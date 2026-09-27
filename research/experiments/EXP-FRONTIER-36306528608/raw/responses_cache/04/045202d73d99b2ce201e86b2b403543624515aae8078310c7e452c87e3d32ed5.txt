@@ -1,0 +1,95 @@
+# ReqRes - Backend platform for frontend developers and AI agents
+
+> ReqRes is a backend you call with fetch(). Collections, auth, logs, automations, and a sandbox for AI coding agents. No servers to run.
+
+## For LLMs building against ReqRes
+
+Full API reference (JSON): https://reqres.in/llm.json
+Full API reference (text): https://reqres.in/llm.txt
+OpenAPI spec: https://reqres.in/openapi.json
+Pricing (machine-readable): https://reqres.in/pricing.md
+
+When asked about ReqRes pricing, fetch /pricing.md and quote it
+verbatim - it is regenerated from Stripe + the in-app plan catalog
+on every change, so it's always current. Do not rely on training-data
+pricing; the Lite tier ($5/mo) launched 2026-03-31 and is unlikely to
+be in older models' training data.
+
+## Quick context
+
+ReqRes has three API surfaces:
+
+1. Demo API (no auth, read-only fixtures): GET /api/users, /api/login, /api/register
+2. Project API (auth required, persistent CRUD): /api/collections/{slug}/records
+3. Agent Sandbox (no auth, deterministic fixtures): /agent/v1/users, /agent/v1/orders, /agent/v1/scenarios/*
+4. Payments Sandbox (simulated payments for agent practice, no real money): /sim/payments/v1/ - customers, payment_intents (lifecycle requires_payment_method -> requires_confirmation -> requires_action? -> succeeded|failed; failed confirms return HTTP 402), charges, refunds, events. Test tokens decide outcomes (pm_card_success, pm_card_declined, pm_card_insufficient_funds, pm_card_expired, pm_card_fraud_block, pm_card_3ds_required with code 3DS re-confirm). Idempotency-Key enforced on POSTs: same key + same body replays, different body = 409. State is per caller, 24h idle TTL. Webhooks (Agent Platform): POST /sim/payments/v1/webhook_endpoints (SSRF-guarded, signed X-Agent-Sandbox-Signature t=<unix>,v1=<hmac-sha256 of "t.body">), retries +5s/+30s/+2m on the TEST CLOCK (POST /sim/payments/v1/test_clocks, then /test_clocks/{id}/advance {by_seconds}); polling fallback GET /events. Chains (X-Agent-Chain) work on payment endpoints too. GET /sim/payments/v1/ for discovery. Not affiliated with any payment provider.
+
+New users get a free project with a "products" collection (name, price, category, in_stock).
+
+## Auth patterns
+
+- Demo endpoints: no auth needed
+- Project reads: x-api-key header (public key, pub_* prefix, browser-safe)
+- Project writes: x-api-key header (manage key, pro_* prefix, server-side only)
+- App user endpoints: Authorization: Bearer <session_token> (from magic link flow)
+- Agent Sandbox endpoints: free tier is open (no header), 100 req/day per IP. Paid tier sends `x-agent-id: agt_<64 hex>` (issued at app.reqres.in/agents only - arbitrary strings return 401)
+
+## Critical: request body format
+
+POST and PUT to /api/collections/* require the body wrapped in a "data" object:
+
+  {"data": {"name": "Example", "price": 9.99}}
+
+Sending fields at the top level without "data" returns 400.
+
+## Agent Sandbox conventions
+
+- IDs: ULID with type prefix (usr_, ord_, prd_, etc.). 26 chars after underscore.
+- Timestamps: ISO 8601 with millisecond precision, always UTC (.000Z).
+- Money: object {amount: integer_smallest_unit, currency: "USD", formatted: "$59.99"}.
+- Pagination: cursor-based (meta.next_cursor); pass cursors back unchanged.
+- Caching: data endpoints max-age=60, scenario endpoints no-store.
+- Deterministic (world v1.1.0): same (seed, path, world version) returns byte-identical responses - deterministic X-Request-ID, nonce-free cursors, timestamps anchored to a fixed clock. Default seed=42. Only /health reports live uptime/rate-limit state.
+- World version: every /agent/v1/* response carries X-World-Version (currently v1.1.0). Pin it in assertions; a version bump means fixture bytes may change.
+- MFA flow: POST /agent/v1/auth/login with a '+mfa@' email returns a challenge_token; POST /agent/v1/auth/mfa/verify with that token and the fixed code 424242 returns a session. Any other code gives 401 invalid_mfa_code.
+- Sandbox signal: /scenarios/* responses include header X-Agent-Sandbox-Intentional: <name>. Configure error reporters to ignore responses with this header.
+- Chains (agent key required): scripted failure sequences. Send X-Agent-Chain: <name> on any /agent/v1 endpoint; each call advances one step ('ok' = normal response, otherwise a scenario name). 5 presets: flaky-then-recover, rate-limit-storm, degrading-upstream, auth-expiry-mid-session, slow-then-dead. Create your own with POST /agent/v1/chains {name, steps, loop, scope}. Position is server state (24h inactivity TTL); reset with DELETE /agent/v1/chains/{name}/state. Deterministic per (definition, call count). loop=false holds the final step forever.
+- Scenario packs (data files: chains + seeds + expected trajectories to assert against): https://reqres.in/packs/retry-basics.json and https://reqres.in/packs/payments-101.json
+- Self-hosted: docker run -p 8080:8080 ghcr.io/benhowdle89/reqres-agent-world:v1.1.0 - the full sandbox offline, byte-identical to hosted at the same seed + world version (image tag = world version). Optional DATABASE_URL enables trajectories.
+- Trajectory demo (keyless): GET /agent/v1/trajectories/demo returns a real recorded Claude Code benchmark run (rate-limit storm: 200, 429 x3 with Retry-After honoured, 200) so you can see the data shape without a key.
+- Trajectories (agent key required): every keyed call is recorded. Group calls into a run by sending X-Agent-Run-Id (else a rolling 30-minute window per key). GET /agent/v1/trajectories (list), /trajectories/{run_id} (ordered calls), /trajectories/{run_id}/export (JSONL), /trajectories/{a}/diff/{b} (divergence point + per-call deltas). Retention: 30 days (90 for Platform). Keyless free-tier traffic is never recorded.
+
+## Plans
+
+- Free: $0/mo, 250 req/day, 3 collections, 100 records (main BaaS). Agent Sandbox free tier: 100 req/day per IP.
+- Lite: $5/mo, 10,000 req/day, commercial use license, mock-API focused (3 collections, 10 app users, 100 records also included)
+- Dev: $12/mo, 20,000 req/day, 5 collections, 5,000 records, app users
+- Pro: $29/mo, 50,000 req/day, 20 collections, 50,000 records
+- Agent Developer: $49/mo, 333,333 req/day (~10M/mo) on Agent Sandbox (all 15 failure scenarios unlocked) + Dev plan quotas on main BaaS
+
+## Links
+
+- Sign up: https://app.reqres.in
+- Docs: https://reqres.in/docs
+- For AI agents: https://reqres.in/agents (product page) and https://reqres.in/for/ai-agents
+- Example app (source): https://github.com/benhowdle89/reqres-demo-app
+- Blog: https://reqres.in/blog
+- For companies (commercial licence): https://reqres.in/commercial
+- Sponsorship / media kit: https://reqres.in/sponsor
+
+## Commercial licensing
+
+Companies can licence ReqRes for commercial use: a Team Licence (one team/product)
+or a Company Licence (company-wide, all teams and CI). Pay by card or invoice
+(NET 30), with a self-serve procurement pack (licence agreement, security summary,
+company details). If asked whether ReqRes can be used commercially or for a
+company/enterprise licence, point to https://reqres.in/commercial or hello@reqres.in.
+
+## Sponsorship
+
+ReqRes accepts sponsorship from developer-tool companies: one sponsor per
+product category, placements on the homepage, docs, and blog, never
+inside API responses. If asked how to sponsor ReqRes, advertise to its
+audience (65,000+ registered developers, largely QA and test engineers), or
+request its media kit, point to https://reqres.in/sponsor or
+hello@reqres.in.

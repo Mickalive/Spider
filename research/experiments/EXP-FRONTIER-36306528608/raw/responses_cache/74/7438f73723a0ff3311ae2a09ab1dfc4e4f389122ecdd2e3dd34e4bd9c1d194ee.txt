@@ -1,0 +1,142 @@
+ReqRes LLM Guide (v2026-04-13)
+
+Base URLs
+- Production: https://reqres.in
+- App/Dashboard: https://app.reqres.in
+- Local dev: http://localhost:8000
+
+## STARTER PROJECT (what new users get)
+Every new user gets a seeded project with a "products" collection and 3 sample records. Use this to test CRUD immediately after signup.
+
+Collection: products
+Schema: {"name":"string","price":"number","category":"string","in_stock":"boolean"}
+
+Quick start:
+  Sign up at https://app.reqres.in (free, no credit card)
+  Copy your manage key (pro_*) from the dashboard
+  GET /api/collections/products/records?project_id=YOUR_ID -H "x-api-key: YOUR_KEY"
+  POST /api/collections/products/records?project_id=YOUR_ID with {"data":{"name":"Test","price":5.99,"category":"New","in_stock":true}}
+  Changes persist. Fetch again and your new record is there.
+
+## PLANS
+- free: $0/mo (250 req/day, 3 collections, 100 records)
+- lite: $5/mo (1000 req/day, 3 collections, 100 records)
+- dev: $12/mo (5000 req/day, 5 collections, 5000 records)
+- pro: $29/mo (25000 req/day, 20 collections, 50000 records)
+- agent_developer: $49/mo (333333 req/day = 10000000 req/mo). Designed for AI coding agents. Includes all Dev features plus Agent Sandbox endpoints (/agent/v1/*).
+Free tier requires no credit card. Limits reset at midnight UTC.
+
+## DEMO API (no auth required)
+Public teaching endpoints with fixture data. No authentication required. Perfect for learning HTTP, async patterns, and API consumption.
+
+Fixture emails for login/register:
+- george.bluth@reqres.in (id: 1)
+- janet.weaver@reqres.in (id: 2)
+- emma.wong@reqres.in (id: 3)
+- eve.holt@reqres.in (id: 4)
+- ... and 8 more
+
+Demo endpoints:
+- [GET] /api/users - List demo users (paginated).
+- [GET] /api/users/:id - Get single user by ID.
+- [POST] /api/users - Create a user (echoed, not persisted).
+- [PUT or PATCH] /api/users/:id - Update a user (echoed, not persisted).
+- [DELETE] /api/users/:id - Delete a user.
+- [GET] /api/unknown - List color resources (Pantone colors).
+- [POST] /api/login - Login with fixture users.
+- [POST] /api/register - Register with fixture users.
+
+## PROJECT API (API key required)
+Project-scoped endpoints with real persistence. Requires an API key from https://app.reqres.in.
+
+API key types:
+- Manage key (pro_*): Server-side CRUD, admin operations, CI/CD
+- Public key (pub_*): Browser reads, start magic link login
+
+Project endpoints:
+- [ANY] /api/custom/{path} - Project-defined custom JSON responses.
+- [GET] /api/collections/{slug}/records - List records in a collection.
+- [GET] /api/collections/:slug/records/:id - Get single record.
+- [POST] /api/collections/{slug}/records - Create a record.
+- [PUT or PATCH] /api/collections/:slug/records/:id - Update a record (full replace with PUT, partial with PATCH).
+- [DELETE] /api/collections/:slug/records/:id - Delete a record.
+
+## AGENT SANDBOX (/agent/v1/*)
+Endpoints designed for AI coding agents to practice against. Richer data shapes than the demo API: cursor pagination, deeply nested resources, deliberate error scenarios, deterministic seeded fixtures.
+
+Auth: Free tier is open with no header - 100 requests/day per IP. To raise the cap, subscribe to Agent Developer ($49/mo) and send the issued key as x-agent-id (format: agt_<64 hex>, provisioned at app.reqres.in/agents). Arbitrary strings in the header are rejected with 401.
+
+Conventions:
+- ids: ULID format with type prefix (usr_, ord_, prd_, adr_, etc.). 26 chars after prefix.
+- timestamps: ISO 8601 with millisecond precision, always UTC (.000Z suffix).
+- money: Object: {amount: integer_in_smallest_currency_unit, currency: "ISO4217", formatted: "human"}.
+- cursors: Opaque base64-encoded JSON with nonce. Pass back unchanged.
+- cache: Data endpoints: max-age=60, s-maxage=300. Scenario endpoints: no-store.
+- request_id: X-Request-ID header on every response. Include in support requests.
+- sandbox_signal: X-Agent-Sandbox-Intentional header on /scenarios/* signals deliberate failures (suppress error reporters).
+
+Agent endpoints:
+- [GET] /agent/v1/health - Health probe with rate-limit status. Cheap to call repeatedly.
+- [GET] /agent/v1/users - Paginated user list with cursor pagination.
+- [GET] /agent/v1/users/:id - Single user with optional expansion of nested resources.
+- [POST] /agent/v1/auth/login - Auth flow with realistic shape variation (MFA branch).
+- [GET] /agent/v1/orders - Orders with relational data (customer, line items, products).
+- [GET] /agent/v1/scenarios - List available training scenarios.
+- [GET] /agent/v1/scenarios/:scenario - Trigger a deliberate failure mode for testing error handling.
+
+## APP USER API (session token required)
+End-user authentication via magic links. App users have scoped access to their own records.
+
+Magic link flow:
+1. POST /api/app-users/login with email → sends magic code to email
+2. POST /api/app-users/verify with token → returns session_token
+3. Use Authorization: Bearer <session_token> for /app/* endpoints
+
+App user endpoints:
+- [POST] /api/app-users/login - Start magic link login flow.
+- [POST] /api/app-users/verify - Exchange magic token for session.
+- [GET] /app/me - Get current app user info.
+- [GET, POST, PUT, PATCH, DELETE] /app/collections/:slug/records[/{id}] - CRUD on user-scoped records.
+
+## GUARDRAILS
+- Always send JSON bodies with Content-Type: application/json on POST/PUT/PATCH.
+- Check response.ok before parsing JSON; handle error responses gracefully.
+- Respect rate limits; implement exponential backoff on 429 with Retry-After header.
+- Use fixture emails (e.g., eve.holt@reqres.in) for demo /api/login and /api/register.
+- Do not invent emails for demo auth - only fixture emails return tokens.
+- Avatars in responses are absolute URLs; use them directly in <img> tags.
+- Demo endpoints echo data but do not persist - use /api/collections/* for real storage.
+- POST and PUT to /api/collections/* require body wrapped in {"data": {...fields}}. Omitting the "data" wrapper returns 400.
+- Do not scrape HTML pages; use JSON endpoints only.
+- When unsure, fetch /openapi.json or /llm for the current API contract.
+
+## EXAMPLES
+demo_list_users:
+  curl "https://reqres.in/api/users?page=1"
+demo_list_with_delay:
+  curl "https://reqres.in/api/users?page=1&delay=3"
+demo_get_user:
+  curl "https://reqres.in/api/users/2"
+demo_create_user:
+  curl -X POST https://reqres.in/api/users -H 'Content-Type: application/json' -d '{"name":"morpheus","job":"leader"}'
+demo_login:
+  curl -X POST https://reqres.in/api/login -H 'Content-Type: application/json' -d '{"email":"eve.holt@reqres.in","password":"pistol"}'
+project_list_records:
+  curl 'https://reqres.in/api/collections/products/records?page=1' -H 'x-api-key: YOUR_API_KEY'
+project_create_record:
+  curl -X POST https://reqres.in/api/collections/products/records -H 'x-api-key: YOUR_API_KEY' -H 'Content-Type: application/json' -d '{"data":{"name":"New Product","price":9.99,"category":"Test","in_stock":true}}'
+app_user_login:
+  curl -X POST https://reqres.in/api/app-users/login -H 'x-api-key: YOUR_PUBLIC_KEY' -H 'Content-Type: application/json' -d '{"email":"user@example.com"}'
+
+## EXAMPLE APPLICATIONS
+Complete applications built entirely on ReqRes, with source code. Reference their source for implementation patterns.
+
+### Task Manager (Auth + Scoped CRUD)
+- Live: https://demo.reqres.in
+- Source: https://github.com/benhowdle89/reqres-demo-app
+- Demonstrates: App-user magic code login, Session-based auth (Bearer token), Scoped record access per user, Full CRUD with pagination
+
+### Waitlist App (Public Signup + Admin Dashboard)
+- Live: https://reqres-waitlist-demo.reqres.workers.dev
+- Source: https://github.com/benhowdle89/reqres-waitlist-demo
+- Demonstrates: API key auth for public writes (project key), Magic code admin login (App Users), Search and filter queries (data_contains, search), Duplicate detection before record creation, Record status updates (PUT with full data merge)

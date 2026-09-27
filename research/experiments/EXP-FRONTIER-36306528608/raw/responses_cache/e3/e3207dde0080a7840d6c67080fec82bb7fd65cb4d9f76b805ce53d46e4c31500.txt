@@ -1,0 +1,560 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="gl-system ui-neutral with-top-bar with-header page-with-panels with-gl-container-queries  user-logged-out" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Branches · GitLab Community / GitLab.com / marketing / Digital Experience / about.gitlab.com Community Fork · GitLab</title>
+<link crossorigin="" href="https://snowplowprd.trx.gitlab.net" rel="preconnect">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-9892dc17af892e03de41625c0ee325117a3b8ee4ba6005f3a3eac68510030aed.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-Italic-f96f17332d67b21ada2dfba5f0c0e1d5801eab99330472057bf18edd93d4ccf7.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-29c2152dac8739499dd0fe5cd37a486ebcc7d4798c9b6d3aeab65b3172375b05.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-Italic-af36701a2188df32a9dcea12e0424c380019698d4f76da9ad8ea2fd59432cf83.woff2" rel="preload">
+
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+window.gon={};gon.math_rendering_limits_enabled=true;gon.features={"allowIframesInMarkdown":false};
+//]]>
+</script>
+
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+const root = document.documentElement;
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  root.classList.add('gl-dark');
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (e.matches) {
+    root.classList.add('gl-dark');
+  } else {
+    root.classList.remove('gl-dark');
+  }
+});
+
+//]]>
+</script>
+
+
+
+
+<meta content="light dark" name="color-scheme">
+<link rel="stylesheet" href="/assets/application-37f3067aeb192e29e5fe51e1bbb23e1d74cd4724c6f9d5205a918c9a83c32eb1.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/application_dark-c7e80eb49883dfc3bdb975fdd50ec2876e89ba1299fbccea4251a30aac52a7e5.css" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" href="/assets/page_bundles/branches-ba30e04f67eaf7237dae8eda0cfb9e5d1698e2efb5cbb9ffd74683ca480d60fe.css" /><link rel="stylesheet" href="/assets/page_bundles/commit_description-9e7efe20f0cef17d0606edabfad0418e9eb224aaeaa2dae32c817060fa60abcc.css" /><link rel="stylesheet" href="/assets/page_bundles/design_management-b0d28c79dc2ff36cbf37b4fa7b3bfb2908c91dcec0cf3fb800f11aaa25b08ea8.css" /><link rel="stylesheet" href="/assets/page_bundles/issuable_list-7a33f8b5a79c609e4bac7e1fa1c5553962adf726cd700fbead1f9e974c41e7c9.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_list-1d9cdbbaf9469f9073c410dc7a7f2543b02071773aa332daf63803eaaec87e62.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_show-ec954ae4932e0bfe7383adee3c75f53c5985c6edea62c7ae4370cb1f6e85a91a.css" /><link rel="stylesheet" href="/assets/page_bundles/notes_shared-009bfb6fa90b583372e5d3f444ccd9b89aa6278564b128d1f21b404747a3981b.css" /><link rel="stylesheet" href="/assets/page_bundles/work_items-cf96ec866af761ac90ea44063245a03c038e1f4ed193f5e2a6432597f048e62f.css" />
+<link rel="stylesheet" href="/assets/tailwind-5108075537a52512531685895e292b73214fb8589df8c5b028b76abedb2f4062.css" />
+
+
+<link rel="stylesheet" href="/assets/fonts-deb7ad1d55ca77c0172d8538d53442af63604ff490c74acc2859db295c125bdb.css" />
+<link rel="stylesheet" href="/assets/highlight/themes/white-fcb8fe745eaa64eb81024a47dc6ddfb59587f0d638bcf5d1ae2e20e5baf4ceb1.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/highlight/themes/dark-14f22f8b4c88bce74c496ff5b27217bdc8636174d6a71aa71b80bca2942d3bc8.css" media="(prefers-color-scheme: dark)" />
+
+<script src="/assets/webpack/runtime.76e95abc.bundle.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/main.45e1895d.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/tracker.1eb446cb.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+window.snowplowOptions = {"namespace":"gl","hostname":"snowplowprd.trx.gitlab.net","cookieDomain":".gitlab.com","appId":"gitlab","formTracking":true,"linkClickTracking":true};
+gl = window.gl || {};
+gl.snowplowStandardContext = {"schema":"iglu:com.gitlab/gitlab_standard/jsonschema/1-1-8","data":{"environment":"production","source":"gitlab-rails","correlation_id":"a41968fddc54c94e-IAD","extra":{},"user_id":null,"global_user_id":null,"user_type":null,"is_gitlab_team_member":null,"namespace_id":67161408,"ultimate_parent_namespace_id":60717473,"project_id":68788690,"feature_enabled_by_namespace_ids":null,"realm":"saas","deployment_type":".com","context_generated_at":"2026-09-27T09:16:33.043Z","organization_id":1}};
+gl.snowplowPseudonymizedPageUrl = "https://gitlab.com/namespace67161408/project68788690/-/branches";
+gl.maskedDefaultReferrerUrl = null;
+gl.ga4MeasurementId = 'G-ENFH3X7M5Y';
+gl.duoEvents = ["ai_question_category","block_slack_duo_mention","perform_completion_worker","receive_slack_duo_mention","process_gitlab_duo_question","agent_platform_session_created","agent_platform_session_dropped","agent_platform_session_finished","agent_platform_session_resumed","agent_platform_session_started","agent_platform_session_stopped","ai_response_time","approve_tool_duo_chat","cleanup_stuck_agent_platform_session","click_ai_catalog_button_duo_rail","click_analyze_with_duo_on_analytics_dashboard","click_dap_trial_or_paid_empty_state_agent","click_dap_trial_or_paid_empty_state_explore_agents_link","click_dap_trial_or_paid_empty_state_prompt","click_delete_ai_catalog_item_button","click_disable_ai_catalog_item_button","click_duo_agentic_not_available_empty_state_learn_more","click_duo_agentic_not_available_empty_state_start_trial","click_duo_agentic_subscription_expired_learn_more","click_duo_agentic_subscription_expired_upgrade","click_duo_agentic_trial_expired_learn_more","click_duo_agentic_trial_expired_upgrade","click_duo_quick_action","click_duplicate_ai_catalog_item_button","click_enable_ai_catalog_item_button","click_purchase_seats_button_group_duo_pro_home_page","click_through_flow_widget","click_through_session_pill","close_vulnerability_resolution_merge_request","code_suggestion_accepted_in_ide","code_suggestion_rejected_in_ide","code_suggestion_shown_in_ide","code_suggestions_connection_details_rate_limit_exceeded","code_suggestions_direct_access_rate_limit_exceeded","code_suggestions_rate_limit_exceeded","create_ai_catalog_item","create_ai_catalog_item_consumer","create_ai_self_hosted_model","create_vulnerability_resolution_merge_request","default_answer","delete_ai_catalog_item","delete_ai_catalog_item_consumer","delete_ai_self_hosted_model","deny_tool_duo_chat","detected_high_comment_temperature","detected_repeated_high_comment_temperature","dismiss_sast_vulnerability_false_positive_analysis","dismiss_secret_detection_vulnerability_false_positive_analysis","duo_workflow_workload_completed","enable_duo_code_review_by_default_marked_pending","encounter_duo_code_review_error_during_review","error_answer","excluded_files_from_duo_code_review","execute_llm_method","explain_code","explain_vulnerability","filter_ai_fp","find_no_issues_duo_code_review_after_review","find_nothing_to_review_duo_code_review_on_mr","finish_duo_workflow_execution","finish_mcp_tool_call","finish_vulnerability_bulk_duo_workflow","fix_code","fix_pipeline_suggestion_applied","fix_pipeline_suggestion_posted","forced_high_temperature_commenting","generate_merge_commit_message","generate_resolve_dependency_bump_pipeline","i_quickactions_q","include_repository_xray_data_into_code_generation_prompt","ingest_ai_audit_events_batch","maximize_duo_chat_panel","mention_gitlabduo_in_mr_comment","merge_vulnerability_resolution_merge_request","minimize_duo_chat_panel","navigate_retry_alternative_duo_agentic_chat","post_comment_duo_code_review_on_diff","process_gitlab_duo_slash_command","publish_duo_code_review_comments","react_thumbs_down_on_duo_code_review_comment","react_thumbs_up_on_duo_code_review_comment","recommend_tool_duo_chat","refactor_code","reported_sast_vulnerability_false_positive_analysis","reported_secret_detection_vulnerability_false_positive_analysis","request_ask_help","request_duo_chat_response","request_duo_vulnerability_resolution","request_review_duo_code_review_on_mr_by_author","request_review_duo_code_review_on_mr_by_non_author","requested_comment_temperature","resize_duo_chat_panel","resolve_feature_discovery_search","restore_ai_catalog_item","retry_duo_workflow_execution","retry_failed_duo_agentic_chat","retry_message_duo_agentic_chat","retry_succeeded_duo_agentic_chat","select_duo_agentic_chat_predefined_prompt","start_duo_workflow_execution","start_mcp_tool_call","start_vulnerability_bulk_duo_workflow","submit_dap_trial_or_paid_empty_state_message","submit_gitlab_duo_question","summarize_new_merge_request","summarize_review","tokens_per_embedding","tokens_per_user_request_prompt","tokens_per_user_request_response","tool_failed_duo_chat","tool_succeeded_duo_chat","trigger_ai_catalog_item","trigger_resolve_dependency_bump_workflow","trigger_sast_vulnerability_fp_detection_workflow","trigger_sast_vulnerability_resolution_workflow","trigger_secret_detection_vulnerability_fp_detection_workflow","trigger_slack_duo","troubleshoot_job","update_ai_catalog_item","update_ai_catalog_item_consumer","update_ai_self_hosted_model","update_model_selection_feature","update_self_hosted_ai_feature_to_vendored_model","view_ai_catalog_item","view_ai_catalog_item_index","view_ai_catalog_project_catalog","view_ai_catalog_project_managed","view_dap_trial_or_paid_empty_state","view_duo_agentic_identity_verification_empty_state","view_duo_agentic_not_available_empty_state","view_duo_agentic_subscription_expired_empty_state","view_duo_agentic_trial_expired_empty_state","write_tests"];
+gl.onlySendDuoEvents = false;
+
+
+//]]>
+</script>
+
+
+<script src="/assets/webpack/sentry.2fac921c.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+
+<script src="/assets/webpack/commons-graphql_explorer-pages.admin.application_settings.general-pages.admin.application_settings.s-41816856.0ed0cd5a.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-c90aa2e3.98aecbba.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-6117f013.abbe62c6.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.service_accounts-pages.explore.ai_catalog-pages.explore.ana-dd0b1cb0.27570770.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.registrations.new-pages.root-pages.root.vue3-pages.sessions.new-p-25643d47.8f1e2a9b.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.deploy_keys.index-pages.admin.deploy_keys.index.vue3-pages.admin.groups.index-pa-11307819.b20952f3.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.projects.snippets.show-pages.root-pages.root.vue3-pages.snippets.-73de5222.2d152cdb.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/0dcf7166.fee24f6c.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.search.show-pages.search.show.vue3-super_sidebar.e7ef8046.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.search.show-super_sidebar.4bb75822.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/super_sidebar.d8c6ab4f.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.projects-pages.projects.activity-pages.projects.activity.vue3-pages.projects.alert_man-0472dc21.1f7714c4.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/959c8513.938cf26b.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.ci_cd.vue3-pages.admin.application_settings.repository.vue3-8ccf5f1a.44b4176d.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.ci_cd.vue3-pages.admin.application_settings.repository.vue3-2d6d725f.fe2c31c6.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.work_item.vue3-pages.admin.gitlab_duo.model_selection.vue3--e5db0211.a58c20d7.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.groups.activity.vue3-pages.groups.analytics.ci_cd_analytics.vue3-pages.groups.analytic-560f3daf.b907255e.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.ci_cd.vue3-pages.admin.application_settings.repository.vue3-8940392f.a8b92308.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.work_item.vue3-pages.dashboard.issues.vue3-pages.dashboard.-1e792747.0388cb87.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.groups.boards.vue3-pages.groups.epic_boards.vue3-pages.projects.boards.vue3-pages.proj-be44fae1.700b1100.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.projects.branches.index.vue3-pages.projects.releases.index.vue3-pages.projects.release-67454bfc.33e9283a.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/commons-pages.projects.branches.index.vue3-pages.projects.tags.index.vue3.46d61e62.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+<script src="/assets/webpack/pages.projects.branches.index.vue3.7d27932c.chunk.js" defer="defer" nonce="Um8UmMc+kDAZ1bEwia/AYg=="></script>
+
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="Branches · GitLab Community / GitLab.com / marketing / Digital Experience / about.gitlab.com Community Fork · GitLab" property="og:title">
+<meta content="For information about community forks, checkout the meta project" property="og:description">
+<meta content="https://gitlab.com/uploads/-/system/project/avatar/68788690/gitlab_logo.png?v=1790260671" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="Branches · GitLab Community / GitLab.com / marketing / Digital Experience / about.gitlab.com Community Fork · GitLab" property="twitter:title">
+<meta content="For information about community forks, checkout the meta project" property="twitter:description">
+<meta content="https://gitlab.com/uploads/-/system/project/avatar/68788690/gitlab_logo.png?v=1790260671" property="twitter:image">
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="10jC-CcS-OU5OHjHFEVv81eg5Po3cUGDW8FsfoxM_BxJXiN-XxWRCQ0Rgkr0dcTpj70xe9XRFAT5hwVLsKqqXw" />
+<meta name="csp-nonce" content="Um8UmMc+kDAZ1bEwia/AYg==" />
+<meta name="action-cable-url" content="/-/cable" />
+<link crossorigin="use-credentials" href="/-/manifest.json" rel="manifest">
+<link rel="icon" type="image/png" href="/assets/favicon-yellow-018213ceb87b472388095d0264be5b4319ef47471dacea03c83ecc233ced2fd5.png" id="favicon" data-original-href="/assets/favicon-yellow-018213ceb87b472388095d0264be5b4319ef47471dacea03c83ecc233ced2fd5.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/apple-touch-icon-b049d4bc0dd9626f31db825d61880737befc7835982586d015bded10b4435460.png" />
+<link crossorigin="use-credentials" href="/search/opensearch.xml" rel="search" title="Search GitLab" type="application/opensearchdescription+xml">
+
+
+
+
+<meta content="For information about community forks, checkout the meta project" name="description">
+<meta content="#F1F0F6" media="(prefers-color-scheme: light)" name="theme-color">
+<meta content="#232128" media="(prefers-color-scheme: dark)" name="theme-color">
+</head>
+
+<body class="tab-width-8 gl-browser-generic gl-platform-other" data-group="digital-experience" data-group-full-path="gitlab-community/gitlab-com/marketing/digital-experience" data-namespace-id="67161408" data-page="projects:branches:index" data-project="about-gitlab-com" data-project-full-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" data-project-id="68788690">
+<div id="js-tooltips-container"></div>
+
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+gl = window.gl || {};
+gl.client = {"isGeneric":true,"isOther":true};
+
+
+//]]>
+</script>
+
+
+<header class="super-topbar js-super-topbar"></header>
+<div class="layout-page js-page-layout page-with-super-sidebar">
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+const outer = document.createElement('div');
+outer.style.visibility = 'hidden';
+outer.style.overflow = 'scroll';
+document.body.appendChild(outer);
+const inner = document.createElement('div');
+outer.appendChild(inner);
+const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+outer.parentNode.removeChild(outer);
+document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+
+//]]>
+</script><aside class="js-super-sidebar super-sidebar super-sidebar-loading" data-command-palette="{&quot;project_files_url&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/files/main?format=json&quot;,&quot;project_blob_url&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main&quot;}" data-is-saas="true" data-sidebar="{&quot;whats_new_most_recent_release_items_count&quot;:7,&quot;whats_new_version_digest&quot;:&quot;5e9e2821a0cddc6e5959ae21eb4f8da802dec7f0644882e1c4e55c9037f23230&quot;,&quot;whats_new_read_articles&quot;:[],&quot;is_logged_in&quot;:false,&quot;compare_plans_url&quot;:&quot;https://about.gitlab.com/pricing&quot;,&quot;current_menu_items&quot;:[{&quot;id&quot;:&quot;project_overview&quot;,&quot;title&quot;:&quot;about.gitlab.com Community Fork&quot;,&quot;avatar&quot;:&quot;/uploads/-/system/project/avatar/68788690/gitlab_logo.png?v=1790260671&quot;,&quot;entity_id&quot;:68788690,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com&quot;,&quot;link_classes&quot;:&quot;shortcuts-project&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;manage_menu&quot;,&quot;title&quot;:&quot;Manage&quot;,&quot;icon&quot;:&quot;users&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/activity&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;activity&quot;,&quot;title&quot;:&quot;Activity&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/activity&quot;,&quot;link_classes&quot;:&quot;shortcuts-project-activity&quot;,&quot;description&quot;:&quot;Track what your team is working on and stay informed of changes&quot;,&quot;library_icon&quot;:&quot;history&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;members&quot;,&quot;title&quot;:&quot;Members&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/project_members&quot;,&quot;description&quot;:&quot;Control who has access to your project and what they can do&quot;,&quot;library_icon&quot;:&quot;users&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;labels&quot;,&quot;title&quot;:&quot;Labels&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/labels&quot;,&quot;description&quot;:&quot;Organize and categorize work across your project with consistent labels&quot;,&quot;library_icon&quot;:&quot;labels&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;code_menu&quot;,&quot;title&quot;:&quot;Code&quot;,&quot;icon&quot;:&quot;code&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/merge_requests&quot;,&quot;is_active&quot;:true,&quot;items&quot;:[{&quot;id&quot;:&quot;project_merge_request_list&quot;,&quot;title&quot;:&quot;Merge requests&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/merge_requests&quot;,&quot;link_classes&quot;:&quot;shortcuts-merge_requests&quot;,&quot;pill_count_field&quot;:&quot;openMergeRequestsCount&quot;,&quot;pill_count_dynamic&quot;:false,&quot;description&quot;:&quot;Collaborate on code changes with built-in review tools&quot;,&quot;library_icon&quot;:&quot;merge-request&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;files&quot;,&quot;title&quot;:&quot;Repository&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/main&quot;,&quot;link_classes&quot;:&quot;shortcuts-tree&quot;,&quot;description&quot;:&quot;Browse and manage repository files and code&quot;,&quot;library_icon&quot;:&quot;repository&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;branches&quot;,&quot;title&quot;:&quot;Branches&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches&quot;,&quot;description&quot;:&quot;Manage project branches and branch protection&quot;,&quot;library_icon&quot;:&quot;branch&quot;,&quot;is_active&quot;:true},{&quot;id&quot;:&quot;commits&quot;,&quot;title&quot;:&quot;Commits&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commits/main?ref_type=heads&quot;,&quot;link_classes&quot;:&quot;shortcuts-commits&quot;,&quot;description&quot;:&quot;View commit history and changes&quot;,&quot;library_icon&quot;:&quot;commit&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;tags&quot;,&quot;title&quot;:&quot;Tags&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tags&quot;,&quot;description&quot;:&quot;Create and manage release tags&quot;,&quot;library_icon&quot;:&quot;tag&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;graphs&quot;,&quot;title&quot;:&quot;Repository graph&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/network/main?ref_type=heads&quot;,&quot;link_classes&quot;:&quot;shortcuts-network&quot;,&quot;description&quot;:&quot;Visualize repository commit history and branches&quot;,&quot;library_icon&quot;:&quot;repository-graph&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;compare&quot;,&quot;title&quot;:&quot;Compare revisions&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main\u0026to=main&quot;,&quot;description&quot;:&quot;Compare changes between revisions&quot;,&quot;library_icon&quot;:&quot;comparison&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;file_locks&quot;,&quot;title&quot;:&quot;Locked files&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/path_locks&quot;,&quot;description&quot;:&quot;Manage file locks to prevent conflicting changes&quot;,&quot;tier&quot;:&quot;premium&quot;,&quot;library_icon&quot;:&quot;doc-locked&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;build_menu&quot;,&quot;title&quot;:&quot;Build&quot;,&quot;icon&quot;:&quot;rocket&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;pipelines&quot;,&quot;title&quot;:&quot;Pipelines&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines&quot;,&quot;link_classes&quot;:&quot;shortcuts-pipelines&quot;,&quot;description&quot;:&quot;Automate your build and deployment process&quot;,&quot;library_icon&quot;:&quot;pipeline&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;jobs&quot;,&quot;title&quot;:&quot;Jobs&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/jobs&quot;,&quot;link_classes&quot;:&quot;shortcuts-builds&quot;,&quot;description&quot;:&quot;Monitor individual build tasks and their results&quot;,&quot;library_icon&quot;:&quot;job&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;pipeline_schedules&quot;,&quot;title&quot;:&quot;Pipeline schedules&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipeline_schedules&quot;,&quot;link_classes&quot;:&quot;shortcuts-builds&quot;,&quot;description&quot;:&quot;Run your automation on a recurring schedule&quot;,&quot;library_icon&quot;:&quot;pipeline-schedule&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;artifacts&quot;,&quot;title&quot;:&quot;Artifacts&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/artifacts&quot;,&quot;link_classes&quot;:&quot;shortcuts-builds&quot;,&quot;description&quot;:&quot;Access build outputs and compiled binaries&quot;,&quot;library_icon&quot;:&quot;doc-compressed&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;deploy_menu&quot;,&quot;title&quot;:&quot;Deploy&quot;,&quot;icon&quot;:&quot;deployments&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/container_registry&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;container_registry&quot;,&quot;title&quot;:&quot;Container registry&quot;,&quot;link&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/container_registry&quot;,&quot;description&quot;:&quot;Store and deploy container images&quot;,&quot;library_icon&quot;:&quot;container-image&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false}],&quot;current_context_header&quot;:&quot;Project&quot;,&quot;support_path&quot;:&quot;https://support.gitlab.com&quot;,&quot;display_whats_new&quot;:true,&quot;show_version_check&quot;:null,&quot;search&quot;:{&quot;search_context&quot;:{&quot;group&quot;:{&quot;id&quot;:67161408,&quot;name&quot;:&quot;Digital Experience&quot;,&quot;full_name&quot;:&quot;GitLab Community / GitLab.com / marketing / Digital Experience&quot;},&quot;group_metadata&quot;:{&quot;issues_path&quot;:&quot;/groups/gitlab-community/gitlab-com/marketing/digital-experience/-/issues&quot;,&quot;mr_path&quot;:&quot;/groups/gitlab-community/gitlab-com/marketing/digital-experience/-/merge_requests&quot;},&quot;project&quot;:{&quot;id&quot;:68788690,&quot;name&quot;:&quot;about.gitlab.com Community Fork&quot;},&quot;project_metadata&quot;:{&quot;mr_path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/merge_requests&quot;},&quot;code_search&quot;:true,&quot;scope&quot;:null,&quot;for_snippets&quot;:null}},&quot;panel_type&quot;:&quot;project&quot;,&quot;shortcut_links&quot;:[{&quot;title&quot;:&quot;Snippets&quot;,&quot;href&quot;:&quot;/explore/snippets&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-snippets&quot;},{&quot;title&quot;:&quot;Groups&quot;,&quot;href&quot;:&quot;/explore/groups&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-groups&quot;},{&quot;title&quot;:&quot;Projects&quot;,&quot;href&quot;:&quot;/explore/projects&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-projects&quot;}],&quot;has_terms&quot;:true,&quot;allow_signup&quot;:&quot;true&quot;,&quot;pinned_items&quot;:[&quot;project_overview&quot;,&quot;members&quot;,&quot;project_issue_list&quot;,&quot;branches&quot;,&quot;project_merge_request_list&quot;,&quot;pipelines&quot;],&quot;trial_registration_path&quot;:&quot;/-/trial_registrations/new&quot;}"></aside>
+
+<div class="broadcast-wrapper gl-rounded-lg gl-overflow-hidden">
+
+
+
+</div>
+<div class="panels-container gl-flex gl-gap-3">
+<div class="content-panels gl-flex-1 gl-w-full gl-flex gl-gap-0 gl-relative js-content-panels gl-@container/content-panels">
+<div class="paneled-view static-panel js-static-panel js-paneled-view content-wrapper">
+<div class="panel-header">
+<div class="panel-header-inner js-panel-header-inner">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"GitLab Community","item":"https://gitlab.com/gitlab-community"},{"@type":"ListItem","position":2,"name":"GitLab.com","item":"https://gitlab.com/gitlab-community/gitlab-com"},{"@type":"ListItem","position":3,"name":"marketing","item":"https://gitlab.com/gitlab-community/gitlab-com/marketing"},{"@type":"ListItem","position":4,"name":"Digital Experience","item":"https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience"},{"@type":"ListItem","position":5,"name":"about.gitlab.com Community Fork","item":"https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com"},{"@type":"ListItem","position":6,"name":"Branches","item":"https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches"}]}
+
+
+</script>
+<div data-testid="breadcrumb-links" id="js-vue-page-breadcrumbs-wrapper">
+<div data-breadcrumbs-json="[{&quot;text&quot;:&quot;GitLab Community&quot;,&quot;href&quot;:&quot;/gitlab-community&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;GitLab.com&quot;,&quot;href&quot;:&quot;/gitlab-community/gitlab-com&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;marketing&quot;,&quot;href&quot;:&quot;/gitlab-community/gitlab-com/marketing&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;Digital Experience&quot;,&quot;href&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;about.gitlab.com Community Fork&quot;,&quot;href&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com&quot;,&quot;avatarPath&quot;:&quot;/uploads/-/system/project/avatar/68788690/gitlab_logo.png?v=1790260671&quot;},{&quot;text&quot;:&quot;Branches&quot;,&quot;href&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches&quot;,&quot;avatarPath&quot;:null}]" id="js-vue-page-breadcrumbs"></div>
+<div id="js-injected-page-breadcrumbs"></div>
+</div>
+<div id="js-page-breadcrumbs-extra"></div>
+
+
+
+<div class="panel-header-inner-actions">
+
+
+<div class="panel-header-inner-actions-portal-target js-panel-actions-portal-target"></div>
+</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="panel-content-inner js-static-panel-inner">
+<div class="alert-wrapper alert-wrapper-top-space gl-flex gl-flex-col gl-gap-3 container-fluid container-limited">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="container-fluid container-limited project-highlight-puc">
+<main class="content gl-@container/panel" id="content-body" itemscope itemtype="http://schema.org/SoftwareSourceCode">
+<div id="js-drawer-container"></div>
+<div class="flash-container flash-container-page sticky" data-testid="flash-container">
+<div id="js-global-alerts"></div>
+</div>
+
+
+
+
+
+
+
+
+<h1 class="gl-sr-only">Branches</h1>
+<div class="gl-flex gl-border-b-1 gl-border-b-solid gl-border-b-default gl-flex-wrap-reverse">
+<ul class="gl-grow gl-border-b-0 nav gl-tabs-nav" role="tablist"><li role="presentation" class="nav-item"><a title="Show overview of the branches" role="tab" class="nav-link gl-tab-nav-item active gl-tab-nav-item-active" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches">Overview</a></li>
+<li role="presentation" class="nav-item"><a title="Show active branches" role="tab" class="nav-link gl-tab-nav-item" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/active">Active</a></li>
+<li role="presentation" class="nav-item"><a title="Show stale branches" role="tab" class="nav-link gl-tab-nav-item" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/stale">Stale</a></li>
+<li role="presentation" class="nav-item"><a title="Show all branches" role="tab" class="nav-link gl-tab-nav-item" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/all">All</a></li>
+</ul><div class="gl-flex gl-items-center gl-gap-3 gl-mt-3 gl-ml-auto @sm/panel:gl-mt-0">
+</div>
+</div>
+<div class="row-content-block gl-border-t-0">
+<div data-project-branches-filtered-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches?state=overview" data-show-dropdown="false" data-sort-options="{&quot;name_asc&quot;:&quot;Name&quot;,&quot;updated_asc&quot;:&quot;Oldest updated&quot;,&quot;updated_desc&quot;:&quot;Updated date&quot;}" data-sorted-by="updated_desc" id="js-branches-sort-dropdown"></div>
+</div>
+
+<div class="js-branch-list" data-default-branch="main" data-diverging-counts-endpoint="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/diverging_commit_counts?format=json"></div>
+<section class="gl-mt-5 crud gl-flex gl-flex-col gl-bg-strong gl-border gl-border-transparent gl-rounded-xl gl-px-2 gl-pb-2 contrast-more:gl-border-strong  " data-testid="haml-crud" id="active-branches"><header class="crud-header gl-relative gl-flex gl-flex-wrap gl-justify-between gl-gap-x-5 gl-gap-y-2 gl-rounded-t-lg gl-py-0 gl-pr-2 gl-pl-3 @md/panel:gl-flex-nowrap">
+<div class="gl-flex gl-grow gl-flex-col gl-self-center gl-py-3">
+<h2 class="gl-mx-0 gl-my-2 gl-inline-flex gl-items-center gl-gap-3 gl-text-base gl-font-bold gl-leading-normal gl-text-heading" data-testid="crud-title">Active branches
+</h2></div>
+<div class="gl-flex gl-gap-3 gl-items-start gl-my-3" data-testid="crud-actions">
+
+</div>
+</header>
+<div class="crud-body gl-grow gl-p-3 gl-bg-default gl-rounded-lg forced-colors:gl-border contrast-more:gl-border" data-testid="crud-body">
+<ul class="content-list branches-list all-branches" data-testid="all-branches-container">
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-main !gl-pr-3" data-name="main" data-qa-name="main" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/main?ref_type=heads">main
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="main" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+<span class="gl-badge badge badge-pill badge-info gl-ml-2"><span class="gl-badge-content">default</span></span>
+<span class="gl-badge badge badge-pill badge-neutral gl-ml-2"><span class="gl-badge-content">protected</span></span>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="384c4d830b998f422ba2194a6251d3f950985450" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/384c4d830b998f422ba2194a6251d3f950985450">384c4d83</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/384c4d830b998f422ba2194a6251d3f950985450">Merge branch 'fmattos-ext-main-patch-32416' into 'main'</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="Sep 24, 2026 2:13pm" datetime="2026-09-24T14:13:23Z" tabindex="0" aria-label="Sep 24, 2026 2:13pm" data-toggle="tooltip" data-placement="top" data-container="body">Sep 24, 2026</time></span>
+</div>
+
+</div>
+</div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><div class="gl-inline-flex gl-align-middle gl-mr-3">
+<svg class="s16"></svg>
+</div></div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/main/about-gitlab-com-main.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/main/about-gitlab-com-main.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/main/about-gitlab-com-main.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/main/about-gitlab-com-main.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+</div>
+</div>
+</li>
+
+</ul>
+
+</div>
+</section>
+<section class="gl-mt-5 crud gl-flex gl-flex-col gl-bg-strong gl-border gl-border-transparent gl-rounded-xl gl-px-2 gl-pb-2 contrast-more:gl-border-strong  " data-testid="haml-crud" id="stale-branches"><header class="crud-header gl-relative gl-flex gl-flex-wrap gl-justify-between gl-gap-x-5 gl-gap-y-2 gl-rounded-t-lg gl-py-0 gl-pr-2 gl-pl-3 @md/panel:gl-flex-nowrap">
+<div class="gl-flex gl-grow gl-flex-col gl-self-center gl-py-3">
+<h2 class="gl-mx-0 gl-my-2 gl-inline-flex gl-items-center gl-gap-3 gl-text-base gl-font-bold gl-leading-normal gl-text-heading" data-testid="crud-title">Stale branches
+</h2></div>
+<div class="gl-flex gl-gap-3 gl-items-start gl-my-3" data-testid="crud-actions">
+
+</div>
+</header>
+<div class="crud-body gl-grow gl-p-3 gl-bg-default gl-rounded-lg forced-colors:gl-border contrast-more:gl-border" data-testid="crud-body">
+<ul class="content-list branches-list all-branches" data-testid="all-branches-container">
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-fix-discord-link !gl-pr-3" data-name="fix-discord-link" data-qa-name="fix-discord-link" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/fix-discord-link?ref_type=heads">fix-discord-link
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="fix-discord-link" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="332c294e955fdfe02a8a09d9e973046e8d3dfde7" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/332c294e955fdfe02a8a09d9e973046e8d3dfde7">332c294e</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/332c294e955fdfe02a8a09d9e973046e8d3dfde7">Fix discord link</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="May 27, 2025 6:06pm" datetime="2025-05-27T18:06:06Z" tabindex="0" aria-label="May 27, 2025 6:06pm" data-toggle="tooltip" data-placement="top" data-container="body">May 27, 2025</time></span>
+</div>
+
+</div>
+</div>
+<div class="js-branch-divergence-graph"></div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><div class="gl-inline-flex gl-align-middle gl-mr-3">
+<svg class="s16"></svg>
+</div></div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/fix-discord-link/about-gitlab-com-fix-discord-link.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/fix-discord-link/about-gitlab-com-fix-discord-link.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/fix-discord-link/about-gitlab-com-fix-discord-link.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/fix-discord-link/about-gitlab-com-fix-discord-link.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+<div class="js-branch-more-actions" data-branch-name="fix-discord-link" data-can-delete-branch="false" data-compare-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main&amp;to=fix-discord-link" data-default-branch-name="main" data-delete-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/fix-discord-link" data-is-protected-branch="false" data-merged="false"></div>
+</div>
+</div>
+</li>
+
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-documentation-docs-decamp-md !gl-pr-3" data-name="documentation-docs-decamp-md" data-qa-name="documentation-docs-decamp-md" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/documentation-docs-decamp-md?ref_type=heads">documentation-docs-decamp-md
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="documentation-docs-decamp-md" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="515bde63459411ec774603dedbd1259f492eb80d" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/515bde63459411ec774603dedbd1259f492eb80d">515bde63</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/515bde63459411ec774603dedbd1259f492eb80d">Apply 4 suggestion(s) to 1 file(s)</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="Oct 29, 2025 10:18pm" datetime="2025-10-29T22:18:25Z" tabindex="0" aria-label="Oct 29, 2025 10:18pm" data-toggle="tooltip" data-placement="top" data-container="body">Oct 29, 2025</time></span>
+</div>
+
+</div>
+</div>
+<div class="js-branch-divergence-graph"></div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><a href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines/2128567433" class="ci-icon ci-icon-variant-success gl-inline-flex gl-items-center gl-text-sm" title="Pipeline: passed" data-toggle="tooltip" data-placement="left" data-container="body" data-testid="ci-icon"><span class="ci-icon-gl-icon-wrapper"><svg class="s24 gl-icon" data-testid="status_success_borderless-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#status_success_borderless"></use></svg></span></a>
+</div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/documentation-docs-decamp-md/about-gitlab-com-documentation-docs-decamp-md.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/documentation-docs-decamp-md/about-gitlab-com-documentation-docs-decamp-md.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/documentation-docs-decamp-md/about-gitlab-com-documentation-docs-decamp-md.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/documentation-docs-decamp-md/about-gitlab-com-documentation-docs-decamp-md.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+<div class="js-branch-more-actions" data-branch-name="documentation-docs-decamp-md" data-can-delete-branch="false" data-compare-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main&amp;to=documentation-docs-decamp-md" data-default-branch-name="main" data-delete-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/documentation-docs-decamp-md" data-is-protected-branch="false" data-merged="false"></div>
+</div>
+</div>
+</li>
+
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-containerize-dev-server !gl-pr-3" data-name="containerize-dev-server" data-qa-name="containerize-dev-server" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/containerize-dev-server?ref_type=heads">containerize-dev-server
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="containerize-dev-server" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="c8816e60c104f32d8fcb48c6661034b726dbd985" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/c8816e60c104f32d8fcb48c6661034b726dbd985">c8816e60</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/c8816e60c104f32d8fcb48c6661034b726dbd985">Apply 1 suggestion(s) to 1 file(s)</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="Oct 30, 2025 1:33am" datetime="2025-10-30T01:33:03Z" tabindex="0" aria-label="Oct 30, 2025 1:33am" data-toggle="tooltip" data-placement="top" data-container="body">Oct 29, 2025</time></span>
+</div>
+
+</div>
+</div>
+<div class="js-branch-divergence-graph"></div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><a href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines/2128758149" class="ci-icon ci-icon-variant-success gl-inline-flex gl-items-center gl-text-sm" title="Pipeline: passed" data-toggle="tooltip" data-placement="left" data-container="body" data-testid="ci-icon"><span class="ci-icon-gl-icon-wrapper"><svg class="s24 gl-icon" data-testid="status_success_borderless-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#status_success_borderless"></use></svg></span></a>
+</div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/containerize-dev-server/about-gitlab-com-containerize-dev-server.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/containerize-dev-server/about-gitlab-com-containerize-dev-server.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/containerize-dev-server/about-gitlab-com-containerize-dev-server.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/containerize-dev-server/about-gitlab-com-containerize-dev-server.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+<div class="js-branch-more-actions" data-branch-name="containerize-dev-server" data-can-delete-branch="false" data-compare-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main&amp;to=containerize-dev-server" data-default-branch-name="main" data-delete-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/containerize-dev-server" data-is-protected-branch="false" data-merged="false"></div>
+</div>
+</div>
+</li>
+
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-jimender2-fix-sliced-urls !gl-pr-3" data-name="jimender2-fix-sliced-urls" data-qa-name="jimender2-fix-sliced-urls" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/jimender2-fix-sliced-urls?ref_type=heads">jimender2-fix-sliced-urls
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="jimender2-fix-sliced-urls" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="4e9e670961ee2615b4a4acd19110d2ad8340e2ca" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/4e9e670961ee2615b4a4acd19110d2ad8340e2ca">4e9e6709</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/4e9e670961ee2615b4a4acd19110d2ad8340e2ca">Fix sliced urls</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="May 9, 2026 3:05pm" datetime="2026-05-09T15:05:25Z" tabindex="0" aria-label="May 9, 2026 3:05pm" data-toggle="tooltip" data-placement="top" data-container="body">May 09, 2026</time></span>
+</div>
+
+</div>
+</div>
+<div class="js-branch-divergence-graph"></div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><a href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines/2520358089" class="ci-icon ci-icon-variant-success gl-inline-flex gl-items-center gl-text-sm" title="Pipeline: passed" data-toggle="tooltip" data-placement="left" data-container="body" data-testid="ci-icon"><span class="ci-icon-gl-icon-wrapper"><svg class="s24 gl-icon" data-testid="status_success_borderless-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#status_success_borderless"></use></svg></span></a>
+</div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/jimender2-fix-sliced-urls/about-gitlab-com-jimender2-fix-sliced-urls.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/jimender2-fix-sliced-urls/about-gitlab-com-jimender2-fix-sliced-urls.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/jimender2-fix-sliced-urls/about-gitlab-com-jimender2-fix-sliced-urls.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/jimender2-fix-sliced-urls/about-gitlab-com-jimender2-fix-sliced-urls.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+<div class="js-branch-more-actions" data-branch-name="jimender2-fix-sliced-urls" data-can-delete-branch="false" data-compare-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main&amp;to=jimender2-fix-sliced-urls" data-default-branch-name="main" data-delete-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/jimender2-fix-sliced-urls" data-is-protected-branch="false" data-merged="false"></div>
+</div>
+</div>
+</li>
+
+<li class="branch-item !gl-flex !gl-items-center js-branch-item js-branch-mhermeling-fix-community-typo !gl-pr-3" data-name="mhermeling-fix-community-typo" data-qa-name="mhermeling-fix-community-typo" data-testid="branch-container">
+<div class="branch-info !gl-overflow-visible">
+<div class="gl-flex gl-items-center">
+<a class="gl-link item-title str-truncated-100 ref-name" data-testid="branch-link" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tree/mhermeling-fix-community-typo?ref_type=heads">mhermeling-fix-community-typo
+</a><button class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary " title="Copy branch name" aria-label="Copy branch name" aria-live="polite" data-toggle="tooltip" data-placement="bottom" data-container="body" data-html="true" data-clipboard-text="mhermeling-fix-community-typo" type="button"><svg class="s16 gl-icon gl-button-icon " data-testid="copy-to-clipboard-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#copy-to-clipboard"></use></svg>
+
+</button>
+
+</div>
+<div class="gl-truncate -gl-my-2 -gl-ml-2">
+<div class="branch-commit gl-text-sm gl-text-subtle gl-truncate gl-p-2">
+<a class="commit-sha gl-font-monospace" data-reference-type="commit" data-commit="d22eeab4d3fd980bb0d5468c31bd5d2d1c52bbd1" data-project-path="gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/d22eeab4d3fd980bb0d5468c31bd5d2d1c52bbd1">d22eeab4</a>
+&middot;
+<span>
+<a class="commit-row-message !gl-text-subtle" href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commit/d22eeab4d3fd980bb0d5468c31bd5d2d1c52bbd1">Remove offending / in previous-heroes/</a>
+</span>
+&middot;
+<span class="gl-text-subtle"><time class="js-timeago" title="May 25, 2026 4:55pm" datetime="2026-05-25T16:55:17Z" tabindex="0" aria-label="May 25, 2026 4:55pm" data-toggle="tooltip" data-placement="top" data-container="body">May 25, 2026</time></span>
+</div>
+
+</div>
+</div>
+<div class="js-branch-divergence-graph"></div>
+<div class="pipeline-status gl-hidden @md/panel:gl-block"><a href="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/pipelines/2551442525" class="ci-icon ci-icon-variant-success gl-inline-flex gl-items-center gl-text-sm" title="Pipeline: passed" data-toggle="tooltip" data-placement="left" data-container="body" data-testid="ci-icon"><span class="ci-icon-gl-icon-wrapper"><svg class="s24 gl-icon" data-testid="status_success_borderless-icon"><use href="/assets/icons-5a3f88503a318f1eaf3b49d9d82c93cdde31fd5224ab8aeeb08534974b21f10c.svg#status_success_borderless"></use></svg></span></a>
+</div>
+<div class="right-block gl-flex gl-items-center @md/panel:gl-justify-end">
+<div class="gl-mr-3">
+</div>
+<div class="js-source-code-dropdown" data-css-class="!gl-mr-2" data-download-artifacts="[]" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/mhermeling-fix-community-typo/about-gitlab-com-mhermeling-fix-community-typo.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/mhermeling-fix-community-typo/about-gitlab-com-mhermeling-fix-community-typo.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/mhermeling-fix-community-typo/about-gitlab-com-mhermeling-fix-community-typo.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/archive/mhermeling-fix-community-typo/about-gitlab-com-mhermeling-fix-community-typo.tar?ref_type=heads&quot;}]"></div>
+
+<div class="gl-w-7">
+<div class="js-branch-more-actions" data-branch-name="mhermeling-fix-community-typo" data-can-delete-branch="false" data-compare-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/compare?from=main&amp;to=mhermeling-fix-community-typo" data-default-branch-name="main" data-delete-path="/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches/mhermeling-fix-community-typo" data-is-protected-branch="false" data-merged="true"></div>
+</div>
+</div>
+</li>
+
+</ul>
+
+</div>
+</section>
+
+
+</main>
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+<div class="paneled-view-portal" id="contextual-panel-portal"></div>
+</div>
+</div>
+
+
+</div>
+
+
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+if ('loading' in HTMLImageElement.prototype) {
+  document.querySelectorAll('img.lazy').forEach(img => {
+    img.loading = 'lazy';
+    let imgUrl = img.dataset.src;
+    // Only adding width + height for avatars for now
+    // Keep this logic in sync with appendWidthToAvatarUrl in
+    // app/assets/javascripts/vue_shared/components/user_avatar/utils.js
+    if (imgUrl.indexOf('/avatar/') > -1 && !imgUrl.includes('width=')) {
+      const targetWidth = img.getAttribute('width') || img.width;
+      imgUrl += imgUrl.includes('?') ? `&width=${targetWidth}` : `?width=${targetWidth}`;
+    }
+    img.src = imgUrl;
+    img.removeAttribute('data-src');
+    img.classList.remove('lazy');
+    img.classList.add('js-lazy-loaded');
+    img.dataset.testid = 'js-lazy-loaded-content';
+  });
+}
+
+//]]>
+</script>
+<script nonce="Um8UmMc+kDAZ1bEwia/AYg==">
+//<![CDATA[
+gl = window.gl || {};
+gl.experiments = {};
+
+
+//]]>
+</script>
+
+</body>
+</html>
+

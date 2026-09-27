@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows."
+        />
+        <title>ReqRes compared to Postman | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/compared/postman"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="ReqRes compared to Postman"
+        />
+        <meta
+            property="og:description"
+            content="ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/compared/postman"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content="2026-01-26" />
+        <meta property="article:modified_time" content="2026-01-26" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="ReqRes compared to Postman"
+        />
+        <meta
+            name="twitter:description"
+            content="ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><!-- Highlight.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.compared-body pre code').forEach(function(block) {
+        hljs.highlightElement(block);
+    });
+
+    // Wrap tables in scrollable containers for mobile
+    document.querySelectorAll('.compared-body table').forEach(function(table) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'compared-table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+});
+</script>
+
+<style>
+    .compared-body {
+        font-size: 17px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    .compared-body h1 {
+        display: none;
+    }
+    .compared-body h2 {
+        font-size: 1.5rem;
+        margin-top: 2.5rem;
+        margin-bottom: 0.9rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.95);
+        text-align: left;
+        scroll-margin-top: 100px;
+    }
+    .compared-body h3 {
+        font-size: 1.2rem;
+        margin-top: 1.4rem;
+        margin-bottom: 0.7rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.92);
+    }
+    .compared-body p {
+        color: rgba(255, 255, 255, 0.78);
+        margin-bottom: 1.05rem;
+    }
+    .compared-body ul {
+        list-style: disc;
+        padding-left: 1.35rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .compared-body ol {
+        list-style: decimal;
+        padding-left: 1.35rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .compared-body li {
+        margin-bottom: 0.5rem;
+    }
+    .compared-body code {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 0.15rem 0.35rem;
+        font-size: 0.9em;
+        word-break: break-all;
+    }
+    .compared-body pre {
+        background: #0d1117;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.25rem;
+        overflow-x: auto;
+        font-size: 0.9em;
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+        max-width: 100%;
+    }
+    .compared-body pre code {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+    }
+    .compared-body pre code.hljs {
+        background: transparent;
+        padding: 0;
+    }
+    .compared-body blockquote {
+        border-left: 3px solid rgba(255, 255, 255, 0.2);
+        padding-left: 0.9rem;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .compared-body a {
+        color: #a5b4fc;
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.3);
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+    .compared-body a:hover,
+    .compared-body a:focus-visible {
+        color: #c4d4ff;
+        text-decoration-color: rgba(255, 255, 255, 0.7);
+    }
+    .compared-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95em;
+        table-layout: auto;
+    }
+    .compared-body th {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    .compared-body td {
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.75);
+    }
+    .compared-body tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
+    .compared-body strong {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+    }
+    .compared-body hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 2rem 0;
+    }
+    .compared-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 1.5rem -1rem;
+        padding: 0 1rem;
+    }
+    .compared-table-wrapper table {
+        margin: 0;
+        min-width: 480px;
+    }
+
+    @media (max-width: 640px) {
+        .compared-body {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .compared-body h2 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+        }
+        .compared-body h3 {
+            font-size: 1.05rem;
+        }
+        .compared-body pre {
+            padding: 1rem;
+            font-size: 0.8em;
+            border-radius: 8px;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+        .compared-body th,
+        .compared-body td {
+            padding: 0.5rem 0.65rem;
+            font-size: 0.85em;
+        }
+        .compared-table-wrapper {
+            margin: 1rem -1rem;
+        }
+    }
+
+    .mini-nav-link {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 13px;
+        transition: color 160ms ease;
+        display: block;
+        padding: 0.35rem 0;
+    }
+    .mini-nav-link:hover {
+        color: rgba(255, 255, 255, 0.9);
+    }
+</style>
+
+<style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link "
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="py-16 md:py-20 bg-black text-white overflow-x-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex gap-6 lg:gap-12">
+            <!-- Main content -->
+            <div class="flex-1 min-w-0 max-w-none lg:max-w-[920px] space-y-8">
+                <!-- Back link -->
+                <a
+                    href="/compared"
+                    class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition"
+                >
+                    <span aria-hidden="true">&larr;</span>
+                    Back to all comparisons
+                </a>
+
+                <!-- Breadcrumb -->
+                <nav aria-label="Breadcrumb" class="text-sm text-white/65 -mt-4">
+                    <ol class="flex items-center gap-2 flex-wrap">
+                        <li>
+                            <a class="hover:text-white" href="/">Home</a>
+                        </li>
+                        <li aria-hidden="true">/</li>
+                        <li>
+                            <a class="hover:text-white" href="/compared">Compared</a>
+                        </li>
+                        <li aria-hidden="true">/</li>
+                        <li class="text-white/80">Postman</li>
+                    </ol>
+                </nav>
+
+                <!-- Header -->
+                <header class="space-y-4">
+                    <p
+                        class="text-[11px] uppercase tracking-[0.2em] text-white/50 font-semibold"
+                    >
+                        Compared
+                    </p>
+                    <div class="flex items-start sm:items-center gap-3 sm:gap-4">
+                        <div class="h-10 w-10 sm:h-14 sm:w-14 rounded-xl border border-white/10 bg-white/5 grid place-items-center p-2 sm:p-3 flex-shrink-0">
+                            <img
+                                src="/img/compared/postman.svg"
+                                alt="Postman logo"
+                                width="40"
+                                height="40"
+                                class="h-full w-full object-contain"
+                            />
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+                            ReqRes compared to Postman
+                        </h1>
+                    </div>
+                    <p class="text-base sm:text-lg text-white/70 max-w-2xl">
+                        ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 text-sm text-white/50">
+                        <span>Last updated: January 26, 2026</span>
+                    </div>
+                </header>
+
+                <!-- CTA Block -->
+                <div
+                    class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6 flex flex-col gap-3 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+                >
+                    <div
+                        class="flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-white/50 font-semibold"
+                    >
+                        Get started
+                    </div>
+                    <p class="text-sm text-white/70">
+                        Try ReqRes in 2 minutes. Start a project or explore the Notes example.
+                    </p>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <a
+                            href="https://app.reqres.in"
+                            class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                        >
+                            Try ReqRes Projects
+                            <span class="ml-2 text-xs opacity-80">&rarr;</span>
+                        </a>
+                        <a
+                            href="https://app.reqres.in/examples/notes-app"
+                            class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                        >
+                            See Notes example
+                            <span class="ml-2 text-xs opacity-70">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Main article content -->
+                <article
+                    class="compared-body rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+                >
+                    <h1>ReqRes compared to Postman</h1>
+<p>ReqRes and Postman are complementary tools, not competitors. Postman is an API client for sending requests and testing; ReqRes is the backend surface you test against. Understanding how they work together helps you build better testing workflows.</p>
+<h2>TL;DR</h2>
+<ul>
+<li><strong>Postman</strong> is an API client for sending HTTP requests, testing APIs, and documenting endpoints.</li>
+<li><strong>ReqRes</strong> is a backend that provides the endpoints you test against-collections, app users, auth, and logs.</li>
+<li>Postman needs an API to call; ReqRes gives you one instantly.</li>
+<li>Use them together: create a ReqRes project, import endpoints into Postman, test your data flows.</li>
+</ul>
+<h2>What ReqRes is</h2>
+<p>ReqRes is a frontend-first backend you call with <code>fetch()</code>. When you create a project, you get:</p>
+<ul>
+<li><strong>Collections</strong> - REST endpoints for your JSON data (<code>/api/:collection</code>)</li>
+<li><strong>App users</strong> - Magic-link authentication endpoints</li>
+<li><strong>Request logs</strong> - Every API call recorded and viewable</li>
+<li><strong>Custom endpoints</strong> - Define specific responses for mocking</li>
+<li><strong>Triggers</strong> - Webhooks and automations on data changes</li>
+</ul>
+<p>ReqRes is the server; it receives and responds to HTTP requests. Your frontend (or Postman) is the client.</p>
+<h2>What Postman is</h2>
+<p>Postman is an API client and collaboration platform. It provides:</p>
+<ul>
+<li><strong>HTTP client</strong> - Send GET, POST, PUT, DELETE requests with a GUI</li>
+<li><strong>Collections</strong> - Organize and save requests for reuse</li>
+<li><strong>Environments</strong> - Manage variables across different setups</li>
+<li><strong>Testing</strong> - Write assertions and run automated test suites</li>
+<li><strong>Documentation</strong> - Generate API docs from your collections</li>
+<li><strong>Mock servers</strong> - Return predefined responses for development</li>
+</ul>
+<p>Postman helps you interact with APIs; it doesn&#39;t provide the API itself.</p>
+<h2>Key differences</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>ReqRes</th>
+<th>Postman</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Role</strong></td>
+<td>Backend (provides APIs)</td>
+<td>Client (calls APIs)</td>
+</tr>
+<tr>
+<td><strong>Data storage</strong></td>
+<td>Yes (collections persist)</td>
+<td>No (stores requests, not data)</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Provides magic-link auth</td>
+<td>Tests auth flows</td>
+</tr>
+<tr>
+<td><strong>Request logging</strong></td>
+<td>Built-in dashboard</td>
+<td>View responses in client</td>
+</tr>
+<tr>
+<td><strong>Mock responses</strong></td>
+<td>Custom endpoints</td>
+<td>Mock servers</td>
+</tr>
+<tr>
+<td><strong>Collaboration</strong></td>
+<td>Project sharing</td>
+<td>Workspace sharing</td>
+</tr>
+<tr>
+<td><strong>Pricing</strong></td>
+<td>Per project</td>
+<td>Per user/team</td>
+</tr>
+</tbody></table>
+<h2>When to choose ReqRes</h2>
+<p>You need ReqRes when you:</p>
+<ul>
+<li><strong>Need a real backend</strong> to test against, not just a mock server</li>
+<li><strong>Want persistent data</strong> that survives between requests</li>
+<li><strong>Build frontend apps</strong> and need actual API endpoints</li>
+<li><strong>Run QA automation</strong> with realistic data flows (create → read → update → delete)</li>
+<li><strong>Demo features</strong> with working data, not static responses</li>
+<li><strong>Learn REST/HTTP</strong> with a real server that behaves like production</li>
+</ul>
+<p><strong>Example scenarios:</strong></p>
+<ul>
+<li>Testing a React app&#39;s data fetching and state management</li>
+<li>Running end-to-end tests that create, modify, and verify data</li>
+<li>Demonstrating API-driven features to stakeholders</li>
+<li>Teaching REST concepts to junior developers</li>
+</ul>
+<h2>When to choose Postman</h2>
+<p>You use Postman when you:</p>
+<ul>
+<li><strong>Test existing APIs</strong> - Send requests to any HTTP endpoint</li>
+<li><strong>Debug API responses</strong> - Inspect headers, status codes, body</li>
+<li><strong>Automate testing</strong> - Write test scripts that run on responses</li>
+<li><strong>Document APIs</strong> - Generate docs from request collections</li>
+<li><strong>Share requests</strong> - Collaborate on API testing with your team</li>
+<li><strong>Mock temporarily</strong> - Stub responses while backend is unavailable</li>
+</ul>
+<p><strong>Example scenarios:</strong></p>
+<ul>
+<li>Debugging why a third-party API returns unexpected data</li>
+<li>Building a test suite for your production API</li>
+<li>Sharing API examples with frontend developers</li>
+<li>Generating documentation for internal APIs</li>
+</ul>
+<h2>Using ReqRes + Postman together</h2>
+<p>The most powerful workflow combines both tools.</p>
+<p><strong>Step 1: Create a ReqRes project</strong></p>
+<p>Create a project at <a href="https://app.reqres.in">app.reqres.in</a> and note your API key.</p>
+<p><strong>Step 2: Import into Postman</strong></p>
+<p>Create a Postman collection with requests to your ReqRes endpoints:</p>
+<pre><code>GET    {{baseUrl}}/api/tasks
+POST   {{baseUrl}}/api/tasks
+GET    {{baseUrl}}/api/tasks/:id
+PUT    {{baseUrl}}/api/tasks/:id
+DELETE {{baseUrl}}/api/tasks/:id
+</code></pre>
+<p>Set environment variables:</p>
+<ul>
+<li><code>baseUrl</code>: Your ReqRes project URL</li>
+<li><code>apiKey</code>: Your ReqRes API key</li>
+</ul>
+<p><strong>Step 3: Test data flows</strong></p>
+<p>Use Postman to:</p>
+<ul>
+<li>Create records and verify responses</li>
+<li>Fetch lists with filters and pagination</li>
+<li>Update records and confirm changes</li>
+<li>Delete records and test error handling</li>
+</ul>
+<p><strong>Step 4: Write assertions</strong></p>
+<p>Add Postman tests to verify ReqRes responses:</p>
+<pre><code class="language-javascript">pm.test(&#39;Status is 200&#39;, () =&gt; {
+    pm.response.to.have.status(200)
+})
+
+pm.test(&#39;Response has data array&#39;, () =&gt; {
+    const json = pm.response.json()
+    pm.expect(json.data).to.be.an(&#39;array&#39;)
+})
+
+pm.test(&#39;Created record has id&#39;, () =&gt; {
+    const json = pm.response.json()
+    pm.expect(json.data.id).to.exist
+})
+</code></pre>
+<p><strong>Step 5: Automate</strong></p>
+<p>Run your Postman collection with Newman (CLI) as part of CI/CD. ReqRes provides consistent, resettable data for reliable test runs.</p>
+<h2>ReqRes is not for you if...</h2>
+<ul>
+<li>You only need to test third-party APIs (use Postman alone)</li>
+<li>You have an existing backend with its own API</li>
+<li>You need GraphQL endpoints (ReqRes is REST-only)</li>
+<li>You just want to document APIs without testing them</li>
+</ul>
+<h2>Common questions</h2>
+<h3>Can Postman mock servers replace ReqRes?</h3>
+<p>Partially. Postman mock servers return predefined responses, but they don&#39;t persist data between requests. If you POST a new record, a subsequent GET won&#39;t include it. ReqRes persists data, making it suitable for realistic data flow testing.</p>
+<h3>Do I need Postman if I use ReqRes?</h3>
+<p>Not necessarily. You can test ReqRes directly from your browser, frontend code, or <code>curl</code>. Postman adds value for:</p>
+<ul>
+<li>Organized request collections</li>
+<li>Team collaboration</li>
+<li>Automated test suites</li>
+<li>API documentation</li>
+</ul>
+<h3>How do request limits work?</h3>
+<p>ReqRes limits are per project (requests/day, stored records). Postman sends requests through its client, so there&#39;s no Postman-side limit on calls to ReqRes. Your ReqRes plan determines how many requests you can make.</p>
+<h3>Can I use ReqRes as a mock server?</h3>
+<p>Yes. ReqRes custom endpoints let you define specific paths and responses. Unlike Postman mocks, ReqRes custom endpoints are served from a real URL your frontend can call in development and staging.</p>
+<h2>Example workflow: Testing a task manager</h2>
+<p>Here&#39;s how a QA engineer might use both tools:</p>
+<ol>
+<li><strong>Create ReqRes project</strong> with a <code>tasks</code> collection</li>
+<li><strong>Set up Postman collection</strong> with CRUD endpoints</li>
+<li><strong>Write test scenarios:</strong><ul>
+<li>Create task → verify 201 response and returned ID</li>
+<li>List tasks → verify new task appears</li>
+<li>Update task status → verify changes persist</li>
+<li>Delete task → verify 204 response</li>
+<li>List tasks → verify task is gone</li>
+</ul>
+</li>
+<li><strong>Run in CI</strong> with Newman, reset ReqRes data between runs</li>
+</ol>
+<p>This gives you real data persistence, observable logs, and repeatable tests.</p>
+<h2>Next step</h2>
+<p>Create a ReqRes project and import the endpoints into Postman. See how real data persistence improves your API testing workflow.</p>
+<ul>
+<li><a href="https://app.reqres.in">Try ReqRes Projects</a> - Create your first project</li>
+<li><a href="https://app.reqres.in/examples/notes-app">See Notes example</a> - Explore a working app</li>
+</ul>
+
+                </article>
+
+                <!-- Bottom CTA -->
+                <div
+                    class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                >
+                    <div class="text-sm text-white/70">
+                        Ready to ship? Continue in the app.
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <a
+                            href="https://app.reqres.in"
+                            class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                        >
+                            Get started
+                            <span class="ml-2 text-xs opacity-80">&rarr;</span>
+                        </a>
+                        <a
+                            href="https://app.reqres.in/examples/notes-app"
+                            class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                        >
+                            See example app
+                            <span class="ml-2 text-xs opacity-70">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini nav (desktop only) -->
+            <aside class="hidden lg:block w-56 flex-shrink-0">
+                <div class="sticky top-24">
+                    <p class="text-[11px] uppercase tracking-[0.15em] text-white/40 font-semibold mb-3">
+                        On this page
+                    </p>
+                    <nav class="space-y-1 border-l border-white/10 pl-4">
+                        <a href="#tldr" class="mini-nav-link">TL;DR</a>
+                        <a href="#what-reqres-is" class="mini-nav-link">What ReqRes is</a>
+                        <a href="#what-postman-is" class="mini-nav-link">What Postman is</a>
+                        <a href="#key-differences" class="mini-nav-link">Key differences</a>
+                        <a href="#when-to-choose-reqres" class="mini-nav-link">When to choose ReqRes</a>
+                        <a href="#when-to-choose-postman" class="mini-nav-link">When to choose Postman</a>
+                        <a href="#using-reqres-postman-together" class="mini-nav-link">Using ReqRes + Postman together</a>
+                        <a href="#reqres-is-not-for-you-if" class="mini-nav-link">ReqRes is not for you if...</a>
+                        <a href="#common-questions" class="mini-nav-link">Common questions</a>
+                        <a href="#example-workflow-testing-a-task-manager" class="mini-nav-link">Example workflow: Testing a task manager</a>
+                        <a href="#next-step" class="mini-nav-link">Next step</a>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- Structured Data: BreadcrumbList -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://reqres.in/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Compared",
+                "item": "https://reqres.in/compared"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Postman",
+                "item": "https://reqres.in/compared/postman"
+            }
+        ]
+    }
+</script>
+
+<!-- Structured Data: Article -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "ReqRes compared to Postman",
+        "description": "ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows.",
+        "image": "https://reqres.in/img/reqres-og-2x.png",
+        "datePublished": "2026-01-26",
+        "dateModified": "2026-01-26",
+        "author": {
+            "@type": "Organization",
+            "name": "ReqRes",
+            "url": "https://reqres.in"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ReqRes",
+            "url": "https://reqres.in",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://reqres.in/img/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://reqres.in/compared/postman"
+        }
+    }
+</script>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

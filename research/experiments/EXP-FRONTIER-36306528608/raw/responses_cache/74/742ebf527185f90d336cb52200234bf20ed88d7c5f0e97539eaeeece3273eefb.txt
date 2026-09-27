@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="Stop maintaining mock servers. Test against a real API with stable payloads, auth flows, and request logs. Built for QA teams using Postman and Playwright."
+        />
+        <title>API Testing for QA Engineers | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/for/qa-engineers"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="API Testing for QA Engineers - Real APIs, Not Mocks"
+        />
+        <meta
+            property="og:description"
+            content="Stop maintaining mock servers. Test against a real API with stable payloads, authentication flows, and request logs. Built for QA teams."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/for/qa-engineers"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="API Testing for QA Engineers - Real APIs, Not Mocks"
+        />
+        <meta
+            name="twitter:description"
+            content="Stop maintaining mock servers. Test against a real API with stable payloads, authentication flows, and request logs. Built for QA teams."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+        <script type="application/ld+json">
+            {"@context":"https://schema.org","@type":"WebPage","name":"API Testing for QA Engineers","description":"Stop maintaining mock servers. Test against a real API with stable payloads, auth flows, and request logs. Built for QA teams using Postman and Playwright.","url":"https://reqres.in/for/qa-engineers","isPartOf":{"@type":"WebSite","name":"ReqRes","url":"https://reqres.in"}}
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><style>
+    .code-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+    .code-scroll::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    .code-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .code-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+    }
+    .code-scroll::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+</style>
+
+<!-- FAQ Schema for SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What do QA engineers actually need from a test API?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "QA engineers need stable, predictable responses (same request returns same shape), real HTTP status codes (not mocked 200s), real authentication flows, request logging for debugging, no infrastructure to maintain, and 24/7 availability for CI runs."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How is ReqRes different from JSONPlaceholder or mock APIs?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ReqRes provides real authentication flows, persistent data, built-in request logs, and per-user isolation - features that JSONPlaceholder and most mock APIs don't offer. It's CI-ready with no setup required, and takes only 10 seconds to get started."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What's included in the ReqRes free tier?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The free tier includes 1 API key, 250 requests/day, all endpoints (CRUD, auth, users), request logs, and requires no credit card. Pro adds more API keys, higher request limits, priority support, and team features."
+            }
+        }
+    ]
+}
+</script>
+
+<style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link "
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-16 pb-12 md:pt-24 md:pb-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <div
+            class="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1"
+        >
+            <span class="text-xs font-medium text-amber-300"
+                >For QA Engineers</span
+            >
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
+            API Testing for QA Engineers
+        </h1>
+        <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+            Stop maintaining mock servers. Test against a real API with stable payloads, authentication flows, and request logs. Built for QA teams using Postman, Playwright, and CI pipelines.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <a
+                href="https://app.reqres.in/signup"
+                class="inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-black hover:bg-white/90 transition shadow-lg shadow-white/10"
+            >
+                Get a free API key
+            </a>
+            <a
+                href="/docs"
+                class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+            >
+                Read the docs
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT QA ENGINEERS NEED -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            What do QA engineers actually need from a test API?
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            Not another mock server. QA teams need infrastructure that matches how real APIs behave - without the overhead of maintaining it.
+        </p>
+        <div class="grid grid-cols-1 gap-4">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">Stable, predictable responses</p>
+                                <p class="text-xs text-white/50">Same request returns same shape every time</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">Real HTTP status codes</p>
+                                <p class="text-xs text-white/50">Not mocked 200s for everything</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">Real authentication flows</p>
+                                <p class="text-xs text-white/50">Not fake /login endpoints that always return 200</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">Request logging</p>
+                                <p class="text-xs text-white/50">See what was sent and received when tests fail</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">No infrastructure to maintain</p>
+                                <p class="text-xs text-white/50">No Docker, no local servers, no seed scripts</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                            <div>
+                                <p class="text-sm font-medium text-white">Available 24/7</p>
+                                <p class="text-xs text-white/50">CI runs at 3am; staging might not be up</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-sm text-white/60">
+            ReqRes delivers on all of these. One API key, and you're testing against real HTTP - not a simulation of it.
+        </p>
+    </div>
+</section>
+
+<!-- HOW IS REQRES DIFFERENT -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            How is ReqRes different from JSONPlaceholder or mock APIs?
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            JSONPlaceholder is great for learning. But when you need real auth, persistent data, and logs to debug failures - you need more.
+        </p>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-white/10 bg-white/[0.02]">
+                            <th class="text-left p-4 font-semibold text-white/80">Feature</th>
+                            <th class="text-center p-4 font-semibold text-amber-300">ReqRes</th>
+                            <th class="text-center p-4 font-semibold text-white/60">JSONPlaceholder</th>
+                            <th class="text-center p-4 font-semibold text-white/60">Postman Mock</th>
+                            <th class="text-center p-4 font-semibold text-white/60">Local Mock</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-white/70">
+                        <tr class="border-b border-white/5">
+                            <td class="p-4">Auth flows</td>
+                            <td class="p-4 text-center text-emerald-400">Real auth</td>
+                            <td class="p-4 text-center text-red-400/70">None</td>
+                            <td class="p-4 text-center text-amber-400/70">Simulated</td>
+                            <td class="p-4 text-center text-amber-400/70">DIY</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="p-4">Persistent data</td>
+                            <td class="p-4 text-center text-emerald-400">Yes</td>
+                            <td class="p-4 text-center text-red-400/70">No</td>
+                            <td class="p-4 text-center text-red-400/70">No</td>
+                            <td class="p-4 text-center text-amber-400/70">Needs DB</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="p-4">Request logs</td>
+                            <td class="p-4 text-center text-emerald-400">Built-in</td>
+                            <td class="p-4 text-center text-red-400/70">No</td>
+                            <td class="p-4 text-center text-amber-400/70">Limited</td>
+                            <td class="p-4 text-center text-amber-400/70">DIY</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="p-4">CI-ready</td>
+                            <td class="p-4 text-center text-emerald-400">Always up</td>
+                            <td class="p-4 text-center text-emerald-400">Always up</td>
+                            <td class="p-4 text-center text-red-400/70">Needs setup</td>
+                            <td class="p-4 text-center text-red-400/70">Needs Docker</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="p-4">User isolation</td>
+                            <td class="p-4 text-center text-emerald-400">Per-user scoping</td>
+                            <td class="p-4 text-center text-red-400/70">No</td>
+                            <td class="p-4 text-center text-red-400/70">No</td>
+                            <td class="p-4 text-center text-amber-400/70">DIY</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">Setup time</td>
+                            <td class="p-4 text-center text-emerald-400">10 seconds</td>
+                            <td class="p-4 text-center text-emerald-400">0 seconds</td>
+                            <td class="p-4 text-center text-white/50">5 minutes</td>
+                            <td class="p-4 text-center text-white/50">30+ minutes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="text-sm text-white/60">
+            For a deeper comparison, see <a href="/blog/jsonplaceholder-alternatives" class="text-amber-300 hover:text-amber-200 underline decoration-amber-300/30">JSONPlaceholder alternatives</a>.
+        </p>
+    </div>
+</section>
+
+<!-- HOW REQRES HELPS QA -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            How ReqRes delivers on each requirement
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Isolated test environments
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Each project is its own namespace - collections, users, logs, all separated. No cross-contamination between test suites or team members.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Real HTTP responses
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Assert against actual status codes, headers, and JSON shapes
+                    - not mocked fixtures that drift over time.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Searchable logs
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Every request is logged with method, path, status, and
+                    timing. Search logs to debug failed assertions.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Auth without the setup
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Magic links create test users and return session tokens. Test authenticated endpoints without standing up an auth server or maintaining test credentials.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMMON QA WORKFLOWS -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Common QA workflows with ReqRes
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            Whether you're running manual tests in Postman or automated suites in CI, ReqRes fits your existing workflow.
+        </p>
+        <div class="grid grid-cols-1 gap-4">
+            <a
+                href="/blog/api-testing-with-postman"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] hover:border-white/20 transition group"
+            >
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm font-semibold text-white group-hover:text-amber-200 transition">Postman collections</div>
+                        <p class="text-xs text-white/60 mt-1 leading-relaxed">
+                            Build Postman collections that hit real endpoints. Use environment variables for API keys, write tests with assertions, and export for CI runs with Newman.
+                        </p>
+                        <span class="text-xs text-amber-300 mt-2 inline-block group-hover:text-amber-200">Read the Postman guide &rarr;</span>
+                    </div>
+                </div>
+            </a>
+            <a
+                href="/blog/api-testing-with-playwright"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] hover:border-white/20 transition group"
+            >
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm font-semibold text-white group-hover:text-amber-200 transition">Playwright E2E tests</div>
+                        <p class="text-xs text-white/60 mt-1 leading-relaxed">
+                            Test real auth flows, user isolation, and data persistence with Playwright's request API. No mocking required - assert against actual HTTP responses.
+                        </p>
+                        <span class="text-xs text-amber-300 mt-2 inline-block group-hover:text-amber-200">Read the Playwright guide &rarr;</span>
+                    </div>
+                </div>
+            </a>
+            <a
+                href="/blog/qa-automation-with-reqres"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] hover:border-white/20 transition group"
+            >
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l-3 3m16.5-3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.678 48.678 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l3-3m-3 3l3 3" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm font-semibold text-white group-hover:text-amber-200 transition">CI pipeline smoke tests</div>
+                        <p class="text-xs text-white/60 mt-1 leading-relaxed">
+                            Run API tests on every push with GitHub Actions, CircleCI, or Jenkins. ReqRes is always up at 3am when your CI runs - no staging server to maintain.
+                        </p>
+                        <span class="text-xs text-amber-300 mt-2 inline-block group-hover:text-amber-200">Read the CI automation guide &rarr;</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CODE EXAMPLES -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Example: Playwright test
+        </h2>
+        <div
+            class="rounded-2xl border border-white/10 bg-black/60 p-5 overflow-x-auto code-scroll"
+        >
+            <pre
+                class="text-sm text-white/80 leading-relaxed"
+            ><code>import { test, expect } from '@playwright/test'
+
+// Get a session token in your test setup - three API calls, no auth server
+let sessionToken: string
+
+test.beforeAll(async ({ request }) => {
+  // Send magic link (in test mode, token is returned directly)
+  await request.post('https://reqres.in/api/app-users/login', {
+    headers: { 'Content-Type': 'application/json', 'x-api-key': 'pk_test_...' },
+    data: { project_id: 'proj_test', email: 'qa@example.com' }
+  })
+
+  // Verify and get session token
+  const verify = await request.post('https://reqres.in/api/app-users/verify', {
+    headers: { 'Content-Type': 'application/json' },
+    data: { token: 'token_from_response' }
+  })
+  sessionToken = (await verify.json()).session_token
+})
+
+test('creates and retrieves a record', async ({ request }) => {
+  // Seed a record
+  const create = await request.post(
+    'https://reqres.in/app/collections/todos/records',
+    {
+      headers: {
+        'Authorization': `Bearer ${sessionToken}`,
+        'Content-Type': 'application/json'
+      },
+      data: { data: { title: 'Test todo', completed: false } }
+    }
+  )
+  expect(create.status()).toBe(201)
+
+  // Assert it appears in the scoped list
+  const list = await request.get(
+    'https://reqres.in/app/collections/todos/records',
+    { headers: { 'Authorization': `Bearer ${sessionToken}` } }
+  )
+  const body = await list.json()
+  expect(body.data).toContainEqual(
+    expect.objectContaining({ title: 'Test todo' })
+  )
+  expect(body.meta.total).toBeGreaterThan(0)
+})
+
+// No mock server. No shared staging. No fixture files.
+// Real HTTP, real auth, real data - deterministic every run.</code></pre>
+        </div>
+    </div>
+</section>
+
+<!-- WHY QA TEAMS CHOOSE REQRES -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Why QA teams choose ReqRes
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">Runs in any CI</div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    No Docker services. No local servers. Hit the API from GitHub Actions, CircleCI, Jenkins - anywhere.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Deterministic data
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Every test run starts with the data you seeded. No shared-environment surprises. No state leaking between suites.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Real auth in your tests
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Test login flows, token verification, and scoped data access - without maintaining an auth server or a credentials file.
+                </p>
+            </div>
+            <div
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2"
+            >
+                <div class="text-sm font-semibold text-white">
+                    Debug with request logs
+                </div>
+                <p class="text-xs text-white/60 leading-relaxed">
+                    Every request logged with method, path, status, and timing. When a test fails, search the logs instead of guessing.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OTHER PERSONAS -->
+<section class="py-6">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-xs text-white/40 text-center">
+            Not a QA engineer? See ReqRes for <a href="/for/founders" class="underline decoration-white/20 hover:text-white/60 transition">founders</a>, <a href="/for/frontend-developers" class="underline decoration-white/20 hover:text-white/60 transition">frontend developers</a>, or <a href="/for/educators" class="underline decoration-white/20 hover:text-white/60 transition">educators</a>.
+        </p>
+    </div>
+</section>
+
+<!-- COMPARED TO -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Already using something else?
+        </h2>
+        <p class="text-sm text-white/70">
+            See how ReqRes compares - and where it fits alongside tools you already know.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a
+                href="/compared/postman"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 flex items-start gap-4 hover:border-white/20 transition group"
+            >
+                <div class="h-9 w-9 rounded-xl border border-white/10 bg-white/5 grid place-items-center p-1.5 shrink-0">
+                    <img
+                        src="/img/compared/postman.svg"
+                        alt="Postman logo"
+                        width="24"
+                        height="24"
+                        loading="lazy"
+                        class="h-full w-full object-contain"
+                    />
+                </div>
+                <div class="space-y-1 min-w-0">
+                    <div class="text-sm font-semibold text-white">ReqRes vs Postman</div>
+                    <p class="text-xs text-white/60 leading-relaxed">ReqRes provides the backend surface with persistent data and auth. Postman helps you test it. See how they work together for API testing workflows.</p>
+                    <span class="text-xs text-amber-300 font-medium group-hover:text-amber-200 transition">Read comparison &rarr;</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FREE TIER -->
+<section class="py-12 md:py-16 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            What's included in the free tier?
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            QA engineers respect directness. Here's exactly what you get - no surprises.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-4">
+                <div class="text-sm font-semibold text-white">Free tier</div>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        1 API key
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        250 requests/day
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        All endpoints (CRUD, auth, users)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Request logs
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        No credit card required
+                    </li>
+                </ul>
+            </div>
+            <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 space-y-4">
+                <div class="text-sm font-semibold text-amber-200">Pro adds</div>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        More API keys (per team member)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Higher request limits
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Priority support
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Team features
+                    </li>
+                </ul>
+                <a href="/#pricing" class="text-xs text-amber-300 hover:text-amber-200 underline decoration-amber-300/30">See pricing &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+            class="rounded-[24px] border border-white/10 bg-gradient-to-r from-amber-600/10 via-slate-900/60 to-slate-900/40 p-8 text-center space-y-4"
+        >
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+                Stop maintaining mock servers.
+            </h2>
+            <p class="text-sm text-white/60">Get a free API key in 10 seconds. No credit card required.</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a
+                    href="https://app.reqres.in/signup"
+                    class="inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-black hover:bg-white/90 transition shadow-lg shadow-white/10"
+                >
+                    Get a free API key
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-10 border-t border-white/5 text-sm text-white/60">
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+        <a href="/" class="flex items-center gap-2.5 group">
+            <div class="w-[32px] h-[32px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[14px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+            <span class="text-[15px] font-medium text-white/70 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+        </a>
+        <div class="flex flex-wrap gap-6 text-white/60 text-xs">
+            <a
+                href="/docs"
+                class="hover:text-white transition"
+                data-visitors-event="Docs CTA"
+                data-visitors-source="footer"
+                >Docs</a
+            >
+            <a
+                href="/about"
+                class="hover:text-white transition"
+                >About</a
+            >
+            <a
+                href="/commercial"
+                class="hover:text-white transition"
+                data-visitors-event="Commercial CTA"
+                data-visitors-source="site-footer"
+                >For companies</a
+            >
+            <a
+                href="/sponsor"
+                class="hover:text-white transition"
+                data-visitors-event="Sponsorship CTA"
+                data-visitors-source="site-footer"
+                >Sponsorship</a
+            >
+            <a
+                href="mailto:hello@reqres.in"
+                class="hover:text-white transition"
+                >Support</a
+            >
+        </div>
+        <div class="text-white/50 text-xs text-center md:text-right">
+            <div>&copy; 2026 ReqRes. Frontend-first backend.</div>
+            <div class="mt-1">
+                Made by
+                <a
+                    href="https://benhowdle.im"
+                    class="underline decoration-white/30 underline-offset-2 hover:text-white/70 hover:decoration-white/50 transition"
+                    >Ben Howdle</a
+                >
+                &middot; Author of
+                <a
+                    href="https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=footer&utm_campaign=launch"
+                    class="underline decoration-white/30 underline-offset-2 hover:text-white/70 hover:decoration-white/50 transition"
+                    >The First CTO</a
+                >
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('pre code').forEach(function (el) {
+            var text = el.textContent
+            text = text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+            var html = text
+                .split('\n')
+                .map(function (line) {
+                    if (/^\s*\/\//.test(line)) {
+                        return line.replace(
+                            /(\/\/.*)$/,
+                            '<span class="text-white/40">$1</span>'
+                        )
+                    }
+                    return line
+                        .replace(
+                            /\b(const|let|await|async|return|new|expect)\b/g,
+                            '<span class="text-sky-300">$1</span>'
+                        )
+                        .replace(
+                            /'([^']*)'/g,
+                            '<span class="text-emerald-300">\'$1\'</span>'
+                        )
+                        .replace(
+                            /`([^`]*)`/g,
+                            '<span class="text-emerald-300">`$1`</span>'
+                        )
+                        .replace(
+                            /\b(true|false|null|undefined)\b/g,
+                            '<span class="text-amber-300">$1</span>'
+                        )
+                })
+                .join('\n')
+            el.innerHTML = html
+        })
+    })
+</script>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

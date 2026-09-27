@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="gl-h-full gl-system" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Start a Free Ultimate Trial · GitLab</title>
+<link crossorigin="" href="https://snowplowprd.trx.gitlab.net" rel="preconnect">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-9892dc17af892e03de41625c0ee325117a3b8ee4ba6005f3a3eac68510030aed.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-Italic-f96f17332d67b21ada2dfba5f0c0e1d5801eab99330472057bf18edd93d4ccf7.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-29c2152dac8739499dd0fe5cd37a486ebcc7d4798c9b6d3aeab65b3172375b05.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-Italic-af36701a2188df32a9dcea12e0424c380019698d4f76da9ad8ea2fd59432cf83.woff2" rel="preload">
+
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+window.gon={};
+//]]>
+</script>
+
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+const root = document.documentElement;
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  root.classList.add('gl-dark');
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (e.matches) {
+    root.classList.add('gl-dark');
+  } else {
+    root.classList.remove('gl-dark');
+  }
+});
+
+//]]>
+</script>
+
+
+
+
+<meta content="light dark" name="color-scheme">
+<link rel="stylesheet" href="/assets/application-e16b5836b809db35fce7a0d08936d08dd41e659f6b8b5a13e53dbc4c4d634427.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/application_dark-bd24c2a8c3e190db3668dad30e8e9ea0ddf145bef95fe0e7168e2346b6662e89.css" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" href="/assets/page_bundles/signup-8046cda69f289eabf6086623c4b6fcc68563c7d81bbd3bcfa2ad1eff83fc1cfa.css" /><link rel="stylesheet" href="/assets/page_bundles/registration_two_panel-9008136e43991d66822dfd7156febf75011ea27ea89f3bf2f3bc6a910512dd16.css" /><link rel="stylesheet" href="/assets/page_bundles/commit_description-9e7efe20f0cef17d0606edabfad0418e9eb224aaeaa2dae32c817060fa60abcc.css" /><link rel="stylesheet" href="/assets/page_bundles/design_management-b0d28c79dc2ff36cbf37b4fa7b3bfb2908c91dcec0cf3fb800f11aaa25b08ea8.css" /><link rel="stylesheet" href="/assets/page_bundles/issuable_list-7a33f8b5a79c609e4bac7e1fa1c5553962adf726cd700fbead1f9e974c41e7c9.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_list-1d9cdbbaf9469f9073c410dc7a7f2543b02071773aa332daf63803eaaec87e62.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_show-ec954ae4932e0bfe7383adee3c75f53c5985c6edea62c7ae4370cb1f6e85a91a.css" /><link rel="stylesheet" href="/assets/page_bundles/notes_shared-009bfb6fa90b583372e5d3f444ccd9b89aa6278564b128d1f21b404747a3981b.css" /><link rel="stylesheet" href="/assets/page_bundles/work_items-cf96ec866af761ac90ea44063245a03c038e1f4ed193f5e2a6432597f048e62f.css" />
+<link rel="stylesheet" href="/assets/tailwind-7c31b1ff1ca55c2ed995ed64fe7cce64ed22b094963afb4cd9a8c4c2b40e32b0.css" />
+
+
+<link rel="stylesheet" href="/assets/fonts-deb7ad1d55ca77c0172d8538d53442af63604ff490c74acc2859db295c125bdb.css" />
+<link rel="stylesheet" href="/assets/highlight/themes/white-fcb8fe745eaa64eb81024a47dc6ddfb59587f0d638bcf5d1ae2e20e5baf4ceb1.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/highlight/themes/dark-14f22f8b4c88bce74c496ff5b27217bdc8636174d6a71aa71b80bca2942d3bc8.css" media="(prefers-color-scheme: dark)" />
+
+<script src="/assets/webpack/runtime.e8492396.bundle.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/main.e6f740a4.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/tracker.1eb446cb.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+window.snowplowOptions = {"namespace":"gl","hostname":"snowplowprd.trx.gitlab.net","cookieDomain":".gitlab.com","appId":"gitlab","formTracking":true,"linkClickTracking":true};
+gl = window.gl || {};
+gl.snowplowStandardContext = {"schema":"iglu:com.gitlab/gitlab_standard/jsonschema/1-1-8","data":{"environment":"production","source":"gitlab-rails","correlation_id":"a41968d7eb07821e-IAD","extra":{},"user_id":null,"global_user_id":null,"user_type":null,"is_gitlab_team_member":null,"namespace_id":null,"ultimate_parent_namespace_id":null,"project_id":null,"feature_enabled_by_namespace_ids":null,"realm":"saas","deployment_type":".com","context_generated_at":"2026-09-27T09:16:26.313Z","organization_id":1}};
+gl.snowplowPseudonymizedPageUrl = "https://gitlab.com/-/trial_registrations/new?amp=masked_amp\u0026glm_content=default-saas-trial%2F\u0026glm_source=about.gitlab.com";
+gl.maskedDefaultReferrerUrl = null;
+gl.ga4MeasurementId = 'G-ENFH3X7M5Y';
+gl.duoEvents = ["ai_question_category","block_slack_duo_mention","perform_completion_worker","receive_slack_duo_mention","process_gitlab_duo_question","agent_platform_session_created","agent_platform_session_dropped","agent_platform_session_finished","agent_platform_session_resumed","agent_platform_session_started","agent_platform_session_stopped","ai_response_time","approve_tool_duo_chat","cleanup_stuck_agent_platform_session","click_ai_catalog_button_duo_rail","click_analyze_with_duo_on_analytics_dashboard","click_dap_trial_or_paid_empty_state_agent","click_dap_trial_or_paid_empty_state_explore_agents_link","click_dap_trial_or_paid_empty_state_prompt","click_delete_ai_catalog_item_button","click_disable_ai_catalog_item_button","click_duo_agentic_not_available_empty_state_learn_more","click_duo_agentic_not_available_empty_state_start_trial","click_duo_agentic_subscription_expired_learn_more","click_duo_agentic_subscription_expired_upgrade","click_duo_agentic_trial_expired_learn_more","click_duo_agentic_trial_expired_upgrade","click_duo_quick_action","click_duplicate_ai_catalog_item_button","click_enable_ai_catalog_item_button","click_purchase_seats_button_group_duo_pro_home_page","click_through_flow_widget","click_through_session_pill","close_vulnerability_resolution_merge_request","code_suggestion_accepted_in_ide","code_suggestion_rejected_in_ide","code_suggestion_shown_in_ide","code_suggestions_connection_details_rate_limit_exceeded","code_suggestions_direct_access_rate_limit_exceeded","code_suggestions_rate_limit_exceeded","create_ai_catalog_item","create_ai_catalog_item_consumer","create_ai_self_hosted_model","create_vulnerability_resolution_merge_request","default_answer","delete_ai_catalog_item","delete_ai_catalog_item_consumer","delete_ai_self_hosted_model","deny_tool_duo_chat","detected_high_comment_temperature","detected_repeated_high_comment_temperature","dismiss_sast_vulnerability_false_positive_analysis","dismiss_secret_detection_vulnerability_false_positive_analysis","duo_workflow_workload_completed","enable_duo_code_review_by_default_marked_pending","encounter_duo_code_review_error_during_review","error_answer","excluded_files_from_duo_code_review","execute_llm_method","explain_code","explain_vulnerability","filter_ai_fp","find_no_issues_duo_code_review_after_review","find_nothing_to_review_duo_code_review_on_mr","finish_duo_workflow_execution","finish_mcp_tool_call","finish_vulnerability_bulk_duo_workflow","fix_code","fix_pipeline_suggestion_applied","fix_pipeline_suggestion_posted","forced_high_temperature_commenting","generate_merge_commit_message","generate_resolve_dependency_bump_pipeline","i_quickactions_q","include_repository_xray_data_into_code_generation_prompt","ingest_ai_audit_events_batch","maximize_duo_chat_panel","mention_gitlabduo_in_mr_comment","merge_vulnerability_resolution_merge_request","minimize_duo_chat_panel","navigate_retry_alternative_duo_agentic_chat","post_comment_duo_code_review_on_diff","process_gitlab_duo_slash_command","publish_duo_code_review_comments","react_thumbs_down_on_duo_code_review_comment","react_thumbs_up_on_duo_code_review_comment","recommend_tool_duo_chat","refactor_code","reported_sast_vulnerability_false_positive_analysis","reported_secret_detection_vulnerability_false_positive_analysis","request_ask_help","request_duo_chat_response","request_duo_vulnerability_resolution","request_review_duo_code_review_on_mr_by_author","request_review_duo_code_review_on_mr_by_non_author","requested_comment_temperature","resize_duo_chat_panel","resolve_feature_discovery_search","restore_ai_catalog_item","retry_duo_workflow_execution","retry_failed_duo_agentic_chat","retry_message_duo_agentic_chat","retry_succeeded_duo_agentic_chat","select_duo_agentic_chat_predefined_prompt","start_duo_workflow_execution","start_mcp_tool_call","start_vulnerability_bulk_duo_workflow","submit_dap_trial_or_paid_empty_state_message","submit_gitlab_duo_question","summarize_new_merge_request","summarize_review","tokens_per_embedding","tokens_per_user_request_prompt","tokens_per_user_request_response","tool_failed_duo_chat","tool_succeeded_duo_chat","trigger_ai_catalog_item","trigger_resolve_dependency_bump_workflow","trigger_sast_vulnerability_fp_detection_workflow","trigger_sast_vulnerability_resolution_workflow","trigger_secret_detection_vulnerability_fp_detection_workflow","trigger_slack_duo","troubleshoot_job","update_ai_catalog_item","update_ai_catalog_item_consumer","update_ai_self_hosted_model","update_model_selection_feature","update_self_hosted_ai_feature_to_vendored_model","view_ai_catalog_item","view_ai_catalog_item_index","view_ai_catalog_project_catalog","view_ai_catalog_project_managed","view_dap_trial_or_paid_empty_state","view_duo_agentic_identity_verification_empty_state","view_duo_agentic_not_available_empty_state","view_duo_agentic_subscription_expired_empty_state","view_duo_agentic_trial_expired_empty_state","write_tests"];
+gl.onlySendDuoEvents = false;
+
+
+//]]>
+</script>
+
+
+<script src="/assets/webpack/sentry.2fac921c.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+
+<script src="/assets/webpack/commons-graphql_explorer-pages.admin.application_settings.general-pages.admin.application_settings.s-41816856.0ed0cd5a.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-c90aa2e3.98aecbba.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-6117f013.abbe62c6.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.service_accounts-pages.explore.ai_catalog-pages.explore.ana-dd0b1cb0.27570770.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.registrations.new-pages.root-pages.root.vue3-pages.sessions.new-p-25643d47.8f1e2a9b.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.admin.deploy_keys.index-pages.admin.deploy_keys.index.vue3-pages.admin.groups.index-pa-11307819.b20952f3.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.projects.snippets.show-pages.root-pages.root.vue3-pages.snippets.-73de5222.2d152cdb.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/0dcf7166.fee24f6c.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.search.show-pages.search.show.vue3-super_sidebar.df21b919.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.search.show-super_sidebar.4bb75822.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/super_sidebar.e6ff1ddb.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-duo_panel-pages.admin.ai.amazon_q_settings-pages.admin.application_settings.general-pages.ad-36273b41.d2665544.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.admin.sessions-pages.groups.omniauth_callbacks-pages.ldap.omniauth_callbacks-pages.omn-aac29e51.1b9d7736.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.groups.sso-pages.registrations.new-pages.sessions.new-pages.trial_registrations.new.e050ff52.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.registrations.new-pages.trial_registrations.new-pages.users.registrations_identity_ver-edae3b83.71d2a65b.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/commons-pages.registrations.new-pages.trial_registrations.new.d610d5c2.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script src="/assets/webpack/pages.trial_registrations.new.dbe8c2c9.chunk.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+gtag('consent', 'default', {
+  'analytics_storage': 'granted',
+  'ad_storage': 'granted',
+  'functionality_storage': 'granted',
+  'wait_for_update': 500
+});
+
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'functionality_storage': 'denied',
+  'region': ['CA-QC', 'CO', 'EU', 'GB', 'IS', 'KR', 'LI', 'NO', 'PE', 'RU'],
+  'wait_for_update': 500
+});
+
+ window.geofeed = (options) => {
+    dataLayer.push({
+      'event': 'OneTrustCountryLoad',
+      'oneTrustCountryId': options.country.toString(),
+      'oneTrustStateId': options.state?.toString()
+    })
+  }
+
+  const json = document.createElement('script');
+  json.setAttribute('src', 'https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location/geofeed');
+  document.head.appendChild(json);
+
+//]]>
+</script><script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;j.setAttribute('nonce',
+'eApQlYFJJ7890vzT9Fk17g==');f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJXWQL');
+
+
+//]]>
+</script>
+<!-- OneTrust -->
+<script src="https://cdn.cookielaw.org/consent/7f944245-c5cd-4eed-a90e-dd955adfdd08/OtAutoBlock.js" defer="defer" nonce="eApQlYFJJ7890vzT9Fk17g=="></script>
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+const oneTrustScript = document.createElement('script');
+oneTrustScript.src = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
+oneTrustScript.dataset.domainScript = '7f944245-c5cd-4eed-a90e-dd955adfdd08';
+oneTrustScript.nonce = 'eApQlYFJJ7890vzT9Fk17g=='
+oneTrustScript.charset = 'UTF-8';
+oneTrustScript.defer = true;
+document.head.appendChild(oneTrustScript);
+
+function OptanonWrapper() { }
+
+
+//]]>
+</script>
+<!-- Bizible -->
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+const bizibleScript = document.createElement('script');
+bizibleScript.src = 'https://cdn.bizible.com/scripts/bizible.js';
+bizibleScript.nonce = 'eApQlYFJJ7890vzT9Fk17g=='
+bizibleScript.charset = 'UTF-8';
+bizibleScript.defer = true;
+document.head.appendChild(bizibleScript);
+
+function OptanonWrapper() { }
+
+
+//]]>
+</script>
+
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="Start a Free Ultimate Trial · GitLab" property="og:title">
+<meta content="GitLab.com" property="og:description">
+<meta content="https://gitlab.com/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="https://gitlab.com/-/trial_registrations/new?amp;glm_content=default-saas-trial/&amp;glm_source=about.gitlab.com" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="Start a Free Ultimate Trial · GitLab" property="twitter:title">
+<meta content="GitLab.com" property="twitter:description">
+<meta content="https://gitlab.com/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="twitter:image">
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="BsO0sMjRZIrapDS3JNqTwukR7O_RVZLycP33TEDvk06Y1VU2sNYNZu6NzjrE6jjYMQw5bjP1x3XSu555fAnFDQ" />
+<meta name="csp-nonce" content="eApQlYFJJ7890vzT9Fk17g==" />
+<meta name="action-cable-url" content="/-/cable" />
+<link crossorigin="use-credentials" href="/-/manifest.json" rel="manifest">
+<link rel="icon" type="image/png" href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" id="favicon" data-original-href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/apple-touch-icon-b049d4bc0dd9626f31db825d61880737befc7835982586d015bded10b4435460.png" />
+<link crossorigin="use-credentials" href="/search/opensearch.xml" rel="search" title="Search GitLab" type="application/opensearchdescription+xml">
+
+
+
+
+<meta content="GitLab.com" name="description">
+<meta content="#F1F0F6" media="(prefers-color-scheme: light)" name="theme-color">
+<meta content="#232128" media="(prefers-color-scheme: dark)" name="theme-color">
+</head>
+
+<body class="gl-h-full  !gl-bg-default!gl-bg-default" data-page="trial_registrations:new">
+
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+gl = window.gl || {};
+gl.client = {"isGeneric":true,"isOther":true};
+
+
+//]]>
+</script>
+
+<script nonce="eApQlYFJJ7890vzT9Fk17g==">
+//<![CDATA[
+gl = window.gl || {};
+gl.experiments = {};
+
+
+//]]>
+</script>
+<div class="gl-flex gl-flex-col gl-min-h-screen">
+<div class="gl-flex gl-flex-1 gl-p-8 gl-gap-8">
+<div class="gl-flex-1 gl-flex gl-flex-col gl-items-center gl-min-w-0">
+<div class="flash-container flash-container-page sticky" data-testid="flash-container">
+<div id="js-global-alerts"></div>
+</div>
+
+<div class="gl-flex gl-flex-col gl-h-full gl-w-full" data-testid="registration-two-panel-layout">
+<div class="gl-flex gl-justify-between gl-items-center gl-gap-3 gl-mb-10">
+<img class="gl-h-6 lazy" alt="GitLab" data-src="/assets/illustrations/gitlab_logo-95e56730dc3513d2d29f49774e8a7c496bce38b491d1ce8c9e76b1e48128ccc4.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+<p class="gl-my-0">
+Already have an account?
+<a data-track-action="click_sign_in_from_registration_page" data-track-label="trial_registration" href="/users/sign_in?redirect_to_referer=yes">Sign in</a>
+</p>
+
+</div>
+<div class="gl-flex-1 gl-flex gl-flex-col gl-mx-auto gl-w-full registration-form-container">
+<h1 class="gl-m-0 gl-pb-3">
+Get Started with GitLab
+</h1>
+<p class="gl-m-0 gl-pb-6">
+Start your free 30 day trial today, no credit card required. You&#39;ll have full access to our most advanced features, including GitLab Duo Agent Platform.
+</p>
+<div class="signup-box registration-form">
+<form data-testid="signup-form" class="gl-show-field-errors js-arkose-labs-form" id="new_new_user" aria-live="assertive" action="/-/trial_registrations?glm_source=about.gitlab.com" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="-ewGEb6k1G9gRD6KbtTKAwzx4N7e3k3lz3QpDic6oxln-ueXxqO9g1RtxAeO5GEZ1Ow1Xzx-GGJtMkA7G9z1Wg" autocomplete="off" /><div class="devise-errors">
+
+
+</div>
+<div class="lastname_1790500586"><style media="screen" nonce="eApQlYFJJ7890vzT9Fk17g==">.lastname_1790500586 {position:absolute!important;top:-9999px;left:-9999px;}</style><label for="lastname">If you are human, please ignore this field.</label><input type="text" name="lastname" id="lastname" autocomplete="nY95wvXlw7XL" tabindex="-1" nonce="true" /></div>
+<div class="name form-row">
+<div class="col form-group">
+<label for="new_user_first_name">First name</label>
+<input class="form-control gl-form-input js-block-emoji js-validate-length js-track-error" data-max-length="127" data-max-length-message="First name is too long (maximum is 127 characters)." data-track-action-for-errors="trial_registration" data-testid="new-user-first-name-field" required="required" title="This field is required." type="text" name="new_user[first_name]" id="new_user_first_name" />
+</div>
+<div class="col form-group">
+<label for="new_user_last_name">Last name</label>
+<input class="form-control gl-form-input js-block-emoji js-validate-length js-track-error" data-max-length="127" data-max-length-message="Last name is too long (maximum is 127 characters)." data-track-action-for-errors="trial_registration" data-testid="new-user-last-name-field" required="required" title="This field is required." type="text" name="new_user[last_name]" id="new_user_last_name" />
+</div>
+</div>
+<div class="username form-group">
+<label for="new_user_username">Username</label>
+<input class="form-control gl-form-input js-block-emoji js-validate-length js-validate-username js-track-error" data-min-length="2" data-min-length-message="Username is too short (minimum is 2 characters)." data-max-length="255" data-max-length-message="Username is too long (maximum is 255 characters)." data-testid="new-user-username-field" data-track-action-for-errors="trial_registration" pattern="[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]{0,254}[a-zA-Z0-9_\-]|[a-zA-Z0-9_]" required="required" title="Please create a username with only alphanumeric characters." type="text" name="new_user[username]" id="new_user_username" />
+<p class="validation-error gl-text-danger gl-field-error-ignore gl-mt-2 field-validation hide">
+Username is already taken.
+</p>
+<p class="validation-success gl-text-success gl-field-error-ignore gl-mt-2 field-validation hide">
+Username is available.
+</p>
+<p class="validation-pending gl-field-error-ignore gl-mt-2 field-validation hide">
+Checking username availability…
+</p>
+</div>
+<div class="form-group">
+<label for="new_user_email">Company email</label>
+<input class="form-control gl-form-input js-validate-email js-track-error" data-testid="new-user-email-field" data-track-action-for-errors="trial_registration" required="required" title="Please provide a valid email address." type="email" name="new_user[email]" id="new_user_email" />
+<p class="validation-hint gl-text-subtle">
+We recommend a work email address.
+</p>
+<p class="validation-warning gl-field-error-ignore gl-text-danger hide">
+Email address without top-level domain. Make sure that you have entered the correct email address.
+</p>
+
+</div>
+<div class="form-group gl-mb-0">
+<label for="new_user_password">Password</label>
+<input class="form-control gl-form-input js-password" data-autocomplete="new-password" data-id="new_user_password" data-name="new_user[password]" data-required="true" data-testid="new-user-password-field" data-track-action-for-errors="trial_registration">
+
+</div>
+
+<div class="form-group gl-mt-6 gl-mb-0">
+<div data-api-key="12D76D4C-5EDF-4EB4-A84D-042C497A9610" data-data-exchange-payload="pSVlwGyWVoxz0k5S
+.wH0bQvDQDzEbAk0KCB1MiZWKiBoJnSNLDo47yiDJwViM0DOh5uvk6H5dnk6r
+dAUj9j4kM2POwRLoqEcmEQAtCLwvGiYE9fIX9nrgaWpJfrOuGCHqYPY6oLFv
+tZMku3V7mjh9AUdwBpLxj6wCVt6TVYUvgQKacVgAe8EpS1uyqGUwQ4l64qkT
+DGF8T1fOnDiVtZB/CmcYiPwRjFkC+gj1G9McpACI/H11np9dHWspXOiGVFZb
+EPXxWRVoQEpMc45Tx7R6u0KwVMO6Ca5bT2vETS4eix3AW/fXaXW4bSwXkCYL
+HZesTA9hKpyL7iJoj7Y40pO/GgIuKODrgcjFgAdwFHX4ihPAzd0V5clpdgrX
+FaAvU5IFPgIvWTFaHBzZ/wlLlr2qHpjpwpWEnuYn/AjzAnpLZEEf4oV54NiB
+yQN3giraWDvVXnkhymKdELbi
+" data-data-exchange-payload-path="/-/arkose/data_exchange_payload" data-domain="gitlab-api.arkoselabs.com" id="js-arkose-labs-challenge"></div>
+
+</div>
+<div class="form-group gl-mb-0 gl-py-6">
+<div class="gl-form-checkbox custom-control custom-checkbox gl-text-subtle">
+<input name="new_user[onboarding_status_email_opt_in]" type="hidden" value="0" autocomplete="off" /><input class="custom-control-input" type="checkbox" value="1" checked="checked" name="new_user[onboarding_status_email_opt_in]" id="new_user_onboarding_status_email_opt_in" />
+<label class="custom-control-label" for="new_user_onboarding_status_email_opt_in"><span>I agree that GitLab can contact me by email about its product, services, or events.</span></label>
+</div>
+
+
+</div>
+<div data-view-model="{&quot;buttonText&quot;:&quot;Continue&quot;,&quot;buttonClass&quot;:&quot;black-btn&quot;,&quot;trackLabel&quot;:&quot;trial_registration&quot;}" id="js-signup-submit-button"></div>
+</form>
+<p class="gl-text-subtle gl-mb-0 gl-text-sm gl-mt-3">
+By clicking Continue or registering through a third party you accept the GitLab <a target="_blank" rel="noopener noreferrer" href="/-/users/terms">Terms of Use and acknowledge the Privacy Statement and Cookie Policy</a>.
+</p>
+
+<div class="gl-pt-5">
+<div class="gl-flex gl-items-center gl-gap-5" data-testid="divider">
+<hr class="gl-grow gl-border-default">
+or
+<hr class="gl-grow gl-border-default">
+</div>
+
+</div>
+<div class="gl-flex gl-gap-3 gl-flex-col">
+<form class="js-omniauth-form" method="post" action="/users/auth/google_oauth2?glm_source=about.gitlab.com&amp;onboarding_status_email_opt_in=true&amp;trial=true"><button class="gl-button btn btn-block btn-md btn-default js-track-omni-auth" data-provider="google_oauth2" data-track-action="google_oauth2_sso" data-track-label="trial_registration" type="submit"><span class="gl-button-text">
+<img alt="Google" title="Sign in with Google" class="gl-button-icon lazy" data-src="/assets/auth_buttons/google_64-9ab7462cd2115e11f80171018d8c39bd493fc375e83202fbb6d37a487ad01908.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+<span class="gl-button-text">
+Continue with Google
+</span>
+
+</span>
+
+</button><input type="hidden" name="authenticity_token" value="BAhWDOdPvAt9vYjB8s_JNwTNn6biSqAbvR9lxaj4DciaHreKn0jV50mUckwS_2It3NBKJwDq9ZwfWQzwlB5biw" autocomplete="off" /></form>
+<form class="js-omniauth-form" method="post" action="/users/auth/github?glm_source=about.gitlab.com&amp;onboarding_status_email_opt_in=true&amp;trial=true"><button class="gl-button btn btn-block btn-md btn-default js-track-omni-auth" data-provider="github" data-track-action="github_sso" data-track-label="trial_registration" type="submit"><span class="gl-button-text">
+<img alt="GitHub" title="Sign in with GitHub" class="gl-button-icon lazy" data-src="/assets/auth_buttons/github_64-84041cd0ea392220da96f0fb9b9473c08485c4924b98c776be1bd33b0daab8c0.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+<span class="gl-button-text">
+Continue with GitHub
+</span>
+
+</span>
+
+</button><input type="hidden" name="authenticity_token" value="WJxVy5I3WZPxbVTAAuvBPvJ7P3TqppWQM7NkZHgTSgnGirRN6jAwf8VErk3i22okKmbq9QgGwBeR9Q1RRPUcSg" autocomplete="off" /></form>
+</div>
+</div>
+</div>
+<div class="registration-form-footer gl-flex gl-justify-between gl-mt-8">
+<p class="gl-m-0">
+Want to host GitLab on your servers?
+<a data-track-action="click_link" data-track-label="start_self-managed_trial" href="https://about.gitlab.com/free-trial?hosted=self-managed">Start a Self-Managed trial</a>
+</p>
+<div class="js-language-switcher" data-locales="[{&quot;value&quot;:&quot;en&quot;,&quot;percentage&quot;:100,&quot;text&quot;:&quot;English&quot;},{&quot;value&quot;:&quot;zh_CN&quot;,&quot;percentage&quot;:99,&quot;text&quot;:&quot;简体中文&quot;},{&quot;value&quot;:&quot;ja&quot;,&quot;percentage&quot;:99,&quot;text&quot;:&quot;日本語&quot;},{&quot;value&quot;:&quot;ga_IE&quot;,&quot;percentage&quot;:99,&quot;text&quot;:&quot;Gaeilge&quot;},{&quot;value&quot;:&quot;pt_BR&quot;,&quot;percentage&quot;:98,&quot;text&quot;:&quot;português (Brasil)&quot;},{&quot;value&quot;:&quot;it&quot;,&quot;percentage&quot;:98,&quot;text&quot;:&quot;italiano&quot;},{&quot;value&quot;:&quot;fr&quot;,&quot;percentage&quot;:98,&quot;text&quot;:&quot;français&quot;},{&quot;value&quot;:&quot;es&quot;,&quot;percentage&quot;:98,&quot;text&quot;:&quot;español&quot;},{&quot;value&quot;:&quot;ko&quot;,&quot;percentage&quot;:96,&quot;text&quot;:&quot;한국어&quot;},{&quot;value&quot;:&quot;de&quot;,&quot;percentage&quot;:95,&quot;text&quot;:&quot;Deutsch&quot;}]"></div>
+
+</div>
+</div>
+
+</div>
+<div class="gl-flex-1 gl-hidden gl-sticky gl-top-8 gl-self-start registration-right-panel lg:gl-block">
+<div class="gl-relative gl-h-full gl-overflow-hidden gl-flex gl-flex-col gl-bg-subtle gl-rounded-3xl">
+<div class="gl-absolute gl-inset-0" style="background-image: url(/assets/dot_with_padding-a94ebfc7ff8d9aeee3e25af44aaeae2d73ef432be4196fd9b03d06a69cb1a967.svg);"></div>
+<div class="gl-absolute gl-inset-0 registration-marketing-panel-bg-gradient"></div>
+<div class="gl-relative gl-flex gl-flex-col gl-h-full gl-px-6 gl-pt-10 gl-pb-5 xl:gl-px-12 xl:gl-pt-20 xl:gl-pb-10">
+<div class="gl-flex gl-justify-center gl-flex-1 gl-items-center">
+<img srcset="/assets/subscription/delegate-ai-736bd1c6f225111ae437dbd351559aefa1978fc513f6b06011534e1a17b7fbd0.png 472w, /assets/subscription/delegate-ai@2x-56dbfa3000985f3f49955cc44d094ed038b85c40689f077dc8ce0a193dda3a5f.png 944w, /assets/subscription/delegate-ai@3x-31bc36b5a0f4e8b5b043919a624c1f813dfc1e23b8975e429f612c4b38f31473.png 1416w" sizes="(min-width: 1024px) 40vw, 100vw" alt="" class="gl-object-contain registration-marketing-panel-illustration registration-marketing-panel-illustration--light lazy" data-src="/assets/subscription/delegate-ai-736bd1c6f225111ae437dbd351559aefa1978fc513f6b06011534e1a17b7fbd0.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+<img srcset="/assets/subscription/delegate-ai-dark-4b4316ff30a01bc577b3e5e288bbea221b0479a644d5b2db06576b3214deb14a.png 472w, /assets/subscription/delegate-ai-dark@2x-3d8b111b76e7580f917f2e8a12168e9cb43575d303896d77963e925e060a1e26.png 944w, /assets/subscription/delegate-ai-dark@3x-98e43c41e5444feb22f271353a35aa6e96485d409593173697fea3024d685db6.png 1416w" sizes="(min-width: 1024px) 40vw, 100vw" alt="" class="gl-object-contain registration-marketing-panel-illustration registration-marketing-panel-illustration--dark lazy" data-src="/assets/subscription/delegate-ai-dark-4b4316ff30a01bc577b3e5e288bbea221b0479a644d5b2db06576b3214deb14a.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+</div>
+<h2 class="gl-text-2xl gl-font-semibold gl-text-default gl-mt-auto gl-text-center">
+Delegate work to AI
+</h2>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

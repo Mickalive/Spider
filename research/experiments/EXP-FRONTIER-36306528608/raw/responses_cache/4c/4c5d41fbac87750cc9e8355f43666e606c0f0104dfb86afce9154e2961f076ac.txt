@@ -1,0 +1,15 @@
+<html>
+<head><title>Index of /3.14/archives/</title></head>
+<body>
+<h1>Index of /3.14/archives/</h1><hr><pre><a href="../">../</a>
+<a href="python-3.14-docs-html.tar.bz2">python-3.14-docs-html.tar.bz2</a>                      27-Sep-2026 05:59             8392620
+<a href="python-3.14-docs-html.zip">python-3.14-docs-html.zip</a>                          27-Sep-2026 05:59            12868312
+<a href="python-3.14-docs-pdf-a4.tar.bz2">python-3.14-docs-pdf-a4.tar.bz2</a>                    01-Oct-2025 10:50            21651219
+<a href="python-3.14-docs-pdf-a4.zip">python-3.14-docs-pdf-a4.zip</a>                        01-Oct-2025 10:50            21613232
+<a href="python-3.14-docs-texinfo.tar.bz2">python-3.14-docs-texinfo.tar.bz2</a>                   19-Sep-2026 20:02            10370156
+<a href="python-3.14-docs-texinfo.zip">python-3.14-docs-texinfo.zip</a>                       19-Sep-2026 20:02            13015947
+<a href="python-3.14-docs-text.tar.bz2">python-3.14-docs-text.tar.bz2</a>                      19-Sep-2026 19:56             3328952
+<a href="python-3.14-docs-text.zip">python-3.14-docs-text.zip</a>                          19-Sep-2026 19:56             4635750
+<a href="python-3.14-docs.epub">python-3.14-docs.epub</a>                              19-Sep-2026 19:58             9205465
+</pre><hr></body>
+</html>

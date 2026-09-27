@@ -1,0 +1,11 @@
+{
+ "arm_phase_entered": false,
+ "calibration_pass": false,
+ "experiment_id": "EXP-FRONTIER-36306528608",
+ "http_requests_total": 292,
+ "min_required": 3,
+ "pages_total": 232,
+ "qualifying_count": 0,
+ "qualifying_sites": [],
+ "wall_clock_s": 87.6
+}

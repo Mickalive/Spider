@@ -1,0 +1,3560 @@
+{
+ "entries": [
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "pass2_00:root",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 254640,
+   "body_sha256": "1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1b/1bcae023612449b14f8bdf41527421d1f6aea7f6f9e25e5a3d9e549770c3dcd1.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/Main_Page"
+  },
+  {
+   "body_bytes": 161263,
+   "body_sha256": "27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/27/27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents"
+  },
+  {
+   "body_bytes": 161263,
+   "body_sha256": "27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/27/27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents"
+  },
+  {
+   "body_bytes": 161263,
+   "body_sha256": "27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/27/27b16c2a0a2a679fe9f97201e9c3b8ffece7b1cb7b6d6e132339e4dad37fd382.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents"
+  },
+  {
+   "body_bytes": 464668,
+   "body_sha256": "173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/17/173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Portal:Current_events"
+  },
+  {
+   "body_bytes": 464668,
+   "body_sha256": "173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/17/173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Portal:Current_events"
+  },
+  {
+   "body_bytes": 464668,
+   "body_sha256": "173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/17/173186fb32b576e89848a552e354bca5e73d9bd8e7b3b2f91e61f224b4764082.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/Portal:Current_events"
+  },
+  {
+   "body_bytes": 142260,
+   "body_sha256": "853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/1951_Miami_Redskins_football_team"
+  },
+  {
+   "body_bytes": 142260,
+   "body_sha256": "853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/1951_Miami_Redskins_football_team"
+  },
+  {
+   "body_bytes": 142260,
+   "body_sha256": "853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/1951_Miami_Redskins_football_team"
+  },
+  {
+   "body_bytes": 142260,
+   "body_sha256": "853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/853ed72b664c7fee9ecd87fbadd04f7762f9a703070d1cf8ad82f98d724f8905.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/1951_Miami_Redskins_football_team"
+  },
+  {
+   "body_bytes": 178864,
+   "body_sha256": "a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a0/a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:About"
+  },
+  {
+   "body_bytes": 178864,
+   "body_sha256": "a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a0/a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:About"
+  },
+  {
+   "body_bytes": 178864,
+   "body_sha256": "a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a0/a000d3b58d249ced660b3a6474d30fd0fc047c7dc7a4926a6a02f0475ff2bc3f.txt",
+   "status_code": 200,
+   "tag": "pass2_00:c5_repeat",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:About"
+  },
+  {
+   "body_bytes": 97512,
+   "body_sha256": "edc5f9e0dd239133dc7b94a0c9b2a276cba76a71aed34c82c26004ea77cae70e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ed/edc5f9e0dd239133dc7b94a0c9b2a276cba76a71aed34c82c26004ea77cae70e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us"
+  },
+  {
+   "body_bytes": 97512,
+   "body_sha256": "edc5f9e0dd239133dc7b94a0c9b2a276cba76a71aed34c82c26004ea77cae70e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ed/edc5f9e0dd239133dc7b94a0c9b2a276cba76a71aed34c82c26004ea77cae70e.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us"
+  },
+  {
+   "body_bytes": 202816,
+   "body_sha256": "1d0fd69e501e3b9573f2524463af0dcad8e82ae94bad96f9afe9d8aebab606ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1d/1d0fd69e501e3b9573f2524463af0dcad8e82ae94bad96f9afe9d8aebab606ab.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Help:Contents"
+  },
+  {
+   "body_bytes": 202816,
+   "body_sha256": "1d0fd69e501e3b9573f2524463af0dcad8e82ae94bad96f9afe9d8aebab606ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1d/1d0fd69e501e3b9573f2524463af0dcad8e82ae94bad96f9afe9d8aebab606ab.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Help:Contents"
+  },
+  {
+   "body_bytes": 123240,
+   "body_sha256": "d9b804324414ff2b727f5abe1445e8da695788d097c88e29b066467dd023f558",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d9/d9b804324414ff2b727f5abe1445e8da695788d097c88e29b066467dd023f558.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Help:Introduction"
+  },
+  {
+   "body_bytes": 123240,
+   "body_sha256": "d9b804324414ff2b727f5abe1445e8da695788d097c88e29b066467dd023f558",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d9/d9b804324414ff2b727f5abe1445e8da695788d097c88e29b066467dd023f558.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Help:Introduction"
+  },
+  {
+   "body_bytes": 684701,
+   "body_sha256": "5e29167420ac1850bbaca4721b65148211ef6f0c8969e756decf39f48b7a90bb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5e/5e29167420ac1850bbaca4721b65148211ef6f0c8969e756decf39f48b7a90bb.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal"
+  },
+  {
+   "body_bytes": 684701,
+   "body_sha256": "5e29167420ac1850bbaca4721b65148211ef6f0c8969e756decf39f48b7a90bb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5e/5e29167420ac1850bbaca4721b65148211ef6f0c8969e756decf39f48b7a90bb.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal"
+  },
+  {
+   "body_bytes": 235304,
+   "body_sha256": "ce4f16d1d7d019c0042ec00eb9a58282909596369154ab0ac034d8ce51c20345",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ce/ce4f16d1d7d019c0042ec00eb9a58282909596369154ab0ac034d8ce51c20345.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Special:RecentChanges"
+  },
+  {
+   "body_bytes": 235304,
+   "body_sha256": "ce4f16d1d7d019c0042ec00eb9a58282909596369154ab0ac034d8ce51c20345",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ce/ce4f16d1d7d019c0042ec00eb9a58282909596369154ab0ac034d8ce51c20345.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs1",
+   "url": "https://en.wikipedia.org/wiki/Special:RecentChanges"
+  },
+  {
+   "body_bytes": 180069,
+   "body_sha256": "c112cb573ac5170d803077c7f8cda01675ab603c76df13a96f73c8a6b75dc5a6",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c1/c112cb573ac5170d803077c7f8cda01675ab603c76df13a96f73c8a6b75dc5a6.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard"
+  },
+  {
+   "body_bytes": 180069,
+   "body_sha256": "c112cb573ac5170d803077c7f8cda01675ab603c76df13a96f73c8a6b75dc5a6",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c1/c112cb573ac5170d803077c7f8cda01675ab603c76df13a96f73c8a6b75dc5a6.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard"
+  },
+  {
+   "body_bytes": 75193,
+   "body_sha256": "f8c7234c9602983eff72ec8022aac248bd4cc2fe41e8b3ba2beb38b9bada4497",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f8/f8c7234c9602983eff72ec8022aac248bd4cc2fe41e8b3ba2beb38b9bada4497.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Special:SpecialPages"
+  },
+  {
+   "body_bytes": 75193,
+   "body_sha256": "f8c7234c9602983eff72ec8022aac248bd4cc2fe41e8b3ba2beb38b9bada4497",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f8/f8c7234c9602983eff72ec8022aac248bd4cc2fe41e8b3ba2beb38b9bada4497.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Special:SpecialPages"
+  },
+  {
+   "body_bytes": 54744,
+   "body_sha256": "b19858b51c025f799b56a9c4ef328487fe09e36394d24191c11b73df874926b5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b19858b51c025f799b56a9c4ef328487fe09e36394d24191c11b73df874926b5.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Special:Search"
+  },
+  {
+   "body_bytes": 54744,
+   "body_sha256": "b19858b51c025f799b56a9c4ef328487fe09e36394d24191c11b73df874926b5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b19858b51c025f799b56a9c4ef328487fe09e36394d24191c11b73df874926b5.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Special:Search"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "54936932c682e5f55821bc6674d2d63649788d04cd646cd157fd55c84cb40030",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/54/54936932c682e5f55821bc6674d2d63649788d04cd646cd157fd55c84cb40030.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=e80e383d58674b0f6e30fa18d4c7441b"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "54936932c682e5f55821bc6674d2d63649788d04cd646cd157fd55c84cb40030",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/54/54936932c682e5f55821bc6674d2d63649788d04cd646cd157fd55c84cb40030.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=e80e383d58674b0f6e30fa18d4c7441b"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "855d718514989d7b3ad10c52f63452b7bf807454d23237853b8eaacea9c38514",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/855d718514989d7b3ad10c52f63452b7bf807454d23237853b8eaacea9c38514.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=581793cd7ed991e9765181ad69ec2d86"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "855d718514989d7b3ad10c52f63452b7bf807454d23237853b8eaacea9c38514",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/85/855d718514989d7b3ad10c52f63452b7bf807454d23237853b8eaacea9c38514.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=581793cd7ed991e9765181ad69ec2d86"
+  },
+  {
+   "body_bytes": 159571,
+   "body_sha256": "13dedfd7b536cae9476c6c0649d77cd46b4f1564a92eb421517368dfd0036838",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/13/13dedfd7b536cae9476c6c0649d77cd46b4f1564a92eb421517368dfd0036838.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:About"
+  },
+  {
+   "body_bytes": 159571,
+   "body_sha256": "13dedfd7b536cae9476c6c0649d77cd46b4f1564a92eb421517368dfd0036838",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/13/13dedfd7b536cae9476c6c0649d77cd46b4f1564a92eb421517368dfd0036838.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:About"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "6c19ba381a791acd74b9791ee7ebb89da02e6182107c7b46523add330723532e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6c/6c19ba381a791acd74b9791ee7ebb89da02e6182107c7b46523add330723532e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=02130ede491878756652f37ff827b8c3"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "6c19ba381a791acd74b9791ee7ebb89da02e6182107c7b46523add330723532e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6c/6c19ba381a791acd74b9791ee7ebb89da02e6182107c7b46523add330723532e.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=02130ede491878756652f37ff827b8c3"
+  },
+  {
+   "body_bytes": 126408,
+   "body_sha256": "d7fdb93db1b330ce0f560efcad6bcdc2b0066fb598ebcca82ca9e8678d4ce5de",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d7/d7fdb93db1b330ce0f560efcad6bcdc2b0066fb598ebcca82ca9e8678d4ce5de.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Contact_us"
+  },
+  {
+   "body_bytes": 126408,
+   "body_sha256": "d7fdb93db1b330ce0f560efcad6bcdc2b0066fb598ebcca82ca9e8678d4ce5de",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d7/d7fdb93db1b330ce0f560efcad6bcdc2b0066fb598ebcca82ca9e8678d4ce5de.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Contact_us"
+  },
+  {
+   "body_bytes": 97794,
+   "body_sha256": "51a1f90ae1c6610f0777605d4d7ba6090d6c144f5493759bddbdcefb66360e3e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/51/51a1f90ae1c6610f0777605d4d7ba6090d6c144f5493759bddbdcefb66360e3e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:Contact_us&amp;action=edit"
+  },
+  {
+   "body_bytes": 97794,
+   "body_sha256": "51a1f90ae1c6610f0777605d4d7ba6090d6c144f5493759bddbdcefb66360e3e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/51/51a1f90ae1c6610f0777605d4d7ba6090d6c144f5493759bddbdcefb66360e3e.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:Contact_us&amp;action=edit"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "25665f01a2c2cb20588fe9f1372190e554f3c8f410405a1659e11383efd39333",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/25/25665f01a2c2cb20588fe9f1372190e554f3c8f410405a1659e11383efd39333.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=0307b62de62e2bb3193d81fd8f09a65d"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "25665f01a2c2cb20588fe9f1372190e554f3c8f410405a1659e11383efd39333",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/25/25665f01a2c2cb20588fe9f1372190e554f3c8f410405a1659e11383efd39333.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=0307b62de62e2bb3193d81fd8f09a65d"
+  },
+  {
+   "body_bytes": 88378,
+   "body_sha256": "8b4823d9d9b486b2362c7b6ee691eeac77a023055b481c1e3975ac9dcedaf8f0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8b/8b4823d9d9b486b2362c7b6ee691eeac77a023055b481c1e3975ac9dcedaf8f0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Help_talk:Contents"
+  },
+  {
+   "body_bytes": 88378,
+   "body_sha256": "8b4823d9d9b486b2362c7b6ee691eeac77a023055b481c1e3975ac9dcedaf8f0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8b/8b4823d9d9b486b2362c7b6ee691eeac77a023055b481c1e3975ac9dcedaf8f0.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Help_talk:Contents"
+  },
+  {
+   "body_bytes": 205232,
+   "body_sha256": "686703c05ee6d5578c35a9a7044849d198d3b4067bca16eddfd166a90bdc1654",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/68/686703c05ee6d5578c35a9a7044849d198d3b4067bca16eddfd166a90bdc1654.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Contents&amp;action=edit"
+  },
+  {
+   "body_bytes": 205232,
+   "body_sha256": "686703c05ee6d5578c35a9a7044849d198d3b4067bca16eddfd166a90bdc1654",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/68/686703c05ee6d5578c35a9a7044849d198d3b4067bca16eddfd166a90bdc1654.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Contents&amp;action=edit"
+  },
+  {
+   "body_bytes": 205253,
+   "body_sha256": "f1bae99876e9532552f818f11be3f9d3ef3654db108fb931d1b0c5642a6b4409",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f1/f1bae99876e9532552f818f11be3f9d3ef3654db108fb931d1b0c5642a6b4409.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Contents&amp;action=history"
+  },
+  {
+   "body_bytes": 205253,
+   "body_sha256": "f1bae99876e9532552f818f11be3f9d3ef3654db108fb931d1b0c5642a6b4409",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f1/f1bae99876e9532552f818f11be3f9d3ef3654db108fb931d1b0c5642a6b4409.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Contents&amp;action=history"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "91ff6095f763b798987319cf777b9aa3e2ed31c8d4ee9a397418478104f16b0c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/91/91ff6095f763b798987319cf777b9aa3e2ed31c8d4ee9a397418478104f16b0c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=5d18434fc107101f147e12edff408bcf"
+  },
+  {
+   "body_bytes": 42395,
+   "body_sha256": "91ff6095f763b798987319cf777b9aa3e2ed31c8d4ee9a397418478104f16b0c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/91/91ff6095f763b798987319cf777b9aa3e2ed31c8d4ee9a397418478104f16b0c.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=5d18434fc107101f147e12edff408bcf"
+  },
+  {
+   "body_bytes": 216570,
+   "body_sha256": "6cf1391b1b33a308cd5d2ae94b85388f9efcb75b2d3dec476700b50fc7eacc2c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6c/6cf1391b1b33a308cd5d2ae94b85388f9efcb75b2d3dec476700b50fc7eacc2c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Help_talk:Introduction"
+  },
+  {
+   "body_bytes": 216570,
+   "body_sha256": "6cf1391b1b33a308cd5d2ae94b85388f9efcb75b2d3dec476700b50fc7eacc2c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6c/6cf1391b1b33a308cd5d2ae94b85388f9efcb75b2d3dec476700b50fc7eacc2c.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Help_talk:Introduction"
+  },
+  {
+   "body_bytes": 123485,
+   "body_sha256": "3aa7cb307d9ad5ac8947d4a7123e3ffe255ea92a5698ca468ead3a48367ad962",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3a/3aa7cb307d9ad5ac8947d4a7123e3ffe255ea92a5698ca468ead3a48367ad962.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Introduction&amp;action=edit"
+  },
+  {
+   "body_bytes": 123485,
+   "body_sha256": "3aa7cb307d9ad5ac8947d4a7123e3ffe255ea92a5698ca468ead3a48367ad962",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3a/3aa7cb307d9ad5ac8947d4a7123e3ffe255ea92a5698ca468ead3a48367ad962.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Introduction&amp;action=edit"
+  },
+  {
+   "body_bytes": 123506,
+   "body_sha256": "2ed4866fb4d5e0f822efbe872e980210506a0f0a22284d3e6d91682c3d9657ed",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2e/2ed4866fb4d5e0f822efbe872e980210506a0f0a22284d3e6d91682c3d9657ed.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Introduction&amp;action=history"
+  },
+  {
+   "body_bytes": 123506,
+   "body_sha256": "2ed4866fb4d5e0f822efbe872e980210506a0f0a22284d3e6d91682c3d9657ed",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2e/2ed4866fb4d5e0f822efbe872e980210506a0f0a22284d3e6d91682c3d9657ed.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/w/index.php?title=Help:Introduction&amp;action=history"
+  },
+  {
+   "body_bytes": 150537,
+   "body_sha256": "5887f157178836ad084d6f0f24d69e67d7cb43e3b9693930edc7754244270018",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5887f157178836ad084d6f0f24d69e67d7cb43e3b9693930edc7754244270018.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Help:Introduction"
+  },
+  {
+   "body_bytes": 150537,
+   "body_sha256": "5887f157178836ad084d6f0f24d69e67d7cb43e3b9693930edc7754244270018",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5887f157178836ad084d6f0f24d69e67d7cb43e3b9693930edc7754244270018.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Help:Introduction"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "7a0bcef31d5c32aaf62e5ff3e3066a84436e288cc4cf55b3a26134e9253fc7ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7a/7a0bcef31d5c32aaf62e5ff3e3066a84436e288cc4cf55b3a26134e9253fc7ab.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=621f8d3f038c4ad7304348a73c4ac785"
+  },
+  {
+   "body_bytes": 42394,
+   "body_sha256": "7a0bcef31d5c32aaf62e5ff3e3066a84436e288cc4cf55b3a26134e9253fc7ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7a/7a0bcef31d5c32aaf62e5ff3e3066a84436e288cc4cf55b3a26134e9253fc7ab.txt",
+   "status_code": 200,
+   "tag": "pass2_00:bfs2",
+   "url": "https://auth.wikimedia.org/enwiki/wiki/Special:CreateAccount?useformat=desktop&usesul3=1&centralauthLoginToken=621f8d3f038c4ad7304348a73c4ac785"
+  },
+  {
+   "body_bytes": 227195,
+   "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://about.gitlab.com/"
+  },
+  {
+   "body_bytes": 227195,
+   "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745.txt",
+   "status_code": 200,
+   "tag": "pass2_01:root",
+   "url": "https://about.gitlab.com/"
+  },
+  {
+   "body_bytes": 227195,
+   "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://about.gitlab.com/"
+  },
+  {
+   "body_bytes": 227195,
+   "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b1/b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745.txt",
+   "status_code": 200,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://about.gitlab.com/"
+  },
+  {
+   "body_bytes": 30932,
+   "body_sha256": "215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_source=about.gitlab.com&amp;glm_content=default-saas-trial/"
+  },
+  {
+   "body_bytes": 30932,
+   "body_sha256": "215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_source=about.gitlab.com&amp;glm_content=default-saas-trial/"
+  },
+  {
+   "body_bytes": 30932,
+   "body_sha256": "215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/215972e620db9ae1380ca0d0ae0369252315f2df080e580334d5e3c86d2b5b7f.txt",
+   "status_code": 200,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_source=about.gitlab.com&amp;glm_content=default-saas-trial/"
+  },
+  {
+   "body_bytes": 30761,
+   "body_sha256": "2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/-/trial_registrations/new/"
+  },
+  {
+   "body_bytes": 30761,
+   "body_sha256": "2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/-/trial_registrations/new/"
+  },
+  {
+   "body_bytes": 30761,
+   "body_sha256": "2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/2181247e099501037843f69b40802eec03285ac4a6916b3fcb378019b821ead8.txt",
+   "status_code": 200,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://gitlab.com/-/trial_registrations/new/"
+  },
+  {
+   "body_bytes": 30901,
+   "body_sha256": "2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2e/2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_content=default-saas-trial&amp;glm_source=about.gitlab.com/"
+  },
+  {
+   "body_bytes": 30901,
+   "body_sha256": "2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2e/2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_content=default-saas-trial&amp;glm_source=about.gitlab.com/"
+  },
+  {
+   "body_bytes": 30901,
+   "body_sha256": "2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2e/2ef885be8de584cf7616b3c955c359eb5f5f418e7cd2a9dd3cbd1bed718a95f4.txt",
+   "status_code": 200,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://gitlab.com/-/trial_registrations/new?glm_content=default-saas-trial&amp;glm_source=about.gitlab.com/"
+  },
+  {
+   "body_bytes": 34352,
+   "body_sha256": "7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7f/7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/"
+  },
+  {
+   "body_bytes": 34352,
+   "body_sha256": "7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7f/7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/"
+  },
+  {
+   "body_bytes": 34352,
+   "body_sha256": "7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7f/7f5028628fddf760fc0fc338dcc54a6d8c66966c7d2fbc8f71c77c3cadd42049.txt",
+   "status_code": 200,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/"
+  },
+  {
+   "body_bytes": 2679,
+   "body_sha256": "282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/28/282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be.txt",
+   "status_code": 404,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/content/en-us/index.yml"
+  },
+  {
+   "body_bytes": 2679,
+   "body_sha256": "282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/28/282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be.txt",
+   "status_code": 404,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/content/en-us/index.yml"
+  },
+  {
+   "body_bytes": 2679,
+   "body_sha256": "282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/28/282dd5357dce7c64a1bcb7100ac7183ed358fbdd0b496ac408e36f1488c2d8be.txt",
+   "status_code": 404,
+   "tag": "pass2_01:c5_repeat",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/content/en-us/index.yml"
+  },
+  {
+   "body_bytes": 2679,
+   "body_sha256": "71bc38302e505a34964370666bd20d33c0765e66dc4559719380931e90a27f8e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/71/71bc38302e505a34964370666bd20d33c0765e66dc4559719380931e90a27f8e.txt",
+   "status_code": 404,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/CONTRIBUTING.md/"
+  },
+  {
+   "body_bytes": 2679,
+   "body_sha256": "71bc38302e505a34964370666bd20d33c0765e66dc4559719380931e90a27f8e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/71/71bc38302e505a34964370666bd20d33c0765e66dc4559719380931e90a27f8e.txt",
+   "status_code": 404,
+   "tag": "pass2_01:bfs1",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/CONTRIBUTING.md/"
+  },
+  {
+   "body_bytes": 21444,
+   "body_sha256": "e5942f1617b88239b25c39ab2587af15bd41c47e8d9d97e052642b2e0db5f803",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e5/e5942f1617b88239b25c39ab2587af15bd41c47e8d9d97e052642b2e0db5f803.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/-/users/terms"
+  },
+  {
+   "body_bytes": 21444,
+   "body_sha256": "e5942f1617b88239b25c39ab2587af15bd41c47e8d9d97e052642b2e0db5f803",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e5/e5942f1617b88239b25c39ab2587af15bd41c47e8d9d97e052642b2e0db5f803.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs2",
+   "url": "https://gitlab.com/-/users/terms"
+  },
+  {
+   "body_bytes": 53538,
+   "body_sha256": "762cc15913bc053084a5a068bd1db3e1267f57dd4510c892f8a7be05cb113be0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/76/762cc15913bc053084a5a068bd1db3e1267f57dd4510c892f8a7be05cb113be0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com"
+  },
+  {
+   "body_bytes": 53538,
+   "body_sha256": "762cc15913bc053084a5a068bd1db3e1267f57dd4510c892f8a7be05cb113be0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/76/762cc15913bc053084a5a068bd1db3e1267f57dd4510c892f8a7be05cb113be0.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs2",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com"
+  },
+  {
+   "body_bytes": 34246,
+   "body_sha256": "23ab02893127ecd975bc50a2b9cd8fb24153c4a0ab1d9e0a1e3054193e3aa824",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/23/23ab02893127ecd975bc50a2b9cd8fb24153c4a0ab1d9e0a1e3054193e3aa824.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com"
+  },
+  {
+   "body_bytes": 34246,
+   "body_sha256": "23ab02893127ecd975bc50a2b9cd8fb24153c4a0ab1d9e0a1e3054193e3aa824",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/23/23ab02893127ecd975bc50a2b9cd8fb24153c4a0ab1d9e0a1e3054193e3aa824.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs2",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com"
+  },
+  {
+   "body_bytes": 519,
+   "body_sha256": "ef5a743fd57be5ccbc24827e59bf2beafe4ac5de67993aefd2dceac8e3207830",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/ef5a743fd57be5ccbc24827e59bf2beafe4ac5de67993aefd2dceac8e3207830.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com.atom"
+  },
+  {
+   "body_bytes": 519,
+   "body_sha256": "ef5a743fd57be5ccbc24827e59bf2beafe4ac5de67993aefd2dceac8e3207830",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/ef5a743fd57be5ccbc24827e59bf2beafe4ac5de67993aefd2dceac8e3207830.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs2",
+   "url": "https://gitlab.com/gitlab-com/marketing/digital-experience/about-gitlab-com.atom"
+  },
+  {
+   "body_bytes": 35548,
+   "body_sha256": "fd6cde858318af45bb3dcc6a92a0cde641c6c909c598c390c59d7816a1600b6a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fd/fd6cde858318af45bb3dcc6a92a0cde641c6c909c598c390c59d7816a1600b6a.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/help"
+  },
+  {
+   "body_bytes": 35548,
+   "body_sha256": "fd6cde858318af45bb3dcc6a92a0cde641c6c909c598c390c59d7816a1600b6a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fd/fd6cde858318af45bb3dcc6a92a0cde641c6c909c598c390c59d7816a1600b6a.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs2",
+   "url": "https://gitlab.com/help"
+  },
+  {
+   "body_bytes": 52514,
+   "body_sha256": "3f458b2f5aae99dcd220665845e3e983b8e259a24a25300d3ae7920e49b8b7bc",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3f/3f458b2f5aae99dcd220665845e3e983b8e259a24a25300d3ae7920e49b8b7bc.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/meta"
+  },
+  {
+   "body_bytes": 52514,
+   "body_sha256": "3f458b2f5aae99dcd220665845e3e983b8e259a24a25300d3ae7920e49b8b7bc",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3f/3f458b2f5aae99dcd220665845e3e983b8e259a24a25300d3ae7920e49b8b7bc.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/meta"
+  },
+  {
+   "body_bytes": 34793,
+   "body_sha256": "86d5bc8f349c5fb1039e30f01e8fe69370ed87d0324d2e05ec0beecc7d267cf5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/86/86d5bc8f349c5fb1039e30f01e8fe69370ed87d0324d2e05ec0beecc7d267cf5.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commits/main"
+  },
+  {
+   "body_bytes": 34793,
+   "body_sha256": "86d5bc8f349c5fb1039e30f01e8fe69370ed87d0324d2e05ec0beecc7d267cf5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/86/86d5bc8f349c5fb1039e30f01e8fe69370ed87d0324d2e05ec0beecc7d267cf5.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/commits/main"
+  },
+  {
+   "body_bytes": 62535,
+   "body_sha256": "e3207dde0080a7840d6c67080fec82bb7fd65cb4d9f76b805ce53d46e4c31500",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e3/e3207dde0080a7840d6c67080fec82bb7fd65cb4d9f76b805ce53d46e4c31500.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches"
+  },
+  {
+   "body_bytes": 62535,
+   "body_sha256": "e3207dde0080a7840d6c67080fec82bb7fd65cb4d9f76b805ce53d46e4c31500",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e3/e3207dde0080a7840d6c67080fec82bb7fd65cb4d9f76b805ce53d46e4c31500.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/branches"
+  },
+  {
+   "body_bytes": 34269,
+   "body_sha256": "fce13d7e0c1497d2551269a80e28dbe4f815b4d634959260178671eea150eeb2",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fc/fce13d7e0c1497d2551269a80e28dbe4f815b4d634959260178671eea150eeb2.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tags"
+  },
+  {
+   "body_bytes": 34269,
+   "body_sha256": "fce13d7e0c1497d2551269a80e28dbe4f815b4d634959260178671eea150eeb2",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fc/fce13d7e0c1497d2551269a80e28dbe4f815b4d634959260178671eea150eeb2.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/tags"
+  },
+  {
+   "body_bytes": 45340,
+   "body_sha256": "1c40f2d1bc64566d340bbabb8cac03e9c45d24169d06766978b6aa6c89e97339",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1c/1c40f2d1bc64566d340bbabb8cac03e9c45d24169d06766978b6aa6c89e97339.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/README.md"
+  },
+  {
+   "body_bytes": 45340,
+   "body_sha256": "1c40f2d1bc64566d340bbabb8cac03e9c45d24169d06766978b6aa6c89e97339",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1c/1c40f2d1bc64566d340bbabb8cac03e9c45d24169d06766978b6aa6c89e97339.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/README.md"
+  },
+  {
+   "body_bytes": 45641,
+   "body_sha256": "af46d5daadcc11f67adbd8b887043dd2c9a6fc97808434a3c80de02dd355416e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/af/af46d5daadcc11f67adbd8b887043dd2c9a6fc97808434a3c80de02dd355416e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/LICENSE"
+  },
+  {
+   "body_bytes": 45641,
+   "body_sha256": "af46d5daadcc11f67adbd8b887043dd2c9a6fc97808434a3c80de02dd355416e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/af/af46d5daadcc11f67adbd8b887043dd2c9a6fc97808434a3c80de02dd355416e.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/LICENSE"
+  },
+  {
+   "body_bytes": 45847,
+   "body_sha256": "975d97906d81f6ed83c0fb36896d3cea3aa50bd196c518ca6246c8d425393c8f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/97/975d97906d81f6ed83c0fb36896d3cea3aa50bd196c518ca6246c8d425393c8f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/CONTRIBUTING.md"
+  },
+  {
+   "body_bytes": 45847,
+   "body_sha256": "975d97906d81f6ed83c0fb36896d3cea3aa50bd196c518ca6246c8d425393c8f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/97/975d97906d81f6ed83c0fb36896d3cea3aa50bd196c518ca6246c8d425393c8f.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/gitlab-community/gitlab-com/marketing/digital-experience/about-gitlab-com/-/blob/main/CONTRIBUTING.md"
+  },
+  {
+   "body_bytes": 31075,
+   "body_sha256": "2aefbcd04da727fdcacaeefc60d944ef66ff1ffd06e9328aa7c2605499d1f3bf",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2a/2aefbcd04da727fdcacaeefc60d944ef66ff1ffd06e9328aa7c2605499d1f3bf.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/help/instance_configuration"
+  },
+  {
+   "body_bytes": 31075,
+   "body_sha256": "2aefbcd04da727fdcacaeefc60d944ef66ff1ffd06e9328aa7c2605499d1f3bf",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2a/2aefbcd04da727fdcacaeefc60d944ef66ff1ffd06e9328aa7c2605499d1f3bf.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/help/instance_configuration"
+  },
+  {
+   "body_bytes": 28827,
+   "body_sha256": "35e688aabb667c4aed9aa12c4dee00a2e7c0ba4d64b8f43e7a47cd31a9981ebd",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/35/35e688aabb667c4aed9aa12c4dee00a2e7c0ba4d64b8f43e7a47cd31a9981ebd.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/user/"
+  },
+  {
+   "body_bytes": 28827,
+   "body_sha256": "35e688aabb667c4aed9aa12c4dee00a2e7c0ba4d64b8f43e7a47cd31a9981ebd",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/35/35e688aabb667c4aed9aa12c4dee00a2e7c0ba4d64b8f43e7a47cd31a9981ebd.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/user/"
+  },
+  {
+   "body_bytes": 26834,
+   "body_sha256": "4dbb3fea9b41a9c8f53fc00092237e243e20bac447380d0e2a5dfddaffa1a8b9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4dbb3fea9b41a9c8f53fc00092237e243e20bac447380d0e2a5dfddaffa1a8b9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/administration/"
+  },
+  {
+   "body_bytes": 26834,
+   "body_sha256": "4dbb3fea9b41a9c8f53fc00092237e243e20bac447380d0e2a5dfddaffa1a8b9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4dbb3fea9b41a9c8f53fc00092237e243e20bac447380d0e2a5dfddaffa1a8b9.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/administration/"
+  },
+  {
+   "body_bytes": 29415,
+   "body_sha256": "e0131809da4aebb225374782a57ed812719214aa9b3da321793056a3ad0d661d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e0/e0131809da4aebb225374782a57ed812719214aa9b3da321793056a3ad0d661d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/tutorials/"
+  },
+  {
+   "body_bytes": 29415,
+   "body_sha256": "e0131809da4aebb225374782a57ed812719214aa9b3da321793056a3ad0d661d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e0/e0131809da4aebb225374782a57ed812719214aa9b3da321793056a3ad0d661d.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/tutorials/"
+  },
+  {
+   "body_bytes": 23725,
+   "body_sha256": "1f069f370e7cce0f69b9cff94127b2cdbd8936572fa90663b4f49ed4e8bcec01",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1f/1f069f370e7cce0f69b9cff94127b2cdbd8936572fa90663b4f49ed4e8bcec01.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/user/gitlab_duo/"
+  },
+  {
+   "body_bytes": 23725,
+   "body_sha256": "1f069f370e7cce0f69b9cff94127b2cdbd8936572fa90663b4f49ed4e8bcec01",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1f/1f069f370e7cce0f69b9cff94127b2cdbd8936572fa90663b4f49ed4e8bcec01.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/user/gitlab_duo/"
+  },
+  {
+   "body_bytes": 35603,
+   "body_sha256": "3f48eea9c05344d44167f5a10dc58258f3e5725add8a09bd9579714110fad18b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3f/3f48eea9c05344d44167f5a10dc58258f3e5725add8a09bd9579714110fad18b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://gitlab.com/help/"
+  },
+  {
+   "body_bytes": 35603,
+   "body_sha256": "3f48eea9c05344d44167f5a10dc58258f3e5725add8a09bd9579714110fad18b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3f/3f48eea9c05344d44167f5a10dc58258f3e5725add8a09bd9579714110fad18b.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://gitlab.com/help/"
+  },
+  {
+   "body_bytes": 26317,
+   "body_sha256": "7fa6b7786cb537d137a78b16f31b8595409d2b53592c463a1d10dac1f29e05aa",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7f/7fa6b7786cb537d137a78b16f31b8595409d2b53592c463a1d10dac1f29e05aa.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/subscriptions/"
+  },
+  {
+   "body_bytes": 26317,
+   "body_sha256": "7fa6b7786cb537d137a78b16f31b8595409d2b53592c463a1d10dac1f29e05aa",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7f/7fa6b7786cb537d137a78b16f31b8595409d2b53592c463a1d10dac1f29e05aa.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/subscriptions/"
+  },
+  {
+   "body_bytes": 25764,
+   "body_sha256": "ca6b7749bdeefac694b7f2a2705e9c0c449c768c72081967b58c89be0ee635f7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ca/ca6b7749bdeefac694b7f2a2705e9c0c449c768c72081967b58c89be0ee635f7.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/install/"
+  },
+  {
+   "body_bytes": 25764,
+   "body_sha256": "ca6b7749bdeefac694b7f2a2705e9c0c449c768c72081967b58c89be0ee635f7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ca/ca6b7749bdeefac694b7f2a2705e9c0c449c768c72081967b58c89be0ee635f7.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/install/"
+  },
+  {
+   "body_bytes": 71310,
+   "body_sha256": "7481984af0ef9530cc2e77838877353425d63b1e3cddf974a9d3b6c47a7c2140",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/7481984af0ef9530cc2e77838877353425d63b1e3cddf974a9d3b6c47a7c2140.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.gitlab.com/administration/reference_architectures/"
+  },
+  {
+   "body_bytes": 71310,
+   "body_sha256": "7481984af0ef9530cc2e77838877353425d63b1e3cddf974a9d3b6c47a7c2140",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/7481984af0ef9530cc2e77838877353425d63b1e3cddf974a9d3b6c47a7c2140.txt",
+   "status_code": 200,
+   "tag": "pass2_01:bfs3",
+   "url": "https://docs.gitlab.com/administration/reference_architectures/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "pass2_02:root",
+   "url": "https://bitbucket.org/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://bitbucket.org/"
+  },
+  {
+   "body_bytes": 199388,
+   "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/ai"
+  },
+  {
+   "body_bytes": 199388,
+   "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/blog/bitbucket/ai"
+  },
+  {
+   "body_bytes": 199388,
+   "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/ai"
+  },
+  {
+   "body_bytes": 199388,
+   "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://www.atlassian.com/blog/bitbucket/ai"
+  },
+  {
+   "body_bytes": 61653,
+   "body_sha256": "0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/features/pipelines/integrations"
+  },
+  {
+   "body_bytes": 61653,
+   "body_sha256": "0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://bitbucket.org/product/features/pipelines/integrations"
+  },
+  {
+   "body_bytes": 61653,
+   "body_sha256": "0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://bitbucket.org/product/features/pipelines/integrations"
+  },
+  {
+   "body_bytes": 118801,
+   "body_sha256": "9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/90/9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/software/bitbucket/features/pipelines"
+  },
+  {
+   "body_bytes": 118801,
+   "body_sha256": "9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/90/9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/software/bitbucket/features/pipelines"
+  },
+  {
+   "body_bytes": 118801,
+   "body_sha256": "9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/90/9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/software/bitbucket/features/pipelines"
+  },
+  {
+   "body_bytes": 118801,
+   "body_sha256": "9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/90/9066b60093d64f6cec066d120749abf29c22483a2c5f2db130850c3dc24474f5.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://www.atlassian.com/software/bitbucket/features/pipelines"
+  },
+  {
+   "body_bytes": 199486,
+   "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0a/0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+  },
+  {
+   "body_bytes": 199486,
+   "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0a/0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+  },
+  {
+   "body_bytes": 199486,
+   "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0a/0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+  },
+  {
+   "body_bytes": 199486,
+   "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0a/0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+  },
+  {
+   "body_bytes": 479732,
+   "body_sha256": "6fe29008655e803e07744fdb10ed1bac7bf1546d11508d35fe3b9b38f28942ea",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6f/6fe29008655e803e07744fdb10ed1bac7bf1546d11508d35fe3b9b38f28942ea.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 479732,
+   "body_sha256": "6fe29008655e803e07744fdb10ed1bac7bf1546d11508d35fe3b9b38f28942ea",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6f/6fe29008655e803e07744fdb10ed1bac7bf1546d11508d35fe3b9b38f28942ea.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 479730,
+   "body_sha256": "6bef7a7e64ca43729d4b2176f456c9198ca8c5c3c9be73d80f093291045f7c37",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6b/6bef7a7e64ca43729d4b2176f456c9198ca8c5c3c9be73d80f093291045f7c37.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 479730,
+   "body_sha256": "6bef7a7e64ca43729d4b2176f456c9198ca8c5c3c9be73d80f093291045f7c37",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6b/6bef7a7e64ca43729d4b2176f456c9198ca8c5c3c9be73d80f093291045f7c37.txt",
+   "status_code": 200,
+   "tag": "pass2_02:c5_repeat",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 479729,
+   "body_sha256": "2387187d1ac9a70175698f682ec4f9b0d3c74e4407350b8c5d2c39d1cbeb1ad9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/23/2387187d1ac9a70175698f682ec4f9b0d3c74e4407350b8c5d2c39d1cbeb1ad9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 479729,
+   "body_sha256": "2387187d1ac9a70175698f682ec4f9b0d3c74e4407350b8c5d2c39d1cbeb1ad9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/23/2387187d1ac9a70175698f682ec4f9b0d3c74e4407350b8c5d2c39d1cbeb1ad9.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/try/cloud/signup?bundle=bitbucket"
+  },
+  {
+   "body_bytes": 189810,
+   "body_sha256": "3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/30/3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/app/bitbucket"
+  },
+  {
+   "body_bytes": 189810,
+   "body_sha256": "3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/30/3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/blog/app/bitbucket"
+  },
+  {
+   "body_bytes": 63489,
+   "body_sha256": "5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5a/5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/write"
+  },
+  {
+   "body_bytes": 63489,
+   "body_sha256": "5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5a/5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://bitbucket.org/product/write"
+  },
+  {
+   "body_bytes": 1161447,
+   "body_sha256": "e0af656d1c83e7a4059ef177ed1dda10f3bd55e72e0f09539f89217da0d21e4c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e0/e0af656d1c83e7a4059ef177ed1dda10f3bd55e72e0f09539f89217da0d21e4c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing"
+  },
+  {
+   "body_bytes": 1161447,
+   "body_sha256": "e0af656d1c83e7a4059ef177ed1dda10f3bd55e72e0f09539f89217da0d21e4c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e0/e0af656d1c83e7a4059ef177ed1dda10f3bd55e72e0f09539f89217da0d21e4c.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing"
+  },
+  {
+   "body_bytes": 60407,
+   "body_sha256": "0678d0babde342017d9c7ff331d3a92977aabd967d2eeba1198152f706785e3c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/06/0678d0babde342017d9c7ff331d3a92977aabd967d2eeba1198152f706785e3c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/version-control-software"
+  },
+  {
+   "body_bytes": 60407,
+   "body_sha256": "0678d0babde342017d9c7ff331d3a92977aabd967d2eeba1198152f706785e3c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/06/0678d0babde342017d9c7ff331d3a92977aabd967d2eeba1198152f706785e3c.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs1",
+   "url": "https://bitbucket.org/product/version-control-software"
+  },
+  {
+   "body_bytes": 196784,
+   "body_sha256": "2b10d56ee684b25f86e535966af089d46b00565ae8f8a693cc1cd8baae5c4704",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2b/2b10d56ee684b25f86e535966af089d46b00565ae8f8a693cc1cd8baae5c4704.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/generate-pull-request-descriptions-with-atlassian-intelligence"
+  },
+  {
+   "body_bytes": 196784,
+   "body_sha256": "2b10d56ee684b25f86e535966af089d46b00565ae8f8a693cc1cd8baae5c4704",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2b/2b10d56ee684b25f86e535966af089d46b00565ae8f8a693cc1cd8baae5c4704.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://www.atlassian.com/blog/bitbucket/generate-pull-request-descriptions-with-atlassian-intelligence"
+  },
+  {
+   "body_bytes": 61653,
+   "body_sha256": "0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/features/pipelines/integrations?category=codequality&amp;p=atlassian/bitbucket-chatgpt-codereview"
+  },
+  {
+   "body_bytes": 61653,
+   "body_sha256": "0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cfa65fbddf7b68159e98f89d065ca4b2268780c47bc9b1dbf8c663d048671e9.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/product/features/pipelines/integrations?category=codequality&amp;p=atlassian/bitbucket-chatgpt-codereview"
+  },
+  {
+   "body_bytes": 14269,
+   "body_sha256": "4c471417c67dcf3bd0cb0f9bccb725b29e231eeb7592ebb5de20a8f52c5696f3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4c/4c471417c67dcf3bd0cb0f9bccb725b29e231eeb7592ebb5de20a8f52c5696f3.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/atlassian/opsgenie-send-alert/src/master/"
+  },
+  {
+   "body_bytes": 14269,
+   "body_sha256": "4c471417c67dcf3bd0cb0f9bccb725b29e231eeb7592ebb5de20a8f52c5696f3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4c/4c471417c67dcf3bd0cb0f9bccb725b29e231eeb7592ebb5de20a8f52c5696f3.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/atlassian/opsgenie-send-alert/src/master/"
+  },
+  {
+   "body_bytes": 14153,
+   "body_sha256": "8b884e751d06cc3c0c7d7025b5e7e82e35063a2ccd2a818b354528a6775d6a9d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8b/8b884e751d06cc3c0c7d7025b5e7e82e35063a2ccd2a818b354528a6775d6a9d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/atlassian/slack-notify/src/master/"
+  },
+  {
+   "body_bytes": 14153,
+   "body_sha256": "8b884e751d06cc3c0c7d7025b5e7e82e35063a2ccd2a818b354528a6775d6a9d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8b/8b884e751d06cc3c0c7d7025b5e7e82e35063a2ccd2a818b354528a6775d6a9d.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/atlassian/slack-notify/src/master/"
+  },
+  {
+   "body_bytes": 14136,
+   "body_sha256": "59ac2ebd4951c15d3c38b6e902ef65e42907eeaf442aea7ad6397dd880423869",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/59/59ac2ebd4951c15d3c38b6e902ef65e42907eeaf442aea7ad6397dd880423869.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/atlassian/aws-s3-deploy/src/master/"
+  },
+  {
+   "body_bytes": 14136,
+   "body_sha256": "59ac2ebd4951c15d3c38b6e902ef65e42907eeaf442aea7ad6397dd880423869",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/59/59ac2ebd4951c15d3c38b6e902ef65e42907eeaf442aea7ad6397dd880423869.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/atlassian/aws-s3-deploy/src/master/"
+  },
+  {
+   "body_bytes": 15779,
+   "body_sha256": "f61958dcb736592a390adc47f639547b60e38ec848e50f72608daceab0627e53",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f6/f61958dcb736592a390adc47f639547b60e38ec848e50f72608daceab0627e53.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/sonarsource/sonarcloud-scan/src/master/"
+  },
+  {
+   "body_bytes": 15779,
+   "body_sha256": "f61958dcb736592a390adc47f639547b60e38ec848e50f72608daceab0627e53",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f6/f61958dcb736592a390adc47f639547b60e38ec848e50f72608daceab0627e53.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/sonarsource/sonarcloud-scan/src/master/"
+  },
+  {
+   "body_bytes": 200940,
+   "body_sha256": "46b11a1e4da0a56bf55edbd08502b50821cea3315af7f227e332e40c568ea433",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/46/46b11a1e4da0a56bf55edbd08502b50821cea3315af7f227e332e40c568ea433.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/introducing-dynamic-pipelines-a-new-standard-in-ci-cd-flexibility"
+  },
+  {
+   "body_bytes": 200940,
+   "body_sha256": "46b11a1e4da0a56bf55edbd08502b50821cea3315af7f227e332e40c568ea433",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/46/46b11a1e4da0a56bf55edbd08502b50821cea3315af7f227e332e40c568ea433.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://www.atlassian.com/blog/bitbucket/introducing-dynamic-pipelines-a-new-standard-in-ci-cd-flexibility"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 54043,
+   "body_sha256": "1e6adf3b75382d11c4ad28c6d2ab1457ad6130702ae9159689454b1c8cf02787",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1e6adf3b75382d11c4ad28c6d2ab1457ad6130702ae9159689454b1c8cf02787.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/write/license"
+  },
+  {
+   "body_bytes": 54043,
+   "body_sha256": "1e6adf3b75382d11c4ad28c6d2ab1457ad6130702ae9159689454b1c8cf02787",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/1e/1e6adf3b75382d11c4ad28c6d2ab1457ad6130702ae9159689454b1c8cf02787.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/product/write/license"
+  },
+  {
+   "body_bytes": 198818,
+   "body_sha256": "4edc4b8c6f988849eb62f935189c133f46528a357ca4c9d3e1082b5a4b8d4628",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4e/4edc4b8c6f988849eb62f935189c133f46528a357ca4c9d3e1082b5a4b8d4628.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/lamp-vs-mean-which-stack-is-right-for-you"
+  },
+  {
+   "body_bytes": 198818,
+   "body_sha256": "4edc4b8c6f988849eb62f935189c133f46528a357ca4c9d3e1082b5a4b8d4628",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4e/4edc4b8c6f988849eb62f935189c133f46528a357ca4c9d3e1082b5a4b8d4628.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://www.atlassian.com/blog/bitbucket/lamp-vs-mean-which-stack-is-right-for-you"
+  },
+  {
+   "body_bytes": 205346,
+   "body_sha256": "0cae129784f322317214d432517f6bde80d6fd203b2777f6de74c4872c93d74c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cae129784f322317214d432517f6bde80d6fd203b2777f6de74c4872c93d74c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/bitbucket-bitrise-configuring-continuous-integration-for-an-ios-app"
+  },
+  {
+   "body_bytes": 205346,
+   "body_sha256": "0cae129784f322317214d432517f6bde80d6fd203b2777f6de74c4872c93d74c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0c/0cae129784f322317214d432517f6bde80d6fd203b2777f6de74c4872c93d74c.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://www.atlassian.com/blog/bitbucket/bitbucket-bitrise-configuring-continuous-integration-for-an-ios-app"
+  },
+  {
+   "body_bytes": 201087,
+   "body_sha256": "464757757c6df3df818ebefa79149241e2ef2c97e5496bcdd9c9115b4750dc7a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/46/464757757c6df3df818ebefa79149241e2ef2c97e5496bcdd9c9115b4750dc7a.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://www.atlassian.com/blog/bitbucket/deploying-an-angular-app-on-a-google-vm-using-bitbucket-pipelines"
+  },
+  {
+   "body_bytes": 201087,
+   "body_sha256": "464757757c6df3df818ebefa79149241e2ef2c97e5496bcdd9c9115b4750dc7a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/46/464757757c6df3df818ebefa79149241e2ef2c97e5496bcdd9c9115b4750dc7a.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://www.atlassian.com/blog/bitbucket/deploying-an-angular-app-on-a-google-vm-using-bitbucket-pipelines"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 109377,
+   "body_sha256": "e97cbfd71a5b2fd507dd4ee28a3e10b36facb59ba8bbe8a76fd8a0e6d119e426",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e9/e97cbfd71a5b2fd507dd4ee28a3e10b36facb59ba8bbe8a76fd8a0e6d119e426.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/code-repository"
+  },
+  {
+   "body_bytes": 109377,
+   "body_sha256": "e97cbfd71a5b2fd507dd4ee28a3e10b36facb59ba8bbe8a76fd8a0e6d119e426",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e9/e97cbfd71a5b2fd507dd4ee28a3e10b36facb59ba8bbe8a76fd8a0e6d119e426.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs2",
+   "url": "https://bitbucket.org/product/code-repository"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 178448,
+   "body_sha256": "a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a3/a3a8e5dcb4811c7dc2475665a3673b4d693bd22a0333e466e8ca6c1414b37143.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs3",
+   "url": "https://bitbucket.org/product/"
+  },
+  {
+   "body_bytes": 63489,
+   "body_sha256": "5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5a/5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/product/write"
+  },
+  {
+   "body_bytes": 63489,
+   "body_sha256": "5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5a/5a12f07becfb78161393e922fa33031311a6879c915c59abfaa80b5e99dcbfc8.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs3",
+   "url": "https://bitbucket.org/product/write"
+  },
+  {
+   "body_bytes": 16382,
+   "body_sha256": "839c1c8cff011a180528749994e53f5ac02e6ba52e49cec05e3aaca02737dd7a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/83/839c1c8cff011a180528749994e53f5ac02e6ba52e49cec05e3aaca02737dd7a.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://bitbucket.org/konathalasuren/angular-ionic-4-all-components-demo/"
+  },
+  {
+   "body_bytes": 16382,
+   "body_sha256": "839c1c8cff011a180528749994e53f5ac02e6ba52e49cec05e3aaca02737dd7a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/83/839c1c8cff011a180528749994e53f5ac02e6ba52e49cec05e3aaca02737dd7a.txt",
+   "status_code": 200,
+   "tag": "pass2_02:bfs3",
+   "url": "https://bitbucket.org/konathalasuren/angular-ionic-4-all-components-demo/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "pass2_03:root",
+   "url": "https://docs.python.org/3/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3/"
+  },
+  {
+   "body_bytes": 11476,
+   "body_sha256": "efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/download.html"
+  },
+  {
+   "body_bytes": 11476,
+   "body_sha256": "efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3/download.html"
+  },
+  {
+   "body_bytes": 11476,
+   "body_sha256": "efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3/download.html"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b7/b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.16/"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b7/b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.16/"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b7/b7d42084ce870125a199ddbb978d31952cb5a930b660e9c29173afa19d170524.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3.16/"
+  },
+  {
+   "body_bytes": 19659,
+   "body_sha256": "01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/01/01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.15/"
+  },
+  {
+   "body_bytes": 19659,
+   "body_sha256": "01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/01/01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.15/"
+  },
+  {
+   "body_bytes": 19659,
+   "body_sha256": "01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/01/01b2e8ae6e87dca4f0cbb7fe1527a59f904a8328153a5aaa5f3b2284edd14f81.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3.15/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.14/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.14/"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3.14/"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ad/adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.13/"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ad/adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.13/"
+  },
+  {
+   "body_bytes": 19653,
+   "body_sha256": "adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ad/adf6a10ee9aa295143b8ed3ae06686c886aefc66e68e8652fe7e87443270d72a.txt",
+   "status_code": 200,
+   "tag": "pass2_03:c5_repeat",
+   "url": "https://docs.python.org/3.13/"
+  },
+  {
+   "body_bytes": 17931,
+   "body_sha256": "8d90f05d1599e16291294963dac3ca355a545c75a3cd70f49cdb48d7f8d37d6c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8d/8d90f05d1599e16291294963dac3ca355a545c75a3cd70f49cdb48d7f8d37d6c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.12/"
+  },
+  {
+   "body_bytes": 17931,
+   "body_sha256": "8d90f05d1599e16291294963dac3ca355a545c75a3cd70f49cdb48d7f8d37d6c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8d/8d90f05d1599e16291294963dac3ca355a545c75a3cd70f49cdb48d7f8d37d6c.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.12/"
+  },
+  {
+   "body_bytes": 16874,
+   "body_sha256": "8c038d3cd01db4194f407795cd30410080d5dcc5e21523ba92e4874fb43127d3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8c/8c038d3cd01db4194f407795cd30410080d5dcc5e21523ba92e4874fb43127d3.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.11/"
+  },
+  {
+   "body_bytes": 16874,
+   "body_sha256": "8c038d3cd01db4194f407795cd30410080d5dcc5e21523ba92e4874fb43127d3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8c/8c038d3cd01db4194f407795cd30410080d5dcc5e21523ba92e4874fb43127d3.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.11/"
+  },
+  {
+   "body_bytes": 16709,
+   "body_sha256": "93610a12535067021ab98c22233b984919e5014d8049c7aa71425fcb14b989b0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/93/93610a12535067021ab98c22233b984919e5014d8049c7aa71425fcb14b989b0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.10/"
+  },
+  {
+   "body_bytes": 16709,
+   "body_sha256": "93610a12535067021ab98c22233b984919e5014d8049c7aa71425fcb14b989b0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/93/93610a12535067021ab98c22233b984919e5014d8049c7aa71425fcb14b989b0.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.10/"
+  },
+  {
+   "body_bytes": 13017,
+   "body_sha256": "5ca07bef986562b0d154131bb07085c90969c60296f4b6b47de37919e496fdf9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5c/5ca07bef986562b0d154131bb07085c90969c60296f4b6b47de37919e496fdf9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.9/"
+  },
+  {
+   "body_bytes": 13017,
+   "body_sha256": "5ca07bef986562b0d154131bb07085c90969c60296f4b6b47de37919e496fdf9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5c/5ca07bef986562b0d154131bb07085c90969c60296f4b6b47de37919e496fdf9.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.9/"
+  },
+  {
+   "body_bytes": 12954,
+   "body_sha256": "0949c87312ac0c853177fce8759e09a270b313950ede9c7853579554f2bfb190",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/09/0949c87312ac0c853177fce8759e09a270b313950ede9c7853579554f2bfb190.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.8/"
+  },
+  {
+   "body_bytes": 12954,
+   "body_sha256": "0949c87312ac0c853177fce8759e09a270b313950ede9c7853579554f2bfb190",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/09/0949c87312ac0c853177fce8759e09a270b313950ede9c7853579554f2bfb190.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs1",
+   "url": "https://docs.python.org/3.8/"
+  },
+  {
+   "body_bytes": 11043,
+   "body_sha256": "168952d54ca04bcd675b7af25fc5755dfd167684f963a0cc8d8514f982419da7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/16/168952d54ca04bcd675b7af25fc5755dfd167684f963a0cc8d8514f982419da7.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/genindex.html"
+  },
+  {
+   "body_bytes": 11043,
+   "body_sha256": "168952d54ca04bcd675b7af25fc5755dfd167684f963a0cc8d8514f982419da7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/16/168952d54ca04bcd675b7af25fc5755dfd167684f963a0cc8d8514f982419da7.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/genindex.html"
+  },
+  {
+   "body_bytes": 88110,
+   "body_sha256": "fdb52781e7edbe8695c8ad69882f0e98fbb7ad9d5282d7d31a8a18bdfdcdd722",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fd/fdb52781e7edbe8695c8ad69882f0e98fbb7ad9d5282d7d31a8a18bdfdcdd722.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/py-modindex.html"
+  },
+  {
+   "body_bytes": 88110,
+   "body_sha256": "fdb52781e7edbe8695c8ad69882f0e98fbb7ad9d5282d7d31a8a18bdfdcdd722",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fd/fdb52781e7edbe8695c8ad69882f0e98fbb7ad9d5282d7d31a8a18bdfdcdd722.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/py-modindex.html"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/index.html"
+  },
+  {
+   "body_bytes": 19641,
+   "body_sha256": "4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4d/4d2542cab71a03f7f1ef7a849dcb95b4d81bb2bf1b036ac4f9583b52cac59867.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/index.html"
+  },
+  {
+   "body_bytes": 8393186,
+   "body_sha256": "7ec0b1f0d7d1fe499b8482cbb4f632dd453871222410351cf2e9e6026ea0c14f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7e/7ec0b1f0d7d1fe499b8482cbb4f632dd453871222410351cf2e9e6026ea0c14f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-html.tar.bz2"
+  },
+  {
+   "body_bytes": 8393186,
+   "body_sha256": "7ec0b1f0d7d1fe499b8482cbb4f632dd453871222410351cf2e9e6026ea0c14f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7e/7ec0b1f0d7d1fe499b8482cbb4f632dd453871222410351cf2e9e6026ea0c14f.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-html.tar.bz2"
+  },
+  {
+   "body_bytes": 3328952,
+   "body_sha256": "39cb919af2dccaa4045ea5e6514585ed9c0182b4bb546c790a5cdb093639f3db",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/39/39cb919af2dccaa4045ea5e6514585ed9c0182b4bb546c790a5cdb093639f3db.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-text.tar.bz2"
+  },
+  {
+   "body_bytes": 3328952,
+   "body_sha256": "39cb919af2dccaa4045ea5e6514585ed9c0182b4bb546c790a5cdb093639f3db",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/39/39cb919af2dccaa4045ea5e6514585ed9c0182b4bb546c790a5cdb093639f3db.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-text.tar.bz2"
+  },
+  {
+   "body_bytes": 10370156,
+   "body_sha256": "fb17e8715ba79505cb0cb765acf1cd389486b220c9a795edd6694249c6bede7e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fb/fb17e8715ba79505cb0cb765acf1cd389486b220c9a795edd6694249c6bede7e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-texinfo.tar.bz2"
+  },
+  {
+   "body_bytes": 10370156,
+   "body_sha256": "fb17e8715ba79505cb0cb765acf1cd389486b220c9a795edd6694249c6bede7e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/fb/fb17e8715ba79505cb0cb765acf1cd389486b220c9a795edd6694249c6bede7e.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs-texinfo.tar.bz2"
+  },
+  {
+   "body_bytes": 9205465,
+   "body_sha256": "4e7fa4b8dfb53be96cb7df5e4054d082c4a929ab148f50396ed4751a04bfc3c0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4e/4e7fa4b8dfb53be96cb7df5e4054d082c4a929ab148f50396ed4751a04bfc3c0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs.epub"
+  },
+  {
+   "body_bytes": 9205465,
+   "body_sha256": "4e7fa4b8dfb53be96cb7df5e4054d082c4a929ab148f50396ed4751a04bfc3c0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4e/4e7fa4b8dfb53be96cb7df5e4054d082c4a929ab148f50396ed4751a04bfc3c0.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/archives/python-3.14-docs.epub"
+  },
+  {
+   "body_bytes": 1355,
+   "body_sha256": "4c5d41fbac87750cc9e8355f43666e606c0f0104dfb86afce9154e2961f076ac",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4c/4c5d41fbac87750cc9e8355f43666e606c0f0104dfb86afce9154e2961f076ac.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.14/archives/"
+  },
+  {
+   "body_bytes": 1355,
+   "body_sha256": "4c5d41fbac87750cc9e8355f43666e606c0f0104dfb86afce9154e2961f076ac",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4c/4c5d41fbac87750cc9e8355f43666e606c0f0104dfb86afce9154e2961f076ac.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.14/archives/"
+  },
+  {
+   "body_bytes": 21255,
+   "body_sha256": "9d3d398febeadad9ce96e81cdff55b2e495c3c2bba26fb182bfc5a7c6e67c1a0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/9d/9d3d398febeadad9ce96e81cdff55b2e495c3c2bba26fb182bfc5a7c6e67c1a0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/bugs.html"
+  },
+  {
+   "body_bytes": 21255,
+   "body_sha256": "9d3d398febeadad9ce96e81cdff55b2e495c3c2bba26fb182bfc5a7c6e67c1a0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/9d/9d3d398febeadad9ce96e81cdff55b2e495c3c2bba26fb182bfc5a7c6e67c1a0.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/bugs.html"
+  },
+  {
+   "body_bytes": 14745,
+   "body_sha256": "30c084ef8acdaddaeda96e0b6e71ba5779f8c3a2990846971590b9a439ab4c83",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/30/30c084ef8acdaddaeda96e0b6e71ba5779f8c3a2990846971590b9a439ab4c83.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3/copyright.html"
+  },
+  {
+   "body_bytes": 14745,
+   "body_sha256": "30c084ef8acdaddaeda96e0b6e71ba5779f8c3a2990846971590b9a439ab4c83",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/30/30c084ef8acdaddaeda96e0b6e71ba5779f8c3a2990846971590b9a439ab4c83.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3/copyright.html"
+  },
+  {
+   "body_bytes": 11484,
+   "body_sha256": "33cbba46f519b7a379621f64c5c3680efa3a2ce15aba26c44eca4baf7c083702",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/33/33cbba46f519b7a379621f64c5c3680efa3a2ce15aba26c44eca4baf7c083702.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.16/download.html"
+  },
+  {
+   "body_bytes": 11484,
+   "body_sha256": "33cbba46f519b7a379621f64c5c3680efa3a2ce15aba26c44eca4baf7c083702",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/33/33cbba46f519b7a379621f64c5c3680efa3a2ce15aba26c44eca4baf7c083702.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.16/download.html"
+  },
+  {
+   "body_bytes": 9854,
+   "body_sha256": "c43a7baa3a171d5ab1af46ddc23d866b5b8bbfe0a9021b09307ed42e403801f0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c4/c43a7baa3a171d5ab1af46ddc23d866b5b8bbfe0a9021b09307ed42e403801f0.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.7/"
+  },
+  {
+   "body_bytes": 9854,
+   "body_sha256": "c43a7baa3a171d5ab1af46ddc23d866b5b8bbfe0a9021b09307ed42e403801f0",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c4/c43a7baa3a171d5ab1af46ddc23d866b5b8bbfe0a9021b09307ed42e403801f0.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.7/"
+  },
+  {
+   "body_bytes": 11488,
+   "body_sha256": "c63c18cf42ee4b3644157c97950cc6679e4933087d499d70828f963c0af7b0ae",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c6/c63c18cf42ee4b3644157c97950cc6679e4933087d499d70828f963c0af7b0ae.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.15/download.html"
+  },
+  {
+   "body_bytes": 11488,
+   "body_sha256": "c63c18cf42ee4b3644157c97950cc6679e4933087d499d70828f963c0af7b0ae",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c6/c63c18cf42ee4b3644157c97950cc6679e4933087d499d70828f963c0af7b0ae.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.15/download.html"
+  },
+  {
+   "body_bytes": 9721,
+   "body_sha256": "aacbc7635217f908ecdd8847747772a235e1cebf09ecc8268555264659e8b8c7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/aa/aacbc7635217f908ecdd8847747772a235e1cebf09ecc8268555264659e8b8c7.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.6/"
+  },
+  {
+   "body_bytes": 9721,
+   "body_sha256": "aacbc7635217f908ecdd8847747772a235e1cebf09ecc8268555264659e8b8c7",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/aa/aacbc7635217f908ecdd8847747772a235e1cebf09ecc8268555264659e8b8c7.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.6/"
+  },
+  {
+   "body_bytes": 11476,
+   "body_sha256": "efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.14/download.html"
+  },
+  {
+   "body_bytes": 11476,
+   "body_sha256": "efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ef/efee11ae793e524c4ca9d492a178a03d5147ef0bff3792f933ce9aad03694764.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.14/download.html"
+  },
+  {
+   "body_bytes": 9934,
+   "body_sha256": "80342a42f4a671ca21e3d106c15792851aa0fc9dbf16bdff3c16ffd151ed091b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/80/80342a42f4a671ca21e3d106c15792851aa0fc9dbf16bdff3c16ffd151ed091b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.5/"
+  },
+  {
+   "body_bytes": 9934,
+   "body_sha256": "80342a42f4a671ca21e3d106c15792851aa0fc9dbf16bdff3c16ffd151ed091b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/80/80342a42f4a671ca21e3d106c15792851aa0fc9dbf16bdff3c16ffd151ed091b.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.5/"
+  },
+  {
+   "body_bytes": 11720,
+   "body_sha256": "d8e9f03936da2caa6b4869ceb286e71800017f89168dbb830d6e9c032e59f28d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d8e9f03936da2caa6b4869ceb286e71800017f89168dbb830d6e9c032e59f28d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.13/download.html"
+  },
+  {
+   "body_bytes": 11720,
+   "body_sha256": "d8e9f03936da2caa6b4869ceb286e71800017f89168dbb830d6e9c032e59f28d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d8e9f03936da2caa6b4869ceb286e71800017f89168dbb830d6e9c032e59f28d.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.13/download.html"
+  },
+  {
+   "body_bytes": 9186,
+   "body_sha256": "382d158ebb406199d3ffa5f7ff522abdd795891992c09c6429e93c3f2cb0e23d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/38/382d158ebb406199d3ffa5f7ff522abdd795891992c09c6429e93c3f2cb0e23d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.4/"
+  },
+  {
+   "body_bytes": 9186,
+   "body_sha256": "382d158ebb406199d3ffa5f7ff522abdd795891992c09c6429e93c3f2cb0e23d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/38/382d158ebb406199d3ffa5f7ff522abdd795891992c09c6429e93c3f2cb0e23d.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.4/"
+  },
+  {
+   "body_bytes": 12322,
+   "body_sha256": "8e1a04e7954f928fa24279c58fee80385becada73054c5ac257193fd11f822ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8e/8e1a04e7954f928fa24279c58fee80385becada73054c5ac257193fd11f822ab.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://docs.python.org/3.12/download.html"
+  },
+  {
+   "body_bytes": 12322,
+   "body_sha256": "8e1a04e7954f928fa24279c58fee80385becada73054c5ac257193fd11f822ab",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/8e/8e1a04e7954f928fa24279c58fee80385becada73054c5ac257193fd11f822ab.txt",
+   "status_code": 200,
+   "tag": "pass2_03:bfs2",
+   "url": "https://docs.python.org/3.12/download.html"
+  },
+  {
+   "body_bytes": 262344,
+   "body_sha256": "14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/14/14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/"
+  },
+  {
+   "body_bytes": 262344,
+   "body_sha256": "14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/14/14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e.txt",
+   "status_code": 200,
+   "tag": "pass2_04:root",
+   "url": "https://reqres.in/"
+  },
+  {
+   "body_bytes": 262344,
+   "body_sha256": "14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/14/14ada438253c3efd5b5c5c5ab6aa512c2934c58d99969301afe671b50c22b96e.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/"
+  },
+  {
+   "body_bytes": 41276,
+   "body_sha256": "0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0f/0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/agents"
+  },
+  {
+   "body_bytes": 41276,
+   "body_sha256": "0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0f/0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/agents"
+  },
+  {
+   "body_bytes": 41276,
+   "body_sha256": "0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0f/0f681af9b162f60463f413584473a27457fbe5ff2e0f101046e0ad45f38b1f4d.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/agents"
+  },
+  {
+   "body_bytes": 44277,
+   "body_sha256": "3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3c/3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/teams"
+  },
+  {
+   "body_bytes": 44277,
+   "body_sha256": "3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3c/3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/teams"
+  },
+  {
+   "body_bytes": 44277,
+   "body_sha256": "3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/3c/3cc130ebce4b3cfd695dde386037cd26a4876e1cf1bae94ec906288e8391b63b.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/teams"
+  },
+  {
+   "body_bytes": 38208,
+   "body_sha256": "dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dd/dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog"
+  },
+  {
+   "body_bytes": 38208,
+   "body_sha256": "dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dd/dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/blog"
+  },
+  {
+   "body_bytes": 38208,
+   "body_sha256": "dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dd/dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/blog"
+  },
+  {
+   "body_bytes": 46772,
+   "body_sha256": "0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0e/0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/docs"
+  },
+  {
+   "body_bytes": 46772,
+   "body_sha256": "0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0e/0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/docs"
+  },
+  {
+   "body_bytes": 46772,
+   "body_sha256": "0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0e/0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/docs"
+  },
+  {
+   "body_bytes": 47029,
+   "body_sha256": "e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e9/e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/about"
+  },
+  {
+   "body_bytes": 47029,
+   "body_sha256": "e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e9/e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/about"
+  },
+  {
+   "body_bytes": 47029,
+   "body_sha256": "e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e9/e9cb3e43953df0159688bdbe02f8074fff47dda0a6ae9fab0277425dae83e050.txt",
+   "status_code": 200,
+   "tag": "pass2_04:c5_repeat",
+   "url": "https://reqres.in/about"
+  },
+  {
+   "body_bytes": 50591,
+   "body_sha256": "54a02c751e05ed4ee9d1e72b4fa767f8befef56e771ecc0c777717a0eab6e474",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/54/54a02c751e05ed4ee9d1e72b4fa767f8befef56e771ecc0c777717a0eab6e474.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/for/educators"
+  },
+  {
+   "body_bytes": 50591,
+   "body_sha256": "54a02c751e05ed4ee9d1e72b4fa767f8befef56e771ecc0c777717a0eab6e474",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/54/54a02c751e05ed4ee9d1e72b4fa767f8befef56e771ecc0c777717a0eab6e474.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/for/educators"
+  },
+  {
+   "body_bytes": 46772,
+   "body_sha256": "0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0e/0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/docs"
+  },
+  {
+   "body_bytes": 46772,
+   "body_sha256": "0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0e/0ee3263d9511527eedd8d597677703bd8c24bfdee677c4ab54121fbce298407c.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/docs"
+  },
+  {
+   "body_bytes": 53748,
+   "body_sha256": "742ebf527185f90d336cb52200234bf20ed88d7c5f0e97539eaeeece3273eefb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/742ebf527185f90d336cb52200234bf20ed88d7c5f0e97539eaeeece3273eefb.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/for/qa-engineers"
+  },
+  {
+   "body_bytes": 53748,
+   "body_sha256": "742ebf527185f90d336cb52200234bf20ed88d7c5f0e97539eaeeece3273eefb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/742ebf527185f90d336cb52200234bf20ed88d7c5f0e97539eaeeece3273eefb.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/for/qa-engineers"
+  },
+  {
+   "body_bytes": 45466,
+   "body_sha256": "d08080b7171d3d5358b05d323ff7960d39dc34e2aaebef24ac6857075307bb0b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d0/d08080b7171d3d5358b05d323ff7960d39dc34e2aaebef24ac6857075307bb0b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/for/frontend-developers"
+  },
+  {
+   "body_bytes": 45466,
+   "body_sha256": "d08080b7171d3d5358b05d323ff7960d39dc34e2aaebef24ac6857075307bb0b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d0/d08080b7171d3d5358b05d323ff7960d39dc34e2aaebef24ac6857075307bb0b.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/for/frontend-developers"
+  },
+  {
+   "body_bytes": 47525,
+   "body_sha256": "7b217b969fa5321b4a1095222d652529c48cd0d5fe07114153e7616f2b3a4e39",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7b/7b217b969fa5321b4a1095222d652529c48cd0d5fe07114153e7616f2b3a4e39.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/for/ai-agents"
+  },
+  {
+   "body_bytes": 47525,
+   "body_sha256": "7b217b969fa5321b4a1095222d652529c48cd0d5fe07114153e7616f2b3a4e39",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7b/7b217b969fa5321b4a1095222d652529c48cd0d5fe07114153e7616f2b3a4e39.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs1",
+   "url": "https://reqres.in/for/ai-agents"
+  },
+  {
+   "body_bytes": 7455,
+   "body_sha256": "045202d73d99b2ce201e86b2b403543624515aae8078310c7e452c87e3d32ed5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/04/045202d73d99b2ce201e86b2b403543624515aae8078310c7e452c87e3d32ed5.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/llms.txt"
+  },
+  {
+   "body_bytes": 7455,
+   "body_sha256": "045202d73d99b2ce201e86b2b403543624515aae8078310c7e452c87e3d32ed5",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/04/045202d73d99b2ce201e86b2b403543624515aae8078310c7e452c87e3d32ed5.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/llms.txt"
+  },
+  {
+   "body_bytes": 59406,
+   "body_sha256": "e5ced657885377bb91f90516fbe888cf5dc7eaad5ff2016bfad5ddf105ae5d44",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e5/e5ced657885377bb91f90516fbe888cf5dc7eaad5ff2016bfad5ddf105ae5d44.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/openapi.json"
+  },
+  {
+   "body_bytes": 59406,
+   "body_sha256": "e5ced657885377bb91f90516fbe888cf5dc7eaad5ff2016bfad5ddf105ae5d44",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e5/e5ced657885377bb91f90516fbe888cf5dc7eaad5ff2016bfad5ddf105ae5d44.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/openapi.json"
+  },
+  {
+   "body_bytes": 41487,
+   "body_sha256": "93d71bd77b393a4f9f3ed842e32872ac7f43d9f6b6f8600eabcbbc7349193e13",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/93/93d71bd77b393a4f9f3ed842e32872ac7f43d9f6b6f8600eabcbbc7349193e13.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/launching-agent-sandbox"
+  },
+  {
+   "body_bytes": 41487,
+   "body_sha256": "93d71bd77b393a4f9f3ed842e32872ac7f43d9f6b6f8600eabcbbc7349193e13",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/93/93d71bd77b393a4f9f3ed842e32872ac7f43d9f6b6f8600eabcbbc7349193e13.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/launching-agent-sandbox"
+  },
+  {
+   "body_bytes": 37347,
+   "body_sha256": "d0ea0cef320a605fd365498ba6e79365c2ca639faa04761ab03e5e6b4d355535",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d0/d0ea0cef320a605fd365498ba6e79365c2ca639faa04761ab03e5e6b4d355535.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/build-app-with-ai-against-reqres"
+  },
+  {
+   "body_bytes": 37347,
+   "body_sha256": "d0ea0cef320a605fd365498ba6e79365c2ca639faa04761ab03e5e6b4d355535",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d0/d0ea0cef320a605fd365498ba6e79365c2ca639faa04761ab03e5e6b4d355535.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/build-app-with-ai-against-reqres"
+  },
+  {
+   "body_bytes": 37642,
+   "body_sha256": "b00a5cad85ffdf0a01bfac97f819937b37cfba4b5dfa6b0c424ab770cf59176e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b0/b00a5cad85ffdf0a01bfac97f819937b37cfba4b5dfa6b0c424ab770cf59176e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/classrooms-for-api-teaching"
+  },
+  {
+   "body_bytes": 37642,
+   "body_sha256": "b00a5cad85ffdf0a01bfac97f819937b37cfba4b5dfa6b0c424ab770cf59176e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b0/b00a5cad85ffdf0a01bfac97f819937b37cfba4b5dfa6b0c424ab770cf59176e.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/classrooms-for-api-teaching"
+  },
+  {
+   "body_bytes": 33590,
+   "body_sha256": "825d1ff93de81aba0b1ddab24dbf93f73647a309e4f6ed1aef7cf7fab9291923",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/82/825d1ff93de81aba0b1ddab24dbf93f73647a309e4f6ed1aef7cf7fab9291923.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/llm-prompts-for-ai-coding"
+  },
+  {
+   "body_bytes": 33590,
+   "body_sha256": "825d1ff93de81aba0b1ddab24dbf93f73647a309e4f6ed1aef7cf7fab9291923",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/82/825d1ff93de81aba0b1ddab24dbf93f73647a309e4f6ed1aef7cf7fab9291923.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/llm-prompts-for-ai-coding"
+  },
+  {
+   "body_bytes": 39079,
+   "body_sha256": "5869a7ecc542e65620dc2665286ed82489e988891e79ed73f22bf645e06ea440",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5869a7ecc542e65620dc2665286ed82489e988891e79ed73f22bf645e06ea440.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/api-testing-in-ci-cd"
+  },
+  {
+   "body_bytes": 39079,
+   "body_sha256": "5869a7ecc542e65620dc2665286ed82489e988891e79ed73f22bf645e06ea440",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5869a7ecc542e65620dc2665286ed82489e988891e79ed73f22bf645e06ea440.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/api-testing-in-ci-cd"
+  },
+  {
+   "body_bytes": 38208,
+   "body_sha256": "dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dd/dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog?page&"
+  },
+  {
+   "body_bytes": 38208,
+   "body_sha256": "dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dd/dd3f5530ae1b902efa0bae5dd0d8ca1be7afc7a2060eb62b191275aa91645880.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog?page&"
+  },
+  {
+   "body_bytes": 36378,
+   "body_sha256": "5cb44ab69a9c7045aa9df488038c2b87ffe0879244e2262d28596f58d5bbe5c6",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5c/5cb44ab69a9c7045aa9df488038c2b87ffe0879244e2262d28596f58d5bbe5c6.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/qa-automation-with-reqres"
+  },
+  {
+   "body_bytes": 36378,
+   "body_sha256": "5cb44ab69a9c7045aa9df488038c2b87ffe0879244e2262d28596f58d5bbe5c6",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/5c/5cb44ab69a9c7045aa9df488038c2b87ffe0879244e2262d28596f58d5bbe5c6.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/qa-automation-with-reqres"
+  },
+  {
+   "body_bytes": 7921,
+   "body_sha256": "7438f73723a0ff3311ae2a09ab1dfc4e4f389122ecdd2e3dd34e4bd9c1d194ee",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/7438f73723a0ff3311ae2a09ab1dfc4e4f389122ecdd2e3dd34e4bd9c1d194ee.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/llm.txt"
+  },
+  {
+   "body_bytes": 7921,
+   "body_sha256": "7438f73723a0ff3311ae2a09ab1dfc4e4f389122ecdd2e3dd34e4bd9c1d194ee",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/74/7438f73723a0ff3311ae2a09ab1dfc4e4f389122ecdd2e3dd34e4bd9c1d194ee.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/llm.txt"
+  },
+  {
+   "body_bytes": 45031,
+   "body_sha256": "7c913617332289ab65af4b68bac371dba0b8f27cfe94fdba02f1e48613921827",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7c/7c913617332289ab65af4b68bac371dba0b8f27cfe94fdba02f1e48613921827.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/api-testing-with-postman"
+  },
+  {
+   "body_bytes": 45031,
+   "body_sha256": "7c913617332289ab65af4b68bac371dba0b8f27cfe94fdba02f1e48613921827",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7c/7c913617332289ab65af4b68bac371dba0b8f27cfe94fdba02f1e48613921827.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/api-testing-with-postman"
+  },
+  {
+   "body_bytes": 32014,
+   "body_sha256": "0f1bcfc291c507f9302f30f44a1cd699d6ac0540fa767067adebb9f1178556f1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0f/0f1bcfc291c507f9302f30f44a1cd699d6ac0540fa767067adebb9f1178556f1.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/stop-faking-apis"
+  },
+  {
+   "body_bytes": 32014,
+   "body_sha256": "0f1bcfc291c507f9302f30f44a1cd699d6ac0540fa767067adebb9f1178556f1",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/0f/0f1bcfc291c507f9302f30f44a1cd699d6ac0540fa767067adebb9f1178556f1.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/stop-faking-apis"
+  },
+  {
+   "body_bytes": 32254,
+   "body_sha256": "959d4ae32e454ba3b6e5c34a6323ad78d2cc8d01597b4b6a4131d2e1b59d1e33",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/95/959d4ae32e454ba3b6e5c34a6323ad78d2cc8d01597b4b6a4131d2e1b59d1e33.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/when-jsonplaceholder-isnt-enough"
+  },
+  {
+   "body_bytes": 32254,
+   "body_sha256": "959d4ae32e454ba3b6e5c34a6323ad78d2cc8d01597b4b6a4131d2e1b59d1e33",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/95/959d4ae32e454ba3b6e5c34a6323ad78d2cc8d01597b4b6a4131d2e1b59d1e33.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/when-jsonplaceholder-isnt-enough"
+  },
+  {
+   "body_bytes": 31829,
+   "body_sha256": "6a8b1be2adaabdc4dd02ce7786baa90d3d53b35f8257344fe2e578cced762428",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6a/6a8b1be2adaabdc4dd02ce7786baa90d3d53b35f8257344fe2e578cced762428.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/blog/frontend-only-auth-without-backend"
+  },
+  {
+   "body_bytes": 31829,
+   "body_sha256": "6a8b1be2adaabdc4dd02ce7786baa90d3d53b35f8257344fe2e578cced762428",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/6a/6a8b1be2adaabdc4dd02ce7786baa90d3d53b35f8257344fe2e578cced762428.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/blog/frontend-only-auth-without-backend"
+  },
+  {
+   "body_bytes": 26408,
+   "body_sha256": "783c440e742c63d335420e3ca1060f5396481860e1b6a1a802f3c316bcd88feb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/78/783c440e742c63d335420e3ca1060f5396481860e1b6a1a802f3c316bcd88feb.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/commercial"
+  },
+  {
+   "body_bytes": 26408,
+   "body_sha256": "783c440e742c63d335420e3ca1060f5396481860e1b6a1a802f3c316bcd88feb",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/78/783c440e742c63d335420e3ca1060f5396481860e1b6a1a802f3c316bcd88feb.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/commercial"
+  },
+  {
+   "body_bytes": 25185,
+   "body_sha256": "b9378142483669d55bf6dfacb1ae9e5ca54f619f59c2962a8732bcfab329a02b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b9/b9378142483669d55bf6dfacb1ae9e5ca54f619f59c2962a8732bcfab329a02b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/sponsor"
+  },
+  {
+   "body_bytes": 25185,
+   "body_sha256": "b9378142483669d55bf6dfacb1ae9e5ca54f619f59c2962a8732bcfab329a02b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b9/b9378142483669d55bf6dfacb1ae9e5ca54f619f59c2962a8732bcfab329a02b.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/sponsor"
+  },
+  {
+   "body_bytes": 41204,
+   "body_sha256": "370b0cf7f063f6692473619311de8aebff48f48eec6b4200267bcf5b594499a3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/37/370b0cf7f063f6692473619311de8aebff48f48eec6b4200267bcf5b594499a3.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/for/founders"
+  },
+  {
+   "body_bytes": 41204,
+   "body_sha256": "370b0cf7f063f6692473619311de8aebff48f48eec6b4200267bcf5b594499a3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/37/370b0cf7f063f6692473619311de8aebff48f48eec6b4200267bcf5b594499a3.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/for/founders"
+  },
+  {
+   "body_bytes": 43914,
+   "body_sha256": "f56c30a85abd3b6485abba906dbe1d6f296657f4e5ec0577d237dfeac83e7453",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f5/f56c30a85abd3b6485abba906dbe1d6f296657f4e5ec0577d237dfeac83e7453.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/compared/firebase"
+  },
+  {
+   "body_bytes": 43914,
+   "body_sha256": "f56c30a85abd3b6485abba906dbe1d6f296657f4e5ec0577d237dfeac83e7453",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/f5/f56c30a85abd3b6485abba906dbe1d6f296657f4e5ec0577d237dfeac83e7453.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/compared/firebase"
+  },
+  {
+   "body_bytes": 40882,
+   "body_sha256": "43d615aca5547a01180e853736d223106da49b29ade7e2c63a5868aaea4622cd",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/43/43d615aca5547a01180e853736d223106da49b29ade7e2c63a5868aaea4622cd.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://reqres.in/compared/postman"
+  },
+  {
+   "body_bytes": 40882,
+   "body_sha256": "43d615aca5547a01180e853736d223106da49b29ade7e2c63a5868aaea4622cd",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/43/43d615aca5547a01180e853736d223106da49b29ade7e2c63a5868aaea4622cd.txt",
+   "status_code": 200,
+   "tag": "pass2_04:bfs2",
+   "url": "https://reqres.in/compared/postman"
+  },
+  {
+   "body_bytes": 576270,
+   "body_sha256": "c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c0/c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/"
+  },
+  {
+   "body_bytes": 576270,
+   "body_sha256": "c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c0/c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45.txt",
+   "status_code": 200,
+   "tag": "pass2_05:root",
+   "url": "https://github.com/"
+  },
+  {
+   "body_bytes": 576270,
+   "body_sha256": "c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/c0/c044efa5574241f72507c1b6fdad2f43da08d91cd2221a9123144b7bd8c10f45.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/"
+  },
+  {
+   "body_bytes": 879196,
+   "body_sha256": "7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7d/7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/copilot"
+  },
+  {
+   "body_bytes": 879196,
+   "body_sha256": "7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7d/7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/copilot"
+  },
+  {
+   "body_bytes": 879196,
+   "body_sha256": "7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7d/7d21fc170235052d182c223e240e3a596d0fdb8aafe78a76c371f6a797de7f01.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/features/copilot"
+  },
+  {
+   "body_bytes": 350183,
+   "body_sha256": "db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/db/db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/ai/github-app"
+  },
+  {
+   "body_bytes": 350183,
+   "body_sha256": "db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/db/db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/ai/github-app"
+  },
+  {
+   "body_bytes": 350183,
+   "body_sha256": "db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/db/db239fba90583a7b932302a2b1f9363409b51008763e5b57fe4a2af07cf0920d.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/features/ai/github-app"
+  },
+  {
+   "body_bytes": 269471,
+   "body_sha256": "d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/mcp"
+  },
+  {
+   "body_bytes": 269471,
+   "body_sha256": "d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/mcp"
+  },
+  {
+   "body_bytes": 269471,
+   "body_sha256": "d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d8ffc99b78131657eeeaf9a6899fbd7dccec34b8adf8324edaf70e84985a83c4.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/mcp"
+  },
+  {
+   "body_bytes": 308098,
+   "body_sha256": "5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/actions"
+  },
+  {
+   "body_bytes": 308098,
+   "body_sha256": "5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/actions"
+  },
+  {
+   "body_bytes": 308098,
+   "body_sha256": "5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/58/5849be2f13c4f563256ae6093426adfd9857678a6e56864b50f963c73c3d3583.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/features/actions"
+  },
+  {
+   "body_bytes": 330273,
+   "body_sha256": "d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/codespaces"
+  },
+  {
+   "body_bytes": 330273,
+   "body_sha256": "d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/codespaces"
+  },
+  {
+   "body_bytes": 330273,
+   "body_sha256": "d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d8/d819a2c1706bfdb5251c7312f9bdfd9d3b8f6ec621fbeb3a719347cd1fee2150.txt",
+   "status_code": 200,
+   "tag": "pass2_05:c5_repeat",
+   "url": "https://github.com/features/codespaces"
+  },
+  {
+   "body_bytes": 349971,
+   "body_sha256": "95bd559b5b814b4a9981c18e0275bc6df57b8a8d7a4977cd27ba25bb7b070e17",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/95/95bd559b5b814b4a9981c18e0275bc6df57b8a8d7a4977cd27ba25bb7b070e17.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/issues"
+  },
+  {
+   "body_bytes": 349971,
+   "body_sha256": "95bd559b5b814b4a9981c18e0275bc6df57b8a8d7a4977cd27ba25bb7b070e17",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/95/95bd559b5b814b4a9981c18e0275bc6df57b8a8d7a4977cd27ba25bb7b070e17.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/issues"
+  },
+  {
+   "body_bytes": 315280,
+   "body_sha256": "d5d15b52ef03b24c50330627e491c6f0309853cee52d54f338398040980f1eae",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d5/d5d15b52ef03b24c50330627e491c6f0309853cee52d54f338398040980f1eae.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/code-review"
+  },
+  {
+   "body_bytes": 315280,
+   "body_sha256": "d5d15b52ef03b24c50330627e491c6f0309853cee52d54f338398040980f1eae",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/d5/d5d15b52ef03b24c50330627e491c6f0309853cee52d54f338398040980f1eae.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/code-review"
+  },
+  {
+   "body_bytes": 327101,
+   "body_sha256": "7d79c42cc0e6e41e36a6e88eed058e668372d8886f4fa2d55b83799d8ae76f38",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7d/7d79c42cc0e6e41e36a6e88eed058e668372d8886f4fa2d55b83799d8ae76f38.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features/code-quality"
+  },
+  {
+   "body_bytes": 327101,
+   "body_sha256": "7d79c42cc0e6e41e36a6e88eed058e668372d8886f4fa2d55b83799d8ae76f38",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/7d/7d79c42cc0e6e41e36a6e88eed058e668372d8886f4fa2d55b83799d8ae76f38.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/features/code-quality"
+  },
+  {
+   "body_bytes": 577133,
+   "body_sha256": "4ffe6dd088f438989c07eaf4130f8ce6e53ccc78b0f5e84d44e8eae48e7e246b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4f/4ffe6dd088f438989c07eaf4130f8ce6e53ccc78b0f5e84d44e8eae48e7e246b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/security/advanced-security"
+  },
+  {
+   "body_bytes": 577133,
+   "body_sha256": "4ffe6dd088f438989c07eaf4130f8ce6e53ccc78b0f5e84d44e8eae48e7e246b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/4f/4ffe6dd088f438989c07eaf4130f8ce6e53ccc78b0f5e84d44e8eae48e7e246b.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/security/advanced-security"
+  },
+  {
+   "body_bytes": 337321,
+   "body_sha256": "b248bf12455414dd781e76f84b92b4a6324847473314338f8fa3c76614486360",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b2/b248bf12455414dd781e76f84b92b4a6324847473314338f8fa3c76614486360.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/security/advanced-security/code-security"
+  },
+  {
+   "body_bytes": 337321,
+   "body_sha256": "b248bf12455414dd781e76f84b92b4a6324847473314338f8fa3c76614486360",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/b2/b248bf12455414dd781e76f84b92b4a6324847473314338f8fa3c76614486360.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs1",
+   "url": "https://github.com/security/advanced-security/code-security"
+  },
+  {
+   "body_bytes": 335835,
+   "body_sha256": "2b50272babe25af7ba2ecc902e80e3671eeaba78c6755c733ffd5f1535fa5bb9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2b/2b50272babe25af7ba2ecc902e80e3671eeaba78c6755c733ffd5f1535fa5bb9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/security/advanced-security/secret-protection"
+  },
+  {
+   "body_bytes": 335835,
+   "body_sha256": "2b50272babe25af7ba2ecc902e80e3671eeaba78c6755c733ffd5f1535fa5bb9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/2b/2b50272babe25af7ba2ecc902e80e3671eeaba78c6755c733ffd5f1535fa5bb9.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/security/advanced-security/secret-protection"
+  },
+  {
+   "body_bytes": 464138,
+   "body_sha256": "59d9774a831a9785fa70e204e039e2dd7e96dbff3a9c821ff992ddec532f4f1c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/59/59d9774a831a9785fa70e204e039e2dd7e96dbff3a9c821ff992ddec532f4f1c.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/why-github"
+  },
+  {
+   "body_bytes": 464138,
+   "body_sha256": "59d9774a831a9785fa70e204e039e2dd7e96dbff3a9c821ff992ddec532f4f1c",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/59/59d9774a831a9785fa70e204e039e2dd7e96dbff3a9c821ff992ddec532f4f1c.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/why-github"
+  },
+  {
+   "body_bytes": 0,
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.txt",
+   "status_code": 400,
+   "tag": "keyed",
+   "url": "https://github.com/marketplace"
+  },
+  {
+   "body_bytes": 0,
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.txt",
+   "status_code": 400,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/marketplace"
+  },
+  {
+   "body_bytes": 654126,
+   "body_sha256": "52b34851584f1f346e33ee5a57cc800c2d75d076f13640fef83be0c6e43033fe",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/52/52b34851584f1f346e33ee5a57cc800c2d75d076f13640fef83be0c6e43033fe.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/features"
+  },
+  {
+   "body_bytes": 654126,
+   "body_sha256": "52b34851584f1f346e33ee5a57cc800c2d75d076f13640fef83be0c6e43033fe",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/52/52b34851584f1f346e33ee5a57cc800c2d75d076f13640fef83be0c6e43033fe.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/features"
+  },
+  {
+   "body_bytes": 1380779,
+   "body_sha256": "56f2d328332772fe400964b1d842401891575edbe41baef630f401ee3fb24ea9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/56/56f2d328332772fe400964b1d842401891575edbe41baef630f401ee3fb24ea9.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/enterprise"
+  },
+  {
+   "body_bytes": 1380779,
+   "body_sha256": "56f2d328332772fe400964b1d842401891575edbe41baef630f401ee3fb24ea9",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/56/56f2d328332772fe400964b1d842401891575edbe41baef630f401ee3fb24ea9.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/enterprise"
+  },
+  {
+   "body_bytes": 378053,
+   "body_sha256": "dc156c2c0e6a0490cd37ecc5094ce2e80418cf8103ef45c1ef0471fa339b2ed8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dc/dc156c2c0e6a0490cd37ecc5094ce2e80418cf8103ef45c1ef0471fa339b2ed8.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/team"
+  },
+  {
+   "body_bytes": 378053,
+   "body_sha256": "dc156c2c0e6a0490cd37ecc5094ce2e80418cf8103ef45c1ef0471fa339b2ed8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/dc/dc156c2c0e6a0490cd37ecc5094ce2e80418cf8103ef45c1ef0471fa339b2ed8.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/team"
+  },
+  {
+   "body_bytes": 421100,
+   "body_sha256": "29da7526cb1ac640c140f242a188cdda2626633b1600208f966eeff2eae33610",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/29/29da7526cb1ac640c140f242a188cdda2626633b1600208f966eeff2eae33610.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/enterprise/startups"
+  },
+  {
+   "body_bytes": 421100,
+   "body_sha256": "29da7526cb1ac640c140f242a188cdda2626633b1600208f966eeff2eae33610",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/29/29da7526cb1ac640c140f242a188cdda2626633b1600208f966eeff2eae33610.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/enterprise/startups"
+  },
+  {
+   "body_bytes": 292225,
+   "body_sha256": "a23c5e728b900e89afefe87d1c370027c83c3f5a5051b29383b1e6254b1fc50f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a2/a23c5e728b900e89afefe87d1c370027c83c3f5a5051b29383b1e6254b1fc50f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry/nonprofits"
+  },
+  {
+   "body_bytes": 292225,
+   "body_sha256": "a23c5e728b900e89afefe87d1c370027c83c3f5a5051b29383b1e6254b1fc50f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a2/a23c5e728b900e89afefe87d1c370027c83c3f5a5051b29383b1e6254b1fc50f.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/solutions/industry/nonprofits"
+  },
+  {
+   "body_bytes": 305398,
+   "body_sha256": "84e6c7fbf6f95beae040dd3f13de573dbd09b1c74885e8122c20043be73f123f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/84/84e6c7fbf6f95beae040dd3f13de573dbd09b1c74885e8122c20043be73f123f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/use-case/app-modernization"
+  },
+  {
+   "body_bytes": 305398,
+   "body_sha256": "84e6c7fbf6f95beae040dd3f13de573dbd09b1c74885e8122c20043be73f123f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/84/84e6c7fbf6f95beae040dd3f13de573dbd09b1c74885e8122c20043be73f123f.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/solutions/use-case/app-modernization"
+  },
+  {
+   "body_bytes": 321143,
+   "body_sha256": "214214b3118734e5ee3d3c98a17e9c75869c46b1ccc5a4f0985e04823e9da87b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/214214b3118734e5ee3d3c98a17e9c75869c46b1ccc5a4f0985e04823e9da87b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/use-case/devsecops"
+  },
+  {
+   "body_bytes": 321143,
+   "body_sha256": "214214b3118734e5ee3d3c98a17e9c75869c46b1ccc5a4f0985e04823e9da87b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/214214b3118734e5ee3d3c98a17e9c75869c46b1ccc5a4f0985e04823e9da87b.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs2",
+   "url": "https://github.com/solutions/use-case/devsecops"
+  },
+  {
+   "body_bytes": 324887,
+   "body_sha256": "4392075ccbdae05f7952806cb0033dccbb98669109814b2dbc2fb34c6c21c021",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/43/4392075ccbdae05f7952806cb0033dccbb98669109814b2dbc2fb34c6c21c021.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/use-case/devops"
+  },
+  {
+   "body_bytes": 324887,
+   "body_sha256": "4392075ccbdae05f7952806cb0033dccbb98669109814b2dbc2fb34c6c21c021",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/43/4392075ccbdae05f7952806cb0033dccbb98669109814b2dbc2fb34c6c21c021.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/use-case/devops"
+  },
+  {
+   "body_bytes": 289881,
+   "body_sha256": "777d4372f7c18436666e12cd2cc54eb4b9b7bf2618307b257e4048aea6213a2e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/77/777d4372f7c18436666e12cd2cc54eb4b9b7bf2618307b257e4048aea6213a2e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/use-case/ci-cd"
+  },
+  {
+   "body_bytes": 289881,
+   "body_sha256": "777d4372f7c18436666e12cd2cc54eb4b9b7bf2618307b257e4048aea6213a2e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/77/777d4372f7c18436666e12cd2cc54eb4b9b7bf2618307b257e4048aea6213a2e.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/use-case/ci-cd"
+  },
+  {
+   "body_bytes": 308850,
+   "body_sha256": "21bc5760e2cd2712d167770f62db3f4c96d34ee6d16d34bde8fff9b5d1cbd303",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/21bc5760e2cd2712d167770f62db3f4c96d34ee6d16d34bde8fff9b5d1cbd303.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/use-case"
+  },
+  {
+   "body_bytes": 308850,
+   "body_sha256": "21bc5760e2cd2712d167770f62db3f4c96d34ee6d16d34bde8fff9b5d1cbd303",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/21/21bc5760e2cd2712d167770f62db3f4c96d34ee6d16d34bde8fff9b5d1cbd303.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/use-case"
+  },
+  {
+   "body_bytes": 1165556,
+   "body_sha256": "caa0a6ec8198e64e79a11e3a9880aa051a0b3996e7b56f77ecf96a3fdf8e6d8b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ca/caa0a6ec8198e64e79a11e3a9880aa051a0b3996e7b56f77ecf96a3fdf8e6d8b.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry/healthcare"
+  },
+  {
+   "body_bytes": 1165556,
+   "body_sha256": "caa0a6ec8198e64e79a11e3a9880aa051a0b3996e7b56f77ecf96a3fdf8e6d8b",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ca/caa0a6ec8198e64e79a11e3a9880aa051a0b3996e7b56f77ecf96a3fdf8e6d8b.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/industry/healthcare"
+  },
+  {
+   "body_bytes": 318527,
+   "body_sha256": "be500eb4cbfb19b9bda45686433210696d269ad7330e7e64ed3c38cba26ab4e8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/be/be500eb4cbfb19b9bda45686433210696d269ad7330e7e64ed3c38cba26ab4e8.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry/financial-services"
+  },
+  {
+   "body_bytes": 318527,
+   "body_sha256": "be500eb4cbfb19b9bda45686433210696d269ad7330e7e64ed3c38cba26ab4e8",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/be/be500eb4cbfb19b9bda45686433210696d269ad7330e7e64ed3c38cba26ab4e8.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/industry/financial-services"
+  },
+  {
+   "body_bytes": 1123016,
+   "body_sha256": "a0514466030b51f212a01ad9f029a07b838a1754aa93ddb620ba0fed5f9c048e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a0/a0514466030b51f212a01ad9f029a07b838a1754aa93ddb620ba0fed5f9c048e.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry/manufacturing"
+  },
+  {
+   "body_bytes": 1123016,
+   "body_sha256": "a0514466030b51f212a01ad9f029a07b838a1754aa93ddb620ba0fed5f9c048e",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/a0/a0514466030b51f212a01ad9f029a07b838a1754aa93ddb620ba0fed5f9c048e.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/industry/manufacturing"
+  },
+  {
+   "body_bytes": 286725,
+   "body_sha256": "034fd36ef9d261c086624f26570ac6d746ebf9fc90450f6b8fe76239a8517be2",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/03/034fd36ef9d261c086624f26570ac6d746ebf9fc90450f6b8fe76239a8517be2.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry/government"
+  },
+  {
+   "body_bytes": 286725,
+   "body_sha256": "034fd36ef9d261c086624f26570ac6d746ebf9fc90450f6b8fe76239a8517be2",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/03/034fd36ef9d261c086624f26570ac6d746ebf9fc90450f6b8fe76239a8517be2.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/industry/government"
+  },
+  {
+   "body_bytes": 305593,
+   "body_sha256": "79fd8437b1c15bfe4137e851822b1af23c181783326f01298367ba98f8564b6f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/79/79fd8437b1c15bfe4137e851822b1af23c181783326f01298367ba98f8564b6f.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions/industry"
+  },
+  {
+   "body_bytes": 305593,
+   "body_sha256": "79fd8437b1c15bfe4137e851822b1af23c181783326f01298367ba98f8564b6f",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/79/79fd8437b1c15bfe4137e851822b1af23c181783326f01298367ba98f8564b6f.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions/industry"
+  },
+  {
+   "body_bytes": 338122,
+   "body_sha256": "ead3f19a095c2186984e223a366c8af4014fe54ce1768581cbf7ec99230217a3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ea/ead3f19a095c2186984e223a366c8af4014fe54ce1768581cbf7ec99230217a3.txt",
+   "status_code": 200,
+   "tag": "keyed",
+   "url": "https://github.com/solutions"
+  },
+  {
+   "body_bytes": 338122,
+   "body_sha256": "ead3f19a095c2186984e223a366c8af4014fe54ce1768581cbf7ec99230217a3",
+   "method": "GET",
+   "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/ea/ead3f19a095c2186984e223a366c8af4014fe54ce1768581cbf7ec99230217a3.txt",
+   "status_code": 200,
+   "tag": "pass2_05:bfs3",
+   "url": "https://github.com/solutions"
+  }
+ ],
+ "experiment_id": "EXP-FRONTIER-36306528608"
+}

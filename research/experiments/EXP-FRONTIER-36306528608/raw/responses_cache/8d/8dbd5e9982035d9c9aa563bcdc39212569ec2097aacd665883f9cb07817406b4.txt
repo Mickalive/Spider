@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html class="gl-system ui-neutral with-top-bar with-header page-with-panels with-gl-container-queries  user-logged-out" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Instance Configuration · Help · GitLab</title>
+<link crossorigin="" href="https://snowplowprd.trx.gitlab.net" rel="preconnect">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-9892dc17af892e03de41625c0ee325117a3b8ee4ba6005f3a3eac68510030aed.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-Italic-f96f17332d67b21ada2dfba5f0c0e1d5801eab99330472057bf18edd93d4ccf7.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-29c2152dac8739499dd0fe5cd37a486ebcc7d4798c9b6d3aeab65b3172375b05.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-Italic-af36701a2188df32a9dcea12e0424c380019698d4f76da9ad8ea2fd59432cf83.woff2" rel="preload">
+
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+window.gon={};
+//]]>
+</script>
+
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+const root = document.documentElement;
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  root.classList.add('gl-dark');
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (e.matches) {
+    root.classList.add('gl-dark');
+  } else {
+    root.classList.remove('gl-dark');
+  }
+});
+
+//]]>
+</script>
+
+
+
+
+<meta content="light dark" name="color-scheme">
+<link rel="stylesheet" href="/assets/application-e16b5836b809db35fce7a0d08936d08dd41e659f6b8b5a13e53dbc4c4d634427.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/application_dark-bd24c2a8c3e190db3668dad30e8e9ea0ddf145bef95fe0e7168e2346b6662e89.css" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" href="/assets/page_bundles/commit_description-9e7efe20f0cef17d0606edabfad0418e9eb224aaeaa2dae32c817060fa60abcc.css" /><link rel="stylesheet" href="/assets/page_bundles/design_management-b0d28c79dc2ff36cbf37b4fa7b3bfb2908c91dcec0cf3fb800f11aaa25b08ea8.css" /><link rel="stylesheet" href="/assets/page_bundles/issuable_list-7a33f8b5a79c609e4bac7e1fa1c5553962adf726cd700fbead1f9e974c41e7c9.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_list-1d9cdbbaf9469f9073c410dc7a7f2543b02071773aa332daf63803eaaec87e62.css" /><link rel="stylesheet" href="/assets/page_bundles/issues_show-ec954ae4932e0bfe7383adee3c75f53c5985c6edea62c7ae4370cb1f6e85a91a.css" /><link rel="stylesheet" href="/assets/page_bundles/notes_shared-009bfb6fa90b583372e5d3f444ccd9b89aa6278564b128d1f21b404747a3981b.css" /><link rel="stylesheet" href="/assets/page_bundles/work_items-cf96ec866af761ac90ea44063245a03c038e1f4ed193f5e2a6432597f048e62f.css" />
+<link rel="stylesheet" href="/assets/tailwind-7c31b1ff1ca55c2ed995ed64fe7cce64ed22b094963afb4cd9a8c4c2b40e32b0.css" />
+
+
+<link rel="stylesheet" href="/assets/fonts-deb7ad1d55ca77c0172d8538d53442af63604ff490c74acc2859db295c125bdb.css" />
+<link rel="stylesheet" href="/assets/highlight/themes/white-fcb8fe745eaa64eb81024a47dc6ddfb59587f0d638bcf5d1ae2e20e5baf4ceb1.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/highlight/themes/dark-14f22f8b4c88bce74c496ff5b27217bdc8636174d6a71aa71b80bca2942d3bc8.css" media="(prefers-color-scheme: dark)" />
+
+<script src="/assets/webpack/runtime.e8492396.bundle.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/main.e6f740a4.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/tracker.1eb446cb.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+window.snowplowOptions = {"namespace":"gl","hostname":"snowplowprd.trx.gitlab.net","cookieDomain":".gitlab.com","appId":"gitlab","formTracking":true,"linkClickTracking":true};
+gl = window.gl || {};
+gl.snowplowStandardContext = {"schema":"iglu:com.gitlab/gitlab_standard/jsonschema/1-1-8","data":{"environment":"production","source":"gitlab-rails","correlation_id":"a419652c5958277b-IAD","extra":{},"user_id":null,"global_user_id":null,"user_type":null,"is_gitlab_team_member":null,"namespace_id":null,"ultimate_parent_namespace_id":null,"project_id":null,"feature_enabled_by_namespace_ids":null,"realm":"saas","deployment_type":".com","context_generated_at":"2026-09-27T09:13:56.062Z","organization_id":1}};
+gl.snowplowPseudonymizedPageUrl = "https://gitlab.com/help/instance_configuration";
+gl.maskedDefaultReferrerUrl = null;
+gl.ga4MeasurementId = 'G-ENFH3X7M5Y';
+gl.duoEvents = ["ai_question_category","block_slack_duo_mention","perform_completion_worker","receive_slack_duo_mention","process_gitlab_duo_question","agent_platform_session_created","agent_platform_session_dropped","agent_platform_session_finished","agent_platform_session_resumed","agent_platform_session_started","agent_platform_session_stopped","ai_response_time","approve_tool_duo_chat","cleanup_stuck_agent_platform_session","click_ai_catalog_button_duo_rail","click_analyze_with_duo_on_analytics_dashboard","click_dap_trial_or_paid_empty_state_agent","click_dap_trial_or_paid_empty_state_explore_agents_link","click_dap_trial_or_paid_empty_state_prompt","click_delete_ai_catalog_item_button","click_disable_ai_catalog_item_button","click_duo_agentic_not_available_empty_state_learn_more","click_duo_agentic_not_available_empty_state_start_trial","click_duo_agentic_subscription_expired_learn_more","click_duo_agentic_subscription_expired_upgrade","click_duo_agentic_trial_expired_learn_more","click_duo_agentic_trial_expired_upgrade","click_duo_quick_action","click_duplicate_ai_catalog_item_button","click_enable_ai_catalog_item_button","click_purchase_seats_button_group_duo_pro_home_page","click_through_flow_widget","click_through_session_pill","close_vulnerability_resolution_merge_request","code_suggestion_accepted_in_ide","code_suggestion_rejected_in_ide","code_suggestion_shown_in_ide","code_suggestions_connection_details_rate_limit_exceeded","code_suggestions_direct_access_rate_limit_exceeded","code_suggestions_rate_limit_exceeded","create_ai_catalog_item","create_ai_catalog_item_consumer","create_ai_self_hosted_model","create_vulnerability_resolution_merge_request","default_answer","delete_ai_catalog_item","delete_ai_catalog_item_consumer","delete_ai_self_hosted_model","deny_tool_duo_chat","detected_high_comment_temperature","detected_repeated_high_comment_temperature","dismiss_sast_vulnerability_false_positive_analysis","dismiss_secret_detection_vulnerability_false_positive_analysis","duo_workflow_workload_completed","enable_duo_code_review_by_default_marked_pending","encounter_duo_code_review_error_during_review","error_answer","excluded_files_from_duo_code_review","execute_llm_method","explain_code","explain_vulnerability","filter_ai_fp","find_no_issues_duo_code_review_after_review","find_nothing_to_review_duo_code_review_on_mr","finish_duo_workflow_execution","finish_mcp_tool_call","finish_vulnerability_bulk_duo_workflow","fix_code","fix_pipeline_suggestion_applied","fix_pipeline_suggestion_posted","forced_high_temperature_commenting","generate_merge_commit_message","generate_resolve_dependency_bump_pipeline","i_quickactions_q","include_repository_xray_data_into_code_generation_prompt","ingest_ai_audit_events_batch","maximize_duo_chat_panel","mention_gitlabduo_in_mr_comment","merge_vulnerability_resolution_merge_request","minimize_duo_chat_panel","navigate_retry_alternative_duo_agentic_chat","post_comment_duo_code_review_on_diff","process_gitlab_duo_slash_command","publish_duo_code_review_comments","react_thumbs_down_on_duo_code_review_comment","react_thumbs_up_on_duo_code_review_comment","recommend_tool_duo_chat","refactor_code","reported_sast_vulnerability_false_positive_analysis","reported_secret_detection_vulnerability_false_positive_analysis","request_ask_help","request_duo_chat_response","request_duo_vulnerability_resolution","request_review_duo_code_review_on_mr_by_author","request_review_duo_code_review_on_mr_by_non_author","requested_comment_temperature","resize_duo_chat_panel","resolve_feature_discovery_search","restore_ai_catalog_item","retry_duo_workflow_execution","retry_failed_duo_agentic_chat","retry_message_duo_agentic_chat","retry_succeeded_duo_agentic_chat","select_duo_agentic_chat_predefined_prompt","start_duo_workflow_execution","start_mcp_tool_call","start_vulnerability_bulk_duo_workflow","submit_dap_trial_or_paid_empty_state_message","submit_gitlab_duo_question","summarize_new_merge_request","summarize_review","tokens_per_embedding","tokens_per_user_request_prompt","tokens_per_user_request_response","tool_failed_duo_chat","tool_succeeded_duo_chat","trigger_ai_catalog_item","trigger_resolve_dependency_bump_workflow","trigger_sast_vulnerability_fp_detection_workflow","trigger_sast_vulnerability_resolution_workflow","trigger_secret_detection_vulnerability_fp_detection_workflow","trigger_slack_duo","troubleshoot_job","update_ai_catalog_item","update_ai_catalog_item_consumer","update_ai_self_hosted_model","update_model_selection_feature","update_self_hosted_ai_feature_to_vendored_model","view_ai_catalog_item","view_ai_catalog_item_index","view_ai_catalog_project_catalog","view_ai_catalog_project_managed","view_dap_trial_or_paid_empty_state","view_duo_agentic_identity_verification_empty_state","view_duo_agentic_not_available_empty_state","view_duo_agentic_subscription_expired_empty_state","view_duo_agentic_trial_expired_empty_state","write_tests"];
+gl.onlySendDuoEvents = false;
+
+
+//]]>
+</script>
+
+
+<script src="/assets/webpack/sentry.2fac921c.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+
+<script src="/assets/webpack/commons-graphql_explorer-pages.admin.application_settings.general-pages.admin.application_settings.s-41816856.0ed0cd5a.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-c90aa2e3.98aecbba.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.admin.abuse_reports.show-pages.dashboard.issues-pages.dashboard.issues.vue3-pages.dash-6117f013.abbe62c6.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings.service_accounts-pages.explore.ai_catalog-pages.explore.ana-dd0b1cb0.27570770.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.registrations.new-pages.root-pages.root.vue3-pages.sessions.new-p-25643d47.8f1e2a9b.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.admin.deploy_keys.index-pages.admin.deploy_keys.index.vue3-pages.admin.groups.index-pa-11307819.b20952f3.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.projects.snippets.show-pages.root-pages.root.vue3-pages.snippets.-73de5222.2d152cdb.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/0dcf7166.fee24f6c.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.search.show-pages.search.show.vue3-super_sidebar.df21b919.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/commons-pages.search.show-super_sidebar.4bb75822.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/super_sidebar.e6ff1ddb.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+<script src="/assets/webpack/default.45e32006.chunk.js" defer="defer" nonce="UdVtKPFi1tIneVEGKT1nyg=="></script>
+
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="Instance Configuration · Help · GitLab" property="og:title">
+<meta content="GitLab.com" property="og:description">
+<meta content="https://gitlab.com/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="https://gitlab.com/help/instance_configuration" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="Instance Configuration · Help · GitLab" property="twitter:title">
+<meta content="GitLab.com" property="twitter:description">
+<meta content="https://gitlab.com/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="twitter:image">
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="7mZsNZS_mwZ-84RW1qfyAJZ2NsWobLj1vsX15Ysicq0TvXpN_7YT0BrTzsA2ma_eI34wV1MYe0Pbn1Lp1RP6eg" />
+<meta name="csp-nonce" content="UdVtKPFi1tIneVEGKT1nyg==" />
+<meta name="action-cable-url" content="/-/cable" />
+<link crossorigin="use-credentials" href="/-/manifest.json" rel="manifest">
+<link rel="icon" type="image/png" href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" id="favicon" data-original-href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/apple-touch-icon-b049d4bc0dd9626f31db825d61880737befc7835982586d015bded10b4435460.png" />
+<link crossorigin="use-credentials" href="/search/opensearch.xml" rel="search" title="Search GitLab" type="application/opensearchdescription+xml">
+<meta content="noindex, nofollow" name="robots">
+
+
+
+
+<meta content="GitLab.com" name="description">
+<meta content="#F1F0F6" media="(prefers-color-scheme: light)" name="theme-color">
+<meta content="#232128" media="(prefers-color-scheme: dark)" name="theme-color">
+</head>
+
+<body class="tab-width-8 gl-browser-generic gl-platform-other" data-page="help:instance_configuration">
+<div id="js-tooltips-container"></div>
+
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+gl = window.gl || {};
+gl.client = {"isGeneric":true,"isOther":true};
+
+
+//]]>
+</script>
+
+
+<header class="super-topbar js-super-topbar"></header>
+<div class="layout-page js-page-layout page-with-super-sidebar">
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+const outer = document.createElement('div');
+outer.style.visibility = 'hidden';
+outer.style.overflow = 'scroll';
+document.body.appendChild(outer);
+const inner = document.createElement('div');
+outer.appendChild(inner);
+const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+outer.parentNode.removeChild(outer);
+document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+
+//]]>
+</script><aside class="js-super-sidebar super-sidebar super-sidebar-loading" data-command-palette="{}" data-is-saas="true" data-sidebar="{&quot;whats_new_most_recent_release_items_count&quot;:7,&quot;whats_new_version_digest&quot;:&quot;5e9e2821a0cddc6e5959ae21eb4f8da802dec7f0644882e1c4e55c9037f23230&quot;,&quot;whats_new_read_articles&quot;:[],&quot;is_logged_in&quot;:false,&quot;compare_plans_url&quot;:&quot;https://about.gitlab.com/pricing&quot;,&quot;current_menu_items&quot;:[{&quot;id&quot;:&quot;projects_menu&quot;,&quot;title&quot;:&quot;Projects&quot;,&quot;icon&quot;:&quot;project&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/projects&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false},{&quot;id&quot;:&quot;groups_menu&quot;,&quot;title&quot;:&quot;Groups&quot;,&quot;icon&quot;:&quot;group&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/groups&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false},{&quot;id&quot;:&quot;catalog_menu&quot;,&quot;title&quot;:&quot;CI/CD Catalog&quot;,&quot;icon&quot;:&quot;catalog-checkmark&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/catalog&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false},{&quot;id&quot;:&quot;ai_catalog_menu&quot;,&quot;title&quot;:&quot;AI Catalog&quot;,&quot;icon&quot;:&quot;tanuki-ai&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/ai-catalog&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false},{&quot;id&quot;:&quot;topics_menu&quot;,&quot;title&quot;:&quot;Topics&quot;,&quot;icon&quot;:&quot;labels&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/projects/topics&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false},{&quot;id&quot;:&quot;snippets_menu&quot;,&quot;title&quot;:&quot;Snippets&quot;,&quot;icon&quot;:&quot;snippet&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/explore/snippets&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[],&quot;separated&quot;:false}],&quot;current_context_header&quot;:&quot;Explore&quot;,&quot;support_path&quot;:&quot;https://support.gitlab.com&quot;,&quot;display_whats_new&quot;:true,&quot;show_version_check&quot;:null,&quot;search&quot;:{&quot;search_context&quot;:{&quot;for_snippets&quot;:null}},&quot;panel_type&quot;:null,&quot;shortcut_links&quot;:[{&quot;title&quot;:&quot;Snippets&quot;,&quot;href&quot;:&quot;/explore/snippets&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-snippets&quot;},{&quot;title&quot;:&quot;Groups&quot;,&quot;href&quot;:&quot;/explore/groups&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-groups&quot;},{&quot;title&quot;:&quot;Projects&quot;,&quot;href&quot;:&quot;/explore/projects&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-projects&quot;}],&quot;has_terms&quot;:true,&quot;allow_signup&quot;:&quot;true&quot;,&quot;pinned_items&quot;:[],&quot;trial_registration_path&quot;:&quot;/-/trial_registrations/new&quot;}"></aside>
+
+<div class="broadcast-wrapper gl-rounded-lg gl-overflow-hidden">
+
+
+
+</div>
+<div class="panels-container gl-flex gl-gap-3">
+<div class="content-panels gl-flex-1 gl-w-full gl-flex gl-gap-0 gl-relative js-content-panels gl-@container/content-panels">
+<div class="paneled-view static-panel js-static-panel js-paneled-view content-wrapper">
+<div class="panel-header">
+<div class="panel-header-inner js-panel-header-inner">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Help","item":"https://gitlab.com/help"},{"@type":"ListItem","position":2,"name":"Help","item":"https://gitlab.com/help/instance_configuration"}]}
+
+
+</script>
+<div data-testid="breadcrumb-links" id="js-vue-page-breadcrumbs-wrapper">
+<div data-breadcrumbs-json="[{&quot;text&quot;:&quot;Help&quot;,&quot;href&quot;:&quot;/help&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;Help&quot;,&quot;href&quot;:&quot;/help/instance_configuration&quot;,&quot;avatarPath&quot;:null}]" id="js-vue-page-breadcrumbs"></div>
+<div id="js-injected-page-breadcrumbs"></div>
+</div>
+<div id="js-page-breadcrumbs-extra"></div>
+
+
+
+<div class="panel-header-inner-actions">
+
+
+<div class="panel-header-inner-actions-portal-target js-panel-actions-portal-target"></div>
+</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="panel-content-inner js-static-panel-inner">
+<div class="alert-wrapper alert-wrapper-top-space gl-flex gl-flex-col gl-gap-3 container-fluid container-limited">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="container-fluid container-limited ">
+<main class="content gl-@container/panel" id="content-body">
+<div id="js-drawer-container"></div>
+<div class="flash-container flash-container-page sticky" data-testid="flash-container">
+<div id="js-global-alerts"></div>
+</div>
+
+
+
+<div class="md gl-text-lg gl-mt-3">
+<h1>Instance Configuration</h1>
+<p>
+In this page you will find information about the settings that are used in your current instance.
+</p>
+
+
+
+
+
+
+
+<p>
+<strong>Table of contents</strong>
+<ul>
+<li>
+<a href="#ssh-host-keys-fingerprints">SSH host key fingerprints</a>
+</li>
+<li><a href="#gitlab-pages">GitLab Pages</a></li>
+<li><a href="#size-limits">Size Limits</a></li>
+<li><a href="#package-registry">Package registry</a></li>
+<li><a href="#rate-limits">Rate Limits</a></li>
+<li><a href="#files-api-rate-limits">Files API rate limits</a></li>
+<li><a href="#users-api-rate-limits">Users API rate limits</a></li>
+<li><a href="#groups-api-rate-limits">Groups API rate limits</a></li>
+<li><a href="#projects-api-rate-limits">Projects API rate limits</a></li>
+<li><a href="#audit-events-api-rate-limits">Audit events API rate limits</a></li>
+<li><a href="#ci-cd-limits">CI/CD limits</a></li>
+<li>
+<a href="#ai_gateway_url">AI gateway URL</a>
+</li>
+
+</ul>
+</p>
+<h2 id="ssh-host-keys-fingerprints">
+SSH host key fingerprints
+</h2>
+<p>
+Below are the fingerprints for the current instance SSH host keys.
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>
+Algorithm
+</th>
+<th>
+MD5
+</th>
+<th>
+SHA256
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECDSA</td>
+<td>
+<code>f1:d0:fb:46:73:7a:70:92:5a:ab:5d:ef:43:e2:1c:35</code>
+</td>
+<td>
+<code>SHA256:HbW3g8zUjNSksFbqTiUWPWg2Bq1x8xdGUrliXFzSnUw</code>
+</td>
+</tr>
+<tr>
+<td>ED25519</td>
+<td>
+<code>2e:65:6a:c8:cf:bf:b2:8b:9a:bd:6d:9f:11:5c:12:16</code>
+</td>
+<td>
+<code>SHA256:eUXGGm1YGsMAS7vkcx6JOJdOGHPem5gQp4taiCfCLB8</code>
+</td>
+</tr>
+<tr>
+<td>RSA</td>
+<td>
+<code>b6:03:0e:39:97:9e:d0:e7:24:ce:a3:77:3e:01:42:09</code>
+</td>
+<td>
+<code>SHA256:ROQFvPThGrW4RuWLoL9tq9I9zJ42fK4XywyRtbOz/EQ</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="gitlab-pages">
+GitLab Pages
+</h2>
+<p>
+Below are the settings for <a target="_blank" rel="noopener noreferrer" href="https://gitlab.io">GitLab Pages</a>.
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Gitlab.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain Name</td>
+<td>
+<code>gitlab.io</code>
+</td>
+</tr>
+<tr>
+<td>IP Address</td>
+<td>
+<code>172.67.173.75</code>
+</td>
+</tr>
+<tr>
+<td>Port</td>
+<td>
+<code>443</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="size-limits">
+Size Limits
+</h2>
+<p>
+There are several size limits in place.
+</p>
+<div class="table-responsive"></div>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Gitlab.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum attachment size</td>
+<td>100 MiB</td>
+</tr>
+<tr>
+<td>Maximum push size</td>
+<td>4.883 GiB</td>
+</tr>
+<tr>
+<td>Maximum export size</td>
+<td>40 GiB</td>
+</tr>
+<tr>
+<td>Maximum import size</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>Maximum diff patch size</td>
+<td>200 KiB</td>
+</tr>
+<tr>
+<td>Maximum job artifact size</td>
+<td>1000 MiB</td>
+</tr>
+<tr>
+<td>Maximum page size</td>
+<td>1000 MiB</td>
+</tr>
+<tr>
+<td>Maximum snippet size</td>
+<td>50 MiB</td>
+</tr>
+<tr>
+<td>Maximum import remote file size (MiB)</td>
+<td>10 GiB</td>
+</tr>
+<tr>
+<td>Maximum download file size (MiB)</td>
+<td>5 GiB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="package-registry">
+Package registry
+</h2>
+<p>
+There are several file size limits in place for the package registry.
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Package type</th>
+<th>Default</th>
+<th>Early_adopter</th>
+<th>Bronze</th>
+<th>Silver</th>
+<th>Gold</th>
+<th>Free</th>
+<th>Ultimate_trial</th>
+<th>Premium_trial</th>
+<th>Opensource</th>
+<th>Premium</th>
+<th>Ultimate</th>
+<th>Ultimate_trial_paid_customer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conan</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+<td>5 MiB</td>
+</tr>
+<tr>
+<td>Maven</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>npm</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>NuGet</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>PyPI</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+<tr>
+<td>Terraform Module</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+<td>1 GiB</td>
+</tr>
+<tr>
+<td>Generic</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+<td>5 GiB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="rate-limits">
+Rate Limits
+</h2>
+<p>
+There are several rate limits in place to protect the system.
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unauthenticated requests</td>
+<td>500</td>
+<td>60</td>
+</tr>
+
+
+
+
+<tr>
+<td>Package registry: unauthenticated API requests</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+<h2 id="files-api-rate-limits">Files API rate limits</h2>
+<p>
+Rate limits for Repository files API endpoints.
+<a href="/help/rate_limits/api/repository-files.md">Learn more.</a>
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repository files API (Unauthenticated)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+<h2 id="users-api-rate-limits">Users API rate limits</h2>
+<p>
+Rate limits for specific Users API endpoints.
+<a href="/help/rate_limits/api/users.md">Learn more.</a>
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+<h2 id="groups-api-rate-limits">Groups API rate limits</h2>
+<p>
+Rate limits for specific Groups API endpoints.
+<a href="/help/rate_limits/api/groups.md">Learn more.</a>
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+<h2 id="projects-api-rate-limits">Projects API rate limits</h2>
+<p>
+Rate limits for specific Projects API endpoints.
+<a href="/help/rate_limits/api/projects.md">Learn more.</a>
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+<h2 id="audit-events-api-rate-limits">Audit events API rate limits</h2>
+<p>
+Rate limits for the audit events API.
+<a href="/help/administration/settings/rate-limit-on-audit-events-api.md">Learn more.</a>
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Rate limit</th>
+<th>Requests per period</th>
+<th>Period in seconds</th>
+</tr>
+</thead>
+<tbody>
+
+
+
+</tbody>
+</table>
+</div>
+<br>
+<h2 id="ci-cd-limits">
+CI/CD limits
+</h2>
+<p>
+There are several CI/CD limits in place.
+</p>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Default</th>
+<th>Early adopter</th>
+<th>Bronze</th>
+<th>Silver</th>
+<th>Gold</th>
+<th>Free</th>
+<th>Ultimate trial</th>
+<th>Premium trial</th>
+<th>Opensource</th>
+<th>Premium</th>
+<th>Ultimate</th>
+<th>Ultimate trial paid customer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum number of jobs in a single pipeline</td>
+<td>-</td>
+<td>1000</td>
+<td>1000</td>
+<td>1500</td>
+<td>2000</td>
+<td>500</td>
+<td>1000</td>
+<td>1000</td>
+<td>2000</td>
+<td>1500</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>Total number of jobs in currently active pipelines</td>
+<td>-</td>
+<td>1000</td>
+<td>500</td>
+<td>10000</td>
+<td>60000</td>
+<td>500</td>
+<td>1000</td>
+<td>1000</td>
+<td>60000</td>
+<td>20000</td>
+<td>60000</td>
+<td>60000</td>
+</tr>
+<tr>
+<td>Maximum number of pipeline subscriptions to and from a project</td>
+<td>-</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Maximum number of pipeline schedules</td>
+<td>-</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>10</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Maximum number of needs dependencies that a job can have</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Maximum number of runners created or active in a group during the past seven days</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>50</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>Maximum number of runners created or active in a project during the past seven days</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>50</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="ai_gateway_url">
+AI gateway URL
+</h2>
+<p>
+AI Gateway URL:
+<a target="_blank" rel="noopener noreferrer" href="https://cloud.gitlab.com/ai">https://cloud.gitlab.com/ai</a>
+</p>
+
+</div>
+
+
+</main>
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+<div class="paneled-view-portal" id="contextual-panel-portal"></div>
+</div>
+</div>
+
+
+</div>
+
+
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+if ('loading' in HTMLImageElement.prototype) {
+  document.querySelectorAll('img.lazy').forEach(img => {
+    img.loading = 'lazy';
+    let imgUrl = img.dataset.src;
+    // Only adding width + height for avatars for now
+    // Keep this logic in sync with appendWidthToAvatarUrl in
+    // app/assets/javascripts/vue_shared/components/user_avatar/utils.js
+    if (imgUrl.indexOf('/avatar/') > -1 && !imgUrl.includes('width=')) {
+      const targetWidth = img.getAttribute('width') || img.width;
+      imgUrl += imgUrl.includes('?') ? `&width=${targetWidth}` : `?width=${targetWidth}`;
+    }
+    img.src = imgUrl;
+    img.removeAttribute('data-src');
+    img.classList.remove('lazy');
+    img.classList.add('js-lazy-loaded');
+    img.dataset.testid = 'js-lazy-loaded-content';
+  });
+}
+
+//]]>
+</script>
+<script nonce="UdVtKPFi1tIneVEGKT1nyg==">
+//<![CDATA[
+gl = window.gl || {};
+gl.experiments = {};
+
+
+//]]>
+</script>
+
+</body>
+</html>
+

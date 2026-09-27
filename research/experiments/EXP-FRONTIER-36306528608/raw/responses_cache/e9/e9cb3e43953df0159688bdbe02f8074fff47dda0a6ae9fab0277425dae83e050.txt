@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="ReqRes started as a weekend project to stop copy-pasting JSON. It now serves billions of API requests a month for hundreds of thousands of developers."
+        />
+        <title>About | Our story and infrastructure | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/about"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="About ReqRes"
+        />
+        <meta
+            property="og:description"
+            content="ReqRes started as a weekend project to stop copy-pasting JSON. It now serves billions of API requests a month for hundreds of thousands of developers."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/about"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="About ReqRes"
+        />
+        <meta
+            name="twitter:description"
+            content="ReqRes started as a weekend project to stop copy-pasting JSON. It now serves billions of API requests a month for hundreds of thousands of developers."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link is-active"
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 is-active"
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<section class="relative overflow-hidden bg-black text-white">
+    <div
+        class="absolute inset-0 bg-[radial-gradient(80%_80%_at_50%_15%,rgba(99,102,241,0.18)_0%,rgba(0,0,0,0)_60%)]"
+    ></div>
+    <div class="relative max-w-3xl mx-auto px-6 md:px-8 py-14 md:py-20">
+        <h1
+            class="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1]"
+        >
+            About ReqRes
+        </h1>
+        <p class="mt-5 text-lg md:text-xl text-white/80 leading-relaxed">
+            ReqRes is a hosted fake REST API that gives developers real, ready-to-use
+            endpoints to build and test against, without standing up a backend.
+        </p>
+        <p class="mt-4 text-white/55">
+            Built by a developer who got tired of rebuilding the same backend for every project.
+        </p>
+    </div>
+</section>
+
+<!-- WHAT REQRES DOES -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+            What ReqRes does
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            A real API, without the backend
+        </h2>
+        <div class="mt-8 space-y-6">
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Real REST endpoints</h3>
+                <p class="text-white/70 leading-relaxed">
+                    GET, POST, PUT, PATCH and DELETE endpoints that return realistic JSON with proper
+                    HTTP status codes. Your code exercises real request and response behaviour, not a static fixture.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Your own persistent data</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Create custom collections with data that persists between sessions. Prototype a whole app
+                    against a real backend you never had to build or deploy.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Auth testing</h3>
+                <p class="text-white/70 leading-relaxed">
+                    <code class="text-emerald-300/90">/api/login</code> and
+                    <code class="text-emerald-300/90">/api/register</code> return tokens on success and 400s on
+                    missing fields, so you can build and test real login flows and their error states.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Request logs</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Inspect every request and response for up to 30 days. See exactly what your app sent and
+                    what came back, so debugging an integration takes minutes, not guesswork.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Latency and error simulation</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Add <code class="text-emerald-300/90">?delay=3</code> to any request to test loading states,
+                    or hit the error endpoints to exercise your failure and retry handling.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT MAKES REQRES DIFFERENT -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+            What makes ReqRes different
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            Why developers reach for ReqRes
+        </h2>
+        <div class="mt-8 space-y-6">
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">A real hosted API, not a static mock</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Unlike JSONPlaceholder, ReqRes returns realistic CRUD behaviour, persistent custom data and
+                    real auth flows, so your tests hit something that behaves like a genuine backend.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Nothing to install or host</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Unlike self-hosted tools such as WireMock, JSON Server or Mockoon, there is no server to run,
+                    maintain or keep alive. ReqRes has been hosted and available since 2014.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Data that persists</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Where most fake APIs give you throwaway responses, ReqRes lets you create collections that
+                    stick around, so you can build stateful flows rather than restart from zero each run.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Built-in request logs</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Hosted mocks like Beeceptor and Postman's mock server rarely give you a full debugging trail.
+                    ReqRes records every request and response so you can see what actually happened.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Free, and month-to-month</h3>
+                <p class="text-white/70 leading-relaxed">
+                    A genuine free tier, with paid plans from $5/month and no contracts. Upgrade, downgrade or
+                    cancel any time, versus the annual licensing typical of enterprise mock services.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO USES REQRES -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+            Who uses ReqRes
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            Built for developers who need an API right now
+        </h2>
+        <ul class="mt-8 space-y-3 text-white/70 leading-relaxed">
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>Frontend developers building UIs that need a realistic API to hit</span></li>
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>Mobile developers on Flutter, React Native, iOS and Android</span></li>
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>QA and test-automation engineers using Playwright, Cypress, REST Assured and Postman</span></li>
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>Educators, bootcamps and course creators teaching APIs and HTTP</span></li>
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>Teams that need a stable API to run against in CI pipelines</span></li>
+            <li class="flex gap-3"><span class="text-emerald-400 mt-1">&#8226;</span><span>Used day to day by developers at companies including IBM, Adobe and Capgemini</span></li>
+        </ul>
+    </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8 space-y-6">
+        <p
+            class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold"
+        >
+            The story
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            From side project to production infrastructure
+        </h2>
+        <div class="mt-6 space-y-5 text-white/70 leading-relaxed">
+            <p>
+                ReqRes started in 2014 as a free REST API for developers. What began as a testing tool has grown into a full backend platform. It was a side project built to solve a personal annoyance: every tutorial and test suite needed a real API to hit, and there wasn't a good free one.
+            </p>
+            <p>
+                It grew organically through developer tutorials, courses, and documentation. No marketing budget, no launch campaign. Developers found it, used it, and linked to it.
+            </p>
+            <p>
+                A small Easter egg from those early days: the sample users are named after Arrested Development characters (Eve Holt is Steve Holt's mother, who appears in the show only as a yearbook photo), and the demo passwords are nicknames from the film I Love You, Man. An inside joke from 2014, now typed by millions of developers learning how to log in.
+            </p>
+            <p>
+                Over time it became clear that what developers actually needed wasn't a fake API. It was a real backend they didn't have to build. The same CRUD + auth pattern, over and over, for every new project.
+            </p>
+            <p>
+                The current version of ReqRes is that real backend: collections, auth, logs, and a database from a single URL. No servers, no deployment, no infrastructure to manage.
+            </p>
+        </div>
+        <div class="mt-10 pt-8 border-t border-white/10">
+            <p class="text-2xl md:text-3xl font-semibold tracking-tight">
+                <span class="text-emerald-400">Billions</span> of successful API responses every month, since 2014.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- WHO BUILT THIS -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8 space-y-6">
+        <p
+            class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold"
+        >
+            The team behind ReqRes
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-6 items-start">
+            <!-- [PLACEHOLDER: Add Ben's headshot image to /public/img/ben-howdle.jpeg] -->
+            <img
+                src="/img/ben-howdle.jpeg"
+                alt="Ben Howdle, founder of ReqRes"
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border border-white/10 flex-shrink-0"
+            />
+            <div class="space-y-4">
+                <p class="text-white/70 leading-relaxed">
+                    Ben Howdle is a two-time startup CTO with 15 years of experience building products for companies including Clerk, GoDaddy, Cisco, Soho House, and MyTheresa. He's been featured in Fast Company and the Wall Street Journal. He currently runs ReqRes, authored The First CTO playbook, and operates from the UK.
+                </p>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a
+                        href="https://www.linkedin.com/in/ben-howdle/"
+                        class="text-white/50 hover:text-white transition"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        LinkedIn
+                    </a>
+                    <a
+                        href="https://github.com/benhowdle89"
+                        class="text-white/50 hover:text-white transition"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+                    <a
+                        href="https://benhowdle.im"
+                        class="text-white/50 hover:text-white transition"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Personal site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FROM THE CREATOR -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
+            <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+                From the creator
+            </p>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">
+                The First CTO: The Job Nobody Explains
+            </h3>
+            <p class="mt-3 text-white/70 leading-relaxed">
+                Ben also wrote a playbook for first-time CTOs at early-stage startups. War stories, hard lessons, and practical templates from 5 years in the seat.
+            </p>
+            <a
+                href="https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=about&utm_campaign=launch"
+                class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Read more
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- HOW REQRES WORKS / INFRASTRUCTURE & TRUST -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p
+            class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold"
+        >
+            How ReqRes works
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            Self-serve, from your first request
+        </h2>
+        <p class="mt-4 text-white/70 leading-relaxed">
+            Sign up for a free account, grab your API key, and send it in the
+            <code class="text-emerald-300/90">x-api-key</code> header on each request. Everything is self-serve,
+            with no sales call. Free to start, paid plans from $5/month lift your limits and unlock logs and
+            persistent data, and every message to <a href="mailto:hello@reqres.in" class="underline decoration-white/30 underline-offset-2 hover:decoration-white/60">hello@reqres.in</a> gets a reply.
+        </p>
+        <div
+            class="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8 space-y-8"
+        >
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-white/90 uppercase tracking-wide">
+                    Hosting & Data
+                </h3>
+                <p class="text-white/70 leading-relaxed">
+                    ReqRes runs on Heroku in the US region, fronted by Cloudflare for global edge caching, DDoS protection, and performance. Data is stored in PostgreSQL with per-project isolation. Backups run daily.
+                </p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-white/90 uppercase tracking-wide">
+                    Uptime
+                </h3>
+                <p class="text-white/70 leading-relaxed">
+                    ReqRes has maintained consistent availability since 2014. Cloudflare provides always-on DDoS mitigation and global load balancing. Infrastructure is monitored around the clock with automated alerting.
+                </p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-white/90 uppercase tracking-wide">
+                    Security
+                </h3>
+                <p class="text-white/70 leading-relaxed">
+                    All traffic is routed through Cloudflare with TLS 1.3, WAF protection, and bot mitigation. API keys are hashed at rest. Project data is isolated per account. Auth tokens are signed and validated server-side.
+                </p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-white/90 uppercase tracking-wide">
+                    Scale
+                </h3>
+                <p class="text-white/70 leading-relaxed">
+                    ReqRes handles billions of API requests a month across thousands of active projects, from a global developer audience.
+                </p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-white/90 uppercase tracking-wide">
+                    Privacy
+                </h3>
+                <p class="text-white/70 leading-relaxed">
+                    Your data belongs to you. ReqRes doesn't sell data, doesn't run analytics on your content, and doesn't share project data with third parties.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KEY FACTS (crawlable) -->
+<section class="py-16 md:py-20 bg-black text-white" id="about-keyfacts">
+    <style>
+        #about-keyfacts .kf { width: 100%; border-collapse: collapse; }
+        #about-keyfacts .kf th,
+        #about-keyfacts .kf td {
+            text-align: left; vertical-align: top;
+            padding: 11px 0; border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px; line-height: 1.55;
+        }
+        #about-keyfacts .kf th {
+            color: rgba(255,255,255,0.5); font-weight: 500; width: 40%;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            padding-right: 16px; white-space: nowrap;
+        }
+        #about-keyfacts .kf td { color: rgba(255,255,255,0.88); }
+        @media (max-width: 560px) {
+            #about-keyfacts .kf th { width: 46%; white-space: normal; }
+        }
+    </style>
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+            Key facts
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            ReqRes at a glance
+        </h2>
+        <div class="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8 overflow-x-auto">
+            <table class="kf">
+                <tbody>
+                    <tr><th scope="row">Company name</th><td>ReqRes</td></tr>
+                    <tr><th scope="row">Type</th><td>Hosted fake / mock REST API (freemium SaaS)</td></tr>
+                    <tr><th scope="row">Founded</th><td>2014</td></tr>
+                    <tr><th scope="row">Founder</th><td>Ben Howdle</td></tr>
+                    <tr><th scope="row">Headquarters</th><td>United Kingdom</td></tr>
+                    <tr><th scope="row">Website</th><td>reqres.in</td></tr>
+                    <tr><th scope="row">Core offering</th><td>Hosted REST API for testing, prototyping and learning, with real endpoints, persistent data, auth and request logs</td></tr>
+                    <tr><th scope="row">Pricing</th><td>Free tier; paid plans from $5/month</td></tr>
+                    <tr><th scope="row">Contract terms</th><td>Month-to-month, cancel any time (no contracts)</td></tr>
+                    <tr><th scope="row">Communication</th><td>Email: hello@reqres.in</td></tr>
+                    <tr><th scope="row">Notable users</th><td>Developers at IBM, Adobe and Capgemini; referenced in open-source projects including Sinon.js</td></tr>
+                    <tr><th scope="row">Reach</th><td>75,000+ registered developers, 25,000+ monthly active, across 400+ organisations</td></tr>
+                    <tr><th scope="row">Requests served</th><td>Billions per month, since 2014</td></tr>
+                    <tr><th scope="row">Competitors</th><td>JSONPlaceholder, Mockoon, WireMock, JSON Server, Beeceptor, Postman Mock Server</td></tr>
+                    <tr><th scope="row">Social</th><td>LinkedIn: /in/ben-howdle &middot; GitHub: /benhowdle89</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <p class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold">
+            FAQ
+        </p>
+        <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
+            Frequently asked questions
+        </h2>
+        <div class="mt-8 space-y-6">
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Is ReqRes free?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Yes. There is a free tier you can use straight away. Paid plans start at $5/month and add
+                    higher limits, request logs and persistent custom data.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Do I need an API key?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Yes, a free API key. Sign up for an account, grab your key, and send it in the
+                    <code class="text-emerald-300/90">x-api-key</code> header on each request.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Can I create my own data and endpoints?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    Yes. Custom collections let you define your own data that persists between sessions, so you
+                    can build a whole app against a backend you didn't have to write.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Can I use ReqRes in production?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    No. ReqRes is built for testing, prototyping and learning. For production traffic you should
+                    run your own backend or a production-grade service.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">What are the rate limits?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    The free tier has a daily request limit that is plenty for learning and light testing. Paid
+                    plans raise it substantially for heavier test suites and CI use.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-lg font-semibold tracking-tight">Who is Eve Holt?</h3>
+                <p class="text-white/70 leading-relaxed">
+                    The internet's favourite fake test user, <code class="text-emerald-300/90">eve.holt@reqres.in</code>,
+                    and one of ReqRes's original sample users since 2014. She's a deep-cut Arrested Development reference:
+                    Eve Holt, Steve Holt's mother, who had a brief high-school fling with G.O.B. and appears in the show only as a yearbook photo.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="py-16 md:py-20 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8 space-y-4">
+        <p
+            class="text-[11px] tracking-[0.24em] uppercase text-white/45 font-semibold"
+        >
+            Contact
+        </p>
+        <p class="text-white/70 leading-relaxed">
+            Questions, feedback, or something broken? Email
+            <a
+                href="mailto:hello@reqres.in"
+                class="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white/60 transition"
+            >hello@reqres.in</a>.
+        </p>
+        <p class="text-white/50 text-sm">
+            I reply to every message.
+        </p>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 md:py-24 bg-black text-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-8 text-center space-y-6">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">
+            Ready to build?
+        </h2>
+        <p class="text-white/70">
+            Create a free project and ship your first endpoint in minutes.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mt-6">
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center justify-center rounded-xl bg-white text-black px-6 py-3 text-sm font-semibold shadow-sm hover:bg-white/90 motion-safe:transition motion-safe:duration-200"
+            >
+                Create your backend
+                <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a
+                href="https://app.reqres.in/examples/notes-app"
+                class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 motion-safe:transition motion-safe:duration-200"
+            >
+                See an example app
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Structured data: Organization + FAQPage (machine-readable ground truth) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ReqRes",
+  "url": "https://reqres.in",
+  "description": "ReqRes is a hosted fake REST API that gives developers real, ready-to-use endpoints to build and test against, without standing up a backend.",
+  "foundingDate": "2014",
+  "founder": { "@type": "Person", "name": "Ben Howdle", "url": "https://benhowdle.im" },
+  "email": "hello@reqres.in",
+  "sameAs": [
+    "https://www.linkedin.com/in/ben-howdle/",
+    "https://github.com/benhowdle89",
+    "https://benhowdle.im"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is ReqRes free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is a free tier you can use straight away. Paid plans start at $5/month and add higher limits, request logs and persistent custom data." } },
+    { "@type": "Question", "name": "Do I need an API key?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, a free API key. Sign up for an account, grab your key, and send it in the x-api-key header on each request." } },
+    { "@type": "Question", "name": "Can I create my own data and endpoints?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Custom collections let you define your own data that persists between sessions, so you can build a whole app against a backend you did not have to write." } },
+    { "@type": "Question", "name": "Can I use ReqRes in production?", "acceptedAnswer": { "@type": "Answer", "text": "No. ReqRes is built for testing, prototyping and learning. For production traffic you should run your own backend or a production-grade service." } },
+    { "@type": "Question", "name": "What are the rate limits?", "acceptedAnswer": { "@type": "Answer", "text": "The free tier has a daily request limit that is plenty for learning and light testing. Paid plans raise it substantially for heavier test suites and CI use." } },
+    { "@type": "Question", "name": "Who is Eve Holt?", "acceptedAnswer": { "@type": "Answer", "text": "The internet's favourite fake test user, eve.holt@reqres.in, and one of ReqRes's original sample users since 2014. She is a deep-cut Arrested Development reference: Eve Holt, Steve Holt's mother, who had a brief high-school fling with G.O.B. and appears in the show only as a yearbook photo." } }
+  ]
+}
+</script>
+
+<footer class="py-10 border-t border-white/5 text-sm text-white/60">
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+        <a href="/" class="flex items-center gap-2.5 group">
+            <div class="w-[32px] h-[32px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[14px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+            <span class="text-[15px] font-medium text-white/70 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+        </a>
+        <div class="flex flex-wrap gap-6 text-white/60 text-xs">
+            <a
+                href="/docs"
+                class="hover:text-white transition"
+                data-visitors-event="Docs CTA"
+                data-visitors-source="footer"
+                >Docs</a
+            >
+            <a
+                href="/about"
+                class="hover:text-white transition"
+                >About</a
+            >
+            <a
+                href="/commercial"
+                class="hover:text-white transition"
+                data-visitors-event="Commercial CTA"
+                data-visitors-source="site-footer"
+                >For companies</a
+            >
+            <a
+                href="/sponsor"
+                class="hover:text-white transition"
+                data-visitors-event="Sponsorship CTA"
+                data-visitors-source="site-footer"
+                >Sponsorship</a
+            >
+            <a
+                href="mailto:hello@reqres.in"
+                class="hover:text-white transition"
+                >Support</a
+            >
+        </div>
+        <div class="text-white/50 text-xs text-center md:text-right">
+            <div>&copy; 2026 ReqRes. Frontend-first backend.</div>
+            <div class="mt-1">
+                Made by
+                <a
+                    href="https://benhowdle.im"
+                    class="underline decoration-white/30 underline-offset-2 hover:text-white/70 hover:decoration-white/50 transition"
+                    >Ben Howdle</a
+                >
+                &middot; Author of
+                <a
+                    href="https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=footer&utm_campaign=launch"
+                    class="underline decoration-white/30 underline-offset-2 hover:text-white/70 hover:decoration-white/50 transition"
+                    >The First CTO</a
+                >
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

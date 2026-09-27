@@ -1,0 +1,259 @@
+{
+ "experiment_id": "EXP-FRONTIER-36306528608",
+ "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+ "python": "3.12.14",
+ "stages": {
+  "stage1_calibration": {
+   "calibration_pass": false,
+   "calibration_site": "https://httpbin.org/forms/post",
+   "criteria": {
+    "C1": {
+     "actionable_links": 0,
+     "forms_found": 1,
+     "links_found": 0,
+     "pass": true,
+     "reason": "1 <form> element(s), 0 <a> href(s) (0 non-asset) in the root observation"
+    },
+    "C2": {
+     "by_type": {},
+     "objects_detected": 0,
+     "pass": false,
+     "reason": "0 action-gating object(s) detected (threshold 3); by gating_type: {}",
+     "state_or_session_objects": 0,
+     "threshold": 3
+    },
+    "C3": {
+     "nonget_forms": 1,
+     "nonget_forms_with_token_named_input": 0,
+     "pass": false,
+     "reason": "0 form(s) declare a non-GET verb AND an input named csrf|token|nonce|_token; token field names seen: none",
+     "token_field_names": []
+    },
+    "C4": {
+     "deep_objects": 0,
+     "max_depth_reached": 0,
+     "pass": false,
+     "reason": "0 action-gating object(s) sit at BFS depth >= 2 from the root; BFS reached depth 0"
+    },
+    "C5": {
+     "hash_differs_count": 0,
+     "pass": false,
+     "probes": 1,
+     "reason": "0/1 same-URL repeat GETs returned a different body sha256 within one session; 0 of those pages also set a cookie (strict state-dependent variant)",
+     "strict_pass_cookie_and_differs": false,
+     "strict_pass_urls": []
+    },
+    "C6": {
+     "content_type": "text/html; charset=utf-8",
+     "error": null,
+     "is_html": true,
+     "pass": true,
+     "reachable": true,
+     "status_code": 200
+    },
+    "C7": {
+     "authorization_header_sent": false,
+     "final_url": "https://httpbin.org/forms/post",
+     "login_wall_detected": false,
+     "pass": true,
+     "reason": "root reachable with no Authorization header and no login redirect"
+    }
+   },
+   "http_requests": 2,
+   "objects_detected": 0,
+   "root_form_input_names": [
+    "comments",
+    "custemail",
+    "custname",
+    "custtel",
+    "delivery",
+    "size",
+    "topping"
+   ]
+  },
+  "stage2_screen": {
+   "candidates_reachable": 14,
+   "candidates_screened": 15,
+   "candidates_unreachable": 1,
+   "min_required": 3,
+   "per_criterion_pass_counts": {
+    "C1": 13,
+    "C2": 4,
+    "C3": 2,
+    "C4": 4,
+    "C5": 2,
+    "C6": 14,
+    "C7": 14
+   },
+   "per_criterion_pass_urls": {
+    "C1": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ],
+    "C2": [
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ],
+    "C3": [
+     "https://en.wikipedia.org",
+     "https://gitlab.com"
+    ],
+    "C4": [
+     "https://reqres.in",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://bitbucket.org"
+    ],
+    "C5": [
+     "https://postman-echo.com",
+     "https://bitbucket.org"
+    ],
+    "C6": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://postman-echo.com",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ],
+    "C7": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://postman-echo.com",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ]
+   },
+   "qualifying_count": 0,
+   "qualifying_urls": [],
+   "unreachable_urls": [
+    "https://api.publicapis.org"
+   ]
+  },
+  "stage3_objects": {
+   "denominator_unit": "count of action-gating spans",
+   "identifiers_detected_total": 1690,
+   "numerator_unit": "count of action-gating spans re-derivable from one unconditional GET of the root observation",
+   "per_site": [
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://httpbin.org"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://httpbin.org/forms/post"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://httpbin.org/cookies/set"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://httpbin.org/post"
+    },
+    {
+     "n_action_gating_spans": 1,
+     "n_rederivable_spans": 1,
+     "rederivable_fraction_site": 1.0,
+     "site": "https://postman-echo.com"
+    },
+    {
+     "n_action_gating_spans": 1,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": 0.0,
+     "site": "https://reqres.in"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://jsonplaceholder.typicode.com"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://developer.mozilla.org"
+    },
+    {
+     "n_action_gating_spans": 3,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": 0.0,
+     "site": "https://docs.python.org"
+    },
+    {
+     "n_action_gating_spans": 8,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": 0.0,
+     "site": "https://en.wikipedia.org"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://example.com"
+    },
+    {
+     "n_action_gating_spans": 0,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": null,
+     "site": "https://github.com"
+    },
+    {
+     "n_action_gating_spans": 3,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": 0.0,
+     "site": "https://gitlab.com"
+    },
+    {
+     "n_action_gating_spans": 9,
+     "n_rederivable_spans": 0,
+     "rederivable_fraction_site": 0.0,
+     "site": "https://bitbucket.org"
+    }
+   ],
+   "pooled_rederivable_fraction": 0.04,
+   "sites_with_objects": 14,
+   "total_action_gating_spans": 25,
+   "total_rederivable_spans": 1
+  }
+ }
+}

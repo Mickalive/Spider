@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReqRes | The staging internet for agents</title>
+<meta name="description" content="A deterministic HTTP world where AI agents practice: seeded data, 15 deliberate failure modes, scripted chains, replayable trajectories. Same seed, byte-identical responses.">
+<link rel="icon" type="image/png" href="/img/logo-dark.jpg">
+<link rel="canonical" href="https://reqres.in/agents">
+<meta property="og:title" content="ReqRes | The staging internet for agents">
+<meta property="og:description" content="Seeded data, deliberate failures, byte-identical replays. The safe place for agents to break things before production.">
+<meta property="og:url" content="https://reqres.in/agents">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ReqRes">
+<meta property="og:image" content="https://reqres.in/img/reqres-og-2x.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ReqRes | The staging internet for agents">
+<meta name="twitter:description" content="Seeded data, deliberate failures, byte-identical replays. The safe place for agents to break things before production.">
+<meta name="twitter:image" content="https://reqres.in/img/reqres-og-2x.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ReqRes for Agents",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://reqres.in/agents",
+  "description": "A deterministic HTTP sandbox where AI agents practice real API work: seeded fixtures, 15 deliberate failure scenarios, scripted chains, a simulated payments API, and replayable trajectory logs. Same seed and world version return byte-identical responses.",
+  "offers": [
+    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Agent Developer", "price": "49", "priceCurrency": "USD" }
+  ],
+  "provider": { "@type": "Organization", "name": "ReqRes", "url": "https://reqres.in" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F1;
+    --ink:#14161A;
+    --ink-soft:#4A4F58;
+    --card:#FFFFFF;
+    --line:#DCDED6;
+    --amber:#FFB300;
+    --amber-deep:#8A5B00;
+    --blue:#2049C7;
+    --pass:#1C7C4A;
+    --green:#059669;
+    --fail:#B3261E;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    --disp:'Archivo', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--amber);color:var(--ink)}
+
+  /* ---------- hazard strip ---------- */
+  .tape{
+    height:10px;
+    background:repeating-linear-gradient(-45deg, var(--ink) 0 14px, var(--amber) 14px 28px);
+  }
+  .tape-note{
+    background:var(--ink);
+    color:#C9CCD2;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:7px 24px;
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .tape-note b{color:var(--amber);font-weight:500}
+  .tape-note span:last-child{display:none}
+  @media(min-width:720px){ .tape-note span:last-child{display:inline} }
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;border-bottom:1px solid var(--line);
+    max-width:1200px;margin:0 auto;
+  }
+  .logo{font-family:var(--disp);font-weight:900;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+  .rbadge{width:28px;height:28px;flex:none;border-radius:8px;border:1.5px solid var(--ink);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:2px 2px 0 var(--amber)}
+  .logo .res{color:var(--green)}
+  .checker{width:16px;height:16px;flex:none;background:
+    conic-gradient(var(--ink) 0 25%, var(--amber) 0 50%, var(--ink) 0 75%, var(--amber) 0 100%);}
+  .logo em{font-style:normal;font-family:var(--mono);font-weight:500;font-size:11px;color:var(--amber-deep);border:1px solid var(--amber-deep);padding:2px 6px;letter-spacing:.06em}
+  nav .links{display:none;gap:26px;font-size:14px;font-weight:500}
+  nav .links a{color:var(--ink-soft);text-decoration:none}
+  nav .links a:hover{color:var(--ink)}
+  @media(min-width:860px){ nav .links{display:flex} }
+  .btn{
+    font-family:var(--sans);font-weight:600;font-size:14px;
+    padding:10px 18px;border:1.5px solid var(--ink);
+    background:var(--ink);color:#fff;text-decoration:none;
+    cursor:pointer;display:inline-block;
+  }
+  .btn:hover{background:var(--blue);border-color:var(--blue)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+  .btn.amber{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+  .btn.amber:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;gap:48px;padding:72px 0 64px;align-items:start}
+  @media(min-width:980px){ .hero{grid-template-columns:1.05fr 1fr;gap:56px;padding:96px 0 88px} }
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--amber-deep);display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:12px;height:12px;background:
+    conic-gradient(var(--ink) 0 25%, var(--amber) 0 50%, var(--ink) 0 75%, var(--amber) 0 100%);}
+  h1{
+    font-family:var(--disp);font-weight:900;
+    font-size:clamp(40px, 6.2vw, 72px);
+    line-height:.98;letter-spacing:-.03em;
+    text-transform:uppercase;
+  }
+  h1 .u{box-shadow:inset 0 -0.28em 0 var(--amber)}
+  .hero p.lede{
+    margin-top:26px;font-size:18px;color:var(--ink-soft);max-width:52ch;
+  }
+  .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .proof{
+    margin-top:40px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);
+    display:flex;flex-wrap:wrap;gap:8px 26px;
+  }
+  .hero .proof b{color:var(--ink);font-weight:600}
+
+  /* ---------- replay terminal (signature) ---------- */
+  .rig{position:relative}
+  .rig::before,.rig::after{
+    content:"";position:absolute;width:22px;height:22px;border:2.5px solid var(--ink);
+  }
+  .rig::before{top:-10px;left:-10px;border-right:none;border-bottom:none}
+  .rig::after{bottom:-10px;right:-10px;border-left:none;border-top:none}
+  .term{
+    background:var(--ink);color:#E8EAEE;
+    font-family:var(--mono);font-size:12.5px;line-height:1.6;
+    border:1.5px solid var(--ink);
+    box-shadow:8px 8px 0 var(--amber);
+  }
+  .term-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:9px 14px;border-bottom:1px solid #2A2E36;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A9099;
+  }
+  .term-head b{color:var(--amber);font-weight:500}
+  .term-body{padding:16px 16px 18px;min-height:305px}
+  .t-cmd{color:#fff}
+  .t-cmd::before{content:"$ ";color:var(--amber)}
+  .t-dim{color:#8A9099}
+  .t-key{color:#7FB0FF}
+  .t-str{color:#FFD54F}
+  .t-pass{color:#5CD695;font-weight:600}
+  .t-run{color:#8A9099;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:12px 0 4px}
+  .t-block{white-space:pre-wrap;word-break:break-all}
+  .caret{display:inline-block;width:7px;height:14px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .term-foot{
+    border-top:1px solid #2A2E36;padding:10px 14px;
+    font-size:11.5px;color:#8A9099;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:76px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+  h2{
+    font-family:var(--disp);font-weight:800;text-transform:uppercase;
+    font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;line-height:1.05;
+  }
+  .sec-tag{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep)}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- why ---------- */
+  .why{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(min-width:860px){ .why{grid-template-columns:repeat(3,1fr)} }
+  .why div{background:var(--card);padding:28px 26px}
+  .why h3{font-family:var(--disp);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px}
+  .why p{font-size:14.5px;color:var(--ink-soft)}
+  .why code{font-family:var(--mono);font-size:12.5px;background:var(--paper);padding:1px 5px;border:1px solid var(--line)}
+
+  /* ---------- failure wall ---------- */
+  .wall{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .cell{
+    background:var(--card);border:1px solid var(--line);padding:16px 16px 14px;
+    display:flex;flex-direction:column;gap:8px;position:relative;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cell:hover{transform:translateY(-3px);box-shadow:5px 5px 0 var(--amber)}
+  .cell .code{font-family:var(--disp);font-weight:900;font-size:30px;line-height:1;letter-spacing:-.02em}
+  .cell .code.c4{color:var(--amber-deep)}
+  .cell .code.c5{color:var(--fail)}
+  .cell .code.c2{color:var(--pass)}
+  .cell .code.c3{color:var(--blue)}
+  .cell .name{font-family:var(--mono);font-size:12.5px;font-weight:500}
+  .cell .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  .cell .tier{
+    position:absolute;top:12px;right:12px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:2px 6px;border:1px solid var(--line);color:var(--ink-soft);
+  }
+  .cell .tier.free{border-color:var(--pass);color:var(--pass)}
+  .wall-note{margin-top:22px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  .wall-note a{color:var(--blue)}
+
+  /* ---------- simulated services ---------- */
+  .svc{display:grid;gap:18px}
+  @media(min-width:900px){ .svc{grid-template-columns:1.3fr 1fr 1fr} }
+  .svc-card{background:var(--card);border:1px solid var(--line);padding:26px}
+  .svc-card.now{border:1.5px solid var(--ink);position:relative;overflow:hidden}
+  .svc-card.now::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:7px;
+    background:repeating-linear-gradient(-45deg, var(--ink) 0 10px, var(--amber) 10px 20px);
+  }
+  .svc-card .stage{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep);margin-bottom:12px}
+  .svc-card h3{font-family:var(--disp);font-weight:800;font-size:22px;text-transform:uppercase;margin-bottom:10px}
+  .svc-card p{font-size:14px;color:var(--ink-soft)}
+  .svc-card ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:7px}
+  .svc-card li{font-family:var(--mono);font-size:12.5px;padding-left:18px;position:relative}
+  .svc-card li::before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;
+    background:conic-gradient(var(--ink) 0 25%, var(--amber) 0 50%, var(--ink) 0 75%, var(--amber) 0 100%);}
+  .svc-card.q{opacity:.72}
+  .svc-legal{margin-top:16px;font-size:11.5px;color:var(--ink-soft);font-family:var(--mono)}
+
+  /* ---------- benchmark ---------- */
+  .bench{background:var(--ink);color:#E8EAEE;border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--amber);padding:34px 30px}
+  .bench h3{font-family:var(--disp);font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:6px}
+  .bench .sub{font-size:14px;color:#9BA1AA;max-width:60ch}
+  table{width:100%;border-collapse:collapse;margin-top:24px;font-family:var(--mono);font-size:13px}
+  th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A9099;font-weight:500;text-align:left;padding:0 12px 10px 0}
+  td{border-top:1px solid #2A2E36;padding:12px 12px 12px 0;color:#E8EAEE}
+  td.score{color:var(--amber);letter-spacing:.06em}
+  .bench-note{margin-top:20px;font-family:var(--mono);font-size:12px;color:#8A9099}
+  .bench-note b{color:var(--amber);font-weight:500}
+
+  /* ---------- pricing ---------- */
+  .price{display:grid;gap:18px}
+  @media(min-width:900px){ .price{grid-template-columns:repeat(3,1fr)} }
+  .plan{background:var(--card);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column}
+  .plan.hot{border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--amber)}
+  .plan .p-name{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep)}
+  .plan .p-cost{font-family:var(--disp);font-weight:900;font-size:38px;margin:10px 0 4px;letter-spacing:-.02em}
+  .plan .p-cost small{font-family:var(--sans);font-weight:500;font-size:14px;color:var(--ink-soft)}
+  .plan .p-for{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+  .plan li{font-size:13.5px;padding-left:20px;position:relative}
+  .plan li::before{content:"→";position:absolute;left:0;color:var(--amber-deep);font-family:var(--mono)}
+  .plan .btn{margin-top:auto;text-align:center}
+
+  /* ---------- partner cta ---------- */
+  .partner{
+    border:1.5px solid var(--ink);background:var(--card);
+    padding:40px 34px;display:grid;gap:26px;
+  }
+  @media(min-width:900px){ .partner{grid-template-columns:1.4fr 1fr;align-items:center} }
+  .partner h2{font-size:clamp(24px,3vw,34px)}
+  .partner p{margin-top:12px;color:var(--ink-soft);font-size:15px;max-width:56ch}
+  .partner .slots{font-family:var(--mono);font-size:12.5px;margin-top:16px;color:var(--amber-deep)}
+  .partner .side{display:flex;flex-direction:column;gap:12px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:36px 0 46px;margin-top:76px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot .links{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px}
+  .foot a{color:var(--ink-soft);text-decoration:none}
+  .foot a:hover{color:var(--blue)}
+  .foot .made{font-size:12.5px;color:var(--ink-soft)}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .caret{animation:none}
+    html{scroll-behavior:auto}
+    .cell,.cell:hover{transition:none;transform:none}
+  }
+  .dp-form{display:flex;flex-direction:column;gap:10px}
+  .dp-form input{font-family:var(--sans);font-size:14px;padding:11px 14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+  .dp-form input:focus{outline:none;border-color:var(--ink)}
+  .dp-form .btn{cursor:pointer;border:none}
+  .dp-msg{font-family:var(--mono);font-size:12px;margin:0;min-height:16px}
+  .dp-msg.ok{color:var(--pass)}
+  .dp-msg.err{color:var(--fail)}
+</style>
+</head>
+<body>
+
+<div class="tape" role="presentation"></div>
+<div class="tape-note">
+  <span><b>Simulated environment.</b> Every failure on this page is intentional.</span>
+  <span>seed=42 · deterministic · reqres.in/agent/v1</span>
+</div>
+
+<nav>
+  <a class="logo" href="/"><span class="rbadge" role="presentation">R</span><span>Req<span class="res">Res</span></span> <em>AGENTS</em></a>
+  <div class="links">
+    <a href="#world">The world</a>
+    <a href="#failures">Failure catalogue</a>
+    <a href="#trajectory">The log</a>
+    <a href="#services">Simulated services</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <a class="btn ghost" href="#pricing">Get an API key</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Built on 12 years · 150M requests/month</p>
+      <h1>The staging <span class="u">internet</span> for agents</h1>
+      <p class="lede">Real APIs are dangerous, rate-limited, and never the same twice. ReqRes is the deterministic world where your agent practices: seeded data, deliberate failures, byte-identical replays. The safe place to break things before production.</p>
+      <div class="cta">
+        <a class="btn amber" href="#pricing" data-ph="agent_get_key_clicked">Get an API key</a>
+        <a class="btn ghost" href="#partner">Become a design partner</a>
+      </div>
+      <p class="proof">
+        <span><b>curl</b>-able in 10 seconds</span>
+        <span><b>15</b> scripted failure modes</span>
+        <span>known to <b>every frontier model</b></span>
+      </p>
+    </div>
+
+    <div class="rig">
+      <div class="term" aria-label="Terminal demo: the same request returns byte-identical responses">
+        <div class="term-head"><span>determinism check</span><b>seed=42</b></div>
+        <div class="term-body" id="termBody">
+          <div class="t-block" id="termContent"></div><span class="caret" id="caret"></span>
+        </div>
+        <div class="term-foot">
+          <span>same seed → same world</span>
+          <span>run it yourself: <span style="color:#E8EAEE">curl "https://reqres.in/agent/v1/users?limit=1"</span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ WHY ============ -->
+  <section>
+    <div class="sec-head reveal">
+      <h2>Agents need a safe place to fail</h2>
+      <span class="sec-tag">Why this exists</span>
+    </div>
+    <div class="why reveal">
+      <div>
+        <h3>Production bites back</h3>
+        <p>An agent practicing retries against a real API is an incident waiting for a timestamp. Rate limits, real money, real customer data. None of it belongs in a training loop.</p>
+      </div>
+      <div>
+        <h3>Mocks rot</h3>
+        <p>Hand-rolled fixtures drift from reality the day you write them. ReqRes serves living, relational, versioned data (<code>users</code>, <code>orders</code>, <code>auth</code>), maintained so you never have to.</p>
+      </div>
+      <div>
+        <h3>Flaky tests teach nothing</h3>
+        <p>If the same request can return different bytes, your eval can't tell a model regression from network weather. Determinism makes agent failures reproducible, and therefore fixable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE WORLD ============ -->
+  <section id="world">
+    <div class="sec-head reveal">
+      <h2>A small world, fully specified</h2>
+      <span class="sec-tag">GET /agent/v1</span>
+    </div>
+    <div class="why reveal">
+      <div>
+        <h3>/users</h3>
+        <p>Cursor pagination, ULIDs, 20+ fields nested three levels deep, nullable on purpose. 247 users per seed, infinite seeds.</p>
+      </div>
+      <div>
+        <h3>/orders</h3>
+        <p>Relational data that references users, products, and addresses, including line items pointing at deleted products, because real data does that.</p>
+      </div>
+      <div>
+        <h3>/auth/login</h3>
+        <p>Returns a session <em>or</em> an MFA challenge depending on the email. Shape-varying responses, with hypermedia hints for the next step.</p>
+      </div>
+      <div>
+        <h3>/scenarios</h3>
+        <p>Fifteen deliberate failure modes on demand: the catalogue below. Every one tagged <code>X-Agent-Sandbox-Intentional</code> so your error reporter stays quiet.</p>
+      </div>
+      <div>
+        <h3>Trajectory logs</h3>
+        <p>A replayable record of every call your agent made: exportable, diffable, attachable to an eval run. For eval teams, the log <em>is</em> the product.</p>
+      </div>
+      <div>
+        <h3>Agent-native discovery</h3>
+        <p>Point any model at <code>/llms.txt</code>, <code>/llm.txt</code>, or <code>/openapi.json</code>, or hand it the MCP server. No human docs required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAILURE CATALOGUE ============ -->
+  <section id="failures">
+    <div class="sec-head reveal">
+      <h2>The failure catalogue</h2>
+      <span class="sec-tag">15 ways to break, on purpose</span>
+    </div>
+    <div class="wall reveal">
+      <div class="cell"><span class="tier free">free</span><span class="code c4">429</span><span class="name">rate-limited</span><span class="desc">Throttled, with Retry-After. Does your agent actually wait?</span></div>
+      <div class="cell"><span class="tier free">free</span><span class="code c4">422</span><span class="name">validation-error</span><span class="desc">Multi-field failure with a field_errors object to parse.</span></div>
+      <div class="cell"><span class="tier free">free</span><span class="code c2">200</span><span class="name">malformed-json</span><span class="desc">A 200 with a truncated body. The cruellest one.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c5">500</span><span class="name">server-error</span><span class="desc">Generic 5xx. Exercises the retry path.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c5">502</span><span class="name">bad-gateway</span><span class="desc">Upstream returned garbage. Test fallback and backoff.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c5">504</span><span class="name">timeout</span><span class="desc">Gateway timeout, simulated delay header included.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c4">401</span><span class="name">unauthorized</span><span class="desc">Bad token, WWW-Authenticate attached.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c4">403</span><span class="name">forbidden</span><span class="desc">Authenticated, but missing the scope.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c4">404</span><span class="name">not-found</span><span class="desc">Gone, with a "did you mean?" hint to follow.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c4">409</span><span class="name">conflict</span><span class="desc">Optimistic-concurrency clash: current_version vs yours.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c4">413</span><span class="name">too-large</span><span class="desc">Payload over the limit; max_bytes tells you by how much.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c2">200</span><span class="name">slow</span><span class="desc">Success, eventually. Simulated 10s delay.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c2">206</span><span class="name">partial-content</span><span class="desc">Half an answer with Content-Range. Handle it.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c3">302</span><span class="name">redirect-loop</span><span class="desc">A 3-hop chain. Exercises follow-redirect caps.</span></div>
+      <div class="cell"><span class="tier">paid</span><span class="code c2">200</span><span class="name">empty-response</span><span class="desc">Content-Length: 0. Nothing at all, successfully.</span></div>
+    </div>
+    <p class="wall-note">Chain them: <a href="/for/ai-agents">scripted scenario sequences</a>: succeed twice, then 429, then timeout. Retry logic that survives contact with reality.</p>
+  </section>
+
+  <!-- ============ TRAJECTORY EXHIBIT ============ -->
+  <section id="trajectory">
+    <div class="sec-head reveal">
+      <h2>The log is the proof</h2>
+      <span class="sec-tag">Exhibit: a real recorded run</span>
+    </div>
+    <div class="bench reveal">
+      <h3>Claude Code vs the rate-limit storm</h3>
+      <p class="sub">On 23 July 2026 we gave Claude Code one instruction: survive the <span style="color:var(--amber)">rate-limit-storm</span> chain. This is the server-side trajectory, unedited. The 30-second gaps are the agent reading <span style="color:var(--amber)">Retry-After: 30</span> and actually waiting. Every call your agent makes is recorded the same way: replayable, exportable, diffable.</p>
+      <table>
+        <thead><tr><th>#</th><th>Clock</th><th>Status</th><th>Chain step</th><th>Gap</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>10:44:09</td><td class="score">200</td><td>storm:0</td><td>&mdash;</td><td>healthy</td></tr>
+          <tr><td>2</td><td>10:44:19</td><td class="score">429</td><td>storm:1</td><td>+9.9s</td><td>throttled</td></tr>
+          <tr><td>3</td><td>10:44:49</td><td class="score">429</td><td>storm:2</td><td>+30.2s</td><td>waited full Retry-After</td></tr>
+          <tr><td>4</td><td>10:45:19</td><td class="score">429</td><td>storm:3</td><td>+30.3s</td><td>waited again</td></tr>
+          <tr><td>5</td><td>10:45:49</td><td class="score">200</td><td>storm:4</td><td>+30.3s</td><td>recovered</td></tr>
+        </tbody>
+      </table>
+      <p class="bench-note">Rubric: 5/5 checks passed, scored from this log alone. Same agent, same day, on payments: <b>201 &rarr; 402 declined &rarr; new card &rarr; 200 &rarr; receipt verified</b>, exactly one decline. See the raw data yourself, no key needed: <b>curl "https://reqres.in/agent/v1/trajectories/demo"</b></p>
+      <p class="bench-note" style="margin-top:8px">Claude Code is an Anthropic product, benchmarked independently. No affiliation or endorsement implied.</p>
+    </div>
+  </section>
+
+  <!-- ============ SIMULATED SERVICES ============ -->
+  <section id="services">
+    <div class="sec-head reveal">
+      <h2>Next: simulated services</h2>
+      <span class="sec-tag">The roadmap</span>
+    </div>
+    <div class="svc reveal">
+      <div class="svc-card now">
+        <p class="stage">Live now · /sim/payments/v1</p>
+        <h3>Payments sandbox</h3>
+        <p>A payments-shaped API where agents practice the scariest integration in software, without touching money. Try it: <span style="font-family:var(--mono);font-size:12px">curl "https://reqres.in/sim/payments/v1/"</span></p>
+        <ul>
+          <li>Idempotency keys, enforced (retry the same key safely, clash and get taught)</li>
+          <li>Signed webhook delivery on a test clock you control</li>
+          <li>Declined cards, 3DS challenges, refunds</li>
+          <li>Deterministic, seeded, replayable</li>
+        </ul>
+      </div>
+      <div class="svc-card q">
+        <p class="stage">Queued · 2027</p>
+        <h3>Messaging sandbox</h3>
+        <p>Slack-shaped events, rate limits, and retry semantics for agents that live in channels.</p>
+      </div>
+      <div class="svc-card q">
+        <p class="stage">Queued · 2027</p>
+        <h3>CRM sandbox</h3>
+        <p>Salesforce-shaped objects, auth scopes, and query semantics for enterprise agent workflows.</p>
+      </div>
+    </div>
+    <p class="svc-legal">Simulated interfaces for practice and evaluation. Not affiliated with or endorsed by the services they resemble.</p>
+  </section>
+
+  <!-- ============ BENCHMARK ============ -->
+  <section id="benchmark">
+    <div class="sec-head reveal">
+      <h2>The Agent API Benchmark</h2>
+      <span class="sec-tag">Quarterly · public</span>
+    </div>
+    <div class="bench reveal">
+      <h3>Which agents handle the real internet?</h3>
+      <p class="sub">Every quarter we score the major coding agents against the full failure catalogue (pagination, retries, malformed JSON, auth flows) using trajectory logs from the sandbox. Published in full, methodology open.</p>
+      <table>
+        <thead><tr><th>Agent</th><th>Pagination</th><th>Retry &amp; backoff</th><th>Error handling</th><th>Overall</th></tr></thead>
+        <tbody>
+          <tr><td>Claude Code</td><td class="score">100%</td><td class="score">100%</td><td class="score">100%</td><td class="score">100%*</td></tr>
+          <tr><td>Cursor</td><td class="score">—</td><td class="score">—</td><td class="score">—</td><td class="score">—</td></tr>
+          <tr><td>Copilot</td><td class="score">—</td><td class="score">—</td><td class="score">—</td><td class="score">—</td></tr>
+          <tr><td>Devin</td><td class="score">—</td><td class="score">—</td><td class="score">—</td><td class="score">—</td></tr>
+        </tbody>
+      </table>
+      <p class="bench-note"><b>* July 2026, v0.1 suite:</b> Claude Code passed every task, so we are making the suite harder until scores can separate frontier agents. <b>Full leaderboard: September 2026.</b> <a href="mailto:hello@reqres.in?subject=Benchmark%20notify%20list" style="color:var(--amber)">Get notified when the leaderboard goes live →</a></p>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section id="pricing">
+    <div class="sec-head reveal">
+      <h2>Pricing</h2>
+      <span class="sec-tag">Start free, no signup</span>
+    </div>
+    <div class="price reveal">
+      <div class="plan">
+        <p class="p-name">Free</p>
+        <p class="p-cost">$0</p>
+        <p class="p-for">Kick the tyres. No card, no signup.</p>
+        <ul>
+          <li>All fixture endpoints</li>
+          <li>100 requests/day per IP</li>
+          <li>3 sample failure scenarios</li>
+        </ul>
+        <a class="btn ghost" href="#" id="copyCurl" data-ph="agent_copy_curl_clicked">Copy a curl command</a>
+      </div>
+      <div class="plan hot">
+        <p class="p-name">Agent Developer</p>
+        <p class="p-cost">$49<small>/mo</small></p>
+        <p class="p-for">For teams shipping agents that hit APIs.</p>
+        <ul>
+          <li>10M requests/month</li>
+          <li>All 15 failure scenarios + chains</li>
+          <li>Trajectory logs &amp; usage dashboard</li>
+          <li>Issued x-agent-id key</li>
+        </ul>
+        <a class="btn amber" href="https://app.reqres.in/upgrade?plan=agent_developer&amp;source=agents_page" data-ph="agent_get_developer_clicked">Get Agent Developer</a>
+      </div>
+      <div class="plan">
+        <p class="p-name">Agent Platform</p>
+        <p class="p-cost">Custom</p>
+        <p class="p-for">For coding-tool companies, eval harnesses, and labs.</p>
+        <ul>
+          <li>100M+ requests/month</li>
+          <li>90-day trajectory retention</li>
+          <li>Private namespaces &amp; self-hosted image (roadmap, design partners first)</li>
+          <li>SLA &amp; single invoice</li>
+        </ul>
+        <a class="btn ghost" href="mailto:hello@reqres.in?subject=Agent%20Platform">Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESIGN PARTNER ============ -->
+  <section id="partner">
+    <div class="partner reveal">
+      <div>
+        <h2>Ten design partners. Then we close the doors.</h2>
+        <p>We're onboarding a small group of environment builders, eval teams, and agent companies before public launch: free Agent Platform access through Q1 2027, a direct line on the roadmap, and your logo on this page when we go loud.</p>
+        <p class="slots">5 of 10 slots remaining</p>
+      </div>
+      <div class="side">
+        <form id="dpForm" class="dp-form">
+          <input type="email" id="dpEmail" required placeholder="you@company.com" aria-label="Your email" />
+          <input type="text" id="dpNote" placeholder="What are you building? (optional)" aria-label="What are you building" />
+          <button type="submit" class="btn amber" id="dpSubmit">Apply for a slot</button>
+          <p id="dpMsg" class="dp-msg" role="status"></p>
+        </form>
+        <a class="btn ghost" href="/for/ai-agents">Read more</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="/"><span class="rbadge" role="presentation">R</span><span>Req<span class="res">Res</span></span></a>
+    <div class="links">
+      <a href="/llms.txt">/llms.txt</a>
+      <a href="/openapi.json">/openapi.json</a>
+      <a href="https://www.npmjs.com/package/reqres-mcp">MCP server</a>
+      <a href="/docs">Docs</a>
+      <a href="https://github.com/users/benhowdle89/packages/container/package/reqres-agent-world">Self-hosted</a>
+    </div>
+    <p class="made">Made by Ben Howdle · Serving test requests since 2014</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var el = document.getElementById('termContent');
+  var caret = document.getElementById('caret');
+
+  var resp = '{\n  <span class="t-key">"id"</span>: <span class="t-str">"usr_PTKF9X67DXKCH8JZ9XXP9K7MWH"</span>,\n  <span class="t-key">"email"</span>: <span class="t-str">"marcus.khan@example.com"</span>,\n  <span class="t-key">"full_name"</span>: <span class="t-str">"Marcus Khan"</span>,\n  <span class="t-key">"locale"</span>: <span class="t-str">"en-GB"</span>\n  <span class="t-dim">…</span>\n}';
+
+  var script = [
+    {t:'cmd',  txt:'curl "https://reqres.in/agent/v1/users?limit=1"'},
+    {t:'run',  txt:'run 1 · 09:14:02'},
+    {t:'html', txt:resp},
+    {t:'cmd',  txt:'curl "https://reqres.in/agent/v1/users?limit=1"'},
+    {t:'run',  txt:'run 2 · 09:14:07'},
+    {t:'html', txt:resp},
+    {t:'pass', txt:'✓ sha256 match: byte-identical across runs'}
+  ];
+
+  function render(upTo, partialCmd){
+    var html = '';
+    for(var i=0;i<upTo;i++){
+      var s = script[i];
+      if(s.t==='cmd')  html += '<div class="t-cmd">'+s.txt+'</div>';
+      if(s.t==='run')  html += '<div class="t-run">'+s.txt+'</div>';
+      if(s.t==='html') html += '<div>'+s.txt+'</div>';
+      if(s.t==='pass') html += '<div class="t-pass" style="margin-top:12px">'+s.txt+'</div>';
+    }
+    if(partialCmd !== undefined){
+      html += '<div class="t-cmd">'+partialCmd+'</div>';
+    }
+    el.innerHTML = html;
+  }
+
+  // Live mode: run the hero demo against the real API; canned transcript is
+  // the fallback. Bodies are hashed with WebCrypto - the match is real.
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+  function firstLines(text){
+    try{
+      var o=JSON.parse(text);var u=o.data&&o.data[0];if(!u)return null;
+      return '{\n  <span class="t-key">"id"</span>: <span class="t-str">"'+esc(u.id)+'"</span>,\n  <span class="t-key">"email"</span>: <span class="t-str">"'+esc(u.email)+'"</span>,\n  <span class="t-key">"full_name"</span>: <span class="t-str">"'+esc(u.full_name)+'"</span>,\n  <span class="t-key">"locale"</span>: <span class="t-str">"'+esc(u.locale)+'"</span>\n  <span class="t-dim">…</span>\n}';
+    }catch(e){return null}
+  }
+  function sha256hex(text){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(b){return b.toString(16).padStart(2,'0')}).join('');
+    });
+  }
+  function liveScript(){
+    var url='/agent/v1/users?limit=1&seed=42';
+    var go=function(){return fetch(url).then(function(r){return r.ok?r.text():Promise.reject(new Error(r.status))})};
+    return go().then(function(a){ return go().then(function(b){
+      var bodyA=firstLines(a), bodyB=firstLines(b);
+      if(!bodyA||!bodyB) throw new Error('shape');
+      return Promise.all([sha256hex(a), sha256hex(b)]).then(function(h){
+        var match = a===b && h[0]===h[1];
+        return [
+          {t:'cmd',  txt:'curl "https://reqres.in/agent/v1/users?limit=1"'},
+          {t:'run',  txt:'run 1 · sha256 '+h[0].slice(0,12)+'…'},
+          {t:'html', txt:bodyA},
+          {t:'cmd',  txt:'curl "https://reqres.in/agent/v1/users?limit=1"'},
+          {t:'run',  txt:'run 2 · sha256 '+h[1].slice(0,12)+'…'},
+          {t:'html', txt:bodyB},
+          {t:'pass', txt: match ? '✓ sha256 match: byte-identical across runs' : '✗ mismatch. File a bug, seriously'}
+        ];
+      });
+    });});
+  }
+
+  var copyBtn=document.getElementById('copyCurl');
+  if(copyBtn){copyBtn.addEventListener('click',function(e){
+    e.preventDefault();
+    navigator.clipboard.writeText('curl "https://reqres.in/agent/v1/users?limit=1"').then(function(){
+      copyBtn.textContent='Copied';setTimeout(function(){copyBtn.textContent='Copy a curl command'},1500);
+    });
+  });}
+
+  function play(){
+  if(reduced){
+    render(script.length);
+    caret.style.display='none';
+  } else {
+    var step = 0;
+    function next(){
+      if(step >= script.length){ caret.style.display='none'; return; }
+      var s = script[step];
+      if(s.t==='cmd'){
+        var i = 0;
+        (function type(){
+          if(i <= s.txt.length){
+            render(step, s.txt.slice(0,i));
+            i++;
+            setTimeout(type, 22);
+          } else {
+            step++;
+            setTimeout(next, 250);
+          }
+        })();
+      } else {
+        step++;
+        render(step);
+        setTimeout(next, s.t==='run' ? 220 : (s.t==='pass' ? 0 : 480));
+      }
+    }
+    setTimeout(next, 500);
+  }
+  }
+
+  liveScript().then(function(s){ script = s; play(); }).catch(function(){ play(); });
+
+  // scroll reveals
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(n){ obs.observe(n); });
+})();
+</script>
+
+
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of', { api_host: 'https://eu.i.posthog.com' });
+posthog.capture('agent_page_viewed', { page: '/agents' });
+// interest funnel: delegate clicks on tracked CTAs
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('[data-ph]');
+  if (a) posthog.capture(a.getAttribute('data-ph'), { href: a.getAttribute('href') || null });
+});
+var dpForm = document.getElementById('dpForm');
+if (dpForm) {
+  dpForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('dpEmail').value.trim();
+    var note = document.getElementById('dpNote').value.trim();
+    var msg = document.getElementById('dpMsg');
+    var btn = document.getElementById('dpSubmit');
+    if (!email) return;
+    posthog.capture('agent_design_partner_cta_clicked', { has_note: !!note });
+    btn.disabled = true; msg.className = 'dp-msg'; msg.textContent = 'Sending...';
+    var did = null; try { did = posthog.get_distinct_id(); } catch (x) {}
+    fetch('/agents/design-partner', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, note: note, distinct_id: did })
+    }).then(function (r) {
+      if (r.ok) {
+        posthog.capture('agent_design_partner_submitted', { has_note: !!note });
+        dpForm.reset(); msg.className = 'dp-msg ok'; msg.textContent = "You're on the list. We'll be in touch.";
+      } else {
+        btn.disabled = false; msg.className = 'dp-msg err'; msg.textContent = 'Please enter a valid email.';
+      }
+    }).catch(function () {
+      btn.disabled = false; msg.className = 'dp-msg err';
+      msg.innerHTML = 'Something went wrong. Email <a href="mailto:hello@reqres.in?subject=Design%20partner" style="color:var(--blue)">hello@reqres.in</a>.';
+    });
+  });
+}
+</script>
+</body>
+</html>

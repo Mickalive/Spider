@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="How to implement authentication flows directly from the frontend using magic links and session tokens."
+        />
+        <title>Frontend-Only Auth Without Standing Up a Backend | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/blog/frontend-only-auth-without-backend"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="Frontend-Only Auth Without Standing Up a Backend | ReqRes Blog"
+        />
+        <meta
+            property="og:description"
+            content="How to implement authentication flows directly from the frontend using magic links and session tokens."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/blog/frontend-only-auth-without-backend"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Frontend-Only Auth Without Standing Up a Backend | ReqRes Blog"
+        />
+        <meta
+            name="twitter:description"
+            content="How to implement authentication flows directly from the frontend using magic links and session tokens."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+        <script type="application/ld+json">
+            [{"@context":"https://schema.org","@type":"BlogPosting","headline":"Frontend-Only Auth Without Standing Up a Backend","description":"How to implement authentication flows directly from the frontend using magic links and session tokens.","datePublished":"2026-09-27T09:12:54.823Z","dateModified":"2026-09-27T09:12:54.823Z","image":"https://reqres.in/img/reqres-og-2x.png","author":{"@type":"Person","name":"Ben Howdle","url":"https://benhowdle.im"},"publisher":{"@type":"Organization","name":"ReqRes","url":"https://reqres.in","logo":{"@type":"ImageObject","url":"https://reqres.in/img/logo-dark.jpg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://reqres.in/blog/frontend-only-auth-without-backend"},"url":"https://reqres.in/blog/frontend-only-auth-without-backend"}]
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+<style>
+    .blog-body {
+        font-size: 17px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .blog-body h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 0.9rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.95);
+        text-align: left;
+    }
+    .blog-body h3 {
+        font-size: 1.2rem;
+        margin-top: 1.4rem;
+        margin-bottom: 0.7rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.92);
+    }
+    .blog-body p {
+        color: rgba(255, 255, 255, 0.78);
+        margin-bottom: 1.05rem;
+    }
+    .blog-body ul {
+        list-style: disc;
+        padding-left: 1.35rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .blog-body li {
+        margin-bottom: 0.5rem;
+    }
+    .blog-body code {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 0.15rem 0.35rem;
+        font-size: 0.9em;
+    }
+    .blog-body pre {
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 1rem;
+        overflow-x: auto;
+        color: #e5e7eb;
+        font-size: 0.95em;
+        line-height: 1.6;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+    .blog-body pre::-webkit-scrollbar {
+        height: 6px;
+    }
+    .blog-body pre::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .blog-body pre::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+    }
+    .blog-body pre::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    .blog-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.95em;
+    }
+    .blog-body th {
+        text-align: left;
+        padding: 0.6rem 0.9rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .blog-body td {
+        padding: 0.55rem 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.75);
+        white-space: nowrap;
+    }
+    .blog-body tr:last-child td {
+        border-bottom: none;
+    }
+    .blog-body blockquote {
+        border-left: 3px solid rgba(255, 255, 255, 0.2);
+        padding-left: 0.9rem;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .blog-body a {
+        color: #a5b4fc;
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.3);
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+    .blog-body a:hover,
+    .blog-body a:focus-visible {
+        color: #c4d4ff;
+        text-decoration-color: rgba(255, 255, 255, 0.7);
+    }
+</style>
+
+<style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link is-active">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link "
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 is-active">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="py-8 md:py-20 bg-black text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/65">
+            <ol class="flex items-center gap-2 flex-wrap">
+                <li>
+                    <a class="hover:text-white" href="/">Home</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                    <a class="hover:text-white" href="/blog">Blog</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li class="text-white/80">Frontend-Only Auth Without Standing Up a Backend</li>
+            </ol>
+        </nav>
+
+        <header class="space-y-3">
+            <p
+                class="text-[11px] uppercase tracking-[0.2em] text-white/50 font-semibold"
+            >
+                ReqRes Blog
+            </p>
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">
+                Frontend-Only Auth Without Standing Up a Backend
+            </h1>
+            <div
+                class="flex flex-wrap items-center gap-3 text-sm text-white/65"
+            >
+                <span>Jan 22, 2026</span>
+                <span aria-hidden="true">•</span>
+                <span>1 min read</span>
+                <span aria-hidden="true">•</span>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >authentication</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >frontend</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >product</span
+                    >
+                </div>
+            </div>
+        </header>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6 flex flex-col gap-3 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+        >
+            <div
+                class="flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-white/50 font-semibold"
+            >
+                Next step
+            </div>
+            <p class="text-sm text-white/70">
+                Want to try this in 2 minutes? Start a project or open the Notes example.
+            </p>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                <a
+                    href="https://app.reqres.in/getting-started"
+                    class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                >
+                    Get started
+                    <span class="ml-2 text-xs opacity-80">→</span>
+                </a>
+                <a
+                    href="https://app.reqres.in/examples/notes-app"
+                    class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                >
+                    See example app
+                    <span class="ml-2 text-xs opacity-70">→</span>
+                </a>
+            </div>
+        </div>
+
+        <article
+            class="blog-body rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+        >
+            <p>Authentication is often the moment a frontend project stalls.</p>
+<p>OAuth providers, JWT handling, user tables, and email flows quickly turn a simple app into a backend project.</p>
+<p>But many teams don&#39;t actually need custom auth infrastructure to move forward. See how <a href="/for/frontend-developers">frontend developers use ReqRes</a> to own auth without backend tickets.</p>
+<h2>The frontend-only auth pattern</h2>
+<p>ReqRes supports a frontend-first auth flow using:</p>
+<ul>
+<li>Magic-link login</li>
+<li>Session tokens</li>
+<li>Per-user scoped data</li>
+</ul>
+<p>No backend server is required.</p>
+<h2>Step 1: send a login link</h2>
+<pre><code class="language-bash">curl -X POST https://reqres.in/api/app-users/login \
+ -H &quot;x-api-key: YOUR_PUBLIC_PROJECT_KEY&quot; \
+ -H &quot;Content-Type: application/json&quot; \
+ -d &#39;{ &quot;email&quot;: &quot;user@example.com&quot; }&#39;
+</code></pre>
+<h2>Step 2: verify the token</h2>
+<pre><code class="language-bash">curl -X POST https://reqres.in/api/app-users/verify \
+ -H &quot;Content-Type: application/json&quot; \
+ -d &#39;{ &quot;token&quot;: &quot;MAGIC_TOKEN_FROM_EMAIL&quot; }&#39;
+</code></pre>
+<p>This returns a session token.</p>
+<h2>Step 3: read and write user data</h2>
+<pre><code class="language-bash">curl https://reqres.in/api/collections/notes/records \
+ -H &quot;Authorization: Bearer SESSION_TOKEN&quot;
+</code></pre>
+<p>Each user only sees their own records.</p>
+<h2>Why teams choose this approach</h2>
+<p>This pattern works well for:</p>
+<ul>
+<li>Client-only apps</li>
+<li>Demos and MVPs</li>
+<li>QA environments</li>
+<li>Internal tools</li>
+</ul>
+<p>You can see the full flow in action here: <a href="https://app.reqres.in/?next=/examples/notes-app">https://app.reqres.in/?next=/examples/notes-app</a></p>
+
+        </article>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7 space-y-4"
+        >
+            <div class="flex items-center justify-between gap-3">
+                <h2 class="text-xl font-semibold">Keep reading</h2>
+                <a
+                    href="/blog"
+                    class="text-sm text-indigo-300 hover:text-white inline-flex items-center gap-1"
+                >
+                    View all
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <a
+                    href="/blog/launching-agent-sandbox"
+                    class="rounded-xl border border-white/10 bg-black/50 p-4 flex flex-col gap-2 hover:border-white/20 hover:-translate-y-1 transition duration-300"
+                >
+                    <div class="text-[12px] text-white/60">
+                        Apr 13, 2026 • 6 min read
+                    </div>
+                    <div class="text-base font-semibold text-white">
+                        Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents
+                    </div>
+                    <p class="text-sm text-white/70">Most AI coding agents that touch a REST API in their first session do something predictable: they generate code that fetches a resource, finds it returns 12 fixture users with shallow shapes, write a wrapper that assu...</p>
+                </a>
+                <a
+                    href="/blog/build-app-with-ai-against-reqres"
+                    class="rounded-xl border border-white/10 bg-black/50 p-4 flex flex-col gap-2 hover:border-white/20 hover:-translate-y-1 transition duration-300"
+                >
+                    <div class="text-[12px] text-white/60">
+                        Apr 2, 2026 • 4 min read
+                    </div>
+                    <div class="text-base font-semibold text-white">
+                        How to use ChatGPT, Claude, or Cursor to build an app against ReqRes
+                    </div>
+                    <p class="text-sm text-white/70">You can build a working app against ReqRes in minutes if you give your AI tool the right context. Without it, the LLM will guess at endpoints, invent auth headers, and generate code that looks right but fails on every...</p>
+                </a>
+                <a
+                    href="/blog/classrooms-for-api-teaching"
+                    class="rounded-xl border border-white/10 bg-black/50 p-4 flex flex-col gap-2 hover:border-white/20 hover:-translate-y-1 transition duration-300"
+                >
+                    <div class="text-[12px] text-white/60">
+                        Mar 2, 2026 • 6 min read
+                    </div>
+                    <div class="text-base font-semibold text-white">
+                        Classrooms: Give Every Student Their Own API
+                    </div>
+                    <p class="text-sm text-white/70">You know the drill. Twenty students, one shared sandbox, and someone runs a DELETE that takes out everyone&#x27;s data five minutes into class. Half the room is debugging someone else&#x27;s mess. The other half hasn&#x27;t started ...</p>
+                </a>
+            </div>
+        </div>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+        >
+            <div class="text-sm text-white/70">
+                Ready to ship? Continue in the app.
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                <a
+                    href="https://app.reqres.in"
+                    class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                >
+                    Get started
+                    <span class="ml-2 text-xs opacity-80">→</span>
+                </a>
+                <a
+                    href="https://app.reqres.in/?next=/examples/notes-app"
+                    class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                >
+                    See example app
+                    <span class="ml-2 text-xs opacity-70">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://reqres.in/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://reqres.in/blog"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Frontend-Only Auth Without Standing Up a Backend",
+                "item": "https://reqres.in/blog/frontend-only-auth-without-backend"
+            }
+        ]
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.hljs) {
+            document.querySelectorAll('.blog-body pre code').forEach(function (el) {
+                window.hljs.highlightElement(el);
+            });
+        }
+    });
+</script>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

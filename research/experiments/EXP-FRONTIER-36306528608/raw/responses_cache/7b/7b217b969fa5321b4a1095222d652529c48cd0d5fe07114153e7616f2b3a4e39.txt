@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="A sandbox REST API designed for AI coding agents. Deterministic seeded fixtures, 15 deliberate failure scenarios, scripted failure chains, replayable trajectory logs, and a simulated payments API. Free to use."
+        />
+        <title>ReqRes for AI Agents - Sandbox API for Claude Code, Cursor, Copilot | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/for/ai-agents"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="A sandbox API your agent can actually trust"
+        />
+        <meta
+            property="og:description"
+            content="Endpoints designed for AI coding agents. Realistic relational data, 15 deliberate failure modes, scripted chains, and trajectory logs. Deterministic responses make agent failures reproducible."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/for/ai-agents"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="A sandbox API your agent can actually trust"
+        />
+        <meta
+            name="twitter:description"
+            content="Endpoints designed for AI coding agents. Realistic relational data, 15 deliberate failure modes, scripted chains, and trajectory logs. Deterministic responses make agent failures reproducible."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/logo-dark.jpg"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+        <script type="application/ld+json">
+            {"@context":"https://schema.org","@type":"WebPage","name":"ReqRes for AI Agents - Sandbox API for Claude Code, Cursor, Copilot","description":"A sandbox REST API designed for AI coding agents. Deterministic seeded fixtures, 15 deliberate failure scenarios, scripted failure chains, replayable trajectory logs, and a simulated payments API. Free to use.","url":"https://reqres.in/for/ai-agents","isPartOf":{"@type":"WebSite","name":"ReqRes","url":"https://reqres.in"}}
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.hljs) {
+            document.querySelectorAll('pre code[class*="language-"]').forEach(function (el) {
+                window.hljs.highlightElement(el);
+            });
+        }
+    });
+</script>
+<style>
+    .code-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+    .code-scroll::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    .code-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .code-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+    }
+</style>
+
+<!-- FAQ Schema for SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is the ReqRes Agent Sandbox?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A set of REST endpoints under /agent/v1/* designed for AI coding agents (Claude Code, Cursor, Copilot, Devin) to practice against. Cursor pagination, deeply nested resources, deterministic seeded fixtures, and 15 deliberate failure scenarios for testing error handling."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Why are the responses deterministic?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Same inputs always return identical outputs. This makes agent test failures reproducible. Without determinism, an agent failing intermittently in CI is impossible to debug. With it, you replay the same request and get the same response every time."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do I need to authenticate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not for the free tier. Agent endpoints are open with IP-based rate limiting at 100 requests/day. To raise the limit, subscribe to Agent Developer and send the issued key in the x-agent-id header (format: agt_<64 hex>, provisioned at app.reqres.in/agents). Arbitrary strings are rejected with 401."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does $49/month buy me?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "10 million requests per month (~333,333/day) to /agent/v1/* with an issued x-agent-id key, access to all 15 failure scenarios (the free tier only exposes 3 samples), scripted scenario chains, trajectory logs with JSONL export and diff, and a dashboard at app.reqres.in/agents. Subscribers also get all Dev plan quotas on the main ReqRes BaaS product."
+            }
+        }
+    ]
+}
+</script>
+
+<style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link "
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 ">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-16 pb-12 md:pt-24 md:pb-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <div
+            class="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1"
+        >
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span class="text-xs font-medium text-emerald-300"
+                >For AI Coding Agents</span
+            >
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
+            A sandbox API your agent can actually trust
+        </h1>
+        <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+            Endpoints designed for AI coding agents like Claude Code, Cursor, Copilot, and Devin. Cursor pagination, deeply nested data, realistic relational shapes, and 15 deliberate failure modes. Deterministic responses make agent failures reproducible.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <a
+                href="/llm.txt"
+                class="inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-black hover:bg-white/90 transition shadow-lg shadow-white/10"
+            >
+                Read the LLM guide
+            </a>
+            <a
+                href="#try-it"
+                class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+            >
+                Try a request
+            </a>
+        </div>
+        <p class="text-xs text-white/40">
+            Free tier is open - 100 requests/day per IP, no signup. Upgrade for 10M/month + every failure scenario.
+            See the full product tour at <a href="/agents" class="text-emerald-400 hover:text-emerald-300">reqres.in/agents</a>.
+        </p>
+    </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Built on twelve years of API infrastructure.
+        </h2>
+        <div class="space-y-4 text-sm md:text-base text-white/70 leading-relaxed">
+            <p>
+                ReqRes has been serving test API requests since 2014. Today we handle over billions of API requests a month across individual developers, QA teams at enterprises like Lloyds Banking Group and Microsoft, and computer science classrooms worldwide.
+            </p>
+            <p>
+                The Agent Sandbox is built on the same infrastructure: the same per-customer metering, the same rate limiting, the same request logging, the same billing rails that have handled that volume for over a decade. When your agent hits <code class="text-[12px] text-emerald-300/80">/agent/v1/</code>, it's hitting a system that's been in production longer than most of your dependencies.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- TRY IT -->
+<section id="try-it" class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Try a request right now
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            No signup. No key. Paste this into your terminal:
+        </p>
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-4 code-scroll overflow-x-auto">
+            <pre class="text-sm font-mono"><code class="language-bash">curl https://reqres.in/agent/v1/users?limit=2</code></pre>
+        </div>
+        <p class="text-xs text-white/50">
+            Response includes cursor pagination, nullable nested fields, ULIDs with type prefixes, and ISO 8601 timestamps. Same request always returns the same data (deterministic seeding). Free tier caps at 100 requests/day per IP - add <code class="text-[11px] text-emerald-300/80">-H "x-agent-id: agt_..."</code> with a subscriber key to raise the cap.
+        </p>
+    </div>
+</section>
+
+<!-- WHAT'S DIFFERENT -->
+<section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            What's different from /api/users?
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            The legacy /api/users endpoint serves 12 fixture users with shallow shapes. Great for humans learning HTTP. Wrong shape for agents practicing real-world code.
+        </p>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-white/[0.04] text-white/60 text-xs uppercase tracking-wider">
+                    <tr>
+                        <th class="text-left px-4 py-3 font-medium">Aspect</th>
+                        <th class="text-left px-4 py-3 font-medium">/api/users</th>
+                        <th class="text-left px-4 py-3 font-medium text-emerald-300">/agent/v1/users</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr><td class="px-4 py-3 text-white/60">Pagination</td><td class="px-4 py-3 text-white/70">Offset (?page=N)</td><td class="px-4 py-3 text-white/70">Cursor (?cursor=...)</td></tr>
+                    <tr><td class="px-4 py-3 text-white/60">ID format</td><td class="px-4 py-3 text-white/70">Integer (1-12)</td><td class="px-4 py-3 text-white/70">ULID (usr_01H...)</td></tr>
+                    <tr><td class="px-4 py-3 text-white/60">Fields per record</td><td class="px-4 py-3 text-white/70">5 flat fields</td><td class="px-4 py-3 text-white/70">20+ fields, 3 levels nested</td></tr>
+                    <tr><td class="px-4 py-3 text-white/60">Nullable fields</td><td class="px-4 py-3 text-white/70">None</td><td class="px-4 py-3 text-white/70">Many (forces null-handling)</td></tr>
+                    <tr><td class="px-4 py-3 text-white/60">Determinism</td><td class="px-4 py-3 text-white/70">Static fixture</td><td class="px-4 py-3 text-white/70">Seeded, reproducible</td></tr>
+                    <tr><td class="px-4 py-3 text-white/60">Total fixture size</td><td class="px-4 py-3 text-white/70">12 users</td><td class="px-4 py-3 text-white/70">247 per seed, ∞ seeds</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ENDPOINT TOUR -->
+<section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            What's in the sandbox
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">GET /agent/v1/users</div>
+                <p class="text-sm text-white/70">Cursor-paginated user list. Sparse fieldsets. Silent param clamping. Forces correct pagination handling.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">GET /agent/v1/users/:id</div>
+                <p class="text-sm text-white/70">Deeply nested resource with optional ?expand= for addresses, activity, organizations. Heterogeneous activity records.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">POST /agent/v1/auth/login</div>
+                <p class="text-sm text-white/70">Returns a session OR an MFA challenge depending on the email. Trains agents to handle shape-varying responses and hypermedia next_step hints.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">GET /agent/v1/orders</div>
+                <p class="text-sm text-white/70">Relational data: orders reference users, products, addresses. Money is always {amount, currency, formatted}. Some line items reference deleted products.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2 md:col-span-2">
+                <div class="text-xs font-mono text-emerald-300">GET /agent/v1/scenarios/:name</div>
+                <p class="text-sm text-white/70">15 deliberate failure modes (enumerated below). Every response includes <code class="text-[11px] text-emerald-300/80">X-Agent-Sandbox-Intentional</code> - configure your error reporter (Sentry, Bugsnag) to suppress responses carrying that header so your training scenarios don't fill your alert queue.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">X-Agent-Chain: flaky-then-recover</div>
+                <p class="text-sm text-white/70">Scripted failure sequences: each call advances one step (succeed, succeed, 429, timeout, recover). 5 presets, or define your own with <code class="text-[11px] text-emerald-300/80">POST /agent/v1/chains</code>. Deterministic per (definition, call count).</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2">
+                <div class="text-xs font-mono text-emerald-300">GET /agent/v1/trajectories</div>
+                <p class="text-sm text-white/70">Every keyed call is recorded server-side: replay any run, export it as JSONL, or diff two runs to the exact call where behaviour diverged. For eval teams, the log is the product.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-2 md:col-span-2">
+                <div class="text-xs font-mono text-emerald-300">POST /sim/payments/v1/payment_intents</div>
+                <p class="text-sm text-white/70">A payments sandbox for the scariest integration in software: intents, enforced idempotency keys, declining test cards, 3DS challenges, signed webhooks on a test clock. Simulated interface, no real money, not affiliated with any payment provider.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCENARIO TABLE -->
+<section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Every failure scenario, enumerated
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            Free tier unlocks 3 samples (<code class="text-[12px] text-emerald-300/80">rate-limited</code>, <code class="text-[12px] text-emerald-300/80">validation-error</code>, <code class="text-[12px] text-emerald-300/80">malformed-json</code>). The other 12 return <code class="text-[12px] text-emerald-300/80">403 scenario_requires_upgrade</code> until you're on Agent Developer.
+        </p>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-white/[0.04] text-white/60 text-xs uppercase tracking-wider">
+                    <tr>
+                        <th class="text-left px-4 py-3 font-medium">Scenario</th>
+                        <th class="text-left px-4 py-3 font-medium">Status</th>
+                        <th class="text-left px-4 py-3 font-medium">Tier</th>
+                        <th class="text-left px-4 py-3 font-medium">Description</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">rate-limited</code></td><td class="px-4 py-3 font-mono text-white/70">429</td><td class="px-4 py-3 text-white/60">Free</td><td class="px-4 py-3 text-white/70">Rate-limit throttling with Retry-After.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">server-error</code></td><td class="px-4 py-3 font-mono text-white/70">500</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Generic 5xx. Exercises your retry path.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">bad-gateway</code></td><td class="px-4 py-3 font-mono text-white/70">502</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Upstream returned garbage. Test fallback + backoff.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">timeout</code></td><td class="px-4 py-3 font-mono text-white/70">504</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Gateway timeout. Returns immediately with <code class="text-[11px] text-emerald-300/80">X-Agent-Sandbox-Simulated-Delay: 30000</code>.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">validation-error</code></td><td class="px-4 py-3 font-mono text-white/70">422</td><td class="px-4 py-3 text-white/60">Free</td><td class="px-4 py-3 text-white/70">Multi-field validation failure with <code class="text-[11px] text-emerald-300/80">field_errors</code> object.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">unauthorized</code></td><td class="px-4 py-3 font-mono text-white/70">401</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Missing/invalid auth token, with <code class="text-[11px] text-emerald-300/80">WWW-Authenticate</code>.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">forbidden</code></td><td class="px-4 py-3 font-mono text-white/70">403</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Authenticated but missing scope.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">not-found</code></td><td class="px-4 py-3 font-mono text-white/70">404</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Resource not found with a "Did you mean?" hint.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">conflict</code></td><td class="px-4 py-3 font-mono text-white/70">409</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Optimistic-concurrency failure; body carries current_version + your_version.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">too-large</code></td><td class="px-4 py-3 font-mono text-white/70">413</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Payload exceeds max size; includes <code class="text-[11px] text-emerald-300/80">max_bytes</code>.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">slow</code></td><td class="px-4 py-3 font-mono text-white/70">200</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Returns immediately with <code class="text-[11px] text-emerald-300/80">X-Agent-Sandbox-Simulated-Delay: 10000</code>. Delay client-side.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">partial-content</code></td><td class="px-4 py-3 font-mono text-white/70">206</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">Partial response with <code class="text-[11px] text-emerald-300/80">Content-Range</code>. Exercises Range handling.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">redirect-loop</code></td><td class="px-4 py-3 font-mono text-white/70">302</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">3-hop chain (?hop=0 → 1 → 2 → JSON). Exercises follow-redirect caps.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">malformed-json</code></td><td class="px-4 py-3 font-mono text-white/70">200</td><td class="px-4 py-3 text-white/60">Free</td><td class="px-4 py-3 text-white/70">200 + <code class="text-[11px] text-emerald-300/80">Content-Type: application/json</code> with truncated body.</td></tr>
+                    <tr><td class="px-4 py-3"><code class="text-emerald-300/90 text-[12px]">empty-response</code></td><td class="px-4 py-3 font-mono text-white/70">200</td><td class="px-4 py-3 text-white/60">Paid</td><td class="px-4 py-3 text-white/70">200 + <code class="text-[11px] text-emerald-300/80">Content-Length: 0</code> and no body.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-white/50">
+            Programmatic list: <a href="/agent/v1/scenarios" class="text-emerald-400 hover:text-emerald-300"><code>GET /agent/v1/scenarios</code></a> returns the same catalog as JSON for agent discovery.
+        </p>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Pricing
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 space-y-3">
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-lg font-semibold text-white">Free</h3>
+                    <span class="text-2xl font-bold text-white">$0</span>
+                </div>
+                <p class="text-sm text-white/60">Explore the sandbox with IP-based rate limits. Good for prototyping and first-integration smoke tests.</p>
+                <ul class="space-y-1.5 text-sm text-white/70 pt-2">
+                    <li class="flex gap-2"><span class="text-white/30">•</span> All fixture endpoints (/users, /orders, /auth/login)</li>
+                    <li class="flex gap-2"><span class="text-white/30">•</span> 100 requests/day per IP</li>
+                    <li class="flex gap-2"><span class="text-white/30">•</span> 3 sample failure scenarios (rate-limited, validation-error, malformed-json)</li>
+                    <li class="flex gap-2"><span class="text-white/30">•</span> No signup required</li>
+                </ul>
+            </div>
+            <div class="rounded-2xl border-2 border-emerald-400/40 bg-emerald-500/[0.04] p-6 space-y-3">
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-lg font-semibold text-white">Agent Developer</h3>
+                    <span class="text-2xl font-bold text-white" data-pd-price="49"><span data-pd-currency-symbol>$</span><span data-pd-price-integer>49</span></span>
+                    <span class="text-sm text-white/50">/mo</span>
+                </div>
+                <p class="text-sm text-white/60">Higher cap + every failure scenario. You get an issued key to put in <code class="text-[11px] text-emerald-300/80">x-agent-id</code>.</p>
+                <ul class="space-y-1.5 text-sm text-white/70 pt-2">
+                    <li class="flex gap-2"><span class="text-emerald-400/70">•</span> 10M requests/month (~333,333/day)</li>
+                    <li class="flex gap-2"><span class="text-emerald-400/70">•</span> All 15 failure scenarios + scripted chains</li>
+                    <li class="flex gap-2"><span class="text-emerald-400/70">•</span> Trajectory logs: replay, JSONL export, diff (30-day retention)</li>
+                    <li class="flex gap-2"><span class="text-emerald-400/70">•</span> Usage dashboard at app.reqres.in/agents</li>
+                    <li class="flex gap-2"><span class="text-emerald-400/70">•</span> Dev plan quotas on the main ReqRes BaaS product</li>
+                </ul>
+                <div class="pt-3">
+                    <a
+                        href="https://app.reqres.in/?plan=agent_developer&source=for_ai_agents"
+                        class="inline-flex w-full items-center justify-center rounded-md bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-400 transition"
+                        data-visitors-event="Signup CTA"
+                        data-visitors-source="for/ai-agents"
+                        data-visitors-plan="Agent Developer"
+                    >
+                        Get Agent Developer
+                    </a>
+                </div>
+            </div>
+            <!-- PPP intentionally disabled: no data-pd-price attributes on the price element. -->
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 space-y-3">
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-lg font-semibold text-white">Agent Platform</h3>
+                    <span class="text-sm text-white/50">Contact sales</span>
+                </div>
+                <p class="text-sm text-white/60">Building an AI coding tool of your own? Talk to us about higher volumes and custom requirements.</p>
+                <ul class="space-y-1.5 text-sm text-white/70 pt-2">
+                    <li class="flex gap-2"><span class="text-white/30">•</span> 100M+ requests/month</li>
+                    <li class="flex gap-2"><span class="text-white/30">•</span> Custom SLA + 90-day trajectory retention</li>
+                    <li class="flex gap-2"><span class="text-white/30">•</span> Payments webhooks + scenario pack authoring</li>
+                </ul>
+                <div class="pt-3">
+                    <a
+                        href="mailto:hello@reqres.in?subject=Agent%20Platform%20enquiry"
+                        class="inline-flex w-full items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                        data-visitors-event="Contact Sales"
+                        data-visitors-source="for/ai-agents"
+                        data-visitors-plan="Agent Platform"
+                    >
+                        Get in touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LLM PROMPT (kickstart block) -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Kickstart prompt (paste into your LLM)
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            Copy this straight into Claude Code, Cursor, ChatGPT, or whatever you build with. Then tell it what you want to build.
+        </p>
+        <div class="rounded-2xl border border-white/10 bg-black/40 code-scroll overflow-x-auto">
+            <pre class="text-xs md:text-sm font-mono whitespace-pre-wrap"><code class="language-markdown">I'm wiring up code against ReqRes for Agents - a deterministic HTTP sandbox for AI coding agents.
+
+Spec (fetch and read first):
+  https://reqres.in/llm.txt
+  https://reqres.in/openapi.json
+
+Facts to keep in working memory:
+- Base URL: https://reqres.in/agent/v1
+- Auth: free tier is open (no header), capped at 100 requests/day per IP. Paid tier sends `x-agent-id: agt_&lt;64 hex&gt;` for 10M requests/month. Keys are issued only via https://app.reqres.in/agents - never invent or guess the value. Arbitrary strings return 401.
+- Endpoints: GET /users, GET /users/:id (?expand=addresses,activity,organizations), POST /auth/login, GET /orders, GET /scenarios/:name, GET /health.
+- IDs are ULIDs with a type prefix (usr_, ord_, prd_, adr_, act_). 26 chars after the prefix.
+- Money is always {amount (integer in smallest unit), currency, formatted}. Never a decimal.
+- Pagination is cursor-based. Pass meta.next_cursor back unchanged. Treat cursors as opaque.
+- Deterministic: same (seed, cursor, params) → same response. Default seed=42.
+- /scenarios/:name exposes 15 deliberate failures (rate-limited, server-error, timeout, validation-error, malformed-json, redirect-loop, …) for exercising retry/backoff/error paths. Every response sets X-Agent-Sandbox-Intentional; suppress that in your error reporter so training runs don't fill your alert queue.
+- Free tier only unlocks 3 of the 15 scenarios (rate-limited, validation-error, malformed-json); the rest return 403 until you're on Agent Developer.
+- With a key: X-Agent-Chain: &lt;name&gt; walks scripted failure sequences (5 presets); X-Agent-Run-Id groups your calls into a replayable trajectory (GET /agent/v1/trajectories); /sim/payments/v1 is a full payments sandbox (test tokens like pm_card_declined decide outcomes, Idempotency-Key enforced).
+- MFA flow: login with a +mfa@ email, then POST /agent/v1/auth/mfa/verify with the challenge_token and code 424242.
+- MCP: npx -y reqres-mcp gives your agent all of this as native tools.
+
+Now please: &lt;tell the agent what to do - e.g. "write a retry-with-exponential-backoff wrapper and test it against /scenarios/rate-limited and /scenarios/server-error" or "generate a typed TypeScript client with full type inference for /users expansion"&gt;</code></pre>
+        </div>
+    </div>
+</section>
+
+<!-- LLM-FRIENDLY DOCS -->
+<section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
+            Built for agents to discover
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+            Agents don't need a human-readable docs site -- they need a machine-readable manifest. Point your agent at any of these:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <a href="/llms.txt" class="rounded-xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.05] transition">
+                <div class="text-xs font-mono text-emerald-300">/llms.txt</div>
+                <div class="text-sm text-white/70 mt-1">Top-level discovery</div>
+            </a>
+            <a href="/llm.txt" class="rounded-xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.05] transition">
+                <div class="text-xs font-mono text-emerald-300">/llm.txt</div>
+                <div class="text-sm text-white/70 mt-1">Full text guide</div>
+            </a>
+            <a href="/openapi.json" class="rounded-xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.05] transition">
+                <div class="text-xs font-mono text-emerald-300">/openapi.json</div>
+                <div class="text-sm text-white/70 mt-1">OpenAPI 3.0.3 spec</div>
+            </a>
+        </div>
+    </div>
+</section>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

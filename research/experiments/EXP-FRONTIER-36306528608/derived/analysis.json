@@ -1,0 +1,590 @@
+{
+ "arms": {
+  "arm_ids": [
+   "RE_DERIVABLE",
+   "CACHE_AND_REVALIDATE",
+   "NULL_COST",
+   "COLD_REEXPLORATION",
+   "NO_MEMORY_DETERMINISTIC",
+   "WITHIN_EPISODE_SCRATCHPAD",
+   "ORACLE_PERFECT_TRANSFER"
+  ],
+  "executed": false,
+  "metrics": {
+   "CACHE_AND_REVALIDATE": null,
+   "COLD_REEXPLORATION": null,
+   "NO_MEMORY_DETERMINISTIC": null,
+   "NULL_COST": null,
+   "ORACLE_PERFECT_TRANSFER": null,
+   "RE_DERIVABLE": null,
+   "WITHIN_EPISODE_SCRATCHPAD": null
+  },
+  "reason": "prereg section 6 admits the arm phase only on a qualifying site set; the frozen screen admitted 0 of 15 frozen candidate sites (minimum 3), so no arm was executed. Arm metrics are null, NOT zero."
+ },
+ "bootstrap_resamples": 10000,
+ "calibration": {
+  "c3_detail": {
+   "nonget_forms": 1,
+   "nonget_forms_with_token_named_input": 0,
+   "pass": false,
+   "reason": "0 form(s) declare a non-GET verb AND an input named csrf|token|nonce|_token; token field names seen: none",
+   "token_field_names": []
+  },
+  "criteria": {
+   "C1": true,
+   "C2": false,
+   "C3": false,
+   "C4": false,
+   "C5": false,
+   "C6": true,
+   "C7": true
+  },
+  "objects_detected": 0,
+  "pass": false,
+  "prereg_claim_about_site": "prereg.md 4.1 asserts this endpoint 'returns an HTML form with a CSRF-like token (<input name=\"csrf_token\" ...>)', that 'the csrf_token rotates or is session-bound', and that it therefore contains a session-scoped identifier, a write verb and a multi-step GET form -> extract token -> POST flow",
+  "root_form_input_names": [
+   "comments",
+   "custemail",
+   "custname",
+   "custtel",
+   "delivery",
+   "size",
+   "topping"
+  ],
+  "site": "https://httpbin.org/forms/post"
+ },
+ "cost_basis": {
+  "body_sensitive": true,
+  "by_host": {
+   "about.gitlab.com": {
+    "mean": 2392,
+    "median": 2392,
+    "n": 1
+   },
+   "auth.wikimedia.org": {
+    "mean": 2875.5,
+    "median": 2859.0,
+    "n": 6
+   },
+   "bitbucket.org": {
+    "mean": 1674.8,
+    "median": 1899.5,
+    "n": 16
+   },
+   "developer.mozilla.org": {
+    "mean": 3176.4,
+    "median": 3116.5,
+    "n": 30
+   },
+   "docs.gitlab.com": {
+    "mean": 1838.4,
+    "median": 1589,
+    "n": 7
+   },
+   "docs.python.org": {
+    "mean": 1492.4,
+    "median": 1476.0,
+    "n": 30
+   },
+   "en.wikipedia.org": {
+    "mean": 6208.2,
+    "median": 7013.5,
+    "n": 24
+   },
+   "example.com": {
+    "mean": 165,
+    "median": 165,
+    "n": 1
+   },
+   "github.com": {
+    "mean": 2934.1,
+    "median": 2999.0,
+    "n": 30
+   },
+   "gitlab.com": {
+    "mean": 1368.8,
+    "median": 1214.0,
+    "n": 20
+   },
+   "httpbin.org": {
+    "mean": 415.7,
+    "median": 549,
+    "n": 9
+   },
+   "jsonplaceholder.typicode.com": {
+    "mean": 229.4,
+    "median": 158,
+    "n": 15
+   },
+   "reqres.in": {
+    "mean": 656.8,
+    "median": 645.5,
+    "n": 30
+   },
+   "www.atlassian.com": {
+    "mean": 3038.7,
+    "median": 3816.5,
+    "n": 12
+   },
+   "www.postman.com": {
+    "mean": 1293,
+    "median": 1293,
+    "n": 1
+   }
+  },
+  "includes": [
+   "url",
+   "method",
+   "status",
+   "links",
+   "forms",
+   "inputs",
+   "landmarks",
+   "headers",
+   "body_sha256",
+   "key_body_fields",
+   "body_bytes"
+  ],
+  "max": 10089,
+  "mean": 2278.4,
+  "median": 2120.0,
+  "min": 151,
+  "n_page_observations": 232,
+  "total": 528578,
+  "unit": "cl100k_base tokens over the FULL body-sensitive MinimalObservation structure"
+ },
+ "decision_rule": {
+  "F1_evaluated": false,
+  "H1_evaluated": false,
+  "branch_mechanically_selected": "ROW_1_screen_yields_lt_3_qualifying_sites",
+  "falsifier_F1": "rederivable_fraction > 0.8 on qualifying sites",
+  "hypothesis_H1": "rederivable_fraction < 0.3 on qualifying sites",
+  "min_required": 3,
+  "n_qualifying_sites": 0,
+  "row1_premise_evidence": {
+   "csrf_token_objects": 4,
+   "server_minted_tokens_unstable_across_sessions": [
+    "gitlab_trial_registration",
+    "wikipedia_create_account"
+   ],
+   "sites_with_token_gated_objects": [
+    "https://en.wikipedia.org",
+    "https://gitlab.com"
+   ],
+   "total_action_gating_spans_observed": 25
+  },
+  "row1_premise_falsified_by_this_run": true,
+  "row1_stated_interpretation": "prereg 4.4 / section 14 row 1: <3 qualifying sites means re-derivable surface = 1.0 in this substrate class because no action-gating structure exists to require cross-episode state -> C-CROSSSITE falsified in this substrate",
+  "why_not_evaluated": "Both H1 and F1 are defined over a qualifying site set of >= 3 sites. The frozen screen admitted 0, and the frozen calibration gate failed, so neither the hypothesis nor its falsifier is evaluable from this run."
+ },
+ "experiment_id": "EXP-FRONTIER-36306528608",
+ "http": {
+  "by_method": {
+   "GET": 299
+  },
+  "distinct_hosts": 16,
+  "non_get_requests_sent": 0,
+  "total_requests_logged": 299
+ },
+ "identifiers": {
+  "by_stability": {
+   "PENDING_CROSS_SESSION_COMPARISON": 6,
+   "session_scoped": 23,
+   "site_resource_id": 1667
+  },
+  "by_type": {
+   "hidden_form_token": 9,
+   "json_id_field": 1643,
+   "named_token_input": 14,
+   "server_minted_csrf_token": 6,
+   "url_path_id": 24
+  },
+  "n_detected": 1696,
+  "n_session_scoped": 23,
+  "session_scoped_sites": [
+   "https://en.wikipedia.org",
+   "https://gitlab.com"
+  ]
+ },
+ "prevalence": {
+  "definition_source": "prereg section 11 (same unit: span counts)",
+  "denominator_unit": "count of action-gating spans",
+  "equal_weight_per_site_mean": 0.16666666666666666,
+  "is_frozen_primary_metric": false,
+  "numerator_unit": "count of action-gating spans re-derivable from one unconditional GET of the root observation",
+  "per_site": [
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://httpbin.org"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://httpbin.org/forms/post"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://httpbin.org/cookies/set"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://httpbin.org/post"
+   },
+   {
+    "n_action_gating_spans": 1,
+    "n_rederivable_spans": 1,
+    "rederivable_fraction_site": 1.0,
+    "site": "https://postman-echo.com"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://api.publicapis.org"
+   },
+   {
+    "n_action_gating_spans": 1,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": 0.0,
+    "site": "https://reqres.in"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://jsonplaceholder.typicode.com"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://developer.mozilla.org"
+   },
+   {
+    "n_action_gating_spans": 3,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": 0.0,
+    "site": "https://docs.python.org"
+   },
+   {
+    "n_action_gating_spans": 8,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": 0.0,
+    "site": "https://en.wikipedia.org"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://example.com"
+   },
+   {
+    "n_action_gating_spans": 0,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": null,
+    "site": "https://github.com"
+   },
+   {
+    "n_action_gating_spans": 3,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": 0.0,
+    "site": "https://gitlab.com"
+   },
+   {
+    "n_action_gating_spans": 9,
+    "n_rederivable_spans": 0,
+    "rederivable_fraction_site": 0.0,
+    "site": "https://bitbucket.org"
+   }
+  ],
+  "pooled_ci95_lower": 0.0,
+  "pooled_ci95_upper": 0.2,
+  "pooled_rederivable_fraction": 0.04,
+  "total_action_gating_spans": 25,
+  "total_rederivable_spans": 1,
+  "why_not_primary": "The frozen primary metric is defined over the qualifying site set. The frozen screen admitted 0 sites, so this figure is a DIAGNOSTIC over all detected objects on all reachable frozen candidates, computed with the frozen prereg-11 protocol and the frozen same-unit numerator/denominator, but it is NOT the frozen primary metric and must not be read against the frozen thresholds."
+ },
+ "reproducibility": {
+  "criteria_identical_all": true,
+  "objects_identical_all": true,
+  "qualifying_stable": true,
+  "rows": [
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 8,
+    "pass2_objects": 8,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://en.wikipedia.org"
+   },
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 3,
+    "pass2_objects": 3,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://gitlab.com"
+   },
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 9,
+    "pass2_objects": 9,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://bitbucket.org"
+   },
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 3,
+    "pass2_objects": 3,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://docs.python.org"
+   },
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 1,
+    "pass2_objects": 1,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://reqres.in"
+   },
+   {
+    "by_type_identical": true,
+    "criteria_identical": true,
+    "objects_identical": true,
+    "pass1_objects": 0,
+    "pass2_objects": 0,
+    "qualifies_pass1": false,
+    "qualifies_pass2": false,
+    "url": "https://github.com"
+   }
+  ],
+  "second_live_pass_sites": 6
+ },
+ "screen": {
+  "missing_ingredients_by_site": {
+   "https://api.publicapis.org": [],
+   "https://bitbucket.org": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token"
+   ],
+   "https://developer.mozilla.org": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://docs.python.org": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "a same-URL content change on repeat GET within one session"
+   ],
+   "https://en.wikipedia.org": [
+    "a same-URL content change on repeat GET within one session"
+   ],
+   "https://example.com": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://github.com": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://gitlab.com": [
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session"
+   ],
+   "https://httpbin.org": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://httpbin.org/cookies/set": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://httpbin.org/forms/post": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://httpbin.org/post": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://jsonplaceholder.typicode.com": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ],
+   "https://postman-echo.com": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "an action-gating object at >= 2 hops from the root",
+    "3 or more action-gating objects"
+   ],
+   "https://reqres.in": [
+    "a declared non-GET form with an input named csrf|token|nonce|_token",
+    "a same-URL content change on repeat GET within one session",
+    "3 or more action-gating objects"
+   ]
+  },
+  "n_candidates": 15,
+  "n_qualifying": 0,
+  "n_reachable": 14,
+  "n_unreachable": [
+   "https://api.publicapis.org"
+  ],
+  "per_criterion": {
+   "C1": {
+    "n_evaluated": 15,
+    "n_pass": 13,
+    "pass_urls": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ]
+   },
+   "C2": {
+    "n_evaluated": 15,
+    "n_pass": 4,
+    "pass_urls": [
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ]
+   },
+   "C3": {
+    "n_evaluated": 15,
+    "n_pass": 2,
+    "pass_urls": [
+     "https://en.wikipedia.org",
+     "https://gitlab.com"
+    ]
+   },
+   "C4": {
+    "n_evaluated": 15,
+    "n_pass": 4,
+    "pass_urls": [
+     "https://reqres.in",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://bitbucket.org"
+    ]
+   },
+   "C5": {
+    "n_evaluated": 15,
+    "n_pass": 2,
+    "pass_urls": [
+     "https://postman-echo.com",
+     "https://bitbucket.org"
+    ]
+   },
+   "C6": {
+    "n_evaluated": 15,
+    "n_pass": 14,
+    "pass_urls": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://postman-echo.com",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ]
+   },
+   "C7": {
+    "n_evaluated": 15,
+    "n_pass": 14,
+    "pass_urls": [
+     "https://httpbin.org",
+     "https://httpbin.org/forms/post",
+     "https://httpbin.org/cookies/set",
+     "https://httpbin.org/post",
+     "https://postman-echo.com",
+     "https://reqres.in",
+     "https://jsonplaceholder.typicode.com",
+     "https://developer.mozilla.org",
+     "https://docs.python.org",
+     "https://en.wikipedia.org",
+     "https://example.com",
+     "https://github.com",
+     "https://gitlab.com",
+     "https://bitbucket.org"
+    ]
+   }
+  },
+  "qualifying_urls": []
+ },
+ "seed": 36306528608,
+ "token_stability_probe": {
+  "gitlab_trial_registration": {
+   "any_field_unstable": true,
+   "n_distinct_body_hashes": 3,
+   "per_field": {
+    "authenticity_token": {
+     "STABLE_ACROSS_INDEPENDENT_SESSIONS": false,
+     "n_distinct_values": 3
+    }
+   },
+   "sessions": 3,
+   "url": "https://gitlab.com/-/trial_registrations/new/"
+  },
+  "wikipedia_create_account": {
+   "any_field_unstable": true,
+   "n_distinct_body_hashes": 3,
+   "per_field": {
+    "wpCreateaccountToken": {
+     "STABLE_ACROSS_INDEPENDENT_SESSIONS": false,
+     "n_distinct_values": 3
+    }
+   },
+   "sessions": 3,
+   "url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount"
+  }
+ }
+}

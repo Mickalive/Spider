@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="Licence ReqRes for commercial use. Team and company licences with commercial use rights, priority support, pay by card or invoice. No meetings."
+        />
+        <title>Commercial licence | ReqRes for companies | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/commercial"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="ReqRes commercial licence"
+        />
+        <meta
+            property="og:description"
+            content="Licence ReqRes for commercial use. Team and company licences with commercial use rights, priority support, pay by card or invoice. No meetings."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/commercial"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="ReqRes commercial licence"
+        />
+        <meta
+            name="twitter:description"
+            content="Licence ReqRes for commercial use. Team and company licences with commercial use rights, priority support, pay by card or invoice. No meetings."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><section class="relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="max-w-3xl">
+            <p class="text-[11px] tracking-[0.2em] uppercase text-emerald-400 font-semibold">
+                ReqRes for companies
+            </p>
+            <h1 class="mt-3 text-4xl sm:text-5xl font-semibold tracking-tight">
+                The commercial licence
+            </h1>
+            <p class="mt-5 text-lg text-white/70">
+                A licence your legal team accepts, an invoice your finance team can pay,
+                and no meetings. If your engineers already use ReqRes at work or in CI,
+                this is the paperwork that makes it official.
+            </p>
+        </div>
+
+        <!-- Honest scale band. Usage figure and platform-scale figure kept distinct. -->
+        <div class="mt-10 grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                <p class="text-[11px] tracking-[0.2em] uppercase text-white/45 font-semibold">
+                    Real usage
+                </p>
+                <p class="mt-2 text-2xl font-semibold tracking-tight">billions of API requests a month</p>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                <p class="text-[11px] tracking-[0.2em] uppercase text-white/45 font-semibold">
+                    Platform scale
+                </p>
+                <p class="mt-2 text-sm text-white/70">~13 billion automated requests a month hit the API. We serve the genuine ones and shed the bulk machine traffic at the edge.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Founding rate (sprint 2026-08; remove after 15 Sep 2026). -->
+<section class="pb-4">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-xl border border-emerald-500/25 bg-emerald-500/10 p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+            <span class="text-[11px] tracking-[0.2em] uppercase text-emerald-300 font-semibold shrink-0">Founding rate</span>
+            <p class="text-sm text-white/80">
+                20% off your first year for teams that licence before 15 September 2026. Quote
+                <span class="font-mono text-emerald-300">FOUNDING20</span> when you get in touch.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="pb-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-7 flex flex-col">
+                <h2 class="text-xl font-semibold tracking-tight">Team Licence</h2>
+                <p class="mt-2 text-3xl font-semibold tracking-tight">
+                    £495<span class="text-base text-white/50 font-normal">/year</span>
+                </p>
+                <p class="mt-3 text-sm text-white/70">One team or product. Commercial use rights, priority email support.</p>
+                <ul class="mt-5 space-y-2 text-sm text-white/80 flex-1">
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Commercial use rights for one team / product</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Use in CI and internal tooling</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Priority email support</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Annual licence certificate + renewal reminder</span>
+                    </li>
+                </ul>
+                <a
+                    href="mailto:hello@reqres.in?subject=ReqRes Team Licence"
+                    class="mt-6 inline-flex justify-center rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/5 transition"
+                >
+                    Contact us to licence
+                </a>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-7 flex flex-col">
+                <h2 class="text-xl font-semibold tracking-tight">Company Licence</h2>
+                <p class="mt-2 text-3xl font-semibold tracking-tight">
+                    £1,950<span class="text-base text-white/50 font-normal">/year</span>
+                </p>
+                <p class="mt-3 text-sm text-white/70">Company-wide use, all teams and CI systems, a named support contact.</p>
+                <ul class="mt-5 space-y-2 text-sm text-white/80 flex-1">
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Company-wide commercial use rights (all teams, all CI)</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Named support contact</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Annual licence certificate + renewal reminder</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="text-emerald-400">&#10003;</span><span>Pay by card or invoice (NET 30)</span>
+                    </li>
+                </ul>
+                <a
+                    href="mailto:hello@reqres.in?subject=ReqRes Company Licence"
+                    class="mt-6 inline-flex justify-center rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/5 transition"
+                >
+                    Contact us to licence
+                </a>
+            </div>
+        </div>
+
+        <!-- OEM / redistribution / special terms — talk to us only (GA1). -->
+        <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.02] p-7">
+            <h2 class="text-lg font-semibold tracking-tight">OEM, redistribution &amp; special terms</h2>
+            <p class="mt-2 text-sm text-white/70">
+                Embedding ReqRes in a product you ship, redistributing it, or need bespoke terms?
+                <a href="mailto:hello@reqres.in?subject=ReqRes OEM / special terms" class="text-emerald-400 hover:underline">Email us</a>
+                and we will sort out the right agreement.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Procurement pack CTA -->
+<section class="pt-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="/commercial/procurement"
+           class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition"
+           data-visitors-event="Commercial Pack" data-visitors-source="commercial">
+            <div>
+                <h3 class="font-semibold text-white">Procurement pack</h3>
+                <p class="mt-1 text-sm text-white/60">Licence agreement, security &amp; architecture summary, and company details. No email gate.</p>
+            </div>
+            <span class="inline-flex items-center gap-2 text-emerald-400 text-sm font-semibold shrink-0">
+                Open the pack
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+        </a>
+    </div>
+</section>
+
+<!-- Procurement facts: how you pay, VAT, renewal. -->
+<section class="py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6 text-sm">
+        <div>
+            <h3 class="font-semibold text-white">Pay by card or invoice</h3>
+            <p class="mt-2 text-white/65">
+                Pay by card now and go live immediately, or request an invoice (NET 30) with a
+                PO number if finance needs one, using the form below.
+            </p>
+        </div>
+        <div>
+            <h3 class="font-semibold text-white">VAT</h3>
+            <p class="mt-2 text-white/65">
+                Prices are exclusive of VAT. UK VAT is added at checkout;
+                EU/other business buyers can enter a VAT number for reverse-charge handling where
+                applicable.
+            </p>
+        </div>
+        <div>
+            <h3 class="font-semibold text-white">Renewal</h3>
+            <p class="mt-2 text-white/65">
+                Licences run for 12 months and renew annually. You get a licence certificate on
+                purchase and a reminder before each renewal. Cancel anytime before renewal.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Invoice request (GA2 fake-door): self-serve, no email exchange to start. -->
+<section class="pb-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
+            <h3 class="font-semibold text-white">Need to pay by invoice?</h3>
+            <p class="mt-1 text-sm text-white/60">Tell us where to send it. We issue a Stripe invoice (NET 30), and you can add a PO number. No sales call.</p>
+            <form id="commercial-invoice-form" class="mt-5 grid sm:grid-cols-2 gap-3">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+                <select name="tier" required class="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2.5 text-sm text-white">
+                    <option value="commercial_team">Team Licence (£495/year)</option><option value="commercial_company">Company Licence (£1,950/year)</option>
+                </select>
+                <input name="company_name" required placeholder="Company name" class="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2.5 text-sm text-white placeholder-white/40" />
+                <input name="billing_email" type="email" required placeholder="Billing email" class="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2.5 text-sm text-white placeholder-white/40" />
+                <input name="vat_number" placeholder="VAT number (optional)" class="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2.5 text-sm text-white placeholder-white/40" />
+                <input name="po_number" placeholder="PO number (optional)" class="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2.5 text-sm text-white placeholder-white/40" />
+                <button type="submit" class="rounded-lg bg-emerald-500 text-black px-5 py-2.5 text-sm font-semibold hover:bg-emerald-400 transition sm:col-span-1">Request an invoice</button>
+            </form>
+            <p id="commercial-invoice-msg" class="mt-3 text-sm text-emerald-300" hidden></p>
+        </div>
+    </div>
+</section>
+
+<script>
+    (function () {
+        var form = document.getElementById('commercial-invoice-form')
+        if (!form) return
+        form.addEventListener('submit', function (e) {
+            e.preventDefault()
+            var btn = form.querySelector('button[type=submit]')
+            var msg = document.getElementById('commercial-invoice-msg')
+            var body = {}
+            new FormData(form).forEach(function (v, k) { body[k] = v })
+            btn.disabled = true; btn.textContent = 'Sending…'
+            fetch('/api/commercial/invoice', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+            }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j } }) })
+              .then(function (res) {
+                  if (res.ok && res.j.ok) {
+                      form.style.display = 'none'; msg.hidden = false; msg.textContent = res.j.message
+                      if (window.posthog) window.posthog.capture('commercial_invoice_requested_client')
+                  } else {
+                      btn.disabled = false; btn.textContent = 'Request an invoice'
+                      msg.hidden = false; msg.className = 'mt-3 text-sm text-amber-300'
+                      msg.textContent = (res.j && res.j.message) || 'Something went wrong. Email hello@reqres.in.'
+                  }
+              }).catch(function () { btn.disabled = false; btn.textContent = 'Request an invoice' })
+        })
+    })()
+</script>
+
+<!-- Champion toolkit (Door 3): most people who bring ReqRes into a team are not
+     the budget owner. Give them a one-click way to forward the business case. -->
+<section class="pb-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-xl border border-emerald-400/20 bg-emerald-400/[0.04] p-6 sm:p-8">
+            <h2 class="text-xl font-semibold tracking-tight text-white">Not the person who signs off on tools?</h2>
+            <p class="mt-2 text-sm text-white/70 max-w-2xl leading-relaxed">
+                Most people who bring ReqRes into a team are not the one who owns the budget. Forward the
+                business case to whoever is, in one click. It is short, honest, and already has the founding
+                discount in it.
+            </p>
+            <div class="mt-5 flex flex-wrap gap-3">
+                <a id="champion-mailto" href="#"
+                    class="inline-flex items-center justify-center rounded-lg bg-emerald-500 text-black px-5 py-2.5 text-sm font-semibold hover:bg-emerald-400 transition"
+                    data-visitors-event="Commercial CTA" data-visitors-source="commercial-champion-mailto">
+                    Email the business case to your manager
+                </a>
+                <button id="champion-copy" type="button"
+                    class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition">
+                    Copy it instead
+                </button>
+            </div>
+            <p id="champion-copied" class="mt-3 text-sm text-emerald-300" hidden>Copied. Paste it into an email or Slack.</p>
+        </div>
+    </div>
+    <script>
+    (function () {
+        var subject = 'ReqRes commercial licence for the team';
+        var body = [
+            'Hi,',
+            '',
+            "We're using ReqRes (reqres.in) in our development and testing workflow. The free tier is meant for personal use, so for our commercial use we need a licence. It covers commercial use rights, higher limits, and priority support, and can be paid by card or by invoice (NET 30).",
+            '',
+            "Pricing starts at GBP 495/year (Team), and there's 20% off year one with code FOUNDING20. Details and checkout: https://reqres.in/commercial?src=manager_forward",
+            '',
+            'Can we get this signed off?',
+            '',
+            'Thanks'
+        ].join('\n');
+        var a = document.getElementById('champion-mailto');
+        if (a) a.setAttribute('href', 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+        var btn = document.getElementById('champion-copy');
+        var msg = document.getElementById('champion-copied');
+        function track(ev) { try { if (window.posthog && window.posthog.capture) window.posthog.capture(ev); } catch (e) {} }
+        if (a) a.addEventListener('click', function () { track('commercial_manager_forward_clicked'); });
+        if (btn) btn.addEventListener('click', function () {
+            var text = subject + '\n\n' + body;
+            var done = function () { if (msg) msg.hidden = false; track('commercial_business_case_copied'); };
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () {}); }
+            else { try { var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); done(); } catch (e) {} }
+        });
+    })();
+    </script>
+</section>
+
+<!-- Company details for procurement paperwork (from config, GX2). -->
+<section class="pb-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-xl border border-white/10 bg-white/[0.02] p-6 text-xs text-white/50">
+            <p class="uppercase tracking-[0.2em] font-semibold text-white/40 mb-2">Supplier details</p>
+            <div>Ben Howdle Limited</div><div>86-90 Paul Street, London, EC2A 4NE, United Kingdom</div><div>Company No. 08781098</div><div>VAT No. GB267181684</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // GA4 event — page view (client PostHog, real distinct_id). Capture the
+    // ?src= tag so /commercial traffic is attributable to the API notice, the
+    // dashboard nudge, or the outreach that drove it.
+    window.addEventListener('load', function () {
+        var src = new URLSearchParams(window.location.search).get('src') || 'organic'
+        if (window.posthog && window.posthog.capture) window.posthog.capture('commercial_page_viewed', { src: src })
+    })
+    // Card checkout → POST → redirect to Stripe. Clean fallback if not yet available.
+    document.querySelectorAll('.commercial-buy').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var tier = btn.getAttribute('data-commercial-tier')
+            btn.disabled = true
+            btn.textContent = 'Redirecting…'
+            fetch('/api/commercial/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tier: tier }),
+            })
+                .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j } }) })
+                .then(function (res) {
+                    if (res.ok && res.j.url) { window.location.href = res.j.url; return }
+                    btn.disabled = false
+                    btn.textContent = 'Email hello@reqres.in'
+                    alert(res.j.message || 'Unable to start checkout. Please email hello@reqres.in.')
+                })
+                .catch(function () {
+                    btn.disabled = false
+                    btn.textContent = 'Email hello@reqres.in'
+                })
+        })
+    })
+</script>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

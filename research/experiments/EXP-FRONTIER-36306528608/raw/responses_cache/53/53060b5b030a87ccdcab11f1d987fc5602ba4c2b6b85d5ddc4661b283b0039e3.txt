@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', 'GTM-KB622KF')
+        </script>
+        <!-- End Google Tag Manager -->
+        <script
+            src="https://analytics.ahrefs.com/analytics.js"
+            data-key="JuVKDRQ5EM9I8yXFMoHuXw"
+            async
+        ></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="description"
+            content="A new REST API at /agent/v1/* purpose-built for AI coding agents. Cursor pagination, deeply nested data, deterministic seeded fixtures, and 15 deliberate failure scenarios. Free to use."
+        />
+        <title>Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents | ReqRes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/logo-dark.jpg"
+            alt="ReqRes Logo"
+        />
+        <link
+            rel="canonical"
+            href="https://reqres.in/blog/launching-agent-sandbox"
+        />
+        <!-- LLM-readable index of the API surface, for agents and AI crawlers. -->
+        <link
+            rel="alternate"
+            type="text/markdown"
+            title="ReqRes for LLMs (llms.txt)"
+            href="https://reqres.in/llms.txt"
+        />
+        <meta
+            property="og:title"
+            content="Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents | ReqRes Blog"
+        />
+        <meta
+            property="og:description"
+            content="A new REST API at /agent/v1/* purpose-built for AI coding agents. Cursor pagination, deeply nested data, deterministic seeded fixtures, and 15 deliberate failure scenarios. Free to use."
+        />
+        <meta
+            property="og:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta
+            property="og:url"
+            content="https://reqres.in/blog/launching-agent-sandbox"
+        />
+        <meta property="og:site_name" content="ReqRes" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents | ReqRes Blog"
+        />
+        <meta
+            name="twitter:description"
+            content="A new REST API at /agent/v1/* purpose-built for AI coding agents. Cursor pagination, deeply nested data, deterministic seeded fixtures, and 15 deliberate failure scenarios. Free to use."
+        />
+        <meta
+            name="twitter:image"
+            content="https://reqres.in/img/reqres-og-2x.png"
+        />
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <link rel="stylesheet" href="/css/tailwind.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/design.css" />
+        <script type="text/javascript">
+        function resolvePdSDKFunction(e,...t){return new Promise((n,i)=>{!function r(){window.PDPromotionUISDK&&"function"==typeof window.PDPromotionUISDK[e]?window.PDPromotionUISDK[e](...t).then(n).catch(i):setTimeout(r,100)}()})}!function(e,t,n,i,r,a,c){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(Array.prototype.slice.call(arguments))},a=t.createElement(n),c=t.getElementsByTagName(n)[0],a.id="parity-deals-sdk",a.async=1,a.src=r,c.parentNode.insertBefore(a,c)}(window,document,"script","PDPromotionUISDK","https://cdn.paritydeals.com/js-promotions-ui/1.0.0/js-promotions-ui.umd.js"),window.PDPromotionUI={init:function(e){return resolvePdSDKFunction("init",e)},getUpdatedPrice:function(e,t){return resolvePdSDKFunction("getUpdatedPrice",e,t)},updatePriceElement:function(e,t){return resolvePdSDKFunction("updatePriceElement",e,t)},updatePrice:function(e){return resolvePdSDKFunction("updatePrice",e)}};
+        </script>
+        <script type="application/ld+json">
+            [{"@context":"https://schema.org","@type":"BlogPosting","headline":"Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents","description":"A new REST API at /agent/v1/* purpose-built for AI coding agents. Cursor pagination, deeply nested data, deterministic seeded fixtures, and 15 deliberate failure scenarios. Free to use.","datePublished":"2026-09-27T09:12:50.972Z","dateModified":"2026-09-27T09:12:50.972Z","image":"https://reqres.in/img/reqres-og-2x.png","author":{"@type":"Person","name":"Ben Howdle","url":"https://benhowdle.im"},"publisher":{"@type":"Organization","name":"ReqRes","url":"https://reqres.in","logo":{"@type":"ImageObject","url":"https://reqres.in/img/logo-dark.jpg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://reqres.in/blog/launching-agent-sandbox"},"url":"https://reqres.in/blog/launching-agent-sandbox"}]
+        </script>
+    </head>
+    <body class="dark-site bg-black text-white">
+        <!--
+          Cross-subdomain signed-in awareness. The dashboard (app.reqres.in)
+          writes `rr_signed_in=1` on domain `.reqres.in` when Clerk has a
+          user. This tiny inline script runs before <main> and adds an
+          `rr-signed-in` class to <html> so downstream CSS + the welcome
+          banner below can react without a second network request.
+        -->
+        <script>
+            (function () {
+                try {
+                    if (/(?:^|;\s*)rr_signed_in=1(?:;|$)/.test(document.cookie)) {
+                        document.documentElement.classList.add('rr-signed-in');
+                    }
+                } catch (e) { /* ignore */ }
+            })();
+        </script>
+        <div
+            id="rr-welcome-back-banner"
+            style="display: none; background: rgba(16, 185, 129, 0.08); border-bottom: 1px solid rgba(16, 185, 129, 0.18); position: relative; z-index: 60;"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-sm">
+                <span style="color: rgba(255,255,255,0.78);">
+                    Welcome back - you're signed in.
+                </span>
+                <a
+                    href="https://app.reqres.in/dashboard"
+                    style="color: #6ee7b7; font-weight: 500; text-decoration: none;"
+                >
+                    Open your dashboard →
+                </a>
+            </div>
+        </div>
+        <style>
+            html.rr-signed-in #rr-welcome-back-banner { display: block !important; }
+        </style>
+        <main role="main"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+<style>
+    .blog-body {
+        font-size: 17px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .blog-body h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 0.9rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.95);
+        text-align: left;
+    }
+    .blog-body h3 {
+        font-size: 1.2rem;
+        margin-top: 1.4rem;
+        margin-bottom: 0.7rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.92);
+    }
+    .blog-body p {
+        color: rgba(255, 255, 255, 0.78);
+        margin-bottom: 1.05rem;
+    }
+    .blog-body ul {
+        list-style: disc;
+        padding-left: 1.35rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .blog-body li {
+        margin-bottom: 0.5rem;
+    }
+    .blog-body code {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 0.15rem 0.35rem;
+        font-size: 0.9em;
+    }
+    .blog-body pre {
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 1rem;
+        overflow-x: auto;
+        color: #e5e7eb;
+        font-size: 0.95em;
+        line-height: 1.6;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+    .blog-body pre::-webkit-scrollbar {
+        height: 6px;
+    }
+    .blog-body pre::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .blog-body pre::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+    }
+    .blog-body pre::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    .blog-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        font-size: 0.95em;
+    }
+    .blog-body th {
+        text-align: left;
+        padding: 0.6rem 0.9rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .blog-body td {
+        padding: 0.55rem 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.75);
+        white-space: nowrap;
+    }
+    .blog-body tr:last-child td {
+        border-bottom: none;
+    }
+    .blog-body blockquote {
+        border-left: 3px solid rgba(255, 255, 255, 0.2);
+        padding-left: 0.9rem;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .blog-body a {
+        color: #a5b4fc;
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.3);
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+    .blog-body a:hover,
+    .blog-body a:focus-visible {
+        color: #c4d4ff;
+        text-decoration-color: rgba(255, 255, 255, 0.7);
+    }
+</style>
+
+<style>
+    .rr-header-nav {
+        gap: 1.75rem;
+    }
+    .rr-header-link {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        padding: 6px 0;
+        transition: color 180ms ease, transform 180ms ease;
+    }
+    .rr-header-link:hover,
+    .rr-header-link:focus-visible {
+        color: rgba(255, 255, 255, 0.95);
+        outline: none;
+        transform: translateY(-1px);
+    }
+    .rr-header-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            rgba(52, 211, 153, 0),
+            rgba(52, 211, 153, 0.7),
+            rgba(52, 211, 153, 0)
+        );
+        transform: scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 220ms ease;
+    }
+    .rr-header-link:hover::after,
+    .rr-header-link:focus-visible::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    .rr-header-link.is-active {
+        color: rgba(255, 255, 255, 0.98);
+    }
+    .rr-header-link.is-active::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .rr-header-link,
+        .rr-header-link::after {
+            transition: none !important;
+        }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div id="agents-banner" class="agents-promo-banner" style="display:none;">
+    <div class="agents-promo-inner">
+        <span class="agents-promo-tape" role="presentation"></span>
+        <span class="agents-promo-text">
+            <b>New:</b> ReqRes for Agents. A deterministic sandbox where AI agents practice real API work, failures included.
+            <a href="/agents" class="agents-promo-link" data-visitors-event="Agents Banner Click" data-ph="agent_banner_clicked" data-ph-source="homepage">Explore the staging internet &rarr;</a>
+        </span>
+        <button type="button" class="agents-promo-close" aria-label="Dismiss" onclick="(function(e){e.closest('.agents-promo-banner').style.display='none';try{sessionStorage.setItem('rr_agents_banner_dismissed','1')}catch(x){}})(this)">&times;</button>
+    </div>
+</div>
+<style>
+    .agents-promo-banner {
+        background: rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .agents-promo-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .agents-promo-tape {
+        width: 26px;
+        height: 8px;
+        flex-shrink: 0;
+        background: repeating-linear-gradient(-45deg, #14161A 0 5px, #FFB300 5px 10px);
+        border-radius: 2px;
+    }
+    .agents-promo-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .agents-promo-text b {
+        color: #fbbf24;
+        font-weight: 600;
+    }
+    .agents-promo-link {
+        color: #6ee7b7;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    .agents-promo-link:hover {
+        color: #a7f3d0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .agents-promo-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.3);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .agents-promo-close:hover { color: rgba(255,255,255,0.6); }
+</style>
+<script>
+    (function(){
+        try {
+            if (sessionStorage.getItem('rr_agents_banner_dismissed') === '1') return;
+        } catch(e) {}
+        var b = document.getElementById('agents-banner');
+        if (b) b.style.display = 'block';
+    })();
+</script>
+
+
+<nav
+    class="sticky top-0 z-50 backdrop-blur bg-black/40 border-b border-white/5"
+>
+    <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3"
+    >
+        <!-- Tablet and up: single row -->
+        <div class="hidden sm:flex items-center justify-between">
+            <a class="flex items-center gap-2.5 group" href="/">
+                <div class="w-[30px] h-[30px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[13px] font-bold text-emerald-300/70 tracking-tight transition-all duration-300 group-hover:border-emerald-400/25 group-hover:bg-emerald-400/[0.07]">R</div>
+                <span class="text-[15px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+            </a>
+
+            <div class="flex items-center rr-header-nav">
+                <a href="/#pricing" class="rr-header-link ">Pricing</a>
+                <a href="/teams" class="rr-header-link ">Teams</a>
+                <a href="/blog" class="rr-header-link is-active">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link "
+                    >About</a
+                >
+            </div>
+
+            <a
+                href="https://app.reqres.in/"
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300"
+                data-visitors-event="Signup CTA"
+                data-visitors-source="nav"
+            >
+                Get Started
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile only -->
+        <div class="sm:hidden space-y-2">
+            <div class="flex items-center justify-between">
+                <a class="flex items-center gap-2 group shrink-0" href="/">
+                    <div class="w-[28px] h-[28px] rounded-lg border border-emerald-400/15 bg-emerald-400/[0.04] flex items-center justify-center text-[12px] font-bold text-emerald-300/70 tracking-tight">R</div>
+                    <span class="text-[14px] font-medium text-white/75 tracking-tight">Req<span class="text-emerald-300/60">Res</span></span>
+                </a>
+
+                <a
+                    href="https://app.reqres.in/"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/60 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:border-white/[0.15] hover:text-white/80 hover:bg-white/[0.04] transition-all duration-300 shrink-0"
+                    data-visitors-event="Signup CTA"
+                    data-visitors-source="nav"
+                >
+                    Get Started
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 overflow-x-auto -mx-4 px-4 scrollbar-hide" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <a href="/#pricing" class="rr-header-link !text-[13px] shrink-0 ">Pricing</a>
+                <a href="/teams" class="rr-header-link !text-[13px] shrink-0 ">Teams</a>
+                <a href="/blog" class="rr-header-link !text-[13px] shrink-0 is-active">Blog</a>
+                <a
+                    href="/docs"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    data-visitors-event="Docs CTA"
+                    data-visitors-source="nav"
+                    >Docs</a
+                >
+                <a
+                    href="/about"
+                    class="rr-header-link !text-[13px] shrink-0 "
+                    >About</a
+                >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="py-8 md:py-20 bg-black text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/65">
+            <ol class="flex items-center gap-2 flex-wrap">
+                <li>
+                    <a class="hover:text-white" href="/">Home</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                    <a class="hover:text-white" href="/blog">Blog</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li class="text-white/80">Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents</li>
+            </ol>
+        </nav>
+
+        <header class="space-y-3">
+            <p
+                class="text-[11px] uppercase tracking-[0.2em] text-white/50 font-semibold"
+            >
+                ReqRes Blog
+            </p>
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">
+                Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents
+            </h1>
+            <div
+                class="flex flex-wrap items-center gap-3 text-sm text-white/65"
+            >
+                <span>Apr 13, 2026</span>
+                <span aria-hidden="true">•</span>
+                <span>6 min read</span>
+                <span aria-hidden="true">•</span>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >announcement</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >ai</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >llm</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >developer-tools</span
+                    >
+                    <span
+                        class="text-[11px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                        >launch</span
+                    >
+                </div>
+            </div>
+        </header>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6 flex flex-col gap-3 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+        >
+            <div
+                class="flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-white/50 font-semibold"
+            >
+                Next step
+            </div>
+            <p class="text-sm text-white/70">
+                Want to try this in 2 minutes? Start a project or open the Notes example.
+            </p>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                <a
+                    href="https://app.reqres.in/getting-started"
+                    class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                >
+                    Get started
+                    <span class="ml-2 text-xs opacity-80">→</span>
+                </a>
+                <a
+                    href="https://app.reqres.in/examples/notes-app"
+                    class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                >
+                    See example app
+                    <span class="ml-2 text-xs opacity-70">→</span>
+                </a>
+            </div>
+        </div>
+
+        <article
+            class="blog-body rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+        >
+            <p>Most AI coding agents that touch a REST API in their first session do something predictable: they generate code that fetches a resource, finds it returns 12 fixture users with shallow shapes, write a wrapper that assumes those shapes hold in production, and then break the moment the user points the agent at a real API.</p>
+<p>The legacy <code>/api/users</code> endpoint at reqres.in is great for humans learning HTTP. It&#39;s the wrong shape for an agent practicing real code. So we built a new one.</p>
+<p>Today we&#39;re launching the <strong>ReqRes Agent Sandbox</strong>: a set of endpoints under <code>/agent/v1/*</code> designed specifically for AI coding agents to practice against. Free to use, deterministic, with the kinds of edge cases agents encounter in production.</p>
+<h2>What&#39;s in it</h2>
+<p>Six endpoints, each chosen to force agents to handle something real-world.</p>
+<h3><code>GET /agent/v1/users</code></h3>
+<p>Cursor-paginated user list. No <code>?page=N</code>. Agents have to learn <code>meta.next_cursor</code> and pass it back unchanged. Limits over 100 are silently clamped, so agents have to verify <code>meta.returned</code> matches their requested limit. Sparse fieldsets via <code>?fields=id,email</code>.</p>
+<pre><code class="language-bash">curl https://reqres.in/agent/v1/users?limit=2
+</code></pre>
+<p>Returns 247 users per seed (default <code>seed=42</code>), with nullable nested fields, ULID IDs (<code>usr_01H...</code>), and ISO 8601 timestamps with millisecond precision. The same request always returns the same response.</p>
+<h3><code>GET /agent/v1/users/:id</code></h3>
+<p>Deeply nested single resource with optional expansion. Without <code>?expand=</code>, nested resources return as references (<code>{id, object_type}</code>). With <code>?expand=addresses,activity,organizations</code>, they&#39;re inlined. Activity records have heterogeneous shapes -- a <code>login</code> event has <code>ip_address</code> and <code>user_agent</code>, a <code>profile_updated</code> event has <code>changed_fields[]</code> instead. Agents that assume uniform array members break.</p>
+<h3><code>POST /agent/v1/auth/login</code></h3>
+<p>Two response shapes depending on the email. Normal accounts return a session with token, refresh_token, expires_at, and user object. Accounts with email containing <code>+mfa@</code> return an MFA challenge with a <code>next_step</code> hypermedia hint pointing to the verification endpoint. Trains agents to handle response shape variation and to use hypermedia for recovery.</p>
+<p>Other deterministic test triggers: <code>+wrong@</code> for invalid_credentials (401), <code>+locked@</code> for account_locked (401).</p>
+<h3><code>GET /agent/v1/orders</code></h3>
+<p>Relational data: orders reference users, products, addresses, and payment methods. Money is always <code>{amount, currency, formatted}</code> Stripe-style -- <code>amount</code> is in the smallest currency unit (cents for USD), never a decimal. Some line items reference deleted products, where <code>product.deleted_at</code> is set and <code>product.name</code>/<code>product.price</code> are <code>null</code>. Forces agents to handle the &quot;referenced resource was deleted after the parent was created&quot; case.</p>
+<h3><code>GET /agent/v1/scenarios/:scenario</code></h3>
+<p>Fifteen deliberate failure modes for testing error handling without trying to force errors on real endpoints:</p>
+<ul>
+<li><code>rate-limited</code>, <code>server-error</code>, <code>bad-gateway</code>, <code>timeout</code>, <code>validation-error</code></li>
+<li><code>unauthorized</code>, <code>forbidden</code>, <code>not-found</code>, <code>conflict</code>, <code>too-large</code></li>
+<li><code>slow</code>, <code>partial-content</code>, <code>redirect-loop</code>, <code>malformed-json</code>, <code>empty-response</code></li>
+</ul>
+<p>Every response includes the header <code>X-Agent-Sandbox-Intentional: &lt;scenario-name&gt;</code>. Configure your error reporter (Sentry, Bugsnag) to suppress responses with this header so your agent&#39;s training scenarios don&#39;t fill up your alert dashboard.</p>
+<p><code>timeout</code> and <code>slow</code> are special: they return immediately with a <code>X-Agent-Sandbox-Simulated-Delay</code> header instead of actually holding the connection open for 30 or 10 seconds. Agents that want to test real timeout handling read the header and delay client-side. Holding open thousands of slow connections would have exhausted our origin&#39;s connection pool.</p>
+<h3><code>GET /agent/v1/health</code></h3>
+<p>Cheap to poll. Returns sandbox status, version, uptime, and the caller&#39;s current rate-limit status. Agents can probe this before a burst of requests to know how much quota they have left. Not edge-cached (<code>Cache-Control: no-store</code>) because the response varies by the caller&#39;s tier - the numbers you see are always yours.</p>
+<h2>Why determinism matters</h2>
+<p>Same <code>(seed, cursor, params)</code> always returns the same response. This is the single most important property of the sandbox.</p>
+<p>Agents fail in production all the time. The hard part isn&#39;t fixing the failure -- it&#39;s reproducing it. With non-deterministic test data, an agent that worked in CI on Tuesday and broke on Wednesday is a haunted-house debugging session. With deterministic test data, you replay the exact same request and get the exact same response, every time. The failure is reproducible. The fix is testable.</p>
+<p>This is the same reason Stripe&#39;s test mode is deterministic. It&#39;s the reason CI test fixtures are checked into version control. Determinism turns &quot;this is broken intermittently&quot; into &quot;here is the reproducer.&quot;</p>
+<h2>Conventions</h2>
+<p>We picked conventions agents will already be familiar with from working with Stripe, GitHub, and other production APIs:</p>
+<ul>
+<li><strong>IDs:</strong> ULID format with type prefix (<code>usr_</code>, <code>ord_</code>, <code>prd_</code>, <code>adr_</code>). 26 characters after the underscore. Lexicographically sortable.</li>
+<li><strong>Timestamps:</strong> ISO 8601 with millisecond precision, always UTC. <code>.000Z</code> suffix even for whole-second values, for parse consistency.</li>
+<li><strong>Money:</strong> Always an object <code>{amount: integer_in_smallest_unit, currency: &quot;ISO 4217 code&quot;, formatted: &quot;human-readable&quot;}</code>. Never a decimal number.</li>
+<li><strong>Cursors:</strong> Opaque base64-encoded JSON with a nonce. Two requests at the same offset produce different cursor strings -- agents must treat cursors as opaque and pass them back unchanged.</li>
+<li><strong>Cache-Control:</strong> Data endpoints <code>max-age=60, s-maxage=300</code>. Scenario endpoints <code>no-store</code>.</li>
+<li><strong>Request IDs:</strong> Every response sets <code>X-Request-ID</code>. Include in support requests.</li>
+</ul>
+<p>Full conventions in <a href="/llm.txt"><code>/llm.txt</code></a> and the <a href="/openapi.json">OpenAPI spec</a>.</p>
+<h2>Pricing</h2>
+<p>The sandbox is <strong>free to use</strong> with IP-based rate limits - 100 requests/day per IP, no signup. Good for prototyping and first-integration smoke tests. Free tier also exposes 3 sample <code>/scenarios/*</code> (<code>rate-limited</code>, <code>validation-error</code>, <code>malformed-json</code>) so you can wire up error handling before committing.</p>
+<p>For production volume, there&#39;s a new <strong>Agent Developer plan at $49/month</strong> that gives you 10 million requests per month (~333,333/day), access to all 15 failure scenarios, and a usage dashboard at <a href="https://app.reqres.in/agents">app.reqres.in/agents</a>. Subscribers also get Dev plan quotas on the main ReqRes BaaS product (collections, app users, request logs, custom endpoints).</p>
+<p>Subscribing provisions an <code>x-agent-id</code> key (format: <code>agt_&lt;64 hex&gt;</code>) which you send on every call to raise the cap. The key is attached to your account in Stripe, not to an agent identity or version string - pass the same key from any agent or environment. Arbitrary strings in the header (e.g. <code>vendor/agent/version</code>) are rejected with 401.</p>
+<h2>How agents discover the sandbox</h2>
+<p>We publish three machine-readable manifests:</p>
+<ul>
+<li><code>/llms.txt</code> -- top-level discovery, ~50 lines, points to deeper references</li>
+<li><code>/llm.txt</code> -- comprehensive text guide with every endpoint, error shape, and convention</li>
+<li><code>/openapi.json</code> -- OpenAPI 3.0.3 spec, full schemas</li>
+</ul>
+<p>Point your agent at any of these. The intent is that an agent should be able to fetch one of them once, understand the entire API, and write working code without any human in the loop.</p>
+<h2>What&#39;s next</h2>
+<p>This is v1. Things we&#39;re explicitly NOT shipping in v1:</p>
+<ul>
+<li>Authentication on the agent endpoints (open for now, IP rate-limiting)</li>
+<li>Write operations on <code>/agent/v1/users</code></li>
+<li>Webhooks or long-polling</li>
+<li>Time-series data endpoints</li>
+<li>GraphQL variant</li>
+<li>SDK on npm (<code>@reqresin/agent-sandbox</code> -- coming soon)</li>
+</ul>
+<p>If you&#39;re building an AI coding agent and want endpoints designed for your use case, <a href="mailto:hello@reqres.in">tell us what you need</a>.</p>
+<h2>Try it</h2>
+<pre><code class="language-bash">curl https://reqres.in/agent/v1/users?limit=2
+</code></pre>
+<p>No header, no signup - that&#39;s the free tier. Once you&#39;re on Agent Developer, add <code>-H &quot;x-agent-id: agt_&lt;your key&gt;&quot;</code> to raise the cap and unlock every scenario.</p>
+<h2>Kickstart prompt</h2>
+<p>If you&#39;re building against this with an LLM, copy-paste this into Claude Code, Cursor, ChatGPT, or whatever you use, then tell it what to build:</p>
+<pre><code class="language-markdown">I&#39;m wiring up code against ReqRes for Agents - a deterministic HTTP sandbox for AI coding agents.
+
+Spec (fetch and read first):
+  https://reqres.in/llm.txt
+  https://reqres.in/openapi.json
+
+Facts to keep in working memory:
+- Base URL: https://reqres.in/agent/v1
+- Auth: free tier is open (no header), capped at 100 requests/day per IP. Paid tier sends `x-agent-id: agt_&lt;64 hex&gt;` for 10M requests/month. Keys are issued only via https://app.reqres.in/agents - never invent or guess the value. Arbitrary strings return 401.
+- Endpoints: GET /users, GET /users/:id (?expand=addresses,activity,organizations), POST /auth/login, GET /orders, GET /scenarios/:name, GET /health.
+- IDs are ULIDs with a type prefix (usr_, ord_, prd_, adr_, act_). 26 chars after the prefix.
+- Money is always {amount (integer in smallest unit), currency, formatted}. Never a decimal.
+- Pagination is cursor-based. Pass meta.next_cursor back unchanged. Treat cursors as opaque.
+- Deterministic: same (seed, cursor, params) → same response. Default seed=42.
+- /scenarios/:name exposes 15 deliberate failures for exercising retry/backoff/error paths. Every response sets X-Agent-Sandbox-Intentional; suppress that in your error reporter so training runs don&#39;t fill your alert queue.
+- Free tier only unlocks 3 of the 15 scenarios (rate-limited, validation-error, malformed-json); the rest return 403 until you&#39;re on Agent Developer.
+
+Now please: &lt;tell the agent what to do&gt;
+</code></pre>
+<p>More at <a href="/for/ai-agents">reqres.in/for/ai-agents</a>.</p>
+
+        </article>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7 space-y-4"
+        >
+            <div class="flex items-center justify-between gap-3">
+                <h2 class="text-xl font-semibold">Keep reading</h2>
+                <a
+                    href="/blog"
+                    class="text-sm text-indigo-300 hover:text-white inline-flex items-center gap-1"
+                >
+                    View all
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <a
+                    href="/blog/build-app-with-ai-against-reqres"
+                    class="rounded-xl border border-white/10 bg-black/50 p-4 flex flex-col gap-2 hover:border-white/20 hover:-translate-y-1 transition duration-300"
+                >
+                    <div class="text-[12px] text-white/60">
+                        Apr 2, 2026 • 4 min read
+                    </div>
+                    <div class="text-base font-semibold text-white">
+                        How to use ChatGPT, Claude, or Cursor to build an app against ReqRes
+                    </div>
+                    <p class="text-sm text-white/70">You can build a working app against ReqRes in minutes if you give your AI tool the right context. Without it, the LLM will guess at endpoints, invent auth headers, and generate code that looks right but fails on every...</p>
+                </a>
+                <a
+                    href="/blog/classrooms-for-api-teaching"
+                    class="rounded-xl border border-white/10 bg-black/50 p-4 flex flex-col gap-2 hover:border-white/20 hover:-translate-y-1 transition duration-300"
+                >
+                    <div class="text-[12px] text-white/60">
+                        Mar 2, 2026 • 6 min read
+                    </div>
+                    <div class="text-base font-semibold text-white">
+                        Classrooms: Give Every Student Their Own API
+                    </div>
+                    <p class="text-sm text-white/70">You know the drill. Twenty students, one shared sandbox, and someone runs a DELETE that takes out everyone&#x27;s data five minutes into class. Half the room is debugging someone else&#x27;s mess. The other half hasn&#x27;t started ...</p>
+                </a>
+            </div>
+        </div>
+
+        <div
+            class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+        >
+            <div class="text-sm text-white/70">
+                Ready to ship? Continue in the app.
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                <a
+                    href="https://app.reqres.in"
+                    class="inline-flex items-center justify-center rounded-md bg-white text-black px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-white/90 w-full sm:w-auto"
+                >
+                    Get started
+                    <span class="ml-2 text-xs opacity-80">→</span>
+                </a>
+                <a
+                    href="https://app.reqres.in/?next=/examples/notes-app"
+                    class="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 w-full sm:w-auto"
+                >
+                    See example app
+                    <span class="ml-2 text-xs opacity-70">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://reqres.in/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://reqres.in/blog"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Launching the ReqRes Agent Sandbox: a REST API designed for AI coding agents",
+                "item": "https://reqres.in/blog/launching-agent-sandbox"
+            }
+        ]
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.hljs) {
+            document.querySelectorAll('.blog-body pre code').forEach(function (el) {
+                window.hljs.highlightElement(el);
+            });
+        }
+    });
+</script>
+</main>
+        <script>
+            window.__REQRES_POSTHOG__ = {
+                key: 'phc_NrJczFx5WV2TAzo2YWa3fMmalFDTuTfl3MfZVtjW7Of',
+                host: 'https://eu.i.posthog.com',
+            }
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-174008107-1"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+
+            gtag('config', 'UA-174008107-1')
+        </script>
+        <script>
+            ;(function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r
+                ;(i[r] =
+                    i[r] ||
+                    function () {
+                        ;(i[r].q = i[r].q || []).push(arguments)
+                    }),
+                    (i[r].l = 1 * new Date())
+                ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+                a.async = 1
+                a.src = g
+                m.parentNode.insertBefore(a, m)
+            })(
+                window,
+                document,
+                'script',
+                '//www.google-analytics.com/analytics.js',
+                'ga'
+            )
+
+            ga('create', 'UA-55888877-1', 'auto')
+            ga('send', 'pageview')
+        </script>
+    </body>
+</html>

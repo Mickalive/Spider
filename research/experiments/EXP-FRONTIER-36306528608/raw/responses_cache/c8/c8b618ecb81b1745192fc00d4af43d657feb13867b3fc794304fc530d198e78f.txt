@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-disabled vector-feature-custom-font-size-clientpref--excluded vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-not-available skin-thumbsize-clientpref-standard" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Pages that link to "Help:Introduction" - Wikipedia</title>
+<script>(function(){var className="client-js vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-disabled vector-feature-custom-font-size-clientpref--excluded vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-not-available skin-thumbsize-clientpref-standard";var cookie=document.cookie.match(/(?:^|; )enwikimwclientpreferences=([^;]+)/);if(cookie){cookie[1].split('%2C').forEach(function(pref){className=className.replace(new RegExp('(^| )'+pref.replace(/-clientpref-\w+$|[^\w-]+/g,'')+'-clientpref-\\w+( |$)'),'$1'+pref+'$2');});}document.documentElement.className=className;}());RLCONF={"wgBreakFrames":true,"wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgRequestId":"b933f9a4-0c6b-45d9-a3d5-4d4e3d94cc0e","wgCanonicalNamespace":"Special","wgCanonicalSpecialPageName":"Whatlinkshere","wgNamespaceNumber":-1,"wgPageName":"Special:WhatLinksHere/Help:Introduction","wgTitle":"WhatLinksHere/Help:Introduction","wgCurRevisionId":0,"wgRevisionId":0,"wgArticleId":0,"wgIsArticle":false,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgPageViewLanguage":"en","wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgRelevantPageName":"Help:Introduction","wgRelevantArticleId":48557688,"wgTempUserName":null,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgNoticeProject":"wikipedia","wgFlaggedRevsParams":{"tags":{"status":{"levels":1}},"namespaces":[0,4]},"wgConfirmEditCaptchaNeededForGenericEdit":false,"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgMediaViewerMobileBeta":false,"wgPopupsFlags":0,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","pageVariantFallbacks":"en"},"wgMFDisplayWikibaseDescriptions":{"search":true,"watchlist":true,"tagline":false,"nearby":true},"wgWMESchemaEditAttemptStepOversample":false,"wgWMEPageLength":0,"wgTestKitchenUserExperiments":{"overrides":[],"enrolled":[],"assigned":[],"subject_ids":[]},"wgEditSubmitButtonLabelPublish":true,"wgVisualEditorPageIsDisambiguation":false,"wgULSPosition":"interlanguage","wgULSisCompactLinksEnabled":false,"wgVector2022LanguageInHeader":true,"wgULSisLanguageSelectorEmpty":true,"wgULSLanguageSelectorV2Enabled":true,"wgCheckUserClientHintsHeadersJsApi":["brands","architecture","bitness","fullVersionList","mobile","model","platform","platformVersion"],"wgPersonalDashboardMenuVisible":false};
+RLSTATE={"ext.globalCssJs.user.styles":"ready","site.styles":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":"ready","user.options":"loading","mediawiki.helplink":"ready","mediawiki.special":"ready","oojs-ui-core.styles":"ready","oojs-ui.styles.indicators":"ready","mediawiki.widgets.styles":"ready","oojs-ui-core.icons":"ready","mediawiki.htmlform.ooui.styles":"ready","mediawiki.htmlform.styles":"ready","mediawiki.codex.messagebox.styles":"ready","skins.vector.search.codex.styles":"ready","skins.vector.styles":"ready","skins.vector.icons":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready"};RLPAGEMODULES=["mediawiki.htmlform","mediawiki.htmlform.ooui","mediawiki.widgets","site","mediawiki.page.ready","skins.vector.js","ext.centralNotice.geoIP","ext.gadget.ReferenceTooltips","ext.gadget.switcher","ext.urlShortener.toolbar","ext.centralauth.centralautologin","ext.testKitchen","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.echo.centralauth","ext.eventLogging","ext.wikimediaEvents","ext.navigationTiming","ext.uls.interface","ext.cx.eventlogging.campaigns","wikibase.databox.fromWikidata","ext.checkUser.clientHints"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.impl(function(){return["user.options@12s5i",function($,jQuery,require,module){mw.user.tokens.set({"patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});mw.user.options.set({"usecodemirror":1});
+}];});});</script>
+<link rel="stylesheet" href="/w/load.php?lang=en&amp;modules=ext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cmediawiki.codex.messagebox.styles%7Cmediawiki.helplink%2Cspecial%7Cmediawiki.htmlform.ooui.styles%7Cmediawiki.htmlform.styles%7Cmediawiki.widgets.styles%7Coojs-ui-core.icons%2Cstyles%7Coojs-ui.styles.indicators%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles&amp;only=styles&amp;skin=vector-2022">
+<script async="" src="/w/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;raw=1&amp;skin=vector-2022"></script>
+<meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022">
+<meta name="generator" content="MediaWiki 1.47.0-wmf.21">
+<meta name="referrer" content="origin">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="robots" content="noindex,nofollow,max-image-preview:standard">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=1120">
+<meta property="og:title" content="Pages that link to &quot;Help:Introduction&quot; - Wikipedia">
+<meta property="og:type" content="website">
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png">
+<link rel="icon" href="/static/favicon/wikipedia.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="/w/rest.php/v1/search" title="Wikipedia (en)">
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd">
+<link rel="canonical" href="https://en.wikipedia.org/wiki/Special:WhatLinksHere/Help:Introduction">
+<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">
+<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom feed" href="/w/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="dns-prefetch" href="auth.wikimedia.org">
+</head>
+<body class="skin--responsive skin-vector skin-vector-search-vue mediawiki ltr sitedir-ltr mw-hide-empty-elt ns--1 ns-special mw-special-Whatlinkshere page-Special_WhatLinksHere_Help_Introduction rootpage-Special_WhatLinksHere_Help_Introduction skin-vector-2022 action-view">
+<div id="mw-aria-live-region" class="mw-aria-live-region" aria-live="polite"></div><a class="mw-jump-link" href="#bodyContent">Jump to content</a>
+<div class="vector-header-container">
+	<header class="vector-header mw-header no-font-mode-scale">
+		<div class="vector-header-start">
+			<nav class="vector-main-menu-landmark" aria-label="Site">
+				
+<div id="vector-main-menu-dropdown" class="vector-dropdown vector-main-menu-dropdown vector-button-flush-left vector-button-flush-right"  title="Main menu" >
+	<input type="checkbox" id="vector-main-menu-dropdown-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-main-menu-dropdown" class="vector-dropdown-checkbox "  aria-label="Main menu"   >
+	<label id="vector-main-menu-dropdown-label" for="vector-main-menu-dropdown-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"  ><span class="vector-icon mw-ui-icon-menu mw-ui-icon-wikimedia-menu cdx-button__icon"></span>
+
+<span class="vector-dropdown-label-text">Main menu</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+				<div id="vector-main-menu-unpinned-container" class="vector-unpinned-container">
+		
+<div id="vector-main-menu" class="vector-main-menu vector-pinnable-element">
+	<div
+	class="vector-pinnable-header vector-main-menu-pinnable-header vector-pinnable-header-unpinned"
+	data-feature-name="main-menu-pinned"
+	data-pinnable-element-id="vector-main-menu"
+	data-pinned-container-id="vector-main-menu-pinned-container"
+	data-unpinned-container-id="vector-main-menu-unpinned-container"
+>
+	<div class="vector-pinnable-header-label">Main menu</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-main-menu.pin" aria-label="Move Main menu to sidebar">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-main-menu.unpin" aria-label="Hide Main menu">hide</button>
+</div>
+
+	
+<div id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation"  >
+	<div class="vector-menu-heading">
+		Navigation
+	</div>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			<li id="n-mainpage-description" class="mw-list-item"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z"><span>Main page</span></a></li><li id="n-contents" class="mw-list-item"><a href="/wiki/Wikipedia:Contents" title="Guides to browsing Wikipedia"><span>Contents</span></a></li><li id="n-currentevents" class="mw-list-item"><a href="/wiki/Portal:Current_events" title="Articles related to current events"><span>Current events</span></a></li><li id="n-randompage" class="mw-list-item"><a href="/wiki/Special:Random" title="Visit a randomly selected article [x]" accesskey="x"><span>Random article</span></a></li><li id="n-aboutsite" class="mw-list-item"><a href="/wiki/Wikipedia:About" title="Learn about Wikipedia and how it works"><span>About Wikipedia</span></a></li><li id="n-contactpage" class="mw-list-item"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia"><span>Contact us</span></a></li>
+		</ul>
+		
+	</div>
+</div>
+
+	
+<div id="p-interaction" class="vector-menu mw-portlet mw-portlet-interaction"  >
+	<div class="vector-menu-heading">
+		Contribute
+	</div>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			<li id="n-help" class="mw-list-item"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia"><span>Help</span></a></li><li id="n-introduction" class="mw-list-item"><a href="/wiki/Help:Introduction" title="Learn how to edit Wikipedia"><span>Learn to edit</span></a></li><li id="n-portal" class="mw-list-item"><a href="/wiki/Wikipedia:Community_portal" title="The hub for editors"><span>Community portal</span></a></li><li id="n-recentchanges" class="mw-list-item"><a href="/wiki/Special:RecentChanges" title="A list of recent changes to Wikipedia [r]" accesskey="r"><span>Recent changes</span></a></li><li id="n-upload" class="mw-list-item"><a href="/wiki/Wikipedia:File_upload_wizard" title="Add images or other media for use on Wikipedia"><span>Upload file</span></a></li><li id="n-specialpages" class="mw-list-item"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li>
+		</ul>
+		
+	</div>
+</div>
+
+</div>
+
+				</div>
+
+	</div>
+</div>
+
+		</nav>
+			
+<a href="/wiki/Main_Page" class="mw-logo">
+	<img class="mw-logo-icon" src="/static/images/icons/enwiki-25.svg" alt="" aria-hidden="true" height="50" width="50">
+	<span class="mw-logo-container skin-invert">
+		<img class="mw-logo-wordmark" alt="Wikipedia" src="/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" style="width: 8.75em; height: 1.375em;">
+		<img class="mw-logo-tagline" alt="The Free Encyclopedia" src="/static/images/mobile/copyright/wikipedia-tagline-en-25.svg" width="140" height="11" style="width: 8.75em; height: 0.6875em;">
+	</span>
+</a>
+
+		</div>
+		<div class="vector-header-end">
+			
+<div id="p-search" role="search" class="vector-search-box-vue  vector-search-box-collapses vector-search-box-show-thumbnail vector-search-box-auto-expand-width vector-search-box">
+	<a href="/wiki/Special:Search" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only search-toggle" title="Search Wikipedia [f]" accesskey="f"><span class="vector-icon mw-ui-icon-search mw-ui-icon-wikimedia-search cdx-button__icon"></span>
+
+<span>Search</span>
+	</a>
+	<div class="vector-typeahead-search-container">
+		<div class="cdx-typeahead-search cdx-typeahead-search--show-thumbnail cdx-typeahead-search--auto-expand-width">
+			<form action="/w/index.php" id="searchform" class="cdx-search-input cdx-search-input--has-end-button">
+				<div id="simpleSearch" class="cdx-search-input__input-wrapper"  data-search-loc="header-moved">
+					<div class="cdx-text-input cdx-text-input--has-start-icon">
+						<input
+							class="cdx-text-input__input mw-searchInput" autocomplete="off"
+							 type="search" name="search" placeholder="Search Wikipedia" aria-label="Search Wikipedia" autocapitalize="none" spellcheck="false" title="Search Wikipedia [f]" accesskey="f" id="searchInput"
+							>
+						<span class="cdx-text-input__icon cdx-text-input__start-icon"></span>
+					</div>
+					<input type="hidden" name="title" value="Special:Search">
+				</div>
+				<button class="cdx-button cdx-search-input__end-button">Search</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+			<nav class="vector-user-links vector-user-links-wide" aria-label="Personal tools">
+	<div class="vector-user-links-main">
+	
+<div id="p-vector-user-menu-preferences" class="vector-menu mw-portlet emptyPortlet"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			
+		</ul>
+		
+	</div>
+</div>
+
+	
+<div id="p-vector-user-menu-userpage" class="vector-menu mw-portlet emptyPortlet"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			
+		</ul>
+		
+	</div>
+</div>
+
+	<nav class="vector-appearance-landmark" aria-label="Appearance">
+		
+<div id="vector-appearance-dropdown" class="vector-dropdown "  title="Change the appearance of the page&#039;s font size, width, and color" >
+	<input type="checkbox" id="vector-appearance-dropdown-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-appearance-dropdown" class="vector-dropdown-checkbox "  aria-label="Appearance"   >
+	<label id="vector-appearance-dropdown-label" for="vector-appearance-dropdown-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"  ><span class="vector-icon mw-ui-icon-appearance mw-ui-icon-wikimedia-appearance cdx-button__icon"></span>
+
+<span class="vector-dropdown-label-text">Appearance</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+			<div id="vector-appearance-unpinned-container" class="vector-unpinned-container">
+				
+			</div>
+		
+	</div>
+</div>
+
+	</nav>
+	
+<div id="p-vector-user-menu-notifications" class="vector-menu mw-portlet emptyPortlet"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			
+		</ul>
+		
+	</div>
+</div>
+
+	
+<div id="p-vector-user-menu-overflow" class="vector-menu mw-portlet"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="pt-sitesupport-2" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=en.wikipedia.org&amp;uselang=en" data-mw-donate-attempt="top_link" class=""><span>Donate</span></a>
+</li>
+<li id="pt-createaccount-2" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Special:CreateAccount&amp;returnto=Special%3AWhatLinksHere%2FHelp%3AIntroduction" title="You are encouraged to create an account and log in; however, it is not mandatory" class=""><span>Create account</span></a>
+</li>
+<li id="pt-login-2" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Special:UserLogin&amp;returnto=Special%3AWhatLinksHere%2FHelp%3AIntroduction" title="You&#039;re encouraged to log in; however, it&#039;s not mandatory. [o]" accesskey="o" class=""><span>Log in</span></a>
+</li>
+
+			
+		</ul>
+		
+	</div>
+</div>
+
+	</div>
+	
+<div id="vector-user-links-dropdown" class="vector-dropdown vector-user-menu vector-button-flush-right vector-user-menu-logged-out vector-user-links-dropdown--collapsible"  title="Log in and more options" >
+	<input type="checkbox" id="vector-user-links-dropdown-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-user-links-dropdown" class="vector-dropdown-checkbox "  aria-label="Personal tools"   >
+	<label id="vector-user-links-dropdown-label" for="vector-user-links-dropdown-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"  ><span class="vector-icon mw-ui-icon-userAvatar mw-ui-icon-wikimedia-userAvatar cdx-button__icon"></span>
+
+<span class="vector-dropdown-label-text">Personal tools</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+		
+<div id="p-personal" class="vector-menu mw-portlet mw-portlet-personal"  title="User menu" >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="pt-sitesupport" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=en.wikipedia.org&amp;uselang=en" data-mw-donate-attempt="top_link" class=""><span class="vector-icon mw-ui-icon-heart mw-ui-icon-wikimedia-heart cdx-button__icon"></span>
+
+<span>Donate</span></a>
+</li>
+<li id="pt-createaccount" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Special:CreateAccount&amp;returnto=Special%3AWhatLinksHere%2FHelp%3AIntroduction" title="You are encouraged to create an account and log in; however, it is not mandatory" class=""><span class="vector-icon mw-ui-icon-userAvatar mw-ui-icon-wikimedia-userAvatar cdx-button__icon"></span>
+
+<span>Create account</span></a>
+</li>
+<li id="pt-login" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Special:UserLogin&amp;returnto=Special%3AWhatLinksHere%2FHelp%3AIntroduction" title="You&#039;re encouraged to log in; however, it&#039;s not mandatory. [o]" accesskey="o" class=""><span class="vector-icon mw-ui-icon-logIn mw-ui-icon-wikimedia-logIn cdx-button__icon"></span>
+
+<span>Log in</span></a>
+</li>
+
+			
+		</ul>
+		
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+</nav>
+
+		</div>
+	</header>
+</div>
+<div class="mw-page-container">
+	<div class="mw-page-container-inner">
+		<div class="vector-sitenotice-container">
+			<div id="siteNotice"><!-- CentralNotice --></div>
+		</div>
+		<div class="vector-column-start">
+			<div class="vector-main-menu-container">
+		<div id="mw-navigation">
+			<nav id="mw-panel" class="vector-main-menu-landmark" aria-label="Site">
+				<div id="vector-main-menu-pinned-container" class="vector-pinned-container">
+				
+				</div>
+		</nav>
+		</div>
+	</div>
+</div>
+		<div class="mw-content-container">
+			<main id="content" class="mw-body">
+				<header class="mw-body-header vector-page-titlebar no-font-mode-scale">
+					<h1 id="firstHeading" class="firstHeading mw-first-heading">Pages that link to "Help:Introduction"</h1>
+		<div class="mw-indicators">
+	<div id="mw-indicator-mw-helplink" class="mw-indicator"><a href="/wiki/Help:What_links_here" target="_blank" class="mw-helplink"><span class="mw-helplink-icon"></span>Help</a></div>
+	</div>
+</header>
+				<div class="vector-page-toolbar">
+					<div class="vector-page-toolbar-container">
+						<div id="left-navigation">
+							<nav aria-label="Namespaces">
+								
+<div id="p-associated-pages" class="vector-menu vector-menu-tabs mw-portlet mw-portlet-associated-pages"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="ca-nstab-help" class="selected mw-list-item vector-tab-noicon"><a data-mw-interface  href="/wiki/Help:Introduction" title="View the help page [c]" accesskey="c" class=""><span>Help page</span></a>
+</li>
+<li id="ca-talk" class="mw-list-item vector-tab-noicon"><a data-mw-interface  href="/wiki/Help_talk:Introduction" rel="discussion" title="Discuss improvements to the content page [t]" accesskey="t" class=""><span>Talk</span></a>
+</li>
+
+			
+		</ul>
+		
+	</div>
+</div>
+
+								
+<div id="vector-variants-dropdown" class="vector-dropdown emptyPortlet"  >
+	<input type="checkbox" id="vector-variants-dropdown-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-variants-dropdown" class="vector-dropdown-checkbox " aria-label="Change language variant"    >
+	<label id="vector-variants-dropdown-label" for="vector-variants-dropdown-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet" aria-hidden="true"  ><span class="vector-dropdown-label-text">English</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+					
+<div id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			
+		</ul>
+		
+	</div>
+</div>
+
+				
+	</div>
+</div>
+
+							</nav>
+						</div>
+						<div id="right-navigation" class="vector-collapsible">
+							<nav aria-label="Views">
+			    
+<div id="p-views" class="vector-menu vector-menu-tabs mw-portlet mw-portlet-views"  >
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="ca-view" class="mw-list-item vector-menu-item--collapsible vector-tab-noicon"><a data-mw-interface  href="/wiki/Help:Introduction" class=""><span>Read</span></a>
+</li>
+<li id="ca-viewsource" class="mw-list-item vector-menu-item--collapsible vector-tab-noicon"><a data-mw-interface  href="/w/index.php?title=Help:Introduction&amp;action=edit" title="This page is protected.
+You can view its source [e]" accesskey="e" class=""><span>View source</span></a>
+</li>
+<li id="ca-history" class="mw-list-item vector-menu-item--collapsible vector-tab-noicon"><a data-mw-interface  href="/w/index.php?title=Help:Introduction&amp;action=history" title="Past revisions of this page [h]" accesskey="h" class=""><span>View history</span></a>
+</li>
+
+			
+		</ul>
+		
+	</div>
+</div>
+
+			</nav>
+
+							<nav class="vector-page-tools-landmark" aria-label="Page tools">
+								
+<div id="vector-page-tools-dropdown" class="vector-dropdown vector-page-tools-dropdown"  >
+	<input type="checkbox" id="vector-page-tools-dropdown-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-tools-dropdown" class="vector-dropdown-checkbox "  aria-label="Tools"   >
+	<label id="vector-page-tools-dropdown-label" for="vector-page-tools-dropdown-checkbox" class="vector-dropdown-label cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only " aria-hidden="true"  ><span class="vector-icon mw-ui-icon-verticalEllipsis mw-ui-icon-wikimedia-verticalEllipsis cdx-button__icon"></span>
+
+<span class="vector-dropdown-label-text">Tools</span>
+	</label>
+	<div class="vector-dropdown-content">
+
+
+									<div id="vector-page-tools-unpinned-container" class="vector-unpinned-container">
+						
+<div id="vector-page-tools" class="vector-page-tools vector-pinnable-element">
+	<div
+	class="vector-pinnable-header vector-page-tools-pinnable-header vector-pinnable-header-unpinned"
+	data-feature-name="page-tools-pinned"
+	data-pinnable-element-id="vector-page-tools"
+	data-pinned-container-id="vector-page-tools-pinned-container"
+	data-unpinned-container-id="vector-page-tools-unpinned-container"
+>
+	<div class="vector-pinnable-header-label">Tools</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-page-tools.pin" aria-label="Move Tools to sidebar">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-page-tools.unpin" aria-label="Hide Tools">hide</button>
+</div>
+
+	
+<div id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-has-collapsible-items"  >
+	<div class="vector-menu-heading">
+		Actions
+	</div>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="ca-view-more" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/wiki/Help:Introduction" class=""><span class="vector-icon mw-ui-icon-eye mw-ui-icon-wikimedia-eye cdx-button__icon"></span>
+
+<span>Read</span></a>
+</li>
+<li id="ca-viewsource-more" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Help:Introduction&amp;action=edit" title="This page is protected.
+You can view its source [e]" accesskey="e" class=""><span class="vector-icon mw-ui-icon-editLock mw-ui-icon-wikimedia-editLock cdx-button__icon"></span>
+
+<span>View source</span></a>
+</li>
+<li id="ca-history-more" class="mw-list-item vector-menu-item--collapsible"><a data-mw-interface  href="/w/index.php?title=Help:Introduction&amp;action=history" title="Past revisions of this page [h]" accesskey="h" class=""><span class="vector-icon mw-ui-icon-history mw-ui-icon-wikimedia-history cdx-button__icon"></span>
+
+<span>View history</span></a>
+</li>
+
+			
+		</ul>
+		
+	</div>
+</div>
+
+<div id="p-tb" class="vector-menu mw-portlet mw-portlet-tb"  >
+	<div class="vector-menu-heading">
+		General
+	</div>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			<li id="t-upload" class="mw-list-item"><a href="//en.wikipedia.org/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]" accesskey="u"><span>Upload file</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-urlshortener" class="mw-list-item"><a href="/w/index.php?title=Special:UrlShortener&amp;url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FSpecial%3AWhatLinksHere%2FHelp%3AIntroduction"><span>Get shortened URL</span></a></li>
+		</ul>
+		
+	</div>
+</div>
+
+<div id="p-wikibase-otherprojects" class="vector-menu mw-portlet mw-portlet-wikibase-otherprojects emptyPortlet"  >
+	<div class="vector-menu-heading">
+		In other projects
+	</div>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			
+			
+		</ul>
+		
+	</div>
+</div>
+
+</div>
+
+									</div>
+				
+	</div>
+</div>
+
+							</nav>
+						</div>
+					</div>
+				</div>
+				<div class="vector-column-end no-font-mode-scale">
+					<div class="vector-sticky-pinned-container">
+						<nav class="vector-page-tools-landmark" aria-label="Page tools">
+							<div id="vector-page-tools-pinned-container" class="vector-pinned-container">
+				
+							</div>
+		</nav>
+						<nav class="vector-appearance-landmark" aria-label="Appearance">
+							<div id="vector-appearance-pinned-container" class="vector-pinned-container">
+				<div id="vector-appearance" class="vector-appearance vector-pinnable-element">
+	<div
+	class="vector-pinnable-header vector-appearance-pinnable-header vector-pinnable-header-pinned"
+	data-feature-name="appearance-pinned"
+	data-pinnable-element-id="vector-appearance"
+	data-pinned-container-id="vector-appearance-pinned-container"
+	data-unpinned-container-id="vector-appearance-unpinned-container"
+>
+	<div class="vector-pinnable-header-label">Appearance</div>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-pin-button" data-event-name="pinnable-header.vector-appearance.pin" aria-label="Move Appearance to sidebar">move to sidebar</button>
+	<button class="vector-pinnable-header-toggle-button vector-pinnable-header-unpin-button" data-event-name="pinnable-header.vector-appearance.unpin" aria-label="Hide Appearance">hide</button>
+</div>
+
+
+</div>
+
+							</div>
+		</nav>
+					</div>
+				</div>
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
+					<div class="vector-body-before-content">
+					
+						
+						<div id="contentSub"><div id="mw-content-subtitle">← <a href="/wiki/Help:Introduction" title="Help:Introduction">Help:Introduction</a></div></div>
+						
+					</div>
+					
+					<div id="mw-content-text" class="mw-body-content"><div class='mw-htmlform-ooui-wrapper oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-padded oo-ui-panelLayout-framed'><form action='/wiki/Special:WhatLinksHere' method='get' enctype='application/x-www-form-urlencoded' class='mw-htmlform mw-htmlform-ooui oo-ui-layout oo-ui-formLayout'><fieldset class='oo-ui-layout oo-ui-labelElement oo-ui-fieldsetLayout'><legend class='oo-ui-fieldsetLayout-header'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-labelElement-label'>What links here</span></legend><div class='oo-ui-fieldsetLayout-group'><div class='oo-ui-widget oo-ui-widget-enabled'><div class='oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-padded oo-ui-panelLayout-framed'><fieldset class='oo-ui-layout oo-ui-labelElement oo-ui-fieldsetLayout'><legend class='oo-ui-fieldsetLayout-header'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-labelElement-label'>⧼whatlinkshere-whatlinkshere-target⧽</span></legend><div class='oo-ui-fieldsetLayout-group'><div class='oo-ui-widget oo-ui-widget-enabled'><div id="mw-htmlform-whatlinkshere-target"><div data-mw-modules='mediawiki.widgets' id='ooui-php-2' class='mw-htmlform-field-HTMLTitleTextField mw-htmlform-autoinfuse oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-whatlinkshere-target"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"Page:"},"classes":["mw-htmlform-field-HTMLTitleTextField","mw-htmlform-autoinfuse"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label for='ooui-php-1' class='oo-ui-labelElement-label'>Page:</label></span><div class='oo-ui-fieldLayout-field'><div id='mw-whatlinkshere-target' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-indicatorElement oo-ui-textInputWidget oo-ui-textInputWidget-type-text oo-ui-textInputWidget-php mw-widget-titleInputWidget' data-ooui='{"_":"mw.widgets.TitleInputWidget","relative":false,"creatable":true,"$overlay":true,"maxLength":255,"name":"target","value":"Help:Introduction","inputId":"ooui-php-1","indicator":"required","required":true}'><input type='text' tabindex='0' name='target' value='Help:Introduction' required='' maxlength='255' id='ooui-php-1' class='oo-ui-inputWidget-input' /><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-indicatorElement-indicator oo-ui-indicator-required'></span></div></div></div></div></div></div></div></fieldset></div><div class='oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-padded oo-ui-panelLayout-framed'><fieldset class='oo-ui-layout oo-ui-labelElement oo-ui-fieldsetLayout'><legend class='oo-ui-fieldsetLayout-header'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-labelElement-label'>⧼whatlinkshere-whatlinkshere-ns⧽</span></legend><div class='oo-ui-fieldsetLayout-group'><div class='oo-ui-widget oo-ui-widget-enabled'><div id="mw-htmlform-whatlinkshere-ns"><div data-mw-modules='mediawiki.widgets' id='ooui-php-5' class='mw-htmlform-field-HTMLSelectNamespace mw-htmlform-autoinfuse oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"namespace"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"Namespace:"},"classes":["mw-htmlform-field-HTMLSelectNamespace","mw-htmlform-autoinfuse"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label for='ooui-php-3' class='oo-ui-labelElement-label'>Namespace:</label></span><div class='oo-ui-fieldLayout-field'><div id='namespace' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-dropdownInputWidget oo-ui-dropdownInputWidget-php mw-widget-namespaceInputWidget' data-ooui='{"_":"mw.widgets.NamespaceInputWidget","includeAllValue":"","userLang":true,"exclude":[],"include":null,"dropdown":{"$overlay":true},"name":"namespace","inputId":"ooui-php-3","required":false}'><select tabindex='0' name='namespace' id='ooui-php-3' class='oo-ui-inputWidget-input'><option value='' selected='selected'>all</option><option value='0'>(Article)</option><option value='1'>Talk</option><option value='2'>User</option><option value='3'>User talk</option><option value='4'>Wikipedia</option><option value='5'>Wikipedia talk</option><option value='6'>File</option><option value='7'>File talk</option><option value='8'>MediaWiki</option><option value='9'>MediaWiki talk</option><option value='10'>Template</option><option value='11'>Template talk</option><option value='12'>Help</option><option value='13'>Help talk</option><option value='14'>Category</option><option value='15'>Category talk</option><option value='100'>Portal</option><option value='101'>Portal talk</option><option value='118'>Draft</option><option value='119'>Draft talk</option><option value='126'>MOS</option><option value='127'>MOS talk</option><option value='710'>TimedText</option><option value='711'>TimedText talk</option><option value='828'>Module</option><option value='829'>Module talk</option><option value='1728'>Event</option><option value='1729'>Event talk</option></select><span class='oo-ui-widget oo-ui-widget-enabled oo-ui-indicatorElement-indicator oo-ui-indicator-down oo-ui-indicatorElement oo-ui-labelElement-invisible oo-ui-indicatorWidget'></span></div></div></div></div><div id='ooui-php-6' class='mw-htmlform-field-HTMLCheckField mw-htmlform-autoinfuse mw-htmlform-hide-if mw-htmlform-hide-if-hidden oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"nsinvert"},"align":"inline","help":{"html":"Check this box to hide links from pages within the selected namespace."},"$overlay":true,"label":{"html":"Invert selection"},"condState":{"hide":["===","namespace",""],"alwaysDisabled":false},"classes":["mw-htmlform-field-HTMLCheckField","mw-htmlform-autoinfuse","mw-htmlform-hide-if","mw-htmlform-hide-if-hidden"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span id='nsinvert' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget' data-ooui='{"_":"OO.ui.CheckboxInputWidget","name":"invert","value":"1","inputId":"ooui-php-4","required":false}'><input type='checkbox' tabindex='0' name='invert' value='1' id='ooui-php-4' class='oo-ui-inputWidget-input' /><span class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><span class='oo-ui-fieldLayout-help oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-buttonElement-frameless oo-ui-buttonElement-size-medium oo-ui-iconElement oo-ui-buttonWidget'><a role='button' title='Check this box to hide links from pages within the selected namespace.' tabindex='0' rel='nofollow' class='oo-ui-buttonElement-button'><span class='oo-ui-iconElement-icon oo-ui-icon-info'></span><span class='oo-ui-labelElement-label'></span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator'></span></a></span><label for='ooui-php-4' class='oo-ui-labelElement-label'>Invert selection</label></span></div></div></div></div></div></fieldset></div><div class='oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-padded oo-ui-panelLayout-framed'><fieldset class='oo-ui-layout oo-ui-labelElement oo-ui-fieldsetLayout'><legend class='oo-ui-fieldsetLayout-header'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-labelElement-label'>⧼whatlinkshere-whatlinkshere-filter⧽</span></legend><div class='oo-ui-fieldsetLayout-group'><div class='oo-ui-widget oo-ui-widget-enabled'><div id="mw-htmlform-whatlinkshere-filter"><div id='ooui-php-14' class='mw-htmlform-field-HTMLCheckField oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-hidetrans"},"align":"inline","helpInline":true,"$overlay":true,"label":{"html":"Hide transclusions"},"classes":["mw-htmlform-field-HTMLCheckField"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span id='mw-input-hidetrans' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget' data-ooui='{"_":"OO.ui.CheckboxInputWidget","name":"hidetrans","value":"1","inputId":"ooui-php-11","required":false}'><input type='checkbox' tabindex='0' name='hidetrans' value='1' id='ooui-php-11' class='oo-ui-inputWidget-input' /><span class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-11' class='oo-ui-labelElement-label'>Hide transclusions</label></span></div></div><div id='ooui-php-15' class='mw-htmlform-field-HTMLCheckField oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-hidelinks"},"align":"inline","helpInline":true,"$overlay":true,"label":{"html":"Hide links"},"classes":["mw-htmlform-field-HTMLCheckField"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span id='mw-input-hidelinks' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget' data-ooui='{"_":"OO.ui.CheckboxInputWidget","name":"hidelinks","value":"1","inputId":"ooui-php-12","required":false}'><input type='checkbox' tabindex='0' name='hidelinks' value='1' id='ooui-php-12' class='oo-ui-inputWidget-input' /><span class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-12' class='oo-ui-labelElement-label'>Hide links</label></span></div></div><div id='ooui-php-16' class='mw-htmlform-field-HTMLCheckField oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-hideredirs"},"align":"inline","helpInline":true,"$overlay":true,"label":{"html":"Hide redirects"},"classes":["mw-htmlform-field-HTMLCheckField"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span id='mw-input-hideredirs' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget' data-ooui='{"_":"OO.ui.CheckboxInputWidget","name":"hideredirs","value":"1","inputId":"ooui-php-13","required":false}'><input type='checkbox' tabindex='0' name='hideredirs' value='1' id='ooui-php-13' class='oo-ui-inputWidget-input' /><span class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-13' class='oo-ui-labelElement-label'>Hide redirects</label></span></div></div></div></div></div></fieldset></div>
+<input id="mw-input-limit" name="limit" type="hidden" value="50">
+<div class="mw-htmlform-submit-buttons">
+<span id='ooui-php-17' class='mw-htmlform-submit oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-buttonElement-size-medium oo-ui-labelElement oo-ui-flaggedElement-primary oo-ui-flaggedElement-progressive oo-ui-buttonInputWidget' data-ooui='{"_":"OO.ui.ButtonInputWidget","type":"submit","value":"Go","label":"Go","flags":["primary","progressive"],"classes":["mw-htmlform-submit"]}'><button type='submit' tabindex='0' value='Go' class='oo-ui-inputWidget-input oo-ui-buttonElement-button'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon oo-ui-image-invert'></span><span class='oo-ui-labelElement-label'>Go</span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator oo-ui-image-invert'></span></button></span></div>
+</div></div></fieldset></form></div><div class="mw-parser-output mw-linkshere">
+<p>The following pages link to <b id="specialDeleteTarget"><a href="/wiki/Help:Introduction" title="Help:Introduction">Help:Introduction</a></b> <span id="specialDeleteLink"></span>
+</p>
+<style data-mw-deduplicate="TemplateStyles:r1374427404">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:": "}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:"\a0 · ";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:" (";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:")";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:" "counter(listitem)"\a0 "}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:" ("counter(listitem)"\a0 "}</style><div class="hlist inline">External tools
+<ul><li>(<a class="external text" href="https://linkcount.toolforge.org/?project=en.wikipedia.org&amp;page=Help%3AIntroduction">link count</a></li>
+<li><a class="external text" href="https://templatecount.toolforge.org/index.php?lang=en&amp;namespace=12&amp;name=Introduction">transclusion count</a></li>
+<li><a class="external text" href="https://wlh.toolforge.org/pages/Introduction?ns=12">sorted list</a>) · See <a href="/wiki/Help:What_links_here" title="Help:What links here">help page</a> for <a href="/wiki/Help:What_links_here#Transclusion" title="Help:What links here">transcluding these entries</a></li></ul>
+</div>
+<hr />
+</div><p>Showing 50 items.
+</p><div class="mw-pager-navigation-bar">View (<span class="mw-prevlink">previous 50</span> |  <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=50&amp;dir=next&amp;offset=1%7C1888" rel="next" class="mw-nextlink">next 50</a>) (<a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=20" class="mw-numlink">20</a> | <span class="mw-numlink">50</span> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=100" class="mw-numlink">100</a> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=250" class="mw-numlink">250</a> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=500" class="mw-numlink">500</a>)</div><ul id="mw-whatlinkshere-list"><li><bdi dir="ltr"><a href="/w/index.php?title=Wikipedia_tutorial&amp;redirect=no" class="mw-redirect" title="Wikipedia tutorial">Wikipedia tutorial</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia+tutorial" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia_tutorial&amp;action=edit" class="mw-redirect" title="Wikipedia tutorial">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/Talk:Thomas_Jefferson/Archive_31" title="Talk:Thomas Jefferson/Archive 31">Talk:Thomas Jefferson/Archive 31</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AThomas+Jefferson%2FArchive+31" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Thomas_Jefferson/Archive_31&amp;action=edit" title="Talk:Thomas Jefferson/Archive 31">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Roger_Gianni~enwiki" title="User:Roger Gianni~enwiki">User:Roger Gianni~enwiki</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ARoger+Gianni%7Eenwiki" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Roger_Gianni~enwiki&amp;action=edit" title="User:Roger Gianni~enwiki">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Interiot/Reports/cross-namespace_redirects" title="User:Interiot/Reports/cross-namespace redirects">User:Interiot/Reports/cross-namespace redirects</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AInteriot%2FReports%2Fcross-namespace+redirects" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Interiot/Reports/cross-namespace_redirects&amp;action=edit" title="User:Interiot/Reports/cross-namespace redirects">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Gavia_immer/sandbox" title="User:Gavia immer/sandbox">User:Gavia immer/sandbox</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AGavia+immer%2Fsandbox" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Gavia_immer/sandbox&amp;action=edit" title="User:Gavia immer/sandbox">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Tessanorthcott" title="User:Tessanorthcott">User:Tessanorthcott</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ATessanorthcott" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Tessanorthcott&amp;action=edit" title="User:Tessanorthcott">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Lorenegenidy" title="User:Lorenegenidy">User:Lorenegenidy</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ALorenegenidy" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Lorenegenidy&amp;action=edit" title="User:Lorenegenidy">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Bobcat21l" title="User:Bobcat21l">User:Bobcat21l</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ABobcat21l" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Bobcat21l&amp;action=edit" title="User:Bobcat21l">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Le_Deluge/categories" title="User:Le Deluge/categories">User:Le Deluge/categories</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ALe+Deluge%2Fcategories" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Le_Deluge/categories&amp;action=edit" title="User:Le Deluge/categories">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Eschoryii" title="User:Eschoryii">User:Eschoryii</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AEschoryii" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Eschoryii&amp;action=edit" title="User:Eschoryii">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:XinqiaoCheng/Report" title="User:XinqiaoCheng/Report">User:XinqiaoCheng/Report</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AXinqiaoCheng%2FReport" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:XinqiaoCheng/Report&amp;action=edit" title="User:XinqiaoCheng/Report">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Weuerle/be_bold" title="User:Weuerle/be bold">User:Weuerle/be bold</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AWeuerle%2Fbe+bold" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Weuerle/be_bold&amp;action=edit" title="User:Weuerle/be bold">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:BrookeMcNeel/be_bold" title="User:BrookeMcNeel/be bold">User:BrookeMcNeel/be bold</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ABrookeMcNeel%2Fbe+bold" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:BrookeMcNeel/be_bold&amp;action=edit" title="User:BrookeMcNeel/be bold">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Isomorphic/archive2" title="User talk:Isomorphic/archive2">User talk:Isomorphic/archive2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AIsomorphic%2Farchive2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Isomorphic/archive2&amp;action=edit" title="User talk:Isomorphic/archive2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Dscarborough" title="User talk:Dscarborough">User talk:Dscarborough</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADscarborough" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Dscarborough&amp;action=edit" title="User talk:Dscarborough">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Amoores" title="User talk:Amoores">User talk:Amoores</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAmoores" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Amoores&amp;action=edit" title="User talk:Amoores">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Cytowic" title="User talk:Cytowic">User talk:Cytowic</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACytowic" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Cytowic&amp;action=edit" title="User talk:Cytowic">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Roost002" title="User talk:Roost002">User talk:Roost002</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ARoost002" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Roost002&amp;action=edit" title="User talk:Roost002">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Fuhghettaboutit/Archive_13" title="User talk:Fuhghettaboutit/Archive 13">User talk:Fuhghettaboutit/Archive 13</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AFuhghettaboutit%2FArchive+13" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Fuhghettaboutit/Archive_13&amp;action=edit" title="User talk:Fuhghettaboutit/Archive 13">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:78.137.32.7" title="User talk:78.137.32.7">User talk:78.137.32.7</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A78.137.32.7" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:78.137.32.7&amp;action=edit" title="User talk:78.137.32.7">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:GGOTCC/Archive_3" title="User talk:GGOTCC/Archive 3">User talk:GGOTCC/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGGOTCC%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:GGOTCC/Archive_3&amp;action=edit" title="User talk:GGOTCC/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Help_desk/Archives/2009_January_23" title="Wikipedia:Help desk/Archives/2009 January 23">Wikipedia:Help desk/Archives/2009 January 23</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AHelp+desk%2FArchives%2F2009+January+23" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Help_desk/Archives/2009_January_23&amp;action=edit" title="Wikipedia:Help desk/Archives/2009 January 23">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_936" title="Wikipedia:Teahouse/Questions/Archive 936">Wikipedia:Teahouse/Questions/Archive 936</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+936" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_936&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 936">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/wiki/How_Wikipedia_Works" title="How Wikipedia Works">How Wikipedia Works</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=How+Wikipedia+Works" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=How_Wikipedia_Works&amp;action=edit" title="How Wikipedia Works">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Beginner" title="Beginner">Beginner</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Beginner" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Beginner&amp;action=edit" title="Beginner">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/w/index.php?title=H:I&amp;redirect=no" class="mw-redirect" title="H:I">H:I</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=H%3AI" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=H:I&amp;action=edit" class="mw-redirect" title="H:I">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/Talk:H:I" title="Talk:H:I">Talk:H:I</a></bdi> (transclusion) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AH%3AI" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:H:I&amp;action=edit" title="Talk:H:I">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Grimace_Shake" title="Talk:Grimace Shake">Talk:Grimace Shake</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AGrimace+Shake" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Grimace_Shake&amp;action=edit" title="Talk:Grimace Shake">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:David_Kogan_(radio_writer)" title="Talk:David Kogan (radio writer)">Talk:David Kogan (radio writer)</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3ADavid+Kogan+%28radio+writer%29" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:David_Kogan_(radio_writer)&amp;action=edit" title="Talk:David Kogan (radio writer)">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Rolmops23" title="User:Rolmops23">User:Rolmops23</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ARolmops23" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Rolmops23&amp;action=edit" title="User:Rolmops23">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Pythoncoder/Help_shortcuts" title="User:Pythoncoder/Help shortcuts">User:Pythoncoder/Help shortcuts</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3APythoncoder%2FHelp+shortcuts" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Pythoncoder/Help_shortcuts&amp;action=edit" title="User:Pythoncoder/Help shortcuts">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Black.Nike.19" title="User:Black.Nike.19">User:Black.Nike.19</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ABlack.Nike.19" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Black.Nike.19&amp;action=edit" title="User:Black.Nike.19">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2021-07" title="User:Oshwah/TalkPageArchives/2021-07">User:Oshwah/TalkPageArchives/2021-07</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2021-07" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2021-07&amp;action=edit" title="User:Oshwah/TalkPageArchives/2021-07">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Creamepuff/Welcome_message" title="User:Creamepuff/Welcome message">User:Creamepuff/Welcome message</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ACreamepuff%2FWelcome+message" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Creamepuff/Welcome_message&amp;action=edit" title="User:Creamepuff/Welcome message">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Drunk_Luke" title="User:Drunk Luke">User:Drunk Luke</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ADrunk+Luke" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Drunk_Luke&amp;action=edit" title="User:Drunk Luke">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Cremastra/Welcome-graphic" title="User:Cremastra/Welcome-graphic">User:Cremastra/Welcome-graphic</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ACremastra%2FWelcome-graphic" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Cremastra/Welcome-graphic&amp;action=edit" title="User:Cremastra/Welcome-graphic">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:AutorisedUser673/Welcome" title="User:AutorisedUser673/Welcome">User:AutorisedUser673/Welcome</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AAutorisedUser673%2FWelcome" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:AutorisedUser673/Welcome&amp;action=edit" title="User:AutorisedUser673/Welcome">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2025-09" title="User:Oshwah/TalkPageArchives/2025-09">User:Oshwah/TalkPageArchives/2025-09</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2025-09" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2025-09&amp;action=edit" title="User:Oshwah/TalkPageArchives/2025-09">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2025-10" title="User:Oshwah/TalkPageArchives/2025-10">User:Oshwah/TalkPageArchives/2025-10</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2025-10" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2025-10&amp;action=edit" title="User:Oshwah/TalkPageArchives/2025-10">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2025-12" title="User:Oshwah/TalkPageArchives/2025-12">User:Oshwah/TalkPageArchives/2025-12</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2025-12" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2025-12&amp;action=edit" title="User:Oshwah/TalkPageArchives/2025-12">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2026-07" title="User:Oshwah/TalkPageArchives/2026-07">User:Oshwah/TalkPageArchives/2026-07</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2026-07" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2026-07&amp;action=edit" title="User:Oshwah/TalkPageArchives/2026-07">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Oshwah/TalkPageArchives/2026-08" title="User:Oshwah/TalkPageArchives/2026-08">User:Oshwah/TalkPageArchives/2026-08</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AOshwah%2FTalkPageArchives%2F2026-08" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Oshwah/TalkPageArchives/2026-08&amp;action=edit" title="User:Oshwah/TalkPageArchives/2026-08">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Nilsopno1" title="User talk:Nilsopno1">User talk:Nilsopno1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ANilsopno1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Nilsopno1&amp;action=edit" title="User talk:Nilsopno1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2603:7080:B705:BE87:0:0:0:1015" title="User talk:2603:7080:B705:BE87:0:0:0:1015">User talk:2603:7080:B705:BE87:0:0:0:1015</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2603%3A7080%3AB705%3ABE87%3A0%3A0%3A0%3A1015" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2603:7080:B705:BE87:0:0:0:1015&amp;action=edit" title="User talk:2603:7080:B705:BE87:0:0:0:1015">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Quick_Trundleteacher" title="User talk:Quick Trundleteacher">User talk:Quick Trundleteacher</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AQuick+Trundleteacher" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Quick_Trundleteacher&amp;action=edit" title="User talk:Quick Trundleteacher">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:PlanetJuice/Archive_3" title="User talk:PlanetJuice/Archive 3">User talk:PlanetJuice/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3APlanetJuice%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:PlanetJuice/Archive_3&amp;action=edit" title="User talk:PlanetJuice/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:WCCAman" title="User talk:WCCAman">User talk:WCCAman</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AWCCAman" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:WCCAman&amp;action=edit" title="User talk:WCCAman">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Luckygamer84" title="User talk:Luckygamer84">User talk:Luckygamer84</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ALuckygamer84" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Luckygamer84&amp;action=edit" title="User talk:Luckygamer84">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:NarwhalHunter" title="User talk:NarwhalHunter">User talk:NarwhalHunter</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ANarwhalHunter" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:NarwhalHunter&amp;action=edit" title="User talk:NarwhalHunter">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2A02:C7C:5F61:E300:2C67:4705:2303:C836" title="User talk:2A02:C7C:5F61:E300:2C67:4705:2303:C836">User talk:2A02:C7C:5F61:E300:2C67:4705:2303:C836</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2A02%3AC7C%3A5F61%3AE300%3A2C67%3A4705%3A2303%3AC836" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2A02:C7C:5F61:E300:2C67:4705:2303:C836&amp;action=edit" title="User talk:2A02:C7C:5F61:E300:2C67:4705:2303:C836">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Omiyomy" title="User talk:Omiyomy">User talk:Omiyomy</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AOmiyomy" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Omiyomy&amp;action=edit" title="User talk:Omiyomy">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Amerheb2023" title="User talk:Amerheb2023">User talk:Amerheb2023</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAmerheb2023" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Amerheb2023&amp;action=edit" title="User talk:Amerheb2023">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Kimeman" title="User talk:Kimeman">User talk:Kimeman</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AKimeman" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Kimeman&amp;action=edit" title="User talk:Kimeman">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Sikh_history_nerd" title="User talk:Sikh history nerd">User talk:Sikh history nerd</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASikh+history+nerd" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Sikh_history_nerd&amp;action=edit" title="User talk:Sikh history nerd">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Spinnenschaben" title="User talk:Spinnenschaben">User talk:Spinnenschaben</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASpinnenschaben" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Spinnenschaben&amp;action=edit" title="User talk:Spinnenschaben">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Suntooooth/Archive_1" title="User talk:Suntooooth/Archive 1">User talk:Suntooooth/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASuntooooth%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Suntooooth/Archive_1&amp;action=edit" title="User talk:Suntooooth/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Dux_Oppositionis" title="User talk:Dux Oppositionis">User talk:Dux Oppositionis</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADux+Oppositionis" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Dux_Oppositionis&amp;action=edit" title="User talk:Dux Oppositionis">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Daydreamdays2" title="User talk:Daydreamdays2">User talk:Daydreamdays2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADaydreamdays2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Daydreamdays2&amp;action=edit" title="User talk:Daydreamdays2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Abbas_Habii" title="User talk:Abbas Habii">User talk:Abbas Habii</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAbbas+Habii" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Abbas_Habii&amp;action=edit" title="User talk:Abbas Habii">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Mwwv/Archive_1" title="User talk:Mwwv/Archive 1">User talk:Mwwv/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AMwwv%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Mwwv/Archive_1&amp;action=edit" title="User talk:Mwwv/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Oomoethu12" title="User talk:Oomoethu12">User talk:Oomoethu12</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AOomoethu12" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Oomoethu12&amp;action=edit" title="User talk:Oomoethu12">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Cyberdog958/Archive_2" title="User talk:Cyberdog958/Archive 2">User talk:Cyberdog958/Archive 2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACyberdog958%2FArchive+2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Cyberdog958/Archive_2&amp;action=edit" title="User talk:Cyberdog958/Archive 2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Tucson_PD" title="User talk:Tucson PD">User talk:Tucson PD</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ATucson+PD" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Tucson_PD&amp;action=edit" title="User talk:Tucson PD">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Rodger501" title="User talk:Rodger501">User talk:Rodger501</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ARodger501" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Rodger501&amp;action=edit" title="User talk:Rodger501">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:JacobCarr06" title="User talk:JacobCarr06">User talk:JacobCarr06</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AJacobCarr06" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:JacobCarr06&amp;action=edit" title="User talk:JacobCarr06">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Giddy001" title="User talk:Giddy001">User talk:Giddy001</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGiddy001" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Giddy001&amp;action=edit" title="User talk:Giddy001">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Mushpit89God" title="User talk:Mushpit89God">User talk:Mushpit89God</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AMushpit89God" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Mushpit89God&amp;action=edit" title="User talk:Mushpit89God">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Chiy828" title="User talk:Chiy828">User talk:Chiy828</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AChiy828" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Chiy828&amp;action=edit" title="User talk:Chiy828">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:37.111.180.7" title="User talk:37.111.180.7">User talk:37.111.180.7</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A37.111.180.7" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:37.111.180.7&amp;action=edit" title="User talk:37.111.180.7">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Kdkddtkgk" title="User talk:Kdkddtkgk">User talk:Kdkddtkgk</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AKdkddtkgk" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Kdkddtkgk&amp;action=edit" title="User talk:Kdkddtkgk">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:73.221.109.253" title="User talk:73.221.109.253">User talk:73.221.109.253</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A73.221.109.253" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:73.221.109.253&amp;action=edit" title="User talk:73.221.109.253">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:DBlez" title="User talk:DBlez">User talk:DBlez</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADBlez" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:DBlez&amp;action=edit" title="User talk:DBlez">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Mishimao" title="User talk:Mishimao">User talk:Mishimao</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AMishimao" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Mishimao&amp;action=edit" title="User talk:Mishimao">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Parsonsgh" title="User talk:Parsonsgh">User talk:Parsonsgh</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AParsonsgh" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Parsonsgh&amp;action=edit" title="User talk:Parsonsgh">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Oscarthehound1970" title="User talk:Oscarthehound1970">User talk:Oscarthehound1970</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AOscarthehound1970" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Oscarthehound1970&amp;action=edit" title="User talk:Oscarthehound1970">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:FAHEEM_SEHWANI" title="User talk:FAHEEM SEHWANI">User talk:FAHEEM SEHWANI</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AFAHEEM+SEHWANI" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:FAHEEM_SEHWANI&amp;action=edit" title="User talk:FAHEEM SEHWANI">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Aqsa_Fatma" title="User talk:Aqsa Fatma">User talk:Aqsa Fatma</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAqsa+Fatma" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Aqsa_Fatma&amp;action=edit" title="User talk:Aqsa Fatma">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:SnazzyWags" title="User talk:SnazzyWags">User talk:SnazzyWags</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASnazzyWags" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:SnazzyWags&amp;action=edit" title="User talk:SnazzyWags">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:PeterMichaelWilliams" title="User talk:PeterMichaelWilliams">User talk:PeterMichaelWilliams</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3APeterMichaelWilliams" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:PeterMichaelWilliams&amp;action=edit" title="User talk:PeterMichaelWilliams">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Sapsaree" title="User talk:Sapsaree">User talk:Sapsaree</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASapsaree" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Sapsaree&amp;action=edit" title="User talk:Sapsaree">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Loesser" title="User talk:Loesser">User talk:Loesser</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ALoesser" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Loesser&amp;action=edit" title="User talk:Loesser">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Siren_Incline" title="User talk:Siren Incline">User talk:Siren Incline</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASiren+Incline" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Siren_Incline&amp;action=edit" title="User talk:Siren Incline">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Sdkb/Archive_12" title="User talk:Sdkb/Archive 12">User talk:Sdkb/Archive 12</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASdkb%2FArchive+12" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Sdkb/Archive_12&amp;action=edit" title="User talk:Sdkb/Archive 12">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2A02:9B0:8033:E308:6479:E465:4C9B:4DB4" title="User talk:2A02:9B0:8033:E308:6479:E465:4C9B:4DB4">User talk:2A02:9B0:8033:E308:6479:E465:4C9B:4DB4</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2A02%3A9B0%3A8033%3AE308%3A6479%3AE465%3A4C9B%3A4DB4" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2A02:9B0:8033:E308:6479:E465:4C9B:4DB4&amp;action=edit" title="User talk:2A02:9B0:8033:E308:6479:E465:4C9B:4DB4">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Cyberdog958/Archive_4" title="User talk:Cyberdog958/Archive 4">User talk:Cyberdog958/Archive 4</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACyberdog958%2FArchive+4" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Cyberdog958/Archive_4&amp;action=edit" title="User talk:Cyberdog958/Archive 4">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Stuffbymax" title="User talk:Stuffbymax">User talk:Stuffbymax</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AStuffbymax" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Stuffbymax&amp;action=edit" title="User talk:Stuffbymax">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:TeardropKILLS" title="User talk:TeardropKILLS">User talk:TeardropKILLS</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ATeardropKILLS" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:TeardropKILLS&amp;action=edit" title="User talk:TeardropKILLS">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Estar8806/Archive_6" title="User talk:Estar8806/Archive 6">User talk:Estar8806/Archive 6</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AEstar8806%2FArchive+6" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Estar8806/Archive_6&amp;action=edit" title="User talk:Estar8806/Archive 6">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Pro-anti-air/Archives/2025/November" title="User talk:Pro-anti-air/Archives/2025/November">User talk:Pro-anti-air/Archives/2025/November</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3APro-anti-air%2FArchives%2F2025%2FNovember" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Pro-anti-air/Archives/2025/November&amp;action=edit" title="User talk:Pro-anti-air/Archives/2025/November">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Thecomarchive" title="User talk:Thecomarchive">User talk:Thecomarchive</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AThecomarchive" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Thecomarchive&amp;action=edit" title="User talk:Thecomarchive">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Chief_Ahead" title="User talk:Chief Ahead">User talk:Chief Ahead</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AChief+Ahead" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Chief_Ahead&amp;action=edit" title="User talk:Chief Ahead">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Ronelikri" title="User talk:Ronelikri">User talk:Ronelikri</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ARonelikri" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Ronelikri&amp;action=edit" title="User talk:Ronelikri">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Asilvering/Archive_27" title="User talk:Asilvering/Archive 27">User talk:Asilvering/Archive 27</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAsilvering%2FArchive+27" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Asilvering/Archive_27&amp;action=edit" title="User talk:Asilvering/Archive 27">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Cyberdog958/Archive_5" title="User talk:Cyberdog958/Archive 5">User talk:Cyberdog958/Archive 5</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACyberdog958%2FArchive+5" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Cyberdog958/Archive_5&amp;action=edit" title="User talk:Cyberdog958/Archive 5">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Asilvering/Archive_28" title="User talk:Asilvering/Archive 28">User talk:Asilvering/Archive 28</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAsilvering%2FArchive+28" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Asilvering/Archive_28&amp;action=edit" title="User talk:Asilvering/Archive 28">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:LLOOF" title="User talk:LLOOF">User talk:LLOOF</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ALLOOF" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:LLOOF&amp;action=edit" title="User talk:LLOOF">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:GreenStaircase" title="User talk:GreenStaircase">User talk:GreenStaircase</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGreenStaircase" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:GreenStaircase&amp;action=edit" title="User talk:GreenStaircase">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Rgali" title="User talk:Rgali">User talk:Rgali</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ARgali" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Rgali&amp;action=edit" title="User talk:Rgali">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Dot.py/Archive_1" title="User talk:Dot.py/Archive 1">User talk:Dot.py/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADot.py%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Dot.py/Archive_1&amp;action=edit" title="User talk:Dot.py/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Bocanegris/Archive_1" title="User talk:Bocanegris/Archive 1">User talk:Bocanegris/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ABocanegris%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Bocanegris/Archive_1&amp;action=edit" title="User talk:Bocanegris/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Cyberdog958/Archive_6" title="User talk:Cyberdog958/Archive 6">User talk:Cyberdog958/Archive 6</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACyberdog958%2FArchive+6" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Cyberdog958/Archive_6&amp;action=edit" title="User talk:Cyberdog958/Archive 6">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:~2026-30197-54" title="User talk:~2026-30197-54">User talk:~2026-30197-54</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A%7E2026-30197-54" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:~2026-30197-54&amp;action=edit" title="User talk:~2026-30197-54">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Asilvering/Archive_36" title="User talk:Asilvering/Archive 36">User talk:Asilvering/Archive 36</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAsilvering%2FArchive+36" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Asilvering/Archive_36&amp;action=edit" title="User talk:Asilvering/Archive 36">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2NumForIce/Archive_7" title="User talk:2NumForIce/Archive 7">User talk:2NumForIce/Archive 7</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2NumForIce%2FArchive+7" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2NumForIce/Archive_7&amp;action=edit" title="User talk:2NumForIce/Archive 7">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:UnregisteredIdiot" title="User talk:UnregisteredIdiot">User talk:UnregisteredIdiot</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AUnregisteredIdiot" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:UnregisteredIdiot&amp;action=edit" title="User talk:UnregisteredIdiot">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Gracie-griffin" title="User talk:Gracie-griffin">User talk:Gracie-griffin</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGracie-griffin" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Gracie-griffin&amp;action=edit" title="User talk:Gracie-griffin">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Goldsztajn/Archives/2026/August" title="User talk:Goldsztajn/Archives/2026/August">User talk:Goldsztajn/Archives/2026/August</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGoldsztajn%2FArchives%2F2026%2FAugust" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Goldsztajn/Archives/2026/August&amp;action=edit" title="User talk:Goldsztajn/Archives/2026/August">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:CoconutOctopus/Archive_7" title="User talk:CoconutOctopus/Archive 7">User talk:CoconutOctopus/Archive 7</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACoconutOctopus%2FArchive+7" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:CoconutOctopus/Archive_7&amp;action=edit" title="User talk:CoconutOctopus/Archive 7">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1086" title="Wikipedia:Teahouse/Questions/Archive 1086">Wikipedia:Teahouse/Questions/Archive 1086</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1086" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1086&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1086">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1087" title="Wikipedia:Teahouse/Questions/Archive 1087">Wikipedia:Teahouse/Questions/Archive 1087</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1087" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1087&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1087">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1090" title="Wikipedia:Teahouse/Questions/Archive 1090">Wikipedia:Teahouse/Questions/Archive 1090</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1090" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1090&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1090">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Village_pump_(proposals)/Archive_187" title="Wikipedia:Village pump (proposals)/Archive 187">Wikipedia:Village pump (proposals)/Archive 187</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AVillage+pump+%28proposals%29%2FArchive+187" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Village_pump_(proposals)/Archive_187&amp;action=edit" title="Wikipedia:Village pump (proposals)/Archive 187">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1202" title="Wikipedia:Teahouse/Questions/Archive 1202">Wikipedia:Teahouse/Questions/Archive 1202</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1202" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1202&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1202">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1203" title="Wikipedia:Teahouse/Questions/Archive 1203">Wikipedia:Teahouse/Questions/Archive 1203</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1203" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1203&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1203">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:AI_noticeboard/Archive_4" title="Wikipedia:AI noticeboard/Archive 4">Wikipedia:AI noticeboard/Archive 4</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AAI+noticeboard%2FArchive+4" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:AI_noticeboard/Archive_4&amp;action=edit" title="Wikipedia:AI noticeboard/Archive 4">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia_talk:Articles_for_deletion/Karen_Read" title="Wikipedia talk:Articles for deletion/Karen Read">Wikipedia talk:Articles for deletion/Karen Read</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia+talk%3AArticles+for+deletion%2FKaren+Read" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia_talk:Articles_for_deletion/Karen_Read&amp;action=edit" title="Wikipedia talk:Articles for deletion/Karen Read">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Template_talk:Talk_header/Archive_10" title="Template talk:Talk header/Archive 10">Template talk:Talk header/Archive 10</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Template+talk%3ATalk+header%2FArchive+10" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Template_talk:Talk_header/Archive_10&amp;action=edit" title="Template talk:Talk header/Archive 10">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Help_talk:List_of_tutorials_and_introductions/Archive_1" title="Help talk:List of tutorials and introductions/Archive 1">Help talk:List of tutorials and introductions/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Help+talk%3AList+of+tutorials+and+introductions%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Help_talk:List_of_tutorials_and_introductions/Archive_1&amp;action=edit" title="Help talk:List of tutorials and introductions/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Help_talk:Referencing_for_beginners/Archive_1" title="Help talk:Referencing for beginners/Archive 1">Help talk:Referencing for beginners/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Help+talk%3AReferencing+for+beginners%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Help_talk:Referencing_for_beginners/Archive_1&amp;action=edit" title="Help talk:Referencing for beginners/Archive 1">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/w/index.php?title=H:Intro&amp;redirect=no" class="mw-redirect" title="H:Intro">H:Intro</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=H%3AIntro" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=H:Intro&amp;action=edit" class="mw-redirect" title="H:Intro">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/User_talk:2NumForIce/Archives/2024/February" title="User talk:2NumForIce/Archives/2024/February">User talk:2NumForIce/Archives/2024/February</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2NumForIce%2FArchives%2F2024%2FFebruary" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2NumForIce/Archives/2024/February&amp;action=edit" title="User talk:2NumForIce/Archives/2024/February">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/w/index.php?title=H:Introduction&amp;redirect=no" class="mw-redirect" title="H:Introduction">H:Introduction</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=H%3AIntroduction" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=H:Introduction&amp;action=edit" class="mw-redirect" title="H:Introduction">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/Talk:D9-Caffeine" title="Talk:D9-Caffeine">Talk:D9-Caffeine</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AD9-Caffeine" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:D9-Caffeine&amp;action=edit" title="Talk:D9-Caffeine">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Isochrone/Archives/2021/December" title="User talk:Isochrone/Archives/2021/December">User talk:Isochrone/Archives/2021/December</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AIsochrone%2FArchives%2F2021%2FDecember" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Isochrone/Archives/2021/December&amp;action=edit" title="User talk:Isochrone/Archives/2021/December">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Hermes1968" title="User talk:Hermes1968">User talk:Hermes1968</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AHermes1968" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Hermes1968&amp;action=edit" title="User talk:Hermes1968">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/w/index.php?title=H:INTRO&amp;redirect=no" class="mw-redirect" title="H:INTRO">H:INTRO</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=H%3AINTRO" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=H:INTRO&amp;action=edit" class="mw-redirect" title="H:INTRO">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/Talk:Katyn_massacre" title="Talk:Katyn massacre">Talk:Katyn massacre</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AKatyn+massacre" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Katyn_massacre&amp;action=edit" title="Talk:Katyn massacre">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Charles_Parks_Richardson" title="Talk:Charles Parks Richardson">Talk:Charles Parks Richardson</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3ACharles+Parks+Richardson" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Charles_Parks_Richardson&amp;action=edit" title="Talk:Charles Parks Richardson">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Obi-Wan_Kenobi_(miniseries)/Archive_1" title="Talk:Obi-Wan Kenobi (miniseries)/Archive 1">Talk:Obi-Wan Kenobi (miniseries)/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AObi-Wan+Kenobi+%28miniseries%29%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Obi-Wan_Kenobi_(miniseries)/Archive_1&amp;action=edit" title="Talk:Obi-Wan Kenobi (miniseries)/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Black.Nike.19" title="User:Black.Nike.19">User:Black.Nike.19</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ABlack.Nike.19" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Black.Nike.19&amp;action=edit" title="User:Black.Nike.19">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Drunk_Luke" title="User:Drunk Luke">User:Drunk Luke</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3ADrunk+Luke" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Drunk_Luke&amp;action=edit" title="User:Drunk Luke">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User:Gurkubondinn" title="User:Gurkubondinn">User:Gurkubondinn</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User%3AGurkubondinn" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User:Gurkubondinn&amp;action=edit" title="User:Gurkubondinn">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:RedSiskin" title="User talk:RedSiskin">User talk:RedSiskin</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ARedSiskin" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:RedSiskin&amp;action=edit" title="User talk:RedSiskin">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2600:8806:406:B700:59CD:5D9D:B958:9240" title="User talk:2600:8806:406:B700:59CD:5D9D:B958:9240">User talk:2600:8806:406:B700:59CD:5D9D:B958:9240</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2600%3A8806%3A406%3AB700%3A59CD%3A5D9D%3AB958%3A9240" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2600:8806:406:B700:59CD:5D9D:B958:9240&amp;action=edit" title="User talk:2600:8806:406:B700:59CD:5D9D:B958:9240">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Isochrone/Archives/2022/January" title="User talk:Isochrone/Archives/2022/January">User talk:Isochrone/Archives/2022/January</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AIsochrone%2FArchives%2F2022%2FJanuary" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Isochrone/Archives/2022/January&amp;action=edit" title="User talk:Isochrone/Archives/2022/January">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Firefangledfeathers/Archive_3" title="User talk:Firefangledfeathers/Archive 3">User talk:Firefangledfeathers/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AFirefangledfeathers%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Firefangledfeathers/Archive_3&amp;action=edit" title="User talk:Firefangledfeathers/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:31.124.226.70" title="User talk:31.124.226.70">User talk:31.124.226.70</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A31.124.226.70" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:31.124.226.70&amp;action=edit" title="User talk:31.124.226.70">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Actualcpscm/Archive_2" title="User talk:Actualcpscm/Archive 2">User talk:Actualcpscm/Archive 2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AActualcpscm%2FArchive+2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Actualcpscm/Archive_2&amp;action=edit" title="User talk:Actualcpscm/Archive 2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:112.204.223.12" title="User talk:112.204.223.12">User talk:112.204.223.12</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A112.204.223.12" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:112.204.223.12&amp;action=edit" title="User talk:112.204.223.12">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Actualcpscm/Archive_3" title="User talk:Actualcpscm/Archive 3">User talk:Actualcpscm/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AActualcpscm%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Actualcpscm/Archive_3&amp;action=edit" title="User talk:Actualcpscm/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:CashMoney_The_Teacher" title="User talk:CashMoney The Teacher">User talk:CashMoney The Teacher</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ACashMoney+The+Teacher" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:CashMoney_The_Teacher&amp;action=edit" title="User talk:CashMoney The Teacher">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Seawolf35/Archive_2" title="User talk:Seawolf35/Archive 2">User talk:Seawolf35/Archive 2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASeawolf35%2FArchive+2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Seawolf35/Archive_2&amp;action=edit" title="User talk:Seawolf35/Archive 2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:ToadetteEdit/Archive_3" title="User talk:ToadetteEdit/Archive 3">User talk:ToadetteEdit/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AToadetteEdit%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:ToadetteEdit/Archive_3&amp;action=edit" title="User talk:ToadetteEdit/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:2NumForIce/Archives/2024/February" title="User talk:2NumForIce/Archives/2024/February">User talk:2NumForIce/Archives/2024/February</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A2NumForIce%2FArchives%2F2024%2FFebruary" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:2NumForIce/Archives/2024/February&amp;action=edit" title="User talk:2NumForIce/Archives/2024/February">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:ToadetteEdit/Archive_4" title="User talk:ToadetteEdit/Archive 4">User talk:ToadetteEdit/Archive 4</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AToadetteEdit%2FArchive+4" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:ToadetteEdit/Archive_4&amp;action=edit" title="User talk:ToadetteEdit/Archive 4">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:ToadetteEdit/Archive_5" title="User talk:ToadetteEdit/Archive 5">User talk:ToadetteEdit/Archive 5</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AToadetteEdit%2FArchive+5" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:ToadetteEdit/Archive_5&amp;action=edit" title="User talk:ToadetteEdit/Archive 5">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:TheRealBasti" title="User talk:TheRealBasti">User talk:TheRealBasti</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ATheRealBasti" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:TheRealBasti&amp;action=edit" title="User talk:TheRealBasti">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:ToadetteEdit/Archive_7" title="User talk:ToadetteEdit/Archive 7">User talk:ToadetteEdit/Archive 7</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AToadetteEdit%2FArchive+7" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:ToadetteEdit/Archive_7&amp;action=edit" title="User talk:ToadetteEdit/Archive 7">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Isochrone/Archives/2024/September" title="User talk:Isochrone/Archives/2024/September">User talk:Isochrone/Archives/2024/September</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AIsochrone%2FArchives%2F2024%2FSeptember" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Isochrone/Archives/2024/September&amp;action=edit" title="User talk:Isochrone/Archives/2024/September">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Troyschaef52" title="User talk:Troyschaef52">User talk:Troyschaef52</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ATroyschaef52" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Troyschaef52&amp;action=edit" title="User talk:Troyschaef52">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Encoded/Archive_3" title="User talk:Encoded/Archive 3">User talk:Encoded/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AEncoded%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Encoded/Archive_3&amp;action=edit" title="User talk:Encoded/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Asilvering/Archive_14" title="User talk:Asilvering/Archive 14">User talk:Asilvering/Archive 14</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAsilvering%2FArchive+14" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Asilvering/Archive_14&amp;action=edit" title="User talk:Asilvering/Archive 14">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:A09/Archive_1" title="User talk:A09/Archive 1">User talk:A09/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AA09%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:A09/Archive_1&amp;action=edit" title="User talk:A09/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:DAKSHP" title="User talk:DAKSHP">User talk:DAKSHP</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ADAKSHP" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:DAKSHP&amp;action=edit" title="User talk:DAKSHP">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:SnowyRiver28/Archive_1" title="User talk:SnowyRiver28/Archive 1">User talk:SnowyRiver28/Archive 1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASnowyRiver28%2FArchive+1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:SnowyRiver28/Archive_1&amp;action=edit" title="User talk:SnowyRiver28/Archive 1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Ultraodan/Archive_2" title="User talk:Ultraodan/Archive 2">User talk:Ultraodan/Archive 2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AUltraodan%2FArchive+2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Ultraodan/Archive_2&amp;action=edit" title="User talk:Ultraodan/Archive 2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Fwintersdottir" title="User talk:Fwintersdottir">User talk:Fwintersdottir</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AFwintersdottir" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Fwintersdottir&amp;action=edit" title="User talk:Fwintersdottir">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:BananaNotes" title="User talk:BananaNotes">User talk:BananaNotes</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ABananaNotes" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:BananaNotes&amp;action=edit" title="User talk:BananaNotes">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Unknown_63521" title="User talk:Unknown 63521">User talk:Unknown 63521</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AUnknown+63521" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Unknown_63521&amp;action=edit" title="User talk:Unknown 63521">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:SnowyRiver28/Archive_2" title="User talk:SnowyRiver28/Archive 2">User talk:SnowyRiver28/Archive 2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASnowyRiver28%2FArchive+2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:SnowyRiver28/Archive_2&amp;action=edit" title="User talk:SnowyRiver28/Archive 2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Asilvering/Archive_27" title="User talk:Asilvering/Archive 27">User talk:Asilvering/Archive 27</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAsilvering%2FArchive+27" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Asilvering/Archive_27&amp;action=edit" title="User talk:Asilvering/Archive 27">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Pradeepkulkarni1" title="User talk:Pradeepkulkarni1">User talk:Pradeepkulkarni1</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3APradeepkulkarni1" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Pradeepkulkarni1&amp;action=edit" title="User talk:Pradeepkulkarni1">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:ItsEthanP" title="User talk:ItsEthanP">User talk:ItsEthanP</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AItsEthanP" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:ItsEthanP&amp;action=edit" title="User talk:ItsEthanP">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:JZDOGGYBOY" title="User talk:JZDOGGYBOY">User talk:JZDOGGYBOY</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AJZDOGGYBOY" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:JZDOGGYBOY&amp;action=edit" title="User talk:JZDOGGYBOY">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:GrahamABeck" title="User talk:GrahamABeck">User talk:GrahamABeck</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGrahamABeck" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:GrahamABeck&amp;action=edit" title="User talk:GrahamABeck">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:~2026-39855-2" title="User talk:~2026-39855-2">User talk:~2026-39855-2</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3A%7E2026-39855-2" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:~2026-39855-2&amp;action=edit" title="User talk:~2026-39855-2">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Flounderbooks" title="User talk:Flounderbooks">User talk:Flounderbooks</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AFlounderbooks" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Flounderbooks&amp;action=edit" title="User talk:Flounderbooks">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Gurkubondinn/Archives/2026" title="User talk:Gurkubondinn/Archives/2026">User talk:Gurkubondinn/Archives/2026</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AGurkubondinn%2FArchives%2F2026" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Gurkubondinn/Archives/2026&amp;action=edit" title="User talk:Gurkubondinn/Archives/2026">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:SnowyRiver28/Archive_3" title="User talk:SnowyRiver28/Archive 3">User talk:SnowyRiver28/Archive 3</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASnowyRiver28%2FArchive+3" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:SnowyRiver28/Archive_3&amp;action=edit" title="User talk:SnowyRiver28/Archive 3">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Morga6356" title="User talk:Morga6356">User talk:Morga6356</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AMorga6356" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Morga6356&amp;action=edit" title="User talk:Morga6356">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/User_talk:Sajjadmrt" title="User talk:Sajjadmrt">User talk:Sajjadmrt</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3ASajjadmrt" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Sajjadmrt&amp;action=edit" title="User talk:Sajjadmrt">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Teahouse/Questions/Archive_1118" title="Wikipedia:Teahouse/Questions/Archive 1118">Wikipedia:Teahouse/Questions/Archive 1118</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3ATeahouse%2FQuestions%2FArchive+1118" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Teahouse/Questions/Archive_1118&amp;action=edit" title="Wikipedia:Teahouse/Questions/Archive 1118">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Help_desk/Archives/2023_May_24" title="Wikipedia:Help desk/Archives/2023 May 24">Wikipedia:Help desk/Archives/2023 May 24</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AHelp+desk%2FArchives%2F2023+May+24" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Help_desk/Archives/2023_May_24&amp;action=edit" title="Wikipedia:Help desk/Archives/2023 May 24">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Help_desk/Archives/2023_August_13" title="Wikipedia:Help desk/Archives/2023 August 13">Wikipedia:Help desk/Archives/2023 August 13</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AHelp+desk%2FArchives%2F2023+August+13" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Help_desk/Archives/2023_August_13&amp;action=edit" title="Wikipedia:Help desk/Archives/2023 August 13">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia:Village_pump_(idea_lab)/Archive_56" title="Wikipedia:Village pump (idea lab)/Archive 56">Wikipedia:Village pump (idea lab)/Archive 56</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia%3AVillage+pump+%28idea+lab%29%2FArchive+56" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia:Village_pump_(idea_lab)/Archive_56&amp;action=edit" title="Wikipedia:Village pump (idea lab)/Archive 56">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Wikipedia_talk:AI_noticeboard/2026-07-10_TheRealBasti" title="Wikipedia talk:AI noticeboard/2026-07-10 TheRealBasti">Wikipedia talk:AI noticeboard/2026-07-10 TheRealBasti</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Wikipedia+talk%3AAI+noticeboard%2F2026-07-10+TheRealBasti" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Wikipedia_talk:AI_noticeboard/2026-07-10_TheRealBasti&amp;action=edit" title="Wikipedia talk:AI noticeboard/2026-07-10 TheRealBasti">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/w/index.php?title=Learn_to_edit&amp;redirect=no" class="mw-redirect" title="Learn to edit">Learn to edit</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Learn+to+edit" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Learn_to_edit&amp;action=edit" class="mw-redirect" title="Learn to edit">edit</a>)</span>
+<ul><li><bdi dir="ltr"><a href="/wiki/User_talk:Aryankhan777" title="User talk:Aryankhan777">User talk:Aryankhan777</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=User+talk%3AAryankhan777" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=User_talk:Aryankhan777&amp;action=edit" title="User talk:Aryankhan777">edit</a>)</span></li>
+</ul></li><li><bdi dir="ltr"><a href="/w/index.php?title=H:START&amp;redirect=no" class="mw-redirect" title="H:START">H:START</a></bdi> (redirect page) <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=H%3ASTART" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=H:START&amp;action=edit" class="mw-redirect" title="H:START">edit</a>)</span>
+</li><li><bdi dir="ltr"><a href="/wiki/Talk:Atlas_Shrugged" title="Talk:Atlas Shrugged">Talk:Atlas Shrugged</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAtlas+Shrugged" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Atlas_Shrugged&amp;action=edit" title="Talk:Atlas Shrugged">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Algeria" title="Talk:Algeria">Talk:Algeria</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlgeria" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Algeria&amp;action=edit" title="Talk:Algeria">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Arc_de_Triomphe" title="Talk:Arc de Triomphe">Talk:Arc de Triomphe</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AArc+de+Triomphe" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Arc_de_Triomphe&amp;action=edit" title="Talk:Arc de Triomphe">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Archaeology" title="Talk:Archaeology">Talk:Archaeology</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AArchaeology" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Archaeology&amp;action=edit" title="Talk:Archaeology">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Android_(robot)" title="Talk:Android (robot)">Talk:Android (robot)</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAndroid+%28robot%29" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Android_(robot)&amp;action=edit" title="Talk:Android (robot)">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Animal" title="Talk:Animal">Talk:Animal</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAnimal" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Animal&amp;action=edit" title="Talk:Animal">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:American_football" title="Talk:American football">Talk:American football</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAmerican+football" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:American_football&amp;action=edit" title="Talk:American football">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:A_Clockwork_Orange_(novel)" title="Talk:A Clockwork Orange (novel)">Talk:A Clockwork Orange (novel)</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AA+Clockwork+Orange+%28novel%29" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:A_Clockwork_Orange_(novel)&amp;action=edit" title="Talk:A Clockwork Orange (novel)">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Alphabet" title="Talk:Alphabet">Talk:Alphabet</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlphabet" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Alphabet&amp;action=edit" title="Talk:Alphabet">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Axiom" title="Talk:Axiom">Talk:Axiom</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAxiom" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Axiom&amp;action=edit" title="Talk:Axiom">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Albert_Camus" title="Talk:Albert Camus">Talk:Albert Camus</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlbert+Camus" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Albert_Camus&amp;action=edit" title="Talk:Albert Camus">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Agatha_Christie" title="Talk:Agatha Christie">Talk:Agatha Christie</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAgatha+Christie" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Agatha_Christie&amp;action=edit" title="Talk:Agatha Christie">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Anarcho-capitalism" title="Talk:Anarcho-capitalism">Talk:Anarcho-capitalism</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAnarcho-capitalism" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Anarcho-capitalism&amp;action=edit" title="Talk:Anarcho-capitalism">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Aarhus" title="Talk:Aarhus">Talk:Aarhus</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAarhus" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Aarhus&amp;action=edit" title="Talk:Aarhus">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Abacus" title="Talk:Abacus">Talk:Abacus</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAbacus" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Abacus&amp;action=edit" title="Talk:Abacus">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Ale" title="Talk:Ale">Talk:Ale</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAle" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Ale&amp;action=edit" title="Talk:Ale">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:All_Saints%27_Day" title="Talk:All Saints&#039; Day">Talk:All Saints&#039; Day</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAll+Saints%27+Day" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:All_Saints%27_Day&amp;action=edit" title="Talk:All Saints&#039; Day">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:The_Amazing_Spider-Man" title="Talk:The Amazing Spider-Man">Talk:The Amazing Spider-Man</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AThe+Amazing+Spider-Man" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:The_Amazing_Spider-Man&amp;action=edit" title="Talk:The Amazing Spider-Man">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Algebraic_number" title="Talk:Algebraic number">Talk:Algebraic number</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlgebraic+number" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Algebraic_number&amp;action=edit" title="Talk:Algebraic number">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Alabama" title="Talk:Alabama">Talk:Alabama</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlabama" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Alabama&amp;action=edit" title="Talk:Alabama">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Apocrypha" title="Talk:Apocrypha">Talk:Apocrypha</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AApocrypha" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Apocrypha&amp;action=edit" title="Talk:Apocrypha">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Ada_Lovelace" title="Talk:Ada Lovelace">Talk:Ada Lovelace</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAda+Lovelace" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Ada_Lovelace&amp;action=edit" title="Talk:Ada Lovelace">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Antoni_Gaud%C3%AD" title="Talk:Antoni Gaudí">Talk:Antoni Gaudí</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAntoni+Gaud%C3%AD" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Antoni_Gaud%C3%AD&amp;action=edit" title="Talk:Antoni Gaudí">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Alan_Turing" title="Talk:Alan Turing">Talk:Alan Turing</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlan+Turing" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Alan_Turing&amp;action=edit" title="Talk:Alan Turing">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Amino_acid" title="Talk:Amino acid">Talk:Amino acid</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAmino+acid" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Amino_acid&amp;action=edit" title="Talk:Amino acid">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Apollo_program" title="Talk:Apollo program">Talk:Apollo program</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AApollo+program" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Apollo_program&amp;action=edit" title="Talk:Apollo program">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Assault" title="Talk:Assault">Talk:Assault</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAssault" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Assault&amp;action=edit" title="Talk:Assault">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Atlas_(disambiguation)" title="Talk:Atlas (disambiguation)">Talk:Atlas (disambiguation)</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAtlas+%28disambiguation%29" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Atlas_(disambiguation)&amp;action=edit" title="Talk:Atlas (disambiguation)">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Alternate_history" title="Talk:Alternate history">Talk:Alternate history</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAlternate+history" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Alternate_history&amp;action=edit" title="Talk:Alternate history">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Ainu_people" title="Talk:Ainu people">Talk:Ainu people</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAinu+people" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Ainu_people&amp;action=edit" title="Talk:Ainu people">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Aleksandr_Solzhenitsyn" title="Talk:Aleksandr Solzhenitsyn">Talk:Aleksandr Solzhenitsyn</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAleksandr+Solzhenitsyn" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Aleksandr_Solzhenitsyn&amp;action=edit" title="Talk:Aleksandr Solzhenitsyn">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Asteroid" title="Talk:Asteroid">Talk:Asteroid</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAsteroid" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Asteroid&amp;action=edit" title="Talk:Asteroid">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Antipope" title="Talk:Antipope">Talk:Antipope</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAntipope" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Antipope&amp;action=edit" title="Talk:Antipope">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Apollo" title="Talk:Apollo">Talk:Apollo</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AApollo" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Apollo&amp;action=edit" title="Talk:Apollo">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Austrian_school_of_economics" title="Talk:Austrian school of economics">Talk:Austrian school of economics</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAustrian+school+of+economics" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Austrian_school_of_economics&amp;action=edit" title="Talk:Austrian school of economics">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Amitabh_Bachchan" title="Talk:Amitabh Bachchan">Talk:Amitabh Bachchan</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAmitabh+Bachchan" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Amitabh_Bachchan&amp;action=edit" title="Talk:Amitabh Bachchan">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Audi" title="Talk:Audi">Talk:Audi</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAudi" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Audi&amp;action=edit" title="Talk:Audi">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Archimedean_solid" title="Talk:Archimedean solid">Talk:Archimedean solid</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AArchimedean+solid" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Archimedean_solid&amp;action=edit" title="Talk:Archimedean solid">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Aikido" title="Talk:Aikido">Talk:Aikido</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAikido" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Aikido&amp;action=edit" title="Talk:Aikido">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:The_Ashes" title="Talk:The Ashes">Talk:The Ashes</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AThe+Ashes" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:The_Ashes&amp;action=edit" title="Talk:The Ashes">edit</a>)</span></li>
+<li><bdi dir="ltr"><a href="/wiki/Talk:Assault_rifle" title="Talk:Assault rifle">Talk:Assault rifle</a></bdi>  <span class="mw-whatlinkshere-tools">(<a href="/w/index.php?title=Special:WhatLinksHere&amp;target=Talk%3AAssault+rifle" title="Special:WhatLinksHere">links</a> | <a href="/w/index.php?title=Talk:Assault_rifle&amp;action=edit" title="Talk:Assault rifle">edit</a>)</span></li>
+</ul><div class="mw-pager-navigation-bar">View (<span class="mw-prevlink">previous 50</span> |  <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=50&amp;dir=next&amp;offset=1%7C1888" rel="next" class="mw-nextlink">next 50</a>) (<a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=20" class="mw-numlink">20</a> | <span class="mw-numlink">50</span> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=100" class="mw-numlink">100</a> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=250" class="mw-numlink">250</a> | <a href="/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;limit=500" class="mw-numlink">500</a>)</div><noscript><img src="https://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&amp;type=1x1&amp;usesul3=1" alt="" width="1" height="1" style="border: none; position: absolute;"></noscript>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/wiki/Special:WhatLinksHere/Help:Introduction">https://en.wikipedia.org/wiki/Special:WhatLinksHere/Help:Introduction</a>"</div></div>
+					<div id="catlinks" class="catlinks catlinks-allhidden" data-mw-interface=""></div>
+				</div>
+			</main>
+			
+		</div>
+		<div class="mw-footer-container">
+			<footer id="footer" class="mw-footer" >
+				<ul id="footer-info" class="mw-portlet mw-portlet-footer-info emptyPortlet">
+</ul>
+
+				<ul id="footer-places" class="mw-portlet mw-portlet-footer-places">
+	<li id="footer-places-privacy"><a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="/wiki/Wikipedia:About">About Wikipedia</a></li>
+	<li id="footer-places-disclaimers"><a href="/wiki/Wikipedia:General_disclaimer">Disclaimers</a></li>
+	<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+	<li id="footer-places-legal-safety-contacts"><a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information">Legal &amp; safety contacts</a></li>
+	<li id="footer-places-wm-codeofconduct"><a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct">Code of Conduct</a></li>
+	<li id="footer-places-developers"><a href="https://developer.wikimedia.org">Developers</a></li>
+	<li id="footer-places-statslink"><a href="https://stats.wikimedia.org/#/en.wikipedia.org">Statistics</a></li>
+	<li id="footer-places-cookiestatement"><a href="https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement">Cookie statement</a></li>
+	<li id="footer-places-mobileview"><a href="//en.wikipedia.org/w/index.php?title=Special:WhatLinksHere/Help:Introduction&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+</ul>
+
+				<ul id="footer-icons" class="mw-portlet mw-portlet-footer-icons noprint">
+	<li id="footer-copyrightico"><a href="https://www.wikimedia.org/" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><picture><source media="(min-width: 500px)" srcset="/static/images/footer/wikimedia-button.svg" width="84" height="29"><img src="/static/images/footer/wikimedia.svg" width="25" height="25" alt="Wikimedia Foundation" lang="en" loading="lazy"></picture></a></li>
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/" class="cdx-button cdx-button--fake-button cdx-button--size-large cdx-button--fake-button--enabled"><picture><source media="(min-width: 500px)" srcset="/w/resources/assets/poweredby_mediawiki.svg" width="88" height="31"><img src="/w/resources/assets/mediawiki_compact.svg" alt="Powered by MediaWiki" lang="en" width="25" height="25" loading="lazy"></picture></a></li>
+</ul>
+
+			</footer>
+		</div>
+	</div> 
+</div> 
+<div class="vector-header-container vector-sticky-header-container no-font-mode-scale">
+	<div id="vector-sticky-header" class="vector-sticky-header">
+		<div class="vector-sticky-header-start">
+			<div class="vector-sticky-header-icon-start vector-button-flush-left" aria-hidden="true">
+				<button class="cdx-button cdx-button--weight-quiet cdx-button--icon-only vector-sticky-header-search-toggle" tabindex="-1" data-event-name="ui.vector-sticky-search-form.icon"><span class="vector-icon mw-ui-icon-search mw-ui-icon-wikimedia-search cdx-button__icon"></span>
+
+<span>Search</span>
+			</button>
+		</div>
+			
+		<div role="search" class="vector-search-box-vue  vector-search-box-show-thumbnail vector-search-box">
+			<div class="vector-typeahead-search-container">
+				<div class="cdx-typeahead-search cdx-typeahead-search--show-thumbnail">
+					<form action="/w/index.php" id="vector-sticky-search-form" class="cdx-search-input cdx-search-input--has-end-button">
+						<div  class="cdx-search-input__input-wrapper"  data-search-loc="header-moved">
+							<div class="cdx-text-input cdx-text-input--has-start-icon">
+								<input
+									class="cdx-text-input__input mw-searchInput" autocomplete="off"
+									
+									type="search" name="search" placeholder="Search Wikipedia">
+								<span class="cdx-text-input__icon cdx-text-input__start-icon"></span>
+							</div>
+							<input type="hidden" name="title" value="Special:Search">
+						</div>
+						<button class="cdx-button cdx-search-input__end-button">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="vector-sticky-header-context-bar">
+				<div class="vector-sticky-header-context-bar-primary" aria-hidden="true" >Pages that link to "Help:Introduction"</div>
+			</div>
+		</div>
+		<div class="vector-sticky-header-end" aria-hidden="true">
+			<div class="vector-sticky-header-icons">
+				<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-talk-sticky-header" tabindex="-1" data-event-name="talk-sticky-header"><span class="vector-icon mw-ui-icon-speechBubbles mw-ui-icon-wikimedia-speechBubbles cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-subject-sticky-header" tabindex="-1" data-event-name="subject-sticky-header"><span class="vector-icon mw-ui-icon-article mw-ui-icon-wikimedia-article cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-history-sticky-header" tabindex="-1" data-event-name="history-sticky-header"><span class="vector-icon mw-ui-icon-wikimedia-history mw-ui-icon-wikimedia-wikimedia-history cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only mw-watchlink" id="ca-watchstar-sticky-header" tabindex="-1" data-event-name="watch-sticky-header"><span class="vector-icon mw-ui-icon-wikimedia-star mw-ui-icon-wikimedia-wikimedia-star cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-edit-sticky-header" tabindex="-1" data-event-name="wikitext-edit-sticky-header"><span class="vector-icon mw-ui-icon-wikimedia-wikiText mw-ui-icon-wikimedia-wikimedia-wikiText cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-ve-edit-sticky-header" tabindex="-1" data-event-name="ve-edit-sticky-header"><span class="vector-icon mw-ui-icon-wikimedia-edit mw-ui-icon-wikimedia-wikimedia-edit cdx-button__icon"></span>
+
+<span></span>
+			</a>
+			<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--icon-only" id="ca-viewsource-sticky-header" tabindex="-1" data-event-name="ve-edit-protected-sticky-header"><span class="vector-icon mw-ui-icon-wikimedia-editLock mw-ui-icon-wikimedia-wikimedia-editLock cdx-button__icon"></span>
+
+<span></span>
+			</a>
+		</div>
+			<div class="vector-sticky-header-buttons">
+				<a href="#" class="cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive" id="ca-addsection-sticky-header" tabindex="-1" data-event-name="addsection-sticky-header"><span class="vector-icon mw-ui-icon-speechBubbleAdd-progressive mw-ui-icon-wikimedia-speechBubbleAdd-progressive cdx-button__icon"></span>
+
+<span>Add topic</span>
+			</a>
+		</div>
+			<div class="vector-sticky-header-icon-end">
+				<div class="vector-user-links">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mw-portlet mw-portlet-dock-bottom emptyPortlet" id="p-dock-bottom">
+	<ul>
+		
+	</ul>
+</div>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgHostname":"mw-web.eqiad.main-5fb6d6bf94-4wf7k","wgBackendResponseTime":228});});</script>
+</body>
+</html>
