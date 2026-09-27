@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-36129163700",
-  "last_experiment_id": "EXP-RUNTIME-36106663091",
-  "last_verdict": "MEASUREMENT_INVALID \u2014 the mandatory frozen Playwright 1.63.0 private-helper provisioning gate failed before browser capture; the current run validly recomputes only the executed plain-HTTP C1-C4 measurements, while C5 and all browser, writable, and k-means claims remain UNKNOWN and the audited prior plain-HTTP DISTRIBUTED VALIDATED ceiling is retained.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-36129163700",
+  "last_verdict": "VALIDATE_C-MEAS-VALID_AT_BOUNDED_INSTRUMENT_SCOPE_PART_A_SUPPORTS_AUDIT_PASS; PART_B_BROWSER_LAUNCH_AND_DOM_AX_AVAILABLE_WRITE_LEG_ABORTED_ON_HARNESS_DEFECT_NOT_ENVIRONMENT; PART_C_FAIL_CLOSED_CAPABILITY_LEDGER_AVAILABLE; DURABILITY_UNSATISFIABLE_AT_MEASUREMENT_HEAD; NO_PRODUCT_PROMOTION; NO_AUTOCHAIN",
   "continue_immediately": false,
-  "next_question": "Before any repeat of the full C1-C8 browser composite, can a new preregistered fail-closed provisioning preflight use the public Playwright 1.63.0 API p.chromium.executable_path (or a pinned Playwright version independently verified to expose the required helper) to launch /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, verify a real 1280x720 CDP DOM and Accessibility.getFullAXTree capture, and perform one reversible valid-auth SPA write with before/after WAL evidence while read-only, invalid-auth, expired-auth, and deleted-session controls leave the WAL unchanged, without synthetic fallback?",
+  "next_question": "Now that the WAL-byte plus logical-projection plus response-fingerprint intervention oracle is VALIDATED against a planted surface, does that same oracle still reach arm-constrained point sensitivity and specificity >=0.90 with two-sided 95% Wilson lower bound >=0.80 and non-degenerate intervals when BOTH bounding confounds of the current scope are broken at once: (i) authorship, by implementing the intervention surface and its auth/session boundary in a module separate from the scorer so the detector never shares an author with the ground-truth provider, and (ii) transport, by driving the full valid-auth SPA write, reversible restore, and the read-only, invalid-auth, expired-auth and deleted-session nulls through the already-demonstrated public-API Chromium path (p.chromium.executable_path launch of /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, Chromium 153.0.8010.12, real 1280x720 CDP DOM plus Accessibility.getFullAXTree) instead of the plain-HTTP client path, with the run_experiment.py:1444 pre_null_logical NameError repaired before freeze, real button clicks as the only write mechanism, mandatory before/after WAL byte evidence, and no synthetic fallback - i.e. does the measurement instrument generalize across the author/measurer boundary and the transport boundary simultaneously, which is the single untested step between this bounded VALIDATED scope and any downstream lane preregistering it as a precondition?",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-09-27T01:59:44.818004+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "213c6c57a9a089b2159cc0e9ce1819f0165b84a498119ab180cf537d737f87ce",
-  "same_failure_count": 4,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-27T03:53:25.012553+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "584ac7ae5bd40f2db35ab4baffbc890963a7f1fc2226c4f88c5111333f4b6808",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
