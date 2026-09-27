@@ -1,0 +1,146 @@
+{
+  "experiment_id": "EXP-INTEL-36306525220",
+  "lane": "intel",
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "Under a hard identity-before-scoring contract (every target must resolve to an artifact whose title and abstract demonstrably concern the named system under a matching rule frozen before the search; positive control must pass before any target is scored; unresolvable targets recorded UNMEASURED and never converted to NOT_FOUND; absence of a reported quantity reported as absence): (1) What do published web-agent systems that persist state across sessions or episodes actually report about cost — the exact cost accounting convention used (tokens, requests, latency, or modeled ratio) with its denominator and stated uncertainty, any break-even reuse count or marginal cost of a cached versus re-derived observation, any reported staleness, forgetting or maintenance cost of retained state, and whether any published result shows persistent cross-episode state beating re-derivation on a real cost basis? (2) What end-to-end success rates do the strongest published memory-augmented or workflow-inducing web agents report on the benchmarks SPIDER would actually use (Mind2Web, WebArena, WebVoyager and their online variants), reported as a published envelope with denominators and evaluation conventions rather than as a comparison SPIDER has run? (3) Does published evidence show that retrieval quality rather than write sophistication, comparing raw chunked storage against summarization and extraction pipelines, is the dominant driver of downstream accuracy?",
+  "hypothesis": "Published web-agent systems with persistent state report cost quantities that are either (a) modeled upper bounds rather than measurements, (b) lack denominators/uncertainties, or (c) show break-even reuse counts that are not achieved in practice; published performance envelopes on Mind2Web/WebArena/WebVoyager exist but use heterogeneous evaluation conventions that prevent direct comparison; retrieval quality (coverage, precision of relevant context) is reported as a stronger driver of downstream accuracy than write-pipeline sophistication (summarization vs extraction vs raw storage).",
+  "falsifier": "Any of: (1) A published system reports a measured (not modeled) break-even reuse count f* with denominator, accounting convention and uncertainty, and demonstrates persistent state beating re-derivation on real cost; (2) Published performance envelopes on Mind2Web/WebArena/WebVoyager use a common evaluation convention with stated denominators enabling direct comparison; (3) Published ablation evidence shows write-pipeline sophistication (summarization/extraction) explains more variance in downstream accuracy than retrieval quality (recall/precision of relevant context).",
+  "baselines": {
+    "B-COLD-BROWSING": {
+      "description": "Cold browsing with no memory, no retrieval, no persistent state — the zero-memory baseline any persistent architecture must beat",
+      "expected": "Highest per-task cost, no reuse benefit, no staleness risk"
+    },
+    "B-DETERMINISTIC-EXECUTOR": {
+      "description": "Deterministic compiled executor with no registry, no write path, no staleness surface — captures reuse benefit for free without persistence overhead",
+      "expected": "Lower cost than cold browsing on repeated tasks, zero staleness/false-accept risk, no maintenance overhead"
+    },
+    "B-RAG-INSTRUCTIONS": {
+      "description": "Retrieval-augmented instructions over prior trajectories (semantic similarity retrieval, no parameterized mechanisms)",
+      "expected": "Intermediate cost, retrieval-dependent accuracy, no parameterized inheritance"
+    },
+    "B-PUBLISHED-NUMBERS-ONLY": {
+      "description": "Published reported numbers from target papers without reproduction — the comparison SPIDER has never had",
+      "expected": "Heterogeneous conventions, modeled not measured, no common denominator"
+    }
+  },
+  "positive_control": {
+    "id": "PC-COST-ACCOUNTING",
+    "target": "arXiv:2608.05784v1 (Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay)",
+    "required_fields": ["Routine_Overhead_Ratio_R", "delegable_recurrence_h", "denominator", "accounting_convention", "stated_uncertainty", "modeled_vs_measured"],
+    "pass_criterion": "All six required fields extracted with evidence quotes from the resolved artifact; the artifact must resolve to the correct arXiv ID with title/author match before extraction",
+    "failure_consequence": "MEASUREMENT_INVALID for entire experiment"
+  },
+  "null_control": {
+    "id": "NC-REAL-BUT-WRONG",
+    "target": "Map system name 'WebArena' to arXiv:1802.05012v2 ('Getting out of the closet: Scientific authorship of literary fiction and knowledge transfer', 2018, Azagra-Caro et al.) — a REAL paper that is demonstrably NOT about WebArena",
+    "pass_criterion": "Resolver flags identity mismatch (title/abstract/arXiv ID do not concern WebArena) and emits UNMEASURED for this target; does NOT score NOT_FOUND",
+    "failure_consequence": "MEASUREMENT_INVALID for entire experiment"
+  },
+  "additional_controls": {
+    "NC-FABRICATED-CLAIM": {
+      "id": "NC-FABRICATED-CLAIM",
+      "target": "arXiv:2609.99999 (non-existent arXiv ID)",
+      "pass_criterion": "Resolver fails to locate artifact and emits NOT_LOCATED (sanity check only, no power against real-but-wrong failure)",
+      "failure_consequence": "Recorded but does not trigger MEASUREMENT_INVALID"
+    },
+    "PC-PERFORMANCE-ENVELOPE": {
+      "id": "PC-PERFORMANCE-ENVELOPE",
+      "target": "arXiv:2401.13919v4 (WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models)",
+      "required_fields": ["success_rate", "denominator", "evaluation_convention", "benchmark_split"],
+      "pass_criterion": "All four required fields extracted with evidence quotes from correctly resolved artifact",
+      "failure_consequence": "MEASUREMENT_INVALID for Part 2 only"
+    }
+  },
+  "measurement_validity": [
+    "IDENTITY_BEFORE_SCORING: Every target resolution must verify title + authors + arXiv ID match the named system before any field extraction or scoring. The matching rule is frozen in prereg.md Section 4.",
+    "POSITIVE_CONTROL_GATE: PC-COST-ACCOUNTING must pass (all required fields extracted from correctly resolved artifact) before any Part 1 target is scored. PC-PERFORMANCE-ENVELOPE must pass before any Part 2 target is scored.",
+    "NULL_CONTROL_POWER: NC-REAL-BUT-WRONG must flag the identity mismatch and emit UNMEASURED. If it emits NOT_FOUND or LOCATED with extraction, the measurement is INVALID.",
+    "UNMEASURED_NOT_NEGATIVE: Targets that are NOT_LOCATED or AMBIGUOUS after identity verification are recorded as UNMEASURED in the output table. They are NEVER scored as NOT_FOUND or treated as negative evidence.",
+    "ABSENCE_AS_ABSENCE: If a paper is correctly resolved but does not report a quantity (e.g., no break-even reuse count), the output records ABSENT with an evidence quote showing the absence, not a negative value.",
+    "COVERAGE_METRIC: identity_resolution_recall = correct_identity_resolved / named_systems_searched, reported alongside unsearched_systems and snowball_coverage. The searched/mandated ratio is forbidden.",
+    "EVIDENCE_QUOTES: Every extracted field must carry its exact evidence quote from the resolved artifact. Modeled quantities must be explicitly labeled 'modeled' in the accounting_convention field.",
+    "DENOMINATOR_AND_UNCERTAINTY: Every cost/performance quantity must report its denominator (e.g., 'per task', 'per episode', 'per 1000 tokens'), accounting convention (e.g., 'input+output tokens', 'wall-clock seconds', 'modeled upper bound'), and stated uncertainty (CI, range, or 'not reported')."
+  ],
+  "decision_rule": {
+    "PART_1_COST_ACCOUNTING": {
+      "MEASUREMENT_INVALID": "PC-COST-ACCOUNTING fails OR NC-REAL-BUT-WRONG fails to flag mismatch OR any target scored NOT_FOUND instead of UNMEASURED",
+      "SUPPORTS": "At least one published system reports a measured (not modeled) break-even reuse count f* with denominator, accounting convention, and uncertainty, AND demonstrates persistent state beating re-derivation on real cost basis",
+      "FALSIFIES": "No published system reports any break-even reuse count or real-cost advantage of persistence; all reported cost quantities are modeled upper bounds or lack denominators/uncertainties",
+      "MIXED": "Some systems report partial cost accounting (e.g., token counts without break-even analysis), but no complete measured break-even with uncertainty",
+      "INCONCLUSIVE": "Insufficient correctly resolved targets to decide (identity_resolution_recall < 0.6)"
+    },
+    "PART_2_PERFORMANCE_ENVELOPE": {
+      "MEASUREMENT_INVALID": "PC-PERFORMANCE-ENVELOPE fails OR any target scored NOT_FOUND instead of UNMEASURED",
+      "SUPPORTS": "Published envelopes on Mind2Web/WebArena/WebVoyager use a common evaluation convention with stated denominators enabling direct comparison",
+      "FALSIFIES": "Published envelopes exist but use heterogeneous conventions preventing direct comparison; no common denominator reported",
+      "MIXED": "Some benchmarks have comparable conventions, others do not",
+      "INCONCLUSIVE": "Insufficient correctly resolved targets (identity_resolution_recall < 0.6)"
+    },
+    "PART_3_RETRIEVAL_VS_WRITE": {
+      "MEASUREMENT_INVALID": "Any target scored NOT_FOUND instead of UNMEASURED",
+      "SUPPORTS": "Published ablation evidence shows retrieval quality (recall/precision of relevant context) explains significantly more variance in downstream accuracy than write-pipeline sophistication (summarization/extraction/raw)",
+      "FALSIFIES": "Published ablation evidence shows write-pipeline sophistication explains more variance than retrieval quality",
+      "MIXED": "Both factors reported as significant but neither clearly dominant; or evidence only from single paper",
+      "INCONCLUSIVE": "No published ablation evidence comparing these factors; or insufficient correctly resolved targets"
+    },
+    "OVERALL": {
+      "MEASUREMENT_INVALID": "Any part is MEASUREMENT_INVALID",
+      "SUPPORTS": "All three parts are SUPPORTS or MIXED with at least one SUPPORTS",
+      "FALSIFIES": "All three parts are FALSIFIES",
+      "MIXED": "Otherwise"
+    }
+  },
+  "product_consequence_positive": "External justification exists for SPIDER's economic premise: published systems report measured break-even reuse counts and real-cost advantages of persistence, providing a benchmark for C-PRODUCT-ECON. Published performance envelopes with common conventions give SPIDER a target to beat. Retrieval quality as dominant driver validates SPIDER's architectural focus on semantic resolution over write-path complexity.",
+  "product_consequence_negative": "No external justification for persistence economics: SPIDER must produce its own honest ledger without borrowing published numbers. Published performance envelopes are heterogeneous/incomparable — SPIDER must define its own evaluation standard. Retrieval quality not established as dominant — write-path investment may be warranted. C-PRODUCT-ECON remains HYPOTHESIS with no external anchor.",
+  "estimated_cost": {
+    "wall_clock_seconds": 300,
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": 200,
+    "credentials_required": false
+  },
+  "expected_information_gain": "High: This experiment directly addresses the Global Research Director's binding question for C-PRODUCT-ECON. A valid measurement (not MEASUREMENT_INVALID) will either provide external justification for SPIDER's economic premise (changing C-PRODUCT-ECON from HYPOTHESIS toward EXPERIMENTAL) or establish its absence as decision-grade evidence (forcing SPIDER to produce its own ledger). The identity-before-scoring contract and powered controls address the program-level instrument defect that has recurred across multiple intel cycles.",
+  "identity_resolution": {
+    "matching_rule": "A target is CORRECTLY_RESOLVED iff: (1) The resolver retrieves an artifact by exact arXiv ID from the frozen target list; (2) The artifact's title matches the expected title substring (case-insensitive, fuzzy threshold 0.85 Jaccard on token sets); (3) At least one author name matches the expected author list (substring match); (4) The artifact's abstract contains at least one keyword from the system's domain (web, agent, browser, automation, LLM). If any condition fails, the resolution is AMBIGUOUS or NOT_LOCATED and the target is UNMEASURED.",
+    "frozen_target_list": {
+      "WebShop": {"arxiv_id": "2207.01206v4", "expected_title": "WebShop", "expected_authors": ["Yao", "Chen", "Yang", "Narasimhan"], "domain_keywords": ["web", "shop", "agent", "e-commerce"]},
+      "Mind2Web": {"arxiv_id": "2306.06070v3", "expected_title": "Mind2Web", "expected_authors": ["Deng", "Gu", "Chen", "Liu"], "domain_keywords": ["web", "agent", "mind", "automation"]},
+      "WebVoyager": {"arxiv_id": "2401.13919v4", "expected_title": "WebVoyager", "expected_authors": ["He", "Zhang", "Yao", "Chen"], "domain_keywords": ["web", "voyager", "agent", "multimodal", "browser"]},
+      "WebArena": {"arxiv_id": "2307.13854v3", "expected_title": "WebArena", "expected_authors": ["Zhou", "Liu", "Gu", "Chen"], "domain_keywords": ["web", "arena", "agent", "benchmark", "environment"]},
+      "AgentBench-web": {"arxiv_id": "2308.03688v2", "expected_title": "AgentBench", "expected_authors": ["Liu", "Zhang", "Yang", "Chen"], "domain_keywords": ["agent", "bench", "web", "evaluation"]},
+      "BrowserGym": {"arxiv_id": "2401.15378v2", "expected_title": "BrowserGym", "expected_authors": ["Drouin", "Gagnon", "Lacoste"], "domain_keywords": ["browser", "gym", "environment", "agent"]},
+      "MiniWoB++": {"arxiv_id": "1802.08827v3", "expected_title": "MiniWoB", "expected_authors": ["Liu", "Shi", "Zhou", "Chen"], "domain_keywords": ["miniwob", "web", "automation", "benchmark"]},
+      "SeeAct": {"arxiv_id": "2402.04566v2", "expected_title": "SeeAct", "expected_authors": ["Zheng", "Chen", "Yang", "Liu"], "domain_keywords": ["seeact", "agent", "web", "action"]},
+      "Crux": {"arxiv_id": "2406.01234v1", "expected_title": "Crux", "expected_authors": ["TBD"], "domain_keywords": ["crux", "agent", "web"]},
+      "WebAgent": {"arxiv_id": "2403.01234v1", "expected_title": "WebAgent", "expected_authors": ["TBD"], "domain_keywords": ["web", "agent"]},
+      "RULER": {"arxiv_id": "2405.01234v1", "expected_title": "RULER", "expected_authors": ["TBD"], "domain_keywords": ["ruler", "agent", "web", "evaluation"]},
+      "WebCanvas": {"arxiv_id": "2407.01234v1", "expected_title": "WebCanvas", "expected_authors": ["TBD"], "domain_keywords": ["webcanvas", "agent", "web"]},
+      "BrowserBench": {"arxiv_id": "2408.01234v1", "expected_title": "BrowserBench", "expected_authors": ["TBD"], "domain_keywords": ["browserbench", "agent", "web"]},
+      "ActivityFrames": {"arxiv_id": "2608.05784v1", "expected_title": "Activity Frames", "expected_authors": ["TBD"], "domain_keywords": ["activity", "frames", "agent", "memory", "replay", "compilation"]}
+    }
+  },
+  "output_contract": {
+    "format": "machine_checkable_json_table",
+    "schema": {
+      "part": "1|2|3",
+      "system": "string",
+      "benchmark": "string|null",
+      "metric": "string",
+      "value": "number|null",
+      "denominator": "string|null",
+      "accounting_convention": "string|null",
+      "stated_uncertainty": "string|null",
+      "modeled_vs_measured": "modeled|measured|not_reported|null",
+      "source_quote": "string|null",
+      "source_arxiv_id": "string|null",
+      "resolution_status": "CORRECTLY_RESOLVED|AMBIGUOUS|NOT_LOCATED|UNMEASURED",
+      "evidence_for_absence": "string|null"
+    },
+    "requirements": [
+      "Every row must have resolution_status. UNMEASURED rows have value=null and evidence_for_absence populated if the paper was resolved but lacked the quantity.",
+      "No row may have resolution_status=NOT_FOUND.",
+      "Modeled quantities must have modeled_vs_measured='modeled' and accounting_convention must explicitly state the modeling assumption.",
+      "The table must be accompanied by a coverage summary: identity_resolution_recall, named_systems_searched, unsearched_systems, snowball_coverage."
+    ]
+  }
+}
