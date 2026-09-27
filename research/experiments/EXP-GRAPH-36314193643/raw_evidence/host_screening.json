@@ -1,0 +1,290 @@
+[
+  {
+    "url": "https://gitlab.freedesktop.org/",
+    "reachable": true,
+    "has_agsi": true,
+    "n_distinct_values": 1
+  },
+  {
+    "url": "https://gitlab.gnome.org/",
+    "reachable": true,
+    "has_agsi": true,
+    "n_distinct_values": 1
+  },
+  {
+    "url": "https://gitlab.alpinelinux.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://gitlab.xfce.org/",
+    "reachable": true,
+    "has_agsi": true,
+    "n_distinct_values": 1
+  },
+  {
+    "url": "https://invent.kde.org/",
+    "reachable": true,
+    "has_agsi": true,
+    "n_distinct_values": 1
+  },
+  {
+    "url": "https://gitlab.inria.fr/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://code.videolan.org/",
+    "reachable": true,
+    "has_agsi": true,
+    "n_distinct_values": 1
+  },
+  {
+    "url": "https://gitlab.kitware.com/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://trac.ffmpeg.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://trac.edgewall.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://bugs.launchpad.net/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://bugs.debian.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://bugzilla.mozilla.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://bugs.kde.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://community.raspberrypi.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://forums.linuxmint.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://forum.archlinux.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://ubuntuforums.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://phpbb.com/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://www.linuxquestions.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://meta.discourse.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://discuss.python.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://meta.fedoraproject.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://forum.manjaro.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://wiki.archlinux.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://wiki.ubuntu.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://wiki.debian.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://www.mediawiki.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://archlinux.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://php.watch/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://docs.djangoproject.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://docs.celeryq.dev/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://docs.pylonsproject.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://docs.mitmproxy.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://docs.scrapy.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://www.djangoproject.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://make.wordpress.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://wordpress.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://wptavern.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://local.ghost.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://codeberg.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://gitea.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://git.sr.ht/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://gitlab.torproject.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://owncloud.org/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://www.nextcloud.com/",
+    "reachable": true,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://tracker.nginx.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  },
+  {
+    "url": "https://jira.apache.org/",
+    "reachable": false,
+    "has_agsi": false,
+    "n_distinct_values": 0
+  }
+]

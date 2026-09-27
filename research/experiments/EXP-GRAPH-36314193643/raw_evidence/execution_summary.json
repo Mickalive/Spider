@@ -1,0 +1,198 @@
+{
+  "experiment_id": "EXP-GRAPH-36314193643",
+  "started_at": "2026-09-27T12:38:00.603534+00:00",
+  "finished_at": "2026-09-27T12:38:00.603545+00:00",
+  "request_count": 132,
+  "cal_pos_results": {
+    "CAL-POS-1": {
+      "passed": true,
+      "n_distinct": 4
+    },
+    "CAL-POS-2": {
+      "passed": false,
+      "n_distinct": 0
+    },
+    "CAL-POS-3": {
+      "passed": false,
+      "n_distinct": 0
+    },
+    "CAL-POS-4": {
+      "passed": false,
+      "n_distinct": 0
+    },
+    "CAL-POS-5": {
+      "passed": false,
+      "n_distinct": 0
+    }
+  },
+  "cal_neg_results": {
+    "CAL-NEG-1": {
+      "rejected": true,
+      "reason": "NO_AGSI_DETECTED"
+    },
+    "CAL-NEG-2": {
+      "rejected": true,
+      "reason": "NO_AGSI_DETECTED"
+    },
+    "CAL-NEG-3": {
+      "rejected": true,
+      "reason": "NO_AGSI_DETECTED"
+    },
+    "CAL-NEG-4": {
+      "rejected": true,
+      "reason": "NO_AGSI_DETECTED"
+    }
+  },
+  "g0_2_pass": false,
+  "g0_3_pass": true,
+  "cal_pos_pass": 1,
+  "cal_neg_rejected": 4,
+  "reachable_hosts": 5,
+  "blocked_hosts": 14,
+  "screened_hosts": 48,
+  "reachable_host_list": [
+    "https://gitlab.freedesktop.org/",
+    "https://gitlab.gnome.org/",
+    "https://gitlab.xfce.org/",
+    "https://invent.kde.org/",
+    "https://code.videolan.org/"
+  ],
+  "blocked_host_list": [
+    "https://gitlab.alpinelinux.org/",
+    "https://gitlab.inria.fr/",
+    "https://gitlab.kitware.com/",
+    "https://community.raspberrypi.org/",
+    "https://forum.archlinux.org/",
+    "https://ubuntuforums.org/",
+    "https://phpbb.com/",
+    "https://www.linuxquestions.org/",
+    "https://meta.fedoraproject.org/",
+    "https://docs.mitmproxy.org/",
+    "https://local.ghost.org/",
+    "https://gitlab.torproject.org/",
+    "https://tracker.nginx.org/",
+    "https://jira.apache.org/"
+  ],
+  "host_details": {
+    "https://gitlab.freedesktop.org/": {
+      "reachable": true,
+      "has_agsi": true,
+      "n_values": 1,
+      "n_200": 2
+    },
+    "https://gitlab.gnome.org/": {
+      "reachable": true,
+      "has_agsi": true,
+      "n_values": 1,
+      "n_200": 2
+    },
+    "https://gitlab.alpinelinux.org/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://gitlab.xfce.org/": {
+      "reachable": true,
+      "has_agsi": true,
+      "n_values": 1,
+      "n_200": 2
+    },
+    "https://invent.kde.org/": {
+      "reachable": true,
+      "has_agsi": true,
+      "n_values": 1,
+      "n_200": 2
+    },
+    "https://gitlab.inria.fr/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://code.videolan.org/": {
+      "reachable": true,
+      "has_agsi": true,
+      "n_values": 1,
+      "n_200": 2
+    },
+    "https://gitlab.kitware.com/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://trac.ffmpeg.org/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://trac.edgewall.org/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://bugs.launchpad.net/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://bugs.debian.org/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://bugzilla.mozilla.org/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://bugs.kde.org/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://community.raspberrypi.org/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://forums.linuxmint.com/": {
+      "reachable": true,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 2
+    },
+    "https://forum.archlinux.org/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://ubuntuforums.org/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://phpbb.com/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    },
+    "https://www.linuxquestions.org/": {
+      "reachable": false,
+      "has_agsi": false,
+      "n_values": 0,
+      "n_200": 0
+    }
+  }
+}
