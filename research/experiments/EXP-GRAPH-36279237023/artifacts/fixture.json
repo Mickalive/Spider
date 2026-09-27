@@ -1,0 +1,384 @@
+{
+  "endpoints": [
+    "DELETE /albums/${album_id}",
+    "DELETE /comments/${comment_id}",
+    "DELETE /photos/${photo_id}",
+    "DELETE /posts/${post_id}",
+    "DELETE /users/${user_id}",
+    "GET /albums/${album_id}",
+    "GET /comments/${comment_id}",
+    "GET /photos/${photo_id}",
+    "GET /posts/${post_id}",
+    "GET /users/${user_id}",
+    "POST /albums",
+    "POST /comments",
+    "POST /photos",
+    "POST /posts",
+    "POST /users",
+    "PUT /albums/${album_id}",
+    "PUT /comments/${comment_id}",
+    "PUT /photos/${photo_id}",
+    "PUT /posts/${post_id}",
+    "PUT /users/${user_id}"
+  ],
+  "families": [
+    "users",
+    "posts",
+    "comments",
+    "albums",
+    "photos"
+  ],
+  "fixture_id": "FIXTURE-EXP-GRAPH-36279237023",
+  "mechanisms": [
+    {
+      "action_template": {
+        "body": {
+          "email": "${email}",
+          "name": "${name}"
+        },
+        "method": "POST",
+        "path": "/users"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_users_create",
+      "intent": "create a new user named Alice with email alice@example.com",
+      "mechanism_id": "mech_users_create",
+      "parameter_slots": [
+        "name",
+        "email"
+      ],
+      "resource_family": "users",
+      "verb": "create"
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/users/${user_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_users_read",
+      "intent": "retrieve the user with id 7",
+      "mechanism_id": "mech_users_read",
+      "parameter_slots": [
+        "user_id"
+      ],
+      "resource_family": "users",
+      "verb": "read"
+    },
+    {
+      "action_template": {
+        "body": {
+          "name": "${name}"
+        },
+        "method": "PUT",
+        "path": "/users/${user_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_users_update",
+      "intent": "update the name of the user with id 7 to Bob",
+      "mechanism_id": "mech_users_update",
+      "parameter_slots": [
+        "user_id",
+        "name"
+      ],
+      "resource_family": "users",
+      "verb": "update"
+    },
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/users/${user_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_users_delete",
+      "intent": "delete the user with id 7",
+      "mechanism_id": "mech_users_delete",
+      "parameter_slots": [
+        "user_id"
+      ],
+      "resource_family": "users",
+      "verb": "delete"
+    },
+    {
+      "action_template": {
+        "body": {
+          "body": "${body}",
+          "title": "${title}"
+        },
+        "method": "POST",
+        "path": "/posts"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_posts_create",
+      "intent": "create a post titled 'Hello' with body 'World'",
+      "mechanism_id": "mech_posts_create",
+      "parameter_slots": [
+        "title",
+        "body"
+      ],
+      "resource_family": "posts",
+      "verb": "create"
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/posts/${post_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_posts_read",
+      "intent": "retrieve the post with id 3",
+      "mechanism_id": "mech_posts_read",
+      "parameter_slots": [
+        "post_id"
+      ],
+      "resource_family": "posts",
+      "verb": "read"
+    },
+    {
+      "action_template": {
+        "body": {
+          "title": "${title}"
+        },
+        "method": "PUT",
+        "path": "/posts/${post_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_posts_update",
+      "intent": "update the title of the post with id 3 to 'Hi'",
+      "mechanism_id": "mech_posts_update",
+      "parameter_slots": [
+        "post_id",
+        "title"
+      ],
+      "resource_family": "posts",
+      "verb": "update"
+    },
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/posts/${post_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_posts_delete",
+      "intent": "delete the post with id 3",
+      "mechanism_id": "mech_posts_delete",
+      "parameter_slots": [
+        "post_id"
+      ],
+      "resource_family": "posts",
+      "verb": "delete"
+    },
+    {
+      "action_template": {
+        "body": {
+          "post_id": "${post_id}",
+          "text": "${text}"
+        },
+        "method": "POST",
+        "path": "/comments"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_comments_create",
+      "intent": "create a comment on the post with id 3 saying 'Nice'",
+      "mechanism_id": "mech_comments_create",
+      "parameter_slots": [
+        "post_id",
+        "text"
+      ],
+      "resource_family": "comments",
+      "verb": "create"
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/comments/${comment_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_comments_read",
+      "intent": "retrieve the comment with id 5",
+      "mechanism_id": "mech_comments_read",
+      "parameter_slots": [
+        "comment_id"
+      ],
+      "resource_family": "comments",
+      "verb": "read"
+    },
+    {
+      "action_template": {
+        "body": {
+          "text": "${text}"
+        },
+        "method": "PUT",
+        "path": "/comments/${comment_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_comments_update",
+      "intent": "update the text of the comment with id 5 to 'Great'",
+      "mechanism_id": "mech_comments_update",
+      "parameter_slots": [
+        "comment_id",
+        "text"
+      ],
+      "resource_family": "comments",
+      "verb": "update"
+    },
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/comments/${comment_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_comments_delete",
+      "intent": "delete the comment with id 5",
+      "mechanism_id": "mech_comments_delete",
+      "parameter_slots": [
+        "comment_id"
+      ],
+      "resource_family": "comments",
+      "verb": "delete"
+    },
+    {
+      "action_template": {
+        "body": {
+          "title": "${title}"
+        },
+        "method": "POST",
+        "path": "/albums"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_albums_create",
+      "intent": "create an album titled 'Trip'",
+      "mechanism_id": "mech_albums_create",
+      "parameter_slots": [
+        "title"
+      ],
+      "resource_family": "albums",
+      "verb": "create"
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/albums/${album_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_albums_read",
+      "intent": "retrieve the album with id 2",
+      "mechanism_id": "mech_albums_read",
+      "parameter_slots": [
+        "album_id"
+      ],
+      "resource_family": "albums",
+      "verb": "read"
+    },
+    {
+      "action_template": {
+        "body": {
+          "title": "${title}"
+        },
+        "method": "PUT",
+        "path": "/albums/${album_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_albums_update",
+      "intent": "update the title of the album with id 2 to 'Holiday'",
+      "mechanism_id": "mech_albums_update",
+      "parameter_slots": [
+        "album_id",
+        "title"
+      ],
+      "resource_family": "albums",
+      "verb": "update"
+    },
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/albums/${album_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_albums_delete",
+      "intent": "delete the album with id 2",
+      "mechanism_id": "mech_albums_delete",
+      "parameter_slots": [
+        "album_id"
+      ],
+      "resource_family": "albums",
+      "verb": "delete"
+    },
+    {
+      "action_template": {
+        "body": {
+          "caption": "${caption}",
+          "url": "${url}"
+        },
+        "method": "POST",
+        "path": "/photos"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_photos_create",
+      "intent": "create a photo with url 'http://example.com/y.png' captioned 'Cat'",
+      "mechanism_id": "mech_photos_create",
+      "parameter_slots": [
+        "url",
+        "caption"
+      ],
+      "resource_family": "photos",
+      "verb": "create"
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/photos/${photo_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_photos_read",
+      "intent": "retrieve the photo with id 4",
+      "mechanism_id": "mech_photos_read",
+      "parameter_slots": [
+        "photo_id"
+      ],
+      "resource_family": "photos",
+      "verb": "read"
+    },
+    {
+      "action_template": {
+        "body": {
+          "caption": "${caption}"
+        },
+        "method": "PUT",
+        "path": "/photos/${photo_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_photos_update",
+      "intent": "update the caption of the photo with id 4 to 'Dog'",
+      "mechanism_id": "mech_photos_update",
+      "parameter_slots": [
+        "photo_id",
+        "caption"
+      ],
+      "resource_family": "photos",
+      "verb": "update"
+    },
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/photos/${photo_id}"
+      },
+      "confidence": 0.5,
+      "fragment_id": "frag_photos_delete",
+      "intent": "delete the photo with id 4",
+      "mechanism_id": "mech_photos_delete",
+      "parameter_slots": [
+        "photo_id"
+      ],
+      "resource_family": "photos",
+      "verb": "delete"
+    }
+  ],
+  "schema_version": 1,
+  "verbs": [
+    "create",
+    "read",
+    "update",
+    "delete"
+  ]
+}

@@ -1,0 +1,951 @@
+{
+  "cosine_top_only_rows": [
+    {
+      "correct": true,
+      "cos_top": 0.7855322360992432,
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_create",
+      "selected_by_cosine": "mech_users_create",
+      "target": "mech_users_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.4832145869731903,
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_read",
+      "selected_by_cosine": "mech_users_read",
+      "target": "mech_users_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.7680613994598389,
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_update",
+      "selected_by_cosine": "mech_users_update",
+      "target": "mech_users_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.5887768268585205,
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_delete",
+      "selected_by_cosine": "mech_users_delete",
+      "target": "mech_users_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6277883648872375,
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_create",
+      "selected_by_cosine": "mech_posts_create",
+      "target": "mech_posts_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.33540135622024536,
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_read",
+      "selected_by_cosine": "mech_posts_read",
+      "target": "mech_posts_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6263942718505859,
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_update",
+      "selected_by_cosine": "mech_posts_update",
+      "target": "mech_posts_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.3583052158355713,
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_delete",
+      "selected_by_cosine": "mech_posts_delete",
+      "target": "mech_posts_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.4993271231651306,
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_create",
+      "selected_by_cosine": "mech_comments_create",
+      "target": "mech_comments_create"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.39119479060173035,
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_read",
+      "selected_by_cosine": "mech_comments_update",
+      "target": "mech_comments_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.7220877408981323,
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_update",
+      "selected_by_cosine": "mech_comments_update",
+      "target": "mech_comments_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6201408505439758,
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_delete",
+      "selected_by_cosine": "mech_comments_delete",
+      "target": "mech_comments_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.5566136837005615,
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_create",
+      "selected_by_cosine": "mech_albums_create",
+      "target": "mech_albums_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.3787077069282532,
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_read",
+      "selected_by_cosine": "mech_albums_read",
+      "target": "mech_albums_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6931833028793335,
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_update",
+      "selected_by_cosine": "mech_albums_update",
+      "target": "mech_albums_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.41680794954299927,
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_delete",
+      "selected_by_cosine": "mech_albums_delete",
+      "target": "mech_albums_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.9003447890281677,
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_create",
+      "selected_by_cosine": "mech_photos_create",
+      "target": "mech_photos_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.5688274502754211,
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_read",
+      "selected_by_cosine": "mech_photos_read",
+      "target": "mech_photos_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.7873309850692749,
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_update",
+      "selected_by_cosine": "mech_photos_update",
+      "target": "mech_photos_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6787160038948059,
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_delete",
+      "selected_by_cosine": "mech_photos_delete",
+      "target": "mech_photos_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.35893574357032776,
+      "family": "users",
+      "goal_id": "underspecified_mech_users_read",
+      "selected_by_cosine": "mech_users_read",
+      "target": "mech_users_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6774832606315613,
+      "family": "users",
+      "goal_id": "underspecified_mech_users_update",
+      "selected_by_cosine": "mech_users_update",
+      "target": "mech_users_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.4727506935596466,
+      "family": "users",
+      "goal_id": "underspecified_mech_users_delete",
+      "selected_by_cosine": "mech_users_delete",
+      "target": "mech_users_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.22020238637924194,
+      "family": "posts",
+      "goal_id": "underspecified_mech_posts_create",
+      "selected_by_cosine": "mech_posts_create",
+      "target": "mech_posts_create"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.2271450161933899,
+      "family": "posts",
+      "goal_id": "underspecified_mech_posts_read",
+      "selected_by_cosine": "mech_photos_read",
+      "target": "mech_posts_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6271849274635315,
+      "family": "comments",
+      "goal_id": "underspecified_mech_comments_update",
+      "selected_by_cosine": "mech_comments_update",
+      "target": "mech_comments_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.20848260819911957,
+      "family": "albums",
+      "goal_id": "underspecified_mech_albums_create",
+      "selected_by_cosine": "mech_albums_create",
+      "target": "mech_albums_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.3430725336074829,
+      "family": "albums",
+      "goal_id": "underspecified_mech_albums_delete",
+      "selected_by_cosine": "mech_albums_delete",
+      "target": "mech_albums_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.7817146182060242,
+      "family": "photos",
+      "goal_id": "underspecified_mech_photos_create",
+      "selected_by_cosine": "mech_photos_create",
+      "target": "mech_photos_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6203212738037109,
+      "family": "photos",
+      "goal_id": "underspecified_mech_photos_delete",
+      "selected_by_cosine": "mech_photos_delete",
+      "target": "mech_photos_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.6391392946243286,
+      "family": "users",
+      "goal_id": "composite_00_mech_users_create",
+      "selected_by_cosine": "mech_users_create",
+      "target": "mech_users_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.5072944164276123,
+      "family": "posts",
+      "goal_id": "composite_01_mech_posts_create",
+      "selected_by_cosine": "mech_posts_create",
+      "target": "mech_posts_create"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.6542386412620544,
+      "family": "comments",
+      "goal_id": "composite_02_mech_comments_create",
+      "selected_by_cosine": "mech_users_update",
+      "target": "mech_comments_create"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.6972815990447998,
+      "family": "albums",
+      "goal_id": "composite_03_mech_albums_create",
+      "selected_by_cosine": "mech_photos_create",
+      "target": "mech_albums_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.7501600980758667,
+      "family": "photos",
+      "goal_id": "composite_04_mech_photos_create",
+      "selected_by_cosine": "mech_photos_create",
+      "target": "mech_photos_create"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.5803887248039246,
+      "family": "users",
+      "goal_id": "composite_05_mech_users_update",
+      "selected_by_cosine": "mech_albums_update",
+      "target": "mech_users_update"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.5273619890213013,
+      "family": "posts",
+      "goal_id": "composite_06_mech_posts_delete",
+      "selected_by_cosine": "mech_comments_delete",
+      "target": "mech_posts_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.507975697517395,
+      "family": "users",
+      "goal_id": "composite_07_mech_users_delete",
+      "selected_by_cosine": "mech_users_delete",
+      "target": "mech_users_delete"
+    },
+    {
+      "correct": false,
+      "cos_top": 0.6599231958389282,
+      "family": "albums",
+      "goal_id": "composite_08_mech_albums_delete",
+      "selected_by_cosine": "mech_photos_update",
+      "target": "mech_albums_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.5340135097503662,
+      "family": "posts",
+      "goal_id": "composite_09_mech_posts_update",
+      "selected_by_cosine": "mech_posts_update",
+      "target": "mech_posts_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "users",
+      "goal_id": "verbatim_mech_users_create",
+      "selected_by_cosine": "mech_users_create",
+      "target": "mech_users_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.000000238418579,
+      "family": "users",
+      "goal_id": "verbatim_mech_users_read",
+      "selected_by_cosine": "mech_users_read",
+      "target": "mech_users_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.9999999403953552,
+      "family": "users",
+      "goal_id": "verbatim_mech_users_update",
+      "selected_by_cosine": "mech_users_update",
+      "target": "mech_users_update"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "users",
+      "goal_id": "verbatim_mech_users_delete",
+      "selected_by_cosine": "mech_users_delete",
+      "target": "mech_users_delete"
+    },
+    {
+      "correct": true,
+      "cos_top": 0.9999998807907104,
+      "family": "posts",
+      "goal_id": "verbatim_mech_posts_create",
+      "selected_by_cosine": "mech_posts_create",
+      "target": "mech_posts_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0000001192092896,
+      "family": "posts",
+      "goal_id": "verbatim_mech_posts_read",
+      "selected_by_cosine": "mech_posts_read",
+      "target": "mech_posts_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0000001192092896,
+      "family": "comments",
+      "goal_id": "verbatim_mech_comments_create",
+      "selected_by_cosine": "mech_comments_create",
+      "target": "mech_comments_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "albums",
+      "goal_id": "verbatim_mech_albums_create",
+      "selected_by_cosine": "mech_albums_create",
+      "target": "mech_albums_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "albums",
+      "goal_id": "verbatim_mech_albums_read",
+      "selected_by_cosine": "mech_albums_read",
+      "target": "mech_albums_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_create",
+      "selected_by_cosine": "mech_photos_create",
+      "target": "mech_photos_create"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0000001192092896,
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_read",
+      "selected_by_cosine": "mech_photos_read",
+      "target": "mech_photos_read"
+    },
+    {
+      "correct": true,
+      "cos_top": 1.0,
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_update",
+      "selected_by_cosine": "mech_photos_update",
+      "target": "mech_photos_update"
+    }
+  ],
+  "embedding": {
+    "dim": 384,
+    "local_cache_path": "/home/runner/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2",
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "sentence_transformers": "6.1.0",
+    "snapshot_file_count": 11,
+    "snapshot_file_set_sha256": "f2c926d7315f0d89dab11936f813240d7b10904a500892313b8db263882aa38c",
+    "snapshot_revisions": [
+      "snapshots"
+    ],
+    "torch": "2.14.0+cu130",
+    "transformers": "5.17.0"
+  },
+  "fit": {
+    "b": 0.18530383624882538,
+    "converged_iters": 10,
+    "estimator": "sklearn.linear_model.LogisticRegression(penalty=None, solver=lbfgs, max_iter=5000)",
+    "fitted": true,
+    "label_balance": {
+      "0": 6,
+      "1": 36
+    },
+    "n_train_rows": 42,
+    "w": 2.6927439442486354
+  },
+  "fitted_parameter_movement": {
+    "note": "non-zero spread across independent train splits is direct evidence that the gate is a fitted function of the data rather than a fixed algebraic transform of cos_sim",
+    "w_spread": 1.1229604465147536,
+    "w_values": [
+      2.7440245575024917,
+      1.6210641109877382,
+      1.934914619900974
+    ]
+  },
+  "frozen": true,
+  "seed_refits": [
+    {
+      "b": -0.04719066595786024,
+      "fitted": true,
+      "split_seed": 990018,
+      "w": 2.7440245575024917
+    },
+    {
+      "b": 0.8200353505398607,
+      "fitted": true,
+      "split_seed": 990019,
+      "w": 1.6210641109877382
+    },
+    {
+      "b": 0.7729430482874374,
+      "fitted": true,
+      "split_seed": 990020,
+      "w": 1.934914619900974
+    }
+  ],
+  "split": {
+    "excluded_from_fitting": {
+      "n": 28,
+      "reason": "OOD and no-applicable goals have no applicable mechanism, so an applicability gate has no defined positive label on them; fitting on them would be label leakage. prereg 3.3's literal '60 applicable' counts the 20 OOD goals as applicable, which is inconsistent with its own OOD description and with NC-NO-APPLICABLE; the 52/28 split is reported instead."
+    },
+    "n_applicable": 52,
+    "n_train": 42,
+    "n_val": 10,
+    "no_held_out_test_split": "The frozen design provides only train/validation, so the primary mechanism-identity accuracy is reported on the union of train and validation. This does not contaminate the SELECTION step, which is parameter-free (argmax of a frozen embedding cosine); only the abstain/commit decision is fitted. Train-only and validation-only accuracies are reported separately so the auditor can separate them.",
+    "seed": 990017,
+    "stratified_by": "resource_family",
+    "train_goal_ids": [
+      "composite_01_mech_posts_create",
+      "composite_02_mech_comments_create",
+      "composite_03_mech_albums_create",
+      "composite_04_mech_photos_create",
+      "composite_06_mech_posts_delete",
+      "composite_07_mech_users_delete",
+      "composite_08_mech_albums_delete",
+      "composite_09_mech_posts_update",
+      "paraphrased_mech_albums_create",
+      "paraphrased_mech_albums_delete",
+      "paraphrased_mech_albums_read",
+      "paraphrased_mech_albums_update",
+      "paraphrased_mech_comments_create",
+      "paraphrased_mech_comments_read",
+      "paraphrased_mech_comments_update",
+      "paraphrased_mech_photos_create",
+      "paraphrased_mech_photos_delete",
+      "paraphrased_mech_photos_read",
+      "paraphrased_mech_photos_update",
+      "paraphrased_mech_posts_read",
+      "paraphrased_mech_posts_update",
+      "paraphrased_mech_users_create",
+      "paraphrased_mech_users_delete",
+      "paraphrased_mech_users_update",
+      "underspecified_mech_albums_create",
+      "underspecified_mech_albums_delete",
+      "underspecified_mech_comments_update",
+      "underspecified_mech_photos_delete",
+      "underspecified_mech_posts_create",
+      "underspecified_mech_posts_read",
+      "underspecified_mech_users_delete",
+      "underspecified_mech_users_read",
+      "underspecified_mech_users_update",
+      "verbatim_mech_comments_create",
+      "verbatim_mech_photos_create",
+      "verbatim_mech_photos_update",
+      "verbatim_mech_posts_create",
+      "verbatim_mech_posts_read",
+      "verbatim_mech_users_create",
+      "verbatim_mech_users_delete",
+      "verbatim_mech_users_read",
+      "verbatim_mech_users_update"
+    ],
+    "val_goal_ids": [
+      "composite_00_mech_users_create",
+      "composite_05_mech_users_update",
+      "paraphrased_mech_comments_delete",
+      "paraphrased_mech_posts_create",
+      "paraphrased_mech_posts_delete",
+      "paraphrased_mech_users_read",
+      "underspecified_mech_photos_create",
+      "verbatim_mech_albums_create",
+      "verbatim_mech_albums_read",
+      "verbatim_mech_photos_read"
+    ]
+  },
+  "threshold": 0.02,
+  "threshold_selection": {
+    "candidates_considered": 49,
+    "grid": [
+      0.02,
+      0.04,
+      0.06,
+      0.08,
+      0.1,
+      0.12,
+      0.14,
+      0.16,
+      0.18,
+      0.2,
+      0.22,
+      0.24,
+      0.26,
+      0.28,
+      0.3,
+      0.32,
+      0.34,
+      0.36,
+      0.38,
+      0.4,
+      0.42,
+      0.44,
+      0.46,
+      0.48,
+      0.5,
+      0.52,
+      0.54,
+      0.56,
+      0.58,
+      0.6,
+      0.62,
+      0.64,
+      0.66,
+      0.68,
+      0.7,
+      0.72,
+      0.74,
+      0.76,
+      0.78,
+      0.8,
+      0.82,
+      0.84,
+      0.86,
+      0.88,
+      0.9,
+      0.92,
+      0.94,
+      0.96,
+      0.98
+    ],
+    "objective": "maximise validation F1 of the positive class 'goal resolved correctly' (selected==target AND not abstained); an abstention on a resolvable goal is a false negative",
+    "selected": {
+      "threshold": 0.02,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    }
+  },
+  "threshold_sweep_validation": [
+    {
+      "threshold": 0.02,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.04,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.06,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.08,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.1,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.12,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.14,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.16,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.18,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.2,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.22,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.24,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.26,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.28,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.3,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.32,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.34,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.36,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.38,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.4,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.42,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.44,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.46,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.48,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.5,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.52,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.54,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.56,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.58,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.6,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.62,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.64,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.66,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.68,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.7,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.72,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.74,
+      "val_committed": 10,
+      "val_f1": 0.9473684210526316,
+      "val_precision": 0.9,
+      "val_recall": 1.0
+    },
+    {
+      "threshold": 0.76,
+      "val_committed": 9,
+      "val_f1": 0.8888888888888888,
+      "val_precision": 0.8888888888888888,
+      "val_recall": 0.8888888888888888
+    },
+    {
+      "threshold": 0.78,
+      "val_committed": 9,
+      "val_f1": 0.8888888888888888,
+      "val_precision": 0.8888888888888888,
+      "val_recall": 0.8888888888888888
+    },
+    {
+      "threshold": 0.8,
+      "val_committed": 9,
+      "val_f1": 0.8888888888888888,
+      "val_precision": 0.8888888888888888,
+      "val_recall": 0.8888888888888888
+    },
+    {
+      "threshold": 0.82,
+      "val_committed": 8,
+      "val_f1": 0.823529411764706,
+      "val_precision": 0.875,
+      "val_recall": 0.7777777777777778
+    },
+    {
+      "threshold": 0.84,
+      "val_committed": 8,
+      "val_f1": 0.823529411764706,
+      "val_precision": 0.875,
+      "val_recall": 0.7777777777777778
+    },
+    {
+      "threshold": 0.86,
+      "val_committed": 7,
+      "val_f1": 0.8750000000000001,
+      "val_precision": 1.0,
+      "val_recall": 0.7777777777777778
+    },
+    {
+      "threshold": 0.88,
+      "val_committed": 4,
+      "val_f1": 0.6153846153846153,
+      "val_precision": 1.0,
+      "val_recall": 0.4444444444444444
+    },
+    {
+      "threshold": 0.9,
+      "val_committed": 4,
+      "val_f1": 0.6153846153846153,
+      "val_precision": 1.0,
+      "val_recall": 0.4444444444444444
+    },
+    {
+      "threshold": 0.92,
+      "val_committed": 3,
+      "val_f1": 0.5,
+      "val_precision": 1.0,
+      "val_recall": 0.3333333333333333
+    },
+    {
+      "threshold": 0.94,
+      "val_committed": 3,
+      "val_f1": 0.5,
+      "val_precision": 1.0,
+      "val_recall": 0.3333333333333333
+    },
+    {
+      "threshold": 0.96,
+      "val_committed": 0,
+      "val_f1": 0.0,
+      "val_precision": 0.0,
+      "val_recall": 0.0
+    },
+    {
+      "threshold": 0.98,
+      "val_committed": 0,
+      "val_f1": 0.0,
+      "val_precision": 0.0,
+      "val_recall": 0.0
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "frozen_input_hashes_match": true,
+  "frozen_input_hashes_recomputed": {
+    "prereg.md": "0c95744647f7aa9943e14de5db7c758e1d45ea152a961f424aab6f610ac66657",
+    "request.json": "d482a1898b243f6bdeec5870ca70993fe64a811dd3e9b1a99cd32e2064bd8b3d",
+    "spec.json": "0151912409917e9098ff691df04b71097e769740bddc30d7bfd7e8862802fcd5"
+  },
+  "v9_code_hashed_into_freeze": {
+    "code_files_expected_by_v9": [
+      "candidate_resolver.py",
+      "goal_generator.py",
+      "http_server.py",
+      "experiment_runner.py",
+      "metric_estimators.py",
+      "fixture_def.py"
+    ],
+    "code_files_present_in_freeze": [],
+    "freeze_json_hashes": [
+      "prereg.md",
+      "request.json",
+      "spec.json"
+    ],
+    "note": "freeze.json was produced by the deterministic freezer at commit 9b56d0b9, which hashes only request.json, spec.json and prereg.md. The outcome-bearing code did not exist at freeze time, so no code hash could be present. The freezer is scripts/freeze_experiment.py, which is outside every scientific lane's allowed_code_roots, so no EXECUTE-stage actor can repair this.",
+    "pass": false
+  }
+}

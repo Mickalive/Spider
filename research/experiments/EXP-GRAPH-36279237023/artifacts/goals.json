@@ -1,0 +1,1067 @@
+{
+  "applies_any_count": 52,
+  "applies_none_count": 28,
+  "counts": {
+    "composite": 10,
+    "no_applicable": 8,
+    "ood": 20,
+    "paraphrased": 20,
+    "underspecified": 10,
+    "verbatim": 12
+  },
+  "declared_ambiguity": "prereg.md 3.3 states 'Total goals: 80 (60 applicable + 12 verbatim + 8 no-applicable)'. The table in the same section gives 20 paraphrased + 10 underspecified + 10 composite + 20 OOD + 12 verbatim + 8 no-applicable = 80, and 60 is the arithmetic sum of the FIRST FOUR categories, i.e. it counts the 20 OOD goals as 'applicable'. That is inconsistent with the same table's own description of OOD goals as 'operations/families not in registry' and with NC-NO-APPLICABLE, which requires goals with no applicable mechanism. The generator therefore implements the CATEGORY TABLE, which is the unambiguous part of the frozen design, giving 52 applies_any and 28 applies_none. The 20 OOD goals are excluded from calibration fitting because an applicability gate has no defined positive label on a goal with no applicable mechanism. The literal '60' is reported as a prereg arithmetic inconsistency, not silently adopted or silently dropped.",
+  "goal_index": {
+    "mech_albums_create": 12,
+    "mech_albums_delete": 15,
+    "mech_albums_read": 13,
+    "mech_albums_update": 14,
+    "mech_comments_create": 8,
+    "mech_comments_delete": 11,
+    "mech_comments_read": 9,
+    "mech_comments_update": 10,
+    "mech_photos_create": 16,
+    "mech_photos_delete": 19,
+    "mech_photos_read": 17,
+    "mech_photos_update": 18,
+    "mech_posts_create": 4,
+    "mech_posts_delete": 7,
+    "mech_posts_read": 5,
+    "mech_posts_update": 6,
+    "mech_users_create": 0,
+    "mech_users_delete": 3,
+    "mech_users_read": 1,
+    "mech_users_update": 2
+  },
+  "goal_set_id": "GOALS-EXP-GRAPH-36279237023",
+  "goals": [
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_create",
+      "operations": [
+        "mech_users_create"
+      ],
+      "target_fragment_id": "frag_users_create",
+      "target_mechanism_id": "mech_users_create",
+      "target_selection_rule": "single_operation",
+      "text": "register a brand-new account named Alice with email alice@example.com"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_read",
+      "operations": [
+        "mech_users_read"
+      ],
+      "target_fragment_id": "frag_users_read",
+      "target_mechanism_id": "mech_users_read",
+      "target_selection_rule": "single_operation",
+      "text": "pull up the account numbered 7"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_update",
+      "operations": [
+        "mech_users_update"
+      ],
+      "target_fragment_id": "frag_users_update",
+      "target_mechanism_id": "mech_users_update",
+      "target_selection_rule": "single_operation",
+      "text": "change the name on the account numbered 7 to Bob"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "users",
+      "goal_id": "paraphrased_mech_users_delete",
+      "operations": [
+        "mech_users_delete"
+      ],
+      "target_fragment_id": "frag_users_delete",
+      "target_mechanism_id": "mech_users_delete",
+      "target_selection_rule": "single_operation",
+      "text": "wipe the account numbered 7 out of the directory"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_create",
+      "operations": [
+        "mech_posts_create"
+      ],
+      "target_fragment_id": "frag_posts_create",
+      "target_mechanism_id": "mech_posts_create",
+      "target_selection_rule": "single_operation",
+      "text": "put up a piece whose heading reads 'Hello' and whose text reads 'World'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_read",
+      "operations": [
+        "mech_posts_read"
+      ],
+      "target_fragment_id": "frag_posts_read",
+      "target_mechanism_id": "mech_posts_read",
+      "target_selection_rule": "single_operation",
+      "text": "show me the piece numbered 3"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_update",
+      "operations": [
+        "mech_posts_update"
+      ],
+      "target_fragment_id": "frag_posts_update",
+      "target_mechanism_id": "mech_posts_update",
+      "target_selection_rule": "single_operation",
+      "text": "relabel the piece numbered 3 so the title becomes 'Hi'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "posts",
+      "goal_id": "paraphrased_mech_posts_delete",
+      "operations": [
+        "mech_posts_delete"
+      ],
+      "target_fragment_id": "frag_posts_delete",
+      "target_mechanism_id": "mech_posts_delete",
+      "target_selection_rule": "single_operation",
+      "text": "throw the piece numbered 3 away"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_create",
+      "operations": [
+        "mech_comments_create"
+      ],
+      "target_fragment_id": "frag_comments_create",
+      "target_mechanism_id": "mech_comments_create",
+      "target_selection_rule": "single_operation",
+      "text": "attach a note 'Nice' underneath the piece numbered 3"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_read",
+      "operations": [
+        "mech_comments_read"
+      ],
+      "target_fragment_id": "frag_comments_read",
+      "target_mechanism_id": "mech_comments_read",
+      "target_selection_rule": "single_operation",
+      "text": "surface the remark numbered 5"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_update",
+      "operations": [
+        "mech_comments_update"
+      ],
+      "target_fragment_id": "frag_comments_update",
+      "target_mechanism_id": "mech_comments_update",
+      "target_selection_rule": "single_operation",
+      "text": "amend the remark numbered 5 so the text reads 'Great'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "comments",
+      "goal_id": "paraphrased_mech_comments_delete",
+      "operations": [
+        "mech_comments_delete"
+      ],
+      "target_fragment_id": "frag_comments_delete",
+      "target_mechanism_id": "mech_comments_delete",
+      "target_selection_rule": "single_operation",
+      "text": "erase the remark numbered 5"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_create",
+      "operations": [
+        "mech_albums_create"
+      ],
+      "target_fragment_id": "frag_albums_create",
+      "target_mechanism_id": "mech_albums_create",
+      "target_selection_rule": "single_operation",
+      "text": "start a collection whose heading reads 'Trip'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_read",
+      "operations": [
+        "mech_albums_read"
+      ],
+      "target_fragment_id": "frag_albums_read",
+      "target_mechanism_id": "mech_albums_read",
+      "target_selection_rule": "single_operation",
+      "text": "open the collection numbered 2"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_update",
+      "operations": [
+        "mech_albums_update"
+      ],
+      "target_fragment_id": "frag_albums_update",
+      "target_mechanism_id": "mech_albums_update",
+      "target_selection_rule": "single_operation",
+      "text": "adjust the collection numbered 2 so the title becomes 'Holiday'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "albums",
+      "goal_id": "paraphrased_mech_albums_delete",
+      "operations": [
+        "mech_albums_delete"
+      ],
+      "target_fragment_id": "frag_albums_delete",
+      "target_mechanism_id": "mech_albums_delete",
+      "target_selection_rule": "single_operation",
+      "text": "discard the collection numbered 2"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_create",
+      "operations": [
+        "mech_photos_create"
+      ],
+      "target_fragment_id": "frag_photos_create",
+      "target_mechanism_id": "mech_photos_create",
+      "target_selection_rule": "single_operation",
+      "text": "upload a picture whose url is 'http://example.com/y.png' captioned 'Cat'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_read",
+      "operations": [
+        "mech_photos_read"
+      ],
+      "target_fragment_id": "frag_photos_read",
+      "target_mechanism_id": "mech_photos_read",
+      "target_selection_rule": "single_operation",
+      "text": "display the picture numbered 4"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_update",
+      "operations": [
+        "mech_photos_update"
+      ],
+      "target_fragment_id": "frag_photos_update",
+      "target_mechanism_id": "mech_photos_update",
+      "target_selection_rule": "single_operation",
+      "text": "adjust the picture numbered 4 so the caption becomes 'Dog'"
+    },
+    {
+      "applies_any": true,
+      "category": "paraphrased",
+      "family": "photos",
+      "goal_id": "paraphrased_mech_photos_delete",
+      "operations": [
+        "mech_photos_delete"
+      ],
+      "target_fragment_id": "frag_photos_delete",
+      "target_mechanism_id": "mech_photos_delete",
+      "target_selection_rule": "single_operation",
+      "text": "remove the picture numbered 4"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "users",
+      "goal_id": "underspecified_mech_users_read",
+      "missing_slot_family": "mech_users_read",
+      "operations": [
+        "mech_users_read"
+      ],
+      "target_fragment_id": "frag_users_read",
+      "target_mechanism_id": "mech_users_read",
+      "target_selection_rule": "single_operation",
+      "text": "pull up the account"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "users",
+      "goal_id": "underspecified_mech_users_update",
+      "missing_slot_family": "mech_users_update",
+      "operations": [
+        "mech_users_update"
+      ],
+      "target_fragment_id": "frag_users_update",
+      "target_mechanism_id": "mech_users_update",
+      "target_selection_rule": "single_operation",
+      "text": "change the name to Bob"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "users",
+      "goal_id": "underspecified_mech_users_delete",
+      "missing_slot_family": "mech_users_delete",
+      "operations": [
+        "mech_users_delete"
+      ],
+      "target_fragment_id": "frag_users_delete",
+      "target_mechanism_id": "mech_users_delete",
+      "target_selection_rule": "single_operation",
+      "text": "wipe the account out of the directory"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "posts",
+      "goal_id": "underspecified_mech_posts_create",
+      "missing_slot_family": "mech_posts_create",
+      "operations": [
+        "mech_posts_create"
+      ],
+      "target_fragment_id": "frag_posts_create",
+      "target_mechanism_id": "mech_posts_create",
+      "target_selection_rule": "single_operation",
+      "text": "put up a piece"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "posts",
+      "goal_id": "underspecified_mech_posts_read",
+      "missing_slot_family": "mech_posts_read",
+      "operations": [
+        "mech_posts_read"
+      ],
+      "target_fragment_id": "frag_posts_read",
+      "target_mechanism_id": "mech_posts_read",
+      "target_selection_rule": "single_operation",
+      "text": "show me the piece"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "comments",
+      "goal_id": "underspecified_mech_comments_update",
+      "missing_slot_family": "mech_comments_update",
+      "operations": [
+        "mech_comments_update"
+      ],
+      "target_fragment_id": "frag_comments_update",
+      "target_mechanism_id": "mech_comments_update",
+      "target_selection_rule": "single_operation",
+      "text": "amend the remark so the text reads 'Great'"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "albums",
+      "goal_id": "underspecified_mech_albums_create",
+      "missing_slot_family": "mech_albums_create",
+      "operations": [
+        "mech_albums_create"
+      ],
+      "target_fragment_id": "frag_albums_create",
+      "target_mechanism_id": "mech_albums_create",
+      "target_selection_rule": "single_operation",
+      "text": "start a collection"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "albums",
+      "goal_id": "underspecified_mech_albums_delete",
+      "missing_slot_family": "mech_albums_delete",
+      "operations": [
+        "mech_albums_delete"
+      ],
+      "target_fragment_id": "frag_albums_delete",
+      "target_mechanism_id": "mech_albums_delete",
+      "target_selection_rule": "single_operation",
+      "text": "discard the collection"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "photos",
+      "goal_id": "underspecified_mech_photos_create",
+      "missing_slot_family": "mech_photos_create",
+      "operations": [
+        "mech_photos_create"
+      ],
+      "target_fragment_id": "frag_photos_create",
+      "target_mechanism_id": "mech_photos_create",
+      "target_selection_rule": "single_operation",
+      "text": "upload a picture captioned 'Cat'"
+    },
+    {
+      "applies_any": true,
+      "category": "underspecified",
+      "family": "photos",
+      "goal_id": "underspecified_mech_photos_delete",
+      "missing_slot_family": "mech_photos_delete",
+      "operations": [
+        "mech_photos_delete"
+      ],
+      "target_fragment_id": "frag_photos_delete",
+      "target_mechanism_id": "mech_photos_delete",
+      "target_selection_rule": "single_operation",
+      "text": "remove the picture"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "users",
+      "goal_id": "composite_00_mech_users_create",
+      "operations": [
+        "mech_users_create",
+        "mech_posts_create"
+      ],
+      "target_fragment_id": "frag_users_create",
+      "target_mechanism_id": "mech_users_create",
+      "target_selection_rule": "first_operation",
+      "text": "register a brand-new account named Alice with email alice@example.com and then put up a piece whose heading reads 'Hello' and whose text reads 'World'"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "posts",
+      "goal_id": "composite_01_mech_posts_create",
+      "operations": [
+        "mech_posts_create",
+        "mech_comments_create"
+      ],
+      "target_fragment_id": "frag_posts_create",
+      "target_mechanism_id": "mech_posts_create",
+      "target_selection_rule": "first_operation",
+      "text": "put up a piece whose heading reads 'Hello' and whose text reads 'World' and then attach a note 'Nice' underneath the piece numbered 3"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "comments",
+      "goal_id": "composite_02_mech_comments_create",
+      "operations": [
+        "mech_comments_create",
+        "mech_users_update"
+      ],
+      "target_fragment_id": "frag_comments_create",
+      "target_mechanism_id": "mech_comments_create",
+      "target_selection_rule": "first_operation",
+      "text": "attach a note 'Nice' underneath the piece numbered 3 and then change the name on the account numbered 7 to Bob"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "albums",
+      "goal_id": "composite_03_mech_albums_create",
+      "operations": [
+        "mech_albums_create",
+        "mech_photos_create"
+      ],
+      "target_fragment_id": "frag_albums_create",
+      "target_mechanism_id": "mech_albums_create",
+      "target_selection_rule": "first_operation",
+      "text": "start a collection whose heading reads 'Trip' and then upload a picture whose url is 'http://example.com/y.png' captioned 'Cat'"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "photos",
+      "goal_id": "composite_04_mech_photos_create",
+      "operations": [
+        "mech_photos_create",
+        "mech_posts_update"
+      ],
+      "target_fragment_id": "frag_photos_create",
+      "target_mechanism_id": "mech_photos_create",
+      "target_selection_rule": "first_operation",
+      "text": "upload a picture whose url is 'http://example.com/y.png' captioned 'Cat' and then relabel the piece numbered 3 so the title becomes 'Hi'"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "users",
+      "goal_id": "composite_05_mech_users_update",
+      "operations": [
+        "mech_users_update",
+        "mech_albums_update"
+      ],
+      "target_fragment_id": "frag_users_update",
+      "target_mechanism_id": "mech_users_update",
+      "target_selection_rule": "first_operation",
+      "text": "change the name on the account numbered 7 to Bob and then adjust the collection numbered 2 so the title becomes 'Holiday'"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "posts",
+      "goal_id": "composite_06_mech_posts_delete",
+      "operations": [
+        "mech_posts_delete",
+        "mech_comments_delete"
+      ],
+      "target_fragment_id": "frag_posts_delete",
+      "target_mechanism_id": "mech_posts_delete",
+      "target_selection_rule": "first_operation",
+      "text": "throw the piece numbered 3 away and then erase the remark numbered 5"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "users",
+      "goal_id": "composite_07_mech_users_delete",
+      "operations": [
+        "mech_users_delete",
+        "mech_comments_read"
+      ],
+      "target_fragment_id": "frag_users_delete",
+      "target_mechanism_id": "mech_users_delete",
+      "target_selection_rule": "first_operation",
+      "text": "wipe the account numbered 7 out of the directory and then surface the remark numbered 5"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "albums",
+      "goal_id": "composite_08_mech_albums_delete",
+      "operations": [
+        "mech_albums_delete",
+        "mech_photos_update"
+      ],
+      "target_fragment_id": "frag_albums_delete",
+      "target_mechanism_id": "mech_albums_delete",
+      "target_selection_rule": "first_operation",
+      "text": "discard the collection numbered 2 and then adjust the picture numbered 4 so the caption becomes 'Dog'"
+    },
+    {
+      "applies_any": true,
+      "category": "composite",
+      "family": "posts",
+      "goal_id": "composite_09_mech_posts_update",
+      "operations": [
+        "mech_posts_update",
+        "mech_users_read"
+      ],
+      "target_fragment_id": "frag_posts_update",
+      "target_mechanism_id": "mech_posts_update",
+      "target_selection_rule": "first_operation",
+      "text": "relabel the piece numbered 3 so the title becomes 'Hi' and then pull up the account numbered 7"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "users",
+      "goal_id": "ood_00_users",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "ban the account numbered 7 permanently"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "users",
+      "goal_id": "ood_01_users",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "search the accounts by email alice@example.com"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "users",
+      "goal_id": "ood_02_users",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "reset the password of the account numbered 7"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "users",
+      "goal_id": "ood_03_users",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "list every account registered this week"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "posts",
+      "goal_id": "ood_04_posts",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "schedule the piece numbered 3 for tomorrow"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "posts",
+      "goal_id": "ood_05_posts",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "tag the piece numbered 3 as featured"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "posts",
+      "goal_id": "ood_06_posts",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "count how many pieces mention 'World'"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "posts",
+      "goal_id": "ood_07_posts",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "publish the piece numbered 3 to the newsletter"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "comments",
+      "goal_id": "ood_08_comments",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "like the remark numbered 5"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "comments",
+      "goal_id": "ood_09_comments",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "report the remark numbered 5 as spam"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "comments",
+      "goal_id": "ood_10_comments",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "reply to the remark numbered 5"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "comments",
+      "goal_id": "ood_11_comments",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "summarise all remarks on the piece numbered 3"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "albums",
+      "goal_id": "ood_12_albums",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "share the collection numbered 2 with a friend"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "albums",
+      "goal_id": "ood_13_albums",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "export the collection numbered 2 as a zip file"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "albums",
+      "goal_id": "ood_14_albums",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "sort the collection numbered 2 by date"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "albums",
+      "goal_id": "ood_15_albums",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "add the piece numbered 3 to the collection numbered 2"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "photos",
+      "goal_id": "ood_16_photos",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "rotate the picture numbered 4 by ninety degrees"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "photos",
+      "goal_id": "ood_17_photos",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "crop the picture numbered 4 to a square"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "photos",
+      "goal_id": "ood_18_photos",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "make the picture numbered 4 the cover image"
+    },
+    {
+      "applies_any": false,
+      "category": "ood",
+      "family": "photos",
+      "goal_id": "ood_19_photos",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "download the picture numbered 4 in full resolution"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "users",
+      "goal_id": "verbatim_mech_users_create",
+      "operations": [
+        "mech_users_create"
+      ],
+      "target_fragment_id": "frag_users_create",
+      "target_mechanism_id": "mech_users_create",
+      "target_selection_rule": "single_operation",
+      "text": "create a new user named Alice with email alice@example.com"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "users",
+      "goal_id": "verbatim_mech_users_read",
+      "operations": [
+        "mech_users_read"
+      ],
+      "target_fragment_id": "frag_users_read",
+      "target_mechanism_id": "mech_users_read",
+      "target_selection_rule": "single_operation",
+      "text": "retrieve the user with id 7"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "users",
+      "goal_id": "verbatim_mech_users_update",
+      "operations": [
+        "mech_users_update"
+      ],
+      "target_fragment_id": "frag_users_update",
+      "target_mechanism_id": "mech_users_update",
+      "target_selection_rule": "single_operation",
+      "text": "update the name of the user with id 7 to Bob"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "users",
+      "goal_id": "verbatim_mech_users_delete",
+      "operations": [
+        "mech_users_delete"
+      ],
+      "target_fragment_id": "frag_users_delete",
+      "target_mechanism_id": "mech_users_delete",
+      "target_selection_rule": "single_operation",
+      "text": "delete the user with id 7"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "posts",
+      "goal_id": "verbatim_mech_posts_create",
+      "operations": [
+        "mech_posts_create"
+      ],
+      "target_fragment_id": "frag_posts_create",
+      "target_mechanism_id": "mech_posts_create",
+      "target_selection_rule": "single_operation",
+      "text": "create a post titled 'Hello' with body 'World'"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "posts",
+      "goal_id": "verbatim_mech_posts_read",
+      "operations": [
+        "mech_posts_read"
+      ],
+      "target_fragment_id": "frag_posts_read",
+      "target_mechanism_id": "mech_posts_read",
+      "target_selection_rule": "single_operation",
+      "text": "retrieve the post with id 3"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "comments",
+      "goal_id": "verbatim_mech_comments_create",
+      "operations": [
+        "mech_comments_create"
+      ],
+      "target_fragment_id": "frag_comments_create",
+      "target_mechanism_id": "mech_comments_create",
+      "target_selection_rule": "single_operation",
+      "text": "create a comment on the post with id 3 saying 'Nice'"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "albums",
+      "goal_id": "verbatim_mech_albums_create",
+      "operations": [
+        "mech_albums_create"
+      ],
+      "target_fragment_id": "frag_albums_create",
+      "target_mechanism_id": "mech_albums_create",
+      "target_selection_rule": "single_operation",
+      "text": "create an album titled 'Trip'"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "albums",
+      "goal_id": "verbatim_mech_albums_read",
+      "operations": [
+        "mech_albums_read"
+      ],
+      "target_fragment_id": "frag_albums_read",
+      "target_mechanism_id": "mech_albums_read",
+      "target_selection_rule": "single_operation",
+      "text": "retrieve the album with id 2"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_create",
+      "operations": [
+        "mech_photos_create"
+      ],
+      "target_fragment_id": "frag_photos_create",
+      "target_mechanism_id": "mech_photos_create",
+      "target_selection_rule": "single_operation",
+      "text": "create a photo with url 'http://example.com/y.png' captioned 'Cat'"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_read",
+      "operations": [
+        "mech_photos_read"
+      ],
+      "target_fragment_id": "frag_photos_read",
+      "target_mechanism_id": "mech_photos_read",
+      "target_selection_rule": "single_operation",
+      "text": "retrieve the photo with id 4"
+    },
+    {
+      "applies_any": true,
+      "category": "verbatim",
+      "family": "photos",
+      "goal_id": "verbatim_mech_photos_update",
+      "operations": [
+        "mech_photos_update"
+      ],
+      "target_fragment_id": "frag_photos_update",
+      "target_mechanism_id": "mech_photos_update",
+      "target_selection_rule": "single_operation",
+      "text": "update the caption of the photo with id 4 to 'Dog'"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_00",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "print the whole database to a file"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_01",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "restart the server"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_02",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "reset the database to its initial state"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_03",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "measure how long the server takes to answer"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_04",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "shut the application down gracefully"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_05",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "back the database up to remote storage"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_06",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "grant a new administrator the right to use the application"
+    },
+    {
+      "applies_any": false,
+      "category": "no_applicable",
+      "family": "platform",
+      "goal_id": "no_applicable_07",
+      "operations": [],
+      "target_fragment_id": null,
+      "target_mechanism_id": null,
+      "target_selection_rule": "no_applicable_mechanism",
+      "text": "upgrade the application to the next version"
+    }
+  ],
+  "mechanism_order": [
+    "mech_users_create",
+    "mech_users_read",
+    "mech_users_update",
+    "mech_users_delete",
+    "mech_posts_create",
+    "mech_posts_read",
+    "mech_posts_update",
+    "mech_posts_delete",
+    "mech_comments_create",
+    "mech_comments_read",
+    "mech_comments_update",
+    "mech_comments_delete",
+    "mech_albums_create",
+    "mech_albums_read",
+    "mech_albums_update",
+    "mech_albums_delete",
+    "mech_photos_create",
+    "mech_photos_read",
+    "mech_photos_update",
+    "mech_photos_delete"
+  ],
+  "schema_version": 1,
+  "seed": 36279237023,
+  "total": 80
+}

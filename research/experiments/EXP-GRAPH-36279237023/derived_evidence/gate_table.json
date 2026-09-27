@@ -1,0 +1,290 @@
+{
+  "gate_order": "V1-V11 -> degeneracy screen -> positive control -> oracle ceiling -> null control -> calibration fitted -> primary -> secondary",
+  "gates": [
+    {
+      "failing_conditions": [
+        "V9_CODE_HASHED_INTO_FREEZE"
+      ],
+      "gate": 1,
+      "name": "measurement_validity_V1_V11",
+      "order": "prereg 7.1 step 1",
+      "pass": false
+    },
+    {
+      "failing_conditions": [],
+      "gate": 2,
+      "name": "degeneracy_screen",
+      "order": "prereg 7.1 step 2",
+      "pass": true
+    },
+    {
+      "failing_conditions": [],
+      "gate": 3,
+      "name": "positive_control_PC-VERBATIM-INTENT",
+      "order": "prereg 7.1 step 3",
+      "pass": true
+    },
+    {
+      "failing_conditions": [],
+      "gate": 4,
+      "name": "oracle_ceiling_B-INTERNAL-ID-ORACLE",
+      "order": "prereg 7.1 step 4",
+      "pass": true
+    },
+    {
+      "denominator": 8,
+      "failing_conditions": [],
+      "gate": 5,
+      "name": "null_control_NC-NO-APPLICABLE",
+      "observed_abstention_rate": 1.0,
+      "order": "prereg 7.1 step 5",
+      "pass": true
+    },
+    {
+      "failing_conditions": [],
+      "gate": 6,
+      "name": "calibration_fitted_check",
+      "order": "prereg 7.1 step 6",
+      "pass": true
+    },
+    {
+      "failing_conditions": [
+        "does_not_exceed_B-LEXICAL-OVERLAP"
+      ],
+      "gate": 7,
+      "name": "primary_mechanism_identity_accuracy_above_nulls",
+      "observed": {
+        "A-CANDIDATE": 0.692308,
+        "B-LEXICAL-OVERLAP": 0.692308,
+        "B-RANDOM-ROLE": 0.134615,
+        "difference_vs_lexical": 0.0,
+        "one_sided_lower_95_vs_lexical": -0.065217,
+        "p_one_sided_vs_lexical": 0.5943,
+        "passes_vs_lexical": false,
+        "passes_vs_random_role": true
+      },
+      "order": "prereg 7.1 step 7",
+      "pass": false
+    },
+    {
+      "detail": [
+        {
+          "direction": "<=",
+          "interpretation_dependent": true,
+          "interpretation_dependent_detail": "the frozen text does not fix the numerator/denominator pairing. The coded 0.3077 is R4 (all-80 wrong-execution numerator over the 52-goal applicable denominator) and FAILS. Under R1 (applicable wrong-executions over applicable goals) the candidate scores 0.0962 and PASSES, while the lexical null scores 0.3077 and fails. Under R2 (all 80) it scores 0.2000 and fails. The gate verdict is therefore not invariant to the specification gap. Reported as coded; not repaired.",
+          "name": "pooled_false_accept",
+          "observed": 0.307692,
+          "pass": false,
+          "threshold": 0.1
+        },
+        {
+          "direction": ">=",
+          "name": "unknown_precision",
+          "observed": 0.607143,
+          "pass": false,
+          "threshold": 0.85
+        },
+        {
+          "bootstrap_upper_95": 0.285203,
+          "bootstrap_upper_threshold": 0.18,
+          "direction": "<=",
+          "name": "ece_global",
+          "observed": 0.203001,
+          "pass": false,
+          "threshold": 0.15
+        },
+        {
+          "bootstrap_upper_95": 0.838805,
+          "bootstrap_upper_threshold": 0.18,
+          "direction": "<=",
+          "name": "ece_per_class_max",
+          "observed": 0.788463,
+          "pass": false,
+          "threshold": 0.15
+        },
+        {
+          "direction": "==",
+          "name": "calibration_fitted",
+          "observed": true,
+          "pass": true,
+          "threshold": true
+        },
+        {
+          "direction": "==",
+          "name": "degeneracy_screen_passed",
+          "observed": true,
+          "pass": true,
+          "threshold": true
+        },
+        {
+          "denominator": 12,
+          "direction": "==",
+          "name": "positive_control_pass",
+          "observed": 1.0,
+          "pass": true,
+          "threshold": 1.0
+        },
+        {
+          "direction": "==",
+          "name": "oracle_ceiling_pass",
+          "observed": 1.0,
+          "pass": true,
+          "threshold": 1.0
+        },
+        {
+          "denominator": 8,
+          "direction": "==",
+          "name": "null_control_pass",
+          "observed": 1.0,
+          "pass": true,
+          "threshold": 1.0
+        }
+      ],
+      "failing_conditions": [
+        "pooled_false_accept",
+        "unknown_precision",
+        "ece_global",
+        "ece_per_class_max"
+      ],
+      "gate": 8,
+      "name": "secondary_gates",
+      "order": "prereg 7.1 step 8",
+      "pass": false
+    }
+  ],
+  "measurement_validity_conditions": {
+    "V10_FAMILY_BLOCKED_UNCERTAINTY": {
+      "blocks": [
+        "albums",
+        "comments",
+        "photos",
+        "posts",
+        "users"
+      ],
+      "evidence": "derived_evidence/metrics.json primary.vs_*",
+      "n_blocks": 5,
+      "n_resamples": 10000,
+      "paired": true,
+      "pass": true
+    },
+    "V11_FIXTURE_DISCRIMINATION": {
+      "evidence": "derived_evidence/phase0_preconditions.json fixture",
+      "n_endpoints": 20,
+      "n_mechanisms": 20,
+      "pass": true,
+      "verbs_per_family": {
+        "albums": [
+          "create",
+          "delete",
+          "read",
+          "update"
+        ],
+        "comments": [
+          "create",
+          "delete",
+          "read",
+          "update"
+        ],
+        "photos": [
+          "create",
+          "delete",
+          "read",
+          "update"
+        ],
+        "posts": [
+          "create",
+          "delete",
+          "read",
+          "update"
+        ],
+        "users": [
+          "create",
+          "delete",
+          "read",
+          "update"
+        ]
+      }
+    },
+    "V1_CONSTRUCT_VALIDITY": {
+      "evidence": "derived_evidence/metrics.json.primary.metric == 'mechanism_identity_accuracy'; HTTP is reported only under verification_measure_http and per-arm http_execution_success_rate",
+      "pass": true,
+      "statement": "primary metric is mechanism-identity binding, HTTP execution is a separate measure"
+    },
+    "V2_POSITIVE_CONTROL_EXECUTED": {
+      "accuracy": 1.0,
+      "denominator": 12,
+      "evidence": "raw_evidence/task_results.jsonl rows arm=A-CANDIDATE category=verbatim",
+      "pass": true
+    },
+    "V3_ORACLE_CEILING": {
+      "evidence": "raw_evidence rows arm=B-INTERNAL-ID-ORACLE",
+      "oracle_accuracy": 1.0,
+      "pass": true
+    },
+    "V4_CALIBRATION_FITTED": {
+      "b": 0.18530383624882538,
+      "caveat": "the gate is formally fitted but INERT at the selected threshold: see metrics.calibration_gate_fired_on_n_applicable_goals",
+      "estimator": "sklearn.linear_model.LogisticRegression(penalty=None, solver=lbfgs, max_iter=5000)",
+      "evidence": "derived_evidence/calibration.json",
+      "independent_refit_w_spread": 1.12296,
+      "n_train_rows": 42,
+      "pass": true,
+      "pass_reasoning": "parameters are learned by maximum likelihood on a held-out-split train set and move across independent train splits, so they are not a fixed algebraic transform of cos_sim",
+      "threshold": 0.02,
+      "w": 2.6927439442486354
+    },
+    "V5_CLOSED_TOP_BIN_ECE": {
+      "evidence": "derived_evidence/phase0_preconditions.json estimator_unit_tests",
+      "pass": true,
+      "rows_dropped": 0,
+      "top_bin_hi": 0.946751
+    },
+    "V6_UNKNOWN_PRECISION_DEFINED": {
+      "evidence": "derived_evidence/phase0_preconditions.json estimator_unit_tests; the metric is NOT an OOD abstention rate (unit test unknown_precision_not_ood_rate returns 0.0 for a single abstention on an applicable goal)",
+      "observed_FP_abstain": 11,
+      "observed_TP_abstain": 17,
+      "pass": true
+    },
+    "V7_PER_TASK_STATE_RESET": {
+      "distinct_start_state_hashes": 1,
+      "evidence": "derived_evidence/design_facts.json state; raw_evidence/task_results.jsonl task_start_state_hash + http.pre_state_hash",
+      "n_tasks": 80,
+      "pass": true,
+      "state_hash": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8"
+    },
+    "V8_DEGENERACY_SCREEN": {
+      "condition_a_informational_caveat": "B-LEXICAL-OVERLAP never abstains, so every one of the 28 goals with no applicable mechanism is scored incorrect by construction. Its accuracy on the frozen 80-goal set is therefore capped at 52/80 = 0.6500 < 0.9 for any lexical selector whatsoever. V8(a) as frozen is structurally non-binding on this fixture and its PASS is not evidence that the lexical null is weak.",
+      "condition_a_lexical_all80": 0.45,
+      "condition_a_passes": true,
+      "condition_a_threshold": 0.9,
+      "condition_b_comparison_leg_nonempty": true,
+      "evidence": "derived_evidence/degeneracy_screen.json (written before any candidate arm ran); raw_evidence/degeneracy_screen_per_goal.jsonl",
+      "incumbent_executable_count": 0,
+      "pass": true,
+      "substitute_executable_count": 80,
+      "substitute_leg": "A-REFERENCE-EMBEDARGMAX"
+    },
+    "V9_CODE_HASHED_INTO_FREEZE": {
+      "cause": "freeze.json was produced by the deterministic freezer at commit 9b56d0b9, which hashes only request.json, spec.json and prereg.md. The outcome-bearing code did not exist at freeze time, so no code hash could be present. The freezer is scripts/freeze_experiment.py, which is outside every scientific lane's allowed_code_roots, so no EXECUTE-stage actor can repair this.",
+      "code_files_expected_by_v9": [
+        "candidate_resolver.py",
+        "goal_generator.py",
+        "http_server.py",
+        "experiment_runner.py",
+        "metric_estimators.py",
+        "fixture_def.py"
+      ],
+      "code_files_present_in_freeze": [],
+      "evidence": "research/experiments/EXP-GRAPH-36279237023/freeze.json (immutable, hash-verified) and scripts/freeze_experiment.py at commit 7f5879fc",
+      "freeze_json_hashes": [
+        "prereg.md",
+        "request.json",
+        "spec.json"
+      ],
+      "pass": false
+    }
+  },
+  "source": "spec.json decision_rule + prereg.md 7.1",
+  "status_outcome_mapping_note": "spec.json decision_rule.outcomes.MEASUREMENT_INVALID maps to packet status=MEASUREMENT_INVALID with outcome=INCONCLUSIVE. A MEASUREMENT_INVALID status here is a statement about the validity of the measurement transaction, not a scientific negative about C-SEMANTIC-RESOLVE. The gate-by-gate measurements are reported in full above so that nothing measured here is discarded.",
+  "status_reason": "frozen decision_rule.outcomes.MEASUREMENT_INVALID: measurement-validity condition V9_CODE_HASHED_INTO_FREEZE FAILED. prereg.md 7.1 evaluates gate 1 first and short-circuits."
+}

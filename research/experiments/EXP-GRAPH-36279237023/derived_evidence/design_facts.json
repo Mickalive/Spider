@@ -1,0 +1,36 @@
+{
+  "arm_order": {
+    "n_distinct_orderings": 78,
+    "n_tasks": 80,
+    "prereg_minimum": 43,
+    "seed": 20260926
+  },
+  "arms": [
+    "A-CANDIDATE",
+    "A-INCUMBENT",
+    "A-REFERENCE-EMBEDARGMAX",
+    "B-LEXICAL-OVERLAP",
+    "B-RANDOM-ROLE",
+    "B-INTERNAL-ID-ORACLE"
+  ],
+  "http_requests_total": 240,
+  "n_arms_executed": 6,
+  "n_tasks": 80,
+  "prereg_arm_count_note": "prereg.md 5.1 says 'All 7 arms execute on each goal'. The frozen Section 4 defines six arms (A-CANDIDATE, A-INCUMBENT, B-LEXICAL-OVERLAP, B-RANDOM-ROLE, B-INTERNAL-ID-ORACLE) plus two goal SUBSETS (PC-VERBATIM-INTENT, NC-NO-APPLICABLE) that are slices of the same arm outputs rather than separate arms. prereg.md 11 adds a seventh only conditionally, as the substitute leg. This run executes six arms per goal plus both control subsets, and the substitute leg when required.",
+  "prereg_stated_arms": 7,
+  "seeds": {
+    "arm_order": 20260926,
+    "bootstrap": 36279237023,
+    "calibration_split": 990017,
+    "goal_generation": 36279237023,
+    "random_role_arm": 4242
+  },
+  "state": {
+    "all_identical": true,
+    "distinct_task_start_state_hashes": 1,
+    "hash": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8",
+    "n_tasks": 80,
+    "reset_before_every_arm_request": true
+  },
+  "total_rows": 480
+}

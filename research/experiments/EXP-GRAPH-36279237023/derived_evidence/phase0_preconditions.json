@@ -1,0 +1,116 @@
+{
+  "applies_any_count": 52,
+  "applies_none_count": 28,
+  "estimator_unit_tests": {
+    "all_pass": true,
+    "checks": {
+      "closed_top_bin": {
+        "n_rows": 92,
+        "pass": true,
+        "rows_dropped": 0,
+        "top_bin_contains_confidence_1_0": true,
+        "top_bin_contains_max_confidence": true
+      },
+      "ece_half_at_0_5": {
+        "ece": 0.5,
+        "pass": true
+      },
+      "ece_mixed_zero": {
+        "ece": 0.0,
+        "pass": true
+      },
+      "ece_perfect_zero": {
+        "ece": 0.0,
+        "pass": true
+      },
+      "ece_worst_one": {
+        "ece": 1.0,
+        "pass": true
+      },
+      "false_accept_rate": {
+        "expected": 0.6666666666666666,
+        "pass": true,
+        "value": 0.6666666666666666
+      },
+      "false_accept_rate_empty_is_null": {
+        "pass": true,
+        "value": null
+      },
+      "paired_bootstrap_reproducible": {
+        "n_blocks": 2,
+        "pass": true
+      },
+      "unknown_precision_not_ood_rate": {
+        "expected": 0.0,
+        "pass": true,
+        "value": 0.0
+      },
+      "unknown_precision_tp_fp": {
+        "expected": 0.75,
+        "pass": true,
+        "value": 0.75
+      },
+      "unknown_precision_vacuous": {
+        "pass": true,
+        "value": 1.0
+      }
+    }
+  },
+  "fixture": {
+    "mechanisms_whose_own_intent_leaves_slots_unbound": [],
+    "mechanisms_with_empty_parameter_slots": [],
+    "n_endpoints": 20,
+    "n_mechanisms": 20,
+    "unbindable_placeholders": [],
+    "v11_multiple_mechanisms_per_family": true,
+    "verbs_per_family": {
+      "albums": [
+        "create",
+        "delete",
+        "read",
+        "update"
+      ],
+      "comments": [
+        "create",
+        "delete",
+        "read",
+        "update"
+      ],
+      "photos": [
+        "create",
+        "delete",
+        "read",
+        "update"
+      ],
+      "posts": [
+        "create",
+        "delete",
+        "read",
+        "update"
+      ],
+      "users": [
+        "create",
+        "delete",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "goal_counts": {
+    "composite": 10,
+    "no_applicable": 8,
+    "ood": 20,
+    "paraphrased": 20,
+    "underspecified": 10,
+    "verbatim": 12
+  },
+  "goal_independence": {
+    "blocking": false,
+    "definition": "per-goal token Jaccard against that goal's OWN target intent (not a union)",
+    "fraction_below_0_3": 0.6190476190476191,
+    "max_per_goal_jaccard": 1.0,
+    "mean_per_goal_jaccard": 0.44467503396074826,
+    "n": 42
+  },
+  "goal_total": 80
+}
