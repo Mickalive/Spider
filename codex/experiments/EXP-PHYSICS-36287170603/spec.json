@@ -1,0 +1,129 @@
+{
+  "experiment_id": "EXP-PHYSICS-36287170603",
+  "lane": "physics",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a reusable, pre-registered intervention-validity contract — a validity test whose null calibration has demonstrated power against the specific failure it must detect, and which is itself validated as a classifier over a preregistered battery of known-good and known-bad statistics including at least the three SPIDER estimators the Codex records as non-discriminating (Physics conditional-entropy statistic that resolves 0 of 468 (C,R) cells and floors p_raw at 1.0, Product fixed-request cold comparator that has no amortization dynamic range, Frontier goal-state-success endpoint measured at 1.000 for all seven arms including one wrong on 43.3 percent of its spans) — correctly reject every known-bad case and accept every known-good case, with each case run through the identical code path on real locally-served multi-page HTTP data carrying a server-side ground-truth transition log?",
+  "hypothesis": "A metamorphic intervention-validity contract (representation-sensitivity test + channel-displacement test) executed on a validated plain-HTTP substrate with server-side ground truth will correctly classify the three documented non-discriminating estimators as INVALID (reject) and at least one validated discrimination estimator as VALID (accept), thereby providing a reusable instrument-certification gate that converts instrument-blindness from a post-hoc discovery into a pre-registered detectable event.",
+  "falsifier": "The contract fails to reject any of the three known-bad estimators, OR incorrectly rejects a known-good estimator, OR the null calibration of the contract itself lacks demonstrated power (minimum attainable permutation p >= 0.01 on any known-bad case), OR the contract cannot be executed on the identical code path for all test cases, OR the substrate fails to provide server-side ground-truth transition logs for verification.",
+  "baselines": {
+    "B-NULL-INSTRUMENT": {
+      "description": "A statistic that is structurally invariant to the treatment variable (returns constant value regardless of input representation). Expected: contract REJECTS (correctly identifies as non-discriminating).",
+      "expected_behavior": "REJECT",
+      "identity": "B-NULL-INSTRUMENT"
+    },
+    "B-IDENTITY-CHANNEL": {
+      "description": "A treatment channel that is a deterministic copy of the ground-truth latent state (MI = H(latent)). Expected: contract ACCEPTS (maximum possible signal).",
+      "expected_behavior": "ACCEPT",
+      "identity": "B-IDENTITY-CHANNEL"
+    },
+    "B-SHUFFLED-CHANNEL": {
+      "description": "A treatment channel with zero mutual information to the target (random permutation within strata). Expected: contract REJECTS (no signal above null).",
+      "expected_behavior": "REJECT",
+      "identity": "B-SHUFFLED-CHANNEL"
+    }
+  },
+  "positive_control": {
+    "description": "Runtime header-only Jaccard discrimination estimator on the validated plain-HTTP substrate (EXP-RUNTIME-36100549580). This estimator demonstrated discriminating positive and null outcomes: header-only Jaccard mean=0.4643, variance>0, null FP=0.0, same-state J=1.0, scheduling de-confounded. Expected: contract ACCEPTS.",
+    "identity": "PC-RUNTIME-HEADER-JACCARD",
+    "expected_behavior": "ACCEPT"
+  },
+  "null_control": {
+    "description": "A degenerate constant statistic that returns 0.0 for all inputs. Expected: contract REJECTS (correctly identifies as having zero dynamic range).",
+    "identity": "NC-CONSTANT-ZERO",
+    "expected_behavior": "REJECT"
+  },
+  "measurement_validity": [
+    {
+      "name": "IVC-METAMORPHIC-INVARIANCE",
+      "description": "Metamorphic test: permuting the treatment variable within strata must leave the statistic bit-identical. This is an invariance property that must pass for any valid estimator. Verified by running the estimator on original vs permuted treatment within each stratum and checking bitwise equality of outputs.",
+      "criterion": "bitwise_equality == True for all strata"
+    },
+    {
+      "name": "IVC-CHANNEL-DISPLACEMENT",
+      "description": "Channel-displacement test: re-drawing the treatment through a channel whose MI to the target is measured and pre-registered must move the statistic by at least that channel's marginal-conditional information. The minimum attainable permutation p must be strictly below 0.01.",
+      "criterion": "delta_statistic >= channel_MI AND min_permutation_p < 0.01"
+    },
+    {
+      "name": "IVC-IDENTICAL-CODE-PATH",
+      "description": "All test cases (known-bad, known-good, baselines, controls) must execute through the identical contract code path. Verified by checking that the same function/class is called with only the estimator and data varying.",
+      "criterion": "single_contract_entry_point == True"
+    },
+    {
+      "name": "IVC-SERVER-GROUND-TRUTH",
+      "description": "The substrate must provide server-side ground-truth transition logs (state, action, next_state, regime) enabling verification of treatment variable construction and MI computation. Verified by checking log completeness and alignment with client observations.",
+      "criterion": "ground_truth_complete == True AND alignment_verified == True"
+    },
+    {
+      "name": "IVC-NO-EXTERNAL-DEPENDENCIES",
+      "description": "The contract must execute without model credentials, container registry authentication, or browser binaries. Stdlib-only HTTP server with deterministic ground truth.",
+      "criterion": "no_external_credentials == True AND browser_free == True"
+    }
+  ],
+  "decision_rule": {
+    "type": "ordered_evaluation",
+    "rules": [
+      {
+        "condition": "ALL three known-bad estimators classified as REJECT by contract",
+        "outcome": "SUPPORTS",
+        "description": "Contract correctly rejects Physics CMI (0/468 cells, p=1.0), Product cold comparator (zero dynamic range), Frontier goal-state-success (1.000 blind to 43.3% error)"
+      },
+      {
+        "condition": "At least ONE known-good estimator classified as ACCEPT by contract",
+        "outcome": "SUPPORTS",
+        "description": "Contract correctly accepts Runtime header-only Jaccard (validated discriminating)"
+      },
+      {
+        "condition": "Contract null calibration demonstrates power: min attainable permutation p < 0.01 on all known-bad cases",
+        "outcome": "SUPPORTS",
+        "description": "The contract's own null is not degenerate"
+      },
+      {
+        "condition": "Contract executes all cases through identical code path on real HTTP substrate with ground truth",
+        "outcome": "SUPPORTS",
+        "description": "Reusable, browser-free, stdlib-only execution verified"
+      },
+      {
+        "condition": "ANY known-bad estimator classified as ACCEPT",
+        "outcome": "FALSIFIES",
+        "description": "Contract fails to detect a documented non-discriminating estimator"
+      },
+      {
+        "condition": "Known-good estimator classified as REJECT",
+        "outcome": "FALSIFIES",
+        "description": "Contract has false positive on a validated discriminating estimator"
+      },
+      {
+        "condition": "Contract null calibration lacks power (min permutation p >= 0.01 on any known-bad)",
+        "outcome": "MEASUREMENT_INVALID",
+        "description": "The contract's own validity gate is not discriminating"
+      },
+      {
+        "condition": "Substrate fails to provide ground-truth logs or identical code path violated",
+        "outcome": "MEASUREMENT_INVALID",
+        "description": "Infrastructure failure, not scientific result"
+      },
+      {
+        "condition": "Mixed or ambiguous classification not covered above",
+        "outcome": "INCONCLUSIVE",
+        "description": "Contract behavior does not cleanly match decision boundaries"
+      }
+    ],
+    "outcome_mapping": {
+      "ALL_known_bad_REJECT AND known_good_ACCEPT AND null_power_demonstrated AND identical_path_verified": "SUPPORTS",
+      "ANY_known_bad_ACCEPT OR known_good_REJECT": "FALSIFIES",
+      "null_power_NOT_demonstrated OR substrate_failure OR code_path_violated": "MEASUREMENT_INVALID",
+      "OTHER": "INCONCLUSIVE"
+    }
+  },
+  "product_consequence_positive": "A reusable, pre-registered intervention-validity contract (IVC) is established and accepted into the Codex. All lanes (Physics, Runtime, Product, Graph, Frontier, Intel) can certify their estimators by running them through the IVC before trusting measurements. The IVC becomes a mandatory gate: any estimator that has not passed the IVC on the validated substrate is MEASUREMENT_INVALID by default. C-MEAS-VALID advances toward VALIDATED with a concrete, reusable instrument-certification artifact. The three documented estimator failures (Physics CMI, Product cold comparator, Frontier goal-state) are now preventable by construction.",
+  "product_consequence_negative": "The intervention-validity contract approach fails: either it cannot detect the known failures (false negatives), incorrectly rejects validated estimators (false positives), its own null lacks power, or it cannot execute on the stdlib HTTP substrate. This means the program has no general solution to the instrument-blindness problem and must continue relying on post-hoc auditor discovery. C-MEAS-VALID remains at MEASUREMENT_INVALID/EXPERIMENTAL with no reusable certification path. Each lane must continue building bespoke validity gates, perpetuating the gate-proliferation trap documented in the Director mandate.",
+  "estimated_cost": {
+    "http_server_setup": "low (stdlib http.server + nginx proxy, already validated in EXP-RUNTIME-36100549580)",
+    "ground_truth_logging": "low (server-side SQLite WAL, already validated)",
+    "contract_execution": "low (single Python module, deterministic, no model calls)",
+    "test_cases": "3 known-bad + 1 known-good + 3 baselines + 2 controls = 9 estimator evaluations",
+    "total_estimated_runtime_minutes": 15,
+    "compute_cost": "negligible (no LLM, no browser, no external API)"
+  },
+  "expected_information_gain": "HIGH: This experiment directly addresses the binding constraint identified by the Global Research Director — measurement unavailability combined with gate proliferation. A successful IVC converts a class of unknown (\"does this estimator read its treatment?\") into a bounded, reusable certification that changes the design space for every future experiment across all lanes. A negative result (contract fails) is equally high-information: it falsifies the meta-hypothesis that a general instrument-certification gate is feasible on plain HTTP, forcing a strategic pivot. The asymmetric payoff justifies spending one cycle on a question that can mostly return 'no change' because the positive outcome licenses a decision the program would otherwise make by default (continue bespoke gates) while the negative merely confirms the status quo."
+}

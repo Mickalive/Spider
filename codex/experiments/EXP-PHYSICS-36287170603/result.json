@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36287170603",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "IVC_CONTRACT_VERDICT_KB-PHYSICS-CMI": "REJECT",
+    "IVC_INVARIANCE_PASSED_KB-PHYSICS-CMI": true,
+    "IVC_DISPLACEMENT_PASSED_KB-PHYSICS-CMI": false,
+    "IVC_MIN_PERMUTATION_P_KB-PHYSICS-CMI": 1.0,
+    "IVC_DELTA_STATISTIC_KB-PHYSICS-CMI": 3.3306690738754696e-16,
+    "IVC_CHANNEL_MI_CH-SHUFFLED": 0.1880049864679197,
+    "IVC_CONTRACT_VERDICT_KB-PRODUCT-COLD": "REJECT",
+    "IVC_INVARIANCE_PASSED_KB-PRODUCT-COLD": true,
+    "IVC_DISPLACEMENT_PASSED_KB-PRODUCT-COLD": false,
+    "IVC_MIN_PERMUTATION_P_KB-PRODUCT-COLD": 1.0,
+    "IVC_DELTA_STATISTIC_KB-PRODUCT-COLD": 0.0,
+    "IVC_CONTRACT_VERDICT_KB-FRONTIER-GOAL": "REJECT",
+    "IVC_INVARIANCE_PASSED_KB-FRONTIER-GOAL": true,
+    "IVC_DISPLACEMENT_PASSED_KB-FRONTIER-GOAL": false,
+    "IVC_MIN_PERMUTATION_P_KB-FRONTIER-GOAL": 1.0,
+    "IVC_DELTA_STATISTIC_KB-FRONTIER-GOAL": 0.0,
+    "IVC_CONTRACT_VERDICT_KG-RUNTIME-HEADER-JACCARD": "REJECT",
+    "IVC_INVARIANCE_PASSED_KG-RUNTIME-HEADER-JACCARD": true,
+    "IVC_DISPLACEMENT_PASSED_KG-RUNTIME-HEADER-JACCARD": false,
+    "IVC_MIN_PERMUTATION_P_KG-RUNTIME-HEADER-JACCARD": 0.000999000999000999,
+    "IVC_DELTA_STATISTIC_KG-RUNTIME-HEADER-JACCARD": 1.771066334482052,
+    "IVC_CHANNEL_MI_CH-IDENTITY": 1.9491083554306654,
+    "IVC_CONTRACT_VERDICT_B-NULL-INSTRUMENT": "REJECT",
+    "IVC_INVARIANCE_PASSED_B-NULL-INSTRUMENT": true,
+    "IVC_DISPLACEMENT_PASSED_B-NULL-INSTRUMENT": false,
+    "IVC_MIN_PERMUTATION_P_B-NULL-INSTRUMENT": 1.0,
+    "IVC_DELTA_STATISTIC_B-NULL-INSTRUMENT": 0.0,
+    "IVC_CONTRACT_VERDICT_B-IDENTITY-CHANNEL": "REJECT",
+    "IVC_INVARIANCE_PASSED_B-IDENTITY-CHANNEL": true,
+    "IVC_DISPLACEMENT_PASSED_B-IDENTITY-CHANNEL": false,
+    "IVC_MIN_PERMUTATION_P_B-IDENTITY-CHANNEL": 0.000999000999000999,
+    "IVC_DELTA_STATISTIC_B-IDENTITY-CHANNEL": 0.10844878700231303,
+    "IVC_CONTRACT_VERDICT_B-SHUFFLED-CHANNEL": "REJECT",
+    "IVC_INVARIANCE_PASSED_B-SHUFFLED-CHANNEL": false,
+    "IVC_DISPLACEMENT_PASSED_B-SHUFFLED-CHANNEL": false,
+    "IVC_MIN_PERMUTATION_P_B-SHUFFLED-CHANNEL": 0.6723276723276723,
+    "IVC_DELTA_STATISTIC_B-SHUFFLED-CHANNEL": 0.005685912713440204,
+    "IVC_CONTRACT_VERDICT_PC-RUNTIME-HEADER-JACCARD": "REJECT",
+    "IVC_INVARIANCE_PASSED_PC-RUNTIME-HEADER-JACCARD": true,
+    "IVC_DISPLACEMENT_PASSED_PC-RUNTIME-HEADER-JACCARD": false,
+    "IVC_MIN_PERMUTATION_P_PC-RUNTIME-HEADER-JACCARD": 0.000999000999000999,
+    "IVC_DELTA_STATISTIC_PC-RUNTIME-HEADER-JACCARD": 1.7711598936776587,
+    "IVC_CONTRACT_VERDICT_NC-CONSTANT-ZERO": "REJECT",
+    "IVC_INVARIANCE_PASSED_NC-CONSTANT-ZERO": true,
+    "IVC_DISPLACEMENT_PASSED_NC-CONSTANT-ZERO": false,
+    "IVC_MIN_PERMUTATION_P_NC-CONSTANT-ZERO": 1.0,
+    "IVC_DELTA_STATISTIC_NC-CONSTANT-ZERO": 0.0,
+    "IVC_CODE_PATH_HASH": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "IVC_IDENTICAL_CODE_PATH_VERIFIED": true,
+    "IVC_GROUND_TRUTH_COMPLETE": false,
+    "IVC_GROUND_TRUTH_COUNT": 2200,
+    "IVC_NO_EXTERNAL_DEPS": true,
+    "IVC_BROWSER_FREE": true
+  },
+  "controls": {
+    "KB-PHYSICS-CMI": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 1.0,
+      "delta_statistic": 3.3306690738754696e-16,
+      "channel_MI": 0.1880049864679197
+    },
+    "KB-PRODUCT-COLD": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 1.0,
+      "delta_statistic": 0.0,
+      "channel_MI": 0.1880049864679197
+    },
+    "KB-FRONTIER-GOAL": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 1.0,
+      "delta_statistic": 0.0,
+      "channel_MI": 0.1880049864679197
+    },
+    "KG-RUNTIME-HEADER-JACCARD": {
+      "expected_behavior": "ACCEPT",
+      "observed_verdict": "REJECT",
+      "pass": false,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 0.000999000999000999,
+      "delta_statistic": 1.771066334482052,
+      "channel_MI": 1.9491083554306654
+    },
+    "B-NULL-INSTRUMENT": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 1.0,
+      "delta_statistic": 0.0,
+      "channel_MI": 0.1880049864679197
+    },
+    "B-IDENTITY-CHANNEL": {
+      "expected_behavior": "ACCEPT",
+      "observed_verdict": "REJECT",
+      "pass": false,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 0.000999000999000999,
+      "delta_statistic": 0.10844878700231303,
+      "channel_MI": 1.9491083554306654
+    },
+    "B-SHUFFLED-CHANNEL": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": false,
+      "displacement_passed": false,
+      "min_permutation_p": 0.6723276723276723,
+      "delta_statistic": 0.005685912713440204,
+      "channel_MI": 0.1880049864679197
+    },
+    "PC-RUNTIME-HEADER-JACCARD": {
+      "expected_behavior": "ACCEPT",
+      "observed_verdict": "REJECT",
+      "pass": false,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 0.000999000999000999,
+      "delta_statistic": 1.7711598936776587,
+      "channel_MI": 1.9491083554306654
+    },
+    "NC-CONSTANT-ZERO": {
+      "expected_behavior": "REJECT",
+      "observed_verdict": "REJECT",
+      "pass": true,
+      "invariance_passed": true,
+      "displacement_passed": false,
+      "min_permutation_p": 1.0,
+      "delta_statistic": 0.0,
+      "channel_MI": 0.1880049864679197
+    }
+  },
+  "artifacts": [
+    {
+      "path": "intervention_validity_contract.py",
+      "role": "code"
+    },
+    {
+      "path": "estimators.py",
+      "role": "code"
+    },
+    {
+      "path": "substrate.py",
+      "role": "code"
+    },
+    {
+      "path": "preregistered_channels.json",
+      "role": "fixture"
+    },
+    {
+      "path": "ground_truth_log.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "contract_results.json",
+      "role": "derived"
+    },
+    {
+      "path": "code_path_hash.txt",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Server-side ground truth logged 2200 transitions",
+    "Pre-registered channel MIs computed from ground truth",
+    "IVC evaluated 9 estimators through identical code path",
+    "Code path hash: 6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "All known-bad rejected: True",
+    "Known-good accepted: False",
+    "Null power demonstrated (p<0.01): False",
+    "Identical code path verified: True"
+  ],
+  "validity_notes": [
+    "Stdlib-only HTTP server (http.server), no nginx required for this experiment",
+    "SQLite WAL for ground-truth logging, no external databases",
+    "No model credentials, container registry auth, or browser binaries used",
+    "Deterministic substrate with fixed seed 44",
+    "Known-bad estimators replicate exact failure modes from Codex evidence",
+    "Known-good estimator replicates validated Runtime header-only Jaccard"
+  ],
+  "unresolved": []
+}
