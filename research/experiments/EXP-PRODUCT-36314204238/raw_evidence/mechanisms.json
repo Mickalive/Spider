@@ -1,0 +1,431 @@
+{
+  "A1_variability_multi": [
+    {
+      "mechanism_id": "A1-delete-05ed486f4130",
+      "intent": "delete",
+      "intents": null,
+      "action_template": {
+        "method": "DELETE",
+        "path": "/${s0}/${s1}"
+      },
+      "inferred_slots": [
+        "s0",
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item",
+        "orders": "order",
+        "products": "product"
+      },
+      "pinned_segments": {},
+      "slot_support": {
+        "s0": {
+          "cardinality": 3,
+          "kind": "closed_set",
+          "n_observations": 150,
+          "values": [
+            "items",
+            "orders",
+            "products"
+          ]
+        },
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 150,
+          "n_observations": 150,
+          "prefixes": [
+            "item",
+            "order",
+            "product"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        0,
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 150,
+      "conforming": 150,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n60",
+      "loo_n": 60,
+      "loo_n_correct": 60,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 0.6667
+    },
+    {
+      "mechanism_id": "A1-read-6b6ab544a7e2",
+      "intent": "read",
+      "intents": null,
+      "action_template": {
+        "method": "GET",
+        "path": "/${s0}/${s1}"
+      },
+      "inferred_slots": [
+        "s0",
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item",
+        "orders": "order",
+        "products": "product"
+      },
+      "pinned_segments": {},
+      "slot_support": {
+        "s0": {
+          "cardinality": 3,
+          "kind": "closed_set",
+          "n_observations": 150,
+          "values": [
+            "items",
+            "orders",
+            "products"
+          ]
+        },
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 150,
+          "n_observations": 150,
+          "prefixes": [
+            "item",
+            "order",
+            "product"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        0,
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 150,
+      "conforming": 150,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n60",
+      "loo_n": 60,
+      "loo_n_correct": 60,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 0.6667
+    },
+    {
+      "mechanism_id": "A1-update-f6ae7ec0d2f8",
+      "intent": "update",
+      "intents": null,
+      "action_template": {
+        "method": "PUT",
+        "path": "/${s0}/${s1}"
+      },
+      "inferred_slots": [
+        "s0",
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item",
+        "orders": "order",
+        "products": "product"
+      },
+      "pinned_segments": {},
+      "slot_support": {
+        "s0": {
+          "cardinality": 3,
+          "kind": "closed_set",
+          "n_observations": 150,
+          "values": [
+            "items",
+            "orders",
+            "products"
+          ]
+        },
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 150,
+          "n_observations": 150,
+          "prefixes": [
+            "item",
+            "order",
+            "product"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        0,
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 150,
+      "conforming": 150,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n60",
+      "loo_n": 60,
+      "loo_n_correct": 60,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 0.6667
+    }
+  ],
+  "A2_variability_single": [
+    {
+      "mechanism_id": "A2-delete-a58906984131",
+      "intent": "delete",
+      "intents": null,
+      "action_template": {
+        "method": "DELETE",
+        "path": "/items/${s1}"
+      },
+      "inferred_slots": [
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item"
+      },
+      "pinned_segments": {
+        "0": "items"
+      },
+      "slot_support": {
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 50,
+          "n_observations": 50,
+          "prefixes": [
+            "item"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 50,
+      "conforming": 50,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n50",
+      "loo_n": 50,
+      "loo_n_correct": 50,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 1.0
+    },
+    {
+      "mechanism_id": "A2-read-c752e2d13b42",
+      "intent": "read",
+      "intents": null,
+      "action_template": {
+        "method": "GET",
+        "path": "/items/${s1}"
+      },
+      "inferred_slots": [
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item"
+      },
+      "pinned_segments": {
+        "0": "items"
+      },
+      "slot_support": {
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 50,
+          "n_observations": 50,
+          "prefixes": [
+            "item"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 50,
+      "conforming": 50,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n50",
+      "loo_n": 50,
+      "loo_n_correct": 50,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 1.0
+    },
+    {
+      "mechanism_id": "A2-update-3a384be7110a",
+      "intent": "update",
+      "intents": null,
+      "action_template": {
+        "method": "PUT",
+        "path": "/items/${s1}"
+      },
+      "inferred_slots": [
+        "s1"
+      ],
+      "declared_identity_slots": [],
+      "declared_identity_fields": [],
+      "id_prefix_by_head": {
+        "items": "item"
+      },
+      "pinned_segments": {
+        "0": "items"
+      },
+      "slot_support": {
+        "s1": {
+          "kind": "shape",
+          "n_distinct": 50,
+          "n_observations": 50,
+          "prefixes": [
+            "item"
+          ],
+          "shape": "[a-z]+\\-[0-9]+"
+        }
+      },
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": [
+        1
+      ],
+      "induction_basis": "observed_variability",
+      "n_observations": 50,
+      "conforming": 50,
+      "loo_accuracy": 1.0,
+      "loo_method": "leave_one_out_random_42_n50",
+      "loo_n": 50,
+      "loo_n_correct": 50,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": 1.0
+    }
+  ],
+  "A3_declared_vocab_single": [
+    {
+      "mechanism_id": "A3-delete-2e4af5834c95",
+      "intent": "delete",
+      "intents": null,
+      "action_template": {
+        "method": "DELETE",
+        "path": "/${collection}/${id}"
+      },
+      "inferred_slots": [
+        "id"
+      ],
+      "declared_identity_slots": [
+        "collection"
+      ],
+      "declared_identity_fields": [
+        "collection",
+        "resource"
+      ],
+      "id_prefix_by_head": null,
+      "pinned_segments": null,
+      "slot_support": null,
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": null,
+      "induction_basis": null,
+      "n_observations": null,
+      "conforming": null,
+      "loo_accuracy": null,
+      "loo_method": null,
+      "loo_n": null,
+      "loo_n_correct": null,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": null
+    },
+    {
+      "mechanism_id": "A3-read-396c0fe31655",
+      "intent": "read",
+      "intents": null,
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "inferred_slots": [
+        "id"
+      ],
+      "declared_identity_slots": [
+        "collection"
+      ],
+      "declared_identity_fields": [
+        "collection",
+        "resource"
+      ],
+      "id_prefix_by_head": null,
+      "pinned_segments": null,
+      "slot_support": null,
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": null,
+      "induction_basis": null,
+      "n_observations": null,
+      "conforming": null,
+      "loo_accuracy": null,
+      "loo_method": null,
+      "loo_n": null,
+      "loo_n_correct": null,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": null
+    },
+    {
+      "mechanism_id": "A3-update-d33e6f47b17e",
+      "intent": "update",
+      "intents": null,
+      "action_template": {
+        "method": "PUT",
+        "path": "/${collection}/${id}"
+      },
+      "inferred_slots": [
+        "id"
+      ],
+      "declared_identity_slots": [
+        "collection"
+      ],
+      "declared_identity_fields": [
+        "collection",
+        "resource"
+      ],
+      "id_prefix_by_head": null,
+      "pinned_segments": null,
+      "slot_support": null,
+      "slot_values_inferred": null,
+      "slot_values_declared": null,
+      "varying_segment_positions": null,
+      "induction_basis": null,
+      "n_observations": null,
+      "conforming": null,
+      "loo_accuracy": null,
+      "loo_method": null,
+      "loo_n": null,
+      "loo_n_correct": null,
+      "min_confidence": 0.85,
+      "confidence": 1.0,
+      "incumbent_formula_confidence": null
+    }
+  ]
+}

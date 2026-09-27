@@ -12,6 +12,13 @@ class ResolutionStatus(str, Enum):
     UNKNOWN = "UNKNOWN"
 
 
+#: Outcome classes for parameter binding. ABSTAIN is scored as its own outcome
+#: class rather than folded into success or failure (frozen decision rule,
+#: spec.json decision_rule.abstention_class).
+BINDER_BOUND = "BOUND"
+BINDER_ABSTAIN = "ABSTAIN"
+
+
 @dataclass(frozen=True)
 class Observation:
     intent: str
@@ -36,6 +43,7 @@ class Mechanism:
     verification_rule: dict[str, Any] = field(default_factory=dict)
     failure_boundary: dict[str, Any] = field(default_factory=dict)
     repair_scope: dict[str, Any] = field(default_factory=dict)
+    intent_namespace_map: list[str] = field(default_factory=list)
     evidence: list[str] = field(default_factory=list)
     confidence: float = 0.0
     invalidated: bool = False
@@ -51,3 +59,20 @@ class Resolution:
     reason: str
     bound_action: dict[str, Any] | None = None
     confidence: float = 0.0
+
+
+@dataclass(frozen=True)
+class BindOutcome:
+    """Result of a parameter-binding attempt for one task.
+
+    ``status`` is BINDER_BOUND or BINDER_ABSTAIN. An abstention is a scored
+    outcome class, not an absence of one, so every field is populated on both
+    paths and callers never have to infer an outcome from a missing value.
+    """
+
+    status: str
+    bound_action: dict[str, Any] | None
+    bind_confidence: float
+    reason: str
+    slot_values: dict[str, str] = field(default_factory=dict)
+    slot_support: dict[str, Any] = field(default_factory=dict)

@@ -1,0 +1,902 @@
+{
+  "A1_variability_multi": [
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/${s0}/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 150,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [],
+        "id_prefix_by_head": {
+          "items": "item",
+          "orders": "order",
+          "products": "product"
+        },
+        "incumbent_formula_confidence": 0.6667,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s0",
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n60",
+        "loo_n": 60,
+        "loo_n_correct": 60,
+        "min_confidence": 0.85,
+        "n_observations": 150,
+        "pinned_segments": {},
+        "slot_support": {
+          "s0": {
+            "cardinality": 3,
+            "kind": "closed_set",
+            "n_observations": 150,
+            "values": [
+              "items",
+              "orders",
+              "products"
+            ]
+          },
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 150,
+            "n_observations": 150,
+            "prefixes": [
+              "item",
+              "order",
+              "product"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          0,
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A1-delete-05ed486f4130",
+      "parameter_slots": [
+        "s0",
+        "s1"
+      ],
+      "postconditions": {
+        "exists": false,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": false,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${s0}/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 150,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [],
+        "id_prefix_by_head": {
+          "items": "item",
+          "orders": "order",
+          "products": "product"
+        },
+        "incumbent_formula_confidence": 0.6667,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s0",
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n60",
+        "loo_n": 60,
+        "loo_n_correct": 60,
+        "min_confidence": 0.85,
+        "n_observations": 150,
+        "pinned_segments": {},
+        "slot_support": {
+          "s0": {
+            "cardinality": 3,
+            "kind": "closed_set",
+            "n_observations": 150,
+            "values": [
+              "items",
+              "orders",
+              "products"
+            ]
+          },
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 150,
+            "n_observations": 150,
+            "prefixes": [
+              "item",
+              "order",
+              "product"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          0,
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A1-read-6b6ab544a7e2",
+      "parameter_slots": [
+        "s0",
+        "s1"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "PUT",
+        "path": "/${s0}/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 150,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [],
+        "id_prefix_by_head": {
+          "items": "item",
+          "orders": "order",
+          "products": "product"
+        },
+        "incumbent_formula_confidence": 0.6667,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s0",
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n60",
+        "loo_n": 60,
+        "loo_n_correct": 60,
+        "min_confidence": 0.85,
+        "n_observations": 150,
+        "pinned_segments": {},
+        "slot_support": {
+          "s0": {
+            "cardinality": 3,
+            "kind": "closed_set",
+            "n_observations": 150,
+            "values": [
+              "items",
+              "orders",
+              "products"
+            ]
+          },
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 150,
+            "n_observations": 150,
+            "prefixes": [
+              "item",
+              "order",
+              "product"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          0,
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A1-update-f6ae7ec0d2f8",
+      "parameter_slots": [
+        "s0",
+        "s1"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ],
+  "A2_variability_single": [
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/items/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 50,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "id_prefix_by_head": {
+          "items": "item"
+        },
+        "incumbent_formula_confidence": 1.0,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n50",
+        "loo_n": 50,
+        "loo_n_correct": 50,
+        "min_confidence": 0.85,
+        "n_observations": 50,
+        "pinned_segments": {
+          "0": "items"
+        },
+        "slot_support": {
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 50,
+            "n_observations": 50,
+            "prefixes": [
+              "item"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A2-delete-a58906984131",
+      "parameter_slots": [
+        "s1"
+      ],
+      "postconditions": {
+        "exists": false,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": false,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/items/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 50,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "id_prefix_by_head": {
+          "items": "item"
+        },
+        "incumbent_formula_confidence": 1.0,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n50",
+        "loo_n": 50,
+        "loo_n_correct": 50,
+        "min_confidence": 0.85,
+        "n_observations": 50,
+        "pinned_segments": {
+          "0": "items"
+        },
+        "slot_support": {
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 50,
+            "n_observations": 50,
+            "prefixes": [
+              "item"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A2-read-c752e2d13b42",
+      "parameter_slots": [
+        "s1"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "PUT",
+        "path": "/items/${s1}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "conforming": 50,
+        "declared_identity_fields": [],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "id_prefix_by_head": {
+          "items": "item"
+        },
+        "incumbent_formula_confidence": 1.0,
+        "induction_basis": "observed_variability",
+        "inferred_slots": [
+          "s1"
+        ],
+        "loo_accuracy": 1.0,
+        "loo_method": "leave_one_out_random_42_n50",
+        "loo_n": 50,
+        "loo_n_correct": 50,
+        "min_confidence": 0.85,
+        "n_observations": 50,
+        "pinned_segments": {
+          "0": "items"
+        },
+        "slot_support": {
+          "s1": {
+            "kind": "shape",
+            "n_distinct": 50,
+            "n_observations": 50,
+            "prefixes": [
+              "item"
+            ],
+            "shape": "[a-z]+\\-[0-9]+"
+          }
+        },
+        "varying_segment_positions": [
+          1
+        ]
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A2-update-3a384be7110a",
+      "parameter_slots": [
+        "s1"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ],
+  "A3_declared_vocab_single": [
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "bf173b3ef66480d7",
+        "81aa28c5e741ba44",
+        "e1867a0a049ea16e",
+        "838dea4f9c4d22db",
+        "ac169c60004160fc",
+        "adce3fa905959690",
+        "9d7bb38694532200",
+        "51018186e3fc5c28",
+        "db0b0b350e67694a",
+        "86db6d6e16ffa1dc",
+        "2958f17ba3295ee7",
+        "22f1da6cb824e4e4",
+        "b1ca81d7830254fe",
+        "96877f2f79418449",
+        "e0a2bd928232f1c3",
+        "a097fc0458c07113",
+        "fbe0bb783808e7e0",
+        "f36d0ebd7b01a267",
+        "d078e088dee656f2",
+        "94c902cba2db016c",
+        "70baf02ba6740109",
+        "0fe9394049d4cb39",
+        "b6407c68bdd9a9fb",
+        "242e0def4ceae89e",
+        "4325afae943d5056",
+        "18715d05d1a6c907",
+        "eba9b92de86172d0",
+        "51080993503d62e2",
+        "c679d0984d75a35f",
+        "33546a774dc0fe08",
+        "01400e755c6d4519",
+        "549d7645a1331b7c",
+        "11f40128d28f7e94",
+        "186fad0acbd26e3d",
+        "eba313bf40c9b71d",
+        "56a683fbd76ae2ff",
+        "25d28e39f09ebefa",
+        "fa99f5ac0e60fa02",
+        "3b664ca6959abd04",
+        "99984957dd9e413f",
+        "7e4a39a1756ffe24",
+        "9a1ee9372e6b751b",
+        "d52c1ad34359d919",
+        "5a6df8d325d80ad8",
+        "b7a9d82cd30c340f",
+        "786b53e475c770d4",
+        "4c0e5272ec70ebad",
+        "7a19ce30eb562ff5",
+        "1749fd366b12ad02",
+        "228c9e1cc9a66d16"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.85,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A3-delete-2e4af5834c95",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "exists": false,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": false,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "442fdd4fd44508e4",
+        "cf2c5a4d7608d84b",
+        "dfe25f1859574ba7",
+        "f2d4bbcf5e470b1f",
+        "3832fe1d504842ef",
+        "9939946b4b5abd12",
+        "c18fcae2ba26df65",
+        "d25ed602ac2254a7",
+        "8ad783f1d1a4e411",
+        "bb609cc39232c368",
+        "4af621e671e162f6",
+        "abe80ccd200963c0",
+        "ccf523c909f63f0c",
+        "26871774450fdfff",
+        "f05db00746b283f1",
+        "d8a2b7823a578960",
+        "4a381583e12baf0d",
+        "0f34bcdba6a00542",
+        "09ef0ff93ed83fd5",
+        "898d1e2a0c7ae8d5",
+        "af9189017a2666e6",
+        "7b05d055a5de6bea",
+        "da2bf19ce1a1d159",
+        "fe78b0e1afcb0201",
+        "3bb1026d228fc06d",
+        "75af1e40fe927ba7",
+        "c47161c50a0c2b2d",
+        "2835c90195c31715",
+        "f23f71f3d24ce926",
+        "e6859ae4dc45d38b",
+        "bce9f86b5aa9ab03",
+        "cf52b437aa7ed368",
+        "3ad4525ba6059fc3",
+        "d9899aa673eee1b7",
+        "a89a2aaf08924329",
+        "4d71f12511ff90c0",
+        "b3857ce6a0c3a026",
+        "992acca0aac7b18d",
+        "d550f255fe6eab4c",
+        "65ad2f6c9bda7db0",
+        "0d7b0b5f40ff5cdb",
+        "5534368edcac87b3",
+        "748bcae247a52d7e",
+        "3ba8164869b1aa2a",
+        "e251d2285d99a586",
+        "31c2775a4977e44a",
+        "50e66072547d5d5f",
+        "b3c85a0ad310211a",
+        "60c9865c3a857675",
+        "4723eda239e2af90"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.85,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A3-read-396c0fe31655",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "PUT",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "98d3644ebc2e6999",
+        "60bd42623c251772",
+        "bfa955e742dd93b2",
+        "920574334b8b557a",
+        "9cb04ec212db4c55",
+        "ce9cca6df79ffec4",
+        "0030119f3d171e5e",
+        "c14474c0d19b976f",
+        "54966a34786b561c",
+        "d1f5a4c1385c34a5",
+        "39bbb4a9ea3837a1",
+        "a8b81ac781845e7e",
+        "c1668deecc29ab9a",
+        "b858fbcd855eeea1",
+        "7c66312c5208cbf8",
+        "00b59c07b68c63f3",
+        "c330fe9241c5905e",
+        "ab388fb047e6e542",
+        "c92ce401d8b71f41",
+        "d711cefad9bbd39f",
+        "376ecf6e8014c725",
+        "7bc7855fa6bb96bb",
+        "bdce7c113f334fea",
+        "0c4494ed2e2189f2",
+        "4c643fc4353b6138",
+        "c54b7ac0fbea0e46",
+        "ce22eeafd7bbb33d",
+        "110736ac2cb4ba7c",
+        "49428da1e395a86e",
+        "8fe3e4bf6d8e5be5",
+        "9f0aa0781015c860",
+        "981fc2f3ca0d5c03",
+        "28c82ece2b06b0d7",
+        "3bc8343f36a396a9",
+        "64406bf5a99e9290",
+        "ac75e67d50a623f9",
+        "82b58f4fb0e3e024",
+        "1d407ca1672c8bbd",
+        "6bf68230cf539eb9",
+        "cc1de894b54450bd",
+        "315afb44435e8abb",
+        "ea60ef66fbe0a6c5",
+        "5b812924e78789b5",
+        "a09531d0c7c93ca1",
+        "720b36e86075aaf7",
+        "a8d13d7b2473dec4",
+        "45a7459903e6aa77",
+        "e0a975e806dd1855",
+        "b2e2357359f79e07",
+        "1ea8900fbe60e1ce"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.85,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update",
+      "intent_namespace_map": [],
+      "invalidated": false,
+      "mechanism_id": "A3-update-d33e6f47b17e",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "exists": true,
+        "status": "ok"
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "exists": true,
+          "status": "ok"
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ]
+}

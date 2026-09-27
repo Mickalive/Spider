@@ -1,0 +1,71 @@
+{
+  "all_pass": true,
+  "checks": {
+    "P1_multiplier_yields_distinct_mean_requests": {
+      "expected": "5 distinct mean re-derivation request counts, one per cost_multiplier",
+      "n_distinct": 5,
+      "observed": {
+        "1.0": 3.0,
+        "10.0": 30.0,
+        "2.0": 6.0,
+        "20.0": 60.0,
+        "5.0": 15.0
+      },
+      "pass": true
+    },
+    "P2_inheritance_path_costs_one_request": {
+      "bound_path": "/items/item-217",
+      "expected": 1,
+      "observed": 1,
+      "pass": true
+    },
+    "P3_http_error_rate_below_one_percent": {
+      "expected": "< 0.01",
+      "n_requests": 64,
+      "observed": 0.0,
+      "pass": true
+    },
+    "P4_latency_injection_deterministic": {
+      "expected": {
+        "1.0": [
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0002
+        ],
+        "20.0": [
+          0.004,
+          0.004,
+          0.004,
+          0.004,
+          0.004
+        ]
+      },
+      "observed": {
+        "1.0": [
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0002
+        ],
+        "20.0": [
+          0.004,
+          0.004,
+          0.004,
+          0.004,
+          0.004
+        ]
+      },
+      "pass": true
+    },
+    "P5_verb_state_transitions_correct": {
+      "expected": "GET exists=True, PUT updated=True, DELETE exists=False for every served identifier",
+      "observed": "18/18 correct",
+      "pass": true
+    }
+  },
+  "note": "F5 substrate surface contract. If all_pass is false the frozen decision rule yields INCONCLUSIVE and no arm measurement is admissible.",
+  "seed": 42
+}

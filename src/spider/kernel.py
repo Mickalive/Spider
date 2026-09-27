@@ -3,13 +3,22 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from collections import Counter, defaultdict
 from typing import Any
 
 from .models import Mechanism, Observation, Resolution, ResolutionStatus
 from .registry import MechanismRegistry
+from .variability import VariabilityBinders
 
 
 _PARAMETER = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+
+#: Slot-value guard pattern. A bound slot value must be a non-empty identifier
+#: token: starts alphanumeric, then alphanumerics, hyphens, underscores. This
+#: rejects empty strings and values with punctuation such as the preregistered
+#: out-of-support probe "SKU-X!!unsupported!!" while accepting every identifier
+#: in both namespaces (item-N, SKU-A, PROD-N, items, products).
+_SLOT_VALUE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 
 
 def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:
@@ -49,16 +58,128 @@ def _bind(value: Any, params: dict[str, Any]) -> Any:
     return value
 
 
-class SpiderKernel:
+# --------------------------------------------------------------------------- #
+# Parameter induction
+#
+# Induction works at path-segment granularity: the common leading segments are
+# pinned and only the genuinely varying segment positions become slots. A path
+# segment whose value matches a field in the observation state (the resource
+# identity, e.g. "collection": "items" matching the "items" segment) is
+# induced as a declared identity slot, so a mechanism trained on one collection
+# can bind another collection at resolve time. Identity slots are induced from
+# the observation structure, not hand-declared by the caller.
+#
+# This block is the INCUMBENT implementation, reproduced unchanged as the
+# B-DECLARED-VOCAB arm of EXP-PRODUCT-36314204238. It is the thing under
+# comparison, so it is kept recognisable and is not refactored. The
+# variability-learned alternative lives in .variability and is mixed in below.
+# --------------------------------------------------------------------------- #
+
+#: Fields that name the RESOURCE rather than the operation. They are constant
+#: within a distillation group but differ between resource A and resource B, so
+#: retaining them in preconditions would block every cross-resource transfer.
+DEFAULT_IDENTITY_FIELDS: tuple[str, ...] = ("collection", "resource")
+
+
+def _segments(path: str) -> list[str]:
+    return [s for s in path.split("/") if s != ""]
+
+
+def _strip_common_prefix(paths: list[str]) -> str:
+    """Longest common leading path SEGMENT prefix, as a URL prefix string."""
+    if not paths:
+        return ""
+    split = [_segments(p) for p in paths]
+    shared: list[str] = []
+    for column in zip(*split):
+        if len(set(column)) != 1:
+            break
+        shared.append(column[0])
+    return "/" + "/".join(shared) if shared else ""
+
+
+def _varying_positions(paths: list[str]) -> list[int]:
+    """Indices where the path segment actually differs across observations."""
+    if not paths:
+        return []
+    split = [_segments(p) for p in paths]
+    width = min(len(s) for s in split)
+    return [i for i in range(width) if len({s[i] for s in split}) > 1]
+
+
+def _slot_name(index: int) -> str:
+    return "id" if index == 0 else f"id{index + 1}"
+
+
+def _path_template(paths: list[str]) -> tuple[str, list[str]]:
+    """Return (template_path, slot_names) with the prefix and suffix preserved."""
+    if not paths:
+        return "", []
+    split = [_segments(p) for p in paths]
+    width = min(len(s) for s in split)
+    varying = [i for i in range(width) if len({s[i] for s in split}) > 1]
+
+    head_len = varying[0] if varying else width
+    tail: list[str] = []
+    limit = head_len
+    for column in zip(*[list(reversed(s))[:limit] for s in split]):
+        if len(set(column)) != 1:
+            break
+        tail.append(column[0])
+    tail.reverse()
+
+    slots = [_slot_name(i) for i in range(len(varying))]
+    head = split[0][:head_len]
+    parts = head + [f"${{{name}}}" for name in slots] + tail
+    template = "/".join(parts)
+    if paths[0].startswith("/"):
+        template = "/" + template
+    return template, slots
+
+
+def _is_identifier_value(value: Any, slot_values: set[str]) -> bool:
+    """True when a value is (or contains) an induced slot value."""
+    if isinstance(value, str):
+        return any(sv and sv in value for sv in slot_values)
+    return False
+
+
+def _transferable(
+    fields: dict[str, Any], slot_values: set[str], identity_fields: tuple[str, ...]
+) -> tuple[dict[str, Any], list[str]]:
+    kept: dict[str, Any] = {}
+    dropped: list[str] = []
+    for key, value in fields.items():
+        if key in identity_fields or _is_identifier_value(value, slot_values):
+            dropped.append(key)
+        else:
+            kept[key] = value
+    return kept, dropped
+
+
+class SpiderKernel(VariabilityBinders):
     """Conservative first execution-inheritance kernel.
 
     This kernel is deliberately not a browser agent. It stores and resolves validated mechanisms.
     It abstains when applicability is not demonstrated.
+
+    Two parameter-binding paths coexist here on purpose. ``distill_parameterized``
+    plus ``resolve`` is the incumbent declared-vocabulary binder (arm A3). The
+    ``distill_variability`` plus ``bind_variability`` pair inherited from
+    VariabilityBinders is the mechanism under test (arm A1/A2). They share one
+    registry, one confidence gate and one resolution contract so that a
+    difference between them is a difference in binding, not in plumbing.
     """
 
-    def __init__(self, registry: MechanismRegistry, min_confidence: float = 0.8):
+    def __init__(
+        self,
+        registry: MechanismRegistry,
+        min_confidence: float = 0.8,
+        intent_namespace_map: dict[str, list[str]] | None = None,
+    ):
         self.registry = registry
         self.min_confidence = min_confidence
+        self.intent_namespace_map = intent_namespace_map or {}
 
     def observe(self, observation: Observation) -> str:
         raw = json.dumps({
@@ -90,11 +211,258 @@ class SpiderKernel:
             confidence=0.5,
         )
 
+    # -- alignment: group observations and locate the varying structure ------- #
+
+    def align_parameters(self, observations: list[Observation]) -> dict[str, Any]:
+        """Group observations by intent and locate varying structure."""
+        groups: dict[str, list[Observation]] = defaultdict(list)
+        for observation in observations:
+            groups[observation.intent].append(observation)
+
+        alignment: dict[str, Any] = {"intents": {}, "n_observations": len(observations)}
+        for intent, members in sorted(groups.items()):
+            successes = [o for o in members if o.success]
+            paths = [o.action.get("path") for o in members if isinstance(o.action.get("path"), str)]
+            varying = _varying_positions(paths) if paths else []
+            prefix = _strip_common_prefix(paths)
+            slot_values: set[str] = set()
+            for observation in members:
+                for index in varying:
+                    parts = _segments(observation.action.get("path", ""))
+                    if index < len(parts):
+                        slot_values.add(parts[index])
+
+            keys = {k for o in members for k in o.action if k != "path"}
+            varying_body = sorted(
+                k for k in keys
+                if len({json.dumps(o.action.get(k), sort_keys=True) for o in members}) > 1
+            )
+            alignment["intents"][intent] = {
+                "n": len(members),
+                "n_success": len(successes),
+                "support": (len(successes) / len(members)) if members else 0.0,
+                "common_prefix": prefix,
+                "n_prefix_segments": len(_segments(prefix)),
+                "varying_segment_positions": varying,
+                "n_varying_segments": len(varying),
+                "varying_body_fields": varying_body,
+                "slot_values": sorted(slot_values),
+                "preconditions": _common_fields([o.state for o in members]),
+                "postconditions": _common_fields([o.next_state for o in members]),
+            }
+        return alignment
+
+    # -- template construction ------------------------------------------------ #
+
+    def _build_action_template(
+        self, observations: list[Observation], identity_fields: tuple[str, ...] = ()
+    ) -> dict[str, Any]:
+        """Build an action template that PRESERVES the common URL prefix.
+
+        A leading path segment whose value equals the observation's value for an
+        identity field becomes a declared slot named after the field. Preserving
+        the version/root prefix while letting the resource identity be bound is
+        how a mechanism distilled on one collection can act on another.
+        """
+        if not observations:
+            return {}
+        paths = [
+            o.action["path"] for o in observations
+            if isinstance(o.action.get("path"), str)
+        ]
+        if not paths:
+            return dict(observations[0].action)
+
+        prefix = _strip_common_prefix(paths)
+        template_path, slots = _path_template(paths)
+        if not template_path:
+            return dict(observations[0].action)
+
+        declared = self._identity_segment_slots(observations, paths, identity_fields)
+        for name, index in declared.items():
+            template_path = self._replace_segment(template_path, index, f"${{{name}}}")
+            slots = [name if s == index else s for s in slots]
+        if declared:
+            slots = sorted(set(slots) | set(declared), key=lambda n: template_path.find("${" + n + "}"))
+
+        keys = {k for o in observations for k in o.action if k != "path"}
+        template: dict[str, Any] = {}
+        for key in sorted(keys):
+            values = {json.dumps(o.action.get(key), sort_keys=True) for o in observations}
+            if len(values) == 1:
+                template[key] = observations[0].action.get(key)
+            elif slots and key in {"id", "identifier"}:
+                template[key] = f"${{{slots[0]}}}"
+            else:
+                template[key] = observations[0].action.get(key)
+        template["path"] = template_path
+        template["__slots__"] = slots
+        template["__declared_slots__"] = sorted(declared)
+        return template
+
+    @staticmethod
+    def _identity_segment_slots(
+        observations: list[Observation], paths: list[str], identity_fields: tuple[str, ...]
+    ) -> dict[str, int]:
+        """Leading path segments that name the resource rather than the operation.
+
+        Returns {field_name: segment_index} for identity fields that actually
+        appear as a path segment with a single consistent value.
+        """
+        out: dict[str, int] = {}
+        for field in identity_fields:
+            values = {o.state.get(field) for o in observations if o.state.get(field) is not None}
+            if len(values) != 1:
+                continue
+            value = next(iter(values))
+            for index, parts in enumerate([_segments(p) for p in paths]):
+                if index < len(parts) and parts[index] == str(value):
+                    out.setdefault(field, index)
+                    break
+        return out
+
+    @staticmethod
+    def _forced_consistency(observations: list[Observation]) -> float:
+        """Fraction of observations sharing the modal non-path action fields.
+
+        Permuting intent labels also permutes the verbs behind them, so this is
+        the factor that stops a null arm from manufacturing a confident
+        mechanism out of a shuffled label set.
+        """
+        if not observations:
+            return 0.0
+        keys = {k for o in observations for k in o.action if k != "path"}
+        if not keys:
+            return 1.0
+        agreeing = 0
+        for observation in observations:
+            modal = {}
+            for key in keys:
+                counts = Counter(json.dumps(o.action.get(key), sort_keys=True) for o in observations)
+                modal[key] = counts.most_common(1)[0][0]
+            if all(json.dumps(observation.action.get(k), sort_keys=True) == modal[k] for k in keys):
+                agreeing += 1
+        return agreeing / len(observations)
+
+    # -- the parameterized distillation path ----------------------------------- #
+
+    @staticmethod
+    def _replace_segment(template: str, index: int, value: str) -> str:
+        parts = template.split("/")
+        parts[index + 1] = value
+        return "/".join(parts)
+
+    def distill_parameterized(
+        self,
+        observations: list[Observation],
+        mechanism_prefix: str = "param",
+        intent_namespace_map: dict[str, list[str]] | None = None,
+        identity_fields: tuple[str, ...] = DEFAULT_IDENTITY_FIELDS,
+    ) -> list[Mechanism]:
+        """Induce one mechanism per intent group, with calibrated confidence.
+
+        Confidence is derived from three measured factors and never hardcoded:
+        add-one empirical support over the group, the fraction of observations
+        that conform to the induced template, and a structural multiplicity
+        penalty for templates with several free INFERRED positions. A template
+        pinning no leading path segment with several free positions is
+        under-determined and is capped below ``min_confidence`` so ``resolve``
+        abstains rather than emitting an under-determined request.
+        """
+        alignment = self.align_parameters(observations)
+
+        built: list[Mechanism] = []
+        nsmap = intent_namespace_map if intent_namespace_map is not None else self.intent_namespace_map
+
+        for intent, info in alignment["intents"].items():
+            if info["n"] == 0:
+                continue
+            members = [o for o in observations if o.intent == intent]
+            template = self._build_action_template(members, identity_fields)
+            slots = list(template.pop("__slots__", []))
+            declared_slots = set(template.pop("__declared_slots__", []))
+            inferred_slots = [s for s in slots if s not in declared_slots]
+            slot_values = set(info["slot_values"])
+
+            conforming = 0
+            for observation in members:
+                path = observation.action.get("path", "")
+                if re.match(_template_regex(template.get("path", ""), slots), path):
+                    conforming += 1
+            consistency = conforming / info["n"] if info["n"] else 0.0
+            consistency *= self._forced_consistency(members)
+            support = (info["n_success"] + 1.0) / (info["n"] + 1.0)
+            multiplicity = 1.0 / (1.0 + 0.5 * (len(inferred_slots) - 1)) if inferred_slots else 1.0
+            confidence = round(support * consistency * multiplicity, 4)
+            pinned = info["n_prefix_segments"] > 0 or bool(declared_slots)
+            underdetermined = (not pinned) and len(inferred_slots) > 1
+            if underdetermined:
+                confidence = min(confidence, 0.5)
+
+            preconditions, dropped_pre = _transferable(info["preconditions"], slot_values, identity_fields)
+            postconditions, dropped_post = _transferable(info["postconditions"], slot_values, identity_fields)
+            dropped = sorted(set(dropped_pre) | set(dropped_post))
+
+            digest = hashlib.sha256(
+                json.dumps([intent, template, slots], sort_keys=True).encode()
+            ).hexdigest()[:12]
+            built.append(
+                Mechanism(
+                    mechanism_id=f"{mechanism_prefix}-{intent}-{digest}",
+                    intent=intent,
+                    preconditions=preconditions,
+                    action_template=template,
+                    postconditions=postconditions,
+                    parameter_slots=slots,
+                    auth_scope="bearer",
+                    intent_namespace_map=list(nsmap.get(intent, [])) if nsmap else [],
+                    freshness={
+                        "strategy": "etag-revalidate",
+                        "max_stale_requests": 0,
+                        "revalidate_before_reuse": True,
+                    },
+                    applicability_guards={
+                        k: v for k, v in info["preconditions"].items()
+                        if k not in dropped_pre
+                    },
+                    verification_rule={
+                        "type": "postcondition_match",
+                        "postconditions": postconditions,
+                    },
+                    failure_boundary={
+                        "excluded_identifier_keys": dropped,
+                        "declared_identity_fields": list(identity_fields),
+                        "declared_identity_slots": sorted(declared_slots),
+                        "inferred_slots": inferred_slots,
+                        "no_empty_prefix_template": not underdetermined,
+                        "confidence": confidence,
+                        "min_confidence": self.min_confidence,
+                    },
+                    repair_scope={
+                        "rebind_slots": True,
+                        "retryable_statuses": ["UNKNOWN", "EXPLORE"],
+                    },
+                    evidence=[self.observe(o)[:16] for o in members],
+                    confidence=confidence,
+                )
+            )
+        return built
+
+    # -- resolution ------------------------------------------------------------ #
+
+    def _intent_matches(self, mechanism: Mechanism, intent: str) -> bool:
+        """Exact equality, or an alias declared in either direction."""
+        if mechanism.intent == intent:
+            return True
+        if intent in mechanism.intent_namespace_map:
+            return True
+        return intent in self.intent_namespace_map.get(mechanism.intent, [])
+
     def resolve(self, intent: str, context: dict[str, Any], params: dict[str, Any] | None = None) -> Resolution:
         params = params or {}
         candidates = []
         for m in self.registry.all():
-            if m.invalidated or m.intent != intent:
+            if m.invalidated or not self._intent_matches(m, intent):
                 continue
             if not _matches(m.preconditions, context):
                 continue
@@ -114,13 +482,52 @@ class SpiderKernel:
         if best.confidence < self.min_confidence:
             return Resolution(ResolutionStatus.EXPLORE, best.mechanism_id, "candidate exists but confidence is below execution threshold", confidence=best.confidence)
 
+        # Slot-value guard: reject bound slot values that are not non-empty
+        # identifier tokens. This is a syntactic sanity check that abstains on
+        # empty strings and values with punctuation (e.g. "SKU-X!!unsupported!!")
+        # while accepting every identifier in both namespaces.
+        bound = _bind(best.action_template, params)
+        for slot in best.parameter_slots:
+            value = params.get(slot)
+            if not isinstance(value, str) or not _SLOT_VALUE.match(value):
+                return Resolution(
+                    ResolutionStatus.UNKNOWN,
+                    best.mechanism_id,
+                    f"slot-value guard rejected slot {slot}",
+                    confidence=best.confidence,
+                )
+
         return Resolution(
             ResolutionStatus.EXECUTABLE,
             best.mechanism_id,
             "applicability guards and confidence threshold passed",
-            bound_action=_bind(best.action_template, params),
+            bound_action=bound,
             confidence=best.confidence,
         )
+
+    def force_resolve(self, intent: str, context: dict[str, Any], params: dict[str, Any] | None = None) -> Resolution:
+        """Resolve ignoring min_confidence. Diagnostic only; never a decision path.
+
+        This exists so the null control can separate genuine abstention from an
+        arm that would have produced a wrong request anyway.
+        """
+        params = params or {}
+        for m in self.registry.all():
+            if m.invalidated or not self._intent_matches(m, intent):
+                continue
+            if not _matches(m.preconditions, context) or not _matches(m.applicability_guards, context):
+                continue
+            required_slots = set(m.parameter_slots) | _template_slots(m.action_template)
+            if any(slot not in params for slot in required_slots):
+                continue
+            return Resolution(
+                ResolutionStatus.EXECUTABLE,
+                m.mechanism_id,
+                "forced: confidence gate bypassed",
+                bound_action=_bind(m.action_template, params),
+                confidence=m.confidence,
+            )
+        return Resolution(ResolutionStatus.UNKNOWN, None, "no applicable mechanism")
 
     def verify(self, mechanism_id: str, observed_state: dict[str, Any]) -> bool:
         mechanism = next((m for m in self.registry.all() if m.mechanism_id == mechanism_id), None)
@@ -130,3 +537,29 @@ class SpiderKernel:
 
     def invalidate(self, mechanism_id: str) -> bool:
         return self.registry.invalidate(mechanism_id)
+
+
+def _common_fields(states: list[dict[str, Any]]) -> dict[str, Any]:
+    """Keys whose value is identical in every supplied state."""
+    if not states:
+        return {}
+    out: dict[str, Any] = {}
+    for key in {k for s in states for k in s}:
+        values = [json.dumps(s.get(key), sort_keys=True) for s in states]
+        if len(set(values)) == 1:
+            out[key] = states[0].get(key)
+    return out
+
+
+def _template_regex(template: str, slots: list[str]) -> str:
+    """Regex accepting any value in each slot position of ``template``."""
+    if not template:
+        return r"$^"
+    out = ""
+    remainder = template
+    for name in slots:
+        marker = "${" + name + "}"
+        head, _, remainder = remainder.partition(marker)
+        out += re.escape(head) + ".*"
+    out += re.escape(remainder)
+    return "^" + out

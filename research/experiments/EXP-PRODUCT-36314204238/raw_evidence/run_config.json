@@ -1,0 +1,49 @@
+{
+  "base_re_derivation_requests": 3,
+  "cells": 90,
+  "confidence_threshold": 0.85,
+  "cost_basis": "counted HTTP requests (prereg 6.5)",
+  "experiment_id": "EXP-PRODUCT-36314204238",
+  "frames": [
+    "R",
+    "B"
+  ],
+  "hashes": {
+    "prereg.md": "5de0826934a7c5313ff4d9b46007841c7a73056d0cfde225c75bde3e55c85618",
+    "request.json": "9131a601245863ca59972812239b97e275c82de2dbaabc8a9d8cdb5d4cde6351",
+    "run_experiment.py": "18132272758e9489b4ee1e7e51e18de30df96aa918d52917f4d4463df5fba4da",
+    "spec.json": "011e7900b2334aeb07916d9be1349a07ba07057959de2cd040c8a15f12cbe69a",
+    "src/spider/kernel.py": "7a0b87307e4d5fd0c4031d044aaea49b81079f63eebd0cf6f66f4daadda82454",
+    "src/spider/models.py": "2c08b4f69c418f65a0ec509f95115297b9812cafe110f447053661d16cef573d",
+    "src/spider/variability.py": "6f1fa7d19206af12e9ae1f79db2d972a6ad1b7447a77795d454a508c46448fd0",
+    "substrate.py": "6ad7e1ed8f6f2143ee132073526adbd006516d7f58767acdba0044cc00e9140d"
+  },
+  "induction_http_requests": {
+    "multi": 1350,
+    "single_items": 450
+  },
+  "induction_observations": {
+    "multi": 450,
+    "single_items": 150
+  },
+  "inherited_requests": 1,
+  "lane": "product",
+  "latency_injection": {
+    "base_latency_s": 0.0002,
+    "rule": "base_latency_s * cost_multiplier, server-side, deterministic"
+  },
+  "multipliers": [
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "seed": 42,
+  "tasks_per_cell": 100,
+  "total_http_requests": 34517,
+  "total_tasks": 10000,
+  "wall_clock_s": 89.97
+}
