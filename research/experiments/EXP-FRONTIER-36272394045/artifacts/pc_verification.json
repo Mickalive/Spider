@@ -1,0 +1,52 @@
+{
+  "conditioned_reference_plant_compile_and_deopt": {
+    "compiled_replays": 0,
+    "deopted": 200
+  },
+  "control": "PC-PLANTED-DISAMBIGUATION",
+  "per_episode_create_state_keys_distinct_counts": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "plant_verified_byte_identical_observations": true,
+  "planted_roles": [
+    "create_resource"
+  ],
+  "planted_span_class_counts": {
+    "i": 1,
+    "ii": 199,
+    "iii": 0
+  },
+  "planted_span_closed_by_conditioned": 200,
+  "planted_span_closed_by_conditioned_fraction": {
+    "ci95": [
+      0.9811546736227335,
+      1.0
+    ],
+    "k": 200,
+    "n": 200,
+    "point": 1.0
+  },
+  "planted_span_distinct_correct_actions_per_episode": true,
+  "planted_span_occurrences": 200,
+  "prereg_criterion": "sigma_1 ~ 1.0, sigma_2 ~ 0, sigma_3 ~ 0 for planted spans; shares (ii) and (iii) must be 0 by construction (prereg.md 7.3, 10.1)",
+  "reading_A_prereg_section_8_literal": "class (ii) fires on any state key that recurs with a different action, so the PC's planted spans are class (ii) and the prereg sigma_2~0 criterion is not attainable by construction",
+  "reading_B_goal_aware_mandate": "class (ii) requires that goal conditioning cannot bind the span; the PC's binding key IS in the goal prefix, so its planted spans are merely-novel and the sigma_2~0 criterion is met",
+  "whole_trace_class_counts": {
+    "i": 1001,
+    "ii": 199,
+    "iii": 0
+  },
+  "whole_trace_share_class_ii": {
+    "ci95": [
+      0.14586263045987358,
+      0.18793668827628757
+    ],
+    "k": 199,
+    "n": 1200,
+    "point": 0.16583333333333333
+  }
+}

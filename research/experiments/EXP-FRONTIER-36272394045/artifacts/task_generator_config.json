@@ -1,0 +1,76 @@
+{
+  "base_generator": "research/frontier/taskplan.py (sha256 8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816, unmodified)",
+  "class_iii_plant": {
+    "declared_span_fraction": 0.1,
+    "gated_extensions": [
+      "GET /resources/{rid}?t=<handle>",
+      "GET /resources?view=<handle>"
+    ],
+    "handle_definition": "<episode_counter:08x><sha256(MINT_SALT|counter)[:8]>, 16 hex chars, episode-varying, not a function of the store, of any request path, of the resource identity, or of the plan",
+    "mint_extension": "PUT /resources/{rid}?mint=1 publishes an episode-scoped handle as a response header and as a raw server-side observation; the response body is byte-identical to the same PUT without ?mint=",
+    "realized_span_fraction": 0.1,
+    "realized_span_occurrences": 120,
+    "realized_work_item_fraction": 0.3,
+    "realized_work_items_over_50_episodes": 60,
+    "token_slots": [
+      "read_resource",
+      "list_resources"
+    ],
+    "work_item_modulus": 10,
+    "work_item_residue": 3,
+    "work_item_schedule": "planted(e,w) <=> (3*(4*(e-1)+w)) % 10 < 3"
+  },
+  "control_novelty_rate": 0.5,
+  "episodes_per_novelty_rate_per_arm": 50,
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "goal_prefix": {
+    "handle_value_ever_included": false,
+    "narrow_fields": [
+      "intent",
+      "key"
+    ],
+    "note": "wide is an upper bound on conditioning power and is therefore the conservative choice against falsifier clause 2",
+    "primary_width": "wide",
+    "wide_fields": [
+      "intent",
+      "step",
+      "work_item",
+      "key",
+      "body",
+      "novel",
+      "token_required"
+    ]
+  },
+  "novelty_grid": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "planted_disambiguation_control": {
+    "binding_key_location": "goal prefix 'key=' field",
+    "planted_observable_state": "(empty store, last request GET /)",
+    "planted_roles": [
+      "create_resource"
+    ]
+  },
+  "spans_per_episode": 24,
+  "step_sequence": [
+    "entry_point",
+    "create_resource",
+    "read_resource",
+    "update_resource",
+    "list_resources",
+    "delete_resource"
+  ],
+  "substrate_extensions": {
+    "mint": "opt-in ?mint= / ?t= / ?view= query parameters; default request shapes return byte-identical responses",
+    "transport": "_Handler.disable_nagle_algorithm = True (no response byte changes; ~24 -> ~3265 requests/second)"
+  },
+  "unique_states_control": {
+    "class_iii_plant": "disabled, otherwise a planted class-(iii) span would (correctly) be reported as class (iii) and the null could not expect exactly zero",
+    "mechanism": "parent taskplan._with_nonce: every path carries ?n=<episode>-<step>"
+  },
+  "work_items_per_episode": 4
+}

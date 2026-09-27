@@ -1,0 +1,836 @@
+{
+  "by_arm": {
+    "B-COLD-EXPLORATION": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 0,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.9968089993972651,
+          1.0
+        ],
+        "k": 1200,
+        "n": 1200,
+        "point": 1.0
+      },
+      "span_level_incorrect_examples": [],
+      "success_rate_prereg_definition": 1.0
+    },
+    "B-NO-MEMORY-CONDITIONED": {
+      "class_iii_spans": {
+        "conditioned_correct": 0,
+        "n": 120
+      },
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 180,
+      "non_class_iii_spans": {
+        "conditioned_correct": 1020,
+        "n": 1080
+      },
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.8286816663969149,
+          0.8690846331811707
+        ],
+        "k": 1020,
+        "n": 1200,
+        "point": 0.85
+      },
+      "span_level_incorrect_examples": [
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-0",
+          "episode": 1,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-0",
+          "episode": 1,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 1,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-0",
+          "episode": 2,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-0",
+          "episode": 2,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 2,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 2,
+          "index": 19,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 2,
+          "index": 20,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 2,
+          "index": 22,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 3,
+          "index": 13,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 3,
+          "index": 14,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 3,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 4,
+          "index": 13,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 4,
+          "index": 14,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 4,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-005-1",
+          "episode": 5,
+          "index": 7,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-005-1",
+          "episode": 5,
+          "index": 8,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 5,
+          "index": 10,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-006-0",
+          "episode": 6,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-006-0",
+          "episode": 6,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 6,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-007-0",
+          "episode": 7,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-007-0",
+          "episode": 7,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 7,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 7,
+          "index": 19,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 3
+        }
+      ],
+      "success_rate_prereg_definition": 1.0
+    },
+    "B-NO-MEMORY-CONDITIONED-NARROW": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 520,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.5384608416226889,
+          0.594447024963613
+        ],
+        "k": 680,
+        "n": 1200,
+        "point": 0.5666666666666667
+      },
+      "span_level_incorrect_examples": [
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-0",
+          "episode": 1,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-0",
+          "episode": 1,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-0",
+          "episode": 1,
+          "index": 3,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 1,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-1",
+          "episode": 1,
+          "index": 7,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-001-1",
+          "episode": 1,
+          "index": 9,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 1,
+          "index": 13,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 1,
+          "index": 15,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 1,
+          "index": 19,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 1,
+          "index": 21,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-0",
+          "episode": 2,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-0",
+          "episode": 2,
+          "index": 2,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-0",
+          "episode": 2,
+          "index": 3,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 2,
+          "index": 4,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-1",
+          "episode": 2,
+          "index": 7,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-002-1",
+          "episode": 2,
+          "index": 9,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 1
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 2,
+          "index": 13,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-2",
+          "episode": 2,
+          "index": 15,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 2
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 2,
+          "index": 19,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 2,
+          "index": 20,
+          "role": "read_resource",
+          "token_required": true,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/s-const-3",
+          "episode": 2,
+          "index": 21,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources",
+          "episode": 2,
+          "index": 22,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 3
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-003-0",
+          "episode": 3,
+          "index": 1,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-003-0",
+          "episode": 3,
+          "index": 3,
+          "role": "update_resource",
+          "token_required": false,
+          "work_item": 0
+        },
+        {
+          "decision_path": "GOAL_CONDITIONED",
+          "declared": null,
+          "emitted": "/resources/r-003-1",
+          "episode": 3,
+          "index": 7,
+          "role": "create_resource",
+          "token_required": false,
+          "work_item": 1
+        }
+      ],
+      "success_rate_prereg_definition": 1.0
+    },
+    "B-NO-MEMORY-DETERMINISTIC": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 20,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.974396714790915,
+          0.9891853179597744
+        ],
+        "k": 1180,
+        "n": 1200,
+        "point": 0.9833333333333333
+      },
+      "span_level_incorrect_examples": [
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000003b58b3c4f",
+          "emitted": "/resources",
+          "episode": 3,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000000400bf7fac",
+          "emitted": "/resources",
+          "episode": 4,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000008da313e9d",
+          "emitted": "/resources",
+          "episode": 8,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000000933e7b420",
+          "emitted": "/resources",
+          "episode": 9,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000000db24732cc",
+          "emitted": "/resources",
+          "episode": 13,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000000e25a54a4f",
+          "emitted": "/resources",
+          "episode": 14,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000001202dc6783",
+          "emitted": "/resources",
+          "episode": 18,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000001325ee9480",
+          "emitted": "/resources",
+          "episode": 19,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000017edc3233e",
+          "emitted": "/resources",
+          "episode": 23,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000018758b474a",
+          "emitted": "/resources",
+          "episode": 24,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000001c147d2ebe",
+          "emitted": "/resources",
+          "episode": 28,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000001d892bf6b4",
+          "emitted": "/resources",
+          "episode": 29,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000021ca5b90b1",
+          "emitted": "/resources",
+          "episode": 33,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000022227ae029",
+          "emitted": "/resources",
+          "episode": 34,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=000000266de7a4ad",
+          "emitted": "/resources",
+          "episode": 38,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=00000027bb14b185",
+          "emitted": "/resources",
+          "episode": 39,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000002bb9a26510",
+          "emitted": "/resources",
+          "episode": 43,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=0000002c78817ded",
+          "emitted": "/resources",
+          "episode": 44,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=000000306a9a27e8",
+          "emitted": "/resources",
+          "episode": 48,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        },
+        {
+          "decision_path": "COMPILED_REPLAY",
+          "declared": "/resources?view=000000314e7143cd",
+          "emitted": "/resources",
+          "episode": 49,
+          "index": 16,
+          "role": "list_resources",
+          "token_required": true,
+          "work_item": 2
+        }
+      ],
+      "success_rate_prereg_definition": 1.0
+    },
+    "NC-UNIQUE-STATES": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 0,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.9968089993972651,
+          1.0
+        ],
+        "k": 1200,
+        "n": 1200,
+        "point": 1.0
+      },
+      "span_level_incorrect_examples": [],
+      "success_rate_prereg_definition": 1.0
+    },
+    "PC-PLANTED-DISAMBIGUATION": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 0,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.9968089993972651,
+          1.0
+        ],
+        "k": 1200,
+        "n": 1200,
+        "point": 1.0
+      },
+      "span_level_incorrect_examples": [],
+      "success_rate_prereg_definition": 1.0
+    },
+    "REPL-REFERENCE-PARENT-IDENTICAL": {
+      "episodes": 50,
+      "episodes_all_steps_expected_code": 50,
+      "episodes_goal_state_reached": 50,
+      "n_span_level_incorrect": 0,
+      "span_level_correct_action_fraction": {
+        "ci95": [
+          0.9968089993972651,
+          1.0
+        ],
+        "k": 1200,
+        "n": 1200,
+        "point": 1.0
+      },
+      "span_level_incorrect_examples": [],
+      "success_rate_prereg_definition": 1.0
+    }
+  },
+  "prereg_criterion": "prereg.md 10.5: all arms must achieve success_rate = 1.0; any arm with success < 1.0 -> MEASUREMENT_INVALID",
+  "success_definition": "parent result.json definition: every step returned its expected status code AND the final resource store matched the goal state (empty)"
+}

@@ -1,0 +1,49 @@
+{
+  "class_counts": {
+    "i": 1151,
+    "ii": 49,
+    "iii": 0
+  },
+  "control": "NC-UNIQUE-STATES",
+  "declared_deviation": "the class-(iii) plant is disabled in this control; otherwise a planted class-(iii) span would (correctly) be reported as class (iii) and the null's exactly-zero criterion would be unattainable by construction",
+  "mechanism": "parent taskplan._with_nonce: every path carries ?n=<episode>-<step>",
+  "prereg_criterion": "sigma_2 == 0 exactly and sigma_3 == 0 exactly (prereg.md 7.4, 10.2)",
+  "prereg_section_13_mitigation_variant": {
+    "consumed_by_any_decision_rule": false,
+    "mechanism": "observable state key augmented with the episode/step id, per prereg.md 13",
+    "n_conflicting_state_keys": 0,
+    "n_state_keys": 1200,
+    "sigma_2_is_zero": true,
+    "sigma_3_is_zero": true
+  },
+  "sigma_2_is_zero": false,
+  "sigma_2_root_cause": {
+    "all_class_ii_from_a_single_state_key": true,
+    "diagnosis": "prereg.md 5 defines the observable state as (world_store_snapshot, last_request); prereg.md 13's stated mitigation puts the uniqueness nonce in the world store snapshot, but the inherited implementation puts it in the request path. Every episode's first span therefore shares one observable state key with 50 different declared correct actions.",
+    "n_class_ii": 49,
+    "n_state_keys_with_conflicting_correct_actions": 1,
+    "offending_state_keys": [
+      {
+        "multiplicity": 50,
+        "n_distinct_declared_actions": 50,
+        "roles": [
+          "entry_point"
+        ],
+        "span_indices": [
+          0
+        ],
+        "state_sig": "39fb690e0a37823e2f9345b759d71cca7952b6e494cea2bdd10baf64da0752a0"
+      }
+    ]
+  },
+  "sigma_3_is_zero": true,
+  "span_occurrences": 1200,
+  "unique_signatures": 1200,
+  "unique_state_keys": 1151,
+  "verdict": {
+    "classifier_false_positive_demonstrated": false,
+    "conclusion": "the literal prereg.md 10.2 criterion is NOT met (sigma_2 = 49/1200), but the prereg's own stated failure meaning (a classifier false positive on unique states) is NOT what occurred. prereg.md 5 makes every episode's first span share one observable state key, and the inherited prereg.md 13 mitigation does not touch that state, so 50 spans with 50 distinct declared actions are, correctly and by the prereg's literal step-2 rule, class (ii). Under prereg.md 13's mechanism as written (nonce in the world store snapshot) sigma_2 == 0 exactly. The null control is therefore UNRESOLVED_BY_PREREG_CONFLICT, not failed.",
+    "literal_prereg_criterion_met": false,
+    "prereg_stated_failure_meaning": "classification logic defect (false positive on unique states)"
+  }
+}

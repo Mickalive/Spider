@@ -63,6 +63,15 @@ def sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+#: Frozen salt for the opt-in capability-mint extension used by
+#: EXP-FRONTIER-36272394045 (spec measurement_validity.task_generator item (d):
+#: a declared non-zero class_iii_fraction whose binding key "comes from a prior
+#: response"). Deterministic so an auditor can recompute every handle from the
+#: raw trace; never present in the plan, the goal/intent prefix, the resource
+#: store, or any request path.
+MINT_SALT = sha256_hex(b"spider-mint-salt-EXP-FRONTIER-36272394045")[:16]
+
+
 def normalize_headers(headers: dict[str, str]) -> dict[str, str]:
     return {k.lower(): v for k, v in sorted(headers.items()) if k.lower() not in VOLATILE_HEADERS}
 
@@ -102,10 +111,62 @@ def state_signature(store: dict[str, dict[str, Any]]) -> str:
     return sha256_hex(canonical_json(store).encode("utf-8"))
 
 
+# ---------------------------------------------------------------------------
+# Opt-in capability mint (EXP-FRONTIER-36272394045, spec measurement_validity.
+# task_generator item (d): a declared non-zero class_iii_fraction whose binding
+# key "comes from a prior response" and is absent from the observable state and
+# from the goal/intent prefix).
+#
+# A minted handle is ``<episode_counter:08x><mac[:8]>`` where
+# ``mac = sha256(MINT_SALT | counter)[:8]``. Validation is therefore a pure
+# function of the request: the server keeps no per-handle state, so the substrate
+# remains a pure function of the request plus the resource store and its
+# determinism guarantee is unchanged.
+#
+# The handle is a pure function of (salt, episode counter) only. It is NOT a
+# function of the resource store and NOT a function of any request path or
+# resource identity, so an executor that can observe only
+# (world_store_snapshot, last_request_method, last_request_path) -- the
+# observable state prereg.md section 5 fixes -- cannot derive it, and neither can
+# an executor that knows the task plan. The only channel that carries it is the
+# mint response.
+# ---------------------------------------------------------------------------
+TOKEN_LEN = 16
+
+
+def _token_mac(counter: int) -> str:
+    return sha256_hex(f"{MINT_SALT}|{counter:08x}".encode("utf-8"))[:8]
+
+
+def mint_token(counter: int) -> str:
+    """Deterministic episode-scoped capability handle."""
+    return f"{counter:08x}{_token_mac(counter)}"
+
+
+def token_valid(token: str) -> bool:
+    """Stateless validation: recompute the MAC from the handle's own counter."""
+    if len(token) != TOKEN_LEN:
+        return False
+    try:
+        counter = int(token[:8], 16)
+    except ValueError:
+        return False
+    if token[:8] != f"{counter:08x}":
+        return False
+    return token[8:] == _token_mac(counter)
+
+
 class _Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     server_version = BANNER
     sys_version = ""
+    # Transport-only latency fix (EXP-FRONTIER-36272394045). The stdlib handler
+    # writes response headers and response body as two separate socket writes;
+    # with Nagle enabled the second write waits on the peer's delayed ACK, which
+    # pinned the substrate at ~24 requests/second and made the preregistered
+    # 30k-request program time out. TCP_NODELAY changes no response byte, so the
+    # determinism guarantee and every recorded body hash are unaffected.
+    disable_nagle_algorithm = True
 
     # -- plumbing ---------------------------------------------------------
     def log_message(self, fmt: str, *args: Any) -> None:  # silence stderr noise
@@ -139,9 +200,21 @@ class _Handler(BaseHTTPRequestHandler):
         parts = [p for p in path.split("?")[0].split("/") if p]
         return (parts[0] if parts else ""), (parts[1] if len(parts) > 1 else "")
 
+    # -- opt-in capability mint (EXP-FRONTIER-36272394045) ------------------
+    @staticmethod
+    def _query(path: str) -> dict[str, str]:
+        if "?" not in path:
+            return {}
+        return dict(
+            kv.split("=", 1) if "=" in kv else (kv, "")
+            for kv in path.split("?", 1)[1].split("&")
+            if kv
+        )
+
     # -- verbs ------------------------------------------------------------
     def do_GET(self) -> None:
         collection, rid = self._split(self.path)
+        query = self._query(self.path)
         if collection == "" and rid == "":
             self._send(200, {"server": BANNER, "resources": 0, "entry": "/"})
             return
@@ -149,9 +222,21 @@ class _Handler(BaseHTTPRequestHandler):
             self._send(404, {"error": "not_found", "path": self.path})
             return
         if rid == "":
+            if "view" in query:
+                if not token_valid(query["view"]):
+                    self._send(404, {"error": "not_found", "path": self.path})
+                    return
+                self._send(200, {"count": len(self.store), "items": self.store, "view_valid": True})
+                return
             self._send(200, {"count": len(self.store), "items": self.store})
             return
         record = self.store.get(rid)
+        if "t" in query:
+            if record is None or not token_valid(query["t"]):
+                self._send(404, {"error": "not_found", "path": self.path})
+                return
+            self._send(200, {"rid": rid, "record": record, "token_valid": True})
+            return
         if record is None:
             self._send(404, {"error": "not_found", "rid": rid})
         else:
@@ -160,11 +245,27 @@ class _Handler(BaseHTTPRequestHandler):
     def do_PUT(self) -> None:
         collection, rid = self._split(self.path)
         body = self._body()
+        query = self._query(self.path)
         if collection != "resources" or rid == "":
             self._send(404, {"error": "not_found", "path": self.path})
             return
         existed = rid in self.store
-        self.store[rid] = {"title": body.get("title"), "value": body.get("value")}
+        # A bodyless PUT is a well-formed HTTP request that names a field-less
+        # record, not a server fault. ``do_PATCH`` already treats a missing body
+        # as an empty object; PUT now does the same instead of raising and
+        # dropping the keep-alive connection. No request issued by the parent
+        # task plan ever sends a missing body, so every recorded parent body
+        # hash is unchanged.
+        payload = body or {}
+        self.store[rid] = {"title": payload.get("title"), "value": payload.get("value")}
+        if "mint" in query:
+            # Opt-in: mint a capability handle bound to (rid, episode counter).
+            # The handle is published ONLY as a response header and as a raw
+            # server-side observation, never in the response body, never in the
+            # store, and never in any request path. The response *body* of a
+            # minting PUT is byte-identical to the body of the same PUT without
+            # ``?mint=`` so the parent's per-span body hashes are preserved.
+            self.server.last_mint = mint_token(int(self.server.episode_counter))  # type: ignore[attr-defined]
         self._send(200 if existed else 201, {"rid": rid, "created": not existed, "record": self.store[rid]})
 
     def do_PATCH(self) -> None:
@@ -198,9 +299,30 @@ class DeterministicHTTPSubstrate:
     def __init__(self) -> None:
         self._server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
         self._server.store = {}  # type: ignore[attr-defined]
+        # Episode counter: advanced by ``reset()`` only, never by a request, and
+        # never part of the resource store or of any response body. It is the
+        # only episode-varying input to the opt-in capability mint.
+        self._server.episode_counter = 0  # type: ignore[attr-defined]
+        self._server.last_mint = None  # type: ignore[attr-defined]
         self._thread = threading.Thread(target=self._server.serve_forever, daemon=True)
         self._thread.start()
         self.port = int(self._server.server_address[1])
+
+    # -- raw observation channel (class-(iii) construction) ------------------
+    @property
+    def episode_counter(self) -> int:
+        """Current episode counter. NOT part of the observable state."""
+        return int(self._server.episode_counter)  # type: ignore[attr-defined]
+
+    @property
+    def last_mint(self) -> str | None:
+        """Handle minted by the most recent ``PUT ...?mint=`` on this server.
+
+        Raw observation of a prior response. Recorded by the runner as the only
+        channel through which a class-(iii) binding key becomes available; it is
+        never added to the observable state or to any arm's input.
+        """
+        return self._server.last_mint  # type: ignore[attr-defined]
 
     # -- lifecycle --------------------------------------------------------
     def close(self) -> None:
@@ -216,6 +338,8 @@ class DeterministicHTTPSubstrate:
 
     def reset(self) -> None:
         self._server.store.clear()  # type: ignore[attr-defined]
+        self._server.episode_counter = int(self._server.episode_counter) + 1  # type: ignore[attr-defined]
+        self._server.last_mint = None  # type: ignore[attr-defined]
 
     @property
     def store(self) -> dict[str, dict[str, Any]]:

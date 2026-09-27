@@ -1,0 +1,136 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "conditioned_action_signature_is_exactly_obs_and_goal",
+      "detail": {
+        "parameters": [
+          "observable_state_sig",
+          "goal_prefix"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "conditioned_action_source_has_no_arm_state",
+      "detail": {
+        "code": "def conditioned_action(observable_state_sig: str, goal_prefix: str) -> dict[str, Any]:\n    \"\"\"\"\"\"\n    goal = parse_goal_prefix(goal_prefix)\n    role = goal['intent']\n    method = ROLE_METHOD[role]\n    key = goal.get('key', '-')\n    body_text = goal.get('body', '-')\n    token_required = goal.get('token_required', '0') == '1'\n    if role == 'entry_point':\n        path, body = ('/', None)\n    elif role in ('read_resource', 'update_resource', 'delete_resource'):\n        path, body = (f'/resources/{key}', None if body_text == '-' else json.loads(body_text))\n    elif role == 'create_resource':\n        path, body = (f'/resources/{key}', None if body_text == '-' else json.loads(body_text))\n    elif role == 'list_resources':\n        path, body = ('/resources', None)\n    else:\n        raise ValueError(f'unknown intent {role!r}')\n    if token_required:\n        path = path.split('?')[0]\n    return {'method': method, 'path': path, 'body': body, 'role': role, 'expected_code': EXPECTED_CODES[role], 'token_supplied': False, 'observable_state_sig': observable_state_sig}",
+        "found": []
+      },
+      "passed": true
+    },
+    {
+      "check": "purity_under_reordering_and_repetition",
+      "detail": {
+        "mismatches": [],
+        "n_pairs": 480
+      },
+      "passed": true
+    },
+    {
+      "check": "purity_under_repetition",
+      "detail": {
+        "n_pairs": 480
+      },
+      "passed": true
+    },
+    {
+      "check": "two_fresh_arm_instances_agree",
+      "detail": {
+        "n": 192
+      },
+      "passed": true
+    },
+    {
+      "check": "arm_dataclass_stores_no_span_history",
+      "detail": {
+        "fields": [
+          "arm",
+          "goal_width",
+          "ledger",
+          "model_calls",
+          "oracle"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "capability_handle_absent_from_both_inputs",
+      "detail": {
+        "leaks": [],
+        "n_token_spans_checked": 12
+      },
+      "passed": true
+    },
+    {
+      "check": "conditioned_arm_never_supplies_handle",
+      "detail": {
+        "bad": [],
+        "n_gated_spans": 12
+      },
+      "passed": true
+    },
+    {
+      "check": "goal_prefix_never_contains_a_handle_query",
+      "detail": {
+        "bad": []
+      },
+      "passed": true
+    },
+    {
+      "check": "base_plan_identical_to_parent_generator",
+      "detail": {
+        "mismatches": []
+      },
+      "passed": true
+    },
+    {
+      "check": "episode_shape_frozen_24_spans",
+      "detail": {
+        "episodes_per_rate": 50,
+        "spans_per_episode": 24
+      },
+      "passed": true
+    },
+    {
+      "check": "class_iii_realized_span_fraction_is_0_10",
+      "detail": {
+        "class_iii_spans": 120,
+        "planted_work_items": 60,
+        "share": 0.1
+      },
+      "passed": true
+    },
+    {
+      "check": "class_iii_plant_max_two_work_items_per_episode",
+      "detail": {
+        "max_per_episode": 2,
+        "min_per_episode": 1
+      },
+      "passed": true
+    },
+    {
+      "check": "wide_prefix_superset_of_narrow",
+      "detail": {
+        "narrow": [
+          "intent",
+          "key"
+        ],
+        "wide": [
+          "body",
+          "intent",
+          "key",
+          "novel",
+          "step",
+          "token_required",
+          "work_item"
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "n_checks": 14,
+  "n_failed": 0,
+  "purpose": "prereg.md section 13 mitigation: the goal-conditioned arm is a pure function of (observable state, goal prefix) with no cross-episode memory"
+}

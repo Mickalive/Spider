@@ -1,0 +1,236 @@
+{
+  "definition": "span occurrences where the ratchet recorded decision_path=COMPILED_REPLAY but its emitted action differs from the declared plan action bound at execution time",
+  "per_novelty_rate": [
+    {
+      "all_false_compiles_are_class_iii": true,
+      "by_class": {
+        "iii": 30
+      },
+      "by_role": {
+        "list_resources": 30
+      },
+      "examples": [
+        {
+          "declared": "/resources?view=00000003b58b3c4f",
+          "emitted": "/resources",
+          "episode": 3,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000400bf7fac",
+          "emitted": "/resources",
+          "episode": 4,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=00000005a86d5705",
+          "emitted": "/resources",
+          "episode": 5,
+          "index": 10,
+          "role": "list_resources",
+          "work_item": 1
+        },
+        {
+          "declared": "/resources?view=00000008da313e9d",
+          "emitted": "/resources",
+          "episode": 8,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000933e7b420",
+          "emitted": "/resources",
+          "episode": 9,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        }
+      ],
+      "false_compile_share_of_compiled_replays": {
+        "ci95": [
+          0.029587870776341306,
+          0.05934744779048553
+        ],
+        "k": 30,
+        "n": 714,
+        "point": 0.04201680672268908
+      },
+      "n_compiled_replays": 714,
+      "n_false_compiled_replays": 30,
+      "n_span_occurrences": 1200,
+      "novelty_rate": 0.0
+    },
+    {
+      "all_false_compiles_are_class_iii": true,
+      "by_class": {
+        "iii": 30
+      },
+      "by_role": {
+        "list_resources": 30
+      },
+      "examples": [
+        {
+          "declared": "/resources?view=00000003b58b3c4f",
+          "emitted": "/resources",
+          "episode": 3,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000400bf7fac",
+          "emitted": "/resources",
+          "episode": 4,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=00000005a86d5705",
+          "emitted": "/resources",
+          "episode": 5,
+          "index": 10,
+          "role": "list_resources",
+          "work_item": 1
+        },
+        {
+          "declared": "/resources?view=00000008da313e9d",
+          "emitted": "/resources",
+          "episode": 8,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000933e7b420",
+          "emitted": "/resources",
+          "episode": 9,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        }
+      ],
+      "false_compile_share_of_compiled_replays": {
+        "ci95": [
+          0.03634248303151095,
+          0.07263146864000056
+        ],
+        "k": 30,
+        "n": 582,
+        "point": 0.05154639175257732
+      },
+      "n_compiled_replays": 582,
+      "n_false_compiled_replays": 30,
+      "n_span_occurrences": 1200,
+      "novelty_rate": 0.25
+    },
+    {
+      "all_false_compiles_are_class_iii": true,
+      "by_class": {
+        "iii": 20
+      },
+      "by_role": {
+        "list_resources": 20
+      },
+      "examples": [
+        {
+          "declared": "/resources?view=00000003b58b3c4f",
+          "emitted": "/resources",
+          "episode": 3,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000400bf7fac",
+          "emitted": "/resources",
+          "episode": 4,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=00000008da313e9d",
+          "emitted": "/resources",
+          "episode": 8,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000933e7b420",
+          "emitted": "/resources",
+          "episode": 9,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        },
+        {
+          "declared": "/resources?view=0000000db24732cc",
+          "emitted": "/resources",
+          "episode": 13,
+          "index": 16,
+          "role": "list_resources",
+          "work_item": 2
+        }
+      ],
+      "false_compile_share_of_compiled_replays": {
+        "ci95": [
+          0.03604635052800907,
+          0.08379096633055302
+        ],
+        "k": 20,
+        "n": 362,
+        "point": 0.055248618784530384
+      },
+      "n_compiled_replays": 362,
+      "n_false_compiled_replays": 20,
+      "n_span_occurrences": 1200,
+      "novelty_rate": 0.5
+    },
+    {
+      "all_false_compiles_are_class_iii": true,
+      "by_class": {},
+      "by_role": {},
+      "examples": [],
+      "false_compile_share_of_compiled_replays": {
+        "ci95": [
+          0.0,
+          0.023163440842904465
+        ],
+        "k": 0,
+        "n": 162,
+        "point": 0.0
+      },
+      "n_compiled_replays": 162,
+      "n_false_compiled_replays": 0,
+      "n_span_occurrences": 1200,
+      "novelty_rate": 0.75
+    },
+    {
+      "all_false_compiles_are_class_iii": true,
+      "by_class": {},
+      "by_role": {},
+      "examples": [],
+      "false_compile_share_of_compiled_replays": {
+        "ci95": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ],
+        "k": 0,
+        "n": 48,
+        "point": 0.0
+      },
+      "n_compiled_replays": 48,
+      "n_false_compiled_replays": 0,
+      "n_span_occurrences": 1200,
+      "novelty_rate": 1.0
+    }
+  ],
+  "why_it_matters": "the observable-state cache key does not include the capability handle, so a replayed action can drop the handle from a class-(iii) action. The response status code is still the expected code, so goal-state success stays 1.0 and endpoint metrics cannot see this at all."
+}

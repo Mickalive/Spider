@@ -1,0 +1,286 @@
+{
+  "derived": {
+    "closure_attribution": {
+      "closed_by_both": 48,
+      "closed_by_compilation": 48,
+      "closed_by_conditioned_only": 972,
+      "closed_by_neither": 180
+    },
+    "compilable_given_deterministic": {
+      "ci95": [
+        0.1860661599241369,
+        0.30373340979204166
+      ],
+      "k": 48,
+      "n": 200,
+      "point": 0.24
+    },
+    "compiled_share_of_all_spans": {
+      "ci95": [
+        0.030301435740345037,
+        0.05263428481417108
+      ],
+      "k": 48,
+      "n": 1200,
+      "point": 0.04
+    },
+    "conditioned_coverage": {
+      "all_occurrences": {
+        "ci95": [
+          0.8286816663969149,
+          0.8690846331811707
+        ],
+        "k": 1020,
+        "n": 1200,
+        "point": 0.85
+      },
+      "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+      "deterministic_occurrences": {
+        "ci95": [
+          0.9811546736227335,
+          1.0
+        ],
+        "k": 200,
+        "n": 200,
+        "point": 1.0
+      },
+      "within_residual": {
+        "ci95": [
+          0.821644139528973,
+          0.863570942484159
+        ],
+        "k": 972,
+        "n": 1152,
+        "point": 0.84375
+      }
+    },
+    "cost": {
+      "B-COLD-EXPLORATION": {
+        "amortized_cost_units_per_episode": 72.0,
+        "compile_units": 0,
+        "component_detail": {
+          "execution": 1200,
+          "machinery": 1200,
+          "model": 1200,
+          "resolve_calls": 1200,
+          "resolve_unknown": 1200
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "total_units": 3600
+      },
+      "B-NO-MEMORY-CONDITIONED": {
+        "amortized_cost_units_per_episode": 48.0,
+        "compile_units": 0,
+        "component_detail": {
+          "execution": 1200,
+          "model": 1200
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 1200,
+        "total_units": 2400
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "amortized_cost_units_per_episode": 48.0,
+        "compile_units": 0,
+        "component_detail": {
+          "execution": 1200,
+          "model": 1200
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 1200,
+        "total_units": 2400
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "amortized_cost_units_per_episode": 47.06,
+        "compile_units": 1,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 1,
+          "compiled_replays": 48,
+          "execution": 1200,
+          "model": 1152,
+          "spans_compiled": 1
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 1152,
+        "total_units": 2353
+      },
+      "bootstrap_conditioned_minus_cold": {
+        "ci95": [
+          -24.0,
+          -24.0
+        ],
+        "mean_difference_units": -24.0,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      },
+      "bootstrap_conditioned_minus_reference": {
+        "ci95": [
+          0.84,
+          1.0
+        ],
+        "mean_difference_units": 0.94,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      },
+      "bootstrap_reference_minus_cold": {
+        "ci95": [
+          -25.0,
+          -24.84
+        ],
+        "mean_difference_units": -24.94,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      },
+      "cold_amortized": 72.0,
+      "conditioned_amortized": 48.0,
+      "conditioned_model_calls_only_amortized": 24.0,
+      "reference_amortized": 47.06
+    },
+    "counts": {
+      "i": 881,
+      "ii": 199,
+      "iii": 120
+    },
+    "deterministic_occurrences": 200,
+    "headroom_ii_plus_iii": {
+      "ci95": [
+        0.24161391993340614,
+        0.29154719868220796
+      ],
+      "k": 319,
+      "n": 1200,
+      "point": 0.2658333333333333
+    },
+    "n_span_occurrences": 1200,
+    "narrow_prefix_sensitivity": {
+      "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+      "coverage": {
+        "all_occurrences": {
+          "ci95": [
+            0.5384608416226889,
+            0.594447024963613
+          ],
+          "k": 680,
+          "n": 1200,
+          "point": 0.5666666666666667
+        },
+        "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+        "deterministic_occurrences": {
+          "ci95": [
+            0.9811546736227335,
+            1.0
+          ],
+          "k": 200,
+          "n": 200,
+          "point": 1.0
+        },
+        "within_residual": {
+          "ci95": [
+            0.5197606724787797,
+            0.577138430028128
+          ],
+          "k": 632,
+          "n": 1152,
+          "point": 0.5486111111111112
+        }
+      },
+      "n_pairs": 1200,
+      "narrow_action_differs_from_wide": 400,
+      "narrow_action_differs_where_wide_matches_declared": 0,
+      "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+    },
+    "per_span_witnessed_determinism_fraction": {
+      "ci95": [
+        0.14665129381791034,
+        0.1888093732505796
+      ],
+      "k": 200,
+      "n": 1200,
+      "point": 0.16666666666666666
+    },
+    "raw_operational": {
+      "B-NO-MEMORY-CONDITIONED": {
+        "handle_available_to_arm": false,
+        "mints_observed": 0,
+        "substrate_requests": 1200
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "cache_size": 952,
+        "compiled_complete_at_episode": 2,
+        "conflicts_detected": 1,
+        "mints_observed": 50,
+        "substrate_requests": 1200
+      }
+    },
+    "residual": {
+      "counts_within_residual": {
+        "i": 833,
+        "ii": 199,
+        "iii": 120
+      },
+      "headroom_ii_plus_iii_within_residual": {
+        "ci95": [
+          0.2518438036196424,
+          0.30345852951829966
+        ],
+        "k": 319,
+        "n": 1152,
+        "point": 0.2769097222222222
+      },
+      "n_residual_span_occurrences": 1152,
+      "residual_share_of_all": {
+        "ci95": [
+          0.9473657151858288,
+          0.969698564259655
+        ],
+        "k": 1152,
+        "n": 1200,
+        "point": 0.96
+      }
+    },
+    "share_class_i_merely_novel": {
+      "ci95": [
+        0.708452801317792,
+        0.7583860800665938
+      ],
+      "k": 881,
+      "n": 1200,
+      "point": 0.7341666666666666
+    },
+    "share_class_ii_epistemically_blocked": {
+      "ci95": [
+        0.14586263045987358,
+        0.18793668827628757
+      ],
+      "k": 199,
+      "n": 1200,
+      "point": 0.16583333333333333
+    },
+    "share_class_iii_observation_absent": {
+      "ci95": [
+        0.08428171719545854,
+        0.11827108328672939
+      ],
+      "k": 120,
+      "n": 1200,
+      "point": 0.1
+    }
+  },
+  "novelty_rate": 1.0
+}

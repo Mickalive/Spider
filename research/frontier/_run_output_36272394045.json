@@ -1,0 +1,3507 @@
+{
+  "derived": {
+    "by_novelty_rate": {
+      "0.00": {
+        "closure_attribution": {
+          "closed_by_both": 684,
+          "closed_by_compilation": 714,
+          "closed_by_conditioned_only": 336,
+          "closed_by_neither": 150
+        },
+        "compilable_given_deterministic": {
+          "ci95": [
+            0.6146122669692661,
+            0.6708861740177393
+          ],
+          "k": 714,
+          "n": 1110,
+          "point": 0.6432432432432432
+        },
+        "compiled_share_of_all_spans": {
+          "ci95": [
+            0.5669652255789651,
+            0.6224284843065152
+          ],
+          "k": 714,
+          "n": 1200,
+          "point": 0.595
+        },
+        "conditioned_coverage": {
+          "all_occurrences": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+          "deterministic_occurrences": {
+            "ci95": [
+              0.9013791123252376,
+              0.9335691584858162
+            ],
+            "k": 1020,
+            "n": 1110,
+            "point": 0.918918918918919
+          },
+          "within_residual": {
+            "ci95": [
+              0.6489226713588739,
+              0.7307920233666393
+            ],
+            "k": 336,
+            "n": 486,
+            "point": 0.691358024691358
+          }
+        },
+        "cost": {
+          "B-COLD-EXPLORATION": {
+            "amortized_cost_units_per_episode": 72.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "machinery": 1200,
+              "model": 1200,
+              "resolve_calls": 1200,
+              "resolve_unknown": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 1200,
+            "model_units": 1200,
+            "total_units": 3600
+          },
+          "B-NO-MEMORY-CONDITIONED": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-CONDITIONED-NARROW": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "amortized_cost_units_per_episode": 34.08,
+            "compile_units": 18,
+            "component_detail": {
+              "cache_key_conflicts": 7,
+              "compile": 18,
+              "compiled_replays": 714,
+              "execution": 1200,
+              "model": 486,
+              "spans_compiled": 18
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 486,
+            "total_units": 1704
+          },
+          "bootstrap_conditioned_minus_cold": {
+            "ci95": [
+              -24.0,
+              -24.0
+            ],
+            "mean_difference_units": -24.0,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_conditioned_minus_reference": {
+            "ci95": [
+              12.42,
+              15.0
+            ],
+            "mean_difference_units": 13.92,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_reference_minus_cold": {
+            "ci95": [
+              -39.0,
+              -36.42
+            ],
+            "mean_difference_units": -37.92,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "cold_amortized": 72.0,
+          "conditioned_amortized": 48.0,
+          "conditioned_model_calls_only_amortized": 24.0,
+          "reference_amortized": 34.08
+        },
+        "counts": {
+          "i": 748,
+          "ii": 332,
+          "iii": 120
+        },
+        "deterministic_occurrences": 1110,
+        "headroom_ii_plus_iii": {
+          "ci95": [
+            0.34968566637256415,
+            0.40443478044277703
+          ],
+          "k": 452,
+          "n": 1200,
+          "point": 0.37666666666666665
+        },
+        "n_span_occurrences": 1200,
+        "narrow_prefix_sensitivity": {
+          "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+          "coverage": {
+            "all_occurrences": {
+              "ci95": [
+                0.5384608416226889,
+                0.594447024963613
+              ],
+              "k": 680,
+              "n": 1200,
+              "point": 0.5666666666666667
+            },
+            "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+            "deterministic_occurrences": {
+              "ci95": [
+                0.5836126314155848,
+                0.6408358284798595
+              ],
+              "k": 680,
+              "n": 1110,
+              "point": 0.6126126126126126
+            },
+            "within_residual": {
+              "ci95": [
+                0.22618012345525665,
+                0.30428020027125924
+              ],
+              "k": 128,
+              "n": 486,
+              "point": 0.26337448559670784
+            }
+          },
+          "n_pairs": 1200,
+          "narrow_action_differs_from_wide": 400,
+          "narrow_action_differs_where_wide_matches_declared": 0,
+          "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+        },
+        "per_span_witnessed_determinism_fraction": {
+          "ci95": [
+            0.9087034473008089,
+            0.9385842021868664
+          ],
+          "k": 1110,
+          "n": 1200,
+          "point": 0.925
+        },
+        "raw_operational": {
+          "B-NO-MEMORY-CONDITIONED": {
+            "handle_available_to_arm": false,
+            "mints_observed": 0,
+            "substrate_requests": 1200
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "cache_size": 115,
+            "compiled_complete_at_episode": 2,
+            "conflicts_detected": 7,
+            "mints_observed": 50,
+            "substrate_requests": 1200
+          }
+        },
+        "residual": {
+          "counts_within_residual": {
+            "i": 128,
+            "ii": 268,
+            "iii": 90
+          },
+          "headroom_ii_plus_iii_within_residual": {
+            "ci95": [
+              0.6957197997287409,
+              0.7738198765447434
+            ],
+            "k": 358,
+            "n": 486,
+            "point": 0.7366255144032922
+          },
+          "n_residual_span_occurrences": 486,
+          "residual_share_of_all": {
+            "ci95": [
+              0.37757151569348474,
+              0.43303477442103483
+            ],
+            "k": 486,
+            "n": 1200,
+            "point": 0.405
+          }
+        },
+        "share_class_i_merely_novel": {
+          "ci95": [
+            0.5955652195572229,
+            0.6503143336274358
+          ],
+          "k": 748,
+          "n": 1200,
+          "point": 0.6233333333333333
+        },
+        "share_class_ii_epistemically_blocked": {
+          "ci95": [
+            0.2520989355862645,
+            0.30265971134962366
+          ],
+          "k": 332,
+          "n": 1200,
+          "point": 0.27666666666666667
+        },
+        "share_class_iii_observation_absent": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      },
+      "0.25": {
+        "closure_attribution": {
+          "closed_by_both": 552,
+          "closed_by_compilation": 582,
+          "closed_by_conditioned_only": 468,
+          "closed_by_neither": 150
+        },
+        "compilable_given_deterministic": {
+          "ci95": [
+            0.6148744190632863,
+            0.6772122045625643
+          ],
+          "k": 582,
+          "n": 900,
+          "point": 0.6466666666666666
+        },
+        "compiled_share_of_all_spans": {
+          "ci95": [
+            0.4568160661537217,
+            0.5132796638643602
+          ],
+          "k": 582,
+          "n": 1200,
+          "point": 0.485
+        },
+        "conditioned_coverage": {
+          "all_occurrences": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+          "deterministic_occurrences": {
+            "ci95": [
+              0.9028756089164295,
+              0.9379798227337471
+            ],
+            "k": 830,
+            "n": 900,
+            "point": 0.9222222222222223
+          },
+          "within_residual": {
+            "ci95": [
+              0.721957946109469,
+              0.7894264196146799
+            ],
+            "k": 468,
+            "n": 618,
+            "point": 0.7572815533980582
+          }
+        },
+        "cost": {
+          "B-COLD-EXPLORATION": {
+            "amortized_cost_units_per_episode": 72.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "machinery": 1200,
+              "model": 1200,
+              "resolve_calls": 1200,
+              "resolve_unknown": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 1200,
+            "model_units": 1200,
+            "total_units": 3600
+          },
+          "B-NO-MEMORY-CONDITIONED": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-CONDITIONED-NARROW": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "amortized_cost_units_per_episode": 36.64,
+            "compile_units": 14,
+            "component_detail": {
+              "cache_key_conflicts": 5,
+              "compile": 14,
+              "compiled_replays": 582,
+              "execution": 1200,
+              "model": 618,
+              "spans_compiled": 14
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 618,
+            "total_units": 1832
+          },
+          "bootstrap_conditioned_minus_cold": {
+            "ci95": [
+              -24.0,
+              -24.0
+            ],
+            "mean_difference_units": -24.0,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_conditioned_minus_reference": {
+            "ci95": [
+              10.16,
+              12.22
+            ],
+            "mean_difference_units": 11.36,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_reference_minus_cold": {
+            "ci95": [
+              -36.22,
+              -34.16
+            ],
+            "mean_difference_units": -35.36,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "cold_amortized": 72.0,
+          "conditioned_amortized": 48.0,
+          "conditioned_model_calls_only_amortized": 24.0,
+          "reference_amortized": 36.64
+        },
+        "counts": {
+          "i": 778,
+          "ii": 302,
+          "iii": 120
+        },
+        "deterministic_occurrences": 900,
+        "headroom_ii_plus_iii": {
+          "ci95": [
+            0.325162909690181,
+            0.3791170871552969
+          ],
+          "k": 422,
+          "n": 1200,
+          "point": 0.3516666666666667
+        },
+        "n_span_occurrences": 1200,
+        "narrow_prefix_sensitivity": {
+          "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+          "coverage": {
+            "all_occurrences": {
+              "ci95": [
+                0.5384608416226889,
+                0.594447024963613
+              ],
+              "k": 680,
+              "n": 1200,
+              "point": 0.5666666666666667
+            },
+            "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+            "deterministic_occurrences": {
+              "ci95": [
+                0.6013453223102876,
+                0.6641879718950312
+              ],
+              "k": 570,
+              "n": 900,
+              "point": 0.6333333333333333
+            },
+            "within_residual": {
+              "ci95": [
+                0.3381074391873336,
+                0.4142410126317893
+              ],
+              "k": 232,
+              "n": 618,
+              "point": 0.37540453074433655
+            }
+          },
+          "n_pairs": 1200,
+          "narrow_action_differs_from_wide": 400,
+          "narrow_action_differs_where_wide_matches_declared": 0,
+          "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+        },
+        "per_span_witnessed_determinism_fraction": {
+          "ci95": [
+            0.7247288148980121,
+            0.7736756848006204
+          ],
+          "k": 900,
+          "n": 1200,
+          "point": 0.75
+        },
+        "raw_operational": {
+          "B-NO-MEMORY-CONDITIONED": {
+            "handle_available_to_arm": false,
+            "mints_observed": 0,
+            "substrate_requests": 1200
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "cache_size": 319,
+            "compiled_complete_at_episode": 2,
+            "conflicts_detected": 5,
+            "mints_observed": 50,
+            "substrate_requests": 1200
+          }
+        },
+        "residual": {
+          "counts_within_residual": {
+            "i": 290,
+            "ii": 238,
+            "iii": 90
+          },
+          "headroom_ii_plus_iii_within_residual": {
+            "ci95": [
+              0.49132960699573025,
+              0.5697792165813693
+            ],
+            "k": 328,
+            "n": 618,
+            "point": 0.5307443365695793
+          },
+          "n_residual_span_occurrences": 618,
+          "residual_share_of_all": {
+            "ci95": [
+              0.4867203361356398,
+              0.5431839338462783
+            ],
+            "k": 618,
+            "n": 1200,
+            "point": 0.515
+          }
+        },
+        "share_class_i_merely_novel": {
+          "ci95": [
+            0.620882912844703,
+            0.674837090309819
+          ],
+          "k": 778,
+          "n": 1200,
+          "point": 0.6483333333333333
+        },
+        "share_class_ii_epistemically_blocked": {
+          "ci95": [
+            0.22793174916689724,
+            0.2769864477991277
+          ],
+          "k": 302,
+          "n": 1200,
+          "point": 0.25166666666666665
+        },
+        "share_class_iii_observation_absent": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      },
+      "0.50": {
+        "closure_attribution": {
+          "closed_by_both": 342,
+          "closed_by_compilation": 362,
+          "closed_by_conditioned_only": 678,
+          "closed_by_neither": 160
+        },
+        "compilable_given_deterministic": {
+          "ci95": [
+            0.5103472702709199,
+            0.5860612910649375
+          ],
+          "k": 362,
+          "n": 660,
+          "point": 0.5484848484848485
+        },
+        "compiled_share_of_all_spans": {
+          "ci95": [
+            0.27636445377839575,
+            0.3282346431273558
+          ],
+          "k": 362,
+          "n": 1200,
+          "point": 0.3016666666666667
+        },
+        "conditioned_coverage": {
+          "all_occurrences": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+          "deterministic_occurrences": {
+            "ci95": [
+              0.9015093166003156,
+              0.9420655950884373
+            ],
+            "k": 610,
+            "n": 660,
+            "point": 0.9242424242424242
+          },
+          "within_residual": {
+            "ci95": [
+              0.7810714945968813,
+              0.8342462645517925
+            ],
+            "k": 678,
+            "n": 838,
+            "point": 0.8090692124105012
+          }
+        },
+        "cost": {
+          "B-COLD-EXPLORATION": {
+            "amortized_cost_units_per_episode": 72.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "machinery": 1200,
+              "model": 1200,
+              "resolve_calls": 1200,
+              "resolve_unknown": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 1200,
+            "model_units": 1200,
+            "total_units": 3600
+          },
+          "B-NO-MEMORY-CONDITIONED": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-CONDITIONED-NARROW": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "amortized_cost_units_per_episode": 40.94,
+            "compile_units": 9,
+            "component_detail": {
+              "cache_key_conflicts": 4,
+              "compile": 9,
+              "compiled_replays": 362,
+              "execution": 1200,
+              "model": 838,
+              "spans_compiled": 9
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 838,
+            "total_units": 2047
+          },
+          "bootstrap_conditioned_minus_cold": {
+            "ci95": [
+              -24.0,
+              -24.0
+            ],
+            "mean_difference_units": -24.0,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_conditioned_minus_reference": {
+            "ci95": [
+              6.26,
+              7.7
+            ],
+            "mean_difference_units": 7.06,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_reference_minus_cold": {
+            "ci95": [
+              -31.7,
+              -30.26
+            ],
+            "mean_difference_units": -31.06,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "cold_amortized": 72.0,
+          "conditioned_amortized": 48.0,
+          "conditioned_model_calls_only_amortized": 24.0,
+          "reference_amortized": 40.94
+        },
+        "counts": {
+          "i": 814,
+          "ii": 266,
+          "iii": 120
+        },
+        "deterministic_occurrences": 660,
+        "headroom_ii_plus_iii": {
+          "ci95": [
+            0.2958427123394164,
+            0.3486287445422256
+          ],
+          "k": 386,
+          "n": 1200,
+          "point": 0.32166666666666666
+        },
+        "n_span_occurrences": 1200,
+        "narrow_prefix_sensitivity": {
+          "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+          "coverage": {
+            "all_occurrences": {
+              "ci95": [
+                0.5384608416226889,
+                0.594447024963613
+              ],
+              "k": 680,
+              "n": 1200,
+              "point": 0.5666666666666667
+            },
+            "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+            "deterministic_occurrences": {
+              "ci95": [
+                0.6298293002927249,
+                0.7015751292992851
+              ],
+              "k": 440,
+              "n": 660,
+              "point": 0.6666666666666666
+            },
+            "within_residual": {
+              "ci95": [
+                0.4484278800724198,
+                0.5159359562703211
+              ],
+              "k": 404,
+              "n": 838,
+              "point": 0.4821002386634845
+            }
+          },
+          "n_pairs": 1200,
+          "narrow_action_differs_from_wide": 400,
+          "narrow_action_differs_where_wide_matches_declared": 0,
+          "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+        },
+        "per_span_witnessed_determinism_fraction": {
+          "ci95": [
+            0.5217371030982003,
+            0.5779437968415262
+          ],
+          "k": 660,
+          "n": 1200,
+          "point": 0.55
+        },
+        "raw_operational": {
+          "B-NO-MEMORY-CONDITIONED": {
+            "handle_available_to_arm": false,
+            "mints_observed": 0,
+            "substrate_requests": 1200
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "cache_size": 553,
+            "compiled_complete_at_episode": 2,
+            "conflicts_detected": 4,
+            "mints_observed": 50,
+            "substrate_requests": 1200
+          }
+        },
+        "residual": {
+          "counts_within_residual": {
+            "i": 500,
+            "ii": 238,
+            "iii": 100
+          },
+          "headroom_ii_plus_iii_within_residual": {
+            "ci95": [
+              0.37064096696428567,
+              0.43692374928651506
+            ],
+            "k": 338,
+            "n": 838,
+            "point": 0.4033412887828162
+          },
+          "n_residual_span_occurrences": 838,
+          "residual_share_of_all": {
+            "ci95": [
+              0.6717653568726442,
+              0.7236355462216043
+            ],
+            "k": 838,
+            "n": 1200,
+            "point": 0.6983333333333334
+          }
+        },
+        "share_class_i_merely_novel": {
+          "ci95": [
+            0.6513712554577744,
+            0.7041572876605835
+          ],
+          "k": 814,
+          "n": 1200,
+          "point": 0.6783333333333333
+        },
+        "share_class_ii_epistemically_blocked": {
+          "ci95": [
+            0.1990743272668342,
+            0.24603532973535494
+          ],
+          "k": 266,
+          "n": 1200,
+          "point": 0.22166666666666668
+        },
+        "share_class_iii_observation_absent": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      },
+      "0.75": {
+        "closure_attribution": {
+          "closed_by_both": 162,
+          "closed_by_compilation": 162,
+          "closed_by_conditioned_only": 858,
+          "closed_by_neither": 180
+        },
+        "compilable_given_deterministic": {
+          "ci95": [
+            0.33222521015710416,
+            0.4234459046133964
+          ],
+          "k": 162,
+          "n": 430,
+          "point": 0.3767441860465116
+        },
+        "compiled_share_of_all_spans": {
+          "ci95": [
+            0.11682600644903668,
+            0.15550342399095984
+          ],
+          "k": 162,
+          "n": 1200,
+          "point": 0.135
+        },
+        "conditioned_coverage": {
+          "all_occurrences": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+          "deterministic_occurrences": {
+            "ci95": [
+              0.957725883854535,
+              0.9873198042973024
+            ],
+            "k": 420,
+            "n": 430,
+            "point": 0.9767441860465116
+          },
+          "within_residual": {
+            "ci95": [
+              0.8023643684276706,
+              0.848406431927556
+            ],
+            "k": 858,
+            "n": 1038,
+            "point": 0.8265895953757225
+          }
+        },
+        "cost": {
+          "B-COLD-EXPLORATION": {
+            "amortized_cost_units_per_episode": 72.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "machinery": 1200,
+              "model": 1200,
+              "resolve_calls": 1200,
+              "resolve_unknown": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 1200,
+            "model_units": 1200,
+            "total_units": 3600
+          },
+          "B-NO-MEMORY-CONDITIONED": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-CONDITIONED-NARROW": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "amortized_cost_units_per_episode": 44.84,
+            "compile_units": 4,
+            "component_detail": {
+              "cache_key_conflicts": 3,
+              "compile": 4,
+              "compiled_replays": 162,
+              "execution": 1200,
+              "model": 1038,
+              "spans_compiled": 4
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1038,
+            "total_units": 2242
+          },
+          "bootstrap_conditioned_minus_cold": {
+            "ci95": [
+              -24.0,
+              -24.0
+            ],
+            "mean_difference_units": -24.0,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_conditioned_minus_reference": {
+            "ci95": [
+              2.68,
+              3.56
+            ],
+            "mean_difference_units": 3.16,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_reference_minus_cold": {
+            "ci95": [
+              -27.56,
+              -26.68
+            ],
+            "mean_difference_units": -27.16,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "cold_amortized": 72.0,
+          "conditioned_amortized": 48.0,
+          "conditioned_model_calls_only_amortized": 24.0,
+          "reference_amortized": 44.84
+        },
+        "counts": {
+          "i": 842,
+          "ii": 238,
+          "iii": 120
+        },
+        "deterministic_occurrences": 430,
+        "headroom_ii_plus_iii": {
+          "ci95": [
+            0.27312364995652255,
+            0.32483005361991385
+          ],
+          "k": 358,
+          "n": 1200,
+          "point": 0.29833333333333334
+        },
+        "n_span_occurrences": 1200,
+        "narrow_prefix_sensitivity": {
+          "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+          "coverage": {
+            "all_occurrences": {
+              "ci95": [
+                0.5384608416226889,
+                0.594447024963613
+              ],
+              "k": 680,
+              "n": 1200,
+              "point": 0.5666666666666667
+            },
+            "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+            "deterministic_occurrences": {
+              "ci95": [
+                0.7252502135859951,
+                0.804897367572353
+              ],
+              "k": 330,
+              "n": 430,
+              "point": 0.7674418604651163
+            },
+            "within_residual": {
+              "ci95": [
+                0.5052299230829282,
+                0.5657981583717719
+              ],
+              "k": 556,
+              "n": 1038,
+              "point": 0.535645472061657
+            }
+          },
+          "n_pairs": 1200,
+          "narrow_action_differs_from_wide": 400,
+          "narrow_action_differs_where_wide_matches_declared": 0,
+          "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+        },
+        "per_span_witnessed_determinism_fraction": {
+          "ci95": [
+            0.3316945649248993,
+            0.3858762185792089
+          ],
+          "k": 430,
+          "n": 1200,
+          "point": 0.35833333333333334
+        },
+        "raw_operational": {
+          "B-NO-MEMORY-CONDITIONED": {
+            "handle_available_to_arm": false,
+            "mints_observed": 0,
+            "substrate_requests": 1200
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "cache_size": 777,
+            "compiled_complete_at_episode": 2,
+            "conflicts_detected": 3,
+            "mints_observed": 50,
+            "substrate_requests": 1200
+          }
+        },
+        "residual": {
+          "counts_within_residual": {
+            "i": 680,
+            "ii": 238,
+            "iii": 120
+          },
+          "headroom_ii_plus_iii_within_residual": {
+            "ci95": [
+              0.3165969717761143,
+              0.3743348900020818
+            ],
+            "k": 358,
+            "n": 1038,
+            "point": 0.3448940269749518
+          },
+          "n_residual_span_occurrences": 1038,
+          "residual_share_of_all": {
+            "ci95": [
+              0.8444965760090402,
+              0.8831739935509633
+            ],
+            "k": 1038,
+            "n": 1200,
+            "point": 0.865
+          }
+        },
+        "share_class_i_merely_novel": {
+          "ci95": [
+            0.6751699463800861,
+            0.7268763500434775
+          ],
+          "k": 842,
+          "n": 1200,
+          "point": 0.7016666666666667
+        },
+        "share_class_ii_epistemically_blocked": {
+          "ci95": [
+            0.17675073358940147,
+            0.22184117010758192
+          ],
+          "k": 238,
+          "n": 1200,
+          "point": 0.19833333333333333
+        },
+        "share_class_iii_observation_absent": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      },
+      "1.00": {
+        "closure_attribution": {
+          "closed_by_both": 48,
+          "closed_by_compilation": 48,
+          "closed_by_conditioned_only": 972,
+          "closed_by_neither": 180
+        },
+        "compilable_given_deterministic": {
+          "ci95": [
+            0.1860661599241369,
+            0.30373340979204166
+          ],
+          "k": 48,
+          "n": 200,
+          "point": 0.24
+        },
+        "compiled_share_of_all_spans": {
+          "ci95": [
+            0.030301435740345037,
+            0.05263428481417108
+          ],
+          "k": 48,
+          "n": 1200,
+          "point": 0.04
+        },
+        "conditioned_coverage": {
+          "all_occurrences": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+          "deterministic_occurrences": {
+            "ci95": [
+              0.9811546736227335,
+              1.0
+            ],
+            "k": 200,
+            "n": 200,
+            "point": 1.0
+          },
+          "within_residual": {
+            "ci95": [
+              0.821644139528973,
+              0.863570942484159
+            ],
+            "k": 972,
+            "n": 1152,
+            "point": 0.84375
+          }
+        },
+        "cost": {
+          "B-COLD-EXPLORATION": {
+            "amortized_cost_units_per_episode": 72.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "machinery": 1200,
+              "model": 1200,
+              "resolve_calls": 1200,
+              "resolve_unknown": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 1200,
+            "model_units": 1200,
+            "total_units": 3600
+          },
+          "B-NO-MEMORY-CONDITIONED": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-CONDITIONED-NARROW": {
+            "amortized_cost_units_per_episode": 48.0,
+            "compile_units": 0,
+            "component_detail": {
+              "execution": 1200,
+              "model": 1200
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1200,
+            "total_units": 2400
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "amortized_cost_units_per_episode": 47.06,
+            "compile_units": 1,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 1,
+              "compiled_replays": 48,
+              "execution": 1200,
+              "model": 1152,
+              "spans_compiled": 1
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1152,
+            "total_units": 2353
+          },
+          "bootstrap_conditioned_minus_cold": {
+            "ci95": [
+              -24.0,
+              -24.0
+            ],
+            "mean_difference_units": -24.0,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_conditioned_minus_reference": {
+            "ci95": [
+              0.84,
+              1.0
+            ],
+            "mean_difference_units": 0.94,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "bootstrap_reference_minus_cold": {
+            "ci95": [
+              -25.0,
+              -24.84
+            ],
+            "mean_difference_units": -24.94,
+            "n_episodes_paired": 50,
+            "p_two_sided_bootstrap": 0.0,
+            "resamples": 5000,
+            "seed": 36272394045
+          },
+          "cold_amortized": 72.0,
+          "conditioned_amortized": 48.0,
+          "conditioned_model_calls_only_amortized": 24.0,
+          "reference_amortized": 47.06
+        },
+        "counts": {
+          "i": 881,
+          "ii": 199,
+          "iii": 120
+        },
+        "deterministic_occurrences": 200,
+        "headroom_ii_plus_iii": {
+          "ci95": [
+            0.24161391993340614,
+            0.29154719868220796
+          ],
+          "k": 319,
+          "n": 1200,
+          "point": 0.2658333333333333
+        },
+        "n_span_occurrences": 1200,
+        "narrow_prefix_sensitivity": {
+          "arm": "B-NO-MEMORY-CONDITIONED-NARROW",
+          "coverage": {
+            "all_occurrences": {
+              "ci95": [
+                0.5384608416226889,
+                0.594447024963613
+              ],
+              "k": 680,
+              "n": 1200,
+              "point": 0.5666666666666667
+            },
+            "definition": "fraction of REFERENCE-trace span occurrences whose correct action (method, path, body) the goal-conditioned arm reproduces exactly, measured on the identical task instances",
+            "deterministic_occurrences": {
+              "ci95": [
+                0.9811546736227335,
+                1.0
+              ],
+              "k": 200,
+              "n": 200,
+              "point": 1.0
+            },
+            "within_residual": {
+              "ci95": [
+                0.5197606724787797,
+                0.577138430028128
+              ],
+              "k": 632,
+              "n": 1152,
+              "point": 0.5486111111111112
+            }
+          },
+          "n_pairs": 1200,
+          "narrow_action_differs_from_wide": 400,
+          "narrow_action_differs_where_wide_matches_declared": 0,
+          "note": "the narrow prefix omits the request body and the token_required flag, so the arm must reconstruct the action from role+key alone; differences are attributable to the prefix, not to the arm, since the arm code is identical and only goal_width differs"
+        },
+        "per_span_witnessed_determinism_fraction": {
+          "ci95": [
+            0.14665129381791034,
+            0.1888093732505796
+          ],
+          "k": 200,
+          "n": 1200,
+          "point": 0.16666666666666666
+        },
+        "raw_operational": {
+          "B-NO-MEMORY-CONDITIONED": {
+            "handle_available_to_arm": false,
+            "mints_observed": 0,
+            "substrate_requests": 1200
+          },
+          "B-NO-MEMORY-DETERMINISTIC": {
+            "cache_size": 952,
+            "compiled_complete_at_episode": 2,
+            "conflicts_detected": 1,
+            "mints_observed": 50,
+            "substrate_requests": 1200
+          }
+        },
+        "residual": {
+          "counts_within_residual": {
+            "i": 833,
+            "ii": 199,
+            "iii": 120
+          },
+          "headroom_ii_plus_iii_within_residual": {
+            "ci95": [
+              0.2518438036196424,
+              0.30345852951829966
+            ],
+            "k": 319,
+            "n": 1152,
+            "point": 0.2769097222222222
+          },
+          "n_residual_span_occurrences": 1152,
+          "residual_share_of_all": {
+            "ci95": [
+              0.9473657151858288,
+              0.969698564259655
+            ],
+            "k": 1152,
+            "n": 1200,
+            "point": 0.96
+          }
+        },
+        "share_class_i_merely_novel": {
+          "ci95": [
+            0.708452801317792,
+            0.7583860800665938
+          ],
+          "k": 881,
+          "n": 1200,
+          "point": 0.7341666666666666
+        },
+        "share_class_ii_epistemically_blocked": {
+          "ci95": [
+            0.14586263045987358,
+            0.18793668827628757
+          ],
+          "k": 199,
+          "n": 1200,
+          "point": 0.16583333333333333
+        },
+        "share_class_iii_observation_absent": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      }
+    },
+    "decision": {
+      "clause_1_triggered": false,
+      "clause_2_triggered_primary_cost_basis": false,
+      "clause_2_triggered_sensitivity_cost_basis": true,
+      "outcome_mapping_ambiguity": "spec.json decision_rule.outcome_mapping maps CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2 to the label 'FALSIFIES_INHERITANCE_NICHE' with the parenthetical '(share ii = 0 -> inheritance has niche)', while prereg.md section 3 prose for the same clause reads 'the ratchet's residual is irreducibly binding and inherited parameterization has a real economic niche'. The label and the prereg prose assert OPPOSITE consequences for the same condition. The mapping is reported but not silently resolved; the DIRECTOR owns it.",
+      "outcome_mapping_applied": null
+    },
+    "declared_instrument_correction": {
+      "now": "the declared plan action bound at execution time (MaterializedPlan.materialized), identical for all arms",
+      "prereg_unaffected": [
+        "falsifier_clause_1 threshold (CI95 upper < 0.01)",
+        "falsifier_clause_2 thresholds (0.6857 / 0.40 / 38.6)",
+        "class (i)/(ii)/(iii) decision procedure (prereg.md 8)",
+        "PC / NC control criteria (prereg.md 10.1, 10.2)",
+        "novelty grid, episode counts, arm set, ledger cost model"
+      ],
+      "was": "the reference arm's own emitted (method, path, body)",
+      "what": "source of truth for the per-span correct action",
+      "why": "circular scoring: the reference arm is the system under characterisation. It emits a non-plan action on class-(iii) spans, so its emitted action cannot also define correctness, and the arm's own oracle made span_level_correct_action_fraction tautologically 1.0 for every arm including the treatment."
+    },
+    "falsifier_clause_1": {
+      "definition": "share_class_ii_epistemically_blocked CI95 upper bound < 0.01 at ALL novelty rates (spec.json decision_rule.falsifier_clause_1)",
+      "per_rate_ci95_upper": {
+        "0.00": 0.30265971134962366,
+        "0.25": 0.2769864477991277,
+        "0.50": 0.24603532973535494,
+        "0.75": 0.22184117010758192,
+        "1.00": 0.18793668827628757
+      },
+      "threshold": 0.01,
+      "triggered": false
+    },
+    "falsifier_clause_2": {
+      "declared_sensitivity_cost_basis": "conditioned_model_calls_only_amortized (prereg.md 7.2 literal wording: 1 unit per oracle call, 0 per execution)",
+      "primary": {
+        "cost_basis": "conditioned_amortized",
+        "definition": "gamma_det >= 0.6857 AND gamma_all >= 0.40 AND conditioned_amortized_cost <= 38.6 at ANY novelty rate (spec.json decision_rule.falsifier_clause_2)",
+        "per_novelty_rate": {
+          "0.00": {
+            "clause_2_met_at_this_rate": false,
+            "cost_le_threshold": false,
+            "cost_units_per_episode": 48.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.918918918918919,
+            "gamma_det_ge_threshold": true
+          },
+          "0.25": {
+            "clause_2_met_at_this_rate": false,
+            "cost_le_threshold": false,
+            "cost_units_per_episode": 48.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9222222222222223,
+            "gamma_det_ge_threshold": true
+          },
+          "0.50": {
+            "clause_2_met_at_this_rate": false,
+            "cost_le_threshold": false,
+            "cost_units_per_episode": 48.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9242424242424242,
+            "gamma_det_ge_threshold": true
+          },
+          "0.75": {
+            "clause_2_met_at_this_rate": false,
+            "cost_le_threshold": false,
+            "cost_units_per_episode": 48.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9767441860465116,
+            "gamma_det_ge_threshold": true
+          },
+          "1.00": {
+            "clause_2_met_at_this_rate": false,
+            "cost_le_threshold": false,
+            "cost_units_per_episode": 48.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 1.0,
+            "gamma_det_ge_threshold": true
+          }
+        },
+        "triggered": false
+      },
+      "primary_cost_basis": "conditioned_amortized (parent-identical ledger: 1 execution + 1 model unit per span, no compile, no machinery)",
+      "sensitivity": {
+        "cost_basis": "conditioned_model_calls_only_amortized",
+        "definition": "gamma_det >= 0.6857 AND gamma_all >= 0.40 AND conditioned_amortized_cost <= 38.6 at ANY novelty rate (spec.json decision_rule.falsifier_clause_2)",
+        "per_novelty_rate": {
+          "0.00": {
+            "clause_2_met_at_this_rate": true,
+            "cost_le_threshold": true,
+            "cost_units_per_episode": 24.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.918918918918919,
+            "gamma_det_ge_threshold": true
+          },
+          "0.25": {
+            "clause_2_met_at_this_rate": true,
+            "cost_le_threshold": true,
+            "cost_units_per_episode": 24.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9222222222222223,
+            "gamma_det_ge_threshold": true
+          },
+          "0.50": {
+            "clause_2_met_at_this_rate": true,
+            "cost_le_threshold": true,
+            "cost_units_per_episode": 24.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9242424242424242,
+            "gamma_det_ge_threshold": true
+          },
+          "0.75": {
+            "clause_2_met_at_this_rate": true,
+            "cost_le_threshold": true,
+            "cost_units_per_episode": 24.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 0.9767441860465116,
+            "gamma_det_ge_threshold": true
+          },
+          "1.00": {
+            "clause_2_met_at_this_rate": true,
+            "cost_le_threshold": true,
+            "cost_units_per_episode": 24.0,
+            "gamma_all": 0.85,
+            "gamma_all_ge_threshold": true,
+            "gamma_det": 1.0,
+            "gamma_det_ge_threshold": true
+          }
+        },
+        "triggered": true
+      }
+    },
+    "pooled": {
+      "compilable_given_deterministic": {
+        "ci95": [
+          0.5490837071129495,
+          0.5828838843814772
+        ],
+        "k": 1868,
+        "n": 3300,
+        "point": 0.566060606060606
+      },
+      "compiled_share_of_all_spans": {
+        "ci95": [
+          0.29974089358582984,
+          0.32316720358356027
+        ],
+        "k": 1868,
+        "n": 6000,
+        "point": 0.31133333333333335
+      },
+      "counts": {
+        "i": 4063,
+        "ii": 1337,
+        "iii": 600
+      },
+      "deterministic_occurrences": 3300,
+      "headroom_ii_plus_iii": {
+        "ci95": [
+          0.311119260072598,
+          0.33477412092657316
+        ],
+        "k": 1937,
+        "n": 6000,
+        "point": 0.32283333333333336
+      },
+      "n_span_occurrences": 6000,
+      "per_span_witnessed_determinism_fraction": {
+        "ci95": [
+          0.5373838988341311,
+          0.5625521178170907
+        ],
+        "k": 3300,
+        "n": 6000,
+        "point": 0.55
+      },
+      "residual": {
+        "counts_within_residual": {
+          "i": 2431,
+          "ii": 1181,
+          "iii": 520
+        },
+        "headroom_ii_plus_iii_within_residual": {
+          "ci95": [
+            0.3967482848634983,
+            0.426745916433049
+          ],
+          "k": 1701,
+          "n": 4132,
+          "point": 0.4116650532429816
+        },
+        "n_residual_span_occurrences": 4132,
+        "residual_share_of_all": {
+          "ci95": [
+            0.6768327964164397,
+            0.70025910641417
+          ],
+          "k": 4132,
+          "n": 6000,
+          "point": 0.6886666666666666
+        }
+      },
+      "share_class_i_merely_novel": {
+        "ci95": [
+          0.6652258790734269,
+          0.688880739927402
+        ],
+        "k": 4063,
+        "n": 6000,
+        "point": 0.6771666666666667
+      },
+      "share_class_ii_epistemically_blocked": {
+        "ci95": [
+          0.2124827613207978,
+          0.2335385863759299
+        ],
+        "k": 1337,
+        "n": 6000,
+        "point": 0.22283333333333333
+      },
+      "share_class_iii_observation_absent": {
+        "ci95": [
+          0.09266313971931678,
+          0.1078487270709097
+        ],
+        "k": 600,
+        "n": 6000,
+        "point": 0.1
+      }
+    },
+    "reference_false_compile": {
+      "definition": "span occurrences where the ratchet recorded decision_path=COMPILED_REPLAY but its emitted action differs from the declared plan action bound at execution time",
+      "per_novelty_rate": [
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 30
+          },
+          "by_role": {
+            "list_resources": 30
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=00000005a86d5705",
+              "emitted": "/resources",
+              "episode": 5,
+              "index": 10,
+              "role": "list_resources",
+              "work_item": 1
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            }
+          ],
+          "false_compile_share_of_compiled_replays": {
+            "ci95": [
+              0.029587870776341306,
+              0.05934744779048553
+            ],
+            "k": 30,
+            "n": 714,
+            "point": 0.04201680672268908
+          },
+          "n_compiled_replays": 714,
+          "n_false_compiled_replays": 30,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.0
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 30
+          },
+          "by_role": {
+            "list_resources": 30
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=00000005a86d5705",
+              "emitted": "/resources",
+              "episode": 5,
+              "index": 10,
+              "role": "list_resources",
+              "work_item": 1
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            }
+          ],
+          "false_compile_share_of_compiled_replays": {
+            "ci95": [
+              0.03634248303151095,
+              0.07263146864000056
+            ],
+            "k": 30,
+            "n": 582,
+            "point": 0.05154639175257732
+          },
+          "n_compiled_replays": 582,
+          "n_false_compiled_replays": 30,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.25
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 20
+          },
+          "by_role": {
+            "list_resources": 20
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            },
+            {
+              "declared": "/resources?view=0000000db24732cc",
+              "emitted": "/resources",
+              "episode": 13,
+              "index": 16,
+              "role": "list_resources",
+              "work_item": 2
+            }
+          ],
+          "false_compile_share_of_compiled_replays": {
+            "ci95": [
+              0.03604635052800907,
+              0.08379096633055302
+            ],
+            "k": 20,
+            "n": 362,
+            "point": 0.055248618784530384
+          },
+          "n_compiled_replays": 362,
+          "n_false_compiled_replays": 20,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.5
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {},
+          "by_role": {},
+          "examples": [],
+          "false_compile_share_of_compiled_replays": {
+            "ci95": [
+              0.0,
+              0.023163440842904465
+            ],
+            "k": 0,
+            "n": 162,
+            "point": 0.0
+          },
+          "n_compiled_replays": 162,
+          "n_false_compiled_replays": 0,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.75
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {},
+          "by_role": {},
+          "examples": [],
+          "false_compile_share_of_compiled_replays": {
+            "ci95": [
+              6.938893903907228e-18,
+              0.07410012966611748
+            ],
+            "k": 0,
+            "n": 48,
+            "point": 0.0
+          },
+          "n_compiled_replays": 48,
+          "n_false_compiled_replays": 0,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 1.0
+        }
+      ],
+      "why_it_matters": "the observable-state cache key does not include the capability handle, so a replayed action can drop the handle from a class-(iii) action. The response status code is still the expected code, so goal-state success stays 1.0 and endpoint metrics cannot see this at all."
+    }
+  },
+  "manifest": {
+    "artifact_hash_list_excludes": [
+      "run_manifest.json (this file; it cannot contain its own hash)",
+      "substrate_determinism_check.json (leftover from the prior failed stage, see below)"
+    ],
+    "artifacts": [
+      {
+        "bytes": 4432473,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+        "sha256": "06beda98295a7641ce9221c7541b2c068ee9c68b14b3d7d88095e61f158b8ba9"
+      },
+      {
+        "bytes": 874288,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_NC-UNIQUE-STATES.jsonl",
+        "sha256": "031c39d2a156bc8207e90359cc463f9a0e893a1ce0c037439ed62d2f063c551f"
+      },
+      {
+        "bytes": 873678,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+        "sha256": "ea0af4db6848d96f2a64ba2f9dcc068cca6353128eff495159518819b533822c"
+      },
+      {
+        "bytes": 3971,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/conditioned_arm_statelessness_test.json",
+        "sha256": "71353657c369b6b70cdae9c5252b942d538efc66ff49711c982474cd47aec3cf"
+      },
+      {
+        "bytes": 23874,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/correctness_invariance.json",
+        "sha256": "9a5d1df7c80160a7da0b54df04a7d317d7bcde5f3b4790d7b9f6cbb90d55cbff"
+      },
+      {
+        "bytes": 68165,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-COLD-EXPLORATION.jsonl",
+        "sha256": "4980ee5566165380fc3cc856e743b6364d0fd0b9577b21739b0a17a2b744b92d"
+      },
+      {
+        "bytes": 63210,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+        "sha256": "fb7e7109858e02719e60f2e6a03a673ca95adec57ab4ae13b15d528a2f76fb45"
+      },
+      {
+        "bytes": 61460,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED.jsonl",
+        "sha256": "38de836b1e4cfed2c1a2171df1183d1d1f906a38f7d2aa2d938a001bee40cf02"
+      },
+      {
+        "bytes": 70799,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-DETERMINISTIC.jsonl",
+        "sha256": "fc66cb261b07b46f5ecd65de9894eab71e1d3d2228667a7b08c95c78b16c1b36"
+      },
+      {
+        "bytes": 11352,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES-CONDITIONED.jsonl",
+        "sha256": "bc50dfb37b23dea0e1e006cb33bd9b575a854b6c83d9d404d22ba93d06cb4b77"
+      },
+      {
+        "bytes": 12412,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES.jsonl",
+        "sha256": "d302e968d6b72e056f00f711a1e7a85eadf5d07fa2f2e2ee71cc934c5c068b30"
+      },
+      {
+        "bytes": 11802,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+        "sha256": "3ff7876877b0083c8c51a77fa8bc54b5cefccf6c6a4e8afadebdd7b0a7ce8bf2"
+      },
+      {
+        "bytes": 12966,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION.jsonl",
+        "sha256": "d3fda5a8e14d81452f2ff719caeb436d4ea1282c328eb607631a2b1995dfa132"
+      },
+      {
+        "bytes": 72082,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+        "sha256": "17d383cfdfbd6193478d8fea4ab80c9c16f4ede554a99278472be22d13c861da"
+      },
+      {
+        "bytes": 2655,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/nc_verification.json",
+        "sha256": "b5c37b5cf3d6e3ab1a99b8c7d3b429cd31aa62daf0a8726dd908bf39222057f7"
+      },
+      {
+        "bytes": 1597,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/pc_verification.json",
+        "sha256": "f8f346d9f8761021b84fe4753e80c049fd617c3931f78c00552e07898da89d57"
+      },
+      {
+        "bytes": 6381,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/reference_false_compile.json",
+        "sha256": "67f0b94020e926333dd88bcc2709b13dfbe53c53c69f0315c08624b6bfcf37b7"
+      },
+      {
+        "bytes": 8626768,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-COLD-EXPLORATION.jsonl",
+        "sha256": "a0ac3c90a7eb95a4deaf7d8f2adfcf76b9f334b4869b37fd8bc3d31afa9cb754"
+      },
+      {
+        "bytes": 5986920,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+        "sha256": "1e86730ba733ba6029d1b74b99dece243787f1d14f29c4b905a37c6587c8e8ac"
+      },
+      {
+        "bytes": 7008912,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED.jsonl",
+        "sha256": "278d9a2058bd301f40b28727a2552e66f795298965336fa7361219525d2d5d5b"
+      },
+      {
+        "bytes": 8469486,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+        "sha256": "6b8e9c6d3910f2522a0ebbb8ac13005c27d663ff087e1dc62fb39468687259af"
+      },
+      {
+        "bytes": 1697601,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_NC-UNIQUE-STATES.jsonl",
+        "sha256": "059599addd2e20cfd70e60da9b489180fdfbd52ef93e6445b236a02654d12a94"
+      },
+      {
+        "bytes": 1418307,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+        "sha256": "8e000cb8b6c282f0b730495e2dd83f7d9ae7e9aaa315f07d3d3d6d64d20d33ca"
+      },
+      {
+        "bytes": 1687051,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION.jsonl",
+        "sha256": "643261f45b9157fea8b02ee80e462525760135d26671018162ffc49a7affcd51"
+      },
+      {
+        "bytes": 1694251,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+        "sha256": "f8f565ac911b33a4122e6f6b340c6bf49b3110d9ebd9dbdb330f3d0a16165e54"
+      },
+      {
+        "bytes": 1900,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_idempotency.json",
+        "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c"
+      },
+      {
+        "bytes": 7539,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.00.json",
+        "sha256": "44f9f1ffef026dc9d6360c0008176a86ad6faa3e0936e5e7c7f6474ef31c82e7"
+      },
+      {
+        "bytes": 7527,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.25.json",
+        "sha256": "fa1090439769e3ff8c1b82b6740208e342b5106d19a075505915597e5e60914b"
+      },
+      {
+        "bytes": 7551,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.50.json",
+        "sha256": "286f8bd51efce74f58581ffbf7857939ea47d56e504e31b07ad13ee8689fce2c"
+      },
+      {
+        "bytes": 7549,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.75.json",
+        "sha256": "cfbabadebbdeea77520137a94f86ba627c1b1409088ab1f4a71654eff642c402"
+      },
+      {
+        "bytes": 7455,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_1.00.json",
+        "sha256": "f6daac6d93dea107381e86008522186e0cec7c3387f4bc92439083a59c5ebef0"
+      },
+      {
+        "bytes": 2692,
+        "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/task_generator_config.json",
+        "sha256": "948885a10d1a954f954ce5205cb88aae7c8cabbc9060c606ec49cd03d0e174a6"
+      }
+    ],
+    "bootstrap": {
+      "resamples": 5000,
+      "seed": 36272394045,
+      "unit": "episode"
+    },
+    "episode_ledger": {
+      "B-COLD-EXPLORATION": 250,
+      "B-NO-MEMORY-CONDITIONED": 250,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 250,
+      "B-NO-MEMORY-DETERMINISTIC": 250,
+      "NC-UNIQUE-STATES": 50,
+      "PC-PLANTED-DISAMBIGUATION": 50,
+      "REPL-REFERENCE-PARENT-IDENTICAL": 250
+    },
+    "experiment_id": "EXP-FRONTIER-36272394045",
+    "git_head": "a9a0ce105a7a5f07103d99eff51339636695100d",
+    "lane": "frontier",
+    "mint_salt": "014630eeab62b06a",
+    "mint_salt_note": "MINT_SALT is the frozen salt for the opt-in capability mint; token = <episode_counter:08x><sha256(MINT_SALT|counter)[:8]>",
+    "pre_existing_artifact_not_produced_by_this_run": {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_determinism_check.json",
+      "why": "left behind by the prior EXECUTE attempt recorded in failure.json (exit 66) and model_execute.json (exit 124); NOT used as evidence by this run. This run's own idempotency evidence is substrate_idempotency.json."
+    },
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "total_substrate_requests": 35600,
+    "wall_clock_seconds": 22.9
+  },
+  "raw": {
+    "conditioned_arm_statelessness_test": {
+      "all_passed": true,
+      "checks": [
+        {
+          "check": "conditioned_action_signature_is_exactly_obs_and_goal",
+          "detail": {
+            "parameters": [
+              "observable_state_sig",
+              "goal_prefix"
+            ]
+          },
+          "passed": true
+        },
+        {
+          "check": "conditioned_action_source_has_no_arm_state",
+          "detail": {
+            "code": "def conditioned_action(observable_state_sig: str, goal_prefix: str) -> dict[str, Any]:\n    \"\"\"\"\"\"\n    goal = parse_goal_prefix(goal_prefix)\n    role = goal['intent']\n    method = ROLE_METHOD[role]\n    key = goal.get('key', '-')\n    body_text = goal.get('body', '-')\n    token_required = goal.get('token_required', '0') == '1'\n    if role == 'entry_point':\n        path, body = ('/', None)\n    elif role in ('read_resource', 'update_resource', 'delete_resource'):\n        path, body = (f'/resources/{key}', None if body_text == '-' else json.loads(body_text))\n    elif role == 'create_resource':\n        path, body = (f'/resources/{key}', None if body_text == '-' else json.loads(body_text))\n    elif role == 'list_resources':\n        path, body = ('/resources', None)\n    else:\n        raise ValueError(f'unknown intent {role!r}')\n    if token_required:\n        path = path.split('?')[0]\n    return {'method': method, 'path': path, 'body': body, 'role': role, 'expected_code': EXPECTED_CODES[role], 'token_supplied': False, 'observable_state_sig': observable_state_sig}",
+            "found": []
+          },
+          "passed": true
+        },
+        {
+          "check": "purity_under_reordering_and_repetition",
+          "detail": {
+            "mismatches": [],
+            "n_pairs": 480
+          },
+          "passed": true
+        },
+        {
+          "check": "purity_under_repetition",
+          "detail": {
+            "n_pairs": 480
+          },
+          "passed": true
+        },
+        {
+          "check": "two_fresh_arm_instances_agree",
+          "detail": {
+            "n": 192
+          },
+          "passed": true
+        },
+        {
+          "check": "arm_dataclass_stores_no_span_history",
+          "detail": {
+            "fields": [
+              "arm",
+              "goal_width",
+              "ledger",
+              "model_calls",
+              "oracle"
+            ]
+          },
+          "passed": true
+        },
+        {
+          "check": "capability_handle_absent_from_both_inputs",
+          "detail": {
+            "leaks": [],
+            "n_token_spans_checked": 12
+          },
+          "passed": true
+        },
+        {
+          "check": "conditioned_arm_never_supplies_handle",
+          "detail": {
+            "bad": [],
+            "n_gated_spans": 12
+          },
+          "passed": true
+        },
+        {
+          "check": "goal_prefix_never_contains_a_handle_query",
+          "detail": {
+            "bad": []
+          },
+          "passed": true
+        },
+        {
+          "check": "base_plan_identical_to_parent_generator",
+          "detail": {
+            "mismatches": []
+          },
+          "passed": true
+        },
+        {
+          "check": "episode_shape_frozen_24_spans",
+          "detail": {
+            "episodes_per_rate": 50,
+            "spans_per_episode": 24
+          },
+          "passed": true
+        },
+        {
+          "check": "class_iii_realized_span_fraction_is_0_10",
+          "detail": {
+            "class_iii_spans": 120,
+            "planted_work_items": 60,
+            "share": 0.1
+          },
+          "passed": true
+        },
+        {
+          "check": "class_iii_plant_max_two_work_items_per_episode",
+          "detail": {
+            "max_per_episode": 2,
+            "min_per_episode": 1
+          },
+          "passed": true
+        },
+        {
+          "check": "wide_prefix_superset_of_narrow",
+          "detail": {
+            "narrow": [
+              "intent",
+              "key"
+            ],
+            "wide": [
+              "body",
+              "intent",
+              "key",
+              "novel",
+              "step",
+              "token_required",
+              "work_item"
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "experiment_id": "EXP-FRONTIER-36272394045",
+      "n_checks": 14,
+      "n_failed": 0,
+      "purpose": "prereg.md section 13 mitigation: the goal-conditioned arm is a pure function of (observable state, goal prefix) with no cross-episode memory"
+    },
+    "correctness_invariance": {
+      "by_arm": {
+        "B-COLD-EXPLORATION": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 0,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "span_level_incorrect_examples": [],
+          "success_rate_prereg_definition": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED": {
+          "class_iii_spans": {
+            "conditioned_correct": 0,
+            "n": 120
+          },
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 180,
+          "non_class_iii_spans": {
+            "conditioned_correct": 1020,
+            "n": 1080
+          },
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "span_level_incorrect_examples": [
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-0",
+              "episode": 1,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-0",
+              "episode": 1,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 1,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-0",
+              "episode": 2,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-0",
+              "episode": 2,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 2,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 2,
+              "index": 19,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 2,
+              "index": 20,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 2,
+              "index": 22,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 3,
+              "index": 13,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 3,
+              "index": 14,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 4,
+              "index": 13,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 4,
+              "index": 14,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-005-1",
+              "episode": 5,
+              "index": 7,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-005-1",
+              "episode": 5,
+              "index": 8,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 5,
+              "index": 10,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-006-0",
+              "episode": 6,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-006-0",
+              "episode": 6,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 6,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-007-0",
+              "episode": 7,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-007-0",
+              "episode": 7,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 7,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 7,
+              "index": 19,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 3
+            }
+          ],
+          "success_rate_prereg_definition": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 520,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          },
+          "span_level_incorrect_examples": [
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-0",
+              "episode": 1,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-0",
+              "episode": 1,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-0",
+              "episode": 1,
+              "index": 3,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 1,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-1",
+              "episode": 1,
+              "index": 7,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-001-1",
+              "episode": 1,
+              "index": 9,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 1,
+              "index": 13,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 1,
+              "index": 15,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 1,
+              "index": 19,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 1,
+              "index": 21,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-0",
+              "episode": 2,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-0",
+              "episode": 2,
+              "index": 2,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-0",
+              "episode": 2,
+              "index": 3,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 2,
+              "index": 4,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-1",
+              "episode": 2,
+              "index": 7,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-002-1",
+              "episode": 2,
+              "index": 9,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 1
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 2,
+              "index": 13,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-2",
+              "episode": 2,
+              "index": 15,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 2
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 2,
+              "index": 19,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 2,
+              "index": 20,
+              "role": "read_resource",
+              "token_required": true,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/s-const-3",
+              "episode": 2,
+              "index": 21,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources",
+              "episode": 2,
+              "index": 22,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 3
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-003-0",
+              "episode": 3,
+              "index": 1,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-003-0",
+              "episode": 3,
+              "index": 3,
+              "role": "update_resource",
+              "token_required": false,
+              "work_item": 0
+            },
+            {
+              "decision_path": "GOAL_CONDITIONED",
+              "declared": null,
+              "emitted": "/resources/r-003-1",
+              "episode": 3,
+              "index": 7,
+              "role": "create_resource",
+              "token_required": false,
+              "work_item": 1
+            }
+          ],
+          "success_rate_prereg_definition": 1.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 20,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.974396714790915,
+              0.9891853179597744
+            ],
+            "k": 1180,
+            "n": 1200,
+            "point": 0.9833333333333333
+          },
+          "span_level_incorrect_examples": [
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000000db24732cc",
+              "emitted": "/resources",
+              "episode": 13,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000000e25a54a4f",
+              "emitted": "/resources",
+              "episode": 14,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000001202dc6783",
+              "emitted": "/resources",
+              "episode": 18,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000001325ee9480",
+              "emitted": "/resources",
+              "episode": 19,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000017edc3233e",
+              "emitted": "/resources",
+              "episode": 23,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000018758b474a",
+              "emitted": "/resources",
+              "episode": 24,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000001c147d2ebe",
+              "emitted": "/resources",
+              "episode": 28,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000001d892bf6b4",
+              "emitted": "/resources",
+              "episode": 29,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000021ca5b90b1",
+              "emitted": "/resources",
+              "episode": 33,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000022227ae029",
+              "emitted": "/resources",
+              "episode": 34,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=000000266de7a4ad",
+              "emitted": "/resources",
+              "episode": 38,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=00000027bb14b185",
+              "emitted": "/resources",
+              "episode": 39,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000002bb9a26510",
+              "emitted": "/resources",
+              "episode": 43,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=0000002c78817ded",
+              "emitted": "/resources",
+              "episode": 44,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=000000306a9a27e8",
+              "emitted": "/resources",
+              "episode": 48,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            },
+            {
+              "decision_path": "COMPILED_REPLAY",
+              "declared": "/resources?view=000000314e7143cd",
+              "emitted": "/resources",
+              "episode": 49,
+              "index": 16,
+              "role": "list_resources",
+              "token_required": true,
+              "work_item": 2
+            }
+          ],
+          "success_rate_prereg_definition": 1.0
+        },
+        "NC-UNIQUE-STATES": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 0,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "span_level_incorrect_examples": [],
+          "success_rate_prereg_definition": 1.0
+        },
+        "PC-PLANTED-DISAMBIGUATION": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 0,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "span_level_incorrect_examples": [],
+          "success_rate_prereg_definition": 1.0
+        },
+        "REPL-REFERENCE-PARENT-IDENTICAL": {
+          "episodes": 50,
+          "episodes_all_steps_expected_code": 50,
+          "episodes_goal_state_reached": 50,
+          "n_span_level_incorrect": 0,
+          "span_level_correct_action_fraction": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "span_level_incorrect_examples": [],
+          "success_rate_prereg_definition": 1.0
+        }
+      },
+      "prereg_criterion": "prereg.md 10.5: all arms must achieve success_rate = 1.0; any arm with success < 1.0 -> MEASUREMENT_INVALID",
+      "success_definition": "parent result.json definition: every step returned its expected status code AND the final resource store matched the goal state (empty)"
+    },
+    "frozen_inputs_hashes": {
+      "all_match": true,
+      "freeze_json": {
+        "experiment_id": "EXP-FRONTIER-36272394045",
+        "frozen_at": "2026-09-26T21:23:51.877470+00:00",
+        "hashes": {
+          "prereg.md": "b186f766c6e455dd91e9f2a2042d82b3e679567ec9f15c3e235556f3d8756d93",
+          "request.json": "d6a289700665aee89245f38e5c6bbd3885c5a14b91fd8ba6f53c784b3876b3b3",
+          "spec.json": "09a3031a38d7a96de286f828658fec332460797d525ed1d27387d8481217338c"
+        },
+        "schema_version": 1
+      },
+      "recomputed": {
+        "prereg.md": "b186f766c6e455dd91e9f2a2042d82b3e679567ec9f15c3e235556f3d8756d93",
+        "request.json": "d6a289700665aee89245f38e5c6bbd3885c5a14b91fd8ba6f53c784b3876b3b3",
+        "spec.json": "09a3031a38d7a96de286f828658fec332460797d525ed1d27387d8481217338c"
+      }
+    },
+    "matched_task_instances_check": {
+      "all_identical": true,
+      "by_novelty_rate": [
+        {
+          "capability_handle_bound_in_declared_action": true,
+          "capability_handle_unique_per_episode_counter": true,
+          "ground_truth_is_shared_by_construction": true,
+          "identical_plan_identity_role_workitem_method_tokenflag": true,
+          "identical_span_population": true,
+          "n_conditioned_spans": 1200,
+          "n_distinct_handles": 50,
+          "n_gated_spans": 120,
+          "n_pairs": 1200,
+          "n_reference_spans": 1200,
+          "novelty_rate": 0.0
+        },
+        {
+          "capability_handle_bound_in_declared_action": true,
+          "capability_handle_unique_per_episode_counter": true,
+          "ground_truth_is_shared_by_construction": true,
+          "identical_plan_identity_role_workitem_method_tokenflag": true,
+          "identical_span_population": true,
+          "n_conditioned_spans": 1200,
+          "n_distinct_handles": 50,
+          "n_gated_spans": 120,
+          "n_pairs": 1200,
+          "n_reference_spans": 1200,
+          "novelty_rate": 0.25
+        },
+        {
+          "capability_handle_bound_in_declared_action": true,
+          "capability_handle_unique_per_episode_counter": true,
+          "ground_truth_is_shared_by_construction": true,
+          "identical_plan_identity_role_workitem_method_tokenflag": true,
+          "identical_span_population": true,
+          "n_conditioned_spans": 1200,
+          "n_distinct_handles": 50,
+          "n_gated_spans": 120,
+          "n_pairs": 1200,
+          "n_reference_spans": 1200,
+          "novelty_rate": 0.5
+        },
+        {
+          "capability_handle_bound_in_declared_action": true,
+          "capability_handle_unique_per_episode_counter": true,
+          "ground_truth_is_shared_by_construction": true,
+          "identical_plan_identity_role_workitem_method_tokenflag": true,
+          "identical_span_population": true,
+          "n_conditioned_spans": 1200,
+          "n_distinct_handles": 50,
+          "n_gated_spans": 120,
+          "n_pairs": 1200,
+          "n_reference_spans": 1200,
+          "novelty_rate": 0.75
+        },
+        {
+          "capability_handle_bound_in_declared_action": true,
+          "capability_handle_unique_per_episode_counter": true,
+          "ground_truth_is_shared_by_construction": true,
+          "identical_plan_identity_role_workitem_method_tokenflag": true,
+          "identical_span_population": true,
+          "n_conditioned_spans": 1200,
+          "n_distinct_handles": 50,
+          "n_gated_spans": 120,
+          "n_pairs": 1200,
+          "n_reference_spans": 1200,
+          "novelty_rate": 1.0
+        }
+      ],
+      "definition": "reference and goal-conditioned arms execute the identical declared plan on the identical span population; the treatment arm's own emitted actions are NOT required to match the declared plan (that is what is measured). The declared correct action is a single shared ground truth computed in the paired reference run, so it is not compared arm-against-arm."
+    },
+    "nc_verification": {
+      "class_counts": {
+        "i": 1151,
+        "ii": 49,
+        "iii": 0
+      },
+      "control": "NC-UNIQUE-STATES",
+      "declared_deviation": "the class-(iii) plant is disabled in this control; otherwise a planted class-(iii) span would (correctly) be reported as class (iii) and the null's exactly-zero criterion would be unattainable by construction",
+      "mechanism": "parent taskplan._with_nonce: every path carries ?n=<episode>-<step>",
+      "prereg_criterion": "sigma_2 == 0 exactly and sigma_3 == 0 exactly (prereg.md 7.4, 10.2)",
+      "prereg_section_13_mitigation_variant": {
+        "consumed_by_any_decision_rule": false,
+        "mechanism": "observable state key augmented with the episode/step id, per prereg.md 13",
+        "n_conflicting_state_keys": 0,
+        "n_state_keys": 1200,
+        "sigma_2_is_zero": true,
+        "sigma_3_is_zero": true
+      },
+      "sigma_2_is_zero": false,
+      "sigma_2_root_cause": {
+        "all_class_ii_from_a_single_state_key": true,
+        "diagnosis": "prereg.md 5 defines the observable state as (world_store_snapshot, last_request); prereg.md 13's stated mitigation puts the uniqueness nonce in the world store snapshot, but the inherited implementation puts it in the request path. Every episode's first span therefore shares one observable state key with 50 different declared correct actions.",
+        "n_class_ii": 49,
+        "n_state_keys_with_conflicting_correct_actions": 1,
+        "offending_state_keys": [
+          {
+            "multiplicity": 50,
+            "n_distinct_declared_actions": 50,
+            "roles": [
+              "entry_point"
+            ],
+            "span_indices": [
+              0
+            ],
+            "state_sig": "39fb690e0a37823e2f9345b759d71cca7952b6e494cea2bdd10baf64da0752a0"
+          }
+        ]
+      },
+      "sigma_3_is_zero": true,
+      "span_occurrences": 1200,
+      "unique_signatures": 1200,
+      "unique_state_keys": 1151,
+      "verdict": {
+        "classifier_false_positive_demonstrated": false,
+        "conclusion": "the literal prereg.md 10.2 criterion is NOT met (sigma_2 = 49/1200), but the prereg's own stated failure meaning (a classifier false positive on unique states) is NOT what occurred. prereg.md 5 makes every episode's first span share one observable state key, and the inherited prereg.md 13 mitigation does not touch that state, so 50 spans with 50 distinct declared actions are, correctly and by the prereg's literal step-2 rule, class (ii). Under prereg.md 13's mechanism as written (nonce in the world store snapshot) sigma_2 == 0 exactly. The null control is therefore UNRESOLVED_BY_PREREG_CONFLICT, not failed.",
+        "literal_prereg_criterion_met": false,
+        "prereg_stated_failure_meaning": "classification logic defect (false positive on unique states)"
+      }
+    },
+    "pc_verification": {
+      "conditioned_reference_plant_compile_and_deopt": {
+        "compiled_replays": 0,
+        "deopted": 200
+      },
+      "control": "PC-PLANTED-DISAMBIGUATION",
+      "per_episode_create_state_keys_distinct_counts": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1
+      },
+      "plant_verified_byte_identical_observations": true,
+      "planted_roles": [
+        "create_resource"
+      ],
+      "planted_span_class_counts": {
+        "i": 1,
+        "ii": 199,
+        "iii": 0
+      },
+      "planted_span_closed_by_conditioned": 200,
+      "planted_span_closed_by_conditioned_fraction": {
+        "ci95": [
+          0.9811546736227335,
+          1.0
+        ],
+        "k": 200,
+        "n": 200,
+        "point": 1.0
+      },
+      "planted_span_distinct_correct_actions_per_episode": true,
+      "planted_span_occurrences": 200,
+      "prereg_criterion": "sigma_1 ~ 1.0, sigma_2 ~ 0, sigma_3 ~ 0 for planted spans; shares (ii) and (iii) must be 0 by construction (prereg.md 7.3, 10.1)",
+      "reading_A_prereg_section_8_literal": "class (ii) fires on any state key that recurs with a different action, so the PC's planted spans are class (ii) and the prereg sigma_2~0 criterion is not attainable by construction",
+      "reading_B_goal_aware_mandate": "class (ii) requires that goal conditioning cannot bind the span; the PC's binding key IS in the goal prefix, so its planted spans are merely-novel and the sigma_2~0 criterion is met",
+      "whole_trace_class_counts": {
+        "i": 1001,
+        "ii": 199,
+        "iii": 0
+      },
+      "whole_trace_share_class_ii": {
+        "ci95": [
+          0.14586263045987358,
+          0.18793668827628757
+        ],
+        "k": 199,
+        "n": 1200,
+        "point": 0.16583333333333333
+      }
+    },
+    "replication_parent_comparison": {
+      "fields_compared": [
+        "state_sig",
+        "signature",
+        "response_body_hash",
+        "response_code",
+        "decision_path",
+        "role",
+        "work_item"
+      ],
+      "identical": true,
+      "mismatches": [],
+      "n_field_mismatches": 0,
+      "parent_artifact": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_no-memory-deterministic.jsonl",
+      "parent_artifact_sha256": "af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b",
+      "parent_rows": 1200,
+      "purpose": "prereg.md 10.3 / no-go 5: reproduce the parent packet's reference-arm raw span evidence field for field",
+      "this_run_rows": 1200
+    },
+    "replication_parent_numbers": {
+      "by_novelty_rate": {
+        "0.00": {
+          "amortized_cost_units_per_episode": 29.2,
+          "compilable_given_deterministic": 0.8,
+          "compiled_replays": 960,
+          "compiled_share_of_all_spans": 0.8,
+          "episodes": 50,
+          "ledger": {
+            "amortized_cost_units_per_episode": 29.2,
+            "compile_units": 20,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 20,
+              "compiled_replays": 960,
+              "execution": 1200,
+              "model": 240,
+              "spans_compiled": 20
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 240,
+            "total_units": 1460
+          },
+          "novelty_rate": 0.0,
+          "per_span_witnessed_determinism_fraction": 1.0,
+          "span_occurrences": 1200,
+          "substrate_requests": 1200
+        },
+        "0.25": {
+          "amortized_cost_units_per_episode": 33.9,
+          "compilable_given_deterministic": 0.7578947368421053,
+          "compiled_replays": 720,
+          "compiled_share_of_all_spans": 0.6,
+          "episodes": 50,
+          "ledger": {
+            "amortized_cost_units_per_episode": 33.9,
+            "compile_units": 15,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 15,
+              "compiled_replays": 720,
+              "execution": 1200,
+              "model": 480,
+              "spans_compiled": 15
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 480,
+            "total_units": 1695
+          },
+          "novelty_rate": 0.25,
+          "per_span_witnessed_determinism_fraction": 0.7916666666666666,
+          "span_occurrences": 1200,
+          "substrate_requests": 1200
+        },
+        "0.50": {
+          "amortized_cost_units_per_episode": 38.6,
+          "compilable_given_deterministic": 0.6857142857142857,
+          "compiled_replays": 480,
+          "compiled_share_of_all_spans": 0.4,
+          "episodes": 50,
+          "ledger": {
+            "amortized_cost_units_per_episode": 38.6,
+            "compile_units": 10,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 10,
+              "compiled_replays": 480,
+              "execution": 1200,
+              "model": 720,
+              "spans_compiled": 10
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 720,
+            "total_units": 1930
+          },
+          "novelty_rate": 0.5,
+          "per_span_witnessed_determinism_fraction": 0.5833333333333334,
+          "span_occurrences": 1200,
+          "substrate_requests": 1200
+        },
+        "0.75": {
+          "amortized_cost_units_per_episode": 43.3,
+          "compilable_given_deterministic": 0.5333333333333333,
+          "compiled_replays": 240,
+          "compiled_share_of_all_spans": 0.2,
+          "episodes": 50,
+          "ledger": {
+            "amortized_cost_units_per_episode": 43.3,
+            "compile_units": 5,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 5,
+              "compiled_replays": 240,
+              "execution": 1200,
+              "model": 960,
+              "spans_compiled": 5
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 960,
+            "total_units": 2165
+          },
+          "novelty_rate": 0.75,
+          "per_span_witnessed_determinism_fraction": 0.375,
+          "span_occurrences": 1200,
+          "substrate_requests": 1200
+        },
+        "1.00": {
+          "amortized_cost_units_per_episode": 47.06,
+          "compilable_given_deterministic": 0.24,
+          "compiled_replays": 48,
+          "compiled_share_of_all_spans": 0.04,
+          "episodes": 50,
+          "ledger": {
+            "amortized_cost_units_per_episode": 47.06,
+            "compile_units": 1,
+            "component_detail": {
+              "cache_key_conflicts": 1,
+              "compile": 1,
+              "compiled_replays": 48,
+              "execution": 1200,
+              "model": 1152,
+              "spans_compiled": 1
+            },
+            "episodes": 50,
+            "execution_units": 1200,
+            "machinery_units": 0,
+            "model_units": 1152,
+            "total_units": 2353
+          },
+          "novelty_rate": 1.0,
+          "per_span_witnessed_determinism_fraction": 0.16666666666666666,
+          "span_occurrences": 1200,
+          "substrate_requests": 1200
+        }
+      },
+      "parent_determinism_wilson_ci95": [
+        0.5552167229809802,
+        0.6109181102518974
+      ],
+      "parent_reference_values": {
+        "cold_amortized_cost_units_per_episode": 72.0,
+        "compilable_given_deterministic": 0.6857,
+        "compiled_share_of_all_spans": 0.4,
+        "deopt_amortized_cost_units_per_episode": 38.6,
+        "per_span_witnessed_determinism_fraction": 0.5833
+      }
+    },
+    "substrate_idempotency": {
+      "all_probes_deterministic": true,
+      "identical_request_round_trips": 800,
+      "n_probes": 8,
+      "probes": {
+        "DELETE /resources/alpha (delete existing)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "DELETE /resources/alpha",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "GET /": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "GET /",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "GET /resources": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "GET /resources",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "GET /resources (list non-empty)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "GET /resources",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "GET /resources/alpha (read after delete)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "GET /resources/alpha",
+          "status_codes": [
+            404
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "GET /resources/alpha (read existing)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "GET /resources/alpha",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "PATCH /resources/alpha (update existing)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "PATCH /resources/alpha",
+          "status_codes": [
+            200
+          ],
+          "unique_response_body_hashes": 1
+        },
+        "PUT /resources/alpha (create)": {
+          "deterministic": true,
+          "repeats": 100,
+          "request": "PUT /resources/alpha",
+          "status_codes": [
+            201
+          ],
+          "unique_response_body_hashes": 1
+        }
+      },
+      "repeats_per_probe": 100
+    }
+  }
+}
