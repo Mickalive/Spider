@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36314204238",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen decision rule short-circuits on F6 (degenerate discriminative power) before evaluating primary falsifiers F1-F4. F6 triggers on ANY arm with CI [1.0, 1.0], which includes both the treatment (A1) and construction-perfect baselines (A7/A8/A9). The rule order must be changed: F1-F4 should be evaluated before F6, or F6 should be restricted to null arms only.",
+    "Frame R (raw goal with identifier in request) is not a discriminating frame for the lexical-overlap null (A4). The prereg declared Frame B as supplementary and Frame R as primary, but Frame R cannot separate A1 from A4:shortest_first because the identifier appears in the goal string. The primary frame designation should be swapped or Frame R should be explicitly documented as non-discriminating for this comparison.",
+    "Induction cost discrepancy: prereg section 4.2 declares 150 requests for induction; section 4.3 defines 150/450 observations at 3 requests each (450/1350 requests). The executed code follows section 4.3. The frozen documents contain contradictory induction budgets. This is a measurement validity issue, not an infrastructure failure.",
+    "F8 (commit hash mismatch) is NOT_EVALUABLE because freeze.json records no code hash. This control-plane defect was already identified in EXP-GRAPH-36279237023. A code hash must be included in freeze.json for future experiments."
+  ],
+  "validity_findings": [
+    "Measurement transaction completed validly: substrate contract all 5 checks passed (distinct cost multipliers, inheritance = 1 request, error rate 0.0, deterministic latency, correct verb transitions). 10,000 bind results, 10,000 execution results, 34,517 raw HTTP observations, 600 induction observations preserved. No infrastructure failure.",
+    "Split integrity maintained: training/test split by identifier families (read/update/delete) AND by collection; family-stratified bootstrap (B=5000) resamples identifiers within (family, collection) strata. No site/task identity leakage detected.",
+    "Representation integrity preserved: slot support inferred from observed path-segment value distributions across collections; no hardcoded vocabulary consulted during A1/A2 inference; raw path segments and state.collection preserved in mechanisms.json.",
+    "Confidence threshold frozen at 0.85 before any arm runs. ABSTAIN scored as distinct outcome class. Selective accuracy and coverage reported as pair.",
+    "Frame B is the only frame that discriminates the mechanisms. On Frame B, the lexical-overlap null (A4) scores 0.0 under both tie-break orders because the bare-ordinal goal contains no identifier token to overlap with. On Frame R, the goal string contains the full identifier, so A4:shortest_first achieves 1.0 bind accuracy trivially.",
+    "The experiment design's validity threat disclosure (prereg section 8.3) is accurate: single path template, synthetic identifiers, deterministic server, no LLM. These limit generalization but do not invalidate the mechanism-level question on this substrate.",
+    "Bootstrap procedure correctly implemented: family-stratified by (family, collection), B=5000, seed=42, unit of resampling = identifier. Intervals at 95% and 97.5% as preregistered.",
+    "A4 tie-break handling: both 'longest_first' and 'shortest_first' raw series preserved. Producer scores A4 at the better of two tie orders for F1 comparison (conservative for the treatment). This is explicitly documented and auditable."
+  ],
+  "baseline_findings": [
+    "B-LEXICAL-OVERLAP (A4): Frame B bind accuracy 0.0 [0.0, 0.0] under both tie orders. Frame R bind accuracy 0.0 (longest_first) vs 1.0 (shortest_first). Semantic false-accept 1.0 on both frames. This null fails to reproduce the treatment on the discriminating frame.",
+    "B-POSITIONAL-REGEX (A5): Bind accuracy 0.0 [0.0, 0.0] on both frames. Semantic false-accept 0.0 (abstains 100% because pattern fails). This null is inert rather than wrong.",
+    "B-MOST-FREQUENT-VALUE (A6): Bind accuracy 0.0 [0.0, 0.0] on both frames. Semantic false-accept 1.0 (always binds most-frequent training value). This null fails completely.",
+    "B-DECLARED-VOCAB (A3): Bind accuracy 1.0 [1.0, 1.0] on both frames. Semantic false-accept 1.0 (transfers to 'products' and 'widgets' without discrimination). UNKNOWN precision undefined (never abstains). This is the incumbent string-matcher behavior.",
+    "B-COLD-RE-DERIVATION (A7), B-WITHIN-EPISODE-SCRATCHPAD (A8), B-RETRIEVAL-K5 (A9): All achieve bind accuracy 1.0 [1.0, 1.0] by construction (they re-derive or retrieve, not bind). Semantic false-accept 1.0. These are economic comparators, not binding nulls.",
+    "Positive control PC-MULTI-COLLECTION-VARIABILITY: A1 achieves bind_accuracy >= 0.95 (actual 1.0), executed_verified >= 0.90 (actual 1.0), semantic_false_accept <= 0.05 (actual 0.0). PASS.",
+    "Null control NC-SINGLE-COLLECTION-DECLARED: A2 on single-collection training shows variability degradation (bind_accuracy 0.34, unknown_precision 0.60 < 0.85 threshold). A3 on 'products' (out-of-support) shows semantic_false_accept >= 0.40 (actual 1.0) and transfer_rate >= 0.90 (actual 1.0). PASS."
+  ],
+  "recomputed_metrics": {
+    "in_support_bind_accuracy_variability_vs_nulls_frame_B": {
+      "A1_ci95_lower": 1.0,
+      "A1_estimate": 1.0,
+      "null_max_ci95_upper": 0.0,
+      "null_arms": {
+        "A4_longest_first_ci95_upper": 0.0,
+        "A4_shortest_first_ci95_upper": 0.0,
+        "A5_ci95_upper": 0.0,
+        "A6_ci95_upper": 0.0
+      },
+      "margin": 1.0,
+      "F1_triggered": false,
+      "note": "On Frame B (discriminating frame), A1 beats all three null binders by CI95 lower > max null CI95 upper"
+    },
+    "in_support_bind_accuracy_variability_vs_nulls_frame_R": {
+      "A1_ci95_lower": 1.0,
+      "A1_estimate": 1.0,
+      "null_max_ci95_upper": 1.0,
+      "null_arms": {
+        "A4_longest_first_ci95_upper": 0.0,
+        "A4_shortest_first_ci95_upper": 1.0,
+        "A5_ci95_upper": 0.0,
+        "A6_ci95_upper": 0.0
+      },
+      "margin": 0.0,
+      "F1_triggered": true,
+      "note": "On Frame R (non-discriminating frame), A4:shortest_first ties A1 at 1.0 because the goal contains the identifier"
+    },
+    "semantic_false_accept_rate_pooled_A1": {
+      "estimate": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "threshold": 0.10,
+      "F2_subcondition_false_accept": false
+    },
+    "unknown_precision_A1": {
+      "value": 1.0,
+      "true_abstain": 250,
+      "false_abstain": 0,
+      "threshold": 0.85,
+      "F2_subcondition_unknown_precision": false
+    },
+    "global_ece_A1": {
+      "estimate": 0.0,
+      "p975_upper": 0.0,
+      "threshold_ece": 0.15,
+      "threshold_ece_975": 0.18,
+      "F2_subcondition_ece": false,
+      "F2_subcondition_ece_975": false
+    },
+    "executed_verified_rate_A1": {
+      "estimate": 1.0,
+      "execution_gap": 0.0,
+      "threshold": 0.05,
+      "F3_triggered": false
+    },
+    "transfer_items_to_products_A2": {
+      "value": 0.0,
+      "n": 85,
+      "threshold": 0.90,
+      "F4_subcondition_items_only": false
+    },
+    "transfer_multi_to_products_A1": {
+      "value": 1.0,
+      "n": 85,
+      "threshold": 0.90,
+      "F4_subcondition_multi": false
+    },
+    "F6_degenerate_discriminative_power": {
+      "series_at_ceiling": ["A1", "A3", "A7", "A8", "A9"],
+      "triggered": true,
+      "diagnosis": "A1 hits ceiling [1.0, 1.0] because 100 in-support tasks from a single synthetic distribution yield no bootstrap variability. A7/A8/A9 hit ceiling by construction (re-derive/retrieve). F6 conflates clean separation with design ceiling effects."
+    },
+    "substrate_contract": {
+      "all_pass": true,
+      "F5_triggered": false
+    },
+    "cost_model_integrity": {
+      "F7_triggered": false,
+      "note": "Induction budget discrepancy between prereg sections 4.2 and 4.3 disclosed but not an F7 deviation per F7 definition (per-task accounting)"
+    }
+  },
+  "claim_ceiling": "The variability-learned binder (A1) demonstrates the mechanism-level pattern the Director mandate targeted: (1) it infers a closed-set collection vocabulary {items, orders, products} and head-to-prefix map from observed variability across 150 multi-collection training observations, with no hardcoded vocabulary; (2) it binds held-out in-support identifiers at ceiling (1.0) while abstaining on well-formed out-of-support 'widgets' identifiers (semantic false-accept 0.0, UNKNOWN precision 1.0); (3) single-collection training (A2) degrades to closed set {items} and correctly refuses 'products' (transfer 0.0); (4) declared-vocabulary incumbent (A3) transfers to 'products' and 'widgets' at 1.0 false-accept. The three structural nulls (lexical-overlap, positional/regex, most-frequent-value) all fail to reproduce A1 on the discriminating frame (Frame B). However, the frozen decision rule's F6 short-circuit prevents the frozen outcome from reaching SUPPORTS. The maximum justified claim ceiling is: C-PARAM-INHERIT mechanism-level behavior is CONSISTENT WITH a variability-learning mechanism and INCONSISTENT WITH the declared-vocabulary string matcher on the discriminating frame, but the frozen decision rule defect (F6 order) means the experiment's own frozen criteria return MEASUREMENT_INVALID. A repaired decision rule + re-run on the same raw evidence would yield SUPPORTS on Frame B.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36314204238/request.json",
+    "research/experiments/EXP-PRODUCT-36314204238/spec.json",
+    "research/experiments/EXP-PRODUCT-36314204238/prereg.md",
+    "research/experiments/EXP-PRODUCT-36314204238/freeze.json",
+    "research/experiments/EXP-PRODUCT-36314204238/result.json",
+    "research/experiments/EXP-PRODUCT-36314204238/report.md",
+    "research/experiments/EXP-PRODUCT-36314204238/provenance.json",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/bind_results.jsonl",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/exec_results.jsonl",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/derived.json",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/mechanisms.json",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/substrate_probe.json",
+    "research/experiments/EXP-PRODUCT-36314204238/raw_evidence/run_config.json"
+  ],
+  "unresolved": [
+    "Whether the mechanism generalizes beyond single-template routes (/collection/id) to multi-template or real-Web path structures. The substrate is deliberately narrow per Scout validity assessment.",
+    "Whether the variability-learning approach transfers to cross-site settings (C-CROSSSITE claim) where collection names and path templates differ across sites. This experiment uses a single substrate with shared template.",
+    "Whether an LLM-in-the-loop agent (C-LLM-INHERIT) would exhibit the same mechanism/matcher distinction. This experiment tests the kernel mechanism in isolation.",
+    "The cost economics on this substrate show cross-episode induction dominated by within-episode baselines (break-even ~2,300-2,700 reuses). Whether this holds on real-Web substrates with higher re-derivation costs is untested.",
+    "The induction budget discrepancy (prereg 4.2 vs 4.3) should be resolved in the next freeze. The executed code followed section 4.3 (450/1350 requests).",
+    "F8 commit hash verification remains unevaluable without a code hash in freeze.json. This is a control-plane fix needed for all lanes."
+  ]
+}
