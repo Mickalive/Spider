@@ -1,0 +1,955 @@
+{
+  "amortized_cost_ratio_vs_bcold": {
+    "cheap": 2.0,
+    "costly": 0.6623093681917211
+  },
+  "arm_http_ok_rate": {
+    "B-COLD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-COLD-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-INSTRUCTIONS-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-INSTRUCTIONS-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-NO-MEMORY-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-NO-MEMORY-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-RETRIEVAL-K5-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-RETRIEVAL-K5-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-SCRATCHPAD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-SCRATCHPAD-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "INHERITANCE-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "INHERITANCE-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "NC-SHUFFLED-INTENT-CHEAP": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "NC-SHUFFLED-INTENT-COSTLY": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "PC-SAME-RESOURCE": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    }
+  },
+  "arm_mean_requests_per_task": {
+    "B-COLD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-COLD-COSTLY": {
+      "B": 5000,
+      "ci_high": 3.12,
+      "ci_low": 3.013333333333333,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 3.06
+    },
+    "B-INSTRUCTIONS-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-INSTRUCTIONS-COSTLY": {
+      "B": 5000,
+      "ci_high": 2.0933333333333333,
+      "ci_low": 2.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 2.04
+    },
+    "B-NO-MEMORY-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-NO-MEMORY-COSTLY": {
+      "B": 5000,
+      "ci_high": 2.0933333333333333,
+      "ci_low": 2.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 2.04
+    },
+    "B-RETRIEVAL-K5-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-RETRIEVAL-K5-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0666666666666667,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0266666666666666
+    },
+    "B-SCRATCHPAD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-SCRATCHPAD-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.1466666666666667,
+      "ci_low": 1.0133333333333334,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0666666666666667
+    },
+    "INHERITANCE-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "INHERITANCE-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0666666666666667,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0266666666666666
+    },
+    "NC-SHUFFLED-INTENT-CHEAP": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "NC-SHUFFLED-INTENT-COSTLY": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "PC-SAME-RESOURCE": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    }
+  },
+  "arm_n": {
+    "B-COLD-CHEAP": 150,
+    "B-COLD-COSTLY": 150,
+    "B-INSTRUCTIONS-CHEAP": 150,
+    "B-INSTRUCTIONS-COSTLY": 150,
+    "B-NO-MEMORY-CHEAP": 150,
+    "B-NO-MEMORY-COSTLY": 150,
+    "B-RETRIEVAL-K5-CHEAP": 150,
+    "B-RETRIEVAL-K5-COSTLY": 150,
+    "B-SCRATCHPAD-CHEAP": 150,
+    "B-SCRATCHPAD-COSTLY": 150,
+    "INHERITANCE-CHEAP": 150,
+    "INHERITANCE-COSTLY": 150,
+    "NC-SHUFFLED-INTENT-CHEAP": 150,
+    "NC-SHUFFLED-INTENT-COSTLY": 150,
+    "PC-SAME-RESOURCE": 150
+  },
+  "arm_per_family": {
+    "B-COLD-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-COLD-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 3.08,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 3.06,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 3.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-INSTRUCTIONS-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-INSTRUCTIONS-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-NO-MEMORY-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-NO-MEMORY-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 2.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-RETRIEVAL-K5-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-RETRIEVAL-K5-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-SCRATCHPAD-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "B-SCRATCHPAD-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.04,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.08,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.08,
+        "n": 50,
+        "resolution_counts": {
+          "n/a": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "INHERITANCE-CHEAP": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "INHERITANCE-COSTLY": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.04,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.04,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      }
+    },
+    "NC-SHUFFLED-INTENT-CHEAP": {
+      "delete": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      },
+      "read": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      },
+      "update": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      }
+    },
+    "NC-SHUFFLED-INTENT-COSTLY": {
+      "delete": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      },
+      "read": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      },
+      "update": {
+        "http_ok_rate": 0.0,
+        "mean_requests": 0.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXPLORE": 50
+        },
+        "success_rate": 0.0
+      }
+    },
+    "PC-SAME-RESOURCE": {
+      "delete": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "read": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      },
+      "update": {
+        "http_ok_rate": 1.0,
+        "mean_requests": 1.0,
+        "n": 50,
+        "resolution_counts": {
+          "EXECUTABLE": 50
+        },
+        "success_rate": 1.0
+      }
+    }
+  },
+  "arm_success_rate": {
+    "B-COLD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-COLD-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-INSTRUCTIONS-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-INSTRUCTIONS-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-NO-MEMORY-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-NO-MEMORY-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-RETRIEVAL-K5-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-RETRIEVAL-K5-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-SCRATCHPAD-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "B-SCRATCHPAD-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "INHERITANCE-CHEAP": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "INHERITANCE-COSTLY": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    },
+    "NC-SHUFFLED-INTENT-CHEAP": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "NC-SHUFFLED-INTENT-COSTLY": {
+      "B": 5000,
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 0.0
+    },
+    "PC-SAME-RESOURCE": {
+      "B": 5000,
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "n": 5000,
+      "n_strata": 3,
+      "point": 1.0
+    }
+  },
+  "arms": [
+    "B-COLD-CHEAP",
+    "B-COLD-COSTLY",
+    "B-INSTRUCTIONS-CHEAP",
+    "B-INSTRUCTIONS-COSTLY",
+    "B-NO-MEMORY-CHEAP",
+    "B-NO-MEMORY-COSTLY",
+    "B-RETRIEVAL-K5-CHEAP",
+    "B-RETRIEVAL-K5-COSTLY",
+    "B-SCRATCHPAD-CHEAP",
+    "B-SCRATCHPAD-COSTLY",
+    "INHERITANCE-CHEAP",
+    "INHERITANCE-COSTLY",
+    "NC-SHUFFLED-INTENT-CHEAP",
+    "NC-SHUFFLED-INTENT-COSTLY",
+    "PC-SAME-RESOURCE"
+  ],
+  "break_even_reuse_count": {
+    "f_star_cheap": null,
+    "f_star_costly": 74
+  },
+  "decision_rule_evaluation": {
+    "bcold_cheap_mean_requests": 1.0,
+    "bcold_costly_mean_requests": 3.06,
+    "cheap_regime_passes_economics": false,
+    "cheap_regime_passes_mechanism": true,
+    "costly_regime_passes_economics": true,
+    "costly_regime_passes_mechanism": true,
+    "outcome": "MIXED",
+    "pc_same_resource_success": 1.0,
+    "safety_gate_passes": true
+  },
+  "f_star_ratio": 0.0,
+  "falsifier_evaluation": {
+    "F1_inheritance_success_lt_0.95": false,
+    "F2_safety_gate_fail": false,
+    "F3_ratio_gt_0.85_at_max_n": true,
+    "F4_f_star_ratio_le_2.0": true,
+    "F5_kernel_distill_not_executable": false,
+    "F6_bcold_costly_le_1.0": false,
+    "F7_bcold_cheap_gt_1.5": false,
+    "F8_cost_accounting_invalid": false
+  },
+  "falsifiers_triggered": [
+    "F3_ratio_gt_0.85_at_max_n",
+    "F4_f_star_ratio_le_2.0"
+  ],
+  "induction_cost_total": 150,
+  "inheritance_mechanism_confidence": {
+    "delete-item": 1.0,
+    "read-item": 1.0,
+    "update-item": 1.0
+  },
+  "inheritance_mechanism_paths": [
+    "/${collection}/${id}"
+  ],
+  "inheritance_mechanism_slots": [
+    "collection",
+    "id"
+  ],
+  "n_for_ratio_0.85": {
+    "cheap": null,
+    "costly": 96
+  },
+  "nc_mechanism_confidence": {
+    "delete-item": 0.4,
+    "read-item": 0.44,
+    "update-item": 0.38
+  },
+  "nc_shuffled_success_rate": {
+    "cheap": 0.0,
+    "costly": 0.0
+  },
+  "probe_abstention_precision": 1.0,
+  "probe_by_kind": {
+    "empty_string_binding": {
+      "executed": 0,
+      "n": 20
+    },
+    "invalid_intent": {
+      "executed": 0,
+      "n": 20
+    },
+    "out_of_support_binding": {
+      "executed": 0,
+      "n": 20
+    }
+  },
+  "probe_false_accept_rate": 0.0,
+  "reauths_costly": 16,
+  "substrate_probe": {
+    "cheap": {
+      "checks": {
+        "direct_get": {
+          "id": "SKU-A",
+          "status": 200
+        },
+        "no_auth_required": {
+          "status": 200
+        },
+        "no_schema": {
+          "status": 404
+        }
+      },
+      "mode": "cheap"
+    },
+    "costly": {
+      "checks": {
+        "auth_login": {
+          "has_token": true,
+          "status": 200
+        },
+        "pagination": {
+          "count": 2,
+          "status": 200
+        },
+        "schema": {
+          "has_verbs": true,
+          "status": 200
+        },
+        "token_expires": {
+          "expired": true,
+          "expiry": 100
+        }
+      },
+      "mode": "costly"
+    }
+  },
+  "total_http_requests": 1689
+}

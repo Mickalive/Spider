@@ -1,0 +1,30 @@
+{
+  "arms": [
+    "B-COLD-CHEAP",
+    "B-COLD-COSTLY",
+    "B-INSTRUCTIONS-CHEAP",
+    "B-INSTRUCTIONS-COSTLY",
+    "B-NO-MEMORY-CHEAP",
+    "B-NO-MEMORY-COSTLY",
+    "B-RETRIEVAL-K5-CHEAP",
+    "B-RETRIEVAL-K5-COSTLY",
+    "B-SCRATCHPAD-CHEAP",
+    "B-SCRATCHPAD-COSTLY",
+    "INHERITANCE-CHEAP",
+    "INHERITANCE-COSTLY",
+    "NC-SHUFFLED-INTENT-CHEAP",
+    "NC-SHUFFLED-INTENT-COSTLY",
+    "PC-SAME-RESOURCE"
+  ],
+  "induction_cost": 150,
+  "n_b_ids": 150,
+  "n_per_family": {
+    "delete": 50,
+    "read": 50,
+    "update": 50
+  },
+  "n_training": 150,
+  "probe_count": 60,
+  "reauths_costly": 16,
+  "total_http_requests": 1689
+}

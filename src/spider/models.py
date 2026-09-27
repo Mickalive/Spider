@@ -31,6 +31,7 @@ class Mechanism:
     postconditions: dict[str, Any]
     parameter_slots: list[str] = field(default_factory=list)
     auth_scope: str | None = None
+    intent_namespace_map: list[str] = field(default_factory=list)
     freshness: dict[str, Any] = field(default_factory=dict)
     applicability_guards: dict[str, Any] = field(default_factory=dict)
     verification_rule: dict[str, Any] = field(default_factory=dict)

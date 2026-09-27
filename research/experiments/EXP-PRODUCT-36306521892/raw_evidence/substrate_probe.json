@@ -1,0 +1,38 @@
+{
+  "cheap": {
+    "checks": {
+      "direct_get": {
+        "id": "SKU-A",
+        "status": 200
+      },
+      "no_auth_required": {
+        "status": 200
+      },
+      "no_schema": {
+        "status": 404
+      }
+    },
+    "mode": "cheap"
+  },
+  "costly": {
+    "checks": {
+      "auth_login": {
+        "has_token": true,
+        "status": 200
+      },
+      "pagination": {
+        "count": 2,
+        "status": 200
+      },
+      "schema": {
+        "has_verbs": true,
+        "status": 200
+      },
+      "token_expires": {
+        "expired": true,
+        "expiry": 100
+      }
+    },
+    "mode": "costly"
+  }
+}
