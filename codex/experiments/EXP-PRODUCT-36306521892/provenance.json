@@ -1,0 +1,117 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/observations.jsonl",
+      "role": "raw",
+      "sha256": "a32c335dd9c15696b289086fe5565e747c7215d1f0db78ff56628a36e9941f06"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/task_results.jsonl",
+      "role": "raw",
+      "sha256": "9e0263d2cf41ee3e04358db202f4c609cfae2252316fadd9f881a25febb58909"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/probe_results.jsonl",
+      "role": "raw",
+      "sha256": "26dd3dc6d15b9d74cb7b4728326d674ba198415f360b1c2d78d2ff83b1c22e49"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/mechanisms.json",
+      "role": "raw",
+      "sha256": "04f6d901036eea5181c31a350420cd3448b1b6cbcda6abc50180842c98e1034a"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/substrate_probe.json",
+      "role": "raw",
+      "sha256": "91c0166d4f81d2e6426879303e4357ca75e45d5f4e3434047669d0751e85343d"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/derived.json",
+      "role": "derived",
+      "sha256": "532f91fd37ad5217af510e3d19f52af0811db38e8f895db5ec233e4672623fd2"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/result.json",
+      "role": "derived",
+      "sha256": "62be0aed24f923817c84183b6aa84880fb5e81a61c15a716345f6fc993267f65"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36306521892/report.md",
+      "role": "derived",
+      "sha256": "6a6bcc74b3914cef866be0d8fb458ef8be8575551e9b50812f1dc72b6433db45"
+    }
+  ],
+  "code_paths": {
+    "builder": "research/experiments/EXP-PRODUCT-36306521892/build_result.py (sha256 c79145e6707c3d9ec7861cde1ae5f6e1cc0a7087085770b8637de135776a0f8b)",
+    "kernel": "src/spider/kernel.py (committed at HEAD 408f3bc1, sha256 57690132de402c12c866a16f0e1dd2901c036dcb852813958895d7a01d340de3)",
+    "models": "src/spider/models.py (sha256 94b5196ccd0a7faabca9bcec7d7e4183b299fa1f2f2962d8c26d0e6bbbb8aba)",
+    "runner": "research/experiments/EXP-PRODUCT-36306521892/run_experiment.py (sha256 14e5db5deef9cc23303d3e22a388fad2a44a47f95d993b3d56ae898c3ac8b2b2)",
+    "substrate": "research/experiments/EXP-PRODUCT-36306521892/substrate.py (sha256 82999148cdf550f49059f480a621bad90369448887e3488ecc5b233e247f5493)",
+    "tests": "tests/test_kernel.py (sha256 316fa7d355748fc6100c2a38f16ab09210a6785d8a7fabe5654274d1051f2336)"
+  },
+  "commands": [
+    "python3 research/experiments/EXP-PRODUCT-36306521892/run_experiment.py",
+    "python3 research/experiments/EXP-PRODUCT-36306521892/build_result.py",
+    "python -m pytest tests/test_kernel.py -v"
+  ],
+  "environment": {
+    "api_key_name": "OPENAI_API_KEY",
+    "api_key_present": false,
+    "browser_available": false,
+    "embedding_service": "unavailable (deterministic hash-n-gram embedding used for B-RETRIEVAL-K5)",
+    "model_calls": 0,
+    "model_tokens": 0,
+    "platform": "linux",
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "third_party_packages": [
+      "tiktoken 0.14.0 (declared tokenizer, cl100k_base)",
+      "pytest 9.1.1"
+    ],
+    "tokenizer_declared": "tiktoken cl100k_base (available but primary metric is request count, not token count)"
+  },
+  "experiment_id": "EXP-PRODUCT-36306521892",
+  "frozen_inputs": {
+    "freeze_verified": true,
+    "prereg_sha256": "b06fc5aca6daacebf394b3ea673d4ec7b486c851e2544648650053408e702986",
+    "request_sha256": "cdd5a13d6b74253b59a216898543cb6b11bcb858a320ff714649089f6c447415",
+    "spec_sha256": "40de3b04a63c0bdd551430fc29e676684aff4567cd2e8176aaf9d089a78746d6c"
+  },
+  "git_state": {
+    "base_sha": "4682030b49d96a0dc1c4a7522ed767ac0efcc3d6",
+    "committed_changes_to_src_or_tests_in_base_range": 3,
+    "diff_stat_base_to_head": "src/spider/kernel.py | 425 +++..., src/spider/models.py | 1 +, tests/test_kernel.py | 148 +++, 3 files changed, 564 insertions(+), 10 deletions(-)",
+    "durable_artifact_note": "Kernel distill_parameterized committed at HEAD 408f3bc1 with nonempty diff vs base_sha; tests reach EXECUTABLE through distill_parameterized. NOTE: a falsy promote_to_product at verdict will trigger revert_product_reject.py (spider-lane.yml line 324) to restore these files to pre_execute_sha 54fbb995. This is the predicted control-plane behavior, not an execution failure.",
+    "durable_artifact_verified": true,
+    "head_is_descendant_of_base": true,
+    "head_sha": "408f3bc1e678214ac385874d4d73a58c8017843b",
+    "kernel_sha256_at_head": "57690132de402c12c866a16f0e1dd2901c036dcb852813958895d7a01d340de3",
+    "working_tree_clean_for_src_tests": true
+  },
+  "github_run_attempt": 1,
+  "github_run_id": "36306521892",
+  "lane": "product",
+  "measurement_transaction": {
+    "bootstrap_B": 5000,
+    "bootstrap_n_strata": 3,
+    "cheap_regime_requests": 651,
+    "costly_regime_requests": 888,
+    "induction_requests_cheap": 150,
+    "reauths_costly": 16,
+    "seed": 42,
+    "total_http_requests": 1689
+  },
+  "schema_version": 1,
+  "test_evidence": {
+    "command": "python -m pytest tests/test_kernel.py -v",
+    "note": "All ParameterInductionTests (T1-T6) reach EXECUTABLE through kernel.distill_parameterized, not by hand-building a Mechanism at confidence 0.95.",
+    "result": "9 passed",
+    "tests_reaching_executable_through_distill": 9
+  },
+  "validity": {
+    "claim_update_authorized": false,
+    "claim_update_reason": "Outcome is MIXED, not SUPPORTS. C-PRODUCT-ECON advances to EXPERIMENTAL (bounded: f* measured in costly regime, cheap regime negative). C-PARAM-INHERIT reinforced at EXPERIMENTAL. No promotion. promote_to_product must be false per Director mandate.",
+    "infrastructure_failure": false,
+    "measurement_valid": true,
+    "protocol_amendments": []
+  }
+}
