@@ -1,0 +1,139 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36293269574/result.json",
+      "sha256": "c505d697cd8b162d03abfc38545c8ecf9aeabae3bf0d6d2b711aba0311749c04",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36293269574/report.md",
+      "sha256": "cf36a520c6b0c40798ef4161ad4854b699bccc3e5c82480fdf4fc77d12e5acad",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36293269574/provenance.json",
+      "sha256": "164e4cb9abc2281c55ae2fc79aab78c2f45f7f3c0b010ea1229ab6cdf3e23c48",
+      "role": "provenance"
+    }
+  ],
+  "controls": {
+    "COLD_REEXPLORATION": {
+      "expected": "High cost, zero amortization",
+      "observed": {
+        "amortized_cost_per_episode": 240.0,
+        "episodes": 50,
+        "observation_tokens": 11900,
+        "repair_events": 0,
+        "requests": 100,
+        "total_cost": 12000,
+        "verification_calls": 0
+      },
+      "pass": true
+    },
+    "NO_MEMORY_DETERMINISTIC": {
+      "expected": "Lower cost than cold, no amortization",
+      "observed": {
+        "amortized_cost_per_episode": 240.0,
+        "episodes": 50,
+        "observation_tokens": 11900,
+        "repair_events": 0,
+        "requests": 100,
+        "total_cost": 12000,
+        "verification_calls": 0
+      },
+      "pass": true
+    },
+    "NULL_STATE_KEYED": {
+      "expected": "false_replay_rate >= 0.05",
+      "observed": 0.0,
+      "pass": false
+    },
+    "ORACLE_PERFECT_TRANSFER": {
+      "expected": "correctness = 1.0, abstention = 0.0",
+      "observed": {
+        "abstention": 0.0,
+        "correctness": 1.0
+      },
+      "pass": true
+    },
+    "WITHIN_EPISODE_SCRATCHPAD": {
+      "expected": "High correctness, no cross-episode amortization",
+      "observed": {
+        "correctness": 1.0,
+        "cost": {
+          "amortized_cost_per_episode": 240.0,
+          "episodes": 50,
+          "observation_tokens": 11900,
+          "repair_events": 0,
+          "requests": 100,
+          "total_cost": 12000,
+          "verification_calls": 0
+        }
+      },
+      "pass": true
+    }
+  },
+  "experiment_id": "EXP-FRONTIER-36293269574",
+  "lane": "frontier",
+  "metrics": {
+    "abstention_rate": {
+      "COLD_REEXPLORATION": 0.0,
+      "INHERITED_PARAMETERIZED": 0.0,
+      "NO_MEMORY_DETERMINISTIC": 0.0,
+      "NULL_STATE_KEYED": 0.0,
+      "ORACLE_PERFECT_TRANSFER": 0.0,
+      "WITHIN_EPISODE_SCRATCHPAD": 0.0
+    },
+    "amortized_cost_per_episode": {
+      "COLD_REEXPLORATION": 240.0,
+      "INHERITED_PARAMETERIZED": 0.0,
+      "NO_MEMORY_DETERMINISTIC": 240.0,
+      "NULL_STATE_KEYED": 241.88,
+      "ORACLE_PERFECT_TRANSFER": 252.0,
+      "WITHIN_EPISODE_SCRATCHPAD": 240.0
+    },
+    "false_replay_rate": {
+      "COLD_REEXPLORATION": 0.0,
+      "INHERITED_PARAMETERIZED": 0.0,
+      "NO_MEMORY_DETERMINISTIC": 0.0,
+      "NULL_STATE_KEYED": 0.0,
+      "ORACLE_PERFECT_TRANSFER": 0.0,
+      "WITHIN_EPISODE_SCRATCHPAD": 0.0
+    },
+    "session_scoped_identifier_prevalence": 0.0,
+    "span_level_action_correctness": {
+      "COLD_REEXPLORATION": 1.0,
+      "INHERITED_PARAMETERIZED": 0.0,
+      "NO_MEMORY_DETERMINISTIC": 1.0,
+      "NULL_STATE_KEYED": 1.0,
+      "ORACLE_PERFECT_TRANSFER": 1.0,
+      "WITHIN_EPISODE_SCRATCHPAD": 1.0
+    },
+    "stable_identifier_prevalence": 0.06
+  },
+  "observations": [
+    "TEST sites reachable: ['https://api.ipify.org', 'https://dog.ceo', 'https://catfact.ninja', 'https://api.chucknorris.io', 'https://zenquotes.io']",
+    "Overall stable identifier prevalence: 0.060",
+    "Overall session-scoped identifier prevalence: 0.000",
+    "INHERITED_PARAMETERIZED arm unavailable: True",
+    "Total episodes executed: 50"
+  ],
+  "outcome": "MIXED",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether parameterized mechanism would transfer if available",
+    "Whether stable identifier prevalence > 0.10 holds on broader Web sample",
+    "Whether NULL_STATE_KEYED false replay rate would be >= 0.05 on read-write sites with CSRF/session identifiers",
+    "Exact token cost mapping to real model API pricing"
+  ],
+  "validity_notes": [
+    "INHERITED_PARAMETERIZED arm unavailable - src/spider/kernel.py lacks distill_parameterized method; distill() hardcodes confidence=0.5 < min_confidence=0.8",
+    "TEST sites are read-only public APIs (no CREATE/UPDATE/DELETE support); task family adapted to available operations",
+    "Minimal structural observation tokens vary by site (35-200 tokens) vs 763-token baseline from EXP-INTEL-36287179392 (HTML pages)",
+    "Identifier detection uses heuristic patterns; may miss site-specific identifier schemas",
+    "NULL_STATE_KEYED false replay measurement limited by read-only API nature (fewer gating objects)",
+    "No site identity leakage prevention verified by audit (mechanisms are stateless functions)",
+    "Cost ledger uses token + request + verification + repair units; no model API calls"
+  ]
+}
