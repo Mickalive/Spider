@@ -1,0 +1,4592 @@
+{
+  "artifacts": [
+    {
+      "path": "artifacts/baseline_replication.json",
+      "role": "raw",
+      "sha256": "327a03cf5f091264b52d10cfa4c640311aaceb3b50a8b71452772d5717f3ae2a"
+    },
+    {
+      "path": "artifacts/binding_compilation_closure.json",
+      "role": "derived",
+      "sha256": "fc39557a855c5d42187ebed2a5acd63b6b7324f15ef802d24ab76b1623ce1c69"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC-declared_alternate_literal_step2.jsonl",
+      "role": "raw",
+      "sha256": "2e5048d90d0bef3dc566c62374c8a116a395d195cab84204194a3cb59f56f12a"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC-declared_alternate_prefix_intent.jsonl",
+      "role": "raw",
+      "sha256": "38742c2ba06f0293c1ad365bc45751f75ad2e72200a81b5f9ab6f4b272e60425"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "role": "raw",
+      "sha256": "7c2774212fff037e22115d3960f280df547d03c85422565e61ab1b2ec19ba0da"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_arm_native_state_key.jsonl",
+      "role": "raw",
+      "sha256": "d215bd4a757fff132838b7a8a8c4e4f1df64deee6c2dd64b6ce21eec4396075b"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "8fd9e83a6a26b981680ab8e54d1bc68220e334e188b896975e59f372efedd772"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_literal_rule_arm_native_state_key.jsonl",
+      "role": "raw",
+      "sha256": "ec191edf5439d7fcd975c55293a3b0dfeedb2106852682898f863ec91d6b9028"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_literal_rule_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "4fe8910b122db321b661646bbda22385598d3dc384a31691d57a3c1fa2dc92c4"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_prefix_intent_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "8dda88ed5d43c851c65706127438e1390a9dd739ef8ffd55c46284519b235392"
+    },
+    {
+      "path": "artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "4011e077e7b3341326a22c61c69b4287181f4c6d27279e24a5f2cc94e8bc383b"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.00.json",
+      "role": "derived",
+      "sha256": "f617c3bdf6048ba7fb0f34381550e52338ec2ae489e2608d868b2cbef561c856"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.25.json",
+      "role": "derived",
+      "sha256": "cefb525606e016b8a2053352fe2583d40c39875f135688536960c43675f8b073"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.50.json",
+      "role": "derived",
+      "sha256": "cf419add39c92fa9a9f8fc1a6f1dfe59e8004a5bd8934b12ad5c49a9861dc5e1"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.75.json",
+      "role": "derived",
+      "sha256": "130abd8b88349b2cf27d0b84e8e905d82fcb4ecf2ec7401d84c4d71e72680f27"
+    },
+    {
+      "path": "artifacts/closure_attribution_1.00.json",
+      "role": "derived",
+      "sha256": "49805f9e7f7349264c4f5596b3f82ae8a0e451a4db6aa48ba1298c3455c1ff35"
+    },
+    {
+      "path": "artifacts/conditioned_arm_statelessness_test.json",
+      "role": "raw",
+      "sha256": "05fb2ea4327994016845a40d7ff896d146a16aefa30fae6b122f91ca41a14a37"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.00.jsonl",
+      "role": "raw",
+      "sha256": "8e83ca3ace02ecf87d0af3e8f87deb9ef29b12210758ab8b422580b4199f8b6c"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.25.jsonl",
+      "role": "raw",
+      "sha256": "7186e646ae4d396f701a4cdaa748c28760f6e65c821678204211f25a9fda035c"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.50.jsonl",
+      "role": "raw",
+      "sha256": "9836fb07ad983d2b9c8b3242b413110ac1f3d438ae985d627a11a45229365deb"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.75.jsonl",
+      "role": "raw",
+      "sha256": "b84b40c7653e801fda33d314e73b418416bee672da49b1d06eb6519a66da6182"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_1.00.jsonl",
+      "role": "raw",
+      "sha256": "25f00751003f24a790e9fd061eadf5c41a167bc75533ac3ef523069d5fa1420a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.00.jsonl",
+      "role": "raw",
+      "sha256": "feca3cadc12aea1965d60abb03eadd7537174bacc49d5aa8a6d49779f1f80d4a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.25.jsonl",
+      "role": "raw",
+      "sha256": "e899f291e524685d9455e738c102ad2e22b77ba8b7b8e93d5723bc9b1352dd9b"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.50.jsonl",
+      "role": "raw",
+      "sha256": "b51e68a0599a8cf9823cca954e229b4a815e39d87b60c34c4f18dfeecb9b5c22"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.75.jsonl",
+      "role": "raw",
+      "sha256": "61e5ac470f12d3782439bb0d921b27fdedf60190d5ed65b2fc9bbb3237c50850"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_1.00.jsonl",
+      "role": "raw",
+      "sha256": "995e605386332cc1e384f0e88ba7d80acd414f5b17952703dc38e655413bc820"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.00.jsonl",
+      "role": "raw",
+      "sha256": "cb28c8a09145780710026d753b353e2fd9731a5629ca715d35a2a45d213bc25a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.25.jsonl",
+      "role": "raw",
+      "sha256": "a664ecefcc5922ed804c6bdffe99138940d821bcf01f8496e3e98983c0c340cb"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.50.jsonl",
+      "role": "raw",
+      "sha256": "164ca6c23ca2b3ff927e102fe5ae986ae053e566a1d879d5400d3396273bc503"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.75.jsonl",
+      "role": "raw",
+      "sha256": "d8d2805b5e0a6ba645f6a51f1cdb8b07f9f4a5728c56ad159023f87854b38630"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_1.00.jsonl",
+      "role": "raw",
+      "sha256": "012b9c170d1eec7c33a8523d81d43e9965fdcf74e552d8a6beb0116f17c73dd3"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.00.jsonl",
+      "role": "raw",
+      "sha256": "b57cdd83d0e5cf34e1d901a004a520aef631497ae1e1e27d614c835b1791ec7c"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.25.jsonl",
+      "role": "raw",
+      "sha256": "3da24b4f04f42323fb0c076cc8852a5e6f54fa78d19cc653a067ec5e8540d99b"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.50.jsonl",
+      "role": "raw",
+      "sha256": "850f8897bf9d655cafea121f100753c7626dc01a7938c98188a90dc7a7ed327d"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.75.jsonl",
+      "role": "raw",
+      "sha256": "d689bd626602d644ed7b0529249009729cf03476aa67245803b6ec1d08929966"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_1.00.jsonl",
+      "role": "raw",
+      "sha256": "934d158e50d2460b1f03b8a3e25af63041d1df864df171577aab9ee2c9cd309e"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.00.jsonl",
+      "role": "raw",
+      "sha256": "0ddb2868cd31914e88f3982fed235ece83dc5d5ada283688af15f82ddebe62b6"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.25.jsonl",
+      "role": "raw",
+      "sha256": "aea7966d69a0757f8506444da6aa57a6a3052122d3769700899b77c3fb90b681"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.50.jsonl",
+      "role": "raw",
+      "sha256": "9aa1cc3ca36be2d9049887f01c85230cc09a64cc8e56900c7224dd199899dbf4"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.75.jsonl",
+      "role": "raw",
+      "sha256": "faad35e2dc81c47359c18e33470ed16c34752b52eb385b1748aa0ca8b0b09c41"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_1.00.jsonl",
+      "role": "raw",
+      "sha256": "0a755a4ed7effa9aea9744f9c28e657845b2b6fd2e943f3dc55f9735e2f17724"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-COLD.jsonl",
+      "role": "raw",
+      "sha256": "999368f05f285f47a45290e675eb1fb0cc4c0ed845f9ae4aa12ff774c4f6d011"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "2e687143b09504f5eb514a52d771b013f084d4255af4697d59d74757f3292a87"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "5e46a125a50e5835b2fb8942bfcf10c1583e44a2c86c30acb21792c550c4cf48"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "1fba1ad2bf46ca13ad54edf9e49622f287362ddc6ff3bf3615e8e6485ee1afce"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES.jsonl",
+      "role": "raw",
+      "sha256": "e257d113ba61c0c82a3626ef32413ee71db2603a51f041369e2190b081f99c71"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "6bfcbf19d8f0025e24adb1fac517a93858f779021eb10e279e0179694456398d"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "7689273f5c6fecd01ab24b3a700b82ee8cf7c9139b739c631835b1ba39211f1b"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "8a59f64ae1f73c657d0d4ca830d5cef52a076e2791e9cd83e43bcd339d5ec65f"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.00.jsonl",
+      "role": "raw",
+      "sha256": "e88e58e5689be434af12033282b2362ee615c17bf37a363a435306fe2082d5b1"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.25.jsonl",
+      "role": "raw",
+      "sha256": "2aa641dcb5e0ccd9ccd1d90d56573aae57e807bb986a1d954ab4ab63af9dc230"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.50.jsonl",
+      "role": "raw",
+      "sha256": "3c2aae5a65fb00619590996b7994b400ad75337896c551199da67da36a2d4ac9"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.75.jsonl",
+      "role": "raw",
+      "sha256": "8fb68c5c682044597fac787026f1e0980eed13a7e84e8ec6615f57251a7a7baf"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_1.00.jsonl",
+      "role": "raw",
+      "sha256": "616de251243c0c52fec12b73a1101c07d25bba7a1da56654ef8ba22f1f5c4490"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.00.jsonl",
+      "role": "raw",
+      "sha256": "7167e971e3b7d0deca5169da98fd43e053de86d86e95d27522c934c341844ee5"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.25.jsonl",
+      "role": "raw",
+      "sha256": "a3696878a6809c599d7bc39fc9cbad17f1b6ccd7b1818c80da7a977539cbdbed"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.50.jsonl",
+      "role": "raw",
+      "sha256": "4d4b92e33ee45701d900c78e114698222a1d5891ab13c20011370b243cac0d4d"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.75.jsonl",
+      "role": "raw",
+      "sha256": "463e736f6580205ebcb90b9c7957ccf5dafd08e5ad78a5b5a930b4889aa9a109"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_1.00.jsonl",
+      "role": "raw",
+      "sha256": "8e2fb01da529efa27f6d5947bde84eac2d329ffb3b7c74589fc4825c44faecb1"
+    },
+    {
+      "path": "artifacts/goal_state_success.json",
+      "role": "raw",
+      "sha256": "d4a2fd8e84544faa55f47084dd0437ce585c6bdc78cb7b14474aa16d2e5f9cdf"
+    },
+    {
+      "path": "artifacts/headroom_closed.json",
+      "role": "derived",
+      "sha256": "21ef3cdd409279a3505b00e7612fcd600994d9f71d66753d2d01f184b43e2736"
+    },
+    {
+      "path": "artifacts/mint_channel_check.json",
+      "role": "raw",
+      "sha256": "bb30c41b8165d63fc39598a95f43d477b176ca2b594cf2bb84a94aeaf42ee4b8"
+    },
+    {
+      "path": "artifacts/nc_verification.json",
+      "role": "raw",
+      "sha256": "4b1238dd93e18e11ab8d4bfcc3acbccecbc53350746ccd833fefc656aec67469"
+    },
+    {
+      "path": "artifacts/paired_bootstrap_cost_differences.json",
+      "role": "derived",
+      "sha256": "6f28f84acb462ee760f00287ba02ba3757c3ee0e6592047fcbc80bb0291830d9"
+    },
+    {
+      "path": "artifacts/pc_verification.json",
+      "role": "raw",
+      "sha256": "33411cd6ee61c4e56854154029394d6f59faf29c28c35fb98bfff5be3c8af43c"
+    },
+    {
+      "path": "artifacts/reference_false_compile.json",
+      "role": "derived",
+      "sha256": "6137b5a5f9badbedfc6aaa4a6b81276c48c30439cfbe679753e8d42e6f797ce3"
+    },
+    {
+      "path": "artifacts/replication_parent_comparison.json",
+      "role": "raw",
+      "sha256": "0e70e2c8a70903acdd2fb66a6677ecdeb4c167073011285557f71e09b3ff6ade"
+    },
+    {
+      "path": "artifacts/replication_parent_numbers.json",
+      "role": "raw",
+      "sha256": "be3849109382ce3c0d942ff837f3b6d2578a4b629fef3041677bdc402cc14c2b"
+    },
+    {
+      "path": "artifacts/run_manifest.json",
+      "role": "raw",
+      "sha256": "fe99c495ce68675cc7c9bc23af2cb7e725223dd2d2266cbb97d4fea9f0eb06a2"
+    },
+    {
+      "path": "artifacts/scratchpad_closure.json",
+      "role": "derived",
+      "sha256": "36f906102b303cda44f71bd7c0e11cc90201a889c5b5a10d2477ff5d74bb1801"
+    },
+    {
+      "path": "artifacts/scratchpad_statelessness_test.json",
+      "role": "raw",
+      "sha256": "05fb2ea4327994016845a40d7ff896d146a16aefa30fae6b122f91ca41a14a37"
+    },
+    {
+      "path": "artifacts/shared_ground_truth_integrity.json",
+      "role": "raw",
+      "sha256": "67a365cfae0df52d79401143ad490c3ba98c5b5dcdd006adf751412906270d97"
+    },
+    {
+      "path": "artifacts/spans_B-COLD-EXPLORATION.jsonl",
+      "role": "raw",
+      "sha256": "cf12322176b92ee964ff4e1dab4519c98123ed6ccb410aa5d78b14b52483e27c"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "role": "raw",
+      "sha256": "aa610ae40409d3b6cb237a7b87cfc804610e93c634ddbe3a914076fcdcc91c92"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "597f750d537b4f7292d1847766b7f539c2ee9aa0cfcaa2e8e026110df1cf0f95"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "role": "raw",
+      "sha256": "ef6e0391161b5072f20bf2c239addfaeb9fef3982d0ebe56be01064136e62fd1"
+    },
+    {
+      "path": "artifacts/spans_CROSS_EPISODE_COMPILED_BINDING.jsonl",
+      "role": "raw",
+      "sha256": "0057f5e399c3e4cf67ae51552e57817d146c8492e3ef0d92023cf3493ee680e5"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-COLD.jsonl",
+      "role": "raw",
+      "sha256": "6d65fc9be175374296b4ac638bb7ef3335d33e8ccc121403e3f684ab1e6cf383"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "5375f0d83839a70ec2515d2bb056ddef9a2448eddcf517aac72cb29aa540ae95"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "6b3d88a40a15c099196d9e53a6e20812e310cfad39d3e13d48cec9cc3657d90c"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "7decd794c9caf7980acddc8c15ec4ed7056915aa18d65bb87e34a0453b61a19f"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES.jsonl",
+      "role": "raw",
+      "sha256": "20325096ba5a1aa8ae6228010b651bed4ccfb8251a8d8685d20f9be25cb06031"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "c850dd711a3035a828619fdd2f4e7ad6cca9cb11bfccf9bc80d274bc0a9e7ed7"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "ea8531d6ee6c862ffe862f9191844bc2c252d1d4ab25c6a74256fec010803ea3"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "0c6d54231a9c7b7bc9f2c2d8a6125f75602ab96d8a4a0a469c98078672cad4ee"
+    },
+    {
+      "path": "artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "role": "raw",
+      "sha256": "92a3fd6becd327f5ad0a26514552d93f385de1c0cdbce2dc51b41493a27f90f6"
+    },
+    {
+      "path": "artifacts/spans_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG.jsonl",
+      "role": "raw",
+      "sha256": "a74ba9196c0521df07a8c176f7ba64e2c0c55905af87679c4b183f7fe305934d"
+    },
+    {
+      "path": "artifacts/spans_WITHIN_EPISODE_SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "6c6909405fc43508e714c201eab7a6a70002baaa879e501dbac2a26167a93333"
+    },
+    {
+      "path": "artifacts/substrate_idempotency.json",
+      "role": "raw",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.00.json",
+      "role": "derived",
+      "sha256": "4affeac62bc0dc1de3cbfbf48ac7bccf7cecf600a2634ec3ea6da2d3aac3f65d"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.25.json",
+      "role": "derived",
+      "sha256": "c3d91149e3a354ddeb61872347916fd7d04b8867adb488a890abd24c139de3a0"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.50.json",
+      "role": "derived",
+      "sha256": "6c2d49678ba054b926ccaaa27fa2450716468d0e92ad6f1b0444a339d3235bfe"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.75.json",
+      "role": "derived",
+      "sha256": "8f3307e20810b9577a815cbf6078c241571305562ec372b19e003d8a8a9afaa3"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_1.00.json",
+      "role": "derived",
+      "sha256": "740d987d56280b866f1288c77923029264535cdfd085b5bdbb34ccbabc02e29c"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.00.json",
+      "role": "derived",
+      "sha256": "64b25a8878bf19253f8a724270e07c1e3c945cd057370a3b4b53a8871ce46bd7"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.25.json",
+      "role": "derived",
+      "sha256": "3f75d5a5c2a487837affa55921e0806ca39a02aa940817e04ec67a3b0282a56c"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.50.json",
+      "role": "derived",
+      "sha256": "0015f54527325abe3442463842824cc498287a2929b3d52e8ee0556c4bca6396"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.75.json",
+      "role": "derived",
+      "sha256": "a8c35683a8389d87bd894a1edc04d1113d33e291c051e9d1ba61c2e8d6e05ff4"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_1.00.json",
+      "role": "derived",
+      "sha256": "d6c44acdc3fe16c7f498cbd0d4b6fe50f1d13f9d2e464105ed587dea2d8fe998"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.00.json",
+      "role": "derived",
+      "sha256": "2866463dd44031adb27d013e8c6909e2286002a9b7d281fa56077b697e5e6a5e"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.25.json",
+      "role": "derived",
+      "sha256": "72262e5d80a22d48f85150413d4bb9e623835d67019a640b660dc9023c31760f"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.50.json",
+      "role": "derived",
+      "sha256": "c0471e1f490979e9acf31b828eb6bdf45f869e6a865ec8871fbcc45841d8217b"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.75.json",
+      "role": "derived",
+      "sha256": "63232e6f1ff6ed671e131526ce6c2224d98c2d197174ba57a852bb7900e3c8e8"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_1.00.json",
+      "role": "derived",
+      "sha256": "3242ba09e662912fe43d9992c85dd0b071849973bcf347facc054783aee00f7b"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.00.json",
+      "role": "derived",
+      "sha256": "41d7f8fdee79253c1da68a82119dcdeac8e638985e19cd60656afd59ae37455e"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.25.json",
+      "role": "derived",
+      "sha256": "78d16ab0bcc9a11b4e77202e206d8fd9e6db193e468d29c6b9f67fec0b5641a2"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.50.json",
+      "role": "derived",
+      "sha256": "f22f6c7f09eba21e40f082e4fc2229942d98fc091612be2c05afbab8a3cd5f81"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.75.json",
+      "role": "derived",
+      "sha256": "96f6891b13327a2e91919653b3e5313680e95a173a2cdd710ed85a085f5aab74"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_1.00.json",
+      "role": "derived",
+      "sha256": "813df39b9add7b8f2214301332141d44fa77494cc180f21073255b1e741dde13"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.00.json",
+      "role": "derived",
+      "sha256": "b079b3926534a10652c193ab572fab40357a2ef56497a6fb74af103e5c507b94"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.25.json",
+      "role": "derived",
+      "sha256": "3e1724719cbe2fbac136b7623c7d94617655201e746ce57d932eff92277804ad"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.50.json",
+      "role": "derived",
+      "sha256": "47baf1e6c93f86213e78481ebf4c8eefb5f472d83703055c5c3354da9e5d158f"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.75.json",
+      "role": "derived",
+      "sha256": "f003636f24f1a527424a0b38971f23ba64fa6dfccfe150486b526f22873edae9"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_1.00.json",
+      "role": "derived",
+      "sha256": "8a037690b07aa9d734306468c3d6534a3cfecfac378af85392b37855270a5a13"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.00.json",
+      "role": "derived",
+      "sha256": "9235d758391739949c909627f43ea6ce61854522f9f28d9186e692fc1faf500e"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.25.json",
+      "role": "derived",
+      "sha256": "46ed24232528313ea7f5e3f7bace0f11f5142c3801b2bda7133848660d6e7502"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.50.json",
+      "role": "derived",
+      "sha256": "0405de8530cb6ab8f64c3ce334f2063db6eb6188eda059972e7d48a7abb90730"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.75.json",
+      "role": "derived",
+      "sha256": "8d2bba167b5742080b87fcb14ff3ae70e711aac1f8895aa1bd8b62a7d699ef50"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_1.00.json",
+      "role": "derived",
+      "sha256": "3d0b52daaf5b77e45c426afe3f2a6204582bd94186ccc50160cc93a301cf95e1"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.00.json",
+      "role": "derived",
+      "sha256": "e7ca64ca92b749b65c3cefc6e6f036ae3659e0a00a4baeee2573ebe83f555830"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.25.json",
+      "role": "derived",
+      "sha256": "ca16d729e856286823b74845c101433d35bd86d35fd955e4224bd5f666a13e13"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.50.json",
+      "role": "derived",
+      "sha256": "7ab594757d3fa4f4afe2f188c9efdac697e33f07f8969ec7c32c41a5e2780190"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.75.json",
+      "role": "derived",
+      "sha256": "390d46e0eb2c97a5d213fe24b7c21e3e2466d84121838f0e9d18f1212d43e303"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_1.00.json",
+      "role": "derived",
+      "sha256": "6ecec97aeada2c800b56fc7ec469663f9e95087cba85f4e44cb74e593218ced7"
+    },
+    {
+      "path": "artifacts/task_generator_config.json",
+      "role": "raw",
+      "sha256": "948885a10d1a954f954ce5205cb88aae7c8cabbc9060c606ec49cd03d0e174a6"
+    }
+  ],
+  "claims_not_made": [
+    "No claim that within-episode value propagation is sufficient to close the residual as a class of agent architectures: only two arms on one plan family on one substrate were measured.",
+    "No claim that persistent cross-episode inheritance is unnecessary. The producer does not self-promote; the frozen scope verdict is reported as measured and adjudicated by the Director.",
+    "No claim that goal-state success is a valid endpoint; it is reported here only as a measured blindness demonstration."
+  ],
+  "controls": {
+    "CTRL-ARM-STATELESSNESS": {
+      "evidence": [
+        "artifacts/scratchpad_statelessness_test.json",
+        "artifacts/conditioned_arm_statelessness_test.json"
+      ],
+      "expected": "prereg.md 6.1: 14 statelessness checks, 0 failures, plus the GoalOnlyPlan AttributeError guard; no-go 5",
+      "observed": "47 checks, 0 failed; GoalOnlyPlan guard present=True",
+      "result": "PASS"
+    },
+    "CTRL-BASELINE-REPLICATION": {
+      "evidence": [
+        "artifacts/baseline_replication.json"
+      ],
+      "expected": "the four inherited parent arms reproduce their parent-packet values (ratchet 0.9833 span-level correctness and 40.94/34.08/36.64/44.84/47.06 amortized cost with the plant, conditioned 0.8500 at 48.0, narrow 0.5667, cold 1.0 at 72.0, and 30/30/20/0/0 false compiled replays)",
+      "observed": "{\"checks\": {\"B-COLD-EXPLORATION_cost_is_72\": true, \"B-COLD-EXPLORATION_span_correctness_is_1\": true, \"B-NO-MEMORY-CONDITIONED-NARROW_span_correctness_matches_parent\": true, \"B-NO-MEMORY-CONDITIONED-WIDE_cost_is_48\": true, \"B-NO-MEMORY-CONDITIONED-WIDE_span_correctness_matches_parent\": true, \"B-NO-MEMORY-DETERMINISTIC_cost_per_rate_matches_parent_with_plant\": true, \"B-NO-MEMORY-DETERMINISTIC_false_compiles_per_rate_match_parent\": true, \"B-NO-MEMORY-DETERMINISTIC_nu_0.50_correctness_matches_parent_headline\": true, \"B-NO-MEMORY-DETERMINISTIC_per_rate_correctness_identical_to_parent_artifact\": true, \"B-NO-MEMORY-DETERMINISTIC_pooled_correctness_identical_to_parent_artifact\": true}, \"reference_arm_exact_replication\": {\"per_rate_identical\": true, \"pooled_identical\": true}, \"span_correctness_pooled\": {\"B-COLD-EXPLORATION\": 1.0, \"B-NO-MEMORY-CONDITIONED-NARROW\": 0.5666666666666667, \"B-NO-MEMORY-CONDITIONED-WIDE\": 0.85, \"B-NO-MEMORY-DETERMINISTIC\": 0.9866666666666667, \"CROSS_EPISODE_COMPILED_BINDING\": 1.0, \"WITHIN_EPISODE_SCRATCHPAD\": 1.0, \"WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG\": 0.8833333333333333}}",
+      "result": "PASS"
+    },
+    "CTRL-FROZEN-INPUTS": {
+      "evidence": [
+        "freeze.json",
+        "artifacts/run_manifest.json"
+      ],
+      "expected": "recomputed sha256 of request.json / spec.json / prereg.md equal freeze.json",
+      "observed": "all_match=True",
+      "result": "PASS"
+    },
+    "CTRL-GOAL-STATE-SUCCESS": {
+      "evidence": [
+        "artifacts/goal_state_success.json"
+      ],
+      "expected": "every arm reaches goal-state success 1.0 (the parent's invariant); any arm below is an instrument failure",
+      "important_caveat": "goal-state success is blind to a missing binding key; it is reported only as a blindness demonstration, never as a quality measure",
+      "observed": "{\"B-COLD-EXPLORATION\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 1.0}, \"B-NO-MEMORY-CONDITIONED-NARROW\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 0.5666666666666667}, \"B-NO-MEMORY-CONDITIONED-WIDE\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 0.85}, \"B-NO-MEMORY-DETERMINISTIC\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 0.9866666666666667}, \"CROSS_EPISODE_COMPILED_BINDING\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 1.0}, \"WITHIN_EPISODE_SCRATCHPAD\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 1.0}, \"WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG\": {\"goal_state_success\": 1.0, \"span_level_action_correctness\": 0.8833333333333333}}",
+      "result": "PASS"
+    },
+    "CTRL-MINT-CHANNEL": {
+      "evidence": [
+        "artifacts/mint_channel_check.json"
+      ],
+      "expected": "prereg.md 5 and no-go 6: the mint response BODY carries capability_handle, the non-mint body is unchanged, and the handle is a pure function of (MINT_SALT, episode counter)",
+      "observed": "{\"all_passed\": true, \"handle_changes_with_the_counter\": {\"all_later_handles_are_distinct\": true, \"all_later_handles_differ_from_counter_1\": true, \"all_later_handles_match_the_declared_pure_function\": true, \"counter_1_handle\": \"00000001fac708db\", \"later_counters\": {\"2\": \"00000002ef34b84a\", \"3\": \"00000003b58b3c4f\", \"4\": \"0000000400bf7fac\"}}, \"handle_equals_declared_pure_function\": true, \"handle_format\": {\"expected_length\": 16, \"mint_salt\": \"014630eeab62b06a\", \"value\": \"00000001fac708db\"}, \"handle_is_deterministic_at_a_fixed_counter\": {\"repeats\": 20, \"unique_handles\": 1, \"unique_hashes\": 1}, \"mint_body_is_non_mint_body_plus_exactly_one_field\": true, \"mint_response_body_carries_capability_handle\": true, \"mint_status_code_unchanged\": true, \"n_substrate_requests\": 25, \"non_mint_put_body_unchanged\": true}",
+      "result": "PASS"
+    },
+    "CTRL-REPL-PARENT-NUMBERS": {
+      "evidence": [
+        "artifacts/replication_parent_comparison.json",
+        "artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+        "artifacts/replication_parent_numbers.json"
+      ],
+      "expected": "prereg.md 15.2 / no-go 2: byte-identical per-span replication of the parent reference arm on the parent-identical generator (class_iii=False), and the parent cost anchor 38.6 at novelty 0.50",
+      "observed": "identical=True, rows=1200, field_mismatches=0; amortized cost at novelty 0.50 = 38.6 (parent 38.6); per-rate cost anchors identical = True",
+      "result": "PASS"
+    },
+    "CTRL-SHARED-GROUND-TRUTH": {
+      "evidence": [
+        "artifacts/shared_ground_truth_integrity.json"
+      ],
+      "expected": "prereg.md 10: the declared plan action bound at execution time is identical for every arm and reproducible",
+      "observed": "{\"agrees_with_reference_arm_pass\": true, \"every_gated_handle_equals_declared_pure_function\": true, \"independent_passes_agree\": true, \"n_gated_spans_checked\": 120, \"n_spans_checked\": 1200, \"purpose\": \"the single shared declared plan action (prereg.md 10) must be arm-independent and reproducible: two independent reference passes at novelty 0.50 materialise identical actions, they agree with the reference arm's own materialisation, and every gated span's handle equals the declared pure function mint_token(episode counter)\"}",
+      "result": "PASS"
+    },
+    "CTRL-SUBSTRATE-IDEMPOTENCY": {
+      "evidence": [
+        "artifacts/substrate_idempotency.json"
+      ],
+      "expected": "prereg.md 4: 8 request shapes x 100 repeats -> exactly 1 response hash and 1 status code per shape",
+      "observed": "n_probes=8, repeats_per_probe=100, identical_round_trips=800, all_deterministic=True",
+      "result": "PASS"
+    },
+    "NC-UNIQUE-STATES": {
+      "evidence": [
+        "artifacts/nc_verification.json",
+        "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_prereg13_state_key.jsonl"
+      ],
+      "expected": "prereg.md 8 / no-go 4: sigma_2 == 0 exactly under the authoritative goal-aware rule with the literal prereg.md 13 mechanism, and no span is labelled class (ii) under any rule variant",
+      "observed": "{\"all_rule_variants\": {\"authoritative_goal_aware_intent_role_arm_native_state_key\": 49, \"authoritative_goal_aware_intent_role_prereg13_state_key\": 0, \"declared_alternate_literal_rule_arm_native_state_key\": 49, \"declared_alternate_literal_rule_prereg13_state_key\": 0, \"declared_alternate_prefix_intent_prereg13_state_key\": 0}, \"arm_correctness_is_NOT_the_criterion\": {\"compiled_binding\": 1.0, \"inherited_conditioned_wide\": 0.0, \"note\": \"the collapse is driven by the prefix's coverage of the request, not by memory scope: the NEW scratchpad and the INHERITED conditioned arm collapse identically, while the ratchet, the cold arm and the new compiled arm (all of which see the plan action) do not. no-go 4 is a criterion about the CLASSIFIER (sigma_2 == 0), and it is evaluated on the labels alone, so this arm-level collapse does not bear on it.\", \"scratchpad\": 0.0}, \"authoritative_sigma_2\": 0}",
+      "result": "PASS"
+    },
+    "PC-PLANTED-DISAMBIGUATION": {
+      "evidence": [
+        "artifacts/pc_verification.json",
+        "artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl"
+      ],
+      "expected": "prereg.md 7 / no-go 3: the scratchpad and the cross-episode compiled arm must close 200/200 planted spans; the ratchet compiles 0/200 because the state key is identical",
+      "observed": "{\"emitted_correct\": {\"B-NO-MEMORY-DETERMINISTIC\": 200, \"CROSS_EPISODE_COMPILED_BINDING\": 200, \"WITHIN_EPISODE_SCRATCHPAD\": 200}, \"memory_mechanism_only\": {\"B-NO-MEMORY-DETERMINISTIC\": 0, \"CROSS_EPISODE_COMPILED_BINDING\": 0, \"WITHIN_EPISODE_SCRATCHPAD\": 0}, \"plant_verified_observation_identical\": true, \"planted_span_occurrences\": 200}",
+      "result": "PASS"
+    }
+  },
+  "decision": {
+    "clause_1_fired": false,
+    "clause_2_correctness_leg_only": true,
+    "clause_2_fired": false,
+    "clause_3_correctness_leg_only": true,
+    "clause_3_fired": false,
+    "frozen_outcome_label": "SCRATCHPAD_CORRECT_BUT_COSTLY",
+    "frozen_outcome_mapping_text_verbatim": "Scratchpad achieves correctness but exceeds cost threshold; persistent inheritance may still have economic niche.",
+    "no_go_conditions_fired": [],
+    "outcome_mapping_source": "spec.json decision_rule.outcome_mapping / prereg.md 3",
+    "packet_outcome_enum_mapping_rationale": "spec.json's outcome_mapping values are sentences, not the packet's outcome enum, so the enum value is the producer's explicit mapping: a fired sufficiency clause is evidence FOR the frozen claim (SUPPORTS), a correctness-only clause is a split result (MIXED), and a non-firing or residual-not-zero clause leaves the residual open (INCONCLUSIVE). The frozen sentence is preserved verbatim above.",
+    "product_consequence": "prereg.md 19 named SCRATCHPAD_SUFFICES or BINDING_KEY_COMPILATION_SUFFICES as the outcomes that would cause SPIDER to narrow or drop persistent cross-episode inheritance. Neither fired."
+  },
+  "experiment_id": "EXP-FRONTIER-36287182510",
+  "lane": "frontier",
+  "metrics": {
+    "amortized_cost_units_per_episode": {
+      "definition": "prereg.md 10.3 and 11: (compile + machinery + model + execution) / episodes on the declared three-term ledger plus the declared machinery term",
+      "ledger_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "amortized_cost_units_per_episode": 72.0,
+          "compile_units": 0,
+          "component_detail": {
+            "execution": 1200,
+            "machinery": 1200,
+            "model": 1200,
+            "resolve_calls": 1200,
+            "resolve_unknown": 1200
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 1200,
+          "model_units": 1200,
+          "total_units": 3600
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "amortized_cost_units_per_episode": 48.0,
+          "compile_units": 0,
+          "component_detail": {
+            "execution": 1200,
+            "model": 1200
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 0,
+          "model_units": 1200,
+          "total_units": 2400
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "amortized_cost_units_per_episode": 48.0,
+          "compile_units": 0,
+          "component_detail": {
+            "execution": 1200,
+            "model": 1200
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 0,
+          "model_units": 1200,
+          "total_units": 2400
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "amortized_cost_units_per_episode": 40.94,
+          "compile_units": 9,
+          "component_detail": {
+            "cache_key_conflicts": 4,
+            "compile": 9,
+            "compiled_replays": 362,
+            "execution": 1200,
+            "model": 838,
+            "spans_compiled": 9
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 0,
+          "model_units": 838,
+          "total_units": 2047
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "amortized_cost_units_per_episode": 48.2,
+          "compile_units": 10,
+          "component_detail": {
+            "cache_key_conflicts": 1,
+            "compile": 10,
+            "execution": 1200,
+            "handles_induced_from_response_bodies": 60,
+            "machinery": 360,
+            "machinery_resolve_bind_verify": 360,
+            "model": 840,
+            "spans_compiled": 10
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 360,
+          "model_units": 840,
+          "total_units": 2410
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "amortized_cost_units_per_episode": 48.0,
+          "compile_units": 0,
+          "component_detail": {
+            "execution": 1200,
+            "handle_values_read_from_response_bodies": 60,
+            "model": 1200,
+            "spans_resolved_from_scratchpad": 120,
+            "spans_ungated_or_unresolved": 1080
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 0,
+          "model_units": 1200,
+          "total_units": 2400
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "amortized_cost_units_per_episode": 48.0,
+          "compile_units": 0,
+          "component_detail": {
+            "execution": 1200,
+            "handle_values_read_from_response_bodies": 200,
+            "model": 1200,
+            "spans_resolved_from_scratchpad": 120,
+            "spans_ungated_or_unresolved": 1080
+          },
+          "episodes": 50,
+          "execution_units": 1200,
+          "machinery_units": 0,
+          "model_units": 1200,
+          "total_units": 2400
+        }
+      },
+      "per_novelty_rate_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "0.00": 72.0,
+          "0.25": 72.0,
+          "0.50": 72.0,
+          "0.75": 72.0,
+          "1.00": 72.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "0.00": 48.0,
+          "0.25": 48.0,
+          "0.50": 48.0,
+          "0.75": 48.0,
+          "1.00": 48.0
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "0.00": 48.0,
+          "0.25": 48.0,
+          "0.50": 48.0,
+          "0.75": 48.0,
+          "1.00": 48.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "0.00": 34.08,
+          "0.25": 36.64,
+          "0.50": 40.94,
+          "0.75": 44.84,
+          "1.00": 47.06
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "0.00": 48.4,
+          "0.25": 48.3,
+          "0.50": 48.2,
+          "0.75": 48.1,
+          "1.00": 48.02
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "0.00": 48.0,
+          "0.25": 48.0,
+          "0.50": 48.0,
+          "0.75": 48.0,
+          "1.00": 48.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "0.00": 48.0,
+          "0.25": 48.0,
+          "0.50": 48.0,
+          "0.75": 48.0,
+          "1.00": 48.0
+        }
+      },
+      "pooled_by_arm": {
+        "B-COLD-EXPLORATION": 72.0,
+        "B-NO-MEMORY-CONDITIONED-NARROW": 48.0,
+        "B-NO-MEMORY-CONDITIONED-WIDE": 48.0,
+        "B-NO-MEMORY-DETERMINISTIC": 40.712,
+        "CROSS_EPISODE_COMPILED_BINDING": 48.204,
+        "WITHIN_EPISODE_SCRATCHPAD": 48.0,
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": 48.0
+      },
+      "unit": "abstract units per episode"
+    },
+    "class_ii_rule_operationalisations": {
+      "authoritative_goal_aware_intent_role": {
+        "definition": "prereg.md 9: state key + goal intent, intent = the `intent` field of the goal prefix (which the generator sets to the role)",
+        "per_novelty_rate": {
+          "0.00": {
+            "counts": {
+              "i": 748,
+              "ii": 332,
+              "iii": 120
+            },
+            "deterministic_occurrences": 1050,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.34968566637256415,
+                0.40443478044277703
+              ],
+              "k": 452,
+              "n": 1200,
+              "point": 0.37666666666666665
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.8550831289728186,
+                0.8925236205751302
+              ],
+              "k": 1050,
+              "n": 1200,
+              "point": 0.875
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.5955652195572229,
+                0.6503143336274358
+              ],
+              "k": 748,
+              "n": 1200,
+              "point": 0.6233333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.2520989355862645,
+                0.30265971134962366
+              ],
+              "k": 332,
+              "n": 1200,
+              "point": 0.27666666666666667
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.25": {
+            "counts": {
+              "i": 778,
+              "ii": 302,
+              "iii": 120
+            },
+            "deterministic_occurrences": 860,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.325162909690181,
+                0.3791170871552969
+              ],
+              "k": 422,
+              "n": 1200,
+              "point": 0.3516666666666667
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.6905110256785041,
+                0.7414395407269774
+              ],
+              "k": 860,
+              "n": 1200,
+              "point": 0.7166666666666667
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.620882912844703,
+                0.674837090309819
+              ],
+              "k": 778,
+              "n": 1200,
+              "point": 0.6483333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.22793174916689724,
+                0.2769864477991277
+              ],
+              "k": 302,
+              "n": 1200,
+              "point": 0.25166666666666665
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.50": {
+            "counts": {
+              "i": 814,
+              "ii": 266,
+              "iii": 120
+            },
+            "deterministic_occurrences": 630,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.2958427123394164,
+                0.3486287445422256
+              ],
+              "k": 386,
+              "n": 1200,
+              "point": 0.32166666666666666
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.49671096871398307,
+                0.5531294812558802
+              ],
+              "k": 630,
+              "n": 1200,
+              "point": 0.525
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.6513712554577744,
+                0.7041572876605835
+              ],
+              "k": 814,
+              "n": 1200,
+              "point": 0.6783333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.1990743272668342,
+                0.24603532973535494
+              ],
+              "k": 266,
+              "n": 1200,
+              "point": 0.22166666666666668
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.75": {
+            "counts": {
+              "i": 842,
+              "ii": 238,
+              "iii": 120
+            },
+            "deterministic_occurrences": 420,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.27312364995652255,
+                0.32483005361991385
+              ],
+              "k": 358,
+              "n": 1200,
+              "point": 0.29833333333333334
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.3235308905725719,
+                0.37742640960824847
+              ],
+              "k": 420,
+              "n": 1200,
+              "point": 0.35
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.6751699463800861,
+                0.7268763500434775
+              ],
+              "k": 842,
+              "n": 1200,
+              "point": 0.7016666666666667
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.17675073358940147,
+                0.22184117010758192
+              ],
+              "k": 238,
+              "n": 1200,
+              "point": 0.19833333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "1.00": {
+            "counts": {
+              "i": 881,
+              "ii": 199,
+              "iii": 120
+            },
+            "deterministic_occurrences": 200,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.24161391993340614,
+                0.29154719868220796
+              ],
+              "k": 319,
+              "n": 1200,
+              "point": 0.2658333333333333
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.14665129381791034,
+                0.1888093732505796
+              ],
+              "k": 200,
+              "n": 1200,
+              "point": 0.16666666666666666
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.708452801317792,
+                0.7583860800665938
+              ],
+              "k": 881,
+              "n": 1200,
+              "point": 0.7341666666666666
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.14586263045987358,
+                0.18793668827628757
+              ],
+              "k": 199,
+              "n": 1200,
+              "point": 0.16583333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          }
+        },
+        "pooled": {
+          "counts": {
+            "i": 4063,
+            "ii": 1337,
+            "iii": 600
+          },
+          "deterministic_occurrences": 3160,
+          "headroom_ii_plus_iii": {
+            "ci95": [
+              0.311119260072598,
+              0.33477412092657316
+            ],
+            "k": 1937,
+            "n": 6000,
+            "point": 0.32283333333333336
+          },
+          "n_span_occurrences": 6000,
+          "per_span_witnessed_determinism_fraction": {
+            "ci95": [
+              0.5140201281897869,
+              0.5392790806908645
+            ],
+            "k": 3160,
+            "n": 6000,
+            "point": 0.5266666666666666
+          },
+          "share_class_i_merely_novel": {
+            "ci95": [
+              0.6652258790734269,
+              0.688880739927402
+            ],
+            "k": 4063,
+            "n": 6000,
+            "point": 0.6771666666666667
+          },
+          "share_class_ii_epistemically_blocked": {
+            "ci95": [
+              0.2124827613207978,
+              0.2335385863759299
+            ],
+            "k": 1337,
+            "n": 6000,
+            "point": 0.22283333333333333
+          },
+          "share_class_iii_observation_absent": {
+            "ci95": [
+              0.09266313971931678,
+              0.1078487270709097
+            ],
+            "k": 600,
+            "n": 6000,
+            "point": 0.1
+          }
+        },
+        "pooled_counts": {
+          "i": 4063,
+          "ii": 1337,
+          "iii": 600
+        },
+        "state_key": "arm-native (observable world state + own last request)"
+      },
+      "declared_alternate_literal_step2": {
+        "definition": "the inherited parent's literal rule: any state key recurring with a different action, with no goal-intent condition. Reported for comparability with the parent's measured sigma_2 = 0.2228.",
+        "parent_pooled_sigma_2": 0.22283333333333333,
+        "per_novelty_rate": {
+          "0.00": {
+            "counts": {
+              "i": 748,
+              "ii": 332,
+              "iii": 120
+            },
+            "deterministic_occurrences": 1050,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.34968566637256415,
+                0.40443478044277703
+              ],
+              "k": 452,
+              "n": 1200,
+              "point": 0.37666666666666665
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.8550831289728186,
+                0.8925236205751302
+              ],
+              "k": 1050,
+              "n": 1200,
+              "point": 0.875
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.5955652195572229,
+                0.6503143336274358
+              ],
+              "k": 748,
+              "n": 1200,
+              "point": 0.6233333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.2520989355862645,
+                0.30265971134962366
+              ],
+              "k": 332,
+              "n": 1200,
+              "point": 0.27666666666666667
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.25": {
+            "counts": {
+              "i": 778,
+              "ii": 302,
+              "iii": 120
+            },
+            "deterministic_occurrences": 860,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.325162909690181,
+                0.3791170871552969
+              ],
+              "k": 422,
+              "n": 1200,
+              "point": 0.3516666666666667
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.6905110256785041,
+                0.7414395407269774
+              ],
+              "k": 860,
+              "n": 1200,
+              "point": 0.7166666666666667
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.620882912844703,
+                0.674837090309819
+              ],
+              "k": 778,
+              "n": 1200,
+              "point": 0.6483333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.22793174916689724,
+                0.2769864477991277
+              ],
+              "k": 302,
+              "n": 1200,
+              "point": 0.25166666666666665
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.50": {
+            "counts": {
+              "i": 814,
+              "ii": 266,
+              "iii": 120
+            },
+            "deterministic_occurrences": 630,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.2958427123394164,
+                0.3486287445422256
+              ],
+              "k": 386,
+              "n": 1200,
+              "point": 0.32166666666666666
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.49671096871398307,
+                0.5531294812558802
+              ],
+              "k": 630,
+              "n": 1200,
+              "point": 0.525
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.6513712554577744,
+                0.7041572876605835
+              ],
+              "k": 814,
+              "n": 1200,
+              "point": 0.6783333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.1990743272668342,
+                0.24603532973535494
+              ],
+              "k": 266,
+              "n": 1200,
+              "point": 0.22166666666666668
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.75": {
+            "counts": {
+              "i": 842,
+              "ii": 238,
+              "iii": 120
+            },
+            "deterministic_occurrences": 420,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.27312364995652255,
+                0.32483005361991385
+              ],
+              "k": 358,
+              "n": 1200,
+              "point": 0.29833333333333334
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.3235308905725719,
+                0.37742640960824847
+              ],
+              "k": 420,
+              "n": 1200,
+              "point": 0.35
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.6751699463800861,
+                0.7268763500434775
+              ],
+              "k": 842,
+              "n": 1200,
+              "point": 0.7016666666666667
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.17675073358940147,
+                0.22184117010758192
+              ],
+              "k": 238,
+              "n": 1200,
+              "point": 0.19833333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "1.00": {
+            "counts": {
+              "i": 881,
+              "ii": 199,
+              "iii": 120
+            },
+            "deterministic_occurrences": 200,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.24161391993340614,
+                0.29154719868220796
+              ],
+              "k": 319,
+              "n": 1200,
+              "point": 0.2658333333333333
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.14665129381791034,
+                0.1888093732505796
+              ],
+              "k": 200,
+              "n": 1200,
+              "point": 0.16666666666666666
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.708452801317792,
+                0.7583860800665938
+              ],
+              "k": 881,
+              "n": 1200,
+              "point": 0.7341666666666666
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.14586263045987358,
+                0.18793668827628757
+              ],
+              "k": 199,
+              "n": 1200,
+              "point": 0.16583333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          }
+        },
+        "pooled": {
+          "counts": {
+            "i": 4063,
+            "ii": 1337,
+            "iii": 600
+          },
+          "deterministic_occurrences": 3160,
+          "headroom_ii_plus_iii": {
+            "ci95": [
+              0.311119260072598,
+              0.33477412092657316
+            ],
+            "k": 1937,
+            "n": 6000,
+            "point": 0.32283333333333336
+          },
+          "n_span_occurrences": 6000,
+          "per_span_witnessed_determinism_fraction": {
+            "ci95": [
+              0.5140201281897869,
+              0.5392790806908645
+            ],
+            "k": 3160,
+            "n": 6000,
+            "point": 0.5266666666666666
+          },
+          "share_class_i_merely_novel": {
+            "ci95": [
+              0.6652258790734269,
+              0.688880739927402
+            ],
+            "k": 4063,
+            "n": 6000,
+            "point": 0.6771666666666667
+          },
+          "share_class_ii_epistemically_blocked": {
+            "ci95": [
+              0.2124827613207978,
+              0.2335385863759299
+            ],
+            "k": 1337,
+            "n": 6000,
+            "point": 0.22283333333333333
+          },
+          "share_class_iii_observation_absent": {
+            "ci95": [
+              0.09266313971931678,
+              0.1078487270709097
+            ],
+            "k": 600,
+            "n": 6000,
+            "point": 0.1
+          }
+        },
+        "pooled_counts": {
+          "i": 4063,
+          "ii": 1337,
+          "iii": 600
+        },
+        "state_key": "arm-native (observable world state + own last request)"
+      },
+      "declared_alternate_prefix_intent": {
+        "definition": "state key + the full wide goal prefix as the intent (the strictest goal-aware reading)",
+        "per_novelty_rate": {
+          "0.00": {
+            "counts": {
+              "i": 889,
+              "ii": 191,
+              "iii": 120
+            },
+            "deterministic_occurrences": 1050,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.23517106916587344,
+                0.2846992627911104
+              ],
+              "k": 311,
+              "n": 1200,
+              "point": 0.25916666666666666
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.8550831289728186,
+                0.8925236205751302
+              ],
+              "k": 1050,
+              "n": 1200,
+              "point": 0.875
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.7153007372088895,
+                0.7648289308341265
+              ],
+              "k": 889,
+              "n": 1200,
+              "point": 0.7408333333333333
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.13956023540782653,
+                0.18094829666970447
+              ],
+              "k": 191,
+              "n": 1200,
+              "point": 0.15916666666666668
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.25": {
+            "counts": {
+              "i": 937,
+              "ii": 143,
+              "iii": 120
+            },
+            "deterministic_occurrences": 860,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.19667718179559182,
+                0.24344843020961096
+              ],
+              "k": 263,
+              "n": 1200,
+              "point": 0.21916666666666668
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.6905110256785041,
+                0.7414395407269774
+              ],
+              "k": 860,
+              "n": 1200,
+              "point": 0.7166666666666667
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.7565515697903891,
+                0.8033228182044081
+              ],
+              "k": 937,
+              "n": 1200,
+              "point": 0.7808333333333334
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.10204006080625294,
+                0.13872375131949682
+              ],
+              "k": 143,
+              "n": 1200,
+              "point": 0.11916666666666667
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.50": {
+            "counts": {
+              "i": 983,
+              "ii": 97,
+              "iii": 120
+            },
+            "deterministic_occurrences": 630,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.1600864870366046,
+                0.20361710168147457
+              ],
+              "k": 217,
+              "n": 1200,
+              "point": 0.18083333333333335
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.49671096871398307,
+                0.5531294812558802
+              ],
+              "k": 630,
+              "n": 1200,
+              "point": 0.525
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.7963828983185255,
+                0.8399135129633954
+              ],
+              "k": 983,
+              "n": 1200,
+              "point": 0.8191666666666667
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.06671520943063358,
+                0.09762657940799249
+              ],
+              "k": 97,
+              "n": 1200,
+              "point": 0.08083333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "0.75": {
+            "counts": {
+              "i": 1031,
+              "ii": 49,
+              "iii": 120
+            },
+            "deterministic_occurrences": 420,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.12229638572257118,
+                0.16166248304372677
+              ],
+              "k": 169,
+              "n": 1200,
+              "point": 0.14083333333333334
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.3235308905725719,
+                0.37742640960824847
+              ],
+              "k": 420,
+              "n": 1200,
+              "point": 0.35
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.8383375169562732,
+                0.8777036142774288
+              ],
+              "k": 1031,
+              "n": 1200,
+              "point": 0.8591666666666666
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                0.03102354197066147,
+                0.05357352691618343
+              ],
+              "k": 49,
+              "n": 1200,
+              "point": 0.04083333333333333
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          },
+          "1.00": {
+            "counts": {
+              "i": 1080,
+              "ii": 0,
+              "iii": 120
+            },
+            "deterministic_occurrences": 200,
+            "headroom_ii_plus_iii": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            },
+            "n_span_occurrences": 1200,
+            "per_span_witnessed_determinism_fraction": {
+              "ci95": [
+                0.14665129381791034,
+                0.1888093732505796
+              ],
+              "k": 200,
+              "n": 1200,
+              "point": 0.16666666666666666
+            },
+            "share_class_i_merely_novel": {
+              "ci95": [
+                0.8817289167132706,
+                0.9157182828045415
+              ],
+              "k": 1080,
+              "n": 1200,
+              "point": 0.9
+            },
+            "share_class_ii_epistemically_blocked": {
+              "ci95": [
+                2.168404344971009e-19,
+                0.003191000602734924
+              ],
+              "k": 0,
+              "n": 1200,
+              "point": 0.0
+            },
+            "share_class_iii_observation_absent": {
+              "ci95": [
+                0.08428171719545854,
+                0.11827108328672939
+              ],
+              "k": 120,
+              "n": 1200,
+              "point": 0.1
+            }
+          }
+        },
+        "pooled": {
+          "counts": {
+            "i": 4920,
+            "ii": 480,
+            "iii": 600
+          },
+          "deterministic_occurrences": 3160,
+          "headroom_ii_plus_iii": {
+            "ci95": [
+              0.17048459527619325,
+              0.1899248981559879
+            ],
+            "k": 1080,
+            "n": 6000,
+            "point": 0.18
+          },
+          "n_span_occurrences": 6000,
+          "per_span_witnessed_determinism_fraction": {
+            "ci95": [
+              0.5140201281897869,
+              0.5392790806908645
+            ],
+            "k": 3160,
+            "n": 6000,
+            "point": 0.5266666666666666
+          },
+          "share_class_i_merely_novel": {
+            "ci95": [
+              0.810075101844012,
+              0.8295154047238067
+            ],
+            "k": 4920,
+            "n": 6000,
+            "point": 0.82
+          },
+          "share_class_ii_epistemically_blocked": {
+            "ci95": [
+              0.07340112782328546,
+              0.08713633230645233
+            ],
+            "k": 480,
+            "n": 6000,
+            "point": 0.08
+          },
+          "share_class_iii_observation_absent": {
+            "ci95": [
+              0.09266313971931678,
+              0.1078487270709097
+            ],
+            "k": 600,
+            "n": 6000,
+            "point": 0.1
+          }
+        },
+        "pooled_counts": {
+          "i": 4920,
+          "ii": 480,
+          "iii": 600
+        },
+        "state_key": "arm-native (observable world state + own last request)"
+      }
+    },
+    "class_iii_closure_by_own_mechanism_rate": {
+      "class_iii_decision_paths_by_arm_and_novelty_rate": {
+        "B-COLD-EXPLORATION": {
+          "0.00": {
+            "DEOPT_TO_MODEL_UNKNOWN": 120
+          },
+          "0.25": {
+            "DEOPT_TO_MODEL_UNKNOWN": 120
+          },
+          "0.50": {
+            "DEOPT_TO_MODEL_UNKNOWN": 120
+          },
+          "0.75": {
+            "DEOPT_TO_MODEL_UNKNOWN": 120
+          },
+          "1.00": {
+            "DEOPT_TO_MODEL_UNKNOWN": 120
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "0.00": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.25": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.50": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.75": {
+            "GOAL_CONDITIONED": 120
+          },
+          "1.00": {
+            "GOAL_CONDITIONED": 120
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "0.00": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.25": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.50": {
+            "GOAL_CONDITIONED": 120
+          },
+          "0.75": {
+            "GOAL_CONDITIONED": 120
+          },
+          "1.00": {
+            "GOAL_CONDITIONED": 120
+          }
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "0.00": {
+            "COMPILED_REPLAY": 30,
+            "DEOPT_TO_MODEL": 90
+          },
+          "0.25": {
+            "COMPILED_REPLAY": 30,
+            "DEOPT_TO_MODEL": 90
+          },
+          "0.50": {
+            "COMPILED_REPLAY": 20,
+            "DEOPT_TO_MODEL": 100
+          },
+          "0.75": {
+            "DEOPT_TO_MODEL": 120
+          },
+          "1.00": {
+            "DEOPT_TO_MODEL": 120
+          }
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "0.00": {
+            "DEOPT_TO_MODEL": 120
+          },
+          "0.25": {
+            "DEOPT_TO_MODEL": 120
+          },
+          "0.50": {
+            "DEOPT_TO_MODEL": 120
+          },
+          "0.75": {
+            "DEOPT_TO_MODEL": 120
+          },
+          "1.00": {
+            "DEOPT_TO_MODEL": 120
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "0.00": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.25": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.50": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.75": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "1.00": {
+            "SCRATCHPAD_PROPAGATED": 120
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "0.00": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.25": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.50": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "0.75": {
+            "SCRATCHPAD_PROPAGATED": 120
+          },
+          "1.00": {
+            "SCRATCHPAD_PROPAGATED": 120
+          }
+        }
+      },
+      "definition": "the subset of class-(iii) closures produced by the arm's OWN declared value-retrieval decision path: COMPILED_REPLAY for the inherited ratchet, SCRATCHPAD_PROPAGATED for the within-episode scratchpad, COMPILED_REPLAY_BOUND for the cross-episode binding-keyed arm. The complement is DEOPT_TO_MODEL, i.e. a perfect-policy oracle fallback.",
+      "pooled_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        }
+      },
+      "unit": "fraction of class-(iii) span occurrences, Wilson CI95"
+    },
+    "class_iii_closure_rate": {
+      "definition": "prereg.md 10.2: fraction of class-(iii) span occurrences whose emitted (method, path, body) equals the declared action. READ THIS WITH class_iii_closure_by_own_mechanism_rate: an arm can close a class-(iii) span correctly by deopting to the perfect-policy model oracle, which is not evidence about the memory mechanism under test.",
+      "per_novelty_rate_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "0.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "0.00": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.25": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.50": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.75": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "1.00": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "0.00": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.25": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.50": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "0.75": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          },
+          "1.00": {
+            "ci95": [
+              0.0,
+              0.031019166418703486
+            ],
+            "k": 0,
+            "n": 120,
+            "point": 0.0
+          }
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "0.00": {
+            "ci95": [
+              0.665588633358744,
+              0.8189017834319043
+            ],
+            "k": 90,
+            "n": 120,
+            "point": 0.75
+          },
+          "0.25": {
+            "ci95": [
+              0.665588633358744,
+              0.8189017834319043
+            ],
+            "k": 90,
+            "n": 120,
+            "point": 0.75
+          },
+          "0.50": {
+            "ci95": [
+              0.7565471860673773,
+              0.8894400363201539
+            ],
+            "k": 100,
+            "n": 120,
+            "point": 0.8333333333333334
+          },
+          "0.75": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          }
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "0.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "0.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "0.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9689808335812966,
+              1.0
+            ],
+            "k": 120,
+            "n": 120,
+            "point": 1.0
+          }
+        }
+      },
+      "pooled_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            4.336808689942018e-19,
+            0.00636170101370071
+          ],
+          "k": 0,
+          "n": 600,
+          "point": 0.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            0.8371206082599051,
+            0.8915474776633813
+          ],
+          "k": 520,
+          "n": 600,
+          "point": 0.8666666666666667
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "ci95": [
+            0.9936382989862994,
+            1.0
+          ],
+          "k": 600,
+          "n": 600,
+          "point": 1.0
+        }
+      },
+      "unit": "fraction of class-(iii) span occurrences, Wilson CI95"
+    },
+    "closure_attribution": {
+      "0.00": {
+        "by_class": {
+          "i": {
+            "compiled_binding_by_model_oracle_fallback": 158,
+            "compiled_binding_by_own_mechanism": 590,
+            "compiled_binding_emitted_correct": 748,
+            "compiled_binding_served": 590,
+            "n": 748,
+            "reference_by_model_oracle_fallback": 128,
+            "reference_by_own_mechanism": 620,
+            "reference_compiled": 620,
+            "reference_emitted_correct": 748,
+            "scratchpad_by_model_oracle_fallback": 748,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 748,
+            "scratchpad_propagated": 0
+          },
+          "ii": {
+            "compiled_binding_by_model_oracle_fallback": 202,
+            "compiled_binding_by_own_mechanism": 130,
+            "compiled_binding_emitted_correct": 332,
+            "compiled_binding_served": 130,
+            "n": 332,
+            "reference_by_model_oracle_fallback": 268,
+            "reference_by_own_mechanism": 64,
+            "reference_compiled": 64,
+            "reference_emitted_correct": 332,
+            "scratchpad_by_model_oracle_fallback": 332,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 332,
+            "scratchpad_propagated": 0
+          },
+          "iii": {
+            "compiled_binding_by_model_oracle_fallback": 120,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 120,
+            "compiled_binding_served": 0,
+            "n": 120,
+            "reference_by_model_oracle_fallback": 90,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 90,
+            "scratchpad_by_model_oracle_fallback": 0,
+            "scratchpad_by_own_mechanism": 120,
+            "scratchpad_emitted_correct": 120,
+            "scratchpad_propagated": 120
+          }
+        },
+        "class_iii_closure_mechanism": {
+          "compiled_binding_by_model_oracle_fallback": 120,
+          "compiled_binding_closed_by_cache_serve": 0,
+          "compiled_binding_emitted_correct": 120,
+          "n_class_iii": 120,
+          "note": "a class-(iii) span counted as closed by an arm's OWN mechanism required that arm's declared value-retrieval decision path (compiled replay / propagated value / binding-keyed cache serve) to have produced the correct request. Spans closed on DEOPT_TO_MODEL were closed by the perfect-policy model oracle and are reported separately, because an oracle-mediated closure is not evidence about the mechanism under test.",
+          "reference_by_model_oracle_fallback": 90,
+          "reference_by_own_compiled_replay": 0,
+          "reference_emitted_correct": 90,
+          "scratchpad_by_model_oracle_fallback": 0,
+          "scratchpad_closed_by_propagated_value": 120,
+          "scratchpad_emitted_correct": 120
+        },
+        "totals": {
+          "closed_by_none_of_the_three": 330,
+          "compiled_binding_served_and_correct": 720,
+          "compiled_emitted_correct": 1200,
+          "definition": "the four *_and_correct / *_served / propagated counters are BY THE ARM'S OWN MECHANISM (correct emission AND a decision_path that is that arm's declared mechanism); the emitted_* counters are the weaker emitted-correct count that also credits DEOPT_TO_MODEL oracle fallback; by_class breaks both down per class",
+          "identity_check_emitted_minus_own_mechanism_is_oracle_fallback": {
+            "compiled_binding": 480,
+            "reference": 486,
+            "scratchpad": 1080
+          },
+          "n": 1200,
+          "reference_compiled_and_correct": 684,
+          "reference_emitted_correct": 1170,
+          "scratchpad_emitted_correct": 1200,
+          "scratchpad_propagated_and_correct": 120
+        }
+      },
+      "0.25": {
+        "by_class": {
+          "i": {
+            "compiled_binding_by_model_oracle_fallback": 320,
+            "compiled_binding_by_own_mechanism": 458,
+            "compiled_binding_emitted_correct": 778,
+            "compiled_binding_served": 458,
+            "n": 778,
+            "reference_by_model_oracle_fallback": 290,
+            "reference_by_own_mechanism": 488,
+            "reference_compiled": 488,
+            "reference_emitted_correct": 778,
+            "scratchpad_by_model_oracle_fallback": 778,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 778,
+            "scratchpad_propagated": 0
+          },
+          "ii": {
+            "compiled_binding_by_model_oracle_fallback": 200,
+            "compiled_binding_by_own_mechanism": 102,
+            "compiled_binding_emitted_correct": 302,
+            "compiled_binding_served": 102,
+            "n": 302,
+            "reference_by_model_oracle_fallback": 238,
+            "reference_by_own_mechanism": 64,
+            "reference_compiled": 64,
+            "reference_emitted_correct": 302,
+            "scratchpad_by_model_oracle_fallback": 302,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 302,
+            "scratchpad_propagated": 0
+          },
+          "iii": {
+            "compiled_binding_by_model_oracle_fallback": 120,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 120,
+            "compiled_binding_served": 0,
+            "n": 120,
+            "reference_by_model_oracle_fallback": 90,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 90,
+            "scratchpad_by_model_oracle_fallback": 0,
+            "scratchpad_by_own_mechanism": 120,
+            "scratchpad_emitted_correct": 120,
+            "scratchpad_propagated": 120
+          }
+        },
+        "class_iii_closure_mechanism": {
+          "compiled_binding_by_model_oracle_fallback": 120,
+          "compiled_binding_closed_by_cache_serve": 0,
+          "compiled_binding_emitted_correct": 120,
+          "n_class_iii": 120,
+          "note": "a class-(iii) span counted as closed by an arm's OWN mechanism required that arm's declared value-retrieval decision path (compiled replay / propagated value / binding-keyed cache serve) to have produced the correct request. Spans closed on DEOPT_TO_MODEL were closed by the perfect-policy model oracle and are reported separately, because an oracle-mediated closure is not evidence about the mechanism under test.",
+          "reference_by_model_oracle_fallback": 90,
+          "reference_by_own_compiled_replay": 0,
+          "reference_emitted_correct": 90,
+          "scratchpad_by_model_oracle_fallback": 0,
+          "scratchpad_closed_by_propagated_value": 120,
+          "scratchpad_emitted_correct": 120
+        },
+        "totals": {
+          "closed_by_none_of_the_three": 490,
+          "compiled_binding_served_and_correct": 560,
+          "compiled_emitted_correct": 1200,
+          "definition": "the four *_and_correct / *_served / propagated counters are BY THE ARM'S OWN MECHANISM (correct emission AND a decision_path that is that arm's declared mechanism); the emitted_* counters are the weaker emitted-correct count that also credits DEOPT_TO_MODEL oracle fallback; by_class breaks both down per class",
+          "identity_check_emitted_minus_own_mechanism_is_oracle_fallback": {
+            "compiled_binding": 640,
+            "reference": 618,
+            "scratchpad": 1080
+          },
+          "n": 1200,
+          "reference_compiled_and_correct": 552,
+          "reference_emitted_correct": 1170,
+          "scratchpad_emitted_correct": 1200,
+          "scratchpad_propagated_and_correct": 120
+        }
+      },
+      "0.50": {
+        "by_class": {
+          "i": {
+            "compiled_binding_by_model_oracle_fallback": 520,
+            "compiled_binding_by_own_mechanism": 294,
+            "compiled_binding_emitted_correct": 814,
+            "compiled_binding_served": 294,
+            "n": 814,
+            "reference_by_model_oracle_fallback": 500,
+            "reference_by_own_mechanism": 314,
+            "reference_compiled": 314,
+            "reference_emitted_correct": 814,
+            "scratchpad_by_model_oracle_fallback": 814,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 814,
+            "scratchpad_propagated": 0
+          },
+          "ii": {
+            "compiled_binding_by_model_oracle_fallback": 200,
+            "compiled_binding_by_own_mechanism": 66,
+            "compiled_binding_emitted_correct": 266,
+            "compiled_binding_served": 66,
+            "n": 266,
+            "reference_by_model_oracle_fallback": 238,
+            "reference_by_own_mechanism": 28,
+            "reference_compiled": 28,
+            "reference_emitted_correct": 266,
+            "scratchpad_by_model_oracle_fallback": 266,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 266,
+            "scratchpad_propagated": 0
+          },
+          "iii": {
+            "compiled_binding_by_model_oracle_fallback": 120,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 120,
+            "compiled_binding_served": 0,
+            "n": 120,
+            "reference_by_model_oracle_fallback": 100,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 100,
+            "scratchpad_by_model_oracle_fallback": 0,
+            "scratchpad_by_own_mechanism": 120,
+            "scratchpad_emitted_correct": 120,
+            "scratchpad_propagated": 120
+          }
+        },
+        "class_iii_closure_mechanism": {
+          "compiled_binding_by_model_oracle_fallback": 120,
+          "compiled_binding_closed_by_cache_serve": 0,
+          "compiled_binding_emitted_correct": 120,
+          "n_class_iii": 120,
+          "note": "a class-(iii) span counted as closed by an arm's OWN mechanism required that arm's declared value-retrieval decision path (compiled replay / propagated value / binding-keyed cache serve) to have produced the correct request. Spans closed on DEOPT_TO_MODEL were closed by the perfect-policy model oracle and are reported separately, because an oracle-mediated closure is not evidence about the mechanism under test.",
+          "reference_by_model_oracle_fallback": 100,
+          "reference_by_own_compiled_replay": 0,
+          "reference_emitted_correct": 100,
+          "scratchpad_by_model_oracle_fallback": 0,
+          "scratchpad_closed_by_propagated_value": 120,
+          "scratchpad_emitted_correct": 120
+        },
+        "totals": {
+          "closed_by_none_of_the_three": 700,
+          "compiled_binding_served_and_correct": 360,
+          "compiled_emitted_correct": 1200,
+          "definition": "the four *_and_correct / *_served / propagated counters are BY THE ARM'S OWN MECHANISM (correct emission AND a decision_path that is that arm's declared mechanism); the emitted_* counters are the weaker emitted-correct count that also credits DEOPT_TO_MODEL oracle fallback; by_class breaks both down per class",
+          "identity_check_emitted_minus_own_mechanism_is_oracle_fallback": {
+            "compiled_binding": 840,
+            "reference": 838,
+            "scratchpad": 1080
+          },
+          "n": 1200,
+          "reference_compiled_and_correct": 342,
+          "reference_emitted_correct": 1180,
+          "scratchpad_emitted_correct": 1200,
+          "scratchpad_propagated_and_correct": 120
+        }
+      },
+      "0.75": {
+        "by_class": {
+          "i": {
+            "compiled_binding_by_model_oracle_fallback": 680,
+            "compiled_binding_by_own_mechanism": 162,
+            "compiled_binding_emitted_correct": 842,
+            "compiled_binding_served": 162,
+            "n": 842,
+            "reference_by_model_oracle_fallback": 680,
+            "reference_by_own_mechanism": 162,
+            "reference_compiled": 162,
+            "reference_emitted_correct": 842,
+            "scratchpad_by_model_oracle_fallback": 842,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 842,
+            "scratchpad_propagated": 0
+          },
+          "ii": {
+            "compiled_binding_by_model_oracle_fallback": 200,
+            "compiled_binding_by_own_mechanism": 38,
+            "compiled_binding_emitted_correct": 238,
+            "compiled_binding_served": 38,
+            "n": 238,
+            "reference_by_model_oracle_fallback": 238,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 238,
+            "scratchpad_by_model_oracle_fallback": 238,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 238,
+            "scratchpad_propagated": 0
+          },
+          "iii": {
+            "compiled_binding_by_model_oracle_fallback": 120,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 120,
+            "compiled_binding_served": 0,
+            "n": 120,
+            "reference_by_model_oracle_fallback": 120,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 120,
+            "scratchpad_by_model_oracle_fallback": 0,
+            "scratchpad_by_own_mechanism": 120,
+            "scratchpad_emitted_correct": 120,
+            "scratchpad_propagated": 120
+          }
+        },
+        "class_iii_closure_mechanism": {
+          "compiled_binding_by_model_oracle_fallback": 120,
+          "compiled_binding_closed_by_cache_serve": 0,
+          "compiled_binding_emitted_correct": 120,
+          "n_class_iii": 120,
+          "note": "a class-(iii) span counted as closed by an arm's OWN mechanism required that arm's declared value-retrieval decision path (compiled replay / propagated value / binding-keyed cache serve) to have produced the correct request. Spans closed on DEOPT_TO_MODEL were closed by the perfect-policy model oracle and are reported separately, because an oracle-mediated closure is not evidence about the mechanism under test.",
+          "reference_by_model_oracle_fallback": 120,
+          "reference_by_own_compiled_replay": 0,
+          "reference_emitted_correct": 120,
+          "scratchpad_by_model_oracle_fallback": 0,
+          "scratchpad_closed_by_propagated_value": 120,
+          "scratchpad_emitted_correct": 120
+        },
+        "totals": {
+          "closed_by_none_of_the_three": 880,
+          "compiled_binding_served_and_correct": 200,
+          "compiled_emitted_correct": 1200,
+          "definition": "the four *_and_correct / *_served / propagated counters are BY THE ARM'S OWN MECHANISM (correct emission AND a decision_path that is that arm's declared mechanism); the emitted_* counters are the weaker emitted-correct count that also credits DEOPT_TO_MODEL oracle fallback; by_class breaks both down per class",
+          "identity_check_emitted_minus_own_mechanism_is_oracle_fallback": {
+            "compiled_binding": 1000,
+            "reference": 1038,
+            "scratchpad": 1080
+          },
+          "n": 1200,
+          "reference_compiled_and_correct": 162,
+          "reference_emitted_correct": 1200,
+          "scratchpad_emitted_correct": 1200,
+          "scratchpad_propagated_and_correct": 120
+        }
+      },
+      "1.00": {
+        "by_class": {
+          "i": {
+            "compiled_binding_by_model_oracle_fallback": 833,
+            "compiled_binding_by_own_mechanism": 48,
+            "compiled_binding_emitted_correct": 881,
+            "compiled_binding_served": 48,
+            "n": 881,
+            "reference_by_model_oracle_fallback": 833,
+            "reference_by_own_mechanism": 48,
+            "reference_compiled": 48,
+            "reference_emitted_correct": 881,
+            "scratchpad_by_model_oracle_fallback": 881,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 881,
+            "scratchpad_propagated": 0
+          },
+          "ii": {
+            "compiled_binding_by_model_oracle_fallback": 199,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 199,
+            "compiled_binding_served": 0,
+            "n": 199,
+            "reference_by_model_oracle_fallback": 199,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 199,
+            "scratchpad_by_model_oracle_fallback": 199,
+            "scratchpad_by_own_mechanism": 0,
+            "scratchpad_emitted_correct": 199,
+            "scratchpad_propagated": 0
+          },
+          "iii": {
+            "compiled_binding_by_model_oracle_fallback": 120,
+            "compiled_binding_by_own_mechanism": 0,
+            "compiled_binding_emitted_correct": 120,
+            "compiled_binding_served": 0,
+            "n": 120,
+            "reference_by_model_oracle_fallback": 120,
+            "reference_by_own_mechanism": 0,
+            "reference_compiled": 0,
+            "reference_emitted_correct": 120,
+            "scratchpad_by_model_oracle_fallback": 0,
+            "scratchpad_by_own_mechanism": 120,
+            "scratchpad_emitted_correct": 120,
+            "scratchpad_propagated": 120
+          }
+        },
+        "class_iii_closure_mechanism": {
+          "compiled_binding_by_model_oracle_fallback": 120,
+          "compiled_binding_closed_by_cache_serve": 0,
+          "compiled_binding_emitted_correct": 120,
+          "n_class_iii": 120,
+          "note": "a class-(iii) span counted as closed by an arm's OWN mechanism required that arm's declared value-retrieval decision path (compiled replay / propagated value / binding-keyed cache serve) to have produced the correct request. Spans closed on DEOPT_TO_MODEL were closed by the perfect-policy model oracle and are reported separately, because an oracle-mediated closure is not evidence about the mechanism under test.",
+          "reference_by_model_oracle_fallback": 120,
+          "reference_by_own_compiled_replay": 0,
+          "reference_emitted_correct": 120,
+          "scratchpad_by_model_oracle_fallback": 0,
+          "scratchpad_closed_by_propagated_value": 120,
+          "scratchpad_emitted_correct": 120
+        },
+        "totals": {
+          "closed_by_none_of_the_three": 1032,
+          "compiled_binding_served_and_correct": 48,
+          "compiled_emitted_correct": 1200,
+          "definition": "the four *_and_correct / *_served / propagated counters are BY THE ARM'S OWN MECHANISM (correct emission AND a decision_path that is that arm's declared mechanism); the emitted_* counters are the weaker emitted-correct count that also credits DEOPT_TO_MODEL oracle fallback; by_class breaks both down per class",
+          "identity_check_emitted_minus_own_mechanism_is_oracle_fallback": {
+            "compiled_binding": 1152,
+            "reference": 1152,
+            "scratchpad": 1080
+          },
+          "n": 1200,
+          "reference_compiled_and_correct": 48,
+          "reference_emitted_correct": 1200,
+          "scratchpad_emitted_correct": 1200,
+          "scratchpad_propagated_and_correct": 120
+        }
+      }
+    },
+    "conditioned_coverage": {
+      "definition": "prereg.md 10.5: fraction of reference-trace span occurrences whose correct action the goal-conditioned arm reproduces, on the identical task instances",
+      "narrow_prefix": {
+        "ci95": [
+          0.5540893995371109,
+          0.5791586226645179
+        ],
+        "k": 3400,
+        "n": 6000,
+        "point": 0.5666666666666667
+      },
+      "scratchpad": {
+        "ci95": [
+          0.9993601665122168,
+          0.9999999999999999
+        ],
+        "k": 6000,
+        "n": 6000,
+        "point": 1.0
+      },
+      "unit": "fraction of span occurrences",
+      "wide_prefix": {
+        "ci95": [
+          0.8407411858625436,
+          0.858810930696008
+        ],
+        "k": 5100,
+        "n": 6000,
+        "point": 0.85
+      }
+    },
+    "declared_instrument_deviation_DI_01_mint_flag": {
+      "measured_price_of_the_flag": {
+        "difference": 0.1166666666666667,
+        "note": "the no-mint-flag arm is a declared non-gating sensitivity: it mints on every create, which the substrate accepts, so the cost is unchanged and only the emitted action differs",
+        "primary_with_mint_flag": 1.0,
+        "sensitivity_arm": "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG",
+        "sensitivity_without_mint_flag": 0.8833333333333333
+      },
+      "what": "the scratchpad arm is conditioned on goal_prefix_wide_mint = the parent's frozen 7-field wide prefix plus one field, mint={0|1}; the handle VALUE is in no prefix, and wide/narrow are byte-identical to the parent",
+      "why_necessary": "without the flag a scratchpad that emits PUT /resources/{rid} never receives a handle, so its class-(iii) span correctness is capped at 0.95 by a representation choice rather than by memory scope"
+    },
+    "falsifier_clauses": {
+      "clause_1": {
+        "authoritative_rule": "goal-aware, intent = the `intent` field of the goal prefix (the role)",
+        "condition": "sigma_2 CI95 upper < 0.01 at ALL five novelty rates",
+        "consequence_if_fired": "INCONCLUSIVE",
+        "fired": false,
+        "id": "clause_1",
+        "label_if_fired": "RESIDUAL_NOT_ZERO",
+        "per_novelty_rate_sigma_2_ci95_upper": {
+          "0.00": 0.30265971134962366,
+          "0.25": 0.2769864477991277,
+          "0.50": 0.24603532973535494,
+          "0.75": 0.22184117010758192,
+          "1.00": 0.18793668827628757
+        },
+        "threshold": 0.01
+      },
+      "clause_2": {
+        "arm": "WITHIN_EPISODE_SCRATCHPAD",
+        "fires": false,
+        "fires_correctness_leg_only": true,
+        "id": "clause_2",
+        "label_if_both_legs": "SCRATCHPAD_SUFFICES",
+        "label_if_correctness_leg_only": "SCRATCHPAD_CORRECT_BUT_COSTLY",
+        "leg_a_correctness": {
+          "holds": true,
+          "observed_pooled": 1.0,
+          "per_novelty_rate": {
+            "0.00": 1.0,
+            "0.25": 1.0,
+            "0.50": 1.0,
+            "0.75": 1.0,
+            "1.00": 1.0
+          },
+          "threshold": 0.9833
+        },
+        "leg_b_cost": {
+          "holds": false,
+          "observed_pooled": 48.0,
+          "per_novelty_rate": {
+            "0.00": 48.0,
+            "0.25": 48.0,
+            "0.50": 48.0,
+            "0.75": 48.0,
+            "1.00": 48.0
+          },
+          "threshold": 38.6
+        }
+      },
+      "clause_3": {
+        "arm": "CROSS_EPISODE_COMPILED_BINDING",
+        "fires": false,
+        "fires_correctness_leg_only": true,
+        "id": "clause_3",
+        "label_if_both_legs": "BINDING_KEY_COMPILATION_SUFFICES",
+        "label_if_correctness_leg_only": "BINDING_COMPILATION_CORRECT_BUT_COSTLY",
+        "leg_a_correctness": {
+          "holds": true,
+          "observed_pooled": 1.0,
+          "per_novelty_rate": {
+            "0.00": 1.0,
+            "0.25": 1.0,
+            "0.50": 1.0,
+            "0.75": 1.0,
+            "1.00": 1.0
+          },
+          "threshold": 0.9833
+        },
+        "leg_b_cost": {
+          "holds": false,
+          "observed_pooled": 48.204,
+          "per_novelty_rate": {
+            "0.00": 48.4,
+            "0.25": 48.3,
+            "0.50": 48.2,
+            "0.75": 48.1,
+            "1.00": 48.02
+          },
+          "threshold": 38.6
+        }
+      }
+    },
+    "goal_state_success": {
+      "definition": "the parent's endpoint, measured only to demonstrate that it cannot discriminate these arms (prereg.md 10); it is NOT the primary endpoint",
+      "pooled_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "n_episodes": 250,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "n_episodes": 250,
+          "point": 1.0
+        }
+      },
+      "unit": "fraction of episodes with an empty store and a final code-200"
+    },
+    "headroom_closed": {
+      "definition": "prereg.md 10.4: (sigma_2 + sigma_3) - residual_after_arm, where residual_after_arm = 1 - span_level_action_correctness",
+      "per_novelty_rate": {
+        "0.00": {
+          "by_arm": {
+            "B-COLD-EXPLORATION": {
+              "headroom_closed": 0.3766666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "B-NO-MEMORY-CONDITIONED-NARROW": {
+              "headroom_closed": -0.05666666666666664,
+              "headroom_closed_fraction": -0.15044247787610612,
+              "residual_after_arm": 0.43333333333333335,
+              "span_level_action_correctness": 0.5666666666666667
+            },
+            "B-NO-MEMORY-CONDITIONED-WIDE": {
+              "headroom_closed": 0.22666666666666668,
+              "headroom_closed_fraction": 0.6017699115044247,
+              "residual_after_arm": 0.15000000000000002,
+              "span_level_action_correctness": 0.85
+            },
+            "B-NO-MEMORY-DETERMINISTIC": {
+              "headroom_closed": 0.3516666666666667,
+              "headroom_closed_fraction": 0.9336283185840707,
+              "residual_after_arm": 0.025000000000000022,
+              "span_level_action_correctness": 0.975
+            },
+            "CROSS_EPISODE_COMPILED_BINDING": {
+              "headroom_closed": 0.3766666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD": {
+              "headroom_closed": 0.3766666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+              "headroom_closed": 0.26,
+              "headroom_closed_fraction": 0.6902654867256637,
+              "residual_after_arm": 0.1166666666666667,
+              "span_level_action_correctness": 0.8833333333333333
+            }
+          },
+          "novelty_rate": 0.0,
+          "sigma_2_plus_sigma_3": 0.3766666666666667
+        },
+        "0.25": {
+          "by_arm": {
+            "B-COLD-EXPLORATION": {
+              "headroom_closed": 0.3516666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "B-NO-MEMORY-CONDITIONED-NARROW": {
+              "headroom_closed": -0.08166666666666667,
+              "headroom_closed_fraction": -0.23222748815165875,
+              "residual_after_arm": 0.43333333333333335,
+              "span_level_action_correctness": 0.5666666666666667
+            },
+            "B-NO-MEMORY-CONDITIONED-WIDE": {
+              "headroom_closed": 0.20166666666666666,
+              "headroom_closed_fraction": 0.5734597156398104,
+              "residual_after_arm": 0.15000000000000002,
+              "span_level_action_correctness": 0.85
+            },
+            "B-NO-MEMORY-DETERMINISTIC": {
+              "headroom_closed": 0.32666666666666666,
+              "headroom_closed_fraction": 0.928909952606635,
+              "residual_after_arm": 0.025000000000000022,
+              "span_level_action_correctness": 0.975
+            },
+            "CROSS_EPISODE_COMPILED_BINDING": {
+              "headroom_closed": 0.3516666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD": {
+              "headroom_closed": 0.3516666666666667,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+              "headroom_closed": 0.235,
+              "headroom_closed_fraction": 0.6682464454976302,
+              "residual_after_arm": 0.1166666666666667,
+              "span_level_action_correctness": 0.8833333333333333
+            }
+          },
+          "novelty_rate": 0.25,
+          "sigma_2_plus_sigma_3": 0.3516666666666667
+        },
+        "0.50": {
+          "by_arm": {
+            "B-COLD-EXPLORATION": {
+              "headroom_closed": 0.32166666666666666,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "B-NO-MEMORY-CONDITIONED-NARROW": {
+              "headroom_closed": -0.11166666666666669,
+              "headroom_closed_fraction": -0.3471502590673576,
+              "residual_after_arm": 0.43333333333333335,
+              "span_level_action_correctness": 0.5666666666666667
+            },
+            "B-NO-MEMORY-CONDITIONED-WIDE": {
+              "headroom_closed": 0.17166666666666663,
+              "headroom_closed_fraction": 0.5336787564766838,
+              "residual_after_arm": 0.15000000000000002,
+              "span_level_action_correctness": 0.85
+            },
+            "B-NO-MEMORY-DETERMINISTIC": {
+              "headroom_closed": 0.30499999999999994,
+              "headroom_closed_fraction": 0.9481865284974091,
+              "residual_after_arm": 0.01666666666666672,
+              "span_level_action_correctness": 0.9833333333333333
+            },
+            "CROSS_EPISODE_COMPILED_BINDING": {
+              "headroom_closed": 0.32166666666666666,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD": {
+              "headroom_closed": 0.32166666666666666,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+              "headroom_closed": 0.20499999999999996,
+              "headroom_closed_fraction": 0.6373056994818652,
+              "residual_after_arm": 0.1166666666666667,
+              "span_level_action_correctness": 0.8833333333333333
+            }
+          },
+          "novelty_rate": 0.5,
+          "sigma_2_plus_sigma_3": 0.32166666666666666
+        },
+        "0.75": {
+          "by_arm": {
+            "B-COLD-EXPLORATION": {
+              "headroom_closed": 0.29833333333333334,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "B-NO-MEMORY-CONDITIONED-NARROW": {
+              "headroom_closed": -0.135,
+              "headroom_closed_fraction": -0.45251396648044695,
+              "residual_after_arm": 0.43333333333333335,
+              "span_level_action_correctness": 0.5666666666666667
+            },
+            "B-NO-MEMORY-CONDITIONED-WIDE": {
+              "headroom_closed": 0.14833333333333332,
+              "headroom_closed_fraction": 0.49720670391061444,
+              "residual_after_arm": 0.15000000000000002,
+              "span_level_action_correctness": 0.85
+            },
+            "B-NO-MEMORY-DETERMINISTIC": {
+              "headroom_closed": 0.29833333333333334,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "CROSS_EPISODE_COMPILED_BINDING": {
+              "headroom_closed": 0.29833333333333334,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD": {
+              "headroom_closed": 0.29833333333333334,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+              "headroom_closed": 0.18166666666666664,
+              "headroom_closed_fraction": 0.6089385474860334,
+              "residual_after_arm": 0.1166666666666667,
+              "span_level_action_correctness": 0.8833333333333333
+            }
+          },
+          "novelty_rate": 0.75,
+          "sigma_2_plus_sigma_3": 0.29833333333333334
+        },
+        "1.00": {
+          "by_arm": {
+            "B-COLD-EXPLORATION": {
+              "headroom_closed": 0.26583333333333337,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "B-NO-MEMORY-CONDITIONED-NARROW": {
+              "headroom_closed": -0.16749999999999998,
+              "headroom_closed_fraction": -0.6300940438871472,
+              "residual_after_arm": 0.43333333333333335,
+              "span_level_action_correctness": 0.5666666666666667
+            },
+            "B-NO-MEMORY-CONDITIONED-WIDE": {
+              "headroom_closed": 0.11583333333333334,
+              "headroom_closed_fraction": 0.43573667711598746,
+              "residual_after_arm": 0.15000000000000002,
+              "span_level_action_correctness": 0.85
+            },
+            "B-NO-MEMORY-DETERMINISTIC": {
+              "headroom_closed": 0.26583333333333337,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "CROSS_EPISODE_COMPILED_BINDING": {
+              "headroom_closed": 0.26583333333333337,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD": {
+              "headroom_closed": 0.26583333333333337,
+              "headroom_closed_fraction": 1.0,
+              "residual_after_arm": 0.0,
+              "span_level_action_correctness": 1.0
+            },
+            "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+              "headroom_closed": 0.14916666666666667,
+              "headroom_closed_fraction": 0.561128526645768,
+              "residual_after_arm": 0.1166666666666667,
+              "span_level_action_correctness": 0.8833333333333333
+            }
+          },
+          "novelty_rate": 1.0,
+          "sigma_2_plus_sigma_3": 0.26583333333333337
+        }
+      }
+    },
+    "headroom_ii_plus_iii": {
+      "definition": "prereg.md 10.4: the maximum recoverable by any inheritance, sigma_2 + sigma_3",
+      "per_novelty_rate": {
+        "0.00": {
+          "ci95": [
+            0.34968566637256415,
+            0.40443478044277703
+          ],
+          "k": 452,
+          "n": 1200,
+          "point": 0.37666666666666665
+        },
+        "0.25": {
+          "ci95": [
+            0.325162909690181,
+            0.3791170871552969
+          ],
+          "k": 422,
+          "n": 1200,
+          "point": 0.3516666666666667
+        },
+        "0.50": {
+          "ci95": [
+            0.2958427123394164,
+            0.3486287445422256
+          ],
+          "k": 386,
+          "n": 1200,
+          "point": 0.32166666666666666
+        },
+        "0.75": {
+          "ci95": [
+            0.27312364995652255,
+            0.32483005361991385
+          ],
+          "k": 358,
+          "n": 1200,
+          "point": 0.29833333333333334
+        },
+        "1.00": {
+          "ci95": [
+            0.24161391993340614,
+            0.29154719868220796
+          ],
+          "k": 319,
+          "n": 1200,
+          "point": 0.2658333333333333
+        }
+      },
+      "pooled": {
+        "ci95": [
+          0.311119260072598,
+          0.33477412092657316
+        ],
+        "k": 1937,
+        "n": 6000,
+        "point": 0.32283333333333336
+      },
+      "unit": "fraction of span occurrences, Wilson CI95"
+    },
+    "paired_bootstrap_cost_differences": {
+      "0.00": {
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -23.04
+          ],
+          "mean_difference_units": -23.6,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            13.32,
+            15.14
+          ],
+          "mean_difference_units": 14.32,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -24.0
+          ],
+          "mean_difference_units": -24.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean_difference_units": 0.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            12.48,
+            15.04
+          ],
+          "mean_difference_units": 13.92,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        }
+      },
+      "0.25": {
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -23.18
+          ],
+          "mean_difference_units": -23.7,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            10.86,
+            12.28
+          ],
+          "mean_difference_units": 11.66,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -24.0
+          ],
+          "mean_difference_units": -24.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean_difference_units": 0.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            10.14,
+            12.22
+          ],
+          "mean_difference_units": 11.36,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        }
+      },
+      "0.50": {
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -23.48
+          ],
+          "mean_difference_units": -23.8,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            6.72,
+            7.78
+          ],
+          "mean_difference_units": 7.26,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -24.0
+          ],
+          "mean_difference_units": -24.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean_difference_units": 0.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            6.28,
+            7.72
+          ],
+          "mean_difference_units": 7.06,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        }
+      },
+      "0.75": {
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -23.72
+          ],
+          "mean_difference_units": -23.9,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            2.88,
+            3.62
+          ],
+          "mean_difference_units": 3.26,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -24.0
+          ],
+          "mean_difference_units": -24.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean_difference_units": 0.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            2.72,
+            3.58
+          ],
+          "mean_difference_units": 3.16,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        }
+      },
+      "1.00": {
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -23.94
+          ],
+          "mean_difference_units": -23.98,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            0.9,
+            1.0
+          ],
+          "mean_difference_units": 0.96,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+          "ci95": [
+            -24.0,
+            -24.0
+          ],
+          "mean_difference_units": -24.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean_difference_units": 0.0,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        },
+        "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            0.84,
+            1.0
+          ],
+          "mean_difference_units": 0.94,
+          "n_episodes_paired": 50,
+          "p_two_sided_bootstrap": 0.0,
+          "resamples": 5000,
+          "seed": 36287182510
+        }
+      }
+    },
+    "reference_false_compiled_replays": {
+      "definition": "span occurrences where the ratchet recorded decision_path=COMPILED_REPLAY but its emitted action differs from the declared plan action bound at execution time",
+      "per_novelty_rate": [
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 30
+          },
+          "by_role": {
+            "list_resources": 30
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=00000005a86d5705",
+              "emitted": "/resources",
+              "episode": 5,
+              "index": 10,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources"
+            }
+          ],
+          "n_compiled_replays": 714,
+          "n_false_compiled_replays": 30,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.0,
+          "parent_measured_n_false_compiled_replays": 30,
+          "share_of_compiled_replays": {
+            "ci95": [
+              0.029587870776341306,
+              0.05934744779048553
+            ],
+            "k": 30,
+            "n": 714,
+            "point": 0.04201680672268908
+          }
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 30
+          },
+          "by_role": {
+            "list_resources": 30
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=00000005a86d5705",
+              "emitted": "/resources",
+              "episode": 5,
+              "index": 10,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources"
+            }
+          ],
+          "n_compiled_replays": 582,
+          "n_false_compiled_replays": 30,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.25,
+          "parent_measured_n_false_compiled_replays": 30,
+          "share_of_compiled_replays": {
+            "ci95": [
+              0.03634248303151095,
+              0.07263146864000056
+            ],
+            "k": 30,
+            "n": 582,
+            "point": 0.05154639175257732
+          }
+        },
+        {
+          "all_false_compiles_are_class_iii": true,
+          "by_class": {
+            "iii": 20
+          },
+          "by_role": {
+            "list_resources": 20
+          },
+          "examples": [
+            {
+              "declared": "/resources?view=00000003b58b3c4f",
+              "emitted": "/resources",
+              "episode": 3,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000400bf7fac",
+              "emitted": "/resources",
+              "episode": 4,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=00000008da313e9d",
+              "emitted": "/resources",
+              "episode": 8,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000933e7b420",
+              "emitted": "/resources",
+              "episode": 9,
+              "index": 16,
+              "role": "list_resources"
+            },
+            {
+              "declared": "/resources?view=0000000db24732cc",
+              "emitted": "/resources",
+              "episode": 13,
+              "index": 16,
+              "role": "list_resources"
+            }
+          ],
+          "n_compiled_replays": 362,
+          "n_false_compiled_replays": 20,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.5,
+          "parent_measured_n_false_compiled_replays": 20,
+          "share_of_compiled_replays": {
+            "ci95": [
+              0.03604635052800907,
+              0.08379096633055302
+            ],
+            "k": 20,
+            "n": 362,
+            "point": 0.055248618784530384
+          }
+        },
+        {
+          "all_false_compiles_are_class_iii": false,
+          "by_class": {},
+          "by_role": {},
+          "examples": [],
+          "n_compiled_replays": 162,
+          "n_false_compiled_replays": 0,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 0.75,
+          "parent_measured_n_false_compiled_replays": 0,
+          "share_of_compiled_replays": {
+            "ci95": [
+              0.0,
+              0.023163440842904465
+            ],
+            "k": 0,
+            "n": 162,
+            "point": 0.0
+          }
+        },
+        {
+          "all_false_compiles_are_class_iii": false,
+          "by_class": {},
+          "by_role": {},
+          "examples": [],
+          "n_compiled_replays": 48,
+          "n_false_compiled_replays": 0,
+          "n_span_occurrences": 1200,
+          "novelty_rate": 1.0,
+          "parent_measured_n_false_compiled_replays": 0,
+          "share_of_compiled_replays": {
+            "ci95": [
+              6.938893903907228e-18,
+              0.07410012966611748
+            ],
+            "k": 0,
+            "n": 48,
+            "point": 0.0
+          }
+        }
+      ],
+      "pooled_n_false_compiled_replays": 80
+    },
+    "scratchpad_propagation_accounting": {
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "0.00": {
+          "cache_key_conflicts": 1,
+          "cache_size_at_end": 261,
+          "compiled_replays": 0,
+          "handles_induced_from_response_bodies": 60,
+          "machinery_resolve_bind_verify": 720,
+          "persistent_bindings_at_end": 4,
+          "spans_compiled": 20
+        },
+        "0.25": {
+          "cache_key_conflicts": 1,
+          "cache_size_at_end": 426,
+          "compiled_replays": 0,
+          "handles_induced_from_response_bodies": 60,
+          "machinery_resolve_bind_verify": 560,
+          "persistent_bindings_at_end": 23,
+          "spans_compiled": 15
+        },
+        "0.50": {
+          "cache_key_conflicts": 1,
+          "cache_size_at_end": 631,
+          "compiled_replays": 0,
+          "handles_induced_from_response_bodies": 60,
+          "machinery_resolve_bind_verify": 360,
+          "persistent_bindings_at_end": 32,
+          "spans_compiled": 10
+        },
+        "0.75": {
+          "cache_key_conflicts": 1,
+          "cache_size_at_end": 796,
+          "compiled_replays": 0,
+          "handles_induced_from_response_bodies": 60,
+          "machinery_resolve_bind_verify": 200,
+          "persistent_bindings_at_end": 51,
+          "spans_compiled": 5
+        },
+        "1.00": {
+          "cache_key_conflicts": 1,
+          "cache_size_at_end": 952,
+          "compiled_replays": 0,
+          "handles_induced_from_response_bodies": 60,
+          "machinery_resolve_bind_verify": 48,
+          "persistent_bindings_at_end": 60,
+          "spans_compiled": 1
+        }
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "0.00": {
+          "handle_values_read_from_response_bodies": 60,
+          "spans_resolved_from_scratchpad": 120,
+          "spans_ungated_or_unresolved": 1080
+        },
+        "0.25": {
+          "handle_values_read_from_response_bodies": 60,
+          "spans_resolved_from_scratchpad": 120,
+          "spans_ungated_or_unresolved": 1080
+        },
+        "0.50": {
+          "handle_values_read_from_response_bodies": 60,
+          "spans_resolved_from_scratchpad": 120,
+          "spans_ungated_or_unresolved": 1080
+        },
+        "0.75": {
+          "handle_values_read_from_response_bodies": 60,
+          "spans_resolved_from_scratchpad": 120,
+          "spans_ungated_or_unresolved": 1080
+        },
+        "1.00": {
+          "handle_values_read_from_response_bodies": 60,
+          "spans_resolved_from_scratchpad": 120,
+          "spans_ungated_or_unresolved": 1080
+        }
+      }
+    },
+    "share_class_i_merely_novel_sigma_1": {
+      "definition": "prereg.md 9 sigma_1",
+      "per_novelty_rate": {
+        "0.00": {
+          "ci95": [
+            0.5955652195572229,
+            0.6503143336274358
+          ],
+          "k": 748,
+          "n": 1200,
+          "point": 0.6233333333333333
+        },
+        "0.25": {
+          "ci95": [
+            0.620882912844703,
+            0.674837090309819
+          ],
+          "k": 778,
+          "n": 1200,
+          "point": 0.6483333333333333
+        },
+        "0.50": {
+          "ci95": [
+            0.6513712554577744,
+            0.7041572876605835
+          ],
+          "k": 814,
+          "n": 1200,
+          "point": 0.6783333333333333
+        },
+        "0.75": {
+          "ci95": [
+            0.6751699463800861,
+            0.7268763500434775
+          ],
+          "k": 842,
+          "n": 1200,
+          "point": 0.7016666666666667
+        },
+        "1.00": {
+          "ci95": [
+            0.708452801317792,
+            0.7583860800665938
+          ],
+          "k": 881,
+          "n": 1200,
+          "point": 0.7341666666666666
+        }
+      },
+      "pooled": {
+        "ci95": [
+          0.6652258790734269,
+          0.688880739927402
+        ],
+        "k": 4063,
+        "n": 6000,
+        "point": 0.6771666666666667
+      },
+      "unit": "fraction of span occurrences, Wilson CI95"
+    },
+    "share_class_ii_epistemically_blocked_sigma_2": {
+      "definition": "prereg.md 9 sigma_2 under the AUTHORITATIVE goal-aware class-(ii) rule: the observable state key recurs with a different correct action for the same goal intent, where the goal intent is the `intent` field of the goal prefix",
+      "per_novelty_rate": {
+        "0.00": {
+          "ci95": [
+            0.2520989355862645,
+            0.30265971134962366
+          ],
+          "k": 332,
+          "n": 1200,
+          "point": 0.27666666666666667
+        },
+        "0.25": {
+          "ci95": [
+            0.22793174916689724,
+            0.2769864477991277
+          ],
+          "k": 302,
+          "n": 1200,
+          "point": 0.25166666666666665
+        },
+        "0.50": {
+          "ci95": [
+            0.1990743272668342,
+            0.24603532973535494
+          ],
+          "k": 266,
+          "n": 1200,
+          "point": 0.22166666666666668
+        },
+        "0.75": {
+          "ci95": [
+            0.17675073358940147,
+            0.22184117010758192
+          ],
+          "k": 238,
+          "n": 1200,
+          "point": 0.19833333333333333
+        },
+        "1.00": {
+          "ci95": [
+            0.14586263045987358,
+            0.18793668827628757
+          ],
+          "k": 199,
+          "n": 1200,
+          "point": 0.16583333333333333
+        }
+      },
+      "pooled": {
+        "ci95": [
+          0.2124827613207978,
+          0.2335385863759299
+        ],
+        "k": 1337,
+        "n": 6000,
+        "point": 0.22283333333333333
+      },
+      "unit": "fraction of span occurrences, Wilson CI95"
+    },
+    "share_class_iii_observation_absent_sigma_3": {
+      "definition": "prereg.md 9 sigma_3: the correct action depends on a capability handle verified absent from the observable state and from both goal prefixes",
+      "per_novelty_rate": {
+        "0.00": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        },
+        "0.25": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        },
+        "0.50": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        },
+        "0.75": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        },
+        "1.00": {
+          "ci95": [
+            0.08428171719545854,
+            0.11827108328672939
+          ],
+          "k": 120,
+          "n": 1200,
+          "point": 0.1
+        }
+      },
+      "pooled": {
+        "ci95": [
+          0.09266313971931678,
+          0.1078487270709097
+        ],
+        "k": 600,
+        "n": 6000,
+        "point": 0.1
+      },
+      "unit": "fraction of span occurrences, Wilson CI95"
+    },
+    "span_level_action_correctness": {
+      "definition": "prereg.md 10.1 PRIMARY ENDPOINT: fraction of span occurrences whose emitted (method, path, body) equals the declared plan action bound at execution time (shared ground truth, identical for all arms)",
+      "per_novelty_rate_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "0.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "0.00": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          },
+          "0.25": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          },
+          "0.50": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          },
+          "0.75": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          },
+          "1.00": {
+            "ci95": [
+              0.5384608416226889,
+              0.594447024963613
+            ],
+            "k": 680,
+            "n": 1200,
+            "point": 0.5666666666666667
+          }
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "0.00": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "0.25": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "0.50": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "0.75": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          },
+          "1.00": {
+            "ci95": [
+              0.8286816663969149,
+              0.8690846331811707
+            ],
+            "k": 1020,
+            "n": 1200,
+            "point": 0.85
+          }
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "0.00": {
+            "ci95": [
+              0.9645356400225766,
+              0.982432909404825
+            ],
+            "k": 1170,
+            "n": 1200,
+            "point": 0.975
+          },
+          "0.25": {
+            "ci95": [
+              0.9645356400225766,
+              0.982432909404825
+            ],
+            "k": 1170,
+            "n": 1200,
+            "point": 0.975
+          },
+          "0.50": {
+            "ci95": [
+              0.974396714790915,
+              0.9891853179597744
+            ],
+            "k": 1180,
+            "n": 1200,
+            "point": 0.9833333333333333
+          },
+          "0.75": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          }
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "0.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "0.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.25": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.50": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "0.75": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          },
+          "1.00": {
+            "ci95": [
+              0.9968089993972651,
+              1.0
+            ],
+            "k": 1200,
+            "n": 1200,
+            "point": 1.0
+          }
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "0.00": {
+            "ci95": [
+              0.8639346769781576,
+              0.9002855558930788
+            ],
+            "k": 1060,
+            "n": 1200,
+            "point": 0.8833333333333333
+          },
+          "0.25": {
+            "ci95": [
+              0.8639346769781576,
+              0.9002855558930788
+            ],
+            "k": 1060,
+            "n": 1200,
+            "point": 0.8833333333333333
+          },
+          "0.50": {
+            "ci95": [
+              0.8639346769781576,
+              0.9002855558930788
+            ],
+            "k": 1060,
+            "n": 1200,
+            "point": 0.8833333333333333
+          },
+          "0.75": {
+            "ci95": [
+              0.8639346769781576,
+              0.9002855558930788
+            ],
+            "k": 1060,
+            "n": 1200,
+            "point": 0.8833333333333333
+          },
+          "1.00": {
+            "ci95": [
+              0.8639346769781576,
+              0.9002855558930788
+            ],
+            "k": 1060,
+            "n": 1200,
+            "point": 0.8833333333333333
+          }
+        }
+      },
+      "pooled_by_arm": {
+        "B-COLD-EXPLORATION": {
+          "ci95": [
+            0.9993601665122168,
+            0.9999999999999999
+          ],
+          "k": 6000,
+          "n": 6000,
+          "point": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "ci95": [
+            0.5540893995371109,
+            0.5791586226645179
+          ],
+          "k": 3400,
+          "n": 6000,
+          "point": 0.5666666666666667
+        },
+        "B-NO-MEMORY-CONDITIONED-WIDE": {
+          "ci95": [
+            0.8407411858625436,
+            0.858810930696008
+          ],
+          "k": 5100,
+          "n": 6000,
+          "point": 0.85
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "ci95": [
+            0.9834373492331346,
+            0.9892732128387564
+          ],
+          "k": 5920,
+          "n": 6000,
+          "point": 0.9866666666666667
+        },
+        "CROSS_EPISODE_COMPILED_BINDING": {
+          "ci95": [
+            0.9993601665122168,
+            0.9999999999999999
+          ],
+          "k": 6000,
+          "n": 6000,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD": {
+          "ci95": [
+            0.9993601665122168,
+            0.9999999999999999
+          ],
+          "k": 6000,
+          "n": 6000,
+          "point": 1.0
+        },
+        "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+          "ci95": [
+            0.8749641145021726,
+            0.8912120131571936
+          ],
+          "k": 5300,
+          "n": 6000,
+          "point": 0.8833333333333333
+        }
+      },
+      "unit": "fraction of span occurrences, Wilson CI95"
+    }
+  },
+  "next_questions_for_director": [
+    "Is the class-(ii) rule a measurement definition to be fixed once for the program, or a per-experiment choice? Three readings of the same frozen text give sigma_2 between 0.08 and 0.22283333333333333 on identical data, and every downstream headroom number inherits that choice.",
+    "Should a binding-IDENTITY cache key (the identity of the capability, not its episode-scoped value) be preregistered next? This run MEASURED that the preregistered binding-VALUE key produced 0/600 class-(iii) closures from its own cache and that the arm's 1.0000 correctness was entirely oracle-mediated, so this is no longer a hypothetical.",
+    "The cost leg of BOTH clauses failed at a specific point: the scratchpad's 48.00 units/episode is the SAME ledger as the inherited conditioned baseline's 48.00, and the frozen 38.6 bar is the inherited ratchet's amortized cost. Should the economic bar for any successor be re-derived, or is 38.6 the program's standing bar? This run inherited the threshold unchanged and cannot answer whether the bar or the measurement is the right target."
+  ],
+  "observations": [
+    "Substrate determinism: 8 request shapes x 100 repeats = 800 identical round trips, all deterministic (True).",
+    "The mint response BODY carries capability_handle (True); the non-mint PUT body is unchanged (True); the handle equals the declared pure function mint_token(episode counter) (True).",
+    "The scratchpad arm unit test ran 47 checks with 0 failures, including the GoalOnlyPlan AttributeError guard (True).",
+    "CTRL-REPL-PARENT-NUMBERS: the reference arm on the parent-identical generator is byte-identical to the parent packet's raw spans on 7 fields for 1200 spans (0 mismatches).",
+    "CTRL-BASELINE-REPLICATION: all inherited parent arms reproduce their parent-packet values (checks {\"B-COLD-EXPLORATION_cost_is_72\": true, \"B-COLD-EXPLORATION_span_correctness_is_1\": true, \"B-NO-MEMORY-CONDITIONED-NARROW_span_correctness_matches_parent\": true, \"B-NO-MEMORY-CONDITIONED-WIDE_cost_is_48\": true, \"B-NO-MEMORY-CONDITIONED-WIDE_span_correctness_matches_parent\": true, \"B-NO-MEMORY-DETERMINISTIC_cost_per_rate_matches_parent_with_plant\": true, \"B-NO-MEMORY-DETERMINISTIC_false_compiles_per_rate_match_parent\": true, \"B-NO-MEMORY-DETERMINISTIC_nu_0.50_correctness_matches_parent_headline\": true, \"B-NO-MEMORY-DETERMINISTIC_per_rate_correctness_identical_to_parent_artifact\": true, \"B-NO-MEMORY-DETERMINISTIC_pooled_correctness_identical_to_parent_artifact\": true}).",
+    "Reference arm with the class-(iii) plant: pooled span-level action correctness 0.9866666666666667, pooled amortized cost 40.712 units/episode, 80 false compiled replays (parent: 80).",
+    "Residual decomposition under the authoritative goal-aware rule: sigma_1 0.6771666666666667, sigma_2 0.22283333333333333 CI95 [0.2124827613207978, 0.2335385863759299], sigma_3 0.1 CI95 [0.09266313971931678, 0.1078487270709097].",
+    "WITHIN_EPISODE_SCRATCHPAD: pooled span-level action correctness 1.0; class-(iii) closure 600/600 by its OWN propagated-value mechanism and 0/600 by model-oracle fallback; pooled amortized cost 48.0 units/episode; 0 false compiled replays.",
+    "CROSS_EPISODE_COMPILED_BINDING: pooled span-level action correctness 1.0; class-(iii) closure 0/600 by its OWN binding-keyed cache and 600/600 by model-oracle fallback; pooled amortized cost 48.204 units/episode; 0 false compiled replays.",
+    "Reference arm on class-(iii) spans: 520/600 closed, of which 0 by its own compiled replay; all 80 of its total errors are false compiled replays on class-(iii) spans.",
+    "Clause 1 fired: False; clause 2 (a) True / (b) False; clause 3 (a) True / (b) False. Outcome label: SCRATCHPAD_CORRECT_BUT_COSTLY; packet outcome: MIXED.",
+    "PC-PLANTED-DISAMBIGUATION: 200 planted create span occurrences, observation-identical within each episode (True); emitted-correct closure scratchpad 200/200, compiled 200/200, ratchet mechanism-only 0/200.",
+    "NC-UNIQUE-STATES with the literal prereg.md 13 mechanism: sigma_2 count 0 under the authoritative rule; the same control under the inherited literal rule on the arm-native state key gives 49/1200.",
+    "Goal-state success is 1.0 for every arm while pooled span-level action correctness ranges from 0.5666666666666667 to 1.0."
+  ],
+  "outcome": "MIXED",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "The class-(ii) rule remains a measurement definition, not a physical fact. MEASURED: the inherited literal rule and the authoritative goal-aware (intent=role) rule are identical here (sigma_2 = 0.2228 = 0.2228), and only the strictest full-prefix intent reading differs (sigma_2 = 0.0800). The choice that actually moves sigma_2 is the observable STATE KEY, measured in NC (0/1200 with the prereg.md 13 world-store nonce, 49/1200 with the arm-native key), not the intent rule. Which spans are 'epistemically blocked' therefore still depends on a measurement decision, and this experiment cannot settle it from its own data.",
+    "The cross-episode arm's cache key binds the handle VALUE, which the prereg fixes, and the handle is a pure function of the episode counter. The consequence is now MEASURED rather than hypothetical: 0/600 class-(iii) closures came from that arm's own cache, so on this generator a binding-VALUE key cannot compile class-(iii) spans at all. A key binding the binding's IDENTITY was not preregistered here and was not run; whether it would compile class-(iii) spans across episodes remains unknown, and it is the single most informative next experiment this run points to.",
+    "Whether the within-episode scratchpad's advantage is specific to this generator (one handle per episode, a 24-step fixed work-item shape, an all-in-one-episode plan) is not established. The result is a statement about this plan family on this substrate.",
+    "The clause-1 threshold (sigma_2 CI95 upper < 0.01) and the correctness/cost thresholds (0.9833 and 38.6 units/episode) were inherited from the parent, where the correctness threshold is the reference arm's own pooled value and the cost threshold is the reference arm's own per-rate value at novelty 0.50. This experiment inherits them unchanged and does not re-derive them."
+  ],
+  "validity_notes": [
+    "REPRESENTATION LOSS (frozen, DI-01): the scratchpad arm and its no-mint-flag sensitivity are conditioned on goal_prefix_wide_mint, i.e. the parent's frozen 7-field wide prefix plus exactly one field, mint={0|1}. Without it a scratchpad that emits the ungated create never receives a handle. The handle VALUE is in no prefix, and wide and narrow are byte-identical to the parent, so the inherited conditioned baselines are unchanged. The price of the flag is measured, not argued: see metrics.declared_instrument_deviation_DI_01_mint_flag.",
+    "REPRESENTATION LOSS (frozen): the capability handle is returned in the mint response BODY in addition to the header. Every non-mint response body is byte-identical to the parent's, which is what keeps CTRL-REPL-PARENT-NUMBERS exact; the mint response body differs from the parent's by exactly one field.",
+    "CLASS-(ii) RULE (frozen, authoritative): the goal-aware reading is implemented as state key + the `intent` field of the goal prefix, which the generator itself names `intent` and sets to the role. Two declared alternates are reported in metrics.class_ii_rule_operationalisations. MEASURED RESULT: the authoritative goal-aware rule and the inherited literal rule are NUMERICALLY IDENTICAL on this data (1337/6000 pooled; 49/1200 in NC under the arm-native state key), because the arm-native state key already contains the executor's own last request and therefore already separates the roles the intent field would separate. Only the strictest full-prefix intent reading differs (480/6000). The choice of STATE KEY, not the choice of intent, is what moves sigma_2 in this experiment. The clause-1 test consumes the authoritative value, and clause 1 fails by a wide margin under all three readings (CI95 upper 0.19-0.30 at every rate).",
+    "FROZEN-IMPLEMENTATION DISCREPANCY, REPORTED NOT REPAIRED: prereg.md 6.3 describes B-NO-MEMORY-DETERMINISTIC as compiling 'within episode only, no cross-episode retention', but the frozen unmodified arm keeps its compiled cache on the instance across all 50 episodes of a run (arms/deopt_ratchet.py, run_episode never clears self.cache). The new cross-episode arm therefore differs from the reference arm in the binding key and in the declared machinery term rather than in retention alone. The arm was not modified, because the prereg declares it the unmodified parent reference and its measured values are the frozen anchors.",
+    "BOUNDED INFORMATION FLOW, DECLARED: the cross-episode arm reads the BOOLEAN 'is this plan step capability-gated' from the plan step it is already required to materialise (the parent's arm contract consumes that step for the expected role and status code). It never reads the handle value from the plan; the handle it keys on is the one it induced from its own response body. An audit field records whether the arm's own induced binding equals the handle the plan bound, for every gated span.",
+    "ORACLE-MEDIATED CLOSURE, MEASURED AND MATERIAL: the cross-episode binding-keyed arm reaches class-(iii) closure 1.0000, but 0 of its 600 class-(iii) closures came from its own binding-keyed cache; every one was a DEOPT_TO_MODEL fallback, because its preregistered cache key contains the handle VALUE and the handle is a pure function of the episode counter, so a class-(iii) span can never be served from cache. Its 1.0000 span-level correctness is therefore inherited from the perfect-policy oracle and is NOT demonstrated by binding-keyed compilation. The within-episode scratchpad's class-(iii) closure is NOT oracle-mediated: 600/600 came from its own propagated value. The ratchet's class-(iii) closure is 0.8667 (0 by its own compiled replay) and its failures are exactly its false compiled replays. Any reading of clause 3 that treats 1.0000 as evidence that binding-keyed compilation closes sigma_3 is unsupported by this run.",
+    "The model oracle is the parent's perfect-policy stand-in and is given the plan (arms/common.py ModelOracle). Both new arms may deopt to it, exactly as the reference arm does. The scratchpad arm never calls it for content: its decision function is total, and its 1 model unit per span is a ledger charge for a per-span policy decision, identical to the conditioned baseline's. The parenthetical reading of prereg.md 6.1 ('model unit per span for spans not resolved from scratchpad') is reported as the sensitivity in metrics.",
+    "The generator's declared class_iii_fraction=0.10 is realised exactly (120 of 1200 span occurrences), and class-(iii) membership is VERIFIED per span (the handle is checked absent from the observable state and from both goal prefixes) rather than assumed from the plant schedule.",
+    "The PC population is ungated by construction, so the PC tests goal disambiguation of observation-identical spans, not binding-value propagation; the mechanism-only closure reading is reported for all three arms so this is visible rather than hidden.",
+    "INHERITED THRESHOLD PROVENANCE, DISCLOSED: the 0.9833 correctness threshold is the parent packet's headline figure for the reference arm, which is that packet's NOVELTY-0.50 RATE; the parent's POOLED value over all five rates, recomputed here from the parent's own raw span artifact, is 5920/6000 = 0.986667. Both new arms are 1.0000 at every rate, so clause 2 leg (a) and clause 3 leg (a) hold under either reading; the threshold is inherited unchanged and not re-derived here. The reference arm's per-rate and pooled correctness reproduce the parent artifact EXACTLY (see metrics.controls.CTRL-BASELINE-REPLICATION).",
+    "SUBSTRATE-CHANGE CONDITIONALITY, INHERITED FROM THE PARENT AUDIT (this is the load-bearing caveat of the whole experiment): the parent packet's audit recorded that on the parent substrate the capability handle was returned only in a response HEADER, which was not a declared readable channel, and that therefore no real model could have read it from the declared channels. This experiment's frozen modification (prereg.md 4 and 5) returns the handle in the mint response BODY as the field capability_handle. CONSEQUENCE: BOTH new arms are measurable ONLY because of that modification. On the unmodified parent substrate neither the scratchpad nor the compiled arm could have observed any handle value to propagate or key on, so both arms would have been unable to close any class-(iii) span by their own mechanism. These results therefore measure value propagation GIVEN a readable handle channel, and they do NOT establish what an executor without that channel can do, nor that a real substrate exposes handles readably. Disclosed as a frozen representation loss; not repaired, not generalised.",
+    "ARMS ARE DETERMINISTIC RULES, NOT LANGUAGE MODELS, INHERITED FROM THE PARENT AUDIT: every arm in this run, new and inherited alike, is a deterministic policy rule with programmatic access to the declared plan through the parent ModelOracle stand-in in arms/common.py. The correctness, class-closure and headroom numbers are therefore UPPER BOUNDS on the information available to a policy that can read the observable channels and the declared goal prefix; they are not predictions of language-model behaviour, they do not measure a model's ability to hold, notice or propagate a value across a context window, and the abstract-unit costs carry no token, latency or dollar mapping. No real Web work, no real model, and no real inheritance mechanism is exercised anywhere in this run.",
+    "INHERITED-AUDIT DISPOSITION (parent EXP-FRONTIER-36272394045 audit.json, status REVISE, producer_claim_supported=false, 8 required_fixes), recorded so this packet is self-contained: (UR-04 cost basis) resolved before freeze in spec.json decision_rule.cost_basis, binding the parent's three-term compile+model+execution ledger, the basis the 38.6 threshold was derived on; (UR-01 clause-1 label conflict) resolved before freeze in spec.json decision_rule.clause_1_label as RESIDUAL_NOT_ZERO, replacing the parent's contradictory FALSIFIES_INHERITANCE_NICHE mapping; (UR-02 class-(ii) ambiguity) resolved before freeze by declaring the goal-aware reading authoritative with the literal reading rejected-with-reason, and all three operationalisations are reported here as metrics.class_ii_rule_operationalisations; (NC mechanism) FIXED as required, the uniqueness nonce is placed in the world-store snapshot per prereg.md 13 rather than in the request path, and sigma_2 is then exactly 0; (PC class assignment) addressed by reporting the PC's planted span classes under the authoritative rule and disclosing that the PC population is ungated, so it cannot discriminate the class-(ii) reading; (reference arm false compiles) acknowledged and quantified here, 80 class-(iii) false COMPILED_REPLAY decisions, in every cost comparison; (conditioned arm is a deterministic rule with oracle access) and (goal-state success is insensitive) both carried forward and restated above and in metrics.controls.CTRL-GOAL-STATE-SUCCESS. This run does not itself resolve the parent's documentary cost-basis dispute, it inherits the parent's adjudication of it.",
+    "Single machine, stdlib ThreadingHTTPServer on 127.0.0.1, no browser, no docker, no model API key, no network. Wall clock and request counts are in artifacts/run_manifest.json."
+  ]
+}
