@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36129163700",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Fix V-SUBSTRATE-CERTIFICATE control evaluation to properly consume A-READINESS-CERTIFICATE.json (all floors met: n_non304=850>=800, per_ep>=400, distinct workers=2, stickiness=1.0>=0.90 over 12 URIs, no missing X-Worker-Pid); current control reports pass=false with observed={} despite raw evidence showing PASS",
+    "Fix Part B code bug: NameError 'pre_null_logical' undefined during SPA write/restore/null controls; this is a harness defect not an environment failure"
+  ],
+  "validity_findings": [
+    {
+      "id": "V-SUBSTRATE-CERTIFICATE",
+      "producer_control_status": "FAIL",
+      "auditor_assessment": "PASS based on raw evidence",
+      "evidence_ref": "artifacts/A-READINESS-CERTIFICATE.json",
+      "detail": "Control evaluation incorrectly reports pass=false with empty observed={}. The readiness certificate artifact shows all frozen floors satisfied: n_total=850, n_non304=850 (>=800), per_ep_non304=425/425 (>=400 each), n_distinct_x_worker_pid=2 (>=2), min_per_uri_stickiness=1.0 (>=0.90 over 12 URIs >10), n_missing_worker_on_200=0. This is a control reporting bug, not a substrate failure. Part A validity is not compromised because the raw certificate is the ground truth."
+    },
+    {
+      "id": "V-B-REAL-CAPTURE",
+      "producer_control_status": "PASS",
+      "auditor_assessment": "PASS for DOM/AX capture; PARTIAL for full browser matrix",
+      "evidence_ref": "artifacts/B-DOM-AX-CAPTURE.json, artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+      "detail": "Real 1280x720 Chromium launch, page.content(), CDP DOM snapshot (28 nodes), and Accessibility.getFullAXTree (30 nodes) all AVAILABLE via public Playwright API. However, the subsequent SPA write/restore/null controls failed with NameError 'pre_null_logical' undefined, making the full Part B matrix UNAVAILABLE. This is correctly reported as B=UNAVAILABLE and is non-vetoing per frozen precedence."
+    },
+    {
+      "id": "PART_B_NON_VETOING",
+      "producer_control_status": "N/A",
+      "auditor_assessment": "CORRECTLY ENFORCED",
+      "evidence_ref": "spec.json decision_rule.precedence, result.json part_B_status=UNAVAILABLE",
+      "detail": "Part B failure does not alter Part A raw evidence, derived metrics, or validity status. The frozen precedence rule is correctly honored: A is primary and evaluated independently; B failure/UNAVAILABLE never changes A's status."
+    },
+    {
+      "id": "NO_SYNTHETIC_FALLBACK",
+      "producer_control_status": "PASS (B-NO-SYNTHETIC-FALLBACK, NC-B-NO-SYNTHETIC)",
+      "auditor_assessment": "PASS",
+      "evidence_ref": "artifacts/B-PLAYWRIGHT-CAPABILITY.json, artifacts/capability_ledger.json",
+      "detail": "No synthetic DOM, AX, WAL, response, credential, package, or network results substituted for failed probes. All unavailable facts recorded as UNAVAILABLE/ERROR with evidence and smallest unblocking action."
+    },
+    {
+      "id": "V-RECOMPUTE",
+      "producer_control_status": "PASS",
+      "auditor_assessment": "PASS",
+      "evidence_ref": "artifacts/A-RECOMPUTE-CHECK.json",
+      "detail": "Independent recomputation from raw episode JSONL reproduces every detector bit, numerator, denominator, and Wilson interval with zero mismatches. Method: independent re-implementation reading only raw JSONL, shares no code with producer scorer."
+    },
+    {
+      "id": "V-CAPTURE-STABILITY",
+      "producer_control_status": "PASS",
+      "auditor_assessment": "PASS",
+      "evidence_ref": "artifacts/A-CAPTURE-STABILITY.jsonl",
+      "detail": "10/10 no-action WAL-vector pairs byte-identical over frozen 250ms interval. Vector SHA-256 stable at 2dc875500b5bec9cd5e3d54e916babcd7218b83b26876e010e3047aeef8a3309 across all pairs."
+    },
+    {
+      "id": "V-AUTH-SESSION-BOUNDARY",
+      "producer_control_status": "PASS",
+      "auditor_assessment": "PASS",
+      "evidence_ref": "artifacts/A-EPISODE-LEDGER.jsonl",
+      "detail": "Controlled write route correctly enforces HS256 signature+expiry and live sessions row. N-INVALID: 20/20 return 401; N-EXPIRED: 20/20 return 401; N-DELETED: 20/20 return 403. No violations observed."
+    },
+    {
+      "id": "DURABILITY_HEAD_CHECK",
+      "producer_control_status": "FAIL (V-DUR-HEAD)",
+      "auditor_assessment": "CORRECTLY REPORTED AS UNSATISFIABLE",
+      "evidence_ref": "artifacts/D-DURABILITY-CHECK.json",
+      "detail": "Frozen executable scope (run_experiment.py, bringup.py, bringup_contract.json) not present at HEAD with matching content. Under lane no-commit rule, this is correctly reported as DURABILITY=UNSATISFIABLE (REFERENCE_ONLY), not a scientific falsification. Smallest sanctioned repair: authorized commit/merge workflow to HEAD, then new run."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-WAL-VECTOR",
+      "producer_status": "PASS",
+      "auditor_assessment": "PASS",
+      "detail": "Per-episode vector_changed bits confirm: P-WRITE 1.0, P-DRIFT 1.0 change vector; N-READ 1.0, N-INVALID 1.0, N-EXPIRED 1.0, N-DELETED 1.0 do not change vector. Raw evidence in A-WAL-VECTOR-BEFORE-AFTER.jsonl."
+    },
+    {
+      "id": "B-LOGICAL-STATE",
+      "producer_status": "PASS",
+      "auditor_assessment": "PASS",
+      "detail": "Positive readbacks equal planted unique values; null arms preserve pre-episode values and session boundaries. Pre/post logical projections per episode in A-EPISODE-LEDGER.jsonl."
+    },
+    {
+      "id": "B-RESPONSE-FINGERPRINT",
+      "producer_status": "PASS",
+      "auditor_assessment": "PASS",
+      "detail": "P-DRIFT changes representation fingerprint; same-state read-only repetitions do not. Per-episode fingerprint_changed bits in A-RESPONSE-FINGERPRINTS.jsonl."
+    },
+    {
+      "id": "B-STATIC-REPEAT-NULL",
+      "producer_status": "PASS",
+      "auditor_assessment": "PASS",
+      "detail": "10/10 no-action capture pairs byte-identical (same as V-CAPTURE-STABILITY)."
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "producer_status": "null (diagnostic only)",
+      "auditor_assessment": "ACKNOWLEDGED AS DIAGNOSTIC",
+      "detail": "Deliberately weak baseline reported for comparison only; correctly not used as primary detector."
+    }
+  ],
+  "recomputed_metrics": {
+    "part_A_arm_metrics": {
+      "P-WRITE": {
+        "estimand": "sensitivity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      },
+      "P-DRIFT": {
+        "estimand": "sensitivity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      },
+      "N-READ": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      },
+      "N-INVALID": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      },
+      "N-EXPIRED": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      },
+      "N-DELETED": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true,
+        "meets_thresholds": true
+      }
+    },
+    "part_A_pooled_descriptive": {
+      "pooled_sensitivity_point": 1.0,
+      "pooled_specificity_point": 1.0,
+      "note": "descriptive only; cannot override a failed individual arm"
+    },
+    "part_A_thresholds": {
+      "point_min": 0.9,
+      "wilson_lo_min": 0.8
+    },
+    "part_A_wilson_z": 1.959963984540054,
+    "readiness_certificate": {
+      "n_total": 850,
+      "n_non304": 850,
+      "n_304": 0,
+      "per_ep_non304": {
+        "/api/profile": 425,
+        "/api/data_list": 425
+      },
+      "distinct_x_worker_pid": 2,
+      "min_per_uri_stickiness": 1.0,
+      "n_distinct_uris": 12,
+      "n_missing_worker_on_200": 0,
+      "all_floors_met": true
+    },
+    "capture_stability_pairs_identical": "10/10",
+    "recompute_zero_mismatches": true,
+    "part_B_status": "UNAVAILABLE",
+    "part_B_fatal_error": "NameError: name 'pre_null_logical' is not defined",
+    "part_C_status": "AVAILABLE",
+    "durability_status": "UNSATISFIABLE"
+  },
+  "claim_ceiling": "H1-A-INTERVENTION-VALIDITY is SUPPORTED in the exact bounded setting: 2x gunicorn 23.0.0 workers @127.0.0.1:19860/19861 sharing /tmp/single.db SQLite WAL (wal_autocheckpoint=0), exclusive nginx 1.24.0 @19851 with hash $request_uri consistent upstream, real proxy_cache, authorization bypass, X-Worker-Pid header, plain HTTP localhost. This does NOT validate browser generalization, TLS, HTTP/2, multi-host, real-site behavior, or any downstream scientific claim. Part B browser capability is UNAVAILABLE due to harness bug (NameError), not environment failure. Part C contract is AVAILABLE for declared required scopes. Durability is UNSATISFIABLE (REFERENCE_ONLY) per lane no-commit rule. No registry promotion of C-MEAS-VALID is authorized by this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36129163700/request.json",
+    "research/experiments/EXP-RUNTIME-36129163700/spec.json",
+    "research/experiments/EXP-RUNTIME-36129163700/prereg.md",
+    "research/experiments/EXP-RUNTIME-36129163700/freeze.json",
+    "research/experiments/EXP-RUNTIME-36129163700/result.json",
+    "research/experiments/EXP-RUNTIME-36129163700/report.md",
+    "research/experiments/EXP-RUNTIME-36129163700/provenance.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-EPISODE-LEDGER.jsonl",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-RESPONSE-FINGERPRINTS.jsonl",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-DETECTOR-OUTPUT.jsonl",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-CAPTURE-STABILITY.jsonl",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-READINESS-CERTIFICATE.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-DERIVED-METRICS.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-RECOMPUTE-CHECK.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/B-DOM-AX-CAPTURE.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/C-BRINGUP-CONTRACT.json",
+    "research/experiments/EXP-RUNTIME-36129163700/artifacts/D-DURABILITY-CHECK.json"
+  ],
+  "unresolved": [
+    "V-SUBSTRATE-CERTIFICATE control evaluation bug: control reports FAIL despite raw readiness certificate showing all floors met. This does not affect the scientific conclusion because the artifact is the ground truth, but the control evaluation logic should be fixed for future runs.",
+    "Part B harness bug (NameError 'pre_null_logical') prevents completion of the full browser write/restore/null matrix. The DOM/AX capture capability is established as AVAILABLE; the SPA interaction path remains untested in this run.",
+    "Durability UNSATISFIABLE is a known consequence of the lane no-commit workflow; not a scientific unknown but a process boundary.",
+    "The contradictory Codex capability probes (Intel AVAILABLE browsergym/agentlab vs Frontier UNAVAILABLE) are preserved in the capability ledger as inherited_probes with same-run component-level resolution (Playwright/Chromium AVAILABLE, browsergym/agentlab UNAVAILABLE). The historical distinction is not erased."
+  ]
+}
