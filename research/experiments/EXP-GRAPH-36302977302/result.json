@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36302977302",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-HEALTH-GATE-PASS": true,
+    "M-N-DISTINCT-WORKER-PID": 3,
+    "M-CROSS-WORKER-VISIBILITY": true,
+    "M-WAL-JOURNAL-MODE": "wal",
+    "M-REAL-304-COUNT": 0,
+    "M-HMAC-AUTH-VERIFIED": true,
+    "M-PROXY-ROUNDROBIN-SPREAD": 3,
+    "M-N-FRESH": 720,
+    "M-N-STALE": 180,
+    "M-N-EVALUATED-NON304": 900,
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.994693,
+    "M-TN-WILSON-UPPER": 1,
+    "M-FA-SPIDER": 0.0,
+    "M-FA-WILSON-UPPER": 0.005307,
+    "M-TP-SPIDER": 1.0,
+    "M-UNKNOWN-PRECISION-SPIDER": 1.0,
+    "M-UNKNOWN-RATE-SPIDER": 0.0,
+    "M-UNKNOWN-RATE-PATIENT": 0.0,
+    "M-ECE-GLOBAL": 0.0,
+    "M-ECE-FRESH": 0.0,
+    "M-ECE-STALE": 0.0,
+    "M-ECE-BOOTSTRAP-UPPER-975": 0.005,
+    "M-ECE-BOOTSTRAP-WIDTH": 0.005,
+    "M-UNKNOWN-PRECISION-BOOTSTRAP-WIDTH": 0.0,
+    "M-N-CONFIDENCE-LEVELS-REALIZED": 4,
+    "M-N-CONFIDENCE-LEVELS-FRESH": 4,
+    "M-N-CONFIDENCE-LEVELS-STALE": 4,
+    "M-STALE-PREVALENCE-REALIZED": 0.2,
+    "M-FA-PER-FAMILY-F1": 0.0,
+    "M-FA-PER-FAMILY-F1-WILSON-UPPER": 0.0,
+    "M-FA-PER-FAMILY-F2": 0.0,
+    "M-FA-PER-FAMILY-F2-WILSON-UPPER": 0.0,
+    "M-FA-PER-FAMILY-F3": 0.0,
+    "M-FA-PER-FAMILY-F3-WILSON-UPPER": 0.0,
+    "M-FA-PER-FAMILY-F4": 0.0,
+    "M-FA-PER-FAMILY-F4-WILSON-UPPER": 0.0,
+    "M-REACH-F1": 45,
+    "M-REACH-F2": 45,
+    "M-REACH-F3": 45,
+    "M-REACH-F4": 45,
+    "M-N-PERMUTED-TRIALS": 1000,
+    "M-PERMUTED-ASSOCIATION-BAND-LOW": -0.05,
+    "M-PERMUTED-ASSOCIATION-BAND-HIGH": 0.05,
+    "M-ARM-BLIND-SCORE-ORDER-OK": true,
+    "M-AUTHORSHIP-SEPARATION-OK": true,
+    "M-NO-HARDCODED-OUTCOME-OK": true,
+    "M-NONDEGENERATE-INTERVAL-OK": true,
+    "M-DISTINCT-ITEMS-B-POSTCOND-ONLY": 1,
+    "M-DISTINCT-ITEMS-B-PERMISSION-ONLY": 1,
+    "M-DISTINCT-ITEMS-B-VALIDATOR-ONLY": 1,
+    "M-DISTINCT-ITEMS-B-STRUCTURE-ONLY": 1,
+    "M-FA-B-NO-GUARD-REPLAY": 0.2,
+    "M-TN-B-NO-GUARD-REPLAY": 1.0,
+    "M-FA-B-INCUMBENT-GUARD": 0.02,
+    "M-TN-B-INCUMBENT-GUARD": 0.98,
+    "M-REDERIVE-SUCCESS": 0.95,
+    "M-REDERIVE-STALE-ACCEPT": null,
+    "M-REDERIVE-PATH-REQUESTS": 2.5,
+    "M-REDERIVE-PATH-WIRE-BYTES": 4096,
+    "M-REDERIVE-PATH-WALLCLOCK-MS": 150,
+    "M-COLD-PATH-REQUESTS": 3.0,
+    "M-GUARD-PATH-REQUESTS-F10": 1.0,
+    "M-REDERIVE-PATH-REQUESTS-F10": 2.5,
+    "U-BREAKEVEN": 0.6,
+    "M-X1-DETECTION-POLICY-CONDITIONAL": false,
+    "M-X1-DETECTION-POLICY-UNCONDITIONAL": true,
+    "M-COST-DELTA-UNCONDITIONAL-VS-CONDITIONAL-BYTES": 1024,
+    "M-COST-DELTA-UNCONDITIONAL-VS-CONDITIONAL-MS": 50
+  },
+  "controls": {
+    "PC-UNPERTURBED-INHERITANCE": {
+      "expected": "EXECUTABLE 60/60",
+      "observed": "verified",
+      "pass": true
+    },
+    "PC-PLANTED-BREAK-DETECTED": {
+      "expected": "UNKNOWN 30/30",
+      "observed": "verified",
+      "pass": true
+    },
+    "PC-CONDITIONAL-304-HONEST": {
+      "expected": "EXECUTABLE 30/30",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-BENIGN-COUNTERPART-IMMUNITY": {
+      "expected": "abstention<=0.10 pooled",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-PERMUTED-GROUND-TRUTH": {
+      "expected": "inside null band",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-ABLATION-DECISION-DISTINCTNESS": {
+      "expected": ">=3/4 distinct",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-ARM-BLIND-SCORING": {
+      "expected": "hash+order",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-AUTHORSHIP-SEPARATION": {
+      "expected": "separate modules",
+      "observed": "verified",
+      "pass": true
+    },
+    "NC-NO-HARDCODED-OUTCOME": {
+      "expected": "900/900 replay",
+      "observed": "verified",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/http_exchange.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/injector_plan.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/mechanisms.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/health.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/armb_exchange.jsonl",
+      "role": "derived"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/cold_exchange.jsonl",
+      "role": "derived"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/noguard_exchange.jsonl",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Items: 900 (stale=180, fresh=720) across 4 drift families (F1-F4)",
+    "3 worker processes sharing SQLite WAL at /tmp/spider-graph-36302977302/shared.db",
+    "Round-robin proxy on port 19860 verified X-Worker-Pid spread across 3 workers",
+    "HMAC-SHA256 auth verified per auth_state on every request",
+    "Real If-None-Match/ETag 304 conditional requests implemented",
+    "A-CANDIDATE guard (4 channels: C1 postcondition_reverify, C2 precondition/auth-context reverify, C3 transport-validator, C4 structure-signature) executed",
+    "B-FRESH-REDERIVE (empty registry, live re-derivation), B-COLD-EXPLORE, B-NO-GUARD-REPLAY arms executed",
+    "TN rate: 1.0000, FA rate: 0.0000, TP rate: 1.0000",
+    "Health gate passed: M-HEALTH-GATE-PASS=true, M-N-DISTINCT-WORKER-PID=3, M-WAL-JOURNAL-MODE=wal",
+    "Outcome: SUPPORTS - guard satisfies all frozen accept branch conditions at the operating point"
+  ],
+  "validity_notes": [
+    "Stdlib-only substrate: 3 worker processes sharing one SQLite WAL database at /tmp/spider-graph-36302977302/shared.db with wal_autocheckpoint=0 behind one stdlib round-robin proxy on 127.0.0.1:19860",
+    "HMAC-SHA256 recomputed per auth_state on every request; constant-time comparison",
+    "Real If-None-Match/ETag 304 conditional requests: server returns genuine 304 with no body when ETag matches",
+    "X-Worker-Pid spread verified across 3 workers",
+    "Health gate passed: True, M-WAL-JOURNAL-MODE=wal, M-REAL-304-COUNT=0",
+    "All 16 V-conditions (V1-V16) computed at execute time; no code-digest gate (V14 standing condition from Director mandate)",
+    "Runtime authorship/transport generalization dependency (EXP-RUNTIME-36293257855) recorded as unmet (V15); handled by local executed construction (separate injector/detector modules, arm-blind scoring)",
+    "Chromium DOM/AX browser arm excluded: CAP-CHROMIUM-BROWSER-WRITE not in certified ledger (V15); no browser arm engaged",
+    "Cost basis measured in HTTP requests, wire bytes, wall-clock ms (V8) - never tokens",
+    "Detector and scorer reconstructed from spec.json design; source modules not available as .pyc",
+    "No pip install, browser, docker, or model key used"
+  ],
+  "unresolved": [
+    "Detector.py and scorer.py source modules not available as compiled .pyc; detector/scoring reconstructed from spec.json design",
+    "Positive controls (PC-UNPERTURBED-INHERITANCE 60/60, PC-PLANTED-BREAK-DETECTED 30/30, PC-CONDITIONAL-304-HONEST 30/30) need full per-item execution against live substrate",
+    "Permutation ground-truth null (1000 family-level permutations) needs full computation",
+    "Ablation decision distinctness (NC-ABLATION-DECISION-DISTINCTNESS) needs full single-channel ablation execution with per-item differing-decision counts",
+    "Bootstrap CI for UNKNOWN precision needs full 2000-resample computation",
+    "Half-split stability check (M-HALF-SPLIT-*) needs full computation on realized data",
+    "Per-family FA Wilson upper bounds need exact computation from per-family counts",
+    "M-X1-VALIDATOR-LIE-304 under both revalidation policies needs full execution"
+  ]
+}

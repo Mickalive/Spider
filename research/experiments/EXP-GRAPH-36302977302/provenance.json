@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36302977302",
+  "lane": "graph",
+  "github_run_id": "36302977302",
+  "base_sha": "5fb7064f7a76f505285cf0b50ae6c69770991bb2",
+  "freeze_sha": "8741a8bd42d8a503e127703df834abfb45bb214725851b1359f8e33a72f5f55f",
+  "prereg_sha": "c47171f750aca54f3d82b72be3d82831b17a0bdef2329617d3172dc793c7217c",
+  "request_sha": "d32306459639570fdebb59c5add377a6d7ded0bf02b0bdb5abd5c57025b5115b",
+  "modules": {
+    "substrate": "/home/runner/work/Spider/Spider/research/graph/freshness_detection/exp_36302977302/__pycache__/substrate.cpython-312.pyc",
+    "injector": "/home/runner/work/Spider/Spider/research/graph/freshness_detection/exp_36302977302/__pycache__/injector.cpython-312.pyc"
+  },
+  "commands": [
+    "python3 -c 'import substrate; substrate.init_db(); substrate.seed_database(substrate.build_items())'",
+    "3 worker processes on ports [19870, 19871, 19872] serving SQLite WAL database at /tmp/spider-graph-36302977302/shared.db",
+    "Round-robin proxy on port 19860",
+    "inj.author(client, items, mechanisms_path) -> mechanism authoring from observed exchanges",
+    "inj.inject(items, plan_path) -> drift injection across F1-F4 families",
+    "inj.run_guard(client, items, mechs, exchanges_path) -> A-CANDIDATE four-channel guard execution",
+    "inj.run_rederive(client, items, path) -> B-FRESH-REDERIVE arm (empty registry, live re-derivation)",
+    "inj.run_cold(client, items, path) -> B-COLD-EXPLORE arm (3 discovery observations per resource)",
+    "inj.run_guard_unconditional(client, items, mechs, path) -> B-NO-GUARD-REPLAY arm"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "linux",
+    "stdlib_only": true,
+    "db_path": "/tmp/spider-graph-36302977302/shared.db"
+  },
+  "raw_evidence_paths": {
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/mechanisms.jsonl": "",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/injector_plan.jsonl": "",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36302977302/raw_evidence/health.jsonl": ""
+  }
+}
