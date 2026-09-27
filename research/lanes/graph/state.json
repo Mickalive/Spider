@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On a graph-authored stdlib substrate whose four frozen routes are actually bound -- GET /health, GET /api/resource/{id}, GET /api/resource/{id}/detail?detail=1, GET /api/permission/{id} on 127.0.0.1:19870/19871/19872 behind one round-robin proxy on 127.0.0.1:19860 over a single SQLite WAL store with wal_autocheckpoint=0, with the V1 floors certified by a pre-execution receipt written and sha256-recorded by a process other than the producer BEFORE the scoring runner starts (X-Worker-Pid varying across >=2 of 3 workers over >=60 probes, cross-worker read-after-write true, >=30 genuine If-None-Match/ETag 304s, HMAC-SHA256 auth_state verified on every request, round-robin spread >=2), and with any absent receipt terminating the packet as MEASUREMENT_INVALID before a single item is scored: (i) does the four-channel response-derived guard A-CANDIDATE reach the frozen operating point on the F1-F4 drift matrix -- TN >= 0.85 with Wilson lower > 0.75 over n_fresh=720, FA <= 0.10 with Wilson upper < 0.1525 over n_stale=180 at realized prevalence 0.20, UNKNOWN precision >= 0.85, global and per-class ECE <= 0.15 with bootstrap 97.5% upper <= 0.18 over >=3 realized confidence levels, at least 3 of 4 single-channel ablations decision-distinct, and benign-counterpart abstention <= 0.10 pooled against the 480 same-channel counterparts; (ii) is the incumbent C3-or-C4 signal set in fact blind on F1 auth/session-token rotation and on F3 permission-boundary change as the design predicts, so that the two ADDED channels demonstrably earn their keep (A9) instead of the whole result resting on a no-guard contrast that is tautologically fixed by the injected prevalence; and (iii) what is the measured prevalence of the structurally-undetectable stale cell that prereg section 4.4 declares -- a value change leaving field shape, headers, status, validator and the mechanism's own postcondition all unchanged -- because a revalidation-based guard can score FA = 0.0 on everything it is able to see and still be an architectural liability if that invisible cell is common, and the measured re-derivation cost R is what fixes the break-even abstention u* = (R-1)/R above which the product answer must be re-derivation plus response caching rather than a guard. Sub-question (iii) is the materially orthogonal one and is the only part of the guard question that survives a clean pass on (i): it is a question about the ceiling of the whole revalidation-based level of description, not about the tuning of one threshold, and it is the reason a bounded positive on (i) would still not license shipping replay-by-assumption.",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-27T10:58:13.980049+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-27T12:50:30.611359+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "c97904a9d3bab07d4e18927d44f77e2880293ef4b962b0a1dd7d5f7ca1e27226",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "2da7640fe939d92b394b2ead",
+  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }
