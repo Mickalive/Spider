@@ -1,0 +1,12 @@
+{
+  "estimator": "PC-RUNTIME-HEADER-JACCARD-VALIDATED",
+  "I_channel_bits": 0.6727315079745887,
+  "E_null_bits": 0.029983612453350017,
+  "MDD_bits": 0.02563486765507012,
+  "reachability_condition_met": true,
+  "margin_bits": 0.6171130278661685,
+  "calculation_method": "Analytical: I(assignment; state_after | regime, state_before, action) computed on fixed-seed ground-truth log; E_null from shuffled-assignment permutation; MDD = 99th percentile of |stat_null - E_null|",
+  "alpha": 0.01,
+  "power_target": 0.8,
+  "n_permutations": 1000
+}

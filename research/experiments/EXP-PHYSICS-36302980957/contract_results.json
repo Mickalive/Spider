@@ -1,0 +1,93 @@
+{
+  "PC-RUNTIME-HEADER-JACCARD-VALIDATED": {
+    "estimator_id": "PC-RUNTIME-HEADER-JACCARD-VALIDATED",
+    "stat_true": 0.009059233449477353,
+    "IVC_MIN_PERMUTATION_P": 0.0015600624024961,
+    "IVC_DELTA_STATISTIC": 0.2027874564459931,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": true,
+    "IVC_INVARIANCE_PASSES": false,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "59d72a28fa9220f028b4f04bc965503e17427ea51c6493eb3bf0ca1ef584b052",
+    "classification": "REJECT",
+    "expected_classification": "ACCEPT"
+  },
+  "KB-PHYSICS-CMI": {
+    "estimator_id": "KB-PHYSICS-CMI",
+    "stat_true": 0.001657038712027159,
+    "IVC_MIN_PERMUTATION_P": 0.2823712948517941,
+    "IVC_DELTA_STATISTIC": 0.0009260749970603221,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "fd7ec33d5e0f310e3d7b582a9832c06a479d70497376f3f9f730dfd9be015e0e",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  },
+  "KB-PRODUCT-COLD-NONCONSTANT": {
+    "estimator_id": "KB-PRODUCT-COLD-NONCONSTANT",
+    "stat_true": 2.4563636363636365,
+    "IVC_MIN_PERMUTATION_P": 0.984399375975039,
+    "IVC_DELTA_STATISTIC": 4.440892098500626e-16,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "44548963ba0fc656658f64e4076b377575bfe3bb609ce5f8d541be8328a2d78e",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  },
+  "KB-FRONTIER-GOAL-NONCONSTANT": {
+    "estimator_id": "KB-FRONTIER-GOAL-NONCONSTANT",
+    "stat_true": 0.6068181818181818,
+    "IVC_MIN_PERMUTATION_P": 0.984399375975039,
+    "IVC_DELTA_STATISTIC": 1.1102230246251565e-16,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "8a47c66746707bc94342c361c6cc75ad18259576ddc2e90d4c9e98922e10a1bd",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  },
+  "NC-BLIND-1": {
+    "estimator_id": "NC-BLIND-1",
+    "stat_true": 0.4928590909090909,
+    "IVC_MIN_PERMUTATION_P": 0.968798751950078,
+    "IVC_DELTA_STATISTIC": 1.1102230246251565e-16,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "217ac322c1cc49f1ff829f277d5918dd643adc321417f0ef43e1d3b3b64298c2",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  },
+  "NC-BLIND-2": {
+    "estimator_id": "NC-BLIND-2",
+    "stat_true": 0.5537818181818182,
+    "IVC_MIN_PERMUTATION_P": 1.0,
+    "IVC_DELTA_STATISTIC": 0.0,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "93d391acb9e5f0e9d5ee0bb834b9123db3bc8c685354c760554bda9c78c2690f",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  },
+  "NC-CONSTANT-ZERO": {
+    "estimator_id": "NC-CONSTANT-ZERO",
+    "stat_true": 0.0,
+    "IVC_MIN_PERMUTATION_P": 1.0,
+    "IVC_DELTA_STATISTIC": 0.0,
+    "IVC_MDD": 0.02563486765507012,
+    "IVC_DISPLACEMENT_PASSES": false,
+    "IVC_INVARIANCE_PASSES": true,
+    "IVC_ACCEPT": false,
+    "IVC_CODE_PATH_HASH": "9b24c77e115a4ae94eedccf789e9b4fd5a3528eddc82970ccc6b84d3a860a8ea",
+    "classification": "REJECT",
+    "expected_classification": "REJECT"
+  }
+}

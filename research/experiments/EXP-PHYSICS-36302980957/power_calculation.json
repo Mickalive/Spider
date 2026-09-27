@@ -1,0 +1,47 @@
+{
+  "alpha": 0.01,
+  "power_target": 0.8,
+  "n_permutations": 1000,
+  "estimators": {
+    "PC-RUNTIME-HEADER-JACCARD-VALIDATED": {
+      "MDD_bits": 0.02563486765507012,
+      "power_at_planted": 1.0,
+      "power_ge_0.8": true
+    },
+    "B-CHANNEL-IDENTITY": {
+      "MDD_bits": 0.02563486765507012,
+      "power_at_planted": 1.0,
+      "power_ge_0.8": true
+    },
+    "KB-PHYSICS-CMI": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    },
+    "KB-PRODUCT-COLD-NONCONSTANT": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    },
+    "KB-FRONTIER-GOAL-NONCONSTANT": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    },
+    "NC-BLIND-1": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    },
+    "NC-BLIND-2": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    },
+    "NC-CONSTANT-ZERO": {
+      "MDD_bits": 0.02563486765507012,
+      "power_ge_0.8": false,
+      "note": "expected REJECT"
+    }
+  }
+}

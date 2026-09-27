@@ -1,0 +1,9 @@
+{
+  "alignment_score": 1.0,
+  "alignment_count": 2200,
+  "total_transitions": 2200,
+  "client_observed_matches_server_logged": 2200,
+  "client_server_mismatches": 0,
+  "mismatch_details": [],
+  "method": "Client-observed state_after compared to server-logged state_after for all 2200 transitions"
+}

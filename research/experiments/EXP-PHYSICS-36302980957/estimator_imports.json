@@ -1,0 +1,31 @@
+{
+  "PC-RUNTIME-HEADER-JACCARD-VALIDATED": {
+    "source_experiment": "EXP-RUNTIME-36100549580",
+    "codex_artifact_sha256": "TBD_AT_DESIGN_TIME",
+    "source_path": "/home/runner/work/Spider/Spider/research/codex/experiments/EXP-RUNTIME-36100549580",
+    "form": "Non-constant: computes Jaccard similarity of response headers across auth states",
+    "imported": true
+  },
+  "KB-PHYSICS-CMI": {
+    "source_experiment": "EXP-PHYSICS-36279239922",
+    "codex_artifact_sha256": "19e44d27bc6b089a3a5297396c1bb97887cf6f65c74cf211a4555ab6570bc0e4",
+    "source_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py",
+    "form": "Non-constant conditional-entropy statistic",
+    "imported": true,
+    "sha256_verified": true
+  },
+  "KB-PRODUCT-COLD-NONCONSTANT": {
+    "source_experiment": "EXP-PRODUCT-33528829801",
+    "codex_artifact_sha256": "TBD_AT_DESIGN_TIME",
+    "source_path": "/home/runner/work/Spider/Spider/research/codex/experiments/EXP-PRODUCT-33528829801",
+    "form": "Non-constant: parameter induction cost comparator (not constant 1.0)",
+    "imported": true
+  },
+  "KB-FRONTIER-GOAL-NONCONSTANT": {
+    "source_experiment": "EXP-FRONTIER-36287182510",
+    "codex_artifact_sha256": "TBD_AT_DESIGN_TIME",
+    "source_path": "/home/runner/work/Spider/Spider/research/codex/experiments/EXP-FRONTIER-36287182510",
+    "form": "Non-constant: goal-state-success endpoint metric (not constant 1.0)",
+    "imported": true
+  }
+}
