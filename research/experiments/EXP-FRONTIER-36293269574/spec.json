@@ -1,17 +1,119 @@
 {
   "experiment_id": "EXP-FRONTIER-36293269574",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE"],
+  "question": "On real, credential-free, publicly reachable websites with a true holdout and no site-identity leakage: (1) What fraction of real action-gating objects expose a STABLE, agent-visible, episode-invariant identifier sufficient to determine the declared action? (2) Does inherited parameterized transfer execute on held-out TEST sites — resolving to the correct action, verifying against response-derived postconditions, at what rate, with what abstention rate, and with what honest cost in real tokens, requests, verification and repair? (3) Does the inherited arm amortize — costing less than cold re-exploration AND less than a no-memory deterministic executor that re-derives every episode — on this real substrate with real token/request mapping?",
+  "hypothesis": "A non-trivial fraction of real action-gating objects expose stable, episode-invariant identifiers; a parameterized mechanism distilled on TRAIN sites transfers to held-out TEST sites with span-level action correctness exceeding strong baselines; the inherited arm amortizes over cold re-exploration and no-memory re-derivation when real token/request costs are counted; a state-keyed cache that omits gating-object identity produces silently wrong actions at a measurable rate.",
+  "falsifier": "Any of: (a) stable identifier prevalence <= 0.10 (i.e., <=10% of action-gating objects expose a stable, episode-invariant, agent-visible identifier sufficient for action determination); (b) INHERITED_PARAMETERIZED span-level action correctness on TEST sites <= COLD_REEXPLORATION correctness + 0.05; (c) INHERITED_PARAMETERIZED abstention rate >= 0.50; (d) INHERITED_PARAMETERIZED amortized cost per episode >= COLD_REEXPLORATION amortized cost per episode; (e) INHERITED_PARAMETERIZED amortized cost per episode >= NO_MEMORY_DETERMINISTIC amortized cost per episode; (f) NULL_STATE_KEYED false replay rate < 0.05 (i.e., the null arm fails to produce measurable silent errors); (g) parameterized mechanism from product kernel is unavailable and cannot be approximated.",
+  "baselines": {
+    "COLD_REEXPLORATION": {
+      "description": "Fresh exploration each episode with no memory inheritance. Each episode independently discovers action-gating identifiers and executes the task. Real token/request cost measured per episode.",
+      "arm_id": "COLD_REEXPLORATION",
+      "expected_behavior": "High per-episode cost (tokens, requests), zero cross-episode amortization, span-level correctness limited by single-episode discovery capability."
+    },
+    "NO_MEMORY_DETERMINISTIC": {
+      "description": "No persistent memory; each episode re-derives the action sequence from observable state (HTTP responses, HTML structure) without any cross-episode cache. Uses the same minimal structural observation representation (763 tokens) as the treatment arm.",
+      "arm_id": "NO_MEMORY_DETERMINISTIC",
+      "expected_behavior": "Lower per-episode cost than COLD_REEXPLORATION (no exploration search), but no cross-episode amortization; correctness depends on whether observable state alone determines actions."
+    },
+    "WITHIN_EPISODE_SCRATCHPAD": {
+      "description": "Sound but unamortized reference: within-episode value propagation only (from prior EXP-FRONTIER-36287182510). Propagates identifiers read from response bodies within the current episode; zero cross-episode retention. Establishes the correctness upper bound without amortization.",
+      "arm_id": "WITHIN_EPISODE_SCRATCHPAD",
+      "expected_behavior": "High span-level correctness (near 1.0 if stable identifiers readable in bodies), zero cross-episode amortization, cost identical to NO_MEMORY_DETERMINISTIC per episode."
+    }
+  },
+  "positive_control": {
+    "arm_id": "ORACLE_PERFECT_TRANSFER",
+    "description": "Oracle arm that knows the correct stable identifier for every action-gating object on TEST sites and binds it perfectly. Measures the theoretical maximum correctness and minimum cost achievable with perfect identifier knowledge. Not a mechanism test — an instrument calibration.",
+    "expected_behavior": "Span-level action correctness = 1.0000, abstention rate = 0.0, minimal honest cost (only execution + verification)."
+  },
+  "null_control": {
+    "arm_id": "NULL_STATE_KEYED",
+    "description": "MANDATORY NULL ARM: Mechanism whose replay/cache key is the observable state signature only (world store snapshot + last request), omitting the gating object's identity. This is exactly the shape of SPIDER's incumbent state-keyed cache that produced 80/600 silent false compiled replays in EXP-FRONTIER-36287182510. Must produce silently wrong actions at a measurable rate on real sites, converting the synthetic finding into a real credential-free number.",
+    "expected_behavior": "Measurable false replay rate (>= 0.05) on TEST sites where observable state is identical but gating-object identity differs across episodes. Span-level correctness < INHERITED_PARAMETERIZED. Cost may appear lower due to silent replays."
+  },
+  "measurement_validity": {
+    "site_selection": {
+      "train_sites": {
+        "count": 10,
+        "selection": "Pre-registered list of 10 diverse credential-free public websites (e.g., Wikipedia, HTTPBin, JSONPlaceholder, GitHub public API docs, MDN, Python docs, Rust docs, Go docs, example.com, httpbin.org). Must be distinct eTLD+1. No authentication, no cookies required, no JavaScript-rendered content.",
+        "holdout_rule": "TRAIN sites are NEVER used for execution evaluation. Distillation runs ONLY on TRAIN sites."
+      },
+      "test_sites": {
+        "count": 5,
+        "selection": "Pre-registered list of 5 held-out credential-free public websites, distinct eTLD+1 from TRAIN and from each other. No site-identity signal (hostname, domain, known-site embedding) may appear in any inherited mechanism, distillation artifact, or cache key.",
+        "holdout_rule": "TEST sites are NEVER observed during distillation. Execution runs ONLY on TEST sites."
+      },
+      "site_identity_leakage_prevention": "Mechanism distillation outputs must not contain hostname, domain, IP, or any site-specific fingerprint. Cache keys must be purely structural (resource type, action pattern, identifier schema). Verification: audit checks that no TEST-site hostname appears in any TRAIN-distilled artifact."
+    },
+    "observation_representation": {
+      "description": "Minimal HTTP+HTML structural representation established in EXP-INTEL-36287179392: 763 tokens/observation (cl100k_base tokenizer) on HTTP-observable structure only (status, headers, link relations, form actions, input names, semantic HTML landmarks). No full DOM, no accessibility tree, no JavaScript execution.",
+      "tokenizer": "cl100k_base (n_vocab 100277)",
+      "cost_accounting": "Every observation incurs its token cost. Token counts are summed per episode and amortized. No model API is called; token cost is the measurement unit for observation economy."
+    },
+    "identifier_detection": {
+      "stable_identifier_criteria": "An identifier is STABLE iff: (a) readable in the HTTP response (body or header) without JavaScript execution; (b) equal across episodes for the same logical resource (same resource type, same semantic role); (c) sufficient together with observable state to determine the declared action (i.e., binding it into the request yields the correct action); (d) episode-invariant (not bound to session, CSRF token rotation, capability handle minting, or nonce). Examples: canonical resource ID in JSON body, stable link relation (rel=canonical, rel=self), self-describing URL with immutable path segment, stable ETag/Last-Modified for idempotent reads, session-independent capability handle.",
+      "session_scoped_criteria": "An identifier is SESSION-SCOPED iff it meets (a)-(c) above but FAILS (d): it varies across episodes for the same logical resource due to session binding, CSRF rotation, capability minting, or nonce. Examples: CSRF token in form/meta, rotating capability handle, session-bound nonce, OAuth state parameter.",
+      "measurement": "For each action-gating span on TEST sites, record: identifier_type (stable | session_scoped | absent), identifier_value, episode_invariance (boolean across 5 episodes), action_determination_sufficiency (boolean: binding identifier yields correct action)."
+    },
+    "parameterized_mechanism": {
+      "source": "C-PARAM-INHERIT product kernel (src/spider/kernel.py distill_parameterized / resolve path). If unavailable at experiment start, the INHERITED_PARAMETERIZED arm is recorded as UNAVAILABLE and the experiment measures identifier prevalence and null/baseline arms only.",
+      "distillation": "Run on TRAIN sites only. Observe successful task trajectories. Distill parameterized mechanisms with parameter slots for varying resource identifiers. Confidence must meet min_confidence threshold (0.8) for EXECUTABLE resolution.",
+      "transfer": "On TEST sites, resolve mechanisms using only structural matching (intent, preconditions, applicability guards) — no site identity. Bind parameters using detected stable identifiers from TEST-site responses. Verify postconditions against response."
+    },
+    "episode_structure": {
+      "episodes_per_test_site": 10,
+      "total_episodes": 50,
+      "task_family": "Read-write resource CRUD on REST-like endpoints (create, read, update, delete, list) — the same intent family as the synthetic substrate, but on real sites with real identifier schemas.",
+      "novelty": "All TEST sites are novel (never seen in distillation). Within a TEST site, episodes 1-5 may reuse resources; episodes 6-10 use fresh resources to measure cold-start vs amortized behavior."
+    },
+    "cost_ledger": {
+      "components": {
+        "observation_tokens": "Tokens for minimal structural observation (763 tokens/observation baseline from EXP-INTEL-36287179392). Summed per episode.",
+        "requests": "HTTP requests issued (each request = 1 unit). Includes exploration, verification, repair.",
+        "verification_calls": "Postcondition verification checks against response (1 unit per check).",
+        "repair_events": "When verification fails, repair attempts (re-fetch, re-bind, re-execute) counted as additional requests + verification.",
+        "model_calls": "NOT USED — no model API. The 'model unit' from synthetic ledgers is replaced by observation_tokens + requests + verification."
+      },
+      "amortized_cost_per_episode": "(sum of all components over all episodes) / episodes. Compared across arms."
+    }
+  },
+  "decision_rule": {
+    "primary_endpoint": "span_level_action_correctness on TEST sites (fraction of spans where executed action matches declared correct action for that span).",
+    "secondary_endpoints": [
+      "stable_identifier_prevalence (fraction of action-gating spans with stable identifier)",
+      "session_scoped_identifier_prevalence",
+      "abstention_rate (UNKNOWN/EXPLORE resolutions)",
+      "amortized_cost_per_episode (tokens + requests + verification + repair)",
+      "false_replay_rate (NULL_STATE_KEYED only)"
+    ],
+    "success_criteria_all_required": [
+      "stable_identifier_prevalence > 0.10",
+      "INHERITED_PARAMETERIZED span_level_action_correctness > COLD_REEXPLORATION span_level_action_correctness + 0.05",
+      "INHERITED_PARAMETERIZED abstention_rate < 0.50",
+      "INHERITED_PARAMETERIZED amortized_cost_per_episode < COLD_REEXPLORATION amortized_cost_per_episode",
+      "INHERITED_PARAMETERIZED amortized_cost_per_episode < NO_MEMORY_DETERMINISTIC amortized_cost_per_episode",
+      "NULL_STATE_KEYED false_replay_rate >= 0.05"
+    ],
+    "outcome_mapping": {
+      "ALL_CRITERIA_MET": "SUPPORTS C-CROSSSITE (cross-site transfer with amortization on real substrate)",
+      "STABLE_ID_PREVALENCE_FAILS": "FALSIFIES architectural precondition — stable identifiers too rare for cross-episode replay",
+      "CORRECTNESS_FAILS": "FALSIFIES transfer execution — parameterized mechanisms do not resolve correctly on holdout",
+      "ABSTENTION_FAILS": "FALSIFIES transfer execution — mechanism abstains too often on holdout",
+      "AMORTIZATION_VS_COLD_FAILS": "FALSIFIES amortization vs cold re-exploration",
+      "AMORTIZATION_VS_NOMEM_FAILS": "FALSIFIES amortization vs no-memory re-derivation",
+      "NULL_ARM_FAILS": "FALSIFIES null hypothesis — state-keyed cache does not produce measurable silent errors on real sites (unexpected)",
+      "MECHANISM_UNAVAILABLE": "MEASUREMENT_INCOMPLETE — parameterized mechanism unavailable; identifier prevalence and baselines still measured",
+      "MULTIPLE_FAILURES": "MIXED — report which criteria passed/failed"
+    }
+  },
+  "product_consequence_positive": "C-CROSSSITE advances from HYPOTHESIS to EXPERIMENTAL with measured real-Web identifier prevalence, transfer correctness, abstention, and amortization. Enables Product to build cross-site inheritance with verified economics. Null arm result validates that SPIDER's incumbent state-keyed cache is unsound on real Web (architectural liability). Product may implement stable-identifier binding + re-validation in kernel.",
+  "product_consequence_negative": "If stable_identifier_prevalence <= 0.10: cross-episode replay architecture is fundamentally unsound on the real Web — no stable handle to bind. SPIDER must pivot to per-episode re-derivation or within-episode propagation only. If transfer correctness/abstention fails: parameterized mechanisms do not generalize across sites even when identifiers exist. If amortization fails: inheritance costs more than re-derivation on real substrate. If null arm fails to produce false replays: the synthetic 80/600 finding was substrate-specific. In all negative cases, C-CROSSSITE remains HYPOTHESIS or moves to REJECTED/BLOCKED with evidence.",
+  "estimated_cost": {
+    "http_requests_estimate": 2500,
+    "observation_tokens_estimate": 380000,
+    "wall_clock_minutes": 30,
+    "compute": "stdlib HTTP only, no browser, no model API, no docker"
+  },
+  "expected_information_gain": "High. This is the first SPIDER experiment to measure (a) real Web stable identifier prevalence, (b) cross-site parameterized transfer on true holdout, (c) honest amortization with real token/request costs, and (d) the null arm's silent error rate on real sites — all on the same credential-free HTTP substrate that EXP-INTEL-36287179392 proved is viable. A decisive result in either direction changes the C-CROSSSITE claim status and SPIDER's architectural commitment to cross-episode replay."
 }
