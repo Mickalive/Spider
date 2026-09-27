@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36287179392",
+  "lane": "intel",
+  "stage": "execute",
+  "github_run_id": "36287179392",
+  "github_run_attempt": "1",
+  "request_id": "bd549d545e9778d018f4ff59",
+  "cycle_id": "36286586455",
+  "origin_github_run_id": "36287179392",
+  "execution_checkpoint": {
+    "path": "research/experiments/EXP-INTEL-36287179392/execution_checkpoint.json",
+    "pre_execute_sha": "da409de772fe21c410df51a8a9d76c4f7a5c9090",
+    "recorded_at": "2026-09-27T02:06:56.291159+00:00"
+  },
+  "git": {
+    "head_commit_at_execute": "4dcb903cb25ab6588af837c50bd0ea21ae91361f",
+    "branch": "lab2/intel",
+    "request_json_base_sha": "1a8c9de729895971390a30687f546a5bb5767843",
+    "commits_made_by_this_stage": [],
+    "note": "This stage made no commit, no push, no branch switch and no reset, per the workflow constraint. HEAD at execution time is recorded above for reproduction."
+  },
+  "frozen_inputs_verified_unmodified": {
+    "freeze_json": "research/experiments/EXP-INTEL-36287179392/freeze.json",
+    "frozen_at": "2026-09-27T02:06:36.552995+00:00",
+    "recomputed_sha256": {
+      "request.json": "2bcc5d2ae04e0dd353ee4c4a731ea59f7c26901a485764a5c51622510d1d8fd8",
+      "spec.json": "da193a23a4c6f7b4241dc222fac441052a4af319641c847364ecc57f3490598c",
+      "prereg.md": "cb9aa1515a552769f381ed4bec526802e07df3e7f0b710b72c32e0867740d572"
+    },
+    "all_match_freeze_json": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "packages": {
+      "requests": "2.34.2",
+      "beautifulsoup4": "4.15.0",
+      "tiktoken": "0.14.0",
+      "publicsuffix2": "2.20191221",
+      "numpy": "2.5.3"
+    },
+    "html_parser": "html.parser (Python standard library; lxml is not installed and was not used)",
+    "tokenizer": {
+      "name": "cl100k_base",
+      "n_vocab": 100277,
+      "source": "tiktoken bundled/remote BPE ranks; loaded successfully at execute time"
+    },
+    "credentials_used": [],
+    "container_registry_pulls": 0,
+    "browser_binaries_used": 0,
+    "model_api_calls": 0,
+    "outbound_access_required": "anonymous public HTTP(S) GET only"
+  },
+  "random_seeds": {
+    "bootstrap": 36287179392,
+    "shuffled_host_null": 36287179393,
+    "positive_control": 36287179392,
+    "note": "prereg section 16 prescribes bootstrap seed = experiment id = 36287179392, null seed = experiment id + 1 = 36287179393, positive-control seed = experiment id + 2. derived/metrics.json records the positive-control seed under seeds.positive_control as 36287179392 because prereg 16 is written as 'seed = 36287179392 + 2' and the analyze phase stores the base experiment id; the control fixtures are deterministic constants, so this seed does not affect any reported value."
+  },
+  "dataset": {
+    "kind": "live public Web, HTTP(S) GET, no authentication",
+    "site_sample_source": "prereg.md section 5.2, fixed before any request",
+    "n_sites_preregistered": 20,
+    "n_sites_measured_ge_2_pages": 15,
+    "n_sites_below_2_pages": 5,
+    "n_pages_retained": 155,
+    "n_http_requests_total": 177,
+    "n_distinct_request_hosts": 23,
+    "total_body_bytes_stored": 23519919,
+    "user_agent": "SPIDER-Research/1.0",
+    "accept": "text/html",
+    "per_host_min_interval_seconds": 1.05,
+    "max_pages_per_site": 10,
+    "min_pages_per_site": 2,
+    "connect_timeout_seconds": 10,
+    "read_timeout_seconds": 30,
+    "concurrency": "5 worker threads, one strictly sequential request queue per host, so the per-host rate limit holds by construction",
+    "fetch_window_utc": "2026-09-27T02:32:12Z to 2026-09-27T02:32:49Z (37 s of page GETs; robots.txt fetches span 2026-09-27T02:32:12Z to 2026-09-27T02:32:43Z). 5 concurrent workers, one sequential queue per host.",
+    "robots_txt": "fetched once per host before any page request and honoured. 18 of 20 hosts returned a parsable robots.txt: 16 returned HTTP 200. stackoverflow.com returned HTTP 418 and www.npmjs.com returned HTTP 403, neither of which is a robots.txt body, so no rules were parsed and none were applied for those two hosts. git-scm.com and kernel.org returned 404 and were treated as unrestricted per prereg 13. Three hosts had same-origin URLs disallowed by robots and were not crawled past them: en.wikipedia.org (4, all /wiki/Special:*), gnu.org (1), news.ycombinator.com (1).",
+    "site_sample_sha256": "b098a58e23435a39b5513c699bdf72915315aeda52e889c1c5eef1037b14cf54",
+    "site_sample_note": "hash is over raw/fetch_manifest.json, which carries the full per-site page inventory, robots outcome, blocked URLs and redirect crossings",
+    "not_measured": [
+      {
+        "site_key": "npmjs.com",
+        "reason": "HTTP 403 on homepage under the frozen User-Agent",
+        "blocking_artifact": "research/experiments/EXP-INTEL-36287179392/raw/raw_responses.jsonl (url https://www.npmjs.com/, and robots fetch https://www.npmjs.com/robots.txt returned HTTP 403, so the block is host-level rather than path-level)",
+        "smallest_unblocking_action": "none available within the frozen design; the frozen User-Agent is fixed by prereg 6.1"
+      },
+      {
+        "site_key": "sourceforge.net",
+        "reason": "HTTP 403 on homepage under the frozen User-Agent",
+        "blocking_artifact": "research/experiments/EXP-INTEL-36287179392/raw/raw_responses.jsonl (url https://sourceforge.net/)",
+        "smallest_unblocking_action": "none available within the frozen design; the frozen User-Agent is fixed by prereg 6.1"
+      },
+      {
+        "site_key": "stackoverflow.com",
+        "reason": "HTTP 403 on homepage under the frozen User-Agent",
+        "blocking_artifact": "research/experiments/EXP-INTEL-36287179392/raw/raw_responses.jsonl (url https://stackoverflow.com/, and robots fetch https://stackoverflow.com/robots.txt returned HTTP 418, so the block is host-level rather than path-level)",
+        "smallest_unblocking_action": "none available within the frozen design; the frozen User-Agent is fixed by prereg 6.1"
+      },
+      {
+        "site_key": "crates.io",
+        "reason": "HTTP 200 but zero same-origin anchor hrefs in the raw HTML; client-rendered application",
+        "blocking_artifact": "research/experiments/EXP-INTEL-36287179392/raw/bodies/ (homepage body, sha256 recorded in raw/fetch_manifest.json)",
+        "smallest_unblocking_action": "a rendering substrate, which the frozen prereg forbids requiring"
+      },
+      {
+        "site_key": "kernel.org",
+        "reason": "HTTP 200 but zero same-origin anchor hrefs in the raw HTML; static page linking only to external mirrors",
+        "blocking_artifact": "research/experiments/EXP-INTEL-36287179392/raw/bodies/ (homepage body, sha256 recorded in raw/fetch_manifest.json)",
+        "smallest_unblocking_action": "add a second frozen base URL for the same host, which the frozen sample forbids"
+      }
+    ],
+    "not_measured_note": "All five are recorded as NOT_MEASURED with their exact blocking artefact, per portfolio directive G1 in request.json director_mandate. None is recorded as a negative result and none was retried with a different User-Agent, renderer or sample, because prereg 5.2 fixes the sample and prereg 5.3/6.1 fix discovery and headers.",
+    "not_measured_corroboration": "The robots.txt fetches independently corroborate the two HTTP-403 homepage blocks: www.npmjs.com/robots.txt returned 403 and stackoverflow.com/robots.txt returned 418. The block is therefore host-level edge behaviour under the frozen User-Agent, not a per-path decision by these sites."
+  },
+  "fixtures": {
+    "path": "research/experiments/EXP-INTEL-36287179392/raw/control_structures.json",
+    "sha256": "cdf401fc0708dac64e733565b72b381366623f944d48c85a2850751039ca5a90",
+    "contents": {
+      "PC-SYNTHETIC-ALIAS": "the two synthetic pages of prereg 11.1, verbatim in intent: identical template structure, different slot values",
+      "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION": "NOT FROZEN, decision-not-used. Adds two deliberately unrelated synthetic hosts C and D so the positive control's permutation null has at least three groups and therefore non-zero variance. Its nav depths differ so that C and D share no template structure with each other."
+    }
+  },
+  "code_paths": [
+    {
+      "path": "research/intel/exp_36287179392_pipeline.py",
+      "sha256": "f0470652d3e9a49c9b2a59a8d571239a1d0c35dd5f3fc88c2858d678c38e0fe8",
+      "role": "frozen estimator library"
+    },
+    {
+      "path": "research/intel/exp_36287179392_fetch.py",
+      "sha256": "298ea401818597930a67a504382b1380f1195989bac4bca0dca5f799e2310632",
+      "role": "phase A, raw fetch"
+    },
+    {
+      "path": "research/intel/exp_36287179392_extract.py",
+      "sha256": "1645cf648781e6e3da2f93563ae2e86088a4d3721c4555c335b419454a62220c",
+      "role": "phase B, structural extraction and representation cost"
+    },
+    {
+      "path": "research/intel/exp_36287179392_analyze.py",
+      "sha256": "9848677bd1c59946ba8a8535f51460f904f63a8ca2cd88be42423a988b04ddf5",
+      "role": "phase C, derived measurements, controls, frozen decision rule"
+    }
+  ],
+  "execution_commands": [
+    {
+      "step": 1,
+      "command": "python3 research/intel/exp_36287179392_fetch.py",
+      "cwd": "repository root",
+      "produces": "raw/robots_records.jsonl, raw/raw_responses.jsonl, raw/bodies/, raw/fetch_manifest.json",
+      "notes": "The only step that touches the network. The request window was 37 seconds, 2026-09-27T02:32:12Z to 2026-09-27T02:32:49Z. PYTHONDONTWRITEBYTECODE=1 was set in the environment for all steps to keep scripts/__pycache__ out of the control-plane roots."
+    },
+    {
+      "step": 2,
+      "command": "python3 research/intel/exp_36287179392_extract.py",
+      "cwd": "repository root",
+      "produces": "raw/extracted_structures.jsonl, raw/control_structures.json",
+      "notes": "Pure function of the stored body files; no network access. Reruns are idempotent."
+    },
+    {
+      "step": 3,
+      "command": "python3 research/intel/exp_36287179392_analyze.py",
+      "cwd": "repository root",
+      "produces": "derived/metrics.json",
+      "notes": "Pure function of steps 1 and 2; no network access. Two consecutive runs produced byte-identical output."
+    }
+  ],
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/raw/raw_responses.jsonl",
+      "sha256": "064b9ba6e6a0ef2b6c162ff2f8fec9a01ce4d27986fc2c98e449f415fcf4f8a0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/raw/robots_records.jsonl",
+      "sha256": "334f8b0feab3b1cf3977ea365f18bbc286ce3654a892337e429a5007137feed6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/raw/fetch_manifest.json",
+      "sha256": "b098a58e23435a39b5513c699bdf72915315aeda52e889c1c5eef1037b14cf54",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/raw/extracted_structures.jsonl",
+      "sha256": "079de565d033768831fbd5115eeee4a11cc3824df94e36560263fc64646eeb74",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/raw/control_structures.json",
+      "sha256": "cdf401fc0708dac64e733565b72b381366623f944d48c85a2850751039ca5a90",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/derived/metrics.json",
+      "sha256": "16988cff779096d0b4c982d8ed22ace99d55bdba74c2ee4984fcc32a4da5867f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/attempt1_nonconforming/fetch_manifest.json",
+      "sha256": "c94aa44ab601ba6375b9df5e9086c6fae61755ea8e0bb641233b0cfe9c52702e",
+      "role": "raw",
+      "note": "discarded pre-measurement attempt, retained as evidence"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36287179392/attempt1_nonconforming/raw_responses.jsonl",
+      "sha256": "cc4ae16a32799ed0b53019d72f39704f33ce414f624ef57eeaba4c79f052d099",
+      "role": "raw",
+      "note": "discarded pre-measurement attempt, retained as evidence"
+    }
+  ],
+  "verification_performed_by_producer": [
+    {
+      "check": "frozen input integrity",
+      "method": "sha256 of request.json, spec.json and prereg.md recomputed and compared to freeze.json",
+      "result": "all three match"
+    },
+    {
+      "check": "analysis determinism",
+      "method": "research/intel/exp_36287179392_analyze.py executed twice, output compared with cmp",
+      "result": "byte-identical, derived/metrics.json sha256 16988cff779096d0b4c982d8ed22ace99d55bdba74c2ee4984fcc32a4da5867f"
+    },
+    {
+      "check": "independent estimator recomputation",
+      "method": "brute-force loop over all 105 host pairs x all signature instances, written without reference to the pipeline closed form",
+      "result": "matched 416218, total 4984, AGF 83.510834670947, mean Jaccard 0.126721042325, 105 pairs; exact agreement"
+    },
+    {
+      "check": "frozen null degeneracy",
+      "method": "200 independent label permutations counted for distinct AGF values",
+      "result": "1 distinct value, confirming the algebraic identity stated in result.json controls.NC-SHUFFLED-HOST"
+    },
+    {
+      "check": "extraction completeness",
+      "method": "count of page records carrying extraction_error",
+      "result": "0 of 155"
+    }
+  ],
+  "producer_deviations_from_frozen_design": [
+    {
+      "deviation": "attempt1 was discarded and the fetch re-run",
+      "cause": "attempt1 resolved prereg 5.3 'same-origin' as same-registrable-domain, walking en.wikipedia.org onto 300+ sibling language Wikipedias and producing 400 distinct request hosts for a 20-site sample; attempt1 also applied a Content-Type filter that prereg 5.3 does not list, discarding 540 valid 200-OK Wikipedia HTML pages whose responses carried no Content-Type header",
+      "outcome_dependent": false,
+      "note": "No outcome metric of any kind was computed from attempt1. It is retained under attempt1_nonconforming/ as raw evidence of the defect."
+    },
+    {
+      "deviation": "signature templates exclude the host",
+      "cause": "prereg 7.2 requires matching across distinct eTLD+1, which is impossible if the host is part of the template",
+      "outcome_dependent": false
+    },
+    {
+      "deviation": "list item_count is carried as metadata and excluded from matching",
+      "cause": "prereg 7.2 matches on template structure; item_count is a count, not a template component, though prereg 7.1 lists it in the signature tuple",
+      "outcome_dependent": false
+    },
+    {
+      "deviation": "url_template may return null for malformed input",
+      "cause": "prereg does not specify malformed-URL handling",
+      "outcome_dependent": false
+    },
+    {
+      "deviation": "non-frozen NC-SIG-REASSIGN null and 4-host positive-control extension computed",
+      "cause": "the frozen null is an algebraic identity on the frozen estimator and the frozen 2-host positive control's AGF > 0.8 threshold is arithmetically unreachable, so the frozen design could not demonstrate sensitivity or produce a power-bearing null",
+      "outcome_dependent": false,
+      "note": "Both are labelled decision-not-used, share one code path with the frozen estimators, and are reported in full so AUDIT can confirm or dispute them. Neither replaces the frozen primary, which remains unevaluable."
+    },
+    {
+      "deviation": "prereg estimated_cost stated 200 http_requests; the conforming run issued 177",
+      "cause": "the conforming run reuses already-fetched bodies for link discovery instead of re-fetching BFS parents",
+      "outcome_dependent": false
+    },
+    {
+      "deviation": "no deviation in seeds, sample, page cap, rate limit, signature classes, bootstrap count, null permutation count, resampling unit, decision rule or cost definitions",
+      "cause": null
+    }
+  ]
+}

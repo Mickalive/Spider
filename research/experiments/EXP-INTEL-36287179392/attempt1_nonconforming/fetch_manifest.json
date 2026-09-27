@@ -1,0 +1,4954 @@
+{
+ "accept": "text/html",
+ "experiment_id": "EXP-INTEL-36287179392",
+ "max_pages_per_site": 10,
+ "n_http_requests_total": 879,
+ "n_page_records": 155,
+ "n_sites_attempted": 20,
+ "n_sites_ge_min_pages": 15,
+ "n_sites_preregistered": 20,
+ "per_host_min_interval_s": 1.05,
+ "sites": {
+  "apache.org": {
+   "base_url": "https://apache.org",
+   "category": "organization",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=apache.org"
+   ],
+   "ordinal": 18,
+   "pages": [
+    {
+     "body_sha256": "76e9bb4f971be7197af4b5b037556d09cb1be87148315ce4057ea91541044020",
+     "bytes": 52629,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 6.744,
+     "status": 200,
+     "url": "https://apache.org/",
+     "url_requested": "https://apache.org"
+    },
+    {
+     "body_sha256": "366ae0c8965117d769716a371cd8cd29160f491180998d48115d7e48e5d1a082",
+     "bytes": 168324,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 61.115,
+     "status": 200,
+     "url": "https://news.apache.org/foundation/entry/introducing-the-asfs-new-logo",
+     "url_requested": "https://news.apache.org/foundation/entry/introducing-the-asfs-new-logo"
+    },
+    {
+     "body_sha256": "f16d5d4d233e187fc363b2500968cbc47e066b25fc51b8f2bbe6e41c7b3852b5",
+     "bytes": 15600,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 138.994,
+     "status": 200,
+     "url": "https://community.apache.org/",
+     "url_requested": "https://community.apache.org/"
+    },
+    {
+     "body_sha256": "a012d6528e3ff2ddf09e4df427c178962bc98c0f3a2da5268a83a65a00cb7d33",
+     "bytes": 22946,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 115.918,
+     "status": 200,
+     "url": "https://community.apache.org/contributors/",
+     "url_requested": "https://community.apache.org/contributors/"
+    },
+    {
+     "body_sha256": "ac3cba1e395d456baee7ccd4b9131599ba304253559d44c253b3172fa9b134be",
+     "bytes": 34121,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 114.856,
+     "status": 200,
+     "url": "https://apache.org/foundation/policies/conduct",
+     "url_requested": "https://apache.org/foundation/policies/conduct"
+    },
+    {
+     "body_sha256": "6a1d17430ab2a5136d869cc7db6bdc01e1169d41a28e66a2a409f0feba0cf015",
+     "bytes": 27216,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 121.706,
+     "status": 200,
+     "url": "https://apache.org/community-resources/",
+     "url_requested": "https://apache.org/community-resources/"
+    },
+    {
+     "body_sha256": "3fb0e50f54f690ef5a1a44031bb1107a8de3f933530156d77caefd2043481f04",
+     "bytes": 5631,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 379.247,
+     "status": 200,
+     "url": "https://events.apache.org/",
+     "url_requested": "https://events.apache.org/"
+    },
+    {
+     "body_sha256": "412249dfc7bcf277e1d69d26292685c8b3b4c5e14cef214099569ebb9cffdf58",
+     "bytes": 27181,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 117.866,
+     "status": 200,
+     "url": "https://apache.org/foundation/buy_stuff",
+     "url_requested": "https://apache.org/foundation/buy_stuff"
+    },
+    {
+     "body_sha256": "9b748cce5143af0f3c939911cf636160210b9b902a8b0d1eaca3f6042fa50407",
+     "bytes": 28541,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 117.579,
+     "status": 200,
+     "url": "https://apache.org/projects/",
+     "url_requested": "https://apache.org/projects"
+    },
+    {
+     "body_sha256": "88f0763b2c5b99b90efce9384f1bbd1349e185633e50643242add22617fa3626",
+     "bytes": 18140,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 168.562,
+     "status": 200,
+     "url": "https://incubator.apache.org/",
+     "url_requested": "https://incubator.apache.org/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://apache.org/robots.txt",
+   "site_key": "apache.org"
+  },
+  "bitbucket.org": {
+   "base_url": "https://bitbucket.org",
+   "category": "developer platform",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=bitbucket.org"
+   ],
+   "ordinal": 12,
+   "pages": [
+    {
+     "body_sha256": "b801447bee87a003bbd1548267875a7bd5fbfde3cd8664761afcfd71b3789c55",
+     "bytes": 178426,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 50.72,
+     "status": 200,
+     "url": "https://bitbucket.org/",
+     "url_requested": "https://bitbucket.org"
+    },
+    {
+     "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+     "bytes": 199388,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 528.985,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/bitbucket/ai",
+     "url_requested": "https://bitbucket.org/blog/ai"
+    },
+    {
+     "body_sha256": "2b4d5b32411c62c54b535138e2837c76421a22f18fe83aa79b4d2255bdaf1b05",
+     "bytes": 61631,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 49.087,
+     "status": 200,
+     "url": "https://bitbucket.org/product/features/pipelines/integrations",
+     "url_requested": "https://bitbucket.org/product/features/pipelines/integrations"
+    },
+    {
+     "body_sha256": "aff45ab70698c878ac1d1ebf510fbe85b651559fc7e5e8dfc72a89788a8f89fa",
+     "bytes": 118779,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 102.372,
+     "status": 200,
+     "url": "https://www.atlassian.com/software/bitbucket/features/pipelines",
+     "url_requested": "https://bitbucket.org/product/features/pipelines"
+    },
+    {
+     "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+     "bytes": 199486,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 205.319,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management",
+     "url_requested": "https://bitbucket.org/blog/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+    },
+    {
+     "body_sha256": "3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39",
+     "bytes": 189810,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 226.656,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/app/bitbucket",
+     "url_requested": "https://bitbucket.org/blog/"
+    },
+    {
+     "body_sha256": "7d804fcd924d1d5fa2b5e477eba0ce7d4d01b47c321ec43567285aa492e23567",
+     "bytes": 63467,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 43.583,
+     "status": 200,
+     "url": "https://bitbucket.org/product/write",
+     "url_requested": "https://bitbucket.org/product/write"
+    },
+    {
+     "body_sha256": "89a266956e07df65ff6cf7fd22aa7c3de089551123bfae4b6ca43bfe18a9d0d8",
+     "bytes": 114916,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 684.869,
+     "status": 200,
+     "url": "https://bitbucket.status.atlassian.com/",
+     "url_requested": "http://status.bitbucket.org/"
+    },
+    {
+     "body_sha256": "459d8758cb01a674098bb22e780e230e6f75ae18cabbe40d72d9b41397b4f8e9",
+     "bytes": 1161298,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 426.449,
+     "status": 200,
+     "url": "https://www.atlassian.com/software/bitbucket/pricing",
+     "url_requested": "https://bitbucket.org/product/pricing"
+    },
+    {
+     "body_sha256": "aa4c10726c3546a21acee82cdab351a89bc1ceac0c06157c9ea78c407f91d4cf",
+     "bytes": 60385,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 58.68,
+     "status": 200,
+     "url": "https://bitbucket.org/product/version-control-software",
+     "url_requested": "https://bitbucket.org/product/version-control-software"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://bitbucket.org/robots.txt",
+   "site_key": "bitbucket.org"
+  },
+  "crates.io": {
+   "base_url": "https://crates.io",
+   "category": "package registry",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=crates.io",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 9,
+   "pages": [
+    {
+     "body_sha256": "970a124f5d7978c62e0cf74bd85f9d15d6ef8a40b01648e25b8ca96a884d57ec",
+     "bytes": 5050,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 28.798,
+     "status": 200,
+     "url": "https://crates.io/",
+     "url_requested": "https://crates.io"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://crates.io/robots.txt",
+   "site_key": "crates.io"
+  },
+  "developer.mozilla.org": {
+   "base_url": "https://developer.mozilla.org",
+   "category": "documentation",
+   "discovered_blocked": [],
+   "discovered_filtered": [
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Cheatsheet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Date_and_time_formats"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/SVG"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/MathML"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/XML"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Applying_color"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Column_layouts"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Center_an_element"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Card"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/API"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/URI"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/WebAssembly"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/WebDriver"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Media"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Performance"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Privacy"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Security"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/curriculum/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/play"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/observatory"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Backgrounds_and_borders/Border-image_generator"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Backgrounds_and_borders/Border-radius_generator"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Backgrounds_and_borders/Box-shadow_generator"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Color_format_converter"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Color_mixer"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Shapes/Shape_generator"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/about"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/advertising"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/community"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/de/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/es/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/fr/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/ja/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/ko/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/pt-BR/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/ru/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/zh-CN/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/zh-TW/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/mdn-turns-20/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/introducing-mdn-mcp-server/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/image-formats-codecs-compression-tools/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/blog/view-transitions-beginner-guide/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/community/spotlight/shrinivass-arunachalam-balasubramanian"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/en-US/careers/listings/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/plus"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://support.mozilla.org/products/mdn-plus"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/MDN/Community"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/MDN/Guides"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/en-US/docs/Glossary"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/privacy/websites/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/en-US/privacy/websites/data-preferences/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/about/legal/terms/mozilla"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/about/governance/policies/participation/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://developer.mozilla.org/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+    },
+    {
+     "reason": "content_type_application/rss+xml; charset=utf-8",
+     "url": "https://hacks.mozilla.org/feed/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.mozilla.org/privacy/"
+    }
+   ],
+   "errors": [],
+   "notes": [
+    "final_etld1=mozilla.org"
+   ],
+   "ordinal": 6,
+   "pages": [
+    {
+     "body_sha256": "2c279e03a48b4eaf9a900ea64a68d0fe9257e7e137b7a964756e77b64fcd506a",
+     "bytes": 121755,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 59.043,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/",
+     "url_requested": "https://developer.mozilla.org"
+    },
+    {
+     "body_sha256": "311eb2e3f460c6a18b45f899bfe1e04cbabd985754e125e32626cf74b785de60",
+     "bytes": 25214,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 420.017,
+     "status": 200,
+     "url": "https://discord.com/invite/Gt4Qf6q67h",
+     "url_requested": "https://developer.mozilla.org/discord"
+    },
+    {
+     "body_sha256": "4fb5fb6962a915bac79ce3389b8cbb4ebdfac2900512c610fd06dcd574a5e414",
+     "bytes": 42929,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 178.761,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/",
+     "url_requested": "https://hacks.mozilla.org/"
+    },
+    {
+     "body_sha256": "5e16b28bee83c4a41fedadf56537815d805d6756a528b8735e68611291e876dd",
+     "bytes": 52948,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 290.529,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/",
+     "url_requested": "https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/"
+    },
+    {
+     "body_sha256": "f44a08b0afcc5488a57cc3cfd98e7913257741fc6f046b45cff76e525e78de05",
+     "bytes": 35935,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 105.666,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/08/intent-to-ship-jpeg-xl/",
+     "url_requested": "https://hacks.mozilla.org/2026/08/intent-to-ship-jpeg-xl/"
+    },
+    {
+     "body_sha256": "a171aa4eac8c862d31c21a9e68181c069ac220e9c9b4220e4d026bd06e8bedb5",
+     "bytes": 71359,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 111.577,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/06/pact-anonymous-credentials-for-the-web/",
+     "url_requested": "https://hacks.mozilla.org/2026/06/pact-anonymous-credentials-for-the-web/"
+    },
+    {
+     "body_sha256": "d67db2c5e4de0155c978e37f20b9eb9977a3b58a79529843cce3a08c121d725d",
+     "bytes": 42856,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 80.321,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/05/web-serial-support-in-firefox/",
+     "url_requested": "https://hacks.mozilla.org/2026/05/web-serial-support-in-firefox/"
+    },
+    {
+     "body_sha256": "a9d8fba62b0249f85cc90ee621681d1ebee0812bc3015728ba2ae1abd0298f52",
+     "bytes": 35520,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 100.299,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/05/trustworthy-javascript-for-the-open-web/",
+     "url_requested": "https://hacks.mozilla.org/2026/05/trustworthy-javascript-for-the-open-web/"
+    },
+    {
+     "body_sha256": "962f389553215a38e198976d8833d96f5ea71298a24dc895538396d3cf1658ab",
+     "bytes": 35067,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 84.304,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/03/firefox-developer-edition-and-beta-try-out-mozillas-rpm-package/",
+     "url_requested": "https://hacks.mozilla.org/2026/03/firefox-developer-edition-and-beta-try-out-mozillas-rpm-package/"
+    },
+    {
+     "body_sha256": "9043ae1f5332147a8bcb17be71f938ab21e8e645402b989b208c822864ed2fd0",
+     "bytes": 60213,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 2,
+     "discovered_from": "https://hacks.mozilla.org/",
+     "latency_ms": 92.803,
+     "status": 200,
+     "url": "https://hacks.mozilla.org/2026/02/making-webassembly-a-first-class-language-on-the-web/",
+     "url_requested": "https://hacks.mozilla.org/2026/02/making-webassembly-a-first-class-language-on-the-web/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://developer.mozilla.org/robots.txt",
+   "site_key": "developer.mozilla.org"
+  },
+  "dockerhub.io": {
+   "base_url": "https://hub.docker.com",
+   "category": "container registry",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=docker.com"
+   ],
+   "ordinal": 14,
+   "pages": [
+    {
+     "body_sha256": "9687055233a23b1cf23c33fd448ab6c9f502be53ee1d1f94a4ce062c30cdc8a1",
+     "bytes": 472359,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 69.475,
+     "status": 200,
+     "url": "https://hub.docker.com/",
+     "url_requested": "https://hub.docker.com"
+    },
+    {
+     "body_sha256": "4ace89f2166852aaaf093f8d8e554d8e97e0c65dae0b9750281a4f70a92b2c0c",
+     "bytes": 121273,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 236.254,
+     "status": 200,
+     "url": "https://app.docker.com/signup",
+     "url_requested": "https://app.docker.com/signup"
+    },
+    {
+     "body_sha256": "48b2c6a0513c13797425e8895106e2523a0852a8038a1e27eeb8fed6ddb70ac7",
+     "bytes": 462157,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 178.239,
+     "status": 200,
+     "url": "https://hub.docker.com/search?type=sbx_kit",
+     "url_requested": "https://hub.docker.com/search?type=sbx_kit"
+    },
+    {
+     "body_sha256": "aea310f672bb8bb27a1428efc0e2c5af4d5800c50b4245305ed173c6803405c3",
+     "bytes": 501440,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 231.195,
+     "status": 200,
+     "url": "https://www.docker.com/products/docker-sandboxes/#get-started%20",
+     "url_requested": "https://www.docker.com/products/docker-sandboxes/#get-started "
+    },
+    {
+     "body_sha256": "e9a4a6dbc64010c82d9710495465140e234274736298abda93dd247a57cf5a5d",
+     "bytes": 432950,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 334.726,
+     "status": 200,
+     "url": "https://hub.docker.com/u/ai",
+     "url_requested": "https://hub.docker.com/catalogs/models"
+    },
+    {
+     "body_sha256": "d30d358bb0c318f21f9f4776eb083beae38f1a142921a2c103405192cf3a9087",
+     "bytes": 574254,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 167.134,
+     "status": 200,
+     "url": "https://hub.docker.com/mcp",
+     "url_requested": "https://hub.docker.com/mcp"
+    },
+    {
+     "body_sha256": "d5a3bd6af069a96270571c89904cab954749bb574ba51ee23e96671069aa1e80",
+     "bytes": 2061433,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 3681.341,
+     "status": 200,
+     "url": "https://hub.docker.com/hardened-images/catalog",
+     "url_requested": "https://hub.docker.com/hardened-images/catalog"
+    },
+    {
+     "body_sha256": "0d4302b3b590c9ba38ce8829bb9eb9db57cc2f30cd6ba0d3d587cd009283880d",
+     "bytes": 485255,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 238.242,
+     "status": 200,
+     "url": "https://hub.docker.com/search?badges=official",
+     "url_requested": "https://hub.docker.com/search?badges=official"
+    },
+    {
+     "body_sha256": "8b76f288bfc3b84c1d599798523059b54ea9a5e7717394893a394c8dcb7c999a",
+     "bytes": 393946,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 173.828,
+     "status": 200,
+     "url": "https://hub.docker.com/publisher-program",
+     "url_requested": "https://hub.docker.com/publisher-program"
+    },
+    {
+     "body_sha256": "677e55d69992ad5130a81d737fa8109b01025b0f894a096baf9b0450e09b3c5b",
+     "bytes": 492989,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 198.267,
+     "status": 200,
+     "url": "https://hub.docker.com/search?badges=open_source",
+     "url_requested": "https://hub.docker.com/search?badges=open_source"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://hub.docker.com/robots.txt",
+   "site_key": "dockerhub.io"
+  },
+  "docs.python.org": {
+   "base_url": "https://docs.python.org",
+   "category": "documentation",
+   "discovered_blocked": [],
+   "discovered_filtered": [
+    {
+     "reason": "content_type_",
+     "url": "https://www.python.org/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/download.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.16/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.15/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.14/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.13/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.12/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.11/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.10/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.9/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.8/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.7/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.6/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.5/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.4/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.3/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.2/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.1/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3.0/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/2.7/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/2.6/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.python.org/doc/versions/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://wiki.python.org/moin/BeginnersGuide"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://wiki.python.org/moin/PythonBooks"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.python.org/doc/av/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/genindex.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/py-modindex.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/whatsnew/3.14.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/whatsnew/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/tutorial/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/builtins/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/library/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/reference/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/using/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/howto/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/installing/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/extending/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/c-api/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/faq/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/deprecations/index.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/glossary.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/search.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/contents.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/bugs.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/license.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/copyright.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/3/about.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/license.html"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://www.python.org/psf/donations/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://docs.python.org/bugs.html"
+    }
+   ],
+   "errors": [],
+   "notes": [
+    "final_etld1=python.org"
+   ],
+   "ordinal": 2,
+   "pages": [
+    {
+     "body_sha256": "5b9d204386804c9f0d4a82a741fb83a078811517bc944bcc8c2fc65fd0654b29",
+     "bytes": 19641,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 11.041,
+     "status": 200,
+     "url": "https://docs.python.org/3/",
+     "url_requested": "https://docs.python.org"
+    },
+    {
+     "body_sha256": "5bd455c3a25642994ac58a994142f5a89b582f51377b9f3bf46b7d6a35476225",
+     "bytes": 412589,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 189.308,
+     "status": 200,
+     "url": "https://peps.python.org/",
+     "url_requested": "https://peps.python.org/"
+    },
+    {
+     "body_sha256": "28f4129198cef877d1befd0012e6a2e2dd69bc960ae3b53d213bc15389b46548",
+     "bytes": 77116,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 130.589,
+     "status": 200,
+     "url": "https://devguide.python.org/",
+     "url_requested": "https://devguide.python.org/"
+    },
+    {
+     "body_sha256": "a49ed945a920705bcd93a56542217082a313105a09417449c5bc5b641415fb56",
+     "bytes": 35841,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 146.612,
+     "status": 200,
+     "url": "https://packaging.python.org/en/latest/",
+     "url_requested": "https://packaging.python.org"
+    },
+    {
+     "body_sha256": "41f29c0826215d917130c46ccb50fb3fa8d7f8f1259aea6b1ee1accaad0008f7",
+     "bytes": 23763,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 170.993,
+     "status": 200,
+     "url": "https://typing.python.org/en/latest/",
+     "url_requested": "https://typing.python.org"
+    },
+    {
+     "body_sha256": "b8090a638d96b688ccf210c90b4b7ea2cc0edf235815732b759eced2b8db6969",
+     "bytes": 33708,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 72.183,
+     "status": 200,
+     "url": "https://devguide.python.org/documentation/help-documenting/",
+     "url_requested": "https://devguide.python.org/documentation/help-documenting/"
+    },
+    {
+     "body_sha256": "c9777591a7de0535799a6b9acc261741d0f362f53ce078a32730ef2d9e104b54",
+     "bytes": 63209,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://peps.python.org/",
+     "latency_ms": 4.996,
+     "status": 200,
+     "url": "https://peps.python.org/pep-0001/#pep-editors",
+     "url_requested": "https://peps.python.org/pep-0001/#pep-editors"
+    },
+    {
+     "body_sha256": "fcca7e8552baa708b8a826dbd4450855d7af8a9acccfc501bf1cf939b8d04a7f",
+     "bytes": 6137,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://peps.python.org/",
+     "latency_ms": 95.35,
+     "status": 200,
+     "url": "https://peps.python.org/topic/",
+     "url_requested": "https://peps.python.org/topic/"
+    },
+    {
+     "body_sha256": "40135e52999c4d0931608275185f48ae4e324a891770b78a9487e506d248fdbd",
+     "bytes": 18064,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://peps.python.org/",
+     "latency_ms": 39.716,
+     "status": 200,
+     "url": "https://peps.python.org/topic/governance/",
+     "url_requested": "https://peps.python.org/topic/governance/"
+    },
+    {
+     "body_sha256": "a61e64d4d600c2341a83e375049c4728b542959e517866c2c6fb9633b651013a",
+     "bytes": 46864,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://peps.python.org/",
+     "latency_ms": 68.258,
+     "status": 200,
+     "url": "https://peps.python.org/topic/packaging/",
+     "url_requested": "https://peps.python.org/topic/packaging/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://docs.python.org/robots.txt",
+   "site_key": "docs.python.org"
+  },
+  "en.wikipedia.org": {
+   "base_url": "https://en.wikipedia.org",
+   "category": "reference",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:Random"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:RecentChanges"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:SpecialPages"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:Search"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=edit"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=history"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Main_Page"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Main_Page"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&oldid=1358980925"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=info"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Special:CiteThisPage&page=Main_Page&id=1358980925&wpFormIdentifier=titleform"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Special:UrlShortener&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMain_Page"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&useparsoid=0"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Special:DownloadAsPdf&page=Main_Page&action=show-download-screen"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&printable=yes"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:Statistics"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&mobileaction=toggle_view_mobile"
+    }
+   ],
+   "discovered_filtered": [
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Portal:Current_events"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:About"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Help:Contents"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Help:Introduction"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Talk:Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:File_Upload_Wizard"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://abstract.wikipedia.org/wiki/Abstract_Wikipedia:Main_page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Free_content"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Help:Introduction_to_Wikipedia"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/English_language"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Valley_Parade"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/All-seater_stadium"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Bradford"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Manningham_F.C."
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Rugby_league"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Bradford_City_A.F.C."
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Archibald_Leitch"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Football_League_First_Division"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Bradford_City_stadium_fire"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Oliver_Popplewell"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Public_inquiry"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/FA_Cup"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Burnley_F.C."
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Kevin_O'Halloran"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2024_East\u2013West_Line_disruption"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Persona_(series)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Today's_featured_article/September_2026"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Featured_articles_(linked_from_TFAfooter)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:About_Today's_featured_article"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/The_Troubles_of_a_Gnome"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Jacek_Stryjenski"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Grand_Th\u00e9\u00e2tre_de_Gen\u00e8ve"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Radiant_Nuclear"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Tsuri_Sagi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Mustafa_Barzani"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/National_Labor_Relations_Board"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Captive_audience_meeting"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Roy_White_(American_football)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Cikini_Incident"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Febb_Burn"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Frank_Lloyd_Wright"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Child_of_the_Sun"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Did_you_know_archive"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Help:Your_first_article"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Template_talk:Did_you_know"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2026_Kohat_attack"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Kohat"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Tilcayo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Hashim_Tha\u00e7i"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/War_crimes_in_the_Kosovo_War#KLA_war_crimes"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Kosovo_Liberation_Army"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/78th_Primetime_Emmy_Awards"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Widow's_Bay"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Primetime_Emmy_Award_for_Outstanding_Comedy_Series"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/The_Pitt"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Primetime_Emmy_Award_for_Outstanding_Drama_Series"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2026_Turkish_LGBTQ_raids"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2026_Iran_war"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2026_Lebanon_war"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Russo-Ukrainian_war_(2022\u2013present)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Timeline_of_the_Russo-Ukrainian_war_(1_September_2026_\u2013_present)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Deaths_in_2026"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Sandro_Mazzola"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Susy_Aponte"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Tim_Read"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Jun_Gato"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Jeffery_Lee"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Dolores_Sibonga"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:In_the_news/Candidates"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/September_27"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Service_flag#Gold_Star_Mother's_Day"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Meskel"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Orthodox_Tewahedo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/1422"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Treaty_of_Melno"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/1875"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Ellen_Southard"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Liverpool"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/United_States_Congress"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Lifesaving_Medal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/1940"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/World_War_II"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Nazi_Germany"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Kingdom_of_Italy"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Empire_of_Japan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Tripartite_Pact"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Military_alliance"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Axis_powers"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/1949"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Chinese_People's_Political_Consultative_Conference"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Zeng_Liansong"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Flag_of_China"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2014"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Mount_Ontake"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/2014_Mount_Ontake_eruption"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Guillaume_Rondelet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Ivan_Goncharov"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Joel_Shapiro"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Madeleine_Tchicaya"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/September_26"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/September_28"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/September"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/List_of_days_of_the_year"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Pin_tumbler_lock"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Linus_Yale_Sr."
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Linus_Yale_Jr."
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Glossary_of_locksmithing_terms"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/User:Wapcaplet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/User:Pbrks"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Template:POTD/2026-09-26"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Template:POTD/2026-09-25"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Template:POTD/2026-09-24"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Picture_of_the_day/Archive"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Featured_pictures"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Village_pump"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:News"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Teahouse"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Help_desk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Reference_desk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents/Portals"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikimedia_Foundation"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ar.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://de.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://es.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fa.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fr.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://it.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nl.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ja.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pl.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pt.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ru.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sv.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://uk.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vi.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://id.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ms.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh-min-nan.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bg.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ca.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cs.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://da.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://et.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://el.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://eo.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://eu.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://he.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hy.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ko.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hu.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://no.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ro.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://simple.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sk.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sr.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sh.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fi.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tr.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://uz.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ast.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://az.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bn.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bs.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ckb.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fy.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ga.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gl.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hr.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ka.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ku.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lv.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lt.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ml.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mk.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://my.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nn.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pa.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sq.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sl.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://th.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://te.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ur.wikipedia.org/wiki/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ab.wikipedia.org/wiki/%D0%98%D1%85%D0%B0%D0%B4%D0%BE%D1%83_%D0%B0%D0%B4%D0%B0%D2%9F%D1%8C%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ace.wikipedia.org/wiki/%C3%94n_Keue"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ady.wikipedia.org/wiki/%D0%9D%D1%8D%D0%BA%D3%80%D1%83%D0%B1%D0%B3%D1%8A%D0%BE_%D1%88%D1%8A%D1%85%D1%8C%D0%B0%D3%80"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://af.wikipedia.org/wiki/Tuisblad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://als.wikipedia.org/wiki/Wikipedia:Houptsyte"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://alt.wikipedia.org/wiki/%D0%A2%D3%A7%D1%81_%D0%B1%D3%B1%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://am.wikipedia.org/wiki/%E1%8B%8B%E1%8A%93%E1%8B%8D_%E1%8C%88%E1%8C%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ami.wikipedia.org/wiki/Sa%E2%80%99ayayaw_pising_no_tyin-naw"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://an.wikipedia.org/wiki/Portalada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ang.wikipedia.org/wiki/Heafodtramet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ann.wikipedia.org/wiki/Uwu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://anp.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF_%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D8%A9_%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D8%A9"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://arc.wikipedia.org/wiki/%DC%A6%DC%90%DC%AC%DC%90_%DC%AA%DC%9D%DC%AB%DC%9D%DC%AC%DC%90"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ary.wikipedia.org/wiki/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D8%A9_%D8%A7%D9%84%D9%84%D9%88%D9%84%D8%A7"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://arz.wikipedia.org/wiki/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D9%87_%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D9%87"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://as.wikipedia.org/wiki/%E0%A6%AC%E0%A7%87%E0%A6%9F%E0%A7%81%E0%A6%AA%E0%A6%BE%E0%A6%A4"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ast.wikipedia.org/wiki/Portada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://atj.wikipedia.org/wiki/Otitikowin"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://av.wikipedia.org/wiki/%D0%91%D0%B5%D1%82%D3%80%D0%B5%D1%80%D0%B0%D0%B1_%D0%B3%D1%8C%D1%83%D0%BC%D0%B5%D1%80"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://avk.wikipedia.org/wiki/Xadola"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://awa.wikipedia.org/wiki/%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A7%E0%A4%BE%E0%A4%A8_%E0%A4%AA%E0%A4%A8%E0%A5%8D%E0%A4%A8%E0%A4%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ay.wikipedia.org/wiki/Nayriri_u%C3%B1stawi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://az.wikipedia.org/wiki/Ana_s%C9%99hif%C9%99"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://azb.wikipedia.org/wiki/%D8%A2%D9%86%D8%A7_%D8%B5%D9%81%D8%AD%D9%87"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ba.wikipedia.org/wiki/%D0%91%D0%B0%D1%88_%D0%B1%D0%B8%D1%82"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ban.wikipedia.org/wiki/Kaca_Utama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bar.wikipedia.org/wiki/Wikipedia:Hoamseitn"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bat-smg.wikipedia.org/wiki/P%C4%97rms_poslapis"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bbc.wikipedia.org/wiki/Pogu_ni_Alaman"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bcl.wikipedia.org/wiki/Panginot_na_Pahina"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bdr.wikipedia.org/wiki/Tekokon_Laman"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://be-tarask.wikipedia.org/wiki/%D0%93%D0%B0%D0%BB%D0%BE%D1%9E%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%BE%D0%BD%D0%BA%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://be.wikipedia.org/wiki/%D0%93%D0%B0%D0%BB%D0%BE%D1%9E%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%BE%D0%BD%D0%BA%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bew.wikipedia.org/wiki/Bal%C3%A9-bal%C3%A9"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bg.wikipedia.org/wiki/%D0%9D%D0%B0%D1%87%D0%B0%D0%BB%D0%BD%D0%B0_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bh.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF_%E0%A4%AA%E0%A4%A8%E0%A5%8D%E0%A4%A8%E0%A4%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bi.wikipedia.org/wiki/Nambawan_Pej"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bjn.wikipedia.org/wiki/Laman_Tatambaian"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://blk.wikipedia.org/wiki/%E1%80%A1%E1%80%93%E1%80%AD%E1%80%80%E1%80%9C%E1%80%AD%E1%80%90%E1%80%BA%E1%80%99%E1%80%B2%E1%80%B7%E1%80%84%E1%80%AB"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bm.wikipedia.org/wiki/Ny%C9%9B_f%C9%94l%C9%94"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bn.wikipedia.org/wiki/%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A7%E0%A6%BE%E0%A6%A8_%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bo.wikipedia.org/wiki/%E0%BD%82%E0%BD%99%E0%BD%BC%E0%BC%8B%E0%BD%84%E0%BD%BC%E0%BD%A6%E0%BC%8D"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bol.wikipedia.org/wiki/Peji_In_Siri"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bpy.wikipedia.org/wiki/%E0%A6%AA%E0%A6%AF%E0%A6%BC%E0%A6%B2%E0%A6%BE_%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://br.wikipedia.org/wiki/Degemer"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bs.wikipedia.org/wiki/Po%C4%8Detna_strana"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://btm.wikipedia.org/wiki/Alaman_Utamo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bug.wikipedia.org/wiki/Watangpola"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://bxr.wikipedia.org/wiki/%D0%9D%D1%8E%D1%83%D1%80_%D1%85%D1%83%D1%83%D0%B4%D0%B0%D2%BB%D0%B0%D0%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ca.wikipedia.org/wiki/Portada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cbk-zam.wikipedia.org/wiki/El_Primero_Pagina"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cdo.wikipedia.org/wiki/T%C3%A0u_Hi%C4%95k"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ce.wikipedia.org/wiki/%D0%9A%D0%BE%D1%8C%D1%80%D1%82%D0%B0_%D0%B0%D0%B3%D3%80%D0%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ceb.wikipedia.org/wiki/Unang_Panid"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ch.wikipedia.org/wiki/Fanhaluman"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://chr.wikipedia.org/wiki/%E1%8E%A4%E1%8E%B5%E1%8E%AE%E1%8E%B5%E1%8F%8D%E1%8F%97"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://chy.wikipedia.org/wiki/Va%27ohtama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ckb.wikipedia.org/wiki/%D8%AF%DB%95%D8%B3%D8%AA%D9%BE%DB%8E%DA%A9"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://co.wikipedia.org/wiki/Pagina_maestra"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cr.wikipedia.org/wiki/%E1%93%83%E1%94%A5%E1%91%95%E1%92%BB%E1%90%B9%E1%94%85%E1%91%8C%E1%92%8B%E1%93%82%E1%91%B2%E1%93%90"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://crh.wikipedia.org/wiki/Ba%C5%9F_Saife"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cs.wikipedia.org/wiki/Hlavn%C3%AD_strana"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://csb.wikipedia.org/wiki/Prz%C3%A9dn%C3%B4_starna"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cu.wikipedia.org/wiki/%D0%93%D0%BB%D0%B0%D0%B2%D1%8C%D0%BD%D0%B0_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cv.wikipedia.org/wiki/%D0%A2%C4%95%D0%BF_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://cy.wikipedia.org/wiki/Hafan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://da.wikipedia.org/wiki/Forside"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dag.wikipedia.org/wiki/Sol%C9%94%C9%A3u"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dga.wikipedia.org/wiki/A_Gamp%C9%9Bl%C9%9B_zu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://din.wikipedia.org/wiki/Apam_k%C3%ABd%C3%AFt"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://diq.wikipedia.org/wiki/Pela_Seri"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dsb.wikipedia.org/wiki/G%C5%82owny_bok"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dtp.wikipedia.org/wiki/Natad_Tagayo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dty.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF_%E0%A4%AA%E0%A4%A8%E0%A5%8D%E0%A4%A8%E0%A4%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dv.wikipedia.org/wiki/%DE%89%DE%A6%DE%87%DE%A8_%DE%9E%DE%A6%DE%8A%DE%B0%DE%99%DE%A7"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://dz.wikipedia.org/wiki/%E0%BD%98%E0%BC%8B%E0%BD%A4%E0%BD%BC%E0%BD%82%E0%BC%8D"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ee.wikipedia.org/wiki/Axa_do_%C5%8Ag%C9%94"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://el.wikipedia.org/wiki/%CE%A0%CF%8D%CE%BB%CE%B7:%CE%9A%CF%8D%CF%81%CE%B9%CE%B1"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://eml.wikipedia.org/wiki/PP_(MUD)"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://eo.wikipedia.org/wiki/Vikipedio:%C4%88efpa%C4%9Do"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://et.wikipedia.org/wiki/Vikipeedia:Esileht"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://eu.wikipedia.org/wiki/Azala"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ext.wikipedia.org/wiki/G%C3%BCiquipedia:Port%C3%A1"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fa.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D9%87%D9%94_%D8%A7%D8%B5%D9%84%DB%8C"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fat.wikipedia.org/wiki/Kratafa_Tsitsir"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ff.wikipedia.org/wiki/Hello_ja%C9%93%C9%93orgo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fi.wikipedia.org/wiki/Wikipedia:Etusivu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fiu-vro.wikipedia.org/wiki/Wikipedia:P%C3%A4%C3%A4leht"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fj.wikipedia.org/wiki/Tabana_levu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fo.wikipedia.org/wiki/Fors%C3%AD%C3%B0a"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fon.wikipedia.org/wiki/W%C3%A9m%C3%A1_Nuk%C9%94nt%C9%94n"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://frp.wikipedia.org/wiki/Vouiquip%C3%A8dia:Re%C3%A7ua_princip%C3%A2la"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://frr.wikipedia.org/wiki/Wikipedia:Hoodsid"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fur.wikipedia.org/wiki/Pagjine_princip%C3%A2l"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://fy.wikipedia.org/wiki/Haadside"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ga.wikipedia.org/wiki/Pr%C3%ADomhleathanach"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gag.wikipedia.org/wiki/Ba%C5%9F_yaprak"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gan.wikipedia.org/wiki/%E5%B0%81%E9%9D%A2"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gcr.wikipedia.org/wiki/Paj_Prensipal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gd.wikipedia.org/wiki/Pr%C3%AComh-Dhuilleag"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gl.wikipedia.org/wiki/Portada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://glk.wikipedia.org/wiki/%DA%AF%D8%AA%CB%87_%D9%88%D9%84%DA%AF"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gn.wikipedia.org/wiki/Kuatia_%C3%91epyr%C5%A9ha"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gom.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%87%E0%A4%B2_%E0%A4%AA%E0%A4%BE%E0%A4%A8"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gor.wikipedia.org/wiki/Halaman_Bungaliyo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://got.wikipedia.org/wiki/%F0%90%8C%B0%F0%90%8C%BD%F0%90%8C%B0%F0%90%8D%83%F0%90%8D%84%F0%90%8D%89%F0%90%8C%B3%F0%90%8C%B4%F0%90%8C%B9%F0%90%8C%BD%F0%90%8C%B9%F0%90%8C%BB%F0%90%8C%B0%F0%90%8C%BF%F0%90%8D%86%F0%90%8D%83"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gpe.wikipedia.org/wiki/Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gu.wikipedia.org/wiki/%E0%AA%AE%E0%AB%81%E0%AA%96%E0%AA%AA%E0%AB%83%E0%AA%B7%E0%AB%8D%E0%AA%A0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://guc.wikipedia.org/wiki/Ee%27iyalaaya_a%27la%C3%BClaas%C3%BC"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gur.wikipedia.org/wiki/P%C9%9Bgezure"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://guw.wikipedia.org/wiki/Weda_Tangan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://gv.wikipedia.org/wiki/Ard-ghuillag"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ha.wikipedia.org/wiki/Babban_shafi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hak.wikipedia.org/wiki/Th%C3%A8u-Ya%CC%8Dp"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://haw.wikipedia.org/wiki/Ka_papa_kinohi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://he.wikipedia.org/wiki/%D7%A2%D7%9E%D7%95%D7%93_%D7%A8%D7%90%D7%A9%D7%99"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hi.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hif.wikipedia.org/wiki/Pahila_Panna"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hr.wikipedia.org/wiki/Glavna_stranica"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hsb.wikipedia.org/wiki/H%C5%82owna_strona"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ht.wikipedia.org/wiki/Paj_Prensipal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hu.wikipedia.org/wiki/Kezd%C5%91lap"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hy.wikipedia.org/wiki/%D4%B3%D5%AC%D5%AD%D5%A1%D5%BE%D5%B8%D6%80_%D5%A7%D5%BB"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://hyw.wikipedia.org/wiki/%D4%B3%D5%AC%D5%AD%D5%A1%D6%82%D5%B8%D6%80_%D4%B7%D5%BB"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ia.wikipedia.org/wiki/Pagina_principal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://iba.wikipedia.org/wiki/Lambar_Keterubah"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://id.wikipedia.org/wiki/Halaman_Utama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ie.wikipedia.org/wiki/Principal_p%C3%A1gine"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ig.wikipedia.org/wiki/Ihu_m%CC%80b%E1%BB%A5"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://igl.wikipedia.org/wiki/Ogb%C3%A1_ogbolo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ik.wikipedia.org/wiki/Aulla%C4%A1niisaa%C4%A1vik"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ilo.wikipedia.org/wiki/Umuna_a_Panid"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://inh.wikipedia.org/wiki/%D0%9A%D0%B5%D1%80%D1%82%D1%82%D0%B5%D1%80%D0%B0_%D0%BE%D0%B0%D0%B3%D3%80%D1%83%D0%B2"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://io.wikipedia.org/wiki/Frontispico"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://is.wikipedia.org/wiki/Fors%C3%AD%C3%B0a"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://isv.wikipedia.org/wiki/Glavna_stranica"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://it.wikipedia.org/wiki/Pagina_principale"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://iu.wikipedia.org/wiki/%E1%90%8A%E1%92%A5%E1%96%85"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://jam.wikipedia.org/wiki/Mien_Piej"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://jbo.wikipedia.org/wiki/uikipedi%27as:ralju"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://jv.wikipedia.org/wiki/Wikip%C3%A9dia:Pendhapa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ka.wikipedia.org/wiki/%E1%83%9B%E1%83%97%E1%83%90%E1%83%95%E1%83%90%E1%83%A0%E1%83%98_%E1%83%92%E1%83%95%E1%83%94%E1%83%A0%E1%83%93%E1%83%98"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kaa.wikipedia.org/wiki/Bas_bet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kab.wikipedia.org/wiki/Asebter_agejdan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kai.wikipedia.org/wiki/Sh%C3%A0fi_Maiw%C3%A0a"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kaj.wikipedia.org/wiki/A%CC%B1gba%CC%B1dang_Ka%CC%B1zzu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kbd.wikipedia.org/wiki/%D0%9D%D0%B0%D0%BF%D1%8D%D0%BA%D3%80%D1%83%D1%8D%D1%86%D3%80_%D0%BD%D1%8D%D1%85%D1%8A%D1%8B%D1%89%D1%85%D1%8C%D1%8D"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kbp.wikipedia.org/wiki/Tal%C9%A9_%C9%96eu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kcg.wikipedia.org/wiki/A%CC%B1tsak_Wat_Wu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kg.wikipedia.org/wiki/Muk%C3%A2nda_ya_ngudi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kge.wikipedia.org/wiki/Wikipidiya:Garang"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ki.wikipedia.org/wiki/Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kk.wikipedia.org/wiki/%D0%91%D0%B0%D1%81%D1%82%D1%8B_%D0%B1%D0%B5%D1%82"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kl.wikipedia.org/wiki/Saqqaa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://km.wikipedia.org/wiki/%E1%9E%91%E1%9F%86%E1%9E%96%E1%9F%90%E1%9E%9A%E1%9E%8A%E1%9E%BE%E1%9E%98"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kn.wikipedia.org/wiki/%E0%B2%AE%E0%B3%81%E0%B2%96%E0%B3%8D%E0%B2%AF_%E0%B2%AA%E0%B3%81%E0%B2%9F"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://knc.wikipedia.org/wiki/Wikipedia:Shafi_kura"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ko.wikipedia.org/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8C%80%EB%AC%B8"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://koi.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BD%D0%B4%D3%A7%D1%82%D1%87%D0%B0%D0%BD_%D0%BB%D0%B8%D1%81%D1%82%D0%B1%D0%BE%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://krc.wikipedia.org/wiki/%D0%91%D0%B0%D1%88_%D0%B1%D0%B5%D1%82"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ks.wikipedia.org/wiki/%D8%A7%D9%8E%DB%81%D9%8E%D9%85_%D8%B5%D9%8E%D9%81%DB%81%D9%95"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ksh.wikipedia.org/wiki/Wikipedia:Houpsigk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ku.wikipedia.org/wiki/Destp%C3%AAk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kus.wikipedia.org/wiki/Zug_lakir"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kv.wikipedia.org/wiki/%D0%9C%D0%B5%D0%B4%D1%88%D3%A7%D1%80_%D0%BB%D0%B8%D1%81%D1%82_%D0%B1%D0%BE%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://kw.wikipedia.org/wiki/Folen_dre"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ky.wikipedia.org/wiki/%D0%91%D0%B0%D1%88%D0%BA%D1%8B_%D0%B1%D0%B0%D1%80%D0%B0%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://la.wikipedia.org/wiki/Vicipaedia:Pagina_prima"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lad.wikipedia.org/wiki/La_Primera_Oja"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lb.wikipedia.org/wiki/Haapts%C3%A4it"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lbe.wikipedia.org/wiki/%D0%90%D0%B3%D1%8C%D0%B0%D0%BC%D0%BC%D1%83%D1%80_%D0%BB%D0%B0%D0%B6%D0%B8%D0%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lez.wikipedia.org/wiki/%D0%9A%D1%8C%D0%B8%D0%BB%D0%B8%D0%BD_%D1%87%D1%87%D0%B8%D0%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lfn.wikipedia.org/wiki/Paje_xef"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lg.wikipedia.org/wiki/Olupapula_Olusooka"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://li.wikipedia.org/wiki/Veurblaad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lij.wikipedia.org/wiki/Pagina_prin%C3%A7ip%C3%A2"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lld.wikipedia.org/wiki/Plata_prinzipala"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lmo.wikipedia.org/wiki/Pagina_principala"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ln.wikipedia.org/wiki/Lok%C3%A1s%C3%A1_ya_libos%C3%B3"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lo.wikipedia.org/wiki/%E0%BB%9C%E0%BB%89%E0%BA%B2%E0%BA%AB%E0%BA%BC%E0%BA%B1%E0%BA%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lt.wikipedia.org/wiki/Pagrindinis_puslapis"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ltg.wikipedia.org/wiki/Suoku_puslopa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://lv.wikipedia.org/wiki/S%C4%81kumlapa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mad.wikipedia.org/wiki/Tan%C3%A8yan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mag.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A4%A8%E0%A5%8D%E0%A4%A8%E0%A4%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mai.wikipedia.org/wiki/%E0%A4%B8%E0%A4%AE%E0%A5%8D%E0%A4%AE%E0%A5%81%E0%A4%96_%E0%A4%AA%E0%A4%A8%E0%A5%8D%E0%A4%A8%E0%A4%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://map-bms.wikipedia.org/wiki/Kaca_Utama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mdf.wikipedia.org/wiki/%D0%9F%D1%80%D1%8F_%D0%BB%D0%BE%D0%BF%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mg.wikipedia.org/wiki/Wikipedia:Fandraisana"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mhr.wikipedia.org/wiki/%D0%A2%D3%B1%D2%A5_%D0%BB%D0%B0%D1%88%D1%82%D1%8B%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mi.wikipedia.org/wiki/Hau_K%C4%81inga"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://min.wikipedia.org/wiki/Laman_Utamo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mk.wikipedia.org/wiki/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ml.wikipedia.org/wiki/%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B4%A7%E0%B4%BE%E0%B4%A8_%E0%B4%A4%E0%B4%BE%E0%B5%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mn.wikipedia.org/wiki/%D0%9D%D2%AF%D2%AF%D1%80_%D1%85%D1%83%D1%83%D0%B4%D0%B0%D1%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mni.wikipedia.org/wiki/%EA%AF%83%EA%AF%94%EA%AF%A8%EA%AF%91%EA%AF%A3%EA%AF%8F%EA%AF%95_%EA%AF%82%EA%AF%83%EA%AF%A5%EA%AF%8F"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mnw.wikipedia.org/wiki/%E1%80%99%E1%80%AF%E1%80%80%E1%80%BA%E1%80%9C%E1%80%AD%E1%80%80%E1%80%BA%E1%80%90%E1%80%99%E1%80%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mos.wikipedia.org/wiki/Soraogo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mr.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mrj.wikipedia.org/wiki/%D0%A2%D3%B9%D0%BD%D0%B3_%D3%B9%D0%BB%D3%B9%D1%88%D1%82%D3%93%D1%88"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ms.wikipedia.org/wiki/Laman_Utama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mt.wikipedia.org/wiki/Il-Pa%C4%A1na_prin%C4%8Bipali"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mwl.wikipedia.org/wiki/Biquip%C3%A9dia:P%C3%A1igina_percipal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://my.wikipedia.org/wiki/%E1%80%97%E1%80%9F%E1%80%AD%E1%80%AF%E1%80%85%E1%80%AC%E1%80%99%E1%80%BB%E1%80%80%E1%80%BA%E1%80%94%E1%80%BE%E1%80%AC"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://myv.wikipedia.org/wiki/%D0%9F%D1%80%D1%8F%D0%B2%D1%82%D0%BB%D0%BE%D0%BF%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://mzn.wikipedia.org/wiki/%DA%AF%D8%AA_%D8%B5%D9%81%D8%AD%D9%87"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nah.wikipedia.org/wiki/Cal%C4%ABxatl"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nap.wikipedia.org/wiki/Paggena_prencepale"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nds-nl.wikipedia.org/wiki/V%C3%B6%C3%A4rblad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nds.wikipedia.org/wiki/Wikipedia:H%C3%B6%C3%B6ftsiet"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ne.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF_%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://new.wikipedia.org/wiki/%E0%A4%AE%E0%A5%82_%E0%A4%AA%E0%A5%8C"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nia.wikipedia.org/wiki/Wikipedia:Olayama"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nl.wikipedia.org/wiki/Hoofdpagina"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nn.wikipedia.org/wiki/Hovudside"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://no.wikipedia.org/wiki/Forside"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nov.wikipedia.org/wiki/Chefi_pagine"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nqo.wikipedia.org/wiki/%DF%93%DF%8F%DF%AC%DF%9F%DF%8F%DF%B2%DF%AC%DF%98%DF%8A"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nr.wikipedia.org/wiki/Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nrm.wikipedia.org/wiki/Page_d%C3%A9_garde"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nso.wikipedia.org/wiki/Letlakala_la_pele"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nup.wikipedia.org/wiki/Kpataki_Kperegi"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://nv.wikipedia.org/wiki/%C3%8Diyis%C3%AD%C3%AD_Naaltsoos"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ny.wikipedia.org/wiki/Tsamba_Lalikulu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://oc.wikipedia.org/wiki/Acu%C3%A8lh"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://olo.wikipedia.org/wiki/Pi%C3%A4sivu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://om.wikipedia.org/wiki/Fuula_Dura"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://or.wikipedia.org/wiki/%E0%AC%AA%E0%AD%8D%E0%AC%B0%E0%AC%A7%E0%AC%BE%E0%AC%A8_%E0%AC%AA%E0%AD%83%E0%AC%B7%E0%AD%8D%E0%AC%A0%E0%AC%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://os.wikipedia.org/wiki/%D0%A1%C3%A6%D0%B9%D1%80%D0%B0%D0%B3_%D1%84%D0%B0%D1%80%D1%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pa.wikipedia.org/wiki/%E0%A8%AE%E0%A9%81%E0%A9%B1%E0%A8%96_%E0%A8%B8%E0%A8%AB%E0%A8%BC%E0%A8%BE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pag.wikipedia.org/wiki/Arapan_ya_Bolong"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pam.wikipedia.org/wiki/Pun_Bulung"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pap.wikipedia.org/wiki/P%C3%A1gina_Prinsipal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pcd.wikipedia.org/wiki/Accueul"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pcm.wikipedia.org/wiki/Main_Pej"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pdc.wikipedia.org/wiki/Haaptblatt"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pfl.wikipedia.org/wiki/Wikipedia:Haubdsaid"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pi.wikipedia.org/wiki/%E0%A4%AA%E0%A4%AE%E0%A5%81%E0%A4%96_%E0%A4%AA%E0%A4%A4%E0%A5%8D%E0%A4%A4_Pamukha_patta"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pms.wikipedia.org/wiki/Intrada"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pnb.wikipedia.org/wiki/%D9%BE%DB%81%D9%84%D8%A7_%D8%B5%D9%81%DB%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pnt.wikipedia.org/wiki/%CE%91%CF%81%CF%87%CE%B9%CE%BA%CF%8C%CE%BD_%CF%83%CE%B5%CE%BB%CE%AF%CE%B4%CE%B1"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ppl.wikipedia.org/wiki/Achtu_Amat"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ps.wikipedia.org/wiki/%D9%84%D9%88%D9%85%DA%93%DB%8C_%D9%85%D8%AE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pwn.wikipedia.org/wiki/sitjumaq_na_sapitj"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://qu.wikipedia.org/wiki/Qhapaq_p%27anqa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rki.wikipedia.org/wiki/%E1%80%A1%E1%80%93%E1%80%AD%E1%80%80%E1%80%85%E1%80%AC%E1%80%99%E1%80%BB%E1%80%80%E1%80%BA%E1%80%94%E1%80%BE%E1%80%AC"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rm.wikipedia.org/wiki/Wikipedia:Pagina_principala"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rmy.wikipedia.org/wiki/Sherutni_patrin"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rn.wikipedia.org/wiki/Urupapuro_nyamukuru"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ro.wikipedia.org/wiki/Pagina_principal%C4%83"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://roa-rup.wikipedia.org/wiki/Prota_fr%C3%A3ndz%C3%A3"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://roa-tara.wikipedia.org/wiki/Pagene_Prengep%C3%A1le"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rsk.wikipedia.org/wiki/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B8_%D0%B1%D0%BE%D0%BA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rue.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://rw.wikipedia.org/wiki/Intangiriro"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sa.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0%E0%A4%AE%E0%A5%8D"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sah.wikipedia.org/wiki/%D0%A1%D2%AF%D1%80%D2%AF%D0%BD_%D1%81%D0%B8%D1%80%D1%8D%D0%B9"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sat.wikipedia.org/wiki/%E1%B1%A2%E1%B1%A9%E1%B1%AC%E1%B1%A9%E1%B1%9B_%E1%B1%A5%E1%B1%9F%E1%B1%A6%E1%B1%B4%E1%B1%9F"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sc.wikipedia.org/wiki/P%C3%A0gina_printzipale"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://scn.wikipedia.org/wiki/P%C3%A0ggina_principali"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sco.wikipedia.org/wiki/Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sd.wikipedia.org/wiki/%D9%85%D9%8F%DA%A9_%D8%B5%D9%81%D8%AD%D9%88"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://se.wikipedia.org/wiki/Port%C3%A1la:Ovdasiidu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sg.wikipedia.org/wiki/G%C3%A4_nz%C3%B6n%C3%AE"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sh.wikipedia.org/wiki/Glavna_stranica"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://shi.wikipedia.org/wiki/Tasna_Tamzwarut"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://shn.wikipedia.org/wiki/%E1%81%BC%E1%82%83%E1%82%88%E1%82%81%E1%80%B0%E1%80%9D%E1%80%BA%E1%82%81%E1%82%85%E1%81%B5%E1%80%BA%E1%82%88"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://si.wikipedia.org/wiki/%E0%B6%B8%E0%B7%94%E0%B6%BD%E0%B7%8A_%E0%B6%B4%E0%B7%92%E0%B6%A7%E0%B7%94%E0%B7%80"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://simple.wikipedia.org/wiki/Main_Page"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sk.wikipedia.org/wiki/Hlavn%C3%A1_str%C3%A1nka"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://skr.wikipedia.org/wiki/%D9%BE%DB%81%D9%84%D8%A7_%D9%BE%D8%B1%D8%AA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sl.wikipedia.org/wiki/Glavna_stran"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sm.wikipedia.org/wiki/It%C5%ABlau_Muamua"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://smn.wikipedia.org/wiki/Ovd%C3%A2sij%C4%91o"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sn.wikipedia.org/wiki/Peji_Rekutanga"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://so.wikipedia.org/wiki/Bogga_Hore"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sq.wikipedia.org/wiki/Faqja_kryesore"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sr.wikipedia.org/wiki/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://srn.wikipedia.org/wiki/Fesipapira"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ss.wikipedia.org/wiki/Likhasi_Lelikhulu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://st.wikipedia.org/wiki/Leqephe_la_pele"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://stq.wikipedia.org/wiki/Haudsiede"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://su.wikipedia.org/wiki/Tepas"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sv.wikipedia.org/wiki/Portal:Huvudsida"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://sw.wikipedia.org/wiki/Mwanzo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://syl.wikipedia.org/wiki/%EA%A0%9D%EA%A0%A5%EA%A0%9F_%EA%A0%9A%EA%A0%A3%EA%A0%94%EA%A0%A3"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://szl.wikipedia.org/wiki/Przodni%C5%8F_zajta"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://szy.wikipedia.org/wiki/saayaway_a_belih"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ta.wikipedia.org/wiki/%E0%AE%AE%E0%AF%81%E0%AE%A4%E0%AE%B1%E0%AF%8D%E0%AE%AA%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%AE%E0%AF%8D"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tay.wikipedia.org/wiki/T%E2%80%99ringan_na_zzngayan"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tcy.wikipedia.org/wiki/%E0%B2%AE%E0%B3%81%E0%B2%96%E0%B3%8D%E0%B2%AF_%E0%B2%AA%E0%B3%81%E0%B2%9F"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tdd.wikipedia.org/wiki/%E1%A5%9E%E1%A5%A8%E1%A5%9D%E1%A5%B4_%E1%A5%98%E1%A5%A3%E1%A5%B2_%E1%A5%96%E1%A5%A5%E1%A5%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://te.wikipedia.org/wiki/%E0%B0%AE%E0%B1%8A%E0%B0%A6%E0%B0%9F%E0%B0%BF_%E0%B0%AA%E0%B1%87%E0%B0%9C%E0%B1%80"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tet.wikipedia.org/wiki/P%C3%A1jina_Mahuluk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tg.wikipedia.org/wiki/%D0%A1%D0%B0%D2%B3%D0%B8%D1%84%D0%B0%D0%B8_%D0%B0%D1%81%D0%BB%D3%A3"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://th.wikipedia.org/wiki/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ti.wikipedia.org/wiki/%E1%88%98%E1%89%A0%E1%8C%88%E1%88%B2_%E1%8C%88%E1%8C%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tig.wikipedia.org/wiki/%E1%8A%A0%E1%8C%8D%E1%8B%B3_%E1%8C%88%E1%8C%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tk.wikipedia.org/wiki/Ba%C5%9F_Sahypa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tl.wikipedia.org/wiki/Unang_Pahina"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tly.wikipedia.org/wiki/S%C9%99rlovh%C9%99"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tn.wikipedia.org/wiki/Tsebe_ya_konokono"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://to.wikipedia.org/wiki/Peesi_tali_fiefia"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tok.wikipedia.org/wiki/lipu_open"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tpi.wikipedia.org/wiki/Fran_pes"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tr.wikipedia.org/wiki/Anasayfa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://trv.wikipedia.org/wiki/Ruwahan_patas"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ts.wikipedia.org/wiki/Tlukankulu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tt.wikipedia.org/wiki/%D0%91%D0%B0%D1%88_%D0%B1%D0%B8%D1%82"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tum.wikipedia.org/wiki/Jani_likulu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tw.wikipedia.org/wiki/Kratafa_Titiriw"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ty.wikipedia.org/wiki/Fa%E2%80%99ari%E2%80%99ira%E2%80%99a"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://tyv.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BB_%D0%B0%D1%80%D1%8B%D0%BD"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://udm.wikipedia.org/wiki/%D0%9A%D1%83%D1%82%D1%81%D0%BA%D0%BE%D0%BD_%D0%B1%D0%B0%D0%BC"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ug.wikipedia.org/wiki/%D8%A8%D8%A7%D8%B4_%D8%A8%DB%95%D8%AA"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://uk.wikipedia.org/wiki/%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_%D1%81%D1%82%D0%BE%D1%80%D1%96%D0%BD%D0%BA%D0%B0"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ur.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%DB%82_%D8%A7%D9%88%D9%84"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://uz.wikipedia.org/wiki/Bosh_Sahifa"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://ve.wikipedia.org/wiki/Hayani"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vec.wikipedia.org/wiki/Wikipedia:Prinsipio"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vep.wikipedia.org/wiki/P%C3%A4lehtpol%E2%80%99"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vi.wikipedia.org/wiki/Trang_Ch%C3%ADnh"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vls.wikipedia.org/wiki/Voorblad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://vo.wikipedia.org/wiki/Cifapad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://wa.wikipedia.org/wiki/Mwaisse_p%C3%A5dje"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://war.wikipedia.org/wiki/Syahan_nga_Pakli"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://wo.wikipedia.org/wiki/X%C3%ABt_wu_nj%C3%ABkk"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://wuu.wikipedia.org/wiki/%E5%B0%81%E9%9D%A2"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://xal.wikipedia.org/wiki/%D0%9D%D2%AF%D1%80_%D1%85%D0%B0%D0%BB%D1%85"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://xh.wikipedia.org/wiki/Iphepha_Elingundoqo"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://xmf.wikipedia.org/wiki/%E1%83%93%E1%83%A3%E1%83%93%E1%83%AE%E1%83%90%E1%83%A1%E1%83%B7%E1%83%9A%E1%83%90"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://yi.wikipedia.org/wiki/%D7%94%D7%95%D7%99%D7%A4%D7%98_%D7%96%D7%99%D7%99%D7%98"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://yo.wikipedia.org/wiki/Oj%C3%BAew%C3%A9_%C3%80k%E1%BB%8D%CC%81k%E1%BB%8D%CC%81"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://za.wikipedia.org/wiki/Yiebdaeuz"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zea.wikipedia.org/wiki/V%C3%B2blad"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zgh.wikipedia.org/wiki/%E2%B5%9C%E2%B4%B0%E2%B5%99%E2%B5%8F%E2%B4%B0_%E2%B5%8F_%E2%B5%93%E2%B5%99%E2%B5%8F%E2%B5%93%E2%B4%B1%E2%B4%B3"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh-classical.wikipedia.org/wiki/%E7%B6%AD%E5%9F%BA%E5%A4%A7%E5%85%B8:%E5%8D%B7%E9%A6%96"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh-min-nan.wikipedia.org/wiki/Th%C3%A2u-ia%CC%8Dh"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh-yue.wikipedia.org/wiki/%E9%A0%AD%E7%89%88"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://zu.wikipedia.org/wiki/Ikhasi_Elikhulu"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer"
+    }
+   ],
+   "errors": [],
+   "notes": [
+    "final_etld1=wikipedia.org",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 3,
+   "pages": [
+    {
+     "body_sha256": "5eb07360bc94b9156f1b542d011d89133212b803e15c868fd740eb75844e583d",
+     "bytes": 254697,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 77.492,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Main_Page",
+     "url_requested": "https://en.wikipedia.org"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://en.wikipedia.org/robots.txt",
+   "site_key": "en.wikipedia.org"
+  },
+  "git-scm.com": {
+   "base_url": "https://git-scm.com",
+   "category": "documentation",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=git-scm.com"
+   ],
+   "ordinal": 16,
+   "pages": [
+    {
+     "body_sha256": "5f17b9cd69eadd0454784c77e8ad18e52c6a1bcb97b15988f61ea4d636cc51df",
+     "bytes": 6297,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 12.162,
+     "status": 200,
+     "url": "https://git-scm.com/",
+     "url_requested": "https://git-scm.com"
+    },
+    {
+     "body_sha256": "2d9f007cf3fb66dc8b3f5653dc0b42e5f03e8520530057263855b0957ae774cd",
+     "bytes": 551,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 77.097,
+     "status": 200,
+     "url": "https://git-scm.com/about/#free-and-open-source",
+     "url_requested": "https://git-scm.com/about/#free-and-open-source"
+    },
+    {
+     "body_sha256": "e2bac12eea774677c8eed8d2dc0e0d16a9fb73e33f154efcbdcb37897633d34a",
+     "bytes": 6660,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 12.541,
+     "status": 200,
+     "url": "https://git-scm.com/about",
+     "url_requested": "https://git-scm.com/about"
+    },
+    {
+     "body_sha256": "000a33ec870342eabe2b36b284c4f3282bbabdc846ba2737d4ebee654c6877f7",
+     "bytes": 32652,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 17.901,
+     "status": 200,
+     "url": "https://git-scm.com/tools/guis",
+     "url_requested": "https://git-scm.com/tools/guis"
+    },
+    {
+     "body_sha256": "9e030b942f4e2db1b19034637288e7d6e60734d471eec81e5eb404b7308a9ec3",
+     "bytes": 168128,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 15.588,
+     "status": 200,
+     "url": "https://git-scm.com/tools/hosting",
+     "url_requested": "https://git-scm.com/tools/hosting"
+    },
+    {
+     "body_sha256": "871f1e864419bc290e6298db0bba6b114560b4c2468d74de7f3cdbd734b80a7c",
+     "bytes": 8883,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 74.058,
+     "status": 200,
+     "url": "https://git-scm.com/tools/command-line",
+     "url_requested": "https://git-scm.com/tools/command-line"
+    },
+    {
+     "body_sha256": "2863733d6ff54863f1458c79ae5fc5b11c7b55e6cc9c59b87a14f8642f698500",
+     "bytes": 6657,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 14.165,
+     "status": 200,
+     "url": "https://git-scm.com/learn",
+     "url_requested": "https://git-scm.com/learn"
+    },
+    {
+     "body_sha256": "72f15a063ec274d2814ff9b76d290c21d8edf882269cfb21aedb911dcab9be00",
+     "bytes": 5854,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 15.957,
+     "status": 200,
+     "url": "https://git-scm.com/tools",
+     "url_requested": "https://git-scm.com/tools"
+    },
+    {
+     "body_sha256": "a8d1aeff49a59090d8d0d93c33f066c412e060a9dffa878c0b8d6f763ae9ccb7",
+     "bytes": 16130,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 12.326,
+     "status": 200,
+     "url": "https://git-scm.com/docs",
+     "url_requested": "https://git-scm.com/docs"
+    },
+    {
+     "body_sha256": "b2d4e03086615facdd6c03178fdc388713b1b6ff0147be9e3282a36ce5b45933",
+     "bytes": 560,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 14.826,
+     "status": 200,
+     "url": "https://git-scm.com/install",
+     "url_requested": "https://git-scm.com/install"
+    }
+   ],
+   "robots_status": 404,
+   "robots_url": "https://git-scm.com/robots.txt",
+   "site_key": "git-scm.com"
+  },
+  "github.com": {
+   "base_url": "https://github.com",
+   "category": "developer platform",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=github.com"
+   ],
+   "ordinal": 1,
+   "pages": [
+    {
+     "body_sha256": "ce41b611b734b2d16afe021995ded4c7a1ecac0a25293e54259271df97759cc4",
+     "bytes": 576270,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 221.272,
+     "status": 200,
+     "url": "https://github.com/",
+     "url_requested": "https://github.com"
+    },
+    {
+     "body_sha256": "ab703d56ec20d476025dc00beb4e9df02833836dc00f6a6a3072048382515296",
+     "bytes": 879196,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 222.625,
+     "status": 200,
+     "url": "https://github.com/features/copilot",
+     "url_requested": "https://github.com/features/copilot"
+    },
+    {
+     "body_sha256": "050e9b1f816a68ac5ede9015552a0223ea4ebcd9d1ba38a14040e1fe65086c31",
+     "bytes": 350184,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 141.976,
+     "status": 200,
+     "url": "https://github.com/features/ai/github-app",
+     "url_requested": "https://github.com/features/ai/github-app"
+    },
+    {
+     "body_sha256": "707164dab678b687bd808bb4713aa45b461c71e63101ffec9f7eb21766aaf7a9",
+     "bytes": 269478,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 335.243,
+     "status": 200,
+     "url": "https://github.com/mcp",
+     "url_requested": "https://github.com/mcp"
+    },
+    {
+     "body_sha256": "eccc2659ebd82d3d48688d3569ad225c0d19bdae78fb4d7c19f2a1da6bb3db38",
+     "bytes": 308098,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 176.433,
+     "status": 200,
+     "url": "https://github.com/features/actions",
+     "url_requested": "https://github.com/features/actions"
+    },
+    {
+     "body_sha256": "50a8e341cb7ebae8dc8c9287605fd823729fcd647c63f7d79b21aedc219864ca",
+     "bytes": 330273,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 191.765,
+     "status": 200,
+     "url": "https://github.com/features/codespaces",
+     "url_requested": "https://github.com/features/codespaces"
+    },
+    {
+     "body_sha256": "c06f6b39efaedc2edcd81be8493e89071c598cabe85252fe303147c87991ef00",
+     "bytes": 349971,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 177.077,
+     "status": 200,
+     "url": "https://github.com/features/issues",
+     "url_requested": "https://github.com/features/issues"
+    },
+    {
+     "body_sha256": "c7e3b49871cdda71e439665261fdd0f13de8952a56197ed702463568b37b9b9e",
+     "bytes": 315280,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 165.101,
+     "status": 200,
+     "url": "https://github.com/features/code-review",
+     "url_requested": "https://github.com/features/code-review"
+    },
+    {
+     "body_sha256": "942a602e754d64d44f050666ab7f8a79c7eec4e71a10bb108375f80b7347ff8a",
+     "bytes": 327101,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 154.31,
+     "status": 200,
+     "url": "https://github.com/features/code-quality",
+     "url_requested": "https://github.com/features/code-quality"
+    },
+    {
+     "body_sha256": "d5a772f7c66c4f6e51ad9365bc23ef1d816fe258e9065b09b414f02081e5da6d",
+     "bytes": 577133,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 415.1,
+     "status": 200,
+     "url": "https://github.com/security/advanced-security",
+     "url_requested": "https://github.com/security/advanced-security"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://github.com/robots.txt",
+   "site_key": "github.com"
+  },
+  "gitlab.com": {
+   "base_url": "https://gitlab.com",
+   "category": "developer platform",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://gitlab.com/users/sign_in/"
+    }
+   ],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=gitlab.com"
+   ],
+   "ordinal": 11,
+   "pages": [
+    {
+     "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+     "bytes": 227195,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 187.186,
+     "status": 200,
+     "url": "https://about.gitlab.com/",
+     "url_requested": "https://gitlab.com"
+    },
+    {
+     "body_sha256": "75609fbfc0402fd57458c9bfc1cd1bd3f5fa7d7e62cab137efc434075cf43715",
+     "bytes": 253420,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 61.569,
+     "status": 200,
+     "url": "https://about.gitlab.com/gitlab-duo-agent-platform/",
+     "url_requested": "https://about.gitlab.com/gitlab-duo-agent-platform/"
+    },
+    {
+     "body_sha256": "564f51b8157bc3cbc74d0c624cf8ccf3a1e431eca676e47bc3d4abdaa451476f",
+     "bytes": 201637,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 43.742,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/code-suggestions/",
+     "url_requested": "https://about.gitlab.com/solutions/code-suggestions/"
+    },
+    {
+     "body_sha256": "333d2fe863aad057057e382be55f8190e18b11c36cad4e71d55df571e9b4aac7",
+     "bytes": 233573,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 50.432,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/continuous-integration/",
+     "url_requested": "https://about.gitlab.com/solutions/continuous-integration/"
+    },
+    {
+     "body_sha256": "e42d26e624d6fb17c8a8d59cdb60bceffcd0f5b3148812cc41db8e73558ac287",
+     "bytes": 214372,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 47.978,
+     "status": 200,
+     "url": "https://about.gitlab.com/partners/technology-partners/aws/",
+     "url_requested": "https://about.gitlab.com/partners/technology-partners/aws/"
+    },
+    {
+     "body_sha256": "229b7c0d9dd842d264f4caf230d160e9dfa84979e392a309d10fb1bac21b91e0",
+     "bytes": 192239,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 94.959,
+     "status": 200,
+     "url": "https://about.gitlab.com/partners/technology-partners/google-cloud-platform/",
+     "url_requested": "https://about.gitlab.com/partners/technology-partners/google-cloud-platform/"
+    },
+    {
+     "body_sha256": "4648669a97d3c60f28689c20f786b5b9e9c63e6da9763fa872b5b705762af9dc",
+     "bytes": 200537,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 24.362,
+     "status": 200,
+     "url": "https://about.gitlab.com/why-gitlab/",
+     "url_requested": "https://about.gitlab.com/why-gitlab/"
+    },
+    {
+     "body_sha256": "ce5d06844ec7497bd67c513e3c83fe4ce9f0ce203c62c2d866ee707f479c75ed",
+     "bytes": 222722,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 35.737,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/source-code-management/",
+     "url_requested": "https://about.gitlab.com/solutions/source-code-management/"
+    },
+    {
+     "body_sha256": "d20e7020af5b2721245fb97cc84ecbc315564df63dcf8c135e443226a2cff408",
+     "bytes": 208690,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 36.506,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/agile-delivery/",
+     "url_requested": "https://about.gitlab.com/solutions/agile-delivery/"
+    },
+    {
+     "body_sha256": "ba9aee5b7d12aa0f7203e9e6a6611ba97d33ac261636eee8a0d176de6d87076a",
+     "bytes": 213853,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 46.133,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/application-security-testing/",
+     "url_requested": "https://about.gitlab.com/solutions/application-security-testing/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://gitlab.com/robots.txt",
+   "site_key": "gitlab.com"
+  },
+  "gnu.org": {
+   "base_url": "https://www.gnu.org",
+   "category": "organization",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://www.gnu.org/cgi-bin/estseek.cgi"
+    }
+   ],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=gnu.org"
+   ],
+   "ordinal": 19,
+   "pages": [
+    {
+     "body_sha256": "0aa9673d39b7c8182bb840278dd6fa090cc88a32cb83a261773360baf4e47717",
+     "bytes": 31710,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 54.766,
+     "status": 200,
+     "url": "https://www.gnu.org/",
+     "url_requested": "https://www.gnu.org"
+    },
+    {
+     "body_sha256": "d712c4f232a2347a4101e5e6a44b0e68d2cfbc6f1c6cdabe1cd2a0ba07a92965",
+     "bytes": 20907,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 36.782,
+     "status": 200,
+     "url": "https://www.gnu.org/gnu/gnu.html",
+     "url_requested": "https://www.gnu.org/gnu/gnu.html"
+    },
+    {
+     "body_sha256": "bb53df6107a69be4ac479149553f6f612b7622b7fe4c95036700d42d34aae14d",
+     "bytes": 19610,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 40.766,
+     "status": 200,
+     "url": "https://www.gnu.org/philosophy/philosophy.html",
+     "url_requested": "https://www.gnu.org/philosophy/philosophy.html"
+    },
+    {
+     "body_sha256": "6df9f9718003d7e086f522f1f729da93ce7b3ed0761f44061730f550b49efaee",
+     "bytes": 32733,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 38.241,
+     "status": 200,
+     "url": "https://www.gnu.org/licenses/licenses.html",
+     "url_requested": "https://www.gnu.org/licenses/licenses.html"
+    },
+    {
+     "body_sha256": "b0d23ff19c74e5ce3db323d7d877e9d34a8868fae3713218d90c5919b7c982fa",
+     "bytes": 22888,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 37.494,
+     "status": 200,
+     "url": "https://www.gnu.org/education/education.html",
+     "url_requested": "https://www.gnu.org/education/education.html"
+    },
+    {
+     "body_sha256": "52652a268df48b6a2b3b8d913ae70f9869c8ed48ce3eeda94e756beea8654341",
+     "bytes": 55586,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 45.958,
+     "status": 200,
+     "url": "https://www.gnu.org/software/software.html",
+     "url_requested": "https://www.gnu.org/software/software.html"
+    },
+    {
+     "body_sha256": "de7ecab21497b8b2305b71ec08be3db7b65392979918940dd5115c97256bcdda",
+     "bytes": 18617,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 37.535,
+     "status": 200,
+     "url": "https://www.gnu.org/distros/distros.html",
+     "url_requested": "https://www.gnu.org/distros/distros.html"
+    },
+    {
+     "body_sha256": "2aaaf2043608b19929187f54e8e4856188716295507fa947a73a20a4aece0ac4",
+     "bytes": 15052,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 35.533,
+     "status": 200,
+     "url": "https://www.gnu.org/doc/doc.html",
+     "url_requested": "https://www.gnu.org/doc/doc.html"
+    },
+    {
+     "body_sha256": "5290385ff44ff304eab0e800e9259a567c2a7fd2f3fd7b47071091bfb731f72f",
+     "bytes": 24967,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 38.802,
+     "status": 200,
+     "url": "https://www.gnu.org/proprietary/proprietary.html",
+     "url_requested": "https://www.gnu.org/proprietary/proprietary.html"
+    },
+    {
+     "body_sha256": "724d4a0540b050f69cb37d772ceda2fa8a5b240446398b3abaab41fb2f632602",
+     "bytes": 25085,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 36.341,
+     "status": 200,
+     "url": "https://www.gnu.org/help/help.html",
+     "url_requested": "https://www.gnu.org/help/help.html"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://www.gnu.org/robots.txt",
+   "site_key": "gnu.org"
+  },
+  "kernel.org": {
+   "base_url": "https://kernel.org",
+   "category": "reference",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=kernel.org"
+   ],
+   "ordinal": 20,
+   "pages": [
+    {
+     "body_sha256": "ca9c7ea66e9579a1d4ada77f47193baedb668d2a845c879e179c195636069290",
+     "bytes": 20359,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 16.116,
+     "status": 200,
+     "url": "https://kernel.org/",
+     "url_requested": "https://kernel.org"
+    },
+    {
+     "body_sha256": "ca9c7ea66e9579a1d4ada77f47193baedb668d2a845c879e179c195636069290",
+     "bytes": 20359,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 45.901,
+     "status": 200,
+     "url": "https://www.kernel.org/",
+     "url_requested": "https://www.kernel.org/"
+    },
+    {
+     "body_sha256": "0d92a22dce5c08d98a4863db0b57cb63b692d9eb6a7a6386c5d17d1f9e88230a",
+     "bytes": 14996,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 5.567,
+     "status": 200,
+     "url": "https://www.kernel.org/category/about.html",
+     "url_requested": "https://www.kernel.org/category/about.html"
+    },
+    {
+     "body_sha256": "9aae43484cf1e18cdab7871810aaceb8970a50446cfeb94cbd1ceb793545f81c",
+     "bytes": 10479,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 43.2,
+     "status": 200,
+     "url": "https://www.kernel.org/category/contact-us.html",
+     "url_requested": "https://www.kernel.org/category/contact-us.html"
+    },
+    {
+     "body_sha256": "58c2dcc79c1d6fee4e6297641084b611c99469fdc17ead91cfe4f7db385f0150",
+     "bytes": 17158,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 4.781,
+     "status": 200,
+     "url": "https://www.kernel.org/category/faq.html",
+     "url_requested": "https://www.kernel.org/category/faq.html"
+    },
+    {
+     "body_sha256": "d3e1b1fd143d7f68595ab61eda3e696f724a122e142a98a8bed4a8253c33c604",
+     "bytes": 15039,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 6.693,
+     "status": 200,
+     "url": "https://www.kernel.org/category/releases.html",
+     "url_requested": "https://www.kernel.org/category/releases.html"
+    },
+    {
+     "body_sha256": "a92564be07016e5bddbbc8b7d6320b2159ccd55f36efb22f0a0df65ae30bad63",
+     "bytes": 19036,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 38.714,
+     "status": 200,
+     "url": "https://www.kernel.org/category/signatures.html",
+     "url_requested": "https://www.kernel.org/category/signatures.html"
+    },
+    {
+     "body_sha256": "d340e5209c3ceed86e1d51415004d4bc6a60045d0b144da28d13201bd10a15c9",
+     "bytes": 23635,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 4.499,
+     "status": 200,
+     "url": "https://www.kernel.org/category/site-news.html",
+     "url_requested": "https://www.kernel.org/category/site-news.html"
+    },
+    {
+     "body_sha256": "89983bbbf84774ce35c2dcf69cdccc313cc6999dcc077db5d91f69524eef5d1e",
+     "bytes": 881,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 5.01,
+     "status": 200,
+     "url": "https://www.kernel.org/pub/",
+     "url_requested": "https://www.kernel.org/pub/"
+    },
+    {
+     "body_sha256": "313200a7f39a68064923024df111e6f5a77dbfdba3bf979800ec735d7ac0aa53",
+     "bytes": 474402,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://kernel.org/",
+     "latency_ms": 128.271,
+     "status": 200,
+     "url": "https://git.kernel.org/",
+     "url_requested": "https://git.kernel.org/"
+    }
+   ],
+   "robots_status": 404,
+   "robots_url": "https://kernel.org/robots.txt",
+   "site_key": "kernel.org"
+  },
+  "linuxfoundation.org": {
+   "base_url": "https://linuxfoundation.org",
+   "category": "organization",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=linuxfoundation.org"
+   ],
+   "ordinal": 17,
+   "pages": [
+    {
+     "body_sha256": "da92e182cee235011cdd38d793044c0a4dc89736d68ba96da66057983ce6b2e2",
+     "bytes": 141194,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 423.479,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org",
+     "url_requested": "https://linuxfoundation.org"
+    },
+    {
+     "body_sha256": "6ff8d8f8efd504363bab96069c22b5d004f0c7c3606f6578c2ab9654a45b5e85",
+     "bytes": 144940,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 68.248,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/ja-jp/",
+     "url_requested": "https://www.linuxfoundation.org/ja-jp/"
+    },
+    {
+     "body_sha256": "a6d6fbe685f0973b4a83de820aeb4bb0b1c7d35fad6ce15e12f44542c66946cd",
+     "bytes": 271462,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 304.56,
+     "status": 200,
+     "url": "https://events.linuxfoundation.org/open-source-summit-europe/",
+     "url_requested": "https://events.linuxfoundation.org/open-source-summit-europe/"
+    },
+    {
+     "body_sha256": "da92e182cee235011cdd38d793044c0a4dc89736d68ba96da66057983ce6b2e2",
+     "bytes": 141194,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 87.406,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/",
+     "url_requested": "https://www.linuxfoundation.org/?hsLang=en"
+    },
+    {
+     "body_sha256": "8c8dbc10c0826a018986ca730ae3072ba899e4469b95a201e0579a1aac85e713",
+     "bytes": 110563,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 91.236,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/join",
+     "url_requested": "https://www.linuxfoundation.org/about/join?hsLang=en"
+    },
+    {
+     "body_sha256": "867cf547653a9ba46aaff5500ad9aa0cd3cc73f786628951744602f7b4301198",
+     "bytes": 95320,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 46.122,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about",
+     "url_requested": "https://www.linuxfoundation.org/about"
+    },
+    {
+     "body_sha256": "c4b34c729400d344194bf4fd85f43d305087b3414b41646f16b3fa86f57b5a33",
+     "bytes": 78058,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 35.957,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/members",
+     "url_requested": "https://www.linuxfoundation.org/about/members"
+    },
+    {
+     "body_sha256": "480eb39a2ba5a85049472eecb410a422200047e4df509baa5b6bde17c88d5d1f",
+     "bytes": 101823,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 39.591,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/individual-supporters",
+     "url_requested": "https://www.linuxfoundation.org/about/individual-supporters"
+    },
+    {
+     "body_sha256": "0744ac4e3597517d91c106abcb350abe8ac4b27f7ee0ce0acdf953df243dda64",
+     "bytes": 352088,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 49.35,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/leadership",
+     "url_requested": "https://www.linuxfoundation.org/about/leadership"
+    },
+    {
+     "body_sha256": "db4b11a10b464d4829ecd2438f4f73ac3e703e37399d12abcae9c04c71a70453",
+     "bytes": 90899,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 65.498,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/inclusion-accessibility",
+     "url_requested": "https://www.linuxfoundation.org/about/inclusion-accessibility"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://linuxfoundation.org/robots.txt",
+   "site_key": "linuxfoundation.org"
+  },
+  "news.ycombinator.com": {
+   "base_url": "https://news.ycombinator.com",
+   "category": "news aggregator",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://news.ycombinator.com/vote?id=49844657&how=up&goto=news"
+    }
+   ],
+   "discovered_filtered": [
+    {
+     "error": null,
+     "reason": "status_429",
+     "url": "https://news.ycombinator.com/from?site=astralcodexten.com"
+    },
+    {
+     "error": null,
+     "reason": "status_429",
+     "url": "https://news.ycombinator.com/user?id=silveraxe93"
+    }
+   ],
+   "errors": [],
+   "notes": [
+    "final_etld1=ycombinator.com"
+   ],
+   "ordinal": 4,
+   "pages": [
+    {
+     "body_sha256": "298915c6734e49878653cb28a6878ecd20139ce28cf94285c41de3c7dd944eba",
+     "bytes": 35030,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 74.029,
+     "status": 200,
+     "url": "https://news.ycombinator.com/",
+     "url_requested": "https://news.ycombinator.com"
+    },
+    {
+     "body_sha256": "709344fbd7074d916c3076b3b03da21948b39128838e01bcb99b01951861efc3",
+     "bytes": 35030,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.719,
+     "status": 200,
+     "url": "https://news.ycombinator.com/news",
+     "url_requested": "https://news.ycombinator.com/news"
+    },
+    {
+     "body_sha256": "c69a62e9825cc4fa1c8c108ce3f0188b7ff259f1588ede9e3dfb37b82afd9ced",
+     "bytes": 40333,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.192,
+     "status": 200,
+     "url": "https://news.ycombinator.com/newest",
+     "url_requested": "https://news.ycombinator.com/newest"
+    },
+    {
+     "body_sha256": "519f4434496d862cb940da841034a23a4f2b4b556150675ea91705a44a438c20",
+     "bytes": 33775,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.919,
+     "status": 200,
+     "url": "https://news.ycombinator.com/front",
+     "url_requested": "https://news.ycombinator.com/front"
+    },
+    {
+     "body_sha256": "add3ca4d4f94aa351a0f329a7aebfcbad694b0e7e41d015dfb675a3d7a6c858a",
+     "bytes": 50325,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.885,
+     "status": 200,
+     "url": "https://news.ycombinator.com/newcomments",
+     "url_requested": "https://news.ycombinator.com/newcomments"
+    },
+    {
+     "body_sha256": "658c55fe1543e5ecf88a6dc0cf55e3211df29f4c045b18c374cbdd4a394a21ff",
+     "bytes": 27993,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.843,
+     "status": 200,
+     "url": "https://news.ycombinator.com/ask",
+     "url_requested": "https://news.ycombinator.com/ask"
+    },
+    {
+     "body_sha256": "e481ddd48683006fc58d09187df37fbe9e8e155c70d6f5c066334dd059d2c8f5",
+     "bytes": 32920,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.173,
+     "status": 200,
+     "url": "https://news.ycombinator.com/show",
+     "url_requested": "https://news.ycombinator.com/show"
+    },
+    {
+     "body_sha256": "22ff423f8e85fa67c9cadf314ed59a7c1fcb757240be5bb9b4d89b7b54d91dfc",
+     "bytes": 22506,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.085,
+     "status": 200,
+     "url": "https://news.ycombinator.com/jobs",
+     "url_requested": "https://news.ycombinator.com/jobs"
+    },
+    {
+     "body_sha256": "552e394d8d9ace3fdbbdc283f740a957c5823e76ded0ee804bbbf95800cf3d37",
+     "bytes": 1169,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.662,
+     "status": 200,
+     "url": "https://news.ycombinator.com/submit",
+     "url_requested": "https://news.ycombinator.com/submit"
+    },
+    {
+     "body_sha256": "017bf5eff5a1dd0eef81d2c991700bb5a927b9915b22320f3a6e477d286fbeb2",
+     "bytes": 128637,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 114.478,
+     "status": 200,
+     "url": "https://news.ycombinator.com/item?id=49844657",
+     "url_requested": "https://news.ycombinator.com/item?id=49844657"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://news.ycombinator.com/robots.txt",
+   "site_key": "news.ycombinator.com"
+  },
+  "npmjs.com": {
+   "base_url": "https://www.npmjs.com",
+   "category": "package registry",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "homepage_status_403",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 8,
+   "pages": [
+    {
+     "body_sha256": "d6647840b0947f46d53a9ed15f37f4ca68b86aec0dff5cfdb02f675d0965ac8a",
+     "bytes": 5468,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 35.278,
+     "status": 403,
+     "url": "https://www.npmjs.com/",
+     "url_requested": "https://www.npmjs.com"
+    }
+   ],
+   "robots_status": 403,
+   "robots_url": "https://www.npmjs.com/robots.txt",
+   "site_key": "npmjs.com"
+  },
+  "pypi.org": {
+   "base_url": "https://pypi.org",
+   "category": "package registry",
+   "discovered_blocked": [],
+   "discovered_filtered": [
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/help/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/search/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/organizations/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/stats/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/trademarks/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/sponsors/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/security/"
+    },
+    {
+     "reason": "content_type_",
+     "url": "https://pypi.org/sitemap/"
+    }
+   ],
+   "errors": [],
+   "notes": [
+    "final_etld1=pypi.org"
+   ],
+   "ordinal": 7,
+   "pages": [
+    {
+     "body_sha256": "8a11c380d10636ff977b5c110ef91be9815d6e16ae1d9ca62dcb668d4bf99c6a",
+     "bytes": 27965,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 3.789,
+     "status": 200,
+     "url": "https://pypi.org/",
+     "url_requested": "https://pypi.org"
+    },
+    {
+     "body_sha256": "975f47778b7b29e9c79c455162577f9d2b264d3fec682526cd16a3285901c9c2",
+     "bytes": 39234,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 90.959,
+     "status": 200,
+     "url": "https://docs.pypi.org/",
+     "url_requested": "https://docs.pypi.org/"
+    },
+    {
+     "body_sha256": "8fa5f8fc62269c077355640c6d5ef3fb8248dc39ec870bb5956b98fcbe76079b",
+     "bytes": 135110,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 836.944,
+     "status": 200,
+     "url": "https://psfmember.org/civicrm/contribute/transact/?reset=1&id=13",
+     "url_requested": "https://donate.pypi.org"
+    },
+    {
+     "body_sha256": "72db11f6234a13b6c4a9715c3e5ee14af6a10edde9e41f2250611c96122fc9e4",
+     "bytes": 54442,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 216.289,
+     "status": 200,
+     "url": "https://blog.pypi.org/",
+     "url_requested": "https://blog.pypi.org"
+    },
+    {
+     "body_sha256": "075b877108b601a8a4c075620460a0f05b225f59db3e7e6538dfdce6d8c01827",
+     "bytes": 46090,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 108.846,
+     "status": 200,
+     "url": "https://docs.pypi.org/project-management/storage-limits/",
+     "url_requested": "https://docs.pypi.org/project-management/storage-limits/"
+    },
+    {
+     "body_sha256": "6e01169c225340166c24ac19659f60cb42295321818fad1f80c9a3c5237a965a",
+     "bytes": 40850,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 108.2,
+     "status": 200,
+     "url": "https://docs.pypi.org/project-management/yanking/",
+     "url_requested": "https://docs.pypi.org/project-management/yanking/"
+    },
+    {
+     "body_sha256": "1883d6d8ff4a7e7807b2904b8dc6ca5a740ec7f6a9cc3c9cb5a94324fd566465",
+     "bytes": 53870,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 38.894,
+     "status": 200,
+     "url": "https://docs.pypi.org/project-management/name-retention/",
+     "url_requested": "https://docs.pypi.org/project-management/name-retention/"
+    },
+    {
+     "body_sha256": "9296eddc77c056ced876d8f676b4edaf742fe67016f8d4741d0b191c8142c927",
+     "bytes": 40922,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 34.044,
+     "status": 200,
+     "url": "https://docs.pypi.org/trusted-publishers/",
+     "url_requested": "https://docs.pypi.org/trusted-publishers/"
+    },
+    {
+     "body_sha256": "5d6667b1cb20db4286e835c070ea795fc19fb826c65442d96fc8fcd6dedc9167",
+     "bytes": 45435,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 34.394,
+     "status": 200,
+     "url": "https://docs.pypi.org/trusted-publishers/adding-a-publisher/",
+     "url_requested": "https://docs.pypi.org/trusted-publishers/adding-a-publisher/"
+    },
+    {
+     "body_sha256": "0cf69c584866d7bd589bd78ab75b434eb44b9cc649d5d08ac137411916083e2e",
+     "bytes": 43270,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://docs.pypi.org/",
+     "latency_ms": 36.48,
+     "status": 200,
+     "url": "https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/",
+     "url_requested": "https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://pypi.org/robots.txt",
+   "site_key": "pypi.org"
+  },
+  "readthedocs.io": {
+   "base_url": "https://readthedocs.io",
+   "category": "documentation hosting",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=readthedocs.com"
+   ],
+   "ordinal": 15,
+   "pages": [
+    {
+     "body_sha256": "0fc8ac064d2b576b7a146c59cc9997c244a6041152d0f72ed9d19091e0ef24b3",
+     "bytes": 33498,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 59.866,
+     "status": 200,
+     "url": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "url_requested": "https://readthedocs.io"
+    },
+    {
+     "body_sha256": "0fc8ac064d2b576b7a146c59cc9997c244a6041152d0f72ed9d19091e0ef24b3",
+     "bytes": 33498,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 19.905,
+     "status": 200,
+     "url": "https://about.readthedocs.com/",
+     "url_requested": "https://about.readthedocs.com/"
+    },
+    {
+     "body_sha256": "170a9c5e0ec267f98468a4f6f9c5b69e9dc0efaa2962d8deee90f74b28e94bb6",
+     "bytes": 44144,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 28.036,
+     "status": 200,
+     "url": "https://about.readthedocs.com/features/",
+     "url_requested": "https://about.readthedocs.com/features/"
+    },
+    {
+     "body_sha256": "c03d795a96084d98008eedd06c60e81e685285a5623378ac76d1713b710362cd",
+     "bytes": 30959,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 119.99,
+     "status": 200,
+     "url": "https://about.readthedocs.com/pricing/",
+     "url_requested": "https://about.readthedocs.com/pricing/"
+    },
+    {
+     "body_sha256": "e4c2b73e8a3b0cc8382c32c014b84938d47163455e1a5bb88504fd6dd9f4eb1f",
+     "bytes": 21089,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 24.68,
+     "status": 200,
+     "url": "https://about.readthedocs.com/blog/",
+     "url_requested": "https://about.readthedocs.com/blog/"
+    },
+    {
+     "body_sha256": "3c63ed81063a6334cf0cf886fb2c9ff09be16b75371868846edd7f63cbfbc257",
+     "bytes": 12828,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 603.892,
+     "status": 200,
+     "url": "https://app.readthedocs.com/accounts/login/?next=/dashboard/",
+     "url_requested": "https://app.readthedocs.com/dashboard/"
+    },
+    {
+     "body_sha256": "ba91c4bd5a51be96d6cb97480b0e4201ca012b0111df1c33945bdd05128759b9",
+     "bytes": 16792,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 106.46,
+     "status": 200,
+     "url": "https://about.readthedocs.com/choosing-a-platform/",
+     "url_requested": "https://about.readthedocs.com/choosing-a-platform/"
+    },
+    {
+     "body_sha256": "78b5ed4fff2e1ec355bbebb7add11b33227e5a51d66530bd0dc9ecbbcd321278",
+     "bytes": 24380,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 80.512,
+     "status": 200,
+     "url": "https://about.readthedocs.com/tools/sphinx/",
+     "url_requested": "https://about.readthedocs.com/tools/sphinx/"
+    },
+    {
+     "body_sha256": "4df59810e26727b1bef860440a5a93836c11c1e860f131f328e42bfa1da31f72",
+     "bytes": 24565,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 28.299,
+     "status": 200,
+     "url": "https://about.readthedocs.com/tools/mkdocs/",
+     "url_requested": "https://about.readthedocs.com/tools/mkdocs/"
+    },
+    {
+     "body_sha256": "ba8c76f74a8e2634e4aa1764e6a61b3763f6ec7b824697e6921bf677bfe6b875",
+     "bytes": 8723,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 251.008,
+     "status": 200,
+     "url": "https://status.readthedocs.com/",
+     "url_requested": "https://status.readthedocs.com/"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://readthedocs.io/robots.txt",
+   "site_key": "readthedocs.io"
+  },
+  "rubygems.org": {
+   "base_url": "https://rubygems.org",
+   "category": "package registry",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "final_etld1=rubygems.org"
+   ],
+   "ordinal": 10,
+   "pages": [
+    {
+     "body_sha256": "807e85b68e5490ff683078c8e9a93671570e1c955c9314fbe376f47693caa385",
+     "bytes": 38740,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 6.266,
+     "status": 200,
+     "url": "https://rubygems.org/",
+     "url_requested": "https://rubygems.org"
+    },
+    {
+     "body_sha256": "54f681128185fc0e13e65ce73cdb04291c2f69a3f1c8054f5340f1648a8048bc",
+     "bytes": 304461,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 253.01,
+     "status": 200,
+     "url": "https://blog.rubygems.org/",
+     "url_requested": "https://blog.rubygems.org"
+    },
+    {
+     "body_sha256": "d7a8927b23c481f456a03bece9dc10f510d0b1341a4a16a7d3e99c2f23bf274b",
+     "bytes": 44152,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 372.194,
+     "status": 200,
+     "url": "https://rubygems.org/stats",
+     "url_requested": "https://rubygems.org/stats"
+    },
+    {
+     "body_sha256": "f5b3683ae8965972c999f248a1d0df3615419a089b128eeb6269402bec97461a",
+     "bytes": 144045,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 416.068,
+     "status": 200,
+     "url": "https://guides.rubygems.org/command-reference/#gem-install",
+     "url_requested": "https://guides.rubygems.org/command-reference/#gem-install"
+    },
+    {
+     "body_sha256": "642d7a9effbd38276e1ca7447cd0aeb9df61cd20372af2bfa63ccf37ec6428ce",
+     "bytes": 34652,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 188.255,
+     "status": 200,
+     "url": "https://rubygems.org/pages/about",
+     "url_requested": "https://rubygems.org/pages/about"
+    },
+    {
+     "body_sha256": "dbad06341d14ba3c58af647d887d7c43eea0ff9e6956386a231d58842aac83e1",
+     "bytes": 123401,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 406.205,
+     "status": 200,
+     "url": "https://status.rubygems.org/",
+     "url_requested": "https://status.rubygems.org"
+    },
+    {
+     "body_sha256": "19b0141fdb0b756f72cb2357f25e2ba21b5cd03c91bead1b55420c7cefc7ca06",
+     "bytes": 33457,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 183.291,
+     "status": 200,
+     "url": "https://rubygems.org/pages/data",
+     "url_requested": "https://rubygems.org/pages/data"
+    },
+    {
+     "body_sha256": "31059e4943bfcae5354694ac2f3eae19c8fd846b8d19d4d8cccee5f0180b0ecc",
+     "bytes": 38282,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 208.87,
+     "status": 200,
+     "url": "https://rubygems.org/pages/security",
+     "url_requested": "https://rubygems.org/pages/security"
+    },
+    {
+     "body_sha256": "98ad54d929839d07704ee909d577eecd84d64421847e864ac46c9c6b8c919ee9",
+     "bytes": 35292,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 226.805,
+     "status": 200,
+     "url": "https://rubygems.org/sign_in",
+     "url_requested": "https://rubygems.org/sign_in"
+    },
+    {
+     "body_sha256": "4d9e22e57306aa56823ca10d2a87ebb6ff8cc1e747c8629d23ebebbb46f0f7f0",
+     "bytes": 35390,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 174.0,
+     "status": 200,
+     "url": "https://rubygems.org/sign_up",
+     "url_requested": "https://rubygems.org/sign_up"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://rubygems.org/robots.txt",
+   "site_key": "rubygems.org"
+  },
+  "sourceforge.net": {
+   "base_url": "https://sourceforge.net",
+   "category": "developer platform",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "homepage_status_403",
+    "final_etld1=sourceforge.net",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 13,
+   "pages": [
+    {
+     "body_sha256": "7514992827c872611ec29a8a4503abff234c8228f080fd05d27c5ce4ce09a2e5",
+     "bytes": 5406,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 7.354,
+     "status": 403,
+     "url": "https://sourceforge.net/",
+     "url_requested": "https://sourceforge.net"
+    }
+   ],
+   "robots_status": 200,
+   "robots_url": "https://sourceforge.net/robots.txt",
+   "site_key": "sourceforge.net"
+  },
+  "stackoverflow.com": {
+   "base_url": "https://stackoverflow.com",
+   "category": "q&a",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "notes": [
+    "homepage_status_403",
+    "final_etld1=stackoverflow.com",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 5,
+   "pages": [
+    {
+     "body_sha256": "97acfde45d9d3fb7171a22fb56c871d0b141239f76df3d6f9ae9296ed6cfede2",
+     "bytes": 5124,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 73.476,
+     "status": 403,
+     "url": "https://stackoverflow.com/questions",
+     "url_requested": "https://stackoverflow.com"
+    }
+   ],
+   "robots_status": 418,
+   "robots_url": "https://stackoverflow.com/robots.txt",
+   "site_key": "stackoverflow.com"
+  }
+ },
+ "total_body_bytes_stored": 21414332,
+ "user_agent": "SPIDER-Research/1.0"
+}

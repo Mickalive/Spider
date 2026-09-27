@@ -1,0 +1,1825 @@
+{
+ "PC-SYNTHETIC-ALIAS": [
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS",
+   "site_key": "PC-SITE-A",
+   "url": "https://pc-a.example/search?q=python",
+   "raw": {
+    "bytes": 629,
+    "tokens": 217,
+    "sha256": "8f8b7a3b13c3afb965f675bfcae21109cced7d9cdd9ef4c79255ee1b591d9253"
+   },
+   "full_dom": {
+    "bytes": 616,
+    "tokens": 213,
+    "sha256": "743e09d1052b1028f94b1108f010027091f3a3cb2dc2d194deea93ad6865eedd"
+   },
+   "a11y": {
+    "bytes": 2594,
+    "tokens": 909,
+    "n_nodes": 21
+   },
+   "minimal": {
+    "bytes": 1080,
+    "tokens": 299
+   },
+   "structures": {
+    "forms": [
+     {
+      "action_template": "/{slug}",
+      "method": "get",
+      "fields": [
+       {
+        "name": "{field}",
+        "type": "submit",
+        "required": false
+       },
+       {
+        "name": "{query}",
+        "type": "text",
+        "required": false
+       }
+      ],
+      "field_slots": [
+       "{field}",
+       "{query}"
+      ]
+     }
+    ],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     }
+    ],
+    "searches": [
+     {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     }
+    ],
+    "paginations": [
+     {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     }
+    ],
+    "details": [
+     {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     }
+    ],
+    "actions": [
+     {
+      "action_type": "submit",
+      "target_template": null
+     },
+     {
+      "action_type": "button",
+      "target_template": null
+     }
+    ]
+   },
+   "signatures": [
+    {
+     "type": "form",
+     "key": {
+      "action_template": "/{slug}",
+      "method": "get",
+      "field_names": [
+       "{field}",
+       "{query}"
+      ]
+     },
+     "match": [
+      "/{slug}",
+      "get",
+      [
+       "{field}",
+       "{query}"
+      ]
+     ],
+     "slots": [
+      "{field}",
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 3,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     },
+     "match": [
+      "ul",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {
+      "item_count": 3
+     }
+    },
+    {
+     "type": "search",
+     "key": {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     },
+     "match": [
+      "/{slug}",
+      "{query}"
+     ],
+     "slots": [
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "pagination",
+     "key": {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     },
+     "match": [
+      "/{slug}/{slug}?{page}",
+      null
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "detail",
+     "key": {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     },
+     "match": [
+      "/{slug}",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "submit",
+      "target_template": null
+     },
+     "match": [
+      "submit",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "button",
+      "target_template": null
+     },
+     "match": [
+      "button",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    }
+   ],
+   "signature_keys": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]",
+    "[\"action\", [\"submit\", null]]",
+    "[\"action\", [\"button\", null]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]"
+   ]
+  },
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS",
+   "site_key": "PC-SITE-B",
+   "url": "https://pc-b.example/search?q=rust",
+   "raw": {
+    "bytes": 636,
+    "tokens": 220,
+    "sha256": "0de7a74406fe2caaa80d30679d948db73a4dbd77f42212b37de379468008d955"
+   },
+   "full_dom": {
+    "bytes": 623,
+    "tokens": 216,
+    "sha256": "8cce7974124b8235c1857b4ea99347b1d60d6cb499525bb6521ebc9e1781560a"
+   },
+   "a11y": {
+    "bytes": 2596,
+    "tokens": 909,
+    "n_nodes": 21
+   },
+   "minimal": {
+    "bytes": 1080,
+    "tokens": 299
+   },
+   "structures": {
+    "forms": [
+     {
+      "action_template": "/{slug}",
+      "method": "get",
+      "fields": [
+       {
+        "name": "{field}",
+        "type": "submit",
+        "required": false
+       },
+       {
+        "name": "{query}",
+        "type": "text",
+        "required": false
+       }
+      ],
+      "field_slots": [
+       "{field}",
+       "{query}"
+      ]
+     }
+    ],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     }
+    ],
+    "searches": [
+     {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     }
+    ],
+    "paginations": [
+     {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     }
+    ],
+    "details": [
+     {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     }
+    ],
+    "actions": [
+     {
+      "action_type": "submit",
+      "target_template": null
+     },
+     {
+      "action_type": "button",
+      "target_template": null
+     }
+    ]
+   },
+   "signatures": [
+    {
+     "type": "form",
+     "key": {
+      "action_template": "/{slug}",
+      "method": "get",
+      "field_names": [
+       "{field}",
+       "{query}"
+      ]
+     },
+     "match": [
+      "/{slug}",
+      "get",
+      [
+       "{field}",
+       "{query}"
+      ]
+     ],
+     "slots": [
+      "{field}",
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 3,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     },
+     "match": [
+      "ul",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {
+      "item_count": 3
+     }
+    },
+    {
+     "type": "search",
+     "key": {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     },
+     "match": [
+      "/{slug}",
+      "{query}"
+     ],
+     "slots": [
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "pagination",
+     "key": {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     },
+     "match": [
+      "/{slug}/{slug}?{page}",
+      null
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "detail",
+     "key": {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     },
+     "match": [
+      "/{slug}",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "submit",
+      "target_template": null
+     },
+     "match": [
+      "submit",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "button",
+      "target_template": null
+     },
+     "match": [
+      "button",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    }
+   ],
+   "signature_keys": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]",
+    "[\"action\", [\"submit\", null]]",
+    "[\"action\", [\"button\", null]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]"
+   ]
+  }
+ ],
+ "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION": [
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION",
+   "site_key": "PC-SITE-A",
+   "url": "https://pc-a.example/search?q=python",
+   "raw": {
+    "bytes": 629,
+    "tokens": 217,
+    "sha256": "8f8b7a3b13c3afb965f675bfcae21109cced7d9cdd9ef4c79255ee1b591d9253"
+   },
+   "full_dom": {
+    "bytes": 616,
+    "tokens": 213,
+    "sha256": "743e09d1052b1028f94b1108f010027091f3a3cb2dc2d194deea93ad6865eedd"
+   },
+   "a11y": {
+    "bytes": 2594,
+    "tokens": 909,
+    "n_nodes": 21
+   },
+   "minimal": {
+    "bytes": 1080,
+    "tokens": 299
+   },
+   "structures": {
+    "forms": [
+     {
+      "action_template": "/{slug}",
+      "method": "get",
+      "fields": [
+       {
+        "name": "{field}",
+        "type": "submit",
+        "required": false
+       },
+       {
+        "name": "{query}",
+        "type": "text",
+        "required": false
+       }
+      ],
+      "field_slots": [
+       "{field}",
+       "{query}"
+      ]
+     }
+    ],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     }
+    ],
+    "searches": [
+     {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     }
+    ],
+    "paginations": [
+     {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     }
+    ],
+    "details": [
+     {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     }
+    ],
+    "actions": [
+     {
+      "action_type": "submit",
+      "target_template": null
+     },
+     {
+      "action_type": "button",
+      "target_template": null
+     }
+    ]
+   },
+   "signatures": [
+    {
+     "type": "form",
+     "key": {
+      "action_template": "/{slug}",
+      "method": "get",
+      "field_names": [
+       "{field}",
+       "{query}"
+      ]
+     },
+     "match": [
+      "/{slug}",
+      "get",
+      [
+       "{field}",
+       "{query}"
+      ]
+     ],
+     "slots": [
+      "{field}",
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 3,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     },
+     "match": [
+      "ul",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {
+      "item_count": 3
+     }
+    },
+    {
+     "type": "search",
+     "key": {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     },
+     "match": [
+      "/{slug}",
+      "{query}"
+     ],
+     "slots": [
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "pagination",
+     "key": {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     },
+     "match": [
+      "/{slug}/{slug}?{page}",
+      null
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "detail",
+     "key": {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     },
+     "match": [
+      "/{slug}",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "submit",
+      "target_template": null
+     },
+     "match": [
+      "submit",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "button",
+      "target_template": null
+     },
+     "match": [
+      "button",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    }
+   ],
+   "signature_keys": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]",
+    "[\"action\", [\"submit\", null]]",
+    "[\"action\", [\"button\", null]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]"
+   ]
+  },
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION",
+   "site_key": "PC-SITE-B",
+   "url": "https://pc-b.example/search?q=rust",
+   "raw": {
+    "bytes": 636,
+    "tokens": 220,
+    "sha256": "0de7a74406fe2caaa80d30679d948db73a4dbd77f42212b37de379468008d955"
+   },
+   "full_dom": {
+    "bytes": 623,
+    "tokens": 216,
+    "sha256": "8cce7974124b8235c1857b4ea99347b1d60d6cb499525bb6521ebc9e1781560a"
+   },
+   "a11y": {
+    "bytes": 2596,
+    "tokens": 909,
+    "n_nodes": 21
+   },
+   "minimal": {
+    "bytes": 1080,
+    "tokens": 299
+   },
+   "structures": {
+    "forms": [
+     {
+      "action_template": "/{slug}",
+      "method": "get",
+      "fields": [
+       {
+        "name": "{field}",
+        "type": "submit",
+        "required": false
+       },
+       {
+        "name": "{query}",
+        "type": "text",
+        "required": false
+       }
+      ],
+      "field_slots": [
+       "{field}",
+       "{query}"
+      ]
+     }
+    ],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     },
+     {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ],
+      "n_links": 1,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     }
+    ],
+    "searches": [
+     {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     }
+    ],
+    "paginations": [
+     {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     }
+    ],
+    "details": [
+     {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     }
+    ],
+    "actions": [
+     {
+      "action_type": "submit",
+      "target_template": null
+     },
+     {
+      "action_type": "button",
+      "target_template": null
+     }
+    ]
+   },
+   "signatures": [
+    {
+     "type": "form",
+     "key": {
+      "action_template": "/{slug}",
+      "method": "get",
+      "field_names": [
+       "{field}",
+       "{query}"
+      ]
+     },
+     "match": [
+      "/{slug}",
+      "get",
+      [
+       "{field}",
+       "{query}"
+      ]
+     ],
+     "slots": [
+      "{field}",
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 3,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/",
+       "/{slug}/{id}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/",
+       "/{slug}/{id}"
+      ]
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "rel_next",
+      "link_templates": [
+       "/{slug}/{slug}?{page}"
+      ]
+     },
+     "match": [
+      "rel_next",
+      [
+       "/{slug}/{slug}?{page}"
+      ]
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "ul",
+      "item_template": "/{slug}/{id}",
+      "item_count": 3
+     },
+     "match": [
+      "ul",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {
+      "item_count": 3
+     }
+    },
+    {
+     "type": "search",
+     "key": {
+      "action_template": "/{slug}",
+      "param_name": "{query}"
+     },
+     "match": [
+      "/{slug}",
+      "{query}"
+     ],
+     "slots": [
+      "{query}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "pagination",
+     "key": {
+      "base_template": "/{slug}/{slug}?{page}",
+      "param_name": null
+     },
+     "match": [
+      "/{slug}/{slug}?{page}",
+      null
+     ],
+     "slots": [
+      "{page}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "detail",
+     "key": {
+      "list_template": "/{slug}",
+      "detail_template": "/{slug}/{id}"
+     },
+     "match": [
+      "/{slug}",
+      "/{slug}/{id}"
+     ],
+     "slots": [
+      "{id}",
+      "{slug}"
+     ],
+     "n_slots": 2,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "submit",
+      "target_template": null
+     },
+     "match": [
+      "submit",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    },
+    {
+     "type": "action",
+     "key": {
+      "action_type": "button",
+      "target_template": null
+     },
+     "match": [
+      "button",
+      null
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {}
+    }
+   ],
+   "signature_keys": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]",
+    "[\"action\", [\"submit\", null]]",
+    "[\"action\", [\"button\", null]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"form\", [\"/{slug}\", \"get\", [\"{field}\", \"{query}\"]]]",
+    "[\"nav\", [\"nav\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"nav\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"header\", [\"/\", \"/{slug}/{id}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"nav\", [\"rel_next\", [\"/{slug}/{slug}?{page}\"]]]",
+    "[\"list\", [\"ul\", \"/{slug}/{id}\"]]",
+    "[\"search\", [\"/{slug}\", \"{query}\"]]",
+    "[\"pagination\", [\"/{slug}/{slug}?{page}\", null]]",
+    "[\"detail\", [\"/{slug}\", \"/{slug}/{id}\"]]"
+   ]
+  },
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION",
+   "site_key": "PC-SITE-C",
+   "url": "https://pc-c.example/home",
+   "raw": {
+    "bytes": 305,
+    "tokens": 111,
+    "sha256": "015bdf94a73ed6322da6ebaa48223ea140211b4661f52511f13a284adc4dd95d"
+   },
+   "full_dom": {
+    "bytes": 290,
+    "tokens": 107,
+    "sha256": "7229b802a2e2ea34fdacaafeb77a7530a6e2645e1ef04c300c8789b689773cae"
+   },
+   "a11y": {
+    "bytes": 872,
+    "tokens": 305,
+    "n_nodes": 7
+   },
+   "minimal": {
+    "bytes": 346,
+    "tokens": 98
+   },
+   "structures": {
+    "forms": [],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "table",
+      "item_template": "<tr>",
+      "item_count": 3
+     }
+    ],
+    "searches": [],
+    "paginations": [],
+    "details": [],
+    "actions": []
+   },
+   "signatures": [
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ]
+     ],
+     "slots": [
+      "{slug}"
+     ],
+     "n_slots": 1,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/{slug}",
+       "/{slug}/{slug}"
+      ]
+     ],
+     "slots": [
+      "{slug}"
+     ],
+     "n_slots": 1,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "table",
+      "item_template": "<tr>",
+      "item_count": 3
+     },
+     "match": [
+      "table",
+      "<tr>"
+     ],
+     "slots": [],
+     "n_slots": 0,
+     "meta": {
+      "item_count": 3
+     }
+    }
+   ],
+   "signature_keys": [
+    "[\"nav\", [\"nav\", [\"/{slug}\", \"/{slug}/{slug}\"]]]",
+    "[\"nav\", [\"header\", [\"/{slug}\", \"/{slug}/{slug}\"]]]",
+    "[\"list\", [\"table\", \"<tr>\"]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"nav\", [\"nav\", [\"/{slug}\", \"/{slug}/{slug}\"]]]",
+    "[\"nav\", [\"header\", [\"/{slug}\", \"/{slug}/{slug}\"]]]"
+   ]
+  },
+  {
+   "control_id": "PC-SYNTHETIC-ALIAS-4SITE-POWER-EXTENSION",
+   "site_key": "PC-SITE-D",
+   "url": "https://pc-d.example/portal",
+   "raw": {
+    "bytes": 346,
+    "tokens": 119,
+    "sha256": "ad3d10f8728bc21e3e3d889c3c69b4136cab2032ddcd4a3e6b98266409b474bb"
+   },
+   "full_dom": {
+    "bytes": 331,
+    "tokens": 115,
+    "sha256": "d56da67bf63c2b60d96f2af0b15c22aec939f09d8a6dc815c5b313e4107caa0c"
+   },
+   "a11y": {
+    "bytes": 1374,
+    "tokens": 481,
+    "n_nodes": 11
+   },
+   "minimal": {
+    "bytes": 367,
+    "tokens": 104
+   },
+   "structures": {
+    "forms": [],
+    "navs": [
+     {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     },
+     {
+      "nav_type": "header",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ],
+      "n_links": 2,
+      "truncated": false
+     }
+    ],
+    "lists": [
+     {
+      "container_type": "ol",
+      "item_template": "/{slug}/{slug}",
+      "item_count": 2
+     }
+    ],
+    "searches": [],
+    "paginations": [],
+    "details": [],
+    "actions": []
+   },
+   "signatures": [
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "nav",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ]
+     },
+     "match": [
+      "nav",
+      [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ]
+     ],
+     "slots": [
+      "{slug}"
+     ],
+     "n_slots": 1,
+     "meta": {}
+    },
+    {
+     "type": "nav",
+     "key": {
+      "nav_type": "header",
+      "link_templates": [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ]
+     },
+     "match": [
+      "header",
+      [
+       "/{slug}",
+       "/{slug}/{slug}/{slug}"
+      ]
+     ],
+     "slots": [
+      "{slug}"
+     ],
+     "n_slots": 1,
+     "meta": {}
+    },
+    {
+     "type": "list",
+     "key": {
+      "container_type": "ol",
+      "item_template": "/{slug}/{slug}",
+      "item_count": 2
+     },
+     "match": [
+      "ol",
+      "/{slug}/{slug}"
+     ],
+     "slots": [
+      "{slug}"
+     ],
+     "n_slots": 1,
+     "meta": {
+      "item_count": 2
+     }
+    }
+   ],
+   "signature_keys": [
+    "[\"nav\", [\"nav\", [\"/{slug}\", \"/{slug}/{slug}/{slug}\"]]]",
+    "[\"nav\", [\"header\", [\"/{slug}\", \"/{slug}/{slug}/{slug}\"]]]",
+    "[\"list\", [\"ol\", \"/{slug}/{slug}\"]]"
+   ],
+   "signature_keys_slotted": [
+    "[\"nav\", [\"nav\", [\"/{slug}\", \"/{slug}/{slug}/{slug}\"]]]",
+    "[\"nav\", [\"header\", [\"/{slug}\", \"/{slug}/{slug}/{slug}\"]]]",
+    "[\"list\", [\"ol\", \"/{slug}/{slug}\"]]"
+   ]
+  }
+ ]
+}

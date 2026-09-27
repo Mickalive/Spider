@@ -1,0 +1,2172 @@
+{
+ "accept": "text/html",
+ "experiment_id": "EXP-INTEL-36287179392",
+ "max_pages_per_site": 10,
+ "n_distinct_request_hosts": 23,
+ "n_http_requests_total": 177,
+ "n_page_records": 155,
+ "n_sites_attempted": 20,
+ "n_sites_ge_min_pages": 15,
+ "n_sites_preregistered": 20,
+ "per_host_min_interval_s": 1.05,
+ "run": "conforming",
+ "sites": {
+  "apache.org": {
+   "base_url": "https://apache.org",
+   "category": "organization",
+   "derived_registrable_domain": "apache.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 18,
+   "origin_netloc": "apache.org",
+   "pages": [
+    {
+     "body_sha256": "76e9bb4f971be7197af4b5b037556d09cb1be87148315ce4057ea91541044020",
+     "bytes": 52629,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 12.123,
+     "status": 200,
+     "url": "https://apache.org/",
+     "url_requested": "https://apache.org"
+    },
+    {
+     "body_sha256": "ac3cba1e395d456baee7ccd4b9131599ba304253559d44c253b3172fa9b134be",
+     "bytes": 34121,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 3.65,
+     "status": 200,
+     "url": "https://apache.org/foundation/policies/conduct",
+     "url_requested": "https://apache.org/foundation/policies/conduct"
+    },
+    {
+     "body_sha256": "6a1d17430ab2a5136d869cc7db6bdc01e1169d41a28e66a2a409f0feba0cf015",
+     "bytes": 27216,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 121.56,
+     "status": 200,
+     "url": "https://apache.org/community-resources/",
+     "url_requested": "https://apache.org/community-resources/"
+    },
+    {
+     "body_sha256": "412249dfc7bcf277e1d69d26292685c8b3b4c5e14cef214099569ebb9cffdf58",
+     "bytes": 27181,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 5.252,
+     "status": 200,
+     "url": "https://apache.org/foundation/buy_stuff",
+     "url_requested": "https://apache.org/foundation/buy_stuff"
+    },
+    {
+     "body_sha256": "9b748cce5143af0f3c939911cf636160210b9b902a8b0d1eaca3f6042fa50407",
+     "bytes": 28541,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 9.408,
+     "status": 200,
+     "url": "https://apache.org/projects/",
+     "url_requested": "https://apache.org/projects"
+    },
+    {
+     "body_sha256": "16294794d1f55171063ae80f8a5aa8e149fa9fe6b8216ea086d29d4007982246",
+     "bytes": 41163,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 134.338,
+     "status": 200,
+     "url": "https://apache.org/foundation/mailinglists",
+     "url_requested": "https://apache.org/foundation/mailinglists"
+    },
+    {
+     "body_sha256": "f03185a0b56ebfd44547f114d02f21548092086daa5a6d7bc85bbabfa90c9da6",
+     "bytes": 29818,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 236.705,
+     "status": 200,
+     "url": "https://apache.org/security/",
+     "url_requested": "https://apache.org/security"
+    },
+    {
+     "body_sha256": "e0cd4eeba10166989145bf350a952ee0aa881a4f6d74b3c1a86ae7390be05c2a",
+     "bytes": 52115,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 251.932,
+     "status": 200,
+     "url": "https://apache.org/foundation/how-it-works/",
+     "url_requested": "https://apache.org/foundation/how-it-works"
+    },
+    {
+     "body_sha256": "9f3f7f1de6bf0595e7499ef88fddf4918f43cd96b2b5e0c0f91d90a461a73736",
+     "bytes": 31278,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 130.723,
+     "status": 200,
+     "url": "https://apache.org/theapacheway/",
+     "url_requested": "https://apache.org/theapacheway/"
+    },
+    {
+     "body_sha256": "84d119e2bc6a65b7c52b4ac912199cd089551651978506f6e79089b73fbf29e1",
+     "bytes": 29330,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://apache.org/",
+     "latency_ms": 114.509,
+     "status": 200,
+     "url": "https://apache.org/legal/",
+     "url_requested": "https://apache.org/legal/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://apache.org/robots.txt",
+   "site_key": "apache.org"
+  },
+  "bitbucket.org": {
+   "base_url": "https://bitbucket.org",
+   "category": "developer platform",
+   "derived_registrable_domain": "bitbucket.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 12,
+   "origin_netloc": "bitbucket.org",
+   "pages": [
+    {
+     "body_sha256": "b801447bee87a003bbd1548267875a7bd5fbfde3cd8664761afcfd71b3789c55",
+     "bytes": 178426,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 102.773,
+     "status": 200,
+     "url": "https://bitbucket.org/",
+     "url_requested": "https://bitbucket.org"
+    },
+    {
+     "body_sha256": "1ed2c897b5e913fd8cf3b087978234e9a8112b4a8d5422ea3c105c5512371c1e",
+     "bytes": 199388,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 125.445,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/bitbucket/ai",
+     "url_requested": "https://bitbucket.org/blog/ai"
+    },
+    {
+     "body_sha256": "2b4d5b32411c62c54b535138e2837c76421a22f18fe83aa79b4d2255bdaf1b05",
+     "bytes": 61631,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 46.788,
+     "status": 200,
+     "url": "https://bitbucket.org/product/features/pipelines/integrations",
+     "url_requested": "https://bitbucket.org/product/features/pipelines/integrations"
+    },
+    {
+     "body_sha256": "aff45ab70698c878ac1d1ebf510fbe85b651559fc7e5e8dfc72a89788a8f89fa",
+     "bytes": 118779,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 49.651,
+     "status": 200,
+     "url": "https://www.atlassian.com/software/bitbucket/features/pipelines",
+     "url_requested": "https://bitbucket.org/product/features/pipelines"
+    },
+    {
+     "body_sha256": "0accf97732ae8bb6992bb850b81f9ca5512f0ddaec27b125330b3e373e0e069c",
+     "bytes": 199486,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 73.413,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/bitbucket/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management",
+     "url_requested": "https://bitbucket.org/blog/a-modern-approach-to-change-management-with-bitbucket-and-jira-service-management"
+    },
+    {
+     "body_sha256": "3053e418213c7a3400e58c9933c46eb0091b2c649d6638bbfd28a96cb3443f39",
+     "bytes": 189810,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 143.016,
+     "status": 200,
+     "url": "https://www.atlassian.com/blog/app/bitbucket",
+     "url_requested": "https://bitbucket.org/blog/"
+    },
+    {
+     "body_sha256": "7d804fcd924d1d5fa2b5e477eba0ce7d4d01b47c321ec43567285aa492e23567",
+     "bytes": 63467,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 47.031,
+     "status": 200,
+     "url": "https://bitbucket.org/product/write",
+     "url_requested": "https://bitbucket.org/product/write"
+    },
+    {
+     "body_sha256": "8452b34d648e5964942e1fbd91f50aa0d3d491696eebbd34e03c80d8a8c8c0c7",
+     "bytes": 1161340,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 459.852,
+     "status": 200,
+     "url": "https://www.atlassian.com/software/bitbucket/pricing",
+     "url_requested": "https://bitbucket.org/product/pricing"
+    },
+    {
+     "body_sha256": "aa4c10726c3546a21acee82cdab351a89bc1ceac0c06157c9ea78c407f91d4cf",
+     "bytes": 60385,
+     "content_type": "text/html;charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://bitbucket.org/",
+     "latency_ms": 45.585,
+     "status": 200,
+     "url": "https://bitbucket.org/product/version-control-software",
+     "url_requested": "https://bitbucket.org/product/version-control-software"
+    },
+    {
+     "body_sha256": "80dd12e317b2cacdd12bf549fab8e7fd7267369c4a82671b8cca75f17640492c",
+     "bytes": 14269,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 2,
+     "discovered_from": "https://bitbucket.org/product/features/pipelines/integrations",
+     "latency_ms": 454.954,
+     "status": 200,
+     "url": "https://bitbucket.org/atlassian/opsgenie-send-alert/src/master/",
+     "url_requested": "https://bitbucket.org/atlassian/opsgenie-send-alert/src/master/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://bitbucket.org/robots.txt",
+   "site_key": "bitbucket.org"
+  },
+  "crates.io": {
+   "base_url": "https://crates.io",
+   "category": "package registry",
+   "derived_registrable_domain": "crates.io",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 0,
+   "notes": [
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 9,
+   "origin_netloc": "crates.io",
+   "pages": [
+    {
+     "body_sha256": "970a124f5d7978c62e0cf74bd85f9d15d6ef8a40b01648e25b8ca96a884d57ec",
+     "bytes": 5050,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 32.03,
+     "status": 200,
+     "url": "https://crates.io/",
+     "url_requested": "https://crates.io"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://crates.io/robots.txt",
+   "site_key": "crates.io"
+  },
+  "developer.mozilla.org": {
+   "base_url": "https://developer.mozilla.org",
+   "category": "documentation",
+   "derived_registrable_domain": "mozilla.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "prereg_label_developer.mozilla.org_is_not_registrable_domain;derived_mozilla.org",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 6,
+   "origin_netloc": "developer.mozilla.org",
+   "pages": [
+    {
+     "body_sha256": "2c279e03a48b4eaf9a900ea64a68d0fe9257e7e137b7a964756e77b64fcd506a",
+     "bytes": 121755,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 12.54,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/",
+     "url_requested": "https://developer.mozilla.org"
+    },
+    {
+     "body_sha256": "764b6bafd5cb8265e5d6c37421fd8a7b351c9c2ff35a6ed10cb4dd4a51f912da",
+     "bytes": 186512,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 8.472,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+    },
+    {
+     "body_sha256": "7bfc66e7e2be263016b670e05bb1a622987083a90050a6f14cdae1e3cb3d613c",
+     "bytes": 232233,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 6.594,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements"
+    },
+    {
+     "body_sha256": "08ac70a512a28745b542122c97c32fd3660045aff5ef0fade88b636e226fc349",
+     "bytes": 217227,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 6.233,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes"
+    },
+    {
+     "body_sha256": "9e0dbc3e6991eaf6c22df49d4f9e701218b14b66fda8f177a2bf8fa59688550f",
+     "bytes": 250913,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 5.823,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes"
+    },
+    {
+     "body_sha256": "68097356e28998cc16a111818a3ffda9f2ccf999fb9c2d8d9fde2f0e31a0f4b1",
+     "bytes": 172843,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 6.459,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference"
+    },
+    {
+     "body_sha256": "23d4f6f1f21186a594d8aa0caccddcd98e144afe60273bd13f724092bea8d0dd",
+     "bytes": 202002,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 5.191,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images"
+    },
+    {
+     "body_sha256": "f2a025566b6206d39b3fdb568802c10d324f377ab7fa46a4ebc94ae0d5dd9dde",
+     "bytes": 197156,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 5.029,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Cheatsheet",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Cheatsheet"
+    },
+    {
+     "body_sha256": "5cedf53cc39d4dc25a11a01ae5a34982adf92fb805ccfb43fbd14d49521bcc03",
+     "bytes": 200696,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 5.169,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Date_and_time_formats",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Date_and_time_formats"
+    },
+    {
+     "body_sha256": "a16cb188dd639445c6fb74e1cbc1fc6823f249f092b684517f205afc533c468c",
+     "bytes": 174603,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://developer.mozilla.org/en-US/",
+     "latency_ms": 5.073,
+     "status": 200,
+     "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides",
+     "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://developer.mozilla.org/robots.txt",
+   "site_key": "developer.mozilla.org"
+  },
+  "dockerhub.io": {
+   "base_url": "https://hub.docker.com",
+   "category": "container registry",
+   "derived_registrable_domain": "docker.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "prereg_label_dockerhub.io_is_not_registrable_domain;derived_docker.com",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 14,
+   "origin_netloc": "hub.docker.com",
+   "pages": [
+    {
+     "body_sha256": "97f9d023ae01689089546f08de4a795d2221c12c4c472cf14c977aa817558d28",
+     "bytes": 472359,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 175.241,
+     "status": 200,
+     "url": "https://hub.docker.com/",
+     "url_requested": "https://hub.docker.com"
+    },
+    {
+     "body_sha256": "927466c09175dd0e1a5d0abf87ddef549b5b74a96d5ad90bb1db0d603bf295e1",
+     "bytes": 462157,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 188.421,
+     "status": 200,
+     "url": "https://hub.docker.com/search?type=sbx_kit",
+     "url_requested": "https://hub.docker.com/search?type=sbx_kit"
+    },
+    {
+     "body_sha256": "1be4141483fa40c4dd6dbfa81f649564ba03594ee0d801bd99d85fe2c68f6854",
+     "bytes": 432949,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 285.035,
+     "status": 200,
+     "url": "https://hub.docker.com/u/ai",
+     "url_requested": "https://hub.docker.com/catalogs/models"
+    },
+    {
+     "body_sha256": "ee159128b109598121711f7d8830c7741839695b1217b098eb72e951505c64af",
+     "bytes": 574254,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 252.912,
+     "status": 200,
+     "url": "https://hub.docker.com/mcp",
+     "url_requested": "https://hub.docker.com/mcp"
+    },
+    {
+     "body_sha256": "95a894d2ec8b27c3e0cdc47c03d7e61cef690b106fd755c0861811fa79932665",
+     "bytes": 2061433,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 3095.229,
+     "status": 200,
+     "url": "https://hub.docker.com/hardened-images/catalog",
+     "url_requested": "https://hub.docker.com/hardened-images/catalog"
+    },
+    {
+     "body_sha256": "96634830233cbf0f4edb2ac66df9b62e80ae38081a9349f11e4a673a5f67d78d",
+     "bytes": 485256,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 242.943,
+     "status": 200,
+     "url": "https://hub.docker.com/search?badges=official",
+     "url_requested": "https://hub.docker.com/search?badges=official"
+    },
+    {
+     "body_sha256": "421c5029d1f3e9b3bf5ac4e53f0be14f5443576d2bd49db937ffba897c8f8512",
+     "bytes": 393946,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 365.324,
+     "status": 200,
+     "url": "https://hub.docker.com/publisher-program",
+     "url_requested": "https://hub.docker.com/publisher-program"
+    },
+    {
+     "body_sha256": "a386eb7d4fb0704ef5b8565f5d174f0249afa4b309b4f0a5ac0a10df3bb42827",
+     "bytes": 492982,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 206.571,
+     "status": 200,
+     "url": "https://hub.docker.com/search?badges=open_source",
+     "url_requested": "https://hub.docker.com/search?badges=open_source"
+    },
+    {
+     "body_sha256": "45872beca8154ea175fddddfb1e5220e845b6ee749fe324deb874366a6b1ab0e",
+     "bytes": 433064,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 267.878,
+     "status": 200,
+     "url": "https://hub.docker.com/categories/networking",
+     "url_requested": "https://hub.docker.com/categories/networking"
+    },
+    {
+     "body_sha256": "8e2415c464e6d16a7e4cfead6ec535550c5d1ae36836f3c75c01abbd2c965d1d",
+     "bytes": 426576,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://hub.docker.com/",
+     "latency_ms": 232.544,
+     "status": 200,
+     "url": "https://hub.docker.com/categories/security",
+     "url_requested": "https://hub.docker.com/categories/security"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://hub.docker.com/robots.txt",
+   "site_key": "dockerhub.io"
+  },
+  "docs.python.org": {
+   "base_url": "https://docs.python.org",
+   "category": "documentation",
+   "derived_registrable_domain": "python.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "prereg_label_docs.python.org_is_not_registrable_domain;derived_python.org",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 2,
+   "origin_netloc": "docs.python.org",
+   "pages": [
+    {
+     "body_sha256": "5b9d204386804c9f0d4a82a741fb83a078811517bc944bcc8c2fc65fd0654b29",
+     "bytes": 19641,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 10.527,
+     "status": 200,
+     "url": "https://docs.python.org/3/",
+     "url_requested": "https://docs.python.org"
+    },
+    {
+     "body_sha256": "9b749cbef5bcaaa60c5ac5722455c83afb8ff856c6888663aab4e655609668e7",
+     "bytes": 11476,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 3.629,
+     "status": 200,
+     "url": "https://docs.python.org/3/download.html",
+     "url_requested": "https://docs.python.org/3/download.html"
+    },
+    {
+     "body_sha256": "0c60c963638db25ab4db3520e5de9d1bb760f072883993465bf33d328ef3fb92",
+     "bytes": 19653,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 3.779,
+     "status": 200,
+     "url": "https://docs.python.org/3.16/",
+     "url_requested": "https://docs.python.org/3.16/"
+    },
+    {
+     "body_sha256": "8ce8fc42498298653819d115e7834c238e7a8e4215145b3347e95c5bd6de6ce3",
+     "bytes": 19659,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 5.79,
+     "status": 200,
+     "url": "https://docs.python.org/3.15/",
+     "url_requested": "https://docs.python.org/3.15/"
+    },
+    {
+     "body_sha256": "5b9d204386804c9f0d4a82a741fb83a078811517bc944bcc8c2fc65fd0654b29",
+     "bytes": 19641,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 5.397,
+     "status": 200,
+     "url": "https://docs.python.org/3.14/",
+     "url_requested": "https://docs.python.org/3.14/"
+    },
+    {
+     "body_sha256": "6f4a47cf02ac819b5fa51fbce5df60e805892f6247f5753caeb810da5fc6e6f4",
+     "bytes": 19653,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 20.174,
+     "status": 200,
+     "url": "https://docs.python.org/3.13/",
+     "url_requested": "https://docs.python.org/3.13/"
+    },
+    {
+     "body_sha256": "8d90f05d1599e16291294963dac3ca355a545c75a3cd70f49cdb48d7f8d37d6c",
+     "bytes": 17931,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 6.292,
+     "status": 200,
+     "url": "https://docs.python.org/3.12/",
+     "url_requested": "https://docs.python.org/3.12/"
+    },
+    {
+     "body_sha256": "8c038d3cd01db4194f407795cd30410080d5dcc5e21523ba92e4874fb43127d3",
+     "bytes": 16874,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 5.087,
+     "status": 200,
+     "url": "https://docs.python.org/3.11/",
+     "url_requested": "https://docs.python.org/3.11/"
+    },
+    {
+     "body_sha256": "93610a12535067021ab98c22233b984919e5014d8049c7aa71425fcb14b989b0",
+     "bytes": 16709,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 4.259,
+     "status": 200,
+     "url": "https://docs.python.org/3.10/",
+     "url_requested": "https://docs.python.org/3.10/"
+    },
+    {
+     "body_sha256": "5ca07bef986562b0d154131bb07085c90969c60296f4b6b47de37919e496fdf9",
+     "bytes": 13017,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://docs.python.org/3/",
+     "latency_ms": 4.485,
+     "status": 200,
+     "url": "https://docs.python.org/3.9/",
+     "url_requested": "https://docs.python.org/3.9/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://docs.python.org/robots.txt",
+   "site_key": "docs.python.org"
+  },
+  "en.wikipedia.org": {
+   "base_url": "https://en.wikipedia.org",
+   "category": "reference",
+   "derived_registrable_domain": "wikipedia.org",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:Random"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:RecentChanges"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:SpecialPages"
+    },
+    {
+     "reason": "robots_disallow",
+     "url": "https://en.wikipedia.org/wiki/Special:Search"
+    }
+   ],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 13,
+   "notes": [
+    "prereg_label_en.wikipedia.org_is_not_registrable_domain;derived_wikipedia.org",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 3,
+   "origin_netloc": "en.wikipedia.org",
+   "pages": [
+    {
+     "body_sha256": "5eb07360bc94b9156f1b542d011d89133212b803e15c868fd740eb75844e583d",
+     "bytes": 254697,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 103.166,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Main_Page",
+     "url_requested": "https://en.wikipedia.org"
+    },
+    {
+     "body_sha256": "f17387e55c0e33448b0aa54b9bfc989d6a35440b8b6612cb8efd72d89090d3a6",
+     "bytes": 161263,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 25.138,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+     "url_requested": "https://en.wikipedia.org/wiki/Wikipedia:Contents"
+    },
+    {
+     "body_sha256": "1daf50d60ed5a0a0b4e9f991a30bc591663223ef72630daebb11d6e6d4116519",
+     "bytes": 456844,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 35.094,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+     "url_requested": "https://en.wikipedia.org/wiki/Portal:Current_events"
+    },
+    {
+     "body_sha256": "0c6e087074282fe5d42296764ec6fb662288ed007c5a07c6598332e8d55ba06d",
+     "bytes": 178864,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 19.503,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+     "url_requested": "https://en.wikipedia.org/wiki/Wikipedia:About"
+    },
+    {
+     "body_sha256": "a420a0b0e6a1e76901a1196350190caa94b56da508d626deb5d06e4360273a38",
+     "bytes": 97512,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 19.42,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+     "url_requested": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us"
+    },
+    {
+     "body_sha256": "3237b60968173bbcaa9e09f01d6005242414fcc8681eefb4ef23a472fd6b58eb",
+     "bytes": 202817,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 20.04,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Help:Contents",
+     "url_requested": "https://en.wikipedia.org/wiki/Help:Contents"
+    },
+    {
+     "body_sha256": "777c31621376d13ef57c36c15bf09f3f8061e3bd387e650ee210a6563907416b",
+     "bytes": 123240,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 19.087,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Help:Introduction",
+     "url_requested": "https://en.wikipedia.org/wiki/Help:Introduction"
+    },
+    {
+     "body_sha256": "a6c8c68daf15dec33242114049541dc7361c5ff387a99164406f75ca78117c45",
+     "bytes": 685083,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 25.443,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+     "url_requested": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal"
+    },
+    {
+     "body_sha256": "ad871cb94713af04daef89833a7d50b5dbac0258abea09e26270f86b0ac40fd6",
+     "bytes": 180069,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 19.768,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard",
+     "url_requested": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard"
+    },
+    {
+     "body_sha256": "f9e6e9b19eb895c2cea4d8b235296530713ee7d9f5532bbf6021c6a0d6c3d883",
+     "bytes": 208602,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://en.wikipedia.org/wiki/Main_Page",
+     "latency_ms": 19.495,
+     "status": 200,
+     "url": "https://en.wikipedia.org/wiki/Talk:Main_Page",
+     "url_requested": "https://en.wikipedia.org/wiki/Talk:Main_Page"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://en.wikipedia.org/robots.txt",
+   "site_key": "en.wikipedia.org"
+  },
+  "git-scm.com": {
+   "base_url": "https://git-scm.com",
+   "category": "documentation",
+   "derived_registrable_domain": "git-scm.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 16,
+   "origin_netloc": "git-scm.com",
+   "pages": [
+    {
+     "body_sha256": "5f17b9cd69eadd0454784c77e8ad18e52c6a1bcb97b15988f61ea4d636cc51df",
+     "bytes": 6297,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 36.122,
+     "status": 200,
+     "url": "https://git-scm.com/",
+     "url_requested": "https://git-scm.com"
+    },
+    {
+     "body_sha256": "2d9f007cf3fb66dc8b3f5653dc0b42e5f03e8520530057263855b0957ae774cd",
+     "bytes": 551,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 16.386,
+     "status": 200,
+     "url": "https://git-scm.com/about/#free-and-open-source",
+     "url_requested": "https://git-scm.com/about/#free-and-open-source"
+    },
+    {
+     "body_sha256": "e2bac12eea774677c8eed8d2dc0e0d16a9fb73e33f154efcbdcb37897633d34a",
+     "bytes": 6660,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 17.034,
+     "status": 200,
+     "url": "https://git-scm.com/about",
+     "url_requested": "https://git-scm.com/about"
+    },
+    {
+     "body_sha256": "000a33ec870342eabe2b36b284c4f3282bbabdc846ba2737d4ebee654c6877f7",
+     "bytes": 32652,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 13.612,
+     "status": 200,
+     "url": "https://git-scm.com/tools/guis",
+     "url_requested": "https://git-scm.com/tools/guis"
+    },
+    {
+     "body_sha256": "9e030b942f4e2db1b19034637288e7d6e60734d471eec81e5eb404b7308a9ec3",
+     "bytes": 168128,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 21.977,
+     "status": 200,
+     "url": "https://git-scm.com/tools/hosting",
+     "url_requested": "https://git-scm.com/tools/hosting"
+    },
+    {
+     "body_sha256": "871f1e864419bc290e6298db0bba6b114560b4c2468d74de7f3cdbd734b80a7c",
+     "bytes": 8883,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 20.418,
+     "status": 200,
+     "url": "https://git-scm.com/tools/command-line",
+     "url_requested": "https://git-scm.com/tools/command-line"
+    },
+    {
+     "body_sha256": "2863733d6ff54863f1458c79ae5fc5b11c7b55e6cc9c59b87a14f8642f698500",
+     "bytes": 6657,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 19.472,
+     "status": 200,
+     "url": "https://git-scm.com/learn",
+     "url_requested": "https://git-scm.com/learn"
+    },
+    {
+     "body_sha256": "72f15a063ec274d2814ff9b76d290c21d8edf882269cfb21aedb911dcab9be00",
+     "bytes": 5854,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 10.061,
+     "status": 200,
+     "url": "https://git-scm.com/tools",
+     "url_requested": "https://git-scm.com/tools"
+    },
+    {
+     "body_sha256": "a8d1aeff49a59090d8d0d93c33f066c412e060a9dffa878c0b8d6f763ae9ccb7",
+     "bytes": 16130,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 45.162,
+     "status": 200,
+     "url": "https://git-scm.com/docs",
+     "url_requested": "https://git-scm.com/docs"
+    },
+    {
+     "body_sha256": "b2d4e03086615facdd6c03178fdc388713b1b6ff0147be9e3282a36ce5b45933",
+     "bytes": 560,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://git-scm.com/",
+     "latency_ms": 13.709,
+     "status": 200,
+     "url": "https://git-scm.com/install",
+     "url_requested": "https://git-scm.com/install"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 404,
+   "robots_url": "https://git-scm.com/robots.txt",
+   "site_key": "git-scm.com"
+  },
+  "github.com": {
+   "base_url": "https://github.com",
+   "category": "developer platform",
+   "derived_registrable_domain": "github.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 1,
+   "origin_netloc": "github.com",
+   "pages": [
+    {
+     "body_sha256": "12305a1d03db42f0b7510ceb09d607636043648347617a35431ee5f530b8552e",
+     "bytes": 576269,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 244.16,
+     "status": 200,
+     "url": "https://github.com/",
+     "url_requested": "https://github.com"
+    },
+    {
+     "body_sha256": "8284585cea2cb117aad9777cc25517b37cdebdf6d1f2a76e43c3b62643f36302",
+     "bytes": 879195,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 225.134,
+     "status": 200,
+     "url": "https://github.com/features/copilot",
+     "url_requested": "https://github.com/features/copilot"
+    },
+    {
+     "body_sha256": "4726764df747e0b465fcc6df55101216a7aa229b6570f70d4afe56678b445eb1",
+     "bytes": 350183,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 133.491,
+     "status": 200,
+     "url": "https://github.com/features/ai/github-app",
+     "url_requested": "https://github.com/features/ai/github-app"
+    },
+    {
+     "body_sha256": "8b4199529aa6b9b7aacb90733888d54881a664fd623fd2901cc675bf1b19c4b5",
+     "bytes": 269477,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 282.259,
+     "status": 200,
+     "url": "https://github.com/mcp",
+     "url_requested": "https://github.com/mcp"
+    },
+    {
+     "body_sha256": "9582753df808e3bcd0eb5f5fde5ffb7c64c1af7ccc66a23d180417306c475e55",
+     "bytes": 308097,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 160.495,
+     "status": 200,
+     "url": "https://github.com/features/actions",
+     "url_requested": "https://github.com/features/actions"
+    },
+    {
+     "body_sha256": "9b686405a2e2975776da31759195f114da4c6e0705dce349f83827cd4dde18fa",
+     "bytes": 330272,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 162.35,
+     "status": 200,
+     "url": "https://github.com/features/codespaces",
+     "url_requested": "https://github.com/features/codespaces"
+    },
+    {
+     "body_sha256": "d91a75b885093310cdd948bfe880a908bec814ef27692fa613b1942b87a6dd79",
+     "bytes": 349970,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 154.777,
+     "status": 200,
+     "url": "https://github.com/features/issues",
+     "url_requested": "https://github.com/features/issues"
+    },
+    {
+     "body_sha256": "3e036a46caa1630a0ddda71fecb503867d029cfc1632b57954c2a9ae045c9511",
+     "bytes": 315279,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 129.478,
+     "status": 200,
+     "url": "https://github.com/features/code-review",
+     "url_requested": "https://github.com/features/code-review"
+    },
+    {
+     "body_sha256": "bde3cbe922412b17bfd344dafb11247dbef4f83906153592f399f5d48020d768",
+     "bytes": 327100,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 142.109,
+     "status": 200,
+     "url": "https://github.com/features/code-quality",
+     "url_requested": "https://github.com/features/code-quality"
+    },
+    {
+     "body_sha256": "0e290bed26515db53b4f5cd35d5fe1f7bc7721aeec8f0b25384922f363c0009c",
+     "bytes": 577132,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://github.com/",
+     "latency_ms": 199.767,
+     "status": 200,
+     "url": "https://github.com/security/advanced-security",
+     "url_requested": "https://github.com/security/advanced-security"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://github.com/robots.txt",
+   "site_key": "github.com"
+  },
+  "gitlab.com": {
+   "base_url": "https://gitlab.com",
+   "category": "developer platform",
+   "derived_registrable_domain": "gitlab.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "homepage_crossed_host:about.gitlab.com",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 11,
+   "origin_netloc": "about.gitlab.com",
+   "pages": [
+    {
+     "body_sha256": "b12fa5fccdc7c47941e45c410afcd6065e24d9873a04161c7fec5f701dbe1745",
+     "bytes": 227195,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 195.622,
+     "status": 200,
+     "url": "https://about.gitlab.com/",
+     "url_requested": "https://gitlab.com"
+    },
+    {
+     "body_sha256": "75609fbfc0402fd57458c9bfc1cd1bd3f5fa7d7e62cab137efc434075cf43715",
+     "bytes": 253420,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 58.695,
+     "status": 200,
+     "url": "https://about.gitlab.com/gitlab-duo-agent-platform/",
+     "url_requested": "https://about.gitlab.com/gitlab-duo-agent-platform/"
+    },
+    {
+     "body_sha256": "564f51b8157bc3cbc74d0c624cf8ccf3a1e431eca676e47bc3d4abdaa451476f",
+     "bytes": 201637,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 26.874,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/code-suggestions/",
+     "url_requested": "https://about.gitlab.com/solutions/code-suggestions/"
+    },
+    {
+     "body_sha256": "333d2fe863aad057057e382be55f8190e18b11c36cad4e71d55df571e9b4aac7",
+     "bytes": 233573,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 45.282,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/continuous-integration/",
+     "url_requested": "https://about.gitlab.com/solutions/continuous-integration/"
+    },
+    {
+     "body_sha256": "e42d26e624d6fb17c8a8d59cdb60bceffcd0f5b3148812cc41db8e73558ac287",
+     "bytes": 214372,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 28.039,
+     "status": 200,
+     "url": "https://about.gitlab.com/partners/technology-partners/aws/",
+     "url_requested": "https://about.gitlab.com/partners/technology-partners/aws/"
+    },
+    {
+     "body_sha256": "229b7c0d9dd842d264f4caf230d160e9dfa84979e392a309d10fb1bac21b91e0",
+     "bytes": 192239,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 24.975,
+     "status": 200,
+     "url": "https://about.gitlab.com/partners/technology-partners/google-cloud-platform/",
+     "url_requested": "https://about.gitlab.com/partners/technology-partners/google-cloud-platform/"
+    },
+    {
+     "body_sha256": "4648669a97d3c60f28689c20f786b5b9e9c63e6da9763fa872b5b705762af9dc",
+     "bytes": 200537,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 98.893,
+     "status": 200,
+     "url": "https://about.gitlab.com/why-gitlab/",
+     "url_requested": "https://about.gitlab.com/why-gitlab/"
+    },
+    {
+     "body_sha256": "ce5d06844ec7497bd67c513e3c83fe4ce9f0ce203c62c2d866ee707f479c75ed",
+     "bytes": 222722,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 57.293,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/source-code-management/",
+     "url_requested": "https://about.gitlab.com/solutions/source-code-management/"
+    },
+    {
+     "body_sha256": "d20e7020af5b2721245fb97cc84ecbc315564df63dcf8c135e443226a2cff408",
+     "bytes": 208690,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 38.064,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/agile-delivery/",
+     "url_requested": "https://about.gitlab.com/solutions/agile-delivery/"
+    },
+    {
+     "body_sha256": "ba9aee5b7d12aa0f7203e9e6a6611ba97d33ac261636eee8a0d176de6d87076a",
+     "bytes": 213853,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://about.gitlab.com/",
+     "latency_ms": 35.529,
+     "status": 200,
+     "url": "https://about.gitlab.com/solutions/application-security-testing/",
+     "url_requested": "https://about.gitlab.com/solutions/application-security-testing/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://gitlab.com/robots.txt",
+   "site_key": "gitlab.com"
+  },
+  "gnu.org": {
+   "base_url": "https://www.gnu.org",
+   "category": "organization",
+   "derived_registrable_domain": "gnu.org",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://www.gnu.org/cgi-bin/estseek.cgi"
+    }
+   ],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 10,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 19,
+   "origin_netloc": "www.gnu.org",
+   "pages": [
+    {
+     "body_sha256": "0aa9673d39b7c8182bb840278dd6fa090cc88a32cb83a261773360baf4e47717",
+     "bytes": 31710,
+     "content_type": "text/html",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 48.742,
+     "status": 200,
+     "url": "https://www.gnu.org/",
+     "url_requested": "https://www.gnu.org"
+    },
+    {
+     "body_sha256": "d712c4f232a2347a4101e5e6a44b0e68d2cfbc6f1c6cdabe1cd2a0ba07a92965",
+     "bytes": 20907,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 37.95,
+     "status": 200,
+     "url": "https://www.gnu.org/gnu/gnu.html",
+     "url_requested": "https://www.gnu.org/gnu/gnu.html"
+    },
+    {
+     "body_sha256": "bb53df6107a69be4ac479149553f6f612b7622b7fe4c95036700d42d34aae14d",
+     "bytes": 19610,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 39.301,
+     "status": 200,
+     "url": "https://www.gnu.org/philosophy/philosophy.html",
+     "url_requested": "https://www.gnu.org/philosophy/philosophy.html"
+    },
+    {
+     "body_sha256": "6df9f9718003d7e086f522f1f729da93ce7b3ed0761f44061730f550b49efaee",
+     "bytes": 32733,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 39.934,
+     "status": 200,
+     "url": "https://www.gnu.org/licenses/licenses.html",
+     "url_requested": "https://www.gnu.org/licenses/licenses.html"
+    },
+    {
+     "body_sha256": "b0d23ff19c74e5ce3db323d7d877e9d34a8868fae3713218d90c5919b7c982fa",
+     "bytes": 22888,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 41.441,
+     "status": 200,
+     "url": "https://www.gnu.org/education/education.html",
+     "url_requested": "https://www.gnu.org/education/education.html"
+    },
+    {
+     "body_sha256": "52652a268df48b6a2b3b8d913ae70f9869c8ed48ce3eeda94e756beea8654341",
+     "bytes": 55586,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 43.365,
+     "status": 200,
+     "url": "https://www.gnu.org/software/software.html",
+     "url_requested": "https://www.gnu.org/software/software.html"
+    },
+    {
+     "body_sha256": "de7ecab21497b8b2305b71ec08be3db7b65392979918940dd5115c97256bcdda",
+     "bytes": 18617,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 36.367,
+     "status": 200,
+     "url": "https://www.gnu.org/distros/distros.html",
+     "url_requested": "https://www.gnu.org/distros/distros.html"
+    },
+    {
+     "body_sha256": "2aaaf2043608b19929187f54e8e4856188716295507fa947a73a20a4aece0ac4",
+     "bytes": 15052,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 37.28,
+     "status": 200,
+     "url": "https://www.gnu.org/doc/doc.html",
+     "url_requested": "https://www.gnu.org/doc/doc.html"
+    },
+    {
+     "body_sha256": "5290385ff44ff304eab0e800e9259a567c2a7fd2f3fd7b47071091bfb731f72f",
+     "bytes": 24967,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 38.106,
+     "status": 200,
+     "url": "https://www.gnu.org/proprietary/proprietary.html",
+     "url_requested": "https://www.gnu.org/proprietary/proprietary.html"
+    },
+    {
+     "body_sha256": "724d4a0540b050f69cb37d772ceda2fa8a5b240446398b3abaab41fb2f632602",
+     "bytes": 25085,
+     "content_type": "text/html",
+     "depth": 1,
+     "discovered_from": "https://www.gnu.org/",
+     "latency_ms": 38.577,
+     "status": 200,
+     "url": "https://www.gnu.org/help/help.html",
+     "url_requested": "https://www.gnu.org/help/help.html"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://www.gnu.org/robots.txt",
+   "site_key": "gnu.org"
+  },
+  "kernel.org": {
+   "base_url": "https://kernel.org",
+   "category": "reference",
+   "derived_registrable_domain": "kernel.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 0,
+   "notes": [
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 20,
+   "origin_netloc": "kernel.org",
+   "pages": [
+    {
+     "body_sha256": "ca9c7ea66e9579a1d4ada77f47193baedb668d2a845c879e179c195636069290",
+     "bytes": 20359,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 15.804,
+     "status": 200,
+     "url": "https://kernel.org/",
+     "url_requested": "https://kernel.org"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 404,
+   "robots_url": "https://kernel.org/robots.txt",
+   "site_key": "kernel.org"
+  },
+  "linuxfoundation.org": {
+   "base_url": "https://linuxfoundation.org",
+   "category": "organization",
+   "derived_registrable_domain": "linuxfoundation.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "homepage_crossed_host:www.linuxfoundation.org",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 17,
+   "origin_netloc": "www.linuxfoundation.org",
+   "pages": [
+    {
+     "body_sha256": "da92e182cee235011cdd38d793044c0a4dc89736d68ba96da66057983ce6b2e2",
+     "bytes": 141194,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 220.877,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org",
+     "url_requested": "https://linuxfoundation.org"
+    },
+    {
+     "body_sha256": "6ff8d8f8efd504363bab96069c22b5d004f0c7c3606f6578c2ab9654a45b5e85",
+     "bytes": 144940,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 34.696,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/ja-jp/",
+     "url_requested": "https://www.linuxfoundation.org/ja-jp/"
+    },
+    {
+     "body_sha256": "da92e182cee235011cdd38d793044c0a4dc89736d68ba96da66057983ce6b2e2",
+     "bytes": 141194,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 90.698,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/",
+     "url_requested": "https://www.linuxfoundation.org/?hsLang=en"
+    },
+    {
+     "body_sha256": "8c8dbc10c0826a018986ca730ae3072ba899e4469b95a201e0579a1aac85e713",
+     "bytes": 110563,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 88.125,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/join",
+     "url_requested": "https://www.linuxfoundation.org/about/join?hsLang=en"
+    },
+    {
+     "body_sha256": "867cf547653a9ba46aaff5500ad9aa0cd3cc73f786628951744602f7b4301198",
+     "bytes": 95320,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 31.036,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about",
+     "url_requested": "https://www.linuxfoundation.org/about"
+    },
+    {
+     "body_sha256": "c4b34c729400d344194bf4fd85f43d305087b3414b41646f16b3fa86f57b5a33",
+     "bytes": 78058,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 65.536,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/members",
+     "url_requested": "https://www.linuxfoundation.org/about/members"
+    },
+    {
+     "body_sha256": "480eb39a2ba5a85049472eecb410a422200047e4df509baa5b6bde17c88d5d1f",
+     "bytes": 101823,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 38.064,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/individual-supporters",
+     "url_requested": "https://www.linuxfoundation.org/about/individual-supporters"
+    },
+    {
+     "body_sha256": "0744ac4e3597517d91c106abcb350abe8ac4b27f7ee0ce0acdf953df243dda64",
+     "bytes": 352088,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 82.824,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/leadership",
+     "url_requested": "https://www.linuxfoundation.org/about/leadership"
+    },
+    {
+     "body_sha256": "db4b11a10b464d4829ecd2438f4f73ac3e703e37399d12abcae9c04c71a70453",
+     "bytes": 90899,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 36.126,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/about/inclusion-accessibility",
+     "url_requested": "https://www.linuxfoundation.org/about/inclusion-accessibility"
+    },
+    {
+     "body_sha256": "8b3ee4c21b12955463952e96648b087c4d97330257b65aaa678029ec0bb74374",
+     "bytes": 81094,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 1,
+     "discovered_from": "https://www.linuxfoundation.org",
+     "latency_ms": 35.981,
+     "status": 200,
+     "url": "https://www.linuxfoundation.org/careers",
+     "url_requested": "https://www.linuxfoundation.org/careers"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://linuxfoundation.org/robots.txt",
+   "site_key": "linuxfoundation.org"
+  },
+  "news.ycombinator.com": {
+   "base_url": "https://news.ycombinator.com",
+   "category": "news aggregator",
+   "derived_registrable_domain": "ycombinator.com",
+   "discovered_blocked": [
+    {
+     "reason": "robots_disallow",
+     "url": "https://news.ycombinator.com/vote?id=49844657&how=up&goto=news"
+    }
+   ],
+   "discovered_filtered": [
+    {
+     "error": null,
+     "reason": "status_429",
+     "url": "https://news.ycombinator.com/from?site=astralcodexten.com"
+    },
+    {
+     "error": null,
+     "reason": "status_429",
+     "url": "https://news.ycombinator.com/user?id=silveraxe93"
+    }
+   ],
+   "errors": [],
+   "n_discovered_same_origin": 12,
+   "notes": [
+    "prereg_label_news.ycombinator.com_is_not_registrable_domain;derived_ycombinator.com",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 4,
+   "origin_netloc": "news.ycombinator.com",
+   "pages": [
+    {
+     "body_sha256": "0bc863daac03a1da903b42d0814106ac9e8c6e08e17b0eb5327bc03de5e007fc",
+     "bytes": 35030,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 324.038,
+     "status": 200,
+     "url": "https://news.ycombinator.com/",
+     "url_requested": "https://news.ycombinator.com"
+    },
+    {
+     "body_sha256": "4c978b83dbeaff35e4031a1f63e146594864fce17534e27656f941f4f91584f8",
+     "bytes": 35030,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.51,
+     "status": 200,
+     "url": "https://news.ycombinator.com/news",
+     "url_requested": "https://news.ycombinator.com/news"
+    },
+    {
+     "body_sha256": "2b68c7a17b164b592864dadd56dbcd63a97c482cd8f04da414a3f289a16b52ca",
+     "bytes": 40372,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.128,
+     "status": 200,
+     "url": "https://news.ycombinator.com/newest",
+     "url_requested": "https://news.ycombinator.com/newest"
+    },
+    {
+     "body_sha256": "4f13a67e76f13913ae0275f20654e0137d158fd5ba088c6ce444b925c91abc77",
+     "bytes": 33775,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.777,
+     "status": 200,
+     "url": "https://news.ycombinator.com/front",
+     "url_requested": "https://news.ycombinator.com/front"
+    },
+    {
+     "body_sha256": "45b5e369b8a470e47961d1da719e1be5ac92193b99ae29efb672df0f6e4fe700",
+     "bytes": 48773,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 58.119,
+     "status": 200,
+     "url": "https://news.ycombinator.com/newcomments",
+     "url_requested": "https://news.ycombinator.com/newcomments"
+    },
+    {
+     "body_sha256": "c12c092d84fbe25a46ec53b88be571604ad930c1e6d42fe9a3fe6fab904d1052",
+     "bytes": 27993,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.57,
+     "status": 200,
+     "url": "https://news.ycombinator.com/ask",
+     "url_requested": "https://news.ycombinator.com/ask"
+    },
+    {
+     "body_sha256": "e5dfc82d33af6f3a7a8f9b8f1057ec76bbdc60574109719d3413c829d224a0be",
+     "bytes": 32920,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.849,
+     "status": 200,
+     "url": "https://news.ycombinator.com/show",
+     "url_requested": "https://news.ycombinator.com/show"
+    },
+    {
+     "body_sha256": "22ff423f8e85fa67c9cadf314ed59a7c1fcb757240be5bb9b4d89b7b54d91dfc",
+     "bytes": 22506,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 57.116,
+     "status": 200,
+     "url": "https://news.ycombinator.com/jobs",
+     "url_requested": "https://news.ycombinator.com/jobs"
+    },
+    {
+     "body_sha256": "552e394d8d9ace3fdbbdc283f740a957c5823e76ded0ee804bbbf95800cf3d37",
+     "bytes": 1169,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 56.292,
+     "status": 200,
+     "url": "https://news.ycombinator.com/submit",
+     "url_requested": "https://news.ycombinator.com/submit"
+    },
+    {
+     "body_sha256": "e0d9d3c7f711ea457d682f087211b18e3ecd0f5f33000114b8734e78dbf726eb",
+     "bytes": 131620,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://news.ycombinator.com/",
+     "latency_ms": 114.377,
+     "status": 200,
+     "url": "https://news.ycombinator.com/item?id=49844657",
+     "url_requested": "https://news.ycombinator.com/item?id=49844657"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://news.ycombinator.com/robots.txt",
+   "site_key": "news.ycombinator.com"
+  },
+  "npmjs.com": {
+   "base_url": "https://www.npmjs.com",
+   "category": "package registry",
+   "derived_registrable_domain": "npmjs.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 0,
+   "notes": [
+    "homepage_status_403",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 8,
+   "origin_netloc": "www.npmjs.com",
+   "pages": [
+    {
+     "body_sha256": "c99b43dd978a856db445e6b917cada4835db190a07ca3d947729413431fb2e4d",
+     "bytes": 5468,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 46.25,
+     "status": 403,
+     "url": "https://www.npmjs.com/",
+     "url_requested": "https://www.npmjs.com"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 403,
+   "robots_url": "https://www.npmjs.com/robots.txt",
+   "site_key": "npmjs.com"
+  },
+  "pypi.org": {
+   "base_url": "https://pypi.org",
+   "category": "package registry",
+   "derived_registrable_domain": "pypi.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 7,
+   "origin_netloc": "pypi.org",
+   "pages": [
+    {
+     "body_sha256": "15f427326655b72bb2e3db06b246a15adc6db1e5c1c8904ca7de787f6b87f367",
+     "bytes": 27965,
+     "content_type": "",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 4.615,
+     "status": 200,
+     "url": "https://pypi.org/",
+     "url_requested": "https://pypi.org"
+    },
+    {
+     "body_sha256": "1a7e149ed75d81bb67dea3bad464f14f7d16c76a817906c0a3513d353bdc2a86",
+     "bytes": 87064,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 353.135,
+     "status": 200,
+     "url": "https://pypi.org/help/",
+     "url_requested": "https://pypi.org/help/"
+    },
+    {
+     "body_sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+     "bytes": 3038,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 150.261,
+     "status": 200,
+     "url": "https://pypi.org/search/",
+     "url_requested": "https://pypi.org/search/"
+    },
+    {
+     "body_sha256": "5fa211ff29dd4103d0244ba1ed2353cdbddf64adb79a5191cf17aad760698273",
+     "bytes": 30144,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 172.246,
+     "status": 200,
+     "url": "https://pypi.org/organizations/",
+     "url_requested": "https://pypi.org/organizations/"
+    },
+    {
+     "body_sha256": "3686ddb3ad99ec4fbd17b623a5f64e4067bccf44c656c01865b29863261a46d3",
+     "bytes": 37495,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 8.655,
+     "status": 200,
+     "url": "https://pypi.org/stats/",
+     "url_requested": "https://pypi.org/stats/"
+    },
+    {
+     "body_sha256": "402d3ce1a1b2cbee5ca817eacf785efc3d431d7253d9678a0418e35779a1ddef",
+     "bytes": 28127,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 179.335,
+     "status": 200,
+     "url": "https://pypi.org/trademarks/",
+     "url_requested": "https://pypi.org/trademarks/"
+    },
+    {
+     "body_sha256": "0590085e8427f5d062fa5485912329de8bbc58b35787e45ddbfb7a2d60dbf0c4",
+     "bytes": 83008,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 173.439,
+     "status": 200,
+     "url": "https://pypi.org/sponsors/",
+     "url_requested": "https://pypi.org/sponsors/"
+    },
+    {
+     "body_sha256": "36bc553a290aaca12e11b9014bd32ec53126b06fca1fbfb09a28b4b08f1a95e5",
+     "bytes": 29149,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 27.053,
+     "status": 200,
+     "url": "https://pypi.org/security/",
+     "url_requested": "https://pypi.org/security/"
+    },
+    {
+     "body_sha256": "3c1b85d8a308459c156402e65219291fc8580516bde0439ae9a6623b9f332507",
+     "bytes": 28114,
+     "content_type": "",
+     "depth": 1,
+     "discovered_from": "https://pypi.org/",
+     "latency_ms": 160.247,
+     "status": 200,
+     "url": "https://pypi.org/sitemap/",
+     "url_requested": "https://pypi.org/sitemap/"
+    },
+    {
+     "body_sha256": "c25d274017923dd5c008c00afcb9c03ddb18b6406d4a62ebdf5ed1ee9dabe8a1",
+     "bytes": 255619,
+     "content_type": "",
+     "depth": 2,
+     "discovered_from": "https://pypi.org/help/",
+     "latency_ms": 27.557,
+     "status": 200,
+     "url": "https://pypi.org/project/requests/",
+     "url_requested": "https://pypi.org/project/requests/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://pypi.org/robots.txt",
+   "site_key": "pypi.org"
+  },
+  "readthedocs.io": {
+   "base_url": "https://readthedocs.io",
+   "category": "documentation hosting",
+   "derived_registrable_domain": "readthedocs.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "prereg_label_readthedocs.io_is_not_registrable_domain;derived_readthedocs.com",
+    "homepage_crossed_host:about.readthedocs.com",
+    "page_cap_reached_10"
+   ],
+   "ordinal": 15,
+   "origin_netloc": "about.readthedocs.com",
+   "pages": [
+    {
+     "body_sha256": "0fc8ac064d2b576b7a146c59cc9997c244a6041152d0f72ed9d19091e0ef24b3",
+     "bytes": 33498,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 68.038,
+     "status": 200,
+     "url": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "url_requested": "https://readthedocs.io"
+    },
+    {
+     "body_sha256": "0fc8ac064d2b576b7a146c59cc9997c244a6041152d0f72ed9d19091e0ef24b3",
+     "bytes": 33498,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 16.703,
+     "status": 200,
+     "url": "https://about.readthedocs.com/",
+     "url_requested": "https://about.readthedocs.com/"
+    },
+    {
+     "body_sha256": "170a9c5e0ec267f98468a4f6f9c5b69e9dc0efaa2962d8deee90f74b28e94bb6",
+     "bytes": 44144,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 21.09,
+     "status": 200,
+     "url": "https://about.readthedocs.com/features/",
+     "url_requested": "https://about.readthedocs.com/features/"
+    },
+    {
+     "body_sha256": "c03d795a96084d98008eedd06c60e81e685285a5623378ac76d1713b710362cd",
+     "bytes": 30959,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 22.523,
+     "status": 200,
+     "url": "https://about.readthedocs.com/pricing/",
+     "url_requested": "https://about.readthedocs.com/pricing/"
+    },
+    {
+     "body_sha256": "e4c2b73e8a3b0cc8382c32c014b84938d47163455e1a5bb88504fd6dd9f4eb1f",
+     "bytes": 21089,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 20.447,
+     "status": 200,
+     "url": "https://about.readthedocs.com/blog/",
+     "url_requested": "https://about.readthedocs.com/blog/"
+    },
+    {
+     "body_sha256": "ba91c4bd5a51be96d6cb97480b0e4201ca012b0111df1c33945bdd05128759b9",
+     "bytes": 16792,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 21.478,
+     "status": 200,
+     "url": "https://about.readthedocs.com/choosing-a-platform/",
+     "url_requested": "https://about.readthedocs.com/choosing-a-platform/"
+    },
+    {
+     "body_sha256": "78b5ed4fff2e1ec355bbebb7add11b33227e5a51d66530bd0dc9ecbbcd321278",
+     "bytes": 24380,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 24.41,
+     "status": 200,
+     "url": "https://about.readthedocs.com/tools/sphinx/",
+     "url_requested": "https://about.readthedocs.com/tools/sphinx/"
+    },
+    {
+     "body_sha256": "4df59810e26727b1bef860440a5a93836c11c1e860f131f328e42bfa1da31f72",
+     "bytes": 24565,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 22.195,
+     "status": 200,
+     "url": "https://about.readthedocs.com/tools/mkdocs/",
+     "url_requested": "https://about.readthedocs.com/tools/mkdocs/"
+    },
+    {
+     "body_sha256": "f06862160c4b61b89089ebb728e51575d3de503c4f8513a596e63f1191b0c249",
+     "bytes": 18212,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 77.235,
+     "status": 200,
+     "url": "https://about.readthedocs.com/tools/",
+     "url_requested": "https://about.readthedocs.com/tools/"
+    },
+    {
+     "body_sha256": "b04ead3ddbf6d8bf74aee89055b72cdbb56c920246cda6b7a20b448b79694653",
+     "bytes": 21285,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://about.readthedocs.com/?ref=app.readthedocs.org",
+     "latency_ms": 92.096,
+     "status": 200,
+     "url": "https://about.readthedocs.com/comparisons/",
+     "url_requested": "https://about.readthedocs.com/comparisons/"
+    }
+   ],
+   "prereg_label_is_registrable_domain": false,
+   "robots_status": 200,
+   "robots_url": "https://readthedocs.io/robots.txt",
+   "site_key": "readthedocs.io"
+  },
+  "rubygems.org": {
+   "base_url": "https://rubygems.org",
+   "category": "package registry",
+   "derived_registrable_domain": "rubygems.org",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 9,
+   "notes": [
+    "page_cap_reached_10"
+   ],
+   "ordinal": 10,
+   "origin_netloc": "rubygems.org",
+   "pages": [
+    {
+     "body_sha256": "697f9ded20c3d66df9d69d3f0101ed0e75bfec81225b1b4d4b46762c12e68965",
+     "bytes": 38740,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 6.589,
+     "status": 200,
+     "url": "https://rubygems.org/",
+     "url_requested": "https://rubygems.org"
+    },
+    {
+     "body_sha256": "d7a8927b23c481f456a03bece9dc10f510d0b1341a4a16a7d3e99c2f23bf274b",
+     "bytes": 44152,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 5.76,
+     "status": 200,
+     "url": "https://rubygems.org/stats",
+     "url_requested": "https://rubygems.org/stats"
+    },
+    {
+     "body_sha256": "642d7a9effbd38276e1ca7447cd0aeb9df61cd20372af2bfa63ccf37ec6428ce",
+     "bytes": 34652,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 4.128,
+     "status": 200,
+     "url": "https://rubygems.org/pages/about",
+     "url_requested": "https://rubygems.org/pages/about"
+    },
+    {
+     "body_sha256": "19b0141fdb0b756f72cb2357f25e2ba21b5cd03c91bead1b55420c7cefc7ca06",
+     "bytes": 33457,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 4.885,
+     "status": 200,
+     "url": "https://rubygems.org/pages/data",
+     "url_requested": "https://rubygems.org/pages/data"
+    },
+    {
+     "body_sha256": "31059e4943bfcae5354694ac2f3eae19c8fd846b8d19d4d8cccee5f0180b0ecc",
+     "bytes": 38282,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 5.236,
+     "status": 200,
+     "url": "https://rubygems.org/pages/security",
+     "url_requested": "https://rubygems.org/pages/security"
+    },
+    {
+     "body_sha256": "ae6a9605504f705ddc457215e0021400583b1e87e93874929495d58afe76e41c",
+     "bytes": 35292,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 177.114,
+     "status": 200,
+     "url": "https://rubygems.org/sign_in",
+     "url_requested": "https://rubygems.org/sign_in"
+    },
+    {
+     "body_sha256": "8130740febefa24258424afac6a195dd4a6c1aa58bcda31b13f43ad184996372",
+     "bytes": 35390,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 174.132,
+     "status": 200,
+     "url": "https://rubygems.org/sign_up",
+     "url_requested": "https://rubygems.org/sign_up"
+    },
+    {
+     "body_sha256": "5f253da7337e2300f10549655adcaf4248fdc5d543dd6b445074ef94e7998845",
+     "bytes": 36256,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 450.976,
+     "status": 200,
+     "url": "https://rubygems.org/sign_in",
+     "url_requested": "https://rubygems.org/dashboard"
+    },
+    {
+     "body_sha256": "ea3f5348ddc88b6b9fd8840fd57647bbc2ae50df227297361f7d0c1525ab5017",
+     "bytes": 36256,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 132.731,
+     "status": 200,
+     "url": "https://rubygems.org/sign_in",
+     "url_requested": "https://rubygems.org/profile/edit"
+    },
+    {
+     "body_sha256": "b198298bf4589e6c1852872183cfce922b17e2e8883f4807111f5e8a63071613",
+     "bytes": 36256,
+     "content_type": "text/html; charset=utf-8",
+     "depth": 1,
+     "discovered_from": "https://rubygems.org/",
+     "latency_ms": 133.536,
+     "status": 200,
+     "url": "https://rubygems.org/sign_in",
+     "url_requested": "https://rubygems.org/settings/edit"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://rubygems.org/robots.txt",
+   "site_key": "rubygems.org"
+  },
+  "sourceforge.net": {
+   "base_url": "https://sourceforge.net",
+   "category": "developer platform",
+   "derived_registrable_domain": "sourceforge.net",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 0,
+   "notes": [
+    "homepage_status_403",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 13,
+   "origin_netloc": "sourceforge.net",
+   "pages": [
+    {
+     "body_sha256": "041fba88034f63d681f85ab93ac0999a4198cd19f2465bc90435c547be21e6d7",
+     "bytes": 5406,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 9.22,
+     "status": 403,
+     "url": "https://sourceforge.net/",
+     "url_requested": "https://sourceforge.net"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 200,
+   "robots_url": "https://sourceforge.net/robots.txt",
+   "site_key": "sourceforge.net"
+  },
+  "stackoverflow.com": {
+   "base_url": "https://stackoverflow.com",
+   "category": "q&a",
+   "derived_registrable_domain": "stackoverflow.com",
+   "discovered_blocked": [],
+   "discovered_filtered": [],
+   "errors": [],
+   "n_discovered_same_origin": 0,
+   "notes": [
+    "homepage_status_403",
+    "fewer_than_min_pages: 1 < 2"
+   ],
+   "ordinal": 5,
+   "origin_netloc": "stackoverflow.com",
+   "pages": [
+    {
+     "body_sha256": "791820aa001598cc1a90d728de1316e5785f99c1a29c5e88c375633a31ccdb3d",
+     "bytes": 5124,
+     "content_type": "text/html; charset=UTF-8",
+     "depth": 0,
+     "discovered_from": null,
+     "latency_ms": 58.308,
+     "status": 403,
+     "url": "https://stackoverflow.com/questions",
+     "url_requested": "https://stackoverflow.com"
+    }
+   ],
+   "prereg_label_is_registrable_domain": true,
+   "robots_status": 418,
+   "robots_url": "https://stackoverflow.com/robots.txt",
+   "site_key": "stackoverflow.com"
+  }
+ },
+ "total_body_bytes_stored": 23519919,
+ "user_agent": "SPIDER-Research/1.0"
+}
