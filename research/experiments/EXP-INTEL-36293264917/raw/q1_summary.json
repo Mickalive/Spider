@@ -1,0 +1,12 @@
+{
+  "outcome": "NOT_FOUND",
+  "bounded_recall": 1.0,
+  "mandated_targets": 8,
+  "searched": 8,
+  "found_count": 0,
+  "partial_count": 0,
+  "not_found_count": 8,
+  "unmeasured_count": 0,
+  "found_sources": [],
+  "partial_sources": []
+}

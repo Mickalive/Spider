@@ -1,0 +1,20 @@
+{
+  "PC-KNOWN-TRANSFER-PAPER": {
+    "target_id": "pc_known_transfer_paper",
+    "name": "WebShop (Yao et al.) - Positive Control",
+    "resolution_status": "LOCATED",
+    "retrieval_status": "SUCCESS",
+    "q1_score": "PARTIAL",
+    "extracted_fields": [],
+    "pass": true,
+    "note": "Positive control passes if pipeline detects at least transfer_success_N and holdout_rule"
+  },
+  "NC-FABRICATED-CLAIM": {
+    "target_id": "nc_fabricated_claim",
+    "name": "Fabricated Cross-Site Transfer Claim (Null Control)",
+    "resolution_status": "NOT_LOCATED",
+    "q1_score": "UNMEASURED",
+    "pass": true,
+    "note": "Null control passes if fabricated claim is NOT_LOCATED or UNVERIFIED, fails if accepted as FOUND/PARTIAL"
+  }
+}

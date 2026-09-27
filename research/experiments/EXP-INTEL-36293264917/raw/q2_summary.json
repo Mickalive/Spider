@@ -1,0 +1,25 @@
+{
+  "outcome": "PARTIAL",
+  "bounded_recall": 1.0,
+  "mandated_targets": 1,
+  "searched": 1,
+  "located_count": 0,
+  "partial_count": 1,
+  "not_located_count": 0,
+  "unmeasured_count": 0,
+  "located_sources": [],
+  "partial_sources": [
+    {
+      "target_id": "activity_frames",
+      "name": "Activity Frames",
+      "fields": [
+        "delegable_recurrence_fraction_h",
+        "overhead_ratio_R",
+        "uncertainty_or_range"
+      ],
+      "missing": [
+        "accounting_convention"
+      ]
+    }
+  ]
+}
