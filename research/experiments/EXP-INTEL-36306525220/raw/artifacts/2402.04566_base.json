@@ -1,0 +1,20 @@
+{
+ "abstract": "Radiotherapy is a primary treatment for cancers with the aim of applying sufficient radiation dose to the planning target volume (PTV) while minimizing dose hazards to the organs at risk (OARs). Convolutional neural networks (CNNs) have automated the radiotherapy plan-making by predicting the dose maps. However, current CNN-based methods ignore the remarkable dose difference in the dose map, i.e., high dose value in the interior PTV while low value in the exterior PTV, leading to a suboptimal prediction. In this paper, we propose a triplet-constraint transformer (TCtrans) with multi-scale refinement to predict the high-quality dose distribution. Concretely, a novel PTV-guided triplet constraint is designed to refine dose feature representations in the interior and exterior PTV by utilizing the explicit geometry of PTV. Furthermore, we introduce a multi-scale refinement (MSR) module to effectively fulfill the triplet constraint in different decoding layers with multiple scales. Besides, a transformer encoder is devised to learn the important global dosimetric knowledge. Experiments on a clinical cervical cancer dataset demonstrate the superiority of our method.",
+ "arxiv_id_returned": "2402.04566",
+ "authors": [
+  "Wen, Lu",
+  "Zhang, Qihun",
+  "Feng, Zhenghao",
+  "Xu, Yuanyuan",
+  "Chen, Xiao",
+  "Zhou, Jiliu",
+  "Wang, Yan"
+ ],
+ "available_versions": [
+  1
+ ],
+ "citation_date": "2024/02/07",
+ "comments": "accepted by 2024 IEEE ISBI",
+ "sha256_abs_page": "40a82a27b8eaba549a40b835d56522c0a4ed82a843244749a42d7c052afd74b7",
+ "title": "Triplet-constraint Transformer with Multi-scale Refinement for Dose Prediction in Radiotherapy"
+}

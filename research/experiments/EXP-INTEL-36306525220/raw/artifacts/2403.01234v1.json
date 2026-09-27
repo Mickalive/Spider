@@ -1,0 +1,17 @@
+{
+ "abstract": "Exploring molecular spaces is crucial for advancing our understanding of chemical properties and reactions, leading to groundbreaking innovations in materials science, medicine, and energy. This paper explores an approach for active learning in molecular discovery using Deep Kernel Learning (DKL), a novel approach surpassing the limits of classical Variational Autoencoders (VAEs). Employing the QM9 dataset, we contrast DKL with traditional VAEs, which analyze molecular structures based on similarity, revealing limitations due to sparse regularities in latent spaces. DKL, however, offers a more holistic perspective by correlating structure with properties, creating latent spaces that prioritize molecular functionality. This is achieved by recalculating embedding vectors iteratively, aligning with the experimental availability of target properties. The resulting latent spaces are not only better organized but also exhibit unique characteristics such as concentrated maxima representing molecular functionalities and a correlation between predictive uncertainty and error. Additionally, the formation of exclusion regions around certain compounds indicates unexplored areas with potential for groundbreaking functionalities. This study underscores DKL's potential in molecular research, offering new avenues for understanding and discovering molecular functionalities beyond classical VAE limitations.",
+ "arxiv_id_returned": "2403.01234",
+ "authors": [
+  "Ghosh, Ayana",
+  "and, Maxim Ziatdinov",
+  "Kalinin, Sergei V."
+ ],
+ "available_versions": [
+  1,
+  2
+ ],
+ "citation_date": "2024/03/02",
+ "comments": "",
+ "sha256_abs_page": "560096df9a1c9f794bfada2bf1df6e85d4d98248c3c18cf97e4e210bfb95b12a",
+ "title": "Active Deep Kernel Learning of Molecular Functionalities: Realizing Dynamic Structural Embeddings"
+}

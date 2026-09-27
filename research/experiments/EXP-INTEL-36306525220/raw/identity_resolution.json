@@ -1,0 +1,965 @@
+{
+ "experiment_id": "EXP-INTEL-36306525220",
+ "frozen_matching_rule_source": "prereg.md Section 4.1/4.2, spec.json identity_resolution.matching_rule",
+ "schema_version": 1,
+ "stage": "identity_resolution",
+ "targets": {
+  "ActivityFrames": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1
+     ],
+     "expected_base": "2608.05784",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2608.05784v1",
+     "pass": true,
+     "returned_base": "2608.05784"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "Activity Frames",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.2,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "activity",
+      "frames",
+      "agent",
+      "memory",
+      "replay",
+      "compilation"
+     ],
+     "matched": [
+      "activity",
+      "frames",
+      "agent",
+      "memory",
+      "replay"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [
+    "C3_author_unevaluable_TBD"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2608.05784",
+   "returned_authors": [
+    "Iyamu, Nossa"
+   ],
+   "returned_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay",
+   "target_arxiv_id": "2608.05784v1",
+   "target_system": "ActivityFrames",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "AgentBench-web": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3
+     ],
+     "expected_base": "2308.03688",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2308.03688v2",
+     "pass": true,
+     "returned_base": "2308.03688"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "AgentBench",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.2,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "AgentBench: Evaluating LLMs as Agents"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Liu",
+      "Zhang",
+      "Yang",
+      "Chen"
+     ],
+     "matched": [
+      "Liu",
+      "Zhang",
+      "Yang",
+      "Chen"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "Liu, Xiao",
+      "Yu, Hao",
+      "Zhang, Hanchen",
+      "Xu, Yifan",
+      "Lei, Xuanyu",
+      "Lai, Hanyu",
+      "Gu, Yu",
+      "Ding, Hangliang",
+      "Men, Kaiwen",
+      "Yang, Kejuan",
+      "Zhang, Shudan",
+      "Deng, Xiang",
+      "Zeng, Aohan",
+      "Du, Zhengxiao",
+      "Zhang, Chenhui",
+      "Shen, Sheng",
+      "Zhang, Tianjun",
+      "Su, Yu",
+      "Sun, Huan",
+      "Huang, Minlie",
+      "Dong, Yuxiao",
+      "Tang, Jie"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "agent",
+      "bench",
+      "web",
+      "evaluation"
+     ],
+     "matched": [
+      "agent",
+      "bench",
+      "evaluation"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [],
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "returned_arxiv_id": "2308.03688",
+   "returned_authors": [
+    "Liu, Xiao",
+    "Yu, Hao",
+    "Zhang, Hanchen",
+    "Xu, Yifan",
+    "Lei, Xuanyu",
+    "Lai, Hanyu",
+    "Gu, Yu",
+    "Ding, Hangliang",
+    "Men, Kaiwen",
+    "Yang, Kejuan",
+    "Zhang, Shudan",
+    "Deng, Xiang",
+    "Zeng, Aohan",
+    "Du, Zhengxiao",
+    "Zhang, Chenhui",
+    "Shen, Sheng",
+    "Zhang, Tianjun",
+    "Su, Yu",
+    "Sun, Huan",
+    "Huang, Minlie",
+    "Dong, Yuxiao",
+    "Tang, Jie"
+   ],
+   "returned_title": "AgentBench: Evaluating LLMs as Agents",
+   "target_arxiv_id": "2308.03688v2",
+   "target_system": "AgentBench-web",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "BrowserBench": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1
+     ],
+     "expected_base": "2408.01234",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2408.01234v1",
+     "pass": true,
+     "returned_base": "2408.01234"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "BrowserBench",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Entanglement Routing in Quantum Networks: A Comprehensive Survey"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "browserbench",
+      "agent",
+      "web"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_unevaluable_TBD",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2408.01234",
+   "returned_authors": [
+    "Abane, Amar",
+    "Cubeddu, Michael",
+    "Mai, Van Sy",
+    "Battou, Abdella"
+   ],
+   "returned_title": "Entanglement Routing in Quantum Networks: A Comprehensive Survey",
+   "target_arxiv_id": "2408.01234v1",
+   "target_system": "BrowserBench",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "BrowserGym": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "expected_base": "2401.15378",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2401.15378v2",
+     "pass": true,
+     "returned_base": "2401.15378"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "BrowserGym",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "A RAG-based Question Answering System Proposal for Understanding Islam: MufassirQAS LLM"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Drouin",
+      "Gagnon",
+      "Lacoste"
+     ],
+     "matched": [],
+     "pass": false,
+     "returned_authors": [
+      "Alan, Ahmet Yusuf",
+      "Karaarslan, Enis",
+      "Aydin, Omer"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "browser",
+      "gym",
+      "environment",
+      "agent"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_mismatch",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2401.15378",
+   "returned_authors": [
+    "Alan, Ahmet Yusuf",
+    "Karaarslan, Enis",
+    "Aydin, Omer"
+   ],
+   "returned_title": "A RAG-based Question Answering System Proposal for Understanding Islam: MufassirQAS LLM",
+   "target_arxiv_id": "2401.15378v2",
+   "target_system": "BrowserGym",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "Crux": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1
+     ],
+     "expected_base": "2406.01234",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2406.01234v1",
+     "pass": true,
+     "returned_base": "2406.01234"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "Crux",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Achieving Tractable Minimax Optimal Regret in Average Reward MDPs"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "crux",
+      "agent",
+      "web"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_unevaluable_TBD",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2406.01234",
+   "returned_authors": [
+    "Boone, Victor",
+    "Zhang, Zihan"
+   ],
+   "returned_title": "Achieving Tractable Minimax Optimal Regret in Average Reward MDPs",
+   "target_arxiv_id": "2406.01234v1",
+   "target_system": "Crux",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "Mind2Web": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3
+     ],
+     "expected_base": "2306.06070",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2306.06070v3",
+     "pass": true,
+     "returned_base": "2306.06070"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "Mind2Web",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.125,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Mind2Web: Towards a Generalist Agent for the Web"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Deng",
+      "Gu",
+      "Chen",
+      "Liu"
+     ],
+     "matched": [
+      "Deng",
+      "Gu",
+      "Chen"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "Deng, Xiang",
+      "Gu, Yu",
+      "Zheng, Boyuan",
+      "Chen, Shijie",
+      "Stevens, Samuel",
+      "Wang, Boshi",
+      "Sun, Huan",
+      "Su, Yu"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "agent",
+      "mind",
+      "automation"
+     ],
+     "matched": [
+      "web",
+      "agent",
+      "mind"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [],
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "returned_arxiv_id": "2306.06070",
+   "returned_authors": [
+    "Deng, Xiang",
+    "Gu, Yu",
+    "Zheng, Boyuan",
+    "Chen, Shijie",
+    "Stevens, Samuel",
+    "Wang, Boshi",
+    "Sun, Huan",
+    "Su, Yu"
+   ],
+   "returned_title": "Mind2Web: Towards a Generalist Agent for the Web",
+   "target_arxiv_id": "2306.06070v3",
+   "target_system": "Mind2Web",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "MiniWoB++": {
+   "checks": {},
+   "failed_conditions": [
+    "C0_no_artifact_retrieved"
+   ],
+   "resolution_status": "NOT_LOCATED",
+   "returned_arxiv_id": null,
+   "returned_authors": null,
+   "returned_title": null,
+   "target_arxiv_id": "1802.08827v3",
+   "target_system": "MiniWoB++",
+   "transport_error": "HTTPError 404",
+   "transport_status": 404
+  },
+  "RULER": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2
+     ],
+     "expected_base": "2405.01234",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2405.01234v1",
+     "pass": true,
+     "returned_base": "2405.01234"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "RULER",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Matrix invertible extensions over commutative rings. Part III: Hermite rings"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "ruler",
+      "agent",
+      "web",
+      "evaluation"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_unevaluable_TBD",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2405.01234",
+   "returned_authors": [
+    "C\u0103lug\u0103reanu, Grigore",
+    "Pop, Horia F.",
+    "Vasiu, Adrian"
+   ],
+   "returned_title": "Matrix invertible extensions over commutative rings. Part III: Hermite rings",
+   "target_arxiv_id": "2405.01234v1",
+   "target_system": "RULER",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "SeeAct": {
+   "checks": {},
+   "failed_conditions": [
+    "C0_no_artifact_retrieved"
+   ],
+   "resolution_status": "NOT_LOCATED",
+   "returned_arxiv_id": null,
+   "returned_authors": null,
+   "returned_title": null,
+   "target_arxiv_id": "2402.04566v2",
+   "target_system": "SeeAct",
+   "transport_error": "HTTPError 404",
+   "transport_status": 404
+  },
+  "WebAgent": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2
+     ],
+     "expected_base": "2403.01234",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2403.01234v1",
+     "pass": true,
+     "returned_base": "2403.01234"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "WebAgent",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Active Deep Kernel Learning of Molecular Functionalities: Realizing Dynamic Structural Embeddings"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "agent"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_unevaluable_TBD",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2403.01234",
+   "returned_authors": [
+    "Ghosh, Ayana",
+    "and, Maxim Ziatdinov",
+    "Kalinin, Sergei V."
+   ],
+   "returned_title": "Active Deep Kernel Learning of Molecular Functionalities: Realizing Dynamic Structural Embeddings",
+   "target_arxiv_id": "2403.01234v1",
+   "target_system": "WebAgent",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "WebArena": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "expected_base": "2307.13854",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2307.13854v3",
+     "pass": true,
+     "returned_base": "2307.13854"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "WebArena",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.111111,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "WebArena: A Realistic Web Environment for Building Autonomous Agents"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Zhou",
+      "Liu",
+      "Gu",
+      "Chen"
+     ],
+     "matched": [
+      "Zhou",
+      "Chen"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "Zhou, Shuyan",
+      "Xu, Frank F.",
+      "Zhu, Hao",
+      "Zhou, Xuhui",
+      "Lo, Robert",
+      "Sridhar, Abishek",
+      "Cheng, Xianyi",
+      "Ou, Tianyue",
+      "Bisk, Yonatan",
+      "Fried, Daniel",
+      "Alon, Uri",
+      "Neubig, Graham"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "arena",
+      "agent",
+      "benchmark",
+      "environment"
+     ],
+     "matched": [
+      "web",
+      "arena",
+      "agent",
+      "benchmark",
+      "environment"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [],
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "returned_arxiv_id": "2307.13854",
+   "returned_authors": [
+    "Zhou, Shuyan",
+    "Xu, Frank F.",
+    "Zhu, Hao",
+    "Zhou, Xuhui",
+    "Lo, Robert",
+    "Sridhar, Abishek",
+    "Cheng, Xianyi",
+    "Ou, Tianyue",
+    "Bisk, Yonatan",
+    "Fried, Daniel",
+    "Alon, Uri",
+    "Neubig, Graham"
+   ],
+   "returned_title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+   "target_arxiv_id": "2307.13854v3",
+   "target_system": "WebArena",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "WebCanvas": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2
+     ],
+     "expected_base": "2407.01234",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2407.01234v1",
+     "pass": true,
+     "returned_base": "2407.01234"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "WebCanvas",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Optimal Control of a Power Storage Facility with Variable Payoffs"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "TBD"
+     ],
+     "matched": [],
+     "pass": null,
+     "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "webcanvas",
+      "agent",
+      "web"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_unevaluable_TBD",
+    "C4_domain_keyword_absent"
+   ],
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2407.01234",
+   "returned_authors": [
+    "O'Brien, Fraser J W",
+    "Johnson, Timothy C"
+   ],
+   "returned_title": "Optimal Control of a Power Storage Facility with Variable Payoffs",
+   "target_arxiv_id": "2407.01234v1",
+   "target_system": "WebCanvas",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "WebShop": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "expected_base": "2207.01206",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2207.01206v4",
+     "pass": true,
+     "returned_base": "2207.01206"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "WebShop",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.090909,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "WebShop: Towards Scalable Real-World Web Interaction with Grounded Language Agents"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Yao",
+      "Chen",
+      "Yang",
+      "Narasimhan"
+     ],
+     "matched": [
+      "Yao",
+      "Chen",
+      "Yang",
+      "Narasimhan"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "Yao, Shunyu",
+      "Chen, Howard",
+      "Yang, John",
+      "Narasimhan, Karthik"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "shop",
+      "agent",
+      "e-commerce"
+     ],
+     "matched": [
+      "web",
+      "shop",
+      "agent",
+      "e-commerce"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [],
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "returned_arxiv_id": "2207.01206",
+   "returned_authors": [
+    "Yao, Shunyu",
+    "Chen, Howard",
+    "Yang, John",
+    "Narasimhan, Karthik"
+   ],
+   "returned_title": "WebShop: Towards Scalable Real-World Web Interaction with Grounded Language Agents",
+   "target_arxiv_id": "2207.01206v4",
+   "target_system": "WebShop",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "WebVoyager": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "expected_base": "2401.13919",
+     "frozen_version_exists": true,
+     "frozen_version_requested": "2401.13919v4",
+     "pass": true,
+     "returned_base": "2401.13919"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "WebVoyager",
+     "expected_title_is_substring": true,
+     "expected_token_coverage_in_title": 1.0,
+     "jaccard_full_title_tokens": 0.090909,
+     "jaccard_threshold": 0.85,
+     "pass": true,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "He",
+      "Zhang",
+      "Yao",
+      "Chen"
+     ],
+     "matched": [
+      "He",
+      "Zhang",
+      "Yao"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "He, Hongliang",
+      "Yao, Wenlin",
+      "Ma, Kaixin",
+      "Yu, Wenhao",
+      "Dai, Yong",
+      "Zhang, Hongming",
+      "Lan, Zhenzhong",
+      "Yu, Dong"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "voyager",
+      "agent",
+      "multimodal",
+      "browser"
+     ],
+     "matched": [
+      "web",
+      "voyager",
+      "agent",
+      "multimodal"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [],
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "returned_arxiv_id": "2401.13919",
+   "returned_authors": [
+    "He, Hongliang",
+    "Yao, Wenlin",
+    "Ma, Kaixin",
+    "Yu, Wenhao",
+    "Dai, Yong",
+    "Zhang, Hongming",
+    "Lan, Zhenzhong",
+    "Yu, Dong"
+   ],
+   "returned_title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models",
+   "target_arxiv_id": "2401.13919v4",
+   "target_system": "WebVoyager",
+   "transport_error": null,
+   "transport_status": 200
+  }
+ },
+ "title_coverage_threshold": 0.85,
+ "title_jaccard_threshold": 0.85,
+ "transport_probes": [
+  {
+   "bytes": 0,
+   "error": "HTTPError 406",
+   "http_status": 406,
+   "label": "arxiv_atom_api_export",
+   "url": "https://export.arxiv.org/api/query?id_list=2207.01206v4&max_results=1"
+  },
+  {
+   "bytes": 0,
+   "error": "HTTPError 406",
+   "http_status": 406,
+   "label": "arxiv_atom_api_www",
+   "url": "https://arxiv.org/api/query?id_list=2207.01206v4&max_results=1"
+  },
+  {
+   "bytes": 44083,
+   "error": null,
+   "http_status": 200,
+   "label": "arxiv_abs_page",
+   "url": "https://arxiv.org/abs/2207.01206v4"
+  },
+  {
+   "bytes": 151,
+   "error": null,
+   "http_status": 200,
+   "label": "semantic_scholar",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/arXiv:2207.01206?fields=title"
+  }
+ ]
+}

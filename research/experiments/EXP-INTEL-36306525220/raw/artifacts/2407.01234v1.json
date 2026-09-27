@@ -1,0 +1,16 @@
+{
+ "abstract": "We present a methodology for determining the relationship between the optimal control points of a power storage facility and a number of different factors including storage level and temperature. The interaction between different factors is considered to allow for the identification of a precise optimal control strategy to maximise the profits of a power storage facility under a variety of different conditions. The methodology is based upon traditional stochastic techniques, however by working directly with excess demand data is model independent and does not require identification of the underlying process.",
+ "arxiv_id_returned": "2407.01234",
+ "authors": [
+  "O'Brien, Fraser J W",
+  "Johnson, Timothy C"
+ ],
+ "available_versions": [
+  1,
+  2
+ ],
+ "citation_date": "2024/07/01",
+ "comments": "32 pages, 7 figures, submission for International Conference on Scientific Computation and Differential Equations (2024)",
+ "sha256_abs_page": "a46259d85d6db02580590a3b67435f60ee435dc7c47c5dc54eb2587e0d91f3cf",
+ "title": "Optimal Control of a Power Storage Facility with Variable Payoffs"
+}

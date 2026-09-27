@@ -1,0 +1,852 @@
+{
+ "controls_verdicts": {
+  "NC-FABRICATED-CLAIM": {
+   "evidence_ref": "raw/controls_result.json -> controls.NC-FABRICATED-CLAIM",
+   "expected_behavior": "arXiv:2609.99999 is not located and the resolver emits NOT_LOCATED",
+   "note": "sanity check only; per prereg 6.4 it has no power and triggers nothing",
+   "observed_behavior": "HTTP 404; resolution_status=NOT_LOCATED",
+   "pass_fail": true
+  },
+  "NC-REAL-BUT-WRONG": {
+   "evidence_ref": "raw/controls_result.json -> controls.NC-REAL-BUT-WRONG; raw/html/ctrl_1802.05012v2.html; raw/identity_resolution.json",
+   "expected_behavior": "arXiv:1802.05012v2 is retrieved as a REAL artifact, the resolver flags the identity mismatch against the named system WebArena, and emits UNMEASURED rather than NOT_FOUND",
+   "note": "The domain-keyword condition alone would have passed (the abstract contains the token 'agent'); the identity gate has power only as a conjunction, and the conjunction fired.",
+   "observed_behavior": "artifact_is_real=True; returned title=\"'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer\"; failed conditions=['C2_title_mismatch', 'C3_author_mismatch']; resolution_status=AMBIGUOUS -> row scored_as=UNMEASURED; emitted NOT_FOUND=False",
+   "pass_fail": true
+  },
+  "PC-COST-ACCOUNTING": {
+   "evidence_ref": "raw/controls_result.json -> controls.PC-COST-ACCOUNTING; raw/field_determinations.json -> rows[part==1]; raw/fulltext/2608.05784.txt",
+   "expected_behavior": "artifact passes prereg 4.1 identity resolution AND all 10 prereg 5.1 fields are determined with evidence quotes",
+   "failure_reasons": [
+    "artifact arXiv:2608.05784v1 does not satisfy the frozen prereg 4.1 identity conjunction: failed conditions ['C3_author_unevaluable_TBD']. spec.json identity_resolution.frozen_target_list freezes expected_authors=['TBD'] for this entry, and prereg 4.1(3) requires at least one author-name substring match against the expected author list, so condition 3 is unsatisfiable as frozen. C1 (exact base id 2608.05784, frozen version v1 exists), C2 (expected title 'Activity Frames' is a case-insensitive substring of the returned title, token coverage 1.0) and C4 (5 of 6 domain keywords present in the abstract) all pass."
+   ],
+   "field_map": {
+    "Routine_Overhead_Ratio_R": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "Routine_Overhead_Ratio_R",
+       "has_absence_evidence": false,
+       "has_quote": true
+      },
+      {
+       "determination": "EXTRACTED",
+       "field": "Routine_Overhead_Ratio_R_ceiling_rung",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "accounting_convention": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "accounting_convention",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "break_even_reuse_count_fstar": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "break_even_reuse_count_fstar",
+       "has_absence_evidence": true,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "delegable_recurrence_h": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "delegable_recurrence_h",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "denominator": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "denominator",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "marginal_cost_cached_vs_derived": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "marginal_cost_cached_vs_derived",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "modeled_vs_measured": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "modeled_vs_measured",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "real_cost_advantage_persistence": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "real_cost_advantage_persistence",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "staleness_forgetting_maintenance_cost": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "staleness_forgetting_maintenance_cost",
+       "has_absence_evidence": true,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "stated_uncertainty": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "stated_uncertainty",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    }
+   },
+   "observed_behavior": "identity resolution_status=AMBIGUOUS (failed ['C3_author_unevaluable_TBD']); 10/10 prereg 5.1 fields determined (14 with verbatim quotes, 0 recorded as absence with absence evidence)",
+   "pass_fail": false
+  },
+  "PC-PERFORMANCE-ENVELOPE": {
+   "evidence_ref": "raw/controls_result.json -> controls.PC-PERFORMANCE-ENVELOPE; raw/field_determinations.json -> rows[part==2 and system=='WebVoyager']",
+   "expected_behavior": "artifact passes prereg 4.1 identity resolution AND success_rate, denominator, evaluation_convention and benchmark_split are all extracted with evidence quotes",
+   "observed_behavior": "identity resolution_status=CORRECTLY_RESOLVED; per-field extracted={'success_rate': True, 'denominator': True, 'evaluation_convention': True, 'benchmark_split': True}",
+   "pass_fail": true
+  }
+ },
+ "coverage_summary": {
+  "correctly_resolved": 5,
+  "correctly_resolved_names": [
+   "AgentBench-web",
+   "Mind2Web",
+   "WebArena",
+   "WebShop",
+   "WebVoyager"
+  ],
+  "identity_resolution_recall": 0.357143,
+  "identity_resolution_recall_denominator_definition": "correctly_resolved / named_systems_searched over the 14 frozen entries of spec.json identity_resolution.frozen_target_list; no per-part partition of the frozen list exists, so the same denominator is used for Parts 1, 2 and 3",
+  "identity_resolution_recall_excluding_prereg_declared_placeholders": 0.555556,
+  "identity_resolution_recall_over_entries_with_real_author_lists": 0.625,
+  "n_entries_with_real_author_lists": 8,
+  "n_excluding_prereg_declared_placeholders": 9,
+  "named_systems_searched": 14,
+  "recall_robust_to_denominator_choice": false,
+  "snowball_coverage": {
+   "cap": 25,
+   "papers_examined": 0,
+   "papers_resolved": 0,
+   "reference_strings_found": 1,
+   "selection_rule": "raw/references/snowball_candidates.json -> selection_rule",
+   "usable_candidates_under_frozen_inclusion_rule": 0
+  },
+  "systems_not_in_frozen_list": [
+   "Agent Workflow Memory (Wang, Mao, Fried, Neubig 2024)",
+   "WebCoach",
+   "ReasoningBank",
+   "any published system reporting a measured break-even reuse count f*"
+  ],
+  "unsearched_systems": [],
+  "unsearched_systems_note": "The frozen target list is a closed list of 14 named systems; every entry was searched. The unsearched space is the published literature outside that list, which prereg 4.4 delegates to a bounded snowball. The snowball was ATTEMPTED and yielded 0 usable candidates (raw/references/snowball_candidates.json): the PC artifact's reference list prints no arXiv identifiers, so the frozen inclusion rule ('reference strings that contain an arXiv identifier') selects nothing."
+ },
+ "experiment_id": "EXP-INTEL-36306525220",
+ "frozen_decision_rule_source": "spec.json decision_rule, prereg.md Sections 7 and 8",
+ "gates": {
+  "gate_1_pc_cost_accounting_fails": {
+   "consequence": "MEASUREMENT_INVALID for entire experiment (prereg 7.1)",
+   "fired": true,
+   "fired_because": [
+    "artifact arXiv:2608.05784v1 does not satisfy the frozen prereg 4.1 identity conjunction: failed conditions ['C3_author_unevaluable_TBD']. spec.json identity_resolution.frozen_target_list freezes expected_authors=['TBD'] for this entry, and prereg 4.1(3) requires at least one author-name substring match against the expected author list, so condition 3 is unsatisfiable as frozen. C1 (exact base id 2608.05784, frozen version v1 exists), C2 (expected title 'Activity Frames' is a case-insensitive substring of the returned title, token coverage 1.0) and C4 (5 of 6 domain keywords present in the abstract) all pass."
+   ]
+  },
+  "gate_2_nc_real_but_wrong_fails_to_flag": {
+   "consequence": "MEASUREMENT_INVALID for entire experiment (prereg 7.2)",
+   "fired": false
+  },
+  "gate_3_any_target_scored_NOT_FOUND": {
+   "consequence": "MEASUREMENT_INVALID for entire experiment (prereg 7.3)",
+   "count_rows_scored_as_NOT_FOUND": 0,
+   "count_rows_with_resolution_status_NOT_FOUND": 0,
+   "fired": false
+  },
+  "gate_4_pc_performance_envelope_fails": {
+   "consequence": "MEASUREMENT_INVALID for Part 2 only (prereg 7.4)",
+   "fired": false
+  },
+  "gate_5_identity_resolution_recall_below_0.6": {
+   "consequence": "that part is INCONCLUSIVE (prereg 7.5)",
+   "fired": true,
+   "recall": 0.357143,
+   "threshold": 0.6
+  }
+ },
+ "generated_at": "2026-09-27T09:14:43.926837+00:00",
+ "integrity_self_checks": {
+  "rows_exposing_denominator_when_value_present": 17,
+  "rows_exposing_modeled_label_when_modeled": 7,
+  "rows_scored_NOT_FOUND": 0,
+  "rows_scored_UNMEASURED": 11,
+  "rows_total": 38,
+  "rows_with_resolution_status_NOT_FOUND": 0,
+  "rows_with_value_null": 13,
+  "rows_with_value_null_and_absence_evidence": 13,
+  "rows_with_value_null_and_no_absence_evidence": 0
+ },
+ "lane": "intel",
+ "overall_frozen_outcome": "MEASUREMENT_INVALID",
+ "overall_frozen_outcome_basis": "prereg 8 OVERALL row 1 (any part MEASUREMENT_INVALID)",
+ "part_outcome_basis": {
+  "part1_outcome_basis": "prereg 8 Part 1 row 1 (Gate 1, 2 or 3 triggered)",
+  "part2_outcome_basis": "prereg 8 Part 2 row 4 (identity resolution recall < 0.6)",
+  "part3_outcome_basis": "prereg 8 Part 3 row 4 (identity resolution recall < 0.6)"
+ },
+ "part_outcomes": {
+  "part1_outcome": "MEASUREMENT_INVALID",
+  "part2_outcome": "INCONCLUSIVE",
+  "part3_outcome": "INCONCLUSIVE"
+ },
+ "schema_version": 1,
+ "table": [
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_mismatch', 'C4_domain_keyword_absent']. Frozen expected_title='BrowserGym', frozen expected_authors=['Drouin', 'Gagnon', 'Lacoste'], requested id 2401.15378v2 returned 'A RAG-based Question Answering System Proposal for Understanding Islam: MufassirQAS LLM'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2401.15378",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "BrowserGym",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_mismatch', 'C4_domain_keyword_absent']. Frozen expected_title='MiniWoB', frozen expected_authors=['Liu', 'Shi', 'Zhou', 'Chen'], requested id 1802.08827 returned 'Integrable spin chains with random interactions'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "1802.08827",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "MiniWoB++",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch']. Frozen expected_title='SeeAct', frozen expected_authors=['Zheng', 'Chen', 'Yang', 'Liu'], requested id 2402.04566 returned 'Triplet-constraint Transformer with Multi-scale Refinement for Dose Prediction in Radiotherapy'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2402.04566",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "SeeAct",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_unevaluable_TBD', 'C4_domain_keyword_absent']. Frozen expected_title='Crux', frozen expected_authors=['TBD'], requested id 2406.01234v1 returned 'Achieving Tractable Minimax Optimal Regret in Average Reward MDPs'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2406.01234",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "Crux",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_unevaluable_TBD', 'C4_domain_keyword_absent']. Frozen expected_title='WebAgent', frozen expected_authors=['TBD'], requested id 2403.01234v1 returned 'Active Deep Kernel Learning of Molecular Functionalities: Realizing Dynamic Structural Embeddings'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2403.01234",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "WebAgent",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_unevaluable_TBD', 'C4_domain_keyword_absent']. Frozen expected_title='RULER', frozen expected_authors=['TBD'], requested id 2405.01234v1 returned 'Matrix invertible extensions over commutative rings. Part III: Hermite rings'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2405.01234",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "RULER",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_unevaluable_TBD', 'C4_domain_keyword_absent']. Frozen expected_title='WebCanvas', frozen expected_authors=['TBD'], requested id 2407.01234v1 returned 'Optimal Control of a Power Storage Facility with Variable Payoffs'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2407.01234",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "WebCanvas",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C2_title_mismatch', 'C3_author_unevaluable_TBD', 'C4_domain_keyword_absent']. Frozen expected_title='BrowserBench', frozen expected_authors=['TBD'], requested id 2408.01234v1 returned 'Entanglement Routing in Quantum Networks: A Comprehensive Survey'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2408.01234",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "BrowserBench",
+   "value": null
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "Identity resolution failed under the frozen prereg 4.1 conjunction: failed conditions ['C3_author_unevaluable_TBD']. Frozen expected_title='Activity Frames', frozen expected_authors=['TBD'], requested id 2608.05784v1 returned 'Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay'. NOT converted to NOT_FOUND.",
+   "metric": "any_part_1_2_3_quantity",
+   "modeled_vs_measured": null,
+   "part": null,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2608.05784",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": null
+  },
+  {
+   "accounting_convention": "R = Cagent(k)/Creplay(k). NUMERATOR MODELED (what a memoryless screenshot-driven loop would spend, computed without executing an agent, an upper bound), DENOMINATOR MEASURED (the emitted guarded plan / minimal script, tokenized deterministically). Tokens counted with tiktoken under cl100k_base; priced with Anthropic's w*h/750 image-token rule plus a 350-token context read and 180 reasoning-output tokens per step",
+   "benchmark": null,
+   "denominator": "per routine instance; Rinject computed on the 20 most frequent action routines (614 recurring routines / 5,508 routine instances at action granularity)",
+   "evidence_for_absence": null,
+   "metric": "Routine_Overhead_Ratio_R",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "ling, because leading with the ceiling would invite a cherry-picking objection. Against the guarded skill plan the compiler actually emits, the median is Rinject = 60\u00d7 (interquartile59\u201362across the20compiled plans): injecting the compiled routine costs about one-sixtieth of re-deriving it from screen- shots. Against the minimal script, the median reaches the information-content ceilingRinfo = 343\u00d7 at action granularity, th",
+   "stated_uncertainty": "IQR 59-62x across the 20 compiled plans; min-max 167-509x",
+   "system": "ActivityFrames",
+   "value": 60.0
+  },
+  {
+   "accounting_convention": "same as operational rung: Rinfo = Cagent(k) / bare-information-content token count, NUMERATOR MODELED and DENOMINATOR MEASURED",
+   "benchmark": null,
+   "denominator": "per routine instance; 614 recurring / 5,508 instances action granularity; 261 recurring / 1,303 instances URL granularity",
+   "evidence_for_absence": null,
+   "metric": "Routine_Overhead_Ratio_R_ceiling_rung",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "d routine costs about one-sixtieth of re-deriving it from screen- shots. Against the minimal script, the median reaches the information-content ceilingRinfo = 343\u00d7 at action granularity, the largest ratio the routine\u2019s bare descrip- tion length can justify. Table 4 reports both rungs and, for Rinfo, the full distribution over routines. The ceiling is robust to the two knobs most likely to be accused",
+   "stated_uncertainty": "IQR 297-390x action granularity; 165-228x URL granularity; min-max 167-509x / 67-301x",
+   "system": "ActivityFrames",
+   "value": 343.0
+  },
+  {
+   "accounting_convention": "fraction of action steps falling inside a >=2-named-target recurring n-gram (k in 3..60, recurs >=3 times, sessions cut at inter-action gaps > 90 s)",
+   "benchmark": null,
+   "denominator": "fraction of all action steps on the corpus; in-sample; 51 active days / 128,756 frames",
+   "evidence_for_absence": null,
+   "metric": "delegable_recurrence_h",
+   "modeled_vs_measured": "measured",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "re that repeats constantly and carries no reusable work. Thedelegablerate is hspecific = 9.0% at action granularity (13.1%at URL granularity): the fraction of steps inside the\u2265 2-named-target routines of Section 7, that is, inside an identifiable, repeatable task. We report the gap83.1%\u2192 9.0%openly rather than quoting the larger figure: it is the difference between \u201cthe keyboard repeats\u201d a",
+   "stated_uncertainty": "URL-granularity counterpart 13.1%; raw recurrence h_raw=83.1%; temporal holdout out-of-sample 7.7% vs in-sample-on-training-days 8.6%",
+   "system": "ActivityFrames",
+   "value": 0.09
+  },
+  {
+   "accounting_convention": "temporal within-user holdout (same user, later in time; NOT a cross-population holdout)",
+   "benchmark": null,
+   "denominator": "fraction of action steps on the held-out final 11 active days of a 51-day corpus; routine table fit on the first 40 active days (4,847 routine signatures)",
+   "evidence_for_absence": null,
+   "metric": "delegable_recurrence_h_out_of_sample",
+   "modeled_vs_measured": "measured",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "t40active days (4,847routine signatures) and then ask what fraction of action steps on the held-out final11days fall into a routinealready knownfrom the training window. The out-of-sample predicted hit rate is7.7%, against an in-sample8.6%on the training days themselves. The modest8.6%\u2192 7.7% drop is the within-user temporal-drift gap (a same-user, later-in-time split, not a cross-population holdout), and 7.7%is the recurrence the cost accounting should carry; the all-fleet ceilingh (1\u2212 1/Rinfo)\u2248 7.7%follows",
+   "stated_uncertainty": "in-sample on the training days themselves 8.6%; drop 8.6%->7.7% attributed to within-user temporal drift",
+   "system": "ActivityFrames",
+   "value": 0.077
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "NOT_REPORTED_AS_A_COMPUTED_QUANTITY. The reuse count N appears only as a symbol inside the piecewise cost model of Eq. (1); the paper states 'the one input none of them measures is h on the pre-delegation passive corpus' and never solves Eq. (1) for a break-even N, so no f* is reported. Absence established over 69,607 characters of retrieved full text; 0 pattern hits for break-even/breakeven/break even reuse/reuse count/payback/amortization point/f*.",
+   "metric": "break_even_reuse_count_fstar",
+   "modeled_vs_measured": null,
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "her they supply an amortized per-task cost of a memory-backed agent, which we adopt as a cited frame, not a contribution: E[$/task] = (1\u2212hq) Cmiss p +hq(C hit+Cverify) +h(1\u2212q)C wrong + Cwrite N , (1) where h is recurrence, q the fraction of hits correctly matched, p the base success rate, N the reuse count, and the C-terms per-branch costs. Every term is al- ready priced in the works above; the one input none of them measures ish on thepre-delegationpassive corpus. Rollout-priced leaderboards observe the hit rate of tasks an agent was given and completed, a survivorship-biased quantity; the demand-sideh, how often the user\u2019s real work repeats whether or not an agent could ",
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": null
+  },
+  {
+   "accounting_convention": "three-arm modeled comparison at Sonnet-class list rates ($3/$15 per Mtok, output fraction 0.07), modeled from measured artifacts and token counts, NOT BILLED; arm B = compiled plan in context, arm C = deterministic local replay",
+   "benchmark": null,
+   "denominator": "per routine occurrence, 20 recurring routines, fleet total 32.8 Mtok / $125.81 under arm A",
+   "evidence_for_absence": null,
+   "metric": "marginal_cost_cached_vs_derived",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "ting with it in context; and arm C, determin- istic local replay. Relative to arm A (32.8Mtok, $125.81 over the fleet), injecting the plan (arm B) saves83.3% of tokens ($20.96, a6.0\u00d7 per-occurrence reduction), and local replay (arm C) saves40.8%($74.46,1 .7\u00d7). Two honesty notes. Arm B\u2019s modeled saving assumes the screenshot baseline of Eq. 2; the one live in-loop compar- ison we have, against an accessibility-tree agent, saved only\u224814%(Section 8.4), so read83 .3%as a modeled upper bound, not ",
+   "stated_uncertainty": "arm B modeled 83.3% token saving; arm C modeled 40.8% ($74.46, 1.7x); the only live in-loop comparison saved only ~14%",
+   "system": "ActivityFrames",
+   "value": 6.0
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": "NO_QUANTIFIED_STALENESS_FORGETTING_OR_MAINTENANCE_COST. The only staleness-adjacent statements are (a) unquantified 'interface drift that a live run must confirm', (b) 'stale attribution' which is a REPAIRED INPUT-RECORDER DEFECT (re-attributed to the temporally nearest snapshot), not a cost of retained state, and (c) a capture operating cost (9.5 GB corpus, ~0.19 GB per active day, OCR on 96% of frames, a11y tree present on 81.5% of frames so 18.5% would fall back to coordinates). No forgetting function, no refresh/invalidation cost, no measured cost of a stale replay is reported. Absence established over 69,607 characters of retrieved full text.",
+   "metric": "staleness_forgetting_maintenance_cost",
+   "modeled_vs_measured": null,
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "7%at the median ceiling Rinfo = 343). That99%is a per-covered- step ceiling, not a fleet saving: local replay reaches it only on the fraction of steps the compiler can guard, whose measured median is0.415, and it is exposed to interface drift that a live run must confirm (Section 8.4). A modeled three-arm comparison makes the gap be- tween ceiling and realized saving concrete. We price three ways of executing the20recurring routines at Sonnet- class list rates ($3/$15 per Mtok, output fraction0.07), modeled from measured artifacts and token counts, not billed: arm ",
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": null
+  },
+  {
+   "accounting_convention": "the paper reserves live billing; the on-hit zero-token case is live-confirmed once, the dollar savings are not",
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "real_cost_advantage_persistence",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "require the model fully out of the loop, which parametric replay is. Three bounds on this confirmation: it is one two-step routine; its plan was seeded from live accessibility names standing in for a mined routine (click-level grounding of the recorder is still under validation); and the guard-miss deopt path was not exercised. The full live three-arm billing with real usage JSON remains reserved. ReadR as a modeled ratio whose denominator \u2014 including its zero-token on-hit case \u2014 is now live-confirmed, and the dollar savings as a modeled ceiling awaiting live billing. Capture is not free.The instrument has an op- erating cost, which we report rather than hide. The corpus database is9.5GB, about0 .19GB per active day; on-device OCR runs on96%of frames, a continuous duty cycle; and the accessibility tree that ",
+   "stated_uncertainty": "the single live confirmation is one two-step routine, plan seeded from live accessibility names, guard-miss deopt path not exercised",
+   "system": "ActivityFrames",
+   "value": "no_measured_real_cost_advantage"
+  },
+  {
+   "accounting_convention": "tokens under cl100k_base for both numerator components and denominator; dollars only in the modeled three-arm table",
+   "benchmark": null,
+   "denominator": "Rinject over the 20 most frequent action routines out of 614 recurring action routines / 5,508 routine instances; Rinfo additionally over 261 recurring URL routines / 1,303 instances; R numerator priced per step at a typical 1512x982 capture (~2,500 tokens/step); compile cost median 0.5 ms at zero token cost; guard coverage median 0.415",
+   "evidence_for_absence": null,
+   "metric": "denominator",
+   "modeled_vs_measured": "measured",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "e guarded skill plan the compiler emits;Rinfo (ceiling) uses the min- imal replay script. Rinject is computed on the20most frequent action routines, so it carries no URL column. Rinfo medians are priced at a typical1512\u00d7 982screen; the resolution band re-prices the numerator at a conser- vative and a retina capture. Action URL Recurring routines 614 261 Routine instances 5,508 1,303 Rinject (guarded plan, operational) 60\u00d7n/a IQR / median plan ",
+   "stated_uncertainty": "corpus = one user, 51 active days, 128,756 frames, 232,898 input events (numerator/replay freeze); Section 6 systems numbers use an earlier freeze (61 days, 46 active, 109,735 frames)",
+   "system": "ActivityFrames",
+   "value": "corpus_and_ladder_denominators_declared"
+  },
+  {
+   "accounting_convention": "token counts via tiktoken cl100k_base for C_replay; C_agent priced from the Anthropic w*h/750 image-token rule plus fixed 350-token context read and 180-token reasoning write, WITHOUT EXECUTING AN AGENT; dollars at Sonnet-class list rates ($3/$15 per Mtok, output fraction 0.07) and explicitly not billed",
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "accounting_convention",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "0tokens of reasoning output. At a typical1512\u00d7 982capture this is about2 ,500tokens per step (1,979image+ 350 + 180), dominated by the screenshot. We are explicit thatCagent is what published screenshot-driven agent loopswould spend, computed without executing an agent, and that it is anupper bound: it assumes a screenshot baseline with no cross-step prompt caching, so an agent that reuses 8 context across steps or grounds on the accessibility tree instead of a fresh screenshot spends fewer tokens per step and R narrows accordingly. Section 8.4 reports a live in- loop comparison against an accessibility-tree agent that saved only\u224814%, and reserves the full live three-arm billing. The denominator ism",
+   "stated_uncertainty": "screen-configuration band 259-425x (1280x800 conservative to 1728x1117 retina)",
+   "system": "ActivityFrames",
+   "value": "tokens_cl100k_base_plus_modeled_dollars"
+  },
+  {
+   "accounting_convention": "interquartile range over the 20 compiled plans; min-max over all routines; a temporal-holdout gap for h; an explicit modeler-disagreement band from re-pricing the numerator at three screen configurations",
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "stated_uncertainty",
+   "modeled_vs_measured": "measured",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "/ median plan tokens 59\u201362\u00d7/ 248 n/a Compile costB0.5ms,0tokens Rinfo (minimal script, ceiling) 343\u00d7198\u00d7 Interquartile range 297\u2013390\u00d7165\u2013228\u00d7 Recurrence-weighted mean 337\u00d7194\u00d7 Min\u2013max 167\u2013509\u00d767\u2013301\u00d7 Across screen resolutions 259\u2013425\u00d7150\u2013245\u00d7 Median script tokens 40 43 Median stepsk/ max occ. 5 / 181 3 / 25 Rinject are dominated by two families, a compose-message loop and a window-close loop, sliced at several lengths by the n-gram miner, soRinject characterizes this user\u2019s highest-frequency micro-routines rather than a div",
+   "stated_uncertainty": "no confidence interval, standard error or significance test is attached to R or to h; the only Wilson 95% CI in the paper (91.7-99.7%) belongs to the Section 6.2 QA accuracy, not to R or h",
+   "system": "ActivityFrames",
+   "value": "IQRs_reported_no_credible_interval_on_R_itself"
+  },
+  {
+   "accounting_convention": "the paper's own three disciplines: no rung of R is multiplied by the 86x context compression; R is never combined with prompt-cache or KV-cache discounts; both the numerator and the three-arm dollars are modeled and reported as ceilings",
+   "benchmark": null,
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "modeled_vs_measured",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": " day versus re-deriving a routine), and stack- ing them would double-count the same work. Second, R is never combined with prompt-cache or KV-cache discounts; caching and replay are alternative recoveries of the same repetition, not additive ones. Third, both the numerator and the three-arm dollars are modeled, so we report them as ceilings and reserve the live billing. 7.4 Desktop Routine Recurrenceh The ratio R prices a single hit; the recurrenceh is how often hits occur, measured as the fraction of action steps that fall inside a recurring routine. A single number would mislead, so we reporth at two levels. Therawrate is hraw = 83.1%: the fraction of action steps insideany recurring n-gram. Thisisdominatedbythe",
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": "modeled"
+  },
+  {
+   "accounting_convention": "h * (1 - 1/Rinfo) with Rinfo = 343; reported as a ceiling, ~9.0% in-sample and ~7.7% out-of-sample",
+   "benchmark": null,
+   "denominator": "all action steps across the fleet, not just the recurring subset",
+   "evidence_for_absence": null,
+   "metric": "all_fleet_ceiling_h_times_1_minus_1_over_Rinfo",
+   "modeled_vs_measured": "modeled",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "es. The modest8.6%\u2192 7.7% drop is the within-user temporal-drift gap (a same-user, later-in-time split, not a cross-population holdout), and 7.7%is the recurrence the cost accounting should carry; the all-fleet ceilingh (1\u2212 1/Rinfo)\u2248 7.7%follows from it. We make exactly one predictive claim, and this is it. What h is notWeb-era studies of page revisitation report far larger constants, on the order of40to58% of page visits being revisits [50,51]. We do not claim those as h. A page revisit is not a delegable task: back- button noise, re-checking a feed, and reopening a tab are revisits with no reu",
+   "stated_uncertainty": "carries the 7.7% out-of-sample h; the paper instructs that this is the recurrence the cost accounting should carry",
+   "system": "ActivityFrames",
+   "value": 0.077
+  },
+  {
+   "accounting_convention": "limitation list, not a cost accounting quantity",
+   "benchmark": null,
+   "denominator": "five limitations stated in Section 8.4 bounding the overhead measurements",
+   "evidence_for_absence": null,
+   "metric": "published_limitation_count",
+   "modeled_vs_measured": "measured",
+   "part": 1,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "Five limitations bound the results of this half of the paper, beyond the systems limitations already stated in Section 8. Single user.Every number in Section 7 comes from one user\u2019s machine, the author\u2019s, over51active days (128,756frames). We state this plainly: R and h are properties of this person\u2019s work, not of a population. The specificity rule and the temporal holdout guard against granularity and circularity artifacts, but not against hav- ing sampled one professional o",
+   "stated_uncertainty": "single user; modeled-not-billed numerator and dollars; one two-step live confirmation with three named bounds; capture is not free; replay coverage bounded by guard coverage",
+   "system": "ActivityFrames",
+   "value": 5
+  },
+  {
+   "accounting_convention": "Task Success Rate, following the WebArena convention: successful completion of tasks without considering whether the steps are optimal",
+   "benchmark": "WebVoyager (own benchmark, 15 sites)",
+   "denominator": "643 tasks total, 40-45 tasks per website; judged by GPT-4V over all screenshots and all actions; a 300-task subset carries three independent human annotators",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2401.13919v4",
+   "source_quote": "to evaluate open-ended web agents. We show that WebV oyager achieves a 59.1% task success rate on our benchmark, significantly surpassing the performance of both GPT-4 (All Tools) and the WebV oyager (text-only) setups, underscoring the exceptional capability of WebV oyager. The proposed automatic evaluation metric achieves 85.3% agreement with human judgment, indi- cating its effectiveness in providing reli",
+   "stated_uncertainty": "per-site values reported with +/- (e.g. 56.9% +/- 2.8%)",
+   "system": "WebVoyager",
+   "value": 0.591
+  },
+  {
+   "accounting_convention": "same Task Success Rate convention as above",
+   "benchmark": "SeeAct online test set",
+   "denominator": "the 50 tasks used in SeeAct agent's online evaluation",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2401.13919v4",
+   "source_quote": " oyager also achieves much stronger performance than both baselines. Finally, WebV oyager has a success rate of 30% on the SeeAct online test set whereas the best SeeAct autonomous agent has 26%, showing the efficacy of our proposed agent. We report the Agreement (the ratio of overlap) and Kappa (\u03ba; Cohen 1960) between consolidated human labels 7 and GPT-4V\u2019s judgments on the subset of 300 tasks in Tab",
+   "stated_uncertainty": null,
+   "system": "WebVoyager",
+   "value": 0.3
+  },
+  {
+   "accounting_convention": "count of benchmark task instances, one success counted per instance",
+   "benchmark": "WebVoyager (own benchmark, 15 sites)",
+   "denominator": "643 tasks total, 40-45 per website; judged by GPT-4V over all screenshots and all actions; a 300-task subset carries three independent human annotators",
+   "evidence_for_absence": null,
+   "metric": "denominator",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2401.13919v4",
+   "source_quote": "rated tasks can be found on the web- sites. In total, we collected 40+ tasks per website, resulting in a total of 643 tasks. To further confirm that the generated tasks in the dataset have low repetition, We use the all-mpnet- base-v26 model to calculate pairwise similarity for 643 ques. Out of a total of 206,403 pairs, o",
+   "stated_uncertainty": "a 300-task human-agreement subset with three annotators each",
+   "system": "WebVoyager",
+   "value": "643 tasks"
+  },
+  {
+   "accounting_convention": "Following WebArena (Zhou et al., 2023), the primary evaluation metric is the Task Success Rate, measuring successful completion of tasks without considering whether the steps are optimal; an LLM judge is shown the whole web trajectory (all screenshots and all actions) and returns a binary judgment of whether the agent successfully completed the task",
+   "benchmark": "WebVoyager (own benchmark, 15 sites)",
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "evaluation_convention",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2401.13919v4",
+   "source_quote": "with their results. Following WebArena (Zhou et al., 2023), the primary evaluation metric we adopt is the Task Success Rate, measuring the successful completion of tasks without considering whether the steps are optimal. Experimental Details We employ GPT-4 Turbo with vision (gpt-4-vision-preview) as the backbone model of our agent, which showcases strong se- mantic and visual und",
+   "stated_uncertainty": "human-label agreement and Cohen's kappa are reported against a 300-task subset",
+   "system": "WebVoyager",
+   "value": "Task_Success_Rate_following_WebArena"
+  },
+  {
+   "accounting_convention": "single held-out benchmark built by the authors; no train/dev/test split is frozen or reported",
+   "benchmark": "WebVoyager (own benchmark, 15 sites)",
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "benchmark_split",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2401.13919v4",
+   "source_quote": "%\u00b12.2% 55.5%\u00b10.8% Table 1: The main result for WebV oyager. Each website contains 40 to 45 tasks, and we report the Task Success Rate in the table. We show the results of GPT-4 (All Tools), WebV oyagerText-only using the accessibility tree, and WebV oyager by comparing with human expert labels.W",
+   "stated_uncertainty": "per-site task counts range 40 to 45",
+   "system": "WebVoyager",
+   "value": "643_tasks_over_15_websites_40_to_45_tasks_each"
+  },
+  {
+   "accounting_convention": "end-to-end task success rate judged by functional correctness of task completions; human performance 78.24% on the same benchmark",
+   "benchmark": "WebArena",
+   "denominator": "812 long-horizon web-based tasks (812 test examples)",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2307.13854v3",
+   "source_quote": "tegrating recent techniques such as reasoning before acting. The results demonstrate that solving complex tasks is challenging: our best GPT-4 -based agent only achieves an end-to-end task success rate of 14.41%, significantly lower than the human performance of 78.24%. These results highlight the need for further development of robust agents, that current state-of-the-art large language models are far from perfect performance in these real-life tasks, and thatWebArena can be used to m",
+   "stated_uncertainty": null,
+   "system": "WebArena",
+   "value": 0.1441
+  },
+  {
+   "accounting_convention": "each step evaluated independently WITH THE GROUND TRUTH ACTION HISTORY PROVIDED; a step counts as successful only if both the selected element and the predicted operation are correct; whole-task Success Rate is the conjunction over steps",
+   "benchmark": "Mind2Web TestCross-Task",
+   "denominator": "macro average across tasks; MINDACT with Flan-T5L; Step Success Rate 50.3% on the same split",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2306.06070v3",
+   "source_quote": " 76 .8 41 .0 4 .0 32 .1 67.6 29.5 1 .7 33 .9 67.3 31.6 1 .6 w/ Flan-T5L 53.4 75.7 50.3 7.1 39.2 67 .1 35 .3 1 .1 39 .7 67 .2 37 .3 2 .7 w/ Flan-T5XL 55.1 7",
+   "stated_uncertainty": "GPT-4 numbers use only 50 tasks per setting due to limited budget",
+   "system": "Mind2Web",
+   "value": 0.071
+  },
+  {
+   "accounting_convention": "same oracle-action-history convention as TestCross-Task",
+   "benchmark": "Mind2Web TestCross-Website",
+   "denominator": "177 tasks from 10 websites (one per remaining top-level domain); MINDACT with Flan-T5L; Step Success Rate 35.3%",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2306.06070v3",
+   "source_quote": " 76 .8 41 .0 4 .0 32 .1 67.6 29.5 1 .7 33 .9 67.3 31.6 1 .6 w/ Flan-T5L 53.4 75.7 50.3 7.1 39.2 67 .1 35 .3 1 .1 39 .7 67 .2 37 .3 2 .7 w/ Flan-T5XL 55.1 7",
+   "stated_uncertainty": null,
+   "system": "Mind2Web",
+   "value": 0.011
+  },
+  {
+   "accounting_convention": "same oracle-action-history convention as TestCross-Task",
+   "benchmark": "Mind2Web TestCross-Domain",
+   "denominator": "912 tasks from 73 websites, holding out two top-level domains (Information and Service); MINDACT with Flan-T5L; Step Success Rate 37.3%",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2306.06070v3",
+   "source_quote": " 76 .8 41 .0 4 .0 32 .1 67.6 29.5 1 .7 33 .9 67.3 31.6 1 .6 w/ Flan-T5L 53.4 75.7 50.3 7.1 39.2 67 .1 35 .3 1 .1 39 .7 67 .2 37 .3 2 .7 w/ Flan-T5XL 55.1 7",
+   "stated_uncertainty": null,
+   "system": "Mind2Web",
+   "value": 0.027
+  },
+  {
+   "accounting_convention": "two metrics reported together: Task Score = 100 x average reward, and Success Rate = the portion of instructions where the final reward r = 1",
+   "benchmark": "WebShop test split",
+   "denominator": "500 test instances of 12,087 total instructions (train/dev/test 10,587/1,000/500); human expert 59%, rule-based heuristic 9.6%",
+   "evidence_for_absence": null,
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2207.01206v4",
+   "source_quote": "tation learning, and pre-trained image and language models. Our best model achieves a task success rate of 29%, which outperforms rule-based heuristics (9.6%) but is far lower than human expert performance (59%). We also analyze agent and human trajectories and ablate various model components to provide insights for developing future agents with stronger language understanding and decision making abilities",
+   "stated_uncertainty": null,
+   "system": "WebShop",
+   "value": 0.291
+  },
+  {
+   "accounting_convention": "Success Rate (SR) as the per-environment evaluation metric, with an estimated #Avg. Turn",
+   "benchmark": "AgentBench-web (Cross Domain test set)",
+   "denominator": "912 tasks from 73 websites for the Cross Domain test set; 8 environments in the suite; per-environment #Test counts in Table 2",
+   "evidence_for_absence": "NO_SINGLE_HEADLINE_SUCCESS_RATE_EXTRACTED_FOR_THE_WEB_SUBSET. The retrieved full text reports SR per environment in a table whose numeric cells are not linearised by the PDF text layer, and the artifact's own '912 tasks from 73 websites' cross-domain figure is attributed to a cross-domain test set the paper reuses from another benchmark. Reporting absence rather than a number, per spec.json ABSENCE_AS_ABSENCE.",
+   "metric": "success_rate",
+   "modeled_vs_measured": "measured",
+   "part": 2,
+   "resolution_status": "CORRECTLY_RESOLVED",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2308.03688v2",
+   "source_quote": "We adopt the success rate (SR) as the evaluation metric. (Cf. Appendix B for more details) Database (DB). As database analysis is crucial but also difficult in many daily affairs, it is paramount to examine LLMs\u2019 abilities to operate on real databases via SQL. Prior research has a significant emphasis on individual procedures, such as translation between SQL and natural language (Zhong et al.",
+   "stated_uncertainty": null,
+   "system": "AgentBench-web",
+   "value": null
+  },
+  {
+   "accounting_convention": "raw rows serialized as search-API JSON (126,812 tokens) vs compiled schema-v1 document (222 frames, 34,815 tokens) vs compact context block (1,469 tokens) vs an LLM summary of the same capture",
+   "benchmark": "8-day downstream QA (own)",
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "write_pipeline_type",
+   "modeled_vs_measured": "measured",
+   "part": 3,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "echanism, not a user study (Section 8). 6.1 Token Cost For one representative full day (2,066 snapshot rows), we compare three representations an agent could receive, tokenized with thecl100k_baseencoding. The raw rows, serialized as the JSON a search API would return, cost 126,812 tokens. The compiled schema-v1 document (222 frames at a 0.5-minute floor) costs 34,815 tokens, a 3.6\u00d7 reduction that also relieves the agent of segmentation work. The compact context block costs 1,469 tokens, an 86\u00d7 reduction, small enough to include in every system prompt (Figure 4). Both compiled forms are p",
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": "three_representations_compared"
+  },
+  {
+   "accounting_convention": "answers questions about the user's day; the compiled block is graded against the same oracle as the other representations",
+   "benchmark": "8-day downstream QA (own)",
+   "denominator": "8 days, 64 ground-truth questions, graded against an independent SQL oracle, run at two model tiers",
+   "evidence_for_absence": null,
+   "metric": "downstream_accuracy",
+   "modeled_vs_measured": "measured",
+   "part": 3,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "duces a day of raw capture to a prompt-ready context block86\u00d7 smaller in68ms, and an agent reading that block answers questions about the day at98.4%accuracy (Wilson95%CI91 .7\u201399.7%) against an independent oracle, versus66\u201380%for an LLM summary of the same capture, a mid-tier model reading the block matching a frontier one. The same compiler doubles as a demand-side cost in- strument. Read off passive, pre-delegation human activ- ity rather than agent rollouts, it supplies",
+   "stated_uncertainty": "Wilson 95% CI 91.7-99.7%",
+   "system": "ActivityFrames",
+   "value": 0.984
+  },
+  {
+   "accounting_convention": null,
+   "benchmark": "8-day downstream QA (own)",
+   "denominator": null,
+   "evidence_for_absence": "NOT_REPORTED_AND_NOT_VARIED. The artifact varies the WRITE representation while holding the RETRIEVED CONTEXT CONSTANT (the whole compiled day is placed in the system prompt, 'small enough to include in every system prompt'). It therefore reports no recall, precision, nDCG, hit rate or MRR over relevant context, and cannot separate retrieval quality from write sophistication. The only retrieval-adjacent quantity is the temporal-holdout routine hit rate (7.7%), which measures recurrence, not retrieval quality. Absence established over 69,607 characters of retrieved full text.",
+   "metric": "retrieval_quality_metric",
+   "modeled_vs_measured": null,
+   "part": 3,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "UNMEASURED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": null,
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": null
+  },
+  {
+   "accounting_convention": "single-factor contrast of representation type at fixed context",
+   "benchmark": "8-day downstream QA (own)",
+   "denominator": null,
+   "evidence_for_absence": null,
+   "metric": "ablation_result",
+   "modeled_vs_measured": "measured",
+   "part": 3,
+   "resolution_status": "AMBIGUOUS",
+   "scored_as": "EXTRACTED",
+   "source_arxiv_id": "2608.05784v1",
+   "source_quote": "ssional\u2019s single-user corpus of128,756frames over51active days, the compiler reduces a day of raw capture to a prompt-ready context block86\u00d7 smaller in68ms, and an agent reading that block answers questions about the day at98.4%accuracy (Wilson95%CI91 .7\u201399.7%) against an independent oracle, versus66\u201380%for an LLM summary of the same capture, a mid-tier model reading the block matching a frontier one. The same compiler doubles as a demand-side cost in- strument. Read off passive, pre-delegation human activ- ity rather than agent rollouts, it supplies two parameters that agent-cost models assume but, ",
+   "stated_uncertainty": null,
+   "system": "ActivityFrames",
+   "value": "write_pipeline_only_retrieval_held_constant"
+  }
+ ]
+}

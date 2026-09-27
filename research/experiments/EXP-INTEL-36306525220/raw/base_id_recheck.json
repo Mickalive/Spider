@@ -1,0 +1,193 @@
+{
+ "experiment_id": "EXP-INTEL-36306525220",
+ "schema_version": 1,
+ "snowball": {
+  "n_candidates_frozen": 1,
+  "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-36306525220/raw/references/snowball_candidates.json",
+  "selection_rule": "Declared at EXECUTE stage 1b, before any snowball artifact was fetched or read. Source: the reference list of the positive-control artifact arXiv:2608.05784v1, taken in document order. Inclusion: reference strings that contain an arXiv identifier (abs/YYMM.NNNNN form). Cap: first 25 such references, no reordering, no content-based filtering, no cherry-picking. Each included reference is then identity-resolved under the frozen prereg 4.1 rule with its OWN frozen expected identity taken verbatim from the citing paper's own reference string (expected_title = title substring as printed in the reference, expected_authors = [] -> condition C3 skipped with reason 'snowball reference carries no author string', domain_keywords = the frozen global domain keyword list). prereg 4.4 caps the snowball at 50; this run takes 25."
+ },
+ "stage": "base_id_recheck",
+ "targets": {
+  "MiniWoB++": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1,
+      2
+     ],
+     "expected_base": "1802.08827",
+     "frozen_version_exists": null,
+     "frozen_version_requested": "1802.08827",
+     "pass": true,
+     "returned_base": "1802.08827"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "MiniWoB",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Integrable spin chains with random interactions"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Liu",
+      "Shi",
+      "Zhou",
+      "Chen"
+     ],
+     "matched": [],
+     "pass": false,
+     "returned_authors": [
+      "Essler, Fabian H. L.",
+      "Berg, Rianne van den",
+      "Gritsev, Vladimir"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "agent",
+      "browser",
+      "automation",
+      "llm",
+      "e-commerce",
+      "benchmark",
+      "environment",
+      "multimodal",
+      "replay",
+      "compilation",
+      "memory",
+      "cache",
+      "cost",
+      "token",
+      "screen",
+      "workflow",
+      "gui",
+      "interface"
+     ],
+     "matched": [],
+     "pass": false
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch",
+    "C3_author_mismatch",
+    "C4_domain_keyword_absent"
+   ],
+   "recheck_note": "Stage-1 request for versioned id 1802.08827v3 returned HTTP 404; re-probed base id 1802.08827.",
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "1802.08827",
+   "returned_authors": [
+    "Essler, Fabian H. L.",
+    "Berg, Rianne van den",
+    "Gritsev, Vladimir"
+   ],
+   "returned_title": "Integrable spin chains with random interactions",
+   "target_arxiv_id": "1802.08827",
+   "target_system": "MiniWoB++",
+   "transport_error": null,
+   "transport_status": 200
+  },
+  "SeeAct": {
+   "checks": {
+    "C1_exact_arxiv_id": {
+     "available_versions": [
+      1
+     ],
+     "expected_base": "2402.04566",
+     "frozen_version_exists": null,
+     "frozen_version_requested": "2402.04566",
+     "pass": true,
+     "returned_base": "2402.04566"
+    },
+    "C2_title": {
+     "coverage_threshold": 0.85,
+     "expected_title": "SeeAct",
+     "expected_title_is_substring": false,
+     "expected_token_coverage_in_title": 0.0,
+     "jaccard_full_title_tokens": 0.0,
+     "jaccard_threshold": 0.85,
+     "pass": false,
+     "primary_reading": "substring_and_token_coverage",
+     "returned_title": "Triplet-constraint Transformer with Multi-scale Refinement for Dose Prediction in Radiotherapy"
+    },
+    "C3_author": {
+     "expected_authors": [
+      "Zheng",
+      "Chen",
+      "Yang",
+      "Liu"
+     ],
+     "matched": [
+      "Zheng",
+      "Chen",
+      "Liu"
+     ],
+     "pass": true,
+     "returned_authors": [
+      "Wen, Lu",
+      "Zhang, Qihun",
+      "Feng, Zhenghao",
+      "Xu, Yuanyuan",
+      "Chen, Xiao",
+      "Zhou, Jiliu",
+      "Wang, Yan"
+     ]
+    },
+    "C4_domain_keyword": {
+     "abstract_available": true,
+     "domain_keywords": [
+      "web",
+      "agent",
+      "browser",
+      "automation",
+      "llm",
+      "e-commerce",
+      "benchmark",
+      "environment",
+      "multimodal",
+      "replay",
+      "compilation",
+      "memory",
+      "cache",
+      "cost",
+      "token",
+      "screen",
+      "workflow",
+      "gui",
+      "interface"
+     ],
+     "matched": [
+      "gui"
+     ],
+     "pass": true
+    }
+   },
+   "failed_conditions": [
+    "C2_title_mismatch"
+   ],
+   "recheck_note": "Stage-1 request for versioned id 2402.04566v2 returned HTTP 404; re-probed base id 2402.04566.",
+   "resolution_status": "AMBIGUOUS",
+   "returned_arxiv_id": "2402.04566",
+   "returned_authors": [
+    "Wen, Lu",
+    "Zhang, Qihun",
+    "Feng, Zhenghao",
+    "Xu, Yuanyuan",
+    "Chen, Xiao",
+    "Zhou, Jiliu",
+    "Wang, Yan"
+   ],
+   "returned_title": "Triplet-constraint Transformer with Multi-scale Refinement for Dose Prediction in Radiotherapy",
+   "target_arxiv_id": "2402.04566",
+   "target_system": "SeeAct",
+   "transport_error": null,
+   "transport_status": 200
+  }
+ }
+}

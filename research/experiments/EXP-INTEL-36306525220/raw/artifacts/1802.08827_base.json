@@ -1,0 +1,17 @@
+{
+ "abstract": "We study a Yang-Baxter integrable quantum spin-1/2 chain with random interactions. The Hamiltonian is local and involves two and three-spin interactions with random parameters. We show that the energy eigenstates of the model are never localized and in fact exhibit perfect energy and spin transport at both zero and infinite temperatures. By considering the vicinity of a free fermion point in the model we demonstrate that this behavior persists under deformations that break integrability but preserve the free fermion nature of the Hamiltonian. In this case the ballistic behavior can be understood as arising from the correlated nature of the disorder in the model. We conjecture that the model belongs to a broad class of models avoiding localization in 1D.",
+ "arxiv_id_returned": "1802.08827",
+ "authors": [
+  "Essler, Fabian H. L.",
+  "Berg, Rianne van den",
+  "Gritsev, Vladimir"
+ ],
+ "available_versions": [
+  1,
+  2
+ ],
+ "citation_date": "2018/02/24",
+ "comments": "published version",
+ "sha256_abs_page": "f2d2de5003676bf38b3c6776dcec6067dae9f6670165b2065f563ba6f1b32165",
+ "title": "Integrable spin chains with random interactions"
+}

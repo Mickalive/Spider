@@ -1,0 +1,17 @@
+{
+ "abstract": "Entanglement routing in near-term quantum networks consists of choosing the optimal sequence of short-range entanglements to combine through swapping operations to establish end-to-end entanglement between two distant nodes. Similar to traditional routing technologies, a quantum routing protocol uses network information to choose the best paths to satisfy a set of end-to-end entanglement requests. However, in addition to network state information, a quantum routing protocol must also take into account the requested entanglement fidelity, the probabilistic nature of swapping operations, and the short lifetime of entangled states. In this work, we formulate a practical entanglement routing problem and analyze and categorize the main approaches to address it, drawing comparisons to, and inspiration from, classical network routing strategies where applicable. We classify and discuss the studied quantum routing schemes into reactive, proactive, opportunistic, and virtual routing",
+ "arxiv_id_returned": "2408.01234",
+ "authors": [
+  "Abane, Amar",
+  "Cubeddu, Michael",
+  "Mai, Van Sy",
+  "Battou, Abdella"
+ ],
+ "available_versions": [
+  1
+ ],
+ "citation_date": "2024/08/02",
+ "comments": "",
+ "sha256_abs_page": "2b3045bceedecb86f962b20ec3fa829f913b33b5d31285fdfd7d8f38df07906e",
+ "title": "Entanglement Routing in Quantum Networks: A Comprehensive Survey"
+}

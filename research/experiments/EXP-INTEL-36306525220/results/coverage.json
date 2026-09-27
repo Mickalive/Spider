@@ -1,0 +1,34 @@
+{
+ "correctly_resolved": 5,
+ "correctly_resolved_names": [
+  "AgentBench-web",
+  "Mind2Web",
+  "WebArena",
+  "WebShop",
+  "WebVoyager"
+ ],
+ "identity_resolution_recall": 0.357143,
+ "identity_resolution_recall_denominator_definition": "correctly_resolved / named_systems_searched over the 14 frozen entries of spec.json identity_resolution.frozen_target_list; no per-part partition of the frozen list exists, so the same denominator is used for Parts 1, 2 and 3",
+ "identity_resolution_recall_excluding_prereg_declared_placeholders": 0.555556,
+ "identity_resolution_recall_over_entries_with_real_author_lists": 0.625,
+ "n_entries_with_real_author_lists": 8,
+ "n_excluding_prereg_declared_placeholders": 9,
+ "named_systems_searched": 14,
+ "recall_robust_to_denominator_choice": false,
+ "snowball_coverage": {
+  "cap": 25,
+  "papers_examined": 0,
+  "papers_resolved": 0,
+  "reference_strings_found": 1,
+  "selection_rule": "raw/references/snowball_candidates.json -> selection_rule",
+  "usable_candidates_under_frozen_inclusion_rule": 0
+ },
+ "systems_not_in_frozen_list": [
+  "Agent Workflow Memory (Wang, Mao, Fried, Neubig 2024)",
+  "WebCoach",
+  "ReasoningBank",
+  "any published system reporting a measured break-even reuse count f*"
+ ],
+ "unsearched_systems": [],
+ "unsearched_systems_note": "The frozen target list is a closed list of 14 named systems; every entry was searched. The unsearched space is the published literature outside that list, which prereg 4.4 delegates to a bounded snowball. The snowball was ATTEMPTED and yielded 0 usable candidates (raw/references/snowball_candidates.json): the PC artifact's reference list prints no arXiv identifiers, so the frozen inclusion rule ('reference strings that contain an arXiv identifier') selects nothing."
+}

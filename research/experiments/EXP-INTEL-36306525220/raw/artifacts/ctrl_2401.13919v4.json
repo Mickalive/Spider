@@ -1,0 +1,24 @@
+{
+ "abstract": "The rapid advancement of large language models (LLMs) has led to a new era marked by the development of autonomous applications in real-world scenarios, which drives innovation in creating advanced web agents. Existing web agents typically only handle one input modality and are evaluated only in simplified web simulators or static web snapshots, greatly limiting their applicability in real-world scenarios. To bridge this gap, we introduce WebVoyager, an innovative Large Multimodal Model (LMM) powered web agent that can complete user instructions end-to-end by interacting with real-world websites. Moreover, we establish a new benchmark by compiling real-world tasks from 15 popular websites and introduce an automatic evaluation protocol leveraging multimodal understanding abilities of GPT-4V to evaluate open-ended web agents. We show that WebVoyager achieves a 59.1% task success rate on our benchmark, significantly surpassing the performance of both GPT-4 (All Tools) and the WebVoyager (text-only) setups, underscoring the exceptional capability of WebVoyager. The proposed automatic evaluation metric achieves 85.3% agreement with human judgment, indicating its effectiveness in providing reliable and accurate assessments of web agents.",
+ "arxiv_id_returned": "2401.13919",
+ "authors": [
+  "He, Hongliang",
+  "Yao, Wenlin",
+  "Ma, Kaixin",
+  "Yu, Wenhao",
+  "Dai, Yong",
+  "Zhang, Hongming",
+  "Lan, Zhenzhong",
+  "Yu, Dong"
+ ],
+ "available_versions": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "citation_date": "2024/01/25",
+ "comments": "Accepted to ACL 2024 (main). Code and data is released at this https URL",
+ "sha256_abs_page": "6aaebc9602142ba1af825eac0547d96f22c2fa70e32aa7c37dc0592c284aa94f",
+ "title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models"
+}

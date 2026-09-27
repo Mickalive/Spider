@@ -1,0 +1,453 @@
+{
+ "controls": {
+  "NC-FABRICATED-CLAIM": {
+   "frozen_definition": {
+    "arxiv_id": "2609.99999",
+    "domain_keywords": [
+     "web",
+     "agent"
+    ],
+    "expected_authors": [
+     "Nonexistent"
+    ],
+    "expected_title": "FabricatedTarget",
+    "gates": "prereg.md Section 6.4 -> recorded, does NOT trigger MEASUREMENT_INVALID",
+    "role": "null_control_sanity_only",
+    "system": "FabricatedTarget"
+   },
+   "observed": {
+    "artifact_is_real": false,
+    "emitted_row_resolution_status": "UNMEASURED",
+    "failed_conditions": [
+     "C0_no_artifact_retrieved"
+    ],
+    "fulltext": {
+     "arxiv_id": "2609.99999",
+     "status": "not_attempted"
+    },
+    "pass": true,
+    "pass_criterion": "resolver fails to locate artifact and emits NOT_LOCATED",
+    "resolution_status": "NOT_LOCATED",
+    "returned_arxiv_id": null,
+    "returned_authors": null,
+    "returned_title": null
+   },
+   "verdict": {
+    "checks": {},
+    "failed_conditions": [
+     "C0_no_artifact_retrieved"
+    ],
+    "resolution_status": "NOT_LOCATED",
+    "returned_arxiv_id": null,
+    "returned_authors": null,
+    "returned_title": null,
+    "target_arxiv_id": "2609.99999",
+    "target_system": "FabricatedTarget",
+    "transport_error": "HTTPError 404",
+    "transport_status": 404
+   }
+  },
+  "NC-REAL-BUT-WRONG": {
+   "frozen_definition": {
+    "arxiv_id": "1802.05012v2",
+    "domain_keywords": [
+     "web",
+     "arena",
+     "agent",
+     "benchmark",
+     "environment"
+    ],
+    "expected_authors": [
+     "Zhou",
+     "Liu",
+     "Gu",
+     "Chen"
+    ],
+    "expected_title": "WebArena",
+    "gates": "prereg.md Section 7 gate 2 -> MEASUREMENT_INVALID for entire experiment",
+    "role": "null_control",
+    "system": "WebArena"
+   },
+   "observed": {
+    "artifact_is_real": true,
+    "emitted_row_resolution_status": "UNMEASURED",
+    "failed_conditions": [
+     "C2_title_mismatch",
+     "C3_author_mismatch"
+    ],
+    "fulltext": {
+     "arxiv_id": "1802.05012v2",
+     "pdf_sha256": "d67760624309b9e377804c3ace0f4aecb4138c3fc4300f0cc6e2a278c6f763d0",
+     "status": "ok",
+     "text_chars": 87582,
+     "text_sha256": "86c645f3c9244662b23f3e260ef22595f51ce576334663621236bf9ef737efb2"
+    },
+    "pass": true,
+    "pass_criterion": "artifact is REAL, resolver flags identity mismatch, resolver emits AMBIGUOUS/NOT_LOCATED (-> UNMEASURED row) and does NOT emit NOT_FOUND",
+    "resolution_status": "AMBIGUOUS",
+    "returned_arxiv_id": "1802.05012",
+    "returned_authors": [
+     "Azagra-Caro, Joaqu\u00edn M.",
+     "Fern\u00e1ndez-Mesa, Anabel",
+     "Robinson-Garc\u00eda, Nicol\u00e1s"
+    ],
+    "returned_title": "'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer"
+   },
+   "verdict": {
+    "checks": {
+     "C1_exact_arxiv_id": {
+      "available_versions": [
+       1,
+       2
+      ],
+      "expected_base": "1802.05012",
+      "frozen_version_exists": true,
+      "frozen_version_requested": "1802.05012v2",
+      "pass": true,
+      "returned_base": "1802.05012"
+     },
+     "C2_title": {
+      "coverage_threshold": 0.85,
+      "expected_title": "WebArena",
+      "expected_title_is_substring": false,
+      "expected_token_coverage_in_title": 0.0,
+      "jaccard_full_title_tokens": 0.0,
+      "jaccard_threshold": 0.85,
+      "pass": false,
+      "primary_reading": "substring_and_token_coverage",
+      "returned_title": "'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer"
+     },
+     "C3_author": {
+      "expected_authors": [
+       "Zhou",
+       "Liu",
+       "Gu",
+       "Chen"
+      ],
+      "matched": [],
+      "pass": false,
+      "returned_authors": [
+       "Azagra-Caro, Joaqu\u00edn M.",
+       "Fern\u00e1ndez-Mesa, Anabel",
+       "Robinson-Garc\u00eda, Nicol\u00e1s"
+      ]
+     },
+     "C4_domain_keyword": {
+      "abstract_available": true,
+      "domain_keywords": [
+       "web",
+       "arena",
+       "agent",
+       "benchmark",
+       "environment"
+      ],
+      "matched": [
+       "agent"
+      ],
+      "pass": true
+     }
+    },
+    "failed_conditions": [
+     "C2_title_mismatch",
+     "C3_author_mismatch"
+    ],
+    "resolution_status": "AMBIGUOUS",
+    "returned_arxiv_id": "1802.05012",
+    "returned_authors": [
+     "Azagra-Caro, Joaqu\u00edn M.",
+     "Fern\u00e1ndez-Mesa, Anabel",
+     "Robinson-Garc\u00eda, Nicol\u00e1s"
+    ],
+    "returned_title": "'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer",
+    "target_arxiv_id": "1802.05012v2",
+    "target_system": "WebArena",
+    "transport_error": null,
+    "transport_status": 200
+   }
+  },
+  "PC-COST-ACCOUNTING": {
+   "frozen_definition": {
+    "arxiv_id": "2608.05784v1",
+    "domain_keywords": [
+     "activity",
+     "frames",
+     "agent",
+     "memory",
+     "replay",
+     "compilation"
+    ],
+    "expected_authors": [
+     "TBD"
+    ],
+    "expected_title": "Activity Frames",
+    "gates": "prereg.md Section 7 gate 1 -> MEASUREMENT_INVALID for entire experiment",
+    "role": "positive_control",
+    "system": "ActivityFrames"
+   },
+   "observed": {
+    "artifact_is_real": true,
+    "failed_conditions": [
+     "C3_author_unevaluable_TBD"
+    ],
+    "fulltext": {
+     "arxiv_id": "2608.05784v1",
+     "pdf_sha256": "7847cb6bd8aa64672ed0f3983312dabeb1db5e126a1aebfec1571c7c920e1602",
+     "status": "ok",
+     "text_chars": 69607,
+     "text_sha256": "e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf"
+    },
+    "identity_precondition_pass": false,
+    "pass": null,
+    "pass_criterion": "artifact passes prereg 4.1 identity resolution AND all required fields are extracted with evidence quotes (field half evaluated in stage 3)",
+    "resolution_status": "AMBIGUOUS",
+    "returned_arxiv_id": "2608.05784",
+    "returned_authors": [
+     "Iyamu, Nossa"
+    ],
+    "returned_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay"
+   },
+   "verdict": {
+    "checks": {
+     "C1_exact_arxiv_id": {
+      "available_versions": [
+       1
+      ],
+      "expected_base": "2608.05784",
+      "frozen_version_exists": true,
+      "frozen_version_requested": "2608.05784v1",
+      "pass": true,
+      "returned_base": "2608.05784"
+     },
+     "C2_title": {
+      "coverage_threshold": 0.85,
+      "expected_title": "Activity Frames",
+      "expected_title_is_substring": true,
+      "expected_token_coverage_in_title": 1.0,
+      "jaccard_full_title_tokens": 0.2,
+      "jaccard_threshold": 0.85,
+      "pass": true,
+      "primary_reading": "substring_and_token_coverage",
+      "returned_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay"
+     },
+     "C3_author": {
+      "expected_authors": [
+       "TBD"
+      ],
+      "matched": [],
+      "pass": null,
+      "unevaluable_reason": "frozen expected_authors == ['TBD']; condition not evaluable"
+     },
+     "C4_domain_keyword": {
+      "abstract_available": true,
+      "domain_keywords": [
+       "activity",
+       "frames",
+       "agent",
+       "memory",
+       "replay",
+       "compilation"
+      ],
+      "matched": [
+       "activity",
+       "frames",
+       "agent",
+       "memory",
+       "replay"
+      ],
+      "pass": true
+     }
+    },
+    "failed_conditions": [
+     "C3_author_unevaluable_TBD"
+    ],
+    "resolution_status": "AMBIGUOUS",
+    "returned_arxiv_id": "2608.05784",
+    "returned_authors": [
+     "Iyamu, Nossa"
+    ],
+    "returned_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay",
+    "target_arxiv_id": "2608.05784v1",
+    "target_system": "ActivityFrames",
+    "transport_error": null,
+    "transport_status": 200
+   }
+  },
+  "PC-PERFORMANCE-ENVELOPE": {
+   "frozen_definition": {
+    "arxiv_id": "2401.13919v4",
+    "domain_keywords": [
+     "web",
+     "voyager",
+     "agent",
+     "multimodal",
+     "browser"
+    ],
+    "expected_authors": [
+     "He",
+     "Zhang",
+     "Yao",
+     "Chen"
+    ],
+    "expected_title": "WebVoyager",
+    "gates": "prereg.md Section 7 gate 4 -> MEASUREMENT_INVALID for Part 2 only",
+    "role": "positive_control",
+    "system": "WebVoyager"
+   },
+   "observed": {
+    "artifact_is_real": true,
+    "failed_conditions": [],
+    "fulltext": {
+     "arxiv_id": "2401.13919v4",
+     "pdf_sha256": "476ed4a064311f93414f5d5d17d90f10d07d2922bc05e09ee89cea26b617a2cb",
+     "status": "ok",
+     "text_chars": 71838,
+     "text_sha256": "abe7d67d7e6558c78f2e390413dc67cf2e0038605abb526f6bc456aec9905f81"
+    },
+    "identity_precondition_pass": true,
+    "pass": null,
+    "pass_criterion": "artifact passes prereg 4.1 identity resolution AND all required fields are extracted with evidence quotes (field half evaluated in stage 3)",
+    "resolution_status": "CORRECTLY_RESOLVED",
+    "returned_arxiv_id": "2401.13919",
+    "returned_authors": [
+     "He, Hongliang",
+     "Yao, Wenlin",
+     "Ma, Kaixin",
+     "Yu, Wenhao",
+     "Dai, Yong",
+     "Zhang, Hongming",
+     "Lan, Zhenzhong",
+     "Yu, Dong"
+    ],
+    "returned_title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models"
+   },
+   "verdict": {
+    "checks": {
+     "C1_exact_arxiv_id": {
+      "available_versions": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "expected_base": "2401.13919",
+      "frozen_version_exists": true,
+      "frozen_version_requested": "2401.13919v4",
+      "pass": true,
+      "returned_base": "2401.13919"
+     },
+     "C2_title": {
+      "coverage_threshold": 0.85,
+      "expected_title": "WebVoyager",
+      "expected_title_is_substring": true,
+      "expected_token_coverage_in_title": 1.0,
+      "jaccard_full_title_tokens": 0.090909,
+      "jaccard_threshold": 0.85,
+      "pass": true,
+      "primary_reading": "substring_and_token_coverage",
+      "returned_title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models"
+     },
+     "C3_author": {
+      "expected_authors": [
+       "He",
+       "Zhang",
+       "Yao",
+       "Chen"
+      ],
+      "matched": [
+       "He",
+       "Zhang",
+       "Yao"
+      ],
+      "pass": true,
+      "returned_authors": [
+       "He, Hongliang",
+       "Yao, Wenlin",
+       "Ma, Kaixin",
+       "Yu, Wenhao",
+       "Dai, Yong",
+       "Zhang, Hongming",
+       "Lan, Zhenzhong",
+       "Yu, Dong"
+      ]
+     },
+     "C4_domain_keyword": {
+      "abstract_available": true,
+      "domain_keywords": [
+       "web",
+       "voyager",
+       "agent",
+       "multimodal",
+       "browser"
+      ],
+      "matched": [
+       "web",
+       "voyager",
+       "agent",
+       "multimodal"
+      ],
+      "pass": true
+     }
+    },
+    "failed_conditions": [],
+    "resolution_status": "CORRECTLY_RESOLVED",
+    "returned_arxiv_id": "2401.13919",
+    "returned_authors": [
+     "He, Hongliang",
+     "Yao, Wenlin",
+     "Ma, Kaixin",
+     "Yu, Wenhao",
+     "Dai, Yong",
+     "Zhang, Hongming",
+     "Lan, Zhenzhong",
+     "Yu, Dong"
+    ],
+    "returned_title": "WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models",
+    "target_arxiv_id": "2401.13919v4",
+    "target_system": "WebVoyager",
+    "transport_error": null,
+    "transport_status": 200
+   }
+  }
+ },
+ "experiment_id": "EXP-INTEL-36306525220",
+ "generated_at": "2026-09-27T09:05:47.001703+00:00",
+ "resolved_target_fulltext": {
+  "AgentBench-web": {
+   "arxiv_id": "2308.03688v2",
+   "pdf_sha256": "6d599fcccc36b9bbe3f7700da916fac547d14b9d94a676bc677d1851d52bf7c8",
+   "status": "ok",
+   "text_chars": 163696,
+   "text_sha256": "4ab564295cd95642b7bdd196a9444e1ac53ec090db10f167993880c51a299550"
+  },
+  "Mind2Web": {
+   "arxiv_id": "2306.06070v3",
+   "pdf_sha256": "75d8af953769a53bf75913908e2bb6185c6b338c8d89b7304e7fd8cfb79934e8",
+   "status": "ok",
+   "text_chars": 81361,
+   "text_sha256": "7d888bc1f29c387094d2966dd682fca2c97c33978830fd1b35308171bbbc9f83"
+  },
+  "WebArena": {
+   "arxiv_id": "2307.13854v3",
+   "pdf_sha256": "eeac4541a48bcfbe9d58fc35f05f3d4a3b02d9c7ee85ffb60766a099b5d362b3",
+   "status": "ok",
+   "text_chars": 76379,
+   "text_sha256": "fe0aa43b740f3c8a1d11d7c74366aa1fff96f32bd5cf802587da71d30a691eb7"
+  },
+  "WebShop": {
+   "arxiv_id": "2207.01206v4",
+   "pdf_sha256": "131e93080bc8d9ff801ff40bf69b7d12bfd9db018c223fdf03e622928f7ec032",
+   "status": "ok",
+   "text_chars": 86250,
+   "text_sha256": "df012c4115b6c50556d3323978bf4458850988ef77fedb3ccb33529436c92b10"
+  },
+  "WebVoyager": {
+   "arxiv_id": "2401.13919v4",
+   "pdf_sha256": "476ed4a064311f93414f5d5d17d90f10d07d2922bc05e09ee89cea26b617a2cb",
+   "status": "cached",
+   "text_chars": 71838,
+   "text_sha256": "abe7d67d7e6558c78f2e390413dc67cf2e0038605abb526f6bc456aec9905f81"
+  }
+ },
+ "schema_version": 1,
+ "stage": "controls_identity"
+}

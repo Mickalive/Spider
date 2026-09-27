@@ -1,0 +1,33 @@
+{
+ "declared_at": "2026-09-27T09:04:45.967571+00:00",
+ "experiment_id": "EXP-INTEL-36306525220",
+ "frozen_global_domain_keywords": [
+  "web",
+  "agent",
+  "browser",
+  "automation",
+  "llm",
+  "e-commerce",
+  "benchmark",
+  "environment",
+  "multimodal",
+  "replay",
+  "compilation",
+  "memory",
+  "cache",
+  "cost",
+  "token",
+  "screen",
+  "workflow",
+  "gui",
+  "interface"
+ ],
+ "n_reference_strings_found": 1,
+ "pdf_sha256": "7847cb6bd8aa64672ed0f3983312dabeb1db5e126a1aebfec1571c7c920e1602",
+ "pdf_status": 200,
+ "references": [
+  "s. No model participates. The same database and window al- ways produce the same document, so episodic memory becomes free to rebuild, safe to cache, and mechanically auditable. Interpretation is not banned but quarantined: a second schema tier accepts inferred labels only when they are namespaced, confidence-tagged, and linked to the measured evidence that supports them. Our contributions are: 1 arXiv:2608.05784v1 [cs.AI] 6 Aug 2026 \u2022 A two-tier schemafor representing human com- puter activity to agents, separating measured fac"
+ ],
+ "schema_version": 1,
+ "selection_rule": "Declared at EXECUTE stage 1b, before any snowball artifact was fetched or read. Source: the reference list of the positive-control artifact arXiv:2608.05784v1, taken in document order. Inclusion: reference strings that contain an arXiv identifier (abs/YYMM.NNNNN form). Cap: first 25 such references, no reordering, no content-based filtering, no cherry-picking. Each included reference is then identity-resolved under the frozen prereg 4.1 rule with its OWN frozen expected identity taken verbatim from the citing paper's own reference string (expected_title = title substring as printed in the reference, expected_authors = [] -> condition C3 skipped with reason 'snowball reference carries no author string', domain_keywords = the frozen global domain keyword list). prereg 4.4 caps the snowball at 50; this run takes 25."
+}
