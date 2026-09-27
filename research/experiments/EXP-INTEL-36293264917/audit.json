@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36293264917",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "F1",
+      "finding_ref": "validity_findings[0], validity_findings[1]",
+      "fix": "Re-run Q1 with a verified identity resolver: assert title/author/arXiv-ID agreement (or an explicit author-confirmed allowlist) BEFORE any field extraction or scoring, and emit AMBIGUOUS/NOT_LOCATED as UNMEASURED. execute_search.py:509-512 currently sets status='LOCATED' for all_results[0] with no identity check, so the frozen identity-before-scoring clause is violated again by construction on every run."
+    },
+    {
+      "id": "F2",
+      "finding_ref": "validity_findings[0]",
+      "fix": "Void and re-run the five misresolved targets against the arXiv IDs already hardcoded in the producer's own script at execute_search.py:489-497 (WebArena 2307.13854, MiniWoB++ 1802.08827, BrowserGym 2401.15378, AgentBench-web 2308.03688). The existing q1_score='NOT_FOUND' entries for webarena, webgym, miniwob, browsergym and agentbench_web must be marked VOID, not retained as per-target negatives."
+    },
+    {
+      "id": "F3",
+      "finding_ref": "validity_findings[2]",
+      "fix": "Split target_id 'crux_webvoyager_seeact_webagent' (execute_search.py:115-127) into four separate mandated targets and search Crux, SeeAct and WebAgent individually. Three systems named in prereg.md section 3.1 item 9 currently have no log line, no resolution record and no score, and their absence is silently absorbed into WebVoyager's NOT_FOUND."
+    },
+    {
+      "id": "F4",
+      "finding_ref": "validity_findings[2], validity_findings[3]",
+      "fix": "Execute the prereg.md section 3.1 item 10 1-hop citation snowball (<=50 papers), or restate the Q1 corpus bound to exclude it in the frozen decision rule BEFORE any negative is claimed. execute_search.py:729 hardcodes snowball_targets=0; this must not be folded silently into a recall figure, because the frozen Q1 NOT_FOUND condition requires an exhaustive search over the bounded target list."
+    },
+    {
+      "id": "F5",
+      "finding_ref": "validity_findings[3]",
+      "fix": "Replace bounded_recall with a metric that can vary: correct_identity_resolved / named_systems_searched, reported alongside unsearched_systems and snowball_coverage. The current searched/mandated ratio at execute_search.py:659-661 is identically 1.0 because the loop at execute_search.py:630-633 processes every mandated target by construction, so the recorded recall of 1.0 measures nothing."
+    },
+    {
+      "id": "F6",
+      "finding_ref": "validity_findings[4]",
+      "fix": "Repair PC-KNOWN-TRANSFER-PAPER: resolve it by arXiv ID 2207.01201 rather than a fuzzy Crossref query, and change execute_search.py:595-599 and :712 so that ABSENCE of the frozen minimum fields (transfer_success_N AND holdout_rule) yields FAIL instead of being relabelled 'PARTIAL' and converted into an unconditional pass. Re-issue raw/controls_result.json so it no longer asserts pass=true for the same control id that result.json records as pass=false."
+    },
+    {
+      "id": "F7",
+      "finding_ref": "validity_findings[5]",
+      "fix": "Add a null control with real power against the failure that actually occurred: inject a REAL but WRONG artifact identity (e.g. map 'WebArena' -> arXiv:1802.05012) and require the resolver to flag it. NC-FABRICATED-CLAIM uses a non-existent arXiv ID (2609.99999) and cannot fail; retain it only as a trivial sanity check, not as the specificity control the mandate required."
+    },
+    {
+      "id": "F8",
+      "finding_ref": "validity_findings[6], validity_findings[7]",
+      "fix": "Reconcile the Q2 overhead_ratio_R metric: report the instrument output (99.0) and the abstract reading ('60-343x') as separate labelled objects each with its own evidence span, and state explicitly that 99.0 is the recovered fraction 1-1/R, not R. Attach an evidence quote to every Q2 field, and void the uncertainty_or_range=FOUND credit unless a range or uncertainty for R or h is actually quoted (the only logged evidence is a sentence saying confidence intervals are not yet reported)."
+    },
+    {
+      "id": "F9",
+      "finding_ref": "validity_findings[8]",
+      "fix": "Re-read the retrieved arXiv:2608.05784v1 span for the accounting convention (the ceiling formula h(1-1/Rinfo), Rinfo=343) and for the section '8.4 Limitations of the Overhead Measurements' with its five stated limitations. Either extract them or record accounting_convention as present-in-source-but-not-extracted. Delete the 'genuine gap in the source, not an extraction failure' characterisation unless the untruncated text is shown to omit it."
+    },
+    {
+      "id": "F10",
+      "finding_ref": "validity_findings[9]",
+      "fix": "Correct the claims that exceed the frozen falsifier: report.md sections 2.1, 5, 7 and 10 and result.json observations[0]/[4], validity_notes[1], controls['B-EXTERNAL-BAR-ABSENT'] and controls['B-INTEL-PREDECESSOR-SEARCH'] must stop asserting 'identity-before-scoring respected', 'All 8 mandated targets were resolved to verified artifact identities', and the global 'the comparator does not exist in the published literature in the required form'. The frozen falsifier permits a negative for the corpus only, with bounded recall recorded exactly."
+    },
+    {
+      "id": "F11",
+      "finding_ref": "validity_findings[0], validity_findings[4]",
+      "fix": "Set result.json status per the frozen rule to MEASUREMENT_INVALID, not COMPLETE. Two independent frozen triggers fire: prereg.md section 5 ('If this control fails (pipeline finds nothing): Measurement is INVALID - search pipeline has no sensitivity'; result.json records extracted_fields=[]) and prereg.md section 6 / spec.json decision_rule.OVERALL ('identity-before-scoring violated for any scored target'). Any Q1 outcome other than UNMEASURED/UNEVALUABLE is barred until F1-F5 are complete."
+    },
+    {
+      "id": "F12",
+      "finding_ref": "validity_findings[1], validity_findings[5], unresolved[6]",
+      "fix": "Do not record a closed negative for C-CROSSSITE from this packet; the external-bar question stays OPEN and unmeasured. Note for the program that this is the second consecutive intel packet reproducing the EXP-INTEL-36272389571 failure class recorded in codex/claim_state.json (crossed name-to-artifact mapping plus a non-discriminating null control), so the identity-resolution defect should be treated as a program-level instrument bug requiring a shared fix, not a per-experiment retry with better search queries."
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1",
+      "severity": "decisive",
+      "class": "identity_before_scoring_violated",
+      "finding": "Five of the eight Q1 target_ids were resolved to artifacts that are not the target system, then scored as per-target negatives instead of UNMEASURED. raw/search_log.jsonl lines 2, 3, 6 and 7 (webarena, webgym, miniwob, browsergym) all record resolution_status='LOCATED' with arXiv:1802.05012v2, \"'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer\" (2018); line 8 (agentbench_web) records LOCATED with arXiv:1004.1769v1, \"Protection of Web Applications from Cross-Site Scripting Attacks in Browser Side\" (2010). All five carry q1_score='NOT_FOUND'. This is the precise outcome prereg.md section 4 and spec.json measurement_validity[0] forbid ('Not located is recorded as UNMEASURED, never as a negative finding') and that request.json director_mandate.allocation.question named as the predecessor's failure. The frozen rule assigns MEASUREMENT_INVALID to this condition; result.json status is COMPLETE."
+    },
+    {
+      "id": "VF2",
+      "severity": "decisive",
+      "class": "instrument_root_cause_misdiagnosed",
+      "finding": "The cause is a missing identity assertion in the producer's own code, not 'search query ambiguity' as stated in provenance.json deviations_from_frozen_design[1..2], report.md section 2.3 and result.json unresolved[1]. execute_search.py:509-512 sets identity['status']='LOCATED' for all_results[0] with no title, author or ID verification whatsoever, so LOCATED means 'some API returned at least one row'. execute_search.py:489-507 hardcodes the CORRECT arXiv IDs (webarena 2307.13854, miniwob 1802.08827, browsergym 2401.15378, agentbench_web 2308.03688, seeact 2402.04566) but the probe (a) is gated on a substring match, (b) appends a stub carrying no arxiv_id, and (c) can never become primary because it is appended after the API results. The correct identities were present in the script and unused. The producer's diagnosis points the next cycle at re-querying rather than at adding the missing assertion."
+    },
+    {
+      "id": "VF3",
+      "severity": "major",
+      "class": "bounded_list_not_exhausted",
+      "finding": "The frozen Q1 NOT_FOUND condition requires an exhaustive search over the bounded target list (prereg.md section 6). It was not exhausted. prereg.md section 3.1 item 9 names Crux, WebVoyager, SeeAct and WebAgent as four targets, but execute_search.py:115-127 collapses them into one target_id whose first query is WebVoyager's, and resolve_identity returns only the first hit; Crux, SeeAct and WebAgent therefore have no log line, no resolution record and no score. prereg.md section 3.1 item 10 (1-hop citation snowball, up to 50 papers) was not executed and snowball_targets is hardcoded to 0 at execute_search.py:729."
+    },
+    {
+      "id": "VF4",
+      "severity": "major",
+      "class": "derived_metric_is_an_identity",
+      "finding": "bounded_recall carries no information. execute_search.py:659-661 computes bounded_recall_q1 = searched_q1 / mandated_q1, where mandated_q1 counts the q1_relevant entries of MANDATED_TARGETS and searched_q1 counts the q1_relevant results of the loop at execute_search.py:630-633, which processes every one of those entries. searched equals mandated by construction, so the metric is identically 1.0. It does not count correct identity resolution, does not count the three unsearched named systems, and does not count the unrun snowball. The recorded recall of 1.0 in raw/bounded_recall.json, result.json metrics.bounded_recall and report.md sections 1, 2.1 and 6.1 is therefore not evidence of coverage. This is structurally the same defect class the parent audit found in the AGF prevalence estimator, where the frozen statistic reduced to x > x."
+    },
+    {
+      "id": "VF5",
+      "severity": "decisive",
+      "class": "positive_control_incapable_of_failing_and_internally_contradictory",
+      "finding": "PC-KNOWN-TRANSFER-PAPER is recorded three mutually inconsistent ways. raw/search_log.jsonl line 10: resolution_status='LOCATED', q1_score='PARTIAL', extracted_q1={}, evidence_quotes=[]. raw/controls_result.json: resolution_status='LOCATED', q1_score='PARTIAL', extracted_fields=[], pass=true. result.json: pass=false, resolution_status='WRONG_PAPER_LOCATED', resolved_to='Evaluation und Bewertung (2014, DOI:10.1007/978-3-658-08327-4_7)'. The pass=true in the hash-cited derived artifact is a code constant, not a measurement: execute_search.py:595-599 sets q1_score='PARTIAL' precisely when the frozen minimum fields are ABSENT (the branch taken in this run), and execute_search.py:712 then computes pass = q1_score in ['FOUND','PARTIAL'], which is unconditionally true. The audit confirms result.json's pass=false is the correct evaluation of the control, and that the producer's decision to set status=COMPLETE anyway contradicts prereg.md section 5 ('If this control fails: Measurement is INVALID - search pipeline has no sensitivity') and section 6."
+    },
+    {
+      "id": "VF6",
+      "severity": "major",
+      "class": "null_control_non_discriminating",
+      "finding": "NC-FABRICATED-CLAIM passes for a trivial reason and has no power against the failure that actually occurred. The control is a non-existent arXiv ID (2609.99999); execute_search.py:509-512 returns NOT_LOCATED whenever an API returns no rows, so the UNMEASURED outcome is guaranteed regardless of instrument quality. request.json director_mandate.allocation.question required 'a null control with power against the failure that actually occurred, namely inject a deliberately wrong artifact identity ... and require the pipeline to flag it'. The failure that actually occurred is a REAL-but-WRONG identity accepted as LOCATED, and this run demonstrates five times that the pipeline cannot flag that class. report.md section 4.1 nonetheless asserts the control 'has power against the failure mode where a missing target was silently substituted (COVENANT target lost in predecessor)'. The same non-discriminating-NC conclusion was already recorded by the DIRECTOR for EXP-INTEL-36272389571 in codex/claim_state.json latest_event_by_claim['C-PRODUCT-ECON']; the defect is inherited from the frozen design (prereg.md section 7.5 anticipates arXiv collision but not wrong-real-identity), so it is a design defect faithfully executed, but it cannot license the Q1 negative."
+    },
+    {
+      "id": "VF7",
+      "severity": "major",
+      "class": "extraction_instrument_has_zero_demonstrated_power_on_this_corpus",
+      "finding": "extracted_q1 is {} for all ten q1_relevant log lines: zero of the frozen Q1 fields were extracted anywhere, including the three correctly identified papers, and the positive control extracted 0 of its 2 required minimum fields. The audit re-ran the producer's own extractor offline to bound this. It CAN reach the positive verdict: a synthetic paragraph that genuinely reports the four-part form yields all six fields and score_q1='FOUND' (VF-A), and PDF-style hard line wrapping does not defeat it (VF-B, still FOUND). So the empty result is not a structural incapacity and not a formatting artifact. However the extractor demonstrably false-positives on vocabulary: a paper that merely cites 'leave-one-site-out' in related work and mentions 'ubiquitous template' scores 'PARTIAL' with two of five fields plus a fabricated site_pair_stratum_isolation (VF-C). The holdout_rule and site_pair_stratum_isolation detectors are keyed to SPIDER's own internal phrasing rather than to reported measurements, and site_pair_stratum_isolation is a mandatory condition for the frozen FOUND verdict, so it is close to unreachable in external literature except by echoing SPIDER's prior handoff wording. The Q1 NOT_FOUND is therefore a report about this instrument, not a fact about the published literature, and it is uninformative in both directions."
+    },
+    {
+      "id": "VF8",
+      "severity": "major",
+      "class": "metric_value_suppressed_and_contradicted_by_instrument_output",
+      "finding": "Q2 overhead_ratio_R has three mutually inconsistent values across the producer's own record. (a) raw/search_log.jsonl line 1 records extracted_q2.overhead_ratio_R = {'value': 99.0}. (b) The audit re-ran the same extractor (execute_search.py:399-413) on the stored abstract and obtained {'value': 60.0}; the extractor's range branch is unreachable for this source because the 'overhead.*?ratio.*?(d+)' pattern matches first and breaks. (c) result.json metrics.Q2_BOUNDING_PARAMETERS.partial_details.extracted_values.overhead_ratio_R reports {'range': '60-343x'}, a value that is neither the logged extraction nor any extractor output - it is a hand reading of the abstract prose, with no evidence quote attached. 99.0 is not R at all: per the log's own fourth evidence quote, 'it recovers 1-1/R ~ 99%(4) of that step's re-derivation cost (exactly 99.7% at the median ceiling Rinfo= 343)' - 99 is the recovered fraction, the complement of the overhead ratio. Neither conflicting instrument value is disclosed in result.json, report.md section 3.1 or provenance.json."
+    },
+    {
+      "id": "VF9",
+      "severity": "major",
+      "class": "false_positive_field_credited_as_evidence",
+      "finding": "Q2 uncertainty_or_range is credited as FOUND but its only logged evidence is a false positive. The field's sole basis is the second evidence quote of raw/search_log.jsonl line 1: 'we release the harness so the comparison can be rerun with confidence intervals', i.e. the source states the confidence intervals are NOT yet reported. The audit reproduced the field firing on that exact string via execute_search.py:430-441 (VF-D), and re-running the extractor on the stored abstract yields only two Q2 fields (delegable_recurrence_fraction_h, overhead_ratio_R) with no uncertainty_or_range. result.json and report.md section 3.1 nonetheless assert '60-343x range for R with explanation of what drives the range', which no logged evidence supports. Q2's 3-of-4 field count therefore rests on 2 supportable fields plus one false positive."
+    },
+    {
+      "id": "VF10",
+      "severity": "moderate",
+      "class": "declared_source_gap_contradicted_by_own_retrieved_span",
+      "finding": "accounting_convention = MISSING is contradicted by the producer's own retrieved text. raw/search_log.jsonl line 1 evidence quote 1 states the all-fleet ceiling as 'h(1-1/Rinfo): with the in-sample delegable rate h= 9.0% it is ~9.0%, and with the conservative out-of-sample rate h= 7.7% (Section 7.4) it is ~7.7%'; quote 3 names 'Rinfo = 343' and the section header '8.4 Limitations of the Overhead Measurements / Five limitations bound the results of this half of t[he paper]'. The retrieved span therefore contains an explicit, if partial, ceiling/accounting formula and a five-item limitations list, both ignored by the extractor. result.json validity_notes[3] and report.md section 3.2 characterise the absence as 'a genuine gap in the source, not an extraction failure', which is not supported for the retrieved span. This dispute does not rescue the LOCATED verdict, which requires 4 of 4 fields, and h itself rests on a corpus of one professional's 128,756 frames over 51 active days."
+    },
+    {
+      "id": "VF11",
+      "severity": "major",
+      "class": "claim_exceeds_frozen_falsifier",
+      "finding": "The frozen falsifier permits the Q1 negative 'FOR THAT CORPUS ONLY, with bounded recall over the mandated target list recorded exactly' (prereg.md sections 1 and 9). report.md section 6.1 exceeds it, stating 'No external comparator exists', 'the comparator does not exist in the published literature in the required form' and '47 prior C-CROSSSITE experiments failing to produce an external comparator are now explicable'. Given VF1, VF3, VF4 and VF6, neither the corpus bound nor the recall accounting holds. This converts missing coverage into a global negative, which the transmission contract forbids (missing evidence is not a negative result)."
+    },
+    {
+      "id": "VF12",
+      "severity": "moderate",
+      "class": "internal_contradiction_in_producer_narrative",
+      "finding": "report.md contradicts itself and the raw log on the central validity claim, always in the producer's favour. Section 2.1 asserts 'All 8 mandated targets were resolved to verified artifact identities' and the table immediately below marks 5 of 8 as wrong papers. Section 7 records 'Identity resolution failure | REALIZED (4 targets) | NOT_LOCATED recorded as UNMEASURED' when the log records 5 targets as LOCATED and scored NOT_FOUND with none recorded as UNMEASURED. Sections 5 and 10 assert 'identity-before-scoring respected' and 'The experiment validly completed its frozen design', both contradicted by raw/search_log.jsonl. Provenance and artifact integrity themselves are sound: all three frozen-input hashes match freeze.json and all six declared artifact hashes match, so this is a reasoning defect, not tampering."
+    },
+    {
+      "id": "VF13",
+      "severity": "minor",
+      "class": "unexplained_identifier_discrepancy",
+      "finding": "raw/search_log.jsonl line 4 records WebShop as arXiv:2207.01206v4 while the producer's own script hardcodes 2207.01201 for webshop at execute_search.py:490. Title and authors (Yao, Chen, Yang, Narasimhan) match the WebShop paper, so the identity is substantively correct and the audit counts it as resolved; the ID disagreement is unexplained and exists because the hardcoded table was never used to check anything (VF2)."
+    },
+    {
+      "id": "VF14",
+      "severity": "informational",
+      "class": "not_a_falsification_and_not_infrastructure_failure",
+      "finding": "This audit does not treat the packet as a scientific negative and does not treat it as infrastructure failure. The corpus is real and credential-free: 0 credentials, 0 model API calls, 0 browser binaries and 0 container pulls, consistent with provenance.json and the mandate's cheapest-sufficient-substrate prior; retrieval genuinely succeeded for the three correctly identified papers and for arXiv:2608.05784v1. The failure is confined to the identity-resolution and control-validity layers of the measuring instrument, and to the interpretation layer that promoted an empty instrument result into a closed negative. The C-CROSSSITE external-bar question is UNMEASURED, not refuted."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-EXTERNAL-BAR-ABSENT",
+      "producer_record": "controls['B-EXTERNAL-BAR-ABSENT'] pass=true; 'Confirmed: 0 of 8 mandated targets report cross-site transfer in the four-part form with holdout rule and stratum isolation. Bounded recall = 1.0.'",
+      "audit_disposition": "pass=true NOT EARNED",
+      "finding": "5 of the 8 were never examined (wrong artifact, VF1), 3 systems named in the mandated list were never searched (VF3), the 1-hop snowball was not run (VF3), the extractor produced 0 of the frozen Q1 fields with no demonstrated power (VF7), and the positive control that was supposed to demonstrate that power extracted 0 of its 2 required fields and is hardcoded to pass in code (VF5). The correct disposition for a corpus in which the instrument was never shown to be able to detect a single instance of the target quantity is UNMEASURED/UNEVALUABLE, not a confirmed absence. The identifier is preserved; only the pass value is disputed."
+    },
+    {
+      "id": "B-SCOUT-CLAIMED-FIGURES",
+      "producer_record": "controls['B-SCOUT-CLAIMED-FIGURES'] pass=true; 'Activity Frames (arXiv:2608.05784v1) LOCATED and confirms R=60-343x (modeled upper bound) and h=9.0% in-sample / 7.7% out-of-sample.'",
+      "audit_disposition": "pass=true PARTIALLY EARNED, NARROWED",
+      "finding": "The single-source attribution holds and is independently verifiable from the packet's own raw evidence: the stored abstract of arXiv:2608.05784v1 states 'the Routine Overhead Ratio R ... a modeled upper bound, at 60-343x, and a delegable recurrence of 9.0% in-sample and 7.7% out-of-sample'. The h values are corroborated by two evidence quotes in raw/search_log.jsonl and were reproduced by the auditor re-running the producer's own extractor. The baseline is NOT earned as 'verified' in full: the accounting_convention half of the baseline is unmet (VF10, and the span does contain a partial ceiling formula that was not extracted), the R field value is contradicted by the instrument's own output and was hand-transcribed without an evidence quote (VF8), and uncertainty_or_range is a false positive (VF9). Supportable form: the figures are quoted in the abstract of one arXiv preprint, on a corpus of one professional's 128,756 frames over 51 active days, alongside a self-declared five-item limitations section that was not read."
+    },
+    {
+      "id": "B-INTEL-PREDECESSOR-SEARCH",
+      "producer_record": "controls['B-INTEL-PREDECESSOR-SEARCH'] pass=true; 'Consistent: this search also found zero sources meeting the four-part form.'",
+      "audit_disposition": "pass=true NOT EARNED as independent support",
+      "finding": "This is agreement between two instruments that both lack demonstrated extraction power for the four-part form, which is not corroboration. The predecessor packet EXP-INTEL-36287179392 established no four-part external-bar result, and the predecessor's own audit found a different frozen estimator (AGF) to be unevaluable. Two empty outputs from instruments with no established sensitivity do not corroborate each other. The identifier is preserved; the support claim is disputed."
+    },
+    {
+      "id": "PC-KNOWN-TRANSFER-PAPER",
+      "producer_record": "metrics.controls.PC-KNOWN-TRANSFER-PAPER pass=false, resolution_status='WRONG_PAPER_LOCATED', resolved_to='Evaluation und Bewertung (2014, DOI:10.1007/978-3-658-08327-4_7)', q1_score='PARTIAL', extracted_fields=[]",
+      "audit_disposition": "pass=false CONFIRMED as the correct evaluation, but not acted upon",
+      "finding": "The audit confirms pass=false: the target resolved to a 2014 German-language conference chapter on 'Evaluation und Bewertung' (venue 'Global Webshop'), nothing to do with the WebShop web-agent benchmark, and no field was extracted. The control therefore failed the frozen pass criterion in prereg.md section 5, which states failure makes the measurement INVALID. Two producer defects follow: status was set to COMPLETE anyway, and the hash-cited derived artifact raw/controls_result.json (sha256 2a996f55b65a5c98) still asserts pass=true for the same control id, so the packet simultaneously asserts both outcomes. The control was also neutralised at the code level and cannot fail in future runs without the change in F6."
+    },
+    {
+      "id": "NC-FABRICATED-CLAIM",
+      "producer_record": "controls['NC-FABRICATED-CLAIM'] pass=true; 'fabricated arXiv:2609.99999 correctly NOT_LOCATED, scored UNMEASURED'",
+      "audit_disposition": "pass=true LITERALLY CORRECT BUT NON-DISCRIMINATING",
+      "finding": "The recorded outcome matches the frozen criterion, so this is not a fabricated result. It is uninformative: a non-existent arXiv ID cannot resolve under any implementation, so the control cannot distinguish a valid instrument from an invalid one, and it has no power against the wrong-real-identity failure that this run actually exhibited five times (VF6). Combined with the neutralised positive control, the packet has no working specificity control and no working sensitivity control, which is why neither Q1 nor Q2 can be certified by this run."
+    },
+    {
+      "id": "baseline_strength_overall",
+      "producer_record": "n/a - audit-level finding",
+      "audit_disposition": "no working control on either axis",
+      "finding": "The frozen design had exactly two instruments for validity (PC sensitivity, NC specificity) and both are disabled as executed: the PC's pass is hardcoded true in code and its failure was recorded but not propagated to status, and the NC cannot fail. There is also no baseline that could detect a false positive in the Q1 direction other than the PC, and the audit's own VF-C test shows the extractor does fire on vocabulary alone. A search over an external literature cannot be adjudicated by a single non-discriminating control plus one disabled control."
+    }
+  ],
+  "recomputed_metrics": {
+    "Q1_CROSS_SITE_TRANSFER": {
+      "producer_bounded_recall": 1.0,
+      "Q1_bounded_recall_recomputed_identity_value": 1.0,
+      "Q1_bounded_recall_information_content": 0.0,
+      "Q1_identity_resolution_recall_named_systems_recomputed": 0.2727,
+      "Q1_identity_resolution_recall_target_ids_recomputed": 0.375,
+      "Q1_target_ids_misresolved_but_scored_NOT_FOUND": 5,
+      "Q1_mandated_named_systems_never_searched": 3,
+      "Q1_snowball_papers_searched": 0,
+      "Q1_snowball_papers_frozen_maximum": 50,
+      "Q1_fields_extracted_total": 0,
+      "Q1_fields_possible_on_correctly_identified_items": 20,
+      "PC_minimum_fields_detected": 0,
+      "PC_minimum_fields_required": 2,
+      "Q1_verdict": "UNEVALUABLE - instrument never demonstrated able to detect any instance of the target quantity, and 5 of 8 target_ids were not the target system"
+    },
+    "Q2_BOUNDING_PARAMETERS": {
+      "Q2_overhead_ratio_R_instrument_value_logged": 99.0,
+      "Q2_overhead_ratio_R_instrument_value_recomputed_on_stored_abstract": 60.0,
+      "Q2_overhead_ratio_R_reported_in_result_json": "60-343x",
+      "Q2_overhead_ratio_R_instrument_output_range_branch_reachable": false,
+      "Q2_delegable_recurrence_fraction_h_in_sample_pct": 9.0,
+      "Q2_delegable_recurrence_fraction_h_out_of_sample_pct": 7.7,
+      "Q2_h_corroborated_by_packet_evidence": true,
+      "Q2_h_corpus_size_frames": 128756,
+      "Q2_h_corpus_active_days": 51,
+      "Q2_h_corpus_users": 1,
+      "Q2_accounting_convention_extracted": false,
+      "Q2_accounting_convention_present_in_retrieved_span": true,
+      "Q2_uncertainty_or_range_credited_by_producer": true,
+      "Q2_uncertainty_or_range_independently_supportable": false,
+      "Q2_fields_independently_supportable": 2,
+      "Q2_fields_total_required_for_LOCATED": 4,
+      "Q2_verdict": "PARTIAL confirmed as a terminal state (2-3 of 4), but the producer's 3-of-4 field count is inflated by one false positive and one suppressed conflicting instrument value; the accounting convention and the '60-343x' range are not instrument-verified"
+    },
+    "packet_integrity": {
+      "frozen_input_hashes_match_freeze_json": true,
+      "declared_artifact_hashes_verified": 6,
+      "declared_artifact_hash_mismatches": 0,
+      "credentials_used": 0,
+      "model_api_calls": 0,
+      "browser_binaries_used": 0,
+      "container_registry_pulls": 0,
+      "wall_clock_seconds": 159,
+      "note": "Provenance and artifact integrity are sound; the defects are in measurement validity, controls and interpretation, not in tampering or infrastructure."
+    },
+    "extractor_validity_probes_run_by_auditor": {
+      "VF-A_synthetic_paper_reporting_four_part_form": "6/6 fields, score FOUND - instrument can express a positive",
+      "VF-B_same_text_with_pdf_style_hard_line_wraps": "6/6 fields, score FOUND - not defeated by line wrapping",
+      "VF-C_paper_merely_citing_leave_one_site_out_and_ubiquitous_template": "2/5 fields incl. a fabricated site_pair_stratum_isolation, score PARTIAL - demonstrated false positive",
+      "VF-D_uncertainty_field_fires_on_a_sentence_saying_CIs_are_not_yet_reported": "field fires - demonstrated false positive",
+      "VF-E_ceiling_formula_span_h(1-1/Rinfo)_extraction": "accounting_convention NOT extracted despite the formula being present in the text"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING: a bounded operational observation about three papers and one preprint. Within a single credential-free arXiv/Semantic Scholar/Crossref pass whose resolver labelled the first API hit LOCATED without any identity verification, three correctly identified web-agent papers (WebShop arXiv:2207.01206v4, Mind2Web arXiv:2306.06070v3, WebVoyager arXiv:2401.13919v4) were retrieved and yielded zero of the six frozen Q1 fields under the frozen extractor, and one arXiv preprint (arXiv:2608.05784v1, 'Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay') states in its own abstract a Routine Overhead Ratio R of 60-343x as a modeled upper bound and a delegable recurrence h of 9.0% in-sample and 7.7% out-of-sample, measured on one professional's corpus of 128,756 frames over 51 active days. Q2 may be carried forward as PARTIAL, bounded to 'figures quoted in one preprint's abstract, n=1 user, with the accounting convention and a five-item limitations section still unread'. Q1 may NOT be carried forward in any form: the outcome is UNEVALUABLE, not NOT_FOUND, not negative, and not closed. Specifically NOT justified and not to be recorded anywhere downstream: (a) that no published source reports the four-part cross-site transfer form; (b) that C-CROSSSITE has no external numeric comparator; (c) that the external-bar question is closed in the negative; (d) that the 47 prior C-CROSSSITE experiments are thereby explicable; (e) any measured value of h or R usable to bound SPIDER's product economics - these remain UNMEASURED priors in SPIDER evidence, now with one preprint queued for proper reading. C-CROSSSITE stays at HYPOTHESIS with next_gate 'true website holdout without site identity leakage' still to be set internally; C-PRODUCT-ECON and C-LLM-INHERIT are unchanged. This is a measurement-validity failure, NOT a scientific falsification and NOT an infrastructure failure: the substrate was available, retrieval worked, and the instrument simply cannot currently distinguish an absent comparator from an unexamined corpus.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36293264917/freeze.json - frozen hashes for request.json, spec.json, prereg.md; all three verified matching by the auditor",
+    "research/experiments/EXP-INTEL-36293264917/prereg.md section 3.1 - mandated target list (11 named Q1 systems plus a <=50-paper 1-hop snowball); the list the producer did not exhaust",
+    "research/experiments/EXP-INTEL-36293264917/prereg.md section 5 - frozen control pass criteria: PC failure makes the measurement INVALID; NC must be flagged NOT_LOCATED/UNVERIFIED and never FOUND/PARTIAL",
+    "research/experiments/EXP-INTEL-36293264917/prereg.md section 6 - Q1 NOT_FOUND requires an exhaustive search over the bounded target list; MEASUREMENT_INVALID if identity-before-scoring is violated for any scored target",
+    "research/experiments/EXP-INTEL-36293264917/spec.json decision_rule.OVERALL - MEASUREMENT_INVALID if identity-before-scoring is violated; also shows the spec omits PARTIAL from the terminal set while the prereg includes it (frozen internal inconsistency, not decisive here)",
+    "research/experiments/EXP-INTEL-36293264917/raw/search_log.jsonl lines 2,3,6,7 - webarena/webgym/miniwob/browsergym recorded LOCATED with arXiv:1802.05012v2, a 2018 literary-fiction sociology paper; q1_score=NOT_FOUND",
+    "research/experiments/EXP-INTEL-36293264917/raw/search_log.jsonl line 8 - agentbench_web recorded LOCATED with arXiv:1004.1769v1, a 2010 XSS paper; q1_score=NOT_FOUND",
+    "research/experiments/EXP-INTEL-36293264917/raw/search_log.jsonl line 10 - PC recorded LOCATED/PARTIAL with extracted_q1={} and zero evidence quotes",
+    "research/experiments/EXP-INTEL-36293264917/raw/search_log.jsonl line 1 - Activity Frames arXiv:2608.05784v1: abstract states R=60-343x and h=9.0%/7.7%; extracted_q2.overhead_ratio_R={'value':99.0}; four evidence quotes including the h(1-1/Rinfo) ceiling formula, Rinfo=343, and the section header '8.4 Limitations of the Overhead Measurements'",
+    "research/experiments/EXP-INTEL-36293264917/raw/controls_result.json - asserts PC-KNOWN-TRANSFER-PAPER pass=true, contradicting result.json pass=false; hash-cited as evidence in result.json artifacts",
+    "research/experiments/EXP-INTEL-36293264917/raw/bounded_recall.json - recall 1.0 for Q1 and Q2 with snowball_targets hardcoded to 0",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 489-512 - correct arXiv IDs hardcoded but never used as primary; identity['status']='LOCATED' set unconditionally for all_results[0]",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 115-127 - four mandated systems (Crux, WebVoyager, SeeAct, WebAgent) collapsed into one target_id",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 399-413 - R extractor first-match-wins with an unreachable range branch",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 430-441 - uncertainty_or_range detector fires on the phrase 'confidence intervals' regardless of polarity",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 595-599, 712 - positive control score forced to PARTIAL when minimum fields are absent, then pass computed as always true",
+    "research/experiments/EXP-INTEL-36293264917/execute_search.py lines 659-661, 729 - bounded_recall is searched/mandated, identically 1.0 by construction; snowball_targets hardcoded 0",
+    "research/experiments/EXP-INTEL-36293264917/result.json - status=COMPLETE and outcome=MIXED; metrics.bounded_recall recall 1.0; controls PC pass=false alongside raw/controls_result.json pass=true",
+    "research/experiments/EXP-INTEL-36293264917/report.md sections 2.1, 4.1, 5, 6.1, 7, 10 - self-contradictory validity narrative and the over-broad 'the comparator does not exist in the published literature' claim",
+    "research/experiments/EXP-INTEL-36293264917/provenance.json deviations_from_frozen_design[1..2] - cause misattributed to 'search query ambiguity'/'Crossref' rather than the missing identity assertion",
+    "research/experiments/EXP-INTEL-36293264917/request.json director_mandate.allocation.question - binding requirements: identity-before-scoring, 'not located' as UNMEASURED, a null control with power against a deliberately wrong artifact identity, and a negative bounded to the corpus",
+    "codex/claim_state.json latest_event_by_claim['C-PRODUCT-ECON'] (EXP-INTEL-36272389571) - precedent: crossed name-to-artifact mapping, 1 of 5 targets UNMEASURED rather than negative, and 'NC-FABRICATED-BINDING-CLAIMS reproduced but is non-discriminating and had no power against the identity failure that actually occurred'",
+    "codex/claim_state.json latest_event_by_claim['C-CROSSSITE'] (EXP-INTEL-36287179392) - C-CROSSSITE held at HYPOTHESIS; parent precedent for an unevaluable frozen estimator (AGF reducing to x > x), the same defect class as the identity-valued bounded_recall here",
+    "research/lanes/registry.json - intel lane charter: 'Find, reproduce and stress-test datasets, baselines and prior art only when they can alter a live SPIDER claim or experimental design'; priority claims C-CROSSSITE, C-PRODUCT-ECON, C-LLM-INHERIT",
+    "auditor recomputation (offline, no network, no writes to producer files): re-ran the producer's own extract_from_text/score_q1/score_q2 from execute_search.py against synthetic and stored text - probes VF-A through VF-E as recorded in recomputed_metrics.extractor_validity_probes_run_by_auditor"
+  ],
+  "unresolved": [
+    "Whether any published source reports the four-part cross-site transfer form with a stated holdout split and stratum isolation remains UNMEASURED. It is not answered, not refuted and not closed by this packet. Resolving it requires F1-F5.",
+    "Whether the frozen Q1 test is satisfiable by external literature at all. site_pair_stratum_isolation is a mandatory condition for FOUND, but its detector is keyed to SPIDER's own vocabulary ('site-pair stratum', 'ubiquitous template'), as is holdout_rule. I cannot determine from this packet whether the design could ever return FOUND for a source that did not echo SPIDER's prior handoff wording; this is a design question that should be settled before the Q1 question is re-run.",
+    "Whether arXiv:2608.05784v1 states an explicit compile-versus-reuse accounting convention, an uncertainty for h and R, or a full build/amortization treatment in its untruncated body. The retrieved 69,425-char span contains the ceiling formula h(1-1/Rinfo) and a five-item limitations section header, neither analysed; h's corpus is n=1 professional.",
+    "Whether the correctly retrieved full texts of WebShop, Mind2Web and WebVoyager contain any of the six Q1 fields under a more tolerant extractor. The observed 0-of-20 is a property of this keyword instrument, not established as a property of those papers.",
+    "Whether benchmarks outside the mandated list (RULER, WebCanvas, BrowserBench per the producer's own unresolved[3]) report the four-part form. Not searched.",
+    "Whether the harness ever issued the direct arXiv requests at execute_search.py:500-507 and what they returned. The stub it appends carries no arxiv_id, so its effect is unobservable from raw/search_log.jsonl, and this is the probe that would have prevented all five misresolutions.",
+    "WebShop's recorded arXiv ID (2207.01206v4) disagrees with the ID hardcoded in the producer's own script (2207.01201). Title and authors match the WebShop paper so the audit counts the identity as substantively resolved, but the discrepancy is unexplained.",
+    "Whether the API corpus available at run time (2026-09-27) is stable enough for a rerun to be comparable. provenance.json declares reproducibility 'deterministic: true' while also conceding public API responses may vary; no response snapshot, cache or query-response record was retained for any of the three APIs, so a re-run cannot be shown to have queried the same corpus. This is a reproducibility gap independent of the validity defects."
+  ]
+}
