@@ -1,0 +1,91 @@
+{
+  "experiment_id": "EXP-PHYSICS-36302980957",
+  "lane": "physics",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a pre-registered intervention-validity contract decide whether a given statistic actually reads its treatment, on a substrate where the treatment is an explicit randomized server-side assignment carrying a server-side ground-truth transition log, rather than a relabeling of the current state, calibrated against a battery that includes the three Codex estimators recorded as non-discriminating (Physics conditional-entropy statistic, Product fixed-request cold comparator, Frontier goal-state-success endpoint) plus a matched non-constant blind pair as preregistered power cases, where acceptance is a dimensionless within-stratum dynamic-range check on the estimator's own output plus a displacement measured against the SAME estimator evaluated on a matched-null re-draw of the true assignment, the minimum detectable displacement is derived at the declared sample size before freeze, and every frozen accept branch is demonstrated arithmetically reachable at that sample size before the experiment is allowed to freeze?",
+  "hypothesis": "A dimensionless intervention-validity contract (IVC) with a within-stratum dynamic-range acceptance criterion and a matched-null displacement test can correctly classify estimators: it ACCEPTS estimators that read the randomized treatment assignment and REJECTS estimators that read only the treatment label or are constant, with the minimum detectable displacement derived from a pre-freeze power calculation at the declared sample size. The contract's accept branch is arithmetically reachable by a perfectly calibrated estimator on the planted effect.",
+  "falsifier": "Any of: (1) the pre-freeze reachability proof fails for any accept branch (i.e., a perfectly calibrated estimator cannot arithmetically satisfy the acceptance criterion at the declared sample size); (2) the pre-freeze power calculation shows the minimum detectable displacement exceeds the planted effect size for any known-good estimator; (3) on the frozen substrate with genuine randomized assignment, the IVC misclassifies any preregistered known-good estimator as REJECT or any preregistered known-bad/non-constant-blind estimator as ACCEPT; (4) the IVC's invariance leg (within-stratum permutation of treatment) fails on a substrate where treatment ≠ stratum key; (5) the client-server alignment metric (required by measurement_validity) is not reported or falls below the preregistered threshold.",
+  "baselines": [
+    {
+      "id": "B-CHANNEL-IDENTITY",
+      "description": "Maximum signal channel: treatment = true randomized assignment; target = next_state; mutual information I(assignment; next_state | state, regime) computed on ground-truth log. This is the planted effect size.",
+      "expected_behavior": "IVC_DELTA = 0 (perfectly calibrated estimator returns channel MI exactly); IVC accepts."
+    },
+    {
+      "id": "B-CHANNEL-SHUFFLED",
+      "description": "Null channel: treatment = globally permuted assignment (breaks assignment→next_state link); target = next_state. Estimates finite-sample bias floor.",
+      "expected_behavior": "IVC_DELTA ≈ 0; IVC rejects (permutation p ≈ 1.0)."
+    },
+    {
+      "id": "B-CHANNEL-PARTIAL-0.5",
+      "description": "Partial signal channel: treatment = assignment with 50% probability, independent noise otherwise. Channel MI ≈ 0.5 * I_max.",
+      "expected_behavior": "IVC_DELTA > 0; IVC accepts if displacement exceeds threshold."
+    },
+    {
+      "id": "B-CHANNEL-PARTIAL-0.1",
+      "description": "Weak signal channel: treatment = assignment with 10% probability, independent noise otherwise. Channel MI ≈ 0.1 * I_max.",
+      "expected_behavior": "IVC_DELTA > 0 but small; may reject if below minimum detectable displacement."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-RUNTIME-HEADER-JACCARD-VALIDATED",
+    "description": "The Runtime header-only Jaccard discrimination statistic from EXP-RUNTIME-36100549580 (audit_status PASS, DISTRIBUTED VALIDATED), imported by sha256 from its Codex artifact and executed on stored real HTTP response headers (not a conditional-MI surrogate). This estimator reads the treatment (auth state) via header variation and has demonstrated discriminating power on real HTTP substrates.",
+    "source_experiment": "EXP-RUNTIME-36100549580",
+    "codex_artifact_sha256": "TBD_AT_DESIGN_TIME",
+    "expected_behavior": "ACCEPTED by IVC (displacement exceeds minimum detectable displacement; invariance passes)."
+  },
+  "null_control": {
+    "id": "NC-CONSTANT-ZERO",
+    "description": "Constant function returning 0.0 for all inputs. Permutation p = 1.0 by construction.",
+    "expected_behavior": "REJECTED by IVC (permutation p = 1.0 > 0.01; displacement = 0)."
+  },
+  "measurement_validity": [
+    "INTERVENTION_NOT_COVARIATE: Server assigns treatment by explicit randomized policy. I(assignment; next_state | state, regime) computed and preregistered BEFORE freeze. Planted effect shown to exceed decision threshold at declared sample size. Treatment ≠ any stratum key (verified by design).",
+    "DIMENSIONLESS_CRITERION: Acceptance uses within-stratum dynamic-range check on estimator's own output (dimensionless) plus displacement against SAME estimator on matched-null re-draw (same units). NO cross-unit comparisons (e.g., estimator units vs bits).",
+    "PRE_FREEZE_REACHABILITY: For every accept branch, a perfectly calibrated estimator's displacement on the planted effect is computed and shown to exceed the acceptance threshold at the declared sample size, using the exact acceptance formula that will be frozen. Proof included in prereg.md.",
+    "PRE_FREEZE_POWER: Minimum detectable displacement (MDD) derived from power calculation at declared sample size (alpha=0.01, power=0.8) using the matched-null re-draw distribution. MDD < planted effect size for known-good estimators. Calculation included in prereg.md.",
+    "CODEX_ESTIMATORS_BY_SHA256: The three Codex estimators (Physics conditional-entropy, Product cold comparator, Frontier goal-state) are imported by their exact sha256 from Codex artifacts, not re-implemented. Their non-constant forms are used.",
+    "MATCHED_NON_CONSTANT_BLIND_PAIR: Two structurally non-constant estimators with zero target information (within-stratum range > 0, I(estimator; target | stratum) = 0 by construction) included as preregistered power cases.",
+    "FULL_HTTP_PRESERVATION: Full HTTP request/response pairs persisted. Alignment metric between client-observed and server-logged transitions computed and reported.",
+    "PER_CASE_RNG_REPRODUCIBILITY: Fresh per-case RNG with recorded seeds so each estimator case is independently reproducible.",
+    "CODE_PATH_INTEGRITY: Hash of evaluate.__code__.co_code (not source text). Static check that no code path branches on estimator id.",
+    "NO_HARDCODED_FLAGS: G7-NO-EXTERNAL-DEPS and G6-GROUND-TRUTH replaced with actual checks. Third-party imports (numpy, scipy) explicitly declared and checked.",
+    "NO_CONSTANTS_IN_BATTERY: Known-bad battery rebuilt from hash-pinned Codex artifacts. Zero constant functions in battery."
+  ],
+  "decision_rule": {
+    "acceptance_criterion": {
+      "type": "dimensionless_within_stratum_dynamic_range_plus_matched_null_displacement",
+      "invariance_leg": {
+        "description": "Within-stratum permutation of treatment assignment. Statistic must be invariant (permutation p > 0.01) because the treatment label carries no information beyond the stratum key.",
+        "metric": "IVC_MIN_PERMUTATION_P_[ESTIMATOR_ID]",
+        "threshold": "> 0.01",
+        "required_for_accept": true
+      },
+      "displacement_leg": {
+        "description": "Estimator evaluated on true assignment vs matched-null re-draw (independent within-stratum relabel of true assignment). Displacement = |stat_true - E_null[stat_null]|. Must exceed minimum detectable displacement (MDD) derived pre-freeze.",
+        "metric": "IVC_DELTA_STATISTIC_[ESTIMATOR_ID]",
+        "threshold": "> MDD_[ESTIMATOR_ID] (pre-freeze computed per estimator)",
+        "required_for_accept": true
+      },
+      "both_legs_required": true
+    },
+    "outcome_mapping": {
+      "ACCEPT": "invariance_passes AND displacement_exceeds_MDD",
+      "REJECT": "NOT (invariance_passes AND displacement_exceeds_MDD)",
+      "MEASUREMENT_INVALID": "substrate_failure OR null_power_NOT_demonstrated OR code_path_violated OR alignment_below_threshold OR reachability_proof_failed OR power_calculation_failed",
+      "precedence_order": ["MEASUREMENT_INVALID", "ACCEPT", "REJECT"]
+    },
+    "classification_targets": {
+      "expected_ACCEPT": ["PC-RUNTIME-HEADER-JACCARD-VALIDATED", "B-CHANNEL-IDENTITY (as estimator)"],
+      "expected_REJECT": ["NC-CONSTANT-ZERO", "B-CHANNEL-SHUFFLED (as estimator)", "KB-PHYSICS-CMI", "KB-PRODUCT-COLD-NONCONSTANT", "KB-FRONTIER-GOAL-NONCONSTANT", "NC-BLIND-1", "NC-BLIND-2"]
+    }
+  },
+  "product_consequence_positive": "A validated dimensionless intervention-validity contract becomes the universal pre-registration gate for all SPIDER lanes. Any estimator claiming to measure a treatment effect (Graph parameter induction, Runtime drift detection, Physics dynamics, Product retrieval, Frontier mechanisms) must pass this contract on a randomized-assignment substrate before its measurements are admitted as evidence. This converts instrument-blindness from a post-hoc auditor discovery into a pre-registered detectable event. C-MEAS-VALID advances from EXPERIMENTAL toward VALIDATED.",
+  "product_consequence_negative": "If the dimensionless IVC cannot be made both satisfiable by a calibrated estimator and discriminating against non-constant blind estimators at the declared sample size, then no pre-registered estimator-certification gate of this form works on this substrate class. The program must either: (a) increase sample size with a new power calculation; (b) change the estimator class; (c) change the substrate to one with stronger signal; or (d) accept that estimator certification requires a different mathematical object. C-MEAS-VALID remains EXPERIMENTAL or is downgraded to MEASUREMENT_INVALID (bounded to this instrument class). No product promotion.",
+  "estimated_cost": {
+    "compute": "Low: stdlib HTTP server + 3 Codex estimator imports + contract evaluation. No browser, no container, no model calls. ~2000-5000 transitions at 10-50ms each = seconds to minutes.",
+    "human": "Design and implementation of randomized-assignment substrate, dimensionless IVC, sha256 estimator imports, pre-freeze reachability/power proofs.",
+    "calendar": "Single autonomous cycle."
+  },
+  "expected_information_gain": "High. This is the highest-leverage experiment in the Physics lane because: (1) it directly addresses the instrument-blindness pathology that has invalidated the majority of recent packets across all lanes; (2) a working IVC would be reusable across Physics, Runtime, Product, Graph, and Frontier; (3) it tests the specific corrections mandated by the Global Research Director (intervention not covariate, dimensionless criterion, pre-freeze reachability, Codex estimators by sha256, non-constant battery); (4) it falsifies the certification meta-hypothesis if the dimensionless criterion cannot work, or validates a universal gate if it can. Either outcome changes architectural decisions."
+}

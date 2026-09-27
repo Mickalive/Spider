@@ -1,0 +1,403 @@
+{
+ "artifact_index": [
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/build_table.py",
+   "sha256": "0bbc80d1599289fe76e638f945e84f33c8c7205774ae704a60d3595ef8c9a073"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/extract_spans.py",
+   "sha256": "61755d9384a40fea56ea2c7e2bed9adcf4fe8a62d33da07a7515cbd8151bac5c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/field_determinations.py",
+   "sha256": "20407b99b185ad92dc032197af429a2f46f261599886baaa31d888a3a478c91a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/base_id_recheck.json",
+   "sha256": "9283511aca4c3d1a7fb68ad650642e97561700d0edf1b85265d3bd7ce042a3f1"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/controls_result.json",
+   "sha256": "8606d5109067e75afffd0415031742a07885d4ca7d39e12d974740544ff43c29"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/field_determinations.json",
+   "sha256": "7e1237e11982d551b49b25a7e65ad9ec8b3532c1ff93e9423ef700a1d0221aa9"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2207.01206v4.txt",
+   "sha256": "df012c4115b6c50556d3323978bf4458850988ef77fedb3ccb33529436c92b10"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2306.06070v3.txt",
+   "sha256": "7d888bc1f29c387094d2966dd682fca2c97c33978830fd1b35308171bbbc9f83"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2307.13854v3.txt",
+   "sha256": "fe0aa43b740f3c8a1d11d7c74366aa1fff96f32bd5cf802587da71d30a691eb7"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2308.03688v2.txt",
+   "sha256": "4ab564295cd95642b7bdd196a9444e1ac53ec090db10f167993880c51a299550"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2401.13919v4.txt",
+   "sha256": "abe7d67d7e6558c78f2e390413dc67cf2e0038605abb526f6bc456aec9905f81"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt",
+   "sha256": "e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/identity_resolution.json",
+   "sha256": "17fa18797b56bde16328ff99930ccd97586be0d258e1c0aa3b871a016c0d75de"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/references/snowball_candidates.json",
+   "sha256": "b3e7dbc925f031031288c2697b79d65b47dccb2590f9a79c59ee10c5d411a7b2"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/search_log.jsonl",
+   "sha256": "b18a32db4ce49aa05d8749b5c0a6770fb7f9349161e1d089d6b9fdfa2563aabe"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/spans.json",
+   "sha256": "4f2f86707bd84b211ad2770a803d645a984db8c5cd3d7e32d59d41fa5ac48859"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/recheck_and_snowball.py",
+   "sha256": "6515e75b45cfe21b5c5fc4c0fe5fe50ac9ce4942c81f23bd838652c6bade264b"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/report.md",
+   "sha256": "8588245469069fea7e75921d99fbe2c53de56bed3081ecffbb4c8a973929f08f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/resolve_identity.py",
+   "sha256": "8cc63cf1768f0fb861388ff57857838966049b8e2696eb9fe58854043ee25a8a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/results/coverage.json",
+   "sha256": "32aebb8c12af325ef06a203e98532e9812ecdf0f69dc660156ee728539a4be70"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/results/table.json",
+   "sha256": "e59885231d9afbd9837aea7aa684ba79b1e4fe4ec96b56e5a8945005fb67e938"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/run_controls.py",
+   "sha256": "5e0ecb92e0b0ec6c91b97299025e2c5afe06f3ab654dd52cc64ea33e954c1cbd"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/validate_packet.py",
+   "sha256": "7e5fdee1d3fb4f1342b9fda2ef9126b985af240ffde89bce0914f7e78a7a1b73"
+  }
+ ],
+ "code_paths": [
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/resolve_identity.py",
+   "role": "frozen prereg 4.1/4.2 identity resolver and raw HTTP log writer",
+   "sha256": "8cc63cf1768f0fb861388ff57857838966049b8e2696eb9fe58854043ee25a8a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/recheck_and_snowball.py",
+   "role": "base-identifier transport re-probe and snowball candidate freeze",
+   "sha256": "6515e75b45cfe21b5c5fc4c0fe5fe50ac9ce4942c81f23bd838652c6bade264b"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/run_controls.py",
+   "role": "the four frozen controls of prereg section 6",
+   "sha256": "5e0ecb92e0b0ec6c91b97299025e2c5afe06f3ab654dd52cc64ea33e954c1cbd"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/extract_spans.py",
+   "role": "frozen pattern sweep",
+   "sha256": "61755d9384a40fea56ea2c7e2bed9adcf4fe8a62d33da07a7515cbd8151bac5c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/field_determinations.py",
+   "role": "field determinations with anchor-sliced verbatim quotes",
+   "sha256": "20407b99b185ad92dc032197af429a2f46f261599886baaa31d888a3a478c91a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/build_table.py",
+   "role": "artifact table, coverage, control verdicts, frozen decision-rule application",
+   "sha256": "0bbc80d1599289fe76e638f945e84f33c8c7205774ae704a60d3595ef8c9a073"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36306525220/validate_packet.py",
+   "role": "producer self-check against EXPERIMENT_PACKET.md and spec output_contract",
+   "sha256": "7e5fdee1d3fb4f1342b9fda2ef9126b985af240ffde89bce0914f7e78a7a1b73"
+  }
+ ],
+ "commands_executed": [
+  {
+   "command": "python3 resolve_identity.py",
+   "material_effect": "applies the frozen prereg 4.1 conjunction to all 14 frozen targets and records the 4 transport probes",
+   "produces": [
+    "raw/identity_resolution.json",
+    "raw/html/*.html",
+    "raw/artifacts/*.json",
+    "raw/search_log.jsonl"
+   ],
+   "step": 1
+  },
+  {
+   "command": "python3 recheck_and_snowball.py",
+   "material_effect": "removes a version-suffix transport artifact from two NOT_LOCATED verdicts and freezes the snowball candidate list at 0 usable entries",
+   "produces": [
+    "raw/base_id_recheck.json",
+    "raw/references/snowball_candidates.json",
+    "raw/references/2608.05784v1_fulltext.txt"
+   ],
+   "step": 2
+  },
+  {
+   "command": "python3 run_controls.py",
+   "material_effect": "runs all four frozen controls and retrieves full text for every correctly resolved target",
+   "produces": [
+    "raw/controls_result.json",
+    "raw/pdf/*.pdf",
+    "raw/fulltext/*.txt"
+   ],
+   "step": 3
+  },
+  {
+   "command": "python3 extract_spans.py",
+   "material_effect": "frozen pattern sweep supplying the windows read in stage 5",
+   "produces": [
+    "raw/spans.json"
+   ],
+   "step": 4
+  },
+  {
+   "command": "python3 field_determinations.py",
+   "material_effect": "26 field determinations, all quote-backed or absence-backed; exits non-zero if any row lacks both",
+   "produces": [
+    "raw/field_determinations.json"
+   ],
+   "step": 5
+  },
+  {
+   "command": "python3 build_table.py",
+   "material_effect": "applies the frozen gates in frozen precedence order and emits the machine-checkable table",
+   "produces": [
+    "results/table.json",
+    "results/coverage.json"
+   ],
+   "step": 6
+  },
+  {
+   "command": "python3 build_result.py",
+   "material_effect": "emits the packet handoff from the recorded artifacts",
+   "produces": [
+    "result.json",
+    "provenance.json"
+   ],
+   "step": 7
+  },
+  {
+   "command": "python3 validate_packet.py",
+   "material_effect": "re-hashes the frozen inputs and checks the packet shape",
+   "produces": [],
+   "step": 8
+  }
+ ],
+ "commits": {
+  "base_sha_from_request": "4682030b49d96a0dc1c4a7522ed767ac0efcc3d6",
+  "branch": "lab2/intel",
+  "note": "No commit, push, branch switch or reset was performed in this session, by branch discipline. The working-tree HEAD is therefore not a durable pin for the artifacts listed here; each artifact carries a sha256 instead.",
+  "pre_execute_sha_from_checkpoint": "2a7fbb4ab76400cf497edde6f854bf82968f9177",
+  "working_tree_head_at_execute": "51938858a966a4d7fde4a2aa6b2d817d14adf57d"
+ },
+ "datasets_fixtures": [
+  {
+   "n": 14,
+   "name": "frozen target list",
+   "path": "research/experiments/EXP-INTEL-36306525220/spec.json",
+   "selector": "identity_resolution.frozen_target_list",
+   "sha256": "ca379586bb484ec6018217453e6b149911cd26a3b3024b9eb5f3433b1a25db4c"
+  },
+  {
+   "name": "frozen control definitions",
+   "path": "research/experiments/EXP-INTEL-36306525220/spec.json",
+   "selector": "positive_control / null_control / additional_controls"
+  },
+  {
+   "name": "frozen snowball candidate list",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/references/snowball_candidates.json",
+   "sha256": "b3e7dbc925f031031288c2697b79d65b47dccb2590f9a79c59ee10c5d411a7b2"
+  }
+ ],
+ "deviations_from_frozen_design": [
+  {
+   "actual": "retrieved by exact arXiv ID over https://arxiv.org/abs/<id> and https://arxiv.org/pdf/<id>",
+   "frozen": "prereg 4.2 step 1: 'Query arXiv API with exact arXiv ID from frozen target list'",
+   "id": "DEV-1",
+   "reason": "export.arxiv.org/api/query and arxiv.org/api/query both return HTTP 406 with an empty body from arXiv's varnish for this runner (OBS-1). The abs page carries the same authoritative citation_title / citation_author / citation_arxiv_id metadata, so the identity assertion is unchanged.",
+   "recorded_in_raw_evidence": "raw/search_log.jsonl (stage=http_get, http_status=406); raw/identity_resolution.json -> transport_probes",
+   "severity": "transport_only",
+   "weakened_a_preregistered_condition": false
+  },
+  {
+   "actual": "targets whose versioned request returned HTTP 404 were re-probed at their frozen BASE arXiv ID, which is the same frozen identifier without a version selector",
+   "frozen": "prereg 4.2 step 1 requests the versioned identifier, e.g. 1802.08827v3",
+   "id": "DEV-2",
+   "reason": "arXiv's abs endpoint 404s on a non-existent version suffix. Re-probing removes a transport artifact; it cannot turn a target into CORRECTLY_RESOLVED unless the base-ID artifact satisfies all four frozen conditions.",
+   "recorded_in_raw_evidence": "raw/base_id_recheck.json; raw/html/1802.08827_base.html; raw/html/2402.04566_base.html",
+   "severity": "transport_only",
+   "weakened_a_preregistered_condition": false
+  },
+  {
+   "actual": "primary test is case-insensitive substring plus expected-token coverage >= 0.85; the full-set Jaccard is computed and logged for every target",
+   "frozen": "prereg 4.1(2): title 'matches the expected title substring (case-insensitive, fuzzy threshold >= 0.85 Jaccard on token sets)'",
+   "id": "DEV-3",
+   "reason": "see frozen_implementation_decisions[0]; the strict literal reading is arithmetically unsatisfiable for every entry in the frozen list",
+   "recorded_in_raw_evidence": "raw/identity_resolution.json -> targets.*.checks.C2_title (jaccard_full_title_tokens and expected_token_coverage_in_title for all 14 entries)",
+   "severity": "interpretation_of_a_frozen_rule",
+   "weakened_a_preregistered_condition": "ambiguous - the frozen sentence supports both readings; the primary test is the reading the same sentence's 'substring' wording supports, and the alternative value is published per target"
+  },
+  {
+   "actual": "attempted; 0 usable candidates; no substitute retrieval performed",
+   "frozen": "prereg 4.4 bounded 1-hop snowball, max 50 papers, from correctly resolved targets",
+   "id": "DEV-4",
+   "reason": "the frozen inclusion rule requires an arXiv identifier inside the reference string and the PC artifact's reference list prints author/title/year only",
+   "recorded_in_raw_evidence": "raw/references/snowball_candidates.json",
+   "severity": "coverage_not_executed",
+   "weakened_a_preregistered_condition": false
+  },
+  {
+   "actual": "pypdf 6.19.0 installed at execute time to read the arXiv PDF text layer",
+   "frozen": "prereg 12 estimated no credentials and no third-party dependency",
+   "id": "DEV-5",
+   "reason": "full text is required by prereg 5.4 and the abstract alone cannot support the Part 1 field determinations",
+   "recorded_in_raw_evidence": "environment.third_party_packages_installed_for_this_run; the PDF text layer is the source of the representation loss in VN-8",
+   "severity": "environment",
+   "weakened_a_preregistered_condition": false
+  },
+  {
+   "actual": "published at exact repository-relative paths with sha256 hashes in result.json artifacts; NOT pinned to a commit",
+   "frozen": "request.director_mandate.dependencies requires the identity-resolution audit, the frozen matching rule and the positive control to be 'published as a reusable artifact at an exact commit and path'",
+   "id": "DEV-6",
+   "reason": "branch discipline in this session forbids git commit, push, branch switch and reset",
+   "recorded_in_raw_evidence": "commits.working_tree_head_at_execute",
+   "severity": "packet_scope",
+   "weakened_a_preregistered_condition": false
+  }
+ ],
+ "environment": {
+  "api_keys_present": [],
+  "browser_interactions": 0,
+  "credentials_required": false,
+  "kernel": "6.17.0-1022-azure",
+  "model_calls": 0,
+  "model_tokens": 0,
+  "network_requests_http_get_attempts": 32,
+  "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "random_seeds": "none; the pipeline is deterministic given the same HTTP responses",
+  "retrieval_window_utc": [
+   "2026-09-27T09:03:32.466691+00:00",
+   "2026-09-27T09:06:04.575884+00:00"
+  ],
+  "third_party_note": "pypdf was installed at execute time solely to extract the arXiv PDF text layer. prereg section 12 estimated zero credentials and did not freeze a package set; the package is recorded here because it materially affects reproduction and because its text layer is the source of the representation loss described in validity_notes VN-8.",
+  "third_party_packages_installed_for_this_run": [
+   "pypdf==6.19.0"
+  ]
+ },
+ "experiment_id": "EXP-INTEL-36306525220",
+ "external_sources_consulted": [
+  {
+   "endpoint_used": "https://arxiv.org/abs/<id> and https://arxiv.org/pdf/<id>",
+   "http_status_counts": {
+    "200": 27,
+    "404": 3,
+    "406": 2
+   },
+   "name": "arXiv",
+   "note": "the two 406s are the transport probes of the blocked Atom API endpoints"
+  },
+  {
+   "endpoint_used": "https://api.semanticscholar.org/graph/v1/paper/arXiv:<id>",
+   "http_status_counts": {
+    "200": 1
+   },
+   "name": "Semantic Scholar graph API",
+   "note": "probed once to establish substrate availability; NOT used to resolve or substitute any frozen target, and no extracted value comes from it"
+  }
+ ],
+ "frozen_implementation_decisions": [
+  {
+   "decision": "title condition read as case-insensitive substring plus expected-token coverage >= 0.85, with the full-token-set Jaccard logged but not used as the primary test",
+   "declared": "before any field determination was authored, in resolve_identity.py docstring and raw/identity_resolution.json",
+   "effect_if_reversed": "identity_resolution_recall becomes 0.0; Parts 2 and 3 remain INCONCLUSIVE; the overall MEASUREMENT_INVALID is unchanged because it rests on gate 1",
+   "reason": "prereg 4.1(2) reads 'matches the expected title substring (case-insensitive, fuzzy threshold >= 0.85 Jaccard on token sets)'. A full-token-set Jaccard of 0.85 between a 1-2 token expected title and a real arXiv title of 8-15 tokens is arithmetically unsatisfiable, which would make the frozen rule incapable of ever returning CORRECTLY_RESOLVED and would silently convert the whole experiment to INCONCLUSIVE. Both statistics are logged so the decision is auditable and reversible."
+  },
+  {
+   "decision": "an expected_authors list of ['TBD'] is recorded as condition C3 pass=null with reason C3_author_unevaluable_TBD, not as pass=false",
+   "declared": "before any field determination was authored, in resolve_identity.py",
+   "effect_if_reversed": "none on any verdict; the PC already fails its pass criterion",
+   "reason": "an unevaluable condition is a different object from a failed condition, and recording it as a failure would fabricate negative identity evidence about an artifact that was never checked against an author list"
+  },
+  {
+   "decision": "an artifact that is retrieved but fails the identity conjunction is emitted as AMBIGUOUS and scored UNMEASURED; NOT_LOCATED is reserved for no artifact at all",
+   "declared": "before any field determination was authored, in resolve_identity.py",
+   "effect_if_reversed": "would recreate the parent packet's five false NOT_FOUND rows",
+   "reason": "this is the parent packet's exact defect: a retrieved-but-wrong artifact was converted into a negative. prereg 4.2 step 6 and spec.json UNMEASURED_NOT_NEGATIVE both require the two states to be distinguished"
+  }
+ ],
+ "frozen_inputs_verified_unmodified": {
+  "prereg.md": {
+   "frozen_sha256": "83194f54a06a3a7dd0045abea661a2e75194c91bbad4923eb65c2f23e4ac21b2",
+   "match": true,
+   "recomputed_sha256": "83194f54a06a3a7dd0045abea661a2e75194c91bbad4923eb65c2f23e4ac21b2"
+  },
+  "request.json": {
+   "frozen_sha256": "645d07187c97beb0d6006a4fc8b8530a6b49cbae8b9d643b6045a2b990a5ca8f",
+   "match": true,
+   "recomputed_sha256": "645d07187c97beb0d6006a4fc8b8530a6b49cbae8b9d643b6045a2b990a5ca8f"
+  },
+  "spec.json": {
+   "frozen_sha256": "ca379586bb484ec6018217453e6b149911cd26a3b3024b9eb5f3433b1a25db4c",
+   "match": true,
+   "recomputed_sha256": "ca379586bb484ec6018217453e6b149911cd26a3b3024b9eb5f3433b1a25db4c"
+  }
+ },
+ "generated_at_utc": "2026-09-27T09:19:05.108338+00:00",
+ "github_run_attempt": "1",
+ "github_run_id": "36306525220",
+ "lane": "intel",
+ "not_done_and_why": [
+  {
+   "item": "frozen target-list identifier repair for BrowserGym, MiniWoB++ and SeeAct",
+   "why": "the frozen list is the corpus definition; repairing it after observing that its identifiers resolve to unrelated artifacts would be post-hoc corpus design. The defect is reported in result.json OBS-3 and unresolved U-2 instead."
+  },
+  {
+   "item": "substitute retrieval to reach published memory-augmented web agents",
+   "why": "outside the frozen target list and the frozen snowball inclusion rule; would be post-hoc corpus expansion. Reported as uncovered in coverage_summary.systems_not_in_frozen_list and unresolved U-3, U-4, U-7."
+  },
+  {
+   "item": "reproduction of any published number",
+   "why": "explicitly out of scope in prereg section 10; also impossible here because no model credentials exist in this environment."
+  },
+  {
+   "item": "an 'author list unavailable' branch in the identity rule",
+   "why": "adding it would flip this experiment's verdict after the outcome was visible, which is exactly the weakening prereg section 14 forbids. The repair is proposed in report.md for a director mandate instead."
+  }
+ ],
+ "origin_github_run_id": "36306525220",
+ "parent_experiment_id": "EXP-INTEL-36293264917",
+ "parent_handoff": {
+  "path": "research/experiments/EXP-INTEL-36293264917/handoff.json",
+  "sha256": "5691eb402fb9e64ff35bf88c7fe7062cb42367c4ac442ca8d6c40e1d801305e6"
+ },
+ "reproduction": {
+  "determinism": "given identical HTTP responses the pipeline is fully deterministic apart from the generated_at / generated_at_utc wall-clock stamps: no model calls, no sampling, no seeds. The one non-reproducible element is arXiv's own corpus, which changes as new versions appear.",
+  "entry_point": "cd research/experiments/EXP-INTEL-36306525220 && python3 resolve_identity.py && python3 recheck_and_snowball.py && python3 run_controls.py && python3 extract_spans.py && python3 field_determinations.py && python3 build_table.py && python3 build_result.py && python3 validate_packet.py",
+  "two_pass_note": "build_result.py is run twice by design: once to emit result.json and provenance.json, then again after report.md is authored so that report.md's sha256 is pinned in result.json.artifacts. The second run is deterministic and changes no other field."
+ },
+ "request_hash": "6549f54917b70e15eaf014f5d55c25c26909559de88ffa8862f41f405d9f6110",
+ "request_id": "ba1783b385cfb6e38c676e4d",
+ "schema_version": 1,
+ "stage": "EXECUTE"
+}

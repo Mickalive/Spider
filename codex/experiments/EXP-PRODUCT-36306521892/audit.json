@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36306521892",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Falsifier F4 (f*_costly / f*_cheap <= 2.0) is miscalibrated for the infinity case: f*_cheap = infinity yields ratio = 0 which triggers F4, but this represents the STRONGEST possible regime difference (finite vs infinite break-even), supporting rather than falsifying regime-dependent persistence policy. F4 must be restated (e.g., one-sided test f*_cheap / f*_costly > 2.0 or explicit infinity handling) before a clean SUPPORTS/FALSIFIES decision can be made.",
+    "The decision_rule.outcome_mapping.FALSIFIES clause 'Any falsifier F1-F8 triggers' conflicts with the MIXED clause 'economics fails in one regime OR f* ratio inconclusive' because F3 and F4 are economics/ratio falsifiers that map to MIXED, not FALSIFIES. The decision rule should explicitly classify which falsifiers yield which outcome.",
+    "The slot-value guard (_SLOT_VALUE regex) is syntactic only (rejects empty strings and punctuation-laden values) but cannot distinguish valid transfer identifiers from well-formed out-of-support bindings. A semantic guard is needed for production; this should be tracked as a known limitation in the handoff."
+  ],
+  "validity_findings": [
+    "Measurement is VALID: substrate surface contract verified in both regimes (substrate_probe.json), durability precondition met (kernel distill_parameterized committed at HEAD 408f3bc1 with nonempty diff vs base_sha 4682030b, 9/9 tests reach EXECUTABLE through distill_parameterized), cost accounting uses counted HTTP requests from substrate responses under single declared basis (no imported constants, jitter, or f-scaled proxies).",
+    "No infrastructure failure: experiment completed fully (status=COMPLETE, 1689 total HTTP requests, 16 re-auths in costly regime). All frozen design elements executed as preregistered.",
+    "Bootstrap CIs on success rates are degenerate at [1.0, 1.0] for all arms (ceiling effect from deterministic substrate). Request-count CIs are informative (B-COLD-COSTLY [3.013, 3.120], INHERITANCE-COSTLY [1.000, 1.067]).",
+    "Induction conducted in cheap regime only (150 observations, 50 distinct item IDs × 3 families). This matches preregistration but means the costly regime induction cost is not directly measured; the 150-request induction cost is shared across both regimes as a cross-episode amortization.",
+    "Unmeasured cost components correctly reported as UNKNOWN with reasons: model calls/tokens (no OPENAI_API_KEY), browser/latency (stdlib HTTP only), verification/repair (no external auditor), staleness/maintenance (single-shot), retrieval embedding compute (deterministic hash-n-gram). No proxy substitution used.",
+    "F3 correctly triggered: amortized_cost_ratio in cheap regime = 2.0 at n=150, never falls to 0.85 because transfer_cost (1.0) equals B-COLD-CHEAP (1.0), making induction cost (150) unrecoverable. This is a structural property of the cheap regime, not a measurement failure.",
+    "F4 triggered due to miscalibration (ratio = 0 from f*_cheap = infinity). The underlying evidence shows maximal regime difference: f*_costly = 74 (finite, reachable), f*_cheap = infinity (structural impossibility). This SUPPORTS regime-dependent persistence policy but formally triggers the falsifier as written.",
+    "Safety gate passes in both regimes: abstention_precision = 1.0 (20/20 invalid_intent probes abstained), false_accept_rate = 0.0 (0/20 out-of-support, 0/20 empty-string executed). NC-SHUFFLED-INTENT induced confidences 0.38-0.44 < 0.8 threshold, abstained on all 150 tasks in both regimes at zero requests.",
+    "PC-SAME-RESOURCE passes: 1.0 success on 150 held-out resource-A identifiers via distill_parameterized, confirming induction pipeline works before transfer.",
+    "Secondary baseline comparison: INHERITANCE-COSTLY (1.027 req/task + 150 induction) does not beat B-SCRATCHPAD-COSTLY (1.067 req/task, no induction) or B-RETRIEVAL-K5-COSTLY (1.027 req/task, no induction) within a single episode (n=150). Cross-episode amortization would require 25+ episodes (scratchpad break-even vs inheritance ~3750 tasks)."
+  ],
+  "baseline_findings": [
+    "B-COLD-COSTLY: mean 3.06 requests/task [3.013, 3.120] CI95, 16 re-auths charged. Satisfies F6 (>1.0). Costly regime is genuinely costly (auth + schema + pagination).",
+    "B-COLD-CHEAP: mean 1.0 requests/task. Satisfies F7 (<=1.5). Cheap regime is genuinely cheap (direct GET).",
+    "B-SCRATCHPAD-COSTLY: mean 1.067 req/task [1.013, 1.147]. No induction cost; amortizes cold discovery within episode. Break-even vs INHERITANCE at ~3750 tasks.",
+    "B-NO-MEMORY-COSTLY: mean 2.04 req/task [2.000, 2.093]. Deterministic executor with hard-coded pagination (no schema call).",
+    "B-INSTRUCTIONS-COSTLY: mean 2.04 req/task [2.000, 2.093]. Pre-provided pagination instruction, executes per task.",
+    "B-RETRIEVAL-K5-COSTLY: mean 1.027 req/task [1.000, 1.067]. Deterministic hash-n-gram retrieval over training trajectories. Matches INHERITANCE per-task cost without induction overhead.",
+    "All baselines achieve 1.0 task success in both regimes (deterministic substrate).",
+    "NC-SHUFFLED-INTENT: induced confidences 0.38/0.40/0.44 (below 0.8), 0% success, 0 requests (abstained via EXPLORE). Confirms min_confidence gate is load-bearing.",
+    "NC-FALSE-ACCEPT: 0% false accept, 100% abstention precision. Slot-value guard rejects empty strings and '!!unsupported!!' bindings."
+  ],
+  "recomputed_metrics": {
+    "amortized_cost_ratio_vs_bcold_cheap": 2.0,
+    "amortized_cost_ratio_vs_bcold_costly": 0.6623093681917211,
+    "bcold_cheap_mean_requests_per_task": 1.0,
+    "bcold_costly_mean_requests_per_task": 3.06,
+    "bcold_costly_mean_requests_ci95": [
+      3.013333333333333,
+      3.12
+    ],
+    "break_even_f_star_cheap": "infinity",
+    "break_even_f_star_costly": 74,
+    "f_star_ratio_costly_over_cheap": 0.0,
+    "induction_cost_total_requests": 150,
+    "inheritance_cheap_mean_requests_per_task": 1.0,
+    "inheritance_cheap_task_success_rate": 1.0,
+    "inheritance_costly_mean_requests_per_task": 1.0266666666666666,
+    "inheritance_costly_task_success_rate": 1.0,
+    "n_for_ratio_0.85_cheap": null,
+    "n_for_ratio_0.85_costly": 96,
+    "reauths_costly": 16,
+    "total_http_requests": 1689
+  },
+  "claim_ceiling": "C-PRODUCT-ECON: break-even reuse count f* measured in costly regime (f* = 74) with valid economics (amortized ratio 0.66 at n=150, ratio <= 0.85 at n=96). Cheap regime correctly yields f* = infinity (structural, not failure). Regime difference is maximal (finite vs infinite), supporting per-object persistence policy, but formal falsifier F4 triggers due to miscalibration. C-PARAM-INHERIT: parameter induction via distill_parameterized reaches EXECUTABLE (confidence 1.0, slots [collection, id] induced, not hand-declared), transfers to disjoint namespace at 100% success, safety gate passes. Both claims advance to EXPERIMENTAL with bounded, decision-changing evidence. NOT SUPPORTS (F3, F4 trigger), NOT FALSIFIES (mechanism works, safety passes, costly economics pass). MIXED is correct per decision rule.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/derived.json (sha256: 532f91fd37ad5217af510e3d19f52af0811db38e8f895db5ec233e4672623fd2)",
+    "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/task_results.jsonl (sha256: 9e0263d2cf41ee3e04358db202f4c609cfae2252316fadd9f881a25febb58909)",
+    "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/probe_results.jsonl (sha256: 26dd3dc6d15b9d74cb7b4728326d674ba198415f360b1c2d78d2ff83b1c22e49)",
+    "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/mechanisms.json (sha256: 04f6d901036eea5181c31a350420cd3448b1b6cbcda6abc50180842c98e1034a)",
+    "research/experiments/EXP-PRODUCT-36306521892/raw_evidence/substrate_probe.json (sha256: 91c0166d4f81d2e6426879303e4357ca75e45d5f4e3434047669d0751e85343d)",
+    "research/experiments/EXP-PRODUCT-36306521892/provenance.json (sha256: 62be0aed24f923817c84183b6aa84880fb5e81a61c15a716345f6fc993267f65)",
+    "src/spider/kernel.py at HEAD 408f3bc1 (sha256: 57690132de402c12c866a16f0e1dd2901c036dcb852813958895d7a01d340de3)",
+    "tests/test_kernel.py 9/9 pass via distill_parameterized -> EXECUTABLE"
+  ],
+  "unresolved": [
+    "Whether f*_costly=74 generalizes beyond self-authored stdlib substrate to real Web APIs with genuine auth/pagination/schema costs and network variance.",
+    "Whether the cheap-regime negative (f*_cheap=infinity) holds on the real credential-free read-only class SPIDER actually reached (C-CROSSSITE surface measurement from Frontier), where cold discovery may also be ~1 request/task but with different variance.",
+    "Whether cross-episode inheritance beats within-episode scratchpad over 25+ episodes (predicted cross-episode break-even ~3750 tasks), which this single-episode experiment cannot measure.",
+    "Whether a semantically meaningful slot-value guard (beyond syntactic pattern check) can be implemented without collapsing the transfer rate on real identifiers.",
+    "C-LLM-INHERIT remains unmeasured: no OPENAI_API_KEY available. Smallest next action is running the same dual-regime design under a real LLM agent with API key.",
+    "F4 restatement needed before next freeze: current formulation cannot correctly handle the infinity case which is the scientifically informative outcome.",
+    "Decision rule conflict: FALSIFIES clause 'Any falsifier F1-F8 triggers' contradicts MIXED clause covering F3/F4. Must be resolved in next preregistration."
+  ]
+}

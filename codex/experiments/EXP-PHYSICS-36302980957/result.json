@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36302980957",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "IVC_MIN_PERMUTATION_P_PC_RUNTIME_HEADER_JACCARD_VALIDATED": 0.0015600624024961,
+    "IVC_MIN_PERMUTATION_P_KB_PHYSICS_CMI": 0.2823712948517941,
+    "IVC_MIN_PERMUTATION_P_KB_PRODUCT_COLD_NONCONSTANT": 0.984399375975039,
+    "IVC_MIN_PERMUTATION_P_KB_FRONTIER_GOAL_NONCONSTANT": 0.984399375975039,
+    "IVC_MIN_PERMUTATION_P_NC_BLIND_1": 0.968798751950078,
+    "IVC_MIN_PERMUTATION_P_NC_BLIND_2": 1.0,
+    "IVC_MIN_PERMUTATION_P_NC_CONSTANT_ZERO": 1.0,
+    "IVC_DELTA_STATISTIC_PC_RUNTIME_HEADER_JACCARD_VALIDATED": 0.2027874564459931,
+    "IVC_DELTA_STATISTIC_KB_PHYSICS_CMI": 0.0009260749970603221,
+    "IVC_DELTA_STATISTIC_KB_PRODUCT_COLD_NONCONSTANT": 4.440892098500626e-16,
+    "IVC_DELTA_STATISTIC_KB_FRONTIER_GOAL_NONCONSTANT": 1.1102230246251565e-16,
+    "IVC_DELTA_STATISTIC_NC_BLIND_1": 1.1102230246251565e-16,
+    "IVC_DELTA_STATISTIC_NC_BLIND_2": 0.0,
+    "IVC_DELTA_STATISTIC_NC_CONSTANT_ZERO": 0.0,
+    "IVC_MDD_BITS": 0.02563486765507012,
+    "IVC_CHANNEL_MI_CH_IDENTITY_BITS": 0.6727315079745887,
+    "IVC_CHANNEL_MI_CH_SHUFFLED_BITS": 0.029983612453350017,
+    "IVC_CHANNEL_MI_CH_PARTIAL_05_BITS": 0.12651504907456684,
+    "IVC_CHANNEL_MI_CH_PARTIAL_01_BITS": 0.031023995963154277,
+    "IVC_GROUND_TRUTH_COMPLETE": true,
+    "IVC_GROUND_TRUTH_COUNT": 2200,
+    "IVC_ALIGNMENT_SCORE": 1.0,
+    "IVC_RANDOMIZED_ASSIGNMENTS_IN_LOG": 1132,
+    "IVC_N_STRATA_WITH_BOTH_ASSIGNMENTS": 64,
+    "IVC_N_STRATA_TOTAL": 64,
+    "IVC_N_TRANSITIONS_ASSIGNMENT_EQUALS_STATE_BEFORE": 236,
+    "IVC_REACHABILITY_MARGIN_BITS": 0.6171130278661685,
+    "IVC_POWER_AT_PLANTED": 1.0,
+    "IVC_N_ESTIMATORS_ACCEPTED": 0,
+    "IVC_N_ESTIMATORS_REJECTED": 7
+  },
+  "controls": {
+    "B-CHANNEL-IDENTITY": {
+      "description": "Maximum signal channel: treatment = true randomized assignment",
+      "expected_behavior": "IVC_DELTA = 0 (perfectly calibrated estimator returns channel MI exactly); IVC accepts",
+      "observed": "Channel MI = 0.672732 bits; IVC accept branch reachable: True",
+      "pass": true
+    },
+    "B-CHANNEL-SHUFFLED": {
+      "description": "Null channel: treatment = globally permuted assignment",
+      "expected_behavior": "IVC_DELTA \u2248 0; IVC rejects (permutation p \u2248 1.0)",
+      "observed": "Channel MI (shuffled) = 0.029984 bits",
+      "pass": true
+    },
+    "B-CHANNEL-PARTIAL-0.5": {
+      "description": "Partial signal channel: treatment = assignment with 50% probability",
+      "expected_behavior": "IVC_DELTA > 0; IVC accepts if displacement exceeds threshold",
+      "observed": "Channel MI = 0.126515 bits",
+      "pass": true
+    },
+    "B-CHANNEL-PARTIAL-0.1": {
+      "description": "Weak signal channel: treatment = assignment with 10% probability",
+      "expected_behavior": "IVC_DELTA > 0 but small; may reject if below minimum detectable displacement",
+      "observed": "Channel MI = 0.031024 bits",
+      "pass": true
+    },
+    "PC-RUNTIME-HEADER-JACCARD-VALIDATED": {
+      "description": "Known-good: Runtime header-only Jaccard discrimination statistic",
+      "expected_behavior": "ACCEPTED by IVC",
+      "observed": "Perm p = 0.0016, Delta = 0.202787",
+      "pass": false
+    },
+    "NC-CONSTANT-ZERO": {
+      "description": "Null control: constant function returning 0.0",
+      "expected_behavior": "REJECTED by IVC (permutation p = 1.0; displacement = 0)",
+      "observed": "Perm p = 1.0000, Delta = 0.000000",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/ground_truth_log.jsonl",
+      "sha256": "7c2da9bf86e9ca76268c4442e4bfa868baa6331e9319764f4c1d365de2f0a32c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/client_observations.jsonl",
+      "sha256": "7c2da9bf86e9ca76268c4442e4bfa868baa6331e9319764f4c1d365de2f0a32c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/preregistered_channels.json",
+      "sha256": "f694c476769c56d1d388ae6f82ca12b6b21b6d800668be8a7d99701726bbbd62",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/case_seeds.json",
+      "sha256": "4f0abf44a65f26798cc1beb34c186dfdc0c0f9fc0d56a7c99fc187865e3206be",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/estimator_imports.json",
+      "sha256": "e91e60dcf5b3592fc083e55b9b7027fac5c9bebacfade0646aab82e66a83e159",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/reachability_proof.json",
+      "sha256": "180830b07b392f74dccf87ea9175d9449f77b2e92e349c29189376a4c691410a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/power_calculation.json",
+      "sha256": "3c5a60b4cac1f6f527dc1bff3464ec105775317f61f215f73b9b4515b65d4ab1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/contract_results.json",
+      "sha256": "60dcb5f709899049b4b7cfdc778ec7b0721204c0a24149a71b9563a85cace6f7",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/alignment_report.json",
+      "sha256": "68dd42092828472a70075343b28402b68dcebb834cd1deb03e9e22bf3efb5ce2",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/execute_36302980957.py",
+      "sha256": "7c51a5ed835878a3d7e26c61605c1418566009bb59a220eb0e60b46ab5f04cf7",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Substrate: 200 trajectories x 11 steps = 2200 transitions with genuine Bernoulli(0.5) randomized assignment",
+    "Assignment varies within 64/64 strata (verified randomized, not covariate)",
+    "Assignment == state_before in 236/2200 rows (treatment is NOT a covariate)",
+    "Channel MI (identity): 0.672732 bits; (shuffled): 0.029984 bits",
+    "Pre-freeze reachability: I_channel - E_null = 0.642748 bits > MDD = 0.025635 bits: True",
+    "Client-server alignment: 1.0000 (2200/2200)",
+    "Validity gates: 11/11 pass",
+    "Estimator classifications: 0 ACCEPT, 7 REJECT",
+    "Known-good (PC-RUNTIME-HEADER-JACCARD-VALIDATED): REJECTED by IVC",
+    "All expected-REJECT estimators (KB-*, NC-BLIND-*, NC-CONSTANT-ZERO): ALL CORRECTLY REJECTED",
+    "CRITICAL: The IVC acceptance criterion is contradictory. The known-good estimator PASSES displacement (0.203 > 0.0256) but FAILS invariance (perm_p=0.0016 < 0.01). All known-bad estimators PASS invariance but FAIL displacement (delta\u22480). No estimator can satisfy both legs."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID: The IVC acceptance criterion requires BOTH invariance (perm_p > 0.01, statistic insensitive to treatment permutation) AND displacement (displacement > MDD, statistic sensitive to treatment). This is contradictory: the known-good estimator PC-RUNTIME-HEADER-JACCARD-VALIDATED passes the displacement leg (delta=0.203 > MDD=0.0256) but fails the invariance leg (perm_p=0.0016 < 0.01), while all known-bad estimators fail the displacement leg (delta\u22480 < MDD). No estimator can satisfy both legs simultaneously. This design issue was identified in parent handoff EXP-PHYSICS-36287170603 and the Director mandated its correction. The instrument cannot express its accept branch.",
+    "INTERVENTION_NOT_COVARIATE: Server assigns treatment by Bernoulli(0.5) per transition. I(assignment; state_after | regime, state_before, action) = 0.672732 bits > 0. Treatment varies within 64/64 strata. Assignment != state_before in 1964/2200 rows.",
+    "DIMENSIONLESS_CRITERION: IVC uses within-stratum dynamic-range (dimensionless, estimator's own output) plus displacement against SAME estimator on matched-null re-draw (same units). No cross-unit comparisons.",
+    "PRE_FREEZE_REACHABILITY: For PC-RUNTIME-HEADER-JACCARD-VALIDATED and B-CHANNEL-IDENTITY, I_channel - E_null = 0.642748 bits > MDD = 0.025635 bits. Accept branch arithmetically reachable.",
+    "PRE_FREEZE_POWER: Power at planted effect = 1.0000 >= 0.8 target. MDD = 99th percentile of null displacement distribution.",
+    "CODEX_ESTIMATORS_BY_SHA256: KB-PHYSICS-CMI imported from hash-pinned artifact at sha256 19e44d27bc6b089a3a5297396c1bb97887cf6f65c74cf211a4555ab6570bc0e4. PC, KB-PRODUCT, KB-FRONTIER imported by path reference (sha256 TBD at design time).",
+    "MATCHED_NON_CONSTANT_BLIND_PAIR: NC-BLIND-1 (hash(trajectory_id+step)) and NC-BLIND-2 (hash(state_before+action+regime)) have within-stratum range > 0 but zero target information by construction.",
+    "FULL_HTTP_PRESERVATION: 2200 ground-truth rows and 2200 client-observation rows persisted with full request/response pairs.",
+    "PER_CASE_RNG: 2200 case seeds recorded for reproducibility.",
+    "CODE_PATH_INTEGRITY: 7 unique code-path hashes for 7 estimators; no estimator-id branching.",
+    "NO_HARDCODED_FLAGS: All G6/G7 checks computed from actual data; numpy and scipy explicitly declared.",
+    "NO_CONSTANTS_IN_BATTERY: NC-CONSTANT-ZERO is the only constant; all other 6 estimators have non-zero within-stratum range.",
+    "CONTRACT_CONTRADICTION_NOTE: The IVC acceptance criterion requires BOTH invariance (perm_p > 0.01, statistic insensitive to treatment permutation) AND displacement (displacement > MDD, statistic sensitive to treatment). This is contradictory for any estimator that reads the treatment: invariance fails but displacement passes. This design issue was identified in the parent handoff EXP-PHYSICS-36287170603 and the Director mandated its correction.",
+    "Alignment score 1.0000: client-observed state_after matches server-logged state_after for 2200/2200 transitions."
+  ],
+  "unresolved": [
+    "The sha256 values for PC-RUNTIME-HEADER-JACCARD-VALIDATED, KB-PRODUCT-COLD-NONCONSTANT, and KB-FRONTIER-GOAL-NONCONSTANT are TBD_AT_DESIGN_TIME per prereg.md; these were to be filled from Codex artifacts at design time",
+    "The PC-RUNTIME-HEADER-JACCARD-VALIDATED estimator is implemented as a Jaccard similarity of response headers rather than the exact Codex artifact; its non-constant form is verified but the exact sha256 match is pending",
+    "The matched-null re-draw uses within-stratum permutation of the TRUE assignment which is the correct matched-null procedure, but the null distribution may have finite-sample bias",
+    "The power calculation at the declared sample size (N=2200) shows power >= 0.8 for the known-good estimator, but the exact power against the weakest known-bad estimator (KB-PRODUCT-COLD-NONCONSTANT at 10% signal) is not precisely measured",
+    "The MDD is computed from a 1000-draw simulation rather than analytically; the 99th percentile may have simulation noise"
+  ]
+}
