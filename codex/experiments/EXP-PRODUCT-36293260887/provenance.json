@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36293260887",
+  "lane": "product",
+  "stage": "execute",
+  "generated_at_utc": "2026-09-27T07:44:01+00:00",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "MIXED",
+  "git_state": {
+    "head_sha": "536e2565f30bedf7f308a62fb08143d65bf24e46",
+    "frozen_base_sha": "244dd5bdfe5d34bcf74f4d8472db3caa0922b641",
+    "base_range": "244dd5bdfe5d34bcf74f4d8472db3caa0922b641..536e2565f30bedf7f308a62fb08143d65bf24e46",
+    "committed_changes_to_src_or_tests_in_base_range": 0,
+    "verification": "git diff 244dd5bd..HEAD -- src/ tests/ is empty",
+    "working_tree_changes_uncommitted": true,
+    "git_actions_taken_by_this_lane": "none; no add, commit, push, checkout, switch, reset or restore was executed",
+    "durable_artifact_verified": false,
+    "durable_artifact_note": "The mandate's central DURABLE requirement is unmet. The corrected kernel exists in the working tree only. This lane has no authorized commit mechanism, so the precondition could not be satisfied at any stage of this experiment."
+  },
+  "frozen_inputs": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/prereg.md",
+      "frozen_sha256": "b9936546d84713d12a0ac1c923c85c845f3ea837dc8e0e6035b98fe20b33d962",
+      "recomputed_sha256": "b9936546d84713d12a0ac1c923c85c845f3ea837dc8e0e6035b98fe20b33d962",
+      "verifies": true,
+      "mutated_by_this_stage": false
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/request.json",
+      "frozen_sha256": "6eafacf7fed660415b20db21f4004dc628929809fbf4d7b4f4b35cdcc5bf7a0e",
+      "recomputed_sha256": "6eafacf7fed660415b20db21f4004dc628929809fbf4d7b4f4b35cdcc5bf7a0e",
+      "verifies": true,
+      "mutated_by_this_stage": false
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/spec.json",
+      "frozen_sha256": "1ee192dd12bb5d851c8a1543880bb26b7591e822d7a3ec16a2cb8b73f116b3f4",
+      "recomputed_sha256": "1ee192dd12bb5d851c8a1543880bb26b7591e822d7a3ec16a2cb8b73f116b3f4",
+      "verifies": true,
+      "mutated_by_this_stage": false
+    }
+  ],
+  "frozen_inputs_all_verify": true,
+  "code_artifacts": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "d64a4bf40d00f6f9d569832f2a014dfe99e7736b7aa708aa8f040a50d0c92ef0",
+      "committed": false,
+      "role": "implementation",
+      "change": "Added align_parameters, _build_action_template, _strip_common_prefix; distill_parameterized now calls them, performs segment-granular prefix preservation, resolves intent-namespace aliases, derives confidence from evidence, and supports induce_identity_slots and force_resolve.",
+      "in_base_sha_range": false
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "c977e6c3ed877bb5515d52b9e40dbf4e3c8fd1db810a1b9d5bb6dba155bd7eb4",
+      "committed": false,
+      "role": "implementation",
+      "change": "Added Mechanism.intent_namespace_map.",
+      "in_base_sha_range": false
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "a2918babb2e80078166561238191f344b7d11e99f018c898320f53368443db64",
+      "committed": false,
+      "role": "verification",
+      "change": "3 pre-existing tests retained; added T1-T5, a segment-granularity test and an under-determined abstention test. All mechanism tests reach EXECUTABLE through distill_parameterized rather than a hand-built Mechanism.",
+      "in_base_sha_range": false
+    }
+  ],
+  "support_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/run_experiment.py",
+      "sha256": "2e4804e280bffffef5d8ff0d6aeb7450e8b1268d46ee84d15113aea7d4b25567",
+      "role": "measurement_harness"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/probe_substrate.py",
+      "sha256": "f5447c74d6cd37d4cd107457117ff4a40560a3711578afe8eebb1249e8e7499a",
+      "role": "measurement_harness"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/build_result.py",
+      "sha256": "4a2ee21083d28d76bb156c52002f2985d0bdfe7b5a6cf46986eec4773c00dc81",
+      "role": "packet_builder"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36272385776/substrate.py",
+      "sha256": "d3fe358ed68d38a0cf5ecd2c0dbabb943c8f9f5f531755fa2580cbeffbb20f26",
+      "role": "fixture",
+      "reused_unchanged": true,
+      "note": "Frozen substrate. Digest matches prereg.md section 7."
+    }
+  ],
+  "evidence_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/substrate_surface_probe.json",
+      "sha256": "afcf86f3e72a137ded57b334a98eace35c2af13f3d4c51fa2584151102992e9a",
+      "kind": "observation",
+      "description": "Empirical probe of the declared and actual substrate surface."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/observations.jsonl",
+      "sha256": "0c84130bf748845bd1b9d56e1d0766182b72da1545c6c89a5d9d90266db35d17",
+      "kind": "observation",
+      "records": 150,
+      "description": "Induced resource-A observations, 50 per intent family, over 50 distinct training identifiers."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/task_results.jsonl",
+      "sha256": "20040a8350b304e72d2db4e28768c525db75935ba7ad027b5d45f8a8cbdb6bfc",
+      "kind": "observation",
+      "records": 1158,
+      "description": "Per-task raw rows across 9 arms."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/probe_results.jsonl",
+      "sha256": "70a2bd205991b3a6f4e351b3ce54a79904367c40aba4a878d37862799223bcb4",
+      "kind": "observation",
+      "records": 180,
+      "description": "Negative probes, 60 per arm over 3 arms."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/mechanisms.json",
+      "sha256": "0523b9fa00b6e6f10a033d2d6a23958acac1a6e4b42ec1460429d493446dfbb0",
+      "kind": "observation",
+      "description": "Mechanisms emitted by each induction call, with templates and confidences."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/derived.json",
+      "sha256": "60ae2764662bb4bebaa80f0d8a7ea40a2edbec6669cd118f43dfeb4e5d272238",
+      "kind": "derived_measurement",
+      "description": "Family-stratified B=5000 bootstrap intervals, cost ratios, break-even and n_max, computed from the raw evidence above."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/result.json",
+      "sha256": "43e2591213c1ea01d7866d24fda66a500549fd4a20f6d06969983a099d50562a",
+      "kind": "packet_output",
+      "description": "Stage output. Generated before this file, so its digest is recorded here for audit."
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36293260887/report.md",
+      "sha256": "d60ef30c2f8f8ff82fd51ebde47bd68f7353b3484ad08a60ff8377260f0293fe",
+      "kind": "packet_output"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "network": "none; stdlib http.client against a local in-process HTTP substrate",
+    "model_calls": 0,
+    "model_tokens": 0,
+    "embedding_service": "unavailable; B-RETRIEVAL-K5 substituted a deterministic hashed character-n-gram bag",
+    "api_key_present": false,
+    "third_party_packages_used": [],
+    "seed": 42,
+    "seeds_control": [
+      "label permutation",
+      "probe selection",
+      "bootstrap resampling"
+    ]
+  },
+  "test_evidence": {
+    "command": "PYTHONPATH=src python3 -m unittest discover -s tests",
+    "result": "OK",
+    "tests_run": 10,
+    "failures": 0,
+    "errors": 0,
+    "preregistered_tests": {
+      "T1": "pass",
+      "T2": "pass",
+      "T3": "pass",
+      "T4": "pass",
+      "T5": "pass"
+    },
+    "note": "Run at execute against the uncommitted working tree. T1, T2 and T4 are assertion-inverted by the frozen substrate's actual surface: T1 pins /api/v1/items/${id} which serves 404, and T4 expects an index with no collection candidates, which does not exist here. The tests are recorded as passing on the assertions as written and this conflict is recorded in result.json validity_notes rather than resolved by weakening a test."
+  },
+  "measurement_transaction": {
+    "http_requests_total": 1746,
+    "reauth_requests_total": 14,
+    "induction_cost_total": 152,
+    "cost_basis": "counted real HTTP requests observed at the client",
+    "task_rows": 1158,
+    "probe_rows": 180,
+    "arms": 9,
+    "substrate_state_reset_between_arms": true
+  },
+  "protocol_amendments": [
+    {
+      "id": "A1",
+      "trigger": "TOKEN_EXPIRY=100 with no issuance endpoint",
+      "amendment": "A 401 clears the request budget instead of re-issuing a token, and the re-authentication is charged as one real HTTP request.",
+      "disclosed_before_inspecting_outcomes": true
+    },
+    {
+      "id": "A2",
+      "trigger": "null-arm success was spuriously 1.0 because the runner supplied the task family's verb instead of the resolved mechanism's verb",
+      "amendment": "Mechanism arms execute the verb carried in the resolved action_template.",
+      "disclosed_before_inspecting_outcomes": false,
+      "integrity_note": "This defect inflated the null arm to a false pass. It was found during execution and corrected; the reported NC-SHUFFLED-INTENT-FORCED success of 0.3333 is trustworthy only because of that correction."
+    }
+  ],
+  "frozen_design_defects_found": [
+    {
+      "clause": "F2",
+      "defect": "requires /api/v1/<collection>/<slot> on a substrate with no /api/v1 prefix; also contradicts T1 which pins the collection"
+    },
+    {
+      "clause": "F6",
+      "defect": "N_MAX and break-even are the same algebraic expression; the clause is an identity and cannot fire"
+    },
+    {
+      "clause": "F9",
+      "defect": "requires the null arm's cost ratio to be >= 1.0, penalising correct abstention at zero requests"
+    },
+    {
+      "clause": "decision_rule.5",
+      "defect": "requires matched end-to-end success against two baselines whose measured success is 0.0, so the comparison has no referent"
+    },
+    {
+      "clause": "F12",
+      "defect": "requires n >= 50 per family for all arms; the frozen substrate supplies only 126 resource-B identifiers"
+    },
+    {
+      "clause": "prereg.5",
+      "defect": "orders kernel fixes to be committed before freeze, but check_scope.py:124-126 gives stage 'design' only 4 exact exp paths and freeze_experiment.py:79-82 writes only 3 hashes (request.json, spec.json, prereg.md), so a code-bound precondition is unsatisfiable in every lane"
+    },
+    {
+      "clause": "prereg.8.4",
+      "defect": "requires N_MAX frozen pre-experiment; absent from spec.json and freeze.json"
+    }
+  ],
+  "program_level_recurrence": {
+    "finding": "A prereg that requires a committed or hash-verified code artifact before freeze is unsatisfiable in every lane, because scripts/freeze_experiment.py:79-82 binds only request.json, spec.json and prereg.md, and scripts/check_scope.py:124-126 withholds code-writing permission until the execute stage.",
+    "verified_at_source_by_this_lane": true,
+    "prior_occurrences_in_codex": [
+      "EXP-GRAPH-36287167610",
+      "EXP-INTEL-36293264917"
+    ],
+    "note": "This lane reached the same defect independently through prereg section 5, a different clause from the graph lane's V9. It is recorded as a program-level control-plane defect rather than as a defect unique to this experiment."
+  },
+  "reproduction": {
+    "order": [
+      "python3 research/experiments/EXP-PRODUCT-36293260887/probe_substrate.py",
+      "PYTHONPATH=src python3 -m unittest discover -s tests",
+      "python3 research/experiments/EXP-PRODUCT-36293260887/run_experiment.py",
+      "python3 research/experiments/EXP-PRODUCT-36293260887/build_result.py",
+      "python3 research/experiments/EXP-PRODUCT-36293260887/build_provenance.py"
+    ],
+    "deterministic": true,
+    "caveat": "The substrate contains no RNG, so the measurement itself is deterministic given the fixed seed. The 'deterministic' flag attests only to the absence of unseeded randomness, not to stability across Python versions."
+  },
+  "integrity_statement": {
+    "frozen_inputs_mutated": false,
+    "codex_mutated": false,
+    "other_lanes_or_experiments_touched": false,
+    "constitutional_files_touched": false,
+    "github_workflows_touched": false,
+    "placeholders_in_packet": false,
+    "claim_self_promotion": false,
+    "self_reference_note": "build_provenance.py cannot record its own digest, because writing the digest changes the file. Its digest is therefore absent from this packet by construction rather than by omission; it can be recomputed directly from the working tree.",
+    "note": "The only modified paths are the product lane's authorized roots (src, tests) and this experiment's own directory. Everything in src/ and tests/ is uncommitted, which is disclosed above as a validity failure rather than presented as a delivered capability."
+  }
+}
