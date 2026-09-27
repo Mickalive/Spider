@@ -1,0 +1,744 @@
+{
+  "artifacts": [
+    {
+      "path": "artifacts/baseline_replication.json",
+      "role": "raw",
+      "sha256": "327a03cf5f091264b52d10cfa4c640311aaceb3b50a8b71452772d5717f3ae2a"
+    },
+    {
+      "path": "artifacts/binding_compilation_closure.json",
+      "role": "derived",
+      "sha256": "fc39557a855c5d42187ebed2a5acd63b6b7324f15ef802d24ab76b1623ce1c69"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC-declared_alternate_literal_step2.jsonl",
+      "role": "raw",
+      "sha256": "2e5048d90d0bef3dc566c62374c8a116a395d195cab84204194a3cb59f56f12a"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC-declared_alternate_prefix_intent.jsonl",
+      "role": "raw",
+      "sha256": "38742c2ba06f0293c1ad365bc45751f75ad2e72200a81b5f9ab6f4b272e60425"
+    },
+    {
+      "path": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "role": "raw",
+      "sha256": "7c2774212fff037e22115d3960f280df547d03c85422565e61ab1b2ec19ba0da"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_arm_native_state_key.jsonl",
+      "role": "raw",
+      "sha256": "d215bd4a757fff132838b7a8a8c4e4f1df64deee6c2dd64b6ce21eec4396075b"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "8fd9e83a6a26b981680ab8e54d1bc68220e334e188b896975e59f372efedd772"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_literal_rule_arm_native_state_key.jsonl",
+      "role": "raw",
+      "sha256": "ec191edf5439d7fcd975c55293a3b0dfeedb2106852682898f863ec91d6b9028"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_literal_rule_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "4fe8910b122db321b661646bbda22385598d3dc384a31691d57a3c1fa2dc92c4"
+    },
+    {
+      "path": "artifacts/classification_NC-UNIQUE-STATES-declared_alternate_prefix_intent_prereg13_state_key.jsonl",
+      "role": "raw",
+      "sha256": "8dda88ed5d43c851c65706127438e1390a9dd739ef8ffd55c46284519b235392"
+    },
+    {
+      "path": "artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "4011e077e7b3341326a22c61c69b4287181f4c6d27279e24a5f2cc94e8bc383b"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.00.json",
+      "role": "derived",
+      "sha256": "f617c3bdf6048ba7fb0f34381550e52338ec2ae489e2608d868b2cbef561c856"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.25.json",
+      "role": "derived",
+      "sha256": "cefb525606e016b8a2053352fe2583d40c39875f135688536960c43675f8b073"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.50.json",
+      "role": "derived",
+      "sha256": "cf419add39c92fa9a9f8fc1a6f1dfe59e8004a5bd8934b12ad5c49a9861dc5e1"
+    },
+    {
+      "path": "artifacts/closure_attribution_0.75.json",
+      "role": "derived",
+      "sha256": "130abd8b88349b2cf27d0b84e8e905d82fcb4ecf2ec7401d84c4d71e72680f27"
+    },
+    {
+      "path": "artifacts/closure_attribution_1.00.json",
+      "role": "derived",
+      "sha256": "49805f9e7f7349264c4f5596b3f82ae8a0e451a4db6aa48ba1298c3455c1ff35"
+    },
+    {
+      "path": "artifacts/conditioned_arm_statelessness_test.json",
+      "role": "raw",
+      "sha256": "05fb2ea4327994016845a40d7ff896d146a16aefa30fae6b122f91ca41a14a37"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.00.jsonl",
+      "role": "raw",
+      "sha256": "8e83ca3ace02ecf87d0af3e8f87deb9ef29b12210758ab8b422580b4199f8b6c"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.25.jsonl",
+      "role": "raw",
+      "sha256": "7186e646ae4d396f701a4cdaa748c28760f6e65c821678204211f25a9fda035c"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.50.jsonl",
+      "role": "raw",
+      "sha256": "9836fb07ad983d2b9c8b3242b413110ac1f3d438ae985d627a11a45229365deb"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_0.75.jsonl",
+      "role": "raw",
+      "sha256": "b84b40c7653e801fda33d314e73b418416bee672da49b1d06eb6519a66da6182"
+    },
+    {
+      "path": "artifacts/costs_B-COLD-EXPLORATION_1.00.jsonl",
+      "role": "raw",
+      "sha256": "25f00751003f24a790e9fd061eadf5c41a167bc75533ac3ef523069d5fa1420a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.00.jsonl",
+      "role": "raw",
+      "sha256": "feca3cadc12aea1965d60abb03eadd7537174bacc49d5aa8a6d49779f1f80d4a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.25.jsonl",
+      "role": "raw",
+      "sha256": "e899f291e524685d9455e738c102ad2e22b77ba8b7b8e93d5723bc9b1352dd9b"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.50.jsonl",
+      "role": "raw",
+      "sha256": "b51e68a0599a8cf9823cca954e229b4a815e39d87b60c34c4f18dfeecb9b5c22"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_0.75.jsonl",
+      "role": "raw",
+      "sha256": "61e5ac470f12d3782439bb0d921b27fdedf60190d5ed65b2fc9bbb3237c50850"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW_1.00.jsonl",
+      "role": "raw",
+      "sha256": "995e605386332cc1e384f0e88ba7d80acd414f5b17952703dc38e655413bc820"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.00.jsonl",
+      "role": "raw",
+      "sha256": "cb28c8a09145780710026d753b353e2fd9731a5629ca715d35a2a45d213bc25a"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.25.jsonl",
+      "role": "raw",
+      "sha256": "a664ecefcc5922ed804c6bdffe99138940d821bcf01f8496e3e98983c0c340cb"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.50.jsonl",
+      "role": "raw",
+      "sha256": "164ca6c23ca2b3ff927e102fe5ae986ae053e566a1d879d5400d3396273bc503"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_0.75.jsonl",
+      "role": "raw",
+      "sha256": "d8d2805b5e0a6ba645f6a51f1cdb8b07f9f4a5728c56ad159023f87854b38630"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-CONDITIONED-WIDE_1.00.jsonl",
+      "role": "raw",
+      "sha256": "012b9c170d1eec7c33a8523d81d43e9965fdcf74e552d8a6beb0116f17c73dd3"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.00.jsonl",
+      "role": "raw",
+      "sha256": "b57cdd83d0e5cf34e1d901a004a520aef631497ae1e1e27d614c835b1791ec7c"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.25.jsonl",
+      "role": "raw",
+      "sha256": "3da24b4f04f42323fb0c076cc8852a5e6f54fa78d19cc653a067ec5e8540d99b"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.50.jsonl",
+      "role": "raw",
+      "sha256": "850f8897bf9d655cafea121f100753c7626dc01a7938c98188a90dc7a7ed327d"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_0.75.jsonl",
+      "role": "raw",
+      "sha256": "d689bd626602d644ed7b0529249009729cf03476aa67245803b6ec1d08929966"
+    },
+    {
+      "path": "artifacts/costs_B-NO-MEMORY-DETERMINISTIC_1.00.jsonl",
+      "role": "raw",
+      "sha256": "934d158e50d2460b1f03b8a3e25af63041d1df864df171577aab9ee2c9cd309e"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.00.jsonl",
+      "role": "raw",
+      "sha256": "0ddb2868cd31914e88f3982fed235ece83dc5d5ada283688af15f82ddebe62b6"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.25.jsonl",
+      "role": "raw",
+      "sha256": "aea7966d69a0757f8506444da6aa57a6a3052122d3769700899b77c3fb90b681"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.50.jsonl",
+      "role": "raw",
+      "sha256": "9aa1cc3ca36be2d9049887f01c85230cc09a64cc8e56900c7224dd199899dbf4"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_0.75.jsonl",
+      "role": "raw",
+      "sha256": "faad35e2dc81c47359c18e33470ed16c34752b52eb385b1748aa0ca8b0b09c41"
+    },
+    {
+      "path": "artifacts/costs_CROSS_EPISODE_COMPILED_BINDING_1.00.jsonl",
+      "role": "raw",
+      "sha256": "0a755a4ed7effa9aea9744f9c28e657845b2b6fd2e943f3dc55f9735e2f17724"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-COLD.jsonl",
+      "role": "raw",
+      "sha256": "999368f05f285f47a45290e675eb1fb0cc4c0ed845f9ae4aa12ff774c4f6d011"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "2e687143b09504f5eb514a52d771b013f084d4255af4697d59d74757f3292a87"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "5e46a125a50e5835b2fb8942bfcf10c1583e44a2c86c30acb21792c550c4cf48"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "1fba1ad2bf46ca13ad54edf9e49622f287362ddc6ff3bf3615e8e6485ee1afce"
+    },
+    {
+      "path": "artifacts/costs_NC-UNIQUE-STATES.jsonl",
+      "role": "raw",
+      "sha256": "e257d113ba61c0c82a3626ef32413ee71db2603a51f041369e2190b081f99c71"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "6bfcbf19d8f0025e24adb1fac517a93858f779021eb10e279e0179694456398d"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "7689273f5c6fecd01ab24b3a700b82ee8cf7c9139b739c631835b1ba39211f1b"
+    },
+    {
+      "path": "artifacts/costs_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "8a59f64ae1f73c657d0d4ca830d5cef52a076e2791e9cd83e43bcd339d5ec65f"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.00.jsonl",
+      "role": "raw",
+      "sha256": "e88e58e5689be434af12033282b2362ee615c17bf37a363a435306fe2082d5b1"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.25.jsonl",
+      "role": "raw",
+      "sha256": "2aa641dcb5e0ccd9ccd1d90d56573aae57e807bb986a1d954ab4ab63af9dc230"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.50.jsonl",
+      "role": "raw",
+      "sha256": "3c2aae5a65fb00619590996b7994b400ad75337896c551199da67da36a2d4ac9"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.75.jsonl",
+      "role": "raw",
+      "sha256": "8fb68c5c682044597fac787026f1e0980eed13a7e84e8ec6615f57251a7a7baf"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_1.00.jsonl",
+      "role": "raw",
+      "sha256": "616de251243c0c52fec12b73a1101c07d25bba7a1da56654ef8ba22f1f5c4490"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.00.jsonl",
+      "role": "raw",
+      "sha256": "7167e971e3b7d0deca5169da98fd43e053de86d86e95d27522c934c341844ee5"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.25.jsonl",
+      "role": "raw",
+      "sha256": "a3696878a6809c599d7bc39fc9cbad17f1b6ccd7b1818c80da7a977539cbdbed"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.50.jsonl",
+      "role": "raw",
+      "sha256": "4d4b92e33ee45701d900c78e114698222a1d5891ab13c20011370b243cac0d4d"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_0.75.jsonl",
+      "role": "raw",
+      "sha256": "463e736f6580205ebcb90b9c7957ccf5dafd08e5ad78a5b5a930b4889aa9a109"
+    },
+    {
+      "path": "artifacts/costs_WITHIN_EPISODE_SCRATCHPAD_1.00.jsonl",
+      "role": "raw",
+      "sha256": "8e2fb01da529efa27f6d5947bde84eac2d329ffb3b7c74589fc4825c44faecb1"
+    },
+    {
+      "path": "artifacts/goal_state_success.json",
+      "role": "raw",
+      "sha256": "d4a2fd8e84544faa55f47084dd0437ce585c6bdc78cb7b14474aa16d2e5f9cdf"
+    },
+    {
+      "path": "artifacts/headroom_closed.json",
+      "role": "derived",
+      "sha256": "21ef3cdd409279a3505b00e7612fcd600994d9f71d66753d2d01f184b43e2736"
+    },
+    {
+      "path": "artifacts/mint_channel_check.json",
+      "role": "raw",
+      "sha256": "bb30c41b8165d63fc39598a95f43d477b176ca2b594cf2bb84a94aeaf42ee4b8"
+    },
+    {
+      "path": "artifacts/nc_verification.json",
+      "role": "raw",
+      "sha256": "4b1238dd93e18e11ab8d4bfcc3acbccecbc53350746ccd833fefc656aec67469"
+    },
+    {
+      "path": "artifacts/paired_bootstrap_cost_differences.json",
+      "role": "derived",
+      "sha256": "6f28f84acb462ee760f00287ba02ba3757c3ee0e6592047fcbc80bb0291830d9"
+    },
+    {
+      "path": "artifacts/pc_verification.json",
+      "role": "raw",
+      "sha256": "33411cd6ee61c4e56854154029394d6f59faf29c28c35fb98bfff5be3c8af43c"
+    },
+    {
+      "path": "artifacts/reference_false_compile.json",
+      "role": "derived",
+      "sha256": "6137b5a5f9badbedfc6aaa4a6b81276c48c30439cfbe679753e8d42e6f797ce3"
+    },
+    {
+      "path": "artifacts/replication_parent_comparison.json",
+      "role": "raw",
+      "sha256": "0e70e2c8a70903acdd2fb66a6677ecdeb4c167073011285557f71e09b3ff6ade"
+    },
+    {
+      "path": "artifacts/replication_parent_numbers.json",
+      "role": "raw",
+      "sha256": "be3849109382ce3c0d942ff837f3b6d2578a4b629fef3041677bdc402cc14c2b"
+    },
+    {
+      "path": "artifacts/run_manifest.json",
+      "role": "raw",
+      "sha256": "fe99c495ce68675cc7c9bc23af2cb7e725223dd2d2266cbb97d4fea9f0eb06a2"
+    },
+    {
+      "path": "artifacts/scratchpad_closure.json",
+      "role": "derived",
+      "sha256": "36f906102b303cda44f71bd7c0e11cc90201a889c5b5a10d2477ff5d74bb1801"
+    },
+    {
+      "path": "artifacts/scratchpad_statelessness_test.json",
+      "role": "raw",
+      "sha256": "05fb2ea4327994016845a40d7ff896d146a16aefa30fae6b122f91ca41a14a37"
+    },
+    {
+      "path": "artifacts/shared_ground_truth_integrity.json",
+      "role": "raw",
+      "sha256": "67a365cfae0df52d79401143ad490c3ba98c5b5dcdd006adf751412906270d97"
+    },
+    {
+      "path": "artifacts/spans_B-COLD-EXPLORATION.jsonl",
+      "role": "raw",
+      "sha256": "cf12322176b92ee964ff4e1dab4519c98123ed6ccb410aa5d78b14b52483e27c"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "role": "raw",
+      "sha256": "aa610ae40409d3b6cb237a7b87cfc804610e93c634ddbe3a914076fcdcc91c92"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "597f750d537b4f7292d1847766b7f539c2ee9aa0cfcaa2e8e026110df1cf0f95"
+    },
+    {
+      "path": "artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "role": "raw",
+      "sha256": "ef6e0391161b5072f20bf2c239addfaeb9fef3982d0ebe56be01064136e62fd1"
+    },
+    {
+      "path": "artifacts/spans_CROSS_EPISODE_COMPILED_BINDING.jsonl",
+      "role": "raw",
+      "sha256": "0057f5e399c3e4cf67ae51552e57817d146c8492e3ef0d92023cf3493ee680e5"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-COLD.jsonl",
+      "role": "raw",
+      "sha256": "6d65fc9be175374296b4ac638bb7ef3335d33e8ccc121403e3f684ab1e6cf383"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "5375f0d83839a70ec2515d2bb056ddef9a2448eddcf517aac72cb29aa540ae95"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-CONDITIONED-WIDE.jsonl",
+      "role": "raw",
+      "sha256": "6b3d88a40a15c099196d9e53a6e20812e310cfad39d3e13d48cec9cc3657d90c"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "7decd794c9caf7980acddc8c15ec4ed7056915aa18d65bb87e34a0453b61a19f"
+    },
+    {
+      "path": "artifacts/spans_NC-UNIQUE-STATES.jsonl",
+      "role": "raw",
+      "sha256": "20325096ba5a1aa8ae6228010b651bed4ccfb8251a8d8685d20f9be25cb06031"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION-COMPILED.jsonl",
+      "role": "raw",
+      "sha256": "c850dd711a3035a828619fdd2f4e7ad6cca9cb11bfccf9bc80d274bc0a9e7ed7"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION-SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "ea8531d6ee6c862ffe862f9191844bc2c252d1d4ab25c6a74256fec010803ea3"
+    },
+    {
+      "path": "artifacts/spans_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "role": "raw",
+      "sha256": "0c6d54231a9c7b7bc9f2c2d8a6125f75602ab96d8a4a0a469c98078672cad4ee"
+    },
+    {
+      "path": "artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "role": "raw",
+      "sha256": "92a3fd6becd327f5ad0a26514552d93f385de1c0cdbce2dc51b41493a27f90f6"
+    },
+    {
+      "path": "artifacts/spans_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG.jsonl",
+      "role": "raw",
+      "sha256": "a74ba9196c0521df07a8c176f7ba64e2c0c55905af87679c4b183f7fe305934d"
+    },
+    {
+      "path": "artifacts/spans_WITHIN_EPISODE_SCRATCHPAD.jsonl",
+      "role": "raw",
+      "sha256": "6c6909405fc43508e714c201eab7a6a70002baaa879e501dbac2a26167a93333"
+    },
+    {
+      "path": "artifacts/substrate_idempotency.json",
+      "role": "raw",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.00.json",
+      "role": "derived",
+      "sha256": "4affeac62bc0dc1de3cbfbf48ac7bccf7cecf600a2634ec3ea6da2d3aac3f65d"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.25.json",
+      "role": "derived",
+      "sha256": "c3d91149e3a354ddeb61872347916fd7d04b8867adb488a890abd24c139de3a0"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.50.json",
+      "role": "derived",
+      "sha256": "6c2d49678ba054b926ccaaa27fa2450716468d0e92ad6f1b0444a339d3235bfe"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_0.75.json",
+      "role": "derived",
+      "sha256": "8f3307e20810b9577a815cbf6078c241571305562ec372b19e003d8a8a9afaa3"
+    },
+    {
+      "path": "artifacts/summary_B-COLD-EXPLORATION_1.00.json",
+      "role": "derived",
+      "sha256": "740d987d56280b866f1288c77923029264535cdfd085b5bdbb34ccbabc02e29c"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.00.json",
+      "role": "derived",
+      "sha256": "64b25a8878bf19253f8a724270e07c1e3c945cd057370a3b4b53a8871ce46bd7"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.25.json",
+      "role": "derived",
+      "sha256": "3f75d5a5c2a487837affa55921e0806ca39a02aa940817e04ec67a3b0282a56c"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.50.json",
+      "role": "derived",
+      "sha256": "0015f54527325abe3442463842824cc498287a2929b3d52e8ee0556c4bca6396"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_0.75.json",
+      "role": "derived",
+      "sha256": "a8c35683a8389d87bd894a1edc04d1113d33e291c051e9d1ba61c2e8d6e05ff4"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-NARROW_1.00.json",
+      "role": "derived",
+      "sha256": "d6c44acdc3fe16c7f498cbd0d4b6fe50f1d13f9d2e464105ed587dea2d8fe998"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.00.json",
+      "role": "derived",
+      "sha256": "2866463dd44031adb27d013e8c6909e2286002a9b7d281fa56077b697e5e6a5e"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.25.json",
+      "role": "derived",
+      "sha256": "72262e5d80a22d48f85150413d4bb9e623835d67019a640b660dc9023c31760f"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.50.json",
+      "role": "derived",
+      "sha256": "c0471e1f490979e9acf31b828eb6bdf45f869e6a865ec8871fbcc45841d8217b"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_0.75.json",
+      "role": "derived",
+      "sha256": "63232e6f1ff6ed671e131526ce6c2224d98c2d197174ba57a852bb7900e3c8e8"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-CONDITIONED-WIDE_1.00.json",
+      "role": "derived",
+      "sha256": "3242ba09e662912fe43d9992c85dd0b071849973bcf347facc054783aee00f7b"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.00.json",
+      "role": "derived",
+      "sha256": "41d7f8fdee79253c1da68a82119dcdeac8e638985e19cd60656afd59ae37455e"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.25.json",
+      "role": "derived",
+      "sha256": "78d16ab0bcc9a11b4e77202e206d8fd9e6db193e468d29c6b9f67fec0b5641a2"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.50.json",
+      "role": "derived",
+      "sha256": "f22f6c7f09eba21e40f082e4fc2229942d98fc091612be2c05afbab8a3cd5f81"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_0.75.json",
+      "role": "derived",
+      "sha256": "96f6891b13327a2e91919653b3e5313680e95a173a2cdd710ed85a085f5aab74"
+    },
+    {
+      "path": "artifacts/summary_B-NO-MEMORY-DETERMINISTIC_1.00.json",
+      "role": "derived",
+      "sha256": "813df39b9add7b8f2214301332141d44fa77494cc180f21073255b1e741dde13"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.00.json",
+      "role": "derived",
+      "sha256": "b079b3926534a10652c193ab572fab40357a2ef56497a6fb74af103e5c507b94"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.25.json",
+      "role": "derived",
+      "sha256": "3e1724719cbe2fbac136b7623c7d94617655201e746ce57d932eff92277804ad"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.50.json",
+      "role": "derived",
+      "sha256": "47baf1e6c93f86213e78481ebf4c8eefb5f472d83703055c5c3354da9e5d158f"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_0.75.json",
+      "role": "derived",
+      "sha256": "f003636f24f1a527424a0b38971f23ba64fa6dfccfe150486b526f22873edae9"
+    },
+    {
+      "path": "artifacts/summary_CROSS_EPISODE_COMPILED_BINDING_1.00.json",
+      "role": "derived",
+      "sha256": "8a037690b07aa9d734306468c3d6534a3cfecfac378af85392b37855270a5a13"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.00.json",
+      "role": "derived",
+      "sha256": "9235d758391739949c909627f43ea6ce61854522f9f28d9186e692fc1faf500e"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.25.json",
+      "role": "derived",
+      "sha256": "46ed24232528313ea7f5e3f7bace0f11f5142c3801b2bda7133848660d6e7502"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.50.json",
+      "role": "derived",
+      "sha256": "0405de8530cb6ab8f64c3ce334f2063db6eb6188eda059972e7d48a7abb90730"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_0.75.json",
+      "role": "derived",
+      "sha256": "8d2bba167b5742080b87fcb14ff3ae70e711aac1f8895aa1bd8b62a7d699ef50"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG_1.00.json",
+      "role": "derived",
+      "sha256": "3d0b52daaf5b77e45c426afe3f2a6204582bd94186ccc50160cc93a301cf95e1"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.00.json",
+      "role": "derived",
+      "sha256": "e7ca64ca92b749b65c3cefc6e6f036ae3659e0a00a4baeee2573ebe83f555830"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.25.json",
+      "role": "derived",
+      "sha256": "ca16d729e856286823b74845c101433d35bd86d35fd955e4224bd5f666a13e13"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.50.json",
+      "role": "derived",
+      "sha256": "7ab594757d3fa4f4afe2f188c9efdac697e33f07f8969ec7c32c41a5e2780190"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_0.75.json",
+      "role": "derived",
+      "sha256": "390d46e0eb2c97a5d213fe24b7c21e3e2466d84121838f0e9d18f1212d43e303"
+    },
+    {
+      "path": "artifacts/summary_WITHIN_EPISODE_SCRATCHPAD_1.00.json",
+      "role": "derived",
+      "sha256": "6ecec97aeada2c800b56fc7ec469663f9e95087cba85f4e44cb74e593218ced7"
+    },
+    {
+      "path": "artifacts/task_generator_config.json",
+      "role": "raw",
+      "sha256": "948885a10d1a954f954ce5205cb88aae7c8cabbc9060c606ec49cd03d0e174a6"
+    }
+  ],
+  "base_sha": "1a8c9de729895971390a30687f546a5bb5767843",
+  "code_paths": [
+    "research/frontier/run_execute_36287182510.py",
+    "research/frontier/arms/scratchpad.py",
+    "research/frontier/arms/compiled_binding.py",
+    "research/frontier/arms/common.py",
+    "research/frontier/arms/deopt_ratchet.py",
+    "research/frontier/arms/conditioned_no_memory.py",
+    "research/frontier/arms/cold_exploration.py",
+    "research/frontier/episodegen_36272394045.py",
+    "research/frontier/substrate_deterministic_http.py",
+    "research/frontier/taskplan.py",
+    "research/frontier/test_scratchpad_36287182510.py"
+  ],
+  "code_sha256": {
+    "research/frontier/arms/cold_exploration.py": "628b9645f4d5817ff7e74cc31d29470e4ad5dfa33158f7ebca64e4f61bc42e7b",
+    "research/frontier/arms/common.py": "d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6",
+    "research/frontier/arms/compiled_binding.py": "a03519a0cbbfd9a5fe9ad8509f3b0bd13c2d27b5a2964f5b47c20d4db4809fbd",
+    "research/frontier/arms/conditioned_no_memory.py": "212b0e89f37f099251207580fdb6752af17d7fa8a3de5c543f80d0d466e41ee7",
+    "research/frontier/arms/deopt_ratchet.py": "0c09a680a0dbde2488fdb9cf94632a9d70af135ab6351a7912401840063f3aee",
+    "research/frontier/arms/scratchpad.py": "e6f4a0e28b0d2b8e12294639bd38913d53aa4a0716536c09856ce9e7de86b768",
+    "research/frontier/episodegen_36272394045.py": "8e95a89610afa7455b5702dfa546220e31584bf06cd2f5cc8a41f43d777e1867",
+    "research/frontier/run_execute_36287182510.py": "ff282a2a8c18b3ce7a49fe6993dac08822ba0212b4810a9e8a4e772d507e8310",
+    "research/frontier/substrate_deterministic_http.py": "4bc9d449f445dec7d2485c3474a6eb7e6d63dc1d0f98a8cc120eb05df1310f0d",
+    "research/frontier/taskplan.py": "8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816",
+    "research/frontier/test_scratchpad_36287182510.py": "d6441dafea15e4c69a065f58b70c5ebf4a109b443eedfbf930dab3c26d03666c"
+  },
+  "commands": [
+    "python3 -m research.frontier.test_scratchpad_36287182510",
+    "python3 -m research.frontier.run_execute_36287182510"
+  ],
+  "environment": {
+    "browser": null,
+    "docker": null,
+    "model_api_key": null,
+    "model_calls": 0,
+    "network": "127.0.0.1 loopback only, stdlib ThreadingHTTPServer, disable_nagle_algorithm=True",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "episodes_run": 1750,
+  "experiment_id": "EXP-FRONTIER-36287182510",
+  "fixtures": {
+    "parent_artifacts_consumed": {
+      "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl": "6b8e9c6d3910f2522a0ebbb8ac13005c27d663ff087e1dc62fb39468687259af",
+      "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl": "f8f565ac911b33a4122e6f6b340c6bf49b3110d9ebd9dbdb330f3d0a16165e54"
+    },
+    "parent_packet": "research/experiments/EXP-FRONTIER-36272394045",
+    "task_generator": "research/frontier/taskplan.py (parent, unmodified) wrapped by research/frontier/episodegen_36272394045.py"
+  },
+  "frozen_inputs": {
+    "all_match": true,
+    "freeze_json": {
+      "experiment_id": "EXP-FRONTIER-36287182510",
+      "frozen_at": "2026-09-27T02:06:20.176545+00:00",
+      "hashes": {
+        "prereg.md": "d839c8b0575293b23ce32af70c05c2cf91f38544dc96650d7c34c9818ef6e17f",
+        "request.json": "1c5ae021d98ad04d9d7bae32442629f7399b270168d7e5725f83d909a6f9026d",
+        "spec.json": "4c2ef55c756552d5ab7a91f69f0cd0d8a0dec66d629cd72c4c69cc35b5f7c62b"
+      },
+      "schema_version": 1
+    },
+    "parent_handoff": {
+      "experiment_id": "EXP-FRONTIER-36272394045",
+      "path": "research/experiments/EXP-FRONTIER-36272394045/handoff.json",
+      "sha256": "b4df3a0aba6d5d5488103973509a7a1b610136b2a88771350e0c599d1dc7d491"
+    },
+    "recomputed": {
+      "prereg.md": "d839c8b0575293b23ce32af70c05c2cf91f38544dc96650d7c34c9818ef6e17f",
+      "request.json": "1c5ae021d98ad04d9d7bae32442629f7399b270168d7e5725f83d909a6f9026d",
+      "spec.json": "4c2ef55c756552d5ab7a91f69f0cd0d8a0dec66d629cd72c4c69cc35b5f7c62b"
+    }
+  },
+  "git": {
+    "rev_parse_HEAD": "aa79d89b49c573af6fc3644ee186abb8c5eb6bf1",
+    "status_porcelain": "M research/frontier/episodegen_36272394045.py\n M research/frontier/substrate_deterministic_http.py\n?? research/experiments/EXP-FRONTIER-36287182510/artifacts/\n?? research/experiments/EXP-FRONTIER-36287182510/model_execute.json\n?? research/experiments/EXP-FRONTIER-36287182510/provenance.json\n?? research/experiments/EXP-FRONTIER-36287182510/report.md\n?? research/experiments/EXP-FRONTIER-36287182510/result.json\n?? research/frontier/arms/compiled_binding.py\n?? research/frontier/arms/scratchpad.py\n?? research/frontier/run_execute_36287182510.py\n?? research/frontier/test_scratchpad_36287182510.py"
+  },
+  "github_run_id": "36287182510",
+  "lane": "frontier",
+  "randomness": {
+    "bootstrap": {
+      "resamples": 5000,
+      "seed": 36287182510,
+      "unit": "episode"
+    },
+    "mint_salt": "014630eeab62b06a",
+    "task_generator": "fixed by episode counter and novelty rate; no RNG"
+  },
+  "request_id": "0a74197aa64a3e081f8f7de5",
+  "schema_version": 1,
+  "span_occurrences_run": 42000,
+  "stage": "EXECUTE",
+  "substrate_requests": {
+    "arms": {
+      "B-COLD-EXPLORATION": 6000,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 6000,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 6000,
+      "B-NO-MEMORY-DETERMINISTIC": 6000,
+      "CROSS_EPISODE_COMPILED_BINDING": 6000,
+      "WITHIN_EPISODE_SCRATCHPAD": 6000,
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": 6000
+    },
+    "determinism_check": 800,
+    "ground_truth_passes": 2400,
+    "mint_channel_check": 25,
+    "nc": 3600,
+    "pc": 3600,
+    "replication": 6000
+  },
+  "wall_clock_seconds": 31.22
+}
