@@ -1,0 +1,101 @@
+{
+  "KB-PHYSICS-CMI": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 1.0,
+    "delta_statistic": 3.3306690738754696e-16,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "KB-PHYSICS-CMI",
+    "channel_id": "CH-SHUFFLED"
+  },
+  "KB-PRODUCT-COLD": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 1.0,
+    "delta_statistic": 0.0,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "KB-PRODUCT-COLD",
+    "channel_id": "CH-SHUFFLED"
+  },
+  "KB-FRONTIER-GOAL": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 1.0,
+    "delta_statistic": 0.0,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "KB-FRONTIER-GOAL",
+    "channel_id": "CH-SHUFFLED"
+  },
+  "KG-RUNTIME-HEADER-JACCARD": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 0.000999000999000999,
+    "delta_statistic": 1.771066334482052,
+    "channel_MI": 1.9491083554306654,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "KG-RUNTIME-HEADER-JACCARD",
+    "channel_id": "CH-IDENTITY"
+  },
+  "B-NULL-INSTRUMENT": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 1.0,
+    "delta_statistic": 0.0,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "B-NULL-INSTRUMENT",
+    "channel_id": "CH-SHUFFLED"
+  },
+  "B-IDENTITY-CHANNEL": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 0.000999000999000999,
+    "delta_statistic": 0.10844878700231303,
+    "channel_MI": 1.9491083554306654,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "B-IDENTITY-CHANNEL",
+    "channel_id": "CH-IDENTITY"
+  },
+  "B-SHUFFLED-CHANNEL": {
+    "verdict": "REJECT",
+    "invariance_passed": false,
+    "displacement_passed": false,
+    "min_permutation_p": 0.6723276723276723,
+    "delta_statistic": 0.005685912713440204,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "B-SHUFFLED-CHANNEL",
+    "channel_id": "CH-SHUFFLED"
+  },
+  "PC-RUNTIME-HEADER-JACCARD": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 0.000999000999000999,
+    "delta_statistic": 1.7711598936776587,
+    "channel_MI": 1.9491083554306654,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "PC-RUNTIME-HEADER-JACCARD",
+    "channel_id": "CH-IDENTITY"
+  },
+  "NC-CONSTANT-ZERO": {
+    "verdict": "REJECT",
+    "invariance_passed": true,
+    "displacement_passed": false,
+    "min_permutation_p": 1.0,
+    "delta_statistic": 0.0,
+    "channel_MI": 0.1880049864679197,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea",
+    "estimator_id": "NC-CONSTANT-ZERO",
+    "channel_id": "CH-SHUFFLED"
+  }
+}
