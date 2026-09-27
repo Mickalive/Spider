@@ -1,17 +1,48 @@
 {
   "experiment_id": "EXP-PRODUCT-36306521892",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON", "C-PARAM-INHERIT"],
+  "question": "What is the break-even reuse count f* at which persistent inheritance actually costs less than re-deriving the same operational knowledge, measured end-to-end in two regimes: (1) costly-re-derivation (multi-step auth, pagination traversal, schema discovery) where cold discovery provably costs >1 request/task, and (2) cheap-re-derivation (credential-free read-only) where cold discovery costs 1 request/task? Does f* differ between regimes by enough to justify a per-object persistence policy instead of unconditional persistence?",
+  "hypothesis": "A mechanism induced from observations of resource A (items) in the cheap regime, with parameter slots induced by distill_parameterized() reaching confidence >= min_confidence (0.8) through the committed kernel at HEAD, will transfer to never-observed resource B (products) with disjoint identifier namespace. In the costly regime, the amortized cost ratio (induction + n * transfer_cost) / (n * B-COLD-COSTLY) will fall <= 0.85 at some reuse count f*_costly. In the cheap regime, the same ratio against B-COLD-CHEAP will fall <= 0.85 at f*_cheap. The ratio f*_costly / f*_cheap will exceed 2.0, demonstrating that persistence policy should be regime-dependent. Mandatory safety: abstention_precision >= 0.95 on negative probes and false_accept_rate <= 0.10 on out-of-support bindings in both regimes. Task success >= 0.95 for INHERITANCE arm in both regimes.",
+  "falsifier": "The hypothesis is falsified if ANY of the following hold: (F1) INHERITANCE arm task success < 0.95 in either regime; (F2) abstention_precision < 0.95 or false_accept_rate > 0.10 in either regime; (F3) amortized_cost_ratio(INHERITANCE vs B-COLD) > 0.85 at maximum executed reuse count in either regime; (F4) f*_costly / f*_cheap <= 2.0 (no meaningful regime difference); (F5) kernel distill() path does not reach EXECUTABLE for any induced mechanism (durability precondition fails); (F6) B-COLD-COSTLY mean requests per task <= 1.0 (costly regime not actually costly); (F7) B-COLD-CHEAP mean requests per task > 1.5 (cheap regime not actually cheap); (F8) any cost component uses imported per-observation constants, jitter, or f-scaled substitution instead of substrate's own responses under the declared tokenizer.",
+  "baselines": [
+    {"id": "B-COLD-COSTLY", "description": "Per-task executed cold discovery in costly regime: auth flow, schema discovery, pagination search, then target verb. Cost = counted HTTP requests from substrate responses."},
+    {"id": "B-COLD-CHEAP", "description": "Per-task executed cold discovery in cheap regime: direct GET /products/{id}. Cost = counted HTTP requests (expected 1.0)."},
+    {"id": "B-SCRATCHPAD-COSTLY", "description": "Within-episode re-derivation in costly regime: first task pays full cold cost, subsequent tasks in same episode reuse discovered schema/auth/paths without registry. Cost = cold cost for task 1, then 1 request/task for subsequent."},
+    {"id": "B-SCRATCHPAD-CHEAP", "description": "Within-episode re-derivation in cheap regime: first task 1 request, subsequent tasks 1 request (no savings possible). Cost = 1 request/task always."},
+    {"id": "B-NO-MEMORY-COSTLY", "description": "Deterministic executor with no registry, no write path, no staleness surface in costly regime: hard-coded auth flow + pagination logic per task. Cost = full cold cost per task (no amortization)."},
+    {"id": "B-NO-MEMORY-CHEAP", "description": "Deterministic executor with no registry in cheap regime: direct GET /products/{id} per task. Cost = 1 request/task."},
+    {"id": "B-INSTRUCTIONS-COSTLY", "description": "Site-specific instructions arm in costly regime: pre-provided auth/schema/pagination instructions, agent executes per task. Cost = instructions overhead + execution requests."},
+    {"id": "B-INSTRUCTIONS-CHEAP", "description": "Site-specific instructions arm in cheap regime: pre-provided direct GET template. Cost = 1 request/task + instructions overhead."},
+    {"id": "B-RETRIEVAL-K5-COSTLY", "description": "Retrieval K=5 in costly regime: semantic retrieval over prior trajectories (deterministic hash-n-gram embedding), then execute top match. Cost = retrieval + execution requests."},
+    {"id": "B-RETRIEVAL-K5-CHEAP", "description": "Retrieval K=5 in cheap regime: retrieval over prior trajectories, then execute. Cost = retrieval + 1 request/task."}
+  ],
+  "positive_control": "PC-SAME-RESOURCE: mechanism induced from resource A (items) tested on held-out identifiers of SAME resource A in cheap regime. Must achieve task success >= 0.95 and resolution EXECUTABLE via distill_parameterized path. Confirms induction pipeline works before transfer.",
+  "null_control": "NC-SHUFFLED-INTENT: training labels shuffled across observations, then distill_parameterized induced. Must abstain (EXPLORE or UNKNOWN) on all probes with induced confidence < 0.8. NC-FALSE-ACCEPT: probes with out-of-support identifier bindings and empty-string bindings. Must reject (not EXECUTABLE) with false_accept_rate <= 0.10.",
+  "measurement_validity": [
+    "Substrate satisfies preregistered surface contract for BOTH regimes (verified by probe before arms run): costly regime exposes auth/pagination/schema endpoints; cheap regime exposes direct GET only.",
+    "Cost basis: single declared tokenizer (tiktoken cl100k_base) applied to substrate response bodies. All request counts from actual HTTP calls issued and counted. No imported per-observation constants.",
+    "Induction cost counted from actual HTTP requests during observation collection, not estimated.",
+    "Substrate reset between arms (fresh()) to prevent cross-arm contamination.",
+    "Family-stratified bootstrap (B=5000) for confidence intervals on all rates and costs.",
+    "Minimum 50 never-observed resource-B identifiers per family (read/update/delete) in BOTH regimes.",
+    "Resource A and B identifier namespaces disjoint by construction (no string overlap).",
+    "Durability: kernel parameter-induction code committed at HEAD with nonempty diff vs base_sha, hash-verified, tests/test_kernel.py exercises distill() -> EXECUTABLE path.",
+    "No model calls/tokens (OPENAI_API_KEY absent) -> reported as UNKNOWN with reason. No browser/latency -> UNKNOWN with reason."
+  ],
+  "decision_rule": {
+    "outcome_mapping": {
+      "SUPPORTS": "All of: (1) INHERITANCE task success >= 0.95 in BOTH regimes; (2) abstention_precision >= 0.95 and false_accept_rate <= 0.10 in BOTH regimes; (3) amortized_cost_ratio(INHERITANCE vs B-COLD) <= 0.85 at some executed reuse count in BOTH regimes; (4) f*_costly / f*_cheap > 2.0; (5) PC-SAME-RESOURCE task success >= 0.95 via distill_parameterized; (6) durability precondition met (kernel diff committed, hash-verified, tests pass).",
+      "FALSIFIES": "Any falsifier F1-F8 triggers.",
+      "MIXED": "Some regimes pass primary criteria but not both, OR safety passes but economics fails in one regime, OR f* ratio inconclusive.",
+      "INCONCLUSIVE": "Measurement validity failure (substrate contract not met, insufficient identifiers, bootstrap degenerate, kernel not committed).",
+      "NOT_APPLICABLE": "Durability precondition F5 fails (kernel cannot reach EXECUTABLE from distill) - experiment cannot test inheritance economics without working induction."
+    },
+    "primary_metric": "amortized_cost_ratio_vs_bcold at executed reuse count; break_even_reuse_count f* per regime; f*_costly / f*_cheap ratio",
+    "safety_gate": "abstention_precision >= 0.95 AND false_accept_rate <= 0.10 in BOTH regimes (mandatory, not traded off against economics)"
+  },
+  "product_consequence_positive": "C-PRODUCT-ECON advances toward VALIDATED: break-even reuse count f* measured in two regimes with regime-dependent policy justification. Persistence architecture validated with quantified economics. C-PARAM-INHERIT reinforced at EXPERIMENTAL with transfer evidence. Product can implement per-object persistence policy (persist only when regime indicates f* is reachable).",
+  "product_consequence_negative": "C-PRODUCT-ECON remains HYPOTHESIS or moves to REJECTED if falsified. If safety gate fails, kernel is unsafe for production regardless of economics. If f* ratio <= 2.0, unconditional persistence is not justified; architecture may pivot to re-derivation + caching with policy. If durability precondition fails, no Product experiment can measure economics until kernel induction is fixed and committed.",
+  "estimated_cost": "Moderate: ~5000 HTTP requests per regime across arms, in-process stdlib substrate, no external APIs. Single GitHub Actions run.",
+  "expected_information_gain": "High: first end-to-end measurement of break-even reuse count f* in two regimes with mandatory safety gates, using committed kernel induction path. Directly tests SPIDER's central premise (pay cost of novelty, not whole task) with real cost accounting."
 }
