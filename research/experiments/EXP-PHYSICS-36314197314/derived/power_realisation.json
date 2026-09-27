@@ -1,0 +1,20 @@
+{
+ "prereg_s12_power_calculation": {
+  "assumed_sites": 20,
+  "claimed_power_brier": "> 0.90",
+  "claimed_power_log_density": "> 0.95",
+  "mde_brier": 0.05,
+  "mde_log_density_nats": 0.22,
+  "note": "prereg s12 tabulates pilot values (-2.34 vs -1.87 nats, Brier 0.42 vs 0.31) and states pilot_data.json and power_calculation.json were recorded at freeze. Neither artifact exists in the frozen packet and freeze.json does not reference them, so the pilot numbers cannot be audited. Under the prereg's own signature schema the tabulated log-density values are also outside the attainable range (max -0.2020 nats, D1/D2).",
+  "pilot_data_artifact_present": false,
+  "power_calculation_artifact_present": false,
+  "present_in_frozen_prereg": true
+ },
+ "realised": {
+  "n_distinct_bootstrap_site_resamples": 118,
+  "n_test_cases": 66,
+  "n_test_sites": 5,
+  "power_at_assumed_site_count": 0.25,
+  "statement": "the design's inference unit is the SITE, so the effective sample size is 5 clusters, not 66 transitions; site-clustered intervals and site-grouped permutations at 5 clusters are close to uninformative, and the prereg's power calculation (20 sites) does not describe this run"
+ }
+}

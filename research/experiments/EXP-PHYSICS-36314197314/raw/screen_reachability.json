@@ -1,0 +1,125 @@
+{
+ "screen_at": "2026-09-27T11:28:21.906338+00:00",
+ "candidates": [
+  {
+   "host": "httpbin.org",
+   "disjoint_excluded_by": "EXP-FRONTIER-36306528608/36293269574",
+   "probe": {
+    "url": "https://httpbin.org/",
+    "status": 200,
+    "len": 9593,
+    "ct": "text/html; charset=utf-8",
+    "ms": 245
+   }
+  },
+  {
+   "host": "api.github.com",
+   "disjoint_excluded_by": null,
+   "probe": {
+    "url": "https://api.github.com/",
+    "status": 200,
+    "len": 2396,
+    "ct": "application/json; charset=utf-8",
+    "ms": 14
+   }
+  },
+  {
+   "host": "api.publicapis.org",
+   "disjoint_excluded_by": null,
+   "errors": [
+    "https: URLError: <urlopen error [Errno -2] Name or service not known>",
+    "http: URLError: <urlopen error [Errno -2] Name or service not known>"
+   ]
+  },
+  {
+   "host": "api.chucknorris.io",
+   "disjoint_excluded_by": "EXP-FRONTIER-36293269574 claim_state",
+   "probe": {
+    "url": "https://api.chucknorris.io/",
+    "status": 200,
+    "len": 15378,
+    "ct": "text/html;charset=UTF-8",
+    "ms": 342
+   }
+  },
+  {
+   "host": "api.agify.io",
+   "disjoint_excluded_by": null,
+   "errors": [
+    "https: HTTPError: HTTP Error 422: Unprocessable Content",
+    "http: HTTPError: HTTP Error 422: Unprocessable Content"
+   ]
+  },
+  {
+   "host": "api.genderize.io",
+   "disjoint_excluded_by": null,
+   "errors": [
+    "https: HTTPError: HTTP Error 422: Unprocessable Content",
+    "http: HTTPError: HTTP Error 422: Unprocessable Content"
+   ]
+  },
+  {
+   "host": "api.nationalize.io",
+   "disjoint_excluded_by": null,
+   "errors": [
+    "https: HTTPError: HTTP Error 422: Unprocessable Content",
+    "http: HTTPError: HTTP Error 422: Unprocessable Content"
+   ]
+  },
+  {
+   "host": "catfact.ninja",
+   "disjoint_excluded_by": "EXP-FRONTIER-36306528608/36293269574",
+   "probe": {
+    "url": "https://catfact.ninja/",
+    "status": 200,
+    "len": 2202,
+    "ct": "text/html; charset=utf-8",
+    "ms": 50
+   }
+  },
+  {
+   "host": "dog.ceo",
+   "disjoint_excluded_by": "EXP-FRONTIER-36306528608/36293269574",
+   "probe": {
+    "url": "https://dog.ceo/",
+    "status": 200,
+    "len": 9339,
+    "ct": "text/html; charset=utf-8",
+    "ms": 113
+   }
+  },
+  {
+   "host": "randomuser.me",
+   "disjoint_excluded_by": null,
+   "probe": {
+    "url": "https://randomuser.me/",
+    "status": 200,
+    "len": 8553,
+    "ct": "text/html; charset=utf-8",
+    "ms": 39
+   }
+  },
+  {
+   "host": "ipify.org",
+   "disjoint_excluded_by": "EXP-FRONTIER-36306528608/36293269574 (api.ipify.org)",
+   "probe": {
+    "url": "https://ipify.org/",
+    "status": 200,
+    "len": 34530,
+    "ct": "text/html",
+    "ms": 271
+   }
+  },
+  {
+   "host": "ifconfig.me",
+   "disjoint_excluded_by": null,
+   "probe": {
+    "url": "https://ifconfig.me/",
+    "status": 200,
+    "len": 12,
+    "ct": "text/plain",
+    "ms": 42
+   }
+  }
+ ]
+}

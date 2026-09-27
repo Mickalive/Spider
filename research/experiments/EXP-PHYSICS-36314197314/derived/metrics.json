@@ -1,0 +1,439 @@
+{
+ "arms": {
+  "B1_MARKOV_1ST_ORDER": {
+   "brier_categorical": 0.07358718114654486,
+   "log_density_joint": 33.98504779239794,
+   "log_score_categorical": -4.049728211833437,
+   "mean_sq_std_residual": 0.057563756666324545
+  },
+  "B2_TFIDF_K5_RETRIEVAL_PREREG_LITERAL": {
+   "brier_categorical": 0.10226824043917901,
+   "log_density_joint": 31.619211413440926,
+   "log_score_categorical": -5.938628643713724,
+   "mean_sq_std_residual": 0.07774386625388612
+  },
+  "B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "brier_categorical": 0.09455750901872756,
+   "log_density_joint": 31.73196699833332,
+   "log_score_categorical": -5.795560256973332,
+   "mean_sq_std_residual": 0.07519200573535031
+  },
+  "B3_COLD_RERIVATION": {
+   "brier_categorical": 0.2995500071857462,
+   "log_density_joint": 23.001173436021855,
+   "log_score_categorical": -9.136098776300907,
+   "mean_sq_std_residual": 0.3928873402441853
+  },
+  "NC_PLACEBO_PERMUTED_MECHANISM": {
+   "brier_categorical": 0.32428404730822513,
+   "log_density_joint": 15.469434739163258,
+   "log_score_categorical": -13.145269086390382,
+   "mean_sq_std_residual": 0.238657165661861
+  },
+  "TREATMENT_INHERITED_MECHANISM": {
+   "brier_categorical": 0.07338133888200837,
+   "log_density_joint": 34.20760968222681,
+   "log_score_categorical": -4.033952953706143,
+   "mean_sq_std_residual": 0.04971718505258329
+  }
+ },
+ "bandwidth_sensitivity_log_density_joint": {
+  "0.25": {
+   "B1_MARKOV_1ST_ORDER": 30.69152703051847,
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": 20.3416501014839,
+   "B3_COLD_RERIVATION": -69.41335964602166,
+   "PC_PLANTED_MECHANISM": 48.26535953998836,
+   "TREATMENT_INHERITED_MECHANISM": 34.10101181679352
+  },
+  "1.00": {
+   "B1_MARKOV_1ST_ORDER": 33.98504779239794,
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": 31.73196699833332,
+   "B3_COLD_RERIVATION": 23.001173436021855,
+   "PC_PLANTED_MECHANISM": 41.3338877343889,
+   "TREATMENT_INHERITED_MECHANISM": 34.20760968222681
+  },
+  "16.00": {
+   "B1_MARKOV_1ST_ORDER": 20.801107593883188,
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": 19.08570466815642,
+   "B3_COLD_RERIVATION": 15.73542546189299,
+   "PC_PLANTED_MECHANISM": 27.470944123189998,
+   "TREATMENT_INHERITED_MECHANISM": 20.891582978926643
+  },
+  "4.00": {
+   "B1_MARKOV_1ST_ORDER": 27.69263802226593,
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": 25.94560698663693,
+   "B3_COLD_RERIVATION": 22.278826935900092,
+   "PC_PLANTED_MECHANISM": 34.402415928789445,
+   "TREATMENT_INHERITED_MECHANISM": 27.789157061169853
+  }
+ },
+ "contrasts_placebo": {
+  "PLACEBO_MINUS_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+   "observed": 0.2506968661616802,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 1.0
+  },
+  "PLACEBO_MINUS_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "observed": 0.22972653828949754,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.9999000099990001
+  },
+  "PLACEBO_MINUS_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+   "observed": 0.02473404012247885,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 1.0
+  },
+  "PLACEBO_MINUS_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+   "observed": -18.51561305323469,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.999000099990001
+  },
+  "PLACEBO_MINUS_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "observed": -16.26253225917007,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.9642035796420358
+  },
+  "PLACEBO_MINUS_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+   "observed": -7.531738696858597,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 0.41525847415258477
+  },
+  "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+   "observed": -9.095540874556946,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 1.0
+  },
+  "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "observed": -7.349708829417049,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.9999000099990001
+  },
+  "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+   "observed": -4.009170310089476,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 1.0
+  },
+  "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+   "observed": 0.18109340899553641,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.055194480551944806
+  },
+  "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "observed": 0.16346515992651067,
+   "p_site_grouped": 1.0,
+   "p_trajectory_grouped": 0.0005999400059994001
+  },
+  "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+   "observed": -0.15423017458232427,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 9.999000099990002e-05
+  }
+ },
+ "contrasts_primary": {
+  "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+   "ci95_high": 0.0,
+   "ci95_low": -0.0006792794729703677,
+   "comparator": "B1_MARKOV_1ST_ORDER",
+   "favourable": true,
+   "metric": "brier_categorical",
+   "observed": -0.00020584226453647717,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 0.0010998900109989002,
+   "site_balanced_observed": -0.00022642649099012375
+  },
+  "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "ci95_high": -0.004324277556812041,
+   "ci95_low": -0.05027200847065538,
+   "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+   "favourable": true,
+   "metric": "brier_categorical",
+   "observed": -0.021176170136719172,
+   "p_site_grouped": 0.4283571642835716,
+   "p_trajectory_grouped": 0.0780921907809219,
+   "site_balanced_observed": -0.020865177833080308
+  },
+  "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+   "ci95_high": -0.17540623535737965,
+   "ci95_low": -0.37609814343159526,
+   "comparator": "B3_COLD_RERIVATION",
+   "favourable": true,
+   "metric": "brier_categorical",
+   "observed": -0.22616866830373789,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 0.00019998000199980003,
+   "site_balanced_observed": -0.2746835197820191
+  },
+  "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+   "ci95_high": 0.052058351820068065,
+   "ci95_low": 1.163090787702545e-16,
+   "comparator": "B1_MARKOV_1ST_ORDER",
+   "favourable": true,
+   "metric": "log_score_categorical",
+   "observed": 0.015775258127293593,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 0.00019998000199980003,
+   "site_balanced_observed": 0.01735278394002284
+  },
+  "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+   "ci95_high": 2.959483062018149,
+   "ci95_low": 0.3123081017442649,
+   "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+   "favourable": true,
+   "metric": "log_score_categorical",
+   "observed": 1.7616073032671906,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 0.054594540545945404,
+   "site_balanced_observed": 1.494080789327907
+  },
+  "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+   "ci95_high": 6.896646734404412,
+   "ci95_low": 4.090714396103777,
+   "comparator": "B3_COLD_RERIVATION",
+   "favourable": true,
+   "metric": "log_score_categorical",
+   "observed": 5.102145822594766,
+   "p_site_grouped": 9.999000099990002e-05,
+   "p_trajectory_grouped": 9.999000099990002e-05,
+   "site_balanced_observed": 5.633892434980761
+  }
+ },
+ "frozen_primary_metric_name": "held_out_log_predictive_density (spec.json decision_rule); realized as the bandwidth-free proper score log_score_categorical, with log_density_joint reported alongside under an explicit bandwidth rule (D2)",
+ "frozen_secondary_metric_name": "brier_score (prereg s10.2: per-feature Brier, mean over features), realized as brier_categorical",
+ "iid_null": {
+  "n_draws": 66,
+  "observed": {
+   "B1_MARKOV_1ST_ORDER": {
+    "brier_categorical": 0.11629149400721875,
+    "log_density_joint": 32.072910022850486,
+    "log_score_categorical": -4.679348229932033,
+    "mean_sq_std_residual": 0.13547181919539272
+   },
+   "B2_TFIDF_K5_RETRIEVAL_PREREG_LITERAL": {
+    "brier_categorical": 0.1348548855204218,
+    "log_density_joint": 29.84074349739071,
+    "log_score_categorical": -6.545540017269285,
+    "mean_sq_std_residual": 0.14348084306750883
+   },
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "brier_categorical": 0.1342714268272431,
+    "log_density_joint": 29.90398341449169,
+    "log_score_categorical": -6.51742164726307,
+    "mean_sq_std_residual": 0.1386676094812386
+   },
+   "B3_COLD_RERIVATION": {
+    "brier_categorical": 0.2932864394928447,
+    "log_density_joint": 24.586365837908133,
+    "log_score_categorical": -6.900891870536215,
+    "mean_sq_std_residual": 0.43144688823573707
+   },
+   "NC_PLACEBO_PERMUTED_MECHANISM": {
+    "brier_categorical": 0.2999494742710264,
+    "log_density_joint": 15.55267576422017,
+    "log_score_categorical": -11.971563896131977,
+    "mean_sq_std_residual": 0.32043650012456915
+   },
+   "PER_SITE_MARGINAL_ORACLE": {
+    "brier_categorical": 0.10415798103688936,
+    "log_density_joint": 33.93899466647521,
+    "log_score_categorical": -2.869581598212493,
+    "mean_sq_std_residual": 0.11578064229273678
+   },
+   "TREATMENT_INHERITED_MECHANISM": {
+    "brier_categorical": 0.11670017582808588,
+    "log_density_joint": 32.09629292920702,
+    "log_score_categorical": -4.673734006066625,
+    "mean_sq_std_residual": 0.13552048646655362
+   }
+  }
+ },
+ "metric_definitions": {
+  "brier_categorical": "per case; multiclass Brier score of the joint discrete response signature, 1 - 2*p(y) + sum_{j,v} p(j,v)^2 (PRIMARY)",
+  "log_density_joint": "nats per held-out case; mixture log density of the true response signature over 10 discrete + 5 continuous components",
+  "log_score_categorical": "nats per held-out case; mixture log probability mass of the true 10-component discrete response signature (PRIMARY)",
+  "mean_sq_std_residual": "per case; mean squared standardized residual of the continuous components under the mixture mean (scale-free diagnostic)"
+ },
+ "pc_threshold_attainability": {
+  "max_attainable_log_score_categorical_any_predictor": -0.20202707317519467,
+  "s13_attainable": true,
+  "s13_threshold_nats": -0.5,
+  "s9_1_attainable": false,
+  "s9_1_threshold_nats": 2.0
+ },
+ "placebo_permutation_distribution": {
+  "brier_categorical": {
+   "max": 0.5944121581180932,
+   "mean": 0.3755823055096164,
+   "min": 0.07899202963139333,
+   "n_distinct": 201,
+   "n_placebo_arms_beating_treatment": 0,
+   "n_placebo_permutations": 201,
+   "placebo_minus_b3_mean": 0.0760322983238702,
+   "sd": 0.08874329450654372,
+   "treatment_percentile_within_placebo_distribution": 0.0
+  },
+  "log_density_joint": {
+   "max": 30.880869829284283,
+   "mean": 11.99730758393026,
+   "min": -4.262084226462265,
+   "n_distinct": 201,
+   "n_placebo_arms_beating_treatment": 0,
+   "n_placebo_permutations": 201,
+   "placebo_minus_b3_mean": -11.003865852091595,
+   "sd": 6.022853919563963,
+   "treatment_percentile_within_placebo_distribution": 0.0
+  },
+  "log_score_categorical": {
+   "max": -4.049728211833437,
+   "mean": -14.766544187979857,
+   "min": -22.836532973918185,
+   "n_distinct": 201,
+   "n_placebo_arms_beating_treatment": 0,
+   "n_placebo_permutations": 201,
+   "placebo_minus_b3_mean": -5.63044541167895,
+   "sd": 3.240383159340352,
+   "treatment_percentile_within_placebo_distribution": 0.0
+  },
+  "mean_sq_std_residual": {
+   "max": 0.8577390566249549,
+   "mean": 0.43792245794112933,
+   "min": 0.08141417316200929,
+   "n_distinct": 201,
+   "n_placebo_arms_beating_treatment": 0,
+   "n_placebo_permutations": 201,
+   "placebo_minus_b3_mean": 0.045035117696944016,
+   "sd": 0.16034905230559693,
+   "treatment_percentile_within_placebo_distribution": 0.0
+  }
+ },
+ "positive_control": {
+  "brier_categorical": 0.00024373337940395315,
+  "log_density_joint": 41.3338877343889,
+  "log_score_categorical": -0.12312145946864247,
+  "mean_sq_std_residual": 0.0,
+  "n_test_identifiers": 10,
+  "n_train_identifiers": 20,
+  "per_case": {
+   "brier_categorical": [
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940394312,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424
+   ],
+   "log_density_joint": [
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889,
+    41.3338877343889
+   ],
+   "log_score_categorical": [
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249
+   ],
+   "mean_sq_std_residual": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "positive_control_global_bandwidth_alternative": {
+  "brier_categorical": 0.00024373337940395315,
+  "log_density_joint": 64.35973866432936,
+  "log_score_categorical": -0.12312145946864247,
+  "mean_sq_std_residual": 0.0,
+  "per_case": {
+   "brier_categorical": [
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940394312,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424,
+    0.00024373337940395424
+   ],
+   "log_density_joint": [
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936,
+    64.35973866432936
+   ],
+   "log_score_categorical": [
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249,
+    -0.12312145946864249
+   ],
+   "mean_sq_std_residual": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "primary_metric_ids": [
+  "log_score_categorical",
+  "brier_categorical"
+ ],
+ "sample": {
+  "infrastructure_failure_fraction": 0.0,
+  "n_action_templates_total": 15,
+  "n_bodies_truncated_at_4096": 17,
+  "n_test": 66,
+  "n_test_sites": 5,
+  "n_test_templates": 11,
+  "n_train": 158,
+  "n_transitions_total": 224,
+  "n_transport_failures": 0,
+  "prereg_s12_assumed_sites": 20,
+  "prereg_s12_implied_heldout_cases": 900
+ }
+}

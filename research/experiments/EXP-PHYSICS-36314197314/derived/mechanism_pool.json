@@ -1,0 +1,2481 @@
+{
+ "analysis_web_requests": 0,
+ "mechanisms": [
+  {
+   "action_template": "api.agify.io::/?name=Alex|{country_id}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "ES",
+     "FR",
+     "IT",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M0_NO_MECHANISM::api.agify.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{results}",
+   "placebo_donor_mechanism": "M3_LINEAR_SIZE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.agify.io"
+  },
+  {
+   "action_template": "api.agify.io::/?name=Alex|{country_id}",
+   "applicability_guard": "site == api.agify.io and action_template == api.agify.io::/?name=Alex|{country_id} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "ES",
+     "FR",
+     "IT",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::api.agify.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{results}",
+   "placebo_donor_mechanism": "M3_LINEAR_SIZE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "api.agify.io"
+  },
+  {
+   "action_template": "api.agify.io::/?name=Alex|{country_id}",
+   "applicability_guard": "site == api.agify.io and action_template == api.agify.io::/?name=Alex|{country_id} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "ES",
+     "FR",
+     "IT",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.agify.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{results}",
+   "placebo_donor_mechanism": "M3_LINEAR_SIZE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.agify.io"
+  },
+  {
+   "action_template": "api.agify.io::/|{name}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "Alex",
+     "Alexandra",
+     "Anna",
+     "Ava",
+     "Bo",
+     "Chen",
+     "Ethan",
+     "Fatima",
+     "Maria",
+     "Mia",
+     "Olivia",
+     "Priya",
+     "Sofia",
+     "Yuki"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M0_NO_MECHANISM::api.agify.io::/|{name}",
+   "parameter_slots": [
+    {
+     "name": "name",
+     "type": "query"
+    }
+   ],
+   "placebo_donor_group": "api.genderize.io::/?name=Alex|{country_id}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.agify.io"
+  },
+  {
+   "action_template": "api.agify.io::/|{name}",
+   "applicability_guard": "site == api.agify.io and action_template == api.agify.io::/|{name} and param_type == 'query'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "Alex",
+     "Alexandra",
+     "Anna",
+     "Ava",
+     "Bo",
+     "Chen",
+     "Ethan",
+     "Fatima",
+     "Maria",
+     "Mia",
+     "Olivia",
+     "Priya",
+     "Sofia",
+     "Yuki"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.agify.io::/|{name}",
+   "parameter_slots": [
+    {
+     "name": "name",
+     "type": "query"
+    }
+   ],
+   "placebo_donor_group": "api.genderize.io::/?name=Alex|{country_id}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.agify.io"
+  },
+  {
+   "action_template": "api.genderize.io::/?name=Alex|{country_id}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "FR",
+     "GB",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0005",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M0_NO_MECHANISM::api.genderize.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.genderize.io"
+  },
+  {
+   "action_template": "api.genderize.io::/?name=Alex|{country_id}",
+   "applicability_guard": "site == api.genderize.io and action_template == api.genderize.io::/?name=Alex|{country_id} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "FR",
+     "GB",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0005",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::api.genderize.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "api.genderize.io"
+  },
+  {
+   "action_template": "api.genderize.io::/?name=Alex|{country_id}",
+   "applicability_guard": "site == api.genderize.io and action_template == api.genderize.io::/?name=Alex|{country_id} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "AU",
+     "BR",
+     "CA",
+     "FR",
+     "GB",
+     "NL",
+     "US",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0005",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.genderize.io::/?name=Alex|{country_id}",
+   "parameter_slots": [
+    {
+     "name": "country_id",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.genderize.io"
+  },
+  {
+   "action_template": "api.genderize.io::/|{name}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "Alex",
+     "Ava",
+     "Bo",
+     "Emma",
+     "Fatima",
+     "John",
+     "Lucas",
+     "Maria",
+     "Mia",
+     "Noah",
+     "Olivia",
+     "Omar",
+     "Sofia",
+     "Yuki"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M0_NO_MECHANISM::api.genderize.io::/|{name}",
+   "parameter_slots": [
+    {
+     "name": "name",
+     "type": "query"
+    }
+   ],
+   "placebo_donor_group": "api.agify.io::/?name=Alex|{country_id}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.genderize.io"
+  },
+  {
+   "action_template": "api.genderize.io::/|{name}",
+   "applicability_guard": "site == api.genderize.io and action_template == api.genderize.io::/|{name} and param_type == 'query'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "Alex",
+     "Ava",
+     "Bo",
+     "Emma",
+     "Fatima",
+     "John",
+     "Lucas",
+     "Maria",
+     "Mia",
+     "Noah",
+     "Olivia",
+     "Omar",
+     "Sofia",
+     "Yuki"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.genderize.io::/|{name}",
+   "parameter_slots": [
+    {
+     "name": "name",
+     "type": "query"
+    }
+   ],
+   "placebo_donor_group": "api.agify.io::/?name=Alex|{country_id}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.genderize.io"
+  },
+  {
+   "action_template": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "git",
+     "go",
+     "linux",
+     "node",
+     "python",
+     "rails",
+     "rust",
+     "spider-physics-0001",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.2954101090418763,
+   "guard_confidence_weight": 0.2954101090418763,
+   "mechanism_id": "M0_NO_MECHANISM::api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "parameter_slots": [
+    {
+     "name": "id_2",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.genderize.io::/|{name}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "applicability_guard": "site == api.github.com and action_template == api.github.com::/repos/{id_1}/{id_2}|{id_2} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "git",
+     "go",
+     "linux",
+     "node",
+     "python",
+     "rails",
+     "rust",
+     "spider-physics-0001",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.4091797819162474,
+   "guard_confidence_weight": 0.4091797819162474,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "parameter_slots": [
+    {
+     "name": "id_2",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.genderize.io::/|{name}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "applicability_guard": "site == api.github.com and action_template == api.github.com::/repos/{id_1}/{id_2}|{id_2} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "git",
+     "go",
+     "linux",
+     "node",
+     "python",
+     "rails",
+     "rust",
+     "spider-physics-0001",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.2954101090418763,
+   "guard_confidence_weight": 0.2954101090418763,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "parameter_slots": [
+    {
+     "name": "id_2",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.genderize.io::/|{name}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.github.com::/users/{id_0}|{id_0}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "defunkt",
+     "jresig",
+     "kneath",
+     "mojombo",
+     "pjhyett",
+     "schacon",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010",
+     "technoweenie"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.49357339036123904,
+   "guard_confidence_weight": 0.49357339036123904,
+   "mechanism_id": "M0_NO_MECHANISM::api.github.com::/users/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.github.com::/users/{id_0}|{id_0}",
+   "applicability_guard": "site == api.github.com and action_template == api.github.com::/users/{id_0}|{id_0} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "defunkt",
+     "jresig",
+     "kneath",
+     "mojombo",
+     "pjhyett",
+     "schacon",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010",
+     "technoweenie"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.012853219277521873,
+   "guard_confidence_weight": 0.012853219277521873,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::api.github.com::/users/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.github.com::/users/{id_0}|{id_0}",
+   "applicability_guard": "site == api.github.com and action_template == api.github.com::/users/{id_0}|{id_0} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "defunkt",
+     "jresig",
+     "kneath",
+     "mojombo",
+     "pjhyett",
+     "schacon",
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0004",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "spider-physics-0010",
+     "technoweenie"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.49357339036123904,
+   "guard_confidence_weight": 0.49357339036123904,
+   "mechanism_id": "M4_ENUM_PER_VALUE::api.github.com::/users/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "api.github.com"
+  },
+  {
+   "action_template": "api.nationalize.io::/",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "None"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 1.0,
+   "guard_confidence_weight": 1.0,
+   "mechanism_id": "M0_NO_MECHANISM::api.nationalize.io::/",
+   "parameter_slots": [],
+   "placebo_donor_group": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "api.nationalize.io"
+  },
+  {
+   "action_template": "ifconfig.me::/all",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "None"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 1.0,
+   "guard_confidence_weight": 1.0,
+   "mechanism_id": "M0_NO_MECHANISM::ifconfig.me::/all",
+   "parameter_slots": [],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "ifconfig.me::/all.json",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "None"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 1.0,
+   "guard_confidence_weight": 1.0,
+   "mechanism_id": "M0_NO_MECHANISM::ifconfig.me::/all.json",
+   "parameter_slots": [],
+   "placebo_donor_group": "api.agify.io::/|{name}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0011",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0015",
+     "spider-physics-0017",
+     "spider-physics-0018",
+     "spider-physics-0019"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M0_NO_MECHANISM::ifconfig.me::/headers/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{seed}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "applicability_guard": "site == ifconfig.me and action_template == ifconfig.me::/headers/{id_0}|{id_0} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0011",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0015",
+     "spider-physics-0017",
+     "spider-physics-0018",
+     "spider-physics-0019"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::ifconfig.me::/headers/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{seed}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "applicability_guard": "site == ifconfig.me and action_template == ifconfig.me::/headers/{id_0}|{id_0} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0001",
+     "spider-physics-0002",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0011",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0015",
+     "spider-physics-0017",
+     "spider-physics-0018",
+     "spider-physics-0019"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.3333333333333333,
+   "guard_confidence_weight": 0.3333333333333333,
+   "mechanism_id": "M4_ENUM_PER_VALUE::ifconfig.me::/headers/{id_0}|{id_0}",
+   "parameter_slots": [
+    {
+     "name": "id_0",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{seed}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "ifconfig.me::/ip",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "None"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 1.0,
+   "guard_confidence_weight": 1.0,
+   "mechanism_id": "M0_NO_MECHANISM::ifconfig.me::/ip",
+   "parameter_slots": [],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "ifconfig.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{exc}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "dob",
+     "email",
+     "gender",
+     "name",
+     "nat",
+     "phone",
+     "picture",
+     "registered",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M0_NO_MECHANISM::randomuser.me::/api/|{exc}",
+   "parameter_slots": [
+    {
+     "name": "exc",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/users/{id_0}|{id_0}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{exc}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{exc} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "dob",
+     "email",
+     "gender",
+     "name",
+     "nat",
+     "phone",
+     "picture",
+     "registered",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.0,
+   "guard_confidence_weight": 0.0,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::randomuser.me::/api/|{exc}",
+   "parameter_slots": [
+    {
+     "name": "exc",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/users/{id_0}|{id_0}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{exc}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{exc} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "dob",
+     "email",
+     "gender",
+     "name",
+     "nat",
+     "phone",
+     "picture",
+     "registered",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0008",
+     "spider-physics-0009",
+     "spider-physics-0010"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M4_ENUM_PER_VALUE::randomuser.me::/api/|{exc}",
+   "parameter_slots": [
+    {
+     "name": "exc",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "api.github.com::/users/{id_0}|{id_0}",
+   "placebo_donor_mechanism": "M1_IDENTITY_EXISTENCE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{nat}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "au",
+     "br",
+     "ca",
+     "de",
+     "es",
+     "fr",
+     "gb",
+     "it",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "us"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M0_NO_MECHANISM::randomuser.me::/api/|{nat}",
+   "parameter_slots": [
+    {
+     "name": "nat",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{exc}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{nat}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{nat} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "au",
+     "br",
+     "ca",
+     "de",
+     "es",
+     "fr",
+     "gb",
+     "it",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "us"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.0,
+   "guard_confidence_weight": 0.0,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::randomuser.me::/api/|{nat}",
+   "parameter_slots": [
+    {
+     "name": "nat",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{exc}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{nat}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{nat} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "au",
+     "br",
+     "ca",
+     "de",
+     "es",
+     "fr",
+     "gb",
+     "it",
+     "spider-physics-0001",
+     "spider-physics-0003",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0009",
+     "us"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M4_ENUM_PER_VALUE::randomuser.me::/api/|{nat}",
+   "parameter_slots": [
+    {
+     "name": "nat",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{exc}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 1.6094379124341003,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.781260791410363,
+    "n_points": 13,
+    "residual_sd": 0.031236181591711987,
+    "slope": 1.0415291049383146
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.04152910*log(n+1) + 6.78126079; TRAIN residual Silverman bandwidth h = 0.01982326 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.6287614679471005,
+    "n_points": 13,
+    "residual_sd": 0.11215205215184201,
+    "slope": 1.0800683872019798
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08006839*log(n+1) + 6.62876147; TRAIN residual Silverman bandwidth h = 0.07117450 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.623554003170087,
+    "n_points": 13,
+    "residual_sd": 0.11155064002019349,
+    "slope": 1.0811421608124065
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08114216*log(n+1) + 6.62355400; TRAIN residual Silverman bandwidth h = 0.07079283 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.619741692190777,
+    "n_points": 13,
+    "residual_sd": 0.1103046263401004,
+    "slope": 1.0817014021467626
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08170140*log(n+1) + 6.61974169; TRAIN residual Silverman bandwidth h = 0.07000208 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.619276582766342,
+    "n_points": 13,
+    "residual_sd": 0.10940720322617804,
+    "slope": 1.0815098380033061
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08150984*log(n+1) + 6.61927658; TRAIN residual Silverman bandwidth h = 0.06943255 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.622465673318018,
+    "n_points": 13,
+    "residual_sd": 0.10996616615641014,
+    "slope": 1.0807046823956434
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08070468*log(n+1) + 6.62246567; TRAIN residual Silverman bandwidth h = 0.06978728 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.6241182957546005,
+    "n_points": 13,
+    "residual_sd": 0.1100710736811915,
+    "slope": 1.0802205322220988
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08022053*log(n+1) + 6.62411830; TRAIN residual Silverman bandwidth h = 0.06985386 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.62686858012224,
+    "n_points": 13,
+    "residual_sd": 0.11036393425150708,
+    "slope": 1.0794640193619764
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07946402*log(n+1) + 6.62686858; TRAIN residual Silverman bandwidth h = 0.07003971 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.630333385359947,
+    "n_points": 13,
+    "residual_sd": 0.11117020249035768,
+    "slope": 1.0787509745860073
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07875097*log(n+1) + 6.63033339; TRAIN residual Silverman bandwidth h = 0.07055139 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.632197609709075,
+    "n_points": 13,
+    "residual_sd": 0.11124859763628804,
+    "slope": 1.0781930217153999
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07819302*log(n+1) + 6.63219761; TRAIN residual Silverman bandwidth h = 0.07060114 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.631843208458818,
+    "n_points": 13,
+    "residual_sd": 0.11213720144385332,
+    "slope": 1.0801148863076377
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08011489*log(n+1) + 6.63184321; TRAIN residual Silverman bandwidth h = 0.07116507 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.628296216567439,
+    "n_points": 13,
+    "residual_sd": 0.11164281284009564,
+    "slope": 1.0818002395857507
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08180024*log(n+1) + 6.62829622; TRAIN residual Silverman bandwidth h = 0.07085132 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.618056675316697,
+    "n_points": 13,
+    "residual_sd": 0.1097976431087764,
+    "slope": 1.0861898080243475
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08618981*log(n+1) + 6.61805668; TRAIN residual Silverman bandwidth h = 0.06968033 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.298317366548036,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 13
+   },
+   "fit": {
+    "intercept": 6.609314359419556,
+    "n_points": 13,
+    "residual_sd": 0.10805335436965051,
+    "slope": 1.0897296179564118
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.08972962*log(n+1) + 6.60931436; TRAIN residual Silverman bandwidth h = 0.06857336 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "1",
+     "11",
+     "128",
+     "13",
+     "17",
+     "199",
+     "23",
+     "256",
+     "31",
+     "4",
+     "5",
+     "7",
+     "9",
+     "97"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.21129026814462357,
+   "guard_confidence_weight": 0.21129026814462357,
+   "mechanism_id": "M0_NO_MECHANISM::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "results",
+     "type": "n"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "1",
+     "11",
+     "128",
+     "13",
+     "17",
+     "199",
+     "23",
+     "256",
+     "31",
+     "4",
+     "5",
+     "7",
+     "9",
+     "97"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.38647295817269484,
+   "guard_confidence_weight": 0.38647295817269484,
+   "mechanism_id": "M2_NUMERIC_RANGE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "results",
+     "type": "n"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound integer must lie inside the inherited support interval; outside it the resource is absent",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "1",
+     "11",
+     "128",
+     "13",
+     "17",
+     "199",
+     "23",
+     "256",
+     "31",
+     "4",
+     "5",
+     "7",
+     "9",
+     "97"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.190946505538058,
+   "guard_confidence_weight": 0.190946505538058,
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "results",
+     "type": "n"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "1",
+     "11",
+     "128",
+     "13",
+     "17",
+     "199",
+     "23",
+     "256",
+     "31",
+     "4",
+     "5",
+     "7",
+     "9",
+     "97"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.21129026814462357,
+   "guard_confidence_weight": 0.21129026814462357,
+   "mechanism_id": "M4_ENUM_PER_VALUE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "results",
+     "type": "n"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{seed}",
+   "applicability_guard": "always (residual, no mechanism, no declaration to apply)",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0005",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0014",
+     "spider-physics-0015",
+     "spider-physics-0018",
+     "spider-physics-0019",
+     "spider-physics-0020"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M0_NO_MECHANISM::randomuser.me::/api/|{seed}",
+   "parameter_slots": [
+    {
+     "name": "seed",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{nat}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "no inherited mechanism; fall back to the action-conditional empirical response-signature distribution",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{seed}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{seed} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0005",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0014",
+     "spider-physics-0015",
+     "spider-physics-0018",
+     "spider-physics-0019",
+     "spider-physics-0020"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.0,
+   "guard_confidence_weight": 0.0,
+   "mechanism_id": "M1_IDENTITY_EXISTENCE::randomuser.me::/api/|{seed}",
+   "parameter_slots": [
+    {
+     "name": "seed",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{nat}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "returns the resource iff the bound identifier is registered; a bound value outside the inherited support yields the absent signature",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "randomuser.me::/api/|{seed}",
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{seed} and param_type == 'id'",
+   "bound_parameters": {
+    "inherited_bindings": [
+     "spider-physics-0003",
+     "spider-physics-0004",
+     "spider-physics-0005",
+     "spider-physics-0006",
+     "spider-physics-0007",
+     "spider-physics-0008",
+     "spider-physics-0010",
+     "spider-physics-0012",
+     "spider-physics-0013",
+     "spider-physics-0014",
+     "spider-physics-0015",
+     "spider-physics-0018",
+     "spider-physics-0019",
+     "spider-physics-0020"
+    ]
+   },
+   "fitted_on": "TRAIN only",
+   "guard_confidence_train_loo_log_density": 0.5,
+   "guard_confidence_weight": 0.5,
+   "mechanism_id": "M4_ENUM_PER_VALUE::randomuser.me::/api/|{seed}",
+   "parameter_slots": [
+    {
+     "name": "seed",
+     "type": "id"
+    }
+   ],
+   "placebo_donor_group": "randomuser.me::/api/|{nat}",
+   "placebo_donor_mechanism": "M4_ENUM_PER_VALUE",
+   "postconditions": "empirical response-signature distribution over the applicable TRAIN subset selected by the bound parameter value",
+   "semantic_effect": "the bound parameter selects among a finite set of known effects; an uninherited selection receives the pooled effect",
+   "site": "randomuser.me"
+  },
+  {
+   "action_template": "planted.local::/echo|{echo_value}",
+   "applicability_guard": "positive control; synthetic origin, not in the real pool",
+   "bound_parameters": {
+    "identifier_prefix": "plant-",
+    "n_test_identifiers": 10,
+    "n_train_identifiers": 20
+   },
+   "fitted_on": "synthetic by construction",
+   "guard_confidence_train_loo_log_density": null,
+   "guard_confidence_weight": null,
+   "mechanism_id": "PLANTED_DETERMINISTIC_ECHO::planted.local::/echo|{echo_value}",
+   "parameter_slots": [
+    {
+     "name": "echo_value",
+     "type": "string"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "status 200, text/plain, body_length = 100 + 10*len(v), body_hash_prefix_8 = sha256(v)[:8], all counts zero",
+   "semantic_effect": "the response signature is a known deterministic function of the bound parameter value",
+   "site": "planted.local"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  },
+  {
+   "applicability_guard": "site == randomuser.me and action_template == randomuser.me::/api/|{results} and param_type == 'n'",
+   "bound_parameters": {
+    "log_support_max": 5.54907608489522,
+    "log_support_min": 0.6931471805599453,
+    "n_inherited_bindings": 14
+   },
+   "fit": {
+    "intercept": 6.633946406064177,
+    "n_points": 14,
+    "residual_sd": 0.10789984320572865,
+    "slope": 1.0789050216798295
+   },
+   "fitted_on": "TRAIN only",
+   "mechanism_id": "M3_LINEAR_SIZE::randomuser.me::/api/|{results}",
+   "parameter_slots": [
+    {
+     "name": "n",
+     "type": "integer"
+    }
+   ],
+   "placebo_donor_group": null,
+   "placebo_donor_mechanism": null,
+   "postconditions": "log1p(body_length) = 1.07890502*log(n+1) + 6.63394641; TRAIN residual Silverman bandwidth h = 0.06746850 (standardized units); all other signature components unchanged",
+   "semantic_effect": "response body size scales as a power law in the bound integer parameter (fitted on TRAIN, extrapolated to never-observed values)",
+   "site": "randomuser.me"
+  }
+ ],
+ "model_calls": 0,
+ "schema": "(mechanism_id, semantic_effect, parameter_slots, bound_parameters, postconditions, applicability_guard) as required by prereg s6",
+ "selected_per_test_template": [
+  {
+   "action_template": "api.agify.io::/?name=Alex|{country_id}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.333333,
+    "M1_IDENTITY_EXISTENCE": 0.333333,
+    "M4_ENUM_PER_VALUE": 0.333333
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.agify.io",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    }
+   ]
+  },
+  {
+   "action_template": "api.agify.io::/|{name}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.5,
+    "M4_ENUM_PER_VALUE": 0.5
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.agify.io",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    }
+   ]
+  },
+  {
+   "action_template": "api.genderize.io::/?name=Alex|{country_id}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.333333,
+    "M1_IDENTITY_EXISTENCE": 0.333333,
+    "M4_ENUM_PER_VALUE": 0.333333
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.genderize.io",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    }
+   ]
+  },
+  {
+   "action_template": "api.genderize.io::/|{name}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.5,
+    "M4_ENUM_PER_VALUE": 0.5
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.genderize.io",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    }
+   ]
+  },
+  {
+   "action_template": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "dominant_mechanism": "M1_IDENTITY_EXISTENCE",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.29541,
+    "M1_IDENTITY_EXISTENCE": 0.40918,
+    "M4_ENUM_PER_VALUE": 0.29541
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.github.com",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    },
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    },
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    },
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    },
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    },
+    {
+     "M0": 0.29541,
+     "M1_absent": 0.40918,
+     "M4_pooled_default": 0.29541
+    }
+   ]
+  },
+  {
+   "action_template": "api.github.com::/users/{id_0}|{id_0}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.493573,
+    "M1_IDENTITY_EXISTENCE": 0.012853,
+    "M4_ENUM_PER_VALUE": 0.493573
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "api.github.com",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    },
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    },
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    },
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    },
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    },
+    {
+     "M0": 0.493573,
+     "M1_absent": 0.012853,
+     "M4_pooled_default": 0.493573
+    }
+   ]
+  },
+  {
+   "action_template": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.333333,
+    "M1_IDENTITY_EXISTENCE": 0.333333,
+    "M4_ENUM_PER_VALUE": 0.333333
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "ifconfig.me",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    },
+    {
+     "M0": 0.333333,
+     "M1_absent": 0.333333,
+     "M4_pooled_default": 0.333333
+    }
+   ]
+  },
+  {
+   "action_template": "randomuser.me::/api/|{exc}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.5,
+    "M1_IDENTITY_EXISTENCE": 0.0,
+    "M4_ENUM_PER_VALUE": 0.5
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "randomuser.me",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    }
+   ]
+  },
+  {
+   "action_template": "randomuser.me::/api/|{nat}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.5,
+    "M1_IDENTITY_EXISTENCE": 0.0,
+    "M4_ENUM_PER_VALUE": 0.5
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "randomuser.me",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    }
+   ]
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "dominant_mechanism": "M2_NUMERIC_RANGE",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.21129,
+    "M2_NUMERIC_RANGE": 0.386473,
+    "M3_LINEAR_SIZE": 0.190947,
+    "M4_ENUM_PER_VALUE": 0.21129
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "randomuser.me",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.344386,
+     "M3": 0.311228,
+     "M4_pooled_default": 0.344386
+    },
+    {
+     "M0": 0.21129,
+     "M2_in_range": 0.386473,
+     "M3": 0.190947,
+     "M4_pooled_default": 0.21129
+    },
+    {
+     "M0": 0.21129,
+     "M2_in_range": 0.386473,
+     "M3": 0.190947,
+     "M4_pooled_default": 0.21129
+    },
+    {
+     "M0": 0.21129,
+     "M2_in_range": 0.386473,
+     "M3": 0.190947,
+     "M4_pooled_default": 0.21129
+    },
+    {
+     "M0": 0.21129,
+     "M2_in_range": 0.386473,
+     "M3": 0.190947,
+     "M4_pooled_default": 0.21129
+    },
+    {
+     "M0": 0.344386,
+     "M3": 0.311228,
+     "M4_pooled_default": 0.344386
+    }
+   ]
+  },
+  {
+   "action_template": "randomuser.me::/api/|{seed}",
+   "dominant_mechanism": "M0_NO_MECHANISM",
+   "guard_confidence_weights": {
+    "M0_NO_MECHANISM": 0.5,
+    "M1_IDENTITY_EXISTENCE": 0.0,
+    "M4_ENUM_PER_VALUE": 0.5
+   },
+   "n_test_bindings": 6,
+   "n_train_bindings": 14,
+   "site": "randomuser.me",
+   "test_case_mechanism_mix": [
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    },
+    {
+     "M0": 0.5,
+     "M4_pooled_default": 0.5
+    }
+   ]
+  }
+ ],
+ "selection_rule": "guard confidence = TRAIN-only leave-one-identifier-out log predictive density, softmax-normalized per (site, action_template); each candidate mechanism is refit on the LOO sub-sample, so no held-out binding informs its own guard confidence"
+}

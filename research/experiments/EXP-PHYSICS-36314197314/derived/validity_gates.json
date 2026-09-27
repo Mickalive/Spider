@@ -1,0 +1,42 @@
+{
+ "V10_POOL_SAMPLE_MEETS_PREREG": {
+  "evidence": "prereg s7.1 asserts 25 origins / 12 unique; the mandate's host disjointness left 7 reachable candidates of which 6 responded; the measured test sample is 66 held-out cases on 5 sites against a power calculation that assumed 20 sites and roughly 900 held-out cases (prereg s12)",
+  "passed": false
+ },
+ "V1_TARGET_INTEGRITY": {
+  "evidence": "no held-out URL or binding value occurs in TRAIN: 0 URL leaks, 0 binding leaks across 66 held-out cases",
+  "passed": true
+ },
+ "V2_SPLIT_INTEGRITY": {
+  "evidence": "holdout is identifier level (66 held-out bindings, none seen in training); TF-IDF vocabulary fit on TRAIN documents only (158 training documents); no site-identity feature enters any predictor; log1p standardization statistics fit on TRAIN only",
+  "passed": true
+ },
+ "V3_SAMPLING_INTEGRITY": {
+  "evidence": "collection seed 232890113, analysis seed 232890113, both derived from request_hash as prereg s16 requires; mechanism selection is a documented TRAIN-only leave-one-identifier-out rule, fully separated from the HTTP environment",
+  "passed": true
+ },
+ "V4_UNCERTAINTY_INTEGRITY": {
+  "evidence": "10000 trajectory-within-site and 10000 site-grouped permutations; 1000 site-clustered bootstrap resamples over 118 distinct site compositions; no injected noise",
+  "passed": true
+ },
+ "V5_REPRESENTATION_INTEGRITY": {
+  "evidence": "all 226 raw responses archived in raw/collection_log.jsonl with full body length and full SHA256; 17 bodies exceed the 4096-byte archive cap, so form/link/script counts are lower bounds for those (D8)",
+  "passed": true
+ },
+ "V6_POSITIVE_CONTROL_REACHABLE": {
+  "evidence": "PC log_score_categorical -0.1231, log_density_joint 41.3339, Brier 0.000244",
+  "passed": true
+ },
+ "V7_PLACEBO_CONTROL_SPECIFIC": {
+  "evidence": "placebo differs from the treatment on 30/66 held-out cases and takes 201 distinct values across 201 permutations, so it is a permuted mechanism object rather than a count-preserving relabeling of the treatment",
+  "passed": true
+ },
+ "V8_IID_NULL_CALIBRATED": {
+  "evidence": "treatment_minus_B3 on the i.i.d. null = +2.2272 nats (log_score_categorical), significant under the frozen criterion; treatment_minus_per_site_oracle = -1.8042 nats",
+  "passed": false
+ },
+ "V9_INFRASTRUCTURE_FAILURE_BELOW_50PCT": {
+  "evidence": "0 of 224 transitions had transport_ok=false (0.0000); missing ledger entries 0",
+  "passed": true
+ }
+}

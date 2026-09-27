@@ -1,0 +1,57 @@
+{
+ "experiment_id": "EXP-PHYSICS-36314197314",
+ "frozen_at": "2026-09-27T11:06:51.439487+00:00",
+ "checks": [
+  {
+   "file": "prereg.md",
+   "expected_sha256": "902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1",
+   "observed_sha256": "902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1",
+   "match": true
+  },
+  {
+   "file": "request.json",
+   "expected_sha256": "2bafe3168616eeb0c6293188b5bd5024dbeaddf090db3039ac9b9ab81f826da6",
+   "observed_sha256": "2bafe3168616eeb0c6293188b5bd5024dbeaddf090db3039ac9b9ab81f826da6",
+   "match": true
+  },
+  {
+   "file": "spec.json",
+   "expected_sha256": "9757f2f6f3d0a822d98a32479d3a18c913cc5e0a52aa458502fa6185a0c13b0e",
+   "observed_sha256": "9757f2f6f3d0a822d98a32479d3a18c913cc5e0a52aa458502fa6185a0c13b0e",
+   "match": true
+  }
+ ],
+ "all_match": true,
+ "frozen_files_referenced_by_freeze_json": [
+  "prereg.md",
+  "request.json",
+  "spec.json"
+ ],
+ "prereg_referenced_artifacts_present": {
+  "frozen_origins.json": true,
+  "raw_responses/": false,
+  "response_signatures.jsonl": false,
+  "mechanism_pool.json": false,
+  "split.json": false,
+  "predictions.jsonl": false,
+  "baseline_predictions.jsonl": false,
+  "control_predictions.jsonl": false,
+  "permutation_nulls.json": false,
+  "bootstrap_cis.json": false,
+  "pilot_data.json": false,
+  "power_calculation.json": false
+ },
+ "prereg_referenced_artifacts_absent": [
+  "raw_responses/",
+  "response_signatures.jsonl",
+  "mechanism_pool.json",
+  "split.json",
+  "predictions.jsonl",
+  "baseline_predictions.jsonl",
+  "control_predictions.jsonl",
+  "permutation_nulls.json",
+  "bootstrap_cis.json",
+  "pilot_data.json",
+  "power_calculation.json"
+ ]
+}

@@ -1,0 +1,579 @@
+{
+ "n_distinct_note": "a small n_distinct_perm_values means the within-site permutation null is coarse at this sample size (few distinct held-out response signatures per site); it limits attainable p resolution and is reported per contrast",
+ "n_permutations_per_null": 10000,
+ "null_definitions": {
+  "site_grouped": "prereg s11.2: held-out response signatures permuted ACROSS sites, preserving the number of cases per site, destroying site-level structure",
+  "trajectory_within_site": "prereg s11.1: held-out response signatures permuted across trajectories (one trajectory per (site, action_template), so one permuted row per case) WITHIN the same site, preserving each site's response marginal and trajectory length"
+ },
+ "p_value_rule": "p = (1 + #{null >= observed}) / (N+1) for higher-is-better metrics and (1 + #{null <= observed}) / (N+1) for lower-is-better metrics; the +1 keeps p strictly positive",
+ "results": {
+  "site_grouped": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 1377,
+    "observed": -0.00020584226453647717,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.00231808019729231,
+    "perm_sd": 0.0003163213851305709
+   },
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.021176170136719172,
+    "p_value": 0.4283571642835716,
+    "perm_mean": -0.020049750446344234,
+    "perm_sd": 0.004825287520845163
+   },
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 9999,
+    "observed": -0.22616866830373789,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.3556200987795615,
+    "perm_sd": 0.018651231285301512
+   },
+   "DELTA_BRIER_CATEGORICAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 9986,
+    "observed": -0.25090270842621665,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.047515198822849734,
+    "perm_sd": 0.022034217774868237
+   },
+   "DELTA_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 9968,
+    "observed": 0.2225618898288699,
+    "p_value": 0.0014998500149985001,
+    "perm_mean": 0.008027698870966696,
+    "perm_sd": 0.06390613004822798
+   },
+   "DELTA_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 2.475642683893491,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -1.1432588646206645,
+    "perm_sd": 0.4037183669573067
+   },
+   "DELTA_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 11.206436246204959,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -26.323447181533744,
+    "perm_sd": 1.056673862144969
+   },
+   "DELTA_LOG_DENSITY_JOINT_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 18.738174943063562,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 1.834598561957658,
+    "perm_sd": 1.2492590901971499
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 1391,
+    "observed": 0.015775258127293593,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -0.04142633741586365,
+    "perm_sd": 0.006833367416640304
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 10000,
+    "observed": 1.7616073032671906,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -0.8025769502780293,
+    "perm_sd": 0.3534586343964342
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 10000,
+    "observed": 5.102145822594766,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -16.939440207203685,
+    "perm_sd": 0.7644728614354204
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 9987,
+    "observed": 9.11131613268424,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -2.193093148263136,
+    "perm_sd": 0.7965819926656216
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9993,
+    "observed": -0.007846571613741266,
+    "p_value": 0.10478952104789521,
+    "perm_mean": -0.005346778644937487,
+    "perm_sd": 0.0021204130715118956
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9999,
+    "observed": -0.02547482068276704,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.05740288923148721,
+    "perm_sd": 0.006592592609762375
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9998,
+    "observed": -0.34317015519160204,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.6111575422039699,
+    "perm_sd": 0.04040535955825484
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.1889399806092777,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.12102172555716537,
+    "perm_sd": 0.04093386066757982
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 9983,
+    "observed": 0.2506968661616802,
+    "p_value": 1.0,
+    "perm_mean": -0.04519711862555743,
+    "perm_sd": 0.021983023790499774
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 9997,
+    "observed": 0.22972653828949754,
+    "p_value": 1.0,
+    "perm_mean": -0.06756494926919397,
+    "perm_sd": 0.02155074242335629
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 9999,
+    "observed": 0.02473404012247885,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.30810489995671175,
+    "perm_sd": 0.024612159993240637
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -18.51561305323469,
+    "p_value": 1.0,
+    "perm_mean": -1.826570863086691,
+    "perm_sd": 1.252923920109289
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -16.26253225917007,
+    "p_value": 1.0,
+    "perm_mean": -2.977857426578322,
+    "perm_sd": 1.292607451344133
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -7.531738696858597,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -28.158045743491403,
+    "perm_sd": 1.3883826345021397
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 9987,
+    "observed": -9.095540874556946,
+    "p_value": 1.0,
+    "perm_mean": 2.1516668108472725,
+    "perm_sd": 0.7947082746694337
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 10000,
+    "observed": -7.349708829417049,
+    "p_value": 1.0,
+    "perm_mean": 1.3905161979851066,
+    "perm_sd": 0.8203321217363919
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 10000,
+    "observed": -4.009170310089476,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -14.74634705894055,
+    "perm_sd": 0.9746221843695939
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": 0.18109340899553641,
+    "p_value": 1.0,
+    "perm_mean": -0.12636850420210283,
+    "perm_sd": 0.0409417017225685
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": 0.16346515992651067,
+    "p_value": 1.0,
+    "perm_mean": -0.06361883632567812,
+    "perm_sd": 0.04097747719167485
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.15423017458232427,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.4901358166468046,
+    "perm_sd": 0.04454587987043014
+   }
+  },
+  "trajectory_within_site": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 16,
+    "observed": -0.00020584226453647717,
+    "p_value": 0.0010998900109989002,
+    "perm_mean": 0.0007156075122426453,
+    "perm_sd": 0.0003818006189355199
+   },
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 454,
+    "observed": -0.021176170136719172,
+    "p_value": 0.0780921907809219,
+    "perm_mean": -0.01217000917359456,
+    "perm_sd": 0.00635587254048793
+   },
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": -0.22616866830373789,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": -0.19024594612849205,
+    "perm_sd": 0.009565964466368024
+   },
+   "DELTA_BRIER_CATEGORICAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": -0.25090270842621665,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": -0.18865726327931887,
+    "perm_sd": 0.019013594251434122
+   },
+   "DELTA_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 6077,
+    "observed": 0.2225618898288699,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 0.025919252740795276,
+    "perm_sd": 0.02597263480580479
+   },
+   "DELTA_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 2.475642683893491,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 1.4947068252576605,
+    "perm_sd": 0.24489518585125652
+   },
+   "DELTA_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 11.206436246204959,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 9.116393572915658,
+    "perm_sd": 0.35502578380732935
+   },
+   "DELTA_LOG_DENSITY_JOINT_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": 18.738174943063562,
+    "p_value": 0.00029997000299970003,
+    "perm_mean": 16.76512523181944,
+    "perm_sd": 0.6221148250066257
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 16,
+    "observed": 0.015775258127293593,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": 0.00047176318606252334,
+    "perm_sd": 0.0067882248306289335
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 534,
+    "observed": 1.7616073032671906,
+    "p_value": 0.054594540545945404,
+    "perm_mean": 1.5306757592182056,
+    "perm_sd": 0.1420695888169468
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": 5.102145822594766,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": 4.143561080940094,
+    "perm_sd": 0.2380550557567949
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": 9.11131613268424,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": 7.202822855945913,
+    "perm_sd": 0.5699366492585004
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9991,
+    "observed": -0.007846571613741266,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": 0.000323936362092674,
+    "perm_sd": 0.0028100706782006276
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.02547482068276704,
+    "p_value": 0.00019998000199980003,
+    "perm_mean": 0.009352199163151201,
+    "perm_sd": 0.007332069481283298
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9999,
+    "observed": -0.34317015519160204,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -0.2854690318342856,
+    "perm_sd": 0.01220166396784558
+   },
+   "DELTA_MEAN_SQ_STD_RESIDUAL_NC_PLACEBO_PERMUTED_MECHANISM": {
+    "comparator": "NC_PLACEBO_PERMUTED_MECHANISM",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.1889399806092777,
+    "p_value": 0.8753124687531247,
+    "perm_mean": -0.21833124948265928,
+    "perm_sd": 0.019547018062198152
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": 0.2506968661616802,
+    "p_value": 1.0,
+    "perm_mean": 0.18937287079156154,
+    "perm_sd": 0.018655438415962736
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 454,
+    "observed": 0.22972653828949754,
+    "p_value": 0.9999000099990001,
+    "perm_mean": 0.17648725410572433,
+    "perm_sd": 0.014437299063305363
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "brier_categorical",
+    "n_distinct_perm_values": 16,
+    "observed": 0.02473404012247885,
+    "p_value": 1.0,
+    "perm_mean": -0.0015886828491731614,
+    "perm_sd": 0.010842167947861034
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -18.51561305323469,
+    "p_value": 0.999000099990001,
+    "perm_mean": -16.739205979078644,
+    "perm_sd": 0.6156064401366612
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -16.26253225917007,
+    "p_value": 0.9642035796420358,
+    "perm_mean": -15.27041840656178,
+    "perm_sd": 0.5412200130980547
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "log_density_joint",
+    "n_distinct_perm_values": 10000,
+    "observed": -7.531738696858597,
+    "p_value": 0.41525847415258477,
+    "perm_mean": -7.648731658903778,
+    "perm_sd": 0.5016571960154412
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 78,
+    "observed": -9.095540874556946,
+    "p_value": 1.0,
+    "perm_mean": -7.20235109275985,
+    "perm_sd": 0.563668674644492
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 534,
+    "observed": -7.349708829417049,
+    "p_value": 0.9999000099990001,
+    "perm_mean": -5.672147096727707,
+    "perm_sd": 0.4790398613025376
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": false,
+    "metric": "log_score_categorical",
+    "n_distinct_perm_values": 16,
+    "observed": -4.009170310089476,
+    "p_value": 1.0,
+    "perm_mean": -3.059261775005818,
+    "perm_sd": 0.3892928764422326
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": false,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 9997,
+    "observed": 0.18109340899553641,
+    "p_value": 0.055194480551944806,
+    "perm_mean": 0.21865518584475194,
+    "perm_sd": 0.019266749093646982
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": false,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": 0.16346515992651067,
+    "p_value": 0.0005999400059994001,
+    "perm_mean": 0.2276834486458105,
+    "perm_sd": 0.02299987855804754
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "mean_sq_std_residual",
+    "n_distinct_perm_values": 10000,
+    "observed": -0.15423017458232427,
+    "p_value": 9.999000099990002e-05,
+    "perm_mean": -0.06713778235162633,
+    "perm_sd": 0.026032454299978188
+   }
+  }
+ },
+ "seeds": {
+  "site_grouped": 232897827,
+  "trajectory_within_site": 232885776
+ }
+}

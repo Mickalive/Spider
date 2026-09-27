@@ -1,0 +1,361 @@
+{
+ "seed": 232890113,
+ "seed_from": "int(request_hash[:8],16)",
+ "inventory": [
+  {
+   "host": "api.agify.io",
+   "crawled_urls": 1,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/",
+     "slots": [],
+     "query": [
+      [
+       "name",
+       "query",
+       ""
+      ],
+      [
+       "country_id",
+       "id",
+       ""
+      ]
+     ],
+     "observed_bindings": {
+      "name": [],
+      "country_id": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    }
+   ]
+  },
+  {
+   "host": "api.github.com",
+   "crawled_urls": 1,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/users/{id_0}",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id"
+      }
+     ],
+     "observed_bindings": {
+      "id_0": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/repos/{id_0}/{id_1}",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id"
+      },
+      {
+       "name": "id_1",
+       "type": "id"
+      }
+     ],
+     "observed_bindings": {
+      "id_0": [],
+      "id_1": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/users/{id_0}/repos",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id"
+      }
+     ],
+     "observed_bindings": {
+      "id_0": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/repos/{id_0}/{id_1}/issues",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id"
+      },
+      {
+       "name": "id_1",
+       "type": "id"
+      }
+     ],
+     "observed_bindings": {
+      "id_0": [],
+      "id_1": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    }
+   ]
+  },
+  {
+   "host": "api.genderize.io",
+   "crawled_urls": 1,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/",
+     "slots": [],
+     "query": [
+      [
+       "name",
+       "query",
+       ""
+      ],
+      [
+       "country_id",
+       "id",
+       ""
+      ]
+     ],
+     "observed_bindings": {
+      "name": [],
+      "country_id": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    }
+   ]
+  },
+  {
+   "host": "api.nationalize.io",
+   "crawled_urls": 1,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    }
+   ]
+  },
+  {
+   "host": "ifconfig.me",
+   "crawled_urls": 1,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/all",
+     "slots": [],
+     "observed_bindings": {},
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/all.json",
+     "slots": [],
+     "observed_bindings": {},
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/ip",
+     "slots": [],
+     "observed_bindings": {},
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    },
+    {
+     "path_template": "/headers/{id_0}",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id"
+      }
+     ],
+     "observed_bindings": {
+      "id_0": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    }
+   ]
+  },
+  {
+   "host": "randomuser.me",
+   "crawled_urls": 15,
+   "templates": [
+    {
+     "path_template": "/",
+     "slots": [],
+     "query_params": [],
+     "observed_bindings": {},
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/{id_0}/style.css",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id",
+       "raw": "dist"
+      }
+     ],
+     "query_params": [],
+     "observed_bindings": {
+      "id_0": [
+       "dist"
+      ]
+     },
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/{id_0}",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id",
+       "raw": "index"
+      }
+     ],
+     "query_params": [],
+     "observed_bindings": {
+      "id_0": [
+       "index",
+       "photos",
+       "documentation",
+       "changelog",
+       "stats",
+       "donate",
+       "copyright",
+       "photoshop",
+       "sketch"
+      ]
+     },
+     "n_observed_urls": 9,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/{id_0}/Random_User_Generator_(CS6).zxp",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id",
+       "raw": "download"
+      }
+     ],
+     "query_params": [],
+     "observed_bindings": {
+      "id_0": [
+       "download"
+      ]
+     },
+     "n_observed_urls": 1,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/{id_0}/{id_1}",
+     "slots": [
+      {
+       "name": "id_0",
+       "type": "id",
+       "raw": "download"
+      },
+      {
+       "name": "id_1",
+       "type": "id",
+       "raw": "Random User Generator 2.0.5.zxp"
+      }
+     ],
+     "query_params": [],
+     "observed_bindings": {
+      "id_0": [
+       "download",
+       "download",
+       "download"
+      ],
+      "id_1": [
+       "Random User Generator 2.0.5.zxp",
+       "Random User Generator v3.0.0.zip",
+       "Random User Generator v3.0.1.zip"
+      ]
+     },
+     "n_observed_urls": 3,
+     "source": "crawl"
+    },
+    {
+     "path_template": "/api/",
+     "slots": [],
+     "query": [
+      [
+       "results",
+       "n",
+       "0"
+      ],
+      [
+       "seed",
+       "id",
+       ""
+      ],
+      [
+       "nat",
+       "id",
+       ""
+      ],
+      [
+       "exc",
+       "id",
+       ""
+      ]
+     ],
+     "observed_bindings": {
+      "results": [],
+      "seed": [],
+      "nat": [],
+      "exc": []
+     },
+     "n_observed_urls": 0,
+     "source": "seed-from-live-probe"
+    }
+   ]
+  }
+ ]
+}

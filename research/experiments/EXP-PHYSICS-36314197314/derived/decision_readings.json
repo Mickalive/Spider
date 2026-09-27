@@ -1,0 +1,79 @@
+{
+ "alternative_reading_if_conditions_1_to_5_dominated": {
+  "outcome": "FALSIFIES",
+  "reason": "under the other reading of s13's precedence, conditions 3, 4 and 5 fail (the B1-Brier site-clustered CI includes zero; the two B2 contrasts do not reach p<0.05 under the trajectory-grouped null, and the B2-Brier contrast does not reach p<0.05 under either null), which would be a FALSIFIES rather than a MEASUREMENT_INVALID"
+ },
+ "condition_values": {
+  "accept": false,
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5": false,
+  "c6": true,
+  "c7": true,
+  "c8": false,
+  "falsifies": true,
+  "measurement_invalid": true
+ },
+ "frozen_branch_selected": {
+  "outcome": "NOT_APPLICABLE",
+  "rule": "prereg s13: conditions 6/7/8 failure -> MEASUREMENT_INVALID, evaluated before the conditions 1-5 FALSIFIES branch because a control failure means the comparison itself is not interpretable",
+  "status": "MEASUREMENT_INVALID"
+ },
+ "prereg_s13_conditions": {
+  "1_beats_all_baselines_log_score": {
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": true
+  },
+  "2_beats_all_baselines_brier": {
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": true
+  },
+  "3_site_clustered_ci_excludes_zero_all_six": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": false,
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": true,
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": false,
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": true
+  },
+  "4_trajectory_permutation_p_lt_0.05_all_six": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": true,
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": false,
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": false,
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": true
+  },
+  "5_site_permutation_p_lt_0.05_all_six": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": true,
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": false,
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": true,
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": true
+  },
+  "6_positive_control_detected": {
+   "brier_lt_0.1": true,
+   "log_density_gt_-0.5": true
+  },
+  "6b_positive_control_detected_under_s9_1_threshold": {
+   "brier_lt_0.1": true,
+   "log_density_gt_2.0": true
+  },
+  "7_placebo_not_detected": {
+   "placebo_not_significantly_above_B1_MARKOV_1ST_ORDER_brier_categorical": true,
+   "placebo_not_significantly_above_B1_MARKOV_1ST_ORDER_log_score_categorical": true,
+   "placebo_not_significantly_above_B2_TFIDF_K5_RETRIEVAL_STRONG_brier_categorical": true,
+   "placebo_not_significantly_above_B2_TFIDF_K5_RETRIEVAL_STRONG_log_score_categorical": true,
+   "placebo_not_significantly_above_B3_COLD_RERIVATION_brier_categorical": true,
+   "placebo_not_significantly_above_B3_COLD_RERIVATION_log_score_categorical": true,
+   "treatment_beats_placebo_brier": true,
+   "treatment_beats_placebo_log_score": true
+  },
+  "8_iid_null_returns_no_structure": {
+   "confound_free_treatment_not_above_per_site_oracle": true,
+   "frozen_criterion_treatment_not_significantly_above_B3": false
+  }
+ },
+ "scientific_bottom_line_independent_of_branch": "The treatment beats all three baselines in the favourable direction on both primary metrics, but its increment over the STRONGEST baseline (B1 first-order Markov on (URL, action)) is +0.0158 nats on log_score_categorical and -0.000206 on brier_categorical, i.e. statistically detectable (p_traj=0.0002) but about 0.39% of the treatment's own log-score magnitude. The large increments over B2 (+1.762) and B3 (+5.102) come from (site, action_template) conditioning, which the frozen i.i.d. control shows is reproduced with NO mechanism reading at all: on i.i.d. data drawn from the per-site marginal the treatment scores -4.674 nats versus B3's -6.901, yet it is WORSE than the per-site marginal oracle (-1.804). So the measured evidence is consistent with 'inherited-mechanism conditioning adds a small increment over site-conditioned memory on this substrate', and inconsistent with 'the large wins over the weaker baselines demonstrate mechanism semantics'."
+}

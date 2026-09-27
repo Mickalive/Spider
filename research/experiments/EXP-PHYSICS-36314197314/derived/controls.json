@@ -1,0 +1,163 @@
+{
+ "NC_INDEPENDENT_IID": {
+  "evidence": "derived/controls.json, raw/collection_log.jsonl",
+  "expected_behavior": "no structure: all predictors at or below B3 on i.i.d. responses drawn per site from the TRAIN marginal (permutation p > 0.05)",
+  "note": "Under the frozen criterion the treatment significantly beats B3 on the i.i.d. data (+2.227 nats on log_score_categorical, -0.177 on Brier), so prereg s13 condition 8 fails. Derivation D10 shows this criterion is confounded: the i.i.d. generator is per-site, while B3 is a GLOBAL cold re-derivation, so ANY predictor conditioned on (site, action_template) - which prereg s8.2 REQUIRES of B1 and which the treatment inherits - beats B3 on this data without reading any mechanism. The confound-free reference is the per-site marginal oracle, which is the strongest possible predictor of the actual generator; against it the treatment is WORSE (-1.804 nats), i.e. no mechanism-specific structure is hallucinated. The failing control therefore diagnoses site conditioning, not a broken mechanism reader.",
+  "observed_behavior": {
+   "confound_free_vs_per_site_marginal_oracle": {
+    "brier_categorical": {
+     "per_site_marginal_oracle": 0.10415798103688936,
+     "treatment": 0.11670017582808588,
+     "treatment_minus_oracle": 0.012542194791196518
+    },
+    "log_density_joint": {
+     "per_site_marginal_oracle": 33.93899466647521,
+     "treatment": 32.09629292920702,
+     "treatment_minus_oracle": -1.842701737268193
+    },
+    "log_score_categorical": {
+     "per_site_marginal_oracle": -2.869581598212493,
+     "treatment": -4.673734006066625,
+     "treatment_minus_oracle": -1.804152407854132
+    },
+    "mean_sq_std_residual": {
+     "per_site_marginal_oracle": 0.11578064229273678,
+     "treatment": 0.13552048646655362,
+     "treatment_minus_oracle": 0.019739844173816842
+    }
+   },
+   "frozen_criterion_vs_B3": {
+    "brier_categorical": {
+     "B1": 0.11629149400721875,
+     "B2": 0.1342714268272431,
+     "B3": 0.2932864394928447,
+     "placebo": 0.2999494742710264,
+     "treatment": 0.11670017582808588,
+     "treatment_minus_B3": -0.17658626366475882
+    },
+    "log_density_joint": {
+     "B1": 32.072910022850486,
+     "B2": 29.90398341449169,
+     "B3": 24.586365837908133,
+     "placebo": 15.55267576422017,
+     "treatment": 32.09629292920702,
+     "treatment_minus_B3": 7.509927091298884
+    },
+    "log_score_categorical": {
+     "B1": -4.679348229932033,
+     "B2": -6.51742164726307,
+     "B3": -6.900891870536215,
+     "placebo": -11.971563896131977,
+     "treatment": -4.673734006066625,
+     "treatment_minus_B3": 2.22715786446959
+    },
+    "mean_sq_std_residual": {
+     "B1": 0.13547181919539272,
+     "B2": 0.1386676094812386,
+     "B3": 0.43144688823573707,
+     "placebo": 0.32043650012456915,
+     "treatment": 0.13552048646655362,
+     "treatment_minus_B3": -0.29592640176918344
+    }
+   }
+  },
+  "observed_behavior_confound_free_vs_per_site_marginal_oracle": {
+   "brier_categorical": {
+    "per_site_marginal_oracle": 0.10415798103688936,
+    "treatment": 0.11670017582808588,
+    "treatment_minus_oracle": 0.012542194791196518
+   },
+   "log_density_joint": {
+    "per_site_marginal_oracle": 33.93899466647521,
+    "treatment": 32.09629292920702,
+    "treatment_minus_oracle": -1.842701737268193
+   },
+   "log_score_categorical": {
+    "per_site_marginal_oracle": -2.869581598212493,
+    "treatment": -4.673734006066625,
+    "treatment_minus_oracle": -1.804152407854132
+   },
+   "mean_sq_std_residual": {
+    "per_site_marginal_oracle": 0.11578064229273678,
+    "treatment": 0.13552048646655362,
+    "treatment_minus_oracle": 0.019739844173816842
+   }
+  },
+  "observed_behavior_frozen_criterion_vs_B3": {
+   "brier_categorical": {
+    "B1": 0.11629149400721875,
+    "B2": 0.1342714268272431,
+    "B3": 0.2932864394928447,
+    "placebo": 0.2999494742710264,
+    "treatment": 0.11670017582808588,
+    "treatment_minus_B3": -0.17658626366475882
+   },
+   "log_density_joint": {
+    "B1": 32.072910022850486,
+    "B2": 29.90398341449169,
+    "B3": 24.586365837908133,
+    "placebo": 15.55267576422017,
+    "treatment": 32.09629292920702,
+    "treatment_minus_B3": 7.509927091298884
+   },
+   "log_score_categorical": {
+    "B1": -4.679348229932033,
+    "B2": -6.51742164726307,
+    "B3": -6.900891870536215,
+    "placebo": -11.971563896131977,
+    "treatment": -4.673734006066625,
+    "treatment_minus_B3": 2.22715786446959
+   },
+   "mean_sq_std_residual": {
+    "B1": 0.13547181919539272,
+    "B2": 0.1386676094812386,
+    "B3": 0.43144688823573707,
+    "placebo": 0.32043650012456915,
+    "treatment": 0.13552048646655362,
+    "treatment_minus_B3": -0.29592640176918344
+   }
+  },
+  "status": "FAIL"
+ },
+ "NC_PLACEBO_PERMUTED_MECHANISM": {
+  "evidence": "derived/controls.json, derived/permutation_nulls.json",
+  "expected_behavior": "not detected: the placebo must not significantly outperform baselines (permutation p > 0.05 on both metrics)",
+  "note": "The placebo is a re-derived predictor driven by permuted declarations, not a relabeling of the treatment's outputs: it differs from the treatment on 30 of 66 held-out cases and its score varies over 201 distinct values across 201 independent permutations, so it is not an invariant statistic. It performs far BELOW the baselines, so the frozen criterion ('must not significantly outperform baselines') is satisfied.",
+  "observed_behavior": {
+   "brier_categorical": 0.32428404730822513,
+   "log_score_categorical": -13.145269086390382,
+   "n_distinct_placebo_scores_log_score_categorical": 201,
+   "n_heldout_cases_where_placebo_differs_from_treatment": 30,
+   "n_placebo_permutations": 201,
+   "placebo_minus_b3_brier_categorical": 0.02473404012247893,
+   "placebo_minus_b3_log_score_categorical": -4.009170310089475,
+   "treatment_percentile_within_placebo_distribution": 0.0
+  },
+  "p_value_treatment_minus_b3_log_score_categorical": 9.999000099990002e-05,
+  "status": "PASS"
+ },
+ "PC_PLANTED_MECHANISM": {
+  "evidence": "derived/controls.json, derived/metrics.json",
+  "expected_behavior": "detected: log predictive density above the frozen threshold and Brier below 0.1 on 10 never-observed planted identifiers",
+  "max_attainable_log_score_categorical_any_predictor": -0.20202707317519467,
+  "note": "s13 formal threshold met on both metrics under both metric readings (joint density 41.334 and categorical log score -0.123, both > -0.5; Brier 0.00024 < 0.1). The s9.1 threshold of > 2.0 nats is arithmetically unreachable for ANY predictor under the frozen 10-component signature with EPS=0.02: the maximum attainable log score is 10*log(1-EPS) = -0.2020 nats.",
+  "observed_behavior": {
+   "brier_categorical": 0.00024373337940395315,
+   "log_density_joint": 41.3338877343889,
+   "log_density_joint_global_bandwidth_alternative": 64.35973866432936,
+   "log_score_categorical": -0.12312145946864247,
+   "n_test_identifiers": 10,
+   "n_train_identifiers": 20
+  },
+  "s9_1_threshold_attainable": false,
+  "status": "PASS",
+  "threshold_s13_formal": {
+   "brier_lt_0.1": true,
+   "log_density_gt_-0.5": true
+  },
+  "threshold_s9_1_contradictory": {
+   "brier_lt_0.1": true,
+   "log_density_gt_2.0": true
+  }
+ }
+}

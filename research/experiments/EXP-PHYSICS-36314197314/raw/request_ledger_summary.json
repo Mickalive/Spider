@@ -1,0 +1,46 @@
+{
+ "per_host": {
+  "api.github.com": {
+   "fetch": 42,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  },
+  "randomuser.me": {
+   "fetch": 80,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  },
+  "api.genderize.io": {
+   "fetch": 40,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  },
+  "api.agify.io": {
+   "fetch": 40,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  },
+  "ifconfig.me": {
+   "fetch": 23,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  },
+  "api.nationalize.io": {
+   "fetch": 1,
+   "cache": 0,
+   "budget_exhausted": 0,
+   "transport_errors": 0
+  }
+ },
+ "n_fetch": 226,
+ "n_cache": 0,
+ "n_budget_exhausted": 0,
+ "collected_at": "2026-09-27T11:39:06.118740+00:00",
+ "user_agent": "spider-research2-physics/EXP-PHYSICS-36314197314 (+stdlib urllib)",
+ "body_archive_cap_bytes": 4096
+}
