@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2245,7 +2245,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
       "hashes": {
         "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
@@ -3034,7 +3034,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "a4de5f75a516c0da50d5a6ef069cbc8dbb3949ea",
       "hashes": {
         "request.json": "8404e00d5823b999ba2fb8b91d27cd3c437c0cb1173503bf9ef60721d447edd1",
@@ -4174,7 +4174,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "da226f7149e87018afd43e6579eb36547ef7f160",
       "hashes": {
         "request.json": "0c7b22e87685530e1d5ca1f3dafecb7bb1751112605297f713f067cd7d04c005",
@@ -5919,7 +5919,7 @@
       "decision": "FALSIFIED-IN-SETTING (bundled frozen rule \u2014 spec contradiction bounded)",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "332c6fe69ebfa29b5cc5b251ba4e72382e6251f0",
       "hashes": {
         "request.json": "482030f631b57e348726e98db9e8bf408d6258d686327fb1ab8fca7b24a602f8",
@@ -6219,7 +6219,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "dbc59208079f8e686a7166a1146758fdc520d81c",
       "hashes": {
         "request.json": "07113a78c28423b79a471c26b8e34388c4fbee5f3e4c099d35e819bc6bfb78a8",
@@ -6409,7 +6409,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ddf9ac679c05a4e78bb79b353545e52549f49309",
       "hashes": {
         "request.json": "5b84d9351344af2b3cdfa20dba3237ab46d253a6a4026b51f457370c4a5cc327",
@@ -6545,7 +6545,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "0a8d4c0cb7efb0046ccbe658c7ca1c41f5d100d2",
       "hashes": {
         "request.json": "e781f6832208715625c7f23568355ff2496349fc961727566af2da456656fed3",
@@ -6681,7 +6681,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "436d62d23bcbdc535ba9948481600eeae2b1dec0",
       "hashes": {
         "request.json": "7b9fb4f60e5e9570f5c71d5a80bfb7d67d8868e32708e8b8076c2a4b0648a3ce",
@@ -6763,7 +6763,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ba2035d7a21455d3ad7773da97b2c4f3cf7885b1",
       "hashes": {
         "request.json": "da9dfd8ffa68469c7ac01820d2fd74a7e7f16955c181e42c524a4a2ffb2aafe1",
@@ -6954,7 +6954,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ca6d0f60bf9d674db76c4dd98350239ec9b99fc8",
       "hashes": {
         "request.json": "e1de2994695629b68fa60f476667453ccd5a90beb454ee8920f7fd2b314c7407",
@@ -7090,7 +7090,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "87e0410e20f31574a8245ea53aed9e5f05d9a4a7",
       "hashes": {
         "request.json": "ae653c915103ccdc2791816f827126d662812190b8609aebf3578464868ed855",
@@ -7227,7 +7227,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "7c767ed15ff4bea72e3cbdb835dbcc7af187a21a",
       "hashes": {
         "request.json": "3947d1e26d7a2c5bae94d06628b4f22e197aea33ca6669a08bfc5deb23dc1672",
@@ -7283,7 +7283,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "daf0ce3c3dc34a8e81a497de5dc53c5dd565674f",
       "hashes": {
         "request.json": "221ae9969371123ef62e2c112f4da599db3e9d271acae033457a433decf4e4a5",
@@ -7530,7 +7530,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "d94ee76f676807b884130eef296cb3204d4f6cc3",
       "hashes": {
         "request.json": "9bf24bd2ec015c18c80babcfad94f9395a538bcbc94af25d9900b2b38d052df2",
@@ -7693,7 +7693,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "756f922dd21b7fe71eae244ee8ca1cb2cf2a34a1",
       "hashes": {
         "request.json": "059952f8267d3d8a83b8ef03e85883d01a14e6562129cfc16c461f820ceec17e",
@@ -7803,7 +7803,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "d79f1b5edca01a3c87e65f44fc50158b280e5a83",
       "hashes": {
         "request.json": "398fde22062495d558abb69096b3ca3045e7dd64d1b1f2cc255078c52f7e6e0b",
@@ -8049,7 +8049,7 @@
       "decision": "SURVIVES_SYNTHETIC_BOUNDED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "1d58cb44fef1706742939405b480261c346afa71",
       "hashes": {
         "request.json": "a0060370fe38348bf3b59aa481430ea4788a8877a38a47d8391f740bd9ad04c2",
@@ -8160,7 +8160,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "87097c6574b886e6b1efa188e8bfc4b2bbf4a274",
       "hashes": {
         "request.json": "9e6c07063944f41a4f49b65fff8a0f9ee0e60adacfd7bec5348e6053f42c3f61",
@@ -8326,7 +8326,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ce68eca9af283c29284ca26a909f899a29605e81",
       "hashes": {
         "request.json": "81bf00f1ba3d70ab27ac9f67fbe99208c0a595795f2b7cb6d824295841b1ba26",
@@ -8542,7 +8542,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "5e2001367d5a5b43cc1fe2cedef02eab4e47e084",
       "hashes": {
         "request.json": "35ea0384ce49b63954c8b99e46cb682759f35e6e035c057dbec7fce71ff5c60c",
@@ -8812,7 +8812,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "81206e58269faa980c7bc1aacd438c7d153f4d45",
       "hashes": {
         "request.json": "355ca3200321039ac184e4cc12d18cd8e44e6a4cf4394788f77803a596bb1cd7",
@@ -9167,7 +9167,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "de86fb12fc10503bd024260a7e261369ddb39cfa",
       "hashes": {
         "request.json": "150cd7de0410f6c55af479bdc634e1e8a552caed24448d8a4433f0e91616a799",
@@ -9302,7 +9302,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "c651c8f9d86a32119f07ca0de5b77ce2f643ca07",
       "hashes": {
         "request.json": "40f42d13acc50e7108cd2db2b071471c11eea902dcd16e98affa0bb23a9e72f4",
@@ -9466,7 +9466,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "67050f01369b90b3840908f2f27cc2ae6a793a51",
       "hashes": {
         "request.json": "d72db7de7158a90723a703295dba9716c209cb51b54349ec3cba96694f1ae5eb",
@@ -9549,7 +9549,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "fa10fbe798a7e88df5d5bd389fe4c69b3c50c7e7",
       "hashes": {
         "request.json": "ebd6f33b8afeee92bf625b929345a02c2c06676914ccda65e44c6e80ce4ec8db",
@@ -9630,7 +9630,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "1abfc09bcd5b75357f5bc63193bc3ad2f2046d1d",
       "hashes": {
         "request.json": "a78bf0ee13936257de3c491b1e8b39b01beac288d36a3c7d17985e3bcb5aa85b",
@@ -9711,7 +9711,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "a64da165000e57924969198d90cf07e898d0a498",
       "hashes": {
         "request.json": "787ed1ccfe3326d32e1fbbd3d2280127a61d0a59e27c206f326a49dc4ec387d3",
@@ -9765,7 +9765,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "debe94de9781032a34a07af67fdecbd15a065411",
       "hashes": {
         "request.json": "d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0",
@@ -9819,7 +9819,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "a44d80c206e70b8b72a45f8be69e23d7b680ccf6",
       "hashes": {
         "request.json": "7d1b3531d34e58e03b32512396c43c5581c0383fb000b9ead1107dbb34ff541c",
@@ -10008,7 +10008,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "3e0eb4f6240d02e414710129cea28d8ded4ba8d5",
       "hashes": {
         "request.json": "a715fa645f746c5db1a5d0b11f17fef47f0ceff1c501e71d030ba13b4e0d81ee",
@@ -10062,7 +10062,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "6e5d0ad2b3b3ab2f1393eabb4a7aa168a896b1dd",
       "hashes": {
         "request.json": "5c1ba8534794b0408bbc857e31558065dbb54639ec426c41a2578483b5c7d669",
@@ -10197,7 +10197,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "33d32aac38725f8c399ee24d4250b1bfc0d8c356",
       "hashes": {
         "request.json": "1fd209511d0b83118f1f62925d19f3098e4ab1049443524ff9302351ce983608",
@@ -10224,7 +10224,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "7415f8196489c33e784ea32cc5c28bfb032b55d8",
       "hashes": {
         "request.json": "f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251",
@@ -10251,7 +10251,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "b99164df382ae1a1ed1050d754634fc43dfe4fd1",
       "hashes": {
         "request.json": "b8957021fb74cd23af4eafced336cab7d5a107568c97d2d075bbbe343e5be53d",
@@ -10305,7 +10305,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "4eb8baef16a0b2989aa0ad49648fce6704fe67cb",
       "hashes": {
         "request.json": "7cc1494403f0e189e60fd6c10358ce128cc6236820c9ea803330d554b269d88c",
@@ -10386,7 +10386,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "9b29ecc23917a13a36c19de4c099262ae30116d6",
       "hashes": {
         "request.json": "ee6ea9c9354a1701d8d70ca4dd82b230344004de40fe7783c503f8cb82b4aecb",
@@ -10575,7 +10575,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "7b8bb3ffeb637cac0ecf79ebcdf9ae24248fa350",
       "hashes": {
         "request.json": "a496c5e2556bc8265029a68446c4864610f758c32d3f4580947000c02b2f47ce",
@@ -10685,7 +10685,7 @@
       "decision": "BOUNDED_PARTIAL_POSITIVE_ON_THE_IDENTIFIED_LEG_ONLY: the no-memory deopt ratchet beats always-deopting cold exploration at matched correctness on this plan family (C_d=38.6 < C_c=72.0 abstract units/episode, paired bootstrap -33.4, CI95 [-34.0,-32.4]) and at all five swept novelty rates; the shipped incumbent kernel is confirmed non-executable under the preregistered configuration (0 of 1200 EXECUTABLE resolutions, 0 mechanisms executed, C_i == C_c exactly); the inherited-vs-no-memory leg is NOT IDENTIFIED, so the frozen falsifier is NOT triggered. Audit status is REVISE with producer_claim_supported=false, therefore C-RESIDUAL-NOVELTY moves HYPOTHESIS -> EXPERIMENTAL at the audited ceiling DEOPT_RATCHET_BEATS_COLD_ON_THIS_PLAN_FAMILY with INHERITED_LEG_NOT_IDENTIFIED, and no product promotion is authorized.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "ee64af0393bf3115f5690136c8ce8adcab1da573",
       "hashes": {
         "request.json": "a8e62c29148047fb86763ea45916abc33c87c01e2530eec24cd6b8979e16e1c7",
@@ -10795,7 +10795,7 @@
       "decision": "BOUNDED_INCONCLUSIVE_BOTH_CLAUSES_UNFIRED_WITH_DOCUMENTARILY_ADJUDICATED_COST_BASIS: on this experimenter-authored plan family the deopt ratchet's residual is real and large and decomposes into 0.2228 epistemically blocked span occurrences (sigma_2, CI95 [0.2125, 0.2335], literal prereg.md 8 step-2 reading) plus exactly 0.1000 observation-absent ones (sigma_3, CI95 [0.0927, 0.1078], numerically identical to the generator's declared class_iii_fraction=0.10), giving a maximum inheritance headroom sigma_2+sigma_3 of 0.3228 pooled (0.3767 at novelty 0.00 falling monotonically to 0.2658 at 1.00); clause 1 therefore did NOT fire (best per-rate sigma_2 CI95 upper bound 0.1879 versus the preregistered 0.01 threshold), and clause 2 did NOT fire because although goal conditioning without inheritance clears both coverage thresholds at every novelty rate (gamma_all 0.8500 >= 0.40, gamma_det 0.9189-1.0000 >= 0.6857) it costs 48.0 abstract units/episode against the 38.6 threshold on the adjudicated parent-identical three-term ledger (conditioned-minus-reference +7.06, CI95 [6.26, 7.70], paired bootstrap n=50, p=0.0), so spec.json's frozen NEITHER_TRIGGERED -> INCONCLUSIVE mapping applies. Three further results are established at the audited ceiling: the two mechanisms do not dominate each other (ratchet 0.9833 versus conditioned 0.8500 span-level action correctness against the shared declared plan action); a compiled-replay cache keyed only on the observable state silently replays wrong actions on 80 class-(iii) span occurrences (all list_resources, all recorded decision_path=COMPILED_REPLAY, 4.2-5.5 percent of its compiled replays at novelty 0.00-0.50); and goal-state success is 1.000 for all seven arms including one wrong on 43.3 percent of its span occurrences, so the endpoint metric this program has been reading is blind to a missing binding key. The decision-determining UR-04 cost-basis conflict is adjudicated documentarily in favour of the parent-identical three-term ledger, because the 38.6 clause-2 threshold was itself derived under that ledger (parent prereg.md 7.2 line 128) and because the string both producer and auditor attribute to prereg.md 7.2 does not exist in the frozen text (this packet's prereg.md 7.2 reads 'Cost Model: 1 unit per model call (oracle invocation). No compile/deopt/machinery costs' and is silent on execution, while prereg.md 13 requires 'Abstract units defined identically to parent', whose formula includes execution_cost_total = 1 unit per span); the 24.0 model-calls-only figure is therefore retained as a reported sensitivity and NOT promoted to a competing FALSIFIES_SPIDER_PREMISE outcome, and the underlying economic crossover question (UR-05) stays OPEN. Audit status is REVISE with producer_claim_supported=false, so C-RESIDUAL-NOVELTY REMAINS EXPERIMENTAL - no downgrade to HYPOTHESIS, no VALIDATED, no REJECTED, no promotion, no SHIPPED - at the ceiling HEADROOM_DECOMPOSED_BOTH_CLAUSES_UNFIRED_ENDPOINT_METRIC_BLIND_ON_THIS_PLAN_FAMILY, and the literal prereg.md 17 no-go conditions 3 and 4 are recorded as textually triggered but adjudicated as self-contradictory criteria rather than as control failures.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "2b8aa8840f8e8e5f5d6cb17a75d5a71b6dccb2c3",
       "hashes": {
         "request.json": "d6a289700665aee89245f38e5c6bbd3885c5a14b91fd8ba6f53c784b3876b3b3",
@@ -10931,7 +10931,7 @@
       "decision": "MEMORY_SCOPE_RESOLVED_WITH_BOTH_SUFFICIENCY_CLAUSES_UNFIRED_ON_COST: the frozen outcome label SCRATCHPAD_CORRECT_BUT_COSTLY stands exactly as measured (result.json decision.frozen_outcome_label, audit.json recomputed_metrics.frozen_outcome_label = SCRATCHPAD_CORRECT_BUT_COSTLY, outcome_enum MIXED), and because audit.json is status=PASS with producer_claim_supported=true and required_fixes=[], this is a valid bounded transaction, not a repair. The measured separation is: (1) WITHIN_EPISODE_SCRATCHPAD - an arm that induces no parameters, compiles nothing across episodes and retains nothing between episodes, its entire memory being the local dict scratchpad_values created inside run_episode (research/frontier/arms/scratchpad.py:259) - reaches 1.0000 span-level action correctness at EVERY novelty rate, closes 100 percent of the residual headroom (headroom_closed_fraction 1.0000 at 0.00/0.25/0.50/0.75/1.00), closes 600/600 class-(iii) span occurrences by its own propagated value with 0 oracle fallbacks anywhere, and records 0 false compiled replays, at 48.00 abstract units/episode. Clause 2 leg (a) holds (1.0000 >= 0.9833), leg (b) fails (48.00 > 38.6). (2) CROSS_EPISODE_COMPILED_BINDING reaches the same 1.0000 but 0/600 class-(iii) closures come from its own binding-keyed cache - all 600 are DEOPT_TO_MODEL - because its preregistered key contains the handle VALUE and the handle is a pure function of the episode counter, so a class-(iii) cache hit is impossible by construction; its correctness is inherited from the perfect-policy oracle and the arm is untested as a mechanism. Clause 3 leg (a) holds only on that oracle-mediated basis and leg (b) fails at 48.204. (3) Clause 1 did not fire (best per-rate sigma_2 CI95 upper 0.1879 versus the 0.01 threshold), so the residual is real and large and was replicated field for field from the parent: sigma_1 0.6772, sigma_2 0.2228 [0.2125, 0.2335], sigma_3 0.1000 [0.0927, 0.1078], headroom sigma_2+sigma_3 0.3228 [0.3111, 0.3348] pooled, declining monotonically 0.3767 -> 0.2658 across the grid, over 4063/1337/600 of 6000 classified span occurrences. BOUNDED ARCHITECTURAL CONSEQUENCE: persistent cross-episode state is NOT necessary for span-level action correctness on this plan family, on this substrate, under this ledger - zero cross-epoch persistence attained 1.0000 - and its only surviving candidate role is AMORTIZATION, which remains unidentified because the one arm measured to amortize (the deopt ratchet, 40.712 pooled, rising 34.08 -> 47.06 with novelty) is unsound on exactly the spans that need a binding, and the one mechanism that was meant to fix it produced zero own-mechanism closures. The minimum persistent state is therefore bounded on one side (none is required for correctness) and still unidentified on the other (whether any sound persistent state amortizes at or below the declared bar). C-RESIDUAL-NOVELTY REMAINS EXPERIMENTAL: no downgrade, no VALIDATED, no REJECTED, no promotion, no SHIPPED.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "68e8f35528bd151d1f0880b6eba7d30c783dd82c",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
       "source_commit": "378349ddefdd1053e28e5afdf9df7ddd18a6780b",
       "hashes": {
         "request.json": "1c5ae021d98ad04d9d7bae32442629f7399b270168d7e5725f83d909a6f9026d",
@@ -11000,6 +11000,33 @@
         "audit.json": "804111c2733e3bc34454ba134cbe97f9b30ceaeaf78e5acad908730f4332939c",
         "verdict.json": "a88cc1d38df50bd9dbb925ebd413ba64947b0f65cb59ac51096d6e06f2902449",
         "handoff.json": "5691eb402fb9e64ff35bf88c7fe7062cb42367c4ac442ca8d6c40e1d801305e6"
+      }
+    },
+    "EXP-FRONTIER-36293269574": {
+      "lane": "frontier",
+      "request_id": "47b1b29957d40107b69006ac",
+      "created_at": "2026-09-27T04:05:28.758302+00:00",
+      "claim_ids": [
+        "C-CROSSSITE"
+      ],
+      "question": "On real, credential-free, publicly reachable websites with a true holdout and no site-identity leakage: (1) What fraction of real action-gating objects expose a STABLE, agent-visible, episode-invariant identifier sufficient to determine the declared action? (2) Does inherited parameterized transfer execute on held-out TEST sites \u2014 resolving to the correct action, verifying against response-derived postconditions, at what rate, with what abstention rate, and with what honest cost in real tokens, requests, verification and repair? (3) Does the inherited arm amortize \u2014 costing less than cold re-exploration AND less than a no-memory deterministic executor that re-derives every episode \u2014 on this real substrate with real token/request mapping?",
+      "audit_status": "FAIL",
+      "decision": "REAL_WEB_SUBSTRATE_ESTABLISHED_CROSSSITE_TRANSFER_UNTESTED_PRECONDITION_UNEVALUABLE_MEASUREMENT_INVALID_NO_PROMOTION_NO_CONTINUE: the transaction is adjudicated as a measurement-validity failure, not a scientific falsification and not an infrastructure failure. audit.json is status=FAIL with producer_claim_supported=false and five required_fixes (two high: required_fixes[0] the mandatory NULL_STATE_KEYED control is not discriminating on the selected read-only TEST sites, required_fixes[1] the INHERITED_PARAMETERIZED mechanism is absent from the product kernel so the transfer, abstention and amortization clauses are untestable), and this Director independently confirms the audit's central findings at source and extends them. The producer's result.json outcome MIXED is NOT adopted as a scientific result and is NOT rewritten as a falsification. What was actually measured, in the order of evidential weight. (1) THE CREDENTIAL-FREE REAL-WEB SUBSTRATE IS REACHABLE AND WAS EXECUTED END TO END, which is this packet's real and reusable product: five public eTLD+1 hosts (api.ipify.org, dog.ceo, catfact.ninja, api.chucknorris.io, zenquotes.io), 50 episodes, 100 HTTP GETs per executable arm, stdlib only, no browser, no docker, no model key, no network beyond the sites themselves. This discharges the mandate's substrate premise and is the first frontier execution on real websites in the program's history. (2) THE SELECTED SUBSTRATE EXPOSES NO SESSION-SCOPED IDENTIFIERS AT ALL (0.000), which is structurally expected for unauthenticated read-only JSON APIs and which removes the only wrong action the mandated null control could have made. The prereg's own mitigation for exactly this risk (prereg.md section 11, null arm not triggered, select TEST sites with known identifier variation) was therefore not implemented. (3) THE MANDATED PRIMARY ENDPOINT WAS NOT MEASURED. Ground truth for span_level_action_correctness is response_code == 200 in every arm (research/frontier/realweb_arms.py:311, 369, 428, 495) and there is no declared plan anywhere in the packet, so on five always-200 endpoints the endpoint is 1.0000 by construction for every arm that can issue a request, which is exactly what was observed for COLD_REEXPLORATION, NO_MEMORY_DETERMINISTIC, WITHIN_EPISODE_SCRATCHPAD, NULL_STATE_KEYED and ORACLE_PERFECT_TRANSFER. (4) CONSEQUENCE, NEW AND DECISIVE: the frozen success clause INHERITED span_level_action_correctness > COLD + 0.05 was ARITHMETICALLY UNSATISFIABLE at run time. COLD saturates at 1.0000, so the bar was strictly greater than 1.05 on a quantity bounded by 1. The frozen success rule could not have fired for any mechanism, including a correct one. This is a fourth documented instance of the program-level control-plane failure mode the Global Director named in portfolio_assessment (graph V9, frontier 48.00-versus-24.00, physics unreachable accept branch), and the pre-freeze satisfiability audit this cycle required of every NEW mandate was not performed at DESIGN. (5) THE PRECONDITION ESTIMATOR IS A RATIO OF DIFFERENT UNITS, so F1 is UNEVALUABLE rather than falsified: total_action_gating_spans is incremented once per episode (research/frontier/run_exp_36293269574.py:107) while stable, session and absent counts are incremented once per distinct subtype:value key (lines 109-119), while prereg.md section 8.4 defines prevalence as count(STABLE)/count(action-gating spans). Only six identifiers were classified in total across five sites (stable 3, absent 3); two of five sites yielded nothing at all, one because dog.ceo exposes identifiers as JSON dict keys the regex instrument cannot see (audit required_fixes[4]); and the substituted site api.ipify.org returns a single bare IP string, contributing 10 to the denominator and 0 to the numerator. The reported 0.060 therefore has no defensible [0,1] prevalence interpretation, and under a per-span reading of the six observed items it becomes 3/6 = 0.50, which flips F1 from FAIL to PASS. The architectural precondition for cross-episode replay is neither shown absent from the real Web nor shown present. (6) THE TREATMENT ARM IS A STUB THAT EXECUTES NOTHING AND CHARGES NOTHING (research/frontier/realweb_arms.py:517-531), so its reported amortized_cost_per_episode 0.0 and abstention_rate 0.0 are non-execution artifacts and F3, F4 and F5 are NOT MEASURED rather than passing, exactly as audit validity_findings[2] states. (7) THE NULL ARM IS INCAPABLE OF FAILING ON THIS SUBSTRATE: it replays the same URL with the same resource_id it just stored and records a false replay only on a non-200 (lines 205-234), and there is no session-scoped identifier to omit, so its 0.000 measures the substrate and the arm's own construction and not SPIDER's incumbent state-keyed cache. (8) THE COST LEDGER IS BODY-BLIND ON THIS SUBSTRATE: MinimalObservation.to_tokens() (research/frontier/realweb_substrate.py:101-115) serialises only url, method, status, link relations, form actions, input names, semantic landmarks and headers, never the response body, so on JSON APIs an observation is priced by URL length and headers alone, the observed 119 tokens/observation mean (11900/100) is not the same quantity as the audited 763.06-token EXP-INTEL-36287179392 floor, and the ledger cannot distinguish re-derivation from replay. The mandate's requirement of an honest real-token cost rather than an abstract ledger is therefore NOT met. (9) NO DURABLE RAW EVIDENCE EXISTS: result.json artifacts are self-referential only, ArmBase.get_metrics() computes a full per-span records list and write_results persists none of it, there is no identifier-classification log, no per-episode log and no response cache, and the substrate is live network, so the primary measurement is not independently checkable and the audit's recomputed_metrics are arithmetic on the reported aggregates. Frozen input integrity is nevertheless intact: freeze.json's three hashes match prereg.md be350db5..., request.json c23ca3bd... and spec.json 63349f4a... on disk. (10) THE REGISTRY NEXT_GATE FOR C-CROSSSITE, true website holdout without site identity leakage, IS NOT DISCHARGED: no distillation ran, TRAIN_SITES is only copied into provenance.json (research/frontier/run_exp_36293269574.py:508) and never contacted, so the holdout is vacuous rather than verified. DECISION CONSEQUENCES. C-CROSSSITE is HELD at HYPOTHESIS with no upgrade and no downgrade. No bounded negative is recorded for it, because the transfer mechanism was never exercised and the precondition estimate is unevaluable; no bounded positive is recorded, because the primary endpoint was never measured. A C-MEAS-VALID instance event is recorded at that claim's unchanged EXPERIMENTAL status to preserve the program-level instrument findings for the owner lanes (runtime, physics); frontier is not an owner lane and directs no owner action. No product action, no promotion, promote_to_product=false, and continue=false because the next step is a substrate and instrument repair plus a product-side capability, not another frontier run: a sixth re-run of the identifier-availability axis with a larger site list would be a repair of a failed experiment, not research, and this packet proves that axis as designed cannot produce a decision.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "source_ref_head": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
+      "source_commit": "c1c6c09c61fd5aa7ec2b3fae0dc832ebe24f1ba6",
+      "hashes": {
+        "request.json": "c23ca3bd1c39f935edb580ae8bdd5b229f211b349078b82ce138ac8e484f3167",
+        "spec.json": "63349f4a183daaa0b221bfbf75171e52412d80f747ad443b8b6f3b1786780e8d",
+        "prereg.md": "be350db5f06ffa9a29392d5881d6c3be94b2b7dc6ef285504b30c64c9e974232",
+        "freeze.json": "5970bdcea1365c1ed30866288c3af1e99dcff9d66343dd444bd936db7f1b37ae",
+        "result.json": "a8ecbb1e299ed5595ac5493d22b50e093a48094845f7f1c3bb98ee9546395c54",
+        "report.md": "21f799da3f88c6dee8b2fa4d8082596b6e46bc5505110bc5bfab0860d3fde39e",
+        "provenance.json": "164e4cb9abc2281c55ae2fc79aab78c2f45f7f3c0b010ea1229ab6cdf3e23c48",
+        "audit.json": "9cef44fcd133251bc4ca3432cbfe358ccb47369cebb75843ab4bf6da11a36895",
+        "verdict.json": "f369a40742f6627d1461b9da46b2bd23315eb60089e60120267b05e54f92981e",
+        "handoff.json": "7675d3e600381dc942c98ed028422657ebd91421e89330e6f78d5feb14b75f80"
       }
     }
   }
