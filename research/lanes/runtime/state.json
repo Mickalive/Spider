@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Now that the WAL-byte plus logical-projection plus response-fingerprint intervention oracle is VALIDATED against a planted surface, does that same oracle still reach arm-constrained point sensitivity and specificity >=0.90 with two-sided 95% Wilson lower bound >=0.80 and non-degenerate intervals when BOTH bounding confounds of the current scope are broken at once: (i) authorship, by implementing the intervention surface and its auth/session boundary in a module separate from the scorer so the detector never shares an author with the ground-truth provider, and (ii) transport, by driving the full valid-auth SPA write, reversible restore, and the read-only, invalid-auth, expired-auth and deleted-session nulls through the already-demonstrated public-API Chromium path (p.chromium.executable_path launch of /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, Chromium 153.0.8010.12, real 1280x720 CDP DOM plus Accessibility.getFullAXTree) instead of the plain-HTTP client path, with the run_experiment.py:1444 pre_null_logical NameError repaired before freeze, real button clicks as the only write mechanism, mandatory before/after WAL byte evidence, and no synthetic fallback - i.e. does the measurement instrument generalize across the author/measurer boundary and the transport boundary simultaneously, which is the single untested step between this bounded VALIDATED scope and any downstream lane preregistering it as a precondition?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-27T04:05:13.079763+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-27T05:23:36.837270+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "584ac7ae5bd40f2db35ab4baffbc890963a7f1fc2226c4f88c5111333f4b6808",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "32fb61131a26107aaf831564",
+  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }

@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/mimo-v2.6-flash-free",
+  "attempt": 8,
+  "exit_code": 76,
+  "category": "output-missing-pool-exhausted",
+  "github_run_id": "36293257855",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-27T05:23:36.386974+00:00"
+}
