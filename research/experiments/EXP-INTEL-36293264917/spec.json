@@ -1,17 +1,47 @@
 {
   "experiment_id": "EXP-INTEL-36293264917",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-PRODUCT-ECON", "C-LLM-INHERIT"],
+  "question": "Two bounded external questions with negatives as first-class outcomes: (1) CROSS-SITE TRANSFER: Does any published system or benchmark report a cross-site transfer result - mechanisms learned on one set of real websites and executed on a held-out set of never-seen websites - as four separately measurable quantities on a stated denominator: (a) transfer success on a stated N of held-out sites, (b) execution correctness conditional on resolution, (c) abstention-or-refusal rate, (d) either a stated boilerplate-exclusion rule or an explicit split of task/actionable structure from shared HTML template boilerplate; together with its holdout rule (leave-one-site-out or equivalent, no site-identity leakage) and its denominators? And specifically, does any such report isolate the site-pair-specific stratum from the ubiquitous-template stratum? (2) BOUNDING PARAMETERS: What are the exact reported figures, with source, for the routine/delegable recurrence fraction in real computer and agent use (h), the overhead ratio paid for re-deriving recurrent work (R), and the compile-versus-reuse build/amortization accounting convention used to report them?",
+  "hypothesis": "No published source reports cross-site transfer in the four-part form with a stated holdout split (falsifier for Q1). The Scout brief's cited figures (Activity Frames: R=60-343x, h=7.7-9%) are the only locatable external numbers for the bounding parameters, but their provenance, denominator, and accounting convention are unverified in SPIDER evidence (Q2).",
+  "falsifier": "Q1: A single published source reporting all four quantities (a-d) on a stated denominator with a stated holdout rule and denominators, AND isolating site-pair-specific from ubiquitous-template stratum. Q2: Locating a primary source for the delegable recurrence fraction h and overhead ratio R that states its measurement scope, denominator, accounting convention, and uncertainty - and that source not being Activity Frames or not supporting the cited range.",
+  "baselines": {
+    "B-EXTERNAL-BAR-ABSENT": "No external comparator exists for C-CROSSSITE in the required four-part form (the null hypothesis for Q1, to be falsified by finding one)",
+    "B-SCOUT-CLAIMED-FIGURES": "Activity Frames paper/report as the sole cited source for R=60-343x and h=7.7-9% (the null for Q2, to be verified or refuted by locating the primary source)",
+    "B-INTEL-PREDECESSOR-SEARCH": "EXP-INTEL-36287179392 and its predecessors searched WebArena/WebGym manifests and found no external transfer rate in the required form (internal SPIDER evidence baseline)"
+  },
+  "positive_control": {
+    "id": "PC-KNOWN-TRANSFER-PAPER",
+    "description": "A known paper that reports cross-site transfer in a multi-quantity form (even if not the exact four-part form), used to verify the search pipeline can detect transfer claims when they exist. Candidate: Zhou et al. 'WebShop' or similar web-agent benchmarks with holdout evaluation.",
+    "expected_detection": "Pipeline must extract at least transfer success and holdout rule from this paper; absence of the full four-part form is recorded as partial detection, not failure."
+  },
+  "null_control": {
+    "id": "NC-FABRICATED-CLAIM",
+    "description": "A deliberately injected false claim (e.g., a fabricated paper title/arXiv ID asserting a four-part cross-site transfer rate) inserted into the search corpus. The pipeline must flag it as UNVERIFIED/NOT_LOCATED, not as a valid finding.",
+    "expected_behavior": "Pipeline records 'not located' as UNMEASURED and never as a system-level negative. This control has power against the failure mode where a missing target was silently substituted (COVENANT target lost in predecessor)."
+  },
+  "measurement_validity": [
+    "Every target name (paper, benchmark, report) must be resolved to a verified artifact identity (DOI, arXiv ID, GitHub repo, official URL) BEFORE any condition is scored. 'Not located' is recorded as UNMEASURED, never as a negative finding.",
+    "The search must carry accounting convention, denominator, and holdout rule with every extracted number. A number without its denominator is UNMEASURED.",
+    "The null control NC-FABRICATED-CLAIM must be included and must pass (flagged as unverified). If it fails (accepted as verified), the measurement is INVALID.",
+    "Search scope is explicitly bounded: target list from director_mandate dependencies plus snowball from citations. Bounded recall is recorded exactly.",
+    "No browser, Docker, model API, or credentials required. Credential-free public HTTP/HTML search only (per agent_prior: cheapest sufficient substrate)."
+  ],
+  "decision_rule": {
+    "Q1_CROSS_SITE_TRANSFER": {
+      "FOUND": "At least one source publishes ALL FOUR quantities (a-d) on a stated denominator with a stated holdout rule AND isolates site-pair-specific from ubiquitous-template stratum. -> C-CROSSSITE registry next_gate set externally; external-bar question CLOSED POSITIVE.",
+      "NOT_FOUND": "Exhaustive search over bounded target list yields zero sources meeting the four-part form. Bounded recall recorded exactly. -> C-CROSSSITE has NO external numeric comparator; registry next_gate 'true website holdout without site identity leakage' must be set internally; external-bar question CLOSED NEGATIVE FOR THAT CORPUS ONLY.",
+      "PARTIAL": "Sources found with some but not all four quantities, or without holdout rule/denominators, or without stratum isolation. Each gap recorded explicitly. -> External-bar question remains OPEN; next_gate remains unset; bounded recall recorded."
+    },
+    "Q2_BOUNDING_PARAMETERS": {
+      "LOCATED": "Primary source for h and R located with stated measurement scope, denominator, accounting convention, and uncertainty. Values extracted and recorded with full metadata. -> SPIDER has measured bounding parameters; product economics can be bounded.",
+      "NOT_LOCATED": "No primary source located beyond the Scout-cited Activity Frames reference, OR Activity Frames located but does not contain the claimed figures/methodology. Bounded recall recorded. -> SPIDER has NO measured value for h and R; the Scout figures remain unverified priors; product economics unbounded.",
+      "PARTIAL": "Activity Frames located but figures/methodology partially documented, or alternative source located with partial metadata. Gaps recorded explicitly."
+    },
+    "OVERALL": "Experiment status = COMPLETE if both Q1 and Q2 reach a terminal state (FOUND/NOT_FOUND/LOCATED/NOT_LOCATED) with bounded recall. Status = MEASUREMENT_INVALID if NC-FABRICATED-CLAIM is accepted as verified, or if identity-before-scoring is violated, or if search cannot be completed due to infrastructure failure."
+  },
+  "product_consequence_positive": "Q1 FOUND: C-CROSSSITE gains an external numeric comparator; the program can benchmark against it rather than setting its own holdout rule. Q2 LOCATED: SPIDER's product economics ceiling becomes quantitatively bounded by measured h and R with known accounting; the program can compute a defensible break-even for inheritance.",
+  "product_consequence_negative": "Q1 NOT_FOUND: C-CROSSSITE has no external comparator; the program MUST set its own holdout rule internally (registry next_gate updated), and 47 prior C-CROSSSITE experiments failing to produce one become explicable. Q2 NOT_LOCATED: The delegable fraction and overhead ratio remain UNMEASURED in SPIDER evidence; the Scout brief's figures are unverified priors; if h is truly ~8%, no inheritance quality changes the economic ceiling - this is a critical product-bounding fact.",
+  "estimated_cost": "Low. Credential-free public search only. No browser, Docker, model API, or GPU. Estimated < 30 minutes wall-clock on stdlib HTTP + HTML parsing.",
+  "expected_information_gain": "High. Both questions are decision-grade: a negative on Q1 closes the external-bar question and forces internal holdout rule. A negative on Q2 establishes that SPIDER has no measured value for the single parameter that bounds its entire economic premise. Either outcome changes a live decision."
 }
