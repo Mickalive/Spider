@@ -1,0 +1,1054 @@
+{
+  "n_distinct_training_ids": 50,
+  "n_training_observations": 150,
+  "nc_shuffled_intent": [
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 0.4,
+      "evidence": [
+        "6d82d5cdaccd2bbe",
+        "c446cebb7ef44a09",
+        "8b2e8ece8c6d01c0",
+        "188e61fd61caf672",
+        "ab02f5544eed7b9a",
+        "bb4a800166c3b2bc",
+        "cd7cb509d6b950e7",
+        "adb745bcf5687ff8",
+        "cc70b78f1969c33d",
+        "fe76a31cff70db52",
+        "865222fc699210fe",
+        "8c321b77467fe4fa",
+        "0fcb41fb1c19fb4e",
+        "f063675d440367a6",
+        "d932ca075a0336b2",
+        "9392b289193100a6",
+        "f73d1c3df4cfb0ca",
+        "d6df23cfbb27b43d",
+        "f08ce62a2730f4c2",
+        "e6cacbe0f6078ff8",
+        "42cdf71ca60dc75d",
+        "a301b6d074d69916",
+        "da992aac198aaa36",
+        "9c0680c403997875",
+        "62e289c5047d186f",
+        "840699af5a14fe0f",
+        "c9918757438b434a",
+        "f6d90165f5b10bf4",
+        "32448791b2d950c9",
+        "dfaf2646fd89cecf",
+        "5a2df5f59d7b8dcf",
+        "f54dfd1fcde3df66",
+        "3d1e2d23f9673c9c",
+        "ca8dcab0558dd3a9",
+        "4c67961023523165",
+        "fb0cf027c304d9e0",
+        "6de7218f6923b505",
+        "8c257510dc5f9885",
+        "5c5d2e63e48ce1df",
+        "e71cab8d64ec175f",
+        "ec7ef6c6e5d0861e",
+        "418335baadc795ba",
+        "dc8f2ee9a6cacb0f",
+        "748c710c3a4a071d",
+        "66ab47b460355e74",
+        "fdaece7bf19cd73e",
+        "5c311d1a6000108d",
+        "fa646f7ce4d41ad6",
+        "4bffc6ce7ddcc002",
+        "db57979b6cb03f91"
+      ],
+      "failure_boundary": {
+        "confidence": 0.4,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete-item",
+      "intent_namespace_map": [
+        "delete-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "nc-delete-item-4cca286eb5bf",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 0.44,
+      "evidence": [
+        "6069d5043fd02984",
+        "a49ec9bc7c520713",
+        "5fb487b0d48c402e",
+        "6e6117055dc642f6",
+        "e021e5532daee5fb",
+        "bc8225a53fb76feb",
+        "e40f5b37619d7690",
+        "b9fa0d4e819159e4",
+        "a385a19f78c81502",
+        "063c2469d6d86c57",
+        "4aa900ec41a942ea",
+        "02aedaee377dd26d",
+        "fc246c60f9c0ee0a",
+        "f8fdeff9b727f3d3",
+        "8ea75204a85dc8a9",
+        "971418554d8cd6d8",
+        "489af18dc0f49fac",
+        "5005475783a49eea",
+        "a727566884260251",
+        "78aede7309299d0c",
+        "4b116910caf824b3",
+        "cb9f6924b4f1de9c",
+        "143d9f321df517ad",
+        "75269e7f9d433edd",
+        "7a6b136863093ce7",
+        "5d8f06243a8b8f83",
+        "8ebde426be2860d0",
+        "41f5205587c219ce",
+        "55056abf228963bb",
+        "3a08f7f71e95e5c3",
+        "b2e7c702e5f7ef46",
+        "2a6f6c47f5da9e1a",
+        "924696ec30e4b4da",
+        "ba5875474272e3da",
+        "946490f826744ec0",
+        "73a7b17055452d03",
+        "f04774782754c3ad",
+        "9f198072b1f7172d",
+        "2b16d4cda0b3fcf6",
+        "88a835a7c6748cdf",
+        "46456a8c8047af90",
+        "f571a9ece3132d1d",
+        "0ea7ae6b01d170fd",
+        "b589c99e1afc022c",
+        "ea221f7619cba686",
+        "91fc84c4daa2da95",
+        "a69e0323c1278c5e",
+        "d7730f01cf931f1f",
+        "12e051b5b96f2e25",
+        "4f5046a2789bae88"
+      ],
+      "failure_boundary": {
+        "confidence": 0.44,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read-item",
+      "intent_namespace_map": [
+        "read-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "nc-read-item-9a7f8f89bd0a",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 0.38,
+      "evidence": [
+        "f00f820e2204b137",
+        "a3ee74a4835a3fa9",
+        "9d900beaface60a6",
+        "d1e4f9a453d33338",
+        "7b6a4448de22c148",
+        "3c3f9d154d32c1bf",
+        "fd6b7420c9d57112",
+        "6ac17daeba8efec0",
+        "9de8c2745b5de82e",
+        "8eac36be25a1bc0e",
+        "0e09543eff8f576a",
+        "72e1af9dcccd7e62",
+        "2f9a4ec8703f3ff4",
+        "9854d66fd3e034b3",
+        "e0dbf709009f03e7",
+        "1ee605f87eec7b7e",
+        "87abe2a76e1d5092",
+        "7bf63f0ccdba174c",
+        "c8be3f6e26b02ae2",
+        "fa4d6d739eb21254",
+        "974ac380fcc319e9",
+        "7ae9d6e17cdac91a",
+        "87e5a8dfbc0a2702",
+        "a47fa8b0b0f0f5b9",
+        "4b02d98a28991d31",
+        "0b54aaab4cdad471",
+        "dc4bedeab8641b5b",
+        "a4706b01372ae004",
+        "1c066bff6540c063",
+        "c92f335ea9d2a10d",
+        "1049794ada30f21e",
+        "aae7418281fb2757",
+        "516250f2b1648dd2",
+        "0f605178ebae7877",
+        "89c1965ade0df32e",
+        "32ceeed04f484cf1",
+        "c37c56f81e68895a",
+        "bbc3d81515f80c1a",
+        "ee588b81c2747760",
+        "d5d92ee60f6c65f0",
+        "e26fd2c09d72259c",
+        "04a9742e083bf114",
+        "4bc0b3a5f53c4bd6",
+        "9c8d94bf877d1cf8",
+        "b8a13d38d1bcaa1f",
+        "abcddc53b2310d2a",
+        "fe7eb73985f99c07",
+        "270495969221d69d",
+        "26c132d2203ff018",
+        "bee4ef9e6deabba7"
+      ],
+      "failure_boundary": {
+        "confidence": 0.38,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update-item",
+      "intent_namespace_map": [
+        "update-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "nc-update-item-6c864a7504e9",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ],
+  "treatment_identity_slot": [
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "8c257510dc5f9885",
+        "0bcb08cb40c774cb",
+        "5d9d3809ed5321bc",
+        "0e3544c3eedd7432",
+        "00553e7a5a8a6817",
+        "168e114fbc22975e",
+        "5c5d2e63e48ce1df",
+        "22e1a160edc766e3",
+        "3fb5114948506e76",
+        "004b321fd83f09a7",
+        "e71cab8d64ec175f",
+        "10df74703099839d",
+        "1fa2de48acab6319",
+        "da135e9f585d7b26",
+        "7d9b40ceab9bae3e",
+        "bcf5b3d6448e3c49",
+        "ec7ef6c6e5d0861e",
+        "418335baadc795ba",
+        "ce80e31eea9f3c09",
+        "00c3cbaa7b339644",
+        "dc8f2ee9a6cacb0f",
+        "274da096657c7f99",
+        "96010987a2f8cc4f",
+        "58f2d386deac1c79",
+        "0432f7b3329f179c",
+        "748c710c3a4a071d",
+        "0c85a409ab3c981a",
+        "7180283df48c792b",
+        "6867c28d3f2f8daf",
+        "66ab47b460355e74",
+        "00e72110683b054b",
+        "fdaece7bf19cd73e",
+        "851340b802c4e41b",
+        "5c311d1a6000108d",
+        "fa646f7ce4d41ad6",
+        "36c85a6cd88e54d0",
+        "e66da226601de45a",
+        "49a7ef266f708d7e",
+        "47d6505d68442709",
+        "9a2401691b7a3aae",
+        "4bffc6ce7ddcc002",
+        "3efc8001ddd8fb70",
+        "db57979b6cb03f91",
+        "ddf30ad851089a0f",
+        "ca2ee030c141c9a7",
+        "af852227d827da2f",
+        "c24d5504d70a7eb1",
+        "abd243f70583c2ef",
+        "1ac6b209e97f084f",
+        "1e3e7e233c577b13"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete-item",
+      "intent_namespace_map": [
+        "delete-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "ident-delete-item-880c984311c2",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "170eb039013050a2",
+        "3f17404fd7f22586",
+        "05512fa1ee5c0ed9",
+        "ecf922fc120bfc90",
+        "06ee629351426049",
+        "242f1754812c0702",
+        "e6c9998234a4f2ce",
+        "6069d5043fd02984",
+        "a49ec9bc7c520713",
+        "5fb487b0d48c402e",
+        "0264c122e94c20c5",
+        "4e543efcec6ae94b",
+        "6e6117055dc642f6",
+        "160d6b46c5667f4d",
+        "46a9c09145902335",
+        "e021e5532daee5fb",
+        "8fa1b71e692fd6b4",
+        "bc8225a53fb76feb",
+        "e472bf68d9a012a4",
+        "e40f5b37619d7690",
+        "4d8d7258127fa639",
+        "04869a0957f7d5c3",
+        "cbfb8dd8e829f56c",
+        "fe340811a3a27146",
+        "758d6606e1b247fe",
+        "3863a4c729e4a7fb",
+        "b9fa0d4e819159e4",
+        "b0d19ed999a8e477",
+        "7c13c8254c1c2ed1",
+        "6d5a1753f6e0bf0f",
+        "56166ad8ac5d81b3",
+        "a17f779e6ec8e6d5",
+        "a385a19f78c81502",
+        "a0fa93f186b6c971",
+        "18bc19346c51d773",
+        "5962192417ecdb43",
+        "a9fcc172110596a0",
+        "1c71c89d8671782a",
+        "e7387149d077d315",
+        "e8ee1a9e99516d95",
+        "61f302b1898eb1ca",
+        "8b16cf765bacf356",
+        "df4c48431cce2db6",
+        "063c2469d6d86c57",
+        "8b73e01f915843f9",
+        "1a773382ddc0edf4",
+        "4aa900ec41a942ea",
+        "233f67eaaf9acaff",
+        "5725edc71f6215d6",
+        "261d9ec575c9da28"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read-item",
+      "intent_namespace_map": [
+        "read-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "ident-read-item-9a7f8f89bd0a",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "PUT",
+        "path": "/${collection}/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "2f56740776a95ee1",
+        "fa4d6d739eb21254",
+        "974ac380fcc319e9",
+        "01c8b39fd9707c2e",
+        "298dc19432cfe6ac",
+        "51249eb23fb95485",
+        "68d5205d8c2ccd52",
+        "10bee7e51acacaae",
+        "7ae9d6e17cdac91a",
+        "87e5a8dfbc0a2702",
+        "78aaa5127f4612f6",
+        "a47fa8b0b0f0f5b9",
+        "e46cfe41e02d4b1d",
+        "4f2f43e914646d13",
+        "a797ea7be4086b8a",
+        "f095a70733ed8ccc",
+        "4b02d98a28991d31",
+        "0b54aaab4cdad471",
+        "2d1a6416ae8515e9",
+        "dc4bedeab8641b5b",
+        "caa8857599f0f433",
+        "cc08e76b62cf1478",
+        "8d4882d39c7d9387",
+        "cf15aece2c415b91",
+        "85572c0dc95dc9d8",
+        "ef1c88b431239d1c",
+        "bb819bc914d16da0",
+        "05543cbbfebd7495",
+        "bdf6a9e8b18d13bb",
+        "a4706b01372ae004",
+        "6ea40d24033eb516",
+        "86cc0542e4f8dae0",
+        "3b552f8e13be2b1b",
+        "bf2e9da54afb96bf",
+        "1c066bff6540c063",
+        "c92f335ea9d2a10d",
+        "ee0ca52fe4b04fc4",
+        "d05477190a14bc4d",
+        "1049794ada30f21e",
+        "13b1a8df4ca078e0",
+        "912dbb7ab3dba1be",
+        "aae7418281fb2757",
+        "96d72953b22e09cb",
+        "516250f2b1648dd2",
+        "eb51f88f1a2a95a1",
+        "0f605178ebae7877",
+        "89c1965ade0df32e",
+        "1232619a0ccc1619",
+        "be1ee5b9c1c1fdbe",
+        "5ee977b0b8cdb967"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [
+          "collection"
+        ],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update-item",
+      "intent_namespace_map": [
+        "update-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "ident-update-item-63866e8f2dc3",
+      "parameter_slots": [
+        "collection",
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ],
+  "treatment_pinned_collection": [
+    {
+      "action_template": {
+        "method": "DELETE",
+        "path": "/items/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "8c257510dc5f9885",
+        "0bcb08cb40c774cb",
+        "5d9d3809ed5321bc",
+        "0e3544c3eedd7432",
+        "00553e7a5a8a6817",
+        "168e114fbc22975e",
+        "5c5d2e63e48ce1df",
+        "22e1a160edc766e3",
+        "3fb5114948506e76",
+        "004b321fd83f09a7",
+        "e71cab8d64ec175f",
+        "10df74703099839d",
+        "1fa2de48acab6319",
+        "da135e9f585d7b26",
+        "7d9b40ceab9bae3e",
+        "bcf5b3d6448e3c49",
+        "ec7ef6c6e5d0861e",
+        "418335baadc795ba",
+        "ce80e31eea9f3c09",
+        "00c3cbaa7b339644",
+        "dc8f2ee9a6cacb0f",
+        "274da096657c7f99",
+        "96010987a2f8cc4f",
+        "58f2d386deac1c79",
+        "0432f7b3329f179c",
+        "748c710c3a4a071d",
+        "0c85a409ab3c981a",
+        "7180283df48c792b",
+        "6867c28d3f2f8daf",
+        "66ab47b460355e74",
+        "00e72110683b054b",
+        "fdaece7bf19cd73e",
+        "851340b802c4e41b",
+        "5c311d1a6000108d",
+        "fa646f7ce4d41ad6",
+        "36c85a6cd88e54d0",
+        "e66da226601de45a",
+        "49a7ef266f708d7e",
+        "47d6505d68442709",
+        "9a2401691b7a3aae",
+        "4bffc6ce7ddcc002",
+        "3efc8001ddd8fb70",
+        "db57979b6cb03f91",
+        "ddf30ad851089a0f",
+        "ca2ee030c141c9a7",
+        "af852227d827da2f",
+        "c24d5504d70a7eb1",
+        "abd243f70583c2ef",
+        "1ac6b209e97f084f",
+        "1e3e7e233c577b13"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "delete-item",
+      "intent_namespace_map": [
+        "delete-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "treatment-delete-item-32fa00f64246",
+      "parameter_slots": [
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "GET",
+        "path": "/items/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "170eb039013050a2",
+        "3f17404fd7f22586",
+        "05512fa1ee5c0ed9",
+        "ecf922fc120bfc90",
+        "06ee629351426049",
+        "242f1754812c0702",
+        "e6c9998234a4f2ce",
+        "6069d5043fd02984",
+        "a49ec9bc7c520713",
+        "5fb487b0d48c402e",
+        "0264c122e94c20c5",
+        "4e543efcec6ae94b",
+        "6e6117055dc642f6",
+        "160d6b46c5667f4d",
+        "46a9c09145902335",
+        "e021e5532daee5fb",
+        "8fa1b71e692fd6b4",
+        "bc8225a53fb76feb",
+        "e472bf68d9a012a4",
+        "e40f5b37619d7690",
+        "4d8d7258127fa639",
+        "04869a0957f7d5c3",
+        "cbfb8dd8e829f56c",
+        "fe340811a3a27146",
+        "758d6606e1b247fe",
+        "3863a4c729e4a7fb",
+        "b9fa0d4e819159e4",
+        "b0d19ed999a8e477",
+        "7c13c8254c1c2ed1",
+        "6d5a1753f6e0bf0f",
+        "56166ad8ac5d81b3",
+        "a17f779e6ec8e6d5",
+        "a385a19f78c81502",
+        "a0fa93f186b6c971",
+        "18bc19346c51d773",
+        "5962192417ecdb43",
+        "a9fcc172110596a0",
+        "1c71c89d8671782a",
+        "e7387149d077d315",
+        "e8ee1a9e99516d95",
+        "61f302b1898eb1ca",
+        "8b16cf765bacf356",
+        "df4c48431cce2db6",
+        "063c2469d6d86c57",
+        "8b73e01f915843f9",
+        "1a773382ddc0edf4",
+        "4aa900ec41a942ea",
+        "233f67eaaf9acaff",
+        "5725edc71f6215d6",
+        "261d9ec575c9da28"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "read-item",
+      "intent_namespace_map": [
+        "read-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "treatment-read-item-9616b6a55471",
+      "parameter_slots": [
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    },
+    {
+      "action_template": {
+        "method": "PUT",
+        "path": "/items/${id}"
+      },
+      "applicability_guards": {
+        "authenticated": true
+      },
+      "auth_scope": "bearer",
+      "confidence": 1.0,
+      "evidence": [
+        "2f56740776a95ee1",
+        "fa4d6d739eb21254",
+        "974ac380fcc319e9",
+        "01c8b39fd9707c2e",
+        "298dc19432cfe6ac",
+        "51249eb23fb95485",
+        "68d5205d8c2ccd52",
+        "10bee7e51acacaae",
+        "7ae9d6e17cdac91a",
+        "87e5a8dfbc0a2702",
+        "78aaa5127f4612f6",
+        "a47fa8b0b0f0f5b9",
+        "e46cfe41e02d4b1d",
+        "4f2f43e914646d13",
+        "a797ea7be4086b8a",
+        "f095a70733ed8ccc",
+        "4b02d98a28991d31",
+        "0b54aaab4cdad471",
+        "2d1a6416ae8515e9",
+        "dc4bedeab8641b5b",
+        "caa8857599f0f433",
+        "cc08e76b62cf1478",
+        "8d4882d39c7d9387",
+        "cf15aece2c415b91",
+        "85572c0dc95dc9d8",
+        "ef1c88b431239d1c",
+        "bb819bc914d16da0",
+        "05543cbbfebd7495",
+        "bdf6a9e8b18d13bb",
+        "a4706b01372ae004",
+        "6ea40d24033eb516",
+        "86cc0542e4f8dae0",
+        "3b552f8e13be2b1b",
+        "bf2e9da54afb96bf",
+        "1c066bff6540c063",
+        "c92f335ea9d2a10d",
+        "ee0ca52fe4b04fc4",
+        "d05477190a14bc4d",
+        "1049794ada30f21e",
+        "13b1a8df4ca078e0",
+        "912dbb7ab3dba1be",
+        "aae7418281fb2757",
+        "96d72953b22e09cb",
+        "516250f2b1648dd2",
+        "eb51f88f1a2a95a1",
+        "0f605178ebae7877",
+        "89c1965ade0df32e",
+        "1232619a0ccc1619",
+        "be1ee5b9c1c1fdbe",
+        "5ee977b0b8cdb967"
+      ],
+      "failure_boundary": {
+        "confidence": 1.0,
+        "declared_identity_fields": [
+          "collection",
+          "resource"
+        ],
+        "declared_identity_slots": [],
+        "excluded_identifier_keys": [
+          "collection"
+        ],
+        "inferred_slots": [
+          "id"
+        ],
+        "min_confidence": 0.8,
+        "no_empty_prefix_template": true
+      },
+      "freshness": {
+        "max_stale_requests": 0,
+        "revalidate_before_reuse": true,
+        "strategy": "etag-revalidate"
+      },
+      "intent": "update-item",
+      "intent_namespace_map": [
+        "update-product"
+      ],
+      "invalidated": false,
+      "mechanism_id": "treatment-update-item-1c72fc698616",
+      "parameter_slots": [
+        "id"
+      ],
+      "postconditions": {
+        "ok": true,
+        "status": 200
+      },
+      "preconditions": {
+        "authenticated": true
+      },
+      "repair_scope": {
+        "rebind_slots": true,
+        "retryable_statuses": [
+          "UNKNOWN",
+          "EXPLORE"
+        ]
+      },
+      "verification_rule": {
+        "postconditions": {
+          "ok": true,
+          "status": 200
+        },
+        "type": "postcondition_match"
+      }
+    }
+  ]
+}

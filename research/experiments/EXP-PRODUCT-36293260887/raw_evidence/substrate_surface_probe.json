@@ -1,0 +1,170 @@
+{
+  "probe_kind": "raw_evidence",
+  "interpretation": null,
+  "substrate_path": "research/experiments/EXP-PRODUCT-36272385776/substrate.py",
+  "substrate_sha256": "d3fe358ed68d38a0cf5ecd2c0dbabb943c8f9f5f531755fa2580cbeffbb20f26",
+  "prereg_claimed_sha256_prefix": "d3fe358e",
+  "prereg_declared_endpoints": [
+    {
+      "claim": "auth_issue",
+      "expect": "Bearer token issuance step",
+      "probe": {
+        "path": "/auth/token",
+        "method": "POST",
+        "status": 401,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"unauthenticated\"}"
+      }
+    },
+    {
+      "claim": "schema_discovery",
+      "expect": "GET /api/v1/schema returns JSON Schema",
+      "probe": {
+        "path": "/api/v1/schema",
+        "method": "GET",
+        "status": 404,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"not found\", \"id\": \"v1/schema\"}"
+      }
+    },
+    {
+      "claim": "pagination",
+      "expect": "?page=N&page_size=K with Link headers",
+      "probe": {
+        "path": "/items?page=1&page_size=10",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"collection\": \"items\", \"count\": 40, \"rows\": [{\"created_index\": 0, \"id\": \"item-1\", \"label\": \"cat0\", \"owner\": \"seed\", \"session\": \"sess-b66fc23a0b\", \"visible_to\": \"alice\"}, {\"created_index\": 1, \"id\": \"item-2\", \"label\": \"ca"
+      }
+    },
+    {
+      "claim": "resource_a_read",
+      "expect": "/api/v1/items/<id>",
+      "probe": {
+        "path": "/api/v1/items/item-1",
+        "method": "GET",
+        "status": 404,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"not found\", \"id\": \"v1/items/item-1\"}"
+      }
+    },
+    {
+      "claim": "resource_b_read",
+      "expect": "/api/v1/products/<id>",
+      "probe": {
+        "path": "/api/v1/products/PROD-100",
+        "method": "GET",
+        "status": 404,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"not found\", \"id\": \"v1/products/PROD-100\"}"
+      }
+    },
+    {
+      "claim": "collections_endpoint",
+      "expect": "/api/v1/collections/*",
+      "probe": {
+        "path": "/api/v1/collections",
+        "method": "GET",
+        "status": 404,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"not found\", \"id\": \"v1/collections\"}"
+      }
+    },
+    {
+      "claim": "categories_endpoint",
+      "expect": "/api/v1/categories/*",
+      "probe": {
+        "path": "/api/v1/categories",
+        "method": "GET",
+        "status": 404,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"not found\", \"id\": \"v1/categories\"}"
+      }
+    }
+  ],
+  "actual_endpoints": [
+    {
+      "claim": "index",
+      "probe": {
+        "path": "/",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"collections\": [\"items\", \"products\"], \"verbs\": {\"create\": \"POST /{collection} {\\\"id\\\",\\\"label\\\"}\", \"delete\": \"DELETE /{collection}/{id}\", \"list\": \"GET /{collection}?q=<label>&limit=<n>\", \"read\": \"GET /{collection}/{id}\""
+      }
+    },
+    {
+      "claim": "item_read_unprefixed",
+      "probe": {
+        "path": "/items/item-1",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": "W/\"d51b2346e0b312367e41\"",
+        "body_snippet": "{\"created_index\": 0, \"id\": \"item-1\", \"label\": \"cat0\", \"owner\": \"seed\", \"session\": \"sess-b66fc23a0b\", \"visible_to\": \"alice\"}"
+      }
+    },
+    {
+      "claim": "product_read_unprefixed",
+      "probe": {
+        "path": "/products/PROD-100",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": "W/\"9cf371c44aff0e7e3c04\"",
+        "body_snippet": "{\"created_index\": 66, \"id\": \"PROD-100\", \"label\": \"cat7\", \"owner\": \"seed\", \"session\": \"sess-b66fc23a0b\", \"visible_to\": \"alice\"}"
+      }
+    },
+    {
+      "claim": "listing_limit",
+      "probe": {
+        "path": "/items?limit=5",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"collection\": \"items\", \"count\": 5, \"rows\": [{\"created_index\": 0, \"id\": \"item-1\", \"label\": \"cat0\", \"owner\": \"seed\", \"session\": \"sess-b66fc23a0b\", \"visible_to\": \"alice\"}, {\"created_index\": 1, \"id\": \"item-2\", \"label\": \"cat"
+      }
+    },
+    {
+      "claim": "listing_q",
+      "probe": {
+        "path": "/items?q=cat1&limit=5",
+        "method": "GET",
+        "status": 200,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"collection\": \"items\", \"count\": 1, \"rows\": [{\"created_index\": 24, \"id\": \"item-25\", \"label\": \"cat1\", \"owner\": \"seed\", \"session\": \"sess-b66fc23a0b\", \"visible_to\": \"alice\"}]}"
+      }
+    },
+    {
+      "claim": "unauthenticated",
+      "probe": {
+        "path": "/items/item-1",
+        "method": "GET",
+        "status": 401,
+        "link_header": null,
+        "etag": null,
+        "body_snippet": "{\"error\": \"unauthenticated\"}"
+      }
+    }
+  ],
+  "identifier_namespaces": {
+    "resource_a_count": 200,
+    "resource_b_count": 126,
+    "intersection": [],
+    "disjoint": true
+  },
+  "token_expiry": {
+    "TOKEN_EXPIRY": 100
+  }
+}
