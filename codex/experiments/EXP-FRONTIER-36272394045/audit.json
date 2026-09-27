@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Resolve the cost basis ambiguity (UR-04): the frozen prereg.md 7.2 literal wording ('1 unit per oracle call, 0 per execution') and the parent's ledger definition (1 per execution + 1 per model call) disagree. The choice flips Clause 2 between triggered (FALSIFIES_SPIDER_PREMISE) and not triggered (INCONCLUSIVE). A binding decision rule must specify exactly one cost basis before any claim can be settled.",
+    "Resolve the class-(ii) definition ambiguity (UR-02): prereg.md 8 step 2 taken literally ('observable state key recurred with a DIFFERENT correct action') and the goal-aware reading implied by prereg.md 7.3/10.1 give different class assignments to the positive control and different absolute sigma_2 values. The literal reading is what the text says; the goal-aware reading is what the positive control's design requires. The frozen text must be amended or the authoritative reading declared.",
+    "Resolve the Clause 1 outcome label conflict (UR-01): spec.json decision_rule.outcome_mapping assigns 'FALSIFIES_INHERITANCE_NICHE' to CLAUSE_1_TRIGGERED, while prereg.md section 3 prose for the same clause states the opposite ('inherited parameterization has a real economic niche'). The label and prose assert opposite consequences. The authoritative mapping must be declared.",
+    "Fix the null control implementation to match prereg.md 13's stated mechanism: the uniqueness nonce must be placed in the world_store_snapshot (per prereg.md 13), not in the request path (per inherited taskplan). The current implementation makes the literal sigma_2 == 0 criterion unattainable by construction, while prereg.md 13's mechanism as written achieves sigma_2 == 0 exactly.",
+    "Fix the positive control's class assignment to be consistent with the chosen class-(ii) reading: if the literal reading is authoritative, the PC's sigma_2 ~ 0 criterion is unattainable by construction and the control must be redesigned; if the goal-aware reading is authoritative, the classification logic must implement it.",
+    "Address the reference arm's false compiles on class-(iii) spans: the ratchet's cache key (observable state) does not include the capability handle, causing 80 false COMPILED_REPLAY decisions across the grid. This makes the reference arm's span-level correctness 0.9833 rather than 1.0, and any economic comparison that credits the ratchet with serving those spans overstates its performance. The cache key defect must be acknowledged in any cost comparison.",
+    "Acknowledge that the goal-conditioned arm is a deterministic rule with oracle access to the declared plan, not a language model: coverage metrics (gamma_det, gamma_all) are upper bounds on information availability, not predictions of model behaviour. The substrate never returns the capability handle in a response body, so no real model could read it from the declared channels.",
+    "Acknowledge that goal-state success is 1.0 for all arms including those with span-level correctness as low as 0.5667, making it an insensitive endpoint metric that cannot detect action-level errors on class-(iii) spans."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "severity": "CRITICAL",
+      "finding": "The frozen preregistration contains three internal textual conflicts that make control criteria and decision mappings ambiguous: (a) prereg.md 8 step 2 (literal) vs prereg.md 7.3/10.1 (goal-aware) on class-(ii) definition; (b) prereg.md 5 (observable state = store + last_request) vs prereg.md 13 (nonce in world_store) making NC's sigma_2 == 0 unattainable by the inherited path-nonce mechanism; (c) spec.json outcome_mapping label 'FALSIFIES_INHERITANCE_NICHE' vs prereg.md 3 prose 'real economic niche' for Clause 1. These are inherited from frozen inputs and are surfaced, not resolved. They are decision-relevant for any future run."
+    },
+    {
+      "id": "VF-02",
+      "severity": "CRITICAL",
+      "finding": "The cost basis for Clause 2 is ambiguous between two textually supported readings: (A) prereg.md 7.2 literal: '1 unit per oracle call, 0 per execution' -> conditioned cost = 24.0 units/episode -> Clause 2 TRIGGERED at all novelty rates -> FALSIFIES_SPIDER_PREMISE; (B) parent-identical ledger (1 execution + 1 model per span, matching reference arm's cost accounting) -> conditioned cost = 48.0 units/episode -> Clause 2 NOT triggered -> INCONCLUSIVE. The frozen design does not definitively select one. The producer reports both but sets outcome from (B). This is the single most consequential ambiguity in the packet."
+    },
+    {
+      "id": "VF-03",
+      "severity": "HIGH",
+      "finding": "The reference arm (B-NO-MEMORY-DETERMINISTIC) emits incorrect actions on 80 class-(iii) span occurrences across the grid (all list_resources role) while recording decision_path=COMPILED_REPLAY. The cache key is the observable state, which lacks the capability handle. Goal-state success remains 1.0 because ungated read/list returns 200 and the goal state (empty store) never requires the handle. This means: (a) the reference arm's span-level correctness is 0.9833, not 1.0; (b) the ratchet's compiled share of 0.40 includes false compiles; (c) endpoint metrics (HTTP status, goal-state success) are completely insensitive to this defect."
+    },
+    {
+      "id": "VF-04",
+      "severity": "HIGH",
+      "finding": "The positive control's substantive test passes decisively: goal-conditioned arm closes 200/200 planted spans, reference ratchet compiles 0/200. Goal conditioning disambiguates the exact parent failure mode. However, under the literal class-(ii) rule (prereg.md 8 step 2), the planted spans are classified as class (ii) (199/200) because the state key recurs with different declared actions. This makes the prereg's own PC pass criterion (sigma_2 ~ 0) unattainable by construction. The control is UNRESOLVED_BY_PREREG_CONFLICT, not PASS or FAIL."
+    },
+    {
+      "id": "VF-05",
+      "severity": "HIGH",
+      "finding": "The null control's literal criterion (sigma_2 == 0 exactly, sigma_3 == 0 exactly) is NOT met: sigma_2 = 49/1200. All 49 class-(ii) spans arise from exactly one state key (empty store, no prior request) recurring 50 times with 50 distinct declared actions (entry-point spans). This is NOT a classifier false positive (the prereg's stated failure meaning) but a consequence of prereg.md 5's observable state definition excluding the request path where the inherited implementation puts the uniqueness nonce. Under prereg.md 13's mechanism as written (nonce in world_store_snapshot), sigma_2 == 0 exactly. The control is UNRESOLVED_BY_PREREG_CONFLICT."
+    },
+    {
+      "id": "VF-06",
+      "severity": "MEDIUM",
+      "finding": "The treatment arm (B-NO-MEMORY-CONDITIONED) is a pure deterministic function of (observable_state_signature, goal_prefix) with no cross-episode memory, verified by 14 statelessness checks and a GoalOnlyPlan view that raises AttributeError for non-goal attributes. This measures the INFORMATION AVAILABLE to a goal-conditioned policy, not any model's ability to exploit it. The substrate returns the capability handle only as a response header and server-side observation, never in a response body. A real model could not read the handle from the declared channels. Gamma_det and gamma_all are upper bounds, not behavioural predictions."
+    },
+    {
+      "id": "VF-07",
+      "severity": "MEDIUM",
+      "finding": "The class-(iii) plant is a synthetic capability handle (deterministic function of fixed salt + episode counter), not a real authorization/session/CSRF mechanism. The experiment tests the STRUCTURE of a binding key absent from observation and goal channels, not any real protocol. No handle unpredictability, expiry, replay windows, or cross-episode leakage is tested. The claim supported is about epistemic class structure, not real-world mechanism viability."
+    },
+    {
+      "id": "VF-08",
+      "severity": "MEDIUM",
+      "finding": "Two substrate modifications were required to complete execution: (1) TCP_NODELAY (disable_nagle_algorithm=True) to fix a ~24 req/s throughput ceiling that caused prior stage failures (exit 66, exit 124); (2) do_PUT treats missing body as empty object matching do_PATCH. Neither alters a parent response byte (verified: create-PUT response body byte-identical with/without ?mint=1). These are declared infrastructure deviations, not measurement invalidity."
+    },
+    {
+      "id": "VF-09",
+      "severity": "LOW",
+      "finding": "The frozen prereg.md records research/frontier/common.py sha256 as d9ceeb6a6bfee1bac7fcd8b65f9407dd616c171c52cfccc654b20c9f75185af6 but the unmodified file hashes to d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6 (3d vs 7d). File was not modified; this is a transcription error in the frozen preregistration, recorded but not corrected per freeze discipline."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-01",
+      "baseline_id": "B-NO-MEMORY-DETERMINISTIC",
+      "finding": "Reference arm replicated parent EXP-FRONTIER-36249071934 field-for-field: 1200/1200 span rows identical on state_sig, signature, response_code, response_body_hash, decision_path, role, work_item with 0 field mismatches. Key numbers reproduced exactly: per-span witnessed determinism 0.5833, compilable-given-deterministic 0.6857, compiled share of all spans 0.40, deopt amortized cost 38.6 (vs cold 72.0). This baseline is solid and the substrate is the parent's substrate."
+    },
+    {
+      "id": "BF-02",
+      "baseline_id": "B-COLD-EXPLORATION",
+      "finding": "Cold exploration baseline achieves exactly 72.0 abstract units/episode at all novelty rates, with span-level action correctness 1.0 and goal-state success 1.0. This matches the parent's cold baseline and provides a stable strong null. No degradation or anomaly detected."
+    },
+    {
+      "id": "BF-03",
+      "baseline_id": "B-NO-MEMORY-CONDITIONED",
+      "finding": "Conditioned arm achieves span-level action correctness 0.8500 (180/1200 incorrect) and goal-state success 1.0. All 180 incorrect spans are class-(iii) or mint-create spans where the binding key (capability handle) is absent from the goal prefix. The arm is stateless and correctly implemented per prereg.md 7.2. The coverage (0.85 all, 0.924 deterministic at nu=0.50) is an upper bound on what goal conditioning alone can achieve on this substrate."
+    },
+    {
+      "id": "BF-04",
+      "baseline_id": "PC-PLANTED-DISAMBIGUATION",
+      "finding": "Positive control substantively passes: goal conditioning closes 200/200 planted spans, reference compiles 0/200. The planted spans present byte-identical observations with 4 distinct correct actions per episode, disambiguated by binding key in goal prefix. However, the literal class-(ii) rule classifies 199/200 as class (ii), making the prereg's own sigma_2 ~ 0 criterion unattainable by construction. The control is UNRESOLVED_BY_PREREG_CONFLICT."
+    },
+    {
+      "id": "BF-05",
+      "baseline_id": "NC-UNIQUE-STATES",
+      "finding": "Null control has 1151 unique state keys out of 1200 span occurrences. The 49 conflicts all come from the entry-point span (empty store, no prior request) recurring 50 times with 50 distinct actions. This is caused by prereg.md 13's stated mitigation (nonce in world_store) not matching the inherited implementation (nonce in request path). Under prereg.md 13 as written, sigma_2 == 0 exactly. The control is UNRESOLVED_BY_PREREG_CONFLICT, not a classifier defect."
+    }
+  ],
+  "recomputed_metrics": {
+    "share_class_i_merely_novel": {
+      "pooled_point": 0.6771666666666667,
+      "pooled_ci95": [0.665226, 0.688881],
+      "per_novelty_rate": {
+        "0.00": {"point": 0.6233333333333333, "ci95": [0.595565, 0.650314]},
+        "0.25": {"point": 0.6483333333333333, "ci95": [0.620883, 0.674837]},
+        "0.50": {"point": 0.6783333333333333, "ci95": [0.651371, 0.704157]},
+        "0.75": {"point": 0.7016666666666667, "ci95": [0.67517, 0.726876]},
+        "1.00": {"point": 0.7341666666666666, "ci95": [0.708453, 0.758386]}
+      },
+      "note": "Matches producer. Computed from classification_B-NO-MEMORY-DETERMINISTIC.jsonl using literal prereg.md 8 step 2 rule."
+    },
+    "share_class_ii_epistemically_blocked": {
+      "pooled_point": 0.22283333333333333,
+      "pooled_ci95": [0.212483, 0.233539],
+      "per_novelty_rate": {
+        "0.00": {"point": 0.27666666666666667, "ci95": [0.252099, 0.30266]},
+        "0.25": {"point": 0.25166666666666665, "ci95": [0.227932, 0.276986]},
+        "0.50": {"point": 0.22166666666666668, "ci95": [0.199074, 0.246035]},
+        "0.75": {"point": 0.19833333333333333, "ci95": [0.176751, 0.221841]},
+        "1.00": {"point": 0.16583333333333333, "ci95": [0.145863, 0.187937]}
+      },
+      "note": "Matches producer. Literal reading of prereg.md 8 step 2. Under goal-aware reading, sigma_2 would be lower (PC's 199 spans would be class (i)). CI95 upper bound at best = 0.1879 >> 0.01 threshold."
+    },
+    "share_class_iii_observation_absent": {
+      "pooled_point": 0.1,
+      "pooled_ci95": [0.092663, 0.107849],
+      "per_novelty_rate": {
+        "0.00": {"point": 0.1, "ci95": [0.084282, 0.118271]},
+        "0.25": {"point": 0.1, "ci95": [0.084282, 0.118271]},
+        "0.50": {"point": 0.1, "ci95": [0.084282, 0.118271]},
+        "0.75": {"point": 0.1, "ci95": [0.084282, 0.118271]},
+        "1.00": {"point": 0.1, "ci95": [0.084282, 0.118271]}
+      },
+      "note": "Matches producer. Exactly 0.10 by construction (class_iii_fraction=0.10 enforced by task generator). Verified: handle absent from observable state and goal prefix on all 600 class-(iii) spans."
+    },
+    "headroom_ii_plus_iii": {
+      "pooled_point": 0.32283333333333336,
+      "pooled_ci95": [0.311119, 0.334774],
+      "per_novelty_rate": {
+        "0.00": {"point": 0.37666666666666665, "ci95": [0.349686, 0.404435]},
+        "0.25": {"point": 0.3516666666666667, "ci95": [0.325163, 0.379117]},
+        "0.50": {"point": 0.32166666666666666, "ci95": [0.295843, 0.348629]},
+        "0.75": {"point": 0.29833333333333334, "ci95": [0.273124, 0.32483]},
+        "1.00": {"point": 0.2658333333333333, "ci95": [0.241614, 0.291547]}
+      },
+      "note": "Matches producer. Maximum recoverable headroom for any inheriting architecture on this plan family."
+    },
+    "conditioned_coverage_all": {
+      "per_novelty_rate": {
+        "0.00": {"point": 0.85, "ci95": [0.828682, 0.869085]},
+        "0.25": {"point": 0.85, "ci95": [0.828682, 0.869085]},
+        "0.50": {"point": 0.85, "ci95": [0.828682, 0.869085]},
+        "0.75": {"point": 0.85, "ci95": [0.828682, 0.869085]},
+        "1.00": {"point": 0.85, "ci95": [0.828682, 0.869085]}
+      },
+      "note": "Matches producer. Constant 0.85 across grid because goal conditioning closes all class-(i) spans (67.7% pooled) plus all class-(ii) spans (22.3% pooled) where the goal prefix carries the distinguishing key. The 15% gap is exactly class-(iii) (10%) plus mint-create spans (5%) where the handle is absent from goal."
+    },
+    "conditioned_coverage_deterministic": {
+      "per_novelty_rate": {
+        "0.00": {"point": 0.918918918918919, "ci95": [0.901379, 0.933569]},
+        "0.25": {"point": 0.9222222222222223, "ci95": [0.902876, 0.93798]},
+        "0.50": {"point": 0.9242424242424242, "ci95": [0.901509, 0.942066]},
+        "0.75": {"point": 0.9767441860465116, "ci95": [0.957726, 0.98732]},
+        "1.00": {"point": 1.0, "ci95": [0.981155, 1.0]}
+      },
+      "note": "Matches producer. Exceeds reference's 0.6857 threshold at all rates. The increase across novelty rates reflects fewer witnessed-deterministic occurrences at higher novelty (denominator shrinks)."
+    },
+    "conditioned_amortized_cost": {
+      "primary_basis_parent_identical_ledger": {
+        "value": 48.0,
+        "unit": "abstract_units_per_episode",
+        "components": {"execution": 1200, "model": 1200, "machinery": 0},
+        "threshold_for_clause_2": 38.6,
+        "cost_le_threshold": false,
+        "note": "Matches producer. Parent-identical ledger charges 1 execution + 1 model per span. Paired bootstrap: conditioned minus reference = +7.06 (CI95 [6.26, 7.7], p=0.0). Conditioned is more expensive than ratchet at every novelty rate."
+      },
+      "sensitivity_basis_model_calls_only": {
+        "value": 24.0,
+        "unit": "abstract_units_per_episode",
+        "components": {"model": 1200, "execution": 0},
+        "threshold_for_clause_2": 38.6,
+        "cost_le_threshold": true,
+        "note": "Matches producer. Prereg.md 7.2 literal wording: '1 unit per oracle call, 0 per execution'. This basis triggers Clause 2 at all novelty rates. The basis choice is unresolved (UR-04) and decision-determining."
+      }
+    },
+    "reference_amortized_cost_nu_0.50": {
+      "without_class_iii_plant": 38.6,
+      "with_class_iii_plant": 40.94,
+      "note": "Matches producer. The class-(iii) plant adds ~2.34 units/episode at nu=0.50 due to deopts on gated spans."
+    },
+    "paired_bootstrap_cost_differences_nu_0.50": {
+      "conditioned_minus_reference": {"mean": 7.06, "ci95": [6.26, 7.7], "p": 0.0},
+      "conditioned_minus_cold": {"mean": -24.0, "ci95": [-24.0, -24.0], "p": 0.0},
+      "reference_minus_cold": {"mean": -31.06, "ci95": [-31.7, -30.26], "p": 0.0},
+      "note": "Matches producer. 5000 resamples, episode as unit, seed 36272394045. Ratchet beats cold decisively; conditioned beats cold but loses to ratchet on primary basis."
+    },
+    "reference_false_compiled_replays": {
+      "total_across_grid": 80,
+      "all_class_iii": true,
+      "all_role_list_resources": true,
+      "per_novelty_rate": {
+        "0.00": {"n_compiled": 714, "n_false": 30, "share": 0.0420},
+        "0.25": {"n_compiled": 582, "n_false": 30, "share": 0.0515},
+        "0.50": {"n_compiled": 362, "n_false": 20, "share": 0.0552},
+        "0.75": {"n_compiled": 162, "n_false": 0, "share": 0.0},
+        "1.00": {"n_compiled": 48, "n_false": 0, "share": 0.0}
+      },
+      "note": "Matches producer. The cache key (observable state) lacks the capability handle. Reference arm's span-level correctness = 0.9833 (20/1200 incorrect at nu=0.50). Goal-state success = 1.0 masks this entirely."
+    },
+    "span_level_action_correctness": {
+      "B-COLD-EXPLORATION": 1.0,
+      "B-NO-MEMORY-CONDITIONED": 0.85,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.5666666666666667,
+      "B-NO-MEMORY-DETERMINISTIC": 0.9833333333333333,
+      "NC-UNIQUE-STATES": 1.0,
+      "PC-PLANTED-DISAMBIGUATION": 1.0,
+      "REPL-REFERENCE-PARENT-IDENTICAL": 1.0,
+      "note": "Matches producer. Ground truth = declared plan action bound at execution time. Narrow prefix (intent+step+work_item+key, no body, no token_required) drops coverage from 0.85 to 0.5667; 400 differing actions, none where wide was correct."
+    },
+    "closure_attribution_nu_0.50": {
+      "closed_by_both": 342,
+      "closed_by_compilation_only": 362,
+      "closed_by_conditioned_only": 678,
+      "closed_by_neither": 160,
+      "note": "Matches producer. The 160 closed by neither are class-(iii) + mint-create spans. Conditioned arm closes 678 spans that ratchet deopts on (class (ii) + class (i) novel). Ratchet closes 362 compiled replays that conditioned also gets right."
+    }
+  },
+  "claim_ceiling": "On the verified-reachable deterministic stdlib HTTP substrate with this experimenter-authored task plan (5 intents, 4 work items, 24 spans/episode, 50 episodes/rate): (1) The deopt ratchet's residual decomposes into ~22% epistemically blocked spans (class ii) and exactly 10% observation-absent spans (class iii) by construction, giving a maximum headroom of ~32% for any inheriting architecture. (2) Goal conditioning without inherited parameterization achieves 85% coverage of all spans and 92% of deterministic spans, exceeding the ratchet's compiled coverage (40% all, 68.6% deterministic), but at 48.0 abstract units/episode vs the ratchet's 38.6 under the parent-identical ledger. (3) Under the prereg.md 7.2 literal cost basis (model calls only, 24.0 units/episode), Clause 2 triggers and the SPIDER mechanism-accumulation premise would be falsified in this setting. (4) The cost basis ambiguity is unresolvable from the frozen packet; neither basis is definitively selected. (5) The class-(ii) definition ambiguity means the absolute level of sigma_2 is reading-dependent, though Clause 1 does not fire under either reading (CI95 upper bound 0.188 >> 0.01). (6) The reference arm has a cache-key defect causing 80 false compiles on class-(iii) spans, inflating its reported coverage. (7) No inference to real Web work, real models, real inheritance mechanisms, or real economic claims is justified. The substrate is synthetic, the task generator is experimenter-authored, the capability handle is synthetic, the treatment is a deterministic rule with oracle access to the plan, and costs are abstract units with no token/latency/dollar mapping. The maximum justified claim is the epistemic decomposition of the ratchet's residual on this specific plan family with the stated ambiguities unresolved.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36272394045/request.json",
+    "research/experiments/EXP-FRONTIER-36272394045/spec.json",
+    "research/experiments/EXP-FRONTIER-36272394045/prereg.md",
+    "research/experiments/EXP-FRONTIER-36272394045/freeze.json",
+    "research/experiments/EXP-FRONTIER-36272394045/result.json",
+    "research/experiments/EXP-FRONTIER-36272394045/report.md",
+    "research/experiments/EXP-FRONTIER-36272394045/provenance.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_NC-UNIQUE-STATES.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-DETERMINISTIC.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-COLD-EXPLORATION.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.00.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.25.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.50.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.75.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_1.00.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/pc_verification.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/nc_verification.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/reference_false_compile.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/correctness_invariance.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/conditioned_arm_statelessness_test.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_idempotency.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/matched_task_instances_check.json",
+    "research/experiments/EXP-FRONTIER-36272394045/artifacts/replication_parent_comparison.json",
+    "research/experiments/EXP-FRONTIER-36249071934/handoff.json",
+    "research/experiments/EXP-FRONTIER-36249071934/audit.json",
+    "research/experiments/EXP-FRONTIER-36249071934/result.json",
+    "codex/claim_state.json"
+  ],
+  "unresolved": [
+    {
+      "id": "UR-01",
+      "question": "spec.json decision_rule.outcome_mapping assigns the label FALSIFIES_INHERITANCE_NICHE to CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2, while prereg.md 3 prose for that same clause states the opposite consequence ('the ratchet's residual is irreducibly binding and inherited parameterization has a real economic niche'). Which is authoritative?",
+      "why_auditor_cannot_settle": "The label and the prose assert opposite consequences for one frozen condition. Resolving it would require amending a frozen input or substituting auditor judgement for the Global Research Director's.",
+      "impact_on_this_run": "None: Clause 1 did not fire on any basis (sigma_2 CI95 upper bound 0.188 >> 0.01), so the ambiguity is not decision-triggering here. But it would be for any future run where sigma_2 approaches zero."
+    },
+    {
+      "id": "UR-02",
+      "question": "Is class (ii) the prereg.md 8 literal rule (a state key recurring with any different action) or the goal-aware rule (a state key recurring with a different action that goal conditioning cannot disambiguate)?",
+      "why_auditor_cannot_settle": "Both readings are textually supported in the frozen preregistration. The literal reading is what step 2 says; the goal-aware reading is what the positive control's design (prereg.md 7.3) and the clause-2 logic require. They give different class assignments to the positive control and different absolute sigma_2 values.",
+      "impact_on_this_run": "Material to the positive control's literal criterion and to the absolute level of sigma_2. Not decision-triggering for Clause 1 because sigma_2's CI95 upper bound is far above 0.01 under either reading (0.188 at best)."
+    },
+    {
+      "id": "UR-03",
+      "question": "The ratchet falsely compiled class-(iii) list_resources spans in 80 span occurrences across the grid, dropping the handle from a replayed action. Is this a cache-key defect to be fixed in the product, or an accepted consequence of a cache keyed only on the observable state?",
+      "why_auditor_cannot_settle": "Fixing it changes the mechanism under characterisation; this run only measures it. Whether the handle belongs in the cache key is a product decision. The substrate deliberately never returns the handle in a response body, so no cache key derivable from a response can contain it.",
+      "impact_on_this_run": "Does not affect either falsifier clause, but means the reference arm's span-level correctness is 0.9833, and any economic comparison crediting the ratchet with serving those spans overstates it."
+    },
+    {
+      "id": "UR-04",
+      "question": "Under the prereg's own model-calls-only cost basis the treatment costs 24.0 units/episode and Clause 2 fires (FALSIFIES_SPIDER_PREMISE). Under the parent-identical ledger it costs 48.0 and Clause 2 does not fire (INCONCLUSIVE). Which basis is the intended one?",
+      "why_auditor_cannot_settle": "Prereg.md 7.2's literal wording ('1 unit per oracle call, 0 per execution') and the parent's ledger definition (used for the reference arm's 38.6 cost) disagree. The choice flips the headline outcome. The frozen design does not definitively select one.",
+      "impact_on_this_run": "Decision-determining. Both are reported; producer sets outcome from primary (parent-identical) basis. This is the single most consequential unresolved issue."
+    },
+    {
+      "id": "UR-05",
+      "question": "Is goal-conditioned coverage of 0.85 of all spans at 48.0 units/episode, against a ratchet that achieves 0.40 compiled share at 38.6 (0.9833 span-level correctness), an economic win anywhere?",
+      "why_auditor_cannot_settle": "The treatment is closed to 0.85 coverage and the ratchet's coverage is 0.9833; neither dominates. The crossover would need a cost model where a conditioned policy does not pay 1 execution unit per span, which is exactly the unresolved UR-04 question.",
+      "impact_on_this_run": "No clause fires on primary basis; this is the product-level economic question the DIRECTOR must price with a resolved cost model."
+    },
+    {
+      "id": "UR-06",
+      "question": "Does a real model, given the same goal prefix, behave like this deterministic rule?",
+      "why_auditor_cannot_settle": "No model was called in this run. The substrate returns the handle only as a response header and server-side observation; the prereg forbids surfacing it to the agent. A real model would additionally pay token costs, tool calls, and error modes not in this ledger.",
+      "impact_on_this_run": "Gamma_det and gamma_all are upper bounds on information availability, not predictions of model behaviour. The conditioned arm's 0.85 coverage assumes perfect oracle access to the declared plan."
+    },
+    {
+      "id": "UR-07",
+      "question": "The per-span witnessed determinism fraction varies from 1.0 to 0.1667 across the novelty grid (0.00 to 1.00). The parent packet's claim C-RESIDUAL-NOVELTY was moved to EXPERIMENTAL based on a single point (nu=0.50). Does the claim ceiling apply to the whole grid or only the declared operating point?",
+      "why_auditor_cannot_settle": "The claim registry and parent handoff treat the determinism fraction as a generator-relative property, not a claim-level number about real agent work. The sweep shows the same experiment yields anything from 1.0 to 0.1667. The claim ceiling must specify which novelty rate(s) it covers.",
+      "impact_on_this_run": "This experiment's headroom (sigma_2 + sigma_3) also varies across the grid (0.377 at nu=0.00 to 0.266 at nu=1.00). The maximum justified claim ceiling must be qualified by novelty rate."
+    }
+  ]
+}

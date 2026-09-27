@@ -1,0 +1,155 @@
+{
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "lane": "frontier",
+  "claim_ids": [
+    "C-RESIDUAL-NOVELTY"
+  ],
+  "question": "On a verified-reachable deterministic stdlib HTTP substrate, decompose the deopt ratchet's residual into three epistemic classes by measuring what is visible to a no-memory executor: (i) merely-novel spans that close when the executor is given the goal/intent as a conditioning prefix while inducing no parameters and retaining no compiled memory; (ii) epistemically blocked spans where byte-identical observations require different correct actions, so that only parameter induction or persistent cross-episode memory can bind them; (iii) observation-absent spans whose binding key is not present in the conditioning context at all. Report the three shares across the pre-declared novelty grid {0.00, 0.25, 0.50, 0.75, 1.00}, with a planted-disambiguation positive control and a matched unique-states null, using the accepted no-memory deterministic deopt ratchet as the reference arm.",
+  "hypothesis": "The deopt ratchet's residual (the 60% of span occurrences not served from compiled replay) decomposes into non-zero shares of epistemically blocked (class ii) and observation-absent (class iii) spans. Goal conditioning alone will not saturate the reference arm's compiled-replay coverage (0.6857 of deterministic occurrences, 0.40 of all occurrences) at equal or lower amortized cost. The sum of shares (ii) + (iii) quantifies the maximum headroom any inheriting architecture could recover on this plan family.",
+  "falsifier": "Two independent falsification clauses, either of which is sufficient: (1) If share (ii) (epistemically blocked spans) is zero within the plan family at all novelty rates, then the ratchet's residual is irreducibly binding and inherited parameterization has a real economic niche on this substrate. (2) If the goal-conditioned no-memory arm reaches or exceeds the reference arm's measured compiled-replay coverage (0.6857 of deterministic span occurrences, 0.40 of all span occurrences) at equal or lower amortized cost, then goal conditioning substitutes for inherited parameterization and SPIDER's mechanism-accumulation premise is falsified in this setting on identified, executable arms.",
+  "baselines": [
+    {
+      "id": "B-NO-MEMORY-DETERMINISTIC",
+      "description": "The accepted no-memory deopt ratchet from EXP-FRONTIER-36249071934: compiles spans after 2 witnesses, selectively deopts on observationally ambiguous keys, measured per-span witnessed determinism 0.5833, compilable-given-deterministic 0.6857, compiled share of all spans 0.40, deopt amortized cost 38.6 abstract units/episode vs cold 72.0. Serves as the reference arm for all comparisons.",
+      "type": "reference"
+    },
+    {
+      "id": "B-NO-MEMORY-CONDITIONED",
+      "description": "No-memory executor given the goal/intent as a conditioning prefix at each decision point. Induces no parameters, retains no compiled memory across episodes. Measures the share of merely-novel spans (class i) that close with goal conditioning alone.",
+      "type": "treatment"
+    },
+    {
+      "id": "PC-PLANTED-DISAMBIGUATION",
+      "description": "Planted positive control: goal-distinct work items that present byte-identical observable states but whose correct action is disambiguated by a binding key carried in the goal/intent prefix. Must achieve share (i) = 1.0 (all such spans close with goal conditioning) and shares (ii) = (iii) = 0 by construction.",
+      "type": "positive_control"
+    },
+    {
+      "id": "NC-UNIQUE-STATES",
+      "description": "Matched null control: states rendered unique by construction (e.g., each span occurrence gets a unique observable state key) so that shares (ii) and (iii) must be exactly zero. Any non-zero measurement of (ii) or (iii) indicates a classification or implementation defect. Share (i) should equal 1.0 minus witness-buildup fraction.",
+      "type": "null_control"
+    }
+  ],
+  "positive_control": "PC-PLANTED-DISAMBIGUATION",
+  "null_control": "NC-UNIQUE-STATES",
+  "measurement_validity": {
+    "substrate": "Python stdlib ThreadingHTTPServer on 127.0.0.1, stateless CRUD service, no DOM, no browser, no docker, no LLM key. Verified reachable in EXP-FRONTIER-36249071934 (8400 real HTTP/1.1 keep-alive requests served). Substrate idempotency: 8 distinct request shapes x 100 repeats = 800 round trips, each returning exactly one response-body hash and status code.",
+    "span_definition": "A span is a single (observable_state, correct_action) pair within a work item. Observable state = (world_store_snapshot, last_request_method, last_request_path). Correct action = (method, path, body_template) tuple. Spans are the atomic unit of compilation and classification.",
+    "classification_protocol": "For each span occurrence in the reference arm's execution trace: (i) Merely-novel: the span's observable state key is novel in the reference arm's history, but the goal-conditioned arm selects the correct action on first encounter. (ii) Epistemically blocked: the span's observable state key has been seen before in the reference arm with a DIFFERENT correct action (byte-identical observation, goal-distinct action). The goal-conditioned arm selects the correct action using the goal prefix. (iii) Observation-absent: the span's correct action depends on a binding key (e.g., resource ID from a prior response) that is NOT present in the current observable state nor in the goal/intent prefix. Neither arm can resolve it without cross-episode memory or parameter induction.",
+    "novelty_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "task_generator": "research/frontier/taskplan.py (same as EXP-FRONTIER-36249071934) extended with: (a) a goal_conditioning_mode flag for the conditioned arm, (b) a planted_disambiguation_mode for PC, (c) a unique_states_mode for NC, (d) a declared class_iii_fraction parameter (non-zero, e.g., 0.10) ensuring spans whose binding key comes from a prior response not in the current observable state or goal. Episode structure: 5 preregistered intents, 4 work items per episode, 24 spans per episode, 50 episodes per novelty rate per arm.",
+    "arms": [
+      {
+        "id": "B-NO-MEMORY-DETERMINISTIC",
+        "episodes_per_novelty_rate": 50,
+        "novelty_rates": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "description": "Reference arm: deopt ratchet with 2-witness compilation, selective deopt on ambiguous keys. No goal conditioning."
+      },
+      {
+        "id": "B-NO-MEMORY-CONDITIONED",
+        "episodes_per_novelty_rate": 50,
+        "novelty_rates": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "description": "Treatment arm: no-memory executor with goal/intent conditioning prefix at each decision. No compilation, no parameter induction, no cross-episode memory."
+      },
+      {
+        "id": "PC-PLANTED-DISAMBIGUATION",
+        "episodes": 50,
+        "description": "Positive control: fixed novelty rate 0.50 (matching reference), with planted goal-distinct observationally-identical spans. Binding key carried in goal."
+      },
+      {
+        "id": "NC-UNIQUE-STATES",
+        "episodes": 50,
+        "description": "Null control: fixed novelty rate 0.50, each span occurrence gets a unique observable state key by construction."
+      }
+    ],
+    "primary_metrics": [
+      {
+        "name": "share_class_i_merely_novel",
+        "description": "Fraction of span occurrences classified as merely-novel (close with goal conditioning alone)",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "share_class_ii_epistemically_blocked",
+        "description": "Fraction of span occurrences classified as epistemically blocked (byte-identical observation, different correct actions)",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "share_class_iii_observation_absent",
+        "description": "Fraction of span occurrences classified as observation-absent (binding key not in observable state nor goal)",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "max_headroom_share_ii_plus_iii",
+        "description": "Sum of shares (ii) + (iii): maximum headroom any inheriting architecture could recover",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "conditioned_compiled_replay_coverage_deterministic",
+        "description": "Fraction of deterministic span occurrences served by goal-conditioned arm (analogous to reference's 0.6857)",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "conditioned_compiled_replay_coverage_all",
+        "description": "Fraction of all span occurrences served by goal-conditioned arm (analogous to reference's 0.40)",
+        "unit": "proportion [0,1]"
+      },
+      {
+        "name": "conditioned_amortized_cost",
+        "description": "Amortized cost in abstract units/episode for goal-conditioned arm (reference: deopt 38.6, cold 72.0)",
+        "unit": "abstract_units_per_episode"
+      },
+      {
+        "name": "saturation_share_class_i",
+        "description": "Per-class share at which goal conditioning alone saturates (coverage reaches reference level)",
+        "unit": "proportion [0,1]"
+      }
+    ],
+    "decision_rule": {
+      "falsifier_clause_1": "If share_class_ii_epistemically_blocked == 0.0 (within measurement precision, CI95 upper bound < 0.01) at ALL novelty rates in {0.00, 0.25, 0.50, 0.75, 1.00}, then CLAUSE_1_TRIGGERED = true → ratchet residual irreducibly binding, inherited parameterization has economic niche.",
+      "falsifier_clause_2": "If conditioned_compiled_replay_coverage_deterministic >= 0.6857 AND conditioned_compiled_replay_coverage_all >= 0.40 AND conditioned_amortized_cost <= 38.6 (reference deopt cost), then CLAUSE_2_TRIGGERED = true → goal conditioning substitutes for inherited parameterization, SPIDER mechanism-accumulation premise falsified.",
+      "outcome_mapping": {
+        "CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2": "FALSIFIES_INHERITANCE_NICHE (share ii = 0 → inheritance has niche)",
+        "CLAUSE_2_TRIGGERED_and_NOT_CLAUSE_1": "FALSIFIES_SPIDER_PREMISE (goal conditioning substitutes)",
+        "BOTH_TRIGGERED": "CONTRADICTORY (investigate)",
+        "NEITHER_TRIGGERED": "INCONCLUSIVE (headroom > 0, goal conditioning does not saturate)"
+      }
+    }
+  },
+  "decision_rule": {
+    "falsifier_clause_1": "If share_class_ii_epistemically_blocked == 0.0 (within measurement precision, CI95 upper bound < 0.01) at ALL novelty rates in {0.00, 0.25, 0.50, 0.75, 1.00}, then CLAUSE_1_TRIGGERED = true → ratchet residual irreducibly binding, inherited parameterization has economic niche.",
+    "falsifier_clause_2": "If conditioned_compiled_replay_coverage_deterministic >= 0.6857 AND conditioned_compiled_replay_coverage_all >= 0.40 AND conditioned_amortized_cost <= 38.6 (reference deopt cost), then CLAUSE_2_TRIGGERED = true → goal conditioning substitutes for inherited parameterization, SPIDER mechanism-accumulation premise falsified.",
+    "outcome_mapping": {
+      "CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2": "FALSIFIES_INHERITANCE_NICHE",
+      "CLAUSE_2_TRIGGERED_and_NOT_CLAUSE_1": "FALSIFIES_SPIDER_PREMISE",
+      "BOTH_TRIGGERED": "CONTRADICTORY",
+      "NEITHER_TRIGGERED": "INCONCLUSIVE"
+    }
+  },
+  "product_consequence_positive": "If CLAUSE_1 triggers (share ii = 0): the deopt ratchet's residual is purely novel spans that close with goal conditioning. This means the 60% gap is not epistemic blockade but merely novelty — inheritance's economic niche is confirmed because parameter induction is the ONLY way to close class (ii) spans. Product should invest in durable parameterized mechanism accumulation. If CLAUSE_2 triggers (goal conditioning saturates): SPIDER's central mechanism-accumulation premise is falsified on this plan family; goal/intent conditioning alone achieves equal/better coverage at equal/lower cost without any compiled memory or parameter induction. Product should pivot to non-inheriting compiled execution with semantic conditioning.",
+  "product_consequence_negative": "If NEITHER clause triggers (INCONCLUSIVE): Headroom (ii+iii) > 0 but goal conditioning does not saturate reference coverage. Inheritance has a bounded economic niche (size = headroom) that requires parameter induction or cross-episode memory. Product should continue building parameterized mechanisms but with a quantified ceiling. The sum (ii+iii) becomes the maximum possible ROI for inheritance work on this substrate.",
+  "estimated_cost": {
+    "episodes_total": 1250,
+    "span_occurrences_total": 30000,
+    "http_requests_estimate": 36000,
+    "compute_minutes_estimate": 15,
+    "storage_mb_estimate": 50
+  },
+  "expected_information_gain": "This experiment changes the level of description from aggregate cost correlation (previous packet) to per-span information structure. It directly measures the epistemic composition of the compilation gap — the single most informative datum from the previous packet was the positive control's failure mode (4 model calls/episode from observationally identical but goal-distinct states). By design, this experiment makes that measurement the primary object, with a two-sided falsifier that can either vindicate inheritance (share ii > 0) or retire it (goal conditioning saturates). A result in either direction changes a product/architecture decision."
+}

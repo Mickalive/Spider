@@ -1,0 +1,69 @@
+{
+  "experiment_id": "EXP-INTEL-36272389571",
+  "lane": "intel",
+  "claim_ids": ["C-PRODUCT-ECON", "C-SEMANTIC-RESOLVE", "C-CROSSSITE"],
+  "question": "For each of the five verified deterministic-compilation systems (AgentJIT, TraceCompiler, COVENANT, Auto/AGI Compiler, TSCG): (1) ADDRESSING — what exactly binds a new task to a compiled artifact (stable internal artifact id, selector/DOM inventory, typed tool schema, recorded trace signature, or open natural-language goal resolution), and what published evidence bears on the error rate of that binding step including abstention/refusal/human-intervention numbers; (2) REGIME BOUNDARIES — the exact reported conditions under which the compiled/deterministic executor wins or loses (reuse count, witnessed-determinism fraction, novelty/residual-novelty rate, task length, build-cost and amortization accounting convention), together with any reported forgetting, staleness, or maintenance cost. For every fact: the exact quoted number with source, whether the artifact is obtainable and runnable with no LLM key, no browser, and no docker, whether the reported task distribution is comparable to a locally-served multi-endpoint HTTP application with parameterized identifiers, and an explicit statement of what remains incomparable.",
+  "hypothesis": "At least one of the five verified systems achieves goal-to-artifact binding via open natural-language resolution with a published error rate at or below the threshold that would make C-SEMANTIC-RESOLVE the load-bearing investment (i.e., the external system already occupies SPIDER's differentiated component), AND the reported regime boundaries for compiled-executor superiority are specific enough to define the exact reuse-count, novelty-rate, and build-cost conditions where SPIDER's inheritance approach must be tested against the MV6 no-memory deterministic executor baseline.",
+  "falsifier": "No verified system achieves open natural-language goal resolution with a published binding error rate (the binding step requires internal ids, selector inventories, typed schemas, or trace signatures in all five systems), OR the reported regime boundaries for compiled-executor wins are absent, incomparable to SPIDER's alias-OOD distribution, or conflated with compilation-vs-inheritance such that no clean break-even condition can be extracted for Product's economics and Frontier's headroom decomposition.",
+  "baselines": {
+    "B-MV6-NO-MEMORY-EXECUTOR": {
+      "description": "MV6-specified no-memory deterministic executor baseline from prior Intel packet: compilation cost $0.002-$0.092, hot-path latency 18.2µs-4.5ms, token cost 0 on repeats, 87.1% witnessed-deterministic, abstention/refusal present",
+      "source": "EXP-INTEL-36249068574 report.md Table 4",
+      "role": "primary_baseline"
+    },
+    "B-PRIOR-INTEL-EXTRACTIONS": {
+      "description": "Prior verified extractions for the four MV1-MV6 systems (Agentic Compilation, Auto/AGI Compiler, TraceCompiler, TSCG) with quantitative claims traced to primary sources",
+      "source": "EXP-INTEL-36249068574 result.json metrics MV1-MV6",
+      "role": "continuity_baseline"
+    },
+    "B-CROSSSITE-HIERARCHICAL": {
+      "description": "Cross-site evidence that hierarchical Intent/Stage/Action significantly outperforms flat fragment reuse on Mind2Web/WebArena/CAP benchmarks",
+      "source": "EXP-INTEL-36249068574 established: arXiv:2603.07024, arXiv:2606.17645, arXiv:2412.07958",
+      "role": "architectural_baseline"
+    }
+  },
+  "positive_control": {
+    "id": "PC-MV6-REPRODUCIBILITY",
+    "description": "Re-extract MV6 no-memory deterministic executor parameters from the same primary sources used in EXP-INTEL-36249068574 and verify exact numerical agreement",
+    "expected": "All MV6 parameters (compilation cost range, latency range, token cost, witnessed-determinism fraction, abstention/refusal presence) match prior extraction within stated precision",
+    "source_refs": ["arXiv:2604.09718", "arXiv:2607.04542", "arXiv:2608.02680", "arXiv:2605.04107", "arXiv:2604.05150"]
+  },
+  "null_control": {
+    "id": "NC-FABRICATED-BINDING-CLAIMS",
+    "description": "Search the five target system papers for three fabricated binding claims that should not appear: (a) 'zero-shot open-vocabulary goal resolution with <5% error rate', (b) 'automatic cross-site transfer without any site-specific configuration', (c) 'forgetting/staleness maintenance cost <1% of build cost'",
+    "expected": "Zero occurrences of these exact fabricated claims in the five target papers",
+    "purpose": "Verify extraction procedure does not hallucinate positive findings"
+  },
+  "measurement_validity": [
+    "MV1: Every extracted fact must have a verbatim quote with page/section/figure/table reference from a primary source (paper, technical report, or official documentation) — no secondary summaries",
+    "MV2: Runnable-locally assessment must be verified by checking repository availability, dependency list, and execution requirements — not inferred from paper claims alone",
+    "MV3: Task distribution comparability must be explicitly assessed against SPIDER's synthetic 40-task alias-OOD: locally-served multi-endpoint HTTP application with parameterized identifiers — state exactly which dimensions match and which do not",
+    "MV4: Compilation-vs-inheritance distinction must be maintained: recording/compilation phases that use behavioral traces or LLM-generated code are NOT 'compilation-bypass' — flag every system where this conflation occurs",
+    "MV5: Regime boundary extraction requires explicit numerical thresholds (reuse count, novelty rate, task length, build cost) — qualitative statements like 'scales well' or 'works for repeated tasks' are insufficient",
+    "MV6: Staleness/forgetting/maintenance costs must be explicitly reported in the source — absence of mention is recorded as 'not reported' not 'zero'"
+  ],
+  "decision_rule": {
+    "description": "Pre-declared decision rule from director_mandate",
+    "conditions": {
+      "C1_ADDRESSING_OPEN_NL": "At least one of the five systems achieves goal-to-artifact binding via open natural-language resolution (not internal id, selector inventory, typed schema, or trace signature) AND publishes a binding error rate (including abstention/refusal/human-intervention numbers)",
+      "C2_REGIME_BOUNDARIES_EXTRACTABLE": "For at least three of the five systems, the exact reported conditions for compiled-executor win/loss are extracted as numerical thresholds (reuse count, witnessed-determinism fraction, novelty rate, task length, build cost, amortization convention) with explicit source quotes",
+      "C3_COMPARABILITY_ASSESSED": "For every extracted regime boundary, an explicit statement of comparability/incomparability to SPIDER's synthetic 40-task alias-OOD (locally-served multi-endpoint HTTP with parameterized identifiers) is provided",
+      "C4_RUNNABILITY_VERIFIED": "For every system, runnability without LLM key, browser, or docker is verified and recorded",
+      "C5_CONFLATION_FLAGGED": "Every instance where a system's 'compilation' phase uses behavioral recording, LLM generation, or trace compilation (rather than pure deterministic compilation-bypass) is explicitly flagged"
+    },
+    "outcomes": {
+      "SUPPORTS": "C1 AND C2 AND C3 AND C4 AND C5 all satisfied — addressing fact redirects two lanes' budgets, regime boundaries aim Product/Frontier at the unresolved regime",
+      "FALSIFIES": "C1 fails (no open NL binding with published error rate in any system) AND C2 fails for at least 4/5 systems (regime boundaries not numerically extractable) — SPIDER's differentiated component is unoccupied, C-SEMANTIC-RESOLVE is load-bearing, regime boundaries must be discovered internally",
+      "MIXED": "C1 fails but C2-C5 partially satisfied — some regime boundaries extracted but addressing gap remains; OR C1 satisfied but C2-C5 fail — addressing occupied but regime boundaries unavailable",
+      "MEASUREMENT_INVALID": "Any MV1-MV6 validity gate fails (e.g., extraction relies on secondary sources, runnability not verified, comparability not explicitly assessed)"
+    }
+  },
+  "product_consequence_positive": "C-SEMANTIC-RESOLVE is NOT the load-bearing investment — external systems already achieve open natural-language goal-to-artifact binding with published error rates. Graph and Product should converge toward compilation-based architectures. Product's break-even measurement and Frontier's headroom decomposition target the regime where compilation wins (per extracted boundaries). Intel's verification complete for this cycle.",
+  "product_consequence_negative": "C-SEMANTIC-RESOLVE IS the load-bearing investment — no external system achieves open NL binding with published error rate; binding requires internal ids/selectors/schemas/traces with published error rates that SPIDER must beat. Product's economics and Frontier's headroom must test SPIDER's inheritance against MV6 no-memory executor on SPIDER's alias-OOD, not against external compilation. Graph must invest in semantic resolution with abstention calibration. Intel completes the verification; the architectural decision is made.",
+  "estimated_cost": {
+    "human_hours": 8,
+    "compute": "negligible (source extraction only)",
+    "external_dependencies": "arXiv access for 5 primary papers + official docs/repos for runnability verification"
+  },
+  "expected_information_gain": "High — resolves the single highest-leverage external fact (addressing mechanism + error rate) that redirects Graph and Product budgets, and extracts regime boundaries that aim Product/Frontier measurements at the unresolved regime. This is the minimal high-information experiment that can change the architectural decision."
+}
