@@ -1,0 +1,63 @@
+{
+  "experiment_id": "EXP-PRODUCT-36314204238",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Is parameter binding a MECHANISM or a string matcher? On a substrate where parameter slots are bound to identifiers drawn from a declared support distribution and a disjoint out-of-support distribution, both of which are WELL-FORMED (same shape, same namespace, plausible values, nothing malformed about them): (i) does a slot binder that infers the slot's support FROM OBSERVED VARIABILITY in the distillation observations -- rather than from a hardcoded kernel vocabulary -- bind an unseen in-support identifier correctly at a rate that beats three strong nulls (a lexical-overlap binder, a positional/regex binder, and a most-frequent-value binder), with family-blocked, site-grouped uncertainty and non-degenerate interval width; (ii) what is the SEMANTIC false-accept rate when a slot is bound to a WELL-FORMED identifier that lies outside the observed support but inside the same shape and namespace -- the exact case the current safety gate does not measure, because the Codex records that it has only ever measured syntax/punctuation rejection and intent-string mismatch -- held at or below 0.10 pooled with UNKNOWN precision >= 0.85 and global plus per-class ECE <= 0.15 with bootstrap 97.5 percent upper <= 0.18, at a confidence threshold frozen before any arm runs, with abstention scored as its own outcome class and selective accuracy reported as a coverage/selective-risk pair; (iii) is the bound mechanism still EXECUTABLE and verifiable end to end on the unseen identifier, measured as executed-and-verified rate rather than as resolution rate, with the shipped kernel probed at the executing commit and the number of EXECUTABLE resolutions obtainable from the committed kernel recorded as a raw observation; and (iv) does a resource trained only on one collection name (e.g. 'items') correctly transfer to a never-observed sibling name (e.g. 'products') when the identifier is well-formed and in-distribution, which is the cleanest available separation of learned-variability from declared-vocabulary?",
+  "hypothesis": "The current kernel's parameter binding is a string matcher using hardcoded DEFAULT_IDENTITY_FIELDS = ('collection','resource'), not a mechanism that learns slot support from observed variability. A binder that genuinely infers support from multi-collection training observations will: (a) achieve higher in-support bind accuracy than lexical-overlap, positional/regex, and most-frequent-value null binders; (b) maintain semantic false-accept rate <= 0.10 on well-formed out-of-support identifiers with calibrated uncertainty (UNKNOWN precision >= 0.85, ECE <= 0.15); (c) produce EXECUTABLE mechanisms at a rate matching its bind accuracy; and (d) transfer from 'items' to 'products' when trained on both collections' variability, but fail when trained only on 'items' with declared vocabulary.",
+  "falsifier": "Any of: (F1) The variability-inferred binder does not beat all three null binders on in-support bind accuracy (family-blocked, site-grouped 95% CI lower bound); (F2) Semantic false-accept rate on well-formed out-of-support identifiers exceeds 0.10 pooled, OR UNKNOWN precision < 0.85, OR global ECE > 0.15, OR bootstrap 97.5% upper ECE > 0.18; (F3) Executed-and-verified rate on unseen in-support identifiers falls below bind accuracy minus 0.05 (execution gap); (F4) Transfer from 'items'-only training to 'products' succeeds at >= 0.90 rate (indicating declared vocabulary, not learned variability); (F5) Substrate contract violation (surface probe fails); (F6) Any arm has degenerate success CI [1.0, 1.0] at ceiling (no discriminative power); (F7) Cost model integrity failure (counted requests deviate from declared basis); (F8) Commit hash mismatch between EXECUTE and frozen kernel.",
+  "baselines": {
+    "B-LEXICAL-OVERLAP": "Null binder: chooses slot value maximizing token overlap with goal/intent string, no training observations used",
+    "B-POSITIONAL-REGEX": "Null binder: extracts slot from fixed URL path position using regex pattern, no variability learning",
+    "B-MOST-FREQUENT-VALUE": "Null binder: always binds the most frequent training value for each slot, ignoring goal/context",
+    "B-DECLARED-VOCAB": "Current kernel behavior: binds using hardcoded DEFAULT_IDENTITY_FIELDS = ('collection','resource') vocabulary, single-collection training",
+    "B-VARIABILITY-LEARNED": "Proposed mechanism: infers slot support from observed variability across multiple collections in training, multi-collection training",
+    "B-COLD-RE-DERIVATION": "No inheritance: full re-derivation per task on the manipulable-cost substrate",
+    "B-WITHIN-EPISODE-SCRATCHPAD": "Within-episode reuse: scratchpad carries discovered mechanism within same episode, no cross-episode induction cost",
+    "B-RETRIEVAL-K5": "Retrieval baseline: top-5 semantic retrieval from prior episodes, no parameter induction"
+  },
+  "positive_control": {
+    "id": "PC-MULTI-COLLECTION-VARIABILITY",
+    "description": "Training observations span 3+ collections with distinct identifier distributions; variability-learned binder must achieve >= 0.95 in-support bind accuracy on held-out identifiers from seen collections",
+    "expected_behavior": "Bind accuracy >= 0.95, executed-verified rate >= 0.90, semantic false-accept <= 0.05"
+  },
+  "null_control": {
+    "id": "NC-SINGLE-COLLECTION-DECLARED",
+    "description": "Training observations from only ONE collection ('items'); declared-vocab binder (current kernel) and variability-learned binder both receive identical single-collection data",
+    "expected_behavior": "Variability-learned binder degrades to declared-vocab performance; both show semantic false-accept >= 0.40 on 'products' (well-formed, out-of-support); declared-vocab binder transfers to 'products' at >= 0.90 (permitted by hardcoded vocabulary)"
+  },
+  "measurement_validity": {
+    "substrate": "stdlib-only HTTP server with manipulable per-task re-derivation cost (independent latency injection, pagination depth, auth-token refresh frequency) -- NOT tied to auth/pagination dichotomy",
+    "cost_manipulation": "Re-derivation cost is a free variable set by experiment: base_cost * cost_multiplier where cost_multiplier in {1.0, 2.0, 5.0, 10.0, 20.0}; inherited execution cost fixed at 1.0 request per task",
+    "surface_contract": "Pre-arm probe verifies: (a) each cost_multiplier yields distinct mean re-derivation requests; (b) inheritance path costs exactly 1 request; (c) 401/403/404/5xx rates < 0.01; (d) latency injection is deterministic per seed",
+    "observation_preservation": "Raw HTTP request/response (status, headers, body, timing) preserved for every interaction; no derived proxy substituted",
+    "split_integrity": "Training/test split by identifier families (read/update/delete) AND by collection; site/group bootstrap respects dependency structure; no site/task identity leakage",
+    "uncertainty_integrity": "Family-stratified bootstrap B=5000 over identifier families; correlated transitions within family not treated as independent; intervals reported at 95% and 97.5%",
+    "representation_integrity": "Slot support inferred from observed path-segment value distributions across collections; no hardcoded vocabulary consulted during inference; raw path segments and state.collection preserved"
+  },
+  "decision_rule": {
+    "primary_metric": "in_support_bind_accuracy_variability_vs_nulls (family-blocked CI95 lower bound)",
+    "secondary_metrics": [
+      "semantic_false_accept_rate_pooled",
+      "unknown_precision",
+      "global_ece",
+      "ece_975_upper",
+      "executed_verified_rate",
+      "transfer_items_to_products_rate",
+      "cost_ratio_break_even_vs_scratchpad",
+      "cost_ratio_break_even_vs_retrieval_k5"
+    ],
+    "outcome_mapping": {
+      "SUPPORTS": "All F1-F4 false: variability binder beats all three nulls on in-support bind accuracy (CI95 lower); semantic false-accept <= 0.10 with UNKNOWN precision >= 0.85 and ECE <= 0.15 (97.5% upper <= 0.18); executed-verified rate within 0.05 of bind accuracy; transfer items->products < 0.90 when trained on items-only (variability failure) but >= 0.90 when trained on multi-collection (variability success)",
+      "FALSIFIES": "Any of F1-F4 true",
+      "MIXED": "Variability binder beats nulls on bind accuracy but fails semantic guard OR execution gap > 0.05 OR transfer pattern ambiguous",
+      "INCONCLUSIVE": "F5-F8 triggered OR intervals degenerate OR substrate contract violated",
+      "MEASUREMENT_INVALID": "Infrastructure failure preventing valid measurement (not a scientific outcome)"
+    },
+    "confidence_threshold": 0.85,
+    "abstention_class": "ABSTAIN scored as distinct outcome; selective accuracy = accuracy on non-abstained; coverage = 1 - abstention_rate"
+  },
+  "product_consequence_positive": "C-PARAM-INHERIT advances toward VALIDATED with evidence that parameter binding is a learned mechanism (not string matcher); enables semantic resolution (C-SEMANTIC-RESOLVE) and cross-site transfer (C-CROSSSITE) by establishing variability-learning as the induction principle; kernel's distill_parameterized can be refactored to infer identity slots from multi-collection variability; promotion gate requires this experiment PASS + independent audit PASS",
+  "product_consequence_negative": "C-PARAM-INHERIT held at EXPERIMENTAL or downgraded; current kernel's declared-vocabulary approach confirmed as string matcher; architectural pivot required: either (a) learn slot support from observed variability across collections, or (b) accept declared vocabulary with explicit semantic false-accept bounds and UNKNOWN handling; no promotion of current distill_parameterized",
+  "estimated_cost": "~50,000 HTTP requests total across all arms (15 arms x 5 cost multipliers x 500 tasks + induction + probes); ~2 CPU hours on stdlib substrate; no model calls, no browser, no Docker, no external API keys",
+  "expected_information_gain": "HIGH: This is the mechanism-level question underneath C-PARAM-INHERIT, C-PRODUCT-ECON, and C-RESIDUAL-NOVELTY. A positive result validates the induction principle for all three claims. A negative result forces architectural pivot. Either outcome changes product architecture. The well-formed semantic probe directly measures the highest-priority UNKNOWN from parent handoff. The manipulable cost ratio resolves the cheap-regime degeneracy. The three strong nulls provide the first real discrimination against the current kernel's approach."
+}
