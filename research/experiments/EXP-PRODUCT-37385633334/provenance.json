@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37385633334",
+  "lane": "product",
+  "git": {
+    "branch": "lab2/product",
+    "head": "82f33f72",
+    "pre_execute_sha": "42d91daceac738c04d0ba0959aa47a3610fd6d54",
+    "parent_handoff_experiment": "EXP-PRODUCT-36314204238",
+    "revert_verified_at_commit": "39fcfd96f5eea0fe9a7d548f869428b617dedd08"
+  },
+  "code_paths": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "config/models.json"
+  ],
+  "environment": {
+    "model_endpoint": "none (no OPENAI_API_KEY, no ANTHROPIC_API_KEY, no endpoint URL, no local model server)",
+    "playwright_installed": false,
+    "httpx_installed": false,
+    "opencode_models": "opencode/* free routing identities only; no programmatic endpoint for the lane",
+    "cwd": "/home/runner/work/Spider/Spider"
+  },
+  "fixtures": {
+    "task_bank": "absent (no frozen >=30-task mechanical-verifier bank committed to this experiment)",
+    "seeded_control_trajectory": "not executable (no counters, no browser/HTTP/model substrate)"
+  },
+  "commands": [
+    "env scan for model credentials (unset)",
+    "python3 -c 'import playwright' -> ModuleNotFoundError",
+    "python3 -c 'import httpx' -> ModuleNotFoundError",
+    "grep -nE 'def |counter|model_calls|http_requests' src/spider/kernel.py",
+    "git show --stat 39fcfd96 (four-file revert verified)"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json",
+      "sha256": "f87f51fdca39f07ae17cfbc99d83718f60226563c2b7fea642d357a1a906f737"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37385633334/freeze.json",
+      "sha256": "9a359e8f576e099881ba1dfb8490a152d05318756257422b809bd216bafb8c49"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37385633334/result.json",
+      "sha256": "50006da6fde9893b5d7fb8bcae47dd08321f948b04870f8ab10b27413be4e84f"
+    }
+  ],
+  "not_reproduced_here": [
+    "no experimental arms executed (gate failed)",
+    "no retrieval baselines executed",
+    "no freshness/delta-repair/cross-site evaluation"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37385633334",
+  "kind": "readiness_certificate_pre_execution",
+  "recorded_at": "2026-10-05T23:25:00+00:00",
+  "checks": {
+    "model_endpoint_reachable": {
+      "required": "HTTP POST to configured model endpoint returns 200 with valid completion within 30s",
+      "probes": {
+        "env_keys_scan": {
+          "OPENAI_API_KEY": "<unset>",
+          "ANTHROPIC_API_KEY": "<unset>",
+          "openai_or_anthropic_url": "<no env var set>"
+        },
+        "config_scan": {
+          "config/models.json_roles": "opencode/* free routing identities only; no gpt-4o-mini endpoint and no API key",
+          "localhost_listeners": "only DNS (127.0.0.53:53, 127.0.0.54:53) and ssh (port 22); no model endpoint listening",
+          "OPENCODE_SDK_ENDPOINT": "no programmatic credential exported to the lane process; the only reachable 'endpoint' is this transient one-shot session"
+        }
+      },
+      "verdict": "FAIL",
+      "reason": "No reachable model endpoint with credentials: OPENAI_API_KEY/ANTHROPIC_API_KEY unset, no configured endpoint URL, no local model server, playwright and httpx not installed. The frozen requirement (gpt-4o-mini or equivalent available endpoint, 200 within 30s) cannot be satisfied, so a stronger 'equivalent' default is not defensible because no programmatic endpoint exists at all."
+    },
+    "task_set_ge_30_mechanical": {
+      "required": ">=30 distinct credential-free real-Web tasks across >=5 domains with mechanical verify(task_id, trajectory)->bool postconditions, frozen before execution",
+      "probes": {
+        "experiment_dir_files": "no tasks.json, no fixtures/, no mechanical verifier bank committed to research/experiments/EXP-PRODUCT-37385633334/ (request.json, spec.json, prereg.md, freeze.json, execution_checkpoint.json, model_design.json, model_execute.json only)",
+        "repo_scan": "prior packets carry their own fixture banks (e.g. EXP-PRODUCT-35777355953/tasks.json) but none is frozen or referenced by this experiment's freeze.json; prereg section 10 required a frozen task list committed before freeze and none exists"
+      },
+      "verdict": "FAIL",
+      "reason": "No task set with mechanical verifiers was defined or frozen for this experiment; the reproducibility commitment is unmet."
+    },
+    "accounting_fidelity_control_pass": {
+      "required": "PC-ACCOUNTING-FIDELITY seeded 5-step trajectory on httpbin.org with per-trajectory counters model_calls, model_tokens, browser_actions, http_requests, retrieval_calls, verification_calls, repair_attempts, latency_ms matching ground truth within 1%",
+      "probes": {
+        "kernel_instrumentation": "src/spider/kernel.py (132 lines) defines only _matches, _template_slots, _bind, MechanismEngine init/observe/distill/resolve/verify/invalidate; no per-trajectory honest counters (model_calls, model_tokens, browser_actions, http_requests, retrieval_calls, verification_calls, repair_attempts) are implemented anywhere",
+        "counter_import_scan": "grep for model_calls/http_requests/counter across src/ returns no instrumented counter surface",
+        "seeded_trajectory": "cannot be executed: no browser substrate (playwright missing), no httpx, no endpoint"
+      },
+      "verdict": "FAIL",
+      "reason": "The accounting instrumentation the positive control must certify does not exist in the product code root, and the seeded trajectory cannot run without browser/HTTP/endpoint substrate. A counter that cannot fire cannot be certified."
+    }
+  },
+  "overall": "FAIL",
+  "termination": "per frozen decision_rule.readiness_certificate.on_failure: status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE, no arm (B-COLD, B-INSTRUCTIONS, B-RETRIEVAL, A-SPIDER, PC, NC) executes",
+  "hygiene_obligation": {
+    "task": "Revert the committed four-file 1466-line insertion-variability kernel delta (src/spider/variability.py +696, tests/test_variability.py +308, src/spider/kernel.py +441/-4, src/spider/models.py +25) while retaining evidence packets",
+    "status": "DONE (verified)",
+    "evidence": "git show 39fcfd96f5eea0fe9a7d548f869428b617dedd08 (R2 product: verdict EXP-PRODUCT-36314204238, 2026-09-27) deleted src/spider/variability.py (696 lines), tests/test_variability.py (308 lines), and restored kernel.py/models.py; working tree shows no variability files; tests/ contains only test_kernel.py; src/spider/ contains __init__.py, __pycache__, kernel.py, models.py, registry.py"
+    }
+  }
+}
