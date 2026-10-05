@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-INTEL-36314207239",
+  "frozen_at": "2026-09-27T11:05:42.152231+00:00",
+  "hashes": {
+    "prereg.md": "36ec7b92164615b59eae645e08bf79527b388ff52a5178d28afaa169f3ecf31b",
+    "request.json": "e2218a7ff7324d3aef624adaceac84d55831544f95e0895b9f76689220dd1e5e",
+    "spec.json": "391a6d451a9b0807ca900690c398cee83a374ffff582d9ffa054ad1f0def1d0d"
+  },
+  "schema_version": 1
+}

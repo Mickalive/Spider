@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36314204238",
+  "lane": "product",
+  "claim_ids": [
+    "C-PARAM-INHERIT"
+  ],
+  "stage": "EXECUTE",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "dependencies": "Python standard library only. No third-party package, no model, no LLM call, no external network.",
+    "pytest_available": false,
+    "test_command": "PYTHONPATH=src python3 -m unittest discover -s tests -v"
+  },
+  "git": {
+    "head": "1f55f7e3d8cd5631cabe982c0c04a2aa2afc6283",
+    "branch": "lab2/product",
+    "status_porcelain": "M src/spider/kernel.py\n M src/spider/models.py\n?? research/experiments/EXP-PRODUCT-36314204238/build_result.py\n?? research/experiments/EXP-PRODUCT-36314204238/model_execute.json\n?? research/experiments/EXP-PRODUCT-36314204238/provenance.json\n?? research/experiments/EXP-PRODUCT-36314204238/raw_evidence/\n?? research/experiments/EXP-PRODUCT-36314204238/report.md\n?? research/experiments/EXP-PRODUCT-36314204238/result.json\n?? research/experiments/EXP-PRODUCT-36314204238/run_experiment.py\n?? research/experiments/EXP-PRODUCT-36314204238/substrate.py\n?? src/spider/variability.py\n?? tests/test_variability.py",
+    "github_run_id": "36314204238",
+    "parent_incumbent_commit": "0852ac4d",
+    "parent_incumbent_source": "git show 0852ac4d:src/spider/kernel.py, reimplemented as the A3 declared-vocabulary arm because freeze.json pins no code hash"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "sha256": "9131a601245863ca59972812239b97e275c82de2dbaabc8a9d8cdb5d4cde6351",
+      "frozen": true
+    },
+    "spec.json": {
+      "sha256": "011e7900b2334aeb07916d9be1349a07ba07057959de2cd040c8a15f12cbe69a",
+      "frozen": true
+    },
+    "prereg.md": {
+      "sha256": "5de0826934a7c5313ff4d9b46007841c7a73056d0cfde225c75bde3e55c85618",
+      "frozen": true
+    }
+  },
+  "code_paths": {
+    "src/spider/kernel.py": "incumbent declared-vocabulary kernel plus the VariabilityBinders mixin",
+    "src/spider/variability.py": "variability induction, LOO calibration, variability binder and the three null binders",
+    "src/spider/models.py": "BindOutcome, binder status constants, Mechanism.intent_namespace_map",
+    "EXP-PRODUCT-36314204238/substrate.py": "deterministic authenticated stdlib HTTP substrate with injectable latency",
+    "EXP-PRODUCT-36314204238/run_experiment.py": "EXECUTE stage: emits raw evidence only, no interpretation",
+    "EXP-PRODUCT-36314204238/build_result.py": "DERIVED stage: metrics, frozen falsifier panel, frozen decision rule, packet outputs"
+  },
+  "hashes": {
+    "prereg.md": "5de0826934a7c5313ff4d9b46007841c7a73056d0cfde225c75bde3e55c85618",
+    "request.json": "9131a601245863ca59972812239b97e275c82de2dbaabc8a9d8cdb5d4cde6351",
+    "run_experiment.py": "18132272758e9489b4ee1e7e51e18de30df96aa918d52917f4d4463df5fba4da",
+    "spec.json": "011e7900b2334aeb07916d9be1349a07ba07057959de2cd040c8a15f12cbe69a",
+    "src/spider/kernel.py": "7a0b87307e4d5fd0c4031d044aaea49b81079f63eebd0cf6f66f4daadda82454",
+    "src/spider/models.py": "2c08b4f69c418f65a0ec509f95115297b9812cafe110f447053661d16cef573d",
+    "src/spider/variability.py": "6f1fa7d19206af12e9ae1f79db2d972a6ad1b7447a77795d454a508c46448fd0",
+    "substrate.py": "6ad7e1ed8f6f2143ee132073526adbd006516d7f58767acdba0044cc00e9140d"
+  },
+  "fixtures": {
+    "training_observations": {
+      "multi": 450,
+      "single_items": 150,
+      "identifiers": "151-200 across items, products, orders",
+      "requests": "3 per observation (list, then two verb actions)"
+    },
+    "test_tasks": {
+      "in_support": "identifiers 201-250 of items, products, orders",
+      "out_of_support": "widgets 151-200, syntactically well formed and present in the substrate",
+      "per_cell": 100,
+      "families": [
+        "read",
+        "update",
+        "delete"
+      ],
+      "frames": [
+        "R",
+        "B"
+      ],
+      "cost_multipliers": [
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        20.0
+      ]
+    },
+    "substrate": "127.0.0.1 ephemeral port, bearer token auth, 0.2 ms base latency x multiplier, deterministic state"
+  },
+  "commands": [
+    "cd research/experiments/EXP-PRODUCT-36314204238",
+    "PYTHONPATH=../../.. python3 run_experiment.py   # EXECUTE, writes raw_evidence/ only",
+    "python3 build_result.py                          # DERIVED, writes derived.json, mechanisms.json, result.json, report.md, provenance.json",
+    "PYTHONPATH=../../.. python3 -m unittest discover -s ../../../tests -v"
+  ],
+  "substrate_contract": {
+    "all_pass": true,
+    "n_checks": 5,
+    "failing_checks": [],
+    "measured": null
+  },
+  "reproduction_notes": [
+    "run_experiment.py writes only raw_evidence/*.jsonl and *.json; it computes no metrics and applies no decision rule.",
+    "build_result.py reads only raw_evidence/ and is deterministic: no randomness outside the seeded bootstrap (B=5000, seed 42).",
+    "The bootstrap resamples identifiers within (family, collection) strata, per prereg section 8.1.",
+    "A4 is scored at the better of two measured tie orders; both raw series are preserved so an auditor can score it either way."
+  ],
+  "not_reproduced_here": [
+    "Multi-template routes, multi-site transfer, real browser or JS substrates, any LLM-in-the-loop economics: all outside this frozen design and outside this substrate's validity history."
+  ]
+}

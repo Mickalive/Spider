@@ -1,0 +1,1176 @@
+{
+ "artifacts": [
+  {
+   "bytes": 151991,
+   "path": "analyze_36314197314.py",
+   "role": "code",
+   "sha256": "d4a8e12308b3b9415e6785412d2e44e25cc1b34827e723c43294bcc42632bf17"
+  },
+  {
+   "bytes": 75886,
+   "path": "derived/baseline_predictions.jsonl",
+   "role": "derived",
+   "sha256": "6f41ea9dd6fbcd90af3699ef9d30654a86bcd268f511f2580c419e1251eb7190"
+  },
+  {
+   "bytes": 16864,
+   "path": "derived/bootstrap_cis.json",
+   "role": "derived",
+   "sha256": "07330dfa00a5a232b713cf8ae4e1647f39c1c24fad1c7dd1712427d8b3366557"
+  },
+  {
+   "bytes": 23716,
+   "path": "derived/control_predictions.jsonl",
+   "role": "derived",
+   "sha256": "fdcba3ada1238cd31c5aee0bd5ba8a4141e88f82ff6457b3598ddd3c62e5dd36"
+  },
+  {
+   "bytes": 7165,
+   "path": "derived/controls.json",
+   "role": "derived",
+   "sha256": "82be9d70f0e504ff364b56fc130a5292d0d8205cf00904a92aa5dd8373a49c4b"
+  },
+  {
+   "bytes": 4455,
+   "path": "derived/decision_readings.json",
+   "role": "derived",
+   "sha256": "5d452ed4450fe8705d5e47beb64a33aa64bfe9a5e3a2d5b5045dfde89fc0be60"
+  },
+  {
+   "bytes": 81398,
+   "path": "derived/mechanism_pool.json",
+   "role": "derived",
+   "sha256": "2a75ab1f816bd111aef84d5f4a0bbf05c6c38327d0509ff4c9d347de41c386a1"
+  },
+  {
+   "bytes": 14356,
+   "path": "derived/metrics.json",
+   "role": "derived",
+   "sha256": "bba11b5f8f1b89eb293eea5947c9ca4a7a835eaa720eee4bdb8882a3c387ae95"
+  },
+  {
+   "bytes": 16682,
+   "path": "derived/per_template_metrics.json",
+   "role": "derived",
+   "sha256": "08c5f2c05b3a513f2b640f13d14d240d839bf82c129580f067049e426f618db2"
+  },
+  {
+   "bytes": 20804,
+   "path": "derived/permutation_nulls.json",
+   "role": "derived",
+   "sha256": "f1cb40cdf11912cd6b13936825052e3b1cd33588800cf5b5a505c65a3d48566d"
+  },
+  {
+   "bytes": 1261811,
+   "path": "derived/permutation_nulls_primary.jsonl",
+   "role": "derived",
+   "sha256": "160ae64dcf37704869f224d314ecc46a68efd8bb295cf5c2225f8df16649d428"
+  },
+  {
+   "bytes": 1187,
+   "path": "derived/power_realisation.json",
+   "role": "derived",
+   "sha256": "85ab8f2ec5c62fc102aa33df5984e65c71754da9b496c9b671becfc92e2c23b2"
+  },
+  {
+   "bytes": 32493,
+   "path": "derived/predictions.jsonl",
+   "role": "derived",
+   "sha256": "f005230eed691a845565ec0629392f5ed418ea1e23316a05948099cec91b56e4"
+  },
+  {
+   "bytes": 181096,
+   "path": "derived/response_signatures.jsonl",
+   "role": "derived",
+   "sha256": "dd414afdade26946ca01a6019306ef0898e164dc3bb0de0e8b0fc2b277aaf205"
+  },
+  {
+   "bytes": 13527,
+   "path": "derived/split.json",
+   "role": "derived",
+   "sha256": "8b1ce8e475f4dc69aaa45c92b2161a67dfd43b0bb43269a539e9460e55ec4f96"
+  },
+  {
+   "bytes": 2452,
+   "path": "derived/validity_gates.json",
+   "role": "derived",
+   "sha256": "61c5f5b5d7dfb0b8e94b145c6668e5ccb09f908e12e7ef8bcf911e7a3955341b"
+  },
+  {
+   "bytes": 18916,
+   "path": "execute_36314197314.py",
+   "role": "code",
+   "sha256": "4afd23704e7a9196cff0ae302ccee533b20e70bf1d5bdbd234df689929eb34db"
+  },
+  {
+   "bytes": 224,
+   "path": "execution_checkpoint.json",
+   "role": "other",
+   "sha256": "d5aaebd8b97bbc06de1eca7dcba4f36100e87a8e77893951b985815a59f0e1d0"
+  },
+  {
+   "bytes": 399,
+   "path": "freeze.json",
+   "role": "frozen_input",
+   "sha256": "401af9775edfe1faaa6adb6678c58101ccfe31186c7257250822e7d16dee0216"
+  },
+  {
+   "bytes": 5385,
+   "path": "frozen_origins.json",
+   "role": "fixture",
+   "sha256": "75689d070ed3e207f54498c0400d786e4e242cfeec032a222d46c94ed80dbd3a"
+  },
+  {
+   "bytes": 241,
+   "path": "model_design.json",
+   "role": "other",
+   "sha256": "a7fe44569fb314610bd7ad00217f19ed18232e329f18b9d48f265a0559cf9160"
+  },
+  {
+   "bytes": 246,
+   "path": "model_execute.json",
+   "role": "fixture",
+   "sha256": "c2375d5924a5c52045d0b33d6df6bc7ebe1ca7f8d3b2732bfc3be225c9fc2d89"
+  },
+  {
+   "bytes": 26085,
+   "path": "prereg.md",
+   "role": "frozen_input",
+   "sha256": "902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1"
+  },
+  {
+   "bytes": 468777,
+   "path": "raw/collection_log.jsonl",
+   "role": "raw",
+   "sha256": "1bdc25620007148f0d4811d36273b2b53f78d1d30aef754c766cccad9787f4fb"
+  },
+  {
+   "bytes": 1677,
+   "path": "raw/frozen_input_verification.json",
+   "role": "raw",
+   "sha256": "a3e5ad5eba7b86b5110bef652673f7f63d4833f3814c5e5049f3496d3ab58ea7"
+  },
+  {
+   "bytes": 901,
+   "path": "raw/request_ledger_summary.json",
+   "role": "raw",
+   "sha256": "dc566f7133927659bb75faec4cd5d9c4c2f255524b5718c63b459721b596d780"
+  },
+  {
+   "bytes": 2823,
+   "path": "raw/screen_reachability.json",
+   "role": "raw",
+   "sha256": "edbb336010352d75435aba73c99576a5d0d2f956cdbf0cfc68e1727b06c18091"
+  },
+  {
+   "bytes": 6356,
+   "path": "raw/template_inventory.json",
+   "role": "raw",
+   "sha256": "b2d414d3d21589127832fb648340d6e077b721ecd66b117cea8f45334c5864e4"
+  },
+  {
+   "bytes": 120595,
+   "path": "raw/transitions_index.json",
+   "role": "raw",
+   "sha256": "5ddfa94a3ace639ae62569b20edf3d7471c19fb4a5b94eaaca114c27c7edcd07"
+  },
+  {
+   "bytes": 21481,
+   "path": "request.json",
+   "role": "frozen_input",
+   "sha256": "2bafe3168616eeb0c6293188b5bd5024dbeaddf090db3039ac9b9ab81f826da6"
+  },
+  {
+   "bytes": 10510,
+   "path": "spec.json",
+   "role": "frozen_input",
+   "sha256": "9757f2f6f3d0a822d98a32479d3a18c913cc5e0a52aa458502fa6185a0c13b0e"
+  },
+  {
+   "bytes": 2379,
+   "path": "verify_frozen_inputs.py",
+   "role": "code",
+   "sha256": "22ade36863b114663841ee4bb626b2a67bfc529cc423dc5920bee8f8a7473ce7"
+  },
+  {
+   "bytes": 25755,
+   "path": "verify_result_36314197314.py",
+   "role": "code",
+   "sha256": "4b1e561d56db2e5ca9b6467e6fcb4455b22d741959b74ffbaf26d397a102d38b"
+  }
+ ],
+ "controls": {
+  "NC_INDEPENDENT_IID": {
+   "evidence": "derived/controls.json, raw/collection_log.jsonl",
+   "expected_behavior": "no structure: all predictors at or below B3 on i.i.d. responses drawn per site from the TRAIN marginal (permutation p > 0.05)",
+   "note": "Under the frozen criterion the treatment significantly beats B3 on the i.i.d. data (+2.227 nats on log_score_categorical, -0.177 on Brier), so prereg s13 condition 8 fails. Derivation D10 shows this criterion is confounded: the i.i.d. generator is per-site, while B3 is a GLOBAL cold re-derivation, so ANY predictor conditioned on (site, action_template) - which prereg s8.2 REQUIRES of B1 and which the treatment inherits - beats B3 on this data without reading any mechanism. The confound-free reference is the per-site marginal oracle, which is the strongest possible predictor of the actual generator; against it the treatment is WORSE (-1.804 nats), i.e. no mechanism-specific structure is hallucinated. The failing control therefore diagnoses site conditioning, not a broken mechanism reader.",
+   "observed_behavior": {
+    "confound_free_vs_per_site_marginal_oracle": {
+     "brier_categorical": {
+      "per_site_marginal_oracle": 0.10415798103688936,
+      "treatment": 0.11670017582808588,
+      "treatment_minus_oracle": 0.012542194791196518
+     },
+     "log_density_joint": {
+      "per_site_marginal_oracle": 33.93899466647521,
+      "treatment": 32.09629292920702,
+      "treatment_minus_oracle": -1.842701737268193
+     },
+     "log_score_categorical": {
+      "per_site_marginal_oracle": -2.869581598212493,
+      "treatment": -4.673734006066625,
+      "treatment_minus_oracle": -1.804152407854132
+     },
+     "mean_sq_std_residual": {
+      "per_site_marginal_oracle": 0.11578064229273678,
+      "treatment": 0.13552048646655362,
+      "treatment_minus_oracle": 0.019739844173816842
+     }
+    },
+    "frozen_criterion_vs_B3": {
+     "brier_categorical": {
+      "B1": 0.11629149400721875,
+      "B2": 0.1342714268272431,
+      "B3": 0.2932864394928447,
+      "placebo": 0.2999494742710264,
+      "treatment": 0.11670017582808588,
+      "treatment_minus_B3": -0.17658626366475882
+     },
+     "log_density_joint": {
+      "B1": 32.072910022850486,
+      "B2": 29.90398341449169,
+      "B3": 24.586365837908133,
+      "placebo": 15.55267576422017,
+      "treatment": 32.09629292920702,
+      "treatment_minus_B3": 7.509927091298884
+     },
+     "log_score_categorical": {
+      "B1": -4.679348229932033,
+      "B2": -6.51742164726307,
+      "B3": -6.900891870536215,
+      "placebo": -11.971563896131977,
+      "treatment": -4.673734006066625,
+      "treatment_minus_B3": 2.22715786446959
+     },
+     "mean_sq_std_residual": {
+      "B1": 0.13547181919539272,
+      "B2": 0.1386676094812386,
+      "B3": 0.43144688823573707,
+      "placebo": 0.32043650012456915,
+      "treatment": 0.13552048646655362,
+      "treatment_minus_B3": -0.29592640176918344
+     }
+    }
+   },
+   "status": "FAIL"
+  },
+  "NC_PLACEBO_PERMUTED_MECHANISM": {
+   "evidence": "derived/controls.json, derived/permutation_nulls.json",
+   "expected_behavior": "not detected: the placebo must not significantly outperform baselines (permutation p > 0.05 on both metrics)",
+   "note": "The placebo is a re-derived predictor driven by permuted declarations, not a relabeling of the treatment's outputs: it differs from the treatment on 30 of 66 held-out cases and its score varies over 201 distinct values across 201 independent permutations, so it is not an invariant statistic. It performs far BELOW the baselines, so the frozen criterion ('must not significantly outperform baselines') is satisfied.",
+   "observed_behavior": {
+    "brier_categorical": 0.32428404730822513,
+    "log_score_categorical": -13.145269086390382,
+    "n_distinct_placebo_scores_log_score_categorical": 201,
+    "n_heldout_cases_where_placebo_differs_from_treatment": 30,
+    "n_placebo_permutations": 201,
+    "placebo_minus_b3_brier_categorical": 0.02473404012247893,
+    "placebo_minus_b3_log_score_categorical": -4.009170310089475,
+    "treatment_percentile_within_placebo_distribution": 0.0
+   },
+   "status": "PASS"
+  },
+  "PC_PLANTED_MECHANISM": {
+   "evidence": "derived/controls.json, derived/metrics.json",
+   "expected_behavior": "detected: log predictive density above the frozen threshold and Brier below 0.1 on 10 never-observed planted identifiers",
+   "note": "s13 formal threshold met on both metrics under both metric readings (joint density 41.334 and categorical log score -0.123, both > -0.5; Brier 0.00024 < 0.1). The s9.1 threshold of > 2.0 nats is arithmetically unreachable for ANY predictor under the frozen 10-component signature with EPS=0.02: the maximum attainable log score is 10*log(1-EPS) = -0.2020 nats.",
+   "observed_behavior": {
+    "brier_categorical": 0.00024373337940395315,
+    "log_density_joint": 41.3338877343889,
+    "log_density_joint_global_bandwidth_alternative": 64.35973866432936,
+    "log_score_categorical": -0.12312145946864247,
+    "n_test_identifiers": 10,
+    "n_train_identifiers": 20
+   },
+   "status": "PASS"
+  }
+ },
+ "experiment_id": "EXP-PHYSICS-36314197314",
+ "lane": "physics",
+ "metrics": {
+  "arms": {
+   "B1_MARKOV_1ST_ORDER": {
+    "brier_categorical": 0.07358718114654486,
+    "log_density_joint": 33.98504779239794,
+    "log_score_categorical": -4.049728211833437,
+    "mean_sq_std_residual": 0.057563756666324545
+   },
+   "B2_TFIDF_K5_RETRIEVAL_PREREG_LITERAL": {
+    "brier_categorical": 0.10226824043917901,
+    "log_density_joint": 31.619211413440926,
+    "log_score_categorical": -5.938628643713724,
+    "mean_sq_std_residual": 0.07774386625388612
+   },
+   "B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "brier_categorical": 0.09455750901872756,
+    "log_density_joint": 31.73196699833332,
+    "log_score_categorical": -5.795560256973332,
+    "mean_sq_std_residual": 0.07519200573535031
+   },
+   "B3_COLD_RERIVATION": {
+    "brier_categorical": 0.2995500071857462,
+    "log_density_joint": 23.001173436021855,
+    "log_score_categorical": -9.136098776300907,
+    "mean_sq_std_residual": 0.3928873402441853
+   },
+   "NC_PLACEBO_PERMUTED_MECHANISM": {
+    "brier_categorical": 0.32428404730822513,
+    "log_density_joint": 15.469434739163258,
+    "log_score_categorical": -13.145269086390382,
+    "mean_sq_std_residual": 0.238657165661861
+   },
+   "TREATMENT_INHERITED_MECHANISM": {
+    "brier_categorical": 0.07338133888200837,
+    "log_density_joint": 34.20760968222681,
+    "log_score_categorical": -4.033952953706143,
+    "mean_sq_std_residual": 0.04971718505258329
+   }
+  },
+  "bandwidth_sensitivity_log_density_joint": {
+   "0.25": {
+    "B1_MARKOV_1ST_ORDER": 30.69152703051847,
+    "B2_TFIDF_K5_RETRIEVAL_STRONG": 20.3416501014839,
+    "B3_COLD_RERIVATION": -69.41335964602166,
+    "PC_PLANTED_MECHANISM": 48.26535953998836,
+    "TREATMENT_INHERITED_MECHANISM": 34.10101181679352
+   },
+   "1.00": {
+    "B1_MARKOV_1ST_ORDER": 33.98504779239794,
+    "B2_TFIDF_K5_RETRIEVAL_STRONG": 31.73196699833332,
+    "B3_COLD_RERIVATION": 23.001173436021855,
+    "PC_PLANTED_MECHANISM": 41.3338877343889,
+    "TREATMENT_INHERITED_MECHANISM": 34.20760968222681
+   },
+   "16.00": {
+    "B1_MARKOV_1ST_ORDER": 20.801107593883188,
+    "B2_TFIDF_K5_RETRIEVAL_STRONG": 19.08570466815642,
+    "B3_COLD_RERIVATION": 15.73542546189299,
+    "PC_PLANTED_MECHANISM": 27.470944123189998,
+    "TREATMENT_INHERITED_MECHANISM": 20.891582978926643
+   },
+   "4.00": {
+    "B1_MARKOV_1ST_ORDER": 27.69263802226593,
+    "B2_TFIDF_K5_RETRIEVAL_STRONG": 25.94560698663693,
+    "B3_COLD_RERIVATION": 22.278826935900092,
+    "PC_PLANTED_MECHANISM": 34.402415928789445,
+    "TREATMENT_INHERITED_MECHANISM": 27.789157061169853
+   }
+  },
+  "contrasts_placebo": {
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "observed": 0.2506968661616802,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 1.0
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "observed": 0.22972653828949754,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.9999000099990001
+   },
+   "PLACEBO_MINUS_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "observed": 0.02473404012247885,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 1.0
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": {
+    "observed": -18.51561305323469,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.999000099990001
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "observed": -16.26253225917007,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.9642035796420358
+   },
+   "PLACEBO_MINUS_LOG_DENSITY_JOINT_B3_COLD_RERIVATION": {
+    "observed": -7.531738696858597,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 0.41525847415258477
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "observed": -9.095540874556946,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 1.0
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "observed": -7.349708829417049,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.9999000099990001
+   },
+   "PLACEBO_MINUS_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "observed": -4.009170310089476,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 1.0
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": {
+    "observed": 0.18109340899553641,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.055194480551944806
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "observed": 0.16346515992651067,
+    "p_site_grouped": 1.0,
+    "p_trajectory_grouped": 0.0005999400059994001
+   },
+   "PLACEBO_MINUS_MEAN_SQ_STD_RESIDUAL_B3_COLD_RERIVATION": {
+    "observed": -0.15423017458232427,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 9.999000099990002e-05
+   }
+  },
+  "contrasts_primary": {
+   "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "ci95_high": 0.0,
+    "ci95_low": -0.0006792794729703677,
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "observed": -0.00020584226453647717,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 0.0010998900109989002,
+    "site_balanced_observed": -0.00022642649099012375
+   },
+   "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "ci95_high": -0.004324277556812041,
+    "ci95_low": -0.05027200847065538,
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "observed": -0.021176170136719172,
+    "p_site_grouped": 0.4283571642835716,
+    "p_trajectory_grouped": 0.0780921907809219,
+    "site_balanced_observed": -0.020865177833080308
+   },
+   "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+    "ci95_high": -0.17540623535737965,
+    "ci95_low": -0.37609814343159526,
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "brier_categorical",
+    "observed": -0.22616866830373789,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 0.00019998000199980003,
+    "site_balanced_observed": -0.2746835197820191
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+    "ci95_high": 0.052058351820068065,
+    "ci95_low": 1.163090787702545e-16,
+    "comparator": "B1_MARKOV_1ST_ORDER",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "observed": 0.015775258127293593,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 0.00019998000199980003,
+    "site_balanced_observed": 0.01735278394002284
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+    "ci95_high": 2.959483062018149,
+    "ci95_low": 0.3123081017442649,
+    "comparator": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "observed": 1.7616073032671906,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 0.054594540545945404,
+    "site_balanced_observed": 1.494080789327907
+   },
+   "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+    "ci95_high": 6.896646734404412,
+    "ci95_low": 4.090714396103777,
+    "comparator": "B3_COLD_RERIVATION",
+    "favourable": true,
+    "metric": "log_score_categorical",
+    "observed": 5.102145822594766,
+    "p_site_grouped": 9.999000099990002e-05,
+    "p_trajectory_grouped": 9.999000099990002e-05,
+    "site_balanced_observed": 5.633892434980761
+   }
+  },
+  "frozen_primary_metric_name": "held_out_log_predictive_density (spec.json decision_rule); realized as the bandwidth-free proper score log_score_categorical, with log_density_joint reported alongside under an explicit bandwidth rule (D2)",
+  "frozen_secondary_metric_name": "brier_score (prereg s10.2: per-feature Brier, mean over features), realized as brier_categorical",
+  "iid_null": {
+   "n_draws": 66,
+   "observed": {
+    "B1_MARKOV_1ST_ORDER": {
+     "brier_categorical": 0.11629149400721875,
+     "log_density_joint": 32.072910022850486,
+     "log_score_categorical": -4.679348229932033,
+     "mean_sq_std_residual": 0.13547181919539272
+    },
+    "B2_TFIDF_K5_RETRIEVAL_PREREG_LITERAL": {
+     "brier_categorical": 0.1348548855204218,
+     "log_density_joint": 29.84074349739071,
+     "log_score_categorical": -6.545540017269285,
+     "mean_sq_std_residual": 0.14348084306750883
+    },
+    "B2_TFIDF_K5_RETRIEVAL_STRONG": {
+     "brier_categorical": 0.1342714268272431,
+     "log_density_joint": 29.90398341449169,
+     "log_score_categorical": -6.51742164726307,
+     "mean_sq_std_residual": 0.1386676094812386
+    },
+    "B3_COLD_RERIVATION": {
+     "brier_categorical": 0.2932864394928447,
+     "log_density_joint": 24.586365837908133,
+     "log_score_categorical": -6.900891870536215,
+     "mean_sq_std_residual": 0.43144688823573707
+    },
+    "NC_PLACEBO_PERMUTED_MECHANISM": {
+     "brier_categorical": 0.2999494742710264,
+     "log_density_joint": 15.55267576422017,
+     "log_score_categorical": -11.971563896131977,
+     "mean_sq_std_residual": 0.32043650012456915
+    },
+    "PER_SITE_MARGINAL_ORACLE": {
+     "brier_categorical": 0.10415798103688936,
+     "log_density_joint": 33.93899466647521,
+     "log_score_categorical": -2.869581598212493,
+     "mean_sq_std_residual": 0.11578064229273678
+    },
+    "TREATMENT_INHERITED_MECHANISM": {
+     "brier_categorical": 0.11670017582808588,
+     "log_density_joint": 32.09629292920702,
+     "log_score_categorical": -4.673734006066625,
+     "mean_sq_std_residual": 0.13552048646655362
+    }
+   }
+  },
+  "metric_definitions": {
+   "brier_categorical": "per case; multiclass Brier score of the joint discrete response signature, 1 - 2*p(y) + sum_{j,v} p(j,v)^2 (PRIMARY)",
+   "log_density_joint": "nats per held-out case; mixture log density of the true response signature over 10 discrete + 5 continuous components",
+   "log_score_categorical": "nats per held-out case; mixture log probability mass of the true 10-component discrete response signature (PRIMARY)",
+   "mean_sq_std_residual": "per case; mean squared standardized residual of the continuous components under the mixture mean (scale-free diagnostic)"
+  },
+  "pc_threshold_attainability": {
+   "max_attainable_log_score_categorical_any_predictor": -0.20202707317519467,
+   "s13_attainable": true,
+   "s13_threshold_nats": -0.5,
+   "s9_1_attainable": false,
+   "s9_1_threshold_nats": 2.0
+  },
+  "placebo_permutation_distribution": {
+   "brier_categorical": {
+    "max": 0.5944121581180932,
+    "mean": 0.3755823055096164,
+    "min": 0.07899202963139333,
+    "n_distinct": 201,
+    "n_placebo_arms_beating_treatment": 0,
+    "n_placebo_permutations": 201,
+    "placebo_minus_b3_mean": 0.0760322983238702,
+    "sd": 0.08874329450654372,
+    "treatment_percentile_within_placebo_distribution": 0.0
+   },
+   "log_density_joint": {
+    "max": 30.880869829284283,
+    "mean": 11.99730758393026,
+    "min": -4.262084226462265,
+    "n_distinct": 201,
+    "n_placebo_arms_beating_treatment": 0,
+    "n_placebo_permutations": 201,
+    "placebo_minus_b3_mean": -11.003865852091595,
+    "sd": 6.022853919563963,
+    "treatment_percentile_within_placebo_distribution": 0.0
+   },
+   "log_score_categorical": {
+    "max": -4.049728211833437,
+    "mean": -14.766544187979857,
+    "min": -22.836532973918185,
+    "n_distinct": 201,
+    "n_placebo_arms_beating_treatment": 0,
+    "n_placebo_permutations": 201,
+    "placebo_minus_b3_mean": -5.63044541167895,
+    "sd": 3.240383159340352,
+    "treatment_percentile_within_placebo_distribution": 0.0
+   },
+   "mean_sq_std_residual": {
+    "max": 0.8577390566249549,
+    "mean": 0.43792245794112933,
+    "min": 0.08141417316200929,
+    "n_distinct": 201,
+    "n_placebo_arms_beating_treatment": 0,
+    "n_placebo_permutations": 201,
+    "placebo_minus_b3_mean": 0.045035117696944016,
+    "sd": 0.16034905230559693,
+    "treatment_percentile_within_placebo_distribution": 0.0
+   }
+  },
+  "positive_control": {
+   "brier_categorical": 0.00024373337940395315,
+   "log_density_joint": 41.3338877343889,
+   "log_score_categorical": -0.12312145946864247,
+   "mean_sq_std_residual": 0.0,
+   "n_test_identifiers": 10,
+   "n_train_identifiers": 20,
+   "per_case": {
+    "brier_categorical": [
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940394312,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424
+    ],
+    "log_density_joint": [
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889,
+     41.3338877343889
+    ],
+    "log_score_categorical": [
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249
+    ],
+    "mean_sq_std_residual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "positive_control_global_bandwidth_alternative": {
+   "brier_categorical": 0.00024373337940395315,
+   "log_density_joint": 64.35973866432936,
+   "log_score_categorical": -0.12312145946864247,
+   "mean_sq_std_residual": 0.0,
+   "per_case": {
+    "brier_categorical": [
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940394312,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424,
+     0.00024373337940395424
+    ],
+    "log_density_joint": [
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936,
+     64.35973866432936
+    ],
+    "log_score_categorical": [
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249,
+     -0.12312145946864249
+    ],
+    "mean_sq_std_residual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "primary_metric_ids": [
+   "log_score_categorical",
+   "brier_categorical"
+  ],
+  "sample": {
+   "infrastructure_failure_fraction": 0.0,
+   "n_action_templates_total": 15,
+   "n_bodies_truncated_at_4096": 17,
+   "n_test": 66,
+   "n_test_sites": 5,
+   "n_test_templates": 11,
+   "n_train": 158,
+   "n_transitions_total": 224,
+   "n_transport_failures": 0,
+   "prereg_s12_assumed_sites": 20,
+   "prereg_s12_implied_heldout_cases": 900
+  }
+ },
+ "observations": [
+  {
+   "action_template": "api.agify.io::/?name=Alex|{country_id}",
+   "body_length_max": 33.0,
+   "body_length_min": 33.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.agify.io",
+   "status_code_counts": {
+    "429": 20
+   }
+  },
+  {
+   "action_template": "api.agify.io::/|{name}",
+   "body_length_max": 33.0,
+   "body_length_min": 33.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.agify.io",
+   "status_code_counts": {
+    "429": 20
+   }
+  },
+  {
+   "action_template": "api.genderize.io::/?name=Alex|{country_id}",
+   "body_length_max": 33.0,
+   "body_length_min": 33.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.genderize.io",
+   "status_code_counts": {
+    "429": 20
+   }
+  },
+  {
+   "action_template": "api.genderize.io::/|{name}",
+   "body_length_max": 72.0,
+   "body_length_min": 33.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.genderize.io",
+   "status_code_counts": {
+    "200": 15,
+    "429": 5
+   }
+  },
+  {
+   "action_template": "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+   "body_length_max": 4995.0,
+   "body_length_min": 118.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.github.com",
+   "status_code_counts": {
+    "200": 1,
+    "404": 19
+   }
+  },
+  {
+   "action_template": "api.github.com::/users/{id_0}|{id_0}",
+   "body_length_max": 1287.0,
+   "body_length_min": 89.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "api.github.com",
+   "status_code_counts": {
+    "200": 9,
+    "404": 11
+   }
+  },
+  {
+   "action_template": "api.nationalize.io::/",
+   "body_length_max": 36.0,
+   "body_length_min": 36.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 1,
+   "n_test": 0,
+   "n_train": 1,
+   "site": "api.nationalize.io",
+   "status_code_counts": {
+    "422": 1
+   }
+  },
+  {
+   "action_template": "ifconfig.me::/all",
+   "body_length_max": 290.0,
+   "body_length_min": 290.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 1,
+   "n_test": 0,
+   "n_train": 1,
+   "site": "ifconfig.me",
+   "status_code_counts": {
+    "200": 1
+   }
+  },
+  {
+   "action_template": "ifconfig.me::/all.json",
+   "body_length_max": 233.0,
+   "body_length_min": 233.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 1,
+   "n_test": 0,
+   "n_train": 1,
+   "site": "ifconfig.me",
+   "status_code_counts": {
+    "200": 1
+   }
+  },
+  {
+   "action_template": "ifconfig.me::/headers/{id_0}|{id_0}",
+   "body_length_max": 9.0,
+   "body_length_min": 9.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "ifconfig.me",
+   "status_code_counts": {
+    "404": 20
+   }
+  },
+  {
+   "action_template": "ifconfig.me::/ip",
+   "body_length_max": 12.0,
+   "body_length_min": 12.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 1,
+   "n_test": 0,
+   "n_train": 1,
+   "site": "ifconfig.me",
+   "status_code_counts": {
+    "200": 1
+   }
+  },
+  {
+   "action_template": "randomuser.me::/api/|{exc}",
+   "body_length_max": 1203.0,
+   "body_length_min": 912.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "randomuser.me",
+   "status_code_counts": {
+    "200": 20
+   }
+  },
+  {
+   "action_template": "randomuser.me::/api/|{nat}",
+   "body_length_max": 1208.0,
+   "body_length_min": 1128.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "randomuser.me",
+   "status_code_counts": {
+    "200": 20
+   }
+  },
+  {
+   "action_template": "randomuser.me::/api/|{results}",
+   "body_length_max": 336603.0,
+   "body_length_min": 1168.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "randomuser.me",
+   "status_code_counts": {
+    "200": 20
+   }
+  },
+  {
+   "action_template": "randomuser.me::/api/|{seed}",
+   "body_length_max": 1219.0,
+   "body_length_min": 1149.0,
+   "kind": "response_signature_by_action_template",
+   "n_requests": 20,
+   "n_test": 6,
+   "n_train": 14,
+   "site": "randomuser.me",
+   "status_code_counts": {
+    "200": 20
+   }
+  },
+  {
+   "action_templates_with_nonzero_delta": [
+    "api.github.com::/repos/{id_1}/{id_2}|{id_2}",
+    "api.github.com::/users/{id_0}|{id_0}"
+   ],
+   "delta_log_score_categorical_B1_by_template": {
+    "api.github.com::/repos/{id_1}/{id_2}|{id_2}": 0.13012934626903075,
+    "api.github.com::/users/{id_0}|{id_0}": 0.0433984931311957
+   },
+   "kind": "treatment_vs_B1_localisation",
+   "n_test_cases": 66,
+   "n_test_cases_where_treatment_differs_from_B1": 12,
+   "note": "on the other 9 of 11 held-out templates the frozen mechanism selection returns the same predictor as the first-order Markov baseline, so the delta is exactly 0",
+   "per_template_delta_and_case_counts": {
+    "api.agify.io::/?name=Alex|{country_id}": {
+     "delta_log_score_categorical_B1": 5.551115123125783e-17,
+     "n_cases": 6,
+     "n_distinct_bodies": 1,
+     "statuses": "429"
+    },
+    "api.agify.io::/|{name}": {
+     "delta_log_score_categorical_B1": -5.551115123125783e-17,
+     "n_cases": 6,
+     "n_distinct_bodies": 1,
+     "statuses": "429"
+    },
+    "api.genderize.io::/?name=Alex|{country_id}": {
+     "delta_log_score_categorical_B1": 5.551115123125783e-17,
+     "n_cases": 6,
+     "n_distinct_bodies": 1,
+     "statuses": "429"
+    },
+    "api.genderize.io::/|{name}": {
+     "delta_log_score_categorical_B1": 5.921189464667501e-16,
+     "n_cases": 6,
+     "n_distinct_bodies": 5,
+     "statuses": "200,429"
+    },
+    "api.github.com::/repos/{id_1}/{id_2}|{id_2}": {
+     "delta_log_score_categorical_B1": 0.13012934626903075,
+     "n_cases": 6,
+     "n_distinct_bodies": 1,
+     "statuses": "404"
+    },
+    "api.github.com::/users/{id_0}|{id_0}": {
+     "delta_log_score_categorical_B1": 0.0433984931311957,
+     "n_cases": 6,
+     "n_distinct_bodies": 4,
+     "statuses": "200,404"
+    },
+    "ifconfig.me::/headers/{id_0}|{id_0}": {
+     "delta_log_score_categorical_B1": 5.551115123125783e-17,
+     "n_cases": 6,
+     "n_distinct_bodies": 1,
+     "statuses": "404"
+    },
+    "randomuser.me::/api/|{exc}": {
+     "delta_log_score_categorical_B1": 8.881784197001252e-16,
+     "n_cases": 6,
+     "n_distinct_bodies": 6,
+     "statuses": "200"
+    },
+    "randomuser.me::/api/|{nat}": {
+     "delta_log_score_categorical_B1": 8.881784197001252e-16,
+     "n_cases": 6,
+     "n_distinct_bodies": 6,
+     "statuses": "200"
+    },
+    "randomuser.me::/api/|{results}": {
+     "delta_log_score_categorical_B1": -2.9605947323337506e-16,
+     "n_cases": 6,
+     "n_distinct_bodies": 6,
+     "statuses": "200"
+    },
+    "randomuser.me::/api/|{seed}": {
+     "delta_log_score_categorical_B1": 8.881784197001252e-16,
+     "n_cases": 6,
+     "n_distinct_bodies": 6,
+     "statuses": "200"
+    }
+   },
+   "sites_with_nonzero_delta": [
+    "api.github.com"
+   ]
+  },
+  {
+   "contrasts": [
+    "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER",
+    "DELTA_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER",
+    "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER",
+    "DELTA_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER"
+   ],
+   "exact_endpoints": {
+    "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": [
+     "-0.0006792794729703677",
+     "0.0"
+    ],
+    "DELTA_LOG_DENSITY_JOINT_B1_MARKOV_1ST_ORDER": [
+     "0.0",
+     "0.4060040758383954"
+    ],
+    "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": [
+     "1.163090787702545e-16",
+     "0.052058351820068065"
+    ],
+    "DELTA_MEAN_SQ_STD_RESIDUAL_B1_MARKOV_1ST_ORDER": [
+     "-0.01659008031641207",
+     "1.0956401461402944e-33"
+    ]
+   },
+   "kind": "site_clustered_interval_endpoints_at_zero",
+   "n_distinct_site_resamples": 118,
+   "note": "a site-clustered percentile interval of a contrast that is identically zero in every resample omitting the one site carrying the effect has an endpoint at ~1e-16; such an endpoint is treated as zero and does not satisfy 'CI excludes zero'"
+  },
+  {
+   "kind": "collection_totals",
+   "latency_ms_max": 313.3,
+   "latency_ms_median": 40.8,
+   "latency_ms_min": 24.9,
+   "n_http_429": 65,
+   "n_http_requests": 226,
+   "n_transport_fail": 0,
+   "n_transport_ok": 226,
+   "note": "one process, sequential, stdlib urllib, no model calls, no browser"
+  },
+  {
+   "kind": "raw_bodies",
+   "n_archived_prefixes": 226,
+   "n_bodies_truncated_at_4096": 17,
+   "n_bodies_with_full_length_and_sha256": 226
+  },
+  {
+   "kind": "github_rate_limit_headers",
+   "limit": "60",
+   "n_github_http_429": 0,
+   "n_github_requests": 42,
+   "remaining_at_last_observation": "56",
+   "url": "https://api.github.com/users/torvalds/repos?per_page=30",
+   "used": "4"
+  },
+  {
+   "crawlable_links_found": 15,
+   "kind": "template_discovery",
+   "n_identifier_bearing_templates_from_crawled_links": 0,
+   "n_identifier_bearing_templates_from_live_observed_paths": 15,
+   "n_origin_roots": 6,
+   "n_origin_roots_meaning": "distinct origin roots in the executed collection ledger, not process count",
+   "note": "raw/template_inventory.json records the screen; the credential-free API roots expose no link/form surface, so templates were seeded from paths observed live on the same hosts (D5)"
+  },
+  {
+   "kind": "excluded_hosts_not_probed",
+   "note": "the five hosts excluded by the director mandate (httpbin.org, catfact.ninja, dog.ceo, ipify.org, api.chucknorris.io) were NOT probed, so no request was spent on them"
+  }
+ ],
+ "outcome": "NOT_APPLICABLE",
+ "schema_version": 1,
+ "status": "MEASUREMENT_INVALID",
+ "unresolved": [
+  "Whether the small but statistically reliable increment over first-order Markov memory (+0.0158 nats, p_traj=0.0002) is real mechanism-conditioned structure or an artifact of site-conditioned memory that the frozen B1 baseline under-specifies: B1's fallback is P(sig | site, action_template), which is the same key the treatment's own M0 residual uses, so the two arms differ ONLY where a non-M0 mechanism changes a prediction.",
+  "Whether the increment would survive a held-out-SITE design, i.e. whether a mechanism learned on one origin transfers to another. This experiment cannot answer it: every arm is site-keyed (V-I).",
+  "Whether the ++0.0158-nat increment over B1 is a property of mechanism-conditioned inheritance at all, or a property of one origin. It is carried entirely by 12 of 66 held-out cases, all in api.github.com, and it is exactly 0 on the other 9 templates (V-N). A replication on any other origin, or on the four mandate-excluded hosts that expose 200/404-varying identifier templates, would decide this; this run cannot.",
+  "Whether the s9.1 positive-control threshold was ever attainable under the frozen signature schema (it is not, per V-C), and which of the two contradictory PC thresholds the design intent was.",
+  "Whether the absent pilot_data.json / power_calculation.json ever existed; if they did, the prereg's tabulated pilot values (log density -2.34 vs -1.87) are outside the attainable range of the frozen metric and would themselves indicate a different metric was intended.",
+  "Whether api.publicapis.org (marked in_pool=true in frozen_origins.json but absent from frozen_pool_eTLD1) was intended to be part of the pool; it had no resolvable DNS at screen time.",
+  "Whether the rate-limited sites (agify, genderize) would contribute real structure if probed with a slower, budget-respecting schedule."
+ ],
+ "validity_notes": [
+  {
+   "id": "V-A_FROZEN_ORIGIN_POOL_ABSENT",
+   "note": "prereg s7.1 contains no frozen origin list, asserts both 25 origins and 12 unique origins, and defers the list to a frozen_origins.json that freeze.json neither references nor hashes. The pool actually measured is 6 credential-free origins (see frozen_origins.json), which is 0.48x the smaller frozen claim and 0.24x the larger one. The 'frozen pool' is therefore an executor construction, not frozen evidence.",
+   "severity": "high"
+  },
+  {
+   "id": "V-B_ABSENT_PRE_FREEZE_ARTIFACTS",
+   "note": "pilot_data.json and power_calculation.json are listed in prereg s15 and s12 as recorded at freeze; neither exists in the frozen packet, and freeze.json does not reference them. The prereg's power numbers (20 sites, MDE 0.22 nats, power>0.95) and its tabulated pilot values cannot be audited. Realised site count is 5.",
+   "severity": "high"
+  },
+  {
+   "id": "V-C_PC_THRESHOLD_CONTRADICTION",
+   "note": "prereg s9.1 requires PC log predictive density > 2.0 nats; s12 and s13 condition 6 require > -0.5 nats. The PC is detected under s13 and not under s9.1. Independently of that contradiction, s9.1's 2.0 nats is arithmetically unattainable for ANY predictor under the frozen 10-component signature with EPS=0.02: the maximum attainable log score is 10*log(1-EPS) = -0.2020 nats. A frozen positive-control threshold that no predictor can reach is an instrument defect detectable before any measurement.",
+   "severity": "high"
+  },
+  {
+   "id": "V-D_IID_CONTROL_CONFOUNDED",
+   "note": "prereg s9.3 draws the i.i.d. null from each site's TRAIN marginal and s13 condition 8 requires every predictor to perform at or below B3, a GLOBAL cold re-derivation. Any predictor keyed on (site, action_template) - which prereg s8.2 requires of B1 and which the treatment inherits - must beat B3 on that data with or without any mechanism reading. This run measured exactly that (treatment -4.674 vs B3 -6.901 nats) while being WORSE than the per-site marginal oracle (-1.804). Condition 8's literal failure is a property of the frozen criterion, not evidence of a hallucinating predictor; s13 nevertheless routes it to MEASUREMENT_INVALID.",
+   "severity": "high"
+  },
+  {
+   "id": "V-E_METRIC_BANDWIDTH_ARBITRARY",
+   "note": "prereg s10.1 does not fix the training sample that sets the Silverman bandwidth, and the joint log density has no bandwidth-free zero point, so the absolute thresholds in s9.1/s13 are not well defined on it. The bandwidth-free proper scores log_score_categorical and brier_categorical are therefore the primary reported metrics; the joint density is reported with an explicit bandwidth rule and a 4-point bandwidth sensitivity sweep (derived/metrics.json bandwidth_sensitivity_log_density_joint), under which the sign of every treatment-minus-baseline joint-density contrast is invariant.",
+   "severity": "medium"
+  },
+  {
+   "id": "V-F_POWER_SHORTFALL",
+   "note": "66 held-out cases on 5 sites, against a power calculation assuming 20 sites and roughly 900 held-out cases. The inference unit is the site, so the effective n is 5 clusters and only 118 distinct site-resample compositions exist in 1000 bootstrap draws. Site-clustered intervals and site-grouped permutations are correspondingly weak, and the B1-vs-treatment contrast - the scientifically decisive one - has a 95% CI of [+0.0000, +0.0521].",
+   "severity": "high"
+  },
+  {
+   "id": "V-G_RATE_LIMIT_SUBSTRATE",
+   "note": "api.agify.io returned HTTP 429 for every request and api.genderize.io returned 429 for 25 of 35, so 2 of 5 test sites contribute only rate-limit responses. Those templates carry no identifier structure and dilute the held-out sample with a constant 429 signature. The exploited structure is concentrated in api.github.com and randomuser.me (see derived/per_template_metrics.json).",
+   "severity": "medium"
+  },
+  {
+   "id": "V-H_REPRESENTATION_LOSS",
+   "note": "body_hash_prefix_8 and body_length are computed on the FULL body (exact length and full SHA256 are archived), but has_form, form_action_count, link_count and script_count are computed on the first 4096 bytes and are lower bounds for the 17 responses whose body exceeded that cap.",
+   "severity": "medium"
+  },
+  {
+   "id": "V-I_SITE_LOCAL_MECHANISM_LIBRARY",
+   "note": "Every arm, treatment and baseline alike, is keyed on (site, action_template) and no site-identity feature enters any predictor. The mechanism library is therefore site-local: this experiment cannot measure cross-site mechanism transfer, and the mandate's disjoint-host-set clause is enforced at the POOL level, not as a held-out-site generalization test. Any claim about mechanisms transferring to unseen hosts is unmeasured here.",
+   "severity": "high"
+  },
+  {
+   "id": "V-J_TEMPLATE_SELECTION_EFFECT",
+   "note": "Templates were discovered from paths observed live on the retained hosts (D5), so the site sample and the template sample are both conditioned on what those hosts happen to expose. The held-out identifiers are genuinely never-observed, but the choice of which action surfaces to test is not independent of the substrate.",
+   "severity": "medium"
+  },
+  {
+   "id": "V-K_COARSE_WITHIN_SITE_NULL",
+   "note": "The trajectory-grouped permutation null attains only 16 distinct values for the B1 contrasts (and 78 for the B3 contrasts) at this sample size, so its p-value resolution is coarse; the site-grouped null is finer (1391 distinct). Both are reported for every contrast.",
+   "severity": "low"
+  },
+  {
+   "id": "V-L_NONDETERMINISM_NOT_ISOLATED",
+   "note": "The Web is live: bodies and headers are re-fetched per run and a rerun would not reproduce byte-identical signatures. Every seed and the exact request ledger ARE recorded, so the analysis is exactly reproducible from the archived ledger, but the collection step is only conditionally reproducible (recorded in provenance.json).",
+   "severity": "low"
+  },
+  {
+   "id": "V-M_DANGLING_ARTIFACT_REFERENCE",
+   "note": "frozen_origins.json's construction_rule_applied cites raw/excluded_host_template_inventory.jsonl as the measured cost of the mandate host exclusion, but that file was never produced: probing the five excluded hosts would violate the director mandate that keeps them out of the pool. The reference is recorded here rather than repaired, because editing an already-written evidence file after the fact would be worse than the dangling pointer. The exclusion's cost is instead quantified from the executed ledger: the excluded hosts are exactly the ones that expose 200/404-varying identifier templates, so 4 of 5 mandate-excluded candidates had no replacement in the retained pool.",
+   "severity": "low"
+  },
+  {
+   "id": "V-N_EFFECT_LOCALISED_TO_ONE_SITE",
+   "note": "the treatment differs from the strongest baseline (B1) on 12 of 66 held-out cases, all of them in 2 template(s) on api.github.com. Every other held-out template returns the same predictor from the frozen mechanism selection, so the delta is exactly 0. Consequently all four B1 site-clustered intervals have an endpoint at exactly zero (one of them at 1.16e-16), and the mechanism increment is not separable from zero at the site-cluster level. Any claim that depends on this increment is a claim about one origin.",
+   "severity": "high"
+  }
+ ]
+}
