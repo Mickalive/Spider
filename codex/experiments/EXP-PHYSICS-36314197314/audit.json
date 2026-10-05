@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36314197314",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Freeze the origin pool in freeze.json with SHA256 (prereg s7.1, freeze.json omits frozen_origins.json). The current pool is executor-constructed post-freeze (V-A).",
+    "Resolve the contradictory positive-control thresholds: s9.1 requires >2.0 nats log predictive density (arithmetically unattainable with 10-component signature + EPS=0.02, max = -0.202 nats); s13 condition 6 requires >-0.5 nats. One must be removed or corrected before freeze (V-C).",
+    "Redesign NC_INDEPENDENT_IID (V-D): the i.i.d. null draws from per-site marginals but the comparator B3 is a global cold re-derivation. Any predictor keyed on (site, action_template) — which B1 and the treatment are — must beat B3 on this data without reading any mechanism. The confound-free reference is the per-site marginal oracle; against it the treatment is worse (-1.804 nats).",
+    "Pre-freeze pilot_data.json and power_calculation.json must exist and be hashed in freeze.json (prereg s12, s15). The tabulated pilot values (-2.34 vs -1.87 nats) are outside the attainable range of the frozen metric, indicating a different metric was used for power planning.",
+    "Increase the site count to meet the pre-freeze power assumption (20 sites, ~900 held-out cases). Current: 5 sites, 66 held-out cases, 118 distinct site-resample compositions in 1000 bootstrap draws (V-F).",
+    "The mandate's disjoint-host-set clause must be enforced at the POOL level by pre-freezing the Graph/Frontier host sets and the candidate universe, not by post-hoc executor filtering that removes the only origins with 200/404-varying identifier templates (V-M, V-N)."
+  ],
+  "validity_findings": [
+    {
+      "id": "V-A_FROZEN_ORIGIN_POOL_ABSENT",
+      "severity": "high",
+      "finding": "prereg s7.1 asserts 25 origins / 12 unique but defers the list to frozen_origins.json which freeze.json neither references nor hashes. The measured pool is 6 origins (api.agify.io, api.github.com, api.genderize.io, api.nationalize.io, ifconfig.me, randomuser.me) — 0.24x the 25-origin claim and 0.48x the 12-origin claim. The pool is an executor construction, not frozen evidence. This is the single largest frozen-design defect.",
+      "evidence_refs": [
+        "frozen_origins.json",
+        "freeze.json (missing frozen_origins.json hash)",
+        "prereg.md s7.1"
+      ]
+    },
+    {
+      "id": "V-B_ABSENT_PRE_FREEZE_ARTIFACTS",
+      "severity": "high",
+      "finding": "pilot_data.json and power_calculation.json are listed as frozen artifacts in prereg s12/s15 and do not exist. The tabulated pilot log densities (-2.34 / -1.87 nats) are outside the attainable range of the frozen bandwidth-free metric (log_score_categorical range ~[-9, -0.1]), so the power calculation describes a different metric and cannot be audited.",
+      "evidence_refs": [
+        "prereg.md s12, s15",
+        "freeze.json (missing hashes)",
+        "derived/metrics.json (metric_definitions, attainable range)"
+      ]
+    },
+    {
+      "id": "V-C_PC_THRESHOLD_CONTRADICTION",
+      "severity": "high",
+      "finding": "Two contradictory positive-control thresholds exist in the frozen prereg: s9.1 requires log predictive density > 2.0 nats; s12/s13 condition 6 requires > -0.5 nats. With the frozen 10-component discrete signature and EPS=0.02, the maximum attainable log_score_categorical for ANY predictor is 10*log(1-EPS) = -0.2020 nats. The s9.1 threshold is arithmetically unattainable — an instrument defect detectable before any measurement. The PC passes s13 (-0.123 nats) but fails s9.1.",
+      "evidence_refs": [
+        "prereg.md s9.1, s12, s13",
+        "derived/metrics.json pc_threshold_attainability",
+        "derived/controls.json PC_PLANTED_MECHANISM"
+      ]
+    },
+    {
+      "id": "V-D_IID_CONTROL_CONFOUNDED",
+      "severity": "high",
+      "finding": "NC_INDEPENDENT_IID draws i.i.d. from each site's TRAIN marginal (prereg s9.3) and requires all predictors to perform at or below B3 (global cold re-derivation, s13 condition 8). B1 is explicitly required by s8.2 to be keyed on (site, action_template), and the treatment inherits this. Any such predictor must beat B3 on per-site-generated data with or without mechanism reading. The treatment beats B3 by +2.227 nats on i.i.d. data but is WORSE than the per-site marginal oracle by -1.804 nats. The control fails by frozen criterion design, not because the predictor hallucinates structure.",
+      "evidence_refs": [
+        "prereg.md s9.3, s13 condition 8",
+        "derived/controls.json NC_INDEPENDENT_IID",
+        "derived/metrics.json iid_null"
+      ]
+    },
+    {
+      "id": "V-E_METRIC_BANDWIDTH_ARBITRARY",
+      "severity": "medium",
+      "finding": "prereg s10.1 does not fix the training sample that sets the Silverman bandwidth for log_density_joint, and the joint density has no bandwidth-free zero point. The absolute thresholds in s9.1/s13 are not well-defined on it. The bandwidth-free proper scores (log_score_categorical, brier_categorical) are correctly used as primary; joint density is reported with an explicit bandwidth rule and 4-point sweep where contrast signs are invariant.",
+      "evidence_refs": [
+        "prereg.md s10.1",
+        "derived/metrics.json bandwidth_sensitivity_log_density_joint",
+        "derived/metrics.json metric_definitions"
+      ]
+    },
+    {
+      "id": "V-F_POWER_SHORTFALL",
+      "severity": "high",
+      "finding": "Pre-freeze power assumed 20 sites and ~900 held-out cases (prereg s12). Actual: 5 test sites, 66 held-out cases, 118 distinct site-resample compositions in 1000 bootstrap draws. Site-clustered intervals and site-grouped permutations are correspondingly weak. The scientifically decisive B1-vs-treatment contrast has 95% CI [+1.16e-16, +0.0521] — endpoint at zero.",
+      "evidence_refs": [
+        "prereg.md s12",
+        "derived/metrics.json sample",
+        "derived/bootstrap_cis.json (n_distinct_site_resamples=118, endpoint_ties_zero=true)"
+      ]
+    },
+    {
+      "id": "V-G_RATE_LIMIT_SUBSTRATE",
+      "severity": "medium",
+      "finding": "api.agify.io returned HTTP 429 for all 20 requests; api.genderize.io returned 429 for 25 of 35. Two of 5 test sites contribute only rate-limit responses (constant 429 signature, no identifier variation). These templates carry no structure and dilute the held-out sample.",
+      "evidence_refs": [
+        "result.json observations (status_code_counts)",
+        "raw/collection_log.jsonl",
+        "derived/per_template_metrics.json"
+      ]
+    },
+    {
+      "id": "V-H_REPRESENTATION_LOSS",
+      "severity": "medium",
+      "finding": "17 of 224 bodies exceeded the 4096-byte archive cap. body_length and body_hash_prefix_8 are computed on the full body, but has_form, form_action_count, link_count, script_count are computed on the prefix and are lower bounds for those responses.",
+      "evidence_refs": [
+        "result.json observations (n_bodies_truncated_at_4096=17)",
+        "raw/collection_log.jsonl"
+      ]
+    },
+    {
+      "id": "V-I_SITE_LOCAL_MECHANISM_LIBRARY",
+      "severity": "high",
+      "finding": "Every arm (treatment and baselines) is keyed on (site, action_template); no site-identity feature enters any predictor. The mechanism library is site-local by construction. The mandate's disjoint-host-set clause is enforced at pool level, not as a held-out-site generalization test. Cross-site mechanism transfer is unmeasured.",
+      "evidence_refs": [
+        "spec.json measurement_validity V2_SPLIT_INTEGRITY",
+        "derived/mechanism_pool.json",
+        "report.md section 7"
+      ]
+    },
+    {
+      "id": "V-J_TEMPLATE_SELECTION_EFFECT",
+      "severity": "medium",
+      "finding": "Templates discovered from paths observed live on retained hosts (D5), so site sample and template sample are conditioned on what those hosts expose. Held-out identifiers are genuinely never-observed, but action surface choice is not independent of substrate.",
+      "evidence_refs": [
+        "result.json observations template_discovery",
+        "raw/template_inventory.json"
+      ]
+    },
+    {
+      "id": "V-K_COARSE_WITHIN_SITE_NULL",
+      "severity": "low",
+      "finding": "Trajectory-grouped permutation null attains only 16 distinct values for B1 contrasts at this sample size, limiting p-value resolution. Site-grouped null is finer (1391 distinct). Both reported.",
+      "evidence_refs": [
+        "derived/permutation_nulls.json (n_distinct_perm_values)"
+      ]
+    },
+    {
+      "id": "V-L_NONDETERMINISM_NOT_ISOLATED",
+      "severity": "low",
+      "finding": "Web is live: bodies/headers re-fetched per run; rerun would not reproduce byte-identical signatures. Exact seeds and request ledger recorded; analysis exactly reproducible from archived ledger; collection only conditionally reproducible.",
+      "evidence_refs": [
+        "provenance.json determinism",
+        "provenance.json seeding"
+      ]
+    },
+    {
+      "id": "V-M_DANGLING_ARTIFACT_REFERENCE",
+      "severity": "low",
+      "finding": "frozen_origins.json cites raw/excluded_host_template_inventory.jsonl as measured cost of mandate exclusion, but that file was never produced (probing excluded hosts would violate mandate). The exclusion's cost is quantified from the executed ledger: 4 of 5 mandate-excluded candidates had 200/404-varying identifier templates and no replacement in the retained pool.",
+      "evidence_refs": [
+        "frozen_origins.json construction_rule_applied",
+        "provenance.json network_manifest hosts_excluded_by_mandate_and_not_probed"
+      ]
+    },
+    {
+      "id": "V-N_EFFECT_LOCALISED_TO_ONE_SITE",
+      "severity": "high",
+      "finding": "Treatment differs from B1 on only 12 of 66 held-out cases (18.2%), all in 2 templates on api.github.com. Delta is exactly 0 on the other 9 templates (frozen mechanism selection returns same predictor as B1). All four B1 site-clustered intervals have an endpoint at exactly zero (one at 1.16e-16). The mechanism increment is not separable from zero at the site-cluster level. Any claim about this increment is a claim about api.github.com, not the Web.",
+      "evidence_refs": [
+        "result.json observations treatment_vs_B1_localisation",
+        "derived/bootstrap_cis.json (endpoint_ties_zero=true for all B1 contrasts)",
+        "report.md section 5 (table of template-level deltas)"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_MARKOV_1ST_ORDER",
+      "finding": "Strongest baseline. Treatment beats it by +0.0158 nats (log_score_categorical) and -0.000206 (brier_categorical), p_trajectory=0.0002, p_site=0.0001. But site-clustered 95% CI for both metrics includes zero (endpoint at 1.16e-16 and 0.0) because the increment lives entirely in api.github.com. The treatment and B1 are identical predictors on 54/66 held-out cases (9 other templates).",
+      "evidence_refs": [
+        "derived/metrics.json arms.B1_MARKOV_1ST_ORDER",
+        "derived/metrics.json contrasts_primary.DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER",
+        "derived/metrics.json contrasts_primary.DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER",
+        "derived/bootstrap_cis.json (B1 contrasts endpoint_ties_zero=true)",
+        "result.json observations treatment_vs_B1_localisation"
+      ]
+    },
+    {
+      "baseline_id": "B2_TFIDF_K5_RETRIEVAL_STRONG",
+      "finding": "Treatment beats it by +1.762 nats (log_score) and -0.0212 (Brier). But on i.i.d. null (per-site marginal), treatment beats B3 by +2.227 nats while being worse than per-site oracle by -1.804 nats. The large margin over B2 comes from (site, action_template) conditioning — which B1 also has — not mechanism semantics. B2 trajectory-grouped p=0.0546, site-grouped p=0.4284 for Brier (fails p<0.05).",
+      "evidence_refs": [
+        "derived/metrics.json arms.B2_TFIDF_K5_RETRIEVAL_STRONG",
+        "derived/metrics.json contrasts_primary (B2 contrasts)",
+        "derived/metrics.json iid_null",
+        "derived/controls.json NC_INDEPENDENT_IID"
+      ]
+    },
+    {
+      "baseline_id": "B3_COLD_RERIVATION",
+      "finding": "Weakest baseline (global marginal). Treatment beats it by +5.102 nats / -0.226 Brier with tight CIs and p<0.0001. But this comparison is uninformative for mechanism semantics: the i.i.d. control shows the same margin is achieved by site-conditioned memory alone. B3 is the correct no-knowledge floor but not a discriminating baseline for the claim.",
+      "evidence_refs": [
+        "derived/metrics.json arms.B3_COLD_RERIVATION",
+        "derived/metrics.json contrasts_primary (B3 contrasts)",
+        "derived/metrics.json iid_null"
+      ]
+    },
+    {
+      "baseline_id": "NC_PLACEBO_PERMUTED_MECHANISM",
+      "finding": "PASS. Placebo is a genuine permuted mechanism object (differs from treatment on 30/66 held-out cases, 201 distinct scores across 201 permutations). It performs far below all baselines (log_score -13.145 vs B1 -4.050). Treatment percentile within placebo distribution = 0.0. This control correctly distinguishes a mechanism reader from a label/structure-only reader, unlike the count-preserving relabeling null in the parent packet.",
+      "evidence_refs": [
+        "derived/controls.json NC_PLACEBO_PERMUTED_MECHANISM",
+        "derived/metrics.json placebo_permutation_distribution",
+        "derived/metrics.json contrasts_placebo"
+      ]
+    },
+    {
+      "baseline_id": "PC_PLANTED_MECHANISM",
+      "finding": "PASS under s13 threshold (log_score_categorical -0.123 > -0.5, Brier 0.00024 < 0.1). FAIL under s9.1 threshold (>2.0 nats, arithmetically unattainable). The accept branch is reachable for the s13 criterion. The contradictory thresholds are an instrument defect (V-C).",
+      "evidence_refs": [
+        "derived/controls.json PC_PLANTED_MECHANISM",
+        "derived/metrics.json positive_control",
+        "derived/metrics.json pc_threshold_attainability"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "DELTA_LOG_SCORE_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+      "observed": 0.015775258127293593,
+      "ci95_low": 1.163090787702545e-16,
+      "ci95_high": 0.052058351820068065,
+      "p_trajectory_grouped": 0.00019998000199980003,
+      "p_site_grouped": 9.999000099990002e-05,
+      "excludes_zero_site_clustered": false,
+      "note": "CI endpoint at 1.16e-16 (identically zero in resamples omitting api.github.com); does not satisfy 'excludes zero'"
+    },
+    "DELTA_BRIER_CATEGORICAL_B1_MARKOV_1ST_ORDER": {
+      "observed": -0.00020584226453647717,
+      "ci95_low": -0.0006792794729703677,
+      "ci95_high": 0.0,
+      "p_trajectory_grouped": 0.0010998900109989002,
+      "p_site_grouped": 9.999000099990002e-05,
+      "excludes_zero_site_clustered": false,
+      "note": "CI endpoint exactly 0.0"
+    },
+    "DELTA_LOG_SCORE_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+      "observed": 1.7616073032671906,
+      "ci95_low": 0.3123081017442649,
+      "ci95_high": 2.959483062018149,
+      "p_trajectory_grouped": 0.054594540545945404,
+      "p_site_grouped": 9.999000099990002e-05,
+      "excludes_zero_site_clustered": true,
+      "note": "Trajectory-grouped p > 0.05 (0.0546) fails condition 4"
+    },
+    "DELTA_BRIER_CATEGORICAL_B2_TFIDF_K5_RETRIEVAL_STRONG": {
+      "observed": -0.021176170136719172,
+      "ci95_low": -0.05027200847065538,
+      "ci95_high": -0.004324277556812041,
+      "p_trajectory_grouped": 0.0780921907809219,
+      "p_site_grouped": 0.4283571642835716,
+      "excludes_zero_site_clustered": true,
+      "note": "Both permutation p > 0.05 fail conditions 4/5"
+    },
+    "DELTA_LOG_SCORE_CATEGORICAL_B3_COLD_RERIVATION": {
+      "observed": 5.102145822594766,
+      "ci95_low": 4.090714396103777,
+      "ci95_high": 6.896646734404412,
+      "p_trajectory_grouped": 9.999000099990002e-05,
+      "p_site_grouped": 9.999000099990002e-05,
+      "excludes_zero_site_clustered": true
+    },
+    "DELTA_BRIER_CATEGORICAL_B3_COLD_RERIVATION": {
+      "observed": -0.22616866830373789,
+      "ci95_low": -0.37609814343159526,
+      "ci95_high": -0.17540623535737965,
+      "p_trajectory_grouped": 0.00019998000199980003,
+      "p_site_grouped": 9.999000099990002e-05,
+      "excludes_zero_site_clustered": true
+    },
+    "IID_CONTROL_TREATMENT_VS_B3_LOG_SCORE": {
+      "observed": 2.22715786446959,
+      "note": "Treatment beats B3 on i.i.d. data but is WORSE than per-site marginal oracle by -1.804 nats. Confounded criterion (V-D)."
+    },
+    "IID_CONTROL_TREATMENT_VS_PER_SITE_ORACLE_LOG_SCORE": {
+      "observed": -1.804152407854132,
+      "note": "Confound-free reference: treatment does not hallucinate mechanism-specific structure on i.i.d. data."
+    }
+  },
+  "claim_ceiling": "On this specific substrate (6 credential-free public origins, response-signature representation with 15 components, site-keyed predictors, 5 test sites, 66 held-out identifier-level cases), inherited-mechanism conditioning adds a small (+0.0158 nats log_score_categorical, -0.000206 brier_categorical), statistically reliable (p_trajectory=0.0002) but site-cluster-CI-non-separable increment over site-conditioned first-order Markov memory, carried entirely by 12/66 held-out cases in api.github.com. The large margins over B2 (+1.762 nats) and B3 (+5.102 nats) are attributable to (site, action_template) conditioning, not mechanism semantics, as demonstrated by the i.i.d. control. Cross-site mechanism transfer, cross-origin generality, and the broader claim C-WEB-DYNAMICS remain unmeasured. The experiment is MEASUREMENT_INVALID per the frozen decision rule due to control failure (V8/condition 8) and multiple pre-freeze instrument defects (V-A, V-B, V-C, V-D, V-F).",
+  "evidence_refs": [
+    "request.json (director_mandate, parent_handoff)",
+    "spec.json (frozen design)",
+    "prereg.md (frozen preregistration, hash 902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1)",
+    "freeze.json (frozen_at 2026-09-27T11:06:51.439487+00:00)",
+    "result.json (producer handoff, status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE)",
+    "report.md (producer interpretation)",
+    "provenance.json (execution provenance)",
+    "frozen_origins.json (executor-constructed pool, not frozen)",
+    "derived/metrics.json (all arms, contrasts, controls, permutation nulls, bootstrap CIs)",
+    "derived/controls.json (control observations)",
+    "derived/validity_gates.json (gate results)",
+    "derived/decision_readings.json (frozen decision rule evaluation)",
+    "derived/bootstrap_cis.json (site-clustered intervals, endpoint_ties_zero)",
+    "derived/permutation_nulls.json (trajectory and site-grouped nulls)",
+    "raw/collection_log.jsonl (226 HTTP GETs, raw evidence)",
+    "raw/transitions_index.json (split provenance)",
+    "raw/screen_reachability.json",
+    "raw/template_inventory.json"
+  ],
+  "unresolved": [
+    "Whether the +0.0158-nat increment over B1 is real mechanism-conditioned structure or an artifact of site-conditioned memory that the frozen B1 baseline under-specifies: B1's fallback is P(sig | site, action_template), which is the same key the treatment's M0 residual uses.",
+    "Whether the increment would survive a held-out-SITE design (mechanism learned on one origin transferring to another). This experiment cannot answer it: every arm is site-keyed (V-I).",
+    "Whether the increment is a property of mechanism-conditioned inheritance at all, or a property of api.github.com specifically. Replication on the four mandate-excluded hosts with 200/404-varying identifier templates (httpbin.org, catfact.ninja, dog.ceo, ipify.org) would decide this.",
+    "Whether the absent pilot_data.json / power_calculation.json ever existed; the prereg's tabulated pilot values are outside the attainable range of the frozen metric.",
+    "Whether api.publicapis.org (in_pool=true in frozen_origins.json but absent from frozen_pool_eTLD1, DNS failure at screen) was intended to be part of the pool.",
+    "Whether the rate-limited sites (agify, genderize) would contribute real structure if probed with a slower, budget-respecting schedule."
+  ]
+}
