@@ -1,17 +1,81 @@
 {
   "experiment_id": "EXP-FRONTIER-37385647440",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS", "C-FRESHNESS", "C-CROSSSITE"],
+  "question": "For every candidate item of interface state a persistent agent would have to carry between episodes on credential-free public HTTP sites, which preregistered stationarity class does it belong to (session_invariant, session_scoped, request_scoped, time_scoped, rotating) and what does it cost in cl100k_base tokens and request count to re-acquire one unconditional path to a fresh valid instance, over K >= 5 independent fresh sessions with disjoint cookie jars per frozen target?",
+  "hypothesis": "On the credential-free public HTTP substrate class (stdlib HTTP, GET only, no browser, no credentials, no write verb), the stationarity class distribution of detectable interface-state items is measurable and the re-acquisition cost per class yields a finite break-even reuse count. Specifically, we expect a non-zero fraction of items to be session_invariant or session_scoped with re-acquisition cost strictly less than unconditional re-derivation cost, making persistent cross-episode state potentially amortizable for those classes. The rotating and time_scoped classes are expected to have no stable cross-episode identifier, requiring procedure re-execution rather than handle replay.",
+  "falsifier": "If the majority of detected state items across the frozen target pool are classified as non-stationary (request_scoped, time_scoped, or rotating) AND the median re_acquisition_cost (tokens + requests) for a fresh valid instance is not strictly less than the unconditional re-derivation cost for the same path, then a handle-refreshing persistent state buys no measurable work reduction on the credential-free public HTTP substrate class. This is a bounded negative for HANDLE PERSISTENCE in this substrate class only; it does not close C-CROSSSITE, C-FRESHNESS, or the persistence question broadly.",
+  "baselines": {
+    "COLD_REEXPLORATION": "Unconditional re-derivation from site root: full observation cost (tokens + requests) to reach a fresh valid instance of each target item starting from a cold session with no prior knowledge. Measured per item per session.",
+    "RETRIEVAL_BASELINE": "Semantic retrieval over prior observations (if any): cost to retrieve and verify a cached item versus re-acquiring fresh. Not exercised in this experiment (no prior episodes), recorded as null.",
+    "ORACLE_PERFECT_TRANSFER": "Hypothetical zero-cost transfer of a cross-episode-stable identifier. Only defined for items classified as session_invariant; null for all other classes. This control is definitionally unavailable for session_scoped, request_scoped, time_scoped, and rotating items."
+  },
+  "positive_control": {
+    "id": "KNOWN_STATIONARY_CONTROL",
+    "description": "A set of known-stationary interface elements (e.g., static navigation links, site logos, fixed footer links, robots.txt, sitemap.xml) that must show exact-value and body-hash invariance across all K sessions. This control must PASS (all designated items classified as session_invariant with 0 variance) before freeze. Failure indicates substrate or instrument defect.",
+    "expected_behavior": "All designated control items classified as session_invariant with exact-value equality and body-hash equality across all K >= 5 sessions. Re_acquisition_cost = 1 request (root or known path) + token cost of that single observation."
+  },
+  "null_control": {
+    "id": "NULL_STATIONARITY_ARM",
+    "description": "A synthetic null-stationarity probe that generates items with no stable identity across sessions (e.g., request-scoped timestamps, per-request nonces, server-generated request IDs). This arm must demonstrate it CAN fire (i.e., classify items as non-stationary) before it is relied upon. If the null arm fails to detect known non-stationarity, the stationarity classifier is not discriminating.",
+    "expected_behavior": "All designated null-control items classified as request_scoped or rotating with high variance across sessions. The arm must produce at least one non-stationary classification on known-non-stationary probes."
+  },
+  "measurement_validity": {
+    "substrate": "stdlib HTTP only (urllib/requests), GET only, no browser, no Docker, no model key, no credentials, no write verbs. Tiktoken must be declared in pyproject.toml or provisioned in workflow image before claiming pure-stdlib run.",
+    "sampling_unit": "State item (per-item admission), NOT site with multi-way qualification conjunction. Each detected interface-state item is independently classified.",
+    "target_pool": "At least 20 classified items across at least 4 sites, hand-picked from credential-free public HTTP sites. Class distribution labelled as sample of hand-picked credential-free pool, explicitly NOT as Web prevalence.",
+    "session_independence": "K >= 5 independent fresh sessions per frozen target. Disjoint cookie jars per session. No session reuse. Inter-session delay declared and sufficient to separate time_scoped from session_scoped rotation (minimum 60 seconds between sessions, configurable).",
+    "classification_method": "Exact-value equality and body-hash (SHA256 of response body) repetition across sessions. An item is session_invariant iff value and body_hash are identical across all K sessions. session_scoped iff identical within a session but differs across sessions. request_scoped iff differs across requests within the same session. time_scoped iff differs across sessions with a periodicity consistent with the declared inter-session delay. rotating iff differs across sessions with no detectable periodicity.",
+    "re_acquisition_cost": "Measured in cl100k_base tokens (using tiktoken) and request count for one unconditional path from site root to a fresh valid instance of the item. Path must be reproducible without prior episode knowledge. Token-to-latency and token-to-dollar remain explicitly UNKNOWN.",
+    "pre_freeze_controls_verification": "All four controls (KNOWN_STATIONARY_CONTROL, REVERIFIED_NON_STATIONARY, INTER_SESSION_DELAY, NULL_STATIONARITY_ARM) must be verified LIVE and PASS before freeze.json is created. Results recorded in spec.json.controls_pre_freeze_verification.",
+    "durable_evidence": "Per-item, per-session records persisted under non-self-referential SHA256 hashes (content-addressed). Raw HTTP responses cached by content hash. Run auditable without re-hitting live network.",
+    "decision_rule_branches": "Every branch in decision_rule must state the exact quantity its condition measures. Any metric not executed (e.g., arms not entered) reported as null, never 0.0."
+  },
+  "decision_rule": {
+    "primary_classification": {
+      "description": "Classify each detected state item into exactly one of: session_invariant, session_scoped, request_scoped, time_scoped, rotating.",
+      "metric": "class_distribution",
+      "type": "categorical_counts",
+      "reporting": "Counts and proportions per class with site-clustered bootstrap CI95 (10,000 resamples, seed = experiment_id)."
+    },
+    "re_acquisition_economics": {
+      "description": "For each class with non-zero items, compute median re_acquisition_cost (tokens, requests) and median unconditional re-derivation cost (COLD_REEXPLORATION baseline). Compute break_even_reuse_count = ceil(re_acquisition_cost / (re_derivation_cost - re_acquisition_cost)) when re_derivation_cost > re_acquisition_cost, else null (infinite).",
+      "metric": "break_even_reuse_count_per_class",
+      "type": "numeric_per_class",
+      "reporting": "Median with site-clustered CI95 per class. Null reported as null."
+    },
+    "falsifier_evaluation": {
+      "description": "Evaluate the preregistered falsifier: (majority_non_stationary) AND (median_re_acquisition_cost >= median_re_derivation_cost_for_majority_class).",
+      "metric": "falsifier_triggered",
+      "type": "boolean",
+      "condition": "majority_non_stationary = (sum of request_scoped + time_scoped + rotating counts) > (sum of session_invariant + session_scoped counts). cost_condition = median_re_acquisition_cost_non_stationary >= median_re_derivation_cost_non_stationary. Both must be true to trigger."
+    },
+    "controls_gate": {
+      "description": "All four pre-freeze controls must PASS. If any control FAILS, the experiment status is MEASUREMENT_INVALID regardless of classification results.",
+      "metric": "controls_pass",
+      "type": "boolean",
+      "required": true
+    },
+    "outcome_mapping": {
+      "CONTROLS_FAIL": "status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE",
+      "FALSIFIER_TRIGGERED": "status=COMPLETE, outcome=FALSIFIES (bounded to HANDLE PERSISTENCE on credential-free HTTP substrate)",
+      "FALSIFIER_NOT_TRIGGERED": "status=COMPLETE, outcome=SUPPORTS (stationarity distribution measurable, finite break-even exists for at least one class)",
+      "MIXED": "status=COMPLETE, outcome=MIXED (some classes have finite break-even, others do not; or controls pass but classification ambiguous)"
+    }
+  },
+  "product_consequence_positive": "If stationarity distribution shows a non-zero fraction of session_invariant or session_scoped items with finite break-even reuse counts, SPIDER's persistent cross-episode state mechanism has a measurable amortization surface on the credential-free HTTP substrate for those classes. This informs C-FRESHNESS (staleness detection scope), C-CROSSSITE (transferable mechanism scope), and product architecture (what state to persist vs. re-derive). The break-even counts become the economic guard for persistence investment.",
+  "product_consequence_negative": "If the falsifier triggers (majority non-stationary AND re-acquisition not cheaper than re-derivation), the honest architecture answer is that persistent cross-episode state has no amortization surface on the credential-free public HTTP substrate class. SPIDER should not invest in cross-episode handle persistence for this substrate; effort should shift to procedure re-execution caching, semantic resolution, or substrate expansion (browser, credentials, write verbs). This is a bounded negative only for HANDLE PERSISTENCE on this substrate class.",
+  "estimated_cost": {
+    "http_requests": "~500-1000 GET requests (4-6 sites * 5-8 items/site * 5 sessions * 1-2 requests/item)",
+    "tokens": "~10,000-50,000 cl100k_base tokens for observation encoding",
+    "wall_clock_seconds": "~120-300 seconds (including declared inter-session delays)",
+    "compute": "Pure Python stdlib + tiktoken, no model calls, no GPU"
+  },
+  "expected_information_gain": "This experiment changes the measured object from a static fraction (which the parent packet showed is not answerable on the available substrate) to a dynamical one that is. It directly measures the stationarity class distribution and re-acquisition economics that C-FRESHNESS break-even arithmetic requires. Both falsifier outcomes are decision-changing: mostly-stationary with finite break-even validates persistence investment for those classes; mostly-non-stationary with no cost advantage redirects architecture to procedure caching. It also provides the first real-site measurement of stationarity classes and re-acquisition costs, replacing the program's current UNKNOWN with evidence.",
+  "controls_pre_freeze_verification": {
+    "KNOWN_STATIONARY_CONTROL": {"status": "PENDING", "verified_at": null, "evidence_ref": null},
+    "REVERIFIED_NON_STATIONARY": {"status": "PENDING", "verified_at": null, "evidence_ref": null},
+    "INTER_SESSION_DELAY": {"status": "PENDING", "verified_at": null, "evidence_ref": null, "delay_seconds": 60},
+    "NULL_STATIONARITY_ARM": {"status": "PENDING", "verified_at": null, "evidence_ref": null}
+  }
 }
