@@ -1,0 +1,79 @@
+{
+  "n_path_param_probes_2xx_3xx_overall": 71,
+  "n_path_param_probes_overall": 905,
+  "parameter_response_by_mechanism": {
+    "M_ANCHOR": {
+      "frac_2xx_3xx": 0.7657458563535912,
+      "frac_2xx_3xx_probes_identical_to_baseline": 0.8888888888888888,
+      "frac_2xx_3xx_probes_same_status_as_baseline": 1.0,
+      "frac_signature_identical": 0.8154696132596685,
+      "frac_with_nonzero_corrected_distance": 0.18453038674033148,
+      "n": 905,
+      "n_2xx_3xx_probes": 693,
+      "n_distinct_probe_signatures": 272,
+      "n_signature_identical_to_baseline": 738
+    },
+    "M_PAGINATION": {
+      "frac_2xx_3xx": 0.7635359116022099,
+      "frac_2xx_3xx_probes_identical_to_baseline": 0.7452966714905933,
+      "frac_2xx_3xx_probes_same_status_as_baseline": 1.0,
+      "frac_signature_identical": 0.6718232044198895,
+      "frac_with_nonzero_corrected_distance": 0.3281767955801105,
+      "n": 905,
+      "n_2xx_3xx_probes": 691,
+      "n_distinct_probe_signatures": 373,
+      "n_signature_identical_to_baseline": 608
+    },
+    "M_SECTION": {
+      "frac_2xx_3xx": 0.07845303867403315,
+      "frac_2xx_3xx_probes_identical_to_baseline": 0.352112676056338,
+      "frac_2xx_3xx_probes_same_status_as_baseline": 1.0,
+      "frac_signature_identical": 0.10386740331491713,
+      "frac_with_nonzero_corrected_distance": 0.8961325966850828,
+      "n": 905,
+      "n_2xx_3xx_probes": 71,
+      "n_distinct_probe_signatures": 406,
+      "n_signature_identical_to_baseline": 94
+    }
+  },
+  "path_param_status_histogram": {
+    "[200, 404]": 3,
+    "[200]": 13,
+    "[403]": 11,
+    "[404, 429]": 2,
+    "[404, 503]": 1,
+    "[404]": 151
+  },
+  "repeat_identical_null": {
+    "frac_repeat_fetches_byte_identical": 0.875,
+    "interpretation_guard": "this is the site-dynamism floor; any signature difference smaller than or comparable to this floor cannot be attributed to the intervention",
+    "n_candidates_probed": 80,
+    "n_candidates_with_any_repeat_variation": 10,
+    "n_repeat_fetches": 160,
+    "n_repeat_fetches_byte_identical_to_baseline": 140
+  },
+  "revalidation_availability": {
+    "frac_returning_304": 0.7375,
+    "n_conditional_get_probes": 80,
+    "n_returning_200": 21,
+    "n_returning_304": 59,
+    "note": "component (i) of the frozen three-way factorization is a CACHE/REVALIDATION component.  Whether any revalidation response is obtainable at all on this substrate decides whether component (i) can be non-zero here."
+  },
+  "screen_criterion_failures": {
+    "C1_transport_ok": 167,
+    "C2_identifier_variation": 19,
+    "C3_template_variation": 97,
+    "n_screened": 181
+  },
+  "transport_success_histogram": {
+    "0": 41,
+    "10": 119,
+    "11": 2,
+    "14": 1,
+    "15": 13,
+    "5": 2,
+    "7": 1,
+    "8": 1,
+    "9": 1
+  }
+}

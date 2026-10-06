@@ -1,0 +1,165 @@
+{
+  "acceptance_conditions": {
+    "A1_primary_metric_above_threshold": {
+      "holds": true,
+      "observed": 1.1107784218146453,
+      "required": "RESIDUAL_EFFECT_SIZE_NATS > 0.05"
+    },
+    "A2_ci95_lower_above_zero": {
+      "holds": true,
+      "observed": 0.8711076731853203,
+      "required": "95% site-clustered CI lower bound > 0"
+    },
+    "A3_treatment_exceeds_null_p95": {
+      "holds": false,
+      "observed": {
+        "n_distinct_null_values": 999,
+        "null_p95": 1.9023843333766466,
+        "treatment": 1.1107784218146453,
+        "treatment_percentile_within_null": 0.487
+      },
+      "required": "treatment residual exceeds 95th percentile of NC_PERMUTED_MECHANISM"
+    },
+    "A4_pc_recovers_ground_truth": {
+      "holds": false,
+      "observed": {
+        "measurement_uncertainty_halfwidth": 0.0,
+        "pc_ci95": [
+          -1.4894969491411805,
+          -1.4894969491411805
+        ],
+        "pc_residual_nats": -1.4894969491411805,
+        "prereg_claimed_pilot_pc_nats": 0.18
+      },
+      "required": "PC_KNOWN_PARAMETER_EFFECT recovers ground truth within 2x measurement uncertainty (prereg s9.1 requires >= 0.10 nats)"
+    },
+    "A5_at_least_15_sites_non_inert": {
+      "holds": false,
+      "observed": 6,
+      "required": ">= 15 of 20 admitted sites contribute non-inert interventions"
+    },
+    "A6_null_non_degenerate": {
+      "holds": true,
+      "observed": 999,
+      "required": "NC_PERMUTED_MECHANISM produces > 1 distinct residual value"
+    }
+  },
+  "alternative_precedence_reading": {
+    "reading": "if the F1..F6 branch were evaluated before the M1..M6 branch, the disposition would read FALSIFIES because F3, F4 and F5 hold",
+    "recorded_not_adopted": true,
+    "why_not_adopted": "the same condition set shows the accept branch is unreachable (A3, A4, A5 fail) and that two instruments are themselves degenerate (the frozen distance is not a metric; the frozen strong baseline collapses to one constant on every test instance), so a negative read here would be a statement about the instrument, which research/EXPERIMENT_PACKET.md s1 forbids recording as scientific falsification"
+  },
+  "any_acceptance_condition_false": true,
+  "any_invalid_condition_true": true,
+  "falsification_conditions_F1_to_F6": {
+    "F1_primary_at_or_below_threshold": {
+      "holds": false,
+      "observed": 1.1107784218146453
+    },
+    "F2_ci95_includes_zero": {
+      "holds": false,
+      "observed": [
+        0.8711076731853203,
+        2.5488029135905945
+      ]
+    },
+    "F3_treatment_below_null_p95": {
+      "holds": true,
+      "observed": {
+        "null_p95": 1.9023843333766466,
+        "treatment": 1.1107784218146453
+      }
+    },
+    "F4_pc_fails_ground_truth_recovery": {
+      "holds": true,
+      "observed": -1.4894969491411805
+    },
+    "F5_fewer_than_15_sites_non_inert": {
+      "holds": true,
+      "observed": 6
+    },
+    "F6_null_degenerate": {
+      "holds": false,
+      "observed": 999
+    }
+  },
+  "frozen_branch_rule": "prereg s3: MEASUREMENT_INVALID if ANY of M1..M6; that branch is evaluated before the F1..F6 falsification branch",
+  "frozen_pool_sites": [
+    "css-tricks.com",
+    "github.com",
+    "microsoft.com",
+    "nih.gov",
+    "packagist.org",
+    "perl.org"
+  ],
+  "frozen_threshold_nats": 0.05,
+  "measurement_invalid_conditions": {
+    "M1_variation_screen_admits_at_least_20_sites": {
+      "holds": false,
+      "observed": 6,
+      "required": ">= 20 admitted sites"
+    },
+    "M2_pilot_and_power_artifacts_present_at_freeze": {
+      "holds": false,
+      "observed": {
+        "candidate_universe.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "frozen_pool.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "pilot_data.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "power_calculation.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        }
+      },
+      "required": "pilot_data.json and power_calculation.json present and hashed at freeze"
+    },
+    "M3_frozen_pool_hashed_into_freeze_json": {
+      "holds": false,
+      "observed": {
+        "freeze_hashes": [
+          "prereg.md",
+          "request.json",
+          "spec.json"
+        ],
+        "frozen_pool_exists": false,
+        "hashed_by_freeze": false
+      },
+      "required": "frozen pool hashed into freeze.json"
+    },
+    "M4_inert_rate_at_most_20pct": {
+      "holds": null,
+      "note": "every reading is recorded and none is adopted as the frozen verdict. The frozen-distance reading is vacuous by construction: prereg s6.3 adds +0.3 * Jaccard, so the frozen distance of an IDENTICAL signature is 0.3 and prereg s8.2's inert test ||delta|| < 0.01 can never fire, which is why it reads 0.0 on the test set. On the held-out test set of 105 instances the signature-identity reading is 0.3333333333333333 and the corrected-distance reading is 0.3333333333333333; both exceed the 0.2 ceiling. M4 is recorded as not decidable as written rather than as pass or fail, because the frozen criterion's own definition is unusable; a strict reading under either non-vacuous definition would make M4 hold.",
+      "observed": {
+        "TEST_corrected_distance_reading": 0.3333333333333333,
+        "TEST_frozen_distance_reading": 0.0,
+        "TEST_signature_identity_reading": 0.3333333333333333,
+        "all_admitted_instances_frozen_distance_reading": 0.0125,
+        "all_admitted_instances_signature_identity_reading": 0.3625,
+        "n_TEST_instances": 105
+      },
+      "required": "intervention self-verification inert rate <= 0.2"
+    },
+    "M5_cache_predictor_free_of_mechanism_declaration": {
+      "holds": true,
+      "observed": "enforced structurally: predict_cache_revalidation receives {url, baseline_url, baseline_signature} only",
+      "required": "cache-semantics predictor does not read the mechanism declaration"
+    },
+    "M6_site_memory_predictor_free_of_bound_parameters": {
+      "holds": true,
+      "observed": "enforced structurally: predict_site_template_memory receives {site, memory_key} only, where memory_key = site|intervention_type",
+      "required": "site-memory predictor does not read bound parameters"
+    }
+  },
+  "n_admitted_sites": 6,
+  "n_frozen_sites_after_split": 2,
+  "n_frozen_test_instances": 240,
+  "n_frozen_test_instances_after_split": 105
+}

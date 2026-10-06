@@ -1,0 +1,46 @@
+{
+  "M_ANCHOR": {
+    "declared_effect": "fragment scrolls client-side",
+    "endpoint": "/pc/<site>/page/1#<id>",
+    "ground_truth_predicted_distance_direction": "exactly zero, fragment is not in the request target",
+    "ground_truth_server_visible_change": false
+  },
+  "M_PAGINATION": {
+    "declared_effect": "parameter echoed into the response body",
+    "endpoint": "/pc/<site>/echo?page=<v>",
+    "ground_truth_predicted_distance_direction": "non-zero, body differs for every v",
+    "ground_truth_server_visible_change": true
+  },
+  "M_SECTION": {
+    "declared_effect": "path segment selects a different document body",
+    "endpoint": "/pc/<site>/page/<v>",
+    "ground_truth_predicted_distance_direction": "non-zero, body differs for every v",
+    "ground_truth_server_visible_change": true
+  },
+  "n_pc_sites": 20,
+  "pc_site_split_rule": "prereg s11 step 3/4: 70% of admitted sites train, 30% test",
+  "test_sites": [
+    "pc15",
+    "pc16",
+    "pc17",
+    "pc18",
+    "pc19",
+    "pc20"
+  ],
+  "train_sites": [
+    "pc01",
+    "pc02",
+    "pc03",
+    "pc04",
+    "pc05",
+    "pc06",
+    "pc07",
+    "pc08",
+    "pc09",
+    "pc10",
+    "pc11",
+    "pc12",
+    "pc13",
+    "pc14"
+  ]
+}

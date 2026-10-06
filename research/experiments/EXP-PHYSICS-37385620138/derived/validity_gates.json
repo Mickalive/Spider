@@ -1,0 +1,72 @@
+[
+  {
+    "check": "null predictors are handed restricted views without the mechanism declaration or bound parameters",
+    "evidence": "exp_37385620138_lib.predict_cache_revalidation / predict_site_template_memory receive {url, baseline_url, baseline_signature} and {site, memory_key} only; MECHANISM_CONDITIONED reads only mechanism_id and value_rank",
+    "gate": "V1_TARGET_INTEGRITY",
+    "name": "no predictor contains the target residual",
+    "result": "PASS"
+  },
+  {
+    "check": "site-level 70/30 split; B_SITE_TEMPLATE_MEMORY fitted on TRAIN rows only",
+    "evidence": "train_sites=4, test_sites=2",
+    "gate": "V2_SPLIT_INTEGRITY",
+    "name": "train/test disjoint; fitted on train only",
+    "result": "PASS"
+  },
+  {
+    "check": "master_seed = int(request_hash[:8],16); permutation and bootstrap seeds derived",
+    "evidence": "master_seed=445086315",
+    "gate": "V3_SAMPLING_INTEGRITY",
+    "name": "seeds deterministic; no policy-dependent sampling",
+    "result": "PASS"
+  },
+  {
+    "check": "10000 site-clustered resamples, no noise injection",
+    "evidence": "n_resamples=10000",
+    "gate": "V4_UNCERTAINTY_INTEGRITY",
+    "name": "site-clustered bootstrap; no injected noise",
+    "result": "PASS"
+  },
+  {
+    "check": "every response archived with status, full response headers, body length, body sha256 and structural hash. DOCUMENTED LOSS: response body bytes are not archived (prereg s14 describes the body as part of this artifact), so a hash cannot be recomputed from the packet without a fresh fetch",
+    "evidence": "raw/collection_log.jsonl",
+    "gate": "V5_REPRESENTATION_INTEGRITY",
+    "name": "raw responses archived; losses documented",
+    "result": "PASS"
+  },
+  {
+    "check": "count of distinct admitted sites after the frozen screen",
+    "evidence": "n_admitted_sites=6, n_screened=181",
+    "gate": "V6_POOL_ADMITTED_GE_20",
+    "name": "variation screen admits >= 20 sites",
+    "result": "FAIL"
+  },
+  {
+    "check": "existence and freeze hashing of the two declared pre-freeze artifacts",
+    "evidence": "{\"candidate_universe.json\": {\"exists_on_disk\": false, \"hashed_by_freeze\": false}, \"frozen_pool.json\": {\"exists_on_disk\": false, \"hashed_by_freeze\": false}, \"pilot_data.json\": {\"exists_on_disk\": false, \"hashed_by_freeze\": false}, \"power_calculation.json\": {\"exists_on_disk\": false, \"hashed_by_freeze\": false}}",
+    "gate": "V7_PILOT_POWER_HASHED",
+    "name": "pilot_data.json + power_calculation.json exist, hashed, in range",
+    "result": "FAIL"
+  },
+  {
+    "check": "fraction of HELD-OUT TEST interventions whose signature is unchanged by the intervention. Reported on all three readings because prereg s6.3 makes the frozen distance incapable of registering an inert intervention (identical signatures score 0.3, above the 0.01 ceiling), so the frozen-distance reading cannot fail and its PASS is not informative",
+    "evidence": "TEST n_frozen=105 n_exploratory=870; TEST frozen_distance=0.0; TEST signature_identity=0.3333333333333333; TEST corrected_distance=0.3333333333333333; all-admitted-instances frozen_distance=0.0125",
+    "gate": "V8_INTERVENTION_BIT",
+    "name": "self-verification: inert rate <= 20% in test",
+    "result": "FAIL"
+  },
+  {
+    "check": "distinct mean-residual values across 1000 permutations",
+    "evidence": "{\"n_permutations\": 1000, \"n_distinct_values\": 999, \"degenerate\": false, \"null_p95\": 1.9023843333766466}",
+    "gate": "V9_PLACEBO_NONDEGENERATE",
+    "name": "NC_PERMUTED_MECHANISM produces > 1 distinct value",
+    "result": "PASS"
+  },
+  {
+    "check": "PC residual >= frozen 0.10 nats",
+    "evidence": "pc_residual=-1.4894969491411805; constant_zero_predictor_residual=-2.3685798086447933; max_attainable_log_score=-log(1e-10)=23.025850929940457",
+    "gate": "V10_PC_ATTAINABLE",
+    "name": "PC_KNOWN_PARAMETER_EFFECT recovers ground truth",
+    "result": "FAIL"
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "all_hashes_match": true,
+  "freeze": {
+    "experiment_id": "EXP-PHYSICS-37385620138",
+    "frozen_at": "2026-10-05T23:06:46.951181+00:00",
+    "hashes": {
+      "prereg.md": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940",
+      "request.json": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd",
+      "spec.json": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7"
+    },
+    "schema_version": 1
+  },
+  "freeze_sha256": "8172956001cc4a849a4f5f0c92c85b849b179aecc44c812ca07388d32652cee4",
+  "hash_checks": {
+    "prereg.md": {
+      "match": true,
+      "on_disk": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940",
+      "recorded": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940"
+    },
+    "request.json": {
+      "match": true,
+      "on_disk": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd",
+      "recorded": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd"
+    },
+    "spec.json": {
+      "match": true,
+      "on_disk": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7",
+      "recorded": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7"
+    }
+  },
+  "master_seed": 445086315,
+  "master_seed_rule": "int(request_hash[:8], 16)  # prereg s5.1",
+  "prereg_declared_prefreeze_artifacts": {
+    "candidate_universe.json": {
+      "exists_on_disk": false,
+      "hashed_by_freeze": false
+    },
+    "frozen_pool.json": {
+      "exists_on_disk": false,
+      "hashed_by_freeze": false
+    },
+    "pilot_data.json": {
+      "exists_on_disk": false,
+      "hashed_by_freeze": false
+    },
+    "power_calculation.json": {
+      "exists_on_disk": false,
+      "hashed_by_freeze": false
+    }
+  },
+  "substrate": {
+    "browser": false,
+    "cookies_or_sessions": 0,
+    "credentials": 0,
+    "docker": false,
+    "model_api_keys": 0,
+    "model_calls": 0,
+    "note": "numpy, scipy, flask, requests and bs4 are absent from this environment; every computation in this packet is pure standard library.",
+    "protocol": "HTTPS GET via python stdlib urllib",
+    "third_party_packages": []
+  }
+}

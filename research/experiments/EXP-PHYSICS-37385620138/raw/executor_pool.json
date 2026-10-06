@@ -1,0 +1,34 @@
+{
+  "admitted_sites": [
+    "css-tricks.com",
+    "github.com",
+    "microsoft.com",
+    "nih.gov",
+    "packagist.org",
+    "perl.org"
+  ],
+  "declared_frozen_artifact_name": "frozen_pool.json",
+  "frozen_C1_requirement": "at least 12 of 15 probes 2xx/3xx, i.e. at least 2 of the 5 frozen path-parameter values must be 2xx/3xx because the other two frozen intervention types contribute at most 10",
+  "frozen_pool_sites_selected": [
+    "css-tricks.com",
+    "github.com",
+    "microsoft.com",
+    "nih.gov",
+    "packagist.org",
+    "perl.org"
+  ],
+  "hashed_by_freeze": false,
+  "is_frozen_evidence": false,
+  "n_admitted_sites": 6,
+  "n_screened_candidates": 181,
+  "path_param_probes_2xx_3xx": 71,
+  "path_param_probes_total": 905,
+  "prereg_5_3_selection_rule": "first 20 admitted sites by deterministic sort over (site, document_url); executed against the frozen order",
+  "screen_failure_counts": {
+    "C1_transport_ok": 167,
+    "C2_identifier_variation": 19,
+    "C3_template_variation": 97
+  },
+  "that_file_exists": false,
+  "this_file_is": "EXECUTOR-CONSTRUCTED admission outcome, produced during EXECUTE"
+}

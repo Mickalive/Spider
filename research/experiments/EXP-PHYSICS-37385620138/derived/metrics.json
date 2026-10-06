@@ -1,0 +1,199 @@
+{
+  "RESIDUAL_EFFECT_SIZE_NATS": {
+    "definition": "mean over held-out instances of log_score(MECHANISM_CONDITIONED, observed) - log_score(B_COMBINED_NULL, observed) with log_score(pred,obs) = -log(|pred-obs| + 1e-10), prereg s8.1",
+    "exploratory_full_screened_pool": 1.4466198109313408,
+    "frozen_pool": 1.1107784218146453,
+    "pc": -1.4894969491411805,
+    "units": "nats"
+  },
+  "RESIDUAL_EFFECT_SIZE_NATS_corrected_distance_variant": {
+    "exploratory_full_screened_pool": 6.828579223488913,
+    "frozen_pool": 5.650871754672433,
+    "note": "executor-added robustness variant: identical pipeline with observed_delta taken from the corrected distance (0.3 * (1 - Jaccard)) instead of the frozen literal formula",
+    "units": "nats"
+  },
+  "baseline_degeneracy": {
+    "exploratory_fallback_tiers": {
+      "global_mean": 870
+    },
+    "frozen_pool_fallback_tiers": {
+      "global_mean": 105
+    },
+    "note": "B_SITE_TEMPLATE_MEMORY is keyed on (site, action_template) and the split is at site level, so no test site can have a TRAIN cell; the frozen strong baseline therefore collapses to one global constant on every test instance"
+  },
+  "bootstrap_ci95": {
+    "exploratory_full_screened_pool": [
+      1.1990979478046837,
+      1.6572265884788178
+    ],
+    "exploratory_full_screened_pool_corrected_distance": [
+      5.767266638769022,
+      7.554186707204159
+    ],
+    "frozen_pool": [
+      0.8711076731853203,
+      2.5488029135905945
+    ],
+    "frozen_pool_corrected_distance": [
+      -1.237202893044757,
+      6.798884195958632
+    ],
+    "pc": [
+      -1.4894969491411805,
+      -1.4894969491411805
+    ]
+  },
+  "collection_totals": {
+    "http_budget_estimate": 5000,
+    "n_candidates_admitted": 6,
+    "n_candidates_screened": 181,
+    "n_diagnostic_requests": 240,
+    "n_pc_requests": 360,
+    "n_requests_archived": 2896,
+    "n_sites_screened": 68,
+    "n_status_2xx": 1595,
+    "n_status_3xx": 0,
+    "n_status_4xx": 1298,
+    "n_status_5xx": 3,
+    "n_status_null": 0,
+    "n_transport_errors": 0,
+    "n_transport_ok": 2896
+  },
+  "inert_rate": {
+    "exploratory_TEST_corrected_distance_reading": 0.5586206896551724,
+    "exploratory_TEST_signature_identity_reading": 0.5586206896551724,
+    "exploratory_frozen_distance_reading": 0.0011049723756906078,
+    "exploratory_signature_identity_reading": 0.5303867403314917,
+    "frozen_pool_TEST_corrected_distance_reading": 0.3333333333333333,
+    "frozen_pool_TEST_frozen_distance_reading": 0.0,
+    "frozen_pool_TEST_signature_identity_reading": 0.3333333333333333,
+    "frozen_pool_frozen_distance_reading": 0.0125,
+    "frozen_pool_signature_identity_reading": 0.3625,
+    "n_exploratory_TEST_instances": 870,
+    "n_frozen_pool_TEST_instances": 105,
+    "n_sites_exploratory": 68,
+    "n_sites_with_any_non_inert_intervention": 6,
+    "reading_note": "three readings are reported because prereg s6.3 makes the frozen distance incapable of registering an inert intervention: frozen_distance uses prereg s8.2's ||delta|| < 0.01 test on the frozen formula, signature_identity tests byte/signature equality, corrected_distance applies the same test to the corrected formula"
+  },
+  "metric_dynamic_range": {
+    "frozen_pc_threshold_nats": 0.1,
+    "frozen_threshold_nats": 0.05,
+    "log_score_at_frozen_distance_floor_0p3": 1.2039728043259361,
+    "max_attainable_log_score_perfect_prediction": 23.025850929940457,
+    "prereg_claimed_pilot_pc_uncertainty_nats": 0.03,
+    "prereg_claimed_pilot_pc_value_nats": 0.18
+  },
+  "null_control_summary": {
+    "exploratory_full_screened_pool": {
+      "degenerate": false,
+      "first_five": [
+        1.1142347388359934,
+        1.1204427222553988,
+        1.1279349332061226,
+        1.1308324378966659,
+        1.1328723256010758
+      ],
+      "n_distinct_values": 1000,
+      "n_permutations": 1000,
+      "null_max": 1.9227367321024156,
+      "null_mean": 1.4558285171330139,
+      "null_min": 1.1142347388359934,
+      "null_p95": 1.6656028510255265,
+      "treatment_percentile_within_null": 0.472
+    },
+    "frozen_pool": {
+      "degenerate": false,
+      "first_five": [
+        -0.2857118332706706,
+        -0.039478435765418436,
+        0.08597064012570159,
+        0.09505425034425034,
+        0.10297895961886401
+      ],
+      "n_distinct_values": 999,
+      "n_permutations": 1000,
+      "null_max": 2.7214394011508958,
+      "null_mean": 1.1287407689330298,
+      "null_min": -0.2857118332706706,
+      "null_p95": 1.9023843333766466,
+      "treatment_percentile_within_null": 0.487
+    },
+    "frozen_pool_corrected_distance": {
+      "degenerate": false,
+      "first_five": [
+        5.04838575757501,
+        5.051790439531342,
+        5.054956097088809,
+        5.058446108105169,
+        5.059256365291581
+      ],
+      "n_distinct_values": 1000,
+      "n_permutations": 1000,
+      "null_max": 6.271503674561568,
+      "null_mean": 5.663773285891024,
+      "null_min": 5.04838575757501,
+      "null_p95": 6.038020256794231,
+      "treatment_percentile_within_null": 0.488
+    },
+    "pc": {
+      "degenerate": false,
+      "first_five": [
+        -1.6186525228533393,
+        -1.614147354983619,
+        -1.6077544200782092,
+        -1.6038843457058933,
+        -1.6032492522084887
+      ],
+      "n_distinct_values": 155,
+      "n_permutations": 1000,
+      "null_max": -0.6466314438991441,
+      "null_mean": -1.2866254684327307,
+      "null_min": -1.6186525228533393,
+      "null_p95": -0.8864358678208568
+    }
+  },
+  "secondary_metrics": {
+    "exploratory_full_screened_pool": {
+      "CACHE_EXPLAINED_VARIANCE": -5.205141699474406,
+      "COMBINED_EXPLAINED_VARIANCE": -1.9765272842161372,
+      "INERT_EPS": 0.01,
+      "INERT_INTERVENTION_RATE": 0.0011049723756906078,
+      "INERT_RATE_corrected_distance_reading": 0.5303867403314917,
+      "INERT_RATE_signature_identity_reading": 0.5303867403314917,
+      "RESIDUAL_SIGN_ACCURACY": 0.2,
+      "SITE_MEMORY_EXPLAINED_VARIANCE": 0.594561558814517,
+      "TREATMENT_EXPLAINED_VARIANCE": -0.6177020145712442,
+      "n_instances": 2715,
+      "variance_note": "SST is 0 when every observed_delta is identical, in which case R^2 is undefined and reported as null rather than as 0"
+    },
+    "frozen_pool": {
+      "CACHE_EXPLAINED_VARIANCE": -5.240339300841565,
+      "COMBINED_EXPLAINED_VARIANCE": -1.1188301455045515,
+      "INERT_EPS": 0.01,
+      "INERT_INTERVENTION_RATE": 0.0125,
+      "INERT_RATE_corrected_distance_reading": 0.3625,
+      "INERT_RATE_signature_identity_reading": 0.3625,
+      "RESIDUAL_SIGN_ACCURACY": 0.2916666666666667,
+      "SITE_MEMORY_EXPLAINED_VARIANCE": 0.4021424951328172,
+      "TREATMENT_EXPLAINED_VARIANCE": -0.6599767205536786,
+      "n_instances": 240,
+      "variance_note": "SST is 0 when every observed_delta is identical, in which case R^2 is undefined and reported as null rather than as 0"
+    }
+  },
+  "sensitivity_alternative_a_priori_prior": {
+    "exploratory_full_screened_pool": 0.4917892543922116,
+    "exploratory_full_screened_pool_corrected_distance": 6.415738025465861,
+    "frozen_pool": 2.921572957271256,
+    "frozen_pool_corrected_distance": 4.68331891500881,
+    "note": "prereg s7.1 fixes the treatment's inputs but not its magnitudes; the two priors used here are both a-priori and both unfitted, so the spread between them bounds how much of the headline number is a free executor choice",
+    "pc": null
+  },
+  "strong_baseline_SB_DEGENERATE_ZERO": {
+    "definition": "predicts 0.0 for every instance; uses no mechanism, no site, no parameter and no data",
+    "exploratory_full_screened_pool": -0.7169764837669147,
+    "exploratory_full_screened_pool_corrected_distance": 12.10272734359179,
+    "frozen_pool": -1.5409649001592265,
+    "frozen_pool_corrected_distance": 6.573769860475571,
+    "pc": -2.3685798086447933
+  }
+}

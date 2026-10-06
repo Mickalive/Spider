@@ -1,0 +1,1341 @@
+{
+  "actual_etld1": 71,
+  "actual_hosts": 84,
+  "actual_pairs": 189,
+  "candidates": [
+    {
+      "candidate_id": "C0000",
+      "document_url": "https://go.dev/doc/faq",
+      "host": "go.dev",
+      "screen_order": 0,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0001",
+      "document_url": "https://www.sqlite.org/wal.html",
+      "host": "www.sqlite.org",
+      "screen_order": 1,
+      "site": "sqlite.org"
+    },
+    {
+      "candidate_id": "C0002",
+      "document_url": "https://www.gutenberg.org/ebooks/",
+      "host": "www.gutenberg.org",
+      "screen_order": 2,
+      "site": "gutenberg.org"
+    },
+    {
+      "candidate_id": "C0003",
+      "document_url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html",
+      "host": "docs.aws.amazon.com",
+      "screen_order": 3,
+      "site": "amazon.com"
+    },
+    {
+      "candidate_id": "C0004",
+      "document_url": "https://www.sqlite.org/docs.html",
+      "host": "www.sqlite.org",
+      "screen_order": 4,
+      "site": "sqlite.org"
+    },
+    {
+      "candidate_id": "C0005",
+      "document_url": "https://europepmc.org/",
+      "host": "europepmc.org",
+      "screen_order": 5,
+      "site": "europepmc.org"
+    },
+    {
+      "candidate_id": "C0006",
+      "document_url": "https://man7.org/linux/man-pages/man1/git.1.html",
+      "host": "man7.org",
+      "screen_order": 6,
+      "site": "man7.org"
+    },
+    {
+      "candidate_id": "C0007",
+      "document_url": "https://www.microsoft.com/en-us/research/publications/",
+      "host": "www.microsoft.com",
+      "screen_order": 7,
+      "site": "microsoft.com"
+    },
+    {
+      "candidate_id": "C0008",
+      "document_url": "https://docs.python.org/3/library/http.client.html",
+      "host": "docs.python.org",
+      "screen_order": 8,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0009",
+      "document_url": "https://aws.amazon.com/blogs/database/",
+      "host": "aws.amazon.com",
+      "screen_order": 9,
+      "site": "amazon.com"
+    },
+    {
+      "candidate_id": "C0010",
+      "document_url": "https://developer.apple.com/safety/",
+      "host": "developer.apple.com",
+      "screen_order": 10,
+      "site": "apple.com"
+    },
+    {
+      "candidate_id": "C0011",
+      "document_url": "https://research.google/pubs/",
+      "host": "research.google",
+      "screen_order": 11,
+      "site": "research.google"
+    },
+    {
+      "candidate_id": "C0012",
+      "document_url": "https://docs.python.org/3/tutorial/introduction.html",
+      "host": "docs.python.org",
+      "screen_order": 12,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0013",
+      "document_url": "https://www.gnu.org/manual/glibc/html_mono/glibc.html",
+      "host": "www.gnu.org",
+      "screen_order": 13,
+      "site": "gnu.org"
+    },
+    {
+      "candidate_id": "C0014",
+      "document_url": "https://wiki.archlinux.org/title/System_maintenance",
+      "host": "wiki.archlinux.org",
+      "screen_order": 14,
+      "site": "archlinux.org"
+    },
+    {
+      "candidate_id": "C0015",
+      "document_url": "https://www.nasa.gov/",
+      "host": "www.nasa.gov",
+      "screen_order": 15,
+      "site": "nasa.gov"
+    },
+    {
+      "candidate_id": "C0016",
+      "document_url": "https://www.ncbi.nlm.nih.gov/books/",
+      "host": "www.ncbi.nlm.nih.gov",
+      "screen_order": 16,
+      "site": "nih.gov"
+    },
+    {
+      "candidate_id": "C0017",
+      "document_url": "https://doc.rust-lang.org/book/ch01-00-getting-started.html",
+      "host": "doc.rust-lang.org",
+      "screen_order": 17,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0018",
+      "document_url": "https://www.typescriptlang.org/play",
+      "host": "www.typescriptlang.org",
+      "screen_order": 18,
+      "site": "typescriptlang.org"
+    },
+    {
+      "candidate_id": "C0019",
+      "document_url": "https://vuejs.org/guide/introduction.html",
+      "host": "vuejs.org",
+      "screen_order": 19,
+      "site": "vuejs.org"
+    },
+    {
+      "candidate_id": "C0020",
+      "document_url": "https://www.sqlite.org/fts5.html",
+      "host": "www.sqlite.org",
+      "screen_order": 20,
+      "site": "sqlite.org"
+    },
+    {
+      "candidate_id": "C0021",
+      "document_url": "https://datatracker.ietf.org/doc/html/rfc7231",
+      "host": "datatracker.ietf.org",
+      "screen_order": 21,
+      "site": "ietf.org"
+    },
+    {
+      "candidate_id": "C0022",
+      "document_url": "https://go.dev/doc/effective_go.html",
+      "host": "go.dev",
+      "screen_order": 22,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0023",
+      "document_url": "https://www.debian.org/doc/manuals/",
+      "host": "www.debian.org",
+      "screen_order": 23,
+      "site": "debian.org"
+    },
+    {
+      "candidate_id": "C0024",
+      "document_url": "https://en.wikipedia.org/wiki/Machine_learning",
+      "host": "en.wikipedia.org",
+      "screen_order": 24,
+      "site": "wikipedia.org"
+    },
+    {
+      "candidate_id": "C0025",
+      "document_url": "https://datatracker.ietf.org/doc/html/rfc9110",
+      "host": "datatracker.ietf.org",
+      "screen_order": 25,
+      "site": "ietf.org"
+    },
+    {
+      "candidate_id": "C0026",
+      "document_url": "https://www.w3.org/TR/HTML52/",
+      "host": "www.w3.org",
+      "screen_order": 26,
+      "site": "w3.org"
+    },
+    {
+      "candidate_id": "C0027",
+      "document_url": "https://cloud.google.com/storage/docs/overview",
+      "host": "cloud.google.com",
+      "screen_order": 27,
+      "site": "google.com"
+    },
+    {
+      "candidate_id": "C0028",
+      "document_url": "https://developer.mozilla.org/en-US/docs/Web/Performance",
+      "host": "developer.mozilla.org",
+      "screen_order": 28,
+      "site": "mozilla.org"
+    },
+    {
+      "candidate_id": "C0029",
+      "document_url": "https://jquery.com/api/",
+      "host": "jquery.com",
+      "screen_order": 29,
+      "site": "jquery.com"
+    },
+    {
+      "candidate_id": "C0030",
+      "document_url": "https://blog.python.org/",
+      "host": "blog.python.org",
+      "screen_order": 30,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0031",
+      "document_url": "https://www.rust-lang.org/learn",
+      "host": "www.rust-lang.org",
+      "screen_order": 31,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0032",
+      "document_url": "https://man7.org/linux/man-pages/man1/curl.1.html",
+      "host": "man7.org",
+      "screen_order": 32,
+      "site": "man7.org"
+    },
+    {
+      "candidate_id": "C0033",
+      "document_url": "https://react.dev/reference/react-dom/client/createRoot",
+      "host": "react.dev",
+      "screen_order": 33,
+      "site": "react.dev"
+    },
+    {
+      "candidate_id": "C0034",
+      "document_url": "https://vuejs.org/guide/introduction.html#setup",
+      "host": "vuejs.org",
+      "screen_order": 34,
+      "site": "vuejs.org"
+    },
+    {
+      "candidate_id": "C0035",
+      "document_url": "https://www.debian.org/users/",
+      "host": "www.debian.org",
+      "screen_order": 35,
+      "site": "debian.org"
+    },
+    {
+      "candidate_id": "C0036",
+      "document_url": "https://pkg.go.dev/context",
+      "host": "pkg.go.dev",
+      "screen_order": 36,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0037",
+      "document_url": "https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html",
+      "host": "doc.rust-lang.org",
+      "screen_order": 37,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0038",
+      "document_url": "https://docs.docker.com/build/",
+      "host": "docs.docker.com",
+      "screen_order": 38,
+      "site": "docker.com"
+    },
+    {
+      "candidate_id": "C0039",
+      "document_url": "https://www.postgresql.org/docs/current/mtts.html",
+      "host": "www.postgresql.org",
+      "screen_order": 39,
+      "site": "postgresql.org"
+    },
+    {
+      "candidate_id": "C0040",
+      "document_url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html",
+      "host": "www.elastic.co",
+      "screen_order": 40,
+      "site": "elastic.co"
+    },
+    {
+      "candidate_id": "C0041",
+      "document_url": "https://nodejs.org/en/docs/getting-started/introduction-to-nodejs",
+      "host": "nodejs.org",
+      "screen_order": 41,
+      "site": "nodejs.org"
+    },
+    {
+      "candidate_id": "C0042",
+      "document_url": "https://www.kernel.org/doc/html/latest/filesystems/index.html",
+      "host": "www.kernel.org",
+      "screen_order": 42,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0043",
+      "document_url": "https://wiki.gentoo.org/wiki/Introduction",
+      "host": "wiki.gentoo.org",
+      "screen_order": 43,
+      "site": "gentoo.org"
+    },
+    {
+      "candidate_id": "C0044",
+      "document_url": "https://babeljs.io/docs/usage/",
+      "host": "babeljs.io",
+      "screen_order": 44,
+      "site": "babeljs.io"
+    },
+    {
+      "candidate_id": "C0045",
+      "document_url": "https://css-tricks.com/snippets/css/",
+      "host": "css-tricks.com",
+      "screen_order": 45,
+      "site": "css-tricks.com"
+    },
+    {
+      "candidate_id": "C0046",
+      "document_url": "https://www.microsoft.com/en-us/research/blog/",
+      "host": "www.microsoft.com",
+      "screen_order": 46,
+      "site": "microsoft.com"
+    },
+    {
+      "candidate_id": "C0047",
+      "document_url": "https://babeljs.io/docs/",
+      "host": "babeljs.io",
+      "screen_order": 47,
+      "site": "babeljs.io"
+    },
+    {
+      "candidate_id": "C0048",
+      "document_url": "https://en.wikisource.org/wiki/Main_Page",
+      "host": "en.wikisource.org",
+      "screen_order": 48,
+      "site": "wikisource.org"
+    },
+    {
+      "candidate_id": "C0049",
+      "document_url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+      "host": "www.typescriptlang.org",
+      "screen_order": 49,
+      "site": "typescriptlang.org"
+    },
+    {
+      "candidate_id": "C0050",
+      "document_url": "https://react.dev/reference/react/useState",
+      "host": "react.dev",
+      "screen_order": 50,
+      "site": "react.dev"
+    },
+    {
+      "candidate_id": "C0051",
+      "document_url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+      "host": "www.elastic.co",
+      "screen_order": 51,
+      "site": "elastic.co"
+    },
+    {
+      "candidate_id": "C0052",
+      "document_url": "https://docs.kernel.org/admin-guide/index.html",
+      "host": "docs.kernel.org",
+      "screen_order": 52,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0053",
+      "document_url": "https://www.nasa.gov/missions/",
+      "host": "www.nasa.gov",
+      "screen_order": 53,
+      "site": "nasa.gov"
+    },
+    {
+      "candidate_id": "C0054",
+      "document_url": "https://www.terraform.io/docs/language/expressions/index.html",
+      "host": "www.terraform.io",
+      "screen_order": 54,
+      "site": "terraform.io"
+    },
+    {
+      "candidate_id": "C0055",
+      "document_url": "https://angular.dev/guide/components",
+      "host": "angular.dev",
+      "screen_order": 55,
+      "site": "angular.dev"
+    },
+    {
+      "candidate_id": "C0056",
+      "document_url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+      "host": "developer.android.com",
+      "screen_order": 56,
+      "site": "android.com"
+    },
+    {
+      "candidate_id": "C0057",
+      "document_url": "https://tc39.es/ecma262/",
+      "host": "tc39.es",
+      "screen_order": 57,
+      "site": "tc39.es"
+    },
+    {
+      "candidate_id": "C0058",
+      "document_url": "https://www.postgresql.org/docs/current/static/httpresource.html",
+      "host": "www.postgresql.org",
+      "screen_order": 58,
+      "site": "postgresql.org"
+    },
+    {
+      "candidate_id": "C0059",
+      "document_url": "https://datatracker.ietf.org/doc/html/rfc9111",
+      "host": "datatracker.ietf.org",
+      "screen_order": 59,
+      "site": "ietf.org"
+    },
+    {
+      "candidate_id": "C0060",
+      "document_url": "https://www.apache.org/tomcat/",
+      "host": "www.apache.org",
+      "screen_order": 60,
+      "site": "apache.org"
+    },
+    {
+      "candidate_id": "C0061",
+      "document_url": "https://en.wiktionary.org/wiki/Main_Page",
+      "host": "en.wiktionary.org",
+      "screen_order": 61,
+      "site": "wiktionary.org"
+    },
+    {
+      "candidate_id": "C0062",
+      "document_url": "https://html.spec.whatwg.org/multipage/browsers.html",
+      "host": "html.spec.whatwg.org",
+      "screen_order": 62,
+      "site": "whatwg.org"
+    },
+    {
+      "candidate_id": "C0063",
+      "document_url": "https://www.unicode.org/charts/",
+      "host": "www.unicode.org",
+      "screen_order": 63,
+      "site": "unicode.org"
+    },
+    {
+      "candidate_id": "C0064",
+      "document_url": "https://getbootstrap.com/docs/5.3/getting-started/introduction/",
+      "host": "getbootstrap.com",
+      "screen_order": 64,
+      "site": "getbootstrap.com"
+    },
+    {
+      "candidate_id": "C0065",
+      "document_url": "https://wiki.archlinux.org/title/List_of_packages",
+      "host": "wiki.archlinux.org",
+      "screen_order": 65,
+      "site": "archlinux.org"
+    },
+    {
+      "candidate_id": "C0066",
+      "document_url": "https://www.w3.org/TR/WebCryptoAPI/",
+      "host": "www.w3.org",
+      "screen_order": 66,
+      "site": "w3.org"
+    },
+    {
+      "candidate_id": "C0067",
+      "document_url": "https://dev.mysql.com/doc/refman/8.4/en/caching.html",
+      "host": "dev.mysql.com",
+      "screen_order": 67,
+      "site": "mysql.com"
+    },
+    {
+      "candidate_id": "C0068",
+      "document_url": "https://dom.spec.whatwg.org/",
+      "host": "dom.spec.whatwg.org",
+      "screen_order": 68,
+      "site": "whatwg.org"
+    },
+    {
+      "candidate_id": "C0069",
+      "document_url": "https://developer.hashicorp.com/terraform/docs",
+      "host": "developer.hashicorp.com",
+      "screen_order": 69,
+      "site": "hashicorp.com"
+    },
+    {
+      "candidate_id": "C0070",
+      "document_url": "https://developer.apple.com/library/archive/documentation/",
+      "host": "developer.apple.com",
+      "screen_order": 70,
+      "site": "apple.com"
+    },
+    {
+      "candidate_id": "C0071",
+      "document_url": "https://www.kernel.org/doc/html/latest/admin-guide/index.html",
+      "host": "www.kernel.org",
+      "screen_order": 71,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0072",
+      "document_url": "https://learn.microsoft.com/en-us/azure/virtual-machines/",
+      "host": "learn.microsoft.com",
+      "screen_order": 72,
+      "site": "microsoft.com"
+    },
+    {
+      "candidate_id": "C0073",
+      "document_url": "https://www.typescriptlang.org/docs/",
+      "host": "www.typescriptlang.org",
+      "screen_order": 73,
+      "site": "typescriptlang.org"
+    },
+    {
+      "candidate_id": "C0074",
+      "document_url": "https://d3js.org/getting-started",
+      "host": "d3js.org",
+      "screen_order": 74,
+      "site": "d3js.org"
+    },
+    {
+      "candidate_id": "C0075",
+      "document_url": "https://d3js.org/examples/",
+      "host": "d3js.org",
+      "screen_order": 75,
+      "site": "d3js.org"
+    },
+    {
+      "candidate_id": "C0076",
+      "document_url": "https://docs.github.com/en/rest",
+      "host": "docs.github.com",
+      "screen_order": 76,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0077",
+      "document_url": "https://sourceware.org/git/",
+      "host": "sourceware.org",
+      "screen_order": 77,
+      "site": "sourceware.org"
+    },
+    {
+      "candidate_id": "C0078",
+      "document_url": "https://www.ietf.org/about/introduction/",
+      "host": "www.ietf.org",
+      "screen_order": 78,
+      "site": "ietf.org"
+    },
+    {
+      "candidate_id": "C0079",
+      "document_url": "https://crates.io/crates/tokio",
+      "host": "crates.io",
+      "screen_order": 79,
+      "site": "crates.io"
+    },
+    {
+      "candidate_id": "C0080",
+      "document_url": "https://www.kernel.org/doc/html/latest/process/index.html",
+      "host": "www.kernel.org",
+      "screen_order": 80,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0081",
+      "document_url": "https://nginx.org/en/docs/",
+      "host": "nginx.org",
+      "screen_order": 81,
+      "site": "nginx.org"
+    },
+    {
+      "candidate_id": "C0082",
+      "document_url": "https://docs.github.com/en/actions",
+      "host": "docs.github.com",
+      "screen_order": 82,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0083",
+      "document_url": "https://www.erlang.org/docs/",
+      "host": "www.erlang.org",
+      "screen_order": 83,
+      "site": "erlang.org"
+    },
+    {
+      "candidate_id": "C0084",
+      "document_url": "https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol",
+      "host": "en.wikipedia.org",
+      "screen_order": 84,
+      "site": "wikipedia.org"
+    },
+    {
+      "candidate_id": "C0085",
+      "document_url": "https://www.scala-lang.org/documentation/",
+      "host": "www.scala-lang.org",
+      "screen_order": 85,
+      "site": "scala-lang.org"
+    },
+    {
+      "candidate_id": "C0086",
+      "document_url": "https://www.apache.org/httpd/2.4/doc/mod/mod_cache.html",
+      "host": "www.apache.org",
+      "screen_order": 86,
+      "site": "apache.org"
+    },
+    {
+      "candidate_id": "C0087",
+      "document_url": "https://docs.microsoft.com/en-us/azure/architecture/",
+      "host": "docs.microsoft.com",
+      "screen_order": 87,
+      "site": "microsoft.com"
+    },
+    {
+      "candidate_id": "C0088",
+      "document_url": "https://www.tailwindcss.com/docs",
+      "host": "www.tailwindcss.com",
+      "screen_order": 88,
+      "site": "tailwindcss.com"
+    },
+    {
+      "candidate_id": "C0089",
+      "document_url": "https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html",
+      "host": "dev.mysql.com",
+      "screen_order": 89,
+      "site": "mysql.com"
+    },
+    {
+      "candidate_id": "C0090",
+      "document_url": "https://clojure.org/learn",
+      "host": "clojure.org",
+      "screen_order": 90,
+      "site": "clojure.org"
+    },
+    {
+      "candidate_id": "C0091",
+      "document_url": "https://www.noaa.gov/",
+      "host": "www.noaa.gov",
+      "screen_order": 91,
+      "site": "noaa.gov"
+    },
+    {
+      "candidate_id": "C0092",
+      "document_url": "https://nodejs.org/en/docs/guides",
+      "host": "nodejs.org",
+      "screen_order": 92,
+      "site": "nodejs.org"
+    },
+    {
+      "candidate_id": "C0093",
+      "document_url": "https://arxiv.org/list/cs.AI/recent",
+      "host": "arxiv.org",
+      "screen_order": 93,
+      "site": "arxiv.org"
+    },
+    {
+      "candidate_id": "C0094",
+      "document_url": "https://www.w3.org/TR/CSS21/",
+      "host": "www.w3.org",
+      "screen_order": 94,
+      "site": "w3.org"
+    },
+    {
+      "candidate_id": "C0095",
+      "document_url": "https://www.erlang.org/doc/man/",
+      "host": "www.erlang.org",
+      "screen_order": 95,
+      "site": "erlang.org"
+    },
+    {
+      "candidate_id": "C0096",
+      "document_url": "https://nginx.org/en/docs/http/",
+      "host": "nginx.org",
+      "screen_order": 96,
+      "site": "nginx.org"
+    },
+    {
+      "candidate_id": "C0097",
+      "document_url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "host": "www.rfc-editor.org",
+      "screen_order": 97,
+      "site": "rfc-editor.org"
+    },
+    {
+      "candidate_id": "C0098",
+      "document_url": "https://docs.github.com/en/get-started",
+      "host": "docs.github.com",
+      "screen_order": 98,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0099",
+      "document_url": "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
+      "host": "nodejs.org",
+      "screen_order": 99,
+      "site": "nodejs.org"
+    },
+    {
+      "candidate_id": "C0100",
+      "document_url": "https://go.dev/ref/spec",
+      "host": "go.dev",
+      "screen_order": 100,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0101",
+      "document_url": "https://angular.dev/guide/http",
+      "host": "angular.dev",
+      "screen_order": 101,
+      "site": "angular.dev"
+    },
+    {
+      "candidate_id": "C0102",
+      "document_url": "https://www.rust-lang.org/production/usage",
+      "host": "www.rust-lang.org",
+      "screen_order": 102,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0103",
+      "document_url": "https://www.rfc-editor.org/rfc/rfc7234.html",
+      "host": "www.rfc-editor.org",
+      "screen_order": 103,
+      "site": "rfc-editor.org"
+    },
+    {
+      "candidate_id": "C0104",
+      "document_url": "https://vuejs.org/api/",
+      "host": "vuejs.org",
+      "screen_order": 104,
+      "site": "vuejs.org"
+    },
+    {
+      "candidate_id": "C0105",
+      "document_url": "https://rubygems.org/gems/rails",
+      "host": "rubygems.org",
+      "screen_order": 105,
+      "site": "rubygems.org"
+    },
+    {
+      "candidate_id": "C0106",
+      "document_url": "https://jquery.com/download/",
+      "host": "jquery.com",
+      "screen_order": 106,
+      "site": "jquery.com"
+    },
+    {
+      "candidate_id": "C0107",
+      "document_url": "https://dev.mysql.com/doc/refman/8.0/en/caching.html",
+      "host": "dev.mysql.com",
+      "screen_order": 107,
+      "site": "mysql.com"
+    },
+    {
+      "candidate_id": "C0108",
+      "document_url": "https://www.w3.org/TR/2011/WD-html5-20111213/",
+      "host": "www.w3.org",
+      "screen_order": 108,
+      "site": "w3.org"
+    },
+    {
+      "candidate_id": "C0109",
+      "document_url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+      "host": "docs.aws.amazon.com",
+      "screen_order": 109,
+      "site": "amazon.com"
+    },
+    {
+      "candidate_id": "C0110",
+      "document_url": "https://en.wikipedia.org/wiki/Cache-control",
+      "host": "en.wikipedia.org",
+      "screen_order": 110,
+      "site": "wikipedia.org"
+    },
+    {
+      "candidate_id": "C0111",
+      "document_url": "https://doc.rust-lang.org/std/collections/index.html",
+      "host": "doc.rust-lang.org",
+      "screen_order": 111,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0112",
+      "document_url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      "host": "developer.mozilla.org",
+      "screen_order": 112,
+      "site": "mozilla.org"
+    },
+    {
+      "candidate_id": "C0113",
+      "document_url": "https://csrc.nist.gov/pubs/sp/800/38/3/final",
+      "host": "csrc.nist.gov",
+      "screen_order": 113,
+      "site": "nist.gov"
+    },
+    {
+      "candidate_id": "C0114",
+      "document_url": "https://aws.amazon.com/blogs/compute/",
+      "host": "aws.amazon.com",
+      "screen_order": 114,
+      "site": "amazon.com"
+    },
+    {
+      "candidate_id": "C0115",
+      "document_url": "https://developer.hashicorp.com/nomad/docs",
+      "host": "developer.hashicorp.com",
+      "screen_order": 115,
+      "site": "hashicorp.com"
+    },
+    {
+      "candidate_id": "C0116",
+      "document_url": "https://www.npmjs.com/package/lodash",
+      "host": "www.npmjs.com",
+      "screen_order": 116,
+      "site": "npmjs.com"
+    },
+    {
+      "candidate_id": "C0117",
+      "document_url": "https://ubuntu.com/tutorials",
+      "host": "ubuntu.com",
+      "screen_order": 117,
+      "site": "ubuntu.com"
+    },
+    {
+      "candidate_id": "C0118",
+      "document_url": "https://api.jquery.com/",
+      "host": "api.jquery.com",
+      "screen_order": 118,
+      "site": "jquery.com"
+    },
+    {
+      "candidate_id": "C0119",
+      "document_url": "https://en.wikipedia.org/wiki/HTTP",
+      "host": "en.wikipedia.org",
+      "screen_order": 119,
+      "site": "wikipedia.org"
+    },
+    {
+      "candidate_id": "C0120",
+      "document_url": "https://packagist.org/packages/",
+      "host": "packagist.org",
+      "screen_order": 120,
+      "site": "packagist.org"
+    },
+    {
+      "candidate_id": "C0121",
+      "document_url": "https://clojure.org/guides",
+      "host": "clojure.org",
+      "screen_order": 121,
+      "site": "clojure.org"
+    },
+    {
+      "candidate_id": "C0122",
+      "document_url": "https://www.gnu.org/licenses/gpl-faq.html",
+      "host": "www.gnu.org",
+      "screen_order": 122,
+      "site": "gnu.org"
+    },
+    {
+      "candidate_id": "C0123",
+      "document_url": "https://www.tailwindcss.com/docs/installation",
+      "host": "www.tailwindcss.com",
+      "screen_order": 123,
+      "site": "tailwindcss.com"
+    },
+    {
+      "candidate_id": "C0124",
+      "document_url": "https://www.iso.org/standards.html",
+      "host": "www.iso.org",
+      "screen_order": 124,
+      "site": "iso.org"
+    },
+    {
+      "candidate_id": "C0125",
+      "document_url": "https://www.terraform.io/docs/language/index.html",
+      "host": "www.terraform.io",
+      "screen_order": 125,
+      "site": "terraform.io"
+    },
+    {
+      "candidate_id": "C0126",
+      "document_url": "https://www.unicode.org/versions/",
+      "host": "www.unicode.org",
+      "screen_order": 126,
+      "site": "unicode.org"
+    },
+    {
+      "candidate_id": "C0127",
+      "document_url": "https://svelte.dev/docs/kit",
+      "host": "svelte.dev",
+      "screen_order": 127,
+      "site": "svelte.dev"
+    },
+    {
+      "candidate_id": "C0128",
+      "document_url": "https://developer.android.com/training/basics/activity-lifecycle",
+      "host": "developer.android.com",
+      "screen_order": 128,
+      "site": "android.com"
+    },
+    {
+      "candidate_id": "C0129",
+      "document_url": "https://www.elastic.co/guide/en/kibana/current/index.html",
+      "host": "www.elastic.co",
+      "screen_order": 129,
+      "site": "elastic.co"
+    },
+    {
+      "candidate_id": "C0130",
+      "document_url": "https://docs.python.org/3/library/json.html",
+      "host": "docs.python.org",
+      "screen_order": 130,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0131",
+      "document_url": "https://developer.android.com/develop/ui/views/layout/declaring-layout",
+      "host": "developer.android.com",
+      "screen_order": 131,
+      "site": "android.com"
+    },
+    {
+      "candidate_id": "C0132",
+      "document_url": "https://developer.hashicorp.com/vault/docs",
+      "host": "developer.hashicorp.com",
+      "screen_order": 132,
+      "site": "hashicorp.com"
+    },
+    {
+      "candidate_id": "C0133",
+      "document_url": "https://www.debian.org/intro",
+      "host": "www.debian.org",
+      "screen_order": 133,
+      "site": "debian.org"
+    },
+    {
+      "candidate_id": "C0134",
+      "document_url": "https://support.github.com/articles/about-github",
+      "host": "support.github.com",
+      "screen_order": 134,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0135",
+      "document_url": "https://css-tricks.com/almanac/",
+      "host": "css-tricks.com",
+      "screen_order": 135,
+      "site": "css-tricks.com"
+    },
+    {
+      "candidate_id": "C0136",
+      "document_url": "https://www.gnu.org/manual/libc/html_node/Contents.html",
+      "host": "www.gnu.org",
+      "screen_order": 136,
+      "site": "gnu.org"
+    },
+    {
+      "candidate_id": "C0137",
+      "document_url": "https://www.python.org/doc/",
+      "host": "www.python.org",
+      "screen_order": 137,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0138",
+      "document_url": "https://nextjs.org/docs/pages/building-your-application/routing",
+      "host": "nextjs.org",
+      "screen_order": 138,
+      "site": "nextjs.org"
+    },
+    {
+      "candidate_id": "C0139",
+      "document_url": "https://pypi.org/project/flask/",
+      "host": "pypi.org",
+      "screen_order": 139,
+      "site": "pypi.org"
+    },
+    {
+      "candidate_id": "C0140",
+      "document_url": "https://getbootstrap.com/docs/5.3/layout/grid/",
+      "host": "getbootstrap.com",
+      "screen_order": 140,
+      "site": "getbootstrap.com"
+    },
+    {
+      "candidate_id": "C0141",
+      "document_url": "https://docs.docker.com/compose/intro/",
+      "host": "docs.docker.com",
+      "screen_order": 141,
+      "site": "docker.com"
+    },
+    {
+      "candidate_id": "C0142",
+      "document_url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+      "host": "docs.aws.amazon.com",
+      "screen_order": 142,
+      "site": "amazon.com"
+    },
+    {
+      "candidate_id": "C0143",
+      "document_url": "https://docs.python.org/3/library/urllib.request.html",
+      "host": "docs.python.org",
+      "screen_order": 143,
+      "site": "python.org"
+    },
+    {
+      "candidate_id": "C0144",
+      "document_url": "https://www.smashingmagazine.com/2023/09/",
+      "host": "www.smashingmagazine.com",
+      "screen_order": 144,
+      "site": "smashingmagazine.com"
+    },
+    {
+      "candidate_id": "C0145",
+      "document_url": "https://learn.microsoft.com/en-us/azure/azure-fundamentals/",
+      "host": "learn.microsoft.com",
+      "screen_order": 145,
+      "site": "microsoft.com"
+    },
+    {
+      "candidate_id": "C0146",
+      "document_url": "https://crates.io/crates/serde",
+      "host": "crates.io",
+      "screen_order": 146,
+      "site": "crates.io"
+    },
+    {
+      "candidate_id": "C0147",
+      "document_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+      "host": "developer.mozilla.org",
+      "screen_order": 147,
+      "site": "mozilla.org"
+    },
+    {
+      "candidate_id": "C0148",
+      "document_url": "https://wiki.gentoo.org/wiki/Getting_started",
+      "host": "wiki.gentoo.org",
+      "screen_order": 148,
+      "site": "gentoo.org"
+    },
+    {
+      "candidate_id": "C0149",
+      "document_url": "https://developer.apple.com/documentation/",
+      "host": "developer.apple.com",
+      "screen_order": 149,
+      "site": "apple.com"
+    },
+    {
+      "candidate_id": "C0150",
+      "document_url": "https://www.nist.gov/pml",
+      "host": "www.nist.gov",
+      "screen_order": 150,
+      "site": "nist.gov"
+    },
+    {
+      "candidate_id": "C0151",
+      "document_url": "https://svelte.dev/docs",
+      "host": "svelte.dev",
+      "screen_order": 151,
+      "site": "svelte.dev"
+    },
+    {
+      "candidate_id": "C0152",
+      "document_url": "https://openstax.org/books/",
+      "host": "openstax.org",
+      "screen_order": 152,
+      "site": "openstax.org"
+    },
+    {
+      "candidate_id": "C0153",
+      "document_url": "https://pkg.go.dev/net/http",
+      "host": "pkg.go.dev",
+      "screen_order": 153,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0154",
+      "document_url": "https://support.github.com/contact",
+      "host": "support.github.com",
+      "screen_order": 154,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0155",
+      "document_url": "https://docs.docker.com/engine/storage/",
+      "host": "docs.docker.com",
+      "screen_order": 155,
+      "site": "docker.com"
+    },
+    {
+      "candidate_id": "C0156",
+      "document_url": "https://www.gutenberg.org/policy/",
+      "host": "www.gutenberg.org",
+      "screen_order": 156,
+      "site": "gutenberg.org"
+    },
+    {
+      "candidate_id": "C0157",
+      "document_url": "https://www.gnu.org/philosophy/free-sw.html",
+      "host": "www.gnu.org",
+      "screen_order": 157,
+      "site": "gnu.org"
+    },
+    {
+      "candidate_id": "C0158",
+      "document_url": "https://www.ietf.org/",
+      "host": "www.ietf.org",
+      "screen_order": 158,
+      "site": "ietf.org"
+    },
+    {
+      "candidate_id": "C0159",
+      "document_url": "https://man7.org/linux/man-pages/man7/http.7.html",
+      "host": "man7.org",
+      "screen_order": 159,
+      "site": "man7.org"
+    },
+    {
+      "candidate_id": "C0160",
+      "document_url": "https://pypi.org/project/requests/",
+      "host": "pypi.org",
+      "screen_order": 160,
+      "site": "pypi.org"
+    },
+    {
+      "candidate_id": "C0161",
+      "document_url": "https://www.rust-lang.org/tools/install",
+      "host": "www.rust-lang.org",
+      "screen_order": 161,
+      "site": "rust-lang.org"
+    },
+    {
+      "candidate_id": "C0162",
+      "document_url": "https://www.rfc-editor.org/rfc/rfc9111.html",
+      "host": "www.rfc-editor.org",
+      "screen_order": 162,
+      "site": "rfc-editor.org"
+    },
+    {
+      "candidate_id": "C0163",
+      "document_url": "https://www.kernel.org/doc/html/latest/networking/index.html",
+      "host": "www.kernel.org",
+      "screen_order": 163,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0164",
+      "document_url": "https://ubuntu.com/server/docs",
+      "host": "ubuntu.com",
+      "screen_order": 164,
+      "site": "ubuntu.com"
+    },
+    {
+      "candidate_id": "C0165",
+      "document_url": "https://nextjs.org/docs/app",
+      "host": "nextjs.org",
+      "screen_order": 165,
+      "site": "nextjs.org"
+    },
+    {
+      "candidate_id": "C0166",
+      "document_url": "https://cloud.google.com/functions/docs/overview",
+      "host": "cloud.google.com",
+      "screen_order": 166,
+      "site": "google.com"
+    },
+    {
+      "candidate_id": "C0167",
+      "document_url": "https://docs.docker.com/engine/containers/",
+      "host": "docs.docker.com",
+      "screen_order": 167,
+      "site": "docker.com"
+    },
+    {
+      "candidate_id": "C0168",
+      "document_url": "https://wiki.archlinux.org/title/Main_page",
+      "host": "wiki.archlinux.org",
+      "screen_order": 168,
+      "site": "archlinux.org"
+    },
+    {
+      "candidate_id": "C0169",
+      "document_url": "https://redis.io/docs/latest/operate/oss_and_stack/",
+      "host": "redis.io",
+      "screen_order": 169,
+      "site": "redis.io"
+    },
+    {
+      "candidate_id": "C0170",
+      "document_url": "https://tc39.es/ecma262/multipage/",
+      "host": "tc39.es",
+      "screen_order": 170,
+      "site": "tc39.es"
+    },
+    {
+      "candidate_id": "C0171",
+      "document_url": "https://www.sqlite.org/lang.html",
+      "host": "www.sqlite.org",
+      "screen_order": 171,
+      "site": "sqlite.org"
+    },
+    {
+      "candidate_id": "C0172",
+      "document_url": "https://www.apache.org/httpd/2.4/docs/2.4-en/",
+      "host": "www.apache.org",
+      "screen_order": 172,
+      "site": "apache.org"
+    },
+    {
+      "candidate_id": "C0173",
+      "document_url": "https://www.postgresql.org/docs/current/static/caching.html",
+      "host": "www.postgresql.org",
+      "screen_order": 173,
+      "site": "postgresql.org"
+    },
+    {
+      "candidate_id": "C0174",
+      "document_url": "https://docs.kernel.org/networking/index.html",
+      "host": "docs.kernel.org",
+      "screen_order": 174,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0175",
+      "document_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+      "host": "developer.mozilla.org",
+      "screen_order": 175,
+      "site": "mozilla.org"
+    },
+    {
+      "candidate_id": "C0176",
+      "document_url": "https://www.perl.org/docs/",
+      "host": "www.perl.org",
+      "screen_order": 176,
+      "site": "perl.org"
+    },
+    {
+      "candidate_id": "C0177",
+      "document_url": "https://redis.io/docs/latest/develop/clients/",
+      "host": "redis.io",
+      "screen_order": 177,
+      "site": "redis.io"
+    },
+    {
+      "candidate_id": "C0178",
+      "document_url": "https://html.spec.whatwg.org/multipage/",
+      "host": "html.spec.whatwg.org",
+      "screen_order": 178,
+      "site": "whatwg.org"
+    },
+    {
+      "candidate_id": "C0179",
+      "document_url": "https://arxiv.org/abs/1706.03762",
+      "host": "arxiv.org",
+      "screen_order": 179,
+      "site": "arxiv.org"
+    },
+    {
+      "candidate_id": "C0180",
+      "document_url": "https://www.rfc-editor.org/rfc/rfc9110.txt",
+      "host": "www.rfc-editor.org",
+      "screen_order": 180,
+      "site": "rfc-editor.org"
+    },
+    {
+      "candidate_id": "C0181",
+      "document_url": "https://redis.io/docs/latest/operate/rs/databases/",
+      "host": "redis.io",
+      "screen_order": 181,
+      "site": "redis.io"
+    },
+    {
+      "candidate_id": "C0182",
+      "document_url": "https://docs.github.com/en/rest/using-the-rest-api",
+      "host": "docs.github.com",
+      "screen_order": 182,
+      "site": "github.com"
+    },
+    {
+      "candidate_id": "C0183",
+      "document_url": "https://research.google/blog/",
+      "host": "research.google",
+      "screen_order": 183,
+      "site": "research.google"
+    },
+    {
+      "candidate_id": "C0184",
+      "document_url": "https://lwn.net/Articles/",
+      "host": "lwn.net",
+      "screen_order": 184,
+      "site": "lwn.net"
+    },
+    {
+      "candidate_id": "C0185",
+      "document_url": "https://go.dev/doc/tutorial/",
+      "host": "go.dev",
+      "screen_order": 185,
+      "site": "go.dev"
+    },
+    {
+      "candidate_id": "C0186",
+      "document_url": "https://cloud.google.com/compute/docs/instances/overview",
+      "host": "cloud.google.com",
+      "screen_order": 186,
+      "site": "google.com"
+    },
+    {
+      "candidate_id": "C0187",
+      "document_url": "https://docs.kernel.org/filesystems/index.html",
+      "host": "docs.kernel.org",
+      "screen_order": 187,
+      "site": "kernel.org"
+    },
+    {
+      "candidate_id": "C0188",
+      "document_url": "https://react.dev/learn",
+      "host": "react.dev",
+      "screen_order": 188,
+      "site": "react.dev"
+    }
+  ],
+  "frozen_target_etld1": 50,
+  "frozen_target_pairs": 200,
+  "hashed_by_freeze": false,
+  "note": "This file is EXECUTOR-CONSTRUCTED. prereg s17 declares it frozen at freeze time, but freeze.json hashes only request.json, spec.json and prereg.md, so this file was not and could not be hashed. It is NOT claimed as frozen evidence.",
+  "seed": 445086315,
+  "seed_rule": "int(request_hash[:8], 16) with request_hash from request.json",
+  "source_arm_used": "manual curation list (prereg s5.1 third arm)",
+  "source_arms_not_reproducible": [
+    "Tranco top 1M (external bulk index, absent from repository)",
+    "Common Crawl index (external bulk index, absent from repository)"
+  ]
+}

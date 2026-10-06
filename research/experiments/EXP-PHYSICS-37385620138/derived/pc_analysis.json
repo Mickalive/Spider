@@ -1,0 +1,166 @@
+{
+  "bootstrap": {
+    "ci95": [
+      -1.4894969491411805,
+      -1.4894969491411805
+    ],
+    "clusters": [
+      "pc:pc05",
+      "pc:pc06",
+      "pc:pc08",
+      "pc:pc09",
+      "pc:pc13",
+      "pc:pc14"
+    ],
+    "n_clusters": 6,
+    "n_distinct_cluster_resamples": 8923,
+    "n_resamples": 10000,
+    "point_estimate": -1.4894969491411805
+  },
+  "corrected_distance_variant": {
+    "bootstrap_ci95": [
+      7.923085363078009,
+      7.923085363078009
+    ],
+    "frozen_pc_requirement_met": true,
+    "note": "executor-added robustness variant: identical positive control, identical ground truth and identical predictors, observed_delta taken from the corrected distance (0.3 * (1 - Jaccard))",
+    "primary": {
+      "mean_log_score_combined": 1.4411892902788057,
+      "mean_log_score_treatment": 9.364274653356816,
+      "mean_residual_nats": 7.923085363078009,
+      "n": 90
+    },
+    "strong_baseline_SB_DEGENERATE_ZERO": {
+      "mean_log_score_combined": 1.4411892902788057,
+      "mean_log_score_treatment": 8.34978771916818,
+      "mean_residual_nats": 6.908598428889374,
+      "n": 90
+    }
+  },
+  "frozen_pc_requirement_met": false,
+  "frozen_pc_threshold_nats": 0.1,
+  "ground_truth": {
+    "M_ANCHOR": {
+      "declared_effect": "fragment scrolls client-side",
+      "endpoint": "/pc/<site>/page/1#<id>",
+      "ground_truth_predicted_distance_direction": "exactly zero, fragment is not in the request target",
+      "ground_truth_server_visible_change": false
+    },
+    "M_PAGINATION": {
+      "declared_effect": "parameter echoed into the response body",
+      "endpoint": "/pc/<site>/echo?page=<v>",
+      "ground_truth_predicted_distance_direction": "non-zero, body differs for every v",
+      "ground_truth_server_visible_change": true
+    },
+    "M_SECTION": {
+      "declared_effect": "path segment selects a different document body",
+      "endpoint": "/pc/<site>/page/<v>",
+      "ground_truth_predicted_distance_direction": "non-zero, body differs for every v",
+      "ground_truth_server_visible_change": true
+    },
+    "n_pc_sites": 20,
+    "pc_site_split_rule": "prereg s11 step 3/4: 70% of admitted sites train, 30% test",
+    "test_sites": [
+      "pc15",
+      "pc16",
+      "pc17",
+      "pc18",
+      "pc19",
+      "pc20"
+    ],
+    "train_sites": [
+      "pc01",
+      "pc02",
+      "pc03",
+      "pc04",
+      "pc05",
+      "pc06",
+      "pc07",
+      "pc08",
+      "pc09",
+      "pc10",
+      "pc11",
+      "pc12",
+      "pc13",
+      "pc14"
+    ]
+  },
+  "n_test_instances": 90,
+  "n_train_instances": 210,
+  "null_control_NC_PERMUTED_MECHANISM": {
+    "degenerate": false,
+    "first_five": [
+      -1.6186525228533393,
+      -1.614147354983619,
+      -1.6077544200782092,
+      -1.6038843457058933,
+      -1.6032492522084887
+    ],
+    "n_distinct_values": 155,
+    "n_permutations": 1000,
+    "null_max": -0.6466314438991441,
+    "null_mean": -1.2866254684327307,
+    "null_min": -1.6186525228533393,
+    "null_p95": -0.8864358678208568
+  },
+  "per_mechanism": {
+    "M_ANCHOR": {
+      "ground_truth_direction": "exactly zero, fragment is not in the request target",
+      "ground_truth_server_visible_change": false,
+      "mean_residual_nats": 0.8472978601967275,
+      "n": 30
+    },
+    "M_PAGINATION": {
+      "ground_truth_direction": "non-zero, body differs for every v",
+      "ground_truth_server_visible_change": true,
+      "mean_residual_nats": -1.8332384934647725,
+      "n": 30
+    },
+    "M_SECTION": {
+      "ground_truth_direction": "non-zero, body differs for every v",
+      "ground_truth_server_visible_change": true,
+      "mean_residual_nats": -3.482550214155496,
+      "n": 30
+    }
+  },
+  "primary": {
+    "mean_log_score_combined": 3.498790740906788,
+    "mean_log_score_treatment": 2.0092937917656077,
+    "mean_residual_nats": -1.4894969491411805,
+    "n": 90
+  },
+  "split": {
+    "n_test_sites": 6,
+    "n_train_sites": 14,
+    "seed": 445086315,
+    "test_sites": [
+      "pc:pc05",
+      "pc:pc06",
+      "pc:pc08",
+      "pc:pc09",
+      "pc:pc13",
+      "pc:pc14"
+    ],
+    "train_sites": [
+      "pc:pc01",
+      "pc:pc02",
+      "pc:pc03",
+      "pc:pc04",
+      "pc:pc07",
+      "pc:pc10",
+      "pc:pc11",
+      "pc:pc12",
+      "pc:pc15",
+      "pc:pc16",
+      "pc:pc17",
+      "pc:pc18",
+      "pc:pc19",
+      "pc:pc20"
+    ]
+  },
+  "strong_baseline_SB_DEGENERATE_ZERO": {
+    "clears_frozen_pc_threshold": false,
+    "mean_log_score": 1.1302109322619946,
+    "mean_residual_nats": -2.3685798086447933
+  }
+}
