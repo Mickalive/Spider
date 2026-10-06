@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37385620138",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix frozen distance formula from '+0.3 * Jaccard' to '0.3 * (1 - Jaccard)' or another form where d=0 iff signatures are equal (prereg s6.3). This single defect accounts for the positive-control failure (pc_residual -1.489 nats under frozen distance vs 7.923 nats under corrected distance with identical ground truth and predictors).",
+    "Re-key B_SITE_TEMPLATE_MEMORY on (site, document_template) fitted across train sites, or hold out documents within sites, so the split can actually exercise component (ii). As frozen, the site-level split with memory_key=site|intervention_type means no test site has a TRAIN cell; the baseline collapsed to global_mean on 105/105 frozen-pool and 870/870 exploratory test instances.",
+    "Re-specify NC_PERMUTED_MECHANISM to permute across mechanisms AND intervention types, or to permute declared effect against bound parameter independently, so the null can separate mechanism declaration from rank alignment. As frozen, each intervention_type contains exactly one mechanism; permutation only reassigns parameter ranks. Null mean (1.129) centers on treatment (1.111), placing treatment at percentile 0.487.",
+    "Register a triviality floor (SB_DEGENERATE_ZERO) as a required control and make the acceptance threshold relative to it, not an absolute 0.05 nats. On the positive control under corrected distance, the constant-zero predictor recovers 87% of the treatment's gain (6.909 vs 7.923 nats). On real Web pools under corrected distance, the constant outperforms the treatment outright (12.103 vs 6.829 nats).",
+    "Lower or restructure C1: the >=12-of-15 criterion requires path-parameterized content that credential-free public HTML documents do not expose. C1 dominates screen failure (167 of 181). Only 71 of 905 path-parameter probes returned 2xx/3xx (7.85%); 151 candidates returned 404 for all five path values.",
+    "Produce and freeze pilot_data.json and power_calculation.json BEFORE freeze with values demonstrably in the attainable range of the frozen metric. The prereg claimed pilot PC=0.18±0.03 nats but these artifacts were never created or hashed; freeze.json hashes only prereg.md, request.json, spec.json.",
+    "Decide branch-precedence explicitly in the next preregistration: prereg s3 evaluates M1-M6 before F1-F6, but the alternative reading (F3, F4, F5 hold) would read FALSIFIES. The Director owns this precedence choice; the packet contract forbids recording instrument defects as scientific falsification."
+  ],
+  "validity_findings": [
+    {
+      "finding": "M1, M2, M3 all hold → experiment is MEASUREMENT_INVALID per frozen decision rule (prereg s3). No inference in either direction is permitted. M1: variation screen admitted 6 sites (required ≥20). M2: pilot_data.json and power_calculation.json absent and unhashed at freeze. M3: frozen_pool.json absent and unhashed at freeze.",
+      "gate": "M1/M2/M3",
+      "severity": "BLOCKING"
+    },
+    {
+      "finding": "V6 FAIL: variation screen admitted 6 sites (required ≥20). Same root cause as M1.",
+      "gate": "V6_POOL_ADMITTED_GE_20",
+      "severity": "BLOCKING"
+    },
+    {
+      "finding": "V7 FAIL: pilot_data.json, power_calculation.json, candidate_universe.json, frozen_pool.json all absent and unhashed. Same root cause as M2/M3.",
+      "gate": "V7_PILOT_POWER_HASHED",
+      "severity": "BLOCKING"
+    },
+    {
+      "finding": "V8 FAIL / M4 NOT DECIDABLE: frozen distance formula adds +0.3 * Jaccard(cache_headers) where a distance requires 0.3 * (1 - Jaccard). As written, identical signatures score 0.3, so the inert test ||delta|| < 0.01 can never fire. Frozen-distance reading is vacuous (0.000 on test). Non-vacuous readings (signature identity 0.333, corrected distance 0.333) both exceed 0.2 ceiling.",
+      "gate": "V8_INTERVENTION_BIT",
+      "severity": "BLOCKING"
+    },
+    {
+      "finding": "V10 FAIL: PC_KNOWN_PARAMETER_EFFECT residual = -1.489 nats (required ≥0.10 nats). The single sign error in the frozen distance formula accounts for the entire failure: corrected-distance variant with identical ground truth, predictors, and server yields pc_residual = 7.923 nats.",
+      "gate": "V10_PC_ATTAINABLE",
+      "severity": "BLOCKING"
+    },
+    {
+      "finding": "V1 PASS: null predictors receive restricted views without mechanism declaration or bound parameters. predict_cache_revalidation receives {url, baseline_url, baseline_signature}; predict_site_template_memory receives {site, memory_key}; MECHANISM_CONDITIONED reads only mechanism_id and value_rank.",
+      "gate": "V1_TARGET_INTEGRITY",
+      "severity": "OK"
+    },
+    {
+      "finding": "V2 PASS: site-level 70/30 split; B_SITE_TEMPLATE_MEMORY fitted on TRAIN rows only. train_sites=4, test_sites=2.",
+      "gate": "V2_SPLIT_INTEGRITY",
+      "severity": "OK"
+    },
+    {
+      "finding": "V3 PASS: master_seed = int(request_hash[:8],16) = 445086315; permutation and bootstrap seeds derived deterministically.",
+      "gate": "V3_SAMPLING_INTEGRITY",
+      "severity": "OK"
+    },
+    {
+      "finding": "V4 PASS: 10,000 site-clustered bootstrap resamples, no injected noise.",
+      "gate": "V4_UNCERTAINTY_INTEGRITY",
+      "severity": "OK"
+    },
+    {
+      "finding": "V5 PASS with documented loss: responses archived with status, headers, body length, body SHA256, structural hash. Body bytes not archived (prereg s14 describes body as part of artifact); recomputation requires fresh fetch.",
+      "gate": "V5_REPRESENTATION_INTEGRITY",
+      "severity": "OK"
+    },
+    {
+      "finding": "V9 PASS: NC_PERMUTED_MECHANISM produced 999 distinct residual values over 1000 permutations (non-degenerate). The inherited placebo defect from parent audit is genuinely repaired.",
+      "gate": "V9_PLACEBO_NONDEGENERATE",
+      "severity": "OK"
+    },
+    {
+      "finding": "A3 FAIL: treatment residual (1.111 nats) does not exceed NC_PERMUTED_MECHANISM p95 (1.902 nats); treatment at percentile 0.487.",
+      "gate": "ACCEPTANCE_A3",
+      "severity": "FAIL"
+    },
+    {
+      "finding": "A4 FAIL: PC residual -1.489 nats vs required ≥0.10 nats; ground-truth recovery failed.",
+      "gate": "ACCEPTANCE_A4",
+      "severity": "FAIL"
+    },
+    {
+      "finding": "A5 FAIL: only 6 sites with any non-inert intervention (required ≥15 of 20 admitted).",
+      "gate": "ACCEPTANCE_A5",
+      "severity": "FAIL"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B_CACHE_REVALIDATION",
+      "finding": "DEGENERATE ON FROZEN POOL. Emitted exactly 1 distinct value on all 105 frozen-pool test instances; carries no per-instance information there. On exploratory test set: 5 distinct values, 165 non-zero. The frozen design's component (i) cannot be measured because the collection protocol issues no conditional requests, even though substrate supplies 304 responses (73.8% of conditional GET probes).",
+      "evidence_refs": [
+        "derived/predictions_summary.json",
+        "derived/substrate_diagnostics.json",
+        "result.json.metrics.CACHE_REVALIDATION_PREDICTOR_DEGENERACY"
+      ]
+    },
+    {
+      "baseline_id": "B_SITE_TEMPLATE_MEMORY",
+      "finding": "STRUCTURALLY COLLAPSED TO CONSTANT. Keyed on (site, action_template) while split is at site level → no test site can have a TRAIN cell. Fell back to global_mean on 105/105 frozen-pool and 870/870 exploratory test instances. The frozen contrast between component (ii) and treatment was never exercised; the entire comparison is treatment vs one constant.",
+      "evidence_refs": [
+        "derived/predictions_summary.json",
+        "result.json.metrics.B_SITE_TEMPLATE_MEMORY_FALLBACK_TIERS"
+      ]
+    },
+    {
+      "baseline_id": "B_COMBINED_NULL",
+      "finding": "EFFECTIVELY CONSTANT. Composes B_SITE_TEMPLATE_MEMORY (always global_mean) with B_CACHE_REVALIDATION (mostly zero). Effective prediction on test is a single global constant (TRAIN mean of observed_delta). The three-way factorization target (cache + site-memory + mechanism residual) collapses to treatment vs one constant.",
+      "evidence_refs": [
+        "derived/predictions_summary.json",
+        "result.json.controls.B_COMBINED_NULL"
+      ]
+    },
+    {
+      "baseline_id": "SB_DEGENERATE_ZERO",
+      "finding": "EXECUTOR-ADDED TRIVIALITY FLOOR. Predicts 0.0 for every instance (no mechanism, site, parameter, data). Under corrected distance on positive control: 6.909 nats vs treatment 7.923 nats (recovers 87% of gain). On real Web exploratory pool: 12.103 nats vs treatment 6.829 nats (constant outperforms treatment). The frozen control set contained no triviality reference; the 0.05 nats threshold has no stated triviality reference point.",
+      "evidence_refs": [
+        "result.json.metrics.STRONG_BASELINE_SB_DEGENERATE_ZERO",
+        "derived/pc_analysis.json"
+      ]
+    },
+    {
+      "baseline_id": "NC_PERMUTED_MECHANISM",
+      "finding": "NON-DEGENERATE BUT CENTRED ON TREATMENT. 999 distinct values over 1000 permutations (requirement >1 holds). However, null mean (1.129) sits on treatment (1.111), treatment percentile 0.487. As specified, it cannot separate mechanism declaration from random rank alignment because each intervention_type contains exactly one mechanism; permutation only reassigns parameter ranks.",
+      "evidence_refs": [
+        "derived/null_distribution.json",
+        "result.json.metrics.NC_PERMUTED_MECHANISM_DISTRIBUTION"
+      ]
+    },
+    {
+      "baseline_id": "PC_KNOWN_PARAMETER_EFFECT",
+      "finding": "FAILS UNDER FROZEN DISTANCE. pc_residual = -1.489 nats (CI95 [-1.489, -1.489]). Ground truth: M_ANCHOR fragment inert (zero server-visible change), M_PAGINATION/M_SECTION parameter echoed in body (non-zero). M_ANCHOR correctly predicted as inert by ground truth; M_PAGINATION and M_SECTION show negative residuals under frozen distance because observed_delta takes at most two distinct values across five parameter ranks while MECHANISM_CONDITIONED emits five rank-ordered values. Corrected distance variant: pc_residual = 7.923 nats, constant_zero = 6.909 nats.",
+      "evidence_refs": [
+        "derived/pc_analysis.json",
+        "raw/pc_truth.json",
+        "result.json.controls.PC_KNOWN_PARAMETER_EFFECT"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "RESIDUAL_EFFECT_SIZE_NATS": {
+      "frozen_pool": 1.1107784218146453,
+      "exploratory_full_screened_pool": 1.4466198109313408,
+      "pc_known_parameter_effect": -1.4894969491411805,
+      "note": "Matches producer's reported values exactly. Computed as mean(log_score(MECHANISM_CONDITIONED, obs) - log_score(B_COMBINED_NULL, obs)) with log_score(pred,obs) = -log(|pred-obs| + 1e-10). NOT admissible for claim inference: M1, M2, M3 hold."
+    },
+    "RESIDUAL_EFFECT_SIZE_NATS_CORRECTED_DISTANCE": {
+      "frozen_pool": 5.650871754672433,
+      "exploratory_full_screened_pool": 6.828579223488913,
+      "pc_known_parameter_effect": 7.923085363078009,
+      "note": "Executor-added robustness variant using observed_delta = 0.3 * (1 - Jaccard) instead of frozen literal formula. Not a frozen metric."
+    },
+    "BOOTSTRAP_CI95_SITE_CLUSTERED": {
+      "frozen_pool": [0.8711076731853203, 2.5488029135905945],
+      "exploratory_full_screened_pool": [1.1990979478046837, 1.6572265884788178],
+      "pc_known_parameter_effect": [-1.4894969491411805, -1.4894969491411805],
+      "n_clusters_frozen_pool_test": 2,
+      "n_distinct_cluster_resamples_frozen_pool_test": 4,
+      "note": "Frozen pool CI based on only 2 test sites (4 train sites); 4 distinct cluster resamples out of 10,000. Exploratory pool has 20 test sites and 10,000 distinct resamples."
+    },
+    "NC_PERMUTED_MECHANISM": {
+      "frozen_pool": {
+        "n_distinct_values": 999,
+        "null_mean": 1.1287407689330298,
+        "null_p95": 1.9023843333766466,
+        "treatment_percentile": 0.487
+      },
+      "exploratory_full_screened_pool": {
+        "n_distinct_values": 1000,
+        "null_mean": 1.4558285171330139,
+        "null_p95": 1.6656028510255265,
+        "treatment_percentile": 0.472
+      }
+    },
+    "RESIDUAL_SIGN_ACCURACY": {
+      "frozen_pool": 0.2916666666666667,
+      "exploratory_full_screened_pool": 0.2
+    },
+    "SITE_MEMORY_EXPLAINED_VARIANCE": {
+      "frozen_pool": 0.4021424951328172,
+      "exploratory_full_screened_pool": 0.594561558814517
+    },
+    "TREATMENT_EXPLAINED_VARIANCE": {
+      "frozen_pool": -0.6599767205536786,
+      "exploratory_full_screened_pool": -0.6177020145712442
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID — no admissible evidence for or against C-WEB-DYNAMICS. The experiment is MEASUREMENT_INVALID because M1 (6 < 20 admitted sites), M2 (pilot_data.json and power_calculation.json absent/unhashed), and M3 (frozen_pool.json absent/unhashed) all hold per frozen decision rule (prereg s3). The frozen distance formula is not a metric (sign error in Jaccard term), the frozen strong baseline B_SITE_TEMPLATE_MEMORY collapses to a global constant on test due to site-level split with site-in-key, the frozen null NC_PERMUTED_MECHANISM centers on the treatment (percentile 0.487), and the mechanism-conditioned predictor outputs rank magnitudes that HTTP signatures cannot express. Substrate findings are admissible but bounded: fragment interventions are inert by HTTP definition; query parameters produce body variation above the 87.5% dynamism floor (25.5% for M_PAGINATION); path parameters are mostly absent (404); revalidation responses exist (73.8% 304) but the frozen protocol does not issue conditional requests. Claim C-WEB-DYNAMICS remains HYPOTHESIS; this run produces no admissible evidence toward it.",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json",
+    "result.json",
+    "report.md",
+    "provenance.json",
+    "raw/frozen_input_verification.json",
+    "raw/executor_pool.json",
+    "raw/collection_log.jsonl",
+    "raw/screen_results.jsonl",
+    "raw/diagnostics.jsonl",
+    "raw/pc_collection_log.jsonl",
+    "raw/pc_truth.json",
+    "derived/predictions_summary.json",
+    "derived/metrics.json",
+    "derived/pc_analysis.json",
+    "derived/null_distribution.json",
+    "derived/bootstrap_cis.json",
+    "derived/decision_readings.json",
+    "derived/validity_gates.json",
+    "research/physics/exp_37385620138_lib.py",
+    "research/physics/exp_37385620138_candidates.py",
+    "research/physics/exp_37385620138_collect.py",
+    "research/physics/exp_37385620138_analyze.py",
+    "research/physics/exp_37385620138_finalize.py",
+    "codex/claim_state.json (C-WEB-DYNAMICS history)",
+    "research/lanes/registry.json"
+  ],
+  "unresolved": [
+    "Branch precedence in prereg s3: M1-M6 evaluated before F1-F6. Alternative reading (F3, F4, F5 hold) would read FALSIFIES. Director must decide precedence in next preregistration; packet contract forbids recording instrument defects as scientific falsification.",
+    "Whether a valid interventional effect-factorization design can be executed on credential-free public HTML via stdlib HTTP, given that path-parameterized content is largely absent (C1 dominates screen failure) and fragment interventions are inert by HTTP definition.",
+    "Whether the mechanism-semantic residual concept (predicting rank-ordered magnitudes of signature change) is identifiable from HTTP response signatures at all, given that HTTP exposes only whether the signature changed, not how much a parameter changed a document.",
+    "Whether the 25.5% body variation rate for M_PAGINATION (vs 12.5% dynamism floor) represents mechanism-semantic structure or template rotation / server-side dynamism — the collapsed B_SITE_TEMPLATE_MEMORY arm was designed to make this discrimination but cannot be exercised as frozen.",
+    "The site-dynamism floor (87.5% byte-identical repeat fetches) is measured but its relationship to the 25.5% pagination variation is not quantified with a strong retrieval baseline at equal accuracy and budget, per the Director's agent prior on retrieval baselines."
+  ]
+}
