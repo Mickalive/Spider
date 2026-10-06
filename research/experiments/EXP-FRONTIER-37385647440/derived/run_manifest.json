@@ -1,0 +1,39 @@
+{
+ "experiment_id": "EXP-FRONTIER-37385647440",
+ "wall_clock_seconds": 487.3,
+ "responses_cached": 250,
+ "cache_bytes_uncompressed": 71405736,
+ "http_log_records": 359,
+ "observation_records": 320,
+ "min_inter_session_delay_s": 93.81,
+ "n_distinct_cookie_names_per_site": {
+  "gitlab": [
+   "_cfuvid",
+   "_gitlab_session",
+   "preferred_language"
+  ],
+  "wikimedia": [
+   "GeoIP",
+   "NetworkProbeLimit",
+   "WMF-Last-Access",
+   "WMF-Uniq",
+   "authSession"
+  ],
+  "wikipedia": [
+   "CentralAuthAnonTopLevel",
+   "GeoIP",
+   "NetworkProbeLimit",
+   "WMF-Last-Access",
+   "WMF-Last-Access-Global",
+   "WMF-Uniq",
+   "authSession",
+   "enwikiSession"
+  ],
+  "bitbucket": [
+   "atlCohort",
+   "bxp_gateway_anchor"
+  ],
+  "httpbin": [],
+  "postman_echo": []
+ }
+}

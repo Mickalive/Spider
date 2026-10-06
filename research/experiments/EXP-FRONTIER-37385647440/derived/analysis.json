@@ -1,0 +1,752 @@
+{
+ "experiment_id": "EXP-FRONTIER-37385647440",
+ "lane": "frontier",
+ "environment": {
+  "python": "3.12.14",
+  "platform": "linux",
+  "tiktoken_version": "0.14.0",
+  "tokenizer_encoding": "cl100k_base",
+  "tiktoken_declared_in_pyproject": false,
+  "network": "AVAILABLE",
+  "started_at_unix": 1791244949.632107
+ },
+ "denominators": {
+  "items_total": 32,
+  "items_discovered_and_admitted": 19,
+  "items_control_declared": 13,
+  "items_classified": 29,
+  "items_unclassifiable": 3,
+  "sites_with_at_least_one_classified_item": 5,
+  "frozen_floor_items": 20,
+  "frozen_floor_sites": 4,
+  "meets_frozen_floor_items": true,
+  "meets_frozen_floor_sites": true
+ },
+ "class_distribution": {
+  "session_invariant": {
+   "count": 12,
+   "proportion": 0.41379310344827586,
+   "ci95_low": 0.045454545454545456,
+   "ci95_high": 0.7586206896551724
+  },
+  "session_scoped": {
+   "count": 0,
+   "proportion": 0.0,
+   "ci95_low": 0.0,
+   "ci95_high": 0.0
+  },
+  "request_scoped": {
+   "count": 17,
+   "proportion": 0.5862068965517241,
+   "ci95_low": 0.2413793103448276,
+   "ci95_high": 0.9545454545454546
+  },
+  "time_scoped": {
+   "count": 0,
+   "proportion": 0.0,
+   "ci95_low": 0.0,
+   "ci95_high": 0.0
+  },
+  "rotating": {
+   "count": 0,
+   "proportion": 0.0,
+   "ci95_low": 0.0,
+   "ci95_high": 0.0
+  }
+ },
+ "class_distribution_value_only_sensitivity": {
+  "session_invariant": {
+   "count": 12,
+   "proportion": 0.7058823529411765
+  },
+  "session_scoped": {
+   "count": 0,
+   "proportion": 0.0
+  },
+  "request_scoped": {
+   "count": 5,
+   "proportion": 0.29411764705882354
+  },
+  "time_scoped": {
+   "count": 0,
+   "proportion": 0.0
+  },
+  "rotating": {
+   "count": 0,
+   "proportion": 0.0
+  }
+ },
+ "bootstrap": {
+  "resamples": 10000,
+  "seed": 37385647440,
+  "unit": "site",
+  "sites": [
+   "bitbucket",
+   "gitlab",
+   "httpbin",
+   "wikimedia",
+   "wikipedia"
+  ]
+ },
+ "re_acquisition_economics_per_class": {
+  "session_invariant": {
+   "n_items": 12,
+   "sites": [
+    "gitlab",
+    "httpbin",
+    "wikipedia"
+   ],
+   "median_re_acquisition_tokens": 37357.0,
+   "median_re_acquisition_requests": 1.0,
+   "median_re_acquisition_tokens_ci95": [
+    113.0,
+    71673
+   ],
+   "median_re_derivation_tokens": 71673,
+   "median_re_derivation_requests": 1,
+   "break_even_reuse_count_tokens": 2,
+   "break_even_null_reason": null,
+   "median_item_level_break_even_reuse_count_tokens": null,
+   "n_items_with_measurable_re_derivation": 7
+  },
+  "session_scoped": null,
+  "request_scoped": {
+   "n_items": 17,
+   "sites": [
+    "bitbucket",
+    "gitlab",
+    "httpbin",
+    "wikimedia",
+    "wikipedia"
+   ],
+   "median_re_acquisition_tokens": 93986,
+   "median_re_acquisition_requests": 1,
+   "median_re_acquisition_tokens_ci95": [
+    224.0,
+    445881
+   ],
+   "median_re_derivation_tokens": 445894,
+   "median_re_derivation_requests": 1,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_null_reason": null,
+   "median_item_level_break_even_reuse_count_tokens": 1256,
+   "n_items_with_measurable_re_derivation": 13
+  },
+  "time_scoped": null,
+  "rotating": null
+ },
+ "falsifier": {
+  "frozen_text": "If the majority of detected state items across the frozen target pool are classified as non-stationary (request_scoped, time_scoped, or rotating) AND the median re_acquisition_cost (tokens + requests) for a fresh valid instance is not strictly less than the unconditional re-derivation cost for the same path, then a handle-refreshing persistent state buys no measurable work reduction on the credential-free public HTTP substrate class. This is a bounded negative for HANDLE PERSISTENCE in this substrate class only; it does not close C-CROSSSITE, C-FRESHNESS, or the persistence question broadly.",
+  "majority_non_stationary": true,
+  "n_non_stationary": 17,
+  "n_stationary": 12,
+  "majority_non_stationary_class": "request_scoped",
+  "cost_condition": false,
+  "cost_condition_reason": null,
+  "falsifier_triggered": false,
+  "falsifier_state": "NOT_TRIGGERED",
+  "attainability_audit": {
+   "question": "Can the frozen falsifier's cost_condition ever be TRUE for any item reachable within the frozen crawl bounds?",
+   "argument": "For an item whose page is reached by the cold breadth-first crawl, re_derivation_requests is the BFS fetch order of that page and re_acquisition_request_count is the length of a shortest path to it. The BFS route is itself a shortest path, so re_derivation_requests >= re_acquisition_request_count, and re_derivation_tokens is the token sum of a superset of those same responses, so re_derivation_tokens >= re_acquisition_tokens. Hence median_re_acquisition >= median_re_derivation is FALSE whenever both medians are measured, and TRUE only where re_derivation is null, which makes the comparison undefined rather than true.",
+   "n_items_classified_with_measurable_re_derivation": 20,
+   "n_items_where_re_derivation_ge_re_acquisition_on_both_units": 20,
+   "empirical_share": 1.0,
+   "frozen_falsifier_trigger_region_is_empty": true,
+   "consequence": "The frozen accept region for FALSIFIES has empty interior: no execution of this frozen decision rule can produce outcome=FALSIFIES. The reachable branches are controls-fail (MEASUREMENT_INVALID), SUPPORTS and MIXED."
+  }
+ },
+ "controls": {
+  "KNOWN_STATIONARY_CONTROL": {
+   "expected_behavior": "ALL non-optional designated items classified session_invariant with exact-value and body-hash equality across all 5 sessions",
+   "status": "FAIL",
+   "metric_value": 12,
+   "items": [
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/robots.txt|robots.txt",
+     "page_url": "https://httpbin.org/robots.txt",
+     "prereg_designated": true,
+     "optional_per_prereg": false,
+     "final_url_observed": "https://httpbin.org/robots.txt",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "n_distinct_body_hashes": 1,
+     "stationarity_class": "session_invariant",
+     "verdict": "PASS",
+     "reason": "exact-value and body-hash invariance across all 5 sessions"
+    },
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/sitemap.xml|sitemap.xml",
+     "page_url": "https://httpbin.org/sitemap.xml",
+     "prereg_designated": true,
+     "optional_per_prereg": true,
+     "final_url_observed": "https://httpbin.org/sitemap.xml",
+     "http_statuses": [
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "n_distinct_body_hashes": 1,
+     "stationarity_class": "session_invariant",
+     "verdict": "SKIPPED",
+     "reason": "prereg 6.1 conditional 'sitemap.xml (if exists, else skip)'; observed HTTP statuses [404] -> the resource is ABSENT. A byte-stable 404 error page is NOT evidence of stationary state and is excluded from the verdict by the frozen conditional, not by producer choice."
+    },
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|file|https://gitlab.com/favicon.ico|favicon.ico",
+     "page_url": "https://gitlab.com/favicon.ico",
+     "prereg_designated": true,
+     "optional_per_prereg": false,
+     "final_url_observed": "https://gitlab.com/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "n_distinct_body_hashes": 1,
+     "stationarity_class": "session_invariant",
+     "verdict": "PASS",
+     "reason": "exact-value and body-hash invariance across all 5 sessions"
+    },
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|file|https://en.wikipedia.org/static/favicon/wikipedia.ico|wikipedia.ico",
+     "page_url": "https://en.wikipedia.org/static/favicon/wikipedia.ico",
+     "prereg_designated": true,
+     "optional_per_prereg": false,
+     "final_url_observed": "https://en.wikipedia.org/static/favicon/wikipedia.ico",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "n_distinct_body_hashes": 1,
+     "stationarity_class": "session_invariant",
+     "verdict": "PASS",
+     "reason": "exact-value and body-hash invariance across all 5 sessions"
+    },
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|link|https://about.gitlab.com/|https://gitlab.com/explore",
+     "page_url": "https://about.gitlab.com/",
+     "prereg_designated": true,
+     "optional_per_prereg": false,
+     "final_url_observed": "https://about.gitlab.com/",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent"
+     ],
+     "n_sessions_observed": 0,
+     "n_distinct_values": null,
+     "n_distinct_body_hashes": null,
+     "stationarity_class": null,
+     "verdict": "UNOBSERVABLE",
+     "reason": "designated element not present at the designated URL: statuses=[200], extract_statuses=['absent'], unclassifiable_reason=designated element not extractable in one or more sessions (sessions [0, 1, 2, 3, 4])"
+    },
+    {
+     "item_id": "KNOWN_STATIONARY_CONTROL|link|https://en.wikipedia.org/wiki/Main_Page|https://en.wikipedia.org/wiki/Main_Page",
+     "page_url": "https://en.wikipedia.org/wiki/Main_Page",
+     "prereg_designated": true,
+     "optional_per_prereg": false,
+     "final_url_observed": "https://en.wikipedia.org/wiki/Main_Page",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "n_distinct_body_hashes": 5,
+     "stationarity_class": "request_scoped",
+     "verdict": "FAIL",
+     "reason": "classified request_scoped (n_distinct_values=1, n_distinct_body_hashes=5)"
+    }
+   ],
+   "evidence_ref": "raw/observations.jsonl"
+  },
+  "REVERIFIED_NON_STATIONARY": {
+   "expected_behavior": "ALL designated items classified session_scoped or rotating with >= 2 distinct values across 5 sessions; any session_invariant verdict invalidates the run",
+   "status": "FAIL",
+   "metric_value": null,
+   "items": [
+    {
+     "item_id": "REVERIFIED_NON_STATIONARY|input|https://gitlab.com/users/sign_in|authenticity_token",
+     "page_url": "https://gitlab.com/users/sign_in",
+     "prereg_designated": true,
+     "http_statuses": [
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403
+     ],
+     "value_extract_statuses": [
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent",
+      "absent"
+     ],
+     "n_sessions_observed": 0,
+     "n_distinct_values": null,
+     "n_distinct_body_hashes": null,
+     "stationarity_class": null,
+     "verdict": "UNOBSERVABLE",
+     "reason": "designated input not observable at the prereg-named URL: statuses=[403]; unclassifiable_reason=designated element not extractable in one or more sessions (sessions [0, 1, 2, 3, 4])"
+    },
+    {
+     "item_id": "REVERIFIED_NON_STATIONARY|input|https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount|wpCreateaccountToken",
+     "page_url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount",
+     "prereg_designated": true,
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 5,
+     "n_distinct_body_hashes": 5,
+     "stationarity_class": "request_scoped",
+     "verdict": "FAIL",
+     "reason": "classified request_scoped; criterion requires session_scoped or rotating with >=2 distinct values"
+    }
+   ],
+   "evidence_ref": "raw/observations.jsonl"
+  },
+  "INTER_SESSION_DELAY": {
+   "expected_behavior": "all inter-session delays >= 60 s",
+   "status": "PASS",
+   "metric_value": 93.81,
+   "items": [],
+   "evidence_ref": "raw/session_timing.jsonl"
+  },
+  "NULL_STATIONARITY_ARM": {
+   "expected_behavior": "at least one designated null item classified request_scoped or rotating, proving the arm can fire",
+   "status": "PASS",
+   "metric_value": 2,
+   "items": [
+    {
+     "item_id": "NULL_STATIONARITY_ARM|json_field|https://httpbin.org/uuid|uuid",
+     "page_url": "https://httpbin.org/uuid",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 5,
+     "stationarity_class": "request_scoped",
+     "arm_fired": true,
+     "verdict": "FIRED"
+    },
+    {
+     "item_id": "NULL_STATIONARITY_ARM|json_field|https://httpbin.org/date|date",
+     "page_url": "https://httpbin.org/date",
+     "http_statuses": [
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404
+     ],
+     "value_extract_statuses": [
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error"
+     ],
+     "n_sessions_observed": 0,
+     "n_distinct_values": null,
+     "stationarity_class": null,
+     "arm_fired": false,
+     "verdict": "UNOBSERVABLE"
+    },
+    {
+     "item_id": "NULL_STATIONARITY_ARM|header|https://httpbin.org/headers|X-Request-Id",
+     "page_url": "https://httpbin.org/headers",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback",
+      "fallback"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "stationarity_class": "request_scoped",
+     "arm_fired": true,
+     "verdict": "FIRED"
+    },
+    {
+     "item_id": "NULL_STATIONARITY_ARM|file|https://httpbin.org/robots.txt?cache_buster={rand16}|robots.txt?cache_buster",
+     "page_url": "https://httpbin.org/robots.txt?cache_buster={rand16}",
+     "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+     ],
+     "value_extract_statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+     ],
+     "n_sessions_observed": 5,
+     "n_distinct_values": 1,
+     "stationarity_class": "session_invariant",
+     "arm_fired": false,
+     "verdict": "NOT_FIRED"
+    }
+   ],
+   "evidence_ref": "raw/observations.jsonl"
+  },
+  "PRE_FREEZE_CONTROL_VERIFICATION_GATE": {
+   "expected_behavior": "all four pre-freeze controls verified live and PASS before freeze.json was created",
+   "status": "FAIL",
+   "metric_value": 0,
+   "items": [],
+   "evidence_ref": "spec.json.controls_pre_freeze_verification"
+  }
+ },
+ "controls_pass": false,
+ "controls_pass_note": "the frozen controls_gate counts the FOUR pre-freeze controls. PRE_FREEZE_CONTROL_VERIFICATION_GATE is reported separately as a process finding and is excluded from that count, but it is itself a FAIL of the frozen prereg section 7 precondition.",
+ "token_to_latency": null,
+ "token_to_dollar": null,
+ "retrieval_baseline_exercised": false,
+ "oracle_perfect_transfer_exercised": false,
+ "non_get_requests_sent": 0,
+ "get_requests_sent": 359,
+ "inter_session_delays": [
+  {
+   "site": "gitlab",
+   "session_pair": "0->1",
+   "delay_seconds": 94.24
+  },
+  {
+   "site": "wikimedia",
+   "session_pair": "0->1",
+   "delay_seconds": 94.09
+  },
+  {
+   "site": "wikipedia",
+   "session_pair": "0->1",
+   "delay_seconds": 93.82
+  },
+  {
+   "site": "bitbucket",
+   "session_pair": "0->1",
+   "delay_seconds": 93.81
+  },
+  {
+   "site": "httpbin",
+   "session_pair": "0->1",
+   "delay_seconds": 94.13
+  },
+  {
+   "site": "postman_echo",
+   "session_pair": "0->1",
+   "delay_seconds": 94.13
+  },
+  {
+   "site": "gitlab",
+   "session_pair": "1->2",
+   "delay_seconds": 94.22
+  },
+  {
+   "site": "wikimedia",
+   "session_pair": "1->2",
+   "delay_seconds": 94.35
+  },
+  {
+   "site": "wikipedia",
+   "session_pair": "1->2",
+   "delay_seconds": 94.39
+  },
+  {
+   "site": "bitbucket",
+   "session_pair": "1->2",
+   "delay_seconds": 94.44
+  },
+  {
+   "site": "httpbin",
+   "session_pair": "1->2",
+   "delay_seconds": 94.24
+  },
+  {
+   "site": "postman_echo",
+   "session_pair": "1->2",
+   "delay_seconds": 94.24
+  },
+  {
+   "site": "gitlab",
+   "session_pair": "2->3",
+   "delay_seconds": 94.31
+  },
+  {
+   "site": "wikimedia",
+   "session_pair": "2->3",
+   "delay_seconds": 94.31
+  },
+  {
+   "site": "wikipedia",
+   "session_pair": "2->3",
+   "delay_seconds": 94.14
+  },
+  {
+   "site": "bitbucket",
+   "session_pair": "2->3",
+   "delay_seconds": 94.17
+  },
+  {
+   "site": "httpbin",
+   "session_pair": "2->3",
+   "delay_seconds": 94.73
+  },
+  {
+   "site": "postman_echo",
+   "session_pair": "2->3",
+   "delay_seconds": 94.73
+  },
+  {
+   "site": "gitlab",
+   "session_pair": "3->4",
+   "delay_seconds": 94.9
+  },
+  {
+   "site": "wikimedia",
+   "session_pair": "3->4",
+   "delay_seconds": 94.94
+  },
+  {
+   "site": "wikipedia",
+   "session_pair": "3->4",
+   "delay_seconds": 94.88
+  },
+  {
+   "site": "bitbucket",
+   "session_pair": "3->4",
+   "delay_seconds": 95.86
+  },
+  {
+   "site": "httpbin",
+   "session_pair": "3->4",
+   "delay_seconds": 95.38
+  },
+  {
+   "site": "postman_echo",
+   "session_pair": "3->4",
+   "delay_seconds": 95.38
+  }
+ ]
+}

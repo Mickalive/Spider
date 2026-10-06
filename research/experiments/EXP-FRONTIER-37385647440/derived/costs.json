@@ -1,0 +1,1085 @@
+{
+ "experiment_id": "EXP-FRONTIER-37385647440",
+ "tokenizer": "cl100k_base (tiktoken, NOT declared in pyproject.toml)",
+ "cold_crawl_summary": {
+  "gitlab": {
+   "root_url": "https://gitlab.com",
+   "final_root": "https://about.gitlab.com/",
+   "root_redirected_off_nominal_host": true,
+   "cold_total_requests": 50,
+   "cold_total_tokens": 3803441,
+   "n_candidates_detected": 50
+  },
+  "wikimedia": {
+   "root_url": "https://auth.wikimedia.org",
+   "final_root": "https://www.wikimedia.org/",
+   "root_redirected_off_nominal_host": true,
+   "cold_total_requests": 1,
+   "cold_total_tokens": 14530,
+   "n_candidates_detected": 0
+  },
+  "wikipedia": {
+   "root_url": "https://en.wikipedia.org",
+   "final_root": "https://en.wikipedia.org/wiki/Main_Page",
+   "root_redirected_off_nominal_host": true,
+   "cold_total_requests": 50,
+   "cold_total_tokens": 5997227,
+   "n_candidates_detected": 110
+  },
+  "bitbucket": {
+   "root_url": "https://bitbucket.org",
+   "final_root": "https://bitbucket.org",
+   "root_redirected_off_nominal_host": false,
+   "cold_total_requests": 50,
+   "cold_total_tokens": 6597425,
+   "n_candidates_detected": 8
+  },
+  "httpbin": {
+   "root_url": "https://httpbin.org",
+   "final_root": "https://httpbin.org",
+   "root_redirected_off_nominal_host": false,
+   "cold_total_requests": 2,
+   "cold_total_tokens": 3534,
+   "n_candidates_detected": 1
+  },
+  "postman_echo": {
+   "root_url": "https://postman-echo.com",
+   "final_root": "https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation",
+   "root_redirected_off_nominal_host": true,
+   "cold_total_requests": 1,
+   "cold_total_tokens": 35891,
+   "n_candidates_detected": 0
+  }
+ },
+ "per_item": {
+  "gitlab|link|https://gitlab.com|https://gitlab.com/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "gitlab|link|https://gitlab.com|https://gitlab.com/ai-transparency-center/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "gitlab|link|https://gitlab.com|https://gitlab.com/assessments/ai-modernization-assessment/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "gitlab|link|https://gitlab.com|https://gitlab.com/assessments/devops-modernization-assessment/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "gitlab|link|https://gitlab.com|https://gitlab.com/assessments/security-modernization-assessment/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "gitlab|link|https://gitlab.com|https://gitlab.com/blog/": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com",
+   "re_acquisition_path": [
+    "https://gitlab.com"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71673,
+    71673,
+    71675,
+    71674,
+    71673
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71673,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 71673,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "wikipedia|input|https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page|wpCreateaccountToken": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page"
+   ],
+   "re_acquisition_request_count": 2,
+   "re_acquisition_tokens_per_session": [
+    93961,
+    94002,
+    94010,
+    94001,
+    93985
+   ],
+   "re_acquisition_requests_per_session": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "median_re_acquisition_tokens": 94001,
+   "median_re_acquisition_requests": 2,
+   "re_derivation_tokens": 965525,
+   "re_derivation_requests": 15,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "wikipedia|input|https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page|wpEditToken": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page"
+   ],
+   "re_acquisition_request_count": 2,
+   "re_acquisition_tokens_per_session": [
+    93961,
+    94002,
+    94010,
+    94001,
+    93985
+   ],
+   "re_acquisition_requests_per_session": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "median_re_acquisition_tokens": 94001,
+   "median_re_acquisition_requests": 2,
+   "re_derivation_tokens": 965525,
+   "re_derivation_requests": 15,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "wikipedia|input|https://en.wikipedia.org/w/index.php?title=Special:UrlShortener&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMain_Page|wpEditToken": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/w/index.php?title=Special:UrlShortener&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMain_Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://en.wikipedia.org/w/index.php?title=Special:UrlShortener&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMain_Page"
+   ],
+   "re_acquisition_request_count": 2,
+   "re_acquisition_tokens_per_session": [
+    93969,
+    93979,
+    93986,
+    94007,
+    93987
+   ],
+   "re_acquisition_requests_per_session": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "median_re_acquisition_tokens": 93986,
+   "median_re_acquisition_requests": 2,
+   "re_derivation_tokens": 1499809,
+   "re_derivation_requests": 26,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "wikipedia|input|https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page|wpEditToken": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page"
+   ],
+   "re_acquisition_request_count": 2,
+   "re_acquisition_tokens_per_session": [
+    93113,
+    93164,
+    93108,
+    93116,
+    93121
+   ],
+   "re_acquisition_requests_per_session": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "median_re_acquisition_tokens": 93116,
+   "median_re_acquisition_requests": 2,
+   "re_derivation_tokens": 977074,
+   "re_derivation_requests": 16,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "wikipedia|input|https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page|wpLoginToken": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page"
+   ],
+   "re_acquisition_request_count": 2,
+   "re_acquisition_tokens_per_session": [
+    93113,
+    93164,
+    93108,
+    93116,
+    93121
+   ],
+   "re_acquisition_requests_per_session": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "median_re_acquisition_tokens": 93116,
+   "median_re_acquisition_requests": 2,
+   "re_derivation_tokens": 977074,
+   "re_derivation_requests": 16,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "wikipedia|input|https://en.wikipedia.org|title": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    81612,
+    81602,
+    81604,
+    81603,
+    81605
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 81604,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 81669,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1256,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/blog/": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/blog/ai": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/product/features/pipelines/integrations": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/product/pricing": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "bitbucket|link|https://bitbucket.org|https://bitbucket.org/product/version-control-software": {
+   "site": "bitbucket",
+   "page_url": "https://bitbucket.org",
+   "re_acquisition_path": [
+    "https://bitbucket.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    445898,
+    445873,
+    445936,
+    445881,
+    445874
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 445881,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 445894,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 6597425,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 34299,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": null
+  },
+  "httpbin|link|https://httpbin.org|https://httpbin.org/forms/post": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org",
+   "re_acquisition_path": [
+    "https://httpbin.org"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    3041,
+    3041,
+    3041,
+    3041,
+    3041
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 3041,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 3041,
+   "re_derivation_requests": 1,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "infinite (re_derivation <= re_acquisition)"
+  },
+  "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/robots.txt|robots.txt": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/robots.txt",
+   "re_acquisition_path": [
+    "https://httpbin.org/robots.txt"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    79,
+    79,
+    79,
+    79,
+    79
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 79,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/sitemap.xml|sitemap.xml": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/sitemap.xml",
+   "re_acquisition_path": [
+    "https://httpbin.org/sitemap.xml"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    134,
+    134,
+    134,
+    134,
+    134
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 134,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "KNOWN_STATIONARY_CONTROL|file|https://gitlab.com/favicon.ico|favicon.ico": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com/favicon.ico",
+   "re_acquisition_path": [
+    "https://gitlab.com/favicon.ico"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    986,
+    997,
+    1002,
+    987,
+    1005
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 997,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "KNOWN_STATIONARY_CONTROL|file|https://en.wikipedia.org/static/favicon/wikipedia.ico|wikipedia.ico": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/static/favicon/wikipedia.ico",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/static/favicon/wikipedia.ico"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    1921,
+    1923,
+    1922,
+    1923,
+    1924
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 1923,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "KNOWN_STATIONARY_CONTROL|link|https://about.gitlab.com/|https://gitlab.com/explore": {
+   "site": "gitlab",
+   "page_url": "https://about.gitlab.com/",
+   "re_acquisition_path": [
+    "https://about.gitlab.com/"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    71674,
+    71675,
+    71675,
+    71674,
+    71675
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 71675,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 522675,
+   "re_derivation_requests": 7,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "KNOWN_STATIONARY_CONTROL|link|https://en.wikipedia.org/wiki/Main_Page|https://en.wikipedia.org/wiki/Main_Page": {
+   "site": "wikipedia",
+   "page_url": "https://en.wikipedia.org/wiki/Main_Page",
+   "re_acquisition_path": [
+    "https://en.wikipedia.org/wiki/Main_Page"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    81586,
+    81600,
+    81603,
+    81609,
+    81609
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 81603,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": 163250,
+   "re_derivation_requests": 2,
+   "re_derivation_status": "reachable_in_bounded_cold_crawl",
+   "re_derivation_at_least_full_cold_crawl_tokens": 5997227,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": 1,
+   "break_even_reuse_count_requests": 1,
+   "break_even_null_reason": null
+  },
+  "REVERIFIED_NON_STATIONARY|input|https://gitlab.com/users/sign_in|authenticity_token": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com/users/sign_in",
+   "re_acquisition_path": [
+    "https://gitlab.com/users/sign_in"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    3595,
+    3631,
+    3567,
+    3650,
+    3590
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 3595,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "REVERIFIED_NON_STATIONARY|input|https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount|wpCreateaccountToken": {
+   "site": "wikimedia",
+   "page_url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount",
+   "re_acquisition_path": [
+    "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    12058,
+    12058,
+    12059,
+    12062,
+    12061
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 12059,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 14530,
+   "re_derivation_at_least_full_cold_crawl_requests": 1,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "REVERIFIED_NON_STATIONARY|input|https://gitlab.com/-/trial_registrations/new/|authenticity_token": {
+   "site": "gitlab",
+   "page_url": "https://gitlab.com/-/trial_registrations/new/",
+   "re_acquisition_path": [
+    "https://gitlab.com/-/trial_registrations/new/"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    11583,
+    11683,
+    11611,
+    11604,
+    11681
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 11611,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3803441,
+   "re_derivation_at_least_full_cold_crawl_requests": 50,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "NULL_STATIONARITY_ARM|json_field|https://httpbin.org/uuid|uuid": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/uuid",
+   "re_acquisition_path": [
+    "https://httpbin.org/uuid"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    102,
+    100,
+    98,
+    100,
+    101
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 100,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "NULL_STATIONARITY_ARM|json_field|https://httpbin.org/date|date": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/date",
+   "re_acquisition_path": [
+    "https://httpbin.org/date"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    132,
+    132,
+    132,
+    132,
+    132
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 132,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "NULL_STATIONARITY_ARM|header|https://httpbin.org/headers|X-Request-Id": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/headers",
+   "re_acquisition_path": [
+    "https://httpbin.org/headers"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    224,
+    226,
+    224,
+    224,
+    224
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "median_re_acquisition_tokens": 224,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  },
+  "NULL_STATIONARITY_ARM|file|https://httpbin.org/robots.txt?cache_buster={rand16}|robots.txt?cache_buster": {
+   "site": "httpbin",
+   "page_url": "https://httpbin.org/robots.txt?cache_buster=135e59e7532fb898",
+   "re_acquisition_path": [
+    "https://httpbin.org/robots.txt?cache_buster=135e59e7532fb898"
+   ],
+   "re_acquisition_request_count": 1,
+   "re_acquisition_tokens_per_session": [
+    92,
+    null,
+    null,
+    null,
+    null
+   ],
+   "re_acquisition_requests_per_session": [
+    1,
+    null,
+    null,
+    null,
+    null
+   ],
+   "median_re_acquisition_tokens": 92,
+   "median_re_acquisition_requests": 1,
+   "re_derivation_tokens": null,
+   "re_derivation_requests": null,
+   "re_derivation_status": "not_reached_within_frozen_crawl_bounds",
+   "re_derivation_at_least_full_cold_crawl_tokens": 3534,
+   "re_derivation_at_least_full_cold_crawl_requests": 2,
+   "break_even_reuse_count_tokens": null,
+   "break_even_reuse_count_requests": null,
+   "break_even_null_reason": "not computable: re_derivation unmeasured under the frozen crawl bounds"
+  }
+ }
+}
