@@ -75,9 +75,9 @@ jobs:
           done
           echo "ready=$ready" >> "$GITHUB_OUTPUT"
           if [[ "$ready" != true ]]; then
-            echo "::error::SPIDER_DIRECTION_OPENCODE_UNAVAILABLE rc=${rc:-75}"
-            exit "${rc:-75}"
+            echo "::warning::SPIDER_DIRECTION_OPENCODE_UNAVAILABLE rc=${rc:-75}; frozen transactions may still resume"
           fi
+          exit 0
 
       - name: Scout lane — general reconnaissance
         id: scout
@@ -139,9 +139,9 @@ jobs:
           fi
           echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           if [[ "$rc" -ne 0 ]]; then
-            echo "::error::SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE rc=$rc"
-            exit "$rc"
+            echo "::warning::SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE rc=$rc; frozen transactions may still resume"
           fi
+          exit 0
 
       - name: Preserve direction artifacts
         if: always()
@@ -158,6 +158,7 @@ jobs:
           retention-days: 14
 
       - name: Dispatch or resume lanes
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           DIRECTION_READY: ${{ steps.director.outputs.ready }}
