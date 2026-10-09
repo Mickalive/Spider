@@ -79,7 +79,9 @@ Local lane Directors still adjudicate evidence and produce bounded handoffs, but
 - read the exact request and lane charter before acting;
 - read relevant Codex evidence rather than reconstructing from old logs;
 - preserve RAW OBSERVATION separately from DERIVED STATE;
-- do not run outcome-bearing measurements during DESIGN;
+- do not run outcome-bearing measurements during DESIGN or BUILD;
+- if an experiment needs new instrument/capability/fixture code, DESIGN declares `build_required=true` and exact `freeze_artifacts`; BUILD creates only those preregistered artifacts before freeze;
+- FREEZE binds the exact BUILD artifact bytes; EXECUTE must not alter them;
 - do not modify frozen files after `freeze.json` exists;
 - use strong baselines and nulls appropriate to the claim;
 - disclose representation loss and validity threats;
@@ -105,6 +107,8 @@ Do not promote an experimental mechanism into Product Core without a verdict aut
 
 Measure end-to-end economics: correctness, model calls/tokens, browser/network work, retrieval, verification, repair, latency, false accepts, staleness and amortization.
 
+A real LLM substrate is defined by a reproducible working invocation, not by the presence of any particular vendor key. A pinned OpenCode model MAY serve as the model substrate if it passes a preflight, is held fixed across measured arms, emits per-call receipts, and no provider/model fallback occurs inside the measured comparison.
+
 ## Physics discipline
 
 Graph reuse is not Physics.
@@ -117,4 +121,4 @@ Frontier exists to search outside the current solution basin. It must not merely
 
 ## Failure discipline
 
-If a required substrate, model, dataset or tool is unavailable, write the exact failure and the smallest next action that could unblock it. Do not weaken a preregistration after seeing outcomes.
+If a required substrate, model, dataset or tool is unavailable, write the exact failure and the smallest next action that could unblock it. Do not weaken a preregistration after seeing outcomes. Repeated absence of the same prerequisite should trigger a capability/provisioning BUILD or a Director PARK/PIVOT, not another expensive copy of the same blocked experiment.
