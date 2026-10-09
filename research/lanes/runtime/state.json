@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "With the composite intervention oracle (WAL-byte vector hash + SQL logical projection + stable-header response fingerprint) now VALIDATED at the authorship-separated, real-Chromium-transport scope but ONLY against interventions the fixture's own controlled endpoint planted, does that same oracle retain arm-constrained discrimination - point sensitivity/specificity >= 0.90 with two-sided 95% Wilson lower bound >= 0.80, non-degenerate intervals, zero false positives on matched nulls, arm-blind scoring and independent recomputation zero mismatches - when the change it must detect is induced OUTSIDE the surface the detector's author wrote (an upstream worker, cache or representation transition performed by a component that is not research/runtime/intervention_surface.py and not reachable from the scorer), while a powered write-then-revert probe executed entirely inside the 50 ms capture interval is added to MEASURE the acknowledged blind spot of a byte-equality WAL oracle rather than assume it away; i.e. is the measured discrimination a property of the oracle over arbitrary state transitions, or only over transitions this particular fixture performs itself, which is the last scope bound standing between the current ceiling and any downstream lane treating the substrate as measurement-valid for real drift questions?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-09T18:26:33.761769+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-09T19:50:37.226734+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "edd619165519091a4127188b2c1eaa652217963d1d99223afee312ca2ef93b5f",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "2ec9912af1c82b8c55d55e90",
+  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
 }
