@@ -1,17 +1,57 @@
 {
   "experiment_id": "EXP-PRODUCT-37973256064",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "On a credential-free substrate that is NOT the synthetic fixture already used for the arm-differentiation certificate (EXP-PRODUCT-37950607128) — specifically a real localhost stdlib-HTTP application with genuinely distinct resource instances and parameterizable identifiers — does the SHIPPED kernel's real distill -> resolve -> execute parameterized round trip (src/spider/kernel.py with distill_parameterized implemented) produce a measurable, causally attributable treatment-arm behavioral difference versus a matched cold re-derivation arm and a matched retrieval-shaped comparator at equal tooling, with honest unit accounting of model calls, tokens, retrieval, verification and repair, and with a known-negative (out-of-support / wrong-intent / missing-parameter) round trip refused for the right reason with a recorded reason and a null action — thereby establishing that the treatment arm is live and separable outside the synthetic fixture before any four-arm external-LLM benchmark is attempted?",
+  "hypothesis": "The SPIDER treatment arm with a parameterized mechanism induced via distill_parameterized from demonstrations on resource-A identifiers will achieve higher success rate and lower residual cost on held-out resource-B identifiers than both the cold re-derivation arm (no inheritance) and the retrieval-shaped comparator (structural similarity matching), while correctly refusing known-negative cases (out-of-support identifiers, wrong intent, missing parameters) with recorded reasons and null actions. The honest accounting surface will show zero model calls/tokens (credential-free substrate), non-zero retrieval/verification/repair counts that differ between arms, and the treatment arm's advantage will be causally attributable to the parameterized mechanism path (distill_parameterized -> resolve -> execute) rather than substrate artifacts.",
+  "falsifier": "Any of: (1) Treatment arm success rate on held-out resource-B identifiers is not statistically significantly higher than BOTH cold arm AND retrieval arm (at equal tooling, matched task distribution); (2) Known-negative refusal rate < 95% or refusal reasons are not correctly attributed (out-of-support vs wrong-intent vs missing-parameter); (3) Honest accounting shows model_calls > 0 or model_tokens > 0 (credential-free violation); (4) Treatment arm advantage disappears when parameterized mechanism is ablated (literal kernel with confidence 0.5); (5) Retrieval-shaped comparator matches or exceeds treatment arm on held-out resources; (6) Cold arm matches treatment arm (no residual-novelty benefit).",
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "description": "Cold re-derivation arm: for each test task on resource-B, the agent re-derives the action from scratch using only the task specification and substrate interaction, with no mechanism inheritance, no retrieval, no prior observations. Same tooling budget as treatment arm.",
+      "type": "negative_control"
+    },
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "description": "Retrieval-shaped comparator: structural similarity matching over training observations (Jaccard on action templates + state signatures), top-K retrieval, parameter binding via slot alignment. Mirrors the B-RETRIEVAL-SHAPED comparator from EXP-PRODUCT-37950607128 but adapted to the real HTTP substrate. Same tooling budget as treatment arm.",
+      "type": "comparator"
+    },
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Literal kernel baseline: SpiderKernel with only the literal distill() method (confidence 0.5, no parameter_slots). This tests whether the parameterized path is necessary. Expected: confidence 0.5 < min_confidence 0.8 → EXPLORE/UNKNOWN on all parameterized tasks.",
+      "type": "ablation"
+    },
+    {
+      "id": "PC-EXACT-REPLAY",
+      "description": "Positive control: Exact replay on training resource-A identifiers. Treatment arm should achieve 100% success with zero novel actions (full reuse). Validates substrate can measure zero-novelty case.",
+      "type": "positive_control"
+    }
+  ],
+  "positive_control": "PC-EXACT-REPLAY",
+  "null_control": {
+    "id": "NC-OUT-OF-SUPPORT-TYPE",
+    "description": "Parameterized mechanism trained on resource type A (e.g., items) tested on completely different resource type C (e.g., users) with no structural overlap. Should be refused with UNKNOWN/EXPLORE due to intent mismatch or precondition failure, bound_action=null, recorded reason.",
+    "expected_behavior": "refusal_with_reason"
+  },
+  "measurement_validity": [
+    "Credential-free: No model API keys, no browser, no external network calls. Pure localhost stdlib http.server.",
+    "Substrate distinct from synthetic fixture: Real HTTP request/response cycles with parameterizable resource identifiers (not hardcoded synthetic fixture values).",
+    "Genuinely distinct resource instances: Multiple resource types (items, users, orders) each with 10+ distinct identifiers (e.g., item-001..item-010). Training on A (first 5), testing on B (last 5).",
+    "Honest unit accounting: Per-trajectory counters for model_calls, model_tokens, retrieval_calls, verification_calls, repair_attempts, http_requests, latency_ms. Model counters MUST be zero (credential-free). Counters must fire on real mechanism execution, not injected.",
+    "Causal attribution: B-LITERAL-KERNEL ablation isolates parameterized path contribution. Treatment arm contrast vs cold/retrieval measured on same held-out resource-B set.",
+    "Known-negative detection: Three refusal categories (out-of-support identifier, wrong intent, missing required parameter) each with distinct recorded reason and bound_action=null.",
+    "Deterministic substrate: Fixed seed, no stochastic server elements that could confound parameter binding.",
+    "Equal tooling: All arms receive identical task specifications, substrate access, and compute budget."
+  ],
+  "decision_rule": {
+    "primary": "Treatment arm (SPIDER parameterized) achieves success_rate >= 0.80 on held-out resource-B identifiers AND success_rate_treatment > success_rate_cold + 0.15 AND success_rate_treatment > success_rate_retrieval + 0.15 (margins chosen to exceed measurement noise on deterministic substrate).",
+    "known_negative": "Known-negative refusal rate >= 0.95 across all three categories (out-of-support, wrong-intent, missing-parameter). Each refusal must have bound_action=null and a non-empty reason string correctly categorizing the refusal type.",
+    "accounting_honesty": "model_calls == 0 AND model_tokens == 0 for all arms (credential-free). retrieval_calls, verification_calls, repair_attempts >= 0 and differ between arms (treatment should show retrieval/verification activity; cold may show more http_requests). No injected counter events.",
+    "causal_attribution": "B-LITERAL-KERNEL baseline achieves success_rate < 0.20 on held-out resource-B (confidence 0.5 < min_confidence 0.8 blocks EXECUTABLE). PC-EXACT-REPLAY achieves success_rate == 1.0 on training resource-A.",
+    "separation_from_synthetic": "All metrics computed on the real HTTP substrate (localhost stdlib server), NOT on the SYNTH-INDUCTION-BANK-v1 fixture from EXP-PRODUCT-37950607128. Substrate must have >= 3 resource types with >= 10 identifiers each."
+  },
+  "product_consequence_positive": "C-PARAM-INHERIT advances from EXPERIMENTAL toward VALIDATED: the shipped kernel's parameterized mechanism path is demonstrated live and causally attributable on a real credential-free substrate outside the synthetic fixture. The treatment arm is separable from cold and retrieval baselines with honest accounting. This clears the critical path for the four-arm C-LLM-INHERIT benchmark (pending model credential). Kernel parameterization becomes a behavior-bound capability, not a synthetic-fixture artifact.",
+  "product_consequence_negative": "C-PARAM-INHERIT remains EXPERIMENTAL (or bounded REJECTED for real-substrate transfer): the parameterized mechanism path fails to demonstrate measurable advantage over cold/retrieval baselines on a real HTTP substrate, or known-negative detection fails, or accounting is dishonest. The kernel's distill_parameterized implementation (if any) has a substrate gap that must be closed before C-LLM-INHERIT or C-PRODUCT-ECON measurement. Product lane must not promote kernel parameterization to product core.",
+  "estimated_cost": "Very low: pure localhost stdlib http.server, no model API calls, no browser, no external network. ~50 HTTP requests per arm x 3 arms x 20 test identifiers = ~3000 requests total. Single-threaded, deterministic, completes in < 60 seconds. No GPU, no cloud costs.",
+  "expected_information_gain": "High: This is the first experiment to test the SHIPPED kernel's parameterized round-trip (distill_parameterized -> resolve -> execute) on a real credential-free HTTP substrate with honest accounting and causal attribution controls. It directly addresses the highest-priority gap identified by the Global Research Director: the treatment arm must be live and separable outside the synthetic fixture. A positive result establishes the kernel parameterization as a real-substrate capability; a negative result bounds the substrate gap and redirects kernel engineering."
 }
