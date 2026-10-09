@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36293257855",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Authorship separation verified: intervention_surface.py and oracle_scorer.py have no cross-imports; scorer imports no Flask; shared constants only via shared_config.py (A-AUTHORSHIP-CHECK.json).",
+    "Transport boundary crossed: all 120 episodes executed through real Chromium via Playwright 1.63.0 public API (p.chromium.executable_path launch of canonical chromium-1243 sha256 8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e), real 1280x720 viewport, real button clicks as only write mechanism (B-PLAYWRIGHT-CAPABILITY.json, run_experiment.py lines 677-706).",
+    "No synthetic fallback used: no requests/httpx imports in run_experiment.py; fixture admin/health calls use stdlib urllib outside measured interval (A-SYNTHETIC-CHECK.json).",
+    "Arm-blind scoring preserved: episode order pre-seeded and archived before any episode runs (A-SEEDED-ORDER.json archived_at 2026-10-09T16:23:13); detector runs on raw measurements without arm labels (A-DETECTOR-OUTPUT.jsonl); labels joined only after detector output written (oracle_scorer.py score_arms).",
+    "Mandatory WAL byte evidence captured inside measured interval: 50ms quiescence before pre-capture and after post-action; fixture setup/teardown outside interval (A-EPISODE-LEDGER.jsonl fixture_setup_before_interval=true, quiescence_ms=50; V-WAL-CAPTURE-IN-INTERVAL control PASS).",
+    "Capture stability control: 10/10 no-action no-click pairs byte-identical (A-CAPTURE-STABILITY.jsonl; NC-CAPTURE-STABILITY PASS).",
+    "Auth/session boundary enforced server-side: valid-auth returns 200; invalid-auth returns 401; expired-auth returns 401; deleted-session returns 403; all rejections happen before any UPDATE (intervention_surface.py _authenticate lines 258-277; A-EPISODE-LEDGER.jsonl action_state_text confirms).",
+    "Positive control sensitivity = 1.0: all 20 P-WRITE episodes detected (wal_changed OR logical_changed OR fingerprint_changed = true) via real button click (A-DERIVED-METRICS.json arms.P-WRITE k=20 n=20).",
+    "Null control specificity = 1.0: all 80 null episodes (N-READ, N-INVALID, N-EXPIRED, N-DELETED) correctly not detected; 0 false positives (A-DERIVED-METRICS.json arms.N-READ/N-INVALID/N-EXPIRED/N-DELETED each k=20 n=20 point_rate=1.0).",
+    "Independent recomputation zero_mismatches = true: recompute_check.py re-implements detector and Wilson CI from raw JSONL only, shares no code with oracle_scorer.py; all 120 episodes match producer's A-DERIVED-METRICS.json (A-RECOMPUTE-CHECK.json).",
+    "Wilson 95% two-sided CI correctly computed: frozen z=1.959963984540054; for k=20,n=20: point=1.0, wilson_lo=0.8388748419471806 (>0.80 threshold), wilson_hi=1.0, ci_nondegenerate=true (verified by recompute_check.py _wilson).",
+    "Capability ledger fail-closed: one-command bring-up (bringup.py + bringup_contract.json) executed before any episode; all 3 required scopes PASS (CAP-CHROMIUM-LAUNCH, CAP-WAL-SUBSTRATE, CAP-NGINX-PROXY); advisory scopes (browsergym, agentlab, policy-model credentials, HF, GHCR) correctly reported UNAVAILABLE without failing required scopes (capability_ledger.json).",
+    "Readiness certificate meets all frozen floors: n_non304=240 (>=200), per_endpoint>=100, distinct X-Worker-Pid=2 (>=2), min per-URI stickiness=1.0 (>=0.90 over 12 URIs), no missing worker header on 200 (A-READINESS-CERTIFICATE.json).",
+    "Reversible restore control PASS: real browser click on restore button returns marker to pre_marker and mutates WAL (B-WAL-EVIDENCE.jsonl action=restore restored_to_pre_marker=true vector_changed=true).",
+    "pre_null_logical NameError repaired: run_restore_control assigns pre_logical before the click; no code path leaves it unassigned (run_experiment.py line 800).",
+    "Durability check UNSATISFIABLE at measurement HEAD: frozen-scope files exist in worktree but not at HEAD (provenance.json durability.checks head_matches_worktree=false for 5/6 files); disposition REFERENCE_ONLY with scientific_effect=none on measurement (provenance.json lines 59-121).",
+    "Substrate matches validated parent: 2x gunicorn 23.0.0 sharing /tmp/single.db WAL (wal_autocheckpoint=0), exclusive nginx 1.24.0 with hash $request_uri consistent, real proxy_cache (V-NGINX-CONFIG-OK, V-SINGLE-HASH, V-FLASK-LISTENING, V-HEALTH-GATE, NC-EXCLUSIVE-NGINX, V-UPSTREAM-2-SERVERS all PASS).",
+    "Proxy cache corroboration: MISS then HIT observed on cacheable key through exclusive nginx (A-READINESS-CERTIFICATE.json cache_corroboration; DIAG-CACHE-MISS-THEN-HIT PASS).",
+    "Dom/AX capture demonstrated: sample episode shows 20->21 DOM nodes and 18->20 AX nodes pre/post (B-PLAYWRIGHT-CAPABILITY.json dom_ax_capture; A-DOM-AX-CAPTURES.jsonl)."
+  ],
+  "baseline_findings": [
+    "Baseline B-PLAIN-HTTP-VALIDATED from EXP-RUNTIME-36129163700 Part A is correctly recorded in spec.json: 6 arms x 20 episodes, all arms point=1.0, Wilson95=[0.8388748419471806, 1.0], non-degenerate, arm-blind detector, independent recomputation zero mismatches. Not re-measured (frozen reference).",
+    "Current experiment matches baseline point performance exactly (all arms point=1.0) and exceeds Wilson lower bound requirement (0.8389 > 0.80 threshold).",
+    "Baseline scope was plain-HTTP same-author; current experiment crosses both authorship and transport boundaries while maintaining identical discrimination performance."
+  ],
+  "recomputed_metrics": {
+    "P-WRITE": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "sensitivity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "P-DRIFT": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "sensitivity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-READ": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "specificity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-INVALID": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "specificity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-EXPIRED": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "specificity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-DELETED": {
+      "n_scored": 20,
+      "k": 20,
+      "estimand": "specificity",
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "all_arms_pass": true,
+    "positive_control_sensitivity": 1.0,
+    "null_control_specificity": {
+      "N-READ": 1.0,
+      "N-INVALID": 1.0,
+      "N-EXPIRED": 1.0,
+      "N-DELETED": 1.0
+    },
+    "recompute_zero_mismatches": true
+  },
+  "claim_ceiling": "C-MEAS-VALID ceiling expands from 'plain-HTTP planted surface, same-author same-transport' to 'authorship-separated intervention surface + real Chromium transport with real button clicks'. The composite oracle (WAL-byte vector hash + SQL logical projection + stable-header response fingerprint) maintains arm-constrained discrimination (point sensitivity/specificity >= 0.90, Wilson 95% lower bound >= 0.80, non-degenerate intervals) across both the author/measurer boundary and the transport boundary simultaneously. Downstream lanes (Graph C-FRESHNESS, C-DELTA-REPAIR; Physics statistical contract) may now preregister 'measurement-valid substrate' as a precondition backed by the one-command bring-up contract and fail-closed capability ledger.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36293257855/request.json",
+    "research/experiments/EXP-RUNTIME-36293257855/spec.json",
+    "research/experiments/EXP-RUNTIME-36293257855/prereg.md",
+    "research/experiments/EXP-RUNTIME-36293257855/freeze.json",
+    "research/experiments/EXP-RUNTIME-36293257855/result.json",
+    "research/experiments/EXP-RUNTIME-36293257855/report.md",
+    "research/experiments/EXP-RUNTIME-36293257855/provenance.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-DETECTOR-OUTPUT.jsonl",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-SEEDED-ORDER.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-RECOMPUTE-CHECK.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-AUTHORSHIP-CHECK.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-SYNTHETIC-CHECK.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-CAPTURE-STABILITY.jsonl",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-EPISODE-LEDGER.jsonl",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-DERIVED-METRICS.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-READINESS-CERTIFICATE.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-WAL-EVIDENCE.jsonl",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-DOM-AX-CAPTURE.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/capability_ledger.json",
+    "research/experiments/EXP-RUNTIME-36293257855/artifacts/C-BRINGUP-CONTRACT.json",
+    "research/runtime/intervention_surface.py",
+    "research/runtime/oracle_scorer.py",
+    "research/runtime/shared_config.py",
+    "research/runtime/bringup.py",
+    "research/experiments/EXP-RUNTIME-36293257855/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-36293257855/recompute_check.py",
+    "research/experiments/EXP-RUNTIME-36293257855/bringup_contract.json"
+  ],
+  "unresolved": [
+    "Whether the oracle's discrimination transfers to a non-planted environmental cache/worker drift rather than a planted set_representation drift (recorded in result.json unresolved and validity_notes).",
+    "Whether a successful run leads any downstream lane to actually preregister this substrate as a precondition (publication is not adoption).",
+    "Whether the registered claim ceiling should be widened to production auth middleware, TLS, HTTP/2 or real sites; none of these was measured.",
+    "Durability of frozen code scope is UNSATISFIABLE at HEAD (worktree files not committed); this is a contract/durability result with no scientific effect on the measurement, recorded in provenance.json durability.disposition=REFERENCE_ONLY."
+  ]
+}
