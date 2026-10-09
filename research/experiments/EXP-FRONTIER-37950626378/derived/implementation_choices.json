@@ -1,0 +1,44 @@
+[
+ {
+  "choice_id": "IC-01",
+  "frozen_text_is_ambiguous_about": "spec.operational_definitions.navigation_graph says 'same registrable host as the seed's final URL'.",
+  "resolution_applied": "Implemented as exact hostname equality against the seed's final URL hostname (same host, any scheme http/https). No eTLD+1 expansion is performed.",
+  "effect_on_result": "Could exclude links that a registrable-domain interpretation would admit (e.g. subdomains). Applies identically to all bands and to the controls."
+ },
+ {
+  "choice_id": "IC-02",
+  "frozen_text_is_ambiguous_about": "spec.operational_definitions.navigation_graph says edges are <a href> links 'in document order' but sets no per-page link cap.",
+  "resolution_applied": "No per-page link cap is applied. The only bounds are the frozen budget B=250, depth cap D=6 and each-URL-fetched-once.",
+  "effect_on_result": "Matches the frozen text. If a page published more than 250 links the budget bound would dominate anyway."
+ },
+ {
+  "choice_id": "IC-03",
+  "frozen_text_is_ambiguous_about": "spec.operational_definitions.frozen_policy bounds the per-site structural crawl at B=250, but the pre-freeze BROAD_FANOUT_CALIBRATION observed requests(hop3)=932, which exceeds B=250.",
+  "resolution_applied": "The two local calibration controls are executed under the identical frozen BFS policy but with a fixture page budget of 1000, sufficient to reach the first hop-3 node, exactly as the frozen pre-freeze observation did. The six real candidate roots use the frozen B=250.",
+  "effect_on_result": "Does not touch the site cost measurements or the falsifier. Required to reproduce the frozen control observation; without it the GROWING branch of the frozen two-sided certificate could not be live-reproduced."
+ },
+ {
+  "choice_id": "IC-04",
+  "frozen_text_is_ambiguous_about": "spec.arms does not say whether RACQ_PATH/RACQ_URL must re-issue GETs or may reuse the bodies observed in the same session.",
+  "resolution_applied": "RACQ_PATH.bytes and RACQ_URL.bytes are charged from the bodies actually fetched in the SAME session that produced RED (the structural BFS fetches every page); RACQ_PATH.requests=h+1 and RACQ_URL.requests=1 are the frozen arm definitions. No extra duplicate GET is issued for an arm because the cost unit is the GET count and the body bytes, both already observed in that session.",
+  "effect_on_result": "Avoids double-charging the substrate for identical content. RED and both RACQ arms are therefore strictly paired on the same session and item set."
+ },
+ {
+  "choice_id": "IC-05",
+  "frozen_text_is_ambiguous_about": "spec.operational_definitions.hop_distance says shortest-path length 'measured by the frozen policy', which is a budgeted BFS rather than a full graph.",
+  "resolution_applied": "Hop is the BFS level at which a URL is first discovered under the frozen item-blind FIFO document-order crawl (the BFS frontier order guarantees this equals the shortest path in the sub-graph explored within budget).",
+  "effect_on_result": "Inside-budget pages get their true shortest-path hop; pages only reachable through edges not explored within budget are not admitted."
+ },
+ {
+  "choice_id": "IC-07",
+  "frozen_text_is_ambiguous_about": "Three frozen candidate roots (book, cargo, nomicon) share the seed host doc.rust-lang.org, and spec.metrics.per_item defines item_id = sha256(seed_host + '|' + page_url + '|' + control_name + '|' + control_type).",
+  "resolution_applied": "Per-site ratios use each candidate root's own kept items (a physical page may legitimately appear under more than one root). The POOLED ratio deduplicates by the frozen stable item_id so the same physical item discovered from two doc.rust-lang.org roots is not counted twice; the number of duplicate rows removed is reported.",
+  "effect_on_result": "Prevents the doc.rust-lang.org overlap from triple-weighting the pooled medians. Per-site numbers and raw rows are unaffected."
+ },
+ {
+  "choice_id": "IC-06",
+  "frozen_text_is_ambiguous_about": "prereg VN-V4 says a site whose two sessions disagree on an item's hop or request count is 'flagged and excluded with a recorded reason'.",
+  "resolution_applied": "Applied literally at site level: if any same-key item in a site disagrees between session A and session B on hop or RED.requests, the whole site is excluded and the reason recorded. All raw per-session values remain in raw/observations.jsonl.",
+  "effect_on_result": "Can only remove items, never add them; if that drops the pool below ADMISSION_GATE_V1 the experiment is MEASUREMENT_INVALID, never a branch."
+ }
+]

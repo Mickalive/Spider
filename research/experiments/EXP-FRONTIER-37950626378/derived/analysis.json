@@ -1,0 +1,92 @@
+{
+ "DEEP": {
+  "engines_or_sites": [
+   "rust_book",
+   "rust_cargo",
+   "rust_nomicon"
+  ],
+  "hosts": [
+   "doc.rust-lang.org"
+  ],
+  "median_racq_path_bytes": 711368,
+  "median_racq_path_requests": 4,
+  "median_racq_url_bytes": 38485,
+  "median_red_bytes": 9704744,
+  "median_red_requests": 158,
+  "median_saving_bytes": 9015431,
+  "median_saving_requests": 154,
+  "n": 25,
+  "n_break_even_eligible": 25
+ },
+ "MID": {
+  "engines_or_sites": [
+   "gentoo",
+   "gnu",
+   "quotes",
+   "rust_book",
+   "rust_cargo",
+   "rust_nomicon"
+  ],
+  "hosts": [
+   "doc.rust-lang.org",
+   "forums.gentoo.org",
+   "quotes.toscrape.com",
+   "www.gnu.org"
+  ],
+  "median_racq_path_bytes": 78106,
+  "median_racq_path_requests": 3,
+  "median_racq_url_bytes": 23705,
+  "median_red_bytes": 4462155,
+  "median_red_requests": 138,
+  "median_saving_bytes": 4390334,
+  "median_saving_requests": 135,
+  "n": 1099,
+  "n_break_even_eligible": 1099
+ },
+ "NEAR": {
+  "engines_or_sites": [
+   "gentoo",
+   "gnu",
+   "quotes",
+   "rust_book",
+   "rust_nomicon"
+  ],
+  "hosts": [
+   "doc.rust-lang.org",
+   "forums.gentoo.org",
+   "quotes.toscrape.com",
+   "www.gnu.org"
+  ],
+  "median_racq_path_bytes": 63384.0,
+  "median_racq_path_requests": 2.0,
+  "median_racq_url_bytes": 31698.0,
+  "median_red_bytes": 1327357.0,
+  "median_red_requests": 30.0,
+  "median_saving_bytes": 1267110.0,
+  "median_saving_requests": 28.0,
+  "n": 408,
+  "n_break_even_eligible": 382
+ },
+ "deep_hosts": [
+  "doc.rust-lang.org"
+ ],
+ "deep_items_by_site": {
+  "rust_book": 12,
+  "rust_cargo": 9,
+  "rust_nomicon": 4
+ },
+ "near_hosts": [
+  "doc.rust-lang.org",
+  "forums.gentoo.org",
+  "quotes.toscrape.com",
+  "www.gnu.org"
+ ],
+ "racq_path_ratio_deep_over_near_bytes": 11.223147797551432,
+ "racq_path_ratio_deep_over_near_requests": 2.0,
+ "session_agreement": {
+  "n_items": 1559,
+  "n_red_bytes_diff": 16,
+  "red_bytes_all_equal": false,
+  "red_requests_all_equal": true
+ }
+}
