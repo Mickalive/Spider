@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37950584469",
+  "lane": "graph",
+  "diagnostic_of": "GATE-C3 / NC-SESSION-ISOLATION",
+  "computed_from": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+  "computed_from_sha256": "9885176e893d9651ed71e1470ebb5c5fc0db3cde410ff013d2dd5ffbbd215d69",
+  "definition_used": "Frozen spec.control_registry.null_controls[NC-SESSION-ISOLATION]: per anchor the four sessions' cookie jars must be pairwise disjoint on (name, value); no Cookie on the first request.",
+  "per_anchor": {
+    "CAL-POS-1": {
+      "pairwise_disjoint_on_name_value": false,
+      "shared_name_value_pairs": [
+        [
+          "preferred_language",
+          "en"
+        ]
+      ],
+      "constant_cookie_names": [
+        "preferred_language"
+      ],
+      "varying_cookie_names": [
+        "_gitlab_session"
+      ],
+      "shared_pairs_only_from_constant_names": true,
+      "session_identifying_values_vary": true,
+      "first_request_cookie_free": true,
+      "jar_sizes": {
+        "S1": 2,
+        "S2": 2,
+        "S3": 2,
+        "S4": 2
+      }
+    },
+    "CAL-POS-2": {
+      "pairwise_disjoint_on_name_value": false,
+      "shared_name_value_pairs": [
+        [
+          "GeoIP",
+          "US:CA:San_Jose:37.34:-121.89:v4"
+        ],
+        [
+          "NetworkProbeLimit",
+          "0.001"
+        ],
+        [
+          "WMF-Last-Access",
+          "09-Oct-2026"
+        ]
+      ],
+      "constant_cookie_names": [
+        "GeoIP",
+        "NetworkProbeLimit",
+        "WMF-Last-Access"
+      ],
+      "varying_cookie_names": [
+        "WMF-Uniq",
+        "authSession"
+      ],
+      "shared_pairs_only_from_constant_names": true,
+      "session_identifying_values_vary": true,
+      "first_request_cookie_free": true,
+      "jar_sizes": {
+        "S1": 5,
+        "S2": 5,
+        "S3": 5,
+        "S4": 5
+      }
+    },
+    "CAL-POS-3": {
+      "pairwise_disjoint_on_name_value": false,
+      "shared_name_value_pairs": [
+        [
+          "CentralAuthAnonTopLevel",
+          "1"
+        ],
+        [
+          "GeoIP",
+          "US:CA:San_Jose:37.34:-121.89:v4"
+        ],
+        [
+          "NetworkProbeLimit",
+          "0.001"
+        ],
+        [
+          "WMF-Last-Access",
+          "09-Oct-2026"
+        ],
+        [
+          "WMF-Last-Access-Global",
+          "09-Oct-2026"
+        ]
+      ],
+      "constant_cookie_names": [
+        "CentralAuthAnonTopLevel",
+        "GeoIP",
+        "NetworkProbeLimit",
+        "WMF-Last-Access",
+        "WMF-Last-Access-Global"
+      ],
+      "varying_cookie_names": [
+        "WMF-Uniq",
+        "authSession",
+        "enwikiSession"
+      ],
+      "shared_pairs_only_from_constant_names": true,
+      "session_identifying_values_vary": true,
+      "first_request_cookie_free": true,
+      "jar_sizes": {
+        "S1": 9,
+        "S2": 9,
+        "S3": 9,
+        "S4": 9
+      }
+    },
+    "CAL-POS-4": {
+      "pairwise_disjoint_on_name_value": true,
+      "shared_name_value_pairs": [],
+      "constant_cookie_names": [],
+      "varying_cookie_names": [],
+      "shared_pairs_only_from_constant_names": true,
+      "session_identifying_values_vary": false,
+      "first_request_cookie_free": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    }
+  },
+  "summary": {
+    "any_anchor_shared_pair": true,
+    "all_shared_pairs_from_constant_names": true,
+    "sessions_cookie_free_on_first_request": true
+  },
+  "interpretation_note": "No session-identifying cookie value (_gitlab_session, authSession, WMF-Uniq, enwikiSession) is shared across sessions; the only shared (name, value) pairs are server-set constant/configuration cookies (preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global, CentralAuthAnonTopLevel). The failure is a property of the frozen literal predicate, not of session contamination. Per the frozen fail-closed rule this remains terminal F-CERT."
+}
