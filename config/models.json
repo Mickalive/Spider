@@ -17,10 +17,10 @@
       "opencode/mimo-v2.5-free"
     ],
     "director": [
+      "opencode/big-pickle",
       "opencode/mimo-v2.5-free",
       "opencode/muse-spark-1.2-contributor-free",
-      "opencode/hy3-free",
-      "opencode/big-pickle"
+      "opencode/hy3-free"
     ],
     "coding": [
       "opencode/mimo-v2.5-free",
@@ -29,11 +29,17 @@
       "opencode/big-pickle"
     ],
     "scout": [
+      "opencode/big-pickle",
       "opencode/mimo-v2.5-free",
       "opencode/muse-spark-1.2-contributor-free",
       "opencode/hy3-free",
-      "opencode/nemotron-3-ultra-free",
-      "opencode/big-pickle"
+      "opencode/nemotron-3-ultra-free"
+    ],
+    "design_review": [
+      "opencode/big-pickle",
+      "opencode/hy3-free",
+      "opencode/muse-spark-1.2-contributor-free",
+      "opencode/mimo-v2.5-free"
     ]
   },
   "retryable_signatures": [
