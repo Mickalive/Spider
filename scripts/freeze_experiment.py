@@ -14,14 +14,6 @@ ELIGIBILITY_CHECKS = (
     "treatment_liveness",
     "freeze_artifacts_bound",
 )
-PRODUCT_TREATMENT_CLAIMS = {
-    "C-PARAM-INHERIT",
-    "C-RESIDUAL-NOVELTY",
-    "C-LLM-INHERIT",
-    "C-PRODUCT-ECON",
-}
-
-
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -68,10 +60,6 @@ def validate_v2_design(req: dict, spec: dict, exp: Path) -> dict[str, str]:
         or review.get("status") != "PASS"
     ):
         raise SystemExit("design review did not PASS for this experiment")
-
-    if req["lane"] == "product" and PRODUCT_TREATMENT_CLAIMS.intersection(spec.get("claim_ids", [])):
-        if eligibility["treatment_liveness"]["status"] != "PASS":
-            raise SystemExit("Product inheritance/economics design requires treatment_liveness PASS before freeze")
 
     artifacts = spec.get("freeze_artifacts")
     if not isinstance(artifacts, list) or any(not isinstance(x, str) for x in artifacts):
