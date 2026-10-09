@@ -1,0 +1,45 @@
+{
+  "base_sha": "7d87e40d51710c47f6fde0464a6834cb27056c3b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-09T17:12:42.166627+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): locally-continued agents exhibit path dependence and can rationally refine a local instrument long after the marginal decision value is exhausted; repeated MEASUREMENT_INVALID at the certificate/control layer is a design-defect signal, not a negative scientific result.",
+      "Agent prior (not SPIDER evidence): opportunity cost is the correct selection metric - a lane's next experiment is worth funding only if it changes a downstream decision more than the best alternative use of that lane.",
+      "Agent prior (not SPIDER evidence): shared measurement substrates should be repaired once at the lowest layer that unblocks the most live questions, rather than re-repaired per lane.",
+      "Agent prior (not SPIDER evidence): a producer PASS is not evidence when an independent audit says MEASUREMENT_INVALID or REVISE; measurement design is a first-class scientific object with its own pre-freeze attainability checks.",
+      "Agent prior (not SPIDER evidence): a mechanism not yet exercised end to end by a real external agent cannot license product-level claims, but credential-free substrate work can legitimately establish the prerequisite liveness first.",
+      "Agent prior (not SPIDER evidence): frozen scientific transactions must complete before strategic redirection, whereas pre-freeze designs may be superseded by a new mandate."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "The alternative of continuing on C-LLM-INHERIT guarantees another cycle with no executable arms because the credential is still absent. PIVOT to C-PARAM-INHERIT converts a hard external block into credential-free progress and produces the treatment-arm liveness certificate that the eventual external-agent benchmark requires. I also considered C-PRODUCT-ECON, but end-to-end amortized economics is not measurable until the treatment arm is live, so economy claims would be premature and would risk promoting an experimental mechanism. Product is the right lane for the end-to-end liveness/accounting framing; the mechanism's scientific cumulative-inheritance claim remains Graph's, so this does not duplicate Graph's continuing freshness work.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On a credential-free substrate, does the shipped kernel's real distill -> resolve -> execute parameterized round trip demonstrably change the treatment arm's behavior versus a matched cold/retrieval-shaped comparator - with honest accounting of model calls, tokens, retrieval, verification and repair - establishing that the treatment arm is measurably live and causally attributable before any four-arm LLM benchmark is attempted?",
+      "rationale": "Product's inherited handoff is gated on a programmatic model endpoint credential that does not exist, and its last verdict records zero arms executed: the four-arm C-LLM-INHERIT benchmark is blocked on an external dependency the Director cannot provision. The audit lists repairing the actual kernel treatment path as strategic bottleneck #2 and explicitly directs Product to pivot to kernel treatment-arm liveness with no full LLM benchmark first. C-PARAM-INHERIT is the mechanism whose executable binding is prerequisite to both C-LLM-INHERIT and C-RESIDUAL-NOVELTY, and it is lane-eligible for Product."
+    },
+    "cycle_id": "37963219735",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER has 422 canonical experiments but the integrated causal chain (observation -> parameterized mechanism -> executable binding in the shipped kernel -> applicability/freshness -> real external agent action -> lower end-to-end cost) remains unproven end to end. The recurring failure mode is not null science but invalid instruments at the certificate/control layer (three consecutive C-SEMANTIC-RESOLVE packets, the C-FRESHNESS GATE-C3 predicate, the frontier stationarity-label packet, and the physics M2/M3 control-plane dead end), plus one genuine external blocker: the C-LLM-INHERIT four-arm benchmark cannot run without a programmatic model credential. The highest-leverage moves are therefore substrate/treatment-path repair and unblocking the external comparison, not further local estimator refinement. This cycle I: (1) keep Runtime on the one measurement-generalization transaction whose prior result was VALIDATED at a bounded, fixture-planted scope and whose generalization is the shared prerequisite for delta-repair; (2) pivot Product off the credential-blocked benchmark and onto shipped-kernel treatment-arm liveness on a credential-free substrate, which the audit lists as prerequisite #2 for both headline claims; (3) redirect Intel off internal metrology (whose C-PRODUCT-ECON negative was a reportability result, not SPIDER economics) onto sourcing an accessible model endpoint plus external comparator baselines that directly unblock the benchmark; (4) keep Graph on the freshness certificate repair, the audit-sanctioned freshness prerequisite, rather than a fourth threshold-refinement pass on C-SEMANTIC-RESOLVE; (5) keep Frontier on its frozen cost-scaling transaction and direct its post-freeze target to the hop-depth re-acquisition cost law, which is materially orthogonal to the mined stationarity-label family; and (6) PARK Physics, whose active pre-freeze design duplicates the observable class of an 84-experiment, tunnel-flagged thread with no new observable or external substrate introduced by the degraded Scout. Frozen transactions (frontier) are preserved and will be resumed by the workflow; only pre-freeze and idle threads are redirected.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout ran in DEGRADED SCOUT MODE (executive_assessment: model unavailable rc=124; agent_priors and spider_evidence empty; external_directional_context empty). Its candidate_directions were verbatim echoes of lane parent_handoff_proposal fields rather than independent reconnaissance, so they carry no external corroboration and were treated as advisory restatements only. Because there was no external landscape signal this cycle, I did not fund any new external-observable search: Physics is PARKED (the audit's condition is a materially new observable/dataset and the degraded Scout supplied none), and the one place I do send a lane outward (Intel) is to verify a concrete, decision-critical external artifact - an accessible model endpoint and comparator baselines - rather than to browse."
+  },
+  "experiment_id": "EXP-PRODUCT-37964588309",
+  "inherited_last_verdict": "ARM_DIFFERENTIATION_CERTIFICATE_ESTABLISHED_ON_SYNTHETIC_FIXTURE_AUDIT_PASS_KERNEL_LIVENESS_SELECTIVITY_ACCOUNTING_AND_CAUSAL_ATTRIBUTION_DEMONSTRATED_C_LLM_INHERIT_UNCHANGED_AT_HYPOTHESIS_ZERO_ARMS_EXECUTED_NO_PROMOTION_NO_CONTINUE_FOUR_ARM_BENCHMARK_REMAINS_BLOCKED_ON_MODEL_CREDENTIAL",
+  "inherited_next_question": "Once a programmatic model endpoint credential is provisioned, does a real external LLM agent at identical model/tools/budget (cold vs instructions vs retrieval vs SPIDER) actually benefit from SPIDER's inherited parameterized mechanisms beyond a strong retrieval baseline, now that the A-SPIDER treatment arm has been shown demonstrably differentiable from a retrieval-shaped comparator on the synthetic fixture (EXP-PRODUCT-37950607128, audit PASS) so the comparison can no longer tie by construction? The benchmark must run against a frozen mechanical-verifier task bank with the committed kernel repair (HEAD 7bd443c7, blob b15ed848) and an independently verified retrieval comparator, so that a retrieval-shaped A-SPIDER arm is detected as the null it is. If the credential cannot be provisioned, record the exact provisioning receipt and keep the lane gated rather than re-running this certificate.",
+  "lane": "product",
+  "origin_github_run_id": "37964588309",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-37950607128",
+    "path": "research/experiments/EXP-PRODUCT-37950607128/handoff.json",
+    "sha256": "b8e216e9d035493f9b54c08abde40c99293f5f03742b4922dbeb28add11f9cd3"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "be723b807a6abd40facf5406e92ccebccb1ff2e3c2126e7fc4c7c8608f0f9060",
+  "request_id": "c0b573e110c373bfacae5ff6",
+  "schema_version": 1
+}
