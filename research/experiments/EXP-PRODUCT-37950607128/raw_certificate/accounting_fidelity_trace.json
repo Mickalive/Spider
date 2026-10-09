@@ -1,0 +1,171 @@
+{
+  "control_id": "PC-ACCOUNTING-FIDELITY",
+  "scripted_trajectory": {
+    "steps": [
+      {
+        "step": 1,
+        "ops": [
+          [
+            "retrieval_calls",
+            1.0
+          ]
+        ]
+      },
+      {
+        "step": 2,
+        "ops": [
+          [
+            "verification_calls",
+            1.0
+          ]
+        ]
+      },
+      {
+        "step": 3,
+        "ops": [
+          [
+            "model_calls",
+            1.0
+          ],
+          [
+            "model_tokens",
+            128.0
+          ]
+        ],
+        "injected": true
+      },
+      {
+        "step": 4,
+        "ops": [
+          [
+            "http_requests",
+            1.0
+          ],
+          [
+            "browser_actions",
+            1.0
+          ]
+        ]
+      },
+      {
+        "step": 5,
+        "ops": [
+          [
+            "retrieval_calls",
+            1.0
+          ],
+          [
+            "verification_calls",
+            1.0
+          ],
+          [
+            "repair_attempts",
+            1.0
+          ],
+          [
+            "latency_ms",
+            12.5
+          ]
+        ]
+      }
+    ],
+    "ground_truth": {
+      "model_calls": 1.0,
+      "model_tokens": 128.0,
+      "browser_actions": 1.0,
+      "http_requests": 1.0,
+      "retrieval_calls": 2.0,
+      "verification_calls": 2.0,
+      "repair_attempts": 1.0,
+      "latency_ms": 12.5
+    },
+    "observed": {
+      "model_calls": 1.0,
+      "model_tokens": 128.0,
+      "browser_actions": 1.0,
+      "http_requests": 1.0,
+      "retrieval_calls": 2.0,
+      "verification_calls": 2.0,
+      "repair_attempts": 1.0,
+      "latency_ms": 12.5
+    },
+    "per_field": {
+      "model_calls": {
+        "expected": 1.0,
+        "observed": 1.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "model_tokens": {
+        "expected": 128.0,
+        "observed": 128.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "browser_actions": {
+        "expected": 1.0,
+        "observed": 1.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "http_requests": {
+        "expected": 1.0,
+        "observed": 1.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "retrieval_calls": {
+        "expected": 2.0,
+        "observed": 2.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "verification_calls": {
+        "expected": 2.0,
+        "observed": 2.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "repair_attempts": {
+        "expected": 1.0,
+        "observed": 1.0,
+        "relative_error": 0.0,
+        "exercised": true
+      },
+      "latency_ms": {
+        "expected": 12.5,
+        "observed": 12.5,
+        "relative_error": 0.0,
+        "exercised": true
+      }
+    },
+    "max_relative_error": 0.0,
+    "pass": true
+  },
+  "inherited_path_counter_increments": {
+    "declared": {
+      "retrieval_calls": 3,
+      "verification_calls": 2,
+      "repair_attempts": 1
+    },
+    "observed": {
+      "retrieval_calls": 3,
+      "verification_calls": 2,
+      "repair_attempts": 1
+    },
+    "exercise_scenario": {
+      "resolve_executable": "EXECUTABLE",
+      "resolve_out_of_support": "refused",
+      "rebind_executable": "EXECUTABLE"
+    },
+    "pass": true
+  },
+  "model_counters": {
+    "injected": true,
+    "model_calls": 1.0,
+    "model_tokens": 128.0,
+    "label": "injected synthetic event, not observed model usage",
+    "pass": true
+  },
+  "pass": true
+}
