@@ -1,0 +1,11 @@
+{
+  "stage": "audit",
+  "category": "AUDIT_FAILURE",
+  "message": "stage exited with code 1",
+  "retryable": false,
+  "fingerprint": "d678ba0cff8bba4acd873839",
+  "recorded_at": "2026-10-09T18:38:14.832582+00:00",
+  "github_run_id": "37964565784",
+  "github_run_attempt": "1",
+  "control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
+}

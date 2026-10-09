@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "With the frozen packet's GATE-C3 session-isolation predicate repaired at DESIGN time as the audit requires (require pairwise disjointness only on session-identifying cookie names, or on (name,value) pairs after excluding server-set constant configuration cookies such as preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global and CentralAuthAnonTopLevel), does a re-frozen packet on the same four pinned credential-free anchors reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), thereby licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-F; and, conditional on that, can a non-degenerate D1V population (M-N-D1V >= 6 with every active channel firing and not firing at least once) make the incumbent value-blind channel's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable rather than DATA-INSUFFICIENT?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-09T17:12:32.633258+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-09T18:38:15.033664+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "ef727e9acec7509ceebd1bacdfbeb7cb16245eb941a6caa1c0886520ebc6500a",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "d678ba0cff8bba4acd873839",
+  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
 }
