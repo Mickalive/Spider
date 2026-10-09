@@ -1,0 +1,650 @@
+[
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-FRONTIER-35796871743",
+    "lane": "frontier",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-FRONTIER-36293269574",
+    "lane": "frontier",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-FRONTIER-36306528608",
+    "lane": "frontier",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-FRONTIER-36306528608",
+    "lane": "frontier",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-FRONTIER-37385647440",
+    "lane": "frontier",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-FRONTIER-37385647440",
+    "lane": "frontier",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PARAM-INHERIT",
+    "experiment_id": "EXP-GRAPH-36272373909",
+    "lane": "graph",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PARAM-INHERIT",
+    "experiment_id": "EXP-GRAPH-36279237023",
+    "lane": "graph",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-GRAPH-36287167610",
+    "lane": "graph",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-34782350557",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-34956989900",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35083033552",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35112013458",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35124660457",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35137036013",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35166505835",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "BLOCKED",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35209112878",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35262261436",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35264637598",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35280397316",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35290611333",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35330747199",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35353016702",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35375593989",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "REJECTED",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35401997918",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "REJECTED",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35409927864",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35422991016",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35434771791",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35445596324",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35462974425",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35470447439",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35476271877",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35530590171",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35538868377",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35544806153",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35551517470",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "REJECTED",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-35572177756",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "REJECTED",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-35651934683",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PARAM-INHERIT",
+    "experiment_id": "EXP-INTEL-35749371101",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-35956094394",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-35999366789",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-36020904615",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-36037208652",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-36249068574",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-SEMANTIC-RESOLVE",
+    "experiment_id": "EXP-INTEL-36272389571",
+    "lane": "intel",
+    "in_frozen_scope": true,
+    "lane_eligible": false,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-INTEL-36272389571",
+    "lane": "intel",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-36287179392",
+    "lane": "intel",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-36306525220",
+    "lane": "intel",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-INTEL-36314207239",
+    "lane": "intel",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PHYSICS-36104718112",
+    "lane": "physics",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PHYSICS-36314197314",
+    "lane": "physics",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-CROSSSITE",
+    "experiment_id": "EXP-PHYSICS-36314197314",
+    "lane": "physics",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PHYSICS-37385620138",
+    "lane": "physics",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PRODUCT-ECON",
+    "experiment_id": "EXP-PRODUCT-34485517221",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PRODUCT-ECON",
+    "experiment_id": "EXP-PRODUCT-34662221249",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-PRODUCT-35932494797",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-PRODUCT-35932494797",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-PRODUCT-35936223443",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-PRODUCT-35936223443",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-PRODUCT-35938367888",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-PRODUCT-35938367888",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-PRODUCT-35947481519",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-PRODUCT-35947481519",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "experiment_id": "EXP-PRODUCT-35949571341",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-FRESHNESS",
+    "experiment_id": "EXP-PRODUCT-35949571341",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PRODUCT-ECON",
+    "experiment_id": "EXP-PRODUCT-36249064252",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PRODUCT-36272385776",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "MEASUREMENT_INVALID",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PRODUCT-36293260887",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-PRODUCT-ECON",
+    "experiment_id": "EXP-PRODUCT-36314204238",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": true,
+    "status": "HYPOTHESIS",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PRODUCT-36314204238",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PRODUCT-37982016598",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  },
+  {
+    "claim_id": "C-MEAS-VALID",
+    "experiment_id": "EXP-PRODUCT-37989728440",
+    "lane": "product",
+    "in_frozen_scope": false,
+    "lane_eligible": false,
+    "status": "EXPERIMENTAL",
+    "reason": "historical claim update preserved but excluded from effective claim state"
+  }
+]
