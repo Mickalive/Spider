@@ -153,8 +153,36 @@ jobs:
           fi
           exit 0
 
+      - name: Provision common research clients
+        if: ${{ steps.install.outputs.ready == 'true' }}
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          python -m pip install -q "httpx>=0.27,<1" "playwright>=1.50,<2"
+          rc=$?
+          if [[ "$rc" -ne 0 ]]; then
+            echo "::warning::SPIDER_RESEARCH_CLIENT_BOOTSTRAP_FAILED rc=$rc"
+            exit 0
+          fi
+          python - <<'PY'
+          import json, shutil
+          import httpx, playwright
+          chrome = (
+              shutil.which("google-chrome")
+              or shutil.which("google-chrome-stable")
+              or shutil.which("chromium")
+              or shutil.which("chromium-browser")
+          )
+          print(json.dumps({
+              "httpx_importable": True,
+              "playwright_importable": True,
+              "system_chromium": chrome,
+          }, sort_keys=True))
+          PY
+
       - name: DESIGN — preregister next discriminating experiment
-        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.frozen != 'true' }}
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.frozen != 'true' && steps.prep.outputs.designed != 'true' }}
         shell: bash
         run: |
           set +e
@@ -162,16 +190,12 @@ jobs:
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
-            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. Search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. For NEW governed experiments, request.json contains director_mandate: treat its target claim and strategic question as binding research direction. The inherited parent_handoff is continuity evidence only and MUST NOT silently override a SUPERSEDE/PIVOT/REOPEN Director decision. If request.json contains parent_handoff, preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Convert the Director's strategic question into the smallest rigorous high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json and the compact accepted evidence relevant to this mandate. Exact immutable request=$DIR/request.json. For NEW governed experiments, request.json contains director_mandate: treat its target claim and strategic question as binding research direction. The inherited parent_handoff is continuity evidence only. Do not run outcome-bearing measurements. Fill only $DIR/spec.json and $DIR/prereg.md. spec.json MUST set build_required to true or false and MUST set freeze_artifacts to the exact repository-relative code/harness/fixture files whose bytes must be bound before execution. If new code is required to make the measurement possible, set build_required=true and declare the intended files before they exist; a separate BUILD stage will create them. Do not require any artifact to be hashed directly into freeze.json by magic: the deterministic freezer binds freeze_artifacts after BUILD. Use stable metric/control identities. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
             scope_rc=$?
             [[ "$scope_rc" -eq 0 ]] || rc=66
-          fi
-          if [[ "$rc" -eq 0 ]]; then
-            python scripts/freeze_experiment.py "$EXP"
-            rc=$?
           fi
           if [[ "$rc" -eq 0 ]]; then
             python scripts/finalize_lane.py "$EXP" --stage design --exit-code 0
@@ -188,11 +212,81 @@ jobs:
               [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
               exit "$cleanup_rc"
             fi
+            bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: design failure $EXP"
+            checkpoint_rc=$?
+            [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+            exit "$rc"
           fi
-          bash scripts/checkpoint.sh design "$LANE" "$EXP" "R2 $LANE: freeze $EXP"
+          bash scripts/checkpoint.sh design-draft "$LANE" "$EXP" "R2 $LANE: design draft $EXP"
           checkpoint_rc=$?
           [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
-          exit "$rc"
+          exit 0
+
+      - name: BUILD — prepare frozen instrument/capability
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.frozen != 'true' }}
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/spec.json" && -f "$DIR/prereg.md" ]] || { echo "::error::Design missing before BUILD"; exit 65; }
+
+          BUILD_REQUIRED=$(jq -r '.build_required // false' "$DIR/spec.json")
+          if [[ "$BUILD_REQUIRED" == true ]]; then
+            ROLE=research
+            [[ "$LANE" == product ]] && ROLE=coding
+            bash .github/scripts/run-opencode-resilient.sh "$ROLE" "$DIR/model_build.json" run --agent spider_lane_researcher \
+              "BUILD ONLY for frozen-design preparation, SPIDER Research 2.0 lane=$LANE experiment=$EXP. Read exact request.json, spec.json and prereg.md. Implement ONLY the preregistered instrument/capability/fixture files listed in spec.freeze_artifacts, under this lane's allowed_code_roots or the experiment directory. You MAY run unit tests, import checks, deterministic health checks and control-fixture checks needed to establish that the instrument exists. You MUST NOT execute treatment arms, inspect outcome-bearing experimental data, tune thresholds on outcomes, write result/report/provenance/audit/verdict/handoff, or change spec/prereg/request. This stage exists only so the exact measurement code can exist BEFORE freeze. Never git commit/push/switch/reset."
+            rc=$?
+          else
+            rc=0
+          fi
+
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/record_build_receipt.py "$EXP"
+            rc=$?
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage build
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage build --exit-code 0
+            rc=$?
+          else
+            python scripts/finalize_lane.py "$EXP" --stage build --exit-code "$rc" --category BUILD_FAILURE || true
+          fi
+          if [[ "$rc" -ne 0 ]]; then
+            python scripts/discard_failed_stage.py "$EXP" --stage build
+            cleanup_rc=$?
+            if [[ "$cleanup_rc" -ne 0 ]]; then
+              bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: build cleanup failure $EXP"
+              checkpoint_rc=$?
+              [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+              exit "$cleanup_rc"
+            fi
+            bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: build failure $EXP"
+            checkpoint_rc=$?
+            [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+            exit "$rc"
+          fi
+          bash scripts/checkpoint.sh build "$LANE" "$EXP" "R2 $LANE: pre-freeze build $EXP"
+          checkpoint_rc=$?
+          [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+          exit 0
+
+      - name: FREEZE — bind design and prebuilt artifacts
+        if: ${{ steps.prep.outputs.frozen != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/build_receipt.json" ]] || { echo "::error::Build receipt missing before freeze"; exit 65; }
+          python scripts/freeze_experiment.py "$EXP"
+          bash scripts/checkpoint.sh design "$LANE" "$EXP" "R2 $LANE: freeze $EXP"
 
       - name: Record durable pre-execution base
         if: ${{ steps.prep.outputs.executed != 'true' }}
