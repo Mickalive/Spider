@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37950607128",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "certificate_overall": "PASS",
+    "ad_positive_roundtrip_pass": true,
+    "ad_negative_roundtrip_pass": true,
+    "ad_treatment_contrast_pass": true,
+    "pc_accounting_fidelity_pass": true,
+    "ad_identity_binding_pass": true,
+    "b_literal_kernel_pass": true,
+    "in_support_executable_rate": 1.0,
+    "held_out_binding_correct_rate": 1.0,
+    "out_of_support_refusal_rate": 1.0,
+    "missing_param_refusal_rate": 1.0,
+    "wrong_intent_refusal_rate": 1.0,
+    "treatment_contrast_rate": 1.0,
+    "degenerate_variant_detected": true,
+    "declared_vs_inferred_slot_count": {
+      "F1-PATH-ID": {"declared": 1, "inferred": 1, "match": true},
+      "F2-QUERY-ID": {"declared": 1, "inferred": 1, "match": true},
+      "F3-BODY-FIELD": {"declared": 1, "inferred": 1, "match": true},
+      "F4-HEADER-FIELD": {"declared": 1, "inferred": 1, "match": true},
+      "F5-TWO-SLOT": {"declared": 2, "inferred": 2, "match": true},
+      "F6-NOISE-STRESS": {"declared": 1, "inferred": 1, "match": true}
+    },
+    "counter_max_relative_error": 0.0,
+    "inherited_path_counter_increments": {
+      "declared": {"retrieval_calls": 3, "verification_calls": 2, "repair_attempts": 1},
+      "observed": {"retrieval_calls": 3, "verification_calls": 2, "repair_attempts": 1},
+      "pass": true
+    },
+    "model_calls": 0,
+    "model_tokens": 0,
+    "browser_actions": 0,
+    "http_requests": 0,
+    "note": "Model/browser/http counters are zero by construction: this experiment is credential-free and synthetic. They were separately shown to fire on an injected event in PC-ACCOUNTING-FIDELITY and are labelled injected, not observed."
+  },
+  "controls": {
+    "AD-POSITIVE-ROUNDTRIP": {
+      "control_id": "AD-POSITIVE-ROUNDTRIP",
+      "expected_behavior": "Every held-out in-support case across all six SYNTH-INDUCTION-BANK-v1 families resolves EXECUTABLE with a non-null action bound at the expected field, executes against the fixture, and passes verify().",
+      "observed_behavior": "6/6 held-out cases (itm-0009, epsilon, tok-99, res-z, (tenant t9,item_id i9), n-09) resolved EXECUTABLE, 6/6 bound identifiers correct, 6/6 execution status 200 and verify True. in_support_executable_rate=1.0.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-POSITIVE-ROUNDTRIP"
+    },
+    "AD-NEGATIVE-ROUNDTRIP": {
+      "control_id": "AD-NEGATIVE-ROUNDTRIP",
+      "expected_behavior": "Every declared out-of-support, missing-parameter and wrong-intent case is refused (non-EXECUTABLE, bound_action null, non-empty reason).",
+      "observed_behavior": "24/24 negative cases refused. out_of_support_refusal_rate=1.0 (15 empty/space/slash cases), missing_param_refusal_rate=1.0 (F5 missing tenant, missing item_id), wrong_intent_refusal_rate=1.0 (6 wrong-intent cases); F5 out-of-support pair also refused. All refusals carried bound_action null and a non-empty reason (EXPLORE for support/param violations, UNKNOWN for wrong intent).",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-NEGATIVE-ROUNDTRIP"
+    },
+    "AD-TREATMENT-CONTRAST": {
+      "control_id": "AD-TREATMENT-CONTRAST",
+      "expected_behavior": "At least one fixture case has a bound-mechanism action != B-RETRIEVAL-SHAPED comparator action, and the forced degenerate zero-contrast variant is detected as a certificate failure.",
+      "observed_behavior": "6/6 real cases have treatment action != comparator action (treatment_contrast_rate=1.0); the forced NC-ZERO-CONTRAST-TREATMENT variant yields contrast_rate=0.0 and is reported as degenerate_variant_detected=true (variant pass=false).",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-TREATMENT-CONTRAST"
+    },
+    "PC-ACCOUNTING-FIDELITY": {
+      "control_id": "PC-ACCOUNTING-FIDELITY",
+      "expected_behavior": "On a seeded deterministic 5-step trajectory all eight counters match ground truth within max_relative_error <= 0.01; and on an inherited mechanism execution retrieval_calls, verification_calls and repair_attempts each increment by the expected non-zero amount; model counters fire only on an injected event and are labelled injected.",
+      "observed_behavior": "max_relative_error=0.0 across all eight counters (model_calls=1, model_tokens=128, browser_actions=1, http_requests=1, retrieval_calls=2, verification_calls=2, repair_attempts=1, latency_ms=12.5). Inherited-path exercise observed increments retrieval_calls=3, verification_calls=2, repair_attempts=1 exactly matching declared. Model counters fired only on the explicitly labelled injected synthetic event.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/accounting_fidelity_trace.json"
+    },
+    "AD-IDENTITY-BINDING": {
+      "control_id": "AD-IDENTITY-BINDING",
+      "expected_behavior": "The reconstructed fixture sha256 and the pre-repair and post-repair kernel blob identities are recorded and internally consistent, so the kernel under test is exactly identified in place of a direct code-hash freeze.",
+      "observed_behavior": "Fixture bank sha256=89a98e5de84a7f56dc8bdb966695db91aca6333743890be3bdc319df3e8c5427. Pre-repair kernel git blob sha1=cfec98660b0277ccbf295e8a4119e8d81ddccf50 (from the freeze commit). Post-repair kernel blob sha1=b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, file sha256=718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72. pre_post_differ=true and consistent.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-IDENTITY-BINDING"
+    },
+    "B-LITERAL-KERNEL": {
+      "control_id": "B-LITERAL-KERNEL",
+      "expected_behavior": "The pre-repair literal path (literal distill() confidence 0.5 vs resolve() min_confidence 0.8) produces zero EXECUTABLE resolutions on the held-out in-support set, so observed liveness is attributable to the in-scope repair and not the pre-existing literal path.",
+      "observed_behavior": "0/6 EXECUTABLE on the held-out in-support set (all UNKNOWN with no bound action); on the exact induction state the literal candidate exists but is EXPLORE at confidence 0.5. Causal attribution established.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.B-LITERAL-KERNEL"
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "control_id": "B-RETRIEVAL-SHAPED",
+      "expected_behavior": "Deterministic K=5 structural field-overlap nearest-observation selector returns the literal action of the most similar induction observation as the non-gating comparator action per case.",
+      "observed_behavior": "Comparator action recorded per case; on all 6 families it differs from the bound-mechanism action (e.g. F1 comparator itm-0001 vs treatment itm-0009; F5 comparator t1/i1 vs treatment t9/i9). Non-gating as specified.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-TREATMENT-CONTRAST.cases"
+    },
+    "NC-ZERO-CONTRAST-TREATMENT": {
+      "control_id": "NC-ZERO-CONTRAST-TREATMENT",
+      "expected_behavior": "Forced variant where treatment action is set equal to the comparator action on all cases; AD-TREATMENT-CONTRAST must report zero contrast and FAIL the variant.",
+      "observed_behavior": "Variant contrast_rate=0.0, n_nonzero=0, variant pass=false, degenerate_variant_detected=true. The certificate demonstrably fires on the retrieval-in-disguise degenerate treatment.",
+      "pass_fail_unknown": "pass",
+      "evidence": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json#checks.AD-TREATMENT-CONTRAST.degenerate_variant"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json",
+      "sha256": "27599c917199b4991556ebad44983499fff160920fddfc9221a7122bcfb6d5c7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/accounting_fidelity_trace.json",
+      "sha256": "13ac56886b99be71f74450b2bc47261bd410a5d3e45cfee0826330809d7e56b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/raw_fixture/synth_induction_bank.json",
+      "sha256": "89a98e5de84a7f56dc8bdb966695db91aca6333743890be3bdc319df3e8c5427",
+      "role": "fixture"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/__init__.py",
+      "sha256": "de7a453a497831adee2b9993b27c37c4cf04907a253fa8b2931b41c32708bcdd",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "89a1b9b9f1abc6367d7cb47de79a56ae8b9709e4452dd36fca51ae8353e00f49",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+      "sha256": "b0ffcbba5041871f58408c4766268b31bb84cb81ccef965cd944c486fd4dd6cf",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/harness/run_certificate.py",
+      "sha256": "59895ddd9a85b6b3f75f9bfef6d39c423740679517df24505d26965918525970",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/execution_checkpoint.json",
+      "sha256": "34766611e5aad4c31633ab909be279281e5c4f98ad5b7bef77bc4b00b73eec15",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37950607128/freeze.json",
+      "sha256": "f3c0c5f657fc7ae7722268de3ca2efe1c34003775985eb98849c12e20349332d",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Executed the frozen certificate with PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-37950607128/harness/run_certificate.py; exit 0; certificate_overall=PASS; every mandatory check reports pass=true.",
+    "AD-POSITIVE-ROUNDTRIP: 6/6 families with a held-out unseen identifier resolved EXECUTABLE with a correctly bound non-null action and verify True.",
+    "AD-NEGATIVE-ROUNDTRIP: 24/24 declared negative cases refused with bound_action null and a non-empty reason; no declared negative became EXECUTABLE.",
+    "AD-TREATMENT-CONTRAST: 6/6 real cases had treatment action != comparator action; the forced NC-ZERO-CONTRAST-TREATMENT variant produced contrast 0 and was detected.",
+    "PC-ACCOUNTING-FIDELITY: seeded trajectory max_relative_error=0.0; a real inherited mechanism execution incremented retrieval_calls by 3, verification_calls by 2, repair_attempts by 1 as declared; model counters fired only on the explicitly injected event.",
+    "AD-IDENTITY-BINDING: fixture sha256 recorded and stable; pre-repair (cfec98660b0277ccbf295e8a4119e8d81ddccf50) and post-repair (b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796) kernel git blobs differ and are recorded.",
+    "B-LITERAL-KERNEL: pre-repair literal behaviour produced 0 EXECUTABLE on the held-out in-support set.",
+    "Noise fields (trace_id, seq, ts, nonce) did not become parameter slots: declared vs inferred slot counts match for every family, including F6-NOISE-STRESS (1/1).",
+    "Unit tests: PYTHONPATH=src python3 -m unittest discover -s tests -v reports Ran 9 tests, OK (3 pre-existing + 6 new contract tests).",
+    "Model/browser/http counters are 0 because no model or browser work is part of this credential-free experiment; this is expected and not a failure."
+  ],
+  "validity_notes": [
+    "CLAIM CEILING: this packet provides ZERO evidence for or against the product thesis C-LLM-INHERIT. It measures only the shipped-kernel arm-differentiation certificate (liveness/selectivity/accounting/attribution). C-LLM-INHERIT stays HYPOTHESIS regardless of this outcome and must not be promoted on the basis of this packet.",
+    "FREEZE SUBSTITUTE (preregistered): the entire SYNTH-INDUCTION-BANK-v1 fixture is specified in text inside prereg.md/spec.json, which freeze.json hashes; EXECUTE reconstructed it deterministically and recorded its sha256; the pre-repair and post-repair git blob identities of src/spider/kernel.py are recorded; and the behavioural checks cannot be satisfied without the required behaviour. This is the documented substitute for a direct code-hash freeze and is not a post-hoc weakening.",
+    "SELF-FULFILLING-CERTIFICATE THREAT acknowledged: EXECUTE authored both the kernel repair and the harness. Mitigations actually exercised: (1) AD-NEGATIVE-ROUNDTRIP forbids an always-EXECUTABLE kernel and refused 24/24; (2) held-out identifiers are absent from induction observations; (3) the certificate is shown to fire on the degenerate retrieval-shaped treatment; (4) the fixture is text-frozen so AUDIT can rebuild it; (5) no pathological count occurred (EXECUTABLE rate on negatives is 0, refusal_rate=1.0); (6) the pre-repair literal path yields 0 EXECUTABLE, so liveness is attributable to the in-scope repair.",
+    "REPRESENTATION LOSS: the in-scope repair adds distill_parameterized plus a confidence-0.9 parameterized policy; the pre-existing literal distill() is deliberately left at confidence 0.5 so B-LITERAL-KERNEL remains reproducible. The default resolve() min_confidence is unchanged (0.8); parameterized mechanisms clear it, literal ones do not.",
+    "FIXTURE SUPPORT NARROWNESS: inferred support descriptors can be narrower than the fixture's declared grammar because they are derived from the finite induction values (e.g. F1 infers ^itm\\-000[0-9]{1}$ from itm-0001..itm-0004). This is sufficient for the frozen checks (held-out values are accepted, declared out-of-support values rejected) but is a bounded-fixture artefact, not a claim of general grammar induction.",
+    "MODEL CREDENTIAL: no model credential was available or required. Model counters were exercised only via an injected synthetic event and are labelled as injected. The four-arm cold/instructions/retrieval/SPIDER benchmark remains unexecuted.",
+    "The orchestration wrapper files model_design.json (status success) and model_execute.json (status retry, attempt 3, exit_code 1, category transient) are infrastructure retry records, not experiment measurements; the measurements in this packet come from the deterministic certificate run, not from those wrapper records."
+  ],
+  "unresolved": [
+    "The downstream four-arm C-LLM-INHERIT benchmark (A-SPIDER vs B-COLD, B-INSTRUCTIONS, B-RETRIEVAL) has not been run and cannot yield product evidence until a programmatic model endpoint credential is provisioned.",
+    "Whether the confidence-0.9 parameterized policy is well-calibrated against real induction data is untested; it is a fixed policy chosen to clear the frozen 0.8 threshold on the synthetic fixture.",
+    "Generalization of the parameterized distillation path beyond the six synthetic families (real sites, richer action grammars, fresh/repair dynamics) is untested.",
+    "The support-inference narrowness noted in validity_notes should be re-examined before relying on it for real out-of-support rejection."
+  ]
+}
