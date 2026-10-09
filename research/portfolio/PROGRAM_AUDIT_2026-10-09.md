@@ -106,11 +106,11 @@ Do not retune thresholds. First supply a route-valid, independently health-certi
 
 ---
 
-### C-DELTA-REPAIR — HYPOTHESIS
+### C-DELTA-REPAIR — latest event MEASUREMENT_INVALID; inherited bounded ceiling EXPERIMENTAL
 
 **What is established**
 
-The program has generated bounded local-repair behavior and several prerequisites, but no canonical evidence yet justifies a general claim that local Web changes can be repaired locally with controlled contamination and lower total cost.
+EXP-GRAPH-36106653880 was measurement-invalid on the distributed-transfer attempt and explicitly preserved the prior single-node EXP-GRAPH-36018188168 as the inherited EXPERIMENTAL ceiling. The distributed run obtained no D1-D7 outcomes and must not be read as a negative. A bounded local-repair mechanism therefore exists, but distributed/general repair with contamination and cost bounds is not established.
 
 **Main dependency**
 
@@ -125,7 +125,7 @@ This claim is downstream, not dead. Repeatedly testing it before fixing those pr
 
 ---
 
-### C-RESIDUAL-NOVELTY — HYPOTHESIS
+### C-RESIDUAL-NOVELTY — EXPERIMENTAL
 
 **Why it matters**
 
@@ -135,9 +135,9 @@ This is closest to SPIDER's distinctive thesis:
 
 **Current state**
 
-No canonical experiment has yet shown a real external-agent cost curve in which successful-task cost scales with controlled novelty fraction rather than full task length.
+EXP-FRONTIER-36287182510 kept the claim at EXPERIMENTAL after a PASS audit. It replicated the residual decomposition over 6000 classified span occurrences (sigma2 about 0.2228, sigma3 0.1000, headroom 0.3228). A zero-cross-episode within-episode scratchpad closed 600/600 observation-absent spans at 1.0 span-level correctness, showing that cross-episode persistence is not required for correctness on that plan family. The value-keyed cross-episode cache closed 0/600 such spans itself and fell back to oracle execution 600/600 times. The successful scratchpad cost 48 abstract units, above the frozen 38.6 cost bar.
 
-Bounded direct-HTTP replay and compiled/reused mechanisms show that repeated work *can* be avoided, but they do not prove residual-novelty scaling on partially novel tasks.
+What remains unproven is the claim's intended scaling law: no canonical experiment has yet shown a real external-agent successful-task cost curve tracking controlled novelty fraction rather than full task length. The cost units are not tokens/latency/dollars and no model call occurred in the transaction.
 
 **Highest-value next gate**
 
@@ -152,11 +152,11 @@ Primary outcome must be **cost per successful task**, including verification and
 
 ---
 
-### C-LLM-INHERIT — HYPOTHESIS
+### C-LLM-INHERIT — BLOCKED condition; underlying registry hypothesis remains unmeasured
 
 **Current state**
 
-Still unmeasured at the claim's intended level.
+The latest canonical Product event, EXP-PRODUCT-37385633334, emits BLOCKED to describe the present condition while explicitly preserving the underlying registry hypothesis as unmeasured. It executed zero treatment/comparator arms, zero model calls, zero browser actions and zero retrieval/verification/repair calls. This is not negative evidence against the claim.
 
 Intel/Product repeatedly identified the missing external-agent experiment, but the last Product readiness gate (EXP-PRODUCT-37385633334) correctly aborted before spending the full budget.
 
