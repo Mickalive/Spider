@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "generated_utc": "2026-10-09T19:04:05.469228+00:00",
+  "obtainability_method": "pip download --no-deps <pkg> (wheel retrieval) succeeded for every package listed; provenance in provisioning_receipts.json",
+  "packages_obtainable": [
+    "langchain",
+    "langchain-community",
+    "chromadb",
+    "faiss-cpu",
+    "llama-index",
+    "browser-use",
+    "langgraph",
+    "pyautogen",
+    "crewai",
+    "dspy-ai",
+    "letta",
+    "zep-python",
+    "playwright",
+    "stagehand-py"
+  ],
+  "session_smoke_measurements": {
+    "langgraph_compiled_workflow": [
+      {
+        "framework": "langgraph",
+        "base_url": "http://127.0.0.1:8081/v1",
+        "model": "local",
+        "output": "SPIDER-PING",
+        "latency_s": 0.144,
+        "output_sha256": "507fea36d4de9c11fa8536cd140b5ba4037ef1aa047279dcd7c0f6d95c90d777",
+        "command": "venv/bin/python smoke_langgraph.py http://127.0.0.1:8081/v1 local sk-noauth"
+      },
+      {
+        "framework": "langgraph",
+        "base_url": "https://text.pollinations.ai/v1",
+        "model": "openai-fast",
+        "output": "SPIDER-PING",
+        "latency_s": 3.793,
+        "output_sha256": "507fea36d4de9c11fa8536cd140b5ba4037ef1aa047279dcd7c0f6d95c90d777",
+        "command": "venv/bin/python smoke_langgraph.py https://text.pollinations.ai/v1 openai-fast sk-noauth"
+      }
+    ],
+    "browser_tool_substrate": {
+      "probe": "playwright + system Chrome (executable_path=/usr/bin/google-chrome)",
+      "title": "SPIDER",
+      "text": "hello",
+      "latency_s": 0.112,
+      "browser": "chromium",
+      "version": "154.0.8037.97",
+      "launch_ok": true
+    },
+    "minimal_web_agent_task": [
+      {
+        "endpoint": "E-LOCAL-LLAMA",
+        "model": "qwen2.5-0.5b-instruct",
+        "task": "click #reveal-btn then answer TARGET-42",
+        "steps": 1,
+        "action_parsed": null,
+        "success": false,
+        "total_tokens": 150,
+        "observation": "model emitted prose, no JSON action",
+        "receipt_sha256": "463f6b7d6b0a686351c19b6c814cec176085f44e52e6e77efd4caa6b007aa980"
+      },
+      {
+        "endpoint": "E-POLLINATIONS-OPENAI",
+        "model": "gpt-oss-20b",
+        "task": "click #reveal-btn then answer TARGET-42",
+        "steps": 1,
+        "action_parsed": null,
+        "success": false,
+        "total_tokens": 197,
+        "observation": "OpenAI python client -> HTTP 400 'unexpected tokens remaining in message header'; raw HTTP -> content empty, reasoning-only, completion capped ~197 tokens though max_tokens=1200 requested",
+        "receipt_sha256": "44b7f5b164f37d0bfcf13dbb3433dee44ce8eadd490a35caa6c75461fb34628a"
+      }
+    ]
+  },
+  "comparators": [
+    {
+      "id": "B-COLD",
+      "category": "cold",
+      "package": null,
+      "obtainable": true,
+      "runnable_under_identical_model": true,
+      "published_numbers": null,
+      "published_same_model_family": false,
+      "audit_result": "NOT_APPLICABLE_INTERNAL"
+    },
+    {
+      "id": "B-INSTRUCTIONS",
+      "category": "instructions",
+      "package": null,
+      "obtainable": true,
+      "runnable_under_identical_model": true,
+      "published_numbers": null,
+      "published_same_model_family": false,
+      "audit_result": "NOT_APPLICABLE_INTERNAL"
+    },
+    {
+      "id": "B-RETRIEVAL",
+      "category": "retrieval_augmented_memory",
+      "package": "langchain-1.4.4 / langchain-community-0.4.2 / chromadb-1.5.9 / faiss-cpu-1.15.1 / llama-index-0.14.25",
+      "obtainable": true,
+      "runnable_under_identical_model": "framework_yes_web_task_not_demonstrated",
+      "published_numbers": {
+        "system": "LRAT (Learning to Retrieve from Agent Trajectories), arXiv 2026",
+        "metric": "task success +27% avg; recall +7..37%",
+        "denominators": "InfoSeek-Eval/BrowseComp-Plus; 100,195 docs; 26,482 trajectories",
+        "models": "agent backbones 4B-358B; retrievers Qwen3-Embed/E5-Large",
+        "token_budget": "partial (steps, not tokens)"
+      },
+      "published_same_model_family": false,
+      "audit_result": "UNAUDITED"
+    },
+    {
+      "id": "B-SELECTOR-CACHE",
+      "category": "selector_action_cache",
+      "package": "browser-use-0.13.11 / playwright-1.63.0 / stagehand-py-0.3.11",
+      "obtainable": true,
+      "runnable_under_identical_model": "framework_yes_web_task_not_demonstrated",
+      "published_numbers": {
+        "system": "browser-use",
+        "metric": "WebVoyager 89.1%",
+        "denominators": "586 tasks",
+        "models": "gpt-4o",
+        "token_budget": "none",
+        "secondary": "Stagehand Browserbase Bench v2: accuracy+cost/task but frontier models (Gemini 2.5, Sonnet 4.5)"
+      },
+      "published_same_model_family": false,
+      "audit_result": "UNAUDITED"
+    },
+    {
+      "id": "B-COMPILED-WORKFLOW",
+      "category": "compiled_workflow_skill_library",
+      "package": "langgraph-1.2.14 / pyautogen-0.10.0 / crewai-1.15.26 / dspy-ai-3.4.0",
+      "obtainable": true,
+      "runnable_under_identical_model": "smoke_pass_web_task_not_completed",
+      "published_numbers": {
+        "system": "budget-constrained web-agent study (AWM/ASI/ReasoningBank), arXiv 2026",
+        "metric": "WebArena SR% / tokens(K)",
+        "denominators": "Shopping 187/Reddit 106/Admin 182; WorkArena-L1 33; 3 runs",
+        "models": "Gemini 3 Flash, GPT-5.4-mini, Qwen 3.6-27B",
+        "token_budget": "YES"
+      },
+      "published_same_model_family": false,
+      "audit_result": "UNAUDITED"
+    },
+    {
+      "id": "B-MEMORY-AGENT",
+      "category": "memory_augmented_agent",
+      "package": "letta-0.34.8 / zep-python-2.0.2 / langchain memory",
+      "obtainable": true,
+      "runnable_under_identical_model": "framework_yes_web_task_not_demonstrated",
+      "published_numbers": {
+        "system": "Letta (MemGPT line)",
+        "metric": "LoCoMo 74.0%",
+        "denominators": "LoCoMo 10 conversations / 1,540 QA",
+        "models": "gpt-4o-mini",
+        "tools": "filesystem grep/search_files/open/close (no browser)",
+        "token_budget": "none",
+        "secondary": "Zep DMR 94.8@gpt-4-turbo / LongMemEval; Mem0 LoCoMo 92.5 tok-budget",
+        "urls": [
+          "https://www.letta.com/blog/benchmarking-ai-agent-memory",
+          "https://arxiv.org/abs/2501.13956",
+          "https://mem0.ai/research"
+        ]
+      },
+      "published_same_model_family": false,
+      "audit_result": "UNAUDITED"
+    }
+  ],
+  "gate1_conclusion": {
+    "obtainable": true,
+    "runnable_under_identical_model_framework": true,
+    "runnable_under_identical_model_web_agent_task": false,
+    "published_numbers_with_denominators_exist": true,
+    "published_numbers_same_model_family_as_attained_endpoint": false
+  }
+}

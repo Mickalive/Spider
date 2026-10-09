@@ -1,0 +1,1 @@
+{"id":"chatcmpl-0ec1ee06-bf04-4281-83b0-d5d8a8dde791","object":"chat.completion","created":1791572324,"model":"local","choices":[{"index":0,"message":{"content":"SPIDER-PING","role":"assistant"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":28,"completion_tokens":4,"total_tokens":32}}

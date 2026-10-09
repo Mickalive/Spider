@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "generated_utc": "2026-10-09T19:04:05.469560+00:00",
+  "gate_0_endpoint_attainability": {
+    "result": "PASS",
+    "evidence": [
+      "raw/endpoint_receipts.json:E-LOCAL-LLAMA",
+      "raw/endpoint_receipts.json:E-POLLINATIONS-OPENAI"
+    ],
+    "notes": "Two credential-free endpoints produced valid non-error completions with usage and response hashes."
+  },
+  "gate_1_comparator_obtainability": {
+    "result": "PASS",
+    "evidence": [
+      "raw/comparator_obtainability.json"
+    ],
+    "notes": "All candidate packages obtainable; comparator frameworks run under the attained endpoints (LangGraph smoke on both). Published success/cost numbers with denominators exist for retrieval/workflow/memory categories."
+  },
+  "gate_2_four_arm_viability": {
+    "result": "FAIL",
+    "required_compromises": [
+      "The only fully offline, reproducible credential-free endpoint (local Qwen2.5-0.5B-Instruct) did not execute a minimal Web-agent task (no parseable action).",
+      "The only stronger credential-free endpoint (pollinations gpt-oss-20b) is an anonymous proxy with intermittent HTTP 402, ~197 completion-token cap, empty content (reasoning-only) and no model pinning/SLA; identical-budget reproducibility cannot be guaranteed.",
+      "Running the four arms therefore requires substituting a different/stronger model (relaxed same-model constraint) or a differently provisioned endpoint -> a material weakening."
+    ],
+    "evidence": [
+      "raw/endpoint_receipts.json",
+      "raw/comparator_obtainability.json:session_smoke_measurements.minimal_web_agent_task"
+    ]
+  },
+  "gate_3_publication_audit": {
+    "result": "FAIL_ZERO_PASS",
+    "criteria": [
+      "same model family",
+      "same tool access",
+      "same budget denominator",
+      "explicit task/site denominators",
+      "no hand-authored decomposition"
+    ],
+    "audited": [
+      {
+        "comparator": "B-RETRIEVAL",
+        "same_model_family": false,
+        "failures": [
+          "different model family (4B-358B backbones)",
+          "no token budget"
+        ]
+      },
+      {
+        "comparator": "B-SELECTOR-CACHE",
+        "same_model_family": false,
+        "failures": [
+          "gpt-4o, not credential-free endpoint model",
+          "no token budget"
+        ]
+      },
+      {
+        "comparator": "B-COMPILED-WORKFLOW",
+        "same_model_family": false,
+        "failures": [
+          "Gemini 3 Flash / GPT-5.4-mini / Qwen 3.6-27B"
+        ]
+      },
+      {
+        "comparator": "B-MEMORY-AGENT",
+        "same_model_family": false,
+        "failures": [
+          "gpt-4o-mini / gpt-4-turbo",
+          "memory-QA task distribution, not Web-agent",
+          "no token budget"
+        ]
+      }
+    ],
+    "notes": "No comparator publishes a Web-agent success/cost number using Qwen2.5-0.5B-Instruct or gpt-oss-20b (or any credential-free endpoint model). Zero comparators pass audit."
+  },
+  "outcome": "DESIGN_COMPROMISED",
+  "outcome_basis": "Gate 0 PASS, Gate 1 PASS, Gate 2 FAIL (and Gate 3 zero-pass corroborates)."
+}

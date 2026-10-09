@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "generated_utc": "2026-10-09T19:04:05.468651+00:00",
+  "pc_ENDPOINT_LIVE": {
+    "id": "PC-ENDPOINT-LIVE",
+    "status": "PASS",
+    "evidence": [
+      "E-LOCAL-LLAMA",
+      "E-POLLINATIONS-OPENAI"
+    ]
+  },
+  "nc_NO_ENDPOINT": {
+    "id": "NC-NO-ENDPOINT",
+    "status": "NOT_HOLDS",
+    "note": "At least two credential-free endpoints produced valid completions, so the null 'no invocable endpoint' condition does not hold."
+  },
+  "endpoints": [
+    {
+      "candidate_id": "E-LOCAL-LLAMA",
+      "type": "local_runtime",
+      "runtime": "llama-cpp-python 0.2.90 (in-process) + llama_cpp.server OpenAI-compatible /v1/chat/completions",
+      "model_id": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+      "credential_required": false,
+      "gguf_path": "/tmp/opencode/probe/qwen05b-q4km.gguf",
+      "gguf_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+      "gguf_bytes": 491400032,
+      "provenance": "downloaded from huggingface.co/<Qwen GGUF resolve>; redirect us.aws.cdn.hf.co",
+      "probe_utc": "2026-10-09T19:03:40.580960+00:00",
+      "valid_completion": true,
+      "completion_text": "SPIDER-PING",
+      "load_s": 0.312,
+      "call_s": 0.422,
+      "usage": {
+        "prompt_tokens": 28,
+        "completion_tokens": 4,
+        "total_tokens": 32
+      },
+      "response_id": "chatcmpl-58054a9d-39e7-477e-bc72-5050fe9ed0e4",
+      "response_sha256": "d4a7428a541d1f68e5485d1efd443d7f54a61cf10a87f7aa8b7cf1e5d8a6f791",
+      "transport": "in-process llama_cpp"
+    },
+    {
+      "candidate_id": "E-POLLINATIONS-OPENAI",
+      "type": "cloud_proxy",
+      "url": "https://text.pollinations.ai/openai",
+      "credential_required": false,
+      "tier": "anonymous",
+      "probe_utc": "2026-10-09T19:03:41.530408+00:00",
+      "model_resolution": {
+        "models_endpoint": "GET https://text.pollinations.ai/models",
+        "resolved": "openai-fast -> gpt-oss-20b (aliases: openai, gpt-oss, gpt-oss-20b, ovh-reasoning)",
+        "reported_model_header": "gpt-oss-20b"
+      },
+      "calls": [
+        {
+          "call": 1,
+          "http_status": 200,
+          "latency_s": 3.265,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        },
+        {
+          "call": 2,
+          "http_status": 200,
+          "latency_s": 0.358,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        },
+        {
+          "call": 3,
+          "http_status": 200,
+          "latency_s": 0.409,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        },
+        {
+          "call": 4,
+          "http_status": 200,
+          "latency_s": 0.2,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        },
+        {
+          "call": 5,
+          "http_status": 200,
+          "latency_s": 0.208,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        },
+        {
+          "call": 6,
+          "http_status": 200,
+          "latency_s": 0.252,
+          "model": "gpt-oss-20b",
+          "content": "{\"ok\":true}",
+          "usage": {
+            "prompt_tokens": 88,
+            "completion_tokens": 58,
+            "total_tokens": 146
+          },
+          "user_tier": "anonymous",
+          "valid_completion": true
+        }
+      ],
+      "valid_completion_observed": true,
+      "n_valid": 6,
+      "n_calls": 6,
+      "http_status_sequence": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "rate_limit_note": "Anonymous tier intermittently returns HTTP 402 Payment Required between successful 200s (observed 200 x6 then 402 then 200). No API key / credential supplied. No SLA, model not pinnable."
+    },
+    {
+      "candidate_id": "E-OPENAI",
+      "url": "https://api.openai.com/v1/chat/completions",
+      "credential_env": "OPENAI_API_KEY",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:04.224113+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\n    \"error\": {\n        \"message\": \"You didn't provide an API key. You need to provide your API key in an Authorization header using Bearer auth (i.e. Authoriz",
+      "content_type": "application/json; charset=utf-8",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-ANTHROPIC",
+      "url": "https://api.anthropic.com/v1/messages",
+      "credential_env": "ANTHROPIC_API_KEY",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:04.317603+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"x-api-key header is required\"},\"request_id\":\"req_011CfsBbXR1nsvs5nbKw3iz5\"}",
+      "content_type": "application/json",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-GROQ",
+      "url": "https://api.groq.com/openai/v1/chat/completions",
+      "credential_env": "GROQ_API_KEY",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:04.448164+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"invalid_api_key\"}}\n",
+      "content_type": "application/json",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-TOGETHER",
+      "url": "https://api.together.xyz/v1/chat/completions",
+      "credential_env": "TOGETHER_API_KEY",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:04.529147+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\n  \"id\": \"p4a96rm-2kFHot-a47fa6249f482869\",\n  \"error\": {\n    \"message\": \"Missing API key. You need to provide your API key in an Authorization header using Bea",
+      "content_type": "application/json; charset=utf-8",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-CEREBRAS",
+      "url": "https://api.cerebras.ai/v1/chat/completions",
+      "credential_env": "CEREBRAS_API_KEY",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:04.892261+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\"message\":\"Wrong API Key\",\"type\":\"invalid_request_error\",\"param\":\"api_key\",\"code\":\"wrong_api_key\"}",
+      "content_type": "application/json",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-REPLICATE",
+      "url": "https://api.replicate.com/v1/models",
+      "credential_env": "REPLICATE_API_TOKEN",
+      "credential_present": false,
+      "probe_utc": "2026-10-09T19:04:05.213896+00:00",
+      "http_status": 401,
+      "body_excerpt": "{\"title\":\"Unauthenticated\",\"detail\":\"You did not pass an authentication token\",\"status\":401}\n",
+      "content_type": "application/problem+json",
+      "decision": "credential_required"
+    },
+    {
+      "candidate_id": "E-GITHUB-MODELS",
+      "url": "https://models.github.ai/inference/chat/completions",
+      "credential_env": "GH_TOKEN",
+      "credential_present": true,
+      "probe_utc": "2026-10-09T19:04:05.285179+00:00",
+      "http_status": 200,
+      "body_excerpt": "OK\r\n",
+      "content_type": "text/plain",
+      "decision": "probe"
+    },
+    {
+      "candidate_id": "E-GITHUB-MODELS-INTERCEPTION-CONTROL",
+      "url": "https://models.github.ai/this/path/does/not/exist",
+      "http_status": 200,
+      "content_type": "text/plain",
+      "body_excerpt": "OK\r\n",
+      "interception_confirmed": true,
+      "note": "Any path returns HTTP 200 text/plain 'OK' -> not a model completion; excluded from valid endpoints."
+    }
+  ],
+  "dns_and_local_runtimes": [
+    {
+      "host": "huggingface.co",
+      "resolved": true,
+      "ip": "3.167.112.45"
+    },
+    {
+      "host": "cdn-lfs.huggingface.co",
+      "resolved": false,
+      "error": "[Errno -5] No address associated with hostname"
+    },
+    {
+      "host": "api-inference.huggingface.co",
+      "resolved": false,
+      "error": "[Errno -5] No address associated with hostname"
+    },
+    {
+      "host": "models.github.ai",
+      "resolved": true,
+      "ip": "140.82.113.21"
+    },
+    {
+      "host": "registry.ollama.ai",
+      "resolved": true,
+      "ip": "104.18.16.170"
+    },
+    {
+      "runtime": "ollama",
+      "present": false,
+      "note": "binary absent"
+    },
+    {
+      "runtime": "docker",
+      "docker_present": true,
+      "note": "daemon reachable in prior probe; no GPU for vLLM/TGI"
+    },
+    {
+      "runtime": "vllm/tgi",
+      "present": false,
+      "note": "requires GPU; nproc=4, no CUDA"
+    }
+  ]
+}
