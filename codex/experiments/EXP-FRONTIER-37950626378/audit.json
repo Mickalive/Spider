@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37950626378",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "finding": "All four frozen controls reproduced live and PASS under the frozen policy with observations matching pre-freeze certificate exactly: POS_KNOWN_HOP_CONTROL (found=true, hop=1, requests=3, cum_bytes=653222, status=200); NEG_UNREACHABLE_CONTROL (found=false); NARROW_CHAIN_CALIBRATION (R=2.0); BROAD_FANOUT_CALIBRATION (R=466.0). The materiality factor M=3.0 remains strictly bracketed by live-measured ratios 2.0 and 466.0.",
+      "severity": "none",
+      "evidence_refs": [
+        "raw/controls.jsonl",
+        "raw/http.jsonl",
+        "result.json.controls"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "finding": "ADMISSION_GATE_V1 PASS: 26 admitted DEEP items (25 after dedup), 419 admitted NEAR items (408 after dedup), 1114 admitted MID items (1099 after dedup), 4 distinct seed hosts. All requirements satisfied (DEEP>=5, NEAR>=8, hosts>=2). The DEEP band is 100% doc.rust-lang.org mdBook (12 rust_book, 9 rust_cargo, 4 rust_nomicon); gnu, quotes, gentoo contributed 0 DEEP items within B=250/D=6.",
+      "severity": "representation_loss",
+      "evidence_refs": [
+        "result.json.metrics.admission_gate",
+        "result.json.metrics.deep_items_by_site",
+        "result.json.metrics.deep_hosts",
+        "result.json.validity_notes[VN-V8]"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "finding": "The RED arm (item-blind FIFO BFS prefix) is forced by construction to exceed the RACQ_PATH arm (persisted shortest path) on any site with branching factor > 1. The frozen baseline-ordering proof (spec.json.baseline_ordering_proof) establishes RED.requests >= RACQ_PATH.requests and RED.bytes >= RACQ_PATH.bytes, with strict inequality whenever the BFS takes >=1 detour. The DEEP/NEAR ratio > M=3.0 is therefore largely a mathematical property of the level-order BFS estimator's branching factor, not independent evidence about Web acquisition economics. The FLAT branch is only producible on the detour-free NARROW_CHAIN_CALIBRATION (R=2.0). This is explicitly disclosed in producer VN-V9.",
+      "severity": "construct_validity",
+      "evidence_refs": [
+        "spec.json.baseline_ordering_proof",
+        "spec.json.falsifier.two_sided_reachability",
+        "result.json.validity_notes[VN-V9]",
+        "result.json.metrics.racq_path_ratio_deep_over_near_requests"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "finding": "The RACQ_PATH arm (persisted shortest path) shows near-linear scaling in hop: median requests DEEP=4 vs NEAR=2 (ratio 2.0), median bytes DEEP=711368 vs NEAR=63384 (ratio 11.22). RACQ_URL is 1 GET for all items. The break-even reuse counts are all << 1 (DEEP requests=0.026, bytes=0.099), meaning a persisted path pays for itself after one reuse — but this is the baseline ordering proof, not a discriminating economic finding. The more direct re-acquisition cost reading is the RACQ_PATH arm, not the RED arm.",
+      "severity": "interpretation",
+      "evidence_refs": [
+        "result.json.metrics.median_re_acquisition_path_requests_by_band",
+        "result.json.metrics.median_re_acquisition_path_bytes_by_band",
+        "result.json.metrics.racq_path_ratio_deep_over_near_requests",
+        "result.json.metrics.median_break_even_reuse_count_requests_by_band"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "finding": "Session agreement: RED.requests identical for all 1559 admitted rows (0 disagreements), so no site was flagged unstable under VN-V4. RED.bytes differs in 16/1559 rows, all on forums.gentoo.org (cumulative +1 byte); VN-V4 keys exclusion on hop or request count only, so these did not trigger exclusion. This is minor response drift, not a stability failure.",
+      "severity": "none",
+      "evidence_refs": [
+        "result.json.metrics.session_agreement",
+        "result.json.validity_notes[VN-V4]"
+      ]
+    },
+    {
+      "id": "VF-06",
+      "finding": "Implementation choice IC-03: The two local calibration controls (NARROW_CHAIN_CALIBRATION, BROAD_FANOUT_CALIBRATION) were executed under the frozen BFS policy but with a fixture page budget of 1000 (vs frozen B=250 for real roots), because the pre-freeze BROAD_FANOUT observation required 932 requests to reach hop 3. This does not affect the site cost measurements or the falsifier, but it means the calibration controls are not run under the exact same budget constraint as the real roots. The producer correctly notes this is required to reproduce the frozen control observation.",
+      "severity": "minor",
+      "evidence_refs": [
+        "derived/implementation_choices.json IC-03",
+        "result.json.validity_notes[VN-V11]"
+      ]
+    },
+    {
+      "id": "VF-07",
+      "finding": "Implementation choice IC-04: RACQ_PATH.bytes and RACQ_URL.bytes are charged from bodies fetched in the SAME session that produced RED (no duplicate GETs issued). RED and both RACQ arms are strictly paired on the same session and item set. This is a valid resolution of the frozen ambiguity and avoids double-charging the substrate.",
+      "severity": "none",
+      "evidence_refs": [
+        "derived/implementation_choices.json IC-04",
+        "result.json.validity_notes[VN-V10]"
+      ]
+    },
+    {
+      "id": "VF-08",
+      "finding": "Implementation choice IC-05: Hop distance is the BFS level at which a URL is first discovered under the frozen item-blind FIFO document-order crawl (budgeted BFS), not the true shortest path in the full graph. Pages only reachable through edges not explored within B=250/D=6 are not admitted. This means measured hop may be longer than true shortest-path hop for pages near the budget boundary, but applies identically to all bands.",
+      "severity": "representation_loss",
+      "evidence_refs": [
+        "derived/implementation_choices.json IC-05",
+        "result.json.validity_notes[VN-V2]",
+        "result.json.validity_notes[VN-V3]"
+      ]
+    },
+    {
+      "id": "VF-09",
+      "finding": "Implementation choice IC-07: Pooled ratio deduplicates by frozen item_id across the three shared doc.rust.lang.org roots (book, cargo, nomicon). 27 duplicate rows removed. Per-site ratios use each candidate root's own kept items. This prevents triple-weighting of overlapping items in the pooled median.",
+      "severity": "none",
+      "evidence_refs": [
+        "derived/implementation_choices.json IC-07",
+        "result.json.metrics.pooled_band_sizes"
+      ]
+    },
+    {
+      "id": "VF-10",
+      "finding": "No tokenizer available (tiktoken ModuleNotFoundError, not in pyproject.toml). Token fields are null; GET requests and response-body bytes are the measured cost bases. This matches the frozen declaration that tokens are optional and gated on a versioned import (VN-V1).",
+      "severity": "none",
+      "evidence_refs": [
+        "result.json.metrics.environment",
+        "result.json.validity_notes[VN-V1]",
+        "result.json.validity_notes[VN-V14]"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "RED_re_derivation",
+      "finding": "The RED arm (item-blind BFS prefix) correctly charges all GETs and bytes up to and including the item page. Median requests DEEP=158 vs NEAR=30 (ratio 5.27); median bytes DEEP=9704744 vs NEAR=1327357 (ratio 7.31). The baseline-ordering proof holds: RED.requests >= RACQ_PATH.requests for all 1532 items (1532/1532 path_len == hop+1).",
+      "pass": true,
+      "evidence_refs": [
+        "result.json.controls.RED_re_derivation",
+        "result.json.metrics.median_re_derivation_requests_by_band",
+        "result.json.metrics.path_len_equals_hop_plus_one"
+      ]
+    },
+    {
+      "baseline_id": "RACQ_PATH_re_acquisition",
+      "finding": "The RACQ_PATH arm charges exactly h+1 GETs (the frozen shortest path). Median requests DEEP=4 vs NEAR=2 (ratio 2.0). Path length equals hop+1 for 1532/1532 items. This arm is the primary re-acquisition comparator and shows near-linear cost in hop.",
+      "pass": true,
+      "evidence_refs": [
+        "result.json.controls.RACQ_PATH_re_acquisition",
+        "result.json.metrics.median_re_acquisition_path_requests_by_band",
+        "result.json.metrics.path_len_equals_hop_plus_one"
+      ]
+    },
+    {
+      "baseline_id": "RACQ_URL_re_acquisition",
+      "finding": "The RACQ_URL arm charges exactly 1 GET for every item (persisted URL lower bound). Applies to all 1532 items. This is the absolute floor for any acquisition strategy.",
+      "pass": true,
+      "evidence_refs": [
+        "result.json.controls.RACQ_URL_re_acquisition",
+        "result.json.metrics.median_re_acquisition_path_requests_by_band"
+      ]
+    },
+    {
+      "baseline_id": "STRUCTURAL_MINIMUM",
+      "finding": "The theoretical floor (h+1 GETs and path-page bytes) is attained by RACQ_PATH for all items (path_len == hop+1 for 1532/1532). This confirms the baseline ordering RED >= RACQ_PATH >= RACQ_URL.",
+      "pass": true,
+      "evidence_refs": [
+        "result.json.controls.STRUCTURAL_MINIMUM",
+        "result.json.metrics.path_len_equals_hop_plus_one"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "pooled_ratio_requests_deep_over_near": 5.266666666666667,
+    "pooled_ratio_bytes_deep_over_near": 7.311329205330593,
+    "materiality_factor": 3.0,
+    "frozen_verdict": "GROWING",
+    "falsifier_triggered": true,
+    "pooled_band_sizes": {
+      "n_deep": 25,
+      "n_near": 408,
+      "n_mid_excluded": 1099,
+      "n_items_deduped": 1532,
+      "n_duplicate_rows_removed": 27
+    },
+    "median_re_derivation_requests_by_band": {
+      "NEAR": 30.0,
+      "MID": 138,
+      "DEEP": 158
+    },
+    "median_re_derivation_bytes_by_band": {
+      "NEAR": 1327357.0,
+      "MID": 4462155,
+      "DEEP": 9704744
+    },
+    "median_re_acquisition_path_requests_by_band": {
+      "NEAR": 2.0,
+      "MID": 3,
+      "DEEP": 4
+    },
+    "median_re_acquisition_path_bytes_by_band": {
+      "NEAR": 63384.0,
+      "MID": 78106,
+      "DEEP": 711368
+    },
+    "racq_path_ratio_deep_over_near_requests": 2.0,
+    "racq_path_ratio_deep_over_near_bytes": 11.223147797551432,
+    "median_break_even_reuse_count_requests_by_band": {
+      "NEAR": 0.06451612903225806,
+      "MID": 0.022222222222222223,
+      "DEEP": 0.025974025974025976
+    },
+    "median_break_even_reuse_count_bytes_by_band": {
+      "NEAR": 0.04754677967974367,
+      "MID": 0.017907812449209318,
+      "DEEP": 0.09917920511656163
+    },
+    "break_even_eligible_counts_by_band": {
+      "NEAR": { "eligible": 382, "n": 408 },
+      "MID": { "eligible": 1099, "n": 1099 },
+      "DEEP": { "eligible": 25, "n": 25 }
+    },
+    "per_site_ratios_session_a": {
+      "rust_book": { "ratio_requests_deep_over_near": 10.625, "ratio_bytes_deep_over_near": 7.622258059765239, "verdict": "GROWING", "n_deep_kept": 12, "n_near_kept": 7 },
+      "rust_cargo": { "ratio_requests_deep_over_near": 28.75, "ratio_bytes_deep_over_near": 13.57236526641084, "verdict": "GROWING", "n_deep_kept": 9, "n_near_kept": 11 },
+      "rust_nomicon": { "ratio_requests_deep_over_near": 44.5, "ratio_bytes_deep_over_near": 40.9619063853682, "verdict": "GROWING", "n_deep_kept": 4, "n_near_kept": 5 },
+      "gnu": { "ratio_requests_deep_over_near": null, "ratio_bytes_deep_over_near": null, "verdict": "UNDEFINED", "n_deep_kept": 0, "n_near_kept": 386 },
+      "quotes": { "ratio_requests_deep_over_near": null, "ratio_bytes_deep_over_near": null, "verdict": "UNDEFINED", "n_deep_kept": 0, "n_near_kept": 3 },
+      "gentoo": { "ratio_requests_deep_over_near": null, "ratio_bytes_deep_over_near": null, "verdict": "UNDEFINED", "n_deep_kept": 0, "n_near_kept": 7 }
+    }
+  },
+  "claim_ceiling": "On the frozen credential-free GET-only stdlib-HTTP substrate, under the frozen item-blind BFS estimator (RED), the re-derivation cost of admitted DEEP state items (all 25 items on doc.rust-lang.org mdBook, hop 3..6) exceeds that of admitted NEAR items (408 items across 4 hosts, hop 0..1) by R_req=5.27 and R_bytes=7.31 at materiality factor M=3.0. The frozen decision rule therefore returns GROWING (SUPPORTS H1). CRITICAL BOUND: The producer correctly discloses (VN-V9) that this ratio is substantially forced by the level-order BFS estimator's branching factor — the FLAT branch is only producible on a detour-free linear chain (NARROW_CHAIN_CALIBRATION R=2.0). The GROWING outcome is a property of the frozen estimator, not independent evidence that the Web charges more for deeper instances. The more direct re-acquisition reading is the RACQ_PATH arm, which scales near-linearly in hop (requests ratio 2.0). The DEEP band is single-host/single-engine (mdBook); cross-host generalization is untested (UR-1). No token/latency/dollar economics were measured (UR-3). No mechanism, cache, or product change is promoted.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-37950626378/request.json",
+    "research/experiments/EXP-FRONTIER-37950626378/spec.json",
+    "research/experiments/EXP-FRONTIER-37950626378/prereg.md",
+    "research/experiments/EXP-FRONTIER-37950626378/freeze.json",
+    "research/experiments/EXP-FRONTIER-37950626378/result.json",
+    "research/experiments/EXP-FRONTIER-37950626378/report.md",
+    "research/experiments/EXP-FRONTIER-37950626378/provenance.json",
+    "research/experiments/EXP-FRONTIER-37950626378/raw/controls.jsonl",
+    "research/experiments/EXP-FRONTIER-37950626378/raw/http.jsonl",
+    "research/experiments/EXP-FRONTIER-37950626378/raw/observations.jsonl",
+    "research/experiments/EXP-FRONTIER-37950626378/derived/metrics.json",
+    "research/experiments/EXP-FRONTIER-37950626378/derived/analysis.json",
+    "research/experiments/EXP-FRONTIER-37950626378/derived/implementation_choices.json"
+  ],
+  "unresolved": [
+    {
+      "id": "UR-1",
+      "question": "Whether any non-mdBook host in the frozen pool admits state items at hop>=3 within B=250/D=6. The DEEP band is single-host/single-engine, so cross-host generalization is untested.",
+      "why": "gnu, quotes and gentoo admitted 0 DEEP items within the frozen budget; a larger budget or different roots would be required."
+    },
+    {
+      "id": "UR-2",
+      "question": "Whether the GROWING pooled ratio reflects Web structure or the branching factor of the frozen item-blind BFS estimator.",
+      "why": "RED>=RACQ_PATH is forced by the frozen baseline-ordering proof; the alternative persisted-path arm is near-linear in hop (requests ratio 2.0). Separating the two needs an estimator that does not order deeper pages behind shallower ones."
+    },
+    {
+      "id": "UR-3",
+      "question": "Real acquisition economics (latency, dollars, model calls) as a function of hop.",
+      "why": "Only GET request counts and response-body bytes were measured; no tokenizer, latency or cost model was available."
+    },
+    {
+      "id": "UR-4",
+      "question": "How many controls are JS-rendered and therefore missed by the static parser, and whether that changes which items are admitted at depth.",
+      "why": "Only static named <input>/<select> were detectable; VN-V6 detection counts are per site."
+    },
+    {
+      "id": "UR-5",
+      "question": "The cause and significance of the 16/1559 response-body byte differences between the two sessions.",
+      "why": "Byte drift only; request counts and hops were identical, so it does not affect the frozen decision rule."
+    },
+    {
+      "id": "UR-6",
+      "question": "Whether a non-level-order estimator (e.g., best-first search guided by a learned or heuristic predictor) would produce a different DEEP/NEAR cost ratio on the same sites, and whether that ratio would be flat or growing.",
+      "why": "The current frozen estimator is the only one tested; the construct validity threat (VF-03) means the GROWING result may be estimator-specific."
+    }
+  ]
+}

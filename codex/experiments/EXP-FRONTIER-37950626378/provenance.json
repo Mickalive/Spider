@@ -1,0 +1,212 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-FRONTIER-37950626378",
+ "lane": "frontier",
+ "origin_github_run_id": "37950626378",
+ "execute_github_run_id": "37975522921",
+ "execute_github_run_attempt": "1",
+ "base_sha": "455f25d130572f80db1d693ef97b050665f5be79",
+ "execution_head_sha": "89c5dea1358f74a8197e69cae94c104ab92fe654",
+ "branch": "lab2/frontier",
+ "command": "python3 research/frontier/run_execute_37950626378.py",
+ "emit_command": "python3 research/frontier/emit_result_37950626378.py",
+ "frozen_inputs": {
+  "request.json": "54cb4d1fcea9faeb7a73c4ea2771cf8d350564f7c139a722f9dfc0a23cc66073",
+  "spec.json": "e41d76ae39cea7594212ebf24262783b6ca6eb347f11ee73e1c4917290cc75a5",
+  "prereg.md": "e3c35c773134163ce9b28e0d01a41b0bfa6320d5ab1209cc0b57e5d511e2c2d5",
+  "freeze.json_sha256": "1150891b375f1221810e2f73bdc7954a27771853487f54334175faa79b5707b6",
+  "verified_unmodified": true
+ },
+ "environment": {
+  "python": "3.12.15",
+  "platform": "linux",
+  "network": "AVAILABLE",
+  "tokenizer": {
+   "tiktoken_version": null,
+   "declared_in_pyproject": false
+  },
+  "uname": "Linux 6.17.0-1022-azure"
+ },
+ "dataset": {
+  "candidate_roots": [
+   {
+    "site": "rust_book",
+    "root": "https://doc.rust-lang.org/book/",
+    "engine": "mdBook",
+    "host": "doc.rust-lang.org"
+   },
+   {
+    "site": "rust_cargo",
+    "root": "https://doc.rust-lang.org/cargo/",
+    "engine": "mdBook",
+    "host": "doc.rust-lang.org"
+   },
+   {
+    "site": "rust_nomicon",
+    "root": "https://doc.rust-lang.org/nomicon/",
+    "engine": "mdBook",
+    "host": "doc.rust-lang.org"
+   },
+   {
+    "site": "gnu",
+    "root": "https://www.gnu.org/",
+    "engine": "GNU web",
+    "host": "www.gnu.org"
+   },
+   {
+    "site": "quotes",
+    "root": "https://quotes.toscrape.com/",
+    "engine": "custom",
+    "host": "quotes.toscrape.com"
+   },
+   {
+    "site": "gentoo",
+    "root": "https://forums.gentoo.org/",
+    "engine": "phpBB",
+    "host": "forums.gentoo.org"
+   }
+  ],
+  "sessions_per_site": 2,
+  "budget_pages": 250,
+  "depth_cap": 6,
+  "n_http_get": 4257,
+  "raw_http_records": 4257,
+  "observation_records": 1559
+ },
+ "code_paths": [
+  "research/frontier/run_execute_37950626378.py",
+  "research/frontier/emit_result_37950626378.py"
+ ],
+ "artifacts": [
+  {
+   "path": "research/frontier/run_execute_37950626378.py",
+   "sha256": "2b9d144ab0d13e7b00a7a421994e122b586b0d2a2d4b37d900d6b6e988c60b7f",
+   "role": "code"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/raw/controls.jsonl",
+   "sha256": "b579f8132eacfa53aeb46985befebabf585b8cfd55c08fb169e6bd8d8cee6218",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/raw/http.jsonl",
+   "sha256": "4cf6fa27929d1134f66c3bae834ce72a6162b524553200ed751c918c2d361072",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/raw/observations.jsonl",
+   "sha256": "33e7baf21767503e9c5be1e70c6c5514ed0a5959b16c7a705c67d4aae3faacf7",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/analysis.json",
+   "sha256": "75a74280b9a16d00e2a4d60767a3056c90273e33f872fcfd42ec99659c222d72",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/implementation_choices.json",
+   "sha256": "00032839197d712c742a0da18bce7dbe6eca520664214d90aed7e60527b5b2c9",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/metrics.json",
+   "sha256": "a02e2fe473b227e1a310dbb14d393db7ceadcbc133b27a4e7bb4887e0213883c",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_gentoo_s0.json",
+   "sha256": "51af34623ce65e9fc19ace8295a315daeda1bc98f717b16deefe2c0e9574abdb",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_gentoo_s1.json",
+   "sha256": "169a42b960aa7e871be1813025d5ec4c36182280c1ec542d4d4fab3367b3b42a",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_gnu_s0.json",
+   "sha256": "f4a87decf3181bf48d070404721fed9a322d960e3e734c955c652f8937073d6c",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_gnu_s1.json",
+   "sha256": "08fcae37bfc38ceb2051fbe19d14c78ae3d041d8a70b7723cdf5e75886a1feea",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_quotes_s0.json",
+   "sha256": "5297ec2aec3e4af220b52b8f0ecaaac40ca871fb64f46992049b04b05ccdb1fa",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_quotes_s1.json",
+   "sha256": "0bd61024aaf04d895bedd76bb04e526cee5406d0c16bec2d36032ddb7add30ca",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_book_s0.json",
+   "sha256": "927a165932423f7ec064e4d73f57e200c92e8a01224fd5570f44895af902869d",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_book_s1.json",
+   "sha256": "7463f234a932314224482fbab5e37cbee075f6ef989fa98de547df44dc162a3e",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_cargo_s0.json",
+   "sha256": "343f297c22c706fa5ef7ff31bcff586bb03ceaa6370a4317d799e8de841966b1",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_cargo_s1.json",
+   "sha256": "f8c408fa9ed571b252e7545b792abd0f1955a14319e3fe6015572164f5e44768",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_nomicon_s0.json",
+   "sha256": "05984936f7dd1fa4df686c06a13a2ef917df4441da84de6f824656d8b72be0a3",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-FRONTIER-37950626378/derived/site_rust_nomicon_s1.json",
+   "sha256": "5101d9d962459a619041ba9a919d340cda45175de714dcc7b56cc7b4b5cd3484",
+   "role": "derived"
+  }
+ ],
+ "safety": {
+  "get_only": true,
+  "non_get_requests": 0,
+  "credentials": false,
+  "cookies": false,
+  "browser": false,
+  "docker": false,
+  "model_key": false,
+  "write_verb": false,
+  "no_commit_no_push": true
+ },
+ "prior_execute_receipts": {
+  "note": "Superseded operational receipts left in place by the workflow runner and NOT treated as scientific evidence. This EXECUTE completes the frozen design; result.json / report.md / provenance.json are the authoritative stage output. These receipts were not edited by the producer.",
+  "failure.json": {
+   "github_run_id": "37962922070",
+   "category": "EXECUTION_FAILURE",
+   "superseded": true
+  },
+  "model_execute.json": {
+   "github_run_id": "37975522921",
+   "status": "retry",
+   "attempt": 4,
+   "superseded": true
+  },
+  "execution_checkpoint.json": {
+   "github_run_id": "37950626378",
+   "role": "origin checkpoint",
+   "superseded": false
+  }
+ },
+ "notes": [
+  "Frozen inputs were re-hashed at execute time and match freeze.json.",
+  "Token channel unavailable; requests and response-body bytes are the declared cost bases.",
+  "RACQ arm bytes are charged from the same-session observed bodies (IC-04); no duplicate GETs were issued for arms."
+ ]
+}
