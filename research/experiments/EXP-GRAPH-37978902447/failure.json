@@ -1,0 +1,11 @@
+{
+  "stage": "director",
+  "category": "DIRECTOR_FAILURE",
+  "message": "stage exited with code 1",
+  "retryable": false,
+  "fingerprint": "5f414767f9c329a2576c2b06",
+  "recorded_at": "2026-10-09T20:34:57.982832+00:00",
+  "github_run_id": "37978902447",
+  "github_run_attempt": "1",
+  "control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
+}
