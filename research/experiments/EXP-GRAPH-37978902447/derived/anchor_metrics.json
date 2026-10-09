@@ -1,0 +1,132 @@
+{
+  "CAL-POS-1": {
+    "A": {
+      "distinct_values": 16,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "0GNMaRtHM4-Yu5ExnqSRGm5D43dST9huMeNAi8df-FVnIijk1sLH2l9_43GMpAAQoxRGLHqYgJ_JWVhMruZD0g",
+        "0kZqkY_tKDT2RReCvymEff3oF_xLhQ_Be5p4Rr1DDU3qz6sCcIwJxC0leAiHoiQg5DG6Uq25ygmC8WtWUhGgJg",
+        "1L1ywAyc4Pbmh3MIwciG_tD_BRF54H1w_RFjlsvRPkzsNLNT8_3BBj3nHIL5QyajySaov5_cuLgEenCGJIOTJw",
+        "CY3kw0O2zAWGEtmVYfyHFpMOIu4wtievyyxFk9kySZ4CdKh7gsc7CGcxf7qmF3HDd_fzzFSjMj_-oXeKi8tzaQ",
+        "DNIC5L7AMXgeYjXod3tawG2IaxJMHn-TSmJoZta1scG7k2Zpc0XFLdmmR6hle8vKoN_OSWTJJ2Ky2HChvwwKRg",
+        "DoV2GudHso0eCBnEjx91bhcaKb9O_ZqWI28MHlFQ4YK5xBKXKsJG2NnMa4SdH-Rk2k2M5GYqwmfb1RTZOOlaBQ",
+        "FNt7Q1qPb1XLe6eZgt3FjyQZgPz8NLKz2q1rRkk0S26jmh_OlwqbAAy_1dmQ3VSF6U4lp9Tj6kIiF3OBII3w6Q",
+        "L0EdlIWoSdlZ8pOabMLJdempq8fsMmF1VuVsKvnmLu-bqXUY0SRq_3os7EyOcfxsIdrCJ0jr99jBamYiHEDk0g",
+        "L1lOjFxM8wqsBeXUWlmoG4yPVIbHxUmehXTQ1WP1o1gkoAI0nT0EB00mQ_udsl7OaHaFpKPQXA6w-eLMMQyZrw",
+        "ZnsLoRWZmltgdCo4ZFzx-jA49LEou1dMhEZm0u29k3Fe8soy6vi7q7sURbJc11GnKeFZH86HkoR9LXXCAu8-Gg",
+        "_GdiITs0cBsUFREy38GtxvIYnalT2FsFC2OS_i1VA-dIjwqtb7hTPTfLbuQ9cpjfOmv0SfcBzaic7Jj2yPPJ2g",
+        "cUMo8py-IpbdS5iBl_fBnSU1AwmX5QH6HYNL9UF3Tkh6umRKXc_VmzxoPq5QHDdIwczSK_PwFGooDnnsE450vw",
+        "h78sheULABn36FNmWv34vaK332xaV5N5EZ4dp6RZNdwzV0QJsYcjP9Q2LLC4Ts2kasS2jP6OBdSGERevQf__4Q",
+        "kAAkWWagNygAZPFiXmjyciUBPmVAh_CLJzsnNs4rSbok6EzVMiwUDiO6jrS828dr7XJXheReZiawtC0-K42Dhw",
+        "rS6s2z5DRhV8IB2PL_3zl1hRbZk4pcB8Bik0XdWcK06m1-Bj_zKxGJ0Du6DoFgVCvKi8u1yw1ewzpAZEh2URuQ",
+        "s-u4PsYY6RN2YXnb8DWHj8brl5hyrslq4b4Fmi2_3USLYnmtOXnI460BFlHIvifS3zI6NpSSDKIY1RaKwu1wLw"
+      ]
+    },
+    "B": {
+      "distinct_values": 16,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "0GNMaRtHM4-Yu5ExnqSRGm5D43dST9huMeNAi8df-FVnIijk1sLH2l9_43GMpAAQoxRGLHqYgJ_JWVhMruZD0g",
+        "0kZqkY_tKDT2RReCvymEff3oF_xLhQ_Be5p4Rr1DDU3qz6sCcIwJxC0leAiHoiQg5DG6Uq25ygmC8WtWUhGgJg",
+        "1L1ywAyc4Pbmh3MIwciG_tD_BRF54H1w_RFjlsvRPkzsNLNT8_3BBj3nHIL5QyajySaov5_cuLgEenCGJIOTJw",
+        "CY3kw0O2zAWGEtmVYfyHFpMOIu4wtievyyxFk9kySZ4CdKh7gsc7CGcxf7qmF3HDd_fzzFSjMj_-oXeKi8tzaQ",
+        "DNIC5L7AMXgeYjXod3tawG2IaxJMHn-TSmJoZta1scG7k2Zpc0XFLdmmR6hle8vKoN_OSWTJJ2Ky2HChvwwKRg",
+        "DoV2GudHso0eCBnEjx91bhcaKb9O_ZqWI28MHlFQ4YK5xBKXKsJG2NnMa4SdH-Rk2k2M5GYqwmfb1RTZOOlaBQ",
+        "FNt7Q1qPb1XLe6eZgt3FjyQZgPz8NLKz2q1rRkk0S26jmh_OlwqbAAy_1dmQ3VSF6U4lp9Tj6kIiF3OBII3w6Q",
+        "L0EdlIWoSdlZ8pOabMLJdempq8fsMmF1VuVsKvnmLu-bqXUY0SRq_3os7EyOcfxsIdrCJ0jr99jBamYiHEDk0g",
+        "L1lOjFxM8wqsBeXUWlmoG4yPVIbHxUmehXTQ1WP1o1gkoAI0nT0EB00mQ_udsl7OaHaFpKPQXA6w-eLMMQyZrw",
+        "ZnsLoRWZmltgdCo4ZFzx-jA49LEou1dMhEZm0u29k3Fe8soy6vi7q7sURbJc11GnKeFZH86HkoR9LXXCAu8-Gg",
+        "_GdiITs0cBsUFREy38GtxvIYnalT2FsFC2OS_i1VA-dIjwqtb7hTPTfLbuQ9cpjfOmv0SfcBzaic7Jj2yPPJ2g",
+        "cUMo8py-IpbdS5iBl_fBnSU1AwmX5QH6HYNL9UF3Tkh6umRKXc_VmzxoPq5QHDdIwczSK_PwFGooDnnsE450vw",
+        "h78sheULABn36FNmWv34vaK332xaV5N5EZ4dp6RZNdwzV0QJsYcjP9Q2LLC4Ts2kasS2jP6OBdSGERevQf__4Q",
+        "kAAkWWagNygAZPFiXmjyciUBPmVAh_CLJzsnNs4rSbok6EzVMiwUDiO6jrS828dr7XJXheReZiawtC0-K42Dhw",
+        "rS6s2z5DRhV8IB2PL_3zl1hRbZk4pcB8Bik0XdWcK06m1-Bj_zKxGJ0Du6DoFgVCvKi8u1yw1ewzpAZEh2URuQ",
+        "s-u4PsYY6RN2YXnb8DWHj8brl5hyrslq4b4Fmi2_3USLYnmtOXnI460BFlHIvifS3zI6NpSSDKIY1RaKwu1wLw"
+      ]
+    }
+  },
+  "CAL-POS-2": {
+    "A": {
+      "distinct_values": 5,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "+\\",
+        "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\"
+      ]
+    },
+    "B": {
+      "distinct_values": 5,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "+\\",
+        "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\"
+      ]
+    }
+  },
+  "CAL-POS-3": {
+    "A": {
+      "distinct_values": 5,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "+\\",
+        "93fb9425aaa2222f5388593b5eab4f7c6ac94aa6+\\",
+        "b80cfc0e42c5cab67386566185e734a26ac94aaa+\\",
+        "d10e59cbd5be917d0e437cd58800c36b6ac94aa8+\\",
+        "d57e859ffd86c53f2d7e8414817918b36ac94aac+\\"
+      ]
+    },
+    "B": {
+      "distinct_values": 5,
+      "extract_rate": 1.0,
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": [
+        "+\\",
+        "93fb9425aaa2222f5388593b5eab4f7c6ac94aa6+\\",
+        "b80cfc0e42c5cab67386566185e734a26ac94aaa+\\",
+        "d10e59cbd5be917d0e437cd58800c36b6ac94aa8+\\",
+        "d57e859ffd86c53f2d7e8414817918b36ac94aac+\\"
+      ]
+    }
+  },
+  "CAL-POS-4": {
+    "A": {
+      "distinct_values": 0,
+      "extract_rate": 0.0,
+      "verdict": "NO_FIELD",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": []
+    },
+    "B": {
+      "distinct_values": 0,
+      "extract_rate": 0.0,
+      "verdict": "NO_FIELD",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "all_values": []
+    }
+  }
+}

@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Discourse Meta - The Official Support Forum for Discourse</title>
+    <meta name="description" content="Learn about and discuss Discourse, the next-generation open-source forum software.">
+    <meta name="generator" content="Discourse 2026.10.0-latest - https://github.com/discourse/discourse version e3e208d474bc22026476d86a033c8c3bf66750fa">
+<link rel="icon" type="image/png" href="https://global.discourse-cdn.com/meta/optimized/3X/b/3/b33be9538df3547fcf9d1a51a4637d77392ac6f9_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://global.discourse-cdn.com/meta/optimized/4X/b/1/2/b12885a6f292ceffc222608846855f25a272835b_2_180x180.jpeg">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1a1a">
+
+<meta name="color-scheme" content="light dark">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://meta.discourse.org/" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://meta.discourse.org","name":"Discourse Meta","potentialAction":{"@type":"SearchAction","target":"https://meta.discourse.org/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<meta name="discourse-track-view-session-id" content="Mwxdo0aKWUKoqn2YbrGn4ZJazPCqsxs2">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://meta.discourse.org/opensearch.xml" title="Discourse Meta Search">
+
+        <link rel="alternate" href="https://meta.discourse.org/" hreflang="x-default" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=en" hreflang="en" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=zh_CN" hreflang="zh-CN" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=es" hreflang="es" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=fr" hreflang="fr" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=de" hreflang="de" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=pt_BR" hreflang="pt-BR" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=it" hreflang="it" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=ar" hreflang="ar" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=ja" hreflang="ja" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=ru" hreflang="ru" />
+      <link rel="alternate" href="https://meta.discourse.org/?tl=ko" hreflang="ko" />
+
+    <link href="https://sea3.discourse-cdn.com/meta/stylesheets/color_definitions_meta-light_144_331_23d5eb3847d8373e12727c5d672430bfa2e2dfbf.css?__ws=meta.discourse.org" media="(prefers-color-scheme: light)" rel="stylesheet" class="light-scheme" data-scheme-id="144"/><link href="https://sea3.discourse-cdn.com/meta/stylesheets/color_definitions_meta-dark_145_331_593aec864002558f3259dc0390750cacc11174ce.css?__ws=meta.discourse.org" media="(prefers-color-scheme: dark)" rel="stylesheet" class="dark-scheme" data-scheme-id="145"/>
+
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common"  />
+
+
+
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/automation_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="automation"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/boards_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="boards"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/chat_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="chat"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/checklist_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-ai_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-ai"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-assign_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-assign"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-cakeday_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-cakeday"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-chat-integration_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-chat-integration"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-customer-flair-plugin_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-customer-flair-plugin"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-data-explorer_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-data-explorer"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-details_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-doc-categories_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-doc-categories"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-events_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-events"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-gamification_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-gamification"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-github_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-github"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-hubspot_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-hubspot"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-lazy-videos_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-local-dates_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-math_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-math"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-new-features-feeds_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-new-features-feeds"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-personalized-feed_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-personalized-feed"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-presence_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-reactions_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-reactions"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-rewind_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-rewind"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-saved-searches_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-saved-searches"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-solved_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-suggested-edits_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-suggested-edits"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-templates_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-theme-install-button_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-theme-install-button"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-topic-voting_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-user-notes_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-user-notes"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-workflows_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-workflows"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-yearly-review_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="discourse-yearly-review"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/footnote_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/hosted-site_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="hosted-site"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/poll_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/spoiler-alert_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/voice_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="voice"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/chat_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="chat_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-ai_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-ai_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-assign_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-assign_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-customer-flair-plugin_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-customer-flair-plugin_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-events_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-events_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-gamification_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-gamification_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-reactions_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-reactions_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-rewind_mobile_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-rewind_mobile"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/chat_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="chat_desktop"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-ai_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-ai_desktop"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-events_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-events_desktop"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-gamification_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-gamification_desktop"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/discourse-reactions_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-reactions_desktop"  />
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/poll_desktop_77b6e067544e8b2d8be369706974981cf9c8d17b.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_264_094caa08e95ce7322e36ed42045db792a1c932a3.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="264" data-theme-name="custom header links (icons)"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_409_945e4d75f7eb00c85019be0fad41889d09cb1091.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="409" data-theme-name="custom topic list ads"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_334_fbfb05beb78218ef6c874695728e26dea28406f0.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="334" data-theme-name="design experiments"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_129_035b98a2d288af1135a675a9a9f5ef4258d8c4a0.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="129" data-theme-name="discotoc"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_171_20f3b523e0d972d295c2c39490c6f8d1ee544a67.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="171" data-theme-name="discourse icon"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_428_77eb257734ac45d40360fc81ba16568528150877.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="428" data-theme-name="discourse lucide icons"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_286_ff1549b5dfc7c3d386c2b65a65a3f3b456743a6f.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="286" data-theme-name="discourse mermaid"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_425_39d5d2c75c0a5ed55dd5f94725f923657d4bc538.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="425" data-theme-name="discourse meta embed component"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_222_23f9dfcdcd27e7f6461075bdfec1a6c9a32be77e.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="222" data-theme-name="docs card filter"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_412_c8ff83de72ddd5334c50d4613d8b87a5389f1f9d.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="412" data-theme-name="ftee badges"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_180_aa9251db93c9c2b3ea6ac9b6722d2f981ae9a5ea.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="180" data-theme-name="placeholder forms"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_202_eb5c9828f84f8aafd93e3b33f4104427c08775c5.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="202" data-theme-name="reply template"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_279_200fa11fedb774b2747fb8f0f3f869f2614e0a08.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="279" data-theme-name="sidebar theme toggle"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_155_c8fa947c70c2c963213a5c857737ec5bb71288bb.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="155" data-theme-name="tag icons"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_208_db28cdfc3d94a6bf195b013decf69b3935808d51.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="208" data-theme-name="team pm likes"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_184_b90026396b636f7f5b75dfd3eba0e3bb5470d74b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="184" data-theme-name="topic thumbnails"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_230_b43b2148f65d656ad8ffbd59bae19be33b441f53.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="230" data-theme-name="unformatted code detector"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_236_0df8d606405c71e5c78c3692a2961616f1a72bf4.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="236" data-theme-name="user card directory"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_309_11afee0e17df00af5a89f31a4ecda628f0c44fa6.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="309" data-theme-name="whisper warning"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_331_c858d6b0162887b684abb0ac2ee553da3528b58e.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="331" data-theme-name="meta branded"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_404_18cbb85baa078ce7e4a6531ce89491e026a0371a.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="404" data-theme-name="collapse ai triage whispers"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_194_0a319dade82d63147f2169b22489314624e87be2.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="194" data-theme-name="create-poll-first"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_379_0fde28a2ef3a55e4a333208ee3ea298e615f1fce.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="379" data-theme-name="developer guides noedit"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_437_c791794f52d1a817cb785818102ed8b467a33dac.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="437" data-theme-name="fix: ai usage tables"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_358_29fa381e24ab3560a3cc61c1d51e8bcc09b82df8.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="358" data-theme-name="hide &#39;check doc&#39;"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_165_eed1ca25cbcb28e9c3016f0d4631e3b4abde2f72.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="165" data-theme-name="hide sidebar for anon - hidden whispers for non-staff"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_298_c47f248a84f3aa5b632a7f185286409ff311d765.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="298" data-theme-name="logo avatar exception"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_421_255222e227f097c7ff3dce4bd2e378777df29cb1.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="421" data-theme-name="meta branded hotfixes"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_436_1a8bd682f78ecacbb76b3bafcdf0173407caa677.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="436" data-theme-name="meta branded livestream layout fix"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_418_ab1f6f4106c6e2ca11dec99fbb4100d242d97597.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="418" data-theme-name="sales mutual action plan table styling"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_267_f338a73a2537543677bc3c73f63e3ff9019a4d47.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="267" data-theme-name="tech advocate only group assign header button"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_434_ca2eea75a6a573c555e0348de863cd3215138e88.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="434" data-theme-name="tech advocate only whisper toggle re-positioning"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/common_theme_355_7b620d6f8002d4ce7267cf2591bbbe8fba1c7a1b.css?__ws=meta.discourse.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="355" data-theme-name="topic voting customisations"/>
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/mobile_theme_180_c28f62dd830b4c7f49c65fea38582e767b0412ed.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="mobile_theme" data-theme-id="180" data-theme-name="placeholder forms"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/mobile_theme_184_4e4f955b94388c3f4eaa978b57297573a7738536.css?__ws=meta.discourse.org" media="(width < 40rem)" rel="stylesheet" data-target="mobile_theme" data-theme-id="184" data-theme-name="topic thumbnails"/>
+  <link href="https://sea3.discourse-cdn.com/meta/stylesheets/desktop_theme_222_7221916a7009806c3238e0256357ad4fb1f121d6.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="222" data-theme-name="docs card filter"/>
+<link href="https://sea3.discourse-cdn.com/meta/stylesheets/desktop_theme_427_72d0e92c880d07875bc1d8fc486775d4fa2b9a07.css?__ws=meta.discourse.org" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="427" data-theme-name="full width (center-main-outlet)"/>
+
+    <meta http-equiv="origin-trial" content="Avxkn9pqiyK+1F1LLCIuXTFKanihzkcBp9P63oOYbFG3xZdBX56KG7ffcvWPy2R1QrcGCtLSXEEx+BEz8m95+AwAAABTeyJvcmlnaW4iOiJodHRwczovL21ldGEuZGlzY291cnNlLm9yZzo0NDMiLCJmZWF0dXJlIjoiQmFkZ2luZyIsImV4cGlyeSI6MTU1NjIyNDYwM30=">
+<script defer="" data-domain="meta.discourse.org,rollup-meta.discourse.org,rollup-all.discourse.org" src="https://www.discourse.org/js/script.outbound-links.tagged-events.js" nonce="VQ8Mu7pkKg0M2JIpNIe5r4FLh"></script>
+<meta name="ahrefs-site-verification" content="07293e630779edf08a6b9b4d1e302e1a182ba6e2861118d7a92b66ea08fb11b0">
+    
+        <link rel="next" href="/latest?no_definitions=true&amp;page=1">
+    <link rel="alternate" type="application/rss+xml" title="Latest posts" href="https://meta.discourse.org/posts.rss" />
+      <link rel="alternate" type="application/rss+xml" title="Latest topics" href="https://meta.discourse.org/latest.rss" />
+    <meta property="og:site_name" content="Discourse Meta" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://global.discourse-cdn.com/meta/original/4X/c/8/9/c899fb03a18cb86f3e071e2c8bc20a09fd9975d0.jpeg" />
+<meta property="og:image" content="https://global.discourse-cdn.com/meta/original/4X/c/8/9/c899fb03a18cb86f3e071e2c8bc20a09fd9975d0.jpeg" />
+<meta property="og:url" content="https://meta.discourse.org/" />
+<meta name="twitter:url" content="https://meta.discourse.org/" />
+<meta property="og:title" content="Discourse Meta" />
+<meta name="twitter:title" content="Discourse Meta" />
+<meta property="og:description" content="Learn about and discuss Discourse, the next-generation open-source forum software." />
+<meta name="twitter:description" content="Learn about and discuss Discourse, the next-generation open-source forum software." />
+
+    <link rel="alternate" type="text/markdown" href="https://meta.discourse.org/latest.md">
+    
+  </head>
+  <body class="crawler ">
+    
+    <header>
+  <a href="/">Discourse Meta</a>
+    <p>Learn about and discuss Discourse, the next-generation open-source forum software.</p>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+      
+
+
+
+
+<div class="topic-list-container" itemscope itemtype='http://schema.org/ItemList'>
+  <meta itemprop='itemListOrder' content='http://schema.org/ItemListOrderDescending'>
+
+  <table class='topic-list'>
+
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th></th>
+        <th class="replies">Replies</th>
+        <th class="views">Views</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='1'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/new-to-discourse-start-here/1' class='title raw-link raw-topic-link'>New to Discourse? Start here!</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/news-and-events/announcements/67' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #ED207B'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Announcements</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+              <p class='excerpt'>
+                :waving_hand: We’re so glad you’re here! This is our official community, where you can connect, ask questions, and share ideas about Discourse, a powerful platform for support, teamwork, and everything community. 
+You’ll&hellip;
+              </p>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>119907</span>
+          </td>
+          <td>
+            February 1, 2013
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='2'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/discourse-cookie-consent-banner/108380' class='title raw-link raw-topic-link'>Discourse Cookie Consent Banner</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/customization/theme-component/120' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00dfff'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Theme component</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/tshenry" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/tshenry/25/119495_2.png" class="avatar" title='tshenry - Original Poster' aria-label='tshenry - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/AquaL1te" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/aqual1te/25/201966_2.png" class="avatar" title='AquaL1te - Frequent Poster' aria-label='AquaL1te - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Krischan" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/krischan/25/47290_2.png" class="avatar" title='Krischan - Frequent Poster' aria-label='Krischan - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Richie" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/richie/25/115110_2.png" class="avatar" title='Richie - Recent Poster' aria-label='Richie - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pfaffman" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pfaffman/25/120154_2.png" class="avatar" title='pfaffman - Most Recent Poster' aria-label='pfaffman - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>35</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>12264</span>
+          </td>
+          <td>
+            October 9, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='3'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/change-icons-globally/87751' class='title raw-link raw-topic-link'>Change icons globally</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pmusaraj" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pmusaraj/25/119489_2.png" class="avatar" title='pmusaraj - Frequent Poster' aria-label='pmusaraj - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Pad_Pors" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pad_pors/25/52016_2.png" class="avatar" title='Pad_Pors - Frequent Poster' aria-label='Pad_Pors - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/jrgong" class="">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/j/c57346/25.png" class="avatar" title='jrgong - Recent Poster' aria-label='jrgong - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Don" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/don/25/228726_2.png" class="avatar" title='Don - Most Recent Poster' aria-label='Don - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>26</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>10320</span>
+          </td>
+          <td>
+            October 5, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='4'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/message-format-support-for-localization/7035' class='title raw-link raw-topic-link'>Message Format support for localization</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/translation/16' class='discourse-tag'>translation</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/reference/482' class='discourse-tag'>reference</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>5246</span>
+          </td>
+          <td>
+            May 31, 2013
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='5'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/add-custom-content-that-only-appears-on-your-homepage/131415' class='title raw-link raw-topic-link'>Add custom content that only appears on your homepage</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pfaffman" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pfaffman/25/120154_2.png" class="avatar" title='pfaffman - Frequent Poster' aria-label='pfaffman - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/carson" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/carson/25/280685_2.png" class="avatar" title='carson - Frequent Poster' aria-label='carson - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/manuel" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/manuel/25/468169_2.png" class="avatar" title='manuel - Recent Poster' aria-label='manuel - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/awesomerobot" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/awesomerobot/25/142900_2.png" class="avatar" title='awesomerobot - Most Recent Poster' aria-label='awesomerobot - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>10</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>8320</span>
+          </td>
+          <td>
+            February 29, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='6'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/create-and-share-a-font-theme-component/62462' class='title raw-link raw-topic-link'>Create and share a font theme component</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pfaffman" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pfaffman/25/120154_2.png" class="avatar" title='pfaffman - Frequent Poster' aria-label='pfaffman - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/bletch" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/bletch/25/69088_2.png" class="avatar" title='bletch - Frequent Poster' aria-label='bletch - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Dave_Driesmans" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/dave_driesmans/25/253276_2.png" class="avatar" title='Dave_Driesmans - Recent Poster' aria-label='Dave_Driesmans - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/kcahtoor" class="latest">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/k/9de0a6/25.png" class="avatar" title='kcahtoor - Most Recent Poster' aria-label='kcahtoor - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>4</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>6171</span>
+          </td>
+          <td>
+            August 19, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='7'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/insert-text-or-images-anywhere-on-your-site-using-css-pseudo-elements/99200' class='title raw-link raw-topic-link'>Insert text or images anywhere on your site using CSS pseudo-elements</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/customization/814' class='discourse-tag'>customization</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>18156</span>
+          </td>
+          <td>
+            October 11, 2018
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='8'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/replace-discourses-default-svg-icons-with-custom-icons-in-a-theme/115736' class='title raw-link raw-topic-link'>Replace Discourse&#39;s default SVG icons with custom icons in a theme</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/NateDhaliwal" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/natedhaliwal/25/313494_2.png" class="avatar" title='NateDhaliwal - Frequent Poster' aria-label='NateDhaliwal - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Wasay_Ahmed" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/wasay_ahmed/25/482084_2.png" class="avatar" title='Wasay_Ahmed - Frequent Poster' aria-label='Wasay_Ahmed - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Adi1" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/adi1/25/485503_2.png" class="avatar" title='Adi1 - Recent Poster' aria-label='Adi1 - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/confused-discourse-user" class="latest">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/c/a88e57/25.png" class="avatar" title='confused-discourse-user - Most Recent Poster' aria-label='confused-discourse-user - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>10</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>9308</span>
+          </td>
+          <td>
+            February 24, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='9'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/include-assets-e-g-images-fonts-in-themes-and-components/62459' class='title raw-link raw-topic-link'>Include assets (e.g. images, fonts) in themes and components</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/bitmage" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/bitmage/25/389881_2.png" class="avatar" title='bitmage - Most Recent Poster' aria-label='bitmage - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>1</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>16206</span>
+          </td>
+          <td>
+            August 23, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='10'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/add-localizable-strings-to-themes-and-theme-components/109867' class='title raw-link raw-topic-link'>Add localizable strings to themes and theme components</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Jerome_Hordies" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jerome_hordies/25/267141_2.png" class="avatar" title='Jerome_Hordies - Frequent Poster' aria-label='Jerome_Hordies - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/merefield" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/merefield/25/176214_2.png" class="avatar" title='merefield - Frequent Poster' aria-label='merefield - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Jukebo" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jukebo/25/423583_2.png" class="avatar" title='Jukebo - Recent Poster' aria-label='Jukebo - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/david" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/david/25/157490_2.png" class="avatar" title='david - Most Recent Poster' aria-label='david - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>22</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>5897</span>
+          </td>
+          <td>
+            August 9, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='11'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/use-discourse-core-variables-in-your-theme/77551' class='title raw-link raw-topic-link'>Use Discourse Core Variables in your Theme</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>12262</span>
+          </td>
+          <td>
+            January 9, 2018
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='12'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/structure-of-themes-and-theme-components/60848' class='title raw-link raw-topic-link'>Structure of themes and theme components</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/reference/482' class='discourse-tag'>reference</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>29813</span>
+          </td>
+          <td>
+            April 12, 2017
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='13'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/the-ui-kit-of-shared-discourse-components-helpers-and-modifiers/411319' class='title raw-link raw-topic-link'>The UI kit of shared Discourse components, helpers, and modifiers</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/system" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/system/25/443519_2.png" class="avatar" title='system - Original Poster, Most Recent Poster' aria-label='system - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>145</span>
+          </td>
+          <td>
+            August 31, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='14'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/private-modules-and-the-internals-convention/414400' class='title raw-link raw-topic-link'>Private modules and the `-internals` convention</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/system" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/system/25/443519_2.png" class="avatar" title='system - Original Poster, Most Recent Poster' aria-label='system - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>5</span>
+          </td>
+          <td>
+            October 9, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='15'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/install-the-discourse-theme-cli-console-app-to-help-you-build-themes/82950' class='title raw-link raw-topic-link'>Install the Discourse Theme CLI console app to help you build themes</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/david" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/david/25/157490_2.png" class="avatar" title='david - Frequent Poster' aria-label='david - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/tgxworld" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/tgxworld/25/106117_2.png" class="avatar" title='tgxworld - Frequent Poster' aria-label='tgxworld - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/merefield" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/merefield/25/176214_2.png" class="avatar" title='merefield - Recent Poster' aria-label='merefield - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/sk-or-v1-contents" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/sk-or-v1-contents/25/547175_2.png" class="avatar" title='sk-or-v1-contents - Most Recent Poster' aria-label='sk-or-v1-contents - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>16</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>32487</span>
+          </td>
+          <td>
+            July 30, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='16'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/get-started-with-theme-creator-and-the-theme-cli/108444' class='title raw-link raw-topic-link'>Get started with Theme Creator and the Theme CLI</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-creator/566' class='discourse-tag'>theme-creator</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/kjs-fgx" class="">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/k/a9adbd/25.png" class="avatar" title='kjs-fgx - Frequent Poster' aria-label='kjs-fgx - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/leonardo" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/leonardo/25/228634_2.png" class="avatar" title='leonardo - Frequent Poster' aria-label='leonardo - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Moin" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/moin/25/554653_2.png" class="avatar" title='Moin - Recent Poster' aria-label='Moin - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/micke" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/micke/25/553682_2.png" class="avatar" title='micke - Most Recent Poster' aria-label='micke - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>8</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>13234</span>
+          </td>
+          <td>
+            May 7, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='17'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/designers-guide-to-getting-started-with-themes-in-discourse/152002' class='title raw-link raw-topic-link'>Designer&#39;s Guide to getting started with themes in Discourse</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/tutorial/484' class='discourse-tag'>tutorial</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/theme-guides/820' class='discourse-tag'>theme-guides</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/dmc" class="">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/d/839c29/25.png" class="avatar" title='dmc - Frequent Poster' aria-label='dmc - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/jordan.vidrine" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jordan.vidrine/25/515563_2.png" class="avatar" title='jordan.vidrine - Frequent Poster' aria-label='jordan.vidrine - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/merefield" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/merefield/25/176214_2.png" class="avatar" title='merefield - Recent Poster' aria-label='merefield - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/jenmck" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jenmck/25/332487_2.png" class="avatar" title='jenmck - Most Recent Poster' aria-label='jenmck - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>9</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>12688</span>
+          </td>
+          <td>
+            April 8, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='18'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/developing-discourse-plugins-part-6-add-acceptance-tests/32619' class='title raw-link raw-topic-link'>Developing Discourse Plugins - Part 6 - Add acceptance tests</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/testing/58' class='discourse-tag'>testing</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/plugin-guides/274' class='discourse-tag'>plugin-guides</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/tutorial/484' class='discourse-tag'>tutorial</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Machigatta" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/machigatta/25/125064_2.png" class="avatar" title='Machigatta - Frequent Poster' aria-label='Machigatta - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/TheBestPessimist" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/thebestpessimist/25/247704_2.png" class="avatar" title='TheBestPessimist - Frequent Poster' aria-label='TheBestPessimist - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/jlc" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jlc/25/251717_2.png" class="avatar" title='jlc - Recent Poster' aria-label='jlc - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/nat" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/nat/25/235063_2.png" class="avatar" title='nat - Most Recent Poster' aria-label='nat - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>32</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>17935</span>
+          </td>
+          <td>
+            June 2, 2022
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='19'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/developing-discourse-plugins-part-5-add-an-admin-interface/31761' class='title raw-link raw-topic-link'>Developing Discourse Plugins - Part 5 - Add an admin interface</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/plugin-guides/274' class='discourse-tag'>plugin-guides</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/tutorial/484' class='discourse-tag'>tutorial</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/eviltrout" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/eviltrout/25/5275_2.png" class="avatar" title='eviltrout - Frequent Poster' aria-label='eviltrout - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Mittineague" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/mittineague/25/114259_2.png" class="avatar" title='Mittineague - Frequent Poster' aria-label='Mittineague - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Canapin" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/canapin/25/119591_2.png" class="avatar" title='Canapin - Recent Poster' aria-label='Canapin - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/NateDhaliwal" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/natedhaliwal/25/313494_2.png" class="avatar" title='NateDhaliwal - Most Recent Poster' aria-label='NateDhaliwal - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>46</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>27379</span>
+          </td>
+          <td>
+            September 24, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='20'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/developing-discourse-plugins-part-4-setup-git/31272' class='title raw-link raw-topic-link'>Developing Discourse Plugins - Part 4 - Setup git</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/plugin-guides/274' class='discourse-tag'>plugin-guides</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/tutorial/484' class='discourse-tag'>tutorial</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/schungx" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/schungx/25/70989_2.png" class="avatar" title='schungx - Frequent Poster' aria-label='schungx - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pacharanero" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pacharanero/25/500583_2.png" class="avatar" title='pacharanero - Frequent Poster' aria-label='pacharanero - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/1c7" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/1c7/25/94822_2.png" class="avatar" title='1c7 - Recent Poster' aria-label='1c7 - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/maaatt" class="latest">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/m/ecb155/25.png" class="avatar" title='maaatt - Most Recent Poster' aria-label='maaatt - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>10</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>13371</span>
+          </td>
+          <td>
+            January 30, 2024
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='21'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/developing-discourse-plugins-part-1-create-a-basic-plugin/30515' class='title raw-link raw-topic-link'>Developing Discourse Plugins - Part 1 - Create a basic plugin</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/plugin-guides/274' class='discourse-tag'>plugin-guides</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/tutorial/484' class='discourse-tag'>tutorial</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/eviltrout" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/eviltrout/25/5275_2.png" class="avatar" title='eviltrout - Frequent Poster' aria-label='eviltrout - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Jithin_Krishnan" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jithin_krishnan/25/121329_2.png" class="avatar" title='Jithin_Krishnan - Frequent Poster' aria-label='Jithin_Krishnan - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pfaffman" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pfaffman/25/120154_2.png" class="avatar" title='pfaffman - Recent Poster' aria-label='pfaffman - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Ambient.Impact" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/ambient.impact/25/387027_2.png" class="avatar" title='Ambient.Impact - Most Recent Poster' aria-label='Ambient.Impact - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>32</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>84505</span>
+          </td>
+          <td>
+            July 8, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='22'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/write-end-to-end-system-specs-for-the-discourse-user-interface/325937' class='title raw-link raw-topic-link'>Write end-to-end system specs for the Discourse user interface</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/system" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/system/25/443519_2.png" class="avatar" title='system - Original Poster' aria-label='system - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/pmusaraj" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/pmusaraj/25/119489_2.png" class="avatar" title='pmusaraj - Recent Poster' aria-label='pmusaraj - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/merefield" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/merefield/25/176214_2.png" class="avatar" title='merefield - Most Recent Poster' aria-label='merefield - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>3</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>758</span>
+          </td>
+          <td>
+            August 28, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='23'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/using-the-dmodal-api-to-render-modal-windows-aka-popups-dialogs-in-discourse/268304' class='title raw-link raw-topic-link'>Using the DModal API to render Modal windows (aka popups/dialogs) in Discourse</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/code/819' class='discourse-tag'>code</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/sam" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/sam/25/102149_2.png" class="avatar" title='sam - Recent Poster' aria-label='sam - Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>2272</span>
+          </td>
+          <td>
+            July 3, 2023
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='24'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/setup-continuous-integration-using-github-actions/240150' class='title raw-link raw-topic-link'>Setup Continuous Integration using GitHub Actions</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/code/819' class='discourse-tag'>code</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Simon_Manning" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/simon_manning/25/198596_2.png" class="avatar" title='Simon_Manning - Frequent Poster' aria-label='Simon_Manning - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/keegan" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/keegan/25/383395_2.png" class="avatar" title='keegan - Frequent Poster' aria-label='keegan - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/david" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/david/25/157490_2.png" class="avatar" title='david - Recent Poster' aria-label='david - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/merefield" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/merefield/25/176214_2.png" class="avatar" title='merefield - Most Recent Poster' aria-label='merefield - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>8</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>1729</span>
+          </td>
+          <td>
+            March 3, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='25'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/using-googles-tachometer-to-measure-js-performance-changes-in-discourse/281158' class='title raw-link raw-topic-link'>Using Google&#39;s &#39;tachometer&#39; to measure JS performance changes in Discourse</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/code/819' class='discourse-tag'>code</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster, Most Recent Poster' aria-label='Discourse - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>1100</span>
+          </td>
+          <td>
+            October 5, 2023
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='26'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/developing-discourse-on-github-codespaces/336131' class='title raw-link raw-topic-link'>Developing Discourse on GitHub Codespaces</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/developer-guides/56' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #00A94F'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Developer Guides</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/system" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/system/25/443519_2.png" class="avatar" title='system - Original Poster' aria-label='system - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Daimonds_and_netherite" class="">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/d/e0b2c6/25.png" class="avatar" title='Daimonds_and_netherite - Frequent Poster' aria-label='Daimonds_and_netherite - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Moin" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/moin/25/554653_2.png" class="avatar" title='Moin - Frequent Poster' aria-label='Moin - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/david" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/david/25/157490_2.png" class="avatar" title='david - Recent Poster' aria-label='david - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/NateDhaliwal" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/natedhaliwal/25/313494_2.png" class="avatar" title='NateDhaliwal - Most Recent Poster' aria-label='NateDhaliwal - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>14</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>2053</span>
+          </td>
+          <td>
+            September 9, 2025
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='27'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/dcs-world-server-status-live-card-plugin/414388' class='title raw-link raw-topic-link'>DCS World Server Status Live Card Plugin</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/customization/plugin/22' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #F7941D'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Plugin</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/fearlessfrog" class="latest single">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/fearlessfrog/25/119653_2.png" class="avatar" title='fearlessfrog - Original Poster, Most Recent Poster' aria-label='fearlessfrog - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>11</span>
+          </td>
+          <td>
+            October 9, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='28'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/spinning-loading-circle-of-component-edit-on-ios/414320' class='title raw-link raw-topic-link'>Spinning loading circle of component edit on iOS</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/contribute/bug/1' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #d1c000'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Bug</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Jagster" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/jagster/25/192154_2.png" class="avatar" title='Jagster - Original Poster, Most Recent Poster' aria-label='Jagster - Original Poster, Most Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/awesomerobot" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/awesomerobot/25/142900_2.png" class="avatar" title='awesomerobot - Recent Poster' aria-label='awesomerobot - Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>2</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>44</span>
+          </td>
+          <td>
+            October 9, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='29'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/e-mail-bounce-notification/414377' class='title raw-link raw-topic-link'>E-Mail Bounce notification</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/support/6' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #ce96c9'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Support</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/newbit1337" class="latest single">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/n/ecc23a/25.png" class="avatar" title='newbit1337 - Original Poster, Most Recent Poster' aria-label='newbit1337 - Original Poster, Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>0</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>14</span>
+          </td>
+          <td>
+            October 9, 2026
+          </td>
+        </tr>
+        <tr class="topic-list-item">
+          <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+            <meta itemprop='position' content='30'>
+            <span class="link-top-line">
+              <a itemprop='url' href='https://meta.discourse.org/t/creating-a-whisper-post/44247' class='title raw-link raw-topic-link'>Creating a whisper post</a>
+            </span>
+            <div class="link-bottom-line">
+                <a href='/c/documentation/site-management/53' class='badge-wrapper bullet'>
+                  <span class='badge-category-bg' style='background-color: #F15D22'></span>
+                  <span class='badge-category clear-badge'>
+                    <span class='category-name'>Site Management</span>
+                  </span>
+                </a>
+                <div class="discourse-tags">
+                    <a href='https://meta.discourse.org/tag/how-to/478' class='discourse-tag'>how-to</a>
+                    ,&nbsp;
+                    <a href='https://meta.discourse.org/tag/whispers/528' class='discourse-tag'>whispers</a>
+                    
+                </div>
+            </div>
+          </td>
+          <td class='posters'>
+              <a rel='nofollow' href="https://meta.discourse.org/u/Discourse" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/discourse/25/580155_2.png" class="avatar" title='Discourse - Original Poster' aria-label='Discourse - Original Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/HAWK" class="">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/hawk/25/86627_2.png" class="avatar" title='HAWK - Frequent Poster' aria-label='HAWK - Frequent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/unknown_error" class="">
+                <img width="25" height="25" src="https://avatars.discourse-cdn.com/v4/letter/u/df705f/25.png" class="avatar" title='unknown_error - Recent Poster' aria-label='unknown_error - Recent Poster'>
+              </a>
+              <a rel='nofollow' href="https://meta.discourse.org/u/nat" class="latest">
+                <img width="25" height="25" src="/user_avatar/meta.discourse.org/nat/25/235063_2.png" class="avatar" title='nat - Most Recent Poster' aria-label='nat - Most Recent Poster'>
+              </a>
+          </td>
+          <td class="replies">
+            <span class='posts' title='posts'>4</span>
+          </td>
+          <td class="views">
+            <span class='views' title='views'>15105</span>
+          </td>
+          <td>
+            July 23, 2025
+          </td>
+        </tr>
+    </tbody>
+
+  </table>
+</div>
+
+  <div class="navigation" role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>
+      <span itemprop='name'><b><a href='/latest?no_definitions=true&amp;page=1' rel='next' itemprop='url'>next page →</a></b></span>
+  </div>
+
+ <!-- include_crawler_content? -->
+
+
+
+  
+
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='/tos' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://www.discourse.org/privacy' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    
+    
+  </body>
+  
+</html>

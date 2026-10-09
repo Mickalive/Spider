@@ -1,0 +1,637 @@
+{
+  "path_A": {
+    "path": "A",
+    "gate_b_branch": "DATA-INSUFFICIENT-D1V-DEGENERATE",
+    "M-N-TRIALS": 48,
+    "M-N-FRESH": 12,
+    "M-N-D1V": 6,
+    "M-N-D1V-ANCHORS": 1,
+    "M-N-D1V-BASE-ADEQUATE": true,
+    "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": false,
+    "anchor_clustered_bounds_degenerate": true,
+    "bootstrap_seed": 37978902447,
+    "bootstrap_seed_note": "shared anchor-clustered bootstrap uses the packet seed; spec V09 prose names 37964565784 (parent's run id) while spec.seed, the satisfiability dry-run and the M-PAIRED-FA-DIFF-D1V-* definitions name 37978902447. This run uses the packet seed 37978902447; the conflict is immaterial here because the clustered bound is null in the degenerate branch.",
+    "M-N-STRUCT-DRIFT": 16,
+    "M-N-ENDPOINT-DRIFT": 12,
+    "M-N-TRANSPORT-DRIFT": 36,
+    "M-N-POSTCOND-DRIFT": 0,
+    "M-FA-INCUMBENT-D1V": 1.0,
+    "M-FA-INCUMBENT-D1V-UB97": null,
+    "M-FA-VALUEAWARE-D1V": 0.0,
+    "M-FA-VALUEAWARE-D1V-UB97": null,
+    "M-PAIRED-FA-DIFF-D1V": 1.0,
+    "M-PAIRED-FA-DIFF-D1V-LOW": null,
+    "M-PAIRED-FA-DIFF-D1V-UB97": null,
+    "M-FA-INCUMBENT-ALL": 0.16666666666666666,
+    "M-FA-VALUEAWARE-ALL": 0.0,
+    "M-FR-INCUMBENT-FRESH": 0.5,
+    "M-FR-VALUEAWARE-FRESH": 0.0,
+    "M-N-DECISIONS-D1V": 2,
+    "decisions_d1v": [
+      "ABSTAIN",
+      "REUSE"
+    ],
+    "channels": {
+      "CH-STRUCT-SIG": {
+        "status": "ACTIVE",
+        "fire": 16,
+        "not_fire": 32,
+        "waived": false,
+        "satisfied": true
+      },
+      "CH-TRANSPORT-VALIDATOR": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      },
+      "CH-POSTCOND-SEM": {
+        "status": "INACTIVE-ON-POPULATION",
+        "fire": 0,
+        "not_fire": 48,
+        "waived": true
+      },
+      "CH-PRECOND-BINDING": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      }
+    },
+    "nondegenerate": true,
+    "anchors_with_d1v": [
+      "CAL-POS-2"
+    ],
+    "d1v_trial_examples": [
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S2",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S3",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S4",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S2",
+        "current_session": "S3",
+        "recorded_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "live_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S2",
+        "current_session": "S4",
+        "recorded_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S3",
+        "current_session": "S4",
+        "recorded_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      }
+    ],
+    "diagnostics": {
+      "M-DIAGNOSTIC-UNCLUSTERED-FA-INCUMBENT-D1V": {
+        "value": [
+          0.609657,
+          1.0
+        ],
+        "unit": "fraction CI",
+        "do_not_use": true,
+        "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+      },
+      "M-DIAGNOSTIC-UNCLUSTERED-FA-VALUEAWARE-D1V": {
+        "value": [
+          0.0,
+          0.390343
+        ],
+        "unit": "fraction CI",
+        "do_not_use": true,
+        "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+      }
+    },
+    "_all_trials_n": 48,
+    "anchor_diagnostics": {
+      "M-D1V-BLOCKER-CAL-POS-1": {
+        "value": "BODY_DERIVED_ETAG",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-1": {
+        "value": true,
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-2": {
+        "value": "NONE",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-2": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-3": {
+        "value": "TOKEN_BEARING_FINAL_URL",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-3": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-4": {
+        "value": "NO_FIELD",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-4": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      }
+    }
+  },
+  "path_B": {
+    "path": "B",
+    "gate_b_branch": "DATA-INSUFFICIENT-D1V-DEGENERATE",
+    "M-N-TRIALS": 48,
+    "M-N-FRESH": 12,
+    "M-N-D1V": 6,
+    "M-N-D1V-ANCHORS": 1,
+    "M-N-D1V-BASE-ADEQUATE": true,
+    "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": false,
+    "anchor_clustered_bounds_degenerate": true,
+    "bootstrap_seed": 37978902447,
+    "bootstrap_seed_note": "shared anchor-clustered bootstrap uses the packet seed; spec V09 prose names 37964565784 (parent's run id) while spec.seed, the satisfiability dry-run and the M-PAIRED-FA-DIFF-D1V-* definitions name 37978902447. This run uses the packet seed 37978902447; the conflict is immaterial here because the clustered bound is null in the degenerate branch.",
+    "M-N-STRUCT-DRIFT": 16,
+    "M-N-ENDPOINT-DRIFT": 12,
+    "M-N-TRANSPORT-DRIFT": 36,
+    "M-N-POSTCOND-DRIFT": 0,
+    "M-FA-INCUMBENT-D1V": 1.0,
+    "M-FA-INCUMBENT-D1V-UB97": null,
+    "M-FA-VALUEAWARE-D1V": 0.0,
+    "M-FA-VALUEAWARE-D1V-UB97": null,
+    "M-PAIRED-FA-DIFF-D1V": 1.0,
+    "M-PAIRED-FA-DIFF-D1V-LOW": null,
+    "M-PAIRED-FA-DIFF-D1V-UB97": null,
+    "M-FA-INCUMBENT-ALL": 0.16666666666666666,
+    "M-FA-VALUEAWARE-ALL": 0.0,
+    "M-FR-INCUMBENT-FRESH": 0.5,
+    "M-FR-VALUEAWARE-FRESH": 0.0,
+    "M-N-DECISIONS-D1V": 2,
+    "decisions_d1v": [
+      "ABSTAIN",
+      "REUSE"
+    ],
+    "channels": {
+      "CH-STRUCT-SIG": {
+        "status": "ACTIVE",
+        "fire": 16,
+        "not_fire": 32,
+        "waived": false,
+        "satisfied": true
+      },
+      "CH-TRANSPORT-VALIDATOR": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      },
+      "CH-POSTCOND-SEM": {
+        "status": "INACTIVE-ON-POPULATION",
+        "fire": 0,
+        "not_fire": 48,
+        "waived": true
+      },
+      "CH-PRECOND-BINDING": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      }
+    },
+    "nondegenerate": true,
+    "anchors_with_d1v": [
+      "CAL-POS-2"
+    ],
+    "d1v_trial_examples": [
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S2",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S3",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S1",
+        "current_session": "S4",
+        "recorded_value": "2228710cd3020cd1da48c6abb4517be36ac94aa5+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S2",
+        "current_session": "S3",
+        "recorded_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "live_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S2",
+        "current_session": "S4",
+        "recorded_value": "f55b1c62465b763f1a4237fba90e3b1e6ac94aa7+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "field_name": "wpCreateaccountToken",
+        "occurrence_ordinal": 0,
+        "recorded_session": "S3",
+        "current_session": "S4",
+        "recorded_value": "b543833fd201d2a1baf2457e7da70ff86ac94aa9+\\",
+        "live_value": "ae570f12045817a296e77d495ba1a1176ac94aab+\\",
+        "label": "STALE",
+        "structural_change": false,
+        "endpoint_change": false,
+        "transport_change": false,
+        "postcond_change": false,
+        "fired": {
+          "CH-STRUCT-SIG": false,
+          "CH-TRANSPORT-VALIDATOR": false,
+          "CH-POSTCOND-SEM": false,
+          "CH-PRECOND-BINDING": true
+        },
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN",
+        "B-NO-GUARD-REPLAY": "REUSE"
+      }
+    ],
+    "diagnostics": {
+      "M-DIAGNOSTIC-UNCLUSTERED-FA-INCUMBENT-D1V": {
+        "value": [
+          0.609657,
+          1.0
+        ],
+        "unit": "fraction CI",
+        "do_not_use": true,
+        "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+      },
+      "M-DIAGNOSTIC-UNCLUSTERED-FA-VALUEAWARE-D1V": {
+        "value": [
+          0.0,
+          0.390343
+        ],
+        "unit": "fraction CI",
+        "do_not_use": true,
+        "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+      }
+    },
+    "_all_trials_n": 48,
+    "anchor_diagnostics": {
+      "M-D1V-BLOCKER-CAL-POS-1": {
+        "value": "BODY_DERIVED_ETAG",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-1": {
+        "value": true,
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-2": {
+        "value": "NONE",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-2": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-3": {
+        "value": "TOKEN_BEARING_FINAL_URL",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-3": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      },
+      "M-D1V-BLOCKER-CAL-POS-4": {
+        "value": "NO_FIELD",
+        "unit": "enum",
+        "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+      },
+      "M-TRANSPORT-BODY-DERIVATION-CAL-POS-4": {
+        "value": "not_applicable",
+        "unit": "boolean|not_applicable",
+        "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+      }
+    }
+  },
+  "trial_construction_stable": true,
+  "included_keys_A": [
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      0
+    ],
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      1
+    ],
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      2
+    ],
+    [
+      "CAL-POS-1",
+      "csrf-token",
+      0
+    ],
+    [
+      "CAL-POS-2",
+      "wpCreateaccountToken",
+      0
+    ],
+    [
+      "CAL-POS-2",
+      "wpEditToken",
+      0
+    ],
+    [
+      "CAL-POS-3",
+      "wpEditToken",
+      0
+    ],
+    [
+      "CAL-POS-3",
+      "wpLoginToken",
+      0
+    ]
+  ],
+  "included_keys_B": [
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      0
+    ],
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      1
+    ],
+    [
+      "CAL-POS-1",
+      "authenticity_token",
+      2
+    ],
+    [
+      "CAL-POS-1",
+      "csrf-token",
+      0
+    ],
+    [
+      "CAL-POS-2",
+      "wpCreateaccountToken",
+      0
+    ],
+    [
+      "CAL-POS-2",
+      "wpEditToken",
+      0
+    ],
+    [
+      "CAL-POS-3",
+      "wpEditToken",
+      0
+    ],
+    [
+      "CAL-POS-3",
+      "wpLoginToken",
+      0
+    ]
+  ]
+}
