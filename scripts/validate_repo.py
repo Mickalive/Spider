@@ -137,6 +137,7 @@ def main():
     require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
     require('req.get("director_mandate")' in snapshot_builder, "portfolio snapshot must detect current Director mandate field")
     require("effective_event_by_claim" in snapshot_builder and "active_mandate_claim_id" in snapshot_builder, "portfolio snapshot must use effective claim state and expose active mandate identity")
+    require('effective.get("next_question") or cfg.get("next_gate")' in snapshot_builder and '"registry_next_gate"' in snapshot_builder, "portfolio snapshot must use the effective claim event's next question as current gate")
 
     ci_wf = text(".github/workflows/ci.yml")
     require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
@@ -182,6 +183,7 @@ def main():
     require('"--diff-filter=A"' in codex, "Codex must pin the original verdict creation commit")
     require("parent_handoff sha256 mismatch" in codex, "Codex must validate inherited handoff hashes")
     require("effective_event_by_claim" in codex and "non_epistemic" in codex and "claim_scope_warnings.json" in codex, "Codex must derive effective epistemic claim state and preserve scope warnings")
+    require('"next_question": verdict.get("next_question")' in codex, "Codex claim events must carry the Director's next question for effective gate selection")
     require("artifact_hashes" in codex and "design_review.json" in codex, "Codex must validate v2 frozen artifacts and design review")
     require("DIRECTOR_CLAIM_STATUSES" in codex, "Codex must reject Director-emitted post-promotion-only claim states")
 
