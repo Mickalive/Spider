@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37385633334",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision a reachable model endpoint with credentials (OPENAI_API_KEY or equivalent for gpt-4o-mini) before any re-freeze",
+    "Install playwright and httpx in the execution environment",
+    "Implement per-trajectory honest counters in src/spider/kernel.py (model_calls, model_tokens, browser_actions, http_requests, retrieval_calls, verification_calls, repair_attempts, latency_ms) and demonstrate them firing on the seeded PC-ACCOUNTING-FIDELITY trajectory with max_relative_error <= 0.01",
+    "Commit a frozen >=30-task mechanical-verifier bank (credential-free real-Web tasks with deterministic verify(task_id, trajectory)->bool postconditions) to this experiment directory before re-freeze",
+    "Ensure freeze.json binds the task bank hash and kernel.py hash so substrate is immutable at freeze, not discovered post hoc"
+  ],
+  "validity_findings": [
+    "Readiness certificate correctly implemented all three frozen checks (model_endpoint_reachable, task_set_ge_30_mechanical, accounting_fidelity_control_pass) and all three correctly returned FAIL with specific evidence",
+    "Producer correctly mapped gate failure to status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE per frozen decision_rule.readiness_certificate.on_failure — this is a substrate diagnosis, not a scientific falsification of C-LLM-INHERIT",
+    "Zero arms executed (B-COLD, B-INSTRUCTIONS, B-RETRIEVAL, A-SPIDER, PC-ACCOUNTING-FIDELITY, NC-SHUFFLED-RETRIEVAL); zero model calls, browser actions, HTTP requests, retrieval/verification/repair calls — consistent with gate termination",
+    "Hygiene obligation (revert of four-file 1466-line insertion-variability kernel delta) verified complete at git commit 39fcfd96f5eea0fe9a7d548f869428b617dedd08; working tree shows only kernel.py, models.py, registry.py in src/spider/ and test_kernel.py in tests/",
+    "No infrastructure failure occurred during readiness probes; failure is absent required substrate, correctly classified as MEASUREMENT_INVALID",
+    "The same three substrate blockers (model credentials, Playwright/browser, mechanical task bank) were recorded for C-LLM-INHERIT in codex/claim_state.json (EXP-PRODUCT-36089498872, EXP-PRODUCT-36091881382) and persist unchanged",
+    "opencode free-model routing identities in config/models.json are not gpt-4o-mini and confer no programmatic endpoint; no seeded deterministic counter trajectory can run without one",
+    "src/spider/kernel.py (132 lines) lacks distill_parameterized(), per-trajectory counters, and any browser/HTTP execution substrate; distill() hardcodes confidence=0.5 while resolve() requires min_confidence=0.8, so no mechanism can ever return EXECUTABLE",
+    "Freeze.json binds only request.json/spec.json/prereg.md hashes; no task bank hash or kernel.py hash was bound, so the absent frozen task list is correctly recorded as FAIL of check 2.2 rather than reconciled post hoc"
+  ],
+  "baseline_findings": [
+    "B-COLD, B-INSTRUCTIONS, B-RETRIEVAL, A-SPIDER: not evaluated — gate failed before any arm execution (correct per frozen design)",
+    "PC-ACCOUNTING-FIDELITY: not runnable — no counter instrumentation in kernel.py, no browser/HTTP/model substrate to execute the seeded trajectory",
+    "NC-SHUFFLED-RETRIEVAL: not evaluated — gate failed before arms",
+    "All baselines and controls correctly recorded as not_evaluated or unknown/not_runnable with evidence pointing to readiness_certificate.json"
+  ],
+  "recomputed_metrics": {
+    "readiness_certificate": {
+      "model_endpoint_reachable": "FAIL",
+      "task_set_ge_30_mechanical": "FAIL",
+      "accounting_fidelity_control_pass": "FAIL"
+    },
+    "arms_executed": 0,
+    "model_calls": 0,
+    "model_tokens": 0,
+    "browser_actions": 0,
+    "http_requests": 0,
+    "retrieval_calls": 0,
+    "verification_calls": 0,
+    "repair_attempts": 0,
+    "cost_per_verified_success_M_total_f10": null,
+    "task_success_rate": null,
+    "false_accept_rate": null,
+    "abstention_rate": null,
+    "ECE": null,
+    "retrieval_precision_at_5": null,
+    "retrieval_recall_at_5": null
+  },
+  "claim_ceiling": "C-LLM-INHERIT remains at HYPOTHESIS with zero admissible evidence. This packet's MEASUREMENT_INVALID is an honest substrate diagnosis (missing model endpoint, missing mechanical task bank, missing accounting instrumentation), not a scientific falsification. The product thesis has never been tested end-to-end with a real LLM agent, real Web tasks, mechanical verification, and strong baselines. The maximum justified claim ceiling is unchanged from prior packets: HYPOTHESIS bounded to prior synthetic/file-proxy ceilings (EXP-PRODUCT-35797365772 FALSIFIED per_hit 1.045>0.85 rho 0.472<0.60). No promotion to EXPERIMENTAL, VALIDATED, or PRODUCT_CORE is authorized by this evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-37385633334/request.json (sha256: b9ac7ff834ffd24fdd934744bfa7b85ab05143ee03068c04ff583f14a60c4c65)",
+    "research/experiments/EXP-PRODUCT-37385633334/spec.json (sha256: a0c34f8862e2bc305350f83ccd08689a8f9119cbee68c0126d377b936ebeae4b)",
+    "research/experiments/EXP-PRODUCT-37385633334/prereg.md (sha256: 5b905f5e0c51e10d502a3124155e194770ec0542a90de32a6338d2dbf8de8201)",
+    "research/experiments/EXP-PRODUCT-37385633334/freeze.json (sha256: 9a359e8f576e099881ba1dfb8490a152d05318756257422b809bd216bafb8c49)",
+    "research/experiments/EXP-PRODUCT-37385633334/result.json (sha256: 50006da6fde9893b5d7fb8bcae47dd08321f948b04870f8ab10b27413be4e84f)",
+    "research/experiments/EXP-PRODUCT-37385633334/report.md",
+    "research/experiments/EXP-PRODUCT-37385633334/provenance.json",
+    "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json (sha256: f87f51fdca39f07ae17cfbc99d83718f60226563c2b7fea642d357a1a906f737)",
+    "codex/claim_state.json (C-LLM-INHERIT events: EXP-PRODUCT-36089498872, EXP-PRODUCT-36091881382, EXP-INTEL-36293264917 all MEASUREMENT_INVALID/HYPOTHESIS)",
+    "src/spider/kernel.py (132 lines, no distill_parameterized, no counters, confidence=0.5 < min_confidence=0.8)"
+  ],
+  "unresolved": [
+    "Smallest unblocking actions: (1) provision model endpoint credential (OPENAI_API_KEY or equivalent for gpt-4o-mini), (2) install playwright+httpx, (3) implement and demonstrate per-trajectory honest counters in src/spider/kernel.py with PC-ACCOUNTING-FIDELITY passing max_relative_error <= 0.01, (4) commit a frozen >=30-task mechanical-verifier bank before any re-freeze, (5) bind task bank and kernel hashes in freeze.json",
+    "C-LLM-INHERIT has 24 prior experiments and zero admissible evidence; the registry next_gate 'same model/tools/budget; cold vs instructions vs retrieval vs SPIDER' remains untouched",
+    "The committed kernel at HEAD cannot return EXECUTABLE after its own distill (confidence=0.5 < min_confidence=0.8), so any product claim assuming inherited mechanisms execute must be costed against a kernel that abstains",
+    "Whether the product thesis can be tested at all on the current substrate (opencode free-model routing, no Docker/BrowserGym, no external credentials) remains an open infrastructure question"
+  ]
+}

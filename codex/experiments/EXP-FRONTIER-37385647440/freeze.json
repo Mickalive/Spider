@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-FRONTIER-37385647440",
+  "frozen_at": "2026-10-05T23:05:10.661240+00:00",
+  "hashes": {
+    "prereg.md": "12ad06afc54453fc8f413346f594a82b2614edf550f1f4ef661c7f7bcd50865c",
+    "request.json": "d126fdaa557a7dc2f5f2c2fdd9647e4ec8c87c4ad442a111ba08ebddce287d8d",
+    "spec.json": "c0738d94bb90a6c3865c558605f2c48bc13e792c8f02e90da785bbfb264e1188"
+  },
+  "schema_version": 1
+}
