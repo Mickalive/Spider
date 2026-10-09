@@ -75,17 +75,17 @@ jobs:
           done
           echo "ready=$ready" >> "$GITHUB_OUTPUT"
           if [[ "$ready" != true ]]; then
-            echo "::error::SPIDER_DIRECTION_OPENCODE_UNAVAILABLE rc=${rc:-75}"
-            exit "${rc:-75}"
+            echo "::warning::SPIDER_DIRECTION_OPENCODE_UNAVAILABLE rc=${rc:-75}"
           fi
+          exit 0
 
       - name: Scout lane — general reconnaissance
         id: scout
         if: ${{ steps.install.outputs.ready == 'true' }}
         env:
-          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
-          SPIDER_MODEL_STALL_SECONDS: "180"
-          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "300"
+          SPIDER_MODEL_STALL_SECONDS: "120"
+          SPIDER_MODEL_MAX_ATTEMPTS: "5"
           SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
         shell: bash
         run: |
@@ -104,13 +104,32 @@ jobs:
           fi
           echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           if [[ "$rc" -ne 0 ]]; then
-            echo "::error::SPIDER_SCOUT_UNAVAILABLE rc=$rc"
-            exit "$rc"
+            echo "::warning::SPIDER_SCOUT_UNAVAILABLE rc=$rc"
+          fi
+          exit 0
+
+      - name: Ensure advisory Scout brief
+        id: scout_brief
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          SNAP=.spider-runtime/director_snapshot.json
+          BRIEF=.spider-runtime/scout_brief.json
+          if [[ -f "$BRIEF" ]] && python scripts/validate_scout_brief.py --snapshot "$SNAP" --brief "$BRIEF" >/dev/null 2>&1; then
+            echo "source=model" >> "$GITHUB_OUTPUT"
+            echo "SPIDER_SCOUT_BRIEF_SOURCE=model"
+          else
+            rm -f "$BRIEF"
+            python scripts/build_scout_fallback.py               --snapshot "$SNAP"               --output "$BRIEF"               --reason "model-based Scout unavailable or invalid"
+            python scripts/validate_scout_brief.py --snapshot "$SNAP" --brief "$BRIEF"
+            echo "source=fallback" >> "$GITHUB_OUTPUT"
+            echo "SPIDER_SCOUT_BRIEF_SOURCE=fallback"
           fi
 
       - name: Global Research Director — choose lane objectives
         id: director
-        if: ${{ steps.scout.outputs.ready == 'true' }}
+        if: ${{ always() && steps.install.outputs.ready == 'true' }}
         env:
           SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
           SPIDER_MODEL_STALL_SECONDS: "180"
@@ -121,7 +140,7 @@ jobs:
           set +e
           set -uo pipefail
           export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/director_allocation.json"
-          bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout is staff advice, not authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
+          bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout is staff advice, not authority and may be an explicit deterministic DEGRADED SCOUT BRIEF. Scout unavailability is not a blocker. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
           rc=$?
 
           git reset --hard HEAD >/dev/null 2>&1 || true
@@ -134,8 +153,8 @@ jobs:
           echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           if [[ "$rc" -ne 0 ]]; then
             echo "::error::SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE rc=$rc"
-            exit "$rc"
           fi
+          exit 0
 
       - name: Preserve direction artifacts
         if: always()
@@ -152,6 +171,7 @@ jobs:
           retention-days: 14
 
       - name: Dispatch or resume lanes
+        if: ${{ always() }}
         env:
           GH_TOKEN: ${{ github.token }}
           DIRECTION_READY: ${{ steps.director.outputs.ready }}
