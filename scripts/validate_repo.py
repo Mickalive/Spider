@@ -132,6 +132,7 @@ def main():
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
     require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
     require("build_scout_fallback.py" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse, "Scout failure must degrade to a fallback brief instead of blocking direction")
+    require("timeout --signal=TERM --kill-after=15s 180s" in pulse and "timeout --signal=TERM --kill-after=15s 480s" in pulse, "Scout and Global Director must have whole-stage deadlines below the 15-minute factory cadence")
     require("if: always()" in pulse and "frozen transactions may still resume" in pulse, "frozen transactions must resume despite strategic control outage")
     require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
