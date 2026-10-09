@@ -150,6 +150,12 @@ def main():
         raise SystemExit(f"unknown claim ids: {sorted(unknown)}")
 
     design_contract_version = int(req.get("design_contract_version", 1))
+    if design_contract_version >= 2:
+        lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
+        eligible = set(lanes["lanes"][req["lane"]].get("priority_claims", []))
+        out_of_lane = set(spec["claim_ids"]) - eligible
+        if out_of_lane:
+            raise SystemExit(f"v2 spec claim_ids outside lane charter: {sorted(out_of_lane)}")
     artifact_hashes: dict[str, str] = {}
     if design_contract_version >= 2:
         artifact_hashes = validate_v2_design(req, spec, exp)
