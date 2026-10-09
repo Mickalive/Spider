@@ -1,0 +1,190 @@
+{
+  "NC_PLANTED_RANDOM_PLUS_LIVE": {
+    "NC_PLANTED_RANDOM": {
+      "fields_total": 1600,
+      "fields_fired": 0,
+      "aggregate_fp": 0.0,
+      "per_rule_fp": {
+        "R_INT_INCR": 0.0,
+        "R_HEX_INCR": 0.0,
+        "R_B62_INCR": 0.0,
+        "R_PREFIX_COUNTER": 0.0,
+        "R_ORDER_LINEAR": 0.0,
+        "R_SESSION_BIND": 0.0,
+        "R_HASH_BIND": 0.0,
+        "R_WALLCLOCK_DEC": 0.0,
+        "R_WALLCLOCK_HEX": 0.0,
+        "R_WALLCLOCK_B64": 0.0,
+        "R_CONST_SUBSTRING": 0.0
+      },
+      "armed": {
+        "R_INT_INCR": true,
+        "R_HEX_INCR": true,
+        "R_B62_INCR": true,
+        "R_PREFIX_COUNTER": true,
+        "R_ORDER_LINEAR": true,
+        "R_SESSION_BIND": true,
+        "R_HASH_BIND": true,
+        "R_WALLCLOCK_DEC": true,
+        "R_WALLCLOCK_HEX": true,
+        "R_WALLCLOCK_B64": true,
+        "R_CONST_SUBSTRING": true
+      },
+      "all_armed": true,
+      "per_regime": {
+        "uuid4": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "hex32": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "hex64": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "b64_16": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "b64_32": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "b62_20": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "b62_43": {
+          "fields": 200,
+          "fields_fired": 0
+        },
+        "dec16": {
+          "fields": 200,
+          "fields_fired": 0
+        }
+      }
+    },
+    "NC_LIVE_HTTPBIN_UUID": {
+      "url": "https://httpbin.org/uuid",
+      "sessions_requested": 8,
+      "fields_collected": 8,
+      "fields_fired": 8,
+      "fired_fraction": 1.0,
+      "per_session": [
+        {
+          "session": 0,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 1,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 2,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 3,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 4,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 5,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 6,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        },
+        {
+          "session": 7,
+          "n": 12,
+          "fired": true,
+          "rules": [
+            "R_SESSION_BIND"
+          ]
+        }
+      ]
+    },
+    "pass": false
+  },
+  "PC_PLANTED_CLASSES": {
+    "classes": {
+      "P_INT_INCR": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_HEX_INCR": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_PREFIX_COUNTER": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_DEC_TS": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_HEX_TS": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_B64_TS": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_SESSION_BIND": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      },
+      "P_HASH_BIND": {
+        "trials": 200,
+        "detected": 200,
+        "power": 1.0
+      }
+    },
+    "power_min": 1.0,
+    "pass": true
+  }
+}

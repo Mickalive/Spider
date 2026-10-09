@@ -1,0 +1,219 @@
+{
+  "n_indicator_fields": 46,
+  "n_predictable": 2,
+  "PREDICTABLE_PREVALENCE_POOLED": 0.043478260869565216,
+  "PREDICTABLE_PREVALENCE_ALL_PLUS_NONCE": 0.0425531914893617,
+  "admitted_fields": 47,
+  "admitted_primary_fields": 46,
+  "admitted_nonce_fields": 1,
+  "admitted_sites_primary": 27,
+  "admitted_sites_list": [
+    "archlinux.org",
+    "dev.to",
+    "djangoproject.com",
+    "elastic.co",
+    "endeavouros.com",
+    "fedoraproject.org",
+    "flarum.org",
+    "freecodecamp.org",
+    "gentoo.org",
+    "gitea.com",
+    "gnome.org",
+    "hashicorp.com",
+    "home-assistant.io",
+    "julialang.org",
+    "kde.org",
+    "kubernetes.io",
+    "manjaro.org",
+    "mediawiki.org",
+    "microsoftonline.com",
+    "openai.com",
+    "openstreetmap.org",
+    "pypi.org",
+    "python.org",
+    "reddit.com",
+    "rubyonrails.org",
+    "wikidata.org",
+    "wikipedia.org"
+  ],
+  "admitted_endpoints": 28,
+  "site_clustered_ci95": [
+    0.0,
+    0.11627906976744186
+  ],
+  "bootstrap_distinct_resamples": 10000,
+  "bootstrap_n_clusters": 27,
+  "bootstrap_informative": true,
+  "baselines": {
+    "B_MEMORY_REPEAT_ACC_MEAN_HOLDOUT": 0.3361801242236025,
+    "B_MEMORY_REPEAT_ACC_MEAN_FULL": 0.3307401483204886,
+    "B_MARKOV1_ACC_MEAN": 0.05900621118012422,
+    "B_CONSTANT_MODE_ACC_MEAN": 0.0
+  },
+  "per_site_prevalence": {
+    "gnome.org": {
+      "n": 3,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "kde.org": {
+      "n": 3,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "archlinux.org": {
+      "n": 5,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "gitea.com": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "python.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "openai.com": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "elastic.co": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "freecodecamp.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "hashicorp.com": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "kubernetes.io": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "julialang.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "home-assistant.io": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "rubyonrails.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "fedoraproject.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "manjaro.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "endeavouros.com": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "wikipedia.org": {
+      "n": 3,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "gentoo.org": {
+      "n": 2,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "openstreetmap.org": {
+      "n": 2,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "mediawiki.org": {
+      "n": 3,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "djangoproject.com": {
+      "n": 2,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "wikidata.org": {
+      "n": 3,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "pypi.org": {
+      "n": 2,
+      "pred": 1,
+      "prevalence": 0.5
+    },
+    "reddit.com": {
+      "n": 1,
+      "pred": 1,
+      "prevalence": 1.0
+    },
+    "dev.to": {
+      "n": 2,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "flarum.org": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    },
+    "microsoftonline.com": {
+      "n": 1,
+      "pred": 0,
+      "prevalence": 0.0
+    }
+  },
+  "per_class_prevalence": {
+    "WALLCLOCK_B64": 1,
+    "CONST_SUBSTRING": 1
+  },
+  "transport_errors": 24,
+  "planned_gets": 1368,
+  "TRANSPORT_ERROR_RATE": 0.017543859649122806,
+  "NON_GET_REQUESTS": 0,
+  "status_histogram": {
+    "403": 120,
+    "200": 1085,
+    "500": 2,
+    "429": 65,
+    "404": 24,
+    "202": 48,
+    "None": 24
+  },
+  "measurement_invalid_conditions": {
+    "a_too_few_fields": false,
+    "b_too_few_sites": false,
+    "c_null_fail": false,
+    "d_pc_power_fail": false,
+    "e_transport_or_non_get": false,
+    "f_locator_missing": false,
+    "g_universe": false,
+    "h_rule_family": false
+  },
+  "branch": "S0",
+  "outcome": "FALSIFIES"
+}
