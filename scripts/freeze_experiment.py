@@ -75,8 +75,10 @@ def main():
     if not prereg_is_substantive(exp / "prereg.md", args.experiment_id):
         raise SystemExit("preregistration remains scaffold or is structurally incomplete")
 
-    build_required = spec.get("build_required", False)
-    freeze_artifacts = spec.get("freeze_artifacts", [])
+    if "build_required" not in spec or "freeze_artifacts" not in spec:
+        raise SystemExit("spec must declare build_required and freeze_artifacts")
+    build_required = spec["build_required"]
+    freeze_artifacts = spec["freeze_artifacts"]
     if not isinstance(build_required, bool):
         raise SystemExit("spec.build_required must be boolean")
     if not isinstance(freeze_artifacts, list) or any(
