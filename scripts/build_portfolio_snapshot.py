@@ -166,7 +166,7 @@ def main() -> None:
         if active_id:
             base = f"research/experiments/{active_id}"
             req = git_show_json(ref, f"{base}/request.json")
-            active_has_portfolio_mandate = isinstance(req.get("portfolio_allocation"), dict)
+            active_has_portfolio_mandate = isinstance(req.get("director_mandate"), dict)
             if git_file_exists(ref, f"{base}/verdict.json"):
                 active_stage = "FINALIZED"
             elif git_file_exists(ref, f"{base}/audit.json"):

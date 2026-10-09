@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37385647440",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "generated_by": "research/frontier/emit_result_37385647440.py",
+  "request": {
+    "request_id": "0c8c26b347c33d3825b26152",
+    "request_hash": "9716d6159d94e695877854b395332b7d8f38e2b74bcd7538dfca2e8f6bf75509",
+    "origin_github_run_id": "37385647440",
+    "created_at": "2026-10-05T22:57:44.010560+00:00",
+    "chain_depth": 0,
+    "parent_handoff": {
+      "experiment_id": "EXP-FRONTIER-36306528608",
+      "path": "research/experiments/EXP-FRONTIER-36306528608/handoff.json",
+      "sha256": "6c9da0235f4ddd12d3bfa5812e742cb8f51201151fc41a5185e04062de9bc87e"
+    },
+    "base_sha": "0a3b7f96f488b6da77728973ea1fcc6caaa17e38"
+  },
+  "frozen_inputs": {
+    "paths": {
+      "request.json": "d126fdaa557a7dc2f5f2c2fdd9647e4ec8c87c4ad442a111ba08ebddce287d8d",
+      "spec.json": "c0738d94bb90a6c3865c558605f2c48bc13e792c8f02e90da785bbfb264e1188",
+      "prereg.md": "12ad06afc54453fc8f413346f594a82b2614edf550f1f4ef661c7f7bcd50865c",
+      "freeze.json": "14a3c6603dcaaee65112ac2edc905325990d4f246ff5d85826d5ea2658200cd9"
+    },
+    "freeze_manifest": {
+      "experiment_id": "EXP-FRONTIER-37385647440",
+      "frozen_at": "2026-10-05T23:05:10.661240+00:00",
+      "hashes": {
+        "prereg.md": "12ad06afc54453fc8f413346f594a82b2614edf550f1f4ef661c7f7bcd50865c",
+        "request.json": "d126fdaa557a7dc2f5f2c2fdd9647e4ec8c87c4ad442a111ba08ebddce287d8d",
+        "spec.json": "c0738d94bb90a6c3865c558605f2c48bc13e792c8f02e90da785bbfb264e1188"
+      },
+      "schema_version": 1
+    },
+    "freeze_hashes_verified": [
+      "prereg.md",
+      "request.json",
+      "spec.json"
+    ],
+    "verified_unmodified": true,
+    "note": "Each frozen file's SHA256 was recomputed at emit time and matched against freeze.json. No frozen file was written by any code path in this lane."
+  },
+  "git": {
+    "execution_head": "0b89abe47cf4710dff8c4736d08fee9e671d6f73",
+    "execution_branch": "lab2/frontier",
+    "base_sha_is_ancestor_of_head": true,
+    "tracked_tree_clean": true,
+    "untracked_paths_created_by_this_lane": [
+      "research/frontier/stationarity_37385647440.py",
+      "research/frontier/analyze_stationarity_37385647440.py",
+      "research/frontier/emit_result_37385647440.py",
+      "research/experiments/EXP-FRONTIER-37385647440/raw/",
+      "research/experiments/EXP-FRONTIER-37385647440/derived/"
+    ],
+    "preexisting_untracked_not_created_by_this_lane": [
+      "research/experiments/EXP-FRONTIER-37385647440/model_execute.json"
+    ],
+    "operations_performed": [
+      "git status",
+      "git log",
+      "git rev-parse",
+      "git merge-base --is-ancestor"
+    ],
+    "no_commit_no_push": true
+  },
+  "code_paths": {
+    "executor": {
+      "path": "research/frontier/stationarity_37385647440.py",
+      "sha256": "53686f083bf3cf14573bfaf9d5200c3edfa9800cee3652b0b31af3161a378084"
+    },
+    "analyzer": {
+      "path": "research/frontier/analyze_stationarity_37385647440.py",
+      "sha256": "059be8e34ea92b7102700b72bc0617423eaaef7445ab235f1b16175d3ed1dd17"
+    },
+    "emitter": {
+      "path": "research/frontier/emit_result_37385647440.py",
+      "sha256": null
+    },
+    "entry_points": [
+      "python3 research/frontier/stationarity_37385647440.py",
+      "python3 research/frontier/analyze_stationarity_37385647440.py",
+      "python3 research/frontier/emit_result_37385647440.py"
+    ],
+    "reproduction_note": "The executor performs live network GETs. Re-running it produces a NEW measurement against the live web and will not reproduce these byte-level results; only the frozen input hashes, the code hashes and the shipped raw/derived artifacts are reproducible exactly."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "tokenizer": {
+      "name": "cl100k_base",
+      "library": "tiktoken",
+      "library_version": "0.14.0",
+      "declared_in_pyproject": false,
+      "note": "Environment-provisioned. spec.measurement_validity.substrate requires tiktoken to be declared in pyproject.toml before claiming a pure-stdlib run; the frontier lane may not edit pyproject.toml, so this run does not claim pure-stdlib.",
+      "vocabulary_sha256_of_mergeable_ranks_prefix": "5ce2c61ab361ddd0"
+    },
+    "http_clients_used": [
+      "urllib.request (stdlib)",
+      "requests (fallback path, unused)"
+    ],
+    "browser": false,
+    "docker": false,
+    "credentials": false,
+    "model_key": false,
+    "network_egress": "credential-free public HTTPS GET only"
+  },
+  "dataset": {
+    "kind": "live credential-free public HTTP target pool (frozen, hand-picked)",
+    "targets": [
+      "bitbucket",
+      "gitlab",
+      "httpbin",
+      "postman_echo",
+      "wikimedia",
+      "wikipedia"
+    ],
+    "sessions_per_target": 5,
+    "admitted_items": 32,
+    "classified_items": 29,
+    "declared_vs_discovered": {
+      "declared_controls": 13,
+      "discovered": 19
+    },
+    "target_pool_scope": "sample of a hand-picked credential-free pool; NOT Web prevalence (spec.measurement_validity.target_pool).",
+    "discarded_executions": 2,
+    "discarded_execution_reason": "two producer-side instrument defects found by self-check (relative-href matching; item-identity collision). Both passes and their evidence were deleted; only the shipped pass is authoritative."
+  },
+  "material_artifacts": [
+    {
+      "path": "research/frontier/stationarity_37385647440.py",
+      "sha256": "53686f083bf3cf14573bfaf9d5200c3edfa9800cee3652b0b31af3161a378084",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/analyze_stationarity_37385647440.py",
+      "sha256": "059be8e34ea92b7102700b72bc0617423eaaef7445ab235f1b16175d3ed1dd17",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/emit_result_37385647440.py",
+      "sha256": "792ec620da45d005a53a28c307856096e06a58f0859bd4598ce71528b841f61f",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/http.jsonl",
+      "sha256": "290dfb188689b550a577816b3d489db6de56de6a666e9183e08992d90b8a1efb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/observations.jsonl",
+      "sha256": "63029c857878f4efcd0f18b3aa4389e4d0c58e1f8968827fee763b46eacaf254",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/session_timing.jsonl",
+      "sha256": "5390fba21e6694f5df5d9a07538be27192bb9759853e56d1924694eb6043d72b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/controls_verification.jsonl",
+      "sha256": "95db345d2b78ddc0907ec66afb2266417e2ed13bb428120039cdaa7330095eef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/items.json",
+      "sha256": "0c789a8deb8f88596c0ecee879c35eaff6198e3fc92b19012b4e3229803f446b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/classification.json",
+      "sha256": "129e5512582a7b19802bddf442e686b7066672383c1997a106d2b85c1371b3de",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/classification_sensitivity.json",
+      "sha256": "a32227dba9e1d4de8554336accbd3ca346a3935b69e032c51a494517e287be64",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/costs.json",
+      "sha256": "3664efe5a00dde9b564fbe55988f6ac71cb63e1e6176d21f283980d1c82e10d2",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/analysis.json",
+      "sha256": "21209fbfcf4038772b5329fee92de8b648c18237ad63a2e204a7468082a52734",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/run_manifest.json",
+      "sha256": "0645e8c46c6b42ea293c8d85c494c17d0a63bad084ab85707d3a58a2916a8628",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/responses_cache/",
+      "sha256": null,
+      "role": "raw",
+      "note": "250 content-addressed response bodies named <sha256-of-uncompressed-body-bytes>.json.gz; the directory itself is not hashable as a single object; each name is the verification handle."
+    }
+  ],
+  "frozen_input_hashes": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/request.json",
+      "sha256": "d126fdaa557a7dc2f5f2c2fdd9647e4ec8c87c4ad442a111ba08ebddce287d8d"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/spec.json",
+      "sha256": "c0738d94bb90a6c3865c558605f2c48bc13e792c8f02e90da785bbfb264e1188"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/prereg.md",
+      "sha256": "12ad06afc54453fc8f413346f594a82b2614edf550f1f4ef661c7f7bcd50865c"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/freeze.json",
+      "sha256": "14a3c6603dcaaee65112ac2edc905325990d4f246ff5d85826d5ea2658200cd9"
+    }
+  ],
+  "upstream_evidence": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/handoff.json",
+      "role": "parent handoff named by request.json"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36314209725/failure.json",
+      "role": "predecessor named by request.json director_mandate; failed installation"
+    },
+    {
+      "path": "research/lanes/registry.json",
+      "role": "frontier lane authorization"
+    },
+    {
+      "path": "research/EXPERIMENT_PACKET.md",
+      "role": "binding packet contract"
+    }
+  ],
+  "commands_materially_affecting_reproduction": [
+    "python3 -m py_compile research/frontier/stationarity_37385647440.py research/frontier/analyze_stationarity_37385647440.py",
+    "python3 research/frontier/stationarity_37385647440.py  # live GET-only network pass",
+    "python3 research/frontier/analyze_stationarity_37385647440.py  # offline, deterministic",
+    "python3 research/frontier/emit_result_37385647440.py  # offline, deterministic"
+  ],
+  "wall_clock_seconds_of_network_pass": 487.3,
+  "http_requests_sent": 359,
+  "limitations": [
+    "Live-network measurement against a drifting web; not byte-reproducible.",
+    "No credentials, no browser, no write verb, per frozen substrate mandate.",
+    "All discovered items lie at crawl hop 0 or 1, so the cost contrast is the extreme-favourable case for handle persistence.",
+    "The frozen falsifier cannot trigger (VN-07) and two frozen controls failed (VN-01), so this packet carries a measurement-validity finding, not a scientific answer."
+  ],
+  "emitter": {
+    "path": "research/frontier/emit_result_37385647440.py",
+    "sha256": "792ec620da45d005a53a28c307856096e06a58f0859bd4598ce71528b841f61f"
+  }
+}

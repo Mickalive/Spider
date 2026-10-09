@@ -1,0 +1,1194 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-GRAPH-36314193643",
+ "lane": "graph",
+ "claim_ids": [
+  "C-FRESHNESS"
+ ],
+ "claim_scope_note": "C-FRESHNESS only. C-PRODUCT-ECON is NOT claimed here: the cost arm of this packet measures component-level guard/acquisition costs in requests and cl100k_base tokens, not end-to-end amortized economics on real agents, and the c_recover term is unmeasured because write verbs are excluded by the mandate. C-CROSSSITE is NOT claimed: this packet has no true website-holdout transfer test. C-DELTA-REPAIR is NOT claimed: its preregistered prerequisite (a calibrated freshness guard) is answered only for the bounded real-substrate case measured here, and only if the ACCEPT branch is reached. Emitting claim events for any of these would be scope inflation.",
+ "mandate_binding": {
+  "source": "request.json.director_mandate.allocation",
+  "action": "PIVOT",
+  "target_claim": "C-FRESHNESS",
+  "cycle_id": "36313602258",
+  "dependencies_declared": [
+   "frontier",
+   "runtime"
+  ],
+  "transformation_of_mandate_into_experiment": "The Director's four-part strategic question is answered by ONE measurement transaction because its four parts share a single instrument and a single substrate: a calibrated screen over real credential-free public HTTP. Part (i) is the instrument's own output (it is the population), part (ii) is the capability test on that population, part (iii) is the only non-tautological discriminator that decides whether the capability comes from the two ADDED channels, and part (iv) is the measured admission region for the capability. Dropping (iii) would leave the result resting on a contrast fixed by prevalence; dropping (iv) would leave an unadmissible capability. Both are therefore load-bearing, not scope creep. The Director's part (iv) is narrowed in one declared respect: the packet measures the guard's own break-even abstention rate and its component acquisition costs, and explicitly does NOT measure the cost of discovering a failed replay, because the mandate forbids write verbs. That narrowing is recorded in scope_boundaries and in prereg.md section 2.3.",
+  "mandate_constraints_honoured": {
+   "no_browser": "No browser, no Playwright, no CDP. html.parser only; no JavaScript execution.",
+   "no_docker": "No containers. No local server. Client-side requests only.",
+   "no_model_key": "No model API call. The single optional dependency is the cl100k_base tokenizer, used for counting only, and its absence is a declared degradation of the cost arm only.",
+   "no_credentials": "No authentication of any kind. No login, no cookie reuse across sessions, no API token.",
+   "no_write_verbs": "GET only. No POST/PUT/PATCH/DELETE, ever. Conditional GET (If-None-Match / If-Modified-Since) is a GET with a request header and is permitted, but only inside the isolated validator arm that never touches the scored population.",
+   "host_set_disjoint_from_frontier_and_physics": "Implemented as frozen step G0.0 (see host_pool.disjointness) and as validity requirement V14. The candidate pool was built to be statically disjoint from every host appearing anywhere in accepted Codex evidence for lanes frontier, physics, intel, graph, runtime and product; the pre-screening dynamic check removes any host that overlaps a concurrently declared frontier/physics pool, in frozen list order, before any candidate is screened.",
+   "anchors_verified_at_freeze": "G0.2 and G0.3 are fail-closed pre-execution gates that run before any candidate host is screened and before any item is scored, and that record the anchors' observed behaviour. Their outcomes are terminal on failure. This removes the exact defect that made EXP-FRONTIER-36306528608 a MEASUREMENT_INVALID (its positive anchor was factually false as served).",
+   "no_freezer_hashed_code_digest_as_validity_condition": "Honoured. There is NO code-digest validity gate anywhere in this spec. Code identity is bound at EXECUTE and recorded in provenance.json (see code_binding)."
+  }
+ },
+ "parent_handoff_continuity": {
+  "parent_experiment_id": "EXP-GRAPH-36302977302",
+  "parent_handoff_path": "research/experiments/EXP-GRAPH-36302977302/handoff.json",
+  "parent_handoff_sha256": "c97904a9d3bab07d4e18927d44f77e2880293ef4b962b0a1dd7d5f7ca1e27226",
+  "disposition_from_request": "SUPERSEDE",
+  "preserved_established": [
+   "Frozen-input integrity of the parent transaction is intact and re-verifiable from freeze.json; the parent was an execution and measurement failure, not tampering. Consequence for this design: freeze.json digests are re-verified before and after execution and any mismatch is terminal.",
+   "The inherited audit-PASS C-FRESHNESS base is TWO packets, not three: EXP-GRAPH-35940399935 and EXP-GRAPH-35947468747. Any design budgeting for three prior positives is mis-sized; this design budgets for two and adds none.",
+   "The incumbent single-resource guard rule is exactly: Jaccard(structure field-set) < 0.85 OR endpoint param-template changed OR (ETag changed AND Cache-Control max-age = 0). That is this packet's B-INCUMBENT-SIGNAL-ONLY, restated on real substrates.",
+   "Both inherited positives constructed their drift families out of the guard's own features, and their own audits recorded the noise-immunity control as satisfiable by construction. Consequence for this design: NO drift is injected anywhere; all labels are raw byte comparisons of real responses."
+  ],
+  "preserved_rejected": [
+   "The parent's reported operating point (TN 1.0, FA 0.0, UNKNOWN precision 1.0, ECE 0.0) is rejected as NOT MEASURED and is not used as a prior, a target or a baseline value here.",
+   "The parent's claim that the drift matrix was reached is rejected; only a plan ledger existed."
+  ],
+  "preserved_unknown_carried_forward": [
+   "The measured prevalence of the structurally-undetectable stale cell remains UNKNOWN after this packet. This design measures the VALUE-COLLISION rate (n_distinct exact values over K fresh sessions) as a lower-bound proxy and explicitly declares the behavioural invisible cell unmeasurable without write verbs. It does not close that question and must not be reported as closing it.",
+   "Whether the incumbent signal set is blind on session/token rotation on real sites is UNKNOWN and is the load-bearing measurement of this packet (part iii).",
+   "The measured acquisition cost and hence the guard's break-even abstention rate on real origins is UNKNOWN and is part (iv)."
+  ],
+  "preserved_do_not_assume": [
+   "Do not read a green control plane as evidence of a sound packet. Three consecutive Graph packets reported PASS for validity checks that were never computed. Consequence: this design forbids a control attestation unless a named artifact with a per-control sha256 exists, and V16 makes an attested-without-artifact control terminal.",
+   "Do not read the parent's next_question's substrate proposal (graph-authored stdlib HTTP with a shared SQLite WAL store) as authorised. The Director explicitly rejected that substrate class. This design uses NO local server at all.",
+   "Do not treat a degenerate gate as a passing gate. The parent handoff flagged that a near-perfect producer metric can satisfy a gate that has only one admissible value. Consequence: V17 declares the FA gate degenerate below n_stale=45 and the calibration arm degenerate below n_all>=60 or fewer than 3 realized confidence levels.",
+   "Do not read the parent's part-(iii) question as answered by this packet. See scope_boundaries.SB-05."
+  ],
+  "deliberate_divergences_from_parent_next_question": [
+   "Substrate: parent's proposal was a local multi-worker HTTP substrate. Rejected by the Director mandate. This design uses real public HTTPS with stdlib urllib only, the one substrate class that has repeatedly produced valid decision-changing measurement.",
+   "Ground truth: parent proposed injected drift families F1-F4. Rejected. This design has no injector; STALE/FRESH are raw byte comparisons of real responses across disjoint fresh sessions, so no contrast in this packet can be fixed by an injected prevalence.",
+   "Family coverage: parent asked for permission-boundary change (F3). Unreachable on credential-free origins. Replaced by session-handle rotation (D2) and DISCLOSED as a non-closure (SB-02), with the credentialed probe named as the exact next action.",
+   "The parent's producer-independent pre-execution health receipt is retained in spirit and generalised: the calibration anchors (G0.2, G0.3) are the producer-independent-style pre-execution gate, they run before any candidate is touched, they write a receipt artifact with sha256, and their failure is terminal. The parent's local-substrate floors (X-Worker-Pid, cross-worker read-after-write, 304 count, HMAC auth) are deleted because the substrate no longer has workers, a store, or auth.",
+   "The parent's third part (measured prevalence of the structurally-undetectable cell) is retained but honestly downgraded: what is measurable without write verbs is the value-collision rate, and the packet says so."
+  ]
+ },
+ "question": "On real, credential-free, publicly reachable web origins selected by a screen that is CALIBRATED BEFORE USE against a positive anchor set of which at least two of five must pass and a negative anchor set of which all four must be rejected (both anchors frozen here with the exact criterion, and both verified to exhibit the asserted behaviour on the execution date, with any failure terminal before a single candidate is screened), (i) what is the measured prevalence, per site and pooled with site-clustered intervals, of session-scoped action-gating state items, where an item qualifies only by exact-value variation AND body-hash variation across at least three independent fresh sessions with disjoint cookie jars; (ii) on the admitted origins, does a four-channel response-derived guard -- postcondition re-verification, precondition/auth-context re-verification, transport validator, structure signature -- reach TN >= 0.85 with Wilson lower > 0.75 and false-accept <= 0.10 with Wilson upper < 0.1525 at a realized prevalence of at least 0.20, with UNKNOWN precision >= 0.85, and global plus per-class ECE <= 0.15 with a site-clustered bootstrap 97.5 percent upper <= 0.18, against B-NO-GUARD-REPLAY, an incumbent signal-only guard, and four single-channel ablations, with at least three of the four ablations decision-distinct; (iii) is the incumbent signal set in fact blind on the value-rotation drift family, as a structural argument predicts, so that the two ADDED channels demonstrably earn their keep rather than resting on a contrast fixed by prevalence; and (iv) what is the measured cost of the abstain decision, in requests and cl100k_base tokens, against the measured cost of re-acquiring a fresh valid instance, so that the guard's economic admissibility is decided by a measured break-even abstention rate rather than assumed.",
+ "hypothesis": "H1 (capability, real substrate). On credential-free public origins whose state is server-minted and server-rendered, session-scoped action-gating state is common among action-gating items, and a four-channel response-derived guard reaches the frozen operating point at that measured prevalence: TN >= 0.85 (Wilson lower > 0.75), false-accept <= 0.10 (Wilson upper < 0.1525), UNKNOWN precision >= 0.85, and global plus per-class ECE <= 0.15 under a site-held-out monotone calibration. Expected direction: strictly better than the incumbent on false-accept at comparable true-negative. H2 (necessity, and the only non-tautological part). The incumbent value-blind signal set is structurally blind to value-only rotation: a server-minted capability token that changes value between sessions while its field name, field type, form action, form method and input-name set are unchanged, on a page that carries no validator, produces an INCUMBENT false-accept of 1.0. Therefore the paired false-accept difference (incumbent minus candidate) on the value-rotation family is >= 0.10 with a site-clustered 97.5 percent lower bound above 0, and at least three of four single-channel ablations are decision-distinct. H3 (economic admissibility). The guard's cost is a whole-document read of the item's host page plus one request, while re-acquisition is a prefix read of that same page plus the intermediate hops actually traversed; therefore R_requests equals the measured hop depth of the item's URL and R_tokens is at most 1, so the measured break-even combined rate (false-accept plus abstention) is (R-1)/R, and the guard is admissible only on items whose measured hop depth exceeds one, with a per-item measured admission region rather than a global verdict. H4 (prevalence ceiling on the claim). The measurable invisible cell -- a stale item whose exact value is byte-identical across sessions because the server recycles a token pool or binds validity server-side -- is NOT measurable without write verbs; the value-collision rate is only a lower-bound proxy and replay-by-assumption is not licensed by this packet under any outcome.",
+ "falsifier": "Preregistered, arithmetically checkable before freeze, and each branch explicitly disclaimed as measurement-validity rather than scientific falsification where so marked. F1 (bounded falsification, C-FRESHNESS guard capability): with adequacy met, M-TN-CAND < 0.85 or M-TN-CAND-WILSON-LOW <= 0.75. F2 (bounded falsification): with adequacy met, M-FA-CAND > 0.10 or M-FA-CAND-WILSON-UP >= 0.1525. F3 (bounded falsification): with adequacy met, M-UNKNOWN-PRECISION-CAND < 0.85. F4 (bounded falsification, calibration only): with adequacy met including n_all >= 60 and at least 3 realized confidence levels at n >= 20, M-ECE-GLOBAL-CAND > 0.15, or either per-class ECE > 0.15, or the site-clustered bootstrap 97.5 percent upper on M-ECE-GLOBAL-CAND > 0.18. F5 (bounded negative about NECESSITY, explicitly NOT a falsification of C-FRESHNESS): B5 fails, i.e. the site-clustered 97.5 percent lower bound of (M-FA-INCUMBENT-D1V - M-FA-CAND-D1V) is below 0.10, or M-FA-INCUMBENT-D1V is below 0.95, or its Wilson lower bound is at or below 0.85, or fewer than three of the four ablations are decision-distinct. Consequence: the guard collapses to the incumbent signal-only rule and the product ships the cheaper incumbent. F6 (bounded negative, NOT falsification): M-VALUE-COLLISION-PREV > 0.10 with Wilson lower > 0.05 on admitted sites. Consequence: even a guard scoring false-accept 0 is architecturally exposed and the product defaults to re-derivation plus response caching. F7 (economic inadmissibility, the Director's falsifier (b)): M-COST-REACQ-REQUESTS < M-COST-GUARD-REQUESTS AND M-COST-REACQ-TOKENS < M-COST-GUARD-TOKENS at every measured reuse count m in {1,2,4,8,16}, while F1..F4 do not fire. Consequence: C-FRESHNESS's capability ships as a measurement-only signal with no economic role, and replay-by-assumption is not licensed. F8 (VALID POSITIVE FINDING, the Director's falsifier (a), NOT a failure and NOT a falsification): all GATE 0 blocking checks pass but n_admitted_sites < 4. Consequence: the public credential-free Web provides fewer than four origins with measurable session-scoped action-gating state under this representation, reported with an exact 97.5 percent upper bound, and SPIDER's public product must be scoped to within-episode reuse unless credentials are assumed. C-FRESHNESS is neither advanced nor lowered by this branch. F9 (terminal, NOT falsification): any GATE 0 blocking check fails, or any blocking validity requirement V01..V13, V15, V16, V18 fails, or the frozen arithmetic reachability certificate (spec.frozen_arithmetic_certificate) is non-empty-unsatisfiable at any declared floor, or the candidate pool contains fewer than 24 hosts after the disjointness removal step. Consequence: status = MEASUREMENT_INVALID, outcome = INCONCLUSIVE, no claim-level statement in either direction.",
+ "baselines": [
+  {
+   "id": "B-NO-GUARD-REPLAY",
+   "description": "No guard: always REUSE, confidence 1.0. Same trials, same labels, same sites.",
+   "expected": "TN = 1.0 by construction and M-FA = measured prevalence by construction.",
+   "tautology_disclosure": "MANDATORY. This baseline's false-accept is an algebraic identity, equal to the item-level prevalence, and carries no information about the candidate. It is reported for completeness and is EXPLICITLY EXCLUDED from every accept and falsifier condition. The inherited handoff's do_not_assume about 'a contrast fixed by injected prevalence' applies here in a weaker form: the prevalence is measured, not injected, but the identity is still an identity. No decision in this packet rests on B-NO-GUARD-REPLAY."
+  },
+  {
+   "id": "B-INCUMBENT-SIGNAL-ONLY",
+   "description": "The incumbent rule of the two inherited audit-PASS C-FRESHNESS packets, restated on real responses and executed on the identical trial population: value-blind structure signature (field-name/type multiset of the page's form/input/meta field set) OR transport-validator change (ETag / Last-Modified / max-age / Vary), with any firing channel causing ABSTAIN. It is structurally incapable of reading a recorded value.",
+   "expected": "False-accept 1.0 on the value-rotation family D1V when the page carries no validator; either 0.0 with a true-negative near 0.0 if the server re-mints whole documents and therefore rotates validators, or an intermediate. The (TN, FA) pair distinguishes the three regimes and the packet reports all three possibilities."
+  },
+  {
+   "id": "A-CH-POSTCOND",
+   "description": "Single-channel ablation: the full four-channel guard with CH-POSTCOND removed; the remaining three channels adjudicate with the same frozen rule.",
+   "expected": "Decision-distinct if the accepting-form-presence channel fires on any admitted trial."
+  },
+  {
+   "id": "A-CH-PRECOND",
+   "description": "Single-channel ablation: the full guard with CH-PRECOND-BINDING removed. This is the ablation that tests the central structural claim, because CH-PRECOND-BINDING is the only channel that can read a recorded value.",
+   "expected": "Decision-distinct on the value-rotation family; this is the ablation whose removal should most degrade false-accept."
+  },
+  {
+   "id": "A-CH-VALIDATOR",
+   "description": "Single-channel ablation: the full guard with CH-TRANSPORT-VALIDATOR removed.",
+   "expected": "Decision-distinct only if real origins actually carry validators. M-CH-VALIDATOR-ACTIVE-RATE is reported; if it is 0.0 the ablation is declared structurally uninformative and is excluded from the three-of-four count with the exclusion recorded (V12)."
+  },
+  {
+   "id": "A-CH-STRUCT",
+   "description": "Single-channel ablation: the full guard with CH-STRUCT-SIG removed.",
+   "expected": "Decision-distinct on body/structure churn; likely not distinct on value rotation, which is the point."
+  }
+ ],
+ "positive_control": {
+  "id": "PC-CANDIDATE-SENSITIVITY",
+  "requirement": "SENSITIVITY IS DEMONSTRATED BY THE POOLED TWO-SIDED ANCHOR CONTRAST, NOT BY A PER-ANCHOR UPPER BOUND. Requirement: M-ANCHOR-POWER-FISHER-P < 0.05 over all nine anchors, that is the abstention rate on positive-anchor trials that pass G0.2 must separate from the abstention rate on all negative-anchor trials. M-FA-CAND-POS and M-TN-CAND-POS are reported with their exact Wilson intervals as DIAGNOSTICS ONLY; no bound on them may gate.",
+  "why_it_is_a_real_control": "These are origins for which session-minted capability rotation is either SPIDER-corroborated (EXP-FRONTIER-36306528608 raw observation: 3 distinct authenticity_token on gitlab.com and 3 distinct wpCreateaccountToken on auth.wikimedia.org across 3 independent fresh sessions, body hashes differing 3/3) or declared a priori by construct. A guard that cannot detect rotation where rotation is known has no sensitivity, and the anchors are outside the scored population so this control cannot be contaminated by the candidate yield.",
+  "pc_incumbent_blindness": {
+   "id": "PC-INCUMBENT-BLINDNESS",
+   "requirement": "M-FA-INCUMBENT-POS is reported on the same anchors against the frozen pre-registered structural prediction of 1.0 (the incumbent is value-blind and these pages are server-minted). A measured value materially below 1.0 is a VALID and decision-relevant finding that the structural argument is wrong on real pages, and it is reported as such, not suppressed.",
+   "why_it_is_a_positive_control": "It is a prediction test on a set where the prediction follows from an argument, not from data.",
+   "metric_ids": [
+    "M-FA-INCUMBENT-POS"
+   ]
+  },
+  "arithmetic_correction": "The earlier draft required a per-anchor false-accept of 0.0 with a Wilson upper < 0.1525. That is unsatisfiable at any per-anchor n affordable here: the bound needs n >= 22 trials on a single anchor and only 3 to 5 are affordable, so the gate would have failed terminally at G0.2 on every run.",
+  "metric_ids": [
+   "M-ANCHOR-POWER-FISHER-P"
+  ]
+ },
+ "null_control": {
+  "id": "NC-CAL-NEG-ALL-REJECTED",
+  "requirement": "All four frozen negative calibration anchors must be rejected by the frozen screen, each with a recorded rejection reason code from {NO_AGSI_DETECTED, AGSI_NOT_SESSION_SCOPED, HOST_UNREACHABLE_IS_NOT_A_REJECTION}. Any anchor admitted is terminal MEASUREMENT_INVALID (G0.3).",
+  "why": "A screen that admits everything has no specificity and no demonstrated detection power. This is the exact defect the Director identified in the parent's screen."
+ },
+ "null_controls": [
+  {
+   "id": "NC-BODY-CHURN",
+   "requirement": "On trials whose item is session-INVARIANT while the host page's body hash VARIES across the fresh sessions: the candidate's false-accept must be <= 0.15 with a Wilson upper < 0.30, and its abstention rate must be <= 0.30 with a Wilson upper < 0.45. Requires n_D3 >= 20 to be read. If n_D3 < 20 the control is reported as unknown and triggers the CC-05 disclosure; it is NOT a fail.",
+   "why": "This is the benign-churn counterpart control and it is the one the inherited positives got wrong: their noise-immunity control was satisfiable by construction because the required-path filter excluded the very fields the noise touched. Here the churn is REAL, unfiltered, and is exactly the population that separates 'the page changed' from 'my inherited knowledge is stale'. A guard that cannot tell them apart is a guard that will abstain on every live page.",
+   "arithmetic_correction": "The earlier draft required false-accept <= 0.10 with a Wilson upper < 0.1525. At n_D3 = 20 that admits no integer count at all, and at n_D3 = 30 admits only 0, so the control was unsatisfiable or knife-edge. The relaxed bound is admissible from n = 18 upward and admits {0,1} at the floor.",
+   "admissible_false_accept_counts_at_n_D3_20": "0..1",
+   "admissible_abstention_counts_at_n_D3_20": "0..4"
+  },
+  {
+   "id": "NC-TIME-VS-SESSION",
+   "requirement": "Report M-WARMJAR-VARIATION-RATE and M-WARMJAR-VALUE-COLLISION-RATE from 2 warm-jar re-captures per admitted item. This is a DIAGNOSTIC with a frozen ceiling rule, not a pass/fail gate: if M-WARMJAR-VARIATION-RATE is within 0.10 of the fresh-jar value-variation rate, the packet's claim ceiling drops to 'per-request or time-scale rotation' rather than 'session-scale rotation'.",
+   "why": "The screen's qualification rule is mandated to be fresh-jar variation, but real pages vary for reasons other than the session (clock, A/B, geo, CDN). Without this control the packet cannot tell session-scoped state from merely unstable state, and a positive result would be uninterpretable."
+  },
+  {
+   "id": "NC-PERMUTED-LABELS",
+   "requirement": "With 1000 within-site permutations of trial labels (seed frozen), the candidate's M-FA-CAND must lie strictly below the 0.5th percentile of the permuted-label distribution of the same statistic, and M-PERMUTED-P (the fraction of permutations achieving a false-accept at least as low as the observed) must be < 0.01.",
+   "why": "Directly targets the EXP-INTEL-36287179392 defect class, in which an estimator was bitwise invariant to its own null and therefore demonstrated no power. A guard statistic that is invariant to permuting the labels it is scored against has measured nothing."
+  },
+  {
+   "id": "NC-SESSION-ISOLATION",
+   "requirement": "Per session, per host: the first request must carry no Cookie header, and the four sessions' cookie jars must be pairwise disjoint on (name, value) with the recorded per-session jar digests in raw evidence. Any violation is terminal.",
+   "why": "Disjoint cookie jars are what makes 'session-scoped' an operational claim instead of an assertion. Without this, the whole screen is uninterpretable, and this is the one check whose failure would silently convert every result into noise."
+  },
+  {
+   "id": "NC-NO-LEAKAGE",
+   "requirement": "The channel dispatch must route the recorded value only into ch_precond. Per trial, emit an attestation that the input dicts passed to ch_struct, ch_validator and ch_postcond contain no key from the frozen set {recorded_value, recorded_value_sha256, label, is_stale, is_fresh, family, site}. Coverage must be 100 percent of scored trials. Any leak is terminal.",
+   "why": "The value-blind channels are the reason the incumbent is predicted blind. If they can see the value, the entire part-(iii) result is a self-fulfilling artefact of the implementation rather than a property of the signal set. This is an executable anti-leakage device, not a promise."
+  },
+  {
+   "id": "NC-NONDEGENERATE-ESTIMATOR",
+   "requirement": "At least 3 realized confidence levels each with n >= 20; at least 2 distinct decisions; every channel that is active anywhere must both fire and abstain at least once, else that channel is declared structurally uninformative and its ablation is excluded from the three-of-four count with the exclusion recorded. M-N-CONFIDENCE-LEVELS <= 2 makes the calibration arm DEGENERATE-NOT-EVALUABLE and forbids any calibration claim.",
+   "why": "Prevents a perfect rule from producing a trivially-calibrated or trivially-degenerate calibration result and being over-read as a calibration success."
+  },
+  {
+   "id": "NC-ITEM-DEPENDENCE-DISCLOSURE",
+   "requirement": "Trial-level metrics are reported with site-clustered intervals (primary, used by every gate) and item-clustered intervals (auxiliary). A trial-level unclustered interval is computed only as a diagnostic and is named M-DIAGNOSTIC-UNCLUSTERED-* with an explicit do-not-use flag. The dependence structure is reported: number of trials per item, number of items per site.",
+   "why": "Each item contributes 3 trials, so trials are not independent within an item. An unclustered interval would be anticonservative and would manufacture significance."
+  }
+ ],
+ "measurement_validity": [
+  {
+   "id": "V01_SCREEN-CALIBRATION-FAIL-CLOSED",
+   "blocking": true,
+   "requirement": "G0.2 and G0.3 are evaluated before any candidate host is screened and before any item is scored. Positive anchors: at least 2 of 5 must pass the frozen screen. Negative anchors: all 4 of 4 must be rejected with a recorded reason code. Any failure terminates the packet as MEASUREMENT_INVALID with no claim-level statement.",
+   "removes_defect": "EXP-FRONTIER-36306528608, whose positive anchor was factually false as served so the screen had no demonstrated detection power at its own calibration site."
+  },
+  {
+   "id": "V02-ARITHMETIC-REACHABILITY",
+   "blocking": true,
+   "requirement": "The frozen certificate in spec.frozen_arithmetic_certificate is recomputed at execution and must be non-empty and satisfiable at every declared floor before any item is scored. A non-satisfiable gate at its declared floor is terminal MEASUREMENT_INVALID, never a scientific negative.",
+   "removes_defect": "EXP-PHYSICS-36287170603, whose accept branch was arithmetically unreachable at the declared n."
+  },
+  {
+   "id": "V03-ANCHOR-VERIFICATION-IS-NOT-A-DESIGN-CLAIM",
+   "blocking": true,
+   "requirement": "DESIGN does not probe any anchor or candidate. The anchors' asserted behaviour is recorded here as an assertion with its evidence class, and G0.2/G0.3 are the only place it is tested. result.json must report M-CAL-POS-FRONTIER-VERIFIED-PASSING and, if false, the frozen ceiling rule CC-01 applies.",
+   "why": "Prevents DESIGN from consuming outcome data and prevents an unverified assertion from being presented as a design-time fact."
+  },
+  {
+   "id": "V04-NO-INJECTED-DRIFT",
+   "blocking": true,
+   "requirement": "Zero injected drift, zero synthetic state, zero local server, zero fixture data. Every label in this packet is a raw byte comparison between two real responses captured on different fresh sessions. Any appearance of an injected field must be terminal.",
+   "why": "This is the single most important difference from all three prior C-FRESHNESS attempts. It is what makes the prevalence, the false-accept and the blindness result un-tautological."
+  },
+  {
+   "id": "V05-SESSION-ISOLATION",
+   "blocking": true,
+   "requirement": "NC-SESSION-ISOLATION. Fresh http.cookiejar.CookieJar per session; no Cookie header on a session's first request; no validator headers carried in; a new TCP/TLS connection per request (default urllib behaviour with Connection: close)."
+  },
+  {
+   "id": "V06-CONDITIONAL-VALIDATOR-ISOLATION",
+   "blocking": true,
+   "requirement": "The validator arm (If-None-Match / If-Modified-Since) is executed in a separate pass, after the scored population is closed, on a separate recorded arm, and its responses never enter the scored population, the screen, the labels or any gate. 304 responses are never counted as a body variation and never counted as a distinct value."
+  },
+  {
+   "id": "V07-ANTI-LEAKAGE-EXECUTION",
+   "blocking": true,
+   "requirement": "NC-NO-LEAKAGE, coverage 100 percent of scored trials. Additionally the guard function receives no label, no family label and no site label; family assignment is applied strictly after decisions are recorded."
+  },
+  {
+   "id": "V08-ESTIMATOR-POWER",
+   "blocking": true,
+   "requirement": "NC-PERMUTED-LABELS with 1000 within-site permutations and a frozen seed. M-PERMUTED-P < 0.01 is required for the guard's false-accept to be interpretable at all; failure is MEASUREMENT_INVALID (the instrument demonstrated no power), not a negative guard result."
+  },
+  {
+   "id": "V09-RESAMPLING-UNIT",
+   "blocking": true,
+   "requirement": "Every pooled interval resamples SITES with replacement, B = 10000, seed = 36314193643. Item-clustered intervals use items as the unit, B = 10000, same seed. No gate uses a trial-level unclustered interval. Percentile method; no Gaussian jitter, no parametric CI, no normal approximation."
+  },
+  {
+   "id": "V10-SEED-DETERMINISM",
+   "blocking": true,
+   "requirement": "All randomness derives from random.Random(36314193643) seeded from the integer experiment id. Python's process-randomized hash() is never used as a seed source, and hash randomization is neutralised for the run. Any key derived from a name uses a frozen stable hash (sha256 truncated), never built-in hash()."
+  },
+  {
+   "id": "V11-POST-HOC-EDITABILITY",
+   "blocking": true,
+   "requirement": "Every raw record is written as one JSON object per line with a per-line sha256 over its canonical serialisation, appended during capture, and never rewritten. The scored population is closed by a frozen closing event (a manifest with the item count and its sha256) before any metric is computed."
+  },
+  {
+   "id": "V12-ABLATION-INFORMATIVENESS",
+   "blocking": true,
+   "requirement": "Every ablation reports differing-decision count, the paired site-clustered bootstrap 97.5 percent lower bound of the false-accept difference, and whether its channel was ever active. A channel that is never active is recorded as STRUCTURALLY_UNINFORMATIVE and its ablation is excluded from the three-of-four count; if fewer than three ablations remain, the ACCEPT branch is unreachable and the packet terminates at the DATA_INSUFFICIENT-DEGENERATION branch, not a falsification."
+  },
+  {
+   "id": "V13-CALIBRATION-HOLDOUT-BY-SITE",
+   "blocking": true,
+   "requirement": "Calibrated confidences come from leave-one-site-out isotonic regression (PAVA, stdlib, frozen) fitted on the other admitted sites and applied to the held-out site; out-of-fold predictions are pooled. No fold ever sees its own site's data. The raw parameter-free confidence map is reported separately as M-ECE-RAW-GLOBAL and is never used to satisfy a gate."
+  },
+  {
+   "id": "V14-HOST-POOL-DISJOINTNESS",
+   "blocking": true,
+   "requirement": "The frozen candidate pool contains no host present in the accepted Codex host union for lanes frontier, physics, intel, graph, runtime and product. Before screening, the pool is checked against any concurrently declared frontier/physics candidate pool for cycle 36313602258 and overlapping hosts are removed in frozen list order, with the removal recorded. Calibration hosts are declared instrument, are excluded from the candidate pool, and their appearance in the historical union is disclosed rather than hidden."
+  },
+  {
+   "id": "V15-NO-ASSERTED-CONTROL-WITHOUT-ARTIFACT",
+   "blocking": true,
+   "requirement": "result.json.controls[k].pass may be true only if a named artifact with a per-control sha256 exists in result.json.artifacts for that control. A control whose status is 'unknown' is legal and expected for inapplicable controls; a control reported pass with no artifact is terminal MEASUREMENT_INVALID.",
+   "why": "The parent's nine controls all read observed='verified', pass=true while the same file deferred 7 of 8 of those computations to 'needs full'."
+  },
+  {
+   "id": "V16-REPRESENTATION-LOSS-DISCLOSURE",
+   "blocking": false,
+   "requirement": "Parsing is html.parser on raw bytes; no JavaScript is executed. Client-side-minted values, XHR/fetch-only gating, canvas-rendered content, values inside inline JS string literals, and anything behind an authenticated session are structurally invisible. Form submission is never exercised, so 'action-gating' is established STRUCTURALLY (frozen predicate) and never behaviourally. The frozen claim-ceiling rule CC-02 applies."
+  },
+  {
+   "id": "V17-DEGENERATE-GATE-GUARD",
+   "blocking": true,
+   "requirement": "Recomputed bands, recorded in frozen_arithmetic_certificate. False-accept gate: n_stale <= 20 is UNSATISFIABLE (zero admissible counts); 22 <= n_stale <= 33 admits exactly one value (FA = 0) and is declared degenerate; n_stale >= 34 is non-degenerate. At the declared floor of 45 the gate admits 0..2. Any landing in a degenerate or unsatisfiable band takes DATA_INSUFFICIENT-DEGENERATION, never a pass. The calibration arm additionally requires n_scored >= 60 with at least 3 realized levels at n >= 20. This guard exists because the parent handoff recorded that a near-perfect producer metric can satisfy a gate that admits only one value, and because the first draft of this very certificate made exactly that error twice.",
+   "bands": {
+    "n_stale_le_20": "UNSATISFIABLE",
+    "n_stale_22_to_33": "DEGENERATE (one value)",
+    "n_stale_ge_34": "non-degenerate"
+   }
+  },
+  {
+   "id": "V18-CODE-IDENTITY-AT-EXECUTE-NOT-AT-FREEZE",
+   "blocking": true,
+   "requirement": "No code digest is a validity condition. Code identity is bound at EXECUTE: every producer source file is hashed with sha256 into result.json.artifacts and provenance.json, the environment records the exact package set and any pip install, and the frozen inputs request/spec/prereg are re-verified against freeze.json before and after execution. This satisfies the Director's mandate constraint that freezer-hashed code digests not be used as validity conditions, because scripts/freeze_experiment.py writes exactly three digests and no more."
+  },
+  {
+   "id": "V19-TRANSPORT-AND-ANTIBOT-DISCLOSURE",
+   "blocking": false,
+   "requirement": "Per-host pacing >= 2.0 s, one frozen User-Agent, at most one retry on connection error and zero retries on any HTTP status, per-host request cap 40, global request cap 2500. A host returning a bot-challenge status (401, 403 with challenge markers, 429, 503) is recorded as BLOCKED and excluded from the scored population; BLOCKED is never counted as a negative or as a fresh item. Blocked and unreachable rates are reported per stratum, and host selection is by frozen list order so exclusion is not outcome-dependent."
+  },
+  {
+   "id": "V20-TIME-WINDOW-RECORDED",
+   "blocking": false,
+   "requirement": "Every raw record carries a UTC timestamp and the run's egress IP/region is recorded once. A qualification that holds only inside the measurement window is disclosed with the window. The window is not extended post hoc."
+  },
+  {
+   "id": "V21-BLOCKING-AND-NONBLOCKING-DISJOINTNESS",
+   "blocking": true,
+   "requirement": "Blocking requirements are V01, V02, V04, V05, V06, V07, V08, V09, V10, V11, V12, V13, V14, V15, V17, V18, V21. V03, V16, V19, V20 are non-blocking: they impose disclosure, not termination. The tokenizer-provisioning check G0.1 is non-blocking and degrades only the cost arm."
+  }
+ ],
+ "decision_rule": "Ordered, fail-closed, and every branch pre-labelled as measurement-validity, data-insufficiency, bounded falsification, bounded negative-about-necessity, or valid-positive-scope-finding. No branch converts a missing measurement into a negative. STAGE 0 GATE 0 (pre-execution, before any candidate is screened or any item scored). G0.1 M-TOKENIZER-PROVISIONED -- non-blocking; if false the cost arm (part iv) is reported DATA_INSUFFICIENT-TOKENIZER and every other arm proceeds. G0.2 M-CAL-POS-PASS >= 2 of 5 with at least one of the SPIDER-corroborated pair passing or the ceiling rule CC-01 applying -- BLOCKING. G0.3 M-CAL-NEG-REJECTED == 4 of 4 -- BLOCKING. G0.4 M-ARITH-SATISFIABLE all declared floors satisfiable -- BLOCKING. G0.5 M-POOL-SIZE >= 24 after the V14 removal step -- BLOCKING. Any BLOCKING failure => status MEASUREMENT_INVALID, outcome INCONCLUSIVE, claim_ceiling 'C-FRESHNESS unchanged; no claim-level statement licensed', falsifier F9. STAGE 1 ADEQUACY (after scoring, before any gate). A1 n_admitted_sites >= 4. A2 n_stale >= 45. A3 n_fresh >= 60. A4 n_stale(D1V) >= 30. A5 n_scored_trials >= 60 with >= 3 realized confidence levels each n >= 20. A6 M-PREV-ITEM-POOL >= 0.20 (the mandate's required realized prevalence regime). Any failure => status COMPLETE, outcome INCONCLUSIVE, branch DATA_INSUFFICIENT, with the satisfied partials reported, and no gate read. NOT a falsification. STAGE 2 ACCEPT requires ALL of B1..B6. B1 M-TN-CAND >= 0.85 AND M-TN-CAND-WILSON-LOW > 0.75. B2 M-FA-CAND <= 0.10 AND M-FA-CAND-WILSON-UP < 0.1525. B3 M-UNKNOWN-PRECISION-CAND >= 0.85. B4 M-ECE-GLOBAL-CAND <= 0.15 AND M-ECE-FRESH-CAND <= 0.15 AND M-ECE-STALE-CAND <= 0.15 AND M-ECE-BOOTSTRAP-UP-CAND <= 0.18. B5 M-FA-INCUMBENT-D1V - M-FA-CAND-D1V >= 0.10 AND its site-clustered bootstrap 97.5 percent lower bound > 0. B6 at least 3 of 4 ablations decision-distinct, each with differing-decision count >= 5 and a site-clustered 97.5 percent lower bound of the paired false-accept difference > 0. ACCEPT reached => status COMPLETE, outcome SUPPORTS, bounded by the claim-ceiling rules CC-01..CC-04. STAGE 3 FALSIFIERS, evaluated in order, only when adequacy met: F1 not-B1 => FALSIFIES, claim C-FRESHNESS REJECTED is NOT emitted; the Director records the bounded negative and the ceiling. F2 not-B2 => FALSIFIES. F3 not-B3 => FALSIFIES. F4 not-B4 => FALSIFIES on calibration only; detection may survive and the packet must say so. F5 not-B5 or not-B6 => MIXED, bounded negative about channel NECESSITY, explicitly not a falsification of C-FRESHNESS. F6 M-VALUE-COLLISION-PREV > 0.10 with Wilson lower > 0.05 => MIXED, ceiling finding. F7 the Director's falsifier (b) => MIXED, economic inadmissibility. F8 the Director's falsifier (a) => COMPLETE, outcome MIXED, branch VALID_POSITIVE_SCOPE_FINDING, with an exact 97.5 percent upper bound on the construct's prevalence over the frozen 48-origin pool, and C-FRESHNESS neither advanced nor lowered. PART (iv) is a REPORTED OUTPUT, not a gate: M-UBREAK-EVEN-COMBined and M-ADMISSION-REGION are computed from measured R_requests, R_tokens, M-FA-CAND and M-UNKNOWN-RATE-CAND in both units, and the admissibility verdict text is derived from them. FALSIFIER (b) F7 is evaluated against them.",
+ "product_consequence_positive": "If the ACCEPT branch is reached, then bounded by CC-01..CC-04: SPIDER may ship a freshness guard whose unit of work is a response-bound revalidation of a recorded value, scoped EXPLICITLY to server-minted, server-rendered, credential-free, no-JavaScript action-gating state, and scoped to the measured admission region (items whose measured hop depth R_requests exceeds 1); outside that region the product answer is re-derivation, not guarding. C-FRESHNESS may advance from HYPOTHESIS to at most EXPERIMENTAL, and only with the ceiling that the drift families were NOT injected, were server-minted and server-rendered, and were observed on a frozen 48-origin pool rather than held out. The product must prefer UNKNOWN over unsafe inheritance: the guard's abstain rate and precision are the shipped parameters, not its accuracy. C-DELTA-REPAIR's preregistered prerequisite becomes answerable in a bounded real-substrate form but is NOT satisfied by this packet and no C-DELTA-REPAIR event may be emitted. No promotion of any mechanism into Product Core is authorized by this packet; this is the graph lane and the packet measures a capability, it does not integrate one.",
+ "product_consequence_negative": "Four distinct negative consequences, each pre-committed. (1) F1/F2/F3: C-FRESHNESS's response-derived guard does not reach a usable operating point on real credential-free server-rendered state. Consequence: SPIDER must NOT ship a freshness gate for this class; reuse of session-scoped values must be treated as unsafe by default, and the product answer becomes re-derivation plus response caching. Bounded: this does not close the C-FRESHNESS domain, because client-side, XHR-minted and authenticated state are untested here and remain open. (2) F4: detection may survive while calibrated abstention does not. Consequence: the capability may ship as an uncalibrated hard gate or not at all; it may NOT ship as a calibrated signal. (3) F5: the two added channels do not earn their keep. Consequence: ship the cheaper incumbent value-blind guard and delete the added channels from the architecture; this is an architecture simplification decided by measurement, and it is a real product saving. (4) F6: the value-collision cell is common. Consequence: even a false-accept-0 guard is architecturally exposed, the product defaults to re-derivation plus response caching, and replay-by-assumption is explicitly NOT licensed. F7 (the Director's falsifier (b)): re-acquisition is cheaper than the guard in both units at every measured reuse count. Consequence: C-FRESHNESS's capability ships as a MEASUREMENT-ONLY SIGNAL WITH NO ECONOMIC ROLE, per the mandate, and the product does not pay for guarding at all. F8 (the Director's falsifier (a), a VALID POSITIVE FINDING): the credential-free public Web yields fewer than four origins with measurable session-scoped action-gating state. Consequence: SPIDER's PUBLIC product must be scoped to WITHIN-EPISODE reuse unless credentials are assumed, and that scope decision is the single most consequential product statement this packet can produce. F9: no product change of any kind is authorized; standing state is that nothing was promoted and replay-by-assumption is not authorized.",
+ "estimated_cost": "Under 0.3 compute-hours and under USD 1 of paid compute. No model calls, no browser, no Docker, no credentials. Request budget: 36 anchor requests (9 anchors x 4 sessions), up to 576 candidate requests (48 hosts x 4 sessions x up to 3 URLs), up to 24 warm-jar diagnostic requests and 24 conditional-validator requests on admitted hosts, against a frozen global cap of 2500 and a per-host cap of 40. Wall clock is dominated by the >= 2.0 s per-host pacing: about 24 s per host, roughly 3 minutes with 8 workers. Raw evidence is on the order of 100-300 MB of HTML, held under /tmp during the run and reduced to compact per-record JSONL plus per-line sha256 before anything is committed. One optional build-time dependency: pip install tiktoken for the cl100k_base cost accounting, disclosed in provenance.json exactly as EXP-FRONTIER-36306528608 disclosed it, with the frozen fallback that its absence degrades only the cost arm. A stdlib PAVA implementation is used for isotonic calibration so that no second dependency is needed.",
+ "expected_information_gain": "High, and unusually well-targeted for this factory because it uses the one substrate class that has repeatedly produced valid decision-changing measurement and because every prior C-FRESHNESS attempt failed on substrate or instrument rather than on science. Four decision-relevant outputs. (a) MEASURED PREVALENCE of session-scoped action-gating state on real credential-free public origins, per site and pooled with site-clustered intervals, which nothing in the Codex has: the only existing datum is Frontier's 2-target observation that server-minted CSRF tokens are non-stationary at session timescale. This number decides whether SPIDER's public product has any cross-episode substrate at all. (b) A REAL operating point, because no drift is injected, so the false-accept bound is earned rather than assumed -- and the arm that matters is the calibrated one, since the uncalibrated map will be reported alongside it and the packet is pre-committed to saying which, if either, is the real result. (c) The necessity test for the two added channels, which is the one part of the parent handoff that was completely unmeasured and is the only part of the whole design that cannot be produced by prevalence; if the incumbent is not blind, SPIDER's guard architecture gets simpler and cheaper, which is a real product decision in the opposite direction from the one the mandate anticipated. (d) A MEASURED break-even abstention rate in two real units with a per-item admission region, replacing an abstract-unit cost model that the portfolio has already shown can be analytically forced to contain zero discriminating data. The Director's own falsifiers (a), (b) and (c) are all reachable, and (a) is explicitly preregistered as a VALID POSITIVE FINDING, so the packet cannot fail into a wasted cycle. Marginal information over pre-2.0 is not marginal: this is a different substrate, a different level of description (real, un-injected, screen-calibrated), and a different target (a real prevalence and a real cost) from all three prior C-FRESHNESS packets. It cannot be obtained by continuing the parent thread, which the Director explicitly superseded.",
+ "frozen_arithmetic_certificate": {
+  "method": "Wilson score interval, z = 1.96, 95 percent, computed on raw integer counts. Site-clustered percentile bootstrap, B = 10000, seed 36314193643.",
+  "purpose": "Discharges the Director's falsifier (c) and V02: the accept branch is demonstrated arithmetically reachable at the declared floors BEFORE freeze, so this packet cannot repeat the EXP-PHYSICS-36287170603 defect of an unreachable accept branch.",
+  "declared_floors": {
+   "n_admitted_sites": 4,
+   "n_stale": 45,
+   "n_fresh": 60,
+   "n_stale_D1V": 30,
+   "n_scored_trials": 60,
+   "min_confidence_levels": 3,
+   "min_n_per_level": 20,
+   "ablation_min_differing_decisions": 5,
+   "paired_diff_min_lower_bound": 0.1
+  },
+  "admissible_counts_at_floors": {
+   "FA_gate_on_n_stale_45": {
+    "admissible_false_accept_counts": "0..2",
+    "max_admissible_false_accept_rate": 0.0444,
+    "admissible_value_count": 3,
+    "note": "3 admissible values at the floor. V17 degeneracy bands for this gate, recomputed at freeze: n_stale <= 20 is UNSATISFIABLE (zero admissible values); 22 <= n_stale <= 33 admits exactly ONE value (FA = 0) and is declared degenerate; n_stale >= 34 is non-degenerate (admits {0,1}). A run landing in a degenerate or unsatisfiable band takes the DATA_INSUFFICIENT-DEGENERATION branch, never a pass."
+   },
+   "TN_gate_on_n_fresh_60": {
+    "admissible_true_negative_counts": "52..60",
+    "min_admissible_true_negative_rate": 0.8667,
+    "admissible_value_count": 9
+   },
+   "blindness_gate_on_n_D1V_30": {
+    "admissible_incumbent_false_accept_counts_for_BLIND": "30..30",
+    "wilson_lower_requirement": 0.85,
+    "admissible_value_count_for_BLIND": 1,
+    "thinness_declaration": "THIN BY CONSTRUCTION AND DECLARED SO. The point requirement FA >= 0.95 plus a Wilson lower above 0.90 is UNSATISFIABLE at n_D1V = 30 (the Wilson lower at 30/30 is 0.8865); satisfying it would require n_D1V >= 35, i.e. at least 12 of 15 admitted items in family D1V, which the packet does not control. The Wilson lower requirement is therefore frozen at 0.85, which at n_D1V = 30 admits exactly one value, 30/30. A 30/30 observation is consistent with a true incumbent false-accept as low as 0.8865, and the report must say so. This component is a SUPPORTING criterion and is declared knife-edge; the LOAD-BEARING part of B5 is the site-clustered paired contrast M-PAIRED-FA-DIFF-D1V, which is not knife-edge. If n_D1V < 30 the blindness component is reported but B5 is decided on the clustered paired contrast alone, with the thinness disclosed in validity_notes."
+   },
+   "confidence_level_realization": {
+    "required_scored_trials": 60,
+    "reason": "3 levels at n >= 20 each"
+   },
+   "unknown_precision_gate_on_n_fresh_60": {
+    "admissible": "any value; M-UNKNOWN-PRECISION-CAND >= 0.85 with a minimum of TEN abstentions required for a Wilson lower bound to exceed 0.72; if fewer than 10 abstentions occur the abstention arm is DATA_INSUFFICIENT-ABSTENTION and B3 is not read",
+    "correction_note": "The earlier draft of this certificate required EIGHT abstentions. That is arithmetically wrong: at n = 8 no integer count satisfies precision >= 0.85 with a Wilson lower above 0.72, so the gate was unsatisfiable and would have driven a guaranteed DATA_INSUFFICIENT-ABSTENTION. Ten is the smallest admissible count. At the floor the admissible set is {10/10}; a 10/10 result is consistent with a true precision as low as 0.7225 and the report must say so. At n = 20 the admissible set widens to {19,20}."
+   },
+   "anchor_power_contrast_across_all_nine_anchors": {
+    "metric": "M-ANCHOR-POWER-FISHER-P",
+    "definition": "Two-sided Fisher exact test on the abstention contrast between positive-anchor trials that pass G0.2 and all negative-anchor trials, i.e. the 2x2 table [abstain, reuse] x [positive anchor, negative anchor].",
+    "requirement": "p < 0.05",
+    "satisfiability_at_the_G0_2_floor": {
+     "passing_positive_anchor_trials": "6 (2 anchors x 3 current sessions)",
+     "negative_anchor_trials": "12 (4 anchors x 3)",
+     "fisher_two_sided_p": 5.4e-05
+    },
+    "satisfiability_at_the_expected_case": {
+     "passing_positive_anchor_trials": "10 (2 anchors x 5 trials)",
+     "negative_anchor_trials": "20",
+     "fisher_two_sided_p": "< 1e-6"
+    },
+    "null_case": {
+     "positive_anchor_trials": "0 of 10 abstain",
+     "fisher_two_sided_p": 1.0
+    },
+    "correction_note": "The earlier draft gated G0.2 and PC-CANDIDATE-SENSITIVITY on a per-anchor false-accept of 0.0 with a Wilson upper bound below 0.1525. That is UNSATISFIABLE at any per-anchor n available here: the bound needs n >= 22 trials on a single anchor, and only 3 to 5 are affordable. The gate has been replaced by this two-sided pooled contrast over all nine anchors, which is satisfiable at the floor, is exactly 1.0 under a non-firing screen, and is therefore genuinely discriminative at the n actually available. No per-anchor upper-bound claim is made or implied."
+   },
+   "F8_clopper_pearson_975_upper_on_admitted_hosts_of_48": {
+    "k_admitted": 8,
+    "upper": 0.3022,
+    "note": "Exact 97.5 percent Clopper-Pearson upper bound solved as P(X <= k | u) = 0.025, reported as M-PREV-ITEM-ADMITTED-UP97. This is the instrument that makes F8 informative: observing ZERO admitted hosts of 48 already bounds the per-host admission probability above at 0.074, which is a product decision, not a shrug."
+   },
+   "null_control_body_churn": {
+    "admissible_false_accept_counts_at_n_D3_20": "0..1",
+    "requirement": "M-FA-CAND on family D3 <= 0.15 with a Wilson upper bound below 0.30, and M-ABSTAIN-RATE-D3 <= 0.30 with a Wilson upper bound below 0.45",
+    "admissible_value_count_for_the_false_accept_component": 2,
+    "n_D3_floor": 20,
+    "if_n_D3_below_20": "the churn control is reported as unknown and triggers the CC-05 disclosure; it is NOT a fail",
+    "correction_note": "The earlier draft required FA <= 0.10 with a Wilson upper below 0.1525 on D3. At n_D3 = 20 that admits no integer count at all (the 0.1525 bound needs n >= 22) and at n_D3 = 30 it admits only 0, so the control was unsatisfiable or knife-edge. The bound is relaxed to 0.30 against a 0.15 rate, which is admissible from n = 18 upward and admits two values at the declared floor."
+   }
+  },
+  "accept_branch_reachability": "PROVEN, REVISED. Configuration: 4 admitted sites, 15 session-scoped items (>= 10 of them in D1V), 20 session-invariant items, 3 current sessions per item. n_stale = 45, n_fresh = 60, n_D1V = 30, n_scored = 105 >= 60, realized item-level prevalence 15/35 = 0.4286 >= 0.20. Working point: FA = 2/45 = 0.0444 with Wilson upper 0.1483 < 0.1525; TN = 52/60 = 0.8667 with Wilson lower 0.8641 > 0.75; incumbent FA on D1V = 30/30 = 1.0 with Wilson lower 0.8865 > 0.85; unknown precision 20/20 = 1.0 with Wilson lower 0.8387 > 0.72; churn FA 1/20 = 0.05 with Wilson upper 0.2361 < 0.30; anchor power Fisher p = 5.4e-05 < 0.05. Every accept condition is simultaneously satisfiable at the declared floors. The first draft of this certificate asserted a blindness admissible set of 28..30 at n_D1V = 30, which is empty under the then-current Wilson lower of 0.90; that error would have made the accept branch unreachable and forced a guaranteed F9 terminal MEASUREMENT_INVALID. It is corrected here, and V02 is discharged on the corrected values.",
+  "site_cluster_bootstrap_adequacy": "With 4 admitted sites the site-clustered percentile bootstrap resamples 4 units; this is the frozen minimum and is declared THIN in every report. With 6 or more admitted sites it is unremarkable. The 3-of-1 fallback is explicitly not used: a 3-site pool would make the clustered bootstrap degenerate, which is why the admitted-site floor is 4 and not 3."
+ },
+ "frozen_populations": {
+  "sessions": {
+   "K_total": 4,
+   "recorded_session": "S1",
+   "current_sessions": [
+    "S2",
+    "S3",
+    "S4"
+   ],
+   "trials_per_item": 3,
+   "mandate_minimum_K": 3,
+   "note": "K_total = 4 satisfies the mandate's K >= 3 and yields 3 independent current-session trials per item."
+  },
+  "agsi_definition": "An ACTION-GATING STATE ITEM (AGSI) is a (host, path, name) triple whose value is (a) the value of an <input>, <textarea> or <select> belonging to a <form> whose method is not GET; or (b) the content of a <meta> element whose name is in the frozen capability-token name list; or (c) a Set-Cookie value set by the origin that is referenced in (i) the query string of any non-GET form action on the host, (ii) any <meta> or <input> on a host page reachable by GET, or (iii) any Location header inside the session's redirect chain. Gating is STRUCTURAL, never behavioural, because write verbs are forbidden (V16).",
+  "frozen_token_name_list": [
+   "authenticity_token",
+   "authenticityToken",
+   "csrfmiddlewaretoken",
+   "_csrf",
+   "csrf_token",
+   "csrf-token",
+   "__RequestVerificationToken",
+   "__VIEWSTATE",
+   "__EVENTVALIDATION",
+   "wpEditToken",
+   "wpCreateaccountToken",
+   "wpCancelToken",
+   "form_token",
+   "__FORM_TOKEN",
+   "auth_token",
+   "os_authkey",
+   "bbl_",
+   "requesttoken",
+   "state",
+   "code",
+   "nonce",
+   "otp",
+   "user_token",
+   "session_token",
+   "authenticity"
+  ],
+  "session_scoped_qualification": "An AGSI qualifies as SESSION-SCOPED iff, over the sessions in which its URL returned HTTP 200 (at least 3 of the 4 required), n_distinct_exact_values >= 2 AND n_distinct_body_sha256 >= 2. This is the mandate's exact criterion. Its weakness is measured, not hidden: NC-BODY-CHURN reports the rate at which the body hash varies while the value does not, and NC-TIME-VS-SESSION reports the warm-jar variation rate that separates session-scale from time-scale rotation.",
+  "admission": "A host is ADMITTED iff it produced at least 1 AGSI that qualifies SESSION-SCOPED and was not BLOCKED or unreachable in any session.",
+  "drift_families_frozen_assignment": {
+   "D1V_value_rotation": "the AGSI's exact value varies across fresh sessions while its field name, field type, form action, form method and input-name set are unchanged AND the host carried no transport validator in any session. This is the family the structural argument predicts the incumbent cannot see.",
+   "D1T_validator_rotation": "the AGSI's value varies AND the host carried a transport validator whose value also varied. Separate from D1V precisely so that the blindness test is not contaminated by an accidental validator change.",
+   "D2_handle_rotation": "the AGSI is Set-Cookie-derived (c) and its value varies across fresh sessions.",
+   "D3_churn": "the AGSI's value is invariant across fresh sessions while the host page's body hash varies. This is the benign-churn family and the NC-BODY-CHURN population.",
+   "D4_route_change": "the AGSI's form action, method or input-name set changed between sessions, irrespective of value.",
+   "labelling_disclosure": "Family labels are assigned by a FROZEN deterministic rule over observed response features, and D1V additionally uses a frozen capability-token name list. That name list is a string-shape matcher, not a mechanism, and family labels are stratifications for reporting only. The guard never sees a family label. Any claim that depends on family labels inherits that limitation."
+  },
+  "ground_truth": "For a trial (item i, current session S_t): recorded_value = the exact value observed in S1, live_value = the exact value observed in S_t. label = STALE iff live_value != recorded_value (byte-exact), FRESH iff live_value == recorded_value. The label is therefore a RAW OBSERVATION with no interpretation and no injected ground truth. Session-scoped qualification is recorded as a separate property and is never used to define the label. Any trial whose label disagrees with its family's expectation is retained and reported, not dropped."
+ },
+ "frozen_guard": {
+  "input_contract": {
+   "value_blind_channels": [
+    "CH-STRUCT-SIG",
+    "CH-TRANSPORT-VALIDATOR",
+    "CH-POSTCOND-SEM"
+   ],
+   "value_aware_channel": "CH-PRECOND-BINDING",
+   "leakage_device": "V07/NC-NO-LEAKAGE: the recorded value and the label are routed into a separate dict and only ch_precond receives them. Per-trial attestation that ch_struct, ch_validator and ch_postcond input dicts contain no key from the frozen forbidden set {recorded_value, recorded_value_sha256, label, is_stale, is_fresh, family, site, admitted}.",
+   "guard_never_receives": [
+    "label",
+    "family",
+    "site",
+    "trial index",
+    "any posterior over staleness"
+   ]
+  },
+  "channels": {
+   "CH-STRUCT-SIG": "Fires iff the multiset of (field_name, type_class) over the page's form/input/meta field set differs between the recorded and the live session. Value-blind. type_class in {text, hidden, password, checkbox, radio, select, textarea, submit, meta, cookie, header, unknown}.",
+   "CH-TRANSPORT-VALIDATOR": "Fires iff etag_live != etag_recorded, OR last_modified_live != last_modified_recorded, OR max_age_live != max_age_recorded, OR vary_live != vary_recorded, OR (max_age_live == 0 and max_age_recorded != 0). If neither session carried any of ETag, Last-Modified or Cache-Control the channel is INACTIVE, which is recorded per item and never counted as passing.",
+   "CH-PRECOND-BINDING": "The only value-aware channel. Its declared predicate is frozen by a name-shape rule: P-SESSION-MINTED if the item's name is in the frozen token-name list or the item is Set-Cookie-derived, else P-INHERITABLE. If no recorded value exists for the item the channel is INACTIVE-UNKNOWN and forces abstention. If P-SESSION-MINTED: fires iff live_value != recorded_value. If P-INHERITABLE: fires iff live_value != recorded_value. Structural disclosure: for P-SESSION-MINTED items this channel is a byte-equality revalidation of the recorded binding, not an inference about validity; that is a claim-ceiling matter (CC-03), not a hidden assumption.",
+   "CH-POSTCOND-SEM": "Fires iff the form that accepts the item is ABSENT from the live page, or its (normalized action, method, input-name set) differs from the recorded session. Value-blind. Normalization replaces numeric and hex segments in path components with a placeholder and lowercases the host."
+  },
+  "decision_rule_frozen": "Let k = number of INACTIVE-UNKNOWN channels, a = number of active channels that fire, m = number of active channels. If k >= 1 => UNKNOWN. Else if a == 0 => REUSE, situation 0, raw confidence 0.50. Else if a == 1 and the firing channel is CH-STRUCT-SIG or CH-TRANSPORT-VALIDATOR => REUSE, situation 1, raw confidence 0.65. Else if a == 1 and the firing channel is CH-POSTCOND-SEM => ABSTAIN, situation 2, raw confidence 0.75. Else if a == 1 and the firing channel is CH-PRECOND-BINDING => ABSTAIN, situation 3, raw confidence 0.80. Else (a >= 2) => ABSTAIN, situation 4, raw confidence 0.90. No parameter is fitted to outcomes. The raw confidence is a frozen, parameter-free, monotone map on evidential strength; it is reported as M-ECE-RAW-GLOBAL and never satisfies a gate.",
+  "calibration": "Calibrated confidence = leave-one-site-out isotonic regression (stdlib PAVA) mapping raw confidence to observed correctness of the REUSE/ABSTAIN decision, fitted on the other admitted sites, applied out-of-fold to the held-out site, pooled. ECE primary uses equal-mass bins over the realized levels; the 10-equal-width-bins version is auxiliary. UNKNOWN trials are excluded from the reuse/abstain accuracy accounting and are evaluated solely by M-UNKNOWN-PRECISION-CAND.",
+  "no_tuning": "Every threshold in this design is either a preregistered gate threshold, a structural name list, or a Wilson/z constant. Nothing is tuned on observed outcomes. Any post-hoc change to any of them makes the affected claim exploratory and it must be reported as such."
+ },
+ "frozen_economics": {
+  "units": [
+   "requests",
+   "cl100k_base tokens"
+  ],
+  "tokenizer": "cl100k_base via tiktoken.get_encoding('cl100k_base'). Frozen fallback: if provisioning fails, G0.1 is false, the cost arm is DATA_INSUFFICIENT-TOKENIZER, and the request-unit economics are still reported.",
+  "c_guard": "The cost of one guard revalidation of an item: 1 GET to the item's own URL, plus the cl100k_base tokens of the FULL response body of that URL, because CH-STRUCT-SIG and CH-POSTCOND-SEM require the whole document. Headers are not tokenized. This is the honest, deliberately conservative accounting: it charges the guard for the whole read it genuinely performs.",
+  "c_reacquire": "The cost of obtaining a fresh valid instance of the same item from a fresh session root by the path the capture pass actually measured: the requests and body tokens of every intermediate hop from the root to the item's URL, PLUS the cl100k_base tokens of the response-body PREFIX of the item's own URL up to and including the item's serialized occurrence, because a re-deriver needs only that prefix. Both components are measured from the recorded raw evidence, never modelled.",
+  "R": "R_requests = c_reacquire_requests / c_guard_requests, which is exactly the measured hop depth of the item's URL (0 intermediate hops gives 1). R_tokens = c_reacquire_tokens / c_guard_tokens, which is at most 1 whenever the prefix is shorter than the full body, and exceeds 1 only when the intermediate hops carry more tokens than the prefix saves.",
+  "decision_derivation": "Per decision, in guard-cost units: no-guard-replay costs 0 and is correct on FRESH trials; guard costs 1 and costs an additional R whenever it abstains or false-accepts. Guard is admissible against always-re-deriving (cost R) iff 1 + (M-FA-CAND + M-UNKNOWN-RATE-CAND) * R < R, i.e. iff M-FA-CAND + M-UNKNOWN-RATE-CAND < (R-1)/R. Therefore M-UBREAK-EVEN-COMBINED := (R-1)/R and M-UBREAK-EVEN-ABSTAIN := (R-1)/R - M-FA-CAND. Both are computed in the request unit and in the token unit, pooled and per site.",
+  "reuse_count_sweep": "m in {1,2,4,8,16}. Frozen finding, asserted in advance and then tested: on this substrate R(m) is invariant in m, because both the guard's revalidation and the re-acquisition are amortised once per session by memoising their verdict, and the quantity that would break the invariance -- within-session re-minting of the item, which would force one revalidation per use -- is itself measured (M-INTRASESSION-MINT-RATE) from 2 extra same-session re-reads per admitted item. The packet therefore reports M-UBREAK-EVEN-ABSTAIN at every m and states, with evidence, whether the invariance is empirical or assumed. This discharges the Director's falsifier (b) on a measured quantity rather than on a modelled sweep.",
+  "explicit_non_measurement": "c_recover, the cost of DISCOVERING that a replayed value has failed, is NOT measured, because discovering it requires issuing the write. The packet therefore does NOT decide replay-versus-re-derive globally and says so. It decides the guard's own measured break-even abstention rate and its per-item admission region, which is what the Director asked for."
+ },
+ "host_pool": {
+  "candidate_pool_size": 48,
+  "candidate_pool_frozen": [
+   "https://gitlab.freedesktop.org/",
+   "https://gitlab.gnome.org/",
+   "https://gitlab.alpinelinux.org/",
+   "https://gitlab.xfce.org/",
+   "https://invent.kde.org/",
+   "https://gitlab.inria.fr/",
+   "https://code.videolan.org/",
+   "https://gitlab.kitware.com/",
+   "https://trac.ffmpeg.org/",
+   "https://trac.edgewall.org/",
+   "https://bugs.launchpad.net/",
+   "https://bugs.debian.org/",
+   "https://bugzilla.mozilla.org/",
+   "https://bugs.kde.org/",
+   "https://community.raspberrypi.org/",
+   "https://forums.linuxmint.com/",
+   "https://forum.archlinux.org/",
+   "https://ubuntuforums.org/",
+   "https://phpbb.com/",
+   "https://www.linuxquestions.org/",
+   "https://meta.discourse.org/",
+   "https://discuss.python.org/",
+   "https://meta.fedoraproject.org/",
+   "https://forum.manjaro.org/",
+   "https://wiki.archlinux.org/",
+   "https://wiki.ubuntu.com/",
+   "https://wiki.debian.org/",
+   "https://www.mediawiki.org/",
+   "https://archlinux.org/",
+   "https://php.watch/",
+   "https://docs.djangoproject.com/",
+   "https://docs.celeryq.dev/",
+   "https://docs.pylonsproject.org/",
+   "https://docs.mitmproxy.org/",
+   "https://docs.scrapy.org/",
+   "https://www.djangoproject.com/",
+   "https://make.wordpress.org/",
+   "https://wordpress.org/",
+   "https://wptavern.com/",
+   "https://local.ghost.org/",
+   "https://codeberg.org/",
+   "https://gitea.com/",
+   "https://git.sr.ht/",
+   "https://gitlab.torproject.org/",
+   "https://owncloud.org/",
+   "https://www.nextcloud.com/",
+   "https://tracker.nginx.org/",
+   "https://jira.apache.org/"
+  ],
+  "strata": {
+   "S1_gitlab_family_rails_authenticity_token": 8,
+   "S2_trac_launchpad_bugzilla_form_token": 6,
+   "S3_phpbb_forum_form_token": 6,
+   "S4_discourse_meta_csrf_token": 4,
+   "S5_mediawiki_edit_and_create_tokens": 6,
+   "S6_django_sphinx_documentation": 6,
+   "S7_wordpress_ghost": 4,
+   "S8_gitea_forgejo_sourcehut": 4,
+   "S9_other_self_hosted": 4
+  },
+  "stratum_rationale": "The strata are declared so that the screen's detection power can be assessed ACROSS token mechanisms rather than on one construct. This is the mitigation for the anchor-overfit threat: if every admitted host comes from a single stratum, the claim ceiling drops to that stratum's construct (CC-01). M-N-STRATA-ADMITTED is a reported metric and a ceiling input.",
+  "pool_immutability": "The pool and its order are frozen. Post-freeze addition, removal or reordering is forbidden except for the V14 disjointness removal, which runs before screening, removes overlapping hosts in frozen list order, and is recorded with the removed hosts and the resulting per-stratum counts. If a stratum drops below 2 remaining hosts, M-STRATUM-IMBALANCE is set and a validity note is emitted; hosts are never added to restore balance.",
+  "disjointness": {
+   "static_exclusion_union": "The union of every host appearing anywhere in accepted Codex evidence for lanes frontier, physics, intel, graph, runtime and product. Frontier: about.gitlab.com api.chucknorris.io api.github.com api.ipify.org api.publicapis.org auth.wikimedia.org bitbucket.org catfact.ninja developer.mozilla.org doc.rust-lang.org docs.python.org dog.ceo en.wikipedia.org example.com github.com gitlab.com go.dev httpbin.org jsonplaceholder.typicode.com postman-echo.com pypi.org reqres.in www.postman.com zenquotes.io. Physics: developer.mozilla.org docs.python.org en.wikipedia.org github.com spa.local spa.test todomvc.com webshop.local. Intel: apache.org arxiv.org bitbucket.org crates.io developer.mozilla.org docs.python.org en.wikipedia.org ghcr.io git-scm.com github.com gitlab.com hub.docker.com huggingface.co kernel.org linuxfoundation.org news.ycombinator.com pypi.org raw.githubusercontent.com readthedocs.io rubygems.org sourceforge.net stackoverflow.com www.gnu.org www.npmjs.org. Graph: api.github.com github.com httpbin.org jsonplaceholder.typicode.com raw.githubusercontent.com. Product: example.com jsonplaceholder.typicode.com github.com.",
+   "dynamic_check": "Before screening, read the frontier and physics request.json / prereg.md candidate lists for cycle 36313602258 if they exist in the working tree; any host in this pool that appears there is removed in frozen list order and recorded. If those files are absent, M-POOL-DISJOINT-DYNAMIC-VERIFIED is false, recorded, and the static exclusion union stands as the enforced bound.",
+   "floor": "After removal the pool must retain at least 24 hosts or G0.5 fails terminally."
+  },
+  "calibration_anchors_declared_as_instrument": {
+   "positive": [
+    {
+     "id": "CAL-POS-1",
+     "url": "https://gitlab.com/-/trial_registrations/new/",
+     "expected_behaviour": "server-minted authenticity_token whose exact value varies across independent fresh sessions",
+     "evidence_class": "SPIDER_CORROBORATED",
+     "evidence_ref": "codex/experiments/EXP-FRONTIER-36306528608/result.json metrics.server_minted_csrf_tokens_stable_across_independent_sessions.per_target['https://gitlab.com/-/trial_registrations/new/'] n_distinct_values 3 of 3 sessions"
+    },
+    {
+     "id": "CAL-POS-2",
+     "url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount",
+     "expected_behaviour": "server-minted wpCreateaccountToken whose exact value varies across independent fresh sessions",
+     "evidence_class": "SPIDER_CORROBORATED",
+     "evidence_ref": "codex/experiments/EXP-FRONTIER-36306528608/result.json same metric, n_distinct_values 3 of 3 sessions"
+    },
+    {
+     "id": "CAL-POS-3",
+     "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&action=form",
+     "expected_behaviour": "a server-minted capability token field (wpEditToken family) that varies across independent fresh sessions",
+     "evidence_class": "SPIDER_PARTIAL",
+     "evidence_ref": "codex/experiments/EXP-FRONTIER-36306528608/result.json detected wpEditToken among the 4 csrf_token-gated objects on en.wikipedia.org; distinctness across sessions NOT verified by that packet",
+     "disclosure": "This anchor's variation is asserted, not corroborated. If it is the only anchor whose distinctness was never observed, its pass is weak evidence and M-CAL-POS-SENSITIVITY is reported as a count over SPIDER_CORROBORATED anchors separately."
+    },
+    {
+     "id": "CAL-POS-4",
+     "url": "https://meta.discourse.org/",
+     "expected_behaviour": "a <meta name=\"csrf-token\"> value that varies across independent fresh sessions",
+     "evidence_class": "A_PRIORI_CONSTRUCT",
+     "disclosure": "Asserted from general knowledge of the Discourse construct. Not SPIDER evidence. Contributes to the majority threshold but cannot alone establish the screen's sensitivity."
+    },
+    {
+     "id": "CAL-POS-5",
+     "url": "https://bugs.launchpad.net/ubuntu/+reportbug",
+     "expected_behaviour": "a server-minted form auth_token value that varies across independent fresh sessions",
+     "evidence_class": "A_PRIORI_CONSTRUCT",
+     "disclosure": "Asserted from general knowledge of the Launchpad construct. Not SPIDER evidence."
+    }
+   ],
+   "negative": [
+    {
+     "id": "CAL-NEG-1",
+     "url": "https://www.iana.org/domains/reserved",
+     "expected_behaviour": "reachable, credential-free, HTTP 200 across all four fresh sessions, and containing no AGSI that qualifies as session-scoped; the page is a static registry with no non-GET form",
+     "evidence_class": "A_PRIORI_CONSTRUCT",
+     "informative_rejection_expected": false,
+     "informative_rejection_note": "Rejection is expected to be vacuous (reason NO_AGSI_DETECTED). It tests that the screen does not admit a trivially static page; it does not test the harder case."
+    },
+    {
+     "id": "CAL-NEG-2",
+     "url": "https://cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst",
+     "expected_behaviour": "reachable, credential-free, HTTP 200, content-pinned and byte-stable across fresh sessions, no non-GET form",
+     "evidence_class": "A_PRIORI_CONSTRUCT",
+     "informative_rejection_expected": false,
+     "informative_rejection_note": "Chosen deliberately instead of raw.githubusercontent.com, which is in the static exclusion union."
+    },
+    {
+     "id": "CAL-NEG-3",
+     "url": "https://www.debian.org/",
+     "expected_behaviour": "reachable, credential-free, HTTP 200, with a GET search form and no non-GET form carrying a session-scoped token",
+     "evidence_class": "A_PRIORI_CONSTRUCT",
+     "informative_rejection_expected": false
+    },
+    {
+     "id": "CAL-NEG-4",
+     "url": "https://httpbin.org/forms/post",
+     "expected_behaviour": "reachable, credential-free, HTTP 200, with a genuine non-GET form that carries NO capability token, so the screen must reject it on the session-scoping criterion rather than on the absence of a form",
+     "evidence_class": "SPIDER_CORROBORATED",
+     "evidence_ref": "codex/experiments/EXP-FRONTIER-36306528608/result.json metrics.screen_criterion_pass_counts C3 nonget_form_with_token_named_input = 2 of 15, and https://httpbin.org/forms/post produced 0 action-gating objects",
+     "informative_rejection_expected": true,
+     "host_union_disclosure": "httpbin.org appears in the frontier and graph historical host union. It is used here as declared INSTRUMENT, is excluded from the candidate pool, and the historical collision is disclosed rather than hidden. The capture protocol differs from Frontier's (single anchor AGSI qualification, 4 sessions) and the host is static, so the collision risk is negligible."
+    }
+   ],
+   "specificity_reporting": "M-CAL-NEG-REJECTED must be 4 of 4. Reported alongside M-CAL-NEG-INFORMATIVE-REJECTIONS, the number rejected specifically because a detected AGSI failed the session-scoping criterion rather than because no AGSI existed. If M-CAL-NEG-INFORMATIVE-REJECTIONS is 0, the packet states that specificity against a session-invariant action-gating construct is NOT estimated, and claim ceiling CC-05 applies."
+  }
+ },
+ "metric_registry": {
+  "prevalence_part_i": [
+   {
+    "id": "M-PREV-ITEM-POOL",
+    "definition": "session-scoped qualifying AGSIs / all AGSIs detected, over every reachable candidate host that produced >= 1 AGSI",
+    "unit": "fraction",
+    "interval": "site-clustered percentile bootstrap 97.5% CI; Clopper-Pearson on item counts as a DIAGNOSTIC only"
+   },
+   {
+    "id": "M-PREV-ITEM-ADMITTED",
+    "definition": "same ratio restricted to admitted hosts",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PREV-ITEM-PERSITE",
+    "definition": "per-host ratio",
+    "unit": "fraction per host"
+   },
+   {
+    "id": "M-PREV-ITEM-ADMITTED-UP97",
+    "definition": "exact 97.5% Clopper-Pearson upper bound used in falsifier (a)",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-N-CAND",
+    "definition": "hosts in the frozen pool after the V14 removal step",
+    "unit": "hosts"
+   },
+   {
+    "id": "M-N-REACHABLE",
+    "definition": "hosts returning HTTP 200 on the root GET in at least 3 of 4 sessions",
+    "unit": "hosts"
+   },
+   {
+    "id": "M-N-BLOCKED",
+    "definition": "hosts returning a bot-challenge status; excluded from the scored population, never counted as a negative",
+    "unit": "hosts"
+   },
+   {
+    "id": "M-N-ADMITTED",
+    "definition": "hosts with >= 1 session-scoped qualifying AGSI",
+    "unit": "hosts"
+   },
+   {
+    "id": "M-N-STRATA-ADMITTED",
+    "definition": "admitted hosts per frozen stratum S1..S9",
+    "unit": "hosts per stratum"
+   }
+  ],
+  "operating_point_part_ii": [
+   {
+    "id": "M-TN-CAND",
+    "definition": "P(REUSE | FRESH) for the four-channel candidate",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-CAND",
+    "definition": "P(REUSE | STALE) for the four-channel candidate",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-TN-CAND-WILSON-LOW",
+    "definition": "Wilson lower, z=1.96",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-CAND-WILSON-UP",
+    "definition": "Wilson upper, z=1.96",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-TP-CAND",
+    "definition": "P(ABSTAIN | STALE)",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UNKNOWN-RATE-CAND",
+    "definition": "P(UNKNOWN)",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UNKNOWN-PRECISION-CAND",
+    "definition": "P(STALE | UNKNOWN); requires >= 10 abstentions for a Wilson lower above 0.72, else DATA_INSUFFICIENT-ABSTENTION and B3 is not read. Eight was the earlier draft value and is arithmetically impossible: at n = 8 no integer count gives precision >= 0.85 with a Wilson lower above 0.72.",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ECE-GLOBAL-CAND",
+    "definition": "equal-mass-binned expected calibration error of the LOSO-calibrated confidence over REUSE/ABSTAIN decisions",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ECE-FRESH-CAND",
+    "definition": "per-class ECE over FRESH trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ECE-STALE-CAND",
+    "definition": "per-class ECE over STALE trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ECE-BOOTSTRAP-UP-CAND",
+    "definition": "site-clustered bootstrap 97.5% upper on M-ECE-GLOBAL-CAND, B=10000",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ECE-RAW-GLOBAL",
+    "definition": "ECE of the frozen parameter-free confidence map; DIAGNOSTIC, cannot satisfy B4",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-N-CONFIDENCE-LEVELS",
+    "definition": "realized calibrated confidence levels with n >= 20",
+    "unit": "levels"
+   },
+   {
+    "id": "M-N-DECISIONS",
+    "definition": "distinct decisions realized across the scored population",
+    "unit": "decisions"
+   },
+   {
+    "id": "M-DISTINCT-DECISIONS-A-CH-STRUCT",
+    "definition": "trials where A-CH-STRUCT differs from the full guard",
+    "unit": "trials"
+   },
+   {
+    "id": "M-DISTINCT-DECISIONS-A-CH-PRECOND",
+    "definition": "trials where A-CH-PRECOND differs from the full guard",
+    "unit": "trials"
+   },
+   {
+    "id": "M-DISTINCT-DECISIONS-A-CH-VALIDATOR",
+    "definition": "trials where A-CH-VALIDATOR differs from the full guard",
+    "unit": "trials"
+   },
+   {
+    "id": "M-DISTINCT-DECISIONS-A-CH-POSTCOND",
+    "definition": "trials where A-CH-POSTCOND differs from the full guard",
+    "unit": "trials"
+   },
+   {
+    "id": "M-AB-PAIRED-DIFF-LOW-<CH>",
+    "definition": "site-clustered bootstrap 97.5% lower bound of (M-FA-ablation - M-FA-candidate) for each ablation",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-N-ABLATIONS-STRUCTURALLY-INFORMATIVE",
+    "definition": "ablations whose channel was ever active; the three-of-four count is evaluated over these",
+    "unit": "ablations"
+   }
+  ],
+  "blindness_part_iii": [
+   {
+    "id": "M-FA-INCUMBENT",
+    "definition": "P(REUSE | STALE) for B-INCUMBENT-SIGNAL-ONLY, pooled",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-TN-INCUMBENT",
+    "definition": "P(REUSE | FRESH) for B-INCUMBENT-SIGNAL-ONLY, pooled",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-INCUMBENT-D1V",
+    "definition": "B-INCUMBENT-SIGNAL-ONLY false-accept on family D1V. Blindness requires this >= 0.95 AND its Wilson lower > 0.85. The Wilson lower threshold is 0.85, NOT 0.90: at n_D1V = 30 the Wilson lower at 30/30 is 0.8865, so a 0.90 requirement is unsatisfiable and would make the accept branch unreachable. Declared THIN and knife-edge; the load-bearing part of B5 is M-PAIRED-FA-DIFF-D1V-CL-LOW.",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-INCUMBENT-D1V-WILSON-LOW",
+    "definition": "Wilson lower, z=1.96",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-CAND-D1V",
+    "definition": "candidate false-accept on family D1V",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PAIRED-FA-DIFF-D1V",
+    "definition": "M-FA-INCUMBENT-D1V - M-FA-CAND-D1V",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PAIRED-FA-DIFF-D1V-CL-LOW",
+    "definition": "site-clustered bootstrap 97.5% lower bound of M-PAIRED-FA-DIFF-D1V; load-bearing for B5",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-INCUMBENT-PERSFAMILY",
+    "definition": "incumbent false-accept by family D1V, D1T, D2, D3, D4",
+    "unit": "fraction per family"
+   },
+   {
+    "id": "M-CH-VALIDATOR-ACTIVE-RATE",
+    "definition": "fraction of admitted items on which CH-TRANSPORT-VALIDATOR was active",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-BLINDNESS-COMPONENT-KNIFE-EDGE",
+    "definition": "boolean; true when the blindness component of B5 rests on a single admissible integer count at the realized n_D1V, which is the case for n_D1V <= 33. When true the report must state that a perfect observation is consistent with a true false-accept as low as the reported Wilson lower",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-ANCHOR-POWER-FISHER-P",
+    "definition": "two-sided Fisher exact p on the abstention contrast between positive-anchor trials that pass G0.2 and all negative-anchor trials; 5.4e-05 at the G0.2 floor of 2 anchors x 3 sessions, < 1e-6 at 2 anchors x 5 trials, and exactly 1.0 under a non-firing screen. Required < 0.05. Replaces the unsatisfiable per-anchor Wilson upper < 0.1525 formulation, which needed n >= 22 trials on a single anchor",
+    "unit": "p-value"
+   },
+   {
+    "id": "M-FA-CAND-D3",
+    "definition": "candidate false-accept on family D3, the benign-churn population; bounded by NC-BODY-CHURN",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ABSTAIN-RATE-D3",
+    "definition": "candidate abstention rate on family D3; bounded by NC-BODY-CHURN",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-N-D3",
+    "definition": "trials on family D3 available to NC-BODY-CHURN; the control is not read below 20",
+    "unit": "count"
+   }
+  ],
+  "invisible_cell_and_diagnostics": [
+   {
+    "id": "M-VALUE-COLLISION-PREV",
+    "definition": "admitted AGSIs with n_distinct_exact_values == 1 across the K fresh sessions WHILE the host's other AGSIs rotate, i.e. the measured value-recycling cell",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-VALUE-COLLISION-WILSON-LOW",
+    "definition": "Wilson lower, z=1.96",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-INVISIBLE-STALE-PREV",
+    "definition": "ALWAYS null at EXECUTE. The behavioural invisible cell cannot be measured without write verbs. It is declared null in result.json with a reason, never reported as 0.0 and never used to satisfy a gate.",
+    "unit": "fraction",
+    "explicit_null": true
+   },
+   {
+    "id": "M-WARMJAR-VARIATION-RATE",
+    "definition": "fraction of admitted items whose value varies across warm-jar re-captures in the same window",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-WARMJAR-VALUE-COLLISION-RATE",
+    "definition": "fraction of admitted items invariant under warm-jar re-capture",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-INTRASESSION-MINT-RATE",
+    "definition": "fraction of admitted items whose value changes across 2 extra same-session re-reads; the quantity that would break the m-invariance of R",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PERMUTED-P",
+    "definition": "fraction of 1000 within-site label permutations achieving a false-accept at least as low as observed",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-CAL-POS-SENSITIVITY",
+    "definition": "k of 5 positive anchors passing the frozen screen, with exact Clopper-Pearson interval",
+    "unit": "fraction of anchors"
+   },
+   {
+    "id": "M-CAL-POS-SENSITIVITY-CORROBORATED",
+    "definition": "k of the 2 SPIDER-corroborated positive anchors passing",
+    "unit": "fraction of anchors"
+   },
+   {
+    "id": "M-CAL-POS-FRONTIER-VERIFIED-PASSING",
+    "definition": "boolean; at least one of CAL-POS-1, CAL-POS-2 passed",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-CAL-NEG-REJECTED",
+    "definition": "k of 4 negative anchors rejected",
+    "unit": "fraction of anchors"
+   },
+   {
+    "id": "M-CAL-NEG-INFORMATIVE-REJECTIONS",
+    "definition": "negative anchors rejected specifically on the session-scoping criterion rather than on absence of an AGSI",
+    "unit": "anchors"
+   },
+   {
+    "id": "M-TOKENIZER-PROVISIONED",
+    "definition": "boolean; gates the cost arm only",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-POOL-SIZE",
+    "definition": "hosts remaining after the V14 removal step",
+    "unit": "hosts"
+   },
+   {
+    "id": "M-POOL-DISJOINT-DYNAMIC-VERIFIED",
+    "definition": "boolean; whether the concurrent frontier/physics pools were available to check against",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-DIAGNOSTIC-UNCLUSTERED-*",
+    "definition": "trial-level unclustered intervals; computed only as a diagnostic and flagged DO-NOT-USE for any gate",
+    "unit": "fraction",
+    "do_not_use": true
+   }
+  ],
+  "economics_part_iv": [
+   {
+    "id": "M-COST-GUARD-REQUESTS",
+    "definition": "median and per-site mean of the guard's revalidation cost in requests",
+    "unit": "requests"
+   },
+   {
+    "id": "M-COST-GUARD-TOKENS",
+    "definition": "median and per-site mean of the guard's revalidation cost in cl100k_base tokens (full body)",
+    "unit": "tokens"
+   },
+   {
+    "id": "M-COST-REACQ-REQUESTS",
+    "definition": "median and per-site mean of the measured re-acquisition cost in requests (intermediate hops only)",
+    "unit": "requests"
+   },
+   {
+    "id": "M-COST-REACQ-TOKENS",
+    "definition": "median and per-site mean of the measured re-acquisition cost in cl100k_base tokens (intermediate hops plus body prefix)",
+    "unit": "tokens"
+   },
+   {
+    "id": "M-R-REQUESTS",
+    "definition": "M-COST-REACQ-REQUESTS / M-COST-GUARD-REQUESTS, pooled and per site",
+    "unit": "ratio"
+   },
+   {
+    "id": "M-R-TOKENS",
+    "definition": "M-COST-REACQ-TOKENS / M-COST-GUARD-TOKENS, pooled and per site",
+    "unit": "ratio"
+   },
+   {
+    "id": "M-UBREAK-EVEN-COMBINED-REQUESTS",
+    "definition": "(R_requests - 1) / R_requests",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UBREAK-EVEN-COMBINED-TOKENS",
+    "definition": "(R_tokens - 1) / R_tokens",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UBREAK-EVEN-ABSTAIN-REQUESTS",
+    "definition": "(R_requests - 1)/R_requests - M-FA-CAND",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UBREAK-EVEN-ABSTAIN-TOKENS",
+    "definition": "(R_tokens - 1)/R_tokens - M-FA-CAND",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-UBREAK-EVEN-ABSTAIN-AT-M",
+    "definition": "the same quantities at m in {1,2,4,8,16}; frozen to be m-invariant, tested rather than assumed",
+    "unit": "fraction per m"
+   },
+   {
+    "id": "M-ADMISSION-REGION",
+    "definition": "the per-item set where M-UBREAK-EVEN-ABSTAIN > M-UNKNOWN-RATE-CAND, i.e. where guarding is cheaper than abstaining; reported as a measured predicate over measured items, never as a global verdict",
+    "unit": "predicate over items"
+   },
+   {
+    "id": "M-C-RECOVER",
+    "definition": "ALWAYS null at EXECUTE. Not measurable without write verbs. Declared null with a reason and explicitly excluded from every derivation.",
+    "unit": "requests and tokens",
+    "explicit_null": true
+   }
+  ]
+ },
+ "control_registry": {
+  "note": "These identifiers are frozen here so that EXECUTE, AUDIT and DIRECTOR refer to the exact same objects. AUDIT must reuse them verbatim when recomputing or disputing.",
+  "calibration": [
+   "CAL-POS-1",
+   "CAL-POS-2",
+   "CAL-POS-3",
+   "CAL-POS-4",
+   "CAL-POS-5",
+   "CAL-NEG-1",
+   "CAL-NEG-2",
+   "CAL-NEG-3",
+   "CAL-NEG-4"
+  ],
+  "gates": [
+   "G0.1",
+   "G0.2",
+   "G0.3",
+   "G0.4",
+   "G0.5"
+  ],
+  "adequacy": [
+   "A1",
+   "A2",
+   "A3",
+   "A4",
+   "A5",
+   "A6"
+  ],
+  "accept": [
+   "B1",
+   "B2",
+   "B3",
+   "B4",
+   "B5",
+   "B6"
+  ],
+  "falsifiers": [
+   "F1",
+   "F2",
+   "F3",
+   "F4",
+   "F5",
+   "F6",
+   "F7",
+   "F8",
+   "F9"
+  ],
+  "baselines": [
+   "B-NO-GUARD-REPLAY",
+   "B-INCUMBENT-SIGNAL-ONLY"
+  ],
+  "ablations": [
+   "A-CH-POSTCOND",
+   "A-CH-PRECOND",
+   "A-CH-VALIDATOR",
+   "A-CH-STRUCT"
+  ],
+  "positive_controls": [
+   "PC-CANDIDATE-SENSITIVITY",
+   "PC-INCUMBENT-BLINDNESS"
+  ],
+  "null_controls": [
+   "NC-CAL-NEG-ALL-REJECTED",
+   "NC-BODY-CHURN",
+   "NC-TIME-VS-SESSION",
+   "NC-PERMUTED-LABELS",
+   "NC-SESSION-ISOLATION",
+   "NC-NO-LEAKAGE",
+   "NC-NONDEGENERATE-ESTIMATOR",
+   "NC-ITEM-DEPENDENCE-DISCLOSURE"
+  ],
+  "validity_requirements": [
+   "V01_SCREEN-CALIBRATION-FAIL-CLOSED",
+   "V02-ARITHMETIC-REACHABILITY",
+   "V03-ANCHOR-VERIFICATION-IS-NOT-A-DESIGN-CLAIM",
+   "V04-NO-INJECTED-DRIFT",
+   "V05-SESSION-ISOLATION",
+   "V06-CONDITIONAL-VALIDATOR-ISOLATION",
+   "V07-ANTI-LEAKAGE-EXECUTION",
+   "V08-ESTIMATOR-POWER",
+   "V09-RESAMPLING-UNIT",
+   "V10-SEED-DETERMINISM",
+   "V11-POST-HOC-EDITABILITY",
+   "V12-ABLATION-INFORMATIVENESS",
+   "V13-CALIBRATION-HOLDOUT-BY-SITE",
+   "V14-HOST-POOL-DISJOINTNESS",
+   "V15-NO-ASSERTED-CONTROL-WITHOUT-ARTIFACT",
+   "V16-REPRESENTATION-LOSS-DISCLOSURE",
+   "V17-DEGENERATE-GATE-GUARD",
+   "V18-CODE-IDENTITY-AT-EXECUTE-NOT-AT-FREEZE",
+   "V19-TRANSPORT-AND-ANTIBOT-DISCLOSURE",
+   "V20-TIME-WINDOW-RECORDED",
+   "V21-BLOCKING-AND-NONBLOCKING-DISJOINTNESS"
+  ],
+  "declared_null_metrics": [
+   "M-INVISIBLE-STALE-PREV",
+   "M-C-RECOVER"
+  ]
+ },
+ "claim_ceiling_rules": {
+  "CC-01": "If M-CAL-POS-FRONTIER-VERIFIED-PASSING is false, or every admitted host comes from a single stratum, the ceiling drops to that stratum's construct only: 'detects session-minted capability tokens of the observed mechanism family', not 'detects session-scoped action-gating state'.",
+  "CC-02": "Always and unconditionally: server-minted, server-rendered, no-JavaScript, credential-free, GET-only. Client-side-minted values, XHR/fetch gating, canvas content, and anything behind authentication are untested and remain open. Gating is established structurally and never behaviourally.",
+  "CC-03": "Always and unconditionally: the guard's value-aware channel is a byte-equality revalidation of a recorded binding, not an inference about server-side validity. No result in this packet licenses replay of a recorded value that the guard has not revalidated, and none licenses replay across sessions at all.",
+  "CC-04": "Always and unconditionally: the frozen 48-origin pool is a sample of public origins, not a website holdout and not a random sample of the Web. Prevalence is a measured quantity for this pool and its frozen stratum structure, and must never be quoted as 'the Web'.",
+  "CC-05": "If M-CAL-NEG-INFORMATIVE-REJECTIONS is 0, specificity against a session-invariant action-gating construct is NOT estimated, and no specificity claim may be made.",
+  "CC-06": "M-INVISIBLE-STALE-PREV is null, not 0.0. No statement about the size of the behaviourally invisible stale cell is licensed by this packet under any outcome."
+ },
+ "scope_boundaries": {
+  "SB-01": "Permission-boundary change, which the Director's strategic question names as the second predicted-blind drift family, is UNREACHABLE on credential-free public origins and is NOT tested. The substitute family D2_handle_rotation is disclosed as a substitute, not as coverage. The exact next action for the missing coverage is a credentialed, single-write, freshness-versus-permission probe, which requires a substrate no lane currently certifies.",
+  "SB-02": "The Director's part (iv) is narrowed: the packet measures the guard's own break-even abstention rate and per-item admission region, and does NOT measure the cost of discovering a failed replay (M-C-RECOVER is null), so it does not decide replay-versus-re-derive globally.",
+  "SB-03": "Cross-site transfer, mechanism parameterization to unseen identifiers, and LLM inheritance are not measured. C-CROSSSITE, C-PARAM-INHERIT and C-LLM-INHERIT are untouched.",
+  "SB-04": "No authenticated state, no write verb, no side effect, no browser, no JavaScript, no model call.",
+  "SB-05": "The parent handoff's part-(iii) question, the measured prevalence of the structurally-undetectable stale cell, is NOT answered. This packet measures the value-collision rate as a lower-bound proxy and declares the behavioural cell null (CC-06). Preserving the parent handoff's warning, a bounded pass on the guard must not be allowed to close replay-versus-re-derivation."
+ },
+ "code_binding": {
+  "freeze_contains_only": [
+   "request.json",
+   "spec.json",
+   "prereg.md"
+  ],
+  "no_code_digest_validity_gate": true,
+  "rationale": "scripts/freeze_experiment.py writes exactly three sha256 keys, so no code artifact can be cryptographically bound at freeze in any lane. The Director's portfolio assessment verified this at source and check_scope.py gives DESIGN prefixes=[], so outcome-bearing code cannot exist at freeze time. Declaring a code digest as a validity condition is therefore unsatisfiable by construction and its failure is self-inflicted.",
+  "obligation_instead": [
+   "EXECUTE hashes every producer source file with sha256 into result.json.artifacts with role 'code' and into provenance.json.",
+   "EXECUTE records the exact interpreter version, the complete package set before and after any install, and every pip install command with its reason and disclosure, in the manner EXP-FRONTIER-36306528608 disclosed tiktoken.",
+   "EXECUTE re-verifies request.json, spec.json and prereg.md against freeze.json sha256 before the first request and again after the last one, and any mismatch is terminal.",
+   "EXECUTE records which absolute paths were written and under which lane, and asserts that no write left the granted scope."
+  ],
+  "frozen_inputs_reverification": "request.json, spec.json, prereg.md against freeze.json before and after execution; terminal on mismatch."
+ },
+ "preregistration_timing": "This spec.json and prereg.md are written before any candidate host, any calibration anchor or any item is contacted. No outcome-bearing measurement was run during DESIGN. The anchors' asserted behaviours are recorded as assertions with their evidence class (SPIDER_CORROBORATED, SPIDER_PARTIAL, A_PRIORI_CONSTRUCT) and are first tested at G0.2/G0.3 on the execution date. Any analysis change after freeze is exploratory and must be reported as such.",
+ "transmission_contract": {
+  "design_emits": [
+   "spec.json",
+   "prereg.md"
+  ],
+  "execute_must_emit": [
+   "result.json",
+   "report.md",
+   "provenance.json"
+  ],
+  "execute_required_top_level_result_fields": [
+   "schema_version",
+   "experiment_id",
+   "lane",
+   "status",
+   "outcome",
+   "metrics",
+   "controls",
+   "artifacts",
+   "observations",
+   "validity_notes",
+   "unresolved"
+  ],
+  "stable_identities_to_preserve": [
+   "experiment_id",
+   "lane",
+   "claim_ids",
+   "all CAL-POS-*",
+   "all CAL-NEG-*",
+   "G0.1..G0.5",
+   "A1..A6",
+   "B1..B6",
+   "F1..F9",
+   "B-NO-GUARD-REPLAY",
+   "B-INCUMBENT-SIGNAL-ONLY",
+   "A-CH-*",
+   "PC-*",
+   "NC-*",
+   "V01..V21",
+   "CC-01..CC-06",
+   "every M-* metric id"
+  ],
+  "status_outcome_vocabulary": {
+   "status": [
+    "COMPLETE",
+    "BLOCKED",
+    "MEASUREMENT_INVALID"
+   ],
+   "outcome": [
+    "SUPPORTS",
+    "FALSIFIES",
+    "MIXED",
+    "INCONCLUSIVE",
+    "NOT_APPLICABLE"
+   ]
+  },
+  "branch_to_status_outcome_map": {
+   "F9_gate0_or_blocking_validity_failure": {
+    "status": "MEASUREMENT_INVALID",
+    "outcome": "INCONCLUSIVE"
+   },
+   "adequacy_failure": {
+    "status": "COMPLETE",
+    "outcome": "INCONCLUSIVE"
+   },
+   "accept_reached": {
+    "status": "COMPLETE",
+    "outcome": "SUPPORTS"
+   },
+   "F1_F2_F3": {
+    "status": "COMPLETE",
+    "outcome": "FALSIFIES"
+   },
+   "F4": {
+    "status": "COMPLETE",
+    "outcome": "FALSIFIES"
+   },
+   "F5_F6_F7": {
+    "status": "COMPLETE",
+    "outcome": "MIXED"
+   },
+   "F8_valid_positive_scope_finding": {
+    "status": "COMPLETE",
+    "outcome": "MIXED"
+   }
+  }
+ }
+}
