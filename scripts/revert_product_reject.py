@@ -24,7 +24,14 @@ def main():
         print("SPIDER_PRODUCT_CODE_ACCEPTED")
         return
 
-    base = json.loads((exp / "execution_checkpoint.json").read_text())["pre_execute_sha"]
+    receipt_path = exp / "build_receipt.json"
+    if receipt_path.exists():
+        receipt = json.loads(receipt_path.read_text())
+        base = receipt.get("pre_build_sha")
+    else:
+        base = None
+    if not base:
+        base = json.loads((exp / "execution_checkpoint.json").read_text())["pre_execute_sha"]
     registry = json.loads((ROOT / "research/lanes/registry.json").read_text())
     roots = registry["lanes"]["product"].get("allowed_code_roots", [])
     if not roots:
