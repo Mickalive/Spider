@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "endpoint_candidates_tested": 14,
+    "credential_free_endpoints_valid": 2,
+    "credential_required_endpoints": 6,
+    "gate_0_endpoint_attainability": "PASS",
+    "gate_1_comparator_obtainability": "PASS",
+    "gate_2_four_arm_viability": "FAIL",
+    "gate_3_publication_audit": "FAIL_ZERO_PASS",
+    "comparator_categories_obtainable": 4,
+    "comparator_packages_obtainable": 14,
+    "comparator_frameworks_running_under_attained_endpoint": 1,
+    "comparator_web_agent_tasks_completed_under_identical_model": 0,
+    "comparators_with_published_numbers_with_denominators": 3,
+    "comparators_with_published_same_model_family_numbers": 0,
+    "comparators_passing_gate3_audit": 0,
+    "frozen_outcome_label": "DESIGN_COMPROMISED",
+    "frozen_outcome_basis": "Gate 0 PASS, Gate 1 PASS, Gate 2 FAIL (Gate 3 zero-pass corroborates)"
+  },
+  "controls": {
+    "PC-ENDPOINT-LIVE": {
+      "expected_behavior": "PASS if any candidate endpoint produces a valid non-error completion with a reproducible receipt (timestamp, model id, token usage, latency, response hash)",
+      "observed_behavior": "PASS: E-LOCAL-LLAMA (llama-cpp-python 0.2.90, qwen2.5-0.5b-instruct-q4_k_m.gguf, usage 28/4/32 tokens, response sha256 d4a7428a541d1f68e5485d1efd443d7f54a61cf10a87f7aa8b7cf1e5d8a6f791) and E-POLLINATIONS-OPENAI (https://text.pollinations.ai/openai, model gpt-oss-20b, anonymous tier, 6/6 HTTP 200, usage present)",
+      "result": "PASS",
+      "evidence_refs": ["raw/endpoint_receipts.json:E-LOCAL-LLAMA", "raw/endpoint_receipts.json:E-POLLINATIONS-OPENAI"]
+    },
+    "NC-NO-ENDPOINT": {
+      "expected_behavior": "PASS (null condition holds) only if every candidate endpoint fails with credential/access error; mutually exclusive with PC-ENDPOINT-LIVE",
+      "observed_behavior": "NOT_HOLDS: two credential-free endpoints produced valid completions, so the 'no invocable endpoint' null does not obtain",
+      "result": "NOT_HOLDS",
+      "evidence_refs": ["raw/endpoint_receipts.json"]
+    },
+    "B-COLD": {
+      "id": "B-COLD",
+      "name": "Cold exploration (no inheritance, no memory)",
+      "expected_behavior": "Highest cost per task, upper bound",
+      "observed_behavior": "Run as internal arm; no external published numbers exist and none required (it is the internal upper bound). Not run in this packet (scope: obtainability only).",
+      "result": "NOT_RUN_IN_SCOPE",
+      "evidence_refs": []
+    },
+    "B-INSTRUCTIONS": {
+      "id": "B-INSTRUCTIONS",
+      "name": "Static instructions/prompting only",
+      "expected_behavior": "Lower than cold, no site/task adaptation",
+      "observed_behavior": "Run as internal arm; no external published numbers. Not run in this packet (scope: obtainability only).",
+      "result": "NOT_RUN_IN_SCOPE",
+      "evidence_refs": []
+    },
+    "B-RETRIEVAL": {
+      "id": "B-RETRIEVAL",
+      "name": "Retrieval-augmented memory (RAG over trajectories)",
+      "expected_behavior": "Obtainable + runnable under identical model/tools/budget + published numbers with denominators",
+      "observed_behavior": "Obtainable (langchain/langchain-community/chromadb/faiss-cpu/llama-index). Published numbers exist (LRAT) but use 4B-358B backbones and no token budget; no Web-agent task completed under the attained credential-free model. Gate 3 audit FAIL.",
+      "result": "PARTIAL",
+      "evidence_refs": ["raw/comparator_obtainability.json:comparators[2]"]
+    },
+    "B-SELECTOR-CACHE": {
+      "id": "B-SELECTOR-CACHE",
+      "name": "Selector/action cache (exact or fuzzy match)",
+      "expected_behavior": "Obtainable + runnable + published numbers with denominators",
+      "observed_behavior": "Obtainable (browser-use/playwright/stagehand-py). browser-use publishes WebVoyager 89.1% on 586 tasks with gpt-4o and no token budget; Stagehand numbers use frontier models. No selector-cache success/cost benchmark with denominators exists under any model. Gate 3 audit FAIL.",
+      "result": "FAIL",
+      "evidence_refs": ["raw/comparator_obtainability.json:comparators[3]"]
+    },
+    "B-COMPILED-WORKFLOW": {
+      "id": "B-COMPILED-WORKFLOW",
+      "name": "Compiled workflow / skill library",
+      "expected_behavior": "Obtainable + runnable under identical model/tools/budget + published numbers with denominators",
+      "observed_behavior": "Obtainable (langgraph/pyautogen/crewai/dspy-ai). Framework smoke-tested running under both credential-free endpoints (LangGraph produced SPIDER-PING). Best published table (AWM/ASI/ReasoningBank) reports WebArena SR and tokens/task but uses Gemini 3 Flash / GPT-5.4-mini / Qwen 3.6-27B, not the attained endpoint model. Gate 3 audit FAIL.",
+      "result": "PARTIAL",
+      "evidence_refs": ["raw/comparator_obtainability.json:comparators[4]", "raw/comparator_obtainability.json:session_smoke_measurements.langgraph_compiled_workflow"]
+    },
+    "B-MEMORY-AGENT": {
+      "id": "B-MEMORY-AGENT",
+      "name": "Memory-augmented agent (MemGPT/Letta/Zep)",
+      "expected_behavior": "Obtainable + runnable + published numbers with denominators",
+      "observed_behavior": "Obtainable (letta/zep-python). Letta publishes LoCoMo 74.0% on 10 conversations/1,540 QA with gpt-4o-mini and filesystem tools (no browser, no token budget); Zep/Mem0 similar model families. Task distribution is memory QA, not Web-agent. Gate 3 audit FAIL.",
+      "result": "FAIL",
+      "evidence_refs": ["raw/comparator_obtainability.json:comparators[5]"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json", "sha256": "b7f5c850c4cee3dbac892e28188c1ef18b32c44dc926cf42de121e731db294e9", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/comparator_obtainability.json", "sha256": "56708e0497e970be1973c7e95df64d44f609acf97143cf4b8791db83100ba185", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/gate_evaluation.json", "sha256": "9d035a541d31052e43a9b43c050c58609f8edcc0ebf891b5343e578c8d3006a2", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/provisioning_receipts.json", "sha256": "88236c4b723fff619c4428359a58db294f2c6f862223295f9b2ef7b28631c5b8", "role": "raw"},
+    {"path": "research/intel/exp_37973264582_execute.py", "sha256": "82c06ebae34f0b9b21f9d1da189c3409f3beacd3fda10897f14583d152a6601b", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/smoke_langgraph.py", "sha256": "fc3b4dac4f5655411d27104fb50355ba69efc887e2466527448a693b8700e55f", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/smoke_pw.py", "sha256": "438fee9475922c27ee9c4ecc58f5aa111b52e06af6e806ffbb81a922aa49d143", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent_http.py", "sha256": "5b51f09801f1a39e372cb7f6c43a5a18bdfc5b6101539ecd75e170aae4a73334", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent_http2.py", "sha256": "cc7a934330a6c33ee5e776ce413cd118adfcd8d1b1f512c1a34e8ed8bcefa2cb", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/local_chat_completion.json", "sha256": "75abb90919ef6c9b0eb0e941265edc1e76f99817b8c503f71e5018a100bb1628", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/local_llama_server.log", "sha256": "cf8dbd41128ff8190a0bd8df2741306c98087b531ac7b8014e6c6918725843b8", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/pollinations_models.json", "sha256": "89877dada14daefc50a077576ef9c080aa15514f50418a1469af01874eda45a1", "role": "raw"}
+  ],
+  "observations": [
+    "E-LOCAL-LLAMA: a credential-free local runtime (llama-cpp-python 0.2.90 + qwen2.5-0.5b-instruct-q4_k_m.gguf, 491,400,032 bytes, sha256 74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db) returned a valid chat completion ('SPIDER-PING', usage prompt_tokens=28/completion_tokens=4/total_tokens=32) both in-process and via the OpenAI-compatible /v1/chat/completions server at 127.0.0.1:8081.",
+    "E-POLLINATIONS-OPENAI: https://text.pollinations.ai/openai with no credential returned HTTP 200 completions with a model id (gpt-oss-20b), usage tokens and 'user_tier':'anonymous'; GET https://text.pollinations.ai/models resolves openai-fast to gpt-oss-20b. Six consecutive calls returned HTTP 200 in the final probe, but earlier in the session the same endpoint returned intermittent HTTP 402 Payment Required, and the OpenAI python client received HTTP 400 'unexpected tokens remaining in message header: Some(\"to=assistant\")' for a request shape that equivalent raw HTTP accepted.",
+    "models.github.ai returned HTTP 200 with content-type text/plain and body 'OK' for every path tested, including a deliberately bogus path; it did not return a model completion and was excluded.",
+    "OpenAI/Anthropic/Groq/Together/Cerebras/Replicate chat endpoints returned HTTP 401/403 credential errors in this environment; api-inference.huggingface.co and cdn-lfs.huggingface.co did not resolve.",
+    "All 14 comparator packages were retrievable via 'pip download --no-deps' (exit 0): langchain, langchain-community, chromadb, faiss-cpu, llama-index, browser-use, langgraph, pyautogen, crewai, dspy-ai, letta, zep-python, playwright, stagehand-py.",
+    "A LangGraph compiled workflow (B-COMPILED-WORKFLOW) executed against both credential-free endpoints and returned 'SPIDER-PING' (local latency 0.144s, proxy latency 3.793s, identical output sha256 507fea36d4de9c11fa8536cd140b5ba4037ef1aa047279dcd7c0f6d95c90d777).",
+    "The browser tool substrate is present: Playwright drove system Chrome (chromium 154.0.8037.97 via executable_path=/usr/bin/google-chrome) to open a page and read title/text (latency 0.112s).",
+    "A minimal Web-agent task (click #reveal-btn, then answer TARGET-42) did not complete under either credential-free endpoint: local Qwen2.5-0.5B emitted prose instead of a JSON action (1 step, 150 tokens); the gpt-oss-20b proxy returned empty content with reasoning-only output and a ~197 completion-token cap despite max_tokens=1200 (1 step, 197 tokens).",
+    "No external comparator publishes a Web-agent success/cost number using Qwen2.5-0.5B-Instruct or gpt-oss-20b, or any credential-free endpoint model, under the same tools and a token budget."
+  ],
+  "validity_notes": [
+    "Scope: this packet only determines whether the frozen C-LLM-INHERIT four-arm benchmark can run on current assets. It does not run the benchmark, does not implement comparators, and does not evaluate SPIDER kernel execution (prereg.md section 11).",
+    "Gate semantics: the canonical result.json outcome enum is SUPPORTS|FALSIFIES|MIXED|INCONCLUSIVE|NOT_APPLICABLE. The frozen spec's label is DESIGN_COMPROMISED (Gate 0-1 PASS but Gate 2 FAIL, Gate 3 zero-pass). Because the frozen hypothesis H1 requires the design to remain valid and executable, and that conjunct is not met, the canonical outcome is recorded as FALSIFIES; the frozen label is preserved in metrics.frozen_outcome_label.",
+    "Alternative Gate 1 reading: if 'runnable under identical model/tools/budget' is read to require a completed Web-agent task rather than a running framework, Gate 1 would FAIL and the outcome would be UNRESOLVABLE_COMPARATOR. Both readings converge on 'not VIABLE'; the difference is recorded in unresolved[0].",
+    "Comparator published numbers are external landscape evidence (Scout-eligible, surfaced during EXECUTE), not independently reproduced SPIDER measurements; they are recorded with source attribution and marked UNAUDITED.",
+    "The minimal Web-agent task uses one synthetic page, one prompt, and one parsing rule; a more capable prompt or constrained decoding could change the observed local-model action rate. The finding is limited to the tested harness.",
+    "No WebArena/WebVoyager task environment is present in the factory; the full four-arm task population was not provisioned in this packet.",
+    "The pollinations endpoint is an anonymous third-party proxy with no SLA, no model pinning, intermittent HTTP 402 and an observed ~197 completion-token cap; its measured receipts are valid at the recorded timestamps but are not guaranteed reproducible later.",
+    "The local 0.5B model is deterministic and offline-reproducible after the 491,400,032-byte GGUF download; larger local GGUFs were not provisioned.",
+    "Inherited parent state (EXP-INTEL-37950616801) is not contradicted: the no-new-corpus / no-commensurable-w finding is untouched; no quantity from arXiv:2608.05784v1 enters any SPIDER cost model."
+  ],
+  "unresolved": [
+    "Gate 1 vs Gate 2 locus: whether the correct frozen label is UNRESOLVABLE_COMPARATOR (Gate 1 fail under the Web-agent-task reading) or DESIGN_COMPROMISED (Gate 1 pass as obtainability, Gate 2 fail). Both are recorded; the producer selected DESIGN_COMPROMISED because the comparator artifacts are obtainable and have published numbers, while the four-arm design itself requires a model substitution.",
+    "Whether a larger credential-free local model (e.g. a 3B-8B GGUF) or a stable anonymous provider could drive the four arms under identical model/tools/budget; not provisioned here.",
+    "Whether prompt engineering / constrained JSON decoding would make the local Qwen2.5-0.5B model act in the minimal Web-agent task; only the tested prompt was evaluated.",
+    "Whether the frozen design should drop the same-model published-baseline requirement (Gate 3) and rely on internally re-run comparators; that is a Director/prereg decision, not an Intel measurement.",
+    "Whether C-LLM-INHERIT's four-arm benchmark is executable 'pending a model credential' (per accepted codex evidence EXP-PRODUCT-37950607128) versus 'requires design weakening' (this packet's Gate 2 finding); the discrepancy is because this packet additionally required a same-model published anchor and an anonymous, budget-stable endpoint.",
+    "Exact rate/quota ceiling of the anonymous pollinations tier; only intermittent 402s were observed, not a documented limit."
+  ]
+}
