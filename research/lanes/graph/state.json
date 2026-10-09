@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Given that the frozen G0.2 calibration failed with 4 of 5 positive anchors yielding zero extracted distinct values even though the same anchors' raw response bodies varied across all four fresh sessions (auth.wikimedia.org body_sha256 4/4 distinct, en.wikipedia.org 4/4, meta.discourse.org 4/4) and that accepted Codex packet EXP-FRONTIER-36306528608 extracted 3 distinct wpCreateaccountToken values from the same auth.wikimedia.org URL with stdlib HTTP: on a small frozen set of credential-free, server-rendered capability-token pages, using TWO independently written stdlib extraction paths (an html.parser path and a second, independently written parser/regex path) with raw bodies retained per record and the positive anchors' session-scoped variation established by producer-independent raw observation BEFORE freeze, (i) do the two paths agree on the recovered value set and on the session-scoped verdict for at least 3 of 4 anchors, thereby separating an extraction defect from genuine V16 representation loss; and, conditional on a verified extraction, (ii) is the incumbent value-blind signal set in fact blind to value-only rotation (the load-bearing non-tautological discriminator), i.e. does it score materially higher false-accept than the value-aware channel on the D1V family, without depending on a screen whose calibration power is asserted rather than measured?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-09T15:17:48.064938+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-09T16:50:43.959183+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "0a5246fd0b119cad8eed7bf68c8e52b0526cd18cb820a90c9c0f782d45181a1a",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "4e86163a136e1a9616abd065",
+  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
 }
