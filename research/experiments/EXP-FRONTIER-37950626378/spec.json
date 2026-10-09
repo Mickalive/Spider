@@ -1,17 +1,303 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-FRONTIER-37950626378",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "director_mandate": {
+    "cycle_id": "37949204501",
+    "action": "CONTINUE",
+    "target_claim": "C-RESIDUAL-NOVELTY",
+    "parent_handoff_disposition": "USE",
+    "binding_question_summary": "Convert the parent non-result (every admitted item at max hop <= 1) into a hop-depth re-acquisition cost-scaling law on the credential-free GET-only stdlib-HTTP substrate, with a falsifier arithmetically checkable before freeze and satisfiable in BOTH directions.",
+    "four_binding_preconditions": [
+      "pre-freeze control certificate: all four controls live-verified PASS with evidence refs inside spec.json BEFORE freeze.json (repairs parent VN-02)",
+      "baseline-ordering argument, proven before freeze, that the re-derivation comparator is strictly more expensive than re-acquisition by construction, so the break-even accept region is non-empty",
+      "paired per-item medians over the SAME item set plus a materiality guard on the break-even denominator",
+      "drop the five-class stationarity taxonomy entirely or make every declared class reachable by evaluation order"
+    ]
+  },
+  "question": "On the credential-free GET-only stdlib-HTTP substrate, over a frozen target pool large enough to admit state-carrying items at shortest-path hop >= 3, how does the unconditional cost of obtaining ONE fresh valid instance of a state item scale with the item's shortest-path hop distance from the host root, measured in GET requests (primary channel; stdlib-only) and response-body bytes (size channel; cl100k_base tokens recorded only if a tokenizer is importable and its version is recorded), and is that cost flat or growing? The experiment replaces the parent's undecidable stationarity LABEL with a cost SCALING LAW on the same free substrate, because the parent measured only hop 0..1 where one or two unconditional GETs already reach the item.",
+  "operational_definitions": {
+    "substrate": "HTTP GET only via Python stdlib urllib; TLS verified; frozen User-Agent 'SPIDER-research-frontier-37950626378/1.0'; timeout 12s; max response body 600000 bytes; redirects followed; no credentials, cookies, browser, Docker, model key or write verb.",
+    "navigation_graph": "Directed graph whose nodes are defragmented same-host http(s) URLs (same registrable host as the seed's final URL) and whose edges are <a href> links parsed from fetched HTML in document order. Non-http(s) schemes and asset extensions (png,jpg,jpeg,gif,svg,ico,css,js,pdf,zip,gz,woff,woff2,ttf,otf,mp4,webp,xml,rss,atom,epub,mobi,mp3,ogg,djvu,exe,iso) are excluded. JS-generated links are NOT edges (disclosed in validity note VN-V2).",
+    "hop_distance": "Graph shortest-path length in edges from the seed root (hop 0) to a page's URL, measured by the frozen policy. The seed URL itself is hop 0.",
+    "state_carrying_item": "A (page_url, control_name, control_type) tuple where the fetched page contains at least one named form control: an <input> with a non-empty name attribute or a <select> with a non-empty name attribute. The page is the observable; the item's hop is the page's hop.",
+    "bands": {
+      "NEAR": "hop in {0,1}",
+      "MID_excluded": "hop == 2 (reported descriptively; excluded from the primary NEAR-vs-DEEP contrast to keep the bands separated)",
+      "DEEP": "hop in {3,4,5,6}"
+    },
+    "frozen_policy": "Item-blind FIFO breadth-first crawl in document order from the seed root; per-site page budget B=250; depth cap D=6; each URL fetched at most once; the crawl stops as soon as the target page is fetched (for a per-item RED cost) or when budget/depth is exhausted (for the structural pass).",
+    "primary_channel": "GET requests (always valid on the stdlib substrate).",
+    "size_channel": "Sum of response-body bytes over the GETs charged to the arm. cl100k_base tokens are an OPTIONAL third channel: recorded only if `import tiktoken` succeeds and its version is recorded; otherwise the token fields are null and the byte channel is the declared size basis."
+  },
+  "hypothesis": "H1 (GROWING): on real sites, the unconditional item-blind re-derivation cost (RED) of a DEEP item (hop >= 3) is materially greater than that of a NEAR item (hop <= 1), by more than the materiality factor M=3.0, in both the request and size channels, because level-order frontier enumeration must fetch substantially more pages before a depth-h page is reached. If H1 holds, persistence of PATHS AND PROCEDURES has a positive, computable amortization surface and the break-even reuse count can be derived for the first time from a real re-derivation cost. H0 (FLAT): DEEP cost is within M=3.0x of NEAR cost in both channels because a detour-free shortest path reaches a deep item in about h GETs, making fresh-instance acquisition O(1) in site structure; then persistent cross-episode state cannot buy a work reduction that grows with Web depth and acquisition should be treated as a constant-cost deterministic procedure. The experiment does not presuppose which holds.",
+  "falsifier": {
+    "statement": "Let R_req = median(red.requests | DEEP) / median(red.requests | NEAR) and R_bytes = median(red.bytes | DEEP) / median(red.bytes | NEAR), with materiality factor M=3.0 pre-registered. FLAT branch (falsifies H1): R_req <= M AND R_bytes <= M. GROWING branch (supports H1): R_req > M AND R_bytes > M. Otherwise (channels disagree) the verdict is MIXED: report the per-channel direction and make NO O(1) claim. The ratio is undefined and the experiment is not scored if either band median is null or the admission gate fails; that is reported as MEASUREMENT_INVALID/status, never as a scientific branch.",
+    "materiality_factor": 3.0,
+    "bands": {"NEAR": [0, 1], "DEEP": [3, 4, 5, 6], "MID_excluded": [2]},
+    "two_sided": true,
+    "satisfiable_directions_live_verified_pre_freeze": {
+      "FLAT": "NARROW_CHAIN_CALIBRATION measured R = 2.0 <= 3.0 at hop3/hop1",
+      "GROWING": "BROAD_FANOUT_CALIBRATION measured R = 466.0 > 3.0 at hop3/hop1"
+    },
+    "arithmetic_checkable_before_freeze": true,
+    "boundary_bracketed_by_live_values": "M=3.0 lies strictly between the two live-measured calibration ratios (2.0 and 466.0), so the decision boundary is bracketed by observed instrument behaviour rather than assumed.",
+    "what_each_branch_means": {
+      "FLAT": "fresh-instance acquisition on this substrate class is O(1) in site structure; persistent state cannot buy a depth-growing work reduction; treat acquisition as constant-cost deterministic procedure and move effort to substrate expansion.",
+      "GROWING": "persistence of paths and procedures has a measurable amortization surface; compute the break-even reuse count from the real re-derivation cost."
+    }
+  },
+  "baselines": [
+    {
+      "id": "RED_re_derivation",
+      "role": "comparator (re-derivation); the 're_derivation' side of the parent contrast",
+      "policy": "frozen item-blind same-host BFS from the seed root, document order, budget B=250, depth cap D=6; stop when the item page is fetched",
+      "cost_units": ["requests", "bytes", "(optional) tokens"],
+      "expected": "most expensive arm by construction (superset of the shortest-path pages)"
+    },
+    {
+      "id": "RACQ_PATH_re_acquisition",
+      "role": "re-acquisition via persisted shortest path; PRIMARY re-acquisition arm",
+      "policy": "GET each node on the frozen shortest path seed -> ... -> item page in hop order; cost = h+1 GETs",
+      "cost_units": ["requests", "bytes", "(optional) tokens"],
+      "expected": "strictly cheaper than RED whenever the BFS takes >=1 detour; equal to RED on a detour-free chain"
+    },
+    {
+      "id": "RACQ_URL_re_acquisition",
+      "role": "re-acquisition via persisted URL; absolute lower bound",
+      "policy": "one GET to the item page URL",
+      "cost_units": ["requests", "bytes", "(optional) tokens"],
+      "expected": "cheapest arm; 1 GET for every h >= 0"
+    },
+    {
+      "id": "STRUCTURAL_MINIMUM",
+      "role": "theoretical floor used only for the ordering proof",
+      "policy": "h+1 GETs and the bytes of the h+1 shortest-path pages",
+      "expected": "lower bound for any path-aware acquisition; RACQ_PATH attains it"
+    }
+  ],
+  "positive_control": {
+    "id": "POS_KNOWN_HOP_CONTROL",
+    "description": "A preregistered real URL that is a direct same-host <a href> on the seed root, so the frozen policy must return hop == 1 and a 200 status. Detects a crawler that mislabels reachable shallow pages as unreachable or miscomputes hop.",
+    "seed": "https://doc.rust-lang.org/book/",
+    "target": "https://doc.rust-lang.org/book/ch01-01-installation.html",
+    "expected": {"found": true, "hop": 1, "status": 200},
+    "pre_freeze_observed": {"found": true, "hop": 1, "requests": 3, "cum_bytes": 653222, "status": 200},
+    "pre_freeze_result": "PASS",
+    "success_condition": "EXECUTE re-runs it under the frozen policy and records found == true and hop == 1; a failure forces status=MEASUREMENT_INVALID.",
+    "instrument_dynamic_range_companions": ["NARROW_CHAIN_CALIBRATION", "BROAD_FANOUT_CALIBRATION"],
+    "parent_control_mapping": "repairs the parent's KNOWN_STATIONARY_CONTROL by making the target a live-confirmed true-hop-1 page rather than a label assumption"
+  },
+  "null_control": {
+    "id": "NEG_UNREACHABLE_CONTROL",
+    "description": "A preregistered same-host URL that does not exist (404) and is not linked from any fetched page, so the frozen policy must return found == false within budget and must not fabricate an item.",
+    "seed": "https://doc.rust-lang.org/book/",
+    "target": "https://doc.rust-lang.org/book/__spider_nonexistent_37950626378__.html",
+    "expected": {"found": false},
+    "pre_freeze_observed": {"found": false, "hop": null, "requests": null},
+    "pre_freeze_result": "PASS",
+    "success_condition": "EXECUTE re-runs it and records found == false without an exception; if the policy reports the missing page as found, status=MEASUREMENT_INVALID.",
+    "parent_control_mapping": "replaces the parent's INTER_SESSION_DELAY / NULL_STATIONARITY_ARM as the absence-detection control"
+  },
+  "controls": {
+    "POS_KNOWN_HOP_CONTROL": {
+      "kind": "positive",
+      "expected": "found==true and hop==1 and status==200",
+      "pre_freeze_observed": {"found": true, "hop": 1, "requests": 3, "cum_bytes": 653222, "status": 200},
+      "pre_freeze_pass": true,
+      "evidence": "inline pre-freeze probe by the DESIGN runner on 2026-10-09; raw command/replay in prereg.md section 'Pre-freeze control certificate'"
+    },
+    "NEG_UNREACHABLE_CONTROL": {
+      "kind": "null/negative",
+      "expected": "found==false",
+      "pre_freeze_observed": {"found": false},
+      "pre_freeze_pass": true,
+      "evidence": "inline pre-freeze probe by the DESIGN runner on 2026-10-09"
+    },
+    "NARROW_CHAIN_CALIBRATION": {
+      "kind": "dynamic-range FLAT",
+      "fixture": "local Python stdlib http.server linear chain of 7 pages (index -> p1 -> ... -> p6), each page links only to the next",
+      "expected": "requests(hop h) == h+1 and R = requests(hop3)/requests(hop1) <= 3.0",
+      "pre_freeze_observed": {"requests": {"hop1": 2, "hop2": 3, "hop3": 4}, "R_hop3_over_hop1": 2.0},
+      "pre_freeze_pass": true,
+      "evidence": "inline pre-freeze probe by the DESIGN runner on 2026-10-09"
+    },
+    "BROAD_FANOUT_CALIBRATION": {
+      "kind": "dynamic-range GROWING",
+      "fixture": "local Python stdlib http.server 30-fanout 4-deep tree, each node links to 30 children",
+      "expected": "R = requests(hop3)/requests(hop1) > 3.0",
+      "pre_freeze_observed": {"requests": {"hop1": 2, "hop3": 932}, "R_hop3_over_hop1": 466.0},
+      "pre_freeze_pass": true,
+      "evidence": "inline pre-freeze probe by the DESIGN runner on 2026-10-09"
+    }
+  },
+  "pre_freeze_control_certificate": {
+    "created_by": "DESIGN runner, 2026-10-09, before freeze.json existed",
+    "policy_under_test": "the frozen policy stated in operational_definitions.frozen_policy",
+    "all_four_live_verified": true,
+    "all_four_pass": true,
+    "certificate": {
+      "POS_KNOWN_HOP_CONTROL": "PASS",
+      "NEG_UNREACHABLE_CONTROL": "PASS",
+      "NARROW_CHAIN_CALIBRATION": "PASS",
+      "BROAD_FANOUT_CALIBRATION": "PASS"
+    },
+    "why_four": "positive reachability, negative absence, and two opposed dynamic-range calibrations that bracket the materiality factor from below and above",
+    "evidence_location": "inline observations above and in prereg.md; EXECUTE must reproduce all four and persist raw artifacts, and may not proceed to the cost measurement if any control fails"
+  },
+  "measurement_validity": [
+    {
+      "id": "VN-V1-tokenizer",
+      "note": "tiktoken is NOT importable in the DESIGN runner (ModuleNotFoundError confirmed). The primary cost basis is therefore GET requests (stdlib only) and the co-primary size basis is response-body bytes. cl100k_base tokens are recorded ONLY if EXECUTE can import tiktoken and records its version; otherwise token fields are null. No token figure may be presented as satisfying the frozen cost basis without a recorded tokenizer version. This repairs the parent's VN-11 (undeclared tokenizer)."
+    },
+    {
+      "id": "VN-V2-js-navigation",
+      "note": "Only static <a href> links are graph edges. JS-generated navigation (e.g., mdBook sidebars) is not followed, so measured hop is shortest-path over static same-host links and may be LONGER than a browser-observed hop. This is disclosed and applies identically to all bands."
+    },
+    {
+      "id": "VN-V3-same-host",
+      "note": "Cross-host navigation is excluded, which can understate real Web depth; the claim is explicitly bounded to same-host static-link acquisition on this substrate class."
+    },
+    {
+      "id": "VN-V4-determinism",
+      "note": "Given the frozen policy and a stable site, RED request count is deterministic; K=2 independent sessions per site are run to detect instability, and any site whose two sessions disagree on an item's hop or request count is flagged and excluded with a recorded reason."
+    },
+    {
+      "id": "VN-V5-availability",
+      "note": "If a seed host is unreachable at EXECUTE time, record status=BLOCKED and the exact error; never record network failure as a scientific branch. DESIGN confirmed all seed hosts reachable on 2026-10-09."
+    },
+    {
+      "id": "VN-V6-parser",
+      "note": "State-item discovery is an HTML-parser heuristic for named <input>/<select>; pages whose controls are JS-rendered are missed. Detection rate is reported per site."
+    },
+    {
+      "id": "VN-V7-band-separation",
+      "note": "hop==2 (MID) items are reported descriptively only and excluded from the primary NEAR-vs-DEEP contrast; the bands are disjoint by construction."
+    },
+    {
+      "id": "VN-V8-representation-loss",
+      "note": "The candidate pool is dominated by the mdBook engine on doc.rust-lang.org; generalization is reported per-host and bounded, and is not claimed beyond the admitted hosts/engines."
+    }
+  ],
+  "target_pool": {
+    "candidate_roots": [
+      {"root": "https://doc.rust-lang.org/book/", "engine": "mdBook", "host": "doc.rust-lang.org", "deep_control_evidence": "pre-recon: searchbar named input present at hop>=3"},
+      {"root": "https://doc.rust-lang.org/cargo/", "engine": "mdBook", "host": "doc.rust-lang.org", "deep_control_evidence": "pre-recon: 24 control-bearing pages at hop>=3"},
+      {"root": "https://doc.rust-lang.org/nomicon/", "engine": "mdBook", "host": "doc.rust-lang.org", "deep_control_evidence": "pre-recon: 4 control-bearing pages at hop>=3"},
+      {"root": "https://www.gnu.org/", "engine": "GNU web", "host": "www.gnu.org", "deep_control_evidence": "pre-recon: named inputs + signup form on root; footer forms on pages"},
+      {"root": "https://quotes.toscrape.com/", "engine": "custom", "host": "quotes.toscrape.com", "deep_control_evidence": "pre-recon: deep pagination, control pages only shallow"},
+      {"root": "https://forums.gentoo.org/", "engine": "phpBB", "host": "forums.gentoo.org", "deep_control_evidence": "pre-recon: 152 control-bearing pages, none yet at hop>=3 within budget"}
+    ],
+    "per_site_budget_pages": 250,
+    "depth_cap": 6,
+    "sessions_per_site": 2,
+    "admission_gate": {
+      "id": "ADMISSION_GATE_V1",
+      "requires": {
+        "admitted_DEEP_items_min": 5,
+        "admitted_NEAR_items_min": 8,
+        "distinct_seed_hosts_min": 2
+      },
+      "on_failure": "status=MEASUREMENT_INVALID with the exact shortfall recorded; no scientific branch is reported",
+      "deterministic": true,
+      "runs": "structural pass, after freeze, before any cost-ratio computation"
+    }
+  },
+  "admission_gate": {
+    "id": "ADMISSION_GATE_V1",
+    "applied_to": "all items discovered by the structural pass (frozen policy, budget 250, depth 6) on the candidate roots",
+    "keep_conditions": [
+      "page fetched with HTTP 200",
+      "hop <= 6",
+      "page contains >= 1 named form control (state item)",
+      "site's two sessions agree on the item's hop (VN-V4)"
+    ],
+    "requires": {"admitted_DEEP_items_min": 5, "admitted_NEAR_items_min": 8, "distinct_seed_hosts_min": 2},
+    "on_failure": "status=MEASUREMENT_INVALID with exact shortfall; no ratio is scored"
+  },
+  "arms": {
+    "RED": "item-blind re-derivation (baseline id RED_re_derivation); charges all GETs and bytes the frozen BFS issues up to and including the item page",
+    "RACQ_PATH": "persisted shortest-path re-acquisition; charges the h+1 path GETs and their bytes",
+    "RACQ_URL": "persisted-URL re-acquisition; charges 1 GET and its bytes"
+  },
+  "metrics": {
+    "per_item": {
+      "item_id": "sha256(seed_host + '|' + page_url + '|' + control_name + '|' + control_type)",
+      "hop": "integer",
+      "band": "NEAR | MID | DEEP",
+      "red.requests": "integer",
+      "red.bytes": "integer",
+      "red.tokens": "integer or null",
+      "racq_path.requests": "integer (== hop+1)",
+      "racq_path.bytes": "integer",
+      "racq_url.requests": "integer (== 1)",
+      "racq_url.bytes": "integer",
+      "saving_requests": "red.requests - racq_path.requests (integer)",
+      "saving_bytes": "red.bytes - racq_path.bytes (integer)",
+      "break_even_eligible": "bool (saving_requests >= 1 AND saving_bytes >= 1024)",
+      "break_even_reuse_count_requests": "racq_path.requests / saving_requests or null",
+      "break_even_reuse_count_bytes": "racq_path.bytes / saving_bytes or null"
+    },
+    "per_site": {
+      "ratio_requests_deep_over_near": "median(red.requests|DEEP) / median(red.requests|NEAR) or null",
+      "ratio_bytes_deep_over_near": "median(red.bytes|DEEP) / median(red.bytes|NEAR) or null",
+      "site_verdict": "FLAT | GROWING | MIXED | UNDEFINED",
+      "detection_rate": "fraction of fetched pages with >=1 named form control"
+    },
+    "pooled": {
+      "pooled_ratio_requests_deep_over_near": "number or null",
+      "pooled_ratio_bytes_deep_over_near": "number or null",
+      "pooled_verdict": "FLAT | GROWING | MIXED | UNDEFINED",
+      "median_break_even_reuse_count_requests_by_band": "object",
+      "median_break_even_reuse_count_bytes_by_band": "object"
+    },
+    "controls_metric": "controls.<id>.pass for the four control ids",
+    "falsifier_triggered": "bool; set only when both pooled ratios are defined"
+  },
+  "break_even": {
+    "eligibility_guard": {"saving_requests_min": 1, "saving_bytes_min": 1024},
+    "formula_requests": "break_even_reuse_count_requests = racq_path.requests / (red.requests - racq_path.requests)",
+    "formula_bytes": "break_even_reuse_count_bytes = racq_path.bytes / (red.bytes - racq_path.bytes)",
+    "paired_item_sets": "Within each band, RED and both RACQ arms are measured over the SAME admitted item set, so every break-even ratio is a per-item quantity.",
+    "guard_behaviour": "Items failing the guard contribute break_even_reuse_count == null with the reason recorded; the band median is taken over eligible items only and the eligible count is reported. If the eligible count in a band is 0, that band's median is null and is not interpreted.",
+    "parent_repair": "This implements precondition (3): paired per-item medians plus a materiality guard so a tiny denominator cannot manufacture a small break-even."
+  },
+  "baseline_ordering_proof": {
+    "claim": "By construction RED >= RACQ_PATH >= RACQ_URL in both requests and bytes, with strict inequalities on any site that is not a detour-free chain.",
+    "argument": [
+      "RACQ_URL issues exactly 1 GET (the item page) and bears that page's bytes.",
+      "RACQ_PATH issues exactly h+1 GETs (one per hop on the frozen shortest path). For h>=1, h+1 > 1, so RACQ_PATH.requests > RACQ_URL.requests; the path pages' bytes include the item page, so RACQ_PATH.bytes >= RACQ_URL.bytes.",
+      "RED is the item-blind BFS. Before fetching the item page at hop h, the BFS must fetch every page at levels 0..h-1 that it reaches and every level-h page that precedes the target in the frozen document order. The shortest-path pages are a subset of the pages RED fetches, so RED.requests >= RACQ_PATH.requests and RED.bytes >= RACQ_PATH.bytes.",
+      "RED.requests > RACQ_PATH.requests (strict) iff the BFS takes at least one detour GET before reaching the item page, i.e. iff the count of pages fetched at levels < h plus preceding level-h pages exceeds h. This occurs whenever some level < h has breadth > 1 or a preceding level-h page exists; it is the normal case on the admitted real sites and fails only on a detour-free linear chain.",
+      "Therefore the re-derivation comparator is strictly more expensive than persisted-path re-acquisition for every admitted item with >=1 detour, so the break-even denominator (RED.requests - RACQ_PATH.requests) is strictly positive and the accept region is non-empty. Detour-free items yield denominator 0 and are recorded as break-even-ineligible, which is the honest FLAT case rather than a fabricated saving."
+    ],
+    "pre_freeze_arithmetic_witness": "The live pre-freeze probe already observed the ordering on real data: POS_KNOWN_HOP_CONTROL target (hop 1, direct link) had RED.requests = 3 and cum_bytes = 653222, while RACQ_PATH.requests = 2 and RACQ_URL.requests = 1 -- RED > RACQ_PATH > RACQ_URL. The BROAD_FANOUT_CALIBRATION had RED.requests(hop3) = 932 versus RACQ_PATH.requests = 4, a strict >200x separation.",
+    "parent_repair": "This implements precondition (2), repairing the parent's empty accept region."
+  },
+  "two_sided_reachability": {
+    "why": "Implements the Director's requirement that the falsifier be satisfiable in BOTH directions, and the discriminating-control prior that a certificate detecting only absence is uninterpretable.",
+    "method": "Two local stdlib http.server fixtures are run under the identical frozen policy and are reported as calibration controls, not as site results.",
+    "FLAT_producible": {"control": "NARROW_CHAIN_CALIBRATION", "observed_R": 2.0, "materiality_factor": 3.0, "verdict": "FLAT (2.0 <= 3.0)"},
+    "GROWING_producible": {"control": "BROAD_FANOUT_CALIBRATION", "observed_R": 466.0, "materiality_factor": 3.0, "verdict": "GROWING (466.0 > 3.0)"},
+    "boundary_bracketed": "M=3.0 lies strictly between the two live-measured ratios, so both branches are demonstrably reachable by the frozen instrument."
+  },
+  "decision_rule": "Step 0: EXECUTE reproduces all four controls; any failure -> status=MEASUREMENT_INVALID, no branch. Step 1: run the structural pass on the candidate roots under the frozen policy; apply ADMISSION_GATE_V1; failure -> status=MEASUREMENT_INVALID with exact shortfall. Step 2: for each admitted item measure RED, RACQ_PATH, RACQ_URL in K=2 sessions. Step 3: compute per-site and pooled ratios with M=3.0. Verdict per site/pool: FLAT iff R_req<=3.0 AND R_bytes<=3.0; GROWING iff R_req>3.0 AND R_bytes>3.0; else MIXED. Step 4: report band medians and the break-even reuse counts for eligible items. The scientific outcome is GROWING (supports H1), FALSIFIES H1 (FLAT), or MIXED, written to result.json.outcome with status=COMPLETE. No outcome is recorded as a failure; only genuine measurement invalidity is status=MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If GROWING (H1 supported): persistence of PATHS AND PROCEDURES has a measurable amortization surface; the packet hands the first real depth-derived re-derivation cost and break-even reuse count to C-RESIDUAL-NOVELTY, C-FRESHNESS staleness economics and the C-WEB-DYNAMICS timescales axis. A bounded successor may then implement a path/procedure cache in the product kernel with a measured break-even, subject to a separate verdict; this experiment does not promote any mechanism.",
+  "product_consequence_negative": "If FLAT (H1 falsified): fresh-instance acquisition on this substrate class is O(1) in site structure; persistent cross-episode state cannot buy a work reduction that grows with Web depth. SPIDER should treat fresh-instance acquisition as a constant-cost deterministic procedure, stop optimizing acquisition on this substrate class, and move effort to substrate expansion and elsewhere. Path-persistence work is deprioritized with recorded evidence rather than by assertion.",
+  "estimated_cost": "6 candidate site roots; structural pass <= 250 GETs/site (<= 1500); cost pass K=2 sessions/site (<= 3000); RACQ_PATH/RACQ_URL charges are bounded by admitted-item counts and are small relative to RED; total <= ~5000 GETs, <= ~200 MB, wall-clock target <= 45 min. No browser, Docker, model key, credential, cookie or write verb. Agent-compute: 1 DESIGN + 1 EXECUTE + 1 AUDIT cycle.",
+  "expected_information_gain": "High. The parent EXP-FRONTIER-37385647440 proved the cost question was never exercised at depth (every admitted item at hop <= 1). This experiment produces the first real re-derivation cost at hop >= 3 and a decision-changing FLAT-vs-GROWING answer: either acquisition is O(1) and path persistence is not an optimization target, or path/procedure persistence has a computable break-even. Both outcomes are decision-changing and neither needs a browser, Docker, credential, model key, write verb or unavailable asset.",
+  "not_authorized": [
+    "re-measuring the static re-derivable fraction",
+    "re-entering the terminated deterministic-compilation-bypass thread",
+    "returning to the blocked C-SEMANTIC-RESOLVE thread",
+    "freezing any design whose falsifier cannot trigger",
+    "the five-class stationarity taxonomy (dropped entirely per precondition 4)"
+  ],
+  "parent_handoff_distinction_preserved": {
+    "established": "The parent source-verified that no admitted item existed at hop >= 2 and that the stationarity label could not be decided with the frozen instrument; the GET-only stdlib substrate and the four-control certificate requirement are inherited as working constraints.",
+    "rejected": "The stationarity LABEL framing and the five-class taxonomy are not carried forward as the measured object.",
+    "unknown": "Whether unconditional fresh-instance acquisition cost is flat or growing in shortest-path hop; the real break-even reuse count.",
+    "do_not_assume": "Do not assume deep items are reachable (the admission gate decides), do not assume a tokenizer is present (VN-V1), do not assume JS navigation is part of the graph (VN-V2), and do not assume site-level results generalize across hosts/engines (VN-V8)."
+  }
 }
