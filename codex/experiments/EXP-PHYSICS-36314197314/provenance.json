@@ -1,0 +1,191 @@
+{
+ "code": {
+  "analyze_36314197314.py": "d4a8e12308b3b9415e6785412d2e44e25cc1b34827e723c43294bcc42632bf17",
+  "execute_36314197314.py": "4afd23704e7a9196cff0ae302ccee533b20e70bf1d5bdbd234df689929eb34db",
+  "verify_frozen_inputs.py": "22ade36863b114663841ee4bb626b2a67bfc529cc423dc5920bee8f8a7473ce7",
+  "verify_result_36314197314.py": "4b1e561d56db2e5ca9b6467e6fcb4455b22d741959b74ffbaf26d397a102d38b"
+ },
+ "commands": [
+  {
+   "command": "python3 verify_frozen_inputs.py",
+   "step": "verify frozen inputs"
+  },
+  {
+   "command": "python3 execute_36314197314.py --stage collect",
+   "n_http_requests": 226,
+   "n_transport_fail": 0,
+   "step": "collect"
+  },
+  {
+   "command": "python3 analyze_36314197314.py",
+   "outputs": [
+    "derived/",
+    "result.json",
+    "report.md",
+    "provenance.json"
+   ],
+   "step": "analyze + write packet"
+  },
+  {
+   "command": "python3 execute_36314197314.py --stage analyze",
+   "step": "stage runner equivalent"
+  },
+  {
+   "command": "python3 analyze_36314197314.py --selftest",
+   "step": "determinism self-test (no HTTP)"
+  },
+  {
+   "command": "python3 verify_result_36314197314.py",
+   "step": "independent post-hoc verification (no HTTP, re-derives the packet from raw/collection_log.jsonl without importing the analyzer)"
+  },
+  {
+   "command": "python3 run_experiment.py --experiment EXP-PHYSICS-36314197314",
+   "status": "absent from the frozen packet; recorded deviation",
+   "step": "frozen prereg's stated command (NOT AVAILABLE)"
+  }
+ ],
+ "determinism": {
+  "analysis_deterministic": true,
+  "collection_deterministic": false,
+  "collection_nondeterminism_reason": "the Web is live: response bodies, ETag/Date headers, rate-limit counters and HTTP status codes are not reproducible, so raw/collection_log.jsonl is a point-in-time observation, not a fixture",
+  "evidence": "all RNG is seeded from the request digest; rerunning analyze_36314197314.py reproduces every digest in result.json.artifacts"
+ },
+ "environment": {
+  "browser": "none",
+  "credential_source": "none",
+  "docker": "none",
+  "external_llm_inference": false,
+  "http_client": "python stdlib urllib.request",
+  "implementation": "cpython",
+  "model_calls": 0,
+  "numpy": "2.5.3",
+  "platform": "linux",
+  "python": "3.12.14",
+  "requests_library_used": false
+ },
+ "experiment_class": "TEST_VE / empirical, real interactive-Web substrate",
+ "experiment_id": "EXP-PHYSICS-36314197314",
+ "frozen_inputs": {
+  "all_declared_digests_match": true,
+  "declared_in_freeze": {
+   "prereg.md": "902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1",
+   "request.json": "2bafe3168616eeb0c6293188b5bd5024dbeaddf090db3039ac9b9ab81f826da6",
+   "spec.json": "9757f2f6f3d0a822d98a32479d3a18c913cc5e0a52aa458502fa6185a0c13b0e"
+  },
+  "freeze_sha256": "401af9775edfe1faaa6adb6678c58101ccfe31186c7257250822e7d16dee0216",
+  "mutated_after_freeze": [],
+  "not_hashed_by_freeze": [
+   "frozen_origins.json",
+   "pilot_data.json",
+   "power_calculation.json"
+  ],
+  "recomputed_now": {
+   "prereg.md": "902fa77d1fe73954cafd7514e82a01180583046bc0973be137677697f2a065f1",
+   "request.json": "2bafe3168616eeb0c6293188b5bd5024dbeaddf090db3039ac9b9ab81f826da6",
+   "spec.json": "9757f2f6f3d0a822d98a32479d3a18c913cc5e0a52aa458502fa6185a0c13b0e"
+  },
+  "verified_identical_before_and_after_collection": true
+ },
+ "generated_at_utc": "2026-09-27T12:13:56+00:00",
+ "generated_by": "EXP-PHYSICS-36314197314 analyze_36314197314.py stage6",
+ "github": {
+  "note": "research2 factory Pulse; identical determinism gate is disabled in this workflow, so the analysis determinism is asserted by the recorded artifact digests and by analyze_36314197314.py --selftest instead",
+  "ref": "refs/heads/main",
+  "repository": "Mickalive/Spider",
+  "run_id": "36314197314",
+  "run_number": "1226",
+  "sha": "31d34049b95b5aa40136ee4540a355666a0ec7e6",
+  "workflow": "SPIDER R2 Lane"
+ },
+ "inputs": {
+  "derived_inputs_to_this_packet": [
+   "derived/metrics.json",
+   "derived/controls.json",
+   "derived/validity_gates.json",
+   "derived/decision_readings.json",
+   "derived/bootstrap_cis.json",
+   "derived/permutation_nulls.json"
+  ],
+  "raw": [
+   "raw/collection_log.jsonl",
+   "raw/transitions_index.json",
+   "raw/request_ledger_summary.json",
+   "raw/screen_reachability.json",
+   "raw/template_inventory.json"
+  ]
+ },
+ "lane": "physics",
+ "model_calls": {
+  "llm_inference": "none; every arm, baseline, control and statistic is computed by numpy from archived HTTP responses",
+  "n": 0,
+  "tokens": 0
+ },
+ "network_manifest": {
+  "dns_failure_at_screen": [
+   "api.publicapis.org"
+  ],
+  "hosts": [
+   "api.agify.io",
+   "api.genderize.io",
+   "api.github.com",
+   "api.nationalize.io",
+   "ifconfig.me",
+   "randomuser.me"
+  ],
+  "hosts_excluded_by_mandate_and_not_probed": [
+   "api.chucknorris.io",
+   "catfact.ninja",
+   "dog.ceo",
+   "httpbin.org",
+   "ipify.org"
+  ],
+  "methods": [
+   "GET"
+  ],
+  "n_distinct_urls": 226
+ },
+ "notes": [
+  "collection and analysis are two separate executables so the analysis can be rerun against the archived ledger without spending a single HTTP request",
+  "the analysis contains no learned external model; mechanism library, arm constructions, controls, nulls and intervals are all local computation",
+  "result.json.artifacts digests are computed before this file and before provenance.json, so they cover raw/, derived/ and code/ but not the canonical packet files themselves"
+ ],
+ "outputs": {
+  "derived_count": 15,
+  "note": "provenance.json cannot contain its own digest; it is hashed by the auditor",
+  "packet": {
+   "report.md": "c1c8c022243a64addb4c1f358dc4714d12fb84bdf79e4523e82ece661d336856",
+   "result.json": "d9c73964518f64428ad64963d99ada519fe0cddbb54fc3f4aae8f11e05659c08"
+  }
+ },
+ "resource_use": {
+  "analysis_wall_seconds_total": 9.1,
+  "n_bootstrap_resamples": 1000,
+  "n_iid_draws": 66,
+  "n_permutations": 20000,
+  "n_placebo_permutations": 201,
+  "permutation_replicates": 10000
+ },
+ "schema_version": "research2/experiment/provenance/v1",
+ "seeding": {
+  "derivation_rule": "each stream uses master_seed XOR a fixed per-stream constant, so every stream is independently reproducible from the request digest",
+  "derived_seeds": {
+   "bootstrap_site_clustered": 232893490,
+   "iid_null_draw": 232885557,
+   "permutation_site_grouped": 232897827,
+   "permutation_trajectory_within_site": 232885776,
+   "placebo_permutations": 222974702,
+   "template_discovery_and_signature": 232899052
+  },
+  "master_seed": 232890113,
+  "master_seed_formula": "int(request_sha256[:8], 16)",
+  "request_sha256": "0de19f011284d03030119db0ae54c8596518386b8ca0231a06d80870300011a4",
+  "seed_derivation": "int(request_sha256[:8], 16)"
+ },
+ "stage": "execute",
+ "web_requests": {
+  "n_browser_requests": 0,
+  "n_docker_requests": 0,
+  "n_http": 226,
+  "n_transport_fail": 0
+ }
+}

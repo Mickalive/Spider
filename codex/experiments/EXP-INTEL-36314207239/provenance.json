@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36314207239",
+  "lane": "intel",
+  "github_run_id": "36314207239",
+  "base_sha": "31d34049b95b5aa40136ee4540a355666a0ec7e6",
+  "request_hash": "e06aeb61a023f3bd6b960e626bb6ae5d5b141163e61c97509c0acf89b95c8318",
+  "freeze_hash": "391a6d451a9b0807ca900690c398cee83a374ffff582d9ffa054ad1f0def1d0d",
+  "prereg_hash": "36ec7b92164615b59eae645e08bf79527b388ff52a5178d28afaa169f3ecf3",
+  "created_at": "2026-09-27T10:58:30.313682+00:00",
+  "frozen_at": "2026-09-27T11:05:42.152231+00:00",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36306525220",
+    "path": "research/experiments/EXP-INTEL-36306525220/handoff.json",
+    "sha256": "7493efa619627593d93a94b68d0cda21d941630df9e7a7d7f3805e28d057bd43"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "substrate": "stdlib HTTP only (urllib)",
+    "browser": false,
+    "docker": false,
+    "model_calls": 0,
+    "credentials": 0,
+    "arxiv_verified": true,
+    "semantic_scholar_available": false,
+    "semantic_scholar_error": "HTTP 429 Too Many Requests"
+  },
+  "commands": [
+    "python3 -c \"import urllib.request; urllib.request.urlopen(urllib.request.Request('https://arxiv.org/abs/2608.05784'), timeout=20)\"",
+    "python3 -c \"import urllib.request; urllib.request.urlopen(urllib.request.Request('https://arxiv.org/abs/1802.05012'), timeout=20)\"",
+    "python3 -c \"import pypdf; reader = pypdf.PdfReader('...')\" for PDF text extraction",
+    "curl -s -A ResearchBot/1.0 https://api.semanticscholar.org/graph/v1/paper/search=... (attempted, returned HTTP 429)",
+    "websearch for arXiv IDs of WebCoach (2511.12997) and ReasoningBank (2509.25140)"
+  ],
+  "artifact_index": [
+    {
+      "path": "raw/arxiv_2608.05784.html",
+      "sha256": "2be69aec80a6241465349be9a74c80bc9d1dafff72c3e0b3d921a9bd6f159528",
+      "role": "raw"
+    },
+    {
+      "path": "raw/arxiv_1802.05012.html",
+      "sha256": "36439ba31db6482a2c275e1913b1f63e559ea9d6deaffbad70e0c9425874d060",
+      "role": "raw"
+    },
+    {
+      "path": "raw/pc_paper.pdf",
+      "sha256": "7847cb6bd8aa64672ed0f3983312dabeb1db5e126a1aebfec1571c7c920e1602",
+      "role": "raw"
+    },
+    {
+      "path": "raw/pc_paper_text.txt",
+      "sha256": "2d0af1629341c03eb4413be027b41cfbc6dc915aaedf560c21f32f5b187d14fc",
+      "role": "raw"
+    },
+    {
+      "path": "raw/identity_resolution.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "raw/field_determinations.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "results/coverage.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "claim_ids": [
+    "C-PRODUCT-ECON"
+  ],
+  "director_mandate_summary": "CONTINUE on C-PRODUCT-ECON with cognitive reset. Using validated identity-before-scoring instrument to find which published web-agent systems persist state and report measured break-even reuse count f*."
+}

@@ -53,12 +53,26 @@ jobs:
               ;;
           esac
 
-          FAILURES=$(gh run list --workflow=factory-pulse.yml --limit 50             --json conclusion,headSha             | jq --arg sha "$SOURCE_SHA"               '[.[] | select(.headSha==$sha and (.conclusion=="failure" or .conclusion=="timed_out" or .conclusion=="action_required" or .conclusion=="startup_failure"))] | length')
+          # Circuit-break only on the CURRENT consecutive failure streak.
+          # Historical failures on the same long-lived main SHA must not poison
+          # recovery forever. A success/cancellation/new head resets the streak.
+          RECENT=$(gh run list --workflow=factory-pulse.yml --limit 50             --json conclusion,headSha,databaseId,createdAt)
+          CONSECUTIVE_FAILURES=$(jq --arg sha "$SOURCE_SHA" '
+            reduce .[] as $r (
+              {count:0, open:true};
+              if .open == false then .
+              elif $r.headSha != $sha then .open=false
+              elif ($r.conclusion=="failure" or $r.conclusion=="timed_out" or $r.conclusion=="action_required" or $r.conclusion=="startup_failure")
+                then .count += 1
+              else .open=false
+              end
+            ) | .count
+          ' <<<"$RECENT")
 
-          if [[ "$FAILURES" -ge 3 ]]; then
-            echo "::error::SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN source_run=$SOURCE_RUN head=$SOURCE_SHA failures=$FAILURES"
+          if [[ "$CONSECUTIVE_FAILURES" -ge 3 ]]; then
+            echo "::error::SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN source_run=$SOURCE_RUN head=$SOURCE_SHA consecutive_failures=$CONSECUTIVE_FAILURES"
             exit 0
           fi
 
-          echo "SPIDER_FACTORY_RECOVERY_RETRY source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION head=$SOURCE_SHA failures=$FAILURES"
+          echo "SPIDER_FACTORY_RECOVERY_RETRY source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION head=$SOURCE_SHA consecutive_failures=$CONSECUTIVE_FAILURES"
           gh workflow run factory-pulse.yml --ref main

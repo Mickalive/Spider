@@ -1,0 +1,113 @@
+{
+  "experiment_id": "EXP-INTEL-36314207239",
+  "lane": "intel",
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "Using the validated identity-before-scoring instrument (4-condition conjunction) from EXP-INTEL-36306525220: which PUBLISHED web-agent systems actually persist state across sessions or episodes, and does ANY report a cost quantity with denominator, accounting convention, stated uncertainty, and a MEASURED break-even reuse count f*? Separately and bounded: does any published system report a MEASURED stationarity metric for the state it carries?",
+  "hypothesis": "At least one published web-agent system that persists state across sessions/episodes reports a measured break-even reuse count f* with denominator, accounting convention, and stated uncertainty. Separately: at least one such system reports a measured stationarity metric for its persistent state.",
+  "falsifier": "After exhaustive construction-seeded search (PC bibliography seeds + 3 external systems + 1 bounded 1-hop snowball via Semantic Scholar author-title-year), zero candidates satisfy the identity conjunction AND report a measured f* with denominator/convention/uncertainty. Separately: zero candidates report a measured stationarity metric.",
+  "baselines": {
+    "B-PUBLISHED-NUMBERS-ONLY": {
+      "description": "Read-only extraction from published artifacts; no reproduction, no SPIDER measurements. Same as EXP-INTEL-36306525220 prereg section 10.",
+      "type": "conceptual"
+    },
+    "B-NULL-FUZZY-RECALL": {
+      "description": "Name-recall search (Google Scholar fuzzy query for 'persistent state web agent', 'cross-episode memory agent', 'break-even reuse count agent') without identity conjunction. Expected to retrieve irrelevant/noisy results.",
+      "type": "negative_control"
+    }
+  },
+  "positive_control": {
+    "id": "PC-COST-ACCOUNTING",
+    "description": "arXiv:2608.05784v1 (Activity Frames) — the verified positive control from EXP-INTEL-36306525220 that contains a complete per-task cost model (Eq. 1) with reuse count N as a symbolic term, explicitly states 'the one input none of them measures is h on the pre-delegation passive corpus', and reports modeled (not billed) dollar comparisons. This control validates that the field-extraction pipeline can extract cost-accounting fields when the identity gate passes. Frozen target: arXiv:2608.05784v1 with expected_authors=['Iyamu', 'Nossa'] (corrected from ['TBD']).",
+    "expected_behavior": "Identity gate passes (C1 exact base_id, C2 title token coverage >=0.85, C3 author substring match, C4 >=4/6 domain keywords). Field extraction yields: break_even_reuse_count_fstar=NOT_REPORTED_AS_A_COMPUTED_QUANTITY (0 pattern hits over full text), real_cost_advantage_persistence=no_measured_real_cost_advantage, staleness_forgetting_maintenance_cost=NOT_REPORTED_AS_A_QUANTIFIED_COST, modeled_vs_measured=modeled_explicitly_stated.",
+    "pass_criteria": "All four identity conditions pass AND field extraction produces the four expected determinations with verbatim quotes."
+  },
+  "null_control": {
+    "id": "NC-REAL-BUT-WRONG",
+    "description": "arXiv:1802.05012v2 ('Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer, 2018, Azagra-Caro et al.) — a REAL artifact at a frozen identifier that is NOT a web-agent system. Validated in EXP-INTEL-36306525220: resolver flagged C2_title_mismatch and C3_author_mismatch, emitted AMBIGUOUS -> UNMEASURED, never NOT_FOUND. C4 domain-keyword condition ALONE would have passed (contains 'agent' token), proving the 4-condition conjunction is necessary for specificity.",
+    "expected_behavior": "Identity gate fails at C2 and/or C3, emits AMBIGUOUS -> UNMEASURED, never NOT_FOUND.",
+    "pass_criteria": "Resolver records pass=null with reason containing C2_title_mismatch or C3_author_mismatch; resolution_status=UNMEASURED; never resolution_status=NOT_FOUND."
+  },
+  "measurement_validity": {
+    "identity_gate": "Four-condition conjunction (C1 exact base_id match, C2 case-insensitive substring + expected_token_coverage >=0.85 per Director ruling, C3 at least one author substring match, C4 >=4 of 6 domain keywords). All conditions must pass for identity_resolution=RESOLVED. Any failure -> AMBIGUOUS -> UNMEASURED. Never NOT_FOUND.",
+    "construct_population": "Candidate set built BY CONSTRUCTION only: (1) PC bibliography seeds: 'Agent workflow memory' (Wang, Mao, Fried, Neubig 2024) and 'Position: Episodic memory is the missing piece for long-term LLM agents' (Pink et al. 2025); (2) External systems from last packet: Agent Workflow Memory, WebCoach, ReasoningBank; (3) Exactly ONE bounded 1-hop snowball: references from the PC artifact resolved by author-title-year against Semantic Scholar graph API (api.semanticscholar.org/graph/v1), maximum 20 candidates, frozen at design time. The 14 frozen benchmark entries from EXP-INTEL-36306525220 are EXCLUDED. The 3 wrong identifiers (BrowserGym 2401.15378, MiniWoB++ 1802.08827, SeeAct 2402.04566) are EXCLUDED — no post-hoc repair.",
+    "field_extraction": "For each RESOLVED candidate, extract verbatim quotes for: (a) persists_state_across_sessions (yes/no/UNKNOWN, never inferred from keywords), (b) cost_quantity_denominator, (c) cost_quantity_accounting_convention, (d) cost_quantity_stated_uncertainty, (e) break_even_reuse_count_fstar (value or NOT_REPORTED_AS_A_COMPUTED_QUANTITY), (f) modeled_vs_measured (modeled/measured/unknown), (g) stationarity_metric (value or NOT_REPORTED, with denominator/convention/uncertainty if present).",
+    "coverage_reporting": "Report: n_candidates_searched, n_resolved, n_persisting_state_yes, n_persisting_state_no, n_persisting_state_unknown, n_reporting_fstar_measured, n_reporting_stationarity_measured. Separate snowball coverage (papers_examined, papers_resolved) from seed coverage. Never use identity_resolution_recall as construct-population proxy.",
+    "substrate": "stdlib HTTP only (urllib/requests). No browser, no Docker, no model credentials. arXiv via https://arxiv.org/abs/<id> (HTTP 200 verified). Semantic Scholar Graph API (HTTP 200 verified on substrate probe)."
+  },
+  "decision_rule": {
+    "part_A_primary": {
+      "outcome_SUPPORTS": "At least one RESOLVED candidate with persists_state_across_sessions=yes AND break_even_reuse_count_fstar reported as a MEASURED quantity (not modeled) WITH explicit denominator, accounting convention, and stated uncertainty.",
+      "outcome_FALSIFIES": "Zero RESOLVED candidates with persists_state_across_sessions=yes AND break_even_reuse_count_fstar measured with denominator/convention/uncertainty. All candidates either: do not persist state, or report f* only as modeled/symbolic, or lack denominator/convention/uncertainty.",
+      "outcome_INCONCLUSIVE": "At least one RESOLVED candidate with persists_state_across_sessions=yes but break_even_reuse_count_fstar status=NOT_REPORTED_AS_A_COMPUTED_QUANTITY or modeled_only, AND no candidate meets SUPPORTS criteria.",
+      "outcome_MEASUREMENT_INVALID": "Identity gate fails validation (PC-COST-ACCOUNTING fails OR NC-REAL-BUT-WRONG resolves to RESOLVED OR emits NOT_FOUND), OR substrate fails (arXiv abs/ or Semantic Scholar API non-200 on >50% probes), OR field extraction fails on PC-COST-ACCOUNTING."
+    },
+    "part_B_stationarity": {
+      "outcome_SUPPORTS": "At least one RESOLVED candidate with persists_state_across_sessions=yes AND stationarity_metric reported as MEASURED with denominator, convention, and uncertainty.",
+      "outcome_FALSIFIES": "Zero RESOLVED candidates with persists_state_across_sessions=yes AND measured stationarity_metric with denominator/convention/uncertainty.",
+      "outcome_INCONCLUSIVE": "At least one RESOLVED candidate with persists_state_across_sessions=yes but stationarity_metric NOT_REPORTED or modeled_only.",
+      "outcome_MEASUREMENT_INVALID": "Same as Part A (shared identity gate and substrate)."
+    },
+    "overall": "Part A and Part B are separately scored. Overall experiment status = MEASUREMENT_INVALID if either part is MEASUREMENT_INVALID; otherwise COMPLETE with per-part outcomes."
+  },
+  "product_consequence_positive": "If Part A SUPPORTS: external corroboration that SPIDER's cross-episode persistence premise has measured economic precedent; Product can anchor C-PRODUCT-ECON's next_gate to a published f* benchmark. If Part B SUPPORTS: external evidence that stationarity measurement is a reporting practice, informing Runtime's freshness guard design.",
+  "product_consequence_negative": "If Part A FALSIFIES: the field has no measured break-even reuse count — SPIDER's premise is economically unprecedented; Product must generate its own f* internally. If Part B FALSIFIES: stationarity reporting is absent; Runtime must invent freshness metrics. If INCONCLUSIVE: question remains open; next cycle may widen snowball or change seeds.",
+  "estimated_cost": {
+    "http_requests": "~100 (arXiv abs + Semantic Scholar API + PDF/text extraction for ~25 candidates)",
+    "compute_seconds": "~300",
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "credentials": 0
+  },
+  "expected_information_gain": "High. This is the first construct-population search (not benchmark-list search) for the decisive C-PRODUCT-ECON question. The identity instrument is validated; the population defect is diagnosed; the snowball rule is now executable via Semantic Scholar API. A valid outcome either way changes the factory's architectural premise.",
+  "identity_resolution": {
+    "frozen_target_list": [
+      {"base_id": "2608.05784", "version": "v1", "expected_title": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay", "expected_authors": ["Iyamu", "Nossa"], "expected_token_coverage_in_title": 1.0, "domain_keywords": ["agent", "memory", "replay", "screen", "activity", "deterministic"], "role": "PC-COST-ACCOUNTING"},
+      {"base_id": "1802.05012", "version": "v2", "expected_title": "Getting out of the closet: Scientific authorship of literary fiction and knowledge transfer", "expected_authors": ["Azagra-Caro"], "expected_token_coverage_in_title": 0.0, "domain_keywords": ["agent", "memory", "web", "browser", "automation", "llm"], "role": "NC-REAL-BUT-WRONG"}
+    ],
+    "seed_candidates": [
+      {"name": "Agent workflow memory", "authors": ["Wang", "Mao", "Fried", "Neubig"], "year": 2024, "source": "PC_bibliography"},
+      {"name": "Position: Episodic memory is the missing piece for long-term LLM agents", "authors": ["Pink"], "year": 2025, "source": "PC_bibliography"},
+      {"name": "Agent Workflow Memory", "authors": ["Wang", "Mao", "Fried", "Neubig"], "year": 2024, "source": "external_systems_not_in_frozen_list"},
+      {"name": "WebCoach", "authors": [], "year": null, "source": "external_systems_not_in_frozen_list"},
+      {"name": "ReasoningBank", "authors": [], "year": null, "source": "external_systems_not_in_frozen_list"}
+    ],
+    "snowball": {
+      "source": "PC-COST-ACCOUNTING references",
+      "method": "author_title_year_via_semantic_scholar_graph_api",
+      "max_candidates": 20,
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "params": {"fields": "paperId,title,authors,year,venue,abstract,references,citations", "limit": 20},
+      "frozen_at_design": true
+    },
+    "excluded_from_search": [
+      "WebShop 2207.01206v4",
+      "Mind2Web 2306.06070v3",
+      "WebVoyager 2401.13919v4",
+      "WebArena 2307.13854v3",
+      "AgentBench 2308.03688v2",
+      "BrowserGym 2401.15378",
+      "MiniWoB++ 1802.08827",
+      "SeeAct 2402.04566",
+      "Crux 2406.01234",
+      "WebAgent 2403.01234",
+      "RULER 2405.01234",
+      "WebCanvas 2407.01234",
+      "BrowserBench 2408.01234"
+    ],
+    "conjunction_conditions": {
+      "C1_exact_base_id": "Exact arXiv base ID match (e.g., 2608.05784)",
+      "C2_title_substring_coverage": "Case-insensitive expected token coverage >= 0.85 (Director ruling: substring + coverage, NOT full-token-set Jaccard)",
+      "C3_author_substring": "At least one expected author surname substring match in returned author list",
+      "C4_domain_keywords": "At least 4 of 6 domain keywords present in title+abstract"
+    }
+  },
+  "field_schema": {
+    "persists_state_across_sessions": {"type": "enum", "values": ["yes", "no", "UNKNOWN"], "evidence_required": "verbatim_quote", "inference_forbidden": "never_from_keywords"},
+    "cost_quantity_denominator": {"type": "string", "evidence_required": "verbatim_quote", "examples": ["per_task", "per_episode", "per_token", "per_dollar"]},
+    "cost_quantity_accounting_convention": {"type": "string", "evidence_required": "verbatim_quote", "examples": ["modeled_from_measured_artifacts", "billed_usage_json", "wall_clock_seconds", "token_count"]},
+    "cost_quantity_stated_uncertainty": {"type": "string", "evidence_required": "verbatim_quote", "examples": ["CI_95%", "IQR", "std_dev", "NOT_STATED"]},
+    "break_even_reuse_count_fstar": {"type": "string", "evidence_required": "verbatim_quote_or_pattern_sweep", "values": ["numeric_value", "NOT_REPORTED_AS_A_COMPUTED_QUANTITY", "SYMBOLIC_ONLY"]},
+    "modeled_vs_measured": {"type": "enum", "values": ["modeled", "measured", "unknown"], "evidence_required": "verbatim_quote"},
+    "stationarity_metric": {"type": "string", "evidence_required": "verbatim_quote", "values": ["numeric_with_denominator_convention_uncertainty", "NOT_REPORTED", "SYMBOLIC_ONLY"]}
+  }
+}

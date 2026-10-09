@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37385633334",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "readiness_certificate": {
+      "model_endpoint_reachable": "FAIL",
+      "task_set_ge_30_mechanical": "FAIL",
+      "accounting_fidelity_control_pass": "FAIL"
+    },
+    "arms_executed": 0,
+    "model_calls": 0,
+    "model_tokens": 0,
+    "browser_actions": 0,
+    "http_requests": 0,
+    "retrieval_calls": 0,
+    "verification_calls": 0,
+    "repair_attempts": 0,
+    "cost_per_verified_success_M_total_f10": null,
+    "task_success_rate": null,
+    "false_accept_rate": null,
+    "abstention_rate": null,
+    "ECE": null,
+    "retrieval_precision_at_5": null,
+    "retrieval_recall_at_5": null
+  },
+  "controls": {
+    "PC-ACCOUNTING-FIDELITY": {
+      "expected_behavior": "All counters within 1% of ground truth on deterministic seeded trajectory",
+      "observed_behavior": "Could not run: no per-trajectory counter instrumentation in src/spider/kernel.py, no browser/HTTP/model substrate",
+      "pass_fail_unknown": "unknown/not_runnable",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    },
+    "NC-SHUFFLED-RETRIEVAL": {
+      "expected_behavior": "Cost per verified success >= B-COLD and accuracy <= B-COLD",
+      "observed_behavior": "Not executed; gate failed before any arm",
+      "pass_fail_unknown": "not_evaluated",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    },
+    "B-COLD": {
+      "expected_behavior": "Cold re-derivation agent",
+      "observed_behavior": "Not executed",
+      "pass_fail_unknown": "not_evaluated",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    },
+    "B-INSTRUCTIONS": {
+      "expected_behavior": "Instructions-only agent",
+      "observed_behavior": "Not executed",
+      "pass_fail_unknown": "not_evaluated",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    },
+    "B-RETRIEVAL": {
+      "expected_behavior": "TF-IDF Jaccard K=5 retrieval agent, retrieval quality reported",
+      "observed_behavior": "Not executed",
+      "pass_fail_unknown": "not_evaluated",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    },
+    "A-SPIDER": {
+      "expected_behavior": "SPIDER kernel arm with full bind/execute/verify",
+      "observed_behavior": "Not executed",
+      "pass_fail_unknown": "not_evaluated",
+      "evidence": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37385633334/raw_readiness/readiness_certificate.json",
+      "sha256": "f87f51fdca39f07ae17cfbc99d83718f60226563c2b7fea642d357a1a906f737",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37385633334/freeze.json",
+      "sha256": "9a359e8f576e099881ba1dfb8490a152d05318756257422b809bd216bafb8c49",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "All three frozen readiness checks FAIL: no model endpoint/credentials, no frozen 30-task mechanical-verifier bank, no accounting instrumentation to certify.",
+    "No experimental arm, positive control or null control executed; zero model calls, zero browser actions, zero HTTP requests.",
+    "The mandatory non-experiment hygiene obligation (revert of the four-file 1466-line insertion-variability delta) was verified already complete: git commit 39fcfd96f5eea0fe9a7d548f869428b617dedd08 removed src/spider/variability.py and tests/test_variability.py and restored kernel.py/models.py; working tree contains only kernel.py, models.py, registry.py, __init__.py in src/spider and test_kernel.py in tests.",
+    "No infrastructure failure occurred during the readiness probes themselves; the failure is an absent required substrate, which the frozen rule maps to MEASUREMENT_INVALID, not to a scientific negative."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID is a substrate diagnosis, not falsification of C-LLM-INHERIT; the product thesis remains untested.",
+    "The same missing-substrate blockers were recorded for C-LLM-INHERIT in codex/claim_state.json (EXP-PRODUCT-36091881382: GHCR pull denied, OPENAI_API_KEY absent, Playwright missing); this run confirms they persist.",
+    "The opencode free-model routing identities in config/models.json are not gpt-4o-mini and confer no programmatic endpoint; no seeded deterministic counter trajectory can run without one.",
+    "Freeze binds request/spec/prereg hashes only; no task bank or code hash was bound, so the absent frozen task list is recorded as a FAIL of check 2.2 rather than reconciled post hoc."
+  ],
+  "unresolved": [
+    "Smallest unblocking actions: provision a model endpoint credential (OPENAI_API_KEY or equivalent), install playwright+httpx, implement and demonstrate the per-trajectory honest counters in src/spider, and commit a frozen 30-task mechanical-verifier bank before any re-freeze.",
+    "C-LLM-INHERIT remains at HYPOTHESIS with zero admissible evidence."
+  ]
+}
