@@ -1,17 +1,192 @@
 {
   "experiment_id": "EXP-INTEL-37950616801",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "director_mandate_ref": {
+    "cycle_id": "37949204501",
+    "allocation_action": "CONTINUE",
+    "target_claim": "C-PRODUCT-ECON",
+    "parent_handoff": {
+      "experiment_id": "EXP-INTEL-36314207239",
+      "path": "research/experiments/EXP-INTEL-36314207239/handoff.json",
+      "sha256": "9cfb6a9165d6fb9e5319a98b947c3fa7baf1319e1168a8ff8cd583e219630297"
+    },
+    "inherited_next_question_ref": "EXP-INTEL-36306525220 next_question Part B (proposed, never executed)"
+  },
+  "question": "Zero-new-corpus determination from the already hash-pinned text layer (research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt, sha256 e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf): is a measured break-even reuse count f* reportable from this literature class at all, or is the persistence-economics anchor unavailable by construction? (a) State the COLD COUNTERFACTUAL arm explicitly, because the published model prices only the branch an agent takes and a break-even is meaningless without the alternative. (b) Derive f* and state the accounting convention assumed for the printed write term (charged once in total versus once per reuse). (c) Evaluate f* over the artifact's own published parameter values (R 60-343x modeled, h 0.090 in-sample and 0.077 out-of-sample, q reported degrading below 1, p the base success rate) and publish the regime table over which (h, q, Cwrite, Cverify) f* is finite, what f* is at the published point estimates, and at what h f* becomes operationally reachable. (d) State the divergence condition (carried state never pays for itself when E_cold <= E_warm plus amortized write cost). Exactly the mandate's Part 1 determination; no new corpus, browser, Docker or credential.",
+  "hypothesis": "H1 (REPORTABLE): from the artifact's own published values there exists a finite, positive break-even reuse count f* = Cwrite / (E_cold - E_warm) on the artifact's published slice (h in {0.077, 0.086, 0.090, 0.131}; q below 1), and it is operationally reachable within the artifact's own observed reuse horizon (f* <= N_reach = 181 reuses of a recurring routine). H0 (UNAVAILABLE BY CONSTRUCTION): no such reportable value exists, because (i) the cold-warm saving is structurally non-positive (g <= 0, so the carried state never pays even with a free write), or (ii) it is finite but requires an input the artifact never publishes in units commensurable with Cmiss (Cwrite, Cverify, Cwrong, or p), so no f* with a stated denominator can be reported, or (iii) it is reachable only at h > 0.131 (a recurrence the artifact never measured).",
+  "falsifier": "H1 is FALSIFIED if, under BOTH frozen readings of the preserved equation and BOTH frozen write conventions, either (F1) the dimensionless saving bracket g <= 0 at every cell of the published slice (structural divergence: E_cold <= E_warm even with a free write), or (F2) f* > N_reach = 181 at every cell where g > 0 using the artifact's published h and q (unreachable within the observed horizon), or (F3) f* is finite only if a required input (Cwrite, Cverify, Cwrong, or p) is supplied from outside the artifact, with no artifact-internal commensurable value, so no numeric f* with a denominator is reportable. H0 is FALSIFIED if there exists a published-slice cell, using only artifact-derived or explicitly swept values, where g > 0, f* <= 181, and h* <= 0.077 (the conservative out-of-sample recurrence), under at least one reading.",
+  "baselines": [
+    {
+      "id": "B-PUBLISHED-NUMBERS-ONLY",
+      "type": "artifact-content baseline / by-construction empty baseline",
+      "method": "Exhaustive, case-insensitive pattern sweep of the frozen 69,607-character text layer for the paper's own publication of a break-even: terms {break-even, breakeven, break even, payback, f*, amortiz*} plus a manual read of the surrounding cost sections (lines 226-240, 898-975, 1155-1245).",
+      "frozen_expected_observation": "The artifact publishes NO break-even reuse count f*, no payback term, and no 'f*' symbol. It publishes saving FRACTIONS and RATIOS instead: per-covered-step recovery 1 - 1/R (~99%, line 938), an all-fleet ceiling h(1 - 1/R_info) ~ 7.7% (lines 972-975), and a per-occurrence reduction 6.0x (line 956). Any 'reportable f*' must therefore be DERIVED by this experiment, not read off; and the artifact's own numbers are not a published f*.",
+      "why_this_is_the_baseline": "It bounds the claim to 'derivable from the artifact', not 'published by the artifact', and it establishes that the artifact's headline economics are saving rates, not break-even counts."
+    },
+    {
+      "id": "B-FLEET-CEILING",
+      "type": "strong baseline / best artifact-internal candidate for an f* proxy",
+      "method": "Attempt to invert the artifact's strongest published economics quantity, the all-fleet ceiling h(1 - 1/R_info) ~ 7.7% (lines 972-975, 1015), into a break-even reuse count without this experiment's cold arm.",
+      "frozen_expected_observation": "The inversion fails: h(1 - 1/R_info) is a fraction of re-derivation cost recovered by carried state, not a write-repayment count. It contains no Cwrite term and no cold arm, so it cannot yield f* on its own. This baseline prevents the experiment from mislabeling a saving rate as a break-even.",
+      "why_this_is_the_baseline": "It is the most generous artifact-internal candidate; if even it cannot yield f*, no weaker artifact quantity can."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-ALGEBRA",
+    "type": "known-answer positive control for the f* engine",
+    "method": "Instantiate the closed form f* = Cwrite / (E_cold - E_warm) on a hand-computed, fully specified parameter cell with g > 0 and a finite f* (e.g. h=0.5, q=1.0, p=1.0, Chit=0, Cverify=0, Cwrong=0, Cwrite=1 in Cmiss units => E_cold=1, E_warm=0.5, f*=2).",
+    "frozen_expected_observation": "The engine returns f* = 2.0 within 1e-9 relative error, finite and positive.",
+    "pass_condition": "|f*_engine - f*_hand| / |f*_hand| <= 1e-9.",
+    "role": "Certifies the arithmetic branch that can return a finite f* actually fires, so a later NOT_FINITE is attributable to the data, not to a broken engine."
+  },
+  "null_control": {
+    "id": "NC-DIVERGENT",
+    "type": "discriminating null control (must fire)",
+    "method": "Instantiate the SAME engine on a fully specified cell known to be divergent: g <= 0 (e.g. h=0.5, q=0.1, p=1.0, Chit=0, Cverify=0.5, Cwrong=10 => g = 0.1*(1 - 0 - 0.5) - 0.9*10 < 0), and additionally evaluate on a cell where f* > N_reach.",
+    "frozen_expected_observation": "The engine returns NOT_FINITE / divergent (no positive finite f*) for g <= 0, and returns UNREACHABLE for 181 < f* < inf, never a spurious positive finite f*.",
+    "pass_condition": "g <= 0 => engine reports divergent; 181 < f* < inf => engine reports unreachable.",
+    "role": "Satisfies the discriminating-control prior: certifies the instrument can return the negative branch, so a NOT_FINITE / UNREACHABLE on the published slice is interpretable as a property of the artifact rather than of the tool."
+  },
+  "additional_controls": [
+    {
+      "id": "PC-READING",
+      "type": "measurement-validity control",
+      "method": "Derive the text layer's fraction-parsing rule from the unambiguous stacked equations (2) Cagent(k)=k(wh/750 + 350 + 180) and (3) R = Cagent(k)/Creplay(k), Creplay(k)=|tiktoken(.)|, whose structural forms are independently known, then apply the derived rule to Eq. (1) and record which reading it selects.",
+      "frozen_expected_observation": "The OCR linearizes stacked fractions numerator-newline-denominator (confirmed by 'wh/750' and 'Cagent(k)' over 'Creplay(k)'). Applied to Eq. (1), the rule selects the literal division reading: (1-hq)Cmiss/p, hq(Chit+Cverify), h(1-q)Cwrong, Cwrite/N.",
+      "fail_action": "If the rule cannot be established, the primary reading is not identifiable and the determination is MEASUREMENT_INVALID."
+    },
+    {
+      "id": "PC-EXTRACT",
+      "type": "extraction-fidelity control",
+      "method": "Re-extract the frozen published anchors by independent search and compare to frozen expected values.",
+      "frozen_expected_observation": "h in {0.077, 0.086, 0.090, 0.131}; R_inject=60x (IQR 59-62), R_info=343x; q bounded below 1 with entity typing ~82%; compile cost <=0.5ms, 0 tokens; median guard coverage 0.415; routine instances 5,508 across 614 recurring routines; max occurrences 181; 3-arm modeled dollars $125.81 / $20.96 / $74.46.",
+      "fail_action": "Any mismatch => MEASUREMENT_INVALID for the affected anchor; the anchor is then recorded as unavailable, not as zero."
+    },
+    {
+      "id": "NC-CONVENTION",
+      "type": "discriminating convention control (must fire)",
+      "method": "Evaluate the SAME parameter cell under both write conventions: AMORTIZE-ONCE (write total Cwrite charged once; per-task write = Cwrite/N) and PER-REUSE (write Cwrite charged on every reuse; total grows as Cwrite*N).",
+      "frozen_expected_observation": "PER-REUSE collapses the break-even to a degenerate condition independent of N (f*=1 if the per-task inequality holds, else no f*), differing from AMORTIZE-ONCE by orders of magnitude. The control fires iff the two conventions give materially different f* on the same cell.",
+      "fail_action": "If they do not differ, the convention axis is misimplemented => MEASUREMENT_INVALID."
+    }
+  ],
+  "measurement_validity": [
+    "Evidence is a single hash-pinned artifact: path and sha256 are asserted in every derived artifact; the file is 70,219 bytes / 69,607 characters / 1,447 lines. A hash or size mismatch invalidates all derived measurements.",
+    "Every quoted formula, parameter and limitation is quoted verbatim with line numbers from the frozen text layer; no quantity is imported from any other paper, dataset or run.",
+    "The preserved equation is OCR-linearized. The multiply-vs-divide ambiguity (Cmiss/p vs Cmiss*p; Cwrite/N vs Cwrite*N) is NOT silently resolved: both readings are frozen and every reported class is reported per reading. PC-READING establishes the text-literal reading as primary; the mandate's literal form is carried as an explicit secondary reading.",
+    "The write-accounting convention is NOT silently resolved: AMORTIZE-ONCE (primary, consistent with the mandate's f* formula) and PER-REUSE (secondary) are both frozen, and NC-CONVENTION certifies they differ.",
+    "Because f* = Cwrite/(h*g) is dimensionless when all C-terms are normalized by Cmiss, a numeric f* is reportable only if the artifact provides the ratio w=Cwrite/Cmiss in commensurable units. The artifact prints compile cost as '<=0.5ms, 0 tokens' (w_model ~ 0) but prints capture/storage cost only in wall-clock and GB (9.5GB, ~0.19GB/active day, OCR on 96% of frames), never in dollars-per-task commensurable with Cmiss. Whether this counts as an artifact-internal w is a frozen adjudication axis, not an assumption.",
+    "Modeled vs measured is preserved exactly as the artifact labels it: R's numerator and the three-arm dollars are 'modeled, not billed' (lines 1160-1168); the denominators (guarded plan, minimal script, guard coverage 0.415) are measured. No modeled quantity is reported as measured.",
+    "Scope is the artifact, not the literature class: this is a determination of whether an f* is derivable from THIS hash-pinned text layer, not a prevalence claim about all persistent-state economics literature. Any generalization is explicitly out of scope.",
+    "Non-adoption bar (inherited, preserved): no quantity from arXiv:2608.05784v1 may enter a SPIDER cost model, break-even derivation, product plan or investor-facing material. This experiment treats the artifact's quantities as the OBJECT of a reportability analysis, never as a SPIDER comparator or cost input. See scope_and_non_adoption.",
+    "f* is reported as a real number with the operational integer horizon ceil(f*) noted separately; reachability is f* <= N_reach, not f* < N_reach.",
+    "Every reported class carries the reading, convention, N_reach and whether each C-term was artifact-derived or swept. An unresolvable mandatory input is reported as absent, never as zero.",
+    "Independent recomputation: the regime table is produced by two implementations (a direct per-cell evaluator and an independent closed-form using the dimensionless g), which must agree at all sampled cells.",
+    "p ('base success rate') is not published numerically by the artifact; it is a swept axis, labeled unpublished. If no reported class survives over the whole p sweep, that non-robustness is stated explicitly."
+  ],
+  "decision_rule": {
+    "precedence": "Apply gates in order; the first gate that fires sets the status.",
+    "gate_0_measurement_invalid": "MEASUREMENT_INVALID (status=MEASUREMENT_INVALID, outcome=MEASUREMENT_INVALID) if ANY of: evidence sha256 != e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf or size != 70,219 bytes; a required formula/parameter span cannot be located verbatim; PC-READING fails; PC-EXTRACT fails on a load-bearing anchor; PC-ALGEBRA does not reproduce the hand-computed f*; NC-DIVERGENT does not fire the negative branch; NC-CONVENTION does not distinguish the conventions; or the two table implementations disagree. Measurement failure is not a scientific negative.",
+    "gate_1_reportability_class_per_reading": "For each frozen reading R in {VAR-LIT (primary: Cmiss/p, Cwrite/N), VAR-MAN (secondary: Cmiss*p, Cwrite*N)} and each convention in {AMORTIZE-ONCE (primary), PER-REUSE (secondary)}, classify the published slice using only artifact-derived values plus the frozen sweeps: DIVERGENT if g <= 0 at every published-slice cell (structural divergence); FINITE_NOT_EVALUABLE if g > 0 somewhere but no artifact-internal commensurable w anchors a numeric f*, so only the locus h*(w)=w/(N_reach*g) can be reported; UNREACHABLE if g > 0 and f* > N_reach at every published-slice cell; REACHABLE if there exists a published-slice cell with g > 0 and f* <= N_reach.",
+    "gate_2_verdict": "Derive the verdict per (reading, convention) from gate_1, then aggregate: SUPPORTS (claim C-PRODUCT-ECON: a measured break-even f* is reportable from this artifact) iff REACHABLE under every non-secondary reading and the REACHABLE region includes h <= 0.077; FALSIFIES (the persistence-economics anchor is unavailable by construction from this artifact) iff every (reading, convention) classifies DIVERGENT, FINITE_NOT_EVALUABLE or UNREACHABLE; MIXED if the classes disagree across readings/conventions or if REACHABLE holds only at h > 0.077 (i.e. only at the URL-granularity 0.131 or otherwise above the recurrence the artifact says the cost accounting should carry).",
+    "gate_3_h_star_report": "Always report the critical recurrence h*(w) = w/(N_reach*g) for each convention/reading and the smallest published h at which f* <= N_reach; state whether that h is <= 0.077 (conservative out-of-sample), <= 0.131 (max published), or beyond 0.131 (never measured, hence unavailable by construction).",
+    "gate_4_divergence_report": "Always report, in the artifact's own terms, the divergence condition: E_cold <= E_warm plus the amortized write cost. Structural form: E_cold - E_warm = h*g <= 0. Operational form under AMORTIZE-ONCE: E_cold <= E_warm + Cwrite/N. State both explicitly even when neither fires.",
+    "frozen_numerics": {
+      "N_reach_primary": 181,
+      "N_reach_sensitivity": [9, 25, 181],
+      "N_reach_basis": "max observed occurrences of a recurring action routine (line 919, 'Median steps k / max occ. 5 / 181'); 5,508 instances across 614 recurring routines gives a mean of ~9.",
+      "published_h_slice": [0.077, 0.086, 0.090, 0.131],
+      "h_star_rule": "reachable iff h_star(w) <= max published h (0.131); claim-supporting iff also h_star(w) <= 0.077."
+    }
+  },
+  "derivations": {
+    "cold_counterfactual": "With no carried state, the hit branch is empty (h=0) and the one-time write is absent, so E_cold = Cmiss/p under VAR-LIT (the cost of one miss re-derivation) and E_cold = Cmiss*p under VAR-MAN. The artifact's Eq. (1) prices only the WARM branch an agent actually takes; E_cold must be supplied by this experiment as the explicit counterfactual, which is the whole point of the mandate's clause (a).",
+    "warm_write_free": "E_warm = (1-hq)*(Cmiss/p) + hq*(Chit+Cverify) + h(1-q)*Cwrong   [VAR-LIT].",
+    "delta": "delta = E_cold - E_warm = h*g, where g = q*(E_cold_unit - Chit - Cverify) - (1-q)*Cwrong and E_cold_unit is Cmiss/p (VAR-LIT) or Cmiss*p (VAR-MAN). g is independent of h.",
+    "break_even": "AMORTIZE-ONCE: total warm cost over N tasks = N*E_warm + Cwrite; total cold = N*E_cold; break-even at N > Cwrite/(E_cold - E_warm) = Cwrite/(h*g) = f*. PER-REUSE: total warm = N*(E_warm + Cwrite); break-even collapses to a single-task inequality, E_cold > E_warm + Cwrite, giving f*=1 if true else no f*.",
+    "dimensionless_form": "Normalize every C-term by Cmiss: r=Chit/Cmiss=1/R (R in {60,343}, artifact-modeled), b=Cverify/Cmiss, c=Cwrong/Cmiss, w=Cwrite/Cmiss. Then f* = w/(h*g) with g = q*(1/p - r - b) - (1-q)*c  [VAR-LIT] or g = q*(p - r - b) - (1-q)*c  [VAR-MAN]. f* depends only on ratios, not on absolute dollars.",
+    "critical_h": "The recurrence at which f* equals the observed reuse horizon is h*(w) = w/(N_reach*g); f* is reachable iff h*(w) <= published h.",
+    "divergence_condition": "Structural: E_cold - E_warm = h*g <= 0, i.e. g <= 0, meaning carried state does not pay even if the write is free. Operational: E_cold <= E_warm + amortized write per task (Cwrite/N under AMORTIZE-ONCE), i.e. f* > N."
+  },
+  "frozen_parameters": {
+    "reading_variants": {
+      "VAR-LIT": {"primary": true, "cold": "Cmiss/p", "write_term": "Cwrite/N", "basis": "OCR literal: stacked numerator over denominator, corroborated by Eq. (2) 'wh/750' and Eq. (3) 'Cagent(k)' over 'Creplay(k)'."},
+      "VAR-MAN": {"primary": false, "cold": "Cmiss*p", "write_term": "Cwrite*N", "basis": "The mandate's literal formula as written; carried as an explicit secondary reading, not silently discarded."}
+    },
+    "write_conventions": {
+      "AMORTIZE-ONCE": {"primary": true, "meaning": "Cwrite charged once in total; per-task amortized write = Cwrite/N. Consistent with f*=Cwrite/(E_cold-E_warm)."},
+      "PER-REUSE": {"primary": false, "meaning": "Cwrite charged on every reuse; total write = Cwrite*N; break-even degenerates."}
+    },
+    "artifact_anchors": {
+      "R_inject": {"value": 60, "unit": "x", "type": "modeled", "line": "876, 910"},
+      "R_info": {"value": 343, "unit": "x", "type": "modeled", "line": "880, 913"},
+      "h_out_of_sample": {"value": 0.077, "type": "measured/predicted", "line": "974, 1014"},
+      "h_in_sample": {"value": 0.090, "type": "measured", "line": "973, 994"},
+      "h_in_sample_training_days": {"value": 0.086, "type": "measured", "line": "1010"},
+      "h_url_granularity": {"value": 0.131, "type": "measured", "line": "995"},
+      "q_typing_accuracy": {"value": 0.82, "type": "measured", "line": "1214"},
+      "compile_cost": {"value": "<=0.5ms, 0 tokens", "type": "measured", "line": "912"},
+      "guard_coverage_median": {"value": 0.415, "type": "measured", "line": "943, 1171", "note": "local-replay coverage, NOT Eq.(1)'s q"},
+      "arm_dollars_modeled": {"value": [125.81, 20.96, 74.46], "type": "modeled, not billed", "line": "954-957"},
+      "per_covered_step_recovery": {"value": "1 - 1/R ~ 99%", "type": "modeled ceiling", "line": "938"},
+      "all_fleet_ceiling": {"value": "h(1 - 1/R_info) ~ 7.7%", "type": "modeled ceiling", "line": "972-975"}
+    },
+    "sweeps": {
+      "h": [0.077, 0.086, 0.090, 0.131, 0.25, 0.5, 1.0],
+      "q": [0.415, 0.82, 1.0],
+      "p": [0.5, 0.8, 1.0],
+      "w_Cwrite_over_Cmiss": [0, 0.0166666667, 0.0029154519, 1, 10],
+      "w_note": "0 corresponds to the artifact's compile-only '0 tokens' reading; 1/60 and 1/343 are R-normalized placeholders; capture-inclusive w is unpublished.",
+      "b_Cverify_over_Cmiss": [0, 0.0166666667, 0.0029154519, 0.1],
+      "c_Cwrong_over_Cmiss": [0.1, 1, 10],
+      "r_Chit_over_Cmiss": {"primary": 0.0166666667, "basis": "1/R_inject (R=60, operational conservative)", "sensitivity": [0.0029154519]}
+    }
+  },
+  "regime_table": {
+    "primary_axes": ["h", "q", "w_Cwrite_over_Cmiss", "b_Cverify_over_Cmiss"],
+    "primary_axis_values": {"h": [0.077, 0.086, 0.090, 0.131, 0.25, 0.5, 1.0], "q": [0.415, 0.82, 1.0], "w_Cwrite_over_Cmiss": [0, 0.0166666667, 0.0029154519, 1, 10], "b_Cverify_over_Cmiss": [0, 0.0166666667, 0.0029154519, 0.1]},
+    "fixed_at_primary": {"r_Chit_over_Cmiss": 0.0166666667, "c_Cwrong_over_Cmiss": 1, "p": 1.0, "N_reach": 181},
+    "per_cell_outputs": ["g", "f_star_real", "ceil_f_star", "reachable (f*<=N_reach)", "divergent (g<=0)", "h_star(w)"],
+    "sensitivity_blocks": ["r in {1/60, 1/343}", "c in {0.1,1,10}", "p in {0.5,0.8,1.0}", "N_reach in {9,25,181}"],
+    "reported_per": ["VAR-LIT/AMORTIZE-ONCE", "VAR-LIT/PER-REUSE", "VAR-MAN/AMORTIZE-ONCE", "VAR-MAN/PER-REUSE"],
+    "published_point_estimates_report": "f* at (h=0.077, q=0.82) and (h=0.090, q=0.82) for each reading/convention across the w and b sweeps, plus the critical h at which the artifact's published h would become reachable."
+  },
+  "reportability_classes": {
+    "REACHABLE": "finite positive f* with artifact-derived or explicitly-swept inputs, f* <= N_reach.",
+    "UNREACHABLE": "g > 0 but f* > N_reach at every published-slice cell.",
+    "FINITE_NOT_EVALUABLE": "g > 0 but no artifact-internal commensurable Cwrite/Cmiss exists, so no numeric f* with a denominator is reportable (only the h*(w) locus is).",
+    "DIVERGENT": "g <= 0 across the published slice: carried state does not pay even with a free write.",
+    "map_to_mandate": {"finite_and_reachable": "REACHABLE", "divergent_or_reachable_only_at_unmeasured_h": "DIVERGENT or UNREACHABLE", "not_evaluable_from_published_values": "FINITE_NOT_EVALUABLE"}
+  },
+  "output_contract": {
+    "required_artifacts": ["result.json", "report.md", "provenance.json"],
+    "required_result_json_keys": ["schema_version", "experiment_id", "lane", "status", "outcome", "metrics", "controls", "artifacts", "observations", "validity_notes", "unresolved"],
+    "evidence_preservation": "All verbatim spans, the evidence path and sha256, and the full regime table are written to a derived artifact under this experiment directory; raw evidence is never modified.",
+    "metrics_minimum": ["M-FSTAR", "M-GSIGN", "M-HSTAR", "M-REACH", "M-TABLE-ROWS", "M-PAPER-FSTAR-HITS", "M-READING-DIVERGENCE", "M-CONVENTION-DIVERGENCE", "M-ARTIFACT-W-COMMENSURABLE"],
+    "controls_minimum": ["PC-ALGEBRA", "NC-DIVERGENT", "PC-READING", "PC-EXTRACT", "NC-CONVENTION", "B-PUBLISHED-NUMBERS-ONLY", "B-FLEET-CEILING"],
+    "mapping_to_claim": "A REACHABLE verdict is EXPERIMENTAL evidence that a measured f* is reportable from this artifact class and licenses a follow-up census mandate. A DIVERGENT/UNREACHABLE/FINITE_NOT_EVALUABLE verdict supports C-PRODUCT-ECON only as a scope finding (the external anchor is unavailable by construction), and Product must then measure its own marginal recurrence h(N) and first-party Cwrite.",
+    "no_self_promotion": "This experiment may not promote C-PRODUCT-ECON; it produces evidence for the lane DIRECTOR."
+  },
+  "scope_and_non_adoption": {
+    "scope": "Determination of reportability/derivability of f* from the single hash-pinned artifact; not a prevalence claim over all persistent-state economics literature, and not a measurement of SPIDER's own recurrence.",
+    "preserved_do_not_assume": "Inherited from the parent verdict/handoff: the corpus is one professional over a bounded active-day window; R_inject 60x and R_info 343x numerators and the three-arm dollar table are modeled, not billed; no quantity from arXiv:2608.05784v1 may enter a SPIDER cost model, break-even derivation, product plan or investor-facing material. This experiment analyzes the artifact as an object and does not adopt its numbers.",
+    "known_conflict_recorded": "The parent verdict's product_action bars introducing arXiv:2608.05784v1 quantities into a break-even derivation; the Director mandate directs deriving f* from those quantities. Resolution frozen here: the experiment studies reportability of f* FROM the artifact (object of study) without adopting any artifact quantity into SPIDER's economics; the positive consequence is a license to fund an external census, not adoption of the artifact's numbers."
+  },
+  "product_consequence_positive": "If the determination is REACHABLE (finite f* at published h and f* <= N_reach), then a measured break-even reuse count IS reportable from this literature class: the persistence-economics anchor is not structurally missing, one properly designed external census is worth funding (the natural next Intel mandate), and Product may treat h(N) as an estimate-able external quantity rather than a first-party-only unknown. C-PRODUCT-ECON remains HYPOTHESIS pending that census; this experiment does not promote it.",
+  "product_consequence_negative": "If the determination is DIVERGENT, UNREACHABLE or FINITE_NOT_EVALUABLE, then the persistence-economics anchor is unavailable BY CONSTRUCTION from this artifact class: a three-cycle open external search for a published f* is retired permanently, no census is funded, and Product must measure its own marginal recurrence h(N) and first-party Cwrite on the shipped path before any break-even claim is admissible. C-PRODUCT-ECON is then supported only as a scope/negative finding.",
+  "estimated_cost": {
+    "wall_clock_seconds": 900,
+    "model_calls": 0,
+    "tokens": 0,
+    "browser_interactions": 0,
+    "network_requests": 0,
+    "docker": false,
+    "credentials_required": false,
+    "corpus_required": false,
+    "new_measurements": false,
+    "substrate": "local read of one 70,219-byte hash-pinned text file plus deterministic arithmetic",
+    "note": "Zero-new-corpus analytic determination exactly as bounded by the Director mandate."
+  },
+  "expected_information_gain": "High. This is a cheap, decidable determination whose either outcome changes a live product/portfolio decision: it either licenses one properly designed external census or permanently retires the external f* search and redirects Product to measure first-party recurrence. It also establishes a reusable algebra (cold arm, reading and convention axes, divergence condition, critical-h locus) that the census design and Product's economics benchmark can reuse with stable identities. It is orthogonal to the two failed searches and closes the Part B proposal left unexecuted by EXP-INTEL-36306525220."
 }
