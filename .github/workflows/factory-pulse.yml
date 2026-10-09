@@ -85,14 +85,14 @@ jobs:
         env:
           SPIDER_MODEL_MAX_RUNTIME_SECONDS: "300"
           SPIDER_MODEL_STALL_SECONDS: "120"
-          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_MAX_ATTEMPTS: "5"
           SPIDER_MODEL_RETRY_DELAY_SECONDS: "5"
         shell: bash
         run: |
           set +e
           set -uo pipefail
           export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/scout_brief.json"
-          bash .github/scripts/run-opencode-resilient.sh scout .spider-runtime/model_scout.json run --agent spider_research_scout             "SCOUT LANE cycle=$GITHUB_RUN_ID. Read the control-plane charter and exact .spider-runtime/director_snapshot.json. Maintain broad situational awareness across the full SPIDER Codex, all lane trajectories, general agent knowledge and shallow external reconnaissance when available. Do NOT choose allocations. Write ONLY .spider-runtime/scout_brief.json using the exact schema in .opencode/agents/spider_research_scout.md."
+          bash .github/scripts/run-opencode-resilient.sh scout .spider-runtime/model_scout.json run --agent spider_research_scout             "SCOUT LANE cycle=$GITHUB_RUN_ID. Read the control-plane charter, dated program audit, and exact .spider-runtime/director_snapshot.json as the complete directional map. Open only targeted canonical packets for decision-changing ambiguities. Use at most one focused external reconnaissance topic. Do NOT choose allocations. Write ONLY .spider-runtime/scout_brief.json using the exact schema in .opencode/agents/spider_research_scout.md."
           rc=$?
 
           git reset --hard HEAD >/dev/null 2>&1 || true
@@ -127,7 +127,7 @@ jobs:
           set +e
           set -uo pipefail
           export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/director_allocation.json"
-          bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout may be in DEGRADED SCOUT MODE. Its brief is staff advice, never a prerequisite or authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
+          bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the dated program audit plus exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json as the complete directional map; open only exact canonical packets needed to resolve a decision-changing ambiguity. The Scout may be in DEGRADED SCOUT MODE. Its brief is staff advice, never a prerequisite or authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
           rc=$?
 
           git reset --hard HEAD >/dev/null 2>&1 || true
