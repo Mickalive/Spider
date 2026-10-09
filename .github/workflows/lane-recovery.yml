@@ -1,18 +1,24 @@
 name: SPIDER R2 Lane Recovery
-run-name: Lane recovery ${{ github.event.workflow_run.id }}
+run-name: Lane recovery ${{ github.run_id }}
 
 on:
   workflow_run:
     workflows: ["SPIDER R2 Lane"]
     types: [completed]
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 permissions:
   actions: write
   contents: read
 
+concurrency:
+  group: spider-r2-lane-recovery
+  cancel-in-progress: true
+
 jobs:
   wake:
-    if: ${{ github.event.workflow_run.conclusion != 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -20,8 +26,53 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          EVENT_RUN_ID: ${{ github.event.workflow_run.id }}
         shell: bash
         run: |
           set -euo pipefail
-          echo "SPIDER_LANE_RECOVERY source_run=${{ github.event.workflow_run.id }} conclusion=${{ github.event.workflow_run.conclusion }}"
+
+          if [[ "$EVENT_NAME" == "workflow_run" ]]; then
+            if [[ "$EVENT_CONCLUSION" == "success" ]]; then
+              echo "SPIDER_LANE_RECOVERY_NOT_NEEDED source_run=$EVENT_RUN_ID conclusion=$EVENT_CONCLUSION"
+              exit 0
+            fi
+            echo "SPIDER_LANE_RECOVERY source_run=$EVENT_RUN_ID conclusion=$EVENT_CONCLUSION"
+            gh workflow run factory-pulse.yml --ref main
+            exit 0
+          fi
+
+          LANES=$(gh run list --workflow=spider-lane.yml --limit 100             --json databaseId,status,conclusion,updatedAt,displayTitle)
+
+          LATEST_BAD=$(jq -c '
+            [.[] | select(
+              .status=="completed" and
+              (.conclusion!="success" and .conclusion!="skipped" and .conclusion!="neutral")
+            )] | sort_by(.updatedAt) | last // empty
+          ' <<<"$LANES")
+
+          if [[ -z "$LATEST_BAD" ]]; then
+            echo "SPIDER_LANE_RECOVERY_NO_FAILURE"
+            exit 0
+          fi
+
+          BAD_RUN=$(jq -r '.databaseId' <<<"$LATEST_BAD")
+          BAD_TIME=$(jq -r '.updatedAt' <<<"$LATEST_BAD")
+          BAD_TITLE=$(jq -r '.displayTitle' <<<"$LATEST_BAD")
+
+          FACTORIES=$(gh run list --workflow=factory-pulse.yml --limit 30             --json databaseId,status,conclusion,createdAt)
+          ACTIVE=$(jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested")] | length' <<<"$FACTORIES")
+          if [[ "$ACTIVE" -gt 0 ]]; then
+            echo "SPIDER_LANE_RECOVERY_FACTORY_ACTIVE count=$ACTIVE latest_bad=$BAD_RUN"
+            exit 0
+          fi
+
+          LATEST_FACTORY_TIME=$(jq -r '[.[]] | sort_by(.createdAt) | last.createdAt // ""' <<<"$FACTORIES")
+          if [[ -n "$LATEST_FACTORY_TIME" && "$LATEST_FACTORY_TIME" > "$BAD_TIME" ]]; then
+            echo "SPIDER_LANE_RECOVERY_ALREADY_COVERED bad_run=$BAD_RUN bad_time=$BAD_TIME factory_time=$LATEST_FACTORY_TIME"
+            exit 0
+          fi
+
+          echo "SPIDER_LANE_RECOVERY_POLL_WAKE bad_run=$BAD_RUN title=$BAD_TITLE bad_time=$BAD_TIME"
           gh workflow run factory-pulse.yml --ref main
