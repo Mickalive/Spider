@@ -25,8 +25,15 @@ case "$STAGE" in
   init)
     paths+=("$EXP/request.json" "$EXP/spec.json" "$EXP/prereg.md" "research/lanes/$LANE/state.json")
     ;;
+  design-draft)
+    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/failure.json" "$EXP/model_design.json" "research/lanes/$LANE/state.json")
+    ;;
   design)
-    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/freeze.json" "$EXP/failure.json" "$EXP/model_design.json" "research/lanes/$LANE/state.json")
+    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/build_receipt.json" "$EXP/freeze.json" "$EXP/failure.json" "$EXP/model_design.json" "$EXP/model_build.json" "research/lanes/$LANE/state.json")
+    ;;
+  build)
+    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/build_receipt.json" "$EXP/failure.json" "$EXP/model_design.json" "$EXP/model_build.json" "research/lanes/$LANE/state.json")
+    while IFS= read -r p; do [[ -n "$p" ]] && paths+=("$p"); done < <(jq -r --arg lane "$LANE" '.lanes[$lane].allowed_code_roots[]?' research/lanes/registry.json)
     ;;
   execution-base)
     paths+=("$EXP/execution_checkpoint.json" "research/lanes/$LANE/state.json")
