@@ -173,6 +173,14 @@ jobs:
 
           CONTRACT=$(jq -r '.design_contract_version // 1' "$DIR/request.json")
           if [[ "$rc" -eq 0 && "$CONTRACT" -ge 2 ]]; then
+            # The resilient reviewer may fall back across providers. Persist the
+            # proposed mutable design first so every reviewer attempt resets to
+            # the SAME spec/prereg, not to the empty init scaffold.
+            bash scripts/checkpoint.sh design-draft "$LANE" "$EXP" "R2 $LANE: proposed design $EXP"
+            draft_checkpoint_rc=$?
+            [[ "$draft_checkpoint_rc" -eq 0 ]] || rc="$draft_checkpoint_rc"
+          fi
+          if [[ "$rc" -eq 0 && "$CONTRACT" -ge 2 ]]; then
             DESIGN_MODEL=$(jq -r '.model // empty' "$DIR/model_design.json")
             if [[ -z "$DESIGN_MODEL" ]]; then
               echo "::error::Missing DESIGN producer model identity for independent review"
