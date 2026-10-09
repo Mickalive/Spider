@@ -1,17 +1,17 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": "EXP-FRONTIER-37984242167",
-  "last_experiment_id": "EXP-FRONTIER-37950626378",
-  "last_verdict": "BOUNDED_ADOPTION_OF_FROZEN_GROWING_BRANCH_MEASUREMENT_VALID_CONTROLS_LIVE_PASS_ADMISSION_GATE_PASS_AUDIT_PASS_CONSTRUCT_VALIDITY_ESTIMATOR_BOUND_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-FRONTIER-37984242167",
+  "last_verdict": "BLOCKED_DESIGN_DEFECT_RECEIPT_ADOPTED_UNSATISFIABLE_EMPTY_SAMPLING_FRAME_0_SEEDS_0_DEEP_0_HOSTS_PRE_FREEZE_CERTIFICATE_ABSENT_GATE_VIOLATION_FALSIFIER_0_0_UNREACHABLE_BOTH_DIRECTIONS_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_FALSE_NO_MEASUREMENT_TAKEN_NO_CLAIM_UPDATE_NO_PROMOTION_NO_CONTINUE_REQUIRES_V2_RE_DESIGN_UNDER_SAME_MANDATE",
   "continue_immediately": false,
-  "next_question": "On the same credential-free GET-only stdlib-HTTP substrate, change the acquisition MECHANISM from same-host link-following BFS to SITE-NATIVE DISCOVERY channels (robots.txt sitemap directives, sitemap.xml, on-site search/query URLs, RSS/Atom feeds, and JSON-LD/structured-data enumeration): over a frozen multi-host pool that is separately confirmed to contain DEEP (hop>=3) state items on at least two distinct hosts/engines, what fraction of those DEEP items can be reached in <= K preregistered GETs (e.g. K=3: one discovery GET plus the item-page GET) using a site-native discovery channel alone, versus only by traversing the hop>=3 shortest path? Preregistered falsifier, arithmetically checkable before freeze and satisfiable in BOTH directions: if the O(1)-reachable fraction of DEEP state items is >= a preregistered materiality threshold (e.g. 0.50) on >=2 engines, then shortest-path hop is NOT a fundamental acquisition-cost barrier for discovery-enabled acquisition and persistent path caching is not the optimization target (effort moves to discovery and substrate expansion); if that fraction is below the threshold, then even with site-native discovery, fresh deep-instance acquisition remains path-bound and persistence of paths/procedures retains a measurable, depth-dependent amortization surface whose break-even can be computed from a real re-derivation cost. This is materially orthogonal to EXP-FRONTIER-37950626378 because it measures a different acquisition mechanism rather than re-scoring a link-following level-order estimator whose DEEP/NEAR ratio is forced by construction (VN-V9/VF-03). If the Global Research Director instead prefers the maintenance/invalidation axis, the alternative live question is: how does the cost of keeping a persisted path/procedure VALID between episodes (re-validation GETs/bytes plus the stale-replay false-accept rate) scale with hop and elapsed time relative to re-derivation.",
+  "next_question": "Under a design-contract v2 protocol (six freeze_eligibility checks: decision_rule_reachability, measurement_prerequisites, baseline_identifiability, control_sensitivity, treatment_liveness, freeze_artifacts_bound; plus independent design_review.json before freeze), can the SAME site-native-discovery acquisition question be made satisfiable and measured: on the credential-free GET-only stdlib-HTTP substrate, over a multi-host pool confirmed during DESIGN to contain DEEP (hop>=3) state items on >=2 distinct hosts/engines (>=10 total, >=3 per engine) via the frozen same-host static-<a> BFS (depth<=6, budget 250), what fraction of those DEEP items is reachable in <=K=3 fresh-agent GETs (one discovery GET + item-page GET + one spare) using ANY of the five frozen discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) - with the preregistered materiality threshold 0.50 on >=2 engines deciding whether shortest-path hop is NOT a fundamental acquisition-cost barrier (persistent path caching is not the optimization target; effort moves to discovery and substrate expansion) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface - given that the v1 freeze of this exact mandate (EXP-FRONTIER-37984242167) committed an empty sampling frame (0 seeds, 0 DEEP items, 0 hosts), an absent pre-freeze control certificate, and a 0/0 primary metric unreachable in both falsifier directions, so the question remains entirely unmeasured; the explicitly recorded maintenance/invalidation alternative (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost, scaling with hop and elapsed time) remains available to the Global Research Director for allocation instead.",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-10-09T23:13:16.159617+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ffc7fbe697cea31d856b6040d464172e531171684334cfc604ba311a9d4b406a",
-  "same_failure_count": 2,
-  "last_failure_fingerprint": "2ec9912af1c82b8c55d55e90",
-  "last_failure_control_revision": "0c7656a2a3dd2b1c22037ba2c496c918de1f05fc33aa09e6166cd700910bcb47"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-09T23:39:14.449390+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "1b220e4114e490b3fd935b29de14e88fc611b919471483e2243d7dc0281ef6bf",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
