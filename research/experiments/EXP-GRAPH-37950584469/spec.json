@@ -1,17 +1,338 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-GRAPH-37950584469",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "claim_scope_note": "The only claim updated by this packet is C-FRESHNESS (owner_lanes graph/runtime/product). C-MEAS-VALID is a non-owned advisory dependency (see advisor_dependency) and is NOT a claim id here: it is owned by runtime/physics, matching parent EXP-GRAPH-36314193643. C-DELTA-REPAIR, C-PARAM-INHERIT, C-PRODUCT-ECON and C-CROSSSITE are explicitly out of scope and no event may be emitted for them.",
+  "director_mandate_binding": {
+    "cycle_id": "37949204501",
+    "action": "CONTINUE",
+    "target_claim": "C-FRESHNESS",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "USE",
+    "binding_strategic_question": "On a small frozen set of credential-free, server-rendered capability-token pages (auth.wikimedia.org, en.wikipedia.org, meta.discourse.org), using TWO independently written stdlib extraction paths (an html.parser path and an independently written parser/regex path), with raw bodies retained per record and the positive anchors' session-scoped variation established by producer-independent raw observation BEFORE freeze: (i) do the two paths agree on the recovered value set and on the session-scoped verdict for at least 3 of 4 anchors, thereby separating an extraction defect from genuine representation loss -- given that the frozen G0.2 calibration of EXP-GRAPH-36314193643 failed with 4 of 5 positive anchors yielding zero extracted distinct values even though the same anchors' raw response bodies varied 4/4 across fresh sessions? and (ii) conditional on a verified extraction, is the incumbent value-blind signal set in fact blind to value-only rotation, i.e. does it score materially higher false-accept than the value-aware channel on the D1V family, without depending on a screen whose calibration power is asserted rather than measured? The design must supply a route-valid, independently health-certified substrate BEFORE freeze and must not be another threshold retune.",
+    "design_response": "This spec answers (i) as the PRIMARY, load-bearing object and (ii) as a predeclared but subordinate, thin conditional object. It is not a threshold retune: no existing guard threshold is re-fit; the measured object is changed to the instrument's extraction validity over byte-identical stored bodies, with the SAME URL (auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount) that Frontier independently extracted from and that the parent reported as zero-distinct. The route-valid, health-certified substrate is supplied as a frozen certificate (spec.substrate_certificate) built only from already-frozen, producer-independent Codex raw artifacts and re-verified fail-closed at GATE C before any confirmatory extraction. See measurement_validity V02 for why the certificate is a frozen pre-confirmatory gate rather than a DESIGN-time measurement.",
+    "advisor_dependency": "C-MEAS-VALID (advisory, runtime-owned): this packet reuses Runtime's substrate-validity discipline (disjoint session jars, raw-body retention, per-record sha256, no injected drift) but must stand on its own certified credential-free substrate and emits no C-MEAS-VALID event."
+  },
+  "parent_handoff_continuity": {
+    "parent_experiment_id": "EXP-GRAPH-36314193643",
+    "parent_handoff_path": "research/experiments/EXP-GRAPH-36314193643/handoff.json",
+    "parent_handoff_sha256": "0a5246fd0b119cad8eed7bf68c8e52b0526cd18cb820a90c9c0f782d45181a1a",
+    "disposition": "USE as continuity evidence only; the parent's next_question is NOT the authorization. The Director mandate is the binding direction and it adopts the parent's two-path measurement-validity form.",
+    "inherited_established": [
+      "FROZEN INPUT INTEGRITY of the parent is intact (Director-recomputed; matches freeze.json).",
+      "The parent is a valid MEASUREMENT_INVALID at GATE 0, not a scientific negative: G0.2 (>=2 of 5 positive anchors) was FALSE at 1/5; G0.3 (4 of 4 negatives rejected) was TRUE.",
+      "The parent's 4/5 positive-anchor failure is a real instrument/calibration failure of a properly frozen transaction, not post-freeze tampering.",
+      "C-FRESHNESS is HYPOTHESIS and no claim-level content was added in either direction by the parent."
+    ],
+    "inherited_rejected": [
+      "The parent's/audit's causal attribution of the 4/5 failure to V16 JS representation loss is NOT established. The parent retained only body_sha256 per record, and accepted Codex EXP-FRONTIER-36306528608 extracted 3 distinct wpCreateaccountToken values from the SAME auth.wikimedia.org URL with stdlib HTTP.",
+      "The parent's off-protocol 2-session candidate screening (M-N-ADMITTED=5) is not a prevalence, an admission, or evidence of session-scoped state.",
+      "The parent's result.json.artifacts digests and execution_summary.json timestamps/host counts are not reliable integrity evidence.",
+      "The parent's local shared-WAL multi-worker substrate proposal remains rejected."
+    ],
+    "inherited_unknown": [
+      "Whether the 4/5 anchor failure is an extraction defect or genuine representation loss. THIS IS THE OBJECT OF THIS EXPERIMENT.",
+      "Whether the auth.wikimedia.org wpCreateaccountToken discrepancy (parent 0 vs Frontier 3 distinct) is extraction or page change between the two captures."
+    ],
+    "inherited_do_not_assume": [
+      "Do not read the parent as a negative about C-FRESHNESS, the credential-free public Web, or replay-versus-re-derivation.",
+      "Do not inherit the JS representation-loss explanation, nor assume its opposite.",
+      "Do not assume a screen whose positive anchors were never verified before freeze can demonstrate detection power.",
+      "Do not promote anything or authorize replay-by-assumption.",
+      "Do not carry the 'three prior graph C-FRESHNESS positives' premise; the audit-PASS base is two (EXP-GRAPH-35940399935 and EXP-GRAPH-35947468747)."
+    ]
+  },
+  "question": "On a frozen 4-anchor set of credential-free, server-rendered capability-token URLs (CAL-POS-1 gitlab.com/-/trial_registrations/new/, CAL-POS-2 auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount, CAL-POS-3 en.wikipedia.org/w/index.php?title=Special:UserLogin&action=form, CAL-POS-4 meta.discourse.org/), captured in K=4 fresh disjoint-cookie-jar sessions with raw bodies retained per record and parsed by TWO independently written stdlib extraction paths (P-EXTRACT-A = html.parser based; P-EXTRACT-B = an independently written regex/lexer path): (i) do the two paths agree, anchor by anchor, on the recovered exact per-field value set AND on the session-scoped verdict for at least 3 of the 4 anchors -- thereby separating an extraction defect (the parent's failure mode) from genuine V16 representation loss (no stdlib no-JS path can recover the value) -- given that the parent's own G0.2 calibration returned 1/5 positive anchors at zero extracted distinct values on bodies that varied 4/4, while accepted Codex EXP-FRONTIER-36306528608 extracted 3 distinct wpCreateaccountToken values for 3 fresh sessions from the identical auth.wikimedia.org URL with stdlib HTTP? And (ii), conditional on a verified extraction and >=1 confirmed session-scoped anchor (D1V family): does the incumbent value-blind signal set (CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR, CH-POSTCOND-SEM) score materially higher false-accept than the value-aware channel (CH-PRECOND-BINDING) on real value-only-rotation trials, measured against a real positive anchor rather than an asserted screen?",
+  "hypothesis": "H-MAIN: The parent's 4/5 zero-distinct-value failure was an EXTRACTION DEFECT, not genuine V16 representation loss. Operationally: on the frozen anchors, after the GATE C substrate certificate passes, both independently written stdlib extraction paths (P-EXTRACT-A and P-EXTRACT-B) will (a) each recover >=2 distinct exact token values across the K=4 fresh sessions on at least 3 of the 4 anchors, and (b) agree with each other on the recovered exact per-field value set and on the session-scoped verdict for at least 3 of the 4 anchors. The decisive case is CAL-POS-2 (auth.wikimedia.org/Special:CreateAccount), where accepted Codex evidence (EXP-FRONTIER-36306528608 raw/token_stability.jsonl) independently recorded 3 distinct wpCreateaccountToken values in 3 fresh sessions while the parent's instrument recorded 0: if either new path recovers >=2 distinct values there, the parent's instrument was at fault. H-BLIND (subordinate, conditional): conditional on a verified extraction and >=1 confirmed session-scoped anchor, on the real D1V (value-only-rotation) trials the incumbent value-blind signal set false-accepts at a materially higher rate than the value-aware channel (M-PAIRED-FA-DIFF-D1V >= 0.10), because a rotation that leaves field name/type/form action/method/input-name-set and all transport validators unchanged is structurally invisible to the three value-blind channels.",
+  "falsifier": "The primary hypothesis H-MAIN is falsified, in the bounded sense below, by any of the following frozen conditions: F-INSTR: the extraction instrument has no demonstrated sensitivity -- the real positive-control anchor CAL-POS-1 does not yield >=2 distinct exact values under BOTH paths, or the frozen instrument fixtures SYN-CANARY-BOTH / SYN-EMPTY-VALUE / SYN-JSSTRING fail -- this is MEASUREMENT_INVALID, not a scientific negative, and no claim-level statement is licensed. F-REPLOSS: after the substrate certificate and instrument checks pass, BOTH paths AGREE (E3 passes) and on at least 3 of the 4 anchors both recover zero non-empty exact token values (or only a single session-invariant value) while the raw body hash varies across sessions -- i.e. the extraction defect hypothesis is rejected in favour of genuine V16 representation loss on these anchors; this is a bounded falsification of the claim that the credential-free stdlib no-JS substrate can expose these anchors' capability tokens, and is explicitly NOT a global falsification of C-FRESHNESS. F-UNRELIABLE: the two independently written paths disagree on the recovered exact value set or on the session-scoped verdict on at least 2 of the 4 anchors -- extraction validity is not established and no substrate verdict can be read. F-BLIND: conditional on a verified extraction, M-PAIRED-FA-DIFF-D1V < 0.10 or its anchor-clustered 97.5% lower bound <= 0 -- the incumbent value-blind signal set is not materially more false-accepting than the value-aware channel on real D1V trials, so the structural blindness argument is wrong on real pages.",
+  "baselines": {
+    "note": "Baselines are frozen identities shared with EXECUTE/AUDIT/DIRECTOR. The parent's exact source code is not preserved in its packet, so B-PARENT-METHOD-REIMPL is a documented best-effort reconstruction of the parent's recorded method ('html.parser on raw bytes, non-GET form token fields and frozen-list meta tokens, no JavaScript'); its reconstruction status is disclosed in validity_notes. No gate depends on it.",
+    "B-SINGLE-PATH-A": {"description": "P-EXTRACT-A alone (stdlib html.parser). The single-path incumbent-extraction baseline. It cannot self-certify: a single path cannot distinguish its own bug from representation loss.", "expected_behavior": "May recover the parent's 0 distinct values if the defect is systematic to html.parser use; used to quantify the marginal value of the dual-path agreement."},
+    "B-SINGLE-PATH-B": {"description": "P-EXTRACT-B alone (independently written regex/lexer). The second single-path baseline.", "expected_behavior": "Should recover values wherever they are present as literal attribute text; its disagreement with A is the measured extraction signal."},
+    "B-PARENT-METHOD-REIMPL": {"description": "Best-effort reimplementation of the parent EXP-GRAPH-36314193643 recorded extraction method, run over the SAME stored raw bodies. Reconstruction is disclosed and imperfect (the parent preserved no code).", "expected_behavior": "If it reproduces 0 distinct values on CAL-POS-2 while A or B recover >=2, that pinpoints the parent's method as the defect."},
+    "B-INCUMBENT-SIGNAL-ONLY": {"description": "The parent's value-blind signal set: CH-STRUCT-SIG + CH-TRANSPORT-VALIDATOR + CH-POSTCOND-SEM, with no value-aware channel. Used only in the conditional part-(ii) blindness read.", "expected_behavior": "Predicted (structurally, not from data) to false-accept on ~1.0 of clean D1V trials because none of its channels can see a value-only change."},
+    "B-VALUE-AWARE": {"description": "CH-PRECOND-BINDING only: fires iff live exact value != recorded exact value.", "expected_behavior": "Fires (abstains) on 1.0 of value-rotating trials by construction; this is a byte-equality revalidation of a recorded binding, not an inference about server-side validity."},
+    "B-NO-GUARD-REPLAY": {"description": "Always reuse the recorded value; no revalidation.", "expected_behavior": "Raw-observation reference for the STALE/FRESH label accounting."}
+  },
+  "positive_control": {
+    "PC-EXTRACT-CANARY": {
+      "id": "PC-EXTRACT-CANARY",
+      "requirement": "On the real anchor CAL-POS-1 (gitlab.com/-/trial_registrations/new/), whose server-minted authenticity_token rotation is SPIDER_CORROBORATED by accepted Codex EXP-FRONTIER-36306528608 (3 distinct values in 3 independent fresh sessions; the parent additionally observed 4 distinct in 4), BOTH P-EXTRACT-A and P-EXTRACT-B must recover >=2 distinct non-empty exact authenticity_token values across the K=4 fresh sessions. M-CANARY-PASS must be true.",
+      "why_it_is_a_real_control": "It is a REAL page with producer-independent corroboration that the token exists and varies. If the two new extractors cannot recover it, the instrument has no demonstrated true-positive sensitivity, and a zero recovery on the uncertain anchors cannot be distinguished from an incapable instrument. Failure is MEASUREMENT_INVALID (F-INSTR), never a negative about the substrate.",
+      "metric_ids": ["M-CANARY-PASS", "M-DISTINCT-VALUES-A-CAL-POS-1", "M-DISTINCT-VALUES-B-CAL-POS-1"]
+    },
+    "PC-INCUMBENT-BLINDNESS": {
+      "id": "PC-INCUMBENT-BLINDNESS",
+      "requirement": "Conditional (part ii only): on the real D1V trial subset, the incumbent value-blind signal set's false-accept M-FA-INCUMBENT-D1V is reported against the frozen structural prediction of 1.0. A measured value materially below 1.0 is a VALID and decision-relevant finding that the structural argument is wrong on real pages, and it is reported as such, not suppressed.",
+      "why_it_is_a_real_control": "It is a pre-registered prediction test on a population where the prediction follows from an argument about the channel definitions, not from data; on real pages incidental structural churn can break it.",
+      "metric_ids": ["M-FA-INCUMBENT-D1V", "M-PAIRED-FA-DIFF-D1V"]
+    }
+  },
+  "null_control": {
+    "NC-CAL-NEG-ALL-REJECTED": {
+      "id": "NC-CAL-NEG-ALL-REJECTED",
+      "requirement": "All four frozen negative anchors (CAL-NEG-1 iana.org/domains/reserved, CAL-NEG-2 cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst, CAL-NEG-3 www.debian.org/, CAL-NEG-4 httpbin.org/forms/post) must yield ZERO non-empty exact in-list token values under BOTH extraction paths in every session, each recorded with a reason code from {NO_TOKEN_FIELD, TOKEN_FIELD_EMPTY, HOST_UNREACHABLE_IS_NOT_A_REJECTION}. Any admitted in-list non-empty value from a negative anchor is terminal MEASUREMENT_INVALID (GATE C2).",
+      "why": "A path that finds token values everywhere has no specificity. This is the exact counterpart to the parent's G0.3 and is measured on the same frozen negatives.",
+      "metric_ids": ["M-CERT-NEG-VALUES-A", "M-CERT-NEG-VALUES-B"]
+    }
+  },
+  "null_controls": [
+    {
+      "id": "NC-EXTRACT-EMPTY-VALUE",
+      "requirement": "On the frozen instrument fixture SYN-EMPTY-VALUE (an in-list token-named hidden input with NO value attribute, plus an in-list meta token with an empty content attribute), both paths must classify the field as PRESENT-EMPTY (field name found, no non-empty exact value) and must AGREE on that classification. Disagreement is a terminal instrument failure (F-INSTR).",
+      "why": "The parent's failure was reported as 'fields present but values empty in raw HTML'. Distinguishing PRESENT-EMPTY from FIELD-ABSENT is the exact operationalization of 'extraction defect' vs 'representation loss', so the instrument must classify both cases consistently and identically.",
+      "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY. Never enters the scored population; no claim depends on the fixture. Frozen synthetic bytes are permitted only for instrument self-test per measurement_validity V08."
+    },
+    {
+      "id": "NC-EXTRACT-JSSTRING",
+      "requirement": "On the frozen instrument fixture SYN-JSSTRING (an in-list token name appearing ONLY inside a JavaScript string literal, never as an HTML attribute value), BOTH paths must recover ZERO non-empty exact values. Any value recovered from the JS string literal is a terminal instrument false-positive (F-INSTR).",
+      "why": "The claim that representation loss is real depends on the extractors correctly NOT treating script text as an attribute. A path that scrapes JS strings would manufacture a false 'extraction works' verdict.",
+      "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+    },
+    {
+      "id": "NC-PATH-INDEPENDENCE",
+      "requirement": "At EXECUTE, an AST-based import-graph attestation must show that P-EXTRACT-B imports neither P-EXTRACT-A nor any module that implements extraction shared between them, and the two path source files must be hashed separately. A one-character perturbation of a frozen instrument fixture must not change the two paths' agreement classification. Failure is terminal (F-INSTR).",
+      "why": "The design's evidential value depends on the two paths being genuinely independent implementations; two copies of the same parser would make agreement tautological."
+    },
+    {
+      "id": "NC-SESSION-ISOLATION",
+      "requirement": "Per anchor, per session: a fresh http.cookiejar.CookieJar; the session's first request must carry no Cookie header; the four sessions' cookie jars must be pairwise disjoint on (name, value) with per-session jar digests recorded in raw evidence; Connection: close and a new TCP/TLS connection per request. Any violation is terminal (GATE C3).",
+      "why": "Disjoint jars are what make 'session-scoped' an operational claim instead of an assertion."
+    },
+    {
+      "id": "NC-TIME-VS-SESSION",
+      "requirement": "2 warm-jar re-captures per anchor from the SAME session jar after the fresh captures. Report M-WARMJAR-VARIATION-RATE (value change within a warm jar) and M-WARMJAR-BODY-VARIATION-RATE. DIAGNOSTIC with a frozen ceiling rule, not a pass/fail gate: if M-WARMJAR-VARIATION-RATE is within 0.10 of the fresh-jar value-variation rate for an anchor, that anchor's rotation is labelled per-request/time-scale rather than session-scale and the claim ceiling drops accordingly.",
+      "why": "Real pages vary for reasons other than the session (clock, A/B, CDN). Without this the packet cannot tell session-scoped state from merely unstable state."
+    },
+    {
+      "id": "NC-NONDEGENERATE-ESTIMATOR",
+      "requirement": "Part (ii) is read only if at least 2 distinct decisions (REUSE/ABSTAIN) are realized on the scored D1V subset and every channel that is active anywhere both fires and does not fire at least once. Otherwise the part-(ii) arm is declared DEGENERATE-NOT-EVALUABLE and no blindness claim is made.",
+      "why": "Prevents a channel that never varies from producing a trivially 'blind' result."
+    }
+  ],
+  "measurement_validity": [
+    {
+      "id": "V01-PRE-REGISTRATION-NO-DESIGN-OUTCOME",
+      "blocking": true,
+      "requirement": "This spec and prereg.md are written before any anchor is contacted in this transaction. DESIGN performed no outcome-bearing measurement: no HTTP request, no extraction, no anchor or candidate probe. The anchors' behaviour is recorded in spec.substrate_certificate only with its evidence class and the exact already-frozen artifact that supports it.",
+      "why": "SPIDER_ARCHITECTURE_RESEARCH2.md section 5 ('DESIGN is not allowed to inspect outcome data') and EXPERIMENT_PACKET.md section 2."
+    },
+    {
+      "id": "V02-SUBSTRATE-CERTIFICATE-FROZEN-AND-RE-VERIFIED",
+      "blocking": true,
+      "requirement": "spec.substrate_certificate is frozen with this design and is built ONLY from already-frozen, producer-independent Codex raw artifacts. At the START of execution, before any confirmatory extraction, EXECUTE re-measures the certificate's route-validity and body-variation facts with the neutral certificate detector and must reproduce them per-anchor within the declared tolerances; a certificate failure is terminal MEASUREMENT_INVALID at GATE C. The certificate does NOT run either extraction path and does not report extracted values, so it does not pre-empt the confirmatory measurement.",
+      "why": "This is how the mandate's 'route-valid, independently health-certified substrate BEFORE freeze' and 'anchors' session-scoped variation established by producer-independent raw observation, a screen's detection power measured rather than asserted' are honoured under a contract that forbids DESIGN-time measurements: the certificate is (a) already independently evidenced and (b) re-measured fail-closed at the head of execution rather than asserted."
+    },
+    {
+      "id": "V03-EXTRACTION-PATH-INDEPENDENCE",
+      "blocking": true,
+      "requirement": "NC-PATH-INDEPENDENCE. P-EXTRACT-A (html.parser) and P-EXTRACT-B (independent regex/lexer) are separate producer source files, share no extraction helper, and the AST import attestation must pass.",
+      "why": "Agreement between non-independent paths is not evidence."
+    },
+    {
+      "id": "V04-SAME-BYTES-BOTH-PATHS",
+      "blocking": true,
+      "requirement": "Both extraction paths operate on byte-identical stored response bodies for the same (anchor, session). The stored body file's sha256 is recorded per record and is the input to both paths.",
+      "why": "Otherwise a recovery difference could be a capture difference rather than an extraction difference."
+    },
+    {
+      "id": "V05-NO-JS-REPRESENTATION-LOSS-DECLARED",
+      "blocking": false,
+      "requirement": "No JavaScript is executed and no browser is used. Only raw HTTP response bytes are parsed. Any zero recovery is therefore a fact about the raw bytes, and V16 representation loss is declared: client-side-minted values, XHR/fetch-only gating, canvas content and authenticated state are structurally invisible and remain open.",
+      "why": "Prevents over-generalization of a bounded result."
+    },
+    {
+      "id": "V06-SESSION-ISOLATION",
+      "blocking": true,
+      "requirement": "NC-SESSION-ISOLATION.",
+      "why": "Session-scope claims require disjoint sessions."
+    },
+    {
+      "id": "V07-NO-ANCHOR-SPECIAL-CASING",
+      "blocking": true,
+      "requirement": "Neither extraction path, the token-name list, nor the presence detector contains anchor-specific, host-specific or URL-specific rules; the same code and the same frozen name list are applied to all anchors and negatives. An attestation over the two path sources confirms the absence of any literal host or anchor token.",
+      "why": "Prevents overfitting the extractor to the anchors and inflating apparent agreement."
+    },
+    {
+      "id": "V08-ANTI-OVERFIT-CONTROLS",
+      "blocking": true,
+      "requirement": "The instrument must additionally pass the frozen unit fixtures (SYN-CANARY-BOTH, SYN-EMPTY-VALUE, SYN-JSSTRING) and both paths must reject all four real negative anchors. Fixtures are instrument self-tests only and never enter the scored population.",
+      "why": "A path can always be written to return whatever is desired; the canary, the empty-value case, the JS-string case and the negatives together constrain both false negatives and false positives."
+    },
+    {
+      "id": "V09-SEED-DETERMINISM",
+      "blocking": true,
+      "requirement": "All randomness derives from random.Random(<frozen_seed>) or os.urandom-free deterministic code; Python process-randomized hash() is never used as a seed or as a key. The frozen seed is 36314193643 (the parent's seed) for any resampling.",
+      "why": "SPIDER_MASTER_PROMPT section 30."
+    },
+    {
+      "id": "V10-RAW-EVIDENCE-RETENTION",
+      "blocking": true,
+      "requirement": "The full raw response body is retained per (anchor, session) under the experiment directory (or a compacted form under /tmp reduced to per-record JSONL plus per-record sha256, disclosed). Every record carries UTC timestamp, final URL after redirects, status, headers of interest, body_sha256, the raw body's storage path or digest, the cookie-jar digest and the set of in-list field-name occurrences found by the neutral detector. Both extraction paths emit per-field extracted-value artifacts (exact string or PRESENT-EMPTY/ABSENT) per record.",
+      "why": "The parent's failure was unrecoverable because bodies were not retained. This packet must be re-analyzable without re-fetching."
+    },
+    {
+      "id": "V11-FROZEN-INPUT-RE-VERIFICATION",
+      "blocking": true,
+      "requirement": "EXECUTE re-verifies request.json, spec.json and prereg.md against freeze.json sha256 before the first request and again after the last; any mismatch is terminal. EXECUTE hashes every producer source file into result.json.artifacts with role 'code' and into provenance.json (freeze.json binds only request/spec/prereg by construction, per code_binding).",
+      "why": "Freeze integrity and code provenance."
+    },
+    {
+      "id": "V12-RESAMPLING-UNIT",
+      "blocking": true,
+      "requirement": "Part (ii) intervals resample ANCHORS (sites) with replacement, B=10000, seed 36314193643, percentile method. No gate uses a trial-level unclustered interval. Trial-level unclustered quantities are named M-DIAGNOSTIC-UNCLUSTERED-* with an explicit do-not-use flag.",
+      "why": "Trials within an anchor are dependent; unclustered intervals would be anticonservative."
+    }
+  ],
+  "substrate_certificate": {
+    "purpose": "Pre-freeze route-valid, independently health-certified substrate. Built only from already-frozen, producer-independent Codex raw artifacts; re-measured fail-closed at GATE C before any confirmatory extraction.",
+    "certificate_evidence_artifacts": [
+      {"path": "codex/experiments/EXP-FRONTIER-36306528608/result.json", "sha256": null, "role": "accepted_codex", "establishes": "Producer-independent (frontier lane) observation: 3 distinct wpCreateaccountToken sha256 values across 3 independent fresh sessions on auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount, and 3 distinct authenticity_token values across 3 fresh sessions on gitlab.com/-/trial_registrations/new/; body hashes differed 3/3 on both."},
+      {"path": "codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl", "sha256": "1bbde51d4cf12c739bc68a435d03e4b0dc844672cb55acd570538b12eac3d429", "role": "raw", "establishes": "The raw cross-session token-stability probe underlying the above. Producer-independent; captured 2026-09-27T08:33Z."},
+      {"path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl", "sha256": "d71ee7d82a761697b04707ac31a5f170d1be02a8f776618822ccb89b521c3ace", "role": "raw", "establishes": "Route validity (HTTP 200) and body variation 4/4 across four fresh sessions for CAL-POS-1/2/3/4 (body_sha256 all distinct; CAL-POS-1 additionally 4 distinct ETags and authenticity_token values); CAL-POS-5 404 x4."},
+      {"path": "research/experiments/EXP-GRAPH-36314193643/provenance.json", "sha256": "2e3109b876a10cba1817f6740460f1e04f048a86fffb5fb808f6b542509d59cc", "role": "derived", "establishes": "Corroborated digests and stdlib-only execution context of the parent raw capture."}
+    ],
+    "anchor_certificate": [
+      {"anchor_id": "CAL-POS-1", "url": "https://gitlab.com/-/trial_registrations/new/", "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions (parent raw_evidence.jsonl) and reachable in Frontier", "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)", "value_variation_evidence": "SPIDER_CORROBORATED: Frontier raw/token_stability.jsonl 3 distinct authenticity_token in 3 sessions; parent 4 distinct in 4 sessions", "evidence_class": "SPIDER_CORROBORATED", "g1_route_expected": true, "g2_body_variable_expected": true},
+      {"anchor_id": "CAL-POS-2", "url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount", "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions and reachable in Frontier", "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)", "value_variation_evidence": "SPIDER_CORROBORATED: Frontier raw/token_stability.jsonl 3 distinct wpCreateaccountToken in 3 sessions; parent instrument reported 0 extracted distinct values -- the reconciliation anchor", "evidence_class": "SPIDER_CORROBORATED", "g1_route_expected": true, "g2_body_variable_expected": true},
+      {"anchor_id": "CAL-POS-3", "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&action=form", "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions", "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)", "value_variation_evidence": "SPIDER_PARTIAL: an in-list token field (wpEditToken/wpLoginToken family) was detected by the parent, but its distinctness across sessions was never verified", "evidence_class": "SPIDER_PARTIAL", "g1_route_expected": true, "g2_body_variable_expected": true},
+      {"anchor_id": "CAL-POS-4", "url": "https://meta.discourse.org/", "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions", "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)", "value_variation_evidence": "A_PRIORI_CONSTRUCT: an in-list meta csrf-token field was reported present by the parent but its content was reported inaccessible; not SPIDER evidence", "evidence_class": "A_PRIORI_CONSTRUCT", "g1_route_expected": true, "g2_body_variable_expected": true},
+      {"anchor_id": "CAL-POS-5", "url": "https://bugs.launchpad.net/ubuntu/+reportbug", "route_status_evidence": "HTTP 404 in 4 of 4 parent sessions", "evidence_class": "RETIRED", "retired_reason": "The URL no longer serves the page (404 x4 in the parent). Retained here for identity continuity only; permanently excluded from the anchor set and from all denominators. It is NOT counted as a negative or as a positive."}
+    ],
+    "negative_anchor_certificate": [
+      {"anchor_id": "CAL-NEG-1", "url": "https://www.iana.org/domains/reserved", "evidence_class": "SPIDER_CORROBORATED (parent G0.3)", "expected": "0 in-list token values, both paths"},
+      {"anchor_id": "CAL-NEG-2", "url": "https://cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst", "evidence_class": "SPIDER_CORROBORATED (parent G0.3)", "expected": "0 in-list token values, both paths"},
+      {"anchor_id": "CAL-NEG-3", "url": "https://www.debian.org/", "evidence_class": "SPIDER_CORROBORATED (parent G0.3)", "expected": "0 in-list token values, both paths"},
+      {"anchor_id": "CAL-NEG-4", "url": "https://httpbin.org/forms/post", "evidence_class": "SPIDER_CORROBORATED (parent G0.3; Frontier recorded 0 action-gating objects and no csrf/token/nonce input)", "expected": "0 in-list token values, both paths"}
+    ],
+    "certificate_tolerances": "GATE C re-measures route status and body variation. Tolerance: route validity requires HTTP 200 in >=3 of the 4 fresh sessions (the parent's 4/4 is the prior, not a hard equality); body variation requires >=2 distinct body_sha256 across the 4 fresh sessions. A neutral presence detector must find at least one in-list field-name occurrence in >=3 sessions on >=3 of the 4 positive anchors. The certificate does not compute extracted values.",
+    "unresolved_property": "Extraction validity (whether a value is present and recoverable in the raw bytes) is exactly the object of the confirmatory measurement and is deliberately NOT asserted by the certificate."
+  },
+  "frozen_populations": {
+    "anchors_positive": ["CAL-POS-1", "CAL-POS-2", "CAL-POS-3", "CAL-POS-4"],
+    "anchors_positive_retired": ["CAL-POS-5"],
+    "anchors_negative": ["CAL-NEG-1", "CAL-NEG-2", "CAL-NEG-3", "CAL-NEG-4"],
+    "sessions": {"K_total": 4, "session_ids": ["S1", "S2", "S3", "S4"], "recorded_session": "S1", "current_sessions": ["S2", "S3", "S4"], "session_isolation": "fresh http.cookiejar.CookieJar per (anchor, session); no Cookie header on the first request; pairwise-disjoint jars on (name,value); Connection: close; new connection per request", "pacing": ">= 2.0 s between same-host requests"},
+    "warm_jar_diagnostic": {"re_captures_per_anchor": 2, "same_jar": true, "purpose": "NC-TIME-VS-SESSION"},
+    "agsi_definition": "An ACTION-GATING STATE ITEM (AGSI) is a (anchor, field_name) pair whose value is (a) the value attribute of an <input>, <textarea> or <select> belonging to a <form> whose method is not GET; or (b) the content attribute of a <meta> element whose name is in the frozen capability-token name list. Gating is STRUCTURAL, never behavioural; write verbs are forbidden.",
+    "frozen_token_name_list": ["authenticity_token", "authenticityToken", "csrfmiddlewaretoken", "_csrf", "csrf_token", "csrf-token", "__RequestVerificationToken", "__VIEWSTATE", "__EVENTVALIDATION", "wpEditToken", "wpCreateaccountToken", "wpCreateaccounttoken", "wpLoginToken", "wpCancelToken", "form_token", "__FORM_TOKEN", "auth_token", "os_authkey", "bbl_", "requesttoken", "state", "code", "nonce", "otp", "user_token", "session_token", "authenticity"],
+    "recovered_value_definition": "For an AGSI, the recovered exact value is the literal attribute string after HTML entity decoding, byte-for-byte; empty string means PRESENT-EMPTY; an absent attribute or absent field means ABSENT. Value comparison is byte-exact.",
+    "session_scoped_qualification": "An anchor's AGSI (per path) qualifies SESSION-SCOPED iff its URL returned HTTP 200 in at least 3 of the 4 sessions AND n_distinct_exact_values >= 2 AND n_distinct_body_sha256 >= 2. This is the parent's exact criterion, reused for identity continuity.",
+    "anchor_verdict_enum": ["RECOVERED_SESSION_SCOPED", "RECOVERED_INVARIANT", "RECOVERED_EMPTY", "NO_FIELD", "UNREACHABLE"],
+    "anchor_verdict_rule": "Per anchor and per path, verdict = RECOVERED_SESSION_SCOPED if that path recovers >=2 distinct non-empty exact values and the session-scoped criterion holds; RECOVERED_INVARIANT if it recovers exactly 1 distinct non-empty exact value across sessions; RECOVERED_EMPTY if in-list fields are present but all values are empty/absent; NO_FIELD if no in-list field is present; UNREACHABLE if HTTP 200 in <3 sessions. The anchor-level verdict is the pair (verdict_A, verdict_B) and is AGREED iff verdict_A == verdict_B.",
+    "d1v_definition": "D1V (value-only rotation) trial: recorded in S1, current in St (t in {S2,S3,S4}); live exact value != recorded exact value (STALE); the field name, type class, form action, form method and input-name set are unchanged between S1 and St; AND no transport validator (ETag, Last-Modified, Cache-Control max-age, Vary) varied between S1 and St. Family labels are stratifications for reporting only; the guard never sees a family label.",
+    "ground_truth": "For a trial (AGSI i, current session St): recorded_value = exact value in S1; live_value = exact value in St; label = STALE iff live_value != recorded_value byte-exact, else FRESH. This is a raw observation with no interpretation and no injected ground truth."
+  },
+  "extraction_paths": {
+    "P-EXTRACT-A": {"id": "P-EXTRACT-A", "name": "HTMLPARSER", "method": "subclass of stdlib html.parser.HTMLParser; walks the tag stream, collects <form>, <input>, <textarea>, <select>, <meta> with their attributes; entity decoding delegated to stdlib html.unescape; records per in-list field name the exact value/PRESENT-EMPTY/ABSENT and the form structural context (action, method, input-name set, type class).", "source_file_role": "code"},
+    "P-EXTRACT-B": {"id": "P-EXTRACT-B", "name": "REGEXLEX", "method": "independently written byte-level lexer using re only for tag/attribute token boundaries plus a hand-written quote/whitespace/attribute state machine and a hand-written HTML entity decoder (NOT html.unescape); must not import P-EXTRACT-A or any shared extraction helper; records the same fields and structural context as P-EXTRACT-A.", "source_file_role": "code"},
+    "same_input_guarantee": "Both paths receive the byte-identical stored body for each (anchor, session); body sha256 is recorded and both paths must hash the same bytes.",
+    "neutral_certificate_detector": "A third, deliberately minimal presence-only detector (a raw byte regex for in-list name= occurrences) used only at GATE C to certify field presence and body variation. It extracts no values and is not either extraction path, so it cannot pre-empt the confirmatory extraction.",
+    "instrument_fixtures": [
+      {"id": "SYN-CANARY-BOTH", "purpose": "positive instrument fixture: a non-GET form with an in-list hidden input carrying a literal value, plus an in-list meta token with content; both paths must recover exactly the same 2 (name,value) pairs.", "scored": false},
+      {"id": "SYN-EMPTY-VALUE", "purpose": "empty-value instrument fixture: an in-list hidden input with no value attribute and an in-list meta token with empty content; both paths must classify PRESENT-EMPTY and agree.", "scored": false},
+      {"id": "SYN-JSSTRING", "purpose": "representation-loss instrument fixture: an in-list token name appearing only inside a JavaScript string literal; both paths must recover 0 non-empty values.", "scored": false}
+    ]
+  },
+  "metric_registry": {
+    "note": "Stable metric identifiers for EXECUTE, AUDIT and DIRECTOR. AUDIT must reuse these verbatim when recomputing or disputing them.",
+    "certificate": [
+      {"id": "M-CERT-ROUTE-OK", "definition": "number of positive anchors with HTTP 200 in >=3 of 4 sessions", "unit": "anchors (0..4)"},
+      {"id": "M-CERT-BODY-VARIABLE", "definition": "number of positive anchors with >=2 distinct body_sha256 across the 4 sessions", "unit": "anchors (0..4)"},
+      {"id": "M-CERT-FIELD-PRESENT", "definition": "number of positive anchors where the neutral presence detector finds >=1 in-list field-name occurrence in >=3 sessions", "unit": "anchors (0..4)"},
+      {"id": "M-CERT-SESSION-ISOLATION-PASS", "definition": "disjoint jars and no first-request Cookie for every (anchor, session)", "unit": "boolean"},
+      {"id": "M-CERT-NEG-VALUES-A", "definition": "total non-empty in-list values recovered by P-EXTRACT-A across all negative anchors", "unit": "count"},
+      {"id": "M-CERT-NEG-VALUES-B", "definition": "total non-empty in-list values recovered by P-EXTRACT-B across all negative anchors", "unit": "count"}
+    ],
+    "extraction": [
+      {"id": "M-DISTINCT-VALUES-A-{anchor}", "definition": "distinct non-empty exact in-list values recovered by P-EXTRACT-A on the anchor across sessions", "unit": "count"},
+      {"id": "M-DISTINCT-VALUES-B-{anchor}", "definition": "distinct non-empty exact in-list values recovered by P-EXTRACT-B on the anchor across sessions", "unit": "count"},
+      {"id": "M-EXTRACT-RATE-A-{anchor}", "definition": "fraction of sessions in which P-EXTRACT-A recovered >=1 non-empty value", "unit": "fraction"},
+      {"id": "M-EXTRACT-RATE-B-{anchor}", "definition": "fraction of sessions in which P-EXTRACT-B recovered >=1 non-empty value", "unit": "fraction"},
+      {"id": "M-ANCHOR-VERDICT-{anchor}", "definition": "pair (verdict_A, verdict_B) from frozen_populations.anchor_verdict_enum", "unit": "enum-pair"},
+      {"id": "M-EXTRACT-AGREE-VALUESET", "definition": "number of positive anchors where P-EXTRACT-A and P-EXTRACT-B recover identical exact per-field value sets across all sessions", "unit": "anchors (0..4)"},
+      {"id": "M-EXTRACT-AGREE-VERDICT", "definition": "number of positive anchors where verdict_A == verdict_B", "unit": "anchors (0..4)"},
+      {"id": "M-EXTRACT-KAPPA", "definition": "Cohen's kappa on per-(anchor, session, in-list field name) value-presence agreement between the two paths", "unit": "dimensionless"},
+      {"id": "M-CANARY-PASS", "definition": "both paths recover >=2 distinct non-empty authenticity_token values on CAL-POS-1", "unit": "boolean"},
+      {"id": "M-FIXTURE-CANARY-PASS", "definition": "both paths recover the 2 expected pairs on SYN-CANARY-BOTH", "unit": "boolean"},
+      {"id": "M-FIXTURE-EMPTY-AGREE", "definition": "both paths classify SYN-EMPTY-VALUE fields as PRESENT-EMPTY identically", "unit": "boolean"},
+      {"id": "M-FIXTURE-JSSTRING-VALUES", "definition": "non-empty values recovered by either path from SYN-JSSTRING", "unit": "count (must be 0)"},
+      {"id": "M-N-SESSION-SCOPED-CONFIRMED", "definition": "number of positive anchors with verdict_A == verdict_B == RECOVERED_SESSION_SCOPED", "unit": "anchors (0..4)"},
+      {"id": "M-N-REPRESENTATION-LOSS", "definition": "number of positive anchors with verdict_A == verdict_B in {RECOVERED_EMPTY, NO_FIELD} while M-CERT-BODY-VARIABLE holds", "unit": "anchors (0..4)"},
+      {"id": "M-N-EXTRACTION-UNRELIABLE", "definition": "number of positive anchors where M-ANCHOR-VERDICT is not AGREED", "unit": "anchors (0..4)"},
+      {"id": "M-WARMJAR-VARIATION-RATE", "definition": "per anchor, fraction of warm-jar re-captures whose recovered exact value differs from the fresh capture", "unit": "fraction"},
+      {"id": "M-WARMJAR-BODY-VARIATION-RATE", "definition": "per anchor, fraction of warm-jar re-captures whose body_sha256 differs from the fresh capture", "unit": "fraction"}
+    ],
+    "blindness_conditional": [
+      {"id": "M-FA-INCUMBENT-D1V", "definition": "P(REUSE | STALE, D1V) for B-INCUMBENT-SIGNAL-ONLY", "unit": "fraction"},
+      {"id": "M-FA-VALUEAWARE-D1V", "definition": "P(REUSE | STALE, D1V) for B-VALUE-AWARE", "unit": "fraction"},
+      {"id": "M-PAIRED-FA-DIFF-D1V", "definition": "M-FA-INCUMBENT-D1V - M-FA-VALUEAWARE-D1V", "unit": "fraction"},
+      {"id": "M-PAIRED-FA-DIFF-D1V-LOW", "definition": "anchor-clustered percentile bootstrap 97.5% lower bound on M-PAIRED-FA-DIFF-D1V, B=10000, seed 36314193643", "unit": "fraction"},
+      {"id": "M-N-D1V", "definition": "number of realized D1V trials", "unit": "trials"},
+      {"id": "M-N-DECISIONS-D1V", "definition": "distinct decisions (REUSE/ABSTAIN) realized on the D1V subset", "unit": "count"}
+    ]
+  },
+  "control_registry": {
+    "note": "Frozen control identifiers; EXECUTE, AUDIT and DIRECTOR reuse them verbatim.",
+    "anchors_positive": ["CAL-POS-1", "CAL-POS-2", "CAL-POS-3", "CAL-POS-4"],
+    "anchors_positive_retired": ["CAL-POS-5"],
+    "anchors_negative": ["CAL-NEG-1", "CAL-NEG-2", "CAL-NEG-3", "CAL-NEG-4"],
+    "gates": ["GATE-C1", "GATE-C2", "GATE-C3", "GATE-C4", "GATE-E1", "GATE-E2", "GATE-E3"],
+    "branches": ["EXTRACTION-DEFECT-CONFIRMED", "REPRESENTATION-LOSS-CONFIRMED", "EXTRACTION-UNRELIABLE", "MIXED-ANCHORS", "NO-BODY-VARIATION", "INCUMBENT-BLIND-CONFIRMED", "INCUMBENT-NOT-BLIND", "DATA-INSUFFICIENT-D1V"],
+    "falsifiers": ["F-INSTR", "F-REPLOSS", "F-UNRELIABLE", "F-BLIND", "F-CERT"],
+    "baselines": ["B-SINGLE-PATH-A", "B-SINGLE-PATH-B", "B-PARENT-METHOD-REIMPL", "B-INCUMBENT-SIGNAL-ONLY", "B-VALUE-AWARE", "B-NO-GUARD-REPLAY"],
+    "positive_controls": ["PC-EXTRACT-CANARY", "PC-INCUMBENT-BLINDNESS"],
+    "null_controls": ["NC-CAL-NEG-ALL-REJECTED", "NC-EXTRACT-EMPTY-VALUE", "NC-EXTRACT-JSSTRING", "NC-PATH-INDEPENDENCE", "NC-SESSION-ISOLATION", "NC-TIME-VS-SESSION", "NC-NONDEGENERATE-ESTIMATOR"],
+    "instrument_fixtures": ["SYN-CANARY-BOTH", "SYN-EMPTY-VALUE", "SYN-JSSTRING"],
+    "validity_requirements": ["V01-PRE-REGISTRATION-NO-DESIGN-OUTCOME", "V02-SUBSTRATE-CERTIFICATE-FROZEN-AND-RE-VERIFIED", "V03-EXTRACTION-PATH-INDEPENDENCE", "V04-SAME-BYTES-BOTH-PATHS", "V05-NO-JS-REPRESENTATION-LOSS-DECLARED", "V06-SESSION-ISOLATION", "V07-NO-ANCHOR-SPECIAL-CASING", "V08-ANTI-OVERFIT-CONTROLS", "V09-SEED-DETERMINISM", "V10-RAW-EVIDENCE-RETENTION", "V11-FROZEN-INPUT-RE-VERIFICATION", "V12-RESAMPLING-UNIT"]
+  },
+  "decision_rule": "ORDERED, FAIL-CLOSED. Every branch is pre-labelled MEASUREMENT_INVALID, ADEQUACY/DATA-INSUFFICIENT, BOUNDED NEGATIVE, or VALID RESULT. No branch converts a missing measurement into a scientific negative. GATE C (pre-confirmatory substrate certificate; blocking measurement-validity, runs before any extraction): C1 M-CERT-ROUTE-OK >= 3 of 4 AND M-CERT-FIELD-PRESENT >= 3 of 4; C2 M-CERT-NEG-VALUES-A == 0 AND M-CERT-NEG-VALUES-B == 0 (all four negatives rejected by both paths); C3 M-CERT-SESSION-ISOLATION-PASS == true. Any C1/C2/C3 failure => status MEASUREMENT_INVALID, outcome INCONCLUSIVE, branch F-CERT, no claim-level statement. C4 (non-blocking disclosure) M-CERT-BODY-VARIABLE: if < 3 of 4 anchors have >=2 distinct body hashes, => status COMPLETE, outcome INCONCLUSIVE, branch NO-BODY-VARIATION, no confirmatory read. GATE E (part i; after GATE C passes): E1 M-CANARY-PASS == true; E2 M-FIXTURE-CANARY-PASS == true AND M-FIXTURE-EMPTY-AGREE == true AND M-FIXTURE-JSSTRING-VALUES == 0 AND NC-PATH-INDEPENDENCE passes. Any E1/E2 failure => status MEASUREMENT_INVALID, outcome INCONCLUSIVE, branch F-INSTR, no claim-level statement (the instrument has no demonstrated sensitivity). E3 M-EXTRACT-AGREE-VALUESET >= 3 AND M-EXTRACT-AGREE-VERDICT >= 3. If E3 FAILS => status COMPLETE, outcome MIXED, branch EXTRACTION-UNRELIABLE (M-N-EXTRACTION-UNRELIABLE >= 2): the two independent paths disagree; extraction validity is not established; no substrate verdict; further instrument repair required. If E3 PASSES => extraction VALIDATED; read anchor verdicts. D1 M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4 => status COMPLETE, outcome SUPPORTS, branch EXTRACTION-DEFECT-CONFIRMED (the parent's zero-distinct failure was an instrument/extraction defect). D2 M-N-REPRESENTATION-LOSS >= 3 of 4 => status COMPLETE, outcome FALSIFIES, branch REPRESENTATION-LOSS-CONFIRMED (bounded: genuine V16 representation loss on this substrate class). D3 otherwise => status COMPLETE, outcome MIXED, branch MIXED-ANCHORS (report per-anchor). GATE B (part ii; ONLY if D1): if M-N-D1V < 6 OR M-N-DECISIONS-D1V < 2 => branch DATA-INSUFFICIENT-D1V; part (ii) is reported null and no architectural claim is made (NOT a failure). Else if M-PAIRED-FA-DIFF-D1V >= 0.10 AND M-PAIRED-FA-DIFF-D1V-LOW > 0 => branch INCUMBENT-BLIND-CONFIRMED; the bounded blindness claim is added. Else => branch INCUMBENT-NOT-BLIND (F-BLIND): the incumbent value-blind signal set is not materially more false-accepting than the value-aware channel on real D1V trials; architecture simplification. Any result status/outcome map: GATE C/E blocking failure -> MEASUREMENT_INVALID/INCONCLUSIVE; C4 NO-BODY-VARIATION -> COMPLETE/INCONCLUSIVE; E3 fail -> COMPLETE/MIXED; D1 -> COMPLETE/SUPPORTS; D2 -> COMPLETE/FALSIFIES; D3 -> COMPLETE/MIXED; B branches do not change status/outcome but are recorded under controls and observations.",
+  "product_consequence_positive": "If the EXTRACTION-DEFECT-CONFIRMED branch is reached (E3 passes and >=3 of 4 anchors are confirmed session-scoped by both paths): (1) the parent's GATE 0 failure is established as an instrument/extraction defect rather than a property of the credential-free Web, so the credential-free stdlib no-JS substrate remains a usable calibration substrate for C-FRESHNESS and the program is unblocked to design a properly-instrumented guard measurement with a pre-freeze certified substrate; (2) C-FRESHNESS may advance from HYPOTHESIS to at most EXPERIMENTAL, only via the DIRECTOR and bounded by CC-A..CC-F, because this packet measures extraction validity and, conditionally, channel necessity -- it does not measure a guard operating point, a prevalence, or an economic break-even; (3) if the INCUMBENT-BLIND-CONFIRMED branch is also reached, the value-aware channel (CH-PRECOND-BINDING) is confirmed necessary on real D1V trials, so the product freshness architecture must retain it and the incumbent-only guard must not be shipped as sufficient. No promotion into Product Core is authorized by this packet: the graph lane measures a capability, it does not integrate one.",
+  "product_consequence_negative": "Four pre-committed bounded consequences. (1) If REPRESENTATION-LOSS-CONFIRMED (D2): the value is not present in the raw bytes on >=3 of the 4 anchors, so no stdlib no-JS guard can be calibrated on this anchor class; SPIDER must NOT ship a freshness gate for the credential-free server-rendered class on these anchors, the public-GET program needs an explicit scope decision (restrict to proven server-rendered token constructs, or commission a JS-capable substrate via Runtime), and replay-by-assumption is not licensed. Bounded: client-side/XHR-minted, authenticated and permission-boundary state remain open and are NOT closed. (2) If EXTRACTION-UNRELIABLE (E3 fail): extraction validity is not established, the two independent paths disagree, and no guard measurement may proceed until the instrument is repaired; this is a real cost and a reason to keep the extraction layer under versioned, dual-path test. (3) If INCUMBENT-NOT-BLIND (F-BLIND): the value-blind channels are not materially less safe than the value-aware channel on real D1V trials; the added value-aware channel may be deleted from the architecture, a real simplification and product saving decided by measurement. (4) If F-INSTR or F-CERT: no product change of any kind is authorized; the standing state is that nothing was promoted and replay-by-assumption is not authorized. In every branch, M-INVISIBLE-STALE-PREV is NOT measured by this packet and is reported null, never 0.0.",
+  "estimated_cost": "Very small. No model calls, no browser, no Docker, no credentials, no local server. Request budget: 16 positive-anchor GETs (4 anchors x 4 fresh sessions) + 16 negative-anchor GETs (4 x 4) + 8 warm-jar re-captures (4 anchors x 2) = 40 plus any same-session redirects, against a frozen cap of 200. Raw bytes on the order of a few MB, retained under the experiment directory (or compacted under /tmp to per-record JSONL plus raw-body digests, disclosed). Wall clock dominated by >=2.0 s per-host pacing: under 2 minutes. Compute well under 0.05 hours; USD 0. Stdlib only (urllib, http.cookiejar, html.parser, re, ast, hashlib, json, random); no pip install required.",
+  "expected_information_gain": "High and tightly targeted. This resolves the single decision-relevant unknown left by the parent, using the strongest available contrast: the parent's instrument reported zero extracted distinct values on the very URL (auth.wikimedia.org/Special:CreateAccount) where accepted Codex EXP-FRONTIER-36306528608 independently recorded 3 distinct wpCreateaccountToken values with stdlib HTTP. Three mutually exclusive and decision-changing outcomes are all reachable: (a) both independent paths recover session-scoped values on >=3 anchors -> the parent failure was an extraction defect, the credential-free substrate is rehabilitated, and a properly-instrumented guard program is unblocked (C-FRESHNESS can advance); (b) both paths agree on zero/empty recovery while bodies vary -> genuine representation loss, requiring an explicit public-substrate scope decision; (c) the two paths disagree -> extraction validity itself is not trustworthy, which no prior C-FRESHNESS packet could detect because all used a single parser. The conditional part-(ii) read supplies the one non-tautological discriminator (whether a value-only rotation is really invisible to the incumbent signal set on real pages) and can simplify the architecture if the incumbent is not blind. The design is deliberately small, uses the same frozen negatives and anchor identities as the parent for continuity, requires no new substrate capability, and cannot be obtained by another threshold retune.",
+  "claim_ceiling_rules": {
+    "CC-A": "All results are scoped to the 4 pinned credential-free, server-rendered, no-JavaScript, credential-free, GET-only anchor URLs, K=4 fresh sessions, stdlib HTTP, on the capture date(s) recorded in provenance. Prevalence over 'the Web' is NOT measured and must never be quoted.",
+    "CC-B": "EXTRACTION-DEFECT-CONFIRMED establishes only that extraction was the parent's failure mode on these anchors. It does NOT by itself establish a guard operating point, a session-scope prevalence, or an economic break-even. C-FRESHNESS may advance at most to EXPERIMENTAL, only via the DIRECTOR.",
+    "CC-C": "REPRESENTATION-LOSS-CONFIRMED closes only the credential-free stdlib no-JS anchor-calibration path for these anchors. Client-side/XHR-minted values, canvas content, authenticated state and permission-boundary change remain open and are not closed by this packet.",
+    "CC-D": "The capability-token name list is a string-shape matcher, not a mechanism; family/verdict labels that depend on it inherit that limitation.",
+    "CC-E": "Part (ii) is thin by construction (few anchors, few D1V trials). Its gate uses an ANCHOR-clustered interval and a declared floor; if the floor is not reached the branch is DATA-INSUFFICIENT-D1V and no blindness claim is made. No prevalence or generalization may be read from it.",
+    "CC-F": "The two extraction paths are independently written but share a single authoring context; independence is structural (different algorithms, no shared code, AST-verified) and is corroborated by the real canary, the empty-value fixture, the JS-string fixture and the four negatives, not by external authorship."
+  },
+  "scope_boundaries": {
+    "SB-01": "No JavaScript, no browser, no headless rendering, no Docker, no local server, no synthetic state in the scored population, no credentials, no write verb, no side effect, no model call. Instrument fixtures are unit tests only and are never scored.",
+    "SB-02": "Permission-boundary change, the parent handoff's second predicted-blind drift family, is UNREACHABLE on credential-free public origins and is NOT tested. The D1V family is value-only rotation.",
+    "SB-03": "Cross-site transfer, mechanism parameterization to unseen identifiers, LLM inheritance, delta repair and residual-novelty economics are not measured; no event may be emitted for C-CROSSSITE, C-PARAM-INHERIT, C-LLM-INHERIT, C-DELTA-REPAIR, C-PRODUCT-ECON or C-SEMANTIC-RESOLVE.",
+    "SB-04": "The behaviourally invisible stale cell (a stale item whose value is byte-identical across sessions) is NOT measured; M-INVISIBLE-STALE-PREV is null, never 0.0.",
+    "SB-05": "The candidate-host pool of the parent is NOT screened. This packet is an instrument-validity experiment on the frozen 4-anchor set only, deliberately not another full guard trial."
+  },
+  "code_binding": {
+    "freeze_contains_only": ["request.json", "spec.json", "prereg.md"],
+    "no_code_digest_validity_gate": true,
+    "rationale": "scripts/freeze_experiment.py writes exactly three sha256 keys, so no code artifact is cryptographically bound at freeze in any lane; check_scope.py grants DESIGN prefixes=[] and only spec.json/prereg.md/failure.json/model_design.json are writable at DESIGN, so outcome-bearing code cannot exist at freeze time. Declaring a code digest as a validity condition would be unsatisfiable by construction.",
+    "obligation_instead": [
+      "EXECUTE hashes every producer source file with sha256 into result.json.artifacts with role 'code' and into provenance.json, including both extraction paths as separate files.",
+      "EXECUTE records the exact interpreter version and the complete stdlib-only dependency set (no pip install is required or permitted).",
+      "EXECUTE re-verifies request.json, spec.json and prereg.md against freeze.json before the first request and again after the last; any mismatch is terminal.",
+      "EXECUTE records which absolute paths were written and asserts that no write left the granted scope (research/experiments/EXP-GRAPH-37950584469 and research/harness, research/graph)."
+    ],
+    "frozen_inputs_reverification": "request.json, spec.json, prereg.md against freeze.json before and after execution; terminal on mismatch."
+  },
+  "preregistration_timing": "This spec.json and prereg.md are written before any anchor is contacted in this transaction. No outcome-bearing measurement was run during DESIGN: no HTTP request, no extraction, no anchor or candidate probe, no outcome inspection. The anchors' asserted behaviours are recorded in spec.substrate_certificate with their evidence class and the exact already-frozen artifact that supports them; extraction validity is deliberately left unresolved and is the confirmatory object. Any analysis change after freeze is exploratory and must be reported as such.",
+  "transmission_contract": {
+    "design_emits": ["spec.json", "prereg.md"],
+    "execute_must_emit": ["result.json", "report.md", "provenance.json"],
+    "execute_required_top_level_result_fields": ["schema_version", "experiment_id", "lane", "status", "outcome", "metrics", "controls", "artifacts", "observations", "validity_notes", "unresolved"],
+    "stable_identities_to_preserve": ["experiment_id", "lane", "claim_ids", "CAL-POS-1..5", "CAL-NEG-1..4", "GATE-C1..C4", "GATE-E1..E3", "F-INSTR", "F-REPLOSS", "F-UNRELIABLE", "F-BLIND", "F-CERT", "B-SINGLE-PATH-A", "B-SINGLE-PATH-B", "B-PARENT-METHOD-REIMPL", "B-INCUMBENT-SIGNAL-ONLY", "B-VALUE-AWARE", "B-NO-GUARD-REPLAY", "PC-EXTRACT-CANARY", "PC-INCUMBENT-BLINDNESS", "NC-*", "SYN-*", "V01..V12", "CC-A..CC-F", "every M-* metric id", "every branch id"],
+    "status_outcome_vocabulary": {"status": ["COMPLETE", "BLOCKED", "MEASUREMENT_INVALID"], "outcome": ["SUPPORTS", "FALSIFIES", "MIXED", "INCONCLUSIVE", "NOT_APPLICABLE"]},
+    "branch_to_status_outcome_map": {
+      "GATE_C_or_GATE_E_blocking_failure": {"status": "MEASUREMENT_INVALID", "outcome": "INCONCLUSIVE"},
+      "C4_NO-BODY-VARIATION": {"status": "COMPLETE", "outcome": "INCONCLUSIVE"},
+      "E3_FAIL_EXTRACTION-UNRELIABLE": {"status": "COMPLETE", "outcome": "MIXED"},
+      "D1_EXTRACTION-DEFECT-CONFIRMED": {"status": "COMPLETE", "outcome": "SUPPORTS"},
+      "D2_REPRESENTATION-LOSS-CONFIRMED": {"status": "COMPLETE", "outcome": "FALSIFIES"},
+      "D3_MIXED-ANCHORS": {"status": "COMPLETE", "outcome": "MIXED"}
+    }
+  }
 }
