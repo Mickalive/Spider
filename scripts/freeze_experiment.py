@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, hashlib, json
+import argparse, hashlib, json, subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -9,6 +9,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def git_head() -> str:
+    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+
+
+def under(path: str, root: str) -> bool:
+    root = root.rstrip("/")
+    return path == root or path.startswith(root + "/")
 
 
 def prereg_is_substantive(path: Path, experiment_id: str) -> bool:
@@ -66,6 +75,49 @@ def main():
     if not prereg_is_substantive(exp / "prereg.md", args.experiment_id):
         raise SystemExit("preregistration remains scaffold or is structurally incomplete")
 
+    if "build_required" not in spec or "freeze_artifacts" not in spec:
+        raise SystemExit("spec must declare build_required and freeze_artifacts")
+    build_required = spec["build_required"]
+    freeze_artifacts = spec["freeze_artifacts"]
+    if not isinstance(build_required, bool):
+        raise SystemExit("spec.build_required must be boolean")
+    if not isinstance(freeze_artifacts, list) or any(
+        not isinstance(x, str) or not x.strip() for x in freeze_artifacts
+    ):
+        raise SystemExit("spec.freeze_artifacts must be a list of non-empty paths")
+    if len(freeze_artifacts) != len(set(freeze_artifacts)):
+        raise SystemExit("spec.freeze_artifacts contains duplicates")
+    if build_required and not freeze_artifacts:
+        raise SystemExit("build_required=true requires freeze_artifacts")
+
+    receipt_path = exp / "build_receipt.json"
+    if not receipt_path.exists():
+        raise SystemExit("build_receipt.json missing; pre-freeze build receipt is mandatory")
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    if receipt.get("experiment_id") != args.experiment_id or receipt.get("lane") != req["lane"]:
+        raise SystemExit("build receipt identity mismatch")
+    receipt_artifacts = receipt.get("artifacts")
+    if not isinstance(receipt_artifacts, dict):
+        raise SystemExit("build receipt artifacts must be an object")
+
+    lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
+    roots = lanes["lanes"][req["lane"]].get("allowed_code_roots", [])
+    exp_root = f"research/experiments/{args.experiment_id}"
+    artifact_hashes = {}
+    for rel in freeze_artifacts:
+        path = Path(rel)
+        if path.is_absolute() or ".." in path.parts:
+            raise SystemExit(f"unsafe freeze artifact path: {rel}")
+        if not (under(rel, exp_root) or any(under(rel, root) for root in roots)):
+            raise SystemExit(f"freeze artifact outside lane-authorized roots: {rel}")
+        full = ROOT / rel
+        if not full.is_file():
+            raise SystemExit(f"freeze artifact missing: {rel}")
+        digest = sha(full)
+        if receipt_artifacts.get(rel) != digest:
+            raise SystemExit(f"build receipt mismatch: {rel}")
+        artifact_hashes[rel] = digest
+
     claims = json.loads((ROOT / "research/claims/registry.json").read_text())
     known = {c["id"] for c in claims["claims"]}
     unknown = set(spec["claim_ids"]) - known
@@ -80,7 +132,10 @@ def main():
             "request.json": sha(exp / "request.json"),
             "spec.json": sha(exp / "spec.json"),
             "prereg.md": sha(exp / "prereg.md"),
+            "build_receipt.json": sha(exp / "build_receipt.json"),
         },
+        "artifact_commit": git_head(),
+        "artifact_hashes": artifact_hashes,
     }
     (exp / "freeze.json").write_text(json.dumps(freeze, indent=2, sort_keys=True) + "\n")
     print(f"SPIDER_FROZEN {args.experiment_id}")
