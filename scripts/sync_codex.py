@@ -122,6 +122,23 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
         if freeze["hashes"].get(name) != sha256(raw[name]):
             raise ValueError(f"freeze hash mismatch: {name}")
 
+    if "build_receipt.json" in freeze["hashes"]:
+        receipt_raw = raw.get("build_receipt.json")
+        if receipt_raw is None or freeze["hashes"]["build_receipt.json"] != sha256(receipt_raw):
+            raise ValueError("freeze hash mismatch: build_receipt.json")
+
+    artifact_hashes = freeze.get("artifact_hashes", {})
+    artifact_commit = freeze.get("artifact_commit")
+    if artifact_hashes:
+        if not isinstance(artifact_hashes, dict) or not isinstance(artifact_commit, str) or not artifact_commit:
+            raise ValueError("freeze artifact binding shape invalid")
+        for rel, expected in artifact_hashes.items():
+            bound = show(artifact_commit, rel)
+            if bound is None:
+                raise ValueError(f"frozen artifact absent at artifact_commit: {rel}")
+            if sha256(bound) != expected:
+                raise ValueError(f"frozen artifact hash mismatch: {rel}")
+
     if len(raw["prereg.md"].strip()) < 100 or len(raw["report.md"].strip()) < 20:
         raise ValueError("prereg/report is structurally empty")
 
@@ -243,6 +260,16 @@ def main():
                         raise ValueError(f"post-finalization mutation detected: {name}")
                     raw[name] = pinned
                     packet_hashes[name] = sha256(pinned)
+
+                optional_name = "build_receipt.json"
+                optional_path = f"research/experiments/{exp_id}/{optional_name}"
+                optional_pinned = show(source_commit, optional_path)
+                optional_current = show(ref, optional_path)
+                if optional_pinned is not None:
+                    if optional_current != optional_pinned:
+                        raise ValueError(f"post-finalization mutation detected: {optional_name}")
+                    raw[optional_name] = optional_pinned
+                    packet_hashes[optional_name] = sha256(optional_pinned)
 
                 req, spec, audit, verdict = validate_packet(exp_id, lane, source_commit, raw, known_claims)
                 if exp_id in entries:
