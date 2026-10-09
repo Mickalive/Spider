@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-37950584469",
-  "last_experiment_id": "EXP-GRAPH-36314193643",
-  "last_verdict": "MEASUREMENT_INVALID_AT_GATE_0_CALIBRATION_C_FRESHNESS_UNCHANGED_AT_HYPOTHESIS_NO_PROMOTION_NO_PRODUCT_CHANGE_NO_RECHAIN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-37950584469",
+  "last_verdict": "MEASUREMENT_INVALID_AT_GATE_C3_CERTIFICATE_DESIGN_DEFECT_EXTRACTION_VALIDITY_INDICATED_NO_CLAIM_LEVEL_STATEMENT_LICENSED_C_FRESHNESS_UNCHANGED_AT_HYPOTHESIS_NO_PROMOTION_NO_PRODUCT_CHANGE_NO_RECHAIN",
   "continue_immediately": false,
-  "next_question": "Given that the frozen G0.2 calibration failed with 4 of 5 positive anchors yielding zero extracted distinct values even though the same anchors' raw response bodies varied across all four fresh sessions (auth.wikimedia.org body_sha256 4/4 distinct, en.wikipedia.org 4/4, meta.discourse.org 4/4) and that accepted Codex packet EXP-FRONTIER-36306528608 extracted 3 distinct wpCreateaccountToken values from the same auth.wikimedia.org URL with stdlib HTTP: on a small frozen set of credential-free, server-rendered capability-token pages, using TWO independently written stdlib extraction paths (an html.parser path and a second, independently written parser/regex path) with raw bodies retained per record and the positive anchors' session-scoped variation established by producer-independent raw observation BEFORE freeze, (i) do the two paths agree on the recovered value set and on the session-scoped verdict for at least 3 of 4 anchors, thereby separating an extraction defect from genuine V16 representation loss; and, conditional on a verified extraction, (ii) is the incumbent value-blind signal set in fact blind to value-only rotation (the load-bearing non-tautological discriminator), i.e. does it score materially higher false-accept than the value-aware channel on the D1V family, without depending on a screen whose calibration power is asserted rather than measured?",
+  "next_question": "With the frozen packet's GATE-C3 session-isolation predicate repaired at DESIGN time as the audit requires (require pairwise disjointness only on session-identifying cookie names, or on (name,value) pairs after excluding server-set constant configuration cookies such as preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global and CentralAuthAnonTopLevel), does a re-frozen packet on the same four pinned credential-free anchors reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), thereby licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-F; and, conditional on that, can a non-degenerate D1V population (M-N-D1V >= 6 with every active channel firing and not firing at least once) make the incumbent value-blind channel's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable rather than DATA-INSUFFICIENT?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-09T16:50:43.959183+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "0a5246fd0b119cad8eed7bf68c8e52b0526cd18cb820a90c9c0f782d45181a1a",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "4e86163a136e1a9616abd065",
-  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-09T16:59:35.399650+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "ef727e9acec7509ceebd1bacdfbeb7cb16245eb941a6caa1c0886520ebc6500a",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
