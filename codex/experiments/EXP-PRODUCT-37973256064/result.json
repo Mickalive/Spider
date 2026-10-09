@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37973256064",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "T-SPIDER-PARAM": {
+      "n_tasks": 15,
+      "n_success": 12,
+      "success_rate": 0.8
+    },
+    "B-COLD-RE-DERIVE": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0
+    },
+    "PC-EXACT-REPLAY": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0
+    },
+    "B-LITERAL-KERNEL": {
+      "n_tasks": 15,
+      "n_success": 0,
+      "success_rate": 0.0
+    },
+    "treatment_advantage_vs_cold": -0.19999999999999996,
+    "treatment_advantage_vs_retrieval": -0.19999999999999996,
+    "causal_attribution_literal_vs_treatment": -0.8,
+    "known_negative_refusal_rate": 1.0,
+    "refusal_reason_correctness": 1.0
+  },
+  "controls": {
+    "B-COLD-RE-DERIVE": {
+      "type": "negative_control",
+      "expected_behavior": "no_inheritance",
+      "observed_behavior": "success_rate=1.0 on held-out",
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "derived/arm_metrics.json"
+      ]
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "type": "comparator",
+      "expected_behavior": "structural_similarity_matching",
+      "observed_behavior": "success_rate=1.0 on held-out",
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "derived/arm_metrics.json"
+      ]
+    },
+    "B-LITERAL-KERNEL": {
+      "type": "ablation",
+      "expected_behavior": "confidence_0.5_below_min_0.8",
+      "observed_behavior": "success_rate=0.0",
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "derived/arm_metrics.json"
+      ]
+    },
+    "PC-EXACT-REPLAY": {
+      "type": "positive_control",
+      "expected_behavior": "1.0_on_training",
+      "observed_behavior": "success_rate=1.0",
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "derived/arm_metrics.json"
+      ]
+    },
+    "NC-OUT-OF-SUPPORT-TYPE": {
+      "type": "null_control",
+      "expected_behavior": "refusal_with_reason_bound_action_null",
+      "observed_behavior": "5/5 refused, bound_action null, UNKNOWN",
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/null_control_unseen_type.jsonl"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/training_observations.jsonl",
+      "sha256": "1a2bb2fcd27e289ac3ec530fff06cb88e3f1f74e2fa29de355a25b2fd5ab2000",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/induced_mechanisms.json",
+      "sha256": "0540dc4c078cabaf93895cf266a2bfaceffba2a2de834b53c322e2cea1579cc9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/task_trajectories.jsonl",
+      "sha256": "c442aa64382264196b8a21081794cb9eb433321e9edb0dce294633278117eed5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/accounting_counters.jsonl",
+      "sha256": "20cc3475c8454adb61ca87fbbf5d6be29464ebb935c646da4ec60565c2b38625",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/known_negatives.jsonl",
+      "sha256": "e76fa00828f2fad62219983029c848d5543849e5e214656d94af268885133602",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/null_control_unseen_type.jsonl",
+      "sha256": "1580b197bc725f127c0a3f2c2427b0debfd592933f39559a70b47cbf568f2c3d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/server_log.jsonl",
+      "sha256": "cd7db388a1175981a7ecd6b38a6b2c61bba42f8cb98ccd658ba4a57885b8fc55",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/derived/arm_metrics.json",
+      "sha256": "77867202242a2067aea6ce9e91f37b607603bca1d9ea04d16f47f3b0b3a48303",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/derived/decision_rule_eval.json",
+      "sha256": "6529c4d216f200aad2c3badbdde3f45c089dca5735064e794d043289e8f6afcc",
+      "role": "derived"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/__init__.py",
+      "sha256": "de7a453a497831adee2b9993b27c37c4cf04907a253fa8b2931b41c32708bcdd",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "89a1b9b9f1abc6367d7cb47de79a56ae8b9709e4452dd36fca51ae8353e00f49",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/harness/run_experiment.py",
+      "sha256": "f452242ce3acfe2821264c2da76e966ffd6fbffff1e3cf15284ca5869a06b8d2",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/harness/substrate.py",
+      "sha256": "2c09997bba72b966c76b84595d4d0f64bdff8367bb9a5f2aa4ef1b06c944aec8",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "type": "direct",
+      "description": "Mechanisms induced via distill_parameterized on A set with 2-digit identifiers produce support regexes accepting ^type-00[0-9]{1}$ (first digit 0, second digit 0-9); held-out identifier type-010 (third char 1, second 1) is outside inferred support, causing 3/15 treatment tasks (type-010 across items/users/orders) to resolve as EXPLORE/refused, yielding treatment success_rate 0.8 on deterministic real HTTP substrate.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "raw_evidence/induced_mechanisms.json"
+      ]
+    },
+    {
+      "type": "direct",
+      "description": "Cold re-derivation and retrieval-shaped comparator both achieve 1.0 on held-out by constructing/copying correct executable actions (1 HTTP request each); literal kernel with confidence 0.5 < 0.8 produces 0.0 success; positive control on training yields 1.0. Accounting: model_calls/model_tokens 0 for all arms; retrieval_calls differ (treatment 1, cold 0, retrieval 3); verification_calls >=1 where executed.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl",
+        "derived/arm_metrics.json",
+        "raw_evidence/accounting_counters.jsonl"
+      ]
+    },
+    {
+      "type": "direct",
+      "description": "Known negatives: 15/15 refused with bound_action=null and correct reason categories (out_of_support/missing_parameter/unknown for wrong_intent); null control on unseen type products refused 5/5.",
+      "evidence_refs": [
+        "raw_evidence/known_negatives.jsonl",
+        "raw_evidence/null_control_unseen_type.jsonl"
+      ]
+    }
+  ],
+  "validity_notes": [
+    {
+      "category": "representation_loss",
+      "description": "The induced support regex accepts one or two-digit suffix pattern anchored to 00? digits; the held-out set includes identifiers ending in 10 (item-010, user-010, order-010) which fall outside ^...-00[0-9]$ (second digit is '1', first is '0', but the pattern requires the second char before final digit to be '0' in '00[0-9]' meaning exactly two 0-prefixed digits total in that suffix form?). The implementation inferred support from training samples item-001..005 (suffix 01,02,03,04,05) so support is bounded to those structural forms; the experiment's held-out B set (006..010) includes 010 which is structurally slightly outside the inferred support. This is a genuine inference ceiling of the current distill_parameterized (support generalization from examples) rather than infrastructure failure; it explains treatment 0.8 without invalidating cold/retrieval or accounting."
+    },
+    {
+      "category": "measurement_caveat",
+      "description": "PRIMARY margin fails because cold and retrieval achieve 1.0 on held-out (deterministic task) while treatment is limited by inferred support generalization; SUBSTRATE_VALIDITY is PASS (real localhost stdlib HTTP, 3 types x 10 ids). Attribution and honesty controls PASS. Decision rule maps to FALSIFIES per prereg §7 when PRIMARY fails; status=COMPLETE (valid scientific negative)."
+    },
+    {
+      "category": "environment",
+      "description": "Pure localhost stdlib http.server, urllib client, single-threaded. No model credentials, no external network. Deterministic."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U-SUPPORT-GENERALIZATION",
+      "description": "Current distill_parameterized infers conservative/overfit support from few examples (5 per type) and rejects 010 forms. Question: should distill_parameterized widen support when training examples form a contiguous sequence, or is this the intended behavior? Not settled by this run.",
+      "priority": "medium"
+    }
+  ]
+}
