@@ -66,6 +66,17 @@ jobs:
           git show "$SOURCE_SHA:$DIR/verdict.json" > /tmp/spider-product-verdict.json
           git show "$SOURCE_SHA:$DIR/handoff.json" > /tmp/spider-product-handoff.json
           git show "$SOURCE_SHA:$DIR/execution_checkpoint.json" > /tmp/spider-product-checkpoint.json
+          if git cat-file -e "$SOURCE_SHA:$DIR/build_receipt.json" 2>/dev/null; then
+            SOURCE_BUILD_BLOB=$(git rev-parse "$SOURCE_SHA:$DIR/build_receipt.json")
+            CURRENT_BUILD_BLOB=$(git rev-parse "origin/lab2/product:$DIR/build_receipt.json" 2>/dev/null || true)
+            [[ "$SOURCE_BUILD_BLOB" == "$CURRENT_BUILD_BLOB" ]] || {
+              echo "::error::post-finalization Product packet mutation detected: build_receipt.json"
+              exit 1
+            }
+            git show "$SOURCE_SHA:$DIR/build_receipt.json" > /tmp/spider-product-build-receipt.json
+          else
+            rm -f /tmp/spider-product-build-receipt.json
+          fi
 
           [[ "$(jq -r '.experiment_id' /tmp/spider-product-verdict.json)" == "$EXP" ]] || { echo "::error::verdict experiment mismatch"; exit 1; }
           [[ "$(jq -r '.lane' /tmp/spider-product-verdict.json)" == product ]] || { echo "::error::verdict lane mismatch"; exit 1; }
@@ -74,8 +85,14 @@ jobs:
           [[ "$(jq -r '.status' /tmp/spider-product-audit.json)" == PASS ]] || { echo "::error::promotion requires PASS audit"; exit 1; }
           [[ "$(jq -r '.promote_to_product // false' /tmp/spider-product-verdict.json)" == true ]] || { echo "::error::verdict does not authorize promotion"; exit 1; }
 
-          BASE=$(jq -r '.pre_execute_sha // empty' /tmp/spider-product-checkpoint.json)
-          [[ -n "$BASE" ]] || { echo "::error::missing pre_execute_sha"; exit 1; }
+          BASE=""
+          if [[ -f /tmp/spider-product-build-receipt.json ]]; then
+            BASE=$(jq -r '.pre_build_sha // empty' /tmp/spider-product-build-receipt.json)
+          fi
+          if [[ -z "$BASE" ]]; then
+            BASE=$(jq -r '.pre_execute_sha // empty' /tmp/spider-product-checkpoint.json)
+          fi
+          [[ -n "$BASE" ]] || { echo "::error::missing Product promotion baseline"; exit 1; }
           git cat-file -e "$BASE^{commit}"
 
           mapfile -t ROOTS < <(jq -r '.lanes.product.allowed_code_roots[]?' research/lanes/registry.json)
