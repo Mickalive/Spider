@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Pollinations.ai endpoint (E-POLLINATIONS-OPENAI) was not in the frozen prereg.md candidate set (lines 59-72). The prereg specified 14 candidates to be tested at DESIGN time before freeze; pollinations.ai was discovered/added during EXECUTE. This is a deviation from the frozen candidate set. However, it does not change the outcome: even with this additional endpoint, Gate 2 still FAILs because the endpoint is unstable (intermittent HTTP 402), token-capped (~197 completion tokens), unpinned (no model pinning/SLA), and returns empty/reasoning-only content for the Web-agent task.",
+    "Gate 1 ambiguity: the frozen spec.json gate_1_comparator_obtainability requires comparators be 'runnable under identical model/tools/budget'. The producer demonstrates framework-level runnability (LangGraph smoke test) but the minimal Web-agent task fails on both credential-free endpoints. Under a stricter 'completed Web-agent task' reading, Gate 1 would FAIL → UNRESOLVABLE_COMPARATOR. The producer records this in unresolved[0] and both readings converge on 'not VIABLE'. This ambiguity is properly disclosed.",
+    "Minimal Web-agent task uses a single synthetic page, one prompt, and one parsing rule. The producer notes in validity_notes[3] that 'a more capable prompt or constrained decoding could change the observed local-model action rate.' The finding is correctly bounded to the tested harness.",
+    "Comparator published numbers are external landscape evidence (Scout-eligible), not independently reproduced SPIDER measurements. The producer records this in validity_notes[2] and marks them UNAUDITED in comparator_obtainability.json. This is appropriate for Intel's charter (baseline/prior art survey).",
+    "Metric discrepancy: result.json.metrics.comparators_with_published_numbers_with_denominators = 3, but comparator_obtainability.json shows 4 external comparator categories with published numbers (B-RETRIEVAL: LRAT, B-SELECTOR-CACHE: browser-use WebVoyager, B-COMPILED-WORKFLOW: AWM/ASI/ReasoningBank, B-MEMORY-AGENT: Letta LoCoMo). B-COLD and B-INSTRUCTIONS are internal arms with no published numbers. The correct count is 4. This is a minor metrics error that does not affect the Gate 3 outcome (zero pass either way).",
+    "No WebArena/WebVoyager task environment was provisioned in the factory (validity_notes[4]). The full four-arm task population was not tested. This is explicitly scoped out per prereg.md section 11."
+  ],
+  "baseline_findings": [
+    "PC-ENDPOINT-LIVE: PASS. Two credential-free endpoints produced valid non-error completions with usage tokens, latency, and response hashes: E-LOCAL-LLAMA (llama-cpp-python 0.2.90, qwen2.5-0.5b-instruct-q4_k_m.gguf, 28/4/32 tokens, response sha256 d4a7428a...) and E-POLLINATIONS-OPENAI (https://text.pollinations.ai/openai, gpt-oss-20b, anonymous tier, 6/6 HTTP 200 with usage). Mutually exclusive with NC-NO-ENDPOINT.",
+    "NC-NO-ENDPOINT: NOT_HOLDS. Correctly does not hold because PC-ENDPOINT-LIVE passed. The null condition 'all candidates fail with credential/access error' is falsified by the two valid endpoints.",
+    "B-COLD and B-INSTRUCTIONS: NOT_RUN_IN_SCOPE. Correctly scoped as internal arms; no external published numbers required or tested.",
+    "B-RETRIEVAL: PARTIAL. Packages obtainable (langchain, chromadb, faiss-cpu, llama-index). Framework runs under attained endpoints. Published numbers (LRAT) exist but use 4B-358B backbones and no token budget → Gate 3 UNAUDITED.",
+    "B-SELECTOR-CACHE: FAIL. Packages obtainable (browser-use, playwright, stagehand-py). Published numbers (WebVoyager 89.1% on 586 tasks with gpt-4o, no token budget) → Gate 3 UNAUDITED. No selector-cache success/cost benchmark with denominators exists under any model.",
+    "B-COMPILED-WORKFLOW: PARTIAL. Packages obtainable (langgraph, pyautogen, crewai, dspy-ai). LangGraph smoke test passed on both credential-free endpoints (identical output hash). Best published table (AWM/ASI/ReasoningBank) uses Gemini 3 Flash / GPT-5.4-mini / Qwen 3.6-27B → Gate 3 UNAUDITED.",
+    "B-MEMORY-AGENT: FAIL. Packages obtainable (letta, zep-python). Published numbers (Letta LoCoMo 74.0% on 10 conversations/1,540 QA with gpt-4o-mini, filesystem tools only, no browser, no token budget) → Gate 3 UNAUDITED."
+  ],
+  "recomputed_metrics": {
+    "endpoint_candidates_tested": 14,
+    "credential_free_endpoints_valid": 2,
+    "credential_required_endpoints": 6,
+    "gate_0_endpoint_attainability": "PASS",
+    "gate_1_comparator_obtainability": "PASS",
+    "gate_2_four_arm_viability": "FAIL",
+    "gate_3_publication_audit": "FAIL_ZERO_PASS",
+    "comparator_categories_obtainable": 4,
+    "comparator_packages_obtainable": 14,
+    "comparator_frameworks_running_under_attained_endpoint": 1,
+    "comparator_web_agent_tasks_completed_under_identical_model": 0,
+    "comparators_with_published_numbers_with_denominators": 4,
+    "comparators_with_published_same_model_family_numbers": 0,
+    "comparators_passing_gate3_audit": 0,
+    "frozen_outcome_label": "DESIGN_COMPROMISED",
+    "frozen_outcome_basis": "Gate 0 PASS, Gate 1 PASS, Gate 2 FAIL (Gate 3 zero-pass corroborates)"
+  },
+  "claim_ceiling": "The frozen C-LLM-INHERIT four-arm benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, same model/tools/budget) is not executable as specified on current factory assets. Two credential-free endpoints exist (local Qwen2.5-0.5B-Instruct via llama.cpp, and anonymous pollinations.ai gpt-oss-20b proxy), but: (a) the local model cannot execute a Web-agent task (emits prose, no parseable JSON action); (b) the proxy is unstable (intermittent HTTP 402), token-capped (~197 completion tokens), unpinned, and returns empty/reasoning-only content; (c) zero external comparators publish Web-agent success/cost numbers on either attained model family or any credential-free endpoint model under the same tools and token budget. The endpoint gap is partially closed but the same-model published-baseline anchor and a budget-stable Web-agent-capable credential-free model do not exist. The benchmark requires either (i) a stable credential-free endpoint able to drive a Web agent, or (ii) a design re-scoping that drops the same-model published-baseline requirement. C-LLM-INHERIT remains HYPOTHESIS.",
+  "evidence_refs": [
+    "raw/endpoint_receipts.json",
+    "raw/comparator_obtainability.json",
+    "raw/gate_evaluation.json",
+    "raw/provisioning_receipts.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json"
+  ],
+  "unresolved": [
+    "Gate 1 vs Gate 2 locus: whether the correct frozen label is UNRESOLVABLE_COMPARATOR (Gate 1 fail under Web-agent-task reading) or DESIGN_COMPROMISED (Gate 1 pass as obtainability, Gate 2 fail). Both recorded; producer selected DESIGN_COMPROMISED.",
+    "Whether a larger credential-free local model (e.g., 3B-8B GGUF) or a stable anonymous provider could drive the four arms under identical model/tools/budget; not provisioned here.",
+    "Whether prompt engineering / constrained JSON decoding would make the local Qwen2.5-0.5B model act in the minimal Web-agent task; only the tested prompt was evaluated.",
+    "Whether the frozen design should drop the same-model published-baseline requirement (Gate 3) and rely on internally re-run comparators; this is a Director/prereg decision, not an Intel measurement.",
+    "Whether C-LLM-INHERIT's four-arm benchmark is executable 'pending a model credential' (per accepted codex evidence EXP-PRODUCT-37950607128) versus 'requires design weakening' (this packet's Gate 2 finding); the discrepancy is because this packet additionally required a same-model published anchor and an anonymous, budget-stable endpoint.",
+    "Exact rate/quota ceiling of the anonymous pollinations tier; only intermittent 402s were observed, not a documented limit.",
+    "Minor metric correction: comparators_with_published_numbers_with_denominators should be 4, not 3 (B-RETRIEVAL, B-SELECTOR-CACHE, B-COMPILED-WORKFLOW, B-MEMORY-AGENT all have published numbers with denominators)."
+  ]
+}
