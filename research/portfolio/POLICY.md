@@ -28,7 +28,7 @@ The Director reasons across:
 
 General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
-A permanent Research Scout supports the Director with broad reconnaissance. The Scout continuously scans the Codex, lane trajectories, external agent approaches, benchmarks, papers and tooling at shallow depth, then produces a staff brief. It does not decide the agenda and its external findings are not SPIDER evidence.
+A permanent Research Scout supports the Director with broad reconnaissance. Scout is advisory and may fail; a deterministic degraded brief preserves Director liveness without fabricating external context. The Scout continuously scans the Codex, lane trajectories, external agent approaches, benchmarks, papers and tooling at shallow depth, then produces a staff brief. It does not decide the agenda and its external findings are not SPIDER evidence.
 
 The Director should consume this brief rather than spend its own cycle on broad reconnaissance. Deep verification, reproduction or implementation is delegated to Intel or the appropriate research lane.
 
@@ -105,7 +105,7 @@ The mandate records:
 
 DESIGN may convert the strategic question into a rigorous falsifiable experiment, but it must not silently replace the Director's target with a nearby local continuation.
 
-If the mandate is infeasible, fail loudly. Do not invent a substitute research direction.
+If the mandate is infeasible because a capability, task bank, measurement harness or dependency that SPIDER can build is absent, prefer a bounded capability/provisioning objective before re-running the blocked end-to-end experiment. If the dependency is genuinely external and unavailable, PARK or PIVOT explicitly. Fail loudly rather than manufacturing evidence.
 
 ## Failure behavior
 
