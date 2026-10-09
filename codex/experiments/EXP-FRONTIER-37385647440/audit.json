@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37385647440",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "The frozen falsifier's cost condition is structurally unsatisfiable (VN-07): breadth-first re-derivation is always ≥ shortest-path re-acquisition by construction, making the FALSIFIES branch unreachable for any execution of this design. A re-derivation baseline strictly more expensive than re-acquisition by construction is required (e.g., adversarial full-site crawl with no path memory, or a cost model charging for re-deriving the entire observation procedure).",
+    "The frozen classification rule order (prereg.md section 4) tests session_scoped before time_scoped and rotating, making both unreachable for any item with within-session variance. Two of five classes have count 0 by construction, not observation. Rule order must be: invariant → within-session-varying → then time/rotating with a declared sampling schedule to separate them.",
+    "The primary classification rule requires value AND containing-page body-hash invariance across sessions (spec.measurement_validity.classification_method). This makes request_scoped a near-catch-all channel: 12 of 29 items depend on this channel choice (value_only_sensitivity). The channel must be declared per item as an explicit hypothesis, not left ambiguous.",
+    "REVERIFIED_NON_STATIONARY accept list (prereg 6.2) requires session_scoped or rotating, excluding request_scoped. Both observable anchors demonstrated non-stationarity MORE strongly (request_scoped: 5 distinct values across sessions AND within a session) yet were rejected. The control could only ever fail; accept list must include request_scoped.",
+    "KNOWN_STATIONARY_CONTROL (prereg 6.1) designates 5 anchors: 2 do not exist on the live web (gitlab /explore absent, httpbin /sitemap.xml 404), and a 3rd (Wikipedia Main_Page self-link) is not stationary under the frozen rule (5 distinct body hashes). A calibration class with 1 genuinely stationary anchor cannot calibrate a 5-class taxonomy. Anchors must be re-specified against live, verifiable stationary resources.",
+    "spec.json controls_pre_freeze_verification records status=PENDING, verified_at=null, evidence_ref=null for all four controls at freeze time (VN-02), violating prereg.md sections 7 and 14. Controls must be verified LIVE and PASS before freeze.json is created; the design was frozen unvalidated.",
+    "The break-even formula ceil(re_acq / (re_deriv - re_acq)) has no materiality guard on the denominator (VN-08). For root-hosted items where re-acquisition and re-derivation are the same single GET differing by ~13 tokens of header jitter, it returns break-even counts spanning 1 to 34,299 for economically identical items, and the class-median (1) disagrees with the median item-level value (1256). Require re_derivation - re_acquisition to exceed a materiality threshold before reporting break-even.",
+    "The site-clustered bootstrap CI95 is degenerate because every class is perfectly separated at the site level (VN-09); resampling sites collapses to extreme proportions. Intervals carry no useful precision; report item-level or acknowledge the limitation explicitly.",
+    "11 of 32 admitted items were never reached within frozen crawl bounds (VN-18), so their unconditional re-derivation cost is genuinely unmeasured and reported as null. The cost contrast is exercised only at hop ≤ 1, the extreme-favourable case for persistence. Deeper crawl bounds or explicit depth-stratified sampling needed."
+  ],
+  "validity_findings": [
+    {
+      "id": "AUDIT-VF-01",
+      "severity": "decisive",
+      "finding": "Two of four frozen pre-freeze controls FAILED: KNOWN_STATIONARY_CONTROL (3 PASS, 1 FAIL, 1 UNOBSERVABLE, 1 SKIPPED) and REVERIFIED_NON_STATIONARY (0 PASS, 1 FAIL, 1 UNOBSERVABLE). Per spec.json decision_rule.controls_gate and outcome_mapping, any control FAIL maps to status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE. The producer correctly applied this branch.",
+      "evidence_refs": [
+        "result.json#controls.KNOWN_STATIONARY_CONTROL",
+        "result.json#controls.REVERIFIED_NON_STATIONARY",
+        "result.json#metrics.controls_pass",
+        "derived/analysis.json#controls"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-02",
+      "severity": "decisive",
+      "finding": "The frozen falsifier's cost condition has an empty trigger interior. The condition compares median re-acquisition cost against median unconditional re-derivation cost measured by a breadth-first cold crawl. A BFS route is itself a shortest path, and its token sum is a superset of the re-acquisition path's responses. Therefore re_derivation ≥ re_acquisition on both units for every reachable item by construction. Empirically confirmed at 20/20 items with measurable re-derivation. The FALSIFIES branch is unreachable for any execution of this frozen rule, independent of the substrate.",
+      "evidence_refs": [
+        "result.json#metrics.falsifier_triggered.attainability_audit",
+        "derived/analysis.json#falsifier.attainability_audit",
+        "result.json#observations.OBS-17"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-03",
+      "severity": "high",
+      "finding": "The frozen classification rule order (session_invariant → session_scoped → request_scoped → time_scoped → rotating) makes time_scoped and rotating unreachable for any item whose value differs within a session. Since request_scoped is tested first when within-session variance exists, both later classes receive 0 counts by construction, not observation. This is a frozen design defect in prereg.md section 4.",
+      "evidence_refs": [
+        "result.json#metrics.class_distribution.per_class.time_scoped",
+        "result.json#metrics.class_distribution.per_class.rotating",
+        "result.json#validity_notes.VN-05",
+        "prereg.md#4"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-04",
+      "severity": "high",
+      "finding": "The primary classification rule requires BOTH value AND containing-page body-hash invariance across sessions for session_invariant. Any item on a page with per-request byte churn is classified request_scoped regardless of its own value stability. This moves 12 of 29 items from request_scoped to session_invariant under a value-only variant (value_only_sensitivity). The channel choice is decision-relevant, not cosmetic.",
+      "evidence_refs": [
+        "result.json#metrics.value_only_sensitivity",
+        "result.json#validity_notes.VN-06",
+        "derived/classification_sensitivity.json"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-05",
+      "severity": "high",
+      "finding": "The break_even_reuse_count metric silently assumes re-acquisition and re-derivation medians are taken over the SAME item set. The frozen crawl bounds break this precondition: 11 of 32 items were never reached. For session_invariant, the class number (2 reuses) is an artifact of a 12-item re-acquisition median against a 7-item re-derivation median; every individual item has infinite break-even. For request_scoped, class-median (1) disagrees with item-level median (1256) due to 17 vs 13 denominators. The economically meaningful reading is the item-level one: the entire invariant class has NO amortization surface.",
+      "evidence_refs": [
+        "result.json#metrics.break_even_reuse_count_per_class",
+        "result.json#validity_notes.VN-19",
+        "result.json#observations.OBS-16",
+        "derived/costs.json"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-06",
+      "severity": "medium",
+      "finding": "Four of six frozen root URLs redirect off their nominal host (gitlab.com→about.gitlab.com, auth.wikimedia.org→www.wikimedia.org, en.wikipedia.org→/wiki/Main_Page, postman-echo.com→www.postman.com/...). The frozen host-pinned cold crawl therefore admits 0 items from wikimedia and postman_echo. 'Site' is not a stable unit on this substrate; the hand-picked pool's site labels do not correspond to coherent crawl targets.",
+      "evidence_refs": [
+        "result.json#metrics.substrate_economics.cold_crawl_summary",
+        "result.json#observations.OBS-08",
+        "result.json#observations.OBS-09",
+        "result.json#validity_notes.VN-10"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-07",
+      "severity": "medium",
+      "finding": "The PRE_FREEZE_CONTROL_VERIFICATION_GATE (a process-validity finding, not one of the four measured controls) FAILS: spec.json.controls_pre_freeze_verification shows all four controls as PENDING with null verified_at and evidence_ref at the time freeze.json was created. This violates prereg.md sections 7 and 14, which require live control verification BEFORE freeze. The design was frozen unvalidated; this is the root process defect enabling all subsequent instrument failures.",
+      "evidence_refs": [
+        "result.json#controls.PRE_FREEZE_CONTROL_VERIFICATION_GATE",
+        "spec.json#controls_pre_freeze_verification",
+        "prereg.md#7",
+        "prereg.md#14"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-08",
+      "severity": "low",
+      "finding": "tiktoken 0.14.0 is environment-provisioned but NOT declared in pyproject.toml (VN-11). spec.measurement_validity.substrate requires tiktoken to be declared in pyproject.toml before claiming a pure-stdlib run. Frontier lane may not edit pyproject.toml. All token figures are therefore 'environment-provisioned tokenizer', not 'declared pure-stdlib run'.",
+      "evidence_refs": [
+        "result.json#validity_notes.VN-11",
+        "provenance.json#environment.tokenizer",
+        "pyproject.toml"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-09",
+      "severity": "low",
+      "finding": "Response bodies are persisted as gzip files at raw/responses_cache/<sha256>.json.gz where <sha256> is SHA256 of UNCOMPRESSED body bytes. The content address is still verifiable, but the gzip wrapper deviates from the frozen 'raw/<hash>.json' layout (VN-12).",
+      "evidence_refs": [
+        "result.json#validity_notes.VN-12",
+        "provenance.json#material_artifacts",
+        "raw/responses_cache/"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-10",
+      "severity": "medium",
+      "finding": "Three of 32 admitted items are unclassifiable (gitlab /explore anchor absent, GitLab /users/sign_in HTTP 403, httpbin /date HTTP 404). They are correctly excluded from the class denominator and reported separately rather than forced into a class (VN-17).",
+      "evidence_refs": [
+        "result.json#metrics.sample_composition.items_unclassifiable",
+        "result.json#validity_notes.VN-17",
+        "derived/classification.json"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "AUDIT-BF-01",
+      "baseline_id": "COLD_REEXPLORATION",
+      "finding": "The COLD_REEXPLORATION baseline (unconditional re-derivation via breadth-first crawl from root, max 2 hops, max 50 pages) is structurally incapable of being cheaper than the shortest-path re-acquisition it is compared against. BFS by definition finds a shortest path, so re_derivation_requests ≥ re_acquisition_request_count and re_derivation_tokens ≥ re_acquisition_tokens for every reachable item. This makes the falsifier's cost condition (median_re_acquisition ≥ median_re_derivation) provably false for all reachable items, rendering the FALSIFIES outcome unreachable.",
+      "evidence_refs": [
+        "spec.json#baselines.COLD_REEXPLORATION",
+        "result.json#metrics.falsifier_triggered.attainability_audit",
+        "derived/analysis.json#falsifier.attainability_audit"
+      ]
+    },
+    {
+      "id": "AUDIT-BF-02",
+      "baseline_id": "ORACLE_PERFECT_TRANSFER",
+      "finding": "ORACLE_PERFECT_TRANSFER is defined only for session_invariant items and is NOT_AVAILABLE for 29 of 29 classified items because all 12 session_invariant items have re_acquisition exactly equal to re_derivation (break-even infinite). This is correctly reported as null per spec.baselines.",
+      "evidence_refs": [
+        "spec.json#baselines.ORACLE_PERFECT_TRANSFER",
+        "result.json#metrics.break_even_reuse_count_per_class.oracle_perfect_transfer_baseline"
+      ]
+    },
+    {
+      "id": "AUDIT-BF-03",
+      "baseline_id": "RETRIEVAL_BASELINE",
+      "finding": "RETRIEVAL_BASELINE was not exercised (no prior episodes in this transaction) and is correctly recorded as null per spec.baselines.",
+      "evidence_refs": [
+        "spec.json#baselines.RETRIEVAL_BASELINE",
+        "result.json#metrics.break_even_reuse_count_per_class.retrieval_baseline"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "class_distribution": {
+      "denominator_items_classified": 29,
+      "per_class": {
+        "session_invariant": {
+          "count": 12,
+          "proportion": 0.41379310344827586
+        },
+        "session_scoped": {
+          "count": 0,
+          "proportion": 0.0
+        },
+        "request_scoped": {
+          "count": 17,
+          "proportion": 0.5862068965517241
+        },
+        "time_scoped": {
+          "count": 0,
+          "proportion": 0.0
+        },
+        "rotating": {
+          "count": 0,
+          "proportion": 0.0
+        }
+      },
+      "note": "Matches producer's result.json metrics.class_distribution exactly. Three classes (session_scoped, time_scoped, rotating) have 0 counts by construction due to frozen rule order, not observation."
+    },
+    "value_only_sensitivity": {
+      "per_class": {
+        "session_invariant": {
+          "count": 12,
+          "proportion": 0.7058823529411765
+        },
+        "request_scoped": {
+          "count": 5,
+          "proportion": 0.29411764705882354
+        }
+      },
+      "n_items_unmatched_by_frozen_value_only_table": 12,
+      "n_items_that_change_class_vs_primary": 6,
+      "note": "Matches producer's result.json metrics.value_only_sensitivity. Under value-only channel, 12 of 29 items change classification, confirming the channel choice is decision-relevant."
+    },
+    "break_even_reuse_count_per_class": {
+      "session_invariant": {
+        "n_items": 12,
+        "n_items_with_measurable_re_derivation": 7,
+        "median_re_acquisition_tokens": 37357.0,
+        "median_re_derivation_tokens": 71673,
+        "class_break_even_reuse_count": 2,
+        "median_item_level_break_even_reuse_count": null,
+        "denominators_match": false,
+        "item_level_conclusion": "All 12 items have re_acquisition == re_derivation (infinite break-even). Class number is artifact of denominator mismatch."
+      },
+      "request_scoped": {
+        "n_items": 17,
+        "n_items_with_measurable_re_derivation": 13,
+        "median_re_acquisition_tokens": 93986,
+        "median_re_derivation_tokens": 445894,
+        "class_break_even_reuse_count": 1,
+        "median_item_level_break_even_reuse_count": 1256,
+        "denominators_match": false,
+        "item_level_conclusion": "Median item-level break-even (1256) disagrees with class-median (1) due to denominator mismatch (17 vs 13)."
+      },
+      "note": "Recomputed from derived/costs.json per_item entries. Matches producer's result.json metrics.break_even_reuse_count_per_class. The denominator mismatch (VN-19) is confirmed: re-acquisition median over all items in class, re-derivation median only over items reached by bounded crawl."
+    },
+    "falsifier_triggered": {
+      "majority_non_stationary": true,
+      "non_stationary_items": 17,
+      "stationary_items": 12,
+      "majority_class": "request_scoped",
+      "cost_condition": false,
+      "cost_condition_evaluated_over": "median re_acquisition vs median unconditional re-derivation of majority class (request_scoped), both in cl100k_base tokens and requests",
+      "attainability_audit": {
+        "n_items_classified_with_measurable_re_derivation": 20,
+        "n_items_where_re_derivation_ge_re_acquisition_on_both_units": 20,
+        "empirical_share": 1.0,
+        "frozen_falsifier_trigger_region_is_empty": true
+      },
+      "note": "Matches producer's result.json metrics.falsifier_triggered exactly. The falsifier's accept region is empty by construction."
+    },
+    "controls_pass": {
+      "value": false,
+      "control_statuses": {
+        "KNOWN_STATIONARY_CONTROL": "FAIL",
+        "REVERIFIED_NON_STATIONARY": "FAIL",
+        "INTER_SESSION_DELAY": "PASS",
+        "NULL_STATIONARITY_ARM": "PASS",
+        "PRE_FREEZE_CONTROL_VERIFICATION_GATE": "FAIL"
+      },
+      "note": "Matches producer's result.json metrics.controls_pass. Two of four measured controls FAIL, triggering MEASUREMENT_INVALID per frozen controls_gate."
+    }
+  },
+  "claim_ceiling": "This experiment supports NO claim update for C-WEB-DYNAMICS, C-FRESHNESS, or C-CROSSSITE. The only admissible conclusions are: (1) a measurement-validity finding that the frozen instrument could not have returned its own positive or negative answer (falsifier has empty trigger region; two controls failed; two classes unreachable by rule order; channel ambiguity moves 12/29 items); (2) three substrate observations bounded to this hand-picked credential-free GET-only pool: (a) objects a persistent agent would replay are dominated by objects already stale within a single episode (CSRF tokens and nonces change on every request), (b) the class of byte-stable objects carries no amortization surface (re-acquisition cost equals re-derivation cost for all 12 session_invariant items), (c) the site labels are unstable (4/6 roots redirect off nominal host; wikimedia and postman_echo admitted 0 items). Do not read class proportions as Web prevalence, do not read 'request_scoped' as a mechanism claim until the page-hash vs value channel ambiguity is resolved, and do not extrapolate beyond the hop ≤ 1 cost contrast tested here.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-37385647440/result.json",
+    "research/experiments/EXP-FRONTIER-37385647440/report.md",
+    "research/experiments/EXP-FRONTIER-37385647440/provenance.json",
+    "research/experiments/EXP-FRONTIER-37385647440/derived/analysis.json",
+    "research/experiments/EXP-FRONTIER-37385647440/derived/classification.json",
+    "research/experiments/EXP-FRONTIER-37385647440/derived/classification_sensitivity.json",
+    "research/experiments/EXP-FRONTIER-37385647440/derived/costs.json",
+    "research/experiments/EXP-FRONTIER-37385647440/raw/controls_verification.jsonl",
+    "research/experiments/EXP-FRONTIER-37385647440/raw/observations.jsonl",
+    "research/experiments/EXP-FRONTIER-37385647440/raw/http.jsonl",
+    "research/experiments/EXP-FRONTIER-37385647440/raw/session_timing.jsonl",
+    "research/experiments/EXP-FRONTIER-37385647440/spec.json",
+    "research/experiments/EXP-FRONTIER-37385647440/prereg.md",
+    "research/experiments/EXP-FRONTIER-37385647440/freeze.json",
+    "research/experiments/EXP-FRONTIER-36306528608/handoff.json"
+  ],
+  "unresolved": [
+    {
+      "id": "AUDIT-UR-01",
+      "question": "Does a genuinely session_scoped class exist anywhere on the credential-free public HTTP substrate?",
+      "why_unresolved": "0 of 29 items classified session_scoped, but the two server-minted CSRF handles that the parent packet reported as session-scoped were observed to change between two GETs one second apart inside one session (request_scoped). This run cannot separate 'no session_scoped class exists' from 'the frozen rule's body-hash channel masks it'."
+    },
+    {
+      "id": "AUDIT-UR-02",
+      "question": "What are the true class proportions of this object class on the frozen pool and beyond?",
+      "why_unresolved": "The frozen (value, page-hash) rule and the disclosed value-only rule disagree by 12 of 29 items, and the frozen pool is hand-picked, so neither the class proportions nor their ordering is identified by this design."
+    },
+    {
+      "id": "AUDIT-UR-03",
+      "question": "Are any items time_scoped or rotating?",
+      "why_unresolved": "Both classes are unreachable under the frozen rule order (AUDIT-VF-03). A correctly ordered rule plus a declared per-session sampling schedule would be required."
+    },
+    {
+      "id": "AUDIT-UR-04",
+      "question": "Would the 3 unclassifiable items classify on a browser or credential-bearing substrate?",
+      "why_unresolved": "The frozen substrate is GET-only and credential-free by mandate, and this lane may not substitute a parent-cited URL for the prereg-named anchor, so the drift was recorded rather than repaired."
+    },
+    {
+      "id": "AUDIT-UR-05",
+      "question": "Is the amortization question answerable at all with an instrument whose falsifier can trigger?",
+      "why_unresolved": "The frozen falsifier's accept region is empty (AUDIT-VF-02). A falsifiable version needs a re-derivation baseline that is strictly more expensive than re-acquisition by construction, e.g., an adversarial crawl of the full site with no path memory, or a cost model that charges for re-deriving the whole observation procedure rather than re-walking a known shortest path."
+    },
+    {
+      "id": "AUDIT-UR-06",
+      "question": "What is the unconditional re-derivation cost of the 11 items not reached within the frozen crawl bounds?",
+      "why_unresolved": "The frozen crawl depth/width bounds never reached their pages, so the cost cell is genuinely unmeasured and reported as null rather than imputed."
+    },
+    {
+      "id": "AUDIT-UR-07",
+      "question": "Do the KNOWN_STATIONARY_CONTROL anchors behave as specified on a stable or credential-bearing substrate?",
+      "why_unresolved": "Only 3 of 5 anchors are testable and 1 of those 3 is not stationary, so the control arm cannot be re-run to PASS without either a different anchor set or a different substrate."
+    }
+  ]
+}

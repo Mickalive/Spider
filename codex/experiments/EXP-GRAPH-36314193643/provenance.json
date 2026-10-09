@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36314193643",
+  "lane": "graph",
+  "github_run_id": "36314193643",
+  "execution_start": "2026-09-27T12:30:57.587287+00:00",
+  "execution_end": "2026-09-27T12:34:41.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "github_run_id": "36314193643",
+    "base_sha": "31d34049b95b5aa40136ee4540a355666a0ec7e6"
+  },
+  "source_files": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/request.json",
+      "sha256": "5d661e3deb456d28b93bcba48dde349d7d4332614e61be971127e94fa5550cad",
+      "role": "frozen-input"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/spec.json",
+      "sha256": "df6e6f05d557421ff3c19918a5401e22b68d96d0a2d57f0051f4c08e77ac5d8b",
+      "role": "frozen-input"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/prereg.md",
+      "sha256": "123ffccfa6b7a59f0ccb0c869784e54502f076a808b302146addea90ffe6af44",
+      "role": "frozen-input"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/freeze.json",
+      "sha256": "c6a7c58693c1d861bb9dbfa6aea0611d52a6cc978146087a6c9123686fd4ce18",
+      "role": "frozen-input"
+    },
+    {
+      "path": "/tmp/opencode/run_exp_36314193643.py",
+      "sha256": "computed-at-execution",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/result.json",
+      "sha256": "e762ac0a60675397dc68987c959dc6eec982e70d6c9e1417d95b9012eea417f5",
+      "role": "producer-output"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/report.md",
+      "sha256": "278bd8a0aea599075b832bd1c8e9d9dca30327c1e4f0652130e3843bc4c68950",
+      "role": "producer-output"
+    }
+  ],
+  "raw_evidence": {
+    "path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl",
+    "sha256": "d71ee7d82a761697b04707ac31a5f170d1be02a8f776618822ccb89b521c3ace",
+    "role": "raw",
+    "record_count": 132,
+    "description": "132 per-request JSONL entries with UTC timestamps, HTTP status codes, ETags, Cache-Control headers, body SHA-256 hashes, and cookie metadata"
+  },
+  "derived_artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json",
+      "sha256": "02fed875f764002e2b934649b1dc0025f636d44425db9b178f0d5204b2448f56",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/host_screening.json",
+      "sha256": "ac7f9149ceb9364bc0c55e9cc0934a536d307d89b3892b7bae8289e2967e2ec8",
+      "role": "derived"
+    }
+  ],
+  "execution_details": {
+    "total_requests": 132,
+    "global_cap": 2500,
+    "per_host_cap": 40,
+    "pacing_seconds": 2.2,
+    "user_agent": "SPIDER-Research/2.0 (graph-lane; experiment EXP-GRAPH-36314193643; +https://spider-research.dev)",
+    "seed": 36314193643,
+    "python_module": "urllib.request, http.cookiejar, html.parser (all stdlib)",
+    "no_browser": true,
+    "no_docker": true,
+    "no_model_key": true,
+    "no_credentials": true,
+    "no_write_verbs": true,
+    "js_execution": false
+  },
+  "dependencies": [
+    "frontier",
+    "runtime"
+  ],
+  "codex_refs": {
+    "claim_state": "codex/claim_state.json",
+    "index": "codex/index.json",
+    "corroborating_experiment": "codex/experiments/EXP-FRONTIER-36306528608/result.json (for SPIDER_CORROBORATED anchor evidence)"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-36302977302",
+    "path": "research/experiments/EXP-GRAPH-36302977302/handoff.json",
+    "sha256": "c97904a9d3bab07d4e18927d44f77e2880293ef4b962b0a1dd7d5f7ca1e27226",
+    "disposition": "SUPERSEDED",
+    "reason": "Director mandate PIVOT to C-FRESHNESS on real substrate; parent used local shared-WAL substrate that produced 67/67 HTTP 404"
+  }
+}

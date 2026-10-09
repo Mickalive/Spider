@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37385620138",
+  "lane": "physics",
+  "stage": "EXECUTE",
+  "github": {
+    "run_id": "37385620138",
+    "repository": "Mickalive/Spider",
+    "workflow_sha_env": "0a3b7f96f488b6da77728973ea1fcc6caaa17e38",
+    "head_commit": "723a2c9c4a266f01e7e8e538b2c9c410e832a9d1",
+    "branch": "lab2/physics",
+    "remote": "https://github.com/Mickalive/Spider",
+    "note": "No commit, push, branch switch or reset was performed by this stage. All new files are untracked working-tree files under the granted scope."
+  },
+  "frozen_inputs": {
+    "freeze_manifest": {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/freeze.json",
+      "sha256": "8172956001cc4a849a4f5f0c92c85b849b179aecc44c812ca07388d32652cee4"
+    },
+    "verification": {
+      "all_hashes_match": true,
+      "freeze": {
+        "experiment_id": "EXP-PHYSICS-37385620138",
+        "frozen_at": "2026-10-05T23:06:46.951181+00:00",
+        "hashes": {
+          "prereg.md": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940",
+          "request.json": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd",
+          "spec.json": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7"
+        },
+        "schema_version": 1
+      },
+      "freeze_sha256": "8172956001cc4a849a4f5f0c92c85b849b179aecc44c812ca07388d32652cee4",
+      "hash_checks": {
+        "prereg.md": {
+          "match": true,
+          "on_disk": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940",
+          "recorded": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940"
+        },
+        "request.json": {
+          "match": true,
+          "on_disk": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd",
+          "recorded": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd"
+        },
+        "spec.json": {
+          "match": true,
+          "on_disk": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7",
+          "recorded": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7"
+        }
+      },
+      "master_seed": 445086315,
+      "master_seed_rule": "int(request_hash[:8], 16)  # prereg s5.1",
+      "prereg_declared_prefreeze_artifacts": {
+        "candidate_universe.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "frozen_pool.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "pilot_data.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        },
+        "power_calculation.json": {
+          "exists_on_disk": false,
+          "hashed_by_freeze": false
+        }
+      },
+      "substrate": {
+        "browser": false,
+        "cookies_or_sessions": 0,
+        "credentials": 0,
+        "docker": false,
+        "model_api_keys": 0,
+        "model_calls": 0,
+        "note": "numpy, scipy, flask, requests and bs4 are absent from this environment; every computation in this packet is pure standard library.",
+        "protocol": "HTTPS GET via python stdlib urllib",
+        "third_party_packages": []
+      }
+    },
+    "immutability": "the three frozen inputs were read only; their hashes still match freeze.json after execution"
+  },
+  "seeds": {
+    "request_hash": null,
+    "master_seed": 445086315,
+    "master_seed_derivation": "int(request_hash[:8], 16)",
+    "bootstrap_seed_offsets": {
+      "primary": 17,
+      "permutations": 31
+    },
+    "n_bootstrap_resamples": 10000,
+    "n_permutations": 1000,
+    "freeze_time": null
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "third_party_packages_used": [],
+    "third_party_packages_unavailable": [
+      "numpy",
+      "scipy",
+      "flask",
+      "requests",
+      "beautifulsoup4",
+      "pandas"
+    ],
+    "standard_library_only": true,
+    "positive_control_server": "http.server.ThreadingHTTPServer on 127.0.0.1 (prereg s9.1 specifies Flask, which is not installed)",
+    "network_access": "outbound HTTPS to public sites succeeded; 0 transport errors over 2896 archived collection requests",
+    "client": "stdlib urllib; no browser, no JavaScript execution, no cookies, no credentials"
+  },
+  "code": [
+    {
+      "path": "research/physics/exp_37385620138_lib.py",
+      "sha256": "82d32328e3b4c9bb9fe6c84b10624533daf804c0d1fe0c35bd70fbdd37929c2c",
+      "role": "frozen primitives: signature, distance, log_score, four predictors, site-clustered bootstrap, permuted-mechanism null, freeze verification"
+    },
+    {
+      "path": "research/physics/exp_37385620138_candidates.py",
+      "sha256": "8756848a95ce2153a1db253bd1bc71f8822bbec5e32efde4507af2f151f11b33",
+      "role": "executor-constructed candidate curation (not a frozen fixture)"
+    },
+    {
+      "path": "research/physics/exp_37385620138_collect.py",
+      "sha256": "97abf56d285b5400b0c88bb12a97ad5e9454abf9ee0ee485d80053f90df44449",
+      "role": "collection phases 0-5: freeze verification, seeded universe, robots screen, baseline plus 15 probes per candidate, substrate diagnostics, positive control"
+    },
+    {
+      "path": "research/physics/exp_37385620138_analyze.py",
+      "sha256": "5354878b4efcc2e91182e36cc0371bea86bce9216ec5fbb30037ca9bfe0fbea1",
+      "role": "derived analysis: pipelines, controls, bootstrap, null, gates, decision rule"
+    },
+    {
+      "path": "research/physics/exp_37385620138_finalize.py",
+      "sha256": "08805442b2ce1e817c7870ef81634f4a02a30a7243c59b3eb61bb4d2de46e2b3",
+      "role": "renders result.json, report.md and provenance.json from derived artifacts"
+    }
+  ],
+  "datasets_and_fixtures": {
+    "candidate_universe": {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/candidate_universe.json",
+      "role": "executor-constructed, NOT the freeze-hashed fixture named by prereg",
+      "frozen": false
+    },
+    "frozen_pool": {
+      "declared_name": "frozen_pool.json",
+      "exists": false,
+      "hashed_by_freeze": false,
+      "substitute": "research/experiments/EXP-PHYSICS-37385620138/raw/executor_pool.json",
+      "reason": "manufacturing a file named frozen_pool.json after the freeze would create the appearance of pre-registered frozen evidence"
+    },
+    "pilot_data": {
+      "declared_name": "pilot_data.json",
+      "exists": false,
+      "hashed_by_freeze": false
+    },
+    "power_calculation": {
+      "declared_name": "power_calculation.json",
+      "exists": false,
+      "hashed_by_freeze": false
+    },
+    "positive_control_truth": {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/pc_truth.json",
+      "frozen": false,
+      "role": "known ground truth for PC_KNOWN_PARAMETER_EFFECT"
+    },
+    "external_sources": [
+      {
+        "name": "public HTML documents",
+        "role": "measurement substrate",
+        "frozen": false,
+        "note": "the public Web is not frozen; a rerun may observe different responses, which is why every response is archived with status, headers, length, body SHA256 and structural hash"
+      },
+      {
+        "name": "robots.txt",
+        "role": "access precondition screening",
+        "frozen": false
+      }
+    ]
+  },
+  "commands": [
+    {
+      "step": "collect",
+      "command": "python3 -u research/physics/exp_37385620138_collect.py",
+      "material_because": "one pass performs freeze verification, the seeded universe, the robots screen, all Web collection, the substrate diagnostics and the positive control, and it writes every raw artifact"
+    },
+    {
+      "step": "analyze",
+      "command": "python3 -u research/physics/exp_37385620138_analyze.py",
+      "material_because": "deterministic; all seeds derive from master_seed, so a rerun reproduces every derived number exactly"
+    },
+    {
+      "step": "finalize",
+      "command": "python3 -u research/physics/exp_37385620138_finalize.py",
+      "material_because": "renders the three packet files from derived artifacts"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/frozen_input_verification.json",
+      "sha256": "cfef2d4a455d77d08e72eee4e1fe5a97b9070493f4212d089b1489d917472233",
+      "role": "raw",
+      "description": "SHA256 verification of the three frozen inputs against freeze.json",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/candidate_universe.json",
+      "sha256": "b8e2845ce701469537737a93dc636ec37df83f88f611d77b5c018739f87445b3",
+      "role": "raw",
+      "description": "executor-constructed seeded candidate (site, document) universe; NOT the freeze-hashed fixture the prereg named, because no freeze-hashed universe exists",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/robots_screen.jsonl",
+      "sha256": "ad4be2817d8c8239800e0a0e4bdb26a21819a0230bd17b94863f2c689f40e4a9",
+      "role": "raw",
+      "description": "per-host robots.txt allow/deny screen",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/collection_log.jsonl",
+      "sha256": "c6973f583e5faedca3fed05c38c5c6beb49c5590ddb878fb0fb9e16b342a1b67",
+      "role": "raw",
+      "description": "every HTTP request/response actually issued: status, response headers, body length, body SHA256, structural hash, requested URL, parameter, value, rank",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/screen_results.jsonl",
+      "sha256": "5701bad163dde41261546a31bb727d76a722bc56f3b0b9eeb2431d6e4ab75f1c",
+      "role": "raw",
+      "description": "per-candidate admission readings against the frozen C1/C2/C3 screen",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/diagnostics.jsonl",
+      "sha256": "4e338e10dfb002108828a327d7906025c2727451eeacb2d05215d9ed9d2fc2ea",
+      "role": "raw",
+      "description": "site-dynamism floor (repeat identical fetches) and conditional-GET revalidation probes",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/pc_collection_log.jsonl",
+      "sha256": "66865e3fbb93bd76cd6830266437075941adf74ae4249dc6e322f1925ef56447",
+      "role": "raw",
+      "description": "every positive-control request/response against the local stdlib server",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/pc_truth.json",
+      "sha256": "82851c59a6dd5f804c8a75d3f3ec692a3d35f3a0e526f4149b7903f0e8845eb9",
+      "role": "raw",
+      "description": "declared positive-control ground truth",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/raw/executor_pool.json",
+      "sha256": "529dbd3f9a334187a24ae19b4e616ef6ba110e146657b33879710e859e6279c1",
+      "role": "raw",
+      "description": "executor-constructed admission outcome; explicitly labelled is_frozen_evidence=false because frozen_pool.json does not exist",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/predictions.jsonl",
+      "sha256": "93c04bbe80d6ce9333c15309ff13a88ce481e4f9473d5173aadfa34b674d88ef",
+      "role": "derived",
+      "description": "per-instance held-out predictions of the exploratory full-screened pool",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/pc_predictions.jsonl",
+      "sha256": "0d0f8e5ca18c525984b29377bf648be0b0ec6ce67c794994134f1133631bb9ea",
+      "role": "derived",
+      "description": "per-instance positive-control predictions and ground-truth direction",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/metrics.json",
+      "sha256": "dbf0f48b6d5d9e5c454c14d59907fa14049dfa5c0fea4e50b329d8af5b06de43",
+      "role": "derived",
+      "description": "primary, secondary and control metrics",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/predictions_summary.json",
+      "sha256": "ca6e13f396bfbd7b30c6bce9eb31b138900d596b49944a35a1b2e7c09a038ea9",
+      "role": "derived",
+      "description": "frozen-pool and exploratory pipeline fits, splits, predictor outputs, fallbacks",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/pc_analysis.json",
+      "sha256": "766d3062d8a3d12f0d5bb12fbf70d35d8cb964e3222e5b083ccbf03182f1bced",
+      "role": "derived",
+      "description": "positive-control reading under the frozen distance and under the corrected distance",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/substrate_diagnostics.json",
+      "sha256": "9919f2a77b0db5cf0f3d9b2633248cc6a1d06b9835388c6ddba0f5ddc9c7bdd1",
+      "role": "derived",
+      "description": "descriptive substrate facts: parameter response, status histograms, dynamism floor",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/decision_readings.json",
+      "sha256": "0750e5a59f9d70def24c2127a82eef2446cd3492e56bcc63a9491cc4d3c9d0bf",
+      "role": "derived",
+      "description": "frozen M1-M6, A1-A6 and F1-F6 condition readings with the branch actually taken",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/validity_gates.json",
+      "sha256": "f1bc57f67dd20f66ac6c3642c951ddf65adb9bbaa2490197c62fe4a40d0ef070",
+      "role": "derived",
+      "description": "frozen V1-V10 gate results",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/derived/null_distribution.json",
+      "sha256": "fe004ba22e330f8b94eafe6809e44678d7651574436dbd98b82e1899ebda389b",
+      "role": "derived",
+      "description": "NC_PERMUTED_MECHANISM permutation draws for every pool and reading",
+      "exists": true
+    },
+    {
+      "path": "research/physics/exp_37385620138_lib.py",
+      "sha256": "82d32328e3b4c9bb9fe6c84b10624533daf804c0d1fe0c35bd70fbdd37929c2c",
+      "role": "code",
+      "description": "frozen primitives, predictors, metric",
+      "exists": true
+    },
+    {
+      "path": "research/physics/exp_37385620138_candidates.py",
+      "sha256": "8756848a95ce2153a1db253bd1bc71f8822bbec5e32efde4507af2f151f11b33",
+      "role": "code",
+      "description": "executor-constructed candidate curation",
+      "exists": true
+    },
+    {
+      "path": "research/physics/exp_37385620138_collect.py",
+      "sha256": "97abf56d285b5400b0c88bb12a97ad5e9454abf9ee0ee485d80053f90df44449",
+      "role": "code",
+      "description": "collection phases 0-5",
+      "exists": true
+    },
+    {
+      "path": "research/physics/exp_37385620138_analyze.py",
+      "sha256": "5354878b4efcc2e91182e36cc0371bea86bce9216ec5fbb30037ca9bfe0fbea1",
+      "role": "code",
+      "description": "derived analysis and gate computation",
+      "exists": true
+    },
+    {
+      "path": "research/physics/exp_37385620138_finalize.py",
+      "sha256": "08805442b2ce1e817c7870ef81634f4a02a30a7243c59b3eb61bb4d2de46e2b3",
+      "role": "code",
+      "description": "renders result.json, report.md, provenance.json",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/request.json",
+      "sha256": "7555a8b635d91d82c4c28bd48140bdcf2d98866adb0842453c6173a4830f4efd",
+      "role": "fixture",
+      "description": "frozen request",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/spec.json",
+      "sha256": "f841b64b5fdf860e42e358efbd94bcac268d26d943848752e154cf66fdc028e7",
+      "role": "fixture",
+      "description": "frozen spec",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/prereg.md",
+      "sha256": "e4b0ecb4583c280ae67add664d1f6136d8763cd07605df7188b65f6d9ce1a940",
+      "role": "fixture",
+      "description": "frozen preregistration",
+      "exists": true
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37385620138/freeze.json",
+      "sha256": "8172956001cc4a849a4f5f0c92c85b849b179aecc44c812ca07388d32652cee4",
+      "role": "fixture",
+      "description": "frozen hash manifest",
+      "exists": true
+    }
+  ],
+  "reproducibility": {
+    "analysis_deterministic": true,
+    "collection_deterministic": false,
+    "collection_nondeterminism_sources": [
+      "public Web responses may change between runs",
+      "HTTP server-side request ordering and edge caching",
+      "no frozen candidate universe exists, so the curated pool is fixed only in this working tree"
+    ],
+    "recompute_from_packet": "every derived quantity in result.json can be recomputed from the archived raw artifacts plus the four code files; only HTTP response bodies are not archived, so a re-derivation that needs a body requires a fresh fetch"
+  },
+  "scope_compliance": {
+    "allowed_code_roots_from_lane_charter": [
+      "research/harness",
+      "research/physics"
+    ],
+    "code_written_under": "research/physics",
+    "artifacts_written_under": "research/experiments/EXP-PHYSICS-37385620138",
+    "constitutional_files_modified": [],
+    "codex_modified": [],
+    "other_lanes_modified": [],
+    "frozen_inputs_modified": [],
+    "git_operations_performed": []
+  },
+  "lineage": {
+    "parent_experiment": "EXP-PHYSICS-36314197314",
+    "parent_handoff": "research/experiments/EXP-PHYSICS-36314197314/handoff.json",
+    "parent_handoff_sha256": "a1346a86430ccda146d0c97c32c5624264ea21da409a7083e08a736e37c07f39",
+    "parent_claim_status": "HYPOTHESIS",
+    "director_mandate": "PIVOT with cognitive_reset=true, parent_handoff_disposition=SUPERSEDE"
+  }
+}
