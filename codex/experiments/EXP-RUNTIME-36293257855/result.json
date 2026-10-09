@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36293257855",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "readiness": {
+      "n_total": 240,
+      "n_non304": 240,
+      "per_ep_non304": {
+        "/api/profile": 120,
+        "/api/data_list": 120
+      },
+      "n_distinct_x_worker_pid": 2,
+      "min_per_uri_stickiness": 1.0,
+      "n_distinct_uris": 12,
+      "pass": true
+    },
+    "readiness_pass": true,
+    "cache_miss_then_hit": true,
+    "cache_observations": [
+      {
+        "leg": 1,
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      {
+        "leg": 2,
+        "status": 200,
+        "x_cache": "HIT"
+      }
+    ],
+    "capability_ledger_required_scopes_pass": true,
+    "arms": {
+      "P-WRITE": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "sensitivity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      },
+      "P-DRIFT": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "sensitivity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      },
+      "N-READ": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "specificity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      },
+      "N-INVALID": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "specificity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      },
+      "N-EXPIRED": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "specificity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      },
+      "N-DELETED": {
+        "n_scored": 20,
+        "k": 20,
+        "estimand": "specificity",
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0,
+        "ci_nondegenerate": true
+      }
+    },
+    "episodes_completed": 120,
+    "episodes_scored": 120,
+    "positive_control_sensitivity": 1.0,
+    "null_control_specificity": {
+      "N-READ": 1.0,
+      "N-INVALID": 1.0,
+      "N-EXPIRED": 1.0,
+      "N-DELETED": 1.0
+    },
+    "all_arms_pass": true,
+    "positive_control_pass": true,
+    "null_control_pass": true,
+    "recompute_zero_mismatches": true,
+    "authorship_separated": true,
+    "synthetic_fallback_used": false,
+    "restore_control_pass": true,
+    "capture_stability_identical_pairs": 10,
+    "measured_interval_quiescence_ms": 50,
+    "chromium": {
+      "public_api_only": true,
+      "private_helper_used": false,
+      "synthetic_fallback_used": false,
+      "executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "is_canonical_path": true,
+      "executable_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+      "sha256_matches_frozen": true,
+      "browser_version": "153.0.8010.12",
+      "launch_ok": true,
+      "api_used": "sync_playwright().start().chromium.executable_path + p.chromium.launch(executable_path=...)",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "dom_ax_capture": {
+        "sample_order_index": 0,
+        "dom_nodes_pre": 20,
+        "ax_nodes_pre": 18,
+        "dom_nodes_post": 21,
+        "ax_nodes_post": 20
+      }
+    },
+    "durability_status": "UNSATISFIABLE",
+    "transport": "real Chromium public Playwright API, real button clicks, 1280x720 CDP DOM + AX",
+    "setting": "2x gunicorn 23.0.0 @127.0.0.1:19860/19861 sharing /tmp/single.db WAL (wal_autocheckpoint=0), exclusive nginx 1.24.0 @19851, hash $request_uri consistent, real proxy_cache; NO TLS/HTTP2/multi-host/real-site/production-auth claim"
+  },
+  "controls": {
+    "V-NGINX-CONFIG-OK": {
+      "pass": true,
+      "expected": "nginx -t exclusive -c rc=0 no emerg no duplicate hash",
+      "observed": "nginx: the configuration file /tmp/single.db.nginx.conf syntax is ok\nnginx: configuration file /tmp/single.db.nginx.conf test is successful"
+    },
+    "V-SINGLE-HASH": {
+      "pass": true,
+      "expected": "exactly one consistent hash",
+      "observed": "count=1"
+    },
+    "V-FLASK-LISTENING": {
+      "pass": true,
+      "expected": "both Flask origins listening",
+      "observed": "[{'port': 19860, 'listening': True}, {'port': 19861, 'listening': True}]"
+    },
+    "V-HEALTH-GATE": {
+      "pass": true,
+      "expected": "nginx 19851 + both origins 200 + X-Worker-Pid",
+      "observed": "nginx_attempts=1 origins_ok=[True, True]"
+    },
+    "NC-EXCLUSIVE-NGINX": {
+      "pass": true,
+      "expected": "exactly one exclusive nginx master",
+      "observed": "1 master(s)"
+    },
+    "V-UPSTREAM-2-SERVERS": {
+      "pass": true,
+      "expected": "2 upstream servers + consistent hash",
+      "observed": "ok"
+    },
+    "PC-BROWSER-WRITE-PLANTED": {
+      "pass": true,
+      "expected": "P-WRITE sensitivity = 1.0 (20/20) through real Chromium button click",
+      "observed": "P-WRITE k=20 n=20 point=1.0 wilson95=[0.8388748419471806, 1.0]",
+      "evidence": "artifacts/A-DERIVED-METRICS.json#arms.P-WRITE; artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl"
+    },
+    "NC-BROWSER-NULL-MATRIX": {
+      "pass": true,
+      "expected": "N-READ/N-INVALID/N-EXPIRED/N-DELETED specificity = 1.0 (0 false positives)",
+      "observed": "{\"N-READ\": 1.0, \"N-INVALID\": 1.0, \"N-EXPIRED\": 1.0, \"N-DELETED\": 1.0}",
+      "evidence": "artifacts/A-DERIVED-METRICS.json#arms; artifacts/A-DETECTOR-OUTPUT.jsonl"
+    },
+    "B-PLAIN-HTTP-VALIDATED": {
+      "pass": "REFERENCE",
+      "expected": "parent validated ceiling: all 6 arms point=1.0, wilson95=[0.8388748419471806, 1.0], recompute zero mismatches",
+      "observed": "not re-measured; frozen baseline recorded in spec.baselines",
+      "source_experiment": "EXP-RUNTIME-36129163700"
+    },
+    "V-AUTHORSHIP-SEPARATION": {
+      "pass": true,
+      "expected": "intervention_surface and oracle_scorer have no cross-imports; scorer no Flask",
+      "observed": "{\"pass\": true, \"surface_path\": \"research/runtime/intervention_surface.py\", \"surface_sha256\": \"10be3dcb8bed76c8d215916aa9b5b2fb8cf95ede8a6136eedd5b948ba1ea0705\", \"scorer_path\": \"research/runtime/oracle_scorer.py\", \"scorer_sha256\": \"7a30ff637654fbfc366d0f0b1dbe2f8bc481c9b56f5ee48fd894e12baccdad5f\", \"surface_imports_scorer\": false, \"scorer_imports_surface\": false, \"scorer_imports_flask\": false, \"shared_module\": \"research/runtime/shared_config.py (constants only; no logic)\"}",
+      "evidence": "artifacts/A-AUTHORSHIP-CHECK.json"
+    },
+    "V-NO-SYNTHETIC-FALLBACK": {
+      "pass": true,
+      "expected": "no requests/httpx fallback; browser probes only; failures recorded UNAVAILABLE",
+      "observed": "{\"pass\": true, \"synthetic_fallback_used\": false, \"forbidden_client_imports_found\": [], \"episode_transport\": \"Playwright 1.63.0 public API only\", \"note\": \"fixture admin/health calls use stdlib urllib outside the measured interval\"}",
+      "evidence": "artifacts/A-SYNTHETIC-CHECK.json"
+    },
+    "V-PRE-NULL-LOGICAL-REPAIRED": {
+      "pass": true,
+      "expected": "pre_null_logical assigned inside the null/restore loop before use",
+      "observed": "run_restore_control assigns pre_logical before the click; no NameError path",
+      "evidence": "research/experiments/EXP-RUNTIME-36293257855/run_experiment.py"
+    },
+    "V-WAL-CAPTURE-IN-INTERVAL": {
+      "pass": true,
+      "expected": "fixture setup before pre-capture; 50 ms quiescence; raw vector inside interval",
+      "observed": "every episode records fixture_setup_before_interval=true and quiescence_ms=50",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "NC-CAPTURE-STABILITY": {
+      "pass": true,
+      "expected": "10/10 no-action no-click pairs byte-identical",
+      "observed": "10/10 identical",
+      "evidence": "artifacts/A-CAPTURE-STABILITY.jsonl"
+    },
+    "V-AUTH-SESSION-BOUNDARY": {
+      "pass": true,
+      "expected": "valid 200; invalid 401; expired 401; deleted 403; rejection before UPDATE",
+      "observed": "action statuses recorded per arm in A-EPISODE-LEDGER.jsonl",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "V-SUBSTRATE-CERTIFICATE": {
+      "pass": true,
+      "expected": "readiness certificate all floors met",
+      "observed": "{\"n_total\": 240, \"n_non304\": 240, \"per_ep_non304\": {\"/api/profile\": 120, \"/api/data_list\": 120}, \"n_distinct_x_worker_pid\": 2, \"min_per_uri_stickiness\": 1.0, \"n_distinct_uris\": 12, \"pass\": true}",
+      "evidence": "artifacts/A-READINESS-CERTIFICATE.json"
+    },
+    "DIAG-CACHE-MISS-THEN-HIT": {
+      "pass": true,
+      "expected": "real proxy_cache yields MISS then HIT",
+      "observed": "[{\"leg\": 1, \"status\": 200, \"x_cache\": \"MISS\"}, {\"leg\": 2, \"status\": 200, \"x_cache\": \"HIT\"}]",
+      "evidence": "artifacts/A-READINESS-CERTIFICATE.json#cache_corroboration"
+    },
+    "CAP-CHROMIUM-LAUNCH": {
+      "pass": true,
+      "expected": "public API launches canonical Chromium 153.0.8010.12 @1280x720",
+      "observed": "{\"public_api_only\": true, \"private_helper_used\": false, \"synthetic_fallback_used\": false, \"executable_path\": \"/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome\", \"is_canonical_path\": true, \"executable_sha256\": \"8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e\", \"sha256_matches_frozen\": true, \"browser_version\": \"153.0.8010.12\", \"launch_ok\": true, \"api_used\": \"sync_playwright().start().chromium.executable_path + p.chromium.launch(executable_path=...)\", \"viewport\": {\"width\": 1280, \"height\": 720}, \"dom_ax_capture\": {\"sample_order_index\": 0, \"dom_nodes_pre\": 20, \"ax_nodes_pre\": 18, \"dom_nodes_post\": 21, \"ax_nodes_post\": 20}}",
+      "evidence": "artifacts/B-PLAYWRIGHT-CAPABILITY.json"
+    },
+    "CAP-REVERSIBLE-RESTORE": {
+      "pass": true,
+      "expected": "real restore click returns marker to pre_marker and mutates WAL",
+      "observed": "{\"state_text\": \"restore: 200 #1\", \"restored_to_pre_marker\": true, \"vector_changed\": true}",
+      "evidence": "artifacts/B-WAL-EVIDENCE.jsonl"
+    },
+    "V-CAPABILITY-LEDGER": {
+      "pass": true,
+      "expected": "one-command bring-up exit 0; CAP-CHROMIUM-LAUNCH, CAP-WAL-SUBSTRATE, CAP-NGINX-PROXY all PASS",
+      "observed": "{\"CAP-CHROMIUM-LAUNCH\": true, \"CAP-WAL-SUBSTRATE\": true, \"CAP-NGINX-PROXY\": true}",
+      "evidence": "artifacts/C-BRINGUP-CONTRACT.json; artifacts/capability_ledger.json"
+    },
+    "V-RECOMPUTE": {
+      "pass": true,
+      "expected": "independent recomputation zero_mismatches=true from raw JSONL",
+      "observed": "{\"zero_mismatches\": true, \"n_episodes_raw\": 120}",
+      "evidence": "artifacts/A-RECOMPUTE-CHECK.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-AUTHORSHIP-CHECK.json",
+      "sha256": "58c56577396076e9a83afe63f8b7a47a0d4d9b5e54715294552ab21ed8cf09d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-CAPTURE-STABILITY.jsonl",
+      "sha256": "a0c956ce6f7871cc2d95481d530b27faae936149d39911f1b1083cc8a5bcc406",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-DERIVED-METRICS.json",
+      "sha256": "bf3ab3ef97f49e320d8b03a18b691290e33b2d8f339d911dc278e731a800e952",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-DETECTOR-OUTPUT.jsonl",
+      "sha256": "e1b63d89624da3e2c9c697a99bf75eac5ddde1227e54812380a8b1386c32bc29",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-DOM-AX-CAPTURES.jsonl",
+      "sha256": "e41d5d43bb8aa1504a9dfec01e264fb77485cb22679867767069e50c6708ee11",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-EPISODE-LEDGER.jsonl",
+      "sha256": "a3af400637ecac995aff2a6e63aa7e32a071f62596eb6e3360e2da2dba62e455",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-READINESS-CERTIFICATE.json",
+      "sha256": "00ba0269f0156663919c07ca60cab1d9013d28964bee14e9aaf1c20a0638da68",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-RECOMPUTE-CHECK.json",
+      "sha256": "126287820cee3d2e260f2446bddd2a70f3b7393e2791b39d6f0bd21dac2d443d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-RESPONSE-FINGERPRINTS.jsonl",
+      "sha256": "0fb5222ef28ef479cc6508d20697e08d35ad4d2605461869bf91eb7a969b6af2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-SEEDED-ORDER.json",
+      "sha256": "db99bbd7227aee9ac7c7cd9f1599117bc1961dd5e4b0bce12a9a60e3cdafcf08",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-SYNTHETIC-CHECK.json",
+      "sha256": "d8cbe3d560565da69e8d1b2e4070558b60bbd7ae8bd0ac17610ff8e07bced21b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+      "sha256": "5790fdbf6892fc2bcd7c813eb68efefe7f039949dbe1ed63af8cc112ed6a6b5b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-DOM-AX-CAPTURE.json",
+      "sha256": "6d2341079ef354256cbd44db2314b68cd3fe7e609805fc7441a8ce3d31109877",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+      "sha256": "fbb756e9508793227004b1b5225f874884f8ed5fa04ab8b05f92602c69ffb600",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/B-WAL-EVIDENCE.jsonl",
+      "sha256": "a4c5d77c39b550b5287aec68cc86996924e9ec1c485ded09e0fbcbddbff48a32",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/C-BRINGUP-CONTRACT.json",
+      "sha256": "ce6414981d5bd86bd99a7bbc10cb1be9c18c638797925caf4ec9f3acbeaf592f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/artifacts/capability_ledger.json",
+      "sha256": "c91b7309e99f25333261f693357995ca8561497b23507a2765d38701231d4682",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/run_experiment.py",
+      "sha256": "6f4effd362f80b40060942833b84657a179118077b163bb8f698fe9a398b853d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/recompute_check.py",
+      "sha256": "2b40cd9c3276c7d7bed0fa435f65d520545fcc564b959aafd255a4e8652334ba",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36293257855/bringup_contract.json",
+      "sha256": "b5c44d4e8aef64c8a0953df77a10092ad11054600eaee6f4111c3ec793f4be8c",
+      "role": "code"
+    },
+    {
+      "path": "research/runtime/intervention_surface.py",
+      "sha256": "10be3dcb8bed76c8d215916aa9b5b2fb8cf95ede8a6136eedd5b948ba1ea0705",
+      "role": "code"
+    },
+    {
+      "path": "research/runtime/oracle_scorer.py",
+      "sha256": "7a30ff637654fbfc366d0f0b1dbe2f8bc481c9b56f5ee48fd894e12baccdad5f",
+      "role": "code"
+    },
+    {
+      "path": "research/runtime/shared_config.py",
+      "sha256": "6840f540bb54ac2b9c047ff7a4a0170c5617b45b2066b0d8d7dbb6f1ee4d2215",
+      "role": "code"
+    },
+    {
+      "path": "research/runtime/bringup.py",
+      "sha256": "d6cc744b72b049e4b6706ccdfb31b97276dbf8d413fe770886a468f956a68103",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Matrix: 120/120 episodes completed via real Chromium; 120/120 scored by the arm-blind detector.",
+    "Per-arm point rates: {\"P-WRITE\": 1.0, \"P-DRIFT\": 1.0, \"N-READ\": 1.0, \"N-INVALID\": 1.0, \"N-EXPIRED\": 1.0, \"N-DELETED\": 1.0}",
+    "Positive control P-WRITE sensitivity=1.0; null-control specificities={\"N-READ\": 1.0, \"N-INVALID\": 1.0, \"N-EXPIRED\": 1.0, \"N-DELETED\": 1.0}.",
+    "Capture stability: 10/10 byte-identical no-action pairs.",
+    "Capability ledger required scopes pass=True; recompute zero_mismatches=True.",
+    "Reversible restore pass=True."
+  ],
+  "validity_notes": [
+    "sudo available: nginx master as root, www-data workers.",
+    "Transport is real Chromium via the public Playwright API only; fixture admin/health calls use stdlib urllib and occur outside the measured interval.",
+    "Representation drift (P-DRIFT) is planted via the controlled endpoint, not environmental; recorded as an unresolved scope bound.",
+    "A byte-equality WAL oracle cannot distinguish 'no write' from 'write then byte-revert inside the capture interval'; bounded by the 10/10 stability control."
+  ],
+  "unresolved": [
+    "Whether the oracle's discrimination transfers to a non-planted environmental cache/worker drift rather than a planted set_representation drift.",
+    "Whether a successful run leads any downstream lane to actually preregister this substrate as a precondition (publication is not adoption).",
+    "Whether the registered claim ceiling should be widened to production auth middleware, TLS, HTTP/2 or real sites; none of these was measured."
+  ]
+}

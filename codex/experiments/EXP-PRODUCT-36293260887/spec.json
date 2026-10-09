@@ -1,0 +1,76 @@
+{
+  "experiment_id": "EXP-PRODUCT-36293260887",
+  "lane": "product",
+  "claim_ids": [
+    "C-PARAM-INHERIT",
+    "C-RESIDUAL-NOVELTY",
+    "C-PRODUCT-ECON"
+  ],
+  "question": "Does a DURABLE, committed, unit-tested parameter-induction capability in the shipped kernel let a mechanism distilled from observations of resource A resolve, bind, execute and verify correctly on never-observed resource B whose identifier value set is disjoint from A, and does that mechanism then reach amortized_cost_ratio at or below 0.85 against B-COLD, B-LITERAL-REPLAY and B-RETRIEVAL-K5 at matched end-to-end success?",
+  "hypothesis": "A corrected parameter-induction pipeline (distill_parameterized + align_parameters + _build_action_template preserving URL prefix + _strip_common_prefix called) implemented in src/spider/kernel.py at HEAD, with tests reaching EXECUTABLE through distill(), will produce mechanisms that transfer to never-observed resource-B identifiers at success_rate >= 0.95, and the amortized cost ratio against executed baselines will be <= 0.85 with break-even at or before N_MAX derived from measured B-COLD per-task cost.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) PC-SAME-RESOURCE success_rate < 0.95 on bound paths of form /api/v1/<collection>/<slot>; (2) amortized_cost_ratio > 0.85 against ANY of B-COLD, B-LITERAL-REPLAY, B-RETRIEVAL-K5 at matched end-to-end success; (3) break_even_transfer_tasks > N_MAX where N_MAX is derived before freeze from executed B-COLD cost; (4) NC-SHUFFLED-INTENT transfer_success > 0.10; (5) positive control or null control fails; (6) n < 50 per family or family-stratified B=5000 bootstrap not computed; (7) < 60 negative probes per arm executed.",
+  "baselines": {
+    "B-COLD": {
+      "description": "Cold discovery executed per task: multi-step auth, pagination traversal, and schema discovery actually performed and counted per task on resource-B endpoints. Cost measured in HTTP requests.",
+      "execution_policy": "per_task_measured",
+      "cost_basis": "http_requests"
+    },
+    "B-LITERAL-REPLAY": {
+      "description": "Literal mechanism replay: exact action_template from resource-A observation replayed on resource-B without parameter binding. Expected to fail on identifier mismatch.",
+      "execution_policy": "replay_without_binding",
+      "cost_basis": "http_requests"
+    },
+    "B-RETRIEVAL-K5": {
+      "description": "Semantic retrieval baseline: top-5 nearest observations from resource-A by intent+state embedding similarity, executed literally on resource-B.",
+      "execution_policy": "retrieval_k5",
+      "cost_basis": "http_requests"
+    }
+  },
+  "positive_control": {
+    "id": "PC-SAME-RESOURCE",
+    "description": "Mechanism induced from resource-A observations, resolved and executed on SAME resource-A identifiers (disjoint value set from training but same endpoint structure). Tests that the induction+resolution pipeline works when URL prefix is preserved and intent namespace matches.",
+    "success_criterion": "success_rate >= 0.95 AND bound_path matches /api/v1/<collection>/<slot> pattern",
+    "n_per_family": 50
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-INTENT",
+    "description": "Mechanism induced from resource-A observations with intent labels randomly permuted across observations. Evaluated on transfer_success criterion (not induced-mechanism count). Should fail to transfer because intent structure is destroyed.",
+    "success_criterion": "transfer_success <= 0.10 AND abstention_precision >= 0.90 AND cost_ratio_vs_bcold >= 1.0",
+    "n_per_family": 50
+  },
+  "measurement_validity": {
+    "target_integrity": "No predictor contains the target directly. Intent labels used for induction are from training observations only. Resource-B test identifiers are disjoint from resource-A training identifiers. B-COLD cost is measured by actual execution, not configured.",
+    "split_integrity": "Training observations (resource-A) and test observations (resource-B) are disjoint by construction. Substrate server state is reset between arms. No site/task identity leaks into features.",
+    "sampling_integrity": "Deterministic seeds for substrate, observation collection, and bootstrap. Resource-B identifier sets are fixed before freeze. Family stratification preserved in bootstrap.",
+    "uncertainty_integrity": "Family-stratified B=5000 bootstrap for all ratio metrics. Resampling unit is task family. Correlated transitions within family are not treated as independent.",
+    "representation_integrity": "Raw HTTP request/response preserved. Induced mechanism fields (parameter_slots, action_template with preserved prefix) have operational meaning. Cost counted as actual HTTP requests executed."
+  },
+  "decision_rule": {
+    "conditions": [
+      "PC-SAME-RESOURCE.success_rate >= 0.95 AND bound_path_preserves_prefix == true",
+      "NC-SHUFFLED-INTENT.transfer_success <= 0.10 AND NC-SHUFFLED-INTENT.abstention_precision >= 0.90 AND NC-SHUFFLED-INTENT.cost_ratio_vs_bcold >= 1.0",
+      "Treatment.amortized_cost_ratio_vs_bcold <= 0.85 AND Treatment.amortized_cost_ratio_vs_literal_replay <= 0.85 AND Treatment.amortized_cost_ratio_vs_retrieval_k5 <= 0.85",
+      "Treatment.break_even_transfer_tasks <= N_MAX (derived before freeze from executed B-COLD cost)",
+      "Treatment.success_rate >= 0.95 on resource-B at matched end-to-end success with baselines",
+      "n >= 50 per family for ALL arms (PC-SAME-RESOURCE, NC-SHUFFLED-INTENT, Treatment, B-COLD, B-LITERAL-REPLAY, B-RETRIEVAL-K5)",
+      "Family-stratified B=5000 bootstrap computed for amortized_cost_ratio and break_even_transfer_tasks",
+      "60 negative probes per arm executed for abstention/false-accept measurement",
+      "All provenance digests verify (no placeholders)"
+    ],
+    "outcome_mapping": {
+      "all_pass": "SUPPORTS",
+      "any_fail": "FALSIFIES",
+      "measurement_failure": "MEASUREMENT_INVALID"
+    }
+  },
+  "product_consequence_positive": "C-PARAM-INHERIT advances to VALIDATED. Durable parameter-induction capability exists in shipped kernel with demonstrated cross-resource transfer and amortized economics. Enables C-LLM-INHERIT, C-PRODUCT-ECON, C-CROSSSITE experiments with executable mechanisms. Product promotion gate becomes decidable.",
+  "product_consequence_negative": "C-PARAM-INHERIT remains EXPERIMENTAL or moves to REJECTED if falsifier triggered by mechanism failure (not measurement failure). The add-at-execute/delete-at-verdict pathology continues. Product lane must either fix kernel defects at deeper level or accept that parameter induction is not viable on this architecture. C-RESIDUAL-NOVELTY and C-PRODUCT-ECON remain unmeasurable without executable inheritance.",
+  "estimated_cost": {
+    "kernel_changes_lines": 200,
+    "test_changes_lines": 150,
+    "substrate_reuse": "EXP-PRODUCT-36272385776 substrate.py",
+    "compute": "stdlib HTTP only, no browser, no model keys",
+    "wall_clock_estimate_minutes": 30
+  },
+  "expected_information_gain": "High. This is the binding bottleneck for the entire product program. A valid positive makes inheritance executable and measurable; a valid negative (with measurement validity) forces architectural reconsideration. Either outcome changes the program direction decisively."
+}

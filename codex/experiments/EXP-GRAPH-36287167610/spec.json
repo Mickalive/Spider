@@ -1,0 +1,168 @@
+{
+  "experiment_id": "EXP-GRAPH-36287167610",
+  "lane": "graph",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "question": "On a stdlib-only locally served multi-endpoint multi-verb HTTP application whose goal file machine-derives the applicable and no-applicable mechanism counts, can a goal-to-mechanism applicability gate fitted against BOTH classes (applicable goals versus goals for which no registered mechanism applies) become non-inert and hold pooled false-accept at or below a preregistered bound, while abstention is scored as its own outcome class, selection accuracy is reported only on goals the arm chooses to answer as a coverage/selective-risk pair, train/validation/test splits are explicit, a lexical-overlap null with a preregistered headroom screen is computed on applicable goals only, and a substitute reference arm is declared non-empty by construction?",
+  "hypothesis": "An applicability gate fitted on a labelled positive class (applicable goals) AND a negative class (no-applicable goals) will produce non-inert abstention decisions on no-applicable goals, achieve pooled false-accept rate ≤ 0.10 counting wrong EXECUTABLE decisions on ALL goals, and maintain selection accuracy at or above the uncalibrated embedding-argmax reference on the goals it chooses to answer (coverage/selective-risk pair), thereby demonstrating that goals can be routed to applicable mechanisms without internal IDs and with calibrated safety.",
+  "falsifier": "The fitted resolver fails to exceed the lexical-overlap null on mechanism-identity binding accuracy with paired family-blocked uncertainty on applicable goals, OR the pooled false-accept rate (wrong EXECUTABLE on ALL goals including no-applicable) exceeds 0.10, OR the coverage/selective-risk pair falls below the embedding-argmax reference on answered applicable goals, OR the calibration gate is inert (fires on 0 of applicable goals at its selected threshold), OR UNKNOWN precision falls below 0.85, OR global ECE exceeds 0.15 (bootstrap upper > 0.18), OR per-class ECE exceeds 0.15 (bootstrap upper > 0.18), OR the calibration is not fitted (parameters fixed algebraic transform).",
+  "baselines": [
+    {
+      "id": "B-LEXICAL-OVERLAP",
+      "description": "Max token Jaccard similarity between goal and mechanism intent strings, selecting the mechanism with highest overlap. No embeddings, no learned components. Never abstains.",
+      "expected_behavior": "Strong baseline on applicable goals. Headroom screen computed on applicable goals only (must be < 0.90). Expected to score poorly on no-applicable goals (always executes wrong mechanism)."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "description": "Selects a mechanism uniformly at random from those whose declared role matches the goal's inferred role (create/read/update/delete). Role inferred by keyword matching on the goal. Never abstains.",
+      "expected_behavior": "Chance-level baseline conditional on role. Expected mechanism-identity accuracy approximately 1/(mechanisms_per_role)."
+    },
+    {
+      "id": "B-EMBEDDING-ARGMAX",
+      "description": "Substitute reference arm: selects mechanism with highest cosine similarity between goal embedding and mechanism intent embedding. Never abstains. Declared non-empty by construction (always produces EXECUTABLE decision).",
+      "expected_behavior": "Ceiling on what the raw embedding signal provides without any gate. Does not abstain on no-applicable goals. Expected to exceed candidate on raw accuracy but with higher false-accept on no-applicable goals."
+    },
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "description": "Oracle arm that receives the true mechanism_id for each goal and returns the corresponding mechanism. Establishes the difficulty ceiling for the frozen goal set and fixture.",
+      "expected_behavior": "Mechanism-identity accuracy = 1.0 by construction on applicable goals. Declared difficulty ceiling: if this oracle achieves < 1.0 on applicable goals, the fixture is defective → MEASUREMENT_INVALID."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-VERBATIM-INTENT",
+    "description": "Goals that are verbatim copies of the distillation intents used to create the mechanisms. The resolver must achieve mechanism-identity accuracy = 1.0 on these goals.",
+    "expected_behavior": "Mechanism-identity accuracy = 1.0, false_accept = 0.0, UNKNOWN precision = 1.0, ECE = 0.0. Denominator must be > 0 and explicitly reported. Failure triggers MEASUREMENT_INVALID."
+  },
+  "null_control": {
+    "id": "NC-NO-APPLICABLE",
+    "description": "Goals for which no mechanism in the registry is applicable. The resolver must abstain on all such goals.",
+    "expected_behavior": "Abstention rate = 1.0 on no-applicable goals, UNKNOWN precision = 1.0 (vacuous for these goals), false_accept = 0.0. Denominator must be > 0 and explicitly reported. Failure triggers MEASUREMENT_INVALID."
+  },
+  "measurement_validity": [
+    "V1-CONSTRUCT-VALIDITY: Primary metric is mechanism-identity binding correctness on applicable goals (selected_mechanism_id == target_mechanism_id). Pooled false-accept counts wrong EXECUTABLE decisions on ALL goals including no-applicable. Coverage/selective-risk reported on applicable goals the arm chooses to answer.",
+    "V2-POSITIVE-CONTROL-EXECUTED: PC-VERBATIM-INTENT runs on every task and its denominator is logged. Zero denominator → MEASUREMENT_INVALID.",
+    "V3-ORACLE-CEILING: B-INTERNAL-ID-ORACLE must achieve mechanism-identity accuracy = 1.0 on applicable goals. If < 1.0 → MEASUREMENT_INVALID.",
+    "V4-CALIBRATION-FITTED: Applicability gate calibration (score → p_applicable) must be a fitted logistic regression on held-out validation data with BOTH positive (applicable) and negative (no-applicable) labels. Fitted parameters (w, b, threshold) logged and declared in prereg.md with SHA256 binding.",
+    "V5-CLOSED-TOP-BIN-ECE: ECE estimator uses closed top bin [0.9, 1.0] inclusive. No rows dropped.",
+    "V6-UNKNOWN-PRECISION-DEFINED: UNKNOWN precision = TP_abstain / (TP_abstain + FP_abstain) where TP_abstain = no-mechanism-applies AND abstain, FP_abstain = mechanism-applies AND abstain. NOT OOD abstention rate.",
+    "V7-PER-TASK-STATE-RESET: Server state fully reset before each task. Per-task state hash (SHA256 of serialized server state) logged. Identical starting state for all arms on a given task.",
+    "V8-DEGENERACY-SCREEN-APPLICABLE-ONLY: Before candidate runs: (a) B-LEXICAL-OVERLAP mechanism-identity accuracy on applicable goals only must be < 0.90 headroom threshold. (b) B-EMBEDDING-ARGMAX (substitute reference) must have > 0 EXECUTABLE decisions on applicable goals. Both must PASS or → MEASUREMENT_INVALID.",
+    "V9-CODE-BOUND-VIA-PREREG: Candidate resolver, goal generator, HTTP server, and experiment runner code hashes are DECLARED inside prereg.md (as SHA256 of pre-existing modules under research/harness). Freezer hashes prereg.md, binding code transitively. EXECUTE recomputes and fails validity on mismatch.",
+    "V10-FAMILY-BLOCKED-UNCERTAINTY: Uncertainty intervals use paired bootstrap resampling with resource family as blocking unit.",
+    "V11-FIXTURE-DISCRIMINATION: Registry contains >1 mechanism per resource family across multiple verbs. Every mechanism's parameter_slots non-empty and bound at execution. Zero unbindable placeholders.",
+    "V12-EXPLICIT-SPLITS: Train/validation/test splits explicitly declared and logged before any fitting. No data leakage across splits.",
+    "V13-INSTRUMENT-DYNAMIC-RANGE: Pre-registered precondition: fitted gate must fire (abstain) on at least 10% of applicable goals AND at least 10% of no-applicable goals at its selected threshold. Checked and logged before main evaluation. FAIL → MEASUREMENT_INVALID."
+  ],
+  "decision_rule": {
+    "primary_metric": "mechanism_identity_accuracy_applicable",
+    "primary_threshold": {
+      "comparison": "paired_family_blocked_bootstrap",
+      "nulls": ["B-LEXICAL-OVERLAP", "B-RANDOM-ROLE"],
+      "alpha": 0.05,
+      "direction": "greater",
+      "headroom_threshold": 0.90
+    },
+    "secondary_gates": [
+      {
+        "name": "pooled_false_accept",
+        "metric": "pooled_false_accept_rate",
+        "threshold": 0.10,
+        "direction": "less_equal",
+        "definition": "Fraction of EXECUTABLE decisions where selected_mechanism_id != target_mechanism_id, pooled across ALL goals (applicable + no-applicable). Numerator: wrong EXECUTABLE. Denominator: total EXECUTABLE decisions."
+      },
+      {
+        "name": "coverage_selective_risk",
+        "metric": "coverage_selective_risk_pair",
+        "threshold": {
+          "coverage_min": 0.50,
+          "selective_risk_max_vs_reference": 0.05
+        },
+        "direction": "coverage_ge_and_selective_risk_le_reference_plus_margin",
+        "definition": "Coverage = fraction of applicable goals where resolver produces EXECUTABLE decision. Selective risk = error rate on answered applicable goals. Candidate pair must have coverage ≥ 0.50 AND selective risk ≤ (embedding_argmax selective risk on its answered applicable goals) + 0.05."
+      },
+      {
+        "name": "unknown_precision",
+        "metric": "unknown_precision",
+        "threshold": 0.85,
+        "direction": "greater_equal",
+        "definition": "TP_abstain / (TP_abstain + FP_abstain) where TP_abstain = no-mechanism-applies AND abstain, FP_abstain = mechanism-applies AND abstain"
+      },
+      {
+        "name": "ece_global",
+        "metric": "ece_global",
+        "threshold": 0.15,
+        "direction": "less_equal",
+        "estimator": "closed_top_bin_10_bins",
+        "bootstrap_upper_bound": 0.18
+      },
+      {
+        "name": "ece_per_class",
+        "metric": "ece_per_class_max",
+        "threshold": 0.15,
+        "direction": "less_equal",
+        "estimator": "closed_top_bin_10_bins_per_class",
+        "bootstrap_upper_bound": 0.18
+      },
+      {
+        "name": "calibration_fitted",
+        "metric": "calibration_is_fitted",
+        "threshold": true,
+        "direction": "equals",
+        "check": "calibration parameters learned on held-out validation split with both positive and negative labels, not fixed algebraic transform"
+      },
+      {
+        "name": "degeneracy_screen_passed",
+        "metric": "degeneracy_screen_pass",
+        "threshold": true,
+        "direction": "equals",
+        "check": "lexical_null_below_headroom_on_applicable AND reference_arm_nonempty_on_applicable"
+      },
+      {
+        "name": "positive_control_pass",
+        "metric": "pc_verbatim_accuracy",
+        "threshold": 1.0,
+        "direction": "equals",
+        "check": "denominator > 0"
+      },
+      {
+        "name": "oracle_ceiling_pass",
+        "metric": "oracle_accuracy",
+        "threshold": 1.0,
+        "direction": "equals"
+      },
+      {
+        "name": "null_control_pass",
+        "metric": "nc_abstention_rate",
+        "threshold": 1.0,
+        "direction": "equals",
+        "check": "denominator > 0"
+      },
+      {
+        "name": "instrument_dynamic_range",
+        "metric": "gate_fires_on_both_classes",
+        "threshold": {
+          "applicable_abstain_fraction_min": 0.10,
+          "no_applicable_abstain_fraction_min": 0.10
+        },
+        "direction": "both_ge",
+        "check": "fitted gate abstains on ≥10% of applicable AND ≥10% of no-applicable goals at selected threshold"
+      }
+    ],
+    "outcomes": {
+      "SUPPORTS": "All gates 1-9 PASS",
+      "FALSIFIES": "Primary gate (8) FAILS OR secondary gates (9) FAIL",
+      "MEASUREMENT_INVALID": "Any gate 1-7 FAILS (measurement validity V1-V13, degeneracy screen, positive control, oracle, null control, calibration fitted check, instrument dynamic range)"
+    }
+  },
+  "product_consequence_positive": "C-SEMANTIC-RESOLVE advances from HYPOTHESIS to EXPERIMENTAL. Semantic resolution with calibrated abstention and bounded false-accept is validated on a discriminating fixture. This unblocks C-LLM-INHERIT, C-CROSSSITE, and C-PRODUCT-ECON which depend on addressable inheritance with safety guarantees. Product can proceed with semantic resolution as a load-bearing component with abstention-as-first-class-outcome.",
+  "product_consequence_negative": "C-SEMANTIC-RESOLVE remains at HYPOTHESIS. The specific resolver architecture (fitted applicability gate with dual-class training) is rejected as insufficient for calibrated routing with safety bounds. Next cycle must either: (a) strengthen the resolver (richer goal encoding, structured parameter binding, different gate architecture), (b) change the fixture to a regime where the current resolver could succeed, or (c) pivot to a different resolution mechanism. The claim is not retired; the domain remains open.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": 800,
+    "estimated_wall_clock_seconds": 180,
+    "compute_notes": "Stdlib-only HTTP server, sentence-transformers embedding (all-MiniLM-L6-v2, cached), logistic calibration on CPU. No LLM calls, no browser. Code binding via pre-existing harness module."
+  },
+  "expected_information_gain": "High. This experiment directly tests the load-bearing C-SEMANTIC-RESOLVE claim with the three critical fixes from the previous MEASUREMENT_INVALID packet: (1) dual-class calibration to make the gate non-inert on no-applicable goals, (2) unambiguous pooled false-accept counting wrong executions on ALL goals, (3) abstention as first-class outcome with coverage/selective-risk reporting. A valid PASS would be the first evidence that semantic resolution works with calibrated safety. A valid FALSIFIES would bound the dual-class gate architecture. Either outcome changes the claim status and product trajectory."
+}

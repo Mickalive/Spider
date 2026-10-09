@@ -1,0 +1,858 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37385647440",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "class_distribution": {
+      "metric_id": "class_distribution",
+      "type": "categorical_counts",
+      "unit": "count of admitted state items",
+      "denominator_items_classified": 29,
+      "per_class": {
+        "session_invariant": {
+          "count": 12,
+          "proportion": 0.41379310344827586,
+          "ci95_low": 0.045454545454545456,
+          "ci95_high": 0.7586206896551724
+        },
+        "session_scoped": {
+          "count": 0,
+          "proportion": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0
+        },
+        "request_scoped": {
+          "count": 17,
+          "proportion": 0.5862068965517241,
+          "ci95_low": 0.2413793103448276,
+          "ci95_high": 0.9545454545454546
+        },
+        "time_scoped": {
+          "count": 0,
+          "proportion": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0
+        },
+        "rotating": {
+          "count": 0,
+          "proportion": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0
+        }
+      },
+      "bootstrap": {
+        "method": "site_clustered_percentile",
+        "resamples": 10000,
+        "seed": "EXP-FRONTIER-37385647440"
+      },
+      "frozen_pool_note": "hand-picked credential-free public HTTP pool, NOT Web prevalence (spec.measurement_validity.target_pool)."
+    },
+    "break_even_reuse_count_per_class": {
+      "metric_id": "break_even_reuse_count_per_class",
+      "type": "numeric_per_class",
+      "unit": "reuses (dimensionless count)",
+      "baseline_id": "COLD_REEXPLORATION",
+      "tokenizer": "cl100k_base",
+      "per_class": {
+        "session_invariant": {
+          "n_items": 12,
+          "sites": [
+            "gitlab",
+            "httpbin",
+            "wikipedia"
+          ],
+          "median_re_acquisition_tokens": 37357.0,
+          "median_re_acquisition_tokens_ci95": [
+            113.0,
+            71673
+          ],
+          "median_re_acquisition_requests": 1.0,
+          "median_re_derivation_tokens": 71673,
+          "median_re_derivation_requests": 1,
+          "break_even_reuse_count_tokens": 2,
+          "break_even_null_reason": null,
+          "median_item_level_break_even_reuse_count_tokens": null,
+          "n_items_with_measurable_re_derivation": 7,
+          "median_denominators": {
+            "re_acquisition_median_over_n_items": 12,
+            "re_derivation_median_over_n_items": 7,
+            "denominators_match": false
+          }
+        },
+        "session_scoped": null,
+        "request_scoped": {
+          "n_items": 17,
+          "sites": [
+            "bitbucket",
+            "gitlab",
+            "httpbin",
+            "wikimedia",
+            "wikipedia"
+          ],
+          "median_re_acquisition_tokens": 93986,
+          "median_re_acquisition_tokens_ci95": [
+            224.0,
+            445881
+          ],
+          "median_re_acquisition_requests": 1,
+          "median_re_derivation_tokens": 445894,
+          "median_re_derivation_requests": 1,
+          "break_even_reuse_count_tokens": 1,
+          "break_even_null_reason": null,
+          "median_item_level_break_even_reuse_count_tokens": 1256,
+          "n_items_with_measurable_re_derivation": 13,
+          "median_denominators": {
+            "re_acquisition_median_over_n_items": 17,
+            "re_derivation_median_over_n_items": 13,
+            "denominators_match": false
+          }
+        },
+        "time_scoped": null,
+        "rotating": null
+      },
+      "oracle_perfect_transfer_baseline": "NOT_AVAILABLE for 29 of 29 classified items: 0 items were classified session_invariant with a measured re_acquisition cost strictly below re-derivation cost (all 12 session_invariant items have re_acquisition == re_derivation), so the ORACLE_PERFECT_TRANSFER break-even is null for every item (spec.baselines).",
+      "retrieval_baseline": "NOT_EXERCISED (no prior episodes in this transaction); recorded as null per spec.baselines.RETRIEVAL_BASELINE."
+    },
+    "falsifier_triggered": {
+      "metric_id": "falsifier_triggered",
+      "type": "boolean",
+      "value": false,
+      "condition": "majority_non_stationary = (sum of request_scoped + time_scoped + rotating counts) > (sum of session_invariant + session_scoped counts). cost_condition = median_re_acquisition_cost_non_stationary >= median_re_derivation_cost_non_stationary. Both must be true to trigger.",
+      "majority_non_stationary": true,
+      "majority_class": "request_scoped",
+      "non_stationary_items": 17,
+      "stationary_items": 12,
+      "cost_condition": false,
+      "attainability_audit": {
+        "question": "Can the frozen falsifier's cost_condition ever be TRUE for any item reachable within the frozen crawl bounds?",
+        "argument": "For an item whose page is reached by the cold breadth-first crawl, re_derivation_requests is the BFS fetch order of that page and re_acquisition_request_count is the length of a shortest path to it. The BFS route is itself a shortest path, so re_derivation_requests >= re_acquisition_request_count, and re_derivation_tokens is the token sum of a superset of those same responses, so re_derivation_tokens >= re_acquisition_tokens. Hence median_re_acquisition >= median_re_derivation is FALSE whenever both medians are measured, and TRUE only where re_derivation is null, which makes the comparison undefined rather than true.",
+        "n_items_classified_with_measurable_re_derivation": 20,
+        "n_items_where_re_derivation_ge_re_acquisition_on_both_units": 20,
+        "empirical_share": 1.0,
+        "frozen_falsifier_trigger_region_is_empty": true,
+        "consequence": "The frozen accept region for FALSIFIES has empty interior: no execution of this frozen decision rule can produce outcome=FALSIFIES. The reachable branches are controls-fail (MEASUREMENT_INVALID), SUPPORTS and MIXED."
+      },
+      "cost_condition_evaluated_over": "median re_acquisition vs median unconditional re-derivation of the majority class (request_scoped), both in cl100k_base tokens and requests"
+    },
+    "controls_pass": {
+      "metric_id": "controls_pass",
+      "type": "boolean",
+      "value": false,
+      "required": true,
+      "control_statuses": {
+        "KNOWN_STATIONARY_CONTROL": "FAIL",
+        "REVERIFIED_NON_STATIONARY": "FAIL",
+        "INTER_SESSION_DELAY": "PASS",
+        "NULL_STATIONARITY_ARM": "PASS",
+        "PRE_FREEZE_CONTROL_VERIFICATION_GATE": "FAIL"
+      },
+      "note": "the frozen controls_gate counts the FOUR pre-freeze controls. PRE_FREEZE_CONTROL_VERIFICATION_GATE is reported separately as a process finding and is excluded from that count, but it is itself a FAIL of the frozen prereg section 7 precondition."
+    },
+    "sample_composition": {
+      "items_admitted": 32,
+      "items_classified": 29,
+      "items_unclassifiable": 3,
+      "sites_executed": 6,
+      "sites_with_classified_items": 5,
+      "sessions_per_target": 5,
+      "inter_session_delay_min_seconds": 93.81,
+      "inter_session_delay_required_seconds": 60,
+      "cold_crawl_depth_bound": {
+        "max_hops": 2,
+        "max_pages_per_cold_crawl": 50,
+        "max_items_per_site": 6
+      },
+      "frozen_floor": {
+        "min_items": 20,
+        "min_sites": 4,
+        "meets_floor_items": true,
+        "meets_floor_sites": true
+      },
+      "max_hop_of_any_admitted_item": 1,
+      "hop_histogram": {
+        "0": 14,
+        "1": 5,
+        "None": 13
+      }
+    },
+    "substrate_economics": {
+      "get_requests_sent": 359,
+      "non_get_requests_sent": 0,
+      "responses_cached": 250,
+      "cache_bytes_uncompressed": 71405736,
+      "wall_clock_seconds": 487.3,
+      "cold_crawl_summary": {
+        "gitlab": {
+          "root_url": "https://gitlab.com",
+          "final_root": "https://about.gitlab.com/",
+          "root_redirected_off_nominal_host": true,
+          "cold_total_requests": 50,
+          "cold_total_tokens": 3803441,
+          "n_candidates_detected": 50
+        },
+        "wikimedia": {
+          "root_url": "https://auth.wikimedia.org",
+          "final_root": "https://www.wikimedia.org/",
+          "root_redirected_off_nominal_host": true,
+          "cold_total_requests": 1,
+          "cold_total_tokens": 14530,
+          "n_candidates_detected": 0
+        },
+        "wikipedia": {
+          "root_url": "https://en.wikipedia.org",
+          "final_root": "https://en.wikipedia.org/wiki/Main_Page",
+          "root_redirected_off_nominal_host": true,
+          "cold_total_requests": 50,
+          "cold_total_tokens": 5997227,
+          "n_candidates_detected": 110
+        },
+        "bitbucket": {
+          "root_url": "https://bitbucket.org",
+          "final_root": "https://bitbucket.org",
+          "root_redirected_off_nominal_host": false,
+          "cold_total_requests": 50,
+          "cold_total_tokens": 6597425,
+          "n_candidates_detected": 8
+        },
+        "httpbin": {
+          "root_url": "https://httpbin.org",
+          "final_root": "https://httpbin.org",
+          "root_redirected_off_nominal_host": false,
+          "cold_total_requests": 2,
+          "cold_total_tokens": 3534,
+          "n_candidates_detected": 1
+        },
+        "postman_echo": {
+          "root_url": "https://postman-echo.com",
+          "final_root": "https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation",
+          "root_redirected_off_nominal_host": true,
+          "cold_total_requests": 1,
+          "cold_total_tokens": 35891,
+          "n_candidates_detected": 0
+        }
+      }
+    },
+    "value_only_sensitivity": {
+      "purpose": "IC-01 disclosure: the frozen rule hashes the whole containing page body, so any item on a page whose bytes churn is request_scoped even when its own value is byte-stable.",
+      "per_class": {
+        "session_invariant": {
+          "count": 12,
+          "proportion": 0.7058823529411765
+        },
+        "session_scoped": {
+          "count": 0,
+          "proportion": 0.0
+        },
+        "request_scoped": {
+          "count": 5,
+          "proportion": 0.29411764705882354
+        },
+        "time_scoped": {
+          "count": 0,
+          "proportion": 0.0
+        },
+        "rotating": {
+          "count": 0,
+          "proportion": 0.0
+        }
+      },
+      "n_items_unmatched_by_the_frozen_value_only_table": 12,
+      "n_items_that_change_class_vs_primary": 6,
+      "class_comparison": {
+        "session_invariant": {
+          "primary": 12,
+          "value_only": 12
+        },
+        "session_scoped": {
+          "primary": 0,
+          "value_only": 0
+        },
+        "request_scoped": {
+          "primary": 17,
+          "value_only": 5
+        },
+        "time_scoped": {
+          "primary": 0,
+          "value_only": 0
+        },
+        "rotating": {
+          "primary": 0,
+          "value_only": 0
+        }
+      }
+    }
+  },
+  "controls": {
+    "KNOWN_STATIONARY_CONTROL": {
+      "expected": "All designated items classified as session_invariant with exact-value and body-hash equality across all K=5 sessions (spec.positive_control).",
+      "observed": {
+        "item_verdicts": [
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/robots.txt|robots.txt",
+            "prereg_designated": true,
+            "optional_per_prereg": false,
+            "verdict": "PASS",
+            "stationarity_class": "session_invariant",
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": 1,
+            "n_distinct_body_hashes": 1,
+            "reason": "exact-value and body-hash invariance across all 5 sessions"
+          },
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/sitemap.xml|sitemap.xml",
+            "prereg_designated": true,
+            "optional_per_prereg": true,
+            "verdict": "SKIPPED",
+            "stationarity_class": "session_invariant",
+            "http_statuses": [
+              404
+            ],
+            "n_distinct_values": 1,
+            "n_distinct_body_hashes": 1,
+            "reason": "prereg 6.1 conditional 'sitemap.xml (if exists, else skip)'; observed HTTP statuses [404] -> the resource is ABSENT. A byte-stable 404 error page is NOT evidence of stationary state and is excluded from the verdict by the frozen conditional, not by producer choice."
+          },
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|file|https://gitlab.com/favicon.ico|favicon.ico",
+            "prereg_designated": true,
+            "optional_per_prereg": false,
+            "verdict": "PASS",
+            "stationarity_class": "session_invariant",
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": 1,
+            "n_distinct_body_hashes": 1,
+            "reason": "exact-value and body-hash invariance across all 5 sessions"
+          },
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|file|https://en.wikipedia.org/static/favicon/wikipedia.ico|wikipedia.ico",
+            "prereg_designated": true,
+            "optional_per_prereg": false,
+            "verdict": "PASS",
+            "stationarity_class": "session_invariant",
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": 1,
+            "n_distinct_body_hashes": 1,
+            "reason": "exact-value and body-hash invariance across all 5 sessions"
+          },
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|link|https://about.gitlab.com/|https://gitlab.com/explore",
+            "prereg_designated": true,
+            "optional_per_prereg": false,
+            "verdict": "UNOBSERVABLE",
+            "stationarity_class": null,
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": null,
+            "n_distinct_body_hashes": null,
+            "reason": "designated element not present at the designated URL: statuses=[200], extract_statuses=['absent'], unclassifiable_reason=designated element not extractable in one or more sessions (sessions [0, 1, 2, 3, 4])"
+          },
+          {
+            "item_id": "KNOWN_STATIONARY_CONTROL|link|https://en.wikipedia.org/wiki/Main_Page|https://en.wikipedia.org/wiki/Main_Page",
+            "prereg_designated": true,
+            "optional_per_prereg": false,
+            "verdict": "FAIL",
+            "stationarity_class": "request_scoped",
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": 1,
+            "n_distinct_body_hashes": 5,
+            "reason": "classified request_scoped (n_distinct_values=1, n_distinct_body_hashes=5)"
+          }
+        ]
+      },
+      "verdict": "FAIL",
+      "n_items_designated": 6,
+      "n_designated_passing": 3,
+      "n_designated_failing": 1,
+      "n_designated_unobservable": 1,
+      "n_items_information_only_never_substituted": 0,
+      "evidence_ref": "raw/controls_verification.jsonl",
+      "frozen_pre_freeze_status": "PENDING",
+      "skipped_items": [
+        {
+          "item_id": "KNOWN_STATIONARY_CONTROL|file|https://httpbin.org/sitemap.xml|sitemap.xml",
+          "reason": "prereg 6.1 conditional 'sitemap.xml (if exists, else skip)'; observed HTTP statuses [404] -> the resource is ABSENT. A byte-stable 404 error page is NOT evidence of stationary state and is excluded from the verdict by the frozen conditional, not by producer choice."
+        }
+      ]
+    },
+    "REVERIFIED_NON_STATIONARY": {
+      "expected": "The prereg-named authenticity_token anchors must classify as session_scoped or rotating (>=2 distinct values) across K=5 sessions.",
+      "observed": {
+        "item_verdicts": [
+          {
+            "item_id": "REVERIFIED_NON_STATIONARY|input|https://gitlab.com/users/sign_in|authenticity_token",
+            "prereg_designated": true,
+            "optional_per_prereg": null,
+            "verdict": "UNOBSERVABLE",
+            "stationarity_class": null,
+            "http_statuses": [
+              403
+            ],
+            "n_distinct_values": null,
+            "n_distinct_body_hashes": null,
+            "reason": "designated input not observable at the prereg-named URL: statuses=[403]; unclassifiable_reason=designated element not extractable in one or more sessions (sessions [0, 1, 2, 3, 4])"
+          },
+          {
+            "item_id": "REVERIFIED_NON_STATIONARY|input|https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount|wpCreateaccountToken",
+            "prereg_designated": true,
+            "optional_per_prereg": null,
+            "verdict": "FAIL",
+            "stationarity_class": "request_scoped",
+            "http_statuses": [
+              200
+            ],
+            "n_distinct_values": 5,
+            "n_distinct_body_hashes": 5,
+            "reason": "classified request_scoped; criterion requires session_scoped or rotating with >=2 distinct values"
+          }
+        ]
+      },
+      "verdict": "FAIL",
+      "n_items_designated": 2,
+      "n_designated_passing": 0,
+      "n_designated_failing": 1,
+      "n_designated_unobservable": 1,
+      "n_items_information_only_never_substituted": 1,
+      "evidence_ref": "raw/controls_verification.jsonl",
+      "frozen_pre_freeze_status": "PENDING",
+      "information_only_items": [
+        {
+          "item_id": "REVERIFIED_NON_STATIONARY|input|https://gitlab.com/-/trial_registrations/new/|authenticity_token",
+          "reason": "parent-cited URL for the same control item; executed for information and excluded from the control verdict (IC-05)"
+        }
+      ]
+    },
+    "INTER_SESSION_DELAY": {
+      "expected": "Minimum measured inter-session delay >= 60 s, so a session_scoped value change cannot be attributed to the declared delay window.",
+      "observed": {
+        "min_inter_session_delay_seconds": 93.81,
+        "max_inter_session_delay_seconds": 95.86,
+        "n_inter_session_intervals_measured": 24,
+        "required_minimum_seconds": 60
+      },
+      "verdict": "PASS",
+      "n_items_designated": 1,
+      "n_designated_passing": 1,
+      "n_designated_failing": 0,
+      "n_designated_unobservable": 0,
+      "n_items_information_only_never_substituted": 0,
+      "evidence_ref": "raw/controls_verification.jsonl",
+      "frozen_pre_freeze_status": "PENDING"
+    },
+    "NULL_STATIONARITY_ARM": {
+      "expected": "At least one designated null probe must classify as non-stationary, proving the classifier discriminates.",
+      "observed": {
+        "probe_classifications": {
+          "uuid": "request_scoped",
+          "date": null,
+          "X-Request-Id": "request_scoped",
+          "robots.txt?cache_buster": "session_invariant"
+        },
+        "n_probes_fired_non_stationary": 2,
+        "class_demonstration": "httpbin.org /uuid (dv=5 across sessions AND dv=5 within a single session) and /headers X-Request-Id (explicit prng fallback, dv=5 across sessions)."
+      },
+      "verdict": "PASS",
+      "n_items_designated": 4,
+      "n_designated_passing": 2,
+      "n_designated_failing": 1,
+      "n_designated_unobservable": 1,
+      "n_items_information_only_never_substituted": 0,
+      "evidence_ref": "raw/controls_verification.jsonl",
+      "frozen_pre_freeze_status": "PENDING"
+    },
+    "PRE_FREEZE_CONTROL_VERIFICATION_GATE": {
+      "expected": "spec.json controls_pre_freeze_verification must record a non-PENDING verified status with an evidence_ref for all four controls before freeze.json exists (prereg.md sections 7 and 14).",
+      "observed": {
+        "KNOWN_STATIONARY_CONTROL": {
+          "status": "PENDING",
+          "verified_at": null,
+          "evidence_ref": null
+        },
+        "REVERIFIED_NON_STATIONARY": {
+          "status": "PENDING",
+          "verified_at": null,
+          "evidence_ref": null
+        },
+        "INTER_SESSION_DELAY": {
+          "status": "PENDING",
+          "verified_at": null,
+          "evidence_ref": null,
+          "delay_seconds": 60
+        },
+        "NULL_STATIONARITY_ARM": {
+          "status": "PENDING",
+          "verified_at": null,
+          "evidence_ref": null
+        }
+      },
+      "verdict": "FAIL",
+      "n_items_executed": 4,
+      "evidence_ref": "spec.json#controls_pre_freeze_verification",
+      "note": "Process-validity finding, reported separately from the four measured control arms; not one of the four controls in the frozen controls_gate."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/stationarity_37385647440.py",
+      "sha256": "53686f083bf3cf14573bfaf9d5200c3edfa9800cee3652b0b31af3161a378084",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/analyze_stationarity_37385647440.py",
+      "sha256": "059be8e34ea92b7102700b72bc0617423eaaef7445ab235f1b16175d3ed1dd17",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/emit_result_37385647440.py",
+      "sha256": "792ec620da45d005a53a28c307856096e06a58f0859bd4598ce71528b841f61f",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/http.jsonl",
+      "sha256": "290dfb188689b550a577816b3d489db6de56de6a666e9183e08992d90b8a1efb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/observations.jsonl",
+      "sha256": "63029c857878f4efcd0f18b3aa4389e4d0c58e1f8968827fee763b46eacaf254",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/session_timing.jsonl",
+      "sha256": "5390fba21e6694f5df5d9a07538be27192bb9759853e56d1924694eb6043d72b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/controls_verification.jsonl",
+      "sha256": "95db345d2b78ddc0907ec66afb2266417e2ed13bb428120039cdaa7330095eef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/items.json",
+      "sha256": "0c789a8deb8f88596c0ecee879c35eaff6198e3fc92b19012b4e3229803f446b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/classification.json",
+      "sha256": "129e5512582a7b19802bddf442e686b7066672383c1997a106d2b85c1371b3de",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/classification_sensitivity.json",
+      "sha256": "a32227dba9e1d4de8554336accbd3ca346a3935b69e032c51a494517e287be64",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/costs.json",
+      "sha256": "3664efe5a00dde9b564fbe55988f6ac71cb63e1e6176d21f283980d1c82e10d2",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/analysis.json",
+      "sha256": "21209fbfcf4038772b5329fee92de8b648c18237ad63a2e204a7468082a52734",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/derived/run_manifest.json",
+      "sha256": "0645e8c46c6b42ea293c8d85c494c17d0a63bad084ab85707d3a58a2916a8628",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-37385647440/raw/responses_cache/",
+      "sha256": null,
+      "role": "raw",
+      "note": "250 content-addressed response bodies named <sha256-of-uncompressed-body-bytes>.json.gz; the directory itself is not hashable as a single object; each name is the verification handle."
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-01",
+      "kind": "raw_observation",
+      "statement": "359 HTTP requests were issued, all GET; 0 non-GET requests were issued.",
+      "evidence_ref": "raw/http.jsonl"
+    },
+    {
+      "id": "OBS-02",
+      "kind": "raw_observation",
+      "statement": "K=5 sessions were executed per frozen target with disjoint cookie jars; measured minimum inter-session delay 93.81 s over 24 timing records.",
+      "evidence_ref": "raw/session_timing.jsonl"
+    },
+    {
+      "id": "OBS-03",
+      "kind": "raw_observation",
+      "statement": "29 of 32 admitted items received a class; 12 session_invariant, 17 request_scoped, 0 session_scoped, 0 time_scoped, 0 rotating.",
+      "evidence_ref": "derived/classification.json"
+    },
+    {
+      "id": "OBS-04",
+      "kind": "raw_observation",
+      "statement": "The Wikimedia authenticity_token designated at https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount and the GitLab authenticity_token at https://gitlab.com/-/trial_registrations/new/ each produced 5 distinct values across the 5 sessions AND 5 distinct values across 5 GETs issued inside a single session (within-session distinct-value count = 5).",
+      "evidence_ref": "raw/observations.jsonl"
+    },
+    {
+      "id": "OBS-05",
+      "kind": "raw_observation",
+      "statement": "https://httpbin.org/uuid produced 5 distinct values across sessions and 5 distinct values within one session; https://httpbin.org/headers X-Request-Id reported its explicit 'prng' fallback on every session and produced 5 distinct values.",
+      "evidence_ref": "raw/observations.jsonl"
+    },
+    {
+      "id": "OBS-06",
+      "kind": "raw_observation",
+      "statement": "The prereg-named REVERIFIED_NON_STATIONARY anchor https://gitlab.com/users/sign_in returned HTTP 403 in all 5 sessions, so the designated input was never observable; the parent-cited anchor https://gitlab.com/-/trial_registrations/new/ returned HTTP 200 and was observable but was never substituted for the prereg-named anchor.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "OBS-07",
+      "kind": "raw_observation",
+      "statement": "https://httpbin.org/sitemap.xml returned HTTP 404 in all 5 sessions; the frozen conditional 'sitemap.xml (if exists, else skip)' therefore skipped it, and a byte-stable 404 error page was excluded from the verdict.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "OBS-08",
+      "kind": "raw_observation",
+      "statement": "4 of 6 frozen roots redirected off their nominal host: gitlab.com -> about.gitlab.com, auth.wikimedia.org -> www.wikimedia.org, en.wikipedia.org -> en.wikipedia.org/wiki/Main_Page, postman-echo.com -> www.postman.com/postman/workspace/published-postman-templates/... bitbucket.org and httpbin.org did not redirect.",
+      "evidence_ref": "derived/costs.json#cold_crawl_summary"
+    },
+    {
+      "id": "OBS-09",
+      "kind": "raw_observation",
+      "statement": "Under the frozen host-pinned cold breadth-first crawl, the wikimedia and postman_echo targets yielded 0 admitted items (1 request each, 0 same-host HTML candidates detected); bitbucket and gitlab admitted items only from their own root pages.",
+      "evidence_ref": "derived/costs.json#cold_crawl_summary"
+    },
+    {
+      "id": "OBS-10",
+      "kind": "raw_observation",
+      "statement": "Every session_invariant item had re-acquisition cost exactly equal to its re-derivation cost (1 request, identical cl100k_base token count), so break_even_reuse_count is null (infinite) for all of them.",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "OBS-11",
+      "kind": "raw_observation",
+      "statement": "For the depth-1 wikipedia items, re-acquisition was 2 requests / ~93k tokens while unconditional re-derivation was 15-26 requests / ~0.97-1.50M tokens. For root-hosted bitbucket items, re-acquisition and re-derivation were the same single GET and differed only by ~13 tokens, which made the frozen break-even formula return values from 1 to 34,299 for economically identical items.",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "OBS-12",
+      "kind": "raw_observation",
+      "statement": "Under the disclosed value-only variant of the frozen rule the class distribution is 12 session_invariant / 5 request_scoped, with 12 of 29 classified items unmatched by the frozen value-only table.",
+      "evidence_ref": "derived/classification_sensitivity.json"
+    },
+    {
+      "id": "OBS-13",
+      "kind": "raw_observation",
+      "statement": "11 of 32 items were not reached within the frozen crawl bounds ({'reachable_in_bounded_cold_crawl': 21, 'not_reached_within_frozen_crawl_bounds': 11}), so their unconditional re-derivation cost is not measurable under this design and their class-level economics rest on the measured subset only.",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "OBS-14",
+      "kind": "raw_observation",
+      "statement": "https://gitlab.com redirected to https://about.gitlab.com/, which contains no /explore link, so the prereg-named KNOWN_STATIONARY_CONTROL anchor https://gitlab.com/explore was unobservable in all 5 sessions; the anchor was probed separately and returned HTTP 200.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "OBS-15",
+      "kind": "raw_observation",
+      "statement": "The KNOWN_STATIONARY_CONTROL anchor https://en.wikipedia.org/wiki/Main_Page (the site self-link on Main_Page) had 1 distinct value across 5 sessions but 5 distinct page body hashes, so the frozen rule classified it request_scoped.",
+      "evidence_ref": "derived/classification.json"
+    },
+    {
+      "id": "OBS-16",
+      "kind": "derived_measurement",
+      "statement": "The class-level break_even_reuse_count for session_invariant is 2 reuses, yet every one of the 12 session_invariant items individually has re-acquisition exactly equal to re-derivation and therefore an infinite item-level break-even. The class number arises because the re-acquisition median is taken over all 12 items (median 37,357 tokens) while the re-derivation median is taken over only the 7 items the bounded crawl could reach (median 71,673 tokens), and the 5 unreachable items are the cheap static files (79-1,923 tokens). The same denominator mismatch applies to request_scoped (re-acquisition median over 17 items, re-derivation median over 13).",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "OBS-17",
+      "kind": "derived_measurement",
+      "statement": "Restricting to the 20 items where BOTH costs are measured, re-derivation was greater than or equal to re-acquisition on both units for 20 of 20 items. The frozen falsifier's cost condition held for 0 of 20.",
+      "evidence_ref": "derived/analysis.json#falsifier.attainability_audit"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-01",
+      "severity": "decisive",
+      "note": "The frozen controls_gate requires all four pre-freeze controls to PASS and maps any control FAIL to status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE. Two of the four measured arms FAILED, so no classification or economic result in this packet may be read as a validated scientific answer.",
+      "evidence_ref": "spec.json#decision_rule.controls_gate"
+    },
+    {
+      "id": "VN-02",
+      "severity": "high",
+      "note": "spec.json controls_pre_freeze_verification records status PENDING, verified_at null, evidence_ref null for all four controls at the time freeze.json exists, although prereg.md sections 7 and 14 require verified controls before freeze. The frozen design was never validated before execution.",
+      "evidence_ref": "spec.json#controls_pre_freeze_verification"
+    },
+    {
+      "id": "VN-03",
+      "severity": "high",
+      "note": "Frozen control-design defect: spec.positive_control and prereg 6.1 designate 5 anchors as known-stationary, but 2 of them are not available on the live web (gitlab /explore absent from the page gitlab.com actually serves; httpbin /sitemap.xml absent). Even ignoring availability, the wikipedia Main_Page self-link anchor is not stationary under the frozen rule because Main_Page's body churns within a session. A 'known stationary' class with only 3 genuinely testable anchors, of which 1 is not stationary, cannot calibrate a five-class taxonomy.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "VN-04",
+      "severity": "high",
+      "note": "Frozen control-design defect: the REVERIFIED_NON_STATIONARY accept list is 'session_scoped or rotating with >= 2 distinct values', which excludes request_scoped. Both observable anchors of that control fell into request_scoped (5 distinct values across sessions AND within a session), i.e. they demonstrated non-stationarity MORE strongly than the control anticipated, yet the frozen criterion rejects them. The control can only fail; no live outcome could pass it.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "VN-05",
+      "severity": "high",
+      "note": "Frozen rule defect (spec.measurement_validity.classification_method): the evaluation order places session_scoped before time_scoped and rotating, so time_scoped and rotating are unreachable for any item whose value differs within a session. Both classes therefore have count 0 by construction, not by observation.",
+      "evidence_ref": "spec.json#measurement_validity.classification_method"
+    },
+    {
+      "id": "VN-06",
+      "severity": "high",
+      "note": "Frozen rule defect: the primary rule requires value AND containing-page body-hash invariance across sessions, so an item is session_invariant only if its whole page is byte-stable. Any item on a page with per-request byte churn is request_scoped regardless of its own value stability. This makes request_scoped a near-catch-all channel and is why the class distribution moves from 12/17 to 12/5 under the value-only variant. The choice of channel is decision-relevant, not cosmetic.",
+      "evidence_ref": "derived/classification_sensitivity.json"
+    },
+    {
+      "id": "VN-07",
+      "severity": "decisive",
+      "note": "The frozen falsifier has an empty trigger interior. Its cost condition compares median re-acquisition against median unconditional re-derivation as measured by the frozen cold breadth-first crawl. A breadth-first route is a shortest path, and the re-derivation token sum is a superset of the re-acquisition token sum, so re_derivation >= re_acquisition on both units for every reachable item. Empirically the condition held for 0 of 20 items with measurable re-derivation. The FALSIFIES outcome was therefore unreachable for any execution of this frozen rule, independent of the substrate.",
+      "evidence_ref": "derived/analysis.json#falsifier.attainability_audit"
+    },
+    {
+      "id": "VN-08",
+      "severity": "medium",
+      "note": "The frozen break_even formula ceil(re_acq / (re_deriv - re_acq)) has no guard against a near-degenerate denominator. For root-hosted items where re-acquisition and re-derivation are the same single GET differing by ~13 tokens of header jitter, it returns break-even counts spanning 1 to 34,299 for economically identical items, and the class-median value (1) disagrees with the median item-level value (1256) for the same class.",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "VN-09",
+      "severity": "medium",
+      "note": "The site-clustered bootstrap CI95 is degenerate because every class is perfectly separated at the site level (gitlab/wikipedia/bitbucket/httpbin each contain only request_scoped or only session_invariant items), so resampling sites collapses to the two extreme proportions. The intervals (0.045-0.759 for session_invariant, 0.241-0.955 for request_scoped) are reported for contract compliance but carry no useful precision.",
+      "evidence_ref": "derived/analysis.json#class_distribution"
+    },
+    {
+      "id": "VN-10",
+      "severity": "medium",
+      "note": "Substrate drift is not a producer defect but limits what the pool can say: the prereg-named GitLab control anchor returns HTTP 403 credential-free, the prereg-named httpbin sitemap anchor returns 404, and 4 of 6 roots redirect off their nominal host, so 'site' is not a stable unit here.",
+      "evidence_ref": "raw/controls_verification.jsonl"
+    },
+    {
+      "id": "VN-11",
+      "severity": "low",
+      "note": "tiktoken 0.14.0 is provisioned in the workflow image but is NOT declared in pyproject.toml, and the frontier lane may not edit pyproject.toml. All token figures are therefore 'environment-provisioned tokenizer', not 'declared pure-stdlib run' as spec.measurement_validity.substrate requires.",
+      "evidence_ref": "pyproject.toml"
+    },
+    {
+      "id": "VN-12",
+      "severity": "low",
+      "note": "Storage-format deviation: response bodies are persisted as gzip files at raw/responses_cache/<sha256>.json.gz where <sha256> is the SHA256 of the UNCOMPRESSED body bytes, so the content address is still verifiable; the gzip wrapper is not the frozen 'raw/<hash>.json' layout.",
+      "evidence_ref": "raw/responses_cache"
+    },
+    {
+      "id": "VN-13",
+      "severity": "medium",
+      "note": "Two earlier complete passes of the same frozen design were discarded and their raw evidence deleted: (1) a pass in which relative hrefs were matched only against absolute designated URLs, and (2) a pass in which item identity (ctrl_id, element_type, element_name) collided between the prereg-named and parent-cited GitLab anchors and silently discarded the prereg-named anchor's observations. Both defects are recorded in the shipped executor as implementation notes IC-09 and IC-10. Only the final pass is authoritative, so no statement in this packet depends on the discarded passes; however this is a third execution of the same frozen question.",
+      "evidence_ref": "derived/items.json#implementation_choices"
+    },
+    {
+      "id": "VN-14",
+      "severity": "medium",
+      "note": "In one discarded pass (about 20 minutes before the shipped pass) the GitLab favicon was byte-unstable across sessions and was therefore classified request_scoped; in the shipped pass it was byte-stable and classified session_invariant. The designated 'known stationary' asset class is thus not robust at the scale of minutes. The discarded pass evidence is not retained, so this is an unreplicated informational observation, not a result.",
+      "evidence_ref": null
+    },
+    {
+      "id": "VN-15",
+      "severity": "low",
+      "note": "request.json records base_sha 0a3b7f96f488b6da77728973ea1fcc6caaa17e38 (an ancestor of the execution HEAD 0b89abe47cf4710dff8c4736d08fee9e671d6f73). Execution used the working tree with the two untracked frontier-lane executor/analyzer files; no committed revision contains them.",
+      "evidence_ref": "request.json#base_sha"
+    },
+    {
+      "id": "VN-16",
+      "severity": "medium",
+      "note": "request.json director_mandate.allocation.question names predecessor EXP-FRONTIER-36314209725, which failed on installation. This packet is the reallocated CONTINUE transaction and carries the same mandate text; the mandate's question is therefore answered by EXP-FRONTIER-37385647440.",
+      "evidence_ref": "request.json#director_mandate"
+    },
+    {
+      "id": "VN-17",
+      "severity": "medium",
+      "note": "3 of 32 admitted items are unclassifiable (gitlab /explore anchor absent, GitLab /users/sign_in HTTP 403, httpbin /date HTTP 404). They are excluded from the class denominator and reported separately rather than being forced into a class.",
+      "evidence_ref": "derived/classification.json"
+    },
+    {
+      "id": "VN-18",
+      "severity": "low",
+      "note": "Every discovered item sits at hop 0 or hop 1 of the frozen crawl, so the re-acquisition/re-derivation contrast exercised here is the extreme-favourable case for handle persistence: the target is one or two GETs from the root. No item at depth >= 2 was admitted, so the cost argument is untested at real depths.",
+      "evidence_ref": "derived/costs.json"
+    },
+    {
+      "id": "VN-19",
+      "severity": "decisive",
+      "note": "The frozen break_even_reuse_count metric silently requires that the re-acquisition and re-derivation medians be taken over the SAME item set. The frozen crawl bounds break that precondition: 11 of 32 items were never reached, and they are the cheap ones. For session_invariant the resulting class number (2 reuses) is an artifact of a 12-item re-acquisition median against a 7-item re-derivation median; every individual item in that class has infinite break-even. The economically meaningful reading is the item-level one, and at item level the entire invariant class has NO amortization surface.",
+      "evidence_ref": "derived/costs.json"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "UR-01",
+      "question": "Does a genuinely session_scoped class exist anywhere on the credential-free public HTTP substrate class?",
+      "why_unresolved": "0 of 29 items classified session_scoped, but the two server-minted CSRF handles that the parent packet reported as session-scoped were observed to change between two GETs one second apart inside one session, so this run cannot separate 'no session_scoped class exists' from 'the frozen rule's body-hash channel masks it'."
+    },
+    {
+      "id": "UR-02",
+      "question": "What are the true class proportions of this object class, on the frozen pool and beyond?",
+      "why_unresolved": "The frozen (value, page-hash) rule and the disclosed value-only rule disagree by 12 of 29 items, and the frozen pool is hand-picked, so neither the class proportions nor their ordering is identified by this design."
+    },
+    {
+      "id": "UR-03",
+      "question": "Are any items time_scoped or rotating?",
+      "why_unresolved": "Both classes are unreachable under the frozen rule order (VN-05). A correctly ordered rule plus a declared per-session sampling schedule would be required."
+    },
+    {
+      "id": "UR-04",
+      "question": "Would the 3 unclassifiable items classify on a browser or credential-bearing substrate?",
+      "why_unresolved": "The frozen substrate is GET-only and credential-free by mandate, and this lane may not substitute a parent-cited URL for the prereg-named anchor, so the drift was recorded rather than repaired."
+    },
+    {
+      "id": "UR-05",
+      "question": "Is the amortization question answerable at all with an instrument whose falsifier can trigger?",
+      "why_unresolved": "The frozen falsifier's accept region is empty (VN-07). A falsifiable version needs a re-derivation baseline that is strictly more expensive than re-acquisition by construction, e.g. an adversarial crawl of the full site with no path memory, or a cost model that charges for re-deriving the whole observation procedure rather than re-walking a known shortest path."
+    },
+    {
+      "id": "UR-06",
+      "question": "What is the unconditional re-derivation cost of the 11 items not reached within the frozen crawl bounds?",
+      "why_unresolved": "The frozen crawl depth/width bounds never reached their pages, so the cost cell is genuinely unmeasured and is reported as null rather than imputed."
+    },
+    {
+      "id": "UR-07",
+      "question": "Do the KNOWN_STATIONARY_CONTROL anchors behave as specified on a stable or credential-bearing substrate?",
+      "why_unresolved": "Only 3 of 5 anchors are testable and 1 of those 3 is not stationary, so the control arm cannot be re-run to PASS without either a different anchor set or a different substrate."
+    }
+  ],
+  "decision_rule_application": {
+    "frozen_branch": "CONTROLS_FAIL",
+    "frozen_mapping": {
+      "CONTROLS_FAIL": "status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE",
+      "FALSIFIER_TRIGGERED": "status=COMPLETE, outcome=FALSIFIES (bounded to HANDLE PERSISTENCE on credential-free HTTP substrate)",
+      "FALSIFIER_NOT_TRIGGERED": "status=COMPLETE, outcome=SUPPORTS (stationarity distribution measurable, finite break-even exists for at least one class)",
+      "MIXED": "status=COMPLETE, outcome=MIXED (some classes have finite break-even, others do not; or controls pass but classification ambiguous)"
+    },
+    "controls_pass": false,
+    "falsifier_triggered": false,
+    "note": "status and outcome are the frozen mapping applied to the analyzer's booleans. No alternative branch was selected, and no promotion is claimed."
+  },
+  "claim_ceiling_producer": "This transaction supports no claim update. Its only admissible conclusion is a measurement-validity finding about the instrument, plus three substrate observations that are consistent with, and bounded by, the inherited parent handoff: (1) on the credential-free GET-only substrate the objects a persistent agent would replay across episodes are dominated by objects that are already stale within a single episode; (2) the class of objects that ARE byte-stable across episodes carries no amortization surface at all, because re-acquiring them costs exactly what re-deriving them costs; (3) the frozen instrument could not have returned its own positive-negative answer. Do not read the class proportions as Web prevalence and do not read 'request_scoped' as a mechanism claim until the page-hash versus value channel ambiguity (VN-06) is resolved.",
+  "evidence_refs": [
+    "derived/analysis.json",
+    "derived/classification.json",
+    "derived/classification_sensitivity.json",
+    "derived/costs.json",
+    "raw/controls_verification.jsonl",
+    "raw/http.jsonl",
+    "raw/observations.jsonl",
+    "raw/session_timing.jsonl",
+    "../EXP-FRONTIER-36306528608/handoff.json",
+    "../EXP-FRONTIER-36314209725/failure.json"
+  ]
+}

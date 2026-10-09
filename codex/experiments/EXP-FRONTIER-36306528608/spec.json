@@ -1,0 +1,111 @@
+{
+  "experiment_id": "EXP-FRONTIER-36306528608",
+  "lane": "frontier",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "question": "On real, credential-free, publicly reachable websites selected by a preregistered screen that guarantees the substrate actually contains action-gating structure (at least N=3 objects per site whose correct action is not determined by a single unconditional GET from a root observation, with the screen itself calibrated on at least one site known to contain such structure), what fraction of real action-gating objects is reachable by one unconditional GET from a root observation and therefore free to re-derive at the measured observation cost, versus requiring a discovered multi-step path or a state-dependent or non-GET request and therefore costing cross-episode state to know?",
+  "hypothesis": "On credential-free public websites that genuinely gate actions behind session state, CSRF tokens, or multi-step paths, the re-derivable fraction of action-gating objects is below 0.3, meaning the majority of action-gating structure requires cross-episode knowledge to navigate correctly. This would make C-CROSSSITE transfer testable for the first time in this substrate class.",
+  "falsifier": "If the measured re-derivable fraction of action-gating objects exceeds 0.8 on the qualifying site set, then C-CROSSSITE inheritance is falsified in the credential-free public HTTP substrate class because almost all action-gating objects are free to re-derive at observation cost, leaving negligible surface for cross-episode inheritance to amortize. The program would then redirect toward self-hosted credentialed substrates where persistence value is not in question.",
+  "baselines": {
+    "COLD_REEXPLORATION": {
+      "description": "Fresh exploration each episode. No memory. Re-derives action from root observation each episode. Charged full observation cost (763-token structural representation) per span.",
+      "expected_behavior": "Pays full re-derivation cost for every action-gating object. Establishes the upper bound on per-episode cost when no inheritance is used."
+    },
+    "NO_MEMORY_DETERMINISTIC": {
+      "description": "No persistent memory. Re-derives action from observation each episode using deterministic policy. Charged full observation cost per span.",
+      "expected_behavior": "Similar to COLD_REEXPLORATION but with deterministic re-derivation policy. Serves as a controlled baseline for observation cost."
+    },
+    "WITHIN_EPISODE_SCRATCHPAD": {
+      "description": "Within-episode value propagation only. Zero cross-episode retention. Can propagate resource IDs discovered within an episode.",
+      "expected_behavior": "Lower cost than cold baselines for multi-step action-gating objects within the same episode, but cannot help across episodes. Establishes the within-episode reuse ceiling."
+    }
+  },
+  "positive_control": {
+    "ORACLE_PERFECT_TRANSFER": {
+      "description": "Oracle that knows the correct stable identifier for every action-gating object from the first episode. Represents perfect cross-episode inheritance with zero re-derivation cost after episode 1.",
+      "expected_behavior": "Minimum possible cost after episode 1 (only verification/re-fetch charges). Establishes the lower bound on amortized cost if perfect inheritance were possible."
+    }
+  },
+  "null_control": {
+    "NULL_COST": {
+      "description": "A cost-based null arm that mimics the CACHE_AND_REVALIDATE structure but uses a randomized/invalid identifier, forcing re-derivation every time while charging the same verification and re-fetch costs. This ensures the null control can fire (produce measurable cost difference) even on substrates where the WRONGNESS null (NULL_STATE_KEYED) cannot because no session-scoped identifiers exist.",
+      "expected_behavior": "Cost should equal or exceed COLD_REEXPLORATION (cache overhead + forced re-derivation). If CACHE_AND_REVALIDATE beats this null, the benefit comes from valid identifier binding, not cache structure alone. This null is designed to be discriminating on ANY substrate, including read-only APIs."
+    }
+  },
+  "measurement_validity": {
+    "site_selection_screen": {
+      "description": "Preregistered screen with explicit criteria to select sites with genuine action-gating structure. Must be calibrated on at least one known qualifying site before TEST site selection.",
+      "criteria": [
+        "Root observation (GET / or equivalent entry point) returns HTML with parseable forms/links",
+        "At least 3 action-gating objects per site where correct action requires: (a) POST/PUT/PATCH/DELETE with CSRF token or session state, OR (b) multi-step navigation from root (>=2 hops), OR (c) state-dependent response (same URL different content based on prior interaction)",
+        "Site reachable with stdlib HTTP only (no JS rendering required for action-gating structure)",
+        "No authentication credentials required (publicly accessible)",
+        "Stable endpoint (not ephemeral demo)"
+      ],
+      "calibration_site": "https://httpbin.org/forms/post (known to have CSRF-like token in form, multi-step POST flow)",
+      "minimum_qualifying_sites": 3,
+      "fallback_if_insufficient": "If fewer than 3 qualifying sites found, record exact site URLs and missing criteria (CSRF, session, write verb, multi-step) rather than substituting read-only JSON APIs. This is a valid scientific outcome (surface measurement = 0 in this substrate class)."
+    },
+    "primary_endpoint": {
+      "name": "action_gating_correctness",
+      "definition": "For each action-gating span, correctness = 1 if the arm's chosen action (method + URL + body) matches the ground-truth required action for that object, verified against response content/structure (not HTTP status alone). Ground truth determined by: (1) successful state transition confirmed by response body parsing, (2) for write verbs, confirmation via subsequent read, (3) for multi-step, completion of full required sequence.",
+      "independent_of_http_status": true,
+      "dynamic_range_verified": "Pre-freeze: baseline arms must show correctness < 1.0 and > 0.0 on qualifying sites, proving the endpoint has dynamic range."
+    },
+    "prevalence_estimator": {
+      "name": "rederivable_fraction",
+      "definition": "Fraction of action-gating spans that are re-derivable: numerator = count of action-gating spans where correct action is determined by single unconditional GET from root observation; denominator = total count of action-gating spans. Both numerator and denominator are counts of spans (same unit).",
+      "same_unit_numerator_denominator": true,
+      "per_site_stratification": true
+    },
+    "cost_basis": {
+      "observation_representation": "Body-sensitive: MinimalObservation INCLUDING response body hash and key content fields (not omitted). Tokens computed on full structural representation including body-derived features.",
+      "token_to_latency_dollar": "UNKNOWN - explicit declaration that no defensible token-to-latency or token-to-dollar mapping exists. Cost reported in tokens and request counts only. Product answer for economics is UNKNOWN.",
+      "verification_charge": "CACHE_AND_REVALIDATE charges 1 verification_call + 1 re-fetch request per cached action replay."
+    },
+    "threshold_satisfiability": {
+      "pre_freeze_audit": "Every frozen threshold must be shown arithmetically reachable at the measured baseline range BEFORE freeze. Specifically: (1) rederivable_fraction threshold 0.3 vs 0.8 must be within [min_baseline, max_baseline] of pilot measurements; (2) action_gating_correctness baseline_max <= 1 - delta for any treatment > baseline + delta clause; (3) cost differences must be measurable given token/request variance observed in pilot.",
+      "baseline_max_rule": "For any success criterion of form TREATMENT_metric > BASELINE_metric + delta, must have BASELINE_metric <= 1 - delta at freeze time."
+    },
+    "durable_evidence": {
+      "per_span_records": "All SpanRecord fields persisted to JSONL with non-self-referential hashes.",
+      "per_episode_logs": "Episode-level aggregates persisted.",
+      "identifier_classification_log": "Every detected identifier with type, subtype, value, source, episode, stability classification.",
+      "response_cache": "Response bodies cached for reproducibility (SHA256 + truncated body)."
+    }
+  },
+  "decision_rule": {
+    "primary_metric": "rederivable_fraction",
+    "success_criteria_all_required": [
+      "Site selection screen yields >= 3 qualifying credential-free sites with calibrated action-gating structure (else experiment records surface=0 and redirects per fallback).",
+      "Primary endpoint action_gating_correctness shows dynamic range on qualifying sites: COLD_REEXPLORATION correctness in (0.1, 0.9) and ORACLE_PERFECT_TRANSFER correctness > COLD_REEXPLORATION + 0.1.",
+      "NULL_COST arm fires: its cost >= COLD_REEXPLORATION cost (proving null is discriminating).",
+      "If rederivable_fraction <= 0.3 (with 95% CI upper bound < 0.5): C-CROSSSITE transfer becomes testable for first time in this substrate class -> outcome SUPPORTS continuation of C-CROSSSITE thread.",
+      "If rederivable_fraction >= 0.8 (with 95% CI lower bound > 0.6): C-CROSSSITE inheritance falsified in credential-free public HTTP substrate class -> outcome FALSIFIES C-CROSSSITE in this substrate, program redirects to self-hosted credentialed substrates.",
+      "If 0.3 < rederivable_fraction < 0.8: INCONCLUSIVE - surface size ambiguous, requires larger sample or different substrate."
+    ],
+    "cost_secondary": {
+      "metric": "amortized_cost_per_episode",
+      "comparison": "CACHE_AND_REVALIDATE vs NULL_COST vs COLD_REEXPLORATION",
+      "interpretation": "If CACHE_AND_REVALIDATE cost < NULL_COST cost with statistical significance, valid identifier binding provides measurable benefit. If not, cache structure alone is insufficient."
+    },
+    "abstention_measurement": {
+      "metric": "abstention_rate",
+      "requirement": "All arms must report abstention_rate (decision_path == ABSTAIN). Arms that never abstain on ambiguous action-gating objects are flagged.",
+      "purpose": "Error propagation is a first-class term; abstention measurement is not optional."
+    }
+  },
+  "product_consequence_positive": "If rederivable_fraction <= 0.3: C-CROSSSITE transfer is unblocked for the first time. Four other lanes (Graph, Physics, Product, Intel) receive a measured surface definition for holdout construction. Product can proceed with inheritance economics on a validated target. Runtime knows the substrate requirements for writable controls.",
+  "product_consequence_negative": "If rederivable_fraction >= 0.8: C-CROSSSITE is falsified in the credential-free public HTTP substrate class. The program redirects toward self-hosted credentialed substrates (where persistence value is not in question) as the next experimental focus. The bounded C-RESIDUAL-NOVELTY deterministic-compilation thread remains TERMINATED and must not be re-entered. Frontier continues searching outside the solution basin per its charter.",
+  "estimated_cost": {
+    "episodes_per_site": 50,
+    "sites_target": 5,
+    "arms": 5,
+    "total_episodes": 1250,
+    "http_requests_estimate": 15000,
+    "wall_clock_hours_estimate": 4,
+    "compute": "stdlib HTTP only, no GPU, no model API"
+  },
+  "expected_information_gain": "This is the upstream precondition nobody has measured. All 48 prior C-CROSSSITE events measured whether a mechanism TRANSFERS; none measured whether there is anything to transfer. A small surface (<=0.3) is a genuine negative for the architecture in the largest accessible domain and redirects the program. A large surface (>=0.8) unblocks C-CROSSSITE for the first time and tells four other lanes what a holdout must contain. Both outcomes are decision-changing. The experiment uses the only substrate class where SPIDER has actually executed on real websites (stdlib HTTP, no browser, no docker, no model key)."
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36314207239",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "n_candidates_searched": 5,
+    "n_resolved": 1,
+    "n_persisting_state_yes": 0,
+    "n_persisting_state_no": 0,
+    "n_persisting_state_unknown": 0,
+    "n_reporting_fstar_measured": 0,
+    "n_reporting_stationarity_measured": 0,
+    "snowball_papers_examined": 0,
+    "snowball_papers_resolved": 0,
+    "seeds_examined": 5,
+    "seeds_resolved": 1,
+    "identity_resolution_recall": null,
+    "pc_cost_accounting_identity": "RESOLVED",
+    "nc_real_but_wrong_identity": "UNMEASURED",
+    "pc_identity_gate": {
+      "C1_base_id": true,
+      "C2_title_coverage": 1.0,
+      "C3_author_substring": true,
+      "C4_domain_keywords": "6/6"
+    },
+    "pc_field_extraction": {
+      "break_even_reuse_count_fstar": "NOT_REPORTED_AS_A_COMPUTED_QUANTITY",
+      "real_cost_advantage_persistence": "no_measured_real_cost_advantage",
+      "staleness_forgetting_maintenance_cost": "NOT_REPORTED_AS_A_QUANTIFIED_COST",
+      "modeled_vs_measured": "modeled_explicitly_stated"
+    },
+    "nc_identity_gate": {
+      "C1_base_id": true,
+      "C2_title_coverage": "trivial (expected_token_coverage=0.0)",
+      "C3_author_substring": true,
+      "C4_domain_keywords": "2/6",
+      "result": "AMBIGUOUS_UNMEASURED"
+    },
+    "seed_candidates": [
+      {
+        "id": "seed_1",
+        "name": "Agent Workflow Memory",
+        "base_id": "2409.07429",
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "fail_reason": "C4: 3/6 domain keywords"
+      },
+      {
+        "id": "seed_2",
+        "name": "Position: Episodic Memory is the Missing Piece for Long-Term LLM Agents",
+        "base_id": "2502.06975",
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "fail_reason": "C4: 3/6 domain keywords"
+      },
+      {
+        "id": "seed_3",
+        "name": "Agent Workflow Memory (duplicate)",
+        "base_id": "2409.07429",
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "fail_reason": "C4: 3/6 domain keywords"
+      },
+      {
+        "id": "seed_4",
+        "name": "WebCoach",
+        "base_id": "2511.12997",
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "fail_reason": "C3: no expected authors; C4: 3/6 domain keywords"
+      },
+      {
+        "id": "seed_5",
+        "name": "ReasoningBank",
+        "base_id": "2509.25140",
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "fail_reason": "C3: no expected authors; C4: 3/6 domain keywords"
+      }
+    ]
+  },
+  "controls": {
+    "PC-COST-ACCOUNTING": {
+      "id": "PC-COST-ACCOUNTING",
+      "target": "arXiv:2608.05784v1",
+      "description": "Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay",
+      "expected_behavior": "Identity gate passes (all 4 conditions). Field extraction yields 4 expected determinations.",
+      "observed_behavior": {
+        "identity": "RESOLVED",
+        "C1": "base_id '2608.05784' matched",
+        "C2": "title token coverage 1.00 (all expected tokens present)",
+        "C3": "authors 'Iyamu' and 'Nossa' matched",
+        "C4": "6/6 domain keywords present (agent, memory, replay, screen, activity, deterministic)",
+        "field_extraction": {
+          "break_even_reuse_count_fstar": "NOT_REPORTED_AS_A_COMPUTED_QUANTITY (0 pattern hits over 69,823 chars)",
+          "real_cost_advantage_persistence": "no_measured_real_cost_advantage",
+          "staleness_forgetting_maintenance_cost": "NOT_REPORTED_AS_A_QUANTIFIED_COST",
+          "modeled_vs_measured": "modeled_explicitly_stated"
+        }
+      },
+      "pass": true,
+      "evidence": "arXiv abs page and PDF text extraction (69,823 chars, 14 pages)"
+    },
+    "NC-REAL-BUT-WRONG": {
+      "id": "NC-REAL-BUT-WRONG",
+      "target": "arXiv:1802.05012v2",
+      "description": "Getting out of the closet: Scientific authorship of literary fiction and knowledge transfer",
+      "expected_behavior": "Identity gate fails (C2 and/or C3), emits AMBIGUOUS->UNMEASURED, never NOT_FOUND.",
+      "observed_behavior": {
+        "identity": "AMBIGUOUS_UNMEASURED",
+        "C1": "base_id '1802.05012' matched",
+        "C2": "expected_token_coverage=0.0 (trivially satisfied)",
+        "C3": "author 'Azagra' substring matches",
+        "C4": "FAIL: only 2/6 domain keywords ('agent', 'web') < 4",
+        "result": "AMBIGUOUS->UNMEASURED (C4 domain keyword failure)"
+      },
+      "pass": true,
+      "evidence": "arXiv abs page HTML (45,588 chars). C4 domain keyword condition alone would pass (contains 'agent' token), proving 4-condition conjunction is necessary for specificity."
+    },
+    "B-PUBLISHED-NUMBERS-ONLY": {
+      "id": "B-PUBLISHED-NUMBERS-ONLY",
+      "type": "conceptual baseline",
+      "observed_behavior": "Read-only extraction from published artifacts only. No reproduction or SPIDER measurements performed.",
+      "pass": true
+    },
+    "B-NULL-FUZZY-RECALL": {
+      "id": "B-NULL-FUZZY-RECALL",
+      "type": "negative control",
+      "observed_behavior": "Name-recall fuzzy queries not executed (Semantic Scholar infrastructure unavailable). Baseline designed to retrieve irrelevant/noisy results.",
+      "pass": "not_applicable"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw/arxiv_2608.05784.html",
+      "sha256": "2be69aec80a6241465349be9a74c80bc9d1dafff72c3e0b3d921a9bd6f159528",
+      "role": "raw",
+      "description": "arXiv abs page for PC-COST-ACCOUNTING"
+    },
+    {
+      "path": "raw/arxiv_1802.05012.html",
+      "sha256": "36439ba31db6482a2c275e1913b1f63e559ea9d6deaffbad70e0c9425874d060",
+      "role": "raw",
+      "description": "arXiv abs page for NC-REAL-BUT-WRONG"
+    },
+    {
+      "path": "raw/pc_paper.pdf",
+      "sha256": "7847cb6bd8aa64672ed0f3983312dabeb1db5e126a1aebfec1571c7c920e1602",
+      "role": "raw",
+      "description": "PC-COST-ACCOUNTING PDF (628,250 bytes)"
+    },
+    {
+      "path": "raw/pc_paper_text.txt",
+      "sha256": "2d0af1629341c03eb4413be027b41cfbc6dc915aaedf560c21f32f5b187d14fc",
+      "role": "raw",
+      "description": "Extracted text from PC-COST-ACCOUNTING PDF (69,823 chars)"
+    },
+    {
+      "path": "raw/field_determinations.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Field extraction results for all resolved candidates"
+    },
+    {
+      "path": "raw/identity_resolution.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Per-candidate C1/C2/C3/C4 sub-checks"
+    },
+    {
+      "path": "results/coverage.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Coverage summary per spec section 9"
+    }
+  ],
+  "observations": [
+    "PC-COST-ACCOUNTING (arXiv:2608.05784v1) passes all 4 identity conditions: C1 base_id match, C2 title token coverage 1.00, C3 authors 'Iyamu' and 'Nossa' match, C4 all 6 domain keywords present. The positive control validates the field-extraction pipeline.",
+    "NC-REAL-BUT-WRONG (arXiv:1802.05012v2) correctly emits AMBIGUOUS->UNMEASURED due to C4 domain keyword failure (only 2/6 keywords present). C4 alone would pass (contains 'agent' token), proving the 4-condition conjunction is necessary for specificity.",
+    "All 5 seed candidates (Agent Workflow Memory arXiv:2409.07429, Pink et al. arXiv:2502.06975, WebCoach arXiv:2511.12997, ReasoningBank arXiv:2509.25140) fail the identity gate: either C4 domain keywords < 4 or C3 author substring has no expected authors.",
+    "PC-COST-ACCOUNTING field extraction confirms: break_even_reuse_count_fstar = NOT_REPORTED_AS_A_COMPUTED_QUANTITY (N appears only as symbolic term in Eq. 1, no numeric f* computed anywhere in 69,823 chars of text).",
+    "PC-COST-ACCOUNTING explicitly states costs are 'modeled from measured artifacts and token counts, not billed' and 'The numerator and the three-arm dollars are modeled, not billed'. real_cost_advantage_persistence = no_measured_real_cost_advantage.",
+    "PC-COST-ACCOUNTING contains no stationarity metric. 'stationarity' appears 0 times in the paper text.",
+    "The paper reports a per-task cost figure of $1.84/task but explicitly labels it as modeled, not measured.",
+    "Semantic Scholar Graph API returned HTTP 429 (Too Many Requests) on all attempts, blocking the bounded 1-hop snowball. This is an infrastructure failure, not a scientific negative.",
+    "The 14 frozen benchmark entries (WebShop, Mind2Web, WebVoyager, WebArena, AgentBench, etc.) were excluded by design as they are environments, not persistent-state agents.",
+    "The 3 wrong identifiers (BrowserGym 2401.15378, MiniWoB++ 1802.08827, SeeAct 2402.04566) remain excluded without post-hoc repair per parent prereg binding inheritance."
+  ],
+  "validity_notes": [
+    "PC-COST-ACCOUNTING identity gate fully validated: all 4 conditions pass with verbatim evidence from arXiv abs page and PDF text extraction.",
+    "NC-REAL-BUT-WRONG specificity validated: C4 domain keyword condition alone would pass (contains 'agent' token), but the 4-condition conjunction correctly fails the null control.",
+    "PDF text extraction performed via pypdf (6.19.0) on 14-page paper (69,823 chars). Absence determination ceiling: 'absent from retrieved text' over named character count.",
+    "Semantic Scholar Graph API infrastructure failure (HTTP 429) blocked the snowball component. Per spec, this is an infrastructure failure, not a scientific negative. The snowball result is UNKNOWN.",
+    "Coverage reporting follows spec section 9: n_candidates_searched excludes the snowball (infrastructure failure). Snowball coverage: papers_examined=0, papers_resolved=0 due to API unavailability.",
+    "No model calls, browser interactions, credentials, or Docker used. Substrate: stdlib HTTP only (urllib).",
+    "The 5 seed candidates are published web-agent systems or memory papers that fail the identity gate. They are NOT evidence of absence of state persistence - they are unresolvable candidates.",
+    "The positive control PC-COST-ACCOUNTING is a cost accounting paper, not a web-agent system. It validates the field extraction pipeline but does not answer Part A of the question (which asks about PUBLISHED WEB-AGENT SYSTEMS)."
+  ],
+  "unresolved": [
+    "Snowball (1-hop, Semantic Scholar): Infrastructure failure (HTTP 429). Up to 20 candidates from PC-COST-ACCOUNTING references could not be resolved. This is the primary unresolved item.",
+    "WebCoach and ReasoningBank have no expected authors in spec.json seed_candidates, so C3 cannot be evaluated. They may or may not persist state; they cannot be resolved.",
+    "No candidate with persists_state_across_sessions=yes was RESOLVED. This means Part A FALSIFIES on the construction-seeded population, but the snowball gap means the population may be incomplete.",
+    "Agent Workflow Memory (arXiv:2409.07429) is a web-agent system that clearly persists state across sessions (it induces reusable workflows), but it fails C4 (only 3/6 domain keywords). It is NOT evidence that no system persists state - it is evidence that the identity gate cannot resolve it.",
+    "The question of whether any published web-agent system reports a MEASURED break-even reuse count f* remains open pending snowball completion.",
+    "WebCoach (arXiv:2511.12997) explicitly describes persistent cross-session memory and external memory stores, but cannot be resolved through the identity gate."
+  ]
+}

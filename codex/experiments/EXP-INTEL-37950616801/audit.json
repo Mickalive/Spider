@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37950616801",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Gate 0 (measurement validity) passes completely: evidence sha256 (e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf), byte count (70219), char count (69607), and line count (1447) all match spec.json; PC-EXTRACT recovers all 34 frozen anchors at correct line numbers; PC-READING derives the OCR linearization rule (stacked numerator-line over denominator-line = division) from Eqs. (2)-(3) and selects VAR-LIT as primary reading; PC-ALGEBRA reproduces hand-computed f*=2.0 with 0.0 relative error and both implementations agree; NC-DIVERGENT fires both the g<=0 divergent branch and the f*>N_reach unreachable branch; NC-CONVENTION shows material difference between AMORTIZE-ONCE (f*=20.73) and PER-REUSE (NO_FSTAR_DEGENERATE) on the same cell; the two regime table implementations (direct evaluator vs closed-form w/(h*g)) agree at all 1,680 primary cells and all 17,280 sensitivity cells with zero mismatches. No measurement invalidity triggered.",
+    "The OCR ambiguity (Cmiss/p vs Cmiss*p; Cwrite/N vs Cwrite*N) is correctly preserved as two explicit readings (VAR-LIT primary, VAR-MAN secondary per mandate literal) and never silently collapsed. The reading divergence factor of 6.69x at the test cell (p=0.5, q=0.82) confirms the choice is material, justifying PC-READING as a gate.",
+    "The write convention ambiguity (AMORTIZE-ONCE primary vs PER-REUSE secondary) is correctly preserved and NC-CONVENTION certifies they differ materially (status differs at w=1.0; ratio 2.89x at w=1/60).",
+    "The unpublished base success rate p is swept over {0.5, 0.8, 1.0} and labeled as such; g remains positive at the published q=0.82 across the p sweep for both readings, so the classification is not an artifact of the p=1.0 assumption.",
+    "Modeled vs measured labels are preserved exactly as the artifact states them: R_inject/R_info numerators, the three-arm dollar table, and the all-fleet ceiling are explicitly 'modeled, not billed' (lines 1160-1168). No modeled quantity is reported as measured.",
+    "Scope is correctly bounded to the single hash-pinned artifact (arXiv:2608.05784v1 text layer), not the literature class. The inherited non-adoption bar is preserved: no quantity from this artifact enters any SPIDER cost model, break-even derivation, product plan, or investor-facing material."
+  ],
+  "baseline_findings": [
+    "B-PUBLISHED-NUMBERS-ONLY (empty baseline by construction): confirms the artifact publishes ZERO break-even/payback/f* terms (0 hits for 'break-even', 'breakeven', 'break even', 'payback', 'f*', 'stationar'; 1 hit for 'amortiz' at line 228, 1 hit for 'reuse count' at line 237 which is the Eq. (1) definition of N). Any reportable f* must be derived, not read.",
+    "B-FLEET-CEILING (strong baseline): the artifact's strongest published economics quantity, the all-fleet ceiling h(1-1/R_info) = 0.07678 (7.7%), is a saving fraction with no Cwrite term and no cold arm. Inversion into a break-even reuse count correctly fails. This prevents mislabeling a saving rate as a break-even count.",
+    "Both baselines are appropriate and correctly executed. They bound the claim to 'derivable from the artifact' not 'published by the artifact' and establish the artifact's headline economics are saving rates, not break-even counts."
+  ],
+  "recomputed_metrics": {
+    "M-FSTAR": {
+      "artifact_internal_reportable": null,
+      "artifact_internal_w_commensurable": false,
+      "numeric_f_star_reportable": false,
+      "primary_class": "FINITE_NOT_EVALUABLE",
+      "reason": "no artifact-internal commensurable Cwrite/Cmiss anchors a numeric f*; p, Cverify, Cwrong and capture-inclusive Cwrite are unpublished in commensurable units",
+      "conditional_swept_w_min_positive": 0.022632567434677696,
+      "conditional_swept_w_max_positive": 238.58566418272488,
+      "published_point_estimates_VAR_LIT_AMORTIZE_ONCE_h077_q082": {
+        "w=0": 0.0,
+        "w=1/60": 0.34558310236862666,
+        "w=1/343": 0.06045185464174228,
+        "w=1": 20.7349861421176,
+        "w=10": 207.349861421176
+      },
+      "published_point_estimates_VAR_LIT_AMORTIZE_ONCE_h090_q082": {
+        "w=0": 0.0,
+        "w=1/60": 0.29566554313760285,
+        "w=1/343": 0.0517199200823795,
+        "w=1": 17.73993258825617,
+        "w=10": 177.3993258825617
+      }
+    },
+    "M-GSIGN": {
+      "g_VAR_LIT_q082_b0_p1_r1_60_c1": 0.6263333333333332,
+      "g_VAR_MAN_q082_b0_p1_r1_60_c1": 0.6263333333333332,
+      "g_VAR_LIT_q0415_b0_p1_r1_60_c1": -0.17691666666666667,
+      "g_VAR_MAN_q0415_b0_p1_r1_60_c1": -0.17691666666666667,
+      "g_VAR_LIT_q1_b0_p1_r1_60_c1": 0.9833333333333333,
+      "g_VAR_MAN_q1_b0_p1_r1_60_c1": 0.9833333333333333,
+      "note": "g = q*(E_cold_unit - Chit - Cverify) - (1-q)*Cwrong; independent of h and w; E_cold_unit = 1/p (VAR-LIT) or p (VAR-MAN) in Cmiss units"
+    },
+    "M-HSTAR": {
+      "primary_g": 0.6263333333333332,
+      "h_star_by_w": {
+        "0": 0.0,
+        "1/60": 0.00014701601592477488,
+        "1/343": 2.5717087333779864e-05,
+        "1": 0.008820960955486493,
+        "10": 0.08820960955486493
+      },
+      "smallest_published_h_reachable_by_w": {
+        "0": 0.077,
+        "1/60": 0.077,
+        "1/343": 0.077,
+        "1": 0.077,
+        "10": 0.09
+      },
+      "N_reach": 181,
+      "reachable_at_h_le_077_conditional_swept_w": true
+    },
+    "M-REACH": {
+      "primary_class_counts": {
+        "FINITE_NOT_EVALUABLE": 4
+      },
+      "conditional_class_counts_if_swept_w_accepted": {
+        "REACHABLE": 4
+      },
+      "primary_verdict": "FALSIFIES"
+    },
+    "M-TABLE-ROWS": {
+      "primary_regime_rows": 1680,
+      "sensitivity_cells": 17280
+    },
+    "M-PAPER-FSTAR-HITS": {
+      "break-even": 0,
+      "breakeven": 0,
+      "break even": 0,
+      "payback": 0,
+      "f*": 0,
+      "stationar": 0,
+      "amortiz": 1,
+      "reuse count": 1
+    },
+    "M-READING-DIVERGENCE": {
+      "cell": {
+        "p": 0.5,
+        "q": 0.82,
+        "r": 0.016666666666666666,
+        "b": 0.0,
+        "c": 1.0,
+        "h": 0.077,
+        "w": 0.016666666666666666
+      },
+      "VAR-LIT": {
+        "g": 1.446333333333333,
+        "f_star": 0.14965444787984547
+      },
+      "VAR-MAN": {
+        "g": 0.21633333333333327,
+        "f_star": 1.0005402917575494
+      },
+      "factor_VAR_MAN_over_VAR_LIT": 6.685670261941449,
+      "primary_reading_selected": "VAR-LIT"
+    },
+    "M-CONVENTION-DIVERGENCE": {
+      "cell": {
+        "h": 0.077,
+        "q": 0.82,
+        "p": 1.0,
+        "r": 0.016666666666666666,
+        "b": 0.0,
+        "c": 1.0,
+        "w": 1.0
+      },
+      "AMORTIZE-ONCE": {
+        "f_star": 20.7349861421176,
+        "status": "FINITE"
+      },
+      "PER-REUSE": {
+        "f_star": null,
+        "status": "NO_FSTAR_DEGENERATE"
+      },
+      "materially_different": true
+    },
+    "M-ARTIFACT-W-COMMENSURABLE": {
+      "value": false,
+      "adjudication": "compile cost is 0 tokens (degenerate, f*=0, not a positive break-even); capture cost printed only as 9.5GB / ~0.19GB per active day / OCR 96%, never in dollars-per-task commensurable with Cmiss"
+    }
+  },
+  "claim_ceiling": "From the single hash-pinned artifact (arXiv:2608.05784v1, sha256 e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf), a numeric break-even reuse count f* with a stated denominator is NOT derivable using only the artifact's own published values. The primary classification is FINITE_NOT_EVALUABLE (g > 0 at the published q≈0.82, but no artifact-internal commensurable w = Cwrite/Cmiss exists to anchor a numeric f*). The verdict FALSIFIES follows from the frozen decision rule. The conditional REACHABLE branch (if the frozen placeholder w sweep is accepted as a reportable input) is recorded but not adopted. This determination is bounded to this artifact; it is NOT a literature-level negative, does not measure SPIDER's own recurrence, and no quantity from this artifact enters SPIDER economics. The persistence-economics anchor is unavailable by construction FROM THIS ARTIFACT CLASS.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt (sha256 e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf)",
+    "research/experiments/EXP-INTEL-37950616801/raw/spans.json (sha256 e35d38c1d31edb6da7b3d862f07d1a620c1c61c9ac22af3b5d995eaaa8e37e76)",
+    "research/experiments/EXP-INTEL-37950616801/raw/regime_table.json (sha256 278c47b846f581c8da671cc7af66b0af2dacc90640b8bba78d6d7812248c0387)",
+    "research/experiments/EXP-INTEL-37950616801/raw/controls_result.json (sha256 582422f561ddc1d83210def160074f7cee2ed9ed0ce7456c5cfdfdf973656811)",
+    "research/experiments/EXP-INTEL-37950616801/raw/classification.json (sha256 558fe94fefeda8853ca9cab6ca8ca540b4f1e5586a58d0077367398f7401334b)",
+    "research/experiments/EXP-INTEL-37950616801/raw/metrics.json (sha256 01ffd3cb405b3e19aaeca163339b40b63929f1ba6b6a1c8ebf17738f7d9b1a96)",
+    "research/experiments/EXP-INTEL-37950616801/run_determination.py (sha256 d349dc5629c54aab051af5da7f03fcf301036bd19e7041725e6cf042438d3811)",
+    "research/experiments/EXP-INTEL-37950616801/build_result.py (sha256 fac639dd90fe96e11cac60070b44d7b8de07b46ba519f03aac4f799fff743420)"
+  ],
+  "unresolved": [
+    "Whether any OTHER published persistent-state artifact reports Cwrite and Cmiss in commensurable units, which would make a measured f* reportable; not examined here and explicitly out of scope.",
+    "Whether the frozen placeholder w sweep (w in {1/60, 1/343, 1, 10}) should be treated as a legitimate 'explicitly-swept input' for a REACHABLE class or as an external assumption. The primary adjudication treats them as placeholders (not artifact measurements); the conditional branch is recorded for the DIRECTOR to bound. This is the single adjudication that moves the verdict between FALSIFIES and SUPPORTS.",
+    "SPIDER's own first-party marginal recurrence h(N) and write cost Cwrite on the shipped path remain unmeasured.",
+    "Whether the compile 0-token cost and the separately printed capture cost (GB/active-day, OCR duty cycle) can be converted into a commensurable dollar-per-task Cwrite using the artifact's own Sonnet pricing context; the artifact does not do so and this experiment correctly does not adopt external prices."
+  ]
+}

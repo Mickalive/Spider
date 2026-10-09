@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36302980957",
+  "github_run_id": "36302980957",
+  "relevant_commits": [
+    {
+      "repo": "Spider/Spider",
+      "commit": "5fb7064f7a76f505285cf0b50ae6c69770991bb2",
+      "description": "Base commit for experiment"
+    },
+    {
+      "repo": "Spider/Spider",
+      "commit": "7c51a5ed8358",
+      "description": "Experiment execution script"
+    }
+  ],
+  "datasets_fixtures": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/ground_truth_log.jsonl",
+      "description": "Server-side ground-truth transitions with randomized assignment"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/client_observations.jsonl",
+      "description": "Full HTTP request/response pairs"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/preregistered_channels.json",
+      "description": "Channel MIs computed on ground-truth log before freeze"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/case_seeds.json",
+      "description": "Per-case RNG seeds for reproducibility"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/reachability_proof.json",
+      "description": "Pre-freeze reachability calculations"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36302980957/power_calculation.json",
+      "description": "Pre-freeze MDD and power calculations"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/physics/execute_36302980957.py",
+      "role": "experiment_executor",
+      "sha256": "7c51a5ed835878a3d7e26c61605c1418566009bb59a220eb0e60b46ab5f04cf7"
+    },
+    {
+      "path": "research/physics/substrate.py",
+      "role": "substrate_reference"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py",
+      "role": "KB-PHYSICS-CMI_source",
+      "sha256": "19e44d27bc6b089a3a5297396c1bb97887cf6f65c74cf211a4555ab6570bc0e4"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "platform": "linux",
+    "hostname": "runnervmtr4k5"
+  },
+  "commands": [
+    "python3 execute_36302980957.py --exp-id EXP-PHYSICS-36302980957",
+    "verify_freeze.py --experiment EXP-PHYSICS-36302980957"
+  ],
+  "freeze_hashes": {
+    "request.json": "b4b1065359dfc4b55430efee55ce64bf0f416d9c4e81384256eecc1cacb0280b",
+    "spec.json": "3920d0912f5528f7fd6417fc4eed72d5f4169dabdc08f9aa8a36b402662e38cc",
+    "prereg.md": "1ff090680329ca7448db7f9a3cdab57cb2de39a0f814db398360d6eed4132f38"
+  }
+}

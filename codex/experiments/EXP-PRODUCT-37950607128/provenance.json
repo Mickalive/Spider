@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37950607128",
+  "lane": "product",
+  "github_run_id": "37950607128",
+  "git": {
+    "branch": "lab2/product",
+    "head": "98bd80b943778b3895c7a3805dc5bccab7715d01",
+    "pre_execute_sha": "b094d925adf6c1e428272d21fe08d1bf463a4f25",
+    "parent_handoff_experiment": "EXP-PRODUCT-37385633334",
+    "frozen_inputs": {
+      "request.json": "912e0cda01b3262c88214f23615405d84f4107f37a5208c57eb799449d40f57e",
+      "spec.json": "b414b76992fa8af18b7a34c9188fba88a536daa1862c0822716dbcb09b645f77",
+      "prereg.md": "da380b5089f995a10cc845d7df5e05fc4e03950e27e7f7a42f249ed4c497cfa7",
+      "freeze.json": "f3c0c5f657fc7ae7722268de3ca2efe1c34003775985eb98849c12e20349332d"
+    },
+    "kernel_identity": {
+      "pre_repair_kernel_blob_sha1": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "post_repair_kernel_blob_sha1": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "post_repair_kernel_file_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "note": "freeze.json hashes spec.json/prereg.md only; these kernel blob identities are the documented preregistered substitute for a direct code-hash freeze."
+    }
+  },
+  "code_paths": [
+    "src/spider/kernel.py",
+    "src/spider/__init__.py",
+    "tests/test_kernel.py",
+    "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+    "research/experiments/EXP-PRODUCT-37950607128/harness/run_certificate.py"
+  ],
+  "environment": {
+    "python": "3.12.15",
+    "cwd": "/home/runner/work/Spider/Spider",
+    "dependencies": "Python standard library only (re, json, hashlib, subprocess, tempfile, dataclasses, enum)",
+    "model_endpoint": "none required and none used (credential-free experiment)",
+    "model_credentials_present": false,
+    "playwright_installed": false,
+    "httpx_installed": false
+  },
+  "fixtures": {
+    "bank_id": "SYNTH-INDUCTION-BANK-v1",
+    "bank_path": "research/experiments/EXP-PRODUCT-37950607128/raw_fixture/synth_induction_bank.json",
+    "bank_sha256": "89a98e5de84a7f56dc8bdb966695db91aca6333743890be3bdc319df3e8c5427",
+    "families": 6,
+    "held_out_identifiers": ["F1:itm-0009", "F2:epsilon", "F3:tok-99", "F4:res-z", "F5:(tenant t9,item_id i9)", "F6:n-09"],
+    "declared_negative_cases": 24,
+    "seeded_control_trajectory": "deterministic 5-step scripted trajectory with ground-truth counters, reproducible offline"
+  },
+  "commands": [
+    "PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-37950607128/harness/run_certificate.py",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+    "git rev-parse HEAD",
+    "git hash-object src/spider/kernel.py",
+    "sha256sum src/spider/kernel.py research/experiments/EXP-PRODUCT-37950607128/raw_fixture/synth_induction_bank.json research/experiments/EXP-PRODUCT-37950607128/raw_certificate/*.json"
+  ],
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/result.json", "sha256": "5b74afb25541b7eaca118f4157feae3006758d2394a75c4fd122055f90714dea"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/arm_differentiation_certificate.json", "sha256": "27599c917199b4991556ebad44983499fff160920fddfc9221a7122bcfb6d5c7"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/raw_certificate/accounting_fidelity_trace.json", "sha256": "13ac56886b99be71f74450b2bc47261bd410a5d3e45cfee0826330809d7e56b6"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/raw_fixture/synth_induction_bank.json", "sha256": "89a98e5de84a7f56dc8bdb966695db91aca6333743890be3bdc319df3e8c5427"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/freeze.json", "sha256": "f3c0c5f657fc7ae7722268de3ca2efe1c34003775985eb98849c12e20349332d"},
+    {"path": "src/spider/kernel.py", "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"},
+    {"path": "tests/test_kernel.py", "sha256": "89a1b9b9f1abc6367d7cb47de79a56ae8b9709e4452dd36fca51ae8353e00f49"}
+  ],
+  "infrastructure_records": [
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/model_design.json", "sha256": "f9c81aa031234a1b691a2a6cd5d589d3742328ab84c0cb866a9fb5e37e6dce26", "role": "orchestration wrapper design status (success); not an experiment measurement"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/model_execute.json", "sha256": "5a39225836878886a81f63eabf976d72c329c3fdd9f7525413d9579e7c59105f", "role": "orchestration wrapper retry record (attempt 3, exit_code 1, transient); not an experiment measurement"},
+    {"path": "research/experiments/EXP-PRODUCT-37950607128/execution_checkpoint.json", "sha256": "34766611e5aad4c31633ab909be279281e5c4f98ad5b7bef77bc4b00b73eec15", "role": "pre_execute_sha checkpoint"}
+  ],
+  "not_reproduced_here": [
+    "the four-arm cold/instructions/retrieval/SPIDER C-LLM-INHERIT benchmark (no model credential)",
+    "any model, browser or network work",
+    "freshness/delta-repair/cross-site evaluation",
+    "real-site or non-synthetic induction data"
+  ],
+  "freeze_substitute_declaration": "FREEZE CANNOT BIND CODE DIRECTLY: (a) SYNTH-INDUCTION-BANK-v1 is specified in text in prereg.md/spec.json which freeze.json hashes; (b) EXECUTE reconstructed the fixture deterministically and recorded its sha256; (c) pre-repair and post-repair kernel git blob identities are recorded above; (d) the behavioural checks cannot be satisfied without the required behaviour. This substitute is declared here and in result.json.validity_notes as preregistered."
+}

@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36306528608",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "status_rationale": "The execution transaction ran to completion and is not an infrastructure failure: 299 HTTP GET requests were issued to 16 distinct hosts, every frozen candidate site was screened, every derived number is recomputable from persisted raw evidence, and a second independent live screen pass reproduced the first exactly. The FROZEN PRIMARY METRIC is nevertheless not validly measured, for two independent reasons that are themselves recorded raw observations. (1) The frozen calibration gate (prereg 4.1) FAILED: the prereg's own known-positive anchor https://httpbin.org/forms/post does not satisfy the frozen screen, so the screen has no demonstrated true-positive detection power at its own calibration site. (2) The qualifying-site precondition of prereg 4.4/6 (>= 3 qualifying sites) was not met: 0 of 15 frozen candidate sites passed all of C1-C7, so the primary metric rederivable_fraction and every arm were not measured. MEASUREMENT_INVALID is used, not COMPLETE, because the primary endpoint transaction did not validly complete; it is not used to encode a scientific negative.",
+  "outcome_rationale": "Neither H1 (rederivable_fraction < 0.3) nor F1 (> 0.8) is evaluable, because both are defined over a qualifying site set of >= 3 sites and 0 sites qualified. The frozen decision rule's mechanical branch is ROW_1 ('screen yields < 3 qualifying sites'), and that is reported verbatim in metrics.decision_rule_branch_mechanically_selected. ROW_1 was NOT converted into outcome=FALSIFIES, because ROW_1's own stated interpretation in prereg 4.4 -- 're-derivable surface = 1.0 in this substrate class because no action-gating structure exists to require cross-episode state' -- is contradicted by this run's own raw evidence: 25 real action-gating objects were detected on 8 credential-free sites, including 4 server-minted-CSRF-token-gated POST objects on 2 sites, and those tokens took 3 distinct values across 3 independent fresh sessions. Encoding ROW_1 as a falsification would convert a missing measurement into a scientific negative, which research/EXPERIMENT_PACKET.md section 1 forbids. The distinction between the mechanical branch and the packet-compliant status is preserved deliberately so an auditor can recompute either.",
+  "metrics": {
+    "rederivable_fraction": {
+      "value": null,
+      "unit": "dimensionless fraction of action-gating spans",
+      "is_frozen_primary_metric": true,
+      "measured": false,
+      "reason_not_measured": "The frozen primary metric is defined over the qualifying site set (prereg 11 denominator = action-gating spans on qualifying sites). The frozen screen admitted 0 of 15 candidate sites against a frozen minimum of 3, and the frozen calibration gate failed, so there is no qualifying site set on which to compute it. This is null (not measured), not 0.0 and not 1.0.",
+      "frozen_thresholds_not_applied": [
+        "H1: rederivable_fraction <= 0.3 with 95% CI upper bound < 0.5 -> SUPPORTS",
+        "F1: rederivable_fraction >= 0.8 with 95% CI lower bound > 0.6 -> FALSIFIES"
+      ]
+    },
+    "rederivable_fraction_diagnostic_all_reachable_candidates": {
+      "value": 0.04,
+      "unit": "dimensionless fraction",
+      "is_frozen_primary_metric": false,
+      "numerator": 1,
+      "denominator": 25,
+      "numerator_unit": "count of action-gating spans re-derivable from ONE unconditional GET of that site's root observation",
+      "denominator_unit": "count of action-gating spans",
+      "same_unit_numerator_denominator": true,
+      "ci95_site_clustered": [
+        0.0,
+        0.2
+      ],
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 36306528608,
+      "equal_weight_per_site_mean": 0.16666666666666666,
+      "classification_protocol": "prereg section 11, applied deterministically per object and fixed across passes",
+      "why_not_the_primary_metric": "Computed over every action-gating object detected on all reachable frozen candidates, not over a qualifying site set. It uses the frozen prereg-11 protocol and the frozen same-unit numerator/denominator, so it is a valid DIAGNOSTIC, but the frozen thresholds must not be read against it.",
+      "derived_from": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/objects.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/raw/classification.jsonl"
+      ],
+      "equal_weight_per_site_basis": "equal weight over the 6 of 15 frozen candidates that produced at least one action-gating object: postman-echo.com 1/1, reqres.in 0/1, docs.python.org 0/3, en.wikipedia.org 0/8, gitlab.com 0/3, bitbucket.org 0/9"
+    },
+    "qualifying_sites_admitted": {
+      "value": 0,
+      "unit": "sites",
+      "frozen_minimum": 3,
+      "candidates_screened": 15,
+      "candidates_reachable": 14,
+      "candidates_unreachable": 1,
+      "unreachable_urls": [
+        "https://api.publicapis.org"
+      ]
+    },
+    "calibration_site_passes_frozen_screen": {
+      "value": false,
+      "unit": "boolean",
+      "calibration_site": "https://httpbin.org/forms/post",
+      "criteria_passed": {
+        "C1": true,
+        "C2": false,
+        "C3": false,
+        "C4": false,
+        "C5": false,
+        "C6": true,
+        "C7": true
+      },
+      "consequence": "prereg 4.1 permits TEST site screening only if calibration passes. The frozen design nevertheless also requires the 4.4 fallback record, so the full frozen candidate pool was screened and recorded."
+    },
+    "screen_criterion_pass_counts": {
+      "value": {
+        "C1": 13,
+        "C2": 4,
+        "C3": 2,
+        "C4": 4,
+        "C5": 2,
+        "C6": 14,
+        "C7": 14
+      },
+      "unit": "sites passing each criterion, out of 15 frozen candidates",
+      "C1_root_html_with_form_or_actionable_link": [
+        13
+      ],
+      "C2_at_least_3_action_gating_objects": [
+        4
+      ],
+      "C3_nonget_form_with_token_named_input": [
+        2
+      ],
+      "C4_object_at_2_or_more_hops": [
+        4
+      ],
+      "C5_state_dependent_repeat_get": [
+        2
+      ],
+      "C6_stdlib_http_html_reachable": [
+        14
+      ],
+      "C7_no_auth_required": [
+        14
+      ]
+    },
+    "action_gating_objects_detected": {
+      "value": 25,
+      "unit": "objects",
+      "across_sites_with_objects": 8,
+      "by_gating_type": {
+        "csrf_token": 4,
+        "multi_step": 20,
+        "state_dependent": 1
+      },
+      "sites": {
+        "https://en.wikipedia.org": 8,
+        "https://bitbucket.org": 9,
+        "https://docs.python.org": 3,
+        "https://gitlab.com": 3,
+        "https://reqres.in": 1,
+        "https://postman-echo.com": 1,
+        "https://httpbin.org": 0,
+        "https://httpbin.org/forms/post": 0,
+        "https://httpbin.org/cookies/set": 0,
+        "https://httpbin.org/post": 0,
+        "https://jsonplaceholder.typicode.com": 0,
+        "https://developer.mozilla.org": 0,
+        "https://example.com": 0,
+        "https://github.com": 0
+      }
+    },
+    "csrf_token_gated_objects_on_credential_free_sites": {
+      "value": 4,
+      "unit": "objects",
+      "sites": [
+        "https://en.wikipedia.org",
+        "https://gitlab.com"
+      ],
+      "token_field_names_observed": [
+        "authenticity_token",
+        "wpCreateaccountToken",
+        "wpEditToken"
+      ],
+      "hops_from_root": {
+        "https://gitlab.com": 1,
+        "https://en.wikipedia.org": 2
+      }
+    },
+    "server_minted_csrf_tokens_stable_across_independent_sessions": {
+      "value": false,
+      "unit": "boolean",
+      "probed_targets": 2,
+      "sessions_per_target": 3,
+      "distinct_token_values_observed": {
+        "gitlab_trial_registration": 3,
+        "wikipedia_create_account": 3
+      },
+      "per_target": {
+        "https://gitlab.com/-/trial_registrations/new/": {
+          "field": "authenticity_token",
+          "n_distinct_values": 3,
+          "n_sessions": 3
+        },
+        "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount": {
+          "field": "wpCreateaccountToken",
+          "n_distinct_values": 3,
+          "n_sessions": 3
+        }
+      },
+      "operational_meaning": "3 distinct values in 3 independent fresh sessions means the token is minted per request/session and cannot be obtained from one unconditional GET of the root observation. This is the direct measurement of the re-derivability question for these objects.",
+      "measurement_type": "RAW OBSERVATION upgraded to a DERIVED MEASUREMENT by comparison across independent sessions"
+    },
+    "observation_tokens_body_sensitive": {
+      "value": 2278.4,
+      "unit": "cl100k_base tokens per page observation",
+      "n_page_observations": 232,
+      "median": 2120,
+      "min": 151,
+      "max": 10089,
+      "total_tokens_all_observations": 528578,
+      "tokenizer": "cl100k_base",
+      "tokenizer_provisioned_on_substrate": true,
+      "body_sensitive": true,
+      "representation_fields": [
+        "url",
+        "method",
+        "status",
+        "links",
+        "forms",
+        "inputs",
+        "landmarks",
+        "headers",
+        "body_sha256",
+        "key_body_fields",
+        "body_bytes"
+      ],
+      "note": "This is the frozen prereg-8 body-sensitive cost basis measured on the substrate itself, not imported from another packet. It is NOT reconcilable with the parent packet's 119 tokens/observation, which was measured on tiny read-only JSON APIs with a body-omitting representation; see validity_notes."
+    },
+    "identifiers_detected": {
+      "value": 1696,
+      "unit": "identifier instances",
+      "by_type": {
+        "json_id_field": 1643,
+        "url_path_id": 24,
+        "named_token_input": 14,
+        "hidden_form_token": 9,
+        "server_minted_csrf_token": 6
+      },
+      "classified_session_scoped": 23,
+      "sites_with_session_scoped_identifiers": [
+        "https://en.wikipedia.org",
+        "https://gitlab.com"
+      ],
+      "note": "The parent packet measured 0.000 session-scoped identifiers over five read-only JSON APIs. This run finds 23 session-scoped identifier instances on 2 credential-free HTML sites. The two results are not contradictory: they are different site samples. This run does NOT overturn the parent measurement and does not claim a program-level prevalence."
+    },
+    "http_requests_issued": {
+      "value": 299,
+      "unit": "requests",
+      "method": "GET",
+      "non_get_requests_issued": 0,
+      "distinct_hosts": 16,
+      "write_leg_exercised": false
+    },
+    "screen_reproducibility": {
+      "value": "identical",
+      "unit": "categorical",
+      "second_independent_live_pass_sites": 6,
+      "object_counts_identical_all_sites": true,
+      "criterion_results_identical_all_sites": true,
+      "qualifying_set_stable": true
+    },
+    "decision_rule_branch_mechanically_selected": {
+      "value": "ROW_1_screen_yields_lt_3_qualifying_sites",
+      "unit": "categorical",
+      "frozen_rule_reference": "prereg section 14 primary decision table, row 1",
+      "row1_stated_claim": "re-derivable surface = 1.0 in this substrate class because no action-gating structure exists to require cross-episode state -> C-CROSSSITE falsified in this substrate",
+      "row1_stated_claim_contradicted_by_this_run": true,
+      "row1_contradiction_evidence": {
+        "action_gating_objects_observed": 25,
+        "sites_with_action_gating_objects": 8,
+        "csrf_token_gated_objects": 4,
+        "server_minted_tokens_unstable_across_3_independent_sessions": 2
+      }
+    },
+    "product_kernel_hard_dependency_discharged": {
+      "value": false,
+      "unit": "boolean",
+      "prereg_reference": "prereg section 16 item 8",
+      "checked_at": "src/spider/kernel.py at HEAD 67e1393b3fc46de8fb63ba15af4fa851ae777c65",
+      "evidence": "distill() hard-codes confidence=0.5 at src/spider/kernel.py:90 while resolve() requires min_confidence=0.8 (src/spider/kernel.py:59,61,114); distill_parameterized is absent from src/.",
+      "consequence": "No inheritance verdict may be issued from this packet regardless of the surface measurement, per the director mandate's hard dependency."
+    },
+    "amortized_cost_per_episode": {
+      "value": null,
+      "unit": "cost units per episode",
+      "measured": false,
+      "reason_not_measured": "The frozen secondary cost analysis is defined over the arms; no arm was executed because no qualifying site set existed. Reported as null, NOT 0.0."
+    },
+    "abstention_rate": {
+      "value": null,
+      "unit": "fraction of spans with decision_path == ABSTAIN",
+      "measured": false,
+      "reason_not_measured": "No arm executed; no decision_path was produced. Reported as null, NOT 0.0."
+    },
+    "action_gating_correctness": {
+      "value": null,
+      "unit": "fraction of spans correct, content-verified",
+      "measured": false,
+      "reason_not_measured": "The frozen primary endpoint is defined over arms on a qualifying site set. No arm was executed. Reported as null, NOT 0.0 and NOT 1.0."
+    }
+  },
+  "controls": {
+    "SCREEN_CALIBRATION_GATE": {
+      "type": "frozen gate (prereg 4.1)",
+      "expected_behavior": "The frozen known-positive calibration site https://httpbin.org/forms/post passes all of C1-C7 and yields >= 3 action-gating objects, thereby demonstrating that the screen can detect action-gating structure when it is present.",
+      "observed_behavior": "FAIL. C1, C6, C7 pass. C2, C3, C4, C5 fail. 0 action-gating objects detected under the frozen C2 (a)(b)(c) logic. The page declares 1 non-GET form whose input names are [comments, custemail, custname, custtel, delivery, size, topping] -- the HTML5-spec pizza-order example form -- and 0 inputs whose name matches csrf|token|nonce|_token.",
+      "status": "FAIL",
+      "consequence": "The screen has no demonstrated true-positive detection power at its own calibration anchor, so a count of 0 qualifying sites cannot be distinguished from a screen that is incapable of detecting gating structure.",
+      "prereg_claim_contradicted": "prereg 4.1 asserts this endpoint 'returns an HTML form with a CSRF-like token (<input name=\"csrf_token\" ...>)' and that 'the csrf_token rotates or is session-bound'. As observed on 2026-09-27 the endpoint contains no csrf/token/nonce-named input at all.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/calibration.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json#calibration"
+      ]
+    },
+    "SITE_SELECTION_SCREEN": {
+      "type": "frozen screen (prereg 4.2, 4.3)",
+      "expected_behavior": ">= 3 of the 15 frozen candidate sites pass C1-C7 and are admitted as qualifying.",
+      "observed_behavior": "0 of 15 admitted. 14 of 15 roots reachable; https://api.publicapis.org unreachable (DNS, 1 request, no response). No site satisfied the full conjunction. The C3-passing sites (en.wikipedia.org, gitlab.com) both fail C5; the C5-passing sites (postman-echo.com, bitbucket.org) both fail C3.",
+      "status": "FAIL",
+      "sub_criterion_evidence": {
+        "C1": "13/15 pass",
+        "C2": "4/15 pass (docs.python.org, en.wikipedia.org, gitlab.com, bitbucket.org)",
+        "C3": "2/15 pass (en.wikipedia.org with wpCreateaccountToken/wpEditToken, gitlab.com with authenticity_token)",
+        "C4": "4/15 pass (reqres.in, docs.python.org, en.wikipedia.org, bitbucket.org)",
+        "C5": "2/15 pass (postman-echo.com, bitbucket.org)",
+        "C6": "14/15 pass",
+        "C7": "14/15 pass"
+      },
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/screen.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/raw/pages.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json#screen"
+      ]
+    },
+    "SCREEN_REPEAT_PASS_REPRODUCIBILITY": {
+      "type": "instrument-validity control added by the producer, not a frozen control",
+      "expected_behavior": "A second independent live screen pass over the object-yielding sites yields the same object counts and the same criterion results, so screen outcomes are properties of the sites and not of one visit.",
+      "observed_behavior": "Identical. 6/6 sites reproduced exactly: en.wikipedia.org 8 objects, gitlab.com 3, bitbucket.org 9, docs.python.org 3, reqres.in 1, github.com 0; all C1-C7 results identical; qualifying set stable at 0.",
+      "status": "PASS",
+      "note": "This control was run because the Web is dynamic and redirect targets move. It is a control over the instrument, not over any mechanism.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/repeat_screen.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json#reproducibility"
+      ]
+    },
+    "TOKEN_STABILITY_CROSS_SESSION_PROBE": {
+      "type": "frozen evidence requirement (prereg durable_evidence.identifier_classification_log) plus prereg-11 step 3",
+      "expected_behavior": "For each detected token field, determine whether the token VALUE is obtainable from one unconditional GET of the root observation, by comparing values across independent fresh sessions.",
+      "observed_behavior": "Both probed targets minted a distinct token in each of 3 independent fresh sessions: gitlab.com/-/trial_registrations/new/ authenticity_token 3 distinct values, auth.wikimedia.org Special:CreateAccount wpCreateaccountToken 3 distinct values. Page body hash also differed in 3/3 sessions on both targets.",
+      "status": "PASS",
+      "significance": "This is a positive detection by the instrument: it fires, and it fires on real credential-free sites. It is the strongest positive control in this packet, and it demonstrates that the re-derivability question IS decidable on this substrate with stdlib HTTP and no credentials.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/derived/token_stability.json"
+      ]
+    },
+    "RE_DERIVABLE": {
+      "type": "frozen treatment arm",
+      "expected_behavior": "Discard all prior state each episode, re-read the root observation, charge full body-sensitive observation cost per span.",
+      "observed_behavior": "NOT EXECUTED. The frozen design admits the arm phase only on a qualifying site set (prereg 6); 0 of 15 sites qualified.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0. This arm was gated by the frozen design, not stubbed. It is explicitly NOT the failure recorded for the parent packet's treatment arm, which executed nothing while reporting 0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "CACHE_AND_REVALIDATE": {
+      "type": "frozen treatment arm",
+      "expected_behavior": "Bind a stable agent-visible identifier of the gating object on first encounter; charge 1 verification call + 1 re-fetch per cached replay; fall back to re-derivation on failed re-validation.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "NULL_COST": {
+      "type": "frozen null control",
+      "expected_behavior": "Mimic the CACHE_AND_REVALIDATE structure with a randomized/invalid identifier, forcing re-derivation every time while charging identical verification and re-fetch costs, so that the null can fire on ANY substrate. Its cost must be >= COLD_REEXPLORATION cost.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites. The frozen success criterion 'NULL_COST arm fires: cost >= COLD_REEXPLORATION cost' was therefore neither confirmed nor refuted.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0. The design rationale for this null -- that a cost null can fire where a wrongness null cannot -- was NOT tested in this run and must not be reported as validated.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "COLD_REEXPLORATION": {
+      "type": "frozen baseline",
+      "expected_behavior": "Fresh exploration each episode with no memory; re-derive from the root each span; charged full observation cost. Expected action_gating_correctness in (0.1, 0.9) per the frozen dynamic-range pre-check.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites. The frozen dynamic-range requirement was therefore never tested, so the primary endpoint's dynamic range is unverified rather than verified.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0 and NOT 1.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "NO_MEMORY_DETERMINISTIC": {
+      "type": "frozen baseline",
+      "expected_behavior": "As COLD_REEXPLORATION with a deterministic tie-breaking policy; controls for policy variance.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "WITHIN_EPISODE_SCRATCHPAD": {
+      "type": "frozen reference arm",
+      "expected_behavior": "Within-episode value propagation only, zero cross-episode retention; can reuse resource IDs discovered inside the same episode.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "ORACLE_PERFECT_TRANSFER": {
+      "type": "frozen positive control",
+      "expected_behavior": "Knows the correct stable identifier for every action-gating object from episode 1; minimum possible cost after episode 1; expected action_gating_correctness > COLD_REEXPLORATION + 0.1.",
+      "observed_behavior": "NOT EXECUTED. Gated: 0 qualifying sites. The frozen dynamic-range clause requiring ORACLE > COLD + 0.1 was never tested, so the positive control's power is unverified.",
+      "status": "unknown",
+      "execution": "NOT_RUN_GATED",
+      "metric_value": null,
+      "note": "null, NOT 0.0. Note that an oracle perfect-transfer arm is definitionally impossible for the 4 observed server-minted CSRF objects, because no cross-episode-stable identifier exists for them: the token differs in every session. This is an observation about the substrate, not a measurement of the arm.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl"
+      ]
+    },
+    "PRIMARY_ENDPOINT_DYNAMIC_RANGE": {
+      "type": "frozen pre-freeze/post-freeze validity check (prereg 10, 13.1, 17.3.1)",
+      "expected_behavior": "COLD_REEXPLORATION action_gating_correctness in (0.1, 0.9) and ORACLE_PERFECT_TRANSFER > COLD + 0.1, proving the endpoint is not saturated.",
+      "observed_behavior": "UNKNOWN. The endpoint was never evaluated because no arm ran. This check is not passed and not failed.",
+      "status": "unknown",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json"
+      ]
+    },
+    "THRESHOLD_SATISFIABILITY": {
+      "type": "frozen pre-freeze audit (prereg 13)",
+      "expected_behavior": "Every frozen threshold demonstrated arithmetically reachable on pilot data before freeze; specifically baseline_max <= 1 - delta for any treatment > baseline + delta clause.",
+      "observed_behavior": "NOT PERFORMED as a pre-freeze pilot, because the calibration site admitted no qualifying object to pilot on. The specific unsatisfiability failure of the parent packet (a clause requiring > 1.05 on a [0,1] quantity) is NOT repeated in this packet: this packet contains no clause of the form treatment > baseline + delta on an unmeasured endpoint, because the endpoint was never measured.",
+      "status": "unknown",
+      "note": "The absence of a pilot is a consequence of the calibration failure, not a separate design omission. It is recorded as unknown, not as passed.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/calibration.jsonl"
+      ]
+    },
+    "PRODUCT_KERNEL_HARD_DEPENDENCY": {
+      "type": "frozen hard dependency (prereg 16 item 8, director mandate)",
+      "expected_behavior": "An executable inherited mechanism exists in the committed product kernel, so an inheritance verdict can be issued.",
+      "observed_behavior": "NOT SATISFIED at HEAD 67e1393b3fc46de8fb63ba15af4fa851ae777c65. src/spider/kernel.py:90 hard-codes confidence=0.5 in distill(); resolve() requires min_confidence=0.8 (lines 59, 61, 114); no distill_parameterized exists anywhere under src/.",
+      "status": "FAIL",
+      "consequence": "Per the mandate, this packet records the surface measurement and issues NO transfer verdict. This is not Frontier's to fix; it is allocated to Product.",
+      "evidence_refs": [
+        "src/spider/kernel.py"
+      ]
+    },
+    "NO_NEW_INFRASTRUCTURE_CONSTRAINT": {
+      "type": "frozen dependency (prereg 16 item 1)",
+      "expected_behavior": "stdlib HTTP only; no browser, no docker, no model key, no network beyond the selected sites themselves.",
+      "observed_behavior": "SATISFIED for the measurement substrate. 299 requests, all method GET, across 16 hosts, all of which are the frozen candidate sites or hosts reached by their own HTTP redirects (about.gitlab.com, docs.gitlab.com, auth.wikimedia.org, www.postman.com). No browser, no docker, no model API call. One build-time deviation is disclosed: the frozen cl100k_base tokenizer was not present in the environment and was installed with `pip install tiktoken` from PyPI before the measurement. tiktoken is not declared in pyproject.toml. The tokenizer is used only to count tokens and makes no model call.",
+      "status": "PASS_WITH_DISCLOSED_DEVIATION",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/provenance.json"
+      ]
+    },
+    "NO_POST_FREEZE_SITE_SUBSTITUTION": {
+      "type": "frozen dependency (prereg 16 item 3, prereg 15)",
+      "expected_behavior": "The frozen candidate pool is screened as written, in order, with no substitution after freeze.",
+      "observed_behavior": "SATISFIED. All 15 frozen URLs from prereg 4.3 were screened in the frozen order. The calibration site was screened at its frozen URL. No site was added, removed or replaced. https://api.publicapis.org was left unreachable and was NOT replaced -- specifically it was not swapped for a read-only JSON endpoint, which is the substitution the director mandate forbids.",
+      "status": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/screen.jsonl"
+      ]
+    },
+    "SAME_UNIT_PREVALENCE_ESTIMATOR": {
+      "type": "frozen gate (prereg 16 item 6)",
+      "expected_behavior": "The prevalence estimator's numerator and denominator use the same unit (span counts), with per-site stratification.",
+      "observed_behavior": "SATISFIED for the diagnostic estimate. Numerator = count of re-derivable action-gating spans, denominator = count of action-gating spans, both span counts, both computed from the same frozen object list; per-site values are also reported and an equal-weight per-site mean is given. This directly repairs the parent packet's distinct-identifier-keys-over-spans ratio.",
+      "status": "PASS",
+      "scope_limit": "This repairs the estimator's UNITS, not the primary metric's validity. The primary metric remains unmeasured because there is no qualifying site set.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json#prevalence"
+      ]
+    },
+    "ONE_DECLARED_COST_BASIS": {
+      "type": "frozen gate (prereg 16 item 7, prereg 8)",
+      "expected_behavior": "One cost basis on a body-sensitive observation representation, with token-to-latency and token-to-dollar declared UNKNOWN where no defensible mapping exists.",
+      "observed_behavior": "SATISFIED. The body-sensitive MinimalObservation includes body_sha256, key_body_fields and body_bytes, and tokens are computed over the full structure. No token-to-latency or token-to-dollar conversion is asserted anywhere in this packet; the product economics answer remains UNKNOWN by explicit declaration.",
+      "status": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36306528608/raw/pages.jsonl",
+        "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json#cost_basis"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/http.jsonl",
+      "sha256": "025aabdbde219445e6e9ec42b14301f8e6886417319278eac1a6c9c1dda56ae9",
+      "role": "raw",
+      "bytes": 1135093,
+      "description": "Every HTTP transaction of the primary pass: url, method, status, headers, body sha256, body excerpt, per-record non-self-referential sha256."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/pages.jsonl",
+      "sha256": "ce6119aff12c8f3102f487d777603b19a48492515e20eae818b328006b147747",
+      "role": "raw",
+      "bytes": 2003705,
+      "description": "232 page observations with BFS depth, parsed forms, token fields, set-cookie names, repeat-GET hash comparison, script hints and the full body-sensitive observation with its token count."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/screen.jsonl",
+      "sha256": "0ca2b61fdd009d543acdc75c2179c2936eb375b4af4b800cd70ea7c5ad3d7868",
+      "role": "raw",
+      "bytes": 61609,
+      "description": "Per-site record for all 15 frozen candidates: C1-C7 pass/fail with the frozen operational-test reason string, qualifying verdict, missing ingredients, detected objects."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/calibration.jsonl",
+      "sha256": "37af30f0b4dc5263efacaa9dff16f939532aa4117a63ae2be4d77105a3785603",
+      "role": "raw",
+      "bytes": 2366,
+      "description": "The frozen prereg-4.1 calibration record for https://httpbin.org/forms/post, including the prereg claim about the site and the observed root-observation form field names."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/objects.jsonl",
+      "sha256": "7f61e5a01262fc6535092a00d92f482ceed8f4352f13c9fce73b1a736b745323",
+      "role": "raw",
+      "bytes": 21405,
+      "description": "All 25 detected action-gating objects with object_id, page_url, path_length, gating_type, required_action (method, url_template, required_fields, token_fields, state_dependencies), ground_truth_verifier and the fixed rederivable flag."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/classification.jsonl",
+      "sha256": "de1dc5cba49b0f1f0947cd8774d5742769e6b133e4dc15787c40e1a1795fdd68",
+      "role": "raw",
+      "bytes": 17373,
+      "description": "Per-object prereg-11 re-derivability classification with the explicit reason strings for each verdict."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/identifiers.jsonl",
+      "sha256": "e33ee7cc205738b2fc62fc8acac2b9350843f6babee363669686dbdb88b03eb9",
+      "role": "raw",
+      "bytes": 877234,
+      "description": "1696 identifier instances with type, subtype, value sha256, source, episode, in-root flag and stability classification, as required by prereg durable_evidence.identifier_classification_log."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl",
+      "sha256": "1bbde51d4cf12c739bc68a435d03e4b0dc844672cb55acd570538b12eac3d429",
+      "role": "raw",
+      "bytes": 6892,
+      "description": "Cross-session token stability probe: 3 independent fresh sessions on each of 2 token-gated targets, with per-field distinct-value counts. Read-only GET only."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/repeat_screen.jsonl",
+      "sha256": "324f07d0686f10f99ec2f3e9568426d518716d2d7d7e8a53a9d71ae42ea5defa",
+      "role": "raw",
+      "bytes": 12323,
+      "description": "Second independent live screen pass over the 6 object-yielding sites; instrument-validity control for Web dynamism."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/http_pass2.jsonl",
+      "sha256": "9ef26ce8789872e1d4fb779ce9d377581d18bffef2731a978e4a9e3fa048e4cc",
+      "role": "raw",
+      "bytes": 857110,
+      "description": "HTTP transactions of the reproducibility pass."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/pages_pass2.jsonl",
+      "sha256": "ee24adf65ea53c868c03cf435604420f591df8171e54a5f8ea700865fa93ece2",
+      "role": "raw",
+      "bytes": 1562253,
+      "description": "Page observations of the reproducibility pass."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/raw/responses_cache/",
+      "sha256": null,
+      "role": "raw",
+      "bytes": 313,
+      "description": "313 files: one SHA256-named response body per distinct body, plus index.json and key_index.json. sha256 is null because this is a directory, not a single artifact. Directory aggregate digest over sorted (relpath, file-sha256) pairs is e8a2ed5b40a8984ed43292d3a80ddf6567486fbd74ac013bb5711b1f6ecf8ac7; it is also recorded in provenance.json#artifact_aggregates and is non-self-referential because it does not include result.json."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json",
+      "sha256": "21fbb7d03f75404843172e4c866c3f57cb873547424f05a995685126908d536b",
+      "role": "derived",
+      "description": "All derived measurements: calibration, screen, same-unit prevalence with site-clustered bootstrap CI, cost basis, identifier inventory, token stability, reproducibility, arm gating, frozen decision-rule branch evaluation."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/derived/screen_summary.json",
+      "sha256": "7c2637bba3a27857c9bcc7e7db9fb9f0aa592ac00f2a2953f0c2053d7221af33",
+      "role": "derived",
+      "description": "Stage-level screen summary with per-criterion pass URLs."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/derived/site_records.json",
+      "sha256": "2e3c6b38871570ec01954e7a2a96d979001c204214db81594600e7f508f0cae4",
+      "role": "derived",
+      "description": "Per-site object lists, classifications, page URLs, BFS depths and identifier counts."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/derived/token_stability.json",
+      "sha256": "9064f091f1b43061b7119e8006a0afcfa227dfa67fb1811b3b5c182c7196dd8c",
+      "role": "derived",
+      "description": "Human-readable token stability report for the 2 probed targets."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json",
+      "sha256": "ef8f71ada28c968050ebdb6d1150a9c25b84d7600c373383def5d7a765ce1f6e",
+      "role": "derived",
+      "description": "The arm-phase gate decision: calibration_pass, qualifying count, arm_phase_entered=false, request and page totals."
+    },
+    {
+      "path": "research/frontier/harness_36306528608.py",
+      "sha256": "027eb5fd777346edd5c719a7f0657608687bacaec6664898d80233680ea8aa25",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. _HASH_TO_BE_REPLACED"
+    },
+    {
+      "path": "research/frontier/screen_36306528608.py",
+      "sha256": "debad6347e937f6fb201729f58eebacd4319af3d7ae50be29fc89db60e892852",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. "
+    },
+    {
+      "path": "research/frontier/run_execute_36306528608.py",
+      "sha256": "2eb8f9cfa63927be9da38c762c5398fffaee3b90775db29b819eac1c010f51ac",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. "
+    },
+    {
+      "path": "research/frontier/probe_token_stability_36306528608.py",
+      "sha256": "f7eb4395657e77bf68ae533a255693ed8b021a94df85da16f52666edc4b8736d",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. "
+    },
+    {
+      "path": "research/frontier/repeat_screen_36306528608.py",
+      "sha256": "010d5a370b798accfeba167b075d68b07d0cfa7e1f790dbb5aebe799f5062f9a",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. "
+    },
+    {
+      "path": "research/frontier/analyze_36306528608.py",
+      "sha256": "0dd256af0b03156e6653f2533f62a0fb8767c397355026fe5bf1cb5a1481c7d8",
+      "role": "code",
+      "description": "Frontier-lane execution instrument for this packet, inside the registry-authorized code root research/frontier. "
+    }
+  ],
+  "observations": [
+    "The frozen calibration site https://httpbin.org/forms/post returns HTTP 200 text/html and declares exactly 1 <form> element with method POST, action http://httpbin.org/post, and input names [comments, custemail, custname, custtel, delivery, size, topping].",
+    "That form contains ZERO inputs whose name matches the frozen C3 pattern csrf|token|nonce|_token, and ZERO hidden inputs carrying a literal value.",
+    "The calibration site therefore fails frozen criteria C2 (0 objects detected, threshold 3), C3 (0 non-GET forms with a token-named input), C4 (0 objects at >= 2 hops; BFS reached depth 0 from the frozen calibration URL) and C5 (0 of 1 same-URL repeat GET returned a different body sha256). It passes C1, C6 and C7.",
+    "The prereg 4.1 rationale asserts this endpoint 'returns an HTML form with a CSRF-like token (<input name=\"csrf_token\" ...>)' and that 'the csrf_token rotates or is session-bound'. No such input exists on the endpoint as served on 2026-09-27.",
+    "14 of the 15 frozen candidate sites returned a usable HTML root observation with no Authorization header. https://api.publicapis.org was unreachable (no response; 1 request) and was not replaced.",
+    "Per-criterion pass counts over the 15 frozen candidates: C1 13, C2 4, C3 2, C4 4, C5 2, C6 14, C7 14. No site passed all seven.",
+    "C3 passed on exactly 2 sites: https://en.wikipedia.org (6 non-GET forms, token field names wpCreateaccountToken and wpEditToken, form page auth.wikimedia.org/enwiki/w/index.php at BFS depth 2) and https://gitlab.com (9 non-GET forms, token field name authenticity_token, form page /-/trial_registrations/new/ at BFS depth 1).",
+    "C5 passed on exactly 2 sites: https://postman-echo.com and https://bitbucket.org. Neither passes C3.",
+    "25 action-gating objects were detected in total across 8 sites: 20 multi_step, 4 csrf_token, 1 state_dependent. Per site: bitbucket.org 9, en.wikipedia.org 8, docs.python.org 3, gitlab.com 3, reqres.in 1, postman-echo.com 1, and 0 on each of httpbin.org, httpbin.org/forms/post, httpbin.org/cookies/set, httpbin.org/post, jsonplaceholder.typicode.com, developer.mozilla.org, example.com and github.com.",
+    "For the 4 csrf_token objects, the required token value is not present in the root observation. The classification reason recorded for each is that the token is minted server-side and cannot be obtained from one unconditional GET of the root.",
+    "The cross-session probe observed 3 distinct sha256 values of the authenticity_token field across 3 independent fresh sessions on https://gitlab.com/-/trial_registrations/new/, and 3 distinct sha256 values of the wpCreateaccountToken field across 3 independent fresh sessions on https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount.",
+    "The response body hash of both probed token-gated pages also differed in 3 of 3 independent sessions.",
+    "The cookie NAME set was identical across the 3 sessions on both probed targets. Cookie VALUES were not hashed by the instrument and are therefore unmeasured.",
+    "Applying the frozen prereg-11 protocol, 1 of 25 detected action-gating spans is re-derivable from one unconditional GET of its site's root observation, giving a same-unit pooled diagnostic fraction of 0.04 with a site-clustered 95% bootstrap CI of [0.0, 0.2] over 10000 resamples at seed 36306528608.",
+    "The equal-weight per-site mean of the same diagnostic is 0.111 across the 5 sites that produced at least one object.",
+    "The body-sensitive observation cost measured on this substrate is a mean of 2278.4 cl100k_base tokens per page observation over 232 observations (median 2120, min 151, max 10089, total 528578 tokens), with host means ranging from 151 on small pages to 6208.2 on en.wikipedia.org.",
+    "The identifier inventory contains 1696 instances: 1643 json_id_field, 24 url_path_id, 14 named_token_input, 9 hidden_form_token and 6 server_minted_csrf_token. 23 are classified session_scoped and occur on exactly 2 sites, en.wikipedia.org and gitlab.com.",
+    "A second independent live screen pass over the 6 object-yielding sites reproduced the first pass exactly: identical object counts (8, 3, 9, 3, 1, 0), identical C1-C7 results, and a stable qualifying set of 0.",
+    "299 HTTP requests were issued in total, every one of method GET. No non-GET request was sent to any host, so no write leg was exercised and no state transition was caused on any third-party production system.",
+    "The frozen candidate https://postman-echo.com has drifted since the prereg was written: its host root https://postman-echo.com/ returns HTTP 302 to https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-, while https://postman-echo.com/get still returns HTTP 200.",
+    "Several frozen candidate roots redirect off their own host: https://gitlab.com/ -> https://about.gitlab.com/, https://en.wikipedia.org/ -> https://en.wikipedia.org/wiki/Main_Page, https://developer.mozilla.org/ -> /en-US/, https://docs.python.org/ -> /3/, https://reqres.in/api-docs -> https://reqres.in/docs. The BFS follows same-site links only; all cross-host observations in raw/pages.jsonl are the result of the sites' own redirects.",
+    "https://en.wikipedia.org/wiki/Special:Random resolves to a different article on each visit, so the Wikipedia object set depends on which random article the BFS lands on.",
+    "At HEAD 67e1393b3fc46de8fb63ba15af4fa851ae777c65, src/spider/kernel.py hard-codes confidence=0.5 in distill() at line 90 while resolve() requires min_confidence=0.8 at lines 59, 61 and 114, and no distill_parameterized symbol exists anywhere under src/.",
+    "freeze.json's three recorded hashes match the on-disk prereg.md (04512e92...), request.json (aa18d40f...) and spec.json (e746160c...) exactly, verified before and after execution. The frozen inputs were not modified."
+  ],
+  "validity_notes": [
+    "SCOPE BOUNDARY. This packet measures the SURFACE over which cross-episode inheritance could amortize, on a frozen pool of 15 credential-free public sites reachable with stdlib HTTP. It does not measure the Web, it does not measure any agent, and it does not measure any mechanism. Nothing here supports a claim about LLM agents, authorization, product economics or any real-world system.",
+    "THE PRIMARY METRIC IS MISSING, NOT ZERO. rederivable_fraction is null because the qualifying-site precondition was not met. It must not be read as 0.0, 1.0, or any value in between. The diagnostic 0.04 is a different quantity on a different sample and must not be substituted for it.",
+    "THE FROZEN DECISION RULE'S ROW 1 IS REPORTED BUT NOT APPLIED AS A FALSIFICATION. Applying it as written would assert 're-derivable surface = 1.0 ... because no action-gating structure exists'. This run observed 25 action-gating objects on 8 sites, including 4 CSRF-token-gated objects whose tokens take 3 distinct values in 3 independent sessions. The branch's stated premise is therefore contradicted by the run's own raw evidence, and the honest encoding is INCONCLUSIVE. The mechanical branch is preserved in metrics.decision_rule_branch_mechanically_selected so an auditor can recompute the frozen rule independently and disagree.",
+    "A FALSE-ZERO CANNOT BE EXCLUDED. Because the calibration gate failed, the screen was never demonstrated to fire on a site that certainly contains action-gating structure in the sense the prereg intended. Consequently '0 of 15 sites qualify' is consistent with BOTH (a) no credential-free site in the pool combines token-gating, multi-hop and state-dependence, and (b) the frozen 7-way conjunction is stricter than how real sites gate actions. Evidence bearing on (b): the two C3-passing sites both fail C5, and the two C5-passing sites both fail C3, so no single site in the pool is simultaneously token-gated and state-dependent. This packet cannot separate the two explanations and does not claim to.",
+    "SCREEN DEFECT 1 -- C3 DOES NOT TEST CREDENTIAL-FREE EXECUTABILITY. Frozen C3 counts declared non-GET forms with a token-named input and does not require the action to be executable without credentials, while C7 only tests the site ROOT. A site can therefore pass C3 via a login-walled form. The 2 C3 passes here are token forms for account creation and trial registration, i.e. the exact forms most likely to be credential-walled. Whether they are executable without credentials was NOT tested: this packet issued no non-GET request, deliberately, to avoid creating accounts or trial subscriptions on third-party production systems.",
+    "SCREEN DEFECT 2 -- C7 CAN FALSE-POSITIVE ON AN AUTHORIZATION WALL. C7 treats an HTTP 403 root as a login wall, but credential-free services commonly answer 403 to a default agent. The instrument was checked on this: https://httpbin.org/status/403 returns 403 to an unauthenticated GET, so that endpoint would be scored as a login wall by C7 despite requiring no credentials. The defect was LATENT in this run, not active: all 14 reachable roots returned HTTP 200, so no C7 verdict in raw/screen.jsonl was produced by a 403.",
+    "SCREEN DEFECT 3 -- ROOTING AT THE HOST ROOT CAN SCREEN THE WRONG DOCUMENT. The screen roots each site at its host root. For a candidate whose root redirects away from the surface of interest, the screen then evaluates the redirect target. This is what happened to the frozen candidate https://postman-echo.com, whose root now 302-redirects to www.postman.com while its /get API still returns 200; the candidate was screened on a documentation page and failed C1. A different but equally defensible reading of 'root observation' would have scored it differently. This is a specification ambiguity in the frozen design, resolved here by the most literal reading, and it is a candidate explanation for part of the 0-of-15 result.",
+    "REPRESENTATION LOSS. The body-sensitive observation captures url, method, status, links, forms, input names, semantic landmark tag counts, 13 retained response headers, a SHA256 of the body and up to 60 key body-derived fields truncated to 500 characters each. It does NOT capture the full body text, script semantics, DOM structure beyond landmark counts, or any JavaScript execution. A site whose action-gating structure exists only in JavaScript is invisible to this screen by construction, and no browser was used.",
+    "HTML PARSING IS REGEX-BASED, NOT DOM-BASED. Per the frozen prereg 4.2 the screen parses with regex. Forms not wrapped in a <form>...</form> pair, and inputs injected by script, are not counted. This biases the screen toward FALSE NEGATIVES on modern sites, and it is a plausible contributor to github.com yielding 0 objects: its interactive surfaces are client-side.",
+    "THE COST NUMBER IS NOT COMPARABLE TO THE PARENT PACKET'S 119 TOKENS. The parent measured 119 tokens/observation on five tiny read-only JSON APIs using a body-omitting representation. This run measures 2278.4 tokens/observation on large HTML pages using a body-sensitive representation. The two are different quantities on different substrates and must not be differenced. The parent handoff's warning that 119 is not reconcilable with the 763.06-token floor remains in force, and this run adds that neither figure should be treated as a program-wide per-observation cost.",
+    "TOKEN-TO-LATENCY AND TOKEN-TO-DOLLAR ARE UNKNOWN BY EXPLICIT DECLARATION. No defensible mapping is asserted. Cost is reported in tokens and request counts only. The product economics answer is UNKNOWN.",
+    "INSTRUMENT PROVISIONING DEVIATION. The frozen cl100k_base tokenizer was absent from the environment and was installed from PyPI with `pip install tiktoken` before measurement. tiktoken is not declared in pyproject.toml. This is a build-time dependency, not a measurement substrate, and it involves no model call. It is disclosed because the mandate required the tokenizer to be computed on the substrate rather than imported from another packet, and the environment did not already provide it.",
+    "ARM METRICS ARE NULL BY DESIGN GATE, NOT BY STUB. No arm was executed because the frozen design admits the arm phase only on a qualifying site set. Every arm metric is null. This is deliberately distinguishable from the parent packet's failure, where a stub arm executed nothing while reporting 0.0, and where the falsification clauses F3/F4/F5 were recorded as passing. Here nothing is reported as passing.",
+    "THE ABSTENTION REQUIREMENT IS UNMET BY CONSTRUCTION. The frozen design makes abstention_rate mandatory for all arms. With no arm executed, no abstention rate exists, so the mandate's requirement that error propagation be a first-class term is NOT satisfied by this packet.",
+    "THE PRODUCT-KERNEL HARD DEPENDENCY IS UNSATISFIED AND GATES ANY INHERITANCE VERDICT. Confirmed directly at HEAD: distill() confidence 0.5 against resolve() min_confidence 0.8, and no distill_parameterized under src/. Per the mandate this packet therefore records the surface measurement and issues no transfer verdict.",
+    "THE 0.000-SESSION-IDENTIFIER RESULT OF THE PARENT PACKET IS NOT OVERTURNED. This run finds 23 session-scoped identifier instances on 2 sites; the parent found 0.000 over 5 always-200 read-only JSON APIs. The difference is the site sample, not a contradiction. No program-level prevalence of session-scoped identifiers is established by either packet, and the denominator used here is objects-per-screened-site, which is not the denominator of any registry-wide statistic.",
+    "SAMPLE SIZE. 15 frozen candidates, 14 reachable, 25 action-gating objects, 232 page observations, 299 GET requests, 16 distinct hosts. The site-clustered bootstrap CI on the diagnostic fraction is wide ([0.0, 0.2]) and rests on only 5 sites that produced objects; it is reported as a diagnostic with that limitation attached and must not be read as an interval estimate for any population.",
+    "EXPLORATORY FIRST PASS IS NOT CITED AS EVIDENCE. An earlier execution of this packet's screen used a looser object detector that counted shallow non-GET forms with no token and no state as action-gating objects. That detector was corrected to implement the frozen C2 (a)(b)(c) logic, and its output was discarded rather than retained. An apparent run-to-run difference noticed during development (36 spans versus 25) is therefore attributable to the producer's own instrument change, NOT to Web nondeterminism, and the second live pass confirms the corrected detector is stable. No claim in this packet rests on the discarded pass.",
+    "REPRESENTATION OF THE POSITIVE FINDING. The statement that real action-gating structure exists on credential-free public sites is supported by token-field PRESENCE plus cross-session token VALUE instability. It is not supported by any executed write, by any observed state transition, or by any demonstration that the correct token actually authorizes the action. It establishes that a server-minted, non-re-derivable gate exists and is visible to a credential-free stdlib HTTP client, which is the question this packet was allocated to ask."
+  ],
+  "unresolved": [
+    "The frozen primary metric rederivable_fraction on a qualifying site set remains unmeasured. Nothing in this packet substitutes for it.",
+    "Whether a credential-free site exists that simultaneously satisfies token-gating, multi-hop reachability AND state-dependent response -- the frozen 7-way conjunction -- is unresolved. This packet cannot distinguish 'no such site' from 'the conjunction is stricter than real gating', because the calibration gate that was supposed to supply detection power failed.",
+    "Whether the 2 C3-passing sites' token-gated actions are actually executable without credentials is untested and deliberately so: this packet issued no non-GET request to any host. A follow-up that submits a token-gated form would create real accounts or trial subscriptions on third-party systems and needs either owner authorization or a self-hosted substrate.",
+    "Whether a site whose action-gating structure exists only in JavaScript qualifies is untested; the frozen stdlib-only, no-browser constraint makes such sites invisible to this screen by construction, and this is a substrate limit rather than a Web fact.",
+    "Whether the prereg's premise about https://httpbin.org/forms/post was ever true, and if so when it stopped being true, is unresolved. The prereg was frozen at 2026-09-27T08:40:32Z, the same day as this run, so the drift predates the freeze and the calibration anchor was already wrong when frozen.",
+    "Whether an executable inherited mechanism would transfer or amortize on the 4 observed CSRF-token-gated objects is unresolved and currently unanswerable: the product kernel cannot execute an inherited mechanism, and the 3-distinct-values-in-3-sessions result implies a perfect-transfer oracle is definitionally unavailable for server-minted tokens, so any future amortization test needs a different persistent-state design than a replayed token.",
+    "Program-level prevalence of session-scoped identifiers on the credential-free public Web remains unestablished. This packet supplies 23 instances over 2 sites out of 14 reachable, on an object-level denominator, which is not comparable to any registry statistic.",
+    "The correct token-to-latency and token-to-dollar mapping remains UNKNOWN and is not answerable from token counts.",
+    "Whether the C5 criterion's literal operational test (same-URL repeat GET with a different body hash) is measuring state dependence or merely page dynamism is unresolved. The instrument records a stricter variant requiring a set-cookie alongside the hash difference; 1 of 2 C5 passes survives the strict variant (bitbucket.org), 1 does not (postman-echo.com).",
+    "Whether the screen's per-criterion pass verdicts are stable over weeks is unresolved. Two passes within one session agree exactly, which controls for within-session dynamism but not for slow drift of the kind that invalidated the httpbin calibration anchor."
+  ]
+}
