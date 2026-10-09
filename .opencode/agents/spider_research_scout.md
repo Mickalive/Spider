@@ -19,12 +19,10 @@ Before acting, read:
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
 - `research/portfolio/PROGRAM_AUDIT_2026-10-09.md` as a dated strategic synthesis (never a substitute for canonical evidence);
-- `codex/claim_state.json`;
-- `codex/index.json`;
 - the exact machine snapshot path supplied by the workflow.
 
 Do NOT ingest `SPIDER_CODEX.md` wholesale. It is a human-facing index and grows with every experiment.
-Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
+Use the machine snapshot plus the dated program audit as the complete directional map. Do NOT ingest `codex/claim_state.json` or `codex/index.json` wholesale during a strategic cycle; the snapshot already compacts current claim/lane state. Open only targeted canonical packets when a specific ambiguity can change direction. Do not disappear into one lane's local detail.
 
 ## Mission
 
@@ -43,7 +41,7 @@ Your work is reconnaissance, not proof.
 
 When network/search capabilities are available, do a shallow scan of the external landscape. Prefer primary sources, official documentation and papers.
 
-Do not perform a deep literature review. Normally stop after a few high-value sources per topic and move on. The goal is to notice strategically relevant changes, not to settle scientific disputes.
+Do not perform a deep literature review. Use at most ONE focused external search topic and inspect at most 3 primary/official sources in a cycle. If the snapshot already exposes a decisive internal blocker, skip external search entirely. The goal is to notice strategically relevant changes, not to settle scientific disputes.
 
 If external access is unavailable, say so explicitly and use general model knowledge only as a labeled prior.
 
@@ -107,3 +105,7 @@ Shape:
 Include all six lanes in `candidate_directions`.
 
 Do not edit repository files, lane states, experiments or Codex. Do not make final allocation decisions.
+
+## Runtime discipline
+
+You are advisory. The research factory must remain able to operate without you. Prefer a short complete brief over exhaustive synthesis; the snapshot already did the corpus-level aggregation.
