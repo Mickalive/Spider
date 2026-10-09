@@ -1,0 +1,313 @@
+{
+  "frozen_certified_field": false,
+  "observed_dynamic_range_certificate": {
+    "certified": false,
+    "cold_max_success_rate": 1.0,
+    "retrieval_max_success_rate": 1.0,
+    "certified_at_novelty": null,
+    "per_level": {
+      "0.5": {
+        "cold_success_rate": 1.0,
+        "retrieval_success_rate": 1.0,
+        "pass": false
+      },
+      "0.75": {
+        "cold_success_rate": 1.0,
+        "retrieval_success_rate": 1.0,
+        "pass": false
+      }
+    }
+  },
+  "primary_conditions": {
+    "C1_dynamic_range_certified": {
+      "pass": false,
+      "frozen_spec_field": false,
+      "observed_certified": false,
+      "note": "C1 is bound by prereg s6 to spec.json.dynamic_range_certified==true, frozen false."
+    },
+    "C2_matched_correctness": {
+      "pass": false,
+      "details": {
+        "T-SPIDER-PARAM": {
+          "pass_per_level": {
+            "0.0": true,
+            "0.25": true,
+            "0.5": false,
+            "0.75": false
+          },
+          "levels_ge_0.80": 2,
+          "ok": false
+        },
+        "B-COLD-RE-DERIVE": {
+          "pass_per_level": {
+            "0.0": true,
+            "0.25": true,
+            "0.5": true,
+            "0.75": true
+          },
+          "levels_ge_0.80": 4,
+          "ok": true
+        },
+        "B-RETRIEVAL-SHAPED": {
+          "pass_per_level": {
+            "0.0": true,
+            "0.25": true,
+            "0.5": true,
+            "0.75": true
+          },
+          "levels_ge_0.80": 4,
+          "ok": true
+        },
+        "B-EMPTIED-REGISTRY": {
+          "pass_per_level": {
+            "0.0": true,
+            "0.25": true,
+            "0.5": true,
+            "0.75": true
+          },
+          "levels_ge_0.80": 4,
+          "ok": true
+        }
+      }
+    },
+    "C3_spearman_cold": {
+      "pass": false,
+      "rho": null,
+      "perm_p": null,
+      "n_levels": 2
+    },
+    "C4_spearman_retrieval": {
+      "pass": false,
+      "rho": null,
+      "perm_p": null,
+      "n_levels": 2
+    },
+    "C5_advantage_at_high_novelty": {
+      "pass": false,
+      "treatment_costs": [],
+      "cold_costs": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "retrieval_costs": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "p_cold": null,
+      "p_retrieval": null
+    }
+  },
+  "primary_pass": false,
+  "secondary": {
+    "S1_emptied_matches_cold": {
+      "pass": true,
+      "by_level": {
+        "0.0": {
+          "emptied_success_rate": 1.0,
+          "cold_success_rate": 1.0,
+          "emptied_cost_per_success": 2.0,
+          "cold_cost_per_success": 2.0,
+          "indistinguishable": true
+        },
+        "0.25": {
+          "emptied_success_rate": 1.0,
+          "cold_success_rate": 1.0,
+          "emptied_cost_per_success": 2.0,
+          "cold_cost_per_success": 2.0,
+          "indistinguishable": true
+        },
+        "0.5": {
+          "emptied_success_rate": 1.0,
+          "cold_success_rate": 1.0,
+          "emptied_cost_per_success": 2.0,
+          "cold_cost_per_success": 2.0,
+          "indistinguishable": true
+        },
+        "0.75": {
+          "emptied_success_rate": 1.0,
+          "cold_success_rate": 1.0,
+          "emptied_cost_per_success": 2.0,
+          "cold_cost_per_success": 2.0,
+          "indistinguishable": true
+        }
+      }
+    },
+    "S2_positive_control": {
+      "pass": true,
+      "success_rate": 1.0
+    },
+    "S3_known_negative_refusal": {
+      "pass": true,
+      "refusal_rate": 1.0,
+      "n": 20,
+      "scope_note": "kernel-path refusal only; direct-construction arms cannot refuse by construction"
+    },
+    "S4_support_boundary": {
+      "items": {
+        "mechanism_id": "mech-aba2a479b5716073",
+        "intent": "read",
+        "parameter_slots": [
+          "item"
+        ],
+        "action_template": {
+          "method": "GET",
+          "url": "http://127.0.0.1:46395/api/items/${item}",
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "preconditions": {
+          "resource_type": "items",
+          "site": "http://127.0.0.1:46395",
+          "auth": "public"
+        },
+        "postconditions": {
+          "id": "${item}",
+          "status": 200,
+          "type": "items"
+        },
+        "parameter_supports": {
+          "item": "^item\\-00[0-9]{1}$"
+        },
+        "confidence": 0.9
+      },
+      "users": {
+        "mechanism_id": "mech-d75f1e402ba64140",
+        "intent": "read",
+        "parameter_slots": [
+          "user"
+        ],
+        "action_template": {
+          "method": "GET",
+          "url": "http://127.0.0.1:46395/api/users/${user}",
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "preconditions": {
+          "resource_type": "users",
+          "site": "http://127.0.0.1:46395",
+          "auth": "public"
+        },
+        "postconditions": {
+          "id": "${user}",
+          "status": 200,
+          "type": "users"
+        },
+        "parameter_supports": {
+          "user": "^user\\-00[0-9]{1}$"
+        },
+        "confidence": 0.9
+      },
+      "orders": {
+        "mechanism_id": "mech-833eeda5f5ca63e1",
+        "intent": "read",
+        "parameter_slots": [
+          "order"
+        ],
+        "action_template": {
+          "method": "GET",
+          "url": "http://127.0.0.1:46395/api/orders/${order}",
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "preconditions": {
+          "resource_type": "orders",
+          "site": "http://127.0.0.1:46395",
+          "auth": "public"
+        },
+        "postconditions": {
+          "id": "${order}",
+          "status": 200,
+          "type": "orders"
+        },
+        "parameter_supports": {
+          "order": "^order\\-00[0-9]{1}$"
+        },
+        "confidence": 0.9
+      },
+      "products": {
+        "mechanism_id": "mech-f5bbef4301c39132",
+        "intent": "read",
+        "parameter_slots": [
+          "product"
+        ],
+        "action_template": {
+          "method": "GET",
+          "url": "http://127.0.0.1:46395/api/products/${product}",
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "preconditions": {
+          "resource_type": "products",
+          "site": "http://127.0.0.1:46395",
+          "auth": "public"
+        },
+        "postconditions": {
+          "id": "${product}",
+          "status": 200,
+          "type": "products"
+        },
+        "parameter_supports": {
+          "product": "^product\\-00[0-9]{1}$"
+        },
+        "confidence": 0.9
+      }
+    }
+  },
+  "accounting": {
+    "model_calls_plus_tokens_total": 0.0,
+    "any_injected_counter_event": false
+  },
+  "shipped_kernel_probe": {
+    "shipped_import": "ok",
+    "features": {
+      "distill_parameterized": false,
+      "TrajectoryCounters": false,
+      "_support_accepts": false,
+      "rebind": false
+    },
+    "api_complete": false,
+    "shipped_file": "src/spider/kernel.py"
+  },
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE"
+}

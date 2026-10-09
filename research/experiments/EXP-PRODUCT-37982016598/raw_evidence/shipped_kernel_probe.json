@@ -1,0 +1,11 @@
+{
+  "shipped_import": "ok",
+  "features": {
+    "distill_parameterized": false,
+    "TrajectoryCounters": false,
+    "_support_accepts": false,
+    "rebind": false
+  },
+  "api_complete": false,
+  "shipped_file": "src/spider/kernel.py"
+}

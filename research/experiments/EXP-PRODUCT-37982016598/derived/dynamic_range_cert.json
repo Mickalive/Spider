@@ -1,0 +1,18 @@
+{
+  "certified": false,
+  "cold_max_success_rate": 1.0,
+  "retrieval_max_success_rate": 1.0,
+  "certified_at_novelty": null,
+  "per_level": {
+    "0.5": {
+      "cold_success_rate": 1.0,
+      "retrieval_success_rate": 1.0,
+      "pass": false
+    },
+    "0.75": {
+      "cold_success_rate": 1.0,
+      "retrieval_success_rate": 1.0,
+      "pass": false
+    }
+  }
+}

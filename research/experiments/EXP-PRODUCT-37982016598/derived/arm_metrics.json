@@ -1,0 +1,237 @@
+{
+  "T-SPIDER-PARAM": {
+    "n_tasks": 80,
+    "n_success": 36,
+    "success_rate": 0.45,
+    "counters_total": {
+      "model_calls": 0.0,
+      "model_tokens": 0.0,
+      "browser_actions": 0.0,
+      "http_requests": 36.0,
+      "retrieval_calls": 80.0,
+      "verification_calls": 36.0,
+      "repair_attempts": 0.0,
+      "latency_ms": 24.674437000385296
+    },
+    "total_composite_cost": 72.0,
+    "cost_per_success": 2.0,
+    "by_novelty": {
+      "0.0": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.25": {
+        "n_tasks": 20,
+        "n_success": 16,
+        "success_rate": 0.8,
+        "total_composite_cost": 32.0,
+        "cost_per_success": 2.0
+      },
+      "0.5": {
+        "n_tasks": 20,
+        "n_success": 0,
+        "success_rate": 0.0,
+        "total_composite_cost": 0.0,
+        "cost_per_success": null
+      },
+      "0.75": {
+        "n_tasks": 20,
+        "n_success": 0,
+        "success_rate": 0.0,
+        "total_composite_cost": 0.0,
+        "cost_per_success": null
+      }
+    }
+  },
+  "B-COLD-RE-DERIVE": {
+    "n_tasks": 80,
+    "n_success": 80,
+    "success_rate": 1.0,
+    "counters_total": {
+      "model_calls": 0.0,
+      "model_tokens": 0.0,
+      "browser_actions": 0.0,
+      "http_requests": 80.0,
+      "retrieval_calls": 0.0,
+      "verification_calls": 80.0,
+      "repair_attempts": 0.0,
+      "latency_ms": 30.35768899985669
+    },
+    "total_composite_cost": 160.0,
+    "cost_per_success": 2.0,
+    "by_novelty": {
+      "0.0": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.25": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.5": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.75": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      }
+    }
+  },
+  "B-RETRIEVAL-SHAPED": {
+    "n_tasks": 80,
+    "n_success": 80,
+    "success_rate": 1.0,
+    "counters_total": {
+      "model_calls": 0.0,
+      "model_tokens": 0.0,
+      "browser_actions": 0.0,
+      "http_requests": 80.0,
+      "retrieval_calls": 240.0,
+      "verification_calls": 80.0,
+      "repair_attempts": 0.0,
+      "latency_ms": 32.395046999226906
+    },
+    "total_composite_cost": 160.0,
+    "cost_per_success": 2.0,
+    "by_novelty": {
+      "0.0": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.25": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.5": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.75": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      }
+    }
+  },
+  "B-EMPTIED-REGISTRY": {
+    "n_tasks": 80,
+    "n_success": 80,
+    "success_rate": 1.0,
+    "counters_total": {
+      "model_calls": 0.0,
+      "model_tokens": 0.0,
+      "browser_actions": 0.0,
+      "http_requests": 80.0,
+      "retrieval_calls": 80.0,
+      "verification_calls": 80.0,
+      "repair_attempts": 0.0,
+      "latency_ms": 29.112943000200175
+    },
+    "total_composite_cost": 160.0,
+    "cost_per_success": 2.0,
+    "by_novelty": {
+      "0.0": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.25": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.5": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.75": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      }
+    }
+  },
+  "PC-EXACT-REPLAY": {
+    "n_tasks": 20,
+    "n_success": 20,
+    "success_rate": 1.0,
+    "counters_total": {
+      "model_calls": 0.0,
+      "model_tokens": 0.0,
+      "browser_actions": 0.0,
+      "http_requests": 20.0,
+      "retrieval_calls": 20.0,
+      "verification_calls": 20.0,
+      "repair_attempts": 0.0,
+      "latency_ms": 11.220845000025292
+    },
+    "total_composite_cost": 40.0,
+    "cost_per_success": 2.0,
+    "by_novelty": {
+      "0.0": {
+        "n_tasks": 20,
+        "n_success": 20,
+        "success_rate": 1.0,
+        "total_composite_cost": 40.0,
+        "cost_per_success": 2.0
+      },
+      "0.25": {
+        "n_tasks": 0,
+        "n_success": 0,
+        "success_rate": 0.0,
+        "total_composite_cost": 0,
+        "cost_per_success": null
+      },
+      "0.5": {
+        "n_tasks": 0,
+        "n_success": 0,
+        "success_rate": 0.0,
+        "total_composite_cost": 0,
+        "cost_per_success": null
+      },
+      "0.75": {
+        "n_tasks": 0,
+        "n_success": 0,
+        "success_rate": 0.0,
+        "total_composite_cost": 0,
+        "cost_per_success": null
+      }
+    }
+  }
+}
