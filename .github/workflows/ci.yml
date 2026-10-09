@@ -36,6 +36,7 @@ jobs:
           python scripts/validate_repo.py
           python scripts/validate_main_safety.py
           python scripts/test_direction_governance.py
+          python scripts/test_design_review_contract.py
 
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v
@@ -52,6 +53,24 @@ jobs:
 
           lanes = ["graph", "physics", "runtime", "product", "intel", "frontier"]
           index = json.loads(Path("codex/index.json").read_text())["experiments"]
+          claim_state = json.loads(Path("codex/claim_state.json").read_text())
+          effective = claim_state.get("effective_event_by_claim")
+          if not isinstance(effective, dict):
+              raise SystemExit("claim_state missing effective_event_by_claim")
+          bad_effective = {
+              claim: event.get("status")
+              for claim, event in effective.items()
+              if event.get("status") in {"MEASUREMENT_INVALID", "BLOCKED"}
+          }
+          if bad_effective:
+              raise SystemExit(f"non-epistemic status leaked into effective claim state: {bad_effective}")
+          for claim, event in effective.items():
+              if event.get("source") == "canonical_event":
+                  if not event.get("in_frozen_scope") or not event.get("lane_eligible"):
+                      raise SystemExit(f"out-of-scope event leaked into effective claim state: {claim}")
+          if not Path("codex/claim_scope_warnings.json").exists():
+              raise SystemExit("codex claim_scope_warnings.json missing")
+
           quarantine = json.loads(Path("codex/quarantine.json").read_text())
           quarantine_by_id = {
               item.get("experiment_id"): item
