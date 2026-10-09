@@ -86,6 +86,8 @@ def main():
         "scripts/finalize_lane.py",
         "scripts/prepare_lane.py",
         "scripts/build_portfolio_snapshot.py",
+        "scripts/build_scout_fallback.py",
+        "scripts/record_build_receipt.py",
         "scripts/validate_portfolio_allocation.py",
         "scripts/validate_scout_brief.py",
         "scripts/sync_codex.py",
@@ -97,6 +99,7 @@ def main():
     scope = text("scripts/check_scope.py")
     require("from control_plane import CONTROL_ROOTS" in scope, "check_scope must use canonical CONTROL_ROOTS")
     require('"audit.json"' in scope and '"verdict.json"' in scope and '"handoff.json"' in scope and 'stage == "execute"' in scope, "EXECUTE scope must protect future-stage packet outputs")
+    require('stage == "build"' in scope and '"freeze.json"' in scope, "scope checker must define a protected pre-freeze BUILD stage")
     require("--untracked-files=all" in scope and "SPIDER_SCOPE_REPAIRED" in scope, "scope checker lacks complete repair/revalidation path")
 
     resilient = text(".github/scripts/run-opencode-resilient.sh")
@@ -114,13 +117,17 @@ def main():
     require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
     require("SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE" in lane_wf and "gh workflow run factory-pulse.yml" in lane_wf, "incomplete lane runs must self-wake global direction from always() cleanup")
     require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
+    require("BUILD — prepare frozen instrument/capability" in lane_wf and "FREEZE — bind design and prebuilt artifacts" in lane_wf, "lane workflow must implement DESIGN -> BUILD -> FREEZE")
+    require("record_build_receipt.py" in lane_wf and "Provision common research clients" in lane_wf, "lane workflow must bind pre-freeze artifacts and provision common research clients")
 
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
+    require('"build_required": false' in prepare and '"freeze_artifacts": []' in prepare and "designed=" in prepare, "experiment scaffold must declare BUILD/freeze metadata and designed state")
 
     snapshot_builder = text("scripts/build_portfolio_snapshot.py")
     require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
+    require('req.get("director_mandate")' in snapshot_builder and 'req.get("portfolio_allocation")' not in snapshot_builder, "portfolio snapshot must detect current Director mandates, not obsolete portfolio allocation fields")
 
     ci_wf = text(".github/workflows/ci.yml")
     require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
@@ -129,7 +136,9 @@ def main():
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
     require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
-    require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
+    require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must remain visible")
+    require("Ensure advisory Scout brief" in pulse and "build_scout_fallback.py" in pulse and "SPIDER_SCOUT_BRIEF_SOURCE=fallback" in pulse, "Scout failure must degrade to a deterministic advisory brief")
+    require("Dispatch or resume lanes" in pulse and "if: ${{ always() }}" in pulse, "Factory dispatch must run even when strategic model stages fail so frozen transactions can resume")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
     require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
@@ -145,6 +154,7 @@ def main():
     require('cron: "*/5 * * * *"' in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory recovery must poll independently of GITHUB_TOKEN event chaining and inspect only the freshest pulse")
     require("GH_REPO:" in factory_recovery, "Factory recovery must provide explicit repository context to gh without checkout")
     require("conclusion == 'cancelled'" not in factory_recovery, "Factory recovery must not retry cancellation superseded by fresher direction")
+    require("CONSECUTIVE_FAILURES" in factory_recovery and "failures=$FAILURES" not in factory_recovery, "Factory recovery breaker must use the current consecutive failure streak, not lifetime failures on a main SHA")
 
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")
@@ -153,6 +163,7 @@ def main():
     require("post-finalization Product packet mutation" in promote, "Product promotion must reject mutated finalized packets")
     require("git apply --reverse --check" in promote and "SPIDER_PRODUCT_ALREADY_PROMOTED" in promote, "Product promotion must be idempotent across latch-write failures")
     require("actions: write" in promote and "SPIDER_FACTORY_WAKE_AFTER_PRODUCT_PROMOTION" in promote and "gh workflow run factory-pulse.yml" in promote, "Product promotion must explicitly wake global direction after clearing the promotion latch")
+    require("pre_build_sha" in promote and "build_receipt.json" in promote, "Product promotion must include audited pre-freeze BUILD code in its pinned delta")
 
     codex = text("scripts/sync_codex.py")
     require("post-finalization mutation detected" in codex and "quarantine.json" in codex, "Codex sync lacks packet integrity quarantine")
@@ -160,17 +171,32 @@ def main():
     require('"--diff-filter=A"' in codex, "Codex must pin the original verdict creation commit")
     require("parent_handoff sha256 mismatch" in codex, "Codex must validate inherited handoff hashes")
     require("DIRECTOR_CLAIM_STATUSES" in codex, "Codex must reject Director-emitted post-promotion-only claim states")
+    require("artifact_hashes" in codex and "artifact_commit" in codex and "build_receipt.json" in codex, "Codex must validate optional pre-freeze artifact bindings")
 
     scout = text(".opencode/agents/spider_research_scout.md")
     require("reconnaissance" in scout.lower() and "candidate_directions" in scout, "Scout agent lacks generalist reconnaissance contract")
+    require("advisory" in scout.lower() and "at most ONE focused external search topic" in scout, "Scout must be bounded and explicitly advisory")
 
     global_director = text(".opencode/agents/spider_portfolio_director.md")
     require("Research Scout" in global_director and "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE" in global_director, "Global Director lacks Scout/decision contract")
+    require("DEGRADED SCOUT BRIEF" in global_director, "Global Director must remain usable with deterministic degraded Scout advice")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):
         require(f"`{status}`" in director, f"Director prompt missing canonical status {status}")
     require("SHIPPED" in director and "MUST NOT" in director, "Director must reserve SHIPPED for post-promotion state")
+
+    freezer = text("scripts/freeze_experiment.py")
+    require("artifact_hashes" in freezer and "artifact_commit" in freezer and "build_receipt.json" in freezer, "freezer must bind declared pre-freeze artifacts")
+
+    finalizer = text("scripts/finalize_lane.py")
+    require("frozen artifact changed" in finalizer, "later stages must verify frozen BUILD artifacts")
+
+    build_receipt = text("scripts/record_build_receipt.py")
+    require("pre_build_sha" in build_receipt and "freeze_artifacts" in build_receipt, "BUILD receipt must pin pre-build base and declared artifacts")
+
+    product_revert = text("scripts/revert_product_reject.py")
+    require("pre_build_sha" in product_revert and "build_receipt.json" in product_revert, "rejected Product experiments must revert pre-freeze BUILD changes")
 
     required = set(PACKET_FILES)
     exp_root = ROOT / "research/experiments"
