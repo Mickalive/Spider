@@ -1,17 +1,320 @@
 {
   "experiment_id": "EXP-PHYSICS-37973239386",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "On a frozen population of credential-free public sites that mint server-side action-gating values (session cookies, CSRF tokens, one-time/nonce tokens) which vary across independent fresh sessions with disjoint cookie jars: what is the PREVALENCE, per site and pooled with site-clustered intervals, of minted-value classes that are PREDICTABLE from observable context (a non-identity transform of the previous value, issue order, the same-session session-cookie identity, or an embedded counter/timestamp/structure) BEYOND a frozen irreducibility null calibrated before freeze with demonstrated power, and SEPARABLE from a memory baseline that merely repeats the last observed value? READ: is the value-level observable a persistence surface (a freshness/repair engine can anticipate or cheaply re-derive the next valid value) or is server-minted action-gating state irreducibly observation-bound (the architecture must persist procedures/paths and re-observe values fresh)?",
+  "hypothesis": "H1: among admitted action-gating fields, the pooled prevalence of fields classified PREDICTABLE beyond B_MEMORY_REPEAT and beyond B_IRREDUCIBILITY_NULL is at least P_HI = 0.25, and the site-clustered 95% CI lower bound exceeds P_FLOOR = 0.10. H0 (the shallow/null expectation): pooled prevalence is at or below P_FLOOR = 0.10, consistent with cryptographic/server-minted action-gating values being observation-bound on this substrate class. The design is explicitly two-sided and treats H0 as a first-class product-relevant outcome, not a failure.",
+  "falsifier": "BOTH DIRECTIONS ARE SATISFIABLE AND FROZEN. Let PV = PREDICTABLE_PREVALENCE_POOLED, and let the site-clustered bootstrap 95% interval be [LO, HI]. (S1) H1 is SUPPORTED if PV >= P_HI = 0.25 AND LO > P_FLOOR = 0.10. (S0) H0 is SUPPORTED (this SUPPORTS FALSIFYING H1) if PV <= P_FLOOR = 0.10 AND HI < P_HI = 0.25. (SX) otherwise the result is MIXED/INCONCLUSIVE. Any of the frozen measurement-invalid conditions fires MEASUREMENT_INVALID, which takes PRECEDENCE over S1, S0 and SX and is never reported as FALSIFIES. A negative is valid and expected to be informative: it establishes that, on this substrate class and window, value-level persistence has no measurable surface and the architecture must persist procedures/paths and re-observe.",
+  "baselines": {
+    "B_MEMORY_REPEAT": {
+      "id": "B_MEMORY_REPEAT",
+      "description": "Mandated memory baseline. Over the field's observation series ordered by (session_index, request_index), the held-out predictor predicts the current value as equal to the immediately preceding observed value of the same field. Accuracy = fraction of i>=2 with pred_i == v_i. This is the 'merely repeats the last observed value' baseline the Director mandate requires the treatment to beat.",
+      "expected_behavior": "Near 0 for genuinely varying minted values; high only if values persist across observations. A field is not counted PREDICTABLE on the strength of B_MEMORY_REPEAT.",
+      "is_memory_baseline": true
+    },
+    "B_MARKOV1": {
+      "id": "B_MARKOV1",
+      "description": "Stronger memory baseline, reported for transparency (NOT used as a disqualifier). First-order successor table vidx -> vidx fitted on the first 70% of ordered observations, applied to the held-out last 30%; unseen predecessors fall back to the training mode. Captures A/B alternation and any repeat structure a plain last-value predictor misses.",
+      "expected_behavior": "Beats B_MEMORY_REPEAT when values alternate or recur. Because the mandate's predictability classes explicitly include a non-trivial transform of the previous value (counters, increments), a field where only B_MARKOV1 succeeds is still reported with its firing non-baseline rule and its class; B_MARKOV1 is recorded as a sensitivity check, not as a gate.",
+      "is_memory_baseline": true
+    },
+    "B_CONSTANT_MODE": {
+      "id": "B_CONSTANT_MODE",
+      "description": "Triviality control, registered in response to the parent packet's mechanism-free-constant finding. Predicts the training-set mode for every held-out observation. Provides the triviality reference point so that no prevalence or accuracy claim is expressed as an unanchored absolute.",
+      "expected_behavior": "Matches the treatment only when the field is constant (which admission already excludes).",
+      "is_memory_baseline": true
+    },
+    "B_IRREDUCIBILITY_NULL": {
+      "id": "B_IRREDUCIBILITY_NULL",
+      "description": "Calibrated irreducibility null. Cryptographic pseudo-random values matched to each real field's length and observed alphabet, drawn from the frozen regime set {uuid4, hex32, hex64, b64_16, b64_32, b62_20, b62_43, dec16} with N=200 fields per regime and n_obs=12 values per field, epoch0=1760000000, RNG seed = 9000 + regime_index. The frozen armed rule set is re-applied; a rule is ARMED iff its null field-level false-positive rate <= ALPHA_RULE = 0.05. DESIGN calibration (literal, embedded): 1600 null fields -> 1 field fired on any rule -> aggregate null FP = 0.000625; per-rule max FP = 0.000625 (R_WALLCLOCK_B64); all 11 non-baseline rules ARMED. This null has demonstrated discriminating power because the same frozen rule family detects the planted positive-control classes at power 1.0 (see PC_PLANTED_CLASSES) while firing on 1/1600 null fields.",
+      "expected_behavior": "Fires on essentially no fields. Aggregate null FP must remain <= 0.05 at EXECUTE re-verification or the run is MEASUREMENT_INVALID.",
+      "is_irreducibility_null": true
+    }
+  },
+  "positive_control": {
+    "id": "PC_PLANTED_CLASSES",
+    "description": "Eight planted, by-construction-predictable field classes, 200 independent trials each with RNG seed = 5000 + trial and n in {8,10,12} observations: P_INT_INCR (decimal integers +7), P_HEX_INCR (hex integers +3), P_PREFIX_COUNTER (random constant shell + integer middle +5 per step), P_DEC_TS (epoch seconds +30), P_HEX_TS (hex epoch seconds +30), P_B64_TS (base64 of 6-byte big-endian epoch seconds +30), P_SESSION_BIND (value equals a same-session cookie value), P_HASH_BIND (value = sha256 hex of a same-session cookie value). A class is DETECTED on a trial iff the frozen rule family fires its designated rule (or any armed non-baseline rule) on that field.",
+    "literal_design_power": {
+      "P_INT_INCR": 1.0,
+      "P_HEX_INCR": 1.0,
+      "P_PREFIX_COUNTER": 1.0,
+      "P_DEC_TS": 1.0,
+      "P_HEX_TS": 1.0,
+      "P_B64_TS": 1.0,
+      "P_SESSION_BIND": 1.0,
+      "P_HASH_BIND": 1.0
+    },
+    "power_requirement": "Every planted class must be detected at power >= 0.8 on the frozen trials at EXECUTE re-verification; otherwise MEASUREMENT_INVALID.",
+    "construct_boundary": "This positive control is authored by the instrument designer. Per the Director's agent prior on author-validated instruments, it certifies the code path and detector sensitivity, NOT the construct boundary on the real Web. The real-Web confirmatory measurement and the out-of-author live null NC_LIVE_HTTPBIN_UUID are the mitigations; the boundary is disclosed as a residual validity threat."
+  },
+  "null_control": {
+    "id": "NC_PLANTED_RANDOM_PLUS_LIVE",
+    "description": "Two-component null. (1) NC_PLANTED_RANDOM: the 1600-field synthetic irreducibility battery of B_IRREDUCIBILITY_NULL (8 regimes x 200 fields, n_obs=12). (2) NC_LIVE_HTTPBIN_UUID: an out-of-author live random source, GET https://httpbin.org/uuid, collected across K=8 fresh sessions to form fields of >=12 UUID4 values each (batch until n_obs>=12); a live-null field is DETECTED iff any armed non-baseline rule fires.",
+    "literal_design_values": {
+      "NC_PLANTED_RANDOM_fields": 1600,
+      "NC_PLANTED_RANDOM_fields_fired": 1,
+      "NC_PLANTED_RANDOM_aggregate_fp": 0.000625,
+      "NC_LIVE_HTTPBIN_UUID_reachability_liveness": "verified at DESIGN: GET https://httpbin.org/uuid returned HTTP 200 with a uuid4 JSON body; deterministic uuid4 null battery fired 0/200 fields"
+    },
+    "pass_condition": "NC_PLANTED_RANDOM aggregate FP <= 0.05 AND NC_LIVE_HTTPBIN_UUID fired-field fraction <= 0.05, both re-verified at EXECUTE; otherwise MEASUREMENT_INVALID."
+  },
+  "measurement_validity": {
+    "target_integrity": "The rule family and the class-priority attribution are frozen here, before freeze, and are fixed functions of a field's own observed values plus same-session cookie values only. No rule reads the confirmatory prevalence, the field's site label, or any outcome. The reproducibility seed is master_seed = int(request_hash[:8],16) = int('92124686',16) = 2450671238 (request_hash 92124686699fdafc6d8a6e7c620506602a301d390e95edfb9d109238ae5fee12); field collection order and session scheduling use master_seed-derived offsets so no post hoc selection is possible.",
+    "split_integrity": "There is no train/test site split in the parent's failed sense. The unit is the field; the rule family is not fitted to real fields (its criteria are frozen predicates), so there is no train/test leakage. Bootstrap resampling is clustered at the registrable domain (eTLD+1 approximation: last two dot-labels, with explicit multi-label public-suffix handling for the frozen universe's co.uk/org.uk-like cases; none occur in the frozen list, documented). EXECUTE must publish the field-to-cluster map.",
+    "sampling_integrity": "The candidate universe of 57 credential-free endpoints is frozen verbatim in this spec.json (candidate_universe). Each endpoint is fetched with K=8 independent fresh sessions, each with a DISJOINT in-memory cookie jar and no shared state, and each session issues J=3 GETs of the SAME document URL. No authentication, no JavaScript, no rendering, no write/non-GET requests, python stdlib HTTP only. Admission is computed on the fresh confirmatory collection, not on DESIGN pilot values.",
+    "uncertainty_integrity": "Site-clustered nonparametric bootstrap, 10,000 resamples, resampling registrable domains with replacement; two-sided 95% percentile interval on PREDICTABLE_PREVALENCE_POOLED. Cluster count and distinct resample count are reported; if distinct resamples < 1000 the interval is flagged uninformative and the outcome is capped at MIXED even if S1/S0 point thresholds are crossed. Per-site prevalence reported for every site with >=1 admitted field.",
+    "representation_integrity": "Per field, EXECUTE archives the raw minted values (as evidence, redacted to length+sha256 for values longer than 512 chars), the locator type and name, the HTTP status, the ordered session/request index, the wall-clock epoch, and the same-session cookie name/value pairs used by SESSION_BIND/HASH_BIND. Response bodies are not archived (only field values and a body sha256), documented as representation loss. No JavaScript/SPA/DOM-rendered token, no authenticated token, no WebSocket/GraphQL/edge/mobile token is observable by this instrument.",
+    "rule_family_frozenness": "The 11-rule armed set and its predicates are frozen in this spec.json and prereg.md; EXECUTE may not add, remove, retune or threshold-shop a rule after seeing real fields. The null and positive-control batteries are re-run at EXECUTE with the frozen seeds and must reproduce the DESIGN power/FP requirement, and the re-run results are reported SEPARATELY from the DESIGN-embedded literal values.",
+    "freeze_control_plane_disclosure": "KNOWN PROGRAM-LEVEL CONSTRAINT (verified at source in the parent packet): scripts/freeze_experiment.py hashes exactly request.json, spec.json and prereg.md and provides no mechanism for a fourth artifact. Therefore NO pre-freeze pilot/power/attainability artifact is referenced by path as a frozen artifact; every mandated pre-freeze value is written LITERALLY inside this spec.json and prereg.md, exactly as the Director mandate requires. EXECUTE must not treat the absence of a separately hashed pilot file as a failure, and must not create a post hoc 'frozen' artifact.",
+    "design_time_activity_disclosure": "DESIGN ran ONLY non-outcome-bearing feasibility/liveness work: (i) a synthetic null/positive-power battery (no real-field outcome), (ii) an admission census (does a field mint a value that VARIES across fresh sessions), and (iii) reachability probes. DESIGN did NOT compute PREDICTABLE_PREVALENCE or apply the rule family to real minted values. The admission census observed the SAME candidate universe that is frozen here; because the rule criteria are fixed a priori and predictability was never inspected, this is a substrate-attainability check, not an outcome. This is disclosed as a residual threat to the cleanest possible separation and is why EXECUTE must recompute admission on a fresh collection."
+  },
+  "decision_rule": {
+    "primary_metric": "PREDICTABLE_PREVALENCE_POOLED",
+    "metric_definition": "N_PREDICTABLE / N_INDICATOR_FIELDS, where N_INDICATOR_FIELDS = admitted action-gating fields with >= N_MIN_OBS = 4 observations and a computable indicator, and N_PREDICTABLE = those fields where (a) at least one ARMED non-baseline rule fires, and (b) the firing rule's detection fraction on the field exceeds B_MEMORY_REPEAT held-out accuracy by at least DELTA_MEM = 0.10. A field that is sequentially deterministic but also memory-repeat-explained (e.g. an identity-persistent value) does not count; admission already excludes constant fields.",
+    "secondary_metrics": [
+      "PREDICTABLE_PREVALENCE_SITE (per registrable domain)",
+      "PREDICTABLE_PREVALENCE_BY_CLASS (class-priority attribution)",
+      "ADMITTED_FIELDS, ADMITTED_SITES, ADMITTED_ENDPOINTS",
+      "B_MEMORY_REPEAT_ACC_MEAN, B_MARKOV1_ACC_MEAN, B_CONSTANT_MODE_ACC_MEAN",
+      "NULL_FP_AGGREGATE (execute re-run), PC_POWER_MIN (execute re-run)",
+      "NON_GET_REQUESTS (must equal 0), TRANSPORT_ERROR_RATE"
+    ],
+    "thresholds_frozen": {
+      "P_FLOOR": 0.10,
+      "P_HI": 0.25,
+      "ALPHA_RULE": 0.05,
+      "PC_POWER_MIN": 0.8,
+      "NULL_FP_MAX": 0.05,
+      "DELTA_MEM": 0.10,
+      "N_MIN_OBS": 4,
+      "M_MIN_FIELDS": 20,
+      "S_MIN_SITES": 8,
+      "TRANSPORT_ERROR_MAX": 0.30,
+      "CLUSTERED_BOOTSTRAP_RESAMPLES": 10000
+    },
+    "branch_precedence": [
+      "1. MEASUREMENT_INVALID if ANY measurement_invalid_condition holds (see decision_rule.measurement_invalid_conditions). status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. This branch PRECEDES S0 and S1; an instrument or substrate failure must NEVER be encoded as FALSIFIES.",
+      "2. SUPPORTS (S1): PV >= 0.25 AND site-clustered CI lower bound > 0.10.",
+      "3. FALSIFIES (S0): PV <= 0.10 AND site-clustered CI upper bound < 0.25.",
+      "4. MIXED/INCONCLUSIVE (SX): otherwise, including any CI that straddles a threshold and any interval resting on <1000 distinct cluster resamples."
+    ],
+    "measurement_invalid_conditions": [
+      "(a) fewer than M_MIN_FIELDS = 20 admitted indicator fields at EXECUTE;",
+      "(b) fewer than S_MIN_SITES = 8 distinct registrable domains among admitted fields;",
+      "(c) NC_PLANTED_RANDOM aggregate FP > 0.05 on the frozen 1600-field battery, or NC_LIVE_HTTPBIN_UUID fired-field fraction > 0.05;",
+      "(d) any of the eight PC_PLANTED_CLASSES detected at power < 0.8 on the frozen 200-trial battery;",
+      "(e) collection transport error rate > 0.30 of planned GETs, or any non-GET request issued, or any authenticated/credentialed request issued;",
+      "(f) more than 0.30 of admitted fields cannot be assigned a frozen locator type or an action-gating name class;",
+      "(g) the frozen 57-endpoint candidate universe in this spec.json is not used verbatim (any substitution, addition or deletion);",
+      "(h) the rule family applied at EXECUTE differs from the frozen predicate set, or a rule threshold is changed post hoc."
+    ],
+    "claim_ceiling": "A SUPPORTS outcome can move C-WEB-DYNAMICS at most to EXPERIMENTAL for this substrate class and window; it cannot VALIDATE the claim and cannot promote to Product on its own. A FALSIFIES outcome is bounded to the frozen credential-free action-gating substrate and window and does not close the claim or the Physics domain."
+  },
+  "product_consequence_positive": "If PV >= 0.25 with clustered CI lower > 0.10, then value-level persistence has a measurable surface on credential-free action-gating state: a freshness/repair engine can ANTICIPATE or CHEAPLY RE-DERIVE the next valid session/CSRF/nonce value from observable context (previous value transform, issue order, session-cookie binding, or embedded counter/timestamp). Product may then memoize or repair values instead of unconditionally re-observing, and C-WEB-DYNAMICS gains a bounded mechanical prior for exploration. Any such capability still requires a separate authorizing verdict before Product Core.",
+  "product_consequence_negative": "If PV <= 0.10 with clustered CI upper < 0.25, then server-minted action-gating state is observation-bound on this substrate class and window: value-level memoization/replay is not a viable surface, and the architecture must PERSIST PROCEDURES AND PATHS and RE-OBSERVE values fresh. This is a decision-changing negative: it directly informs the persist-values-versus-procedures decision, bounds value-replay caching expectations, and directs Product to procedural persistence plus cheap re-observation economics. UNKNOWN remains a valid product answer where the interval is inconclusive.",
+  "estimated_cost": {
+    "http_requests_planned": 1544,
+    "http_requests_breakdown": "57 endpoints x K=8 sessions x J=3 GETs = 1368; plus ~176 control/misc requests (httpbin uuid batching + reachability)",
+    "compute_hours": 1,
+    "storage_mb": 50,
+    "wall_clock_minutes": 40,
+    "model_calls": 0,
+    "browser": false,
+    "credentials": 0
+  },
+  "expected_information_gain": "High and decision-changing. This is the first bounded PREVALENCE estimate, with site-clustered intervals, of predictability in server-minted action-gating values, replacing the retired response-signature density/divergence estimator line that Codex found rank/magnitude-non-identifiable. It carries a both-directions falsifier, an out-of-author live null, a frozen irreducibility null with demonstrated power, a mandated memory-repeat baseline, and an arithmetic attainability certificate grounded in a literal pre-freeze census (16/57 endpoints admitted, 33 varying action-gating fields, 14 registrable sites). A valid positive establishes a value-level persistence surface; a valid negative establishes irreducibility and directs the architecture to procedures/paths plus fresh re-observation.",
+  "observable_object": {
+    "unit": "admitted action-gating field = (endpoint site, document URL, locator type, locator name)",
+    "locator_types": ["cookie", "input.hidden", "meta"],
+    "action_gating_name_classes": {
+      "SESSION": "cookie name matches /session|sessid|sid|jsessionid|phpsessid|asp.net_sessionid|connect.sid|_forum_session|authsession|auth_session|laravel_session|ci_session|codeigniter|symfony|rack.session|gitea|i_like_gitea|play_session/i",
+      "CSRF": "cookie/input/meta name matches /csrf|xsrf|_token|authenticity|csrftoken|csrfmiddlewaretoken|__RequestVerificationToken/i",
+      "TOKEN": "name matches /token/i (one-time/login tokens such as wpLoginToken, wpCreateaccountToken)",
+      "NONCE": "meta name matches /nonce/i (reported as a separate stratum; e.g. csp-nonce)"
+    },
+    "excluded_name_pattern": "/_ga|_gid|_gat|_gcl|_fbp|_fbc|__cf_bm|_cfuvid|ajs_|atlcohort|_abck|bm_sz|^cid$|euid|_v-visitor|GU_|gu_|WMF-Uniq|LAST_NEWS|kndctr|cfz_|X-Experiments|Optanon|CookieConsent|cookieyes|moove_|_hp2|_uet|_pin_unauth|_pinterest|IDE|NID|1P_JAR|CONSENT|_twpid|mp_|_mkto|__hstc|__hssc|__hssrc|hubspotutk|intercom|amplitude|ajs_user|segment|mixpanel|heap|_clck|_clsk/i",
+    "non_get_prohibited": true,
+    "credential_free": true,
+    "javascript": false
+  },
+  "frozen_rule_family": {
+    "rng_seed_master": 2450671238,
+    "rng_seed_expression": "int(request_hash[:8], 16)",
+    "rules_nonbaseline_armed": {
+      "R_INT_INCR": "all values parse as decimal integers and consecutive deltas are a single nonzero constant d.",
+      "R_HEX_INCR": "all values parse as base-16 integers and consecutive deltas are a single nonzero constant d.",
+      "R_B62_INCR": "all values parse as base-62 integers over digits+upper+lower and consecutive deltas are a single nonzero constant d.",
+      "R_PREFIX_COUNTER": "the longest common prefix P and suffix S leave a varying middle that parses as integers with a single nonzero constant delta, and the constant shell length >= max(4, 0.25*min_len).",
+      "R_ORDER_LINEAR": "integer values fit v_i = a + b*i (b != 0) on the first half and reproduce the held-out second half exactly.",
+      "R_SESSION_BIND": "at least 0.75 of observations equal, start with, end with, or contain (len>=8) a same-session cookie value.",
+      "R_HASH_BIND": "at least 0.75 of observations equal the md5, sha1 or sha256 hex digest of a same-session cookie value.",
+      "R_WALLCLOCK_DEC": "a decimal substring of length >= 10 decodes to epoch within +/- 3600 s of the observation wall-clock, at second or millisecond scale.",
+      "R_WALLCLOCK_HEX": "a hex substring of length >= 8 decodes to epoch within +/- 3600 s at second or millisecond scale.",
+      "R_WALLCLOCK_B64": "a base64 substring window of 4 bytes (big or little endian) decodes to epoch within +/- 3600 s at second or millisecond scale.",
+      "R_CONST_SUBSTRING": "the longest common substring across all values has length >= max(6, 0.40*min_len) while values are not all identical."
+    },
+    "baselines_not_counted": {
+      "R_MEMORY_REPEAT": "predict current = previous observed value (identity).",
+      "R_MARKOV1": "first-order successor table, held-out on last 30%, mode fallback.",
+      "R_CONSTANT_MODE": "predict training mode."
+    },
+    "class_attribution_priority": [
+      "SESSION_BIND", "HASH_BIND", "WALLCLOCK_B64", "WALLCLOCK_HEX", "WALLCLOCK_DEC",
+      "INT_INCR", "PREFIX_COUNTER", "HEX_INCR", "ORDER_LINEAR", "B62_INCR", "CONST_SUBSTRING",
+      "MEMORY_ONLY", "UNPREDICTABLE"
+    ],
+    "calibration": {
+      "null_regimes": ["uuid4", "hex32", "hex64", "b64_16", "b64_32", "b62_20", "b62_43", "dec16"],
+      "null_n_fields_per_regime": 200,
+      "null_n_obs_per_field": 12,
+      "null_epoch0": 1760000000,
+      "null_rng_seed_rule": "9000 + regime_index",
+      "null_fields_total": 1600,
+      "null_fields_fired": 1,
+      "null_aggregate_fp": 0.000625,
+      "null_per_rule_fp": {"R_INT_INCR": 0.0, "R_HEX_INCR": 0.0, "R_B62_INCR": 0.0, "R_PREFIX_COUNTER": 0.0, "R_ORDER_LINEAR": 0.0, "R_SESSION_BIND": 0.0, "R_HASH_BIND": 0.0, "R_WALLCLOCK_DEC": 0.0, "R_WALLCLOCK_HEX": 0.0, "R_WALLCLOCK_B64": 0.000625, "R_CONST_SUBSTRING": 0.0},
+      "all_11_rules_armed": true,
+      "positive_power_min": 1.0,
+      "positive_trials_per_class": 200,
+      "positive_rng_seed_rule": "5000 + trial_index",
+      "positive_n_obs_choices": [8, 10, 12]
+    }
+  },
+  "admission_criterion": {
+    "collection": "per endpoint: K=8 independent fresh sessions, each with a disjoint in-memory cookie jar, no shared cookies; each session performs J=3 GETs of the same document URL; User-Agent fixed; timeout 20 s; body read capped at 600000 bytes.",
+    "field_admitted_iff": "(1) locator/name belongs to the frozen action-gating taxonomy and is not in the excluded_name_pattern; (2) at least 2 distinct raw values are observed across all sessions/requests; (3) the field is present in at least 2 distinct sessions; (4) at least N_MIN_OBS=4 observations total.",
+    "strata": "ALL (SESSION, CSRF, TOKEN) pooled for the primary metric; NONCE reported as a separate stratum and excluded from the primary metric by default, with an optional ALL_PLUS_NONCE sensitivity reported separately."
+  },
+  "candidate_universe": {
+    "frozen": true,
+    "n_endpoints": 57,
+    "endpoints": [
+      "https://gitlab.com/users/sign_in",
+      "https://gitlab.gnome.org/users/sign_in",
+      "https://invent.kde.org/users/sign_in",
+      "https://salsa.debian.org/users/sign_in",
+      "https://gitlab.freedesktop.org/users/sign_in",
+      "https://gitlab.archlinux.org/users/sign_in",
+      "https://codeberg.org/user/login",
+      "https://gitea.com/user/login",
+      "https://git.disroot.org/user/login",
+      "https://discuss.python.org/",
+      "https://community.openai.com/",
+      "https://discuss.elastic.co/",
+      "https://community.cloudflare.com/",
+      "https://forum.freecodecamp.org/",
+      "https://discuss.hashicorp.com/",
+      "https://discuss.kubernetes.io/",
+      "https://community.home-assistant.io/",
+      "https://discourse.julialang.org/",
+      "https://discuss.rubyonrails.org/",
+      "https://discussion.fedoraproject.org/",
+      "https://forum.manjaro.org/",
+      "https://forum.endeavouros.com/",
+      "https://en.wikipedia.org/w/index.php?title=Special:UserLogin",
+      "https://wiki.archlinux.org/index.php?title=Special:UserLogin",
+      "https://wiki.gentoo.org/index.php?title=Special:UserLogin",
+      "https://wiki.openstreetmap.org/w/index.php?title=Special:UserLogin",
+      "https://www.mediawiki.org/w/index.php?title=Special:UserLogin",
+      "https://www.wikidata.org/w/index.php?title=Special:UserLogin",
+      "https://www.djangoproject.com/accounts/login/",
+      "https://www.djangoproject.com/admin/login/",
+      "https://pypi.org/account/login/",
+      "https://docs.djangoproject.com/",
+      "https://bitbucket.org/account/signin/",
+      "https://rubygems.org/session/new",
+      "https://www.reddit.com/login/",
+      "https://news.ycombinator.com/login",
+      "https://basecamp.com/",
+      "https://pragprog.com/",
+      "https://www.npmjs.com/login",
+      "https://dev.to/enter",
+      "https://start.spring.io/",
+      "https://spring.io/",
+      "https://wordpress.org/wp-login.php",
+      "https://wordpress.com/log-in",
+      "https://www.phpbb.com/community/",
+      "https://discuss.flarum.org/",
+      "https://community.nodebb.org/",
+      "https://community.invisioncommunity.com/",
+      "https://www.joomla.org/",
+      "https://www.concretecms.org/",
+      "https://craftcms.com/",
+      "https://www.okta.com/login/",
+      "https://auth0.com/",
+      "https://login.microsoftonline.com/",
+      "https://duckduckgo.com/html/?q=test",
+      "https://www.bing.com/search?q=test",
+      "https://search.brave.com/search?q=test"
+    ],
+    "selection_basis": "A curated credential-free universe spanning Rails/GitLab, Gitea, Discourse, MediaWiki, Django, Python/PyPI, forum stacks, and session-minting login/search endpoints. Frozen verbatim; EXECUTE may not substitute endpoints."
+  },
+  "pilot_certificates": {
+    "disclosure": "All values below are DESIGN-phase, literal, non-outcome-bearing feasibility/liveness measurements, embedded here because the freeze control plane hashes only three files (see measurement_validity.freeze_control_plane_disclosure). They are NOT confirmatory outcomes and NOT evidence about C-WEB-DYNAMICS.",
+    "null_calibration": {
+      "fields_total": 1600,
+      "fields_fired": 1,
+      "aggregate_fp": 0.000625,
+      "alpha_rule": 0.05,
+      "verdict": "PASS (all 11 rules armed)"
+    },
+    "positive_power": {
+      "trials_per_class": 200,
+      "power_per_class": 1.0,
+      "min_power": 1.0,
+      "verdict": "PASS (>= 0.8)"
+    },
+    "live_null_liveness": {
+      "httpbin_uuid_status": 200,
+      "httpbin_headers_status": 200,
+      "uuid4_synthetic_null_fp": 0.0,
+      "verdict": "PASS (out-of-author live source reachable; deterministic uuid4 battery fires on 0/200)"
+    },
+    "admission_census": {
+      "mode": "K=3 sessions, J=1 request, 57 endpoints",
+      "endpoints_admitted": 16,
+      "endpoint_admission_rate": 0.2807,
+      "distinct_registrable_sites": 14,
+      "distinct_hostnames": 15,
+      "varying_action_gating_fields": 33,
+      "note": "1 of the 33 is a meta csp-nonce (NONCE stratum, excluded from primary metric by default); 32 are SESSION/CSRF/TOKEN.",
+      "example_admitted_fields": [
+        "gitlab.gnome.org: cookie _gitlab_session, input authenticity_token, meta csrf-token",
+        "invent.kde.org: cookie _gitlab_session, input authenticity_token, meta csrf-token, meta csp-nonce",
+        "gitlab.archlinux.org: cookie _gitlab_session, input authenticity_token, meta csrf-token",
+        "gitea.com: cookie i_like_gitea",
+        "en.wikipedia.org: cookie authSession, input wpLoginToken",
+        "wiki.archlinux.org: cookie archwiki_session, input wpLoginToken",
+        "wiki.gentoo.org: cookie gentoo-wiki_session, input wpLoginToken",
+        "wiki.openstreetmap.org: cookie wiki_session, input wpLoginToken",
+        "www.mediawiki.org: cookie authSession, input wpLoginToken",
+        "www.wikidata.org: cookie authSession, input wpLoginToken",
+        "www.djangoproject.com: cookie csrftoken, input csrfmiddlewaretoken (login and admin/login)",
+        "pypi.org: cookie session_id, input csrf_token",
+        "www.reddit.com: input jsc_token",
+        "dev.to: cookie _Devto_Forem_Session, input authenticity_token",
+        "discuss.flarum.org: cookie flarum_session"
+      ],
+      "verdict": "PASS (substrate attainable)"
+    },
+    "attainability_certificate_arithmetic": {
+      "required_fields_M_MIN": 20,
+      "required_sites_S_MIN": 8,
+      "pilot_admitted_fields": 33,
+      "pilot_prime_fields_excluding_nonce": 32,
+      "pilot_sites": 14,
+      "field_margin_ratio": 1.60,
+      "site_margin_ratio": 1.75,
+      "monotonicity_argument": "The confirmatory collection uses K=8 sessions and J=3 requests versus the census's K=3/J=1. The variation criterion (>=2 distinct values) and the presence criterion (>=2 sessions) are monotone in the number of observations, so admission at K=8/J=3 can only be equal to or greater than the census admission, absent server-side change. The N_MIN_OBS=4 gate is the only new constraint and is satisfied by construction at K=8/J=3.",
+      "branch": "If, despite this certificate, EXECUTE admits < 20 fields or < 8 sites, the run selects MEASUREMENT_INVALID (conditions (a)/(b)) and NOT FALSIFIES."
+    }
+  },
+  "scope_boundaries": [
+    "Credential-free public HTTP GET only; no authentication, no JavaScript, no DOM rendering, no SPA/GraphQL/WebSocket/edge/mobile observable.",
+    "Action-gating values only (SESSION/CSRF/TOKEN; NONCE reported separately); analytics/consent/ad/bot-management identifiers excluded by a frozen name pattern.",
+    "One stdlib-HTTP client, one collection window, one frozen 57-endpoint universe; rates describe this pool and window, not the Web.",
+    "A FALSIFIES outcome closes only this substrate class and window; it does not close C-WEB-DYNAMICS or the Physics domain (AGENTS.md physics discipline).",
+    "A SUPPORTS outcome moves C-WEB-DYNAMICS at most to EXPERIMENTAL and authorizes no Product promotion."
+  ],
+  "parent_handoff_disposition": "request.json director_mandate.allocation.parent_handoff_disposition = SUPERSEDE. The parent (EXP-PHYSICS-37385620138) is continuity evidence only. Its query-parameter perturbation direction is NOT adopted. Its four-way carry_forward is preserved by reference and not silently overridden; the binding direction is the Director mandate's server-minted-value predictability question."
 }
