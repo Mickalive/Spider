@@ -20,6 +20,11 @@ def base_snapshot() -> dict:
     return {
         "schema_version": 1,
         "cycle_id": "TEST-CYCLE",
+        "global": {
+            "canonical_experiments": 417,
+            "quarantined_experiments": 2,
+            "starved_claims": [],
+        },
         "lanes": {
             lane: {
                 "last_claim": cfg["priority_claims"][0],
@@ -102,6 +107,47 @@ def main() -> None:
     rejected = run_validator(base_snapshot(), missing)
     if rejected.returncode == 0:
         raise SystemExit("validator accepted a structurally incomplete mandate")
+
+    with tempfile.TemporaryDirectory() as td:
+        td = Path(td)
+        snap = td / "snapshot.json"
+        brief = td / "brief.json"
+        write_json(snap, base_snapshot())
+        fallback = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/build_scout_fallback.py"),
+                "--snapshot",
+                str(snap),
+                "--output",
+                str(brief),
+                "--reason",
+                "test outage",
+            ],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+        )
+        if fallback.returncode != 0:
+            raise SystemExit("deterministic Scout fallback failed:\n" + fallback.stdout + fallback.stderr)
+        valid_brief = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/validate_scout_brief.py"),
+                "--snapshot",
+                str(snap),
+                "--brief",
+                str(brief),
+            ],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+        )
+        if valid_brief.returncode != 0:
+            raise SystemExit("deterministic Scout fallback emitted invalid brief:\n" + valid_brief.stdout + valid_brief.stderr)
+        brief_obj = json.loads(brief.read_text())
+        if "DEGRADED SCOUT BRIEF" not in brief_obj["executive_assessment"]:
+            raise SystemExit("Scout fallback is not explicitly degraded")
 
     print("SPIDER_DIRECTION_GOVERNANCE_TEST_OK")
 
