@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -56,11 +57,16 @@ def main() -> None:
             raise SystemExit(f"freeze_artifact missing or not a file: {rel}")
         manifest[rel] = sha(full)
 
+    pre_build_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+    ).strip()
+
     receipt = {
         "schema_version": 1,
         "experiment_id": args.experiment_id,
         "lane": lane,
         "build_required": build_required,
+        "pre_build_sha": pre_build_sha,
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "artifacts": manifest,
     }
