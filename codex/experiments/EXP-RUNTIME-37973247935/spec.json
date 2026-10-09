@@ -1,0 +1,145 @@
+{
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "With the composite intervention oracle (length-framed SHA-256 WAL-byte vector + SQL logical projection + stable-header response fingerprint) VALIDATED at the authorship-separated, real-Chromium-transport scope ONLY against interventions performed through the fixture's own controlled endpoint (research/runtime/intervention_surface.py), does that same oracle retain arm-constrained discrimination - point sensitivity >= 0.90 with two-sided 95% Wilson lower bound >= 0.80 and non-degenerate intervals on out-of-surface positive arms, zero false positives on matched out-of-surface nulls, arm-blind scoring and independent recomputation with zero mismatches - when the change it must detect is induced OUTSIDE the surface the detector's author wrote, by a component that is neither research/runtime/intervention_surface.py nor reachable (importable or callable) from the scorer (research/runtime/oracle_scorer.py): an independent out-of-surface worker that commits a direct SQLite state mutation, a direct representation-body mutation, a rolled-back/no-op invocation, and an nginx proxy-cache MISS-to-HIT transport transition; and, separately, does a powered write-then-revert probe executed entirely inside the 50 ms capture interval MEASURE rather than assume the acknowledged blind spot of a byte-equality WAL oracle, in both the byte-restore direction and the logical-restore direction?",
+  "hypothesis": "The composite intervention oracle's arm-constrained discrimination is a property of the oracle over committed database state transitions, not an artifact of the fixture that authored the interventions. Specifically: (H1) out-of-surface committed mutations (a direct SQLite UPDATE of the controlled runtime_probe row, and a direct UPDATE of the body_config representation row that changes the served /api response body) are detected at point sensitivity >= 0.90 with Wilson 95% lower bound >= 0.80 and non-degenerate intervals; (H2) matched out-of-surface nulls (worker invoked but idle, worker mutation attempted and rolled back before commit, and an nginx proxy-cache MISS-to-HIT over an identical body) yield zero false positives; (H3) the same oracle continues to detect the in-surface planted browser write (instrument liveness) at sensitivity 1.0. The blind-spot probe (H4, reported but not gated) predicts that a write restored to byte-identical pre/post state inside the interval is NOT detected (byte-restore blind spot magnitude measurable), while a logically reverted write that is not byte-restored IS detected (byte sensitivity).",
+  "falsifier": "Any of the following is an explicit falsification of the stated transfer hypothesis: (i) either out-of-surface positive arm P-OOS-WORKER or P-OOS-REPR yields point sensitivity < 0.90, OR a two-sided 95% Wilson lower bound < 0.80, OR a degenerate interval (ci_hi <= ci_lo), given the instrument-liveness control passed; (ii) any single false positive (detected=true) on any matched out-of-surface null episode in N-OOS-IDLE, N-OOS-REJECT or N-OOS-CACHE (zero false positives is the frozen null requirement); (iii) independent recomputation over raw JSONL yields zero_mismatches=false; (iv) the arm-blind discipline is violated (detector output written after arm labels are joined). Instrument-liveness failure (PC-INSURFACE-WRITE-LIVE sensitivity < 1.0), capability-ledger required-scope failure, missing mandatory WAL evidence, authorship/reachability violation, synthetic fallback, or a failed pre-freeze attainability/control-liveness preflight are NOT scientific falsification and map to MEASUREMENT_INVALID or INCONCLUSIVE as defined in decision_rule.",
+  "baselines": {
+    "B-INSURFACE-BROWSER-VALIDATED": {
+      "description": "The frozen parent instrument and ceiling from EXP-RUNTIME-36293257855: composite oracle (WAL-byte vector + logical projection + stable-header fingerprint), 6 in-surface arms x 20 episodes through real Chromium via the public Playwright API, all arms point=1.0, Wilson95=[0.8388748419471806, 1.0], positive control sensitivity 1.0, null-matrix specificity 1.0, zero false positives, arm-blind detector output archived before label join, independent recomputation zero_mismatches=true, capability ledger all required scopes PASS. AUDIT PASS with no required fixes. This baseline is frozen and is NOT re-measured as the scientific question of this experiment.",
+      "source_experiment": "EXP-RUNTIME-36293257855",
+      "metrics": {
+        "arms": 6,
+        "episodes_per_arm": 20,
+        "sensitivity_point": 1.0,
+        "sensitivity_wilson_lo": 0.8388748419471806,
+        "specificity_point": 1.0,
+        "specificity_wilson_lo": 0.8388748419471806,
+        "recompute_zero_mismatches": true
+      },
+      "scope_bound_that_this_experiment_tests": "Every positive in the baseline was planted through research/runtime/intervention_surface.py's own controlled endpoint; the detector's construct boundary against a change it did not author is unmeasured."
+    },
+    "B-OUT-OF-SURFACE-PRECEDENT": {
+      "description": "No direct precedent: the accepted Codex (codex/claim_state.json events_by_claim.C-MEAS-VALID) and the parent handoff record that an out-of-surface transition has never been measured. The nginx proxy-cache MISS-to-HIT corroboration exists only as a readiness/transport diagnostic, and representation drift (P-DRIFT) exists only as a surface-planted set_representation call. Recorded as null/empty rather than fabricated.",
+      "source_experiment": null,
+      "metrics": {}
+    }
+  },
+  "positive_control": {
+    "id": "PC-INSURFACE-WRITE-LIVE",
+    "description": "Instrument-liveness control for this run. A planted valid-auth SPA write through the REAL Chromium button click against the UNCHANGED validated intervention surface (research/runtime/intervention_surface.py), exactly as in the parent P-WRITE arm. This re-establishes, in this run, that the instrument is live and that the fixture is separable from the out-of-surface arms. It is a control, not the scientific question, and does not repeat the six-arm matrix.",
+    "expected_behavior": "detected=true for 20/20 episodes; pre/post WAL vector hash differs; logical projection matches the planted value",
+    "arms": ["P-WRITE"],
+    "episodes": 20,
+    "accept_region": {"n": 20, "required_k": 20, "point_min": 1.0, "wilson_lo_min": 0.8388748419471806},
+    "evidence_refs": ["A-DETECTOR-OUTPUT.jsonl", "A-WAL-VECTOR-BEFORE-AFTER.jsonl", "A-EPISODE-LEDGER.jsonl"]
+  },
+  "null_control": {
+    "id": "NC-OOS-NULL-MATRIX",
+    "description": "Three matched out-of-surface null arms (40 episodes each = 120 episodes) executed inside the measured interval. Each must yield zero false positives. N-OOS-IDLE is the matched null of the out-of-surface worker path (worker invoked, connects, performs a read-only SELECT, commits nothing); N-OOS-REJECT is the matched transactional-failure null (worker attempts a mutation that violates the schema's CHECK(id=1) constraint and rolls back, so no committed bytes change); N-OOS-CACHE is the transport-component null (a fresh cacheable key requested twice through the exclusive nginx yields MISS then HIT with byte-identical body and stable headers, only frozen-volatile headers X-Cache/Age/X-Worker-Pid differing).",
+    "expected_behavior": "detected=false on all 120 null episodes; pre/post WAL vector byte-identical; logical projection unchanged; stable-header response fingerprint unchanged",
+    "arms": ["N-OOS-IDLE", "N-OOS-REJECT", "N-OOS-CACHE"],
+    "episodes_per_arm": 40,
+    "frozen_null_requirement": "zero false positives (0/120) across all matched nulls",
+    "evidence_refs": ["A-DETECTOR-OUTPUT.jsonl", "A-WAL-VECTOR-BEFORE-AFTER.jsonl", "A-EPISODE-LEDGER.jsonl"]
+  },
+  "measurement_validity": {
+    "out_of_surface_component": {
+      "module": "research/runtime/oos_worker.py",
+      "role": "ground-truth provider for the out-of-surface arms (the analogue of intervention_surface.py for this new scope)",
+      "modes": {
+        "commit_probe_update": "direct committed SQLite UPDATE of the controlled runtime_probe row (marker/revision/updated_at) bypassing the Flask surface entirely",
+        "commit_representation": "direct committed SQLite UPDATE of the body_config row (variant/content) that changes the body served by the stable-header /api endpoints",
+        "idle": "connect, read-only SELECT, close; no write and no commit",
+        "reject_rollback": "attempt a mutation that violates CHECK(id=1) on runtime_probe, then ROLLBACK; no committed change"
+      },
+      "must_not_import": ["research.runtime.intervention_surface", "research.runtime.oracle_scorer"],
+      "must_not_be_imported_by": ["research.runtime.oracle_scorer"]
+    },
+    "scorer_unreachability": "research/runtime/oracle_scorer.py must not import, reference or call research/runtime/oos_worker.py, and oos_worker.py must not import oracle_scorer.py. The harness imports both but contains no detection and no out-of-surface mutation logic. A static source scan (V-OOS-UNREACHABLE-FROM-SCORER) records the verdict; the scalar detect() boundary continues to receive only the three raw measurements (pre/post vector hash, pre/post logical projection, pre/post fingerprint) and never an arm label, planted value, worker mode or expected outcome.",
+    "authorship_separation": "The parent authorship separation is preserved and extended: intervention_surface.py (in-surface ground truth) does not import oracle_scorer.py; oos_worker.py (out-of-surface ground truth) does not import oracle_scorer.py; oracle_scorer.py imports neither and imports no Flask. All three may import a constants-only config module. Authentic multi-human author separation is not observable in this environment; what is measured is logical component separation and scorer-unreachability, recorded as such.",
+    "transport": "Real Chromium via public Playwright API only (p.chromium.executable_path launch of the canonical chromium-1243 executable sha256 8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e, playwright 1.63.0, real 1280x720 CDP DOM.getDocument(depth=-1, pierce=True) + Accessibility.getFullAXTree), exactly as the validated parent. Real button clicks remain the ONLY write mechanism for the in-surface liveness control and for the episode navigation. Out-of-surface arms additionally perform their DB mutation through oos_worker.py executed by the harness, which is the deliberate new condition; the out-of-surface mutation is not routed through any browser click and is not routed through intervention_surface.py.",
+    "wal_evidence": "Mandatory before/after WAL byte vector capture for every episode, inside the measured interval after 50 ms quiescence, using the frozen length-framed SHA-256 over /tmp/single.db plus /tmp/single.db-wal. Fixture setup/teardown (session upsert, probe reset, body reset) happens outside the measured interval and is recorded per episode. -shm is diagnostic only and never enters the vector.",
+    "arm_blind_scoring": "Episode order is pre-seeded and archived before any episode runs (artifacts/A-SEEDED-ORDER.json, seed recorded). The detector runs and its output is written (artifacts/A-DETECTOR-OUTPUT.jsonl) BEFORE arm labels are joined; label join happens in a separate step. Independent recomputation (artifacts/A-RECOMPUTE-CHECK.json) re-implements the detector and Wilson CI from raw JSONL only, imports nothing from oracle_scorer, and must yield zero_mismatches=true.",
+    "no_synthetic_fallback": "Any failed real probe (browser launch, navigation, click, CDP/AX capture, WAL capture, oos_worker execution, SQLite read) records UNAVAILABLE/ERROR with evidence and a smallest unblocking action. No httpx/requests client, synthetic browser, synthetic WAL/DOM/AX vector, or fabricated outcome may stand in for a failed real measurement.",
+    "rng_and_determinism": "Fresh per-case RNG with recorded seeds for episode ordering, planted values and any stochasticity. Master seed derived from experiment_id 37973247935. No code path branches on arm id inside the detector.",
+    "capability_ledger": "One-command fail-closed bring-up (research/runtime/bringup.py + the per-experiment bringup_contract.json) must exit 0 with all declared required scopes PASS before any episode runs. Required scopes reuse the validated parent set (CAP-CHROMIUM-LAUNCH, CAP-WAL-SUBSTRATE, CAP-NGINX-PROXY). BrowserGym, AgentLab, policy-model credentials and GHCR are declared advisory UNAVAILABLE and are NOT on the critical path; the out-of-surface design is credential-free.",
+    "parent_components_immutable": "research/runtime/oracle_scorer.py, research/runtime/intervention_surface.py and research/runtime/shared_config.py are the validated parent components and must not be mutated by this experiment. New out-of-surface behavior lives in research/runtime/oos_worker.py and the experiment-local harness/config so the validated component hashes remain stable.",
+    "attainability_preflight": {
+      "status": "COMPUTED_IN_DESIGN",
+      "method": "two-sided 95% Wilson score interval with the frozen z=1.959963984540054, computed as pure arithmetic in DESIGN; no outcome measurements were run",
+      "out_of_surface_positive_arms_n": 40,
+      "out_of_surface_positive_accept_region": {
+        "min_k": 37,
+        "n": 40,
+        "point_at_min_k": 0.925,
+        "wilson_lo_at_min_k": 0.8014,
+        "wilson_hi_at_min_k": 0.9742,
+        "non_degenerate": true
+      },
+      "out_of_surface_null_arms_n": 40,
+      "null_accept_region": {"max_false_positives": 0, "k": 40, "n": 40, "point": 1.0, "wilson_lo": 0.9124},
+      "liveness_control_n": 20,
+      "liveness_accept_region": {"min_k": 20, "n": 20, "point": 1.0, "wilson_lo": 0.8388748419471806},
+      "why_n_40": "At n=20 the frozen pair (point >= 0.90 AND wilson_lo >= 0.80) is satisfiable only at 20/20 (k=19 gives wilson_lo=0.7639 < 0.80), so any single miss on a genuinely 0.95 instrument within 20 trials would FALSIFY. At n=40 the accept region is non-empty and non-trivial (k >= 37, point >= 0.925, wilson_lo >= 0.8014), so the literal Director thresholds are attainable by a genuinely high-rate instrument rather than only by a perfect one. This is the pre-freeze attainability certificate demanded by the mandate.",
+      "freeze_gate": "The full arithmetic table (k from 0..n per arm) must be materialized as artifacts/A-ATTAINABILITY-CERTIFICATE.json and must reproduce these accept regions before freeze.json is created."
+    },
+    "control_liveness_preflight": {
+      "required_before_freeze": true,
+      "discipline": "Each check runs mechanically on a throwaway copy of the schema / a throwaway cache key and MUST NOT invoke oracle_scorer on the real episode matrix or inspect any arm outcome. A failed check blocks freeze and makes the experiment MEASUREMENT_INVALID rather than a scientific negative.",
+      "checks": [
+        {"id": "CL-OOS-WORKER-COMMIT-PROBE", "description": "oos_worker commit_probe_update produces a committed WAL byte change and a changed logical projection row on a throwaway DB copy"},
+        {"id": "CL-OOS-WORKER-COMMIT-REPR", "description": "oos_worker commit_representation changes the body_config row and therefore the served body on a throwaway DB copy"},
+        {"id": "CL-OOS-WORKER-IDLE", "description": "oos_worker idle leaves the throwaway DB and WAL bytes byte-identical"},
+        {"id": "CL-OOS-WORKER-REJECT", "description": "oos_worker reject_rollback raises the CHECK constraint, rolls back, and leaves the throwaway DB and WAL bytes byte-identical"},
+        {"id": "CL-REVERT-FIDELITY", "description": "snapshot then restore of /tmp single.db plus -wal bytes on a throwaway copy yields a byte-identical length-framed vector, so the blind-spot probe is mechanically executable"},
+        {"id": "CL-CACHE-MISS-HIT", "description": "a fresh cacheable key through the exclusive nginx yields X-Cache MISS then HIT with identical body and identical stable headers on a real transport leg"},
+        {"id": "CL-INSURFACE-LIVE", "description": "the unchanged intervention surface still mutates the WAL via a real browser button click (parent-proven; structurally re-verified), so the liveness control can fire"}
+      ]
+    }
+  },
+  "decision_rule": {
+    "result_mapping": {
+      "SUPPORTS": "Both out-of-surface positive arms (P-OOS-WORKER, P-OOS-REPR) meet point >= 0.90 AND wilson_lo >= 0.80 AND ci_hi > ci_lo at the frozen per-arm n; zero false positives across all matched out-of-surface null episodes (0/120); instrument-liveness control PC-INSURFACE-WRITE-LIVE sensitivity = 1.0; arm-blind detector output archived before label join; independent recomputation zero_mismatches = true; capability-ledger all required scopes PASS; attainability and control-liveness preflights passed. The blind-spot probe M-REVERT-BLINDSPOT is reported and does not gate this mapping.",
+      "MIXED": "Exactly one of P-OOS-WORKER / P-OOS-REPR meets the positive thresholds while the other fails (transfer is component- or channel-specific); OR both positives meet the thresholds but at least one matched-null episode is a false positive (sensitivity transfers but specificity does not); OR both positives meet the thresholds but the blind-spot probe contradicts the registered directional prediction for BOTH sub-conditions (interpretation becomes mixed; the probe still never changes the sensitivity/specificity gate).",
+      "FALSIFIES": "Both out-of-surface positive arms fail the positive thresholds (all out-of-surface sensitivity lost) while the instrument-liveness control passed, OR zero false positives is violated together with at least one positive failing. A valid scientific negative is status=COMPLETE with this outcome, not an infrastructure failure.",
+      "INCONCLUSIVE": "Infrastructure or substrate failure prevents completing the frozen episode matrix (browser launch, navigation, click, WAL capture, oos_worker execution, nginx cache leg), OR the capability ledger reports a required scope FAIL, OR mandatory WAL evidence is missing for any episode, OR the number of scored episodes per arm differs from n for mechanical reasons. Recorded per-episode with the smallest unblocking action; never encoded as a scientific negative.",
+      "MEASUREMENT_INVALID": "Authorship separation or scorer-unreachability violated (oos_worker or intervention_surface imported by the scorer, or the detector received an arm label/planted value/worker mode); synthetic fallback used for any failed probe; instrument-liveness control sensitivity < 1.0 (instrument not live); attainability or control-liveness preflight not run or failed; WAL evidence captured outside the measured interval; blind-spot probe snapshot/restore fidelity not achieved (revert_bytes_identical=false where required)."
+    },
+    "arm_thresholds": {"point_min": 0.90, "wilson_lo_min": 0.80, "non_degenerate": true},
+    "out_of_surface_positive_arms": ["P-OOS-WORKER", "P-OOS-REPR"],
+    "out_of_surface_null_arms": ["N-OOS-IDLE", "N-OOS-REJECT", "N-OOS-CACHE"],
+    "episodes_per_arm": 40,
+    "null_requirement": "zero false positives across all matched-null episodes (0/120)",
+    "liveness_control": {"id": "PC-INSURFACE-WRITE-LIVE", "n": 20, "sensitivity_min": 1.0},
+    "blindspot_probe": {
+      "id": "M-REVERT-BLINDSPOT",
+      "sub_conditions": {
+        "M-REVERT-BYTES": "committed out-of-surface write then exact byte restore of single.db plus -wal inside the interval; registered directional prediction: oracle detects ~0 (byte-equality blind spot)",
+        "M-REVERT-LOGICAL": "committed out-of-surface write then a committed compensating inverse (logical state restored, WAL bytes not restored) inside the interval; registered directional prediction: oracle detects ~1 (byte-sensitivity)"
+      },
+      "n": 20,
+      "gated": false,
+      "reporting": "detection fraction per sub-condition with two-sided 95% Wilson CI, plus independent SQL confirmation that the transient write occurred (write_happened=true) and revert fidelity (revert_bytes_identical). Never gates SUPPORTS/FALSIFIES; enters interpretation, validity_notes and unresolved."
+    },
+    "recomputation_requirement": "zero_mismatches = true",
+    "capability_ledger_requirement": "all required scopes PASS",
+    "pre_freeze_preflight_requirement": "attainability certificate reproduced and control-liveness checks all pass before freeze.json exists"
+  },
+  "product_consequence_positive": "If the oracle retains out-of-surface discrimination, C-MEAS-VALID's construct boundary is materially narrowed: the measured discrimination becomes evidence that the instrument detects committed state transitions it did not author, not merely fixture-performed interventions. Downstream lanes (Graph C-FRESHNESS and C-DELTA-REPAIR, and the Physics statistical-contract certification) may then preregister this substrate as a measurement-valid precondition at the new, explicitly quoted ceiling. The out-of-surface worker contract (oos_worker.py) becomes a reusable component-level analogue of the intervention surface for transfer tests. This is a bounded scope widening, not product promotion: runtime still may not set PRODUCT_CORE/SHIPPED.",
+  "product_consequence_negative": "If out-of-surface discrimination fails or specificity collapses, then the validated ceiling narrows to 'the oracle detects what this particular fixture does'. C-MEAS-VALID stays bounded and downstream lanes may NOT inherit the substrate for real drift or delta-repair questions. The program must then either (a) redesign the detector to key on a state transition observable that is not tied to the authored fixture (for example an explicit logical-delta or versioned-projection channel) before downstream claims can be preregistered, or (b) accept and publish that the instrument is a fixture-scoped control and route freshness/repair work to a different measurement substrate. A partial (MIXED) result localizes the failure to a component or channel and guides targeted repair instead of blanket rejection.",
+  "estimated_cost": {
+    "new_out_of_surface_episodes": 200,
+    "out_of_surface_arms": 5,
+    "episodes_per_arm": 40,
+    "liveness_control_episodes": 20,
+    "blindspot_probe_episodes": 40,
+    "total_measured_episodes": 260,
+    "browser_launches": 280,
+    "estimated_wall_clock_minutes": 100,
+    "infrastructure": "reuse of the validated substrate: 2x gunicorn 23.0.0 @127.0.0.1:19860/19861 sharing /tmp/single.db WAL (wal_autocheckpoint=0), exclusive nginx 1.24.0 @127.0.0.1:19851 with hash $request_uri consistent and real proxy_cache, Playwright 1.63.0 / canonical Chromium 153.0.8010.12 @1280x720. Credential-free; no model calls, no network egress required.",
+    "cost_note": "Wall-clock includes the 240-request readiness certificate and per-episode fixture setup/teardown outside the measured interval."
+  },
+  "expected_information_gain": "High and decision-changing. This is the single remaining construct-validity bound named by the parent result.json unresolved[0], the parent audit unresolved[0], and the Director mandate: whether the validated discrimination is a property of the oracle over arbitrary committed state transitions or only over transitions the fixture itself performs. A SUPPORTS result converts the validated ceiling from 'detects fixture-authored interventions' to 'detects out-of-surface committed state transitions', which is the exact precondition Graph (C-FRESHNESS, C-DELTA-REPAIR) and the Physics statistical-contract certification have been waiting to preregister. A FALSIFIES or MIXED result localizes the break to a component (representation vs probe-row) or a direction (sensitivity vs specificity) and prevents the program from building downstream work on an unlicensed substrate. The blind-spot probe converts a standing assumption ('the byte-equality oracle cannot see a write-then-revert') into a measured magnitude in both directions, so it cannot silently mislead a future drift design. The experiment is a bounded transfer test on the existing fixture, not open-ended substrate work."
+}
