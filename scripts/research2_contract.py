@@ -42,7 +42,8 @@ PACKET_FILES = (
 
 STAGE_OUTPUTS = {
     "install": (),
-    "design": ("freeze.json",),
+    "design": ("spec.json", "prereg.md"),
+    "build": ("build_receipt.json",),
     "execute": ("result.json", "report.md", "provenance.json"),
     "audit": ("audit.json",),
     "director": ("verdict.json", "handoff.json"),
