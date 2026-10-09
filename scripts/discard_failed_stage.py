@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = {
     "design": ["spec.json", "prereg.md", "freeze.json"],
+    "build": ["build_receipt.json"],
     "execute": ["result.json", "report.md", "provenance.json"],
     "audit": ["audit.json"],
     "director": ["verdict.json", "handoff.json"],
@@ -35,6 +36,28 @@ def restore_path(ref: str, path: str) -> None:
         elif p.exists() or p.is_symlink():
             p.unlink(missing_ok=True)
     run("git", "clean", "-fd", "--", path)
+
+
+def clean_failed_build(exp_id: str, exp: Path) -> None:
+    req = json.loads((exp / "request.json").read_text())
+    lane = req["lane"]
+    registry = json.loads((ROOT / "research/lanes/registry.json").read_text())
+    roots = registry["lanes"][lane].get("allowed_code_roots", [])
+
+    preserved: dict[str, bytes] = {}
+    for name in ["failure.json", "model_build.json"]:
+        p = exp / name
+        if p.exists():
+            preserved[name] = p.read_bytes()
+
+    for root in roots:
+        restore_path("HEAD", root)
+
+    rel_exp = f"research/experiments/{exp_id}"
+    restore_path("HEAD", rel_exp)
+    for name, data in preserved.items():
+        (exp / name).parent.mkdir(parents=True, exist_ok=True)
+        (exp / name).write_bytes(data)
 
 
 def clean_failed_execute(exp_id: str, exp: Path) -> None:
@@ -84,6 +107,8 @@ def main():
 
     if args.stage == "execute":
         clean_failed_execute(args.experiment_id, exp)
+    elif args.stage == "build":
+        clean_failed_build(args.experiment_id, exp)
     else:
         discard_stage_outputs(args.experiment_id, exp, args.stage)
     print(f"SPIDER_DISCARDED_INVALID_STAGE_OUTPUTS stage={args.stage}")
