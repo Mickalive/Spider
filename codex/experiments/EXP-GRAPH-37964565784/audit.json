@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37964565784",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The frozen spec's repaired_session_isolation_predicate (NC-SESSION-ISOLATION-REPAIRED) implements an AND of two sub-predicates: (1) session_identifying_disjoint (session-identifying cookie NAMES must be disjoint across sessions) AND (2) pairwise_disjoint_on_name_value_after_filter ((name,value) pairs disjoint after allowlist exclusion). The audit's required_fixes[0] specified an OR: \"require pairwise disjointness only on session-identifying cookie names, OR on (name,value) pairs after excluding server-set constant configuration cookies.\" The spec implemented the first alternative as a name-disjointness requirement, which is impossible for real session cookies (the name _gitlab_session appears in every session by design). The second alternative ((name,value) disjointness after allowlist exclusion) PASSES (pairwise_disjoint_on_name_value_after_filter=true for all anchors). The spec must be revised to implement the audit's intended repair: use pairwise_disjoint_on_name_value_after_filter as the sole disjointness check, or clarify which alternative was intended.",
+    "Re-freeze the experiment with the corrected GATE-C3 predicate and re-execute. The current freeze.json binds a predicate that fails on legitimate session behavior, not on a genuine isolation defect."
+  ],
+  "validity_findings": [
+    "SPECIFICATION DEFECT IN GATE-C3 PREDICATE: The frozen spec's repaired_session_isolation_predicate adds session_identifying_disjoint (requiring session-identifying cookie NAMES to be disjoint across sessions). This is NOT what the audit's required_fixes[0] mandated. The audit offered two alternatives: (a) name-disjointness for session-identifying cookies, OR (b) (name,value)-disjointness after excluding constant-config cookies. Alternative (a) is infeasible for real session cookies (_gitlab_session, WMF-Uniq, authSession, enwikiSession appear in every session by design). Alternative (b) is implemented as pairwise_disjoint_on_name_value_after_filter and PASSES for all anchors. The spec incorrectly conjoined both as AND, causing GATE-C3 to fail on legitimate server behavior. This is a DESIGN-stage defect, not an EXECUTE failure.",
+    "PART I EXTRACTION IS ROBUST AND WOULD PASS D1 IF GATE-C3 WERE CORRECTED: M-EXTRACT-AGREE-VALUESET=4/4, M-EXTRACT-AGREE-VERDICT=4/4, M-CANARY-PASS=true, M-N-SESSION-SCOPED-CONFIRMED=3/4 (CAL-POS-1,2,3), M-N-REPRESENTATION-LOSS=1/4 (CAL-POS-4). All positive controls (PC-EXTRACT-CANARY, PC-GUARD-LOGIC) and null controls (NC-CAL-NEG-ALL-REJECTED, NC-PATH-INDEPENDENCE, NC-TRIAL-CONSTRUCTION-STABILITY) PASS. The extraction instrument demonstrates sensitivity and agreement.",
+    "PART II DRIFT POPULATION IS NON-DEGENERATE AND YIELDS EXPLICIT FALSE-ACCEPT BOUND: M-N-D1V=6 trials (all from CAL-POS-2 wpCreateaccountToken), M-N-DECISIONS-D1V=2 (both REUSE and ABSTAIN observed), all active channels fire and not-fire at least once. CH-POSTCOND-SEM is correctly waived as INACTIVE-ON-POPULATION. M-PAIRED-FA-DIFF-D1V=1.0 with anchor-clustered 97.5% lower bound = 1.0. This meets the INCUMBENT-BLIND-CONFIRMED threshold (diff >= 0.10 and LB > 0) but was NOT READ because Part I did not reach D1 due to the GATE-C3 specification defect.",
+    "TIMESCALE DIAGNOSTIC CONFIRMS PER-REQUEST ROTATION: CAL-POS-1, CAL-POS-2, CAL-POS-3 show M-WARMJAR-VARIATION-RATE = M-WARMJAR-FRESH-VALUE-VARIATION-RATE = 1.0, classified as PER_REQUEST_SCALE per CC-H. Any value-binding freshness verdict on these anchors is bounded to short-lived applicability, not session-scoped durability.",
+    "PROVENANCE GAP: codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl is absent (audit required_fixes[1] from parent), recorded as provenance dependency only. GATE C re-measures live and does not depend on it.",
+    "ANCHOR CONSTRUCT VALIDITY: CAL-POS-4 yields NO_FIELD under both paths (evidence class A_PRIORI_CONSTRUCT). Whether this is genuine absence or a limitation of the frozen token-name list is unresolved. CAL-POS-3 is SPIDER_PARTIAL (not independently Codex-corroborated). Only CAL-POS-1 and CAL-POS-2 are SPIDER_CORROBORATED by Frontier."
+  ],
+  "baseline_findings": [
+    "B-INCUMBENT-SIGNAL-ONLY (value-blind incumbent): On D1V trials, false-accept rate = 1.0 (UB97=1.0) — structurally predicted because no channel except CH-PRECOND-BINDING can see value-only changes, and CH-PRECOND-BINDING is excluded from this baseline. On all trials, false-accept rate = 0.167 (8/48), driven by FRESH trials where no channel fires.",
+    "B-VALUE-AWARE (CH-PRECOND-BINDING only): On D1V trials, false-accept rate = 0.0 (UB97=0.0) — by construction, it abstains on every value rotation. On all trials, false-accept rate = 0.0.",
+    "B-FULL-GUARD (union of four channels): On D1V trials, false-accept rate = 0.0 (equals B-VALUE-AWARE where no structural/transport change). On FRESH trials, REUSE rate = 0.5 (12/24) — CH-STRUCT-SIG and CH-TRANSPORT-VALIDATOR fire on half the FRESH trials due to per-request structural/transport variation.",
+    "CH-POSTCOND-SEM is INACTIVE-ON-POPULATION (waived with reason): fires 0/48, not_fire 48/48. The postcond drift family (F-POSTCOND) stays UNKNOWN per NC-NONDEGENERATE-ESTIMATOR waiver. This is correctly reported.",
+    "CH-STRUCT-SIG and CH-TRANSPORT-VALIDATOR are ACTIVE and satisfied: they fire on structural/transport changes (15/48 and 36/48 respectively) and not-fire otherwise. Their activity on FRESH trials demonstrates the guard responds to non-value drift, which is correct behavior but inflates the incumbent's apparent false-accept rate on the ALL family (0.167)."
+  ],
+  "recomputed_metrics": {
+    "M-CERT-ROUTE-OK": {"value": 4, "unit": "anchors (0..4)", "match": true},
+    "M-CERT-BODY-VARIABLE": {"value": 4, "unit": "anchors (0..4)", "match": true},
+    "M-CERT-FIELD-PRESENT": {"value": 3, "unit": "anchors (0..4)", "match": true},
+    "M-CERT-SESSION-ISOLATION-PASS": {"value": false, "unit": "boolean", "match": true, "note": "Fails due to session_identifying_disjoint sub-predicate; pairwise_disjoint_on_name_value_after_filter=true for all anchors"},
+    "M-CERT-FIRST-REQUEST-COOKIELESS": {"value": true, "unit": "boolean", "match": true},
+    "M-CERT-SESSION-IDENTIFYING-DISJOINT": {"value": false, "unit": "boolean", "match": true, "note": "Session-identifying cookie names (_gitlab_session, WMF-Uniq, authSession, enwikiSession) appear in all sessions; this is expected behavior, not an isolation failure"},
+    "M-CERT-CONSTCONFIG-SHARED-NAMES": {"value": {"CAL-POS-1": ["preferred_language"], "CAL-POS-2": ["GeoIP", "NetworkProbeLimit", "WMF-Last-Access"], "CAL-POS-3": ["CentralAuthAnonTopLevel", "GeoIP", "NetworkProbeLimit", "WMF-Last-Access", "WMF-Last-Access-Global"], "CAL-POS-4": [], "CAL-NEG-1": [], "CAL-NEG-2": [], "CAL-NEG-3": [], "CAL-NEG-4": []}, "unit": "map", "match": true},
+    "M-CERT-UNEXPECTED-SHARED-NAMES": {"value": {"CAL-POS-1": ["_gitlab_session"], "CAL-POS-2": ["WMF-Uniq", "authSession"], "CAL-POS-3": ["WMF-Uniq", "authSession", "enwikiSession"], "CAL-POS-4": [], "CAL-NEG-1": [], "CAL-NEG-2": [], "CAL-NEG-3": [], "CAL-NEG-4": []}, "unit": "map", "match": true},
+    "M-CERT-NEG-VALUES-A": {"value": 0, "unit": "count", "match": true},
+    "M-CERT-NEG-VALUES-B": {"value": 0, "unit": "count", "match": true},
+    "M-EXTRACT-AGREE-VALUESET": {"value": 4, "unit": "anchors (0..4)", "match": true},
+    "M-EXTRACT-AGREE-VERDICT": {"value": 4, "unit": "anchors (0..4)", "match": true},
+    "M-CANARY-PASS": {"value": true, "unit": "boolean", "match": true},
+    "M-N-SESSION-SCOPED-CONFIRMED": {"value": 3, "unit": "anchors (0..4)", "match": true},
+    "M-N-REPRESENTATION-LOSS": {"value": 1, "unit": "anchors (0..4)", "match": true},
+    "M-N-D1V": {"value": 6, "unit": "trials", "match": true, "note": "Constructed but not READ per frozen decision rule; all 6 from CAL-POS-2 wpCreateaccountToken"},
+    "M-N-DECISIONS-D1V": {"value": 2, "unit": "count", "match": true},
+    "M-PAIRED-FA-DIFF-D1V": {"value": 1.0, "unit": "fraction", "match": true, "note": "Incumbent 1.0 vs value-aware 0.0; anchor-clustered LB=1.0, UB97=1.0"},
+    "M-FA-INCUMBENT-D1V": {"value": 1.0, "unit": "fraction", "match": true},
+    "M-FA-INCUMBENT-D1V-UB97": {"value": 1.0, "unit": "fraction", "match": true},
+    "M-FA-VALUEAWARE-D1V": {"value": 0.0, "unit": "fraction", "match": true},
+    "M-FA-VALUEAWARE-D1V-UB97": {"value": 0.0, "unit": "fraction", "match": true},
+    "M-ROTATION-TIMESCALE-CAL-POS-1": {"value": "PER_REQUEST_SCALE", "unit": "enum", "match": true},
+    "M-ROTATION-TIMESCALE-CAL-POS-2": {"value": "PER_REQUEST_SCALE", "unit": "enum", "match": true},
+    "M-ROTATION-TIMESCALE-CAL-POS-3": {"value": "PER_REQUEST_SCALE", "unit": "enum", "match": true},
+    "M-ROTATION-TIMESCALE-CAL-POS-4": {"value": "NO_ROTATION", "unit": "enum", "match": true}
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID at GATE-C3 (F-CERT) per frozen spec; C-FRESHNESS remains HYPOTHESIS. No claim-level statement is licensed by this packet as frozen. However, the EVIDENCE (not the frozen outcome) supports: (1) EXTRACTION-DEFECT-CONFIRMED (Part I D1) — dual-path agreement 4/4, 3/4 anchors session-scoped, canary passes, all controls pass; (2) INCUMBENT-BLIND-CONFIRMED (Part II) — M-N-D1V=6, M-PAIRED-FA-DIFF-D1V=1.0 with anchor-clustered LB=1.0, meeting the explicit false-accept bound mandate; (3) PER_REQUEST_SCALE timescale (CC-H) bounds any value-binding verdict to short-lived applicability. If the GATE-C3 predicate is corrected to implement the audit's intended repair (pairwise_disjoint_on_name_value_after_filter only), a re-frozen re-execution would likely yield status=COMPLETE, outcome=SUPPORTS, branch=EXTRACTION-DEFECT-CONFIRMED with Part II read, advancing C-FRESHNESS to at most EXPERIMENTAL under CC-A..CC-H.",
+  "evidence_refs": [
+    {"path": "research/experiments/EXP-GRAPH-37964565784/result.json", "role": "producer_handoff"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/spec.json", "role": "frozen_design", "note": "Contains the defective repaired_session_isolation_predicate"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/certificate.json", "role": "derived", "note": "Shows pairwise_disjoint_on_name_value_after_filter=true for all anchors; session_identifying_disjoint=false for CAL-POS-1,2,3"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/extraction_A.jsonl", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/extraction_B.jsonl", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/anchor_metrics.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/trials.jsonl", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/derived/guard_stats.json", "role": "derived", "note": "Shows Part II would yield INCUMBENT-BLIND-CONFIRMED if read"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/raw/records.jsonl", "role": "raw", "note": "Shows session-identifying cookie names repeated across sessions with different values"},
+    {"path": "research/experiments/EXP-GRAPH-37964565784/provenance.json", "role": "provenance"}
+  ],
+  "unresolved": [
+    "Whether the corrected GATE-C3 predicate (using only pairwise_disjoint_on_name_value_after_filter) would pass on these anchors in a re-frozen re-execution. Expected yes based on current certificate.json showing true for all anchors.",
+    "Whether CAL-POS-4's NO_FIELD verdict is genuine absence of in-list tokens or a limitation of the frozen token-name list (evidence class A_PRIORI_CONSTRUCT).",
+    "Whether the wpCreateaccountToken discrepancy (Frontier 3 distinct vs parent packet 5 distinct vs grandparent 0) is stable over time and across egress networks; this run records one date and one egress ASN.",
+    "codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl remains absent (provenance dependency from audit required_fixes[1]).",
+    "The behaviourally invisible stale cell (SB-04, M-INVISIBLE-STALE-PREV) and permission-boundary drift family (SB-02) remain unmeasured by design.",
+    "Whether the audit's required_fixes[0] 'OR' between two alternatives was meant as a design choice for the DESIGNER to pick one, or as a requirement that BOTH hold. The current spec implements both as AND; the evidence shows alternative (b) passes and alternative (a) is infeasible."
+  ]
+}
