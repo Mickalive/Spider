@@ -53,12 +53,32 @@ jobs:
               ;;
           esac
 
-          FAILURES=$(gh run list --workflow=factory-pulse.yml --limit 50             --json conclusion,headSha             | jq --arg sha "$SOURCE_SHA"               '[.[] | select(.headSha==$sha and (.conclusion=="failure" or .conclusion=="timed_out" or .conclusion=="action_required" or .conclusion=="startup_failure"))] | length')
+          HISTORY=$(gh run list --workflow=factory-pulse.yml --limit 20             --json databaseId,status,conclusion,headSha,createdAt)
 
-          if [[ "$FAILURES" -ge 3 ]]; then
-            echo "::error::SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN source_run=$SOURCE_RUN head=$SOURCE_SHA failures=$FAILURES"
+          # Count only the current consecutive failure streak. A previous success
+          # resets the breaker even when main has the same SHA for days. The old
+          # implementation counted every historical failure on a SHA and could
+          # permanently lock the factory after transient provider outages.
+          CONSECUTIVE_FAILURES=$(jq -r --arg sha "$SOURCE_SHA" '
+            reduce .[] as $r (
+              {count:0, open:true};
+              if (.open | not) then .
+              elif $r.headSha != $sha then .open=false
+              elif ($r.conclusion=="failure" or
+                    $r.conclusion=="timed_out" or
+                    $r.conclusion=="action_required" or
+                    $r.conclusion=="startup_failure") then
+                .count += 1
+              else
+                .open=false
+              end
+            ) | .count
+          ' <<<"$HISTORY")
+
+          if [[ "$CONSECUTIVE_FAILURES" -ge 3 ]]; then
+            echo "::error::SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN source_run=$SOURCE_RUN head=$SOURCE_SHA consecutive_failures=$CONSECUTIVE_FAILURES"
             exit 0
           fi
 
-          echo "SPIDER_FACTORY_RECOVERY_RETRY source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION head=$SOURCE_SHA failures=$FAILURES"
+          echo "SPIDER_FACTORY_RECOVERY_RETRY source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION head=$SOURCE_SHA consecutive_failures=$CONSECUTIVE_FAILURES"
           gh workflow run factory-pulse.yml --ref main
