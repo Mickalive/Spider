@@ -1,0 +1,86 @@
+{
+  "experiment_id": "EXP-PRODUCT-37385633334",
+  "lane": "product",
+  "claim_ids": [
+    "C-LLM-INHERIT"
+  ],
+  "question": "Does a real external LLM agent with a real model endpoint benefit from SPIDER's inherited mechanisms beyond strong memory and instruction baselines, at equal model, tools, and budget?",
+  "hypothesis": "An LLM agent equipped with SPIDER's current inheritance primitives (parameterized mechanism resolution, mechanism registry, bind/execute/verify) will achieve lower end-to-end cost per verified success than a retrieval baseline at matched budget and matched accuracy, on a task set of >=30 credential-free real-Web tasks with mechanically verifiable postconditions.",
+  "falsifier": "The SPIDER arm does NOT beat the retrieval baseline (B-RETRIEVAL) at matched budget AND matched accuracy on the primary metric (end-to-end cost per verified success). If the readiness certificate fails, the experiment terminates at MEASUREMENT_INVALID without executing any arms.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "name": "Cold Re-derivation",
+      "description": "LLM agent with no stored knowledge, no retrieval, no inheritance. Must derive all actions from scratch per task. Equal model, tools, budget as SPIDER arm.",
+      "type": "negative_control"
+    },
+    {
+      "id": "B-INSTRUCTIONS",
+      "name": "Instructions-Only",
+      "description": "LLM agent given natural-language task instructions only. No retrieval from observation bank, no mechanism inheritance. Equal model, tools, budget as SPIDER arm.",
+      "type": "baseline"
+    },
+    {
+      "id": "B-RETRIEVAL",
+      "name": "Retrieval Baseline (K=5)",
+      "description": "LLM agent retrieves top-5 most similar trajectories from SPIDER's observation bank using TF-IDF Jaccard (TAU=0.30), with retrieval quality reported (precision@5, recall@5). No mechanism inheritance. Equal model, tools, budget as SPIDER arm.",
+      "type": "strong_baseline"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-ACCOUNTING-FIDELITY",
+    "name": "Accounting-Fidelity Control",
+    "description": "A seeded control trajectory run before any arm that demonstrates per-trajectory honest counters fire correctly: token counts, browser calls, HTTP requests, retrieval calls, verification calls, repair attempts all recorded and match ground truth within 1%. Must pass before any experimental arm executes.",
+    "expected_behavior": "All counters within 1% of ground truth on a deterministic seeded trajectory",
+    "pass_criterion": "max_relative_error <= 0.01 on all counter types"
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-RETRIEVAL",
+    "name": "Shuffled Retrieval Null",
+    "description": "Retrieval baseline with trajectory IDs randomly permuted before similarity search, destroying any semantic relationship. Expected to perform at or below cold baseline.",
+    "expected_behavior": "Cost per verified success >= B-COLD, accuracy <= B-COLD",
+    "pass_criterion": "cost_ratio_vs_cold >= 1.0 AND accuracy_ratio_vs_cold <= 1.0"
+  },
+  "measurement_validity": [
+    "Readiness certificate MUST pass before any arm executes: (1) model endpoint reachable and responsive (2) >=30 credential-free real-Web tasks with mechanically verifiable postconditions defined and tested (3) accounting-fidelity control (PC-ACCOUNTING-FIDELITY) passes on seeded trajectory",
+    "All arms use IDENTICAL model endpoint, temperature=0, seed=42, max_tokens=4096, max_steps=15",
+    "All arms have IDENTICAL tool budget: Playwright browser, HTTP client, SPIDER kernel (for SPIDER arm only)",
+    "Task success verified by MECHANICAL postcondition check (HTTP status, response body schema, DOM selector, JSON field match) - NO LLM judge, NO human evaluation",
+    "Per-trajectory honest counters: model_calls, model_tokens, browser_actions, http_requests, retrieval_calls, verification_calls, repair_attempts, latency_ms recorded per trajectory",
+    "Cost model: M_total_f10 = model_tokens + 10*(browser_actions + http_requests + retrieval_calls + verification_calls + repair_attempts) amortized over f=10 reuses",
+    "Accuracy reported ALONGSIDE cost, never traded silently. False accepts and abstentions counted as costs.",
+    "Family-stratified bootstrap (5000 resamples, trajectory_id unit) for CIs; block permutation (5000) for null distributions",
+    "SPIDER arm declares absent primitives before freeze: NO freshness guard (C-FRESHNESS), NO delta repair (C-DELTA-REPAIR). A null result is a lower bound on the product thesis, not a refutation."
+  ],
+  "decision_rule": {
+    "readiness_certificate": {
+      "gate": "ALL three checks must pass: model_endpoint_reachable, task_set_ge_30_mechanical, accounting_fidelity_control_pass",
+      "on_failure": "status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE, experiment terminates immediately"
+    },
+    "primary_metric": "cost_per_verified_success_M_total_f10",
+    "primary_comparison": "SPIDER_vs_B_RETRIEVAL at matched budget AND matched accuracy",
+    "success_criteria": [
+      "SPIDER cost_per_verified_success < B-RETRIEVAL cost_per_verified_success (strictly lower)",
+      "SPIDER accuracy >= B-RETRIEVAL accuracy - 0.02 (matched accuracy within 2%)",
+      "SPIDER false_accept_rate <= 0.10",
+      "SPIDER abstention_rate in [0.00, 0.15] with ECE <= 0.15"
+    ],
+    "outcome_mapping": {
+      "ALL success_criteria met": "SUPPORTS",
+      "PRIMARY comparison fails (cost not lower OR accuracy not matched)": "FALSIFIES",
+      "Readiness certificate fails": "MEASUREMENT_INVALID",
+      "Infrastructure failure during arm execution": "BLOCKED",
+      "Otherwise": "INCONCLUSIVE"
+    }
+  },
+  "product_consequence_positive": "C-LLM-INHERIT advances toward EXPERIMENTAL/VALIDATED. SPIDER's inheritance primitives provide measurable benefit to a real LLM agent over strong baselines. Product thesis gains first admissible evidence. Next gate: cross-site transfer (C-CROSSSITE) and freshness/repair integration.",
+  "product_consequence_negative": "C-LLM-INHERIT remains at HYPOTHESIS. The product thesis has no admissible evidence after this first rigorous test. Product lane must either (a) strengthen inheritance primitives before retry, or (b) pivot architecture. No promotion possible without a SUPPORTS outcome on this claim.",
+  "estimated_cost": {
+    "model_calls_estimate": 1800,
+    "model_tokens_estimate": 7200000,
+    "browser_sessions_estimate": 120,
+    "wall_clock_hours_estimate": 8,
+    "readiness_certificate_estimate_hours": 1
+  },
+  "expected_information_gain": "This is the FIRST experiment in the program's history to test the actual product thesis (C-LLM-INHERIT) with a real LLM agent, real Web tasks, mechanical verification, and strong baselines executed FIRST. A SUPPORTS provides the first admissible evidence for the product thesis. A FALSIFIES falsifies the current architecture's central claim. A MEASUREMENT_INVALID at the readiness gate honestly identifies missing substrate rather than producing invalid science. Either outcome changes the program's direction decisively."
+}

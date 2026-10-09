@@ -86,6 +86,7 @@ def main():
         "scripts/finalize_lane.py",
         "scripts/prepare_lane.py",
         "scripts/build_portfolio_snapshot.py",
+        "scripts/build_scout_fallback.py",
         "scripts/validate_portfolio_allocation.py",
         "scripts/validate_scout_brief.py",
         "scripts/sync_codex.py",
@@ -121,6 +122,7 @@ def main():
 
     snapshot_builder = text("scripts/build_portfolio_snapshot.py")
     require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
+    require('req.get("director_mandate")' in snapshot_builder, "portfolio snapshot must detect current Director mandate field")
 
     ci_wf = text(".github/workflows/ci.yml")
     require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
@@ -129,6 +131,9 @@ def main():
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
     require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
+    require("build_scout_fallback.py" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse, "Scout failure must degrade to a fallback brief instead of blocking direction")
+    require("timeout --signal=TERM --kill-after=15s 180s" in pulse and "timeout --signal=TERM --kill-after=15s 480s" in pulse, "Scout and Global Director must have whole-stage deadlines below the 15-minute factory cadence")
+    require("if: always()" in pulse and "frozen transactions may still resume" in pulse, "frozen transactions must resume despite strategic control outage")
     require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
@@ -140,9 +145,11 @@ def main():
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
+    require("spider-r2-factory-pulse-${{ github.sha }}" in pulse and "SPIDER_STALE_DIRECTION_SKIP" in pulse and "CURRENT_MAIN" in pulse, "Factory concurrency must isolate control-plane SHAs and stale cycles must be unable to dispatch")
     factory_recovery = text(".github/workflows/factory-recovery.yml")
     require("SPIDER R2 Factory Pulse" in factory_recovery and "SPIDER_FACTORY_RECOVERY_RETRY" in factory_recovery and "SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN" in factory_recovery and "gh workflow run factory-pulse.yml" in factory_recovery, "Factory Pulse failures must have bounded external recovery")
     require('cron: "*/5 * * * *"' in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory recovery must poll independently of GITHUB_TOKEN event chaining and inspect only the freshest pulse")
+    require("CONSECUTIVE_FAILURES" in factory_recovery and "Historical failures" in factory_recovery, "Factory recovery circuit breaker must use consecutive failures, not lifetime failures on a long-lived SHA")
     require("GH_REPO:" in factory_recovery, "Factory recovery must provide explicit repository context to gh without checkout")
     require("conclusion == 'cancelled'" not in factory_recovery, "Factory recovery must not retry cancellation superseded by fresher direction")
 
