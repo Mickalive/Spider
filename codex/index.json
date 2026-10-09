@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2301,7 +2301,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2436,7 +2436,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2490,7 +2490,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2517,7 +2517,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2681,7 +2681,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2736,7 +2736,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
       "hashes": {
         "request.json": "643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43",
@@ -3007,7 +3007,7 @@
       "decision": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "hashes": {
         "request.json": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096",
@@ -3252,7 +3252,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "4a05cb4bddd4a363a16fef0efb3f527351171bb5",
       "hashes": {
         "request.json": "f9bf5371a07ca694b57bed901fcb2f59a165d6cf5bd709f25db0a746564d2106",
@@ -3360,7 +3360,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "hashes": {
         "request.json": "450c3863973676610d95beecdb0bf50b95ed7eb48fc10f4c31edf110a21e0c0d",
@@ -3469,7 +3469,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "hashes": {
         "request.json": "c632c17ab522cecd32dd3f3f3ba9efc11c7ffa5c67c4b33ba2b5afd8c019fb4c",
@@ -3523,7 +3523,7 @@
       "decision": "SURVIVES",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
       "hashes": {
         "request.json": "473e95dcb69c5603e9d9509d73b87a4a544bac20583d02e63bc2f2052dfedf17",
@@ -3604,7 +3604,7 @@
       "decision": "REVISE \u2014 Producer SURVIVES_CURRENT_TEST claim not justified at systematic-review ceiling. Preregistered PubMed/EconLit/Cochrane database search was not executed (audit V1_DATABASE_MISREPRESENTATION, severity high): provenance.json shows web-search-API natural-language queries, not database-specific syntax with Boolean operators/MeSH/Cochrane filters. Positive controls PC1/PC2 pass on recomputed distinct counts (PC1 min 5-6 distinct \u22652 threshold, PC2 strong count 1 via OECD sensitivity framework \u22651 threshold). Falsifiers F1/F2 correctly not triggered. Audit dedup corrects producer counts: M1 3\u21922-3, M2 4\u21923, M4 3\u21921 strong, M6 12\u219210 distinct URLs. Provenance integrity degraded: 2 duplicate URL pairs in key_sources (Munda/Greco share Springer DOI, Dobbie/Zhou share ScienceDirect pii), M5 screened total 30 vs provenance 34. Evidence provides non-systematic synthesis of additional theoretical grounding (OECD sensitivity analysis framework for MIXED outcome handling; psychometric composite score problems; econometric composite indicator aggregation ambiguity) at interpretive-analogy ceiling, not the systematic-review ceiling claimed by producer. Report.md \u00a71-3 overstates by presenting SURVIVES without bounding to interpretive ceiling (audit V6). C-MEAS-VALID remains EXPERIMENTAL: this experiment adds theoretical grounding for the recipe choice sub-problem but does not provide empirical resolution (full-DOM re-run required). No claim status change warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "287ed35331a86c21ab1f48fe96993a23f1eb1064",
       "hashes": {
         "request.json": "cfcbb95331a97887331e31eb073ca950fc2af1e398a0e58cdf6422763b53fca4",
@@ -3795,7 +3795,7 @@
       "decision": "REVISE \u2014 Producer's MIXED outcome is not justified per frozen decision_rule. The observed C-pattern (C1 PASS, C2 FAIL, C3 PASS, C4 PASS, C5 PASS) has no frozen bucket: MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). This is a preregistration coverage defect (audit V1_DECISION_RULE_UNCLASSIFIABLE), not a scientific result. Additionally, C2_DOMINANCE_INFORMATIVE is construct-impossible with exactly 2 recipes (all dominance necessarily 0%/100%, audit V2), C3_CI_INFORMATIVE compares rank-width to density-range in incommensurable units (audit V3), C4 chi-square never computed and N=14 vs frozen 21 (audit V4), and C5 null dominance is tautological with 2 recipes (audit V5). The OECD/COINr framework as operationalized is not informative for MIXED outcome handling in the 2-recipe setting. The parent's next question (full-DOM C2 reversal persistence) remains blocked by the runtime locatableSample cap. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "5741bbc510a113e333cc68908856e6ce3766b9af",
       "hashes": {
         "request.json": "8d7edc7a275de1318b7d3d39632de656e24549b5d18f0bd824efed5f1388a144",
@@ -3877,7 +3877,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: 0/3 pairwise dominance comparisons are non-degenerate (all strictly 0% or 100%). C1 passes (63/63 valid), but C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The meta-analytic mean recipe (canonical+weighted)/2 always ranks between the two originals by mathematical identity (OBS-1, VN-1), so no linear combination of two strictly-ordered recipes can produce non-degenerate dominance. The 2-recipe degeneracy is NOT solely a 2-recipe artifact \u2014 it persists because the density metric has extreme recipe sensitivity (31x canonical/weighted gap) and linear interpolation preserves ordering. The MIXED outcome decision rule remains UNRESOLVED. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "94c085899b8cd91699778cbd24e5aa5204dc5961",
       "hashes": {
         "request.json": "5a66aac977545bc7bc2f7c271c1e021a29744aea791d298a393d9c6adba93abc",
@@ -3985,7 +3985,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: with correct task-major ordering, |Spearman(R, canonical)| = 0.23 (p=0.31) and |Spearman(R, weighted)| = 0.21 (p=0.36), both below the 0.30 threshold; eta-squared(R, page_type) = 0.144 < 0.20. C1 passes (CV=0.70 > 0.10). C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The producer's claimed C2 pass was an artifact of definition-major data ordering (all DEF-FULL-MAP first, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. The density ratio is definition-sensitive (10x gap between DEF-FORM-ONLY and others) but does not significantly correlate with task type or recipe sensitivity in this N=21 sample. NC1 null control also fails: real eta-squared=0.144 vs shuffled mean=0.117, task-type structure not statistically significant (permutation p=0.23). C-MEAS-VALID status updated to REJECTED for the density-ratio MIXED metric approach.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "2d30a999746852de85c2bc6b49378ca47044f9df",
       "hashes": {
         "request.json": "7ecd8c6f07eb2d73b50195889183ba74970114f594865a50528ca8b45ca05cad",
@@ -4201,7 +4201,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: C4 fails (eta-squared=0.000 < 0.10 threshold). C1 passes (CV=0.584 > 0.10), C2 passes (7/21 pairs outside convex hull, threshold 3), C3 passes (|rho(hier, canonical)|=0.879 < 0.90, OR clause). The hierarchy-weighted density recipe produces zero task-type discrimination across all tested alpha values (0.1, 0.3, 0.5) with identical mean density (0.667) across listing, detail, and cart page types. The recipe is a perfect monotonic reparameterization of area-weighted density (Spearman rho=1.0 at alpha=0.3) because the depth estimation heuristic uses inForm (binary flag) rather than actual DOM tree structure, making the depth distribution task-invariant. Hull-breaking on 7/21 pairs is entirely ISOLATED-A-LINK and definition-dependent, not task-type-dependent. Positive control PC1 fails (inter-type ratio=1.0). Null control NC1 fails (random weights show equivalent correlation structure). Audit PASS confirms all recomputed metrics match producer; audit VF-1 identifies depth estimation as heuristic (not true DOM depth); audit VF-2 corrects producer p-values (irrelevant to binary decision rule). The negative result is bounded to heuristic depth estimation on truncated-first-20 locatable_sample (7 tasks, 1 Magento site, 3 definitions); true DOM tree depth with parent-child links remains untested (producer U-1).",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "748397fec07423756cf20550cd9d55915933c23b",
       "hashes": {
         "request.json": "3b11e5a172d8795255f6482ee75791ab5c00c48e095cfd3ee6a45237cfe92b1b",
@@ -4336,7 +4336,7 @@
       "decision": "FALSIFIES \u2014 Frozen decision_rule NOT C1 triggers FALSIFIES: sample elements are NOT 100% identical within page type (y-coordinates differ for elements 12-19, 8/20 elements). Even ignoring positional y-differences, C2 and C4 still FAIL (eta2=1.0 on tag_entropy/form_fraction/total_area, I_sample=1.449 bits \u2260 0.0). The template-composition hypothesis is decisively falsified: the locatable_sample HAS task-type discrimination (eta2=1.0), and the parent's hierarchy-weighted density producing eta2=0.0 is caused by the density formula collapsing between-type variance, not by sample template invariance. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 locatable_sample.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "f8d8e8447dc3950bc04bd48db5bfc2ea529131f8",
       "hashes": {
         "request.json": "f3b67c47b365bacb65a23bee56991c1178571d9a27268b37fd3055c581d87fa2",
@@ -4363,7 +4363,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "f2ad3407e3153321c3e94644170dd5cb03f77343",
       "hashes": {
         "request.json": "1234c5b1fcc3badb2143a1354153b5aa476ad3eed4b78289caf3f6346ebcc9d8",
@@ -4390,7 +4390,7 @@
       "decision": "MIXED \u2014 Frozen conjunctive rule: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (normalized hierarchy eta2=0.0), C3 PASS (max pipeline eta2=0.999645 \u226b 0.05), C4 FAIL (ranking preservation not achieved across all 6 definition\u00d7recipe combinations per audit recomputation: canonical recipe 58%/48% agreement, per-task recipe untested), C5 PASS (0.999645 > 0.0+0.01). The OECD/COINr pipeline preserves between-type discrimination for DEF-FULL-MAP and DEF-FORM-ONLY (non-recipe eta2 0.964-0.999), confirming the hierarchy formula \u2014 not the pipeline \u2014 was the bottleneck. However, ranking reversal under recipe sampling (especially DEF-FORM-ONLY and per-task recipe ~0.36) means the pipeline does not reliably preserve the natural page-type ranking across all definition\u00d7recipe combinations. Claim ceiling bounded to single Magento site, truncated-first-20 locatable_sample, 7 tasks (cart n=1 degenerate), 2 non-degenerate definitions, y-proxy hierarchy depth.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "aa5566a0948dbc4f8ad3d056683f4f7a11c41738",
       "hashes": {
         "request.json": "e0fc549849a8c37b49d05e3b9e0d51e1d7e0474c77119eb0497690a93eb8a095",
@@ -4553,7 +4553,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "68db4301ae84b028e5b5aecab29415df7122ed8c",
       "hashes": {
         "request.json": "5f4575e2483f36e680819c0d1673746f82b03eabad6d5e1014c38203a51aac32",
@@ -4688,7 +4688,7 @@
       "decision": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "dd87835fc927ead19f6f3e31a7fb9951b954cdc4",
       "hashes": {
         "request.json": "377d57138c68319b02d2ed80a20cd24d51cd5e2c47147869e8afc0ef1bbf1b5e",
@@ -4770,7 +4770,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "b8c47aeabfe1ed7fbeda65056c425763d500e1f2",
       "hashes": {
         "request.json": "42a221ad654b0c78d2b8a39c73aed9d1d8da7200e2d2cca45bfdbc10888008c9",
@@ -4853,7 +4853,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
       "hashes": {
         "request.json": "0403e9eecf4fb89b4917531c3001196de239ba3dd5008569305e96e92d75e1ea",
@@ -5234,7 +5234,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
       "hashes": {
         "request.json": "77331f7d7cecee79e669ff86f04173a631a29b7b20bdaf7cfc9fd3b1308a5f65",
@@ -5399,7 +5399,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
       "hashes": {
         "request.json": "ce14534fa06958648c1d105cd42c11e4a72f1afb73da90ff886a936c697fa11c",
@@ -5481,7 +5481,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
       "hashes": {
         "request.json": "db0f173842ccf6ffa325300b64c1b3d28302918748d4cdcf7645ffd24ff5728b",
@@ -5590,7 +5590,7 @@
       "decision": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e60795b8004c6b7224af6870b843f4388c73c740",
       "hashes": {
         "request.json": "9890c168e758e39e33ab49855ceecc3ed750e24abc089dfd9021c4dca4b9c818",
@@ -5617,7 +5617,7 @@
       "decision": "FALSIFIES \u2014 The truncation-artifact hypothesis is decisively falsified. Full-DOM canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP is 37.26%, which is 18.69pp BELOW the truncated-first-20 baseline (55.95%) and far below all preregistered thresholds (C5: 60.95%, C6: 75%). Per-task agreement collapses from 78.65% to 11.41% (\u221267.24pp). The ranking instability is NOT a truncation artifact; it WORSENS with full DOM elements. F1 and F2 both trigger. The hypothesis (H1 >=80%, H2 >=+10pp, H3 >=85%) is falsified across all three conditions. Controls pass (PC1 eta2=1.0, NC1 eta2=0.0, C4 max eta2=0.99996), confirming the pipeline is functioning; the negative result is scientific, not infrastructural. Audit REVISE corrects B3 non-recipe ranking preservation (actually 0% for tag_entropy/form_fraction due to direct vs pipeline ranking inversion), within-type clone degeneracy (identical locatable_samples per type inflate discrimination), and hash salt non-determinism \u2014 none change the falsification direction. The Bootstrap CI is degenerate [0,1] due to binary ranking agreement across bootstraps with N=7 tasks, consistent with within-type clone degeneracy.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "77f66f2a302d98d827a3f38df2f5b84d4907de7e",
       "hashes": {
         "request.json": "8244b9e09e1f5febce4d1d797c115e0236b297940532cf634b78c1f879b3580d",
@@ -5892,7 +5892,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 frozen decision rule passes: condition (1) M1>=0.5 satisfied by WebArena shopping (1.0) and VisualWebArena (1.0); condition (2) M2>=0.5 satisfied by WebArena shopping (0.8) and Mind2Web (0.65); condition (3) M3=true satisfied by Mind2Web official 3-way split. However, the claim ceiling is strictly bounded by audit: this is a distributed structural-documentation survey only. No direct dataset inspection performed. Mind2Web M1=0.8182 is inflated from hardcoded instance_count=10 (audit VF1; empirical mean 4.42 gives corrected M1=0.311). M2 values are heuristic estimates from scoring rules, not measured fractions of task instances with variable fields (audit VF2). PC1/NC1 controls are tautological \u2014 they test scoring code output, not independent benchmark structure verification (audit VF3). No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits (audit VF4). Cross-site mechanism sharing is assumed from documentation, not verified on task samples (audit VF5). Mind2Web novelty-fraction split guarantees instance-level separation but not same-mechanism overlap across train/test (audit VF6). Transformation costs inherited from EXP-INTEL-33925056324, not re-measured (audit VF7). The frozen decision_rule is satisfied; the producer's SUPPORTS outcome is valid under distributed interpretation. But the maximum justified ceiling is: public documentation suggests WebArena shopping (imposed cross-site pairs, 12 stores sharing platform) and Mind2Web (official instance-level splits) provide complementary structural properties that *could* support C-LLM-INHERIT experiment design pending dataset-level verification of mechanism sharing, duplication fraction, and parameterization prevalence. This is not a validated ranked suitability list for SPIDER execution.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "98a79bab85bc3df1f0f2065384ce44db9adb6836",
       "hashes": {
         "request.json": "cfcd41df4428a9c32908ec2982e56384c1d5ac8efc4a2715c013d929b2fa4cdf",
@@ -6028,7 +6028,7 @@
       "decision": "MIXED \u2014 frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant).",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "f95178a51de3d209f5eb15112fb87612d3901de1",
       "hashes": {
         "request.json": "ea8240ee7e99ee598773a95ce5d979d1cd7b7b2364455fb0a1a7e1103a51368e",
@@ -6083,7 +6083,7 @@
       "decision": "REVISE \u2014 WebArena quantitative census replicates exactly (192 shopping tasks, 49 intent_templates, 36 families >=3 [34 >=4, 33 >=5], duplication 0.9479 95% CI [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198], param_task 0.8958 [0.8490,0.9375]) but within-store same-mechanism AX consistency (threshold >=0.6, requires 15 tasks 2-per-family live CDP Accessibility.getFullAXTree at 1280x720 initial viewport) is UNMEASURED (ax_consistency=null, REUSED 10 trees 1-per-family, playwright_installed=false despite docker_available=true) so frozen clause 1 is FALSIFIED-IN-SETTING per spec, not PARTIAL; Mind2Web cross-website overlap measurement is methodologically non-compliant (coarse 33-mechanism heuristic vs frozen TF-IDF->k-means k=min(50,unique_tasks/20) train-only, synthetic 60/40 website shuffle replacing official train/test_website/test_domain splits, shuffle null as label-shuffle with random split_point, 73/3 vs spec 137/31 divergence revision_unknown) so Mind2Web axis is INCONCLUSIVE not falsified; producer MIXED verdict not supported as stated; bounded ceiling is census-level parameterized family reuse only, no LLM inheritance demonstrated",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "4264b65fcf92f6702284a72b43f90cf4c324e414",
       "hashes": {
         "request.json": "a7f23b05df38515a4c5c31b007d02b8f04e84d9457e486714f33381a531bdbdc",
@@ -6192,7 +6192,7 @@
       "decision": "REVISE \u2014 WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "3377d6b4dbcaf175773e620f7ec5fd7e4ec41209",
       "hashes": {
         "request.json": "1682b411adab1a191ddd3320cb2f0e60d56b609d858494398f58f4adc0079da8",
@@ -6328,7 +6328,7 @@
       "decision": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "06fb976833b2171d1d23d316cb6190adac5553ae",
       "hashes": {
         "request.json": "b128fd6d8168b953f27d7391e4b98b8e13b4092d3f0ea5028b7c3e084b6e0afd",
@@ -6518,7 +6518,7 @@
       "decision": "INCONCLUSIVE \u2013 both axes MEASUREMENT_INVALID per frozen gates (Mind2Web Gate0 single train; Docker PC3 count window violated); outcome MIXED mislabeled per audit",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "5653a0e75662ab35fd4303ca6ae87282d511a28f",
       "hashes": {
         "request.json": "0f393cfafa046eb6bea925af16b4dcf3eadfc84c6ca4d7f1043b4a16f4ddab72",
@@ -6654,7 +6654,7 @@
       "decision": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "7d9ba0ad46826e9c928df81510027aff1ed1d6bd",
       "hashes": {
         "request.json": "544bebb4019fedde0d96e98984a205b8ca3a2e5b721bef816b21ef751f666938",
@@ -6736,7 +6736,7 @@
       "decision": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "093292693457a494ab42e4022f1cc0cff2fd7b45",
       "hashes": {
         "request.json": "6992c1dbef0b05e053dde3de1cb86ae80ff24fabd82a5e1e9e2ce28c03138ca5",
@@ -6927,7 +6927,7 @@
       "decision": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "34bc669a574f27f35bd8dc76d556f25007adccd1",
       "hashes": {
         "request.json": "255d8b7bf8b69f0b3c152d12fac32150e5555b79e2fda0470a81696c8d32dc02",
@@ -7119,7 +7119,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
       "hashes": {
         "request.json": "64ee25addf28572a08a656946e0479fc1a2b0ff40d87e57915859bf0d90293e3",
@@ -7366,7 +7366,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "c3f90f923f8f88f3594e98f0bf7c469b6e9448eb",
       "hashes": {
         "request.json": "6ebd2a12427d06a71dbba3a893e6d5e8023addf99167ea08777bdfaeca44d45f",
@@ -7503,7 +7503,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "50586c3476001369f43a50c3eb7eefd9d993c280",
       "hashes": {
         "request.json": "8e0bc46ea98cef7bb15749e0b25b2c46d36a474cb75fcd29d4e7c64abd260ca9",
@@ -7611,7 +7611,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "77bf1c49e51b00c1252bca754508d3e30b451214",
       "hashes": {
         "request.json": "e937f6e9948dab8ba4709a48161b1a47e153b9bf7986888166dc2893389859e0",
@@ -7720,7 +7720,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "70d20c57f0fe17f55f09a650e0cfe07d5291596c",
       "hashes": {
         "request.json": "d7a76dddc68b7d24e6940645b05888c6b3eabde8b8ca372266e7e75b69c3fe46",
@@ -7830,7 +7830,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "ef0b8c076ba4ca7eca86c0a6450a695462df0e31",
       "hashes": {
         "request.json": "5e3d386c6dc392b287b877f1b6b421151d2614527e3afd2674d23061e13e2cd8",
@@ -7912,7 +7912,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "304f93e3453e7f76ee647ace750dd0f9a5f443c3",
       "hashes": {
         "request.json": "f3a03285cb8024d083ab2c0dfc81d668de1d90b8cb983efdad018d048be8c3c8",
@@ -8022,7 +8022,7 @@
       "decision": "MIXED \u2014 H1/H2 FALSIFIED-IN-SETTING (bounded to homepage/template longest-prefix + unstable Stagehand exact-match); H3/H4 MEASUREMENT_INVALID per infrastructure precedence; audit REVISE required; no SURVIVES, no promotion",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "91f074f43c3a0a5416ab4a1ac5013afa9cb742bb",
       "hashes": {
         "request.json": "3b62a93d611331c578855c1c43cf276e0932065c62cc01f6a167088e9a32dfe6",
@@ -8243,7 +8243,7 @@
       "decision": "REVISE \u2014 No SURVIVES; audit REVISE producer_claim_supported=false. H1/H2 remain bounded FALSIFIED-IN-SETTING on Magento homepage/template only (18/20 identical 1430-node captures, recomputed CI [0.7,1.0] not [1.0,1.0], shuffle_mean 0.9 not 1.0, variance pop 0.09/sample 0.10, shuffle p=1.0 gap 0.0, delta_vs_truncated null); product-page within-store transfer UNTESTED (1/10 families with 2 product pages, adequacy gate <5 families) \u2192 MEASUREMENT_INVALID for H1 product hypothesis; Stagehand HIT 0.0 due to incomplete expanded stripping (grammar f2b5e3bb only form_key, missing uenc/store/session/timestamp/nonce, hash_changed_on_every access 36/36 before_hash!=after_hash) \u2192 H2 FALSIFIED bounded to unstable exact-cache, MISS 1.0/false_accept 0.0 vacuous; H3 WebGym 0/50 (401/404 after 2 genuine attempts) and H4 Gate0 0 transitions (BrowserGym API mismatch) correctly MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence; Docker 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb and 20/20 AX liveness at 1280x720 remain valid. C-CROSSSITE stays HYPOTHESIS.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "d9d990f43b66965e784fef504a869543423f72e6",
       "hashes": {
         "request.json": "10462600910927c17f5876357f1bb1a0ba6c3e1ad19c55c4b2af650fd864e541",
@@ -8353,7 +8353,7 @@
       "decision": "REVISE \u2014 No SURVIVES; audit REVISE producer_claim_supported=false. H1 product-page hypothesis MEASUREMENT_INVALID (sampling deviation), listing-vs-detail pairing bounded FALSIFIED-IN-SETTING only; H2 Stagehand MEASUREMENT_INVALID (n=5<30 and SHA unstable); H3 WebGym and H4 Gate0 correctly MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence. C-CROSSSITE remains HYPOTHESIS single-store vacuous.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "b283857164d7d60728c397badc09916db52a7f92",
       "hashes": {
         "request.json": "e5e629e06b1c575c91a6d3be88ffc76c518a313cc45eaf2cd8d5f6f4f18710d1",
@@ -8461,7 +8461,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 H1 product-page within-store AX_consistency not tested (4 families <5 adequacy; full-page LCP 0.0 is representation artifact); no SURVIVES/FALSIFIED ceiling beyond substrate liveness",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e789a0513e48ab20e92da139b63d826d4788eae3",
       "hashes": {
         "request.json": "803980b91c8378d7f10ae1b0e66829332cafbb1e49a226fe91783851a32c2721",
@@ -8704,7 +8704,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "ac173516f5c6f6132c545a0d1ea0e63d5eafff91",
       "hashes": {
         "request.json": "adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5",
@@ -8976,7 +8976,7 @@
       "decision": "REVISE \u2014 BOUNDED_PARTIAL_SURVIVES",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e81ea95c6a3d7154ff3ef0ea51fa439d4ea01b12",
       "hashes": {
         "request.json": "8bf79eb97b2d5507bed7ada74eae57056a62d65fbdc0d740783d7270bf5e70ae",
@@ -9140,7 +9140,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "17c28f5b2ee97c7879dc682889563fa10f170edf",
       "hashes": {
         "request.json": "ade7c451dc83b5997ce910b52bdd85c8f7193be14ed2587fd7d6eee300a43dde",
@@ -9385,7 +9385,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "d2ec81b3eeadb54d0ba83711a92276d4f2576e69",
       "hashes": {
         "request.json": "024857aad14ec1a631c98236e0bff3a5a2382bc946f2c8b0d15555be85f082fc",
@@ -9522,7 +9522,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
       "hashes": {
         "request.json": "b8d095cdfd9a73c2a17d3677e3285459ebb844dff8c9f8a31388bae3c88c44bb",
@@ -9603,7 +9603,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "14a6459a29ef445c7641d9fa1454760899c6e6d6",
       "hashes": {
         "request.json": "489bdca45f551aa8d3890d89b36fbc3ef15b8ac27650aeae8b4828181db2fbe8",
@@ -9846,7 +9846,7 @@
       "decision": "MIXED \u2014 H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE does NOT SURVIVE on attempted censuses; durable single-source pin survives but union 4/10, WebGym diverse UNAVAILABLE pending HF_TOKEN, delta inverted fails gate",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "e5f53e7c8be8ff713d2a8523b30a94299f82246c",
       "hashes": {
         "request.json": "625c0dc1b06a2b2f0d2aee9f0d5aa73068b25c9720d8f5d26121a68a6810d9ce",
@@ -9927,7 +9927,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "a088f9ffcd23374727bee8e81fbbeb5fa4abe469",
       "hashes": {
         "request.json": "300e8ccd615782c5de44d25321b5230978f28121bf0784eeff778cc261003f0c",
@@ -10089,7 +10089,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "fce9fb4677caf41c9d8ec78604e7ffa95daed397",
       "hashes": {
         "request.json": "fcf7dece9a67fdf1e07a95700efad1f26d5fa0ddd40eb5d3047935c13ea1e8ad",
@@ -10170,7 +10170,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "7143ed4b13c52bc887168a7f2bd10e224e1495e0",
       "hashes": {
         "request.json": "190329625e4cf1d5704d589b2d8307b11540bddd48f47dda54d798d2ceb8b1b5",
@@ -10359,7 +10359,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "c6fe6ecdc449519e88fa2bf14df95d5715b1ff54",
       "hashes": {
         "request.json": "f8950754ed776156e0a6a9478984c6fac1268f677ece7e97546ff507f97fbbff",
@@ -10658,7 +10658,7 @@
       "decision": "INTEL verification complete (MV1-MV6 PASS): verified external deterministic-compilation literature specifies the no-memory deterministic executor baseline (MV6) and published cross-site evidence favors hierarchical Intent/Stage/Action over flat fragment reuse on benchmarks; however, task distribution incomparability (MV3 PARTIAL) and compilation-vs-inheritance conflation mean the external convergence does not constitute a clean falsification of SPIDER's compilation-bypass direction per the frozen decision_rule. Producer outcome misclassified (MIXED) relative to spec; audit ceiling bounds claims. Claims updated conservatively.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "a076102f078b0a6a09ec8f28baa49657e45bdd49",
       "hashes": {
         "request.json": "319ece0f99660e127028ca4ae311fac327ef81ea71a63b93316c2a8b9052341a",
@@ -10768,7 +10768,7 @@
       "decision": "MIXED_CORRECTED_BOUNDED_NO_STATUS_CHANGE_NO_PROMOTION: this packet is a source-verified but internally over-claimed extraction, not the MV1-MV6 PASS verification result.json reports. Under the corrected reading the applicable frozen decision-rule clause is the FIRST MIXED clause ('C1 fails but C2-C5 partially satisfied'), not the producer's invoked 'C1 satisfied but C4 fails' (audit.json required_fixes[14]). Frozen C1_ADDRESSING_OPEN_NL is NOT SATISFIED: exactly one consulted source (arXiv:2604.09718) takes open natural language as compile input, and NONE of the five publishes a goal-to-artifact binding error rate, abstention rate or human-intervention rate. Its 80-94% is JSON-schema validity over 110 internal compile attempts, execution accuracy 95-98% is conditional on a valid blueprint, the audit's recomputed zero-shot end-to-end task success is 76.00%-90.24% (46/50*0.98, 8/10*0.95, 47/50*0.96), every compiled blueprint passes a MANDATORY human review gate (Section 3.3) with no published amendment rate, and Section 5.1 states the proprietary enterprise DOMs 'limits independent replication of the specific execution payloads' (audit.json claim_ceiling; recomputed_metrics.agentjitz_zero_shot_end_to_end_task_success_recomputed). One of the five mandated targets, COVENANT, was never located - zero occurrences of the string in all five sources - so 1 of 5 is UNMEASURED, not a negative; the frozen name-to-artifact mapping is crossed (spec 'TraceCompiler' -> arXiv:2607.04542 'Auto'; 'COVENANT' -> arXiv:2608.02680 'TraceCompiler'). Producer scores are corrected here: c1_addressing_open_nl true->false; addressing_open_nl_systems stays 1 but splits into 'open NL as compile input'=1 and 'publishes a binding error rate'=0; runnable_locally_systems 2->1 (both entries are the same artifact, arXiv:2605.04107); mv1_pass true->PARTIAL, mv2_pass true->FAIL, mv5_pass true->PARTIAL, mv6_pass true->PARTIAL; PC-MV6-REPRODUCIBILITY reclassified from verification to intra-lineage consistency with unstated precision; NC-FABRICATED-BINDING-CLAIMS reproduced but is non-discriminating and had no power against the identity failure that actually occurred. prereg.md Section 8 makes any MV failure MEASUREMENT_INVALID and MV2 fails as frozen (no artifact URL of any kind exists for arXiv:2604.09718 or arXiv:2608.02680, so runnability there was paper-claim inference), so I apply that consequence to the runnability/C4 sub-measurement it actually invalidates while preserving the source extractions as raw evidence; I do not void the whole transaction because the error direction is conservative (it produced 'not runnable', not a positive claim) and the auditor independently re-fetched and verified every material number against the sources - this is the adjudication audit.json unresolved[0] expressly reserved to the Director. Regime boundaries ARE extracted and now carry their accounting conventions, but every one is author-self-evaluated on an author-self-authored or proprietary benchmark, has zero independent replication, and is certified INCOMPARABLE to SPIDER's alias-OOD, so they are reference points and not a transfer function; report.md Section 5's instruction to target 'reuse count >=17, witnessed-determinism >=87%, task length 5+ steps' is NOT authorized and is contradicted by the packet's own c3_comparability_assessed finding (audit required_fixes[12]). The two load-bearing new facts are (a) the external error-rate bar C-SEMANTIC-RESOLVE was supposed to inherit does not exist in this literature, so the component is unoccupied-AND-unmeasured rather than settled, and (b) determinism does not imply compilability - arXiv:2607.04542 refuses family F3 at all three rungs although F3 is 100.0% witnessed-deterministic (audit validity_findings[7] note to Director: the only conflation-clean system is the non-replicable internal one, and the three systems with published quantitative regimes all record/inherit behaviour first). All three frozen claims are held at their current registry/codex statuses; no promotion; no product action.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "bbc5f2280bf1b8a249320327b09ceb8ada2f6d4e",
       "hashes": {
         "request.json": "01d43c79b4fadb1812c4e64a4e2ea01c42fc38cad6ffeb949ca04580ad192ef0",
@@ -10958,7 +10958,7 @@
       "decision": "MIXED_COST_ESTABLISHED_PREVALENCE_UNEVALUABLE_CROSSSITE_HELD_AT_HYPOTHESIS_NO_PROMOTION: the measurement transaction completed validly and credential-free (result.json status=COMPLETE, outcome=MIXED; audit.json status=REVISE, producer_claim_supported=true), and it settles exactly one of the two halves the mandate asked for. COST HALF ESTABLISHED at the audited ceiling: a minimal HTTP+HTML structural representation costs 763.06 tokens / 2,801.19 bytes per observation (mean; median 576 / 2,138) over n=155 observations from 15 eTLD+1 hosts, against B-RAW-HTML 52,020.35 / 151,741.41, B-FULL-DOM 50,907.34 / 145,140.82 and the preregistered B-A11Y-TREE approximation 16,793.67 / 48,693.05, all four on the same 155 observations under one shared tokenizer (cl100k_base, n_vocab 100277); ratios 68.2x / 66.7x / 22.0x in tokens, with paired eTLD+1-level bootstrap (10,000 replicates) 95% CI upper bounds of -22,823.81 tokens vs full DOM and -8,932.25 tokens vs a11y, both strictly negative, and minimal smaller on 155/155 and 150/155 observations respectively. The frozen cost clause is SATISFIED (audit baseline_findings[0..3], recomputed_metrics.cost_per_observation_mean and cost_paired_differences). PREVALENCE HALF NOT ESTABLISHED AND NOT FALSIFIED: the frozen primary clause is UNEVALUABLE because the frozen estimator and its frozen null are the same object up to a label. AGF = sum_K (T_K^2 - sum_s n_{s,K}^2)/(2*total_signatures) depends on the per-host key counts only through the symmetric quantity sum_s n_{s,K}^2, so permuting eTLD+1 labels is exactly invariant: 1,000 permutations produced exactly 1 distinct value, bitwise equal to the observed point estimate 83.51083467094703, std = 0.0 exactly, and the clause reduces to 83.51083467094703 > 83.51083467094703. result.json records primary_evaluable=false and primary_satisfied=null, NOT false, and the auditor confirms this (audit required_fixes[0], validity_findings[0]-[1]). This is a defect in the frozen estimator/null pair, not infrastructure failure and not a scientific negative: no substrate was missing, 0 of 155 pages failed extraction, and 0 credentials, registry pulls, browser binaries or model API calls were used (audit validity_findings[2]). C-CROSSSITE therefore stays at HYPOTHESIS. The frozen design's own consequence (prereg.md section 18) ties the HYPOTHESIS->EXPERIMENTAL move to 'measured prevalence AND cost floor'; only cost was measured, and the registry construct is mechanism transfer across a website holdout (next_gate 'true website holdout without site identity leakage'), which this packet did not measure, so promoting the claim would be status inflation. audit.json status is REVISE, not PASS, so VALIDATED is unavailable in any case, and lane=intel forecloses PRODUCT_CORE. No product action, no promotion, continue=false. The one genuinely decision-relevant prevalence datum is NOT the AGF magnitude but the audit's decomposition: only 67 distinct signature keys are shared by >=2 of the 15 hosts, list signatures are 97.25% of all 416,218 matched instances, a single key list(ul, /{slug}/{slug}) is 49.56% of them, 96.49% come from keys carried by 6+ hosts, and only 3.51% from the site-pair-specific 2-5-host regime a cross-site inheritance product would monetise; the audit's own words are that the frozen AGF 'primarily measures that the Web is built from <ul> elements, not that it contains reusable task structure'. Under the only non-frozen null with power (NC-SIG-REASSIGN, 869 distinct values, std 0.193) the observed sharing sits 18.58 AGF units and 0.2507 Jaccard units BELOW a random re-partition of the same template vocabulary. That is evidence against the specific mechanism this statistic can see; it is explicitly NOT a bounded negative on C-CROSSSITE, because the statistic cannot separate reusable task structure from shared HTML boilerplate, and the auditor reserved independent confirmation of that producer-constructed randomisation before any lane re-scopes on its direction (audit unresolved[3]). Five of twenty pre-registered hosts are recorded NOT_MEASURED with exact blocking artefacts per portfolio directive G1, and are neither negatives nor evidence about those sites.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "4024e17496bea882cd0e6d023d1d40e83b768b3d",
       "hashes": {
         "request.json": "2bcc5d2ae04e0dd353ee4c4a731ea59f7c26901a485764a5c51622510d1d8fd8",
@@ -11043,7 +11043,7 @@
       "decision": "MEASUREMENT_INVALID_Q1_UNEVALUABLE_Q2_PARTIAL_ALL_THREE_CLAIMS_HELD_AT_HYPOTHESIS_NO_PROMOTION_NO_CONTINUE: the experiment is adjudicated MEASUREMENT_INVALID, the producer's status=COMPLETE/outcome=MIXED and its Q1=NOT_FOUND are not adopted, and the three in-scope claims are all held at their registry statuses. This is a measurement-validity failure and NOT a scientific falsification and NOT an infrastructure failure (audit.json validity_findings[13]/VF14, independently confirmed below). Q1 IS UNEVALUABLE, NOT NEGATIVE. The producer resolved 5 of the 8 Q1 target_ids to artifacts that are not the target system and then scored each of them as a per-target NOT_FOUND, which is the exact conversion the frozen prereg and the binding mandate forbid. Verified directly in the raw log: raw/search_log.jsonl lines 2, 3, 6 and 7 (webarena, webgym, miniwob, browsergym) all carry resolution_status='LOCATED' with arXiv:1802.05012v2, \"'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer\" (2018, Azagra-Caro et al.), and line 8 (agentbench_web) carries arXiv:1004.1769v1, 'Protection of Web Applications from Cross-Site Scripting Attacks in Browser Side' (2010), all five with q1_score='NOT_FOUND'. That is identity-before-scoring violated for five scored targets, which spec.json decision_rule.OVERALL and prereg.md section 6 map to MEASUREMENT_INVALID by name. A second frozen trigger fires independently: the positive control PC-KNOWN-TRANSFER-PAPER resolved to a 2014 German-language conference chapter 'Evaluation und Bewertung' (venue 'Global Webshop', author Oliver Meidl) with extracted_q1={} and zero evidence quotes (raw/search_log.jsonl line 10), so it failed the prereg.md section 5 criterion of extracting at least transfer_success_N and holdout_rule, and prereg.md section 5 states failure of that control makes the measurement INVALID. The producer recorded pass=false and then set status=COMPLETE anyway. Three further defects destroy the instrument's ability to support any negative: (i) the instrument was never shown to be able to detect a single instance of the target quantity - extracted_q1 is {} for all ten q1_relevant log lines, 0 of 6 fields on the three correctly identified papers and 0 of 2 minimum fields on the positive control, while the auditor's offline probes of the producer's own extractor show it CAN reach FOUND on a synthetic four-part paragraph (VF-A) and is not defeated by PDF line wrapping (VF-B), so the empty result is a property of the keyword instrument, not of the literature (VF7); (ii) the reported bounded_recall of 1.0 is an identity, not a measurement - execute_search.py:659-661 computes searched/mandated over a loop at execute_search.py:630-633 that processes every mandated target by construction, and snowball_targets is hardcoded to 0 at execute_search.py:729 although prereg.md section 3.1 item 10 authorised up to 50 papers; the audit's recomputation gives real identity-resolution recall of 0.2727 over 11 named systems (3 correct) and 0.375 over 8 target_ids, with 3 mandated named systems never searched at all because Crux, SeeAct and WebAgent were collapsed into a single target_id at execute_search.py:115-127 (VF3, VF4); (iii) the null control has no power - NC-FABRICATED-CLAIM uses a non-existent arXiv ID 2609.99999, which cannot resolve under any implementation, so its pass is guaranteed and it has no power against the wrong-real-identity failure that actually occurred five times; the binding mandate required exactly that stronger control (request.json director_mandate.allocation.question), and audit VF6 records that the producer's report.md section 4.1 nonetheless asserted it did. Consequently the producer's downstream readings - raw/q1_summary.json outcome NOT_FOUND with not_found_count=8, raw/bounded_recall.json recall 1.0, result.json controls B-EXTERNAL-BAR-ABSENT and B-INTEL-PREDECESSOR-SEARCH pass=true, report.md sections 6.1 and 10 'No external comparator exists', 'the comparator does not exist in the published literature in the required form' and '47 prior C-CROSSSITE experiments failing to produce an external comparator are now explicable' - are all rejected as findings. The frozen falsifier permits a negative 'FOR THAT CORPUS ONLY, with bounded recall over the mandated target list recorded exactly' (prereg.md sections 1 and 9); neither the corpus bound nor the recall accounting holds, and the contract forbids turning missing coverage into a global negative. Q2 IS CARRIED FORWARD AS PARTIAL, NARROWED, and it is the one durable product of this cycle. arXiv:2608.05784v1 is a real, correctly resolved artifact and its own stored abstract states a Routine Overhead Ratio R of 60-343x as a modeled upper bound and a delegable recurrence h of 9.0% in-sample and 7.7% out-of-sample, on one professional's single-user corpus of 128,756 frames over 51 active days (raw/search_log.jsonl line 1, quoted verbatim in audit.json baseline_findings[1]). The audit corroborates the h values by re-running the producer's extractor and confirms the single-source attribution. Three qualifications travel with them and none may be dropped. First, the producer's Q2 field count of 3 of 4 is inflated: only 2 fields are independently supportable, because uncertainty_or_range is a demonstrated false positive whose sole evidence is the sentence 'we release the harness so the comparison can be rerun with confidence intervals', i.e. the source states the intervals are NOT yet reported, and the detector fires on the phrase regardless of polarity (VF9, probe VF-D). Second, overhead_ratio_R has three mutually inconsistent values and none of them is certified: raw/search_log.jsonl line 1 logs 99.0, the auditor's re-run of the same extractor on the same stored abstract returns 60.0 because the range branch is unreachable, and result.json reports '60-343x' as a hand reading of abstract prose with no evidence quote attached; and 99.0 is not R at all - per the same log's own fourth evidence quote the source says a compiled routine 'recovers 1-1/R ~ 99% of that step's re-derivation cost (exactly 99.7% at the median ceiling Rinfo= 343)', so 99 is the recovered fraction, the complement of the overhead ratio (VF8). Third, the producer's 'accounting_convention is a genuine gap in the source, not an extraction failure' (result.json validity_notes[3], report.md section 3.2) is contradicted by the producer's own retrieved span, which contains the explicit all-fleet ceiling formula h(1-1/Rinfo) with Rinfo=343 and the section header '8.4 Limitations of the Overhead Measurements / Five limitations bound the results of this half of the paper' (VF10, probe VF-E). So the honest Q2 statement is: figures are quoted in one preprint's abstract, n=1 user, R is a modeled upper bound, the accounting convention and the five stated limitations are present-but-unextracted, and h and R therefore remain unverified priors for SPIDER's economic premise. The packet also records a first external comparator SPIDER has on record from the same verified abstract, which the audit did not dispute and which is carried forward with full caveats: a compiled day-level context block 86x smaller in 68 ms, and 98.4% answer accuracy (Wilson 95% CI 91.7-99.7%) against an independent oracle versus 66-80% for an LLM summary of the same capture. That is an abstract-level, unreplicated, n=1 figure on a different substrate and a different quantity from SPIDER's audited 68x / 763.06-token per-observation floor, and it neither replicates nor contradicts it. C-CROSSSITE, C-PRODUCT-ECON and C-LLM-INHERIT are all held at HYPOTHESIS, which is their current research/claims/registry.json status, and MEASUREMENT_INVALID is deliberately NOT applied to any of them: this packet measured none of the three claims, it looked for an external comparator, so the correct claim-level statement is that no admissible evidence moved any of them in either direction. VALIDATED is unavailable because audit.json status is MEASUREMENT_INVALID, not PASS, and lane=intel forecloses PRODUCT_CORE regardless. No product action and no promotion. continue=false: the next step is a substrate and instrument repair, not another intel search run. audit.json required_fixes[11] (F12) records that this is the SECOND consecutive intel packet reproducing the EXP-INTEL-36272389571 failure class recorded in codex/claim_state.json latest_event_by_claim['C-PRODUCT-ECON'] - crossed name-to-artifact mapping plus a non-discriminating null control - so the identity-resolution defect must be treated as a program-level instrument bug requiring one shared fix, not a per-experiment retry with better search queries; and the audit's own unresolved[1] shows the deeper blocker, that the frozen Q1 verdict may be unsatisfiable by external literature at all because site_pair_stratum_isolation is a mandatory FOUND condition whose detector is keyed to SPIDER's own prior vocabulary, which must be settled before any cycle is spent re-running Q1. Packet integrity itself is sound and is not in question: all three frozen-input hashes match freeze.json, all six declared artifact hashes verify, 0 credentials, 0 model API calls, 0 browser binaries, 0 container pulls, 159 seconds wall clock, retrieval genuinely succeeded for the four correctly identified artifacts. This is a reasoning and instrument-validity failure, not tampering and not a missing substrate. Scope note recorded rather than silently dropped: the binding mandate's third clause - whether parametric or compiled memory that survives a backbone change is demonstrated to transfer across models, which would bear on whether SPIDER's inheritance substrate should be retrieval or parameters - appears nowhere in spec.json, prereg.md, report.md or result.json, so C-LLM-INHERIT received no measurement and its directed sub-question was removed at DESIGN with no record in the packet; the next_question restores it as a named sub-question rather than treating C-LLM-INHERIT as addressed.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "2e37b90686efad7f9b21738b2f71235b5e22e5c7",
       "hashes": {
         "request.json": "6e760a1ff510b7424686e3085b42a9a079f4ce775aa947788acac99b7507be89",
@@ -11206,7 +11206,7 @@
       "decision": "MEASUREMENT_INVALID_FROZEN_CORPUS_DEFECT_AND_WRONG_CONSTRUCT_POPULATION_IDENTITY_GATE_REPAIRED_C-PRODUCT-ECON_HELD_AT_HYPOTHESIS_C-MEAS-VALID_HELD_AT_EXPERIMENTAL_NO_PROMOTION_NO_CONTINUE: the experiment is adjudicated MEASUREMENT_INVALID. It is a measurement-validity failure and NOT a scientific falsification and NOT an infrastructure failure (audit.json validity_findings[13] VF14; 0 credentials, 0 model calls, 0 browser binaries, 0 container pulls, 32 HTTP GETs). Two frozen gates fire and bind the packet: gate 1 (PC-COST-ACCOUNTING fails) makes the whole experiment MEASUREMENT_INVALID, and gate 5 (identity_resolution_recall 0.357143 < 0.6) makes Parts 2 and 3 INCONCLUSIVE. The producer's status=MEASUREMENT_INVALID / outcome=NOT_APPLICABLE and its per-part frozen outcomes Part1=MEASUREMENT_INVALID, Part2=INCONCLUSIVE, Part3=INCONCLUSIVE, overall=MEASUREMENT_INVALID are ADOPTED as frozen-rule outputs, and the auditor independently recomputed them (audit.json recomputed_metrics). THE BINDING TRIGGER IS A FROZEN CORPUS DEFECT, NOT A RESOLVER FAILURE, AND THE AUDITOR SAYS SO: spec.json identity_resolution.frozen_target_list freezes expected_authors=['TBD'] for the PC-COST-ACCOUNTING target arXiv:2608.05784v1, while prereg.md 4.1(3) requires at least one author substring match, so condition 3 is unsatisfiable as frozen and the resolver correctly recorded pass=null with reason C3_author_unevaluable_TBD rather than pass=true, on a REAL artifact whose identifier, title (expected_token_coverage_in_title=1.0) and 5 of 6 domain keywords all match and whose single author is 'Iyamu, Nossa' (raw/identity_resolution.json targets.ActivityFrames; audit VF3, required_fixes[0]). The producer correctly refused to add an 'author list unavailable' branch after seeing the outcome, because that would be a post-hoc change to a frozen identity contract that flips the verdict (result.json validity_notes VN-2). THE MANDATED INSTRUMENT REPAIR WORKED AND THIS IS THE MOST IMPORTANT POSITIVE RESULT IN THE PACKET: the failure class that broke the parent packet is gone. Gates 2, 3 and 4 all did not fire. NC-REAL-BUT-WRONG retrieved a REAL artifact (arXiv:1802.05012v2, 'Getting out of the closet: Scientific authorship of literary fiction and knowledge transfer', 2018, Azagra-Caro et al.), the resolver flagged C2_title_mismatch and C3_author_mismatch, emitted AMBIGUOUS -> UNMEASURED and never NOT_FOUND, and because that unrelated abstract contains the token 'agent' the C4 domain-keyword condition alone WOULD have passed - so the demonstration is that the identity gate has power only as a four-condition CONJUNCTION (audit VF4; result.json observations[5]). 0 of 38 artifact-table rows were scored NOT_FOUND and 0 rows carry resolution_status=NOT_FOUND, versus 5 such rows in the parent (audit VF5; results/table.json integrity_self_checks). PC-PERFORMANCE-ENVELOPE passed with all four required fields from a correctly resolved artifact (audit VF6). THE NEW AND DECISIVE FINDING IS THAT THE FROZEN CORPUS IS THE WRONG POPULATION, INDEPENDENT OF IDENTITY RECALL: the 14 frozen entries are benchmarks and environments, and none of the 5 correctly resolved targets persists state across sessions or episodes, so p1_n_correctly_resolved_targets_persisting_state_across_sessions = 0 and the Part 1 construct population inside the frozen list is 0 at any resolver accuracy. This SUPERSEDES the inherited diagnosis that repairing the identity gate would unblock Part 1: a perfect resolver on this list still cannot answer the frozen Part 1 question (result.json validity_notes VN-5; audit required_fixes[2], validity_findings[7]). BOUNDED, REPORTED-NOT-ADOPTED SCIENTIFIC CONTENT at the audited claim ceiling: within the corpus actually reached (5 benchmarks + 1 memory paper) no artifact reports a measured break-even reuse count f* (in arXiv:2608.05784v1 the reuse count N appears only as a symbol inside Eq. (1)'s piecewise cost model and is never solved; 0 pattern hits for break-even/breakeven/break even reuse/reuse count/payback/amortization point/f* over 69,607 characters of retrieved full text) and none demonstrates persistent cross-episode state beating re-derivation on a real billed cost basis (that paper states its three-arm dollar comparison is 'modeled from measured artifacts and token counts, not billed' and that 'the full live three-arm billing with real usage JSON remains reserved'; its one live in-loop comparison saved about 14% against a modeled 83.3%). Those are absences inside a corpus that never contained the Part 1 construct, so they are NOT a literature-level negative and the audit's claim_ceiling says in terms that this packet 'does not establish that such justification is absent in the broader literature'. Part 2 recorded four distinct evaluation conventions across four benchmarks with only WebArena<->WebVoyager sharing one, and Part 3's only ablation varies the WRITE representation at constant retrieved context and reports no retrieval-quality metric at all, so neither part can carry a retrieval-vs-write or convention verdict. DIRECTOR RULING on the one open implementation question, resolving audit required_fixes[4] and producer U-6: the binding reading of prereg 4.1(2) is case-insensitive substring PLUS expected-token coverage >= 0.85 as logged per target; the strict full-token-set Jaccard >= 0.85 reading is arithmetically unsatisfiable on this list - jaccard_full_title_tokens is 0.2 for the real, correct ActivityFrames artifact against a 9-token returned title - so a rule no correct artifact can satisfy has no discriminating power and drives recall to 0.0. This ruling is recorded so it is not re-litigated and does not change the outcome, which rests on gate 1 independently. The four audit required_fixes that request 'a director mandate' are requests to the Global Research Director and are NOT self-issued here; lane Directors adjudicate evidence and do not dispatch (AGENTS.md 'Global direction discipline'). This is the third consecutive intel MEASUREMENT_INVALID on the C-PRODUCT-ECON external-anchor question, but the failure class has CHANGED from resolver misidentification to frozen-corpus population mismatch, which is why the next question is a corpus redesign plus a decidable algebraic test rather than a fourth run of the same search.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "00914e713d7ede39fd68d225e158e0112a14da5a",
       "hashes": {
         "request.json": "645d07187c97beb0d6006a4fc8b8530a6b49cbae8b9d643b6045a2b990a5ca8f",
@@ -11287,7 +11287,7 @@
       "decision": "MIXED__PART_A_AND_PART_B_PRIMARY_QUESTION_MEASUREMENT_INVALID__A_BOUNDED_FIELD_EXTRACTION_SUBRESULT_RETAINED__C-PRODUCT-ECON_HELD_AT_HYPOTHESIS__C-MEAS-VALID_HELD_AT_EXPERIMENTAL__NO_PROMOTION__NO_CONTINUE: the producer's status=COMPLETE/outcome=FALSIFIES on both parts is NOT ADOPTED as a literature-level negative, and the audit's REVISE is not upgraded into one either. The primary question is adjudicated MEASUREMENT_INVALID on two independent and jointly sufficient grounds, neither of which the producer or the auditor had to adjudicate. GROUND 1 - THE IDENTITY GATE IS STRUCTURALLY ANTI-CORRELATED WITH THE TARGET CONSTRUCT, so the primary metric is uninterpretable. spec.json identity_resolution freezes the C4 domain-keyword vocabulary of the POSITIVE CONTROL, ['agent','memory','replay','screen','activity','deterministic'] - words taken from the title 'Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay' - and the resolver applied that same list unchanged to every construct-population candidate. A web-agent system that persists state across episodes must contain at least two of {replay, screen, activity, deterministic} in addition to agent and memory in order to clear 4/6. All four distinct seeds were rejected at exactly that condition with exactly 3/6 (Agent Workflow Memory 2409.07429, Pink et al. 2502.06975, WebCoach 2511.12997, ReasoningBank 2509.25140; result.json metrics.seed_candidates[*].fail_reason; audit.json recomputed_metrics seed_1..seed_5). The only artifact that clears C4 at 6/6 is the control the vocabulary was taken from. n_persisting_state_yes=0 is therefore a statement about a frozen keyword list, not about the published literature, and the four distinct papers scoring an identical 3/6 is the signature of a fixed vocabulary rather than a property of four unrelated papers. GROUND 2 - THE MANDATORY POPULATION COMPONENT NEVER RAN. spec.json identity_resolution.snowball is frozen_at_design=true with max_candidates=20 and is the only mechanism by which the construction-seeded population could exceed the five seeds; provenance.json environment records semantic_scholar_available=false with semantic_scholar_error='HTTP 429 Too Many Requests', and the run reports snowball_papers_examined=0 and snowball_papers_resolved=0. research/EXPERIMENT_PACKET.md section 1 forbids encoding an infrastructure or substrate failure as scientific falsification, so the only frozen path to a negative is barred at its source, and the frozen decision rule itself had no MEASUREMENT_INVALID trigger for a blocked mandatory component (audit.json validity_findings VF5, required_fixes[4]). The outcome=COMPLETE label is therefore a frozen-rule artefact, not a verdict on the world. WHAT IS ADOPTED AS ESTABLISHED, at the ceiling 'one named artifact, read-only, denominators exposed, modeled labelled': arXiv:2608.05784v1 reports no measured break-even reuse count f* (the reuse count N appears only as a symbol in Eq. (1) and is never solved; 0 pattern hits for break-even/breakeven/payback/amortization-point/f* in the preserved text layer), no measured real-cost advantage of persistence ('modeled from measured artifacts and token counts, not billed'), and no stationarity metric. This is corroborated at the PARENT ceiling by preserved, hash-pinned evidence that still exists: research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt, 69,607 characters, sha256 e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf, in which 'stationar' occurs 0 times, 'break-even' 0, 'breakeven' 0, 'payback' 0, 'amortiz' 1, 'reuse count' 1 (the Eq. (1) definition of N). ONE FACTUAL CORRECTION TO THE PRODUCER'S RECORD, made from that same preserved span: the $1.84/task figure is NOT a report by arXiv:2608.05784v1. The paper introduces it as a citation of its own reference [49] - 'the Holistic Agent Leaderboard for real rollout economics ( approximately $1.84/task)[49]' - and then says 'Together they supply an amortized per-task cost of a memory-backed agent, which we adopt as a cited frame, not a contribution'. It is a third-party number cited by the PC, not a measurement made by it, so result.json observations[10] and report.md section 1 misattribute it and it must never be cited as that paper's report. ALSO ADOPTED: the identity gate's C4 condition has one powered demonstration in this packet, against a real-but-wrong artifact - arXiv:1802.05012v2 resolved to a real artifact, was rejected at 2/6 domain keywords, and emitted AMBIGUOUS -> UNMEASURED and never NOT_FOUND. AND THE INHERITED INSTRUMENT CREDIT IS PARTIALLY REGRESSED RATHER THAN RE-VERIFIED, which is the most consequential negative finding in this packet and was flagged by neither party. The parent's headline demonstration of conjunction power rested on 'C4 alone would have passed'; the parent's own preserved raw record contradicts it: research/experiments/EXP-INTEL-36306525220/raw/identity_resolution.json targets.WebArena.checks.C4_domain_keyword records matched=['web','arena','agent','benchmark','environment'] against frozen domain_keywords of the same five, i.e. 5 of 5 with pass=true, on the unrelated 2018 literary-fiction abstract that contains no such domain vocabulary - an impossible text match and therefore a non-discriminating evaluation, on the one target where it was decisive. Every other non-trivial target in that file has matched strictly a subset of its frozen list. In this packet the opposite two conditions were made tautologies: spec.json null_control re-freezes the null artifact's TRUE expected title and its TRUE expected author, so C2 and C3 compare the artifact against itself, and the frozen pass criterion 'reason containing C2_title_mismatch or C3_author_mismatch' is therefore unsatisfiable as frozen; the producer recorded the control as pass=true on a C4 failure instead. Consequence: in the parent C2 and C3 discriminated and C4 did not; in this packet C4 discriminates and C2 and C3 cannot; NO RUN IN EITHER PACKET DEMONSTRATES THAT ALL FOUR IDENTITY CONDITIONS ARE JOINTLY NECESSARY, and the inherited established[0]/established[1] credit must travel with that qualification. Related and uncaused: C2's treatment of expected_token_coverage_in_title=0.0 changed between the two runs on the same frozen value - pass=false in the parent raw record under the binding rule coverage>=0.85, recorded as satisfied ('trivial') here - and because no code artifact is preserved the cause is UNKNOWN. PACKET INTEGRITY IS SOUND AND IS NOT THE DEFECT: all three frozen inputs verify unmodified against freeze.json (prereg.md 36ec7b92...f31b, request.json e2218a7f...1e5e, spec.json 391a6d45...1d0d), the infrastructure failures were reported honestly and not converted into a negative, and the producer refused to invent snowball candidates. BUT THE PACKET IS NOT REPRODUCIBLE OR RE-CHECKABLE: zero of the seven artifacts committed in prereg.md section 15 exist on disk, including raw/identity_resolution.json, raw/field_determinations.json, raw/controls_result.json, raw/snowball_candidates.json, results/table.json and results/coverage.json, and the four artifacts that carry sha256 values in result.json artifacts[] (raw/arxiv_2608.05784.html, raw/arxiv_1802.05012.html, raw/pc_paper.pdf, raw/pc_paper_text.txt) name files that do not exist. audit.json recomputed_metrics is consequently a re-derivation of result.json rather than an independent recomputation from raw evidence, and this packet's provenance.json records a 63-character prereg hash that does not match the freezer's 64-character value, while the reusable resolver published by the parent (research/experiments/EXP-INTEL-36306525220/resolve_identity.py, sha256 8cc63cf1768f0fb861388ff57857838966049b8e2696eb9fe58854043ee25a8a) was neither reused nor re-published, so the instrument that produced this packet's C1-C4 sub-checks is unrecoverable. ONE SCOPE LOSS IS RECORDED: the Global Research Director's second bounded clause also asked whether any published system reports a measured witnessed-determinism fraction with its acceptance conditions; the frozen Part B narrowed itself to stationarity_metric only, so that clause was dropped at DESIGN and remains unasked by any packet in this thread. continue=false because the next action needs a new frozen design, a substrate decision and a Global Research Director mandate rather than immediate chaining; VALIDATED is unavailable because audit.status is REVISE and not PASS; PRODUCT_CORE is unavailable because lane=intel; SHIPPED is reserved for post-audit product promotion and is not emitted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "4b7908165d3dea8f1fa15b06c70b3e6370316f5f",
       "hashes": {
         "request.json": "e2218a7ff7324d3aef624adaceac84d55831544f95e0895b9f76689220dd1e5e",
@@ -11451,7 +11451,7 @@
       "decision": "ADOPTED AS A VALID SCIENTIFIC NEGATIVE AT THE FROZEN CEILING, BOUNDED TO ONE HASH-PINNED ARTIFACT: producer status=COMPLETE / outcome=FALSIFIES and audit status=PASS (producer_claim_supported=true, required_fixes=[]) are both adopted. Gate_0 passed every frozen check - evidence sha256 / 70,219 bytes / 69,607 characters / 1,447 lines match spec.json, PC-EXTRACT recovered 34/34 anchors, PC-READING derived the stacked-fraction rule from Eqs. (2)-(3) and selected VAR-LIT, PC-ALGEBRA reproduced hand f*=2.0 at relative error 0.0, NC-DIVERGENT fired both the g<=0 and the f*>N_reach branches, NC-CONVENTION distinguished AMORTIZE-ONCE f*=20.73 from PER-REUSE NO_FSTAR_DEGENERATE on the same cell, and the two independent table implementations agree at all 1,680 primary and 17,280 sensitivity cells - so this is measurement-valid science and NOT an infrastructure failure and NOT a substrate failure. Per frozen gate_1/gate_2 all four (reading, convention) quadruples classify FINITE_NOT_EVALUABLE, so the packet-level verdict is FALSIFIES of H1: no numeric break-even reuse count f* with a stated denominator is derivable from arXiv:2608.05784v1 using only the artifact's own published values, because no artifact-internal commensurable w = Cwrite/Cmiss exists (compile cost printed as '<=0.5ms, 0 tokens' is a degenerate f*=0, not a positive break-even; capture/storage cost is printed only as 9.5GB, ~0.19GB per active day and 96% OCR duty; p, Cverify and Cwrong are never published in commensurable units). DIRECTOR RULING resolving audit unresolved[1] and producer unresolved[1]: the frozen placeholder w sweep {1/60, 1/343, 1, 10} is NOT an artifact-internal measurement, so the conditional REACHABLE branch is recorded but NOT adopted, frozen falsifier clause F3 ('input supplied from outside the artifact, with no artifact-internal commensurable value') governs, gate_1 precedence is upheld, and this ruling is bound to this packet and must not be re-litigated downstream. WHAT THE NEGATIVE DOES NOT SAY: structural divergence does NOT fire - g is positive at the artifact's published q~=0.82 across the p sweep for both readings - so the failure mode is missing denominators, not a non-positive saving, and the class FINITE_NOT_EVALUABLE is not f*=infinity. Scope is the single artifact, not the literature class, and not SPIDER. C-PRODUCT-ECON is HELD at HYPOTHESIS: this packet measured reportability of an external artifact's algebra and never measured SPIDER's end-to-end amortized economics, so the registry next gate 'end-to-end amortized economics on real agents' is untouched; UPGRADE BARRED (no measurement of the claim's own subject matter; spec.json output_contract.no_self_promotion), REJECTION BARRED (the falsified proposition is reportability from this artifact only). NO promotion (lane=intel, no Product code in scope, promote_to_product=false), NO external census funded on this evidence, non-adoption bar preserved verbatim, continue=false: the next step is first-party measurement under a new Global Research Director mandate, not a fourth Intel search on this thread.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "13ad782a77d28c5c193b393193411ad6f65180ec",
+      "source_ref_head": "09443322dc26b05c3c70cde56c4c7ebac6e427fd",
       "source_commit": "95699f802bd3444b7c16239112e60a80e91fe393",
       "hashes": {
         "request.json": "59c48de322cf3e30cf36b3f6a262e925e56b692e56cabf192d7003d06a5182a0",
