@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-36293257855",
-  "last_experiment_id": "EXP-RUNTIME-36129163700",
-  "last_verdict": "VALIDATE_C-MEAS-VALID_AT_BOUNDED_INSTRUMENT_SCOPE_PART_A_SUPPORTS_AUDIT_PASS; PART_B_BROWSER_LAUNCH_AND_DOM_AX_AVAILABLE_WRITE_LEG_ABORTED_ON_HARNESS_DEFECT_NOT_ENVIRONMENT; PART_C_FAIL_CLOSED_CAPABILITY_LEDGER_AVAILABLE; DURABILITY_UNSATISFIABLE_AT_MEASUREMENT_HEAD; NO_PRODUCT_PROMOTION; NO_AUTOCHAIN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-36293257855",
+  "last_verdict": "VALIDATE_C-MEAS-VALID_AT_BOUNDED_AUTHORSHIP_SEPARATED_REAL_CHROMIUM_TRANSPORT_SCOPE; SUPPORTS_ALL_SIX_ARMS_POINT_1.0_WILSON_LO_0.8389_POSITIVE_CONTROL_SENSITIVITY_1.0_NULL_MATRIX_SPECIFICITY_1.0_ZERO_FALSE_POSITIVES; INDEPENDENT_RECOMPUTE_ZERO_MISMATCHES_AND_CAPABILITY_LEDGER_ALL_REQUIRED_SCOPES_PASS; AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_NO_REQUIRED_FIXES; REGISTRY_NEXT_GATE_DISCHARGED_AT_THIS_SCOPE; DURABILITY_PRECONDITION_UNMET_AT_MEASUREMENT_HEAD_REFERENCE_ONLY_AND_NOW_HEAD_RESIDENT_VERIFIED_BY_DIRECTOR; NO_PRODUCT_PROMOTION; NO_AUTOCHAIN",
   "continue_immediately": false,
-  "next_question": "Now that the WAL-byte plus logical-projection plus response-fingerprint intervention oracle is VALIDATED against a planted surface, does that same oracle still reach arm-constrained point sensitivity and specificity >=0.90 with two-sided 95% Wilson lower bound >=0.80 and non-degenerate intervals when BOTH bounding confounds of the current scope are broken at once: (i) authorship, by implementing the intervention surface and its auth/session boundary in a module separate from the scorer so the detector never shares an author with the ground-truth provider, and (ii) transport, by driving the full valid-auth SPA write, reversible restore, and the read-only, invalid-auth, expired-auth and deleted-session nulls through the already-demonstrated public-API Chromium path (p.chromium.executable_path launch of /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, Chromium 153.0.8010.12, real 1280x720 CDP DOM plus Accessibility.getFullAXTree) instead of the plain-HTTP client path, with the run_experiment.py:1444 pre_null_logical NameError repaired before freeze, real button clicks as the only write mechanism, mandatory before/after WAL byte evidence, and no synthetic fallback - i.e. does the measurement instrument generalize across the author/measurer boundary and the transport boundary simultaneously, which is the single untested step between this bounded VALIDATED scope and any downstream lane preregistering it as a precondition?",
+  "next_question": "With the composite intervention oracle (WAL-byte vector hash + SQL logical projection + stable-header response fingerprint) now VALIDATED at the authorship-separated, real-Chromium-transport scope but ONLY against interventions the fixture's own controlled endpoint planted, does that same oracle retain arm-constrained discrimination - point sensitivity/specificity >= 0.90 with two-sided 95% Wilson lower bound >= 0.80, non-degenerate intervals, zero false positives on matched nulls, arm-blind scoring and independent recomputation zero mismatches - when the change it must detect is induced OUTSIDE the surface the detector's author wrote (an upstream worker, cache or representation transition performed by a component that is not research/runtime/intervention_surface.py and not reachable from the scorer), while a powered write-then-revert probe executed entirely inside the 50 ms capture interval is added to MEASURE the acknowledged blind spot of a byte-equality WAL oracle rather than assume it away; i.e. is the measured discrimination a property of the oracle over arbitrary state transitions, or only over transitions this particular fixture performs itself, which is the last scope bound standing between the current ceiling and any downstream lane treating the substrate as measurement-valid for real drift questions?",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-10-09T15:44:00.825503+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "584ac7ae5bd40f2db35ab4baffbc890963a7f1fc2226c4f88c5111333f4b6808",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-09T16:49:26.786959+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "edd619165519091a4127188b2c1eaa652217963d1d99223afee312ca2ef93b5f",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
