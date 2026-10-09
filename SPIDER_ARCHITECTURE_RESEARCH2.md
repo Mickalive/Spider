@@ -80,13 +80,15 @@ Cross-lane evidence is consumed from the Codex or exact immutable commits. Cross
 
 Every claim-bearing cycle is:
 
-`REQUEST -> DESIGN -> FREEZE -> EXECUTE -> CHECKPOINT -> INDEPENDENT AUDIT -> DIRECTOR VERDICT -> CODEX`
+`REQUEST -> DESIGN -> optional BUILD -> FREEZE -> EXECUTE -> CHECKPOINT -> INDEPENDENT AUDIT -> DIRECTOR VERDICT -> CODEX`
 
-DESIGN is not allowed to inspect outcome data.
+DESIGN is not allowed to inspect outcome data. It declares whether new measurement/capability artifacts must exist before freeze and lists their exact repository-relative paths.
 
-FREEZE is performed by deterministic code, not by the research agent. It hashes the request, specification and preregistration before execution begins.
+BUILD is a pre-outcome construction stage. It may create only preregistered instrument, capability, fixture or task-bank artifacts inside the lane's authorized roots. It may run unit tests and health/control checks, but it may not execute treatment arms or inspect outcome-bearing data.
 
-EXECUTE may not mutate frozen inputs.
+FREEZE is performed by deterministic code, not by the research agent. It hashes the request, specification, preregistration, the BUILD receipt and every declared `freeze_artifact` byte. This closes the former impossible contract in which experiments required code to be frozen even though code could only be written after freeze.
+
+EXECUTE may not mutate frozen inputs or frozen BUILD artifacts.
 
 AUDIT may not help the producer obtain PASS.
 
@@ -163,7 +165,9 @@ The factory must survive model failures, GitHub retries and partial runs.
 - no global all-or-nothing recovery;
 - no scientific lane self-dispatches a child experiment from its local handoff;
 - Codex synchronization wakes the next global direction pulse through canonical main updates;
-- every pulse runs Scout -> Global Research Director -> dispatch/resume;
+- every pulse attempts Scout -> Global Research Director -> dispatch/resume;
+- Scout is advisory, never a single point of failure: if it is unavailable, a deterministic degraded brief is supplied and the Director reasons from the accepted snapshot;
+- if the Global Director itself is unavailable, frozen transactions may still resume, but NEW/PREFREEZE work remains fail-closed;
 - scheduled pulses repair sleeping transitions and re-evaluate stopped/idle lanes;
 - frozen transactions resume independently of new direction decisions;
 - pre-freeze work is resumed only when still consistent with the Director mandate, otherwise it may be superseded;
