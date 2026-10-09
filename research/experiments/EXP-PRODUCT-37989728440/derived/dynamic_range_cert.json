@@ -1,0 +1,94 @@
+{
+  "computed_before_arm_execution": true,
+  "source": "frozen_task_bank_design + frozen_arm_capabilities",
+  "run_data_used": false,
+  "per_family": {
+    "F1": {
+      "0.5": {
+        "cold_can_discover_session": true,
+        "cold_can_discover_resource_id": true,
+        "cold_can_discover_endpoint": true,
+        "cold_success_rate": 1.0,
+        "retrieval_can_discover_session": true,
+        "retrieval_can_discover_resource_id": true,
+        "retrieval_can_discover_endpoint": true,
+        "retrieval_success_rate": 1.0
+      },
+      "0.75": {
+        "cold_can_discover_session": true,
+        "cold_can_discover_resource_id": true,
+        "cold_can_discover_endpoint": true,
+        "cold_success_rate": 1.0,
+        "retrieval_can_discover_session": true,
+        "retrieval_can_discover_resource_id": true,
+        "retrieval_can_discover_endpoint": true,
+        "retrieval_success_rate": 1.0
+      }
+    },
+    "F2": {
+      "0.5": {
+        "cold_can_discover_session": true,
+        "cold_can_discover_resource_id": true,
+        "cold_can_discover_endpoint": true,
+        "cold_success_rate": 1.0,
+        "retrieval_can_discover_session": true,
+        "retrieval_can_discover_resource_id": true,
+        "retrieval_can_discover_endpoint": true,
+        "retrieval_success_rate": 1.0
+      },
+      "0.75": {
+        "cold_can_discover_session": true,
+        "cold_can_discover_resource_id": true,
+        "cold_can_discover_endpoint": true,
+        "cold_success_rate": 1.0,
+        "retrieval_can_discover_session": true,
+        "retrieval_can_discover_resource_id": true,
+        "retrieval_can_discover_endpoint": true,
+        "retrieval_success_rate": 1.0
+      }
+    }
+  },
+  "cold_has_dynamic_range_at_novelty_ge_0.5": false,
+  "retrieval_has_dynamic_range_at_novelty_ge_0.5": false,
+  "dynamic_range_certified": false,
+  "reason": "B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED both implement mandatory session/resource/endpoint discovery and the deterministic server accepts the discovered in-support values, so both solve every task at novelty 0.5 and 0.75 (success_rate = 1.0). No task family has success_rate < 0.95, therefore the certificate is unsatisfiable on this credential-free deterministic substrate class.",
+  "observed_after_run": {
+    "F1": {
+      "0.0": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.25": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.5": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.75": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      }
+    },
+    "F2": {
+      "0.0": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.25": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.5": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      },
+      "0.75": {
+        "B-COLD-RE-DERIVE": 1.0,
+        "B-RETRIEVAL-SHAPED": 1.0
+      }
+    }
+  },
+  "observed_dynamic_range_certified": false
+}

@@ -1,0 +1,49 @@
+{
+  "checks": {
+    "C1_dynamic_range_certificate": "FAIL",
+    "C2_matched_correctness": "PASS",
+    "C3_cost_advantage_vs_cold": "PASS",
+    "C4_cost_advantage_vs_retrieval": "PASS",
+    "C5_novelty_monotonicity": "FAIL",
+    "C6_null_carrier": "PASS",
+    "C7_known_negative": "PASS",
+    "C8_accounting_honesty": "PASS",
+    "C9_causal_attribution": "PASS",
+    "C10_substrate_validity": "PASS",
+    "C11_treatment_carrier_bound": "PASS"
+  },
+  "checks_bool": {
+    "C1_dynamic_range_certificate": false,
+    "C2_matched_correctness": true,
+    "C3_cost_advantage_vs_cold": true,
+    "C4_cost_advantage_vs_retrieval": true,
+    "C5_novelty_monotonicity": false,
+    "C6_null_carrier": true,
+    "C7_known_negative": true,
+    "C8_accounting_honesty": true,
+    "C9_causal_attribution": true,
+    "C10_substrate_validity": true,
+    "C11_treatment_carrier_bound": true
+  },
+  "overall_outcome": "FALSIFIES",
+  "known_negative": {
+    "refusal_rate": 1.0,
+    "reason_correctness": 1.0,
+    "n": 30
+  },
+  "null_carrier_relative_diffs": [
+    4.959625916915179e-06,
+    7.523968242537684e-05,
+    7.092674507254602e-05,
+    6.497634301612697e-05,
+    1.8334993097728734e-05,
+    2.2926105442412895e-05,
+    4.671458260709421e-05,
+    5.416132872334535e-06
+  ],
+  "c3_c4_robustness": {
+    "note": "Frozen cost_per_success includes latency_ms/1000 (continuous noise). C3 relies on sub-1e-3 relative differences at novelty 0.5/0.75 and is not robust; on deterministic counters only, treatment ties cold.",
+    "C3_counter_only": false,
+    "C4_counter_only": true
+  }
+}

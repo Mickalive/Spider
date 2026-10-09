@@ -1,0 +1,128 @@
+{
+  "B-COLD-RE-DERIVE": {
+    "points": [
+      {
+        "novelty": 0.0,
+        "advantage": -2.0004013698002376,
+        "cold_http_requests": 1
+      },
+      {
+        "novelty": 0.25,
+        "advantage": 0.000553561199740038,
+        "cold_http_requests": 3
+      },
+      {
+        "novelty": 0.5,
+        "advantage": 0.0007153467998248786,
+        "cold_http_requests": 4
+      },
+      {
+        "novelty": 0.75,
+        "advantage": 0.0008193042002861972,
+        "cold_http_requests": 5
+      },
+      {
+        "novelty": 0.0,
+        "advantage": -2.0004891943997793,
+        "cold_http_requests": 1
+      },
+      {
+        "novelty": 0.25,
+        "advantage": 0.00038977899994296905,
+        "cold_http_requests": 3
+      },
+      {
+        "novelty": 0.5,
+        "advantage": 0.0001922534000184939,
+        "cold_http_requests": 4
+      },
+      {
+        "novelty": 0.75,
+        "advantage": 0.0001377966001205877,
+        "cold_http_requests": 5
+      }
+    ],
+    "spearman_rho_novelty": 0.5855400437691199,
+    "permutation_p_novelty": 0.1528847115288471,
+    "spearman_rho_full_task_length": 0.5855400437691199,
+    "criterion_rho_gt_0.5_and_p_lt_0.05": false,
+    "counter_only": {
+      "advantage_points": [
+        -2.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "spearman_rho_novelty": 0.7745966692414834,
+      "permutation_p_novelty": 0.072992700729927
+    }
+  },
+  "B-RETRIEVAL-SHAPED": {
+    "points": [
+      {
+        "novelty": 0.0,
+        "advantage": 2.0001805477998467,
+        "cold_http_requests": 2
+      },
+      {
+        "novelty": 0.25,
+        "advantage": 2.0001897335996546,
+        "cold_http_requests": 2
+      },
+      {
+        "novelty": 0.5,
+        "advantage": 2.00032663539987,
+        "cold_http_requests": 3
+      },
+      {
+        "novelty": 0.75,
+        "advantage": 2.0001992349996733,
+        "cold_http_requests": 4
+      },
+      {
+        "novelty": 0.0,
+        "advantage": 2.0001204712000797,
+        "cold_http_requests": 2
+      },
+      {
+        "novelty": 0.25,
+        "advantage": 1.9999313608000193,
+        "cold_http_requests": 2
+      },
+      {
+        "novelty": 0.5,
+        "advantage": 1.9999745868001808,
+        "cold_http_requests": 3
+      },
+      {
+        "novelty": 0.75,
+        "advantage": 1.9997520857998108,
+        "cold_http_requests": 4
+      }
+    ],
+    "spearman_rho_novelty": 0.0,
+    "permutation_p_novelty": 1.0,
+    "spearman_rho_full_task_length": 0.025717224993681984,
+    "criterion_rho_gt_0.5_and_p_lt_0.05": false,
+    "counter_only": {
+      "advantage_points": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "spearman_rho_novelty": 0.0,
+      "permutation_p_novelty": 1.0
+    }
+  },
+  "seed": 42,
+  "permutations": 10000
+}

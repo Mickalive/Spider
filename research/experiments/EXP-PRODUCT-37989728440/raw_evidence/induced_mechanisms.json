@@ -1,0 +1,198 @@
+{
+  "treatment_mechanisms": [
+    {
+      "family": "F1",
+      "resource_type": "documents",
+      "mechanism_id": "mech-8a45e6dd1d3e150d",
+      "parameter_slots": [
+        "session_token",
+        "property",
+        "value",
+        "document"
+      ],
+      "parameter_supports": {
+        "session_token": "^tok\\-[a-z0-9]{16}$",
+        "property": "^[a-z]+$",
+        "value": "^draft\\-[0-9]{1}$",
+        "document": "^doc\\-0[0-9]{2}$"
+      },
+      "action_template": {
+        "method": "POST",
+        "url": "http://127.0.0.1:43839/api/documents/${document}/update",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Session-Token": "${session_token}"
+        },
+        "json": {
+          "property": "${property}",
+          "value": "${value}"
+        }
+      },
+      "postconditions": {
+        "id": "${document}",
+        "property": "${property}",
+        "success": true,
+        "type": "documents",
+        "value": "${value}"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        "aea9957d8d8c9301",
+        "b6d310447c169780",
+        "df866ab617529d08",
+        "c3333dbdacc8ecb3",
+        "0f026e4a63666e8b"
+      ]
+    },
+    {
+      "family": "F1",
+      "resource_type": "records",
+      "mechanism_id": "mech-650a9820f7c2ccf8",
+      "parameter_slots": [
+        "session_token",
+        "property",
+        "value",
+        "record"
+      ],
+      "parameter_supports": {
+        "session_token": "^tok\\-[a-z0-9]{16}$",
+        "property": "^[a-z]+$",
+        "value": "^draft\\-[0-9]{1}$",
+        "record": "^rec\\-0[0-9]{2}$"
+      },
+      "action_template": {
+        "method": "POST",
+        "url": "http://127.0.0.1:43839/api/records/${record}/update",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Session-Token": "${session_token}"
+        },
+        "json": {
+          "property": "${property}",
+          "value": "${value}"
+        }
+      },
+      "postconditions": {
+        "id": "${record}",
+        "property": "${property}",
+        "success": true,
+        "type": "records",
+        "value": "${value}"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        "ab972d14a2680b19",
+        "4f15a5433da46181",
+        "ed52a83e3a0310a1",
+        "23df4a8318157663",
+        "e712268dc42b0776"
+      ]
+    },
+    {
+      "family": "F2",
+      "resource_type": "gadgets",
+      "mechanism_id": "mech-1c2f86c4f26b0b1c",
+      "parameter_slots": [
+        "session_token",
+        "property",
+        "value",
+        "gadget"
+      ],
+      "parameter_supports": {
+        "session_token": "^tok\\-[a-z0-9]{16}$",
+        "property": "^[a-z]+$",
+        "value": "^draft\\-[0-9]{1}$",
+        "gadget": "^gad\\-0[0-9]{2}$"
+      },
+      "action_template": {
+        "method": "POST",
+        "url": "http://127.0.0.1:43839/api/gadgets/${gadget}/update",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Session-Token": "${session_token}"
+        },
+        "json": {
+          "property": "${property}",
+          "value": "${value}"
+        }
+      },
+      "postconditions": {
+        "id": "${gadget}",
+        "property": "${property}",
+        "success": true,
+        "type": "gadgets",
+        "value": "${value}"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        "557b1c9fed4f4615",
+        "3e47ed0c0873ad72",
+        "b77eb09fd1e57832",
+        "24bf895e9eecf5ac",
+        "5448cd11ecb41ffc"
+      ]
+    },
+    {
+      "family": "F2",
+      "resource_type": "widgets",
+      "mechanism_id": "mech-68b26e27622cd30c",
+      "parameter_slots": [
+        "session_token",
+        "property",
+        "value",
+        "widget"
+      ],
+      "parameter_supports": {
+        "session_token": "^tok\\-[a-z0-9]{16}$",
+        "property": "^[a-z]+$",
+        "value": "^draft\\-[0-9]{1}$",
+        "widget": "^wid\\-0[0-9]{2}$"
+      },
+      "action_template": {
+        "method": "POST",
+        "url": "http://127.0.0.1:43839/api/widgets/${widget}/update",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Session-Token": "${session_token}"
+        },
+        "json": {
+          "property": "${property}",
+          "value": "${value}"
+        }
+      },
+      "postconditions": {
+        "id": "${widget}",
+        "property": "${property}",
+        "success": true,
+        "type": "widgets",
+        "value": "${value}"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        "9211e12f25093724",
+        "89b8e9d5e147ccc1",
+        "5818d69a08e7950d",
+        "aaf6d2a424f3f404",
+        "06f4eafb78beb617"
+      ]
+    }
+  ],
+  "literal_mechanism_count": 20,
+  "literal_mechanisms_sample": [
+    {
+      "mechanism_id": "obs-aea9957d8d8c9301",
+      "confidence": 0.5,
+      "intent": "update_resource"
+    },
+    {
+      "mechanism_id": "obs-b6d310447c169780",
+      "confidence": 0.5,
+      "intent": "update_resource"
+    },
+    {
+      "mechanism_id": "obs-df866ab617529d08",
+      "confidence": 0.5,
+      "intent": "update_resource"
+    }
+  ]
+}
