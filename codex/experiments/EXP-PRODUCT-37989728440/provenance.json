@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37989728440",
+  "lane": "product",
+  "github_run_id": "37989728440",
+  "recorded_at": "2026-10-09T21:38:01.315546+00:00",
+  "git": {
+    "head": "79363512597002d9f0bd5ab27886d964571da63f",
+    "base_sha": "e84398fc72ec41dfc345e53a623a56ea09bff761",
+    "pre_execute_sha": "65f8e359497f46bb04f5d038b92c38b065a1b2ae",
+    "commits": {
+      "execution_base": "79363512597002d9f0bd5ab27886d964571da63f",
+      "freeze": "65f8e359497f46bb04f5d038b92c38b065a1b2ae",
+      "allocate": "9759d07e",
+      "codex_sync": "e84398fc72ec41dfc345e53a623a56ea09bff761"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "6e16822895a3d61731249019103677620df6191560993a7c70248d4500ad7f0e",
+    "spec.json": "8f37be00eb8d13ba6cd357bbc066d3639088e210155d9bcc752bea9ecd071be0",
+    "prereg.md": "3003a704bbb2b986b52b520861aaabd4a1786d5255cd2a90e4968c46b6b5c25b"
+  },
+  "treatment_carrier": {
+    "git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+    "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "vendored_paths": [
+      "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+      "research/experiments/EXP-PRODUCT-37989728440/kernel_treatment.py"
+    ],
+    "verified_sha256_at_execution": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "shipped_src_spider_kernel": {
+      "path": "src/spider/kernel.py",
+      "git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "note": "NOT modified by this experiment; the shipped blob still lacks the parameterized path."
+    }
+  },
+  "harness_code": {
+    "research/experiments/EXP-PRODUCT-37989728440/harness/substrate.py": "0f9f9182cb90ac9e379000e4420a93ba2d2e6a167906c59bd9eac8a8392395af",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/run_experiment.py": "4cb974e8ba7fd7dc15596be53b40256a658607a2a3a36ec735468fcb3132442b",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "substrate": {
+    "technology": "Python stdlib http.server, credential-free, localhost ephemeral port",
+    "seed": 42,
+    "families": {
+      "F1": [
+        "documents",
+        "records"
+      ],
+      "F2": [
+        "widgets",
+        "gadgets"
+      ]
+    },
+    "novelty_levels": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "discovery_endpoints": [
+      "GET /api/session",
+      "GET /api/resources",
+      "GET /api/schema/{type}"
+    ],
+    "target_action": "POST /api/{type}/{id}/update",
+    "task_counts": {
+      "training_per_family": 10,
+      "test_per_family_per_level": 5,
+      "held_out_total": 40,
+      "known_negatives": 30
+    },
+    "max_http_requests_per_task": 10,
+    "timeout_s": 30
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "dependencies": "stdlib only (no pip installs, no model credentials, no browser)"
+  },
+  "commands": [
+    "python research/experiments/EXP-PRODUCT-37989728440/harness/run_experiment.py"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/task_trajectories.jsonl",
+      "sha256": "9b8cbe08f8dba10202262461f3bd65666ba1ceeda4eb5b2746f19e1f8242704f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/accounting_counters.jsonl",
+      "sha256": "81fe7913a7e6ef2991f57c33f5346b7c43745d769a3710866d54fdfe27c0348f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/server_log.jsonl",
+      "sha256": "00552071141fa13c44c412fba2ca51b6f1cb3ac5b117fa14a82b46cedb4d614c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/known_negatives.jsonl",
+      "sha256": "8bfd4ea9be3cabf510b39bf44c429bcfd048ee9fd964b3cc346a96c11abff146",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/induced_mechanisms.json",
+      "sha256": "4d248dcb7144c39c516474fc5a5fe58a8a1bdb9114695d8bfdbc1d553e8228f6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/training_observations.jsonl",
+      "sha256": "657d095fef8aafa96d075e944f2811d629760ee28e74daea51283d318776771b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/treatment_registry.jsonl",
+      "sha256": "e19912a3df0ec563280b64668f9bd2bab26c2a0d18a08bcee75507db8a22c73f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/raw_evidence/literal_registry.jsonl",
+      "sha256": "e30161b53177c04753f73a1c4f43d4e08b6ed34b46b57af8d2f71f8c8ede6541",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/derived/arm_metrics.json",
+      "sha256": "d98e171530de50115a5e952decf88de0d499904edbe19fdaf382c1720f80dc83",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/derived/dynamic_range_cert.json",
+      "sha256": "df67e1fdba3bd50a39feca5dd3be3096ef7067fa7ce6bb9258fcda7b9f2df1c1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/derived/decision_rule_eval.json",
+      "sha256": "074847d0a9b5bf252d62148c93216e9f7aea6b2a47b206e63a79ed5f1122a9d6",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/derived/spearman_monotonicity.json",
+      "sha256": "e8f298ad9c1292d6495ee65a9b7a60476459fe73983330a861077cd3608de03c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/harness/substrate.py",
+      "sha256": "0f9f9182cb90ac9e379000e4420a93ba2d2e6a167906c59bd9eac8a8392395af",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/harness/run_experiment.py",
+      "sha256": "4cb974e8ba7fd7dc15596be53b40256a658607a2a3a36ec735468fcb3132442b",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37989728440/kernel_treatment.py",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "role": "code"
+    }
+  ]
+}

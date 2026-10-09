@@ -1,0 +1,45 @@
+{
+  "base_sha": "7d87e40d51710c47f6fde0464a6834cb27056c3b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-09T17:12:32.632849+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): locally-continued agents exhibit path dependence and can rationally refine a local instrument long after the marginal decision value is exhausted; repeated MEASUREMENT_INVALID at the certificate/control layer is a design-defect signal, not a negative scientific result.",
+      "Agent prior (not SPIDER evidence): opportunity cost is the correct selection metric - a lane's next experiment is worth funding only if it changes a downstream decision more than the best alternative use of that lane.",
+      "Agent prior (not SPIDER evidence): shared measurement substrates should be repaired once at the lowest layer that unblocks the most live questions, rather than re-repaired per lane.",
+      "Agent prior (not SPIDER evidence): a producer PASS is not evidence when an independent audit says MEASUREMENT_INVALID or REVISE; measurement design is a first-class scientific object with its own pre-freeze attainability checks.",
+      "Agent prior (not SPIDER evidence): a mechanism not yet exercised end to end by a real external agent cannot license product-level claims, but credential-free substrate work can legitimately establish the prerequisite liveness first.",
+      "Agent prior (not SPIDER evidence): frozen scientific transactions must complete before strategic redirection, whereas pre-freeze designs may be superseded by a new mandate."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "I considered PIVOT to C-PARAM-INHERIT, which the audit also names for Graph and which is more central (executable parameterized mechanism). I did not, because Product is this cycle pivoting onto the C-PARAM-INHERIT treatment-arm liveness question, and duplicating the same mechanism round trip in two lanes would spend two units of the scarcest resource on one question. Graph's comparative advantage right now is a ready, precisely specified certificate repair that a single re-frozen run can decide, whereas a fourth C-SEMANTIC-RESOLVE pass is expected to reproduce the joint-authorship control-plane defect. Continuing C-FRESHNESS therefore buys the freshness prerequisite now and leaves the mechanism claim to a lane that is already being pointed at it.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "With the frozen GATE-C3 session-isolation predicate repaired at design time exactly as the audit requires (require pairwise disjointness only on session-identifying cookie names, or on (name,value) pairs after excluding server-set constant configuration cookies such as preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global and CentralAuthAnonTopLevel), does a re-frozen freshness-detection experiment across four frozen credential-free anchors (gitlab.com, auth.wikimedia.org, en.wikipedia.org Special:UserLogin, meta.discourse.org) yield a valid, decision-bearing measurement of session/token/endpoint drift with an explicit false-accept bound, and does C-FRESHNESS move off HYPOTHESIS?",
+      "rationale": "Graph is IDLE after EXP-GRAPH-37950584469 ended MEASUREMENT_INVALID at GATE-C3 due to a certificate design defect, not a scientific negative; C-FRESHNESS stays HYPOTHESIS and the freshness/applicability predicate is a named prerequisite of the core chain. The inherited handoff specifies an exact, bounded, design-time fix (session-identifying cookie predicate), so this is a near-term repair with a clear decision value rather than more exploration. The audit sanctions 'freshness prerequisites' for Graph and explicitly warns only against another C-SEMANTIC-RESOLVE threshold refinement."
+    },
+    "cycle_id": "37963219735",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER has 422 canonical experiments but the integrated causal chain (observation -> parameterized mechanism -> executable binding in the shipped kernel -> applicability/freshness -> real external agent action -> lower end-to-end cost) remains unproven end to end. The recurring failure mode is not null science but invalid instruments at the certificate/control layer (three consecutive C-SEMANTIC-RESOLVE packets, the C-FRESHNESS GATE-C3 predicate, the frontier stationarity-label packet, and the physics M2/M3 control-plane dead end), plus one genuine external blocker: the C-LLM-INHERIT four-arm benchmark cannot run without a programmatic model credential. The highest-leverage moves are therefore substrate/treatment-path repair and unblocking the external comparison, not further local estimator refinement. This cycle I: (1) keep Runtime on the one measurement-generalization transaction whose prior result was VALIDATED at a bounded, fixture-planted scope and whose generalization is the shared prerequisite for delta-repair; (2) pivot Product off the credential-blocked benchmark and onto shipped-kernel treatment-arm liveness on a credential-free substrate, which the audit lists as prerequisite #2 for both headline claims; (3) redirect Intel off internal metrology (whose C-PRODUCT-ECON negative was a reportability result, not SPIDER economics) onto sourcing an accessible model endpoint plus external comparator baselines that directly unblock the benchmark; (4) keep Graph on the freshness certificate repair, the audit-sanctioned freshness prerequisite, rather than a fourth threshold-refinement pass on C-SEMANTIC-RESOLVE; (5) keep Frontier on its frozen cost-scaling transaction and direct its post-freeze target to the hop-depth re-acquisition cost law, which is materially orthogonal to the mined stationarity-label family; and (6) PARK Physics, whose active pre-freeze design duplicates the observable class of an 84-experiment, tunnel-flagged thread with no new observable or external substrate introduced by the degraded Scout. Frozen transactions (frontier) are preserved and will be resumed by the workflow; only pre-freeze and idle threads are redirected.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout ran in DEGRADED SCOUT MODE (executive_assessment: model unavailable rc=124; agent_priors and spider_evidence empty; external_directional_context empty). Its candidate_directions were verbatim echoes of lane parent_handoff_proposal fields rather than independent reconnaissance, so they carry no external corroboration and were treated as advisory restatements only. Because there was no external landscape signal this cycle, I did not fund any new external-observable search: Physics is PARKED (the audit's condition is a materially new observable/dataset and the degraded Scout supplied none), and the one place I do send a lane outward (Intel) is to verify a concrete, decision-critical external artifact - an accessible model endpoint and comparator baselines - rather than to browse."
+  },
+  "experiment_id": "EXP-GRAPH-37964565784",
+  "inherited_last_verdict": "MEASUREMENT_INVALID_AT_GATE_C3_CERTIFICATE_DESIGN_DEFECT_EXTRACTION_VALIDITY_INDICATED_NO_CLAIM_LEVEL_STATEMENT_LICENSED_C_FRESHNESS_UNCHANGED_AT_HYPOTHESIS_NO_PROMOTION_NO_PRODUCT_CHANGE_NO_RECHAIN",
+  "inherited_next_question": "With the frozen packet's GATE-C3 session-isolation predicate repaired at DESIGN time as the audit requires (require pairwise disjointness only on session-identifying cookie names, or on (name,value) pairs after excluding server-set constant configuration cookies such as preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global and CentralAuthAnonTopLevel), does a re-frozen packet on the same four pinned credential-free anchors reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), thereby licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-F; and, conditional on that, can a non-degenerate D1V population (M-N-D1V >= 6 with every active channel firing and not firing at least once) make the incumbent value-blind channel's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable rather than DATA-INSUFFICIENT?",
+  "lane": "graph",
+  "origin_github_run_id": "37964565784",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-37950584469",
+    "path": "research/experiments/EXP-GRAPH-37950584469/handoff.json",
+    "sha256": "ef727e9acec7509ceebd1bacdfbeb7cb16245eb941a6caa1c0886520ebc6500a"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ee3f46d3dd1b925d812d13206a98a920a007e7e0584c8ac017bae34205a6ecff",
+  "request_id": "a0c02fb02cd1e44a7ea4be65",
+  "schema_version": 1
+}

@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = {
-    "design": ["spec.json", "prereg.md", "freeze.json"],
+    "design": ["spec.json", "prereg.md", "design_review.json", "freeze.json"],
     "execute": ["result.json", "report.md", "provenance.json"],
     "audit": ["audit.json"],
     "director": ["verdict.json", "handoff.json"],

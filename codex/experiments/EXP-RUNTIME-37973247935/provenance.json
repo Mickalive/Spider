@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "run_id": "37973247935",
+  "generated_at": "2026-10-09T21:42:01.081206+00:00",
+  "base_sha": "7d87e40d51710c47f6fde0464a6834cb27056c3b",
+  "head_sha": "5badedf76ffd05fb2f705a9f386ddb84cef61bff",
+  "worktree_status": "M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n M research/experiments/EXP-RUNTIME-37973247935/model_execute.json\n?? codex/experiments/EXP-FRONTIER-37950626378/\n?? codex/experiments/EXP-GRAPH-37964565784/\n?? codex/experiments/EXP-GRAPH-37978902447/\n?? codex/experiments/EXP-INTEL-37973264582/\n?? codex/experiments/EXP-PHYSICS-37973239386/\n?? codex/experiments/EXP-PRODUCT-37973256064/\n?? codex/experiments/EXP-PRODUCT-37982016598/\n?? research/experiments/EXP-RUNTIME-37973247935/artifacts/\n?? research/experiments/EXP-RUNTIME-37973247935/bringup_contract.json\n?? research/experiments/EXP-RUNTIME-37973247935/exp_config.py\n?? research/experiments/EXP-RUNTIME-37973247935/recompute_check.py\n?? research/experiments/EXP-RUNTIME-37973247935/report.md\n?? research/experiments/EXP-RUNTIME-37973247935/result.json\n?? research/experiments/EXP-RUNTIME-37973247935/run_experiment.py\n?? research/runtime/oos_worker.py",
+  "seeds": {
+    "master_seed": 37973247935,
+    "episode_order": "random.Random(37973247935).shuffle(...)",
+    "per_episode": "master_seed + episode_id"
+  },
+  "frozen_inputs": {
+    "request.json": "aaf11aeba28fd947012f15da9bea03596779eed45d57231b67c857982b9eda77",
+    "spec.json": "37d8c9c8302005abbc9da49b61541865cee0f313374fba37730c4be77b917245",
+    "prereg.md": "8e7da04c314b9498cf7b49a3a05c5a955d5742c458109ef740073e4f5a098916",
+    "freeze.json": "630cbec0da0a3f3e623a2baafd69aa7c5e84b0896cf52e074baddd120362eb67"
+  },
+  "components": {
+    "intervention_surface.py": "10be3dcb8bed76c8d215916aa9b5b2fb8cf95ede8a6136eedd5b948ba1ea0705",
+    "oracle_scorer.py": "7a30ff637654fbfc366d0f0b1dbe2f8bc481c9b56f5ee48fd894e12baccdad5f",
+    "shared_config.py": "6840f540bb54ac2b9c047ff7a4a0170c5617b45b2066b0d8d7dbb6f1ee4d2215",
+    "oos_worker.py": "64a6ab17566b932cdd97adcaf2e8de61433494c3955417e9170382f4021aa316",
+    "bringup.py": "d6cc744b72b049e4b6706ccdfb31b97276dbf8d413fe770886a468f956a68103",
+    "run_experiment.py": "f904ab896f64d43c90b013831570615777f2732a368db8d3363ec9b980d45ae1",
+    "exp_config.py": "056c912b0cffcd49854a88120c1a7a9decc843318c843a8e2fcf9e6d259e86e1",
+    "bringup_contract.json": "adf06a9d6e4d4bf11b311f27deb5fbfffb9b4e911abdf57610ecd4d46fd90caf"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "linux",
+    "flask_pin": "3.1.3",
+    "pyjwt_pin": "2.15.0",
+    "gunicorn_pin": "23.0.0",
+    "playwright_pin": "1.63.0",
+    "nginx_version": "1.24.0"
+  },
+  "browser": {},
+  "substrate": {
+    "upstreams": [
+      "127.0.0.1:19860",
+      "127.0.0.1:19861"
+    ],
+    "nginx_listen": "127.0.0.1:19851",
+    "database_path": "/tmp/single.db",
+    "journal_mode": "WAL",
+    "wal_autocheckpoint": 0,
+    "wal_bytes_diagnostic": "recorded per episode in A-WAL-VECTOR-BEFORE-AFTER.jsonl"
+  },
+  "commands": {
+    "bringup": "python -m research.runtime.bringup --config research/experiments/EXP-RUNTIME-37973247935/bringup_contract.json --ledger research/experiments/EXP-RUNTIME-37973247935/artifacts/capability_ledger.json",
+    "recompute": "python /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-37973247935/recompute_check.py",
+    "run": "python /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-37973247935/run_experiment.py"
+  },
+  "durability": {
+    "disposition": "NOT_RUN",
+    "scientific_effect": "none"
+  },
+  "recompute": {
+    "zero_mismatches": false,
+    "summary": {
+      "error": "experiment did not complete"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-ATTAINABILITY-CERTIFICATE.json",
+      "sha256": "5a2a70f99d50f5990ce893fb1179363dec24f1a216151a10435c4dd48f9b0884",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-BLINDSPOT-PROBE.jsonl",
+      "sha256": "07b75217f55561d407e7725db2452bbf25ca13226fbe5d27664f536c35741fbd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CAPTURE-STABILITY.jsonl",
+      "sha256": "2322cbdcdbfb638836a6e8083077b0666d27f3cb8342414d33422304c48e4604",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CONTROL-LIVENESS.json",
+      "sha256": "a7e75fdb3877cc8cd461b7c7b753b83f29d800e071563fac75ddcba3d2cb7299",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-DETECTOR-OUTPUT.jsonl",
+      "sha256": "5658028cb1946fa9c40b7ef4229529a3f0c21aee9be0e4e3e196656270b94a79",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-EPISODE-LEDGER.jsonl",
+      "sha256": "3b23a4bd158e3a12b3a687b5bc3b9410fba54824a8c9127fcf1d04577c4213f7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-OOS-WORKER-EVIDENCE.jsonl",
+      "sha256": "4343191346f727d4ed50616b7f744f58be9d171f3aa3eac9eb3d18d4f7eba139",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-READINESS-CERTIFICATE.json",
+      "sha256": "3c8f0800369c6756112d050795a449421b3428e94f6ee748ed696fabcd9a1424",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-SEEDED-ORDER.json",
+      "sha256": "ae004cd5d9f52e91c9b9d175b151e17b8cf92565b00a8b3e68fb5d2906e24449",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+      "sha256": "8166152c031ef60cb8085ca3395890faa66a87a1adb1cad00daf42d22d3cfdda",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+      "sha256": "c457125ee102f585ff1f758a9c1d99b424a34bb9aa7835f082430a1d9369167f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/C-BRINGUP-CONTRACT.json",
+      "sha256": "698506bc33cdca6b47cccc3d3d8920a55b1bf24414c30d8445e9b4be5bf2d6e9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/capability_ledger.json",
+      "sha256": "6f2d988a8d5e956d50cc6c236b7d0c7c36a7bf5da5043eee4a24c398b22d219c",
+      "role": "derived"
+    }
+  ]
+}

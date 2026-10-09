@@ -147,6 +147,7 @@ def main():
             base_sha = os.environ.get("SPIDER_START_SHA") or os.environ.get("GITHUB_SHA") or "unknown"
             seed = {
                 "schema_version": 1,
+                "design_contract_version": 2,
                 "experiment_id": exp_id,
                 "lane": args.lane,
                 "origin_github_run_id": str(args.run_id),
@@ -181,6 +182,15 @@ def main():
                 "product_consequence_negative": "",
                 "estimated_cost": "",
                 "expected_information_gain": "",
+                "freeze_eligibility": {
+                    "decision_rule_reachability": {"status": "PENDING", "reason": "", "evidence_refs": []},
+                    "measurement_prerequisites": {"status": "PENDING", "reason": "", "evidence_refs": []},
+                    "baseline_identifiability": {"status": "PENDING", "reason": "", "evidence_refs": []},
+                    "control_sensitivity": {"status": "PENDING", "reason": "", "evidence_refs": []},
+                    "treatment_liveness": {"status": "PENDING", "reason": "", "evidence_refs": []},
+                    "freeze_artifacts_bound": {"status": "PENDING", "reason": "", "evidence_refs": []}
+                },
+                "freeze_artifacts": []
             }
             (exp / "spec.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
             (exp / "prereg.md").write_text(f"# {exp_id} preregistration\n\nDESIGN NOT YET FROZEN.\n", encoding="utf-8")

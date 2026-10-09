@@ -94,6 +94,7 @@ def main() -> None:
     }
     claim_state = load("codex/claim_state.json")
     latest_claim_events = claim_state.get("latest_event_by_claim", {})
+    effective_claim_events = claim_state.get("effective_event_by_claim") or latest_claim_events
 
     experiments: list[dict] = []
     for exp_id, raw in index.items():
@@ -115,15 +116,20 @@ def main() -> None:
     claims: dict[str, dict] = {}
     for claim_id, cfg in claim_registry.items():
         latest = latest_claim_events.get(claim_id) or {}
-        effective_status = latest.get("status") or cfg.get("status")
+        effective = effective_claim_events.get(claim_id) or {}
+        effective_status = effective.get("status") or cfg.get("status")
         last_entries = [e for e in experiments if claim_id in (e.get("claim_ids") or [])]
         last = last_entries[-1] if last_entries else None
         claims[claim_id] = {
             "title": cfg.get("title"),
             "registry_status": cfg.get("status"),
             "effective_status": effective_status,
+            "effective_source_experiment_id": effective.get("experiment_id"),
+            "latest_raw_status": latest.get("status"),
+            "latest_raw_experiment_id": latest.get("experiment_id"),
             "owner_lanes": cfg.get("owner_lanes") or [],
-            "next_gate": cfg.get("next_gate"),
+            "next_gate": effective.get("next_question") or cfg.get("next_gate"),
+            "registry_next_gate": cfg.get("next_gate"),
             "product_capability": cfg.get("product_capability"),
             "total_experiments": global_total_counts[claim_id],
             "recent_experiments": global_recent_counts[claim_id],
@@ -163,10 +169,20 @@ def main() -> None:
         active_id = state.get("active_experiment_id")
         active_stage = "IDLE"
         active_has_portfolio_mandate = False
+        active_mandate_action = None
+        active_mandate_claim_id = None
+        active_mandate_question = None
+        active_mandate_disposition = None
         if active_id:
             base = f"research/experiments/{active_id}"
             req = git_show_json(ref, f"{base}/request.json")
             active_has_portfolio_mandate = isinstance(req.get("director_mandate"), dict)
+            if active_has_portfolio_mandate:
+                allocation = req["director_mandate"].get("allocation") or {}
+                active_mandate_action = allocation.get("action")
+                active_mandate_claim_id = allocation.get("claim_id")
+                active_mandate_question = allocation.get("question")
+                active_mandate_disposition = allocation.get("parent_handoff_disposition")
             if git_file_exists(ref, f"{base}/verdict.json"):
                 active_stage = "FINALIZED"
             elif git_file_exists(ref, f"{base}/audit.json"):
@@ -207,6 +223,10 @@ def main() -> None:
             "active_experiment_id": active_id,
             "active_stage": active_stage,
             "active_has_portfolio_mandate": active_has_portfolio_mandate,
+            "active_mandate_action": active_mandate_action,
+            "active_mandate_claim_id": active_mandate_claim_id,
+            "active_mandate_question": active_mandate_question,
+            "active_mandate_parent_handoff_disposition": active_mandate_disposition,
             "last_failure_retryable": state.get("last_failure_retryable"),
             "same_failure_count": state.get("same_failure_count", 0),
             # Direction must reason from accepted evidence. Preserve the lane's

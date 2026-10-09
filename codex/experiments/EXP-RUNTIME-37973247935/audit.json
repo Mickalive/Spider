@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix response fingerprint volatility: the browser-captured composite fingerprint (fingerprint_changed) is true on ALL 260 episodes, making the composite detector (wal_changed OR logical_changed OR fingerprint_changed) always return true. The volatile header exclusion (Date, Server, X-Cache, etc.) must work correctly for browser CDP captures, not just urllib captures.",
+    "Fix capture stability gate: the gate checks 'all_identical' (vector AND fingerprint AND logical) but the prereg specifies 'byte-identical' meaning WAL vector only. The gate should check vector_identical only, and the planned 20 pairs must be produced (only 19 were produced due to interleaving modulo-13 logic).",
+    "Fix stability pair interleaving: with 260 episodes and modulo-13, only 19 pairs are produced. Use a fixed schedule or adjust to guarantee exactly 20 pairs.",
+    "The experiment halted at Phase 7 (capture stability gate) and never reached arm-blind scoring, independent recompute, authorship checks, or durability recording. A re-run with the above fixes must complete the full matrix."
+  ],
+  "validity_findings": [
+    "Detector compromise (critical): A-DETECTOR-OUTPUT.jsonl shows fingerprint_changed=true for all 260 episodes across ALL arms (positive, null, liveness, blindspot). Consequently detected=true for all 260 episodes. The composite detector cannot discriminate between any arms because the fingerprint component fires on every capture.",
+    "Fingerprint volatility root cause: The oracle_scorer.response_fingerprint excludes headers case-insensitively (Date, Server, X-Cache, etc.), but the browser CDP capture path (_browser_composite) applies the same exclusion. Evidence shows fingerprint_changed=true even on stability pairs where only 250ms elapsed with no action. The Date header changes between pre/post captures and may not be excluded correctly, or other volatile content (e.g., session timestamps in response body) leaks into the fingerprint.",
+    "Capture stability gate mis-specified in code: run_stability_pair computes 'all_identical' = vector_identical AND fingerprint_identical AND logical_identical. The prereg (section 8) states '20 no-action pairs, all must be byte-identical' where 'byte-identical' refers to the WAL byte vector (length-framed SHA-256 over db+wal), not the composite fingerprint. The gate incorrectly fails on fingerprint instability which is a detector implementation issue, not a WAL substrate issue.",
+    "Stability pair count shortfall: The interleaving logic '(order_index + 1) % 13 == 0' with 260 episodes yields only 19 pairs (at indices 12, 25, ..., 247). The prereg requires 20 pairs (CAPTURE_STABILITY_PAIRS = 20).",
+    "Experiment incomplete: The run halted at the capture stability gate (Phase 7) and never executed Phase 8 (authorship separation checks), Phase 9 (arm-blind label join and derived metrics), Phase 10 (independent recompute), Phase 11 (durability), or Phase 12 (frozen decision mapping). The result.json was written via _write_minimal_outputs with minimal data.",
+    "Preflights and substrate bring-up PASSED: readiness certificate (240 non-304, 2 workers, stickiness 1.0), capability ledger (all required scopes PASS), attainability certificate (min_k=37 reproduced), control-liveness checks (all 7 PASS), Chromium sha256 match, exclusive nginx. The substrate was correctly established.",
+    "Out-of-surface mutations EXECUTED and COMMITTED: A-OOS-WORKER-EVIDENCE.jsonl shows commit_probe_update and commit_representation modes committed successfully with WAL vector changes and logical projection changes. The oos_worker ground-truth component functioned correctly.",
+    "Blind-spot probe EXECUTED: 20 M-REVERT-BYTES and 20 M-REVERT-LOGICAL episodes ran with write_happened=true and write_confirmed=true. However, detector output shows detected=true for all (due to fingerprint noise), so blind-spot signal is uninterpretable.",
+    "Arm-blind discipline PRESERVED in detector output: A-DETECTOR-OUTPUT.jsonl contains no 'arm' field (verified). The detector was run before label join per design.",
+    "No synthetic fallback used: urllib only for fixture/admin; Playwright public API for browser; nginx proxy_cache for N-OOS-CACHE transport null. Verified in run_experiment.py and A-OOS-WORKER-EVIDENCE.jsonl.",
+    "Authorship separation NOT VERIFIED in artifacts: A-AUTHORSHIP-CHECK.json and A-OOS-UNREACHABLE.json were not produced (experiment halted before Phase 8). Static source inspection of oracle_scorer.py, intervention_surface.py, oos_worker.py confirms no cross-imports and no Flask import in scorer, but this must be mechanically recorded in a re-run."
+  ],
+  "baseline_findings": [
+    "Parent baseline B-INSURFACE-BROWSER-VALIDATED (EXP-RUNTIME-36293257855) is correctly cited and not re-measured. It established the composite oracle at the authorship-separated real-Chromium scope against fixture-authored interventions only.",
+    "B-OUT-OF-SURFACE-PRECEDENT correctly recorded as empty ({}) — no prior out-of-surface measurement exists in Codex or parent handoff.",
+    "The in-surface liveness control (PC-INSURFACE-WRITE-LIVE, 20 episodes) was executed in this run but its detector output is compromised by fingerprint noise (detected=true for all 20, but for the wrong reason). Cannot validate liveness sensitivity=1.0 from this run.",
+    "The frozen null requirement (zero false positives across 120 matched null episodes) cannot be evaluated because detector output is all true."
+  ],
+  "recomputed_metrics": {
+    "detector_output_analysis": {
+      "total_episodes": 260,
+      "fingerprint_changed_true": 260,
+      "wal_changed_true": 100,
+      "logical_changed_true": 60,
+      "detected_true": 260,
+      "per_arm_detected_rate": {
+        "P-OOS-WORKER": "40/40 (1.0)",
+        "P-OOS-REPR": "40/40 (1.0)",
+        "N-OOS-IDLE": "40/40 (1.0)",
+        "N-OOS-REJECT": "40/40 (1.0)",
+        "N-OOS-CACHE": "40/40 (1.0)",
+        "PC-INSURFACE-WRITE-LIVE": "20/20 (1.0)",
+        "M-REVERT-BYTES": "20/20 (1.0)",
+        "M-REVERT-LOGICAL": "20/20 (1.0)"
+      },
+      "note": "All arms show 100% detection due to fingerprint_changed=true on every episode. The detector provides zero discriminatory power. Sensitivity/specificity/Wilson CI cannot be meaningfully computed from this detector output."
+    },
+    "capture_stability": {
+      "pairs_executed": 19,
+      "pairs_required": 20,
+      "vector_identical_all": true,
+      "fingerprint_identical_all": false,
+      "logical_identical_all": true,
+      "all_identical_all": false,
+      "gate_result": "FAIL (checks all_identical, should check vector_identical per prereg)"
+    },
+    "oos_worker_evidence": {
+      "commit_probe_update_committed": "observed in evidence",
+      "commit_representation_committed": "observed in evidence",
+      "idle_vector_identical": "observed in evidence",
+      "reject_rollback_integrity_error": "observed in evidence",
+      "nginx_cache_miss_then_hit": "observed in evidence"
+    },
+    "independent_recompute": "NOT EXECUTED (experiment halted before Phase 10). A-RECOMPUTE-CHECK.json not produced."
+  },
+  "claim_ceiling": "The producer's MEASUREMENT_INVALID status is correct per the frozen decision rule (capture stability gate failure). However, the deeper finding is that the composite detector is fundamentally compromised for this run: fingerprint_changed=true on all episodes destroys all discriminatory power. No scientific conclusion about out-of-surface transfer (SUPPORTS/FALSIFIES/MIXED) can be drawn from this data. The claim ceiling remains at the parent VALIDATED ceiling (authorship-separated, real-Chromium, fixture-authored interventions only). C-MEAS-VALID does not widen to out-of-surface scope. Downstream lanes (Graph C-FRESHNESS, C-DELTA-REPAIR; Physics statistical-contract certification) may NOT inherit the substrate for real-drift questions based on this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-37973247935/result.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-DETECTOR-OUTPUT.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CAPTURE-STABILITY.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-EPISODE-LEDGER.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-OOS-WORKER-EVIDENCE.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-BLINDSPOT-PROBE.jsonl",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-ATTAINABILITY-CERTIFICATE.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CONTROL-LIVENESS.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-READINESS-CERTIFICATE.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-SEEDED-ORDER.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/capability_ledger.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/C-BRINGUP-CONTRACT.json",
+    "research/experiments/EXP-RUNTIME-37973247935/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+    "research/runtime/oracle_scorer.py (frozen hash 7a30ff637654fbfc366d0f0b1dbe2f8bc481c9b56f5ee48fd894e12baccdad5f)",
+    "research/runtime/oos_worker.py (hash 64a6ab17566b932cdd97adcaf2e8de61433494c3955417e9170382f4021aa316)",
+    "research/experiments/EXP-RUNTIME-37973247935/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-37973247935/spec.json",
+    "research/experiments/EXP-RUNTIME-37973247935/prereg.md",
+    "research/experiments/EXP-RUNTIME-37973247935/freeze.json"
+  ],
+  "unresolved": [
+    "Whether the fingerprint volatility is caused by Date header leakage, session timestamp in response body, or another volatile field in the browser-captured response legs. The oracle_scorer.excluded_headers set includes Date/Server/X-Cache/etc. but the browser capture path may not apply exclusion identically.",
+    "Whether the capture stability gate should be 'vector_identical only' (per prereg 'byte-identical') or 'all_identical' (per run_experiment.py implementation). The prereg text is authoritative.",
+    "Whether the stability pair interleaving should be fixed to produce exactly 20 pairs (e.g., fixed indices or modulo-12 for 260 episodes).",
+    "Whether the detector can be fixed in-place (correct volatile exclusion for browser captures) or requires a design change (e.g., fingerprint-only detector for transport nulls, WAL+logical for mutation detection).",
+    "Whether a re-run with fixed fingerprint exclusion would yield valid discrimination on the out-of-surface arms. The oos_worker mutations are confirmed committed and the substrate is live.",
+    "Authorship separation and scorer-unreachability mechanical verification artifacts (A-AUTHORSHIP-CHECK.json, A-OOS-UNREACHABLE.json) not produced — must be verified in re-run.",
+    "Independent recompute (falsifier iii) not executed — must be verified in re-run.",
+    "Durability record (A-DURABILITY.json) not produced — disposition NOT_RUN."
+  ]
+}
