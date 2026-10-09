@@ -1,17 +1,75 @@
 {
   "experiment_id": "EXP-PRODUCT-37982016598",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "question": "On the real credential-free substrate where the shipped kernel's parameterized distill->resolve->execute path is live and causally attributable (EXP-PRODUCT-37973256064, audit PASS), over matched task families with a controlled residual-novelty fraction and a PRE-FREEZE CERTIFIED dynamic range (cold re-derivation and retrieval-shaped comparator success_rate < 0.95), does cost per SUCCESSFUL task - including verification and repair, in honest http_requests/verification_calls/repair_attempts/latency_ms - track residual novelty rather than full task length, against cold re-derivation, a retrieval-shaped comparator, and an inheritance-ablation (emptied registry) null?",
+  "hypothesis": "Cost per successful task for the SPIDER parameterized inheritance arm (T-SPIDER-PARAM) increases sub-linearly with residual novelty fraction, while cold re-derivation (B-COLD-RE-DERIVE) and retrieval-shaped (B-RETRIEVAL-SHAPED) arms increase super-linearly or linearly, such that the cost advantage of SPIDER over both comparators grows with residual novelty. The emptied-registry null (B-EMPTIED-REGISTRY) matches cold re-derivation cost at all novelty levels.",
+  "falsifier": "BOTH-DIRECTIONS: (1) If at matched correctness (success_rate >= 0.80 for all arms), the cost advantage of T-SPIDER-PARAM over B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED does NOT increase monotonically with residual novelty fraction (Spearman rho <= 0 for cost_advantage vs novelty), the 'pay for novelty, not the whole task' premise is FALSIFIED-IN-SETTING. (2) If T-SPIDER-PARAM does not achieve lower cost_per_success than BOTH B-COLD-RE-DERIVE AND B-RETRIEVAL-SHAPED at the highest novelty level tested (novelty >= 0.7), the premise is FALSIFIED-IN-SETTING. (3) If dynamic range certification fails (cold or retrieval success_rate >= 0.95 on any task family), the experiment is MEASUREMENT_INVALID.",
+  "baselines": [
+    {"id": "B-COLD-RE-DERIVE", "description": "Cold re-derivation: construct exact URL and HTTP request directly from task specification without any registry lookup. Zero registry access. Measures full-task cost."},
+    {"id": "B-RETRIEVAL-SHAPED", "description": "Retrieval-shaped comparator: retrieve nearest mechanism template from registry by semantic similarity (embedding cosine), bind task parameters to template slots, execute. Measures retrieval+adaptation cost."},
+    {"id": "B-EMPTIED-REGISTRY", "description": "Inheritance-ablation null: registry emptied before task execution, forcing parameterized path to fall back to cold behavior. Verifies that any advantage requires registry content."},
+    {"id": "PC-EXACT-REPLAY", "description": "Positive control: exact replay of training identifiers (novelty=0). All arms should achieve success_rate=1.0 and minimal cost. Validates substrate and accounting."}
+  ],
+  "positive_control": "PC-EXACT-REPLAY: On training identifiers (novelty=0), all four arms must achieve success_rate=1.0. Cost_per_success for T-SPIDER-PARAM must be <= B-COLD-RE-DERIVE (registry lookup overhead only). If PC fails, substrate or accounting is broken.",
+  "null_control": "B-EMPTIED-REGISTRY: With registry emptied, T-SPIDER-PARAM must produce cost_per_success statistically indistinguishable from B-COLD-RE-DERIVE at all novelty levels (paired permutation test p > 0.05). If null differs from cold, registry state leaks into execution path.",
+  "measurement_validity": {
+    "credential_free": true,
+    "model_calls_zero": true,
+    "model_tokens_zero": true,
+    "substrate": "localhost stdlib http.server (same as EXP-PRODUCT-37973256064, harness/substrate.py)",
+    "resource_types": ["items", "users", "orders", "products"],
+    "identifiers_per_type": 20,
+    "task_families": 4,
+    "novelty_levels": [0.0, 0.25, 0.5, 0.75],
+    "tasks_per_family_per_level": 5,
+    "total_tasks": 80,
+    "deterministic_verify": true,
+    "mechanical_verify_no_llm": true,
+    "accounting_counters": ["http_requests", "verification_calls", "repair_attempts", "latency_ms"],
+    "dynamic_range_certificate": "PRE-FREEZE: Before freeze.json, the harness MUST verify that B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 on at least one task family at novelty >= 0.5. Certificate recorded in spec.json.dynamic_range_certified=true. If certification fails, experiment is MEASUREMENT_INVALID and must not freeze.",
+    "causal_attribution": "Arm separation by mechanism architecture: T-SPIDER-PARAM uses kernel.distill_parameterized + resolve + execute; B-COLD-RE-DERIVE uses direct URL construction; B-RETRIEVAL-SHAPED uses embedding retrieval + template bind; B-EMPTIED-REGISTRY uses T-SPIDER-PARAM code path with empty registry.",
+    "honest_accounting": "All arms report identical counter surface. No injected counter events. Per-task raw_evidence/accounting_counters.jsonl preserved.",
+    "known_negatives": "5 declared negative task specs per family (out-of-support, missing-parameter, wrong-intent, unseen-type, malformed). All arms must refuse with bound_action=null and non-empty reason. Refusal rate must be 1.0."
+  },
+  "decision_rule": {
+    "primary": {
+      "description": "Cost advantage of T-SPIDER-PARAM over both B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED increases with residual novelty fraction at matched correctness.",
+      "conditions": [
+        "C1: Dynamic range certified (cold_success < 0.95 AND retrieval_success < 0.95 on some family at novelty >= 0.5)",
+        "C2: All arms achieve success_rate >= 0.80 on at least 3/4 novelty levels (matched correctness)",
+        "C3: Spearman rho (cost_advantage_vs_cold vs novelty) > 0.5 with permutation p < 0.05",
+        "C4: Spearman rho (cost_advantage_vs_retrieval vs novelty) > 0.5 with permutation p < 0.05",
+        "C5: At highest novelty level (>=0.7), T-SPIDER-PARAM cost_per_success < B-COLD-RE-DERIVE cost_per_success AND < B-RETRIEVAL-SHAPED cost_per_success (paired permutation p < 0.05 each)"
+      ],
+      "outcome_if_all_pass": "SUPPORTS",
+      "outcome_if_any_fail": "FALSIFIES"
+    },
+    "secondary": {
+      "description": "Emptied registry null matches cold re-derivation; support generalization boundary characterized.",
+      "conditions": [
+        "S1: B-EMPTIED-REGISTRY cost_per_success indistinguishable from B-COLD-RE-DERIVE at all novelty levels (paired permutation p > 0.05)",
+        "S2: PC-EXACT-REPLAY success_rate=1.0 for all arms",
+        "S3: Known-negative refusal rate = 1.0 for all arms",
+        "S4: Support boundary: training identifiers contiguous 001-005, held-out 006-010, 011-015, 016-020; refusal pattern characterized"
+      ]
+    }
+  },
+  "product_consequence_positive": "C-RESIDUAL-NOVELTY advances to EXPERIMENTAL with measured cost/novelty curve. The dynamic-range task bank and cost accounting surface become product infrastructure for C-LLM-INHERIT benchmark. Kernel parameterized path (src/spider/kernel.py) is validated as treatment carrier for four-arm benchmark when credential provisions.",
+  "product_consequence_negative": "If FALSIFIES: 'pay for novelty, not whole task' premise rejected for this architecture on this substrate. Product must change architecture (e.g., different parameterization, different retrieval, different cost model) rather than continue incremental fixes. C-RESIDUAL-NOVELTY set to REJECTED. Dynamic-range task bank still retained for future architectures.",
+  "estimated_cost": {
+    "http_requests": "~320 (80 tasks x 4 arms avg 1 req)",
+    "verification_calls": "~320",
+    "latency_ms_total": "< 30000",
+    "compute": "credential-free, no model calls, single CPU core < 60s"
+  },
+  "expected_information_gain": "High. First integrated measurement of end-to-end cost-per-success vs residual novelty on live parameterized path with certified dynamic range. Resolves the central unknown from EXP-PRODUCT-37973256064 (U-DECISION_RULE_CALIBRATION). Produces the task bank and accounting surface required for C-LLM-INHERIT benchmark.",
+  "dynamic_range_certified": false,
+  "dynamic_range_certificate": {
+    "certified": false,
+    "cold_max_success_rate": null,
+    "retrieval_max_success_rate": null,
+    "certified_at_novelty": null,
+    "certification_note": "Must be set to true by harness pre-freeze check before freeze.json is written. If false at freeze time, experiment is MEASUREMENT_INVALID."
+  }
 }
