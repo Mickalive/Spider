@@ -1,328 +1,234 @@
-# SPIDER Research 2.0 — Program Audit
+# SPIDER Research 2.0 — Program Audit — 2026-10-09
 
-Date: 2026-10-09  
-Canonical corpus: 417 experiments  
-Quarantined packets: 2  
-Purpose: strategic synthesis for Scout and Global Research Director. This document is a dated synthesis, not a replacement for canonical packets.
+**Status: GOVERNANCE SYNTHESIS, NOT CANONICAL SCIENTIFIC EVIDENCE.**
+
+This is a dated strategic reading of canonical packets for Scout and the Global Research Director. Exact scientific claims remain subordinate to `codex/experiments/<id>/` and `codex/claim_state.json`.
+
+Canonical corpus at audit: **429 experiments**.
 
 ## Executive conclusion
 
-SPIDER has **not** demonstrated a universal "Web Physics", nor has it yet demonstrated the core product claim that a real external LLM agent pays mainly for residual novelty rather than the whole task.
+SPIDER has **not** demonstrated a universal Web Physics and has **not** yet demonstrated its decisive product claim: that a real external LLM agent pays materially less successful-task cost because inherited SPIDER mechanisms reduce the work that must be redone as residual novelty falls.
 
-It **has** demonstrated several bounded ingredients:
+It has, however, accumulated enough evidence to narrow the program substantially.
 
-1. parameterized mechanism inheritance is possible on synthetic/in-kernel task families;
-2. some Web/action datasets contain non-random predictive structure beyond shuffle;
-3. bounded measurement instruments can discriminate real HTTP/auth state under controlled conditions;
-4. response-derived freshness/staleness signals can work on synthetic/local substrates;
-5. direct protocol/API replay can dramatically outperform repeated UI traversal in bounded sandbox workflows;
-6. the factory's audits have repeatedly falsified naive shortcuts: exact-route replay, TF-IDF staleness semantics, simple DOM-density metrics, several Web-Physics estimators, and token-length-as-economics.
+The strongest current synthesis is:
 
-The missing proof is the **integrated causal chain**:
+> **Reusable procedures/mechanisms look more promising than replaying or predicting ephemeral Web values.**
 
-> observation -> parameterized mechanism -> executable binding in the shipped kernel -> applicability/freshness decision -> real external agent action -> lower end-to-end successful-task cost on partially novel or cross-site work.
+The program has bounded evidence for parameterized mechanism reuse, intervention-valid measurement, extractable freshness signals, and the observation-bound nature of many server-minted action-gating values. The remaining bottleneck is integration into a live treatment plus a non-degenerate real-agent benchmark.
 
-No canonical packet currently validates that chain end to end.
+## Portfolio health
+
+| Lane | Canonical | PASS | REVISE | MEASUREMENT_INVALID | FAIL | BLOCKED |
+|---|---:|---:|---:|---:|---:|---:|
+| Graph | 78 | 27 | 16 | 23 | 7 | 5 |
+| Physics | 68 | 13 | 21 | 29 | 5 | 0 |
+| Runtime | 67 | 30 | 21 | 15 | 1 | 0 |
+| Product | 82 | 34 | 24 | 21 | 2 | 1 |
+| Intel | 77 | 23 | 42 | 7 | 3 | 2 |
+| Frontier | 57 | 20 | 17 | 17 | 3 | 0 |
+
+The dominant inefficiency is no longer lack of experimental activity. It is **freezing designs that later prove non-identifying, arithmetically unreachable, prerequisite-blocked or treatment-degenerate**.
+
+Physics has 50/68 REVISE+MEASUREMENT_INVALID; Intel 49/77; Product 45/82; Graph 39/78; Runtime 36/67; Frontier 34/57.
+
+The architectural response is to move satisfiability cost **before freeze**.
 
 ## Claim audit
 
-### C-PARAM-INHERIT — EXPERIMENTAL
+### C-FRESHNESS — effective state: EXPERIMENTAL
 
-**What survived**
+Strongest current packet: `EXP-GRAPH-37978902447` (audit PASS).
 
-- Synthetic experiments demonstrated parameter-slot induction and correct binding on unseen identifiers.
-- Multi-parameter synthetic variants reached perfect binding/resolution within their frozen harnesses.
-- Competition-safe retrieval/selection behavior survived bounded Graph tests.
+Bounded result:
+- four pinned credential-free, server-rendered, no-JavaScript GET-only anchors;
+- two independent extraction paths agree 4/4;
+- session/value extraction confirmed on 3/4 anchors;
+- corrected session-isolation certificate passes;
+- earlier zero-distinct failures on these anchors were extraction/instrument defects rather than representation loss.
 
-Representative evidence includes:
-- EXP-PRODUCT-33528829801
-- EXP-PRODUCT-33741671686
-- EXP-GRAPH-33816735314
+Ceiling:
+- observed values rotate at per-request scale on 3/4 anchors;
+- the value-blind versus value-aware false-accept question is still unmeasured because the D1V population spans only one anchor and clustered inference is degenerate.
 
-**What did not survive / current ceiling**
+Interpretation: credible bounded freshness/extraction substrate, **not** a validated end-to-end freshness guard or economic policy.
 
-- Later Product work repeatedly found that harness-level parameterization did not cleanly transfer into the product/kernel path.
-- The latest Product diagnosis (EXP-PRODUCT-37385633334) identifies a decisive implementation gap: the shipped kernel exposes literal `distill()`, not the parameterized induction path expected by the experimental design, and the literal confidence/resolution thresholds can make distill-to-EXECUTABLE impossible by construction.
+### C-MEAS-VALID — effective state: EXPERIMENTAL
 
-**Current interpretation**
+Runtime contains the strongest positive measurement-substrate evidence.
 
-The *idea* of parameterized inheritance is experimentally supported. The *shipped mechanism path* is not yet demonstrated.
+`EXP-RUNTIME-36293257855` provides a bounded authorship-separated / real-Chromium intervention-oracle result with point sensitivity and specificity 1.0 across the frozen arms and Wilson lower bounds around 0.84, plus functioning positive/null controls.
 
-**Highest-value next gate**
+Interpretation: measurement can be trustworthy in a bounded setting. It is not a universal substrate guarantee.
 
-Before any expensive LLM benchmark:
-1. prove a positive round trip in the actual kernel: observe -> distill parameterized -> resolve EXECUTABLE -> non-null bound_action -> execute;
-2. prove a negative round trip: wrong/out-of-support binding is refused for the right reason;
-3. hash/pin the actual kernel and task bank into the frozen transaction.
+### C-PARAM-INHERIT — effective state: EXPERIMENTAL
 
----
+Product/Graph have demonstrated bounded parameterized binding and executable mechanism behavior in controlled task families. `EXP-PRODUCT-37973256064` confirms that a credential-free parameterized path can be live and causally attributable.
 
-### C-MEAS-VALID — EXPERIMENTAL
+What remains unproved is the important comparison:
+- superiority over non-degenerate cold/retrieval baselines;
+- true cross-site transfer;
+- real-agent successful-task savings.
 
-**What survived**
+The shipped `src/spider/kernel.py` still exposes only literal `distill()` at confidence 0.5 versus default execution threshold 0.8 and no shipped `distill_parameterized()`. A richer audited carrier exists in experiment evidence but has **not** survived the promotion path and must not be manually copied to main.
 
-Runtime established multiple bounded measurement-validity successes:
-- real Flask/JWT discrimination;
-- bounded Keycloak/auth-state discrimination;
-- a later intervention oracle combining WAL-byte, logical projection and response fingerprints passed an independent audit at a narrow instrument scope (EXP-RUNTIME-36129163700).
+### C-RESIDUAL-NOVELTY — effective state: EXPERIMENTAL
 
-**What was falsified**
+Earlier accepted evidence gives a bounded mechanism-level signal at fixed task length.
 
-- Header mechanisms often failed to transfer across endpoints.
-- Several apparent signals were body-dominated, endpoint-specific or application-engineered.
-- Browser/write-path generalization remained incomplete.
-- Multiple later packets failed because the substrate or frozen control scheme was invalid before science could be read.
+The recent `EXP-PRODUCT-37982016598` gives **no new claim evidence**: its frozen dynamic-range certificate was already false. Cold and retrieval solve the deterministic one-request task at ceiling while the treatment suffers from narrow inferred support. Cost accounting also omits dimensions needed for the intended comparison.
 
-**Current interpretation**
+Interpretation: residual-novelty economics remains a central open claim, but the next work is task-bank/treatment repair, not another benchmark run.
 
-This is the strongest infrastructural claim in the program: SPIDER can construct trustworthy bounded instruments, but they are not yet a general measurement substrate for all downstream claims.
+### C-WEB-DYNAMICS — effective state: HYPOTHESIS
 
-**Highest-value next gate**
+`EXP-PHYSICS-37973239386` is a valid audited negative, not another invalidity.
 
-Repair and execute the author-separated + real-browser/write-path validation that was already identified, instead of inventing another estimator.
+On a credential-free HTTP action-gating substrate:
+- 46 primary indicator fields;
+- 27 sites;
+- 2 predictable fields;
+- predictable prevalence 0.04348;
+- site-clustered 95% upper bound 0.116;
+- frozen low/high thresholds 0.10 / 0.25;
+- all measurement-invalid gates false;
+- audit PASS.
 
----
+Bounded architectural consequence:
+for this substrate, server-minted action-gating values are mostly observation-bound. Persisting procedures/paths and re-observing fresh values is more plausible than assuming a broadly useful predictive law for the values themselves.
 
-### C-FRESHNESS — HYPOTHESIS
+This does not reject Web dynamics globally. JavaScript/DOM/SPA/authenticated/interventional regimes remain outside the packet.
 
-**What survived**
+### C-DELTA-REPAIR — effective state should be EXPERIMENTAL
 
-- Two bounded Graph positives showed that response-derived freshness guards can separate planted stale/fresh states on synthetic/local HTTP substrates.
-- Ablations showed some multi-channel value in those bounded settings.
+`EXP-GRAPH-36018188168` is the strongest accepted bounded single-node positive.
 
-**What failed**
+The later `EXP-GRAPH-36106653880` is MEASUREMENT_INVALID because the distributed substrate did not start. That transaction does not scientifically downgrade the claim.
 
-- Naive TF-IDF semantic staleness was falsified.
-- The latest distributed/shared-WAL Graph attempt (EXP-GRAPH-36302977302) was MEASUREMENT_INVALID: the frozen HTTP routes were not actually bound and the health gate correctly failed.
-- Therefore no distributed-realistic freshness operating point was measured.
-
-**Additional Frontier observation**
-
-EXP-FRONTIER-37385647440 observed that some server-minted handles rotate *within* a single episode. That creates a structural blind cell for replay-by-handle and reinforces the need for re-derivation/procedure-level reasoning. It is not itself a freshness-accuracy result.
-
-**Highest-value next gate**
-
-Do not retune thresholds. First supply a route-valid, independently health-certified substrate. Then measure false accepts on auth/session/permission/endpoint/validator drift and compare the guard economically with fresh re-derivation.
-
----
-
-### C-DELTA-REPAIR — HYPOTHESIS
-
-**What is established**
-
-The program has generated bounded local-repair behavior and several prerequisites, but no canonical evidence yet justifies a general claim that local Web changes can be repaired locally with controlled contamination and lower total cost.
-
-**Main dependency**
-
-A useful delta-repair experiment depends on:
-- trustworthy freshness/applicability detection;
-- a real executable mechanism path;
-- a measurement substrate whose perturbations are independently certified.
-
-**Current interpretation**
-
-This claim is downstream, not dead. Repeatedly testing it before fixing those prerequisites mostly measures the substrate.
-
----
-
-### C-RESIDUAL-NOVELTY — HYPOTHESIS
-
-**Why it matters**
-
-This is closest to SPIDER's distinctive thesis:
-
-> pay for novelty, not for the whole task.
-
-**Current state**
-
-No canonical experiment has yet shown a real external-agent cost curve in which successful-task cost scales with controlled novelty fraction rather than full task length.
-
-Bounded direct-HTTP replay and compiled/reused mechanisms show that repeated work *can* be avoided, but they do not prove residual-novelty scaling on partially novel tasks.
-
-**Highest-value next gate**
-
-Construct matched task families with controlled novelty and compare:
-- cold agent;
-- instructions/memory;
-- retrieval;
-- compiled/replayed workflow where applicable;
-- SPIDER executable mechanism inheritance.
-
-Primary outcome must be **cost per successful task**, including verification and repair.
-
----
+Any current-state view that replaces EXPERIMENTAL with MEASUREMENT_INVALID is a **Codex reduction defect**: packet measurement status has been confused with claim epistemic status.
 
 ### C-LLM-INHERIT — HYPOTHESIS
 
-**Current state**
+Still no valid four-arm same-model/same-tools/same-budget comparison:
+cold vs instructions/memory vs retrieval vs SPIDER.
 
-Still unmeasured at the claim's intended level.
-
-Intel/Product repeatedly identified the missing external-agent experiment, but the last Product readiness gate (EXP-PRODUCT-37385633334) correctly aborted before spending the full budget.
-
-**Critical discovery**
-
-The treatment arm itself is currently not proven live in the shipped kernel. A benchmark comparing SPIDER with retrieval is meaningless until SPIDER can actually execute an inherited mechanism at a non-zero rate.
-
-**Highest-value next gate**
-
-Treatment-arm liveness first; real LLM benchmark second.
-
----
-
-### C-CROSSSITE — HYPOTHESIS
-
-**What we know**
-
-- Existing WebWorldData-style evidence contains predictive signal beyond shuffle.
-- MIND2WEB strongly falsified naive exact replay: exact route reuse is rare even when operation-level similarity is substantial.
-- No canonical experiment yet demonstrates mechanism transfer on a true website holdout without identity leakage.
-
-**Current interpretation**
-
-Cross-site inheritance remains one of the project's defining unanswered questions.
-
-**Highest-value next gate**
-
-After executable kernel liveness exists, train/induce on site A and evaluate homologous mechanisms on unseen site B with strict site holdout and no site identity leakage.
-
----
-
-### C-WEB-DYNAMICS — HYPOTHESIS
-
-**What survived**
-
-- Non-random predictive structure exists in bounded datasets and synthetic systems.
-- Some narrow mechanism-conditioned effects survive specific tests.
-
-**What repeatedly failed**
-
-Across Physics and Frontier, many candidate formulations were falsified or measurement-invalid:
-- simple distributional geometry;
-- several density/divergence estimators;
-- rank/magnitude effects not identifiable in HTTP signatures;
-- designs with empty or unattainable accept regions;
-- site/template baselines that absorbed purported mechanism signal.
-
-Latest Physics (EXP-PHYSICS-37385620138) remained MEASUREMENT_INVALID and did not move the claim.
-
-**Current interpretation**
-
-There is no justification for a broad "physics of the Web" claim. Physics should remain PARKED unless a materially different observable, dataset or mechanism becomes available.
-
----
-
-### C-SEMANTIC-RESOLVE — HYPOTHESIS
-
-**What survived**
-
-A bounded semantic-resolution result existed, but later work showed important aliasing and grounding failures.
-
-HTTP status alone failed to identify equivalent/valid templates in realistic aliasing cases; body-based grounding can help but requires an external correctness oracle and can create false positives.
-
-**Current interpretation**
-
-Semantic resolution remains useful but should be downstream of a live executable mechanism path. Do not restart another isolated resolver micro-benchmark without a product use case.
-
----
+Do not fund another full run until:
+1. a model endpoint is actually usable;
+2. the exact frozen SPIDER treatment can execute an inherited mechanism;
+3. the task bank gives cold/retrieval non-ceiling headroom;
+4. accounting includes retrieval, verification and repair.
 
 ### C-PRODUCT-ECON — HYPOTHESIS
 
-**What is established**
+Intel `EXP-INTEL-37950616801` gives a clean bounded negative about one external artifact: a numeric break-even reuse count cannot be derived from that paper using only published internal denominators because a commensurable write-cost ratio is absent.
 
-Bounded sandbox results show large UI-vs-direct-protocol speed/cost differences. Competitor systems also clearly avoid repeated reasoning using action caches, compiled workflows, semantic selectors, inference caching and browser/API bypass.
+That is not evidence against SPIDER economics.
 
-**What is not established**
+The decisive first-party quantities remain:
+- recurrence `h(N)`;
+- `Cwrite`;
+- `Cmiss`;
+- explicit cold counterfactual;
+- cost per successful task including retrieval/verification/repair.
 
-SPIDER has not measured:
-- real end-to-end amortized cost per successful task;
-- break-even reuse count under its own system;
-- recurrence/reuse distribution on the target task population;
-- maintenance/freshness/repair overhead at realistic scale.
+### C-CROSSSITE — HYPOTHESIS
 
-Intel's later work sharpened an important point: published persistence/memory systems often provide cost equations or component costs without the empirical recurrence/stationarity quantity needed to calculate an operational break-even.
+No true website-holdout SPIDER mechanism-inheritance result without site identity leakage exists yet.
 
-**Highest-value next gate**
+External literature supports hierarchical transfer strategies, but does not answer this claim.
 
-SPIDER must measure its own recurrence/novelty distribution and treatment efficacy rather than borrow an external economics number.
+### C-SEMANTIC-RESOLVE — HYPOTHESIS
+
+Synthetic alias work produced bounded positives and negatives. Repeated real/substrate attempts suffered measurement/design defects, including unbound code/assets and unsatisfiable validity gates.
+
+Do not restart an isolated resolver micro-benchmark until the resolver participates in a live product path and its dependencies can be frozen.
 
 ## Program-level discoveries
 
-### 1. Local continuation is a real agent failure mode
+### 1. Local continuation is itself an agent failure mode
 
-The factory itself demonstrated a general agent behavior: previous-output injection creates strong path dependence. Agents can rationally refine a local problem indefinitely while losing global utility.
+The factory demonstrated strong path dependence from previous-output injection. Agents can make rational local improvements while research utility collapses globally. This motivated Scout -> Global Director -> specialist lanes.
 
-This motivated the Scout -> Global Director -> scientific lanes architecture.
+### 2. Measurement design is a scientific object
 
-### 2. Measurement design is a first-class scientific object
-
-A large fraction of failures were not null scientific results but invalid instruments:
+Repeated failures came from:
 - empty accept regions;
-- controls that could not fire;
-- positive controls tautological by construction;
-- frozen rules that made one branch unreachable;
-- substrate health failures;
-- future-stage packet contamination.
+- thresholds impossible by arithmetic;
+- controls that cannot fire;
+- tautological comparators;
+- treatment/comparator identity;
+- unavailable prerequisites;
+- mutable code/task banks not bound at freeze.
 
-The program learned that pre-freeze *attainability* and *control liveness* need explicit machine checks.
+A valid pre-freeze satisfiability certificate is therefore a first-class requirement, not paperwork.
 
 ### 3. Reuse unit matters
 
-The evidence increasingly disfavors "replay the previous route" as the general abstraction.
+Evidence increasingly disfavors “replay the previous route” as a general abstraction.
 
-The more promising hierarchy is:
-- literal action replay for exact repetition;
+Useful hierarchy:
+- literal action cache for exact repetition;
 - compiled workflow for same workflow/new values;
-- semantic selector for layout variation;
+- semantic locator for layout variation;
 - parameterized mechanism for homologous transformations;
-- procedure/path persistence when handles themselves rotate;
-- fresh re-derivation when state is cheap or unstable.
+- procedure/path persistence when values/handles rotate;
+- fresh re-derivation when state is unstable or cheap.
 
-### 4. The economic object should be work avoided, not representation size
+### 4. Economics is work avoided, not representation length
 
-Parameterization does not reliably reduce representation tokens. The plausible economic value is avoided exploration, browser traversal, model inference, verification and repair.
+Parameterization does not reliably save representation tokens. Plausible value comes from avoided exploration, browser traversal, model inference, verification and repair.
 
-### 5. The Web may contain predictive structure without possessing a useful universal low-dimensional physics
+### 5. Predictive structure does not imply a universal low-dimensional Web Physics
 
-Those statements are compatible. Current evidence supports the first in bounded settings and does not establish the second.
+The program has bounded non-random predictive signals and also strong bounded negatives. Both can be true.
 
-## Current strategic bottlenecks
+## Structural blockers and fixes
 
-Priority order as of this audit:
+### B1 — Pre-freeze satisfiability
+**Fix:** design-contract v2 plus independent DESIGN REVIEW. A new experiment cannot freeze with unreachable decision branches, missing hard prerequisites, degenerate baselines, insensitive controls, dead treatment, or unbound mutable dependencies.
 
-1. **Restore factory liveness.**
-   Scout must be advisory, not a single point of failure; Factory recovery must use consecutive failures rather than lifetime failures on one SHA.
+### B2 — Claim-state reduction
+**Fix:** preserve raw chronological events, but derive `effective_event_by_claim`. Historical MEASUREMENT_INVALID/BLOCKED packet events and out-of-scope claim updates do not erase accepted epistemic state.
 
-2. **Repair the actual kernel treatment path.**
-   A real distill -> resolve -> execute parameterized round trip is prerequisite to C-LLM-INHERIT and C-RESIDUAL-NOVELTY.
+### B3 — Scope inflation
+**Fix:** v2 claim updates must be in frozen `spec.claim_ids` and lane-eligible. Cross-lane findings travel in handoff/dependencies.
 
-3. **Finish the Runtime generalization gate.**
-   Resolve the blocked author-separated/browser-write measurement transaction or supersede it cleanly with a repaired frozen design.
+### B4 — Pre-freeze churn
+**Fix:** resume unfinished pre-freeze work by strategic mandate identity (same claim + CONTINUE + USE), not byte-identical natural-language question wording.
 
-4. **Run the first real external-agent comparison.**
-   Only after (2) and (3).
+### B5 — Strategic provider ordering
+On 2026-10-09 mimo/muse/hy3 repeatedly failed while big-pickle produced valid Global Director output.
+**Fix:** Scout/Director/design-review route to big-pickle first, retaining fallbacks.
 
-5. **Keep Physics parked unless a new observable/substrate appears.**
-   More estimator refinement on the current evidence base has low marginal value.
+### B6 — Product treatment carrier
+The shipped kernel is not the richer audited parameterized carrier.
+**Fix:** Product must build/promote a surviving treatment through the audited promotion path. No manual copy from experiment evidence.
 
-6. **Use Frontier for orthogonal economics/structure questions.**
-   The hop-depth re-acquisition cost scaling question is materially different and can determine whether paths/procedures are worth persisting.
+## Priority order after hardening
 
-## Things the program must not claim
+1. Product: establish/promote a real parameterized treatment carrier with known-positive EXECUTABLE and known-negative refusal.
+2. Product + Runtime: build a non-degenerate task bank and complete accounting.
+3. Run the first real C-LLM-INHERIT four-arm benchmark.
+4. Measure C-PRODUCT-ECON / C-RESIDUAL-NOVELTY first-party economics and `h(N)`.
+5. Continue Freshness only on a multi-anchor value-blind population or materially different real drift class.
+6. PARK broad Physics value-prediction work unless a materially new observable or substrate appears.
+7. Intel should verify only external facts that can change the above decisions; no generic f* hunt.
+8. Frontier should prefer orthogonal cost-scaling / procedure-persistence questions over another stationarity taxonomy.
 
-- "Universal Web Physics discovered."
-- "SPIDER beats cold/retrieval agents on real tasks."
-- "Cross-site mechanism transfer demonstrated."
-- "Freshness solved."
-- "Product economics validated."
-- "Token savings are the main source of value."
-- "A PASS producer result is evidence when the independent audit says MEASUREMENT_INVALID/REVISE."
+## What SPIDER must not claim
 
-## Recommended immediate Director posture after liveness restoration
+- universal Web Physics discovered;
+- real-agent SPIDER superiority demonstrated;
+- cross-site transfer demonstrated;
+- freshness solved;
+- product economics validated;
+- token savings are the central economic mechanism.
 
-- Runtime: REOPEN or repair the blocked measurement-generalization transaction.
-- Product: PIVOT to kernel treatment-arm liveness; no full LLM benchmark before it passes.
-- Graph: support the executable parameterized mechanism + freshness prerequisites, not another local threshold refinement.
-- Intel: stop internal metrology; provide current competitor/baseline and external-accounting evidence that directly affects Product's benchmark.
-- Frontier: pursue hop-depth/re-acquisition cost scaling or another genuinely orthogonal mechanism/economics question.
-- Physics: PARK unless Scout/Director identifies a materially new observable or dataset.
+## Decisive missing proof
+
+The program should now organize around one integrated causal chain:
+
+> observe -> parameterized mechanism -> executable binding in the **shipped** treatment -> applicability/freshness decision -> real external-agent action -> lower end-to-end cost per successful partially novel task after verification/repair/maintenance.
+
+No canonical packet currently validates that chain end to end.

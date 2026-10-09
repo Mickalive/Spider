@@ -139,6 +139,17 @@ def verify_freeze(exp: Path) -> None:
         if not path.exists() or sha(path) != expected:
             raise ValueError(f"frozen file changed: {name}")
 
+    artifact_hashes = freeze.get("artifact_hashes", {})
+    if not isinstance(artifact_hashes, dict):
+        raise ValueError("freeze artifact_hashes must be an object")
+    for rel, expected in artifact_hashes.items():
+        p = Path(rel)
+        if p.is_absolute() or ".." in p.parts:
+            raise ValueError(f"unsafe frozen artifact path: {rel}")
+        path = ROOT / p
+        if not path.exists() or not path.is_file() or sha(path) != expected:
+            raise ValueError(f"frozen artifact changed or missing: {rel}")
+
 
 def require_stage_outputs(exp: Path, stage: str) -> None:
     missing = [name for name in STAGE_OUTPUTS[stage] if not (exp / name).exists()]
@@ -201,6 +212,12 @@ def validate_verdict_and_handoff(exp: Path, req: dict, audit: dict):
 
     registry = json.loads((ROOT / "research/claims/registry.json").read_text())
     known = {c["id"] for c in registry["claims"]}
+    design_contract_version = int(req.get("design_contract_version", 1))
+    frozen_spec = json.loads((exp / "spec.json").read_text())
+    frozen_claims = set(frozen_spec.get("claim_ids", []))
+    lane_registry = json.loads((ROOT / "research/lanes/registry.json").read_text())
+    lane_claims = set(lane_registry["lanes"][req["lane"]].get("priority_claims", []))
+
     for event in verdict["claim_updates"]:
         if not isinstance(event, dict):
             raise ValueError("claim update must be an object")
@@ -211,6 +228,16 @@ def validate_verdict_and_handoff(exp: Path, req: dict, audit: dict):
             raise ValueError(f"invalid claim update status: {status}")
         if not event.get("reason"):
             raise ValueError("claim update requires reason")
+        if design_contract_version >= 2:
+            if claim_id not in frozen_claims:
+                raise ValueError(f"v2 claim update outside frozen spec.claim_ids: {claim_id}")
+            if claim_id not in lane_claims:
+                raise ValueError(f"v2 claim update outside lane charter: {claim_id}")
+            if status in {"MEASUREMENT_INVALID", "BLOCKED"}:
+                raise ValueError(
+                    f"v2 claim update may not use packet/operational status {status}; "
+                    "retain the prior effective epistemic claim status and record packet invalidity in reason/handoff"
+                )
         if status == "VALIDATED" and audit["status"] != "PASS":
             raise ValueError("VALIDATED claim update requires PASS audit")
         if status == "PRODUCT_CORE" and (req["lane"] != "product" or audit["status"] != "PASS" or not verdict["promote_to_product"]):

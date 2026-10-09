@@ -123,7 +123,7 @@ def stage_policy(lane: str, experiment_id: str, stage: str):
 
     if stage == "design":
         prefixes = []
-        exact = [f"{exp}/spec.json", f"{exp}/prereg.md", f"{exp}/failure.json", f"{exp}/model_design.json"]
+        exact = [f"{exp}/spec.json", f"{exp}/prereg.md", f"{exp}/design_review.json", f"{exp}/failure.json", f"{exp}/model_design.json", f"{exp}/model_design_review.json"]
         protected = {f"{exp}/request.json", lane_state}
     elif stage == "execute":
         prefixes = [exp] + cfg.get("allowed_code_roots", [])

@@ -73,7 +73,14 @@ def experiment_sort_key(item):
     return (created, run_id, exp_id)
 
 
-def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, bytes], known_claims: set[str]):
+def validate_packet(
+    exp_id: str,
+    lane: str,
+    source_commit: str,
+    raw: dict[str, bytes],
+    known_claims: set[str],
+    lane_claims: set[str],
+):
     req = parse_json(raw["request.json"], "request")
     require(req, ["schema_version", "experiment_id", "lane", "request_id", "request_hash", "base_sha", "claim_registry_sha256"], "request")
     if req["schema_version"] != 1 or req["experiment_id"] != exp_id or req["lane"] != lane:
@@ -118,9 +125,24 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
     require(freeze, ["schema_version", "experiment_id", "hashes"], "freeze")
     if freeze["schema_version"] != 1 or freeze["experiment_id"] != exp_id or not isinstance(freeze["hashes"], dict):
         raise ValueError("freeze identity/shape mismatch")
-    for name in ("request.json", "spec.json", "prereg.md"):
-        if freeze["hashes"].get(name) != sha256(raw[name]):
+    for name, expected in freeze["hashes"].items():
+        if name not in raw:
+            raise ValueError(f"frozen packet file missing from canonical raw set: {name}")
+        if expected != sha256(raw[name]):
             raise ValueError(f"freeze hash mismatch: {name}")
+
+    artifact_hashes = freeze.get("artifact_hashes", {})
+    if not isinstance(artifact_hashes, dict):
+        raise ValueError("freeze artifact_hashes must be an object")
+    for rel, expected in artifact_hashes.items():
+        p = Path(rel)
+        if p.is_absolute() or ".." in p.parts:
+            raise ValueError(f"unsafe frozen artifact path: {rel}")
+        pinned_artifact = show(source_commit, rel)
+        if pinned_artifact is None:
+            raise ValueError(f"frozen artifact absent at finalization commit: {rel}")
+        if sha256(pinned_artifact) != expected:
+            raise ValueError(f"frozen artifact hash mismatch: {rel}")
 
     if len(raw["prereg.md"].strip()) < 100 or len(raw["report.md"].strip()) < 20:
         raise ValueError("prereg/report is structurally empty")
@@ -163,11 +185,20 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
     require_list(verdict, "evidence_refs", "verdict")
     if verdict["promote_to_product"] and (lane != "product" or audit["status"] != "PASS"):
         raise ValueError("unauthorized product promotion verdict")
+    design_contract_version = int(req.get("design_contract_version", 1))
+    frozen_claims = set(spec["claim_ids"])
     for event in verdict["claim_updates"]:
         if not isinstance(event, dict):
             raise ValueError("claim update must be an object")
         if event.get("claim_id") not in known_claims or event.get("status") not in DIRECTOR_CLAIM_STATUSES or not event.get("reason"):
             raise ValueError("invalid Director claim update")
+        if design_contract_version >= 2:
+            if event.get("claim_id") not in frozen_claims:
+                raise ValueError(f"v2 claim update outside frozen spec.claim_ids: {event.get('claim_id')}")
+            if event.get("claim_id") not in lane_claims:
+                raise ValueError(f"v2 claim update outside lane charter: {event.get('claim_id')}")
+            if event.get("status") in {"MEASUREMENT_INVALID", "BLOCKED"}:
+                raise ValueError("v2 packet/operational status may not replace epistemic claim status")
         if event.get("status") == "VALIDATED" and audit["status"] != "PASS":
             raise ValueError("VALIDATED claim without PASS audit")
         if event.get("status") == "PRODUCT_CORE" and (lane != "product" or audit["status"] != "PASS" or not verdict["promote_to_product"]):
@@ -200,7 +231,10 @@ def main():
 
     claims_registry = json.loads((ROOT / "research/claims/registry.json").read_text())
     known_claims = {c["id"] for c in claims_registry["claims"]}
+    registry_status = {c["id"]: c["status"] for c in claims_registry["claims"]}
+    lanes_registry = json.loads((ROOT / "research/lanes/registry.json").read_text())["lanes"]
     gaps: list[dict] = []
+    scope_warnings: list[dict] = []
     quarantine: list[dict] = []
     entries: dict[str, dict] = {}
     claim_events: dict[str, list] = {}
@@ -244,7 +278,24 @@ def main():
                     raw[name] = pinned
                     packet_hashes[name] = sha256(pinned)
 
-                req, spec, audit, verdict = validate_packet(exp_id, lane, source_commit, raw, known_claims)
+                # Design-contract v2 adds an independently produced design review
+                # to the immutable freeze set without making it mandatory for legacy packets.
+                req_preview = parse_json(raw["request.json"], "request preview")
+                if int(req_preview.get("design_contract_version", 1)) >= 2:
+                    review_path = f"research/experiments/{exp_id}/design_review.json"
+                    pinned_review = show(source_commit, review_path)
+                    current_review = show(ref, review_path)
+                    if pinned_review is None:
+                        raise ValueError("v2 packet missing design_review.json at finalization")
+                    if current_review != pinned_review:
+                        raise ValueError("post-finalization mutation detected: design_review.json")
+                    raw["design_review.json"] = pinned_review
+                    packet_hashes["design_review.json"] = sha256(pinned_review)
+
+                lane_claims = set(lanes_registry[lane].get("priority_claims", []))
+                req, spec, audit, verdict = validate_packet(
+                    exp_id, lane, source_commit, raw, known_claims, lane_claims
+                )
                 if exp_id in entries:
                     raise ValueError(f"duplicate experiment id already ingested from {entries[exp_id]['source_ref']}")
 
@@ -269,14 +320,30 @@ def main():
                 }
                 entries[exp_id] = entry
                 for event in verdict.get("claim_updates", []):
-                    claim_events.setdefault(event["claim_id"], []).append({
+                    claim_id = event["claim_id"]
+                    in_frozen_scope = claim_id in set(spec["claim_ids"])
+                    lane_eligible = claim_id in set(lanes_registry[lane].get("priority_claims", []))
+                    enriched = {
                         "experiment_id": exp_id,
                         "lane": lane,
                         "created_at": req.get("created_at"),
                         "decision": verdict["decision"],
                         "source_commit": source_commit,
+                        "in_frozen_scope": in_frozen_scope,
+                        "lane_eligible": lane_eligible,
                         **event,
-                    })
+                    }
+                    claim_events.setdefault(claim_id, []).append(enriched)
+                    if not in_frozen_scope or not lane_eligible:
+                        scope_warnings.append({
+                            "claim_id": claim_id,
+                            "experiment_id": exp_id,
+                            "lane": lane,
+                            "in_frozen_scope": in_frozen_scope,
+                            "lane_eligible": lane_eligible,
+                            "status": event.get("status"),
+                            "reason": "historical claim update preserved but excluded from effective claim state",
+                        })
             except Exception as exc:
                 quarantine.append({"lane": lane, "experiment_id": exp_id, "ref": ref, "source_commit": source_commit, "error": str(exc)})
 
@@ -287,11 +354,38 @@ def main():
         events.sort(key=lambda e: ((e.get("created_at") or ""), e["experiment_id"]))
     latest_event = {claim_id: events[-1] for claim_id, events in claim_events.items() if events}
 
+    # Effective claim state is epistemic, not merely chronological. Preserve all
+    # raw events, but do not let packet/operational statuses or historical
+    # out-of-scope updates erase accepted scientific state.
+    non_epistemic = {"MEASUREMENT_INVALID", "BLOCKED"}
+    effective_event: dict[str, dict] = {}
+    for claim_id in sorted(known_claims):
+        effective: dict = {
+            "claim_id": claim_id,
+            "status": registry_status[claim_id],
+            "reason": "base status from research/claims/registry.json; no later admissible epistemic event",
+            "source": "registry",
+        }
+        for event in claim_events.get(claim_id, []):
+            if not event.get("in_frozen_scope", False) or not event.get("lane_eligible", False):
+                continue
+            if event.get("status") in non_epistemic:
+                continue
+            effective = dict(event)
+            effective["source"] = "canonical_event"
+        effective_event[claim_id] = effective
+
     codex_dir = ROOT / "codex"
     (codex_dir / "coverage_gaps.json").write_text(json.dumps(gaps, indent=2) + "\n")
     (codex_dir / "quarantine.json").write_text(json.dumps(quarantine, indent=2) + "\n")
+    (codex_dir / "claim_scope_warnings.json").write_text(json.dumps(scope_warnings, indent=2) + "\n")
     (codex_dir / "index.json").write_text(json.dumps({"schema_version": 2, "experiments": entry_order}, indent=2) + "\n")
-    (codex_dir / "claim_state.json").write_text(json.dumps({"schema_version": 2, "events_by_claim": claim_events, "latest_event_by_claim": latest_event}, indent=2) + "\n")
+    (codex_dir / "claim_state.json").write_text(json.dumps({
+        "schema_version": 3,
+        "events_by_claim": claim_events,
+        "latest_event_by_claim": latest_event,
+        "effective_event_by_claim": effective_event,
+    }, indent=2) + "\n")
 
     # SPIDER_CODEX.md is an index, not a second multi-megabyte copy of every packet.
     # Full canonical evidence remains losslessly available under codex/experiments/.
@@ -311,15 +405,21 @@ def main():
     ]
     for exp_id, e in entry_order.items():
         lines.append(f"| {exp_id} | {e['lane']} | {e['audit_status']} | {e['decision']} | {', '.join(e['claim_ids'])} | `{e['source_commit'][:12]}` |")
+    if effective_event:
+        lines += ["", "## Effective claim state", "", "This table is the state used for research direction. Packet-level MEASUREMENT_INVALID/BLOCKED events and historical out-of-scope claim updates remain in claim_state history but do not erase accepted epistemic state.", "", "| Claim | Status | Source |", "|---|---|---|"]
+        for claim_id in sorted(effective_event):
+            e = effective_event[claim_id]
+            source = e.get("experiment_id") or e.get("source", "registry")
+            lines.append(f"| {claim_id} | {e['status']} | {source} |")
     if latest_event:
-        lines += ["", "## Latest recorded claim events", "", "These are chronological latest events, not an automatic truth ranking.", "", "| Claim | Status | Experiment | Lane |", "|---|---|---|---|"]
+        lines += ["", "## Latest raw claim events", "", "Chronological event stream for auditability; not an automatic truth ranking.", "", "| Claim | Status | Experiment | Lane |", "|---|---|---|---|"]
         for claim_id in sorted(latest_event):
             e = latest_event[claim_id]
             lines.append(f"| {claim_id} | {e['status']} | {e['experiment_id']} | {e['lane']} |")
     if gaps or quarantine:
         lines += ["", "## Integrity accounting", "", "See `codex/coverage_gaps.json` and `codex/quarantine.json`; incomplete or invalid finalized packets are never silently ingested."]
     (ROOT / "SPIDER_CODEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"SPIDER_CODEX_SYNC_OK experiments={len(entry_order)} gaps={len(gaps)} quarantine={len(quarantine)} refs={len(refs)}")
+    print(f"SPIDER_CODEX_SYNC_OK experiments={len(entry_order)} gaps={len(gaps)} quarantine={len(quarantine)} scope_warnings={len(scope_warnings)} refs={len(refs)}")
 
 
 if __name__ == "__main__":

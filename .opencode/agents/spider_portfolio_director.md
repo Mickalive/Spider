@@ -25,7 +25,7 @@ Before acting, read:
 - the exact Research Scout brief supplied by the workflow.
 
 Do NOT ingest `SPIDER_CODEX.md` wholesale.
-Use the machine snapshot, Scout brief, `codex/claim_state.json` and `codex/index.json` as the complete program map. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
+Use the machine snapshot, Scout brief, `codex/claim_state.json` and `codex/index.json` as the complete program map. Treat `effective_event_by_claim` as current epistemic state; `latest_event_by_claim` is raw chronology and may contain a later measurement-invalid/blocked event that must not erase earlier accepted evidence. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
 
 ## Your job
 
@@ -45,6 +45,8 @@ Use genuine scientific judgment. Consider:
 - neglected or newly unblocked claims;
 - cross-lane dependencies;
 - measurement readiness;
+- whether the proposed treatment and strong baselines are actually distinguishable before spending an EXECUTE cycle;
+- whether a prerequisite should be repaired once in Runtime/Product instead of re-discovered as MEASUREMENT_INVALID across multiple lanes;
 - product leverage;
 - opportunity cost in the ordinary sense: what more important question would remain unasked if this lane continues here?
 
@@ -89,6 +91,7 @@ In particular:
 - Product should prioritize external-agent behavior and end-to-end product economics.
 - Graph should cover cumulative inheritance broadly, not identify itself with one subclaim.
 - Physics may go deep on measurement when that depth is actually opening a path to real Web evidence.
+- Do not assign expensive C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON execution while the shipped SPIDER treatment cannot demonstrate a pre-freeze executable inherited mechanism or while the task bank gives cold/retrieval baselines ceiling performance; assign Product/Runtime to remove that blocker first.
 
 ## Output
 
@@ -121,6 +124,8 @@ Shape:
 ```
 
 For CONTINUE/PIVOT/REOPEN, `claim_id` and `question` must be non-null and the claim must be eligible under that lane's charter.
+
+When a lane has an unfinished PREFREEZE experiment whose active mandate targets the same claim and remains strategically correct, prefer `CONTINUE` with `parent_handoff_disposition="USE"`. Natural-language wording need not be byte-identical; use PIVOT/REOPEN/SUPERSEDE only when the scientific objective materially changes.
 
 For PARK/TERMINATE, `question` must be null. `claim_id` may identify the parked thread or be null.
 
