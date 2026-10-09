@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **426**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **427**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -436,6 +436,7 @@ Validated experiments: **426**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-GRAPH-37964565784 | graph | REVISE | MEASUREMENT_INVALID_AT_GATE_C3_SECOND_CERTIFICATE_DESIGN_DEFECT_CONJUNCTIVE_PREDICATE_UNSATISFIABLE_C_FRESHNESS_UNCHANGED_AT_HYPOTHESIS_NO_PROMOTION_NO_PRODUCT_CHANGE_NO_RECHAIN | C-FRESHNESS | `8ba3f3e5e108` |
 | EXP-PRODUCT-37973256064 | product | PASS | REAL_CREDENTIAL_FREE_SUBSTRATE_PARAMETERIZED_PATH_LIVE_CAUSALLY_ATTRIBUTABLE_AND_HONESTLY_ACCOUNTED_OUTSIDE_SYNTHETIC_FIXTURE_AUDIT_PASS_PRODUCER_CLAIM_UNSUPPORTED_FROZEN_PRIMARY_MARGIN_FAILS_WITH_ZERO_DYNAMIC_RANGE_AT_BASELINE_CEILING_TREATMENT_0.80_BOUNDED_BY_CONSERVATIVE_SUPPORT_INFERENCE_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_NO_PROMOTION_NO_CONTINUE | C-PARAM-INHERIT | `1675f1ad1e2e` |
 | EXP-INTEL-37973264582 | intel | PASS | FALSIFIES OF H1 AT THE FROZEN CEILING, ADOPTED WITH AUDIT PASS (frozen label DESIGN_COMPROMISED): the frozen C-LLM-INHERIT four-arm benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, same model/tools/budget) is not executable as specified on current factory assets. Gate 0 PASS - PC-ENDPOINT-LIVE fired on two credential-free endpoints: E-LOCAL-LLAMA (llama-cpp-python 0.2.90, qwen2.5-0.5b-instruct-q4_k_m.gguf, usage 28/4/32 tokens, response sha256 d4a7428a541d1f68e5485d1efd443d7f54a61cf10a87f7aa8b7cf1e5d8a6f791) and E-POLLINATIONS-OPENAI (https://text.pollinations.ai/openai, gpt-oss-20b, anonymous tier, 6/6 HTTP 200 with usage); NC-NO-ENDPOINT does NOT hold (the 'no invocable endpoint' null is falsified; two endpoints DO exist, so the blocker is capability/stability, not existence). Gate 1 PASS under the obtainability/framework reading: 14/14 comparator packages retrievable via pip download --no-deps, and a LangGraph compiled workflow executed under BOTH credential-free endpoints with identical output sha256 507fea36d4de9c11fa8536cd140b5ba4037ef1aa047279dcd7c0f6d95c90d777. Gate 2 FAIL: a minimal Web-agent task (click #reveal-btn then answer TARGET-42, one synthetic page) was NOT completed under either endpoint - the local 0.5B model emitted prose with no parseable JSON action (150 tokens, 1 step), and the proxy returned empty/reasoning-only content with a ~197 completion-token cap despite max_tokens=1200 and intermittently returned HTTP 402, with no SLA and no model pinning; running the four arms as frozen therefore requires substituting a different/stronger model or a differently provisioned endpoint, which is a material weakening of the same-model/tools/budget constraint. Gate 3 FAIL_ZERO_PASS: 4 comparator categories carry published success/cost numbers with denominators (B-RETRIEVAL: LRAT +27% on 100,195 docs / 26,482 trajectories; B-SELECTOR-CACHE: browser-use WebVoyager 89.1% on 586 tasks; B-COMPILED-WORKFLOW: AWM/ASI/ReasoningBank WebArena SR + tokens/task; B-MEMORY-AGENT: Letta LoCoMo 74.0% on 10 conversations / 1,540 QA), but ZERO publish on the attained model families (Qwen2.5-0.5B-Instruct, gpt-oss-20b) under the same tools and a token budget; all marked UNAUDITED. Independent audit status=PASS, producer_claim_supported=true, required_fixes=[] (one minor metric correction: comparators_with_published_numbers_with_denominators is 4, not 3; outcome unchanged). C-LLM-INHERIT UNCHANGED at HYPOTHESIS; NO promotion; the external-baseline search thread is bounded by this determination; the benchmark becomes executable only via (i) a budget-stable credential-free Web-agent-capable endpoint (e.g., a larger local GGUF) or (ii) a Global Research Director re-scope dropping Gate 3's same-model external published-baseline anchor in favor of internally re-run comparators. | C-LLM-INHERIT | `364d7b360b36` |
+| EXP-PRODUCT-37982016598 | product | PASS | FROZEN_PRE_FREEZE_DYNAMIC_RANGE_GATE_C1_FAILED_MEASUREMENT_INVALID_ADOPTED_AUDIT_PASS_PRODUCER_CLAIM_UNSUPPORTED_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE_TASK_BANK_REDESIGN_AND_TREATMENT_CARRIER_BINDING_REQUIRED | C-RESIDUAL-NOVELTY | `14e1774a83d2` |
 
 ## Latest recorded claim events
 
@@ -447,10 +448,10 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-36106653880 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-37964565784 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-37973264582 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-FRONTIER-37385647440 | frontier |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-PRODUCT-37982016598 | product |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-37973256064 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 | intel |
-| C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-FRONTIER-37950626378 | frontier |
+| C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37982016598 | product |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-36287167610 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-FRONTIER-37385647440 | frontier |
 
