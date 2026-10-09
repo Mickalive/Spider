@@ -328,6 +328,7 @@ def main():
                         "lane": lane,
                         "created_at": req.get("created_at"),
                         "decision": verdict["decision"],
+                        "next_question": verdict.get("next_question"),
                         "source_commit": source_commit,
                         "in_frozen_scope": in_frozen_scope,
                         "lane_eligible": lane_eligible,
