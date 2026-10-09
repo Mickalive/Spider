@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On credential-free public HTTP GET substrates (the frozen 57-endpoint universe plus any preregistered extension), are the ONSET and RECOVERY of server-side ACCESS BARRIERS - Cloudflare-style 403 challenge pages, 429 rate limits, and connection-level transport failures - predictable from observable request-history features (request rate, burstiness, inter-request spacing, per-session cookie-jar continuity/freshness, endpoint identity) BEYOND a frozen memory/constant null calibrated before freeze with demonstrated power, and separable from ordinary endpoint-level unavailability (403-as-block versus 403-as-legitimate-response, and 404/500 as non-barrier failures) - such that an agent can schedule re-observation to hold target success rate near the no-barrier baseline while issuing measurably fewer requests than unconditional retry? Pre-register a falsifier satisfiable in BOTH directions, a REQUIRED no-adaptation/unconditional-retry baseline expressed RELATIVE to it, and a pre-freeze arithmetic attainability certificate proving barrier events are reachable in the frozen pool (this packet observed 120 HTTP 403s, 65 429s and 24 transport errors, but those are incidental observations, not an attainability certificate, and a barrier-dynamics design must certify attainability before freeze rather than assume it).",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-09T22:24:51.034551+00:00",
-  "last_failure_retryable": true,
+  "consecutive_failures": 2,
+  "updated_at": "2026-10-09T23:43:59.856889+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "281a29dec07c745202386cef1476e12e236ddd3e3ba9d43d34d81d7f4d277468",
   "same_failure_count": 1,
-  "last_failure_fingerprint": "fece634f3ddc7205ce6eed20",
-  "last_failure_control_revision": "a04b50023ccea461836521f50fc52a208c08163bd310b55be729b65396b37675"
+  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
+  "last_failure_control_revision": "0c7656a2a3dd2b1c22037ba2c496c918de1f05fc33aa09e6166cd700910bcb47"
 }
