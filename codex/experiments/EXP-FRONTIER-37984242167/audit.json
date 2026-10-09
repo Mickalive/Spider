@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37984242167",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "DESIGN must populate spec.json.target_pool.seeds with candidate seed URLs and run the frozen hop-confirmation crawl (static same-host <a> BFS, depth<=6, budget 250) during DESIGN to admit >=10 DEEP items with >=2 distinct hosts/engines each having >=3 DEEP items (VN-V2, admission_gate ADMISSION_GATE_V2).",
+    "DESIGN must verify and record live evidence for all three pre-freeze control certificate conditions in spec.json.pre_freeze_control_certificate before freeze: (a) pool DEEP admission on >=2 hosts/engines, (b) >=1 discovery channel probeable on >=1 pool host with HTTP 200 + parsable entries, (c) null control synthetic items yield 0 reachable URLs on all channels (VN-V9, prereg §14). Freeze proceeds ONLY if all_verified=true with evidence_refs populated.",
+    "DESIGN must resolve all open design decisions listed in prereg.md §18 (final seed list, synthetic identifier format, search query-parameter mapping per host, JSON-LD @type vocabulary, sitemap.gz handling, redirect accounting in K=3, engine definition for multi-generator same-domain sites) and freeze them in spec.json before freeze.json is created.",
+    "For design-contract v2, the freeze_eligibility checks (decision_rule_reachability, measurement_prerequisites, baseline_identifiability, control_sensitivity, treatment_liveness, freeze_artifacts_bound) would catch this defect class at DESIGN review; a fresh v2 design should be used for the re-freeze.",
+    "The deterministic freezer must bind the pool/crawl/certificate artifacts via freeze.json.artifact_hashes (freeze_artifacts_bound) so the sampling frame is immutably pinned at freeze time, not just the three canonical text files."
+  ],
+  "validity_findings": [
+    {
+      "id": "VN-A1_unsatisfiable_sampling_frame",
+      "severity": "CRITICAL",
+      "description": "The frozen spec.json.target_pool admits zero seeds, zero confirmed DEEP items, and zero hosts. VN-V2 requires the pool to be frozen at DESIGN time with live hop-confirmation crawl confirming DEEP items on >=2 engines. The frozen record shows pool_deep_items_confirmed=false, pool_deep_hosts_confirmed=false. There is no sampling frame to measure; the primary metric denominator is 0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#target_pool",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#measurement_validity.VN-V2",
+        "research/experiments/EXP-FRONTIER-37984242167/prereg.md#6.1"
+      ]
+    },
+    {
+      "id": "VN-A2_pre_freeze_certificate_gate_violated",
+      "severity": "CRITICAL",
+      "description": "VN-V9 and prereg §14 explicitly state: 'Freeze proceeds ONLY if all three are verified.' The frozen pre_freeze_control_certificate has all_verified=false, verified_at=null, discovery_channel_probe_verified=false, null_control_verified=false, evidence_refs=[]. The freeze committed despite the design's own mandatory gate being unfulfilled. This is a control-plane/governance failure, not a scientific outcome.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#pre_freeze_control_certificate",
+        "research/experiments/EXP-FRONTIER-37984242167/prereg.md#14",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#measurement_validity.VN-V9"
+      ]
+    },
+    {
+      "id": "VN-A3_falsifier_unreachable_both_directions",
+      "severity": "CRITICAL",
+      "description": "The frozen decision_rule.primary_metric = count(reachable DEEP items) / count(admitted DEEP items). As frozen, denominator = 0, so the fraction is 0/0 (undefined). Neither SUPPORTS (fraction >=0.50 on >=2 engines) nor FALSIFIES (fraction <0.50 on >=2 engines) is arithmetically reachable. The MIXED and INCONCLUSIVE mappings also require evaluable per-engine metrics. This is the exact 'empty-accept-region / unsatisfiable-predicate' failure class the director_mandate.agent_priors_used[8] warns about.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#decision_rule",
+        "research/experiments/EXP-FRONTIER-37984242167/request.json#director_mandate.agent_priors_used[8]",
+        "research/experiments/EXP-FRONTIER-37984242167/prereg.md#3"
+      ]
+    },
+    {
+      "id": "VN-A4_open_design_decisions_not_resolved",
+      "severity": "HIGH",
+      "description": "prereg.md §18 lists seven unresolved design decisions that 'must be resolved and frozen in spec.json before freeze.json is created': final seed list, synthetic identifier format, search query-parameter mapping, JSON-LD vocabulary, sitemap.gz handling, redirect accounting, engine definition. None are resolved in the frozen spec.json. The freeze therefore committed an incomplete design.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/prereg.md#18",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json"
+      ]
+    },
+    {
+      "id": "VN-A5_no_artifact_binding_in_freeze",
+      "severity": "HIGH",
+      "description": "freeze.json contains only the three canonical hashes (request.json, spec.json, prereg.md). It binds no pool, seed-list, raw-crawl-log, or certificate artifact via artifact_hashes. For a design whose validity depends entirely on a frozen sampling frame, the absence of artifact binding means the sampling frame identity is not pinned anywhere in the repository.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/freeze.json",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#target_pool"
+      ]
+    },
+    {
+      "id": "VN-A6_controls_never_exercised",
+      "severity": "MEDIUM",
+      "description": "All four frozen controls (PC_DISCOVERY_CHANNEL_REACHABILITY, NC_SYNTHETIC_UNREACHABLE_ITEM, B_LINK_FOLLOWING_BFS, B_PERSISTED_PATH_REACQUISITION, B_DIRECT_URL_REPLAY) are reported UNKNOWN because the frozen design assigned their execution to DESIGN pre-freeze (VN-V9, prereg §14). The positive control required live channel probe evidence in the certificate; the null control required frozen synthetic identifiers; the baselines required the frozen pool's admitted items. None were ever given the chance to run. This is consistent with the producer's UNKNOWN (not FAIL) classification.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#positive_control",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#null_control",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json#baselines"
+      ]
+    },
+    {
+      "id": "VN-A7_baselines_unpaired_to_this_experiment",
+      "severity": "MEDIUM",
+      "description": "Baselines B_LINK_FOLLOWING_BFS, B_PERSISTED_PATH_REACQUISITION, B_DIRECT_URL_REPLAY are carried from EXP-FRONTIER-37950626378. The parent handoff explicitly rejects its single-host/single-engine mdBook DEEP band as a substitute for the required >=2-engine pool (parent handoff dependencies, carry_forward.do_not_assume). The producer correctly treats these as inherited context only, not as measurements of this experiment.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_LINK_FOLLOWING_BFS",
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_PERSISTED_PATH_REACQUISITION",
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_DIRECT_URL_REPLAY",
+        "research/experiments/EXP-FRONTIER-37950626378/handoff.json#carry_forward.do_not_assume"
+      ]
+    },
+    {
+      "id": "VN-A8_environment_viable_not_infrastructure_failure",
+      "severity": "LOW",
+      "description": "TCP 443 connectivity to candidate hosts (doc.rust-lang.org, www.gnu.org, quotes.toscrape.com, example.com) succeeded within 4s (OBS-ENV-01). Python 3.12.15 stdlib HTTP substrate is available. The BLOCKED status is correctly attributed to the unsatisfiable frozen design, not infrastructure failure. This is properly disclosed in VN-B9.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#observations.OBS-ENV-01",
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#validity_notes.VN-B9",
+        "research/experiments/EXP-FRONTIER-37984242167/provenance.json#environment"
+      ]
+    },
+    {
+      "id": "VN-A9_no_measurement_invalidity_no_scientific_negative",
+      "severity": "LOW",
+      "description": "The producer correctly classifies this as a design/control-plane defect record (status=BLOCKED, outcome=NOT_APPLICABLE), not MEASUREMENT_INVALID (no measurement was taken to invalidate) and not a scientific FALSIFIES. No claim update is warranted. C-RESIDUAL-NOVELTY and C-WEB-DYNAMICS retain their Codex effective statuses (EXP-PRODUCT-37989728440 and EXP-PHYSICS-37973239386 respectively). This is properly documented in VN-B10.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#status",
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#outcome",
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#validity_notes.VN-B10",
+        "research/experiments/EXP-FRONTIER-37984242167/codex/claim_state.json"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B_LINK_FOLLOWING_BFS",
+      "status": "UNKNOWN",
+      "finding": "Not re-measurable: the frozen design assigned hop-confirmation crawl to DESIGN pre-freeze (VN-V5). The parent experiment's RED/RACQ values (single-host mdBook) cannot be paired to this experiment's empty pool. The baseline is inherited context only.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_LINK_FOLLOWING_BFS",
+        "research/experiments/EXP-FRONTIER-37950626378/result.json#metrics.median_re_acquisition_path_requests_by_band"
+      ]
+    },
+    {
+      "control_id": "B_PERSISTED_PATH_REACQUISITION",
+      "status": "UNKNOWN",
+      "finding": "Carried reference only from parent (median RACQ_PATH.requests: NEAR=2.0, MID=3, DEEP=4). Not re-measurable here because no admitted DEEP items exist in the frozen pool.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_PERSISTED_PATH_REACQUISITION",
+        "research/experiments/EXP-FRONTIER-37950626378/handoff.json#carry_forward.established"
+      ]
+    },
+    {
+      "control_id": "B_DIRECT_URL_REPLAY",
+      "status": "UNKNOWN",
+      "finding": "Carried reference only from parent (RACQ_URL.requests=1 for every item). Not re-measurable here because no known item URLs exist in the frozen pool.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-37984242167/result.json#controls.B_DIRECT_URL_REPLAY",
+        "research/experiments/EXP-FRONTIER-37950626378/handoff.json#carry_forward.established"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "frozen_spec_target_pool_seeds_length": 0,
+    "frozen_spec_target_pool_confirmed_deep_items_length": 0,
+    "frozen_spec_target_pool_confirmed_deep_hosts_length": 0,
+    "frozen_spec_pre_freeze_control_certificate_all_verified": false,
+    "frozen_spec_pre_freeze_control_certificate_evidence_refs_length": 0,
+    "admission_gate_pass": null,
+    "admission_gate_reason": "ADMISSION_GATE_V2 not evaluable: frozen record admits 0 DEEP items and 0 hosts; conditions (>=10 admitted DEEP items total; >=2 hosts with >=3 DEEP each) cannot be checked on empty sampling frame.",
+    "discovery_reachable_fraction": null,
+    "discovery_reachable_fraction_reason": "Denominator count(admitted DEEP items) = 0 as frozen; fraction 0/0 undefined; both falsifier branches unreachable.",
+    "discovery_reachable_fraction_per_engine": {},
+    "discovery_reachable_fraction_per_engine_reason": "No host/engine has admitted DEEP items in frozen record; per-engine fraction non-computable.",
+    "discovery_reachable_fraction_per_channel": {},
+    "discovery_reachable_fraction_per_channel_reason": "No discovery channel probed; frozen design requires per-channel coverage but item set is empty.",
+    "median_discovery_GETs_reachable": null,
+    "median_discovery_bytes_reachable": null,
+    "hop_depth_distribution": {},
+    "hop_depth_distribution_reason": "Hop confirmation crawl was DESIGN obligation (VN-V5/VN-V2); no hop depths recorded in frozen spec.",
+    "RED_requests_vs_discovery_GETs": null,
+    "RED_requests_vs_discovery_GETs_reason": "Paired comparison requires same admitted item set for RED and discovery; item set is empty.",
+    "channels_with_zero_deep": {},
+    "null_control_false_positive_rate": {},
+    "engines_meeting_threshold": null,
+    "engines_meeting_threshold_reason": "decision_rule.engines_meeting_threshold requires discovery_reachable_fraction_per_engine for >=1 engine; none exists.",
+    "measurement_attempted": false,
+    "measurement_attempted_reason": "No live HTTP probe executed. Frozen design's sampling frame and pre-freeze certificate are empty; constructing pool post-freeze would mutate frozen design (VN-V2, VN-V9, prereg §14, §19), so no confirmatory measurement possible under frozen transaction."
+  },
+  "claim_ceiling": "No scientific claim is supportable from this frozen transaction. The experiment's hypothesis (site-native discovery reaches >=50% of DEEP items in <=3 GETs on >=2 engines) remains entirely untested. The frozen design violates its own pre-freeze gates (VN-V9, prereg §14), admits zero DEEP items across zero hosts, and leaves all open design decisions unresolved (prereg §18). The falsifier is arithmetically unsatisfiable in both directions (denominator=0). C-RESIDUAL-NOVELTY and C-WEB-DYNAMICS retain their Codex effective epistemic statuses (EXPERIMENTAL and HYPOTHESIS respectively per codex/claim_state.json). This packet provides a verifiable design-defect receipt, not scientific evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-37984242167/request.json",
+    "research/experiments/EXP-FRONTIER-37984242167/spec.json",
+    "research/experiments/EXP-FRONTIER-37984242167/prereg.md",
+    "research/experiments/EXP-FRONTIER-37984242167/freeze.json",
+    "research/experiments/EXP-FRONTIER-37984242167/result.json",
+    "research/experiments/EXP-FRONTIER-37984242167/report.md",
+    "research/experiments/EXP-FRONTIER-37984242167/provenance.json",
+    "research/experiments/EXP-FRONTIER-37950626378/handoff.json",
+    "codex/claim_state.json"
+  ],
+  "unresolved": [
+    "Whether any non-mdBook host admits DEEP (hop>=3) items within B=250/D=6 remains unknown (carried from EXP-FRONTIER-37950626378 UR-1); it is a prerequisite for the cross-engine contrast this experiment requires.",
+    "Whether site-native discovery channels reach DEEP items in <=K=3 GETs on >=2 engines remains UNMEASURED; nothing in this receipt answers it, and it must not be read as either a positive or negative answer.",
+    "Whether the discovery question is the right next investment versus the explicitly recorded maintenance/invalidation axis (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost, per parent handoff next_question alternative) is a Global Research Director allocation decision.",
+    "Why the DESIGN stage froze a spec whose own pre-freeze gating obligations (VN-V9, prereg §14) were unfulfilled, and why the deterministic freezer committed a v1 packet without artifact binding for the sampling frame, are control-plane/governance questions for the factory (freezer, DESIGN reviewer, or lane governance); this packet records the defect but cannot fix it retroactively.",
+    "A satisfiable re-freeze requires: (1) re-open DESIGN for the same director mandate; (2) curate candidate seeds; (3) run frozen hop-confirmation crawl; (4) admit >=10 DEEP items with >=2 hosts/engines >=3 each; (5) verify >=1 discovery channel and null control live; (6) populate spec.json.target_pool and pre_freeze_control_certificate with evidence_refs; (7) resolve all prereg §18 decisions; (8) re-freeze with artifact_hashes binding the pool/crawl/certificate. A design-contract v2 design with freeze_eligibility checks would make this defect class impossible to freeze."
+  ]
+}
