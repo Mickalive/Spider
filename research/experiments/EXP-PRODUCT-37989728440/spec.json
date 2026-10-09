@@ -1,17 +1,71 @@
 {
   "experiment_id": "EXP-PRODUCT-37989728440",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-RESIDUAL-NOVELTY", "C-PARAM-INHERIT", "C-FRESHNESS"],
+  "question": "On a credential-free task bank whose correct action is NOT fully determined by the task specification (multi-step discovery: server-side session state and valid resource identifiers must be read via explicit discovery requests before the target action can be constructed), can a PRE-FREEZE, arithmetically checkable dynamic-range certificate be produced BEFORE freeze.json exists — B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family, with matched correctness >= 0.80 for all arms — so that cost_per_success on an honest metric that INCLUDES retrieval_calls (plus http_requests, verification_calls, repair_attempts, latency_ms) can be compared between the live-kernel treatment arm (T-SPIDER-PARAM: the shipped parameterize->resolve->execute path bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) and cold re-derivation, a retrieval-shaped comparator, and an emptied-registry null, and does the treatment advantage increase monotonically with residual novelty (Spearman rho > 0.5, permutation p < 0.05) rather than with full task length? If the certificate is unsatisfiable on every credential-free deterministic substrate tested, record that bounded substrate-class negative and DO NOT freeze.",
+  "hypothesis": "The SPIDER treatment arm with parameterized mechanisms induced via distill_parameterized from demonstrations will achieve lower cost_per_success on held-out tasks than both B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED, and this advantage will increase monotonically with residual novelty (Spearman rho > 0.5, permutation p < 0.05) because the treatment reuses the discovered session-state/parameter-binding logic while comparators must re-discover or re-retrieve it per task. The honest cost metric includes retrieval_calls, making retrieval-shaped work visible. The emptied-registry null (B-EMPTIED-REGISTRY) will match cold re-derivation, confirming the registry is the carrier. The treatment carrier is the audited kernel path (blob b15ed848).",
+  "falsifier": "Any of: (1) PRE-FREEZE dynamic-range certificate cannot be satisfied: B-COLD-RE-DERIVE or B-RETRIEVAL-SHAPED success_rate >= 0.95 at novelty >= 0.5 on all task families (zero headroom); (2) Matched correctness < 0.80 for any arm at any novelty level; (3) Treatment arm cost_per_success advantage over BOTH comparators does NOT increase monotonically with residual novelty (Spearman rho <= 0.5 OR permutation p >= 0.05); (4) B-EMPTIED-REGISTRY cost_per_success does not match B-COLD-RE-DERIVE (registry not the carrier); (5) Honest accounting violated: model_calls > 0 or model_tokens > 0 (credential-free); (6) Treatment carrier not bound to audited blob b15ed848; (7) Known-negative refusal rate < 0.95 or refusal reasons incorrectly categorized.",
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "description": "Cold re-derivation arm: for each test task, the agent must discover session state and valid resource identifiers from scratch via explicit HTTP discovery requests (GET /api/session, GET /api/resources) before constructing the target action. No mechanism inheritance, no registry, no retrieval. Same tooling budget as treatment arm.",
+      "type": "negative_control"
+    },
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "description": "Retrieval-shaped comparator: structural similarity retrieval over training observations (Jaccard on action templates + state signatures), top-K retrieval, parameter binding via slot alignment. Must also perform discovery requests for session/valid-IDs but can reuse retrieved action templates. Same tooling budget as treatment arm. Retrieval_calls counted honestly.",
+      "type": "comparator"
+    },
+    {
+      "id": "B-EMPTIED-REGISTRY",
+      "description": "Emptied-registry null: SpiderKernel with registry initialized empty (no mechanisms). Forces EXPLORE/UNKNOWN on all tasks, falling back to cold re-derivation behavior. This tests whether the registry itself is the carrier of advantage. Expected: cost_per_success matches B-COLD-RE-DERIVE.",
+      "type": "null_control"
+    },
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Literal kernel ablation: SpiderKernel with only literal distill() (confidence 0.5, no parameter_slots). Trained on same demonstrations. Expected: confidence 0.5 < min_confidence 0.8 blocks EXECUTABLE on parameterized tasks. Isolates parameterized path contribution.",
+      "type": "ablation"
+    }
+  ],
+  "positive_control": "PC-EXACT-REPLAY",
+  "null_control": {
+    "id": "B-EMPTIED-REGISTRY",
+    "description": "Emptied-registry null matching cold re-derivation cost. Registry contains zero mechanisms. Tests whether registry is the carrier of any treatment advantage.",
+    "expected_behavior": "cost_per_success matches B-COLD-RE-DERIVE within measurement noise"
+  },
+  "measurement_validity": [
+    "Credential-free: No model API keys, no browser, no external network calls. Pure localhost stdlib http.server.",
+    "PRE-FREEZE DYNAMIC-RANGE CERTIFICATE (HARD GATE): Before freeze.json is created, the experiment harness MUST arithmetically verify that B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family, with matched correctness >= 0.80 for all arms. This certificate is computed from the frozen task bank design and frozen arm implementations — NO outcome data from the actual run. If certificate=false, the experiment MUST NOT freeze (exit with MEASUREMENT_INVALID). This gate is enforced by the freeze script reading spec.json.dynamic_range_certified.",
+    "Correct action NOT fully determined by task spec: Task specification only provides high-level intent (e.g., 'update resource with property X'). The exact resource ID, session token, and endpoint parameterization must be discovered via explicit HTTP requests (GET /api/session, GET /api/resources) whose responses vary per session/novelty level.",
+    "Genuine residual novelty gradient: Task families at novelty levels 0.0, 0.25, 0.5, 0.75 where novelty = fraction of task steps/parameters NOT determined by the task spec. At novelty=0.0, task spec fully determines action (direct URL construction). At novelty>=0.5, discovery steps are mandatory.",
+    "Honest unit accounting: Per-trajectory counters for model_calls, model_tokens, retrieval_calls, verification_calls, repair_attempts, http_requests, latency_ms. Model counters MUST be zero (credential-free). retrieval_calls MUST be counted and included in cost_per_success. Counters fire on real mechanism execution, not injected.",
+    "Causal attribution: B-LITERAL-KERNEL ablation isolates parameterized path. B-EMPTIED-REGISTRY isolates registry carrier. Treatment arm contrast vs cold/retrieval measured on same held-out tasks at each novelty level.",
+    "Known-negative detection: Three refusal categories (out-of-support identifier, wrong intent, missing required parameter) each with distinct recorded reason and bound_action=null.",
+    "Deterministic substrate: Fixed seed, server state determined by seed + novelty level. No stochastic elements.",
+    "Equal tooling: All arms receive identical task specifications, substrate access, and compute budget.",
+    "Treatment carrier binding: The kernel implementation used for T-SPIDER-PARAM must be either (a) the current src/spider/kernel.py restored to git blob b15ed848, or (b) a vendored copy of that exact blob with its sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 recorded in provenance.json. The freeze.json cannot hash code, so the binding is explicit in spec and provenance."
+  ],
+  "decision_rule": {
+    "C1_dynamic_range_certificate": "PRE-FREEZE: B-COLD-RE-DERIVE success_rate < 0.95 AND B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family, AND all arms matched_correctness >= 0.80. Certificate computed from frozen task bank + arm implementations (no run data). If false, experiment MUST NOT freeze (MEASUREMENT_INVALID).",
+    "C2_matched_correctness": "All arms achieve success_rate >= 0.80 on held-out tasks at ALL novelty levels (0.0, 0.25, 0.5, 0.75) on at least one task family.",
+    "C3_cost_advantage_vs_cold": "Treatment cost_per_success < B-COLD-RE-DERIVE cost_per_success at novelty >= 0.5 on at least one task family.",
+    "C4_cost_advantage_vs_retrieval": "Treatment cost_per_success < B-RETRIEVAL-SHAPED cost_per_success at novelty >= 0.5 on at least one task family.",
+    "C5_novelty_monotonicity": "Spearman rho between residual_novelty and (treatment_cost_per_success - cold_cost_per_success) > 0.5 with permutation p < 0.05, AND same for (treatment_cost_per_success - retrieval_cost_per_success) > 0.5 with permutation p < 0.05. Advantage increases with NOVELTY, not full task length.",
+    "C6_null_carrier": "B-EMPTIED-REGISTRY cost_per_success matches B-COLD-RE-DERIVE cost_per_success (within 10% relative difference) across all novelty levels, confirming registry is the carrier.",
+    "C7_known_negative": "Known-negative refusal_rate >= 0.95 across all three categories. Each refusal has bound_action=null and non-empty reason correctly categorizing the type.",
+    "C8_accounting_honesty": "model_calls == 0 AND model_tokens == 0 for all arms. retrieval_calls, verification_calls, repair_attempts >= 0 and differ between arms as designed. No injected counter events.",
+    "C9_causal_attribution": "B-LITERAL-KERNEL success_rate < 0.20 on held-out tasks at novelty >= 0.5. PC-EXACT-REPLAY success_rate == 1.0 on training tasks.",
+    "C10_substrate_validity": "Server uses real HTTP, task bank has >= 2 task families with genuine novelty gradient, substrate distinct from prior synthetic fixtures.",
+    "C11_treatment_carrier_bound": "Treatment arm uses kernel code bound to git blob b15ed848 (sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) per provenance.json.",
+    "OVERALL_OUTCOME": {
+      "SUPPORTS": "C1 through C11 all PASS",
+      "FALSIFIES": "C1 fails (certificate unsatisfiable) OR C2 fails OR C5 fails OR C7 fails",
+      "MIXED": "C1 passes but any of C3, C4, C6, C8, C9, C10, C11 fail",
+      "MEASUREMENT_INVALID": "C1 fails at freeze time (certificate=false) OR infrastructure failure (server won't start, etc.)"
+    }
+  },
+  "product_consequence_positive": "C-RESIDUAL-NOVELTY advances from HYPOTHESIS toward EXPERIMENTAL/VALIDATED: the shipped kernel's parameterized mechanism path demonstrates a measurable cost advantage per successful task that scales with residual novelty (not full task length) on a real credential-free substrate with honest accounting including retrieval_calls. The treatment carrier (audited blob b15ed848) is live and separable. This clears the critical path for the four-arm C-LLM-INHERIT benchmark (pending model credential) and C-PRODUCT-ECON end-to-end economics. Kernel parameterization becomes a behavior-bound work-compression capability.",
+  "product_consequence_negative": "C-RESIDUAL-NOVELTY remains HYPOTHESIS (or bounded REJECTED for this substrate class): the parameterized mechanism path fails to demonstrate a novelty-scaling cost advantage, or the pre-freeze dynamic-range certificate is unsatisfiable on all tested credential-free deterministic substrates (bounded substrate-class negative recorded). The kernel's distill_parameterized implementation has a substrate gap that must be closed before C-LLM-INHERIT or C-PRODUCT-ECON measurement. Product lane must not promote kernel parameterization to product core. If certificate unsatisfiable everywhere tested, route to external-agent four-arm benchmark on provisioned model endpoint per Director mandate.",
+  "estimated_cost": "Low: pure localhost stdlib http.server, no model API calls, no browser, no external network. ~200-500 HTTP requests per arm x 4 arms x ~20 test tasks = ~16,000-40,000 requests total. Single-threaded, deterministic, completes in < 120 seconds. No GPU, no cloud costs.",
+  "expected_information_gain": "Very high: This is the first experiment to test the SHIPPER kernel's parameterized round-trip (distill_parameterized -> resolve -> execute) on a credential-free substrate with GENUINE residual novelty (correct action not determined by task spec) and an honest cost metric INCLUDING retrieval_calls. It directly addresses the highest-priority gap identified by the Global Research Director: the task bank must have dynamic range certified BEFORE freeze. A positive result establishes the kernel parameterization as a real work-compression capability with novelty-scaling economics; a certificate failure records a bounded substrate-class negative and redirects to the four-arm benchmark. This experiment is the linchpin for the entire C-RESIDUAL-NOVELTY / C-PRODUCT-ECON / C-LLM-INHERIT chain."
 }
