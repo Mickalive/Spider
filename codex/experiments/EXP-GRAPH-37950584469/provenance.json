@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37950584469",
+  "lane": "graph",
+  "github_run_id": "37950584469",
+  "execution_start_utc": "2026-10-09T16:17:48.102286+00:00",
+  "execution_end_utc": "2026-10-09T16:18:04.958703+00:00",
+  "environment": {
+    "python_version": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "stdlib_only": true,
+    "dependencies": [
+      "urllib.request",
+      "http.cookiejar",
+      "html.parser",
+      "re",
+      "ast",
+      "hashlib",
+      "json",
+      "random",
+      "statistics",
+      "time"
+    ],
+    "no_browser": true,
+    "no_js": true,
+    "no_credentials": true,
+    "no_write_verbs": true,
+    "no_model_calls": true,
+    "no_docker": true
+  },
+  "frozen_inputs_verification": {
+    "request.json": {
+      "expected": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+      "actual": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+      "match": true,
+      "when": "before"
+    },
+    "spec.json": {
+      "expected": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+      "actual": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+      "match": true,
+      "when": "before"
+    },
+    "prereg.md": {
+      "expected": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+      "actual": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+      "match": true,
+      "when": "before"
+    }
+  },
+  "source_files": [
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/path_a_htmlparser.py",
+      "sha256": "6456fdfc8270c645a88288395a568855c655588f7e3915b34e4ccda7cc797a33",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/path_b_regexlex.py",
+      "sha256": "b436c05663ad1c9880ca5c774dda930d5c80b904b473d9d412462591a458969d",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/neutral_detector.py",
+      "sha256": "2851314315ac72566b70d7222c1b16638cb490d32b655ef12b4cb7c26237eef9",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/fixtures.py",
+      "sha256": "2a4b8562533a787c34a9e630587ba326ebb55b45f8e5339bfc74d84abc36729c",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/run_experiment.py",
+      "sha256": "730130d92cc52dbb59ff91f10661a9d5587ac15fb335fcbcf1fa6332647647d6",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S1_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S2_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S3_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S4_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S1_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S2_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S3_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S4_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S1_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S2_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S3_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S4_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S1_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S2_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S3_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S4_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S1_fresh.html",
+      "sha256": "654e0783616ae95cd75c3ba6328eb139f44f098282b23533063df5a790973a47",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S2_fresh.html",
+      "sha256": "fc01fffd98cb8fa118be2e893189602da37c0e2625352496868cf1903eca4532",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S3_fresh.html",
+      "sha256": "52524c9dc59bdb018221494051b9c89eb78641768720506e5b41d06394f6cc67",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_fresh.html",
+      "sha256": "5c6fe49e3cbdebcc6c26b78018f948704abd68e0f8549a7c8b53b5a684ccf0a7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_warm1.html",
+      "sha256": "59c5e3f92fe83ca44311dc231838435558a02686245d59c534c67a4f9d8e9075",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_warm2.html",
+      "sha256": "672903cbb2cbb7c5b2cc49c34137c486ad62abe67ef42aa61eeb566738bb6bdd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S1_fresh.html",
+      "sha256": "932107193e3d3f39813d3d90878c37ff6a16011f40e3b0ccb70f9062b065cbd5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S2_fresh.html",
+      "sha256": "94f4c665c3bf4981dce1c08a4143d5dd0a84b04df0f06ba89d5891f216136cd5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S3_fresh.html",
+      "sha256": "1315aa35ff2120bb61f7deb7ac5fb77900730e53ed1eb35d1317c3f9c39b2e0e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_fresh.html",
+      "sha256": "92163af6706d3901b18e1f94a1b627cbee29ac12f6592f1eea258e5c894bc8ec",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_warm1.html",
+      "sha256": "a6a226e85977d96bcc1757b176439f4f1e7e745bcc04d91b58f99e1500c13118",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_warm2.html",
+      "sha256": "fc1d27c6e30e0fb8a42002a42eb9a83031e95380289a9947f873caa2ea6c481c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S1_fresh.html",
+      "sha256": "2cfa8a1e60fcfc7d30ddfc2ab67a84be5679315b42789d42be36ba31a364f9e5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S2_fresh.html",
+      "sha256": "bfe23d0e0b2aa6f98dffaa5593c78080acb9cc2031d1777f6dd63116b38fff13",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S3_fresh.html",
+      "sha256": "49f3e6fa4d6944b4db128ac72efe6219ff2f08960240a9f6e6156525b137896e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_fresh.html",
+      "sha256": "64bfde37c2699c695464700cd830ceabaec0a52ae0500c19e56cf2cb4a827913",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_warm1.html",
+      "sha256": "8aceb4f514ff259ef6d39977a572573dece0d9bab8f485a15b84d0975e128c0d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_warm2.html",
+      "sha256": "bc816ec0dbae60321521ebcf1f2542ee714c0bca4592d403b3b056421340a0fc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S1_fresh.html",
+      "sha256": "5ac444a745e926f03ab6e5ed22e680a9e8bef0bde9724d6dbac11ae0a9f8ca50",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S2_fresh.html",
+      "sha256": "041cd0bdac21c75f5e2a7f24e5b9cb784fc1166cf49e7817f77a1aa91603a872",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S3_fresh.html",
+      "sha256": "13808bd53b6cd09616ab138541d6fba44fb2ab07dfcd421b72ff55a24e79fd9c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_fresh.html",
+      "sha256": "57747f75986ffe3eea613da6106e294eeac91156d2321752add11b53c0621dae",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_warm1.html",
+      "sha256": "a5a6fff8b4641e65a7ace77b06a917c56482d73862bacdaade82fd3994a55fe7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_warm2.html",
+      "sha256": "2d50bc8aa385e64be78f888e795a3cee99fbf5fbf49bf57d4b507014942753fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/derived/extraction.jsonl",
+      "sha256": "cb94cbb7c7fb893b835219c55e0ab9a25384a84b862c9dcd55cbd7dd1580be8b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+      "sha256": "9885176e893d9651ed71e1470ebb5c5fc0db3cde410ff013d2dd5ffbbd215d69",
+      "role": "raw"
+    }
+  ],
+  "path_independence_attestation": {
+    "path_a_sha256": "6456fdfc8270c645a88288395a568855c655588f7e3915b34e4ccda7cc797a33",
+    "path_b_sha256": "b436c05663ad1c9880ca5c774dda930d5c80b904b473d9d412462591a458969d",
+    "source_hashes_differ": true,
+    "path_b_imports": [
+      "__future__",
+      "re"
+    ],
+    "path_b_forbidden_imports": [],
+    "path_b_imports_path_a_or_html": false,
+    "anchor_host_tokens_found_in_producer_sources": [],
+    "no_anchor_special_casing": true,
+    "perturbation_invariant": true,
+    "path_independence_pass": true
+  },
+  "request_count": 40,
+  "request_cap": 200,
+  "pacing_seconds": 2.0,
+  "seed": 36314193643,
+  "user_agent": "SPIDER-Research/2.0 (graph-lane; experiment EXP-GRAPH-37950584469; +https://spider-research.dev)",
+  "raw_records_path": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+  "written_scope_assertion": "Writes were confined to research/experiments/EXP-GRAPH-37950584469/ and research/graph/freshness_detection/exp_37950584469/.",
+  "post_run_derived_analysis": [
+    {
+      "id": "M-DIAGNOSTIC-SESSION-ISOLATION",
+      "script": "research/graph/freshness_detection/exp_37950584469/analyze_session_isolation.py",
+      "script_sha256": "31797e03f289bc775afd2df4d15aee1033734bf44ccb27fc1cfa6eba8e5063f9",
+      "output": "research/experiments/EXP-GRAPH-37950584469/derived/session_isolation_diagnostic.json",
+      "output_sha256": "adc6987dab415697562c7eebe792e9e0222ee3ca18d8df656bfe59fedcfd805c",
+      "input": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+      "command": "python3 research/graph/freshness_detection/exp_37950584469/analyze_session_isolation.py",
+      "note": "Run after the 40-request measurement transaction. Read-only over raw/records.jsonl; emits a derived diagnostic explaining the frozen GATE-C3 failure. No host contacted; no gate, metric, status, outcome or branch changed."
+    }
+  ],
+  "execution_checkpoint_pre_sha": "19b8b774c93d5c8eac387d9b3522459851ff7747"
+}
