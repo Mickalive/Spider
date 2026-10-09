@@ -1,0 +1,10 @@
+{
+  "executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+  "exists": true,
+  "frozen_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+  "playwright_pin": "1.63.0",
+  "browser_version": "153.0.8010.12",
+  "sha256_matches_frozen": true,
+  "actual_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+  "launch_ok": true
+}

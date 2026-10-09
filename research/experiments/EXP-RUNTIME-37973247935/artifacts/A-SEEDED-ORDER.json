@@ -1,0 +1,1588 @@
+{
+  "seed": 37973247935,
+  "arms": [
+    "P-OOS-WORKER",
+    "P-OOS-REPR",
+    "N-OOS-IDLE",
+    "N-OOS-REJECT",
+    "N-OOS-CACHE",
+    "PC-INSURFACE-WRITE-LIVE",
+    "M-REVERT-BYTES",
+    "M-REVERT-LOGICAL"
+  ],
+  "episodes_per_arm": {
+    "P-OOS-WORKER": 40,
+    "P-OOS-REPR": 40,
+    "N-OOS-IDLE": 40,
+    "N-OOS-REJECT": 40,
+    "N-OOS-CACHE": 40,
+    "PC-INSURFACE-WRITE-LIVE": 20,
+    "M-REVERT-BYTES": 20,
+    "M-REVERT-LOGICAL": 20
+  },
+  "total_episodes": 260,
+  "order": [
+    {
+      "order_index": 0,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 30,
+      "rng_seed": 37973247965
+    },
+    {
+      "order_index": 1,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 2,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 3,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 38,
+      "rng_seed": 37973247973
+    },
+    {
+      "order_index": 4,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 5,
+      "arm": "P-OOS-REPR",
+      "episode_id": 38,
+      "rng_seed": 37973247973
+    },
+    {
+      "order_index": 6,
+      "arm": "P-OOS-REPR",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 7,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 8,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 22,
+      "rng_seed": 37973247957
+    },
+    {
+      "order_index": 9,
+      "arm": "P-OOS-REPR",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 10,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 11,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 12,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 13,
+      "arm": "P-OOS-REPR",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 14,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 15,
+      "arm": "P-OOS-REPR",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 16,
+      "arm": "P-OOS-REPR",
+      "episode_id": 34,
+      "rng_seed": 37973247969
+    },
+    {
+      "order_index": 17,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 18,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 28,
+      "rng_seed": 37973247963
+    },
+    {
+      "order_index": 19,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 20,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 21,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 27,
+      "rng_seed": 37973247962
+    },
+    {
+      "order_index": 22,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 23,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 23,
+      "rng_seed": 37973247958
+    },
+    {
+      "order_index": 24,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 25,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 26,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 22,
+      "rng_seed": 37973247957
+    },
+    {
+      "order_index": 27,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 28,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 29,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 30,
+      "rng_seed": 37973247965
+    },
+    {
+      "order_index": 30,
+      "arm": "P-OOS-REPR",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 31,
+      "arm": "P-OOS-REPR",
+      "episode_id": 35,
+      "rng_seed": 37973247970
+    },
+    {
+      "order_index": 32,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 24,
+      "rng_seed": 37973247959
+    },
+    {
+      "order_index": 33,
+      "arm": "P-OOS-REPR",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 34,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 35,
+      "arm": "P-OOS-REPR",
+      "episode_id": 21,
+      "rng_seed": 37973247956
+    },
+    {
+      "order_index": 36,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 37,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 38,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 39,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 40,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 41,
+      "arm": "P-OOS-REPR",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 42,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 43,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 36,
+      "rng_seed": 37973247971
+    },
+    {
+      "order_index": 44,
+      "arm": "P-OOS-REPR",
+      "episode_id": 29,
+      "rng_seed": 37973247964
+    },
+    {
+      "order_index": 45,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 20,
+      "rng_seed": 37973247955
+    },
+    {
+      "order_index": 46,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 47,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 48,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 49,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 21,
+      "rng_seed": 37973247956
+    },
+    {
+      "order_index": 50,
+      "arm": "P-OOS-REPR",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 51,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 52,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 21,
+      "rng_seed": 37973247956
+    },
+    {
+      "order_index": 53,
+      "arm": "P-OOS-REPR",
+      "episode_id": 37,
+      "rng_seed": 37973247972
+    },
+    {
+      "order_index": 54,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 55,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 56,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 57,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 58,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 34,
+      "rng_seed": 37973247969
+    },
+    {
+      "order_index": 59,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 36,
+      "rng_seed": 37973247971
+    },
+    {
+      "order_index": 60,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 61,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 34,
+      "rng_seed": 37973247969
+    },
+    {
+      "order_index": 62,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 63,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 29,
+      "rng_seed": 37973247964
+    },
+    {
+      "order_index": 64,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 25,
+      "rng_seed": 37973247960
+    },
+    {
+      "order_index": 65,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 20,
+      "rng_seed": 37973247955
+    },
+    {
+      "order_index": 66,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 28,
+      "rng_seed": 37973247963
+    },
+    {
+      "order_index": 67,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 68,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 30,
+      "rng_seed": 37973247965
+    },
+    {
+      "order_index": 69,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 21,
+      "rng_seed": 37973247956
+    },
+    {
+      "order_index": 70,
+      "arm": "P-OOS-REPR",
+      "episode_id": 26,
+      "rng_seed": 37973247961
+    },
+    {
+      "order_index": 71,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 34,
+      "rng_seed": 37973247969
+    },
+    {
+      "order_index": 72,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 30,
+      "rng_seed": 37973247965
+    },
+    {
+      "order_index": 73,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 74,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 22,
+      "rng_seed": 37973247957
+    },
+    {
+      "order_index": 75,
+      "arm": "P-OOS-REPR",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 76,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 77,
+      "arm": "P-OOS-REPR",
+      "episode_id": 36,
+      "rng_seed": 37973247971
+    },
+    {
+      "order_index": 78,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 26,
+      "rng_seed": 37973247961
+    },
+    {
+      "order_index": 79,
+      "arm": "P-OOS-REPR",
+      "episode_id": 27,
+      "rng_seed": 37973247962
+    },
+    {
+      "order_index": 80,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 21,
+      "rng_seed": 37973247956
+    },
+    {
+      "order_index": 81,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 39,
+      "rng_seed": 37973247974
+    },
+    {
+      "order_index": 82,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 83,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 84,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 33,
+      "rng_seed": 37973247968
+    },
+    {
+      "order_index": 85,
+      "arm": "P-OOS-REPR",
+      "episode_id": 24,
+      "rng_seed": 37973247959
+    },
+    {
+      "order_index": 86,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 37,
+      "rng_seed": 37973247972
+    },
+    {
+      "order_index": 87,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 39,
+      "rng_seed": 37973247974
+    },
+    {
+      "order_index": 88,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 89,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 90,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 91,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 92,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 93,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 94,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 95,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 96,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 25,
+      "rng_seed": 37973247960
+    },
+    {
+      "order_index": 97,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 26,
+      "rng_seed": 37973247961
+    },
+    {
+      "order_index": 98,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 35,
+      "rng_seed": 37973247970
+    },
+    {
+      "order_index": 99,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 31,
+      "rng_seed": 37973247966
+    },
+    {
+      "order_index": 100,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 22,
+      "rng_seed": 37973247957
+    },
+    {
+      "order_index": 101,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 33,
+      "rng_seed": 37973247968
+    },
+    {
+      "order_index": 102,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 34,
+      "rng_seed": 37973247969
+    },
+    {
+      "order_index": 103,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 32,
+      "rng_seed": 37973247967
+    },
+    {
+      "order_index": 104,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 105,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 106,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 107,
+      "arm": "P-OOS-REPR",
+      "episode_id": 39,
+      "rng_seed": 37973247974
+    },
+    {
+      "order_index": 108,
+      "arm": "P-OOS-REPR",
+      "episode_id": 30,
+      "rng_seed": 37973247965
+    },
+    {
+      "order_index": 109,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 110,
+      "arm": "P-OOS-REPR",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 111,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 37,
+      "rng_seed": 37973247972
+    },
+    {
+      "order_index": 112,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 29,
+      "rng_seed": 37973247964
+    },
+    {
+      "order_index": 113,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 27,
+      "rng_seed": 37973247962
+    },
+    {
+      "order_index": 114,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 115,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 116,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 32,
+      "rng_seed": 37973247967
+    },
+    {
+      "order_index": 117,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 26,
+      "rng_seed": 37973247961
+    },
+    {
+      "order_index": 118,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 119,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 120,
+      "arm": "P-OOS-REPR",
+      "episode_id": 28,
+      "rng_seed": 37973247963
+    },
+    {
+      "order_index": 121,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 122,
+      "arm": "P-OOS-REPR",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 123,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 24,
+      "rng_seed": 37973247959
+    },
+    {
+      "order_index": 124,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 125,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 37,
+      "rng_seed": 37973247972
+    },
+    {
+      "order_index": 126,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 25,
+      "rng_seed": 37973247960
+    },
+    {
+      "order_index": 127,
+      "arm": "P-OOS-REPR",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 128,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 129,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 130,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 131,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 36,
+      "rng_seed": 37973247971
+    },
+    {
+      "order_index": 132,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 133,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 134,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 135,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 136,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 137,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 138,
+      "arm": "P-OOS-REPR",
+      "episode_id": 20,
+      "rng_seed": 37973247955
+    },
+    {
+      "order_index": 139,
+      "arm": "P-OOS-REPR",
+      "episode_id": 23,
+      "rng_seed": 37973247958
+    },
+    {
+      "order_index": 140,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 23,
+      "rng_seed": 37973247958
+    },
+    {
+      "order_index": 141,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 142,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 143,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 28,
+      "rng_seed": 37973247963
+    },
+    {
+      "order_index": 144,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 31,
+      "rng_seed": 37973247966
+    },
+    {
+      "order_index": 145,
+      "arm": "P-OOS-REPR",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 146,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 20,
+      "rng_seed": 37973247955
+    },
+    {
+      "order_index": 147,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 148,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 149,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 27,
+      "rng_seed": 37973247962
+    },
+    {
+      "order_index": 150,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 26,
+      "rng_seed": 37973247961
+    },
+    {
+      "order_index": 151,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 29,
+      "rng_seed": 37973247964
+    },
+    {
+      "order_index": 152,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 153,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 154,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 35,
+      "rng_seed": 37973247970
+    },
+    {
+      "order_index": 155,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 23,
+      "rng_seed": 37973247958
+    },
+    {
+      "order_index": 156,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 157,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 4,
+      "rng_seed": 37973247939
+    },
+    {
+      "order_index": 158,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 159,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 11,
+      "rng_seed": 37973247946
+    },
+    {
+      "order_index": 160,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 161,
+      "arm": "P-OOS-REPR",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 162,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 36,
+      "rng_seed": 37973247971
+    },
+    {
+      "order_index": 163,
+      "arm": "P-OOS-REPR",
+      "episode_id": 25,
+      "rng_seed": 37973247960
+    },
+    {
+      "order_index": 164,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 165,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 166,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 167,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 20,
+      "rng_seed": 37973247955
+    },
+    {
+      "order_index": 168,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 169,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 170,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 38,
+      "rng_seed": 37973247973
+    },
+    {
+      "order_index": 171,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 38,
+      "rng_seed": 37973247973
+    },
+    {
+      "order_index": 172,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 31,
+      "rng_seed": 37973247966
+    },
+    {
+      "order_index": 173,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 174,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 175,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 176,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 9,
+      "rng_seed": 37973247944
+    },
+    {
+      "order_index": 177,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 178,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 179,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 180,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 181,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 182,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 183,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 184,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 31,
+      "rng_seed": 37973247966
+    },
+    {
+      "order_index": 185,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 33,
+      "rng_seed": 37973247968
+    },
+    {
+      "order_index": 186,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 187,
+      "arm": "P-OOS-REPR",
+      "episode_id": 31,
+      "rng_seed": 37973247966
+    },
+    {
+      "order_index": 188,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 189,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 190,
+      "arm": "P-OOS-REPR",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 191,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 192,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 193,
+      "arm": "P-OOS-REPR",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 194,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 195,
+      "arm": "P-OOS-REPR",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 196,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 197,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 32,
+      "rng_seed": 37973247967
+    },
+    {
+      "order_index": 198,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 39,
+      "rng_seed": 37973247974
+    },
+    {
+      "order_index": 199,
+      "arm": "P-OOS-REPR",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 200,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 201,
+      "arm": "P-OOS-REPR",
+      "episode_id": 19,
+      "rng_seed": 37973247954
+    },
+    {
+      "order_index": 202,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 203,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 204,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 35,
+      "rng_seed": 37973247970
+    },
+    {
+      "order_index": 205,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 206,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 207,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 37,
+      "rng_seed": 37973247972
+    },
+    {
+      "order_index": 208,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 209,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 210,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 211,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 23,
+      "rng_seed": 37973247958
+    },
+    {
+      "order_index": 212,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 213,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 214,
+      "arm": "P-OOS-REPR",
+      "episode_id": 22,
+      "rng_seed": 37973247957
+    },
+    {
+      "order_index": 215,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 25,
+      "rng_seed": 37973247960
+    },
+    {
+      "order_index": 216,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 32,
+      "rng_seed": 37973247967
+    },
+    {
+      "order_index": 217,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 24,
+      "rng_seed": 37973247959
+    },
+    {
+      "order_index": 218,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 219,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 220,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 221,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 222,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 223,
+      "arm": "P-OOS-REPR",
+      "episode_id": 32,
+      "rng_seed": 37973247967
+    },
+    {
+      "order_index": 224,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 225,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 12,
+      "rng_seed": 37973247947
+    },
+    {
+      "order_index": 226,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 18,
+      "rng_seed": 37973247953
+    },
+    {
+      "order_index": 227,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 17,
+      "rng_seed": 37973247952
+    },
+    {
+      "order_index": 228,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 229,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 230,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 16,
+      "rng_seed": 37973247951
+    },
+    {
+      "order_index": 231,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 232,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 27,
+      "rng_seed": 37973247962
+    },
+    {
+      "order_index": 233,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 29,
+      "rng_seed": 37973247964
+    },
+    {
+      "order_index": 234,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 28,
+      "rng_seed": 37973247963
+    },
+    {
+      "order_index": 235,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 0,
+      "rng_seed": 37973247935
+    },
+    {
+      "order_index": 236,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 237,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 13,
+      "rng_seed": 37973247948
+    },
+    {
+      "order_index": 238,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 239,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 39,
+      "rng_seed": 37973247974
+    },
+    {
+      "order_index": 240,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 241,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 15,
+      "rng_seed": 37973247950
+    },
+    {
+      "order_index": 242,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 14,
+      "rng_seed": 37973247949
+    },
+    {
+      "order_index": 243,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 38,
+      "rng_seed": 37973247973
+    },
+    {
+      "order_index": 244,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 245,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 10,
+      "rng_seed": 37973247945
+    },
+    {
+      "order_index": 246,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 33,
+      "rng_seed": 37973247968
+    },
+    {
+      "order_index": 247,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 3,
+      "rng_seed": 37973247938
+    },
+    {
+      "order_index": 248,
+      "arm": "P-OOS-REPR",
+      "episode_id": 5,
+      "rng_seed": 37973247940
+    },
+    {
+      "order_index": 249,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 250,
+      "arm": "M-REVERT-BYTES",
+      "episode_id": 6,
+      "rng_seed": 37973247941
+    },
+    {
+      "order_index": 251,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 252,
+      "arm": "P-OOS-REPR",
+      "episode_id": 33,
+      "rng_seed": 37973247968
+    },
+    {
+      "order_index": 253,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 2,
+      "rng_seed": 37973247937
+    },
+    {
+      "order_index": 254,
+      "arm": "P-OOS-WORKER",
+      "episode_id": 7,
+      "rng_seed": 37973247942
+    },
+    {
+      "order_index": 255,
+      "arm": "N-OOS-CACHE",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 256,
+      "arm": "M-REVERT-LOGICAL",
+      "episode_id": 8,
+      "rng_seed": 37973247943
+    },
+    {
+      "order_index": 257,
+      "arm": "PC-INSURFACE-WRITE-LIVE",
+      "episode_id": 1,
+      "rng_seed": 37973247936
+    },
+    {
+      "order_index": 258,
+      "arm": "N-OOS-REJECT",
+      "episode_id": 24,
+      "rng_seed": 37973247959
+    },
+    {
+      "order_index": 259,
+      "arm": "N-OOS-IDLE",
+      "episode_id": 35,
+      "rng_seed": 37973247970
+    }
+  ],
+  "archived_at": "2026-10-09T21:40:16.089782+00:00",
+  "note": "raw order archived before any scoring (prereg 18); per-episode RNG seed = master_seed + episode_id"
+}

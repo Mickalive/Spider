@@ -1,0 +1,2216 @@
+{
+  "n_total": 240,
+  "n_non304": 240,
+  "n_missing_worker_on_200": 0,
+  "per_ep_non304": {
+    "/api/profile": 120,
+    "/api/data_list": 120
+  },
+  "distinct_x_worker_pid_on_200": [
+    "42762",
+    "42764"
+  ],
+  "n_distinct_x_worker_pid": 2,
+  "per_uri_stickiness": {
+    "/api/profile?uid=0": 1.0,
+    "/api/data_list?uid=1": 1.0,
+    "/api/profile?uid=2": 1.0,
+    "/api/data_list?uid=3": 1.0,
+    "/api/profile?uid=4": 1.0,
+    "/api/data_list?uid=5": 1.0,
+    "/api/profile?uid=6": 1.0,
+    "/api/data_list?uid=7": 1.0,
+    "/api/profile?uid=8": 1.0,
+    "/api/data_list?uid=9": 1.0,
+    "/api/profile?uid=10": 1.0,
+    "/api/data_list?uid=11": 1.0
+  },
+  "min_per_uri_stickiness": 1.0,
+  "n_distinct_uris": 12,
+  "floors": {
+    "n_non304>=200": true,
+    "per_ep_non304>=100": true,
+    "distinct_x_worker_pid>=2": true,
+    "per_uri_stickiness>=0.90_over_>10_uris": true,
+    "no_missing_worker_header_on_200": true
+  },
+  "raw_records": [
+    {
+      "attempt": 0,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 1,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 2,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 3,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 4,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 5,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 6,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 7,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 8,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 9,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 10,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 11,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 12,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 13,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 14,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 15,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 16,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 17,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 18,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 19,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 20,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 21,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 22,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 23,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 24,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 25,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 26,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 27,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 28,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 29,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 30,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 31,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 32,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 33,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 34,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 35,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 36,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 37,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 38,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 39,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 40,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 41,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 42,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 43,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 44,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 45,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 46,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 47,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 48,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 49,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 50,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 51,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 52,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 53,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 54,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 55,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 56,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 57,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 58,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 59,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 60,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 61,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 62,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 63,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 64,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 65,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 66,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 67,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 68,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 69,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 70,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 71,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 72,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 73,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 74,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 75,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 76,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 77,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 78,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 79,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 80,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 81,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 82,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 83,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 84,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 85,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 86,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 87,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 88,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 89,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 90,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 91,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 92,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 93,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 94,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 95,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 96,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 97,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 98,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 99,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 100,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 101,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 102,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 103,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 104,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 105,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 106,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 107,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 108,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 109,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 110,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 111,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 112,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 113,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 114,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 115,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 116,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 117,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 118,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 119,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 120,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 121,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 122,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 123,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 124,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 125,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 126,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 127,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 128,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 129,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 130,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 131,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 132,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 133,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 134,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 135,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 136,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 137,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 138,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 139,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 140,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 141,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 142,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 143,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 144,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 145,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 146,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 147,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 148,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 149,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 150,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 151,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 152,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 153,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 154,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 155,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 156,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 157,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 158,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 159,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 160,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 161,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 162,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 163,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 164,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 165,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 166,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 167,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 168,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 169,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 170,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 171,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 172,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 173,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 174,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 175,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 176,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 177,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 178,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 179,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 180,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 181,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 182,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 183,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 184,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 185,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 186,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 187,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 188,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 189,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 190,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 191,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 192,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 193,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 194,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 195,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 196,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 197,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 198,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 199,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 200,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 201,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 202,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 203,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 204,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 205,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 206,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 207,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 208,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 209,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 210,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 211,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 212,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 213,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 214,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 215,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 216,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 217,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 218,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 219,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 220,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 221,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 222,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 223,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 224,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 225,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 226,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 227,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 228,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=0",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 229,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=1",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "C"
+    },
+    {
+      "attempt": 230,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=2",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 231,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=3",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "D"
+    },
+    {
+      "attempt": 232,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=4",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 233,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=5",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 234,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=6",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 235,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=7",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 236,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=8",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "A"
+    },
+    {
+      "attempt": 237,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=9",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 238,
+      "endpoint": "/api/profile",
+      "uri": "/api/profile?uid=10",
+      "status": 200,
+      "worker": "42764",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    },
+    {
+      "attempt": 239,
+      "endpoint": "/api/data_list",
+      "uri": "/api/data_list?uid=11",
+      "status": 200,
+      "worker": "42762",
+      "x_cache": "BYPASS",
+      "body_state": "B"
+    }
+  ],
+  "pass": true,
+  "cache_corroboration": {
+    "executed": true,
+    "observations": [
+      {
+        "leg": 1,
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      {
+        "leg": 2,
+        "status": 200,
+        "x_cache": "HIT"
+      }
+    ],
+    "miss_then_hit": true
+  }
+}

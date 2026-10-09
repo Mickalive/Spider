@@ -1,0 +1,97 @@
+{
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "discipline": "throwaway DB copies / throwaway cache key; oracle_scorer never invoked on real episodes during preflight",
+  "checks": [
+    {
+      "id": "CL-OOS-WORKER-COMMIT-PROBE",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "vector_changed": true,
+        "logical_before": {
+          "marker": "pre_marker",
+          "representation": "pre_repr",
+          "revision": 0,
+          "updated_at": 0.0
+        },
+        "logical_after": {
+          "marker": "cl_commit_probe",
+          "representation": "pre_repr",
+          "revision": 1,
+          "updated_at": 1791582015.1773117
+        }
+      }
+    },
+    {
+      "id": "CL-OOS-WORKER-COMMIT-REPR",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "vector_changed": true,
+        "body_before": {
+          "variant": "A",
+          "content": "{\"data\": \"hello\", \"version\": 1}"
+        },
+        "body_after": {
+          "variant": "B",
+          "content": "{\"data\": \"hello!\", \"version\": 2}"
+        }
+      }
+    },
+    {
+      "id": "CL-OOS-WORKER-IDLE",
+      "pass": true,
+      "detail": {
+        "vector_identical": true,
+        "committed": false,
+        "exception": null
+      }
+    },
+    {
+      "id": "CL-OOS-WORKER-REJECT",
+      "pass": true,
+      "detail": {
+        "vector_identical": true,
+        "committed": false,
+        "exception": "IntegrityError: CHECK constraint failed: id=1"
+      }
+    },
+    {
+      "id": "CL-REVERT-FIDELITY",
+      "pass": true,
+      "detail": {
+        "write_committed": true,
+        "mid_changed": true,
+        "restored_identical": true
+      }
+    },
+    {
+      "id": "CL-CACHE-MISS-HIT",
+      "pass": true,
+      "detail": {
+        "legs": [
+          {
+            "status": 200,
+            "x_cache": "MISS"
+          },
+          {
+            "status": 200,
+            "x_cache": "HIT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "CL-INSURFACE-LIVE",
+      "pass": true,
+      "detail": {
+        "structural": true,
+        "in_surface_write_status": 200,
+        "marker_after": "cl_insurface_live"
+      }
+    }
+  ],
+  "all_pass": true,
+  "generated_at": "2026-10-09T21:40:15.213261+00:00",
+  "readiness_pass": true
+}

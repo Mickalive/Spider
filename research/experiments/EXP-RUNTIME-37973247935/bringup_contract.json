@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "contract_id": "C-BRINGUP-CONTRACT-EXP-RUNTIME-37973247935",
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "lane": "runtime",
+  "run_id": "37973247935",
+  "base_sha": "7d87e40d51710c47f6fde0464a6834cb27056c3b",
+  "frozen_at": "2026-10-09T18:54:10.530674+00:00",
+  "substrate": {
+    "upstreams": ["127.0.0.1:19860", "127.0.0.1:19861"],
+    "gunicorn": {
+      "version": "23.0.0",
+      "workers_per_upstream": 1,
+      "wsgi_app": "research.runtime.intervention_surface:create_app",
+      "wsgi_shim": "/tmp/wsgi.py"
+    },
+    "nginx": {
+      "version": "1.24.0",
+      "listen": "127.0.0.1:19851",
+      "config_path": "/tmp/single.db.nginx.conf",
+      "upstream_hash": "hash $request_uri consistent",
+      "proxy_cache": true,
+      "cache_path": "/tmp/single.db.cache",
+      "temp_path": "/tmp/single.db.temp",
+      "authorization_bypass": "proxy_no_cache $http_authorization; proxy_cache_bypass $http_authorization;",
+      "worker_header": "X-Worker-Pid"
+    },
+    "database": {
+      "path": "/tmp/single.db",
+      "journal_mode": "WAL",
+      "wal_autocheckpoint": 0,
+      "gating_derived_files": ["/tmp/single.db-wal"],
+      "diagnostic_only_files": ["/tmp/single.db-shm"],
+      "schema": {
+        "sessions": "CREATE TABLE IF NOT EXISTS sessions (id INTEGER PRIMARY KEY, sid TEXT UNIQUE, username TEXT, valid INTEGER DEFAULT 1, created_at REAL)",
+        "runtime_probe": "CREATE TABLE IF NOT EXISTS runtime_probe (id INTEGER PRIMARY KEY CHECK(id=1), marker TEXT NOT NULL, representation TEXT NOT NULL, revision INTEGER NOT NULL, updated_at REAL NOT NULL)",
+        "body_config": "CREATE TABLE IF NOT EXISTS body_config (id INTEGER PRIMARY KEY CHECK(id=1), variant TEXT, content TEXT)"
+      }
+    },
+    "run_lock": "/tmp/spider-runtime-EXP-RUNTIME-37973247935.lock"
+  },
+  "browser": {
+    "playwright": "1.63.0",
+    "chromium_executable": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "chromium_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+    "chromium_version": "153.0.8010.12",
+    "viewport": {"width": 1280, "height": 720},
+    "api": "public Playwright sync API: sync_playwright().start().chromium.executable_path + p.chromium.launch(executable_path=...); no playwright._impl or private helper",
+    "capture": "CDP DOM.getDocument(depth=-1, pierce=True) + Accessibility.getFullAXTree",
+    "write_mechanism": "real button click via page.click('button[data-testid=\"write-btn\"]') only (liveness control); out-of-surface arms mutate via research/runtime/oos_worker.py directly"
+  },
+  "health_checks": {
+    "nginx_health": "GET http://127.0.0.1:19851/health -> 200 + X-Worker-Pid present",
+    "origin_health": [
+      "GET http://127.0.0.1:19860/health -> 200 + X-Worker-Pid",
+      "GET http://127.0.0.1:19861/health -> 200 + X-Worker-Pid"
+    ],
+    "readiness_certificate": "artifacts/A-READINESS-CERTIFICATE.json",
+    "proxy_cache": "two GETs on one cacheable key through exclusive nginx -> MISS then HIT"
+  },
+  "floors": {
+    "n_non304_min": 200,
+    "n_non304_per_endpoint_min": 100,
+    "distinct_x_worker_pid_min": 2,
+    "per_uri_stickiness_min": 0.90,
+    "per_uri_stickiness_min_uris": 10,
+    "missing_worker_header_on_200_max": 0
+  },
+  "required_scopes": {
+    "CAP-CHROMIUM-LAUNCH": {
+      "required": ["CAP-PYTHON-DEPENDENCIES", "CAP-CHROMIUM-LAUNCH"],
+      "advisory": ["CAP-BROWSERGYM-IMPORT", "CAP-AGENTLAB-IMPORT"]
+    },
+    "CAP-WAL-SUBSTRATE": {
+      "required": [
+        "CAP-PYTHON-DEPENDENCIES",
+        "CAP-DISTRIBUTED-SUBSTRATE",
+        "CAP-WAL-SCHEMA",
+        "CAP-HEALTH-GATE",
+        "CAP-N-NON304-FLOOR",
+        "CAP-X-WORKER-PID-FLOOR"
+      ],
+      "advisory": [
+        "CAP-POLICY-MODEL-CREDENTIAL",
+        "CAP-HF-REACHABILITY",
+        "CAP-GHCR-REACHABILITY"
+      ]
+    },
+    "CAP-NGINX-PROXY": {
+      "required": ["CAP-DISTRIBUTED-SUBSTRATE", "CAP-HEALTH-GATE", "CAP-NGINX-CACHE-MISS-HIT"],
+      "advisory": ["CAP-HF-REACHABILITY", "CAP-GHCR-REACHABILITY"]
+    }
+  },
+  "probe_discipline": {
+    "python_dependencies": "isolated subprocess with sys.executable, import check, short timeout",
+    "browsergym_agentlab": "isolated import check; never a synthetic success",
+    "policy_model_credential": "environment-key presence booleans only; never token values",
+    "hf_ghcr": "bounded read-only HTTP reachability with explicit timeout, status code and latency; no model download",
+    "chromium_launch": "public Playwright API probe (sync_playwright().start().chromium.executable_path preferred; public p.chromium.launch() equivalent); no playwright._impl or private helper",
+    "distributed_health": "two-worker readiness certificate",
+    "fail_closed": "a timeout, import exception, missing executable or non-2xx reachability result is UNAVAILABLE/ERROR with evidence, never silently upgraded to AVAILABLE"
+  },
+  "idempotence": "the command acquires the run lock, refuses to kill unrelated processes, replace a foreign config or overwrite a foreign lock, and returns non-zero for a failed required scope",
+  "one_command": "python -m research.runtime.bringup --config research/experiments/EXP-RUNTIME-37973247935/bringup_contract.json --ledger research/experiments/EXP-RUNTIME-37973247935/artifacts/capability_ledger.json"
+}
