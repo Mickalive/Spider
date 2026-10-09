@@ -30,7 +30,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: spider-r2-factory-pulse
+  group: spider-r2-factory-pulse-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
@@ -165,6 +165,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          # A direction cycle is authoritative only for the main commit it
+          # started from. Newer main commits may run concurrently; stale cycles
+          # are forbidden from dispatching work.
+          git fetch -q origin main
+          CURRENT_MAIN=$(git rev-parse origin/main)
+          if [[ "$CURRENT_MAIN" != "$GITHUB_SHA" ]]; then
+            echo "SPIDER_STALE_DIRECTION_SKIP run_sha=$GITHUB_SHA current_main=$CURRENT_MAIN"
+            exit 0
+          fi
 
           CONTROL_REV=$(python scripts/control_plane.py revision --root .)
           LANES=(graph physics runtime product intel frontier)
