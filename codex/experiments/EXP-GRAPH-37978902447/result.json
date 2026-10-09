@@ -1,0 +1,1382 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37978902447",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "branch": "EXTRACTION-DEFECT-CONFIRMED",
+  "gate_b_branch": "DATA-INSUFFICIENT-D1V-DEGENERATE",
+  "claim_ids": [
+    "C-FRESHNESS"
+  ],
+  "metrics": {
+    "M-CERT-ROUTE-OK": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-BODY-VARIABLE": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-FIELD-PRESENT": {
+      "value": 3,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-SESSION-ISOLATION-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-CERT-FIRST-REQUEST-COOKIELESS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-CERT-SESSION-IDENTIFYING-DISJOINT": {
+      "value": false,
+      "unit": "boolean"
+    },
+    "M-CERT-PAIRWISE-DISJOINT-AFTER-FILTER": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-CERT-SESSION-ISOLATION-DISJUNCTIVE-BRANCH": {
+      "value": {
+        "value_after_filter_branch_true": true,
+        "name_disjointness_branch_true": false
+      },
+      "unit": "boolean-pair",
+      "note": "diagnostic recording which audit branch is satisfiable; only the value_after_filter branch gates GATE-C3"
+    },
+    "M-CERT-CONSTCONFIG-SHARED-NAMES": {
+      "value": {
+        "CAL-POS-1": [
+          "preferred_language"
+        ],
+        "CAL-POS-2": [
+          "GeoIP",
+          "NetworkProbeLimit",
+          "WMF-Last-Access"
+        ],
+        "CAL-POS-3": [
+          "CentralAuthAnonTopLevel",
+          "GeoIP",
+          "NetworkProbeLimit",
+          "WMF-Last-Access",
+          "WMF-Last-Access-Global"
+        ],
+        "CAL-POS-4": [],
+        "CAL-NEG-1": [],
+        "CAL-NEG-2": [],
+        "CAL-NEG-3": [],
+        "CAL-NEG-4": []
+      },
+      "unit": "map"
+    },
+    "M-CERT-UNEXPECTED-SHARED-NAMES": {
+      "value": {
+        "CAL-POS-1": [
+          "_gitlab_session"
+        ],
+        "CAL-POS-2": [
+          "WMF-Uniq",
+          "authSession"
+        ],
+        "CAL-POS-3": [
+          "WMF-Uniq",
+          "authSession",
+          "enwikiSession"
+        ],
+        "CAL-POS-4": [],
+        "CAL-NEG-1": [],
+        "CAL-NEG-2": [],
+        "CAL-NEG-3": [],
+        "CAL-NEG-4": []
+      },
+      "unit": "map"
+    },
+    "M-CERT-NEG-VALUES-A": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-CERT-NEG-VALUES-B": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-EXTRACT-AGREE-VALUESET": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-EXTRACT-AGREE-VERDICT": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-EXTRACT-KAPPA": {
+      "value": null,
+      "unit": "dimensionless"
+    },
+    "M-CANARY-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-CANARY-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-EMPTY-AGREE": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-JSSTRING-VALUES": {
+      "value": 0,
+      "unit": "count (must be 0)"
+    },
+    "M-GUARD-FIXTURE-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-N-SESSION-SCOPED-CONFIRMED": {
+      "value": 3,
+      "unit": "anchors (0..4)"
+    },
+    "M-N-REPRESENTATION-LOSS": {
+      "value": 1,
+      "unit": "anchors (0..4)"
+    },
+    "M-N-EXTRACTION-UNRELIABLE": {
+      "value": 0,
+      "unit": "anchors (0..4)"
+    },
+    "M-N-AGSI-INSTANCES": {
+      "value": 8,
+      "unit": "count"
+    },
+    "M-N-AGSI-EXCLUDED-UNSTABLE": {
+      "value": 0,
+      "unit": "keys",
+      "path_A_excluded": [],
+      "path_B_excluded": []
+    },
+    "M-INVISIBLE-STALE-PREV": {
+      "value": null,
+      "unit": "fraction",
+      "reason_not_measured": "SB-04: the behaviourally invisible stale cell is not measured by this packet; null, never 0.0."
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-1": {
+      "value": 16,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-1": {
+      "value": 16,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-1": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-2": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-2": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-2": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-3": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-3": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-3": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-4": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-4": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-4": {
+      "value": [
+        "NO_FIELD",
+        "NO_FIELD"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-WARMJAR-VARIATION-RATE": {
+      "value": {
+        "CAL-POS-1": 1.0,
+        "CAL-POS-2": 1.0,
+        "CAL-POS-3": 1.0,
+        "CAL-POS-4": 0.0
+      },
+      "unit": "map (fraction per anchor)"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE": {
+      "value": {
+        "CAL-POS-1": 1.0,
+        "CAL-POS-2": 1.0,
+        "CAL-POS-3": 1.0,
+        "CAL-POS-4": 1.0
+      },
+      "unit": "map (fraction per anchor)"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE": {
+      "value": {
+        "CAL-POS-1": 1.0,
+        "CAL-POS-2": 1.0,
+        "CAL-POS-3": 1.0,
+        "CAL-POS-4": 0.0
+      },
+      "unit": "map (fraction per anchor)"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ROTATION-TIMESCALE-CAL-POS-1": {
+      "value": "PER_REQUEST_SCALE",
+      "unit": "enum"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ROTATION-TIMESCALE-CAL-POS-2": {
+      "value": "PER_REQUEST_SCALE",
+      "unit": "enum"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ROTATION-TIMESCALE-CAL-POS-3": {
+      "value": "PER_REQUEST_SCALE",
+      "unit": "enum"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-4": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-ROTATION-TIMESCALE-CAL-POS-4": {
+      "value": "NO_ROTATION",
+      "unit": "enum"
+    },
+    "M-D1V-BLOCKER-CAL-POS-1": {
+      "value": "BODY_DERIVED_ETAG",
+      "unit": "enum",
+      "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+    },
+    "M-TRANSPORT-BODY-DERIVATION-CAL-POS-1": {
+      "value": true,
+      "unit": "boolean|not_applicable",
+      "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+    },
+    "M-D1V-BLOCKER-CAL-POS-2": {
+      "value": "NONE",
+      "unit": "enum",
+      "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+    },
+    "M-TRANSPORT-BODY-DERIVATION-CAL-POS-2": {
+      "value": "not_applicable",
+      "unit": "boolean|not_applicable",
+      "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+    },
+    "M-D1V-BLOCKER-CAL-POS-3": {
+      "value": "TOKEN_BEARING_FINAL_URL",
+      "unit": "enum",
+      "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+    },
+    "M-TRANSPORT-BODY-DERIVATION-CAL-POS-3": {
+      "value": "not_applicable",
+      "unit": "boolean|not_applicable",
+      "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+    },
+    "M-D1V-BLOCKER-CAL-POS-4": {
+      "value": "NO_FIELD",
+      "unit": "enum",
+      "note": "diagnostic only; does not feed GATE-B. Enum: NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE"
+    },
+    "M-TRANSPORT-BODY-DERIVATION-CAL-POS-4": {
+      "value": "not_applicable",
+      "unit": "boolean|not_applicable",
+      "note": "diagnostic only; whether a changed transport component is a deterministic function of the response body"
+    },
+    "M-N-TRIALS": {
+      "value": 48,
+      "unit": "trials"
+    },
+    "M-N-FRESH": {
+      "value": 12,
+      "unit": "trials"
+    },
+    "M-N-D1V": {
+      "value": 6,
+      "unit": "trials"
+    },
+    "M-N-D1V-ANCHORS": {
+      "value": 1,
+      "unit": "anchors"
+    },
+    "M-N-D1V-BASE-ADEQUATE": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": {
+      "value": false,
+      "unit": "boolean"
+    },
+    "M-N-STRUCT-DRIFT": {
+      "value": 16,
+      "unit": "trials"
+    },
+    "M-N-ENDPOINT-DRIFT": {
+      "value": 12,
+      "unit": "trials"
+    },
+    "M-N-TRANSPORT-DRIFT": {
+      "value": 36,
+      "unit": "trials"
+    },
+    "M-N-POSTCOND-DRIFT": {
+      "value": 0,
+      "unit": "trials"
+    },
+    "M-FA-INCUMBENT-D1V": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-FA-INCUMBENT-D1V-UB97": {
+      "value": null,
+      "unit": "fraction"
+    },
+    "M-FA-VALUEAWARE-D1V": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-FA-VALUEAWARE-D1V-UB97": {
+      "value": null,
+      "unit": "fraction"
+    },
+    "M-PAIRED-FA-DIFF-D1V": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-PAIRED-FA-DIFF-D1V-LOW": {
+      "value": null,
+      "unit": "fraction"
+    },
+    "M-PAIRED-FA-DIFF-D1V-UB97": {
+      "value": null,
+      "unit": "fraction"
+    },
+    "M-FA-INCUMBENT-ALL": {
+      "value": 0.16666666666666666,
+      "unit": "fraction"
+    },
+    "M-FA-VALUEAWARE-ALL": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-FR-INCUMBENT-FRESH": {
+      "value": 0.5,
+      "unit": "fraction"
+    },
+    "M-FR-VALUEAWARE-FRESH": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-N-DECISIONS-D1V": {
+      "value": 2,
+      "unit": "count"
+    },
+    "M-DIAGNOSTIC-UNCLUSTERED-FA-INCUMBENT-D1V": {
+      "value": [
+        0.609657,
+        1.0
+      ],
+      "unit": "fraction CI",
+      "do_not_use": true,
+      "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+    },
+    "M-DIAGNOSTIC-UNCLUSTERED-FA-VALUEAWARE-D1V": {
+      "value": [
+        0.0,
+        0.390343
+      ],
+      "unit": "fraction CI",
+      "do_not_use": true,
+      "reason": "trial-level unclustered interval; V12 forbids using it for any gate"
+    }
+  },
+  "controls": {
+    "GATE-C1": {
+      "expected": "M-CERT-ROUTE-OK>=3 and M-CERT-FIELD-PRESENT>=3",
+      "observed": {
+        "route_ok": true
+      },
+      "result": "PASS"
+    },
+    "GATE-C2": {
+      "expected": "M-CERT-NEG-VALUES-A==0 and M-CERT-NEG-VALUES-B==0",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-C3": {
+      "expected": "corrected predicate: first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter (SOLE disjointness check; session_identifying_disjoint non-gating) AND NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS",
+      "observed": {
+        "isolation_pass": true,
+        "not_vacuous": true,
+        "session_identifying_disjoint_is_gating": false
+      },
+      "result": "PASS"
+    },
+    "GATE-C4": {
+      "expected": "M-CERT-BODY-VARIABLE>=3 (non-blocking disclosure)",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-E1": {
+      "expected": "M-CANARY-PASS==true",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-E2": {
+      "expected": "fixtures + NC-PATH-INDEPENDENCE + NC-TRIAL-CONSTRUCTION-STABILITY",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-E3": {
+      "expected": "M-EXTRACT-AGREE-VALUESET>=3 and M-EXTRACT-AGREE-VERDICT>=3",
+      "observed": {
+        "valueset": 4,
+        "verdict": 4
+      },
+      "result": "PASS"
+    },
+    "GATE-B": {
+      "expected": "Part II read only if D1; anchored bound non-degenerate iff M-N-D1V-ANCHORS>=2; INCUMBENT-BLIND-CONFIRMED iff diff>=0.10 and anchor-clustered LB>0",
+      "observed": {
+        "branch": "DATA-INSUFFICIENT-D1V-DEGENERATE",
+        "M-N-D1V-ANCHORS": 1,
+        "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": false,
+        "anchors_with_d1v": [
+          "CAL-POS-2"
+        ]
+      },
+      "result": "DATA-INSUFFICIENT-D1V-DEGENERATE"
+    },
+    "B-SINGLE-PATH-A": {
+      "expected_behavior": "P-EXTRACT-A alone cannot self-certify",
+      "observed": {
+        "CAL-POS-1": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-2": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-3": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-4": "NO_FIELD"
+      },
+      "result": "OBSERVED"
+    },
+    "B-SINGLE-PATH-B": {
+      "expected_behavior": "independent regex/lexer; disagreement is the extraction signal",
+      "observed": {
+        "CAL-POS-1": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-2": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-3": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-4": "NO_FIELD"
+      },
+      "result": "OBSERVED"
+    },
+    "B-PARENT-METHOD-REIMPL": {
+      "expected_behavior": "best-effort documented reconstruction of the grandparent method over the same bytes; no gate depends on it",
+      "observed": {
+        "reconstruction_note": "Parent preserved no code; proxy = P-EXTRACT-A (html.parser, non-GET form token fields + frozen-list meta tokens, no JS).",
+        "CAL-POS-2_distinct_values": 5,
+        "CAL-POS-2_verdict": "RECOVERED_SESSION_SCOPED"
+      },
+      "result": "DISCLOSED-PROXY"
+    },
+    "B-INCUMBENT-SIGNAL-ONLY": {
+      "expected_behavior": "value-blind: REUSE iff none of CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR, CH-POSTCOND-SEM fires",
+      "observed": {
+        "M-FA-INCUMBENT-D1V": 1.0,
+        "M-FA-INCUMBENT-D1V-UB97": null,
+        "channels": {
+          "CH-STRUCT-SIG": {
+            "status": "ACTIVE",
+            "fire": 16,
+            "not_fire": 32,
+            "waived": false,
+            "satisfied": true
+          },
+          "CH-TRANSPORT-VALIDATOR": {
+            "status": "ACTIVE",
+            "fire": 36,
+            "not_fire": 12,
+            "waived": false,
+            "satisfied": true
+          },
+          "CH-POSTCOND-SEM": {
+            "status": "INACTIVE-ON-POPULATION",
+            "fire": 0,
+            "not_fire": 48,
+            "waived": true
+          },
+          "CH-PRECOND-BINDING": {
+            "status": "ACTIVE",
+            "fire": 36,
+            "not_fire": 12,
+            "waived": false,
+            "satisfied": true
+          }
+        }
+      },
+      "result": "DATA-INSUFFICIENT-D1V-DEGENERATE"
+    },
+    "B-VALUE-AWARE": {
+      "expected_behavior": "CH-PRECOND-BINDING only: REUSE iff live == recorded",
+      "observed": {
+        "M-FA-VALUEAWARE-D1V": 0.0,
+        "M-FA-VALUEAWARE-D1V-UB97": null
+      },
+      "result": "DATA-INSUFFICIENT-D1V-DEGENERATE"
+    },
+    "B-FULL-GUARD": {
+      "expected_behavior": "union of the four channels",
+      "observed": "reported as reference",
+      "result": "DATA-INSUFFICIENT-D1V-DEGENERATE"
+    },
+    "B-NO-GUARD-REPLAY": {
+      "expected_behavior": "always REUSE; raw-observation reference only",
+      "observed": {
+        "n_trials": 48,
+        "n_d1v": 6
+      },
+      "result": "OBSERVED"
+    },
+    "CH-STRUCT-SIG": {
+      "expected": "fires iff structure signature differs",
+      "observed": {
+        "status": "ACTIVE",
+        "fire": 16,
+        "not_fire": 32,
+        "waived": false,
+        "satisfied": true
+      },
+      "result": "ACTIVE"
+    },
+    "CH-TRANSPORT-VALIDATOR": {
+      "expected": "fires iff transport signature differs",
+      "observed": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      },
+      "result": "ACTIVE"
+    },
+    "CH-POSTCOND-SEM": {
+      "expected": "fires iff session in-list field-name set differs",
+      "observed": {
+        "status": "INACTIVE-ON-POPULATION",
+        "fire": 0,
+        "not_fire": 48,
+        "waived": true
+      },
+      "result": "INACTIVE-ON-POPULATION"
+    },
+    "CH-PRECOND-BINDING": {
+      "expected": "fires iff live != recorded byte-exact",
+      "observed": {
+        "status": "ACTIVE",
+        "fire": 36,
+        "not_fire": 12,
+        "waived": false,
+        "satisfied": true
+      },
+      "result": "ACTIVE"
+    },
+    "PC-EXTRACT-CANARY": {
+      "expected": "both paths >=2 distinct authenticity_token on CAL-POS-1",
+      "observed": true,
+      "result": "PASS"
+    },
+    "PC-GUARD-LOGIC": {
+      "expected": "all SYN-GUARD-* fixtures produce pre-declared decisions",
+      "observed": {
+        "SYN-GUARD-D1V": {
+          "fired": {
+            "CH-STRUCT-SIG": false,
+            "CH-TRANSPORT-VALIDATOR": false,
+            "CH-POSTCOND-SEM": false,
+            "CH-PRECOND-BINDING": true
+          },
+          "expected": {
+            "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+            "B-VALUE-AWARE": "ABSTAIN",
+            "B-FULL-GUARD": "ABSTAIN"
+          },
+          "observed": {
+            "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+            "B-VALUE-AWARE": "ABSTAIN",
+            "B-FULL-GUARD": "ABSTAIN"
+          },
+          "pass": true
+        },
+        "SYN-GUARD-FRESH": {
+          "fired": {
+            "CH-STRUCT-SIG": false,
+            "CH-TRANSPORT-VALIDATOR": false,
+            "CH-POSTCOND-SEM": false,
+            "CH-PRECOND-BINDING": false
+          },
+          "expected": {
+            "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+            "B-VALUE-AWARE": "REUSE",
+            "B-FULL-GUARD": "REUSE"
+          },
+          "observed": {
+            "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+            "B-VALUE-AWARE": "REUSE",
+            "B-FULL-GUARD": "REUSE"
+          },
+          "pass": true
+        },
+        "SYN-GUARD-POSTCOND": {
+          "fired": {
+            "CH-STRUCT-SIG": false,
+            "CH-TRANSPORT-VALIDATOR": false,
+            "CH-POSTCOND-SEM": true,
+            "CH-PRECOND-BINDING": false
+          },
+          "expected": {
+            "B-INCUMBENT-SIGNAL-ONLY": "ABSTAIN",
+            "B-VALUE-AWARE": "REUSE",
+            "B-FULL-GUARD": "ABSTAIN"
+          },
+          "observed": {
+            "B-INCUMBENT-SIGNAL-ONLY": "ABSTAIN",
+            "B-VALUE-AWARE": "REUSE",
+            "B-FULL-GUARD": "ABSTAIN"
+          },
+          "pass": true
+        }
+      },
+      "result": "PASS"
+    },
+    "NC-CAL-NEG-ALL-REJECTED": {
+      "expected": "0 in-list values under BOTH paths on all 4 negatives",
+      "observed": {
+        "CAL-NEG-1": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-2": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-3": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-4": {
+          "A": [],
+          "B": []
+        }
+      },
+      "result": "PASS"
+    },
+    "NC-EXTRACT-EMPTY-VALUE": {
+      "expected": "SYN-EMPTY-VALUE PRESENT-EMPTY, both paths agree",
+      "observed": [
+        [
+          "authenticity_token",
+          "PRESENT_EMPTY"
+        ],
+        [
+          "csrf-token",
+          "PRESENT_EMPTY"
+        ]
+      ],
+      "result": "PASS"
+    },
+    "NC-EXTRACT-JSSTRING": {
+      "expected": "0 non-empty values from SYN-JSSTRING",
+      "observed": 0,
+      "result": "PASS"
+    },
+    "NC-PATH-INDEPENDENCE": {
+      "expected": "AST import attestation + separate hashes + perturbation invariance",
+      "observed": {
+        "path_a_sha256": "f7cfee3f051ff72563a71351aab5b03d7aaf1ce19757dac880908adef0a73ee0",
+        "path_b_sha256": "dccd4e2283fb7016650e74cf735ce8bc1f3b269f9652fe9d256daa8bef59e56f",
+        "source_hashes_differ": true,
+        "path_b_imports": [
+          "__future__",
+          "re"
+        ],
+        "path_b_forbidden_imports": [],
+        "anchor_host_tokens_found_in_producer_sources": [],
+        "no_anchor_special_casing": true,
+        "perturbation_invariant": true,
+        "path_independence_pass": true
+      },
+      "result": "PASS"
+    },
+    "NC-SESSION-ISOLATION-REPAIRED": {
+      "expected": "repaired predicate passes for every anchor/session",
+      "observed": {
+        "CAL-POS-1": true,
+        "CAL-POS-2": true,
+        "CAL-POS-3": true,
+        "CAL-POS-4": true,
+        "CAL-NEG-1": true,
+        "CAL-NEG-2": true,
+        "CAL-NEG-3": true,
+        "CAL-NEG-4": true
+      },
+      "result": "PASS"
+    },
+    "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS": {
+      "expected": "at the (name,value) PAIR level: a shared NON-allowlisted pair must FAIL; a shared ALLOWLISTED constant only must PASS; a shared session-identifying NAME with DISTINCT values must PASS (parent-defect regression)",
+      "observed": {
+        "shared_non_allowlisted_pair_fails": true,
+        "allowlisted_only_passes": true,
+        "shared_session_identifying_name_distinct_values_passes": true,
+        "not_vacuous": true,
+        "fixture_fail_observed": {
+          "first_request_cookieless": true,
+          "constconfig_shared_names": [
+            "preferred_language"
+          ],
+          "unexpected_shared_names": [
+            "_gitlab_session"
+          ],
+          "session_identifying_disjoint": false,
+          "session_identifying_disjoint_is_gating": false,
+          "pairwise_disjoint_on_name_value_after_filter": false,
+          "pass": false
+        },
+        "fixture_pass_observed": {
+          "first_request_cookieless": true,
+          "constconfig_shared_names": [
+            "preferred_language"
+          ],
+          "unexpected_shared_names": [],
+          "session_identifying_disjoint": true,
+          "session_identifying_disjoint_is_gating": false,
+          "pairwise_disjoint_on_name_value_after_filter": true,
+          "pass": true
+        },
+        "fixture_name_distinct_observed": {
+          "first_request_cookieless": true,
+          "constconfig_shared_names": [
+            "preferred_language"
+          ],
+          "unexpected_shared_names": [
+            "_gitlab_session"
+          ],
+          "session_identifying_disjoint": false,
+          "session_identifying_disjoint_is_gating": false,
+          "pairwise_disjoint_on_name_value_after_filter": true,
+          "pass": true
+        }
+      },
+      "result": "PASS"
+    },
+    "NC-TRIAL-CONSTRUCTION-STABILITY": {
+      "expected": "identical included-key set on both paths",
+      "observed": "see GATE-E2 / guard_stats.json",
+      "result": "PASS"
+    },
+    "NC-TIME-VS-SESSION": {
+      "expected": "warm-jar diagnostic, frozen ceiling rule, not pass/fail",
+      "observed": "see M-WARMJAR-* and M-ROTATION-TIMESCALE-*",
+      "result": "DIAGNOSTIC"
+    },
+    "NC-NONDEGENERATE-ESTIMATOR": {
+      "expected": "M-N-D1V>=6, >=2 decisions on D1V, every active channel fires and not-fires; inactive channels waived with reason",
+      "observed": {
+        "M-N-D1V": 6,
+        "M-N-DECISIONS-D1V": 2,
+        "nondegenerate": true,
+        "channels": {
+          "CH-STRUCT-SIG": {
+            "status": "ACTIVE",
+            "fire": 16,
+            "not_fire": 32,
+            "waived": false,
+            "satisfied": true
+          },
+          "CH-TRANSPORT-VALIDATOR": {
+            "status": "ACTIVE",
+            "fire": 36,
+            "not_fire": 12,
+            "waived": false,
+            "satisfied": true
+          },
+          "CH-POSTCOND-SEM": {
+            "status": "INACTIVE-ON-POPULATION",
+            "fire": 0,
+            "not_fire": 48,
+            "waived": true
+          },
+          "CH-PRECOND-BINDING": {
+            "status": "ACTIVE",
+            "fire": 36,
+            "not_fire": 12,
+            "waived": false,
+            "satisfied": true
+          }
+        }
+      },
+      "result": "PASS"
+    },
+    "NC-D1V-ANCHOR-NONDEGENERACY": {
+      "expected": "anchor-clustered bound evaluable iff M-N-D1V-ANCHORS>=2 on top of NC-NONDEGENERATE-ESTIMATOR; with a single anchor every resample is identical",
+      "observed": {
+        "M-N-D1V-ANCHORS": 1,
+        "anchors_with_d1v": [
+          "CAL-POS-2"
+        ],
+        "M-N-D1V-BASE-ADEQUATE": true,
+        "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": false
+      },
+      "result": "DEGENERATE-OR-INSUFFICIENT"
+    },
+    "NC-OPEN-GET-ONLY": {
+      "expected": "every scored request is a credential-free idempotent GET",
+      "observed": "all requests method GET; no write verb, no credentials",
+      "result": "PASS"
+    },
+    "F-INSTR": {
+      "observed_triggered": false
+    },
+    "F-REPLOSS": {
+      "observed_triggered": false
+    },
+    "F-UNRELIABLE": {
+      "observed_triggered": false
+    },
+    "F-BLIND": {
+      "observed_triggered": false
+    },
+    "F-BLIND-DEGENERATE": {
+      "observed_triggered": true
+    },
+    "F-CERT": {
+      "observed_triggered": false
+    },
+    "CAL-POS-1": {
+      "role": "positive; SPIDER_CORROBORATED canary",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-2": {
+      "role": "positive; reconciliation anchor",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-3": {
+      "role": "positive; SPIDER_PARTIAL",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-4": {
+      "role": "positive; A_PRIORI_CONSTRUCT",
+      "verdict_pair": [
+        "NO_FIELD",
+        "NO_FIELD"
+      ]
+    },
+    "CAL-POS-5": {
+      "role": "RETIRED (404x4 in parent); excluded from all denominators",
+      "result": "NOT_CONTACTED"
+    },
+    "CAL-NEG-1": {
+      "role": "negative"
+    },
+    "CAL-NEG-2": {
+      "role": "negative"
+    },
+    "CAL-NEG-3": {
+      "role": "negative"
+    },
+    "CAL-NEG-4": {
+      "role": "negative"
+    },
+    "SYN-CANARY-BOTH": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-EMPTY-VALUE": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-JSSTRING": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-GUARD-D1V": {
+      "role": "guard fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-GUARD-FRESH": {
+      "role": "guard fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-GUARD-POSTCOND": {
+      "role": "guard fixture (unscored)",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/records.jsonl",
+      "sha256": "00b60903320447799039d9f004da41d504d64e18f722353993c6a435fb8555e2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S1_fresh.html",
+      "sha256": "dfcca75f4e6d0c298c801b8ab4cd7b0b726debffd3d76df719091400bcb3926f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S2_fresh.html",
+      "sha256": "61df4c7634656a47ef18c7bca3c7218faad8fc6cb54fd2d7e38c37f9b236385a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S3_fresh.html",
+      "sha256": "91aca934f6cb4b978c53f000186d74c52a232783133a58917492e4ee1fb9e604",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_fresh.html",
+      "sha256": "6f8062c6201b517591ef31a4480f5a6fa6ed33e21edf4099e88d6d7f0c4fc9ec",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S1_fresh.html",
+      "sha256": "b3e83b6a2ec393287cfdf08e7ca46ffb022f522320233f38fe6b91bb15fbe116",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S2_fresh.html",
+      "sha256": "909eddfc805727d37ac46d834512960daa4ae121890c9472505aa27c290d10f8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S3_fresh.html",
+      "sha256": "3fb609b05ced28fd5181c2570cf14d13b7e785b064b20892b207bef20b33fa5d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_fresh.html",
+      "sha256": "153b3330f7bbe6b5963ece05e74a04669bdf1ceba80d6d8fe33b695bbf604dc2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S1_fresh.html",
+      "sha256": "364d2284dfa99e45afbc6b45878a35069f9f1be15aa2f01c3e60e5d935ac4693",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S2_fresh.html",
+      "sha256": "1dd71f194a6a203456a38a5574d48426e8eb08043f2cc108d9438e2e0d1d70d6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S3_fresh.html",
+      "sha256": "680262c906d4ae6544bde7c2f4ad427b1874fe814bec2f5cf5adbc906c8a1923",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_fresh.html",
+      "sha256": "20efaf08a2cde535413050a653022c84d6800d2a84619a74028be13beb51bb57",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S1_fresh.html",
+      "sha256": "52c5671ddad52740ba7600bf59dd228c76348e2f581584ca6c93364e86054511",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S2_fresh.html",
+      "sha256": "5775b31af59c1f7e16c92516d6cf387bbdfcf178cfc8270c0a06a05ab372ddbd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S3_fresh.html",
+      "sha256": "8285ebbff27ca86f6127d8b279956075ed3c85cbcfffc2cfdb9d176ff39043d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_fresh.html",
+      "sha256": "5482eb052436a52f240335a709125a8c7bbf6d1dac09b66403726447f43e0aca",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S1_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S2_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S3_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S4_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S1_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S2_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S3_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S4_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S1_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S2_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S3_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S4_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S1_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S2_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S3_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S4_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_warm1.html",
+      "sha256": "b1a4672c1a64819ee4cee1fefd721efb5fc0442917b0185a052fb254b7ba7d32",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_warm2.html",
+      "sha256": "449987c046e5c14b303011d6d8977d9864a568ef7549bbe8f39031e85c24387d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_warm1.html",
+      "sha256": "22d1469794ba770ce24a8da2386fc51ec4d6e1e341ed3313da03ee7afe2f1008",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_warm2.html",
+      "sha256": "0fe4c69f76c93079239631d6551b59e2e2740f4a25cd3d17d40b4d82fba90f68",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_warm1.html",
+      "sha256": "e687f84df913fd057bec086ee81c9754b16a849d51cc4d613b8f2314c485052e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_warm2.html",
+      "sha256": "fe7accebba2d5e5c52164e5e514d8ef3811d2a22a17ee4bce312461894cff1b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_warm1.html",
+      "sha256": "c5d84f214a9503f14568da63f839d681efbdd3a481da0fcf12edb45eb1ce9776",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_warm2.html",
+      "sha256": "4c4cd2c155fc7ba87c429df4f279c589a02abde330466f940f8e2c6b39451353",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/extraction_A.jsonl",
+      "sha256": "f3d0accc1882144c61775b2ea5233973bc1cb196f815c6dcabea066c852b384a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/extraction_B.jsonl",
+      "sha256": "f4e21723e71dd93091f404244a11e79197d3e6b230e4bf17f482d2a18aa94021",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/trials.jsonl",
+      "sha256": "a3ccb4bdccc4dc08dc0175278c741afe7bd22b593b52c5829c6d520650c94996",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/certificate.json",
+      "sha256": "6999463bb253b9be774edb87c3c1c76570845e53fee45987e623d87a036c44b1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/fixtures.json",
+      "sha256": "1d09892d2b28b58d132eaa5ff282b65f1c3f27ad99421b8a57a5641d482079be",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/anchor_metrics.json",
+      "sha256": "e94cdec771162d6d260fd8541b02f7cb1c8dfcaa704c22173899fb34126b862b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/derived/guard_stats.json",
+      "sha256": "bfb8e4fc7c5bf44b9f111ba6e8f5d261dde777fcdb220aa6dfb460d03bcaf35a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/path_a_htmlparser.py",
+      "sha256": "f7cfee3f051ff72563a71351aab5b03d7aaf1ce19757dac880908adef0a73ee0",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/path_b_regexlex.py",
+      "sha256": "dccd4e2283fb7016650e74cf735ce8bc1f3b269f9652fe9d256daa8bef59e56f",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/neutral_detector.py",
+      "sha256": "5de0aa7f97b4450f6ee4c71ba36fd337cccd7dcb13bf4d49ea7ff39d42309783",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/fixtures.py",
+      "sha256": "01f6a683616f66724e5f3ea7732e18b161146acf080626aaa41441f4c71c471c",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/guard.py",
+      "sha256": "cb05ae93d0238552743c30aa9eda8be0a5adf3ab72833ddad50ed9cd6982ac73",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37978902447/code/run_experiment.py",
+      "sha256": "038b7e758e10823bc11bad51cf34740ac78622fee83bab7b82c79662d90b6b1d",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Requests executed: 40 (cap 200); all method GET; no credentials, no write verb.",
+    "CORRECTED GATE-C3 predicate: pass = first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter (SOLE disjointness check); session_identifying_disjoint is NON-GATING. M-CERT-SESSION-ISOLATION-PASS=True; per-anchor pass={'CAL-POS-1': True, 'CAL-POS-2': True, 'CAL-POS-3': True, 'CAL-POS-4': True, 'CAL-NEG-1': True, 'CAL-NEG-2': True, 'CAL-NEG-3': True, 'CAL-NEG-4': True}.",
+    "Constant-configuration shared cookie names per anchor: {'CAL-POS-1': ['preferred_language'], 'CAL-POS-2': ['GeoIP', 'NetworkProbeLimit', 'WMF-Last-Access'], 'CAL-POS-3': ['CentralAuthAnonTopLevel', 'GeoIP', 'NetworkProbeLimit', 'WMF-Last-Access', 'WMF-Last-Access-Global'], 'CAL-POS-4': [], 'CAL-NEG-1': [], 'CAL-NEG-2': [], 'CAL-NEG-3': [], 'CAL-NEG-4': []}.",
+    "Unexpected shared cookie names (outside allowlist, non-gating diagnostic): {'CAL-POS-1': ['_gitlab_session'], 'CAL-POS-2': ['WMF-Uniq', 'authSession'], 'CAL-POS-3': ['WMF-Uniq', 'authSession', 'enwikiSession'], 'CAL-POS-4': [], 'CAL-NEG-1': [], 'CAL-NEG-2': [], 'CAL-NEG-3': [], 'CAL-NEG-4': []}.",
+    "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS (pair level): shared_non_allowlisted_pair_fails=True; allowlisted_only_passes=True; session_identifying_name_distinct_values_passes=True; not_vacuous=True.",
+    "CAL-POS-1: verdict_A=RECOVERED_SESSION_SCOPED (distinct=16), verdict_B=RECOVERED_SESSION_SCOPED (distinct=16), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-2: verdict_A=RECOVERED_SESSION_SCOPED (distinct=5), verdict_B=RECOVERED_SESSION_SCOPED (distinct=5), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-3: verdict_A=RECOVERED_SESSION_SCOPED (distinct=5), verdict_B=RECOVERED_SESSION_SCOPED (distinct=5), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-4: verdict_A=NO_FIELD (distinct=0), verdict_B=NO_FIELD (distinct=0), route_ok=4/4, distinct_body=4/4.",
+    "M-EXTRACT-AGREE-VALUESET=4/4, M-EXTRACT-AGREE-VERDICT=4/4, M-CANARY-PASS=True.",
+    "M-N-SESSION-SCOPED-CONFIRMED=3/4, M-N-REPRESENTATION-LOSS=1/4, M-N-EXTRACTION-UNRELIABLE=0/4.",
+    "CAL-NEG-1: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-2: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-3: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-4: path_A non-empty values=[], path_B non-empty values=[].",
+    "Drift population (path A): M-N-TRIALS=48, M-N-FRESH=12, M-N-D1V=6 over M-N-D1V-ANCHORS=1 anchors (['CAL-POS-2']); struct=16, endpoint=12, transport=36, postcond=0.",
+    "Channels (path A): {\"CH-POSTCOND-SEM\": {\"fire\": 0, \"not_fire\": 48, \"status\": \"INACTIVE-ON-POPULATION\", \"waived\": true}, \"CH-PRECOND-BINDING\": {\"fire\": 36, \"not_fire\": 12, \"satisfied\": true, \"status\": \"ACTIVE\", \"waived\": false}, \"CH-STRUCT-SIG\": {\"fire\": 16, \"not_fire\": 32, \"satisfied\": true, \"status\": \"ACTIVE\", \"waived\": false}, \"CH-TRANSPORT-VALIDATOR\": {\"fire\": 36, \"not_fire\": 12, \"satisfied\": true, \"status\": \"ACTIVE\", \"waived\": false}}.",
+    "Mandate Q2 per-anchor diagnostics (descriptive, non-gating): {\"M-D1V-BLOCKER-CAL-POS-1\": \"BODY_DERIVED_ETAG\", \"M-D1V-BLOCKER-CAL-POS-2\": \"NONE\", \"M-D1V-BLOCKER-CAL-POS-3\": \"TOKEN_BEARING_FINAL_URL\", \"M-D1V-BLOCKER-CAL-POS-4\": \"NO_FIELD\", \"M-TRANSPORT-BODY-DERIVATION-CAL-POS-1\": true, \"M-TRANSPORT-BODY-DERIVATION-CAL-POS-2\": \"not_applicable\", \"M-TRANSPORT-BODY-DERIVATION-CAL-POS-3\": \"not_applicable\", \"M-TRANSPORT-BODY-DERIVATION-CAL-POS-4\": \"not_applicable\"}.",
+    "Part II gate: DATA-INSUFFICIENT-D1V-DEGENERATE; M-N-DECISIONS-D1V=2; M-N-D1V-BASE-ADEQUATE=True; M-D1V-ANCHOR-CLUSTERED-EVALUABLE=False; M-FA-INCUMBENT-D1V=1.0; M-FA-VALUEAWARE-D1V=0.0; M-PAIRED-FA-DIFF-D1V=1.0 (LB=None, UB=None).",
+    "Warm-jar timescale per anchor: {\"CAL-POS-1\": {\"fresh_var\": 1.0, \"timescale\": \"PER_REQUEST_SCALE\", \"warm_var\": 1.0}, \"CAL-POS-2\": {\"fresh_var\": 1.0, \"timescale\": \"PER_REQUEST_SCALE\", \"warm_var\": 1.0}, \"CAL-POS-3\": {\"fresh_var\": 1.0, \"timescale\": \"PER_REQUEST_SCALE\", \"warm_var\": 1.0}, \"CAL-POS-4\": {\"fresh_var\": 0.0, \"timescale\": \"NO_ROTATION\", \"warm_var\": 0.0}}",
+    "Guard fixtures: {\"SYN-GUARD-D1V\": {\"expected\": {\"B-FULL-GUARD\": \"ABSTAIN\", \"B-INCUMBENT-SIGNAL-ONLY\": \"REUSE\", \"B-VALUE-AWARE\": \"ABSTAIN\"}, \"fired\": {\"CH-POSTCOND-SEM\": false, \"CH-PRECOND-BINDING\": true, \"CH-STRUCT-SIG\": false, \"CH-TRANSPORT-VALIDATOR\": false}, \"observed\": {\"B-FULL-GUARD\": \"ABSTAIN\", \"B-INCUMBENT-SIGNAL-ONLY\": \"REUSE\", \"B-VALUE-AWARE\": \"ABSTAIN\"}, \"pass\": true}, \"SYN-GUARD-FRESH\": {\"expected\": {\"B-FULL-GUARD\": \"REUSE\", \"B-INCUMBENT-SIGNAL-ONLY\": \"REUSE\", \"B-VALUE-AWARE\": \"REUSE\"}, \"fired\": {\"CH-POSTCOND-SEM\": false, \"CH-PRECOND-BINDING\": false, \"CH-STRUCT-SIG\": false, \"CH-TRANSPORT-VALIDATOR\": false}, \"observed\": {\"B-FULL-GUARD\": \"REUSE\", \"B-INCUMBENT-SIGNAL-ONLY\": \"REUSE\", \"B-VALUE-AWARE\": \"REUSE\"}, \"pass\": true}, \"SYN-GUARD-POSTCOND\": {\"expected\": {\"B-FULL-GUARD\": \"ABSTAIN\", \"B-INCUMBENT-SIGNAL-ONLY\": \"ABSTAIN\", \"B-VALUE-AWARE\": \"REUSE\"}, \"fired\": {\"CH-POSTCOND-SEM\": true, \"CH-PRECOND-BINDING\": false, \"CH-STRUCT-SIG\": false, \"CH-TRANSPORT-VALIDATOR\": false}, \"observed\": {\"B-FULL-GUARD\": \"ABSTAIN\", \"B-INCUMBENT-SIGNAL-ONLY\": \"ABSTAIN\", \"B-VALUE-AWARE\": \"REUSE\"}, \"pass\": true}}.",
+    "Trial construction stable across paths A/B (included-key sets identical)= True."
+  ],
+  "validity_notes": [
+    "PART II TRIAL-CONSTRUCTION OPERATIONALIZATION. The frozen spec describes the AGSI instance key as '(anchor_id, field_name, structure_signature) plus a document-order occurrence ordinal'. Taken maximally literally (structure_signature inside the matching key), a structural change would alter the key, exclude the instance and make CH-STRUCT-SIG/M-N-STRUCT-DRIFT unreachable, contradicting the frozen metric registry and the NC-NONDEGENERATE-ESTIMATOR clause which anticipates CH-POSTCOND-SEM as the inactive channel. EXECUTE therefore pairs AGSI occurrences across sessions by (anchor_id, field_name, document-order occurrence ordinal among same-field occurrences) and requires the same-field occurrence COUNT to be identical across all four sessions before a slot contributes; structure_signature is recorded and used as the CH-STRUCT-SIG activation input, not as part of the matching key. This is a disclosed operationalization of an ambiguous frozen clause; it was fixed before any guard statistic was computed and is applied identically to both paths.",
+    "PART II VALUE-TRIAL REQUIREMENT. A realized trial requires BOTH the recorded and current occurrence state to be VALUE (non-empty exact string), mirroring the parent's frozen operationalization and the ground_truth formula. Occurrences that are PRESENT-EMPTY on either side are not realized as value trials.",
+    "PART II IS STATUS-NON-CHANGING. GATE B branches (INCUMBENT-BLIND-CONFIRMED / INCUMBENT-NOT-BLIND / DATA-INSUFFICIENT-D1V) are recorded under metrics/controls/observations and never change status/outcome.",
+    "CORRECTED GATE-C3 PREDICATE (the only design change). pass = first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter; session_identifying_disjoint is recorded as a NON-GATING diagnostic and is not a conjunct. NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS is repaired to the (name,value)-pair level so that a shared session-identifying NAME with distinct values no longer fails the predicate.",
+    "RESAMPLING UNIT. Part II intervals resample ANCHORS with replacement, B=10000, percentile method. Seed disclosure: spec.seed and the satisfiability dry-run declare 37978902447, the M-PAIRED-FA-DIFF-D1V-* definitions name 37978902447, while spec V09 prose names 37964565784 (the parent's run id) and the M-FA-INCUMBENT/VALUEAWARE-UB97 definitions also name 37964565784. This run uses the packet seed 37978902447 for the single shared resample so the paired difference stays paired; the conflict is never read here because the clustered bound is null in the degenerate branch. The trial-level Wilson intervals are reported only as M-DIAGNOSTIC-UNCLUSTERED-* with do_not_use=true; no gate uses them.",
+    "V05 NO-JS REPRESENTATION LOSS DECLARED. No JavaScript was executed and no browser was used; only raw HTTP response bytes were parsed. Client-side/XHR-minted values, canvas content and authenticated state are structurally invisible.",
+    "NC-PATH-INDEPENDENCE attestation: path_independence_pass=True, path_B_forbidden_imports=[], no_anchor_special_casing=True, perturbation_invariant=True.",
+    "V11 frozen-input re-verification before=True after=True.",
+    "GATE C4 (non-blocking) M-CERT-BODY-VARIABLE=4/4; satisfied.",
+    "PROVENANCE DEPENDENCY codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl present=False (reported absent; design-owned by the Codex synchronization step; GATE C re-measures live and does not depend on it; audit required_fixes[1] recorded).",
+    "CC-A SCOPE. All results are scoped to the 4 pinned credential-free, server-rendered, no-JavaScript GET-only anchors, K=4 fresh sessions, stdlib HTTP, one capture date and one egress path. Prevalence over 'the Web' is never quoted.",
+    "PER-REQUEST vs SESSION ROTATION. M-ROTATION-TIMESCALE is a diagnostic with the frozen CC-H ceiling; if PER_REQUEST_SCALE, value-binding freshness is bounded to a short-lived applicability check, not session-scoped durability.",
+    "The two extraction paths were adapted from the parent packet's independently written stdlib paths and are separate producer files for this experiment; independence is structural (different algorithms, no shared code, AST-verified) and corroborated by the canary, fixtures and negatives (CC-F).",
+    "F-BLIND-DEGENERATE (mandate Q2). The D1V population spans only M-N-D1V-ANCHORS=1 anchor(s) (['CAL-POS-2']); with a single anchor every anchor-clustered bootstrap resample is identical, so the 97.5% bound is DEGENERATE by construction. GATE-B is NOT READ; this is a pre-declared power statement, never a blindness/necessity result.",
+    "INACTIVE-ON-POPULATION channels (waived with reason): CH-POSTCOND-SEM; their drift family stays UNKNOWN."
+  ],
+  "unresolved": [
+    "Part II is DATA-INSUFFICIENT-D1V-DEGENERATE: the D1V population has M-N-D1V=6 trials but spans only M-N-D1V-ANCHORS=1 anchor(s) (['CAL-POS-2']), so the anchor-clustered bound is degenerate by construction and GATE-B is not read. Whether the value-aware channel is necessary on value-only rotation remains UNKNOWN; this is a pre-declared power statement, not a blindness result. Blocker diagnostics: {\"M-D1V-BLOCKER-CAL-POS-1\": \"BODY_DERIVED_ETAG\", \"M-D1V-BLOCKER-CAL-POS-2\": \"NONE\", \"M-D1V-BLOCKER-CAL-POS-3\": \"TOKEN_BEARING_FINAL_URL\", \"M-D1V-BLOCKER-CAL-POS-4\": \"NO_FIELD\"}.",
+    "codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl is absent; provenance completeness gap (audit required_fixes[1]).",
+    "Whether CAL-POS-4's NO_FIELD verdict is genuine absence or a limitation of the frozen token-name list is unresolved.",
+    "Whether the wpCreateaccountToken discrepancy is stable over time and across egress networks is unresolved; this run records one date and one egress path.",
+    "The behaviourally invisible stale cell (SB-04, M-INVISIBLE-STALE-PREV) and the permission-boundary drift family (SB-02) remain unmeasured by design."
+  ],
+  "frozen_input_verification": {
+    "before": {
+      "request.json": {
+        "expected": "ede34d519294b78287be548d6941b1e198e4009f3a949b522691b946dc1b83dc",
+        "actual": "ede34d519294b78287be548d6941b1e198e4009f3a949b522691b946dc1b83dc",
+        "match": true,
+        "when": "before"
+      },
+      "spec.json": {
+        "expected": "830f8b8877c5c89416233be1a6bfbb92603efeef4edd2f9a08171e5df012bb49",
+        "actual": "830f8b8877c5c89416233be1a6bfbb92603efeef4edd2f9a08171e5df012bb49",
+        "match": true,
+        "when": "before"
+      },
+      "prereg.md": {
+        "expected": "3008a5884aed3a2bc577a4170796107fff897554e88690744c11e08582c4e0e5",
+        "actual": "3008a5884aed3a2bc577a4170796107fff897554e88690744c11e08582c4e0e5",
+        "match": true,
+        "when": "before"
+      }
+    },
+    "after": {
+      "request.json": {
+        "expected": "ede34d519294b78287be548d6941b1e198e4009f3a949b522691b946dc1b83dc",
+        "actual": "ede34d519294b78287be548d6941b1e198e4009f3a949b522691b946dc1b83dc",
+        "match": true,
+        "when": "after"
+      },
+      "spec.json": {
+        "expected": "830f8b8877c5c89416233be1a6bfbb92603efeef4edd2f9a08171e5df012bb49",
+        "actual": "830f8b8877c5c89416233be1a6bfbb92603efeef4edd2f9a08171e5df012bb49",
+        "match": true,
+        "when": "after"
+      },
+      "prereg.md": {
+        "expected": "3008a5884aed3a2bc577a4170796107fff897554e88690744c11e08582c4e0e5",
+        "actual": "3008a5884aed3a2bc577a4170796107fff897554e88690744c11e08582c4e0e5",
+        "match": true,
+        "when": "after"
+      }
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37973239386",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF1_LIVE_NULL_CONSTRUCTION_BUG_CORRECTED",
+      "severity": "minor",
+      "finding": "The initial EXECUTE analysis constructed NC_LIVE_HTTPBIN_UUID same-session cookie maps as {'_': <uuid_value>}, causing R_SESSION_BIND to fire vacuously on all 8/8 live-null fields. This was a control-construction bug, not a rule-family defect. The producer corrected the cookie-map to the faithful empty map (httpbin.org/uuid sets no cookies), re-ran the analysis, and preserved the pre-correction artifact verbatim at derived/controls_initial_live_null_selfbind_bug.json. The correction changed only the null/liveness gate; the confirmatory primary metric and all frozen rules/thresholds were untouched. This is properly disclosed in validity_notes V1 and observation O11.",
+      "evidence_refs": [
+        "derived/controls_initial_live_null_selfbind_bug.json",
+        "result.json.validity_notes[V1_LIVE_NULL_CONSTRUCTION_CORRECTION]",
+        "result.json.observations[O11_DESIGN_NULL_DISCREPANCY]"
+      ]
+    },
+    {
+      "id": "VF2_DESIGN_EXECUTE_NULL_FIRE_DISCREPANCY",
+      "severity": "minor",
+      "finding": "The DESIGN-embedded literal irreducibility null reported 1/1600 fields fired (aggregate FP 0.000625, rule R_WALLCLOCK_B64); the EXECUTE frozen-seed re-run reported 0/1600 (aggregate FP 0.0). Both satisfy the frozen NULL_FP_MAX=0.05 requirement. The discrepancy is disclosed and the DESIGN literal is carried alongside the EXECUTE re-run. This limits the EXECUTE-only bound on R_WALLCLOCK_B64's real false-positive rate but does not alter any branch outcome.",
+      "evidence_refs": [
+        "result.json.metrics.NULL_FP_AGGREGATE",
+        "result.json.metrics.NULL_FP_AGGREGATE_DESIGN_LITERAL",
+        "result.json.validity_notes[V2_DESIGN_EXECUTE_NULL_FIRE_DIFFERENCE]"
+      ]
+    },
+    {
+      "id": "VF3_AUTHOR_AUTHORED_POSITIVE_CONTROL_CONSTRUCT_BOUNDARY",
+      "severity": "note",
+      "finding": "PC_PLANTED_CLASSES is authored by the instrument designer and certifies the detector code path and sensitivity, NOT the construct boundary on the real Web. This is explicitly disclosed as a residual validity threat in validity_notes V4 and controls[PC_PLANTED_CLASSES].construct_boundary. Mitigations are the out-of-author NC_LIVE_HTTPBIN_UUID live null (passed) and the fresh real-Web confirmatory collection.",
+      "evidence_refs": [
+        "spec.json.positive_control.construct_boundary",
+        "result.json.validity_notes[V4_AUTHOR_AUTHORED_POSITIVE_CONTROL]"
+      ]
+    },
+    {
+      "id": "VF4_POOL_NOT_PROBABILITY_SAMPLE",
+      "severity": "note",
+      "finding": "The frozen 57-endpoint universe is a curated convenience pool spanning Rails/GitLab, Gitea, Discourse, MediaWiki, Django, forum and login/search endpoints. All rates describe this pool in one collection window (one stdlib-HTTP client, one User-Agent, one network vantage). It is not a probability sample of the Web. This is a scope boundary, properly disclosed in validity_notes V5 and scope_boundaries.",
+      "evidence_refs": [
+        "spec.json.scope_boundaries[2]",
+        "result.json.validity_notes[V5_POOL_NOT_PROBABILITY_SAMPLE]"
+      ]
+    },
+    {
+      "id": "VF5_REPRESENTATION_LOSS",
+      "severity": "note",
+      "finding": "Only credential-free HTTP GET-observable fields are measured. No JavaScript/DOM/SPA-rendered, authenticated, WebSocket/GraphQL, edge or mobile-sourced token is observable. Response bodies are not archived (only body_sha256 per observation), so body-level re-derivation is not reconstructable from this packet. The NONCE stratum contains exactly 1 admitted field (a csp-nonce), so its separate estimate is not informative. This is properly disclosed in validity_notes V6.",
+      "evidence_refs": [
+        "spec.json.scope_boundaries[0]",
+        "spec.json.observable_object.javascript",
+        "spec.json.observable_object.credential_free",
+        "result.json.validity_notes[V6_REPRESENTATION_LOSS]"
+      ]
+    },
+    {
+      "id": "VF6_BLOCKING_AND_RATE_LIMITS",
+      "severity": "minor",
+      "finding": "In this collection window, several frozen endpoints were Cloudflare-blocked (403) or rate-limited (429), including three endpoints admitted in the DESIGN census (gitlab.archlinux.org, salsa.debian.org, gitlab.freedesktop.org). Overall admission (46 indicator fields, 27 sites) still far exceeds the frozen minima (M_MIN_FIELDS=20, S_MIN_SITES=8), so no measurement-invalid condition fires. However, per-site coverage is window-dependent and the census monotonicity argument is not strictly reproduced endpoint-by-endpoint. Disclosed in validity_notes V8 and observation O10.",
+      "evidence_refs": [
+        "result.json.observations[O10_BLOCKED_HOSTS]",
+        "result.json.validity_notes[V8_BLOCKING_AND_RATE_LIMITS]"
+      ]
+    },
+    {
+      "id": "VF7_RULE_MULTIPLICITY_AND_ATTRIBUTION",
+      "severity": "note",
+      "finding": "11 armed rules raise per-field false-positive risk; the frozen 1600-field calibration bounds aggregate FP (<= 0.05) and counted fields must additionally beat B_MEMORY_REPEAT by DELTA_MEM=0.10. Class attribution follows the frozen priority and can mislabel when several rules fire (e.g., R_B62_INCR also fires on digit strings); this affects only the class breakdown (PREDICTABLE_PREVALENCE_BY_CLASS), not the pooled PREDICTABLE_PREVALENCE_POOLED indicator. Disclosed in validity_notes V7.",
+      "evidence_refs": [
+        "result.json.validity_notes[V7_RULE_MULTIPLICITY_AND_ATTRIBUTION]",
+        "spec.json.frozen_rule_family.class_attribution_priority"
+      ]
+    },
+    {
+      "id": "VF8_CLIENT_SIDE_WALLCLOCK_SOURCE",
+      "severity": "note",
+      "finding": "Wallclock rules (R_WALLCLOCK_DEC/HEX/B64) compare candidate substrings against the CLIENT-side collection wall-clock epoch (time.time() at request time), not a server clock. Any server/client clock skew or timezone-independent epoch offset within +/-3600 s is absorbed by the 1-hour tolerance. This is a deliberate frozen design choice, disclosed in validity_notes V3. The pypi.org R_WALLCLOCK_B64 detection (12 s delta) is well within tolerance.",
+      "evidence_refs": [
+        "spec.json.frozen_rule_family.rules_nonbaseline_armed.R_WALLCLOCK_B64",
+        "result.json.validity_notes[V3_WALLCLOCK_CLOCK_SOURCE]"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF1_MEMORY_REPEAT_BASELINE_VALID",
+      "finding": "B_MEMORY_REPEAT mean holdout accuracy = 0.336, driven by identity-persistent session cookies (e.g., _gitlab_session, authSession, *_Session, flarum_session) that repeat the same value for 3 requests within a session then rotate. The two counted predictable fields exceed this baseline by >= DELTA_MEM=0.10: pypi.org session_id (1.0 - 0.714 = 0.286), reddit.com jsc_token (1.0 - 0.0 = 1.0). The baseline correctly disqualifies memory-repeat-explained fields and does not gate the two genuine structural predictabilities.",
+      "evidence_refs": [
+        "result.json.metrics.B_MEMORY_REPEAT_ACC_MEAN",
+        "result.json.controls.B_MEMORY_REPEAT.observed.mean_holdout_accuracy",
+        "derived/fields.json (session cookie fields with attributed_class=MEMORY_ONLY)"
+      ]
+    },
+    {
+      "id": "BF2_MARKOV1_BASELINE_SENSITIVITY",
+      "finding": "B_MARKOV1 mean holdout accuracy = 0.059, substantially below B_MEMORY_REPEAT (0.336) because the varying fields (CSRF/one-time tokens, discourse-track-view-session-id) show no first-order recurrence structure. This is reported as a sensitivity check only, not a disqualifier, consistent with the mandate that predictability classes explicitly include non-trivial transforms of the previous value.",
+      "evidence_refs": [
+        "result.json.metrics.B_MARKOV1_ACC_MEAN",
+        "result.json.controls.B_MARKOV1.observed.mean_accuracy"
+      ]
+    },
+    {
+      "id": "BF3_CONSTANT_MODE_BASELINE",
+      "finding": "B_CONSTANT_MODE mean accuracy = 0.0, as expected since admission excludes constant fields (n_distinct >= 2). Serves as a triviality anchor so no prevalence claim is an unanchored absolute.",
+      "evidence_refs": [
+        "result.json.metrics.B_CONSTANT_MODE_ACC_MEAN",
+        "result.json.controls.B_CONSTANT_MODE.observed.mean_accuracy"
+      ]
+    },
+    {
+      "id": "BF4_IRREDUCIBILITY_NULL_CALIBRATION",
+      "finding": "B_IRREDUCIBILITY_NULL (NC_PLANTED_RANDOM) EXECUTE re-run: 0/1600 fields fired, aggregate FP = 0.0, all 11 non-baseline rules ARMED. This replicates the DESIGN calibration (1/1600 fired, FP = 0.000625) within tolerance. Both satisfy the frozen NULL_FP_MAX=0.05 gate. The null has demonstrated discriminating power: the same rule family detects all 8 planted positive-control classes at power 1.0 while firing on essentially no cryptographic null fields.",
+      "evidence_refs": [
+        "result.json.controls.B_IRREDUCIBILITY_NULL.observed",
+        "result.json.metrics.NULL_FP_AGGREGATE",
+        "result.json.metrics.NULL_FP_AGGREGATE_DESIGN_LITERAL"
+      ]
+    },
+    {
+      "id": "BF5_POSITIVE_CONTROL_POWER",
+      "finding": "PC_PLANTED_CLASSES EXECUTE re-run: all 8 classes detected at power 1.0 (200/200 trials each), exceeding the frozen PC_POWER_MIN=0.8 requirement. This certifies the detector code path and sensitivity for the frozen rule family.",
+      "evidence_refs": [
+        "result.json.controls.PC_PLANTED_CLASSES.observed",
+        "result.json.metrics.PC_POWER_MIN"
+      ]
+    },
+    {
+      "id": "BF6_LIVE_NULL_HTTPBIN_UUID",
+      "finding": "NC_LIVE_HTTPBIN_UUID (out-of-author live null): 8 fields collected across 8 fresh sessions, 0/8 fields fired (fired fraction 0.0), satisfying the <= 0.05 gate. The cookie-map construction was corrected to the faithful empty map (httpbin sets no cookies); the pre-correction artifact is preserved.",
+      "evidence_refs": [
+        "result.json.controls.NC_PLANTED_RANDOM_PLUS_LIVE.observed",
+        "result.json.metrics.LIVE_NULL_FIRED_FRACTION",
+        "derived/controls_initial_live_null_selfbind_bug.json"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "PREDICTABLE_PREVALENCE_POOLED": 0.043478260869565216,
+    "PREDICTABLE_PREVALENCE_SITE": {
+      "pypi.org": { "n": 2, "pred": 1, "prevalence": 0.5 },
+      "reddit.com": { "n": 1, "pred": 1, "prevalence": 1.0 },
+      "gnome.org": { "n": 3, "pred": 0, "prevalence": 0.0 },
+      "kde.org": { "n": 3, "pred": 0, "prevalence": 0.0 },
+      "archlinux.org": { "n": 5, "pred": 0, "prevalence": 0.0 },
+      "gitea.com": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "python.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "openai.com": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "elastic.co": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "freecodecamp.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "hashicorp.com": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "kubernetes.io": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "julialang.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "home-assistant.io": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "rubyonrails.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "fedoraproject.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "manjaro.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "endeavouros.com": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "wikipedia.org": { "n": 3, "pred": 0, "prevalence": 0.0 },
+      "gentoo.org": { "n": 2, "pred": 0, "prevalence": 0.0 },
+      "openstreetmap.org": { "n": 2, "pred": 0, "prevalence": 0.0 },
+      "mediawiki.org": { "n": 3, "pred": 0, "prevalence": 0.0 },
+      "djangoproject.com": { "n": 2, "pred": 0, "prevalence": 0.0 },
+      "wikidata.org": { "n": 3, "pred": 0, "prevalence": 0.0 },
+      "dev.to": { "n": 2, "pred": 0, "prevalence": 0.0 },
+      "flarum.org": { "n": 1, "pred": 0, "prevalence": 0.0 },
+      "microsoftonline.com": { "n": 1, "pred": 0, "prevalence": 0.0 }
+    },
+    "PREDICTABLE_PREVALENCE_BY_CLASS": {
+      "WALLCLOCK_B64": 1,
+      "CONST_SUBSTRING": 1
+    },
+    "PREDICTABLE_PREVALENCE_ALL_PLUS_NONCE": 0.0425531914893617,
+    "site_clustered_ci95": [
+      0.0,
+      0.11627906976744186
+    ],
+    "bootstrap_n_clusters": 27,
+    "bootstrap_distinct_resamples": 10000,
+    "bootstrap_informative": true,
+    "N_INDICATOR_FIELDS": 46,
+    "N_PREDICTABLE": 2,
+    "ADMITTED_FIELDS": 47,
+    "ADMITTED_PRIMARY_FIELDS": 46,
+    "ADMITTED_NONCE_FIELDS": 1,
+    "ADMITTED_SITES": 27,
+    "ADMITTED_ENDPOINTS": 28,
+    "B_MEMORY_REPEAT_ACC_MEAN": 0.3361801242236025,
+    "B_MARKOV1_ACC_MEAN": 0.05900621118012422,
+    "B_CONSTANT_MODE_ACC_MEAN": 0.0,
+    "NULL_FP_AGGREGATE": 0.0,
+    "NULL_FP_AGGREGATE_DESIGN_LITERAL": 0.000625,
+    "PC_POWER_MIN": 1.0,
+    "LIVE_NULL_FIRED_FRACTION": 0.0,
+    "NON_GET_REQUESTS": 0,
+    "TRANSPORT_ERROR_RATE": 0.017543859649122806,
+    "TRANSPORT_ERRORS": 24,
+    "PLANNED_GETS": 1368
+  },
+  "claim_ceiling": "The FALSIFIES outcome is correctly derived from the frozen branch precedence (S0): PREDICTABLE_PREVALENCE_POOLED = 0.0435 <= P_FLOOR = 0.10 AND site-clustered 95% CI upper bound = 0.116 < P_HI = 0.25. Per the frozen claim_ceiling, this FALSIFIES outcome is bounded to the frozen credential-free action-gating substrate class and window; it does not close C-WEB-DYNAMICS or the Physics domain and authorizes no Product promotion. The negative is valid and decision-changing: it establishes that on this substrate, server-minted action-gating state is observation-bound and the architecture must persist procedures/paths and re-observe values fresh.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-37973239386/request.json",
+    "research/experiments/EXP-PHYSICS-37973239386/spec.json",
+    "research/experiments/EXP-PHYSICS-37973239386/prereg.md",
+    "research/experiments/EXP-PHYSICS-37973239386/freeze.json",
+    "research/experiments/EXP-PHYSICS-37973239386/result.json",
+    "research/experiments/EXP-PHYSICS-37973239386/report.md",
+    "research/experiments/EXP-PHYSICS-37973239386/provenance.json",
+    "research/experiments/EXP-PHYSICS-37973239386/raw/collection.jsonl",
+    "research/experiments/EXP-PHYSICS-37973239386/derived/fields.json",
+    "research/experiments/EXP-PHYSICS-37973239386/derived/field_cluster_map.json",
+    "research/experiments/EXP-PHYSICS-37973239386/derived/controls.json",
+    "research/experiments/EXP-PHYSICS-37973239386/derived/metrics.json",
+    "research/physics/exp_37973239386_lib.py",
+    "research/physics/exp_37973239386_run.py",
+    "research/physics/exp_37973239386_finalize.py"
+  ],
+  "unresolved": [
+    {
+      "id": "U1_GENERALIZATION",
+      "question": "Do the two counted predictable classes (pypi.org itsdangerous-style timestamp segment; reddit.com jsc_token constant 32-hex prefix) persist across collection windows, or are they point-in-time artifacts that may be rotated by the operator?"
+    },
+    {
+      "id": "U2_CONSTRUCT_BOUNDARY",
+      "question": "What is the real-Web predictability prevalence on JavaScript-rendered, authenticated, or SPA substrates that this credential-free HTTP GET instrument cannot observe?"
+    },
+    {
+      "id": "U3_NULL_RULE_SENSITIVITY",
+      "question": "Why did R_WALLCLOCK_B64 fire once in the DESIGN literal null battery and zero times in the EXECUTE re-run with the same nominal seeds? This is a within-tolerance discrepancy but limits the EXECUTE-only bound on that rule's false-positive rate."
+    },
+    {
+      "id": "U4_REDDIT_MECHANISM",
+      "question": "What produces the constant 32-hex-character prefix of reddit.com jsc_token and does it carry predictive information about the random suffix?"
+    },
+    {
+      "id": "U5_VALUE_VS_PROCEDURE",
+      "question": "Whether the architecture should persist procedures/paths and re-observe values fresh is informed but not decided by this bounded negative; a product-level cost comparison is out of scope for this physics packet."
+    }
+  ]
+}
