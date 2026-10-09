@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-37978902447",
-  "last_experiment_id": "EXP-GRAPH-37964565784",
-  "last_verdict": "MEASUREMENT_INVALID_AT_GATE_C3_SECOND_CERTIFICATE_DESIGN_DEFECT_CONJUNCTIVE_PREDICATE_UNSATISFIABLE_C_FRESHNESS_UNCHANGED_AT_HYPOTHESIS_NO_PROMOTION_NO_PRODUCT_CHANGE_NO_RECHAIN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-37978902447",
+  "last_verdict": "SUPPORTS_EXTRACTION_DEFECT_CONFIRMED_ON_4_PINNED_ANCHORS_C_FRESHNESS_ADVANCES_HYPOTHESIS_TO_EXPERIMENTAL_PART_II_D1V_DEGENERATE_UNREAD_NO_PRODUCT_PROMOTION",
   "continue_immediately": false,
-  "next_question": "With the frozen GATE-C3 session-isolation predicate now implemented exactly as the audit intended (a DISJUNCTION: pairwise disjointness required only on session-identifying cookie names OR on (name,value) pairs after excluding the frozen constant-configuration allowlist of preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global and CentralAuthAnonTopLevel -- operationally, use pairwise_disjoint_on_name_value_after_filter as the sole disjointness check, NOT conjoined with session_identifying_disjoint as the failed packet did), does a re-frozen freshness experiment on the same four pinned credential-free anchors (gitlab.com trial_registrations, auth.wikimedia.org Special:CreateAccount, en.wikipedia.org Special:UserLogin, meta.discourse.org), K=4 fresh disjoint-jar sessions with dual independent stdlib extraction paths and retained raw bodies, reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), thereby licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-H; and if D1 is reached, does a D1V population whose trials span MORE THAN ONE anchor (the current constructed population has all M-N-D1V=6 trials from CAL-POS-2 alone) make the incumbent value-blind guard's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable with a non-degenerate anchor-clustered lower bound, rather than the unread single-anchor point estimate 1.0?",
+  "next_question": "Can a D1V (value-only rotation: STALE and NOT structural_change and NOT transport_change) drift population spanning >=2 anchors be constructed on a credential-free, server-rendered, no-JavaScript GET-only substrate -- either by admitting anchors whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators from value rotation -- such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate, thereby licensing either INCUMBENT-BLIND-CONFIRMED (CH-PRECOND-BINDING necessary) or INCUMBENT-NOT-BLIND (value-aware channel deletable) under CC-A..CC-I?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-09T20:34:58.183030+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "61a29ceec64cdc9b8db206d891d6756d928adfe168f5f6b981633dffcc386cdb",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "5f414767f9c329a2576c2b06",
-  "last_failure_control_revision": "5c4f9421bc747022bf943c2f0a4707440b34d63f2fae2885ef8b0401cbb08b45"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-09T20:41:13.558727+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6d576cc5fd0bd22ed4a4c5c7cb1853be1eaee78e65701ba3a4a3728b7a8b7d68",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }

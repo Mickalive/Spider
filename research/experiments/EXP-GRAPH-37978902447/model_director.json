@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/exo-free",
-  "attempt": 5,
-  "exit_code": 1,
-  "category": "substantive",
-  "github_run_id": "37978902447",
+  "status": "success",
+  "model": "opencode/big-pickle",
+  "attempt": 4,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "37988061766",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-09T20:34:57.732958+00:00"
+  "recorded_at": "2026-10-09T20:40:49.957857+00:00"
 }
