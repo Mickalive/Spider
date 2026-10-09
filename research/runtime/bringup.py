@@ -55,11 +55,16 @@ def acquire_run_lock(lock_path: str) -> Optional[int]:
 
 def _probe_python_dependencies() -> Dict[str, Any]:
     """CAP-PYTHON-DEPENDENCIES: isolated subprocess import check with the same
-    interpreter, short timeout. Never a synthetic success."""
+    interpreter for exactly the frozen substrate dependency set
+    (flask 3.1.3, pyjwt 2.15.0, gunicorn 23.0.0, playwright 1.63.0 per
+    prereg section 4). Never a synthetic success. Note: 'requests'/httpx are
+    deliberately NOT dependency-scope requirements; the frozen design forbids
+    their use in the episode transport (no-synthetic-fallback), so their
+    absence cannot fail this scope."""
     code = (
         "import importlib, json\n"
         "out = {}\n"
-        "for m in ['flask', 'jwt', 'requests', 'gunicorn']:\n"
+        "for m in ['flask', 'jwt', 'gunicorn', 'playwright']:\n"
         "    try:\n"
         "        mod = importlib.import_module(m)\n"
         "        out[m] = str(getattr(mod, '__version__', 'unknown'))\n"
@@ -310,6 +315,47 @@ def _probe_health_gate(contract: Dict[str, Any]) -> Dict[str, Any]:
                 "probed_at": _utc()}
 
 
+def _probe_proxy_cache(contract: Dict[str, Any]) -> Dict[str, Any]:
+    """CAP-NGINX-CACHE-MISS-HIT: real proxy_cache corroboration on one
+    cacheable key through the exclusive nginx. First GET must be MISS,
+    second must be HIT. An error is UNAVAILABLE/ERROR, never a pass."""
+    import urllib.request
+    subs = contract["substrate"]
+    port = subs["nginx"]["listen"].split(":")[1]
+    nonce = str(time.time_ns())
+    url = f"http://127.0.0.1:{port}/health?cacheprobe={nonce}"
+
+    def _leg() -> Dict[str, Any]:
+        req = urllib.request.Request(url, headers={"User-Agent": "spider-runtime-bringup/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            return {"status": resp.status, "x_cache": resp.headers.get("X-Cache", "missing"),
+                    "worker": resp.headers.get("X-Worker-Pid", "missing")}
+
+    try:
+        leg1 = _leg()
+        leg2 = _leg()
+        ok = (leg1["status"] == 200 and leg2["status"] == 200
+              and leg1["x_cache"] == "MISS" and leg2["x_cache"] == "HIT")
+        return {
+            "status": "AVAILABLE" if ok else "UNAVAILABLE",
+            "url": url, "leg1": leg1, "leg2": leg2, "miss_then_hit": bool(ok),
+            "evidence": ("two GETs on one cacheable key through exclusive nginx; "
+                         "MISS then HIT proves a real proxy_cache"),
+            "smallest_unblock_action": None if ok else
+                "enable proxy_cache for the probed location and start the substrate (2x gunicorn + exclusive nginx -c), then re-run",
+            "probed_at": _utc(),
+        }
+    except Exception as e:
+        return {
+            "status": "UNAVAILABLE", "url": url,
+            "error": f"{type(e).__name__}: {e}",
+            "miss_then_hit": False,
+            "evidence": "no HTTP response; recorded UNAVAILABLE, never upgraded",
+            "smallest_unblock_action": "start the substrate (2x gunicorn + exclusive nginx -c) and verify a cacheable 200 path, then re-run",
+            "probed_at": _utc(),
+        }
+
+
 def _probe_readiness_floors(contract: Dict[str, Any], experiment_dir: Path) -> Dict[str, Any]:
     """CAP-N-NON304-FLOOR and CAP-X-WORKER-PID-FLOOR: read this run's readiness
     certificate and check the frozen floors. The certificate is raw evidence;
@@ -408,6 +454,7 @@ def build_ledger(contract: Dict[str, Any], experiment_dir: Path) -> Dict[str, An
     comps["CAP-DISTRIBUTED-SUBSTRATE"] = _probe_distributed_substrate(contract)
     comps["CAP-WAL-SCHEMA"] = _probe_wal_schema(contract)
     comps["CAP-HEALTH-GATE"] = _probe_health_gate(contract)
+    comps["CAP-NGINX-CACHE-MISS-HIT"] = _probe_proxy_cache(contract)
     floors = _probe_readiness_floors(contract, experiment_dir)
     comps.update(floors)
     return comps
@@ -459,7 +506,7 @@ def main() -> int:
             "experiment_id": contract["experiment_id"],
             "lane": contract["lane"],
             "run_id": contract["run_id"],
-            "base_sha": "8bc01342a23fe7a24959d09d8e2556ba2966c7e8",
+            "base_sha": contract.get("base_sha", "8bc01342a23fe7a24959d09d8e2556ba2966c7e8"),
             "head_sha": git_head,
             "worktree_status": wt_status,
             "generated_at": _utc(),

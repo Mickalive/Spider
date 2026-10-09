@@ -1,0 +1,23 @@
+{
+  "public_api_only": true,
+  "private_helper_used": false,
+  "synthetic_fallback_used": false,
+  "executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+  "is_canonical_path": true,
+  "executable_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+  "sha256_matches_frozen": true,
+  "browser_version": "153.0.8010.12",
+  "launch_ok": true,
+  "api_used": "sync_playwright().start().chromium.executable_path + p.chromium.launch(executable_path=...)",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "dom_ax_capture": {
+    "sample_order_index": 0,
+    "dom_nodes_pre": 20,
+    "ax_nodes_pre": 18,
+    "dom_nodes_post": 21,
+    "ax_nodes_post": 20
+  }
+}

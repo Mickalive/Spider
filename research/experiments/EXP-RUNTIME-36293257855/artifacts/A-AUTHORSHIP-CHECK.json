@@ -1,0 +1,11 @@
+{
+  "pass": true,
+  "surface_path": "research/runtime/intervention_surface.py",
+  "surface_sha256": "10be3dcb8bed76c8d215916aa9b5b2fb8cf95ede8a6136eedd5b948ba1ea0705",
+  "scorer_path": "research/runtime/oracle_scorer.py",
+  "scorer_sha256": "7a30ff637654fbfc366d0f0b1dbe2f8bc481c9b56f5ee48fd894e12baccdad5f",
+  "surface_imports_scorer": false,
+  "scorer_imports_surface": false,
+  "scorer_imports_flask": false,
+  "shared_module": "research/runtime/shared_config.py (constants only; no logic)"
+}

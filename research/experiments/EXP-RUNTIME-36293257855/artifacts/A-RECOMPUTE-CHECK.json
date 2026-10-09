@@ -1,0 +1,75 @@
+{
+  "zero_mismatches": true,
+  "n_episodes_raw": 120,
+  "n_episodes_ordered": 120,
+  "n_arms": 6,
+  "episodes_per_arm": {
+    "P-WRITE": 20,
+    "P-DRIFT": 20,
+    "N-READ": 20,
+    "N-INVALID": 20,
+    "N-EXPIRED": 20,
+    "N-DELETED": 20
+  },
+  "recomputed_arms": {
+    "P-WRITE": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "P-DRIFT": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-READ": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-INVALID": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-EXPIRED": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    },
+    "N-DELETED": {
+      "n_scored": 20,
+      "k": 20,
+      "point_rate": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0,
+      "ci_nondegenerate": true
+    }
+  },
+  "recomputed_all_arms_pass": true,
+  "recomputed_verdict": "SUPPORTS",
+  "producer_verdict": "SUPPORTS",
+  "mismatches": [],
+  "method": "independent re-implementation reading only raw JSONL and A-SEEDED-ORDER.json; shares no code with the producer scorer; arm labels joined only after the bits",
+  "z": 1.959963984540054,
+  "thresholds": {
+    "point_min": 0.9,
+    "wilson_lo_min": 0.8,
+    "non_degenerate": true
+  }
+}

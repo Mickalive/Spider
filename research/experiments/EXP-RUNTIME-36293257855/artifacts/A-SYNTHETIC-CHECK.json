@@ -1,0 +1,7 @@
+{
+  "pass": true,
+  "synthetic_fallback_used": false,
+  "forbidden_client_imports_found": [],
+  "episode_transport": "Playwright 1.63.0 public API only",
+  "note": "fixture admin/health calls use stdlib urllib outside the measured interval"
+}

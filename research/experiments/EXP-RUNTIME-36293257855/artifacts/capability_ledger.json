@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "ledger_id": "CAPABILITY-LEDGER-36293257855",
+  "experiment_id": "EXP-RUNTIME-36293257855",
+  "lane": "runtime",
+  "run_id": "36293257855",
+  "base_sha": "244dd5bdfe5d34bcf74f4d8472db3caa0922b641",
+  "head_sha": "18a52f12bb77f97a5252afebb881e53df2b7fa79",
+  "worktree_status": "M .github/workflows/factory-pulse.yml\n M .github/workflows/factory-recovery.yml\n M .opencode/agents/spider_portfolio_director.md\n M .opencode/agents/spider_research_scout.md\n M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n M research/experiments/EXP-RUNTIME-36293257855/model_execute.json\n M research/runtime/bringup.py\n M scripts/build_portfolio_snapshot.py\n M scripts/validate_repo.py\n?? codex/experiments/EXP-FRONTIER-36293269574/\n?? codex/experiments/EXP-FRONTIER-36306528608/\n?? codex/experiments/EXP-FRONTIER-37385647440/\n?? codex/experiments/EXP-GRAPH-36287167610/\n?? codex/experiments/EXP-GRAPH-36302977302/\n?? codex/experiments/EXP-GRAPH-36314193643/\n?? codex/experiments/EXP-INTEL-36293264917/\n?? codex/experiments/EXP-INTEL-36306525220/\n?? codex/experiments/EXP-INTEL-36314207239/\n?? codex/experiments/EXP-PHYSICS-36302980957/\n?? codex/experiments/EXP-PHYSICS-36314197314/\n?? codex/experiments/EXP-PHYSICS-37385620138/\n?? codex/experiments/EXP-PRODUCT-36293260887/\n?? codex/experiments/EXP-PRODUCT-36306521892/\n?? codex/experiments/EXP-PRODUCT-36314204238/\n?? codex/experiments/EXP-PRODUCT-37385633334/\n?? research/experiments/EXP-RUNTIME-36293257855/artifacts/\n?? research/experiments/EXP-RUNTIME-36293257855/bringup_contract.json\n?? research/experiments/EXP-RUNTIME-36293257855/provenance.json\n?? research/experiments/EXP-RUNTIME-36293257855/recompute_check.py\n?? research/experiments/EXP-RUNTIME-36293257855/report.md\n?? research/experiments/EXP-RUNTIME-36293257855/result.json\n?? research/experiments/EXP-RUNTIME-36293257855/run_experiment.py\n?? research/portfolio/PROGRAM_AUDIT_2026-10-09.md\n?? research/runtime/intervention_surface.py\n?? research/runtime/oracle_scorer.py\n?? research/runtime/shared_config.py\n?? scripts/build_scout_fallback.py",
+  "generated_at": "2026-10-09T16:23:10.347245+00:00",
+  "freshness": "same-run; every component probed at ledger generation time",
+  "secret_redaction": "credential presence and references only; no secret values",
+  "required_scope": {
+    "CAP-CHROMIUM-LAUNCH": {
+      "required": [
+        "CAP-PYTHON-DEPENDENCIES",
+        "CAP-CHROMIUM-LAUNCH"
+      ],
+      "advisory": [
+        "CAP-BROWSERGYM-IMPORT",
+        "CAP-AGENTLAB-IMPORT"
+      ]
+    },
+    "CAP-WAL-SUBSTRATE": {
+      "required": [
+        "CAP-PYTHON-DEPENDENCIES",
+        "CAP-DISTRIBUTED-SUBSTRATE",
+        "CAP-WAL-SCHEMA",
+        "CAP-HEALTH-GATE",
+        "CAP-N-NON304-FLOOR",
+        "CAP-X-WORKER-PID-FLOOR"
+      ],
+      "advisory": [
+        "CAP-POLICY-MODEL-CREDENTIAL",
+        "CAP-HF-REACHABILITY",
+        "CAP-GHCR-REACHABILITY"
+      ]
+    },
+    "CAP-NGINX-PROXY": {
+      "required": [
+        "CAP-DISTRIBUTED-SUBSTRATE",
+        "CAP-HEALTH-GATE",
+        "CAP-NGINX-CACHE-MISS-HIT"
+      ],
+      "advisory": [
+        "CAP-HF-REACHABILITY",
+        "CAP-GHCR-REACHABILITY"
+      ]
+    }
+  },
+  "scopes": {
+    "CAP-CHROMIUM-LAUNCH": {
+      "required": [
+        "CAP-PYTHON-DEPENDENCIES",
+        "CAP-CHROMIUM-LAUNCH"
+      ],
+      "advisory": [
+        "CAP-BROWSERGYM-IMPORT",
+        "CAP-AGENTLAB-IMPORT"
+      ],
+      "failed_required": [],
+      "scope_pass": true,
+      "fail_closed_note": "the contract fails closed for this scope; this is a bounded contract/availability result, never a scientific falsification"
+    },
+    "CAP-WAL-SUBSTRATE": {
+      "required": [
+        "CAP-PYTHON-DEPENDENCIES",
+        "CAP-DISTRIBUTED-SUBSTRATE",
+        "CAP-WAL-SCHEMA",
+        "CAP-HEALTH-GATE",
+        "CAP-N-NON304-FLOOR",
+        "CAP-X-WORKER-PID-FLOOR"
+      ],
+      "advisory": [
+        "CAP-POLICY-MODEL-CREDENTIAL",
+        "CAP-HF-REACHABILITY",
+        "CAP-GHCR-REACHABILITY"
+      ],
+      "failed_required": [],
+      "scope_pass": true,
+      "fail_closed_note": "the contract fails closed for this scope; this is a bounded contract/availability result, never a scientific falsification"
+    },
+    "CAP-NGINX-PROXY": {
+      "required": [
+        "CAP-DISTRIBUTED-SUBSTRATE",
+        "CAP-HEALTH-GATE",
+        "CAP-NGINX-CACHE-MISS-HIT"
+      ],
+      "advisory": [
+        "CAP-HF-REACHABILITY",
+        "CAP-GHCR-REACHABILITY"
+      ],
+      "failed_required": [],
+      "scope_pass": true,
+      "fail_closed_note": "the contract fails closed for this scope; this is a bounded contract/availability result, never a scientific falsification"
+    }
+  },
+  "components": {
+    "CAP-PYTHON-DEPENDENCIES": {
+      "status": "AVAILABLE",
+      "command": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3 -c <import flask, jwt, requests, gunicorn>",
+      "timeout_s": 30,
+      "exit_status": 0,
+      "versions": {
+        "flask": "3.1.3",
+        "jwt": "2.15.0",
+        "gunicorn": "23.0.0",
+        "playwright": "unknown"
+      },
+      "evidence": "isolated subprocess import check (same interpreter)",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:09.454742+00:00"
+    },
+    "CAP-CHROMIUM-LAUNCH": {
+      "status": "AVAILABLE",
+      "executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "is_canonical_path": true,
+      "browser_version": "153.0.8010.12",
+      "api_used": "sync_playwright().start().chromium.executable_path + p.chromium.launch(executable_path=...)",
+      "private_helper_used": false,
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.083958+00:00"
+    },
+    "CAP-BROWSERGYM-IMPORT": {
+      "status": "UNAVAILABLE",
+      "command": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3 -c \"import browsergym\"",
+      "timeout_s": 30,
+      "exit_status": 1,
+      "stderr_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'browsergym'\n",
+      "evidence": "isolated subprocess import check; never a synthetic success",
+      "smallest_unblock_action": "pip install the browsergym package, then re-run the bring-up command",
+      "probed_at": "2026-10-09T16:23:10.097968+00:00"
+    },
+    "CAP-AGENTLAB-IMPORT": {
+      "status": "UNAVAILABLE",
+      "command": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3 -c \"import agentlab\"",
+      "timeout_s": 30,
+      "exit_status": 1,
+      "stderr_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'agentlab'\n",
+      "evidence": "isolated subprocess import check; never a synthetic success",
+      "smallest_unblock_action": "pip install the agentlab package, then re-run the bring-up command",
+      "probed_at": "2026-10-09T16:23:10.111594+00:00"
+    },
+    "CAP-POLICY-MODEL-CREDENTIAL": {
+      "status": "UNAVAILABLE",
+      "env_key_presence": {
+        "OPENAI_API_KEY": false,
+        "ANTHROPIC_API_KEY": false,
+        "HF_TOKEN": false,
+        "GITHUB_TOKEN": false
+      },
+      "redaction": "presence booleans only; no secret values recorded",
+      "smallest_unblock_action": "configure the required policy-model credential environment key, then re-run; presence alone never authorizes a scientific claim",
+      "probed_at": "2026-10-09T16:23:10.111635+00:00"
+    },
+    "CAP-HF-REACHABILITY": {
+      "status": "AVAILABLE",
+      "url": "https://huggingface.co",
+      "http_status": 200,
+      "latency_ms": 88.9,
+      "timeout_s": 10,
+      "evidence": "HTTP 200 within 10s; reachability means a response arrived, not that content was downloaded",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.214671+00:00"
+    },
+    "CAP-GHCR-REACHABILITY": {
+      "status": "UNAVAILABLE",
+      "url": "https://ghcr.io/v2/",
+      "timeout_s": 10,
+      "error": "HTTPError: HTTP Error 401: Unauthorized",
+      "evidence": "no HTTP response within timeout; recorded UNAVAILABLE, never upgraded",
+      "smallest_unblock_action": "provide network egress to the endpoint (or record the endpoint as unreachable in the invoking lane's preregistration), then re-run",
+      "probed_at": "2026-10-09T16:23:10.323857+00:00"
+    },
+    "CAP-DISTRIBUTED-SUBSTRATE": {
+      "status": "AVAILABLE",
+      "port_checks": {
+        "127.0.0.1:19860": true,
+        "127.0.0.1:19861": true,
+        "127.0.0.1:19851": true
+      },
+      "evidence": "TCP connect checks against the frozen ports",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.324316+00:00"
+    },
+    "CAP-WAL-SCHEMA": {
+      "status": "AVAILABLE",
+      "journal_mode": "wal",
+      "tables": [
+        "body_config",
+        "runtime_probe",
+        "sessions"
+      ],
+      "required_tables_present": true,
+      "wal_autocheckpoint_set": 0,
+      "evidence": "PRAGMA journal_mode + sqlite_master inspection on the frozen path",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.326323+00:00"
+    },
+    "CAP-HEALTH-GATE": {
+      "status": "AVAILABLE",
+      "url": "http://127.0.0.1:19851/health",
+      "http_status": 200,
+      "x_worker_pid": "44624",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.326944+00:00"
+    },
+    "CAP-NGINX-CACHE-MISS-HIT": {
+      "status": "AVAILABLE",
+      "url": "http://127.0.0.1:19851/health?cacheprobe=1791562990326959383",
+      "leg1": {
+        "status": 200,
+        "x_cache": "MISS",
+        "worker": "44624"
+      },
+      "leg2": {
+        "status": 200,
+        "x_cache": "HIT",
+        "worker": "44624"
+      },
+      "miss_then_hit": true,
+      "evidence": "two GETs on one cacheable key through exclusive nginx; MISS then HIT proves a real proxy_cache",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.328384+00:00"
+    },
+    "CAP-N-NON304-FLOOR": {
+      "status": "AVAILABLE",
+      "observed": {
+        "n_non304": 240,
+        "per_ep_non304": {
+          "/api/profile": 120,
+          "/api/data_list": 120
+        },
+        "n_304": null
+      },
+      "floor": 200,
+      "floor_per_endpoint": 100,
+      "evidence": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36293257855/artifacts/A-READINESS-CERTIFICATE.json",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.328906+00:00"
+    },
+    "CAP-X-WORKER-PID-FLOOR": {
+      "status": "AVAILABLE",
+      "observed": {
+        "n_distinct_x_worker_pid": 2,
+        "distinct_workers": [
+          "44621",
+          "44624"
+        ]
+      },
+      "floor": 2,
+      "evidence": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36293257855/artifacts/A-READINESS-CERTIFICATE.json",
+      "smallest_unblock_action": null,
+      "probed_at": "2026-10-09T16:23:10.328914+00:00"
+    }
+  },
+  "inherited_probes": [
+    {
+      "id": "INHERITED-INTEL-36058324385",
+      "observation": "accepted Intel audit recorded pip-installed browsergym-core 0.14.3, agentlab 0.4.2 and playwright 1.63.0 with twelve successful 1280x720 CDP Accessibility.getFullAXTree captures at statistical median 707 accessibility nodes on canonical product pages (families 136/145/196/222).",
+      "recorded_availability": {
+        "browsergym_core_0_14_3": true,
+        "agentlab_0_4_2": true,
+        "playwright_1_63_0": true,
+        "cdp_ax_captures": 12,
+        "cdp_ax_median_nodes": 707
+      },
+      "evidence": "codex/claim_state.json:3145 (accepted Intel audit evidence)"
+    },
+    {
+      "id": "INHERITED-FRONTIER-36129180789",
+      "observation": "accepted Frontier substrate diagnostic reported browsergym_available=false with all primary and null controls NOT_RUN.",
+      "recorded_availability": {
+        "browsergym_available": false,
+        "controls": "NOT_RUN"
+      },
+      "evidence": "codex/experiments/EXP-FRONTIER-36129180789/handoff.json"
+    },
+    {
+      "id": "SAME-RUN-RESOLUTION",
+      "observation": "same-run probes resolve the contradiction at component level: the browser launch capability (public Playwright API + canonical Chromium executable) and the Playwright package are AVAILABLE in this environment, while the browsergym and agentlab imports are UNAVAILABLE. The historical distinction between an unavailable observation and a valid negative is preserved; availability is resolved per component, not erased.",
+      "evidence": [
+        "#CAP-CHROMIUM-LAUNCH",
+        "#CAP-BROWSERGYM-IMPORT",
+        "#CAP-AGENTLAB-IMPORT"
+      ]
+    }
+  ],
+  "substrate": {
+    "upstreams": [
+      "127.0.0.1:19860",
+      "127.0.0.1:19861"
+    ],
+    "nginx": "127.0.0.1:19851",
+    "config_path": "/tmp/single.db.nginx.conf",
+    "upstream_hash": "hash $request_uri consistent",
+    "database_path": "/tmp/single.db",
+    "journal_mode": "WAL",
+    "wal_autocheckpoint": 0,
+    "schema": {
+      "sessions": "CREATE TABLE IF NOT EXISTS sessions (id INTEGER PRIMARY KEY, sid TEXT UNIQUE, username TEXT, valid INTEGER DEFAULT 1, created_at REAL)",
+      "runtime_probe": "CREATE TABLE IF NOT EXISTS runtime_probe (id INTEGER PRIMARY KEY CHECK(id=1), marker TEXT NOT NULL, representation TEXT NOT NULL, revision INTEGER NOT NULL, updated_at REAL NOT NULL)",
+      "body_config": "CREATE TABLE IF NOT EXISTS body_config (id INTEGER PRIMARY KEY CHECK(id=1), variant TEXT, content TEXT)"
+    }
+  },
+  "health_checks": {
+    "nginx_health": "GET http://127.0.0.1:19851/health -> 200 + X-Worker-Pid present",
+    "origin_health": [
+      "GET http://127.0.0.1:19860/health -> 200 + X-Worker-Pid",
+      "GET http://127.0.0.1:19861/health -> 200 + X-Worker-Pid"
+    ],
+    "readiness_certificate": "artifacts/A-READINESS-CERTIFICATE.json",
+    "proxy_cache": "two GETs on one cacheable key through exclusive nginx -> MISS then HIT"
+  },
+  "floors": {
+    "n_non304_min": 200,
+    "n_non304_per_endpoint_min": 100,
+    "distinct_x_worker_pid_min": 2,
+    "per_uri_stickiness_min": 0.9,
+    "per_uri_stickiness_min_uris": 10,
+    "missing_worker_header_on_200_max": 0
+  },
+  "one_command": "python -m research.runtime.bringup --config research/experiments/EXP-RUNTIME-36293257855/bringup_contract.json --ledger research/experiments/EXP-RUNTIME-36293257855/artifacts/capability_ledger.json",
+  "evidence": {
+    "readiness_certificate": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36293257855/artifacts/A-READINESS-CERTIFICATE.json",
+    "bringup_contract": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36293257855/bringup_contract.json",
+    "contract_sha256": "b5c44d4e8aef64c8a0953df77a10092ad11054600eaee6f4111c3ec793f4be8c"
+  }
+}

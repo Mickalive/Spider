@@ -1,0 +1,16 @@
+{
+  "order_index": 0,
+  "episode_id": 4,
+  "pre": {
+    "dom_nodes": 20,
+    "dom_sha256": "91f0599b6798dd00e2fd34e1046f0dde3a3c3252edbf4fc13e669f54aab86cfc",
+    "ax_nodes": 18,
+    "ax_sha256": "fbbfd709257518a7f8220b1d6d0e2182753fbbdf56ab78d01d765f614a0b9063"
+  },
+  "post": {
+    "dom_nodes": 21,
+    "dom_sha256": "c697b129ebe6b98dd0928d662aa367ece93757157fbe4f8af474c7d30724b7d6",
+    "ax_nodes": 20,
+    "ax_sha256": "f88787a89865718e8f4b5cf4a656aed7a601b502a30f153fcdb1a1c712645cf6"
+  }
+}

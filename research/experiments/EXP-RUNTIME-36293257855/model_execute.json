@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/ling-3.1-flash-free",
-  "attempt": 8,
-  "exit_code": 75,
-  "category": "transient-pool-exhausted",
-  "github_run_id": "37948717469",
+  "status": "success",
+  "model": "opencode/big-pickle",
+  "attempt": 5,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "37953868318",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-09T15:34:35.818834+00:00"
+  "recorded_at": "2026-10-09T16:27:49.545137+00:00"
 }
