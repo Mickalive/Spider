@@ -4,7 +4,7 @@ Path: `research/experiments/<experiment_id>/`
 
 This document is the binding transmission protocol between autonomous agents. Agents do not hand work to one another through chat memory, Actions logs, unstated assumptions or prose summaries. They hand over the canonical experiment packet below.
 
-The machine creates `request.json`. DESIGN fills `spec.json` and `prereg.md`. The deterministic freezer creates `freeze.json`. After freeze, those inputs are immutable. EXECUTE adds measurements. AUDIT adds an independent attack. DIRECTOR adds the bounded decision and durable handoff. Downstream stages may read upstream files but must never rewrite them.
+The machine creates `request.json`. DESIGN fills `spec.json` and `prereg.md`. When required, BUILD creates only preregistered instrument/capability/fixture artifacts and a deterministic `build_receipt.json`. The deterministic freezer then creates `freeze.json` and binds those exact artifact bytes. After freeze, those inputs and bound artifacts are immutable. EXECUTE adds measurements. AUDIT adds an independent attack. DIRECTOR adds the bounded decision and durable handoff. Downstream stages may read upstream files but must never rewrite them.
 
 ## 1. Transmission invariants
 
@@ -44,11 +44,17 @@ If a parent handoff exists, DESIGN must preserve its four-way distinction: `esta
 
 When `director_mandate` is present, its target claim and strategic question are binding research direction. DESIGN may refine that question into the smallest rigorous falsifiable experiment, but may not silently drift back to the parent handoff or substitute a nearby objective.
 
-DESIGN emits only `spec.json` and `prereg.md`.
+DESIGN emits only `spec.json` and `prereg.md`. `spec.json` also declares `build_required` and `freeze_artifacts`.
 
-### DESIGN -> EXECUTE
+### DESIGN -> BUILD -> FREEZE
 
-EXECUTE receives the exact frozen `request.json`, `spec.json`, `prereg.md`, `freeze.json`. It executes the frozen design rather than re-designing after outcomes are visible.
+If `build_required=true`, BUILD creates only the exact preregistered instrument/capability/fixture files declared in `freeze_artifacts`, within the lane's authorized code roots or experiment directory. BUILD may run unit/import/health/control-fixture checks needed to prove the instrument exists, but MUST NOT execute treatment arms, inspect outcome-bearing experimental data, tune on outcomes, or write producer/audit/verdict files.
+
+The deterministic build receipt records the pre-build commit and hashes of all declared artifacts. FREEZE verifies those hashes and binds the artifact commit+bytes together with request/spec/prereg. Even when `build_required=false`, a zero-artifact receipt makes the transition explicit.
+
+### FREEZE -> EXECUTE
+
+EXECUTE receives the exact frozen `request.json`, `spec.json`, `prereg.md`, `build_receipt.json`, `freeze.json` and bound artifact bytes. It executes the frozen design rather than re-designing after outcomes are visible.
 
 EXECUTE emits `result.json`, `report.md`, `provenance.json` plus raw/derived artifacts where practical.
 
@@ -89,6 +95,8 @@ Cross-lane scientific inheritance should occur through accepted Codex evidence o
 - `product_consequence_negative`
 - `estimated_cost`
 - `expected_information_gain`
+- `build_required` — boolean; true when new code/fixture/task-bank must be constructed before freeze
+- `freeze_artifacts` — exact repository-relative files whose bytes must be bound before EXECUTE; may be `[]` only when no pre-freeze artifact is required
 
 The scientific content of these fields is deliberately flexible. The contract standardizes transmission, not the scientific hypothesis.
 
