@@ -188,7 +188,7 @@ def main():
                 "product_consequence_negative": "",
                 "estimated_cost": "",
                 "expected_information_gain": "",
-                "build_required": false,
+                "build_required": False,
                 "freeze_artifacts": [],
             }
             (exp / "spec.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
