@@ -3,11 +3,11 @@
   "note": "Candidates are fallbacks, not permanent health claims. Runtime failures rotate automatically.",
   "roles": {
     "research": [
+      "opencode/big-pickle",
       "opencode/mimo-v2.5-free",
       "opencode/muse-spark-1.2-contributor-free",
       "opencode/hy3-free",
-      "opencode/nemotron-3-ultra-free",
-      "opencode/big-pickle"
+      "opencode/nemotron-3-ultra-free"
     ],
     "audit": [
       "opencode/hy3-free",

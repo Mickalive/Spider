@@ -18,7 +18,7 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `research/portfolio/PROGRAM_AUDIT_2026-10-09.md` as a dated strategic synthesis (never a substitute for canonical evidence);
+- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as a dated strategic synthesis (never a substitute for canonical evidence);
 - `codex/claim_state.json`;
 - `codex/index.json`;
 - the exact machine-generated director snapshot supplied by the workflow;
@@ -91,7 +91,7 @@ In particular:
 - Product should prioritize external-agent behavior and end-to-end product economics.
 - Graph should cover cumulative inheritance broadly, not identify itself with one subclaim.
 - Physics may go deep on measurement when that depth is actually opening a path to real Web evidence.
-- Do not assign expensive C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON execution while the shipped SPIDER treatment cannot demonstrate a pre-freeze executable inherited mechanism or while the task bank gives cold/retrieval baselines ceiling performance; assign Product/Runtime to remove that blocker first.
+- Do not assign expensive C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON execution until ALL THREE readiness conditions hold in current accepted evidence: (1) the shipped Product treatment can demonstrate a pre-freeze executable inherited parameterized mechanism plus a known-negative refusal, (2) the task bank gives cold/retrieval baselines non-ceiling dynamic range and a treatment/comparator distinction, and (3) the selected same-model endpoint/runtime can actually drive the minimal multi-step Web-agent capability test under the intended budget. If any condition is missing, assign Product/Runtime/Intel to remove that blocker instead of funding the full benchmark.
 
 ## Output
 
