@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "github_run_id": "37973264582",
+  "github_run_attempt": "1",
+  "request_base_sha": "7d87e40d51710c47f6fde0464a6834cb27056c3b",
+  "execute_source_commit": "4edcd4698a6658ad639b3c4a48afd07c65e4f8f1",
+  "frozen_inputs": {
+    "request.json": "455427c8424b09e4ec5f34c01003e8929229cb5347a9e9f3e7dbee2c84d8594f",
+    "spec.json": "36f1b4e8b42e54f50e2b04eb4d55d12af8dbe75826f0e090fe5a141211cb0d66",
+    "prereg.md": "98cf2603139e6c9a7146d427701b908a4758016013d391fd27401096e13ca510",
+    "frozen_at": "2026-10-09T18:38:26.163258+00:00"
+  },
+  "claim_ids": ["C-LLM-INHERIT"],
+  "execution_checkpoint_pre_execute_sha": "d67738b0fb8b5a95b6c4d5777a4b9ae838d96631",
+  "code_paths": [
+    {"path": "research/intel/exp_37973264582_execute.py", "role": "EXECUTE harness (gates 0-3)", "sha256": "82c06ebae34f0b9b21f9d1da189c3409f3beacd3fda10897f14583d152a6601b"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/smoke_langgraph.py", "role": "B-COMPILED-WORKFLOW runnability smoke", "sha256": "fc3b4dac4f5655411d27104fb50355ba69efc887e2466527448a693b8700e55f"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/smoke_pw.py", "role": "browser tool substrate smoke", "sha256": "438fee9475922c27ee9c4ecc58f5aa111b52e06af6e806ffbb81a922aa49d143"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "role": "minimal Web-agent task (openai client)", "sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent_http.py", "role": "minimal Web-agent task (raw HTTP + retry)", "sha256": "5b51f09801f1a39e372cb7f6c43a5a18bdfc5b6101539ecd75e170aae4a73334"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent_http2.py", "role": "minimal Web-agent task (reasoning fallback, larger budget)", "sha256": "cc7a934330a6c33ee5e776ce413cd118adfcd8d1b1f512c1a34e8ed8bcefa2cb"}
+  ],
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json", "sha256": "b7f5c850c4cee3dbac892e28188c1ef18b32c44dc926cf42de121e731db294e9", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/comparator_obtainability.json", "sha256": "56708e0497e970be1973c7e95df64d44f609acf97143cf4b8791db83100ba185", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/gate_evaluation.json", "sha256": "9d035a541d31052e43a9b43c050c58609f8edcc0ebf891b5343e578c8d3006a2", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/provisioning_receipts.json", "sha256": "88236c4b723fff619c4428359a58db294f2c6f862223295f9b2ef7b28631c5b8", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/local_chat_completion.json", "sha256": "75abb90919ef6c9b0eb0e941265edc1e76f99817b8c503f71e5018a100bb1628", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/local_llama_server.log", "sha256": "cf8dbd41128ff8190a0bd8df2741306c98087b531ac7b8014e6c6918725843b8", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/pollinations_models.json", "sha256": "89877dada14daefc50a077576ef9c080aa15514f50418a1469af01874eda45a1", "role": "raw"}
+  ],
+  "datasets_and_fixtures": {
+    "local_model": {
+      "name": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+      "bytes": 491400032,
+      "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+      "source": "huggingface.co resolve redirect to us.aws.cdn.hf.co",
+      "path_at_runtime": "/tmp/opencode/probe/qwen05b-q4km.gguf"
+    },
+    "minimal_web_agent_fixture": {
+      "type": "inline data: HTML page",
+      "task": "click #reveal-btn then answer TARGET-42",
+      "page": "<h1>Vault</h1><button id='reveal-btn'>Reveal code</button><div id='code'></div>, JS sets #code text to TARGET-42 on click"
+    },
+    "comparator_package_wheels": {
+      "method": "pip download --no-deps --dest /tmp/opencode/probe/pkgs",
+      "packages": ["langchain", "langchain-community", "chromadb", "faiss-cpu", "llama-index", "browser-use", "langgraph", "pyautogen", "crewai", "dspy-ai", "letta", "zep-python", "playwright", "stagehand-py"],
+      "result": "all exit 0"
+    }
+  },
+  "endpoints": [
+    {"id": "E-LOCAL-LLAMA", "url": "http://127.0.0.1:8081/v1/chat/completions", "credential": "none", "model": "qwen2.5-0.5b-instruct"},
+    {"id": "E-POLLINATIONS-OPENAI", "url": "https://text.pollinations.ai/openai", "credential": "none (anonymous tier)", "model": "gpt-oss-20b"},
+    {"id": "E-GITHUB-MODELS", "url": "https://models.github.ai/inference/chat/completions", "credential": "GH_TOKEN", "result": "intercepted / not a valid completion"}
+  ],
+  "environment": {
+    "python": "3.12.15",
+    "llama_cpp_python": "0.2.90",
+    "chromium": "154.0.8037.97 (/usr/bin/google-chrome)",
+    "nproc": 4,
+    "gpu": "none",
+    "venv_for_comparator_smoke": "/tmp/opencode/probe/venv (openai 3.27.0, httpx 0.28.1, langgraph, langchain-openai, playwright)",
+    "network": "PyPI reachable; huggingface.co and registry.ollama.ai resolve; api-inference.huggingface.co and cdn-lfs.huggingface.co do not resolve; models.github.ai intercepted"
+  },
+  "commands": [
+    "python3 -m llama_cpp.server --model /tmp/opencode/probe/qwen05b-q4km.gguf --host 127.0.0.1 --port 8081 --chat_format qwen",
+    "curl -sS -X POST http://127.0.0.1:8081/v1/chat/completions -H 'content-type: application/json' -d '{\"model\":\"local\",\"messages\":[{\"role\":\"user\",\"content\":\"Reply with the single token SPIDER-PING\"}],\"max_tokens\":16}'",
+    "curl -sS https://text.pollinations.ai/models",
+    "curl -sS -X POST https://text.pollinations.ai/openai -H 'content-type: application/json' -d '{\"model\":\"openai-fast\",\"messages\":[{\"role\":\"system\",\"content\":\"You are a web agent. Reply JSON only.\"},{\"role\":\"user\",\"content\":\"Reply with {\\\"ok\\\":true}\"}],\"max_tokens\":60}'",
+    "./venv/bin/python smoke_langgraph.py http://127.0.0.1:8081/v1 local sk-noauth",
+    "./venv/bin/python smoke_langgraph.py https://text.pollinations.ai/v1 openai-fast sk-noauth",
+    "./venv/bin/python smoke_pw.py",
+    "./venv/bin/python min_webagent.py http://127.0.0.1:8081/v1 local 4",
+    "./venv/bin/python min_webagent_http2.py https://text.pollinations.ai/v1 openai-fast 4",
+    "python3 research/intel/exp_37973264582_execute.py"
+  ],
+  "notes": [
+    "EXECUTE did not modify frozen request.json/spec.json/prereg.md/freeze.json (hashes re-verified equal to freeze.json).",
+    "No git commit or push was performed by the lane.",
+    "Comparator published-numbers audit relies on external landscape evidence with source URLs recorded in raw/comparator_obtainability.json; not independently reproduced."
+  ]
+}

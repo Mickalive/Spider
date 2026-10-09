@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37973256064",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "category": "support_inference_limitation",
+      "description": "The distill_parameterized implementation's _infer_support function inferred a conservative regex pattern '^item\\-00[0-9]{1}$' from training identifiers item-001..item-005 (suffixes '1'..'5' of length 1). This pattern accepts item-006..item-009 but rejects item-010 (suffix '10' of length 2). The 3/15 treatment failures (item-010, user-010, order-010) are due to this support generalization boundary, not a failure of the parameterized mechanism path itself. This is a genuine inference ceiling of the current implementation with 5 training examples per type.",
+      "severity": "material",
+      "evidence_refs": [
+        "raw_evidence/induced_mechanisms.json",
+        "raw_evidence/task_trajectories.jsonl (T-SPIDER-PARAM lines 5, 10, 15)",
+        "src/spider/kernel.py:_infer_support (lines 123-142)"
+      ]
+    },
+    {
+      "category": "decision_rule_margin_demand",
+      "description": "The PRIMARY decision rule requires treatment advantage > 0.15 over BOTH cold and retrieval baselines. On this deterministic substrate where cold and retrieval trivially achieve 1.0 (constructing correct URLs directly from task spec), the treatment's 0.80 success rate yields advantage of -0.20. The margin is extremely demanding for a deterministic task where baselines have zero error. The treatment's failures are conservative support checks (a feature for known-negative detection), not mechanism path failures.",
+      "severity": "design",
+      "evidence_refs": [
+        "prereg.md section 7 (decision rule)",
+        "derived/decision_rule_eval.json",
+        "raw_evidence/task_trajectories.jsonl (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED all success=True)"
+      ]
+    },
+    {
+      "category": "substrate_validity_confirmed",
+      "description": "The substrate is confirmed as a real localhost stdlib-HTTP server (not SYNTH-INDUCTION-BANK-v1). Training identifiers are systematic (item-001..item-005, user-001..user-005, order-001..order-005). Server processed 72 real HTTP request/response cycles with deterministic X-Request-Id headers. Three resource types with 10 identifiers each satisfy the frozen substrate validity requirements.",
+      "severity": "confirmatory",
+      "evidence_refs": [
+        "raw_evidence/training_observations.jsonl",
+        "raw_evidence/server_log.jsonl (72 entries)",
+        "harness/substrate.py",
+        "derived/decision_rule_eval.json:substrate_validity.pass=true"
+      ]
+    },
+    {
+      "category": "causal_attribution_valid",
+      "description": "B-LITERAL-KERNEL ablation achieves 0.0 success (confidence 0.5 < min_confidence 0.8 blocks EXECUTABLE), while PC-EXACT-REPLAY achieves 1.0 on training set. This confirms the treatment arm's 0.80 is attributable to the parameterized mechanism path (distill_parameterized -> resolve -> execute), not substrate artifacts. The treatment's failures are at the resolve stage (support check), not at the execute stage.",
+      "severity": "confirmatory",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl (B-LITERAL-KERNEL all success=False, resolution_status=EXPLORE/UNKNOWN)",
+        "raw_evidence/task_trajectories.jsonl (PC-EXACT-REPLAY all success=True)",
+        "derived/decision_rule_eval.json:causal_attribution.pass=true"
+      ]
+    },
+    {
+      "category": "known_negative_detection_valid",
+      "description": "All 15 known-negative cases correctly refused with bound_action=null and correct reason categorization (5 out-of-support, 5 missing-parameter, 5 wrong-intent). Null control on unseen type 'products' refused 5/5. This demonstrates the parameterized mechanism's refusal capability works correctly on the real substrate.",
+      "severity": "confirmatory",
+      "evidence_refs": [
+        "raw_evidence/known_negatives.jsonl",
+        "raw_evidence/null_control_unseen_type.jsonl",
+        "derived/decision_rule_eval.json:known_negative.pass=true"
+      ]
+    },
+    {
+      "category": "accounting_honesty_valid",
+      "description": "All arms show model_calls=0, model_tokens=0 (credential-free). No injected counter events. Retrieval calls differ as designed (treatment=1, cold=0, retrieval=3 per task). Verification calls fire on actual verification. Counters are genuine per-increment events with timestamps.",
+      "severity": "confirmatory",
+      "evidence_refs": [
+        "raw_evidence/accounting_counters.jsonl",
+        "derived/arm_metrics.json",
+        "derived/decision_rule_eval.json:accounting_honesty.pass=true"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-COLD-RE-DERIVE",
+      "assessment": "Valid strong negative control. Achieves 1.0 success on held-out by directly constructing correct URLs from task spec. No mechanism inheritance, no retrieval. Correctly demonstrates the task is trivially solvable without inheritance on this deterministic substrate.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl (lines 16-30)",
+        "derived/arm_metrics.json"
+      ]
+    },
+    {
+      "control_id": "B-RETRIEVAL-SHAPED",
+      "assessment": "Valid comparator. Structural similarity retrieval (Jaccard on action/state keys) with top-K=3 and slot alignment correctly retrieves training observations and substitutes held-out identifiers. Achieves 1.0 success. Uses 3 retrieval calls per task vs treatment's 1. Correctly demonstrates a strong retrieval baseline that matches treatment's URL construction capability without the parameterized mechanism.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl (lines 31-45)",
+        "derived/arm_metrics.json",
+        "harness/run_experiment.py:run_retrieval (lines 269-303)"
+      ]
+    },
+    {
+      "control_id": "B-LITERAL-KERNEL",
+      "assessment": "Valid ablation control. Literal distill() produces mechanisms with confidence 0.5, which is below min_confidence 0.8. All 15 held-out tasks resolve as EXPLORE/UNKNOWN with success_rate=0.0. Confirms the parameterized path (confidence 0.9) is necessary for the treatment's 0.80 result.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl (B-LITERAL-KERNEL lines)",
+        "derived/arm_metrics.json",
+        "src/spider/kernel.py:distill (lines 226-245)"
+      ]
+    },
+    {
+      "control_id": "PC-EXACT-REPLAY",
+      "assessment": "Valid positive control. Treatment mechanisms tested on training identifiers (item-001..item-005 etc.) achieve 1.0 success with EXECUTABLE resolution on all 15 tasks. Validates the mechanism induction and binding works perfectly within inferred support.",
+      "evidence_refs": [
+        "raw_evidence/task_trajectories.jsonl (PC-EXACT-REPLAY lines 46-70)",
+        "derived/arm_metrics.json"
+      ]
+    },
+    {
+      "control_id": "NC-OUT-OF-SUPPORT-TYPE",
+      "assessment": "Valid null control. Mechanisms trained on items/users/orders asked to resolve unseen type 'products' (no training observations). All 5 cases refused with UNKNOWN, bound_action=null, reason 'no applicable validated mechanism'. Confirms the registry correctly rejects out-of-type queries.",
+      "evidence_refs": [
+        "raw_evidence/null_control_unseen_type.jsonl",
+        "derived/decision_rule_eval.json (not directly logged but control passed)"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "T-SPIDER-PARAM": {
+      "n_tasks": 15,
+      "n_success": 12,
+      "success_rate": 0.8,
+      "counters_per_task": {
+        "model_calls": 0.0,
+        "model_tokens": 0.0,
+        "browser_actions": 0.0,
+        "http_requests": 0.8,
+        "retrieval_calls": 1.0,
+        "verification_calls": 0.8,
+        "repair_attempts": 0.0,
+        "latency_ms": 0.4722762666915514
+      }
+    },
+    "B-COLD-RE-DERIVE": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0,
+      "counters_per_task": {
+        "model_calls": 0.0,
+        "model_tokens": 0.0,
+        "browser_actions": 0.0,
+        "http_requests": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 1.0,
+        "repair_attempts": 0.0,
+        "latency_ms": 0.3690661333166645
+      }
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0,
+      "counters_per_task": {
+        "model_calls": 0.0,
+        "model_tokens": 0.0,
+        "browser_actions": 0.0,
+        "http_requests": 1.0,
+        "retrieval_calls": 3.0,
+        "verification_calls": 1.0,
+        "repair_attempts": 0.0,
+        "latency_ms": 0.4062955333665741
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "n_tasks": 15,
+      "n_success": 15,
+      "success_rate": 1.0,
+      "counters_per_task": {
+        "model_calls": 0.0,
+        "model_tokens": 0.0,
+        "browser_actions": 0.0,
+        "http_requests": 1.0,
+        "retrieval_calls": 1.0,
+        "verification_calls": 1.0,
+        "repair_attempts": 0.0,
+        "latency_ms": 0.539427533340131
+      }
+    },
+    "B-LITERAL-KERNEL": {
+      "n_tasks": 15,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "counters_per_task": {
+        "model_calls": 0.0,
+        "model_tokens": 0.0,
+        "browser_actions": 0.0,
+        "http_requests": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 0.0,
+        "repair_attempts": 0.0,
+        "latency_ms": 0.16798233330822163
+      }
+    },
+    "treatment_advantage_vs_cold": -0.2,
+    "treatment_advantage_vs_retrieval": -0.2,
+    "causal_attribution_literal_vs_treatment": 0.8,
+    "known_negative_refusal_rate": 1.0,
+    "refusal_reason_correctness": 1.0
+  },
+  "claim_ceiling": "The experiment demonstrates that the SHIPPED kernel's parameterized mechanism PATH (distill_parameterized -> resolve -> execute) is live and causally attributable on a real credential-free HTTP substrate outside the synthetic fixture. The treatment arm is separable from cold and retrieval baselines by mechanism architecture (parameterized vs literal vs retrieval) and honest accounting. However, the current support inference implementation (_infer_support) bounds the treatment's applicability on the specific held-out set (item-010, user-010, order-010 rejected due to conservative regex from 5 training examples). C-PARAM-INHERIT remains EXPERIMENTAL with a bounded ceiling: substrate transfer is demonstrated; support generalization to adjacent identifier patterns is the limiting factor. The PRIMARY decision clause fails because the frozen margins (>0.15 advantage over cold/retrieval) are incompatible with a deterministic substrate where trivial baselines achieve 1.0. This is a valid scientific negative for the frozen design, not an infrastructure failure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-37973256064/request.json",
+    "research/experiments/EXP-PRODUCT-37973256064/spec.json",
+    "research/experiments/EXP-PRODUCT-37973256064/prereg.md",
+    "research/experiments/EXP-PRODUCT-37973256064/freeze.json",
+    "research/experiments/EXP-PRODUCT-37973256064/result.json",
+    "research/experiments/EXP-PRODUCT-37973256064/report.md",
+    "research/experiments/EXP-PRODUCT-37973256064/provenance.json",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/training_observations.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/induced_mechanisms.json",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/task_trajectories.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/accounting_counters.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/known_negatives.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/null_control_unseen_type.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/server_log.jsonl",
+    "research/experiments/EXP-PRODUCT-37973256064/derived/arm_metrics.json",
+    "research/experiments/EXP-PRODUCT-37973256064/derived/decision_rule_eval.json",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-PRODUCT-37973256064/harness/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-37973256064/harness/substrate.py"
+  ],
+  "unresolved": [
+    {
+      "id": "U-SUPPORT-GENERALIZATION",
+      "description": "The _infer_support function infers a single-digit quantifier {1} from training suffixes '1'..'5' (length 1), rejecting '10' (length 2). Question: should distill_parameterized widen support when training examples form a contiguous numeric sequence (001..005 suggests 001..010 as natural continuation), or is conservative single-digit inference the intended behavior? This is a kernel design question not settled by this run.",
+      "priority": "medium"
+    },
+    {
+      "id": "U-DECISION_RULE_CALIBRATION",
+      "description": "The PRIMARY margin (>0.15 advantage over cold/retrieval) was calibrated to 'exceed measurement noise on deterministic substrate' but cold/retrieval achieve 1.0 (zero noise) on this task. The treatment's conservative support check (a feature for known-negative detection) penalizes it relative to baselines that lack this check. Future designs on deterministic substrates may need asymmetric margins or a different primary metric (e.g., known-negative detection rate as primary, with success rate as secondary).",
+      "priority": "low"
+    }
+  ]
+}

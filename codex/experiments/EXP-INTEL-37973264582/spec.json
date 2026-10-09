@@ -1,0 +1,87 @@
+{
+  "experiment_id": "EXP-INTEL-37973264582",
+  "lane": "intel",
+  "claim_ids": ["C-LLM-INHERIT"],
+  "question": "Which currently accessible, programmatically invocable model endpoints (no human-issued credential) or local model runtimes, together with which external memory/persistence-agent comparator baselines, can satisfy the C-LLM-INHERIT four-arm benchmark's same-model/tools/budget requirement?",
+  "hypothesis": "At least one credential-free model endpoint or local runtime exists that can be programmatically invoked by the factory with a reproducible receipt, and at least one external comparator baseline (retrieval-augmented memory, selector/action cache, compiled-workflow, or memory-agent system) is obtainable and runnable under identical model/tools/budget constraints with published success/cost numbers and denominators, such that the frozen four-arm benchmark design remains valid and executable.",
+  "falsifier": "No credential-free model endpoint or local runtime can be invoked by the factory (all require human-issued credentials, are rate-limited to zero, or return only errors), OR no external comparator baseline is obtainable/runnable under the identical model/tools/budget constraint with published numbers, OR the four-arm benchmark design must be materially weakened (e.g., different models, different budgets, simulated comparators) to run, in which case the benchmark is declared unresolvable on current assets with exact provisioning receipts.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "name": "Cold exploration (no inheritance, no memory)",
+      "description": "Agent explores task from scratch with no prior knowledge, no memory retrieval, no inherited mechanisms",
+      "expected_behavior": "Highest cost per task, serves as upper bound"
+    },
+    {
+      "id": "B-INSTRUCTIONS",
+      "name": "Static instructions/prompting only",
+      "description": "Agent receives hand-authored task instructions but no dynamic memory or mechanism inheritance",
+      "expected_behavior": "Lower than cold, but no adaptation to site/task variation"
+    },
+    {
+      "id": "B-RETRIEVAL",
+      "name": "Retrieval-augmented memory (RAG over trajectories)",
+      "description": "Agent retrieves similar past trajectories/fragments via semantic similarity and adapts them",
+      "expected_behavior": "Strong baseline; tests whether SPIDER's mechanism parameterization adds value beyond retrieval"
+    },
+    {
+      "id": "B-SELECTOR-CACHE",
+      "name": "Selector/action cache (exact or fuzzy match)",
+      "description": "Agent caches and reuses exact selector sequences or action patterns from prior successful runs",
+      "expected_behavior": "Tests exact/fuzzy replay vs. parameterized mechanism inheritance"
+    },
+    {
+      "id": "B-COMPILED-WORKFLOW",
+      "name": "Compiled workflow / skill library",
+      "description": "Agent has access to a library of pre-compiled, parameterized skills/workflows (e.g., LangGraph, AutoGen, CrewAI patterns)",
+      "expected_behavior": "Tests whether SPIDER's Web-specific mechanism distillation adds value beyond general workflow compilation"
+    },
+    {
+      "id": "B-MEMORY-AGENT",
+      "name": "Memory-augmented agent (e.g., MemGPT, Letta, Zep)",
+      "description": "Agent with long-term memory module that stores and retrieves facts/episodes",
+      "expected_behavior": "Tests general memory vs. SPIDER's operational Web mechanism inheritance"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-ENDPOINT-LIVE",
+    "name": "Credential-free endpoint invocation receipt",
+    "description": "At least one model endpoint or local runtime responds to a programmatic invocation with a valid completion (not auth error, not rate-limit error, not 'credential required') and returns a reproducible receipt (timestamp, model ID, token usage, latency, response hash)",
+    "expected_behavior": "PASS if any candidate endpoint produces a valid completion receipt; FAIL if all candidates return only credential/rate-limit errors"
+  },
+  "null_control": {
+    "id": "NC-NO-ENDPOINT",
+    "name": "No invocable endpoint available",
+    "description": "All enumerated endpoints/local runtimes require human-issued credentials, have zero available quota, or are otherwise inaccessible to the factory automation",
+    "expected_behavior": "PASS (null condition holds) if every candidate endpoint fails with credential/access error; this triggers the 'benchmark unresolvable' outcome"
+  },
+  "measurement_validity": [
+    "Attainability certificate: every candidate endpoint/local runtime must be tested with a live programmatic invocation before freeze; no speculative 'should work' claims",
+    "Control liveness: PC-ENDPOINT-LIVE and NC-NO-ENDPOINT must be mutually exclusive and collectively exhaustive for the candidate set",
+    "Comparator obtainability: each external baseline must be tested for actual obtainability (pip install, git clone, API key availability) and runnability under identical model/tools/budget",
+    "Published numbers requirement: comparator baselines must have published success/cost numbers with explicit denominators (tasks, sites, model, budget); 'we think it works' is not evidence",
+    "Same-model/tools/budget constraint: any viable comparator must demonstrably run with the exact same model endpoint, tool set, and token/budget limits as the SPIDER treatment arm",
+    "No human-issued credentials: factory automation must be able to invoke the endpoint without any human-in-the-loop credential provisioning at experiment runtime"
+  ],
+  "decision_rule": {
+    "gate_0_endpoint_attainability": "At least one candidate model endpoint or local runtime produces a valid PC-ENDPOINT-LIVE receipt (non-error completion with token usage, latency, response hash). If zero, experiment outcome = UNRESOLVABLE_ENDPOINT, record all provisioning receipts, STOP.",
+    "gate_1_comparator_obtainability": "At least one candidate external comparator baseline is obtainable (installable/accessible) AND runnable under identical model/tools/budget AND has published success/cost numbers with denominators. If zero, outcome = UNRESOLVABLE_COMPARATOR, record all obtainability receipts, STOP.",
+    "gate_2_four_arm_viability": "The frozen C-LLM-INHERIT four-arm design (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER) can be executed with the attained endpoint and obtained comparators WITHOUT weakening (same model, same tools, same budget, real comparators not simulated). If weakening required, outcome = DESIGN_COMPROMISED, record exact compromises needed, STOP.",
+    "gate_3_publication_audit": "For each obtained comparator, published numbers are audited for: (a) same model family, (b) same tool access, (c) same budget denominator, (d) explicit task/site denominators, (e) no hand-authored decomposition leakage. Comparators failing audit are marked UNAUDITED and excluded from benchmark viability.",
+    "final_outcomes": {
+      "VIABLE": "Gates 0-3 all PASS: endpoint + audited comparators exist, four-arm design executable as frozen",
+      "UNRESOLVABLE_ENDPOINT": "Gate 0 FAIL: no credential-free invocable endpoint",
+      "UNRESOLVABLE_COMPARATOR": "Gate 0 PASS but Gate 1 FAIL: endpoint exists but no auditable comparator",
+      "DESIGN_COMPROMISED": "Gates 0-1 PASS but Gate 2 FAIL: endpoint+comparators exist but four-arm design requires weakening"
+    }
+  },
+  "product_consequence_positive": "C-LLM-INHERIT four-arm benchmark becomes executable on current factory assets. Product lane can proceed to implement the treatment arm (SPIDER mechanism execution) and run the full comparison with real external baselines. This unblocks the central external-agent claim.",
+  "product_consequence_negative": "C-LLM-INHERIT four-arm benchmark is declared unresolvable on current factory assets (endpoint or comparator gap). The claim remains HYPOTHESIS pending external provisioning (credential acquisition, comparator release, or kernel execution capability). Intel lane documents exact provisioning receipts and stops the external-baseline search thread. Product/Graphics lanes must achieve kernel execution liveness first before benchmark makes sense.",
+  "estimated_cost": {
+    "model_calls": "~50-100 invocations across candidate endpoints (discovery + receipt validation)",
+    "human_time_hours": 2,
+    "compute": "negligible (local runtime checks only)",
+    "external_dependencies": "public API endpoints, open-source comparator repos, Docker images"
+  },
+  "expected_information_gain": "High: binary resolution of whether the program's central external-agent claim (C-LLM-INHERIT) can be tested on current assets. A VIABLE outcome directly unblocks Product's highest-priority work. An UNRESOLVABLE outcome cleanly retires the external search thread and redirects to first-party kernel execution work. Either outcome changes a product/claim decision."
+}
