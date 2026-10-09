@@ -125,6 +125,27 @@ def stage_policy(lane: str, experiment_id: str, stage: str):
         prefixes = []
         exact = [f"{exp}/spec.json", f"{exp}/prereg.md", f"{exp}/failure.json", f"{exp}/model_design.json"]
         protected = {f"{exp}/request.json", lane_state}
+    elif stage == "build":
+        prefixes = [exp] + cfg.get("allowed_code_roots", [])
+        exact = []
+        protected = {
+            f"{exp}/{x}"
+            for x in [
+                "request.json",
+                "spec.json",
+                "prereg.md",
+                "freeze.json",
+                "result.json",
+                "report.md",
+                "provenance.json",
+                "audit.json",
+                "verdict.json",
+                "handoff.json",
+                "model_execute.json",
+                "model_audit.json",
+                "model_director.json",
+            ]
+        } | {lane_state}
     elif stage == "execute":
         prefixes = [exp] + cfg.get("allowed_code_roots", [])
         exact = []
@@ -165,7 +186,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lane", required=True)
     ap.add_argument("--experiment-id", required=True)
-    ap.add_argument("--stage", required=True, choices=["design", "execute", "audit", "director"])
+    ap.add_argument("--stage", required=True, choices=["design", "build", "execute", "audit", "director"])
     ap.add_argument("--repair", action="store_true")
     args = ap.parse_args()
 
