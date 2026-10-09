@@ -1,0 +1,38 @@
+{
+  "primary": {
+    "clause_treatment_rate_ge_0.80": true,
+    "clause_advantage_vs_cold_gt_0.15": false,
+    "clause_advantage_vs_retrieval_gt_0.15": false,
+    "treatment_rate": 0.8,
+    "cold_rate": 1.0,
+    "retrieval_rate": 1.0,
+    "advantage_vs_cold": -0.19999999999999996,
+    "advantage_vs_retrieval": -0.19999999999999996,
+    "pass": false
+  },
+  "known_negative": {
+    "refusal_rate": 1.0,
+    "refusal_reason_correctness": 1.0,
+    "all_refusals_bound_action_null": true,
+    "pass": true
+  },
+  "accounting_honesty": {
+    "model_calls_total": 0.0,
+    "model_tokens_total": 0.0,
+    "any_injected_counter_event": false,
+    "pass": true
+  },
+  "causal_attribution": {
+    "literal_kernel_success_rate": 0.0,
+    "pc_exact_replay_success_rate": 1.0,
+    "pass": true
+  },
+  "substrate_validity": {
+    "real_localhost_http": true,
+    "num_training_resource_types": 3,
+    "num_identifiers_per_type": 10,
+    "substrate_is_synth_induction_bank_v1": false,
+    "pass": true
+  },
+  "outcome": "FALSIFIES"
+}

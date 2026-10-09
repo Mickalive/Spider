@@ -1,0 +1,86 @@
+{
+  "items": {
+    "mechanism_id": "mech-48a706c9600e8647",
+    "intent": "read",
+    "parameter_slots": [
+      "item"
+    ],
+    "action_template": {
+      "method": "GET",
+      "url": "http://127.0.0.1:41129/api/items/${item}",
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+    "preconditions": {
+      "resource_type": "items",
+      "site": "http://127.0.0.1:41129",
+      "auth": "public"
+    },
+    "postconditions": {
+      "id": "${item}",
+      "status": 200,
+      "type": "items"
+    },
+    "parameter_supports": {
+      "item": "^item\\-00[0-9]{1}$"
+    },
+    "confidence": 0.9
+  },
+  "users": {
+    "mechanism_id": "mech-9b34ef9c45a7e0f6",
+    "intent": "read",
+    "parameter_slots": [
+      "user"
+    ],
+    "action_template": {
+      "method": "GET",
+      "url": "http://127.0.0.1:41129/api/users/${user}",
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+    "preconditions": {
+      "resource_type": "users",
+      "site": "http://127.0.0.1:41129",
+      "auth": "public"
+    },
+    "postconditions": {
+      "id": "${user}",
+      "status": 200,
+      "type": "users"
+    },
+    "parameter_supports": {
+      "user": "^user\\-00[0-9]{1}$"
+    },
+    "confidence": 0.9
+  },
+  "orders": {
+    "mechanism_id": "mech-66505d0bff001a06",
+    "intent": "read",
+    "parameter_slots": [
+      "order"
+    ],
+    "action_template": {
+      "method": "GET",
+      "url": "http://127.0.0.1:41129/api/orders/${order}",
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+    "preconditions": {
+      "resource_type": "orders",
+      "site": "http://127.0.0.1:41129",
+      "auth": "public"
+    },
+    "postconditions": {
+      "id": "${order}",
+      "status": 200,
+      "type": "orders"
+    },
+    "parameter_supports": {
+      "order": "^order\\-00[0-9]{1}$"
+    },
+    "confidence": 0.9
+  }
+}
