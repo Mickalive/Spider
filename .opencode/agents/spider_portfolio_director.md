@@ -24,7 +24,7 @@ Before acting, read:
 - the exact Research Scout brief supplied by the workflow.
 
 Do NOT ingest `SPIDER_CODEX.md` wholesale.
-Use the machine snapshot, Scout brief, `codex/claim_state.json` and `codex/index.json` as the complete program map. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
+Use the machine snapshot plus the Scout brief as the complete directional program map. Do NOT ingest `codex/claim_state.json` or `codex/index.json` wholesale during a strategic cycle; the snapshot already carries current claim state, recent trajectories, quarantine-aware lane state and liveness. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
 
 ## Your job
 
@@ -63,7 +63,7 @@ Never present a prior as if SPIDER experimentally established it.
 
 The permanent Research Scout performs the broad reconnaissance for you.
 
-Read its brief as staff advice, not authority. Challenge it against the Codex and your own reasoning. You should not spend your cycle doing broad browsing or literature review. If the Scout identifies something strategically important but uncertain, assign Intel or the relevant lane to verify it deeply.
+Read its brief as staff advice, not authority. The brief may explicitly be a deterministic DEGRADED SCOUT BRIEF when the model-based Scout is unavailable; that is not a blocker and must not be treated as evidence. Challenge it against the Codex and your own reasoning. You should not spend your cycle doing broad browsing or literature review. If the Scout identifies something strategically important but uncertain, assign Intel or the relevant lane to verify it deeply.
 
 You may inspect a specific source only when needed to resolve an ambiguity in the Scout brief, but this should be exceptional.
 
