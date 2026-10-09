@@ -70,12 +70,19 @@ def all_exist(exp: Path, names: list[str]) -> bool:
     return all((exp / name).exists() for name in names)
 
 
-def packet_stage_flags(exp: Path) -> tuple[bool, bool, bool, bool]:
-    frozen = all_exist(exp, ["spec.json", "prereg.md", "freeze.json"])
+def packet_stage_flags(exp: Path) -> tuple[bool, bool, bool, bool, bool]:
+    designed = False
+    try:
+        spec = json.loads((exp / "spec.json").read_text(encoding="utf-8"))
+        prereg = (exp / "prereg.md").read_text(encoding="utf-8", errors="replace").strip()
+        designed = bool(spec.get("question")) and len(prereg) >= 500
+    except Exception:
+        designed = False
+    frozen = designed and all_exist(exp, ["freeze.json"])
     executed = frozen and all_exist(exp, ["result.json", "report.md", "provenance.json"])
     audited = executed and (exp / "audit.json").exists()
     finalized = audited and all_exist(exp, ["verdict.json", "handoff.json"])
-    return frozen, executed, audited, finalized
+    return designed, frozen, executed, audited, finalized
 
 
 def main():
@@ -181,6 +188,8 @@ def main():
                 "product_consequence_negative": "",
                 "estimated_cost": "",
                 "expected_information_gain": "",
+                "build_required": False,
+                "freeze_artifacts": [],
             }
             (exp / "spec.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
             (exp / "prereg.md").write_text(f"# {exp_id} preregistration\n\nDESIGN NOT YET FROZEN.\n", encoding="utf-8")
@@ -201,13 +210,14 @@ def main():
         })
 
     state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
-    frozen, executed, audited, finalized = packet_stage_flags(exp)
+    designed, frozen, executed, audited, finalized = packet_stage_flags(exp)
 
     out = Path(os.environ.get("GITHUB_OUTPUT", "/tmp/spider_prepare_output"))
     with out.open("a", encoding="utf-8") as fh:
         fh.write(f"experiment_id={exp_id}\n")
         fh.write(f"experiment_dir=research/experiments/{exp_id}\n")
         fh.write(f"request_id={req['request_id']}\n")
+        fh.write(f"designed={'true' if designed else 'false'}\n")
         fh.write(f"frozen={'true' if frozen else 'false'}\n")
         fh.write(f"executed={'true' if executed else 'false'}\n")
         fh.write(f"audited={'true' if audited else 'false'}\n")
