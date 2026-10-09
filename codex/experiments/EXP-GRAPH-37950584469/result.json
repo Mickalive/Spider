@@ -1,0 +1,948 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37950584469",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "branch": "F-CERT",
+  "metrics": {
+    "M-CERT-ROUTE-OK": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-BODY-VARIABLE": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-FIELD-PRESENT": {
+      "value": 3,
+      "unit": "anchors (0..4)"
+    },
+    "M-CERT-SESSION-ISOLATION-PASS": {
+      "value": false,
+      "unit": "boolean"
+    },
+    "M-CERT-NEG-VALUES-A": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-CERT-NEG-VALUES-B": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-EXTRACT-AGREE-VALUESET": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-EXTRACT-AGREE-VERDICT": {
+      "value": 4,
+      "unit": "anchors (0..4)"
+    },
+    "M-EXTRACT-KAPPA": {
+      "value": null,
+      "unit": "dimensionless"
+    },
+    "M-CANARY-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-CANARY-PASS": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-EMPTY-AGREE": {
+      "value": true,
+      "unit": "boolean"
+    },
+    "M-FIXTURE-JSSTRING-VALUES": {
+      "value": 0,
+      "unit": "count (must be 0)"
+    },
+    "M-N-SESSION-SCOPED-CONFIRMED": {
+      "value": 3,
+      "unit": "anchors (0..4)"
+    },
+    "M-N-REPRESENTATION-LOSS": {
+      "value": 1,
+      "unit": "anchors (0..4)"
+    },
+    "M-N-EXTRACTION-UNRELIABLE": {
+      "value": 0,
+      "unit": "anchors (0..4)"
+    },
+    "M-INVISIBLE-STALE-PREV": {
+      "value": null,
+      "unit": "fraction",
+      "reason_not_measured": "SB-04: the behaviourally invisible stale cell is not measured by this packet and may satisfy no gate; reported null, never 0.0."
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-1": {
+      "value": 16,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-1": {
+      "value": 16,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-1": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-1": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-2": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-2": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-2": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-2": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-3": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-3": {
+      "value": 5,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-3": {
+      "value": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-3": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-DISTINCT-VALUES-A-CAL-POS-4": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-DISTINCT-VALUES-B-CAL-POS-4": {
+      "value": 0,
+      "unit": "count"
+    },
+    "M-EXTRACT-RATE-A-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-EXTRACT-RATE-B-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-ANCHOR-VERDICT-CAL-POS-4": {
+      "value": [
+        "NO_FIELD",
+        "NO_FIELD"
+      ],
+      "unit": "enum-pair"
+    },
+    "M-WARMJAR-VARIATION-RATE-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-BODY-VARIATION-RATE-CAL-POS-4": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-WARMJAR-FRESH-VALUE-VARIATION-RATE-CAL-POS-4": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-FA-INCUMBENT-D1V": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-FA-VALUEAWARE-D1V": {
+      "value": 0.0,
+      "unit": "fraction"
+    },
+    "M-PAIRED-FA-DIFF-D1V": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-PAIRED-FA-DIFF-D1V-LOW": {
+      "value": 1.0,
+      "unit": "fraction"
+    },
+    "M-N-D1V": {
+      "value": 3,
+      "unit": "trials"
+    },
+    "M-N-DECISIONS-D1V": {
+      "value": 2,
+      "unit": "count"
+    },
+    "M-DIAGNOSTIC-SESSION-ISOLATION-SHARED-PAIRS": {
+      "value": {
+        "CAL-POS-1": 1,
+        "CAL-POS-2": 3,
+        "CAL-POS-3": 5,
+        "CAL-POS-4": 0
+      },
+      "unit": "shared (name,value) pairs per anchor (derived; NOT a gate)",
+      "note": "GATE-C3 uses M-CERT-SESSION-ISOLATION-PASS, unchanged: false."
+    },
+    "M-DIAGNOSTIC-SESSION-ISOLATION-ALL-SHARED-CONSTANT": {
+      "value": true,
+      "unit": "boolean (derived; NOT a gate)"
+    }
+  },
+  "controls": {
+    "GATE-C1": {
+      "expected": "M-CERT-ROUTE-OK>=3 and M-CERT-FIELD-PRESENT>=3",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-C2": {
+      "expected": "M-CERT-NEG-VALUES-A==0 and M-CERT-NEG-VALUES-B==0",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-C3": {
+      "expected": "M-CERT-SESSION-ISOLATION-PASS==true",
+      "observed": false,
+      "result": "FAIL"
+    },
+    "GATE-C4": {
+      "expected": "M-CERT-BODY-VARIABLE>=3 (non-blocking disclosure)",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-E1": {
+      "expected": "M-CANARY-PASS==true",
+      "observed": true,
+      "result": "PASS"
+    },
+    "GATE-E2": {
+      "expected": "fixtures + NC-PATH-INDEPENDENCE pass",
+      "observed": {
+        "M-FIXTURE-CANARY-PASS": true,
+        "M-FIXTURE-EMPTY-AGREE": true,
+        "M-FIXTURE-JSSTRING-VALUES": 0,
+        "NC-PATH-INDEPENDENCE": true
+      },
+      "result": "PASS"
+    },
+    "GATE-E3": {
+      "expected": "M-EXTRACT-AGREE-VALUESET>=3 and M-EXTRACT-AGREE-VERDICT>=3",
+      "observed": {
+        "M-EXTRACT-AGREE-VALUESET": 4,
+        "M-EXTRACT-AGREE-VERDICT": 4
+      },
+      "result": "PASS"
+    },
+    "B-SINGLE-PATH-A": {
+      "expected_behavior": "P-EXTRACT-A alone cannot self-certify",
+      "observed": {
+        "CAL-POS-1": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-2": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-3": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-4": "NO_FIELD"
+      },
+      "result": "OBSERVED"
+    },
+    "B-SINGLE-PATH-B": {
+      "expected_behavior": "P-EXTRACT-B alone; disagreement with A is the extraction signal",
+      "observed": {
+        "CAL-POS-1": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-2": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-3": "RECOVERED_SESSION_SCOPED",
+        "CAL-POS-4": "NO_FIELD"
+      },
+      "result": "OBSERVED"
+    },
+    "B-PARENT-METHOD-REIMPL": {
+      "expected_behavior": "best-effort reconstruction of the parent's method over the same stored bodies; no gate depends on it",
+      "observed": {
+        "reconstruction_note": "Parent preserved no code. Proxy = P-EXTRACT-A (html.parser, non-GET form token fields + frozen-list meta tokens, no JS), which is the recorded description of the parent method.",
+        "CAL-POS-2_distinct_values": 5,
+        "CAL-POS-2_verdict": "RECOVERED_SESSION_SCOPED"
+      },
+      "result": "DISCLOSED-PROXY"
+    },
+    "B-INCUMBENT-SIGNAL-ONLY": {
+      "expected_behavior": "value-blind: CH-STRUCT-SIG + CH-TRANSPORT-VALIDATOR + CH-POSTCOND-SEM; predicted to reuse on ~1.0 of clean D1V trials",
+      "observed": {
+        "M-FA-INCUMBENT-D1V": 1.0,
+        "channel_fire_counts": {
+          "CH-STRUCT-SIG": 6,
+          "CH-TRANSPORT-VALIDATOR": 3,
+          "CH-POSTCOND-SEM": 0,
+          "CH-PRECOND-BINDING": 9
+        },
+        "channel_not_fire_counts": {
+          "CH-STRUCT-SIG": 9,
+          "CH-TRANSPORT-VALIDATOR": 12,
+          "CH-POSTCOND-SEM": 15,
+          "CH-PRECOND-BINDING": 6
+        }
+      },
+      "result": "DATA-INSUFFICIENT-D1V"
+    },
+    "B-VALUE-AWARE": {
+      "expected_behavior": "CH-PRECOND-BINDING: abstains iff live != recorded; byte-equality revalidation, not server validity",
+      "observed": {
+        "M-FA-VALUEAWARE-D1V": 0.0
+      },
+      "result": "DATA-INSUFFICIENT-D1V"
+    },
+    "B-NO-GUARD-REPLAY": {
+      "expected_behavior": "always reuse; raw-observation reference for STALE/FRESH accounting",
+      "observed": {
+        "n_all_trials": 15,
+        "n_stale_trials": 3
+      },
+      "result": "OBSERVED"
+    },
+    "PC-EXTRACT-CANARY": {
+      "expected": "both paths recover >=2 distinct authenticity_token values on CAL-POS-1",
+      "observed": true,
+      "result": "PASS"
+    },
+    "PC-INCUMBENT-BLINDNESS": {
+      "expected": "M-FA-INCUMBENT-D1V reported against frozen structural prediction 1.0",
+      "observed": 1.0,
+      "result": "DATA-INSUFFICIENT-D1V"
+    },
+    "NC-CAL-NEG-ALL-REJECTED": {
+      "expected": "0 in-list values under BOTH paths on all 4 negatives",
+      "observed": {
+        "CAL-NEG-1": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-2": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-3": {
+          "A": [],
+          "B": []
+        },
+        "CAL-NEG-4": {
+          "A": [],
+          "B": []
+        }
+      },
+      "result": "PASS"
+    },
+    "NC-EXTRACT-EMPTY-VALUE": {
+      "expected": "both paths classify SYN-EMPTY-VALUE fields PRESENT-EMPTY and agree",
+      "observed": true,
+      "result": "PASS"
+    },
+    "NC-EXTRACT-JSSTRING": {
+      "expected": "0 non-empty values from SYN-JSSTRING, both paths",
+      "observed": 0,
+      "result": "PASS"
+    },
+    "NC-PATH-INDEPENDENCE": {
+      "expected": "AST import attestation, separate hashes, perturbation invariance",
+      "observed": {
+        "source_hashes_differ": true,
+        "path_b_forbidden_imports": [],
+        "no_anchor_special_casing": true,
+        "perturbation_invariant": true
+      },
+      "result": "PASS"
+    },
+    "NC-SESSION-ISOLATION": {
+      "expected": "fresh disjoint jars; no first-request Cookie",
+      "observed": {
+        "CAL-POS-1": {
+          "pairwise_disjoint": false,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 2,
+            "S2": 2,
+            "S3": 2,
+            "S4": 2
+          },
+          "pass": false
+        },
+        "CAL-POS-2": {
+          "pairwise_disjoint": false,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 5,
+            "S2": 5,
+            "S3": 5,
+            "S4": 5
+          },
+          "pass": false
+        },
+        "CAL-POS-3": {
+          "pairwise_disjoint": false,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 9,
+            "S2": 9,
+            "S3": 9,
+            "S4": 9
+          },
+          "pass": false
+        },
+        "CAL-POS-4": {
+          "pairwise_disjoint": true,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 0,
+            "S2": 0,
+            "S3": 0,
+            "S4": 0
+          },
+          "pass": true
+        },
+        "CAL-NEG-1": {
+          "pairwise_disjoint": true,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 0,
+            "S2": 0,
+            "S3": 0,
+            "S4": 0
+          },
+          "pass": true
+        },
+        "CAL-NEG-2": {
+          "pairwise_disjoint": true,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 0,
+            "S2": 0,
+            "S3": 0,
+            "S4": 0
+          },
+          "pass": true
+        },
+        "CAL-NEG-3": {
+          "pairwise_disjoint": true,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 0,
+            "S2": 0,
+            "S3": 0,
+            "S4": 0
+          },
+          "pass": true
+        },
+        "CAL-NEG-4": {
+          "pairwise_disjoint": true,
+          "no_first_request_cookie": true,
+          "sizes": {
+            "S1": 0,
+            "S2": 0,
+            "S3": 0,
+            "S4": 0
+          },
+          "pass": true
+        }
+      },
+      "result": "FAIL"
+    },
+    "NC-TIME-VS-SESSION": {
+      "expected": "warm-jar diagnostic reported; not a pass/fail gate",
+      "observed": "see M-WARMJAR-*-RATE metrics",
+      "result": "DIAGNOSTIC"
+    },
+    "NC-NONDEGENERATE-ESTIMATOR": {
+      "expected": ">=2 decisions on D1V and every active channel fires and does not fire once",
+      "observed": {
+        "M-N-DECISIONS-D1V": 2,
+        "nondegenerate": false,
+        "channels_nondegenerate": false,
+        "channel_fire": {
+          "CH-STRUCT-SIG": 6,
+          "CH-TRANSPORT-VALIDATOR": 3,
+          "CH-POSTCOND-SEM": 0,
+          "CH-PRECOND-BINDING": 9
+        },
+        "channel_not_fire": {
+          "CH-STRUCT-SIG": 9,
+          "CH-TRANSPORT-VALIDATOR": 12,
+          "CH-POSTCOND-SEM": 15,
+          "CH-PRECOND-BINDING": 6
+        }
+      },
+      "result": "DEGENERATE-NOT-EVALUABLE"
+    },
+    "F-INSTR": {
+      "observed_triggered": false
+    },
+    "F-REPLOSS": {
+      "observed_triggered": false
+    },
+    "F-UNRELIABLE": {
+      "observed_triggered": false
+    },
+    "F-BLIND": {
+      "observed_triggered": false
+    },
+    "F-CERT": {
+      "observed_triggered": true
+    },
+    "CAL-POS-1": {
+      "role": "positive; SPIDER_CORROBORATED canary",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-2": {
+      "role": "positive; reconciliation anchor",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-3": {
+      "role": "positive; SPIDER_PARTIAL",
+      "verdict_pair": [
+        "RECOVERED_SESSION_SCOPED",
+        "RECOVERED_SESSION_SCOPED"
+      ]
+    },
+    "CAL-POS-4": {
+      "role": "positive; A_PRIORI_CONSTRUCT",
+      "verdict_pair": [
+        "NO_FIELD",
+        "NO_FIELD"
+      ]
+    },
+    "CAL-POS-5": {
+      "role": "RETIRED (404x4 in parent); excluded from all denominators",
+      "result": "NOT_CONTACTED"
+    },
+    "CAL-NEG-1": {
+      "role": "negative"
+    },
+    "CAL-NEG-2": {
+      "role": "negative"
+    },
+    "CAL-NEG-3": {
+      "role": "negative"
+    },
+    "CAL-NEG-4": {
+      "role": "negative"
+    },
+    "SYN-CANARY-BOTH": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-EMPTY-VALUE": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    },
+    "SYN-JSSTRING": {
+      "role": "instrument fixture (unscored)",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/path_a_htmlparser.py",
+      "sha256": "6456fdfc8270c645a88288395a568855c655588f7e3915b34e4ccda7cc797a33",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/path_b_regexlex.py",
+      "sha256": "b436c05663ad1c9880ca5c774dda930d5c80b904b473d9d412462591a458969d",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/neutral_detector.py",
+      "sha256": "2851314315ac72566b70d7222c1b16638cb490d32b655ef12b4cb7c26237eef9",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/fixtures.py",
+      "sha256": "2a4b8562533a787c34a9e630587ba326ebb55b45f8e5339bfc74d84abc36729c",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/run_experiment.py",
+      "sha256": "730130d92cc52dbb59ff91f10661a9d5587ac15fb335fcbcf1fa6332647647d6",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S1_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S2_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S3_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-1/S4_fresh.html",
+      "sha256": "e5cbcb8eafa0417efa96e0aafb525d99b75e84983b6696e48e2ffe6d1cd8b58e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S1_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S2_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S3_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-2/S4_fresh.html",
+      "sha256": "1fe5f8952eada8e38b1967615269caf289d0792d2fca488a36b550f9135044d2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S1_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S2_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S3_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-3/S4_fresh.html",
+      "sha256": "26dced98a8bc2901fdc0087751565943bd13fbdab3c5f15171805e2514e3bb33",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S1_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S2_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S3_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-NEG-4/S4_fresh.html",
+      "sha256": "d9cd9adbe7554d4e82a597d722dccdcea70c8dd918836670e3f9687531f54d74",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S1_fresh.html",
+      "sha256": "654e0783616ae95cd75c3ba6328eb139f44f098282b23533063df5a790973a47",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S2_fresh.html",
+      "sha256": "fc01fffd98cb8fa118be2e893189602da37c0e2625352496868cf1903eca4532",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S3_fresh.html",
+      "sha256": "52524c9dc59bdb018221494051b9c89eb78641768720506e5b41d06394f6cc67",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_fresh.html",
+      "sha256": "5c6fe49e3cbdebcc6c26b78018f948704abd68e0f8549a7c8b53b5a684ccf0a7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_warm1.html",
+      "sha256": "59c5e3f92fe83ca44311dc231838435558a02686245d59c534c67a4f9d8e9075",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-1/S4_warm2.html",
+      "sha256": "672903cbb2cbb7c5b2cc49c34137c486ad62abe67ef42aa61eeb566738bb6bdd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S1_fresh.html",
+      "sha256": "932107193e3d3f39813d3d90878c37ff6a16011f40e3b0ccb70f9062b065cbd5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S2_fresh.html",
+      "sha256": "94f4c665c3bf4981dce1c08a4143d5dd0a84b04df0f06ba89d5891f216136cd5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S3_fresh.html",
+      "sha256": "1315aa35ff2120bb61f7deb7ac5fb77900730e53ed1eb35d1317c3f9c39b2e0e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_fresh.html",
+      "sha256": "92163af6706d3901b18e1f94a1b627cbee29ac12f6592f1eea258e5c894bc8ec",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_warm1.html",
+      "sha256": "a6a226e85977d96bcc1757b176439f4f1e7e745bcc04d91b58f99e1500c13118",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-2/S4_warm2.html",
+      "sha256": "fc1d27c6e30e0fb8a42002a42eb9a83031e95380289a9947f873caa2ea6c481c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S1_fresh.html",
+      "sha256": "2cfa8a1e60fcfc7d30ddfc2ab67a84be5679315b42789d42be36ba31a364f9e5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S2_fresh.html",
+      "sha256": "bfe23d0e0b2aa6f98dffaa5593c78080acb9cc2031d1777f6dd63116b38fff13",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S3_fresh.html",
+      "sha256": "49f3e6fa4d6944b4db128ac72efe6219ff2f08960240a9f6e6156525b137896e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_fresh.html",
+      "sha256": "64bfde37c2699c695464700cd830ceabaec0a52ae0500c19e56cf2cb4a827913",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_warm1.html",
+      "sha256": "8aceb4f514ff259ef6d39977a572573dece0d9bab8f485a15b84d0975e128c0d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-3/S4_warm2.html",
+      "sha256": "bc816ec0dbae60321521ebcf1f2542ee714c0bca4592d403b3b056421340a0fc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S1_fresh.html",
+      "sha256": "5ac444a745e926f03ab6e5ed22e680a9e8bef0bde9724d6dbac11ae0a9f8ca50",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S2_fresh.html",
+      "sha256": "041cd0bdac21c75f5e2a7f24e5b9cb784fc1166cf49e7817f77a1aa91603a872",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S3_fresh.html",
+      "sha256": "13808bd53b6cd09616ab138541d6fba44fb2ab07dfcd421b72ff55a24e79fd9c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_fresh.html",
+      "sha256": "57747f75986ffe3eea613da6106e294eeac91156d2321752add11b53c0621dae",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_warm1.html",
+      "sha256": "a5a6fff8b4641e65a7ace77b06a917c56482d73862bacdaade82fd3994a55fe7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/bodies/CAL-POS-4/S4_warm2.html",
+      "sha256": "2d50bc8aa385e64be78f888e795a3cee99fbf5fbf49bf57d4b507014942753fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/derived/extraction.jsonl",
+      "sha256": "cb94cbb7c7fb893b835219c55e0ab9a25384a84b862c9dcd55cbd7dd1580be8b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+      "sha256": "9885176e893d9651ed71e1470ebb5c5fc0db3cde410ff013d2dd5ffbbd215d69",
+      "role": "raw"
+    },
+    {
+      "path": "research/graph/freshness_detection/exp_37950584469/analyze_session_isolation.py",
+      "sha256": "31797e03f289bc775afd2df4d15aee1033734bf44ccb27fc1cfa6eba8e5063f9",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-37950584469/derived/session_isolation_diagnostic.json",
+      "sha256": "adc6987dab415697562c7eebe792e9e0222ee3ca18d8df656bfe59fedcfd805c",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Requests executed: 40 (cap 200).",
+    "Fresh sessions per anchor: CAL-POS-1 jar_sizes={'S1': 2, 'S2': 2, 'S3': 2, 'S4': 2}, CAL-POS-2 jar_sizes={'S1': 5, 'S2': 5, 'S3': 5, 'S4': 5}, CAL-POS-3 jar_sizes={'S1': 9, 'S2': 9, 'S3': 9, 'S4': 9}, CAL-POS-4 jar_sizes={'S1': 0, 'S2': 0, 'S3': 0, 'S4': 0}",
+    "CAL-POS-1: verdict_A=RECOVERED_SESSION_SCOPED (distinct=16), verdict_B=RECOVERED_SESSION_SCOPED (distinct=16), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-2: verdict_A=RECOVERED_SESSION_SCOPED (distinct=5), verdict_B=RECOVERED_SESSION_SCOPED (distinct=5), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-3: verdict_A=RECOVERED_SESSION_SCOPED (distinct=5), verdict_B=RECOVERED_SESSION_SCOPED (distinct=5), route_ok=4/4, distinct_body=4/4.",
+    "CAL-POS-4: verdict_A=NO_FIELD (distinct=0), verdict_B=NO_FIELD (distinct=0), route_ok=4/4, distinct_body=4/4.",
+    "M-EXTRACT-AGREE-VALUESET=4/4, M-EXTRACT-AGREE-VERDICT=4/4.",
+    "M-CANARY-PASS=True (CAL-POS-1 authenticity_token >=2 distinct under both paths).",
+    "CAL-NEG-1: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-2: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-3: path_A non-empty values=[], path_B non-empty values=[].",
+    "CAL-NEG-4: path_A non-empty values=[], path_B non-empty values=[].",
+    "D1V: M-N-D1V=3 M-N-DECISIONS-D1V=2 M-FA-INCUMBENT-D1V=1.0 M-FA-VALUEAWARE-D1V=0.0 M-PAIRED-FA-DIFF-D1V=1.0 low=1.0; gate_b_branch=DATA-INSUFFICIENT-D1V.",
+    "Instrument fixtures: canary=True, empty_agree=True, jsstring_values=0.",
+    "Branch: F-CERT.",
+    "DERIVED GATE-C3 diagnosis (raw/records.jsonl -> derived/session_isolation_diagnostic.json): every shared (name,value) jar pair is a server-set CONSTANT configuration cookie; session-identifying cookies differ across sessions. Per anchor shared pairs: CAL-POS-1=[['preferred_language', 'en']], CAL-POS-2=[['GeoIP', 'US:CA:San_Jose:37.34:-121.89:v4'], ['NetworkProbeLimit', '0.001'], ['WMF-Last-Access', '09-Oct-2026']], CAL-POS-3=[['CentralAuthAnonTopLevel', '1'], ['GeoIP', 'US:CA:San_Jose:37.34:-121.89:v4'], ['NetworkProbeLimit', '0.001'], ['WMF-Last-Access', '09-Oct-2026'], ['WMF-Last-Access-Global', '09-Oct-2026']], CAL-POS-4=[].",
+    "DERIVED: varying (session-scoped) cookie names by anchor: CAL-POS-1=['_gitlab_session'], CAL-POS-2=['WMF-Uniq', 'authSession'], CAL-POS-3=['WMF-Uniq', 'authSession', 'enwikiSession'], CAL-POS-4=[]; all first requests were cookie-free in all sessions."
+  ],
+  "validity_notes": [
+    "V11: request.json/spec.json/prereg.md sha256 re-verified against freeze.json before the first request (OK) and after the last (OK).",
+    "V05/V16: no JavaScript, no browser, no headless rendering executed. Zero recovery (if any) is a fact about raw bytes only; client-side/XHR-minted values, canvas content and authenticated state remain structurally invisible and open.",
+    "Entity decoding: CPython's html.parser already decodes HTML character references in attribute values (verified: a&amp;lt;b&amp; -> a&lt;b&). An additional html.unescape call would double-decode, so path A relies on the stdlib parser's single decode; path B uses an independent hand-written decoder. This is the sole operationalization deviation from the spec's literal 'html.unescape' phrasing.",
+    "ABSENT vs PRESENT-EMPTY: spec.recovered_value_definition says an absent value attribute means ABSENT, while NC-EXTRACT-EMPTY-VALUE requires a field with no value attribute to be classified PRESENT-EMPTY. The fixture requirement is operationally explicit, so a found in-list field with no/empty value is classified PRESENT-EMPTY; ABSENT is used only for a field name not observed in a session.",
+    "D1V non-degeneracy: NC-NONDEGENERATE-ESTIMATOR is applied as (a) >=2 distinct decisions on the D1V subset and (b) every active channel fires and does not fire at least once over the full trial population. Channels are evaluated on captured real data, not hardcoded. nondegenerate=False.",
+    "Cohens kappa (M-EXTRACT-KAPPA) is None (undefined) when chance agreement is 1.0. Observed kappa=None.",
+    "Certificate evidence artifact codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl (sha256 1bbde51d...) referenced by spec.substrate_certificate was NOT present in the checked-out repository at EXECUTE time; the accepted frontier result.json (sha256 7b0347ba...) was present. GATE C independently re-measures route validity, body variation and field presence from live captures, so the certificate did not depend on the missing file; the absence is disclosed as a provenance limitation.",
+    "B-PARENT-METHOD-REIMPL is a disclosed proxy (parent preserved no code); no gate depends on it.",
+    "Anchor construct overfit is constrained by V07 (no anchor/host-specific rules in producer sources) and by the same code/name-list being applied to all anchors and negatives.",
+    "GATE-C4 (M-CERT-BODY-VARIABLE>=3): PASS.",
+    "Raw bodies retained per record under raw/bodies/; raw/records.jsonl carries timestamp, final URL, status, headers of interest, body_sha256, storage path, jar digest, neutral detector names.",
+    "GATE-C3 FAILURE CAUSE (derived, non-gate): the frozen predicate 'four fresh jars pairwise disjoint on (name, value)' fails on CAL-POS-1/2/3 solely because servers set constant configuration cookies with identical (name,value) across independent sessions (preferred_language=en; GeoIP; NetworkProbeLimit=0.001; WMF-Last-Access date; WMF-Last-Access-Global date; CentralAuthAnonTopLevel=1). No session-identifying cookie value was shared and every first request was cookie-free. The literal frozen predicate is therefore structurally unsatisfiable on these Wikimedia/gitlab anchors, so GATE-C3 is a design/operationalization defect of this packet, not evidence about C-FRESHNESS. The frozen fail-closed rule still yields terminal F-CERT; no gate was relaxed after outcomes were seen."
+  ],
+  "unresolved": [
+    "Whether the parent's 4/5 zero-distinct-value gate-0 failure generalizes beyond these four anchors to the broader credential-free server-rendered Web. CC-A forbids prevalence claims.",
+    "Whether the auth.wikimedia.org wpCreateaccountToken discrepancy is reproducible over time / from different egress networks; this run captures one date and one egress ASN.",
+    "Part (ii) status: DATA-INSUFFICIENT-D1V; the value-aware channel's necessity on non-D1V drift families (permission-boundary change, SB-02) was not tested and remains open.",
+    "The structurally invisible stale cell (M-INVISIBLE-STALE-PREV) and permission-boundary change remain permanently unmeasured by this design.",
+    "Whether a value-blind guard operating point, prevalence or economic break-even follows; none is measured by this packet (CC-B).",
+    "Whether a repaired isolation predicate (e.g. pairwise-disjoint on session-identifying cookie names, or excluding server constant configuration cookies) would pass on these anchors, and whether the downstream GATE E / D1 read would then hold. Untested in this packet; a redesign, not an EXECUTE change."
+  ],
+  "frozen_input_verification": {
+    "before": {
+      "request.json": {
+        "expected": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+        "actual": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+        "match": true,
+        "when": "before"
+      },
+      "spec.json": {
+        "expected": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+        "actual": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+        "match": true,
+        "when": "before"
+      },
+      "prereg.md": {
+        "expected": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+        "actual": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+        "match": true,
+        "when": "before"
+      }
+    },
+    "after": {
+      "request.json": {
+        "expected": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+        "actual": "d99cf39a29a18c6fbdd3eac64a7f5be24574fa81d0d3534412ec99cdae23c2cb",
+        "match": true,
+        "when": "after"
+      },
+      "spec.json": {
+        "expected": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+        "actual": "fd1aee847bdc1b6e192cb6ebb1f455873515cfc46d4c4cf10293cb4befe81b82",
+        "match": true,
+        "when": "after"
+      },
+      "prereg.md": {
+        "expected": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+        "actual": "940b66afea26faf4d67b0547447540746e19d37fed4843f171f1559e6fc34150",
+        "match": true,
+        "when": "after"
+      }
+    }
+  },
+  "post_run_derived_diagnostics": [
+    {
+      "id": "M-DIAGNOSTIC-SESSION-ISOLATION",
+      "artifact": "research/experiments/EXP-GRAPH-37950584469/derived/session_isolation_diagnostic.json",
+      "sha256": "adc6987dab415697562c7eebe792e9e0222ee3ca18d8df656bfe59fedcfd805c",
+      "producer": "research/graph/freshness_detection/exp_37950584469/analyze_session_isolation.py",
+      "producer_sha256": "31797e03f289bc775afd2df4d15aee1033734bf44ccb27fc1cfa6eba8e5063f9",
+      "note": "Computed from retained raw evidence AFTER the measurement transaction completed. It explains the frozen GATE-C3 failure and changes no gate, metric, status, outcome or branch."
+    }
+  ]
+}
