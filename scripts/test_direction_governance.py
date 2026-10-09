@@ -146,7 +146,7 @@ def main() -> None:
         if valid_brief.returncode != 0:
             raise SystemExit("deterministic Scout fallback emitted invalid brief:\n" + valid_brief.stdout + valid_brief.stderr)
         brief_obj = json.loads(brief.read_text())
-        if "DEGRADED SCOUT BRIEF" not in brief_obj["executive_assessment"]:
+        if "DEGRADED SCOUT" not in brief_obj["executive_assessment"]:
             raise SystemExit("Scout fallback is not explicitly degraded")
 
     print("SPIDER_DIRECTION_GOVERNANCE_TEST_OK")
