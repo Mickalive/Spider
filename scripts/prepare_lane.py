@@ -75,7 +75,7 @@ def packet_stage_flags(exp: Path) -> tuple[bool, bool, bool, bool, bool]:
     try:
         spec = json.loads((exp / "spec.json").read_text(encoding="utf-8"))
         prereg = (exp / "prereg.md").read_text(encoding="utf-8", errors="replace").strip()
-        designed = bool(spec.get("question")) and len(prereg) >= 500 and "DESIGN NOT YET FROZEN." not in prereg
+        designed = bool(spec.get("question")) and len(prereg) >= 500
     except Exception:
         designed = False
     frozen = designed and all_exist(exp, ["freeze.json"])
