@@ -123,7 +123,7 @@ def main():
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
-    require('"build_required": false' in prepare and '"freeze_artifacts": []' in prepare and "designed=" in prepare, "experiment scaffold must declare BUILD/freeze metadata and designed state")
+    require('"build_required": False' in prepare and '"freeze_artifacts": []' in prepare and "designed=" in prepare, "experiment scaffold must declare BUILD/freeze metadata and designed state")
 
     snapshot_builder = text("scripts/build_portfolio_snapshot.py")
     require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
