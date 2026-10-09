@@ -25,6 +25,9 @@ case "$STAGE" in
   init)
     paths+=("$EXP/request.json" "$EXP/spec.json" "$EXP/prereg.md" "research/lanes/$LANE/state.json")
     ;;
+  design-draft)
+    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/failure.json" "$EXP/model_design.json" "research/lanes/$LANE/state.json")
+    ;;
   design)
     paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/build_receipt.json" "$EXP/freeze.json" "$EXP/failure.json" "$EXP/model_design.json" "$EXP/model_build.json" "research/lanes/$LANE/state.json")
     ;;
