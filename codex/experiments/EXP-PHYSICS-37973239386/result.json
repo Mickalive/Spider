@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37973239386",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "PREDICTABLE_PREVALENCE_POOLED": 0.043478260869565216,
+    "PREDICTABLE_PREVALENCE_SITE": {
+      "gnome.org": {
+        "n": 3,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "kde.org": {
+        "n": 3,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "archlinux.org": {
+        "n": 5,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "gitea.com": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "python.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "openai.com": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "elastic.co": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "freecodecamp.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "hashicorp.com": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "kubernetes.io": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "julialang.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "home-assistant.io": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "rubyonrails.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "fedoraproject.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "manjaro.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "endeavouros.com": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "wikipedia.org": {
+        "n": 3,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "gentoo.org": {
+        "n": 2,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "openstreetmap.org": {
+        "n": 2,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "mediawiki.org": {
+        "n": 3,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "djangoproject.com": {
+        "n": 2,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "wikidata.org": {
+        "n": 3,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "pypi.org": {
+        "n": 2,
+        "pred": 1,
+        "prevalence": 0.5
+      },
+      "reddit.com": {
+        "n": 1,
+        "pred": 1,
+        "prevalence": 1.0
+      },
+      "dev.to": {
+        "n": 2,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "flarum.org": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      },
+      "microsoftonline.com": {
+        "n": 1,
+        "pred": 0,
+        "prevalence": 0.0
+      }
+    },
+    "PREDICTABLE_PREVALENCE_BY_CLASS": {
+      "WALLCLOCK_B64": 1,
+      "CONST_SUBSTRING": 1
+    },
+    "PREDICTABLE_PREVALENCE_ALL_PLUS_NONCE": 0.0425531914893617,
+    "site_clustered_ci95": [
+      0.0,
+      0.11627906976744186
+    ],
+    "bootstrap_n_clusters": 27,
+    "bootstrap_distinct_resamples": 10000,
+    "bootstrap_informative": true,
+    "N_INDICATOR_FIELDS": 46,
+    "N_PREDICTABLE": 2,
+    "ADMITTED_FIELDS": 47,
+    "ADMITTED_PRIMARY_FIELDS": 46,
+    "ADMITTED_NONCE_FIELDS": 1,
+    "ADMITTED_SITES": 27,
+    "ADMITTED_ENDPOINTS": 28,
+    "B_MEMORY_REPEAT_ACC_MEAN": 0.3361801242236025,
+    "B_MARKOV1_ACC_MEAN": 0.05900621118012422,
+    "B_CONSTANT_MODE_ACC_MEAN": 0.0,
+    "NULL_FP_AGGREGATE": 0.0,
+    "NULL_FP_AGGREGATE_DESIGN_LITERAL": 0.000625,
+    "PC_POWER_MIN": 1.0,
+    "LIVE_NULL_FIRED_FRACTION": 0.0,
+    "NON_GET_REQUESTS": 0,
+    "TRANSPORT_ERROR_RATE": 0.017543859649122806,
+    "TRANSPORT_ERRORS": 24,
+    "PLANNED_GETS": 1368,
+    "STATUS_HISTOGRAM": {
+      "403": 120,
+      "200": 1085,
+      "500": 2,
+      "429": 65,
+      "404": 24,
+      "202": 48,
+      "None": 24
+    },
+    "thresholds_frozen": {
+      "P_FLOOR": 0.1,
+      "P_HI": 0.25,
+      "ALPHA_RULE": 0.05,
+      "PC_POWER_MIN": 0.8,
+      "NULL_FP_MAX": 0.05,
+      "DELTA_MEM": 0.1,
+      "N_MIN_OBS": 4,
+      "M_MIN_FIELDS": 20,
+      "S_MIN_SITES": 8,
+      "TRANSPORT_ERROR_MAX": 0.3,
+      "CLUSTERED_BOOTSTRAP_RESAMPLES": 10000
+    },
+    "measurement_invalid_conditions": {
+      "a_too_few_fields": false,
+      "b_too_few_sites": false,
+      "c_null_fail": false,
+      "d_pc_power_fail": false,
+      "e_transport_or_non_get": false,
+      "f_locator_missing": false,
+      "g_universe": false,
+      "h_rule_family": false
+    },
+    "branch": "S0"
+  },
+  "controls": {
+    "B_MEMORY_REPEAT": {
+      "expected": "near 0 for genuinely varying minted values; high only if values persist across observations; NOT allowed to make a field PREDICTABLE on its own.",
+      "observed": {
+        "mean_holdout_accuracy": 0.3361801242236025,
+        "mean_full_accuracy": 0.3307401483204886,
+        "interpretation_of_value": "0.336 is driven by identity-persistent session cookies; every counted predictable field exceeded this baseline by >= DELTA_MEM=0.10."
+      },
+      "role": "disqualifier baseline (mandated)",
+      "pass": true,
+      "evidence_refs": [
+        "derived/fields.json",
+        "derived/metrics.json"
+      ]
+    },
+    "B_MARKOV1": {
+      "expected": "beats B_MEMORY_REPEAT when values alternate or recur; sensitivity check only, not a gate.",
+      "observed": {
+        "mean_accuracy": 0.05900621118012422
+      },
+      "role": "sensitivity baseline",
+      "pass": true,
+      "evidence_refs": [
+        "derived/fields.json",
+        "derived/metrics.json"
+      ]
+    },
+    "B_CONSTANT_MODE": {
+      "expected": "matches the treatment only when the field is constant, which admission already excludes.",
+      "observed": {
+        "mean_accuracy": 0.0
+      },
+      "role": "triviality control",
+      "pass": true,
+      "evidence_refs": [
+        "derived/fields.json",
+        "derived/metrics.json"
+      ]
+    },
+    "B_IRREDUCIBILITY_NULL": {
+      "expected": "aggregate field-level false-positive rate <= NULL_FP_MAX=0.05 on the frozen 1600-field battery, all 11 rules ARMED.",
+      "observed": {
+        "execute_rerun_fields_total": 1600,
+        "execute_rerun_fields_fired": 0,
+        "execute_rerun_aggregate_fp": 0.0,
+        "execute_rerun_all_11_rules_armed": true,
+        "design_literal_fields_fired": 1,
+        "design_literal_aggregate_fp": 0.000625,
+        "discrepancy_note": "DESIGN-embedded literal recorded 1/1600 R_WALLCLOCK_B64 fire; EXECUTE re-run with frozen seeds recorded 0/1600. Both satisfy the frozen FP<=0.05 requirement; the difference is disclosed and does not alter any branch."
+      },
+      "role": "calibrated irreducibility null",
+      "pass": true,
+      "evidence_refs": [
+        "derived/controls.json"
+      ]
+    },
+    "PC_PLANTED_CLASSES": {
+      "expected": "every one of the eight planted classes detected at power >= PC_POWER_MIN=0.8 on the frozen 200-trial battery.",
+      "observed": {
+        "power_min": 1.0,
+        "per_class": {
+          "P_INT_INCR": 1.0,
+          "P_HEX_INCR": 1.0,
+          "P_PREFIX_COUNTER": 1.0,
+          "P_DEC_TS": 1.0,
+          "P_HEX_TS": 1.0,
+          "P_B64_TS": 1.0,
+          "P_SESSION_BIND": 1.0,
+          "P_HASH_BIND": 1.0
+        },
+        "trials_per_class": 200
+      },
+      "role": "positive control (author-authored; construct boundary disclosed)",
+      "pass": true,
+      "evidence_refs": [
+        "derived/controls.json"
+      ]
+    },
+    "NC_PLANTED_RANDOM_PLUS_LIVE": {
+      "expected": "NC_PLANTED_RANDOM aggregate FP <= 0.05 AND NC_LIVE_HTTPBIN_UUID fired-field fraction <= 0.05.",
+      "observed": {
+        "planted_random_aggregate_fp": 0.0,
+        "live_httpbin_uuid_fields_collected": 8,
+        "live_httpbin_uuid_fields_fired": 0,
+        "live_httpbin_uuid_fired_fraction": 0.0
+      },
+      "role": "two-component null control",
+      "pass": true,
+      "evidence_refs": [
+        "derived/controls.json",
+        "derived/controls_initial_live_null_selfbind_bug.json"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw/collection.jsonl",
+      "sha256": "6badb5aba89e6f8d5741cd1ba3288998034b3f9c28c4b1b3271a797b952c049f",
+      "bytes": 810124,
+      "role": "raw"
+    },
+    {
+      "path": "raw/collection_meta.json",
+      "sha256": "6c0297f8dbb9c8cfd10d352ed90307a20a8757a17d32e7bf07d7433baf627197",
+      "bytes": 2618,
+      "role": "raw"
+    },
+    {
+      "path": "derived/fields.json",
+      "sha256": "b441bf13eaee0466e4210a622678f20e7a7cef174f7fb928901d80dd79b896e6",
+      "bytes": 101271,
+      "role": "derived"
+    },
+    {
+      "path": "derived/field_cluster_map.json",
+      "sha256": "99e2484f94f639260aef7c46122c24871d1fd1af9915c7c5f7d3d2937d48da01",
+      "bytes": 27224,
+      "role": "derived"
+    },
+    {
+      "path": "derived/controls.json",
+      "sha256": "8014d2ae6a1a852d02a26a8391fca2d080acea0efd94b1bb3d11e126a3822413",
+      "bytes": 3646,
+      "role": "derived"
+    },
+    {
+      "path": "derived/controls_initial_live_null_selfbind_bug.json",
+      "sha256": "d0e44642d307a878a76f51e1b7a91e3d82015d174285e39379d0d9283d0a2999",
+      "bytes": 3959,
+      "role": "derived"
+    },
+    {
+      "path": "derived/metrics.json",
+      "sha256": "ab0d4004fdccbfb656a2d060b64cf289adac4ceaadbaac9d2db954e78a1cd0ef",
+      "bytes": 4265,
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/exp_37973239386_lib.py",
+      "sha256": "ab727198ec96f31c2ab7941913a2415905bacc48f649e05874208fe21b90c8c1",
+      "bytes": 29500,
+      "role": "code"
+    },
+    {
+      "path": "research/physics/exp_37973239386_run.py",
+      "sha256": "fe049fcd22517371ba0e985eae9be90853705e245c05587c2890f3eca1003ded",
+      "bytes": 15693,
+      "role": "code"
+    },
+    {
+      "path": "research/physics/exp_37973239386_finalize.py",
+      "sha256": "1179ae8ae6aab9ffc3b659346d389a7c145c7271da73f4f100fcf9adeb6a25ce",
+      "bytes": 39126,
+      "role": "code"
+    },
+    {
+      "path": "request.json",
+      "sha256": "19757cd7f91ed0e5f15948a65ff13c05910e2cbed7523d9e354fb899aea92d3d",
+      "bytes": 12485,
+      "role": "fixture"
+    },
+    {
+      "path": "spec.json",
+      "sha256": "9a4cddbc4865fbd98ecb9a6ecc6e66f034999b6a8ca13d88c5f4dc01bd9221e9",
+      "bytes": 31359,
+      "role": "fixture"
+    },
+    {
+      "path": "prereg.md",
+      "sha256": "761a11bb1c725ae8d1534b95d50d6648586752af53c7ebff5d764656302b6cd2",
+      "bytes": 19979,
+      "role": "fixture"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "57a96166c8ee302600c3b3c7ab0eafec906078e80a76986f96b9accb2fcbdf6c",
+      "bytes": 399,
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    {
+      "id": "O1_COLLECTION",
+      "fact": "Fresh confirmatory collection executed the frozen 57-endpoint universe with K=8 independent sessions and J=3 GETs each = 1368 planned GETs; NON_GET_REQUESTS=0; 24 transport errors (1.76%) all on community.invisioncommunity.com; status histogram {\"200\": 1085, \"202\": 48, \"403\": 120, \"404\": 24, \"429\": 65, \"500\": 2, \"None\": 24}."
+    },
+    {
+      "id": "O2_ADMISSION",
+      "fact": "47 admitted action-gating fields (46 PRIMARY SESSION/CSRF/TOKEN + 1 NONCE csp-nonce) across 28 endpoints and 27 registrable domains."
+    },
+    {
+      "id": "O3_PRIMARY",
+      "fact": "N_INDICATOR_FIELDS=46, N_PREDICTABLE=2, PREDICTABLE_PREVALENCE_POOLED=0.043478; ALL_PLUS_NONCE=0.042553; site-clustered 95% CI [0.0, 0.11627906976744186] over 27 clusters / 10000 distinct resamples."
+    },
+    {
+      "id": "O4_PREDICTABLE_FIELDS",
+      "fact": "The two counted fields: [{\"attributed_class\": \"WALLCLOCK_B64\", \"best_rule_fraction\": 1.0, \"cluster\": \"pypi.org\", \"endpoint\": \"https://pypi.org/account/login/\", \"firing_rules\": [\"R_WALLCLOCK_B64\"], \"locator_type\": \"cookie\", \"memory_repeat_holdout\": 0.7142857142857143, \"name\": \"session_id\"}, {\"attributed_class\": \"CONST_SUBSTRING\", \"best_rule_fraction\": 1.0, \"cluster\": \"reddit.com\", \"endpoint\": \"https://www.reddit.com/login/\", \"firing_rules\": [\"R_CONST_SUBSTRING\"], \"locator_type\": \"input.hidden\", \"memory_repeat_holdout\": 0.0, \"name\": \"jsc_token\"}]"
+    },
+    {
+      "id": "O5_PYPI_DETAIL",
+      "fact": "pypi.org cookie session_id has 3 dot-separated segments; the middle segment is the identical string 'aslBhA' in all 8 distinct session values and base64-decodes to bytes 6ac94184, whose big-endian 4-byte integer 1791574404 lies within 3600 s of the collection epoch (~1791574416); the varying first segment carries the signed payload. R_WALLCLOCK_B64 detection fraction = 1.0."
+    },
+    {
+      "id": "O6_REDDIT_DETAIL",
+      "fact": "reddit.com input.hidden jsc_token values are 64 lowercase hex characters sharing a constant 32-hex-character prefix (e.g. '2824be10929bdc604753c70a67a1c331'); values are not identical and do not repeat within the window; R_CONST_SUBSTRING detection fraction = 1.0."
+    },
+    {
+      "id": "O7_OTHER_FIELDS",
+      "fact": "No armed rule fired on any of the other 44 indicator fields. The persistent session cookies (e.g. _gitlab_session, authSession, *_Session, flarum_session) are memory-repeat-explained (holdout accuracy ~0.71); per-request CSRF/one-time tokens (authenticity_token, wpLoginToken, csrfmiddlewaretoken, csrf-token, discourse-track-view-session-id) vary with no rule firing."
+    },
+    {
+      "id": "O8_CONTROLS_EXECUTE",
+      "fact": "EXECUTE re-run controls: NC_PLANTED_RANDOM 0/1600 fired (aggregate FP 0.0), all 11 rules armed; NC_LIVE_HTTPBIN_UUID 0/8 fields fired (fraction 0.0); PC_PLANTED_CLASSES power_min=1.0 (all 8 classes 200/200)."
+    },
+    {
+      "id": "O9_BRANCH_DERIVATION",
+      "fact": "Measurement-invalid conditions (a)-(h) all evaluated false: {\"a_too_few_fields\": false, \"b_too_few_sites\": false, \"c_null_fail\": false, \"d_pc_power_fail\": false, \"e_transport_or_non_get\": false, \"f_locator_missing\": false, \"g_universe\": false, \"h_rule_family\": false}. Branch precedence therefore resolves to S0/FALSIFIES (PV=0.0435<=0.10 AND clustered CI upper=0.116<0.25)."
+    },
+    {
+      "id": "O10_BLOCKED_HOSTS",
+      "fact": "Reachability in this window: gitlab.com, community.cloudflare.com, www.npmjs.com, wordpress.com and www.phpbb.com returned 403; rubygems.org returned 404; community.invisioncommunity.com was a transport error; several GitLab/Gitea hosts returned 429 rate limits. Three endpoints admitted in the DESIGN census (gitlab.archlinux.org, salsa.debian.org, gitlab.freedesktop.org) were blocked this window and did not contribute fields."
+    },
+    {
+      "id": "O11_DESIGN_NULL_DISCREPANCY",
+      "fact": "DESIGN-embedded literal null reported 1/1600 fired (aggregate FP 0.000625, rule R_WALLCLOCK_B64); the EXECUTE frozen-seed re-run reported 0/1600 (aggregate FP 0.0). Both are <= NULL_FP_MAX=0.05."
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "V1_LIVE_NULL_CONSTRUCTION_CORRECTION",
+      "note": "The first EXECUTE analysis constructed each NC_LIVE_HTTPBIN_UUID observation's same-session cookie map as {'_': <the uuid value itself>}, which made R_SESSION_BIND fire vacuously on all 8/8 live-null fields and failed the null-gate (status would have been MEASUREMENT_INVALID). The rule family predicates and all thresholds were NOT changed; only the control's cookie-map construction was corrected to an empty map (httpbin.org/uuid sets no cookies), which is the faithful construction for a cookie-free random source. The pre-correction artifact is preserved verbatim at derived/controls_initial_live_null_selfbind_bug.json. This correction changes only the null/liveness gate, not the confirmatory primary metric."
+    },
+    {
+      "id": "V2_DESIGN_EXECUTE_NULL_FIRE_DIFFERENCE",
+      "note": "DESIGN literal null fired 1/1600 (R_WALLCLOCK_B64, FP 0.000625); EXECUTE re-run fired 0/1600. Disclosed; both pass FP<=0.05. The residual difference prevents using the EXECUTE battery alone to bound R_WALLCLOCK_B64's real false-positive rate, so the DESIGN literal is carried alongside."
+    },
+    {
+      "id": "V3_WALLCLOCK_CLOCK_SOURCE",
+      "note": "Wallclock rules compare candidate substrings against the CLIENT-side collection wall-clock epoch (time.time() at request time), not a server clock. Any server/client clock skew or timezone-independent epoch offset within +/-3600 s is absorbed by the 1-hour tolerance. This is a deliberate frozen design choice."
+    },
+    {
+      "id": "V4_AUTHOR_AUTHORED_POSITIVE_CONTROL",
+      "note": "PC_PLANTED_CLASSES is authored by the instrument designer and certifies the detector code path and sensitivity, NOT the construct boundary on the real Web. Mitigations are the out-of-author NC_LIVE_HTTPBIN_UUID live null and the fresh real-Web confirmatory collection; the construct boundary remains a disclosed residual threat."
+    },
+    {
+      "id": "V5_POOL_NOT_PROBABILITY_SAMPLE",
+      "note": "The frozen 57-endpoint universe is a curated convenience pool; all rates describe this pool in one collection window (one stdlib-HTTP client, one User-Agent, one network vantage). It is not a probability sample of the Web."
+    },
+    {
+      "id": "V6_REPRESENTATION_LOSS",
+      "note": "Only credential-free HTTP GET-observable fields are measured. No JavaScript/DOM/SPA-rendered, authenticated, WebSocket/GraphQL, edge or mobile-sourced token is observable. Response bodies are not archived (only body_sha256 per observation), so body-level re-derivation is not reconstructable from this packet. The NONCE stratum contains exactly 1 admitted field (a csp-nonce), so its separate estimate is not informative."
+    },
+    {
+      "id": "V7_RULE_MULTIPLICITY_AND_ATTRIBUTION",
+      "note": "11 armed rules raise per-field false-positive risk; the frozen 1600-field calibration bounds it (aggregate FP <= 0.05) and counted fields must additionally beat B_MEMORY_REPEAT by DELTA_MEM=0.10. Class attribution (WALLCLOCK_B64 vs CONST_SUBSTRING) follows the frozen priority and can mislabel when several rules fire; this affects only the class breakdown, not the pooled indicator."
+    },
+    {
+      "id": "V8_BLOCKING_AND_RATE_LIMITS",
+      "note": "In this window several frozen endpoints were Cloudflare-blocked (403) or rate-limited (429), including three endpoints admitted in the DESIGN census. Overall admission still exceeded the frozen M_MIN_FIELDS/S_MIN_SITES by wide margins, so no measurement-invalid condition fires; however per-site coverage is window-dependent and the census monotonicity argument is not strictly reproduced endpoint-by-endpoint."
+    },
+    {
+      "id": "V9_USER_AGENT_CHOICE",
+      "note": "The spec fixes a single User-Agent but not its exact string. A plain identifying research User-Agent was used because full browser-like UAs were rejected 403/406 by Cloudflare on multiple frozen endpoints while research-style UAs were served. The choice is fixed in code (research/physics/exp_37973239386_lib.py:USER_AGENT) and applied uniformly."
+    },
+    {
+      "id": "V10_CLUSTER_APPROXIMATION",
+      "note": "Clusters are the registrable domain approximated as the last two dot-labels; the frozen universe contains no multi-label public suffix (co.uk/org.uk-like) cases, so the approximation is exact for this pool (as stated in spec.json.measurement_validity.split_integrity)."
+    },
+    {
+      "id": "V11_DIRECTED_VS_CONFIRMATORY",
+      "note": "DIRECTOR-mandated experiment (request.json.director_mandate, action=CONTINUE, claim C-WEB-DYNAMICS, parent_handoff_disposition=SUPERSEDE). The parent EXP-PHYSICS-37385620138 is continuity evidence only; its query-parameter perturbation direction is NOT adopted. No parent carry_forward category is silently overridden."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U1_GENERALIZATION",
+      "question": "Do the two counted predictable classes persist across collection windows? The pypi.org R_WALLCLOCK_B64 detection rides on an itsdangerous-style middle timestamp segment; the reddit.com jsc_token constant-prefix structure may be rotated by the operator. A second window would distinguish stable structure from a point-in-time artifact."
+    },
+    {
+      "id": "U2_CONSTRUCT_BOUNDARY",
+      "question": "What is the real-Web predictability prevalence on JavaScript-rendered, authenticated, or SPA substrates that this credential-free HTTP GET instrument cannot observe?"
+    },
+    {
+      "id": "U3_NULL_RULE_SENSITIVITY",
+      "question": "Why did R_WALLCLOCK_B64 fire once in the DESIGN literal null battery and zero times in the EXECUTE re-run with the same nominal seeds? This is a within-tolerance discrepancy but limits the EXECUTE-only bound on that rule's false-positive rate."
+    },
+    {
+      "id": "U4_REDDIT_MECHANISM",
+      "question": "What produces the constant 32-hex-character prefix of reddit.com jsc_token and does it carry predictive information about the random suffix?"
+    },
+    {
+      "id": "U5_VALUE_VS_PROCEDURE",
+      "question": "Whether the architecture should persist procedures/paths and re-observe values fresh is informed but not decided by this bounded negative; a product-level cost comparison is out of scope for this physics packet."
+    }
+  ]
+}

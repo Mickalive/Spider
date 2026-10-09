@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37973256064",
+  "lane": "product",
+  "producer": {
+    "agent_type": "big-pickle/EXECUTE",
+    "model": "opencode/big-pickle"
+  },
+  "git": {
+    "repo_root": "/home/runner/work/Spider/Spider",
+    "commit": "86722252623bc674c4fb37da8150b86928684950",
+    "branch": null,
+    "diff_stat": "not recorded (frozen inputs immutable; code modified only in allowed paths)",
+    "diff_filtered": [
+      "src/spider/kernel.py",
+      "src/spider/__init__.py",
+      "tests/test_kernel.py",
+      "research/experiments/EXP-PRODUCT-37973256064/harness/run_experiment.py",
+      "research/experiments/EXP-PRODUCT-37973256064/harness/substrate.py"
+    ]
+  },
+  "environment": {
+    "python_version": "3.12.3",
+    "platform": "linux",
+    "hostname": null,
+    "time_utc": "2026-10-09T18:50:51Z",
+    "pwd": "/home/runner/work/Spider/Spider",
+    "env_vars": {
+      "PYTHONPATH": "src"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/request.json",
+      "sha256": "c2f578482ec3c46ce8694b4fe7077495325d4d04b535ab88252505d2af1a0153"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/spec.json",
+      "sha256": "1733f30b9c1e3adf77ba8f63aa321d82f5aa54983804aafdd30eaccb2f422c99"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/prereg.md",
+      "sha256": "0938f9c35dd7c719a6b478728041f31fd81d4e9d6f8ec81c4f80bf739b2fd2a2"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/freeze.json",
+      "sha256": null,
+      "sha256_observed": "computed below"
+    }
+  },
+  "kernel_identity": {
+    "kernel_path": "src/spider/kernel.py",
+    "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "git_blob_sha": "b15ed84865cdd0e91af6337299674d072db3e48121d78a15125a3c797ba2f3ab",
+    "repaired_from_parent": true,
+    "reverted_commit": "efe0fe1aebc410c677f6e65e22b52d096f7af3be"
+  },
+  "tests_identity": {
+    "tests_path": "tests/test_kernel.py",
+    "sha256": "89a1b9b9f1abc6367d7cb47de79a56ae8b9709e4452dd36fca51ae8353e00f49",
+    "git_blob_sha_from_parent": "7bd443c7694df4723839dfbf3e920f31b63f89e5574b9657eedff28145807440"
+  },
+  "substrate": {
+    "type": "real_localhost_stdlib_http",
+    "module": "research/experiments/EXP-PRODUCT-37973256064/harness/substrate.py",
+    "sha256": "2c09997bba72b966c76b84595d4d0f64bdff8367bb9a5f2aa4ef1b06c944aec8",
+    "fixture_not_used": true,
+    "server_requests_total": 72
+  },
+  "harness": {
+    "module": "research/experiments/EXP-PRODUCT-37973256064/harness/run_experiment.py",
+    "sha256": "f452242ce3acfe2821264c2da76e966ffd6fbffff1e3cf15284ca5869a06b8d2",
+    "python_path": "src"
+  },
+  "execution": {
+    "start_time": null,
+    "end_time": null,
+    "command": "PYTHONPATH=src timeout 300 python3 research/experiments/EXP-PRODUCT-37973256064/harness/run_experiment.py",
+    "exit_code": 0
+  },
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/training_observations.jsonl",
+      "sha256": "1a2bb2fcd27e289ac3ec530fff06cb88e3f1f74e2fa29de355a25b2fd5ab2000",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/induced_mechanisms.json",
+      "sha256": "0540dc4c078cabaf93895cf266a2bfaceffba2a2de834b53c322e2cea1579cc9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/task_trajectories.jsonl",
+      "sha256": "c442aa64382264196b8a21081794cb9eb433321e9edb0dce294633278117eed5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/accounting_counters.jsonl",
+      "sha256": "20cc3475c8454adb61ca87fbbf5d6be29464ebb935c646da4ec60565c2b38625",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/known_negatives.jsonl",
+      "sha256": "e76fa00828f2fad62219983029c848d5543849e5e214656d94af268885133602",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/null_control_unseen_type.jsonl",
+      "sha256": "1580b197bc725f127c0a3f2c2427b0debfd592933f39559a70b47cbf568f2c3d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/raw_evidence/server_log.jsonl",
+      "sha256": "cd7db388a1175981a7ecd6b38a6b2c61bba42f8cb98ccd658ba4a57885b8fc55",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/derived/arm_metrics.json",
+      "sha256": "77867202242a2067aea6ce9e91f37b607603bca1d9ea04d16f47f3b0b3a48303",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/derived/decision_rule_eval.json",
+      "sha256": "6529c4d216f200aad2c3badbdde3f45c089dca5735064e794d043289e8f6afcc",
+      "role": "derived"
+    }
+  ],
+  "frozen_inputs_observed": {
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-37973256064/freeze.json",
+      "sha256": "d69599034040ffc93e0c1fe1ede30fb1a766444fec2d96532425370edc391637"
+    }
+  }
+}
