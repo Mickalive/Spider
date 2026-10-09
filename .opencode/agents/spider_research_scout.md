@@ -18,7 +18,7 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `research/portfolio/PROGRAM_AUDIT_2026-10-09.md` as a dated strategic synthesis (never a substitute for canonical evidence);
+- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as a dated strategic synthesis (never a substitute for canonical evidence);
 - `codex/claim_state.json`;
 - `codex/index.json`;
 - the exact machine snapshot path supplied by the workflow.
