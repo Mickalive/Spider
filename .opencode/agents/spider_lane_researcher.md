@@ -27,10 +27,14 @@ DESIGN:
 - fill the exact experiment `spec.json` and `prereg.md`;
 - include strong baselines, positive/null controls and validity threats;
 - use stable names/ids for controls and metrics that EXECUTE and AUDIT can reuse;
-- state consequences of both positive and negative outcomes.
+- state consequences of both positive and negative outcomes;
+- when request.design_contract_version >= 2, fill every `freeze_eligibility` check with PASS or justified NOT_APPLICABLE and list every mutable local code/data/task-bank/fixture dependency in `freeze_artifacts`;
+- before finalizing v2 DESIGN, actively try to disprove its own satisfiability: empty/unreachable branches, arithmetic impossibility, ceiling/floor baselines, treatment/comparator identity, insensitive controls, missing prerequisites and unbound mutable artifacts are DESIGN failures, not things to discover during EXECUTE;
+- cheap non-outcome-bearing satisfiability probes are allowed in DESIGN. Confirmatory/outcome-bearing measurements are not.
 
 EXECUTE:
-- frozen request/spec/prereg/freeze are immutable;
+- frozen request/spec/prereg/freeze (and design_review when present) are immutable;
+- every file listed in freeze.artifact_hashes is an immutable interpretation dependency for this experiment; do not modify it;
 - execute exactly the frozen design;
 - keep RAW EVIDENCE, OBSERVATIONS, DERIVED MEASUREMENTS and INTERPRETATION distinct;
 - preserve raw evidence and distinguish measurement failure from negative result;
