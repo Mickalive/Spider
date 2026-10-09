@@ -139,6 +139,14 @@ def verify_freeze(exp: Path) -> None:
         if not path.exists() or sha(path) != expected:
             raise ValueError(f"frozen file changed: {name}")
 
+    artifact_hashes = freeze.get("artifact_hashes", {})
+    if not isinstance(artifact_hashes, dict):
+        raise ValueError("freeze artifact_hashes must be an object")
+    for rel, expected in artifact_hashes.items():
+        path = ROOT / rel
+        if not path.is_file() or sha(path) != expected:
+            raise ValueError(f"frozen artifact changed: {rel}")
+
 
 def require_stage_outputs(exp: Path, stage: str) -> None:
     missing = [name for name in STAGE_OUTPUTS[stage] if not (exp / name).exists()]
