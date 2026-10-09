@@ -26,7 +26,7 @@ case "$STAGE" in
     paths+=("$EXP/request.json" "$EXP/spec.json" "$EXP/prereg.md" "research/lanes/$LANE/state.json")
     ;;
   design)
-    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/freeze.json" "$EXP/failure.json" "$EXP/model_design.json" "research/lanes/$LANE/state.json")
+    paths+=("$EXP/spec.json" "$EXP/prereg.md" "$EXP/design_review.json" "$EXP/freeze.json" "$EXP/failure.json" "$EXP/model_design.json" "$EXP/model_design_review.json" "research/lanes/$LANE/state.json")
     ;;
   execution-base)
     paths+=("$EXP/execution_checkpoint.json" "research/lanes/$LANE/state.json")
