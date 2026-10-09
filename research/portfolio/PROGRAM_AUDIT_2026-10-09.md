@@ -4,7 +4,7 @@
 
 This is a dated strategic reading of canonical packets for Scout and the Global Research Director. Exact scientific claims remain subordinate to `codex/experiments/<id>/` and `codex/claim_state.json`.
 
-Canonical corpus at audit: **429 experiments**.
+Canonical corpus at audit: **430 experiments**.
 
 ## Executive conclusion
 
@@ -54,13 +54,13 @@ Ceiling:
 
 Interpretation: credible bounded freshness/extraction substrate, **not** a validated end-to-end freshness guard or economic policy.
 
-### C-MEAS-VALID — effective state: EXPERIMENTAL
+### C-MEAS-VALID — effective state: VALIDATED
 
 Runtime contains the strongest positive measurement-substrate evidence.
 
 `EXP-RUNTIME-36293257855` provides a bounded authorship-separated / real-Chromium intervention-oracle result with point sensitivity and specificity 1.0 across the frozen arms and Wilson lower bounds around 0.84, plus functioning positive/null controls.
 
-Interpretation: measurement can be trustworthy in a bounded setting. It is not a universal substrate guarantee.
+Interpretation: the composite intervention oracle is **VALIDATED at this bounded authorship-separated, real-Chromium fixture scope**. This validation does not extend automatically to TLS/HTTP2, multi-host, production auth middleware, environmental drift or arbitrary upstream state transitions.
 
 ### C-PARAM-INHERIT — effective state: EXPERIMENTAL
 
@@ -77,9 +77,9 @@ The shipped `src/spider/kernel.py` still exposes only literal `distill()` at con
 
 Earlier accepted evidence gives a bounded mechanism-level signal at fixed task length.
 
-The recent `EXP-PRODUCT-37982016598` gives **no new claim evidence**: its frozen dynamic-range certificate was already false. Cold and retrieval solve the deterministic one-request task at ceiling while the treatment suffers from narrow inferred support. Cost accounting also omits dimensions needed for the intended comparison.
+`EXP-PRODUCT-37982016598` gave no new claim evidence because its dynamic-range certificate was already false. The immediately following `EXP-PRODUCT-37989728440` made the substrate-class problem more explicit: on the mandatory-discovery deterministic REST task family, cold and retrieval both remain at success_rate=1.0 at novelty >=0.5; the SPIDER treatment is causally live but ties cold on deterministic work counters at novelty >=0.25, and the novelty-monotonicity gate fails. Audit status is REVISE, so this is a bounded task-family negative, not a claim downgrade.
 
-Interpretation: residual-novelty economics remains a central open claim, but the next work is task-bank/treatment repair, not another benchmark run.
+Interpretation: residual-novelty economics remains a central open claim, but the next work is a genuinely non-degenerate task family / multi-task amortization setting, not another run on deterministic one-request-style discovery.
 
 ### C-WEB-DYNAMICS — effective state: HYPOTHESIS
 
