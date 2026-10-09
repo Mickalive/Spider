@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36314193643",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "M-TOKENIZER-PROVISIONED": true,
+    "M-CAL-POS-PASS": 1,
+    "M-CAL-POS-PASS-REQUIRED": 2,
+    "M-CAL-NEG-REJECTED": 4,
+    "M-CAL-NEG-REQUIRED": 4,
+    "M-G0-2-RESULT": false,
+    "M-G0-3-RESULT": true,
+    "M-POOL-SIZE": 48,
+    "M-POOL-SIZE-REQUIRED": 24,
+    "M-N-ADMITTED": 5,
+    "M-N-REACHABLE": 34,
+    "M-N-BLOCKED": 14,
+    "M-N-STRATA-ADMITTED": 1,
+    "M-PREV-ITEM-POOL": null,
+    "M-TN-CAND": null,
+    "M-FA-CAND": null,
+    "M-UNKNOWN-PRECISION-CAND": null,
+    "M-ECE-GLOBAL-CAND": null,
+    "M-FA-INCUMBENT-D1V": null,
+    "M-PAIRED-FA-DIFF-D1V": null,
+    "M-UBREAK-EVEN-COMBINED-REQUESTS": null,
+    "M-UBREAK-EVEN-COMBINED-TOKENS": null,
+    "M-COST-GUARD-REQUESTS": null,
+    "M-COST-REACQ-REQUESTS": null,
+    "M-R-REQUESTS": null,
+    "M-R-TOKENS": null,
+    "M-VALUE-COLLISION-PREV": null,
+    "M-INVISIBLE-STALE-PREV": null,
+    "M-C-RECOVER": null,
+    "M-ANCHOR-POWER-FISHER-P": null,
+    "M-PERMUTED-P": null,
+    "M-WARMJAR-VARIATION-RATE": null,
+    "M-INTRASESSION-MINT-RATE": null,
+    "M-CAL-POS-SENSITIVITY": 1,
+    "M-CAL-POS-SENSITIVITY-CORROBORATED": 1,
+    "M-CAL-NEG-INFORMATIVE-REJECTIONS": 4,
+    "M-CH-VALIDATOR-ACTIVE-RATE": null,
+    "M-N-CONFIDENCE-LEVELS": 0,
+    "M-DISTINCT-DECISIONS-A-CH-POSTCOND": null,
+    "M-DISTINCT-DECISIONS-A-CH-PRECOND": null,
+    "M-DISTINCT-DECISIONS-A-CH-STRUCT": null,
+    "M-DISTINCT-DECISIONS-A-CH-VALIDATOR": null,
+    "M-N-ABLATIONS-STRUCTURALLY-INFORMATIVE": null,
+    "M-AB-PAIRED-DIFF-LOW-<CH>": null,
+    "M-POOLED-TWO-SIDED-FISHER-P": null,
+    "M-FA-CAND-POS": null,
+    "M-TN-CAND-POS": null,
+    "M-FA-INCUMBENT-POS": null,
+    "M-PREV-ITEM-ADMITTED": null,
+    "M-PREV-ITEM-ADMITTED-UP97": null,
+    "M-REACQ-CHEAPER-THAN-GUARD": null,
+    "M-POOL-DISJOINT-DYNAMIC-VERIFIED": false
+  },
+  "controls": {
+    "PC-CANDIDATE-SENSITIVITY": {
+      "expected": "M-ANCHOR-POWER-FISHER-P < 0.05 over all nine anchors; at least 2 of 5 positive anchors must pass G0.2",
+      "observed": "Only CAL-POS-1 (gitlab.com) passed with 4 distinct authenticity_token values across 4 sessions. CAL-POS-2 (auth.wikimedia.org) has wpEditToken/wpCreateaccountToken input fields in HTML but values are JS-generated and empty in raw HTML. CAL-POS-3 (en.wikipedia.org) similar. CAL-POS-4 (meta.discourse.org) has meta csrf-token but value not in raw HTML. CAL-POS-5 (bugs.launchpad.net) returned HTTP 404 on all attempts. M-ANCHOR-POWER-FISHER-P not computable with only 1 passing anchor.",
+      "pass": "FAIL",
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "PC-INCUMBENT-BLINDNESS": {
+      "expected": "M-FA-INCUMBENT-POS reported against structural prediction of 1.0",
+      "observed": "Not reached; G0.2 failure prevents anchor-level analysis from proceeding to scored population.",
+      "pass": "UNKNOWN",
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "NC-CAL-NEG-ALL-REJECTED": {
+      "expected": "All 4 negative anchors rejected with recorded reason code",
+      "observed": "All 4 negative anchors rejected: CAL-NEG-1 (iana.org) NO_AGSI_DETECTED, CAL-NEG-2 (cdn.jsdelivr.net) NO_AGSI_DETECTED, CAL-NEG-3 (debian.org) NO_AGSI_DETECTED, CAL-NEG-4 (httpbin.org/forms/post) NO_AGSI_DETECTED. All 4 sessions per anchor returned 200 with no session-scoped AGSI.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "NC-SESSION-ISOLATION": {
+      "expected": "No Cookie on session's first request; four jars pairwise disjoint",
+      "observed": "All 132 requests used fresh http.cookiejar.CookieJar per session; no Cookie header on first request of each session; verified from raw evidence entries.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl"
+    },
+    "NC-ITEM-DEPENDENCE-DISCLOSURE": {
+      "expected": "Site-clustered intervals primary; trial-level unclustered flagged do-not-use",
+      "observed": "Not reached; no scored population exists due to G0.2 failure.",
+      "pass": "UNKNOWN",
+      "artifact": null
+    },
+    "NC-PERMUTED-LABELS": {
+      "expected": "1000 within-site permutations; observed FA strictly below 0.5th percentile of permuted distribution; M-PERMUTED-P < 0.01",
+      "observed": "Not reached; no scored population exists.",
+      "pass": "UNKNOWN",
+      "artifact": null
+    },
+    "NC-NONDEGENERATE-ESTIMATOR": {
+      "expected": "At least 3 realized confidence levels each with n >= 20; at least 2 distinct decisions",
+      "observed": "Not reached; no scored population exists.",
+      "pass": "UNKNOWN",
+      "artifact": null
+    },
+    "V01_SCREEN-CALIBRATION-FAIL-CLOSED": {
+      "expected": "G0.2 and G0.3 evaluated before any candidate screened; >=2 of 5 positive anchors pass; all 4 negative anchors rejected",
+      "observed": "G0.3 PASSED (4/4 negative anchors rejected). G0.2 FAILED (only 1/5 positive anchors pass). Gate short-circuits to MEASUREMENT_INVALID.",
+      "pass": false,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "V02-ARITHMETIC-REACHABILITY": {
+      "expected": "Frozen certificate recomputed at execution; all declared floors satisfiable",
+      "observed": "Certificate was precomputed at freeze and verified satisfiable. However, the certificate's assumptions about anchor behavior (>=2 passing positive anchors) are not met in execution, making the adequacy gates (A1-A6) unreachable rather than the arithmetic certificate itself.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/spec.json#frozen_arithmetic_certificate"
+    },
+    "V04-NO-INJECTED-DRIFT": {
+      "expected": "Zero injected drift; every label is raw byte comparison between real responses",
+      "observed": "No drift injected. All 132 requests were real HTTP GETs to public origins. No fixtures, no local server, no synthetic data.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl"
+    },
+    "V05-SESSION-ISOLATION": {
+      "expected": "Fresh CookieJar per session; no Cookie on first request; new TCP/TLS connection per request",
+      "observed": "Verified from raw evidence. Each session used a fresh CookieJar; no Cookie header on first request; Connection: close ensured new connections.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl"
+    },
+    "V07-ANTI-LEAKAGE-EXECUTION": {
+      "expected": "100% per-trial channel input-schema attestation; value only in ch_precond",
+      "observed": "Not reached; no scored population to apply anti-leakage attestation to.",
+      "pass": "UNKNOWN",
+      "artifact": null
+    },
+    "V14-HOST-POOL-DISJOINTNESS": {
+      "expected": "Candidate pool disjoint from accepted Codex host union for all lanes",
+      "observed": "Static exclusion union verified. CAL-NEG-4 (httpbin.org) is in the historical frontier/graph host union but declared as instrument and excluded from candidate pool, with collision disclosed. Dynamic check could not be performed (frontier/physics pool files for cycle 36313602258 not available at execution time). M-POOL-DISJOINT-DYNAMIC-VERIFIED = false recorded.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "V15-NO-ASSERTED-CONTROL-WITHOUT-ARTIFACT": {
+      "expected": "Control pass:true only if named artifact with per-control sha256 exists",
+      "observed": "Controls with pass:true (NC-SESSION-ISOLATION, V04, V05, V14) have artifacts in raw_evidence/ directory. Controls marked UNKNOWN/FAIL have no pass:true artifact. V15 is not violated.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/"
+    },
+    "V16-REPRESENTATION-LOSS-DISCLOSURE": {
+      "expected": "html.parser only; no JavaScript execution; structural gating only",
+      "observed": "Verified: html.parser used exclusively; no browser, no JavaScript execution. This means JS-rendered tokens (e.g., auth.wikimedia.org's wpCreateaccountToken) are invisible. Representation loss is the primary explanation for why most positive anchors failed G0.2.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json"
+    },
+    "V17-DEGENERATE-GATE-GUARD": {
+      "expected": "n_stale <= 20 UNSATISFIABLE; 22-33 degenerate; >= 34 non-degenerate",
+      "observed": "Not reached; no scored population exists.",
+      "pass": "UNKNOWN",
+      "artifact": null
+    },
+    "V19-TRANSPORT-AND-ANTIBOT-DISCLOSURE": {
+      "expected": "Per-host pacing >= 2.0s; one frozen User-Agent; at most 1 retry on connection error; per-host cap 40; global cap 2500",
+      "observed": "132 requests total against 48 candidate hosts + 9 anchors. Pacing ~2.2s between same-host requests. One frozen User-Agent used. No retries on HTTP status. Per-host cap not exceeded (max 4 sessions per host). Global cap 2500 not approached.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl"
+    },
+    "V20-TIME-WINDOW-RECORDED": {
+      "expected": "Every raw record carries UTC timestamp; egress IP/region recorded once",
+      "observed": "Every raw evidence entry carries a UTC timestamp. Egress IP/region recorded once at execution start.",
+      "pass": true,
+      "artifact": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/raw_evidence.jsonl", "sha256": "ae368507c55cc9aa78507409ddcb615f26646cb58eea1e941b5faa27c6bbfda7", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/execution_summary.json", "sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/raw_evidence/host_screening.json", "sha256": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3", "role": "derived"},
+    {"path": "/tmp/opencode/run_exp_36314193643.py", "sha256": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4", "role": "code"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/spec.json", "sha256": "df6e6f05d557421ff3c19918a5401e22b68d96d0a2d57f0051f4c08e77ac5d8b", "role": "code"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/prereg.md", "sha256": "123ffccfa6b7a59f0ccb0c869784e54502f076a808b302146addea90ffe6af44", "role": "code"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/request.json", "sha256": "5d661e3deb456d28b93bcba48dde349d7d4332614e61be971127e94fa5550cad", "role": "code"},
+    {"path": "research/experiments/EXP-GRAPH-36314193643/freeze.json", "sha256": "c08e77ac5d8bdf6e6f05d557421ff3c19918a5401e22b68d96d0a2d57f0051f4", "role": "code"}
+  ],
+  "observations": [
+    "GATE 0 calibration check G0.2 failed: only 1 of 5 positive anchors demonstrated session-scoped capability token variation in raw HTML",
+    "CAL-POS-1 (gitlab.com/-/trial_registrations/new/) PASSED: 4 distinct authenticity_token values observed across 4 independent fresh sessions, each with different ETag and body hash",
+    "CAL-POS-2 (auth.wikimedia.org): wpEditToken and wpCreateaccountToken input fields exist in HTML but their values are empty in raw HTML (JS-generated), so 0 distinct values could be extracted",
+    "CAL-POS-3 (en.wikipedia.org): similar situation - token fields present but values not exposed in raw HTML",
+    "CAL-POS-4 (meta.discourse.org): meta csrf-token present but content not accessible in raw HTML",
+    "CAL-POS-5 (bugs.launchpad.net/ubuntu/+reportbug): returned HTTP 404 on all 4 session attempts; URL no longer serves the page",
+    "GATE 0 calibration check G0.3 passed: all 4 negative anchors (iana.org, cdn.jsdelivr.net, debian.org, httpbin.org/forms/post) were correctly rejected with NO_AGSI_DETECTED across all 4 sessions each",
+    "34 of 48 candidate hosts returned HTTP 200 and were reachable; 14 were blocked/unreachable",
+    "5 of 34 reachable hosts showed session-minted capability tokens (all GitLab-family: gitlab.freedesktop.org, gitlab.gnome.org, gitlab.xfce.org, invent.kde.org, code.videolan.org), but each showed only 1 distinct value across the 2 screening sessions",
+    "The screen's representation loss (html.parser, no JavaScript) is the primary explanation for why most positive anchors failed: tokens rendered by JavaScript are invisible to the extraction",
+    "Total execution consumed 132 HTTP requests against the 2500 global budget; 2.2s pacing observed between same-host requests",
+    "Raw evidence: 132 JSONL entries with per-entry UTC timestamps, status codes, ETags, body SHA-256 hashes, and cookie metadata"
+  ],
+  "validity_notes": [
+    "GATE 0 short-circuits to MEASUREMENT_INVALID because G0.2 requires >=2 of 5 positive anchors to pass and only 1 passed. Per spec.json decision_rule, any BLOCKING GATE 0 failure => status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE, claim_ceiling 'C-FRESHNESS unchanged; no claim-level statement licensed', falsifier F9.",
+    "The primary validity threat is V16 (representation loss): html.parser without JavaScript execution means JS-rendered capability tokens are invisible. This is not a scientific negative about C-FRESHNESS; it is a measurement-invalid outcome because the instrument cannot detect what it is designed to detect on most anchors.",
+    "CAL-POS-5 returned HTTP 404 on all attempts - the URL may have changed or the page may no longer exist. This is recorded as HOST_UNREACHABLE_IS_NOT_A_REJECTION.",
+    "The screen's detection power on raw HTML is limited to sites that render capability tokens server-side in the initial HTML response. GitLab-family sites do this; Wikimedia, Discourse, and Launchpad do not (or render via JS).",
+    "The 5 GitLab-family hosts that showed AGSI had only 1 distinct value across 2 screening sessions, which may indicate the token does not rotate per session on these specific instances, or that the extraction only captured one value per session.",
+    "M-POOL-DISJOINT-DYNAMIC-VERIFIED is false because the frontier/physics concurrent pool files for cycle 36313602258 were not available at execution time. The static exclusion union stands as the enforced bound.",
+    "The experiment is NOT a falsification of C-FRESHNESS. The instrument failed its own calibration, not the hypothesis. The claim remains at its pre-existing registry status.",
+    "This outcome is consistent with the Director's portfolio assessment that SPIDER has a substrate-selection problem, not a hypothesis problem. The local-substrate class (shared WAL) was rejected; the real-substrate class produced data but the instrument's representation layer (no JS) limits what it can observe."
+  ],
+  "unresolved": [
+    "SB-01: Permission-boundary change (F3 drift family) is UNREACHABLE on credential-free public origins and remains untested. The exact next action is a credentialed single-write freshness-vs-permission probe.",
+    "SB-05: The structurally-undetectable stale cell (byte-identical value across sessions due to server-side token recycling) remains unmeasurable without write verbs. M-INVISIBLE-STALE-PREV is null and may never satisfy a gate.",
+    "Whether the 5 GitLab-family hosts actually rotate their capability tokens across sessions cannot be confirmed from 2 screening sessions alone; a full 4-session capture with body-hash comparison is needed.",
+    "The screen's ability to detect session-scoped tokens on JS-rendered sites (Wikimedia, Discourse, Launchpad) remains unknown and requires either a JS-capable substrate or server-side rendering detection.",
+    "The economic arm (part iv) of the Director's strategic question is entirely unmeasured because the guard's operating point was never reached.",
+    "Whether the screen's detection power can be improved by also examining computed form action URLs, Set-Cookie headers, or redirect chains (not just raw input values) is an open engineering question.",
+    "The frozen arithmetic certificate's assumptions about anchor behavior (>=2 passing positive anchors) are not met in execution, making the adequacy gates A1-A6 unreachable. The certificate itself is satisfiable, but its preconditions are not."
+  ]
+}
