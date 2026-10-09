@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37950616801",
+  "lane": "intel",
+  "created_at": "2026-10-09T16:15:39Z",
+  "github": {
+    "run_id": "37950616801",
+    "run_attempt": "1",
+    "note": "Captured from GITHUB_RUN_ID / GITHUB_RUN_ATTEMPT during EXECUTE."
+  },
+  "execution_environment": {
+    "platform": "linux",
+    "platform_release": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python_version": "3.12.15",
+    "model_id": "opencode/big-pickle",
+    "agent": "SPIDER Research 2.0 intel lane researcher"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-37950616801/request.json",
+      "sha256": "59c48de322cf3e30cf36b3f6a262e925e56b692e56cabf192d7003d06a5182a0"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-37950616801/spec.json",
+      "sha256": "28bc0cd01c0f84e19279a4a42370b59218af2306b9154a3847dd37ca4875b29b"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-37950616801/prereg.md",
+      "sha256": "8358836d0ff42756ce92fd309185138cdad5ab0aa2ce055cc5260e585b0e1458"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-37950616801/freeze.json",
+      "sha256": null,
+      "note": "freeze.json hashes the three frozen inputs above; it is itself not hashed here because it is the freeze record."
+    }
+  },
+  "upstream_evidence": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt",
+      "sha256": "e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf",
+      "bytes": 70219,
+      "characters": 69607,
+      "lines": 1447,
+      "note": "arXiv:2608.05784v1 OCR text layer. Read-only; never modified."
+    },
+    "parent_handoff": {
+      "path": "research/experiments/EXP-INTEL-36314207239/handoff.json",
+      "note": "Inherited carry_forward state; inherited next_question treated as a local proposal only, subordinate to the Director mandate in request.json."
+    },
+    "lane_charter": {
+      "path": "research/lanes/registry.json",
+      "note": "intel allowed_code_roots=[research/intel]; claim C-PRODUCT-ECON status HYPOTHESIS, owner_lanes [product, graph]."
+    },
+    "accepted_codex_evidence": {
+      "path": "codex/index.json",
+      "note": "Read-only accepted evidence; not regenerated or mutated."
+    }
+  },
+  "chain": {
+    "RAW_EVIDENCE": [
+      "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt (sha256 e286167a…4dbf)"
+    ],
+    "OBSERVATION": [
+      "Eq. (1) lines 231-240; Eqs. (2)-(3) lines 826-854; anchors re-extracted with line numbers (raw/spans.json).",
+      "Absence sweep: 0 hits for break-even/breakeven/break even/payback/f*/stationar."
+    ],
+    "DERIVED_MEASUREMENT": [
+      "g at published q=0.82: +0.626333; f*=w/(h*g); regime table 1680 rows; sensitivity 17280 cells; two implementations agree 0 mismatches; seven controls pass (raw/metrics.json, raw/regime_table.json, raw/controls_result.json)."
+    ],
+    "INTERPRETATION": [
+      "Primary class FINITE_NOT_EVALUABLE (no artifact-internal commensurable w); verdict FALSIFIES (bounded to this artifact). Conditional swept-w class REACHABLE recorded, not adopted.",
+      "For C-PRODUCT-ECON this is a scope finding: measure first-party h(N) and Cwrite rather than import an external f*."
+    ]
+  },
+  "produced_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/result.json",
+      "sha256": "fbbf066df60a5339bca1fa1098ecdb016ea309c566b43de3ceec0fe4b7201846",
+      "role": "result",
+      "note": "Producer handoff with all mandatory packet keys."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/report.md",
+      "sha256": "dcc701c0dd481ba79e148223bfc50074091965b47eeee40628b29feb7c1ca0e4",
+      "role": "report",
+      "note": "Human-readable interpretation and implications."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/spans.json",
+      "sha256": "e35d38c1d31edb6da7b3d862f07d1a620c1c61c9ac22af3b5d995eaaa8e37e76",
+      "role": "derived",
+      "note": "Verbatim anchors, line numbers, evidence path/sha256, PC-READING rule."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/regime_table.json",
+      "sha256": "278c47b846f581c8da671cc7af66b0af2dacc90640b8bba78d6d7812248c0387",
+      "role": "derived",
+      "note": "Full 1,680-row primary regime table."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/controls_result.json",
+      "sha256": "582422f561ddc1d83210def160074f7cee2ed9ed0ce7456c5cfdfdf973656811",
+      "role": "derived",
+      "note": "All seven controls with observed behavior."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/classification.json",
+      "sha256": "558fe94fefeda8853ca9cab6ca8ca540b4f1e5586a58d0077367398f7401334b",
+      "role": "derived",
+      "note": "Per-combination classes, verdict, point estimates."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/metrics.json",
+      "sha256": "01ffd3cb405b3e19aaeca163339b40b63929f1ba6b6a1c8ebf17738f7d9b1a96",
+      "role": "derived",
+      "note": "Required M-* metrics."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/run_determination.py",
+      "sha256": "d349dc5629c54aab051af5da7f03fcf301036bd19e7041725e6cf042438d3811",
+      "role": "code",
+      "note": "Deterministic stdlib-only engine; writes raw artifacts."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/build_result.py",
+      "sha256": "fac639dd90fe96e11cac60070b44d7b8de07b46ba519f03aac4f799fff743420",
+      "role": "code",
+      "note": "Assembles result.json from raw artifacts."
+    }
+  ],
+  "analysis_parameters": {
+    "readings": ["VAR-LIT (primary)", "VAR-MAN (secondary)"],
+    "conventions": ["AMORTIZE-ONCE (primary)", "PER-REUSE"],
+    "PUBLISHED_H": [0.077, 0.086, 0.090, 0.131],
+    "H_SWEEP_additions": [0.25, 0.5, 1.0],
+    "Q_SWEEP": [0.415, 0.82, 1.0],
+    "W_SWEEP": [0.0, 0.016666666666666666, 0.0029154518950437317, 1.0, 10.0],
+    "B_SWEEP": [0.0, 0.016666666666666666, 0.0029154518950437317, 0.1],
+    "C_SWEEP": [0.1, 1.0, 10.0],
+    "P_SWEEP": [0.5, 0.8, 1.0],
+    "r_primary": 0.016666666666666666,
+    "r_sensitivity": 0.0029154518950437317,
+    "c_primary": 1.0,
+    "N_reach": 181,
+    "artifact_internal_w_commensurable": false,
+    "note": "All parameters frozen in spec.json. Executed exactly as designed; no post-hoc parameter changes."
+  },
+  "reproduction_command": "python3 research/experiments/EXP-INTEL-37950616801/run_determination.py && python3 research/experiments/EXP-INTEL-37950616801/build_result.py",
+  "git_state": {
+    "branch": "lab2/intel",
+    "head_commit": "965b828d2918b7826faafae59ae0bf5370afa468",
+    "note": "Execution-base commit is 'R2 intel: execution base EXP-INTEL-37950616801'. No commits, resets or force-pushes were made; frozen files were never modified."
+  }
+}

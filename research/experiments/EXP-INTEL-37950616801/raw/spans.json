@@ -1,0 +1,272 @@
+{
+  "evidence": {
+    "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt",
+    "sha256": "e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf",
+    "bytes": 70219,
+    "chars": 69607,
+    "lines": 1447
+  },
+  "anchors": [
+    {
+      "id": "eq1_span",
+      "expected_substring": "E[$/task] = (1\u2212hq) Cmiss",
+      "found": true,
+      "line": 231,
+      "verbatim_line": "E[$/task] = (1\u2212hq) Cmiss"
+    },
+    {
+      "id": "eq1_cold_term",
+      "expected_substring": "p +hq(C hit+Cverify)",
+      "found": true,
+      "line": 232,
+      "verbatim_line": "p +hq(C hit+Cverify)"
+    },
+    {
+      "id": "eq1_write_term",
+      "expected_substring": "+h(1\u2212q)C wrong + Cwrite",
+      "found": true,
+      "line": 233,
+      "verbatim_line": "+h(1\u2212q)C wrong + Cwrite"
+    },
+    {
+      "id": "eq1_write_over_n",
+      "expected_substring": "N ,",
+      "found": true,
+      "line": 234,
+      "verbatim_line": "N ,"
+    },
+    {
+      "id": "eq1_defs",
+      "expected_substring": "where h is recurrence, q the fraction of hits correctly",
+      "found": true,
+      "line": 236,
+      "verbatim_line": "where h is recurrence, q the fraction of hits correctly"
+    },
+    {
+      "id": "eq1_missing_input",
+      "expected_substring": "them measures ish on thepre-delegationpassive corpus",
+      "found": true,
+      "line": 240,
+      "verbatim_line": "them measures ish on thepre-delegationpassive corpus."
+    },
+    {
+      "id": "eq2_span",
+      "expected_substring": "Cagent(k) =k",
+      "found": true,
+      "line": 826,
+      "verbatim_line": "Cagent(k) =k"
+    },
+    {
+      "id": "eq2_wh750",
+      "expected_substring": "750 + 350 + 180",
+      "found": true,
+      "line": 828,
+      "verbatim_line": "750 + 350 + 180"
+    },
+    {
+      "id": "eq3_span",
+      "expected_substring": "R= Cagent(k)",
+      "found": true,
+      "line": 851,
+      "verbatim_line": "R= Cagent(k)"
+    },
+    {
+      "id": "eq3_denominator",
+      "expected_substring": "C replay(k) =",
+      "found": true,
+      "line": 852,
+      "verbatim_line": "Creplay(k) , C replay(k) ="
+    },
+    {
+      "id": "R_inject_60",
+      "expected_substring": "Rinject = 60\u00d7",
+      "found": true,
+      "line": 876,
+      "verbatim_line": "median is Rinject = 60\u00d7 (interquartile59\u201362across"
+    },
+    {
+      "id": "R_inject_iqr",
+      "expected_substring": "interquartile59\u201362",
+      "found": true,
+      "line": 876,
+      "verbatim_line": "median is Rinject = 60\u00d7 (interquartile59\u201362across"
+    },
+    {
+      "id": "R_info_343",
+      "expected_substring": "Rinfo = 343\u00d7",
+      "found": true,
+      "line": 880,
+      "verbatim_line": "the information-content ceilingRinfo = 343\u00d7 at action"
+    },
+    {
+      "id": "h_insample_90",
+      "expected_substring": "h = 9.0%",
+      "found": true,
+      "line": 973,
+      "verbatim_line": "delegable rate h = 9.0%it is\u2248 9.0%, and with the con-"
+    },
+    {
+      "id": "h_url_131",
+      "expected_substring": "13.1%at URL granularity",
+      "found": true,
+      "line": 995,
+      "verbatim_line": "at action granularity (13.1%at URL granularity): the"
+    },
+    {
+      "id": "h_train_86",
+      "expected_substring": "in-sample8.6%",
+      "found": true,
+      "line": 1010,
+      "verbatim_line": "predicted hit rate is7.7%, against an in-sample8.6%on"
+    },
+    {
+      "id": "h_oos_77",
+      "expected_substring": "predicted hit rate is7.7%",
+      "found": true,
+      "line": 1010,
+      "verbatim_line": "predicted hit rate is7.7%, against an in-sample8.6%on"
+    },
+    {
+      "id": "h_oos_carry",
+      "expected_substring": "7.7%is the recurrence the cost accounting should carry",
+      "found": true,
+      "line": 1014,
+      "verbatim_line": "7.7%is the recurrence the cost accounting should carry;"
+    },
+    {
+      "id": "q_typing_82",
+      "expected_substring": "approximately82%accurate",
+      "found": true,
+      "line": 1214,
+      "verbatim_line": "entity typing, which is approximately82%accurate at"
+    },
+    {
+      "id": "q_below_one",
+      "expected_substring": "soq < 1and the honest fleet",
+      "found": true,
+      "line": 1218,
+      "verbatim_line": "or fail to match a real one, soq < 1and the honest fleet"
+    },
+    {
+      "id": "compile_cost_tokens",
+      "expected_substring": "Compile costB0.5ms,0tokens",
+      "found": true,
+      "line": 912,
+      "verbatim_line": "Compile costB0.5ms,0tokens"
+    },
+    {
+      "id": "guard_coverage_415",
+      "expected_substring": "median guard coverage of0.415",
+      "found": true,
+      "line": 1171,
+      "verbatim_line": "the median guard coverage of0.415that bounds local"
+    },
+    {
+      "id": "guard_coverage_415b",
+      "expected_substring": "measured median is0.415",
+      "found": true,
+      "line": 943,
+      "verbatim_line": "measured median is0.415, and it is exposed to interface"
+    },
+    {
+      "id": "recurring_routines_614",
+      "expected_substring": "Recurring routines 614",
+      "found": true,
+      "line": 908,
+      "verbatim_line": "Recurring routines 614 261"
+    },
+    {
+      "id": "routine_instances_5508",
+      "expected_substring": "Routine instances 5,508",
+      "found": true,
+      "line": 909,
+      "verbatim_line": "Routine instances 5,508 1,303"
+    },
+    {
+      "id": "max_occ_181",
+      "expected_substring": "max occ. 5 / 181",
+      "found": true,
+      "line": 919,
+      "verbatim_line": "Median stepsk/ max occ. 5 / 181 3 / 25"
+    },
+    {
+      "id": "compose_181",
+      "expected_substring": "181occurrences",
+      "found": true,
+      "line": 893,
+      "verbatim_line": "compose-message loop,181occurrences) and the most"
+    },
+    {
+      "id": "armA_dollars",
+      "expected_substring": "$125.81",
+      "found": true,
+      "line": 954,
+      "verbatim_line": "istic local replay. Relative to arm A (32.8Mtok, $125.81"
+    },
+    {
+      "id": "armB_dollars",
+      "expected_substring": "$20.96",
+      "found": true,
+      "line": 956,
+      "verbatim_line": "of tokens ($20.96, a6.0\u00d7 per-occurrence reduction), and"
+    },
+    {
+      "id": "armC_dollars",
+      "expected_substring": "$74.46",
+      "found": true,
+      "line": 957,
+      "verbatim_line": "local replay (arm C) saves40.8%($74.46,1 .7\u00d7). Two"
+    },
+    {
+      "id": "modeled_not_billed",
+      "expected_substring": "modeled, not billed",
+      "found": true,
+      "line": 1161,
+      "verbatim_line": "modeled, not billed. R\u2019s numerator (Eq. 2) is what"
+    },
+    {
+      "id": "capture_not_free",
+      "expected_substring": "Capture is not free",
+      "found": true,
+      "line": 1202,
+      "verbatim_line": "Capture is not free.The instrument has an op-"
+    },
+    {
+      "id": "capture_95gb",
+      "expected_substring": "9.5GB",
+      "found": true,
+      "line": 1204,
+      "verbatim_line": "corpus database is9.5GB, about0 .19GB per active day;"
+    },
+    {
+      "id": "all_fleet_ceiling",
+      "expected_substring": "all-fleet ceiling ish (1\u2212 1/Rinfo)",
+      "found": true,
+      "line": 972,
+      "verbatim_line": "est all-fleet ceiling ish (1\u2212 1/Rinfo): with the in-sample"
+    }
+  ],
+  "absence_sweep": {
+    "break-even": 0,
+    "breakeven": 0,
+    "break even": 0,
+    "payback": 0,
+    "f*": 0,
+    "stationar": 0,
+    "amortiz": 1,
+    "reuse count": 1
+  },
+  "pc_reading": {
+    "checks": {
+      "eq2_stacked_fraction_wh_over_750": true,
+      "eq3_stacked_fraction_agent_over_replay": true,
+      "eq3_denominator_absolute_tiktoken": true
+    },
+    "rule_derived": true,
+    "rule": "OCR linearizes stacked fractions as numerator_line / denominator_line (division); corroborated by Eq. (2) 'wh/750' and Eq. (3) Cagent(k) over C replay(k).",
+    "selected_primary_reading": "VAR-LIT",
+    "selected_cold_term": "Cmiss/p",
+    "selected_write_term": "Cwrite/N",
+    "secondary_reading_preserved": "VAR-MAN (Cmiss*p, Cwrite*N) per mandate literal form"
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "M-FSTAR": {
+    "artifact_internal_reportable": null,
+    "artifact_internal_w_commensurable": false,
+    "numeric_f_star_reportable": false,
+    "primary_class": "FINITE_NOT_EVALUABLE",
+    "reason": "no artifact-internal commensurable Cwrite/Cmiss anchors a numeric f*; p, Cverify, Cwrong and capture-inclusive Cwrite are unpublished in commensurable units",
+    "conditional_swept_w_min_positive": 0.022632567434677696,
+    "conditional_swept_w_max_positive": 238.58566418272488,
+    "published_point_estimates": {
+      "VAR-LIT/AMORTIZE-ONCE/h=0.077/q=0.82": [
+        {
+          "b": 0.0,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.0,
+          "w": 0.016666666666666666,
+          "f_star": 0.34558310236862666,
+          "status": "FINITE",
+          "h_star_w": 0.00014701601592477488
+        },
+        {
+          "b": 0.0,
+          "w": 0.0029154518950437317,
+          "f_star": 0.06045185464174228,
+          "status": "FINITE",
+          "h_star_w": 2.5717087333779864e-05
+        },
+        {
+          "b": 0.0,
+          "w": 1.0,
+          "f_star": 20.7349861421176,
+          "status": "FINITE",
+          "h_star_w": 0.008820960955486493
+        },
+        {
+          "b": 0.0,
+          "w": 10.0,
+          "f_star": 207.349861421176,
+          "status": "FINITE",
+          "h_star_w": 0.08820960955486493
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.016666666666666666,
+          "f_star": 0.3532919746195046,
+          "status": "FINITE",
+          "h_star_w": 0.00015029548091547988
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.0029154518950437317,
+          "f_star": 0.06180034541449061,
+          "status": "FINITE",
+          "h_star_w": 2.629075467909269e-05
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 1.0,
+          "f_star": 21.19751847717028,
+          "status": "FINITE",
+          "h_star_w": 0.009017728854928794
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 10.0,
+          "f_star": 211.9751847717028,
+          "status": "FINITE",
+          "h_star_w": 0.09017728854928793
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.016666666666666666,
+          "f_star": 0.34690722299068866,
+          "status": "FINITE",
+          "h_star_w": 0.00014757931585791727
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.0029154518950437317,
+          "f_star": 0.0606834792403537,
+          "status": "FINITE",
+          "h_star_w": 2.5815623765233343e-05
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 1.0,
+          "f_star": 20.81443337944132,
+          "status": "FINITE",
+          "h_star_w": 0.008854758951475037
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 10.0,
+          "f_star": 208.1443337944132,
+          "status": "FINITE",
+          "h_star_w": 0.08854758951475036
+        },
+        {
+          "b": 0.1,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.1,
+          "w": 0.016666666666666666,
+          "f_star": 0.3976427736378748,
+          "status": "FINITE",
+          "h_star_w": 0.00016916294790119533
+        },
+        {
+          "b": 0.1,
+          "w": 0.0029154518950437317,
+          "f_star": 0.06955850267717927,
+          "status": "FINITE",
+          "h_star_w": 2.9591186221783438e-05
+        },
+        {
+          "b": 0.1,
+          "w": 1.0,
+          "f_star": 23.85856641827249,
+          "status": "FINITE",
+          "h_star_w": 0.01014977687407172
+        },
+        {
+          "b": 0.1,
+          "w": 10.0,
+          "f_star": 238.58566418272488,
+          "status": "FINITE",
+          "h_star_w": 0.1014977687407172
+        }
+      ],
+      "VAR-LIT/AMORTIZE-ONCE/h=0.090/q=0.82": [
+        {
+          "b": 0.0,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.0,
+          "w": 0.016666666666666666,
+          "f_star": 0.29566554313760285,
+          "status": "FINITE",
+          "h_star_w": 0.00014701601592477488
+        },
+        {
+          "b": 0.0,
+          "w": 0.0029154518950437317,
+          "f_star": 0.0517199200823795,
+          "status": "FINITE",
+          "h_star_w": 2.5717087333779864e-05
+        },
+        {
+          "b": 0.0,
+          "w": 1.0,
+          "f_star": 17.73993258825617,
+          "status": "FINITE",
+          "h_star_w": 0.008820960955486493
+        },
+        {
+          "b": 0.0,
+          "w": 10.0,
+          "f_star": 177.3993258825617,
+          "status": "FINITE",
+          "h_star_w": 0.08820960955486493
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.016666666666666666,
+          "f_star": 0.30226091161890956,
+          "status": "FINITE",
+          "h_star_w": 0.00015029548091547988
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 0.0029154518950437317,
+          "f_star": 0.05287362885461974,
+          "status": "FINITE",
+          "h_star_w": 2.629075467909269e-05
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 1.0,
+          "f_star": 18.135654697134573,
+          "status": "FINITE",
+          "h_star_w": 0.009017728854928794
+        },
+        {
+          "b": 0.016666666666666666,
+          "w": 10.0,
+          "f_star": 181.35654697134572,
+          "status": "FINITE",
+          "h_star_w": 0.09017728854928793
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.016666666666666666,
+          "f_star": 0.2967984018920336,
+          "status": "FINITE",
+          "h_star_w": 0.00014757931585791727
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 0.0029154518950437317,
+          "f_star": 0.05191808779452483,
+          "status": "FINITE",
+          "h_star_w": 2.5815623765233343e-05
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 1.0,
+          "f_star": 17.807904113522017,
+          "status": "FINITE",
+          "h_star_w": 0.008854758951475037
+        },
+        {
+          "b": 0.0029154518950437317,
+          "w": 10.0,
+          "f_star": 178.07904113522017,
+          "status": "FINITE",
+          "h_star_w": 0.08854758951475036
+        },
+        {
+          "b": 0.1,
+          "w": 0.0,
+          "f_star": 0.0,
+          "status": "FINITE",
+          "h_star_w": 0.0
+        },
+        {
+          "b": 0.1,
+          "w": 0.016666666666666666,
+          "f_star": 0.340205484112404,
+          "status": "FINITE",
+          "h_star_w": 0.00016916294790119533
+        },
+        {
+          "b": 0.1,
+          "w": 0.0029154518950437317,
+          "f_star": 0.05951116340158671,
+          "status": "FINITE",
+          "h_star_w": 2.9591186221783438e-05
+        },
+        {
+          "b": 0.1,
+          "w": 1.0,
+          "f_star": 20.41232904674424,
+          "status": "FINITE",
+          "h_star_w": 0.01014977687407172
+        },
+        {
+          "b": 0.1,
+          "w": 10.0,
+          "f_star": 204.1232904674424,
+          "status": "FINITE",
+          "h_star_w": 0.1014977687407172
+        }
+      ]
+    }
+  },
+  "M-GSIGN": {
+    "g_at_published_point_estimates": {
+      "VAR-LIT": {
+        "q=0.415,b=0,p=1,r=1/60,c=1": -0.17691666666666667,
+        "q=0.82,b=0,p=1,r=1/60,c=1": 0.6263333333333332,
+        "q=1.0,b=0,p=1,r=1/60,c=1": 0.9833333333333333
+      },
+      "VAR-MAN": {
+        "q=0.415,b=0,p=1,r=1/60,c=1": -0.17691666666666667,
+        "q=0.82,b=0,p=1,r=1/60,c=1": 0.6263333333333332,
+        "q=1.0,b=0,p=1,r=1/60,c=1": 0.9833333333333333
+      }
+    },
+    "g_primary_VAR_LIT_q0.82_b0_p1_r1_60_c1": 0.6263333333333332,
+    "note": "g = q*(E_cold_unit - Chit - Cverify) - (1-q)*Cwrong; independent of h and w"
+  },
+  "M-HSTAR": {
+    "primary_g": 0.6263333333333332,
+    "h_star_by_w": {
+      "0.0": 0.0,
+      "0.016666666666666666": 0.00014701601592477488,
+      "0.0029154518950437317": 2.5717087333779864e-05,
+      "1.0": 0.008820960955486493,
+      "10.0": 0.08820960955486493
+    },
+    "smallest_published_h_reachable_by_w": {
+      "0.0": 0.077,
+      "0.016666666666666666": 0.077,
+      "0.0029154518950437317": 0.077,
+      "1.0": 0.077,
+      "10.0": 0.09
+    },
+    "N_reach": 181,
+    "reachable_at_h_le_0.077_conditional_swept_w": true
+  },
+  "M-REACH": {
+    "primary_class_counts": {
+      "FINITE_NOT_EVALUABLE": 4
+    },
+    "conditional_class_counts_if_swept_w_accepted": {
+      "REACHABLE": 4
+    },
+    "primary_verdict": "FALSIFIES"
+  },
+  "M-TABLE-ROWS": {
+    "primary_regime_rows": 1680,
+    "sensitivity_cells": 17280
+  },
+  "M-PAPER-FSTAR-HITS": {
+    "break-even": 0,
+    "breakeven": 0,
+    "break even": 0,
+    "payback": 0,
+    "f*": 0,
+    "stationar": 0,
+    "amortiz": 1,
+    "reuse count": 1
+  },
+  "M-READING-DIVERGENCE": {
+    "cell": {
+      "p": 0.5,
+      "q": 0.82,
+      "r": 0.016666666666666666,
+      "b": 0.0,
+      "c": 1.0,
+      "h": 0.077,
+      "w": 0.016666666666666666
+    },
+    "VAR-LIT": {
+      "g": 1.446333333333333,
+      "f_star": 0.14965444787984547
+    },
+    "VAR-MAN": {
+      "g": 0.21633333333333327,
+      "f_star": 1.0005402917575494
+    },
+    "factor_VAR_MAN_over_VAR_LIT": 6.685670261941449,
+    "primary_reading_selected": "VAR-LIT"
+  },
+  "M-CONVENTION-DIVERGENCE": {
+    "cell": {
+      "h": 0.077,
+      "q": 0.82,
+      "p": 1.0,
+      "r": 0.016666666666666666,
+      "b": 0.0,
+      "c": 1.0,
+      "w": 1.0
+    },
+    "AMORTIZE-ONCE": {
+      "f_star": 20.7349861421176,
+      "status": "FINITE"
+    },
+    "PER-REUSE": {
+      "f_star": null,
+      "status": "NO_FSTAR_DEGENERATE"
+    },
+    "materially_different": true
+  },
+  "M-ARTIFACT-W-COMMENSURABLE": {
+    "value": false,
+    "adjudication": "compile cost is 0 tokens (degenerate, f*=0, not a positive break-even); capture cost printed only as 9.5GB / ~0.19GB per active day / OCR 96%, never in dollars-per-task commensurable with Cmiss"
+  }
+}

@@ -1,0 +1,626 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37950616801",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M-FSTAR": {
+      "artifact_internal_reportable": null,
+      "artifact_internal_w_commensurable": false,
+      "numeric_f_star_reportable": false,
+      "primary_class": "FINITE_NOT_EVALUABLE",
+      "reason": "no artifact-internal commensurable Cwrite/Cmiss anchors a numeric f*; p, Cverify, Cwrong and capture-inclusive Cwrite are unpublished in commensurable units",
+      "conditional_swept_w_min_positive": 0.022632567434677696,
+      "conditional_swept_w_max_positive": 238.58566418272488,
+      "published_point_estimates": {
+        "VAR-LIT/AMORTIZE-ONCE/h=0.077/q=0.82": [
+          {
+            "b": 0.0,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.0,
+            "w": 0.016666666666666666,
+            "f_star": 0.34558310236862666,
+            "status": "FINITE",
+            "h_star_w": 0.00014701601592477488
+          },
+          {
+            "b": 0.0,
+            "w": 0.0029154518950437317,
+            "f_star": 0.06045185464174228,
+            "status": "FINITE",
+            "h_star_w": 2.5717087333779864e-05
+          },
+          {
+            "b": 0.0,
+            "w": 1.0,
+            "f_star": 20.7349861421176,
+            "status": "FINITE",
+            "h_star_w": 0.008820960955486493
+          },
+          {
+            "b": 0.0,
+            "w": 10.0,
+            "f_star": 207.349861421176,
+            "status": "FINITE",
+            "h_star_w": 0.08820960955486493
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.016666666666666666,
+            "f_star": 0.3532919746195046,
+            "status": "FINITE",
+            "h_star_w": 0.00015029548091547988
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.0029154518950437317,
+            "f_star": 0.06180034541449061,
+            "status": "FINITE",
+            "h_star_w": 2.629075467909269e-05
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 1.0,
+            "f_star": 21.19751847717028,
+            "status": "FINITE",
+            "h_star_w": 0.009017728854928794
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 10.0,
+            "f_star": 211.9751847717028,
+            "status": "FINITE",
+            "h_star_w": 0.09017728854928793
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.016666666666666666,
+            "f_star": 0.34690722299068866,
+            "status": "FINITE",
+            "h_star_w": 0.00014757931585791727
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.0029154518950437317,
+            "f_star": 0.0606834792403537,
+            "status": "FINITE",
+            "h_star_w": 2.5815623765233343e-05
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 1.0,
+            "f_star": 20.81443337944132,
+            "status": "FINITE",
+            "h_star_w": 0.008854758951475037
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 10.0,
+            "f_star": 208.1443337944132,
+            "status": "FINITE",
+            "h_star_w": 0.08854758951475036
+          },
+          {
+            "b": 0.1,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.1,
+            "w": 0.016666666666666666,
+            "f_star": 0.3976427736378748,
+            "status": "FINITE",
+            "h_star_w": 0.00016916294790119533
+          },
+          {
+            "b": 0.1,
+            "w": 0.0029154518950437317,
+            "f_star": 0.06955850267717927,
+            "status": "FINITE",
+            "h_star_w": 2.9591186221783438e-05
+          },
+          {
+            "b": 0.1,
+            "w": 1.0,
+            "f_star": 23.85856641827249,
+            "status": "FINITE",
+            "h_star_w": 0.01014977687407172
+          },
+          {
+            "b": 0.1,
+            "w": 10.0,
+            "f_star": 238.58566418272488,
+            "status": "FINITE",
+            "h_star_w": 0.1014977687407172
+          }
+        ],
+        "VAR-LIT/AMORTIZE-ONCE/h=0.090/q=0.82": [
+          {
+            "b": 0.0,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.0,
+            "w": 0.016666666666666666,
+            "f_star": 0.29566554313760285,
+            "status": "FINITE",
+            "h_star_w": 0.00014701601592477488
+          },
+          {
+            "b": 0.0,
+            "w": 0.0029154518950437317,
+            "f_star": 0.0517199200823795,
+            "status": "FINITE",
+            "h_star_w": 2.5717087333779864e-05
+          },
+          {
+            "b": 0.0,
+            "w": 1.0,
+            "f_star": 17.73993258825617,
+            "status": "FINITE",
+            "h_star_w": 0.008820960955486493
+          },
+          {
+            "b": 0.0,
+            "w": 10.0,
+            "f_star": 177.3993258825617,
+            "status": "FINITE",
+            "h_star_w": 0.08820960955486493
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.016666666666666666,
+            "f_star": 0.30226091161890956,
+            "status": "FINITE",
+            "h_star_w": 0.00015029548091547988
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 0.0029154518950437317,
+            "f_star": 0.05287362885461974,
+            "status": "FINITE",
+            "h_star_w": 2.629075467909269e-05
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 1.0,
+            "f_star": 18.135654697134573,
+            "status": "FINITE",
+            "h_star_w": 0.009017728854928794
+          },
+          {
+            "b": 0.016666666666666666,
+            "w": 10.0,
+            "f_star": 181.35654697134572,
+            "status": "FINITE",
+            "h_star_w": 0.09017728854928793
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.016666666666666666,
+            "f_star": 0.2967984018920336,
+            "status": "FINITE",
+            "h_star_w": 0.00014757931585791727
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 0.0029154518950437317,
+            "f_star": 0.05191808779452483,
+            "status": "FINITE",
+            "h_star_w": 2.5815623765233343e-05
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 1.0,
+            "f_star": 17.807904113522017,
+            "status": "FINITE",
+            "h_star_w": 0.008854758951475037
+          },
+          {
+            "b": 0.0029154518950437317,
+            "w": 10.0,
+            "f_star": 178.07904113522017,
+            "status": "FINITE",
+            "h_star_w": 0.08854758951475036
+          },
+          {
+            "b": 0.1,
+            "w": 0.0,
+            "f_star": 0.0,
+            "status": "FINITE",
+            "h_star_w": 0.0
+          },
+          {
+            "b": 0.1,
+            "w": 0.016666666666666666,
+            "f_star": 0.340205484112404,
+            "status": "FINITE",
+            "h_star_w": 0.00016916294790119533
+          },
+          {
+            "b": 0.1,
+            "w": 0.0029154518950437317,
+            "f_star": 0.05951116340158671,
+            "status": "FINITE",
+            "h_star_w": 2.9591186221783438e-05
+          },
+          {
+            "b": 0.1,
+            "w": 1.0,
+            "f_star": 20.41232904674424,
+            "status": "FINITE",
+            "h_star_w": 0.01014977687407172
+          },
+          {
+            "b": 0.1,
+            "w": 10.0,
+            "f_star": 204.1232904674424,
+            "status": "FINITE",
+            "h_star_w": 0.1014977687407172
+          }
+        ]
+      }
+    },
+    "M-GSIGN": {
+      "g_at_published_point_estimates": {
+        "VAR-LIT": {
+          "q=0.415,b=0,p=1,r=1/60,c=1": -0.17691666666666667,
+          "q=0.82,b=0,p=1,r=1/60,c=1": 0.6263333333333332,
+          "q=1.0,b=0,p=1,r=1/60,c=1": 0.9833333333333333
+        },
+        "VAR-MAN": {
+          "q=0.415,b=0,p=1,r=1/60,c=1": -0.17691666666666667,
+          "q=0.82,b=0,p=1,r=1/60,c=1": 0.6263333333333332,
+          "q=1.0,b=0,p=1,r=1/60,c=1": 0.9833333333333333
+        }
+      },
+      "g_primary_VAR_LIT_q0.82_b0_p1_r1_60_c1": 0.6263333333333332,
+      "note": "g = q*(E_cold_unit - Chit - Cverify) - (1-q)*Cwrong; independent of h and w"
+    },
+    "M-HSTAR": {
+      "primary_g": 0.6263333333333332,
+      "h_star_by_w": {
+        "0.0": 0.0,
+        "0.016666666666666666": 0.00014701601592477488,
+        "0.0029154518950437317": 2.5717087333779864e-05,
+        "1.0": 0.008820960955486493,
+        "10.0": 0.08820960955486493
+      },
+      "smallest_published_h_reachable_by_w": {
+        "0.0": 0.077,
+        "0.016666666666666666": 0.077,
+        "0.0029154518950437317": 0.077,
+        "1.0": 0.077,
+        "10.0": 0.09
+      },
+      "N_reach": 181,
+      "reachable_at_h_le_0.077_conditional_swept_w": true
+    },
+    "M-REACH": {
+      "primary_class_counts": {
+        "FINITE_NOT_EVALUABLE": 4
+      },
+      "conditional_class_counts_if_swept_w_accepted": {
+        "REACHABLE": 4
+      },
+      "primary_verdict": "FALSIFIES"
+    },
+    "M-TABLE-ROWS": {
+      "primary_regime_rows": 1680,
+      "sensitivity_cells": 17280
+    },
+    "M-PAPER-FSTAR-HITS": {
+      "break-even": 0,
+      "breakeven": 0,
+      "break even": 0,
+      "payback": 0,
+      "f*": 0,
+      "stationar": 0,
+      "amortiz": 1,
+      "reuse count": 1
+    },
+    "M-READING-DIVERGENCE": {
+      "cell": {
+        "p": 0.5,
+        "q": 0.82,
+        "r": 0.016666666666666666,
+        "b": 0.0,
+        "c": 1.0,
+        "h": 0.077,
+        "w": 0.016666666666666666
+      },
+      "VAR-LIT": {
+        "g": 1.446333333333333,
+        "f_star": 0.14965444787984547
+      },
+      "VAR-MAN": {
+        "g": 0.21633333333333327,
+        "f_star": 1.0005402917575494
+      },
+      "factor_VAR_MAN_over_VAR_LIT": 6.685670261941449,
+      "primary_reading_selected": "VAR-LIT"
+    },
+    "M-CONVENTION-DIVERGENCE": {
+      "cell": {
+        "h": 0.077,
+        "q": 0.82,
+        "p": 1.0,
+        "r": 0.016666666666666666,
+        "b": 0.0,
+        "c": 1.0,
+        "w": 1.0
+      },
+      "AMORTIZE-ONCE": {
+        "f_star": 20.7349861421176,
+        "status": "FINITE"
+      },
+      "PER-REUSE": {
+        "f_star": null,
+        "status": "NO_FSTAR_DEGENERATE"
+      },
+      "materially_different": true
+    },
+    "M-ARTIFACT-W-COMMENSURABLE": {
+      "value": false,
+      "adjudication": "compile cost is 0 tokens (degenerate, f*=0, not a positive break-even); capture cost printed only as 9.5GB / ~0.19GB per active day / OCR 96%, never in dollars-per-task commensurable with Cmiss"
+    }
+  },
+  "controls": {
+    "PC-ALGEBRA": {
+      "expected_behavior": "f* = 2.0 (finite, positive) to 1e-9 relative error",
+      "observed_behavior": {
+        "engine_f_star": 2.0,
+        "hand_f_star": 2.0,
+        "rel_error": 0.0,
+        "two_implementations_agree": true
+      },
+      "pass": true,
+      "evidence_ref": "raw/controls_result.json#PC-ALGEBRA"
+    },
+    "NC-DIVERGENT": {
+      "expected_behavior": "g<=0 => divergent; finite f*>N_reach => unreachable; never a spurious finite positive",
+      "observed_behavior": {
+        "divergent_cell": {
+          "g": -8.95,
+          "status": "DIVERGENT",
+          "f_star": null
+        },
+        "unreachable_cell": {
+          "g": 1.0,
+          "f_star": 200.0,
+          "N_reach": 181,
+          "status": "FINITE"
+        },
+        "divergent_fires": true,
+        "unreachable_fires": true
+      },
+      "pass": true,
+      "evidence_ref": "raw/controls_result.json#NC-DIVERGENT"
+    },
+    "PC-READING": {
+      "expected_behavior": "derive numerator-line/denominator-line (division) parsing rule from Eqs. (2)-(3), apply to Eq. (1)",
+      "observed_behavior": {
+        "checks": {
+          "eq2_stacked_fraction_wh_over_750": true,
+          "eq3_stacked_fraction_agent_over_replay": true,
+          "eq3_denominator_absolute_tiktoken": true
+        },
+        "selected_primary_reading": "VAR-LIT",
+        "selected_cold_term": "Cmiss/p",
+        "selected_write_term": "Cwrite/N"
+      },
+      "pass": true,
+      "evidence_ref": "raw/spans.json#pc_reading"
+    },
+    "PC-EXTRACT": {
+      "expected_behavior": "independently re-extract frozen anchors (R 60/343, h slice, q~82%, compile 0 tokens, guard 0.415, 5,508/614 routines, max occ 181, arm dollars)",
+      "observed_behavior": {
+        "anchors_total": 34,
+        "anchors_found": 34,
+        "anchors_missing": [],
+        "anchor_lines": {
+          "eq1_span": 231,
+          "eq1_cold_term": 232,
+          "eq1_write_term": 233,
+          "eq1_write_over_n": 234,
+          "eq1_defs": 236,
+          "eq1_missing_input": 240,
+          "eq2_span": 826,
+          "eq2_wh750": 828,
+          "eq3_span": 851,
+          "eq3_denominator": 852,
+          "R_inject_60": 876,
+          "R_inject_iqr": 876,
+          "R_info_343": 880,
+          "h_insample_90": 973,
+          "h_url_131": 995,
+          "h_train_86": 1010,
+          "h_oos_77": 1010,
+          "h_oos_carry": 1014,
+          "q_typing_82": 1214,
+          "q_below_one": 1218,
+          "compile_cost_tokens": 912,
+          "guard_coverage_415": 1171,
+          "guard_coverage_415b": 943,
+          "recurring_routines_614": 908,
+          "routine_instances_5508": 909,
+          "max_occ_181": 919,
+          "compose_181": 893,
+          "armA_dollars": 954,
+          "armB_dollars": 956,
+          "armC_dollars": 957,
+          "modeled_not_billed": 1161,
+          "capture_not_free": 1202,
+          "capture_95gb": 1204,
+          "all_fleet_ceiling": 972
+        }
+      },
+      "pass": true,
+      "evidence_ref": "raw/spans.json"
+    },
+    "NC-CONVENTION": {
+      "expected_behavior": "AMORTIZE-ONCE and PER-REUSE differ materially on the same cell",
+      "observed_behavior": {
+        "cells": {
+          "w=0.016666666666666666": {
+            "AMORTIZE-ONCE": {
+              "f_star": 0.34558310236862666,
+              "status": "FINITE"
+            },
+            "PER-REUSE": {
+              "f_star": 1.0,
+              "status": "FINITE"
+            }
+          },
+          "w=1.0": {
+            "AMORTIZE-ONCE": {
+              "f_star": 20.7349861421176,
+              "status": "FINITE"
+            },
+            "PER-REUSE": {
+              "f_star": null,
+              "status": "NO_FSTAR_DEGENERATE"
+            }
+          }
+        },
+        "detail": {
+          "w=0.016666666666666666": "ratio=2.89366",
+          "w=1.0": "status differs"
+        }
+      },
+      "pass": true,
+      "evidence_ref": "raw/controls_result.json#NC-CONVENTION"
+    },
+    "B-PUBLISHED-NUMBERS-ONLY": {
+      "expected_behavior": "artifact publishes NO f*, payback or break-even term; only a 'reuse count' definition of N and one 'amortiz' hit",
+      "observed_behavior": {
+        "term_hits": {
+          "break-even": 0,
+          "breakeven": 0,
+          "break even": 0,
+          "payback": 0,
+          "f*": 0,
+          "reuse count": 1,
+          "amortiz": 1
+        }
+      },
+      "pass": true,
+      "evidence_ref": "raw/controls_result.json#B-PUBLISHED-NUMBERS-ONLY"
+    },
+    "B-FLEET-CEILING": {
+      "expected_behavior": "h(1-1/R_info) is a saving fraction; contains no Cwrite and no cold arm, so it cannot be inverted into f*; inversion must fail",
+      "observed_behavior": {
+        "all_fleet_ceiling_value": 0.07677551020408163,
+        "has_cwrite_term": false,
+        "has_cold_arm": false,
+        "inversion_fails": true
+      },
+      "pass": true,
+      "evidence_ref": "raw/controls_result.json#B-FLEET-CEILING"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/run_determination.py",
+      "sha256": "d349dc5629c54aab051af5da7f03fcf301036bd19e7041725e6cf042438d3811",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/spans.json",
+      "sha256": "e35d38c1d31edb6da7b3d862f07d1a620c1c61c9ac22af3b5d995eaaa8e37e76",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/regime_table.json",
+      "sha256": "278c47b846f581c8da671cc7af66b0af2dacc90640b8bba78d6d7812248c0387",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/controls_result.json",
+      "sha256": "582422f561ddc1d83210def160074f7cee2ed9ed0ce7456c5cfdfdf973656811",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/classification.json",
+      "sha256": "558fe94fefeda8853ca9cab6ca8ca540b4f1e5586a58d0077367398f7401334b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37950616801/raw/metrics.json",
+      "sha256": "01ffd3cb405b3e19aaeca163339b40b63929f1ba6b6a1c8ebf17738f7d9b1a96",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "EVIDENCE VERIFIED: the frozen text layer research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt has sha256 e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf, 70,219 bytes, 69,607 characters, 1,447 lines -- all matching spec.json.",
+    "Eq. (1) located verbatim at lines 231-240: 'E[$/task] = (1-hq) Cmiss' / 'p +hq(C hit+Cverify)' / '+h(1-q)C wrong + Cwrite' / 'N ,' with the cold term written as Cmiss over p and the write term as Cwrite over N.",
+    "Eqs. (2)-(3) at lines 826-854 confirm stacked fractions are OCR-linearized as numerator-line over denominator-line (division), e.g. 'wh/750' and Cagent(k) over C replay(k); applied to Eq. (1) this selects VAR-LIT (cold = Cmiss/p, write = Cwrite/N) as the primary reading.",
+    "The artifact publishes ZERO occurrences of 'break-even', 'breakeven', 'break even', 'payback' and 'f*'; exactly ONE 'amortiz' (line 228) and ONE 'reuse count' (line 237, the Eq. (1) definition of N); ZERO 'stationar'.",
+    "Published anchors re-extracted with line numbers: R_inject=60x (line 876, IQR 59-62), R_info=343x (line 880), h=9.0% (line 973), h=13.1% URL (line 995), h=8.6% training (line 1010), h=7.7% out-of-sample (lines 1010/1014), entity typing ~82% and q<1 (lines 1214/1218), compile '<=0.5ms, 0 tokens' (line 912), median guard coverage 0.415 (lines 943/1171), 614 recurring routines / 5,508 instances (lines 908-909), max occurrences 181 (lines 893/919), modeled arm dollars $125.81/$20.96/$74.46 (lines 954-957).",
+    "g (the dimensionless saving bracket) at the artifact's published point estimates (r=1/60, b=0, c=1, p=1): g=+0.6263 at q=0.82 (entity typing), g=+0.9833 at q=1.0, and g=-0.1769 at q=0.415 (the guard-coverage proxy, not Eq. (1)'s q). g is independent of h and w, so structural divergence does not hold at the published q~0.82.",
+    "Conditional on accepting the frozen placeholder w sweep, f* at the published point estimate (h=0.077, q=0.82, r=1/60, b=0, c=1, p=1) is: 0.346 for w=1/60, 0.0605 for w=1/343, 20.74 for w=1, 207.35 for w=10; f*=0 at w=0. At h=0.090 the same w values give 0.296, 0.0517, 17.74 and 177.40.",
+    "The artifact prints compile cost only as '0 tokens' (a zero dollar write, f*=0, not a positive break-even) and capture/storage cost only as '9.5GB', '~0.19GB per active day' and 'OCR runs on 96% of frames' (lines 1202-1207); it never prints Cwrite in dollars-per-task commensurable with Cmiss. The base success rate p ('base success rate', line 237) is never published numerically; Cverify and Cwrong are likewise not published.",
+    "The two independent implementations of the f* engine (direct cold/warm evaluator and dimensionless closed form f*=w/(h*g)) agree at all 1,680 primary regime cells and all 17,280 sensitivity cells with zero mismatches.",
+    "PC-ALGEBRA reproduces the hand-computed f*=2.0 at h=0.5,q=1,p=1,Chit=Cverify=Cwrong=0,Cwrite=1 to relative error 0.0; NC-DIVERGENT fires both the g<=0 divergent branch and the f*>N_reach unreachable branch; NC-CONVENTION shows AMORTIZE-ONCE f*=20.74 versus PER-REUSE NO_FSTAR_DEGENERATE on the same cell.",
+    "The artifact's strongest published economics quantity, the all-fleet ceiling h(1-1/R_info), evaluates to 0.07677 (7.7%) -- a saving fraction with no Cwrite term and no cold arm, so it cannot be inverted into a break-even.",
+    "PRIMARY CLASSIFICATION (no artifact-internal commensurable w): all four (reading, convention) combinations classify FINITE_NOT_EVALUABLE -- g>0 somewhere, but no artifact-internal commensurable Cwrite/Cmiss anchors a numeric f*. Verdict per frozen gate_2: FALSIFIES.",
+    "CONDITIONAL SENSITIVITY: if the frozen placeholder w sweep is accepted as a reportable input, all four combinations classify REACHABLE, and the reachable region includes h<=0.077 for w in {1/60, 1/343, 1} (h*<=0.0088); w=10 needs h>=0.0882. This conditional branch is recorded, not adopted."
+  ],
+  "validity_notes": [
+    "Scope: this is a reportability determination about ONE hash-pinned artifact (arXiv:2608.05784v1 text layer), not a prevalence claim over persistent-state economics literature.",
+    "ADJUDICATED AXIS (frozen by spec, decided here): no artifact-internal commensurable w=Cwrite/Cmiss exists. The compile cost is literally 0 tokens (degenerate f*=0, not a positive break-even), while the real persistent-write cost includes capture, printed only in GB/wall-clock; p, Cverify and Cwrong are never published in commensurable units. Hence the primary class is FINITE_NOT_EVALUABLE and only the critical-h locus h*(w)=w/(N_reach*g) is reportable without external inputs.",
+    "The opposite adjudication (accepting the swept placeholder w) yields REACHABLE and is reported as an explicit conditional sensitivity in metrics['M-REACH'] and observations; the DIRECTOR may reopen that axis, but as frozen the placeholder values are not artifact measurements.",
+    "The preserved equation is OCR-linearized; the multiply-vs-divide ambiguity (Cmiss/p vs Cmiss*p; Cwrite/N vs Cwrite*N) is reported per reading and never silently collapsed. PC-READING selected VAR-LIT as primary; VAR-MAN is carried as the mandate's literal secondary reading.",
+    "p is unpublished numerically and swept over {0.5,0.8,1.0}; the reported classification is not robust to p only through g, and the published-slice cells with g>0 persist under the primary parameters.",
+    "The corpus is one professional over 51 active days / 128,756 frames; R's numerator, the three-arm dollars and the all-fleet ceiling are explicitly 'modeled, not billed' (lines 1160-1168); this experiment preserves those labels.",
+    "Non-adoption bar preserved: no quantity from arXiv:2608.05784v1 enters a SPIDER cost model, break-even derivation, product plan or investor-facing material. The artifact is the object of a reportability analysis, not a comparator or input.",
+    "Measurement validity: gate_0 passed all checks -- evidence hash/byte/char/line match, PC-EXTRACT recovered all 34 anchors, PC-READING derived the rule, PC-ALGEBRA reproduced the hand value, NC-DIVERGENT fired both branches, NC-CONVENTION fired, and the two table implementations agree at every cell.",
+    "f* is reported as a real number with the integer horizon ceil(f*) noted; reachability is f*<=N_reach=181, the artifact's own maximum routine occurrences (the most generous horizon), so a positive finding would be conservative.",
+    "Outcome FALSIFIES is a statement about reportability from THIS artifact: a numeric f* with a stated denominator is not derivable from the artifact's own published values. It is NOT a literature-level negative and does not measure SPIDER's own recurrence."
+  ],
+  "unresolved": [
+    "Whether any OTHER published persistent-state artifact reports Cwrite/Cmiss in commensurable units, which would make a measured f* reportable; not examined here and out of scope.",
+    "Whether the frozen placeholder w sweep should be treated as a legitimate 'explicitly-swept input' for a REACHABLE class (the conditional branch recorded here) or as an external assumption (the primary FINITE_NOT_EVALUABLE class). This is the single adjudication that moves the verdict between FALSIFIES and SUPPORTS; DIRECTOR owns the bounded decision.",
+    "SPIDER's own first-party marginal recurrence h(N) and write cost Cwrite on the shipped path remain unmeasured.",
+    "Whether the compile 0-token cost and the separately printed capture cost (GB/active-day, OCR duty cycle) can be converted into a commensurable dollar-per-task Cwrite using the artifact's own Sonnet pricing; the artifact does not do so and this experiment did not adopt external prices."
+  ]
+}
