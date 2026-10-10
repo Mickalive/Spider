@@ -1,0 +1,50 @@
+{
+  "per_class": [
+    {
+      "input_class": "CLEAN",
+      "action": "stop",
+      "wait_s": 0.0,
+      "fresh_jar": false,
+      "defined": true
+    },
+    {
+      "input_class": "RATE_LIMIT_429",
+      "action": "retry",
+      "wait_s": 8.0,
+      "fresh_jar": false,
+      "defined": true
+    },
+    {
+      "input_class": "BLOCK_403_CHALLENGE",
+      "action": "stop",
+      "wait_s": 0.0,
+      "fresh_jar": false,
+      "defined": true
+    },
+    {
+      "input_class": "UNAVAILABLE_403",
+      "action": "stop",
+      "wait_s": 0.0,
+      "fresh_jar": false,
+      "defined": true
+    },
+    {
+      "input_class": "TRANSPORT_ERROR",
+      "action": "retry_once_fresh",
+      "wait_s": 3.0,
+      "fresh_jar": true,
+      "defined": true
+    },
+    {
+      "input_class": "OTHER_NONBARRIER",
+      "action": "stop",
+      "wait_s": 0.0,
+      "fresh_jar": false,
+      "defined": true
+    }
+  ],
+  "worst_case_429_sequence_requests": 5,
+  "terminates_within_J_max": true,
+  "all_classes_defined": true,
+  "J_MAX": 5
+}

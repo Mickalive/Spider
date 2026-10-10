@@ -1,0 +1,114 @@
+[
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://httpbin.org/status/403",
+    "expected": [
+      "BLOCK_403_CHALLENGE",
+      "UNAVAILABLE_403"
+    ],
+    "observed": "UNAVAILABLE_403",
+    "status": 403,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://httpbin.org/status/403",
+    "expected": [
+      "BLOCK_403_CHALLENGE",
+      "UNAVAILABLE_403"
+    ],
+    "observed": "UNAVAILABLE_403",
+    "status": 403,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://httpbin.org/status/429",
+    "expected": [
+      "RATE_LIMIT_429"
+    ],
+    "observed": "RATE_LIMIT_429",
+    "status": 429,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://httpbin.org/status/429",
+    "expected": [
+      "RATE_LIMIT_429"
+    ],
+    "observed": "RATE_LIMIT_429",
+    "status": 429,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://no-such-host.invalid/",
+    "expected": [
+      "TRANSPORT_ERROR"
+    ],
+    "observed": "TRANSPORT_ERROR",
+    "status": null,
+    "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+    "passed": true
+  },
+  {
+    "group": "PC_BARRIER_ORACLE",
+    "url": "https://no-such-host.invalid/",
+    "expected": [
+      "TRANSPORT_ERROR"
+    ],
+    "observed": "TRANSPORT_ERROR",
+    "status": null,
+    "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+    "passed": true
+  },
+  {
+    "group": "NC_CLEAN_ORACLE",
+    "url": "https://httpbin.org/status/200",
+    "expected": [
+      "CLEAN"
+    ],
+    "observed": "CLEAN",
+    "status": 200,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "NC_CLEAN_ORACLE",
+    "url": "https://httpbin.org/status/200",
+    "expected": [
+      "CLEAN"
+    ],
+    "observed": "CLEAN",
+    "status": 200,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "NC_CLEAN_ORACLE",
+    "url": "https://httpbin.org/uuid",
+    "expected": [
+      "CLEAN"
+    ],
+    "observed": "CLEAN",
+    "status": 200,
+    "error": null,
+    "passed": true
+  },
+  {
+    "group": "NC_CLEAN_ORACLE",
+    "url": "https://httpbin.org/uuid",
+    "expected": [
+      "CLEAN"
+    ],
+    "observed": "CLEAN",
+    "status": 200,
+    "error": null,
+    "passed": true
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "experiment_id": "EXP-PHYSICS-37992957068",
+  "verify_frozen": {
+    "declared": {
+      "prereg.md": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+      "request.json": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+      "spec.json": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2"
+    },
+    "actual": {
+      "prereg.md": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+      "request.json": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+      "spec.json": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2"
+    },
+    "match": {
+      "prereg.md": true,
+      "request.json": true,
+      "spec.json": true
+    },
+    "all_match": true,
+    "freeze_sha256": "ab5d9561528e8b4f4025a700dd75de566d338c3d1ef291281281bc9b03a4d220"
+  },
+  "policy_trace": {
+    "per_class": [
+      {
+        "input_class": "CLEAN",
+        "action": "stop",
+        "wait_s": 0.0,
+        "fresh_jar": false,
+        "defined": true
+      },
+      {
+        "input_class": "RATE_LIMIT_429",
+        "action": "retry",
+        "wait_s": 8.0,
+        "fresh_jar": false,
+        "defined": true
+      },
+      {
+        "input_class": "BLOCK_403_CHALLENGE",
+        "action": "stop",
+        "wait_s": 0.0,
+        "fresh_jar": false,
+        "defined": true
+      },
+      {
+        "input_class": "UNAVAILABLE_403",
+        "action": "stop",
+        "wait_s": 0.0,
+        "fresh_jar": false,
+        "defined": true
+      },
+      {
+        "input_class": "TRANSPORT_ERROR",
+        "action": "retry_once_fresh",
+        "wait_s": 3.0,
+        "fresh_jar": true,
+        "defined": true
+      },
+      {
+        "input_class": "OTHER_NONBARRIER",
+        "action": "stop",
+        "wait_s": 0.0,
+        "fresh_jar": false,
+        "defined": true
+      }
+    ],
+    "worst_case_429_sequence_requests": 5,
+    "terminates_within_J_max": true,
+    "all_classes_defined": true,
+    "J_MAX": 5
+  },
+  "oracles": [
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://httpbin.org/status/403",
+      "expected": [
+        "BLOCK_403_CHALLENGE",
+        "UNAVAILABLE_403"
+      ],
+      "observed": "UNAVAILABLE_403",
+      "status": 403,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://httpbin.org/status/403",
+      "expected": [
+        "BLOCK_403_CHALLENGE",
+        "UNAVAILABLE_403"
+      ],
+      "observed": "UNAVAILABLE_403",
+      "status": 403,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://httpbin.org/status/429",
+      "expected": [
+        "RATE_LIMIT_429"
+      ],
+      "observed": "RATE_LIMIT_429",
+      "status": 429,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://httpbin.org/status/429",
+      "expected": [
+        "RATE_LIMIT_429"
+      ],
+      "observed": "RATE_LIMIT_429",
+      "status": 429,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://no-such-host.invalid/",
+      "expected": [
+        "TRANSPORT_ERROR"
+      ],
+      "observed": "TRANSPORT_ERROR",
+      "status": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "passed": true
+    },
+    {
+      "group": "PC_BARRIER_ORACLE",
+      "url": "https://no-such-host.invalid/",
+      "expected": [
+        "TRANSPORT_ERROR"
+      ],
+      "observed": "TRANSPORT_ERROR",
+      "status": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "passed": true
+    },
+    {
+      "group": "NC_CLEAN_ORACLE",
+      "url": "https://httpbin.org/status/200",
+      "expected": [
+        "CLEAN"
+      ],
+      "observed": "CLEAN",
+      "status": 200,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "NC_CLEAN_ORACLE",
+      "url": "https://httpbin.org/status/200",
+      "expected": [
+        "CLEAN"
+      ],
+      "observed": "CLEAN",
+      "status": 200,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "NC_CLEAN_ORACLE",
+      "url": "https://httpbin.org/uuid",
+      "expected": [
+        "CLEAN"
+      ],
+      "observed": "CLEAN",
+      "status": 200,
+      "error": null,
+      "passed": true
+    },
+    {
+      "group": "NC_CLEAN_ORACLE",
+      "url": "https://httpbin.org/uuid",
+      "expected": [
+        "CLEAN"
+      ],
+      "observed": "CLEAN",
+      "status": 200,
+      "error": null,
+      "passed": true
+    }
+  ],
+  "oracles_all_pass": true,
+  "n_planned_gets": 3420,
+  "n_requests": 1254,
+  "status_histogram": {
+    "403": 240,
+    "200": 875,
+    "500": 1,
+    "None": 52,
+    "429": 26,
+    "404": 48,
+    "202": 12
+  },
+  "class_histogram": {
+    "BLOCK_403_CHALLENGE": 240,
+    "OTHER_NONBARRIER": 435,
+    "CLEAN": 501,
+    "TRANSPORT_ERROR": 52,
+    "RATE_LIMIT_429": 26
+  },
+  "wall_clock_s": 336.2,
+  "max_workers": 8
+}

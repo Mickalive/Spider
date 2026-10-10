@@ -1,0 +1,583 @@
+{
+  "experiment_id": "EXP-PHYSICS-37992957068",
+  "metrics": {
+    "SKILL_LL": 0.0051411334373070855,
+    "SKILL_LL_CI95": [
+      -0.00933845159088395,
+      0.019388300216115453
+    ],
+    "SKILL_LL_NOID": -0.16769865144813678,
+    "SKILL_LL_NOID_CI95": [
+      -0.20766734593518785,
+      -0.12518679747297579
+    ],
+    "SKILL_BA": 0.004273504273504258,
+    "logloss": {
+      "M_HISTORY": 0.06601220151654957,
+      "B_CONSTANT": 0.5695032674263448,
+      "B_ENDPOINT_CONST": 0.07115333495385665,
+      "B_MEMORY_PERSIST": 0.23607956121411153,
+      "B_RATE_ONLY": 0.5104185807132909
+    },
+    "balanced_accuracy": {
+      "M_HISTORY": 0.9564787937429446,
+      "B_CONSTANT": 0.5,
+      "B_ENDPOINT_CONST": 0.9522052894694404,
+      "B_MEMORY_PERSIST": 0.8438054346073214,
+      "B_RATE_ONLY": 0.5820230607966457
+    },
+    "n_rows_primary": 1254,
+    "ONSET_SKILL_LL": null,
+    "ONSET_CI95": [
+      null,
+      null
+    ],
+    "ONSET_n": 0,
+    "RECOVERY_SKILL_LL": -0.15683934234527497,
+    "RECOVERY_CI95": [
+      -0.2578014307332254,
+      -0.06481082932141478
+    ],
+    "RECOVERY_n": 13,
+    "SEPARABILITY_SKILL_LL": 0.020645683265606084,
+    "SEPARABILITY_CI95": [
+      0.014759963514801732,
+      0.027601150356357802
+    ],
+    "SEPARABILITY_n": 753,
+    "d_Req": -2.4848484848484853,
+    "d_Req_CI95": [
+      -3.3900752464971458,
+      -1.6916514227642279
+    ],
+    "d_Succ": 0.0,
+    "ADAPT_abs_requests": 1.2727272727272727,
+    "RETRY_abs_requests": 3.757575757575758,
+    "ADAPT_success": 0.3333333333333333,
+    "RETRY_success": 0.3333333333333333,
+    "endpoint_no_barrier_success": 0.25,
+    "n_barrier_exposed_endpoints": 11,
+    "n_scheduler_barrier_events": 318,
+    "n_sessions": 684,
+    "n_requests": 1254,
+    "class_histogram": {
+      "BLOCK_403_CHALLENGE": 240,
+      "OTHER_NONBARRIER": 435,
+      "CLEAN": 501,
+      "TRANSPORT_ERROR": 52,
+      "RATE_LIMIT_429": 26
+    },
+    "status_histogram": {
+      "403": 240,
+      "200": 875,
+      "500": 1,
+      "None": 52,
+      "429": 26,
+      "404": 48,
+      "202": 12
+    }
+  },
+  "core": {
+    "SKILL_LL": 0.0051411334373070855,
+    "LO": -0.00933845159088395,
+    "HI": 0.019388300216115453,
+    "n_rows": 1254,
+    "logloss": {
+      "M_HISTORY": 0.06601220151654957,
+      "B_CONSTANT": 0.5695032674263448,
+      "B_ENDPOINT_CONST": 0.07115333495385665,
+      "B_MEMORY_PERSIST": 0.23607956121411153,
+      "B_RATE_ONLY": 0.5104185807132909
+    },
+    "balanced_accuracy": {
+      "M_HISTORY": 0.9564787937429446,
+      "B_CONSTANT": 0.5,
+      "B_ENDPOINT_CONST": 0.9522052894694404,
+      "B_MEMORY_PERSIST": 0.8438054346073214,
+      "B_RATE_ONLY": 0.5820230607966457
+    },
+    "SKILL_BA": 0.004273504273504258
+  },
+  "core_noid": {
+    "SKILL_LL": -0.16769865144813678,
+    "LO": -0.20766734593518785,
+    "HI": -0.12518679747297579,
+    "n_rows": 1254,
+    "logloss": {
+      "M_HISTORY": 0.23885198640199348,
+      "B_CONSTANT": 0.5695032674263448,
+      "B_ENDPOINT_CONST": 0.07115333495385665,
+      "B_MEMORY_PERSIST": 0.23607956121411153,
+      "B_RATE_ONLY": 0.5104185807132909
+    },
+    "balanced_accuracy": {
+      "M_HISTORY": 0.8458817126269956,
+      "B_CONSTANT": 0.5,
+      "B_ENDPOINT_CONST": 0.9522052894694404,
+      "B_MEMORY_PERSIST": 0.8438054346073214,
+      "B_RATE_ONLY": 0.5820230607966457
+    },
+    "SKILL_BA": -0.10632357684244476
+  },
+  "controls": {
+    "PC_SYNTHETIC_DYNAMICS": {
+      "replications": 200,
+      "power": 0.98,
+      "hits": 196,
+      "mean_SKILL_LL": 0.03763306768836208,
+      "min_SKILL_LL": 0.012537234709395384,
+      "max_SKILL_LL": 0.066974123468305,
+      "min_CI_lower": -0.0024629257267939405,
+      "gate": 0.8,
+      "pass": true,
+      "plant": {
+        "a": -1.0,
+        "b": 1.0,
+        "c": 0.3
+      },
+      "synthetic_endpoints": 19
+    },
+    "NC_SYNTHETIC_MEMORYLESS": {
+      "replications": 200,
+      "false_positive_rate": 0.01,
+      "hits": 2,
+      "mean_SKILL_LL": -0.005464498788909347,
+      "min_SKILL_LL": -0.016153787740988246,
+      "max_SKILL_LL": 0.008252005962192221,
+      "max_CI_lower": 0.0022527939428374855,
+      "gate": 0.05,
+      "pass": true,
+      "synthetic_endpoints": 19
+    },
+    "PC_BARRIER_ORACLE": {
+      "requests": [
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://httpbin.org/status/403",
+          "expected": [
+            "BLOCK_403_CHALLENGE",
+            "UNAVAILABLE_403"
+          ],
+          "observed": "UNAVAILABLE_403",
+          "status": 403,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://httpbin.org/status/403",
+          "expected": [
+            "BLOCK_403_CHALLENGE",
+            "UNAVAILABLE_403"
+          ],
+          "observed": "UNAVAILABLE_403",
+          "status": 403,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://httpbin.org/status/429",
+          "expected": [
+            "RATE_LIMIT_429"
+          ],
+          "observed": "RATE_LIMIT_429",
+          "status": 429,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://httpbin.org/status/429",
+          "expected": [
+            "RATE_LIMIT_429"
+          ],
+          "observed": "RATE_LIMIT_429",
+          "status": 429,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://no-such-host.invalid/",
+          "expected": [
+            "TRANSPORT_ERROR"
+          ],
+          "observed": "TRANSPORT_ERROR",
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "passed": true
+        },
+        {
+          "group": "PC_BARRIER_ORACLE",
+          "url": "https://no-such-host.invalid/",
+          "expected": [
+            "TRANSPORT_ERROR"
+          ],
+          "observed": "TRANSPORT_ERROR",
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "passed": true
+        }
+      ],
+      "pass": true
+    },
+    "NC_CLEAN_ORACLE": {
+      "requests": [
+        {
+          "group": "NC_CLEAN_ORACLE",
+          "url": "https://httpbin.org/status/200",
+          "expected": [
+            "CLEAN"
+          ],
+          "observed": "CLEAN",
+          "status": 200,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "NC_CLEAN_ORACLE",
+          "url": "https://httpbin.org/status/200",
+          "expected": [
+            "CLEAN"
+          ],
+          "observed": "CLEAN",
+          "status": 200,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "NC_CLEAN_ORACLE",
+          "url": "https://httpbin.org/uuid",
+          "expected": [
+            "CLEAN"
+          ],
+          "observed": "CLEAN",
+          "status": 200,
+          "error": null,
+          "passed": true
+        },
+        {
+          "group": "NC_CLEAN_ORACLE",
+          "url": "https://httpbin.org/uuid",
+          "expected": [
+            "CLEAN"
+          ],
+          "observed": "CLEAN",
+          "status": 200,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "pass": true
+    }
+  },
+  "branch": {
+    "PRED_PASS": false,
+    "PRED_FAIL": false,
+    "SCHED_ECON_PASS": true,
+    "SCHED_ECON_FAIL": false,
+    "pred_disposition": "PRED_AMBIG",
+    "sched_disposition": "SCHED_ECON_PASS",
+    "branch": "INCONCLUSIVE"
+  },
+  "measurement_invalid_conditions": {
+    "network_unreachable": false,
+    "pc_barrier_oracle_misclassified": false,
+    "nc_clean_oracle_misclassified": false,
+    "fewer_than_3_barrier_exposed_endpoints": false,
+    "fewer_than_30_scheduler_barrier_events": false,
+    "pc_synthetic_power_below_0_80": false,
+    "nc_synthetic_false_positive_above_0_05": false,
+    "classifier_not_reproducible": false
+  },
+  "measurement_invalid": false,
+  "barrier_exposed_endpoints": [
+    "https://auth0.com/",
+    "https://community.cloudflare.com/",
+    "https://community.invisioncommunity.com/",
+    "https://gitlab.archlinux.org/users/sign_in",
+    "https://gitlab.com/users/sign_in",
+    "https://search.brave.com/search?q=test",
+    "https://wordpress.com/log-in",
+    "https://www.djangoproject.com/accounts/login/",
+    "https://www.djangoproject.com/admin/login/",
+    "https://www.npmjs.com/login",
+    "https://www.phpbb.com/community/"
+  ],
+  "scheduler_stratum": {
+    "d_Req": -2.4848484848484853,
+    "d_Req_ci_lo": -3.3900752464971458,
+    "d_Req_ci_hi": -1.6916514227642279,
+    "d_Req_ci_note": null,
+    "d_Succ": 0.0,
+    "ADAPT_abs_requests": 1.2727272727272727,
+    "RETRY_abs_requests": 3.757575757575758,
+    "ADAPT_success": 0.3333333333333333,
+    "RETRY_success": 0.3333333333333333,
+    "endpoint_no_barrier_success": 0.25,
+    "n_stratum_endpoints": 11,
+    "n_stratum_episodes": 132,
+    "n_stratum_barrier_events": 318
+  },
+  "full_pool_scheduler": {
+    "d_Req": -1.0467836257309944,
+    "d_Req_ci_lo": -1.3165957272665896,
+    "d_Req_ci_hi": -0.7744787738929768,
+    "d_Req_ci_note": null,
+    "d_Succ": -0.005847953216374324,
+    "ADAPT_abs_requests": 1.0526315789473684,
+    "RETRY_abs_requests": 2.0994152046783627,
+    "ADAPT_success": 0.7251461988304093,
+    "RETRY_success": 0.7309941520467836,
+    "endpoint_no_barrier_success": 0.7105263157894737,
+    "n_stratum_endpoints": 57,
+    "n_stratum_episodes": 684,
+    "n_stratum_barrier_events": 318
+  },
+  "transition_detail": {
+    "ONSET": {
+      "skill": null,
+      "lo": null,
+      "hi": null,
+      "n": 0,
+      "note": "no events of this class in the run"
+    },
+    "RECOVERY": {
+      "skill": -0.15683934234527497,
+      "lo": -0.2578014307332254,
+      "hi": -0.06481082932141478,
+      "n": 13
+    }
+  },
+  "separability_detail": {
+    "SKILL_LL": 0.020645683265606084,
+    "LO": 0.014759963514801732,
+    "HI": 0.027601150356357802,
+    "n_rows": 753,
+    "logloss": {
+      "M_HISTORY": 0.015501830021060745,
+      "B_CONSTANT": 0.6871978643792178,
+      "B_ENDPOINT_CONST": 0.036147513286666814,
+      "B_MEMORY_PERSIST": 0.20322058290646544,
+      "B_RATE_ONLY": 0.686895213160151
+    },
+    "balanced_accuracy": {
+      "M_HISTORY": 0.9984276729559749,
+      "B_CONSTANT": 0.5,
+      "B_ENDPOINT_CONST": 0.9984276729559749,
+      "B_MEMORY_PERSIST": 0.8604857948384298,
+      "B_RATE_ONLY": 0.4808826718716114
+    },
+    "SKILL_BA": 0.0
+  },
+  "collection_meta": {
+    "experiment_id": "EXP-PHYSICS-37992957068",
+    "verify_frozen": {
+      "declared": {
+        "prereg.md": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+        "request.json": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+        "spec.json": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2"
+      },
+      "actual": {
+        "prereg.md": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+        "request.json": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+        "spec.json": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2"
+      },
+      "match": {
+        "prereg.md": true,
+        "request.json": true,
+        "spec.json": true
+      },
+      "all_match": true,
+      "freeze_sha256": "ab5d9561528e8b4f4025a700dd75de566d338c3d1ef291281281bc9b03a4d220"
+    },
+    "policy_trace": {
+      "per_class": [
+        {
+          "input_class": "CLEAN",
+          "action": "stop",
+          "wait_s": 0.0,
+          "fresh_jar": false,
+          "defined": true
+        },
+        {
+          "input_class": "RATE_LIMIT_429",
+          "action": "retry",
+          "wait_s": 8.0,
+          "fresh_jar": false,
+          "defined": true
+        },
+        {
+          "input_class": "BLOCK_403_CHALLENGE",
+          "action": "stop",
+          "wait_s": 0.0,
+          "fresh_jar": false,
+          "defined": true
+        },
+        {
+          "input_class": "UNAVAILABLE_403",
+          "action": "stop",
+          "wait_s": 0.0,
+          "fresh_jar": false,
+          "defined": true
+        },
+        {
+          "input_class": "TRANSPORT_ERROR",
+          "action": "retry_once_fresh",
+          "wait_s": 3.0,
+          "fresh_jar": true,
+          "defined": true
+        },
+        {
+          "input_class": "OTHER_NONBARRIER",
+          "action": "stop",
+          "wait_s": 0.0,
+          "fresh_jar": false,
+          "defined": true
+        }
+      ],
+      "worst_case_429_sequence_requests": 5,
+      "terminates_within_J_max": true,
+      "all_classes_defined": true,
+      "J_MAX": 5
+    },
+    "oracles": [
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://httpbin.org/status/403",
+        "expected": [
+          "BLOCK_403_CHALLENGE",
+          "UNAVAILABLE_403"
+        ],
+        "observed": "UNAVAILABLE_403",
+        "status": 403,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://httpbin.org/status/403",
+        "expected": [
+          "BLOCK_403_CHALLENGE",
+          "UNAVAILABLE_403"
+        ],
+        "observed": "UNAVAILABLE_403",
+        "status": 403,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://httpbin.org/status/429",
+        "expected": [
+          "RATE_LIMIT_429"
+        ],
+        "observed": "RATE_LIMIT_429",
+        "status": 429,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://httpbin.org/status/429",
+        "expected": [
+          "RATE_LIMIT_429"
+        ],
+        "observed": "RATE_LIMIT_429",
+        "status": 429,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://no-such-host.invalid/",
+        "expected": [
+          "TRANSPORT_ERROR"
+        ],
+        "observed": "TRANSPORT_ERROR",
+        "status": null,
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "passed": true
+      },
+      {
+        "group": "PC_BARRIER_ORACLE",
+        "url": "https://no-such-host.invalid/",
+        "expected": [
+          "TRANSPORT_ERROR"
+        ],
+        "observed": "TRANSPORT_ERROR",
+        "status": null,
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "passed": true
+      },
+      {
+        "group": "NC_CLEAN_ORACLE",
+        "url": "https://httpbin.org/status/200",
+        "expected": [
+          "CLEAN"
+        ],
+        "observed": "CLEAN",
+        "status": 200,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "NC_CLEAN_ORACLE",
+        "url": "https://httpbin.org/status/200",
+        "expected": [
+          "CLEAN"
+        ],
+        "observed": "CLEAN",
+        "status": 200,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "NC_CLEAN_ORACLE",
+        "url": "https://httpbin.org/uuid",
+        "expected": [
+          "CLEAN"
+        ],
+        "observed": "CLEAN",
+        "status": 200,
+        "error": null,
+        "passed": true
+      },
+      {
+        "group": "NC_CLEAN_ORACLE",
+        "url": "https://httpbin.org/uuid",
+        "expected": [
+          "CLEAN"
+        ],
+        "observed": "CLEAN",
+        "status": 200,
+        "error": null,
+        "passed": true
+      }
+    ],
+    "oracles_all_pass": true,
+    "n_planned_gets": 3420,
+    "n_requests": 1254,
+    "status_histogram": {
+      "403": 240,
+      "200": 875,
+      "500": 1,
+      "None": 52,
+      "429": 26,
+      "404": 48,
+      "202": 12
+    },
+    "class_histogram": {
+      "BLOCK_403_CHALLENGE": 240,
+      "OTHER_NONBARRIER": 435,
+      "CLEAN": 501,
+      "TRANSPORT_ERROR": 52,
+      "RATE_LIMIT_429": 26
+    },
+    "wall_clock_s": 336.2,
+    "max_workers": 8,
+    "classifier_recomputation_mismatches": 0,
+    "classifier_recomputation_examples": []
+  }
+}
