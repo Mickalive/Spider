@@ -40,13 +40,13 @@ Credential-free, deterministic, locally-served multi-page REST site; **Python 3.
 
 ### 4.1 Asymmetric class ADB-v6 (the object under certification)
 
-Bootstrap: `GET /` → `hub` → `boot/1..5` (7 requests); `/boot/5` serves the session manifest (ordered role registry `R1..R6`, task list, and the frozen ascending warm-up sequence `["0.0","0.25","0.5","0.75"]`). Discovery is a fixed **3-step carry chain** per role:
+Bootstrap: `GET /` → `hub` → `boot/1..5` (7 requests); `/boot/5` serves the session manifest (ordered role registry `R1..R6`, task list, and the frozen ascending warm-up sequence `["0.0","0.25","0.5","0.75"]`). The bootstrap is session-scoped: `root` and `hub` are static site-level pages, but `boot/1..5` form a session-scoped carry chain and the manifest at `/boot/5` is session-scoped, so a leave-instance-out trajectory index can supply only the static root/hub prefix (never the boot chain or the manifest). Discovery is a fixed **3-step carry chain** per role:
 
 1. `GET /disc/<role>/1` → per-role session nonce `N_r`;
 2. `GET /disc/<role>/2/<N_r>` → partial token `P_r` iff `N_r` is session-valid;
 3. `GET /disc/<role>/3/<P_r>` → resolved token `T_r` and commits the role for the session iff `P_r` is valid.
 
-Each step requires the previous step's value and mixes role id with the session secret. Therefore **no policy can resolve a role in fewer than 3 requests per task without persisting `T_r` across tasks** — the exact capability under test. The task specification is handed to every arm as task input (uniformly, not an HTTP request).
+Each step requires the previous step's value and mixes role id with the session secret. Therefore **no policy can resolve a role in fewer than 3 requests per task without persisting `T_r` across tasks** — the exact capability under test. The task specification is handed to every arm as task input (uniformly, not an HTTP request). `B(n)` is a **hard** per-task HTTP-request budget: an episode whose policy would exceed it halts at exactly `B(n)` with zero overrun and is scored a failure, so the predicted **observed** comparator ledger is the budget-truncated one (see §5–§6). The budget caps HTTP requests only; the retrieval arm's 3 local index probes are a separate `retrieval_calls` counter and never consume the HTTP budget (but are always included in the fully-loaded gap total).
 
 ### 4.2 Calibration class CC-DEGENERATE (certificate-sensitivity sibling)
 
@@ -60,27 +60,35 @@ Same transport and bootstrap, but discovery is **query-answerable**: a single `G
 - `CC-DEGENERATE` calibration bank: one family × 4 high-novelty tasks, run by both comparators (8 episodes).
 - Seed: `20261010`.
 - Budgets `B(n)={11,15,16,18}`; `B_deg(n)={11,13,15,17}`.
-- **Route-leak rule**: no rendered task spec, disc/answer page, hub, boot page or sitemap may contain an absolute URL, the session id, or any of the literals `/s/`, `{sid}`, `/boot/`, `/hub`, `/tasks`, `/disc/`, `/answer/`, `/verify`. The sitemap lists only `/`, `/hub`, `/about`.
+- **Route-leak rule (two surfaces)**: (i) every rendered **task spec** (handed to every arm as task input) contains no session id, no absolute URL, no declared route literal and no token/nonce; (ii) every rendered **site page** may carry the declared navigational route templates the arms must follow, but contains no absolute URL, no session id in prose, and no resolved/partial token or nonce outside the single step response that legitimately produces it. `robots.txt` (allow-all) and `sitemap.xml` (listing only `/`, `/hub`, `/about`) are ordinary routes; arms are handed the task spec and the site root URL only, and the strongest enumeration (sitemap + hub + boot/1..5 = 7) costs the same as root + hub + boot/1..5, so enumeration cannot amortize the boot chain or the manifest.
+- **Session scope**: `T-AMORT-REUSE` = one session per 4-task block (6 sessions); `B-COLD-RE-DERIVE`, `B-RETRIEVAL-SHAPED`, `PC-FOREKNOWN-SCHEMA` = fresh per-task episodes (24 each, no cross-task state); `CC-DEGENERATE` comparators = per-task episodes on the 4-task calibration bank. A per-task episode's served session contains exactly its single declared task, so no cross-task state can be inherited accidentally.
 
 ## 5. Cost model and embedded declaration
 
 The frozen canonical declaration object (EXECUTE must re-render it exactly; canonicalization = `json.dumps(obj, sort_keys=True, separators=(",",":"))`):
 
 ```json
-{"bootstrap":["root","hub","boot/1","boot/2","boot/3","boot/4","boot/5"],"budgets":{"0.0":11,"0.25":15,"0.5":16,"0.75":18},"calibration":{"budgets":{"0.0":11,"0.25":13,"0.5":15,"0.75":17},"discovery_requests_per_role":1,"name":"CC-DEGENERATE"},"discovery_steps":3,"families":["F1","F2"],"h":{"0.0":0,"0.25":2,"0.5":4,"0.75":6},"levels":[0.0,0.25,0.5,0.75],"role_rule":"h(n)=8n","schema":"ADB-v6","seed":20261010,"sessions_per_family":3,"tasks_per_session":4,"warmup_sequence":["0.0","0.25","0.5","0.75"]}
+{"bootstrap":["root","hub","boot/1","boot/2","boot/3","boot/4","boot/5"],"budgets":{"0.0":11,"0.25":15,"0.5":16,"0.75":18},"calibration":{"budgets":{"0.0":11,"0.25":13,"0.5":15,"0.75":17},"discovery_requests_per_role":1,"levels":[0.5,0.75],"name":"CC-DEGENERATE","route_template":"/answer/{role}"},"counter_partition_adb":"http_requests = bootstrap_requests + tasks_page_requests + discovery_calls + verification_calls","discovery_route_template":"/disc/{role}/{step}[/{value}]","discovery_steps":3,"families":["F1","F2"],"h":{"0.0":0,"0.25":2,"0.5":4,"0.75":6},"levels":[0.0,0.25,0.5,0.75],"manifest_route":"/boot/5","registry":["R1","R2","R3","R4","R5","R6"],"role_rule":"h(n)=8n","route_leak_rule":{"rendered_page_prohibited":["absolute_url","session_id_in_prose","resolved_token_outside_its_step_response","partial_token_outside_its_step_response"],"sitemap_allowed":["/","/hub","/about"],"task_spec_prohibited":["session_id","absolute_url","declared_route_literal","token"]},"schema":"ADB-v6","seed":20261010,"session_scope":{"cc_degenerate_comparators":"per_task","cold":"per_task","pc":"per_task","retrieval":"per_task","treatment":"per_session_4_tasks"},"sessions_per_family":3,"sitemap_allowed":["/","/hub","/about"],"tasks_per_session":4,"tasks_route":"/tasks","verify_route_template":"/verify?level={n}","warmup_sequence":["0.0","0.25","0.5","0.75"]}
 ```
 
-Derived per-task HTTP cost model (server-logged `http_requests`; `retrieval_total` adds the 3 local index probes counted as `retrieval_calls`):
+The declaration now pins the full topology — registry `R1..R6`, the bootstrap and route templates, budgets, strata, seed, session scope and the two-surface leak rule — not only scalar parameters, so gate I6 binds the topology and not just the numbers.
+
+Derived per-task HTTP cost model. `B(n)` is a hard budget, so a comparator that would exceed it halts at exactly `B(n)` and fails; both the NOMINAL (untruncated policy) and the OBSERVED (budget-truncated) ledgers are frozen, and P6 anchors on the OBSERVED one. `retrieval_total` adds the 3 local index probes counted as `retrieval_calls` (not HTTP).
 
 | arm | n=0.0 | n=0.25 | n=0.5 | n=0.75 | formula |
 |---|---|---|---|---|---|
-| `B-COLD-RE-DERIVE` | 8 | 14 | 20 | 26 | `3h+8` |
-| `B-RETRIEVAL-SHAPED` (server) | 6 | 12 | 18 | 24 | `3h+6` |
-| `B-RETRIEVAL-SHAPED` (total incl. probes) | 9 | 15 | 21 | 27 | `3h+9` |
+| `B-COLD-RE-DERIVE` (nominal) | 8 | 14 | 20 | 26 | `3h+8` |
+| `B-COLD-RE-DERIVE` (observed, truncated) | 8 | 14 | 16 | 18 | `min(3h+8, B)` |
+| `B-RETRIEVAL-SHAPED` server (nominal) | 6 | 12 | 18 | 24 | `3h+6` |
+| `B-RETRIEVAL-SHAPED` server (observed) | 6 | 12 | 16 | 18 | `min(3h+6, B)` |
+| `B-RETRIEVAL-SHAPED` total incl. probes (nominal) | 9 | 15 | 21 | 27 | `3h+9` |
+| `B-RETRIEVAL-SHAPED` total incl. probes (observed) | 9 | 15 | 19 | 21 | `min(3h+6,B)+3` |
 | `T-AMORT-REUSE` | 9 | 7 | 7 | 7 | session bootstrap 8 + new-role discovery + 1 verify |
 | `PC-FOREKNOWN-SCHEMA` | 8 | 10 | 12 | 14 | `h+8` |
-| `B-COLD-RE-DERIVE` on `CC-DEGENERATE` | 8 | 10 | 12 | 14 | `h+8` |
-| `B-RETRIEVAL-SHAPED` on `CC-DEGENERATE` (total) | 9 | 11 | 13 | 15 | `h+9` |
+| `B-COLD-RE-DERIVE` on `CC-DEGENERATE` (n=0.5,0.75) | — | — | 12 | 14 | `h+8` |
+| `B-RETRIEVAL-SHAPED` on `CC-DEGENERATE` total (n=0.5,0.75) | — | — | 13 | 15 | `h+9` |
+
+Observed comparator-minus-treatment total gaps therefore are cold `[-1,7,9,11]` and retrieval `[0,8,12,14]` (nominal `[-1,7,13,19]` / `[0,8,14,20]`); both are non-decreasing, strictly increasing across `0.5<0.75`, and the observed high-novelty minima (9 cold / 12 retrieval) exceed the `>=8` threshold (P4/P5).
 
 `T-AMORT-REUSE` pays the 8-request session bootstrap once (charged to the warm-up task), then 3 requests for each newly introduced role (roles are nested: 2 new roles per escalating level ⇒ 6 discovery requests) plus 1 verify = 7 thereafter; session total 30.
 
@@ -91,10 +99,14 @@ Computed by a DESIGN stdlib probe (`python 3.12.15`); no arm was run and no succ
 Predicted certificate object (canonical form, `json.dumps(sort_keys=True, separators=(",",":"))`):
 
 ```json
-{"ADB-v6":{"certificate":true,"cold":{"0.0":8,"0.25":14,"0.5":20,"0.75":26},"gap_vs_treatment":{"cold":[-1,7,13,19],"retrieval":[0,8,14,20]},"pc":{"0.0":8,"0.25":10,"0.5":12,"0.75":14},"retrieval_http":{"0.0":6,"0.25":12,"0.5":18,"0.75":24},"retrieval_total":{"0.0":9,"0.25":15,"0.5":21,"0.75":27},"success":{"cold":[true,true,false,false],"pc":[true,true,true,true],"retrieval":[true,true,false,false],"treatment":[true,true,true,true]},"treatment":{"0.0":9,"0.25":7,"0.5":7,"0.75":7}},"CC-DEGENERATE":{"certificate":false,"cold":{"0.0":8,"0.25":10,"0.5":12,"0.75":14},"retrieval_http":{"0.0":6,"0.25":8,"0.5":10,"0.75":12},"retrieval_total":{"0.0":9,"0.25":11,"0.5":13,"0.75":15},"success":{"cold":[true,true,true,true],"retrieval":[true,true,true,true]}}}
+{"class_asymmetric":{"budgets":{"0.0":11,"0.25":15,"0.5":16,"0.75":18},"certificate":true,"gap_total_vs_treatment":{"cold":[-1,7,9,11],"retrieval":[0,8,12,14]},"h":{"0.0":0,"0.25":2,"0.5":4,"0.75":6},"levels":["0.0","0.25","0.5","0.75"],"min_high_novelty_gap":{"cold":9,"retrieval":12},"nominal_http":{"cold":[8,14,20,26],"pc":[8,10,12,14],"retrieval_http":[6,12,18,24],"retrieval_total":[9,15,21,27],"treatment":[9,7,7,7]},"observed_http":{"cold":[8,14,16,18],"pc":[8,10,12,14],"retrieval_http":[6,12,16,18],"treatment":[9,7,7,7]},"observed_total":{"cold":[8,14,16,18],"pc":[8,10,12,14],"retrieval_total":[9,15,19,21],"treatment":[9,7,7,7]},"success":{"cold":[true,true,false,false],"pc":[true,true,true,true],"retrieval":[true,true,false,false],"treatment":[true,true,true,true]}},"class_calibration":{"budgets":{"0.5":15,"0.75":17},"certificate":false,"h":{"0.5":4,"0.75":6},"levels":[0.5,0.75],"name":"CC-DEGENERATE","nominal_total":{"cold":[12,14],"retrieval":[13,15]},"success":{"cold":[true,true],"retrieval":[true,true]}}}
 ```
 
-**Certificate predicate** `CERT(cls)` = `TRUE` iff (a) every strong baseline's predicted **minimum total cost at high novelty** (`n ≥ 0.5`) strictly exceeds `B(n)`; (b) the treatment's predicted maximum per-task cost ≤ `B(n)` at every level; (c) the positive control's predicted per-task cost ≤ `B(n)` at every level.
+This canonical certificate object is the gate-I6 anchor; `spec.json#decision_rule.arithmetic_certificate` is its explanatory expansion with byte-identical values (nominal vs observed split, per-level gaps, min-gap, Wilson). The two must agree numerically.
+
+**Nominal vs observed (the truncation fix).** Because `B(n)` is a HARD budget, a high-novelty comparator episode halts at `B(n)` and fails, so the **OBSERVED** ledger — the P6 anchor — is cold `{8,14,16,18}` (n=0.5 20→16, n=0.75 26→18), retrieval server `{6,12,16,18}` / total `{9,15,19,21}`, treatment `{9,7,7,7}`, PC `{8,10,12,14}`. The **NOMINAL** untruncated costs (cold `{8,14,20,26}`, retrieval `{6,12,18,24}` / `{9,15,21,27}`) are the policy costs and are exactly what certificate clause (a) uses, since `nominal > B(n)` is the assertion that the stateless comparator cannot fit. Freezing both removes the earlier ambiguity where the observed ledger could never equal a nominal-cost prediction.
+
+**Certificate predicate** `CERT(cls)` = `TRUE` iff (a) every strong baseline's **NOMINAL (untruncated) minimum total cost at high novelty** (`n ≥ 0.5`) strictly exceeds `B(n)`; (b) the treatment's predicted maximum per-task cost ≤ `B(n)` at every level; (c) the positive control's predicted per-task cost ≤ `B(n)` at every level.
 
 - `CERT(ADB-v6) = TRUE`: cold 20>16, 26>18 and retrieval_total 21>16, 27>18; treatment 9,7,7,7 ≤ B; PC 8,10,12,14 ≤ B.
 - `CERT(CC-DEGENERATE) = FALSE`: cold 12≤15, 14≤17 (comparators not below ceiling), retrieval_total 13≤15, 15≤17.
@@ -103,13 +115,13 @@ Predicted certificate object (canonical form, `json.dumps(sort_keys=True, separa
 
 **Informational hypothesis digests (non-binding cross-check; gate I6 is structural equality, not digest equality):**
 
-- D1 (declaration) = `81280bcc13b55a2fac30a36b9a0e9e16bbccb459661eddeece53a90b66d66fcb`
-- D2 (predicted certificate) = `95b4e47e3764cc87fb6493cd7d8934c16b0bc2c42def5c1777c0877e5191a87f`
+- D1 (declaration) = `a9fbd3d345906d22fa4377eb9dd351be9b1f690441a3303b0fa3bf3fb32d50db`
+- D2 (predicted certificate) = `c8fd21015436b65f8213816484fc13f424e31be0170613e3a489dc983cb52f21`
 
 ## 7. Controls
 
 - **`PC-FOREKNOWN-SCHEMA`** (positive control, solvability ceiling): given manifest, role registry and resolved tokens out of band; walks bootstrap (7) + one commit per role (`h`) + `/verify` (1) = `h+8 = {8,10,12,14}` ≤ `B(n)`. Required 24/24 (12/12 high novelty). Excluded from the gap computation.
-- **`NC-OOS-SCHEMA`** (known-negative refusal null): 5 frozen out-of-support sessions (non-ascending sequence or non-nested registry) must be refused `OUT_OF_SUPPORT` within ≤2 requests; false accepts 0/5.
+- **`NC-OOS-SCHEMA`** (known-negative refusal null): 5 frozen out-of-support sessions (non-ascending sequence or non-nested registry) must be refused `OUT_OF_SUPPORT` at manifest classification after exactly 7 requests (root, hub, boot/1..5), with 0 role commits, 0 `/verify` and 0 `/tasks` fetches; false accepts 0/5.
 - **`CC-DEGENERATE`** (certificate-sensitivity calibration): both comparators must reach the ceiling on the query-answerable sibling; this is the observational counterpart of `CERT(CC-DEGENERATE)=FALSE`.
 - **`NC-BUDGET-TRUNCATION`**: 6 deliberately under-funded episodes must stop at the imposed budget with zero overrun.
 - **`M-COUNTER-RECONCILE`**: per-episode arm counters == server request log; subset relations hold; 0 mismatches.
@@ -140,7 +152,7 @@ Predicted certificate object (canonical form, `json.dumps(sort_keys=True, separa
 - **P2** retrieval high-novelty point < 0.95 and Wilson hi < treatment lo (predicted k=0/12).
 - **P3** treatment succeeds 12/12 high novelty (lo 0.757506 ≥ 0.75) and 12/12 low novelty.
 - **P4** observed mean comparator-minus-treatment total gap is non-decreasing across n and strictly increasing across 0.5<0.75 for both comparators.
-- **P5** minimum observed high-novelty mean gap ≥ 8 requests (predicted 13 cold / 14 retrieval).
+- **P5** minimum observed high-novelty mean **total-cost** gap ≥ 8 requests (predicted, on the frozen budget-truncated observed ledger, 9 cold / 12 retrieval; the untruncated nominal counterpart is 13 cold / 14 retrieval and is used only by the certificate predicate).
 - **P6** observed 4-arm × 4-level ADB-v6 success matrix and per-condition ledger equal the prediction.
 - **P7** certificate discrimination: `CERT(ADB-v6)=TRUE`, `CERT(CC-DEGENERATE)=FALSE`, confirmed observationally by I11.
 
@@ -156,7 +168,7 @@ Predicted certificate object (canonical form, `json.dumps(sort_keys=True, separa
 
 ## 9. Sampling, matching and counter honesty
 
-Tasks are matched across arms (same 24 ADB-v6 tasks; same 4 CC-DEGENERATE tasks). No arm is charged a cost it does not pay: stateless arms pay per-task bootstrap and the full 3-step chain per role; retrieval additionally pays its 3 index probes (counted as `retrieval_calls`, not omitted and not summed into `http_requests`); the treatment pays its single session bootstrap and discovery only for roles it has never resolved. Per-episode frozen ledger predicate: `arm_reported_http_requests == server_logged_requests` AND `bootstrap_requests + discovery_calls + verification_calls ≤ http_requests` AND `retrieval_calls` and `repair_attempts` recorded independently of `http_requests`. `latency_ms` and model tokens are prohibited as decision inputs.
+Tasks are matched across arms (same 24 ADB-v6 tasks; same 4 CC-DEGENERATE tasks). No arm is charged a cost it does not pay: stateless arms pay per-task bootstrap and the full 3-step chain per role; retrieval additionally pays its 3 index probes (counted as `retrieval_calls`, not omitted and not summed into `http_requests`); the treatment pays its single session bootstrap and discovery only for roles it has never resolved. The per-episode frozen **partition** predicate is: `arm_reported_http_requests == server_logged_requests` AND `http_requests == bootstrap_requests + tasks_page_requests + discovery_calls + verification_calls` (on ADB-v6; `calibration_calls` replaces `discovery_calls` on CC-DEGENERATE) AND `retrieval_calls` is recorded independently of `http_requests` (never summed into it) AND `repair_attempts` is a flagged subset of `http_requests` with `repair_attempts ≤ 1` per task. This makes the four mandate counters — `http_requests`, `retrieval_calls`, `verification_calls`, `repair_attempts` — exactly checkable rather than asserted. `latency_ms` and model tokens are prohibited as decision inputs.
 
 ## 10. EXECUTE procedure and abort gates
 
@@ -183,7 +195,10 @@ Tasks are matched across arms (same 24 ADB-v6 tasks; same 4 CC-DEGENERATE tasks)
 
 - `python 3.12.15`; stdlib import probe: `http.server, urllib.request, html.parser, json, hashlib, random, statistics, socket, threading` — all import (9/9).
 - localhost `ThreadingHTTPServer` canary on `127.0.0.1:ephemeral` returned HTTP 200 (`b"ok"`), confirming transport.
-- The arithmetic certificate and its calibration were computed with `json`/`statistics` only; **no arm was run and no success/failure outcome was observed**.
+- Wilson 95% intervals recomputed at `n=12, z=1.959963984540054`: k=0 → [0, 0.242494]; k=6 → [0.253782, 0.746218]; k=7 → [0.319511, 0.806740]; k=12 → [0.757506, 1.0]. Confirms comparator k≤6 hi (`0.746218`) < treatment k=12 lo (`0.757506`), and that k≥7 overlaps.
+- Cost/arithmetic recompute under the hard-budget truncation: nominal cold `{8,14,20,26}`, retrieval server `{6,12,18,24}` / total `{9,15,21,27}`, treatment `{9,7,7,7}`, PC `{8,10,12,14}`; observed (truncated) cold `{8,14,16,18}`, retrieval server `{6,12,16,18}` / total `{9,15,19,21}`; gaps cold `[-1,7,9,11]` / retrieval `[0,8,12,14]` (non-decreasing; strictly increasing across `0.5<0.75`; min high 9/12 ≥ 8). `CERT(ADB-v6)=TRUE`, `CERT(CC-DEGENERATE)=FALSE` (cold 12≤15,14≤17). CC-DEGENERATE bank: cold `{12,14}`, retrieval `{13,15}`, both within `B_deg={15,17}` → 4/4 ceiling.
+- Canonical serialization check: `json.dumps(obj, sort_keys=True, separators=(",",":"))` reproduced deterministically; D1 (declaration) and D2 (certificate) computed as the sha256 of those canonical byte strings. These digests are informational; gate I6 is structural equality.
+- The arithmetic certificate and its calibration were computed with `json`/`statistics`/`hashlib` only; **no arm was run and no success/failure outcome was observed**. The only executions were the stdlib import probe and the localhost bind canary, neither of which bears on any arm's outcome.
 
 ## 13. Pre-2.0 comparison and material difference
 
