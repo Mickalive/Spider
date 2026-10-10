@@ -91,6 +91,8 @@ You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions
 
 Leak guard (P2-BLIND-COMPOSITION): neither prompt contains the exact selector `#reveal-btn` nor the answer string `TARGET-42`.
 
+Treatment scope: PR-SPECIFIED is the mandate's `goal/schema` bundle — it supplies BOTH the action-schema enumeration and the goal sentence jointly. Component-wise isolation (schema-only vs goal-only) is explicitly out of scope for this packet; the preregistered single variable is the bundle versus its own no-goal/no-schema comparator (PR-UNDERSPEC). A positive result therefore licenses "the goal/schema-specified prompt converts the click", not a component-level causal split; that split is recorded as a refinement for a possible follow-up, not as a missing control.
+
 Sampling (identical to parent): temperature=0.0, max_tokens=512, n_ctx=2048, chat_format=`qwen`, llama_seed=42, base_seed=42, episode seed = 42 + episode_idx, 5 episodes/arm/model, CPU threads=4. The EXECUTE harness must reconstruct PR-UNDERSPEC and PR-SPECIFIED byte-for-byte (AUDIT-verifiable against this section) and all other fixture fields byte-identical to the parent `harness_config.json`.
 
 ## 5. Procedure (frozen)
@@ -158,7 +160,7 @@ These anchors are consistent with the parent observation (step-1 action fine, mu
 
 ## 11. Environment / prerequisites (verified live at DESIGN, non-outcome-bearing)
 
-python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,473 MiB available; Google Chrome 154.0.8037.97 at `/usr/bin/google-chrome`; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3; PyPI-verified pinned artifacts llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel (the identical stack already built and ran in the parent EXECUTE). GGUF URLs HTTP-verified at pinned sizes (0.5B/3B/7B/14B); the 7B single-file URL 404 is recorded. No credential, paid endpoint, GPU or new substrate required.
+python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,471 MiB available; Google Chrome 154.0.8037.97 at `/usr/bin/google-chrome`; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3; PyPI-verified pinned artifacts llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel (the identical stack already built and ran in the parent EXECUTE). GGUF URLs HTTP-verified at pinned sizes (0.5B/3B/7B/14B); the 7B single-file URL 404 is recorded. No credential, paid endpoint, GPU or new substrate required.
 
 ## 12. Code / artifact binding (design_contract_version 2)
 
@@ -190,3 +192,12 @@ python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,473 MiB ava
 - Design: `opencode/big-pickle`, DESIGN mode, lane intel.
 - No outcome-bearing measurements were performed during DESIGN; all probes were non-outcome-bearing and recorded in `spec.pre_freeze_satisfiability_dry_run.environment_probes`.
 - Fidelity: parent/census fixture hashes re-verified at DESIGN; PR-SPECIFIED byte-compared against `min_webagent.py` SYS literal — the only deviations are the two click-example tokens (`ref`->`selector`, `<id>`->`<css selector>`), with all other text verbatim.
+
+## Appendix A — Design-process note (non-scientific; NOT part of the preregistered design)
+
+Recorded so a material prerequisite does not exist only in workflow logs. It changes no scientific field above.
+
+- 2026-10-10: the design-contract v2 pre-freeze review produced no `design_review.json` for any lane. This packet and every other current v2 packet (`EXP-GRAPH-38046502943`, `EXP-PRODUCT-38078422511`, `EXP-RUNTIME-38074822959`, `EXP-PHYSICS-38074818597`, `EXP-FRONTIER-38078430316`) terminated at the `design_review` stage with the same receipt: reviewer model `opencode/exo-free`, attempt 4, `exit_code` 1, category `substantive`.
+- Mechanism (inspected, not measured): `config/models.json` `roles.design_review` lists four models; `SPIDER_EXCLUDE_MODEL` removes the producer (`opencode/big-pickle`), so attempts 1-3 cover the three configured free models and attempt 4 is the first discovered free model. `.github/scripts/run-opencode-resilient.sh` marks any non-zero opencode exit with no network signature `substantive` and exits without fallback, so one such crash aborts the stage.
+- Not a defect of this packet: `spec.json` validates (all 15 required DESIGN fields; the exact six `freeze_eligibility` checks `PASS`; 5 `freeze_artifacts` with sha256 recomputed and matching), and every recorded DESIGN probe re-verified live this run (nproc 4; RAM 11264/14471/15989 MiB; disk 85 GiB; python 3.12.15; gcc 13.3.0 / cmake 3.31.6 / make 4.3; chrome 154.0.8037.97; PyPI llama-cpp-python 0.2.90 sdist 63,762,953 B and playwright 1.63.0 manylinux wheel; GGUF resolve-redirect + pinned sizes for 0.5B/3B/7B/14B and the 32B-shard1 ceiling figure; the 7B single-file URL 404).
+- Smallest unblocking action (owner: lane workflow / model routing; outside lane-DESIGN edit scope): guarantee the `design_review` role at least one reviewer that reliably emits `design_review.json` and is distinct from the producer, or make a reviewer provider crash / missing output fall through rather than abort. Process evidence only.
