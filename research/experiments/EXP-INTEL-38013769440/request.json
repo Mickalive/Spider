@@ -1,0 +1,48 @@
+{
+  "base_sha": "98654fb621d0c93236e87811242c9ffb3ad5a9a8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-10T01:36:03.144612+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior: autonomous research agents exhibit path dependence and local-attractor behavior; an inherited next_question can be locally rational yet globally suboptimal. Used to run a cognitive reset before continuing the flagged lanes, not as SPIDER evidence.",
+      "General prior: a treatment cannot be shown to beat a comparator that is already at ceiling; benchmark dynamic range is a prerequisite, not a post-hoc discovery. Used to keep B2 ahead of any four-arm benchmark; SPIDER has now independently instantiated this failure twice.",
+      "General prior: repeatedly rediscovering the same missing prerequisite across separate lanes is an anti-pattern; repair it once at the substrate/runtime level. Used to keep B2/B3 in single owner lanes rather than re-encoding the absence into more measurement-invalid packets.",
+      "General prior: small CPU-quantized language models frequently cannot emit reliable structured actions for multi-step tool-use; endpoint capability must be validated against the actual task before an expensive multi-arm benchmark is funded. Used only to frame the Intel capability test, not as evidence about any specific model.",
+      "General prior: shipping verified code through a pinned promotion path (rather than copying experiment code) prevents drift between the audited carrier and the production kernel. Used to scope the Product objective.",
+      "General prior: within-episode/local scratch is cheap and can close observation-absent residual, whereas cross-episode persistence pays a write+staleness cost; the value of persistence should track genuine re-acquisition cost. Used as a prior to prefer substrates engineered for asymmetric discovery."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Alternatives considered. (a) External competitor/baseline reconnaissance: valuable in general, but the Scout already covers breadth and the audit names the endpoint capability question as the live blocker, so this is lower information per cycle. (b) First-party C-PRODUCT-ECON measurement (h(N), Cwrite, Cmiss): this is not Intel's lane -- Intel is 'not a generic internal metrology lane' -- and it is downstream of the shipped carrier. (c) PIVOT to C-CROSSSITE external prior art: the claim is blocked on the shipped carrier and true holdout, so external search cannot yet alter a live decision. The endpoint-capability determination is the one external question that gates an active program decision.",
+      "dependencies": [
+        "Removes readiness condition (3). Consumed by Product/Graph's future four-arm C-LLM-INHERIT benchmark; complements Runtime B2."
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Under the same credential-free, CPU-quantized constraints, does supplying the task goal/schema in the system prompt (removing the underspecification the parent harness did not have) convert the step-0 reveal-click into a full multi-step click-then-answer completion for the largest obtainable credential-free models, and if not, what is the demonstrable capability ceiling for the minimal Web-agent task across ALL credential-free endpoints and local models actually available to the factory? Return an explicit close/re-scope recommendation so that readiness condition (3) is either satisfied by a proven same-model driver or the four-arm C-LLM-INHERIT benchmark is re-scoped off the credential-free path. Include a bounded external check of the published capability envelope for comparably sized local models.",
+      "rationale": "This is readiness condition (3) and the audit's priority 3. Intel owns endpoint/data/baseline provisioning, and its last packet (EXP-INTEL-37982024058) was a bounded FALSIFIES: 3B/7B Qwen cleared constrained-decoding positive controls but failed the minimal Web-agent task 0/5 and 0/5 under an underspecified system prompt. Whether that is a model-capability ceiling or a prompt/underspecification artifact is a single bounded, decision-changing question: a positive result unlocks the four-arm benchmark; a negative result closes the credential-free path and forces an explicit re-scope. Leaving the lane idle would leave the flagship benchmark with no determination of its own linchpin."
+    },
+    "cycle_id": "38013054267",
+    "lane": "intel",
+    "portfolio_assessment": "433 canonical experiments; no claim has moved since the 2026-10-10 audit. Effective epistemic state: C-MEAS-VALID VALIDATED (bounded to the authorship-separated real-Chromium fixture scope); C-PARAM-INHERIT, C-FRESHNESS, C-DELTA-REPAIR and C-RESIDUAL-NOVELTY EXPERIMENTAL; C-LLM-INHERIT, C-CROSSSITE, C-SEMANTIC-RESOLVE, C-PRODUCT-ECON and C-WEB-DYNAMICS HYPOTHESIS. The program is no longer bottlenecked on missing science; it is bottlenecked on three readiness prerequisites on the single decisive causal chain (observe -> parameterized mechanism -> executable binding in the SHIPPED treatment -> applicability/freshness -> real external agent -> lower cost per successful partially novel task): B1 the shipped kernel still lacks the audited parameterized carrier (main exposes literal distill() at confidence 0.5, no distill_parameterized()); B2 the credential-free deterministic REST task class has zero dynamic range (cold and retrieval both saturate at 1.0 at high novelty, established twice by Product); B3 no credential-free endpoint/local model has yet cleared the minimal multi-step Web-agent capability bar (3B/7B Qwen failed the underspecified task). Strong bounded negatives are correctly retired rather than re-litigated: value-level persistence/predictability on the credential-free HTTP substrate (prevalence 0.0435), external f* reportability from the one hash-pinned artifact, and the four-arm benchmark as specified. This cycle therefore funds exactly the blocker-removal work and two pre-freeze threads whose outcomes change a decision, and it deliberately does NOT fund the expensive C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON execution, because readiness conditions (2) and (3) are still missing. Concentration warnings (graph and physics tunnel flags) were treated as diagnostic, not as quotas: in both cases the pending pre-freeze mandate is the globally correct next problem under the audit.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout ran in DEGRADED SCOUT MODE (model unavailable, rc=124): no external reconnaissance, `spider_evidence`, `external_directional_context` and `cross_lane_dependencies` were all empty, and its candidate directions were restatements of the pending pre-freeze mandates or of the lanes' own parent handoffs. It therefore could not and did not alter any allocation; I treated it as non-authoritative staff advice and reasoned from the machine snapshot, `codex/claim_state.json.effective_event_by_claim`, and the dated program audit. Where the Scout offered a discretionary alternative it was weighed and rejected on the merits: for Frontier it floated the recorded maintenance/invalidation economics thread as an alternative to the site-native-discovery question, but I chose the discovery question because it tests the load-bearing assumption of the current architecture synthesis (that Web depth makes state re-acquisition materially expensive), whereas the maintenance thread largely re-measures freshness economics already under Graph. For Graph, Physics, Runtime and Product the Scout's candidate directions coincide with the pre-freeze mandates I independently judged still correct, so no pivot was warranted. The Scout's advisory questions ('which blocker most constrains residual-novelty economics' and 'which lanes repeat measurement-repair whose prerequisite should be repaired once') were answered directly by the B1/B2/B3 allocation rather than by dispatching those lanes elsewhere."
+  },
+  "experiment_id": "EXP-INTEL-38013769440",
+  "inherited_last_verdict": "FALSIFIES",
+  "inherited_next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "lane": "intel",
+  "origin_github_run_id": "38013769440",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-37982024058",
+    "path": "research/experiments/EXP-INTEL-37982024058/handoff.json",
+    "sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "2cd3a1b46f2aa32620ca26b30c5bcd540cc985ac29a7c2914a63a4af93661a80",
+  "request_id": "995424891ad3a6fc035ca47b",
+  "schema_version": 1
+}
