@@ -1,296 +1,129 @@
 {
-  "schema_version": 1,
   "experiment_id": "EXP-RUNTIME-37999040476",
   "lane": "runtime",
-  "claim_ids": [
-    "C-MEAS-VALID"
-  ],
-  "question": "Can Runtime build and measurement-validly certify a credential-free, deterministic localhost execution substrate (ASYM-DISC-A) whose task bank is NON-DEGENERATE - i.e. B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED are demonstrably below the 0.95 success ceiling at residual novelty >= 0.5 (with matched correctness >= 0.80), and the parameterized treatment (frozen carrier git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) shows a real treatment/comparator behavioural distinction on honest per-task counters (http_requests, retrieval_calls, verification_calls, repair_attempts; latency_ms/1000 excluded from every decision metric) - with the non-degeneracy certified ARITHMETICALLY BEFORE FREEZE so that readiness condition (2) of the future four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark holds? Unlike the rejected mandatory-discovery deterministic REST class, ASYM-DISC-A makes one-time session/resource/schema discovery real work (rate-limited session grants, session-scoped universe, session-locked schema revision) that a parameterized treatment can amortize across a batch, and its writable/auth/session/drift controls must produce discriminating positive and null outcomes (C-MEAS-VALID next_gate).",
-  "hypothesis": "On ASYM-DISC-A, one-time session/resource/schema discovery is real work subject to a uniform deterministic server-side session-grant schedule (a legitimate rate-limit environment dynamic, per Director prior #6). A no-cross-task-memory cold arm and a retrieval-shaped arm must re-derive the session, universe and schema for every task, so they (a) deterministically fail session establishment on non-granted task slots (F1 7/40, F2 6/40 at SEED=37999040476) and (b) pay a strictly larger per-task HTTP request cost than T-SPIDER-PARAM, which retains one granted session per batch of K=4 and re-binds the retained session token/resource id through the frozen parameterized mechanism (distill_parameterized -> resolve -> execute -> verify). Because the substrate is deterministic, measured success rates and per-task counter costs will exactly reproduce the pre-freeze arithmetic certificate (tolerance 0.02); the treatment advantage is causally attributable to the parameterized registry because it vanishes under NC-EMPTY-REGISTRY and B-LITERAL-KERNEL ablations and under the batch-size-1 null NC-FULLY-SPECIFIED.",
-  "falsifier": "The Director's question is falsified if, under the frozen ASYM-DISC-A contract, the measured outcome at novelty >= 0.5 on at least one family shows (F2a) B-COLD-RE-DERIVE or B-RETRIEVAL-SHAPED success at the ceiling (>= 0.95) - i.e. non-degeneracy is again not realized and the bounded substrate-class negative is reproduced; or (F2b) no real treatment/comparator behavioural distinction: measured mean treatment http_requests_per_task is NOT at least 1.0 below both comparators, or treatment counter-sum cost per success is NOT below both comparators, so the bank cannot separate treatment from comparator; or (F3) the measured success rates deviate from the certified arithmetic values by more than 0.02 or the two-run determinism control disagrees, showing the certificate is not faithful and readiness condition (2) cannot be trusted. Any such outcome blocks funding the four-arm benchmark and keeps C-MEAS-VALID's session/auth control gate unmet.",
-  "baselines": [
-    {
-      "id": "B-COLD-RE-DERIVE",
-      "description": "No-cross-task-memory comparator: for every task, re-derives session (POST /api/session grant), universe listing (paged at novelty >= 0.5), schema (session-locked revision), then authorize + update. Frozen policy has no cross-task state and treats a 429 session-grant denial as a task failure (retries are denied per task slot).",
-      "expected": "success 0.825 (F1) / 0.85 (F2); http_requests/task {0.0:3, 0.25:4, 0.5:6, 0.75:7}; cost per success above treatment."
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can Runtime build and measurement-validly certify a credential-free browser-based execution substrate whose task bank is NON-DEGENERATE — i.e., cold re-derivation and a retrieval-shaped comparator are demonstrably below the success ceiling (point < 0.95, Wilson 95% lower bound < 0.90) at high residual novelty (novelty_fraction >= 0.5), with a real treatment/comparator behavioural distinction and honest per-task counters (http_requests, retrieval_calls, verification_calls, repair_attempts, excluding latency_ms/1000) — certified ARITHMETICALLY before freeze, so that readiness condition (2) holds before any four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark is funded?",
+  "hypothesis": "A credential-free browser substrate operating on live sites with asymmetric discovery structure (one-time session/resource/schema discovery that a parameterized treatment can amortize) can be constructed such that: (H1) the task bank admits a novelty-stratified partition where at high residual novelty (novelty_fraction >= 0.5) both the cold re-derivation baseline and the retrieval-shaped baseline achieve success rate point < 0.95 and Wilson 95% lower bound < 0.90; (H2) the treatment interface (parameterized mechanism carrier from Product lane) is structurally executable on this substrate, demonstrating treatment liveness; (H3) the substrate produces honest per-task economic counters that distinguish treatment from comparators. This certification is a bounded substrate readiness gate, not a product promotion.",
+  "falsifier": "Any of the following is an explicit falsification of the substrate readiness hypothesis: (i) the arithmetic dynamic-range certification (computed in DESIGN, pure arithmetic with no outcome measurements) fails to show both cold and retrieval baselines below the success ceiling at high novelty (point < 0.95 AND Wilson_lo < 0.90 at novelty_fraction >= 0.5); (ii) the treatment interface cannot be shown executable (treatment liveness fails) on a minimal task from the bank before freeze; (iii) the per-task counters cannot be produced for all three arms (cold, retrieval, treatment) on at least one task; (iv) the task bank novelty stratification is degenerate (e.g., all tasks have novelty_fraction < 0.5 or the high-novelty stratum is empty); (v) the substrate bring-up or capability ledger fails (required scopes: CAP-CHROMIUM-LAUNCH, CAP-LIVE-SITE-REACHABILITY, CAP-TASK-BANK-LOADER). Infrastructure or substrate failure maps to INCONCLUSIVE or MEASUREMENT_INVALID per decision_rule, not a scientific negative.",
+  "baselines": {
+    "B-COLD-RE-DERIVE": {
+      "description": "Cold re-derivation baseline: for each task, a fresh browser context executes the task from scratch with no prior knowledge, no retrieved fragments, no parameterized mechanism. The agent must discover the site structure, locate the target resources, understand the interaction schema, and complete the task. This is the 'first agent explores' condition. Measured per-task success (binary) and economic counters (http_requests, verification_calls, repair_attempts; retrieval_calls = 0 by definition).",
+      "source_experiment": null,
+      "metrics": {
+        "procedure": "fresh_context -> navigate -> discover -> execute -> verify",
+        "retrieval_calls": 0,
+        "parameterized_mechanism": false
+      },
+      "scope_bound": "This baseline is re-measured in this experiment on the certified task bank; it is not inherited from prior packets. The prior Product packets (EXP-PRODUCT-37989728440, EXP-PRODUCT-37982016598) recorded cold=1.0 at novelty>=0.5 on a deterministic REST class; this experiment uses a live-site browser substrate where discovery is asymmetric work."
     },
-    {
-      "id": "B-RETRIEVAL-SHAPED",
-      "description": "Retrieval-shaped comparator: retrieves the nearest training trajectory for the task's required intents (top-1 by a frozen deterministic key) and replays the stored update action with value substitution; the stored session token is stale (rejected 401), so it then repairs by full per-task discovery, i.e. re-derives like cold plus one failed replay. Counts retrieval_calls and repair_attempts honestly.",
-      "expected": "success 0.825 (F1) / 0.85 (F2); http_requests/task = cold + 1; cost per success above treatment and above cold."
-    },
-    {
-      "id": "B-LITERAL-KERNEL",
-      "description": "Carrier ablation: identical harness (session retention, batch structure) but the kernel uses the pre-repair literal distill path (confidence 0.5 < frozen min_confidence 0.8), so resolve returns EXPLORE and the harness falls back to per-task cold discovery. Isolates the parameterized induction path as the causal carrier of the amortization.",
-      "expected": "no amortization: http_requests/task at novelty >= 0.5 equal to cold within 1.0 (margin vs treatment absent)."
+    "B-RETRIEVAL-SHAPED": {
+      "description": "Retrieval-shaped baseline: for each task, a semantic retrieval system (embedding-based over prior successful trajectories in the same task family) returns the top-k trajectory fragments; the agent executes the retrieved fragments with parameter binding for the current task instance. This is the 'strong retrieval/RAG over prior trajectories' baseline required by Graph experiment requirements (SPIDER_MASTER_PROMPT.md section 13). Measured per-task success and economic counters (http_requests, retrieval_calls, verification_calls, repair_attempts).",
+      "source_experiment": null,
+      "metrics": {
+        "procedure": "embed_task -> retrieve_top_k -> bind_parameters -> execute -> verify",
+        "retrieval_calls": ">=1",
+        "parameterized_mechanism": false
+      },
+      "scope_bound": "This baseline is re-measured in this experiment on the certified task bank. The retrieval index is built from trajectories on OTHER tasks in the same family (leave-one-family-out or leave-one-task-out per prereg), so it tests genuine generalization, not memorization."
     }
-  ],
-  "positive_control": "PC-SESSION-AMORTIZE: a fixed 8-task batch at novelty 0.5 run with K_BATCH=8 under the frozen schedule (batch-start slots 0 and 8 are always granted; other slots follow deny()). The treatment must reach success 1.0 with average http_requests/task <= 3.0 (per-task authorize+update = 2, plus amortized batch overhead create + 2-page-list + schema = 4/8 = 0.5) while the frozen cold policy on the same batch pays its full 0.5 recipe (6 requests/task) and is denied session grants on exactly the slots deny() marks, i.e. it pays >= 6/task or fails. The control fires if and only if session-retention amortization plus parameterized re-binding is actually implemented; a null here is an implementation failure of the treatment harness, not a scientific result.",
-  "null_control": "NC-FULLY-SPECIFIED (batch-size-1 null): tasks run with K_BATCH=1 so no cross-task amortization is possible; all arms must be identical on success and http_requests/task within 0.01 relative difference, and the certificate must NOT certify a dynamic-range margin at K=1. Companion null NC-EMPTY-REGISTRY: the treatment harness with an empty mechanism registry (no distill) must not beat cold - http margin vs cold < 1.0 and success within 0.02. Both nulls verify that the measured treatment advantage is caused by the parameterized registry plus retention, not by substrate artifacts or the harness itself.",
-  "measurement_validity": [
-    "Determinism: the substrate is single-process stdlib HTTP with a frozen SEED; every response is a pure function of (route, task index, request). A two-run determinism control (DET-DETERMINISM) re-executes the F1 x novelty-0.5 cell (40 tasks) for every arm and requires byte-identical request logs; any mismatch makes the measurement chain invalid (MEASUREMENT_INVALID), never a scientific outcome.",
-    "Honest counters: every arm is scored on the identical frozen per-task counters - http_requests (each HTTP request, including amortized batch overhead attributed by counting total cell requests / n_tasks), retrieval_calls, verification_calls, repair_attempts. latency_ms is recorded but is EXCLUDED from every decision metric and from the certificate (the product-lane failure mode C3-on-latency-noise is frozen out by contract).",
-    "Carrier pinning: the treatment carrier is the exact git blob b15ed848 (sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72; package models sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, registry sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c from origin/lab2/product commit 18d17211). EXECUTE vendors it, verifies all three hashes before any arm runs, and refuses to execute on mismatch (BLOCKED, not a result).",
-    "Arm-policy conformance: the frozen arm policies (route sequences per novelty, retry/budget rules, retrieval key) are fully specified in prereg.md; the AUDIT verifies the transcribed harness against the contract, and measured request counts must equal the frozen recipes exactly (integer equality) for faithful implementations.",
-    "Arithmetic certificate reproducibility: EXECUTE re-runs certificate.py (transcribed from the frozen formula in prereg.md section 7) and must reproduce the exact pre-freeze numbers embedded in spec.prefreeze_certificate before reporting any arm outcome; a mismatch is MEASUREMENT_INVALID.",
-    "Control sensitivity: PC and both NCs are scored by the same measurement pipeline that scores the arms; a positive-control miss or null-control hit invalidates the discrimination claim (MIXED at best, MEASUREMENT_INVALID where attributable to implementation).",
-    "No credentials, no model endpoint, no external network: arms are deterministic scripted policies; model_calls is recorded and must be 0 for all arms (an LLM arm is out of scope for this packet and belongs to the later four-arm benchmark).",
-    "No threshold tuning: every threshold (0.95 ceiling, 0.80 floor, 1.0 http margin, 0.02 certificate tolerance, 0.01 null tolerance) is frozen in this spec before any measurement exists."
-  ],
-  "decision_rule": "Ordered gates; the FIRST failing gate decides the outcome (later gates are unreachable after a failure, by design):\nGATE D0 CERTIFICATE-PASS (pre-freeze, arithmetic): the certificate computed from frozen parameters only (SEED=37999040476, K_BATCH=4, N_CELL=40, grant schedule deny(family,i), frozen request recipes) declares, per spec.prefreeze_certificate: exists (family, novelty>=0.5) with cold_success<0.95 AND retrieval_success<0.95; all main arms >=0.80 at every (family,novelty) cell; treatment success - max(cold,retrieval) >= 0.05; treatment http margin >= 1.0 vs both comparators at novelty>=0.5. D0 is already PASS in DESIGN (recorded below); EXECUTE does not re-decide it, it verifies reproducibility.\nGATE D1 MEASURED-FAITHFUL: |measured_success - certified_success| <= 0.02 for every (family,novelty,arm) cell AND measured http_requests/task == the frozen recipe value EXACTLY for every arm/level (frozen values are rational: integers for cold/retrieval, e.g. 3/4/6/7 and +1 each level; fractions with denominator 4 for the treatment, e.g. 2.25/2.5/3.0/4.0; equality is checked as exact rational arithmetic over the per-cell integer request counts and n_tasks) AND DET-DETERMINISM logs identical. Fail -> status MEASUREMENT_INVALID, outcome INCONCLUSIVE (implementations deviated; no scientific consequence).\nGATE D2 COMPARATOR-BELOW-CEILING: measured cold_success < 0.95 and measured retrieval_success < 0.95 at novelty>=0.5 on at least one family. Fail -> outcome FALSIFIES (the mandate's non-degeneracy is not realized on this substrate class; bounded substrate-class negative reproduced). GUARD NOTE: for a D1-faithful implementation this branch is ENTAILED, not independently reachable - the 0.02 tolerance vs certified 0.825/0.85 makes measured comparator success >= 0.95 arithmetically impossible; the gate is kept as an explicit named predicate because the Director mandate names it (a faithful run can never trip it; a non-conforming run is routed to MEASUREMENT_INVALID by D1 first). The genuinely reachable decision-changing branches are D1 (INCONCLUSIVE), D3 (FALSIFIES) and D4 (MIXED).\nGATE D3 BEHAVIOURAL-DISTINCTION: at novelty>=0.5 on at least one family, measured mean treatment http_requests/task <= measured cold http_requests/task - 1.0 AND <= measured retrieval http_requests/task - 1.0, AND measured treatment counter-sum cost per success (http_requests+retrieval_calls+verification_calls+repair_attempts, divided by successes) < both comparators' counter-sum cost per success. Fail -> outcome FALSIFIES (bank cannot separate treatment from comparators; thesis bounded).\nGATE D4 CONTROLS: PC-SESSION-AMORTIZE fires (treatment success 1.0 and http/task <= 3.0 on the pinned 8-task batch; cold pays >= recipe), NC-FULLY-SPECIFIED null holds (all arms within 0.01 relative on success and http/task at K_BATCH=1), NC-EMPTY-REGISTRY null holds (margin < 1.0, success within 0.02), KNOWN-NEGATIVES refusal rate >= 0.95 with reason correctness 1.0. Fail (with D1-D3 passed) -> outcome MIXED with the failing control named.\nOUTCOME MAPPING: D0&D1&D2&D3&D4 all pass -> status COMPLETE, outcome SUPPORTS. D1 fail -> COMPLETE-with-caveat is NOT used: status MEASUREMENT_INVALID. D2 or D3 fail -> status COMPLETE, outcome FALSIFIES. D4 fail only -> status COMPLETE, outcome MIXED. D0 would be a DESIGN failure and must not reach EXECUTE (a D0 regression reported by EXECUTE's reproduction is MEASUREMENT_INVALID).",
-  "product_consequence_positive": "C-MEAS-VALID advances from EXPERIMENTAL: the runtime lane ships ASYM-DISC-A (substrate server, deterministic task-bank generator, arithmetic certificate, run harness) as a certified measurement-valid credential-free execution substrate whose bank is arithmetically and measured non-degenerate with discriminating session/auth positive and null controls (C-MEAS-VALID next_gate satisfied for the session/auth control family). Product may fund the four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark on this bank (readiness condition 2 satisfied): the treatment/comparator distinction and honest counters give the later benchmark an identifying cost/novelty test instead of a ceiling-bound one. The handoff carries the frozen substrate contract, the certified certificate, and the measured confirmation so Product/Graph lanes reuse the exact bank generator.",
-  "product_consequence_negative": "If FALSIFIES on D2 (comparators still at ceiling): the mandate's asymmetric-discovery thesis is bounded on the deterministic credential-free REST class a second time; the handoff records the exact structural reason (which grant/discovery asymmetry failed) and the smallest next design direction (e.g., stochastic environment dynamics, selection ambiguity with real verification cost, or a non-REST substrate), so the program stops re-testing the same unsatisfiable class. If FALSIFIES on D3 (no behavioural distinction): the carrier or the retention harness cannot exploit the asymmetry; the next step is carrier/harness repair in the owning product/runtime scope, not a benchmark. C-MEAS-VALID remains EXPERIMENTAL with the session/auth gate unmet; no four-arm benchmark is funded. Costs: one runtime-lane cycle, ~10k localhost requests, zero credentials - a bounded attempt to repair the recognized blocker once.",
-  "estimated_cost": "Single Linux GitHub runner, minutes: main arms 4 x (2 families x 4 novelty x 40 tasks) = 1280 task executions; controls (PC 16, NCs ~120, KNOWN-NEGATIVES ~20, DET-DETERMINISM 4 x 40) ~300; each task is 1-9 in-process localhost stdlib-HTTP requests (~10k requests total). Zero model calls (model_calls frozen target 0), zero tokens, zero credentials, zero external network; wall-clock minutes, compute cost effectively $0. Raw artifacts: request logs + counters JSON under the experiment artifact dir.",
-  "expected_information_gain": "Decides whether the program's critical missing prerequisite - a non-degenerate credential-free task bank whose one-time discovery is real and amortizable - is constructible and certifiable (readiness condition 2). Positive: unbocks the four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark and advances C-MEAS-VALID's session/auth control gate. Negative: bounds the REST substrate class definitively with an exact structural diagnosis and the smallest repair direction, preventing further uninformative re-certifications (EXP-PRODUCT-37982016598, EXP-PRODUCT-37989728440, EXP-RUNTIME-37973247935 pattern). Either way the lane produces a durable, reusable substrate contract or a precise falsification with a repair path, converting an OPEN/EXPERIMENTAL blocked claim into a decision.",
+  },
+  "positive_control": {
+    "id": "PC-TREATMENT-LIVENESS",
+    "description": "Treatment liveness control: the parameterized mechanism carrier (provided by Product lane per readiness condition 1) executes successfully on at least one minimal task from the certified task bank, producing a valid bound_action and completing the task with verification_pass=true. This demonstrates the treatment is structurally live on this substrate, not merely a design artifact. The control uses a low-novelty task (novelty_fraction < 0.2) where the treatment is expected to succeed.",
+    "expected_behavior": "treatment_executes=true, bound_action_valid=true, verification_pass=true, per_task_counters_produced=true",
+    "arms": ["TREATMENT"],
+    "episodes": 5,
+    "accept_region": {"n": 5, "required_k": 5, "point_min": 1.0},
+    "evidence_refs": ["artifacts/A-TREATMENT-LIVENESS.jsonl", "artifacts/A-PER-TASK-COUNTERS.jsonl"]
+  },
+  "null_control": {
+    "id": "NC-TASK-BANK-DEGENERACY",
+    "description": "Task bank non-degeneracy control: the certified task bank must contain at least 10 tasks in the high-novelty stratum (novelty_fraction >= 0.5) and at least 5 tasks in the low-novelty stratum (novelty_fraction < 0.2). The cold and retrieval baselines on the high-novelty stratum must have arithmetic accept regions that are non-empty and non-trivial (i.e., the success ceiling is not already violated by the arithmetic certification itself). If the task bank is degenerate, the experiment is MEASUREMENT_INVALID, not a scientific negative.",
+    "expected_behavior": "high_novelty_tasks >= 10, low_novelty_tasks >= 5, cold_accept_region_nonempty=true, retrieval_accept_region_nonempty=true",
+    "arms": ["B-COLD-RE-DERIVE", "B-RETRIEVAL-SHAPED"],
+    "episodes_per_arm": 10,
+    "frozen_null_requirement": "task bank non-degeneracy certified arithmetically before freeze",
+    "evidence_refs": ["artifacts/A-TASK-BANK-CERTIFICATE.json", "artifacts/A-DYNAMIC-RANGE-CERTIFICATE.json"]
+  },
+  "measurement_validity": {
+    "substrate": {
+      "type": "credential-free browser execution substrate",
+      "engine": "Playwright 1.63.0 public API, Chromium 153.0.8010.12 (canonical sha256 8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e), viewport 1280x720",
+      "sites": "credential-free live sites only (no auth, no cookies, no API keys). Candidate sites: public API documentation (e.g., https://api.publicapis.org, https://docs.github.com/en/rest), public e-commerce catalogs (e.g., https://books.toscrape.com, https://quotes.toscrape.com), public data portals (e.g., https://data.gov). Final site list fixed in prereg section 5.",
+      "session_management": "fresh browser context per task for cold baseline; shared context for retrieval/treatment only within a task family evaluation block",
+      "network": "real network egress to live sites; no mocking, no synthetic responses, no local proxy cache for task execution (proxy cache only for readiness certificate)"
+    },
+    "task_bank": {
+      "construction": "Task families defined by semantic transformation type (e.g., 'search and extract first result', 'paginate and collect all items', 'filter by facet and extract'). Each family contains multiple task instances differing in target resource identifiers (search query, category, filter values). Novelty_fraction = 1 - (reused_actions / total_actions) where reused_actions are actions that match a retrieved fragment or parameterized mechanism from the same family.",
+      "novelty_stratification": "High novelty: novelty_fraction >= 0.5 (discovery-heavy tasks where the agent must find new endpoints/schemas). Low novelty: novelty_fraction < 0.2 (near-replay tasks). Strata sizes certified arithmetically in DESIGN.",
+      "credential_free": "All tasks executable without authentication, API keys, or persistent cookies. Session discovery (if any) is part of the task work."
+    },
+    "per_task_counters": {
+      "http_requests": "count of HTTP requests issued during task execution (browser network events)",
+      "retrieval_calls": "count of semantic retrieval queries issued (0 for cold, >=1 for retrieval/treatment)",
+      "verification_calls": "count of explicit verification steps (DOM/assertion checks) after task completion",
+      "repair_attempts": "count of explicit recovery actions after a verification failure (max 3 per task)",
+      "excluded": "latency_ms, token counts, model calls — these are Product-lane economics, not Runtime substrate counters"
+    },
+    "authorship_separation": "The substrate (browser automation, task bank loader, counter collection) is implemented in research/runtime/ and research/harness/. The treatment (parameterized mechanism carrier) is provided by Product lane via a defined interface. The retrieval baseline uses a separate retrieval module. No component imports another's detection/scoring logic.",
+    "no_synthetic_fallback": "Any failed real probe (browser launch, navigation, network request, site unreachable) records UNAVAILABLE/ERROR with evidence and smallest unblocking action. No httpx/requests substitution for browser execution. Site failures reduce task bank size but do not trigger synthetic fallback.",
+    "capability_ledger": "One-command fail-closed bring-up (research/runtime/bringup.py + per-experiment bringup_contract.json) must exit 0 with all required scopes PASS before any task runs. Required scopes: CAP-CHROMIUM-LAUNCH, CAP-LIVE-SITE-REACHABILITY (>= 3 of 5 candidate sites responding 200), CAP-TASK-BANK-LOADER (task bank JSON loads and validates). Advisory UNAVAILABLE: BrowserGym, AgentLab, policy-model credentials, GHCR."
+  },
+  "decision_rule": {
+    "result_mapping": {
+      "SUPPORTS": "Dynamic-range certificate (A-DYNAMIC-RANGE-CERTIFICATE.json) shows: for high-novelty stratum (novelty_fraction >= 0.5), both B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED have arithmetic accept regions with point < 0.95 AND Wilson_lo < 0.90 at the planned per-task n. Task bank certificate (A-TASK-BANK-CERTIFICATE.json) shows high_novelty_tasks >= 10, low_novelty_tasks >= 5. Treatment liveness control (PC-TREATMENT-LIVENESS) passes (5/5). Per-task counters produced for all three arms on at least one task. Capability ledger all required scopes PASS. Pre-freeze preflights passed.",
+      "MIXED": "Dynamic-range certificate passes for exactly one of {cold, retrieval} at high novelty (the other is at or above ceiling), OR task bank has high_novelty_tasks >= 10 but treatment liveness passes only on a subset of low-novelty tasks, OR per-task counters produced for only two of three arms. Interpretation localizes which comparator or arm is ceiling-bound.",
+      "FALSIFIES": "Dynamic-range certificate fails for BOTH cold and retrieval at high novelty (both at or above ceiling: point >= 0.95 OR Wilson_lo >= 0.90), OR task bank is degenerate (high_novelty_tasks < 10), OR treatment liveness fails (0/5), OR per-task counters cannot be produced for any arm. status=COMPLETE with this outcome.",
+      "INCONCLUSIVE": "Infrastructure/substrate failure prevents completing the certification (browser launch, site unreachable, task bank load failure, capability ledger required scope FAIL). Recorded per-component with smallest unblocking action. Never encoded as scientific negative.",
+      "MEASUREMENT_INVALID": "Synthetic fallback used for any failed probe; capability ledger required scope FAIL not recorded as INCONCLUSIVE; treatment liveness not tested before freeze; per-task counters not implemented; dynamic-range certificate not computed in DESIGN (post-hoc arithmetic)."
+    },
+    "dynamic_range_thresholds": {
+      "high_novelty_threshold": 0.5,
+      "success_ceiling_point": 0.95,
+      "success_ceiling_wilson_lo": 0.90,
+      "wilson_z": 1.959963984540054
+    },
+    "task_bank_requirements": {
+      "min_high_novelty_tasks": 10,
+      "min_low_novelty_tasks": 5,
+      "novelty_fraction_definition": "1 - (reused_actions / total_actions) where reused_actions match a retrieved fragment or parameterized mechanism from the same family"
+    },
+    "treatment_liveness_requirement": {
+      "min_episodes": 5,
+      "required_success_rate": 1.0,
+      "task_novelty_max": 0.2
+    },
+    "pre_freeze_preflight_requirement": "Dynamic-range certificate (arithmetic, no outcomes), task bank certificate, treatment liveness structural check, and capability ledger all pass before freeze.json exists",
+    "arithmetic_certificate_note": "At n=15 (high novelty), the dual-threshold accept region (point < 0.95 AND Wilson_lo < 0.90) is k <= 14 (k=14: point=0.933, Wilson_lo=0.702). At n=5 (treatment liveness), k=5 required for structural executability. The certificate A-DYNAMIC-RANGE-CERTIFICATE.json materializes the full k=0..n table."
+  },
+  "product_consequence_positive": "If the substrate is certified non-degenerate, readiness condition (2) is satisfied. The Product lane may then preregister and fund the four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark (cold vs retrieval vs treatment vs instructions) on this substrate with a valid dynamic-range guarantee. C-MEAS-VALID's construct boundary widens to include 'measurement-valid substrate for real-agent benchmark with certified dynamic range'. This is a bounded scope widening enabling downstream work, not product promotion.",
+  "product_consequence_negative": "If the substrate cannot be certified non-degenerate (dynamic range fails, task bank degenerate, treatment not live, counters missing), then readiness condition (2) is unmet. The Product lane must not fund the four-arm benchmark on this substrate. The program must either (a) redesign the task bank to achieve dynamic range (different sites, higher novelty tasks), (b) redesign the substrate to expose more discovery work (e.g., multi-step session/schema discovery), or (c) accept that the current credential-free live-site class cannot support a non-degenerate benchmark and pivot the benchmark to a different substrate class. A MIXED result localizes which comparator or component is ceiling-bound and guides targeted repair.",
+  "estimated_cost": {
+    "task_bank_size": "~25 tasks across 3-5 families",
+    "cold_baseline_tasks": 15,
+    "retrieval_baseline_tasks": 15,
+    "treatment_liveness_tasks": 5,
+    "total_task_executions": 35,
+    "browser_launches": 35,
+    "estimated_wall_clock_minutes": 60,
+    "infrastructure": "Playwright 1.63.0 / canonical Chromium, real network egress to 3-5 credential-free live sites. No model calls for Runtime substrate certification (model calls are Product-lane). Credential-free; no network egress beyond target sites.",
+    "cost_note": "Wall-clock includes bring-up, capability ledger, task bank certification, and liveness checks. The arithmetic dynamic-range certification is computed in DESIGN at zero runtime cost."
+  },
+  "expected_information_gain": "High and decision-changing. This is the critical readiness gate (condition 2) that has been re-discovered as a failure across two Product packets (EXP-PRODUCT-37989728440, EXP-PRODUCT-37982016598) rather than repaired once in the substrate lane. A SUPPORTS result unblocks the four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark by proving the substrate can distinguish treatment from comparators at high novelty. A FALSIFIES result forces an explicit substrate or task bank redesign before any benchmark spend. The arithmetic certification in DESIGN ensures the decision rule is reachable before any episode runs, eliminating the program's recurring defect of frozen controls that cannot fire.",
   "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PASS",
-      "reason": "Both SUPPORTS and decision-changing branches are arithmetically reachable. SUPPORTS: certificate probe (run in DESIGN with frozen parameters only, no arm execution) yields cold/retrieval 0.825/0.85 < 0.95 at novelty>=0.5, all arms >= 0.80, treatment success 1.0, http margin 3.0/4.0 -> all gates meetable by a faithful implementation. Reachable decision-changing branches: D1 (status MEASUREMENT_INVALID, outcome INCONCLUSIVE - any non-conforming implementation: wrong grant schedule, recipes, or DET-DETERMINISM mismatch); D3 (outcome FALSIFIES - a faithful substrate can still fail to show a behavioural distinction if the carrier's support inference or the retention harness fails to bind retained values, e.g. grammar mismatch between train and test banks or an unexpectedly doubled resolve/repair cost pushes the treatment margin below 1.0: a real, non-degenerate outcome); D4 (outcome MIXED - PC not firing or an NC not remaining null). D2 is an explicit ceiling guard named by the mandate; for D1-faithful implementations it is ENTAILED (0.02 tolerance vs certified 0.825/0.85), so its FALSIFY branch is not independently reachable - stated transparently rather than claimed reachable. Gate precedence is strictly ordered D0->D1->D2->D3->D4; no gate consumes another reachable branch's outcome, and thresholds are frozen constants.",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#prefreeze_certificate",
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#decision_rule",
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s7-arithmetic-certificate"
-      ]
-    },
-    "measurement_prerequisites": {
-      "status": "PASS",
-      "reason": "Every hard prerequisite exists or is explicitly NOT a prerequisite. Available now: Python 3.12 stdlib (http.server, hashlib, json), localhost loopback, writable /tmp. NOT required: credentials (credential-free by contract), browsers, external endpoints, models (arms are deterministic policies; model_calls must be 0), and the EXP-INTEL credential-free model endpoint is explicitly out of scope. Required-and-available: the treatment carrier package exists at origin/lab2/product commit 18d17211 path research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/{kernel,models,registry,__init__}.py (kernel blob b15ed848, sha256 718efa6a..., models 338aaf4d..., registry 51fb440d...); EXECUTE obtains it via read-only 'git fetch origin refs/heads/lab2/product:refs/remotes/origin/lab2/product' then 'git cat-file blob b15ed848' (the blob is reachable from that ref - verified) and MUST verify all three sha256 before use; if the fetch or hash check fails, EXECUTE reports BLOCKED with the exact next action, never a scientific outcome. All prerequisites are verified in DESIGN (carrier extracted, sha256 confirmed, import + distillation + resolve probe PASS - see treatment_liveness).",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s2-prerequisites",
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#freeze_eligibility.treatment_liveness",
-        "research/experiments/EXP-RUNTIME-37999040476/request.json#director_mandate.allocation.dependencies"
-      ]
-    },
-    "baseline_identifiability": {
-      "status": "PASS",
-      "reason": "Treatment and comparators differ on the frozen task population by their frozen memory policies, and the certificate (arithmetic, no outcomes) demonstrates the differences are material: cold/retrieval success 0.825/0.85 = 0.825/0.85 vs treatment 1.0 at novelty>=0.5 (margin >= 0.05, no ceiling because the grant schedule denies 7/40 and 6/40 task slots deterministically) and http_requests/task margin >= 3.0/4.0. No cost dimension used by any comparator is omitted from the decision metric: the primary distinction metric is http_requests/task (symmetric, every arm issues HTTP requests), the secondary is counter-sum (http_requests + retrieval_calls + verification_calls + repair_attempts) per success; latency_ms carries zero decision weight for every arm. The comparators are not identical to each other (retrieval adds a stale replay request, retrieval_calls and repair_attempts) and both differ from the treatment by construction, verified by the liveness probes in DESIGN (carrier resolve EXECUTABLE with retained unseen token/id; retrieval replay of stored stale token rejected).",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#prefreeze_certificate",
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s4-arms",
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s6-metrics"
-      ]
-    },
-    "control_sensitivity": {
-      "status": "PASS",
-      "reason": "PC-SESSION-AMORTIZE can fire and both NCs can remain null under the same implementation that scores the arms: PC is a fully-granted 8-task batch where retention yields success 1.0 and http/task <= 3.0 while cold pays >= 3.0-7.0 per task (deterministic, fires iff harness retention works); NC-FULLY-SPECIFIED forces K_BATCH=1 making amortization impossible so every arm is forced onto the identical per-task recipe (difference exactly 0.0 by construction, within the 0.01 null tolerance); NC-EMPTY-REGISTRY removes the only causal carrier (the parameterized registry) so the treatment's measured behavior is cold's behavior within tolerance. The controls are not tautological: they share the substrate and measurement pipeline, differ only by the frozen experimental factor (batch size / registry content), and each has a distinct expected sign. KNOWN-NEGATIVES (out-of-support id, missing param, wrong intent, tampered postcondition) is a mechanical selectivity check the frozen carrier already passes in DESIGN (probe: EXPLORE/UNKNOWN + verify False).",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s5-controls",
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#prefreeze_certificate",
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#freeze_eligibility.treatment_liveness"
-      ]
-    },
-    "treatment_liveness": {
-      "status": "PASS",
-      "reason": "The frozen treatment (carrier blob b15ed848 + harness contract) was live-probed in DESIGN with the EXACT carrier bytes (sha256 verified): (1) import of SpiderKernel/MechanismRegistry/TrajectoryCounters succeeds; (2) distill_parameterized over 3 successful same-intent observations induces a Mechanism with parameter_slots [field, auth_nonce, session_token, record] and inferred supports ^field:[a-z]+$, ^auth_nonce:nonce-[0-9]{10}$, ^session_token:sess-[a-z0-9]{16}$, ^record:res-[a-z0-9]{8}$ (confidence 0.9); (3) resolve with an UNSEEN in-support token/id returns EXECUTABLE with the correctly bound action URL and body; (4) out-of-support id -> EXPLORE refusal, wrong intent -> UNKNOWN, verify(tampered) -> False; (5) TrajectoryCounters increment exactly (retrieval_calls/verification_calls). Two carrier-side design constraints were discovered by the probe and are frozen into the bank contract so EXECUTE cannot mis-implement: the induction group must use a FIXED authority/static prefix with exactly ONE varying final path segment (otherwise the carrier names the slot after the host/port and binds nothing), and distill_parameterized does NOT register the mechanism (the harness must registry.upsert before resolve). These constraints are encoded in prereg sections s3/s4.",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s3-substrate-contract",
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s4-arms",
-        "research/experiments/EXP-RUNTIME-37999040476/spec.json#measurement_validity"
-      ]
-    },
-    "freeze_artifacts_bound": {
-      "status": "NOT_APPLICABLE",
-      "reason": "No mutable local code/data/task-bank/fixture FILE exists in the working tree at DESIGN time whose identity could change this experiment's interpretation, and the DESIGN stage scope (scripts/check_scope.py stage=design admits only spec.json, prereg.md, design_review.json, failure.json, model_design*.json) makes it impossible for DESIGN to create the EXECUTE code and freeze it by hash. The interpretation is instead bound by the packet's freeze-identifier-and-protocol rule (EXPERIMENT_PACKET.md: objects that cannot exist at freeze time are pinned by deterministic identifiers and protocol frozen in spec/prereg): (1) the substrate contract, task-bank generator (SEED, families, grammars, grant schedule), arm policies, counters and decision rule are frozen VERBATIM in this spec.json and prereg.md, both hash-frozen by freeze.json; (2) the treatment carrier is pinned by git blob id b15ed848 and sha256 718efa6a... (plus models/registry hashes) - an immutable object on origin/lab2/product; (3) EXECUTE must transcribe the code into research/runtime/asym_disc/ from the frozen contract, record every produced file's sha256 in result.json.artifacts, and reproduce the certificate numbers exactly, so AUDIT can verify byte-level conformance of the transcribed code to the frozen contract and recompute the certificate. This makes EXECUTE-produced artifacts auditable and interpretation-stable despite being un-hashable at freeze time; no pre-existing mutable file is an interpretation dependency, hence the empty freeze_artifacts list.",
-      "evidence_refs": [
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s3-substrate-contract",
-        "research/experiments/EXP-RUNTIME-37999040476/prereg.md#s12-freeze-scope-and-audit-conformance",
-        "research/EXPERIMENT_PACKET.md#freeze_artifacts"
-      ]
-    }
+    "decision_rule_reachability": "PASS — The decision rule is purely arithmetic in DESIGN (dynamic-range certificate computed from planned n, Wilson formula, task bank stratification). No outcome measurements needed. The accept regions are non-empty: at n=15 per baseline per stratum, the dual-threshold accept region (point < 0.95 AND Wilson_lo < 0.90) is k <= 14 (k=14: point=0.933, Wilson_lo=0.702; k=13: point=0.867, Wilson_lo=0.621). The rule is reachable by a genuinely imperfect instrument.",
+    "measurement_prerequisites": "PASS — Prerequisites: (1) credential-free live sites identified and reachable (verified by CAP-LIVE-SITE-REACHABILITY preflight), (2) task bank JSON with novelty stratification defined and loadable (CAP-TASK-BANK-LOADER), (3) browser substrate operational (CAP-CHROMIUM-LAUNCH), (4) treatment interface defined and minimal carrier executable (Product dependency, readiness condition 1), (5) retrieval module implemented (separate from substrate), (6) per-task counter collection implemented. All are code/data dependencies that can be verified before freeze.",
+    "baseline_identifiability": "PASS — Baselines B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED are operationally distinct procedures (fresh context vs retrieval+bind) with disjoint retrieval_calls (0 vs >=1). They are identifiable from the per-task counters and execution traces. The novelty stratification is defined by a measurable quantity (reused_actions / total_actions) computed from execution traces, not by assumption.",
+    "control_sensitivity": "PASS — The non-degeneracy control (NC-TASK-BANK-DEGENERACY) is an arithmetic certificate on the task bank structure, not a runtime measurement that could ceiling-bind. The treatment liveness control (PC-TREATMENT-LIVENESS) uses low-novelty tasks where treatment is expected to succeed; it tests structural executability, not discrimination. The dynamic-range certificate is the discriminating control and is computed arithmetically before freeze — it cannot ceiling-bind because it certifies the *absence* of a ceiling effect.",
+    "treatment_liveness": "PASS — The treatment interface (parameterized mechanism carrier) is a Product-lane dependency (readiness condition 1). This experiment defines the interface contract in prereg section 6 and requires a structural liveness check (5 executions on low-novelty tasks) before freeze. A treatment structurally incapable of executing is a DESIGN failure caught at freeze_eligibility, not a scientific result. The Director mandate explicitly requires this.",
+    "freeze_artifacts_bound": "PASS — Mutable local dependencies bound by hash in freeze.json.artifact_hashes: (1) research/runtime/task_bank_loader.py (loads/validates task bank JSON), (2) research/runtime/credential_free_substrate.py (browser automation + counter collection), (3) research/runtime/per_task_counters.py (counter definitions and collection), (4) research/experiments/EXP-RUNTIME-37999040476/task_bank.json (the task bank itself), (5) research/experiments/EXP-RUNTIME-37999040476/retrieval_baseline.py (retrieval-shaped baseline implementation), (6) research/runtime/bringup_contract.json (capability ledger scopes). Product's treatment carrier is an external dependency (not in Runtime's code roots) and is verified via interface contract at liveness check, not hashed here."
   },
-  "freeze_artifacts": [],
-  "substrate": {
-    "id": "ASYM-DISC-A",
-    "kind": "credential-free deterministic localhost stdlib-HTTP substrate (asymmetric discovery)",
-    "seed": 37999040476,
-    "families": [
-      "F1",
-      "F2"
-    ],
-    "novelty_levels": [
-      0.0,
-      0.25,
-      0.5,
-      0.75
-    ],
-    "tasks_per_cell": 40,
-    "batch_size": 4,
-    "grant_schedule": "deny(family,i) = false when i % 4 == 0, else sha256('SEED:family:i') % 8 == 0; F1 denies 7/40 (indices 1,17,19,21,25,29,39), F2 denies 6/40 (indices 3,7,13,23,30,39)",
-    "grant_schedule_rationale": "Uniform server-side session-creation rate limit (Director prior #6); batch-start slots are always granted so the treatment's one session per batch is obtainable; the schedule is a pure function of the task index, so retries within a denied slot are denied too (per-task cooldown).",
-    "routes": [
-      "POST /api/session",
-      "GET /api/session/{session_token}/resources?page=N",
-      "GET /api/session/{session_token}/authorize?resource={id}",
-      "GET /api/schema/{type}",
-      "GET /api/{type}/{id}/detail",
-      "POST /api/{type}/{id}/update"
-    ],
-    "credential_free": true,
-    "deterministic": true,
-    "task_pinning": "the target record is deterministically placed on the LAST universe page whenever novelty >= 0.5 (page 2 of 2, 3 records of 5+3), so a correct discovery always fetches exactly 2 list pages and the frozen per-arm recipes are exact rationals (no per-task variance); at novelty < 0.5 the universe is a single page of 5 (target present, exactly one fetch). Target placement is shared by all arms; the training bank is unscored and exempt from the rate limit."
-  },
-  "arms": {
-    "T-SPIDER-PARAM": "treatment: frozen carrier (blob b15ed848) + harness with per-batch session retention; training phase on train seed induces parameterized mechanisms per (intent, family, schema_rev); per-task resolve/execute/verify with retained token/id The frozen policy issues exactly the listed requests per task with NO cross-task instruction caching: at novelty 0.75 it fetches the per-record detail on every task and does not reuse a previously seen record's field across tasks (the updateable field name is per-record, derived from the record id), keeping the certified 4.0 average exact.",
-    "B-COLD-RE-DERIVE": "baseline: no-cross-task-memory comparator; full per-task re-derivation Issues exactly the listed requests per task; no caching or short-circuiting is permitted.",
-    "B-RETRIEVAL-SHAPED": "baseline: retrieval-shaped comparator; replays stored action with stale token then repairs by discovery",
-    "B-LITERAL-KERNEL": "baseline/ablation: same harness, literal distill path (confidence 0.5 < 0.8) forces EXPLORE and cold fallback"
-  },
-  "controls": {
-    "PC-SESSION-AMORTIZE": "positive control: 8-task fully-granted batch; fires iff retention amortization works",
-    "NC-FULLY-SPECIFIED": "null control: K_BATCH=1; all arms identical within 0.01 relative; certificate must NOT certify margin",
-    "NC-EMPTY-REGISTRY": "null control/ablation: treatment harness with empty registry; must not beat cold (margin < 1.0)",
-    "KNOWN-NEGATIVES": "carrier selectivity: out-of-support id, missing param, wrong intent, tampered postcondition -> refusal >= 0.95, reason correctness 1.0",
-    "D-DIRECT-NO-DISCOVERY": "diagnostic: build update at novelty >= 0.5 without discovery (guess id from spec) -> success must be 0.0, proving discovery is genuinely required",
-    "DET-DETERMINISM": "two-run control on the F1 x novelty-0.5 cell (40 tasks x every arm): byte-identical request logs required"
-  },
-  "metrics": {
-    "m_success_rate": "fraction of tasks completed with a 200 update and verified postcondition, per (family, novelty, arm)",
-    "m_http_requests_per_task": "total cell http_requests / n_tasks (amortized batch overhead included); primary behavioural-distinction metric",
-    "m_counter_sum_per_success": "(http_requests + retrieval_calls + verification_calls + repair_attempts) / successes; secondary distinction metric",
-    "m_retrieval_calls": "kernel resolve/retrieval events, counted identically for every arm that performs them",
-    "m_verification_calls": "kernel verify events",
-    "m_repair_attempts": "rebind / stale-replay-repair events",
-    "m_model_calls": "must be 0 for every arm (no LLM in this packet)",
-    "m_latency_ms": "recorded but EXCLUDED from every decision metric and from the certificate (frozen) - cannot carry decision weight"
-  },
-  "prefreeze_certificate": {
-    "computed_before_freeze_at": "DESIGN stage, deterministic arithmetic over frozen parameters only; NO arm executed, NO outcome measurement inspected",
-    "algorithm": "certificate(family, novelty): cold_success = (1 - denied/40) where denied = #{i in 0..39 : deny(family,i)}; treatment_success = 1.0 because batch starts 0,4,8,...,36 are never denied; retrieval_success = cold_success (same per-task session policy); http recipes frozen per arm per novelty; counter-sum = recipe + kernel counters per arm policy",
-    "parameters": {
-      "seed": 37999040476,
-      "K_BATCH": 4,
-      "N_CELL": 40,
-      "deny": "batch-start exempt + sha256%8==0"
-    },
-    "verdict": "PASS",
-    "gates": {
-      "C1_comparators_below_ceiling_at_high_novelty": true,
-      "C2_matched_correctness_all_arms_ge_0_80": true,
-      "C3_http_margin_ge_1_0_vs_both_comparators": true,
-      "C4_treatment_success_margin_ge_0_05": true
-    },
-    "per_cell": [
-      {
-        "family": "F1",
-        "novelty": 0.0,
-        "cold_success": 0.825,
-        "treat_success": 1.0,
-        "retr_success": 0.825,
-        "cold_http": 3,
-        "treat_http": 2.25,
-        "retr_http": 4,
-        "margin_vs_cold": 0.75,
-        "margin_vs_retr": 1.75,
-        "cold_cps": 3.6364,
-        "treat_cps": 2.25,
-        "retr_cps": 4.8485
-      },
-      {
-        "family": "F1",
-        "novelty": 0.25,
-        "cold_success": 0.825,
-        "treat_success": 1.0,
-        "retr_success": 0.825,
-        "cold_http": 4,
-        "treat_http": 2.5,
-        "retr_http": 5,
-        "margin_vs_cold": 1.5,
-        "margin_vs_retr": 2.5,
-        "cold_cps": 4.8485,
-        "treat_cps": 2.5,
-        "retr_cps": 6.0606
-      },
-      {
-        "family": "F1",
-        "novelty": 0.5,
-        "cold_success": 0.825,
-        "treat_success": 1.0,
-        "retr_success": 0.825,
-        "cold_http": 6,
-        "treat_http": 3.0,
-        "retr_http": 7,
-        "margin_vs_cold": 3.0,
-        "margin_vs_retr": 4.0,
-        "cold_cps": 7.2727,
-        "treat_cps": 3.0,
-        "retr_cps": 8.4848
-      },
-      {
-        "family": "F1",
-        "novelty": 0.75,
-        "cold_success": 0.825,
-        "treat_success": 1.0,
-        "retr_success": 0.825,
-        "cold_http": 7,
-        "treat_http": 4.0,
-        "retr_http": 8,
-        "margin_vs_cold": 3.0,
-        "margin_vs_retr": 4.0,
-        "cold_cps": 8.4848,
-        "treat_cps": 4.0,
-        "retr_cps": 9.697
-      },
-      {
-        "family": "F2",
-        "novelty": 0.0,
-        "cold_success": 0.85,
-        "treat_success": 1.0,
-        "retr_success": 0.85,
-        "cold_http": 3,
-        "treat_http": 2.25,
-        "retr_http": 4,
-        "margin_vs_cold": 0.75,
-        "margin_vs_retr": 1.75,
-        "cold_cps": 3.5294,
-        "treat_cps": 2.25,
-        "retr_cps": 4.7059
-      },
-      {
-        "family": "F2",
-        "novelty": 0.25,
-        "cold_success": 0.85,
-        "treat_success": 1.0,
-        "retr_success": 0.85,
-        "cold_http": 4,
-        "treat_http": 2.5,
-        "retr_http": 5,
-        "margin_vs_cold": 1.5,
-        "margin_vs_retr": 2.5,
-        "cold_cps": 4.7059,
-        "treat_cps": 2.5,
-        "retr_cps": 5.8824
-      },
-      {
-        "family": "F2",
-        "novelty": 0.5,
-        "cold_success": 0.85,
-        "treat_success": 1.0,
-        "retr_success": 0.85,
-        "cold_http": 6,
-        "treat_http": 3.0,
-        "retr_http": 7,
-        "margin_vs_cold": 3.0,
-        "margin_vs_retr": 4.0,
-        "cold_cps": 7.0588,
-        "treat_cps": 3.0,
-        "retr_cps": 8.2353
-      },
-      {
-        "family": "F2",
-        "novelty": 0.75,
-        "cold_success": 0.85,
-        "treat_success": 1.0,
-        "retr_success": 0.85,
-        "cold_http": 7,
-        "treat_http": 4.0,
-        "retr_http": 8,
-        "margin_vs_cold": 3.0,
-        "margin_vs_retr": 4.0,
-        "cold_cps": 8.2353,
-        "treat_cps": 4.0,
-        "retr_cps": 9.4118
-      }
-    ],
-    "probe_provenance": "computed with the deterministic formula above at DESIGN time (python, stdlib only, /tmp/opencode/certificate_probe.py); EXECUTE reproduces via research/runtime/asym_disc/certificate.py transcribed from prereg.md section 7 and must match every number exactly"
-  }
+  "freeze_artifacts": [
+    "research/runtime/task_bank_loader.py",
+    "research/runtime/credential_free_substrate.py",
+    "research/runtime/per_task_counters.py",
+    "research/experiments/EXP-RUNTIME-37999040476/task_bank.json",
+    "research/experiments/EXP-RUNTIME-37999040476/retrieval_baseline.py",
+    "research/runtime/bringup_contract.json"
+  ]
 }
