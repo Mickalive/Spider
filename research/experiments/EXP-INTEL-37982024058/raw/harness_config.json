@@ -1,0 +1,80 @@
+{
+  "fixture_id": "FIX-CFG-EXP-INTEL-37982024058",
+  "source": "frozen prereg.md sections 3-6 and spec.json measurement_validity; constructed before any outcome-bearing measurement",
+  "task": {
+    "name": "MIN-WEBAGENT-CLICK-REVEAL-ANSWER",
+    "description": "Click #reveal-btn then answer TARGET-42 (identical semantic task to parent EXP-INTEL-37973264582 Gate 2)",
+    "page_html": "<!DOCTYPE html>\n<html>\n<body>\n  <button id=\"reveal-btn\">Reveal</button>\n  <div id=\"target\" style=\"display:none\">TARGET-42</div>\n  <script>\n    document.getElementById('reveal-btn').onclick = () => {\n      document.getElementById('target').style.display = 'block';\n      document.getElementById('reveal-btn').style.display = 'none';\n    };\n  </script>\n</body>\n</html>\n",
+    "served_via": "local python http.server on 127.0.0.1 random port",
+    "max_steps_per_episode": 5,
+    "threshold_target_text": "TARGET-42"
+  },
+  "action_schema": {
+    "description": "Valid actions; any parse error, schema violation, or missing required field = parse failure",
+    "click": {"required": ["action", "selector"], "action_value": "click"},
+    "answer": {"required": ["action", "text"], "action_value": "answer"}
+  },
+  "gbnf_grammar": "root ::= ws \"{\" ws \"\\\"action\\\"\" ws \":\" ws action ws \",\" ws field ws \"}\" ws\nws ::= [ \\t\\n]*\naction ::= \"\\\"click\\\"\" | \"\\\"answer\\\"\"\nfield ::= \"\\\"selector\\\"\" ws \":\" ws string | \"\\\"text\\\"\" ws \":\" ws string\nstring ::= \"\\\"\" strchars \"\\\"\"\nstrchars ::= strchar strchars | strchar\nstrchar ::= [^\"\\\\] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F])\n",
+  "prompts": {
+    "system": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.",
+    "user_template": "PAGE_TEXT: {page_text}\nELEMENTS: {elements_json}\nHISTORY: {history}\nNext action (JSON only): ",
+    "positive_control_probe": "Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}"
+  },
+  "sampling": {
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "base_seed": 42,
+    "episode_seed_offset": "42 + episode_idx",
+    "n_ctx": 2048,
+    "chat_format": "qwen",
+    "llama_seed": 42
+  },
+  "candidate_models_frozen": [
+    {
+      "candidate_id": "M-7B-QWEN",
+      "role": "primary",
+      "model": "Qwen2.5-7B-Instruct",
+      "quant": "Q4_K_M",
+      "frozen_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m.gguf",
+      "note": "Frozen URL returns HTTP 404; same-repo same-quant weights exist only as split shards qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf + -00002-of-00002.gguf; shard load attempted before fallback per prereg section 8"
+    },
+    {
+      "candidate_id": "M-3B-QWEN",
+      "role": "fallback",
+      "model": "Qwen2.5-3B-Instruct",
+      "quant": "Q4_K_M",
+      "frozen_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf",
+      "note": "single-file Q4_K_M confirmed present (2,104,932,768 bytes)"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-JSON-CONSTRAINED-DECODING",
+    "probes": 10,
+    "success_criterion": "10/10 syntactically valid JSON matching action schema"
+  },
+  "null_control": {
+    "id": "NC-NO-MODEL-ACTION",
+    "episodes": 5,
+    "fixed_invalid_content": "I will click the button",
+    "success_criterion": "0% parseable JSON actions, 0% task completion"
+  },
+  "random_baseline": {
+    "id": "B-RANDOM-ACTION",
+    "episodes": 5,
+    "action_space": [
+      {"action": "click", "selector": "#reveal-btn"},
+      {"action": "answer", "text": "TARGET-41"},
+      {"action": "answer", "text": "TARGET-42"},
+      {"action": "answer", "text": "TARGET-43"},
+      {"action": "answer", "text": "unknown"}
+    ]
+  },
+  "clearing_threshold": {"task_success_rate_min": 0.6, "parseable_action_rate_step1_min": 0.6, "episodes": 5},
+  "metrics_stable_ids": [
+    "parseable_action_rate_step1",
+    "task_success_rate",
+    "mean_inference_latency_s",
+    "mean_completion_tokens",
+    "positive_control_pass_rate"
+  ]
+}

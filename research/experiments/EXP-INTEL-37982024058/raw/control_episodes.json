@@ -1,0 +1,375 @@
+{
+  "B-RANDOM-ACTION": {
+    "baseline_id": "B-RANDOM-ACTION",
+    "episodes": [
+      {
+        "clicked_reveal": false,
+        "episode": 0,
+        "final_answer": "TARGET-42",
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": true,
+        "step_count": 3,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "answer",
+              "text": "TARGET-42"
+            },
+            "answer_text": "TARGET-42",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"answer\", \"text\": \"TARGET-42\"}",
+            "regex_action": {
+              "action": "answer",
+              "text": "TARGET-42"
+            },
+            "step": 2
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 1,
+        "final_answer": "TARGET-41",
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": true,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "answer_text": "TARGET-41",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"answer\", \"text\": \"TARGET-41\"}",
+            "regex_action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 2,
+        "final_answer": "TARGET-41",
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": true,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "answer_text": "TARGET-41",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"answer\", \"text\": \"TARGET-41\"}",
+            "regex_action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 3,
+        "final_answer": "TARGET-41",
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": true,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "answer_text": "TARGET-41",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"answer\", \"text\": \"TARGET-41\"}",
+            "regex_action": {
+              "action": "answer",
+              "text": "TARGET-41"
+            },
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 4,
+        "final_answer": "unknown",
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": true,
+        "step_count": 2,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "answer",
+              "text": "unknown"
+            },
+            "answer_text": "unknown",
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "kind": "random_baseline"
+            },
+            "raw": "{\"action\": \"answer\", \"text\": \"unknown\"}",
+            "regex_action": {
+              "action": "answer",
+              "text": "unknown"
+            },
+            "step": 1
+          }
+        ],
+        "task_success": false
+      }
+    ],
+    "parseable_action_rate_step1": 1.0,
+    "task_success_rate": 0.0
+  },
+  "NC-NO-MODEL-ACTION": {
+    "control_id": "NC-NO-MODEL-ACTION",
+    "criterion": "0% parseable JSON actions, 0% task completion",
+    "episodes": [
+      {
+        "clicked_reveal": false,
+        "episode": 0,
+        "final_answer": null,
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": false,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": null,
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "json_error: Expecting value: line 1 column 1 (char 0)",
+            "parse_ok": false,
+            "producer_meta": {
+              "kind": "null_control"
+            },
+            "raw": "I will click the button",
+            "regex_action": null,
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 1,
+        "final_answer": null,
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": false,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": null,
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "json_error: Expecting value: line 1 column 1 (char 0)",
+            "parse_ok": false,
+            "producer_meta": {
+              "kind": "null_control"
+            },
+            "raw": "I will click the button",
+            "regex_action": null,
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 2,
+        "final_answer": null,
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": false,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": null,
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "json_error: Expecting value: line 1 column 1 (char 0)",
+            "parse_ok": false,
+            "producer_meta": {
+              "kind": "null_control"
+            },
+            "raw": "I will click the button",
+            "regex_action": null,
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 3,
+        "final_answer": null,
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": false,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": null,
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "json_error: Expecting value: line 1 column 1 (char 0)",
+            "parse_ok": false,
+            "producer_meta": {
+              "kind": "null_control"
+            },
+            "raw": "I will click the button",
+            "regex_action": null,
+            "step": 0
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": false,
+        "episode": 4,
+        "final_answer": null,
+        "final_target_text": null,
+        "final_target_visible": false,
+        "revealed_value": null,
+        "step1_parse_ok": false,
+        "step_count": 1,
+        "steps": [
+          {
+            "action": null,
+            "completion_tokens": 0,
+            "latency_s": 0.0,
+            "parse_detail": "json_error: Expecting value: line 1 column 1 (char 0)",
+            "parse_ok": false,
+            "producer_meta": {
+              "kind": "null_control"
+            },
+            "raw": "I will click the button",
+            "regex_action": null,
+            "step": 0
+          }
+        ],
+        "task_success": false
+      }
+    ],
+    "parseable_action_rate_step1": 0.0,
+    "task_success_rate": 0.0
+  }
+}
