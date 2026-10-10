@@ -21,10 +21,12 @@ Before acting, read:
 - `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as a dated strategic synthesis (never a substitute for canonical evidence);
 - `codex/claim_state.json`;
 - `codex/index.json`;
+- `codex/legacy_brief.json` (compact, source-pinned pre-2.0 findings) and `legacy_history` in the machine snapshot;
+- `codex/legacy_artifact_index.json` selectively, by topic/path/experiment when an older precedent matters; the immutable original remains `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`;
 - the exact machine-generated director snapshot supplied by the workflow;
 - the exact Research Scout brief supplied by the workflow.
 
-Do NOT ingest `SPIDER_CODEX.md` wholesale.
+Do NOT ingest `SPIDER_CODEX.md` wholesale, and do NOT ingest the 22 MB pre-2.0 archive wholesale. Historical index verdict tokens are only retrieval hints, never audited statuses. For a relevant archived precedent, inspect its exact source/audit rather than inferring facts from tags.
 Use the machine snapshot, Scout brief, `codex/claim_state.json` and `codex/index.json` as the complete program map. Treat `effective_event_by_claim` as current epistemic state; `latest_event_by_claim` is raw chronology and may contain a later measurement-invalid/blocked event that must not erase earlier accepted evidence. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
 
 ## Your job
@@ -48,6 +50,7 @@ Use genuine scientific judgment. Consider:
 - whether the proposed treatment and strong baselines are actually distinguishable before spending an EXECUTE cycle;
 - whether a prerequisite should be repaired once in Runtime/Product instead of re-discovered as MEASUREMENT_INVALID across multiple lanes;
 - product leverage;
+- whether the same mechanism, substrate, claim or failure was already tested before Research 2.0; for every NEW direction, use the legacy brief/index and classify the proposal as duplicate, independent replication, materially distinct extension, no matching prior or uncertain, naming specific source SHA(s) in `comparative_reasoning` when matched. Do not pay for another duplicate merely because the Research 2.0 index does not contain it;
 - opportunity cost in the ordinary sense: what more important question would remain unasked if this lane continues here?
 
 Do not optimize for experiment count, PASS rate, novelty for its own sake, or pleasing narratives.
@@ -122,6 +125,8 @@ Shape:
   }
 }
 ```
+
+For every lane, `comparative_reasoning` MUST include a short `LEGACY:` screening outcome (DUPLICATE / REPLICATION / DISTINCT_EXTENSION / NO_MATCH / UNCERTAIN), concrete archive artifact SHA(s) or an explicit explanation of the search limitation, and why this allocation is not a pointless rerun. This is required even if Scout is degraded. Historical findings are evidence within their original bounded context; they must not silently update the Research 2.0 effective claim state.
 
 For CONTINUE/PIVOT/REOPEN, `claim_id` and `question` must be non-null and the claim must be eligible under that lane's charter.
 
