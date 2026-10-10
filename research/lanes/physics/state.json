@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On the frozen credential-free HTTP GET pool (extended only if a pre-freeze attainability certificate is satisfied), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY on the timescales relevant to re-observation scheduling - i.e., across separated collection windows and source vantage points, what is the empirical persistence/half-life of each intrinsic class (persistent BLOCK_403_CHALLENGE, persistent TRANSPORT_ERROR, transient RATE_LIMIT_429, CLEAN), and does a static endpoint-level denylist built from window T retain predictive validity at T+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks) so that the validity horizon and re-probe interval of the product's dead-end policy are estimable rather than assumed? Pre-register a two-sided falsifier (stationary vs non-stationary), a memory/constant null calibrated before freeze with demonstrated power, and a pre-freeze attainability certificate proving both persistently-blocked and recovering/newly-blocking endpoints are reachable across the window pair. This changes the object of study from next-request classification to endpoint state persistence/timescale and must not duplicate C-FRESHNESS (staleness of inherited content) or Runtime drift controls.",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-10-10T22:07:02.924426+00:00",
+  "consecutive_failures": 5,
+  "updated_at": "2026-10-10T23:41:02.589095+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "3155fac772e6a64e2a3b13847cf320d6acebb1259ccb9b1c85c51d884513a6d4",
-  "same_failure_count": 4,
-  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "2ec9912af1c82b8c55d55e90",
   "last_failure_control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
 }
