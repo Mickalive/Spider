@@ -83,7 +83,7 @@ Next action (JSON only):
 You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.
 ```
 
-**Treatment system prompt (PR-SPECIFIED)** — the single-variable change; byte-frozen to the grand-parent census harness SYS literal (`EXP-INTEL-37973264582/raw/code/min_webagent.py`, sha256 `4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862`), with the ONLY adaptation `ref`->`selector` (the frozen grammar accepts only keys `selector`/`text`). The goal sentence is VERBATIM from the census SYS:
+**Treatment system prompt (PR-SPECIFIED)** — the single-variable change; byte-frozen to the grand-parent census harness SYS literal (`EXP-INTEL-37973264582/raw/code/min_webagent.py`, sha256 `4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862`), with exactly two token-level adaptations in the click example — the schema key `ref`->`selector` (the frozen grammar accepts only keys `selector`/`text`) and its placeholder `<id>`->`<css selector>`. Every other word is VERBATIM, including the goal sentence:
 
 ```
 You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {"action":"click","selector":"<css selector>"} or {"action":"answer","text":"<code>"}. Click the button to reveal the code, then answer it.
@@ -97,7 +97,7 @@ Sampling (identical to parent): temperature=0.0, max_tokens=512, n_ctx=2048, cha
 
 Candidate order: M-7B-QWEN -> M-3B-QWEN -> (conditional) M-14B-QWEN -> (census-completeness) M-0.5B-QWEN. Per candidate: (1) load + receipt (shard sha256); (2) PC-JSON-CONSTRAINED-DECODING (10/10); (3) 5 episodes under PR-UNDERSPEC (M-7B-QWEN and M-3B-QWEN only = CV-UNDERSPEC-REPLICATION); (4) 5 episodes under PR-SPECIFIED. M-14B-QWEN and M-0.5B-QWEN run PC then PR-SPECIFIED only. PC-SCRIPTED-ORACLE runs once before any model episode; NC-NO-MODEL-ACTION and B-RANDOM-ACTION run once. Early stop on the first clear under PR-SPECIFIED (remaining candidates `NOT_ATTEMPTED-EARLY-STOP`, never negatives).
 
-Obtainable set (pre-declared, non-outcome-bearing): M-0.5B/3B/7B-QWEN are always in the obtainable set; M-14B-QWEN joins iff all 3 shards download with pinned content-lengths AND available memory >= 11 GiB at load time. Otherwise M-14B-QWEN is recorded `NOT_IN_OBTAINABLE_SET` (RAM or PROVISIONING) and excluded by the definition (bounded ceiling, not a scientific negative).
+Obtainable set (pre-declared, non-outcome-bearing): M-0.5B/3B/7B-QWEN are always in the obtainable set; M-14B-QWEN joins iff all 3 shards download with pinned content-lengths AND available memory >= 11 GiB at load time. Otherwise M-14B-QWEN is recorded `NOT_IN_OBTAINABLE_SET` (RAM or PROVISIONING) and excluded by the definition (bounded ceiling, not a scientific negative). "Largest obtainable" is defined by the runner's ~16 GiB RAM under CPU-only llama.cpp: 14B Q4_K_M (~8.37 GiB weights) fits; Qwen2.5-32B Q4_K_M is 19,851,336,384 B (~18.49 GiB) across 5 shards and 72B is larger still, so 32B/72B are `NOT_IN_OBTAINABLE_SET` by the same memory definition and the E-LOCAL-LLAMA Q4_K_M range ends at 14B.
 
 ## 6. Metrics
 
@@ -158,7 +158,7 @@ These anchors are consistent with the parent observation (step-1 action fine, mu
 
 ## 11. Environment / prerequisites (verified live at DESIGN, non-outcome-bearing)
 
-python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,435 MiB available; Google Chrome 154.0.8037.97 at `/usr/bin/google-chrome`; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3; PyPI-verified pinned artifacts llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel (the identical stack already built and ran in the parent EXECUTE). GGUF URLs HTTP-verified at pinned sizes (0.5B/3B/7B/14B); the 7B single-file URL 404 is recorded. No credential, paid endpoint, GPU or new substrate required.
+python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,473 MiB available; Google Chrome 154.0.8037.97 at `/usr/bin/google-chrome`; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3; PyPI-verified pinned artifacts llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel (the identical stack already built and ran in the parent EXECUTE). GGUF URLs HTTP-verified at pinned sizes (0.5B/3B/7B/14B); the 7B single-file URL 404 is recorded. No credential, paid endpoint, GPU or new substrate required.
 
 ## 12. Code / artifact binding (design_contract_version 2)
 
@@ -189,4 +189,4 @@ python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,435 MiB ava
 
 - Design: `opencode/big-pickle`, DESIGN mode, lane intel.
 - No outcome-bearing measurements were performed during DESIGN; all probes were non-outcome-bearing and recorded in `spec.pre_freeze_satisfiability_dry_run.environment_probes`.
-- Fidelity: parent/census fixture hashes re-verified at DESIGN; PR-SPECIFIED byte-compared against `min_webagent.py` SYS literal with only the schema-key adaptation.
+- Fidelity: parent/census fixture hashes re-verified at DESIGN; PR-SPECIFIED byte-compared against `min_webagent.py` SYS literal — the only deviations are the two click-example tokens (`ref`->`selector`, `<id>`->`<css selector>`), with all other text verbatim.
