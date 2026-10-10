@@ -18,7 +18,7 @@ The Director is also responsible for research liveness. A lane that has stopped,
 
 The Director reasons across:
 
-- the complete accepted Codex and claim state;
+- the complete accepted Codex and claim state, using `effective_event_by_claim` for current epistemic status and raw latest events only for chronology;
 - the missions and capabilities of all six lanes;
 - recent and historical experiment trajectories;
 - unresolved central claims and current product bottlenecks;
@@ -106,6 +106,8 @@ The mandate records:
 DESIGN may convert the strategic question into a rigorous falsifiable experiment, but it must not silently replace the Director's target with a nearby local continuation.
 
 If the mandate is infeasible, fail loudly. Do not invent a substitute research direction.
+
+New design-contract v2 work must pass an independent pre-freeze satisfiability/identifiability review. Repeated measurement-invalid packets with the same prerequisite failure are evidence that the prerequisite should be repaired or the thread PARKed; they are not a reason to spend more cycles rediscovering the same absence.
 
 ## Failure behavior
 

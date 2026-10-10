@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37973239386",
+  "lane": "physics",
+  "origin_github_run_id": "37973239386",
+  "claim_ids": [
+    "C-WEB-DYNAMICS"
+  ],
+  "director_mandate": {
+    "action": "CONTINUE",
+    "claim_id": "C-WEB-DYNAMICS",
+    "parent_handoff_disposition": "SUPERSEDE",
+    "parent_handoff": "research/experiments/EXP-PHYSICS-37385620138/handoff.json"
+  },
+  "git": {
+    "head": "1e7f18774fc2dd0175801137360035029c5258e2",
+    "note": "Working tree also contains unrelated Codex-sync edits (SPIDER_CODEX.md, codex/claim_state.json, codex/index.json) and other lanes' directories that this EXECUTE did not modify."
+  },
+  "frozen_inputs": {
+    "declared_in_freeze": {
+      "prereg.md": "761a11bb1c725ae8d1534b95d50d6648586752af53c7ebff5d764656302b6cd2",
+      "request.json": "19757cd7f91ed0e5f15948a65ff13c05910e2cbed7523d9e354fb899aea92d3d",
+      "spec.json": "9a4cddbc4865fbd98ecb9a6ecc6e66f034999b6a8ca13d88c5f4dc01bd9221e9"
+    },
+    "reverified": {
+      "prereg.md": {
+        "declared": "761a11bb1c725ae8d1534b95d50d6648586752af53c7ebff5d764656302b6cd2",
+        "actual": "761a11bb1c725ae8d1534b95d50d6648586752af53c7ebff5d764656302b6cd2",
+        "match": true
+      },
+      "request.json": {
+        "declared": "19757cd7f91ed0e5f15948a65ff13c05910e2cbed7523d9e354fb899aea92d3d",
+        "actual": "19757cd7f91ed0e5f15948a65ff13c05910e2cbed7523d9e354fb899aea92d3d",
+        "match": true
+      },
+      "spec.json": {
+        "declared": "9a4cddbc4865fbd98ecb9a6ecc6e66f034999b6a8ca13d88c5f4dc01bd9221e9",
+        "actual": "9a4cddbc4865fbd98ecb9a6ecc6e66f034999b6a8ca13d88c5f4dc01bd9221e9",
+        "match": true
+      }
+    },
+    "all_match": true,
+    "freeze_sha256": "57a96166c8ee302600c3b3c7ab0eafec906078e80a76986f96b9accb2fcbdf6c",
+    "mutated_after_freeze": []
+  },
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.15",
+    "implementation": "CPython",
+    "http_client": "python stdlib urllib.request",
+    "requests_library_used": false,
+    "browser": "none",
+    "javascript": false,
+    "credentials": 0,
+    "model_calls": 0,
+    "external_llm_inference": false,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64; research) SPIDER-Research2.0/EXP-PHYSICS-37973239386"
+  },
+  "code": {
+    "research/physics/exp_37973239386_lib.py": "ab727198ec96f31c2ab7941913a2415905bacc48f649e05874208fe21b90c8c1",
+    "research/physics/exp_37973239386_run.py": "fe049fcd22517371ba0e985eae9be90853705e245c05587c2890f3eca1003ded",
+    "research/physics/exp_37973239386_finalize.py": "1179ae8ae6aab9ffc3b659346d389a7c145c7271da73f4f100fcf9adeb6a25ce"
+  },
+  "commands": [
+    {
+      "step": "collect + analyze (fresh Web collection)",
+      "command": "python3 research/physics/exp_37973239386_run.py --workers 16",
+      "n_http_requests_planned": 1368,
+      "n_transport_fail": 24
+    },
+    {
+      "step": "re-run analysis after live-null construction correction (no collection)",
+      "command": "python3 research/physics/exp_37973239386_run.py --analyze"
+    },
+    {
+      "step": "finalize packet",
+      "command": "python3 research/physics/exp_37973239386_finalize.py"
+    }
+  ],
+  "datasets_fixtures": {
+    "candidate_universe": "spec.json candidate_universe (57 endpoints, frozen verbatim)",
+    "raw_evidence": "raw/collection.jsonl (456 session records, 1368 observations)",
+    "control_batteries": "derived/controls.json; DESIGN literal values embedded in spec.json.pilot_certificates"
+  },
+  "determinism": {
+    "analysis_deterministic": true,
+    "collection_deterministic": false,
+    "collection_nondeterminism_reason": "the Web is live: statuses, headers, rate limits and minted values are a point-in-time observation, not a fixture; rerunning the collector on the same universe will not reproduce raw/collection.jsonl byte-for-byte",
+    "note": "All synthetic batteries and the bootstrap are seeded (master_seed=int(request_hash[:8],16)=2450671238; null seeds 9000+regime; PC seeds 5000+trial); the finalize step performs no RNG."
+  }
+}

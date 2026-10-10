@@ -1,0 +1,1806 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-GRAPH-37978902447",
+ "lane": "graph",
+ "claim_ids": [
+  "C-FRESHNESS"
+ ],
+ "claim_scope_note": "The only claim updated by this packet is C-FRESHNESS (owner_lanes graph/runtime/product). C-MEAS-VALID is a non-owned advisory dependency (runtime/physics) and is NOT a claim id here: no C-MEAS-VALID event may be emitted. C-DELTA-REPAIR, C-SEMANTIC-RESOLVE, C-PARAM-INHERIT, C-LLM-INHERIT, C-PRODUCT-ECON and C-CROSSSITE are explicitly out of scope and no event may be emitted for them. This is the THIRD consecutive certificate attempt on this gate; the mandate's hard-stop rule applies (a further predicate/class-defect MEASUREMENT_INVALID should cause the next Director cycle to PARK Graph and repair the certificate machinery in Runtime/Product instead).",
+ "director_mandate_binding": {
+  "cycle_id": "37978016186",
+  "action": "CONTINUE",
+  "target_claim": "C-FRESHNESS",
+  "cognitive_reset": true,
+  "parent_handoff_disposition": "USE",
+  "binding_strategic_question": "With the frozen GATE-C3 session-isolation predicate now implemented exactly as the audit intended -- a DISJUNCTION, using pairwise_disjoint_on_name_value_after_filter (pairwise disjointness on (name,value) pairs after excluding the frozen constant-configuration allowlist preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global, CentralAuthAnonTopLevel) as the SOLE disjointness check, NOT conjoined with session_identifying_disjoint as the failed packet did -- does a re-frozen freshness experiment on the same four pinned credential-free anchors reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-H; and if D1 is reached, does a D1V population whose trials span MORE THAN ONE anchor (rather than all M-N-D1V=6 trials from CAL-POS-2 alone) make the incumbent value-blind guard's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable with a non-degenerate anchor-clustered lower bound?",
+  "binding_pre_freeze_precondition": "MANDATORY, added by the Director because this is the THIRD consecutive control-plane design defect on this gate: before freeze.json exists, DESIGN must execute and record inside spec.json a satisfiability dry-run proving the frozen GATE-C3 predicate AND every declared membership class is REACHABLE and evaluable on pinned synthetic inputs, with the exact predicate expression and its disjoint/non-disjoint truth table, so that an unsatisfiable-predicate or empty-class defect is caught pre-freeze instead of surfacing as another MEASUREMENT_INVALID. Discharged in spec.pre_freeze_satisfiability_dry_run (executed by DESIGN on synthetic inputs only; no HTTP, no anchor contact).",
+  "explicitly_not_authorized": [
+   "re-measuring the static re-derivable fraction",
+   "returning to the blocked C-SEMANTIC-RESOLVE V9_CODE_HASHED_INTO_FREEZE thread",
+   "freezing any design whose predicate or class membership cannot be shown satisfiable before freeze"
+  ],
+  "hard_stop_rule": "If this attempt is ALSO MEASUREMENT_INVALID on a predicate/class defect, the next Director cycle should PARK Graph and instead mandate a one-time repair of the certificate machinery in Runtime/Product.",
+  "audit_fix_binding": "Implements audit.json required_fixes[0] of the parent EXP-GRAPH-37964565784 verbatim: use pairwise_disjoint_on_name_value_after_filter as the SOLE disjointness check; do NOT conjoin it with session_identifying_disjoint. audit.json required_fixes[1] (restore codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl) is a PROVENANCE dependency only, owned by the Codex synchronization step; EXECUTE records its presence/absence and hash, GATE C re-measures live and does not depend on it.",
+  "agent_priors_used": [
+   "The mandate cites agent priors (NOT SPIDER evidence): repeated instrument repair on one gate is a local attractor; a third attempt must carry a pre-freeze satisfiability dry-run and a hard-stop rule; falsifiers should be arithmetically checkable and satisfiable in BOTH directions before freeze."
+  ]
+ },
+ "parent_handoff_continuity": {
+  "parent_experiment_id": "EXP-GRAPH-37964565784",
+  "parent_handoff_path": "research/experiments/EXP-GRAPH-37964565784/handoff.json",
+  "parent_handoff_sha256": "61a29ceec64cdc9b8db206d891d6756d928adfe168f5f6b981633dffcc386cdb",
+  "disposition": "USE as continuity evidence only. The parent's next_question is advisory and is NOT the authorization; the Director mandate cycle_id 37978016186 is the binding direction. The parent ended MEASUREMENT_INVALID at GATE-C3 (F-CERT, second certificate design defect: the audit's two alternatives were conjoined with AND), not a scientific negative.",
+  "g_series_experiment_id": "EXP-GRAPH-37950584469",
+  "inherited_established": [
+   "FROZEN INPUT INTEGRITY of the parent is intact: sha256(request.json)=6be23953ef26f27dc8a48d20c3988b6355e925a81566e1974da2c9c551945219, sha256(spec.json)=85a29731e9aefc55508b9d87acb96c8307d2e114dfe9571d277b5a0f60e0821e, sha256(prereg.md)=367b4bd128023e20c7d7e7c4b24334db84c44016aeb1bf3e73775042f9be8504, all matching freeze.json sha256 11ce8ff1d7d34fd8670c55599f4f2eb0acddab6b9fc881c938fbd5153db96920 (Director-recomputed). The parent is a valid terminal MEASUREMENT_INVALID at GATE-C3, not a scientific negative.",
+   "GATE-C3 FAILURE IS A SECOND CERTIFICATE DESIGN DEFECT, SOURCE-VERIFIED: the parent's frozen predicate conjoined three requirements with AND, including session_identifying_disjoint (all session-identifying cookie NAMES pairwise disjoint per anchor). That sub-predicate is unsatisfiable for real session cookies, which reuse their names by design. derived/certificate.json (sha256 e3655c932ed83f9a29f2849dd24e5354e54545b62c300852e7ef38a320027dc8) shows session_identifying_disjoint=false for CAL-POS-1, CAL-POS-2 and CAL-POS-3, while pairwise_disjoint_on_name_value_after_filter=true for ALL 8 anchors, all first requests cookie-free, and NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS=true. The name-level sub-predicate was the sole failure cause.",
+   "INSTRUMENT-LEVEL EXTRACTION EVIDENCE (RAW/DERIVED; NOT a licensed claim advancement): the two independently written stdlib paths P-EXTRACT-A (html.parser) and P-EXTRACT-B (regex/lexer) agree on per-field value sets and session-scoped verdicts (M-EXTRACT-AGREE-VALUESET=4/4, M-EXTRACT-AGREE-VERDICT=4/4); M-CANARY-PASS=true; M-N-SESSION-SCOPED-CONFIRMED=3/4 with distinct values CAL-POS-1=16, CAL-POS-2=5, CAL-POS-3=5, CAL-POS-4=0; M-N-REPRESENTATION-LOSS=1/4; M-N-EXTRACTION-UNRELIABLE=0/4. All non-GATE-C3 gates pass. This makes an extraction defect the better-supported cause, but licenses no claim because GATE-C3 short-circuits.",
+   "TIMESCALE DIAGNOSTIC (CC-H): CAL-POS-1/2/3 classify PER_REQUEST_SCALE; CAL-POS-4 NO_ROTATION. Any value-binding freshness verdict on these anchors is bounded to a short-lived applicability check.",
+   "C-FRESHNESS CLAIM STATE IS UNCHANGED AT HYPOTHESIS (registry C-FRESHNESS=HYPOTHESIS, owner_lanes [graph,runtime,product]; next_gate 'session/token/DOM/endpoint/permission drift with false-accept measurement').",
+   "TRANSPORT-VALUE COUPLING (this DESIGN's re-read of the parent RAW evidence, not a parent-packet outcome; see spec.substrate_certificate.transport_value_coupling_design_derivation): on CAL-POS-1 the response ETag equals sha256(body)[:32] for all 4 sessions, so the frozen transport_signature necessarily changes whenever the rotating authenticity_token changes the body; on CAL-POS-3 the final_url (inside the frozen transport_signature) carries a per-session centralauthLoginToken. Both make the frozen D1V family structurally unreachable on those anchors, which is why the parent's D1V trials were all from CAL-POS-2."
+  ],
+  "inherited_rejected": [
+   "REJECTED, bounded: the frozen parent GATE-C3 predicate (AND of first_request_cookieless, session_identifying_disjoint and pairwise_disjoint_on_name_value_after_filter) is not a valid session-isolation test on these anchors; the name-level sub-predicate is structurally unsatisfiable. This rejects the specific conjunction implementation, not the general freshness/applicability check.",
+   "REJECTED: reading the parent's derived Part II point estimate M-PAIRED-FA-DIFF-D1V=1.0 (LB=1.0) or M-FA-INCUMBENT-D1V=1.0 as a confirmed architectural necessity or false-accept bound. GATE-B was NOT_READ_D1_NOT_REACHED; all 6 D1V trials came from a single anchor (M-N-D1V-ANCHORS=1), so the anchor-clustered bound is degenerate.",
+   "REJECTED (continuity): attributing the earlier zero-distinct-value failure to V16/JS representation loss on these anchors; two independent stdlib paths recover session-scoped values from raw bytes on CAL-POS-1/2/3.",
+   "NOT EMITTED: any claim event for C-MEAS-VALID, C-DELTA-REPAIR, C-SEMANTIC-RESOLVE, C-PARAM-INHERIT, C-PRODUCT-ECON or C-CROSSSITE."
+  ],
+  "inherited_unknown": [
+   "Whether the CORRECTED GATE-C3 predicate (pairwise_disjoint_on_name_value_after_filter as the sole disjointness check) passes on a re-frozen re-execution of these anchors. Expected yes from derived/certificate.json (true for all 8 anchors), but untested as frozen. THIS IS THE OBJECT OF PART I.",
+   "Whether a D1V population can be constructed that spans MORE THAN ONE anchor at zero extra request cost, making the anchor-clustered bound non-degenerate. THIS IS THE OBJECT OF PART II (mandate Q2).",
+   "Whether CAL-POS-4's NO_FIELD verdict is genuine absence of in-list token fields in raw bytes or a limitation of the frozen token-name list.",
+   "Whether the auth.wikimedia.org wpCreateaccountToken discrepancy (grandparent 0, Frontier 3, parent 5) is stable over time and across egress networks; this capture is one date and one egress path.",
+   "The provenance completeness gap: codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl remains absent (audit required_fixes[1]); GATE C re-measures live and does not depend on it.",
+   "SB-02 permission-boundary change (unreachable on credential-free public origins) and SB-04 behaviourally invisible stale cell (M-INVISIBLE-STALE-PREV reported null, never 0.0) remain unmeasured by design."
+  ],
+  "inherited_do_not_assume": [
+   "Do not read the parent as a negative about C-FRESHNESS, the credential-free public Web, replay-versus-re-derivation, or the four-channel guard. F-CERT is terminal-not-falsification; the scientific falsifiers F-REPLOSS, F-UNRELIABLE and F-BLIND were never reached.",
+   "Do not treat the parent's instrument-level extraction evidence or its unread Part II point estimate as a licensed claim or architectural result. GATE-C3 blocked the read and GATE-B never ran.",
+   "Do not quote any prevalence over 'the Web'. CC-A bounds every result to the 4 pinned credential-free, server-rendered, no-JavaScript GET-only anchors, K=4 fresh sessions, stdlib HTTP, one capture date and one egress path.",
+   "Do not re-freeze the conjunction predicate or repeat the parent's unsatisfiable GATE-C3 literal; repair it at DESIGN time as the audit's OR (use pairwise_disjoint_on_name_value_after_filter alone).",
+   "Do not promote anything and do not authorize replay-by-assumption. SB-02, SB-04, cross-site transfer, parameterization, LLM inheritance, delta repair, residual novelty and product economics were not measured.",
+   "Do not assume the corrected predicate will pass merely because the audit expected it; the dry-run below proves satisfiability/reachability on synthetic inputs, but the confirmatory pass is measured live at GATE C."
+  ],
+  "parent_reference": {
+   "request_json_sha256": "6be23953ef26f27dc8a48d20c3988b6355e925a81566e1974da2c9c551945219",
+   "spec_json_sha256": "85a29731e9aefc55508b9d87acb96c8307d2e114dfe9571d277b5a0f60e0821e",
+   "prereg_md_sha256": "367b4bd128023e20c7d7e7c4b24334db84c44016aeb1bf3e73775042f9be8504",
+   "freeze_json_sha256": "11ce8ff1d7d34fd8670c55599f4f2eb0acddab6b9fc881c938fbd5153db96920"
+  }
+ },
+ "question": "With the frozen GATE-C3 session-isolation predicate now implemented exactly as the audit intended -- a DISJUNCTION, using pairwise_disjoint_on_name_value_after_filter (pairwise disjointness on (name,value) pairs after excluding the frozen constant-configuration allowlist preferred_language, GeoIP, NetworkProbeLimit, WMF-Last-Access, WMF-Last-Access-Global, CentralAuthAnonTopLevel) as the SOLE disjointness check, NOT conjoined with session_identifying_disjoint as the failed packet did -- does a re-frozen freshness experiment on the same four pinned credential-free anchors reach GATE E3 PASS and D1 (M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4), licensing EXTRACTION-DEFECT-CONFIRMED and advancing C-FRESHNESS from HYPOTHESIS to at most EXPERIMENTAL under CC-A..CC-H; and if D1 is reached, does a D1V population whose trials span MORE THAN ONE anchor (rather than all M-N-D1V=6 trials from CAL-POS-2 alone) make the incumbent value-blind guard's false-accept differential M-PAIRED-FA-DIFF-D1V statistically evaluable with a non-degenerate anchor-clustered lower bound?",
+ "hypothesis": "H-MAIN (Part I): after the CORRECTED GATE-C3 predicate passes (first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter, with session_identifying_disjoint demoted to a non-gating diagnostic), both independently written stdlib extraction paths (P-EXTRACT-A, P-EXTRACT-B) each recover >=2 distinct non-empty exact token values across the K=4 fresh sessions on at least 3 of 4 anchors and agree on the recovered per-field value set and session-scoped verdict (M-EXTRACT-AGREE-VALUESET >= 3 AND M-EXTRACT-AGREE-VERDICT >= 3), so M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4 and the parent's failure on these anchors is an EXTRACTION DEFECT, not genuine representation loss. H-GUARD (Part II, co-primary, read only if D1 and only if non-degenerate): over the frozen drift-trial population (all recorded/current session pairs, AGSIs keyed by (anchor_id, field_name, structure_signature) plus a count-stable occurrence ordinal), the incumbent value-blind guard B-INCUMBENT-SIGNAL-ONLY false-accepts on the D1V (value-only rotation, = STALE and not structural_change and not transport_change) family at a materially higher rate than B-VALUE-AWARE: M-PAIRED-FA-DIFF-D1V >= 0.10 with anchor-clustered 97.5% lower bound > 0, yielding an explicit false-accept bound. NEW non-degeneracy clause: the anchor-clustered bound is non-degenerate only if M-N-D1V-ANCHORS >= 2 (with a single anchor every bootstrap resample is identical). H-TIMESCALE (diagnostic, frozen classification): the warm-jar value-variation rate is within 0.10 of the fresh-jar value-variation rate on at least 2 anchors, labelling their rotation per-request/time-scale rather than session-scale.",
+ "falsifier": "Frozen conditions, each pre-labelled. F-CERT: the corrected certificate fails (GATE C1/C2/C3) -> status MEASUREMENT_INVALID, outcome INCONCLUSIVE, no claim-level statement. F-INSTR: no demonstrated instrument sensitivity (PC-EXTRACT-CANARY fails; fixtures fail; NC-PATH-INDEPENDENCE fails; or the two paths disagree on >=5% of included guard-trial labels) -> MEASUREMENT_INVALID, INCONCLUSIVE, no claim-level statement. F-REPLOSS (bounded): after GATE C and GATE E pass, BOTH paths AGREE and on >=3 of 4 anchors both recover zero non-empty exact values (or only a single session-invariant value) while the body hash varies -> REPRESENTATION-LOSS-CONFIRMED, a bounded falsification on these anchors, NOT a global falsification of C-FRESHNESS. F-UNRELIABLE: the two paths disagree on the recovered exact value set or session-scoped verdict on >=2 of 4 anchors -> EXTRACTION-UNRELIABLE, no substrate verdict. F-BLIND (Part II, read only if adequacy met): M-PAIRED-FA-DIFF-D1V < 0.10 OR its anchor-clustered 97.5% lower bound <= 0 -> INCUMBENT-NOT-BLIND, a bounded negative about the NECESSITY of the value-aware channel on real D1V trials, not a falsification of C-FRESHNESS. F-BLIND-DEGENERATE (NEW, mandate Q2): if the D1V population spans fewer than 2 anchors (M-N-D1V-ANCHORS < 2) the anchor-clustered lower bound is degenerate by construction and GATE-B is NOT READ -> branch DATA-INSUFFICIENT-D1V-DEGENERATE; this is a pre-declared power statement, never a blindness/necessity result. In every terminal measurement-invalid branch C-FRESHNESS stays HYPOTHESIS, no promotion, no replay-by-assumption.",
+ "pre_freeze_satisfiability_dry_run": {
+  "status": "EXECUTED BY DESIGN (synthetic inputs only; no HTTP request, no anchor contact, no outcome measurement)",
+  "mandate_requirement": "MANDATORY, added by the Director because this is the THIRD consecutive control-plane design defect on this gate: before freeze.json exists, DESIGN must execute and record inside spec.json a satisfiability dry-run proving the frozen GATE-C3 predicate AND every declared membership class is REACHABLE and evaluable on pinned synthetic inputs, with the exact predicate expression and its disjoint/non-disjoint truth table, so that an unsatisfiable-predicate or empty-class defect is caught pre-freeze instead of surfacing as another MEASUREMENT_INVALID. Discharged in spec.pre_freeze_satisfiability_dry_run (executed by DESIGN on synthetic inputs only; no HTTP, no anchor contact).",
+  "script": "/tmp/opencode/dryrun.py (self-contained, stdlib only; not part of the frozen packet)",
+  "seed": 37978902447,
+  "result": {
+   "script": "pre_freeze_satisfiability_dry_run",
+   "seed": 37978902447,
+   "allowlist": [
+    "preferred_language",
+    "GeoIP",
+    "NetworkProbeLimit",
+    "WMF-Last-Access",
+    "WMF-Last-Access-Global",
+    "CentralAuthAnonTopLevel"
+   ],
+   "session_identifying_names": [
+    "_gitlab_session",
+    "WMF-Uniq",
+    "authSession",
+    "enwikiSession"
+   ],
+   "predicate_expression": {
+    "corrected_gate_c3": "pass_condition = first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter(jars)",
+    "pairwise_disjoint_on_name_value_after_filter": "for all i<j: filter_allowlist(jar_i) INTERSECT filter_allowlist(jar_j) == {}; filter_allowlist drops any (name,value) whose NAME is in CONSTCONFIG_ALLOWLIST",
+    "session_identifying_disjoint": "NON-GATING diagnostic; MUST NOT be a conjunct",
+    "parent_defective_gate_c3": "first_request_cookieless AND session_identifying_disjoint AND pairwise_disjoint_on_name_value_after_filter",
+    "D1V": "label==STALE AND NOT structural_change AND NOT transport_change (endpoint/postcond excluded from the D1V filter by the frozen rule)"
+   },
+   "truth_table": [
+    {
+     "case_id": "T1_legit_session_name_shared_values_distinct",
+     "note": "Real pattern: shared session names, distinct values, shared allowlisted constants",
+     "jars": [
+      [
+       [
+        "GeoIP",
+        "US"
+       ],
+       [
+        "_gitlab_session",
+        "s1"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "GeoIP",
+        "US"
+       ],
+       [
+        "_gitlab_session",
+        "s2"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "_gitlab_session",
+        "s3"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "_gitlab_session",
+        "s4"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": true
+     },
+     "v2_expected": true,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": false,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T2_shared_nonallowlist_pair_same_value",
+     "note": "Genuine violation: identical non-allowlisted (name,value) pair shared",
+     "jars": [
+      [
+       [
+        "_gitlab_session",
+        "same"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "_gitlab_session",
+        "same"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": false,
+      "pass_condition": false
+     },
+     "v2_expected": false,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": false,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T3_allowlist_only_shared_same_value",
+     "note": "Shared allowlisted constant only",
+     "jars": [
+      [
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "preferred_language",
+        "en"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": true
+     },
+     "v2_expected": true,
+     "v2_ok": true,
+     "parent_and_observed_pass": true,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": true
+    },
+    {
+     "case_id": "T4_not_vacuous_allowlist_plus_shared_pair",
+     "note": "Not-vacuous: allowlisting must not mask a shared custom pair",
+     "jars": [
+      [
+       [
+        "custom_tok",
+        "x"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ],
+      [
+       [
+        "custom_tok",
+        "x"
+       ],
+       [
+        "preferred_language",
+        "en"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": false,
+      "pass_condition": false
+     },
+     "v2_expected": false,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T5_empty_jars",
+     "note": "No cookies",
+     "jars": [
+      [],
+      [],
+      [],
+      []
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": true
+     },
+     "v2_expected": true,
+     "v2_ok": true,
+     "parent_and_observed_pass": true,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": true
+    },
+    {
+     "case_id": "T6_first_request_carried_cookie",
+     "note": "first_request_cookieless gates independently",
+     "jars": [
+      [
+       [
+        "_gitlab_session",
+        "s1"
+       ]
+      ],
+      [
+       [
+        "_gitlab_session",
+        "s2"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": true,
+     "v2_observed": {
+      "first_request_cookieless": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": false
+     },
+     "v2_expected": false,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": false,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T7_parent_and_counterexample",
+     "note": "Legitimate: corrected passes, parent AND fails (the diagnosed defect)",
+     "jars": [
+      [
+       [
+        "WMF-Uniq",
+        "u1"
+       ],
+       [
+        "_gitlab_session",
+        "s1"
+       ]
+      ],
+      [
+       [
+        "WMF-Uniq",
+        "u2"
+       ],
+       [
+        "_gitlab_session",
+        "s2"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": true
+     },
+     "v2_expected": true,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": false,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T8_unknown_shared_name_same_value",
+     "note": "Unlisted cookie not auto-exempted",
+     "jars": [
+      [
+       [
+        "new_tok",
+        "v"
+       ]
+      ],
+      [
+       [
+        "new_tok",
+        "v"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": false,
+      "pass_condition": false
+     },
+     "v2_expected": false,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": false
+    },
+    {
+     "case_id": "T9_unknown_shared_name_distinct_value",
+     "note": "Value-disjoint unknown name ok",
+     "jars": [
+      [
+       [
+        "new_tok",
+        "v1"
+       ]
+      ],
+      [
+       [
+        "new_tok",
+        "v2"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass_condition": true
+     },
+     "v2_expected": true,
+     "v2_ok": true,
+     "parent_and_observed_pass": true,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": true
+    },
+    {
+     "case_id": "T10_three_way_overlap",
+     "note": "Pairwise overlap across some pair",
+     "jars": [
+      [
+       [
+        "a",
+        "1"
+       ]
+      ],
+      [
+       [
+        "a",
+        "1"
+       ]
+      ],
+      [
+       [
+        "b",
+        "2"
+       ]
+      ]
+     ],
+     "first_request_had_cookie": false,
+     "v2_observed": {
+      "first_request_cookieless": true,
+      "pairwise_disjoint_on_name_value_after_filter": false,
+      "pass_condition": false
+     },
+     "v2_expected": false,
+     "v2_ok": true,
+     "parent_and_observed_pass": false,
+     "parent_session_identifying_disjoint": true,
+     "parent_expected_pass": false
+    }
+   ],
+   "truth_table_all_match": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "any_expected_mismatch": false,
+   "corrected_differs_from_parent_and": [
+    "T1_legit_session_name_shared_values_distinct",
+    "T7_parent_and_counterexample"
+   ],
+   "membership_class_reachability": {
+    "anchor_verdicts": {
+     "RECOVERED_SESSION_SCOPED": {
+      "verdict": "RECOVERED_SESSION_SCOPED",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "distinct_values": 2,
+      "has_any_field": true
+     },
+     "RECOVERED_INVARIANT": {
+      "verdict": "RECOVERED_INVARIANT",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "distinct_values": 1,
+      "has_any_field": true
+     },
+     "RECOVERED_EMPTY": {
+      "verdict": "RECOVERED_EMPTY",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "distinct_values": 0,
+      "has_any_field": true
+     },
+     "NO_FIELD": {
+      "verdict": "NO_FIELD",
+      "route_ok": 4,
+      "distinct_body": 4,
+      "distinct_values": 0,
+      "has_any_field": false
+     },
+     "UNREACHABLE": {
+      "verdict": "UNREACHABLE",
+      "route_ok": 2,
+      "distinct_body": 4,
+      "distinct_values": 2,
+      "has_any_field": true
+     }
+    },
+    "drift_families": {
+     "families_reachable": [
+      "F-FRESH",
+      "F-STRUCT",
+      "F-TRANSPORT",
+      "F-VALUE(D1V)"
+     ],
+     "combination_counts": {
+      "F-FRESH": 16,
+      "F-VALUE(D1V)": 4,
+      "F-TRANSPORT": 4,
+      "F-STRUCT": 8
+     },
+     "witness[stale,structural,transport,endpoint,postcond]": {
+      "F-FRESH": [
+       false,
+       false,
+       false,
+       false,
+       false
+      ],
+      "F-STRUCT": [
+       true,
+       true,
+       false,
+       false,
+       false
+      ],
+      "F-TRANSPORT": [
+       true,
+       false,
+       true,
+       false,
+       false
+      ],
+      "F-VALUE(D1V)": [
+       true,
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     "F-FRESH_and_F-VALUE_partition_all_combos": true
+    },
+    "endpoint_postcond_observables": {
+     "endpoint_change_true": "F-VALUE(D1V)",
+     "postcond_change_true": "F-VALUE(D1V)",
+     "both_true": "F-VALUE(D1V)"
+    },
+    "guard_channels": {
+     "CH-STRUCT-SIG": {
+      "fire": 1,
+      "not_fire": 5,
+      "both_reachable": true
+     },
+     "CH-TRANSPORT-VALIDATOR": {
+      "fire": 1,
+      "not_fire": 5,
+      "both_reachable": true
+     },
+     "CH-POSTCOND-SEM": {
+      "fire": 1,
+      "not_fire": 5,
+      "both_reachable": true
+     },
+     "CH-PRECOND-BINDING": {
+      "fire": 5,
+      "not_fire": 1,
+      "both_reachable": true
+     }
+    },
+    "gate_b_branches": {
+     "INCUMBENT-BLIND-CONFIRMED": "INCUMBENT-BLIND-CONFIRMED",
+     "INCUMBENT-NOT-BLIND": "INCUMBENT-NOT-BLIND",
+     "DATA-INSUFFICIENT-D1V": "DATA-INSUFFICIENT-D1V",
+     "DATA-INSUFFICIENT-D1V-DEGENERATE": "DATA-INSUFFICIENT-D1V-DEGENERATE"
+    },
+    "decision_branches": {
+     "D1_EXTRACTION-DEFECT-CONFIRMED": "D1_EXTRACTION-DEFECT-CONFIRMED",
+     "D2_REPRESENTATION-LOSS-CONFIRMED": "D2_REPRESENTATION-LOSS-CONFIRMED",
+     "D3_MIXED-ANCHORS": "D3_MIXED-ANCHORS"
+    },
+    "anchor_clustered_bootstrap": {
+     "two_anchor": {
+      "n_anchors": 2,
+      "degenerate": false,
+      "diff_low": 1.0,
+      "diff_ub": 1.0
+     },
+     "one_anchor": {
+      "n_anchors": 1,
+      "degenerate": true,
+      "diff_low": null,
+      "diff_ub": null
+     }
+    }
+   },
+   "empty_class_check": {
+    "all_five_anchor_verdicts_reachable": true,
+    "all_four_drift_families_reachable": true,
+    "d1v_family_reachable": true,
+    "all_four_channels_fire_and_not_fire": true,
+    "all_gate_b_branches_reachable": true,
+    "all_decision_branches_reachable": true,
+    "predicate_pass_reachable": true,
+    "predicate_fail_reachable": true
+   },
+   "conclusion": "CORRECTED PREDICATE IS SATISFIABLE AND NOT VACUOUS; every declared membership class has a pinned synthetic witness; all four guard channels and all GATE-B/decision branches are reachable. No unsatisfiable-predicate or empty-class defect detected pre-freeze.",
+   "inherited_transport_value_coupling_parent_raw": {
+    "CAL-POS-1": {
+     "etag_equals_sha256_body_prefix32_all_4_sessions": true,
+     "consequence": "frozen transport_signature includes ETag = sha256(body)[:32]; body rotates with authenticity_token so transport_change=True on every value-rotation trial -> D1V unreachable on CAL-POS-1 under frozen rules"
+    },
+    "CAL-POS-2": {
+     "etag_present": false,
+     "final_url_stable": true,
+     "consequence": "transport stable -> only anchor that can yield D1V (parent M-N-D1V=6)"
+    },
+    "CAL-POS-3": {
+     "final_url_carries_per_session_centralauthLoginToken": true,
+     "consequence": "frozen transport_signature includes final_url; token-in-URL makes transport_change=True on every value-rotation trial -> D1V unreachable on CAL-POS-3"
+    },
+    "CAL-POS-4": {
+     "in_list_field_present": false,
+     "consequence": "NO_FIELD -> contributes no trials"
+    }
+   },
+   "single_anchor_d1v_forecast": {
+    "basis": "inherited parent RAW evidence",
+    "M-N-D1V-ANCHORS_expected": 1,
+    "effect": "anchor-clustered bootstrap degenerate (one anchor -> identical resamples) -> the mandate's multi-anchor evaluability question is expected to resolve DATA-INSUFFICIENT-D1V-DEGENERATE on these 4 anchors unless the frozen transport signature is unchanged and a value-rotation trial with stable transport is observed on >1 anchor"
+   }
+  },
+  "design_verdict": "CORRECTED PREDICATE IS SATISFIABLE AND NOT VACUOUS; every declared membership class has a pinned synthetic witness; all four guard channels and all GATE-B/decision branches are reachable. No unsatisfiable-predicate or empty-class defect detected pre-freeze.",
+  "false_positive_check": "DRY-RUN FOUND AND FIXED ONE DESIGN DEFECT PRE-FREEZE: the parent's NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS fixture tested shared session cookie NAMES, which the corrected sole (name,value) check deliberately ALLOWS; a name-level fixture would therefore have made the corrected predicate look vacuous. The corrected not-vacuous fixture requires a shared non-allowlisted (name,value) PAIR (truth-table cases T2, T4, T8) to FAIL. This defect was caught before freeze, exactly as the mandate requires."
+ },
+ "d1v_multi_anchor_question": {
+  "mandate_q2": "If D1 is reached, does a D1V population whose trials span MORE THAN ONE anchor make M-PAIRED-FA-DIFF-D1V evaluable with a non-degenerate anchor-clustered lower bound?",
+  "frozen_d1v_definition": "STALE AND NOT structural_change AND NOT transport_change; structural_change = structure_signature (type_class, form_action, form_method, sorted form_input_names) differs; transport_change = transport_signature (ETag, Last-Modified, Cache-Control max-age, Vary) OR final_url differs.",
+  "new_non_degeneracy_clause": "M-N-D1V-ANCHORS >= 2 is REQUIRED in addition to the parent's M-N-D1V >= 6 and M-N-DECISIONS-D1V >= 2 and NC-NONDEGENERATE-ESTIMATOR. Otherwise branch DATA-INSUFFICIENT-D1V-DEGENERATE.",
+  "pre_registered_diagnostic": "For each anchor, EXECUTE reports M-D1V-BLOCKER-{anchor} (enum NONE | BODY_DERIVED_ETAG | TOKEN_BEARING_FINAL_URL | STRUCTURAL_ENDPOINT_DRIFT | NO_FIELD | UNREACHABLE) and M-TRANSPORT-BODY-DERIVATION-{anchor} (boolean: whether a changed transport component is a deterministic function of the body, e.g. ETag == sha256(body)[:32]). These are zero-extra-cost descriptive diagnostics derived from the same retained raw captures; they do not change the frozen guard and do not feed GATE-B.",
+  "expected_outcome_basis": "DESIGN-derived from the parent RAW evidence: CAL-POS-1 transport is body-derived (ETag == sha256(body)[:32] on 4/4 sessions) and CAL-POS-3 final_url carries a per-session centralauthLoginToken; both force transport_change on every value-rotation trial, so under the frozen transport signature these two anchors cannot contribute D1V. CAL-POS-2 has stable transport (the parent's 6 D1V trials) and CAL-POS-4 is NO_FIELD. Therefore the multi-anchor D1V population is NOT constructible at zero extra request cost on these anchors and the mandate's Q2 is EXPECTED to resolve DATA-INSUFFICIENT-D1V-DEGENERATE. This is a pre-declared expectation, not a result: EXECUTE measures M-N-D1V-ANCHORS live and the diagnostic records the cause on the new capture.",
+  "decision_consequence": "If confirmed degenerate, this is decision-changing: it tells the Director that powering the blindness/necessity read requires either a different anchor population (with independent transport validators) or an instrument redesign that decouples body-derived validators from value rotation -- neither of which is authorized by this mandate. If a second anchor does contribute D1V, GATE-B is read with the anchor-clustered bound."
+ },
+ "baselines": {
+  "note": "Frozen identities shared with EXECUTE/AUDIT/DIRECTOR. The parent EXP-GRAPH-37950584469 preserved no code in its packet but its method is documented (html.parser on raw bytes, non-GET form token fields and frozen-list meta tokens, no JavaScript), so B-PARENT-METHOD-REIMPL is a documented best-effort reconstruction; reconstruction status is disclosed in validity_notes and no gate depends on it.",
+  "B-SINGLE-PATH-A": {
+   "description": "P-EXTRACT-A alone (stdlib html.parser). Single-path incumbent-extraction baseline; cannot self-certify.",
+   "expected_behavior": "Recovers session-scoped values on CAL-POS-1/2/3 per the parent packet; used to quantify the marginal value of dual-path agreement."
+  },
+  "B-SINGLE-PATH-B": {
+   "description": "P-EXTRACT-B alone (independently written regex/lexer with hand-written entity decoder).",
+   "expected_behavior": "Should agree with A wherever values are literal attribute text; disagreement is the measured extraction signal."
+  },
+  "B-PARENT-METHOD-REIMPL": {
+   "description": "Best-effort reimplementation of the parent EXP-GRAPH-36314193643 recorded extraction method over the SAME stored bodies; reconstruction disclosed.",
+   "expected_behavior": "If it reproduces 0 distinct values on CAL-POS-2 while A or B recover >=2, it pinpoints the parent's own method as the defect; no gate depends on it."
+  },
+  "B-INCUMBENT-SIGNAL-ONLY": {
+   "description": "The value-blind incumbent guard: REUSE iff none of CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR, CH-POSTCOND-SEM fires. This is the candidate shipped guard subject to the mandate's false-accept bound.",
+   "expected_behavior": "Predicted (structurally) to REUSE on ~1.0 of clean D1V trials because no channel can see a value-only change."
+  },
+  "B-VALUE-AWARE": {
+   "description": "CH-PRECOND-BINDING only: REUSE iff live exact value == recorded exact value; a byte-equality revalidation of a recorded binding, not an inference about server-side validity.",
+   "expected_behavior": "Abstains on 1.0 of value-rotating trials by construction."
+  },
+  "B-FULL-GUARD": {
+   "description": "Union of the four channels: REUSE iff none of CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR, CH-POSTCOND-SEM, CH-PRECOND-BINDING fires. Reported as the combined reference.",
+   "expected_behavior": "Equals B-VALUE-AWARE where there is no structural/transport change and there is value rotation."
+  },
+  "B-NO-GUARD-REPLAY": {
+   "description": "Always reuse the recorded value; no revalidation.",
+   "expected_behavior": "Raw-observation reference for STALE/FRESH accounting only; evidence of nothing about the candidate."
+  }
+ },
+ "positive_control": {
+  "PC-EXTRACT-CANARY": {
+   "id": "PC-EXTRACT-CANARY",
+   "requirement": "On the real anchor CAL-POS-1 (gitlab.com/-/trial_registrations/new/), whose server-minted authenticity_token rotation is SPIDER_CORROBORATED by accepted Codex EXP-FRONTIER-36306528608 and by the parent packet (16 distinct across 4 sessions), BOTH P-EXTRACT-A and P-EXTRACT-B must recover >=2 distinct non-empty exact authenticity_token values across the K=4 fresh sessions. M-CANARY-PASS must be true.",
+   "why_it_is_a_real_control": "It is a REAL page with producer-independent corroboration that the token exists and varies. If the two extractors cannot recover it, the instrument has no demonstrated true-positive sensitivity and a zero recovery on the uncertain anchors cannot be distinguished from an incapable instrument. Failure is MEASUREMENT_INVALID (F-INSTR), never a negative about the substrate.",
+   "metric_ids": [
+    "M-CANARY-PASS",
+    "M-DISTINCT-VALUES-A-CAL-POS-1",
+    "M-DISTINCT-VALUES-B-CAL-POS-1"
+   ]
+  },
+  "PC-GUARD-LOGIC": {
+   "id": "PC-GUARD-LOGIC",
+   "requirement": "Unscored instrument self-test on the synthetic fixture SYN-GUARD-D1V (a recorded/live pattern with byte-identical structure and transport and a rotated value): B-INCUMBENT-SIGNAL-ONLY must REUSE (false accept) and B-VALUE-AWARE must ABSTAIN; on SYN-GUARD-FRESH (identical value and structure): both must REUSE; on SYN-GUARD-POSTCOND (identical value but a changed in-list field set): CH-POSTCOND-SEM must fire and B-INCUMBENT-SIGNAL-ONLY must ABSTAIN. Any mismatch is terminal instrument failure (F-INSTR).",
+   "why_it_is_a_real_control": "The guard's firing logic is a program; this fixture proves it can fire and abstain on the exact patterns the real read depends on, without which a degenerate real population cannot be distinguished from a broken guard.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; synthetic bytes are permitted only for instrument self-test per V08 and never enter the scored population.",
+   "metric_ids": [
+    "M-GUARD-FIXTURE-PASS"
+   ]
+  }
+ },
+ "null_control": {
+  "NC-CAL-NEG-ALL-REJECTED": {
+   "id": "NC-CAL-NEG-ALL-REJECTED",
+   "requirement": "All four frozen negative anchors (CAL-NEG-1 iana.org/domains/reserved, CAL-NEG-2 cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst, CAL-NEG-3 www.debian.org/, CAL-NEG-4 httpbin.org/forms/post) must yield ZERO non-empty exact in-list token values under BOTH extraction paths in every session. Any admitted in-list non-empty value from a negative anchor is terminal MEASUREMENT_INVALID (GATE C2).",
+   "why": "A path that finds token values everywhere has no specificity; this is the exact counterpart to the parent G0.3 and is measured on the same frozen negatives.",
+   "metric_ids": [
+    "M-CERT-NEG-VALUES-A",
+    "M-CERT-NEG-VALUES-B"
+   ]
+  }
+ },
+ "null_controls": [
+  {
+   "id": "NC-EXTRACT-EMPTY-VALUE",
+   "requirement": "On the frozen instrument fixture SYN-EMPTY-VALUE (an in-list token-named hidden input with NO value attribute, plus an in-list meta token with an empty content attribute), both paths must classify the field as PRESENT-EMPTY (field name found, no non-empty exact value) and must AGREE. Disagreement is terminal (F-INSTR).",
+   "why": "Distinguishing PRESENT-EMPTY from FIELD-ABSENT is the operationalization of 'extraction defect' vs 'representation loss'.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+  },
+  {
+   "id": "NC-EXTRACT-JSSTRING",
+   "requirement": "On the frozen instrument fixture SYN-JSSTRING (an in-list token name appearing ONLY inside a JavaScript string literal), BOTH paths must recover ZERO non-empty exact values. Any value recovered from the JS string literal is terminal (F-INSTR).",
+   "why": "The representation-loss claim depends on the extractors correctly NOT treating script text as an attribute.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+  },
+  {
+   "id": "NC-PATH-INDEPENDENCE",
+   "requirement": "At EXECUTE, an AST-based import-graph attestation must show that P-EXTRACT-B imports neither P-EXTRACT-A nor any module that implements extraction shared between them, and the two path source files must be hashed separately. A one-character perturbation of a frozen instrument fixture must not change the two paths' agreement classification. Failure is terminal (F-INSTR).",
+   "why": "The design's evidential value depends on the two paths being genuinely independent implementations.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+  },
+  {
+   "id": "NC-SESSION-ISOLATION-REPAIRED",
+   "requirement": "Per anchor, per fresh session: a fresh http.cookiejar.CookieJar; the session's first request must carry no Cookie header; after removing the frozen constant-configuration allowlist, the (name,value) sets of every pair of sessions must be disjoint. session_identifying_disjoint is computed and reported as a NON-GATING diagnostic (M-CERT-SESSION-IDENTIFYING-DISJOINT) and is NOT a conjunct. Any (name,value) overlap outside the allowlist is terminal (GATE C3).",
+   "why": "This is the DESIGN-time audit repair implemented as AUDIT INTENDED: the sole disjointness check is (name,value)-after-filter. The parent conjoined it with the structurally unsatisfiable name-level check.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+  },
+  {
+   "id": "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS",
+   "requirement": "Unscored synthetic self-test proving the corrected repair has teeth on the (name,value) level: a synthetic jar pair that shares an identical NON-allowlisted (name,value) pair (e.g. _gitlab_session=abc in both) must FAIL the corrected predicate. Sharing an allowlisted constant only (e.g. preferred_language=en) must PASS. Sharing a session-identifying NAME with DISTINCT values must PASS. A predicate that fails the last case or passes the first is mis-specified and is terminal (F-CERT). See truth-table cases T1..T10 in spec.pre_freeze_satisfiability_dry_run.",
+   "why": "The parent's not-vacuous fixture tested shared session cookie NAMES, which the corrected sole (name,value) check deliberately ALLOWS; the fixture is corrected at DESIGN time to the (name,value) level. Without this the corrected repair could silently become either always-false or vacuous.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored."
+  },
+  {
+   "id": "NC-TRIAL-CONSTRUCTION-STABILITY",
+   "requirement": "The drift-trial population is constructed by keying AGSI instances on (anchor_id, field_name, structure_signature) plus a document-order occurrence ordinal, and a key contributes trials only if its occurrence count is IDENTICAL in the recorded and current session of every pair considered. Keys with unequal counts are EXCLUDED and counted in M-N-AGSI-EXCLUDED-UNSTABLE. The trial population, the keys and the exclusions are fixed before any guard statistic is computed, and computed independently on P-EXTRACT-A and P-EXTRACT-B; the two paths must yield the same included-key set. Failure is terminal (F-INSTR).",
+   "why": "The parent's field_name-only keying dropped every multi-form anchor (CAL-POS-1 contributed 0 trials) and made M-N-D1V=3. The repair must be deterministic and must not depend on incidental occurrence ordering.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored. Real trials only."
+  },
+  {
+   "id": "NC-TIME-VS-SESSION",
+   "requirement": "2 warm-jar re-captures per anchor from the SAME session jar after the fresh captures. Report M-WARMJAR-VARIATION-RATE (value change within a warm jar), M-WARMJAR-BODY-VARIATION-RATE and M-ROTATION-TIMESCALE-{anchor}. DIAGNOSTIC with a frozen ceiling rule, not a pass/fail gate: if M-WARMJAR-VARIATION-RATE is within 0.10 of the fresh-jar value-variation rate for an anchor, that anchor's rotation is labelled PER_REQUEST_SCALE rather than SESSION_SCALE and the claim ceiling drops accordingly (CC-H).",
+   "why": "Without this the packet cannot tell session-scoped state from merely unstable state."
+  },
+  {
+   "id": "NC-NONDEGENERATE-ESTIMATOR",
+   "requirement": "Part II is READ only if: (a) M-N-D1V >= 6 realized value-only-rotation trials; (b) >=2 distinct guard decisions (REUSE/ABSTAIN) are realized on the D1V subset; (c) every channel ACTIVE anywhere on the captured population fires AND does-not-fire at least once. A channel is INACTIVE-ON-POPULATION iff its activation input is constant across all compared recorded/current pairs (e.g. CH-POSTCOND-SEM when the in-list field-name set never changes); an inactive channel is reported inactive with its reason and its non-degeneracy requirement is WAIVED, but the guard's behaviour on that drift family is then declared UNKNOWN and must not be asserted. Otherwise the part-II arm is declared DATA-INSUFFICIENT-D1V and no false-accept or blindness claim is made.",
+   "why": "Prevents a channel that never varies from producing a trivially 'blind' result, while not making the mandate unreachable when a drift family simply does not occur on the frozen anchors (the parent's exact CH-POSTCOND-SEM 0/15 failure). The waiver is pre-registered, reasons are reported, and the waived family stays UNKNOWN."
+  },
+  {
+   "id": "NC-OPEN-GET-ONLY",
+   "requirement": "Every scored request is an idempotent GET of a credential-free public URL; no Cookie is sent on a first request; no form is submitted; no write verb, no authentication, no side effect. The neutral detector is presence-only and extracts no values.",
+   "why": "Keeps the substrate credential-free and the measurement free of injected state."
+  },
+  {
+   "id": "NC-D1V-ANCHOR-NONDEGENERACY",
+   "requirement": "Part II is READ only if the D1V family spans >=2 distinct anchors (M-N-D1V-ANCHORS >= 2). With a single anchor the anchor-clustered bootstrap resamples only that anchor and every replicate is identical, so M-PAIRED-FA-DIFF-D1V-LOW / -UB97 are degenerate. A single-anchor D1V population is terminal for Gate B as DATA-INSUFFICIENT-D1V-DEGENERATE, and the single-anchor point estimates are reported as descriptive only.",
+   "why": "The parent's NC-NONDEGENERATE-ESTIMATOR omitted the anchor count and reported nondegenerate=True with M-N-D1V-ANCHORS=1 and a degenerate LB=1.0. The mandate's Q2 explicitly targets this. This is a pre-declared power condition, not a gate relaxation.",
+   "fixture_disclosure": "INSTRUMENT UNIT TEST ONLY; never scored. Value-disjoint rotation trials only."
+  },
+  {
+   "id": "NC-TRANSPORT-VALUE-COUPLING-DECLARED",
+   "requirement": "EXECUTE reports, per anchor, whether the changed transport component is a deterministic function of the response body (M-TRANSPORT-BODY-DERIVATION-{anchor}) and the per-anchor D1V blocker (M-D1V-BLOCKER-{anchor}). If the frozen transport signature couples to the rotating value, the D1V family is declared structurally unreachable on that anchor and the reason is recorded; the frozen guard and D1V definition are NOT modified.",
+   "why": "Avoids silently re-fitting or redefining transport after the parent outcome; documents the design-level limitation that determines whether mandate Q2 can be powered on the frozen anchors.",
+   "fixture_disclosure": "DESCRIPTIVE DIAGNOSTIC; derived from retained raw captures at zero extra request cost; never scored."
+  }
+ ],
+ "measurement_validity": [
+  {
+   "id": "V01-PRE-REGISTRATION-NO-DESIGN-OUTCOME",
+   "blocking": true,
+   "requirement": "This spec and prereg.md are written before any anchor is contacted in this transaction. DESIGN performed no outcome-bearing measurement: no HTTP request, no extraction, no anchor or candidate probe. The anchors' behaviour is recorded in spec.substrate_certificate only with its evidence class and the exact already-frozen artifact that supports it.",
+   "why": "SPIDER_ARCHITECTURE_RESEARCH2.md section 5 and EXPERIMENT_PACKET.md section 2."
+  },
+  {
+   "id": "V02-SUBSTRATE-CERTIFICATE-FROZEN-AND-RE-VERIFIED",
+   "blocking": true,
+   "requirement": "spec.substrate_certificate is frozen with this design and is built ONLY from already-frozen, producer-independent Codex raw artifacts and the parent packet's raw/derived records. At the START of execution, before any confirmatory extraction, EXECUTE re-measures the certificate's route-validity, body-variation, field-presence and repaired session-isolation facts with the neutral certificate detector and must reproduce them per anchor within the declared tolerances; a certificate failure is terminal MEASUREMENT_INVALID at GATE C. The certificate runs neither extraction path and reports no extracted values.",
+   "why": "Honours the mandate's 'route-valid, health-certified substrate' under a contract that forbids DESIGN-time measurement, and re-verifies live rather than asserting."
+  },
+  {
+   "id": "V03-EXTRACTION-PATH-INDEPENDENCE",
+   "blocking": true,
+   "requirement": "NC-PATH-INDEPENDENCE. P-EXTRACT-A (html.parser) and P-EXTRACT-B (independent regex/lexer) are separate producer source files, share no extraction helper, and the AST import attestation must pass.",
+   "why": "Agreement between non-independent paths is not evidence."
+  },
+  {
+   "id": "V04-SAME-BYTES-BOTH-PATHS",
+   "blocking": true,
+   "requirement": "Both extraction paths operate on byte-identical stored response bodies for the same (anchor, session), and both the extraction read and the guard-trial read are computed from those same bytes. The stored body sha256 is recorded per record and is the input to both paths.",
+   "why": "Otherwise a recovery or label difference could be a capture difference rather than an extraction/guard difference."
+  },
+  {
+   "id": "V05-NO-JS-REPRESENTATION-LOSS-DECLARED",
+   "blocking": false,
+   "requirement": "No JavaScript is executed and no browser is used. Only raw HTTP response bytes are parsed. Any zero recovery is therefore a fact about the raw bytes, and V16 representation loss is declared: client-side-minted values, XHR/fetch-only gating, canvas content and authenticated state are structurally invisible and remain open.",
+   "why": "Prevents over-generalization of a bounded result."
+  },
+  {
+   "id": "V06-SESSION-ISOLATION-REPAIRED",
+   "blocking": true,
+   "requirement": "NC-SESSION-ISOLATION-REPAIRED. The CORRECTED predicate is frozen in spec.repaired_session_isolation_predicate: pass = first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter (sole disjointness check); session_identifying_disjoint is a non-gating diagnostic. It must still be falsifiable at the (name,value) level (NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS).",
+   "why": "The parent's literal predicate was unsatisfiable; the repaired one must still be falsifiable (NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS)."
+  },
+  {
+   "id": "V07-NO-ANCHOR-SPECIAL-CASING",
+   "blocking": true,
+   "requirement": "Neither extraction path, the token-name list, the presence detector, nor the guard contains anchor-, host- or URL-specific rules; the same code and the same frozen name list are applied to all anchors and negatives. An attestation over the two path sources confirms the absence of any literal host or anchor token.",
+   "why": "Prevents overfitting the extractor or guard to the anchors and inflating apparent agreement or blindness."
+  },
+  {
+   "id": "V08-ANTI-OVERFIT-CONTROLS",
+   "blocking": true,
+   "requirement": "The instrument must additionally pass the frozen unit fixtures (SYN-CANARY-BOTH, SYN-EMPTY-VALUE, SYN-JSSTRING, SYN-GUARD-D1V, SYN-GUARD-FRESH, SYN-GUARD-POSTCOND) and both paths must reject all four real negative anchors. Fixtures are instrument self-tests only and never enter the scored population.",
+   "why": "A path or guard can always be written to return whatever is desired; the fixtures together constrain false negatives and false positives, including the guard's firing logic."
+  },
+  {
+   "id": "V09-SEED-DETERMINISM",
+   "blocking": true,
+   "requirement": "All randomness derives from random.Random(<frozen_seed>); Python process-randomized hash() is never used as a seed or as a key. The frozen seed for this packet is 37964565784 (the experiment's run id). The parent's seed 36314193643 is retained only where a parent-derived quantity is explicitly recomputed for continuity, and that fact is recorded.",
+   "why": "SPIDER_MASTER_PROMPT section 30."
+  },
+  {
+   "id": "V10-RAW-EVIDENCE-RETENTION",
+   "blocking": true,
+   "requirement": "The full raw response body is retained per (anchor, session) under the experiment directory (or a compacted form under /tmp reduced to per-record JSONL plus per-record sha256, disclosed). Every record carries UTC timestamp, final URL after redirects, status, headers of interest (including ETag, Last-Modified, Cache-Control, Vary), body_sha256, the raw body's storage path or digest, the cookie-jar digest and the set of in-list field-name occurrences found by the neutral detector. Both extraction paths emit per-field extracted-value artifacts (exact string or PRESENT-EMPTY/ABSENT) per record and the guard emits per-trial decision artifacts.",
+   "why": "The parent's failure was unrecoverable because bodies were not retained; this packet must be re-analyzable without re-fetching."
+  },
+  {
+   "id": "V11-FROZEN-INPUT-RE-VERIFICATION",
+   "blocking": true,
+   "requirement": "EXECUTE re-verifies request.json, spec.json and prereg.md against freeze.json sha256 before the first request and again after the last; any mismatch is terminal. EXECUTE hashes every producer source file into result.json.artifacts with role 'code' and into provenance.json (freeze.json binds only request/spec/prereg by construction, per code_binding).",
+   "why": "Freeze integrity and code provenance."
+  },
+  {
+   "id": "V12-RESAMPLING-UNIT",
+   "blocking": true,
+   "requirement": "Part II intervals resample ANCHORS (sites) with replacement, B=10000, seed 37964565784, percentile method, and additionally report a trial-level Clopper-Pearson/Wilson interval named M-DIAGNOSTIC-UNCLUSTERED-* with an explicit do-not-use flag. No gate uses a trial-level unclustered interval.",
+   "why": "Trials within an anchor are dependent; unclustered intervals would be anticonservative."
+  },
+  {
+   "id": "V13-TRIAL-CONSTRUCTION-STABILITY",
+   "blocking": true,
+   "requirement": "NC-TRIAL-CONSTRUCTION-STABILITY. The AGSI instance key, the occurrence-count-equality rule, the exclusion rule, the trial population and the drift-family labels are frozen before outcomes and are computed identically from P-EXTRACT-A and P-EXTRACT-B; the included-key sets from the two paths must be identical. Any discrepancy is terminal (F-INSTR).",
+   "why": "A trial population chosen after seeing values admits selection bias; the parent's degenerate keying shows this construction is a first-class design object."
+  },
+  {
+   "id": "V14-GUARD-NONDEGENERACY",
+   "blocking": true,
+   "requirement": "NC-NONDEGENERATE-ESTIMATOR as redefined, including the INACTIVE-ON-POPULATION waiver with its mandatory reason and UNKNOWN labelling.",
+   "why": "Keeps the mandate's non-degeneracy requirement while acknowledging that a drift family that never occurs cannot be required to fire."
+  },
+  {
+   "id": "V15-PRE-FREEZE-SATISFIABILITY-DRY-RUN",
+   "blocking": true,
+   "requirement": "The mandate's binding precondition: spec.pre_freeze_satisfiability_dry_run must show (before freeze) that the corrected GATE-C3 predicate is satisfiable AND not vacuous on pinned synthetic inputs, and that every declared membership class (5 anchor verdicts, 4 drift families, 4 guard channels fire/not-fire, all GATE-B branches, all D1/D2/D3 decision branches, the anchor-clustered bootstrap non-degeneracy) is REACHABLE. The dry-run is synthetic-only and outcome-free.",
+   "why": "Third consecutive control-plane defect on this gate; catch unsatisfiable-predicate/empty-class defects pre-freeze."
+  }
+ ],
+ "substrate_certificate": {
+  "purpose": "Pre-freeze route-valid, health-certified substrate and the REPAIRED session-isolation predicate. Built only from already-frozen, producer-independent Codex artifacts and the parent packet's raw/derived records; re-measured fail-closed at GATE C before any confirmatory extraction.",
+  "certificate_evidence_artifacts": [
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/request.json",
+    "sha256": "6be23953ef26f27dc8a48d20c3988b6355e925a81566e1974da2c9c551945219",
+    "role": "derived",
+    "establishes": "Parent mandate (spent) and parent_handoff reference; used only for identity continuity."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/spec.json",
+    "sha256": "85a29731e9aefc55508b9d87acb96c8307d2e114dfe9571d277b5a0f60e0821e",
+    "role": "derived",
+    "establishes": "Parent frozen design including the defective conjoined predicate; the object being repaired."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/freeze.json",
+    "sha256": "11ce8ff1d7d34fd8670c55599f4f2eb0acddab6b9fc881c938fbd5153db96920",
+    "role": "derived",
+    "establishes": "Parent frozen digests; integrity of the parent packet."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/result.json",
+    "sha256": "a3e73cb0a805eaab0bedadf4a98f9388b3a4fbc3f6e1bb5528a3ec3b5a6a9aeb",
+    "role": "derived",
+    "establishes": "Parent status MEASUREMENT_INVALID/INCONCLUSIVE/F-CERT; instrument-level extraction evidence; M-N-D1V=6 (unread)."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/audit.json",
+    "sha256": "3a99fe34d817b0a90faed3d5884eeccf283753180a1a1e7258286295eabb1f85",
+    "role": "derived",
+    "establishes": "Independent audit naming the GATE-C3 AND-vs-OR defect and required_fixes[0]: use pairwise_disjoint_on_name_value_after_filter as the sole disjointness check."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/raw/records.jsonl",
+    "sha256": "35e396ab6c8c3f79a9c4ab301eff9efd7203fd0d3b5b004b82b83d516e3755b1",
+    "role": "raw",
+    "establishes": "Parent live captures with cookie jars, ETag/Last-Modified/Cache-Control/Vary, final_url and body_sha256; source of the DESIGN-derived transport-value coupling diagnostic. Contains NO extracted values."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/derived/certificate.json",
+    "sha256": "e3655c932ed83f9a29f2849dd24e5354e54545b62c300852e7ef38a320027dc8",
+    "role": "derived",
+    "establishes": "Correction evidence: pairwise_disjoint_on_name_value_after_filter=true for all 8 anchors; session_identifying_disjoint=false on CAL-POS-1/2/3; NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS=true."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/derived/guard_stats.json",
+    "sha256": "cf2bec1568aab7da61b7f53b5c0900780ead45b8723194b472d7f0cc9232b2e5",
+    "role": "derived",
+    "establishes": "Parent would-be GATE-B statistics and M-N-D1V-ANCHORS=1 (only CAL-POS-2); evidence that the single-anchor degeneracy is real."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/derived/anchor_metrics.json",
+    "sha256": "2b9e07ea9953a6b04e8e9db4c3a42229505ae1055b312dc598d74790cc13c615",
+    "role": "derived",
+    "establishes": "Per-anchor extraction metrics and timescale classification."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/derived/extraction_A.jsonl",
+    "sha256": "a8575141dabdcdf1249e7dcbd3ec21a126f0b2c6dbf099ec8b1331ab2760d40a",
+    "role": "derived",
+    "establishes": "P-EXTRACT-A per-record extracted values (parent)."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37964565784/derived/extraction_B.jsonl",
+    "sha256": "c40be8e615a183cd3527a5e5adba8d5bcf38e3834adf295dfcb8d551036c5af1",
+    "role": "derived",
+    "establishes": "P-EXTRACT-B per-record extracted values (parent)."
+   },
+   {
+    "path": "research/experiments/EXP-GRAPH-37950584469/raw/records.jsonl",
+    "sha256": "9885176e893d9651ed71e1470ebb5c5fc0db3cde410ff013d2dd5ffbbd215d69",
+    "role": "raw",
+    "establishes": "Grandparent live captures retained for identity continuity."
+   },
+   {
+    "path": "codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl",
+    "sha256": "1bbde51d4cf12c739bc68a435d03e4b0dc844672cb55acd570538b12eac3d429",
+    "role": "raw",
+    "establishes": "Cross-session token-stability probe. REPORTED ABSENT in the checked-out repo (audit required_fixes[1]); EXECUTE records presence/absence and sha256 if present. GATE C re-measures live and does not depend on it."
+   }
+  ],
+  "anchor_certificate": [
+   {
+    "anchor_id": "CAL-POS-1",
+    "url": "https://gitlab.com/-/trial_registrations/new/",
+    "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions and in Frontier",
+    "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)",
+    "value_variation_evidence": "SPIDER_CORROBORATED: Frontier 3 distinct authenticity_token in 3 sessions; parent packet 16 distinct in 4; the 4 forms per session are the key multi-occurrence case the repaired trial construction must retain",
+    "evidence_class": "SPIDER_CORROBORATED",
+    "g1_route_expected": true,
+    "g2_body_variable_expected": true
+   },
+   {
+    "anchor_id": "CAL-POS-2",
+    "url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount",
+    "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions and in Frontier",
+    "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)",
+    "value_variation_evidence": "SPIDER_CORROBORATED: Frontier 3 distinct wpCreateaccountToken in 3 sessions; parent packet 5 distinct in 4 (the reconciliation anchor vs the grandparent's 0)",
+    "evidence_class": "SPIDER_CORROBORATED",
+    "g1_route_expected": true,
+    "g2_body_variable_expected": true
+   },
+   {
+    "anchor_id": "CAL-POS-3",
+    "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&action=form",
+    "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions",
+    "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)",
+    "value_variation_evidence": "SPIDER_CORROBORATED by the parent packet at instrument level: 5 distinct wpLoginToken across 4 sessions, both paths; not independently Codex-corroborated",
+    "evidence_class": "SPIDER_PARTIAL",
+    "g1_route_expected": true,
+    "g2_body_variable_expected": true
+   },
+   {
+    "anchor_id": "CAL-POS-4",
+    "url": "https://meta.discourse.org/",
+    "route_status_evidence": "HTTP 200 in 4 of 4 parent sessions",
+    "body_variation_evidence": "n_distinct_body_sha256 = 4 of 4 (parent)",
+    "value_variation_evidence": "A_PRIORI_CONSTRUCT: parent packet found NO in-list field under both paths; treated as an expected representation-loss candidate, not a corroborated token anchor",
+    "evidence_class": "A_PRIORI_CONSTRUCT",
+    "g1_route_expected": true,
+    "g2_body_variable_expected": true
+   },
+   {
+    "anchor_id": "CAL-POS-5",
+    "url": "https://bugs.launchpad.net/ubuntu/+reportbug",
+    "route_status_evidence": "HTTP 404 in 4 of 4 parent sessions",
+    "evidence_class": "RETIRED",
+    "retired_reason": "The URL no longer serves the page (404 x4). Retained for identity continuity only; excluded from the anchor set and from all denominators. NOT counted as a negative or as a positive."
+   }
+  ],
+  "negative_anchor_certificate": [
+   {
+    "anchor_id": "CAL-NEG-1",
+    "url": "https://www.iana.org/domains/reserved",
+    "evidence_class": "SPIDER_CORROBORATED (parent G0.3)",
+    "expected": "0 in-list token values, both paths"
+   },
+   {
+    "anchor_id": "CAL-NEG-2",
+    "url": "https://cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst",
+    "evidence_class": "SPIDER_CORROBORATED (parent G0.3)",
+    "expected": "0 in-list token values, both paths"
+   },
+   {
+    "anchor_id": "CAL-NEG-3",
+    "url": "https://www.debian.org/",
+    "evidence_class": "SPIDER_CORROBORATED (parent G0.3)",
+    "expected": "0 in-list token values, both paths"
+   },
+   {
+    "anchor_id": "CAL-NEG-4",
+    "url": "https://httpbin.org/forms/post",
+    "evidence_class": "SPIDER_CORROBORATED (parent G0.3)",
+    "expected": "0 in-list token values, both paths"
+   }
+  ],
+  "certificate_tolerances": "GATE C re-measures route status, body variation, field presence and the repaired session-isolation predicate. Tolerance: route validity requires HTTP 200 in >=3 of the 4 fresh sessions (the parent's 4/4 is the prior, not a hard equality); body variation requires >=2 distinct body_sha256 across the 4 fresh sessions; the neutral presence detector must find at least one in-list field-name occurrence in >=3 sessions on >=3 of the 4 positive anchors. The certificate does not compute extracted values and does not compute guard trials.",
+  "unresolved_property": "Extraction validity (whether a value is present and recoverable in the raw bytes) and guard behaviour are exactly the objects of the confirmatory measurement and are deliberately NOT asserted by the certificate.",
+  "transport_value_coupling_design_derivation": {
+   "evidence_class": "DESIGN-DERIVED FROM INHERITED PARENT RAW EVIDENCE (not a new measurement; no anchor contacted at DESIGN)",
+   "CAL-POS-1": "ETag == sha256(body)[:32] on 4/4 parent sessions; transport_signature includes ETag, so transport_change is forced by value rotation -> D1V structurally unreachable on CAL-POS-1 under the frozen rules.",
+   "CAL-POS-2": "No ETag; stable final_url; transport stable -> the only parent anchor that can yield D1V (parent M-N-D1V=6).",
+   "CAL-POS-3": "final_url (inside transport_signature) carries a distinct centralauthLoginToken per session -> transport_change forced by value rotation -> D1V structurally unreachable on CAL-POS-3.",
+   "CAL-POS-4": "NO_FIELD -> contributes no value trials.",
+   "note": "Used only to pre-declare the expected mandate-Q2 outcome in spec.d1v_multi_anchor_question. EXECUTE re-measures M-N-D1V-ANCHORS and M-D1V-BLOCKER-{anchor} live on the new capture; this derivation never sets a gate value."
+  }
+ },
+ "repaired_session_isolation_predicate": {
+  "id": "NC-SESSION-ISOLATION-REPAIRED",
+  "gate": "GATE-C3",
+  "pass_metric": "M-CERT-SESSION-ISOLATION-PASS",
+  "authority": "audit.json required_fixes[0] of EXP-GRAPH-37964565784, implemented VERBATIM at DESIGN time: pairwise_disjoint_on_name_value_after_filter is the SOLE disjointness check. This supersedes the parent's conjoined AND predicate.",
+  "constant_configuration_cookie_allowlist": [
+   "preferred_language",
+   "GeoIP",
+   "NetworkProbeLimit",
+   "WMF-Last-Access",
+   "WMF-Last-Access-Global",
+   "CentralAuthAnonTopLevel"
+  ],
+  "session_identifying_cookie_names_observed": [
+   "_gitlab_session",
+   "WMF-Uniq",
+   "authSession",
+   "enwikiSession"
+  ],
+  "exemption_rule": "A shared cookie NAME is exempt from the pairwise-disjointness requirement iff it is an exact member of the frozen constant_configuration_cookie_allowlist. Any cookie name outside that allowlist is treated as potentially session-identifying; if any pair of sessions for the same anchor shares such a name (regardless of its value), the predicate FAILS. The allowlist is closed and frozen; unknown/new cookies are NOT auto-exempted.",
+  "sub_predicates": {
+   "first_request_cookieless": "for every (anchor, session): jar_was_empty_before_request == true on the first request; a SEPARATE requirement that gates",
+   "pairwise_disjoint_on_name_value_after_filter": "for every anchor and every pair of sessions: after removing any (name,value) whose NAME is in the frozen constant_configuration_cookie_allowlist, the remaining (name,value) sets are disjoint. THIS IS THE SOLE DISJOINTNESS CHECK.",
+   "session_identifying_disjoint": "NON-GATING DIAGNOSTIC ONLY (reported as M-CERT-SESSION-IDENTIFYING-DISJOINT). It is expected to be FALSE on anchors that reuse session cookie names with distinct values, and that is correct. It MUST NOT be a conjunct."
+  },
+  "pass_condition": "first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter for all resolved positive and negative anchors and all sessions. (Operational form of the audit's OR: the name-disjointness branch is dropped because it is structurally unsatisfiable for real session cookies; the satisfiable (name,value)-after-filter branch alone is used.)",
+  "sub_metrics": [
+   "M-CERT-FIRST-REQUEST-COOKIELESS",
+   "M-CERT-PAIRWISE-DISJOINT-AFTER-FILTER",
+   "M-CERT-SESSION-IDENTIFYING-DISJOINT (NON-GATING diagnostic)",
+   "M-CERT-CONSTCONFIG-SHARED-NAMES",
+   "M-CERT-UNEXPECTED-SHARED-NAMES"
+  ],
+  "anti_gaming": "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS must be true at the (name,value) level: a shared non-allowlisted (name,value) PAIR must FAIL; a shared allowlisted constant only must PASS; a shared session-identifying NAME with distinct values must PASS. See pre_freeze_satisfiability_dry_run truth-table cases T1..T10.",
+  "preserved_not_weakened": "The predicate is NOT 'jars share no cookies' and NOT 'no shared cookie names'. It requires that the only shared (name,value) pairs be allowlisted constant configuration; any non-allowlisted (name,value) pair shared by two sessions FAILS. Unknown/new cookies are NOT auto-exempted (truth-table T8). It is re-verified live at GATE C on the new captures.",
+  "pre_freeze_satisfiability": "Discharged: see spec.pre_freeze_satisfiability_dry_run (predicate pass and fail both reachable; T1/T7 prove the parent AND was the defect)."
+ },
+ "frozen_populations": {
+  "anchors_positive": [
+   "CAL-POS-1",
+   "CAL-POS-2",
+   "CAL-POS-3",
+   "CAL-POS-4"
+  ],
+  "anchors_positive_retired": [
+   "CAL-POS-5"
+  ],
+  "anchors_negative": [
+   "CAL-NEG-1",
+   "CAL-NEG-2",
+   "CAL-NEG-3",
+   "CAL-NEG-4"
+  ],
+  "sessions": {
+   "K_total": 4,
+   "session_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4"
+   ],
+   "recorded_session": "S1",
+   "current_sessions": [
+    "S2",
+    "S3",
+    "S4"
+   ],
+   "session_isolation": "fresh http.cookiejar.CookieJar per (anchor, session); no Cookie header on the first request; repaired disjointness predicate; Connection: close; new connection per request",
+   "pacing": ">= 2.0 s between same-host requests"
+  },
+  "warm_jar_diagnostic": {
+   "re_captures_per_anchor": 2,
+   "same_jar": true,
+   "purpose": "NC-TIME-VS-SESSION / M-ROTATION-TIMESCALE"
+  },
+  "agsi_definition": "An ACTION-GATING STATE ITEM (AGSI) is a (anchor, field_name) pair whose value is (a) the value attribute of an <input>, <textarea> or <select> belonging to a <form> whose method is not GET; or (b) the content attribute of a <meta> element whose name is in the frozen capability-token name list. Gating is STRUCTURAL, never behavioural; write verbs are forbidden.",
+  "agsi_instance_key": "(anchor_id, field_name, structure_signature) plus a document-order occurrence ordinal assigned among occurrences of the same key within a session. A key contributes guard trials iff its occurrence count is IDENTICAL in the recorded session and in every current session it is paired with; keys with unequal counts are EXCLUDED and counted in M-N-AGSI-EXCLUDED-UNSTABLE. This is the DESIGN-time repair of the parent's field_name-only keying, which required exactly one occurrence and therefore dropped CAL-POS-1 entirely.",
+  "frozen_token_name_list": [
+   "authenticity_token",
+   "authenticityToken",
+   "csrfmiddlewaretoken",
+   "_csrf",
+   "csrf_token",
+   "csrf-token",
+   "__RequestVerificationToken",
+   "__VIEWSTATE",
+   "__EVENTVALIDATION",
+   "wpEditToken",
+   "wpCreateaccountToken",
+   "wpCreateaccounttoken",
+   "wpLoginToken",
+   "wpCancelToken",
+   "form_token",
+   "__FORM_TOKEN",
+   "auth_token",
+   "os_authkey",
+   "bbl_",
+   "requesttoken",
+   "state",
+   "code",
+   "nonce",
+   "otp",
+   "user_token",
+   "session_token",
+   "authenticity"
+  ],
+  "recovered_value_definition": "For an AGSI, the recovered exact value is the literal attribute string after HTML entity decoding, byte-for-byte; empty string means PRESENT-EMPTY; an absent attribute or absent field means ABSENT. Value comparison is byte-exact.",
+  "session_scoped_qualification": "An anchor's AGSI (per path) qualifies SESSION-SCOPED iff its URL returned HTTP 200 in at least 3 of the 4 sessions AND n_distinct_exact_values >= 2 AND n_distinct_body_sha256 >= 2. This is the parent's exact criterion, reused for identity continuity.",
+  "anchor_verdict_enum": [
+   "RECOVERED_SESSION_SCOPED",
+   "RECOVERED_INVARIANT",
+   "RECOVERED_EMPTY",
+   "NO_FIELD",
+   "UNREACHABLE"
+  ],
+  "anchor_verdict_rule": "Per anchor and per path, verdict = RECOVERED_SESSION_SCOPED if that path recovers >=2 distinct non-empty exact values and the session-scoped criterion holds; RECOVERED_INVARIANT if it recovers exactly 1 distinct non-empty exact value across sessions; RECOVERED_EMPTY if in-list fields are present but all values are empty/absent; NO_FIELD if no in-list field is present; UNREACHABLE if HTTP 200 in <3 sessions. The anchor-level verdict is the pair (verdict_A, verdict_B) and is AGREED iff verdict_A == verdict_B.",
+  "trial_population": "All ordered recorded/current session pairs (Sr, Sc) with r < c among S1..S4 (6 pairs), for every included AGSI instance. The S1 -> {S2,S3,S4} subset is reported separately for continuity with the parent but is NOT the whole population.",
+  "drift_families": {
+   "F-FRESH": "live == recorded AND no structural, transport, endpoint or postcond change",
+   "F-VALUE (D1V)": "live != recorded AND no structural change AND no transport change (parent's exact D1V definition); postcond change is allowed but stratified",
+   "F-STRUCT": "structure_signature differs (type_class, form_action, form_method, input_name_set)",
+   "F-ENDPOINT": "subset of F-STRUCT where form_action specifically differs; also reported via transport final_url differences",
+   "F-TRANSPORT": "transport_signature differs (ETag, Last-Modified, Cache-Control max-age, Vary)",
+   "F-POSTCOND": "in-list field-name set differs"
+  },
+  "d1v_definition": "Value-only rotation: STALE (live exact value != recorded exact value, byte-exact) AND NOT structural_change AND NOT transport_change. structural_change = structure_signature (type_class, form_action, form_method, sorted input_name_set) differs; transport_change = (ETag, Last-Modified, Cache-Control max-age, Vary) or final_url differs. endpoint_change and postcond_change are observed and reported but do NOT exclude a trial from D1V under the frozen rule. Family labels stratify reporting only; the guard never sees a label.",
+  "ground_truth": "For a trial (AGSI instance i, recorded Sr, current Sc): recorded_value = exact value in Sr; live_value = exact value in Sc; label = STALE iff live_value != recorded_value byte-exact, else FRESH. This is a raw observation with no interpretation and no injected ground truth.",
+  "d1v_anchor_coverage_requirement": "M-N-D1V-ANCHORS >= 2 is REQUIRED for a READ Gate-B (new; see spec.d1v_multi_anchor_question). Per-anchor D1V blockers are diagnosed by M-D1V-BLOCKER-{anchor}."
+ },
+ "extraction_paths": {
+  "P-EXTRACT-A": {
+   "id": "P-EXTRACT-A",
+   "name": "HTMLPARSER",
+   "method": "subclass of stdlib html.parser.HTMLParser; walks the tag stream, collects <form>, <input>, <textarea>, <select>, <meta> with their attributes; entity decoding delegated to stdlib html.unescape; records per in-list field name the exact value/PRESENT-EMPTY/ABSENT and the form structural context (action, method, input-name set, type class).",
+   "source_file_role": "code"
+  },
+  "P-EXTRACT-B": {
+   "id": "P-EXTRACT-B",
+   "name": "REGEXLEX",
+   "method": "independently written byte-level lexer using re only for tag/attribute token boundaries plus a hand-written quote/whitespace/attribute state machine and a hand-written HTML entity decoder (NOT html.unescape); must not import P-EXTRACT-A or any shared extraction helper; records the same fields and structural context as P-EXTRACT-A.",
+   "source_file_role": "code"
+  },
+  "same_input_guarantee": "Both paths receive the byte-identical stored body for each (anchor, session); body sha256 is recorded and both paths must hash the same bytes.",
+  "reuse_note": "EXECUTE may reuse or adapt the parent packet's independently written paths at research/graph/freshness_detection/exp_37950584469/path_a_htmlparser.py, path_b_regexlex.py, neutral_detector.py and fixtures.py, but must write them as separate producer files for this experiment and must not import one path from the other.",
+  "neutral_certificate_detector": "A third, deliberately minimal presence-only detector (a raw byte regex for in-list name= occurrences) used only at GATE C to certify field presence and body variation. It extracts no values and is not either extraction path.",
+  "instrument_fixtures": [
+   {
+    "id": "SYN-CANARY-BOTH",
+    "purpose": "positive instrument fixture: a non-GET form with an in-list hidden input carrying a literal value, plus an in-list meta token with content; both paths must recover exactly the same 2 (name,value) pairs.",
+    "scored": false
+   },
+   {
+    "id": "SYN-EMPTY-VALUE",
+    "purpose": "empty-value instrument fixture: in-list hidden input with no value attribute and in-list meta token with empty content; both paths must classify PRESENT-EMPTY and agree.",
+    "scored": false
+   },
+   {
+    "id": "SYN-JSSTRING",
+    "purpose": "representation-loss instrument fixture: in-list token name only inside a JavaScript string literal; both paths must recover 0 non-empty values.",
+    "scored": false
+   },
+   {
+    "id": "SYN-GUARD-D1V",
+    "purpose": "guard-logic fixture: byte-identical structure/transport with a rotated value; B-INCUMBENT-SIGNAL-ONLY must REUSE and B-VALUE-AWARE must ABSTAIN.",
+    "scored": false
+   },
+   {
+    "id": "SYN-GUARD-FRESH",
+    "purpose": "guard-logic fixture: identical value and structure; both guards must REUSE.",
+    "scored": false
+   },
+   {
+    "id": "SYN-GUARD-POSTCOND",
+    "purpose": "guard-logic fixture: same value but a changed in-list field-name set; CH-POSTCOND-SEM must fire and B-INCUMBENT-SIGNAL-ONLY must ABSTAIN.",
+    "scored": false
+   }
+  ]
+ },
+ "guard_model": {
+  "decision_set": [
+   "REUSE",
+   "ABSTAIN"
+  ],
+  "note": "ABSTAIN is the product-preferred UNKNOWN/unsafe-to-inherit outcome; REUSE is inheritance of the recorded binding.",
+  "channels": {
+   "CH-STRUCT-SIG": {
+    "activation_input": "structure_signature = (type_class, form_action, form_method, sorted form_input_names)",
+    "fires_when": "structure_signature differs between recorded and current"
+   },
+   "CH-TRANSPORT-VALIDATOR": {
+    "activation_input": "transport_signature = (ETag, Last-Modified, Cache-Control max-age, Vary) plus final_url after redirects",
+    "fires_when": "transport_signature differs"
+   },
+   "CH-POSTCOND-SEM": {
+    "activation_input": "in-list field-name set of the session",
+    "fires_when": "the in-list field-name set differs"
+   },
+   "CH-PRECOND-BINDING": {
+    "activation_input": "recorded exact value and live exact value",
+    "fires_when": "live != recorded byte-exact"
+   }
+  },
+  "incumbent_reuse_rule": "B-INCUMBENT-SIGNAL-ONLY: REUSE iff none of CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR, CH-POSTCOND-SEM fires.",
+  "valueaware_reuse_rule": "B-VALUE-AWARE: REUSE iff live == recorded.",
+  "full_reuse_rule": "B-FULL-GUARD: REUSE iff none of the four channels fires.",
+  "false_accept": "a trial whose label is STALE and whose guard decision is REUSE",
+  "false_reject": "a trial whose label is FRESH and whose guard decision is ABSTAIN"
+ },
+ "metric_registry": {
+  "note": "Stable metric identifiers for EXECUTE, AUDIT and DIRECTOR. AUDIT must reuse these verbatim when recomputing or disputing them.",
+  "certificate": [
+   {
+    "id": "M-CERT-ROUTE-OK",
+    "definition": "number of positive anchors with HTTP 200 in >=3 of 4 sessions",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-CERT-BODY-VARIABLE",
+    "definition": "number of positive anchors with >=2 distinct body_sha256 across the 4 sessions",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-CERT-FIELD-PRESENT",
+    "definition": "number of positive anchors where the neutral presence detector finds >=1 in-list field-name occurrence in >=3 sessions",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-CERT-SESSION-ISOLATION-PASS",
+    "definition": "CORRECTED predicate: first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter (sole disjointness check). session_identifying_disjoint is NOT part of this metric.",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-CERT-FIRST-REQUEST-COOKIELESS",
+    "definition": "every (anchor, session) first request carried no Cookie header",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-CERT-SESSION-IDENTIFYING-DISJOINT",
+    "definition": "NON-GATING diagnostic: no cookie NAME outside the frozen allowlist is shared by any pair of sessions. Expected false on anchors reusing session cookie names with distinct values; never gates.",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-CERT-CONSTCONFIG-SHARED-NAMES",
+    "definition": "sorted list, per anchor, of shared cookie names that are inside the allowlist (diagnostic, non-gating)",
+    "unit": "map"
+   },
+   {
+    "id": "M-CERT-UNEXPECTED-SHARED-NAMES",
+    "definition": "sorted list, per anchor, of shared cookie names outside the allowlist (any non-empty value fails GATE-C3)",
+    "unit": "map"
+   },
+   {
+    "id": "M-CERT-NEG-VALUES-A",
+    "definition": "total non-empty in-list values recovered by P-EXTRACT-A across all negative anchors",
+    "unit": "count"
+   },
+   {
+    "id": "M-CERT-NEG-VALUES-B",
+    "definition": "total non-empty in-list values recovered by P-EXTRACT-B across all negative anchors",
+    "unit": "count"
+   },
+   {
+    "id": "M-CERT-PAIRWISE-DISJOINT-AFTER-FILTER",
+    "definition": "for every anchor and session pair, the (name,value) sets after removing allowlisted cookie names are disjoint (THE sole gating disjointness check)",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-CERT-SESSION-ISOLATION-DISJUNCTIVE-BRANCH",
+    "definition": "diagnostic recording which audit branch was satisfiable: value_after_filter_branch_true / name_disjointness_branch_true (the latter expected false on real session cookies)",
+    "unit": "boolean-pair"
+   }
+  ],
+  "extraction": [
+   {
+    "id": "M-DISTINCT-VALUES-A-{anchor}",
+    "definition": "distinct non-empty exact in-list values recovered by P-EXTRACT-A on the anchor across sessions",
+    "unit": "count"
+   },
+   {
+    "id": "M-DISTINCT-VALUES-B-{anchor}",
+    "definition": "distinct non-empty exact in-list values recovered by P-EXTRACT-B on the anchor across sessions",
+    "unit": "count"
+   },
+   {
+    "id": "M-EXTRACT-RATE-A-{anchor}",
+    "definition": "fraction of sessions in which P-EXTRACT-A recovered >=1 non-empty value",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-EXTRACT-RATE-B-{anchor}",
+    "definition": "fraction of sessions in which P-EXTRACT-B recovered >=1 non-empty value",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ANCHOR-VERDICT-{anchor}",
+    "definition": "pair (verdict_A, verdict_B) from frozen_populations.anchor_verdict_enum",
+    "unit": "enum-pair"
+   },
+   {
+    "id": "M-EXTRACT-AGREE-VALUESET",
+    "definition": "number of positive anchors where P-EXTRACT-A and P-EXTRACT-B recover identical exact per-field value sets across all sessions",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-EXTRACT-AGREE-VERDICT",
+    "definition": "number of positive anchors where verdict_A == verdict_B",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-EXTRACT-KAPPA",
+    "definition": "Cohen's kappa on per-(anchor, session, in-list field name) value-presence agreement between the two paths",
+    "unit": "dimensionless"
+   },
+   {
+    "id": "M-CANARY-PASS",
+    "definition": "both paths recover >=2 distinct non-empty authenticity_token values on CAL-POS-1",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-FIXTURE-CANARY-PASS",
+    "definition": "both paths recover the 2 expected pairs on SYN-CANARY-BOTH",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-FIXTURE-EMPTY-AGREE",
+    "definition": "both paths classify SYN-EMPTY-VALUE fields as PRESENT-EMPTY identically",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-FIXTURE-JSSTRING-VALUES",
+    "definition": "non-empty values recovered by either path from SYN-JSSTRING",
+    "unit": "count (must be 0)"
+   },
+   {
+    "id": "M-N-SESSION-SCOPED-CONFIRMED",
+    "definition": "number of positive anchors with verdict_A == verdict_B == RECOVERED_SESSION_SCOPED",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-N-REPRESENTATION-LOSS",
+    "definition": "number of positive anchors with verdict_A == verdict_B in {RECOVERED_EMPTY, NO_FIELD} while M-CERT-BODY-VARIABLE holds",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-N-EXTRACTION-UNRELIABLE",
+    "definition": "number of positive anchors where M-ANCHOR-VERDICT is not AGREED",
+    "unit": "anchors (0..4)"
+   },
+   {
+    "id": "M-WARMJAR-VARIATION-RATE",
+    "definition": "per anchor, fraction of warm-jar re-captures whose recovered exact value differs from the fresh capture",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-WARMJAR-BODY-VARIATION-RATE",
+    "definition": "per anchor, fraction of warm-jar re-captures whose body_sha256 differs from the fresh capture",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-WARMJAR-FRESH-VALUE-VARIATION-RATE",
+    "definition": "per anchor, fraction of fresh-session pairs whose recovered exact value differs (the comparator for the timescale classification)",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-ROTATION-TIMESCALE-{anchor}",
+    "definition": "enum {SESSION_SCALE, PER_REQUEST_SCALE, NO_ROTATION, UNDETERMINED}: PER_REQUEST_SCALE iff M-WARMJAR-VARIATION-RATE is within 0.10 of M-WARMJAR-FRESH-VALUE-VARIATION-RATE; NO_ROTATION iff both are 0; SESSION_SCALE iff warm rate is materially below the fresh rate; UNDETERMINED if no value rotates",
+    "unit": "enum"
+   }
+  ],
+  "drift_and_guard": [
+   {
+    "id": "M-N-AGSI-INSTANCES",
+    "definition": "number of AGSI instance keys that contribute at least one trial",
+    "unit": "count"
+   },
+   {
+    "id": "M-N-AGSI-EXCLUDED-UNSTABLE",
+    "definition": "number of AGSI keys excluded because their occurrence count differed across the paired sessions",
+    "unit": "count"
+   },
+   {
+    "id": "M-N-TRIALS",
+    "definition": "number of realized recorded/current trials over all included AGSI instances and all ordered session pairs",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-FRESH",
+    "definition": "number of realized FRESH trials",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-D1V",
+    "definition": "STALE AND NOT structural_change AND NOT transport_change (frozen exact definition)",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-D1V-ANCHORS",
+    "definition": "number of distinct anchors contributing at least one D1V trial",
+    "unit": "anchors"
+   },
+   {
+    "id": "M-N-STRUCT-DRIFT",
+    "definition": "number of trials with a structural-signature change",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-ENDPOINT-DRIFT",
+    "definition": "number of trials with a form_action (endpoint) change",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-TRANSPORT-DRIFT",
+    "definition": "number of trials with a transport-validator change",
+    "unit": "trials"
+   },
+   {
+    "id": "M-N-POSTCOND-DRIFT",
+    "definition": "number of trials with an in-list field-name-set change",
+    "unit": "trials"
+   },
+   {
+    "id": "M-FA-INCUMBENT-D1V",
+    "definition": "P(REUSE | STALE, D1V) for B-INCUMBENT-SIGNAL-ONLY",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-INCUMBENT-D1V-UB97",
+    "definition": "anchor-clustered percentile bootstrap 97.5% upper bound on the incumbent D1V false-accept rate (the explicit false-accept bound), B=10000, seed 37964565784",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-VALUEAWARE-D1V",
+    "definition": "P(REUSE | STALE, D1V) for B-VALUE-AWARE",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-VALUEAWARE-D1V-UB97",
+    "definition": "anchor-clustered 97.5% upper bound on the value-aware D1V false-accept rate, B=10000, seed 37964565784",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PAIRED-FA-DIFF-D1V",
+    "definition": "M-FA-INCUMBENT-D1V - M-FA-VALUEAWARE-D1V",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PAIRED-FA-DIFF-D1V-LOW",
+    "definition": "anchor-clustered percentile bootstrap 97.5% lower bound on M-PAIRED-FA-DIFF-D1V, B=10000, seed 37978902447; DEGENERATE (null) when M-N-D1V-ANCHORS < 2 because every resample is identical",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-PAIRED-FA-DIFF-D1V-UB97",
+    "definition": "anchor-clustered percentile bootstrap 97.5% upper bound on M-PAIRED-FA-DIFF-D1V, B=10000, seed 37978902447; DEGENERATE (null) when M-N-D1V-ANCHORS < 2",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-INCUMBENT-ALL",
+    "definition": "P(REUSE | STALE) for B-INCUMBENT-SIGNAL-ONLY over all STALE trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FA-VALUEAWARE-ALL",
+    "definition": "P(REUSE | STALE) for B-VALUE-AWARE over all STALE trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FR-INCUMBENT-FRESH",
+    "definition": "P(ABSTAIN | FRESH) for B-INCUMBENT-SIGNAL-ONLY over all FRESH trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-FR-VALUEAWARE-FRESH",
+    "definition": "P(ABSTAIN | FRESH) for B-VALUE-AWARE over all FRESH trials",
+    "unit": "fraction"
+   },
+   {
+    "id": "M-N-DECISIONS-D1V",
+    "definition": "distinct guard decisions (REUSE/ABSTAIN) realized on the D1V subset",
+    "unit": "count"
+   },
+   {
+    "id": "M-GUARD-FIXTURE-PASS",
+    "definition": "all SYN-GUARD-* guard-logic fixtures produce their pre-declared decisions",
+    "unit": "boolean"
+   },
+   {
+    "id": "M-INVISIBLE-STALE-PREV",
+    "definition": "NOT MEASURED by this packet (SB-04); reported null, never 0.0",
+    "unit": "null"
+   },
+   {
+    "id": "M-D1V-BLOCKER-{anchor}",
+    "definition": "enum {NONE, BODY_DERIVED_ETAG, TOKEN_BEARING_FINAL_URL, STRUCTURAL_ENDPOINT_DRIFT, NO_FIELD, UNREACHABLE}: why (or whether) an anchor contributes D1V trials",
+    "unit": "enum"
+   },
+   {
+    "id": "M-TRANSPORT-BODY-DERIVATION-{anchor}",
+    "definition": "boolean: whether a changed transport component is a deterministic function of the response body (e.g. ETag == sha256(body)[:32]); descriptive, zero-extra-cost",
+    "unit": "enum {true,false,not_applicable}"
+   },
+   {
+    "id": "M-D1V-ANCHOR-CLUSTERED-EVALUABLE",
+    "definition": "boolean: M-N-D1V >= 6 AND M-N-DECISIONS-D1V >= 2 AND M-N-D1V-ANCHORS >= 2 AND NC-NONDEGENERATE-ESTIMATOR satisfied (after waiver); false => DATA-INSUFFICIENT-D1V-DEGENERATE",
+    "unit": "boolean"
+   }
+  ]
+ },
+ "control_registry": {
+  "note": "Frozen control identifiers; EXECUTE, AUDIT and DIRECTOR reuse them verbatim.",
+  "anchors_positive": [
+   "CAL-POS-1",
+   "CAL-POS-2",
+   "CAL-POS-3",
+   "CAL-POS-4"
+  ],
+  "anchors_positive_retired": [
+   "CAL-POS-5"
+  ],
+  "anchors_negative": [
+   "CAL-NEG-1",
+   "CAL-NEG-2",
+   "CAL-NEG-3",
+   "CAL-NEG-4"
+  ],
+  "gates": [
+   "GATE-C1",
+   "GATE-C2",
+   "GATE-C3",
+   "GATE-C4",
+   "GATE-E1",
+   "GATE-E2",
+   "GATE-E3",
+   "GATE-B"
+  ],
+  "branches": [
+   "EXTRACTION-DEFECT-CONFIRMED",
+   "REPRESENTATION-LOSS-CONFIRMED",
+   "EXTRACTION-UNRELIABLE",
+   "MIXED-ANCHORS",
+   "NO-BODY-VARIATION",
+   "INCUMBENT-BLIND-CONFIRMED",
+   "INCUMBENT-NOT-BLIND",
+   "DATA-INSUFFICIENT-D1V",
+   "DATA-INSUFFICIENT-D1V-DEGENERATE"
+  ],
+  "falsifiers": [
+   "F-INSTR",
+   "F-REPLOSS",
+   "F-UNRELIABLE",
+   "F-BLIND",
+   "F-CERT"
+  ],
+  "baselines": [
+   "B-SINGLE-PATH-A",
+   "B-SINGLE-PATH-B",
+   "B-PARENT-METHOD-REIMPL",
+   "B-INCUMBENT-SIGNAL-ONLY",
+   "B-VALUE-AWARE",
+   "B-FULL-GUARD",
+   "B-NO-GUARD-REPLAY"
+  ],
+  "positive_controls": [
+   "PC-EXTRACT-CANARY",
+   "PC-GUARD-LOGIC"
+  ],
+  "null_controls": [
+   "NC-CAL-NEG-ALL-REJECTED",
+   "NC-EXTRACT-EMPTY-VALUE",
+   "NC-EXTRACT-JSSTRING",
+   "NC-PATH-INDEPENDENCE",
+   "NC-SESSION-ISOLATION-REPAIRED",
+   "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS",
+   "NC-TRIAL-CONSTRUCTION-STABILITY",
+   "NC-TIME-VS-SESSION",
+   "NC-NONDEGENERATE-ESTIMATOR",
+   "NC-OPEN-GET-ONLY",
+   "NC-D1V-ANCHOR-NONDEGENERACY",
+   "NC-TRANSPORT-VALUE-COUPLING-DECLARED"
+  ],
+  "guard_channels": [
+   "CH-STRUCT-SIG",
+   "CH-TRANSPORT-VALIDATOR",
+   "CH-POSTCOND-SEM",
+   "CH-PRECOND-BINDING"
+  ],
+  "instrument_fixtures": [
+   "SYN-CANARY-BOTH",
+   "SYN-EMPTY-VALUE",
+   "SYN-JSSTRING",
+   "SYN-GUARD-D1V",
+   "SYN-GUARD-FRESH",
+   "SYN-GUARD-POSTCOND"
+  ],
+  "validity_requirements": [
+   "V01-PRE-REGISTRATION-NO-DESIGN-OUTCOME",
+   "V02-SUBSTRATE-CERTIFICATE-FROZEN-AND-RE-VERIFIED",
+   "V03-EXTRACTION-PATH-INDEPENDENCE",
+   "V04-SAME-BYTES-BOTH-PATHS",
+   "V05-NO-JS-REPRESENTATION-LOSS-DECLARED",
+   "V06-SESSION-ISOLATION-REPAIRED",
+   "V07-NO-ANCHOR-SPECIAL-CASING",
+   "V08-ANTI-OVERFIT-CONTROLS",
+   "V09-SEED-DETERMINISM",
+   "V10-RAW-EVIDENCE-RETENTION",
+   "V11-FROZEN-INPUT-RE-VERIFICATION",
+   "V12-RESAMPLING-UNIT",
+   "V13-TRIAL-CONSTRUCTION-STABILITY",
+   "V14-GUARD-NONDEGENERACY",
+   "V15-PRE-FREEZE-SATISFIABILITY-DRY-RUN"
+  ]
+ },
+ "decision_rule": "ORDERED, FAIL-CLOSED. Every branch is pre-labelled MEASUREMENT_INVALID, DATA-INSUFFICIENT, BOUNDED NEGATIVE, or VALID RESULT; no branch converts a missing or invalid measurement into a scientific negative. PRE-FREEZE PRECONDITION (discharged in spec.pre_freeze_satisfiability_dry_run): the corrected GATE-C3 predicate and every declared membership class must be REACHABLE on pinned synthetic inputs before freeze; this spec is the satisfiability certificate. GATE C (pre-confirmatory certificate, before any extraction): C1 M-CERT-ROUTE-OK >= 3 of 4 AND M-CERT-FIELD-PRESENT >= 3 of 4; C2 M-CERT-NEG-VALUES-A == 0 AND M-CERT-NEG-VALUES-B == 0; C3 M-CERT-SESSION-ISOLATION-PASS == true (CORRECTED predicate: first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter; session_identifying_disjoint NON-GATING) AND NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS == true. Any C1/C2/C3 failure => status MEASUREMENT_INVALID, outcome INCONCLUSIVE, branch F-CERT, no claim-level statement. C4 (non-blocking) M-CERT-BODY-VARIABLE < 3 => status COMPLETE, outcome INCONCLUSIVE, branch NO-BODY-VARIATION, no confirmatory read. GATE E (after GATE C): E1 M-CANARY-PASS == true; E2 M-FIXTURE-CANARY-PASS == true AND M-FIXTURE-EMPTY-AGREE == true AND M-FIXTURE-JSSTRING-VALUES == 0 AND M-GUARD-FIXTURE-PASS == true AND NC-PATH-INDEPENDENCE == true AND NC-TRIAL-CONSTRUCTION-STABILITY == true. Any E1/E2 failure => MEASUREMENT_INVALID, INCONCLUSIVE, branch F-INSTR. E3 M-EXTRACT-AGREE-VALUESET >= 3 AND M-EXTRACT-AGREE-VERDICT >= 3. If E3 FAILS => status COMPLETE, outcome MIXED, branch EXTRACTION-UNRELIABLE (M-N-EXTRACTION-UNRELIABLE >= 2); no substrate verdict. If E3 PASSES: D1 M-N-SESSION-SCOPED-CONFIRMED >= 3 of 4 => status COMPLETE, outcome SUPPORTS, branch EXTRACTION-DEFECT-CONFIRMED. Else D2 M-N-REPRESENTATION-LOSS >= 3 of 4 => status COMPLETE, outcome FALSIFIES, branch REPRESENTATION-LOSS-CONFIRMED (bounded). Else D3 => status COMPLETE, outcome MIXED, branch MIXED-ANCHORS. GATE B (PART II, read ONLY if D1): if M-N-D1V < 6 OR M-N-DECISIONS-D1V < 2 OR M-N-D1V-ANCHORS < 2 OR NC-NONDEGENERATE-ESTIMATOR fails (after its INACTIVE-ON-POPULATION waiver) => branch DATA-INSUFFICIENT-D1V-DEGENERATE when M-N-D1V-ANCHORS < 2, else branch DATA-INSUFFICIENT-D1V; part II reported null with reason, no false-accept or blindness claim; report M-D1V-BLOCKER-{anchor} and M-TRANSPORT-BODY-DERIVATION-{anchor}. Else if M-PAIRED-FA-DIFF-D1V >= 0.10 AND M-PAIRED-FA-DIFF-D1V-LOW > 0 => branch INCUMBENT-BLIND-CONFIRMED: report M-FA-INCUMBENT-D1V and its UB97 as the explicit false-accept bound, and state that value-aware binding is necessary on this class. Else => branch INCUMBENT-NOT-BLIND (F-BLIND). GATE B branches do not change status/outcome; they are recorded under metrics/controls/observations. Status/outcome map: GATE C or GATE E blocking failure -> MEASUREMENT_INVALID/INCONCLUSIVE; C4 -> COMPLETE/INCONCLUSIVE; E3 fail -> COMPLETE/MIXED; D1 -> COMPLETE/SUPPORTS; D2 -> COMPLETE/FALSIFIES; D3 -> COMPLETE/MIXED.",
+ "claim_ceiling_rules": {
+  "CC-A": "All results are scoped to the 4 pinned credential-free, server-rendered, no-JavaScript, GET-only anchor URLs, K=4 fresh sessions, stdlib HTTP, on the capture date(s) recorded in provenance and one egress ASN. Prevalence over 'the Web' is NOT measured and must never be quoted.",
+  "CC-B": "EXTRACTION-DEFECT-CONFIRMED (Part I) establishes that extraction was the parent failure mode on these anchors; it does not by itself establish a guard operating point, a session-scope prevalence, or an economic break-even. Combined with a READ Part II false-accept bound it measures the incumbent guard's behaviour on real value-only rotation. C-FRESHNESS may advance at most to EXPERIMENTAL, only via the DIRECTOR.",
+  "CC-C": "REPRESENTATION-LOSS-CONFIRMED closes only the credential-free stdlib no-JS anchor-calibration path for these anchors. Client-side/XHR-minted values, canvas content, authenticated state and permission-boundary change remain open.",
+  "CC-D": "The capability-token name list and the drift-family labels are string/structure-shape matchers, not mechanisms; labels that depend on them inherit that limitation.",
+  "CC-E": "Part II false-accept bounds are anchor-clustered and descriptive; with few anchors the interval is coarse and must be quoted with its resampling unit. A D1V population spanning fewer than 2 anchors is DEGENERATE and licenses no false-accept, blindness or architecture claim (branch DATA-INSUFFICIENT-D1V-DEGENERATE); the single-anchor point estimate is descriptive only. No prevalence or generalization may be read from it.",
+  "CC-F": "The two extraction paths are independently written but share a single authoring context; independence is structural (different algorithms, no shared code, AST-verified) and is corroborated by the real canary, the fixtures, and the four negatives, not by external authorship.",
+  "CC-G": "The repaired session-isolation predicate exempts only the closed, frozen constant-configuration cookie allowlist; any other shared cookie name fails GATE-C3. New or unknown constant cookies are NOT auto-exempted, so the repair cannot silently become vacuous.",
+  "CC-H": "If M-ROTATION-TIMESCALE is PER_REQUEST_SCALE for an anchor, any value-binding freshness verdict on that anchor is bounded to per-request/time-scale applicability and must not be described as 'session-scoped durability'.",
+  "CC-I": "NEW: the multi-anchor D1V evaluability question is bounded to the 4 pinned anchors under the frozen transport signature. If transport validators are body-derived or token-bearing, D1V is structurally unreachable on those anchors; a negative answer to the mandate's Q2 is a property of instrument \u00d7 anchor, not of the freshness mechanism, and authorizes no change to the guard."
+ },
+ "scope_boundaries": {
+  "SB-01": "No JavaScript, no browser, no headless rendering, no Docker, no local server, no synthetic state in the scored population, no credentials, no write verb, no side effect, no model call. Instrument fixtures are unit tests only and are never scored.",
+  "SB-02": "Permission-boundary change, the parent handoff's predicted-blind drift family, is UNREACHABLE on credential-free public origins and is NOT tested. The D1V family is value-only rotation; structural and transport drift are captured as stratifications but permission drift is not.",
+  "SB-03": "Cross-site transfer, mechanism parameterization to unseen identifiers, LLM inheritance, delta repair and residual-novelty economics are not measured; no event may be emitted for C-CROSSSITE, C-PARAM-INHERIT, C-LLM-INHERIT, C-DELTA-REPAIR, C-PRODUCT-ECON or C-SEMANTIC-RESOLVE.",
+  "SB-04": "The behaviourally invisible stale cell (a stale item whose value is byte-identical across sessions) is NOT measured; M-INVISIBLE-STALE-PREV is null, never 0.0.",
+  "SB-05": "This is a bounded, frozen-anchor drift-and-guard-bound measurement on a credential-free no-JS substrate, not a prevalence study and not a full guard operating-point calibration (no authenticated or permission state, no product economics). The parent candidate-host pool is NOT screened.",
+  "SB-06": "No threshold is re-fit and no new detection mechanism is invented. The only DESIGN change relative to the parent is the GATE-C3 predicate correction (audit required_fixes[0]: sole disjointness check) plus the mandate-required pre-freeze satisfiability dry-run and the pre-declared D1V anchor-non-degeneracy clause. The drift trial construction, the four-channel guard, the D1V definition, the anchors, K=4 and the negative controls are inherited frozen from EXP-GRAPH-37964565784 unchanged. No exploratory redefinition of transport or D1V is authorized.",
+  "SB-07": "The design-derived transport-value coupling diagnostic (spec.substrate_certificate.transport_value_coupling_design_derivation) is descriptive and zero-extra-cost, derived from retained parent raw captures; it does not enter any gate and does not set expected anchor values."
+ },
+ "code_binding": {
+  "freeze_contains_only": [
+   "request.json",
+   "spec.json",
+   "prereg.md"
+  ],
+  "no_code_digest_validity_gate": true,
+  "rationale": "scripts/freeze_experiment.py writes exactly three sha256 keys and DESIGN has write scope only for spec.json/prereg.md/ failure.json/model_design.json, so outcome-bearing code cannot exist at freeze time. Declaring a code digest as a validity condition would be unsatisfiable by construction.",
+  "obligation_instead": [
+   "EXECUTE hashes every producer source file with sha256 into result.json.artifacts with role 'code' and into provenance.json, including both extraction paths as separate files and the guard module.",
+   "EXECUTE records the exact interpreter version and the complete stdlib-only dependency set (no pip install).",
+   "EXECUTE re-verifies request.json, spec.json and prereg.md against freeze.json before the first request and again after the last; any mismatch is terminal.",
+   "EXECUTE records which absolute paths were written and asserts that no write left the granted scope (research/experiments/EXP-GRAPH-37978902447, research/harness, research/graph)."
+  ],
+  "reuse_of_parent_code": "EXECUTE may base the paths, neutral detector and fixtures on research/experiments/EXP-GRAPH-37964565784/code/* and research/graph/freshness_detection/exp_37950584469/* but must write separate producer files for this experiment and record their hashes. The ONLY design change is the corrected GATE-C3 predicate (spec.repaired_session_isolation_predicate)."
+ },
+ "preregistration_timing": "This spec.json and prereg.md are written before any anchor is contacted in this transaction. No outcome-bearing measurement was run during DESIGN: no HTTP request, no extraction, no anchor or candidate probe. The ONLY computation DESIGN performed is the mandate-required satisfiability dry-run on pinned SYNTHETIC inputs (spec.pre_freeze_satisfiability_dry_run); it uses no network and no anchor data and cannot pre-empt the confirmatory objects. The anchors' asserted behaviour is recorded in spec.substrate_certificate with its evidence class and the exact already-frozen artifacts. Extraction validity and guard behaviour remain the confirmatory objects. Any analysis change after freeze is exploratory and must be reported as such.",
+ "transmission_contract": {
+  "design_emits": [
+   "spec.json",
+   "prereg.md"
+  ],
+  "execute_must_emit": [
+   "result.json",
+   "report.md",
+   "provenance.json"
+  ],
+  "execute_required_top_level_result_fields": [
+   "schema_version",
+   "experiment_id",
+   "lane",
+   "status",
+   "outcome",
+   "metrics",
+   "controls",
+   "artifacts",
+   "observations",
+   "validity_notes",
+   "unresolved"
+  ],
+  "stable_identities_to_preserve": [
+   "experiment_id",
+   "lane",
+   "claim_ids",
+   "CAL-POS-1..5",
+   "CAL-NEG-1..4",
+   "GATE-C1..C4",
+   "GATE-E1..E3",
+   "GATE-B",
+   "F-INSTR",
+   "F-REPLOSS",
+   "F-UNRELIABLE",
+   "F-BLIND",
+   "F-CERT",
+   "B-SINGLE-PATH-A",
+   "B-SINGLE-PATH-B",
+   "B-PARENT-METHOD-REIMPL",
+   "B-INCUMBENT-SIGNAL-ONLY",
+   "B-VALUE-AWARE",
+   "B-FULL-GUARD",
+   "B-NO-GUARD-REPLAY",
+   "CH-STRUCT-SIG",
+   "CH-TRANSPORT-VALIDATOR",
+   "CH-POSTCOND-SEM",
+   "CH-PRECOND-BINDING",
+   "PC-EXTRACT-CANARY",
+   "PC-GUARD-LOGIC",
+   "NC-*",
+   "SYN-*",
+   "V01..V15",
+   "CC-A..CC-I",
+   "SB-01..SB-07",
+   "every M-* metric id",
+   "every branch id including DATA-INSUFFICIENT-D1V-DEGENERATE"
+  ],
+  "status_outcome_vocabulary": {
+   "status": [
+    "COMPLETE",
+    "BLOCKED",
+    "MEASUREMENT_INVALID"
+   ],
+   "outcome": [
+    "SUPPORTS",
+    "FALSIFIES",
+    "MIXED",
+    "INCONCLUSIVE",
+    "NOT_APPLICABLE"
+   ]
+  },
+  "branch_to_status_outcome_map": {
+   "GATE_C_or_GATE_E_blocking_failure": {
+    "status": "MEASUREMENT_INVALID",
+    "outcome": "INCONCLUSIVE"
+   },
+   "C4_NO-BODY-VARIATION": {
+    "status": "COMPLETE",
+    "outcome": "INCONCLUSIVE"
+   },
+   "E3_FAIL_EXTRACTION-UNRELIABLE": {
+    "status": "COMPLETE",
+    "outcome": "MIXED"
+   },
+   "D1_EXTRACTION-DEFECT-CONFIRMED": {
+    "status": "COMPLETE",
+    "outcome": "SUPPORTS"
+   },
+   "D2_REPRESENTATION-LOSS-CONFIRMED": {
+    "status": "COMPLETE",
+    "outcome": "FALSIFIES"
+   },
+   "D3_MIXED-ANCHORS": {
+    "status": "COMPLETE",
+    "outcome": "MIXED"
+   }
+  },
+  "gate_b_is_non_status_changing": true,
+  "required_metrics_to_report_null_explicitly": [
+   "M-INVISIBLE-STALE-PREV",
+   "M-PAIRED-FA-DIFF-D1V",
+   "M-FA-INCUMBENT-D1V",
+   "M-FA-VALUEAWARE-D1V",
+   "M-FA-INCUMBENT-D1V-UB97",
+   "M-FA-VALUEAWARE-D1V-UB97",
+   "M-PAIRED-FA-DIFF-D1V-LOW",
+   "M-PAIRED-FA-DIFF-D1V-UB97",
+   "M-N-D1V-ANCHORS",
+   "M-D1V-ANCHOR-CLUSTERED-EVALUABLE"
+  ]
+ },
+ "product_consequence_positive": "If EXTRACTION-DEFECT-CONFIRMED is reached (E3 passes and >=3 of 4 anchors are confirmed session-scoped by both paths): (1) the grandparent's 4/5 zero-distinct failure is established as an instrument/extraction defect rather than a property of the credential-free Web, so the credential-free stdlib no-JS substrate remains a usable calibration substrate for C-FRESHNESS; (2) C-FRESHNESS may advance from HYPOTHESIS to at most EXPERIMENTAL, only via the DIRECTOR and bounded by CC-A..CC-I. If Part II is also READ and INCUMBENT-BLIND-CONFIRMED: the measured false-accept bound (M-FA-INCUMBENT-D1V with UB97) shows the value-blind incumbent guard is unsafe on real value-only rotation, so the shipped freshness architecture must retain CH-PRECOND-BINDING (value-awareness). If M-ROTATION-TIMESCALE is PER_REQUEST_SCALE, recording a token yields no durable freshness, so the guard must be treated as a short-lived applicability check. No promotion into Product Core is authorized by this packet.",
+ "product_consequence_negative": "Pre-committed bounded consequences. (1) If REPRESENTATION-LOSS-CONFIRMED: no stdlib no-JS guard can be calibrated on >=3 of these anchors; bounded to the credential-free server-rendered class. (2) If EXTRACTION-UNRELIABLE: no guard measurement may proceed until the instrument is repaired. (3) If INCUMBENT-NOT-BLIND: the value-aware channel may be deleted, a real simplification decided by measurement. (4) If DATA-INSUFFICIENT-D1V OR DATA-INSUFFICIENT-D1V-DEGENERATE: Part II is reported null with its reason; only the Part I extraction read is licensed. The DEGENERATE case (M-N-D1V-ANCHORS < 2) additionally records the per-anchor blocker diagnostic and establishes that powering the blindness/necessity question requires a different anchor population or an instrument redesign -- neither authorized by this mandate. (5) If F-INSTR or F-CERT: no product change of any kind is authorized; C-FRESHNESS stays HYPOTHESIS and replay-by-assumption is not authorized. In every branch M-INVISIBLE-STALE-PREV is reported null, never 0.0.",
+ "estimated_cost": "Very small. No model calls, no browser, no Docker, no credentials, no local server. Request budget identical to the parent: 16 positive-anchor GETs (4 x 4) + 16 negative-anchor GETs (4 x 4) + 8 warm-jar re-captures (4 x 2) = 40 plus same-session redirects, against a frozen cap of 200. Stdlib only (urllib, http.cookiejar, html.parser, re, ast, hashlib, json, math, random). Wall clock under 2 minutes at >=2.0 s per-host pacing. USD 0.",
+ "expected_information_gain": "High and tightly targeted. PART I converts the parent's blocked instrument-level 4/4 dual-path agreement into a LICENSED result by applying the audit's exact predicate correction; reachable outcomes are EXTRACTION-DEFECT-CONFIRMED, REPRESENTATION-LOSS-CONFIRMED, or EXTRACTION-UNRELIABLE, and this is the first time that read can be taken because the previous two packets died on a control-plane defect. PART II answers the mandate's Q2 explicitly: the parent's single-anchor (M-N-D1V-ANCHORS=1) D1V population made the anchor-clustered lower bound degenerate, so this packet adds a pre-registered anchor-count requirement and a per-anchor blocker diagnostic. Because the frozen transport signature couples to the rotating value on CAL-POS-1 (body-derived ETag) and CAL-POS-3 (token-bearing final_url), the expected Q2 answer is DATA-INSUFFICIENT-D1V-DEGENERATE with a documented mechanism -- which is decision-changing: it tells the Director the blindness/necessity read cannot be powered on these anchors without a different population or an instrument redesign. The packet is small, uses the same frozen anchors and negatives for identity continuity, and cannot be reduced to another threshold retune."
+}

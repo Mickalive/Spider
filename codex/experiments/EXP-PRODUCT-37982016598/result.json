@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37982016598",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "dynamic_range_certified_frozen": false,
+    "dynamic_range_certified_observed": false,
+    "cold_max_success_rate": 1.0,
+    "retrieval_max_success_rate": 1.0,
+    "certified_at_novelty": null,
+    "success_rate": {
+      "T-SPIDER-PARAM": 0.45,
+      "B-COLD-RE-DERIVE": 1.0,
+      "B-RETRIEVAL-SHAPED": 1.0,
+      "B-EMPTIED-REGISTRY": 1.0,
+      "PC-EXACT-REPLAY": 1.0
+    },
+    "success_rate_by_novelty": {
+      "T-SPIDER-PARAM": {"0.0": 1.0, "0.25": 0.8, "0.5": 0.0, "0.75": 0.0},
+      "B-COLD-RE-DERIVE": {"0.0": 1.0, "0.25": 1.0, "0.5": 1.0, "0.75": 1.0},
+      "B-RETRIEVAL-SHAPED": {"0.0": 1.0, "0.25": 1.0, "0.5": 1.0, "0.75": 1.0},
+      "B-EMPTIED-REGISTRY": {"0.0": 1.0, "0.25": 1.0, "0.5": 1.0, "0.75": 1.0},
+      "PC-EXACT-REPLAY": {"0.0": 1.0, "0.25": null, "0.5": null, "0.75": null}
+    },
+    "cost_per_success": {
+      "unit": "composite_cost_units = http_requests + verification_calls + repair_attempts",
+      "T-SPIDER-PARAM": 2.0,
+      "B-COLD-RE-DERIVE": 2.0,
+      "B-RETRIEVAL-SHAPED": 2.0,
+      "B-EMPTIED-REGISTRY": 2.0,
+      "PC-EXACT-REPLAY": 2.0,
+      "T-SPIDER-PARAM_by_novelty": {"0.0": 2.0, "0.25": 2.0, "0.5": null, "0.75": null},
+      "note": "null at T-SPIDER-PARAM novelty 0.5/0.75 because success_count=0 (undefined, not zero)."
+    },
+    "cost_advantage_vs_cold": null,
+    "cost_advantage_vs_retrieval": null,
+    "spearman_rho_cold": null,
+    "spearman_rho_retrieval": null,
+    "perm_p_cold": null,
+    "perm_p_retrieval": null,
+    "refusal_rate": 1.0,
+    "known_negatives_n": 20,
+    "http_requests_total": 316,
+    "model_calls": 0.0,
+    "model_tokens": 0.0,
+    "browser_actions": 0.0,
+    "shipped_kernel_api_complete": false,
+    "shipped_kernel_missing_features": ["distill_parameterized", "TrajectoryCounters", "_support_accepts", "rebind"],
+    "note": "All numeric arm metrics above are descriptive diagnostics from a run whose frozen C1 gate already failed. They are not a valid hypothesis test and must not be interpreted as SUPPORTS/FALSIFIES evidence for C-RESIDUAL-NOVELTY."
+  },
+  "controls": {
+    "C1_DYNAMIC_RANGE_GATE": {
+      "expected_behavior": "spec.json.dynamic_range_certified == true at freeze, i.e. B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 on at least one family at novelty >= 0.5.",
+      "observed_behavior": "Frozen spec.json.dynamic_range_certified=false with null certificate fields; diagnostic re-run observed cold=1.0 and retrieval=1.0 at novelty 0.5 and 0.75 (pass=false).",
+      "pass": false,
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/spec.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/dynamic_range_cert.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json"
+      ]
+    },
+    "B-COLD-RE-DERIVE": {
+      "expected_behavior": "Cold re-derivation baseline; must NOT be at the success ceiling for dynamic range to exist.",
+      "observed_behavior": "success_rate=1.0 at all novelty levels (20/20 per level); cost_per_success=2.0; 80 http_requests + 80 verification_calls.",
+      "pass": false,
+      "failure_mode": "ceiling",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"]
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "expected_behavior": "Retrieval+template-bind comparator; must NOT be at the success ceiling for dynamic range to exist.",
+      "observed_behavior": "success_rate=1.0 at all novelty levels; cost_per_success=2.0; 80 http_requests + 240 retrieval_calls + 80 verification_calls.",
+      "pass": false,
+      "failure_mode": "ceiling",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"]
+    },
+    "B-EMPTIED-REGISTRY": {
+      "expected_behavior": "Inheritance-ablation null: cost_per_success indistinguishable from B-COLD-RE-DERIVE at all novelty levels (S1).",
+      "observed_behavior": "success_rate=1.0 and cost_per_success=2.0 at all novelty levels, matching cold (indistinguishable; S1 pass consistent with null).",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json"]
+    },
+    "PC-EXACT-REPLAY": {
+      "expected_behavior": "Positive control: success_rate=1.0 on training identifiers (novelty=0); substrate and accounting validate.",
+      "observed_behavior": "success_rate=1.0 (20/20) at novelty=0.0; cost_per_success=2.0.",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"]
+    },
+    "S3_KNOWN_NEGATIVES": {
+      "expected_behavior": "Refusal rate = 1.0 across all arms with non-empty reasons, bound_action=null.",
+      "observed_behavior": "refusal_rate=1.0 on 20 declared negative task specs for the kernel-treatment path.",
+      "pass": true,
+      "scope_note": "Refusal applies to the kernel path only; direct-construction comparator arms cannot refuse by construction.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/raw_evidence/known_negatives.jsonl"]
+    },
+    "S4_SUPPORT_BOUNDARY": {
+      "expected_behavior": "Characterize generalization across held-out identifier blocks (training 001-005, held-out 006-010/011-015/016-020).",
+      "observed_behavior": "Induced parameter_supports regexes are ^<type>\\-00[0-9]{1}$ (accept 001-009). Treatment succeeds at 001-005 and 006-009 (novelty 0.0/0.25) and refuses at 011-020 (novelty 0.5/0.75).",
+      "pass": "characterized",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/induced_mechanisms.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"
+      ]
+    },
+    "T-SPIDER-PARAM_LIVENESS": {
+      "expected_behavior": "Frozen carrier src/spider/kernel.py must contain the audited parameterized path (blob b15ed848) that the treatment arm executes.",
+      "observed_behavior": "Shipped HEAD src/spider/kernel.py is blob cfec9866 and lacks distill_parameterized, TrajectoryCounters, _support_accepts, rebind (api_complete=false). Diagnostic ran against the vendored audited blob b15ed848.",
+      "pass": false,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-37982016598/raw_evidence/shipped_kernel_probe.json"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/request.json", "sha256": "7b9c436489bd3a88a2d15f2449358342bd72a2eb89805c8be26359b34f117b03", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/spec.json", "sha256": "9e0aeea501aee45eddb8d71bcdb60fb004ccf6b1e7fb0dd0b18cef8f263ea379", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/prereg.md", "sha256": "453ea2fcb67bba1aa7527a4cb6660b43e262aabcfebc75887770e1a14c10305d", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/freeze.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/substrate.py", "sha256": "e7d8cfce08f8391d5f1ab9a519e5f6fe5ddb1c527dbc8d9366f3f277ffcc08b8", "role": "code"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/run_experiment.py", "sha256": "408d54ba64359b10b43c74a54df2b37c71ee5229ff5f6519c940ea3583130446", "role": "code"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/audited_spider/kernel.py", "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72", "role": "fixture", "note": "identical to audited git blob b15ed848"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/audited_spider/models.py", "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78", "role": "fixture", "note": "identical to git blob f08608c3 (matches shipped HEAD src/spider/models.py)"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/audited_spider/registry.py", "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c", "role": "fixture", "note": "identical to git blob 986317f7 (matches shipped HEAD src/spider/registry.py)"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/harness/audited_spider/__init__.py", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/shipped_kernel_probe.json", "sha256": "9ba96a0de011c9e97ec80cccc70a0a0dc4e62e3fc67966bbae028ce56e4e9486", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/training_observations.jsonl", "sha256": "936cacf5eb6915d6c4ac2c5b9149105523fa9884d2a837e691de40b84ac6dbc1", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/induced_mechanisms.json", "sha256": "fa776382450088b1831c2f8a22b3281c037edecf0579cbf8ac2074f892d882f2", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/task_trajectories.jsonl", "sha256": "87de33622119b3e3ab3aaa44a548f35f3a8ee8f1c2e56ee2fdcacb3a6946bf33", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/accounting_counters.jsonl", "sha256": "ad41946151205f7528fb8da66528588c94bce9b481aeab4c1dace27f0348c928", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/known_negatives.jsonl", "sha256": "4c762c8f6eab5cb01d7b5f1d5a7689434ac525659a2b5083d64c23d6ea14c4ca", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/server_log.jsonl", "sha256": "ddea884bf250ec825ede25684e67328baf61c1dc92b3ceba33280d95387d00c7", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json", "sha256": "26fcee1f0e05c607a41c493724df7d0eb8a252ec0f000a05e36b904004c2f1a6", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/derived/dynamic_range_cert.json", "sha256": "d4aed3898a6ca2a9bdd0ff0c254542239f91eeabbe941a96834485d3e44a4d82", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json", "sha256": "6fb15a82bc92b3dcb900e55768e14220369415f7cef1cda0c57cfe0a19e19e43", "role": "derived"}
+  ],
+  "observations": [
+    "Frozen spec.json field dynamic_range_certified is false, and its embedded dynamic_range_certificate object has certified=false with cold_max_success_rate=null, retrieval_max_success_rate=null, certified_at_novelty=null.",
+    "Frozen prereg.md section 5/12 states that if dynamic_range_certified != true at freeze time the experiment is MEASUREMENT_INVALID and must not proceed to EXECUTE.",
+    "The diagnostic re-run of the certificate observed B-COLD-RE-DERIVE success_rate=1.0 and B-RETRIEVAL-SHAPED success_rate=1.0 at novelty 0.5 and 0.75 (both at ceiling; pass=false at both levels).",
+    "T-SPIDER-PARAM success_rate was 0.45 overall: 1.0 at novelty 0.0, 0.8 at 0.25, 0.0 at 0.5, 0.0 at 0.75.",
+    "B-COLD-RE-DERIVE, B-RETRIEVAL-SHAPED and B-EMPTIED-REGISTRY each achieved success_rate=1.0 at all four novelty levels.",
+    "cost_per_success was 2.0 composite cost units for every arm whose successes were defined; T-SPIDER-PARAM cost_per_success is undefined (null) at novelty 0.5 and 0.75 because it had zero successes there.",
+    "Induced mechanisms for all four resource types carry parameter_supports regexes of the form ^<type>\\-00[0-9]{1}$, which match 001-009 only.",
+    "The shipped HEAD src/spider/kernel.py (blob cfec9866) lacks distill_parameterized, TrajectoryCounters, _support_accepts and rebind (api_complete=false); the vendored audited blob b15ed848 contains them and was used for the diagnostic run.",
+    "Known-negative refusal rate was 1.0 over 20 declared negative task specs on the kernel path; PC-EXACT-REPLAY success_rate was 1.0.",
+    "The substrate server handled 316 HTTP request cycles (server_log.jsonl); model_calls and model_tokens were 0 across all arms."
+  ],
+  "validity_notes": [
+    "The frozen design already declared the measurement invalid at freeze time: spec.json.dynamic_range_certified=false and the frozen prereg forbids proceeding to EXECUTE. status=MEASUREMENT_INVALID is therefore fixed by the frozen contract, not chosen after seeing outcomes.",
+    "The arm success/cost numbers reported here are descriptive diagnostics collected to document the certificate failure and the treatment support boundary. Because the conjunctive primary gate C1 failed before any comparison, C2-C5 were not evaluable and no SUPPORTS/FALSIFIES conclusion may be drawn about C-RESIDUAL-NOVELTY.",
+    "The token/LLM accounting surface is credential-free by construction (model_calls=0, model_tokens=0); no external model or web access was used.",
+    "Representation loss: novelty is operationalized only through contiguous identifier blocks (001-005 vs 006-010 vs 011-015 vs 016-020) and does not vary path/body structure as the prereg's higher novelty levels nominally describe.",
+    "The deterministic localhost REST substrate is solved directly by URL construction for every identifier in every block; the comparator arms are therefore structurally at ceiling, which is the same zero-dynamic-range failure mode as parent EXP-PRODUCT-37973256064.",
+    "The treatment's observed 0.45 is explained by the induced support regex ^<type>\\-00[0-9]{1}$ resolving only 001-009; this is a support-boundary observation, not independent evidence about cost economics.",
+    "The shipped kernel regression (blob b15ed848 -> cfec9866 in merge 5601ede3) means the audited treatment carrier is absent from the current shipped path; the diagnostic used a vendored copy of the audited blob, so the run does not certify the shipped path.",
+    "No claim state was modified; per frozen prereg section 9, a MEASUREMENT_INVALID outcome carries no claim update and requires task-bank redesign and re-freeze."
+  ],
+  "unresolved": [
+    "Whether any credential-free task bank can produce a dynamic-range certificate for cold and retrieval-shaped comparators on this architecture (the core blocker for the C-RESIDUAL-NOVELTY question).",
+    "Whether the T-SPIDER-PARAM support boundary failure at novelty 0.5/0.75 is fixable (e.g. corrected support inference) or is intrinsic to the audited induction mechanism.",
+    "Whether the shipped src/spider/kernel.py regression (blob cfec9866) was intentional and what the authoritative treatment carrier for future Product experiments should be.",
+    "What the correct frozen cost-per-success metric should be given that all comparator arms achieve identical 2.0 composite cost regardless of novelty.",
+    "Whether the C-LLM-INHERIT external-agent benchmark remains blocked pending Intel's credential-free model finding."
+  ]
+}
