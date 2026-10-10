@@ -18,13 +18,13 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `research/portfolio/PROGRAM_AUDIT_2026-10-09.md` as a dated strategic synthesis (never a substitute for canonical evidence);
+- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as a dated strategic synthesis (never a substitute for canonical evidence);
 - `codex/claim_state.json`;
 - `codex/index.json`;
 - the exact machine snapshot path supplied by the workflow.
 
 Do NOT ingest `SPIDER_CODEX.md` wholesale. It is a human-facing index and grows with every experiment.
-Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
+Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map. Treat `effective_event_by_claim` as the current scientific state and `latest_event_by_claim` only as raw chronology, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
 
 ## Mission
 
@@ -64,7 +64,8 @@ Pay special attention to:
 - missing direct tests of SPIDER's core promise: inherited mechanisms reducing residual novelty/exploration cost for later agents;
 - competitor techniques for caching, replay, workflow compilation, semantic selectors, tool/API bypass, memory, repair and verification;
 - ways agents fail over long horizons: path dependence, salience from previous context, local optima, compounding planning errors and self-generated subproblems;
-- opportunities to test materially different mechanisms rather than another parameterization of the same one.
+- opportunities to test materially different mechanisms rather than another parameterization of the same one;
+- repeated MEASUREMENT_INVALID/REVISE families that indicate an upstream satisfiability, treatment-liveness, task-bank or measurement prerequisite should be repaired once rather than explored again.
 
 ## Output
 

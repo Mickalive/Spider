@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-37982016598",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The frozen spec.json field dynamic_range_certified=false at freeze time mandates MEASUREMENT_INVALID per prereg.md sections 5 and 12. The producer correctly reported this status; no fix can change the frozen contract. To make progress on C-RESIDUAL-NOVELTY, a NEW experiment with a redesigned task bank that produces certified dynamic range (cold and retrieval success_rate < 0.95 at novelty ≥ 0.5) must be designed, frozen, and executed.",
+    "The shipped kernel src/spider/kernel.py (blob cfec9866) lacks the parameterized path (distill_parameterized, TrajectoryCounters, _support_accepts, rebind) that the frozen design names as the treatment carrier. The diagnostic ran against a vendored copy of the audited blob b15ed848. Any future experiment must either restore the parameterized path to the shipped kernel or explicitly bind the treatment carrier by git blob hash in the frozen spec.",
+    "The composite cost_per_success metric (http_requests + verification_calls + repair_attempts) excludes retrieval_calls. This makes B-RETRIEVAL-SHAPED (240 retrieval_calls total) appear to have the same cost as B-COLD-RE-DERIVE (0 retrieval_calls). The cost metric must include retrieval_calls or a separate retrieval_cost metric must be reported for honest cost accounting across arms.",
+    "The induced mechanism parameter_supports regexes (^<type>\\-00[0-9]{1}$) only accept identifiers 001-009, causing treatment collapse at novelty ≥ 0.5. This is a support-inference design issue, not a cost economics finding. A redesigned task bank must either widen support induction (e.g., include boundary examples in training) or define novelty levels that stay within the induced support if the intent is to measure cost economics rather than support boundaries."
+  ],
+  "validity_findings": [
+    "The frozen design's primary gate C1 (dynamic_range_certified == true) failed at freeze time: spec.json.dynamic_range_certified=false with all certificate fields null. Per the frozen prereg.md (sections 5, 12, and closing line), this mandates status=MEASUREMENT_INVALID and outcome=NOT_APPLICABLE before any outcome data is inspected. The producer correctly followed the frozen contract.",
+    "The diagnostic re-run confirmed the certificate failure: B-COLD-RE-DERIVE success_rate=1.0 and B-RETRIEVAL-SHAPED success_rate=1.0 at novelty 0.5 and 0.75 on all 4 task families. The deterministic localhost HTTP substrate is trivially solved by direct URL construction (cold) and template binding (retrieval), producing zero dynamic range — the same failure mode as parent EXP-PRODUCT-37973256064.",
+    "The treatment T-SPIDER-PARAM achieved success_rate=0.45 overall (1.0 at novelty 0.0, 0.8 at 0.25, 0.0 at 0.5, 0.0 at 0.75). The 0.45 is entirely explained by the induced support regex ^<type>\\-00[0-9]{1}$ accepting only identifiers 001-009. This is a support-generalization ceiling, not evidence about cost-per-success economics.",
+    "All successful arms have identical cost_per_success = 2.0 composite units. B-COLD-RE-DERIVE: 80 http_requests + 80 verification_calls = 160 total / 80 successes = 2.0. B-RETRIEVAL-SHAPED: 80 http_requests + 240 retrieval_calls + 80 verification_calls = 400 total, but retrieval_calls excluded from composite metric so 160/80 = 2.0. T-SPIDER-PARAM: 36 http_requests + 36 verification_calls = 72 / 36 successes = 2.0 (undefined at novelty 0.5/0.75). The composite metric is saturated and cannot discriminate arms.",
+    "The shipped kernel regression (merge 5601ede3: audited blob b15ed848 → cfec9866) means the diagnostic run used a vendored copy of the audited parameterized path, not the shipped path. The run does not certify the shipped carrier for C-RESIDUAL-NOVELTY or C-LLM-INHERIT.",
+    "The known-negative refusal test (S3) passed with refusal_rate=1.0 on 20 declared negatives, but scope is limited to the kernel path; direct-construction comparator arms cannot refuse by construction, so this does not test comparator refusal behavior.",
+    "The positive control PC-EXACT-REPLAY succeeded at 1.0 on training identifiers, validating substrate and accounting for the training block only.",
+    "The emptied-registry null (S1) matches cold re-derivation cost_per_success (2.0) at all novelty levels, consistent with the null hypothesis that any treatment advantage requires registry content."
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "C1_DYNAMIC_RANGE_GATE",
+      "assessment": "FAIL — frozen spec field dynamic_range_certified=false; observed cold_max_success_rate=1.0, retrieval_max_success_rate=1.0 at novelty ≥ 0.5. The deterministic substrate admits no headroom for cost/novelty comparison.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/spec.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/dynamic_range_cert.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json"
+      ]
+    },
+    {
+      "control_id": "B-COLD-RE-DERIVE",
+      "assessment": "CEILING — success_rate=1.0 at all 4 novelty levels (80/80); cost_per_success=2.0 constant across novelty. Direct URL construction solves the deterministic substrate perfectly. No dynamic range exists for this comparator.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json",
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/accounting_counters.jsonl"
+      ]
+    },
+    {
+      "control_id": "B-RETRIEVAL-SHAPED",
+      "assessment": "CEILING — success_rate=1.0 at all 4 novelty levels; cost_per_success=2.0 constant (retrieval_calls excluded from composite metric). Template binding solves the substrate perfectly. The 240 retrieval_calls total are not reflected in the reported cost.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json",
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/accounting_counters.jsonl"
+      ]
+    },
+    {
+      "control_id": "B-EMPTIED-REGISTRY",
+      "assessment": "PASS (null hypothesis consistent) — success_rate=1.0 and cost_per_success=2.0 at all novelty levels, indistinguishable from B-COLD-RE-DERIVE. The null correctly predicts that without registry content, the treatment path falls back to cold-equivalent behavior.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"
+      ]
+    },
+    {
+      "control_id": "PC-EXACT-REPLAY",
+      "assessment": "PASS — success_rate=1.0 on 20 training identifier tasks (novelty=0.0); cost_per_success=2.0. Substrate and accounting validated for the training block.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json"
+      ]
+    },
+    {
+      "control_id": "S3_KNOWN_NEGATIVES",
+      "assessment": "PASS (kernel path only) — refusal_rate=1.0 on 20 declared negative task specs with bound_action=null and non-empty reasons. Comparator arms not tested for refusal (cannot refuse by construction).",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/known_negatives.jsonl"
+      ]
+    },
+    {
+      "control_id": "S4_SUPPORT_BOUNDARY",
+      "assessment": "CHARACTERIZED — induced mechanisms carry parameter_supports regexes ^<type>\\-00[0-9]{1}$ accepting 001-009 only. Treatment succeeds on training (001-005) and first held-out block (006-009, 80%), refuses 011-020. This is the mechanism behind treatment's 0.45 success_rate.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/induced_mechanisms.json",
+        "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json"
+      ]
+    },
+    {
+      "control_id": "T-SPIDER-PARAM_LIVENESS",
+      "assessment": "FAIL (shipped carrier) — shipped src/spider/kernel.py (blob cfec9866) lacks distill_parameterized, TrajectoryCounters, _support_accepts, rebind. Diagnostic used vendored audited blob b15ed848. The run does not certify the shipped kernel as treatment carrier.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/shipped_kernel_probe.json",
+        "research/experiments/EXP-PRODUCT-37982016598/provenance.json"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "dynamic_range_certified_frozen": false,
+    "dynamic_range_certified_observed": false,
+    "cold_max_success_rate": 1.0,
+    "retrieval_max_success_rate": 1.0,
+    "certified_at_novelty": null,
+    "success_rate": {
+      "T-SPIDER-PARAM": 0.45,
+      "B-COLD-RE-DERIVE": 1.0,
+      "B-RETRIEVAL-SHAPED": 1.0,
+      "B-EMPTIED-REGISTRY": 1.0,
+      "PC-EXACT-REPLAY": 1.0
+    },
+    "success_rate_by_novelty": {
+      "T-SPIDER-PARAM": {
+        "0.0": 1.0,
+        "0.25": 0.8,
+        "0.5": 0.0,
+        "0.75": 0.0
+      },
+      "B-COLD-RE-DERIVE": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "B-RETRIEVAL-SHAPED": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "B-EMPTIED-REGISTRY": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "PC-EXACT-REPLAY": {
+        "0.0": 1.0,
+        "0.25": null,
+        "0.5": null,
+        "0.75": null
+      }
+    },
+    "cost_per_success": {
+      "unit": "composite_cost_units = http_requests + verification_calls + repair_attempts (retrieval_calls EXCLUDED)",
+      "T-SPIDER-PARAM": 2.0,
+      "B-COLD-RE-DERIVE": 2.0,
+      "B-RETRIEVAL-SHAPED": 2.0,
+      "B-EMPTIED-REGISTRY": 2.0,
+      "PC-EXACT-REPLAY": 2.0,
+      "T-SPIDER-PARAM_by_novelty": {
+        "0.0": 2.0,
+        "0.25": 2.0,
+        "0.5": null,
+        "0.75": null
+      },
+      "note": "retrieval_calls not included in composite metric; B-RETRIEVAL-SHAPED total counters = 80 http + 240 retrieval + 80 verification = 400; T-SPIDER-PARAM total retrieval_calls = 80. Cost per success undefined at novelty 0.5/0.75 for T-SPIDER-PARAM (zero successes)."
+    },
+    "cost_advantage_vs_cold": null,
+    "cost_advantage_vs_retrieval": null,
+    "spearman_rho_cold": null,
+    "spearman_rho_retrieval": null,
+    "perm_p_cold": null,
+    "perm_p_retrieval": null,
+    "refusal_rate": 1.0,
+    "known_negatives_n": 20,
+    "http_requests_total": 316,
+    "model_calls": 0.0,
+    "model_tokens": 0.0,
+    "browser_actions": 0.0,
+    "shipped_kernel_api_complete": false,
+    "shipped_kernel_missing_features": [
+      "distill_parameterized",
+      "TrajectoryCounters",
+      "_support_accepts",
+      "rebind"
+    ],
+    "retrieval_calls_total": {
+      "T-SPIDER-PARAM": 80.0,
+      "B-COLD-RE-DERIVE": 0.0,
+      "B-RETRIEVAL-SHAPED": 240.0,
+      "B-EMPTIED-REGISTRY": 80.0,
+      "PC-EXACT-REPLAY": 20.0
+    },
+    "decision_rule_primary_pass": false,
+    "decision_rule_C1_pass": false,
+    "decision_rule_C2_pass": false,
+    "decision_rule_C3_evaluable": false,
+    "decision_rule_C4_evaluable": false,
+    "decision_rule_C5_evaluable": false,
+    "decision_rule_S1_pass": true,
+    "decision_rule_S2_pass": true,
+    "decision_rule_S3_pass": true
+  },
+  "claim_ceiling": "No claim about C-RESIDUAL-NOVELTY can be made from this experiment. The frozen dynamic range certificate failed at freeze time (spec.json.dynamic_range_certified=false), mandating MEASUREMENT_INVALID per the frozen prereg. The descriptive arm metrics show zero dynamic range (both comparators at success ceiling) and saturated cost_per_success (2.0 for all arms), so the primary hypothesis (cost advantage grows with novelty) was not testable. The treatment's 0.45 success_rate is explained by its induced support regex accepting only identifiers 001-009, not by cost economics. The shipped kernel lacks the parameterized treatment carrier. C-RESIDUAL-NOVELTY remains at its pre-existing registry status (HYPOTHESIS) with no evidence update from this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-37982016598/request.json",
+    "research/experiments/EXP-PRODUCT-37982016598/spec.json",
+    "research/experiments/EXP-PRODUCT-37982016598/prereg.md",
+    "research/experiments/EXP-PRODUCT-37982016598/freeze.json",
+    "research/experiments/EXP-PRODUCT-37982016598/result.json",
+    "research/experiments/EXP-PRODUCT-37982016598/report.md",
+    "research/experiments/EXP-PRODUCT-37982016598/provenance.json",
+    "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/induced_mechanisms.json",
+    "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/shipped_kernel_probe.json",
+    "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/accounting_counters.jsonl",
+    "research/experiments/EXP-PRODUCT-37982016598/raw_evidence/known_negatives.jsonl",
+    "research/experiments/EXP-PRODUCT-37982016598/derived/arm_metrics.json",
+    "research/experiments/EXP-PRODUCT-37982016598/derived/dynamic_range_cert.json",
+    "research/experiments/EXP-PRODUCT-37982016598/derived/decision_rule_eval.json",
+    "research/experiments/EXP-PRODUCT-37973256064/handoff.json"
+  ],
+  "unresolved": [
+    "Whether any credential-free task bank on this architecture/substrate can produce a certified dynamic range (cold and retrieval success_rate < 0.95 at novelty ≥ 0.5). The deterministic localhost REST substrate is solved at ceiling by both comparators by construction.",
+    "Whether the T-SPIDER-PARAM support boundary failure at novelty ≥ 0.5 (induced regex ^<type>\\-00[0-9]{1}$ accepting only 001-009) is fixable via corrected support inference (e.g., wider generalization from contiguous sequences) or is intrinsic to the audited induction mechanism.",
+    "Whether the shipped src/spider/kernel.py regression (blob b15ed848 → cfec9866 in merge 5601ede3) was intentional and what the authoritative treatment carrier for future Product experiments should be.",
+    "What the correct cost-per-success metric should be given that the current composite metric excludes retrieval_calls, making B-RETRIEVAL-SHAPED (240 retrieval_calls) appear equal to B-COLD-RE-DERIVE (0 retrieval_calls).",
+    "Whether the C-LLM-INHERIT external-agent benchmark remains blocked pending Intel's credential-free model finding and provisioning of a programmatic model endpoint.",
+    "Whether the task bank design can be redesigned to produce dynamic range while maintaining causal attribution and honest accounting — e.g., by introducing stochasticity, authentication, path variation, or multi-step tasks that cold construction cannot trivially solve."
+  ]
+}

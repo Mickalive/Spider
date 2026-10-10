@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-37984242167",
+  "lane": "frontier",
+  "stage": "execute",
+  "status_summary": "BLOCKED: frozen design unsatisfiable (empty target_pool + absent pre-freeze control certificate); no web measurement taken; receipt produced instead of fabricated numbers.",
+  "github": {
+    "run_id": "38003276774",
+    "run_attempt": "1",
+    "branch": "lab2/frontier",
+    "base_sha_request": "01a63237ee024253a251f13300243a5472349a8c",
+    "pre_execute_sha": "c6edd08c63deebf314f6ad8b423652f210a00f59",
+    "head_sha_at_execute": "165a2970e4b9acdbe9c75e2b8192df77fb04a84c",
+    "prior_failed_execute_runs": ["37996033047 (attempt 1)"],
+    "git_discipline": "No commit, push, switch, or reset was performed during this stage; working-tree modifications outside this packet directory pre-existed this run and were not touched."
+  },
+  "frozen_inputs": {
+    "verified_unmodified": true,
+    "verification": "sha256 of request.json/spec.json/prereg.md recomputed during EXECUTE and compared against freeze.json.hashes; all three match exactly.",
+    "hashes": {
+      "research/experiments/EXP-FRONTIER-37984242167/request.json": "25ca2e366e635ec9e10a4a98ce25bb4b43c0017df98e1d62f94affdc425607e3",
+      "research/experiments/EXP-FRONTIER-37984242167/spec.json": "43105f9436b416414cdec03426204f974425994ebea7041ec4ee68dfb1bba5de",
+      "research/experiments/EXP-FRONTIER-37984242167/prereg.md": "401f2137a23c324ce05e21a1646c6c290f46c643be7fb4dfd1f7547c1b149c9c",
+      "research/experiments/EXP-FRONTIER-37984242167/freeze.json": "437721bbfd573ce39886a4661288c68fd17f338c3d86ebe982403e8202135d53"
+    }
+  },
+  "measurement_declaration": {
+    "web_measurement_taken": false,
+    "reason": "The frozen spec.json.target_pool admits zero seeds / zero confirmed DEEP items / zero hosts and the frozen pre_freeze_control_certificate is all_verified=false with no evidence refs. VN-V2/VN-V9 and prereg sections 6/14/18 assign pool construction and the live certificate to DESIGN before freeze. Constructing the pool post-freeze would mutate the frozen design's sampling frame, so no confirmatory measurement is possible under the frozen transaction.",
+    "falsifier_reachability": "Neither SUPPORTS nor FALSIFIES branch is arithmetically reachable: denominator count(admitted DEEP items) = 0 as frozen, fraction undefined (0/0), zero engines countable."
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.15",
+    "substrate": "credential-free GET-only stdlib HTTP per frozen VN-V1; NOT exercised (no HTTP sent)",
+    "tcp_443_probe": "connect ok within 4s: doc.rust-lang.org, www.gnu.org, quotes.toscrape.com, example.com (socket only; no HTTP request)",
+    "tiktoken": "absent per frozen design VN-V7; token fields null (not applicable to this receipt)"
+  },
+  "commands_executed": [
+    "sha256sum research/experiments/EXP-FRONTIER-37984242167/{request.json,spec.json,prereg.md,freeze.json,execution_checkpoint.json,failure.json}",
+    "python3 -c json inspection of spec.json target_pool / pre_freeze_control_certificate / decision_rule / freeze_eligibility",
+    "python3 -c json inspection of request.json (design_contract_version, director_mandate, parent_handoff)",
+    "grep/read of codex/index.json, codex/claim_state.json (effective_event_by_claim for C-RESIDUAL-NOVELTY, C-WEB-DYNAMICS)",
+    "read of research/experiments/EXP-FRONTIER-37950626378/{handoff.json,spec.json,result.json,raw/*} (inherited context only)",
+    "git log --oneline -15 / git show --stat for prior execute commits (receipt inspection, no mutation)",
+    "python3 socket TCP-443 probe (4s timeout; environment only, no HTTP)"
+  ],
+  "code_paths": {
+    "experiment_code_written": "none",
+    "experiment_code_executed": "none",
+    "product_code_touched": "none",
+    "scope_check": "frontier lane granted roots research/harness, research/frontier (registry.json); this stage wrote only canonical packet files under research/experiments/EXP-FRONTIER-37984242167/ and modified nothing else."
+  },
+  "produced_artifacts": {
+    "research/experiments/EXP-FRONTIER-37984242167/result.json": "422e9343ac5277aff54f60fd720b1628a75ca2507ea9c07ab5957ebe3e8a1f0f",
+    "research/experiments/EXP-FRONTIER-37984242167/report.md": "b4a315a9346116192171800c9de93e43167f9f5e610103641f56de6b8dbef903"
+  },
+  "inherited_context_refs": [
+    "research/experiments/EXP-FRONTIER-37950626378/handoff.json (sha256 ffc7fbe697cea31d856b6040d464172e531171684334cfc604ba311a9d4b406a): parent four-way carry_forward; established/rejected/unknown/do_not_assume preserved; its dependency on a >=2-engine DEEP pool and pre-freeze control certificate is quoted in report.md section 2.",
+    "codex/claim_state.json effective_event_by_claim: C-RESIDUAL-NOVELTY -> EXP-PRODUCT-37989728440; C-WEB-DYNAMICS -> EXP-PHYSICS-37973239386 (unchanged by this receipt)."
+  ],
+  "reproducibility_note": "This determination is reproduced by (1) reading the frozen files under research/experiments/EXP-FRONTIER-37984242167/, (2) confirming their hashes against freeze.json, and (3) applying the frozen decision rule to the frozen record: denominator zero, both branches unreachable. No network state or nondeterministic seed is involved."
+}

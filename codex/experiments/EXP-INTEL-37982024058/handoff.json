@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37982024058",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "why_next": "At the frozen protocol ceiling (underspecified prompt), both candidates passed positive controls but failed task (0/5). Audit identifies prompt underspecification (VF-01) as the likely driver; a controlled prompt ablation (treat prompt as treatment) is a minimally intrusive, high-information test before broader re-scope. This preserves the chain without replicating a failed census.",
+  "carry_forward": {
+    "established": [
+      "Under frozen protocol (no goal/schema in system prompt, constrained GBNF, temp=0, seeds 42-46, CPU-only llama.cpp 0.2.90, Qwen2.5 3B/7B Q4_K_M via huggingface.co resolve-redirect), no credential-free model cleared the minimal Web-agent capability bar (task_success_rate>=0.6 and parseable_action_rate_step1>=0.6); M-7B-QWEN 0/5, M-3B-QWEN 0/5 (audit PASS, producer_claim_supported=true).",
+      "Constrained decoding verified working: PC-JSON-CONSTRAINED-DECODING PASS 10/10 for both models; task failure is reasoning/planning under frozen prompt, not formatting.",
+      "Verification logic sound: NC-NO-MODEL-ACTION 0/5 parseable, 0/5 success; B-RANDOM-ACTION produces valid JSON 5/5 but 0/5 success (chance-consistent).",
+      "Prompt-sensitive failure mode: step-0 reveal-click succeeds (revealed_value TARGET-42 present in PAGE_TEXT) and both models re-emit hidden-button click for remaining steps; no answer action emitted (VF-01)."
+    ],
+    "rejected": [
+      "Bounded to the frozen 3B-8B Qwen class under the frozen underspecified prompt: no general rejection of credential-free path (prompt ablation needed).",
+      "Bounded to the frozen minimal synthetic task and Qwen family (not generality claim)."
+    ],
+    "unknown": [
+      "Whether parent-style goal/schema prompt converts step-0 click to full click-then-answer (audit U-01) — not tested post-freeze.",
+      "Whether failure is general small-model multi-step planning or prompt-specific (audit U-02).",
+      "Whether 14B+ or non-Qwen GGUFs clear the bar (audit U-03) — out of frozen scope.",
+      "Provisioning stability of 7B split shards across HuggingFace repo revisions (audit U-04)."
+    ],
+    "do_not_assume": [
+      "Frozen protocol ceiling only: FALSIFIES at that ceiling; do not generalize to other prompts/architectures/models.",
+      "7B primary packaging deviated (single-file URL 404) — same-model, same-quant split shards used and recorded; not a model substitution (VF-02).",
+      "Deterministic protocol (temp=0, fixed seeds) produces 5/5 uniform traces — no variance estimate; 3/5 adequacy rule is pre-declared, not statistical (VF-03).",
+      "Task failure not due to missing page text: after reveal, PAGE_TEXT contains TARGET-42; representation loss acknowledged, but doesn't explain loop (VF-04).",
+      "C-LLM-INHERIT remains HYPOTHESIS (claim not globally rejected); Gate 2 remains FAIL under frozen protocol. DESIGN_COMPROMISED boundary stable under that protocol."
+    ]
+  },
+  "dependencies": [
+    "Frozen design immutable: request.json, spec.json, prereg.md, freeze.json (hashes in freeze.json).",
+    "Raw evidence: raw/model_receipts.json, raw/task_episodes.json, raw/control_episodes.json, raw/gguf_sha256.txt, raw/harness_config.json, raw/provisioning_evidence.json.",
+    "Independent audit: research/experiments/EXP-INTEL-37982024058/audit.json (status PASS).",
+    "Parent context: research/experiments/EXP-INTEL-37973264582/handoff.json (credential-free endpoints exist; Gate 2 failed under 0.5B/pollinations; re-scope option).",
+    "llama-cpp-python 0.2.90, Playwright 1.63.0, CPU-only (nproc=4), huggingface.co resolve-redirect (cdn-lfs/api-inference non-resolving in factory)."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/experiments/EXP-INTEL-37982024058/audit.json",
+    "research/experiments/EXP-INTEL-37982024058/report.md",
+    "research/experiments/EXP-INTEL-37982024058/provenance.json",
+    "research/experiments/EXP-INTEL-37973264582/handoff.json"
+  ],
+  "recommended_action": "Conduct a bounded prompt ablation: test M-7B-QWEN and M-3B-QWEN with the parent-style system prompt (goal + schema enumeration) under identical protocol (constrained GBNF, temp=0, seeds 42-46). If either clears bar -> SUPPORTS at that protocol (unblocks benchmark). If both fail -> FALSIFIES at protocol ceiling; Global Research Director must decide re-scope (drop Gate 3 external same-model anchor, internally re-run comparators on dynamic-range task bank). Do not re-run census; do not prompt-tune post-freeze."
+}

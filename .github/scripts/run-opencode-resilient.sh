@@ -44,8 +44,8 @@ if [[ -x "$REAL" ]]; then
 fi
 mapfile -t MODELS < <(printf '%s\n' "${CONFIGURED[@]}" "${DISCOVERED[@]}" | awk 'NF && !seen[$0]++')
 
-if [[ "$ROLE" == audit && -z "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
-  echo "::error::Independent audit requires a known producer model to exclude" >&2
+if [[ ( "$ROLE" == audit || "$ROLE" == design_review ) && -z "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
+  echo "::error::Independent $ROLE requires a known producer model to exclude" >&2
   exit 67
 fi
 if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
