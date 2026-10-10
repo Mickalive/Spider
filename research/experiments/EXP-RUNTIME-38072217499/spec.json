@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-RUNTIME-38072217499",
+  "lane": "runtime",
+  "claim_ids": [],
+  "question": "",
+  "hypothesis": "",
+  "falsifier": "",
+  "baselines": [],
+  "positive_control": "",
+  "null_control": "",
+  "measurement_validity": [],
+  "decision_rule": "",
+  "product_consequence_positive": "",
+  "product_consequence_negative": "",
+  "estimated_cost": "",
+  "expected_information_gain": "",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    },
+    "measurement_prerequisites": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    },
+    "baseline_identifiability": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    },
+    "control_sensitivity": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    },
+    "treatment_liveness": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    },
+    "freeze_artifacts_bound": {
+      "status": "PENDING",
+      "reason": "",
+      "evidence_refs": []
+    }
+  },
+  "freeze_artifacts": []
+}
