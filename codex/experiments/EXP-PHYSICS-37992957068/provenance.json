@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37992957068",
+  "lane": "physics",
+  "origin_github_run_id": "37992957068",
+  "claim_ids": [
+    "C-WEB-DYNAMICS"
+  ],
+  "director_mandate": {
+    "action": "PIVOT",
+    "claim_id": "C-WEB-DYNAMICS",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "USE",
+    "cycle_id": "37991758372"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-37973239386",
+    "path": "research/experiments/EXP-PHYSICS-37973239386/handoff.json",
+    "sha256": "281a29dec07c745202386cef1476e12e236ddd3e3ba9d43d34d81d7f4d277468"
+  },
+  "git": {
+    "head": "d2c1d17d5b5813dc917bad3f8d71d6fc526216a9",
+    "branch": "lab2/physics",
+    "note": "Working tree also contains unrelated lane directories and Codex-sync edits that this EXECUTE did not modify."
+  },
+  "frozen_inputs": {
+    "declared_in_freeze": {
+      "prereg.md": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+      "request.json": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+      "spec.json": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2"
+    },
+    "reverified": {
+      "prereg.md": {
+        "declared": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+        "actual": "21b0ae07ccd28d416f829257344efa3486c43289f58b9e59eeb78fbc2a325e12",
+        "match": true
+      },
+      "request.json": {
+        "declared": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+        "actual": "fd5f78175feda937e88e142bbdae5b976a98c1c28e9c5477b2d1af1cff140065",
+        "match": true
+      },
+      "spec.json": {
+        "declared": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2",
+        "actual": "38ec8d15fac9b7e50fda5825c130a409d4211a341076023b9112548ccd3fa2d2",
+        "match": true
+      }
+    },
+    "all_match": true,
+    "freeze_sha256": "ab5d9561528e8b4f4025a700dd75de566d338c3d1ef291281281bc9b03a4d220",
+    "mutated_after_freeze": []
+  },
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.15",
+    "numpy": "2.5.3",
+    "numpy_role": "analysis-only numerical accelerator; collection uses stdlib only",
+    "http_client": "python stdlib urllib.request",
+    "requests_library_used": false,
+    "browser": "none",
+    "javascript": false,
+    "credentials": 0,
+    "model_calls": 0,
+    "external_llm_inference": false,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64; research) SPIDER-Research2.0/EXP-PHYSICS-37992957068",
+    "collection_workers": 8
+  },
+  "code": {
+    "research/physics/exp_37992957068_lib.py": "767e2c56fc0fb79bb953f5f11d1223a4b82305782457eb346a70f94d41e1054f",
+    "research/physics/exp_37992957068_run.py": "829caf9926a63b1af2b54a71f1e5c6c4eed51a8720ecd5c3f1520fceb8fbfa62",
+    "research/physics/exp_37992957068_finalize.py": "a7cda82d990a7d5a0c3b70b33bf81c93a46305167145cd16fe61cb6d0ab53ac1",
+    "combined_code_sha256": "6505171cd5668db17f77178fad6cb95cd7e97be7f35c037fac5c0eb149684b71"
+  },
+  "commands": [
+    "python3 research/physics/exp_37992957068_run.py --collect",
+    "python3 research/physics/exp_37992957068_run.py --analyze",
+    "python3 research/physics/exp_37992957068_finalize.py"
+  ],
+  "datasets_fixtures": {
+    "frozen_universe": {
+      "source": "embedded verbatim in spec.json.frozen_universe.endpoints",
+      "n_endpoints": 57
+    },
+    "pre_freeze_census": {
+      "path": "/tmp/opencode/phys379/census.json",
+      "sha256": null,
+      "note": "Pre-freeze non-outcome-bearing reachability census cited by spec.json; it lived at an absolute path in an external temp dir and is not present in this environment, so its hash is explicitly null. The run independently verifies attainability floors from observed data (see result.json.observations O6)."
+    }
+  },
+  "seeds": {
+    "assignment": 37992957068,
+    "bootstrap": 37992957068,
+    "pc_synthetic": 37992957068,
+    "nc_synthetic": 37992957069
+  },
+  "determinism": {
+    "arm_assignment": "seeded block randomisation, 3 sessions per arm per endpoint (seed 37992957068); recorded at raw/arm_assignment.json",
+    "arm_assignment_sha256": "7e2b69026f74f66dd257c75d4b0e851928f8a34b0544da9ed0b756e770faee37",
+    "bootstrap_resamples": 10000,
+    "classification": "intrinsic class is a pure function of the stored fields (status, error, cf_mitigated, challenge_marker_matched); the analyze step re-derived every class from those fields with 0 mismatches (recorded in derived/metrics.json collection_meta and result.metrics.measurement_invalid_conditions)",
+    "collect_reproducible": false,
+    "collect_note": "Web responses are not reproducible; all downstream metrics are deterministic functions of raw/collection.jsonl.",
+    "numpy_used_in_collection": false,
+    "pc_synthetic_endpoints": 19,
+    "nc_synthetic_endpoints": 19
+  },
+  "census_artifact": {
+    "path": "/tmp/opencode/phys379/census.json",
+    "sha256": null
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/collection.jsonl",
+      "sha256": "21bec3c2b45c1bb71697d3376df96d80f12f753cb415c7f6867d7f078f61a7b7",
+      "bytes": 659524,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/collection_meta.json",
+      "sha256": "17625b198d0696072d1be7122c388dc5a8013357f6aa663e1a24f018516360b9",
+      "bytes": 5024,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/oracles.json",
+      "sha256": "950adc2899da9222b3a9b7f0c591cef2069350ed08a19aa5dd1983898c377001",
+      "bytes": 2366,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/policy_trace.json",
+      "sha256": "4f4adc69be613af74894d3c9672764df8f8b4de2ce3642ca15e6354b557dd4f4",
+      "bytes": 1026,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/arm_assignment.json",
+      "sha256": "7e2b69026f74f66dd257c75d4b0e851928f8a34b0544da9ed0b756e770faee37",
+      "bytes": 14090,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/raw/frozen_verify.json",
+      "sha256": "bdeadb9bad69be14eeb2d33e41641cb2cc693286f03a1f0653a6ca1f4e8737df",
+      "bytes": 753,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-37992957068/derived/metrics.json",
+      "sha256": "7ee11a96112fcada55dd010fd10c9731553364a0d509eb7fb1f4a3581301b005",
+      "bytes": 16113,
+      "role": "derived"
+    }
+  ]
+}
