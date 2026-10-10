@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Once the composite oracle's response-fingerprint component is repaired so that browser CDP captures exclude all volatile headers - the hop-by-hop 'Connection' header (present pre-capture, absent post-capture on the same no-action pair, and absent from SC.EXCLUDED_HEADERS, the pinned root cause of 260/260 fingerprint_changed=true) must be excluded like Date/Server/X-Cache/Age/ETag/W-ETag/X-Worker-Pid/X-Request-Id/Content-Length - and the capture-stability gate is corrected to test only the WAL byte vector (prereg section 8 'byte-identical') with exactly 20 no-action pairs, does the otherwise unchanged composite oracle (length-framed SHA-256 WAL-byte vector + SQL logical projection + stable-header response fingerprint) retain out-of-surface arm-constrained discrimination - point sensitivity/specificity >= 0.90 with two-sided 95% Wilson lower bound >= 0.80, non-degenerate intervals, zero false positives on matched out-of-surface nulls, arm-blind scoring and independent recomputation zero mismatches - on the frozen out-of-surface transfer design (P-OOS-WORKER and P-OOS-REPR vs N-OOS-IDLE, N-OOS-REJECT, N-OOS-CACHE), with M-REVERT-BLINDSPOT re-implemented so M-REVERT-LOGICAL is a genuine committed-logical-restore (compensating inverse commits, WAL bytes NOT restored) rather than a second byte-restore; i.e., is the measured discrimination a property of the oracle over committed state transitions it did not author, which remains the last scope bound standing between the parent VALIDATED ceiling and any downstream lane treating this substrate as measurement-valid for real drift?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-10-10T15:26:54.055339+00:00",
-  "last_failure_retryable": false,
+  "consecutive_failures": 6,
+  "updated_at": "2026-10-10T15:41:51.136094+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "984049809ebf393e805f59c9b8d083caf2ebfc387348079b06ccacbe41b8928e",
-  "same_failure_count": 3,
-  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
-  "last_failure_control_revision": "bf70eef1f9002f2159b41980d1ca900d03536e36137b85f40a98589dbed45a2c"
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "fece634f3ddc7205ce6eed20",
+  "last_failure_control_revision": "bd1a82b471ae068e413ad8df20a9eb8f90675213560b37e690cf815d24ded351"
 }
