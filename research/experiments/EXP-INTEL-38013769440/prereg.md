@@ -1,42 +1,35 @@
-# EXP-INTEL-38013769440 — Preregistration (lane intel)
+# EXP-INTEL-38013769440 preregistration
 
-Status: DESIGN FINAL (this file is byte-authority for the frozen prompts; `spec.json` is machine authority).
+Lane: `intel`. Claim: `C-LLM-INHERIT` (intel priority claim; director_mandate cycle `38013054267`, action `REOPEN`).
+Status line: DESIGN v2 — preregistered before any confirmatory episode and before any model load.
+This file is frozen together with `spec.json`; both are immutable after `freeze.json` exists.
 
-## 0. Identity and authority
+## 1. Objective and the decision it can change
 
-- Experiment: `EXP-INTEL-38013769440`, lane `intel`, claim `C-LLM-INHERIT` (only claim addressed).
-- Binding direction: `request.json` `director_mandate` (cycle `38013054267`, action `REOPEN`, target `C-LLM-INHERIT`, `parent_handoff_disposition=USE`, `cognitive_reset=false`). The mandate's strategic question is the authorization; the inherited `EXP-INTEL-37982024058` handoff (sha256 `b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55`) is continuity evidence only.
-- This packet determines readiness condition (3) of the four-arm C-LLM-INHERIT benchmark. It does not promote the claim; any status change is the DIRECTOR's decision.
+Readiness condition (3) of the four-arm `C-LLM-INHERIT` benchmark requires at least one credential-free,
+CPU-quantized, same-model driver that can complete the minimal multi-step Web-agent task. The parent
+experiment (`EXP-INTEL-37982024058`) produced a bounded FALSIFIES: under an underspecified system prompt
+(no goal, no action-schema enumeration) Qwen2.5 3B/7B passed constrained-decoding positive controls 10/10
+and step-1 parsing 5/5, yet failed the task 0/5 and 0/5, looping on a click of the now-hidden `#reveal-btn`.
 
-Binding question: Under the same credential-free, CPU-quantized constraints, does supplying the task goal/schema in the system prompt (removing the underspecification the parent harness did not have) convert the step-0 reveal-click into a full multi-step click-then-answer completion for the largest obtainable credential-free models, and if not, what is the demonstrable capability ceiling for the minimal Web-agent task across ALL credential-free endpoints and local models actually available to the factory? Return an explicit close/re-scope recommendation so that readiness condition (3) is either satisfied by a proven same-model driver or the four-arm benchmark is re-scoped off the credential-free path. Include a bounded external check of the published capability envelope for comparably sized local models.
+This experiment asks the single decision-changing question named by the audit (`VF-01`):
 
-## 1. Established / rejected / unknown / do_not_assume (from parent EXP-INTEL-37982024058)
+> Does supplying the task **goal and action schema** in the system prompt convert the step-0 reveal-click
+> into a full click-then-answer completion for the largest obtainable credential-free models — and if not,
+> what is the demonstrable capability ceiling for the minimal Web-agent task across the credential-free
+> endpoints and local models actually available to the factory?
 
-- **Established.** Under the frozen underspecified-prompt protocol (no goal/schema; constrained GBNF; temp=0; seeds 42-46; CPU-only llama.cpp 0.2.90; Qwen2.5 3B/7B Q4_K_M): M-7B-QWEN 0/5 and M-3B-QWEN 0/5 task success, `parseable_action_rate_step1` 1.0, PC-JSON 10/10, audit PASS. Verification is mechanical (`clicked_reveal AND revealed_value==TARGET-42 AND final answer==TARGET-42`). NC 0/5; B-RANDOM 5/5 valid JSON, 0/5 success. Failure mode: step-0 reveal-click succeeds, then the models re-click the now-hidden `#reveal-btn` for all remaining steps and never answer.
-- **Rejected.** Bounded to the frozen 3B-8B Qwen class under the underspecified prompt (not a general rejection of the credential-free path). The census unconstrained-decoding 0.5B prose result does NOT transfer to this GBNF protocol. The Pollinations proxy (gpt-oss-20b) is carried as a timestamp-bound endpoint-layer negative (empty/reasoning-only, ~197-token cap, intermittent 402), not re-measured.
-- **Unknown.** Whether the goal/schema prompt converts the click into full completion; whether the failure is prompt-specific or a general small-model planning ceiling; whether 14B clears; whether 0.5B clears under GBNF.
-- **do_not_assume.** Do not generalize the parent FALSIFIES to other prompts/architectures/models; the 7B single-file URL 404s (split shards are same model/quant, not a substitution); NOT_ATTEMPTED/NOT_MEASURED records are not negatives; carried negatives are not protocol-transferable; do not re-run the census.
+Both outcomes change a program decision: a proven driver unblocks the flagship four-arm benchmark;
+exhaustion licenses an explicit close/re-scope off the credential-free path. The mandate licenses both
+directions, and both branches below are reachable.
 
-## 2. Hypothesis (H1) and Falsifier (F1)
+## 2. Frozen task (byte-identical to the parent fixture)
 
-**H1.** The parent's 0/5 negatives are caused at least partly by system-prompt underspecification (audit VF-01), not by an immutable capability ceiling. Under PR-SPECIFIED (below), the step-0 reveal-click converts into a full click-then-answer: at least one candidate in {M-7B-QWEN, M-3B-QWEN, M-14B-QWEN} clears the bar (`task_success_rate >= 0.6` AND `parseable_action_rate_step1 >= 0.6` over 5 episodes), all other constraints byte-identical to the parent. M-0.5B-QWEN is additionally measured as a census-completeness candidate; if it alone clears, the outcome is still SUPPORTS with it recorded as the driver.
+The task HTML, GBNF grammar, user template, sampling and verifier are byte-identical to
+`research/experiments/EXP-INTEL-37982024058/raw/harness_config.json`
+(sha256 `7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb`).
 
-**F1.** Under PR-SPECIFIED no obtainable candidate clears the bar, while CV-UNDERSPEC-REPLICATION reproduces the parent 0/5 + reveal-click loop and PC-SCRIPTED-ORACLE proves the task is passable (5/5). Exhaustion of the obtainable range plus the carried proxy negative closes the credential-free path: readiness condition (3) is NOT satisfied and the benchmark must be re-scoped off the credential-free path.
-
-## 3. Candidates (frozen)
-
-| id | model | packaging | bytes | sha256 / source | URL |
-|---|---|---|---|---|---|
-| M-0.5B-QWEN | Qwen2.5-0.5B-Instruct Q4_K_M | single | 491,400,032 | `74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db` (census receipts; recomputed at download) | huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF resolve qwen2.5-0.5b-instruct-q4_k_m.gguf |
-| M-3B-QWEN | Qwen2.5-3B-Instruct Q4_K_M | single | 2,104,932,768 | `626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d` (parent gguf_sha256.txt) | .../Qwen2.5-3B-Instruct-GGUF ... qwen2.5-3b-instruct-q4_k_m.gguf |
-| M-7B-QWEN | Qwen2.5-7B-Instruct Q4_K_M | 2 shards | 3,993,201,344 + 689,872,288 | shard1 `dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db`, shard2 `539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a` (parent gguf_sha256.txt) | .../Qwen2.5-7B-Instruct-GGUF ...-00001-of-00002.gguf, -00002-of-00002.gguf |
-| M-14B-QWEN (escalation, availability-gated) | Qwen2.5-14B-Instruct Q4_K_M | 3 shards | 3,991,999,872 + 3,989,373,504 + 1,006,737,120 | recomputed at download; sizes pinned at DESIGN | .../Qwen2.5-14B-Instruct-GGUF ...-000{1,2,3}-of-00003.gguf |
-
-The 7B single-file URL `...q4_k_m.gguf` returns 404 (pre-probed) — EXECUTE must not use it. A shard hash mismatch => `NOT_MEASURED-SHA-MISMATCH`, never a silent substitution.
-
-## 4. Frozen task and prompts (single-variable ablation)
-
-Task `MIN-WEBAGENT-CLICK-REVEAL-ANSWER`: synthetic page served via local `http.server` on 127.0.0.1 random port. HTML byte-identical to the parent fixture `harness_config.json`:
+Task HTML (`task.page_html`):
 
 ```html
 <!DOCTYPE html>
@@ -54,9 +47,13 @@ Task `MIN-WEBAGENT-CLICK-REVEAL-ANSWER`: synthetic page served via local `http.s
 </html>
 ```
 
-Max 5 steps/episode. Success requires `clicked_reveal=True` AND `revealed_value==TARGET-42` AND final answer text == `TARGET-42`. Action schema: `click` requires `action`+`selector`; `answer` requires `action`+`text`; any parse error, schema violation or missing field is a parse failure (regex-parse recorded as raw evidence only).
+Success predicate (mechanical, unchanged): `clicked_reveal == True` AND `revealed_value == "TARGET-42"`
+AND a final `answer` action whose text is exactly `"TARGET-42"`.
 
-GBNF grammar (byte-identical to parent fixture):
+Constraint: **every episode of every arm — including every control — must navigate to the served task URL
+before the episode begins.** This fixes the parent control bug (see §7).
+
+GBNF grammar (`gbnf_grammar`, byte-for-byte from the fixture):
 
 ```
 root ::= ws "{" ws "\"action\"" ws ":" ws action ws "," ws field ws "}" ws
@@ -68,136 +65,169 @@ strchars ::= strchar strchars | strchar
 strchar ::= [^"\\] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F])
 ```
 
-User template (byte-identical to parent):
+Sampling / runtime (frozen): `temperature=0.0`, `max_tokens=512`, `n_ctx=2048`, `llama_seed=42`,
+`chat_format="qwen"`, episode seed `= 42 + episode_idx`, 5 episodes per arm, `n_threads=4`, CPU-only,
+`llama-cpp-python==0.2.90` (primary; the identical build ran in the parent EXECUTE), Playwright 1.63.0
+with `/usr/bin/google-chrome` (154.0.8037.97). User template (frozen):
+`PAGE_TEXT: {page_text}\nELEMENTS: {elements_json}\nHISTORY: {history}\nNext action (JSON only): `.
 
-```
-PAGE_TEXT: {page_text}
-ELEMENTS: {elements_json}
-HISTORY: {history}
-Next action (JSON only): 
-```
+## 3. Treatment and comparator (single frozen variable)
 
-**Comparator system prompt (PR-UNDERSPEC)** — byte-identical to the parent fixture `prompts.system`:
+Both prompts are constructed by the harness from the frozen literals below with no discretion.
+
+**PR-UNDERSPEC** (comparator; the parent `prompts.system` literal, verbatim):
 
 ```
 You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.
 ```
 
-**Treatment system prompt (PR-SPECIFIED)** — the single-variable change; byte-frozen to the grand-parent census harness SYS literal (`EXP-INTEL-37973264582/raw/code/min_webagent.py`, sha256 `4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862`), with exactly two token-level adaptations in the click example — the schema key `ref`->`selector` (the frozen grammar accepts only keys `selector`/`text`) and its placeholder `<id>`->`<css selector>`. Every other word is VERBATIM, including the goal sentence:
+**PR-SPECIFIED** (treatment) is PR-UNDERSPEC with exactly one appended suffix:
 
 ```
-You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {"action":"click","selector":"<css selector>"} or {"action":"answer","text":"<code>"}. Click the button to reveal the code, then answer it.
+ Actions available: {"action":"click","selector":"<css selector>"} or {"action":"answer","text":"<code>"}. Click the button to reveal the code, then answer it.
 ```
 
-Leak guard (P2-BLIND-COMPOSITION): neither prompt contains the exact selector `#reveal-btn` nor the answer string `TARGET-42`.
+Thus `PR-SPECIFIED = PR-UNDERSPEC + " " + suffix`. The opening instruction sentence is **byte-identical**
+across the two arms; the only difference is the presence of the action-schema enumeration and the goal
+sentence. This removes the prior-design confound in which the opening instruction sentence also changed.
+The schema keys `selector`/`text` match the frozen grammar. The goal sentence
+`Click the button to reveal the code, then answer it.` is reproduced **verbatim** from the grand-parent
+census `SYS` literal in `research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py`
+(sha256 `4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862`); only the schema token
+`ref`→`selector` and placeholder `<id>`→`<css selector>` are adapted to the frozen grammar.
 
-Treatment scope: PR-SPECIFIED is the mandate's `goal/schema` bundle — it supplies BOTH the action-schema enumeration and the goal sentence jointly. Component-wise isolation (schema-only vs goal-only) is explicitly out of scope for this packet; the preregistered single variable is the bundle versus its own no-goal/no-schema comparator (PR-UNDERSPEC). A positive result therefore licenses "the goal/schema-specified prompt converts the click", not a component-level causal split; that split is recorded as a refinement for a possible follow-up, not as a missing control.
+**Leak guard (P2-BLIND-COMPOSITION):** neither prompt contains the substring `#reveal-btn` nor `TARGET-42`.
+The treatment states the goal without naming the selector or the answer.
 
-Sampling (identical to parent): temperature=0.0, max_tokens=512, n_ctx=2048, chat_format=`qwen`, llama_seed=42, base_seed=42, episode seed = 42 + episode_idx, 5 episodes/arm/model, CPU threads=4. The EXECUTE harness must reconstruct PR-UNDERSPEC and PR-SPECIFIED byte-for-byte (AUDIT-verifiable against this section) and all other fixture fields byte-identical to the parent `harness_config.json`.
+Component-wise isolation (schema-only vs goal-only) is out of scope for this packet; comparing the
+goal+schema bundle against its no-goal/no-schema comparator is the preregistered single variable.
 
-## 5. Procedure (frozen)
+## 4. Candidates
 
-Candidate order: M-7B-QWEN -> M-3B-QWEN -> (conditional) M-14B-QWEN -> (census-completeness) M-0.5B-QWEN. Per candidate: (1) load + receipt (shard sha256); (2) PC-JSON-CONSTRAINED-DECODING (10/10); (3) 5 episodes under PR-UNDERSPEC (M-7B-QWEN and M-3B-QWEN only = CV-UNDERSPEC-REPLICATION); (4) 5 episodes under PR-SPECIFIED. M-14B-QWEN and M-0.5B-QWEN run PC then PR-SPECIFIED only. PC-SCRIPTED-ORACLE runs once before any model episode; NC-NO-MODEL-ACTION and B-RANDOM-ACTION run once. Early stop on the first clear under PR-SPECIFIED (remaining candidates `NOT_ATTEMPTED-EARLY-STOP`, never negatives).
+Obtainable primary set `S_primary` (E-LOCAL-LLAMA, huggingface.co resolve-redirect GGUF):
 
-Obtainable set (pre-declared, non-outcome-bearing): M-0.5B/3B/7B-QWEN are always in the obtainable set; M-14B-QWEN joins iff all 3 shards download with pinned content-lengths AND available memory >= 11 GiB at load time. Otherwise M-14B-QWEN is recorded `NOT_IN_OBTAINABLE_SET` (RAM or PROVISIONING) and excluded by the definition (bounded ceiling, not a scientific negative). "Largest obtainable" is defined by the runner's ~16 GiB RAM under CPU-only llama.cpp: 14B Q4_K_M (~8.37 GiB weights) fits; Qwen2.5-32B Q4_K_M is 19,851,336,384 B (~18.49 GiB) across 5 shards and 72B is larger still, so 32B/72B are `NOT_IN_OBTAINABLE_SET` by the same memory definition and the E-LOCAL-LLAMA Q4_K_M range ends at 14B.
+| id | model | quant | bytes (live-verified at DESIGN) |
+|----|-------|-------|---------------------------------|
+| M-0.5B-QWEN | Qwen2.5-0.5B-Instruct | Q4_K_M | 491,400,032 |
+| M-3B-QWEN | Qwen2.5-3B-Instruct | Q4_K_M | 2,104,932,768 |
+| M-7B-QWEN | Qwen2.5-7B-Instruct | Q4_K_M | 3,993,201,344 + 689,872,288 (2 shards) |
+| M-14B-QWEN | Qwen2.5-14B-Instruct | Q4_K_M | 3,991,999,872 + 3,989,373,504 + 1,006,737,120 (3 shards) |
 
-## 6. Metrics
+Pinned sha256 (from `raw/gguf_sha256.txt`, census receipts): M-3B `626b4a66…15c62d`;
+M-7B shard1 `dfce12e3…0580db`, shard2 `539cf93f…df3d72a`; M-0.5B `74a4da8c…d7a9db`.
+M-14B shas and the probe shas are recomputed at download. A shard hash/size mismatch is `NOT_MEASURED`
+with reason `SHA-MISMATCH`, never a substitution.
 
-- `task_success_rate` — episodes with `clicked_reveal=True` AND `revealed_value==TARGET-42` AND final answer == `TARGET-42` (bar >= 0.6).
-- `parseable_action_rate_step1` — step-1 action parsed to valid schema JSON (bar >= 0.6).
-- `positive_control_pass_rate` — PC-JSON passes / 10 (requirement 10/10 pre-task).
-- `scripted_oracle_task_success_rate` — PC-SCRIPTED-ORACLE successes / 5 (requirement 5/5).
-- `answer_action_emission_rate` — episodes emitting >= 1 parseable `answer` action.
-- `step0_reveal_click_rate` — episodes with a step-1 click on `#reveal-btn`.
-- `loop_signature_rate` — episodes with >= 1 post-reveal click on the now-hidden `#reveal-btn`.
-- `mean_inference_latency_s`, `mean_completion_tokens` — economics records.
-- `candidate_cleared_bar` (derived) — `parseable_action_rate_step1 >= 0.6 AND task_success_rate >= 0.6`.
-- `obtainable_set_complete` (derived) — every candidate in the pre-declared obtainable set measured under PR-SPECIFIED.
+`M-14B-QWEN` joins `S_primary` iff all shards download with the pinned content-lengths AND available RAM
+`>= 11 GiB` at load time; otherwise it is `NOT_IN_OBTAINABLE_SET` (reason RAM/PROVISIONING). Qwen2.5-32B
+Q4_K_M (~18.49 GiB weights; first shard 3,961,498,272 B, HTTP-verified at DESIGN) and 72B exceed the
+runner's ~16 GiB RAM and are `NOT_IN_OBTAINABLE_SET` by the same pre-declared memory definition; the
+E-LOCAL-LLAMA runnable range ends at 14B.
 
-## 7. Controls
+**Architecture-diversity probe (secondary, non-gating):** `M-LLAMA-3.2-3B` (Q4_K_M, 2,019,377,696 B,
+same ~3B size class as M-3B-QWEN), to separate a Qwen-specific ceiling from a small-model ceiling. Gated
+on the frozen runtime exposing a usable chat template; if not, `NOT_MEASURED-RUNTIME`, never a negative.
+Its result is reported as generalization evidence and does not change the primary decision.
 
-- **PC-SCRIPTED-ORACLE** (positive, NEW): deterministic non-model policy emits `{"action":"click","selector":"#reveal-btn"}` then `{"action":"answer","text":"TARGET-42"}` through the identical episode pipeline; 5 episodes. Requirement 5/5; < 5/5 => `MEASUREMENT_INVALID` (unpassable-task / broken-verifier artifact cannot masquerade as a negative).
-- **PC-JSON-CONSTRAINED-DECODING** (positive): 10/10 schema-valid JSON per candidate through the identical grammar path. A failure is `NOT_MEASURED-PC-FAIL`; both 7B and 3B failing => `MEASUREMENT_INVALID`.
-- **NC-NO-MODEL-ACTION** (null): fixed invalid producer ('I will click the button'), 5 episodes; expect 0 parseable / 0 success.
-- **B-RANDOM-ACTION** (null-random): uniform random, ONE ACTION PER EPISODE (the parent B-RANDOM semantics: 5/5 valid JSON, deterministic 0/5 success), drawn from `[click #reveal-btn; answer TARGET-41/42/43/unknown]`, 5 episodes, seeds 42-46. A single action can never contain both the reveal click and the answer text, so task success is deterministically 0/5 — the floor is exact, not statistical. (Per-step sampling would give ~33% per-episode chance success; EXECUTE must draw exactly one action per episode.)
-- **CV-UNDERSPEC-REPLICATION** (continuity): M-7B-QWEN and M-3B-QWEN under PR-UNDERSPEC. PASS iff for EACH model: `task_success_rate == 0/5` AND `step0_reveal_click_rate >= 0.8` AND `loop_signature_rate >= 0.2` AND `parseable_action_rate_step1 >= 0.8`. All-or-nothing: ANY unmet condition on either model (including a clear under PR-UNDERSPEC) => `MEASUREMENT_INVALID` reason `REPLICATION-DEVIATION`.
-- Carried context (not controls): B-0.5B-QWEN-LOCAL (different protocol), B-POLLINATIONS-PROXY (timestamp-bound).
+Other reachable-but-not-measured GGUFs (declared scope boundary, not an availability claim):
+Llama-3.1-8B (4,920,739,232 B), Gemma-2-2B (1,708,582,752 B), Gemma-2-9B (5,761,057,728 B),
+Phi-3.5-mini (2,393,232,672 B) — all HTTP-verified live at DESIGN via the same route.
+
+## 5. Arms per candidate
+
+Per candidate, in order: `PC-JSON-CONSTRAINED-DECODING` (10/10) → `PR-UNDERSPEC` (5 episodes) →
+`PR-SPECIFIED` (5 episodes). PR-UNDERSPEC is run for M-7B-QWEN and M-3B-QWEN (the two parent models) and
+for M-LLAMA-3.2-3B if measured; M-14B-QWEN and M-0.5B-QWEN run PR-SPECIFIED only, after PC.
+`PC-SCRIPTED-ORACLE` runs once before any model episode.
+
+## 6. Controls (frozen ids)
+
+- **PC-SCRIPTED-ORACLE** (positive ceiling, 5/5): a non-model policy clicks `#reveal-btn` then answers
+  `TARGET-42` through the identical pipeline. `< 5/5` ⇒ `MEASUREMENT_INVALID`.
+- **PC-JSON-CONSTRAINED-DECODING** (positive, 10/10 per candidate): isolates decoding from reasoning.
+  A candidate failing this is `NOT_MEASURED-PC-FAIL`; both 7B and 3B failing ⇒ `MEASUREMENT_INVALID`.
+- **NC-NO-MODEL-ACTION** (null, 0 parseable / 0 success on the loaded page): verifier rejects non-actions.
+- **B-RANDOM-ACTION** (null, chance floor): per-step uniform draw from the fixture `action_space`
+  (`click #reveal-btn`, `answer TARGET-41`, `answer TARGET-42`, `answer TARGET-43`, `answer unknown`),
+  base_seed 42, on the loaded page. This is the **true parent semantics** (`make_random_producer` draws
+  `rng.choice` at every step). Analytical per-episode success `= r/(1-q) = (1/5)/(4/5) = 0.25`, so the
+  probability of clearing the ≥3/5 bar by chance is ≈0.104; the realized value is reported as the floor.
+  Guard: if B-RANDOM clears the bar, a clearing model must reach `task_success_rate ≥ 0.8` to count.
+- **B-ANSWER-NO-REVEAL** (null, floor-exact): deterministically emits `answer TARGET-42` without clicking,
+  5 episodes; `0/5` success with `5/5` parseable. `> 0/5` success ⇒ `MEASUREMENT_INVALID`.
+- **CV-UNDERSPEC-REPLICATION** (continuity): for each of M-7B-QWEN, M-3B-QWEN under PR-UNDERSPEC,
+  PASS iff `task_success_rate == 0/5` AND `step0_reveal_click_rate ≥ 0.8` AND `loop_signature_rate ≥ 0.2`
+  AND `parseable_action_rate_step1 ≥ 0.8`. Any deviation ⇒ `REPLICATION-DEVIATION` ⇒ `MEASUREMENT_INVALID`.
+
+## 7. Corrections relative to the parent and prior attempt
+
+1. **Parent control bug (verified from `raw/control_episodes.json`).** `mode_null_random` created the page
+   but never called `page.goto`, and `run_episode` reloads `page.url` (= `about:blank`). Every B-RANDOM
+   click recorded `click_ok=False` and `final_target_visible=False`. The parent's "B-RANDOM 5/5 valid JSON,
+   0/5 success" is therefore **not** a valid chance bound. This experiment runs NC and B-RANDOM on the
+   loaded task page, records the realized random floor, and adds the floor-exact `B-ANSWER-NO-REVEAL`.
+2. **B-RANDOM semantics.** The prior attempt redefined B-RANDOM as one action per episode and attributed
+   that to the parent. The parent samples uniformly **per step**; this prereg restores the true semantics
+   and documents the resulting ~0.25 per-episode chance level and its bar-clearing guard.
+3. **Treatment identity.** PR-SPECIFIED is now a strict suffix append to the byte-identical PR-UNDERSPEC
+   opening sentence, removing the prior confound in which the opening instruction also changed.
+4. **Non-Qwen obtainability.** The prior attempt claimed non-Qwen models were "not obtainable"; they are
+   reachable via the same resolve route (verified live). They are now an explicit bounded-scope boundary,
+   plus one same-size cross-architecture probe.
 
 ## 8. Decision rule
 
-Bar cleared iff `parseable_action_rate_step1 >= 0.6` AND `task_success_rate >= 0.6` (>= 3/5 both; success mechanically requires the reveal click).
+**Bar (parent-comparable):** `parseable_action_rate_step1 ≥ 0.6` AND `task_success_rate ≥ 0.6` over the
+5-episode PR-SPECIFIED arm (≥ 3/5 both). Ordered evaluation:
 
-1. `PC-SCRIPTED-ORACLE != 5/5` => `MEASUREMENT_INVALID`. `PC-JSON` fails on BOTH 7B and 3B => `MEASUREMENT_INVALID`.
-2. CV-UNDERSPEC-REPLICATION not PASS => `MEASUREMENT_INVALID` (`REPLICATION-DEVIATION`). Raw observations still reported.
-3. Any measured candidate clears under PR-SPECIFIED => `SUPPORTS` (early stop; first clearing candidate in frozen order + all clearing candidates recorded as drivers).
-4. Replication PASS and no candidate clears:
-   a. EVERY candidate in the obtainable set measured and failed => `FALSIFIES`. Ceiling = measured E-LOCAL-LLAMA range + carried proxy negative; issue close/re-scope.
-   b. Any candidate IN the obtainable set unresolved for a non-capability reason => `MIXED`; negative bounded to the measured subset; unresolved arm explicitly UNRESOLVED.
-5. Infra failure preventing measurement => `MEASUREMENT_INVALID` (never a scientific negative); `status=BLOCKED` only if it precedes any measurement. A valid scientific negative is `status=COMPLETE` with `outcome=FALSIFIES`.
+1. `PC-SCRIPTED-ORACLE != 5/5` ⇒ `MEASUREMENT_INVALID`; `B-ANSWER-NO-REVEAL != 0/5` success ⇒
+   `MEASUREMENT_INVALID`; `NC-NO-MODEL-ACTION != 0` parseable ⇒ `MEASUREMENT_INVALID`;
+   PC-JSON failing on both 7B and 3B ⇒ `MEASUREMENT_INVALID`.
+2. `CV-UNDERSPEC-REPLICATION` must PASS (§6), else `MEASUREMENT_INVALID`.
+3. **SUPPORTS** iff some `S_primary` model clears the bar (applying the B-RANDOM guard); record the driver
+   id and shard hashes.
+4. **FALSIFIES** iff all gates pass and every `S_primary` model is measured under PR-SPECIFIED and fails
+   the bar. M-14B is either in `S_primary` and measured, or excluded by the pre-declared availability
+   definition, so `S_primary` is always fully measurable when downloads succeed.
+5. **MIXED** iff an `S_primary` model is unresolved for a non-capability reason while none clears.
 
-Close/re-scope deliverable (report.md, regardless of direction): SUPPORTS -> benchmark executable as frozen with the proven driver (id + shard hashes); FALSIFIES/MIXED -> readiness condition (3) NOT satisfiable on the credential-free path; re-scope the four-arm benchmark off it (drop Gate 3's same-model external anchor; internally re-run comparators on a dynamic-range task bank per EXP-PRODUCT-37973256064/EXP-PRODUCT-37950607128).
+`NOT_ATTEMPTED`, `NOT_IN_OBTAINABLE_SET`, `NOT_MEASURED` and infrastructure failures are census/operational
+records, never scientific negatives; infrastructure failure is `MEASUREMENT_INVALID`, never FALSIFIES.
 
-## 9. Validity threats and representation loss
+## 9. Validity threats
 
-- **Constrained decoding** measures reasoning+completion under grammar, not free-form formatting; PC-JSON isolates decoding from reasoning.
-- **Verification tautology** avoided: success requires `TARGET-42` extracted after the reveal click; answering from prior knowledge without the click yields wrong context (target hidden).
-- **Version/representation loss**: GBNF, chrome 154.0.8037.97, playwright 1.63.0 and llama-cpp-python 0.2.90 are pinned; the only fallback (0.3.x wheel) is gated by CV-UNDERSPEC-REPLICATION so drift becomes `MEASUREMENT_INVALID`, not silent.
-- **Determinism**: temp=0 + fixed seeds; the 3/5 rule is pre-declared, not statistical; 5/5-uniform traces should be read as a deterministic-protocol result, not a sampled rate with independent trials.
-- **Scope**: bounds hold only for the frozen minimal two-step task, prompts, sampling and measured candidates; no generalization to arbitrary multi-step web tasks; no Product-Core promotion.
-- **Prerequisite honesty**: the runner image ships the chrome binary but not the python `llama_cpp`/`playwright` packages; both pinned versions were verified to exist on public PyPI at DESIGN and the identical stack was already built and run in the parent EXECUTE.
+- **Low-`n` / deterministic protocol.** temp=0 and fixed seeds make traces near-duplicates; the 5-episode
+  unit is an adequacy rule, not a variance estimate (inherited `VF-03`). Reported as counts, not p-values.
+- **Chance floor.** The parent bar's per-step chance-clearing probability is ≈0.104; the B-RANDOM guard and
+  the floor-exact control bound this, but the bar remains weak for stochastic policies.
+- **Representation loss.** The observation truncates body text to 300 chars and element text to 40 chars
+  (frozen from the parent). After reveal, `TARGET-42` appears in `PAGE_TEXT`; this was acknowledged in the
+  parent and does not by itself explain the loop.
+- **Prompt-arm asymmetry.** M-14B-QWEN and M-0.5B-QWEN are run under PR-SPECIFIED only, so their success is
+  a capability result; the statement that the *prompt* converts the click rests on the 7B/3B
+  `CV-UNDERSPEC-REPLICATION`. The two largest/smallest arms are therefore ceiling tests, not conversion
+  attribution.
+- **Runtime/chattemplate for non-Qwen.** The M-LLAMA-3.2-3B probe may be unavailable under the frozen
+  runtime; it is then `NOT_MEASURED-RUNTIME`, and the Qwen-family result still stands as a bounded ceiling.
+- **Scope.** Bounds only this minimal two-step synthetic task, these frozen prompts, this sampling and the
+  measured credential-free candidates. No generalization to arbitrary multi-step web tasks.
+- **External check is context only.** The published-envelope anchors (WebArena peer-reviewed: GPT-4 14.41%,
+  human 78.24%; non-peer-reviewed vendor/community tool-calling snapshots) cannot alter the primary outcome.
 
-## 10. Legacy / pre-2.0 comparison and bounded external envelope check
+## 10. Consequences
 
-`codex/legacy_brief.json` records no prior SPIDER experiment on small-local-model agentic prompt ablation; the closest legacy findings are about compiled replay (P2-REPLAY-COST) and content-addressed reuse (P2-BLIND-COMPOSITION), neither of which is this measurement. This experiment is a distinct new measurement, not a repeat of a pre-2.0 design.
+- **Positive (SUPPORTS):** readiness condition (3) is satisfied by a proven credential-free same-model
+  driver; the four-arm `C-LLM-INHERIT` benchmark becomes executable as frozen; `C-LLM-INHERIT` advances
+  from HYPOTHESIS toward EXPERIMENTAL (DIRECTOR decision).
+- **Negative (FALSIFIES/MIXED):** readiness condition (3) is demonstrated not satisfiable on the
+  credential-free path up to the measured ceiling; `C-LLM-INHERIT` must be re-scoped off it (drop Gate 3's
+  same-model external anchor; internally re-run comparators on a task bank with demonstrable dynamic range,
+  since readiness condition (2) / the mandate's B2 is also open). No credential-free endpoint is promoted
+  into Product Core.
 
-Bounded external check (mandate request; non-confirmatory; `EXTERNAL_PRIOR_ART` only) — completed at DESIGN and recorded in `spec.external_capability_envelope_check`:
+## 11. Relationship to pre-2.0 precedent
 
-- WebArena (arXiv:2307.13854, ICLR 2024): best GPT-4 agent 14.41% end-to-end success vs human 78.24%; GPT-3.5 8.75%.
-- Public WebArena leaderboard metadata: zero-shot Qwen2.5-7B ~12.3%; DPO-tuned Qwen2.5-7B ~24-28%.
-- Qwen2.5 official function-calling docs: tool use is prompt/template dependent; the model can "fall into a loop and require calling the same function again and again", and protocol conformance is not guaranteed; a fine-tuned Qwen2.5-3B is offered because base 3B is not reliable multi-step.
-
-These anchors are consistent with the parent observation (step-1 action fine, multi-step completion fragile) but are NOT measurements of this task, these GGUF builds or this prompt, and cannot alter the primary outcome. EXECUTE records them as context only.
-
-## 11. Environment / prerequisites (verified live at DESIGN, non-outcome-bearing)
-
-python 3.12.15; nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,432 MiB available; Google Chrome 154.0.8037.97 at `/usr/bin/google-chrome`; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3; PyPI-verified pinned artifacts llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel (the identical stack already built and ran in the parent EXECUTE). GGUF URLs HTTP-verified at pinned sizes (0.5B/3B/7B/14B and the 32B-shard1 ceiling figure 3,961,498,272 B); the 7B single-file URL 404 is recorded. No credential, paid endpoint, GPU or new substrate required.
-
-## 12. Code / artifact binding (design_contract_version 2)
-
-`freeze_artifacts` lists the pre-existing mutable local inputs whose identity can change the interpretation; `scripts/freeze_experiment.py` hashes them into `freeze.json.artifact_hashes` and they become immutable for this transaction:
-
-- `research/experiments/EXP-INTEL-37982024058/raw/harness_config.json` (`7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb`) — task HTML, GBNF, `prompts.system`=PR-UNDERSPEC, user template, sampling, action schema.
-- `research/intel/run_exp_37982024058.py` (`2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00`) — fork source; success mechanics verified at DESIGN.
-- `research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt` (`93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd`) — 3B/7B identities.
-- `research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json` (`b7f5c850c4cee3dbac892e28188c1ef18b32c44dc926cf42de121e731db294e9`) — 0.5B pinning + proxy/interception receipts.
-- `research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py` (`4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862`) — treatment-provenance SYS literal for PR-SPECIFIED.
-
-`freeze_artifacts_bound = PASS`. The EXECUTE harness (`research/intel/run_exp_38013769440.py`) and its derived fixture do not exist at freeze time because DESIGN writes only `spec.json`/`prereg.md`; they are bound at EXECUTE by sha256 into `result.json.artifacts` (roles `code`/`fixture`) and `provenance.json`. AUDIT re-verifies the derived fixture and both prompt strings byte-for-byte against section 4. Remote GGUF responses are pinned by URL + sha256 (sampling protocol frozen), not by file hash.
-
-## 13. Branch-reachability matrix
-
-| branch | reachable when |
-|---|---|
-| SUPPORTS | any measured candidate clears under PR-SPECIFIED (early stop; driver recorded) |
-| FALSIFIES | PC-SCRIPTED-ORACLE 5/5, replication PASS, and EVERY candidate in the obtainable set measured under PR-SPECIFIED and failing (14B either in the set and measured, or excluded by the pre-declared availability definition) |
-| MIXED | replication PASS, measured candidates fail, but a candidate IN the obtainable set is unresolved for a non-capability reason |
-| MEASUREMENT_INVALID | scripted-oracle < 5/5; PC-JSON fails on both 7B and 3B; replication not PASS; playwright/chrome/server/build failure |
-
-## 14. Handoff preparation
-
-`handoff.json` will preserve established (per-candidate ablation outcome; all control results; census completeness incl. 0.5B/14B; cost records), rejected (invalidated re-scope assumptions), unknown (14B/0.5B if unmeasured; external-envelope classification), do_not_assume (no cross-model generalization, no endpoint promotion, no four-arm benchmark execution authorization, carried negatives not protocol-transferable).
-
-## 15. Signatures
-
-- Design: `opencode/big-pickle`, DESIGN mode, lane intel.
-- No outcome-bearing measurements were performed during DESIGN; all probes were non-outcome-bearing and recorded in `spec.pre_freeze_satisfiability_dry_run.environment_probes`.
-- Fidelity: parent/census fixture hashes re-verified at DESIGN; PR-SPECIFIED byte-compared against `min_webagent.py` SYS literal — the only deviations are the two click-example tokens (`ref`->`selector`, `<id>`->`<css selector>`), with all other text verbatim.
-
-## Appendix A — Design-process note (non-scientific; NOT part of the preregistered design)
-
-Recorded so a material prerequisite does not exist only in workflow logs. It changes no scientific field above.
-
-- 2026-10-10: the design-contract v2 pre-freeze review produced no `design_review.json` for any lane. This packet and every other current v2 packet (`EXP-GRAPH-38046502943`, `EXP-PRODUCT-38078422511`, `EXP-RUNTIME-38074822959`, `EXP-PHYSICS-38074818597`, `EXP-FRONTIER-38078430316`) terminated at the `design_review` stage with the same receipt: reviewer model `opencode/exo-free`, attempt 4, `exit_code` 1, category `substantive`.
-- Mechanism (inspected, not measured): `config/models.json` `roles.design_review` lists four models; `SPIDER_EXCLUDE_MODEL` removes the producer (`opencode/big-pickle`), so attempts 1-3 cover the three configured free models and attempt 4 is the first discovered free model. `.github/scripts/run-opencode-resilient.sh` marks any non-zero opencode exit with no network signature `substantive` and exits without fallback, so one such crash aborts the stage.
-- Not a defect of this packet: `spec.json` validates (all 15 required DESIGN fields; the exact six `freeze_eligibility` checks `PASS`; 5 `freeze_artifacts` with sha256 recomputed and matching), and every recorded DESIGN probe re-verified live this run (nproc 4; RAM 11221/14432/15989 MiB; disk 85 GiB; python 3.12.15; gcc 13.3.0 / cmake 3.31.6 / make 4.3; chrome 154.0.8037.97; PyPI llama-cpp-python 0.2.90 sdist 63,762,953 B and playwright 1.63.0 manylinux wheel; GGUF resolve-redirect + pinned sizes for 0.5B/3B/7B/14B and the 32B-shard1 ceiling figure; the 7B single-file URL 404).
-- Smallest unblocking action (owner: lane workflow / model routing; outside lane-DESIGN edit scope): guarantee the `design_review` role at least one reviewer that reliably emits `design_review.json` and is distinct from the producer, or make a reviewer provider crash / missing output fall through rather than abort. Process evidence only.
+This is not a pre-2.0 replay and not a repeat of the prior invalid design. It is a controlled, within-
+experiment prompt ablation with an in-experiment continuity replication, corrected controls, a floor-exact
+null, a verifier-ceiling control, and a declared closest-model boundary — sufficient to convert the parent
+bounded FALSIFIES into an identifiability-safe determination of readiness condition (3).
