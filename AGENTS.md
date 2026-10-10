@@ -87,7 +87,9 @@ Local lane Directors still adjudicate evidence and produce bounded handoffs, but
 - do not ask interactive questions during autonomous runs;
 - never invent a result when infrastructure fails;
 - leave a durable handoff;
-- for DESIGN of a governed NEW experiment, follow the `director_mandate` instead of drifting back to the parent handoff.
+- for DESIGN of a governed NEW experiment, follow the `director_mandate` instead of drifting back to the parent handoff;
+- for design-contract v2, do not freeze until the six satisfiability/identifiability checks and the independent `design_review.json` pass;
+- use `codex/claim_state.json.effective_event_by_claim` as current epistemic state; raw latest events remain audit history and may end in MEASUREMENT_INVALID/BLOCKED without downgrading the claim.
 
 ## Branch/scope discipline
 

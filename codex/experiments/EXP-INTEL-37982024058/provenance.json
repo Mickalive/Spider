@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37982024058",
+  "lane": "intel",
+  "status": "PASS",
+  "execution": {
+    "origin_github_run_id": "37982024058",
+    "request_id": "b340505ab1be514bd1e0845d",
+    "request_hash": "a37d6b060db6474243252a6f858291c97faba37800b1224ffa1c1490a65d8fbf",
+    "base_sha": "626495fd647cf074f53c74ab460d0971718f5604",
+    "execution_commit": "a32def625da70e89e399445020e1d610c07754ed",
+    "executed_at": "2026-10-10T00:00:00Z",
+    "director_mandate_cycle_id": "37980982065"
+  },
+  "frozen_inputs": {
+    "request.json": "6d0dfc15a12964041dc92b320d66513d97e1b316ab14ffbc55e679534f973756",
+    "spec.json": "86cf8894c36474ae77be60fe4d6871dcc83cf9e60440537c6da3be00cc78f30b",
+    "prereg.md": "ea24f96568349d90e61760aea1b9bc3422a3db53cbbe43accf3e7c3526f762f8",
+    "freeze.json": "present (schema_version=1; hashes match the three files above)",
+    "parent_handoff": {"path": "research/experiments/EXP-INTEL-37973264582/handoff.json", "sha256": "67e0316d0ecc74f714976ccf5e8b74e90cff1dc9174ad09b74742195bf8a9603"}
+  },
+  "code": [
+    {"path": "research/intel/run_exp_37982024058.py", "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00", "role": "execute harness (frozen design)"},
+    {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "role": "parent harness reference (prompts/task comparability); not executed in this experiment"}
+  ],
+  "fixtures": [
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json", "sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb", "role": "frozen harness fixture: system prompt and user template from prereg section 4.1, GBNF grammar for the action schema, page HTML, seeds, temperature=0.0, max_tokens=512, threshold 0.6, 5 episodes"}
+  ],
+  "models": {
+    "primary": {
+      "candidate_id": "M-7B-QWEN",
+      "model": "Qwen2.5-7B-Instruct-Q4_K_M",
+      "frozen_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m.gguf",
+      "frozen_url_http_status": 404,
+      "used_files": [
+        {"url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf", "bytes": 3993201344, "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db"},
+        {"url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf", "bytes": 689872288, "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a"}
+      ],
+      "load": "SUCCESS (llama-cpp-python 0.2.90; shard1 path; companion shard auto-located; n_vocab=152064)"
+    },
+    "fallback": {
+      "candidate_id": "M-3B-QWEN",
+      "model": "Qwen2.5-3B-Instruct-Q4_K_M",
+      "frozen_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf",
+      "frozen_url_http_status": 302,
+      "used_files": [
+        {"url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf", "bytes": 2104932768, "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d"}
+      ],
+      "load": "SUCCESS (llama-cpp-python 0.2.90, chat_format=qwen, n_ctx=2048)"
+    }
+  },
+  "environment": {
+    "os": "Linux (GitHub Actions runner)",
+    "cpu_cores": 4,
+    "ram_free_gb": 14,
+    "python": "3.12.15",
+    "llama_cpp_python": "0.2.90",
+    "playwright": "1.63.0",
+    "chrome": "154.0.8037.97 (/usr/bin/google-chrome, headless, --no-sandbox)",
+    "network_route": "huggingface.co resolve-redirect -> us.aws.cdn.hf.co (HTTP 302); cdn-lfs.huggingface.co and api-inference.huggingface.co do not resolve (parent evidence)",
+    "no_gpu": true
+  },
+  "exact_commands": {
+    "download": "curl -sL --retry 3 <resolve-url> -o <file>  (see raw/provisioning_evidence.json for per-file URLs)",
+    "sha256": "sha256sum <gguf>  (recorded in raw/gguf_sha256.txt)",
+    "positive_control_and_task": "python research/intel/run_exp_37982024058.py --mode probe-candidate --candidate <M-7B-QWEN|M-3B-QWEN> --gguf <paths...>",
+    "controls": "python research/intel/run_exp_37982024058.py --mode null-random",
+    "decision_rule": "applied in report.md section 2 per prereg section 7"
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-37982024058/result.json", "sha256": "d01d6f903d18e0b7c0376470b0a5ea798edd0de6976cd6aad0b8494180db2a63", "role": "packet"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/report.md", "sha256": "40152c487b451646019e4114be433d2bf8edbc5cbbbf9f7ccc0e6120df162268", "role": "packet"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json", "sha256": "e42723c7809114fb4c65729a8439c852cc9abe9f51286d7b5792b6d8c083911b", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/task_episodes.json", "sha256": "eee5541866ec4a2cceec87337e2d319c149a8d3a59cc58b63a0fa4da103017e9", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json", "sha256": "624d427e531b31494e6631bb19007d3b85d1f91693f4874d0c78ae8444415cef", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt", "sha256": "93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json", "sha256": "7b1e50436e75292baa88029264938773342b99785536a94c185d8371b74693f0", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json", "sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb", "role": "fixture"}
+  ],
+  "reproducibility_notes": [
+    "Large GGUF weights are not committed to the repository; they are reproducible from the recorded resolve-redirect URLs and sha256 values computed at download time (HuggingFace did not publish lfs.sha256 for these Xet-stored files).",
+    "The frozen primary 7B single-file URL 404s; reproduction must use the same-repo same-quant split shards recorded above and pass shard1 as model_path.",
+    "Episode results are deterministic under temperature=0.0 with seeds 42..46, chat_format='qwen', and the frozen GBNF grammar; the positive control uses seed=42."
+  ]
+}

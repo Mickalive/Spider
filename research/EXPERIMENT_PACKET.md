@@ -44,11 +44,17 @@ If a parent handoff exists, DESIGN must preserve its four-way distinction: `esta
 
 When `director_mandate` is present, its target claim and strategic question are binding research direction. DESIGN may refine that question into the smallest rigorous falsifiable experiment, but may not silently drift back to the parent handoff or substitute a nearby objective.
 
-DESIGN emits only `spec.json` and `prereg.md`.
+DESIGN emits `spec.json` and `prereg.md`. For new design-contract v2 requests, an independent DESIGN REVIEW then emits `design_review.json` before freeze. The reviewer does not redesign or execute the experiment; it attacks satisfiability and identifiability.
+
+For design-contract v2, `spec.json` also contains:
+- `freeze_eligibility`: exactly six checks — `decision_rule_reachability`, `measurement_prerequisites`, `baseline_identifiability`, `control_sensitivity`, `treatment_liveness`, `freeze_artifacts_bound`. Every check must be `PASS` or justified `NOT_APPLICABLE`; `PENDING`/FAIL cannot freeze.
+- `freeze_artifacts`: exact repository-relative FILE paths for mutable local code, task banks, datasets or fixtures whose identity can change the interpretation. The freezer hashes them into `freeze.json.artifact_hashes`. If no mutable local dependency exists, `freeze_artifacts_bound` must be `NOT_APPLICABLE` with a reason and the list is empty.
+
+A v2 Product experiment targeting inheritance/residual-novelty/LLM-inheritance/product-economics must demonstrate treatment liveness before freeze when it contains a SPIDER treatment arm. A treatment structurally incapable of becoming EXECUTABLE is a DESIGN failure, not a scientific result.
 
 ### DESIGN -> EXECUTE
 
-EXECUTE receives the exact frozen `request.json`, `spec.json`, `prereg.md`, `freeze.json`. It executes the frozen design rather than re-designing after outcomes are visible.
+EXECUTE receives the exact frozen `request.json`, `spec.json`, `prereg.md`, `freeze.json`, plus `design_review.json` for v2 packets. Every path in `freeze.json.artifact_hashes` is also immutable for the transaction. It executes the frozen design rather than re-designing after outcomes are visible.
 
 EXECUTE emits `result.json`, `report.md`, `provenance.json` plus raw/derived artifacts where practical.
 
@@ -171,7 +177,7 @@ Required top-level shape:
 }
 ```
 
-Every `claim_updates` event is an object with `claim_id`, registry-valid `status`, and `reason`. The Director must ground decisions in upstream evidence/audit references rather than restating confidence as evidence.
+Every `claim_updates` event is an object with `claim_id`, registry-valid `status`, and `reason`. In v2 it must be within frozen `spec.claim_ids` AND the lane charter. `MEASUREMENT_INVALID` / `BLOCKED` are packet/operational states in v2 and do not replace the effective epistemic status of a claim; retain the prior effective status and explain the packet disposition instead. The Director must ground decisions in upstream evidence/audit references rather than restating confidence as evidence.
 
 `continue` controls immediate chaining only. `false` may still carry a `next_question` for the scheduled pulse or another lane.
 
