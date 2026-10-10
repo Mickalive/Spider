@@ -85,7 +85,11 @@ def main() -> None:
 
     lane_registry = load("research/lanes/registry.json")["lanes"]
     claim_registry = {c["id"]: c for c in load("research/claims/registry.json")["claims"]}
-    index = load("codex/index.json").get("experiments", {})
+    unified_index = load("codex/index.json")
+    index = unified_index.get("experiments", {})
+    historical = unified_index.get("historical") or {}
+    if historical.get("artifact_count") != 1401 or historical.get("source_path") != "codex/sources/0000-historical-evidence.md":
+        raise SystemExit("cumulative Codex missing original scientific evidence")
     quarantine = load("codex/quarantine.json")
     quarantine_by_id = {
         item.get("experiment_id"): item
@@ -141,6 +145,7 @@ def main() -> None:
             "last_experiment_id": last.get("experiment_id") if last else None,
             "last_experiment_at": last.get("created_at") if last else None,
             "last_decision": last.get("decision") if last else None,
+            "historical_precedents": (claim_state.get("historical_precedents_by_claim") or {}).get(claim_id, []),
         }
 
     starved_claims = [
@@ -266,6 +271,9 @@ def main() -> None:
             "what should receive the next unit of research attention?"
         ),
         "global": {
+            "historical_unique_artifacts": historical["artifact_count"],
+            "historical_source_blob_sha": historical.get("source_blob_sha"),
+            "historical_count_unit": "unique evidence artifacts, not independent experiments",
             "canonical_experiments": len(experiments),
             "quarantined_experiments": len(quarantine_by_id),
             "recent_window": args.recent_window,
