@@ -27,6 +27,27 @@ def main():
     claims = load("research/claims/registry.json")
     lanes = load("research/lanes/registry.json")
     models = load("config/models.json")
+    # Historical research must remain visible to Research 2.0 direction, but
+    # historical verdict labels are not canonical Research 2.0 claims.
+    legacy_brief = load("codex/legacy_brief.json")
+    legacy_index = load("codex/legacy_artifact_index.json")
+    legacy_entries = legacy_index.get("artifacts") or []
+    require(len(legacy_entries) == legacy_index.get("count") == 1401, "legacy index coverage mismatch")
+    require(len({item["sha"] for item in legacy_entries}) == 1401, "duplicate legacy source artifact SHA")
+    require(
+        legacy_brief["source"]["blob_sha"] == legacy_index["source"]["blob_sha"]
+        == "9bb76113aeaf46d9aecdd8a38349a3a7741e57c3",
+        "legacy source pin mismatch",
+    )
+    require(
+        "legacy_history" in text("scripts/build_portfolio_snapshot.py"),
+        "global direction snapshot must include pre-2.0 findings",
+    )
+    require(
+        "LEGACY:" in text(".opencode/agents/spider_portfolio_director.md"),
+        "Global Director must screen relevant pre-2.0 duplicates",
+    )
+
 
     claim_ids = [c["id"] for c in claims["claims"]]
     require(len(claim_ids) == len(set(claim_ids)), "duplicate claim id")
