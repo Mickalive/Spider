@@ -6,10 +6,11 @@
 - Design contract version: 2 (freeze_eligibility + freeze_artifacts in spec.json)
 - Request: `research/experiments/EXP-INTEL-38013769440/request.json` (contains `director_mandate`, allocation action REOPEN, parent_handoff disposition USE)
 - Parent packet: `research/experiments/EXP-INTEL-37982024058` (handoff sha256 `b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55`)
+- Canonical machine state: `spec.json` (this file is the human-readable supporting preregistration).
 
 ## 0. Status
 
-`FROZEN` (DESIGN complete, satisfiability checks PASS, awaiting freezer).
+`DESIGN NOT YET FROZEN` (DESIGN complete and self-attacked; six `freeze_eligibility` checks PASS/NOT_APPLICABLE; awaiting independent pre-freeze design review and the deterministic freezer). No confirmatory measurement has been executed.
 
 ---
 
@@ -58,10 +59,10 @@ Parent handoff (EXP-INTEL-37982024058) carry-forward — preserved verbatim in i
 Verified live by non-outcome-bearing probes (recorded in this prereg; all PASS):
 
 - Python 3.12.15 (runner toolchain).
-- `llama-cpp-python==0.2.90` primary: no cp312 binary wheel exists; sdist `llama_cpp_python-0.2.90.tar.gz` (63,762,953 bytes) downloads; source-build toolchain present (gcc 13.3.0, g++ , cmake 3.31.6, make). Fallback ONLY if sdist build fails: latest 0.3.x wheel; document flag; continuity gated by CV-UNDERSPEC-REPLICATION.
+- `llama-cpp-python==0.2.90` primary: no cp312 binary wheel exists; sdist `llama_cpp_python-0.2.90.tar.gz` (63,762,953 bytes, verified on PyPI at DESIGN) downloads; source-build toolchain present (gcc 13.3.0, cmake 3.31.6, make) and the `scikit-build-core` build backend is downloadable (`scikit_build_core-1.1.1-py3-none-any.whl`, verified). This exact build already succeeded in the parent EXECUTE, so it is a proven-reachable step. Fallback ONLY if sdist build fails: latest 0.3.x wheel; document flag; continuity gated by CV-UNDERSPEC-REPLICATION.
 - `playwright==1.63.0` (wheel verified downloadable); system `google-chrome` present at `/usr/bin/google-chrome` (version 154.0.8037.97, identical to parent); `executable_path` used; no browser install step required.
 - Network: huggingface.co `resolve-redirect` route verified live (HTTP 200) for all model URLs below; content-lengths match the parent's `gguf_sha256.txt` receipts byte-for-byte.
-- Hardware: nproc=4, CPU-only; free RAM 14 GiB (>= 11 GiB precondition for 14B); free disk 86 GiB (>= 15 GiB precondition).
+- Hardware: nproc=4, CPU-only; RAM 15989 MiB total (~10.8 GiB free / ~14.1 GiB available); disk 85.0 GiB free. The 14B arm is gated on available memory (≥ ~11 GiB) and falls to `NOT_ATTEMPTED-RAM` (⇒ MIXED) if unmet.
 
 Candidates with pinned identities (URLs verified at DESIGN; shas from parent receipt or computed at download):
 
@@ -140,6 +141,7 @@ The EXECUTE harness must construct its fixture such that the PR-UNDERSPEC and PR
 
 ## 5. Controls and Baselines (stable identifiers)
 
+- **PC-SCRIPTED-ORACLE** (positive control, task/verifier ceiling; NEW): a deterministic NON-MODEL scripted policy emits `{"action":"click","selector":"#reveal-btn"}` then `{"action":"answer","text":"TARGET-42"}` through the identical episode pipeline (same page server, Playwright/chrome, parser, verifier), 5 episodes. Requirement: `scripted_oracle_task_success_rate` = 5/5. < 5/5 ⇒ `MEASUREMENT_INVALID` (the task/verifier cannot reward a correct click-then-answer, so no candidate 0/5 would be interpretable). This certifies the ceiling at 1.0 — a gap the first draft left open.
 - **PC-JSON-CONSTRAINED-DECODING** (positive control, per candidate): 10/10 probes `Emit exactly: {"action":"click","selector":"#test"}` through the identical LlamaGrammar path; success = 10/10 syntactically valid JSON matching the action schema. Requirements: pass before candidate's task episodes.
 - **NC-NO-MODEL-ACTION** (null control, 5 episodes): fixed invalid content producer (`I will click the button`); success criterion = 0% parseable, 0% completion (reproduction of parent).
 - **B-RANDOM-ACTION** (random-baseline null, 5 episodes): uniform random from frozen action space `[click #reveal-btn, answer TARGET-41, answer TARGET-42, answer TARGET-43, answer unknown]`; expectation = chance-level success (~0%: correct answer requires preceding correct click and exact text), valid-JSON rate ~1.0 (parent reproduced: 5/5 valid JSON, 0/5 success).
@@ -152,6 +154,8 @@ The EXECUTE harness must construct its fixture such that the PR-UNDERSPEC and PR
 
 ## 6. Measurement Protocol
 
+Per-experiment preamble (once, before any model episode): (0) PC-SCRIPTED-ORACLE 5 episodes; must be 5/5 or the experiment is `MEASUREMENT_INVALID`.
+
 Per-model sequence (fixed order): (1) model load + receipt; (2) PC-JSON-CONSTRAINED-DECODING (10/10); (3) 5 episodes PR-UNDERSPEC (replication) for M-7B-QWEN and M-3B-QWEN only (M-14B-QWEN has no parent replication reference, so it runs only PC then PR-SPECIFIED); (4) 5 episodes PR-SPECIFIED (treatment) for every measured candidate. Candidate order: M-7B-QWEN -> M-3B-QWEN -> [conditional] M-14B-QWEN. Early stop on first clear under PR-SPECIFIED (remaining candidates recorded NOT_ATTEMPTED-EARLY-STOP; never negatives).
 
 Per episode: render user prompt; produce one action (model / null-random producer); parse (JSON schema + regex fallback both recorded); execute click (Playwright `eval_on_selector_all`, record click_selector and whether target visible after) or answer (record answer_text); repeat up to 5 steps or completion; record final_answer, seed, inference latency (mean over steps), completion tokens (mean over steps). Raw evidence per episode preserved (all fields of parent's episodes schema), appended to per-experiment artifacts.
@@ -161,6 +165,7 @@ Metrics (stable identifiers, reused from parent + two task-conversion metrics):
 - `parseable_action_rate_step1` — fraction of episodes whose step-1 action parsed to valid schema JSON (0..1; bar threshold 0.6)
 - `task_success_rate` — fraction of episodes with final answer == `TARGET-42` (bar threshold 0.6)
 - `positive_control_pass_rate` — PC 10/10 required pre-task per candidate
+- `scripted_oracle_task_success_rate` — NEW: PC-SCRIPTED-ORACLE task successes / 5 (must be 5/5; failure ⇒ MEASUREMENT_INVALID)
 - `answer_action_emission_rate` — NEW: fraction of episodes emitting >= 1 parseable `answer` action (the step-0 → click-then-answer conversion metric named by the mandate)
 - `step0_reveal_click_rate` — fraction of episodes with a `click` on `#reveal-btn` at step 1 (parent observed 5/5)
 - `mean_inference_latency_s`, `mean_completion_tokens` — economics/cost records per candidate
@@ -174,7 +179,8 @@ Success threshold (per candidate): cleared bar iff >= 3/5 episodes with BOTH ste
 
 Run arms in order; evaluate in the order below. Exactly one outcome is written to `result.json.outcome` ∈ {SUPPORTS, FALSIFIES, MIXED, MEASUREMENT_INVALID}; `status` ∈ {COMPLETE, BLOCKED, MEASUREMENT_INVALID}.
 
-1. If nodecode infra fails PC on BOTH M-7B-QWEN and M-3B-QWEN → OUTCOME=MEASUREMENT_INVALID (decoding infrastructure failure, not model capability). Candidates with PC-fail are NOT_MEASURED-PC-FAIL.
+0. If PC-SCRIPTED-ORACLE < 5/5 → OUTCOME=MEASUREMENT_INVALID (task/verifier cannot reward a correct click-then-answer; any candidate 0/5 is uninterpretable).
+1. If decoding infra fails PC on BOTH M-7B-QWEN and M-3B-QWEN → OUTCOME=MEASUREMENT_INVALID (decoding infrastructure failure, not model capability). Candidates with PC-fail are NOT_MEASURED-PC-FAIL.
 2. Run CV-UNDERSPEC-REPLICATION (7B, 3B). If either model under PR-UNDERSPEC CLEARS the bar or the loop signature is absent in both models → OUTCOME=MEASUREMENT_INVALID (environment not continuous with parent; ablation unidentifiable). Raw observations still reported.
 3. Run treatment. If any measured candidate clears the bar under PR-SPECIFIED → OUTCOME=SUPPORTS (early stop; role/bar/hashes recorded). Readiness condition (3) satisfied by proven same-model driver; benchmark executable as frozen.
 4. If replication passed and every measured candidate failed:
@@ -205,6 +211,7 @@ Source classification per hit: `PAPER_EVIDENCE` (peer-reviewed/arXiv with explic
 - **Determinism/randomness**: temp=0, fixed seeds (42-46); the parent showed 5/5 uniform traces under these settings; any non-determinism appears as mixed traces and is recorded as an observation, not used to rescue an outcome.
 - **Census completeness**: NOT_ATTEMPTED/NOT_MEASURED are records with reasons, never negatives. 14B excluded by RAM/URL/disk gates ⇒ MIXED (not FALSIFIES) with explicit UNRESOLVED.
 - **Chance-level success**: B-RANDOM-ACTION establishes chance floor; bar thresholds (0.6) are above any plausible chance rate for exact-text completion after click.
+- **Unpassable task / uncertified ceiling**: PC-SCRIPTED-ORACLE (5/5 required) certifies that a correct click-then-answer is rewarded at 1.0, so a universal candidate 0/5 cannot be an unpassable-task or verifier artifact; its failure routes to MEASUREMENT_INVALID.
 - **Verification tautology**: success requires `TARGET-42` extracted from the actual page after the reveal click; a model answering from prior knowledge without the click yields the wrong context (target hidden ⇒ not in PAGE_TEXT/ELEMENTS).
 - **Carried evidence decay**: Pollinations receipts are timestamp-bound; this design does not rely on them beyond the negative baseline already established by the audit.
 - **Measurement vs infrastructure failure**: all failure modes map to explicit categories (NOT_MEASURED-*, MEASUREMENT_INVALID) per the decision rule; infrastructure failure is never encoded as a scientific negative.
@@ -233,8 +240,8 @@ Source classification per hit: `PAPER_EVIDENCE` (peer-reviewed/arXiv with explic
 
 ## 12. Dependencies on Frozen Upstream Evidence
 
-- Parent packet `EXP-INTEL-37982024058` spec/prereg/result/audit/provenance/raw (fixture + receipts + hashes) — bound via freeze_artifacts.
-- `research/intel/run_exp_37982024058.py` — audited ancestor harness; the EXECUTE harness for this experiment is a minimal parameterized fork constrained to: (a) same modes/parsing/verification/page-server logic, (b) parameterization of system prompt per arm and per-candidate URL shards, (c) outdir = this experiment's dir. All other logic byte-preserved unless removal is required for the parameterization and is documented in provenance.
+- Parent packet `EXP-INTEL-37982024058` spec/prereg/result/audit/provenance/raw (fixture + receipts + hashes) — immutable external evidence referenced by path in `spec.code_binding` (not a mutable local `freeze_artifact`; see section 17).
+- `research/intel/run_exp_37982024058.py` (sha256 `2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00`) — audited ancestor harness; the EXECUTE harness for this experiment is a minimal parameterized fork constrained to: (a) same modes/parsing/verification/page-server logic, (b) parameterization of system prompt per arm and per-candidate URL shards, (c) outdir = this experiment's dir. All other logic byte-preserved unless removal is required for the parameterization and is documented in provenance. The derived EXECUTE harness and fixture are bound at EXECUTE by sha256 into `result.json.artifacts` (roles `code`/`fixture`) and `provenance.json`.
 - Pre-2.0 Codex PAPER_EVIDENCE (WebArena numbers) as external-check anchor only.
 - `codex/claim_state.json.effective_event_by_claim` — C-LLM-INHERIT HYPOTHESIS (current effective event: EXP-INTEL-37982024058 FALSIFIES).
 
@@ -256,19 +263,47 @@ Under `research/experiments/EXP-INTEL-38013769440/`:
 - `raw/harness_config.json` — this experiment's fixture (must equal the parent fixture byte-for-byte except `prompts.system` per arm, plus candidate URLs/shas for 14B; AUDIT-verifiable against this prereg).
 - `raw/model_receipts.json` — per candidate: load time, gguf sha256 (all shards), positive_control result.
 - `raw/task_episodes.json` — per candidate per arm per episode: full trace (prompt, raw completion, parsed action, regex action, clicked selector, visibility, token/latency stats, final answer, seed).
-- `raw/control_episodes.json` — NC + B-RANDOM episodes.
+- `raw/control_episodes.json` — PC-SCRIPTED-ORACLE + NC-NO-MODEL-ACTION + B-RANDOM-ACTION episodes.
 - `raw/provisioning_evidence.json` — download attrs (URL, bytes, sha256) and attainment-gate records for 14B (reason codes NOT_ATTEMPTED-URL/RAM/DISK if any).
+- `raw/code_manifest.json` — sha256 of the EXECUTE harness (`research/intel/run_exp_38013769440.py`) and the derived fixture, for `result.json.artifacts` (roles `code`/`fixture`).
 - `result.json` (packet schema v1), `report.md`, `provenance.json`.
 
 ---
 
 ## 15. Handoff Preparation
 
-`handoff.json` will preserve: established (prompt ablation outcome per candidate; PC/NC/random/replication control results; census completeness; cost records), rejected (any re-scope assumptions invalidated), unknown (14B if unmeasured; external envelope classification), and do_not_assume (no cross-model generalization, no endpoint promotion, no benchmark execution authorization).
+`handoff.json` will preserve: established (prompt ablation outcome per candidate; PC-SCRIPTED-ORACLE/PC-JSON/NC/random/replication control results; census completeness; cost records), rejected (any re-scope assumptions invalidated), unknown (14B if unmeasured; external envelope classification), and do_not_assume (no cross-model generalization, no endpoint promotion, no benchmark execution authorization).
 
 ---
 
-## 16. Signatures
+## 16. Pre-Freeze Self-Attack (design_contract_version 2)
+
+DESIGN actively tried to disprove its own satisfiability before freeze. Findings (mirrored in `spec.pre_freeze_satisfiability_dry_run.self_attack_findings`):
+
+- **SA-01 (BLOCKING, fixed)**: the first draft marked `freeze_artifacts_bound` PASS against three pre-existing parent files while the actual EXECUTE harness (the true interpretation dependency) cannot pre-exist at DESIGN freeze time. Reclassified to `NOT_APPLICABLE` with `freeze_artifacts: []`, mirroring the only accepted v2 precedent (`EXP-GRAPH-37992949248`); the EXECUTE harness is bound at EXECUTE by sha256 into `result.json.artifacts` and `provenance.json`.
+- **SA-02 (BLOCKING, fixed)**: no control proved the task/verifier can register success, so a universal 0/5 would be uninterpretable. Added **PC-SCRIPTED-ORACLE** (5/5 required; failure ⇒ MEASUREMENT_INVALID).
+- **SA-03 (MAJOR, fixed)**: the 14B RAM precondition was stated as "14 GiB free"; actual free RAM is ~10.8 GiB (~14.1 GiB available). The 14B arm is now explicitly attainability-gated on available memory (≥ ~11 GiB); non-attainment ⇒ `NOT_ATTEMPTED-RAM` and `MIXED` (14B UNRESOLVED), never `FALSIFIES`.
+- **SA-04 (MINOR, fixed)**: the 7B single-file URL 404s; only split shards exist. The 404 is recorded as a pre-freeze probe result so EXECUTE does not retry it or record a spurious provisioning failure.
+- **SA-05 (MINOR, fixed)**: the first draft's FALSIFIES branch implicitly assumed 14B attainment; the decision rule now separates FALSIFIES (14B measured and failing) from MIXED (14B unresolved).
+
+### Branch-reachability matrix (every branch reachable; no empty class)
+
+| branch | reachable when |
+|---|---|
+| SUPPORTS | any measured candidate clears the bar under PR-SPECIFIED |
+| FALSIFIES | PC-SCRIPTED-ORACLE 5/5, replication PASS, and 7B/3B/14B all measured and failing |
+| MIXED | replication PASS and 7B/3B fail, but 14B is NOT attempted/measured (RAM/URL/disk/run-error/PC-fail) |
+| MEASUREMENT_INVALID | scripted-oracle < 5/5; or PC-JSON fails on both 7B and 3B; or a candidate clears under PR-UNDERSPEC; or loop signature absent in both models; or infra failure |
+
+---
+
+## 17. Code and Artifact Binding (v2)
+
+`freeze_artifacts` is empty and `freeze_artifacts_bound` is `NOT_APPLICABLE`: no mutable local code/data/task-bank/fixture dependency exists at freeze time, because the DESIGN write scope permits only `spec.json`/`prereg.md`. The immutable pre-existing evidence this design reuses is referenced by path+sha256 in `spec.code_binding` (ancestor harness, parent fixture, GGUF receipts), not as mutable local fixtures. The EXECUTE-written harness and derived fixture are bound at EXECUTE by sha256 into `result.json.artifacts` (roles `code`/`fixture`) and `provenance.json`; AUDIT re-verifies the derived fixture and prompt strings byte-for-byte against this prereg.
+
+---
+
+## 18. Signatures
 
 - Design: big-pickle (opencode/big-pickle), DESIGN mode, lane intel.
-- No outcome-bearing measurements were performed during DESIGN; all environment probes were non-outcome-bearing satisfiability checks recorded in sections 3 and 9.
+- No outcome-bearing measurements were performed during DESIGN; all environment probes were non-outcome-bearing satisfiability checks recorded in `spec.pre_freeze_satisfiability_dry_run.environment_probes` and sections 3 and 9.
