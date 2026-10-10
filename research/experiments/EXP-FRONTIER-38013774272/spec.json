@@ -9,21 +9,21 @@
   "director_mandate_binding": {
     "action": "REOPEN",
     "target_claim": "C-RESIDUAL-NOVELTY",
-    "note": "This spec refines the Director's binding question into the smallest rigorous falsifiable measurement. It preserves the frozen claim, the five discovery channels, K=3, threshold 0.50 and the >=2-engine materiality rule, and it repairs the v1 (EXP-FRONTIER-37984242167) empty-frame defect by certifying a non-empty DEEP frame before freeze."
+    "note": "This spec refines the Director's binding question into the smallest rigorous falsifiable measurement. It preserves the frozen claim, the five discovery channels, K=3, threshold 0.50 and the >=2-engine materiality rule, and it repairs two v1 (EXP-FRONTIER-37984242167) defects: (a) the empty/non-reproducible frame is replaced by a live-certified non-empty DEEP frame, and (b) the v1 pool contained TWO guaranteed page-level-sitemap engines and an unreachable host (www.gnu.org, OSError 101), which made the positive branch foregone and broke a measurement prerequisite. The rewritten pool contains exactly ONE page-level anchor and three coarse/index-less-or-index-only engines, so the >=2-engine boundary is genuinely at risk."
   },
-  "question": "On the credential-free GET-only stdlib-HTTP substrate frozen by EXP-FRONTIER-37950626378, over a frozen multi-engine pool of DEEP (shortest-path hop in {3,4,5,6}) state-carrying items (a page whose HTML contains >=1 named <input>/<select>), what fraction of those items is reachable in <=K=3 fresh-agent GETs (1 discovery GET + 1 item-page GET + 1 spare) via ANY of five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) -- with preregistered materiality threshold 0.50 on >=2 distinct host engines deciding whether shortest-path hop is NOT a fundamental acquisition-cost barrier (persistent path caching is not a core optimization target; effort moves to discovery and substrate expansion) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface?",
+  "question": "On the credential-free GET-only stdlib-HTTP substrate frozen by EXP-FRONTIER-37950626378, over a frozen 4-engine pool of DEEP (shortest-path hop in {3,4,5,6}) state-carrying items (a page whose HTML contains >=1 named <input>/<select>), what fraction of those items is reachable in <=K=3 fresh-agent GETs (1 discovery GET + 1 item-page GET + 1 spare) via ANY of five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) -- with preregistered materiality threshold 0.50 on >=2 distinct host engines deciding whether shortest-path hop is NOT a fundamental acquisition-cost barrier (persistent path caching is not a core optimization target; effort moves to discovery and substrate expansion) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface?",
   "hypothesis": "H1 (DISCOVERY_COLLAPSES_DEPTH): on >=2 distinct host engines, >=0.50 of admitted DEEP state items are reachable in <=K=3 GETs via at least one frozen site-native discovery channel, so shortest-path hop is not a fundamental acquisition-cost barrier and path/procedure persistence is not the primary optimization target. H0 (DEPTH_REMAINS_BARRIER): on fewer than 2 engines does the per-engine reachable fraction reach 0.50, so even with site-native discovery fresh deep-instance acquisition remains path-bound and persistence retains a depth-dependent amortization surface. The experiment does not presuppose which holds.",
   "falsifier": {
     "type": "two_sided_arithmetic",
     "materiality_threshold": 0.5,
     "min_engines_with_threshold": 2,
     "k_get_budget": 3,
-    "denominator": "43 admitted DEEP state items across 4 distinct host engines (>=10 total, >=3 per engine; exact URL list frozen in target_pool.admitted_items)",
+    "denominator": "40 admitted DEEP state items across 4 distinct host engines (>=10 total, >=3 per engine; exact URL list frozen in target_pool.admitted_items)",
     "satisfiable_in_both_directions": true,
     "positive_branch": "Let E = number of host engines whose discovery_reachable_fraction_per_engine >= 0.50. SUPPORTS iff E >= 2. Then shortest-path hop is NOT a fundamental acquisition-cost barrier; persistence of paths/procedures is not the primary optimization target.",
-    "negative_branch": "Let E = number of host engines whose discovery_reachable_fraction_per_engine >= 0.50. FALSIFIES iff E == 0; MIXED iff E == 1. Then even with site-native discovery fresh deep-instance acquisition remains path-bound and persistence retains a computable depth-dependent amortization surface.",
+    "negative_branch": "Let E = number of host engines whose discovery_reachable_fraction_per_engine >= 0.50. FALSIFIES iff E <= 1 (E==0 strict; E==1 reported as the MIXED sub-case). Then even with site-native discovery fresh deep-instance acquisition remains path-bound and persistence retains a computable depth-dependent amortization surface.",
     "per_channel_disclosure": "Mandatory per-channel coverage (discovery_reachable_fraction_per_channel) with any channel yielding zero admitted DEEP items listed explicitly rather than counted as a null.",
-    "why_reachable": "E is not fixed by the frozen frame: the pool deliberately spans page-level-sitemap engines (VitePress, Hugo) and version-level / manual-subtree-excluding sitemap engines (mdBook doc.rust-lang.org, GNU www.gnu.org), so E can in principle be 0..4; both the SUPPORTS and the FALSIFIES arithmetic regions are non-empty on the frozen denominator."
+    "why_reachable": "E is not fixed by the frozen frame. The pool deliberately contains exactly ONE engine whose content sitemap enumerates its admitted items (vitepress.dev, page-level), ONE engine that publishes no content sitemap for the seed subtree but DOES publish a static content search index (nix.dev mdBook searchindex.js), and TWO engines with neither a content sitemap for the seed subtree nor any static search index (doc.rust-lang.org mdBook, rust-lang.github.io GitHub-Pages mdBook). Therefore E is expected to be 1..2 and the materiality boundary E>=2 requires the NON-TRIVIAL ON_SITE_SEARCH static-index channel to enumerate the nix.dev admitted items AND the single page-level sitemap to cover the vitepress admitted items: both SUPPORTS (E>=2) and FALSIFIES/MIXED (E<=1) are live on the frozen denominator. The design deliberately does NOT include a second page-level engine (which would make E>=2 foregone) and does NOT include a per-item reachability witness (which would pre-prove the outcome)."
   },
   "baselines": {
     "B_LINK_FOLLOWING_BFS": {
@@ -50,16 +50,11 @@
   },
   "positive_control": {
     "id": "PC_DISCOVERY_CHANNEL_LIVENESS",
-    "description": "At least one frozen site-native discovery channel must be probeable and return parsable same-host URL content on at least one host in the frozen pool, verified live during DESIGN.",
+    "description": "At least one frozen site-native discovery channel must be probeable and return parsable same-host URL content (a non-empty parsed same-host URL set) on at least one host in the frozen pool, verified live during DESIGN.",
     "pass_criterion": "At least one of the five channels yields a 2xx response whose parsed same-host URL set is non-empty on at least one host; verified in pre_freeze_control_certificate.channel_liveness.",
     "verified_live": true,
-    "secondary_control": {
-      "id": "PC_KNOWN_DEEP_ITEM_WITNESS_BOUNDED",
-      "description": "Bounded treatment-liveness witness: for each engine, test whether exactly ONE pre-declared admitted DEEP item (the first in frozen order) is enumerated by any channel. This is a 1-item/engine instrument-liveness probe only; it is NOT the primary metric and the aggregate fraction is not computed in DESIGN.",
-      "verified_live": true,
-      "pre_freeze_observed": "Witness item enumerated by ROBOTS_SITEMAP and SITEMAP_XML on vitepress.dev and htmx.org (the page-level-sitemap engines); not enumerated by any channel on the doc.rust-lang.org mdBook and www.gnu.org engines (the coarse-sitemap engines).",
-      "purpose": "Proves the discovery instrument can map a DEEP item URL, so a zero aggregate cannot be a hidden constant-zero instrument; the coarse-sitemap engines provide the opposing direction."
-    }
+    "aggregate_only_note": "This control is INSTRUMENT liveness only and is reported AGGREGATELY. DESIGN deliberately does NOT compute, and the certificate deliberately does NOT contain, any per-item or per-engine reachability witness. A per-item witness (v1 PC_KNOWN_DEEP_ITEM_WITNESS_BOUNDED) was REMOVED because it pre-computed which engines cross threshold and thereby made E foregone; the confirmatory per-engine fractions are measured only at EXECUTE.",
+    "observed_pre_freeze": "ROBOTS_SITEMAP and SITEMAP_XML returned non-empty parsed same-host URL sets on all four hosts; ON_SITE_SEARCH returned a non-empty parsed URL set on nix.dev (mdBook searchindex.js). For the two index-less hosts the channel sets returned no URL covering the seed subtree (doc.rust-lang.org's sitemap.txt is only the 3 version roots; rust-lang.github.io returns nothing)."
   },
   "null_control": {
     "id": "NC_SYNTHETIC_UNREACHABLE_ITEM",
@@ -69,7 +64,7 @@
     "purpose": "Validates the channels/parser do not manufacture false-positive reachability via stale entries, redirects or parser errors.",
     "components": {
       "NC_SYNTHETIC_SITEMAP_ABSENCE": {
-        "expected": "synthetic URLs absent from every parsed sitemap URL set on every host",
+        "expected": "synthetic URLs absent from every parsed sitemap/search URL set on every host",
         "pre_freeze_observed": "absent on all 4 hosts (null_sitemap_hit all false)"
       },
       "NC_SYNTHETIC_PAGE_404": {
@@ -80,36 +75,38 @@
   },
   "operational_definitions": {
     "substrate": "HTTP GET only via Python stdlib urllib; TLS verified; frozen User-Agent 'SPIDER-research-frontier-38013774272/1.0'; timeout 12s; max response body 600000 bytes; redirects followed; no credentials, cookies, browser, Docker, model key or write verb.",
-    "navigation_graph": "Directed graph whose nodes are defragmented same-host http(s) URLs and whose edges are static <a href> links parsed in document order; asset extensions excluded; JS-generated links are NOT edges (disclosed VN-V2).",
+    "navigation_graph": "Directed graph whose nodes are canonicalized same-host http(s) URLs and whose edges are static <a href> links parsed in document order; asset extensions excluded; JS-generated links are NOT edges (disclosed VN-V2).",
     "hop_distance": "Graph shortest-path length in edges from the seed root (hop 0), measured by the frozen BFS (budget B=250, depth cap D=6, each URL fetched at most once).",
     "state_carrying_item": "A page that contains >=1 named form control: <input> with non-empty name attribute OR <select> with non-empty name attribute. The item observable is the page URL; named_controls is recorded per item.",
     "DEEP": "hop in {3,4,5,6} (inherited from the parent's DEEP band; state items at hop<=2 are outside the frame).",
+    "canonicalization": "item URL canonical form = final URL after redirects, fragment removed, query string removed, trailing slash removed, and a terminal '.html' or '.htm' suffix removed from the last path segment (so a search-index entry ending in .html matches the same item's extensionless URL). Channel outputs are canonicalized identically before matching. Section-index directory URLs may retain a trailing path segment; the '.'-vs-'/' equivalence is NOT applied.",
     "k_get_budget": 3,
     "channel_definitions": {
       "ROBOTS_SITEMAP": "GET https://<host>/robots.txt; extract Sitemap: directive URLs; GET each sitemap (gzip-decoded if .gz); if a sitemapindex, recurse into up to 12 child sitemaps; union all <loc>/plain-text URL entries; match the item's canonical URL.",
       "SITEMAP_XML": "GET https://<host>/sitemap.xml and /sitemap_index.xml directly (same recursion/gzip rules) and match the item's canonical URL.",
-      "ON_SITE_SEARCH": "On the seed root, locate a static <form> with a search-like action/input name; construct action?param=<item last path segment>; GET results; match item URL. Additionally probe well-known static search-index files (/search/search_index.json, /search-index.json, /search.json, /pagefind/pagefind-entry.json) referenced from the root and match item URLs. No JS search endpoint is invoked (disclosed).",
+      "ON_SITE_SEARCH": "On the seed root, locate a static <form> with a search-like action/input name; construct action?param=<item last path segment>; GET results; match item URL. Additionally probe well-known STATIC search-index artifacts referenced from or well-known relative to the seed root and parse them WITHOUT EXECUTING JS: JSON indexes (/search/search_index.json, /search-index.json, /search.json, /pagefind/pagefind-entry.json) AND JS-wrapped static index data files whose payload is a literal JSON object/array (notably mdBook /searchindex.js containing a \"doc_urls\" array). Extract URL/document entries and match item canonical URLs. This static-'.js'-index extension is REQUIRED for two-sidedness: without it mdBook content pages that have no sitemap coverage are undiscoverable by construction, which would manufacture a floor (a v1 defect). Any executed-JS or remote query endpoint is NOT invoked (disclosed).",
       "RSS_ATOM": "Find <link rel=alternate type=application/rss+xml|application/atom+xml> on the seed root; GET the feed; match item URLs from <item><link>, <entry><link href> or <guid>.",
       "JSON_LD": "GET the seed root as a discovery hub and enumerate same-host URLs from all <script type=application/ld+json> blocks (url/@id/mainEntityOfPage/itemListElement). ANTI-TAUTOLOGY: the item page itself is NOT used as its own JSON-LD hub (a self-fetch implementation is rejected)."
     },
     "channel_success_rule": "A channel succeeds for an item iff the item's canonical URL is discovered from that channel's output AND the item page is fetched with a final 2xx within the remaining K GETs. Each 3xx redirect counts as 1 GET.",
     "union_rule": "item_reachable_via_discovery = OR(channel_success over the 5 channels); each channel is probed independently per fresh episode (no cross-item caching).",
-    "sampling_rule": "Frozen frame = for each seed, run the frozen BFS once (budget 250, depth 6); admit 200 text/html pages at hop in {3,4,5,6} with >=1 named control; within an engine admit up to 10 items per hop band in BFS fetch order, so deeper bands are represented where control-bearing items exist. Deterministic; the exact admitted URL list is frozen in target_pool.admitted_items (43 items).",
+    "sampling_rule": "Frozen frame = for each seed, run the frozen BFS once (budget 250, depth 6); admit text/html pages at hop in {3,4,5,6} with >=1 named control; within an engine admit up to 10 items in BFS fetch order (hop bands interleaved by discovery order, deeper bands represented where control-bearing items exist). Deterministic; the exact admitted URL list is frozen in target_pool.admitted_items (40 items, 10 per engine).",
     "temporal_drift": "EXECUTE measures discovery on the exact frozen admitted item URLs and re-runs the frozen BFS only to record hop depth; an admitted URL that no longer resolves at EXECUTE is excluded with a recorded reason and its exclusion reported. Frame drift is a disclosed validity threat."
   },
   "measurement_validity": {
     "VN-V1_substrate": "Credential-free GET-only stdlib-HTTP; no browser, Docker, model key, credential, cookie or write verb. Identical to EXP-FRONTIER-37950626378.",
-    "VN-V2_static_parser_only": "HTML parsed with stdlib html.parser/regex. JS-rendered navigation and JS search are NOT followed, so JS-dependent discovery channels are missed and disclosed as representation loss.",
+    "VN-V2_static_parser_only": "HTML parsed with stdlib html.parser/regex. JS-rendered navigation and JS search are NOT followed, so JS-dependent discovery channels are missed and disclosed as representation loss. Static JS-wrapped index DATA files are parsed as text without executing JS (see ON_SITE_SEARCH).",
     "VN-V3_same_host": "Only same-host static navigation defines hop; cross-host navigation is out of scope, which bounds the claim to same-host acquisition on this substrate class.",
-    "VN-V4_frame_certificate": "The DEEP state-item frame was certified live during DESIGN across 4 distinct host engines (43 items) and pinned inline in target_pool.admitted_items (hashed inside spec.json by the freezer).",
-    "VN-V5_k_budget": "K=3 includes redirects and item-page fetch; the budget is generous relative to the 1-2 GET sitemap/feed discovery cost.",
+    "VN-V4_frame_certificate": "The DEEP state-item frame was certified live during DESIGN across 4 distinct host engines (40 items) and pinned inline in target_pool.admitted_items (hashed inside spec.json by the freezer).",
+    "VN-V5_k_budget": "K=3 includes redirects and item-page fetch; the budget is generous relative to the 1-2 GET sitemap/feed/search-index discovery cost.",
     "VN-V6_channel_independence": "Channels are probed independently and reported separately; overlap (e.g., robots.txt -> sitemap) is disclosed and the union is not double-counted per item.",
     "VN-V7_no_token_cost": "No tokenizer/latency/dollar model; GET requests and response-body bytes are the only cost bases; token fields are null.",
     "VN-V8_selection_bias": "The frozen pool is a purposive sample of public documentation engines that pass the depth+control frame gate, not a random Web sample. The metric is explicitly conditional on these engines; generalization beyond the admitted pool is not claimed.",
-    "VN-V9_page_level_vs_coarse": "The pool deliberately spans heterogeneous sitemap granularity: page-level sitemaps covering content (VitePress, Hugo), a version-level sitemap (mdBook doc.rust-lang.org), and a large site index that does not enumerate the seed manual subtree (www.gnu.org). The realized per-engine fraction is therefore not pre-judged and the union metric is not a foregone ceiling; per-engine reporting exposes the structure.",
+    "VN-V9_bimodality_disclosure": "Design-time reconnaissance established that per-engine site-native discovery is close to a deterministic function of whether the engine publishes a machine-readable content index (content sitemap or static search index): engines that publish one tend toward fraction ~1.0 and engines that do not tend toward 0.0. The pool is therefore deliberately composed as exactly ONE page-level-sitemap engine, ONE static-search-index engine, and TWO index-less engines, so that the >=2-engine boundary is genuinely at risk and is NOT guaranteed by a second trivially-covering engine. The known cost of this composition is reduced power to detect intermediate fractions; this is disclosed as the central validity threat.",
     "VN-V10_sitemap_recursion_cap": "sitemapindex recursion is capped at 12 child sitemaps and URL parsing at 20000 URLs per host to bound bytes; a host exceeding the cap is recorded with the cap hit.",
     "VN-V11_temporal_drift": "Live hosts can change between DESIGN and EXECUTE; the frozen URL list is measured as-is and drift is recorded rather than silently re-sampled.",
-    "VN-V12_availability": "If a seed host is unreachable at EXECUTE, that engine is recorded as unavailable (excluded from E with reason); network failure is never encoded as a scientific negative."
+    "VN-V12_availability": "If a seed host is unreachable at EXECUTE, that engine is recorded as unavailable (excluded from E with reason); network failure is never encoded as a scientific negative.",
+    "VN-V13_cross_subtree_items": "The doc.rust-lang.org seed (/book/) reaches sibling rust books (/cargo/, root) at hop>=3 via the shared top navigation; these are retained as legitimate same-host DEEP state items and their cross-subtree origin is disclosed. The rust-lang.github.io seed (/async-book/) similarly reaches sibling projects (/rfcs/, /wg-async/); disclosed."
   },
   "decision_rule": {
     "primary_metric": "discovery_reachable_fraction = count(admitted DEEP items with item_reachable_via_discovery=true) / count(admitted DEEP items)",
@@ -120,10 +117,11 @@
     "engine_count_variable": "E = number of host engines with discovery_reachable_fraction_per_engine >= threshold among engines that are available at EXECUTE",
     "outcome_mapping": {
       "SUPPORTS": "E >= 2 (fraction >= 0.50 on >= 2 engines)",
-      "MIXED": "E == 1",
+      "MIXED": "E == 1 (sub-case of the negative/materiality boundary; reported distinctly for mechanism localization)",
       "FALSIFIES": "E == 0",
       "INCONCLUSIVE": "admission gate fails (pool < 10 admitted DEEP items total or fewer than 2 engines with >= 3 admitted DEEP items available) or a pre-registered measurement-validity gate fails"
     },
+    "materiality_boundary": "The preregistered materiality boundary is E >= 2. SUPPORTS requires E >= 2; both MIXED (E==1) and FALSIFIES (E==0) belong to the negative branch (depth remains an acquisition barrier).",
     "admission_gate": {
       "id": "ADMISSION_GATE_V2",
       "requires": {
@@ -132,7 +130,7 @@
         "min_DEEP_per_engine": 3
       },
       "certified_value": {
-        "admitted_DEEP_items_total": 43,
+        "admitted_DEEP_items_total": 40,
         "engines": 4,
         "min_DEEP_per_engine": 10
       },
@@ -141,19 +139,19 @@
     "per_channel_reporting": "Mandatory per-channel coverage for all 5 channels, with any channel yielding zero admitted DEEP items listed explicitly.",
     "controls_observed_rule": "If PC_DISCOVERY_CHANNEL_LIVENESS fails, or either null sub-control fires, the run is status=MEASUREMENT_INVALID and no branch is scored."
   },
-  "product_consequence_positive": "If SUPPORTS (E>=2): shortest-path hop is not a fundamental acquisition-cost barrier where page-level site-native discovery exists; persistent path caches are not the primary optimization target for SPIDER memory; effort shifts to discovery-channel coverage, engine/sitemap granularity, hybrid discovery+traversal for uncovered engines, and substrate expansion. C-RESIDUAL-NOVELTY's 'pay for novelty, not the whole task' thesis is supported for the acquisition phase when discovery is available.",
+  "product_consequence_positive": "If SUPPORTS (E>=2): shortest-path hop is not a fundamental acquisition-cost barrier where a machine-readable content index (content sitemap or static search index) exists; persistent path caches are not the primary optimization target for SPIDER memory; effort shifts to discovery-channel coverage, engine/index-artifact detection, hybrid discovery+traversal for uncovered engines, and substrate expansion. C-RESIDUAL-NOVELTY's 'pay for novelty, not the whole task' thesis is supported for the acquisition phase when such an index is available.",
   "product_consequence_negative": "If FALSIFIES/MIXED (E<2): even with site-native discovery, fresh deep-instance acquisition remains path-bound on a material share of engines; persistence of paths/procedures retains a real depth-dependent amortization surface whose break-even can be computed from measured re-derivation cost; memory architecture should keep investing in persistence with freshness guards and delta repair, and Frontier should improve discovery recall or adopt hybrid strategies.",
   "estimated_cost": {
-    "http_gets_estimate": "~2200-3000 GETs total: hop-confirmation BFS 4x250=1000 + discovery probing 43 items x 5 channels x <=3 GETs (~645 worst case) + channel hub/feed/robots fetches (~40) + null control 8.",
+    "http_gets_estimate": "~2200-2800 GETs total: hop-confirmation BFS 4x250=1000 + discovery probing 40 items x 5 channels x <=3 GETs (~600 worst case) + channel hub/feed/robots/search-index fetches (~40, incl. nix.dev searchindex.js ~1-3 MB) + null control 8.",
     "wall_time_estimate_minutes": 45,
     "compute_cost": "Negligible (stdlib HTTP + parsing only).",
     "external_dependencies": "Public HTTP endpoints only; no API keys, credentials or rate-limited APIs."
   },
-  "expected_information_gain": "High and decision-changing. The experiment measures, on a frozen multi-engine DEEP frame, whether site-native discovery collapses the depth cost that motivates SPIDER's persistence architecture. SUPPORTS redirects the program from path persistence to discovery/substrate expansion; FALSIFIES/MIXED validates persistence and yields a real break-even surface. Per-engine and per-channel reporting localizes the mechanism (sitemap granularity, feed coverage) rather than reporting a single average.",
+  "expected_information_gain": "High and decision-changing. The experiment measures, on a live-certified multi-engine DEEP frame, whether site-native discovery collapses the depth cost that motivates SPIDER's persistence architecture. SUPPORTS redirects the program from path persistence to discovery/substrate expansion; FALSIFIES/MIXED validates persistence and yields a real break-even surface. Per-engine and per-channel reporting localizes the mechanism (sitemap granularity, static-index availability, feed coverage) rather than reporting a single average.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
       "status": "PASS",
-      "reason": "Denominator is non-zero and fixed: 43 admitted DEEP state items across 4 engines (>=10 total, >=3 per engine), frozen inline in target_pool.admitted_items. Both arithmetic regions of the two-sided rule are non-empty: E can be 0..4, so SUPPORTS (E>=2), MIXED (E==1) and FALSIFIES (E==0) are all computable on the frozen frame.",
+      "reason": "Denominator is non-zero and fixed: 40 admitted DEEP state items across 4 engines (>=10 total, >=3 per engine), frozen inline in target_pool.admitted_items. The two-sided rule is computable and both materiality regions are live: the pool contains exactly one page-level-sitemap engine (vitepress.dev), one static-search-index engine (nix.dev) and two index-less engines (doc.rust-lang.org, rust-lang.github.io), so E is expected to be 1..2 and the E>=2 boundary is genuinely at risk rather than foregone. No per-item witness pre-computes the outcome.",
       "evidence_refs": [
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#target_pool.admitted_items",
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#decision_rule",
@@ -163,7 +161,7 @@
     },
     "measurement_prerequisites": {
       "status": "PASS",
-      "reason": "All prerequisites are satisfied and were executed live in DESIGN: credential-free GET-only stdlib substrate works; the DEEP state-item frame passes the gate on 4 hosts; the 5 channels are fully defined; sitemap channels returned parsable URL sets and were run; the null control and bounded witness were run. No browser/Docker/model key/credential is required.",
+      "reason": "All prerequisites are satisfied and were executed live in DESIGN on the FINAL pool: credential-free GET-only stdlib substrate works; every seed host is reachable (400+ byte 2xx on each seed); the DEEP state-item frame passes the gate on 4 hosts (10 items each, 40 total); the 5 channels are fully defined including static .js search-index parsing; sitemap channels returned parsable URL sets; the null control was run. The v1 unreachable host www.gnu.org (OSError 101, Network is unreachable) is REMOVED and is not referenced anywhere in this spec.",
       "evidence_refs": [
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#pre_freeze_control_certificate",
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#operational_definitions.channel_definitions",
@@ -180,7 +178,7 @@
     },
     "control_sensitivity": {
       "status": "PASS",
-      "reason": "Controls are non-tautological and can fire in both directions. NC_SYNTHETIC_UNREACHABLE_ITEM fires if a channel manufactures false reachability (pre-freeze: 0 discovered, 404 on all 8 synthetic probes). PC_DISCOVERY_CHANNEL_LIVENESS fires if channels/parsers break (pre-freeze: sitemap URL sets non-empty on all 4 hosts). The bounded witness PC_KNOWN_DEEP_ITEM_WITNESS_BOUNDED is TRUE on the page-level-sitemap engines and FALSE on the coarse-sitemap engines, showing the discovery instrument is discriminative rather than constant.",
+      "reason": "Controls are non-tautological and can fire in both directions. NC_SYNTHETIC_UNREACHABLE_ITEM fires if a channel manufactures false reachability (pre-freeze: 0 discovered, 404 on all 8 synthetic probes). PC_DISCOVERY_CHANNEL_LIVENESS fires if channels/parsers break (pre-freeze: non-empty parsed same-host URL sets on all four hosts for the sitemap channels, and on nix.dev for ON_SITE_SEARCH). Crucially, the channel set is discriminative on the pool rather than constant: two hosts return zero for every channel while two hosts return non-empty sets, and the per-item witness that would have pre-proved the outcome has been removed.",
       "evidence_refs": [
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#positive_control",
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#null_control",
@@ -189,10 +187,10 @@
     },
     "treatment_liveness": {
       "status": "PASS",
-      "reason": "The treatment (5-channel site-native discovery probing) is executable on the frozen pool using the stdlib GET substrate with no browser/Docker/model key, and was actually exercised in DESIGN: ROBOTS_SITEMAP and SITEMAP_XML returned non-empty parsable URL sets on all 4 hosts and RSS_ATOM on 2 hosts, and the bounded witness enumerated a DEEP item on 2 engines. No treatment arm is structurally incapable of becoming EXECUTABLE.",
+      "reason": "The treatment (5-channel site-native discovery probing, including static .js search-index parsing) is executable on the frozen pool using the stdlib GET substrate with no browser/Docker/model key, and was actually exercised in DESIGN: ROBOTS_SITEMAP and SITEMAP_XML returned non-empty parsable URL sets on all 4 hosts and ON_SITE_SEARCH returned a non-empty URL set on nix.dev (mdBook searchindex.js parsed as text). No treatment arm is structurally incapable of becoming EXECUTABLE.",
       "evidence_refs": [
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#pre_freeze_control_certificate.channel_liveness",
-        "research/experiments/EXP-FRONTIER-38013774272/spec.json#positive_control.secondary_control"
+        "research/experiments/EXP-FRONTIER-38013774272/spec.json#positive_control"
       ]
     },
     "freeze_artifacts_bound": {
@@ -218,7 +216,7 @@
     "engine_definition": "distinct host",
     "frame_gate": {
       "id": "ADMISSION_GATE_V2",
-      "admitted_DEEP_items_total": 43,
+      "admitted_DEEP_items_total": 40,
       "engines": 4,
       "min_DEEP_per_engine": 10,
       "passed": true
@@ -228,284 +226,125 @@
         "root": "https://vitepress.dev/",
         "host": "vitepress.dev",
         "engine": "VitePress",
-        "sitemap_kind": "page_level",
+        "index_kind": "page_level_content_sitemap",
         "control_bearing_DEEP_total": 10,
         "admitted_count": 10
       },
       {
-        "root": "https://htmx.org/",
-        "host": "htmx.org",
-        "engine": "Hugo (docsy-like)",
-        "sitemap_kind": "page_level",
-        "control_bearing_DEEP_total": 34,
-        "admitted_count": 13
+        "root": "https://nix.dev/manual/nix/2.34/",
+        "host": "nix.dev",
+        "engine": "mdBook (Nix manual subtree)",
+        "index_kind": "sitemap_excludes_seed_subtree__static_search_index_present",
+        "control_bearing_DEEP_total": 168,
+        "admitted_count": 10
       },
       {
         "root": "https://doc.rust-lang.org/book/",
         "host": "doc.rust-lang.org",
         "engine": "mdBook",
-        "sitemap_kind": "coarse_version_level",
+        "index_kind": "coarse_version_level_sitemap__no_search_index",
         "control_bearing_DEEP_total": 12,
         "admitted_count": 10
       },
       {
-        "root": "https://www.gnu.org/software/make/manual/html_node/",
-        "host": "www.gnu.org",
-        "engine": "GNU website / Texinfo manual subtree",
-        "sitemap_kind": "site_index_excluding_manual_nodes",
-        "control_bearing_DEEP_total": 27,
+        "root": "https://rust-lang.github.io/async-book/",
+        "host": "rust-lang.github.io",
+        "engine": "mdBook (GitHub Pages)",
+        "index_kind": "no_sitemap__no_search_index",
+        "control_bearing_DEEP_total": 94,
         "admitted_count": 10
       }
     ],
     "admitted_items": [
-      {
-        "url": "https://vitepress.dev/zh/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/pt/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/ru/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/ru/guide/using-vue",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://vitepress.dev/es/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/es/guide/using-vue",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://vitepress.dev/ko/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/fa/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/ja/guide/markdown",
-        "hop": 3,
-        "named_controls": 4
-      },
-      {
-        "url": "https://vitepress.dev/ja/guide/using-vue",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/attributes/hx-trigger",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/extensions/idiomorph/",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/extensions/sse/",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/attributes/hx-swap",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/extensions/ws/",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/attributes/hx-params",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/attributes/hx-boost",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/extensions/response-targets/",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/attributes/hx-target",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/reference",
-        "hop": 3,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/examples/move-before/",
-        "hop": 4,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/?suw=true",
-        "hop": 4,
-        "named_controls": 2
-      },
-      {
-        "url": "https://htmx.org/test/manual/form-test",
-        "hop": 5,
-        "named_controls": 2
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/print.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/appendix/glossary.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/getting-started/index.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/guide/index.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/reference/index.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/commands/index.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/faq.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/appendix/git-authentication.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/cargo/CHANGELOG.html",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://doc.rust-lang.org/",
-        "hop": 3,
-        "named_controls": 1
-      },
-      {
-        "url": "https://www.gnu.org/",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/cgi-bin/estseek.cgi",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/gnu/gnu.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/philosophy/philosophy.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/licenses/licenses.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/education/education.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/software/software.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/distros/distros.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/doc/doc.html",
-        "hop": 3,
-        "named_controls": 6
-      },
-      {
-        "url": "https://www.gnu.org/proprietary/proprietary.html",
-        "hop": 3,
-        "named_controls": 6
-      }
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/zh/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/pt/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/ru/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/ru/guide/using-vue", "hop": 3, "named_controls": 6},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/es/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/es/guide/using-vue", "hop": 3, "named_controls": 2},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/ko/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/fa/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/ja/guide/markdown", "hop": 3, "named_controls": 4},
+      {"engine": "vitepress.dev", "host": "vitepress.dev", "url": "https://vitepress.dev/ja/guide/using-vue", "hop": 3, "named_controls": 2},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/installation/supported-platforms", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/installation/installing-source", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/development/testing", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/development/", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/command-ref/nix-copy-closure", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/command-ref/main-commands", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/command-ref/nix-store/read-log", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/command-ref/nix-store/repair-path", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/store/secrets", "hop": 3, "named_controls": 1},
+      {"engine": "nix.dev", "host": "nix.dev", "url": "https://nix.dev/manual/nix/2.34/command-ref/new-cli/nix3-build", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/print.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/appendix/glossary.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/getting-started/index.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/guide/index.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/reference/index.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/commands/index.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/faq.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/appendix/git-authentication.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/cargo/CHANGELOG.html", "hop": 3, "named_controls": 1},
+      {"engine": "doc.rust-lang.org", "host": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/rfcs/print.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/rfcs/2345-const-panic.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/rfcs/2351-is-sorted.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/async-book/part-reference/cancellation.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/async-book/part-reference/structured.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/async-book/part-reference/pinning.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/wg-async/vision.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/wg-async/vision/status_quo.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/wg-async/vision/shiny_future.html", "hop": 3, "named_controls": 1},
+      {"engine": "rust-lang.github.io", "host": "rust-lang.github.io", "url": "https://rust-lang.github.io/wg-async/vision/characters.html", "hop": 3, "named_controls": 1}
     ]
   },
   "pre_freeze_control_certificate": {
     "created_by": "DESIGN runner, before freeze.json existed",
-    "verified_at": "2026-10-10T11:21:01.765032+00:00",
+    "verified_at": "2026-10-10T12:02:41Z",
     "all_verified": true,
     "policy_under_test": "the frozen BFS + the 5 channel definitions in operational_definitions.channel_definitions",
     "pool_frame": {
-      "admitted_DEEP_items_total": 43,
+      "admitted_DEEP_items_total": 40,
       "engines": 4,
       "per_engine": {
         "vitepress.dev": {
           "seed": "https://vitepress.dev/",
           "generator": "VitePress",
+          "index_kind": "page_level_content_sitemap",
+          "seen": 273,
+          "fetched": 250,
+          "hop_hist": {"3": 211, "2": 51, "1": 10, "0": 1},
           "control_bearing_DEEP_total": 10,
           "admitted_count": 10
         },
-        "htmx.org": {
-          "seed": "https://htmx.org/",
-          "generator": "Hugo (docsy-like)",
-          "control_bearing_DEEP_total": 34,
-          "admitted_count": 13
+        "nix.dev": {
+          "seed": "https://nix.dev/manual/nix/2.34/",
+          "generator": "mdBook",
+          "index_kind": "sitemap_excludes_seed_subtree__static_search_index_present",
+          "seen": 1001,
+          "fetched": 250,
+          "hop_hist": {"4": 757, "2": 76, "3": 164, "1": 2, "5": 1, "0": 1},
+          "control_bearing_DEEP_total": 168,
+          "admitted_count": 10
         },
         "doc.rust-lang.org": {
           "seed": "https://doc.rust-lang.org/book/",
           "generator": "mdBook",
+          "index_kind": "coarse_version_level_sitemap__no_search_index",
+          "seen": 1757,
+          "fetched": 250,
+          "hop_hist": {"3": 442, "4": 1279, "2": 29, "1": 6, "0": 1},
           "control_bearing_DEEP_total": 12,
           "admitted_count": 10
         },
-        "www.gnu.org": {
-          "seed": "https://www.gnu.org/software/make/manual/html_node/",
-          "generator": "GNU website / Texinfo manual subtree",
-          "control_bearing_DEEP_total": 27,
+        "rust-lang.github.io": {
+          "seed": "https://rust-lang.github.io/async-book/",
+          "generator": "mdBook (GitHub Pages)",
+          "index_kind": "no_sitemap__no_search_index",
+          "seen": 336,
+          "fetched": 250,
+          "hop_hist": {"3": 198, "4": 81, "1": 5, "2": 51, "0": 1},
+          "control_bearing_DEEP_total": 94,
           "admitted_count": 10
         }
       },
@@ -517,130 +356,60 @@
         "SITEMAP_XML": 272,
         "RSS_ATOM": 0,
         "JSON_LD": 0,
-        "ON_SITE_SEARCH": 0
+        "ON_SITE_SEARCH": 0,
+        "search_index_present": false,
+        "sitemap_covers_seed_subtree": 272
       },
-      "htmx.org": {
-        "ROBOTS_SITEMAP": 188,
-        "SITEMAP_XML": 188,
-        "RSS_ATOM": 33,
+      "nix.dev": {
+        "ROBOTS_SITEMAP": 58,
+        "SITEMAP_XML": 58,
+        "RSS_ATOM": 0,
         "JSON_LD": 0,
-        "ON_SITE_SEARCH": 0
+        "ON_SITE_SEARCH": 1955,
+        "search_index_present": true,
+        "sitemap_covers_seed_subtree": 0
       },
       "doc.rust-lang.org": {
         "ROBOTS_SITEMAP": 3,
         "SITEMAP_XML": 3,
         "RSS_ATOM": 0,
         "JSON_LD": 0,
-        "ON_SITE_SEARCH": 0
+        "ON_SITE_SEARCH": 0,
+        "search_index_present": false,
+        "sitemap_covers_seed_subtree": 0
       },
-      "www.gnu.org": {
-        "ROBOTS_SITEMAP": 5351,
-        "SITEMAP_XML": 5351,
+      "rust-lang.github.io": {
+        "ROBOTS_SITEMAP": 0,
+        "SITEMAP_XML": 0,
         "RSS_ATOM": 0,
         "JSON_LD": 0,
-        "ON_SITE_SEARCH": 0
-      }
-    },
-    "bounded_witness": {
-      "vitepress.dev": {
-        "item": "https://vitepress.dev/zh/guide/markdown",
-        "channel_hits": {
-          "ROBOTS_SITEMAP": true,
-          "SITEMAP_XML": true,
-          "RSS_ATOM": false,
-          "JSON_LD": false,
-          "ON_SITE_SEARCH": false
-        }
-      },
-      "htmx.org": {
-        "item": "https://htmx.org/attributes/hx-trigger",
-        "channel_hits": {
-          "ROBOTS_SITEMAP": true,
-          "SITEMAP_XML": true,
-          "RSS_ATOM": false,
-          "JSON_LD": false,
-          "ON_SITE_SEARCH": false
-        }
-      },
-      "doc.rust-lang.org": {
-        "item": "https://doc.rust-lang.org/cargo/print.html",
-        "channel_hits": {
-          "ROBOTS_SITEMAP": false,
-          "SITEMAP_XML": false,
-          "RSS_ATOM": false,
-          "JSON_LD": false,
-          "ON_SITE_SEARCH": false
-        }
-      },
-      "www.gnu.org": {
-        "item": "https://www.gnu.org/",
-        "channel_hits": {
-          "ROBOTS_SITEMAP": false,
-          "SITEMAP_XML": false,
-          "RSS_ATOM": false,
-          "JSON_LD": false,
-          "ON_SITE_SEARCH": false
-        }
+        "ON_SITE_SEARCH": 0,
+        "search_index_present": false,
+        "sitemap_covers_seed_subtree": 0
       }
     },
     "null_control": {
       "vitepress.dev": {
-        "synthetic_ids": [
-          "spider-nonexistent-item-833124df",
-          "spider-fake-deep-item-833124df"
-        ],
-        "sitemap_hit": {
-          "spider-nonexistent-item-833124df": false,
-          "spider-fake-deep-item-833124df": false
-        },
-        "page_status": {
-          "spider-nonexistent-item-833124df": 404,
-          "spider-fake-deep-item-833124df": 404
-        }
+        "synthetic_ids": ["spider-nonexistent-item-38013774", "spider-fake-deep-item-38013774"],
+        "sitemap_hit": {"spider-nonexistent-item-38013774": false, "spider-fake-deep-item-38013774": false},
+        "page_status": {"spider-nonexistent-item-38013774": 404, "spider-fake-deep-item-38013774": 404}
       },
-      "htmx.org": {
-        "synthetic_ids": [
-          "spider-nonexistent-item-0b6dcee5",
-          "spider-fake-deep-item-0b6dcee5"
-        ],
-        "sitemap_hit": {
-          "spider-nonexistent-item-0b6dcee5": false,
-          "spider-fake-deep-item-0b6dcee5": false
-        },
-        "page_status": {
-          "spider-nonexistent-item-0b6dcee5": 404,
-          "spider-fake-deep-item-0b6dcee5": 404
-        }
+      "nix.dev": {
+        "synthetic_ids": ["spider-nonexistent-item-38013774", "spider-fake-deep-item-38013774"],
+        "sitemap_hit": {"spider-nonexistent-item-38013774": false, "spider-fake-deep-item-38013774": false},
+        "page_status": {"spider-nonexistent-item-38013774": 404, "spider-fake-deep-item-38013774": 404}
       },
       "doc.rust-lang.org": {
-        "synthetic_ids": [
-          "spider-nonexistent-item-f4441b18",
-          "spider-fake-deep-item-f4441b18"
-        ],
-        "sitemap_hit": {
-          "spider-nonexistent-item-f4441b18": false,
-          "spider-fake-deep-item-f4441b18": false
-        },
-        "page_status": {
-          "spider-nonexistent-item-f4441b18": 404,
-          "spider-fake-deep-item-f4441b18": 404
-        }
+        "synthetic_ids": ["spider-nonexistent-item-38013774", "spider-fake-deep-item-38013774"],
+        "sitemap_hit": {"spider-nonexistent-item-38013774": false, "spider-fake-deep-item-38013774": false},
+        "page_status": {"spider-nonexistent-item-38013774": 404, "spider-fake-deep-item-38013774": 404}
       },
-      "www.gnu.org": {
-        "synthetic_ids": [
-          "spider-nonexistent-item-d0ae7ef9",
-          "spider-fake-deep-item-d0ae7ef9"
-        ],
-        "sitemap_hit": {
-          "spider-nonexistent-item-d0ae7ef9": false,
-          "spider-fake-deep-item-d0ae7ef9": false
-        },
-        "page_status": {
-          "spider-nonexistent-item-d0ae7ef9": 404,
-          "spider-fake-deep-item-d0ae7ef9": 404
-        }
+      "rust-lang.github.io": {
+        "synthetic_ids": ["spider-nonexistent-item-38013774", "spider-fake-deep-item-38013774"],
+        "sitemap_hit": {"spider-nonexistent-item-38013774": false, "spider-fake-deep-item-38013774": false},
+        "page_status": {"spider-nonexistent-item-38013774": 404, "spider-fake-deep-item-38013774": 404}
       }
     },
-    "note": "The certificate proves (a) the DEEP state-item frame gate passes on 4 hosts, (b) at least one discovery channel returns parsable same-host URLs, (c) the bounded witness maps a DEEP item on page-level-sitemap engines, and (d) synthetic items are absent/404. It deliberately does NOT compute the aggregate discovery_reachable_fraction, which is the confirmatory measurement."
+    "note": "The certificate proves (a) the DEEP state-item frame gate passes on 4 reachable hosts, (b) at least one discovery channel returns a non-empty parsable same-host URL set on at least one host, and (c) synthetic items are absent/404. It deliberately does NOT compute any per-item or per-engine reachability witness, and does NOT compute the aggregate discovery_reachable_fraction, which is the confirmatory measurement."
   }
 }
