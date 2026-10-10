@@ -1,6 +1,6 @@
 # SPIDER — Global scientific-to-product audit (10 October 2026)
 
-**Nature:** strategic synthesis, not canonical scientific evidence. **As-of:** `main` Codex sync commit `8b0af54c2fa1e04e39d7ded0234c37ec896b1b4c` (2026-10-10 10:30:57 UTC). **Status:** Research 2.0 **index-level** audit, selected source-packet cross-checks, with a supplementary (2026-10-10) archive manifest and selected original historical passages now read. It is **not** a re-execution of 434 experiments or a line-by-line re-audit of the ~22 MB pre-2.0 archive.
+**Nature:** strategic synthesis, not canonical scientific evidence. **As-of:** all 1,401 uniquely indexed historical source artifacts plus the 434 subsequently finalized Research 2.0 packets, at the last verified R2 synchronization commit `8b0af54c2fa1e04e39d7ded0234c37ec896b1b4c`. **Continuity update:** the original 22 MB historical blob is now present byte-for-byte on `main` at `codex/sources/0000-historical-evidence.md`; both eras are in ONE generated `SPIDER_CODEX.md`, ONE `codex/index.json` and ONE `codex/claim_state.json`. This is a complete inventory and synthesis with selected original primary-evidence checks, **not** independent re-execution or line-by-line validation of every artifact.
 
 ## Decision in one paragraph
 
@@ -8,9 +8,9 @@
 
 ## 1. Sources and counting rules
 
-1. **Frozen historical archive**: `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`, commit `b5f305af3608e5c3a4e0198f505b9ced7e5f8005`, retained as the original source-of-record. Initial GitHub file reads returned an empty body due to file size, but **a direct Git-blob fetch subsequently recovered the complete 21,974,490-character archived document**, including its 1,401-entry primary manifest. Its source and metadata are now indexed in `codex/legacy_artifact_index.json`, with a curated `codex/legacy_brief.json` integrated into the global Director snapshot and a navigation protocol in `codex/LEGACY_EVIDENCE_GUIDE.md`. Selected original historical passages were inspected: the corrected 8.5x-to-1.002x matched-task comparison (artifact 4.114), WP-003 invalidity (artifact 4.203), and the bounded WP-003B follow-up (artifact 4.237). This is **access to the complete archive plus targeted primary reading**, not an independent line-by-line re-audit of all 1,401 artifacts.
-2. **Research 2.0 canonical inventory**: `SPIDER_CODEX.md` at the above sync commit. All **434 experiment index rows** were read and counted. **0 coverage gaps and 2 quarantined packets** are reported by the compiler; they do not imply every experiment is valid or reproducible. The current Codex was updated **after** the dated 433-experiment program audit.
-3. **Current state**: effective-claim table in `SPIDER_CODEX.md`, cross-checked against `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` (433-experiment snapshot) and `research/claims/registry.json`. An operational packet state must never overwrite a previous accepted epistemic status.
+1. **Historical first epoch (original, lossless)**: `codex/sources/0000-historical-evidence.md`, a byte-identical Git-blobbased source also frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md` (`9bb76113aeaf46d9aecdd8a38349a3a7741e57c3`), 21,974,490 characters and 1,401 unique scientific artifacts. Source-line metadata for all artifacts is joined into `codex/index.json.historical.artifacts`. A compact source-anchored precedent for each scientific claim is joined into `codex/claim_state.json.historical_precedents_by_claim`. Selected original passages were inspected: corrected Graph speed (4.114), WP-003 invalidity (4.203), WP-003B bounded follow-up (4.237), and Product synthesis (4.697). Full inventory is **not** a fresh line-by-line independent audit.
+2. **Subsequent Research 2.0 packets, same Codex**: `SPIDER_CODEX.md` at the above sync. All **434 subsequent experiment rows** were read and counted. **0 coverage gaps and 2 quarantined packets** are reported by the compiler; they do not imply every experiment is valid or reproducible. The current Codex was updated **after** the dated 433-experiment program audit.
+3. **One cumulative claim state**: current effective-claim table in `SPIDER_CODEX.md`, preceded by explicit historical findings in `codex/claim_state.json`, cross-checked against `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` (433-experiment snapshot) and `research/claims/registry.json`. An operational packet state must never overwrite a previous accepted epistemic status.
 4. **Selected primary packets**: `EXP-PRODUCT-37973256064`, `EXP-PRODUCT-37989728440`, `EXP-GRAPH-37992949248`, together with the dated audit's referenced packets for measurement, model capability and Physics. **Source-level checks**: `src/spider/kernel.py` and `src/spider/__init__.py`.
 5. **Not done**: re-run code, independently verify every historical raw artifact, inspect all 434 packets one by one, or compare every live lane branch HEAD with `main`. These must not be claimed as completed.
 
@@ -32,6 +32,24 @@
 - `REVISE + MEASUREMENT_INVALID = 255 / 434 = 58.8%`: enormous validation/design friction. These categories are not all wasted science, but they expose poor yield per unit of factory work. `MEASUREMENT_INVALID = 113 / 434 = 26.0%`.
 - The 434th accepted canonical packet is Graph `EXP-GRAPH-37992949248`, audit PASS. It **replicates a repaired extraction certificate** but finds a **single-anchor, transport-coupled D1V population**, inadequate for a clustered false-accept estimate. It is **not** a product promotion and **does not validate freshness**.
 - The prior strategic audit at `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` is stale by **one packet**; otherwise its central product conclusion remains consistent with this sync.
+
+## 2A. Continuity review — what the ORIGINAL research actually established
+
+The original research is not discarded and its results are not counted as a new universe of independent confirmations:
+
+| Original thread | Exact bounded result | Consequence for today's SPIDER |
+|---|---|---|
+| WP-000 / WP-001 | Mechanics-only rule accuracy 0.6595 on 200 tasks from 56 sites; across 100 splits, rule minus shuffle dimensional accuracy +0.0505 (95% empirical interval +0.0249 to +0.0756). | Nonrandom structure under those task protocols, **not** universal Web dynamics or a website-independent product advantage. |
+| WP-002B | 300 trajectories, 901 real next-state transitions; dimensional accuracy rule 0.6238, nearest neighbour 0.6295, shuffle 0.5706; repeated-trajectory rather than website holdout. | Website transfer and rule superiority over strong NN comparator **not** established. |
+| Mind2Web V0.50 | On 176 task routes, exact human route 6/176; strict causal chains 4/176; available action extraction 3843/6766. | Literal human route imitation / automatic compositionality is a weak general thesis. |
+| Graph G-H1 (artifact 4.114) | Original 8.5x speed headline withdrawn; **matched** tasks: 2.822 s cold vs 2.816 s replay = **1.002x**. Replay eliminated novel decisions in this scripted setting. | Procedure reuse is credible, wall-time / real-agent savings are still unproven. |
+| Graph G-H2 / G-H4 (Product ledger 4.697) | Blind composition reported 3/3 vs 0/3 limited baselines with keyword/oracle dependence. Scripted V31 paraphrase retrieval@1 2/8 to 6/8 with fresh-instrument selection caveat. | Small bounded evidence of retrieval and procedural composition, no reliable LLM consumer or true cross-site transfer. |
+| WP-003 / WP-003B follow-up | WP-003 **MEASUREMENT_INVALID** (target leakage + invalid uncertainty estimate). Controlled follow-up, 875 rows, action-only MSE ~0.756 vs full ~0.735; incremental pre-state structure tiny and sensitive to outliers. | Do not resurrect the invalid original claim; action semantics and direct observation matter more than elaborate global dynamical prediction on tested features. |
+| Physics WP-005 / WP-007 (historical ledgers) | Held-out-site response-transfer nulls were competitive; the WP-007 report explicitly describes negligible/outlier-driven, nonsignificant effects. | No accepted general Web-physics law emerged from the original era. |
+
+**Longitudinal reading:** from the earliest WP tasks to the latest credential-free live HTTP work, SPIDER increasingly supports a practical distinction between **reusable procedures/mechanisms** and **unreliable ephemeral site state**. It has repeatedly failed to establish robust universal site-held-out dynamics and has not shown superior end-to-end agent economics. That consistency makes the procedural-inheritance product thesis worth **one decisive fair test**, not endless mechanism proliferation.
+
+**Critical guard:** early historical PASS/VALIDATED labels and later R2 audit PASS have different source-specific semantics; the joint Codex records both as provenance without pretending that source artifact tokens are equivalent to final scientific decisions.
 
 ## 3. Claims: what is truly known and what is still missing
 
@@ -103,6 +121,6 @@ Then run the **one decisive benchmark**: COLD vs INSTRUCTIONS vs RETRIEVAL vs SP
 ## 8. Answers and immediate bookkeeping
 
 - **Are new experiments in the Codex?** Yes: `SPIDER_CODEX.md` now contains 434 accepted experiment rows; the latest verified `codex: sync Research 2.0 evidence` commit is `8b0af54c...` on **10 October 2026**. Its Graph packet is incorporated into effective C-FRESHNESS history and does **not** authorize Product promotion.
-- **Does the dated file cover the entire historical program?** No. `PROGRAM_AUDIT_2026-10-10.md` covers 433 R2 experiments, not the newly synchronized 434th, and it explicitly treats the pre-2.0 archive as a separate frozen source.
+- **Does the Codex cover the historical program continuously?** Yes: original 1,401 unique source artifacts and 434 subsequent experiments are now indexed together, and the ten claim histories include historical precedents. `PROGRAM_AUDIT_2026-10-10.md` is an older 433-packet snapshot; this global audit is the newer cumulative synthesis. A merged index is not a new line-by-line scientific validation.
 - **Does a usable product exist?** A conservative kernel and supporting infrastructure exist. A causally proven economically superior, externally agent-usable product **does not yet**.
 - **What matters next?** Shipped executable carrier, non-degenerate task bank, capable real agent, then one directly monetizable marginal-cost result.
