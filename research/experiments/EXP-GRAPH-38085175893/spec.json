@@ -1,50 +1,275 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-GRAPH-38085175893",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-DELTA-REPAIR"],
+  "claim_scope_note": "The only claim addressed by this packet is C-DELTA-REPAIR (owner_lanes graph/runtime/product, registry status HYPOTHESIS, next_gate 'controlled local perturbations with repair cost and contamination bounds'). No other claim id may be advanced and no event may be emitted for C-FRESHNESS, C-PARAM-INHERIT, C-RESIDUAL-NOVELTY, C-LLM-INHERIT, C-SEMANTIC-RESOLVE, C-MEAS-VALID, C-PRODUCT-ECON or C-CROSSSITE. The result is a bounded, controlled-substrate measurement; it is not a Web-prevalence statement (SB-01) and it does not promote anything to Product Core (SB-05).",
+  "director_mandate_binding": {
+    "cycle_id": "38084662468",
+    "request_id": "2f73527189f90cc59c11f8b2",
+    "action": "PIVOT",
+    "target_claim": "C-DELTA-REPAIR",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "SUPERSEDE",
+    "legacy_comparison": "DISTINCT_EXTENSION",
+    "binding_strategic_question": "Can local delta repair, measured on a controlled credential-free multi-node substrate with an independently verifiable local-perturbation surface, repair the inherited knowledge affected by a bounded local change (blast radius 1-3: a changed field, endpoint, transport validator/token, or permission) at repair cost materially below an honest cold re-derivation under identical per-trajectory counters (http_requests + retrieval_calls + verification_calls + repair_attempts), while keeping contamination (incorrectly repaired or falsely accepted items) below a preregistered bound and reporting per-family precision/recall and false-accept, so that C-DELTA-REPAIR's registry next gate (controlled local perturbations with repair cost and contamination bounds) is actually measured rather than re-assumed?",
+    "mandate_obedience_note": "The mandate's strategic question names 'permission' as one possible bound-1-3 change; on a credential-free substrate (which this design requires so that no lane depends on an unavailable model/credential/browser, per the Runtime C-MEAS-VALID dependency) permission/authority-boundary drift is structurally unreachable. This family is therefore declared NOT_APPLICABLE (SB-02) rather than dropped silently; the three reachable families (field, endpoint, transport) and a legitimate-update control cover the mandate's discriminating core. The mandate also explicitly warns that mandates avoid re-requiring the unsatisfiable V9 literal and that the freeze-time code-binding defect lives in scripts/ outside every lane's allowed_code_roots; this design therefore binds only EXECUTE-existing artifacts or declares the check NOT_APPLICABLE honestly.",
+    "explicitly_not_authorized": [
+      "any claim event outside C-DELTA-REPAIR; no C-MEAS-VALID, C-FRESHNESS, C-PARAM-INHERIT, C-RESIDUAL-NOVELTY, C-LLM-INHERIT, C-SEMANTIC-RESOLVE, C-PRODUCT-ECON or C-CROSSSITE event",
+      "any Product Core promotion or shipped-status change",
+      "reusing the parked C-FRESHNESS four-anchor D1V route or any web anchor contact",
+      "a Web-prevalence or 'the Web' generalization (SB-01)",
+      "a claim that repair generalizes beyond the frozen blast radius 1-3 and the frozen family set (SB-06)"
+    ],
+    "agent_priors_used": [
+      "General prior, not SPIDER evidence: a deterministic substrate where the treatment is handed the exact delta collapses repair to the oracle and yields a definitional ceiling (repair==truth, contamination==0); the design must add an observable-ambiguity stratum and a legitimate-update control so precision/recall are non-trivial and both the SUPPORTS and FALSIFIES branches remain reachable.",
+      "General prior, not SPIDER evidence: a prior distributed attempt failed at the health gate (EXP-GRAPH-36106653880 MEASUREMENT_INVALID, substrate_started=false); the design must use a substrate whose prerequisites are already present in the environment rather than pip-installed at EXECUTE time.",
+      "General prior, not SPIDER evidence: if the comparator is at a floor (cold re-derivation already minimal) or the treatment is at a ceiling, no effect is identifiable regardless of sample size, so a pre-freeze non-degeneracy/dynamic-range probe must precede any benchmark spend."
+    ]
+  },
+  "parent_handoff_continuity": {
+    "parent_experiment_id": "EXP-GRAPH-37992949248",
+    "parent_handoff_path": "research/experiments/EXP-GRAPH-37992949248/handoff.json",
+    "parent_handoff_sha256": "4dd5f69fc4909b8531e1901a1dc0cef5ad3eb76f18d1c2581ba797124a51c780",
+    "disposition": "SUPERSEDE as authorization (the mandate is a PIVOT to C-DELTA-REPAIR with cognitive_reset=true); the parent handoff is retained ONLY as continuity evidence and its four-way distinction is preserved verbatim below. Its next_question is NOT the objective of this experiment.",
+    "inherited_established": [
+      "The parent established a licensed extraction result on C-FRESHNESS, not a repair result; it is irrelevant to this experiment's claim and is recorded only to prevent re-importing it as a repair fact.",
+      "A repaired measurement substrate existed: the corrected GATE-C3 predicate and dual independent stdlib extraction paths passed on credential-free GET-only anchors; this design borrows only the general governance lesson (fail-closed substrate certificate) and no anchor.",
+      "The anchor-clustered bootstrap estimator is certified capable of non-degenerate and degenerate bounds via a same-code-path positive/null control; this design borrows only the estimator-control PATTERN, not the D1V object."
+    ],
+    "inherited_rejected": [
+      "REJECTED (by the parent): constructing a >=2-anchor D1V population from the four frozen C-FRESHNESS anchors under the frozen transport signature.",
+      "REJECTED (by the parent): reading single-anchor D1V point estimates as false-accept/blindness/necessity results.",
+      "Out of scope for this packet: any C-FRESHNESS status change or anchor contact."
+    ],
+    "inherited_unknown": [
+      "Whether the parent's extraction/substrate findings generalize at all beyond its four anchors (SB-01 boundary); this experiment does not test the Web and does not import those anchors.",
+      "Whether local delta repair is a reusable multi-node capability at all: the parent did not measure repair; this experiment is the first controlled multi-node repair-cost/contamination read in R2.",
+      "The exact per-unit instrumentation cost of each counter under a real multi-node loop; the design's constants are declared in spec.counter_definitions and only ratios are gated."
+    ],
+    "inherited_do_not_assume": [
+      "Do not assume the parent's C-FRESHNESS degeneracy implies anything about repair; repair and freshness are different objects.",
+      "Do not assume the prior single-node repair result (EXP-GRAPH-36018188168) transfers to a multi-node substrate without re-measurement; its deterministic single-node ceiling (contamination 0.0, repair 1.0) is exactly the degeneracy this design must avoid.",
+      "Do not assume the prior distributed failure (EXP-GRAPH-36106653880 MEASUREMENT_INVALID) was a scientific negative about repair; it was an infrastructure failure, and its leaked default constants (contamination 0.1611, amortized 15/1) must not be cited as repair evidence.",
+      "Do not treat the mandate's word 'permission' as measured; on this credential-free substrate it is NOT_APPLICABLE (SB-02)."
+    ]
+  },
+  "question": "On a controlled, credential-free, stdlib-only multi-node substrate (N=3 node processes with distinct PIDs and distinct local registries behind one deterministic router) with an independently verifiable local-perturbation surface (blast radius 1-3), across the reachable perturbation families FIELD, ENDPOINT and TRANSPORT plus a legitimate-update control family, can a local delta-repair treatment (T-LOCAL-DELTA-REPAIR) repair inherited knowledge at an L1 counter cost (http_requests + retrieval_calls + verification_calls + repair_attempts, summed over scored episodes) materially below an honest cold full re-derivation comparator (B-COLD-REDERIVE) while holding contamination and false-accept below preregistered bounds, keeping per-family precision/recall measured (not assumed), and containing every repair to the independently verified blast radius, so that C-DELTA-REPAIR's next gate is actually measured?",
+  "hypothesis": "H-MAIN (cost). Across the frozen scored episodes, M_COST_RATIO = M_COST_L1_T-LOCAL-DELTA-REPAIR / M_COST_L1_B-COLD-REDERIVE is <= 0.65, because the treatment re-derives only the independently verified blast radius (1-3 items on one node) while B-COLD-REDERIVE re-derives the full inherited corpus (R=24 items over N=3 nodes) per episode. H-QUALITY. The treatment holds M_CONTAMINATION <= 0.05, M_FALSE_ACCEPT <= 0.05, min over families {FIELD,ENDPOINT,TRANSPORT} of M_RECALL_FAM >= 0.9, and M_FALSE_REPAIR_LEGIT <= 0.05, so the cost win is not bought by silent corruption. H-CONTAIN. M_BLAST_RADIUS_CONTAINMENT == 1.0 and M_CROSS_NODE_CONTAMINATION == 0.0: every applied mutation lies inside the independently recomputed true blast radius and no node outside it is mutated. H-NONDEGENERATE (design-level). The treatment is NOT handed the exact delta on the scored population: the surface-ambiguous stratum of FIELD, where a genuine perturbation and a legitimate update produce the same observable value-changed signal, forces the treatment to verify (cost) or abstain (UNKNOWN) or risk a false-repair/false-accept; therefore repair is not definitionally the oracle and both the SUPPORTS and FALSIFIES regions of the decision rule are arithmetically reachable (spec.pre_freeze_satisfiability_dry_run).",
+  "falsifier": "Frozen conditions, each pre-labelled. F-VALID: any measurement-validity gate fails (substrate health/identity V02; independent perturbation verification V03; counter-instrumentation consistency V04; control-channel isolation V05; raw retention V06; determinism V07; frozen-input integrity V08; credential-free loopback-only V09; treatment-liveness smoke V11) -> status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE, no claim-level statement. F-INSTR: a positive control fails (PC-DETECT-CANARY recall != 1.0; PC-COST-CANARY fails to separate B-COLD-REDERIVE from B-LOCAL-ORACLE; PC-REPAIR-SEMANTICS fixture mismatch) or a null control is insensitive (B-NOOP-STALE fails to exhibit contamination > bound on perturbed items, so the contamination metric cannot detect failure; or B-COLD-REDERIVE fails to reach contamination 0, so the metric is stuck) -> MEASUREMENT_INVALID, INCONCLUSIVE. F-COST (falsifies H-MAIN): M_COST_RATIO >= 1.0 -> LOCAL-REPAIR-NO-WORK-SAVED. F-QUALITY (falsifies H-QUALITY): M_CONTAMINATION > 0.20 OR min family M_RECALL < 0.5 -> REPAIR-LEAKY. F-CONTAIN (falsifies H-CONTAIN): M_BLAST_RADIUS_CONTAINMENT < 1.0 OR M_CROSS_NODE_CONTAMINATION > 0.0 -> REPAIR-OVERREACH, a bounded falsification of local containment on this substrate. F-MIXED: 0.65 < M_COST_RATIO < 1.0, or cost <= 0.65 with a quality/containment failure not severe enough for F-QUALITY/F-CONTAIN -> INTERMEDIATE. Every terminal branch either emits a bounded C-DELTA-REPAIR statement (SUPPORTS/FALSIFIES/MIXED, all status=COMPLETE) or is a measurement-invalid/inconclusive state that is explicitly NOT a scientific negative (SB-08).",
+  "substrate": {
+    "class": "CONTROLLED, CREDENTIAL-FREE, STDLIB-ONLY, LOOPBACK-ONLY MULTI-NODE HTTP SUBSTRATE (no Flask/PyJWT/nginx/gunicorn/SQLite dependency)",
+    "why_this_class": "The prior distributed attempt (EXP-GRAPH-36106653880) failed at health because its Flask+PyJWT+gunicorn+nginx substrate was not robustly startable in the environment. Design self-attack (SA-04) rejected any substrate requiring pip installs. The DESIGN satisfiability probe started N=3 stdlib ThreadingHTTPServer node processes plus a stdlib router on ephemeral loopback ports and observed 3 distinct node identities and successful routed reads, so this class is proven startable before freeze.",
+    "nodes": {
+      "count": 3,
+      "implementation": "one independent OS process per node, each http.server.ThreadingHTTPServer on its own loopback port, each with its own local JSON registry file under a per-node temp directory",
+      "identity_surface": "each node exposes /health -> {status, node_pid, node_id, registry_sha256}; distinct OS PIDs and distinct registry paths are the multi-node identity evidence",
+      "knowledge": "each node holds the inherited record subset assigned to it by the deterministic router key; the inherited corpus is R=24 records"
+    },
+    "router": {
+      "count": 1,
+      "implementation": "stdlib ThreadingHTTPServer that deterministically maps a request key (resource_id, and for ENDPOINT/TRANSPORT families a synthetic family key) to exactly one node",
+      "role": "the system under test sees a single base URL; the router is the only client-facing entrypoint"
+    },
+    "credential_free": "no Authorization header, no JWT, no cookie, no session, no credential of any kind is required or accepted; every scored request is an idempotent GET; no write verb is exposed to the system under test",
+    "perturbation_surface": {
+      "class": "INDEPENDENTLY VERIFIABLE LOCAL PERTURBATION SURFACE",
+      "controller": "an out-of-band perturbation controller (NOT the system under test) mutates node registry files between episodes through a control channel the system under test cannot read or write",
+      "independent_verification": "for every perturbation the controller retains the pre-mutation and post-mutation registry file sha256 for all N nodes and the node-PID map; a verifier module that shares NO localization code with the treatment recomputes the TRUE blast radius (set of (node_id, record_id, field/path)) and the TRUE post-perturbation ground-truth value set from those retained snapshots",
+      "why_this_is_stronger_than_self_report": "contamination, precision, recall, false-accept and blast-radius containment can all be scored against a ground truth the treatment did not produce and cannot see"
+    },
+    "families": {
+      "FIELD": {"blast_radius": 1, "description": "one field value on one record on one node changes; observable surface is a value mismatch on the served field.", "includes_ambiguous_stratum": true},
+      "ENDPOINT": {"blast_radius": "1-2", "description": "the response schema of one record family on one node changes (field added, removed or retyped; path-normalization changes)."},
+      "TRANSPORT": {"blast_radius": "1-3", "description": "a node changes its validator semantics: ETag emitted from a different scheme, or If-None-Match handling changes so a stale body yields 304 (false-fresh) or a fresh body is served after a 304-triggering token."},
+      "LEGIT": {"blast_radius": 1, "description": "LEGITIMATE-UPDATE CONTROL: a value changes through a pre-registered legitimate update channel; it MUST NOT be treated as requiring repair. Not a perturbation family for recall; scored for false-repair and contamination."},
+      "PERMISSION": {"status": "NOT_APPLICABLE", "reason": "SB-02: permission/authority-boundary drift requires credentialed/authenticated state, which a credential-free substrate structurally forbids. The nearest reachable analogue (a node-local capability flag governing field visibility) is a strict subset of ENDPOINT and is therefore not admitted as a distinct family. Declared, not silently dropped."}
+    },
+    "ambiguity_design": "Within FIELD, a pre-registered surface-ambiguous stratum presents the SAME observable signal (a changed value with shape-invariant schema and normal transport) for both a genuine perturbation and a LEGIT legitimate update. On this stratum the treatment cannot be definitionally certain; it must verify (counter cost), abstain UNKNOWN, or accept the risk of false-repair/false-accept. This is what keeps the treatment below the oracle ceiling and makes precision/recall non-trivial (H-NONDEGENERATE).",
+    "determinism": "a single frozen seed (38085175893) drives all layout/scheduling/ambiguity assignment via random.Random(seed); Python process-randomized hash() is never used as a seed or layout key; registry files are canonical JSON with sorted keys",
+    "environment": "CPython 3.12 stdlib only; Python 3.12.15 present in the design environment; no external network, no model, no browser, no credential, no pip install at EXECUTE time (V09)"
+  },
+  "treatment": {
+    "id": "T-LOCAL-DELTA-REPAIR",
+    "description": "Maintain per-node inherited knowledge plus a verifier. For each scored episode (a query whose served value fails verification), localize the affected node and key deterministically from the router key; re-fetch ONLY the affected node's affected record(s) within the detected scope; re-derive the delta; apply a MINIMAL mutation to the affected local registry; re-verify; mark repaired on success. On surface-ambiguous observations the treatment may abstain (UNKNOWN) and bill a bounded cold re-derivation fallback for that single item. It never mutates a node outside the independently recomputed blast radius.",
+    "counter_vector": ["http_requests", "retrieval_calls", "verification_calls", "repair_attempts"],
+    "liveness_requirement": "V11 treatment-liveness smoke test: before scoring, the treatment must execute end-to-end on one canary episode and produce a verifier-consistent repaired state; a structurally non-executable treatment is a DESIGN/EXECUTE failure (MEASUREMENT_INVALID), never a scientific negative."
+  },
+  "counter_definitions": {
+    "http_requests": "each outbound HTTP request the system under test issues to the substrate (router or node) during a scored episode, counted at the client boundary.",
+    "retrieval_calls": "each distinct lookup into inherited knowledge (a local-registry read or a cross-node knowledge retrieval) during a scored episode.",
+    "verification_calls": "each independent verification pass over a candidate reconciled value (a re-fetch-and-compare or a verifier-oracle invocation) during a scored episode.",
+    "repair_attempts": "each mutation/apply attempt to a local registry (including rejected or rolled-back attempts) during a scored episode.",
+    "aggregation": "M_COST_VECTOR_X = element-wise sum of the four counters over all scored episodes for arm X; M_COST_L1_X = sum of the four components; M_COST_RATIO = M_COST_L1_T-LOCAL-DELTA-REPAIR / M_COST_L1_B-COLD-REDERIVE.",
+    "instrumentation_consistency": "client-boundary counters are cross-checked against raw per-request logs (V04); any discrepancy is terminal MEASUREMENT_INVALID."
+  },
+  "baselines": {
+    "note": "Frozen identities shared verbatim with EXECUTE/AUDIT/DIRECTOR. All arms share the identical counter instrumentation and the identical scored episode set.",
+    "B-COLD-REDERIVE": {"id": "B-COLD-REDERIVE", "description": "Honest cold full re-derivation: for each scored episode, re-derive the full inherited corpus (all N nodes, all R records) from scratch with fresh verification and no reuse of inherited knowledge.", "role": "primary cost comparator for M_COST_RATIO and the honest work-avoided reference."},
+    "B-NOOP-STALE": {"id": "B-NOOP-STALE", "description": "Null comparator: serve inherited knowledge unchanged, with no detection and no repair.", "role": "proves the contamination/false-accept metrics can detect failure (NC-INSTRUMENT-SENSITIVITY)."},
+    "B-FULL-REFRESH": {"id": "B-FULL-REFRESH", "description": "Cost-ceiling comparator: on the first detected change in an episode, refresh the entire corpus.", "role": "establishes the cost ceiling (M_COST_RATIO approaching 1.0) and makes the F-COST/FALSIFIES branch reachable."},
+    "B-LOCAL-ORACLE": {"id": "B-LOCAL-ORACLE", "description": "Definitional floor: given the true delta, apply only the minimal mutations to the affected registry.", "role": "establishes the cost floor; used by PC-COST-CANARY to prove the ceiling is not below the floor and the counter instrument has dynamic range. NOT a scientific arm."}
+  },
+  "positive_control": {
+    "PC-DETECT-CANARY": {"id": "PC-DETECT-CANARY", "requirement": "On a pre-registered fully-observable FIELD canary episode, T-LOCAL-DELTA-REPAIR must detect and repair the perturbation so that M_RECALL_FIELD on the canary == 1.0 and M_CANARY_PASS == true.", "why_it_is_a_real_control": "A zero-recall treatment cannot be distinguished from an incapable instrument; the canary pins the instrument's ability to fire.", "metric_ids": ["M_CANARY_PASS", "M_RECALL_FIELD"]},
+    "PC-COST-CANARY": {"id": "PC-COST-CANARY", "requirement": "On the same episode, M_COST_L1_B-COLD-REDERIVE must be strictly greater than M_COST_L1_B-LOCAL-ORACLE; M_COST_SEPARATION_PASS == true.", "why_it_is_a_real_control": "Proves the counter instrument separates full-corpus work from minimal work; without it a flat cost_ratio cannot be interpreted.", "metric_ids": ["M_COST_SEPARATION_PASS", "M_COST_L1_B-COLD-REDERIVE", "M_COST_L1_B-LOCAL-ORACLE"]},
+    "PC-REPAIR-SEMANTICS": {"id": "PC-REPAIR-SEMANTICS", "requirement": "On a synthetic fixture where the treatment is handed the exact delta, its output registry state must be byte-equal (canonical JSON) to the independently computed ground-truth state; M_REPAIR_FIXTURE_PASS == true.", "why_it_is_a_real_control": "A treatment that cannot even reproduce truth given the delta has a defective apply path; failure is a measurement failure, not a negative.", "metric_ids": ["M_REPAIR_FIXTURE_PASS"]}
+  },
+  "null_control": {
+    "NC-NOOP-NO-PERTURBATION": {"id": "NC-NOOP-NO-PERTURBATION", "requirement": "On a no-perturbation replicate, M_CONTAMINATION == 0, M_FALSE_ACCEPT == 0 and M_FALSE_REPAIR == 0 (the treatment makes no spurious mutations).", "why": "A treatment that mutates without cause corrupts the substrate."},
+    "NC-LEGIT-NO-REPAIR": {"id": "NC-LEGIT-NO-REPAIR", "requirement": "On the LEGIT family, M_FALSE_REPAIR_LEGIT <= 0.05: legitimate updates must not be classified as perturbations requiring repair.", "why": "Distinguishes repair from destructive over-refresh."},
+    "NC-INSTRUMENT-SENSITIVITY": {"id": "NC-INSTRUMENT-SENSITIVITY", "requirement": "On perturbed items B-NOOP-STALE must exhibit M_CONTAMINATION > the contamination bound (the metric detects failure), while B-COLD-REDERIVE must reach M_CONTAMINATION == 0 on the same items (the metric is not stuck).", "why": "A metric that cannot read both failure and success controls nothing."},
+    "NC-VERIFIER-INDEPENDENCE": {"id": "NC-VERIFIER-INDEPENDENCE", "requirement": "The independently recomputed true blast radius and ground-truth value set must exactly match the perturbation controller's retained pre/post registry snapshots; the verifier shares no localization code path with the treatment; any mismatch is terminal MEASUREMENT_INVALID.", "why": "Self-reported containment is not evidence."},
+    "NC-CONTAMINATION-BYTE-EXACT": {"id": "NC-CONTAMINATION-BYTE-EXACT", "requirement": "Contamination, precision, recall and false-accept are computed by byte-exact comparison to the independently recomputed ground truth, never from the treatment's self-report.", "why": "Prevents a treatment from manufacturing its own success criterion."}
+  },
+  "metrics": {
+    "M_COST_RATIO": "M_COST_L1_T-LOCAL-DELTA-REPAIR / M_COST_L1_B-COLD-REDERIVE (primary cost metric; lower is better).",
+    "M_COST_L1_T-LOCAL-DELTA-REPAIR": "sum of the four frozen counters for the treatment.",
+    "M_COST_L1_B-COLD-REDERIVE": "sum of the four frozen counters for cold full re-derivation.",
+    "M_COST_L1_B-LOCAL-ORACLE": "sum of the four frozen counters for the definitional floor (dynamic-range reference).",
+    "M_CONTAMINATION": "fraction of all served answers (perturbed + LEGIT + no-perturbation items) that are byte-inexact versus independently recomputed ground truth.",
+    "M_FALSE_ACCEPT": "fraction of scored items where the treatment serves or preserves a stale/incorrect value while claiming a consistent/repaired state.",
+    "M_PRECISION_FIELD": "precision of the treatment's repair detections on the FIELD family.",
+    "M_PRECISION_ENDPOINT": "precision of the treatment's repair detections on the ENDPOINT family.",
+    "M_PRECISION_TRANSPORT": "precision of the treatment's repair detections on the TRANSPORT family.",
+    "M_RECALL_FIELD": "recall on the FIELD family (genuine perturbations repaired / genuine perturbations).",
+    "M_RECALL_ENDPOINT": "recall on the ENDPOINT family.",
+    "M_RECALL_TRANSPORT": "recall on the TRANSPORT family.",
+    "M_FALSE_REPAIR": "fraction of unperturbed items mutated by the treatment.",
+    "M_FALSE_REPAIR_LEGIT": "fraction of LEGIT (legitimate-update) items mutated by the treatment.",
+    "M_BLAST_RADIUS_CONTAINMENT": "fraction of perturbations whose applied mutation set is a subset of the independently recomputed true blast radius.",
+    "M_CROSS_NODE_CONTAMINATION": "fraction of perturbed episodes in which a node outside the true blast radius is mutated or serves a byte-inexact value attributable to the perturbation.",
+    "M_UNKNOWN_RATE": "fraction of episodes where the treatment abstains (UNKNOWN) instead of repairing.",
+    "M_CANARY_PASS": "PC-DETECT-CANARY boolean.",
+    "M_COST_SEPARATION_PASS": "PC-COST-CANARY boolean.",
+    "M_REPAIR_FIXTURE_PASS": "PC-REPAIR-SEMANTICS boolean."
+  },
+  "decision_rule": {
+    "ordered": [
+      {"order": 1, "id": "GATE-V", "condition": "all blocking measurement-validity checks pass (V02-V09, V11) and all three positive controls pass and all null controls are sensitive", "branch": "MEASUREMENT_INVALID / INCONCLUSIVE if any fails", "consequence": "no C-DELTA-REPAIR scientific statement; operational failure is not falsification (SB-08)"},
+      {"order": 2, "id": "SUPPORTS", "condition": "M_COST_RATIO <= 0.65 AND M_CONTAMINATION <= 0.05 AND M_FALSE_ACCEPT <= 0.05 AND min(M_RECALL_FIELD, M_RECALL_ENDPOINT, M_RECALL_TRANSPORT) >= 0.9 AND M_FALSE_REPAIR_LEGIT <= 0.05 AND M_BLAST_RADIUS_CONTAINMENT == 1.0 AND M_CROSS_NODE_CONTAMINATION == 0.0", "branch": "SUPPORTS", "consequence": "bounded local-repair capability measured on the controlled substrate; C-DELTA-REPAIR's next gate is measured (status remains HYPOTHESIS, DIRECTOR decides any change)"},
+      {"order": 3, "id": "FALSIFIES-COST", "condition": "M_COST_RATIO >= 1.0", "branch": "FALSIFIES / LOCAL-REPAIR-NO-WORK-SAVED", "consequence": "local repair saves no work versus honest cold re-derivation on this substrate"},
+      {"order": 4, "id": "FALSIFIES-QUALITY", "condition": "M_CONTAMINATION > 0.20 OR min(M_RECALL_FIELD, M_RECALL_ENDPOINT, M_RECALL_TRANSPORT) < 0.5", "branch": "FALSIFIES / REPAIR-LEAKY", "consequence": "cost work is not reliable repair"},
+      {"order": 5, "id": "FALSIFIES-CONTAIN", "condition": "M_BLAST_RADIUS_CONTAINMENT < 1.0 OR M_CROSS_NODE_CONTAMINATION > 0.0", "branch": "FALSIFIES / REPAIR-OVERREACH", "consequence": "repair is not locally contained on this substrate"},
+      {"order": 6, "id": "MIXED", "condition": "otherwise (0.65 < M_COST_RATIO < 1.0, OR M_COST_RATIO <= 0.65 with a quality/containment shortfall not severe enough for FALSIFIES-QUALITY/FALSIFIES-CONTAIN)", "branch": "MIXED", "consequence": "partial save or partial reliability; bounded report, no capability claim"}
+    ],
+    "branch_reachability": "Proven reachable pre-freeze in spec.pre_freeze_satisfiability_dry_run: SUPPORTS (cost_ratio in [0.0625,0.1458] with clean quality), FALSIFIES-COST (a treatment that over-re-derives drives cost_ratio to ~1.0; B-FULL-REFRESH realises it), FALSIFIES-QUALITY (a leaky arm reaches contamination 0.233 and recall 0.5), FALSIFIES-CONTAIN (any out-of-radius mutation), and MIXED (cost win with quality shortfall, e.g. contamination 0.233 / recall 0.5 at cost_ratio 0.146). No branch is empty."
+  },
+  "pre_freeze_satisfiability_dry_run": {
+    "status": "EXECUTED BY DESIGN on a stdlib synthetic probe only; NO substrate-under-test episode, NO confirmatory measurement, NO web, NO model, NO credential. It exercises the same counter arithmetic, decision thresholds and dynamic-range logic EXECUTE will freeze.",
+    "probe_artifact": "/tmp/opencode/probe_38085175893.py (design-local; not a scored artifact)",
+    "component_A_substrate_feasibility": {
+      "result": "PASS",
+      "detail": "The probe started N=3 independent stdlib ThreadingHTTPServer node processes plus one stdlib deterministic router on ephemeral loopback ports; 12 routed reads returned 3 distinct node identities (pids 40000,40001,40002) and routed_ok=true; stdlib_only=true. No Flask/PyJWT/nginx/gunicorn/SQLite was required. This disproves the /tmp scratch-directory misconception for the new experiment before EXECUTE exists and removes the EXP-GRAPH-36106653880 health-gate failure mode."
+    },
+    "component_B_branch_arithmetic": {
+      "result": "PASS",
+      "detail": "With R=24 records over N=3 nodes, blast radius b in [1,3] and the frozen counter aggregation, the treatment cost_ratio range is [0.0625,0.1458] (oracle floor 0.0625; B-FULL-REFRESH ceiling 1.0). SUPPORTS (<=0.65) is reachable; FALSIFIES-COST (>=1.0) is reachable via a full re-derivation per episode; MIXED is reachable (cost_ratio 0.146 with contamination 0.233 / recall 0.5). The SUPPORTS ceiling 0.65 is strictly above the floor 0.0625, so the support threshold is not below the definitional floor and not a tautological ceiling."
+    },
+    "component_C_bounds_non_vacuity": {
+      "result": "PASS",
+      "detail": "Under the frozen metric definitions: a reachable PASS case gives M_CONTAMINATION 0.0167 (<=0.05), M_FALSE_ACCEPT 0.0278 (<=0.05), M_RECALL_FIELD 0.917 (>=0.9); a reachable FAIL case gives M_CONTAMINATION 0.2333 (>0.05), M_FALSE_ACCEPT 0.1667 (>0.05), M_RECALL_FIELD 0.5 (<0.9). Both regions of every bound are arithmetically reachable, so the bounds are non-vacuous and discriminating."
+    },
+    "branch_reachability_matrix": {
+      "GATE-V_MEASUREMENT_INVALID": "reachable (substrate start failure, counter mismatch, verifier mismatch, control-channel leak, liveness failure)",
+      "SUPPORTS": "reachable (cost_ratio ~0.06-0.15 with clean quality and perfect containment)",
+      "FALSIFIES-COST": "reachable (B-FULL-REFRESH cost_ratio ~1.0; or a treatment that re-derives the full corpus per episode)",
+      "FALSIFIES-QUALITY": "reachable (leaky arm: contamination 0.233, recall 0.5)",
+      "FALSIFIES-CONTAIN": "reachable (any mutation outside the true blast radius)",
+      "MIXED": "reachable (cost win with quality shortfall; or cost in (0.65,1.0))"
+    },
+    "estimator_control_fixture": {
+      "note": "No bootstrap estimator is used by this experiment; the analogous non-vacuity guarantee is the dynamic-range control PC-COST-CANARY (B-COLD-REDERIVE strictly above B-LOCAL-ORACLE) plus the contamination PASS/FAIL witnesses above. Declared explicitly so AUDIT does not look for an unused estimator control."
+    },
+    "self_attack_findings": [
+      {"id": "SA-01", "severity": "BLOCKING", "finding": "The first-drafted decision rule's MIXED reachability check ignored the 'cost win but quality fails' subcase and reported MIXED unreachable.", "resolution": "MIXED redefined as 'otherwise', explicitly including cost_ratio<=0.65 with a quality/containment shortfall; a witness (cost_ratio 0.146, contamination 0.233, recall 0.5) is recorded; the probe was corrected and re-run."},
+      {"id": "SA-02", "severity": "MAJOR", "finding": "The mandate names 'permission' as a blast-radius-1-3 change, but permission drift is structurally unreachable on a credential-free substrate.", "resolution": "PERMISSION declared NOT_APPLICABLE with reason SB-02; the nearest analogue (node-local capability flag governing field visibility) is a strict subset of ENDPOINT, so it is not admitted as a distinct family. No silent drop."},
+      {"id": "SA-03", "severity": "BLOCKING", "finding": "A deterministic substrate that hands the treatment the exact delta collapses repair to the oracle (repair==truth, contamination==0), reproducing the EXP-GRAPH-36018188168 single-node definitional ceiling and making precision/recall trivial.", "resolution": "Added a pre-registered surface-ambiguous FIELD stratum (genuine perturbation and legitimate update share the same observably changed signal) and a LEGIT control family; the treatment must verify, abstain or risk error, so it cannot be at the oracle ceiling and precision/recall are non-trivial."},
+      {"id": "SA-04", "severity": "BLOCKING", "finding": "Any substrate requiring pip-installed Flask/PyJWT/gunicorn/nginx reproduces the EXP-GRAPH-36106653880 MEASUREMENT_INVALID health-gate failure.", "resolution": "Design fixed to stdlib-only loopback HTTP node processes; a pre-freeze probe started 3 nodes + router successfully. The 3-node/1-router design is feasible without any install."},
+      {"id": "SA-05", "severity": "MAJOR", "finding": "Contamination/containment scored from treatment self-report would let the treatment define its own success.", "resolution": "Added NC-CONTAMINATION-BYTE-EXACT and NC-VERIFIER-INDEPENDENCE: an independent verifier recomputes ground truth and blast radius from retained pre/post registry snapshots by byte-exact comparison."},
+      {"id": "SA-06", "severity": "MINOR", "finding": "The NUMERIC cost threshold 0.65 could have been set below the definitional floor, making SUPPORTS tautological, or above the ceiling, making it unreachable.", "resolution": "The probe fixes floor 0.0625, ceiling 1.0 and threshold 0.65 strictly inside the open interval; both SUPPORTS and FALSIFIES-COST are reachable."},
+      {"id": "SA-07", "severity": "MINOR", "finding": "freeze_artifacts could not bind the EXECUTE-written runner/substrate/verifier code because those files do not exist at freeze and the DESIGN write scope forbids creating them.", "resolution": "freeze_artifacts declared [] with freeze_artifacts_bound=NOT_APPLICABLE and the exact reason; the planned EXECUTE code files and their required roles are enumerated in spec.code_binding and MUST be hashed into result.json.artifacts (role 'code') and provenance.json."}
+    ],
+    "no_outcome_claim": "The probe measures no repair behaviour of the real treatment and cannot pre-empt the confirmatory objects (cost ratio, contamination, precision/recall, containment). It only proves feasibility and arithmetic reachability."
+  },
+  "measurement_validity": [
+    {"id": "V01-PRE-REGISTRATION-NO-DESIGN-OUTCOME", "blocking": true, "requirement": "This spec and prereg.md are written before any substrate episode. DESIGN performed no confirmatory measurement: no substrate-under-test perturbation, no treatment evaluation. The only DESIGN computation is the synthetic stdlib satisfiability probe.", "why": "Research 2.0 packet contract and architecture section 5."},
+    {"id": "V02-SUBSTRATE-HEALTH-AND-IDENTITY", "blocking": true, "requirement": "At EXECUTE start, verify N=3 node processes are alive with distinct OS PIDs and distinct registry paths, and the router health endpoint returns a routed read; any failure is terminal MEASUREMENT_INVALID (not a scientific negative).", "why": "The prior distributed failure was a health-gate infrastructure failure; fail closed, not open."},
+    {"id": "V03-INDEPENDENT-PERTURBATION-VERIFICATION", "blocking": true, "requirement": "Retain pre/post registry sha256 for all nodes and independently recompute the true blast radius and ground-truth value set; a verifier/treatment code-path mismatch is terminal MEASUREMENT_INVALID.", "why": "Containment and contamination must rest on independently recomputed ground truth."},
+    {"id": "V04-COUNTER-INSTRUMENTATION-CONSISTENCY", "blocking": true, "requirement": "Client-boundary counters are cross-checked against raw per-request logs; any discrepancy is terminal MEASUREMENT_INVALID.", "why": "Cost is the primary metric; its instrument must be internally consistent."},
+    {"id": "V05-CONTROL-CHANNEL-ISOLATION", "blocking": true, "requirement": "The system under test cannot read or write the perturbation controller's ledger or control channel (verified by isolation attestation); the treatment never receives the true delta on the scored population.", "why": "Otherwise the treatment could read the ground truth and collapse to the oracle."},
+    {"id": "V06-RAW-EVIDENCE-RETENTION", "blocking": true, "requirement": "Retain all episode request/response records, per-node registry snapshots (pre/post every perturbation), counter logs and the independent ground-truth recomputation; the whole measurement must be re-analyzable without re-running.", "why": "The prior distributed failure was unrecoverable because evidence was not retained."},
+    {"id": "V07-DETERMINISM", "blocking": true, "requirement": "A single frozen seed (38085175893) drives all layout/scheduling/ambiguity assignment via random.Random(seed); Python process-randomized hash() is never used as a seed or layout key.", "why": "Master prompt determinism."},
+    {"id": "V08-FROZEN-INPUT-RE-VERIFICATION", "blocking": true, "requirement": "Re-verify request.json/spec.json/prereg.md against freeze.json sha256 before the first episode and after the last; hash every producer source file into result.json.artifacts (role 'code') and provenance.json.", "why": "Freeze integrity and code provenance."},
+    {"id": "V09-CREDENTIAL-FREE-LOOPBACK-ONLY", "blocking": true, "requirement": "The substrate is local loopback only; every scored request is an idempotent GET; no credential, token, cookie, session, browser or external network is used; no write verb is exposed to the system under test. Violation is terminal MEASUREMENT_INVALID.", "why": "Keeps the substrate reproducible and independent of unavailable external services/credentials."},
+    {"id": "V10-BOUND-NON-VACUITY", "blocking": true, "requirement": "Each gated bound must have both a reachable PASS and a reachable FAIL region, documented in spec.pre_freeze_satisfiability_dry_run; the support threshold must lie strictly above the definitional floor and strictly below the full-refresh ceiling.", "why": "Prevents a tautological or unreachable decision."},
+    {"id": "V11-TREATMENT-LIVENESS-SMOKE", "blocking": true, "requirement": "Before scoring, the treatment must complete one canary episode end-to-end with a verifier-consistent repaired state.", "why": "A structurally non-executable treatment is a DESIGN/EXECUTE failure, not a scientific negative."},
+    {"id": "V12-LEGACY-DISTINCTNESS", "blocking": false, "requirement": "Record explicitly that this experiment is a DISTINCT_EXTENSION from the pre-2.0 repair-round artifacts (which repaired rejected experiment runs / orchestration, not inherited Web knowledge) and from the prior R2 single-node and distributed delta-repair packets (different measured object: multi-node repair cost + contamination under controlled local perturbations).", "why": "Prevents re-running an identical or already-closed design."}
+  ],
+  "code_binding": {
+    "freeze_time_existing_dependencies": "NONE mutable and interpretation-critical. The design depends only on immutable accepted evidence (parent packet, Codex claim state, frozen request) referenced by path, and on EXECUTE-authored code which does not yet exist at freeze time.",
+    "planned_execute_code_files_must_be_hashed": [
+      {"role": "code", "planned": "research/graph/delta_repair/execute_delta_repair_multinode_38085175893.py", "purpose": "episode runner, treatment, comparators, counter instrumentation"},
+      {"role": "code", "planned": "research/graph/delta_repair/multinode_node_38085175893.py", "purpose": "stdlib node process with per-node registry"},
+      {"role": "code", "planned": "research/graph/delta_repair/multinode_router_38085175893.py", "purpose": "stdlib deterministic router"},
+      {"role": "code", "planned": "research/graph/delta_repair/perturbation_controller_38085175893.py", "purpose": "out-of-band perturbation controller and independent verifier"},
+      {"role": "fixture", "planned": "research/graph/delta_repair/fixtures_38085175893.py", "purpose": "synthetic canary and PC-REPAIR-SEMANTICS fixtures"}
+    ],
+    "requirement": "EXECUTE MUST hash each produced file (sha256) into result.json.artifacts with role 'code' or 'fixture' and into provenance.json; the independent auditor recomputes these hashes. Because these files do not exist at freeze time and scripts/check_scope.py's DESIGN scope forbids DESIGN from creating them, they cannot be listed in spec.freeze_artifacts (the freezer rejects non-existent paths). This is the declared freeze-time code-binding limitation; those files are mutable for the transaction and MUST be bound at EXECUTE.",
+    "at_execute_also_reuse_unchanged": "The frozen request.json/spec.json/prereg.md/design_review.json and the frozen seed; no external data."
+  },
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every ordered branch is reachable and non-empty, proven in spec.pre_freeze_satisfiability_dry_run: SUPPORTS (cost_ratio 0.0625-0.1458 with clean quality), FALSIFIES-COST (>=1.0, realised by B-FULL-REFRESH), FALSIFIES-QUALITY (contamination 0.233 / recall 0.5), FALSIFIES-CONTAIN (out-of-radius mutation), MIXED (cost win with quality shortfall, witness cost_ratio 0.146 / contamination 0.233 / recall 0.5). GATE-V is reachable via the enumerated validity failures. The support threshold 0.65 lies strictly above the definitional floor 0.0625 and below the ceiling 1.0, so SUPPORTS is neither tautological nor unreachable. Self-attack SA-01 fixed the earlier MIXED mis-specification.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38085175893/spec.json#pre_freeze_satisfiability_dry_run", "research/experiments/EXP-GRAPH-38085175893/spec.json#decision_rule"]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All prerequisites exist now and are local: CPython 3.12 stdlib only (no Flask/PyJWT/nginx/gunicorn/SQLite/pip install), loopback networking, and enough ephemeral ports. The DESIGN probe already started N=3 stdlib ThreadingHTTPServer nodes plus a router and read through them successfully, so the substrate class is proven startable before freeze. No external network, model, credential, browser, task bank or dataset is required. The treatment-liveness smoke test (V11) is a pre-scoring smoke, not a deferred prerequisite for the design's satisfiability.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38085175893/spec.json#pre_freeze_satisfiability_dry_run.component_A_substrate_feasibility", "research/experiments/EXP-GRAPH-36106653880/result.json"]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The four arms are deterministic, distinguishable program behaviours with known signatures under the identical counter instrumentation: B-LOCAL-ORACLE touches only the minimal mutation set (floor 0.0625); T-LOCAL-DELTA-REPAIR adds bounded fetch/verify for blast radius 1-3; B-COLD-REDERIVE re-derives the full R=24 / N=3 corpus per episode; B-FULL-REFRESH is the cost ceiling (~1.0). PC-COST-CANARY proves the instrument separates floor from cold re-derivation. There is no guaranteed ceiling/floor collapse of the compared pair: the treatment is deliberately kept below the oracle by the surface-ambiguous stratum and the LEGIT control, so repair is not definitionally the ground truth. The comparator pair (treatment vs B-COLD-REDERIVE) is the mandated object and is identifiable.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38085175893/spec.json#baselines", "research/experiments/EXP-GRAPH-38085175893/spec.json#pre_freeze_satisfiability_dry_run.component_B_branch_arithmetic", "research/experiments/EXP-GRAPH-36018188168/result.json"]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control has a pre-declared firing/abstaining outcome and pre-declared pass/fail arithmetic computed by the SAME treatment/counter code that scores the question: PC-DETECT-CANARY requires canary recall == 1.0; PC-COST-CANARY requires cold > oracle strictly; PC-REPAIR-SEMANTICS requires byte-equal output on a given-delta fixture; NC-NOOP-NO-PERTURBATION requires contamination/false-repair == 0; NC-LEGIT-NO-REPAIR requires false-repair <= 0.05; NC-INSTRUMENT-SENSITIVITY requires B-NOOP-STALE contamination > bound AND B-COLD-REDERIVE contamination == 0 on the same items; NC-VERIFIER-INDEPENDENCE requires an exact independent recompute. Both PASS and FAIL regions of every bound are arithmetically reachable (component_C). The controls are not tautological: they operate on canary/legitimate/synthetic fixtures with pre-declared expectations.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38085175893/spec.json#positive_control", "research/experiments/EXP-GRAPH-38085175893/spec.json#null_control", "research/experiments/EXP-GRAPH-38085175893/spec.json#pre_freeze_satisfiability_dry_run.component_C_bounds_non_vacuity"]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The decision-relevant treatment T-LOCAL-DELTA-REPAIR is a concrete, executable program: read the router-keyed node/record, re-fetch the affected record(s), re-derive, apply a minimal registry mutation, re-verify. Design proven satisfiable: the probe already demonstrated the substrate the treatment needs (3 stdlib nodes + router + routed reads) and the arithmetic shows the treatment can land in all decision regions. V11 mandates a pre-scoring liveness smoke test; a structurally non-executable treatment is a DESIGN/EXECUTE failure (MEASUREMENT_INVALID), not a scientific result. No branch of the decision rule is structurally empty for the treatment.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38085175893/spec.json#treatment", "research/experiments/EXP-GRAPH-38085175893/spec.json#pre_freeze_satisfiability_dry_run.component_A_substrate_feasibility", "research/experiments/EXP-GRAPH-38085175893/spec.json#measurement_validity"]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "No freeze-time-existing mutable local code/data/task-bank/fixture dependency exists. The only mutable local dependencies are the EXECUTE-authored producer files (episode runner, node, router, perturbation controller/verifier, fixtures), which do not exist yet because the DESIGN write scope (scripts/check_scope.py stage 'design') allows only spec.json/prereg.md/design_review.json/failure.json/model_design.json and forbids creating code. scripts/freeze_experiment.py.safe_repo_file rejects non-existent paths, so those files cannot be listed in freeze_artifacts; their identity is instead bound at EXECUTE by sha256 into result.json.artifacts (role 'code'/'fixture') and provenance.json, as enumerated in spec.code_binding. The pre-existing static artifacts this design relies on (the frozen request and the immutable accepted parent packet / Codex claim state) are immutable and referenced by path, not mutable local fixtures. This is the same honest freeze-time code-binding limitation the Director's mandate acknowledges (the defect lives in scripts/, outside every lane's allowed_code_roots), and it is declared rather than hidden.",
+      "evidence_refs": ["scripts/freeze_experiment.py", "scripts/check_scope.py", "research/experiments/EXP-GRAPH-38085175893/spec.json#code_binding"]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [],
+  "legacy_distinctness": {
+    "pre_2_0_archive": "The indexed pre-2.0 graph repair artifacts (results/graph/cycle3_REPAIR_ROUND1_recount.json sha256 f2239dd8dfb2f4744895bb9c3a6495646cfab31c; results/graph/fused_REPAIR_ROUND1_recount.json sha256 c7a052ea28929a9a62813b230480118d209eccde; reports/graph/robustness_repair_round1.md sha256 032c11f915eb4b235f2cba0fd907f9a81a0122b7; reports/graph/procedure_compilation_p0.md sha256 12eac599c2e907e442f74d48625bf404b259a74f) concern repairing REJECTED EXPERIMENT RUNS / orchestration and procedure compilation, not local delta repair of inherited Web knowledge under controlled perturbations. This experiment is therefore a DISTINCT_EXTENSION, matching the Director's comparative_reasoning and the mandate's legacy classification.",
+    "r2_predecessors": "EXP-GRAPH-35952148696 (synthetic single-resource blast radius 1; inherited synthetic ceiling) and EXP-GRAPH-36018188168 (single-node deterministic substrate; contamination 0.0, repair 1.0 definitional ceiling) measured single-node repair; EXP-GRAPH-36106653880 (distributed) was MEASUREMENT_INVALID at the health gate. This experiment changes the measured object to a MULTI-NODE repair-cost and contamination-bound read on an independently verifiable perturbation surface, avoiding both the single-node definitional ceiling (via the surface-ambiguous stratum and LEGIT control) and the prior health-gate failure (via a stdlib-only substrate proven startable pre-freeze).",
+    "not_a_rerun": "It does not repeat the SPIDER_CODEX_ULTIME repair-round recounts, does not contact web anchors, does not re-litigate C-FRESHNESS D1V, and does not import the failed distributed packet's leaked defaults."
+  },
+  "scope_boundaries": {
+    "SB-01": "Every result is bounded to the frozen controlled substrate (N=3 stdlib nodes, R=24 records, blast radius 1-3, the frozen family set, the single frozen seed). No Web-prevalence or 'the Web' statement.",
+    "SB-02": "PERMISSION-family repairability is NOT_APPLICABLE on this credential-free substrate; the mandate's 'permission' clause is declared unreachable, not silently dropped.",
+    "SB-03": "No external network, model, credential, browser or task bank is used; all evidence is local.",
+    "SB-04": "Only C-DELTA-REPAIR is addressed; no other claim event may be emitted.",
+    "SB-05": "No Product Core promotion and no shipped-status change; only the DIRECTOR may change claim status.",
+    "SB-06": "No claim that repair generalizes beyond blast radius 1-3 or beyond the frozen families.",
+    "SB-07": "The substrate is synthetic/controlled; this is not real-Web verification.",
+    "SB-08": "MEASUREMENT_INVALID/INCONCLUSIVE is an operational state, never a scientific falsification of C-DELTA-REPAIR.",
+    "SB-09": "DISTINCT_EXTENSION from the pre-2.0 repair-round artifacts and the prior R2 single-node/distributed packets.",
+    "SB-10": "Single environment and single seed; no amortization-over-population or prevalence claim."
+  },
+  "product_consequence_positive": "If SUPPORTS: C-DELTA-REPAIR's registry next gate ('controlled local perturbations with repair cost and contamination bounds') is measured on a multi-node substrate for the first time in R2, giving the Product/Runtime lanes a bounded, auditable work-avoided ratio and a contamination/false-accept envelope for local delta repair. This is decision-relevant input to whether delta-repair instrumentation is worth building at all. It does NOT by itself authorize any Product Core promotion, shipping, or status change (SB-05); the DIRECTOR decides bounded status movement from the frozen packet plus independent audit.",
+  "product_consequence_negative": "If FALSIFIES or MIXED: the product decision is to NOT invest in local-only delta repair as currently framed and to prefer honest cold re-derivation or a guard-first approach, with the specific failure mode recorded (no work saved / leaky / overreach). C-DELTA-REPAIR remains HYPOTHESIS (or the DIRECTOR records the bounded negative); no capability claim is made. A negative is first-class and prevents spending product effort on an unmeasured capability.",
+  "estimated_cost": "Local, credential-free, no model calls and no external network. Bounded budget: N=3 stdlib node processes + 1 router + 1 perturbation controller; R=24 records; a scored suite of at most 200 episodes across families (FIELD, ENDPOINT, TRANSPORT, LEGIT) plus canary/null/fixture controls; total counter L1 across all arms well under 4000 units; wall-clock minutes on the runner; retention of all raw records and registry snapshots. No tokens, no browser, no retrieval service.",
+  "expected_information_gain": "HIGH. There is currently no R2 measurement of multi-node local delta-repair cost and contamination under an independently verifiable perturbation surface; C-DELTA-REPAIR's next gate has been re-assumed rather than measured since EXP-GRAPH-36018188168 (single-node, definitionally degenerate) and EXP-GRAPH-36106653880 (MEASUREMENT_INVALID). This experiment either licenses a bounded measured repair capability or closes it with a specific failure mode, changing the build/no-build decision for delta repair."
 }
