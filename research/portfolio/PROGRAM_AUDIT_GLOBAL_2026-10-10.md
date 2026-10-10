@@ -78,7 +78,7 @@ The original research is not discarded and its results are not counted as a new 
 
 ## 5. Historical pre-2.0 lessons — continuity, NOT a newly certified re-audit
 
-The archived Codex is frozen and deliberately **separate** from the 434 Research 2.0 packet ledger. Preserve it; do not conflate its original science blobs, run memories or failed workflows with canonical R2 experiments.
+The original Codex source is frozen as **historical evidence within one cumulative scientific record**. Its 1,401 individually indexed evidence artefacts and the 434 subsequent canonical experiment packets are joined through `SPIDER_CODEX.md`, `codex/index.json` and `codex/claim_state.json`. They retain distinct provenance and incomparable counting units, but **not separate research programs**. Do not confuse archived source blobs or historical run memories with independent R2 experiment packets.
 
 Earlier project-level work reported three relevant failure patterns, which require line-level cross-checks against the large archive before being treated as revalidated:
 
@@ -86,7 +86,7 @@ Earlier project-level work reported three relevant failure patterns, which requi
 2. **Target leakage / invalid bootstrap:** historical `WP-003` was deemed `MEASUREMENT_INVALID`; apparent predictive value from leaked `prev_action` or a mis-specified bootstrap is not evidence of transferable Web physics.
 3. **Factory-control fragility:** stale prompts, branch drift, premature stopping and loss of scientific artifacts motivated the frozen Codex and Research 2.0 transaction design. Increased orchestration complexity is a **cost**, not a product feature.
 
-**Historical verification boundary (updated):** The frozen 21.97-million-character source and its 1,401-entry manifest are now technically readable through the Git blob. The new crosswalk, index and compact snapshot avoid forcing models to ingest the archive wholesale. Selected historical reports and the original archive summary have been read, but no complete 1,401-artifact forensic re-audit or independent re-execution has occurred. The Research 2.0 director now has explicit historical context for non-duplication. The source remains frozen.
+**Historical verification boundary:** The frozen 21.97-million-character source and its 1,401-entry manifest are now technically readable through the Git blob. The new crosswalk, index and compact snapshot avoid forcing models to ingest the archive wholesale. Selected historical reports and the original archive summary have been read, but no complete 1,401-artifact forensic re-audit or independent re-execution has occurred. The Research 2.0 director now has explicit historical context for non-duplication. The source remains frozen.
 
 ## 6. Opportunity / risk: useful knowledge vs research theatre
 
@@ -117,6 +117,10 @@ Then run the **one decisive benchmark**: COLD vs INSTRUCTIONS vs RETRIEVAL vs SP
 **Proposed go/no-go threshold, not an observed result:** >=20% lower **fully loaded** cost per successful task compared with the strongest non-SPIDER baseline, non-inferior success/safety and a reproducible second-family effect; exact sample size/power to be pre-registered based on pilot variance. If the treatment cannot clear the positive/negative shipped-carrier gate or no non-degenerate task bank is feasible, **pause flagship economics experiments rather than regenerate invalid packets**. If it fails well-powered comparison, either narrow to the demonstrated reusable workflow niche or stop this product thesis.
 
 **Capacity allocation recommendation:** temporarily **concentrate Product, Runtime and Intel on those three gates**. Keep Graph limited to blocking freshness/safety evidence; **PARK** repeating the same four D1V anchors. Physics and Frontier continue only with predeclared orthogonal expected decision value and a capped budget; otherwise PARK. This is an **audit recommendation**, not a change to the running workflows.
+
+## 7A. Verification of unified Codex delivery
+
+The latest observed `main` head at review time was `5b45e01e2f71bd8b2b7cbfdfa63b69bb1348ae6f` (2026-10-10 16:02:45 UTC). `SPIDER R2 CI` on that exact commit completed **successfully** (GitHub Actions run 38066057780). The `codex/sources/0000-historical-evidence.md` blob SHA equals the frozen archival source SHA `9bb76113aeaf46d9aecdd8a38349a3a7741e57c3`. This verifies integration integrity and control-plane tests; it **does not independently validate all experimental findings**. A Codex sync run during the integration sequence had failed on an intermediate revision; the latest successful CI is a stronger current signal of repository validity, though it is not proof that every future scheduled sync or agent run will succeed.
 
 ## 8. Answers and immediate bookkeeping
 
