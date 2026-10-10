@@ -4,8 +4,8 @@
   "message": "stage exited with code 1",
   "retryable": false,
   "fingerprint": "2ec9912af1c82b8c55d55e90",
-  "recorded_at": "2026-10-10T12:22:16.167870+00:00",
-  "github_run_id": "38046506410",
+  "recorded_at": "2026-10-10T13:53:40.123078+00:00",
+  "github_run_id": "38052147139",
   "github_run_attempt": "1",
   "control_revision": "bf70eef1f9002f2159b41980d1ca900d03536e36137b85f40a98589dbed45a2c"
 }
