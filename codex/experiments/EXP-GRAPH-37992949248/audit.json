@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37992949248",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "severity": "INFO",
+      "finding": "GATE-C certificate passes completely on fresh capture: M-CERT-ROUTE-OK=4/4, M-CERT-BODY-VARIABLE=4/4, M-CERT-FIELD-PRESENT=3/4, M-CERT-SESSION-ISOLATION-PASS=true, M-CERT-NEG-VALUES-A/B=0. Corrected predicate (first_request_cookieless AND pairwise_disjoint_on_name_value_after_filter) passes on all 8 anchors; session_identifying_disjoint correctly demoted to non-gating diagnostic. NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS verified with fixture pass/fail observations.",
+      "evidence_refs": [
+        "result.json.controls.GATE-C1",
+        "result.json.controls.GATE-C2",
+        "result.json.controls.GATE-C3",
+        "result.json.controls.GATE-C4",
+        "result.json.metrics.M-CERT-SESSION-ISOLATION-PASS",
+        "result.json.metrics.M-CERT-PAIRWISE-DISJOINT-AFTER-FILTER",
+        "result.json.metrics.M-CERT-CONSTCONFIG-SHARED-NAMES",
+        "result.json.metrics.M-CERT-UNEXPECTED-SHARED-NAMES",
+        "raw/records.jsonl"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "severity": "INFO",
+      "finding": "GATE-E extraction validity passes: M-EXTRACT-AGREE-VALUESET=4/4, M-EXTRACT-AGREE-VERDICT=4/4, M-CANARY-PASS=true (16 distinct authenticity_token on CAL-POS-1 both paths), M-FIXTURE-CANARY-PASS, M-FIXTURE-EMPTY-AGREE, M-FIXTURE-JSSTRING-VALUES=0, M-GUARD-FIXTURE-PASS, NC-PATH-INDEPENDENCE (separate source hashes, no anchor tokens in sources, perturbation invariant), NC-TRIAL-CONSTRUCTION-STABILITY (identical included-key sets). M-N-SESSION-SCOPED-CONFIRMED=3/4 (CAL-POS-1/2/3 RECOVERED_SESSION_SCOPED; CAL-POS-4 NO_FIELD as expected for A_PRIORI_CONSTRUCT anchor). M-N-REPRESENTATION-LOSS=1/4 correctly attributed to CAL-POS-4 field absence, not extraction failure. M-N-EXTRACTION-UNRELIABLE=0/4.",
+      "evidence_refs": [
+        "result.json.controls.GATE-E1",
+        "result.json.controls.GATE-E2",
+        "result.json.controls.GATE-E3",
+        "result.json.metrics.M-EXTRACT-AGREE-VALUESET",
+        "result.json.metrics.M-EXTRACT-AGREE-VERDICT",
+        "result.json.metrics.M-CANARY-PASS",
+        "result.json.metrics.M-DISTINCT-VALUES-A-CAL-POS-1",
+        "result.json.metrics.M-DISTINCT-VALUES-B-CAL-POS-1",
+        "result.json.metrics.M-N-SESSION-SCOPED-CONFIRMED",
+        "result.json.metrics.M-N-REPRESENTATION-LOSS",
+        "derived/extraction_A.jsonl",
+        "derived/extraction_B.jsonl",
+        "result.json.controls.NC-PATH-INDEPENDENCE"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "severity": "INFO",
+      "finding": "GATE-F estimator capability control passes with same-code-path binding (V16): PC-ESTIMATOR-NONDEGENERATE on SYN-ESTIMATOR-2ANCHOR returns LOW=1/3, UB97=1/2 (LOW>0, UB97<1, LOW<UB97 per pre-freeze arithmetic). NC-ESTIMATOR-CONTROL-SENSITIVITY: SYN-ESTIMATOR-1ANCHOR returns null bound; SYN-ESTIMATOR-HOMOGENEOUS returns zero-width interval [0.5, 0.5] with M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS=true. All three fixtures computed by estimator.anchor_clustered_paired_fa_diff with B=10000, seed=37992949248, identical to real read. This certifies the estimator is capable of non-degenerate bounds and its width tracks between-anchor heterogeneity.",
+      "evidence_refs": [
+        "result.json.controls.GATE-F",
+        "result.json.controls.PC-ESTIMATOR-NONDEGENERATE",
+        "result.json.controls.NC-ESTIMATOR-CONTROL-SENSITIVITY",
+        "result.json.metrics.M-ESTIMATOR-POSITIVE-CONTROL-PASS",
+        "result.json.metrics.M-ESTIMATOR-CONTROL-LOW",
+        "result.json.metrics.M-ESTIMATOR-CONTROL-UB97",
+        "result.json.metrics.M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS",
+        "derived/estimator_controls.json",
+        "spec.json.measurement_validity.V16"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "severity": "INFO",
+      "finding": "Part II D1V population correctly characterized: M-N-D1V=6 trials, M-N-D1V-ANCHORS=1 (only CAL-POS-2 yields D1V trials on wpCreateaccountToken). M-N-DECISIONS-D1V=1 (incumbent REUSE only; value-aware ABSTAIN by construction). M-D1V-ANCHOR-CLUSTERED-EVALUABLE=false (single anchor). Per-anchor blockers match parent exactly: CAL-POS-1=BODY_DERIVED_ETAG (ETag == sha256(body)[:32] verified from raw headers), CAL-POS-2=NONE, CAL-POS-3=TOKEN_BEARING_FINAL_URL (centralauthLoginToken in final_url), CAL-POS-4=NO_FIELD. M-TRANSPORT-COUPLING-STABILITY=UNCHANGED for all 4 anchors. M-D1V-DEGENERACY-MODE=ANCHOR_TRANSPORT_COUPLING correctly attributed (every value-bearing non-D1V anchor transport-blocked; NO_FIELD on CAL-POS-4 counted separately per spec fix SA-02). GATE-B correctly NOT READ (F-BLIND-DEGENERATE observed). F-NONDEGENERATE not triggered (no second D1V anchor appeared).",
+      "evidence_refs": [
+        "result.json.metrics.M-N-D1V",
+        "result.json.metrics.M-N-D1V-ANCHORS",
+        "result.json.metrics.M-N-DECISIONS-D1V",
+        "result.json.metrics.M-D1V-ANCHOR-CLUSTERED-EVALUABLE",
+        "result.json.metrics.M-D1V-BLOCKER-CAL-POS-1",
+        "result.json.metrics.M-D1V-BLOCKER-CAL-POS-2",
+        "result.json.metrics.M-D1V-BLOCKER-CAL-POS-3",
+        "result.json.metrics.M-D1V-BLOCKER-CAL-POS-4",
+        "result.json.metrics.M-TRANSPORT-BODY-DERIVATION-CAL-POS-1",
+        "result.json.metrics.M-TRANSPORT-COUPLING-STABILITY-CAL-POS-1",
+        "result.json.metrics.M-TRANSPORT-COUPLING-STABILITY-CAL-POS-2",
+        "result.json.metrics.M-TRANSPORT-COUPLING-STABILITY-CAL-POS-3",
+        "result.json.metrics.M-TRANSPORT-COUPLING-STABILITY-CAL-POS-4",
+        "result.json.metrics.M-D1V-DEGENERACY-MODE",
+        "result.json.controls.GATE-B",
+        "result.json.controls.F-BLIND-DEGENERATE",
+        "result.json.controls.F-NONDEGENERATE",
+        "derived/guard_stats.json",
+        "raw/records.jsonl"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "severity": "INFO",
+      "finding": "Feasibility certificate correctly constructed per spec.feasibility_certificate: Component 1 (population exhaustion) established - every value-bearing non-D1V anchor (CAL-POS-1, CAL-POS-3) is transport-blocked; CAL-POS-4 NO_FIELD excluded from transport-coupling count per SA-02 fix. Component 2 (estimator capability) established via GATE-F PASS. Component 3 (attribution) yields M-D1V-DEGENERACY-MODE=ANCHOR_TRANSPORT_COUPLING and secondary label FEASIBILITY-D1V-SINGLE-ANCHOR-TRANSPORT-COUPLED emitted. This is the mandate's bounded-reason deliverable, not a bare repetition.",
+      "evidence_refs": [
+        "result.json.metrics.M-D1V-DEGENERACY-MODE",
+        "result.json.metrics.FEASIBILITY-D1V-SINGLE-ANCHOR-TRANSPORT-COUPLED",
+        "result.json.metrics.M-N-D1V-BLOCKED-ANCHORS",
+        "derived/feasibility.json",
+        "spec.json.feasibility_certificate"
+      ]
+    },
+    {
+      "id": "VF-06",
+      "severity": "MINOR",
+      "finding": "M-INVISIBLE-STALE-PREV correctly reported as null with reason (SB-04), never 0.0. No prevalence claim over 'the Web' (CC-A). No product promotion or replay-by-assumption (SB-08). Timescale diagnostic (CC-H) reports PER_REQUEST_SCALE on CAL-POS-1/2/3, NO_ROTATION on CAL-POS-4; M-WARMJAR-VARIATION-RATE=1.0 on CAL-POS-1/2/3 confirming session-scoped state.",
+      "evidence_refs": [
+        "result.json.metrics.M-INVISIBLE-STALE-PREV",
+        "result.json.metrics.M-ROTATION-TIMESCALE-CAL-POS-1",
+        "result.json.metrics.M-ROTATION-TIMESCALE-CAL-POS-2",
+        "result.json.metrics.M-ROTATION-TIMESCALE-CAL-POS-3",
+        "result.json.metrics.M-ROTATION-TIMESCALE-CAL-POS-4",
+        "result.json.metrics.M-WARMJAR-VARIATION-RATE",
+        "spec.json.claim_scope_note"
+      ]
+    },
+    {
+      "id": "VF-07",
+      "severity": "INFO",
+      "finding": "Raw evidence retention (V10) and frozen input re-verification (V11) verified: all 40 request records with body_sha256, headers, cookies, final_url retained; 40 body files hashed in artifacts; request.json/spec.json/prereg.md sha256 match before and after execution; producer code files hashed into artifacts with role 'code'. NC-OPEN-GET-ONLY: all 40 requests are credential-free GET, no write verbs, no auth.",
+      "evidence_refs": [
+        "result.json.artifacts",
+        "provenance.json.frozen_input_verification",
+        "provenance.json.code_attestation",
+        "result.json.controls.NC-OPEN-GET-ONLY",
+        "raw/records.jsonl"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-INCUMBENT-SIGNAL-ONLY",
+      "finding": "Behaves exactly as specified: REUSE on all 6 strict D1V trials (M-FA-INCUMBENT-D1V=1.0) because no channel fires on value-only rotation; ABSTAIN on trials where CH-TRANSPORT-VALIDATOR fires (CAL-POS-1, CAL-POS-3) or CH-STRUCT-SIG fires. CH-POSTCOND-SEM INACTIVE-ON-POPULATION (waived with reason). Channel firing counts: CH-STRUCT-SIG 16/48, CH-TRANSPORT-VALIDATOR 36/48, CH-PRECOND-BINDING 36/48. Matches frozen guard definition.",
+      "evidence_refs": [
+        "result.json.controls.B-INCUMBENT-SIGNAL-ONLY",
+        "result.json.metrics.M-FA-INCUMBENT-D1V",
+        "result.json.metrics.M-FA-INCUMBENT-D1V-UB97",
+        "derived/guard_stats.json.path_A.channels"
+      ]
+    },
+    {
+      "control_id": "B-VALUE-AWARE",
+      "finding": "Behaves exactly as specified (CH-PRECOND-BINDING only): ABSTAIN on all 6 strict D1V trials (M-FA-VALUEAWARE-D1V=0.0) because live != recorded byte-exact by D1V definition. REUSE only on FRESH trials where live == recorded. Matches frozen guard definition.",
+      "evidence_refs": [
+        "result.json.controls.B-VALUE-AWARE",
+        "result.json.metrics.M-FA-VALUEAWARE-D1V",
+        "result.json.metrics.M-FA-VALUEAWARE-D1V-UB97",
+        "derived/guard_stats.json.path_A.channels.CH-PRECOND-BINDING"
+      ]
+    },
+    {
+      "control_id": "B-FULL-GUARD",
+      "finding": "Union of four channels: equals B-VALUE-AWARE on value-rotating trials (ABSTAIN), REUSE only where no channel fires. Reported as reference only.",
+      "evidence_refs": [
+        "result.json.controls.B-FULL-GUARD",
+        "derived/guard_stats.json"
+      ]
+    },
+    {
+      "control_id": "B-NO-GUARD-REPLAY",
+      "finding": "Always REUSE (48/48 trials). Raw-observation reference only.",
+      "evidence_refs": [
+        "result.json.controls.B-NO-GUARD-REPLAY",
+        "derived/guard_stats.json"
+      ]
+    },
+    {
+      "control_id": "PC-EXTRACT-CANARY",
+      "finding": "PASS: both paths recover >=2 distinct authenticity_token values on CAL-POS-1 across 4 sessions (16 each). Demonstrates instrument sensitivity on SPIDER_CORROBORATED rotating token.",
+      "evidence_refs": [
+        "result.json.controls.PC-EXTRACT-CANARY",
+        "result.json.metrics.M-DISTINCT-VALUES-A-CAL-POS-1",
+        "result.json.metrics.M-DISTINCT-VALUES-B-CAL-POS-1",
+        "derived/extraction_A.jsonl",
+        "derived/extraction_B.jsonl"
+      ]
+    },
+    {
+      "control_id": "PC-GUARD-LOGIC",
+      "finding": "PASS: all SYN-GUARD-* fixtures produce pre-declared decisions exactly (SYN-GUARD-D1V: incumbent REUSE, value-aware ABSTAIN; SYN-GUARD-FRESH: all REUSE; SYN-GUARD-POSTCOND: incumbent ABSTAIN, value-aware REUSE). Guard logic verified.",
+      "evidence_refs": [
+        "result.json.controls.PC-GUARD-LOGIC",
+        "derived/fixtures.json"
+      ]
+    },
+    {
+      "control_id": "NC-CAL-NEG-ALL-REJECTED",
+      "finding": "PASS: 0 in-list non-empty values on all 4 negatives under both paths. Specificity control satisfied.",
+      "evidence_refs": [
+        "result.json.controls.NC-CAL-NEG-ALL-REJECTED",
+        "result.json.metrics.M-CERT-NEG-VALUES-A",
+        "result.json.metrics.M-CERT-NEG-VALUES-B",
+        "derived/extraction_A.jsonl",
+        "derived/extraction_B.jsonl"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "M-ESTIMATOR-CONTROL-LOW": 0.3333333333333333,
+    "M-ESTIMATOR-CONTROL-UB97": 0.5,
+    "M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS": true,
+    "M-N-D1V-ANCHORS": 1,
+    "M-D1V-ANCHOR-CLUSTERED-EVALUABLE": false,
+    "M-D1V-DEGENERACY-MODE": "ANCHOR_TRANSPORT_COUPLING",
+    "M-N-D1V": 6,
+    "M-N-DECISIONS-D1V": 1,
+    "M-FA-INCUMBENT-D1V": 1.0,
+    "M-FA-VALUEAWARE-D1V": 0.0,
+    "M-PAIRED-FA-DIFF-D1V": 1.0,
+    "M-PAIRED-FA-DIFF-D1V-LOW": null,
+    "M-PAIRED-FA-DIFF-D1V-UB97": null,
+    "M-N-SESSION-SCOPED-CONFIRMED": 3,
+    "M-N-REPRESENTATION-LOSS": 1,
+    "M-CANARY-PASS": true,
+    "M-EXTRACT-AGREE-VALUESET": 4,
+    "M-EXTRACT-AGREE-VERDICT": 4,
+    "M-CERT-SESSION-ISOLATION-PASS": true,
+    "M-CERT-NEG-VALUES-A": 0,
+    "M-CERT-NEG-VALUES-B": 0,
+    "M-TRANSPORT-COUPLING-STABILITY-CAL-POS-1": "UNCHANGED",
+    "M-TRANSPORT-COUPLING-STABILITY-CAL-POS-2": "UNCHANGED",
+    "M-TRANSPORT-COUPLING-STABILITY-CAL-POS-3": "UNCHANGED",
+    "M-TRANSPORT-COUPLING-STABILITY-CAL-POS-4": "UNCHANGED"
+  },
+  "claim_ceiling": "On the four pinned credential-free, server-rendered, no-JavaScript GET-only anchors (CAL-POS-1..4), K=4 fresh sessions, stdlib HTTP, one capture date, one egress ASN: (1) Part I replicates EXTRACTION-DEFECT-CONFIRMED (GATE-E3 PASS, M-N-SESSION-SCOPED-CONFIRMED=3/4, both independent stdlib paths agree on per-field value sets and session-scoped verdicts). The parent's failure on these anchors is attributable to an instrument/extraction certificate defect (GATE-C3), not representation loss. (2) Part II yields DATA-INSUFFICIENT-D1V-DEGENERATE with M-D1V-DEGENERACY-MODE=ANCHOR_TRANSPORT_COUPLING and secondary label FEASIBILITY-D1V-SINGLE-ANCHOR-TRANSPORT-COUPLED, satisfying the Director mandate's escape clause. The D1V population spans exactly one anchor (CAL-POS-2) because the frozen transport_signature couples to the rotating value on CAL-POS-1 (body-derived ETag) and CAL-POS-3 (token-bearing final_url), and CAL-POS-4 has NO_FIELD; this coupling is time-stable (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED vs parent). The anchor-clustered bootstrap estimator is certified capable of non-degenerate bounds (GATE-F PASS: heterogeneous 2-anchor fixture LOW=1/3, UB97=1/2; 1-anchor null; homogeneous zero-width). Therefore the degeneracy is attributed to the population (structural transport-value coupling), not the estimator. Powering the guard-differential read (M-PAIRED-FA-DIFF-D1V with non-degenerate anchor-clustered 97.5% lower bound) requires either a different anchor population with transport validators independent of the rotating value, or an instrument redesign decoupling body-derived validators from value rotation — neither authorized by this mandate (parent SB-05). C-FRESHNESS status remains EXPERIMENTAL per CC-B; no product promotion; no replay-by-assumption. All results scoped to CC-A (four anchors, one capture, one ASN). M-INVISIBLE-STALE-PREV=null (SB-04).",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json",
+    "result.json",
+    "report.md",
+    "provenance.json",
+    "raw/records.jsonl",
+    "derived/extraction_A.jsonl",
+    "derived/extraction_B.jsonl",
+    "derived/trials.jsonl",
+    "derived/guard_stats.json",
+    "derived/estimator_controls.json",
+    "derived/feasibility.json",
+    "derived/anchor_metrics.json",
+    "derived/certificate.json",
+    "research/experiments/EXP-GRAPH-37978902447/result.json",
+    "research/experiments/EXP-GRAPH-37978902447/audit.json",
+    "research/experiments/EXP-GRAPH-37978902447/handoff.json"
+  ],
+  "unresolved": [
+    "Whether CAL-POS-4's NO_FIELD reflects genuine absence of in-list token fields or a limitation of the frozen token-name list (inherited from parent handoff unknown).",
+    "Whether the wpCreateaccountToken count (5 distinct values per session) is stable over time and across egress networks (inherited from parent handoff unknown).",
+    "Whether a D1V population spanning >=2 anchors is constructible at all on the credential-free substrate under the frozen transport signature; if the single-anchor result replicates, the readiness of the blindness/necessity decision remains the unresolved object (inherited from parent handoff unknown).",
+    "Whether the per-anchor transport-value coupling is TIME-STABLE in general or whether the UNCHANGED result on this capture date is coincidental (tested here for this capture only).",
+    "The uniform-blindness residual (SA-07): even if M-N-D1V-ANCHORS >= 2, a uniform incumbent REUSE rate yields degenerate [1,1] interval; the mandate's non-degenerate read additionally requires within-anchor incumbent variation (co-occurring postcond drift or equivalent)."
+  ]
+}

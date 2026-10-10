@@ -1,0 +1,12 @@
+{
+  "artifact_hashes": {},
+  "design_contract_version": 1,
+  "experiment_id": "EXP-GRAPH-37992949248",
+  "frozen_at": "2026-10-10T09:34:51.760825+00:00",
+  "hashes": {
+    "prereg.md": "e71fe797afaa0e59739018b90acd7875dabd4cfd96a506c035672295f8897392",
+    "request.json": "675d088d1418db6e45b86718d385828d0d5ddeb1e94babe6bd1a8a446f455048",
+    "spec.json": "83f500c572f940bfa42c7485bbeffb3542b2ae2fe90ef73de3751ac31e005e2b"
+  },
+  "schema_version": 1
+}
