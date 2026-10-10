@@ -6,121 +6,97 @@
   "claim_ids": [
     "C-FRESHNESS"
   ],
-  "director_mandate_ref": "request.json director_mandate (cycle_id 38045993953): action CONTINUE, target claim C-FRESHNESS, parent_handoff_disposition USE, explicit fail-loud/park fallback.",
+  "director_mandate_ref": "request.json director_mandate (cycle_id 38045993953): action CONTINUE, target claim C-FRESHNESS, claim_ids include the Director target, parent_handoff_disposition USE, explicit fail-loud/park fallback for the negative constructibility case.",
+  "design_verdict": "MANDATE-INFEASIBLE-FAIL-LOUD",
   "question": "On credential-free, server-rendered, no-JavaScript GET-only anchors, is a value-only-rotation (D1V: STALE AND NOT structural_change AND NOT transport_change) population spanning >= 2 independent anchors constructible AT ALL such that the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate and M-N-D1V-ANCHORS >= 2 -- either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by a principled instrument change that reclassifies transport-validator motion caused solely by the rotating value itself, with that reclassification justified structurally rather than assumed? The DESIGN must produce a pre-freeze constructibility certificate for the >=2-anchor D1V frame (the exact anchors, the per-anchor transport-change cause, and the arithmetic showing the estimator is powered), and if no such population is constructible on this substrate it must FAIL LOUDLY and return the decisive positive-control-backed bounded reason that parks the four-anchor Part II route -- so that freshness effort can then move to a broader-population guard false-accept/calibration measurement or another sub-mechanism, rather than freeze another structurally degenerate single-anchor read.",
-  "hypothesis": "NEGATIVE constructibility certificate (pre-freeze, verified at EXECUTE): On the accepted credential-free, server-rendered, no-JavaScript, GET-only anchor repertoire (CAL-POS-1..4, K=4 fresh sessions, stdlib HTTP, capture dates 2026-10-09 [grandparent] and 2026-10-10 [parent], one egress path), NO value-only-rotation (D1V) population spanning >= 2 independent anchors is constructible under the frozen D1V definition, frozen transport signature and frozen token list. The D1V population spans exactly one anchor (CAL-POS-2) on BOTH retained corpora (M-N-D1V=6, M-N-D1V-ANCHORS=1); the other three anchors are value-bearing but D1V-blocked with byte-level transport causes (CAL-POS-1=BODY_DERIVED_ETAG, CAL-POS-3=TOKEN_BEARING_FINAL_URL, CAL-POS-4=NO_FIELD); the transport-value coupling is time-stable (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors at both dates); and the anchor-clustered estimator is independently certified powered (GATE F PASS plus the SYN-POWER-2ANCHOR-D1V arithmetic: INCUMBENT-BLIND-CONFIRMED, LOW=2/3, UB97=1.0, pooled diff=10/12 over 12 D1V trials and 2 pseudo-anchors under the frozen seed/B). Consequence: the four-anchor Part II route is PARKED (fail-loud) and C-FRESHNESS remains EXPERIMENTAL; freshness effort should move to a broader-population guard false-accept/calibration measurement or another sub-mechanism.",
-  "falsifier": "F-NONDEGENERATE-EVIDENCE (falsifies the NEGATIVE certificate; revokes the park): at EXECUTE, ANY of the following on either retained corpus re-derived with the frozen parent machine -> (1) M-N-D1V-ANCHORS >= 2, or (2) gate_b_branch != DATA-INSUFFICIENT-D1V-DEGENERATE (i.e., a non-degenerate, readable GATE-B), or (3) per-anchor blocker map != {CAL-POS-1: BODY_DERIVED_ETAG, CAL-POS-2: NONE, CAL-POS-3: TOKEN_BEARING_FINAL_URL, CAL-POS-4: NO_FIELD}. Expected-empty on the frozen retained corpora; if it fires, the certificate is falsified and the park is revoked. Instrument/integrity failures are NOT falsifications: F-RE-DERIVATION / F-ESTIMATOR / F-INSTR / F-POWER-DEMO are MEASUREMENT_INVALID dispositions.",
+  "hypothesis": "NEGATIVE constructibility certificate and DESIGN failure (mandate-infeasible): On the accepted credential-free, server-rendered, no-JavaScript, GET-only anchor repertoire (CAL-POS-1..4; K=4 fresh sessions; stdlib HTTP; one egress path; capture dates 2026-10-09 [grandparent] and 2026-10-10 [parent]) NO value-only-rotation (D1V) population spanning >= 2 independent anchors is constructible under the frozen D1V definition, frozen transport signature and frozen token list such that the anchor-clustered 97.5% lower bound of M-PAIRED-FA-DIFF-D1V is non-degenerate. The D1V population spans exactly one anchor (CAL-POS-2) on BOTH retained corpora (M-N-D1V=6, M-N-D1V-ANCHORS=1); the other anchors are value-bearing but D1V-blocked with byte-level transport causes (CAL-POS-1=BODY_DERIVED_ETAG, CAL-POS-3=TOKEN_BEARING_FINAL_URL, CAL-POS-4=NO_FIELD); the transport-value coupling is time-stable (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors at both dates). Decisively, even if the anchor count were raised to >= 2 (e.g. via remedy b), the mandated object remains unreachable because on every value-only-rotation trial the value-blind incumbent B-INCUMBENT-SIGNAL-ONLY is at the false-accept ceiling (REUSE, since neither CH-STRUCT-SIG nor CH-TRANSPORT-VALIDATOR nor CH-POSTCOND-SEM fires) while the value-aware comparator B-VALUE-AWARE is at the floor (ABSTAIN, because D1V requires STALE, i.e. live != recorded). The per-trial paired differential is therefore identically 1 for any pure D1V trial, so the anchor-clustered paired interval is the zero-width [1,1] for ANY number of anchors. A non-degenerate read would require WITHIN-anchor variation of the incumbent decision, i.e. CH-POSTCOND-SEM in-list field-name-set drift co-occurring with D1V; that is (i) absent on the accepted repertoire (M-N-POSTCOND-DRIFT=0 on both corpora), (ii) not value-only rotation (it is a second, independent channel), and (iii) not pre-certifiable for a new anchor population without outcome-bearing anchor screening (prohibited at DESIGN). The mandate's fail-loud clause is therefore triggered: this DESIGN cannot honestly produce a freeze-eligible two-sided experiment, and it fails loudly with the positive-control-backed bounded reason that parks the four-anchor Part II route.",
+  "falsifier": "F-POSITIVE-CONSTRUCTIBLE (would refute the NEGATIVE certificate and the fail-loud DESIGN failure): a pre-freezable demonstration, using ONLY already-accepted evidence and a structurally justified, non-circular transport reclassification, that a >= 2-anchor D1V population exists whose anchor-clustered M-PAIRED-FA-DIFF-D1V 97.5% interval has LOW < UB97 (positive width). Concretely any of: (1) an accepted >= 2-anchor D1V population with a non-degenerate anchor-clustered interval; (2) a principled rule that decouples transport-validator motion from value rotation AND yields within-anchor incumbent-decision variation without CH-POSTCOND-SEM drift; (3) evidence that the incumbent is NOT at the D1V false-accept ceiling (some D1V trial with unchanged postcond where it ABSTAINS). Expected-empty on the accepted repertoire and the two accepted capture dates (analytically empty: the differential is identically 1 on pure value-only rotation). Instrument/integrity failures (GATE F controls, fixture canaries, path independence, hash chain) are NOT falsifications; they would be MEASUREMENT_INVALID, never a scientific answer.",
   "baselines": {
-    "role": "inherited frozen four-channel guard baselines (EXP-GRAPH-37992949248, semantics unchanged SB-06/CC-*); the Part II question compares B-INCUMBENT-SIGNAL-ONLY vs B-VALUE-AWARE on the D1V population, but GATE-B is NOT read on the real single-anchor population (pre-declared power statement, CC-E/SB-08)",
-    "B-INCUMBENT-SIGNAL-ONLY": "value-blind incumbent: REUSE iff none of CH-STRUCT-SIG / CH-TRANSPORT-VALIDATOR / CH-POSTCOND-SEM fires. On a 2-anchor D1V population the paired false-accept differential is the measured object (M-PAIRED-FA-DIFF-D1V).",
-    "B-VALUE-AWARE": "REUSE iff CH-PRECOND-BINDING does not fire (value-aware comparator of the differential).",
+    "role": "inherited frozen four-channel guard baselines (EXP-GRAPH-37992949248, semantics unchanged SB-06/CC-*); the Part II question compares B-INCUMBENT-SIGNAL-ONLY vs B-VALUE-AWARE on the D1V population, but the comparison is structurally degenerate on pure value-only rotation and GATE-B is therefore NOT read",
+    "B-INCUMBENT-SIGNAL-ONLY": "value-blind incumbent: REUSE iff none of CH-STRUCT-SIG / CH-TRANSPORT-VALIDATOR / CH-POSTCOND-SEM fires. On D1V, CH-STRUCT-SIG and CH-TRANSPORT-VALIDATOR are false by definition and CH-POSTCOND-SEM is false on the accepted repertoire (M-N-POSTCOND-DRIFT=0), so it REUSEs on every D1V trial (ceiling).",
+    "B-VALUE-AWARE": "REUSE iff CH-PRECOND-BINDING does not fire. On D1V the live value != the recorded value (STALE), so it ABSTAINS on every D1V trial (floor).",
     "B-FULL-GUARD": "REUSE iff none of the four channels fires (all-channel reference).",
     "B-NO-GUARD-REPLAY": "always REUSE (degenerate floor, unit-test only).",
+    "ceiling_floor_note": "The treatment/comparator pair is a guaranteed ceiling/floor pair on the D1V family (incumbent FA = 1, value-aware FA = 0), so the paired differential has zero variance across trials and the anchor-clustered interval is degenerate for any anchor count. This is exactly the situation the independent pre-freeze review must reject (baseline_identifiability).",
     "do_not": "No baseline numeric value on the real population is read as a false-accept/blindness result: single-anchor bounds are null by construction (estimator n_anchors<2 rule); trial-level unclustered intervals are do_not_use (V12)."
   },
   "positive_control": {
-    "PC-ESTIMATOR-NONDEGENERATE": "SYN-ESTIMATOR-2ANCHOR (synthetic heterogeneous 2-anchor fixture): LOW=1/3 > 0 AND UB97=1/2 < 1 AND LOW < UB97, computed by estimator.anchor_clustered_paired_fa_diff with the SAME function/B=10000/seed 37992949248 as the real read (V16 binding). Proves the estimator is capable of a non-degenerate bound; a degenerate live read is therefore a population property, not an instrument defect.",
-    "PC-ESTIMATOR-POWER-DEMO": "SYN-POWER-2ANCHOR-D1V (frozen synthetic D1V scenario, CC-J): 12 D1V trials over 2 pseudo-anchors + 1 FRESH trial -> INCUMBENT-BLIND-CONFIRMED with LOW=2/3, UB97=1.0, pooled diff=10/12, M-N-D1V=12, M-N-D1V-ANCHORS=2. The powered-estimator arithmetic of the certificate, re-verified at EXECUTE under the frozen guard_statistics machine / seed / B.",
-    "PC-GUARD-LOGIC": "all SYN-GUARD-* fixtures produce pre-declared decisions for all four baselines (frozen guard.decide).",
-    "PC-EXTRACTION-CANARY": "SYN-CANARY-BOTH: both independent stdlib extraction paths recover both (name,value) pairs byte-exact.",
-    "PC-CERTIFICATE-RE-DERIVATION": "both retained corpora re-derive the certificate premises with the frozen machine AND equal the values published by the accepted packets (M-N-D1V=6, M-N-D1V-ANCHORS=1, anchors=[CAL-POS-2], published blocker map, stability UNCHANGED x4, DATA-INSUFFICIENT-D1V-DEGENERATE / ANCHOR_TRANSPORT_COUPLING, null low/upper bounds, dual-path agreement 4/4)."
+    "PC-ESTIMATOR-NONDEGENERATE": "SYN-ESTIMATOR-2ANCHOR (synthetic heterogeneous 2-anchor fixture): LOW=1/3 > 0 AND UB97=1/2 < 1 AND LOW < UB97, computed by estimator.anchor_clustered_paired_fa_diff with the SAME function/B=10000/seed 37992949248 as the real read (V16 binding). Re-verified during this DESIGN satisfiability probe (degenerate=False, n_anchors=2, n_trials=5). Proves the estimator is capable of a non-degenerate bound; a degenerate live read is therefore a population/object property, not an instrument defect.",
+    "PC-ESTIMATOR-POWER-DEMO": "SYN-POWER-2ANCHOR-D1V (frozen synthetic D1V scenario, CC-J): 12 D1V trials over 2 pseudo-anchors + 1 FRESH trial -> INCUMBENT-BLIND-CONFIRMED with LOW=2/3, UB97=1.0, pooled diff=10/12, M-N-D1V=12, M-N-D1V-ANCHORS=2. Re-verified during this DESIGN probe. Shows the estimator CAN be powered when the D1V family contains within-anchor incumbent variation; the real population lacks that variation.",
+    "PC-GUARD-LOGIC": "all SYN-GUARD-* fixtures produce pre-declared decisions for all four baselines (frozen guard.decide). Re-verified (GUARD_FIXTURE_PASS=True).",
+    "PC-EXTRACTION-CANARY": "SYN-CANARY-BOTH: both independent stdlib extraction paths recover both (name,value) pairs byte-exact (CANARY_PASS=True).",
+    "PC-CERTIFICATE-RE-DERIVATION": "both retained corpora re-derive the negative-certificate premises with the frozen machine AND equal the values published by the accepted packets (M-N-D1V=6, M-N-D1V-ANCHORS=1, anchors=[CAL-POS-2], published blocker map, stability UNCHANGED x4, DATA-INSUFFICIENT-D1V-DEGENERATE / ANCHOR_TRANSPORT_COUPLING, null LOW/UB97, dual-path agreement 4/4). Verified during this DESIGN probe on both parent and grandparent corpora."
   },
   "null_control": {
-    "NC-ESTIMATOR-CONTROL-SENSITIVITY": "SYN-ESTIMATOR-1ANCHOR -> null LOW/UB97 (never 0.0); SYN-ESTIMATOR-HOMOGENEOUS -> zero-width [1/2,1/2]. The estimators' degenerate/null semantics stay null under the same code path.",
+    "NC-ESTIMATOR-CONTROL-SENSITIVITY": "SYN-ESTIMATOR-1ANCHOR -> null LOW/UB97 (never 0.0); SYN-ESTIMATOR-HOMOGENEOUS -> zero-width [1/2,1/2]. Re-verified (POS_CTRL=True, NC_SENS=True). The estimators' degenerate/null semantics stay null under the same code path.",
     "NC-EXTRACT-EMPTY-VALUE": "SYN-EMPTY-VALUE -> PRESENT_EMPTY on both paths (empty value is a state, not absence).",
     "NC-EXTRACT-JSSTRING": "SYN-JSSTRING -> 0 non-empty values on both paths (JS string assignment is not an HTML form field).",
-    "NC-PATH-INDEPENDENCE": "path_a_htmlparser vs path_b_regexlex: no shared source, no forbidden imports, no anchor special-casing, perturbation-invariance (frozen path_independence_attestation).",
-    "NC-CROSS-CORPUS-REPRODUCTION": "the GRANDPARENT corpus re-derived with the PARENT frozen machine reproduces the grandparent published M-N-D1V / M-N-D1V-ANCHORS / per-anchor blockers (same-machine cross-date determinism).",
-    "NC-CERTIFICATE-HASH": "freeze.json artifact_hashes match disk; the four frozen packet hashes match; every retained body sha256 recomputes to its record; records.jsonl matches the published raw-artifact hashes of the accepted packets.",
-    "NC-NETWORK-CONTROL": "0 HTTP requests performed by this run (all evidence retained; NC-OPEN-GET-ONLY / NC-CREDENTIAL-FREE state the inherited capture protocol: credential-free, cookie-free first request, GET-only, stdlib).",
+    "NC-PATH-INDEPENDENCE": "path_a_htmlparser vs path_b_regexlex: no shared source, no forbidden imports, no anchor special-casing, perturbation-invariance (frozen path_independence_attestation; pass=True).",
+    "NC-CROSS-CORPUS-REPRODUCTION": "the GRANDPARENT corpus re-derived with the PARENT frozen machine reproduces the grandparent published M-N-D1V / M-N-D1V-ANCHORS / per-anchor blockers (same-machine cross-date determinism). Verified.",
+    "NC-CERTIFICATE-HASH": "the four frozen packet hashes match the values referenced in prereg.md (parent handoff, parent result.json, parent freeze.json, parent+grandparent raw/records.jsonl). Verified during this DESIGN probe.",
+    "NC-NETWORK-CONTROL": "0 HTTP requests performed at DESIGN (all evidence retained; the inherited capture protocol is credential-free, cookie-free first request, GET-only, stdlib).",
     "NC-NO-FIELD-ANCHOR": "CAL-POS-4 re-derives blocker NO_FIELD in both corpora (negative control for value presence)."
   },
   "measurement_validity": {
-    "status": "the EXECUTE transaction is valid iff (1) no network/credential/browser substrate is required (this run is local and deterministic), (2) the frozen artifact-hash and packet-hash chain verifies, (3) the instrument canaries (GATE F, extraction/guard fixtures, path independence) all PASS on the frozen machine, (4) the certificate premises re-derive from the retained corpora and equal the accepted published values, and (5) the power arithmetic reproduces. A failing validity condition yields MEASUREMENT_INVALID (F-* branches), never a scientific answer.",
-    "no_new_capture_protocol": "EXECUTE performs ZERO HTTP requests: no anchor is re-fetched, no session is re-created, no candidate is newly screened. All evidence is the retained accepted corpora (parent + grandparent), referenced by hash. GATE-B is NOT read (single-anchor population; pre-declared power statement).",
-    "determinism": "the only stochastic machinery is estimator.anchor_clustered_paired_fa_diff with fixed seed 37992949248 and fixed B=10000 via random.Random(seed) (Mersenne Twister, deterministic across CPython 3.x); all compared values are either frozen constants or already-published accepted values.",
-    "representation_loss": "none in this run (no new measurement of the world); the frame's known representation limits are inherited (CC-A bound, token list bound, one egress path) and carried in unresolved."
+    "status": "DESIGN-stage only. This packet declares NO freeze and NO EXECUTE. The certificate rests on (1) the retained accepted corpora and the frozen machine, hash-referenced; (2) cheap, non-outcome-bearing DESIGN satisfiability probes that import the frozen parent modules and run their own canaries/controls and the frozen synthetic estimator fixtures; and (3) analytic proof that the mandated object is unreachable on pure value-only rotation. No new HTTP capture, no credential, no browser, no new anchor screening. Because the mandate is infeasible, the honest DESIGN disposition is a loud failure, expressed as freeze_eligibility FAIL entries; the deterministic freezer is expected to refuse and no freeze.json is produced.",
+    "no_new_capture_protocol": "0 HTTP requests: no anchor is re-fetched, no session is re-created, no candidate is newly screened. All evidence is the retained accepted corpora (parent + grandparent), referenced by hash.",
+    "determinism": "the only stochastic machinery is estimator.anchor_clustered_paired_fa_diff with fixed seed 37992949248 and fixed B=10000 via random.Random(seed) (Mersenne Twister, deterministic across CPython 3.x); all compared values are frozen constants or already-published accepted values.",
+    "representation_loss": "none added by this DESIGN (no new measurement of the world); the frame's known representation limits are inherited (CC-A bound, token list bound, one egress path) and carried in unresolved."
   },
   "decision_rule": {
-    "mode": "ordered, fail-closed, evaluated by the frozen EXECUTE driver (code/verify_certificate.py materialized verbatim from prereg.md; sha256 bound in execute_driver_sha256). First matching branch wins; the four F-* validity branches are mutually exclusive by construction and precede both terminal scientific branches.",
+    "mode": "ordered, fail-closed constructibility certificate. The DESIGN does NOT freeze an EXECUTE: first-match wins among the certificate branches below, and the single reachable terminal branch on the accepted substrate is the negative/fail-loud branch.",
     "branches": [
       {
-        "id": "F-RE-DERIVATION",
-        "trigger": "integrity failure (freeze.json artifact_hashes vs disk, frozen packet hashes, per-body sha256 recompute, records.jsonl vs published raw hashes) OR driver self-hash mismatch OR either corpus failing to re-derive the pre-registered expected premises (expected-dict mismatch) OR transport-premise check failure",
-        "status": "MEASUREMENT_INVALID",
-        "outcome": "INCONCLUSIVE",
-        "consequence": "certificate NOT verified; no park decision is licensed; re-run after repairing the frozen-input chain (retryable at EXECUTE level only with unchanged frozen design)."
-      },
-      {
-        "id": "F-ESTIMATOR",
-        "trigger": "GATE F controls fail (PC-ESTIMATOR-NONDEGENERATE or NC-ESTIMATOR-CONTROL-SENSITIVITY false)",
-        "status": "MEASUREMENT_INVALID",
-        "outcome": "INCONCLUSIVE",
-        "consequence": "no degeneracy claim may be drawn (estimator suspect); certificate NOT verified."
-      },
-      {
-        "id": "F-INSTR",
-        "trigger": "extraction/guard fixtures or path-independence attestation fail",
-        "status": "MEASUREMENT_INVALID",
-        "outcome": "INCONCLUSIVE",
-        "consequence": "the instrument is not self-certified; certificate NOT verified."
-      },
-      {
-        "id": "F-POWER-DEMO",
-        "trigger": "SYN-POWER-2ANCHOR-D1V arithmetic does not reproduce (branch, LOW=2/3, UB97=1.0, diff=10/12, M-N-D1V=12, M-N-D1V-ANCHORS=2)",
-        "status": "MEASUREMENT_INVALID",
-        "outcome": "INCONCLUSIVE",
-        "consequence": "the powered-estimator premise of the certificate is not established; certificate NOT verified."
-      },
-      {
-        "id": "F-NONDEGENERATE-EVIDENCE",
-        "trigger": "on either retained corpus: M-N-D1V-ANCHORS >= 2 OR gate_b_branch != DATA-INSUFFICIENT-D1V-DEGENERATE OR blocker map != {CAL-POS-1: BODY_DERIVED_ETAG, CAL-POS-2: NONE, CAL-POS-3: TOKEN_BEARING_FINAL_URL, CAL-POS-4: NO_FIELD}",
-        "status": "COMPLETE",
-        "outcome": "MIXED",
-        "consequence": "the NEGATIVE certificate is FALSIFIED; the >=2-anchor D1V frame is constructible (or a non-degenerate read is available); park REVOKED; C-FRESHNESS direction re-opened (decision by the Global Research Director). Declared expected-empty for the frozen retained corpora; the branch exists to catch tamper-resistant discrepancies and to keep the certificate falsifiable."
-      },
-      {
-        "id": "CERTIFICATE-CONFIRMED-PARK",
-        "trigger": "all integrity/instrument/power/premise checks pass and no falsifier fired",
+        "id": "CERT-POSITIVE-CONSTRUCTIBLE",
+        "trigger": "a pre-freezable demonstration (already-accepted evidence only, plus a structurally justified non-circular transport reclassification) that a >= 2-anchor D1V population exists whose anchor-clustered M-PAIRED-FA-DIFF-D1V 97.5% interval has LOW < UB97",
         "status": "COMPLETE",
         "outcome": "SUPPORTS",
-        "consequence": "the NEGATIVE constructibility certificate is verified on the accepted repertoire at the two accepted capture dates; the four-anchor Part II route is PARKED (fail-loud); no claim status changes (C-FRESHNESS stays EXPERIMENTAL); no product promotion; freshness effort should move to a broader-population guard false-accept/calibration measurement or another sub-mechanism (Director decision)."
+        "consequence": "would license freezing a genuine two-sided >= 2-anchor D1V measurement (the mandate's positive case).",
+        "reachable": false,
+        "reachability_note": "EMPTY / UNREACHABLE on the accepted substrate: no such population exists, and the positive object is arithmetically impossible on pure value-only rotation because the paired differential is identically 1 (see certificate.degeneracy_argument). This emptiness is the DESIGN failure."
+      },
+      {
+        "id": "CERT-NEGATIVE-FAIL-LOUD",
+        "trigger": "current evidence (D1V spans exactly one anchor CAL-POS-2; M-N-POSTCOND-DRIFT=0; the >= 2-anchor positive object is arithmetically unreachable; no structural non-circular transport reclassification exists)",
+        "status": "DESIGN_FAILURE",
+        "outcome": "INFEASIBLE",
+        "consequence": "no freeze; the DESIGN fails loudly (POLICY.md line 115 plus the mandate's explicit fail-loud clause); the four-anchor Part II route is PARKED; the bounded positive-control-backed reason is returned; C-FRESHNESS remains EXPERIMENTAL; freshness effort may move to a broader-population guard false-accept/calibration measurement or another freshness sub-mechanism (Global Research Director decision, not self-authorized)."
       }
     ],
-    "expected_branch": "CERTIFICATE-CONFIRMED-PARK",
-    "expected_status": "COMPLETE",
-    "expected_outcome": "SUPPORTS"
+    "reachable_terminal": "CERT-NEGATIVE-FAIL-LOUD",
+    "expected_status": "DESIGN_FAILURE",
+    "expected_outcome": "INFEASIBLE"
   },
-  "product_consequence_positive": "No SPIDER product promotion and no product behaviour change are licensed by this packet. The verified NEGATIVE certificate (branch CERTIFICATE-CONFIRMED-PARK) parks the four-anchor Part II route and leaves C-FRESHNESS at EXPERIMENTAL (inherited effective status). The value-blind-vs-value-aware false-accept question remains UNREAD and is expressly not answered. The park redirects freshness effort toward a broader-population guard false-accept/calibration measurement or another freshness sub-mechanism, which a future Director mandate may allocate. Nothing in this packet authorizes replay-by-assumption of the four anchors under the frozen transport signature.",
-  "product_consequence_negative": "If the certificate is falsified (F-NONDEGENERATE-EVIDENCE), the park is revoked: a >=2-anchor D1V population or a non-degenerate GATE-B read is available on the retained evidence, so the value-aware-necessity question (INCUMBENT-BLIND-CONFIRMED vs INCUMBENT-NOT-BLIND, CH-PRECOND-BINDING) becomes measurable and the false-accept read can be powered; the Director then decides the next measurement. If the certificate is NOT verified (any F-* validity branch), no park and no falsification is licensed: the packet is MEASUREMENT_INVALID and the frozen-input chain must be repaired before any C-FRESHNESS decision.",
+  "product_consequence_positive": "No SPIDER product promotion and no product behaviour change are licensed. Even in the mandate's positive case (a constructible >= 2-anchor D1V frame) the effect would only be to license a later, properly-powered false-accept/necessity measurement; it would not by itself ship or delete the value-aware freshness channel. This packet is bounded to a DESIGN certificate.",
+  "product_consequence_negative": "The negative certificate does not change C-FRESHNESS (it stays EXPERIMENTAL, per codex/claim_state.json effective_event_by_claim from EXP-GRAPH-37978902447) and does not touch the product. Its product-direction consequence is procedural: the four-anchor Part II route is PARKED and freshness effort is redirected (by the Director) toward a broader-population guard false-accept/calibration measurement or another sub-mechanism, rather than repeatedly re-freezing a structurally degenerate single-anchor read.",
   "estimated_cost": {
     "network_requests": 0,
     "credentials": 0,
     "browser": "none (stdlib only)",
-    "compute": "local CPU seconds: 2 x 40-body dual-path extraction + anchor_d1v_diagnostics + guard_statistics + 1 x 10000-resample bootstrap (seed 37992949248) + integrity hashing of 91 artifacts (SHA-256). Described as < 5 minutes wall-clock on CI.",
+    "compute": "DESIGN satisfiability probes only: import of the frozen parent modules, their fixtures/controls/path-independence attestation, the frozen synthetic estimator fixtures, and re-derivation of the two retained corpora (no new capture). < 5 minutes wall-clock on CI.",
     "model_calls": 0,
-    "writes": "restricted to research/experiments/EXP-GRAPH-38046502943/ (result.json, report.md, provenance.json, derived/*) plus materialized code/verify_certificate.py"
+    "writes": "research/experiments/EXP-GRAPH-38046502943/spec.json and prereg.md only; no git operations"
   },
-  "expected_information_gain": "A decisive, pre-freeze, auditable answer to the mandate's binary constructibility question: either (i) the >=2-anchor D1V frame is NOT constructible on the accepted credential-free GET-only repertoire, with the exact anchors, per-anchor byte-level transport causes, positive-control-backed powered-estimator arithmetic, and a verified fail-loud reason that parks the four-anchor Part II route (unblocking a redirect of C-FRESHNESS effort), or (ii) the certificate is falsified and the park revoked, licensing the first non-degenerate INCUMBENT-BLIND read. Either way the C-FRESHNESS decisive chain advances without freezing another structurally degenerate single-anchor measurement. Expected information gain is maximal for a zero-remote-cost run: it converts an inherited unknown (constructibility) into an established bounded negative/positive, and it is the cheapest discriminating test available (no HTTP, no substrate risk).",
+  "expected_information_gain": "Decisive: it converts the mandate's binary constructibility question into an established bounded NEGATIVE, answering it with exact anchors, per-anchor byte-level transport causes, and positive-control-backed powered-estimator arithmetic, and it parks the four-anchor Part II route so C-FRESHNESS effort is not spent re-freezing a structurally degenerate single-anchor read. The information is maximal for zero remote cost. The residual unknown (broader-population constructibility) is explicitly out of scope (CC-A bound) and handed to the Director, not assumed.",
   "certificate": {
     "verdict": "NEGATIVE",
-    "statement": "No value-only-rotation (D1V) population spanning >= 2 independent anchors is constructible on the accepted credential-free, server-rendered, no-JavaScript, GET-only anchor repertoire (CAL-POS-1..4; K=4 fresh sessions; stdlib HTTP; one egress path) at the two accepted capture dates (grandparent 2026-10-09, parent 2026-10-10) under the frozen D1V definition, frozen transport signature, frozen token list and frozen instrument. The D1V population spans exactly one anchor (CAL-POS-2; M-N-D1V=6, M-N-D1V-ANCHORS=1 on both corpora); GATE-B is unreadable by construction; the estimator is independently certified powered (GATE F + SYN-POWER-2ANCHOR-D1V). The four-anchor Part II route is therefore PARKED.",
+    "statement": "No value-only-rotation (D1V) population spanning >= 2 independent anchors is constructible on the accepted credential-free, server-rendered, no-JavaScript, GET-only anchor repertoire (CAL-POS-1..4; K=4 fresh sessions; stdlib HTTP; one egress path) at the two accepted capture dates (grandparent 2026-10-09, parent 2026-10-10) under the frozen D1V definition, frozen transport signature, frozen token list and frozen instrument. The D1V population spans exactly one anchor (CAL-POS-2; M-N-D1V=6, M-N-D1V-ANCHORS=1 on both corpora). Moreover the mandated object is unreachable even if the anchor count were raised: on pure value-only rotation the incumbent/value-aware paired differential is identically 1, so the anchor-clustered 97.5% interval is the zero-width [1,1] for any anchor count. The four-anchor Part II route is therefore PARKED and the DESIGN fails loudly.",
     "scope": "bounded to the accepted repertoire and the two accepted capture dates; CC-A bound inherited (no anchor-pool screening, no Web-prevalence claim); broader-population constructibility remains UNKNOWN (out of scope, do_not_assume).",
     "anchors": {
       "CAL-POS-1": {
         "transport_cause": "BODY_DERIVED_ETAG",
-        "byte_level_premise": "parent corpus: on all K=4 fresh sessions, ETag == 'W/\"<sha256(body)[:32]>\"' (a deterministic function of the response body; e.g., S1 ETag 6e4d409aa5228030672423928a10aefd == sha256(S1 body)[:32], verified at EXECUTE against every session). Any value rotation that changes the body forces CH-TRANSPORT-VALIDATOR to fire, so the value-only-rotation family cannot form on this anchor: transport_change is forced for every value-changing request pair.",
-        "accepted_evidence": "parent result.json M-TRANSPORT-BODY-DERIVATION-CAL-POS-1=true; M-D1V-BLOCKER-CAL-POS-1=BODY_DERIVED_ETAG; stability UNCHANGED at both dates; bias from bodies differing in >200 regions including per-request nonces and per-session authenticity_tokens (documented in the parent packet), so the ETag motion is not caused by the in-list rotating value alone.",
+        "byte_level_premise": "on all K=4 fresh sessions ETag == 'W/\"<sha256(body)[:32]>\"' (a deterministic function of the whole response body). Any value rotation that changes the body forces CH-TRANSPORT-VALIDATOR to fire, so the value-only-rotation family cannot form: transport_change is forced for every value-changing request pair.",
+        "accepted_evidence": "parent result.json M-TRANSPORT-BODY-DERIVATION-CAL-POS-1=true; M-D1V-BLOCKER-CAL-POS-1=BODY_DERIVED_ETAG; stability UNCHANGED at both dates; the bodies differ in many regions (per-request nonces and per-session authenticity_tokens), so the ETag motion is not caused by the in-list rotating value alone.",
         "verdict_over_date": "UNCHANGED (parent + grandparent)"
       },
       "CAL-POS-2": {
         "transport_cause": "NONE",
-        "byte_level_premise": "the SOLE D1V anchor: transport signature (ETag, Last-Modified, max-age, Vary) AND final_url are constant across all four sessions (transport_signature_stable=true) while the extracted in-list values rotate per request (values_rotate=true). Verified at EXECUTE.",
+        "byte_level_premise": "the SOLE D1V anchor: transport signature (ETag, Last-Modified, max-age, Vary) AND final_url are constant across all four sessions (transport_signature_stable=true) while the extracted in-list values rotate per request (values_rotate=true). This is the only anchor contributing D1V trials (M-N-D1V=6).",
         "verdict_over_date": "UNCHANGED (parent + grandparent)"
       },
       "CAL-POS-3": {
         "transport_cause": "TOKEN_BEARING_FINAL_URL",
-        "byte_level_premise": "parent corpus: final_url distinct on all K=4 fresh sessions, each carrying a 32-hex centralauthLoginToken (e.g., 5efcb364..., 32e3ab27..., 1211ef13..., 3a962889...) that is NOT one of the rotating wpLoginToken body values (verified at EXECUTE byte-level). The transport component is a DIFFERENT credential-bearing token than the in-list rotated value, so transport_change is forced by a transport field that is not the rotating value; Route-B reclassification (motion caused solely by the rotating value) is structurally unsound here.",
+        "byte_level_premise": "final_url is distinct on all K=4 fresh sessions, each carrying a 32-hex centralauthLoginToken that is NOT one of the rotating wpLoginToken body values. The transport component is a DIFFERENT credential-bearing token than the in-list rotated value, so transport_change is forced by a transport field that is not the rotating value; route-b reclassification (motion caused solely by the rotating value) is structurally unsound here.",
         "accepted_evidence": "parent result.json M-D1V-BLOCKER-CAL-POS-3=TOKEN_BEARING_FINAL_URL; stability UNCHANGED at both dates.",
         "verdict_over_date": "UNCHANGED (parent + grandparent)"
       },
@@ -128,199 +104,116 @@
         "transport_cause": "NO_FIELD",
         "byte_level_premise": "no value-bearing in-list fields in the retained bytes on any session (NO_FIELD verdict re-derived on all K=4 sessions); no trials can form; the NO_FIELD-vs-token-list-limit distinction remains an inherited unknown.",
         "verdict_over_date": "UNCHANGED (parent + grandparent)"
+      },
+      "CAL-POS-5": {
+        "transport_cause": "RETIRED",
+        "byte_level_premise": "retired (404x4) by the grandparent packet and excluded from all denominators; re-introducing it is out of scope.",
+        "verdict_over_date": "RETIRED"
       }
     },
+    "degeneracy_argument": {
+      "claim": "The mandated object (non-degenerate anchor-clustered 97.5% lower bound of M-PAIRED-FA-DIFF-D1V on a >= 2-anchor D1V population) is ARITHMETICALLY UNREACHABLE on this substrate even if M-N-D1V-ANCHORS >= 2 were achieved.",
+      "proof_sketch": "Frozen D1V is STALE (live value != recorded value) AND NOT structural_change AND NOT transport_change. On a D1V trial, B-INCUMBENT-SIGNAL-ONLY REUSEs unless CH-STRUCT-SIG, CH-TRANSPORT-VALIDATOR or CH-POSTCOND-SEM fires; the first two are false by the D1V definition and the third is false on the accepted repertoire (M-N-POSTCOND-DRIFT=0 on both corpora), so incumbent REUSE = 1. B-VALUE-AWARE REUSEs only if live == recorded, which D1V forbids (STALE), so value-aware REUSE = 0 and value-aware false-accept = 0. Hence the per-trial paired differential is identically 1 on every D1V trial, and the anchor-clustered bootstrap of a constant 1 over any number of anchors returns the zero-width [1,1]. Non-degeneracy would require within-anchor variation of the incumbent decision, i.e. CH-POSTCOND-SEM field-name-set drift co-occurring with D1V; that is absent (M-N-POSTCOND-DRIFT=0), is a second independent channel rather than value-only rotation, and cannot be pre-certified for a new anchor population without prohibited outcome-bearing screening.",
+      "consequence": "PC-ESTIMATOR-POWER-DEMO (LOW=2/3, UB97=1.0) is powered ONLY because its synthetic pseudo-anchor B deliberately injects postcond drift, i.e. within-anchor incumbent ABSTAINs; that variation does not exist in the real D1V family. The estimator is powered; the OBJECT is not constructible."
+    },
     "estimator_arithmetic": {
-      "gate_f": "SYN-ESTIMATOR-2ANCHOR: LOW=1/3 > 0, UB97=1/2 < 1, LOW < UB97; 1-anchor fixture -> null LOW/UB97; homogeneous fixture -> zero-width [1/2,1/2]; same estimator function/B=10000/seed 37992949248 as the real read (V16). Accepted in parent result/audit (gate_f=true).",
-      "syn_power_2anchor_d1v": "SYN-POWER-2ANCHOR-D1V (CC-J synthetic, frozen in prereg + driver): 12 D1V trials over 2 pseudo-anchors (anchor A postcond-silent x6 -> incumbent REUSE x6; anchor B postcond fires trials 4,5 -> incumbent ABSTAIN x2 / REUSE x4) + 1 FRESH (precondition silent) trial -> M-N-D1V=12, M-N-D1V-ANCHORS=2, decisions {REUSE, ABSTAIN}, pooled diff=10/12, LOW=2/3, UB97=1.0, gate_b=INCUMBENT-BLIND-CONFIRMED under seed 37992949248, B=10000. Shows the estimator is powered for a 2-anchor D1V frame: the single-anchor degeneracy of the real read is a population-constructibility property, not an instrument-power failure.",
-      "conclusion": "the estimator is powered; the blocker is population constructibility."
+      "gate_f": "SYN-ESTIMATOR-2ANCHOR: LOW=1/3 > 0, UB97=1/2 < 1, LOW < UB97; 1-anchor fixture -> null LOW/UB97; homogeneous fixture -> zero-width [1/2,1/2]; same estimator function/B=10000/seed 37992949248 as the real read (V16). Accepted in parent result/audit (gate_f=true) and re-verified at DESIGN.",
+      "syn_power_2anchor_d1v": "SYN-POWER-2ANCHOR-D1V (CC-J synthetic, frozen): 12 D1V trials over 2 pseudo-anchors (anchor A postcond-silent x6 -> incumbent REUSE x6; anchor B postcond fires trials 4,5 -> incumbent ABSTAIN x2 / REUSE x4) + 1 FRESH trial -> M-N-D1V=12, M-N-D1V-ANCHORS=2, decisions {REUSE, ABSTAIN}, pooled diff=10/12, LOW=2/3, UB97=1.0, gate_b=INCUMBENT-BLIND-CONFIRMED under seed 37992949248, B=10000. Re-verified at DESIGN.",
+      "conclusion": "the estimator is powered; the blocker is population/object constructibility, and specifically the absence of within-D1V incumbent variation on the accepted repertoire."
     },
     "route_b_rejection": {
-      "question": "could an instrument redesign reclassify the transport-validator motion (caused by value rotation) so that a second anchor enters D1V (mandate remedy b)?",
+      "question": "could an instrument redesign reclassify transport-validator motion (caused by value rotation) so that a second anchor enters D1V (mandate remedy b)?",
       "finding": "REJECTED at byte level on the accepted repertoire; no structural, non-circular reclassification exists for the blocked anchors:",
-      "CAL-POS-1": "the ETag is exactly sha256(body)[:32] wrapped in W/\"...\"; it changes because the body changes, and the body changes are NOT solely the in-list value (per-request nonces, per-session authenticity_tokens, >200 differing regions). Reclassifying this motion as value-caused would require dropping CH-TRANSPORT-VALIDATOR for motion that is not caused by the rotating value - circular and false at byte level.",
-      "CAL-POS-3": "the final_url token (32-hex centralauthLoginToken) differs from the rotating in-list wpLoginToken values (longer, distinct bytes); the transport component is a different token with an independent cause; no principled rule maps final_url motion to the in-list value's motion.",
+      "CAL-POS-1": "the ETag is exactly sha256(body)[:32] wrapped in W/\"...\"; it changes because the body changes, and the body changes are NOT solely the in-list value (per-request nonces, per-session authenticity_tokens, many differing regions). Reclassifying this motion as value-caused would mean dropping CH-TRANSPORT-VALIDATOR for motion not caused by the rotating value - circular and false at byte level.",
+      "CAL-POS-3": "the final_url token (32-hex centralauthLoginToken) differs from the rotating in-list wpLoginToken values; the transport component is a different token with an independent cause; no principled rule maps final_url motion to the in-list value's motion.",
       "CAL-POS-4": "no fields at all; no reclassification can create trials.",
       "CAL-POS-2": "already D1V (no reclassification needed).",
-      "consequence": "remedy (b) is not constructible on this repertoire; remedy (a) (a materially different anchor population with transport validators independent of the rotating value) would require new anchor-pool screening outside the accepted CC-A bound and is UNKNOWN rather than certified - precisely why the certificate is bounded to the accepted repertoire and why the broader-population question is handed to the Director."
+      "consequence": "remedy (b) is not constructible on this repertoire; remedy (a) (a materially different anchor population with transport validators independent of the rotating value) would require new anchor-pool screening outside the accepted CC-A bound and is UNKNOWN rather than certified - and even if it produced a second anchor, the degeneracy_argument shows the required non-degenerate bound would still not exist. This is precisely why the certificate is bounded to the accepted repertoire and why the broader-population question is handed to the Director."
     },
     "park": {
-      "consequence": "four-anchor Part II route PARKED; C-FRESHNESS stays EXPERIMENTAL (effective_event_by_claim from EXP-GRAPH-37978902447); no false-accept / blindness / value-awareness-necessity claim is read from the single-anchor descriptive point estimates (GATE-B unread, bounds null).",
+      "consequence": "four-anchor Part II route PARKED; C-FRESHNESS stays EXPERIMENTAL (effective_event_by_claim from EXP-GRAPH-37978902447); no false-accept / blindness / value-awareness-necessity claim is read from the single-anchor descriptive point estimates.",
       "redirect": "freshness effort may move to a broader-population guard false-accept/calibration measurement or another sub-mechanism (Global Research Director decision, not self-authorized here)."
     },
-    "falsifiers": "M-N-D1V-ANCHORS >= 2 on either corpus; non-degenerate gate_b read; blocker-map mismatch (see decision_rule F-NONDEGENERATE-EVIDENCE). Expected-empty."
+    "falsifiers": "F-POSITIVE-CONSTRUCTIBLE (see top-level falsifier): a non-degenerate >= 2-anchor D1V population demonstrable from already-accepted evidence, or a structural non-circular reclassification yielding within-D1V incumbent variation, or evidence the incumbent is not at the D1V false-accept ceiling. Expected-empty."
   },
-  "protocol": {
-    "mode": "local, deterministic, zero-HTTP certificate verification of retained accepted evidence (no capture), declared in prereg.md; EXECUTE materializes code/verify_certificate.py verbatim from prereg.md (sha256 bound in execute_driver_sha256), verifies its own hash, then runs: (1) integrity (freeze artifact_hashes, frozen packet hashes incl. design_review.json, per-body sha256 recompute, records.jsonl vs published raw hashes), (2) driver self-hash, (3) instrument controls (run_fixtures, run_estimator_controls/GATE F, path_independence_attestation from the frozen parent modules), (4) SYN-POWER-2ANCHOR-D1V power demonstration, (5) per-corpus re-derivation of the certificate premises with the frozen parent machine (both extraction paths -> build_population -> anchor_path_metrics -> anchor_d1v_diagnostics -> guard_statistics) asserting pre-registered expectations AND equality with accepted published values (comparability rule: M-N-D1V / M-N-D1V-ANCHORS / per-anchor blockers compared for both corpora; PARENT additionally M-N-DECISIONS-D1V / M-D1V-DEGENERACY-MODE / M-N-D1V-BLOCKED-ANCHORS; GRANDPARENT published M-N-DECISIONS-D1V=2 uses the grandparent machine's pre-SA-03 counting semantics and is not byte-comparable), (6) byte-level transport premises on the parent corpus, (7) ordered fail-closed decision rule; emits result.json / report.md / provenance.json / derived/*.",
-    "no_new_capture": "true",
-    "gate_b_not_read": "true (pre-declared power statement; single-anchor population)",
-    "claim_event_emitted": false,
-    "writes_scope": "research/experiments/EXP-GRAPH-38046502943/** only; no git operations."
+  "design_failure": {
+    "verdict": "MANDATE-INFEASIBLE-FAIL-LOUD",
+    "category": "CONSTRUCTIBILITY_NEGATIVE",
+    "reason": "The mandate's required positive object is arithmetically unreachable on the accepted substrate: on every value-only-rotation trial the value-blind incumbent is at the false-accept ceiling and the value-aware comparator at the floor, so the paired differential is identically 1 and the anchor-clustered 97.5% interval is zero-width [1,1] for any anchor count. The accepted repertoire additionally supplies only one D1V anchor (CAL-POS-2) and no structural non-circular transport reclassification, and the remedy (a) population would be UNKNOWN without prohibited outcome-bearing screening. There is therefore no honest freeze-eligible two-sided experiment.",
+    "fail_loud_mechanism": "spec.freeze_eligibility marks decision_rule_reachability and baseline_identifiability FAIL (with reasons/evidence_refs); the independent pre-freeze reviewer must REVISE, and the deterministic freezer refuses a FAIL status. No freeze.json is produced and the DESIGN stage fails loudly, per POLICY.md line 115 and the mandate's explicit fail-loud clause. This is a DESIGN failure, not a MEASUREMENT_INVALID or a scientific refutation of C-FRESHNESS.",
+    "parked": "four-anchor Part II route; C-FRESHNESS remains EXPERIMENTAL",
+    "redirect": "broader-population guard false-accept/calibration measurement or another freshness sub-mechanism (Global Research Director decision; not self-authorized)"
   },
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PASS",
-      "reason": "Positive/support branch CERTIFICATE-CONFIRMED-PARK is reachable: a DESIGN-time satisfiability probe ran the exact frozen machine pieces (instrument canaries, GATE F, SYN-POWER-2ANCHOR-D1V arithmetic, both corpus re-derivations against published values, byte-level transport premises) and every pre-registered expectation held, so the success branch fires when the same checks pass at EXECUTE. Falsifying branch F-NONDEGENERATE-EVIDENCE is reachable and arithmetically attainable: its triggers (M-N-D1V-ANCHORS>=2, gate_b_branch!=DATA-INSUFFICIENT-D1V-DEGENERATE, blocker-map mismatch) are ordinary comparisons over the machine's own outputs, machine-checkable at EXECUTE, and the SYN-POWER-2ANCHOR-D1V scenario demonstrates the machine CAN emit exactly those forms (>=2 anchors, INCUMBENT-BLIND-CONFIRMED) under the same code path. The four F-* validity branches are reachable on integrity/control failures (hash mismatch, GATE F fail, fixture fail, power arithmetic mismatch). Thresholds are attainable: GATE F requires LOW>0 AND UB97<1 (achieved: 1/3, 1/2); power thresholds (diff>=0.10, LOW>0) achieved (10/12, 2/3). Precedence is free of shadowing: the ordered elif chain is first-match-wins, F-* before F-NONDEGENERATE before CERTIFICATE-CONFIRMED-PARK; no later branch is unreachable because each upstream branch's trigger is checkable and disjoint by construction.",
+      "status": "FAIL",
+      "reason": "The mandate's required positive/support branch (a constructible >= 2-anchor D1V population whose anchor-clustered M-PAIRED-FA-DIFF-D1V 97.5% interval has LOW < UB97) is EMPTY/UNREACHABLE on the accepted substrate. No configuration of the retained corpora can produce it: the paired differential is identically 1 on every pure value-only-rotation trial (incumbent at the false-accept ceiling, value-aware at the floor; CH-POSTCOND-SEM silent, M-N-POSTCOND-DRIFT=0), so the anchor-clustered interval is [1,1] for any anchor count. The only reachable terminal branch is the negative/fail-loud one; a design whose discriminating branch cannot trigger is not freeze-eligible. This is a DESIGN failure, declared honestly rather than deferred to EXECUTE.",
       "evidence_refs": [
-        "research/experiments/EXP-GRAPH-37992949248/code/run_experiment.py (frozen machine: guard_statistics gate-b branch logic, cluster_precondition_ok, M-D1V-DEGENERACY-MODE)",
-        "research/experiments/EXP-GRAPH-37992949248/code/estimator.py (anchor_clustered_paired_fa_diff, B=10000, seed binding)",
-        "research/experiments/EXP-GRAPH-37992949248/result.json (gate_f=true, GATE F LOW=1/3 UB97=1/2, M-N-D1V=6, M-N-D1V-ANCHORS=1, M-D1V-DEGENERACY-MODE=ANCHOR_TRANSPORT_COUPLING)",
-        "research/experiments/EXP-GRAPH-38046502943/prereg.md (frozen SYN-POWER-2ANCHOR-D1V scenario and expected arithmetic)",
-        "research/experiments/EXP-GRAPH-38046502943/spec.json (this decision_rule)"
+        "research/experiments/EXP-GRAPH-37992949248/code/guard.py (frozen four-baseline decision semantics: D1V -> incumbent REUSE, value-aware ABSTAIN)",
+        "research/experiments/EXP-GRAPH-37992949248/code/estimator.py (anchor_clustered_paired_fa_diff degenerate-null semantics)",
+        "research/experiments/EXP-GRAPH-37992949248/result.json (M-N-D1V=6, M-N-D1V-ANCHORS=1, M-N-POSTCOND-DRIFT=0, gate_b=DATA-INSUFFICIENT-D1V-DEGENERATE, M-D1V-DEGENERACY-MODE=ANCHOR_TRANSPORT_COUPLING)",
+        "research/experiments/EXP-GRAPH-37992949248/derived/guard_stats.json (re-derived at DESIGN: anchors_with_d1v=['CAL-POS-2'], null LOW/UB97)",
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (certificate.degeneracy_argument)"
       ]
     },
     "measurement_prerequisites": {
       "status": "PASS",
-      "reason": "Every hard prerequisite exists NOW and is local. Retained corpora: parent raw/records.jsonl + 40 bodies and grandparent raw/records.jsonl + 40 bodies are present and hash-consistent (probe-verified integrity; also hashed in freeze.json.artifact_hashes). Frozen instrument: the 7 parent code modules exist, import cleanly, and their canaries run (probe-verified: fixtures, GATE F, path-independence attestation all PASS). Runtime: CPython stdlib only (hashlib, json, re, platform, sys, pathlib, random via the frozen estimator); no credentials, browser, network, external endpoints, task banks or writable controls are required - the measurement is a local deterministic re-derivation, so nothing 'will be created during EXECUTE' that determines whether the measurement is possible; the only EXECUTE-side materialization is the driver itself, extracted byte-exactly from prereg.md and hash-bound by spec.execute_driver_sha256. design_review.json is produced by the independent reviewer before freeze (workflow-owned). No prerequisite determines the measurement that is unavailable.",
+      "reason": "Every prerequisite for the certificate exists NOW and is local: the parent and grandparent retained corpora (raw/records.jsonl + bodies) are present and hash-consistent; the 7 frozen parent code modules exist and import cleanly; their canaries, fixtures, GATE F controls and path-independence attestation all PASS (re-verified at DESIGN). Runtime is CPython stdlib only; no credentials, browser, network, external endpoints or task banks are required. No prerequisite is deferred to EXECUTE ('will be created during EXECUTE'), because this DESIGN intentionally freezes no EXECUTE.",
       "evidence_refs": [
         "research/experiments/EXP-GRAPH-37992949248/raw/records.jsonl",
-        "research/experiments/EXP-GRAPH-37992949248/raw/bodies/ (40 files)",
+        "research/experiments/EXP-GRAPH-37992949248/code/ (7 modules; imported cleanly at DESIGN)",
         "research/experiments/EXP-GRAPH-37978902447/raw/records.jsonl",
-        "research/experiments/EXP-GRAPH-37978902447/raw/bodies/ (40 files)",
-        "research/experiments/EXP-GRAPH-37992949248/code/run_experiment.py, guard.py, estimator.py, neutral_detector.py, path_a_htmlparser.py, path_b_regexlex.py, fixtures.py",
         "research/experiments/EXP-GRAPH-38046502943/request.json (no credential/browser/network dependency declared)"
       ]
     },
     "baseline_identifiability": {
-      "status": "PASS",
-      "reason": "The compared arms (B-INCUMBENT-SIGNAL-ONLY vs B-VALUE-AWARE) demonstrably differ on the D1V trial family the differential measures: on the synthetic 2-anchor D1V frame (same guard.decide code, same estimator, same B/seed) the pooled paired false-accept differential is 10/12 > 0 with LOW=2/3 < UB97=1.0, i.e., the arms are not guaranteed identical (no ceiling/floor collapse) whenever a >=2-anchor D1V population exists; and the certificate's entire point is that the real population is single-anchor, where the arms are DESCRIPTIVE-ONLY by the estimator's n_anchors<2 null rule - the pre-declared power statement, not a failure of arm identifiability. No cost dimension used by one comparator is omitted: the only scored metric is M-PAIRED-FA-DIFF-D1V with its LOW/UB97 bounds; the run performs no economics measurement.",
+      "status": "FAIL",
+      "reason": "Guaranteed ceiling/floor: on the D1V family the two compared arms cannot differ across trials. B-INCUMBENT-SIGNAL-ONLY REUSEs (false accept) on every D1V trial because CH-STRUCT-SIG and CH-TRANSPORT-VALIDATOR are false by the D1V definition and CH-POSTCOND-SEM is silent (M-N-POSTCOND-DRIFT=0); B-VALUE-AWARE ABSTAINS on every D1V trial because D1V requires STALE. The paired differential is therefore a constant 1 with zero variance, and the anchor-clustered 97.5% interval is zero-width [1,1] regardless of anchor count. The treatment/comparator pair is not identifiable on the object under test (this is the exact ceiling/floor situation the pre-freeze review must reject), so the design is not freeze-eligible.",
       "evidence_refs": [
-        "research/experiments/EXP-GRAPH-37992949248/code/guard.py (frozen four-baseline decision semantics)",
-        "research/experiments/EXP-GRAPH-37992949248/code/estimator.py (paired false-accept differential, degenerate-null semantics)",
-        "research/experiments/EXP-GRAPH-37992949248/result.json (GATE F controls; M-PAIRED-FA-DIFF-D1V-LOW/UB97 null on the single-anchor read)",
-        "research/experiments/EXP-GRAPH-38046502943/prereg.md (SYN-POWER-2ANCHOR-D1V: arms differ 10/12)"
+        "research/experiments/EXP-GRAPH-37992949248/code/guard.py (frozen guard decision semantics)",
+        "research/experiments/EXP-GRAPH-37992949248/result.json (M-FA-INCUMBENT-D1V=1.0, M-FA-VALUEAWARE-D1V=0.0, M-PAIRED-FA-DIFF-D1V=1.0, M-N-POSTCOND-DRIFT=0)",
+        "research/experiments/EXP-GRAPH-37992949248/code/estimator.py (constant-input bootstrap returns zero-width interval)",
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (certificate.degeneracy_argument)"
       ]
     },
     "control_sensitivity": {
       "status": "PASS",
-      "reason": "The positive controls fire and the null controls stay null under the SAME implementation that scores the question. Positive: PC-ESTIMATOR-NONDEGENERATE (SYN-ESTIMATOR-2ANCHOR LOW=1/3>0, UB97=1/2<1) and PC-ESTIMATOR-POWER-DEMO (SYN-POWER-2ANCHOR-D1V -> INCUMBENT-BLIND-CONFIRMED, LOW=2/3, UB97=1.0) run through estimator.anchor_clustered_paired_fa_diff and guard_statistics - the exact code path of the real read - and both fire (probe-verified PASS). Null: NC-ESTIMATOR-CONTROL-SENSITIVITY (1-anchor -> null bounds; homogeneous -> zero-width [1/2,1/2]) stays null under the same code (probe-verified PASS); extraction/guard fixtures and path-independence attestation PASS (probe-verified). The controls are not tautological: they operate on synthetic pseudo-anchor trials with pre-declared expectations, so a defective estimator, a broken extraction path or a re-opened second anchor would flip them.",
+      "reason": "The positive controls fire and the null controls stay null under the SAME implementation that would score the question. Positive: PC-ESTIMATOR-NONDEGENERATE (SYN-ESTIMATOR-2ANCHOR LOW=1/3>0, UB97=1/2<1) and PC-ESTIMATOR-POWER-DEMO (SYN-POWER-2ANCHOR-D1V -> INCUMBENT-BLIND-CONFIRMED, LOW=2/3, UB97=1.0) run through estimator.anchor_clustered_paired_fa_diff and guard_statistics and both fire (re-verified at DESIGN: POS_CTRL=True). Null: NC-ESTIMATOR-CONTROL-SENSITIVITY (1-anchor -> null bounds; homogeneous -> zero-width [1/2,1/2]) stays null under the same code (NC_SENS=True); extraction/guard fixtures and path-independence attestation PASS. The controls are not tautological: they operate on synthetic pseudo-anchor trials with pre-declared expectations.",
       "evidence_refs": [
-        "research/experiments/EXP-GRAPH-37992949248/result.json (GATE F positive control recorded: M-ESTIMATOR-POSITIVE-CONTROL-PASS=true, LOW=1/3, UB97=1/2, M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS=true)",
-        "research/experiments/EXP-GRAPH-37992949248/derived/estimator_controls.json (accepted; NC-ESTIMATOR-CONTROL-SENSITIVITY=true, 1-anchor null + homogeneous zero-width records)",
-        "research/experiments/EXP-GRAPH-37992949248/code/fixtures.py (SYN-CANARY, SYN-EMPTY-VALUE, SYN-JSSTRING, GUARD_FIXTURES, estimator fixtures)",
-        "research/experiments/EXP-GRAPH-37992949248/code/run_experiment.py (run_fixtures, run_estimator_controls, path_independence_attestation)"
+        "research/experiments/EXP-GRAPH-37992949248/result.json (GATE F positive control; homogeneous control PASS)",
+        "research/experiments/EXP-GRAPH-37992949248/derived/estimator_controls.json",
+        "research/experiments/EXP-GRAPH-37992949248/code/fixtures.py, run_experiment.py (run_fixtures, run_estimator_controls, path_independence_attestation)",
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (positive_control, null_control)"
       ]
     },
     "treatment_liveness": {
       "status": "NOT_APPLICABLE",
-      "reason": "This is a graph-lane C-FRESHNESS constructibility-certificate measurement, not a Product-lane inheritance/residual-novelty/LLM-inheritance/product-economics experiment, and the frozen question contains no SPIDER mechanism/product treatment arm whose executability needs a liveness smoke test. The object under test IS the constructibility of the measurement frame (>=2-anchor D1V population + powered estimator); its 'liveness' is instead certified by the same evidence the liveness check would use: the SYN-POWER-2ANCHOR-D1V arithmetic shows the frame CAN become executable (INCUMBENT-BLIND-CONFIRMED with LOW=2/3 < UB97=1.0 under the frozen seed/B on the frozen machine), and decision_rule_reachability + control_sensitivity cover frame reachability. Per the reviewer contract, NOT_APPLICABLE is permitted exactly when the experiment does not evaluate a SPIDER treatment; a treatment-constructibility question answered by a certificate is therefore not a liveness gap.",
+      "reason": "This is a graph-lane C-FRESHNESS constructibility-certificate question, not a Product-lane experiment, and the frozen question contains no SPIDER mechanism/product treatment arm whose executability needs a liveness smoke test. The object under test is the constructibility of the measurement frame (>= 2-anchor D1V population + powered estimator); there is no treatment to keep alive.",
       "evidence_refs": [
         "research/experiments/EXP-GRAPH-38046502943/request.json (claim C-FRESHNESS, graph lane, constructibility question)",
-        "research/experiments/EXP-GRAPH-38046502943/spec.json (decision_rule, certificate.estimator_arithmetic)"
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (decision_rule, certificate)"
       ]
     },
     "freeze_artifacts_bound": {
-      "status": "PASS",
-      "reason": "All 91 mutable local files whose identity can change the interpretation are listed: the 7 frozen parent instrument modules (code/*.py), both retained raw/records.jsonl, all 80 retained response bodies (raw/bodies/**), and both accepted result.json files (read by the driver for published-value comparison and published raw-artifact hashes). These are exactly the interpretation-changing dependencies: the frozen machine, the retained corpora and the published comparison targets. Remote Web responses are not re-fetched (protocol declares zero HTTP); their identity is bound by the retained bytes' hashes above, and the sampling protocol/anchor identities were already frozen by the accepted packets and are referenced, not re-frozen. No other mutable dependency exists (driver code is bound by spec.execute_driver_sha256 and is materialized verbatim from prereg.md).",
+      "status": "NOT_APPLICABLE",
+      "reason": "No EXECUTE is authorized for this design (the mandate is infeasible and the DESIGN fails loudly), so no frozen measurement depends on mutable local artifacts. freeze_artifacts is therefore empty. The evidence the certificate rests on (the retained accepted corpora, the frozen instrument modules, and the accepted published result/handoff) is referenced by path and sha256 in evidence_refs and prereg.md; those are immutable accepted evidence, not EXECUTE-side mutable dependencies.",
       "evidence_refs": [
-        "research/experiments/EXP-GRAPH-38046502943/spec.json (freeze_artifacts: 91 paths)",
-        "research/experiments/EXP-GRAPH-37992949248/result.json, research/experiments/EXP-GRAPH-37978902447/result.json (published comparison inputs)",
-        "research/experiments/EXP-GRAPH-37992949248/code/*.py (7 files), both raw/records.jsonl, both raw/bodies/** (80 files)"
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (freeze_artifacts: [])",
+        "research/experiments/EXP-GRAPH-38046502943/spec.json (evidence_refs)"
       ]
     }
   },
-  "freeze_artifacts": [
-    "research/experiments/EXP-GRAPH-37992949248/code/guard.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/estimator.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/neutral_detector.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/path_a_htmlparser.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/path_b_regexlex.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/fixtures.py",
-    "research/experiments/EXP-GRAPH-37992949248/code/run_experiment.py",
-    "research/experiments/EXP-GRAPH-37992949248/raw/records.jsonl",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-1/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-1/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-1/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-1/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-2/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-2/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-2/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-2/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-3/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-3/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-3/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-3/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-4/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-4/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-4/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-NEG-4/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-1/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-2/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-3/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37992949248/raw/bodies/CAL-POS-4/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37992949248/result.json",
-    "research/experiments/EXP-GRAPH-37978902447/raw/records.jsonl",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-1/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-2/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-3/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-NEG-4/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-1/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-2/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-3/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S1_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S2_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S3_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_fresh.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_warm1.html",
-    "research/experiments/EXP-GRAPH-37978902447/raw/bodies/CAL-POS-4/S4_warm2.html",
-    "research/experiments/EXP-GRAPH-37978902447/result.json"
-  ],
-  "execute_driver_sha256": "b2e498d604908c179273a38996b4783a886d9d1ed39844e81003f4a47eaa36e0",
+  "freeze_artifacts": [],
   "evidence_refs": [
-    "research/experiments/EXP-GRAPH-37992949248/result.json (sha256 9156e97dd95858ded8942459aa6d7350b1b1635197048a47089af1af622ba97f) - accepted GATE F, M-N-D1V=6/M-N-D1V-ANCHORS=1, blockers, stability UNCHANGED x4, per-anchor transport diagnostics",
+    "research/experiments/EXP-GRAPH-37992949248/result.json (sha256 9156e97dd95858ded8942459aa6d7350b1b1635197048a47089af1af622ba97f) - accepted GATE F, M-N-D1V=6/M-N-D1V-ANCHORS=1, blockers, stability UNCHANGED x4, M-N-POSTCOND-DRIFT=0, per-anchor transport diagnostics",
     "research/experiments/EXP-GRAPH-37992949248/freeze.json (sha256 64450207760e901b733dbb011125d2938d26ad06106bde5076dd3277b7a32134)",
     "research/experiments/EXP-GRAPH-37992949248/raw/records.jsonl (sha256 bdef74f6219ef0b2b8f18917fafffe3fac4eeb4cc7dcd98012017b426f5fc32f)",
     "research/experiments/EXP-GRAPH-37992949248/handoff.json - carry_forward (established/rejected/unknown/do_not_assume) preserved in prereg.md",
-    "research/experiments/EXP-GRAPH-37978902447/result.json - grandparent accepted metrics (M-N-D1V=6, M-N-D1V-ANCHORS=1, blockers; M-N-DECISIONS-D1V=2 under its own machine semantics, not byte-comparable)",
+    "research/experiments/EXP-GRAPH-37978902447/result.json - grandparent accepted metrics (M-N-D1V=6, M-N-D1V-ANCHORS=1, blockers)",
     "research/experiments/EXP-GRAPH-37978902447/raw/records.jsonl (sha256 00b60903320447799039d9f004da41d504d64e18f722353993c6a435fb8555e2)",
+    "research/experiments/EXP-GRAPH-37992949248/code/ - frozen instrument (guard.py, estimator.py, neutral_detector.py, path_a_htmlparser.py, path_b_regexlex.py, fixtures.py, run_experiment.py)",
     "codex/claim_state.json - effective_event_by_claim C-FRESHNESS = EXPERIMENTAL (retained; this packet changes nothing)",
+    "research/portfolio/POLICY.md line 115 - fail-loud requirement when the mandate is infeasible",
     "research/claims/registry.json, research/lanes/registry.json - claim + lane charter identity"
   ]
 }
