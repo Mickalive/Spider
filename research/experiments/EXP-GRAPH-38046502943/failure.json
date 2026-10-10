@@ -1,11 +1,11 @@
 {
-  "stage": "design",
-  "category": "DESIGN_FAILURE",
+  "stage": "install",
+  "category": "OPENCODE_INSTALL_FAILURE",
   "message": "stage exited with code 75",
   "retryable": true,
-  "fingerprint": "fece634f3ddc7205ce6eed20",
-  "recorded_at": "2026-10-10T16:29:55.611590+00:00",
-  "github_run_id": "38063607645",
+  "fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "recorded_at": "2026-10-10T17:35:07.486242+00:00",
+  "github_run_id": "38072207023",
   "github_run_attempt": "1",
   "control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
 }
