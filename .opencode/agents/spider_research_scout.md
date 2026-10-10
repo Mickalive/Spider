@@ -18,13 +18,15 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `research/portfolio/PROGRAM_AUDIT_2026-10-09.md` as a dated strategic synthesis (never a substitute for canonical evidence);
-- `codex/claim_state.json`;
-- `codex/index.json`;
+- `research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md` as the cumulative strategic review of original science plus 434 subsequent experiments (never a substitute for canonical evidence);
+- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as the preceding 433-packet historical snapshot;
+- `codex/claim_state.json` (one timeline: historical_precedents_by_claim and subsequent accepted events);
+- `codex/index.json` (one catalog: historical.artifacts and subsequent experiments);
+- `codex/legacy_brief.json` / the snapshot's `legacy_history` and the selective `codex/legacy_artifact_index.json` as the historical pre-2.0 navigation layer;
 - the exact machine snapshot path supplied by the workflow.
 
-Do NOT ingest `SPIDER_CODEX.md` wholesale. It is a human-facing index and grows with every experiment.
-Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
+Do NOT ingest `SPIDER_CODEX.md` wholesale or the 22 MB archived Codex wholesale. Historic tags in the 1401-entry index are navigation hints only: check relevant archived source/audit before elevating a result. It is a human-facing index and grows with every experiment.
+Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map. Treat `effective_event_by_claim` as the current scientific state and `latest_event_by_claim` only as raw chronology, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
 
 ## Mission
 
@@ -60,11 +62,13 @@ Never silently convert categories 2 or 3 into category 1.
 
 Pay special attention to:
 - repeated local continuation where the strategic value is diminishing;
+- Research 2.0 questions that duplicate or contradict the archived pre-2.0 results; explicitly suggest reuse, justified replication, genuine extension or parking, with source SHA(s) where a match exists;
 - lanes that are idle/stalled and need a new objective;
 - missing direct tests of SPIDER's core promise: inherited mechanisms reducing residual novelty/exploration cost for later agents;
 - competitor techniques for caching, replay, workflow compilation, semantic selectors, tool/API bypass, memory, repair and verification;
 - ways agents fail over long horizons: path dependence, salience from previous context, local optima, compounding planning errors and self-generated subproblems;
-- opportunities to test materially different mechanisms rather than another parameterization of the same one.
+- opportunities to test materially different mechanisms rather than another parameterization of the same one;
+- repeated MEASUREMENT_INVALID/REVISE families that indicate an upstream satisfiability, treatment-liveness, task-bank or measurement prerequisite should be repaired once rather than explored again.
 
 ## Output
 
@@ -106,4 +110,4 @@ Shape:
 
 Include all six lanes in `candidate_directions`.
 
-Do not edit repository files, lane states, experiments or Codex. Do not make final allocation decisions.
+Do not edit repository files, lane states, experiments or Codex. Do not make final allocation decisions. The legacy check must still be performed by the Director if you are unavailable; the deterministic snapshot supplies the compact historical context in degraded Scout mode.

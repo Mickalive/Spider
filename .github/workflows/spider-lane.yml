@@ -162,8 +162,49 @@ jobs:
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
-            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. Search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. For NEW governed experiments, request.json contains director_mandate: treat its target claim and strategic question as binding research direction. The inherited parent_handoff is continuity evidence only and MUST NOT silently override a SUPERSEDE/PIVOT/REOPEN Director decision. If request.json contains parent_handoff, preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Convert the Director's strategic question into the smallest rigorous high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/portfolio/POLICY.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. FIRST inspect codex/legacy_brief.json and relevant paths/experiments in codex/legacy_artifact_index.json; use the mounted .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md for targeted primary-source comparisons only. Document where the current design materially differs from or rigorously replicates pre-2.0 precedents; never repeat an identical invalid/degenerate design. Exact immutable request=$DIR/request.json. For NEW governed experiments, request.json contains director_mandate: treat its target claim and strategic question as binding research direction. The inherited parent_handoff is continuity evidence only and MUST NOT silently override a SUPERSEDE/PIVOT/REOPEN Director decision. If request.json contains parent_handoff, preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Cheap pre-freeze satisfiability probes ARE allowed and required for design_contract_version>=2. Before finalizing, attack your own design for empty/unreachable decision branches, missing prerequisites, treatment/comparator identity, ceiling baselines, insensitive controls and mutable code/data dependencies. For v2 fill spec.freeze_eligibility and spec.freeze_artifacts exactly as research/EXPERIMENT_PACKET.md requires. Convert the Director's strategic question into the smallest rigorous high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
           rc=$?
+
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+
+          CONTRACT=$(jq -r '.design_contract_version // 1' "$DIR/request.json")
+          if [[ "$rc" -eq 0 && "$CONTRACT" -ge 2 ]]; then
+            # The resilient reviewer may fall back across providers. Persist the
+            # proposed mutable design first so every reviewer attempt resets to
+            # the SAME spec/prereg, not to the empty init scaffold.
+            bash scripts/checkpoint.sh design-draft "$LANE" "$EXP" "R2 $LANE: proposed design $EXP"
+            draft_checkpoint_rc=$?
+            [[ "$draft_checkpoint_rc" -eq 0 ]] || rc="$draft_checkpoint_rc"
+          fi
+          if [[ "$rc" -eq 0 && "$CONTRACT" -ge 2 ]]; then
+            DESIGN_MODEL=$(jq -r '.model // empty' "$DIR/model_design.json")
+            if [[ -z "$DESIGN_MODEL" ]]; then
+              echo "::error::Missing DESIGN producer model identity for independent review"
+              rc=69
+            else
+              export SPIDER_EXCLUDE_MODEL="$DESIGN_MODEL"
+              export SPIDER_REQUIRED_OUTPUTS="$DIR/design_review.json"
+              bash .github/scripts/run-opencode-resilient.sh design_review "$DIR/model_design_review.json" run --agent spider_design_reviewer \
+                "PRE-FREEZE DESIGN REVIEW ONLY for lane=$LANE experiment=$EXP. Read .opencode/agents/spider_design_reviewer.md and the exact $DIR/request.json, $DIR/spec.json and $DIR/prereg.md. Attack satisfiability and identifiability; do not redesign or run the confirmatory experiment. Write ONLY $DIR/design_review.json."
+              review_rc=$?
+              unset SPIDER_REQUIRED_OUTPUTS
+              unset SPIDER_EXCLUDE_MODEL
+              if [[ "$review_rc" -eq 0 ]]; then
+                python scripts/validate_design_review.py --spec "$DIR/spec.json" --review "$DIR/design_review.json"
+                review_rc=$?
+              fi
+              if [[ "$review_rc" -eq 0 && "$(jq -r '.status' "$DIR/design_review.json")" != "PASS" ]]; then
+                echo "::warning::SPIDER_DESIGN_REVIEW_REVISE experiment=$EXP"
+                review_rc=65
+              fi
+              [[ "$review_rc" -eq 0 ]] || rc="$review_rc"
+            fi
+          fi
+
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
             scope_rc=$?

@@ -74,6 +74,8 @@ A lane handoff's `next_question` is therefore advisory continuity state, not an 
 
 Already-frozen experiments are completed under their frozen design. Pre-freeze work may be superseded by a new Global Director mandate.
 
+New requests use **design-contract v2**. DESIGN must demonstrate before freeze that the decision rule is reachable, prerequisites exist, baselines can discriminate, controls can fire, the treatment is live when relevant, and every mutable local interpretation dependency is bound by hash. A fresh independent DESIGN REVIEW attacks those declarations before the deterministic freezer commits the transaction. Legacy packets remain v1 and are not retroactively invalidated.
+
 Cross-lane evidence is consumed from the Codex or exact immutable commits. Cross-lane dependencies inform Director choices but do not become hard workflow barriers unless the scientific design strictly requires it.
 
 ## 5. One standard experiment transaction
@@ -173,6 +175,8 @@ The factory must survive model failures, GitHub retries and partial runs.
 ## 10. Global research direction
 
 The Global Research Director uses judgment, not a fixed numerical score.
+
+The Director reasons from `effective_event_by_claim` as the current epistemic state. Chronologically later packet-level MEASUREMENT_INVALID/BLOCKED events remain visible in raw history but do not erase earlier accepted scientific evidence.
 
 It reasons from:
 

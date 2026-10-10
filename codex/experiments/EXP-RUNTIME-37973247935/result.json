@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-37973247935",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "substrate": {
+      "nginx_masters": {
+        "ours": [
+          "42769 nginx: master process nginx -c /tmp/single.db.nginx.conf"
+        ],
+        "foreign": [],
+        "exclusive": true
+      },
+      "origins_ok": {
+        "19860": true,
+        "19861": true
+      }
+    },
+    "readiness": {
+      "n_total": 240,
+      "n_non304": 240,
+      "per_ep_non304": {
+        "/api/profile": 120,
+        "/api/data_list": 120
+      },
+      "n_distinct_x_worker_pid": 2,
+      "min_per_uri_stickiness": 1.0,
+      "n_distinct_uris": 12,
+      "pass": true
+    },
+    "capability_ledger": {
+      "ledger_ok": true,
+      "scopes": {
+        "CAP-CHROMIUM-LAUNCH": true,
+        "CAP-WAL-SUBSTRATE": true,
+        "CAP-NGINX-PROXY": true
+      }
+    },
+    "preflights": {
+      "attainability_accept_min_k_reproduced_37": true,
+      "control_liveness_all_pass": true,
+      "checks": [
+        {
+          "id": "CL-OOS-WORKER-COMMIT-PROBE",
+          "pass": true,
+          "detail": {
+            "committed": true,
+            "vector_changed": true,
+            "logical_before": {
+              "marker": "pre_marker",
+              "representation": "pre_repr",
+              "revision": 0,
+              "updated_at": 0.0
+            },
+            "logical_after": {
+              "marker": "cl_commit_probe",
+              "representation": "pre_repr",
+              "revision": 1,
+              "updated_at": 1791582015.1773117
+            }
+          }
+        },
+        {
+          "id": "CL-OOS-WORKER-COMMIT-REPR",
+          "pass": true,
+          "detail": {
+            "committed": true,
+            "vector_changed": true,
+            "body_before": {
+              "variant": "A",
+              "content": "{\"data\": \"hello\", \"version\": 1}"
+            },
+            "body_after": {
+              "variant": "B",
+              "content": "{\"data\": \"hello!\", \"version\": 2}"
+            }
+          }
+        },
+        {
+          "id": "CL-OOS-WORKER-IDLE",
+          "pass": true,
+          "detail": {
+            "vector_identical": true,
+            "committed": false,
+            "exception": null
+          }
+        },
+        {
+          "id": "CL-OOS-WORKER-REJECT",
+          "pass": true,
+          "detail": {
+            "vector_identical": true,
+            "committed": false,
+            "exception": "IntegrityError: CHECK constraint failed: id=1"
+          }
+        },
+        {
+          "id": "CL-REVERT-FIDELITY",
+          "pass": true,
+          "detail": {
+            "write_committed": true,
+            "mid_changed": true,
+            "restored_identical": true
+          }
+        },
+        {
+          "id": "CL-CACHE-MISS-HIT",
+          "pass": true,
+          "detail": {
+            "legs": [
+              {
+                "status": 200,
+                "x_cache": "MISS"
+              },
+              {
+                "status": 200,
+                "x_cache": "HIT"
+              }
+            ]
+          }
+        },
+        {
+          "id": "CL-INSURFACE-LIVE",
+          "pass": true,
+          "detail": {
+            "structural": true,
+            "in_surface_write_status": 200,
+            "marker_after": "cl_insurface_live"
+          }
+        }
+      ]
+    },
+    "chromium": {
+      "executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "exists": true,
+      "frozen_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+      "playwright_pin": "1.63.0",
+      "browser_version": "153.0.8010.12",
+      "sha256_matches_frozen": true,
+      "actual_sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+      "launch_ok": true
+    }
+  },
+  "controls": {
+    "V-HEALTH-GATE": {
+      "expected": "nginx 19851 200 + X-Worker-Pid",
+      "observed": "[{\"attempt\": 0, \"path\": \"nginx:19851\", \"status\": 200, \"worker\": \"42764\"}]",
+      "pass": true,
+      "evidence": "phase 0b gate logs"
+    },
+    "NC-EXCLUSIVE-NGINX": {
+      "expected": "exactly one nginx master, ours",
+      "observed": "{\"ours\": [\"42769 nginx: master process nginx -c /tmp/single.db.nginx.conf\"], \"foreign\": [], \"exclusive\": true}",
+      "pass": true,
+      "evidence": "phase 0b ps scan"
+    },
+    "V-UPSTREAM-2-SERVERS": {
+      "expected": "both origins 200 via nginx",
+      "observed": "{\"19860\": true, \"19861\": true}",
+      "pass": true,
+      "evidence": "phase 0b origin health gates"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-ATTAINABILITY-CERTIFICATE.json",
+      "sha256": "5a2a70f99d50f5990ce893fb1179363dec24f1a216151a10435c4dd48f9b0884",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-BLINDSPOT-PROBE.jsonl",
+      "sha256": "07b75217f55561d407e7725db2452bbf25ca13226fbe5d27664f536c35741fbd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CAPTURE-STABILITY.jsonl",
+      "sha256": "2322cbdcdbfb638836a6e8083077b0666d27f3cb8342414d33422304c48e4604",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-CONTROL-LIVENESS.json",
+      "sha256": "a7e75fdb3877cc8cd461b7c7b753b83f29d800e071563fac75ddcba3d2cb7299",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-DETECTOR-OUTPUT.jsonl",
+      "sha256": "5658028cb1946fa9c40b7ef4229529a3f0c21aee9be0e4e3e196656270b94a79",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-EPISODE-LEDGER.jsonl",
+      "sha256": "3b23a4bd158e3a12b3a687b5bc3b9410fba54824a8c9127fcf1d04577c4213f7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-OOS-WORKER-EVIDENCE.jsonl",
+      "sha256": "4343191346f727d4ed50616b7f744f58be9d171f3aa3eac9eb3d18d4f7eba139",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-READINESS-CERTIFICATE.json",
+      "sha256": "3c8f0800369c6756112d050795a449421b3428e94f6ee748ed696fabcd9a1424",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-SEEDED-ORDER.json",
+      "sha256": "ae004cd5d9f52e91c9b9d175b151e17b8cf92565b00a8b3e68fb5d2906e24449",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+      "sha256": "8166152c031ef60cb8085ca3395890faa66a87a1adb1cad00daf42d22d3cfdda",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+      "sha256": "c457125ee102f585ff1f758a9c1d99b424a34bb9aa7835f082430a1d9369167f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/C-BRINGUP-CONTRACT.json",
+      "sha256": "698506bc33cdca6b47cccc3d3d8920a55b1bf24414c30d8445e9b4be5bf2d6e9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-37973247935/artifacts/capability_ledger.json",
+      "sha256": "6f2d988a8d5e956d50cc6c236b7d0c7c36a7bf5da5043eee4a24c398b22d219c",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "sudo available: True",
+    "run lock acquired",
+    "substrate: writing nginx conf, starting gunicorn x2 (19860/19861), starting nginx (19851, exclusive)",
+    "origin 19860 health: True (worker=42762)",
+    "origin 19861 health: True (worker=42764)",
+    "readiness certificate: pass=True n_non304=240 distinct_workers=2 stickiness=1.0",
+    "attainability accept min_k=37 (frozen 37); control-liveness all_pass=True",
+    "anchor sqlite connection held open across the matrix (prevents WAL last-close checkpoint/deletion)",
+    "chromium 153.0.8010.12 launched",
+    "capture stability: 19 pairs, all_identical=False"
+  ],
+  "validity_notes": [
+    "capture stability gate failed: a no-action pair was not byte-identical"
+  ],
+  "unresolved": [],
+  "decision_reasons": [
+    "capture stability gate failed: a no-action pair was not byte-identical"
+  ]
+}

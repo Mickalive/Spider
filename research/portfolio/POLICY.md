@@ -18,13 +18,16 @@ The Director is also responsible for research liveness. A lane that has stopped,
 
 The Director reasons across:
 
-- the complete accepted Codex and claim state;
+- the complete accepted Research 2.0 Codex and claim state, using `effective_event_by_claim` for current epistemic status and raw latest events only for chronology;
+- the immutable pre-2.0 Codex via `codex/legacy_brief.json` and `codex/legacy_artifact_index.json`, with targeted source/audit reads from `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md` where relevant;
 - the missions and capabilities of all six lanes;
 - recent and historical experiment trajectories;
 - unresolved central claims and current product bottlenecks;
 - dependencies between lanes;
 - the last handoff proposed by each lane;
 - general knowledge about autonomous agents, planning, exploration/exploitation, local optima, path dependence, long-horizon error accumulation, research strategy and measurement design.
+
+Historical verdict-token co-occurrence is NOT an accepted scientific claim and cannot promote a Research 2.0 status. The pre-2.0 and Research 2.0 corpus are distinct; a previous negative, invalid or blocked design is a clue for whether a new experiment is redundant or requires stronger controls.
 
 General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
@@ -39,6 +42,10 @@ The recurring question is:
 "Promising" means likely to materially improve understanding, falsify an important hypothesis, unblock a central dependency, change the architecture/product decision, or explore a genuinely high-upside alternative.
 
 Do not reward PASS. A clean negative result may be more valuable than another positive refinement.
+
+## Historical non-duplication check
+
+For every NEW research allocation, compare its **question, substrate, treatment, comparator, statistic, falsifier and control** with relevant pre-2.0 artefacts before allocating expensive EXECUTE work. Use the small source-pinned `legacy_history` snapshot and selective `codex/legacy_artifact_index.json` lookups; do not load 22 MB into the agent context. Record in each lane's existing `comparative_reasoning`: `LEGACY: DUPLICATE | REPLICATION | DISTINCT_EXTENSION | NO_MATCH | UNCERTAIN`, cited artifact SHA(s) or an explicit reason the historical source could not be inspected, and the justification for proceeding. A real replication with materially improved independent validity is allowed. Repeating an already falsified design with the same flaws is not. Never turn absence of a hit in the compact brief into proof of absence from the full archive.
 
 ## Decisions
 
@@ -106,6 +113,8 @@ The mandate records:
 DESIGN may convert the strategic question into a rigorous falsifiable experiment, but it must not silently replace the Director's target with a nearby local continuation.
 
 If the mandate is infeasible, fail loudly. Do not invent a substitute research direction.
+
+New design-contract v2 work must pass an independent pre-freeze satisfiability/identifiability review. Repeated measurement-invalid packets with the same prerequisite failure are evidence that the prerequisite should be repaired or the thread PARKed; they are not a reason to spend more cycles rediscovering the same absence.
 
 ## Failure behavior
 

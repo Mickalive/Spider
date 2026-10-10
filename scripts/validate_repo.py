@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -27,6 +28,50 @@ def main():
     claims = load("research/claims/registry.json")
     lanes = load("research/lanes/registry.json")
     models = load("config/models.json")
+    # Historical research must remain visible to Research 2.0 direction, but
+    # historical verdict labels are not canonical Research 2.0 claims.
+    legacy_brief = load("codex/legacy_brief.json")
+    legacy_index = load("codex/legacy_artifact_index.json")
+    legacy_entries = legacy_index.get("artifacts") or []
+    require(len(legacy_entries) == legacy_index.get("count") == 1401, "legacy index coverage mismatch")
+    require(len({item["sha"] for item in legacy_entries}) == 1401, "duplicate legacy source artifact SHA")
+    require(
+        legacy_brief["source"]["blob_sha"] == legacy_index["source"]["blob_sha"]
+        == "9bb76113aeaf46d9aecdd8a38349a3a7741e57c3",
+        "legacy source pin mismatch",
+    )
+    # One cumulative Codex: protect the original blob, every historic artifact,
+    # the subsequent experiment packets, and both eras of the same claim ledger.
+    all_index = load("codex/index.json")
+    all_claim_state = load("codex/claim_state.json")
+    origin = all_index.get("historical") or {}
+    source_path = origin.get("source_path")
+    require(source_path == "codex/sources/0000-historical-evidence.md", "historical evidence not materialized into main Codex")
+    raw = (ROOT / source_path).read_bytes()
+    pinned_sha = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+    require(origin.get("source_blob_sha") == pinned_sha == legacy_index["source"]["blob_sha"], "cumulative historical source hash mismatch")
+    require(all_index.get("schema_version") == 3, "cumulative index schema mismatch")
+    require(origin.get("artifact_count") == len(origin.get("artifacts", [])) == 1401, "historical artifacts missing from unified index")
+    require(
+        {item["sha"] for item in origin["artifacts"]} == {item["sha"] for item in legacy_entries},
+        "unified index differs from historical artifact inventory",
+    )
+    require(len(all_index.get("experiments") or {}) > 0, "subsequent experiment history missing from cumulative index")
+    require(all_claim_state.get("schema_version") == 4, "cumulative claim ledger schema mismatch")
+    require(
+        set(all_claim_state.get("historical_precedents_by_claim") or {}) == {c["id"] for c in claims["claims"]},
+        "historical precedents missing from the ten continuous claim records",
+    )
+    require("cumulative scientific record" in text("SPIDER_CODEX.md"), "human readable Codex no longer cumulative")
+    require(
+        "legacy_history" in text("scripts/build_portfolio_snapshot.py"),
+        "global direction snapshot must include pre-2.0 findings",
+    )
+    require(
+        "LEGACY:" in text(".opencode/agents/spider_portfolio_director.md"),
+        "Global Director must screen relevant pre-2.0 duplicates",
+    )
+
 
     claim_ids = [c["id"] for c in claims["claims"]]
     require(len(claim_ids) == len(set(claim_ids)), "duplicate claim id")
@@ -47,6 +92,8 @@ def main():
 
     for role, candidates in models["roles"].items():
         require(bool(candidates) and len(candidates) == len(set(candidates)), f"model role {role}: empty or duplicate candidates")
+    require(models["roles"]["research"][0] == "opencode/big-pickle", "research role must try the empirically successful provider first")
+    require(models["roles"]["scout"][0] == "opencode/big-pickle" and models["roles"]["director"][0] == "opencode/big-pickle", "strategic roles must keep the proven provider first")
 
     critical_control = {
         ".github/scripts",
@@ -79,6 +126,7 @@ def main():
         ".opencode/agents/spider_lane_researcher.md",
         ".opencode/agents/spider_lane_auditor.md",
         ".opencode/agents/spider_lane_director.md",
+        ".opencode/agents/spider_design_reviewer.md",
         ".opencode/agents/spider_portfolio_director.md",
         ".opencode/agents/spider_research_scout.md",
         "scripts/check_scope.py",
@@ -87,6 +135,7 @@ def main():
         "scripts/prepare_lane.py",
         "scripts/build_portfolio_snapshot.py",
         "scripts/build_scout_fallback.py",
+        "scripts/validate_design_review.py",
         "scripts/validate_portfolio_allocation.py",
         "scripts/validate_scout_brief.py",
         "scripts/sync_codex.py",
@@ -95,9 +144,17 @@ def main():
     for path in required_files:
         require((ROOT / path).exists(), f"missing Research 2.0 control file: {path}")
 
+    freeze = text("scripts/freeze_experiment.py")
+    require("freeze_eligibility" in freeze and "design_review.json" in freeze and "artifact_hashes" in freeze, "freezer must enforce v2 satisfiability review and bound artifacts")
+    require("v2 spec claim_ids outside lane charter" in freeze, "freezer must enforce v2 lane claim scope")
+
+    finalizer = text("scripts/finalize_lane.py")
+    require("frozen artifact changed or missing" in finalizer and "v2 claim update outside frozen spec.claim_ids" in finalizer and "packet/operational status" in finalizer, "finalizer must enforce v2 frozen artifacts and claim semantics")
+
     scope = text("scripts/check_scope.py")
     require("from control_plane import CONTROL_ROOTS" in scope, "check_scope must use canonical CONTROL_ROOTS")
     require('"audit.json"' in scope and '"verdict.json"' in scope and '"handoff.json"' in scope and 'stage == "execute"' in scope, "EXECUTE scope must protect future-stage packet outputs")
+    require("design_review.json" in scope and "model_design_review.json" in scope, "DESIGN scope must contain independent design-review outputs")
     require("--untracked-files=all" in scope and "SPIDER_SCOPE_REPAIRED" in scope, "scope checker lacks complete repair/revalidation path")
 
     resilient = text(".github/scripts/run-opencode-resilient.sh")
@@ -106,7 +163,7 @@ def main():
     require("SPIDER_RETRY_BASELINE_RESTORE_FAILED" in resilient, "retry-baseline restoration failure must be explicit")
     require("setsid --wait" in resilient and "MODEL_PGID" in resilient, "model attempts must run in an isolated process group")
     require('kill -TERM -- "-$MODEL_PGID"' in resilient and 'kill -KILL -- "-$MODEL_PGID"' in resilient, "timeouts must terminate the entire model process tree")
-    require("Independent audit requires a known producer model to exclude" in resilient, "audit must fail closed when producer-model identity is unknown")
+    require("SPIDER_EXCLUDE_MODEL" in resilient and "design_review" in resilient, "audit/design review must support producer-model exclusion")
 
     lane_wf = text(".github/workflows/spider-lane.yml")
     require("SPIDER_REQUIRED_OUTPUTS" in lane_wf, "lane workflow must validate mandatory model outputs")
@@ -114,15 +171,20 @@ def main():
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
     require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
     require("SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE" in lane_wf and "gh workflow run factory-pulse.yml" in lane_wf, "incomplete lane runs must self-wake global direction from always() cleanup")
+    require("spider_design_reviewer" in lane_wf and "validate_design_review.py" in lane_wf and "SPIDER_DESIGN_REVIEW_REVISE" in lane_wf, "v2 DESIGN must pass independent pre-freeze review")
+    require("checkpoint.sh design-draft" in lane_wf, "v2 DESIGN must durably checkpoint the proposed design before reviewer fallback")
     require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
 
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
+    require('"design_contract_version": 2' in prepare and '"freeze_eligibility"' in prepare and '"freeze_artifacts"' in prepare, "NEW experiments must use design-contract v2")
 
     snapshot_builder = text("scripts/build_portfolio_snapshot.py")
     require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
     require('req.get("director_mandate")' in snapshot_builder, "portfolio snapshot must detect current Director mandate field")
+    require("effective_event_by_claim" in snapshot_builder and "active_mandate_claim_id" in snapshot_builder, "portfolio snapshot must use effective claim state and expose active mandate identity")
+    require('effective.get("next_question") or cfg.get("next_gate")' in snapshot_builder and '"registry_next_gate"' in snapshot_builder, "portfolio snapshot must use the effective claim event's next question as current gate")
 
     ci_wf = text(".github/workflows/ci.yml")
     require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
@@ -138,13 +200,15 @@ def main():
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
     require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
-    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "conclusion != 'success'" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
+    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
+    require('cron: "*/5 * * * *"' in recovery_wf and "SPIDER_LANE_RECOVERY_PENDING" in recovery_wf and "SPIDER_LANE_RECOVERY_ALREADY_CONSIDERED" in recovery_wf, "Lane recovery must poll independently of GITHUB_TOKEN workflow_run delivery and avoid replaying failures already considered by a newer Factory")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("actions: write" in codex_wf and "Wake global direction after canonicalization" in codex_wf and "gh workflow run factory-pulse.yml" in codex_wf, "Codex sync must explicitly wake global direction after canonicalization")
     require("SPIDER_FACTORY_WAKE_SKIPPED_ACTIVE" not in codex_wf, "Codex sync must not skip a fresher direction wake because an older pulse is active")
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
+    require('NEW_DISPOSITION" == "USE"' in pulse and 'ACTIVE_OLD_CLAIM" == "$TARGET_CLAIM"' in pulse, "prefreeze resume must use strategic mandate identity rather than exact question wording")
     require("spider-r2-factory-pulse-${{ github.sha }}" in pulse and "SPIDER_STALE_DIRECTION_SKIP" in pulse and "CURRENT_MAIN" in pulse, "Factory concurrency must isolate control-plane SHAs and stale cycles must be unable to dispatch")
     factory_recovery = text(".github/workflows/factory-recovery.yml")
     require("SPIDER R2 Factory Pulse" in factory_recovery and "SPIDER_FACTORY_RECOVERY_RETRY" in factory_recovery and "SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN" in factory_recovery and "gh workflow run factory-pulse.yml" in factory_recovery, "Factory Pulse failures must have bounded external recovery")
@@ -166,6 +230,9 @@ def main():
     require("source_commit" in codex and "freeze hash mismatch" in codex, "Codex sync must pin and validate finalized packets")
     require('"--diff-filter=A"' in codex, "Codex must pin the original verdict creation commit")
     require("parent_handoff sha256 mismatch" in codex, "Codex must validate inherited handoff hashes")
+    require("effective_event_by_claim" in codex and "non_epistemic" in codex and "claim_scope_warnings.json" in codex, "Codex must derive effective epistemic claim state and preserve scope warnings")
+    require('"next_question": verdict.get("next_question")' in codex, "Codex claim events must carry the Director's next question for effective gate selection")
+    require("artifact_hashes" in codex and "design_review.json" in codex, "Codex must validate v2 frozen artifacts and design review")
     require("DIRECTOR_CLAIM_STATUSES" in codex, "Codex must reject Director-emitted post-promotion-only claim states")
 
     scout = text(".opencode/agents/spider_research_scout.md")
@@ -173,11 +240,16 @@ def main():
 
     global_director = text(".opencode/agents/spider_portfolio_director.md")
     require("Research Scout" in global_director and "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE" in global_director, "Global Director lacks Scout/decision contract")
+    require("PROGRAM_AUDIT_2026-10-10.md" in global_director and "ALL THREE readiness conditions" in global_director, "Global Director must use current audit and enforce flagship readiness")
+    scout_prompt = text(".opencode/agents/spider_research_scout.md")
+    require("PROGRAM_AUDIT_2026-10-10.md" in scout_prompt, "Scout must use current program audit")
+    require((ROOT / "research/portfolio/PROGRAM_AUDIT_2026-10-10.md").exists(), "current program audit missing")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):
         require(f"`{status}`" in director, f"Director prompt missing canonical status {status}")
     require("SHIPPED" in director and "MUST NOT" in director, "Director must reserve SHIPPED for post-promotion state")
+    require("effective_event_by_claim" in director and "packet/operational" in director, "Lane Director must distinguish effective epistemic state from packet invalidity")
 
     required = set(PACKET_FILES)
     exp_root = ROOT / "research/experiments"

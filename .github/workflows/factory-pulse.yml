@@ -220,6 +220,7 @@ jobs:
             ACTIVE_STAGE="IDLE"
             ACTIVE_HAS_MANDATE="false"
             ACTIVE_OLD_QUESTION=""
+            ACTIVE_OLD_CLAIM=""
             if [[ -n "$ACTIVE_EXP" ]] && git show-ref --verify --quiet "refs/remotes/$REF"; then
               BASE="research/experiments/$ACTIVE_EXP"
               if remote_exists "$REF" "$BASE/verdict.json"; then ACTIVE_STAGE="FINALIZED"
@@ -233,6 +234,7 @@ jobs:
                 REQ=$(git show "$REF:$BASE/request.json" 2>/dev/null || echo '{}')
                 ACTIVE_HAS_MANDATE=$(jq -r 'has("director_mandate")' <<<"$REQ")
                 ACTIVE_OLD_QUESTION=$(jq -r '.director_mandate.allocation.question // empty' <<<"$REQ")
+                ACTIVE_OLD_CLAIM=$(jq -r '.director_mandate.allocation.claim_id // empty' <<<"$REQ")
               fi
             fi
 
@@ -261,13 +263,17 @@ jobs:
             ACTION=$(jq -r --arg lane "$LANE" '.allocations[$lane].action' .spider-runtime/director_allocation.json)
             TARGET_CLAIM=$(jq -r --arg lane "$LANE" '.allocations[$lane].claim_id // empty' .spider-runtime/director_allocation.json)
             NEW_QUESTION=$(jq -r --arg lane "$LANE" '.allocations[$lane].question // empty' .spider-runtime/director_allocation.json)
+            NEW_DISPOSITION=$(jq -r --arg lane "$LANE" '.allocations[$lane].parent_handoff_disposition // empty' .spider-runtime/director_allocation.json)
 
             if [[ "$ACTION" == "PARK" || "$ACTION" == "TERMINATE" ]]; then
               echo "SPIDER_DIRECTOR_ACTION lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
               continue
             fi
 
-            if [[ "$ACTIVE_STAGE" == "PREFREEZE" && "$ACTIVE_HAS_MANDATE" == true && "$ACTION" == "CONTINUE" && "$ACTIVE_OLD_QUESTION" == "$NEW_QUESTION" ]]; then
+            # Strategic continuity is identified by the claim + explicit USE
+            # disposition, not by byte-identical natural-language wording.
+            # A PIVOT/REOPEN/SUPERSEDE still allocates a fresh transaction.
+            if [[ "$ACTIVE_STAGE" == "PREFREEZE" && "$ACTIVE_HAS_MANDATE" == true && "$ACTION" == "CONTINUE" && "$NEW_DISPOSITION" == "USE" && -n "$ACTIVE_OLD_CLAIM" && "$ACTIVE_OLD_CLAIM" == "$TARGET_CLAIM" ]]; then
               echo "SPIDER_RESUME_DIRECTED_PREFREEZE lane=$LANE experiment=$ACTIVE_EXP"
               if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
                 echo "::error::Failed to resume directed prefreeze lane=$LANE experiment=$ACTIVE_EXP"
