@@ -8,7 +8,7 @@
   "next_question": "On credential-free public HTTP GET substrates (the frozen 57-endpoint universe plus any preregistered extension), are the ONSET and RECOVERY of server-side ACCESS BARRIERS - Cloudflare-style 403 challenge pages, 429 rate limits, and connection-level transport failures - predictable from observable request-history features (request rate, burstiness, inter-request spacing, per-session cookie-jar continuity/freshness, endpoint identity) BEYOND a frozen memory/constant null calibrated before freeze with demonstrated power, and separable from ordinary endpoint-level unavailability (403-as-block versus 403-as-legitimate-response, and 404/500 as non-barrier failures) - such that an agent can schedule re-observation to hold target success rate near the no-barrier baseline while issuing measurably fewer requests than unconditional retry? Pre-register a falsifier satisfiable in BOTH directions, a REQUIRED no-adaptation/unconditional-retry baseline expressed RELATIVE to it, and a pre-freeze arithmetic attainability certificate proving barrier events are reachable in the frozen pool (this packet observed 120 HTTP 403s, 65 429s and 24 transport errors, but those are incidental observations, not an attainability certificate, and a barrier-dynamics design must certify attainability before freeze rather than assume it).",
   "promotion_ready": false,
   "consecutive_failures": 6,
-  "updated_at": "2026-10-10T13:54:50.915032+00:00",
+  "updated_at": "2026-10-10T15:43:05.315796+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "281a29dec07c745202386cef1476e12e236ddd3e3ba9d43d34d81d7f4d277468",
   "same_failure_count": 2,
