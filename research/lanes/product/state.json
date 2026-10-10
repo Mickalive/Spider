@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Now that the pre-freeze dynamic-range certificate is unsatisfiable on the mandatory-discovery deterministic credential-free REST substrate class (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED both at the 1.0 correctness ceiling at novelty >= 0.5 in families F1 and F2, so the parameterized treatment cannot save http_requests and the frozen cost/novelty test is non-discriminating), the materially orthogonal question is: on a programmatic, budget-stable, credential-free model endpoint (the prerequisite Intel showed is missing, EXP-INTEL-37973264582), can the frozen four-arm C-LLM-INHERIT benchmark (same model/tools/budget: COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, with the parameterized mechanism carrier bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) produce genuine behavioral variance (COLD success_rate meaningfully below the 1.0 ceiling) and, if so, does the SPIDER arm beat COLD, INSTRUCTIONS and RETRIEVAL on cost per SUCCESSFUL task on an honest counter-only metric (http_requests + retrieval_calls + verification_calls + repair_attempts, excluding latency_ms/1000)? If no such endpoint can be provisioned, the fallback is a credential-free substrate engineered for ASYMMETRIC discovery (multi-task sessions where one-time session/resource/schema discovery is amortized or cached across tasks), tested against the same certificate and the same counter-only novelty-monotonicity criterion; a fourth re-run of the mandatory-discovery deterministic REST certificate is explicitly excluded.",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-10T01:35:57.126438+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-10-10T02:27:10.100260+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "911f765d04a83974f20d113da206b4075337c3a9bed4c5a77a8f06ffb4773ed9",
-  "same_failure_count": 1,
+  "same_failure_count": 2,
   "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
-  "last_failure_control_revision": "0c7656a2a3dd2b1c22037ba2c496c918de1f05fc33aa09e6166cd700910bcb47"
+  "last_failure_control_revision": "bf70eef1f9002f2159b41980d1ca900d03536e36137b85f40a98589dbed45a2c"
 }
