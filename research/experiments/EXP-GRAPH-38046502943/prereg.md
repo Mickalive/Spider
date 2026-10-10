@@ -1,204 +1,139 @@
-# EXP-GRAPH-38046502943 — Pre-registration (DESIGN packet)
+# PREREGISTRATION — EXP-GRAPH-38046502943
 
-**Status: DESIGN COMPLETE — freeze SUPPRESSED. NOT FROZEN.**
-This document, together with `spec.json`, is the pre-freeze constructibility
-certificate deliverable mandated by the Global Research Director. No EXECUTE
-is authorized by this packet and none should be derived from it.
+**Design-contract version 2 — DESIGN_ONLY_FAIL_LOUD_CERTIFICATE (no EXECUTE phase)**
+
+Status: preregistered PRIOR TO any freeze attempt and PRIOR TO any outcome-bearing
+measurement ("guard decision / false-accept" computation). The design-time satisfiability
+probe produced drift labels and headers/body-hash facts only (mandate option A allowance).
+
+---
 
 ## 1. Identity
 
-- Experiment: `EXP-GRAPH-38046502943`
-- Lane: `graph`
-- Claim: `C-FRESHNESS` (freshness sub-mechanism: session/token drift with
-  false-accept measurement)
-- Design contract version: 2
-- Parent (bounded): `EXP-GRAPH-37992949248`
-- Type: `DESIGN_ONLY_FAIL_LOUD_CERTIFICATE`
+- experiment_id: `EXP-GRAPH-38046502943`
+- lane: GRAPH
+- claim: `C-FRESHNESS` — the freshness guard protects storage-cache REUSE decisions
+  against stale web-form values via transport metadata and value-recency signals.
+- parent: `EXP-GRAPH-37992949248` (frozen packet; claim state C-FRESHNESS EXPERIMENTAL,
+  bounded by a single-anchor degenerate read).
+- grandparent: `EXP-GRAPH-37978902447` (raw records capture date 2026-10-09).
+- director mandate (request.json): CONTINUE on C-FRESHNESS with option A — bounded
+  design-time screen; freeze a powered Part II read IF constructible on a materially
+  different population; otherwise emit a fail-loud certificate with exact anchors,
+  per-anchor transport-change cause, estimator power arithmetic, positive/negative
+  controls, and park the route with a bounded reason. CAL-POS-1..4 must not be refetched.
 
-## 2. The question (as bound by the Director mandate)
+## 2. Question
 
-> On credential-free, server-rendered, no-JavaScript GET-only anchors, is a
-> value-only-rotation (D1V: STALE AND NOT structural_change AND NOT
-> transport_change) population spanning >= 2 independent anchors constructible
-> AT ALL such that the anchor-clustered 97.5% lower bound of the incumbent
-> value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is
-> non-degenerate and M-N-D1V-ANCHORS >= 2 — either (option A) by admitting a
-> materially different anchor population whose transport validators (ETag,
-> Last-Modified, Cache-Control max-age, Vary, final_url) are provably
-> independent of the rotating value, or (option B) by a principled instrument
-> change that reclassifies transport-validator motion caused solely by the
-> rotating value itself, justified structurally rather than assumed?
+Is there a constructible >=2-anchor D1V frame on a materially different population on
+which a powered non-degenerate `M-PAIRED-FA-DIFF-D1V` read can decide
+INCUMBENT-BLIND-CONFIRMED vs INCUMBENT-NOT-BLIND?
 
-The DESIGN must produce a pre-freeze constructibility certificate (exact
-anchors, per-anchor transport-change cause, estimator power arithmetic). If no
-such population is constructible, it must FAIL LOUDLY and return the decisive
-positive-control-backed bounded reason that parks the four-anchor Part II
-route, so freshness effort can move to a broader-population guard
-false-accept/calibration measurement or another sub-mechanism — rather than
-freeze another structurally degenerate single-anchor read.
+Definitions (frozen, inherited): D1V = value STALE AND NOT structural_change AND NOT
+transport_change. Per-anchor incumbent FA on the D1V subset = 1.0 by the closed-form
+guard theorem (no channel fires => REUSE); value-aware FA = 0.0 (CH-PRECOND-BINDING
+always fires). The pooled estimator is non-degenerate (LOW < UB97) iff some anchor has
+per-anchor incumbent FA != 1.0 iff CH-POSTCOND-SEM fires on at least one D1V pair.
 
-## 3. Hypothesis and falsifier
+## 3. Pre-declared branches
 
-- Hypothesis `H-CONSTRUCTIBLE`: a powered, non-degenerate >=2-anchor D1V frame
-  is constructible on this substrate via option A and/or option B.
-- Falsifier `F-NONDEGENERATE-CERT`: demonstration that every constructible D1V
-  frame on the observed substrate realizes per-anchor false-accept identically
-  (homogeneous blindness), forcing LOW == UB97 == 1.0 — i.e., the power of the
-  estimator is not certifiable → FAIL LOUDLY.
+- Branch A (certificate PASS): a constructible >=2-anchor frame with >=2 D1V trials on
+  which the would-be read would realize a non-degenerate interval (LOW > 0 AND
+  LOW < UB97) => propose freeze and EXECUTE the powered Part II read.
+- Branch B (certificate FAIL_LOUD): no such frame constructible; the would-be read
+  deterministically lands in DATA-INSUFFICIENT-D1V-DEGENERATE => decision_rule_reachability
+  = FAIL, freeze refused, certificate is the terminal deliverable, route parked with
+  bounded reason, no claim-change, product answer for C-FRESHNESS remains UNKNOWN.
 
-## 4. Design: certificate-first satisfiability assessment (no outcome measurements)
+Both branches are acceptable scientific outcomes. The certificate does not decide
+blindness; it decides whether a powered read is constructible.
 
-The experiment is a DESIGN-time certificate. It used:
+## 4. Design-time satisfiability probes (non-outcome-bearing)
 
-1. **Bounded live screen** of 8 candidate anchors (3 cookieless GET-only
-   sessions each, pacing >= 3s, same-day, single egress). Recorded: status,
-   final_url, body sha256, transport headers (ETag, Last-Modified,
-   Cache-Control, Vary), in-list token names, per-session extracted values,
-   and the frozen drift labels (structural/transport/postcond/endpoint change)
-   computed with the parent packet's **exact trial-construction semantics**
-   (per-field occurrence ordinal keying, per-pair structure comparison).
-   **Drift labels only.** No guard decisions, no false-accept rates, no
-   intervals were computed at any point — those are EXECUTE-read outcomes.
-2. **Zero-network replay** of the frozen inherited evidence (CAL-POS-1..3 raw
-   records + bodies) under the same parent-exact construction, as the
-   classifier sensitivity control.
-3. **Closed-form estimator power arithmetic** using the frozen guard logic and
-   the frozen anchor-clustered bootstrap.
+Licensed by mandate option A under the v2 pre-freeze allowance. These produce drift
+labels, headers, hashes, and satisfiability arithmetic — never guard decisions or
+false-accept metrics on live evidence.
 
-### Screen results (2026-10-10)
+4.1 Zero-network instrument controls (local fixtures, no network):
+- M-FIXTURE-CANARY-PASS, M-FIXTURE-EMPTY-AGREE, M-GUARD-FIXTURE-PASS.
+- Frozen estimator at its binding (B = estimator.DEFAULT_B = 10000, seed = FROZEN_SEED =
+  37992949248 — identical to a would-be EXECUTE):
+  - SYN-ESTIMATOR-2ANCHOR (heterogeneous): expect non-degenerate LOW=1/3, UB97=1/2 (PASS).
+  - SYN-ESTIMATOR-1ANCHOR: expect degenerate, reason n_anchors<2.
+  - SYN-ESTIMATOR-HOMOGENEOUS (2 anchors, equal per-anchor FA): expect zero-width
+    [0.5,0.5], reason zero_width_interval — the population-diagnostic showing
+    zero-width is not an estimator failure.
+- PC-POSTCOND-CLASSIFIER-SENSITIVITY (SYN-POSTCOND-HET: differing in-list field-name
+  sets): expect CH-POSTCOND-SEM to FIRE, all guard variants ABSTAIN.
+- NC-POSTCOND-NULL (SYN-POSTCOND-NULL: identical field-name sets): expect CH-POSTCOND-SEM
+  NOT to fire; incumbent REUSE, value-aware ABSTAIN (CH-PRECOND-BINDING fires).
 
-| Candidate | URL (registration path) | Result |
-|---|---|---|
-| P1-OSM-RAILS | openstreetmap.org/user/new | **D1V-capable**, 6/6 D1V trials (authenticity_token, csrf-token); transport byte-stable |
-| P3-MW-ARCH | wiki.archlinux.org Special:CreateAccount | **D1V-capable**, 3/6 (wpCreateaccountToken; wpEditToken constant FRESH); transport byte-stable |
-| P4-MW-GENTOO | wiki.gentoo.org Special:CreateAccount | **D1V-capable**, 3/6 (wpCreateaccountToken); transport byte-stable |
-| P6-MASTODON | mastodon.social/auth/sign_up | **D1V-capable**, 6/6 D1V trials (authenticity_token, csrf-token); transport byte-stable |
-| P2-DRUPAL | drupal.org/user/register | NO_FIELD (Keycloak SSO redirect) |
-| P5-PHPBB | phpbb.com/community/app.php/user/register | UNREACHABLE (HTTP 403 x3) |
-| P7-WORDPRESS | wordpress.org SSO login | NO_FIELD (login.wordpress.org redirect) |
-| P8-XWIKI | xwiki.org Main | NO_FIELD (JS-bound flow) |
+4.2 Inherited-evidence replay: reconstruct the parent trial matrix from frozen raw
+records with parent-exact construction; expect exact reproduction (48 trials;
+CAL-POS-2: 6 D1V, 0 postcond drift; CAL-POS-1: 24 trials; CAL-POS-3: 12 trials).
 
-Transport signatures on all four value-bearing candidates: ETag=None,
-Last-Modified=None, Cache-Control constant, Vary constant, final_url constant.
-**Postcond (session field-name set) never fired on any candidate.**
+4.3 Live candidate screen (K=4 cookieless GET-only sessions per candidate, fresh empty
+CookieJar per (anchor,session), no JS, no submissions, pacing >=3.0s, 10 candidates,
+iana.org control before/after; 42 requests total on 2026-10-10 12:51:42Z..12:53:19Z):
+- Record per session: status, final_url, headers (ETag, Last-Modified, Cache-Control,
+  Vary), body_sha256 (verify against recomputed hash), extracted in-list fields and
+  byte-exact values where VALUE-state, session in-list field-name set.
+- Classify every pair per frozen definitions; verify path A/B pair-set agreement on all
+  40 sessions.
+- NO guard decision and NO false-accept number is computed on live evidence at any point.
 
-Inherited control replay (parent-exact): CAL-POS-2 → 6 D1V trials (reproduces
-parent M-N-D1V=6); CAL-POS-1 → BODY_DERIVED_ETAG, transport change 6/6 pairs,
-structural change 4/6 pairs; CAL-POS-3 → TOKEN_BEARING_FINAL_URL, struct +
-transport + endpoint change 6/6 pairs. All reproduce the parent trial matrix.
+## 5. Decision inputs and pre-declared branch determinacy
 
-Option B re-verification on frozen evidence: CAL-POS-1 body diffs include
-nonces/arkose/snowplow beyond the token → ETag motion not caused solely by the
-rotating value; CAL-POS-3 final_url centralauthLoginToken is a different,
-concurrently/mutually-orthogonally rotating value than body wpLoginToken
-(byte-suffix drift) → not same-value leakage. **Option B closed for both.**
+The two decisive branches are reachable ONLY via a would-be read with LOW > 0 AND
+LOW < UB97 (Branch A) vs the realization that this is arithmetically impossible on the
+observed population because per-anchor incumbent FA = 1.0 on every D1V-capable anchor
+(0 postcond fires) => LOW == UB97 == 1.0, and pooled = 1.0 => INCUMBENT-NOT-BLIND also
+unreachable (Branch B).
 
-## 5. The power arithmetic (the certificate's core)
+Note: a would-be frame satisfying M-N-D1V-ANCHORS>=2 and M-N-DECISIONS-D1V>=2 is NOT
+sufficient for Branch A — the interval must also be non-degenerate. This was the exact
+gap of the prior attempt's planned read.
 
-- On any D1V trial: B-VALUE-AWARE ABSTAINS (CH-PRECOND-BINDING fires since
-  live != recorded) → value-aware FA = 0.
-- B-INCUMBENT-SIGNAL-ONLY REUSEs on every D1V trial (D1V excludes structural,
-  transport, and postcond firing) → per-anchor incumbent FA on D1V trials =
-  1 − postcond_fire_fraction(a).
-- Pooled differential = anchor-clustered weighted mean of per-anchor FA.
-- LOW < UB97 (non-degenerate 97.5% interval) **iff** per-anchor FA is
-  heterogeneous **iff** CH-POSTCOND-SEM fires on >= 1 D1V pair of some anchor.
-- Observed: postcond fires 0 times on 0 D1V pairs across 5 D1V-capable anchors
-  (CAL-POS-2 + P1/P3/P4/P6), 3 capture dates, 4 platform families
-  (WMF, OSMF, Arch Linux, Gentoo, Mastodon).
-- Therefore on ANY constructible frame (e.g., {P1,P3,P4,P6}, K=4 → 36 D1V
-  trials, 4 anchors — satisfying M-N-D1V-ANCHORS>=2): per-anchor FA = 1.0
-  everywhere → LOW == UB97 == 1.0 → **zero-width degenerate interval**,
-  would-be mode `DATA-INSUFFICIENT-D1V-DEGENERATE` / `ANCHOR_SCARCITY_OTHER`.
+## 6. Controls (stable ids, reused by EXECUTE/AUDIT)
 
-### Branch reachability of the would-be frozen decision rule
+- PC-CLASSIFIER-SENSITIVITY: inherited-evidence replay reproduces parent drift facts.
+- PC-EXTRACTION-CANARY: PA.extract byte-identical value recovery on live + inherited.
+- PC-POSTCOND-CLASSIFIER-SENSITIVITY: CH-POSTCOND-SEM fires when in-list field sets differ.
+- NC-POSTCOND-NULL: CH-POSTCOND-SEM silent when field sets identical.
+- PC-ESTIMATOR-NONDEGENERATE: frozen estimator non-degenerate on heterogeneous synthetic.
+- NC-ESTIMATOR-CONTROL-SENSITIVITY: frozen estimator 1-anchor and homogeneous forms.
+- NC-OPEN-GET-ONLY, NC-CREDENTIAL-FREE, NC-NETWORK-CONTROL (iana.org 200 before/after).
 
-- INCUMBENT-BLIND-CONFIRMED requires LOW>0 AND LOW<UB97 → **unreachable**.
-- INCUMBENT-NOT-BLIND (F-BLIND) requires LOW<=0 or pooled<0.10 → pooled=1.0 →
-  **unreachable**.
-- Sole reachable outcome: DATA-INSUFFICIENT-D1V-DEGENERATE.
+## 7. Validity disciplines
 
-## 6. Controls
+- V01 probe-session exclusion: probe sessions are never part of a future scored
+  population unless re-harvested under frozen EXECUTE.
+- V02 substrate re-verification for any future EXECUTE.
+- V03 classifier continuity + path A/B agreement.
+- V04 timing/pacing; new-anchor facts are single-date; union with CAL-POS-2 spans two
+  capture dates (2026-10-09, 2026-10-10).
+- V05 contextual rotation; no assertion about WHY values rotate.
+- V06 transport-signature time-variability disclosed (P1/P6 same-day divergence).
+- V07 evidence embedded verbatim in spec; recomputable by downstream auditors.
 
-- **PC-CLASSIFIER-SENSITIVITY**: inherited-evidence replay reproduces parent
-  drift facts exactly (see §4); the "no change" verdicts on candidates are true
-  observations, not classifier blind spots.
-- **PC-EXTRACTION-CANARY**: PA.extract recovers in-list values byte-identically
-  on all live candidates and inherited bodies.
-- **PC-ESTIMATOR-NONDEGENERATE** (inherited GATE-F PASS): on a synthetic
-  heterogeneous 2-anchor fixture the bootstrap returns LOW=1/3, UB97=1/2 —
-  the estimator machinery yields non-degenerate intervals whenever the
-  population supports them. The forced degeneracy is a population property.
-- **NC-NONDEGENERATE-ESTIMATOR, NC-OPEN-GET-ONLY, NC-CREDENTIAL-FREE**
-  (inherited); **NC-NETWORK-CONTROL** (iana.org 200 before probe).
+## 8. Pre-declared consequences
 
-## 7. Pre-registered outcomes and consequences
+- Positive (Branch A, not realized): freeze + EXECUTE the powered read; blindness
+  confirmation licenses channel consolidation and C-FRESHNESS route update.
+- Negative (Branch B, realized): route parked; product answer UNKNOWN; no claim change;
+  redirects pre-registered but NOT designed: (a) FRESH/STALE guard calibration over the
+  two live D1V anchors with their constant wpEditToken controls, (b) false-outage
+  calibration, (c) transport-coupling generalizability certificate
+  (BODY_DERIVED_ETAG now on 3 platform families).
 
-- **Certificate PASS** (had postcond heterogeneity been observed): freeze and
-  execute the powered read on the certified frame; blindness confirmation
-  licensed. — *Not realized.*
-- **Certificate FAIL (realized)**: FAIL LOUDLY per mandate. Freeze is refused
-  (`decision_rule_reachability = FAIL`); the certificate is the terminal
-  deliverable; C-FRESHNESS status unchanged (UNKNOWN); the four-anchor Part II
-  route is **parked with a positive-control-backed bounded reason**:
-  the blindness confirmation is unfalsifiable at the anchor level on this
-  substrate (incumbent REUSEs on every D1V trial; field-set homogeneity
-  collapses the differential's dynamic range to zero). Notably,
-  ANCHOR_TRANSPORT_COUPLING is **repudiated as the general blocker** — the new
-  population is transport-stable; the operative attribution is population-wide
-  field-set homogeneity. A re-run would deterministically land in
-  DATA-INSUFFICIENT-D1V-DEGENERATE again.
-- **Pre-registered redirect recommendation** (not designed here): (a)
-  broader-population guard false-accept/calibration measurement — the four new
-  live anchors make a multi-anchor calibration study concretely feasible; (b)
-  another freshness sub-mechanism (e.g., FRESH-trial false-outage/calibration).
+## 9. Scope
 
-## 8. Measurement validity
+Only `spec.json` and `prereg.md` are written in this experiment directory. No
+modification of inherited evidence; no refetch of CAL-POS-1..4; no git mutations.
+Session-local probe artifacts (/tmp/opencode/) are not bound artifacts.
 
-- V01-NEW: probe produced drift labels and transport facts only; NO guard
-  decisions / false-accept measurements. Probe sessions are excluded from any
-  future scored population unless re-harvested under a frozen EXECUTE with
-  re-verified substrate certificate.
-- V02: any future EXECUTE on these anchors must re-verify C-ANCHOR-802-200-LIVE /
-  C-ANCHOR-MISC-105-REUSE-LOCK, C-SESSION-ISOLATION-REPAIRED (runtime re-check,
-  not assumption).
-- V03: frozen classifier and in-list TOKEN_NAME_LIST reused unchanged; verified
-  live (canary).
-- V04: same-day captures (3s+ pacing); cross-date inference rests solely on
-  inherited CAL-POS-2 evidence merged with the probe date.
-- V05: rotation is server-side per-request minting; the certificate does not
-  depend on asserting why values rotate, only that they do and nothing else
-  moves.
+## 10. Timing / immutability
 
-## 9. Key definitions carried forward (frozen)
-
-- D1V = STALE AND NOT structural_change AND NOT transport_change.
-- structural_change: structure_signature = (type_class, form_action,
-  form_method, tuple(form_input_names)) differs per pair.
-- transport_change: transport_signature = (ETag, Last-Modified, Cache-Control
-  max-age, Vary) differs, OR final_url differs.
-- postcond_change (CH-POSTCOND-SEM): session in-list field-name set differs.
-- label STALE: live value != recorded value byte-exact.
-- Trial construction: per-field occurrence ordinal keying across the session
-  extraction order; pairs over recorded-vs-current sessions; per-pair channel
-  comparisons; value/state filters — exactly as frozen in the parent packet.
-
-## 10. What this packet does NOT claim
-
-- No false-accept measurements, no guard decisions, no intervals (none were
-  computed).
-- No claim status change for C-FRESHNESS.
-- No statement that postcond heterogeneity is impossible in general — only that
-  it is unobserved on this substrate across 3 dates / 5 anchors; the
-  certificate is falsifiable by a future observation of it.
-
-## 11. Transmission notes
-
-- Reading order for downstream agents: this prereg → `spec.json` (certificate
-  + embedded evidence with body hashes) → parent packet only as needed.
-- The probe raw evidence is session-local and NOT committed; all certificate
-  facts are embedded in `spec.json` (headers, final_urls, body sha256
-  prefixes, extracted value prefixes, parent-exact drift classifications).
-- Next decision stages: lane DIRECTOR (redirect adjudication) and AUDIT
-  (independent certificate review). The fail-loud terminal outcome is the
-  deliverable; no EXECUTE handoff is produced.
+This preregistration is written before any freeze attempt. `spec.json` is immutable
+once `freeze.json` would exist — here freeze is refused by the certificate itself, and
+`spec.json` + `prereg.md` are the terminal deliverables for DIRECTOR/AUDIT review.
