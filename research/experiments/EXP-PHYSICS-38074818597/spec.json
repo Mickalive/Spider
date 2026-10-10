@@ -1,25 +1,23 @@
 {
   "experiment_id": "EXP-PHYSICS-38074818597",
   "lane": "physics",
-  "claim_ids": ["C-WEB-DYNAMICS"],
-  "title": "Endpoint ACCESS-BARRIER state persistence/timescale across a window ladder and the validity horizon of a static endpoint denylist",
-
-  "question": "On the frozen 57-endpoint credential-free HTTP GET pool (parent EXP-PHYSICS-37992957068, which inherited it verbatim from EXP-PHYSICS-37973239386; NOT extended because the pre-freeze attainability certificate is satisfied inside the frozen 57), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY across separated observation windows -- measured as the persistence/half-life of each intrinsic class {BLOCK_403_CHALLENGE, TRANSPORT_ERROR, RATE_LIMIT_429, CLEAN, UNAVAILABLE_403, OTHER_NONBARRIER} -- and does a static endpoint-level denylist built from an anchor window at T0 retain predictive validity at T0+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks), so that the validity horizon and re-probe interval of the product's dead-end policy are ESTIMABLE rather than assumed? The unit of study is endpoint access-state persistence/timescale, NOT next-request barrier classification (that sub-thread is bounded by EXP-PHYSICS-37992957068) and NOT staleness of inherited content (C-FRESHNESS) or Runtime drift controls. The temporal/window axis is measured; the source-vantage axis is a declared single-vantage scope boundary (one stdlib HTTP egress).",
-
+  "claim_ids": [
+    "C-WEB-DYNAMICS"
+  ],
+  "title": "Endpoint ACCESS-BARRIER state persistence/timescale across a window ladder and the class-conditional validity horizon of a static endpoint denylist",
+  "question": "On the frozen 57-endpoint credential-free HTTP GET pool (parent EXP-PHYSICS-37992957068, which inherited it verbatim from EXP-PHYSICS-37973239386; NOT extended because the pre-freeze attainability certificate is satisfied inside the frozen 57), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY across separated observation windows -- measured as the persistence of each intrinsic class {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} versus the transient/recovering rate-driven class {RATE_LIMIT_429} and the ordinary classes {CLEAN, UNAVAILABLE_403, OTHER_NONBARRIER} -- and does a static endpoint-level denylist built from an anchor window at T0 retain predictive validity at T0+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks), so that the validity horizon and the class-conditional re-probe interval of the product's dead-end policy are ESTIMABLE rather than assumed? The unit of study is endpoint access-state persistence/timescale, NOT next-request barrier classification (bounded by EXP-PHYSICS-37992957068) and NOT staleness of inherited content (C-FRESHNESS) or Runtime drift controls. The temporal/window axis is measured; the source-vantage axis is a declared single-vantage scope boundary (one stdlib HTTP egress). The primary stationarity decision is made on endpoint-identity information (STATIONARITY_SKILL) and intrinsic-class persistence; the coarse pooled-denylist horizon is a reported product quantity that does not, by itself, overwrite the stationarity decision (see decision_rule.branch_precedence).",
   "hypothesis": {
-    "H1_stationary": "Endpoint ambient access-barrier state is stationary on the tested timescale: the anchor-to-lag barrier persistence is above chance (STATIONARITY_SKILL(1800s) >= 0.05 nats/endpoint with endpoint-permutation p < 0.05 and endpoint-clustered CI lower > 0), the static-denylist false-accept and false-reject rates both stay <= 0.10 through the longest lag, and intrinsic non-rate barriers (BLOCK_403_CHALLENGE, TRANSPORT_ERROR) persist at CLASS_PERSISTENCE >= 0.90.",
-    "H2_nonstationary": "Endpoint ambient access-barrier state is NOT stationary on the tested timescale: at least one denylisted endpoint recovers (false-accept > 0.10 at the first lag) or anchor state carries no information about lag state (STATIONARITY_SKILL not significant), so a pooled static denylist has no usable validity horizon beyond immediate re-observation.",
-    "H2b_class_conditional": "A static pooled denylist is the wrong object: intrinsic non-rate barriers (BLOCK_403_CHALLENGE, TRANSPORT_ERROR) are persistent (CLASS_PERSISTENCE >= 0.90) while rate-driven barriers (RATE_LIMIT_429, observed through the frozen stress stratum) recover within the ladder, so validity is class-conditional and the re-probe interval must differ by class.",
+    "H1_stationary": "Endpoint ambient access-barrier state is stationary on the tested timescale: STATIONARITY_SKILL(delta_ref) is significant (>= 0.05 nats/endpoint, endpoint-permutation p < 0.05, endpoint-clustered CI lower > 0; STAT_SIG_SIGONLY), each present intrinsic class {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} has CLASS_PERSISTENCE >= 0.90 (INTRINSIC_PERSISTENT), no rate-driven transient instability is observed (NOT RATE_TRANSIENT), there is no state-change evidence, and the pooled static denylist consequently keeps DENYLIST_FALSE_ACCEPT and DENYLIST_FALSE_REJECT <= 0.10 through the full nominal ladder (DENYLIST_HORIZON = 1800 s, an implied reported consequence rather than a separate gate).",
+    "H2_nonstationary": "Endpoint ambient access-barrier state is NOT stationary on the tested timescale: there is POSITIVE evidence of state change within the ladder -- at least one present intrinsic class {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} fails CLASS_PERSISTENCE >= 0.90 (INTRINSIC_BREAK), or, when no intrinsic class is present at T0, ambient transitions/recoveries or a denylist false-accept/false-reject at the 1800 s reference occur (STATE_CHANGE_EVIDENCE) -- so a pooled static denylist has no usable validity horizon beyond immediate re-observation. A merely non-significant stationarity test with NO positive change evidence is NOT S0; it is SIN_INCONCLUSIVE (an underpowered/ambiguous negative is not a scientific negative).",
+    "H2b_class_conditional": "A single pooled static denylist is the wrong object: intrinsic non-rate barriers (BLOCK_403_CHALLENGE, TRANSPORT_ERROR) are persistent (CLASS_PERSISTENCE >= 0.90) while rate-driven barriers (RATE_LIMIT_429, observed through the frozen stress stratum and the ambient ladder) recover or appear transiently within the ladder, so validity is class-conditional and the re-probe interval must differ by class.",
     "H0_null": "Memoryless/exchangeable endpoints: the lag state is independent of the anchor state, so STATIONARITY_SKILL is ~0 under the B_EXCHANGE permutation null and a static denylist is no better than a constant usable-endpoint prior.",
-    "relation_to_claim": "H1/H2/H2b are orthogonal falsifiable programs on the C-WEB-DYNAMICS next_gate axis 'timescales'. H2 bounds (does not close) an endpoint-level static-denylist prior on this pool/window; no hypothesis advances C-WEB-DYNAMICS above HYPOTHESIS."
+    "relation_to_claim": "H1/H2/H2b are orthogonal falsifiable programs on the C-WEB-DYNAMICS next_gate axis 'timescales'. H2/H2b bound (do not reject) a pooled static-denylist prior on this pool/window; no hypothesis advances C-WEB-DYNAMICS above HYPOTHESIS."
   },
-
-  "falsifier": "BOTH DIRECTIONS ARE SATISFIABLE, FROZEN AND REACHABLE (see prereg.md 'Attainability certificate'). Primary quantities: STATIONARITY_SKILL(delta_ref=1800s) = plug-in binary mutual information I(B_0 ; B_delta) in nats per endpoint over the ambient barrier indicator, with a B_EXCHANGE endpoint-permutation null (10000 permutations) and an endpoint-clustered bootstrap 95% CI; DENYLIST_FALSE_ACCEPT(delta) = fraction of T0 ambient-barrier endpoints that are non-barrier at delta; DENYLIST_FALSE_REJECT(delta) = fraction of T0 ambient-nonbarrier endpoints that are barrier at delta; DENYLIST_HORIZON = largest ladder delta delta_k such that FA and FR pass at EVERY lag up to and including delta_k (a contiguous valid prefix), else 0. Frozen thresholds: tau_FA = tau_FR = 0.10; alpha = 0.05; delta_SKILL = 0.05 nats; pc_power_min = 0.80; nc_fp_max = 0.05. Let STAT_SIG = (STATIONARITY_SKILL(1800) >= 0.05) AND (perm p < 0.05) AND (clustered CI lower > 0) AND (MI_POWER_OK), where MI_POWER_OK = the frozen PC_SYNTHETIC_STATIONARY generator (rho=1.0 persistent-barrier reference) has power >= 0.80 at the observed T0 ambient barrier prevalence f_b_obs. Let IMMEDIATE_FAIL = (DENYLIST_HORIZON == 0). (S1_STATIONARY) STAT_SIG AND DENYLIST_HORIZON == 1800. (S0_NON_STATIONARY) IMMEDIATE_FAIL OR (MI_POWER_OK AND NOT (STATIONARITY_SKILL >= 0.05 AND perm p < 0.05 AND CI lower > 0)). (SM_CLASS_CONDITIONAL) STAT_SIG AND DENYLIST_HORIZON < 1800 AND CLASS_PERSISTENCE[BLOCK_403_CHALLENGE] >= 0.90 AND CLASS_PERSISTENCE[TRANSPORT_ERROR] >= 0.90 AND TRANSIENT_UNSTABLE. (SIN_INCONCLUSIVE) otherwise. Reachability: S1 is reachable because the pre-freeze census observed 5 persistent BLOCK_403_CHALLENGE endpoints (gitlab.com/users/sign_in, community.cloudflare.com, www.npmjs.com/login, wordpress.com/log-in, www.phpbb.com/community/) and 1 persistent TRANSPORT_ERROR endpoint (community.invisioncommunity.com) across a 45s window pair, which yields high STATIONARITY_SKILL and low FA/FR. S0 is reachable because the census observed a live RECOVERY (search.brave.com/search?q=test RATE_LIMIT_429 -> CLEAN across the pair), so at least one denylisted endpoint recovers and FA(beta) > 0.10; and because the pre-freeze onset probe drove CLEAN -> RATE_LIMIT_429 on www.djangoproject.com/admin/login, www.djangoproject.com/accounts/login and auth0.com, showing lag independence (skill -> 0) is attainable for rate-driven strata. SM is reachable because persistent 403s and recovering 429s coexist. MEASUREMENT_INVALID is reserved exclusively for prerequisite/control failure (network, classifier reproducibility, oracle misclassification, PC power < 0.80, NC false-positive > 0.05, or T0 ambient-barrier floor < 3 endpoints), never for a scientific S0/S1/SM.",
-
+  "falsifier": "TWO-SIDED AND BOTH DIRECTIONS FROZEN-REACHABLE (see prereg.md 'Attainability certificate' and freeze_eligibility.decision_rule_reachability). Primary quantities: STATIONARITY_SKILL(delta_ref=1800s) = plug-in binary mutual information I(B_0 ; B_delta) in nats per endpoint over the ambient barrier indicator, with a B_EXCHANGE GLOBAL endpoint-permutation null (10000 uniform shuffles of the lag vector across all 57 endpoints; seed 38074818597) and an endpoint-clustered bootstrap 95% CI (cluster = registrable domain defined in measurement_validity.uncertainty_integrity; 10000 resamples, seed 38074818597); DENYLIST_FALSE_ACCEPT(delta) = fraction of T0 ambient-barrier endpoints that are non-barrier at delta; DENYLIST_FALSE_REJECT(delta) = fraction of T0 ambient-nonbarrier endpoints that are barrier at delta; DENYLIST_HORIZON = largest ladder delta delta_k such that FA and FR pass at EVERY lag up to and including delta_k (a contiguous valid prefix), else 0. Frozen thresholds: tau_FA = tau_FR = 0.10; alpha = 0.05; delta_SKILL = 0.05 nats; pc_power_min = 0.80; nc_false_positive_max = 0.05; intrinsic_persistence_min = 0.90. Let STAT_SIG_SIGONLY = (STATIONARITY_SKILL(1800) >= 0.05) AND (perm p < 0.05) AND (clustered CI lower > 0). Let INTRINSIC_PERSISTENT = at least one class in {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} is present at T0 AND every present class in that set has CLASS_PERSISTENCE >= 0.90; Let INTRINSIC_BREAK = (an intrinsic class is present at T0) AND NOT INTRINSIC_PERSISTENT. Let RATE_TRANSIENT = (STRESS_FALSE_ACCEPT > 0.10) OR (median TRANSIENT_RECOVERY_HALF_LIFE is finite and < 1800) OR (a RATE_LIMIT_429 endpoint is present at T0 and CLASS_PERSISTENCE[RATE_LIMIT_429] < 0.90) OR (AMBIENT_RECOVERY_n > 0) OR (STRESS_ONSET_n > 0). Let STATE_CHANGE_EVIDENCE = (AMBIENT_RECOVERY_n > 0) OR (AMBIENT_ONSET_n > 0) OR (DENYLIST_FALSE_ACCEPT(1800) > 0.10) OR (DENYLIST_FALSE_REJECT(1800) > 0.10). MI power is a REPORTED DIAGNOSTIC (MI_POWER_OK at rho=1.0, POWER_AT_RHO90, POWER_AT_DELTA_SKILL) and is NOT a branch gate, so no branch depends on a non-significant negative. The frozen branches are S1_STATIONARY (STAT_SIG_SIGONLY AND INTRINSIC_PERSISTENT AND NOT RATE_TRANSIENT AND NOT STATE_CHANGE_EVIDENCE; DENYLIST_HORIZON == 1800 is then an implied reported consequence, not a gate), S0_NON_STATIONARY (INTRINSIC_BREAK OR (STATE_CHANGE_EVIDENCE AND no intrinsic class present at T0)), SM_CLASS_CONDITIONAL (INTRINSIC_PERSISTENT AND RATE_TRANSIENT), SIN_INCONCLUSIVE (otherwise), plus MEASUREMENT_INVALID only on prerequisite/control failure. Fresh branch_probe2.py (/tmp/opencode/phys380_cal/branch_probe2.py sha256 0ffb401058e11e76c56dbeabbafe1c8c3e54b49a672ca649879adaee10afdb4d) demonstrates all five reachable on the actual logic; see prereg.md section 6.3.",
   "baselines": {
     "B_EXCHANGE": {
       "id": "B_EXCHANGE",
-      "description": "Mandated memory/constant null: permute the lag-state labels B_delta across endpoints (10000 permutations, seed 38074818597), preserving the anchor marginals and each endpoint's cluster, and recompute I(B_0;B_delta). The primary p-value is (1 + #{perm MI >= observed MI}) / (1 + 10000). This is exactly the null that the anchor state carries no information about the lag state beyond the marginal (i.e. the identity-transfer predictor equals the constant-marginal predictor).",
+      "description": "Mandated memory/constant null: a GLOBAL uniform shuffle of the lag-state labels B_delta across all 57 endpoints (10000 permutations, seed 38074818597), preserving the anchor marginals because only the lag labels are permuted, and recompute I(B_0;B_delta). Permutation clusters are NOT preserved; the endpoint-clustered bootstrap (not the permutation) accounts for registrable-domain dependence. The primary p-value is (1 + #{perm MI >= observed MI}) / (1 + 10000). This is exactly the null that the anchor state carries no information about the lag state beyond the marginal (the identity-transfer predictor equals the constant-marginal predictor).",
       "role": "primary strong null (memoryless/exchangeable endpoints)"
     },
     "B_CONSTANT_USABLE": {
@@ -39,62 +37,96 @@
     },
     "comparison": "The primary stationarity metric is measured against the B_EXCHANGE permutation null; DENYLIST_SKILL is measured against B_CONSTANT_USABLE."
   },
-
   "positive_control": {
     "PC_SYNTHETIC_STATIONARY": {
       "id": "PC_SYNTHETIC_STATIONARY",
-      "description": "Offline planted-stationary generator: N=57 endpoints; a fraction f_b are barrier-capable and, conditionally on capability, the lag state equals the anchor state with probability rho (otherwise redrawn from the marginal). The SAME plug-in MI estimator and B_EXCHANGE permutation test are applied. Design-time calibration (non-outcome-bearing, no Web data) used R=200 replications, perms_per_rep=1000, seed 38074818597.",
-      "literal_design_values": {"rng_master_seed": 38074818597, "replications_R": 200, "n_endpoints": 57, "f_b": 0.20, "rho": 0.80, "perms_per_rep": 1000, "alpha": 0.05},
-      "power_requirement": "Fraction of R replications with permutation p < 0.05 must be >= 0.80 at the frozen f_b=0.20,rho=0.80; the achieved design-time power is 1.00. EXECUTE additionally computes MI_POWER_OK = power at the observed f_b_obs under the persistent-barrier reference rho=1.0 (achieved 0.92/0.995/1.00/1.00 at f_b=0.05/0.08/0.10/0.20); STAT_SIG is unavailable when MI_POWER_OK is false.",
-      "construct_boundary": "Validates that the estimator recovers a known stationary endpoint population at this sample size; it does not assert that any real endpoint is stationary. Boundary calibration: power=1.00 at f_b=0.10,rho=0.80; power=0.735 at f_b=0.10,rho=0.50 (disclosed; the low-prevalence/low-persistence corner is deliberately NOT claimed as powered)."
+      "description": "Offline planted-stationary generator: N=57 endpoints; anchor state Bernoulli(f_b); lag state equals the anchor state with probability rho (otherwise redrawn from Bernoulli(f_b)). The SAME plug-in MI estimator and B_EXCHANGE permutation test are applied. Fresh DESIGN-time calibration (non-outcome-bearing, no Web data) used R=200 replications, perms_per_rep=1000, seed 38074818597 (/tmp/opencode/phys380_cal/calib.py sha256 c5860b9b5fedd41e0356b4553e49b4fe16debef98a02104a809d4b367c03e886).",
+      "literal_design_values": {
+        "rng_master_seed": 38074818597,
+        "replications_R": 200,
+        "n_endpoints": 57,
+        "perms_per_rep": 1000,
+        "alpha": 0.05
+      },
+      "power_requirement": "Fraction of R replications with permutation p < 0.05 must be >= 0.80. Fresh achieved power: f_b=0.20,rho=0.80 -> 1.00; f_b=0.10,rho=0.80 -> 0.985. EXECUTE additionally reports, as non-gating diagnostics, MI_POWER_OK (power at f_b_obs, rho=1.0; fresh 0.955/0.990/0.995/1.00 at f_b=0.05/0.08/0.10/0.20), POWER_AT_RHO90 (fresh ~0.97) and POWER_AT_DELTA_SKILL (power at MI=0.05 nats; fresh ~0.49-0.67). Branch decisions do NOT depend on these diagnostics.",
+      "construct_boundary": "Validates that the estimator recovers a known stationary endpoint population at this sample size; it does not assert that any real endpoint is stationary. Boundary calibration: power=0.81 at f_b=0.10,rho=0.50 and only ~0.49-0.67 to detect MI=delta_SKILL=0.05 nats at N=57, both disclosed as the low-effect corners; the weak-effect underpowering is why S0 rests on positive change evidence instead of non-significance."
     },
     "PC_ORACLE_BARRIER": {
       "id": "PC_ORACLE_BARRIER",
-      "description": "Live positive control on non-pool hosts with deterministic status: https://httpbin.org/status/429 must classify RATE_LIMIT_429; a guaranteed-unresolvable host (https://no-such-host.invalid/) must classify TRANSPORT_ERROR; https://httpbin.org/status/403 must classify UNAVAILABLE_403 (proving the classifier separates 403-as-plain-unavailability from a challenge 403). The BLOCK_403_CHALLENGE branch is exercised by natural pool endpoints (prerequisite floor >= 1 challenge endpoint at T0) and by the frozen classifier replay control, not by a synthetic oracle.",
-      "literal_design_values": {"hosts": ["https://httpbin.org/status/429", "https://no-such-host.invalid/", "https://httpbin.org/status/403"], "per_host_requests": 2},
+      "description": "Live positive control on non-pool hosts with deterministic status: https://httpbin.org/status/429 must classify RATE_LIMIT_429; a guaranteed-unresolvable host (https://no-such-host.invalid/) must classify TRANSPORT_ERROR; https://httpbin.org/status/403 must classify UNAVAILABLE_403 (proving the classifier separates 403-as-plain-unavailability from a challenge 403). A second 429 oracle host (https://httpbingo.org/status/429) is requested as a redundancy check, and if BOTH 429 oracle hosts are unreachable/challenged the run is MEASUREMENT_INVALID rather than silently dropping the control. The BLOCK_403_CHALLENGE branch is exercised by natural pool endpoints (prerequisite floor >= 1 challenge endpoint at T0) and by the frozen classifier replay control, not by a synthetic oracle.",
+      "literal_design_values": {
+        "hosts": [
+          "https://httpbin.org/status/429",
+          "https://httpbingo.org/status/429",
+          "https://no-such-host.invalid/",
+          "https://httpbin.org/status/403"
+        ],
+        "per_host_requests": 2
+      },
       "pass_condition": "Every oracle request is classified into its expected intrinsic class; otherwise MEASUREMENT_INVALID.",
       "construct_boundary": "Confirms the live collection+classifier code path can register barriers and can distinguish 403-as-block from 403-as-plain; it is not a natural Web barrier."
     }
   },
-
   "null_control": {
     "NC_SYNTHETIC_EXCHANGEABLE": {
       "id": "NC_SYNTHETIC_EXCHANGEABLE",
-      "description": "Offline exchangeable generator: N=57 endpoints; anchor and lag binary states are drawn independently with the same per-endpoint Bernoulli prevalence (no persistence). Fed through the SAME estimator and B_EXCHANGE permutation test. Design-time calibration used R=200, perms_per_rep=1000, seed 38074818598.",
-      "literal_design_values": {"rng_master_seed": 38074818598, "replications_R": 200, "n_endpoints": 57, "p": 0.20, "perms_per_rep": 1000, "alpha": 0.05},
-      "pass_condition": "Fraction of R replications with permutation p < 0.05 must be <= 0.05; the achieved design-time false-positive rate is 0.01 at p=0.20 (0.03 at p=0.30).",
+      "description": "Offline exchangeable generator: N=57 endpoints; anchor and lag binary states are drawn independently with the same per-endpoint Bernoulli prevalence (no persistence). Fed through the SAME estimator and B_EXCHANGE permutation test. Fresh DESIGN-time calibration used R=200, perms_per_rep=1000, seed 38074818598 (/tmp/opencode/phys380_cal/calib.py).",
+      "literal_design_values": {
+        "rng_master_seed": 38074818598,
+        "replications_R": 200,
+        "n_endpoints": 57,
+        "p": 0.2,
+        "perms_per_rep": 1000,
+        "alpha": 0.05
+      },
+      "pass_condition": "Fraction of R replications with permutation p < 0.05 must be <= 0.05; the fresh achieved false-positive rate is 0.01 at p=0.20 (0.03 at p=0.30).",
       "construct_boundary": "Calibrates the null: a genuinely exchangeable endpoint population must not yield spurious stationarity skill."
     },
     "NC_CLEAN_ORACLE": {
       "id": "NC_CLEAN_ORACLE",
-      "description": "Live negative control on https://httpbin.org/status/200 and https://httpbin.org/uuid, which must classify CLEAN.",
-      "literal_design_values": {"hosts": ["https://httpbin.org/status/200", "https://httpbin.org/uuid"], "per_host_requests": 2},
+      "description": "Live negative control on https://httpbin.org/status/200, https://httpbin.org/uuid and the redundant https://example.com/ , which must classify CLEAN.",
+      "literal_design_values": {
+        "hosts": [
+          "https://httpbin.org/status/200",
+          "https://httpbin.org/uuid",
+          "https://example.com/"
+        ],
+        "per_host_requests": 2
+      },
       "pass_condition": "All requests classify CLEAN; otherwise MEASUREMENT_INVALID.",
       "construct_boundary": "Confirms the classifier does not fire on clean responses."
     },
     "C_PROBE_LOAD": {
       "id": "C_PROBE_LOAD",
-      "description": "Validity control for self-induction, NOT a statistical null: Cochran-Armitage trend of ambient barrier prevalence across the 5 sweep indices for the 52 non-stressed endpoints. Under no probe-induced drift the slope is ~0. A positive slope is reported as a self-induction caveat; it does not by itself invalidate the run but is disclosed next to every persistence estimate.",
-      "literal_design_values": {"endpoints": "the 52 frozen endpoints outside stratum_stress", "sweeps": [0, 1, 2, 3, 4], "direction": "two-sided"},
+      "description": "Validity control for self-induction, NOT a statistical null: Cochran-Armitage trend of ambient barrier prevalence across the 5 sweep indices for the 52 non-stressed endpoints, plus the pre-freeze replica STATIONARITY_SKILL_NO_STRESS measured on the 52 non-stressed endpoints. Under no probe-induced drift the trend slope is ~0 and the no-stress skill matches the full-pool skill. A positive slope or a large full-vs-no-stress gap is reported as a self-induction caveat; it does not by itself invalidate the run but is disclosed next to every persistence estimate.",
+      "literal_design_values": {
+        "endpoints": "the 52 frozen endpoints outside stratum_stress",
+        "sweeps": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "direction": "two-sided"
+      },
       "pass_condition": "No hard pass/fail; reported transparently. If the slope CI excludes 0 with rising prevalence it is recorded as a validity threat to the STATIONARY branch.",
       "construct_boundary": "Separates genuine endpoint persistence from accumulation of barriers caused by our own single-GET probes."
     }
   },
-
   "measurement_validity": {
-    "target_integrity": "Every request stores raw HTTP status, response headers (server, cf-mitigated, retry-after), body SHA-256, byte length, first 20000 body bytes for marker matching, elapsed ms, attempt index, sweep index, endpoint and any transport error string. The intrinsic class is a pure deterministic function of those stored fields under the frozen classifier, so AUDIT can recompute it.",
-    "label_determinism": "Each sweep's ambient class depends only on that sweep's single response; the load class depends only on that burst's responses. No class depends on the anchor state, so modeling the anchor does not leak the lag label.",
+    "target_integrity": "Every request stores raw HTTP status, response headers (server, cf-mitigated, retry-after), body SHA-256, byte length, first 20000 body bytes for marker matching, elapsed ms, sweep index, attempt index, endpoint and any transport error string. The intrinsic class is a pure deterministic function of those stored fields under the frozen classifier, so AUDIT can recompute it.",
+    "label_determinism": "Each sweep's ambient class depends only on that sweep's single response; the load class depends only on that burst's responses. No class depends on the anchor state, so conditioning on the anchor state does not leak the lag label.",
     "split_integrity": "The anchor window is sweep 0; lag labels are sweeps 1..4 at target offsets 20/120/600/1800 s. There is no fitting: the estimator is a pre-registered closed-form mutual information; exactness is by permutation and clustered bootstrap, not cross-validation.",
-    "uncertainty_integrity": "Endpoint-permutation null (10000 permutations, seed 38074818597) for STATIONARITY_SKILL p-values; endpoint-clustered bootstrap (cluster = registrable domain, 10000 resamples, seed 38074818597) for percentile 95% CIs of STATIONARITY_SKILL and of FA/FR at each lag.",
+    "uncertainty_integrity": "Endpoint-permutation null: 10000 GLOBAL uniform shuffles of the lag vector across all 57 endpoints (seed 38074818597) for STATIONARITY_SKILL p-values. Endpoint-clustered bootstrap: cluster = registrable domain, where registrable_domain(url) is the frozen deterministic function 'take the URL host, strip a single leading www., and retain the final two dot-separated labels' (no multi-label public suffix occurs in the frozen 57); e.g. gitlab.gnome.org -> gnome.org, www.djangoproject.com -> djangoproject.com. 10000 resamples (seed 38074818597) give percentile 95% CIs of STATIONARITY_SKILL and of FA/FR at each lag.",
     "sampling_integrity": "The 57-endpoint universe is frozen and may not be substituted, added to or dropped. Per-sweep endpoint probe ORDER is a frozen seeded permutation (seed 38074818597) so any residual load effect is not systematically associated with endpoint identity or sweep. No endpoint may be dropped after seeing its outcomes.",
     "representation_integrity": "One stdlib-HTTP client, one User-Agent, one network egress vantage, one ~30-minute wall-clock window. The source-vantage axis of the mandate is NOT varied and is a declared scope boundary. Results describe this pool, this vantage and this window only.",
     "control_integrity": "PC_SYNTHETIC_STATIONARY power at the frozen f_b=0.20,rho=0.80 and NC_SYNTHETIC_EXCHANGEABLE false-positive at p=0.20 must meet their frozen bounds; PC_ORACLE_BARRIER and NC_CLEAN_ORACLE live classifications must be correct; the classifier replay must yield 0 mismatches. Any failure => status MEASUREMENT_INVALID, never a scientific negative.",
     "prerequisite_integrity": "Live network must reach the frozen universe and both oracle hosts. At T0 the number of ambient-barrier endpoints must be >= 3 (dynamic-range floor) and the anchor and delta_ref sweeps must both complete; otherwise MEASUREMENT_INVALID (attainability failure), because the pre-freeze census shows this floor is achievable.",
-    "power_integrity": "Because the stationarity test is powered only when enough endpoints are barrier-capable, MI_POWER_OK = power of the frozen PC generator at the observed f_b_obs under the persistent-barrier reference rho=1.0 must hold for the STATIONARY branch; when it is false and no immediate recovery is observed the result is INCONCLUSIVE (an underpowered negative is not a scientific negative).",
-    "resolution_disclosure": "The false-accept resolution is 1/n_denylisted; with the census-consistent n_denylisted ~= 6 the smallest non-zero FA is ~0.17, so tau_FA=0.10 means ANY observed recovery flags the horizon as failed. This coarse but conservative resolution is disclosed; it favors the product-safe NON_STATIONARY reading.",
-    "activity_disclosure": "The only pre-freeze activity is a non-outcome-bearing reachability census (/tmp/opencode/phys380/census.py, 17 fixed endpoints, 2 sweeps separated by 45s, 3 GETs each) plus two non-outcome-bearing design probes (/tmp/opencode/phys380/onset.py for onset reachability; /tmp/opencode/phys380/calib2.py for estimator power/false-positive and branch reachability). These establish attainability, classifier liveness and estimator calibration only; they are not part of the frozen measurement. Their summary is reproduced literally in prereg.md. EXECUTE must itself re-verify all attainability floors from its own collected data (the /tmp artifacts are not a frozen interpretation dependency and may not be re-hashed)."
+    "power_integrity": "Stationarity detection power is REPORTED, not gated, so no branch rests on a non-significant negative. EXECUTE reports POWER_AT_DELTA_SKILL = power of the frozen PC generator to detect the minimum meaningful effect MI = delta_SKILL (0.05 nats) at the observed f_b_obs, POWER_AT_RHO90 = power at (f_b_obs, rho=0.90), and MI_POWER_OK = power at (f_b_obs, rho=1.0). Fresh DESIGN-time values at N=57 (R=200, 1000 perms; /tmp/opencode/phys380_cal/power_min.py sha256 84074980a49b624d42fe873be80d83d4c53b5866671bc6ef7c8f3e3d96d5a056): power at MI=0.05 is ~0.49-0.67, i.e. weak-but-real persistence is NOT reliably detectable at this n, while power at rho=0.90/1.0 is ~0.97/1.00. This weak-effect underpowering is disclosed and is exactly why S0 is defined by POSITIVE change evidence rather than by non-significance of the MI test. The T0 ambient-barrier floor (>= 3) remains the identifiability prerequisite and any shortfall is MEASUREMENT_INVALID, not S0.",
+    "resolution_disclosure": "The false-accept resolution is 1/n_denylisted; with the census-consistent n_denylisted ~= 6-9 the smallest non-zero FA is ~0.11-0.17, so tau_FA=0.10 means ANY observed recovery flags the pooled-denylist horizon as failed. This coarse but conservative resolution is disclosed and is exactly why the pooled-denylist horizon is a reported product quantity while the stationarity/intrinsic-persistence decision is made separately (see decision_rule.branch_precedence). CLASS_PERSISTENCE has resolution 1/n_intrinsic; with n_intrinsic ~= 5, the >= 0.90 threshold requires ALL 5 intrinsic endpoints to persist (4/5 = 0.80 fails), so the intrinsic persistence test is deliberately stringent and a single flaky intrinsic endpoint routes S1/SM to S0 or SIN; this is disclosed.",
+    "activity_disclosure": "The only pre-freeze activity is non-outcome-bearing: (i) a reachability census over a fixed 26-endpoint subset of the frozen 57, in two sweeps separated by 30 s, with a 6-GET/0.12 s burst on the 5 rate-limit-capable endpoints (/tmp/opencode/phys380_cal/census.py sha256 5050fdf28cfbf230a70492cae6514d10ba5fcf8405c6a8672557f5628bfd72e3); (ii) offline estimator calibration, minimum-meaningful-effect power calibration and branch probes on synthetic data only (/tmp/opencode/phys380_cal/calib.py sha256 c5860b9b5fedd41e0356b4553e49b4fe16debef98a02104a809d4b367c03e886; power_min.py sha256 84074980a49b624d42fe873be80d83d4c53b5866671bc6ef7c8f3e3d96d5a056; branch_probe2.py sha256 0ffb401058e11e76c56dbeabbafe1c8c3e54b49a672ca649879adaee10afdb4d). These establish attainability, classifier liveness, estimator calibration, power and branch reachability only; they are not part of the frozen measurement. Their summary is reproduced literally in prereg.md. EXECUTE must itself re-verify all attainability floors and all control calibrations from its own collected data (the /tmp artifacts are not a frozen interpretation dependency and may not be re-hashed)."
   },
-
   "frozen_intrinsic_classifier": {
     "CHALLENGE_RE_LITERAL": "(?i)(just a moment|cf-chl|challenge-platform|checking your browser|cf_chl|turnstile|hcaptcha|captcha|attention required)",
     "match_scope": "CHALLENGE_RE is applied to the first 20000 bytes of the response body decoded as latin-1 (lossless byte mapping). cf-mitigated is lowercased and compared to the string 'challenge'.",
@@ -104,12 +136,25 @@
     "UNAVAILABLE_403": "HTTP status == 403 without any challenge marker.",
     "TRANSPORT_ERROR": "No HTTP response (DNS failure, connection refused, TLS failure, or timeout).",
     "OTHER_NONBARRIER": "Any other HTTP status (404, 500, redirect chains to error, etc.).",
-    "barrier_set": ["RATE_LIMIT_429", "BLOCK_403_CHALLENGE", "TRANSPORT_ERROR"],
-    "ordinary_unavailability_set": ["UNAVAILABLE_403", "OTHER_NONBARRIER"],
-    "severity_rank": {"TRANSPORT_ERROR": 5, "RATE_LIMIT_429": 4, "BLOCK_403_CHALLENGE": 3, "UNAVAILABLE_403": 2, "OTHER_NONBARRIER": 1, "CLEAN": 0},
+    "barrier_set": [
+      "RATE_LIMIT_429",
+      "BLOCK_403_CHALLENGE",
+      "TRANSPORT_ERROR"
+    ],
+    "ordinary_unavailability_set": [
+      "UNAVAILABLE_403",
+      "OTHER_NONBARRIER"
+    ],
+    "severity_rank": {
+      "TRANSPORT_ERROR": 5,
+      "RATE_LIMIT_429": 4,
+      "BLOCK_403_CHALLENGE": 3,
+      "UNAVAILABLE_403": 2,
+      "OTHER_NONBARRIER": 1,
+      "CLEAN": 0
+    },
     "label_determinism": "All classes are functions of a single request's stored fields only; none depends on prior requests, so conditioning on the anchor state is not label leakage."
   },
-
   "frozen_universe": {
     "frozen": true,
     "n_endpoints": 57,
@@ -174,11 +219,21 @@
       "https://search.brave.com/search?q=test"
     ]
   },
-
   "sweep_protocol": {
     "unit": "(endpoint, sweep_index); anchor = sweep 0",
-    "sweep_target_offsets_s": [0, 20, 120, 600, 1800],
-    "delta_ladder_s": [20, 120, 600, 1800],
+    "sweep_target_offsets_s": [
+      0,
+      20,
+      120,
+      600,
+      1800
+    ],
+    "delta_ladder_s": [
+      20,
+      120,
+      600,
+      1800
+    ],
     "delta_ref_s": 1800,
     "ambient_probe": "For EVERY endpoint: a fresh cookie jar, then exactly one HTTP GET to the endpoint URL. Store raw fields; ambient_class = classifier output. Endpoints are probed sequentially in a per-sweep frozen seeded permutation order (seed 38074818597) with inter-endpoint gap 0.30 s.",
     "load_probe": "Immediately AFTER its ambient probe, each endpoint in stratum_stress additionally receives a burst of B_stress=8 GETs at gap 0.15 s inside a SEPARATE fresh cookie jar; load_class = argmax severity_rank over the 8 responses. The 52 non-stress endpoints receive no load probe.",
@@ -186,9 +241,18 @@
     "request_headers": "One frozen User-Agent string and Accept header recorded in prereg.md; GET only; no authentication; no credentials; no JavaScript.",
     "gap_after_probe": "0.30 s between consecutive endpoints within a sweep.",
     "wall_clock_cap_minutes": 60,
-    "partial_ladder_rule": "If a sweep overruns, record the ACTUAL elapsed delta and use it; the analysis maps each sweep to its nearest pre-registered ladder rung. If the anchor (sweep 0) or the delta_ref sweep fails entirely, the run is MEASUREMENT_INVALID."
+    "partial_ladder_rule": "The ANALYSIS labels each sweep by its NOMINAL ladder rung (sweep k -> sweep_target_offsets_s[k]) and evaluates all per-rung metrics (FA/FR, DENYLIST_HORIZON, DENYLIST_FIRST_FAIL_LAG) on those nominal rungs, so DENYLIST_HORIZON takes values in {0,20,120,600,1800}. The ACTUAL elapsed delta of each sweep is recorded and reported alongside the nominal rung and is used only for descriptive timing and for the delta_ref validity check. delta_ref is the final sweep (nominal 1800 s); its ACTUAL delta must be >= 1500 s or the run is MEASUREMENT_INVALID. If the anchor (sweep 0) fails entirely, the run is MEASUREMENT_INVALID.",
+    "request_policy": {
+      "method": "GET",
+      "follow_redirects": true,
+      "max_redirects": 5,
+      "timeout_s": 30,
+      "retries": 0,
+      "attempts_per_observation": 1,
+      "tls_verify": true,
+      "note": "A single request defines an observation; there is NO retry, so a DNS/connect/TLS/timeout failure is directly TRANSPORT_ERROR rather than a retried CLEAN. The stored attempt_index is therefore 0 for ambient and load observations; the per_host_requests=2 for oracle controls are two independent observations, not retries."
+    }
   },
-
   "strata": {
     "stratum_stress": {
       "definition": "Fixed pre-registered rate-limit-capable set derived from parent accepted evidence and the pre-freeze census; it is NOT selected from this run's outcomes.",
@@ -211,72 +275,124 @@
         "https://community.invisioncommunity.com/"
       ]
     },
-    "primary_inference_population": "The full frozen 57-endpoint pool for STATIONARITY_SKILL and FA/FR; class-conditional persistence uses the T0 ambient class of each endpoint."
+    "primary_inference_population": "The full frozen 57-endpoint pool for STATIONARITY_SKILL and FA/FR; STATIONARITY_SKILL_NO_STRESS on the 52 non-stressed endpoints is a pre-registered robustness replica; class-conditional persistence uses the T0 ambient class of each endpoint."
   },
-
   "stable_identifiers": {
     "primary_metric": "STATIONARITY_SKILL",
-    "secondary_metrics": ["STATIONARITY_SKILL_BY_LAG", "STATIONARITY_SKILL_MULTI", "DENYLIST_FALSE_ACCEPT", "DENYLIST_FALSE_REJECT", "DENYLIST_HORIZON", "DENYLIST_FIRST_FAIL_LAG", "DENYLIST_SKILL", "CLASS_PERSISTENCE", "TRANSIENT_RECOVERY_HALF_LIFE", "STRESS_FALSE_ACCEPT", "ONSET_n", "RECOVERY_n", "PERSIST_n", "MI_POWER_OK", "f_b_obs"],
-    "baseline_ids": ["B_EXCHANGE", "B_CONSTANT_USABLE", "B_MARGINAL", "B_LASTSWEEP"],
-    "control_ids": ["PC_SYNTHETIC_STATIONARY", "PC_ORACLE_BARRIER", "NC_SYNTHETIC_EXCHANGEABLE", "NC_CLEAN_ORACLE", "C_PROBE_LOAD"],
-    "policy_ids": ["POLICY_STATIC_DENYLIST"],
-    "class_ids": ["CLEAN", "RATE_LIMIT_429", "BLOCK_403_CHALLENGE", "UNAVAILABLE_403", "TRANSPORT_ERROR", "OTHER_NONBARRIER"],
-    "branch_ids": ["S1_STATIONARY", "S0_NON_STATIONARY", "SM_CLASS_CONDITIONAL", "SIN_INCONCLUSIVE", "MEASUREMENT_INVALID"],
-    "seeds": {"probe_order": 38074818597, "bootstrap": 38074818597, "permutation": 38074818597, "pc_synthetic": 38074818597, "nc_synthetic": 38074818598}
+    "secondary_metrics": [
+      "STATIONARITY_SKILL_BY_LAG",
+      "STATIONARITY_SKILL_MULTI",
+      "STATIONARITY_SKILL_NO_STRESS",
+      "DENYLIST_FALSE_ACCEPT",
+      "DENYLIST_FALSE_REJECT",
+      "DENYLIST_HORIZON",
+      "DENYLIST_FIRST_FAIL_LAG",
+      "DENYLIST_SKILL",
+      "CLASS_PERSISTENCE",
+      "TRANSIENT_RECOVERY_HALF_LIFE",
+      "STRESS_FALSE_ACCEPT",
+      "AMBIENT_ONSET_n",
+      "AMBIENT_RECOVERY_n",
+      "STRESS_ONSET_n",
+      "PERSIST_n",
+      "MI_POWER_OK",
+      "f_b_obs",
+      "STATE_CHANGE_EVIDENCE",
+      "INTRINSIC_BREAK",
+      "POWER_AT_DELTA_SKILL",
+      "POWER_AT_RHO90"
+    ],
+    "baseline_ids": [
+      "B_EXCHANGE",
+      "B_CONSTANT_USABLE",
+      "B_MARGINAL",
+      "B_LASTSWEEP"
+    ],
+    "control_ids": [
+      "PC_SYNTHETIC_STATIONARY",
+      "PC_ORACLE_BARRIER",
+      "NC_SYNTHETIC_EXCHANGEABLE",
+      "NC_CLEAN_ORACLE",
+      "C_PROBE_LOAD"
+    ],
+    "policy_ids": [
+      "POLICY_STATIC_DENYLIST",
+      "POLICY_CLASS_CONDITIONAL_DENYLIST"
+    ],
+    "class_ids": [
+      "CLEAN",
+      "RATE_LIMIT_429",
+      "BLOCK_403_CHALLENGE",
+      "UNAVAILABLE_403",
+      "TRANSPORT_ERROR",
+      "OTHER_NONBARRIER"
+    ],
+    "branch_ids": [
+      "S1_STATIONARY",
+      "S0_NON_STATIONARY",
+      "SM_CLASS_CONDITIONAL",
+      "SIN_INCONCLUSIVE",
+      "MEASUREMENT_INVALID"
+    ],
+    "seeds": {
+      "probe_order": 38074818597,
+      "bootstrap": 38074818597,
+      "permutation": 38074818597,
+      "pc_synthetic": 38074818597,
+      "nc_synthetic": 38074818598
+    }
   },
-
   "decision_rule": {
     "primary_metric": "STATIONARITY_SKILL",
     "metric_definition": "STATIONARITY_SKILL(delta) = plug-in binary mutual information I(B_anchor ; B_delta), in nats per endpoint, over the ambient barrier indicator (barrier_set vs non-barrier); B_EXCHANGE endpoint-permutation p-value (10000 permutations); endpoint-clustered bootstrap 95% CI [LO,HI] (10000 resamples). Higher = more stationary/identity-informative.",
     "primary_decision_quantities": {
+      "STAT_SIG_SIGONLY": "STATIONARITY_SKILL(delta_ref) >= 0.05 AND perm p < 0.05 AND clustered CI lower > 0. (Stationarity evidence.)",
+      "MI_POWER_OK": "power of PC_SYNTHETIC_STATIONARY at (f_b=f_b_obs, rho=1.0, R=200, perms=1000) >= 0.80. REPORTED only; NOT a branch gate.",
+      "INTRINSIC_PERSISTENT": "at least one class in {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} is present at T0 AND every present class in that set has CLASS_PERSISTENCE >= 0.90.",
+      "RATE_TRANSIENT": "(STRESS_FALSE_ACCEPT > 0.10) OR (median TRANSIENT_RECOVERY_HALF_LIFE finite and < 1800) OR (a RATE_LIMIT_429 endpoint is present at T0 and CLASS_PERSISTENCE[RATE_LIMIT_429] < 0.90) OR (AMBIENT_RECOVERY_n > 0) OR (STRESS_ONSET_n > 0). AMBIENT_RECOVERY_n counts ambient barrier->non-barrier transitions across consecutive ladder sweeps; STRESS_ONSET_n counts ambient RATE_LIMIT_429 appearances on stratum_stress endpoints whose T0 ambient class was not RATE_LIMIT_429. Generic ambient onsets are deliberately NOT part of this gate (they are reported as AMBIENT_ONSET_n but may be intrinsic).",
       "DENYLIST_FALSE_ACCEPT": "FA(delta) = fraction of endpoints with an ambient barrier at T0 whose ambient class at delta is non-barrier (false-accept: denylisted endpoint recovered).",
       "DENYLIST_FALSE_REJECT": "FR(delta) = fraction of endpoints ambient-non-barrier at T0 whose ambient class at delta is a barrier (false-reject: previously CLEAN endpoint newly blocks).",
       "DENYLIST_HORIZON": "largest ladder delta delta_k such that FA(delta_j) <= 0.10 AND FR(delta_j) <= 0.10 for ALL j <= k (a CONTIGUOUS VALID PREFIX from the first lag, so a mid-ladder failure cannot be masked by a later pass); 0 if the first lag already fails.",
-      "DENYLIST_FIRST_FAIL_LAG": "smallest ladder delta at which FA > 0.10 or FR > 0.10, else null when the whole ladder passes."
+      "DENYLIST_FIRST_FAIL_LAG": "smallest ladder delta at which FA > 0.10 or FR > 0.10, else null when the whole ladder passes.",
+      "INTRINSIC_BREAK": "(an intrinsic class in {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} is present at T0) AND NOT INTRINSIC_PERSISTENT.",
+      "STATE_CHANGE_EVIDENCE": "(AMBIENT_RECOVERY_n > 0) OR (AMBIENT_ONSET_n > 0) OR (DENYLIST_FALSE_ACCEPT(delta_ref) > 0.10) OR (DENYLIST_FALSE_REJECT(delta_ref) > 0.10)."
     },
     "secondary_quantities": {
       "STATIONARITY_SKILL_MULTI": "plug-in 6-class mutual information I(C_anchor;C_delta) at delta_ref with the same permutation null.",
+      "STATIONARITY_SKILL_NO_STRESS": "STATIONARITY_SKILL(delta_ref) restricted to the 52 non-stressed endpoints (self-induction robustness replica).",
       "DENYLIST_SKILL": "log-loss improvement (nats/endpoint) of the anchor-transfer predictor over B_CONSTANT_USABLE at delta_ref.",
       "CLASS_PERSISTENCE": "For each intrinsic class, the fraction of endpoints with that T0 ambient class whose delta_ref ambient class is identical.",
-      "TRANSIENT_RECOVERY_HALF_LIFE": "For stratum_stress endpoints, the smallest ladder delta at which the ambient class is non-barrier after a T0 load_class in barrier_set; report per-endpoint and median.",
-      "STRESS_FALSE_ACCEPT": "fraction of stratum_stress endpoints with T0 load_class in barrier_set that are ambient-non-barrier at delta_ref.",
+      "TRANSIENT_RECOVERY_HALF_LIFE": "For stratum_stress endpoints, the smallest NOMINAL ladder rung at which the ambient class is non-barrier after a T0 load_class in barrier_set; report per-endpoint and median. If no stratum_stress endpoint has a T0 load_class in barrier_set, the median is null and the corresponding RATE_TRANSIENT term is false.",
+      "STRESS_FALSE_ACCEPT": "fraction of stratum_stress endpoints with T0 load_class in barrier_set that are ambient-non-barrier at the delta_ref sweep. Defined as 0.0 when no stratum_stress endpoint has a T0 load_class in barrier_set (the condition is not triggered).",
       "C_PROBE_LOAD": "Cochran-Armitage trend of ambient barrier prevalence across sweeps for the 52 non-stress endpoints (slope, two-sided p).",
-      "ONSET_n / RECOVERY_n / PERSIST_n": "counts of ambient transitions across consecutive ladder sweeps and versus T0."
+      "AMBIENT_ONSET_n / AMBIENT_RECOVERY_n / PERSIST_n": "AMBIENT_ONSET_n = number of consecutive-sweep non-barrier->barrier ambient transitions (over all endpoints, sweeps 0->1,1->2,2->3,3->4). AMBIENT_RECOVERY_n = number of consecutive-sweep barrier->non-barrier ambient transitions. PERSIST_n = number of endpoints whose ambient class is identical at T0 (sweep 0) and at the delta_ref sweep. STRESS_ONSET_n = number of ambient RATE_LIMIT_429 appearances on stratum_stress endpoints (any sweep) whose T0 ambient class was not RATE_LIMIT_429.",
+      "POWER_AT_DELTA_SKILL": "power of the frozen PC generator to detect MI = delta_SKILL (0.05 nats) at the observed f_b_obs (reported diagnostic).",
+      "POWER_AT_RHO90": "power of the frozen PC generator at (f_b_obs, rho=0.90) (reported diagnostic)."
     },
     "thresholds_frozen": {
-      "tau_FA": 0.10,
-      "tau_FR": 0.10,
+      "tau_FA": 0.1,
+      "tau_FR": 0.1,
       "alpha": 0.05,
       "delta_SKILL_nats": 0.05,
-      "pc_power_min": 0.80,
+      "pc_power_min": 0.8,
       "nc_false_positive_max": 0.05,
+      "intrinsic_persistence_min": 0.9,
       "min_t0_ambient_barrier_endpoints": 3,
       "bootstrap_resamples": 10000,
       "permutations": 10000
     },
-    "derived_gates": {
-      "MI_POWER_OK": "power of the frozen PC_SYNTHETIC_STATIONARY generator at (f_b=f_b_obs, rho=1.0, R=200, perms=1000) >= 0.80, using the PERSISTENT-BARRIER reference regime (rho=1.0) motivated by the census's perfectly persistent intrinsic barriers. Achieved power: f_b=0.05 -> 0.92, 0.08 -> 0.995, 0.10 -> 1.00, 0.20 -> 1.00. Power at the lower-persistence reference rho=0.80 is additionally reported (1.00 at f_b>=0.10) to disclose the persistence-sensitivity of the gate.",
-      "STAT_SIG_SIGONLY": "STATIONARITY_SKILL(delta_ref) >= 0.05 AND permutation p < 0.05 AND clustered CI lower > 0.",
-      "STAT_SIG": "STAT_SIG_SIGONLY AND MI_POWER_OK.",
-      "IMMEDIATE_FAIL": "DENYLIST_HORIZON == 0.",
-      "INTRINSIC_PERSISTENT": "CLASS_PERSISTENCE[BLOCK_403_CHALLENGE] >= 0.90 AND CLASS_PERSISTENCE[TRANSPORT_ERROR] >= 0.90.",
-      "TRANSIENT_UNSTABLE": "(T0 RATE_LIMIT_429 endpoints are non-barrier at delta_ref in > 0.10 of cases) OR (median TRANSIENT_RECOVERY_HALF_LIFE < delta_ref) OR (STRESS_FALSE_ACCEPT > 0.10)."
-    },
     "branch_precedence": [
-      "1. MEASUREMENT_INVALID if any measurement_validity prerequisite fails (network unreachable to universe or oracle hosts; classifier replay mismatches > 0; PC_SYNTHETIC_STATIONARY power at frozen f_b=0.20,rho=0.80 < 0.80; NC_SYNTHETIC_EXCHANGEABLE false-positive > 0.05; PC_ORACLE_BARRIER or NC_CLEAN_ORACLE misclassified; fewer than 3 T0 ambient-barrier endpoints; anchor or delta_ref sweep incomplete).",
-      "2. S0_NON_STATIONARY if IMMEDIATE_FAIL OR (MI_POWER_OK AND NOT STAT_SIG_SIGONLY).",
-      "3. S1_STATIONARY if STAT_SIG AND DENYLIST_HORIZON == 1800.",
-      "4. SM_CLASS_CONDITIONAL if STAT_SIG AND DENYLIST_HORIZON < 1800 AND INTRINSIC_PERSISTENT AND TRANSIENT_UNSTABLE.",
-      "5. SIN_INCONCLUSIVE otherwise (notably: NOT MI_POWER_OK without IMMEDIATE_FAIL; or STAT_SIG with a partial horizon that is not class-conditional)."
+      "1. MEASUREMENT_INVALID if any measurement_validity prerequisite fails (network unreachable to universe or oracle hosts; classifier replay mismatches > 0; PC_SYNTHETIC_STATIONARY power at frozen f_b=0.20,rho=0.80 < 0.80; NC_SYNTHETIC_EXCHANGEABLE false-positive > 0.05; PC_ORACLE_BARRIER or NC_CLEAN_ORACLE misclassified; fewer than 3 T0 ambient-barrier endpoints; anchor incomplete or delta_ref actual delta < 1500 s).",
+      "2. S0_NON_STATIONARY if INTRINSIC_BREAK OR (STATE_CHANGE_EVIDENCE AND no intrinsic class in {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} is present at T0). This is a POSITIVE non-stationarity result (an intrinsic barrier class failed to persist, or the state changed with no intrinsic class to anchor it).",
+      "3. S1_STATIONARY if STAT_SIG_SIGONLY AND INTRINSIC_PERSISTENT AND NOT RATE_TRANSIENT AND NOT STATE_CHANGE_EVIDENCE. Under NOT STATE_CHANGE_EVIDENCE there are no ambient transitions and FA/FR <= 0.10 at the delta_ref rung, which IMPLIES the full nominal horizon (DENYLIST_HORIZON == 1800) as a REPORTED consequence rather than a branch gate; the pooled horizon can therefore never by itself flip the branch.",
+      "4. SM_CLASS_CONDITIONAL if INTRINSIC_PERSISTENT AND RATE_TRANSIENT.",
+      "5. SIN_INCONCLUSIVE otherwise (notably: INTRINSIC_PERSISTENT AND NOT RATE_TRANSIENT with a non-rate state change; no intrinsic class at T0 and no state change; or any configuration where neither stationarity nor positive change is established). A non-significant STAT_SIG_SIGONLY with no positive change evidence is SIN_INCONCLUSIVE, NEVER S0."
     ],
-    "measurement_invalid_conditions": "Network unreachable to the frozen universe or oracle hosts; classifier not reproducible from stored raw fields; PC_SYNTHETIC_STATIONARY power < 0.80 at the frozen f_b=0.20,rho=0.80; NC_SYNTHETIC_EXCHANGEABLE false-positive > 0.05; PC_ORACLE_BARRIER or NC_CLEAN_ORACLE misclassified; fewer than 3 T0 ambient-barrier endpoints; anchor or delta_ref sweep incomplete. These are attainability/measurement failures and MUST NOT be reported as S0_NON_STATIONARY.",
+    "measurement_invalid_conditions": "Network unreachable to the frozen universe or oracle hosts; classifier not reproducible from stored raw fields; PC_SYNTHETIC_STATIONARY power < 0.80 at the frozen f_b=0.20,rho=0.80; NC_SYNTHETIC_EXCHANGEABLE false-positive > 0.05; PC_ORACLE_BARRIER or NC_CLEAN_ORACLE misclassified; fewer than 3 T0 ambient-barrier endpoints; anchor incomplete or delta_ref actual delta < 1500 s. These are attainability/measurement failures and MUST NOT be reported as S0_NON_STATIONARY.",
     "claim_ceiling": "At most C-WEB-DYNAMICS = HYPOTHESIS here; H2/S0 and H2b/SM bound (do not reject) a pooled static-denylist prior on this frozen pool/window. No PRODUCT_CORE promotion and no EXPERIMENTAL upgrade from this single window ladder."
   },
-
-  "product_consequence_positive": "If S1_STATIONARY: a static endpoint-level denylist built from one observation window remains valid through the longest tested lag (1800 s) on this pool, so the dead-end policy can adopt a long, quantifiable re-probe interval and terminal classification for denylisted endpoints, and does not need an online per-endpoint history model for access decisions. The measured DENYLIST_HORIZON becomes the schedulable re-probe interval.",
-
-  "product_consequence_negative": "If S0_NON_STATIONARY or SM_CLASS_CONDITIONAL: a pooled static denylist silently goes stale (false-accept = a denylisted endpoint recovers; false-reject = a clean endpoint newly blocks), costing the crawler recoverable targets or wasted retries. The product must either (SM) split the dead-end policy into an intrinsic-block track with a long horizon and a rate-driven track with a short horizon driven by the measured TRANSIENT_RECOVERY_HALF_LIFE and STRESS_FALSE_ACCEPT, or (S0) treat endpoint access state as non-amortizable and re-observe before each use. This bounds (does not close) the timescale axis of C-WEB-DYNAMICS on this pool/window.",
-
+  "product_consequence_positive": "If S1_STATIONARY: a static endpoint-level denylist built from one observation window remains valid through the longest tested lag (1800 s) on this pool, so the dead-end policy can adopt a long, quantifiable re-probe interval and terminal classification for denylisted endpoints, and does not need an online per-endpoint history model for access decisions. The measured DENYLIST_HORIZON becomes the schedulable re-probe interval. If SM_CLASS_CONDITIONAL: the intrinsic-block track (BLOCK_403_CHALLENGE, TRANSPORT_ERROR) keeps a long horizon and the rate-driven track uses the measured TRANSIENT_RECOVERY_HALF_LIFE, so POLICY_CLASS_CONDITIONAL_DENYLIST is licensed; this is a positive, product-usable, bounded result even though it is not a uniform static denylist.",
+  "product_consequence_negative": "If S0_NON_STATIONARY: endpoint access state is non-amortizable on this pool; the product must re-observe before each use and must not cache a static per-endpoint access decision. If SIN_INCONCLUSIVE: no policy change is licensed; the pooled-denylist validity horizon remains unmeasured on this pool/window and the dead-end policy must keep its current re-probe behaviour. Both bound (do not close) the timescale axis of C-WEB-DYNAMICS on this pool/window.",
   "estimated_cost": {
     "http_requests_planned": 497,
     "http_requests_worst_case": 700,
@@ -288,65 +404,90 @@
     "browser": false,
     "credentials": false
   },
-
-  "expected_information_gain": "High and decision-changing. This is the first falsification-first measurement on the frozen credential-free pool of ENDPOINT access-state persistence across separated windows rather than next-request classification, and it produces the two quantities the product's dead-end policy currently assumes: DENYLIST_FALSE_ACCEPT/FALSE_REJECT curves and a DENYLIST_HORIZON, plus class-conditional half-lives. Either branch is decision-relevant (long static horizon vs class-conditional/short horizon) and bounds or advances the timescale axis of C-WEB-DYNAMICS without repeating the exhausted next-request or value-derivation sub-threads.",
-
-  "parent_handoff_disposition": "request.json director_mandate.allocation.parent_handoff_disposition = USE. The referenced handoff (EXP-PHYSICS-37992957068/handoff.json, sha256 3155fac772e6a64e2a3b13847cf320d6acebb1259ccb9b1c85c51d884513a6d4) is inherited as continuity evidence. Its established state (endpoint identity explains next-request barrier state; ONSET_n=0; A_ADAPT economy is mechanical; measurement-valid) is preserved; its rejected readings (INCONCLUSIVE != S0; ONSET untested not falsified; no product promotion) are preserved; its unknown state (stationarity/timescale and denylist horizon; the single-window/single-client validity threat) is exactly what this experiment targets; its do_not_assume list (no generalization beyond the frozen pool/one vantage/one window; no C-FRESHNESS or Runtime drift conflation) is honored. The Director mandate action is REOPEN on C-WEB-DYNAMICS and is the binding direction.",
-
+  "expected_information_gain": "High and decision-changing. This is the first falsification-first measurement on the frozen credential-free pool of ENDPOINT access-state persistence across separated windows rather than next-request classification, and it produces the two quantities the product's dead-end policy currently assumes: DENYLIST_FALSE_ACCEPT/FALSE_REJECT curves with a DENYLIST_HORIZON, plus class-conditional persistence/half-lives. Either branch is decision-relevant (uniform static horizon vs class-conditional/short horizon vs no static amortization), and the redesigned branch precedence makes S0 a POSITIVE change result and keeps the primary stationarity conclusion independent of both the coarse pooled-denylist resolution and a possibly underpowered MI test, so a class-conditional world is correctly reported as SM and an ambiguous negative as SIN rather than falsely as S0. It bounds or advances the timescale axis of C-WEB-DYNAMICS without repeating the exhausted next-request or value-derivation sub-threads.",
+  "parent_handoff_disposition": "request.json director_mandate.allocation.parent_handoff_disposition = USE. The referenced handoff (EXP-PHYSICS-37992957068/handoff.json, sha256 3155fac772e6a64e2a3b13847cf320d6acebb1259ccb9b1c85c51d884513a6d4) is inherited as continuity evidence. Its established state (endpoint identity explains next-request barrier state; AMBIENT/ONSET_n=0 in the prior single window; A_ADAPT economy is mechanical; measurement-valid) is preserved; its rejected readings (INCONCLUSIVE != S0; ONSET untested not falsified; no product promotion) are preserved; its unknown state (stationarity/timescale and denylist horizon; the single-window/single-client validity threat) is exactly what this experiment targets; its do_not_assume list (no generalization beyond the frozen pool/one vantage/one window; no C-FRESHNESS or Runtime drift conflation) is honored. The Director mandate action is REOPEN on C-WEB-DYNAMICS and is the binding direction.",
   "director_mandate_trace": {
     "action": "REOPEN",
     "target_claim": "C-WEB-DYNAMICS",
     "cognitive_reset": true,
     "parent_handoff_disposition": "USE",
-    "requirement_two_sided_falsifier": "satisfied by falsifier S1_STATIONARY vs S0_NON_STATIONARY (plus SM/SIN)",
-    "requirement_memory_constant_null_calibrated_before_freeze_with_power": "satisfied by B_EXCHANGE permutation null, NC_SYNTHETIC_EXCHANGEABLE (FP 0.01 <= 0.05) and PC_SYNTHETIC_STATIONARY (power 1.00 >= 0.80 at f_b=0.20,rho=0.80); see prereg.md 'Null calibration'",
+    "requirement_two_sided_falsifier": "satisfied by S1_STATIONARY (positive stationarity: intrinsic persistence, no rate transience, no state change, full horizon) vs S0_NON_STATIONARY (positive change: INTRINSIC_BREAK, or state change with no intrinsic class), with SM/SIN as frozen refinements; branch_probe2.py demonstrates all are reachable through the actual metric and no branch depends on a non-significant negative",
+    "requirement_memory_constant_null_calibrated_before_freeze_with_power": "satisfied by B_EXCHANGE permutation null, NC_SYNTHETIC_EXCHANGEABLE (fresh FP 0.01 <= 0.05) and PC_SYNTHETIC_STATIONARY (fresh power 1.00 >= 0.80 at f_b=0.20,rho=0.80); see prereg.md 'Null calibration'",
     "requirement_pre_freeze_attainability_certificate": "satisfied; see prereg.md 'Attainability certificate' and freeze_eligibility.measurement_prerequisites",
     "requirement_capped_budget": "satisfied; estimated_cost and wall_clock_cap_minutes=60",
-    "requirement_park_if_certificate_unsatisfiable": "certificate IS satisfied pre-freeze (persistent barriers AND a live recovery observed across the window pair), so the experiment proceeds; if EXECUTE cannot re-verify the floors the packet is MEASUREMENT_INVALID, which is the operational analogue of PARK",
-    "non_drift_statement": "This experiment addresses exactly the mandate question (endpoint detection state stationarity/timescale and static-denylist validity horizon) and does not re-run next-request barrier classification (EXP-PHYSICS-37992957068), value derivation/PMI, C-FRESHNESS (content staleness) or Runtime drift controls."
+    "requirement_park_if_certificate_unsatisfiable": "certificate IS satisfied pre-freeze (6 stably persistent intrinsic barriers AND a live rate-limit recovery observed, plus live rate-limit onsets under the burst), so the experiment proceeds; if EXECUTE cannot re-verify the floors the packet is MEASUREMENT_INVALID, which is the operational analogue of PARK",
+    "non_drift_statement": "This experiment addresses exactly the mandate question (endpoint access-state stationarity/timescale and static-denylist validity horizon) and does not re-run next-request barrier classification (EXP-PHYSICS-37992957068), value derivation/PMI, C-FRESHNESS (content staleness) or Runtime drift controls."
   },
-
   "scope_boundaries": [
     "Credential-free public HTTP GET only; no authentication, JavaScript, DOM, SPA, GraphQL or WebSocket.",
     "One stdlib-HTTP client, one User-Agent, one network egress vantage and one ~30-minute collection window; the mandate's source-vantage axis is NOT varied and is a declared scope boundary.",
     "The frozen 57-endpoint universe is used unchanged and is NOT extended; no post-outcome endpoint substitution or dropping.",
     "No LLM calls, no browser, no credentials.",
     "Persistence and denylist validity are tested only through the frozen intrinsic classifier and the frozen ambient/load probes; the horizon is censored at delta_ref=1800 s.",
-    "The pre-freeze census/probe artifacts under /tmp/opencode/phys380 are non-confirmatory and are not a frozen interpretation dependency; EXECUTE re-verifies all attainability floors from its own data."
+    "The pre-freeze census/calibration/branch-probe artifacts under /tmp/opencode/phys380_cal are non-confirmatory and are not a frozen interpretation dependency; EXECUTE re-verifies all attainability floors and control calibrations from its own data."
   ],
-
   "freeze_eligibility": {
     "decision_rule_reachability": {
       "status": "PASS",
-      "reason": "All five dispositions are arithmetically reachable through the frozen metric, and the design-time branch probe on the actual estimator (non-outcome-bearing; /tmp/opencode/phys380/calib2.py) produced them. S1_STATIONARY: a stationary plant (6 persistent barriers / 57) gave STATIONARITY_SKILL=0.3365, permutation p=0.001, FA=0.0, FR=0.0 => STAT_SIG true and HORIZON=1800. S0_NON_STATIONARY: a plant with 3 barriers at T0 all recovered by T1 gave STATIONARITY_SKILL=0.0, p=1.0, FA=1.0 => IMMEDIATE_FAIL. SM_CLASS_CONDITIONAL: 6 persistent + 3 recovering endpoints gave STATIONARITY_SKILL=0.236, p=0.001, FA=0.333, FR=0.0 with intrinsic persistence 1.0 => class-conditional. SIN_INCONCLUSIVE is reachable when the ensemble is not significant for identity yet no recovery occurs and MI_POWER_OK is false (low-prevalence corner). MEASUREMENT_INVALID is produced only by prerequisite/control failure, never by a scientific outcome.",
-      "evidence_refs": ["spec.json:falsifier", "spec.json:decision_rule.branch_precedence", "prereg.md:Attainability certificate", "prereg.md:Null calibration"]
+      "reason": "All five dispositions are reachable through the frozen metric, and the fresh design-time branch probe (/tmp/opencode/phys380_cal/branch_probe2.py sha256 0ffb401058e11e76c56dbeabbafe1c8c3e54b49a672ca649879adaee10afdb4d) produced them on the actual plug-in MI + B_EXCHANGE permutation + intrinsic-persistence + rate-transient + state-change logic (no Web data). S1_STATIONARY: a stationary plant (6 persistent BLOCK_403_CHALLENGE + 1 persistent TRANSPORT_ERROR over the nominal ladder) gave STATIONARITY_SKILL=0.3725, perm p=0.002 (STAT_SIG_SIGONLY true), INTRINSIC_PERSISTENT true, NOT RATE_TRANSIENT, no state change; the full nominal horizon is implied. S0_NON_STATIONARY: an exchangeable plant (Bernoulli 0.15 barrier per sweep; >= 3 T0 barriers so the floor is met) gave MI=0.0075, p=0.573, INTRINSIC_BREAK true, FA=0.714 -> S0 by POSITIVE change evidence, not by non-significance. SM_CLASS_CONDITIONAL: 6 persistent intrinsic + 3 RATE_LIMIT_429 endpoints that recover gave MI=0.2360, p=0.002, INTRINSIC_PERSISTENT true, RATE_TRANSIENT true, FA=0.333. SIN_INCONCLUSIVE: a floor-satisfying pool with 6 persistent intrinsic barriers plus a single non-rate generic onset gave MI=0.2861, p=0.002, INTRINSIC_PERSISTENT true, NOT RATE_TRANSIENT, STATE_CHANGE_EVIDENCE true -> SIN. MEASUREMENT_INVALID is produced only by prerequisite/control failure (including fewer than 3 T0 ambient-barrier endpoints), never by a scientific outcome. The decision is decoupled from MI non-significance (S0 requires positive change) and from the pooled horizon (S1 does not gate on DENYLIST_HORIZON; the horizon is an implied reported consequence), so a class-conditional world is SM and an ambiguous negative is SIN.",
+      "evidence_refs": [
+        "spec.json:falsifier",
+        "spec.json:decision_rule.branch_precedence",
+        "prereg.md:Attainability certificate",
+        "prereg.md:Null calibration",
+        "freeze_eligibility.decision_rule_reachability"
+      ]
     },
     "measurement_prerequisites": {
       "status": "PASS",
-      "reason": "The frozen 57-endpoint universe and both oracle hosts are live-reachable from this environment. The pre-freeze census (17 endpoints, 2 sweeps separated by 45 s, 3 GETs each) observed 5 endpoints with persistent BLOCK_403_CHALLENGE across the pair, 1 endpoint with persistent TRANSPORT_ERROR across the pair, a live RECOVERY (search.brave.com/search?q=test 429 -> CLEAN across the pair), and clean endpoints; a separate non-outcome-bearing probe drove live CLEAN -> RATE_LIMIT_429 onsets on www.djangoproject.com/admin/login, www.djangoproject.com/accounts/login and auth0.com. The live oracles resolved as expected (httpbin 200/403/429; gitlab.com challenge 403; djangoproject admin 200). The classifier is deterministic from stored fields, so reproducibility is checkable. EXECUTE must re-verify network reachability, oracle classifications and the >= 3 T0 ambient-barrier floor before/interpreting collection; failure yields MEASUREMENT_INVALID.",
-      "evidence_refs": ["prereg.md:Attainability certificate", "spec.json:measurement_validity.prerequisite_integrity", "spec.json:sweep_protocol"]
+      "reason": "The frozen 57-endpoint universe and both oracle host groups are live-reachable from this environment in the pre-freeze census (/tmp/opencode/phys380_cal/census.py, sha256 5050fdf28cfbf230a70492cae6514d10ba5fcf8405c6a8672557f5628bfd72e3). Over a fixed 26-endpoint subset in two sweeps separated by 30 s, the frozen classifier observed: window-A class histogram {BLOCK_403_CHALLENGE 5, TRANSPORT_ERROR 1, RATE_LIMIT_429 1, OTHER_NONBARRIER 2, CLEAN 17}; 6 stably persistent barrier endpoints across both census runs (gitlab.com/users/sign_in, community.cloudflare.com, www.npmjs.com/login, wordpress.com/log-in, www.phpbb.com/community/, community.invisioncommunity.com); a live recovery of a rate-limited endpoint in one run (search.brave.com/search?q=test RATE_LIMIT_429 -> CLEAN across a 30 s pair) and the same endpoint persisting in a second run (run-to-run variability of the rate class, exactly the class-conditional structure the experiment measures); live RATE_LIMIT_429 onsets under the 6-GET burst on www.djangoproject.com/accounts/login/ and search.brave.com; and oracle liveness (httpbin 429/403/200/uuid and no-such-host.invalid all classified as expected; oracle_ok=true). The classifier is deterministic from stored fields, so reproducibility is checkable. EXECUTE must re-verify network reachability, oracle classifications, the >= 3 T0 ambient-barrier floor and both frozen control calibrations before interpreting collection; failure yields MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "prereg.md:Attainability certificate",
+        "spec.json:measurement_validity.prerequisite_integrity",
+        "spec.json:sweep_protocol",
+        "spec.json:measurement_validity.activity_disclosure"
+      ]
     },
     "baseline_identifiability": {
       "status": "PASS",
-      "reason": "The primary null is non-degenerate and the metric separates the two regimes rather than sitting at a ceiling. Design-time calibration on the actual plug-in MI + B_EXCHANGE permutation statistic (no Web data) gave: NC_SYNTHETIC_EXCHANGEABLE false-positive 0.01 at p=0.20 and 0.03 at p=0.30 (<= 0.05), so exchangeable endpoints do NOT produce spurious stationarity skill; PC_SYNTHETIC_STATIONARY power 1.00 at f_b=0.20,rho=0.80 and 1.00 at f_b=0.10,rho=0.80 (>= 0.80), so a genuinely stationary population is detected. B_CONSTANT_USABLE is a distinct floor from B_EXCHANGE: the identity-transfer predictor can beat the constant-usable prior only when the anchor is informative (MI > 0), and the census shows the anchor is informative (6 persistent barriers, ~10-35% barrier-exposed). rho=0.50 at f_b=0.10 is disclosed as underpowered (0.735), which is why MI_POWER_OK gates the STATIONARY branch.",
-      "evidence_refs": ["spec.json:baselines", "spec.json:positive_control.PC_SYNTHETIC_STATIONARY", "spec.json:null_control.NC_SYNTHETIC_EXCHANGEABLE", "prereg.md:Null calibration", "prereg.md:Attainability certificate"]
+      "reason": "The primary null is non-degenerate and the metric separates the two regimes rather than sitting at a ceiling. Fresh design-time calibration on the actual plug-in MI + B_EXCHANGE permutation statistic (no Web data; /tmp/opencode/phys380_cal/calib.py) gave: NC_SYNTHETIC_EXCHANGEABLE false-positive 0.01 at p=0.20 and 0.03 at p=0.30 (<= 0.05), so exchangeable endpoints do NOT produce spurious stationarity skill; PC_SYNTHETIC_STATIONARY power 1.00 at f_b=0.20,rho=0.80 and 0.985 at f_b=0.10,rho=0.80 (>= 0.80), so a genuinely stationary population is detected. B_CONSTANT_USABLE is a distinct floor from B_EXCHANGE: the identity-transfer predictor beats the constant-usable prior only when the anchor is informative (MI > 0), and the census shows the anchor is informative (6 persistent barriers, ~27% barrier prevalence on the census subset). Power is reported as a diagnostic (POWER_AT_DELTA_SKILL ~0.49-0.67, POWER_AT_RHO90 ~0.97 at N=57) and is deliberately NOT a branch gate; S0 rests on positive change evidence, so low power for weak effects cannot manufacture an S0 and cannot manufacture an S1.",
+      "evidence_refs": [
+        "spec.json:baselines",
+        "spec.json:positive_control.PC_SYNTHETIC_STATIONARY",
+        "spec.json:null_control.NC_SYNTHETIC_EXCHANGEABLE",
+        "prereg.md:Null calibration",
+        "prereg.md:Attainability certificate"
+      ]
     },
     "control_sensitivity": {
       "status": "PASS",
-      "reason": "Two disjoint synthetic controls bracket the estimator with demonstrated, not asserted, sensitivity: PC_SYNTHETIC_STATIONARY requires >= 0.80 power to recover a planted stationary population (achieved 1.00) and NC_SYNTHETIC_EXCHANGEABLE requires <= 0.05 false-positive on exchangeable data (achieved 0.01). Two live controls validate the real code path: PC_ORACLE_BARRIER must classify deterministic 429/transport oracles as barriers and httpbin 403 as UNAVAILABLE_403 (proving the 403-discrimination branch), and NC_CLEAN_ORACLE must classify 200/uuid as CLEAN. C_PROBE_LOAD adds a self-induction trend control. Both positive and negative sensitivity are therefore demonstrated synthetically and live.",
-      "evidence_refs": ["spec.json:positive_control", "spec.json:null_control", "prereg.md:Null calibration"]
+      "reason": "Two disjoint synthetic controls bracket the estimator with demonstrated, not asserted, sensitivity: PC_SYNTHETIC_STATIONARY requires >= 0.80 power to recover a planted stationary population (fresh achieved 1.00 at f_b=0.20,rho=0.80) and NC_SYNTHETIC_EXCHANGEABLE requires <= 0.05 false-positive on exchangeable data (fresh achieved 0.01). Two live controls validate the real code path in the census: PC_ORACLE_BARRIER classified httpbin 429 as RATE_LIMIT_429, no-such-host.invalid as TRANSPORT_ERROR and httpbin 403 as UNAVAILABLE_403, while NC_CLEAN_ORACLE classified httpbin 200/uuid as CLEAN (oracle_ok=true). C_PROBE_LOAD adds a self-induction trend control plus the pre-registered STATIONARITY_SKILL_NO_STRESS replica. Both positive and negative sensitivity are therefore demonstrated synthetically and live.",
+      "evidence_refs": [
+        "spec.json:positive_control",
+        "spec.json:null_control",
+        "prereg.md:Null calibration",
+        "prereg.md:Attainability certificate"
+      ]
     },
     "treatment_liveness": {
-      "status": "PASS",
-      "reason": "This is a Physics measurement/estimation experiment, not a Product inheritance/residual-novelty/LLM-inheritance/product-economics experiment, so no SPIDER treatment arm exists. The estimable decision object POLICY_STATIC_DENYLIST is a bounded deterministic function of the ambient class (DENY if barrier else ALLOW) with a deterministic re-probe at DENYLIST_HORIZON; it returns a defined decision for every class and always terminates. EXECUTE's first action is a non-network policy trace proving this (recorded in provenance as a measurement prerequisite), so no treatment is structurally incapable of becoming EXECUTABLE.",
-      "evidence_refs": ["spec.json:stable_identifiers.policy_ids", "spec.json:decision_rule", "prereg.md:Treatment liveness"]
+      "status": "NOT_APPLICABLE",
+      "reason": "This is a Physics measurement/estimation experiment on a real Web substrate, not a Product inheritance/residual-novelty/LLM-inheritance/product-economics experiment and it contains no SPIDER treatment arm. The packet's treatment-liveness requirement is explicitly Product-scoped, so it does not apply. The live contrast that matters here is the estimator's own comparator, and it is realized and reachable: the anchor-state transfer predictor is compared against B_EXCHANGE (permutation null, calibrated FP 0.01), B_CONSTANT_USABLE (floor) and B_MARGINAL; the estimable decision object POLICY_STATIC_DENYLIST is a bounded deterministic function of ambient_class (DENY if in barrier_set else ALLOW) that returns a defined decision for every class and always terminates, and POLICY_CLASS_CONDITIONAL_DENYLIST is defined whenever the SM branch is reached. No treatment is structurally incapable of becoming EXECUTABLE because no treatment exists.",
+      "evidence_refs": [
+        "spec.json:stable_identifiers.policy_ids",
+        "spec.json:decision_rule",
+        "spec.json:baselines",
+        "prereg.md:Treatment / policy liveness"
+      ]
     },
     "freeze_artifacts_bound": {
       "status": "NOT_APPLICABLE",
-      "reason": "No pre-existing mutable local code, task bank, dataset or fixture is an interpretation dependency. Every interpretation-determining constant (frozen 57-endpoint universe, literal CHALLENGE_RELITERAL, classifier and severity ranks, sweep ladder, ambient/load probe definitions, strata, thresholds tau/alpha/delta_SKILL/power/FP, seeds, branch logic) is embedded verbatim in spec.json and prereg.md, which the deterministic freezer hashes (freeze.json.hashes.spec.json, prereg.md). The collection/analysis code is authored at EXECUTE strictly as a literal realization of those literals and may not introduce or retune any decision-relevant constant; its hash must be recorded in provenance.json for AUDIT. The /tmp/opencode/phys380 pre-freeze census and probe scripts are non-confirmatory and are explicitly NOT interpretation dependencies (EXECUTE re-derives all attainability floors from its own data), and remote Web responses cannot be frozen. Therefore freeze_artifacts is empty and the binding is NOT_APPLICABLE.",
-      "evidence_refs": ["scripts/freeze_experiment.py:64-76", "research/EXPERIMENT_PACKET.md:49-51", "spec.json:measurement_validity.activity_disclosure"]
+      "reason": "No pre-existing mutable local code, task bank, dataset or fixture is an interpretation dependency. Every interpretation-determining constant (frozen 57-endpoint universe, literal CHALLENGE_RE_LITERAL, classifier and severity ranks, sweep ladder, ambient/load probe definitions, strata, thresholds tau/alpha/delta_SKILL/power/FP/intrinsic-persistence, seeds, branch logic) is embedded verbatim in spec.json and prereg.md, which the deterministic freezer hashes (freeze.json.hashes.spec.json, prereg.md). The collection/analysis code does not yet exist at freeze and is authored at EXECUTE strictly as a literal realization of those literals; it may not introduce or retune any decision-relevant constant, and its hash must be recorded in provenance.json for AUDIT. The /tmp/opencode/phys380_cal pre-freeze census/calibration/branch-probe scripts are non-confirmatory and are explicitly NOT interpretation dependencies (EXECUTE re-derives all attainability floors and control calibrations from its own data), and remote Web responses cannot be frozen. Listing a not-yet-existing EXECUTE file would fail the freezer's existing-file check. Therefore freeze_artifacts is empty and the binding is NOT_APPLICABLE.",
+      "evidence_refs": [
+        "scripts/freeze_experiment.py",
+        "research/EXPERIMENT_PACKET.md",
+        "spec.json:measurement_validity.activity_disclosure"
+      ]
     }
   },
-
   "freeze_artifacts": []
 }
