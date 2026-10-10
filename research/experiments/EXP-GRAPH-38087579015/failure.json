@@ -1,0 +1,11 @@
+{
+  "stage": "design",
+  "category": "DESIGN_FAILURE",
+  "message": "stage exited with code 1",
+  "retryable": false,
+  "fingerprint": "3b9ff5e4e9e73f23e368efb4",
+  "recorded_at": "2026-10-10T22:28:47.064305+00:00",
+  "github_run_id": "38090168189",
+  "github_run_attempt": "1",
+  "control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
+}
