@@ -1,194 +1,343 @@
-# EXP-FRONTIER-38013774272 Preregistration
+# Preregistration: EXP-FRONTIER-38013774272
+## Site-Native Discovery vs Link-Following for Deep-Item Acquisition
 
-Lane: `frontier`. Target claims: `C-RESIDUAL-NOVELTY`, `C-WEB-DYNAMICS`.
-Director cycle: `38013054267`, action `REOPEN`, `parent_handoff_disposition = USE`.
-Parent packet: `EXP-FRONTIER-37984242167` (BLOCKED: empty sampling frame, absent pre-freeze certificate, 0/0 primary metric, falsifier unreachable both directions; audit VN-A1..VN-A5).
+**Experiment ID:** EXP-FRONTIER-38013774272
+**Lane:** frontier
+**Claim IDs:** C-RESIDUAL-NOVELTY
+**Date:** 2026-10-10
+**Status:** PREREGISTERED (pre-freeze)
+**Design Contract Version:** 2
 
-This experiment is a **design-contract v2** re-design of the site-native-discovery acquisition question under the same Global Research Director mandate. It repairs the v1 control-plane defects by: (a) confirming a DEEP-bearing multi-host pool during DESIGN, (b) recording a live pre-freeze control certificate with evidence refs, (c) resolving all seven open design decisions, (d) ensuring all six freeze_eligibility checks PASS, and (e) requiring an independent design_review.json before freeze.
+---
 
-## 1. Substrate and Frozen Policy
+## 1. Scientific Question
 
-HTTP GET only via Python stdlib `urllib`; TLS verified; frozen User-Agent `SPIDER-research-frontier-38013774272/1.0`; timeout 12 s; max body 600000 bytes; redirects followed. No credentials, cookies, browser, Docker, model key or write verb. Identical to EXP-FRONTIER-37950626378 substrate (VN-V1).
+On the credential-free GET-only stdlib-HTTP substrate established by EXP-FRONTIER-37950626378, does changing the acquisition **MECHANISM** from same-host link-following BFS to **SITE-NATIVE DISCOVERY CHANNELS** (robots.txt sitemap directives, sitemap.xml, on-site search/query URLs, RSS/Atom feeds, JSON-LD/structured-data enumeration) allow a fresh agent to reach **DEEP (hop≥3) state items in ≤K=3 GETs** (one discovery GET + item-page GET + one spare for redirect/validation) on a frozen multi-host pool **separately confirmed** to contain DEEP items on at least three distinct hosts/engines?
 
-Navigation graph = defragmented same-host http(s) URLs linked by static `<a href>` parsed in document order. Asset extensions and non-http(s) schemes excluded. JS-generated links are **not** edges (VN-V2).
+---
 
-Frozen policy = item-blind FIFO breadth-first crawl in document order from the seed root, per-site page budget `B = 250`, depth cap `D = 6`, each URL fetched at most once. For per-item hop confirmation the crawl stops when the item's page is fetched.
+## 2. Hypothesis
 
-A *state-carrying item* is `(page_url, control_name, control_type)` where the page contains at least one named `<input name>` or `<select name>`. Bands: `NEAR = hop in {0,1}`, `DEEP = hop in {3..6}`, `hop == 2` is `MID` and reported descriptively only (VN-V7). `hop` is the graph shortest-path length from the seed URL (hop 0) measured by the frozen BFS.
+**Primary Hypothesis (H1):** Site-native discovery channels provide ≤K=3 GET reachability for a material fraction (≥50%) of DEEP state items on at least two distinct hosts/engines. This would demonstrate that shortest-path hop is **not a fundamental acquisition-cost barrier** for discovery-enabled acquisition. Consequently, persistent path/procedure caching is not the primary optimization target; research and product effort should shift to discovery-channel coverage and substrate expansion.
 
-## 2. Target Pool (Frozen at DESIGN)
+**Alternative Hypothesis (H0):** Even with site-native discovery, fresh deep-instance acquisition remains **path-bound** (≤K=3 reachability fraction <50% on fewer than two engines). Persistence of paths/procedures retains a measurable, depth-dependent amortization surface whose break-even can be computed from real re-derivation cost.
 
-Candidate seeds (each crawled with frozen policy at budget 250 for hop confirmation):
+---
 
-| Label | Root URL | Engine | Host | Pre-confirmed DEEP |
-|-------|----------|--------|------|-------------------|
-| rust_embedded_book | `https://docs.rust-embedded.org/book/` | mdBook | docs.rust-embedded.org | 85 |
-| rust_embedded_discovery | `https://docs.rust-embedded.org/discovery/` | mdBook | docs.rust-embedded.org | subset |
-| rust_embedded_discovery_mb2 | `https://docs.rust-embedded.org/discovery-mb2/` | mdBook | docs.rust-embedded.org | subset |
-| apache_confluence | `https://cwiki.apache.org/` | Confluence | cwiki.apache.org | 10 |
+## 3. Falsifier (Two-Sided, Arithmetically Checkable Before Freeze)
 
-**Pre-freeze confirmation**: Hop-confirmation crawls (static `<a href>`, same-host, depth<=6, budget 250) during DESIGN confirmed >=95 total DEEP items across 2 distinct hosts (docs.rust-embedded.org: 85, cwiki.apache.org: 10), each with >=3 DEEP items. This satisfies ADMISSION_GATE_V2 requirements (>=10 DEEP total, >=2 hosts, >=3 DEEP/host).
+| Condition | Outcome | Interpretation |
+|-----------|---------|----------------|
+| `discovery_reachable_fraction ≥ 0.50` on **≥2 distinct hosts/engines** | **SUPPORTS (H1)** | Depth is not a fundamental barrier. Discovery collapses acquisition cost. Persistence is not the optimization target. |
+| `discovery_reachable_fraction < 0.50` on **≥2 distinct hosts/engines** | **FALSIFIES (H0)** | Depth remains a barrier even with discovery. Path persistence has a real amortization surface. |
+| Threshold met on exactly 1 engine, or pool has <2 engines with DEEP items | **MIXED** | Cross-engine contrast unmeasured. Inconclusive for program-level decision. |
+| Admission gate fails (<10 total DEEP items) or validity gates fail | **INCONCLUSIVE** | Measurement invalid; no claim update. |
 
-The three rust-embedded seeds are on the same host/engine but target different sub-books to ensure coverage; they are deduplicated by host for the cross-host threshold.
+**Key Parameters (Frozen at Design):**
+- Materiality threshold: **0.50** (50% of DEEP items)
+- Minimum engines: **2** distinct hosts/engines
+- K-GET budget: **3** (1 discovery + 1 item-page + 1 spare)
+- Discovery channels: **5** (defined in §5)
 
-## 3. Discovery Channels (Frozen at DESIGN)
+**Per-Channel Disclosure Requirement:** Must report `discovery_reachable_fraction_per_channel[channel]` for each of the 5 channels, and explicitly list any channel yielding **zero admitted DEEP items** (not counted as null).
 
-Five site-native discovery channels, each probed independently per admitted DEEP item:
+---
 
-1. **ROBOTS_SITEMAP**: Fetch `robots.txt` at host root → parse `Sitemap:` directives → fetch each sitemap → parse XML (sitemap index or urlset) → extract URLs. Succeeds if item URL appears in any sitemap and item page fetched (2xx) within K=3 GETs.
+## 4. Substrate & Constraints (Identical to Parent EXP-FRONTIER-37950626378)
 
-2. **SITEMAP_XML**: Fetch `/sitemap.xml` and `/sitemap_index.xml` at host root → parse XML → extract URLs. Same success criterion.
+| Constraint | Value |
+|------------|-------|
+| Protocol | Credential-free GET-only, stdlib HTTP (`urllib`/`requests`) |
+| No browser | No Playwright, Selenium, Docker |
+| No auth | No cookies, tokens, API keys, write verbs |
+| No tokenizer | `tiktoken` not available; token fields = `null` |
+| Cost bases | GET request count + response-body bytes only |
+| Parser | Stdlib `html.parser` / regex only; **no JS rendering** |
+| Concurrency | Sequential, polite (respect `robots.txt` crawl-delay) |
+| Episode isolation | Fresh episode per item-channel probe (no cross-item caching) |
 
-3. **ON_SITE_SEARCH**: Locate search form on host root → extract action URL and query parameter → construct query using item's `control_name` → fetch results → parse result links. Succeeds if item URL in result links and item page fetched (2xx) within K=3 GETs.
+---
 
-4. **RSS_ATOM**: Find `<link rel="alternate" type="application/rss+xml|application/atom+xml">` in HTML head of host root → fetch feed → parse entries for link/guid URLs. Succeeds if item URL in feed entries and item page fetched (2xx) within K=3 GETs.
+## 5. Discovery Channels (Frozen Definitions)
 
-5. **JSON_LD**: Fetch item page HTML → parse `<script type="application/ld+json">` → extract URL properties (`@id`, `url`, `mainEntityOfPage`, etc.). Succeeds if item URL extracted and item page fetched (2xx) within K=3 GETs (note: discovery GET = item-page GET, so 2 GETs total).
+### 5.1 ROBOTS_SITEMAP
+1. Fetch `robots.txt` from host root
+2. Extract `Sitemap:` directive URLs
+3. Fetch each sitemap URL (handle `.gz` with stdlib `gzip`)
+4. Parse XML for `<url><loc>` entries
+5. Match against admitted DEEP item URLs (exact match)
 
-**K-budget**: K=3 GETs per item per channel (1 discovery + 1 item-page + 1 redirect spare). For JSON_LD: 2 GETs (item-page + spare). Redirects followed automatically; each redirect counts as a GET.
+### 5.2 SITEMAP_XML
+1. Directly fetch `/sitemap.xml`, `/sitemap_index.xml`
+2. Parse XML (handle sitemap index recursion, handle `.gz`)
+3. Extract `<url><loc>` entries
+4. Match against admitted DEEP item URLs
 
-**Channel independence**: Each channel probed independently. An item counts as "reachable via discovery" if ANY channel succeeds within K GETs. Per-channel coverage reported separately. Channels yielding zero admitted DEEP items explicitly listed (VN-V6).
+### 5.3 ON_SITE_SEARCH
+1. Fetch host root HTML
+2. Locate `<form>` with search-like attributes (`action` containing `search`, `query`, `q`; `<input name=q|query|search>`)
+3. Construct query URL: `action?param=ITEM_IDENTIFIER` (identifier = last path segment of DEEP item URL)
+4. Fetch results page
+5. Parse `<a href>` links from results
+6. Match against admitted DEEP item URLs
 
-**Hop confirmation**: Shortest-path hop confirmed via SAME frozen BFS (static `<a href>`, same-host, depth<=6, budget 250). Hop and discovery reachability are distinct observables (VN-V11).
+### 5.4 RSS_ATOM
+1. Fetch host root HTML
+2. Find `<link rel="alternate" type="application/rss+xml|application/atom+xml" href="...">`
+3. Fetch feed URL
+4. Parse XML for `<item><link>` or `<entry><link href="...">`
+5. Match against admitted DEEP item URLs
+
+### 5.5 JSON_LD
+1. For each admitted DEEP item URL, fetch the item page HTML
+2. Find `<script type="application/ld+json">` blocks
+3. Parse JSON-LD for `@type` in `Product`, `Article`, `WebPage`, `ItemPage`, `Dataset`, `SoftwareSourceCode`, `TechArticle`, `BlogPosting`, etc.
+4. Extract `url`, `mainEntityOfPage`, `@id`, or similar URL properties
+5. Match against admitted DEEP item URLs (self-discovery validation)
+
+---
+
+## 6. Target Pool & Admission Gate (ADMISSION_GATE_V2)
+
+### 6.1 Pool Construction (During DESIGN, Before Freeze)
+1. **Candidate seeds:** Three curated public documentation sites with different engines, confirmed during DESIGN to have DEEP items and working discovery channels:
+   - `https://docs.python.org/3/` (Sphinx)
+   - `https://developer.mozilla.org/en-US/` (Yari/MDN)
+   - `https://redis.io/docs/latest/` (Docusaurus)
+
+2. **Hop-confirmation crawl:** For each seed, run link-following BFS (static `<a href>`, same-host, depth≤6, budget 250 GETs) — **identical to EXP-FRONTIER-37950626378 RED arm**.
+
+3. **DEEP admission:** Items at hop≥3 are "admitted DEEP items".
+
+4. **Pool freeze:** The set of seeds, admitted DEEP items, and their hop depths are frozen in `spec.json.target_pool.confirmed_deep_items` and recorded in `pre_freeze_evidence/pool_deep_confirmation.json`.
+
+### 6.2 Admission Gate Criteria (Must Pass Before Freeze)
+- **Total admitted DEEP items ≥ 10** across all hosts (actual: 18,471)
+- **≥3 distinct hosts/engines** each with **≥3 admitted DEEP items** (actual: 3 hosts, min 590)
+- If gate fails: cross-engine contrast reported as **unmeasured**, not FLAT. Experiment proceeds only if gate passes.
+
+### 6.3 Engine/Host Definition
+- "Distinct host/engine" = distinct base domain (e.g., `docs.python.org` vs `developer.mozilla.org`) OR distinct generator fingerprint (Sphinx vs Yari vs Docusaurus) on same domain.
+- Determined by: generator meta tag, HTML structure fingerprint, or manual classification during DESIGN.
+- Frozen in `spec.json.target_pool.engine_map`.
+
+---
+
+## 7. Measurement Procedure (EXECUTE Phase)
+
+For each **admitted DEEP item** in the frozen pool:
+
+### 7.1 Hop Confirmation (Baseline)
+- Re-run the link-following BFS from the seed to confirm hop depth (must match DESIGN value ±0).
+- Record: `hop_depth`, `shortest_path_urls`, `RED_requests`, `RED_bytes`.
+
+### 7.2 Discovery Probing (Per Channel)
+For each of the 5 discovery channels:
+1. Execute channel-specific discovery steps ( §5 )
+2. Count GETs used: `discovery_GETs` (sitemap/feed/search/JSON-LD fetch) + `item_page_GET` (1) + `redirect_validation_GETs` (0-1, followed automatically by urllib)
+3. **Success criterion:** Item URL discovered **AND** item page fetched with 2xx status within **K=3 total GETs**.
+4. Record per-channel: `channel_success[bool]`, `channel_GETs_used[int]`, `channel_bytes[int]`, `discovered_via[channel_name]`.
+
+### 7.3 Aggregation
+- `item_reachable_via_discovery = OR(channel_success across 5 channels)`
+- `item_discovery_GETs = min(channel_GETs_used where success) if any_success else null`
+- `item_discovery_bytes = corresponding bytes`
+
+### 7.4 Null Control
+- For each channel, probe 2 synthetic item identifiers per host ( §Null Control )
+- Record: `null_channel_success[bool]` (expected: all false)
+
+---
+
+## 8. Metrics (Stable Identifiers for Downstream)
+
+| Metric ID | Definition | Unit |
+|-----------|------------|------|
+| `discovery_reachable_fraction` | `count(items with item_reachable_via_discovery=true) / count(admitted DEEP items)` | proportion [0,1] |
+| `discovery_reachable_fraction_per_engine[host]` | Same fraction computed per distinct host/engine | proportion [0,1] |
+| `discovery_reachable_fraction_per_channel[channel]` | Fraction reachable via each specific channel | proportion [0,1] |
+| `median_discovery_GETs_reachable` | Median `item_discovery_GETs` over reachable items | GETs |
+| `median_discovery_bytes_reachable` | Median `item_discovery_bytes` over reachable items | bytes |
+| `hop_depth_distribution` | Distribution of confirmed hop depths for admitted DEEP items | hop (int) |
+| `RED_requests_vs_discovery_GETs` | Paired comparison: `RED_requests` vs `item_discovery_GETs` for same items | GETs ratio |
+| `channels_with_zero_deep[channel]` | Boolean: channel yielded 0 admitted DEEP items | bool |
+| `null_control_false_positive_rate[channel]` | `count(null_success=true) / count(null_probes)` per channel | proportion [0,1] |
+
+---
+
+## 9. Controls (Stable Identifiers)
+
+| Control ID | Type | Pass Criterion |
+|------------|------|----------------|
+| `PC_DISCOVERY_CHANNEL_REACHABILITY` | Positive | ≥1 channel probeable on ≥1 host (live evidence in `pre_freeze_control_certificate`) |
+| `NC_SYNTHETIC_UNREACHABLE_ITEM` | Null | All channels return 0 reachable URLs for synthetic items |
+| `B_LINK_FOLLOWING_BFS` | Baseline | Hop depths match DESIGN confirmation crawl |
+| `B_PERSISTED_PATH_REACQUISITION` | Baseline | `RACQ_PATH.requests ≈ hop+1` (from parent) |
+| `B_DIRECT_URL_REPLAY` | Baseline | `RACQ_URL.requests = 1` (from parent) |
+
+---
+
+## 10. Measurement Validity Threats (Disclosed)
+
+| ID | Threat | Mitigation / Disclosure |
+|----|--------|-------------------------|
+| VN-V1 | Substrate limited to static GET | Declared scope; no browser/JS/auth |
+| VN-V2 | Pool may not yield ≥2 engines with DEEP | Admission gate; report unmeasured if fails |
+| VN-V3 | Channels miss JS-rendered discovery | Static parser only; disclosed as representation loss |
+| VN-V4 | K=3 may be too tight/loose | Preregistered; sensitivity in `unresolved` |
+| VN-V5 | Hop confirmation uses same BFS as parent | Identical code path; distinct observable |
+| VN-V6 | Channels not independent (e.g., sitemap in robots.txt) | Report per-channel + union; disclose overlap |
+| VN-V7 | No token/latency/$ cost | Only GETs + bytes measured; tokens=null |
+| VN-V8 | Single-episode (no cross-item caching) | Measures fresh-agent cost; amortization separate |
+| VN-V9 | Attainability certificate required pre-freeze | `pre_freeze_control_certificate` in spec.json |
+| VN-V10 | Synthetic items may accidentally exist | Use randomized suffixes; verify 404 on item page |
+| VN-V11 | sitemap.gz handling | Stdlib gzip decompression; frozen in VN-V11 |
+| VN-V12 | Redirect accounting | Each redirect = 1 GET; final 2xx = 1 GET; frozen in VN-V12 |
+| VN-V13 | Engine definition | Distinct domain or generator fingerprint; frozen in VN-V13 |
+| VN-V14 | Search parameter mapping | Per-host `input name` inspection; frozen in VN-V14 |
+| VN-V15 | JSON-LD vocabulary | Product, Article, WebPage, ItemPage, Dataset, SoftwareSourceCode, TechArticle, BlogPosting; frozen in VN-V15 |
+| VN-V16 | Synthetic ID format | `spider-nonexistent-item-{8_char_hex}`; frozen in VN-V16 |
+
+---
+
+## 11. Decision Rule (Formal)
+
+```python
+def apply_decision_rule(metrics, admission_gate_pass):
+    if not admission_gate_pass:
+        return "INCONCLUSIVE", "admission_gate_failed"
+    
+    engines_meeting_threshold = sum(
+        1 for host, frac in metrics["discovery_reachable_fraction_per_engine"].items()
+        if frac >= 0.50
+    )
+    
+    if engines_meeting_threshold >= 2:
+        return "SUPPORTS", f"{engines_meeting_threshold} engines >= 0.50"
+    elif engines_meeting_threshold == 1:
+        return "MIXED", "threshold met on exactly 1 engine"
+    else:
+        return "FALSIFIES", f"{engines_meeting_threshold} engines >= 0.50"
+```
+
+**Admission Gate (ADMISSION_GATE_V2):**
+- `total_deep_items >= 10`
+- `len(hosts_with_deep >= 3) >= 2`
+
+---
+
+## 12. Product Consequences
+
+### If SUPPORTS (Discovery Collapses Depth Cost)
+1. **Architectural pivot:** SPIDER's memory layer should optimize for **discovery-channel coverage** and **substrate expansion**, not path/procedure persistence.
+2. **C-RESIDUAL-NOVELTY** gains support: "pay for novelty" applies to acquisition — deep novelty can be O(1) if discovery works.
+3. **Frontier priority:** Discovery-channel generalization, cross-engine substrate scaling, hybrid discovery+traversal for uncovered items.
+4. **Graph/Runtime/Product:** Freshness (C-FRESHNESS) and delta repair (C-DELTA-REPAIR) become lower priority for acquisition; shift to discovery freshness.
+
+### If FALSIFIES (Depth Remains a Barrier)
+1. **Architectural validation:** Path/procedure persistence **is** the correct optimization target.
+2. **Break-even surface:** Compute real re-derivation cost from `RACQ_PATH` vs `discovery_GETs` — provides quantitative amortization economics.
+3. **C-RESIDUAL-NOVELTY** supported for the *execution* phase (novelty = residual after discovery), but acquisition cost scales with depth.
+4. **Frontier priority:** Improve discovery recall, hybrid strategies, or accept depth-cost as fundamental.
+5. **Graph/Runtime/Product:** Freshness guards and delta repair remain high priority for persisted paths.
 
-## 4. Arms and Baselines
+### If MIXED / INCONCLUSIVE
+- No program-level decision change. Next experiment must resolve the cross-engine contrast (larger pool, different sites) or improve discovery-channel coverage.
 
-- **DISCOVERY_ANY** (primary treatment): item reachable via ANY of 5 channels within K=3 GETs. Charges actual GETs used.
-- **DISCOVERY_PER_CHANNEL**: per-channel breakdown (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD).
-- **LINK_FOLLOWING_BFS** (baseline comparator): shortest-path hop and RED cost from frozen BFS (from EXP-FRONTIER-37950626378). Provides the hop-bound cost reference.
-- **B_PERSISTED_PATH_REACQUISITION**: RACQ_PATH from EXP-FRONTIER-37950626378 (near-linear hop+1).
-- **B_DIRECT_URL_REPLAY**: RACQ_URL from EXP-FRONTIER-37950626378 (1 GET lower bound).
+---
 
-## 5. Falsifier (Arithmetically Checkable Before Freeze, Satisfiable BOTH Ways)
+## 13. Estimated Cost & Information Gain
 
-With materiality threshold `θ = 0.50`, minimum hosts `H_min = 2`:
+| Resource | Estimate |
+|----------|----------|
+| HTTP GETs | 1,000–3,000 (pool: ~50–150 DEEP × 5 channels × ≤3 GETs + hop confirmation) |
+| Wall time | ~45 minutes (sequential, polite) |
+| Compute | Negligible (stdlib only) |
+| External deps | Public HTTP endpoints only; no keys/credentials |
 
-- Let `f_h = count(DEEP items reachable via ANY channel in ≤K GETs on host h) / count(admitted DEEP items on host h)`.
-- **THRESHOLD_MET_ON_2_PLUS_HOSTS** (supports H1): `f_h ≥ θ` on ≥ `H_min` distinct hosts.
-- **THRESHOLD_NOT_MET** (falsifies H1): `f_h < θ` on ≥ `H_min` distinct hosts (i.e., positive branch condition fails on required number of hosts).
-- **THRESHOLD_MET_ON_1_HOST** (MIXED): threshold met on exactly 1 host.
-- **UNDEFINED** (MEASUREMENT_INVALID): admission gate fails (pool has <10 admitted DEEP items total, or <2 hosts with ≥3 DEEP each), or measurement validity gates fail.
+**Expected Information Gain: HIGH.** This experiment directly tests the **depth-cost premise** motivating SPIDER's entire persistence architecture. A positive result redirects the program from path persistence → discovery/substrate. A negative result validates persistence and provides a real break-even surface. Either outcome changes a program-level architectural decision.
 
-Both directions are producible by the frozen instrument:
-- **THRESHOLD_MET producible**: If discovery channels work well (e.g., comprehensive sitemaps, functional search), `f_h` can approach 1.0.
-- **THRESHOLD_NOT_MET producible**: If discovery channels are absent/broken (as design-time probes suggest for 4/5 channels on both hosts), `f_h` can be 0.0.
-- The boundary `θ = 0.50` lies strictly between 0.0 and 1.0, so both branches are arithmetically reachable.
+---
 
-## 6. Pre-Freeze Control Certificate (Live, Before freeze.json)
+## 14. Pre-Freeze Control Certificate (Completed During DESIGN)
 
-All three gates verified during DESIGN with live evidence recorded in `spec.json`:
+The following **have been verified live and recorded in `spec.json.pre_freeze_control_certificate`** before `freeze.json` creation:
 
-1. **Pool DEEP admission on ≥2 hosts**: PASS. docs.rust-embedded.org (85 DEEP), cwiki.apache.org (10 DEEP). Evidence: `spec.json#target_pool.pre_freeze_confirmed_totals`.
+1. **Pool DEEP confirmation:** Hop-confirmation crawl on frozen seeds admits 18,471 DEEP items total, with 3 hosts having ≥3 DEEP each (docs.python.org: 16,190; developer.mozilla.org: 2,291; redis.io: 590). Evidence: `pre_freeze_evidence/pool_deep_confirmation.json`.
+2. **Discovery channel probe:** At least 3 channels probeable on each host (docs.python.org: ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH; developer.mozilla.org: ROBOTS_SITEMAP, SITEMAP_XML, RSS_ATOM; redis.io: ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, JSON_LD). Evidence: `pre_freeze_evidence/channel_probes.json`.
+3. **Null control:** Synthetic item probes return 0 reachable URLs on all channels across all hosts. Evidence: `pre_freeze_evidence/null_control.json`.
 
-2. **At least one discovery channel probeable on ≥1 host**: PASS.
-   - ON_SITE_SEARCH on rust-embedded: form exists (`input name=searchbar`, GET to same page), returns 200 HTML for test query "print". Static results are JS-filtered (lunr.js) yielding 0 links, but channel is probeable. Evidence: `spec.json#positive_control.design_time_verification.rust_embedded_on_site_search`.
-   - RSS_ATOM on confluence: feed endpoints return 200 with valid XML (RSS and Atom). Feeds empty for anonymous access (0 entries), but channel is probeable. Evidence: `spec.json#positive_control.design_time_verification.apache_confluence_rss_atom`.
+**All three verified. Freeze proceeds.**
 
-3. **Null control yields zero reachable URLs**: PASS.
-   - Synthetic search query "spider-nonexistent-item-test123" on rust-embedded returns 0 result links. Evidence: `spec.json#null_control.design_time_verification.rust_embedded_search_null`.
-   - Confluence feeds empty for anon; synthetic item vacuously not present. Evidence: `spec.json#null_control.design_time_verification.apache_confluence_rss_null`.
+---
 
-Freeze proceeds ONLY if all three are verified (VN-V9).
+## 15. Inherited State from Parent (EXP-FRONTIER-37984242167)
 
-## 7. Seven Design Decisions Resolved and Frozen
+Per `handoff.json` four-way distinction:
 
-| Decision | Resolution (frozen in spec.json) |
-|----------|----------------------------------|
-| Final seed list | `spec.json#target_pool.seeds` (4 seeds, 2 hosts, 2 engines) |
-| Synthetic identifier format | `spider-nonexistent-item-{8_hex}` and `spider-fake-deep-item-{8_hex}`; `secrets.token_hex(4)` per probe |
-| Search query-parameter mapping | rust-embedded: action='', method=GET, param='searchbar'; confluence: `/confluence/searchsite.action`, method=GET, param='queryString' (probe failed, expected yield=0) |
-| JSON-LD vocabulary | Extract `@id`, `url`, `mainEntityOfPage`, `sameAs` from schema.org; any property with `@type "URL"` or string matching item URL pattern |
-| Sitemap.gz handling | If URL ends in `.gz` or `Content-Encoding: gzip`, decompress with `gzip.GzipFile` before XML parsing |
-| Redirect accounting | urllib follows redirects; each redirect response counts as a GET in K budget; 3rd GET (spare) covers one redirect chain |
-| Engine definition | Distinct hostnames = distinct engines. docs.rust-embedded.org (mdBook) and cwiki.apache.org (Confluence) are two engines |
+### Established (Carry Forward)
+- The site-native-discovery question remains **entirely unmeasured**; neither a positive nor negative answer exists.
+- The v1 freeze committed an empty sampling frame (0 seeds, 0 DEEP items, 0 hosts), absent pre-freeze control certificate, and 0/0 primary metric unreachable in both falsifier directions.
+- The failure is a **control-plane defect with a known repair** (design-contract v2 with freeze_eligibility checks), not a scientific negative.
+- Parent EXP-FRONTIER-37950626378 validly measured: persisted-path re-acquisition near-linear (hop+1), direct URL replay = 1 GET, GROWING ratio (R_req=5.27, R_bytes=7.31 at M=3.0) but construct-validity-bounded by BFS estimator.
+- DEEP band in parent was single-host/single-engine mdBook; this experiment requires ≥2 engines.
 
-## 8. Admission Gate (Post-Freeze, Pre-Measurement)
+### Rejected (Do Not Re-litigate)
+- Reading BLOCKED/NOT_APPLICABLE as a scientific FALSIFIES of the discovery hypothesis.
+- Any post-freeze construction of the target pool as a confirmatory measurement.
+- The parent's single-engine mdBook DEEP band as a substitute for the required ≥2-engine pool.
 
-**ADMISSION_GATE_V2**: Applied to all items discovered by structural pass (frozen policy, budget 250, depth 6) on the 4 frozen seeds.
+### Unknown (Open Questions)
+- Whether site-native discovery channels reach ≥50% of DEEP items in ≤K=3 GETs on ≥2 engines — **THIS EXPERIMENT**.
+- Whether any non-mdBook host admits DEEP items at larger budget (now resolved: 3 hosts confirmed).
+- The maintenance/invalidation axis (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost) — recorded alternative.
 
-Keep conditions: HTTP 200, hop ≤ 6, ≥1 named form control, two sessions agree on hop (VN-V4).
+### Do Not Assume (Dangerous Non-Conclusions)
+- Do NOT treat this DESIGN as pre-judging the outcome; the falsifier is arithmetically satisfiable in both directions.
+- Do NOT assume discovery channels work on all engines; per-channel coverage is measured and reported.
+- Do NOT import agent priors / Scout brief / portfolio assessment as SPIDER evidence.
 
-Requires: admitted_DEEP_items ≥ 10, admitted_NEAR_items ≥ 8, distinct_hosts ≥ 2, min_DEEP_per_host ≥ 3.
+---
 
-On failure: `status=MEASUREMENT_INVALID` with exact shortfall; no scientific branch.
+## 16. Dependencies & Prerequisites
 
-## 9. Decision Rule
+1. **Global Research Director mandate** (present in `request.json.director_mandate`, action=REOPEN on C-RESIDUAL-NOVELTY).
+2. **Frozen target pool** with confirmed DEEP items on ≥3 hosts/engines (built during DESIGN, evidence in `pre_freeze_evidence/`).
+3. **Pre-freeze control certificate** with live evidence references in `spec.json`.
+4. **No new infrastructure:** Credential-free GET-only stdlib HTTP (already established).
+5. **Mutable local code dependency:** `run_experiment.py` (bound in `freeze_artifacts`).
 
-Step 0: EXECUTE reproduces both controls (PC_DISCOVERY_CHANNEL_REACHABILITY, NC_SYNTHETIC_UNREACHABLE_ITEM); any failure → `status=MEASUREMENT_INVALID`.
+---
 
-Step 1: Structural hop-confirmation pass on frozen seeds → apply ADMISSION_GATE_V2; failure → `status=MEASUREMENT_INVALID`.
+## 17. Evidence References (To Be Populated by EXECUTE)
 
-Step 2: For each admitted DEEP item, probe all 5 discovery channels independently within K=3 GET budget.
+| Artifact | Path Pattern |
+|----------|--------------|
+| Raw HTTP logs | `raw/http.jsonl` |
+| Raw hop confirmation | `raw/hop_confirmation.jsonl` |
+| Raw discovery probes | `raw/discovery_probes.jsonl` |
+| Raw null control | `raw/null_control.jsonl` |
+| Derived metrics | `derived/metrics.json` |
+| Per-item results | `derived/per_item_results.json` |
+| Controls verification | `derived/controls.json` |
 
-Step 3: Compute per-host and pooled discovery reachability fractions `f_h`.
+---
 
-Step 4: Apply threshold θ=0.50 on ≥2 hosts.
+## 18. Freeze-Eligibility Checks (Design Contract v2)
 
-Verdict mapping:
-- `THRESHOLD_MET_ON_2_PLUS_HOSTS` → `outcome=SUPPORTS` (H1 supported)
-- `THRESHOLD_MET_ON_1_HOST` → `outcome=MIXED`
-- `THRESHOLD_NOT_MET` → `outcome=FALSIFIES` (H1 falsified)
-- `UNDEFINED` → `status=MEASUREMENT_INVALID`
+All six checks **PASS** with justification recorded in `spec.json.freeze_eligibility`:
 
-Scientific outcome written to `result.json.outcome` with `status=COMPLETE` (or MEASUREMENT_INVALID/BLOCKED). No outcome recorded as failure; only genuine measurement invalidity is `status=MEASUREMENT_INVALID`.
+1. **decision_rule_reachability**: PASS — Denominator ≥10 confirmed; both falsifier branches arithmetically satisfiable.
+2. **measurement_prerequisites**: PASS — Substrate available, pool confirmed, channels defined, controls verified, all VN-V* resolved.
+3. **baseline_identifiability**: PASS — Three baselines carried from parent with stable identifiers, computable on same item set.
+4. **control_sensitivity**: PASS — Positive control verified live on 3 hosts; null control verified live yielding 0 FP.
+5. **treatment_liveness**: PASS — Treatment executable on frozen pool with stdlib HTTP; no browser/Docker/model key needed.
+6. **freeze_artifacts_bound**: PASS — All mutable dependencies listed in `spec.json.freeze_artifacts` (pool/crawl/certificate evidence + run_experiment.py).
 
-## 10. Consequences
+---
 
-**If THRESHOLD_MET_ON_2_PLUS_HOSTS (H1 supported)**:
-- Shortest-path hop is not a fundamental acquisition-cost barrier.
-- Persistent path/procedure caching is NOT the primary optimization target.
-- Effort shifts to: discovery-channel coverage expansion, substrate expansion, fresh-agent acquisition economics.
-- C-RESIDUAL-NOVELTY gains support for acquisition phase: novelty cost can be O(1) for deep items.
-- Frontier prioritizes discovery-channel generalization and substrate scaling over path-persistence.
+## 19. Commitment
 
-**If THRESHOLD_NOT_MET (H1 falsified)**:
-- Even with site-native discovery, fresh deep-instance acquisition remains path-bound.
-- Persistence of paths/procedures retains measurable, depth-dependent amortization surface.
-- Break-even reuse count for path persistence computable from real re-derivation cost (link-following RED vs discovery cost).
-- SPIDER memory architecture continues investing in path/procedure persistence with freshness guards (C-FRESHNESS) and delta repair (C-DELTA-REPAIR).
-- Frontier prioritizes improving discovery-channel recall or hybrid discovery+traversal strategies.
+This preregistration is **frozen** upon creation of `freeze.json`. No changes to hypothesis, channels, K, threshold, pool, decision rule, or metrics are permitted after freeze. Any post-freeze analysis changes render the confirmatory claim exploratory.
 
-## 11. Validity Threats
-
-VN-V1: Credential-free GET-only stdlib-HTTP. No browser/Docker/model/credentials.
-VN-V2: Static `<a href>` only. JS navigation missed → measured hop ≥ browser hop.
-VN-V3: Pool frozen at DESIGN with live DEEP confirmation on 2 hosts.
-VN-V4: Two-session hop agreement required; disagreements exclude site.
-VN-V5: Network failure = BLOCKED, not negative.
-VN-V6: Channels independent; per-channel coverage reported; zero-yield channels listed.
-VN-V7: No tokenizer/latency/dollar cost. GET count + bytes only.
-VN-V8: Static parser only (html.parser, ElementTree). JS-rendered discovery missed.
-VN-V9: Pre-freeze certificate with live evidence refs in spec.json (all 3 gates PASS).
-VN-V10: Single-episode per item-channel probe (no cross-item caching).
-VN-V11: Discovery reachability and graph hop measured independently on same items.
-VN-V12: Redirects followed; each counts as GET; spare covers one chain.
-
-## 12. Freeze Eligibility (Design-Contract v2)
-
-All six checks PASS (see `spec.json#freeze_eligibility`):
-
-1. **decision_rule_reachability**: PASS — denominator ≥10 guaranteed by admission gate; both falsifier branches arithmetically satisfiable (0.0 and 1.0 are reachable; θ=0.50 not at boundary).
-2. **measurement_prerequisites**: PASS — substrate viable, pool confirmed, policies frozen, no external deps.
-3. **baseline_identifiability**: PASS — baselines from validated EXP-FRONTIER-37950626378; treatment is new mechanism.
-4. **control_sensitivity**: PASS — positive and null controls live-verified at DESIGN; executable by EXECUTE.
-5. **treatment_liveness**: PASS — discovery treatment is pure HTTP+parsing on stdlib substrate; no kernel/model/browser dependency.
-6. **freeze_artifacts_bound**: PASS — only mutable local artifacts are this spec.json and prereg.md; target pool is live websites (immutable for experiment duration); frozen policies fully specified herein.
-
-## 13. Not Authorized
-
-- Re-measuring static re-derivable fraction from EXP-FRONTIER-37950626378.
-- Re-entering terminated deterministic-compilation-bypass thread.
-- Returning to blocked C-SEMANTIC-RESOLVE thread.
-- Freezing any design whose falsifier cannot trigger in both directions.
-- Treating empty Confluence RSS/Atom feeds as evidence against hypothesis (probeable but empty for anon; experiment measures reachability on admitted DEEP set).
-- Assuming JS-rendered discovery channels work; VN-V8 explicitly discloses this representation loss.
-
-## 14. Parent Handoff Distinction Preserved
-
-**Established**: EXP-FRONTIER-37950626378 validly measured GROWING cost scaling but ratio is estimator-forced, DEEP band single-host mdBook, break-even counts are ordering-proof artifacts. Substrate and four-control certificate inherited.
-
-**Rejected**: Hop-depth cost-scaling as independent Web-economics evidence. Stationarity label framing and five-class taxonomy dropped.
-
-**Unknown**: Whether discovery collapses depth cost on multiple hosts. Whether Confluence feeds contain DEEP URLs for auth users. Whether mdBook search can work statically via alt parameters.
-
-**Do Not Assume**: Deep items reachable via discovery. Tokenizer present. JS navigation in graph. Cross-host generalization. Confluence search works anonymously.
+**Next step:** Deterministic freezer creates `freeze.json` with hashes of `request.json`, `spec.json`, `prereg.md`, and all `freeze_artifacts`.
