@@ -26,10 +26,9 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **434**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **435**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
-
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
 |---|---|---|---|---|---|
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT | `fb05ae4d41a0` |
@@ -466,6 +465,7 @@ Finalized subsequent packets: **434**. Coverage gaps: **0**. Quarantined packets
 | EXP-FRONTIER-37984242167 | frontier | PASS | BLOCKED_DESIGN_DEFECT_RECEIPT_ADOPTED_UNSATISFIABLE_EMPTY_SAMPLING_FRAME_0_SEEDS_0_DEEP_0_HOSTS_PRE_FREEZE_CERTIFICATE_ABSENT_GATE_VIOLATION_FALSIFIER_0_0_UNREACHABLE_BOTH_DIRECTIONS_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_FALSE_NO_MEASUREMENT_TAKEN_NO_CLAIM_UPDATE_NO_PROMOTION_NO_CONTINUE_REQUIRES_V2_RE_DESIGN_UNDER_SAME_MANDATE | C-RESIDUAL-NOVELTY, C-WEB-DYNAMICS | `6538b12b1cb9` |
 | EXP-PRODUCT-37989728440 | product | REVISE | BOUNDED_SUBSTRATE_CLASS_NEGATIVE_ADOPTED_UNDER_FROZEN_OVERALL_FALSIFIES_ROW_C1_DYNAMIC_RANGE_CERTIFICATE_UNSATISFIABLE_AND_C5_NOVELTY_MONOTONICITY_FAILS_TREATMENT_TIES_COLD_ON_DETERMINISTIC_COUNTERS_FREEZE_GATE_NOT_ENFORCED_GOVERNANCE_DEFECT_RECORDED_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE | C-RESIDUAL-NOVELTY, C-PARAM-INHERIT, C-FRESHNESS | `18d172113168` |
 | EXP-GRAPH-37992949248 | graph | PASS | SUPPORTS_EXTRACTION_DEFECT_CONFIRMED_REPLICATED_AND_DECISIVE_FEASIBILITY_D1V_SINGLE_ANCHOR_TRANSPORT_COUPLED_TIME_STABLE_C_FRESHNESS_STAYS_EXPERIMENTAL_FOUR_ANCHOR_PART_II_ROUTE_PARKED_NO_PRODUCT_PROMOTION | C-FRESHNESS | `dbd76dc6ef00` |
+| EXP-PHYSICS-37992957068 | physics | PASS | INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE | C-WEB-DYNAMICS | `cb2051ccab80` |
 
 ## Effective claim state
 
@@ -482,7 +482,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-36287167610 |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37973239386 |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37992957068 |
 
 ## Latest raw claim events
 
@@ -499,7 +499,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 | intel |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 | product |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-36287167610 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37973239386 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37992957068 | physics |
 
 ## Integrity accounting
 
