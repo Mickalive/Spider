@@ -1,10 +1,32 @@
-# SPIDER CODEX — Research 2.0
+# SPIDER CODEX — cumulative scientific record
 
-Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
+One SPIDER program, one continuous scientific history; Research 2.0 extends earlier experiments.
+Original evidence is kept byte-for-byte on main at codex/sources/0000-historical-evidence.md.
+The single codex/index.json combines original source artifact locations and subsequent experiment packets.
+The same codex/claim_state.json records bounded historical precedents and subsequent audited claim events.
 
-Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
-Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **434**. Coverage gaps: **0**. Quarantined packets: **2**.
+## Earlier research — preserved source, indexed into the same Codex
+
+Unique historical evidence artifacts: **1401** (source documents, NOT independent experiments).
+Immutable original Git blob: 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3.
+Search codex/index.json.historical.artifacts by original path, lane and line interval.
+Historical PASS tags are hints, not automatically validated scientific claims.
+
+| Historical evidence | Original reference | Bounded finding |
+|---|---|---|
+| P2-REPLAY-COST | pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b | Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings. |
+| P2-BLIND-COMPOSITION | pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda | G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference. |
+| P2-WP002B | archived Codex section 1 WP-002B | 901 true next-state transitions from 300 trajectories; rule DIM-ACC 0.6238, NN 0.6295, shuffle 0.5706, repeated trajectory holdouts; no website-holdout result. |
+| P2-WP003 | pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9 | Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap. |
+| P2-WP003B | pre2 artifact 4.237 sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e | Follow-up verified no leakage on 875 rows and reports action-only MSE 0.756 vs full MSE 0.735; pre-state mechanics <3% additional explained variance at tested granularity. |
+| P2-MIND2WEB | archived Codex section 1 Mind2Web V0.50 | Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions. |
+| P2-AUTOMATION | archived Codex section 2 | Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity. |
+
+## Subsequent finalized experiments — Research 2.0
+
+Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
+Use the same codex/index.json and codex/claim_state.json across both periods.
+Finalized subsequent packets: **434**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
