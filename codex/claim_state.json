@@ -1,5 +1,181 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
+  "historical_precedents_by_claim": {
+    "C-CROSSSITE": [
+      {
+        "key": "P2-WP002B",
+        "source": "archived Codex section 1 WP-002B",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "901 true next-state transitions from 300 trajectories; rule DIM-ACC 0.6238, NN 0.6295, shuffle 0.5706, repeated trajectory holdouts; no website-holdout result.",
+        "guard": "Do not claim rule beats nearest-neighbour or transfers cross-site."
+      },
+      {
+        "key": "P2-WP003",
+        "source": "pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9",
+        "status": "MEASUREMENT_INVALID",
+        "fact": "Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap.",
+        "guard": "Never inherit negative or positive scientific conclusion; require non-leaking prospective controls."
+      },
+      {
+        "key": "P2-WP003B",
+        "source": "pre2 artifact 4.237 sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Follow-up verified no leakage on 875 rows and reports action-only MSE 0.756 vs full MSE 0.735; pre-state mechanics <3% additional explained variance at tested granularity.",
+        "guard": "Avoid rerunning near-identical state-feature tests; different observables may warrant new experiments."
+      }
+    ],
+    "C-DELTA-REPAIR": [
+      {
+        "key": "P2-AUTOMATION",
+        "source": "archived Codex section 2",
+        "status": "HISTORICAL_OPERATIONAL_LESSON",
+        "fact": "Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity.",
+        "guard": "Prevent repeated orchestration repairs from being treated as research advance."
+      }
+    ],
+    "C-FRESHNESS": [
+      {
+        "key": "P2-AUTOMATION",
+        "source": "archived Codex section 2",
+        "status": "HISTORICAL_OPERATIONAL_LESSON",
+        "fact": "Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity.",
+        "guard": "Prevent repeated orchestration repairs from being treated as research advance."
+      }
+    ],
+    "C-LLM-INHERIT": [
+      {
+        "key": "P2-REPLAY-COST",
+        "source": "pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b",
+        "status": "HISTORICAL_AUDITED_BOUNDED",
+        "fact": "Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings.",
+        "guard": "Always use matched tasks and fully loaded counterfactual costs; do not frame scripted replay as real-agent economics."
+      },
+      {
+        "key": "P2-BLIND-COMPOSITION",
+        "source": "pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda",
+        "status": "HISTORICAL_BOUNDED_NEEDS_EXACT_PRIMARY_CHECK",
+        "fact": "G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference.",
+        "guard": "Repeat only with controls that remove keyword/oracle and strong comparators; never present as broad generalization."
+      },
+      {
+        "key": "P2-MIND2WEB",
+        "source": "archived Codex section 1 Mind2Web V0.50",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions.",
+        "guard": "Do not assume human-route imitation or exact cache replay suffices; distinguish retrieval, operation overlap and causal composition."
+      }
+    ],
+    "C-MEAS-VALID": [
+      {
+        "key": "P2-WP003",
+        "source": "pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9",
+        "status": "MEASUREMENT_INVALID",
+        "fact": "Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap.",
+        "guard": "Never inherit negative or positive scientific conclusion; require non-leaking prospective controls."
+      },
+      {
+        "key": "P2-AUTOMATION",
+        "source": "archived Codex section 2",
+        "status": "HISTORICAL_OPERATIONAL_LESSON",
+        "fact": "Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity.",
+        "guard": "Prevent repeated orchestration repairs from being treated as research advance."
+      }
+    ],
+    "C-PARAM-INHERIT": [
+      {
+        "key": "P2-REPLAY-COST",
+        "source": "pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b",
+        "status": "HISTORICAL_AUDITED_BOUNDED",
+        "fact": "Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings.",
+        "guard": "Always use matched tasks and fully loaded counterfactual costs; do not frame scripted replay as real-agent economics."
+      },
+      {
+        "key": "P2-BLIND-COMPOSITION",
+        "source": "pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda",
+        "status": "HISTORICAL_BOUNDED_NEEDS_EXACT_PRIMARY_CHECK",
+        "fact": "G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference.",
+        "guard": "Repeat only with controls that remove keyword/oracle and strong comparators; never present as broad generalization."
+      },
+      {
+        "key": "P2-MIND2WEB",
+        "source": "archived Codex section 1 Mind2Web V0.50",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions.",
+        "guard": "Do not assume human-route imitation or exact cache replay suffices; distinguish retrieval, operation overlap and causal composition."
+      }
+    ],
+    "C-PRODUCT-ECON": [
+      {
+        "key": "P2-REPLAY-COST",
+        "source": "pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b",
+        "status": "HISTORICAL_AUDITED_BOUNDED",
+        "fact": "Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings.",
+        "guard": "Always use matched tasks and fully loaded counterfactual costs; do not frame scripted replay as real-agent economics."
+      }
+    ],
+    "C-RESIDUAL-NOVELTY": [
+      {
+        "key": "P2-REPLAY-COST",
+        "source": "pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b",
+        "status": "HISTORICAL_AUDITED_BOUNDED",
+        "fact": "Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings.",
+        "guard": "Always use matched tasks and fully loaded counterfactual costs; do not frame scripted replay as real-agent economics."
+      },
+      {
+        "key": "P2-BLIND-COMPOSITION",
+        "source": "pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda",
+        "status": "HISTORICAL_BOUNDED_NEEDS_EXACT_PRIMARY_CHECK",
+        "fact": "G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference.",
+        "guard": "Repeat only with controls that remove keyword/oracle and strong comparators; never present as broad generalization."
+      },
+      {
+        "key": "P2-MIND2WEB",
+        "source": "archived Codex section 1 Mind2Web V0.50",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions.",
+        "guard": "Do not assume human-route imitation or exact cache replay suffices; distinguish retrieval, operation overlap and causal composition."
+      }
+    ],
+    "C-SEMANTIC-RESOLVE": [
+      {
+        "key": "P2-BLIND-COMPOSITION",
+        "source": "pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda",
+        "status": "HISTORICAL_BOUNDED_NEEDS_EXACT_PRIMARY_CHECK",
+        "fact": "G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference.",
+        "guard": "Repeat only with controls that remove keyword/oracle and strong comparators; never present as broad generalization."
+      },
+      {
+        "key": "P2-MIND2WEB",
+        "source": "archived Codex section 1 Mind2Web V0.50",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions.",
+        "guard": "Do not assume human-route imitation or exact cache replay suffices; distinguish retrieval, operation overlap and causal composition."
+      }
+    ],
+    "C-WEB-DYNAMICS": [
+      {
+        "key": "P2-WP002B",
+        "source": "archived Codex section 1 WP-002B",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "901 true next-state transitions from 300 trajectories; rule DIM-ACC 0.6238, NN 0.6295, shuffle 0.5706, repeated trajectory holdouts; no website-holdout result.",
+        "guard": "Do not claim rule beats nearest-neighbour or transfers cross-site."
+      },
+      {
+        "key": "P2-WP003",
+        "source": "pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9",
+        "status": "MEASUREMENT_INVALID",
+        "fact": "Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap.",
+        "guard": "Never inherit negative or positive scientific conclusion; require non-leaking prospective controls."
+      },
+      {
+        "key": "P2-WP003B",
+        "source": "pre2 artifact 4.237 sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e",
+        "status": "HISTORICAL_BOUNDED",
+        "fact": "Follow-up verified no leakage on 875 rows and reports action-only MSE 0.756 vs full MSE 0.735; pre-state mechanics <3% additional explained variance at tested granularity.",
+        "guard": "Avoid rerunning near-identical state-feature tests; different observables may warrant new experiments."
+      }
+    ]
+  },
   "events_by_claim": {
     "C-WEB-DYNAMICS": [
       {
@@ -1093,6 +1269,19 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "UNCHANGED at the registry status, and BOUNDED to the frozen credential-free stdlib-HTTP action-gating substrate and one collection window: no inference is licensed for JS/DOM/SPA/authenticated/edge/mobile/GraphQL tokens, other pools, other windows, or the Web at large. The producer (result.json status=COMPLETE, outcome=FALSIFIES, frozen branch S0) and the independent auditor (audit.json status=PASS, producer_claim_supported=true, required_fixes=[]) agree, and the Director upholds both. The auditor recomputed PREDICTABLE_PREVALENCE_POOLED=0.043478260869565216, N_INDICATOR_FIELDS=46, N_PREDICTABLE=2 and the site-clustered CI95 [0.0, 0.11627906976744186] bitwise against the producer, and every one of the eight frozen measurement-invalid conditions (a)-(h) is false. Frozen branch precedence resolves to S0: PV=0.0435 <= P_FLOOR=0.10 AND clustered CI upper=0.1163 < P_HI=0.25. BOUNDED TO WHAT THIS PACKET JUSTIFIES: the pre-registered H1 (pooled value-level predictability prevalence >= 0.25 with CI lower > 0.10 BEYOND the mandated B_MEMORY_REPEAT baseline and the calibrated irreducibility null) is REJECTED for the frozen credential-free action-gating substrate and this one collection window; on this substrate class server-minted SESSION/CSRF/TOKEN values are essentially observation-bound (2/46 fields fired any armed rule, pypi.org cookie session_id via R_WALLCLOCK_B64 and reddit.com input.hidden jsc_token via R_CONST_SUBSTRING; the other 44 indicator fields fired no armed rule, and persistent session cookies are memory-repeat-explained at mean holdout 0.336). This is a valid scientific negative, not a design failure: MEASUREMENT_INVALID did not fire (46 indicator fields >= M_MIN_FIELDS 20; 27 registrable domains >= S_MIN_SITES 8; NC_PLANTED_RANDOM 0/1600 fired with all 11 rules armed; NC_LIVE_HTTPBIN_UUID 0/8 fired; PC_PLANTED_CLASSES power 1.0 on all 8 classes; NON_GET_REQUESTS=0; TRANSPORT_ERROR_RATE=0.01754 <= 0.30; frozen universe verbatim; rule family unchanged). NOT CLOSED AND NOT ADVANCED: per the frozen claim_ceiling and AGENTS.md physics discipline, a FALSIFIES outcome is bounded to this substrate class and window and does NOT close C-WEB-DYNAMICS or the Physics domain; no status above HYPOTHESIS is permitted (the audit PASS supports the negative reading, it does not validate the claim, so VALIDATED/PRODUCT_CORE are unavailable and SHIPPED is reserved for post-Director product promotion and is never emitted here). C-MEAS-VALID and C-CROSSSITE receive no event from this packet (spec.json.claim_ids=['C-WEB-DYNAMICS']). VALIDITY NUANCE CARRIED FORWARD, NONE OF WHICH INVERTS THE BRANCH: (i) the EXECUTE live-null construction was corrected after the first analysis (cookie map {'_': uuid} made R_SESSION_BIND fire 8/8; corrected to the faithful empty map because httpbin.org/uuid sets no cookies) with only the null gate affected and the pre-correction artifact preserved at derived/controls_initial_live_null_selfbind_bug.json (audit VF1, minor); (ii) the DESIGN-embedded irreducibility null fired 1/1600 (FP 0.000625, R_WALLCLOCK_B64) while the EXECUTE frozen-seed re-run fired 0/1600, so the EXECUTE-only false-positive bound for R_WALLCLOCK_B64 is weak and the DESIGN literal is carried alongside (audit VF2); (iii) PC_PLANTED_CLASSES is author-authored and certifies the code path, not the real-Web construct boundary (audit VF3). The branch is robust to all three: removing the two counted fields would only lower PV, never raise it above P_FLOOR or the CI upper above P_HI. The Director verified that all three freeze.json digests and all 14 result.json artifact sha256 digests re-verify on disk."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-37992957068",
+        "lane": "physics",
+        "created_at": "2026-10-09T21:21:54.940290+00:00",
+        "decision": "INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE",
+        "next_question": "On the frozen credential-free HTTP GET pool (extended only if a pre-freeze attainability certificate is satisfied), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY on the timescales relevant to re-observation scheduling - i.e., across separated collection windows and source vantage points, what is the empirical persistence/half-life of each intrinsic class (persistent BLOCK_403_CHALLENGE, persistent TRANSPORT_ERROR, transient RATE_LIMIT_429, CLEAN), and does a static endpoint-level denylist built from window T retain predictive validity at T+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks) so that the validity horizon and re-probe interval of the product's dead-end policy are estimable rather than assumed? Pre-register a two-sided falsifier (stationary vs non-stationary), a memory/constant null calibrated before freeze with demonstrated power, and a pre-freeze attainability certificate proving both persistently-blocked and recovering/newly-blocking endpoints are reachable across the window pair. This changes the object of study from next-request classification to endpoint state persistence/timescale and must not duplicate C-FRESHNESS (staleness of inherited content) or Runtime drift controls.",
+        "source_commit": "cb2051ccab80a62c9bc90fcd96a2cf97ff6dbb48",
+        "in_frozen_scope": true,
+        "lane_eligible": true,
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "RETAINED AT HYPOTHESIS - no advance and no downgrade. registry status is HYPOTHESIS (research/claims/registry.json; C-WEB-DYNAMICS owner_lanes physics+frontier; next_gate 'orthogonal falsifiable programs on effect factorization, barriers, timescales, geometry, multiscale dynamics or other measurable mechanisms') and this packet does not justify a change. The packet is measurement-valid (result.json status=COMPLETE; audit.json status=PASS with producer_claim_supported=true and required_fixes=[]) but its frozen branch resolves to INCONCLUSIVE: PRED disposition PRED_AMBIG (SKILL_LL=0.0051411334373070855 nats/request, endpoint-clustered 95% CI [-0.00933845159088395, 0.019388300216115453], far below delta_SKILL=0.05) plus a SCHED_ECON_PASS that audit VF4 shows is a mechanical consequence of the frozen arm definitions on endpoint-constant barriers (A_ADAPT stops on persistent BLOCK_403_CHALLENGE/UNAVAILABLE_403 while A_RETRY retries to J_max=5; identical success 0.3333). Per the frozen branch_precedence rule 7, PRED_AMBIG plus SCHED_ECON_PASS is INCONCLUSIVE (S2_MIXED requires an explicit FAIL, which did not occur), so no frozen gate passed at the claim level. The only positive-looking signals are endpoint identity, not dynamics beyond memory/similarity: full M_HISTORY held-out logloss 0.06601220151654957 vs strongest null B_ENDPOINT_CONST 0.07115333495385665, and the endpoint-identity ablation M_HISTORY_NOID SKILL_LL=-0.16769865144813678 (CI95 [-0.20766734593518785, -0.12518679747297579]). ONSET was unobserved (ONSET_n=0 of 1254 requests) so onset predictability is untested, not falsified (result V6); RECOVERY_SKILL_LL=-0.15683934234527497 (CI95 [-0.2578014307332254, -0.06481082932141478], n=13) is negative. VALIDATED and PRODUCT_CORE are unavailable (no claim-level PASS and no product-lane code); REJECTED would overstate an INCONCLUSIVE branch (the frozen S0/PRED_FAIL threshold was not reached and the audit explicitly does not close the sub-thread); MEASUREMENT_INVALID and BLOCKED do not apply because every measurement-validity prerequisite passed. Bounded to the frozen credential-free 57-endpoint stdlib-HTTP GET pool and one collection window; no inference to the Web, other windows, or JS/DOM/SPA/authenticated substrates."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -7394,17 +7583,17 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-37973239386",
+      "experiment_id": "EXP-PHYSICS-37992957068",
       "lane": "physics",
-      "created_at": "2026-10-09T18:26:35.300995+00:00",
-      "decision": "FALSIFIES_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_S0_PV_0_043478_LE_P_FLOOR_0_10_AND_SITE_CLUSTERED_CI95_UPPER_0_116279_LT_P_HI_0_25_AUDIT_STATUS_PASS_PRODUCER_CLAIM_SUPPORTED_TRUE_ALL_MEASUREMENT_INVALID_CONDITIONS_A_H_FALSE_CONTROLS_PASS_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_VALUE_LEVEL_PERSISTENCE_SUBHYPOTHESIS_H1_REJECTED_ON_FROZEN_CREDENTIAL_FREE_ACTION_GATING_SUBSTRATE_AND_WINDOW_NO_PROMOTION_NO_CONTINUE",
-      "next_question": "On credential-free public HTTP GET substrates (the frozen 57-endpoint universe plus any preregistered extension), are the ONSET and RECOVERY of server-side ACCESS BARRIERS - Cloudflare-style 403 challenge pages, 429 rate limits, and connection-level transport failures - predictable from observable request-history features (request rate, burstiness, inter-request spacing, per-session cookie-jar continuity/freshness, endpoint identity) BEYOND a frozen memory/constant null calibrated before freeze with demonstrated power, and separable from ordinary endpoint-level unavailability (403-as-block versus 403-as-legitimate-response, and 404/500 as non-barrier failures) - such that an agent can schedule re-observation to hold target success rate near the no-barrier baseline while issuing measurably fewer requests than unconditional retry? Pre-register a falsifier satisfiable in BOTH directions, a REQUIRED no-adaptation/unconditional-retry baseline expressed RELATIVE to it, and a pre-freeze arithmetic attainability certificate proving barrier events are reachable in the frozen pool (this packet observed 120 HTTP 403s, 65 429s and 24 transport errors, but those are incidental observations, not an attainability certificate, and a barrier-dynamics design must certify attainability before freeze rather than assume it).",
-      "source_commit": "0dd2acb3811cee78123f35ec30ecfcf715f20e2b",
+      "created_at": "2026-10-09T21:21:54.940290+00:00",
+      "decision": "INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE",
+      "next_question": "On the frozen credential-free HTTP GET pool (extended only if a pre-freeze attainability certificate is satisfied), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY on the timescales relevant to re-observation scheduling - i.e., across separated collection windows and source vantage points, what is the empirical persistence/half-life of each intrinsic class (persistent BLOCK_403_CHALLENGE, persistent TRANSPORT_ERROR, transient RATE_LIMIT_429, CLEAN), and does a static endpoint-level denylist built from window T retain predictive validity at T+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks) so that the validity horizon and re-probe interval of the product's dead-end policy are estimable rather than assumed? Pre-register a two-sided falsifier (stationary vs non-stationary), a memory/constant null calibrated before freeze with demonstrated power, and a pre-freeze attainability certificate proving both persistently-blocked and recovering/newly-blocking endpoints are reachable across the window pair. This changes the object of study from next-request classification to endpoint state persistence/timescale and must not duplicate C-FRESHNESS (staleness of inherited content) or Runtime drift controls.",
+      "source_commit": "cb2051ccab80a62c9bc90fcd96a2cf97ff6dbb48",
       "in_frozen_scope": true,
       "lane_eligible": true,
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "UNCHANGED at the registry status, and BOUNDED to the frozen credential-free stdlib-HTTP action-gating substrate and one collection window: no inference is licensed for JS/DOM/SPA/authenticated/edge/mobile/GraphQL tokens, other pools, other windows, or the Web at large. The producer (result.json status=COMPLETE, outcome=FALSIFIES, frozen branch S0) and the independent auditor (audit.json status=PASS, producer_claim_supported=true, required_fixes=[]) agree, and the Director upholds both. The auditor recomputed PREDICTABLE_PREVALENCE_POOLED=0.043478260869565216, N_INDICATOR_FIELDS=46, N_PREDICTABLE=2 and the site-clustered CI95 [0.0, 0.11627906976744186] bitwise against the producer, and every one of the eight frozen measurement-invalid conditions (a)-(h) is false. Frozen branch precedence resolves to S0: PV=0.0435 <= P_FLOOR=0.10 AND clustered CI upper=0.1163 < P_HI=0.25. BOUNDED TO WHAT THIS PACKET JUSTIFIES: the pre-registered H1 (pooled value-level predictability prevalence >= 0.25 with CI lower > 0.10 BEYOND the mandated B_MEMORY_REPEAT baseline and the calibrated irreducibility null) is REJECTED for the frozen credential-free action-gating substrate and this one collection window; on this substrate class server-minted SESSION/CSRF/TOKEN values are essentially observation-bound (2/46 fields fired any armed rule, pypi.org cookie session_id via R_WALLCLOCK_B64 and reddit.com input.hidden jsc_token via R_CONST_SUBSTRING; the other 44 indicator fields fired no armed rule, and persistent session cookies are memory-repeat-explained at mean holdout 0.336). This is a valid scientific negative, not a design failure: MEASUREMENT_INVALID did not fire (46 indicator fields >= M_MIN_FIELDS 20; 27 registrable domains >= S_MIN_SITES 8; NC_PLANTED_RANDOM 0/1600 fired with all 11 rules armed; NC_LIVE_HTTPBIN_UUID 0/8 fired; PC_PLANTED_CLASSES power 1.0 on all 8 classes; NON_GET_REQUESTS=0; TRANSPORT_ERROR_RATE=0.01754 <= 0.30; frozen universe verbatim; rule family unchanged). NOT CLOSED AND NOT ADVANCED: per the frozen claim_ceiling and AGENTS.md physics discipline, a FALSIFIES outcome is bounded to this substrate class and window and does NOT close C-WEB-DYNAMICS or the Physics domain; no status above HYPOTHESIS is permitted (the audit PASS supports the negative reading, it does not validate the claim, so VALIDATED/PRODUCT_CORE are unavailable and SHIPPED is reserved for post-Director product promotion and is never emitted here). C-MEAS-VALID and C-CROSSSITE receive no event from this packet (spec.json.claim_ids=['C-WEB-DYNAMICS']). VALIDITY NUANCE CARRIED FORWARD, NONE OF WHICH INVERTS THE BRANCH: (i) the EXECUTE live-null construction was corrected after the first analysis (cookie map {'_': uuid} made R_SESSION_BIND fire 8/8; corrected to the faithful empty map because httpbin.org/uuid sets no cookies) with only the null gate affected and the pre-correction artifact preserved at derived/controls_initial_live_null_selfbind_bug.json (audit VF1, minor); (ii) the DESIGN-embedded irreducibility null fired 1/1600 (FP 0.000625, R_WALLCLOCK_B64) while the EXECUTE frozen-seed re-run fired 0/1600, so the EXECUTE-only false-positive bound for R_WALLCLOCK_B64 is weak and the DESIGN literal is carried alongside (audit VF2); (iii) PC_PLANTED_CLASSES is author-authored and certifies the code path, not the real-Web construct boundary (audit VF3). The branch is robust to all three: removing the two counted fields would only lower PV, never raise it above P_FLOOR or the CI upper above P_HI. The Director verified that all three freeze.json digests and all 14 result.json artifact sha256 digests re-verify on disk."
+      "reason": "RETAINED AT HYPOTHESIS - no advance and no downgrade. registry status is HYPOTHESIS (research/claims/registry.json; C-WEB-DYNAMICS owner_lanes physics+frontier; next_gate 'orthogonal falsifiable programs on effect factorization, barriers, timescales, geometry, multiscale dynamics or other measurable mechanisms') and this packet does not justify a change. The packet is measurement-valid (result.json status=COMPLETE; audit.json status=PASS with producer_claim_supported=true and required_fixes=[]) but its frozen branch resolves to INCONCLUSIVE: PRED disposition PRED_AMBIG (SKILL_LL=0.0051411334373070855 nats/request, endpoint-clustered 95% CI [-0.00933845159088395, 0.019388300216115453], far below delta_SKILL=0.05) plus a SCHED_ECON_PASS that audit VF4 shows is a mechanical consequence of the frozen arm definitions on endpoint-constant barriers (A_ADAPT stops on persistent BLOCK_403_CHALLENGE/UNAVAILABLE_403 while A_RETRY retries to J_max=5; identical success 0.3333). Per the frozen branch_precedence rule 7, PRED_AMBIG plus SCHED_ECON_PASS is INCONCLUSIVE (S2_MIXED requires an explicit FAIL, which did not occur), so no frozen gate passed at the claim level. The only positive-looking signals are endpoint identity, not dynamics beyond memory/similarity: full M_HISTORY held-out logloss 0.06601220151654957 vs strongest null B_ENDPOINT_CONST 0.07115333495385665, and the endpoint-identity ablation M_HISTORY_NOID SKILL_LL=-0.16769865144813678 (CI95 [-0.20766734593518785, -0.12518679747297579]). ONSET was unobserved (ONSET_n=0 of 1254 requests) so onset predictability is untested, not falsified (result V6); RECOVERY_SKILL_LL=-0.15683934234527497 (CI95 [-0.2578014307332254, -0.06481082932141478], n=13) is negative. VALIDATED and PRODUCT_CORE are unavailable (no claim-level PASS and no product-lane code); REJECTED would overstate an INCONCLUSIVE branch (the frozen S0/PRED_FAIL threshold was not reached and the audit explicitly does not close the sub-thread); MEASUREMENT_INVALID and BLOCKED do not apply because every measurement-validity prerequisite passed. Bounded to the frozen credential-free 57-endpoint stdlib-HTTP GET pool and one collection window; no inference to the Web, other windows, or JS/DOM/SPA/authenticated substrates."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-37989728440",
@@ -7676,17 +7865,17 @@
       "source": "canonical_event"
     },
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-37973239386",
+      "experiment_id": "EXP-PHYSICS-37992957068",
       "lane": "physics",
-      "created_at": "2026-10-09T18:26:35.300995+00:00",
-      "decision": "FALSIFIES_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_S0_PV_0_043478_LE_P_FLOOR_0_10_AND_SITE_CLUSTERED_CI95_UPPER_0_116279_LT_P_HI_0_25_AUDIT_STATUS_PASS_PRODUCER_CLAIM_SUPPORTED_TRUE_ALL_MEASUREMENT_INVALID_CONDITIONS_A_H_FALSE_CONTROLS_PASS_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_VALUE_LEVEL_PERSISTENCE_SUBHYPOTHESIS_H1_REJECTED_ON_FROZEN_CREDENTIAL_FREE_ACTION_GATING_SUBSTRATE_AND_WINDOW_NO_PROMOTION_NO_CONTINUE",
-      "next_question": "On credential-free public HTTP GET substrates (the frozen 57-endpoint universe plus any preregistered extension), are the ONSET and RECOVERY of server-side ACCESS BARRIERS - Cloudflare-style 403 challenge pages, 429 rate limits, and connection-level transport failures - predictable from observable request-history features (request rate, burstiness, inter-request spacing, per-session cookie-jar continuity/freshness, endpoint identity) BEYOND a frozen memory/constant null calibrated before freeze with demonstrated power, and separable from ordinary endpoint-level unavailability (403-as-block versus 403-as-legitimate-response, and 404/500 as non-barrier failures) - such that an agent can schedule re-observation to hold target success rate near the no-barrier baseline while issuing measurably fewer requests than unconditional retry? Pre-register a falsifier satisfiable in BOTH directions, a REQUIRED no-adaptation/unconditional-retry baseline expressed RELATIVE to it, and a pre-freeze arithmetic attainability certificate proving barrier events are reachable in the frozen pool (this packet observed 120 HTTP 403s, 65 429s and 24 transport errors, but those are incidental observations, not an attainability certificate, and a barrier-dynamics design must certify attainability before freeze rather than assume it).",
-      "source_commit": "0dd2acb3811cee78123f35ec30ecfcf715f20e2b",
+      "created_at": "2026-10-09T21:21:54.940290+00:00",
+      "decision": "INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE",
+      "next_question": "On the frozen credential-free HTTP GET pool (extended only if a pre-freeze attainability certificate is satisfied), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY on the timescales relevant to re-observation scheduling - i.e., across separated collection windows and source vantage points, what is the empirical persistence/half-life of each intrinsic class (persistent BLOCK_403_CHALLENGE, persistent TRANSPORT_ERROR, transient RATE_LIMIT_429, CLEAN), and does a static endpoint-level denylist built from window T retain predictive validity at T+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks) so that the validity horizon and re-probe interval of the product's dead-end policy are estimable rather than assumed? Pre-register a two-sided falsifier (stationary vs non-stationary), a memory/constant null calibrated before freeze with demonstrated power, and a pre-freeze attainability certificate proving both persistently-blocked and recovering/newly-blocking endpoints are reachable across the window pair. This changes the object of study from next-request classification to endpoint state persistence/timescale and must not duplicate C-FRESHNESS (staleness of inherited content) or Runtime drift controls.",
+      "source_commit": "cb2051ccab80a62c9bc90fcd96a2cf97ff6dbb48",
       "in_frozen_scope": true,
       "lane_eligible": true,
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "UNCHANGED at the registry status, and BOUNDED to the frozen credential-free stdlib-HTTP action-gating substrate and one collection window: no inference is licensed for JS/DOM/SPA/authenticated/edge/mobile/GraphQL tokens, other pools, other windows, or the Web at large. The producer (result.json status=COMPLETE, outcome=FALSIFIES, frozen branch S0) and the independent auditor (audit.json status=PASS, producer_claim_supported=true, required_fixes=[]) agree, and the Director upholds both. The auditor recomputed PREDICTABLE_PREVALENCE_POOLED=0.043478260869565216, N_INDICATOR_FIELDS=46, N_PREDICTABLE=2 and the site-clustered CI95 [0.0, 0.11627906976744186] bitwise against the producer, and every one of the eight frozen measurement-invalid conditions (a)-(h) is false. Frozen branch precedence resolves to S0: PV=0.0435 <= P_FLOOR=0.10 AND clustered CI upper=0.1163 < P_HI=0.25. BOUNDED TO WHAT THIS PACKET JUSTIFIES: the pre-registered H1 (pooled value-level predictability prevalence >= 0.25 with CI lower > 0.10 BEYOND the mandated B_MEMORY_REPEAT baseline and the calibrated irreducibility null) is REJECTED for the frozen credential-free action-gating substrate and this one collection window; on this substrate class server-minted SESSION/CSRF/TOKEN values are essentially observation-bound (2/46 fields fired any armed rule, pypi.org cookie session_id via R_WALLCLOCK_B64 and reddit.com input.hidden jsc_token via R_CONST_SUBSTRING; the other 44 indicator fields fired no armed rule, and persistent session cookies are memory-repeat-explained at mean holdout 0.336). This is a valid scientific negative, not a design failure: MEASUREMENT_INVALID did not fire (46 indicator fields >= M_MIN_FIELDS 20; 27 registrable domains >= S_MIN_SITES 8; NC_PLANTED_RANDOM 0/1600 fired with all 11 rules armed; NC_LIVE_HTTPBIN_UUID 0/8 fired; PC_PLANTED_CLASSES power 1.0 on all 8 classes; NON_GET_REQUESTS=0; TRANSPORT_ERROR_RATE=0.01754 <= 0.30; frozen universe verbatim; rule family unchanged). NOT CLOSED AND NOT ADVANCED: per the frozen claim_ceiling and AGENTS.md physics discipline, a FALSIFIES outcome is bounded to this substrate class and window and does NOT close C-WEB-DYNAMICS or the Physics domain; no status above HYPOTHESIS is permitted (the audit PASS supports the negative reading, it does not validate the claim, so VALIDATED/PRODUCT_CORE are unavailable and SHIPPED is reserved for post-Director product promotion and is never emitted here). C-MEAS-VALID and C-CROSSSITE receive no event from this packet (spec.json.claim_ids=['C-WEB-DYNAMICS']). VALIDITY NUANCE CARRIED FORWARD, NONE OF WHICH INVERTS THE BRANCH: (i) the EXECUTE live-null construction was corrected after the first analysis (cookie map {'_': uuid} made R_SESSION_BIND fire 8/8; corrected to the faithful empty map because httpbin.org/uuid sets no cookies) with only the null gate affected and the pre-correction artifact preserved at derived/controls_initial_live_null_selfbind_bug.json (audit VF1, minor); (ii) the DESIGN-embedded irreducibility null fired 1/1600 (FP 0.000625, R_WALLCLOCK_B64) while the EXECUTE frozen-seed re-run fired 0/1600, so the EXECUTE-only false-positive bound for R_WALLCLOCK_B64 is weak and the DESIGN literal is carried alongside (audit VF2); (iii) PC_PLANTED_CLASSES is author-authored and certifies the code path, not the real-Web construct boundary (audit VF3). The branch is robust to all three: removing the two counted fields would only lower PV, never raise it above P_FLOOR or the CI upper above P_HI. The Director verified that all three freeze.json digests and all 14 result.json artifact sha256 digests re-verify on disk.",
+      "reason": "RETAINED AT HYPOTHESIS - no advance and no downgrade. registry status is HYPOTHESIS (research/claims/registry.json; C-WEB-DYNAMICS owner_lanes physics+frontier; next_gate 'orthogonal falsifiable programs on effect factorization, barriers, timescales, geometry, multiscale dynamics or other measurable mechanisms') and this packet does not justify a change. The packet is measurement-valid (result.json status=COMPLETE; audit.json status=PASS with producer_claim_supported=true and required_fixes=[]) but its frozen branch resolves to INCONCLUSIVE: PRED disposition PRED_AMBIG (SKILL_LL=0.0051411334373070855 nats/request, endpoint-clustered 95% CI [-0.00933845159088395, 0.019388300216115453], far below delta_SKILL=0.05) plus a SCHED_ECON_PASS that audit VF4 shows is a mechanical consequence of the frozen arm definitions on endpoint-constant barriers (A_ADAPT stops on persistent BLOCK_403_CHALLENGE/UNAVAILABLE_403 while A_RETRY retries to J_max=5; identical success 0.3333). Per the frozen branch_precedence rule 7, PRED_AMBIG plus SCHED_ECON_PASS is INCONCLUSIVE (S2_MIXED requires an explicit FAIL, which did not occur), so no frozen gate passed at the claim level. The only positive-looking signals are endpoint identity, not dynamics beyond memory/similarity: full M_HISTORY held-out logloss 0.06601220151654957 vs strongest null B_ENDPOINT_CONST 0.07115333495385665, and the endpoint-identity ablation M_HISTORY_NOID SKILL_LL=-0.16769865144813678 (CI95 [-0.20766734593518785, -0.12518679747297579]). ONSET was unobserved (ONSET_n=0 of 1254 requests) so onset predictability is untested, not falsified (result V6); RECOVERY_SKILL_LL=-0.15683934234527497 (CI95 [-0.2578014307332254, -0.06481082932141478], n=13) is negative. VALIDATED and PRODUCT_CORE are unavailable (no claim-level PASS and no product-lane code); REJECTED would overstate an INCONCLUSIVE branch (the frozen S0/PRED_FAIL threshold was not reached and the audit explicitly does not close the sub-thread); MEASUREMENT_INVALID and BLOCKED do not apply because every measurement-validity prerequisite passed. Bounded to the frozen credential-free 57-endpoint stdlib-HTTP GET pool and one collection window; no inference to the Web, other windows, or JS/DOM/SPA/authenticated substrates.",
       "source": "canonical_event"
     }
   }

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -27,6 +28,50 @@ def main():
     claims = load("research/claims/registry.json")
     lanes = load("research/lanes/registry.json")
     models = load("config/models.json")
+    # Historical research must remain visible to Research 2.0 direction, but
+    # historical verdict labels are not canonical Research 2.0 claims.
+    legacy_brief = load("codex/legacy_brief.json")
+    legacy_index = load("codex/legacy_artifact_index.json")
+    legacy_entries = legacy_index.get("artifacts") or []
+    require(len(legacy_entries) == legacy_index.get("count") == 1401, "legacy index coverage mismatch")
+    require(len({item["sha"] for item in legacy_entries}) == 1401, "duplicate legacy source artifact SHA")
+    require(
+        legacy_brief["source"]["blob_sha"] == legacy_index["source"]["blob_sha"]
+        == "9bb76113aeaf46d9aecdd8a38349a3a7741e57c3",
+        "legacy source pin mismatch",
+    )
+    # One cumulative Codex: protect the original blob, every historic artifact,
+    # the subsequent experiment packets, and both eras of the same claim ledger.
+    all_index = load("codex/index.json")
+    all_claim_state = load("codex/claim_state.json")
+    origin = all_index.get("historical") or {}
+    source_path = origin.get("source_path")
+    require(source_path == "codex/sources/0000-historical-evidence.md", "historical evidence not materialized into main Codex")
+    raw = (ROOT / source_path).read_bytes()
+    pinned_sha = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+    require(origin.get("source_blob_sha") == pinned_sha == legacy_index["source"]["blob_sha"], "cumulative historical source hash mismatch")
+    require(all_index.get("schema_version") == 3, "cumulative index schema mismatch")
+    require(origin.get("artifact_count") == len(origin.get("artifacts", [])) == 1401, "historical artifacts missing from unified index")
+    require(
+        {item["sha"] for item in origin["artifacts"]} == {item["sha"] for item in legacy_entries},
+        "unified index differs from historical artifact inventory",
+    )
+    require(len(all_index.get("experiments") or {}) > 0, "subsequent experiment history missing from cumulative index")
+    require(all_claim_state.get("schema_version") == 4, "cumulative claim ledger schema mismatch")
+    require(
+        set(all_claim_state.get("historical_precedents_by_claim") or {}) == {c["id"] for c in claims["claims"]},
+        "historical precedents missing from the ten continuous claim records",
+    )
+    require("cumulative scientific record" in text("SPIDER_CODEX.md"), "human readable Codex no longer cumulative")
+    require(
+        "legacy_history" in text("scripts/build_portfolio_snapshot.py"),
+        "global direction snapshot must include pre-2.0 findings",
+    )
+    require(
+        "LEGACY:" in text(".opencode/agents/spider_portfolio_director.md"),
+        "Global Director must screen relevant pre-2.0 duplicates",
+    )
+
 
     claim_ids = [c["id"] for c in claims["claims"]]
     require(len(claim_ids) == len(set(claim_ids)), "duplicate claim id")

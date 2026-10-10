@@ -1,13 +1,34 @@
-# SPIDER CODEX — Research 2.0
+# SPIDER CODEX — cumulative scientific record
 
-Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
+One SPIDER program, one continuous scientific history; Research 2.0 extends earlier experiments.
+Original evidence is kept byte-for-byte on main at codex/sources/0000-historical-evidence.md.
+The single codex/index.json combines original source artifact locations and subsequent experiment packets.
+The same codex/claim_state.json records bounded historical precedents and subsequent audited claim events.
 
-Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
-Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **434**. Coverage gaps: **0**. Quarantined packets: **2**.
+## Earlier research — preserved source, indexed into the same Codex
+
+Unique historical evidence artifacts: **1401** (source documents, NOT independent experiments).
+Immutable original Git blob: 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3.
+Search codex/index.json.historical.artifacts by original path, lane and line interval.
+Historical PASS tags are hints, not automatically validated scientific claims.
+
+| Historical evidence | Original reference | Bounded finding |
+|---|---|---|
+| P2-REPLAY-COST | pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b | Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings. |
+| P2-BLIND-COMPOSITION | pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda | G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference. |
+| P2-WP002B | archived Codex section 1 WP-002B | 901 true next-state transitions from 300 trajectories; rule DIM-ACC 0.6238, NN 0.6295, shuffle 0.5706, repeated trajectory holdouts; no website-holdout result. |
+| P2-WP003 | pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9 | Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap. |
+| P2-WP003B | pre2 artifact 4.237 sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e | Follow-up verified no leakage on 875 rows and reports action-only MSE 0.756 vs full MSE 0.735; pre-state mechanics <3% additional explained variance at tested granularity. |
+| P2-MIND2WEB | archived Codex section 1 Mind2Web V0.50 | Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions. |
+| P2-AUTOMATION | archived Codex section 2 | Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity. |
+
+## Subsequent finalized experiments — Research 2.0
+
+Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
+Use the same codex/index.json and codex/claim_state.json across both periods.
+Finalized subsequent packets: **435**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
-
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
 |---|---|---|---|---|---|
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT | `fb05ae4d41a0` |
@@ -444,6 +465,7 @@ Validated experiments: **434**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-FRONTIER-37984242167 | frontier | PASS | BLOCKED_DESIGN_DEFECT_RECEIPT_ADOPTED_UNSATISFIABLE_EMPTY_SAMPLING_FRAME_0_SEEDS_0_DEEP_0_HOSTS_PRE_FREEZE_CERTIFICATE_ABSENT_GATE_VIOLATION_FALSIFIER_0_0_UNREACHABLE_BOTH_DIRECTIONS_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_FALSE_NO_MEASUREMENT_TAKEN_NO_CLAIM_UPDATE_NO_PROMOTION_NO_CONTINUE_REQUIRES_V2_RE_DESIGN_UNDER_SAME_MANDATE | C-RESIDUAL-NOVELTY, C-WEB-DYNAMICS | `6538b12b1cb9` |
 | EXP-PRODUCT-37989728440 | product | REVISE | BOUNDED_SUBSTRATE_CLASS_NEGATIVE_ADOPTED_UNDER_FROZEN_OVERALL_FALSIFIES_ROW_C1_DYNAMIC_RANGE_CERTIFICATE_UNSATISFIABLE_AND_C5_NOVELTY_MONOTONICITY_FAILS_TREATMENT_TIES_COLD_ON_DETERMINISTIC_COUNTERS_FREEZE_GATE_NOT_ENFORCED_GOVERNANCE_DEFECT_RECORDED_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE | C-RESIDUAL-NOVELTY, C-PARAM-INHERIT, C-FRESHNESS | `18d172113168` |
 | EXP-GRAPH-37992949248 | graph | PASS | SUPPORTS_EXTRACTION_DEFECT_CONFIRMED_REPLICATED_AND_DECISIVE_FEASIBILITY_D1V_SINGLE_ANCHOR_TRANSPORT_COUPLED_TIME_STABLE_C_FRESHNESS_STAYS_EXPERIMENTAL_FOUR_ANCHOR_PART_II_ROUTE_PARKED_NO_PRODUCT_PROMOTION | C-FRESHNESS | `dbd76dc6ef00` |
+| EXP-PHYSICS-37992957068 | physics | PASS | INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE | C-WEB-DYNAMICS | `cb2051ccab80` |
 
 ## Effective claim state
 
@@ -460,7 +482,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-36287167610 |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37973239386 |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37992957068 |
 
 ## Latest raw claim events
 
@@ -477,7 +499,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 | intel |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 | product |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-36287167610 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37973239386 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-37992957068 | physics |
 
 ## Integrity accounting
 

@@ -9,7 +9,7 @@ Research 2.0 deliberately keeps two goals alive at once:
 1. build a usable execution-inheritance product core;
 2. continue broad falsification-first research into mechanisms that could radically reduce how agents search, explore, verify and repair Web work.
 
-The pre-2.0 scientific record is frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`. It is never rewritten by Research 2.0.
+SPIDER has **one cumulative scientific Codex**: `SPIDER_CODEX.md` and `codex/index.json` connect the original immutable source (`codex/sources/0000-historical-evidence.md`, 1,401 unique scientific artifacts) to all subsequent audited experiments. One claim ledger keeps the full history. Research 2.0 is the continuation of this research, not a separate scientific program.
 
 Active architecture: `SPIDER_ARCHITECTURE_RESEARCH2.md`.
 
@@ -40,7 +40,7 @@ Every claim-bearing run uses one standard experiment packet:
 
 `request.json + spec.json + prereg.md + freeze.json + result.json + report.md + provenance.json + audit.json + verdict.json + handoff.json`
 
-The active Codex compiler ingests finalized packets from all lane branches into `SPIDER_CODEX.md`. Negative, blocked, invalid and falsified outcomes are first-class entries.
+The active Codex compiler ingests finalized packets from all lane branches into the **same** historical-and-current `SPIDER_CODEX.md` and `codex/index.json`, verifies the unchanged original historical Git blob, and retains negative, blocked, invalid and falsified outcomes.
 
 ## Automation
 
