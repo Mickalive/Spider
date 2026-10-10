@@ -81,8 +81,8 @@ the per-engine fractions are measured only at EXECUTE.
 
 Frame gate **ADMISSION_GATE_V2**: `>= 10` admitted DEEP state items total, `>= 2` engines, `>= 3`
 per engine. **Passed with 40 items on 4 engines (10 each).** Every admitted URL was re-fetched on
-the same day the certificate was issued (2026-10-10) and returned final 2xx with the frozen
-`named_controls` value (0 mismatches across all 40).
+2026-10-10 (certificate issue) and again at the latest DESIGN re-run (2026-10-10T13:36:59Z) and
+returned final 2xx with the frozen `named_controls` value (0 mismatches across all 40).
 
 | Seed root | Host (engine) | Generator | Index kind (measured liveness) | Control-bearing DEEP (total) | Admitted |
 |---|---|---|---|---|---|
@@ -314,6 +314,13 @@ Either outcome changes a program-level architectural decision and is decision-ch
 Recorded inline in `spec.json#pre_freeze_control_certificate` (re-issued and re-verified
 2026-10-10T12:45:00Z by this DESIGN re-run):
 
+**Frame re-certification at the latest DESIGN re-run (2026-10-10T13:36:59Z):** the 4 seed roots
+and all **40/40** frozen admitted item URLs were re-fetched live; every item returned a final 2xx
+with the recorded `named_controls` (**0 mismatches**); one item (`nix.dev .../development`) redirects
+to its trailing-slash form (disclosed, VN-V12); aggregate channel facts and the 8/8 synthetic 404
+null reproduced exactly. Raw aggregate values are in
+`spec.json#pre_freeze_control_certificate.frame_admission_recheck` and `.design_probe_evidence`.
+
 1. **Pool frame gate PASS:** 40 admitted DEEP state items across 4 reachable host engines
    (`vitepress.dev` 10, `nix.dev` 10, `doc.rust-lang.org` 10, `rust-lang.github.io` 10); every
    admitted URL re-fetched final 2xx with the frozen named_controls value (0 mismatches).
@@ -340,7 +347,7 @@ measurement. Channel URL-set sizes are aggregate instrument facts only.
 | `baseline_identifiability` | PASS | `B_LINK_FOLLOWING_BFS` (hop, requests-to-first-reach) recomputable on the same frozen items under the same frozen policy; `B_DIRECT_URL_REPLAY` = 1 by construction; context baseline labeled inherited, never paired |
 | `control_sensitivity` | PASS | null fires on false accepts (8/8 synthetic 404, 0/8 in URL sets); positive instrument-liveness fires on parser/channel breakage at EXECUTE; channel set is discriminative on the pool (0 on two hosts vs 272/58/1933 on the others); per-item witness removed so controls cannot pre-prove `E` |
 | `treatment_liveness` | PASS | discovery probing executed live on the final pool (robots/sitemap/searchindex/hashmap/feed/json-ld scans, form action-attribute characterization); no treatment arm structurally incapable of being executable |
-| `freeze_artifacts_bound` | NOT_APPLICABLE | no separate mutable local artifact exists; the full frame and decision rule are inline in `spec.json`/`prereg.md`, hashed by the freezer (`freeze_artifacts = []`); EXECUTE must publish its code + raw logs as result artifacts |
+| `freeze_artifacts_bound` | NOT_APPLICABLE | no separate mutable local artifact exists; the full frame (all 40 URLs), live certificate and probe evidence are inline in `spec.json`, and the decision rule is in `spec.json`/`prereg.md`, all hashed by the freezer (`freeze_artifacts = []`). The parent-handoff dependency asking that "pool/crawl/certificate artifacts" be hashed is satisfied by construction (they are fields of the hashed `spec.json`), not by a separate file; `research/EXPERIMENT_PACKET.md` §2 (lines 50-51) requires `NOT_APPLICABLE` + empty list exactly in this case. EXECUTE's own code/logs are result artifacts, not DESIGN-time mutable dependencies |
 
 ---
 

@@ -114,6 +114,7 @@
     "VN-V14_item_url_forms": "Item URLs are stored in engine-native serving forms and fetched as-is: extensionless on vitepress.dev, nix.dev and rust-lang.github.io; '.html' on doc.rust-lang.org (extensionless returns 404 there). Matching always uses the canonical match key (fragment/query/slash/'.html' stripped) applied identically to items and channel outputs, so search-index '.html' entries match extensionless items and vice versa."
   },
   "decision_rule": {
+    "primary_decision_variable": "E = count over engines available at EXECUTE of (discovery_reachable_fraction_per_engine[host] >= threshold). E is the sole variable that maps to an outcome; the aggregate discovery_reachable_fraction and the per-channel fractions are reported diagnostics and are NOT themselves the decision variable.",
     "primary_metric": "discovery_reachable_fraction = count(admitted DEEP items with item_reachable_via_discovery=true) / count(admitted DEEP items)",
     "per_engine_metric": "discovery_reachable_fraction_per_engine[host]",
     "per_channel_metric": "discovery_reachable_fraction_per_channel[channel]",
@@ -201,7 +202,7 @@
     },
     "freeze_artifacts_bound": {
       "status": "NOT_APPLICABLE",
-      "reason": "No separate mutable local code/data/task-bank/fixture file exists at DESIGN time and none is created (DESIGN scope is spec.json and prereg.md only). The complete sampling frame (seed list + exact admitted DEEP item URLs with engine-native serving forms, hops and named-control counts) is materialized inline in spec.json#target_pool.admitted_items, and all channel/decision definitions are in prereg.md; the deterministic freezer records the SHA-256 of request.json, spec.json, prereg.md and design_review.json in freeze.json.hashes, so the frame and decision rule are identity-bound by the frozen packet. EXECUTE derives its implementation verbatim from the frozen prereg and must publish its code + raw logs as result artifacts; no unbound mutable artifact can change the interpretation of the frozen decision rule.",
+      "reason": "No separate mutable local code/data/task-bank/fixture file exists at DESIGN time and none is created (DESIGN scope is spec.json and prereg.md only). The complete sampling frame (seed list + exact admitted DEEP item URLs with engine-native serving forms, hops and named-control counts) is materialized inline in spec.json#target_pool.admitted_items, and all channel/decision definitions are in prereg.md; the deterministic freezer records the SHA-256 of request.json, spec.json, prereg.md and design_review.json in freeze.json.hashes, so the frame and decision rule are identity-bound by the frozen packet. EXECUTE derives its implementation verbatim from the frozen prereg and must publish its code + raw logs as result artifacts; no unbound mutable artifact can change the interpretation of the frozen decision rule. NOTE on the parent-handoff dependency (EXP-FRONTIER-37984242167 handoff.dependencies[0](d), which asked that 'pool/crawl/certificate artifacts' be hashed into freeze.json.artifact_hashes): that intent is satisfied here by CONSTRUCTION rather than by a separate artifact, because the pool (all 40 URLs), the live certificate and its probe evidence are inline fields of spec.json and therefore hashed into freeze.json.hashes as part of the canonical spec; there is no separate mutable file whose identity could drift. research/EXPERIMENT_PACKET.md section 2 lines 50-51 explicitly provides that when no mutable local dependency exists, freeze_artifacts_bound must be NOT_APPLICABLE with a reason and freeze_artifacts must be empty. EXECUTE's own freshly written code and raw logs are EXECUTE outputs (result artifacts), not DESIGN-time mutable dependencies, and cannot change the frozen decision rule.",
       "evidence_refs": [
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#target_pool.admitted_items",
         "research/experiments/EXP-FRONTIER-38013774272/spec.json#freeze_artifacts",
@@ -312,8 +313,31 @@
   "pre_freeze_control_certificate": {
     "created_by": "DESIGN runner (re-run of EXP-FRONTIER-38013774272), before freeze.json existed",
     "verified_at": "2026-10-10T12:45:00Z",
+    "re_verified_at": "2026-10-10T13:36:59Z",
     "all_verified": true,
     "policy_under_test": "the frozen BFS (same-host static-<a>, B=250, D=6) + the 5 channel definitions in operational_definitions.channel_definitions",
+    "frame_admission_recheck": {
+      "verified_at": "2026-10-10T13:36:59Z",
+      "method": "credential-free stdlib HTTP GET of every frozen admitted item URL + the 4 seed roots, same UA/timeout as the frozen substrate",
+      "admitted_items_total": 40,
+      "admitted_items_final_2xx_with_named_controls": 40,
+      "mismatches": 0,
+      "seeds_final_2xx": 4,
+      "redirected_items": [{"url": "https://nix.dev/manual/nix/2.34/development", "final": "https://nix.dev/manual/nix/2.34/development/"}],
+      "note": "This run re-fetched the 40 frozen admitted item URLs and the 4 seed roots live. The per-host fetched_html_by_hop histograms, hop values and control_bearing_DEEP_total counts below are from the DESIGN-time BFS crawl recorded at verified_at (2026-10-10T12:45:00Z); this recheck confirms the frozen frame is still resolvable and still carries named controls, which is the prerequisite for EXECUTE."
+    },
+    "design_probe_evidence": {
+      "verified_at": "2026-10-10T13:36:59Z",
+      "kind": "aggregate non-outcome-bearing instrument facts only (no per-item or per-engine reachability witness)",
+      "seed_root_status": {"vitepress.dev": 200, "nix.dev": 200, "doc.rust-lang.org": 200, "rust-lang.github.io": 200},
+      "channel_aggregates": {
+        "vitepress.dev": {"robots_status": 200, "robots_sitemap_urls": 272, "sitemap_xml_status": 200, "sitemap_xml_urls": 272, "rss_atom_links_on_root": 0, "json_ld_blocks_on_root": 0, "hashmap_json_status": 200, "hashmap_json_note": "present (12046 bytes); its keys are .md-relative ids, not URLs, so it yields 0 URL entries under the match rule (see channel_liveness)"},
+        "nix.dev": {"robots_status": 200, "robots_sitemap_urls": 58, "sitemap_xml_status": 200, "sitemap_xml_urls": 58, "rss_atom_links_on_root": 0, "json_ld_blocks_on_root": 0, "searchindex_doc_url_entries": 1933},
+        "doc.rust-lang.org": {"robots_status": 200, "robots_sitemap_urls": 3, "sitemap_xml_status": 404, "sitemap_xml_urls": 0, "rss_atom_links_on_root": 0, "json_ld_blocks_on_root": 0},
+        "rust-lang.github.io": {"robots_status": 404, "robots_sitemap_urls": 0, "sitemap_xml_status": 404, "sitemap_xml_urls": 0, "rss_atom_links_on_root": 0, "json_ld_blocks_on_root": 0}
+      },
+      "null_control_recheck": {"synthetic_pages_404": "8/8", "synthetic_ids_in_parsed_url_sets": 0}
+    },
     "pool_frame": {
       "admitted_DEEP_items_total": 40,
       "engines": 4,
@@ -425,6 +449,6 @@
         "page_status": {"spider-nonexistent-item-38013774": 404, "spider-fake-deep-item-38013774": 404}
       }
     },
-    "note": "The certificate proves (a) the DEEP state-item frame gate passes on 4 reachable hosts (40 admitted items, each re-fetched final 2xx with the recorded named_controls on 2026-10-10), (b) at least one discovery channel returns a non-empty parsable same-host URL set on at least one host (three channels live: vitepress.dev ROBOTS_SITEMAP/SITEMAP_XML 272, nix.dev ON_SITE_SEARCH 1933 doc_urls), and (c) synthetic items are absent from every parsed URL set and 404 on the item page. It deliberately does NOT compute any per-item or per-engine reachability witness and does NOT compute the aggregate discovery_reachable_fraction, which is the confirmatory measurement. Channel URL-set sizes are aggregate instrument facts only."
+    "note": "The certificate proves (a) the DEEP state-item frame gate passes on 4 reachable hosts (40 admitted items, each re-fetched final 2xx with the recorded named_controls on 2026-10-10), (b) at least one discovery channel returns a non-empty parsable same-host URL set on at least one host (three channels live: vitepress.dev ROBOTS_SITEMAP/SITEMAP_XML 272, nix.dev ON_SITE_SEARCH 1933 doc_urls), and (c) synthetic items are absent from every parsed URL set and 404 on the item page. It deliberately does NOT compute any per-item or per-engine reachability witness and does NOT compute the aggregate discovery_reachable_fraction, which is the confirmatory measurement. Channel URL-set sizes are aggregate instrument facts only. Re-verified live at this DESIGN run (2026-10-10T13:36:59Z): 4/4 seed roots final 2xx; 40/40 admitted items final 2xx with the recorded named controls (0 mismatches); aggregate channel facts and the 8/8 synthetic 404 null reproduced exactly (see frame_admission_recheck and design_probe_evidence)."
   }
 }
