@@ -171,7 +171,7 @@ Metrics (stable identifiers, reused from parent + two task-conversion metrics):
 - `mean_inference_latency_s`, `mean_completion_tokens` — economics/cost records per candidate
 - `candidate_cleared_bar` (derived bool), `census_completed` (derived bool)
 
-Success threshold (per candidate): cleared bar iff >= 3/5 episodes with BOTH step1-parseable >= 3/5 AND task success >= 3/5.
+Success threshold (per candidate): cleared bar iff `parseable_action_rate_step1 >= 0.6` AND `task_success_rate >= 0.6` over the frozen 5-episode arm (equivalently, >= 3/5 episodes parsed at step 1 AND >= 3/5 episodes completed).
 
 ---
 
@@ -181,7 +181,7 @@ Run arms in order; evaluate in the order below. Exactly one outcome is written t
 
 0. If PC-SCRIPTED-ORACLE < 5/5 → OUTCOME=MEASUREMENT_INVALID (task/verifier cannot reward a correct click-then-answer; any candidate 0/5 is uninterpretable).
 1. If decoding infra fails PC on BOTH M-7B-QWEN and M-3B-QWEN → OUTCOME=MEASUREMENT_INVALID (decoding infrastructure failure, not model capability). Candidates with PC-fail are NOT_MEASURED-PC-FAIL.
-2. Run CV-UNDERSPEC-REPLICATION (7B, 3B). If either model under PR-UNDERSPEC CLEARS the bar or the loop signature is absent in both models → OUTCOME=MEASUREMENT_INVALID (environment not continuous with parent; ablation unidentifiable). Raw observations still reported.
+2. Run CV-UNDERSPEC-REPLICATION (7B, 3B). Replication PASS iff for EACH of M-7B-QWEN and M-3B-QWEN: `task_success_rate == 0/5` AND `step0_reveal_click_rate >= 0.8` AND >= 1 loop-signature episode. If replication does NOT PASS (any condition unmet on either model — including any clear under PR-UNDERSPEC, any task success > 0/5, click rate < 4/5, or absent loop signature) → OUTCOME=`MEASUREMENT_INVALID` with reason `REPLICATION-DEVIATION` (environment not byte-continuous with parent; ablation unidentifiable). Raw observations still reported.
 3. Run treatment. If any measured candidate clears the bar under PR-SPECIFIED → OUTCOME=SUPPORTS (early stop; role/bar/hashes recorded). Readiness condition (3) satisfied by proven same-model driver; benchmark executable as frozen.
 4. If replication passed and every measured candidate failed:
    - a. If M-14B-QWEN was attained and measured and failed → OUTCOME=FALSIFIES. Demonstrable ceiling = {M-0.5B-QWEN (carried), M-3B-QWEN, M-7B-QWEN, M-14B-QWEN, B-POLLINATIONS-PROXY (carried)} = the full credential-free endpoint/model set actually available (E-LOCAL-LLAMA range + E-POLLINATIONS-OPENAI; models.github.ai is an interception, not an endpoint). Issue explicit close/re-scope recommendation (below).
@@ -285,6 +285,7 @@ DESIGN actively tried to disprove its own satisfiability before freeze. Findings
 - **SA-03 (MAJOR, fixed)**: the 14B RAM precondition was stated as "14 GiB free"; actual free RAM is ~10.8 GiB (~14.1 GiB available). The 14B arm is now explicitly attainability-gated on available memory (≥ ~11 GiB); non-attainment ⇒ `NOT_ATTEMPTED-RAM` and `MIXED` (14B UNRESOLVED), never `FALSIFIES`.
 - **SA-04 (MINOR, fixed)**: the 7B single-file URL 404s; only split shards exist. The 404 is recorded as a pre-freeze probe result so EXECUTE does not retry it or record a spurious provisioning failure.
 - **SA-05 (MINOR, fixed)**: the first draft's FALSIFIES branch implicitly assumed 14B attainment; the decision rule now separates FALSIFIES (14B measured and failing) from MIXED (14B unresolved).
+- **SA-06 (BLOCKING, fixed)**: the first-drafted replication gate had an undefined middle — a partial deviation (e.g., 1/5 task success under PR-UNDERSPEC, above the parent's 0/5 but below the 0.6 clear bar) matched no branch and would have let the run proceed to the treatment arm without a continuity PASS. Replication is now an all-or-nothing gate (PASS requires the full conjunction per model; ANY unmet condition ⇒ `MEASUREMENT_INVALID` / `REPLICATION-DEVIATION`), as mirrored in `spec.pre_freeze_satisfiability_dry_run.self_attack_findings.SA-06`.
 
 ### Branch-reachability matrix (every branch reachable; no empty class)
 
@@ -293,7 +294,7 @@ DESIGN actively tried to disprove its own satisfiability before freeze. Findings
 | SUPPORTS | any measured candidate clears the bar under PR-SPECIFIED |
 | FALSIFIES | PC-SCRIPTED-ORACLE 5/5, replication PASS, and 7B/3B/14B all measured and failing |
 | MIXED | replication PASS and 7B/3B fail, but 14B is NOT attempted/measured (RAM/URL/disk/run-error/PC-fail) |
-| MEASUREMENT_INVALID | scripted-oracle < 5/5; or PC-JSON fails on both 7B and 3B; or a candidate clears under PR-UNDERSPEC; or loop signature absent in both models; or infra failure |
+| MEASUREMENT_INVALID | scripted-oracle < 5/5; or PC-JSON fails on both 7B and 3B; or replication not PASS (any deviation from the parent's deterministic pattern on either model, incl. a clear under PR-UNDERSPEC); or infra failure |
 
 ---
 
