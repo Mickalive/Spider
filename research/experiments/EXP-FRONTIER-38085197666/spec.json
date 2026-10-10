@@ -1,50 +1,274 @@
 {
+  "spec_schema_version": 2,
   "experiment_id": "EXP-FRONTIER-38085197666",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": ["C-CROSSSITE"],
+  "design_contract_version": 2,
+  "director_mandate": {
+    "cycle_id": "38084662468",
+    "action": "PIVOT",
+    "target_claim": "C-CROSSSITE",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "USE",
+    "binding_question_summary": "On the credential-free GET-only stdlib-HTTP substrate, over a frozen multi-host pool confirmed during DESIGN by a pre-freeze attainability certificate to contain DEEP (hop>=3) state-carrying items on at least two distinct hosts/engines, does site-native discovery (robots.txt/sitemap, on-site search, RSS/Atom, JSON-LD enumeration) let a fresh agent reach those DEEP items in O(1) GETs (K<=3), and is the unconditional cost of obtaining one fresh valid instance flat or growing in the item's shortest-path hop distance - deciding whether persistent cross-episode state can buy a work reduction that grows with Web depth, or whether fresh-instance acquisition is a constant-cost procedure and effort should move to procedure caching and substrate expansion? The v1 freeze of this exact mandate (EXP-FRONTIER-37984242167) committed an empty sampling frame (0 seeds, 0 DEEP, 0 hosts, absent certificate, 0/0 falsifier), so the question is entirely unmeasured; this v2 re-design repairs the sampling frame and both falsifier branches before freeze."
+  },
+  "question": "Over the frozen multi-host pool in target_pool (267 admitted DEEP state-carrying pages: mdBook 108 across doc.rust-lang.org / rust-lang.github.io / wasm-bindgen.github.io, Sphinx 159 on docs.pytest.org), confirmed during DESIGN by the frozen same-host static-<a> BFS (depth<=6, budget B=250) to contain DEEP (hop>=3) state-carrying pages on >=2 distinct generator engines and >=2 distinct hosts (ADMISSION_GATE_V2 PASS), what fraction of those admitted DEEP pages is reachable in <=K=3 fresh-agent GETs (up to 2 discovery GETs + 1 item-page GET) via ANY of the five frozen cold-start discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD); and, descriptively, does reachability scale with hop? The preregistered materiality threshold 0.50 on >=2 distinct host/engine units decides whether shortest-path hop is NOT a fundamental acquisition-cost barrier (discovery/substrate expansion, not path caching, is the target) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface.",
+  "hypothesis": "H1 (SUPPORTS). On the frozen pool, site-native discovery reaches a material fraction (>=0.50) of admitted DEEP pages in <=K=3 GETs on >=2 distinct host/engine units, because at least two pool hosts publish a machine-readable enumeration of their pages (robots.txt Sitemap directive -> sitemap.txt/sitemap.xml). If H1 holds, shortest-path hop is NOT a fundamental acquisition-cost barrier for discovery-enabled acquisition, persistent path/procedure caching is not the primary optimization target, and effort should move to discovery-channel coverage and substrate expansion. H0 (negative branch). Discovery reaches <0.50 of admitted DEEP pages on all but at most one host/engine unit; then even with site-native discovery, fresh deep-instance acquisition remains path-bound and persistence of paths/procedures retains a measurable, depth-dependent amortization surface whose break-even can be computed from real re-derivation cost. The experiment does not presuppose which holds.",
+  "falsifier": {
+    "type": "two_sided_arithmetic",
+    "unit": "host/engine unit = distinct registrable host of the seed's final root (per-engine generator grouping reported descriptively)",
+    "primary_metric": "discovery_reachable_fraction_per_host[host]",
+    "materiality_threshold": 0.50,
+    "min_units_with_threshold": 2,
+    "k_get_budget": 3,
+    "positive_branch": "SUPPORTS iff the number E of host/engine units with discovery_reachable_fraction_per_host >= 0.50 is >= 2.",
+    "mixed_branch": "MIXED iff E == 1.",
+    "negative_branch": "FALSIFIES iff E == 0.",
+    "admission_gate": "ADMISSION_GATE_V2: total admitted DEEP pages >= 10 AND >= 2 distinct generator engines with >= 3 admitted DEEP pages each AND >= 2 distinct hosts with >= 3 admitted DEEP pages each. Verified during DESIGN and re-evaluated at EXECUTE; failure -> status=MEASUREMENT_INVALID with the exact shortfall, never a scientific branch.",
+    "per_channel_disclosure": "Mandatory per-channel coverage discovery_reachable_fraction_per_channel[channel]; any channel yielding zero admitted DEEP items is explicitly listed as a zero channel, not treated as null.",
+    "arithmetic_realizability": "The denominator (number of admitted DEEP pages) is >= 10 by construction and the per-host fraction lies in [0,1], so E in {0,1,...} is well-defined and every branch is reachable; the local stdlib fixtures CAL_DISCOVERABLE_FIXTURE (fraction 1.0) and CAL_OPAQUE_FIXTURE (fraction 0.0) bracket the 0.50 boundary from both sides.",
+    "what_each_branch_means": {
+      "SUPPORTS": "shortest-path hop is not a fundamental acquisition-cost barrier; discovery and substrate expansion are the optimization target; persistent path caching is de-prioritized with recorded evidence.",
+      "FALSIFIES": "fresh deep-instance acquisition remains path-bound; persistent paths/procedures retain a computable, depth-dependent amortization surface and the break-even can be derived from the recorded re-derivation cost.",
+      "MIXED": "the cross-host contrast is split; no program-level decision change and the next experiment must resolve discovery-channel coverage or pool composition."
     }
   },
-  "freeze_artifacts": []
+  "baselines": [
+    {
+      "id": "B_LINK_FOLLOWING_BFS",
+      "role": "comparator (link-following re-derivation); supplies the hop depth and the cumulative GET/byte cost of the item-blind same-host BFS up to each admitted DEEP page",
+      "policy": "frozen item-blind same-host BFS from the seed root, document order, budget B=250, depth cap D=6 (this experiment's pool-construction pass)",
+      "cost_units": ["requests", "bytes"],
+      "expected": ">= hop+1 for every admitted page (detour-free chain is the degenerate equality case)"
+    },
+    {
+      "id": "B_PERSISTED_PATH_REACQUISITION",
+      "role": "re-acquisition via persisted shortest path (inherited from EXP-FRONTIER-37950626378)",
+      "policy": "GET each node on the frozen shortest path seed -> ... -> item page in hop order; cost = hop+1 GETs",
+      "cost_units": ["requests", "bytes"],
+      "expected": "near-linear in hop; strictly cheaper than B_LINK_FOLLOWING_BFS whenever the BFS takes a detour"
+    },
+    {
+      "id": "B_DIRECT_URL_REPLAY",
+      "role": "absolute lower bound (inherited from EXP-FRONTIER-37950626378)",
+      "policy": "one GET to the known item page URL",
+      "cost_units": ["requests"],
+      "expected": "1 GET for every hop"
+    },
+    {
+      "id": "B_NO_DISCOVERY",
+      "role": "floor comparator",
+      "policy": "CAL_OPAQUE_FIXTURE: a local stdlib site with the same deep structure but no robots/sitemap/feed/search/JSON-LD; discovery must yield 0",
+      "cost_units": ["fraction"],
+      "expected": "0.0 by construction"
+    }
+  ],
+  "positive_control": {
+    "id": "PC_DISCOVERY_CHANNEL_REACHABILITY",
+    "description": "At least one frozen discovery channel must be live and parsable on at least one host of the frozen pool, and a preregistered true-hop-1 page must be recoverable by the frozen BFS.",
+    "pass_criterion": "(a) at least one of ROBOTS_SITEMAP / SITEMAP_XML / ON_SITE_SEARCH / RSS_ATOM / JSON_LD returns HTTP 200 with parsable entries on >= 1 pool host, verified live during DESIGN with evidence in pre_freeze_control_certificate; AND (b) the frozen BFS returns found==true with hop==1 for the preregistered target https://doc.rust-lang.org/book/ch01-01-installation.html.",
+    "evidence_required": "HTTP status, content-type and parsed entry count per verified channel per host; hop observed for the true-hop-1 target."
+  },
+  "null_control": {
+    "id": "NC_SYNTHETIC_UNREACHABLE_ITEM",
+    "description": "Synthetic item URLs that do not exist on any pool host, probed through every discovery channel. A channel must yield zero reachable items, and the synthetic item page must be non-2xx.",
+    "pass_criterion": "For each of the 5 channels, the synthetic probe returns success == false across the pool hosts (0 reachable URLs).",
+    "synthetic_items": ["spider-nonexistent-38085197666-a.html", "spider-nonexistent-38085197666-b.html"],
+    "purpose": "Validates that discovery channels do not produce false-positive reachability via search suggestions, redirect chains or parser errors."
+  },
+  "measurement_validity": [
+    {
+      "id": "VN-V1_substrate",
+      "rule": "Credential-free GET-only stdlib HTTP (urllib + http.server for local fixtures). No browser, JS, Docker, model key, credential, cookie, write verb or tokenizer. GET = one logical request with followed redirects; a separate redirect/validation fetch consumes the K spare."
+    },
+    {
+      "id": "VN-V2_frozen_pool",
+      "rule": "The seed list is frozen at DESIGN in target_pool.seeds; EXECUTE re-runs the frozen BFS (depth<=6, budget 250) to reconstruct the pool and re-applies ADMISSION_GATE_V2. If the live pool no longer satisfies the gate, status=MEASUREMENT_INVALID with the exact shortfall; the cross-engine contrast is never reported as FLAT from an empty or single-engine frame."
+    },
+    {
+      "id": "VN-V3_discovery_channels",
+      "rule": "Five frozen cold-start channels: (1) ROBOTS_SITEMAP: GET /robots.txt -> Sitemap: directives -> GET sitemap(s) -> parse <loc> or plain-text URL lines; (2) SITEMAP_XML: GET /sitemap.xml, /sitemap_index.xml, /sitemap-index.xml directly -> parse; (3) ON_SITE_SEARCH: GET the seed root, locate a server-side search form/action, GET action?name=<item path segment>, parse result links; (4) RSS_ATOM: GET the seed root, follow a <link rel=alternate type=application/rss+xml|atom+xml>, parse entry links; (5) JSON_LD: GET the seed root (a cold hub resource, never the item page), parse application/ld+json and collect url/@id/mainEntityOfPage/contentUrl values. All channels are cold-start: the item page is fetched only AFTER the item URL is discovered."
+    },
+    {
+      "id": "VN-V4_k_budget",
+      "rule": "K=3 total GETs per item per channel = up to DISCOVERY_GETS_MAX=2 discovery GETs + exactly 1 item-page GET. A channel succeeds for an item iff the item URL (host+path, query and trailing slash normalized) is discovered within the discovery budget AND the item page returns a 2xx status within K. Sitemap-index recursion or multi-sitemap fetches beyond 2 discovery GETs do not count as success."
+    },
+    {
+      "id": "VN-V5_hop_confirmation",
+      "rule": "Shortest-path hop for each admitted page is computed by the SAME frozen same-host static-<a> BFS (document order, budget 250, depth 6) used to build the pool. Hop and discovery reachability are distinct observables measured on the same item set."
+    },
+    {
+      "id": "VN-V6_channel_independence",
+      "rule": "Each channel is probed independently with its own fresh budget. An item counts as reachable if ANY channel succeeds. Per-channel coverage is reported separately and a zero-yield channel is explicitly listed."
+    },
+    {
+      "id": "VN-V7_no_token_latency_cost",
+      "rule": "No tokenizer, latency timer or dollar-cost model. GET request count and response-body bytes are the only cost bases; token fields are null."
+    },
+    {
+      "id": "VN-V8_static_parser_only",
+      "rule": "Stdlib html.parser only. Only static <a href>, <form>/<input>/<select> (named controls), <link rel=alternate rss/atom> and <script type=application/ld+json> are detectable. JS-rendered navigation, JS search indexes (e.g. mdBook searchindex.js, Sphinx client search) and JS-injected JSON-LD are missed and disclosed as representation loss."
+    },
+    {
+      "id": "VN-V9_attainability_certificate",
+      "rule": "The pre-freeze control certificate (spec.json.pre_freeze_control_certificate) must be all_verified=true with live evidence before freeze: (a) pool admits DEEP pages on >=2 engines and >=2 hosts; (b) >=1 channel probeable on >=1 pool host; (c) null control yields 0 reachable. This experiment's DESIGN satisfied all three (see certificate)."
+    },
+    {
+      "id": "VN-V10_single_episode",
+      "rule": "Each item-channel probe is a fresh episode (no cross-item caching of discovered URLs within the experiment). This measures fresh-agent acquisition cost, not amortized multi-item discovery."
+    },
+    {
+      "id": "VN-V11_determinism",
+      "rule": "SESSIONS=2 independent sessions per item are run under the frozen policy. Any item whose channel success vector differs between sessions is flagged and excluded with a recorded reason; the excluded count is reported."
+    },
+    {
+      "id": "VN-V12_availability",
+      "rule": "If a seed host is unreachable at EXECUTE time, record status=BLOCKED and the exact error; network failure is never encoded as a scientific branch. DESIGN confirmed all seed hosts reachable and the channel-liveness certificate on 2026-10-10."
+    },
+    {
+      "id": "VN-V13_page_unit",
+      "rule": "The admitted item unit is the state-carrying PAGE (page_url with >=1 named <input>/<select>), item_id = sha256(host + '|' + page_url). This resolves a v1 ambiguity: control-level tuples over-weight engines with many named controls per page (Sphinx 9/page vs mdBook 1/page). Control-level tuples are reported descriptively only."
+    },
+    {
+      "id": "VN-V14_pool_dedup",
+      "rule": "A page reachable from multiple seeds is admitted once at its minimum same-host static-hop, attributed to the seed giving that minimum hop (ties broken by lexicographically smallest seed), and attributed to the host/engine of the winning seed's final root."
+    },
+    {
+      "id": "VN-V15_json_ld_cold",
+      "rule": "JSON_LD is a cold-start channel: structured data is read from the seed root (or another discovery-obtained hub), never from the item page. A site that exposes JSON-LD only on the item page earns no JSON_LD credit; self-referential item-page JSON-LD is disclosed, not scored."
+    }
+  ],
+  "metrics": {
+    "primary": {
+      "discovery_reachable_fraction": "count(admitted DEEP pages with any_success) / count(admitted DEEP pages)",
+      "discovery_reachable_fraction_per_host[host]": "same fraction computed per distinct host (decision unit)",
+      "discovery_reachable_fraction_per_engine[engine]": "same fraction computed per generator engine (mdBook / Sphinx), descriptive"
+    },
+    "secondary": {
+      "discovery_reachable_fraction_per_channel[channel]": "fraction of admitted DEEP pages reachable via that channel alone",
+      "discovery_reachable_fraction_by_hop[3..6]": "hop-stratified reachability (path-bound vs flat diagnostic)",
+      "median_discovery_gets_reachable": "median total GETs among successful channel probes",
+      "engines_meeting_threshold": "E = number of host units with fraction >= 0.50"
+    },
+    "controls_metric": "controls.<id>.pass for PC_DISCOVERY_CHANNEL_REACHABILITY, NC_SYNTHETIC_UNREACHABLE_ITEM, CAL_DISCOVERABLE_FIXTURE, CAL_OPAQUE_FIXTURE, ADMISSION_GATE_V2, PC_HOP_CONFIRMATION"
+  },
+  "resolved_design_decisions": {
+    "final_seed_list": "5 frozen seeds: doc.rust-lang.org/book/ (mdBook), doc.rust-lang.org/edition-guide/ (mdBook), rust-lang.github.io/rust-clippy/master/ (mdBook), wasm-bindgen.github.io/wasm-bindgen/ (mdBook), docs.pytest.org/en/stable/ (Sphinx).",
+    "synthetic_identifier_format": "spider-nonexistent-38085197666-<a|b>.html appended to a pool host; expected 0 reachable and non-2xx item page.",
+    "search_query_parameter_mapping": "Use the named control on the located search form (via_input name) or 'q' default; query value = last path segment of the item URL with a trailing .html/.php/.htm/.asp/.aspx stripped; discovery GETs capped at 2.",
+    "json_ld_vocabulary": "Collect 'url', '@id', 'mainEntityOfPage', 'contentUrl', 'sameAs' from any @graph/ItemList/WebPage/BreadcrumbList/SearchAction objects; cold-start only (seed root hub).",
+    "sitemap_gz_handling": "sitemap files are read as fetched text; if a response is gzip-encoded and not transparently decoded by urllib, the channel records 0 entries (disclosed). Plain-text sitemaps (one URL per line) and XML <loc> sitemaps are both parsed.",
+    "redirect_accounting": "One logical GET with redirects followed counts as 1; a separate validation GET, if issued, consumes the K spare. Channels never exceed DISCOVERY_GETS_MAX discovery GETs.",
+    "engine_definition": "Generator engine fingerprint: mdBook (doc.rust-lang.org, rust-lang.github.io, wasm-bindgen.github.io) vs Sphinx (docs.pytest.org). The decision unit is the distinct host (v1 'host/engine' bracket [host]); engine grouping is reported descriptively.",
+    "item_unit": "State-carrying page (>=1 named <input>/<select>); item_id = sha256(host + '|' + page_url); control-level tuples supplementary (VN-V13)."
+  },
+  "decision_rule": "Frozen, evaluated in order. Step 0 controls: run CAL_DISCOVERABLE_FIXTURE (expect fraction 1.0), CAL_OPAQUE_FIXTURE (expect 0.0), PC_HOP_CONFIRMATION (expect found & hop 1), NC_SYNTHETIC_UNREACHABLE_ITEM (expect 0). Any control failure -> status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE (infrastructure/substrate failure, never a scientific answer). Step 1 admission: reconstruct the pool from the frozen seeds under the frozen BFS; apply ADMISSION_GATE_V2; failure -> status=MEASUREMENT_INVALID with exact shortfall. Step 2 measurement: for each admitted DEEP page and each of the 5 channels in 2 sessions, compute channel success within K=3; drop items with inter-session disagreement (VN-V11). Step 3: compute discovery_reachable_fraction (pooled), per-host, per-engine, per-channel, by-hop; E = number of host units with per-host fraction >= 0.50. Outcome: SUPPORTS iff E >= 2 (status=COMPLETE); MIXED iff E == 1; FALSIFIES iff E == 0. No outcome is recorded as a failure; only genuine measurement invalidity is MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If SUPPORTS: shortest-path hop is not a fundamental acquisition-cost barrier for discovery-enabled acquisition; SPIDER should optimize discovery-channel coverage and substrate expansion rather than path/procedure caching. C-CROSSSITE gains a bounded positive that a reusable discovery procedure transfers across >=2 host/engine units. Freshness (C-FRESHNESS) and delta-repair become lower priority for the acquisition phase. No mechanism is promoted to Product Core by this experiment.",
+  "product_consequence_negative": "If FALSIFIES: even with site-native discovery, fresh deep-instance acquisition remains path-bound; persistence of paths/procedures retains a measurable depth-dependent amortization surface and the break-even reuse count can be computed from the recorded re-derivation cost. SPIDER's memory architecture should continue investing in path/procedure persistence with freshness guards. If MIXED: no program-level decision change; the next experiment must resolve discovery-channel coverage or pool composition.",
+  "estimated_cost": "DESIGN already paid: pool-construction BFS (<=5 seeds x 250 GETs) plus channel-liveness/null/calibration probes. EXECUTE: pool reconstruction <=1250 GETs; discovery 267 admitted pages x 5 channels x <=3 GETs x 2 sessions, bounded by the cache and budget (~<=8000 GETs) plus ~125 MB; wall time target <= 45 min. Stdlib only; no browser, Docker, key, credential, cookie or tokenizer.",
+  "expected_information_gain": "High. The question was left entirely unmeasured by v1 (empty frame, 0/0 falsifier). This is the first measurement of whether site-native discovery collapses the depth cost on a genuinely multi-engine/multi-host pool, with both falsifier branches live (local fixtures produce 0.0 and 1.0) and the decision threshold 0.50 bracketed by live instrument behavior. Either direction changes a program-level architecture decision (discovery/substrate expansion vs path/procedure persistence).",
+  "target_pool": {
+    "seeds": [
+      {"seed": "https://doc.rust-lang.org/book/", "host": "doc.rust-lang.org", "engine": "mdBook"},
+      {"seed": "https://doc.rust-lang.org/edition-guide/", "host": "doc.rust-lang.org", "engine": "mdBook"},
+      {"seed": "https://rust-lang.github.io/rust-clippy/master/", "host": "rust-lang.github.io", "engine": "mdBook"},
+      {"seed": "https://wasm-bindgen.github.io/wasm-bindgen/", "host": "wasm-bindgen.github.io", "engine": "mdBook"},
+      {"seed": "https://docs.pytest.org/en/stable/", "host": "docs.pytest.org", "engine": "Sphinx"}
+    ],
+    "deep_confirmation_crawl_params": {"max_depth": 6, "budget_per_seed": 250, "same_host_only": true, "parser": "static_a_href", "item_unit": "state_carrying_page"},
+    "confirmed_deep_counts": {"total_deep_pages": 267, "mdBook": 108, "Sphinx": 159, "doc.rust-lang.org": 84, "rust-lang.github.io": 18, "wasm-bindgen.github.io": 6, "docs.pytest.org": 159},
+    "confirmed_deep_hosts": ["doc.rust-lang.org", "rust-lang.github.io", "wasm-bindgen.github.io", "docs.pytest.org"],
+    "confirmed_deep_engines": ["mdBook", "Sphinx"],
+    "representative_confirmed_deep_items": [
+      {"page_url": "https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html", "hop": 3, "host": "doc.rust-lang.org", "engine": "mdBook"},
+      {"page_url": "https://doc.rust-lang.org/book/ch03-02-data-types.html", "hop": 3, "host": "doc.rust-lang.org", "engine": "mdBook"},
+      {"page_url": "https://rust-lang.github.io/rfcs/0001-private-fields.html", "hop": 5, "host": "rust-lang.github.io", "engine": "mdBook"},
+      {"page_url": "https://wasm-bindgen.github.io/wasm-bindgen/examples/wasm-in-web-worker.html", "hop": 3, "host": "wasm-bindgen.github.io", "engine": "mdBook"},
+      {"page_url": "https://docs.pytest.org/en/latest/backwards-compatibility.html", "hop": 3, "host": "docs.pytest.org", "engine": "Sphinx"}
+    ]
+  },
+  "pre_freeze_control_certificate": {
+    "created_by": "DESIGN runner, 2026-10-10, before freeze.json existed",
+    "all_verified": true,
+    "verified_at": "2026-10-10T21:40:00Z",
+    "pool_deep_items_confirmed": true,
+    "pool_deep_hosts_confirmed": true,
+    "discovery_channel_probe_verified": true,
+    "null_control_verified": true,
+    "admission_gate_pass": true,
+    "dynamic_range_verified": true,
+    "evidence_refs": [
+      "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 4 (frozen pool + ADMISSION_GATE_V2 PASS: 267 DEEP, mdBook 108, Sphinx 159, 4 hosts)",
+      "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 6 (pre-freeze probe log: channel liveness, null control, calibration)",
+      "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 13 (frozen outcome-bearing code, CODE_SHA256)"
+    ],
+    "certificate": {
+      "pool_admission": "PASS (267 admitted DEEP state-carrying pages; mdBook=108, Sphinx=159; distinct hosts with >=3 = 4; distinct engines with >=3 = 2).",
+      "channel_liveness": "PASS. ROBOTS_SITEMAP live on doc.rust-lang.org (robots.txt 200 -> Sitemap: https://doc.rust-lang.org/sitemap.txt, 200) and docs.pytest.org (robots.txt 200 -> Sitemap: https://docs.pytest.org/sitemap.xml, 200, 15 <loc>). SITEMAP_XML live on docs.pytest.org. ON_SITE_SEARCH forms present on doc.rust-lang.org and docs.pytest.org seed roots. RSS_ATOM: no feed links on any seed root. JSON_LD: 0 ld+json blocks on all four seed roots (expected zero channel).",
+      "null_control": "PASS (synthetic item probe returns success=false for all 5 channels; NULL_ALL_ZERO=true).",
+      "dynamic_range": "PASS: CAL_DISCOVERABLE_FIXTURE fraction 1.0 (via ROBOTS_SITEMAP and SITEMAP_XML); CAL_OPAQUE_FIXTURE fraction 0.0. Threshold 0.50 is strictly bracketed."
+    },
+    "note": "This certificate repairs v1 audit VN-A1/VN-A2/VN-A3 (empty frame, absent certificate, unreachable falsifier): the sampling frame is non-empty and recorded, all three certificate conditions are live-verified, and both falsifier branches are realizable."
+  },
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The denominator (admitted DEEP pages) is >= 10 by the frozen pool (DESIGN observed 267, gate PASS) and the per-host fraction lies in [0,1], so E (hosts meeting 0.50) is well-defined and SUPPORTS (E>=2), MIXED (E==1) and FALSIFIES (E==0) are all arithmetically reachable. Two local stdlib fixtures bracket the 0.50 boundary from both sides (1.0 discoverable, 0.0 opaque), so neither branch is unreachable and no comparator sits at ceiling or floor. The exact v1 defect (0/0 denominator, both branches unreachable) cannot recur because the sampled frame is constructed and hash-copied into the frozen packet before freeze.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/spec.json#falsifier, #target_pool, #pre_freeze_control_certificate",
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 2 (falsifier), section 4 (pool), section 6 (calibration)",
+        "research/experiments/EXP-FRONTIER-37984242167/audit.json#VN-A1, #VN-A3 (defect being repaired)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All prerequisites were probed live during DESIGN on the same runner class (bare CPython 3.12, network enabled): (a) all four pool hosts reachable over TLS (HTTP 200 on the seed roots); (b) the frozen BFS built the 267-page DEEP pool within B=250/D=6; (c) at least two discovery channels are live and parsable on pool hosts (robots.txt -> sitemap.txt on doc.rust-lang.org; robots.txt -> sitemap.xml 15 <loc> on docs.pytest.org; search forms present on both); (d) the null control yields zero reachable; (e) the full pipeline runs end-to-end on local stdlib fixtures. Substrate is stdlib-only; no browser, model, key or credential is required.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 6 (probe log)",
+        "research/experiments/EXP-FRONTIER-38085197666/spec.json#pre_freeze_control_certificate"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Four stable, mutually distinct baselines with deterministic policies: B_LINK_FOLLOWING_BFS (item-blind same-host BFS, >= hop+1 GETs), B_PERSISTED_PATH_REACQUISITION (hop+1 GETs), B_DIRECT_URL_REPLAY (1 GET) and B_NO_DISCOVERY (0.0 floor on CAL_OPAQUE_FIXTURE). The treatment (discovery reachability) is a distinct decision function over the same admitted item set, so the discovery-vs-link-following contrast is identified. Identities are frozen in spec.json baselines[] and prereg section 5 and are reused verbatim by EXECUTE/AUDIT.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 5"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control can fire in both directions: CAL_DISCOVERABLE_FIXTURE and CAL_OPAQUE_FIXTURE prove the instrument yields 1.0 and 0.0 (sensitivity to real discovery availability); PC_HOP_CONFIRMATION fails loudly if hop computation is broken; NC_SYNTHETIC_UNREACHABLE_ITEM catches false-positive discovery via search suggestions/redirects/parser error; ADMISSION_GATE_V2 fails loudly if the live pool collapses. The 0.50 materiality threshold is strictly between the two live-measured calibration endpoints, and the observed cross-host channel liveness is genuinely heterogeneous (sitemap present on 2 hosts, absent on 2), so the treatment is not uniformly high or low by construction.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 6 (calibration + liveness)",
+        "research/experiments/EXP-FRONTIER-38085197666/spec.json#positive_control, #null_control"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment (the five site-native discovery channels) is not an empty shell: the complete discovery pipeline executed end-to-end during DESIGN on a local stdlib fixture and produced fraction 1.0 (via ROBOTS_SITEMAP/SITEMAP_XML) and 0.0 (opaque), and two real pool hosts publish live machine-readable enumerations (doc.rust-lang.org sitemap.txt 200; docs.pytest.org sitemap.xml 200 with 15 <loc>). Two pool hosts (rust-lang.github.io, wasm-bindgen.github.io) expose no robots/sitemap/feed/JSON-LD, so the treatment can both succeed and fail on the frozen pool. No confirmatory outcome was computed at DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 6 (calibration + channel liveness)",
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 13 (frozen code, CODE_SHA256)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "There is no mutable local file, task bank, dataset or fixture whose identity can change the interpretation. The frozen seed list, the BFS policy, the five channel definitions, K accounting, admission gate, metrics and decision rule are all inlined in spec.json, and the COMPLETE outcome-bearing code (pool construction, discovery channels, null control, calibration fixtures, metrics, decision) is frozen VERBATIM inside prereg.md section 13, which freeze.json hashes transitively; EXECUTE must reproduce it byte-for-byte and verify CODE_SHA256 before running. The only remote dependency is the live public Web (an external network resource, not a mutable local artifact), pinned by the frozen seed list and re-checked by ADMISSION_GATE_V2 at EXECUTE. Per EXPERIMENT_PACKET.md section 2, when no mutable local dependency exists freeze_artifacts_bound must be NOT_APPLICABLE with a reason and the list is empty; the DESIGN-stage write restriction (scripts/check_scope.py: DESIGN may only write spec.json/prereg.md) makes pre-freeze artifact files impossible by construction, and the prereg-embedded code is strictly stronger (hash-bound).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38085197666/prereg.md section 13 (frozen code block + CODE_SHA256=14c501399721603bab35817c7a5a4ad0f25f84d7bd825633b71ee636cc51d96b)",
+        "research/experiments/EXP-FRONTIER-38085197666/spec.json#target_pool (inlined seeds)",
+        "scripts/check_scope.py (design-stage allowed writes)",
+        "research/EXPERIMENT_PACKET.md section 2"
+      ]
+    }
+  },
+  "freeze_artifacts": [],
+  "not_authorized": [
+    "re-measuring the parent's static re-derivable fraction or its GROWING ratio",
+    "returning to the blocked C-SEMANTIC-RESOLVE thread",
+    "constructing the pool or running any discovery probe after freeze.json exists",
+    "freezing any design whose falsifier cannot trigger in both directions",
+    "promoting any discovery mechanism to Product Core from this experiment"
+  ]
 }
