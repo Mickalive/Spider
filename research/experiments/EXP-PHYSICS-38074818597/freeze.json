@@ -1,0 +1,13 @@
+{
+  "artifact_hashes": {},
+  "design_contract_version": 2,
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "frozen_at": "2026-10-10T23:19:23.455175+00:00",
+  "hashes": {
+    "design_review.json": "4e59fb3e4701c4d4f785efca7c614c037ec4e01aaa01532fb330e1de9a04d2fe",
+    "prereg.md": "4a76861ec39b0155aa3b36df139af2077f590735633b49352f8f66ca7033d61b",
+    "request.json": "b692e03b3043584a2fa4118591d3b8a6a1c9998db07598969e6860cdb2c687c4",
+    "spec.json": "ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd"
+  },
+  "schema_version": 1
+}

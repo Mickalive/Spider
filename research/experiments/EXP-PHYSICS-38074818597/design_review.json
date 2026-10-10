@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "lane": "physics",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both two-sided branches are arithmetically and empirically reachable. Support branch: with n_t0_intrinsic>=3 fully persisting, the binary indicator satisfies I(B_T0;B_delta)=H(B_T0)>=H(3/57)=0.206 nats > delta_SKILL=0.05, the global endpoint permutation p is tiny (perfect 6x6 mapping has probability 1/C(57,6)~2.5e-8), and the endpoint-clustered bootstrap can have a strictly positive lower bound with >=6 barrier clusters; the pre-freeze synthetic calibration on the exact rule confirms S1 selection in stationary worlds. Falsifying branch: S0 fires via any of three independently producible classes - (a) intrinsic break, (b) intrinsic-denylist violation (1 recovery among 6 intrinsic gives FA=1/6=0.167, 2 recoveries gives FA=0.333>tau_FA), and (c) no_anchor_information (exchangeable world MI~0.01, p>=0.05). Thresholds are attainable; branch precedence (INVALID -> S1 -> S0) contains no branch that makes a later branch unreachable; rate-limit transients never gate S1 because the denylist is computed over the intrinsic set. Independent verification: /tmp/opencode/phys380/calibration_exact.json (sha256 4c5eccb4...) shows PC98 S1_frac 0.825 (unconditional) / 0.985 (fixed endowment), PC92 0.765/0.88, and S0 200/200 in NC_EXCHANGE with fixed-case S0 rows for intrinsic break, two-block recovery, newly-blocking. Note the spec's declared calibration figures (295/300, PERM=500) do not match this artifact, but the reachability conclusion is unchanged.",
+      "evidence_refs": [
+        "spec.json:falsifier",
+        "spec.json:decision_rule.branch_precedence",
+        "spec.json:decision_rule.thresholds_frozen",
+        "prereg.md:section-6",
+        "/tmp/opencode/phys380/calibration_exact.json sha256 4c5eccb4eb2953b318c78637268039880f6a3bc5de709e6a2736231791b27eac"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Hard prerequisites are present now. Python 3.12.15 is installed and numpy is absent, matching the stdlib-only requirement; the 57 endpoints, the oracle hosts, and a live network egress are demonstrated by the contemporaneous pre-freeze census (/tmp/opencode/phys380/census.json sha256 4dc8d974...): the 429/403/transport/clean oracles all classify as expected, 7 stable intrinsic endpoints (6 BLOCK_403_CHALLENGE + 1 TRANSPORT_ERROR) exceed the n_t0_intrinsic>=3 floor, n_t0_barrier>=3 holds, and the stress burst induced RATE_LIMIT_429 on djangoproject.com/accounts/login and search.brave.com with recovery to CLEAN. No credential, browser, dataset or task-bank prerequisite exists (all NOT_APPLICABLE). The spec's cited census/calibration artifacts (b0b9e520/3e603e32/5fd08d99/c100f177) are absent and are not durable, but the declared prerequisites are independently satisfiable from the present artifacts and EXECUTE re-verifies every floor from its own data.",
+      "evidence_refs": [
+        "spec.json:measurement_validity.prerequisite_integrity",
+        "spec.json:sweep_protocol",
+        "spec.json:estimated_cost",
+        "/tmp/opencode/phys380/census.json sha256 4dc8d974dcc1bcdc8998571c22aadc2b35a52d0092b76f32c42baef619ca7800"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "There is no treatment/comparator arm pair (this is estimator vs strong null), but the contrast is identifiable and non-degenerate. The binary barrier indicator is non-constant on the frozen pool (f_b_obs~6-8/57), B_EXCHANGE preserves both marginals while breaking endpoint identity, and the metric separates regimes: independent calibration gives stationary-world MI ~0.33 nats versus exchangeable-world MI ~0.011 nats, with B_EXCHANGE false-positive (p<0.05) ~0.02 and zero S1 selections in the exchangeable world. No ceiling/floor: the null is not at the metric ceiling and the observed regime is not at the null. No cost metric is used, so the omitted-cost-dimension failure mode does not apply.",
+      "evidence_refs": [
+        "spec.json:baselines",
+        "spec.json:null_control.NC_SYNTHETIC_EXCHANGEABLE",
+        "/tmp/opencode/phys380/calibration_exact.json sha256 4c5eccb4eb2953b318c78637268039880f6a3bc5de709e6a2736231791b27eac"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive and negative synthetic controls bracket the pipeline with demonstrated (not asserted) sensitivity on the exact planned statistic and rule: PC_SYNTHETIC_STATIONARY selects S1 in 0.825-0.985 of pre-freeze replications at rho=0.98 (perm-sig rate ~1.0), while NC_SYNTHETIC_EXCHANGEABLE selects S1 in 0.0 and yields B_EXCHANGE p<0.05 in only 0.02 of replications (<=0.05). Live controls also fire under the same collection+classifier path: PC_ORACLE_BARRIER classified httpbin/httpbingo 429 as RATE_LIMIT_429, no-such-host.invalid as TRANSPORT_ERROR and httpbin 403 as UNAVAILABLE_403; NC_CLEAN_ORACLE classified the clean hosts CLEAN. The controls are neither tautological nor impossible, and EXECUTE re-runs them with any failure mapped to MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "spec.json:positive_control",
+        "spec.json:null_control",
+        "spec.json:measurement_validity.control_integrity",
+        "/tmp/opencode/phys380/census.json sha256 4dc8d974dcc1bcdc8998571c22aadc2b35a52d0092b76f32c42baef619ca7800"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "NOT_APPLICABLE",
+      "reason": "This is a Physics measurement/estimation experiment on a live Web substrate and contains NO SPIDER treatment arm. It is not a Product experiment targeting C-PARAM-INHERIT, C-RESIDUAL-NOVELTY, C-LLM-INHERIT or C-PRODUCT-ECON, so the special treatment-liveness rule for those claims does not apply. The estimable objects are a measured denylist-validity horizon and two deterministic policies (POLICY_STATIC_DENYLIST_INTRINSIC, POLICY_CLASS_CONDITIONAL_DENYLIST) that are total functions of the observed class and terminate.",
+      "evidence_refs": [
+        "spec.json:freeze_eligibility.treatment_liveness",
+        "spec.json:stable_identifiers.policy_ids",
+        "spec.json:claim_ceiling"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every interpretation-determining constant is written literally in spec.json and prereg.md, which the deterministic freezer hashes: the 57-endpoint universe, the challenge-marker regex and full intrinsic classifier, the sweep/induced protocol, strata, thresholds, seeds and branch precedence. Remote Web responses cannot be frozen; their target identifiers and sampling protocol are frozen in spec/prereg instead. The EXECUTE collection/analysis code does not exist at freeze and is constrained to a literal realization of those embedded constants with its hash recorded in provenance.json for AUDIT, so no unpinned mutable fixture determines the interpretation. See nonblocking finding N1: the /tmp pre-freeze artifacts cited in spec.activity_disclosure and prereg sections 6-7 are absent and do not match the contemporaneous artifacts, but they are explicitly declared non-interpretation-dependencies and EXECUTE re-derives all floors/calibrations, so this does not bind the interpretation.",
+      "evidence_refs": [
+        "spec.json:freeze_artifacts",
+        "spec.json:frozen_universe",
+        "spec.json:frozen_intrinsic_classifier",
+        "prereg.md:section-12"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "N1",
+      "finding": "The frozen spec/prereg cite pre-freeze artifacts that do not exist and whose hashes do not match the contemporaneous artifacts. spec.activity_disclosure and prereg sections 6-7 cite probe_live.py sha256 c100f177..., census.json sha256 b0b9e520..., calibrate4.py sha256 3e603e32... and cal4.json sha256 5fd08d99.... None of these files exist under /tmp/opencode/phys380. The files actually present are probe_live.py sha256 7686442f..., census.json sha256 4dc8d974..., calibrate.py sha256 8f02dc57... and calibration_exact.json sha256 4c5eccb4..., and the DESIGN generator /tmp/opencode/phys380/make_spec.py (sha256 f79f4c77...) references those present hashes. Impact is bounded because these /tmp scripts/outputs are declared non-interpretation-dependencies and EXECUTE re-derives every floor and control; AUDIT should not treat the cited hashes as durable evidence.",
+      "evidence_refs": [
+        "spec.json:measurement_validity.activity_disclosure",
+        "prereg.md:section-6",
+        "prereg.md:section-7",
+        "/tmp/opencode/phys380/make_spec.py sha256 f79f4c77a5f5d55008e8fe9ec692e7a3344799633e1431c8709e374e5b7806c3"
+      ]
+    },
+    {
+      "id": "N2",
+      "finding": "The frozen textual census claims contradict the present census artifact. spec's declared certificate/prereg section 7.1 state two cold-GET sweeps ~132 s apart with identical histograms {BLOCK_403_CHALLENGE:5, TRANSPORT_ERROR:1, OTHER_NONBARRIER:5, CLEAN:46} and 'no ambient class changed'. The present census.json records delta01_s=38.5 s (with a separate 362.6 s window_pair), sweep histograms {BLOCK_403_CHALLENGE:6, CLEAN:45, OTHER_NONBARRIER:4, TRANSPORT_ERROR:1, RATE_LIMIT_429:1} and a non-empty changed_between_sweeps (search.brave.com RATE_LIMIT_429 -> CLEAN). The intrinsic-persistence claim still holds (the changed endpoint is non-intrinsic, and 7 intrinsic endpoints persisted), so attainability is unaffected, but the frozen certificate text is inaccurate and should be reconciled before AUDIT relies on it.",
+      "evidence_refs": [
+        "prereg.md:section-7.1",
+        "/tmp/opencode/phys380/census.json sha256 4dc8d974dcc1bcdc8998571c22aadc2b35a52d0092b76f32c42baef619ca7800",
+        "/tmp/opencode/phys380/window_pair.json sha256 00f58b96a378a165d0e06a757ab78c2f1eaa2600341dfa7f824bdbfd405da263"
+      ]
+    },
+    {
+      "id": "N3",
+      "finding": "Internal definition conflict for DENYLIST_INTRINSIC_VALID. spec.decision_rule.primary_decision_quantities says FALSE_ACCEPT and FALSE_REJECT are 'both computed on the intrinsic set only', which is inconsistent with the frozen falsifier/prereg definition of DENYLIST_FALSE_REJECT whose denominator is |T0 non-intrinsic| (51). The conflict is resolvable (both readings are arithmetically attainable and the falsifier/prereg definitions govern), but EXECUTE/AUDIT should implement FALSE_REJECT over the non-intrinsic denominator as stated in spec.falsifier and prereg section 4.",
+      "evidence_refs": [
+        "spec.json:falsifier",
+        "spec.json:decision_rule.primary_decision_quantities",
+        "prereg.md:section-4"
+      ]
+    },
+    {
+      "id": "N4",
+      "finding": "Control-parameter inconsistency. The PC/NC literal_design_values use perms_per_rep=500 and replications_R=300, while spec.decision_rule.thresholds_frozen and prereg section 6 specify 10000 permutations/resamples, and the present calibration artifact was produced with R=200, PERM=BOOT=10000. The power gate is not necessarily affected because PC98 is well above pc_power_min=0.80 even at the unconditional-marginal value 0.825, but the frozen control settings should be stated once, consistently.",
+      "evidence_refs": [
+        "spec.json:positive_control.PC_SYNTHETIC_STATIONARY",
+        "spec.json:null_control.NC_SYNTHETIC_EXCHANGEABLE",
+        "spec.json:decision_rule.thresholds_frozen",
+        "prereg.md:section-6"
+      ]
+    },
+    {
+      "id": "N5",
+      "finding": "Prereg section 7.4 overstates the false-reject route to S0: it states a load-induced onset provides FALSE_REJECT > 0, but the branch requires FALSE_REJECT > tau_FR = 0.20, i.e. at least 11 newly-intrinsic endpoints among the 51 non-intrinsic. S0 remains reachable through the false-accept, intrinsic-break and STAT_SIG-false routes, so this does not affect branch reachability.",
+      "evidence_refs": [
+        "prereg.md:section-7.4",
+        "spec.json:decision_rule.primary_decision_quantities"
+      ]
+    },
+    {
+      "id": "N6",
+      "finding": "The director mandate question names source vantage points as part of the measured axis, but the frozen question fixes a single network egress and declares the source-vantage axis a scope boundary. This reduces external validity/generalizability but does not affect whether the frozen question is answerable; the finding is bounded to this pool, one vantage and one window as disclosed.",
+      "evidence_refs": [
+        "request.json:director_mandate.allocation.question",
+        "spec.json:scope_boundaries",
+        "spec.json:measurement_validity.representation_integrity"
+      ]
+    }
+  ],
+  "rationale": "The experiment is a cheap, credential-free, stdlib-only live measurement with a two-sided, pre-declared decision rule. I independently confirmed from artifacts present on this runner (plus static arithmetic and hash checks) that the decision rule is reachable in both directions (S1 in stationary worlds, S0 in exchangeable/break worlds), that the named hard prerequisites are available now (Python 3.12 stdlib, live network, 7 persistent intrinsic endpoints and both oracle groups), that the estimator is identifiable against the B_EXCHANGE strong null (stationary ~0.33 nats vs exchangeable ~0.011 nats, no ceiling/floor), that the positive and null controls fire oppositely under the same scoring implementation, that no SPIDER treatment arm exists (treatment_liveness NOT_APPLICABLE), and that all interpretation-determining constants are embedded literally in spec/prereg with remote targets and sampling protocol frozen. The only defects found are documentation/provenance issues (N1-N6): the frozen text cites pre-freeze /tmp artifacts that are absent with non-matching hashes and reports census/calibration figures that differ from the contemporaneous artifacts; one decision-quantity wording conflict; inconsistent control permutation counts; an overstated false-reject route; and the declared single-vantage scope boundary. None of these prevent the experiment from answering its own question, and the substantive declared PASSes survive independent verification, so the design is not frozen-incapable. I did not run the confirmatory experiment and did not inspect future outcomes.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38074818597/request.json hash 6d4f08c7fbd740a5e46965ef37778107e2837f779b10cad0dc84e28de48be691",
+    "research/experiments/EXP-PHYSICS-38074818597/spec.json sha256 ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd",
+    "research/experiments/EXP-PHYSICS-38074818597/prereg.md sha256 4a76861ec39b0155aa3b36df139af2077f590735633b49352f8f66ca7033d61b",
+    "research/experiments/EXP-PHYSICS-37992957068/handoff.json sha256 3155fac772e6a64e2a3b13847cf320d6acebb1259ccb9b1c85c51d884513a6d4",
+    "/tmp/opencode/phys380/census.json sha256 4dc8d974dcc1bcdc8998571c22aadc2b35a52d0092b76f32c42baef619ca7800",
+    "/tmp/opencode/phys380/calibration_exact.json sha256 4c5eccb4eb2953b318c78637268039880f6a3bc5de709e6a2736231791b27eac",
+    "/tmp/opencode/phys380/window_pair.json sha256 00f58b96a378a165d0e06a757ab78c2f1eaa2600341dfa7f824bdbfd405da263",
+    "/tmp/opencode/phys380/make_spec.py sha256 f79f4c77a5f5d55008e8fe9ec692e7a3344799633e1431c8709e374e5b7806c3"
+  ]
+}
