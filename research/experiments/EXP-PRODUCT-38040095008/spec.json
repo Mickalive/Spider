@@ -1,50 +1,132 @@
 {
   "experiment_id": "EXP-PRODUCT-38040095008",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "design_contract_version": 2,
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the audited parameterized-inheritance capability be made DURABLE and PROMOTABLE in the shipping kernel path (src/spider) -- a pre-freeze arm-differentiation certificate showing that the SHIPPED kernel executes an inherited parameterized mechanism (known-positive: induction observation -> parameterized distillation -> resolve to EXECUTABLE with a correctly bound, non-null action -> execute against the fixture -> verify) AND refuses a known-negative binding (missing-parameter / out-of-support / wrong-intent) with a recorded reason and a null action, with unit tests, an accounting check that the inherited-path counters increment, and the kernel identity bound at freeze -- so that the carrier actually lands in main through the pinned Product promotion path without manually copying experiment code?",
+  "hypothesis": "Installing the audited parameterized-inheritance carrier kernel (research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py, git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) BYTE-IDENTICALLY at the shipping kernel path src/spider/kernel.py -- with src/spider/models.py and src/spider/registry.py already byte-identical to the carrier's versions (sha256 338aaf4d... / 51fb440d..., same git blobs f08608c3... / 986317f7...) and src/spider/__init__.py kept as the shipped public surface (sha256 3d173722...) -- makes the shipped package (a) execute the inherited parameterized round trip on all six SYNTH-INDUCTION-BANK-v1 families (distill_parameterized -> resolve EXECUTABLE with a correctly bound non-null held-out identifier -> deterministic fixture execute status 200 -> verify true), (b) refuse the full declared negative set (out-of-support / missing-parameter / wrong-intent: 24/24) with a recorded reason and a null bound action, (c) keep the inherited-path counters honest (retrieval_calls, verification_calls, repair_attempts increment exactly as declared, no other counter moves), (d) keep the pre-existing regression suite green under the canonical discovery invocation, and (e) preserve the installed-kernel identity equal to the frozen carrier hash, so that the resulting src/ + tests/ delta is promotable by the pinned Product promotion workflow without manually copying experiment code.",
+  "falsifier": "Any of: (1) C1 identity binding fails -- installed src/spider/kernel.py sha256 != 718efa6a... or git blob != b15ed848..., or any frozen artifact deviates from its freeze.json.artifact_hashes entry; (2) C2 positive roundtrip fails -- AD-POSITIVE-ROUNDTRIP is not 6/6 EXECUTABLE with a correctly bound held-out identifier, execute status 200 and verify true; (3) C3 negative roundtrip fails -- any of the 24 declared negatives resolves EXECUTABLE, has a non-null bound action, or has an empty reason (any per-category refusal rate < 1.0); (4) C4 treatment contrast fails -- real contrast_rate == 0.0, or the NC-ZERO-CONTRAST-TREATMENT degenerate variant is not detected; (5) C5 accounting fidelity fails -- inherited-path increments != exactly {retrieval_calls: 3, verification_calls: 2, repair_attempts: 1}, or any non-inherited counter is non-zero; (6) C6 literal control fails -- B-LITERAL-KERNEL held_out_executable_count > 0; (7) C7 promotability fails after a C1-passing byte-exact install -- tests/test_kernel.py or the EXECUTE-added tests/test_ship_kernel.py fail under the canonical discovery invocation, or `python -m compileall -q src scripts` fails. Any C2/C7 failure means the audited carrier, once installed at the shipping position, is not promotable in its audited form.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-KERNEL",
+      "type": "ablation",
+      "description": "Literal-only kernel ablation (pre-repair semantics preserved unchanged inside the carrier): SpiderKernel.distill() creates literal mechanisms at confidence 0.5 (< min_confidence 0.8) with no parameter_slots, so on the parameterized held-out tasks it produces 0 EXECUTABLE. This isolates the contribution of the distill_parameterized path and is the exact behaviour of the shipped pre-install kernel (blob cfec9866...). Expected: held_out_executable_count == 0. This is the discriminating baseline: treatment 6/6 vs baseline 0/6 on the same fixture and same process."
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "type": "comparator",
+      "description": "Retrieval-shaped comparator: the literal action of the K=5 structurally nearest induction observation (Jaccard over flattened intent/state/action key paths, from the frozen fixture module), executed with no parameter binding and no support re-check. Recorded per family inside AD-TREATMENT-CONTRAST; NON-GATING for the promotion decision (it is a structural comparator, not a real LLM retrieval arm, and no cost metric is claimed from it)."
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-SHIPPED-PRE-INSTALL",
+      "type": "baseline_state",
+      "description": "Baseline identity of the shipping kernel BEFORE install: src/spider/kernel.py git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50, sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (literal-only: no distill_parameterized, no rebind, no TrajectoryCounters). Recorded so the identity change is unambiguous and so a negative outcome can revert the Product branch to this exact state."
+    }
+  ],
+  "positive_control": {
+    "id": "AD-POSITIVE-ROUNDTRIP",
+    "description": "Known-positive input to the certificate instrument: for each of the six families, distill_parameterized is induced from the four induction observations, resolve is called on the stable preconditions with the held-out identifier keyed by the mechanism's OWN inferred slot names (F2 infers 'q' from params.q; F5 infers ['item_id','tenant']), and the bound action is executed against the deterministic fixture and verified. Family slot_keys are used only to locate held-out VALUES, never to guess slot names.",
+    "expected_behavior": "6/6 families EXECUTABLE, bound_action non-null, bound identifier == expected held-out identifier, fixture execute status 200, verify true; executable_rate == 1.0."
+  },
+  "null_control": {
+    "id": "NC-ZERO-CONTRAST-TREATMENT",
+    "description": "Degenerate zero-contrast null: the SAME contrast instrument is run with the comparator action on BOTH sides (comparator-vs-itself). An insensitive instrument would still pass; a sensitive one reports degenerate contrast_rate == 0.0 and flags the degenerate variant as a failure.",
+    "expected_behavior": "degenerate_contrast_rate == 0.0 and degenerate_variant_detected == true, while the real contrast_rate > 0.0 elsewhere."
+  },
+  "measurement_validity": [
+    "CREDENTIAL-FREE, DETERMINISTIC, STANDARD LIBRARY ONLY: no model, browser, network, GPU or database. Verified environment: Python 3.12.15, git 2.55.0 (probe run 2026-10-10).",
+    "CLAIM CEILING: this packet provides ZERO evidence for or against the product thesis C-LLM-INHERIT and no new claim-level evidence for C-PARAM-INHERIT generalization. It measures only whether the audited parameterized-inheritance capability is durable/promotable at the shipping position. Because the installed bytes are pinned to the frozen carrier hash, the confirmatory measurement is a deterministic integration/durability confirmation, not a new causal discovery about web behaviour.",
+    "TREATMENT LIVENESS PREREQUISITE (v2): a Design probe independently laid the frozen carrier at the shipping kernel position inside a byte-faithful replica of the REAL shipping tree (real src/spider/__init__.py, models.py, registry.py; only kernel.py replaced) and ran ARM-DIFFERENTIATION-CERTIFICATE-v3 plus the canonical regression invocation. The treatment is structurally live; see prereg.md section 7 for the observed values, the embedded driver source and the exact commands.",
+    "IDENTITY BINDING (gate): the installed src/spider/kernel.py must equal the frozen carrier artifact byte-for-byte (sha256 718efa6a..., git blob b15ed848...). The carrier's models.py (338aaf4d...) and registry.py (51fb440d...) are byte-identical to the shipped src/spider/models.py and src/spider/registry.py, so the only production module that changes is the kernel. The carrier package __init__.py is EMPTY and is NOT used at install; the shipped __init__.py (3d173722...) stays the package surface. TrajectoryCounters is importable from spider.kernel at module scope; a package-level re-export is out of scope.",
+    "KNOWN-NEGATIVE CATEGORIES: out-of-support identifiers (empty, whitespace, slash, and the out-of-grammar F5 slot pair), missing required parameters (F5 missing tenant, missing item_id), and wrong intent. Every negative must yield a non-EXECUTABLE status (EXPLORE or UNKNOWN), bound_action == null and a non-empty recorded reason; per-category refusal rates must all be 1.0. Parameter keys in negative cases are mapped to the mechanism's inferred slot names exactly as in the positive control.",
+    "ACCOUNTING HONESTY (PC-ACCOUNTING-FIDELITY): a real inherited-path exercise on family F1 (resolve-EXECUTABLE + verify + refused out-of-support resolve + rebind + verify) must increment retrieval_calls by exactly 3, verification_calls by exactly 2 and repair_attempts by exactly 1, with model_calls, model_tokens, browser_actions, http_requests and latency_ms all exactly 0. No synthetic/injected counter events are used in this packet.",
+    "NO COST METRIC IS CLAIMED: this packet does not compare arms on cost or success rate and therefore cannot fall into the latency_ms/1000 non-discriminating-metric defect recorded in the parent handoff.",
+    "CANONICAL REGRESSION INVOCATION: the repository runs tests as `PYTHONPATH=src python -m unittest discover -s tests -v`. The DESIGN probe confirmed tests/test_kernel.py (3 tests) passes both pre-install (shipped tree) and post-install (replica) under this invocation, and that `python -m compileall -q <package>` returns 0. tests/ has no __init__.py, so module-path invocation is not canonical.",
+    "PROMOTION-PATH DEPENDENCY (operational, not a scientific falsifier): the pinned Product promotion workflow promotes ONLY the delta over allowed_code_roots ([src, tests, sdk, pyproject.toml]) between execution_checkpoint.json.pre_execute_sha and the commit that created verdict.json. EXECUTE must therefore keep the code-root delta minimal and exclusive: ONLY src/spider/kernel.py replaced and tests/test_ship_kernel.py added; nothing else under src/, tests/, sdk/ or pyproject.toml may change. If main diverges in src/spider since the execution base, the 3-way apply can conflict and promotion hard-stops.",
+    "The unit tests are NOT the decision instrument: the certificate (AD-* / PC-* / NC-* / B-LITERAL) is the decision instrument and its raw JSON is written by the certificate runner. The EXECUTE-added unit test module is a secondary regression surface; C2-C6 gate the decision from the certificate JSON, which AUDIT can recompute from raw evidence.",
+    "NO-RESIDUE RULE: on FALSIFIES / MEASUREMENT_INVALID / BLOCKED the Product branch tree must not keep the installed kernel; the code-root delta is reverted to pre_execute_sha (B-SHIPPED-PRE-INSTALL)."
+  ],
+  "decision_rule": {
+    "C1_identity_binding": "PASS iff installed src/spider/kernel.py sha256 == 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 AND git blob == b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, AND every frozen artifact still matches its freeze.json.artifact_hashes entry.",
+    "C2_positive_roundtrip": "PASS iff AD-POSITIVE-ROUNDTRIP is 6/6 (resolution EXECUTABLE, bound_action non-null, bound identifier == expected held-out identifier, fixture execute status == 200, verify == true).",
+    "C3_negative_roundtrip": "PASS iff AD-NEGATIVE-ROUNDTRIP refusal rate == 1.0 over all 24 negative cases with every case non-EXECUTABLE, bound_action null and a non-empty reason; per-category rates (out-of-support, missing-parameter, wrong-intent) all 1.0.",
+    "C4_treatment_contrast": "PASS iff AD-TREATMENT-CONTRAST real contrast_rate > 0.0 AND NC-ZERO-CONTRAST-TREATMENT degenerate variant is detected (degenerate contrast_rate == 0.0, degenerate_variant_detected == true).",
+    "C5_accounting_fidelity": "PASS iff PC-ACCOUNTING-FIDELITY inherited-path increments == exactly {retrieval_calls: 3, verification_calls: 2, repair_attempts: 1} AND all non-inherited counters are zero.",
+    "C6_literal_control": "PASS iff B-LITERAL-KERNEL held_out_executable_count == 0.",
+    "C7_promotability": "PASS iff after the byte-exact install tests/test_kernel.py and tests/test_ship_kernel.py pass under the canonical discovery invocation and `python -m compileall -q src scripts` returns 0.",
+    "OVERALL_OUTCOME": {
+      "SUPPORTS": "C1-C7 all PASS. status=COMPLETE. The audited capability is installed at the shipping position and the packet is promotion-ready; DIRECTOR may set promote_to_product=true (final decision is the DIRECTOR's).",
+      "FALSIFIES": "C2 or C7 fails after a C1-passing byte-exact install. status=COMPLETE. The audited carrier cannot carry the inherited-parameterized round trip at the shipping position and/or is incompatible with the shipping test/compile surface; it is not promotable in its audited form. Reachability is not vacuous: the pre-install probe shows the unmodified shipped kernel fails C2 (AttributeError: no distill_parameterized) and C1 (46929b3a != 718efa6a).",
+      "MEASUREMENT_INVALID": "C1 fails (identity/binding violated or a frozen artifact changed), or C3, C4, C5 or C6 fails (the arm-differentiation instrumentation does not behave as frozen). status=MEASUREMENT_INVALID. Do not promote; repair the instrumentation and re-run under a new frozen packet. Reachability is demonstrated by the drift probe (single-byte mutation flips C1). Never record this as a scientific negative.",
+      "BLOCKED": "Infrastructure/prerequisite failure independent of the hypothesis: src/ not writable within the Product execute scope, the checker cannot run, or the install cannot be performed. status=BLOCKED. Never encoded as FALSIFIES."
     }
   },
-  "freeze_artifacts": []
+  "product_consequence_positive": "The audited parameterized-inheritance carrier is installed byte-identically at src/spider/kernel.py and the arm-differentiation certificate plus unit tests pass on the shipped package, so the EXECUTE packet supports promotion. DIRECTOR may advance C-PARAM-INHERIT toward PRODUCT_CORE with promote_to_product=true (finalize_lane requires a PASS audit, the Product lane and promotion intent for that status; SHIPPED is post-promotion and is not a lane-Director status). The pinned Product promotion workflow then applies ONLY the audited src/ + tests/ delta (src/spider/kernel.py plus tests/test_ship_kernel.py) onto current main, runs compileall/validate_repo/the canonical unit-test discovery, and commits the promotion -- no manual copying of experiment code into main. Readiness condition (1) for the four-arm C-LLM-INHERIT benchmark is cleared and the program's central 'audited but never shipped' gap is closed.",
+  "product_consequence_negative": "No promotion. The installed kernel is reverted to the frozen baseline identity B-SHIPPED-PRE-INSTALL (blob cfec98660b0277ccbf295e8a4119e8d81ddccf50, sha256 46929b3a...) so the Product branch tree carries no residue, and C-PARAM-INHERIT retains its prior effective epistemic status (EXPERIMENTAL). If the outcome is FALSIFIES, the audited carrier is not promotable in its current form and the next action is a bounded integration-defect diagnosis identifying the exact incompatibility before any re-port. If the outcome is MEASUREMENT_INVALID, the arm-differentiation instrumentation (not the capability) is at fault and must be repaired and re-run under a new frozen packet.",
+  "estimated_cost": "Low. Pure determinism with the standard library: no model calls, no browser, no network, no GPU, no cloud. The DESIGN probe over 6 families, 24 negative cases, accounting and regression checks completed in under 5 seconds. EXECUTE writes the installed kernel, one new unit-test module, a certificate runner and raw certificate JSON; well under 60 seconds wall-clock and negligible resource cost.",
+  "expected_information_gain": "High for the program, bounded and explicitly disclosed for the claim. Program value: this packet is designed to convert two audit-PASS C-PARAM-INHERIT packets (EXP-PRODUCT-37973256064 live path; EXP-PRODUCT-37950607128 arm-differentiation certificate) into a DURABLE, promotion-ready shipped state and to exercise the pinned Product promotion path end-to-end. It directly closes readiness condition (1) -- the highest-leverage open blocker named by the Global Research Director -- and unblocks the four-arm C-LLM-INHERIT benchmark. Claim-level information gain is bounded and disclosed: because the installed bytes are pinned to the frozen audited carrier, the certificate is deterministic and was already demonstrated as the mandatory pre-freeze treatment-liveness probe, so this is a durability/integration/promotion confirmation, not new causal evidence about web behaviour. The residual uncertainty it tests is real and has repeatedly blocked the program: whether the audited capability survives installation at the shipping position and the repository's promotion checks (import surface, identity, regression suite, compileall) without manual intervention, and whether the decision machinery detects failure when the state is NOT installed (pre-install probe) or is corrupted (drift probe).",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Every decision branch is reachable and no branch is empty. SUPPORTS is reachable: the DESIGN probe (probe driver sha256 e9ad3ba8..., results c_installed.json sha256 6c63c75c...) produced PASS on all gating checks (AD-POSITIVE-ROUNDTRIP 6/6, AD-NEGATIVE-ROUNDTRIP 24/24, AD-TREATMENT-CONTRAST real 1.0 + degenerate detected, PC-ACCOUNTING-FIDELITY exact {3,2,1}, B-LITERAL-KERNEL 0, AD-IDENTITY-BINDING match) with the frozen carrier at the shipping position in a byte-faithful replica. FALSIFIES is reachable and was empirically demonstrated pre-freeze: the pre-install probe (c_preinstall.json sha256 ce3c0d67...) shows the shipped kernel has no distill_parameterized (AttributeError) and fails C1 (46929b3a != 718efa6a), so the certificate detects the not-installed state rather than vacuously passing. MEASUREMENT_INVALID is reachable: the drift probe (c_drift.json sha256 4894344c...) shows C1 detects a single-byte mutation (observed sha 70f4b542... != required 718efa6a...) while behaviour still passes, proving C1 is an independent gate. BLOCKED is reachable on scope/environment/install failure. The certificate runner computes all checks unconditionally; SUPPORTS is a conjunction over C1-C7 with no vacuous term.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38040095008/prereg.md#7-pre-freeze-satisfiability-probe",
+        "research/experiments/EXP-PRODUCT-38040095008/spec.json#decision_rule"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All prerequisites exist and were exercised at DESIGN. Python 3.12.15 and git 2.55.0 are present (probe ran on them). The certificate is standard-library-only and credential-free, so there is no external substrate prerequisite. The Product execute scope permits writing src/ and tests/ (research/lanes/registry.json product.allowed_code_roots = [src, tests, sdk, pyproject.toml]; check_scope.py execute prefixes include the experiment dir plus those roots). Every freeze artifact exists at freeze time (hashes in prereg.md section 8). execution_checkpoint.json with pre_execute_sha is written automatically before EXECUTE by scripts/record_execution_base.py. The canonical test invocation, compileall and the certificate all ran successfully during DESIGN. src/spider/kernel.py is intentionally NOT a freeze artifact because EXECUTE must replace its content; its required post-install identity is pinned by C1 to the frozen carrier hash and its pre-install identity is recorded as B-SHIPPED-PRE-INSTALL.",
+      "evidence_refs": [
+        "research/lanes/registry.json",
+        "scripts/record_execution_base.py",
+        "research/experiments/EXP-PRODUCT-38040095008/prereg.md#8-freeze-artifacts-and-identities"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The treatment and the discriminating baseline are distinct, observable objects with genuine dynamic range. B-LITERAL-KERNEL yields 0 EXECUTABLE on the parameterized held-out tasks while the treatment yields 6/6 EXECUTABLE with correctly bound held-out identifiers (probe: executable_rate 0.0 vs 1.0 on the same fixture and process). The pre-install shipping kernel is a different git blob (cfec9866...) from the installed carrier (b15ed848...), so the pre/post identity contrast is unambiguous and was measured in both directions. No arm sits at a success ceiling: the literal arm is pinned at 0, giving the measurement genuine range. No cost metric is used, so there is no omitted cost dimension. B-RETRIEVAL-SHAPED is an explicitly non-gating structural comparator (real contrast_rate 1.0, degenerate comparator-vs-itself 0.0 and detected); it is not used to claim any product advantage.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38040095008/spec.json#baselines",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+        "research/experiments/EXP-PRODUCT-38040095008/prereg.md#7-pre-freeze-satisfiability-probe"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control fires at its required value and can also fail; both directions were demonstrated at DESIGN. Positive control AD-POSITIVE-ROUNDTRIP fired 6/6 on the installed replica AND failed 0/6 on the unmodified shipped tree (AttributeError per family), so it discriminates the two states. Negative control AD-NEGATIVE-ROUNDTRIP refused 24/24 with null actions and recorded reasons across all categories. The degenerate zero-contrast null NC-ZERO-CONTRAST-TREATMENT was detected as a failure (rate 0.0, detected true), showing the contrast instrument is sensitive to a no-difference certificate rather than trivially passing. PC-ACCOUNTING-FIDELITY separates exact counters (increments exactly {3,2,1}; all non-inherited counters exactly zero) and reports rather than hides the missing TrajectoryCounters pre-install. B-LITERAL-KERNEL produced exactly 0 EXECUTABLE on both trees. AD-IDENTITY-BINDING passed on the replica, failed on the unmodified tree, and the drift probe proves single-byte detection. No control is tautological or insensitive.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38040095008/spec.json#positive_control",
+        "research/experiments/EXP-PRODUCT-38040095008/spec.json#null_control",
+        "research/experiments/EXP-PRODUCT-38040095008/prereg.md#7-pre-freeze-satisfiability-probe"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "REQUIRED v2 treatment-liveness demonstration, executed at DESIGN as a cheap, non-outcome-bearing satisfiability probe. The frozen audited carrier kernel (sha256 718efa6a..., blob b15ed848...) was laid at the shipping kernel position inside a byte-faithful sandbox replica of the REAL shipping tree (real src/spider/__init__.py 3d173722..., real models.py 338aaf4d..., real registry.py 51fb440d...; only kernel.py replaced), and ARM-DIFFERENTIATION-CERTIFICATE-v3 was run against it plus the canonical regression invocation. Observed (c_installed.json): AD-POSITIVE-ROUNDTRIP PASS 6/6 (F1 itm-0009, F2 epsilon via inferred slot 'q', F3 tok-99, F4 res-z, F5 t9/i9 via inferred slots ['item_id','tenant'], F6 n-09; confidence 0.9, EXECUTABLE, binding correct, execute 200, verify true); AD-NEGATIVE-ROUNDTRIP PASS 24/24 (per-category rates all 1.0); AD-TREATMENT-CONTRAST PASS (real 1.0, degenerate detected); PC-ACCOUNTING-FIDELITY PASS (increments exactly retrieval_calls 3, verification_calls 2, repair_attempts 1; all other counters zero); B-LITERAL-KERNEL PASS (0 EXECUTABLE); AD-IDENTITY-BINDING PASS (installed hash == frozen carrier hash). The treatment is structurally live at the shipping position and is not a ceiling/empty arm. The exact commands, the embedded driver source and observed values are in prereg.md section 7; EXECUTE re-runs the identical certificate against the real installed package as the confirmatory measurement.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38040095008/prereg.md#7-pre-freeze-satisfiability-probe",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Eight mutable local interpretation dependencies are bound; all exist as repository files and none is a path EXECUTE must mutate. (1-3) the audited carrier kernel.py (treatment source AND the required installed-identity target), models.py and registry.py; (4) the SYNTH-INDUCTION-BANK-v1 fixture reconstruction fixture.py (sha256 b0ffcbba...); (5-7) the shipped import dependencies src/spider/models.py and src/spider/registry.py, and the shipped public surface src/spider/__init__.py (kept byte-identical so the package surface cannot drift); (8) the pre-existing regression suite tests/test_kernel.py (bound so it cannot be weakened). src/spider/kernel.py is deliberately excluded because EXECUTE replaces its content; its post-install identity is instead pinned by decision_rule C1 to the frozen carrier hash and its pre-install baseline (sha256 46929b3a..., blob cfec9866...) is recorded as B-SHIPPED-PRE-INSTALL for reversion. The certificate runner, the fixture reconstruction copy and raw evidence written by EXECUTE are derived artifacts, not interpretation dependencies. All paths are repository-relative with no absolute or '..' components.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38040095008/spec.json#freeze_artifacts",
+        "scripts/freeze_experiment.py"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+    "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/__init__.py",
+    "tests/test_kernel.py"
+  ]
 }
