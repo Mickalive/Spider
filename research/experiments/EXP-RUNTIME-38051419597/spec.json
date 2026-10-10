@@ -1,50 +1,172 @@
 {
   "experiment_id": "EXP-RUNTIME-38051419597",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can Runtime deliver a reusable, credential-free asymmetric-discovery task bank whose (a) high-novelty stratum has cold re-derivation (A-COLD-RE-DERIVE) and a retrieval-shaped comparator (A-RETRIEVAL-SHAPED) below the success ceiling (point < 0.95 AND two-sided 95% Wilson lower bound < 0.90 at planned n=12), (b) a declared parameterized mechanism (A-TREAT-PARAM-MECH) is measurably distinct from and better than both comparators on deterministic per-task counters, (c) every counter is server-log-reconciled and the task spec leaks no resolution route, and (d) the bank's non-degeneracy is certified ARITHMETICALLY in DESIGN before freeze - thereby satisfying readiness condition (2) so the downstream four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark is no longer ceiling-bound - rather than re-running another C-MEAS-VALID oracle/harness certificate?",
+  "hypothesis": "A declared, credential-free, locally-served multi-page substrate with a hidden resolution layer (route discovery cost > the frozen per-task request budget for high-novelty tasks, but ~0 once a compiled route schema is inherited from a same-family training task) yields a non-degenerate task bank: at novelty_fraction >= 0.5 the cold and retrieval-shaped arms cannot resolve within the budget and sit strictly below the success ceiling, while a declared parameterized mechanism and an oracle-schema positive control resolve within budget. Under this construction the treatment/comparator distinction is real (disjoint deterministic counter signatures and disjoint code paths), counters are honest (server-log reconciled), task specs leak no route token, and the full accept region is non-empty and reachable by a genuinely imperfect instrument. This is an instrument-readiness certificate for a reusable bank; it is NOT a transfer, generalization, or product claim, and NOT a measurement of a real LLM agent.",
+  "falsifier": "The bank-readiness hypothesis is falsified by any of the following at the frozen thresholds: (F1) at least one of A-COLD-RE-DERIVE / A-RETRIEVAL-SHAPED reaches the ceiling on the high-novelty stratum (point >= 0.95 OR Wilson_lo >= 0.90) while PC-ORACLE-SCHEMA-COLD >= 0.95 and counters reconcile - i.e. the bank has no dynamic range and adds no headroom to the existing mandatory-discovery substrate classes; (F2) the pre-freeze arithmetic certificate shows the high-novelty stratum empty or the accept region empty (a constructibility failure, caught in DESIGN, not bootstrapped at EXECUTE); (F3) A-TREAT-PARAM-MECH fails liveness (low-novelty point < 1.0) or the treatment-minus-comparator margin at high novelty is <= 0.25; (F4) the task spec leaks a resolution route token, counter reconciliation has any mismatch, or NC-OOS-TYPE refusal rate < 1.0 (validity/integrity failures). F1/F3 map to status=COMPLETE with outcome FALSIFIES/MIXED (a bounded negative about this bank class). F2 is a DESIGN/freeze failure. F4 maps to status=MEASUREMENT_INVALID (instrument failure), never a scientific negative.",
+  "baselines": {
+    "A-COLD-RE-DERIVE": {
+      "id": "A-COLD-RE-DERIVE",
+      "role": "strong baseline (first agent, no inheritance)",
+      "description": "Stateless per task: no prior trajectory, no retrieval index, no mechanism store, no oracle schema. A frozen, seeded, non-omniscient bounded breadth-first traversal from the substrate entry page discovers the resolution layer and attempts to resolve+extract the target value within the frozen per-task request budget B=10. Success_in_budget is binary.",
+      "procedure": "reset_state -> bfs_from_entry(seed=MASTER_SEED) -> resolve_route -> extract_value -> verify",
+      "counter_signature": {"retrieval_calls": 0, "mechanism_lookup_calls": 0, "route_discovery_requests": ">0"},
+      "scope_bound": "Re-measured in this experiment on the frozen bank. Cold is deliberately non-omniscient (the task spec does not reveal the route) but is a reasonable bounded planner given the same budget B as every other arm; PC-ORACLE-SCHEMA-COLD isolates the discovery cost from bank solvability."
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "A-RETRIEVAL-SHAPED": {
+      "id": "A-RETRIEVAL-SHAPED",
+      "role": "strong retrieval/RAG-over-trajectories baseline",
+      "description": "Retrieves the top-k prior successful trajectory fragments from a leave-one-family-out index built only from OTHER families' training trajectories (so no memorization of the evaluated instance), rebinds parameters, and executes. When no fragment is admissible it falls back to the same bounded BFS as cold.",
+      "procedure": "embed_task -> retrieve_top_k(leave_one_family_out) -> bind_parameters -> execute_or_fallback_bfs -> verify",
+      "counter_signature": {"retrieval_calls": ">=1", "mechanism_lookup_calls": 0, "route_discovery_requests": ">=0"},
+      "scope_bound": "Re-measured on the frozen bank; the index excludes the evaluated family to test genuine cross-family generalization, not memorization. Fragment budget and similarity threshold are frozen."
     }
   },
-  "freeze_artifacts": []
+  "positive_control": {
+    "id": "PC-ORACLE-SCHEMA-COLD",
+    "role": "primary positive control (bank solvability)",
+    "description": "The cold policy is given the resolution schema out of band (hypothetically zero discovery cost) on the SAME high-novelty tasks. If the bank is realizable and the budget adequate, this must succeed at or above the ceiling. This separates 'the bank has no headroom because tasks are trivially solvable' from 'the bank has headroom because discovery is the cost'. It is a SOLVABILITY CEILING control, NOT a headroom comparator: it is not used to compute the treatment-minus-comparator margin, so treatment and PC-ORACLE-SCHEMA-COLD both succeeding at 12/12 is expected and adds no independent comparison.",
+    "expected_behavior": "success_in_budget point >= 0.95 on the n=12 high-novelty stratum",
+    "arms": ["A-COLD-RE-DERIVE"],
+    "episodes_per_arm": 12,
+    "accept_region": {"n": 12, "required_min_k": 12, "point_min": 0.95},
+    "evidence_refs": ["artifacts/A-ARM-EPISODES.jsonl", "artifacts/A-SUMMARY.json"]
+  },
+  "null_control": {
+    "id": "NC-OOS-TYPE",
+    "role": "known-negative refusal null",
+    "description": "Targets whose type/family is absent from the mechanism store (out-of-support). A-TREAT-PARAM-MECH must refuse (UNKNOWN, no bound value) rather than fabricate; this checks that the treatment's success is schema-bound and not a substrate artifact, and partially exercises readiness condition (1)'s known-negative refusal requirement without depending on the Product carrier.",
+    "expected_behavior": "refusal_rate = 1.0, false_accepts = 0, bound_value = null on every episode",
+    "arms": ["A-TREAT-PARAM-MECH"],
+    "episodes_per_arm": 5,
+    "frozen_null_requirement": "5 frozen out-of-support instances, all refused with reason OUT_OF_SUPPORT",
+    "evidence_refs": ["artifacts/A-NULL-OOS.jsonl"]
+  },
+  "measurement_validity": {
+    "substrate": {
+      "name": "ADB-v1 (Asymmetric-Discovery Bank, v1)",
+      "type": "credential-free, locally-served, deterministic multi-page link-and-value substrate",
+      "implementation": "Python 3.12 standard library only: http.server.ThreadingHTTPServer for the site, urllib.request for arm transport, html.parser + json for parsing, hashlib for content digests, random.Random(MASTER_SEED) for seeded arm order. No third-party packages, no browser, no external network, no credentials, no cookies.",
+      "structure": "Entry page '/' links to F=3 family listing pages /list/<family>/page-1.html; each listing paginates via page-{p+1}.html and links to item pages; each item page carries the target value. A hidden resolution layer (per-family schema variant token and route template) is required to jump directly to the target item page; the token is discoverable only by traversing the listing pages, never stated in the task spec.",
+      "budget": {"per_task_request_budget_B": 10, "max_repair_attempts": 3},
+      "determinism": "All topology, listing order and value content are generated from the frozen declaration with a fixed seed; a content digest of the served topology is recorded in provenance.",
+      "site_authoring_disclosure": "The substrate is synthetic by design (there is no third-party site with the exact declared asymmetric structure). This experiment certifies the INSTRUMENT's dynamic range under declared non-omniscient policies; it does not certify transfer to the open Web or to a real agent (see validity notes / do-not-assume)."
+    },
+    "task_bank": {
+      "construction": "18 frozen task instances across F1/F2/F3, each with a declared shortest resolution path length d(t) from entry to the target value. Task spec contains only {task_id, family, target_label, required_value_kind}; it must NOT contain any route token.",
+      "strata": {"high_novelty": 12, "low_novelty": 6, "gap": 0},
+      "novelty_fraction_definition": "1 - (reused_edges / shortest_path_edges), where reused_edges are edges present in at least one other-family training trajectory (leave-one-family-out). High novelty >= 0.5; low novelty < 0.2; the interval [0.2,0.5) is frozen empty.",
+      "novelty_edge_table": {
+        "note": "Fully enumerated so the stratum membership is arithmetic, not EXECUTE discretion. shortest_path_edges = declared d(t); reused_edges counted leave-one-family-out. novelty_fraction is computed, not asserted.",
+        "F1-T1": {"path_edges": 7, "reused_edges": 3, "novelty_fraction": 0.571},
+        "F1-T2": {"path_edges": 9, "reused_edges": 4, "novelty_fraction": 0.556},
+        "F1-T3": {"path_edges": 12, "reused_edges": 5, "novelty_fraction": 0.583},
+        "F1-T4": {"path_edges": 14, "reused_edges": 6, "novelty_fraction": 0.571},
+        "F2-T1": {"path_edges": 8, "reused_edges": 4, "novelty_fraction": 0.500},
+        "F2-T2": {"path_edges": 11, "reused_edges": 5, "novelty_fraction": 0.545},
+        "F2-T3": {"path_edges": 13, "reused_edges": 6, "novelty_fraction": 0.538},
+        "F2-T4": {"path_edges": 16, "reused_edges": 7, "novelty_fraction": 0.562},
+        "F3-T1": {"path_edges": 9, "reused_edges": 4, "novelty_fraction": 0.556},
+        "F3-T2": {"path_edges": 12, "reused_edges": 5, "novelty_fraction": 0.583},
+        "F3-T3": {"path_edges": 15, "reused_edges": 7, "novelty_fraction": 0.533},
+        "F3-T4": {"path_edges": 18, "reused_edges": 8, "novelty_fraction": 0.556},
+        "F1-L1": {"path_edges": 3, "reused_edges": 3, "novelty_fraction": 0.000},
+        "F1-L2": {"path_edges": 5, "reused_edges": 5, "novelty_fraction": 0.000},
+        "F2-L1": {"path_edges": 3, "reused_edges": 3, "novelty_fraction": 0.000},
+        "F2-L2": {"path_edges": 4, "reused_edges": 4, "novelty_fraction": 0.000},
+        "F3-L1": {"path_edges": 4, "reused_edges": 4, "novelty_fraction": 0.000},
+        "F3-L2": {"path_edges": 5, "reused_edges": 5, "novelty_fraction": 0.000}
+      },
+      "route_leak_rule": "For every task, the token set of the task spec intersected with the declared route-token set must be empty.",
+      "credential_free": true
+    },
+    "per_task_counters": {
+      "http_requests": "server-logged request count for the episode",
+      "route_discovery_requests": "subset of http_requests spent resolving the route",
+      "retrieval_calls": "retrieval queries issued (0 for cold; >=1 for retrieval)",
+      "mechanism_lookup_calls": "mechanism-store lookups (0 for cold; >=1 for treatment)",
+      "verification_calls": "post-extraction DOM/value assertions",
+      "repair_attempts": "recovery actions after a failed verification (<=3)",
+      "requests_to_success_unbudgeted": "requests the arm needs with the budget removed (counterfactual cost-to-success); continuous dynamic-range signal",
+      "excluded": "latency_ms, model calls/tokens - prohibited as decision inputs (prior audit found latency_ms/1000 is instrument noise)"
+    },
+    "authorship_separation": "The site (ground-truth provider) and the arm policies (all use the shared transport) are implemented as separate modules; the site never imports an arm module and the site's request log is the ground truth for counter reconciliation. The retrieval index is built by a separate module that cannot read the site source.",
+    "no_synthetic_fallback": "Any failure (site bind failure, transport error, digest mismatch) is recorded with the exact error and mapped to MEASUREMENT_INVALID or BLOCKED, never silently substituted and never encoded as a scientific negative.",
+    "counter_honesty": "Every arm-reported counter must reconcile exactly to the server request log. Per episode the frozen reconciliation predicate is: arm_reported_http_requests == server_logged_requests AND route_discovery_requests <= http_requests AND retrieval_calls+mechanism_lookup_calls are recorded independently of http_requests. route_discovery_requests is a SUBSET of http_requests, so it is compared as a subset, never summed with http_requests. M-COUNTER-RECONCILE mismatch counter = 0.",
+    "prerequisites": "Python 3.12 stdlib present; research/runtime/shared_config.py present and providing WILSON_Z and MASTER_SEED (bound by hash); no external dependency."
+  },
+  "decision_rule": {
+    "frozen_thresholds": {
+      "wilson_z": 1.959963984540054,
+      "success_ceiling_point": 0.95,
+      "success_ceiling_wilson_lo": 0.90,
+      "high_novelty_threshold": 0.5,
+      "n_high_novelty": 12,
+      "n_low_novelty": 6,
+      "treatment_margin_min": 0.25,
+      "oracle_schema_control_min_point": 0.95,
+      "counter_mismatch_max": 0,
+      "refusal_rate_min": 1.0
+    },
+    "primary_predicate": "SUPPORTS iff (P1) A-COLD-RE-DERIVE high-novelty point < 0.95 AND Wilson_lo < 0.90; (P2) A-RETRIEVAL-SHAPED high-novelty point < 0.95 AND Wilson_lo < 0.90; (P3) PC-ORACLE-SCHEMA-COLD high-novelty point >= 0.95; (P4) A-TREAT-PARAM-MECH low-novelty (liveness) point = 1.0; (P5) treatment-minus-comparator high-novelty success margin >= 0.25; (P6) M-COUNTER-RECONCILE mismatch = 0; (P7) route-leak check passed for all 18 tasks; (P8) NC-OOS-TYPE refusal_rate = 1.0.",
+    "result_mapping": {
+      "integrity_set": "P3 (oracle-schema control >= 0.95), P4 (treatment liveness = 1.0), P6 (counter mismatch = 0), P7 (no route leak), P8 (refusal rate = 1.0). Any failure here is an instrument abort.",
+      "SUPPORTS": "Integrity set holds AND P1 AND P2 AND P5. Readiness condition (2) is satisfied for this instrument: the bank has certified cold/retrieval headroom at high novelty with an honest, route-leak-free, counter-reconciled treatment/comparator distinction. C-MEAS-VALID's construct boundary widens to include 'measurement-valid substrate with a certified non-degenerate bank' for Runtime-owned downstream work.",
+      "MIXED": "Integrity set holds AND (exactly one of P1/P2 fails, OR (P1 AND P2 AND NOT P5)). Localizes which comparator is ceiling-bound, or that headroom exists but the treatment-minus-comparator margin (< 0.25) is insufficient. Total partition with SUPPORTS/FALSIFIES.",
+      "FALSIFIES": "Integrity set holds AND NOT P1 AND NOT P2 - i.e. no dynamic range on this bank even though it is solvable when the schema is known. A bounded negative about this declared bank class; status=COMPLETE.",
+      "INCONCLUSIVE": "Substrate bring-up, site bind, transport or digest failure prevents completing the matrix; recorded per component with the smallest unblocking action. Never a scientific negative.",
+      "MEASUREMENT_INVALID": "Any integrity-set failure: P3 fails (bank unsolvable / budget or bank defect); P4 fails (treatment not live); P6 fails (counter mismatch); P7 fails (route leak); P8 fails (known-negative refusal); OR the EXECUTE implementation does not match the frozen declaration. Instrument failure, not a claim result."
+    },
+    "reachability_certificate": {
+      "computed_in": "DESIGN (pure arithmetic on planned n, Wilson formula and the declared topology; no outcome measurements)",
+      "n_high_novelty": 12,
+      "accept_region_high_novelty": "k in {0..11} satisfy point < 0.95 AND Wilson_lo < 0.90 (k=11: point=0.9167, Wilson_lo=0.6461; k=12: point=1.0 FAILS). Region non-empty and reachable by an imperfect instrument. Note: at n=12 the point<0.95 clause is the binding one (max in-region Wilson_lo = 0.6461 < 0.90), so the Wilson clause is reported for generality and is non-binding at this n; k=12 fails on both.",
+      "declared_prediction": {"A-COLD-RE-DERIVE_high_k": 2, "A-RETRIEVAL-SHAPED_high_k": 4, "A-TREAT-PARAM-MECH_high_k": 12, "PC-ORACLE-SCHEMA-COLD_high_k": 12},
+      "predicted_wilson": {"cold_k2_n12": {"point": 0.1667, "wilson_lo": 0.0470}, "retr_k4_n12": {"point": 0.3333, "wilson_lo": 0.1381}, "treat_k12_n12": {"point": 1.0, "wilson_lo": 0.7575}}
+    }
+  },
+  "product_consequence_positive": "If SUPPORTS, Runtime can hand downstream lanes (Graph C-FRESHNESS/C-DELTA-REPAIR and the Product four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark) a reusable, hash-pinned task bank with a certified comparator headroom guarantee and honest counters, so a later treatment advantage is no longer at risk of being an unreachable-margin artifact. C-MEAS-VALID widens within its bounded scope from 'intervention-valid oracle fixture' to 'measurement-valid bank with certified dynamic range'. This is a bounded instrument-readiness widening, not product promotion and not a transfer claim.",
+  "product_consequence_negative": "If FALSIFIES, the declared asymmetric-discovery bank construction does not produce headroom either, and the program must not fund the four-arm benchmark on this class; the next move is to change the discovery asymmetry (longer-horizon multi-task amortization, third-party/adversarial task populations) or to conclude that the deterministic credential-free class cannot carry the benchmark and scope the benchmark to a real-agent-capable substrate once readiness condition (3) is met. If MEASUREMENT_INVALID, the bank/instrument is repaired before any downstream spend. Either way the failure is bounded to this bank construction, not to C-MEAS-VALID's parent VALIDATED ceiling.",
+  "estimated_cost": {
+    "arms": ["A-COLD-RE-DERIVE", "A-RETRIEVAL-SHAPED", "A-TREAT-PARAM-MECH"],
+    "episodes": {"high_novelty_x_arms": 36, "low_novelty_x_arms": 18, "positive_controls": 15, "null_controls": 5, "total": 74},
+    "substrate": "local stdlib HTTP server; no network egress, no browser, no model calls, no credentials",
+    "estimated_wall_clock_minutes": 10,
+    "cost_note": "Cheap by construction: all episodes are local HTTP with the stdlib. The expensive pre-freeze part (arithmetic certificate) is computed in DESIGN at zero runtime cost."
+  },
+  "expected_information_gain": "Moderate-to-high and instrument-scoped. The arithmetic certificate is a design guarantee conditional on the declared topology; once EXECUTE implements the declaration, SUPPORTS is largely the declaration taking effect, so the genuinely falsifiable pathways are implementation divergence, route/index leakage, counter dishonesty, the oracle-solvability control, and any cross-family fragment generalizing further than declared (which would raise retrieval to ceiling and fire MIXED/FALSIFIES). The experiment is decision-changing because it (a) proves the recurring 'dynamic-range certificate unsatisfiable / comparators at ceiling' defect is a DESIGN-declaration problem rather than an intrinsic impossibility, (b) hands downstream Graph/Product work a hash-pinned bank with a comparator-headroom guarantee, and (c) explicitly closes the declared credential-free bank class on FALSIFIES instead of re-discovering it in three lanes. It does NOT establish transfer to the open Web or to a real agent; that remains readiness condition (3).",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The decision rule is arithmetic on planned n and the declared topology, computed before freeze with no outcomes. The high-novelty accept region (point < 0.95 AND Wilson_lo < 0.90) is non-empty: at n=12, k in {0..11} qualify (k=11 point=0.9167, Wilson_lo=0.6461; k=12 point=1.0 fails). Every decision branch is reachable: SUPPORTS (all P1..P8), MIXED (exactly one comparator ceiling), FALSIFIES (both comparators ceiling with P3 held), MEASUREMENT_INVALID (P3/P6/P7 fail), INCONCLUSIVE (substrate failure). The declared prediction (cold k=2, retrieval k=4, treatment k=12, oracle k=12) lies strictly inside the accept region for both comparators, so the rule discriminates.",
+      "evidence_refs": ["spec.json#decision_rule.reachability_certificate", "prereg.md#5-task-bank-declaration-and-arithmetic-certificate"]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All prerequisites are available or created inside the frozen transaction and are verifiable before freeze: (1) Python 3.12 standard library only (http.server, urllib.request, html.parser, json, hashlib, random) - no third-party package, browser, network egress or credential is required, removing the Playwright/live-site fragility of the prior proposal; (2) research/runtime/shared_config.py exists and supplies WILSON_Z and MASTER_SEED, and is bound by hash; (3) the site topology, task bank, novelty strata and arm policies are fully declared in prereg.md, so no external site or dataset is required. A stdlib import satisfiability probe was run in DESIGN (allowed) confirming no missing dependency.",
+      "evidence_refs": ["research/runtime/shared_config.py", "spec.json#measurement_validity.prerequisites", "prereg.md#4-substrate-declaration-adb-v1-asymmetric-discovery-bank-v1"]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The three arms have disjoint, mechanically recorded counter signatures: retrieval_calls is 0 for cold, >=1 for retrieval, >=1 mechanism_lookup_calls/0 retrieval_calls for treatment; route_discovery_requests > 0 only when an arm actually traverses (cold always, retrieval on fallback, treatment never on in-support tasks). Their procedures and code paths are distinct (bounded BFS vs leave-one-family-out retrieval+rebind vs compiled schema+parameter bind). The leave-one-family-out index prevents memorization. The novelty metric is computed from declared path edges, not assumed.",
+      "evidence_refs": ["spec.json#baselines", "prereg.md#6-arms-and-identifiability"]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control can fail and each failure is mapped: PC-ORACLE-SCHEMA-COLD must reach >= 0.95 or the bank is unsolvable (P3 -> MEASUREMENT_INVALID, separating instrument failure from a negative); PC-EXACT-REPLAY must be 1.0 or the subtopology/counters are broken; NC-OOS-TYPE must refuse 5/5 or treatment success is a substrate artifact; the route-leak check must be empty or the comparison is invalid; M-COUNTER-RECONCILE mismatch must be 0 or counters are dishonest. The declared predictions sit well inside the accept region, so none of the controls is insensitive by construction.",
+      "evidence_refs": ["spec.json#positive_control", "spec.json#null_control", "prereg.md#7-controls"]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm is a declared deterministic mechanism (compiled route schema + parameter bind), not an external Product carrier, so the packet's pre-freeze Product-carrier liveness mandate does not apply. Its liveness is structural (the schema built from same-family training tasks applies to held-out in-support instances by construction) and is exercised by the low-novelty liveness block (expected 6/6) at the START of EXECUTE, which is a POST-FREEZE abort gate, not a pre-freeze demonstration; a liveness failure aborts to MEASUREMENT_INVALID. PC-EXACT-REPLAY is a separate substrate/transport control and is not cited as evidence of treatment liveness. The treatment's disjoint counter signature (mechanism_lookup_calls >= 1, route_discovery_requests = 0) demonstrates it is a genuinely different procedure.",
+      "evidence_refs": ["spec.json#decision_rule", "prereg.md#8-treatment-liveness-and-abort"]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "One pre-existing mutable repository file constrains interpretation and is bound by sha256 in freeze.json.artifact_hashes: research/runtime/shared_config.py, whose WILSON_Z governs every interval in the decision rule and whose MASTER_SEED governs the seeded arm/episode order. EXECUTE must assert that the imported WILSON_Z and MASTER_SEED equal the frozen values; a mismatch is MEASUREMENT_INVALID. Only those two constants are consumed; the file's other parent-era constants (EXPERIMENT_ID, THRESH_WILSON_LO=0.80, etc.) are explicitly NOT used, so the parent's lower 0.80 threshold does not leak into this experiment's 0.90/0.95 decision rule. All other interpretation surface (task bank, topology, novelty edge table, arm policies, counter definitions, thresholds) is declared inside the frozen spec.json/prereg.md and is therefore bound by freeze.json.hashes; the EXECUTE implementation is materialized once inside the frozen experiment directory and every implementation/raw artifact is hashed in result.json.artifacts and recomputed by AUDIT. No external site, dataset or fixture is read.",
+      "evidence_refs": ["research/runtime/shared_config.py", "spec.json#measurement_validity", "prereg.md#9-freeze-artifacts"]
+    }
+  },
+  "freeze_artifacts": ["research/runtime/shared_config.py"]
 }
