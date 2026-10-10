@@ -1,49 +1,162 @@
 {
+  "spec_schema_version": 2,
   "experiment_id": "EXP-FRONTIER-38078430316",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "question": "Binding Director question (director_mandate.allocation.question, PIVOT off EXP-FRONTIER-37984242167): \\\"Can goals be resolved to applicable mechanisms without internal ids under an uncontaminated design -- goals authored by a process that never sees any mechanism intent string, a contamination screen measuring overlap against every registry intent, and an authoring-provenance record -- such that max-cosine (or the candidate resolver) selection beats a token-overlap/lexical null on independently-authored-goal comparison with calibrated applicability and an explicit abstention region?\\\"  Operationalized: on a frozen controlled mechanism registry (20 mechanisms, 5 families x 4 roles), with goals authored by an explicit process-G vocabulary disjoint from the process-A intent vocabulary, does all-MiniLM-L6-v2 max-cosine mechanism selection beat a token-Jaccard lexical null on mechanism-identity accuracy for the contamination-screened independently-authored goals, and does the fitted dual-class applicability gate with its explicit abstention region (max-cosine floor + top1-top2 margin) deliver pooled false-accept <= 0.10, coverage >= 0.50, selective risk within +0.05 of the argmax reference, unknown precision >= 0.85 and ECE <= 0.15?",
+  "hypothesis": "H1 (SUPPORTS condition). Under independent authorship (process-G goal author never sees process-A intent strings: disjoint content vocabulary, zero substring leakage), the embedding (all-MiniLM-L6-v2) max-cosine resolver identifies the applicable mechanism on contamination-screened independently-authored goals at higher accuracy than the token-overlap lexical null (family-blocked paired one-sided 95% lower bound of the treatment-minus-null difference > 0), and also higher than the topic-only B-FAMILY-ONLY-EMBEDDING baseline (operation-level resolution, not mere topic clustering), while the dual-class fitted applicability gate with explicit abstention region (max-cosine floor + margin floor) meets the frozen calibration and safety bounds (pooled false-accept <= 0.10 on ALL goals, coverage >= 0.50, selective risk <= argmax reference + 0.05, unknown precision >= 0.85, ECE <= 0.15 with bootstrap upper <= 0.18, abstention >= 0.50 on no-applicable goals). This bounds C-SEMANTIC-RESOLVE upward: goals can be resolved to applicable mechanisms without internal ids under an uncontaminated design.",
+  "falsifier": "F1 (FALSIFIES condition). On the contamination-screened independently-authored primary set, the family-blocked paired one-sided 95% lower bound of (treatment accuracy - lexical null accuracy) is <= 0, OR the corresponding treatment-minus-family-only bound is <= 0 (advantage explainable by topic clustering alone), OR both treatment and lexical collapse to chance. A valid FALSIFIES is a bounded replication negative: on this substrate and embedding, the surface-form-overlap confound is NOT the explanation of prior addressing results and max-cosine semantic selection shows no advantage over lexical selection once authorship is separated; claim remains at HYPOTHESIS with a bounded negative for this mechanism class. MIXED: primary advantage established (selection-level semantics) but one or more calibration/safety gates fail (calibrated applicability not established).",
+  "baselines": [
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "kind": "ceiling_oracle",
+      "definition": "returns the true target mechanism_id for every goal; expected accuracy 1.0; if < 1.0 the fixture is defective and the measurement is invalid."
+    },
+    {
+      "id": "B-EMBEDDING-ARGMAX",
+      "kind": "treatment_reference",
+      "definition": "select argmax cosine(goal, intent) over all 20 intents (all-MiniLM-L6-v2, mean-pooled, L2-normalized); never abstains; deterministic tie-break by sorted mechanism_id."
+    },
+    {
+      "id": "B-LEXICAL-OVERLAP",
+      "kind": "null_comparator",
+      "definition": "select argmax token Jaccard over content words vs every intent; never abstains; first maximum in frozen id order wins (deterministic). On the primary set the lexical null is at its floor by construction (disjoint vocabularies); on the overlap set it is high (contamination gradient reference)."
+    },
+    {
+      "id": "B-RANDOM",
+      "kind": "chance_null",
+      "definition": "uniform random choice among the 20 mechanisms per goal (declared per-goal seeds); expected accuracy 0.05; sanity control for the metric."
+    },
+    {
+      "id": "B-FAMILY-ONLY-EMBEDDING",
+      "kind": "topic_confound_control",
+      "definition": "family resolved by max cosine to the family centroid (mean of its 4 intents), then uniform random member of that family (declared seed). Expected ~0.20-0.25 if the embedding only captures topic; isolates resource-family (topic) clustering from operation-level identity."
+    },
+    {
+      "id": "B-ROLE-ONLY-EMBEDDING",
+      "kind": "topic_confound_control",
+      "definition": "role resolved by max mean cosine over mechanisms of each role, then uniform random member (declared seed); ~0.20-0.25 ceiling; isolates verb/role-level clustering."
+    },
+    {
+      "id": "NC-EMBEDDING-SHUFFLE",
+      "kind": "sensitivity_control",
+      "definition": "label-permuted embedding argmax (declared per-goal seeds); must be <= 0.5 (sensitive instrument); ~chance expected."
+    }
+  ],
+  "positive_control": "C1-PC-VERBATIM: 10 goals that are byte-exact intent strings (2 per family, create/read), applicable by construction, contaminated by construction. Expected arm_embedding_argmax accuracy == 1.0 with denominator 10 > 0. Any other value -> MEASUREMENT_INVALID.",
+  "null_control": "C2-NC-NO-APPLICABLE: 30 goals (15 out-of-domain + 15 near-miss) with no applicable mechanism. Expected: A-CANDIDATE-GATED abstention (UNKNOWN) >= 0.50 on this set at the frozen gate (calibration-gate identity; a failure routes to MIXED via gate G3, and to MEASUREMENT_INVALID only if the whole control chain G1 fails).",
+  "measurement_validity": [
+    {
+      "id": "V1",
+      "name": "prerequisites",
+      "rule": "numpy==1.26.4, onnxruntime==1.19.2, tokenizers==0.20.3 available; all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 files model.onnx (sha256 6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452) and tokenizer.json (sha256 be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037) verified hash-equal before any embedding; embedding dim == 384."
+    },
+    {
+      "id": "V2",
+      "name": "fixture_canary",
+      "rule": "sha256(fixture.json) == 60c8ce3edda7079ea846612ab9f3f744f2501b63b3dfe43fa40c9c6dcd097872 and sha256(goals.json) == 359558610442ad5ab2a8852b2f3cb7eeb03cc814f2812b3767442b9d2ea81007 (deterministic regeneration; see prereg section 4)."
+    },
+    {
+      "id": "V3",
+      "name": "code_canary",
+      "rule": "run.py transcribed byte-identical from prereg.md section 6.4; sha256(run.py) == 1eb69dbc47861426493453a58cac6d5d9c90996f230bc0bfedaad3eb027dffa3."
+    },
+    {
+      "id": "V4",
+      "name": "authoring_barrier",
+      "rule": "contamination screen against EVERY registry intent: max token Jaccard on the primary (independent) set == 0 (< 0.20 hard threshold), zero primary-scoped substring violations, zero content-vocab overlap between V_A and V_G (C6)."
+    },
+    {
+      "id": "V5",
+      "name": "positive_control",
+      "rule": "C1-PC-VERBATIM accuracy == 1.0, denominator 10."
+    },
+    {
+      "id": "V6",
+      "name": "oracle_ceiling",
+      "rule": "B-INTERNAL-ID-ORACLE accuracy == 1.0 (C3)."
+    },
+    {
+      "id": "V7",
+      "name": "metric_sensitivity",
+      "rule": "NC-EMBEDDING-SHUFFLE accuracy <= 0.5 (C4) and B-RANDOM within 0.10 of 0.05 (C5)."
+    },
+    {
+      "id": "V8",
+      "name": "degeneracy_screen",
+      "rule": "benchmark dynamic range certificate (Director agent-prior 1): lexical null accuracy on the primary set < 0.90 and oracle == 1.0 (C10). Held BEFORE outcome interpretation; a lexical null already at ceiling would make the comparison uninformative."
+    },
+    {
+      "id": "V9",
+      "name": "split_integrity",
+      "rule": "train/val/test splits are stratified by family (applicable) and category (no-applicable) with fixed seed 38078430316, logged before any fitting; no goal appears in two splits; split counts recorded (OBS-2)."
+    },
+    {
+      "id": "V10",
+      "name": "model_and_gate_determinism",
+      "rule": "single frozen model revision; fitted logistic-gate parameters and threshold lambda recorded exactly; all randomness uses declared fixed seeds; arm execution order randomized with declared seed and recorded (OBS-10)."
+    }
+  ],
+  "decision_rule": "Frozen, evaluated in order:\\nG1 measurement validity: V1..V10 all PASS (equivalently controls C1..C10 all pass). Any FAIL -> status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE (infrastructure/substrate or control-chain failure; never a scientific answer).\\nG2 primary gates (both required for SUPPORTS):\\n  P1: family-blocked paired one-sided 95% bootstrap lower bound of (m_primary_treatment_acc - m_primary_lexical_acc) > 0 on the 60-goal primary set (10,000 resamples, seed 38078430316).\\n  P2: same bootstrap of (m_primary_treatment_acc - m_primary_family_only_acc) > 0 (operation-level resolution beyond topic clustering).\\nG3 calibration gates (all required for SUPPORTS): cal_pooled_false_accept <= 0.10; cal_coverage >= 0.50; cal_selective_risk <= cal_selective_risk_ref_argmax + 0.05; cal_unknown_precision >= 0.85; cal_ece_global <= 0.15 and cal_ece_upper95 <= 0.18; cal_abstain_noapply_rate >= 0.50.\\nOutcomes:\\n  SUPPORTS   (status=COMPLETE): G1 PASS and G2 PASS and G3 PASS.\\n  MIXED      (status=COMPLETE): G1 PASS and G2 PASS and G3 FAIL (selection-level semantics established; calibrated applicability not).\\n  FALSIFIES  (status=COMPLETE): G1 PASS and G2 FAIL (bounded replication negative for this substrate/model; claim stays HYPOTHESIS with negative bound).\\n  MEASUREMENT_INVALID (status=MEASUREMENT_INVALID): G1 FAIL.\\nThe contamination-gradient contrast m_advantage_gradient_interaction and the overlap-set accuracies are informative observations (OBS-*), not gates; they do not alter the frozen outcome mapping.",
+  "product_consequence_positive": "If SUPPORTS: C-SEMANTIC-RESOLVE advances to EXPERIMENTAL (bounded: controlled registry, 20 mechanisms, MiniLM-L6-v2, independent-authorship protocol). The kernel's exact-match resolver (src/spider/kernel.py) gains an evidence-backed semantic-addressing candidate: goal text -> mechanism_id without internal ids, with an explicit abstention region for no-applicable/ambiguous goals. C-PARAM-INHERIT (Product) is the declared downstream consumer of resolved mechanisms and can cite this packet when parameterized inheritance needs goal-to-mechanism routing; a later product integration must re-test on the real task bank (B2) before promotion to PRODUCT_CORE.",
+  "product_consequence_negative": "If FALSIFIES: bounded negative -- under authoring-provenance separation and contamination screening, MiniLM max-cosine cannot beat token-overlap on this substrate; the prior graph bounded positive (EXP-GRAPH-36287167610) is explained as (at least partly) joint-authorship surface-form overlap, not robust semantic addressing. No promotion; C-SEMANTIC-RESOLVE stays HYPOTHESIS; the kernel keeps exact-match resolution; further semantic addressing work must choose a different representation (explicit ontology/lexicon, different model class, or retrieval-shaped addressing) before re-testing. If MIXED: selection advantage exists but the abstention/calibration contract is not met; resolver must not be deployed without a re-designed abstention policy.",
+  "estimated_cost": "One EXECUTE run. Downloads: model.onnx 90.4MB + tokenizer.json 0.47MB (pinned HF revision); wheels numpy/onnxruntime/tokenizers ~35MB. Compute: 140 goal embeddings + 20 intent embeddings on CPU (MiniLM-L6-v2, ONNX) - seconds; 10,000 x 5-family bootstrap - seconds; total wall time < 10 minutes, RAM < 1.5GB. No live Web substrate, no agent-in-the-loop, no HTTP server, no model API spend. DESIGN probe cost already paid: wheels + model files fetched once (evidence in prereg section 6.2/6.3).",
+  "expected_information_gain": "Decides whether C-SEMANTIC-RESOLVE (goal->mechanism addressing without internal ids) is robust beyond surface-form overlap - the exact confound that invalidated EXP-GRAPH-36287167610 (MEASUREMENT_INVALID via joint-authorship vocabulary sharing) and was left unresolved by the Intel addressing arm at n=8 (exact and lexical top-1 both 4/8). Higher n (60-goal primary set vs 8), independent authorship + contamination screen against every registry intent + authoring-provenance record (the Director's exact new gate), calibrated applicability and an explicit abstention region, and a topic-clustering control (B-FAMILY-ONLY/ROLE-ONLY) that the prior never had. Either direction changes the kernel architecture decision (semantic resolver vs exact-match) and the C-PARAM-INHERIT dependency graph.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Both SUPPORTS and FALSIFIES branches are arithmetically reachable on the frozen fixture: primary set n=60 across 5 families, chance 1/20 (random), lexical floor ~0-0.08 (Jaccard 0.0 by construction), family-only ceiling ~0.20-0.25, oracle 1.0; treatment accuracy may fall anywhere on [0,1] and the two bootstrap one-sided lower bounds may be >0 or <=0 depending on the measured embeddings, so both G2-outcome branches can fire. G3 branches are reachable because near-miss no-applicable goals (max Jaccard up to 0.20, high cosine to real intents) force real gate decisions while out-of-domain goals force abstention. No branch is empty or unreachable; the prior's 0/0-denominator unreachability (EXP-FRONTIER-37984242167) cannot occur: every control and comparison set has a non-empty, construction-guaranteed denominator (>0 by fixture counts).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 2 (falsifier), 4 (fixture counts), 8 (decision rule)",
+        "codex/experiments/EXP-GRAPH-36287167610/audit.json (prior 0/0-type failure)",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json (empty-frame precedent to avoid)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All prerequisites were probed successfully at DESIGN time on the actual runner class (bare CPython 3.12, network enabled): (a) pypi.org reachable, wheels numpy==1.26.4, onnxruntime==1.19.2, tokenizers==0.20.3 downloaded and import-verified; (b) huggingface.co reachable, model.onnx and tokenizer.json at pinned revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 downloaded with sha256 6fd5d72f... and be50c362... verified; (c) embedding computed (dim 384) with semantic dynamic range (probe pairs: synonyms 0.50-0.80, unrelated ~0.0). No live Web/substrate dependency. EXECUTE repeats install+download with hash verification before any measurement (prereg sections 6.2-6.3).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md sections 6.2 (prerequisite certificate), 6.3 (probe log)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 4.5 (model pinning)"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Six stable, mutually distinct baselines with deterministic definitions: B-INTERNAL-ID-ORACLE (ceiling, =1.0 by construction), B-EMBEDDING-ARGMAX (treatment reference, never abstains), B-LEXICAL-OVERLAP (null, token Jaccard over content words, first-max tie-break), B-RANDOM (chance 0.05), B-FAMILY-ONLY-EMBEDDING and B-ROLE-ONLY-EMBEDDING (topic-confound controls, ~0.20-0.25 ceilings) and NC-EMBEDDING-SHUFFLE (sensitivity). Each has a distinct decision function over the same goals; identities are frozen in spec.json baselines[] and prereg section 5 and are reused verbatim by EXECUTE/AUDIT.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/spec.json baselines[]",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 5 (arms), section 7 (metrics)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control can fire in both directions: C1-PC-VERBATIM fails loudly if the pipeline is broken (accuracy != 1.0); C2-NC-NO-APPLICABLE stresses the gate with near-miss negatives (Jaccard up to 0.20) plus clean out-of-domain goals; C3 oracle catches fixture defects; C4 shuffle (permutation) forces ~chance in any sensitive metric and <= 0.5 as hard bound; C5 random anchors the metric at 0.05; C6 authoring-barrier screen verifies max Jaccard == 0 (hard threshold 0.20), zero substring leakage and zero vocab overlap on the primary set; C10 degeneracy screen catches an at-ceiling comparator. The lexical null is demonstrably sensitive to contamination: it is at ceiling on verbatim (Jaccard 1.0) and high on overlap goals (Jaccard 0.33-1.0) yet at floor on the primary set (0.0) - the gradient is built into the fixture and used as an observation.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 4.4 (contamination screen values from DESIGN probe)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 5 (controls)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 9 (threats)"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment (embedding max-cosine) is not an empty shell: the exact model files were downloaded and a live embedding was computed during DESIGN (probe pairs 'add a new user' vs 'create a new user account' cos 0.800, vs 'register a fresh account for someone' 0.501; 'convert a document to pdf' vs 'export a file as pdf format' 0.770; unrelated pairs ~ -0.06..0.02), showing the treatment can both succeed and fail discriminatively. The complete pipeline (embedding + all arms + gate fitting + metrics + controls + decision labels) was executed end-to-end on a TOY fixture (--toy-full mode) without errors during DESIGN; the confirmatory fixture is distinct and was never evaluated.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 6.3 (probe log)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 6.5 (toy-full liveness)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 4.3 (goal wording)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "There is no mutable local file, task bank, dataset or fixture whose identity could change the interpretation: the complete fixture data (mechanism registry intents, goal vocabulary, goal texts, contamination screen logic) AND the complete outcome-bearing code (run.py, including gate fitting, arms and metric computation) are deterministically specified and frozen VERBATIM inside prereg.md section 6.4, which freeze.json hashes transitively; fixture.json/goals.json are regenerated deterministically at EXECUTE and must reproduce the declared sha256 (V2). The only external dependency is the pretrained model, which is remote and pinned by repo+revision+per-file sha256 (V1) exactly as EXPERIMENT_PACKET.md section 2 directs for remote artifacts. Per EXPERIMENT_PACKET.md: 'If no mutable local dependency exists, freeze_artifacts_bound must be NOT_APPLICABLE with a reason and the list is empty.' The DESIGN-stage write restriction (scripts/check_scope.py: only spec.json/prereg.md may be written in DESIGN) makes pre-freeze artifact files impossible by construction, and the prereg-embedded code is strictly stronger (hash-bound).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 6.4 (frozen code block + CODE_SHA256)",
+        "research/experiments/EXP-FRONTIER-38078430316/prereg.md section 4 (fixture, hashes)",
+        "scripts/check_scope.py (design-stage allowed writes)",
+        "research/EXPERIMENT_PACKET.md section 2"
+      ]
     }
   },
   "freeze_artifacts": []
