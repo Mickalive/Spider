@@ -5,14 +5,20 @@ on:
   workflow_run:
     workflows: ["SPIDER R2 Lane"]
     types: [completed]
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 permissions:
   actions: write
   contents: read
 
+concurrency:
+  group: spider-r2-lane-recovery
+  cancel-in-progress: true
+
 jobs:
   wake:
-    if: ${{ github.event.workflow_run.conclusion != 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -23,5 +29,45 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "SPIDER_LANE_RECOVERY source_run=${{ github.event.workflow_run.id }} conclusion=${{ github.event.workflow_run.conclusion }}"
+
+          LANES=(graph physics runtime product intel frontier)
+          RUNS=$(gh run list --workflow=spider-lane.yml --limit 100             --json databaseId,status,conclusion,displayTitle,createdAt)
+          FACTORY=$(gh run list --workflow=factory-pulse.yml --limit 1             --json databaseId,status,conclusion,createdAt)
+
+          FACTORY_STATUS=$(jq -r '.[0].status // ""' <<<"$FACTORY")
+          FACTORY_CREATED=$(jq -r '.[0].createdAt // ""' <<<"$FACTORY")
+          if [[ "$FACTORY_STATUS" != "" && "$FACTORY_STATUS" != "completed" ]]; then
+            echo "SPIDER_LANE_RECOVERY_FACTORY_ACTIVE status=$FACTORY_STATUS"
+            exit 0
+          fi
+
+          NEED_WAKE=0
+          for LANE in "${LANES[@]}"; do
+            LATEST=$(jq -c --arg prefix "R2 lane=$LANE "               '[.[] | select(.displayTitle|startswith($prefix))][0] // {}' <<<"$RUNS")
+            RUN_ID=$(jq -r '.databaseId // empty' <<<"$LATEST")
+            STATUS=$(jq -r '.status // empty' <<<"$LATEST")
+            CONCLUSION=$(jq -r '.conclusion // empty' <<<"$LATEST")
+            CREATED=$(jq -r '.createdAt // empty' <<<"$LATEST")
+
+            [[ -n "$RUN_ID" ]] || continue
+            [[ "$STATUS" == "completed" ]] || continue
+            [[ "$CONCLUSION" != "success" ]] || continue
+
+            # If a later Factory cycle has already considered this failure,
+            # trust that strategic decision (it may legitimately PARK the lane).
+            if [[ -n "$FACTORY_CREATED" && "$FACTORY_CREATED" > "$CREATED" ]]; then
+              echo "SPIDER_LANE_RECOVERY_ALREADY_CONSIDERED lane=$LANE run=$RUN_ID factory_created=$FACTORY_CREATED"
+              continue
+            fi
+
+            echo "SPIDER_LANE_RECOVERY_PENDING lane=$LANE run=$RUN_ID conclusion=$CONCLUSION created=$CREATED"
+            NEED_WAKE=1
+          done
+
+          if [[ "$NEED_WAKE" -eq 0 ]]; then
+            echo "SPIDER_LANE_RECOVERY_NOT_NEEDED"
+            exit 0
+          fi
+
           gh workflow run factory-pulse.yml --ref main
+          echo "SPIDER_LANE_RECOVERY_WAKE"
