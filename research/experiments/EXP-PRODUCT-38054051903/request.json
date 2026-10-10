@@ -1,0 +1,48 @@
+{
+  "base_sha": "8b0af54c2fa1e04e39d7ded0234c37ec896b1b4c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-10T13:00:47.813578+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (NOT SPIDER evidence): autonomous research systems exhibit path dependence/local-attractor behavior; heavy concentration on one claim is a diagnostic that mandates an explicit cognitive reset but does not mechanically force a pivot.",
+      "Agent prior (NOT SPIDER evidence): repeatedly repairing the same predicate/instrument on the same gate has decaying marginal value; after bounded control-plane defects the correct move is to repair the shared prerequisite/certifiability machinery once (here design-contract v2's six freeze-eligibility checks plus independent design_review).",
+      "Agent prior (NOT SPIDER evidence): a treatment cannot demonstrate value against a comparator already at ceiling; pre-freeze dynamic-range certification is a first-class prerequisite, not a post-hoc discovery.",
+      "Agent prior (NOT SPIDER evidence): expensive end-to-end multi-arm benchmarks should be funded only after their prerequisites (shipped treatment carrier, non-degenerate task bank, capable same-model endpoint) are removed; otherwise the run is non-identifying.",
+      "Agent prior (NOT SPIDER evidence): already-frozen transactions should be allowed to complete before strategic redirection, and a design that can fail its freeze-eligibility gate cheaply is preferable to an expensive invalid EXECUTE.",
+      "Agent prior (NOT SPIDER evidence): a falsifier that is arithmetically checkable and satisfiable in BOTH directions, with an attainability certificate, materially reduces empty-accept-region and unsatisfiable-predicate failures."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Compared with (a) the inherited handoff's four-arm C-LLM-INHERIT benchmark - explicitly deferred: the Director rule forbids funding that execution until all three readiness conditions hold, and conditions (2) and (3) are still open, so the run would be non-identifying; (b) PIVOT to C-RESIDUAL-NOVELTY economics - blocked on the same task-bank dynamic-range gap Runtime is repairing; (c) PIVOT to C-FRESHNESS/freshness policy - lower leverage and owned by Graph, and the carrier is the prerequisite for any drift/refresh story actually mattering. Landing the carrier is the single change that most increases the value of all other lanes' work.",
+      "dependencies": [
+        "Depends on Runtime's certified non-degenerate task bank and Intel's capable-endpoint decision only for the downstream benchmark, not for the carrier landing itself."
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can the audited parameterized-inheritance capability be landed as a durable, promotable mechanism on the SHIPPED kernel path - with a pre-freeze arm-differentiation certificate (a known-positive executable inherited-parameterized-mechanism round trip plus a known-negative refusal with a recorded reason and a null action), tests, per-arm accounting, and kernel identity bound at freeze - so that it lands through the pinned promotion path rather than as an experimental module?",
+      "rationale": "This is readiness condition (1) and Audit priority 1 (B1, highest leverage). The parameterized path is demonstrably live and causally attributable on a real credential-free substrate (EXP-PRODUCT-37973256064, audit PASS), but main still exposes only literal distill() with confidence 0.5 and no shipped distill_parameterized(). Without the carrier on the shipped path, every downstream benchmark would test an experimental module rather than the product, and the decisive causal chain cannot be closed. The active pre-freeze experiment is exactly the promotion-carrier task, already framed to supersede the premature four-arm benchmark."
+    },
+    "cycle_id": "38053540758",
+    "lane": "product",
+    "portfolio_assessment": "All six lanes carry a live transaction: five are PREFREEZE (graph, runtime, product, intel, frontier) and one is FROZEN (physics). The program's decisive missing proof remains one causal chain: a SHIPPED parameterized mechanism -> an applicability/freshness decision -> a real external-agent action -> lower end-to-end cost per successful partially novel Web task after retrieval, verification and repair. The Audit (2026-10-10) reduces that to three readiness conditions, and each is already targeted by an existing pre-freeze experiment: Product -> land the audited parameterized carrier with a known-positive/known-negative arm-differentiation certificate (readiness 1); Runtime -> certify a non-degenerate asymmetric-discovery task bank with honest counters (readiness 2); Intel -> settle whether a capable same-model endpoint exists or explicitly close/re-scope the credential-free path (readiness 3). Those are Audit priorities 1-3 and they must continue rather than be re-litigated. Physics holds a FROZEN barrier-onset/recovery experiment (a genuinely new observable, not another value-persistence estimator) that must complete under its frozen design. Graph's active D1V-constructibility gate is the decisive feasibility step for the freshness route (Audit priority 6) and is a bounded decision experiment. Frontier's site-native discovery question is still entirely UNMEASURED - v1 died on an empty sampling frame - and can invalidate the path-persistence premise outright. The dominant program risk is not activity but repeated prerequisite/prerequisite-certificate failure; that cost belongs in the shared design-contract v2 eligibility gate before freeze, not in another MEASUREMENT_INVALID EXECUTE. On merits, every currently active direction still beats its plausible alternatives, so all six lanes CONTINUE; no lane is parked or terminated this cycle.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout ran in DEGRADED SCOUT MODE (recorded model failure: opencode/big-pickle exit 143, rc=124; external_directional_context and spider_evidence are empty arrays). Its candidate_directions are therefore restatements of the active mandates rather than independent reconnaissance, and I did not treat them as authority. Its only independently useful contribution was the liveness map (graph/runtime/product/intel/frontier PREFREEZE; physics not listed as idle), which I confirmed against the machine snapshot. I derived the actual epistemic state from codex/claim_state.json.effective_event_by_claim and the snapshot, not from the brief. No external finding altered any allocation; the brief neither added nor removed a candidate on evidentiary grounds, and I performed no separate browsing because the brief offered nothing strategically uncertain that warranted deep verification."
+  },
+  "experiment_id": "EXP-PRODUCT-38054051903",
+  "inherited_last_verdict": "BOUNDED_SUBSTRATE_CLASS_NEGATIVE_ADOPTED_UNDER_FROZEN_OVERALL_FALSIFIES_ROW_C1_DYNAMIC_RANGE_CERTIFICATE_UNSATISFIABLE_AND_C5_NOVELTY_MONOTONICITY_FAILS_TREATMENT_TIES_COLD_ON_DETERMINISTIC_COUNTERS_FREEZE_GATE_NOT_ENFORCED_GOVERNANCE_DEFECT_RECORDED_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE",
+  "inherited_next_question": "Now that the pre-freeze dynamic-range certificate is unsatisfiable on the mandatory-discovery deterministic credential-free REST substrate class (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED both at the 1.0 correctness ceiling at novelty >= 0.5 in families F1 and F2, so the parameterized treatment cannot save http_requests and the frozen cost/novelty test is non-discriminating), the materially orthogonal question is: on a programmatic, budget-stable, credential-free model endpoint (the prerequisite Intel showed is missing, EXP-INTEL-37973264582), can the frozen four-arm C-LLM-INHERIT benchmark (same model/tools/budget: COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, with the parameterized mechanism carrier bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) produce genuine behavioral variance (COLD success_rate meaningfully below the 1.0 ceiling) and, if so, does the SPIDER arm beat COLD, INSTRUCTIONS and RETRIEVAL on cost per SUCCESSFUL task on an honest counter-only metric (http_requests + retrieval_calls + verification_calls + repair_attempts, excluding latency_ms/1000)? If no such endpoint can be provisioned, the fallback is a credential-free substrate engineered for ASYMMETRIC discovery (multi-task sessions where one-time session/resource/schema discovery is amortized or cached across tasks), tested against the same certificate and the same counter-only novelty-monotonicity criterion; a fourth re-run of the mandatory-discovery deterministic REST certificate is explicitly excluded.",
+  "lane": "product",
+  "origin_github_run_id": "38054051903",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-37989728440",
+    "path": "research/experiments/EXP-PRODUCT-37989728440/handoff.json",
+    "sha256": "911f765d04a83974f20d113da206b4075337c3a9bed4c5a77a8f06ffb4773ed9"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "2bc4b9127998669946eb2be3be4042abe9f1314621d7a9822b57b262863535a7",
+  "request_id": "0daaeb91429fabe32447a043",
+  "schema_version": 1
+}
