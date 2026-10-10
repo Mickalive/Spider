@@ -8,7 +8,7 @@
   "next_question": "Can a D1V (value-only rotation: STALE and NOT structural_change and NOT transport_change) drift population spanning >=2 anchors be constructed on a credential-free, server-rendered, no-JavaScript GET-only substrate -- either by admitting anchors whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators from value rotation -- such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate, thereby licensing either INCUMBENT-BLIND-CONFIRMED (CH-PRECOND-BINDING necessary) or INCUMBENT-NOT-BLIND (value-aware channel deletable) under CC-A..CC-I?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-10-10T02:57:51.205283+00:00",
+  "updated_at": "2026-10-10T09:04:37.449912+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "6d576cc5fd0bd22ed4a4c5c7cb1853be1eaee78e65701ba3a4a3728b7a8b7d68",
   "same_failure_count": 1,
