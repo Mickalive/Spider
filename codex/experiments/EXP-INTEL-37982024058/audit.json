@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37982024058",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "category": "prompt_underspecification",
+      "severity": "material",
+      "description": "The frozen system prompt (prereg §4.1, harness_config.json) states only 'You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.' It does NOT enumerate the action schema, nor state the task goal ('click the button, then answer the revealed code'). The parent experiment EXP-INTEL-37973264582's harness SYS prompt contained both the goal instruction and schema enumeration. Under the frozen protocol, both candidate models (M-7B-QWEN, M-3B-QWEN) emit a valid click on #reveal-btn at step 0, the target is revealed (TARGET-42 appears in PAGE_TEXT), but then both models re-emit the same click action on the now-hidden button for steps 1-4 and never emit an 'answer' action. This failure mode is consistent with an instruction-following/planning deficit under an underspecified prompt, NOT a JSON emission deficit (positive control 10/10) or clicking deficit (step-0 click executes successfully). The prereg §8 explicitly listed prompt sensitivity as a validity threat. The producer correctly did not re-run with an amended prompt post-freeze, and recorded this tension in unresolved[0]. The FALSIFIES outcome is valid AT THE FROZEN CEILING (the frozen prompt), but the claim ceiling must be bounded to this specific prompt.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#prompts.system",
+        "research/experiments/EXP-INTEL-37982024058/result.json#observations[99]",
+        "research/experiments/EXP-INTEL-37982024058/result.json#validity_notes[5]",
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-8",
+        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py (parent SYS prompt)"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "category": "provisioning_packaging_deviation",
+      "severity": "minor",
+      "description": "The frozen primary URL for M-7B-QWEN (https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m.gguf) returned HTTP 404. The model is published only as two split shards (00001-of-00002, 00002-of-00002) in the same repo at the same quantization (Q4_K_M). Per prereg §8 ('If download fails for primary, proceed to fallback'), the same-repo, same-model, same-quant split shards were downloaded, sha256-recorded at download time, load-tested (load succeeded, n_vocab=152064), and evaluated. The primary model was NOT excluded; both primary and fallback were tested. This is a packaging/provisioning deviation, not a model or quantization substitution. The deviation is documented in raw/provisioning_evidence.json and does not invalidate the measurement.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json#0.load_status",
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-8"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "category": "deterministic_protocol_no_variance",
+      "severity": "material",
+      "description": "The protocol uses temperature=0.0 with fixed seeds (42+episode_idx). All 5 episodes per candidate produced identical trace structures (step-0 click success, steps 1-4 repeated hidden-button click, 5 steps, task_success=false). There is zero variance across episodes. The 5/5 uniformity must be read as a deterministic-protocol outcome, not as independent Bernoulli trials supporting a rate estimate. The pre-declared 3/5 threshold is an adequacy rule for the deterministic protocol, not a statistical threshold with a p-value. The producer correctly noted this in validity_notes[6]. No confidence intervals or variance estimates are possible or reported.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json#0.episodes[*].steps[*].raw",
+        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json#1.episodes[*].steps[*].raw",
+        "research/experiments/EXP-INTEL-37982024058/result.json#validity_notes[6]",
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-13.3"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "category": "representation_loss",
+      "severity": "expected",
+      "description": "State representation is a simplified text DOM (PAGE_TEXT, ELEMENTS, HISTORY), not a full accessibility tree. After the reveal click, ELEMENTS is empty (the only button is hidden) and PAGE_TEXT contains 'TARGET-42'. The model's repeated re-click is therefore NOT attributable to missing page text — the target value is present in the observation. Action space is limited to click/answer; no type, select, hover, scroll, navigation. Single synthetic page, no auth, no network calls after load, no session variation. Single model family (Qwen2.5). These are acknowledged scope boundaries (prereg §9, §11) appropriate for a capability gate, not a generality claim.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-9",
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-11",
+        "research/experiments/EXP-INTEL-37982024058/result.json#validity_notes[7]",
+        "research/experiments/EXP-INTEL-37982024058/result.json#validity_notes[11]"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "category": "small_n_predeclared_threshold",
+      "severity": "expected",
+      "description": "n=5 episodes per candidate, n=5 control episodes. Thresholds are the pre-declared adequacy rule (3/5). No p-values, confidence intervals, or statistical tests beyond the decision rule (prereg §13.3). This is appropriate for a capability gate with a both-directions falsifier.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/prereg.md#section-13.3",
+        "research/experiments/EXP-INTEL-37982024058/result.json#validity_notes[9]"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "PC-JSON-CONSTRAINED-DECODING",
+      "role": "positive_control",
+      "expected": "10/10 syntactically valid JSON matching action schema per model",
+      "observed": "M-7B-QWEN: 10/10 (pass_rate=1.0); M-3B-QWEN: 10/10 (pass_rate=1.0)",
+      "verdict": "PASS",
+      "assessment": "Constrained decoding infrastructure (llama.cpp GBNF grammar) is verified working for both candidate models. The task failure is definitively not a formatting/decoding failure. This isolates model reasoning/planning from infrastructure.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json#0.positive_control",
+        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json#1.positive_control"
+      ]
+    },
+    {
+      "control_id": "NC-NO-MODEL-ACTION",
+      "role": "null_control",
+      "expected": "0% parseable JSON actions, 0% task completion (verification logic must reject non-JSON)",
+      "observed": "parseable_action_rate_step1=0.0 (0/5), task_success_rate=0.0 (0/5)",
+      "verdict": "PASS",
+      "assessment": "The mechanical verification logic correctly rejects non-parseable content. The fixed invalid content 'I will click the button' was rejected at step 0 in all 5 episodes. Terminal page state never revealed #target (final_target_visible=false).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json#NC-NO-MODEL-ACTION",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls.NC-NO-MODEL-ACTION"
+      ]
+    },
+    {
+      "control_id": "B-RANDOM-ACTION",
+      "role": "negative_baseline",
+      "expected": "Chance-level task success with valid-JSON actions (5 episodes; per-episode success probability ~0.04-0.08 from the 5-action uniform space)",
+      "observed": "parseable_action_rate_step1=1.0 (5/5, valid JSON by construction), task_success_rate=0.0 (0/5)",
+      "verdict": "PASS",
+      "assessment": "0/5 is consistent with chance (expected 0-2 successes in 5 episodes at per-episode success probability ~0.04-0.08). This is a chance bound, not evidence of model superiority. The random baseline correctly produces schema-valid JSON but fails the task, confirming the task requires planning, not just valid JSON emission.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json#B-RANDOM-ACTION",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls.B-RANDOM-ACTION"
+      ]
+    },
+    {
+      "control_id": "B-0.5B-QWEN-LOCAL",
+      "role": "carried_reference_baseline",
+      "expected": "0% parseable actions, 0% task success (from parent EXP-INTEL-37973264582)",
+      "observed": "Not re-run in this experiment; parent evidence: 0.5B emitted prose with no parseable JSON action (150 tokens, 1 step)",
+      "verdict": "UNKNOWN_NOT_RERUN",
+      "assessment": "Correctly carried forward as a reference baseline from the parent experiment. Not re-run per prereg scope boundaries. The parent's Gate 2 finding (0.5B cannot act) is consistent with the current findings at 3B/7B under the frozen prompt.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37973264582/result.json",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls.B-0.5B-QWEN-LOCAL"
+      ]
+    },
+    {
+      "control_id": "B-POLLINATIONS-PROXY",
+      "role": "carried_reference_baseline",
+      "expected": "0% task success (token cap, empty content, budget instability) from parent EXP-INTEL-37973264582",
+      "observed": "Not re-run in this experiment; parent evidence: empty/reasoning-only content, ~197-token cap, intermittent HTTP 402, no SLA/pinning",
+      "verdict": "UNKNOWN_NOT_RERUN",
+      "assessment": "Correctly carried forward. The pollinations proxy characteristics are timestamp-bound and not guaranteed reproducible (parent handoff.do_not_assume[1]).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37973264582/result.json",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls.B-POLLINATIONS-PROXY"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "M-7B-QWEN": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "mean_inference_latency_s": {"value": 5.065, "unit": "s", "match": true},
+      "mean_completion_tokens": {"value": 17.0, "unit": "tokens", "match": true}
+    },
+    "M-3B-QWEN": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "mean_inference_latency_s": {"value": 2.154, "unit": "s", "match": true},
+      "mean_completion_tokens": {"value": 13.0, "unit": "tokens", "match": true}
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true}
+    },
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true}
+    },
+    "capability_bar": {
+      "threshold_task_success_rate": 0.6,
+      "threshold_parseable_action_rate_step1": 0.6,
+      "cleared_by_any_candidate": false,
+      "match": true
+    }
+  },
+  "claim_ceiling": "Under the FROZEN protocol (specific system prompt lacking goal/schema enumeration, constrained GBNF decoding, temperature=0.0, seeds 42-46, minimal synthetic click-reveal-answer task, CPU-only llama.cpp 0.2.90, Qwen2.5 3B/7B Q4_K_M GGUFs via huggingface.co resolve-redirect), NO accessible credential-free CPU-quantized GGUF in the 3B-8B Qwen class clears the minimal Web-agent capability bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6). Gate 2 of the frozen C-LLM-INHERIT four-arm benchmark remains FAIL. The DESIGN_COMPROMISED boundary from parent EXP-INTEL-37973264582 is stable against scaling the local model class within the frozen 3B-8B Qwen constraint. This experiment does NOT establish that these models cannot complete the task under a different prompt (e.g., parent-style goal+schema), that larger (>8B) or non-Qwen models fail, or that constrained decoding/provisioning infrastructure failed (both verified working). The claim ceiling is bounded to the frozen protocol and candidate set.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-37982024058/request.json",
+    "research/experiments/EXP-INTEL-37982024058/spec.json",
+    "research/experiments/EXP-INTEL-37982024058/prereg.md",
+    "research/experiments/EXP-INTEL-37982024058/freeze.json",
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/experiments/EXP-INTEL-37982024058/report.md",
+    "research/experiments/EXP-INTEL-37982024058/provenance.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/task_episodes.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+    "research/experiments/EXP-INTEL-37982024058/model_execute.json",
+    "research/experiments/EXP-INTEL-37973264582/handoff.json",
+    "research/experiments/EXP-INTEL-37973264582/audit.json"
+  ],
+  "unresolved": [
+    {
+      "id": "U-01",
+      "question": "Would supplying the task goal and action schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for either M-7B-QWEN or M-3B-QWEN?",
+      "why_unresolvable_in_this_experiment": "Post-freeze prompt tuning is prohibited by the frozen design (prereg §13, §15). This is the single highest-value follow-up and requires a NEW experiment with an amended prompt as the treatment variable.",
+      "impact_on_claim_ceiling": "If a parent-style prompt yields task success, the FALSIFIES outcome at the frozen ceiling would be a prompt-sensitivity result, not a model-capability result. The credential-free path might be unblockable with a prompt change alone. If it still fails, the model-capability deficit is confirmed."
+    },
+    {
+      "id": "U-02",
+      "question": "Is the step-0 reveal followed by a re-click loop a general small-model multi-step planning deficit, or specific to a prompt that never states the terminal answer action?",
+      "why_unresolvable_in_this_experiment": "Only one prompt variant was tested (the frozen underspecified prompt). Disentangling prompt sensitivity from model planning capacity requires a controlled prompt ablation.",
+      "impact_on_claim_ceiling": "If prompt-specific, the credential-free path may be unblocked by prompt engineering alone. If general, scaling model size/architecture is necessary."
+    },
+    {
+      "id": "U-03",
+      "question": "Would larger (14B+) or non-Qwen (Llama, Gemma, Phi) CPU-quantized GGUFs clear the bar under the same frozen protocol?",
+      "why_unresolvable_in_this_experiment": "Out of the frozen 3B-8B / Qwen scope (prereg §3, §11). The director mandate explicitly bounded the probe to the accessible 3B-8B range via the confirmed download route.",
+      "impact_on_claim_ceiling": "If a 14B+ model clears the bar, the 'credential-free path exhausted' conclusion would be scoped to 3B-8B only. The director mandate's stopping rule ('exhaustion of the accessible model size range') would need re-evaluation if larger models become accessible."
+    },
+    {
+      "id": "U-04",
+      "question": "Whether the split-shard packaging of the 7B model is stable across future HuggingFace repo revisions (the frozen single-file URL is already gone).",
+      "why_unresolvable_in_this_experiment": "Provisioning stability over time is not measured in this experiment. The current split shards loaded successfully but future availability is unknown.",
+      "impact_on_claim_ceiling": "If the split-shard packaging changes, reproducibility of the exact 7B artifact may be compromised. The sha256 receipts (raw/gguf_sha256.txt) pin the exact artifacts used."
+    }
+  ]
+}

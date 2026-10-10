@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-37982024058",
+  "lane": "intel",
+  "decision": "FALSIFIES",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Under the frozen protocol (underspecified system prompt, llama.cpp 0.2.90, Qwen2.5 3B/7B Q4_K_M GGUFs via huggingface.co resolve-redirect), credential-free CPU-quantized models cleared constrained-decoding positive controls but failed the minimal Web-agent task (0/5, 0/5); capability bar (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6) not met. Gate 2 remains FAIL; DESIGN_COMPROMISED boundary stable at protocol ceiling. Claim retained HYPOTHESIS (not a global negative)."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "reason": "Audit PASS, producer_claim_supported=true. At frozen protocol ceiling, no candidate cleared the capability bar. Failure mode (reveal-click then re-click loop) is prompt-sensitive (audit VF-01); prompt ablation is the highest-information next test. Credential-free 3B-8B Qwen range exhausted under frozen prompt; re-scope remains an option if prompt ablation also fails.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/experiments/EXP-INTEL-37982024058/audit.json",
+    "research/experiments/EXP-INTEL-37982024058/spec.json",
+    "research/experiments/EXP-INTEL-37982024058/prereg.md",
+    "research/experiments/EXP-INTEL-37982024058/freeze.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/task_episodes.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json",
+    "research/experiments/EXP-INTEL-37973264582/handoff.json"
+  ]
+}
