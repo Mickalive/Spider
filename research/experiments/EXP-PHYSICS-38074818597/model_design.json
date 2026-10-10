@@ -1,10 +1,10 @@
 {
   "status": "success",
-  "model": "opencode/big-pickle",
-  "attempt": 1,
+  "model": "opencode/nemotron-3-ultra-free",
+  "attempt": 5,
   "exit_code": 0,
   "category": "ok",
-  "github_run_id": "38087583073",
+  "github_run_id": "38090172387",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-10T21:54:07.320588+00:00"
+  "recorded_at": "2026-10-10T23:13:18.391767+00:00"
 }
