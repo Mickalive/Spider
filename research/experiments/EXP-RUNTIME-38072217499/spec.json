@@ -1,49 +1,203 @@
 {
   "experiment_id": "EXP-RUNTIME-38072217499",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does a declared, credential-free, locally-served ASYMMETRIC-DISCOVERY task bank (ADB-v4) - whose session-scoped role discovery is a fixed-length chained protocol paid identically per task by any non-persisting arm but paid once per role and reused across the tasks of a session by a stateful mechanism - yield a genuinely non-degenerate measurement instrument, certified ARITHMETICALLY in DESIGN before freeze, in which at high residual novelty (novelty_fraction >= 0.5) the cold re-derivation baseline (B-COLD-RE-DERIVE) and the retrieval-shaped comparator (B-RETRIEVAL-SHAPED) are strictly below the success ceiling (high-novelty point < 0.95 AND two-sided 95% Wilson lower bound < 0.90 at n=12), the session-amortizing treatment (T-AMORT-REUSE) is behaviourally distinct and reaches ceiling, a foreknown-schema positive control proves solvability, the out-of-family null refuses without false accepts, every counter is server-reconciled over the four mandate counters (http_requests, retrieval_calls, verification_calls, repair_attempts) and route-token-leak-free, and a preregistered contamination/dynamic-range certificate pins the expected ledger - so that the bank is delivered as a reusable Runtime substrate that removes readiness condition (2) (blocker B2) rather than another mandatory-discovery deterministic REST certificate (explicitly excluded after EXP-PRODUCT-37989728440)?",
+  "hypothesis": "A credential-free deterministic localhost REST bank in which (a) each session begins with a carry-chained bootstrap (root, hub, boot/1..5; /boot/5 yields the session manifest, the ordered role registry R1..R6, and the task list) and each hidden role is resolved by a fixed 3-step chained discovery protocol GET /disc/<role>/<step> that no arm can shorten, so the per-role discovery cost is strategy-invariant and equals 3 for every non-persisting arm; (b) hidden-role count grows with novelty as h(n)=8n for n in {0,0.25,0.5,0.75}; (c) a stateless arm re-pays the session bootstrap and the full 3-step discovery per required role on every task, while a within-session stateful mechanism pays the bootstrap once per session and pays 3 only for roles it has never resolved (reusing an already-resolved role costs 0); and (d) each task enforces a published non-decreasing integer request budget B(n)={10,15,16,18}, yields a non-degenerate instrument: cold (cost 3h+8) and retrieval (total cost 3h+9) cannot resolve high-novelty tasks within budget (both {T,T,F,F} across n=0/0.25/0.5/0.75; high-novelty k=0/12) whereas T-AMORT-REUSE resolves every level (per-task {9,8,8,8} <= B(n); high-novelty 12/12) and PC-FOREKNOWN-SCHEMA proves the bank is solvable (h+8 <= B(n); high-novelty 12/12). The comparator-minus-treatment per-task gap is non-decreasing across levels and strictly increasing across the high-novelty levels for both comparators (cold {-1,6,12,18}, retrieval {0,7,13,19}; min high-novelty gaps 12 and 13 requests), and the treatment/comparator distinction is behavioural and coupling-free (disjoint route traces: the treatment walks the boot chain once per 4-task session, issues /tasks once per session, and has zero /disc on already-resolved roles, while each stateless task walks the full boot chain and issues exactly 3h /disc steps; retrieval alone issues 3 local index probes). This is an instrument-readiness certificate conditional on the declaration; it is NOT a Web-transfer, real-agent, or product claim.",
+  "falsifier": "The ADB-v4 bank-readiness hypothesis is falsified or bounded by any of the following at the frozen thresholds: (F1) at least one comparator (B-COLD-RE-DERIVE or B-RETRIEVAL-SHAPED) reaches the ceiling on the 12-task high-novelty stratum (observed point >= 0.95 OR Wilson 95% lower bound >= 0.90) while PC-FOREKNOWN-SCHEMA succeeds and every integrity gate holds - the bank has no dynamic range and adds no headroom to the excluded mandatory-discovery class; (F2) the DESIGN arithmetic certificate shows the high-novelty stratum empty, a predicted success cell unreachable, or a budget that admits a comparator at high novelty (constructibility failure, caught before freeze, not a runtime discovery); (F3) the treatment is not live at HIGH novelty - it fails a high-novelty task (n>=0.5), or its per-task cost exceeds B(n), or the observed comparator-minus-treatment gap is not non-decreasing across n or its high-novelty minimum is < 8 requests (a treatment failure at LOW novelty n<0.5, or a session whose declared task sequence is not the frozen ascending warm-up, is integrity gate I9 -> MEASUREMENT_INVALID, an instrument failure, not a scientific negative); (F4) any integrity gate fails - PC-FOREKNOWN-SCHEMA < 24/24, a low-novelty treatment failure (I9), an out-of-family session is accepted (I2), a budget-truncation episode overruns (I3), counter reconciliation is non-zero (I4), session replay is not exact (I5), the rendered declaration/certificate digest differs from the frozen D1/D2 (I6), a route token leaks into a task spec (I7), a re-run is non-deterministic (I8), or the contamination checks fail (I10). F1/F3 map to status=COMPLETE with outcome FALSIFIES or MIXED (a bounded negative about this bank construction). F4 maps to status=MEASUREMENT_INVALID (instrument failure), never to a scientific negative. F2 is a DESIGN/freeze failure, not a result.",
+  "baselines": {
+    "B-COLD-RE-DERIVE": {
+      "id": "B-COLD-RE-DERIVE",
+      "role": "strong baseline (first agent, no cross-task inheritance, per-task isolation)",
+      "description": "Stateless per-task episode with no cross-task memory, no retrieval index, no mechanism store and no session state. The episode is handed the site root only. It may use any site-native enumeration channel (robots.txt, sitemap.xml) at zero additional cost, but the declared sitemap lists only /, /hub and /about, so enumeration cannot amortize the boot chain or the session manifest. It walks the bootstrap (root -> hub -> boot/1..5 via the session carry chain = 7 requests; /boot/5 serves the session manifest), and then, because the discovery protocol is carry-chained and it cannot persist a resolved role across a task, it re-walks the full 3-step chain for each required role (3h), then /verify (1). Cost = 3h(n)+8; the session bootstrap and every role's discovery are re-paid per task by construction.",
+      "procedure": "fresh_episode -> bootstrap(root,hub,boot1..5,manifest_at_boot5) -> for each required role: disc(step1),disc(step2),disc(step3) -> verify",
+      "counter_signature": {"http_requests": "3h(n)+8", "bootstrap_requests": 7, "discovery_calls": "3h(n)", "retrieval_calls": 0, "verification_calls": 1, "repair_attempts": 0},
+      "scope_bound": "Deliberately non-omniscient and stateless: it is the strongest bounded planner we can declare given the same published budget B(n) as every arm (it uses the shortest bootstrap and full site-native enumeration), but it is forbidden from carrying a resolution receipt across the tasks of a session, which is the operational definition of the cold condition. Because the discovery primitive is a fixed carry chain, no policy can resolve a role in fewer than 3 requests per task without cross-task persistence; the declared policy is therefore not a strawman. This experiment certifies the instrument under declared policies; it does not claim these policies are optimal against an unrealized memory-carrying agent (readiness condition 3)."
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "id": "B-RETRIEVAL-SHAPED",
+      "role": "strong retrieval/RAG-over-trajectories comparator",
+      "description": "Like cold, plus it issues 3 local index probes per task against a cross-family leave-instance-out trajectory index built only from OTHER families' training trajectories (the probes are a local module call, counted separately as retrieval_calls, not as server http_requests). The index supplies the static root/hub navigational prefix (so retrieval starts at /boot/1 and spends 5 bootstrap requests instead of 7), but because the boot-chain carries and the role-resolution receipts are session-scoped and the index is leave-instance-out, retrieved fragments cannot supply the current session's carries or role mapping; retrieval still re-walks the full 3-step chain per role per task (3h). Server cost = 3h(n)+6; total arm cost including the 3 index probes = 3h(n)+9. The index cost is included in the total, so the comparison never omits a cost dimension the comparator actually pays.",
+      "procedure": "fresh_episode -> index_top_k(3, leave_family_out) -> bootstrap(boot1..5,manifest_at_boot5) -> for each required role: disc(step1),disc(step2),disc(step3) -> verify",
+      "counter_signature": {"http_requests": "3h(n)+6", "bootstrap_requests": 5, "discovery_calls": "3h(n)", "retrieval_calls": 3, "verification_calls": 1, "repair_attempts": 0},
+      "scope_bound": "The index is cross-family and leave-instance-out; a retrieval advantage would require the index to supply the current session's carries or role mapping, which it cannot, so retrieval's headroom is bounded by the fixed 2-request navigational prefix. If retrieval nonetheless reaches the high-novelty ceiling the design is falsified (F1), not rescued. A retrieval policy that additionally persists a within-session mechanism store would blur into T-AMORT-REUSE and is out of scope by construction."
+    }
+  },
+  "treatment": {
+    "id": "T-AMORT-REUSE",
+    "role": "session-amortizing mechanism (the Runtime substrate capability under test)",
+    "description": "A stateful policy that opens one multi-task session, walks the carry-chained bootstrap once (root, hub, boot/1..5 = 7 requests), fetches /tasks (1) and the first task spec (included), then resolves the session's tasks in the frozen ascending sequence. It persists the session manifest and, after a role's 3-step /disc chain completes, records that role's resolved token; on later tasks each already-known role costs 0 /disc requests and each newly introduced role costs 3 (roles are nested: level n introduces the first h(n)=8n roles, so 2 new roles per escalating level). It fetches each subsequent task spec (1 per task) and issues /verify (1 per task). Per-task cost = [9, 8, 8, 8] for n=0/0.25/0.5/0.75 (bootstrap and session-open charged to the warm-up task 1); session total 33. Before spending, it validates that the manifest declares the frozen ascending warm-up task sequence ['0.0','0.25','0.5','0.75']; if the sequence differs it refuses the session (UNKNOWN, no commit, no verify) rather than overspending.",
+    "procedure": "open_session -> validate_manifest_sequence -> bootstrap(root,hub,boot1..5) -> tasks -> spec1 -> [task_k: (spec if k>1) + new_roles*3 + verify]",
+    "counter_signature": {"http_requests_per_task": [9, 8, 8, 8], "session_total": 33, "tasks_per_session": 4, "boot_chain_per_session": 1, "tasks_page_per_session": 1, "discovery_calls": "0,6,6,6 (new roles only)", "retrieval_calls": 0, "verification_calls": 4, "repair_attempts": 0},
+    "scope_bound": "The treatment is a declared deterministic Runtime mechanism, not a Product carrier, so the pre-freeze Product-carrier liveness mandate does not apply; its liveness is structural and certified arithmetically (every per-task cost <= B(n) under the declared session schema, and it refuses rather than overspends on any non-conforming sequence)."
+  },
+  "positive_control": {
+    "id": "PC-FOREKNOWN-SCHEMA",
+    "role": "primary positive control (bank solvability ceiling)",
+    "description": "A policy given the session manifest, the role registry and the resolved role tokens out of band (hypothetically zero discovery cost) on the SAME 24 test tasks (all 4 novelty levels, so the full 4-arm x 4-level success matrix is measured and P6 is evaluable), plus the task spec. It walks the bootstrap (7) and issues one commit per required role (h) + /verify (1) = h(n)+8, all within B(n). If the bank is realizable and budgets adequate this must succeed 24/24; failure at any level would mean the bank is unsolvable and separates 'no headroom because discovery is costly' from 'no headroom because the task is impossible'. It is a SOLVABILITY ceiling control, NOT a headroom comparator, and it is excluded from the comparator-minus-treatment gap computation.",
+    "expected_behavior": "success_in_budget = 24/24 across all novelty levels (cost h(n)+8 <= B(n) for all levels; the 12/12 high-novelty stratum is the accept_region and the low 12 are the solvability sanity cells)",
+    "arms": ["T-AMORT-REUSE"],
+    "accept_region": {"n": 12, "required_min_k": 12, "point_min": 0.95},
+    "evidence_refs": ["spec.json#measurement_validity", "prereg.md#7-controls"]
+  },
+  "null_control": {
+    "id": "NC-OOS-FAMILY",
+    "role": "known-negative refusal null (out-of-support)",
+    "description": "Five frozen out-of-family session instances whose family signature is absent from the treatment's induced store. T-AMORT-REUSE must classify at the hub page and refuse (UNKNOWN, no commit, no verify) rather than fabricate or fall through to a generic resolver. This checks that treatment success is session/schema-bound and not a substrate artifact.",
+    "expected_behavior": "refusal_rate = 1.0, false_accepts = 0/5, bound_value = null; refusal observed after at most 2 requests (root, hub)",
+    "arms": ["T-AMORT-REUSE"],
+    "episodes_per_arm": 5,
+    "frozen_null_requirement": "5 frozen out-of-support session instances, all refused with reason OUT_OF_SUPPORT at the hub classification step",
+    "evidence_refs": ["prereg.md#7-controls", "prereg.md#10-execute-procedure-and-abort-gates"]
+  },
+  "measurement_validity": {
+    "substrate": {
+      "name": "ADB-v4 (Asymmetric-Discovery Bank, v4)",
+      "type": "credential-free, locally-served, deterministic multi-page REST substrate with a session-scoped, carry-chained role-resolution layer",
+      "implementation": "Python 3.12 standard library only: http.server.ThreadingHTTPServer for the site, urllib.request for arm transport, html.parser + json for parsing, hashlib for content digests, random.Random(SEED) for seeded values. No third-party package, no browser, no external network, no credentials, no cookies, no model calls.",
+      "transport": "http on 127.0.0.1 with an ephemeral port chosen by the OS; the port is not part of the frozen declaration identity (declared as the literal string 'ephemeral-not-frozen')."
+    },
+    "discovery_protocol": "Per role, resolution is a fixed 3-step carry chain: GET /disc/<role>/1 returns a per-role session nonce N_r; GET /disc/<role>/2/<N_r> returns a partial token P_r iff N_r is the session-valid nonce; GET /disc/<role>/3/<P_r> returns the resolved token T_r and commits role r for the session iff P_r is valid. Each step requires the previous step's value, and the chain is role-specific (mixes role id with the session secret), so it cannot be shortened or shared across roles within a task, and no arm can resolve a role in fewer than 3 requests without persisting T_r across tasks. This makes the per-role cost strategy-invariant, removing the ADB-v3 'try-both-candidates' policy-choice artifact.",
+    "task_bank": {
+      "construction": "F=2 families (F1,F2), 3 test sessions per family x 4 tasks (one per novelty level n in {0.0,0.25,0.5,0.75}) = 24 test tasks per arm. Each session's task list is fixed ascending ['0.0','0.25','0.5','0.75'] and each task has h(n)=8n hidden roles drawn as the first h(n) of the session's ordered registry R1..R6; the task spec exposes the role names but MUST NOT contain any route token (session id, canonical base, boot/hub/task/disc routes or absolute URLs).",
+      "strata": {"high_novelty_tasks_per_arm": 12, "low_novelty_tasks_per_arm": 12, "tasks_per_level_per_arm": 6},
+      "novelty_definition": "novelty n is a declared level of each frozen task; high novelty is n>=0.5, low novelty is n<0.5. The h(n)=8n hidden-role count is the operational cost driver, so stratum membership is arithmetic, not EXECUTE discretion.",
+      "budgets": {"0.0": 10, "0.25": 15, "0.5": 16, "0.75": 18},
+      "budget_semantics": "Per-task integer HTTP-request budget applied identically to every arm. Success = every required role is committed and /verify confirms the committed state within B(n). Budgets are non-decreasing and deliberately LENIENT toward the comparators (they do not shrink with novelty), so a comparator failing at high novelty fails despite the allowance.",
+      "seed": 20261010,
+      "route_leak_rule": "For every rendered task spec, disc page, hub, boot page and sitemap, the text must contain no absolute URL and none of the literals '/s/', '{sid}', '/boot/', '/hub', '/tasks', '/disc/', '/verify', or the session id; only the arm's own navigational relative links are permitted. The sitemap may list only '/', '/hub' and '/about'. Checked statically in DESIGN and re-checked at EXECUTE (gate I7)."
+    },
+    "per_task_counters": {
+      "http_requests": "server-logged HTTP request count for the episode (ground truth); includes bootstrap, discovery and verify",
+      "bootstrap_requests": "subset of http_requests spent on root/hub/boot navigation",
+      "discovery_calls": "subset of http_requests spent on the 3-step /disc protocol (3h for stateless arms; new_roles*3 for the treatment)",
+      "retrieval_calls": "local index queries issued (0 for cold/treatment; 3 per task for retrieval) - counted separately from http_requests because the index is an in-process module, and disclosed as such",
+      "verification_calls": "post-commit /verify requests (1 per task)",
+      "repair_attempts": "recovery actions issued after a failed discovery/verify, capped at 1 per task; each is charged to http_requests and recorded",
+      "excluded": "latency_ms and model calls/tokens are prohibited as decision inputs (prior audit found latency_ms/1000 to be instrument noise)"
+    },
+    "authorship_separation": "The site (ground-truth provider and request-log authority) and the arm policies are separate modules; the site never imports an arm module. No arm may read the site source. The retrieval index is built by a module that cannot read the site source or the evaluated session/family.",
+    "counter_honesty": "Every arm-reported counter must reconcile exactly to the site request log. Per episode the frozen predicate is: arm_reported_http_requests == server_logged_requests AND bootstrap_requests + discovery_calls + verification_calls <= http_requests AND retrieval_calls and repair_attempts are recorded independently of http_requests (bootstrap_requests and discovery_calls are subsets, never summed with http_requests). M-COUNTER-RECONCILE mismatches must be 0 or the run is MEASUREMENT_INVALID.",
+    "determinism": "All topology, listing order, role ordering and disc values are generated from the frozen declaration and seed; a canonical render-declaration digest D1 and predicted-certificate digest D2 are frozen in prereg.md and must be reproduced byte-for-byte at EXECUTE (gate I6). Running the same episode twice must produce identical counters (gate I8).",
+    "prerequisites": "Python 3.12 standard library present (http.server, urllib.request, html.parser, json, hashlib, random, statistics, socket, threading); no browser, no network egress, no credential and no external dataset. A stdlib import probe and a localhost server canary were run in DESIGN confirming both prerequisites (non-outcome-bearing; python 3.12.15).",
+    "no_synthetic_fallback": "Any failure (site bind failure, transport error, digest mismatch) is recorded with the exact error and mapped to MEASUREMENT_INVALID or INCONCLUSIVE, never silently substituted and never encoded as a scientific negative.",
+    "site_authoring_disclosure": "The substrate is synthetic by design (no third-party site exhibits exactly this declared asymmetric structure). This experiment certifies the INSTRUMENT's dynamic range and honesty under declared non-omniscient policies; it does not certify transfer to the open Web or to a real LLM agent (see validity threats).",
+    "memory_asymmetry_disclosure": "The declared asymmetry between the arms is a within-session MEMORY asymmetry, stated openly rather than hidden behind a protocol trick. The discovery protocol is a fixed 3-step carry chain that no policy can shorten; the only way to pay less than 3 per role per task is to persist the resolved token across tasks, which is exactly the declared treatment capability. B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED are declared as the strongest bounded policies consistent with their no-cross-task-persistence constraint (shortest bootstrap, full site-native enumeration, retrieval's full leave-instance-out index). This experiment certifies the instrument under exactly these declared policies; it explicitly does NOT claim a memory-carrying LLM agent (readiness condition 3) is bounded by them, and that is the downstream four-arm question.",
+    "contamination_certificate": {
+      "isolation": "Each arm runs against a fresh server process on a fresh ephemeral port with a fresh in-memory session namespace; no arm shares mutable state with another and server request logs are per-arm.",
+      "index_isolation": "The retrieval index is built only from the OTHER family's training trajectories (leave-instance-out); it MUST NOT contain any route, token or page from the evaluated session or family.",
+      "route_leak": "No task spec, disc page, hub, boot page or sitemap contains a session id, an absolute URL or any declared route literal (gate I7).",
+      "signature_disjointness": "Arms' route-trace signatures must be disjoint apart from the declared shared navigational routes (root/hub/boot/verify); any undeclared overlap is contamination (gate I10).",
+      "contamination_falsifiers": [
+        "any route token appears in a rendered spec/page (I7) -> MEASUREMENT_INVALID",
+        "the retrieval index contains an evaluated-session/family item (I10) -> MEASUREMENT_INVALID",
+        "cross-arm request-log overlap beyond the declared navigational routes (I10) -> MEASUREMENT_INVALID",
+        "a comparator success at high novelty (P1/P2) -> FALSIFIES"
+      ]
+    },
+    "reusable_substrate_delivery": "EXECUTE materialises the generator as research/runtime/adb_bank.py (within the Runtime lane's authorized code root) plus a frozen bank manifest at research/experiments/EXP-RUNTIME-38072217499/bank_manifest.json, and records their sha256 in provenance.json, so downstream Runtime/Product work can bind the bank as a reusable substrate (blocker B2). Freeze-time hashing is not applicable because the deliverable does not pre-exist freeze."
+  },
+  "decision_rule": {
+    "frozen_thresholds": {
+      "wilson_z_two_sided_95": 1.959963984540054,
+      "success_ceiling_point": 0.95,
+      "success_ceiling_wilson_lo": 0.90,
+      "high_novelty_threshold": 0.5,
+      "n_high_novelty": 12,
+      "n_low_novelty": 12,
+      "min_high_novelty_gap_requests": 8,
+      "counter_mismatch_max": 0,
+      "oos_false_accept_max": 0,
+      "budget_overrun_max": 0,
+      "repair_attempts_max_per_task": 1
+    },
+    "integrity_gates": {
+      "I1": "PC-FOREKNOWN-SCHEMA succeeds 24/24 overall and 12/12 on the high-novelty stratum (bank solvable).",
+      "I2": "NC-OOS-FAMILY false_accepts = 0/5 and all 5 refusals observed at hub classification.",
+      "I3": "NC-BUDGET-TRUNCATION: all 6 truncated episodes stop at the imposed budget with zero overrun and a recorded failure/partial state.",
+      "I4": "M-COUNTER-RECONCILE mismatches = 0 (arm counters == site request log; per-condition and total ledgers reconcile; subset relations hold).",
+      "I5": "PC-EXACT-SESSION-REPLAY: the 6 replayed treatment test sessions reproduce the original per-route counter vectors exactly.",
+      "I6": "Render digest match: EXECUTE-rendered declaration canonical sha256 == D1 and predicted-certificate canonical sha256 == D2.",
+      "I7": "Route-token leak absent on every rendered spec/disc/hub/boot/task page and the sitemap lists only /, /hub and /about.",
+      "I8": "Determinism: a repeated episode produces byte-identical counters.",
+      "I9": "Treatment session-schema and low-novelty liveness abort gate: T-AMORT-REUSE validates the frozen ascending warm-up sequence and refuses (UNKNOWN, no overspend) on any non-conforming session, and succeeds on every n<0.5 task with per-task cost <= B(n). A structural treatment failure here is an instrument failure, not a scientific negative.",
+      "I10": "Contamination gate: per-arm server isolation holds, the retrieval index is leave-instance-out (no evaluated-session/family item), and arm route-trace signatures overlap only on the declared shared navigational routes."
+    },
+    "propositions": {
+      "P1": "B-COLD-RE-DERIVE high-novelty success point < 0.95 AND Wilson 95% lo < 0.90 (predicted k=0/12).",
+      "P2": "B-RETRIEVAL-SHAPED high-novelty success point < 0.95 AND Wilson 95% lo < 0.90 (predicted k=0/12).",
+      "P3": "T-AMORT-REUSE succeeds 12/12 at high novelty AND 12/12 at low novelty (treatment live at every level; per-task cost within B(n)).",
+      "P4": "Observed per-task mean comparator-minus-treatment gap is non-decreasing across n=0,0.25,0.5,0.75 for BOTH comparators AND strictly increasing across the two high-novelty levels (0.5 < 0.75).",
+      "P5": "Minimum observed high-novelty per-task mean gap >= 8 requests (predicted min 12 cold / 13 retrieval).",
+      "P6": "Exact certificate agreement: the observed 4-arm x 4-level success matrix equals the predicted matrix and the observed per-condition request ledger equals the predicted ledger (D2)."
+    },
+    "result_mapping": {
+      "precedence": "Evaluate integrity gates first (any failure of I1..I10 -> MEASUREMENT_INVALID; note the low-novelty treatment block and the session-schema guard are themselves an abort gate). Then SUPPORTS iff P1..P6 all hold; else FALSIFIES iff NOT (P1 AND P2); else MIXED. Because MIXED is defined as P1 AND P2 AND NOT(P1 AND P2 AND P3 AND P4 AND P5 AND P6), SUPPORTS, FALSIFIES and MIXED are disjoint and cover every integrity-passing case: the precedence is a total partition.",
+      "SUPPORTS": "Integrity set holds AND P1..P6. Readiness condition (2) is removed for this instrument: a hash-pinned asymmetric-discovery bank with certified cold/retrieval headroom, a live amortizing mechanism, honest reconciled counters over the four mandate counters, and no route leak or contamination. C-MEAS-VALID's construct boundary widens, within its bounded scope, to include 'measurement-valid substrate with a certified non-degenerate asymmetric-discovery bank' for Runtime-owned downstream work.",
+      "FALSIFIES": "Integrity set holds AND at least one comparator reaches the ceiling at high novelty (NOT (P1 AND P2)). A bounded negative about this declared asymmetric-discovery construction: session-amortized discovery does not create headroom on the credential-free localhost class either. status=COMPLETE.",
+      "MIXED": "Integrity set holds AND P1 AND P2 AND NOT (P1 AND P2 AND P3 AND P4 AND P5 AND P6) - i.e. the comparator ceiling separation (P1,P2) holds but at least one of P3 (treatment high-novelty liveness), P4/P5 (gap trend/magnitude) or P6 (exact certificate agreement) does not. Localizes whether the headroom is real while the declared mechanism/cost model is wrong. status=COMPLETE.",
+      "MEASUREMENT_INVALID": "Any integrity-gate failure I1..I10 (including the low-novelty treatment liveness / session-schema abort gate I9 and the contamination gate I10). The measurement did not validly probe the claim; instrument failure, never a scientific negative; repair and re-run rather than reinterpreting.",
+      "INCONCLUSIVE": "Substrate bring-up, site bind, transport or digest-infrastructure failure prevents completing the matrix; recorded with the smallest unblocking action. Never a scientific negative."
+    },
+    "reachability_certificate": {
+      "computed_in": "DESIGN (pure arithmetic on the frozen declaration; no outcome measurements). Probe 2 recomputed it independently.",
+      "n_high_novelty": 12,
+      "declared_prediction": {"B-COLD-RE-DERIVE_high_k": 0, "B-RETRIEVAL-SHAPED_high_k": 0, "T-AMORT-REUSE_high_k": 12, "PC-FOREKNOWN-SCHEMA_high_k": 12},
+      "predicted_wilson": {
+        "cold_k0_n12": {"point": 0.0, "wilson_lo": 0.0, "wilson_hi": 0.242494},
+        "retrieval_k0_n12": {"point": 0.0, "wilson_lo": 0.0, "wilson_hi": 0.242494},
+        "treat_k12_n12": {"point": 1.0, "wilson_lo": 0.757506, "wilson_hi": 1.0}
+      },
+      "branch_reachability": {
+        "SUPPORTS": "Reachable: a faithful render of the declaration yields the predicted matrices and ledger. Note the honest nature of a certification experiment: under a byte-faithful render SUPPORTS is expected by construction; the empirical content is the verification that the render matches the declaration.",
+        "FALSIFIES": "Reachable under an integrity-passing render (one whose I1..I10 all hold) via a non-gated parameter realising differently in a way that makes a comparator fit B(n) at high novelty: (a) the retrieval index realises a larger saving than the declared 2 bootstrap requests (index savings are declared, not integrity-gated): its total is 3h+X with declared X=9; if an un-gated realisation lets X fall to <=4 (a saving of >=5 requests), then at h=4 the cost 16 fits B(0.5)=16 and NOT(P1) holds; or (b) the realized bootstrap is materially cheaper than the declared 3h+8 (a saving of >=4 requests lets cold fit B(0.5)=16); or (c) a stateless arm accidentally persists a within-task receipt, saving discovery. Each drives NOT(P1 AND P2) while I1..I10 still hold. (A route-token leak is deliberately NOT a FALSIFIES path - it is integrity gate I7 and maps to MEASUREMENT_INVALID.) This is the decision-changing scientific negative branch.",
+        "MIXED": "Reachable under a faithful render: a cost-model-only divergence (e.g. the treatment session pays a different number of bootstrap or spec requests, or the index saving is exactly the declared size but a different per-level pattern) changes the observed ledger/gaps (NOT P6/P4/P5) without flipping the high-novelty ceiling (P1,P2,P3 hold).",
+        "MEASUREMENT_INVALID": "Reachable: any of I1..I10 (e.g. a route leak, counter mismatch, replay mismatch, digest mismatch, contamination, or a low-novelty treatment failure / non-conforming session).",
+        "INCONCLUSIVE": "Reachable: localhost bind or transport failure before episode execution."
+      }
+    }
+  },
+  "product_consequence_positive": "If SUPPORTS, Runtime hands downstream lanes (Graph C-FRESHNESS/C-DELTA-REPAIR and the Product four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY benchmark) a reusable, hash-pinned synthetic asymmetric-discovery task bank delivered at the Runtime lane root with certified comparator headroom UNDER THE DECLARED POLICIES and honest counters over the four mandate counters, so a later treatment advantage measured under those policies is no longer at risk of being an unreachable-margin or ceiling artifact. Scope-honest claim: this advances Audit readiness condition (2) for this instrument by delivering a bank whose dynamic range is certified for the declared stateless/amortizing policies; it does NOT certify dynamic range against a real memory-carrying LLM agent, which could erase the declared memory asymmetry, so blocker B2 is only partially retired pending readiness condition (3). C-MEAS-VALID widens only within its bounded instrument scope; this is not product promotion and not a Web-transfer claim.",
+  "product_consequence_negative": "If FALSIFIES, the session-amortized asymmetric-discovery construction does not create headroom on the credential-free localhost class either; the program must not fund the four-arm C-LLM-INHERIT/C-RESIDUAL-NOVELTY benchmark on this bank class and should change the discovery asymmetry (third-party/adversarial populations) or scope the benchmark to a real-agent-capable substrate once readiness condition (3) is met. If MIXED, the ceiling headroom is retained but the declared cost model/trend must be corrected before reuse. If MEASUREMENT_INVALID, the instrument is repaired before any downstream spend. Every failure is bounded to this construction, not to C-MEAS-VALID's parent VALIDATED ceiling.",
+  "estimated_cost": {
+    "arms": ["B-COLD-RE-DERIVE", "B-RETRIEVAL-SHAPED", "T-AMORT-REUSE", "PC-FOREKNOWN-SCHEMA"],
+    "episodes": {"test_x_arm": 96, "replay_sessions": 6, "null_sessions": 5, "budget_truncation_episodes": 6, "repair_episodes": 6, "total": 119},
+    "predicted_http_requests": {"cold_test_24": 408, "retrieval_test_24_http": 360, "retrieval_test_24_index_probes": 72, "treat_test_24": 198, "pc_all_24": 264, "approx_total_including_controls": 1630},
+    "substrate": "local stdlib HTTP server; no network egress, no browser, no model calls, no credentials",
+    "estimated_wall_clock_minutes": 12,
+    "cost_note": "Cheap by construction: all episodes are local HTTP with the stdlib. The expensive pre-freeze part (the arithmetic certificate) is computed in DESIGN at zero runtime cost."
+  },
+  "expected_information_gain": "Moderate-to-high and instrument-scoped. The arithmetic certificate is a design guarantee conditional on the declared topology; once EXECUTE implements the declaration, SUPPORTS is largely the declaration taking effect, so the genuinely falsifiable pathways are implementation divergence, route/index leakage, counter dishonesty, budget-truncation behaviour, out-of-family false acceptance, contamination, and any arm behaviour that differs from the arithmetic (which would fire MIXED or FALSIFIES). The experiment is decision-changing because it (a) tests whether the recurring 'dynamic-range certificate unsatisfiable / comparators at ceiling' defect is a declaration problem rather than an intrinsic impossibility on the credential-free class, (b) delivers a hash-pinned bank with a certified comparator-headroom guarantee or a bounded negative at the Runtime lane root (blocker B2), and (c) explicitly closes the session-amortized asymmetric construction on FALSIFIES instead of re-discovering it in three lanes. It does NOT establish transfer to the open Web or to a real agent; that remains readiness condition (3).",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The decision rule is pure arithmetic over planned n and the frozen declaration, computed before freeze with no outcomes (probe 2). The accept region is non-empty and every verdict branch has a concrete reachable scenario: SUPPORTS (faithful render), FALSIFIES (a comparator resolving high-novelty tasks within budget via a non-integrity realization such as larger-than-declared index savings or a cheaper-than-declared bootstrap, while I1..I10 hold), MIXED (cost-model-only divergence that preserves P1/P2/P3 but breaks P6/P4/P5), MEASUREMENT_INVALID (any I1..I10 failure, including the low-novelty treatment abort gate I9 and the contamination gate I10), INCONCLUSIVE (bind/transport failure). Precedence is total and disjoint: integrity gate first (I1..I10), then SUPPORTS, then FALSIFIES = NOT(P1 AND P2), then MIXED = P1 AND P2 AND NOT(P1 AND P2 AND P3 AND P4 AND P5 AND P6); no branch makes a later branch unreachable. Thresholds are attainable: at n=12, k=0 gives point 0.0 and Wilson lo 0.0 (both < 0.95/0.90) with hi 0.242494, while k=12 gives point 1.0 and lo 0.757506; the min high-novelty gap (12 cold / 13 retrieval) exceeds the >=8 threshold. Budgets B(n)={10,15,16,18} admit the treatment (costs 9,8,8,8) and the positive control (h+8 = 8,10,12,14) at every level, and reject both comparators at n>=0.5 (cold 20,26; retrieval total 21,27) while admitting both at n<0.5 (cold 8,14; retrieval total 9,15).",
+      "evidence_refs": ["spec.json#decision_rule.reachability_certificate", "prereg.md#6-arithmetic-certificate-cert-adb-dynamic-range", "prereg.md#8-decision-rule"]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All prerequisites are available now or are fully declared deterministic functions of the frozen seed inside the packet, not unknown external dependencies: (1) Python 3.12 standard library only (http.server, urllib.request, html.parser, json, hashlib, random, statistics, socket, threading) - a DESIGN import probe confirmed every required module (python 3.12.15), removing any browser/live-site/credential fragility; (2) a localhost ThreadingHTTPServer canary bound 127.0.0.1:ephemeral and returned 200, confirming transport; (3) the site topology, task bank (24 test tasks + 5 null + 6 truncation + 6 repair), role rule, budgets, seed and arm policies are fully declared in prereg.md, so no external site, dataset, credential or model endpoint is read. The bank content is generated deterministically from the frozen declaration (not an unknown external artifact), analogous to a frozen fixture; DESIGN probes already instantiated the transport and confirmed the arithmetic is realizable.",
+      "evidence_refs": ["spec.json#measurement_validity.substrate", "spec.json#measurement_validity.prerequisites", "prereg.md#4-substrate-declaration-adb-v4", "prereg.md#15-design-phase-probes-non-outcome-bearing"]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Treatment and both strong baselines can differ on the frozen task population and are not guaranteed identical: comparator per-task costs (3h+8 cold, 3h+9 retrieval total) exceed the published budgets at high novelty while the treatment session costs (9,8,8,8) fit every level, so the success profiles are provably distinct (cold {T,T,F,F}, retrieval {T,T,F,F}, treatment {T,T,T,T}). Every cost dimension each comparator actually pays is charged: stateless arms pay per-task bootstrap AND the full 3-step discovery chain per required role; the retrieval arm is additionally charged its 3 local index probes (not omitted, and it saves only 2 bootstrap requests, so its total cost is +1 vs cold); the treatment pays its session bootstrap (amortized) and pays discovery only for roles it has never resolved. Crucially, the comparator costs are NOT policy artifacts: the discovery primitive is a fixed carry-chained 3-step protocol whose steps each require the previous step's value, so no strategy can resolve a role in fewer than 3 requests per task without cross-task persistence - the exact capability under test. Route-trace signatures are formally distinct: retrieval = cold + {3 index probes}; treatment sessions contain /tasks once and one boot chain, and zero /disc on already-resolved roles; PC lacks the discovery chains; OOS refuses without commit. Known limitation, declared: because retrieval saves only the fixed 2-request root/hub prefix over cold, its stratum-level success profile coincides with cold (both {T,T,F,F}); the two comparators therefore bracket the ceiling jointly rather than independently. Both are mandated by the Director, both remain strictly below the treatment, and their ledgers differ (retrieval pays 3 index probes and 1 fewer bootstrap request), so the coincidence is disclosed rather than hidden. The leave-instance-out index prevents retrieval from supplying the current session's carries or role mapping. The novelty metric is computed from the declared h(n), not assumed, and cold/retrieval are declared as the strongest bounded stateless policies (shortest bootstrap, full site-native enumeration) so the headroom is not an artifact of a weak baseline.",
+      "evidence_refs": ["spec.json#baselines", "spec.json#treatment", "spec.json#measurement_validity.discovery_protocol", "spec.json#decision_rule.reachability_certificate", "prereg.md#5-cost-model-and-static-traces"]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Each control can fire and each failure maps to a distinct consequence under the same implementation that scores the experiment: PC-FOREKNOWN-SCHEMA must reach 24/24 (I1) or the bank is unsolvable -> MEASUREMENT_INVALID, separating instrument failure from a scientific negative; the low-novelty treatment abort gate plus session-schema guard must hold (I9) or the bank topology/schema is unimplementable -> MEASUREMENT_INVALID; NC-OOS-FAMILY must refuse 5/5 (I2) or treatment success is a substrate artifact; NC-BUDGET-TRUNCATION must show zero overrun on 6 episodes (I3); NC-REPAIR-TRANSIENT must show the arm either repairs (repair_attempts=1, counted and charged) or honestly fails without a hidden retry; PC-EXACT-SESSION-REPLAY must reproduce counters exactly (I5); the route-leak check (I7); counter reconciliation (I4); the render-digest gate (I6); determinism gate (I8); and the contamination gate (I10). No control is tautological in the operational sense: the positive control's cost (h+8) is arithmetic-clear of the budget at high levels, the null control's refusal is a policy decision that a greedy fall-through resolver would violate, the repair control deliberately injects a transient fault so a repair counter (or an honest failure) is observable, and the truncation control deliberately under-funds episodes so an overrun is observable. Under a byte-faithful render every control passes by construction; the control's non-trivial content is detection of a render that deviates from the declaration, which is exactly the residual risk the instrument must catch.",
+      "evidence_refs": ["spec.json#positive_control", "spec.json#null_control", "prereg.md#7-controls", "prereg.md#10-execute-procedure-and-abort-gates"]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "T-AMORT-REUSE is a declared deterministic mechanism (open a session, validate the manifest's frozen ascending warm-up sequence, walk the bootstrap once, persist the session manifest, record each role's resolved token after its 3-step chain, reuse it on later tasks, refuse out-of-family and non-conforming sessions), not an external Product carrier, so the pre-freeze Product-carrier liveness mandate does not apply. Its liveness is structural and certified arithmetically: the per-task costs (9,8,8,8) fit B(n)={10,15,16,18} at every level, so a faithful implementation resolves all 12 high-novelty and all 12 low-novelty tasks; the low-novelty block is executed FIRST at EXECUTE as a post-freeze abort gate, and a liveness failure aborts to MEASUREMENT_INVALID. Ordering robustness (fixing the ADB-v3 fragility): the bank's session schema ALWAYS declares the ascending warm-up sequence ['0.0','0.25','0.5','0.75']; T-AMORT-REUSE validates this before spending and REFUSES (UNKNOWN, no overspend) on any non-conforming session, so a reordered session cannot cause an over-budget failure - it becomes a refusal rather than a cost blowout, and any such refusal in the test matrix is gate I9 -> MEASUREMENT_INVALID (instrument divergence). The treatment's disjoint counter signature (bootstrap once per 4 tasks, /tasks once per session, discovery_calls 0,6,6,6 with zero on reused roles, retrieval_calls 0) demonstrates it is a genuinely different procedure from both comparators. No separate Product carrier is required for this runtime instrument.",
+      "evidence_refs": ["spec.json#treatment", "spec.json#decision_rule.reachability_certificate", "prereg.md#5-cost-model-and-static-traces", "prereg.md#10-execute-procedure-and-abort-gates"]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "No pre-existing mutable local repository file, task bank, dataset or fixture is consumed by this experiment, so there is nothing to hash into freeze.json.artifact_hashes and the list is empty. Two independent grounds make NOT_APPLICABLE the only valid semantic here: (1) the interpretation surface is not an external artifact at all - the substrate topology, the 24-task bank (a deterministic function of family x session x level), the role rule h(n)=8n, the fixed 3-step discovery protocol, the published budgets, the seed 20261010, the arm policies and the counter/reconciliation predicates are all declared inside the frozen spec.json/prereg.md, and their identity is pinned by the two frozen digests D1 = cc146763642147f391e410bd8c46806386c1333ff9c5fd1aaf9e6ce37696b028 (render-declaration) and D2 = 5e4424a10dec21a585c169b2568348a2490c562007b7e512144310805b4f38a9 (predicted certificate); the decision depends only on quantities pinned by D1 (h(n), budgets, arm costs), so no unpinned mutable input can change the outcome; and (2) the DESIGN-stage workflow grants this stage write scope only to spec.json/prereg.md, so authoring a generator/bank file at DESIGN is structurally impossible - the bank is necessarily an EXECUTE deliverable. EXECUTE materialises the generator, harness and reusable substrate (research/runtime/adb_bank.py) post-freeze inside the experiment transaction; those produced files are fingerprinted in result.json.artifacts and recomputed by AUDIT, and gate I6 requires the rendered declaration/certificate to match D1/D2 byte-for-byte. Had a pre-existing mutable dependency existed it would have been bound; none does, so the correct status is NOT_APPLICABLE with an empty freeze_artifacts list (which the freezer enforces).",
+      "evidence_refs": ["spec.json#measurement_validity.determinism", "spec.json#measurement_validity.reusable_substrate_delivery", "prereg.md#6-arithmetic-certificate-cert-adb-dynamic-range", "prereg.md#14-artifacts"]
     }
   },
   "freeze_artifacts": []
