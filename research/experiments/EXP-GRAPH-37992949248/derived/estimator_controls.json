@@ -1,0 +1,67 @@
+{
+  "M-ESTIMATOR-POSITIVE-CONTROL-PASS": true,
+  "M-ESTIMATOR-CONTROL-LOW": 0.3333333333333333,
+  "M-ESTIMATOR-CONTROL-UB97": 0.5,
+  "M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS": true,
+  "NC-ESTIMATOR-CONTROL-SENSITIVITY": true,
+  "nc_1anchor_null_pass": true,
+  "flexible_binding": "estimator.anchor_clustered_paired_fa_diff (same function/B/seed as the real read; V16)",
+  "fixtures": {
+    "SYN-ESTIMATOR-2ANCHOR": {
+      "LOW": 0.3333333333333333,
+      "UB97": 0.5,
+      "fa_inc_ub97": 0.5,
+      "fa_va_ub97": 0.0,
+      "degenerate": false,
+      "degenerate_reason": null,
+      "n_anchors": 2,
+      "n_trials": 5,
+      "B": 10000,
+      "seed": 37992949248,
+      "n_resamples": 10000
+    },
+    "SYN-ESTIMATOR-1ANCHOR": {
+      "LOW": null,
+      "UB97": null,
+      "fa_inc_ub97": null,
+      "fa_va_ub97": null,
+      "degenerate": true,
+      "degenerate_reason": "n_anchors<2",
+      "n_anchors": 1,
+      "n_trials": 1,
+      "B": 10000,
+      "seed": 37992949248,
+      "n_resamples": 0
+    },
+    "SYN-ESTIMATOR-HOMOGENEOUS": {
+      "LOW": 0.5,
+      "UB97": 0.5,
+      "fa_inc_ub97": 0.5,
+      "fa_va_ub97": 0.0,
+      "degenerate": true,
+      "degenerate_reason": "zero_width_interval",
+      "n_anchors": 2,
+      "n_trials": 4,
+      "B": 10000,
+      "seed": 37992949248,
+      "n_resamples": 10000
+    }
+  },
+  "reference_arithmetic": {
+    "SYN-ESTIMATOR-2ANCHOR": {
+      "LOW_expected": 0.3333333333333333,
+      "UB97_expected": 0.5
+    },
+    "SYN-ESTIMATOR-1ANCHOR": {
+      "LOW_expected": null,
+      "UB97_expected": null
+    },
+    "SYN-ESTIMATOR-HOMOGENEOUS": {
+      "LOW_expected": 0.5,
+      "UB97_expected": 0.5
+    }
+  },
+  "seed": 37992949248,
+  "B": 10000,
+  "note": "INSTRUMENT UNIT TEST ONLY (CC-J): synthetic pseudo-anchors; never scored; these numbers are never a measure of real anchors."
+}

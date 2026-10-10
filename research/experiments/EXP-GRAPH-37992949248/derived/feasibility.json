@@ -1,0 +1,18 @@
+{
+  "M-D1V-DEGENERACY-MODE": "ANCHOR_TRANSPORT_COUPLING",
+  "secondary_label": "FEASIBILITY-D1V-SINGLE-ANCHOR-TRANSPORT-COUPLED",
+  "M-ESTIMATOR-POSITIVE-CONTROL-PASS": true,
+  "per_anchor_blockers": {
+    "CAL-POS-1": "BODY_DERIVED_ETAG",
+    "CAL-POS-2": "NONE",
+    "CAL-POS-3": "TOKEN_BEARING_FINAL_URL",
+    "CAL-POS-4": "NO_FIELD"
+  },
+  "M-TRANSPORT-COUPLING-STABILITY": {
+    "CAL-POS-1": "UNCHANGED",
+    "CAL-POS-2": "UNCHANGED",
+    "CAL-POS-3": "UNCHANGED",
+    "CAL-POS-4": "UNCHANGED"
+  },
+  "note": "feasibility certificate (spec.feasibility_certificate); descriptive/instrument-level; the secondary label is emitted only when the mode is ANCHOR_TRANSPORT_COUPLING and GATE F passed."
+}

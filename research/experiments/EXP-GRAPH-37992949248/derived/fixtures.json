@@ -1,0 +1,107 @@
+{
+  "M-FIXTURE-CANARY-PASS": true,
+  "M-FIXTURE-EMPTY-AGREE": true,
+  "M-FIXTURE-JSSTRING-VALUES": 0,
+  "M-GUARD-FIXTURE-PASS": true,
+  "guard_fixtures": {
+    "SYN-GUARD-D1V": {
+      "fired": {
+        "CH-STRUCT-SIG": false,
+        "CH-TRANSPORT-VALIDATOR": false,
+        "CH-POSTCOND-SEM": false,
+        "CH-PRECOND-BINDING": true
+      },
+      "expected": {
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN"
+      },
+      "observed": {
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "ABSTAIN",
+        "B-FULL-GUARD": "ABSTAIN"
+      },
+      "pass": true
+    },
+    "SYN-GUARD-FRESH": {
+      "fired": {
+        "CH-STRUCT-SIG": false,
+        "CH-TRANSPORT-VALIDATOR": false,
+        "CH-POSTCOND-SEM": false,
+        "CH-PRECOND-BINDING": false
+      },
+      "expected": {
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "REUSE",
+        "B-FULL-GUARD": "REUSE"
+      },
+      "observed": {
+        "B-INCUMBENT-SIGNAL-ONLY": "REUSE",
+        "B-VALUE-AWARE": "REUSE",
+        "B-FULL-GUARD": "REUSE"
+      },
+      "pass": true
+    },
+    "SYN-GUARD-POSTCOND": {
+      "fired": {
+        "CH-STRUCT-SIG": false,
+        "CH-TRANSPORT-VALIDATOR": false,
+        "CH-POSTCOND-SEM": true,
+        "CH-PRECOND-BINDING": false
+      },
+      "expected": {
+        "B-INCUMBENT-SIGNAL-ONLY": "ABSTAIN",
+        "B-VALUE-AWARE": "REUSE",
+        "B-FULL-GUARD": "ABSTAIN"
+      },
+      "observed": {
+        "B-INCUMBENT-SIGNAL-ONLY": "ABSTAIN",
+        "B-VALUE-AWARE": "REUSE",
+        "B-FULL-GUARD": "ABSTAIN"
+      },
+      "pass": true
+    }
+  },
+  "canary_a_pairs": [
+    [
+      "authenticity_token",
+      "fixture-canary-value-7f3a"
+    ],
+    [
+      "csrf-token",
+      "fixture-meta-canary-91bd"
+    ]
+  ],
+  "canary_b_pairs": [
+    [
+      "authenticity_token",
+      "fixture-canary-value-7f3a"
+    ],
+    [
+      "csrf-token",
+      "fixture-meta-canary-91bd"
+    ]
+  ],
+  "empty_a_states": [
+    [
+      "authenticity_token",
+      "PRESENT_EMPTY"
+    ],
+    [
+      "csrf-token",
+      "PRESENT_EMPTY"
+    ]
+  ],
+  "empty_b_states": [
+    [
+      "authenticity_token",
+      "PRESENT_EMPTY"
+    ],
+    [
+      "csrf-token",
+      "PRESENT_EMPTY"
+    ]
+  ],
+  "js_a_values": [],
+  "js_b_values": []
+}

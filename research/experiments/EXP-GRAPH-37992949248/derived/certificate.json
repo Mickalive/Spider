@@ -1,0 +1,237 @@
+{
+  "M-CERT-ROUTE-OK": 4,
+  "M-CERT-BODY-VARIABLE": 4,
+  "M-CERT-FIELD-PRESENT": 3,
+  "M-CERT-SESSION-ISOLATION-PASS": true,
+  "M-CERT-FIRST-REQUEST-COOKIELESS": true,
+  "M-CERT-SESSION-IDENTIFYING-DISJOINT": false,
+  "M-CERT-CONSTCONFIG-SHARED-NAMES": {
+    "CAL-POS-1": [
+      "preferred_language"
+    ],
+    "CAL-POS-2": [
+      "GeoIP",
+      "NetworkProbeLimit",
+      "WMF-Last-Access"
+    ],
+    "CAL-POS-3": [
+      "CentralAuthAnonTopLevel",
+      "GeoIP",
+      "NetworkProbeLimit",
+      "WMF-Last-Access",
+      "WMF-Last-Access-Global"
+    ],
+    "CAL-POS-4": [],
+    "CAL-NEG-1": [],
+    "CAL-NEG-2": [],
+    "CAL-NEG-3": [],
+    "CAL-NEG-4": []
+  },
+  "M-CERT-UNEXPECTED-SHARED-NAMES": {
+    "CAL-POS-1": [
+      "_gitlab_session"
+    ],
+    "CAL-POS-2": [
+      "WMF-Uniq",
+      "authSession"
+    ],
+    "CAL-POS-3": [
+      "WMF-Uniq",
+      "authSession",
+      "enwikiSession"
+    ],
+    "CAL-POS-4": [],
+    "CAL-NEG-1": [],
+    "CAL-NEG-2": [],
+    "CAL-NEG-3": [],
+    "CAL-NEG-4": []
+  },
+  "M-CERT-NEG-VALUES-A": 0,
+  "M-CERT-NEG-VALUES-B": 0,
+  "per_anchor": {
+    "CAL-POS-1": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "preferred_language"
+      ],
+      "unexpected_shared_names": [
+        "_gitlab_session"
+      ],
+      "session_identifying_disjoint": false,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 2,
+        "S2": 2,
+        "S3": 2,
+        "S4": 2
+      }
+    },
+    "CAL-POS-2": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "GeoIP",
+        "NetworkProbeLimit",
+        "WMF-Last-Access"
+      ],
+      "unexpected_shared_names": [
+        "WMF-Uniq",
+        "authSession"
+      ],
+      "session_identifying_disjoint": false,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 5,
+        "S2": 5,
+        "S3": 5,
+        "S4": 5
+      }
+    },
+    "CAL-POS-3": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "CentralAuthAnonTopLevel",
+        "GeoIP",
+        "NetworkProbeLimit",
+        "WMF-Last-Access",
+        "WMF-Last-Access-Global"
+      ],
+      "unexpected_shared_names": [
+        "WMF-Uniq",
+        "authSession",
+        "enwikiSession"
+      ],
+      "session_identifying_disjoint": false,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 8,
+        "S2": 8,
+        "S3": 8,
+        "S4": 8
+      }
+    },
+    "CAL-POS-4": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    },
+    "CAL-NEG-1": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    },
+    "CAL-NEG-2": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    },
+    "CAL-NEG-3": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    },
+    "CAL-NEG-4": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true,
+      "jar_sizes": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 0,
+        "S4": 0
+      }
+    }
+  },
+  "NC-CONSTCONFIG-EXCLUSION-NOT-VACUOUS": {
+    "shared_non_allowlisted_pair_fails": true,
+    "allowlisted_only_passes": true,
+    "shared_session_identifying_name_distinct_values_passes": true,
+    "not_vacuous": true,
+    "fixture_fail_observed": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "preferred_language"
+      ],
+      "unexpected_shared_names": [
+        "_gitlab_session"
+      ],
+      "session_identifying_disjoint": false,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": false,
+      "pass": false
+    },
+    "fixture_pass_observed": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "preferred_language"
+      ],
+      "unexpected_shared_names": [],
+      "session_identifying_disjoint": true,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true
+    },
+    "fixture_name_distinct_observed": {
+      "first_request_cookieless": true,
+      "constconfig_shared_names": [
+        "preferred_language"
+      ],
+      "unexpected_shared_names": [
+        "_gitlab_session"
+      ],
+      "session_identifying_disjoint": false,
+      "session_identifying_disjoint_is_gating": false,
+      "pairwise_disjoint_on_name_value_after_filter": true,
+      "pass": true
+    }
+  }
+}
