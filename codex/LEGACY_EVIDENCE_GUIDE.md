@@ -1,11 +1,11 @@
-# SPIDER — Pre-2.0 evidence bridge (read before allocating NEW research)
+# SPIDER — Navigating the historical portion of ONE cumulative Codex
 
-The full **frozen** pre-2.0 source is `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`, Git blob `9bb76113aeaf46d9aecdd8a38349a3a7741e57c3` (~22 MB, 566,404 lines). Research 2.0 packets are **separate**. Do not join their counts or treat a substring labelled PASS as a successful hypothesis.
+The historic source is now part of the **same continuous scientific record**: `codex/sources/0000-historical-evidence.md` on main is byte-identical to the original archive Git blob `9bb76113aeaf46d9aecdd8a38349a3a7741e57c3` (~22 MB; 566,404 lines). The **single** `SPIDER_CODEX.md`, `codex/index.json` and `codex/claim_state.json` cover historical evidence and subsequent Research 2.0 packets. Do not add artifact counts to experiment counts or treat an artifact containing PASS as a successful hypothesis.
 
 ## Available lightweight entry points
 
 - `codex/legacy_brief.json` — source-pinned, bounded historical findings, automatically included as `legacy_history` in `scripts/build_portfolio_snapshot.py`. It is a first-pass *screen*, not evidence that no other relevant historical artifact exists.
-- `codex/legacy_artifact_index.json` — 1,401 historic unique final-state scientific/data artifacts, with `sha`, original `paths`, `experiment_ids`, `lane`, `role`, and exact **source line interval** in the frozen document. Artifact counts are not experimental counts: there are 717 `result_measurement`, 250 `audit_gate`, 106 `report_verdict`, 153 `state_provenance`, 51 `prereg_protocol`, 107 `context_input`, 17 `charter_question` entries.
+- `codex/index.json.historical.artifacts` — all 1,401 original unique final-state scientific/data artifacts, with `sha`, original `paths`, `experiments`, `lane`, `role`, and exact **source line interval**. The older `codex/legacy_artifact_index.json` is retained as a reproducible source-input inventory, not another Codex. Artifact counts are not experimental counts: there are 717 `result_measurement`, 250 `audit_gate`, 106 `report_verdict`, 153 `state_provenance`, 51 `prereg_protocol`, 107 `context_input`, 17 `charter_question` entries.
 - Exact **archived original** is authoritative; an index's `verdict_tokens` are search aids only. A candidate repeated experiment requires reading original design/results/audit, not just the keyword inventory.
 
 ## Read one archived artifact; never load the 22 MB whole file into LLM context
@@ -13,15 +13,14 @@ The full **frozen** pre-2.0 source is `archive/spider-codex-ultimate:SPIDER_CODE
 On a checkout with Git installed:
 
 ```bash
-git fetch -q origin 'refs/heads/archive/spider-codex-ultimate:refs/remotes/origin/archive/spider-codex-ultimate'
-git show origin/archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md | sed -n '201815,201870p'
+sed -n '201815,201870p' codex/sources/0000-historical-evidence.md
 ```
 
 This is an example source excerpt for the corrected Graph speed claim, **not** a generic proof; use the exact `start_line/end_line` returned by the JSON index for your selected artifact. To find matching index entries:
 
 ```python
 import json
-entries=json.load(open("codex/legacy_artifact_index.json",encoding="utf-8"))["artifacts"]
+entries=json.load(open("codex/index.json",encoding="utf-8"))["historical"]["artifacts"]
 for x in entries:
     if any("physics" in p.lower() and "report" in p.lower() for p in x["paths"]):
         print(x["sha"],x["paths"],x["start_line"],x["end_line"])
@@ -45,9 +44,9 @@ The underlying source is **read-only**. No scientific claim can be upgraded by i
 When proposing NEW direction on Graph, Physics, Runtime, Product, Intel or Frontier:
 
 1. Match historical **scientific question, substrate, controls, exact comparator, metric and failure mode**, not only the name of a claim.
-2. Use the `legacy_history` snapshot and filter `codex/legacy_artifact_index.json`; inspect exact archived source if a match looks material.
+2. Use the same claim snapshot and filter `codex/index.json.historical.artifacts`; inspect exact original source if a match looks material.
 3. Put one of `LEGACY: DUPLICATE / REPLICATION / DISTINCT_EXTENSION / NO_MATCH / UNCERTAIN` in the existing `comparative_reasoning`, alongside source SHA or an explicit limitation of the search.
 4. Don't allocate expensive work to a duplicate unless it is a proper independently powered replication with a meaningful validity upgrade. A historical invalid is not proof of falsification, but it **is** a warning not to repeat the same flaw.
-5. Keep the pre-2.0 archive immutable and separate from Research 2.0 canonical `claim_state.json`. Only experiments that pass Research 2.0's own gates may advance current claim statuses.
+5. Keep the original historical source immutable **within the unified Codex**. Associate earlier findings with the same claim record, but never upgrade the effective claim status from a raw historical verdict label. An upgrade requires admissible independently audited evidence.
 
 This makes the legacy archive usable for strategic choices without adding another autonomous lane, an oversized agent prompt or a new epistemic authority.
