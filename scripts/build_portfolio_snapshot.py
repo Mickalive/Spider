@@ -93,6 +93,11 @@ def main() -> None:
         if item.get("experiment_id")
     }
     claim_state = load("codex/claim_state.json")
+    # Compact, source-pinned historical pre-2.0 evidence for every direction cycle.
+    # Do not load the 22 MB archive into the model context.
+    legacy_brief = load("codex/legacy_brief.json")
+    if legacy_brief.get("source", {}).get("artifact_count") != 1401:
+        raise SystemExit("pre-2.0 legacy brief missing or unrecognized; refuse silent historical blindness")
     latest_claim_events = claim_state.get("latest_event_by_claim", {})
     effective_claim_events = claim_state.get("effective_event_by_claim") or latest_claim_events
 
@@ -270,6 +275,7 @@ def main() -> None:
         },
         "claims": claims,
         "lanes": lanes,
+        "legacy_history": legacy_brief,
     }
 
     out = Path(args.output)
