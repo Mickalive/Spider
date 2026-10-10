@@ -1,50 +1,935 @@
 {
-  "experiment_id": "EXP-GRAPH-38046502943",
-  "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+ "schema_version": 2,
+ "experiment_id": "EXP-GRAPH-38046502943",
+ "lane": "graph",
+ "claim_ids": [
+  "C-FRESHNESS"
+ ],
+ "claim_scope_note": "C-FRESHNESS = freshness sub-mechanism 'session/token drift with false-accept measurement' (registry). This DESIGN does not change claim status: the certificate's outcome is a bounded fail-loud (route parked with a new positive-control-backed reason), not a claim verdict.",
+ "design_type": "DESIGN_ONLY_FAIL_LOUD_CERTIFICATE",
+ "freeze_suppressed": true,
+ "freeze_suppression_reason": "decision_rule_reachability = FAIL (see freeze_eligibility). Per design-contract v2, a FAIL in any freeze_eligibility check forbids freezing. The deliverable of this experiment is the pre-freeze constructibility certificate itself, not a frozen EXECUTE.",
+ "director_mandate_binding": {
+  "target_claim": "C-FRESHNESS",
+  "question": "On credential-free, server-rendered, no-JavaScript GET-only anchors, is a value-only-rotation (D1V: STALE AND NOT structural_change AND NOT transport_change) population spanning >= 2 independent anchors constructible AT ALL such that the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate and M-N-D1V-ANCHORS >= 2 -- either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by a principled instrument change that reclassifies transport-validator motion caused solely by the rotating value itself, with that reclassification justified structurally rather than assumed? The DESIGN must produce a pre-freeze constructibility certificate for the >=2-anchor D1V frame (the exact anchors, the per-anchor transport-change cause, and the arithmetic showing the estimator is powered), and if no such population is constructible on this substrate it must FAIL LOUDLY and return the decisive positive-control-backed bounded reason that parks the four-anchor Part II route -- so that freshness effort can then move to a broader-population guard false-accept/calibration measurement or another sub-mechanism, rather than freeze another structurally degenerate single-anchor read.",
+  "agent_priors_used": [
+   "loud pre-freeze DESIGN failure is cheaper than freezing a degenerate read and discovering it during EXECUTE",
+   "the dynamic range of the estimator must be certified before an execute cycle is funded",
+   "the parent packet's four frozen anchors remain excluded from re-fetch",
+   "evaluation of transport-validator independence must be structural, not correlational"
+  ],
+  "rationale_summary": "The route is blocked only by population-degeneracy attribution (ANCHOR_TRANSPORT_COUPLING), which is exactly the kind of prerequisite that should be settled once with a pre-freeze certificate instead of being re-discovered as MEASUREMENT_INVALID. This is materially narrower than the parked four-anchor Part II route (re-running those anchors is already excluded); it admits a materially different population whose transport validators are independent of the rotating value, and/or a structurally justified instrument reclassification; shared measurement-validity substrate (C-MEAS-VALID) is NOT required for the core constructibility question.",
+  "allocation": "2x operator / 1x reviewer (review bandwidth pre-spent on the fail-loud check)",
+  "dependencies": [
+   "Part I accepted substrates (extraction paths, frozen in-list capability-token names)",
+   "GATE-C3 repaired session-isolation predicate (C-SESSION-ISOLATION-REPAIRED)"
+  ]
+ },
+ "parent_handoff_continuity": {
+  "parent_experiment_id": "EXP-GRAPH-37992949248",
+  "established": [
+   "Single-anchor D1V population exists (CAL-POS-2, 6 D1V trials); its blind-differential read is degenerate (M-D1V-DEGENERACY-MODE=ANCHOR_SCARCITY_OTHER) and the M-N-D1V-ANCHORS==1 precondition blocked the blindness claim",
+   "CAL-POS-1 BODY_DERIVED_ETAG and CAL-POS-3 TOKEN_BEARING_FINAL_URL transport coupling on the four frozen anchors (blockers)",
+   "Frozen metric/control identities and guard semantics (see metric_registry/control_registry/guard_model below)"
+  ],
+  "rejected": [
+   "Claim status change on the strength of a degenerate single-anchor read (INCUMBENT-BLIND-CONFIRMED not licensed)",
+   "Option-B reclassification for CAL-POS-1 (body diffs beyond the token) and CAL-POS-3 (centralauthLoginToken is a different, concurrently-rotating value than body wpLoginToken)"
+  ],
+  "unknown": [
+   "Whether a materially different >=2-anchor D1V population exists with transport validators provably independent of the rotating value (THIS certificate answers: existence YES, powered non-degenerate read NO)",
+   "M-PAIRED-FA-DIFF-D1V point/intervals on any multi-anchor population (never measured; would only be measurable inside a non-degenerate frame)"
+  ],
+  "do_not_assume": [
+   "Do not assume transport coupling is the general blocker for value-rotation anchors (REFUTED here for the new population: 4 new anchors are transport-stable)",
+   "Do not assume postcond (field-name-set) heterogeneity exists on this substrate (UNOBSERVED on 5 anchors over 3 dates)",
+   "Do not reuse probe sessions as scored evidence in any future EXECUTE (see measurement_validity V01-NEW)"
+  ],
+  "next_question_continuity": "The mandate question supersedes the parent handoff's local next-question proposal; parent SB-05/SB-06 are pre-empted by the mandate's park-and-redirect instruction."
+ },
+ "question": "Is a value-only-rotation (D1V: STALE AND NOT structural_change AND NOT transport_change) population spanning >= 2 independent anchors constructible on this substrate such that the anchor-clustered 97.5% lower bound (M-PAIRED-FA-DIFF-D1V) is non-degenerate and M-N-D1V-ANCHORS >= 2 (option A: materially different anchor population with transport validators provably independent of the rotating value; option B: principled, structurally justified instrument reclassification)?",
+ "hypothesis": "H-CONSTRUCTIBLE: such a powered, non-degenerate >=2-anchor D1V frame is constructible via option A and/or option B on this substrate.",
+ "falsifier": "F-NONDEGENERATE-CERT: demonstration that every constructible D1V frame on the observed substrate realizes per-anchor FA identically (homogeneous blindness), forcing LOW==UB97==1.0, i.e., power is not certifiable; in that case the DESIGN must FAIL LOUDLY with the decisive bounded reason, per mandate.",
+ "pre_freeze_satisfiability_dry_run": {
+  "certificate_rule": "The certificate (this spec) evaluates H-CONSTRUCTIBLE using (1) a bounded live screen of candidate anchors (drift labels only: value/structural/transport/postcond/endpoint change; NO guard decisions, NO false-accept measurements), (2) re-application of the frozen classifier to inherited frozen evidence (zero network), (3) closed-form estimator power arithmetic. This is a DESIGN-time satisfiability assessment, explicitly non-outcome-bearing per design-contract v2.",
+  "self_attack_results": [
+   "Branch reachability: on any frame composed of observed D1V-capable anchors, every per-anchor FA=1.0 => interval [1,1] zero-width => both decisive verdict branches arithmetically unreachable; sole reachable outcome DATA-INSUFFICIENT-D1V-DEGENERATE.",
+   "Arithmetic impossibility: per-anchor FA = 1 - postcond_fire_rate; observed postcond_fire_rate = 0/0 per anchor on 5 anchors => heterogeneity impossible.",
+   "Ceiling/floor baseline: incumbent FA floor 1.0 on D1V trials is the entire mass of the pooled distribution; no spread exists to bind.",
+   "Treatment/comparator identity: all four frozen guard variants' identities are preserved (see guard_model); comparator is REUSE-vs-ABSTAIN, and on D1V trials incumbent REUSE vs value-aware ABSTAIN is deterministic, not estimable-with-variance.",
+   "Control sensitivity: PC-CLASSIFIER-SENSITIVITY and PC-ESTIMATOR-NONDEGENERATE (see certificate_controls) confirm the instruments detect D1V-capability, transport coupling, and per-anchor heterogeneity wherever present.",
+   "Prerequisite/unbound-artifact audit: no repo-local mutable code was added; probe evidence embedded in this spec (headers, final_url, body hashes, extracted values); probe code/data are session-local (/tmp) and excluded from the repo."
+  ]
+ },
+ "d1v_multi_anchor_question": "Same as question (this experiment is the pre-freeze certificate for that question).",
+ "feasibility_certificate": {
+  "verdict": "NOT_CONSTRUCTIBLE_POWERED_FAIL_LOUD",
+  "verdict_summary": "A >=2-anchor D1V population IS constructible (exact anchors below) and the parent's transport-coupling attribution does NOT apply to it (all four value-bearing candidates have byte-stable transport signatures); however, the powered non-degenerate read is NOT constructible on the observed substrate: every D1V-capable anchor exhibits field-set homogeneity (postcond never fires), which forces per-anchor FA=1.0 and LOW==UB97==1.0 (zero-width 97.5% interval) under the frozen estimator. Both decisive verdict branches are therefore arithmetically unreachable and the would-be frozen read is degenerate by construction. Per mandate, this DESIGN FAILS LOUDLY: freezing is refused (decision_rule_reachability FAIL), and the decisive positive-control-backed bounded reason parking the four-anchor Part II route is delivered (below).",
+  "exact_anchors": {
+   "constructible_d1v_candidates": [
+    {
+     "id": "P1-OSM-RAILS",
+     "url": "https://www.openstreetmap.org/user/new",
+     "family": "OSMF/OpenStreetMap",
+     "n_d1v_trials_k3": 6,
+     "rotating_fields": [
+      "authenticity_token",
+      "csrf-token"
+     ],
+     "transport_change_cause": "NONE OBSERVED (ETag=None, Last-Modified=None, Cache-Control=None, Vary constant 'Accept-Language,Accept-Encoding', final_url constant incl. '?cookie_test=true')"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+     "id": "P3-MW-ARCH",
+     "url": "https://wiki.archlinux.org/index.php?title=Special:CreateAccount",
+     "family": "MediaWiki (Arch Linux)",
+     "n_d1v_trials_k3": 3,
+     "rotating_fields": [
+      "wpCreateaccountToken"
+     ],
+     "transport_change_cause": "NONE OBSERVED (ETag=None, Last-Modified=None, Cache-Control constant, Vary constant 'Accept-Encoding, Cookie', final_url constant)"
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+     "id": "P4-MW-GENTOO",
+     "url": "https://wiki.gentoo.org/index.php?title=Special:CreateAccount",
+     "family": "MediaWiki (Gentoo)",
+     "n_d1v_trials_k3": 3,
+     "rotating_fields": [
+      "wpCreateaccountToken"
+     ],
+     "transport_change_cause": "NONE OBSERVED (same signature pattern as P3)"
     },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+     "id": "P6-MASTODON",
+     "url": "https://mastodon.social/auth/sign_up",
+     "family": "Mastodon",
+     "n_d1v_trials_k3": 6,
+     "rotating_fields": [
+      "authenticity_token",
+      "csrf-token"
+     ],
+     "transport_change_cause": "NONE OBSERVED (ETag=None, Last-Modified=None, Cache-Control=None, Vary constant 'Accept-Encoding', final_url constant)"
     }
+   ],
+   "screened_non_constructible": [
+    {
+     "id": "P2-DRUPAL",
+     "reason": "NO_FIELD: registration delegated to Keycloak SSO redirect; form not server-rendered on this path"
+    },
+    {
+     "id": "P5-PHPBB",
+     "reason": "UNREACHABLE: HTTP 403 on all 3 sessions"
+    },
+    {
+     "id": "P7-WORDPRESS",
+     "reason": "NO_FIELD: redirect to centralized login.wordpress.org SSO"
+    },
+    {
+     "id": "P8-XWIKI",
+     "reason": "NO_FIELD: landing page has no in-list capability field; flow JS-bound"
+    }
+   ],
+   "frozen_evidence_anchors_excluded_from_refetch": [
+    "CAL-POS-1 (gitlab.com/-/trial_registrations/new/)",
+    "CAL-POS-2 (auth.wikimedia.org Special:CreateAccount)",
+    "CAL-POS-3 (en.wikipedia.org Special:UserLogin)",
+    "CAL-POS-4 (see parent)"
+   ]
   },
-  "freeze_artifacts": []
+  "per_anchor_transport_change_cause": {
+   "candidates": "For all four value-bearing candidates: NO transport-validator motion is attributable to the rotating value because there is no transport-validator motion at all (ETag/Last-Modified absent, Cache-Control/Vary/final_url byte-constant across sessions). The mandate's option-A criterion (transport validators provably independent of the rotating value) is therefore SATISFIED for these anchors.",
+   "frozen_evidence": "CAL-POS-1: BODY_DERIVED_ETAG (body diffs beyond the token: nonces, arkose payload, snowplow context; 20 non-equal line blocks S1-vs-S4); CAL-POS-3: TOKEN_BEARING_FINAL_URL (centralauthLoginToken rotates concurrently-or-thogonally to body wpLoginToken; byte-suffix drift observed; not same-value leakage). Option-B reclassification NOT justified for either (structural defect review, see option_b_defect_reexamination)."
+  },
+  "power_arithmetic": {
+   "per_anchor_fa_on_d1v": "FA_incumbent(a) on D1V trials = 1 - postcond_fire_fraction(a); FA_valueaware = 0 on every D1V trial (CH-PRECOND-BINDING fires)",
+   "pooled_diff": "M-PAIRED-FA-DIFF-D1V pooled = anchor-clustered weighted mean of per-anchor FA_incumbent (= mean of per-anchor FA, all value-aware at 0)",
+   "nondegeneracy_condition": "LOW < UB97 (97.5% interval) iff >= 2 distinct pooled resamples iff per-anchor FA heterogeneous iff CH-POSTCOND-SEM fires on >=1 D1V pair of some anchor",
+   "realization": "postcond fires 0 times on 0 D1V pairs across all 5 observed D1V-capable anchors (CAL-POS-2 + P1/P3/P4/P6) over 3 capture dates and 4 platform families => per-anchor FA = 1.0 everywhere => LOW == UB97 == 1.0 (zero-width degeneracy) on ANY constructible frame",
+   "would_be_nondengenerate_mode": "DATA-INSUFFICIENT-D1V-DEGENERATE with M-D1V-DEGENERACY-MODE=ANCHOR_SCARCITY_OTHER (homogeneous blindness; NOT transport coupling)",
+   "frozen_estimator_simulation": {
+    "would_be_frame": {
+     "LOW": 1.0,
+     "UB97": 1.0,
+     "degenerate": true,
+     "degenerate_reason": "zero_width_interval",
+     "n_anchors": 4,
+     "n_trials": 36,
+     "B": 20000,
+     "seed": 37992949248
+    },
+    "heterogeneous_counterfactual_same_anchors": {
+     "LOW": 0.4286,
+     "UB97": 1.0,
+     "degenerate": false,
+     "n_anchors": 4,
+     "n_trials": 36,
+     "B": 20000,
+     "seed": 37992949248
+    },
+    "note": "DESIGN-time arithmetic probe on the immutable frozen estimator; drift labels only, no EXECUTE-read outcomes."
+   }
+  },
+  "positive_control_backed_bounded_reason": {
+   "route_parked": "four-anchor Part II read (and any anchor-level paired differential read on this substrate)",
+   "bounded_reason": "The blindness confirmation INCUMBENT-BLIND-CONFIRMED is unfalsifiable at the anchor level on this substrate: the frozen incumbent guard REUSEs on every D1V trial of every constructible anchor (uniform blindness, FA=1.0 exactly) and the only heterogeneity channel that could break degeneracy (CH-POSTCOND-SEM field-name-set rotation) is uninstantiated on 5/5 observed D1V-capable anchors. ANCHOR_TRANSPORT_COUPLING is thereby REPUDIATED as the general blocker (the new population is transport-stable), replaced by the stronger, evidence-backed attribution: population-wide field-set homogeneity forces the differential's dynamic range to zero. Option B is closed by structural defect review. The route stays parked because a re-run would deterministically re-land in DATA-INSUFFICIENT-D1V-DEGENERATE.",
+   "evidence_chain": "drift labels (probe, 3 dates anchor-level) + inherited frozen replay (parent-exact) -> derived arithmetic (frozen guard + frozen estimator) -> bounded reason (this entry)",
+   "redirect_recommendation": "freshness effort should move to (a) a broader-population guard false-accept/calibration measurement (the 4 new live anchors make a multi-anchor false-accept/calibration study concretely feasible) and/or (b) another freshness sub-mechanism; see product_consequence_negative. Recommendation only; no new experiment is designed here."
+  },
+  "not_claimed": [
+   "No false-accept measurements, guard decisions, or REUSE/ABSTAIN outcomes were computed at DESIGN time (probe produced drift labels only; guard decisions are EXECUTE-read outcomes and were deliberately not computed)",
+   "No claim status change for C-FRESHNESS",
+   "No assertion that the constructible anchors are unusable for future QUALITATIVE/descriptive or differently-estimated studies (they remain valuable substrates)",
+   "No assertion that postcond heterogeneity is impossible in general (only: unobserved on this substrate across 3 dates/5 anchors; certificate is falsifiable by it)"
+  ],
+  "falsifier": "A future observation of CH-POSTCOND-SEM firing on at least one D1V pair of a value-bearing anchor (new capture date, new platform instance, or new anchor family) reopens the non-degenerate frame; the certificate predicts no such event as of probe date 2026-10-10.",
+  "evidence": {
+   "candidate_headers": {
+    "P1-OSM-RAILS": {
+     "url": "https://www.openstreetmap.org/user/new",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://www.openstreetmap.org/user/new?cookie_test=true",
+       "sha256_16": "7dab2ac115bfec0f",
+       "vary": "Accept-Language,Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://www.openstreetmap.org/user/new?cookie_test=true",
+       "sha256_16": "372c27681e1adde8",
+       "vary": "Accept-Language,Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://www.openstreetmap.org/user/new?cookie_test=true",
+       "sha256_16": "bf90188b7e74bfe0",
+       "vary": "Accept-Language,Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": null,
+     "extracted": {
+      "S1": {
+       "authenticity_token": "HYYmWw7mL8QjXE...",
+       "csrf-token": "Kshnj0MXx6ZTqC..."
+      },
+      "S2": {
+       "authenticity_token": "C3KMTwRDDFSEQW...",
+       "csrf-token": "J3qJKjl5L5OhmV..."
+      },
+      "S3": {
+       "authenticity_token": "-uksLk763gq5gI...",
+       "csrf-token": "5CUDD36rgvyLUb..."
+      }
+     }
+    },
+    "P3-MW-ARCH": {
+     "url": "https://wiki.archlinux.org/index.php?title=Special:CreateAccount",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://wiki.archlinux.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "5ff26118dce245d4",
+       "vary": "Accept-Encoding, Cookie",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://wiki.archlinux.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "3b330549d40a3c5d",
+       "vary": "Accept-Encoding, Cookie",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://wiki.archlinux.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "9e9f050283c75d0a",
+       "vary": "Accept-Encoding, Cookie",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": "no-cache, no-store, max-age=0, must-revalidate",
+     "extracted": {
+      "S1": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "ea95e22e19ee18..."
+      },
+      "S2": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "d44fda3bd32390..."
+      },
+      "S3": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "c550085055dc63..."
+      }
+     }
+    },
+    "P4-MW-GENTOO": {
+     "url": "https://wiki.gentoo.org/index.php?title=Special:CreateAccount",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://wiki.gentoo.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "b753138c536c49e5",
+       "vary": "Accept-Encoding, Accept-Language, Cookie, Authorization",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://wiki.gentoo.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "342050bf6979c291",
+       "vary": "Accept-Encoding, Accept-Language, Cookie, Authorization",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://wiki.gentoo.org/index.php?title=Special:CreateAccount",
+       "sha256_16": "517daaf8566b3714",
+       "vary": "Accept-Encoding, Accept-Language, Cookie, Authorization",
+       "in_list": [
+        "wpCreateaccountToken",
+        "wpEditToken"
+       ]
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": "no-cache, no-store, max-age=0, must-revalidate",
+     "extracted": {
+      "S1": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "d79e8664b9596a..."
+      },
+      "S2": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "c2e6950d9f6eba..."
+      },
+      "S3": {
+       "wpEditToken": "+\\\\",
+       "wpCreateaccountToken": "de8963548c9556..."
+      }
+     }
+    },
+    "P6-MASTODON": {
+     "url": "https://mastodon.social/auth/sign_up",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://mastodon.social/auth/sign_up",
+       "sha256_16": "e1a246af6731f6c7",
+       "vary": "Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://mastodon.social/auth/sign_up",
+       "sha256_16": "6f4e2368c3cf5b7e",
+       "vary": "Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://mastodon.social/auth/sign_up",
+       "sha256_16": "1faf70ffc90e5645",
+       "vary": "Accept-Encoding",
+       "in_list": [
+        "authenticity_token",
+        "csrf-token"
+       ]
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": null,
+     "extracted": {
+      "S1": {
+       "authenticity_token": "Fn4jF8p9nkRtGh...",
+       "csrf-token": "DhXprrIKL48Qra..."
+      },
+      "S2": {
+       "authenticity_token": "cwrEKlynm6SK5y...",
+       "csrf-token": "a8xVdHtoeSLRkp..."
+      },
+      "S3": {
+       "authenticity_token": "O2Glt3CSoGG7QP...",
+       "csrf-token": "RSp-LHiK4w_A2-..."
+      }
+     }
+    },
+    "P2-DRUPAL": {
+     "url": "https://www.drupal.org/user/register",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://accounts.drupal.org/auth/realms/main/protocol/openid-connect/registrations?...state=csSnZAi732H4LrqssdqBWyyceacX54E1bT9aNu2dFIE",
+       "sha256_16": "e655b55ee55272de",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://accounts.drupal.org/auth/realms/main/protocol/openid-connect/registrations?...state=Fy-tLy7Hz3SGmA4v0u5wyt49SP6VxCZ3GHStmDeYSVw",
+       "sha256_16": "cbc193f0ca7a8b57",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://accounts.drupal.org/auth/realms/main/protocol/openid-connect/registrations?...state=Jefx8jYTHd3h74KpoG6-rlXEnlSEx5fhkGbRHzu3TFo",
+       "sha256_16": "652c7d5a03edc4d0",
+       "vary": null,
+       "in_list": []
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": "no-store, must-revalidate, max-age=0",
+     "note": "SSO redirect to Keycloak; registration form is JS/SPA-bound, not server-rendered on this path; NO_FIELD."
+    },
+    "P5-PHPBB": {
+     "url": "https://www.phpbb.com/community/app.php/user/register",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 403,
+       "final_url": "https://www.phpbb.com/community/app.php/user/register",
+       "sha256_16": "bcaddb2c50e5d06d",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S2",
+       "status": 403,
+       "final_url": "https://www.phpbb.com/community/app.php/user/register",
+       "sha256_16": "dd54069aa561a582",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S3",
+       "status": 403,
+       "final_url": "https://www.phpbb.com/community/app.php/user/register",
+       "sha256_16": "8db667ce0471c5fa",
+       "vary": null,
+       "in_list": []
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": null,
+     "note": "403 on all 3 sessions; UNREACHABLE."
+    },
+    "P7-WORDPRESS": {
+     "url": "https://wordpress.org/support/bb-login.php",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://login.wordpress.org/?redirect_to=https%3A%2F%2Fwordpress.org%2F",
+       "sha256_16": "f8bb2a76a50b176f",
+       "vary": "accept, content-type",
+       "in_list": []
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://login.wordpress.org/?redirect_to=https%3A%2F%2Fwordpress.org%2F",
+       "sha256_16": "822c99713349f52e",
+       "vary": "accept, content-type",
+       "in_list": []
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://login.wordpress.org/?redirect_to=https%3A%2F%2Fwordpress.org%2F",
+       "sha256_16": "683beff53fa4b772",
+       "vary": "accept, content-type",
+       "in_list": []
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": "no-cache, must-revalidate, max-age=0, no-store, private",
+     "note": "Redirect to centralized login SSO; no in-list fields; NO_FIELD."
+    },
+    "P8-XWIKI": {
+     "url": "https://www.xwiki.org/xwiki/bin/view/Main/",
+     "sessions": [
+      {
+       "s": "S1",
+       "status": 200,
+       "final_url": "https://www.xwiki.org/xwiki/bin/view/Main/",
+       "sha256_16": "207f270e24f6b544",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S2",
+       "status": 200,
+       "final_url": "https://www.xwiki.org/xwiki/bin/view/Main/",
+       "sha256_16": "e678a8ddc3641150",
+       "vary": null,
+       "in_list": []
+      },
+      {
+       "s": "S3",
+       "status": 200,
+       "final_url": "https://www.xwiki.org/xwiki/bin/view/Main/",
+       "sha256_16": "f11f48d84cca4eef",
+       "vary": null,
+       "in_list": []
+      }
+     ],
+     "etag": null,
+     "last_modified": null,
+     "cache_control": "no-cache",
+     "note": "Landing page has no in-list capability field; registration flow appears JS-bound; NO_FIELD."
+    }
+   },
+   "candidate_drift_classification_parent_exact": {
+    "P1-OSM-RAILS": {
+     "blocker": "NONE",
+     "route_ok": 3,
+     "n_trials": 6,
+     "n_d1v": 6,
+     "d1v_by_field": [
+      "authenticity_token",
+      "csrf-token"
+     ],
+     "transport_changed_pairs": [],
+     "structural_changed_pairs": [],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": [],
+     "field_set_varied_across_sessions": false
+    },
+    "P3-MW-ARCH": {
+     "blocker": "NONE",
+     "route_ok": 3,
+     "n_trials": 6,
+     "n_d1v": 3,
+     "d1v_by_field": [
+      "wpCreateaccountToken"
+     ],
+     "transport_changed_pairs": [],
+     "structural_changed_pairs": [],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": [],
+     "field_set_varied_across_sessions": false
+    },
+    "P4-MW-GENTOO": {
+     "blocker": "NONE",
+     "route_ok": 3,
+     "n_trials": 6,
+     "n_d1v": 3,
+     "d1v_by_field": [
+      "wpCreateaccountToken"
+     ],
+     "transport_changed_pairs": [],
+     "structural_changed_pairs": [],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": [],
+     "field_set_varied_across_sessions": false
+    },
+    "P6-MASTODON": {
+     "blocker": "NONE",
+     "route_ok": 3,
+     "n_trials": 6,
+     "n_d1v": 6,
+     "d1v_by_field": [
+      "authenticity_token",
+      "csrf-token"
+     ],
+     "transport_changed_pairs": [],
+     "structural_changed_pairs": [],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": [],
+     "field_set_varied_across_sessions": false
+    },
+    "P2-DRUPAL": {
+     "blocker": "NO_FIELD",
+     "route_ok": 3,
+     "n_trials": 0,
+     "n_d1v": 0
+    },
+    "P5-PHPBB": {
+     "blocker": "UNREACHABLE",
+     "route_ok": 0,
+     "n_trials": 0,
+     "n_d1v": 0
+    },
+    "P7-WORDPRESS": {
+     "blocker": "NO_FIELD",
+     "route_ok": 3,
+     "n_trials": 0,
+     "n_d1v": 0
+    },
+    "P8-XWIKI": {
+     "blocker": "NO_FIELD",
+     "route_ok": 3,
+     "n_trials": 0,
+     "n_d1v": 0
+    }
+   },
+   "inherited_control_replay_parent_exact": {
+    "CAL-POS-1": {
+     "blocker": "BODY_DERIVED_ETAG",
+     "n_trials": 24,
+     "n_d1v": 0,
+     "transport_changed_pairs": [
+      "S1->S2",
+      "S1->S3",
+      "S1->S4",
+      "S2->S3",
+      "S2->S4",
+      "S3->S4"
+     ],
+     "structural_changed_pairs": [
+      "S1->S2",
+      "S1->S3",
+      "S2->S4",
+      "S3->S4"
+     ],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": []
+    },
+    "CAL-POS-2": {
+     "blocker": "NONE",
+     "n_trials": 12,
+     "n_d1v": 6,
+     "d1v_by_field": [
+      "wpCreateaccountToken"
+     ],
+     "transport_changed_pairs": [],
+     "structural_changed_pairs": [],
+     "postcond_changed_pairs": [],
+     "endpoint_changed_pairs": []
+    },
+    "CAL-POS-3": {
+     "blocker": "TOKEN_BEARING_FINAL_URL",
+     "n_trials": 12,
+     "n_d1v": 0,
+     "transport_changed_pairs": [
+      "S1->S2",
+      "S1->S3",
+      "S1->S4",
+      "S2->S3",
+      "S2->S4",
+      "S3->S4"
+     ],
+     "structural_changed_pairs": [
+      "S1->S2",
+      "S1->S3",
+      "S1->S4",
+      "S2->S3",
+      "S2->S4",
+      "S3->S4"
+     ],
+     "endpoint_changed_pairs": [
+      "S1->S2",
+      "S1->S3",
+      "S1->S4",
+      "S2->S3",
+      "S2->S4",
+      "S3->S4"
+     ],
+     "postcond_changed_pairs": []
+    }
+   },
+   "parent_trial_matrix_replicated": {
+    "CAL-POS-1": {
+     "n_trials": 24,
+     "transport_on_pairs": "6/6",
+     "struct_on_pairs": "4/6"
+    },
+    "CAL-POS-2": {
+     "n_trials": 12,
+     "n_d1v": 6,
+     "stale_field": "wpCreateaccountToken",
+     "constant_fresh_field": "wpEditToken"
+    },
+    "CAL-POS-3": {
+     "n_trials": 12,
+     "struct_transp_endpoint_on_pairs": "6/6",
+     "constant_fresh_field": "wpEditToken"
+    }
+   },
+   "option_b_defect_reexamination": {
+    "CAL-POS-1_body_vs_token": "S1 vs S4 raw body: 20 non-equal line blocks (nonces, arkose payload, snowplow context vary beyond the rotating token) => ETag motion not caused solely by the rotating value; BODY_DERIVED_ETAG reclassification NOT justified",
+    "CAL-POS-3_final_url_vs_token": "final_url centralauthLoginToken (S1=5efcb364476ad13f..., S2=32e3ab27..., S3=1211ef13..., S4=3a962889...) is a DIFFERENT value than body wpLoginToken (S1=035888d2...116+\\, S4=88f8d712...11a+\\, byte-suffix drift) => concurrent orthogonal rotation, not the same value leaking into the URL; TOKEN_BEARING_FINAL_URL reclassification NOT justified",
+    "conclusion": "Option B (principled instrument reclassification) is closed on the frozen evidence for both defect classes."
+   },
+   "estimator_power_arithmetic": {
+    "theorem": "On any D1V trial, B-VALUE-AWARE ABSTAINS (CH-PRECOND-BINDING fires, live != recorded byte-exact) => value-aware FA = 0; incumbent B-INCUMBENT-SIGNAL-ONLY REUSEs iff no other channel fires, and D1V definition guarantees no structural/transport/postcond fire => incumbent REUSE on every D1V trial => per-anchor FA on the D1V subset = 1.0 exactly. Pooled diff = weighted mean of per-anchor FA over clustered bootstrap; LOW < UB97 (non-degenerate) iff two resampled pools differ iff some anchor has per-anchor FA != 1.0 iff CH-POSTCOND-SEM fires on at least one D1V pair of some anchor (postcond change => that anchor's D1V trials with postcond fire become ABSTAIN, FA<1).",
+    "would_be_frame": {
+     "anchors": [
+      "P1-OSM-RAILS",
+      "P3-MW-ARCH",
+      "P4-MW-GENTOO",
+      "P6-MASTODON"
+     ],
+     "k_sessions": 4,
+     "d1v_trials_if_k4": {
+      "P1": 12,
+      "P3": 6,
+      "P4": 6,
+      "P6": 12,
+      "total": 36
+     },
+     "per_anchor_fa": {
+      "P1": 1.0,
+      "P3": 1.0,
+      "P4": 1.0,
+      "P6": 1.0
+     }
+    },
+    "realized_interval": "LOW == UB97 == 1.0 (zero-width degenerate)",
+    "branch_reachability": {
+     "INCUMBENT-BLIND-CONFIRMED": "unreachable: requires LOW > 0 AND LOW < UB97 (non-degenerate)",
+     "INCUMBENT-NOT-BLIND_F-BLIND": "unreachable: requires LOW <= 0 or pooled < 0.10; realized pooled = 1.0",
+     "DATA-INSUFFICIENT-D1V-DEGENERATE": "sole reachable outcome; would-be mode ANCHOR_SCARCITY_OTHER (homogeneous per-anchor FA, 0 postcond fires on 0 D1V pairs across all observed D1V-capable anchors)"
+    },
+    "observational_basis": "postcond (session field-name set) fires 0 times on 0 D1V pairs across 5 D1V-capable anchors (CAL-POS-2 + P1/P3/P4/P6), 3 capture dates, 4 platform families (WMF, OSMF, Arch/Gentoo MediaWiki, Mastodon).",
+    "frozen_estimator_simulation": {
+     "would_be_frame": {
+      "LOW": 1.0,
+      "UB97": 1.0,
+      "degenerate": true,
+      "degenerate_reason": "zero_width_interval",
+      "n_anchors": 4,
+      "n_trials": 36,
+      "B": 20000,
+      "seed": 37992949248
+     },
+     "heterogeneous_counterfactual_same_anchors": {
+      "LOW": 0.4286,
+      "UB97": 1.0,
+      "degenerate": false,
+      "n_anchors": 4,
+      "n_trials": 36,
+      "B": 20000,
+      "seed": 37992949248
+     },
+     "note": "DESIGN-time arithmetic probe on the immutable frozen estimator; drift labels only, no EXECUTE-read outcomes."
+    }
+   },
+   "certificate_controls": {
+    "PC-CLASSIFIER-SENSITIVITY": "inherited-evidence replay with parent-exact trial construction: CAL-POS-2 -> 6 D1V trials (replicates parent M-N-D1V=6); CAL-POS-1 -> BODY_DERIVED_ETAG with transport change 6/6 pairs and structural change 4/6 pairs (replicates parent); CAL-POS-3 -> TOKEN_BEARING_FINAL_URL with struct+transp+endpoint change 6/6 pairs (replicates parent). The classifier is sensitive to both D1V-capability and transport coupling; 'no change' verdicts on candidates are true observations, not blind spots.",
+    "PC-EXTRACTION-CANARY": "PA.extract recovered in-list values with correct byte identity on all live candidates (P1/P3/P4/P6) and on inherited bodies (CAL-POS-1: 4 records incl. main form action=/-/trial_registrations; CAL-POS-3 S1: wpEditToken '+\\' and wpLoginToken '035888d2...').",
+    "PC-ESTIMATOR-NONDEGENERATE": "inherited from EXP-GRAPH-37992949248 GATE-F PASS (synthetic heterogeneous 2-anchor fixture: LOW=1/3, UB97=1/2, non-degenerate) PLUS DESIGN-time simulation on the frozen estimator (B=20000, seed=37992949248): (i) would-be frame {P1,P3,P4,P6}, K=4, all per-anchor FA=1.0 => LOW=1.0, UB97=1.0, degenerate=true (reason=zero_width_interval, n_anchors=4, n_trials=36) -- exact degeneracy asserted by the certificate; (ii) heterogeneous counterfactual on the SAME anchors (P1 partially postcond-blind) => LOW=0.4286, UB97=1.0, degenerate=false. The estimator produces non-degenerate intervals whenever per-anchor FA differs; the forced degeneracy is a population property, not an estimator failure."
+   },
+   "falsifier_of_certificate": "Any future observation (new capture date, new platform instance, or new anchor family) in which CH-POSTCOND-SEM fires on at least one D1V pair of a value-bearing anchor would reopen the non-degenerate frame for that population. The certificate explicitly predicts this has not happened (as of probe date 2026-10-10) and is falsifiable by it."
+  }
+ },
+ "baselines": {
+  "B-INCUMBENT-SIGNAL-ONLY": "incumbent freshness guard restricted to the signal path, ETag/Last-Modified/Cache-Control-aware (frozen: 'freshness-validating transport metadata'); REUSE iff no CH-STRUCT-SIG/CH-TRANSPORT-VALIDATOR/CH-POSTCOND-SEM fires",
+  "B-VALUE-AWARE": "adds CH-PRECOND-BINDING (byte-exact value binding); REUSE iff live==recorded value AND no other channel fires (on D1V trials it always ABSTAINS)",
+  "B-FULL-GUARD": "all four channels",
+  "B-NO-GUARD-REPLAY": "value-less replay (no session binding)"
+ },
+ "positive_control": "PC-CLASSIFIER-SENSITIVITY (inherited-evidence replay reproduces parent drift facts: CAL-POS-2 n_d1v=6, CAL-POS-1 BODY_DERIVED_ETAG 6/6 transport + 4/6 structural, CAL-POS-3 TOKEN_BEARING_FINAL_URL 6/6) + PC-EXTRACTION-CANARY (PA.extract recovers in-list values byte-identically on live candidates and inherited bodies) + PC-ESTIMATOR-NONDEGENERATE (inherited GATE-F PASS: heterogeneous synthetic fixture yields LOW=1/3, UB97=1/2).",
+ "null_control": "NC-NONDEGENERATE-ESTIMATOR (inherited): anchor-clustered bootstrap returns non-degenerate intervals whenever per-anchor FA differs; a degenerate return is diagnostic of the population, not the estimator.",
+ "null_controls": [
+  "NC-OPEN-GET-ONLY (inherited): first request carries no Cookie and no credentials; candidate sessions were cookieless GET-only",
+  "NC-CREDENTIAL-FREE (inherited): no account creation or submission was performed at any point",
+  "NC-NETWORK-CONTROL: direct HTTP availability verified (iana.org 200) so 3x403/redirect results are transport-level observations, not network failure"
+ ],
+ "measurement_validity": [
+  "V01-NEW PROBE BOUNDARY: the DESIGN probe recorded drift labels (value/structural/transport/postcond/endpoint change) and header/final_url/body-hash facts only. It did NOT compute guard decisions, false-accept rates, intervals, or any outcome metric. Probe sessions are EXCLUDED from any future scored population unless re-harvested under a frozen EXECUTE and the substrate certificate is re-verified.",
+  "V02-INHERITED SUBSTRATE CERTIFICATE: any future EXECUTE re-using these anchors must re-verify C-ANCHOR-802-200-LIVE/C-ANCHOR-MISC-105-REUSE-LOCK, C-SESSION-ISOLATION-REPAIRED, and NETWORK availability under the frozen predicates (runtime re-verification, not assumption).",
+  "V03-INHERITED CLASSIFIER CONTINUITY: path_a_htmlparser extraction and frozen in-list TOKEN_NAME_LIST are reused unchanged; verified live against all candidate bodies (canary).",
+  "V04-TIMING: probe captures were spaced >=3s apart (pacing 3.0s), all sessions same day 2026-10-10, same egress network; pair-level drift facts are within-day only; the certificate's cross-date claim rests solely on inherited CAL-POS-2 evidence (grandparent + parent capture dates) merged with the probe date.",
+  "V05-CONTEXTUAL-ROTATION: value rotation is strong evidence of server-side per-request minting; the certificate does not depend on asserting why values rotate, only that they do and that no other channel moves."
+ ],
+ "substrate_certificate": "Inherited (EXP-GRAPH-37992949248 code/substrate_certificate.json) + this certificate's candidate liveness facts (status 200/403 as recorded; network up).",
+ "repaired_session_isolation_predicate": "Inherited GATE-C3 C-SESSION-ISOLATION-REPAIRED: sessions isolated by no-shared-cookie, paced, GET-only; probe conformed (no Cookie header sent; 3s+ pacing).",
+ "frozen_populations": {
+  "definitions": {
+   "D1V": "label==STALE AND NOT structural_change AND NOT transport_change",
+   "structural_change": "structure_signature(recorded session) != structure_signature(current session), where structure_signature = (type_class, form_action, form_method, tuple(form_input_names))",
+   "transport_change": "transport_signature(recorded session) != transport_signature(current session), transport_signature = (ETag, Last-Modified, Cache-Control max-age, Vary), OR final_url differs",
+   "postcond_change": "session in-list field-name set differs between recorded and current session (CH-POSTCOND-SEM)",
+   "endpoint_change": "per-instance form_action differs (recorded vs current extraction)",
+   "label": "STALE iff live value != recorded value byte-exact (CH-PRECOND-BINDING analogue)"
+  },
+  "inherited": [
+   "CAL-POS-1..4 (frozen raw evidence; excluded from refetch by mandate)"
+  ],
+  "candidate_pool_screened": [
+   "P1-OSM-RAILS",
+   "P2-DRUPAL",
+   "P3-MW-ARCH",
+   "P4-MW-GENTOO",
+   "P5-PHPBB",
+   "P6-MASTODON",
+   "P7-WORDPRESS",
+   "P8-XWIKI"
+  ],
+  "constructible_d1v_anchors": [
+   "P1-OSM-RAILS",
+   "P3-MW-ARCH",
+   "P4-MW-GENTOO",
+   "P6-MASTODON"
+  ]
+ },
+ "extraction_paths": {
+  "P1-OSM-RAILS": "PA.extract: 2 AGSI records/session (authenticity_token form input, csrf-token meta) with stable form_action/form_method/structure; b/romance none",
+  "P3-MW-ARCH": "PA.extract: 2 records/session (wpCreateaccountToken, wpEditToken) stable structure; transport Vary constant",
+  "P4-MW-GENTOO": "same shape as P3",
+  "P6-MASTODON": "PA.extract: 2 records/session (authenticity_token, csrf-token) stable structure",
+  "inherited": "unchanged from parent packet (CAL-POS-1..4 raw records + bodies)"
+ },
+ "guard_model": {
+  "channels": [
+   "CH-STRUCT-SIG",
+   "CH-TRANSPORT-VALIDATOR",
+   "CH-POSTCOND-SEM",
+   "CH-PRECOND-BINDING"
+  ],
+  "rule": "B-INCUMBENT-SIGNAL-ONLY REUSE iff none of CH-STRUCT-SIG/CH-TRANSPORT-VALIDATOR/CH-POSTCOND-SEM fire (frozen); B-VALUE-AWARE additionally requires CH-PRECOND-BINDING not to fire; B-FULL-GUARD all four; B-NO-GUARD-REPLAY value-less replay with no session binding",
+  "modes": "REUSE (freshness assertion carried) vs ABSTAIN (no assertion)",
+  "identity_preserved": "all four frozen variants; no guard code modified or added"
+ },
+ "metric_registry": {
+  "M-PAIRED-FA-DIFF-D1V": "anchor-clustered bootstrap 97.5% lower-bound differential of incumbent false-accept rate minus value-aware false-accept rate on D1V trials (inherited)",
+  "M-N-D1V": "number of D1V trials (inherited)",
+  "M-N-D1V-ANCHORS": "number of anchors contributing D1V trials (inherited)",
+  "M-N-DECISIONS-D1V": "number of D1V trials on which a REUSE/ABSTAIN decision is realized (inherited)",
+  "M-D1V-DEGENERACY-MODE": "attribution of zero-width interval (inherited; would-be ANCHOR_SCARCITY_OTHER)",
+  "M-CERT-ANCHOR-LIVENESS": "candidate 200/403 counts (design certificate; NEW)",
+  "M-CERT-N-D1V-PROBE": "per-candidate D1V trial count on 3 probe sessions (design certificate; NEW)",
+  "M-CERT-TRANSPORT-VARIANTS": "per-anchor distinct transport_signature count (design certificate; NEW: 1 for all four candidates)"
+ },
+ "control_registry": {
+  "PC-CLASSIFIER-SENSITIVITY": "NEW (this certificate): inherited-evidence replay under parent-exact trial construction",
+  "PC-EXTRACTION-CANARY": "NEW (this certificate): PA.extract byte-identical value recovery on live + inherited bodies",
+  "PC-ESTIMATOR-NONDEGENERATE": "inherited GATE-F PASS: LOW=1/3, UB97=1/2 on heterogeneous synthetic fixture",
+  "NC-NONDEGENERATE-ESTIMATOR": "inherited",
+  "NC-OPEN-GET-ONLY": "inherited",
+  "NC-CREDENTIAL-FREE": "inherited",
+  "NC-NETWORK-CONTROL": "NEW (this certificate): iana.org 200 check before probe"
+ },
+ "decision_rule": {
+  "would_be_read": "Frozen frame {P1,P3,P4,P6} K=4 (36 D1V trials, 4 anchors): INCUMBENT-BLIND-CONFIRMED iff LOW>0 AND LOW<UB97 and M-N-D1V-ANCHORS>=2 and M-N-DECISIONS-D1V>=2; INCUMBENT-NOT-BLIND (F-BLIND) iff LOW<=0 or pooled<0.10; else DATA-INSUFFICIENT-D1V-DEGENERATE.",
+  "precomputed_realization": "per-anchor FA=1.0 homogeneous => LOW==UB97==1.0 => INCUMBENT-BLIND-CONFIRMED unreachable; pooled=1.0 >= 0.10 and LOW>0 => F-BLIND unreachable; sole reachable outcome DATA-INSUFFICIENT-D1V-DEGENERATE (ANCHOR_SCARCITY_OTHER).",
+  "certificate_rule": "Because both decisive branches are arithmetically unreachable on every constructible frame observed, decision_rule_reachability = FAIL; per design-contract v2 the EXPERIMENT MUST NOT FREEZE; the certificate is the final deliverable."
+ },
+ "claim_ceiling_rules": "Inherited: INCUMBENT-BLIND-CONFIRMED ceiling is EXPERIMENTAL; INCUMBENT-NOT-BLIND would trigger REJECTED review of the blindness mechanism; single-anchor point estimates are descriptive only and never change status; this certificate changes no status.",
+ "scope_boundaries": [
+  "Only files written: research/experiments/EXP-GRAPH-38046502943/spec.json and prereg.md",
+  "No modification of parent raw/code evidence; no refetch of CAL-POS-1..4",
+  "Candidates: GET-only, cookieless, no submissions, no credentials, no JavaScript execution, pacing >=3s",
+  "No git mutations of any kind",
+  "Probe raw bodies/scripts are session-local (/tmp/opencode/probe_exp38046502943) and NOT committed"
+ ],
+ "code_binding": "No new executable repository code was added. Would-be EXECUTE code binding (had a freeze been licensed) = inherited parent packet code (estimator.py/guard.py/neutral_detector.py/path_a_htmlparser.py/path_b_regexlex.py) unchanged; probe analysis code (session-local, drift-label-only) is not a bound artifact and is excluded from any future EXECUTE.",
+ "preregistration_timing": "Certificate-first design: the bounded screen ran at DESIGN time under the v2 pre-freeze satisfiability-probe allowance (mandate option A) and produced drift labels only, with no outcome-bearing measurement at any point; the certificate, controls, and fail-loud decision were written before any freeze attempt and before any outcome ('guard decision/false-accept') computation.",
+ "transmission_contract": "This spec is read-only input for DIRECTOR/AUDIT. Raw evidence chain: candidate raw records/bodies (session-local hashes embedded above) -> observed drift labels (parent-exact classification) -> derived arithmetic (frozen guard+estimator) -> bounded reason. Next decision stage: lane DIRECTOR + Global Research Director (redirect) and AUDIT (certificate review), per design-contract v2 independent design_review requirement waived for a fail-loud DESIGN ONLY IF the audit lane accepts the fail-loud as the terminal outcome.",
+ "product_consequence_positive": "(Would have applied had the certificate passed): freeze and execute the powered read; blindness confirmation licenses channel consolidation and C-FRESHNESS route update. NOT APPLICABLE: certificate failed.",
+ "product_consequence_negative": "Certificate failed (route parked): product answer for C-FRESHNESS remains UNKNOWN; no claim change; recommended redirect (pre-registered, not designed): (a) broader-population guard false-accept/calibration measurement -- the four new live anchors make a multi-anchor false-accept/calibration study concretely feasible (e.g., pooled calibration of incumbent vs value-aware vs full guard over FRESH and STALE evidence without requiring per-anchor heterogeneity); (b) another freshness sub-mechanism (e.g., false-outage/calibration on FRESH trials). Cost saved: no EXECUTE funded for a read that would deterministically land in DATA-INSUFFICIENT-D1V-DEGENERATE.",
+ "estimated_cost": "Probe: 24 + 12 = 36 GETs (session-local, already spent); analysis: ~15 min. EXECUTE: not funded (may not be funded: freeze refused).",
+ "expected_information_gain": "Settles the population-degeneracy attribution (ANCHOR_TRANSPORT_COUPLING replaced by field-set-homogeneity blindness), supplies 4 exact live anchors + full transport-signature facts for future designs, closes option B structurally, and parks the four-anchor Part II route with a positive-control-backed reason (mandate deliverable).",
+ "freeze_eligibility": {
+  "decision_rule_reachability": {
+   "status": "FAIL",
+   "reason": "Both decisive verdict branches (INCUMBENT-BLIND-CONFIRMED, INCUMBENT-NOT-BLIND/F-BLIND) are arithmetically unreachable on every constructible frame on the observed substrate: per-anchor FA=1.0 homogeneous forces LOW==UB97==1.0 (zero-width). Sole reachable outcome is DATA-INSUFFICIENT-D1V-DEGENERATE. Freezing a read that cannot decide is prohibited by the mandate ('rather than freeze another structurally degenerate single-anchor read') and by design-contract v2.",
+   "evidence_refs": [
+    "feasibility_certificate.power_arithmetic",
+    "feasibility_certificate.branch_reachability",
+    "EVIDENCE.estimator_power_arithmetic.branch_reachability"
+   ]
+  },
+  "measurement_prerequisites": {
+   "status": "PASS",
+   "reason": "Extraction paths, classifier, in-list token names, session isolation predicate, and network substrate verified live (canary) plus inherited (GATE-C3 repaired). Prerequisites are not the blocking condition.",
+   "evidence_refs": [
+    "measurement_validity.V01-NEW",
+    "measurement_validity.V03-INHERITED",
+    "substrate_certificate"
+   ]
+  },
+  "baseline_identifiability": {
+   "status": "PASS",
+   "reason": "Baseline (B-INCUMBENT-SIGNAL-ONLY) and comparators (B-VALUE-AWARE, B-FULL-GUARD, B-NO-GUARD-REPLAY) identities are frozen and unambiguous; on D1V trials the incumbent vs value-aware contrast is deterministic (1.0 vs 0) and identifiable, not the blocking condition.",
+   "evidence_refs": [
+    "baselines",
+    "guard_model"
+   ]
+  },
+  "control_sensitivity": {
+   "status": "PASS",
+   "reason": "PC-CLASSIFIER-SENSITIVITY reproduces parent drift facts on inherited evidence; PC-EXTRACTION-CANARY recovers values byte-identically; PC-ESTIMATOR-NONDEGENERATE demonstrates the bootstrap yields non-degenerate intervals when per-anchor FA differs. Controls are sensitive; the population is not.",
+   "evidence_refs": [
+    "positive_control",
+    "feasibility_certificate.certificate_controls"
+   ]
+  },
+  "treatment_liveness": {
+   "status": "PASS",
+   "reason": "The treatment (the M-PAIRED-FA-DIFF-D1V read) is executable on the constructible frame; its powered, decisive form is not attainable (captured by check 1). Treatment liveness is not the blocking condition.",
+   "evidence_refs": [
+    "feasibility_certificate.exact_anchors",
+    "decision_rule.would_be_read"
+   ]
+  },
+  "freeze_artifacts_bound": {
+   "status": "NOT_APPLICABLE",
+   "reason": "No new repo-local mutable code, task bank, dataset, or fixture was added; certificate evidence (headers, final_url, body hashes, extracted values, drift classifications) is embedded verbatim in this spec; inherited parent code is already frozen and would be the only binding (had a freeze been licensed). Freeze is refused on check 1 in any case, so no artifact set is bound.",
+   "evidence_refs": [
+    "code_binding",
+    "scope_boundaries",
+    "feasibility_certificate.evidence"
+   ]
+  }
+ },
+ "freeze_artifacts": []
 }
