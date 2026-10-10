@@ -233,6 +233,49 @@ def main():
     known_claims = {c["id"] for c in claims_registry["claims"]}
     registry_status = {c["id"]: c["status"] for c in claims_registry["claims"]}
     lanes_registry = json.loads((ROOT / "research/lanes/registry.json").read_text())["lanes"]
+
+    # SPIDER has one cumulative scientific history, not two Codices.
+    # The original archive blob is materialized losslessly on main.
+    legacy_index = json.loads((ROOT / "codex/legacy_artifact_index.json").read_text(encoding="utf-8"))
+    legacy_brief = json.loads((ROOT / "codex/legacy_brief.json").read_text(encoding="utf-8"))
+    historical_source = "codex/sources/0000-historical-evidence.md"
+    historical_raw = (ROOT / historical_source).read_bytes()
+    historical_blob = hashlib.sha1(
+        b"blob " + str(len(historical_raw)).encode() + b"\0" + historical_raw
+    ).hexdigest()
+    if historical_blob != legacy_index["source"]["blob_sha"] or historical_blob != legacy_brief["source"]["blob_sha"]:
+        raise ValueError("historical source hash mismatch")
+    if len(legacy_index["artifacts"]) != legacy_index["count"] or legacy_index["count"] != legacy_brief["source"]["artifact_count"]:
+        raise ValueError("historical artifact coverage mismatch")
+    historical_manifest = {
+        "period": "historical research (before autonomous Research 2.0)",
+        "source_path": historical_source,
+        "source_blob_sha": historical_blob,
+        "original_archive": "archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md",
+        "artifact_count": len(legacy_index["artifacts"]),
+        "counting_rule": "unique source artifacts, NOT independent experiment count",
+        "artifacts": legacy_index["artifacts"],
+    }
+    historical_claim_map = {
+        "C-MEAS-VALID": ["P2-WP003", "P2-AUTOMATION"],
+        "C-PARAM-INHERIT": ["P2-BLIND-COMPOSITION", "P2-REPLAY-COST", "P2-MIND2WEB"],
+        "C-FRESHNESS": ["P2-AUTOMATION"],
+        "C-DELTA-REPAIR": ["P2-AUTOMATION"],
+        "C-RESIDUAL-NOVELTY": ["P2-REPLAY-COST", "P2-BLIND-COMPOSITION", "P2-MIND2WEB"],
+        "C-LLM-INHERIT": ["P2-REPLAY-COST", "P2-BLIND-COMPOSITION", "P2-MIND2WEB"],
+        "C-PRODUCT-ECON": ["P2-REPLAY-COST"],
+        "C-CROSSSITE": ["P2-WP002B", "P2-WP003", "P2-WP003B"],
+        "C-SEMANTIC-RESOLVE": ["P2-MIND2WEB", "P2-BLIND-COMPOSITION"],
+        "C-WEB-DYNAMICS": ["P2-WP002B", "P2-WP003", "P2-WP003B"],
+    }
+    historic_precedents = {
+        claim_id: [
+            {key: finding[key] for key in ("key", "source", "status", "fact", "guard")}
+            for finding in legacy_brief["findings"]
+            if finding["key"] in historical_claim_map.get(claim_id, [])
+        ]
+        for claim_id in sorted(known_claims)
+    }
     gaps: list[dict] = []
     scope_warnings: list[dict] = []
     quarantine: list[dict] = []
@@ -380,9 +423,10 @@ def main():
     (codex_dir / "coverage_gaps.json").write_text(json.dumps(gaps, indent=2) + "\n")
     (codex_dir / "quarantine.json").write_text(json.dumps(quarantine, indent=2) + "\n")
     (codex_dir / "claim_scope_warnings.json").write_text(json.dumps(scope_warnings, indent=2) + "\n")
-    (codex_dir / "index.json").write_text(json.dumps({"schema_version": 2, "experiments": entry_order}, indent=2) + "\n")
+    (codex_dir / "index.json").write_text(json.dumps({"schema_version": 3, "historical": historical_manifest, "experiments": entry_order}, indent=2) + "\n")
     (codex_dir / "claim_state.json").write_text(json.dumps({
-        "schema_version": 3,
+        "schema_version": 4,
+        "historical_precedents_by_claim": historic_precedents,
         "events_by_claim": claim_events,
         "latest_event_by_claim": latest_event,
         "effective_event_by_claim": effective_event,
@@ -391,16 +435,35 @@ def main():
     # SPIDER_CODEX.md is an index, not a second multi-megabyte copy of every packet.
     # Full canonical evidence remains losslessly available under codex/experiments/.
     lines = [
-        "# SPIDER CODEX — Research 2.0",
+        "# SPIDER CODEX — cumulative scientific record",
         "",
-        "Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.",
+        "One SPIDER program, one continuous scientific history; Research 2.0 extends earlier experiments.",
+        "Original evidence is kept byte-for-byte on main at codex/sources/0000-historical-evidence.md.",
+        "The single codex/index.json combines original source artifact locations and subsequent experiment packets.",
+        "The same codex/claim_state.json records bounded historical precedents and subsequent audited claim events.",
         "",
-        "Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.",
-        "Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.",
-        f"Validated experiments: **{len(entry_order)}**. Coverage gaps: **{len(gaps)}**. Quarantined packets: **{len(quarantine)}**.",
+        "## Earlier research — preserved source, indexed into the same Codex",
+        "",
+        f"Unique historical evidence artifacts: **{len(legacy_index['artifacts'])}** (source documents, NOT independent experiments).",
+        f"Immutable original Git blob: {historical_blob}.",
+        "Search codex/index.json.historical.artifacts by original path, lane and line interval.",
+        "Historical PASS tags are hints, not automatically validated scientific claims.",
+        "",
+        "| Historical evidence | Original reference | Bounded finding |",
+        "|---|---|---|",
+    ]
+    for finding in legacy_brief["findings"]:
+        fact = finding["fact"].replace("|", "/").replace("\n", " ")
+        lines.append(f"| {finding['key']} | {finding['source']} | {fact} |")
+    lines += [
+        "",
+        "## Subsequent finalized experiments — Research 2.0",
+        "",
+        "Canonical subsequent evidence is in codex/experiments/<experiment_id>/.",
+        "Use the same codex/index.json and codex/claim_state.json across both periods.",
+        f"Finalized subsequent packets: **{len(entry_order)}**. Coverage gaps: **{len(gaps)}**. Quarantined packets: **{len(quarantine)}**.",
         "",
         "## Experiment index",
-        "",
         "| Experiment | Lane | Audit | Verdict | Claims | Source commit |",
         "|---|---|---|---|---|---|",
     ]
