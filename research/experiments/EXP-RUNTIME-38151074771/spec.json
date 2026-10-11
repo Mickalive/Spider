@@ -1,49 +1,336 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-RUNTIME-38151074771",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "claim_scope_note": "This packet constructs and mechanically certifies a MEASUREMENT SUBSTRATE - a credential-free non-degenerate asymmetric-discovery task bank - and produces substrate-validity evidence usable only under C-MEAS-VALID's bounded scope (current effective event: VALIDATED at the authorship-separated real-Chromium fixture-authored scope, EXP-RUNTIME-36293257855, per codex/claim_state.json.effective_event_by_claim). It does NOT change claim status, does NOT promote anything to Product, and claims no real-agent capability. C-RESIDUAL-NOVELTY / C-PARAM-INHERIT / C-LLM-INHERIT / C-PRODUCT-ECON are not runtime-charter claims and are NOT touched by this packet.",
+  "director_mandate_binding": {
+    "cycle_id": "38150430423",
+    "action": "CONTINUE",
+    "target_claim": "C-MEAS-VALID",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "SUPERSEDE",
+    "question_verbatim": "Can a credential-free task bank engineered for ASYMMETRIC discovery - multi-task sessions in which one-time session / resource / schema discovery is amortized or cached across tasks, and therefore materially different from the bounded-negative mandatory-discovery deterministic REST class - receive a PRE-FREEZE, arithmetically checkable dynamic-range certificate (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.50 on at least one family, matched correctness >= 0.80 for all arms, and a treatment/comparator distinction) so that it can serve as the reusable substrate that unblocks the flagship inheritance benchmark (B2), recording a bounded substrate-class negative and freezing nothing if the certificate is unsatisfiable on every credential-free substrate tested?",
+    "dependencies": [
+      "The task bank must be materially different from the bounded-negative mandatory-discovery deterministic REST class (SESSION-BINDING-AMORTIZED, one-time session-scoped discovery).",
+      "The bounded substrate-class negative is the authorized exit if the pre-freeze certificate is unsatisfiable on every credential-free substrate tested."
+    ],
+    "not_authorized": [
+      "A fourth re-run of the mandatory-discovery deterministic REST certificate (EXP-PRODUCT-37989728440 class) - explicitly excluded by the mandate",
+      "The superseded parent out-of-surface oracle question (EXP-RUNTIME-37973247935; disposition SUPERSEDE); its three code repairs (Connection-header exclusion, WAL-vector stability gate, genuine logical-restore) are NOT run here",
+      "Any claim-status or promotion move on C-RESIDUAL-NOVELTY / C-PARAM-INHERIT / C-LLM-INHERIT / C-PRODUCT-ECON"
+    ],
+    "freeze_nothing_clause": "The certificate below IS the mandate's pre-freeze arithmetic certificate and it IS satisfiable with the frozen literals (verified by DESIGN-time probes, section pre_freeze_arithmetic_certificate), so the freeze-nothing branch is not taken. The clause remains operational for (a) any unsatisfiable variant found at DESIGN time (exit without freezing, recording the bounded substrate-class negative) and (b) a realized corruption at measure time (decision_rule.FALSIFIES: the certificate is re-evaluated from measured rates; comparator-at/above-ceiling maps to the bounded negative, never to a scientific positive)."
+  },
+  "parent_handoff_continuity": {
+    "parent": "research/experiments/EXP-RUNTIME-37973247935/handoff.json",
+    "sha256": "984049809ebf393e805f59c9b8d083caf2ebfc387348079b06ccacbe41b8928e",
+    "disposition": "SUPERSEDE by director_mandate (cognitive_reset=true, parent_handoff_disposition=SUPERSEDE); carried for continuity ONLY, not as the research agenda",
+    "established": [
+      "C-MEAS-VALID's last runtime packet (EXP-RUNTIME-37973247935) was MEASUREMENT_INVALID on a volatile-header fingerprint leak (hop-by-hop 'Connection' present in pre-capture, absent in post-capture on the same no-action pair, absent from SC.EXCLUDED_HEADERS): composite detector detected=true on 260/260. No scientific direction was tested by that packet.",
+      "The composite oracle's out-of-surface transfer question is untested in either direction.",
+      "The parent substrate/preflights functioned and the WAL byte vector was stable 19/19 on executed no-action pairs (preserved raw evidence)."
+    ],
+    "rejected": [
+      "Rejected: any SUPPORTS/FALSIFIES/MIXED reading of the out-of-surface transfer question from the parent packet (all per-arm rates were fingerprint-leak artifacts).",
+      "Rejected: 'the out-of-surface transfer fails' / 'the oracle cannot see out-of-surface mutations' (MEASUREMENT_INVALID is neither support nor falsification).",
+      "Rejected: 'the WAL substrate is unstable' (WAL byte vector identical 19/19).",
+      "Rejected: 'the capture-stability gate as implemented was the frozen control' (it checked all_identical while prereg defined byte-identical as the WAL vector).",
+      "Nothing scientific relevant to THIS task-bank question was rejected by the parent packet; its disposition is operational (invalid measurement), and the mandate SUPERSEDEs its next_question."
+    ],
+    "unknown": [
+      "Whether ANY credential-free asymmetric-discovery substrate class yields non-degenerate dynamic range - exactly this experiment's target.",
+      "Whether the parent composite oracle detects committed out-of-surface transitions at the frozen thresholds (remains open; NOT this experiment's question).",
+      "Whether downstream lanes (Graph C-FRESHNESS/C-DELTA-REPAIR, Physics statistical-contract certification) will adopt this substrate once a valid certificate exists (publication is not adoption)."
+    ],
+    "do_not_assume": [
+      "The parent next_question (fingerprint repair + out-of-surface re-run) is NOT this experiment's question; the mandate SUPERSEDEs it.",
+      "The REST-class 1.0 ceiling does NOT entail that every credential-free class is degenerate; the class is specific, and this experiment tests a materially different one (SESSION-BINDING-AMORTIZED).",
+      "This packet does not advance C-MEAS-VALID status, promotes nothing to Product, and does not import or invoke research/runtime/*.py (real-Chromium oracle substrate) in its measurement path.",
+      "A measured comparator-at-ceiling rate on the mechanism-intact frozen class is the bounded substrate-class negative (FALSIFIES), not an excuse to re-run the excluded REST certificate."
+    ]
+  },
+  "legacy_comparative_reasoning": {
+    "class": "LEGACY: NO_MATCH",
+    "basis": "The Director's comparative search of codex/legacy_artifact_index.json for 'discovery','cost','amortiz','capsule' found no non-ceiling task bank: the legacy runtime corpus is accounting/capsule infrastructure (e.g. artifact 531 results/runtime/capsules-r23cost/MANIFEST.json sha 67142e6e349e12f6b41fb4a2bde97b69b022d67b; verifier_cost bundles 584/590) plus the P2-AUTOMATION operational lesson (archived section 2: workflow completion != scientific validity). No 'task bank' artifact exists in the 1,401-artifact legacy index; a targeted primary-source grep over .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md for 'task bank','dynamic range','success ceiling','amortiz','discovery cost' returns zero matches.",
+    "nearest_precedents_cited_not_run": [
+      "Mind2Web V0.50 (archived Codex section 1, blob sha 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3; retrieval 47/176, exact human-route imitation 6/176): retrieval beats exact-route imitation on a real web corpus, which is why the certificate requires a retrieval-shaped comparator rather than assuming replay suffices.",
+      "P2-REPLAY-COST (pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b): matched-task/fully-loaded-cost guard motivates the four honest counters (http + retrieval + verification + repair) over latency-only proxies."
+    ],
+    "r2_precedents_off_class": [
+      "EXP-PRODUCT-37989728440 (bounded substrate-class negative, FALSIFIES): B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED both 1.000 at novelty 0.5/0.75 on the mandatory-discovery deterministic credential-free REST class; C1 certificate FALSE there (dynamic_range_certificate.design_certified=false). Cited as the excluded-class ceiling reference; NOT re-run (mandate).",
+      "EXP-PRODUCT-37973256064: COLD/RETRIEVAL at the 1.0 ceiling on held-out tasks while the treatment scored 0.8 by its own support bound; no dynamic range; excluded-class reference only.",
+      "EXP-PRODUCT-36272385776: a genuine cold-discovery-cost substrate was constructible (B-COLD 3.0 requests/task) but the treatment arm was invalidated by an 'action_template' path code defect; shows one-time discovery substrates are constructible.",
+      "Same-mandate Runtime pre-freeze predecessors EXP-RUNTIME-38121196004, EXP-RUNTIME-38112381024, EXP-RUNTIME-38123988847 and EXP-RUNTIME-38125434571: all died at the independent design-review stage on the SHARED control-plane/model-routing failure (state fingerprint 3b9ff5e4e9e73f23e368efb4, reviewer model opencode/exo-free, exit 1, category substantive), NOT on a scientific defect; none ever froze or executed. This DESIGN rigorously replicates the 38125434571 construction (session-binding-amortized, K=8, one-time 48-bit session binding, four arms, NC-MECHANISM-OFF negative-branch witness) with FRESH independently re-derived satisfiability probes (the predecessors' /tmp probe artifacts no longer exist) and re-verified closed-form arithmetic."
+    ],
+    "materially_different_from": "the bounded-negative mandatory-discovery deterministic REST class; this is the SESSION-BINDING-AMORTIZED class (multi-task sessions, one-time session-scoped schema/binding discovery amortized or cached across tasks, chain-task carry, per-session 128-request budget that never binds)."
+  },
+  "question": "On a credential-free substrate class materially different from the bounded-negative mandatory-discovery deterministic REST class - multi-task sessions where one-time session/resource/schema discovery amortizes or caches across tasks - can an asymmetric-discovery task bank be certified ARITHMETICALLY BEFORE FREEZE (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family; matched correctness >= 0.80 for all arms; a real treatment/comparator behavioural distinction; honest per-condition counters http_requests + retrieval_calls + verification_calls + repair_attempts; and a preregistered contamination/dynamic-range certificate) so that the bank is deliverable as a reusable substrate unblocking the flagship inheritance benchmark B2? If the certificate is unsatisfiable on every credential-free substrate tested, the mandated outcome is a bounded substrate-class negative and nothing is frozen.",
+  "hypothesis": "The SESSION-BINDING-AMORTIZED class (credential-free deterministic stdlib localhost HTTP; K=8-task sessions; a 48-bit session-scoped binding revealed EXACTLY ONCE in the precursor task's commit receipt, absent from every idempotent channel, and unrecoverable by a memoryless comparator) yields a non-degenerate bank certifiable pre-freeze. Under the frozen benchmark conventions, each of F1-RECORDS and F2-WIDGETS has predicted comparator success_rate 0.875 (140/160) at novelty 0.50 and 0.75 - strictly below the 0.95 ceiling and above the 0.80 floor - and 1.0 at novelty 0.00/0.25, while T-AMORTIZED-DISCOVERY and PC-EXACT-REPLAY reach 1.0 at every band, with >= 2 of the 4 counter dimensions behaviourally distinct between T and each comparator. The comparator rate (K-1)/K is robust across K in {7,8,9,10} (0.857/0.875/0.889/0.900, all in [0.80,0.95)).",
+  "falsifier": "F-CEILING/CLASS-DEGENERACY: zero families certify and the non-certification is comparator-attributable (in BOTH families either B-COLD-RE-DERIVE or B-RETRIEVAL-SHAPED success_rate >= 0.95 at novelty in {0.50,0.75}, or a comparator success_rate < 0.80 at some band), with all validity gates V1-V7 passed and every control at its predicted value -> the SESSION-BINDING-AMORTIZED class is declared degenerate for credential-free stdlib deterministic substrates -> bounded substrate-class negative (the mandate's honest decision-changing outcome). F-LEAK: the one-time binding, or any value sufficient to reconstruct it, is present in any idempotent channel (/session, /task/{i}, non-receipt commit responses, all 400/409 bodies) -> NC-NO-LEAK fires -> MIXED (never a scientific reading). F-GATE: any validity gate V1-V7 fails (nondeterminism, counter inconsistency, frozen-file change, arm protocol violation, stdlib-only breach, matched-manifest mismatch, server-enforcement failure) -> MEASUREMENT_INVALID, never a scientific reading.",
+  "substrate": {
+    "class": "SESSION-BINDING-AMORTIZED (materially distinct from EXP-PRODUCT-37989728440 mandatory-discovery deterministic REST, which is cited only, never re-run)",
+    "transport": "Python stdlib only (http.server / http.client / urllib.request / hashlib / json / hmac / secrets), a single in-process server bound to 127.0.0.1, no persistence beyond process memory, no external network, no credentials, no LLM calls, no browser",
+    "prohibition": "EXECUTE MUST NOT import research/runtime/*.py or any other repository module into the measurement path (stdlib-only, frozen). Design-time probes already verified http.server/http.client/urllib.request/hashlib/json/hmac/secrets import under python 3.12.15.",
+    "session": "K=8 tasks per session. GET /api/v1/{family}/session -> {session_token, schema, epoch}. session_token is opaque (SHA-256 over server_secret + family + novelty + session_index, 'token' domain) and is NOT the binding; epoch is a monotone construction counter.",
+    "binding": "the correct resource_id of the chain task is a one-time 48-bit value = SHA-256(server_secret, family, novelty, session_index, 'binding') hexdigest truncated to 48 bits (12 hex chars). It is revealed EXACTLY ONCE in the precursor task's commit receipt (field chain_resource_id), is absent from every idempotent channel, is consumed on first successful use at the chain task, and any stale/foreign/consumed value -> 400. Re-commit of the precursor -> 409 and NEVER re-reveals the binding. The field is named chain_resource_id (NOT next_resource_id): at novelty 0.75 the precursor is task-(K-3)=5 and the chain task is index (K-1)=7, so the revealed value is the CHAIN task's id carried across an intermediate task, not the immediately-next task's id. NC-BINDING-UNIQUENESS additionally requires all session bindings in the run to be pairwise distinct (probe-verified over the full scored matrix: 160 bindings, pairwise distinct).",
+    "protocol": {
+      "GET /api/v1/{family}/session": "create/look up the run's session -> {session_token, schema, epoch}; never contains the binding except in the NC-MECHANISM-OFF ablation configuration",
+      "GET /api/v1/{family}/task/{i}": "intent {index, intent, resource_id|null, requires_schema, is_chain}; chain task has resource_id=null",
+      "POST /api/v1/{family}/commit": "{session_token, task_index, resource_id, payload} -> 200 + receipt on success (the precursor's 200 receipt carries the single chain_resource_id reveal); 400 invalid/missing/consumed/foreign binding; 409 already-committed (never re-reveals). chain_resource_id is emitted ONLY on the precursor's first 200 commit receipt.",
+      "response_invariants": "the binding appears ONLY in the precursor's 200 commit receipt under field chain_resource_id; /session, /task/{i}, ordinary receipts, 400 and 409 bodies must not contain it (NC-NO-LEAK scans every such body in the mechanism-intact run)."
+    },
+    "families": [
+      "F1-RECORDS",
+      "F2-WIDGETS"
+    ],
+    "novelty_ladder": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "novelty_semantics": {
+      "0.00": "schema_required=false; resource_id explicit in task spec; no chain task; all arms 1.0",
+      "0.25": "schema_required=true (wire schema discovered via /session); resource_id explicit; no chain task; all arms 1.0",
+      "0.50": "schema_required=true + exactly one chain task at index (K-3)=5; the binding is revealed in task-(K-4)=4 commit receipt under chain_resource_id (carry distance 1)",
+      "0.75": "schema_required=true + exactly one chain task at index (K-1)=7; the binding is revealed in task-(K-3)=5 commit receipt under chain_resource_id (carry distance 2; an intermediate task-6 separates reveal from use)"
+    },
+    "novelty_fraction": "novelty = fraction of commit parameters not determined by (task spec union frozen grammar): 0.00 -> 0/4; 0.25 -> 1/4 (wire schema); 0.50 -> 2/4 on the chain task (schema + session-scoped binding), 1/4 elsewhere; 0.75 -> 3/4 on the chain task (schema + binding + >1-step context retention), 1/4 elsewhere. The band label is fixed by construction; the certificate gates evaluate at novelty >= 0.50.",
+    "sample": "N_SESSIONS=20 per (family x novelty x scored arm) cell -> 160 tasks per cell; 2 families x 4 bands x 4 scored arms = 640 scored sessions (5120 scored tasks); controls add the cells listed in controls; a full double-run of the scored matrix is required",
+    "determinism": "one run_seed fixed at EXECUTE start and recorded in provenance.json; server_secret = SHA-256(run_seed, 'server_secret') (deterministic; the `secrets` module is NOT used for server_secret, so bindings and tokens are reproducible); per-(family,novelty,session_index) seeds via SHA-256(run_seed, family, novelty, session_index); no process hash(); no wall-clock dependence in outcomes (latency recorded advisory only); NC-DOUBLE-RUN: a second identical-seed run must reproduce every per-task outcome and counter byte-identically.",
+    "budget": "every arm operates under the same 128-request/session ceiling (NC-EQUAL-BUDGET); max predicted usage is 25/session, so the budget never binds and comparator failure is NOT budget-induced, it is induced by the non-recoverability of the one-time binding (information-theoretic: 2^48 possible values vs 128 requests; ~2^47 worst-case)",
+    "arm_scope": "arms interact ONLY through the HTTP surface; access to server-process state, bank files or generator internals is a frozen protocol violation",
+    "benchmark_convention_disclosure": "Non-degeneracy here means strictly below the 1.0 correctness ceiling under the memoryless-per-task comparator convention, exactly as in the flagged Product packets. The one-time binding is a small learnable artefact: NC-RETAIN-RECEIPT shows an actor retaining the immediate predecessor receipt finishes 1.0 at carry distance 1. The certificate therefore certifies DYNAMIC RANGE (the B2 blocker), not difficulty for a memory-enabled agent; real-agent difficulty is for B2's LLM arms to measure on this delivered bank. This boundary is disclosed, not hidden.",
+    "bounds_disclosure": "What the certificate does and does not certify is bounded here. It certifies DYNAMIC RANGE against the mandate-named memoryless-per-task comparators, NOT difficulty for a memory-enabled agent: it is exactly the B2 blocker (cold/retrieval at the 1.0 correctness ceiling on the tested class). A policy that carries in-session context reaches 1.0 (T-AMORTIZED-DISCOVERY, and NC-RETAIN-RECEIPT at carry distance 1). The one-time binding is a small learnable artefact; the certificate is a substrate-validity object for the B2 benchmark, whose LLM arms measure real difficulty on the delivered bank. This boundary is measured and disclosed, not hidden."
+  },
+  "arms": {
+    "T-AMORTIZED-DISCOVERY": "treatment (benchmark inheritor stand-in): GET /session once per session; retain ALL in-session context including every commit receipt; capture chain_resource_id (the binding) from the precursor receipt; commit each task once using spec/schema ids and the captured binding at the chain task. Predicted success 1.0 all bands; per-session http=17, retrieval_calls=0, verification_calls=8, repair_attempts=0.",
+    "B-COLD-RE-DERIVE": "mandated comparator: before EVERY task GET /session and DISCARD prior task context (no receipt retention); at the chain task the binding is not re-derivable (one-time, 48-bit, non-leaked; ~2^47 guesses vs the 128-request/session budget) -> first commit 400, one repair re-attempt 400 -> chain task failed. Predicted success 0.875 (7/8) at novelty >= 0.50, 1.0 below; per-session http=25 (24 at 0.00/0.25), retrieval_calls=0, verification_calls=9 (8 below), repair_attempts=1 (0 below).",
+    "B-RETRIEVAL-SHAPED": "mandated comparator in the FROZEN memoryless-per-task retrieval convention: identical request pattern to cold PLUS exactly one local retrieval_call per task over the frozen prior-session store (top-1 similarity; 8 calls/session); at the chain task it retrieves a binding recorded in a DIFFERENT session (stale for the current session's registry; NC-BINDING-UNIQUENESS guarantees it is never the current binding) -> 400 -> fail. The prior-session store EXCLUDES the current session by the frozen convention (no in-session carry): a retrieval variant that indexes current-session observations IS T-AMORTIZED-DISCOVERY and scores 1.0, which is the disclosed amortization boundary, not a comparator. Predicted success 0.875 at novelty >= 0.50, 1.0 below; per-session http=25 (24 below), retrieval_calls=8, verification_calls=9 (8 below), repair_attempts=1 (0 below).",
+    "PC-EXACT-REPLAY": "positive control: golden-input executor given the session's exact binding and schema by frozen construction (the chain_resource_id is handed to it); it performs no wire discovery of schema or binding (only 1 session_get to obtain the opaque session_token, 8 task_reads, 8 commits). Proves the substrate is completable and the scorer is non-degenerate; also the T-liveness anchor. Predicted success 1.0 all bands; per-session http=17, retrieval_calls=0, verification_calls=8, repair_attempts=0."
+  },
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "role": "mandated cold re-derivation comparator; one of the two 0.95-ceiling gates at novelty >= 0.5",
+      "expected": "0.875 at novelty 0.50/0.75; 1.0 at 0.00/0.25; both families",
+      "identity_note": "baseline identity reused from codex/experiments/EXP-PRODUCT-37989728440 on a materially different substrate class"
+    },
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "role": "mandated retrieval-shaped comparator; the other 0.95-ceiling gate at novelty >= 0.5",
+      "expected": "0.875 at novelty 0.50/0.75; 1.0 at 0.00/0.25; both families",
+      "identity_note": "baseline identity reused from the excluded-class packet on a materially different substrate class; retrieval_calls are counted honestly"
+    },
+    {
+      "id": "CEILING-1.0",
+      "role": "degenerate-ceiling reference from the excluded REST class; cited, NOT re-run (mandate). Also the expected value of the NC-MECHANISM-OFF ablation",
+      "expected": "1.0 on the excluded mandatory-discovery REST class; 1.0 on NC-MECHANISM-OFF -> certificate FALSE"
+    },
+    {
+      "id": "FLOOR-0.0",
+      "role": "true floor anchor: discovery-free spec-only actor cannot satisfy schema-dependent tasks",
+      "expected": "1.0 at novelty 0.00; 0.0 at novelty >= 0.25 (NC-NO-DISCOVERY-DIRECT)"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-EXACT-REPLAY",
+    "role": "proves the substrate is completable and the scorer non-degenerate; also the treatment-liveness anchor (T must equal PC at 1.0, so a broken receipt-capture loop drops T and trips the distinction gate)",
+    "expected": "success 1.0 at every band in both families; per-session http=17, retrieval_calls=0, verification_calls=8, repair_attempts=0"
+  },
+  "null_control": {
+    "id": "NC-MECHANISM-OFF",
+    "role": "mechanism ablation AND negative-branch witness: the one-time-ness of the binding is disabled (the binding is ALSO exposed by /session, i.e. symmetric re-derivable discovery) with the identical task bank and arm policies. Expected: B-COLD and B-RETRIEVAL both 1.0 at novelty >= 0.5 -> the certificate procedure returns FALSE -> proves the certificate can fire negative and that the one-time asymmetric mechanism (not the bank content or the arm definitions alone) produces the dynamic range. SCOPING: NC-NO-LEAK is NOT evaluated in this ablation (the ablation intentionally exposes the binding); it is evaluated only in the mechanism-intact scored run.",
+    "expected": "COLD=RETRIEVAL=1.0 at novelty >= 0.5 -> certificate FALSE (probe-verified)"
+  },
+  "controls": {
+    "NC-EMPTIED-CONTEXT": "diagnostic: T minus context retention (captures the receipt then discards it before the chain task). Expected 0.875 at novelty >= 0.5, 1.0 below (mechanism intact); expected to track the comparators under a degenerate reading. Isolates retention as the operative distinction between T and the comparators.",
+    "NC-SHUFFLED-BINDING": "T given a WELL-FORMED binding value drawn from ANOTHER session of the same family (valid format, wrong registry entry); the server rejects it against the live session registry (400). Expected 0.875 at novelty >= 0.5. Proves session-scoped server validation consumes/validates the registry entry rather than only checking a syntactic value.",
+    "NC-FAMILY-ISOLATION": "T given a well-formed binding drawn from the OTHER family; the server rejects it (400). Expected 0.875 at novelty >= 0.5. Proves family isolation is server-enforced.",
+    "NC-NO-DISCOVERY-DIRECT": "floor anchor: an actor that DOES obtain a valid session_token and CAN commit, but uses ONLY the task specs - it does not consume the /session schema and does not retain any receipt. Expected 1.0 at novelty 0.00 (no schema required) and 0.0 at novelty >= 0.25 (payloads cannot match the undiscovered wire schema; the chain binding is also absent). This isolates 'discovery/schema applicability is required' from 'a session merely exists': the actor has a session, so a 0.0 is attributable to the undiscovered schema, not to a missing token.",
+    "NC-NO-LEAK": "falsifier control, evaluated ONLY in the mechanism-intact scored run (NOT in the NC-MECHANISM-OFF ablation, which intentionally exposes the binding): mechanical scan of EVERY idempotent response body (/session, /task/{i}, non-receipt commit responses, all 400/409 error bodies) for the binding and for any value sufficient to reconstruct it (the precursor receipt is the sole permitted occurrence, exactly once, under chain_resource_id). A single hit -> F-LEAK -> MIXED (no scientific reading: a leaked binding destroys the intended asymmetry).",
+    "NC-EQUAL-BUDGET": "every arm operates under the same 128-request/session ceiling (max predicted usage 25); no arm is starved; the budget never binds (failure is therefore not budget-induced).",
+    "NC-NO-SYNTHETIC": "the server returns no hints or assistive values (no edit-distance feedback, no partial credit); scoring is exact match of the final committed state against the deterministic ground-truth manifest.",
+    "NC-ARM-BLIND-SCORING": "the scorer is a pure stateless function over (task_index, final_committed_state) rows only; it never sees arm identity, arm traces, retrieval-store contents or counters. Verified by frozen interface contract.",
+    "NC-COUNTER-INTEGRITY": "all four counters are re-derived from ONE interleaved execution trace with monotonic request ids. Frozen invariants: http_requests == session_gets + task_reads + commit_requests; verification_calls == commit_requests; repair_attempts <= verification_calls; retrieval_calls > 0 only for B-RETRIEVAL-SHAPED. Re-derivation must match the reported counters exactly.",
+    "NC-DOUBLE-RUN": "the full scored matrix is executed twice with the same run_seed; every per-task outcome and counter must be byte-identical; any divergence -> MEASUREMENT_INVALID.",
+    "NC-K-SWEEP": "the construction is re-run at K in {7,9,10} with the identical mechanism, using the index formula chain(K,0.50)=K-3 / precursor(K,0.50)=K-4 and chain(K,0.75)=K-1 / precursor(K,0.75)=K-3 (so carry distances stay 1 and 2); comparators must stay in [0.80,0.95) (probe: 0.8571/0.8889/0.9000). Proves the 0.875 result is not a knife-edge artifact of K=8.",
+    "NC-RETAIN-RECEIPT": "solvability/depth witness (diagnostic, NOT a certificate gate and NOT in the SUPPORTS control-equality set): a cold-by-policy actor that retains EXACTLY the immediately-prior task's receipt. Expected 1.0 at novelty 0.50 (carry distance 1) and 0.875 at novelty 0.75 (distance 2 exceeds 1-step retention). Proves the chain task is completable (substrate not impossible) and that the benchmark measures a real memory-depth-sensitive discovery-and-carry mechanism. Only the extreme NC-RETAIN-RECEIPT = 0.0 at novelty 0.50 (chain unreachable by ANY memory actor) is a decision-relevant substrate-solvability failure -> MIXED.",
+    "NC-BINDING-UNIQUENESS": "construction invariant (this design's addition): every session binding in the run is pairwise distinct, so a value retrieved from the prior-session store can never be the current session's binding (probe-verified over the full scored matrix: 160/160 pairwise distinct). Gates the meaning of NC-SHUFFLED-BINDING and B-RETRIEVAL-SHAPED's stale-retrieval failure."
+  },
+  "counters": {
+    "http_requests": "every HTTP request issued by the arm (success, failure, repair re-attempts), from the single interleaved trace",
+    "retrieval_calls": "local retrieval invocations over the frozen prior-session store (B-RETRIEVAL-SHAPED only; 0 for all other arms)",
+    "verification_calls": "commit requests issued = ground-truth checks performed (includes repair re-attempts)",
+    "repair_attempts": "commit requests issued after an initial failure on the same task",
+    "predicted_per_session": "T/PC all bands: (http 17, retr 0, verif 8, repair 0). COLD novelty 0.00/0.25: (24, 0, 8, 0); 0.50/0.75: (25, 0, 9, 1). RETRIEVAL novelty 0.00/0.25: (24, 8, 8, 0); 0.50/0.75: (25, 8, 9, 1).",
+    "matched_correctness": "fraction of scored tasks whose final committed state exactly equals the deterministic ground-truth manifest (arm-blind exact match); equals success_rate under this construction because a task counts as successful only on exact match"
+  },
+  "contamination_controls": {
+    "cache_vs_current_session": "T's retained context contains only {session schema, explicit spec-derived resource ids, the current session's receipts}; B-RETRIEVAL-SHAPED's store contains ONLY values from sessions OTHER than the current one (frozen prior-session store, the mandate's memoryless retrieval convention); no arm receives the current session's binding except through the single server-issued precursor receipt (T/PC) under field chain_resource_id. A retrieval policy that indexes the CURRENT session's observations is behaviorally T-AMORTIZED-DISCOVERY (1.0) and is the disclosed amortization boundary, not this comparator.",
+    "server_enforced": "the server validates every resource_id against the live session registry and consumes the binding on first use; stale/foreign/consumed -> 400 (verified by NC-SHUFFLED-BINDING, NC-FAMILY-ISOLATION, NC-NO-LEAK).",
+    "matched_manifests": "identical task manifests per (family, novelty) across ALL arms; arms differ ONLY in frozen policy, never in stimuli.",
+    "cache_only_oracle": "a store-only/cache-only actor completes 0 tasks at novelty >= 0.25 (behavioural proxy NC-NO-DISCOVERY-DIRECT); no test-session answer is obtainable from any store.",
+    "arm_blind_scoring": "the scorer sees only (task_index, final_committed_state) rows; no arm identity, traces, stores or counters.",
+    "binding_uniqueness": "NC-BINDING-UNIQUENESS guarantees prior-session-store values are never the current session's binding."
+  },
+  "measurement_validity": {
+    "validity_class": "deterministic closed-form construction measurement on a frozen-literal bank; no LLM, no stochastic model, no network beyond loopback",
+    "gate_classes": "Two classes are deliberately separated. VALIDITY GATES V1-V7 decide whether the measurement is interpretable at all (any failure -> MEASUREMENT_INVALID). SCIENTIFIC RATE MEASUREMENTS (per-cell arm success rates) are genuine measured outputs and are NOT equality-frozen. CONTROL CLASSES are explicit (see control_taxonomy): a validity gate failure -> MEASUREMENT_INVALID; the falsifier control NC-NO-LEAK firing -> MIXED; a liveness failure (T<0.80 or PC<1.0) -> MIXED; DIAGNOSTIC controls track the substrate and are NEVER required to equal a single pre-set value for a FALSIFIES reading. This structural separation is the correction of the prior same-mandate designs' defect (an equality gate on every cell made the falsifying branch unreachable) and of the first revision of this spec (whose FALSIFIES branch required every control to equal its non-degenerate prediction, which forced any genuine degeneracy into MIXED).",
+    "validity_gates": [
+      "V1: packet immutability (frozen request/spec/prereg/design_review untouched), stdlib-only measurement path, and a code-fidelity manifest recorded in result.json.artifacts (EXECUTE-authored generator/server/executors/scorer paths + SHA-256)",
+      "V2: NC-DOUBLE-RUN byte-identical per-task outcomes and counters",
+      "V3: NC-COUNTER-INTEGRITY trace re-derivation matches the reported counters",
+      "V4: NC-ARM-BLIND-SCORING interface contract honored",
+      "V5: matched manifests across arms and no arm protocol violation",
+      "V6: binding entropy recomputed >= 40 bits",
+      "V7: NC-SHUFFLED-BINDING and NC-FAMILY-ISOLATION confirm server-enforced session/family scope and binding consumption"
+    ],
+    "representation_loss": "executors are deterministic stand-ins for real agents; the certificate certifies the SUBSTRATE's dynamic range under the frozen benchmark conventions, not any real-agent capability. Real-agent economics remain for the B2 benchmark to measure on this bank.",
+    "threats": {
+      "circularity_substrate_vs_arm": "addressed by NC-MECHANISM-OFF (disabling only the one-time mechanism, with identical bank and arms, flips comparators to 1.0 and the certificate to FALSE - probe-verified), by NC-NO-LEAK + 48-bit entropy (non-re-derivability mechanically verified over the HTTP surface), and by the information-theoretic argument that the comparator policy is the mandate-named memoryless-per-task benchmark convention and its per-chain-task failure is forced by 48 bits of unrecoverable state, not by an arm-tuning choice.",
+      "ceiling_baselines": "both comparators predicted at 0.875, 0.075 below the 0.95 ceiling and 0.075 above the 0.80 floor; the excluded REST class is cited, NOT re-run (mandate).",
+      "floor_baselines": "NC-NO-DISCOVERY-DIRECT anchors the true floor at 0.0 for novelty >= 0.25, so 0.875 is not a floor artifact.",
+      "treatment_comparator_identity": "T, COLD and RETRIEVAL differ in frozen policy and in predicted success rate and in counter dimensions (T vs COLD 3/4, T vs RETRIEVAL 4/4; rule >= 2/4); identity collision is impossible unless a validity gate fails.",
+      "contamination": "see contamination_controls; scored via server-enforced validation plus the cache-only-actor proxy and NC-BINDING-UNIQUENESS.",
+      "nondeterminism": "single run_seed, no process hash(), no wall-clock dependence, NC-DOUBLE-RUN gate.",
+      "learnability_of_binding": "disclosed in substrate.bounds_disclosure and measured by NC-RETAIN-RECEIPT: the 0.875 comparator rate is relative to the memoryless-per-task convention; the certificate certifies dynamic range, not difficulty for a memory-enabled agent.",
+      "amortization_boundary": "addressing the strongest attack: a memory-enabled policy defeats the chain task without extra requests (retention, not search). T-AMORTIZED-DISCOVERY and NC-RETAIN-RECEIPT(at 0.50) ARE that policy and are measured at 1.0. The certificate therefore makes a bounded claim: the mandate-named memoryless-per-task comparators are non-degenerate (0.875), and a memory-enabled baseline reaches the substrate ceiling. The class-level negative (if FALSIFIES) is correspondingly bounded to the memoryless convention, and this is disclosed. No stronger claim is made.",
+      "retrieval_current_session": "B-RETRIEVAL-SHAPED is frozen to a prior-session store by the mandate's memoryless retrieval convention; a variant indexing current-session observations is behaviorally T and scores 1.0. This is the amortization boundary, disclosed, not a hidden crippling of the comparator."
+    },
+    "control_taxonomy": {
+      "validity_gates": "V1-V7; any failure -> MEASUREMENT_INVALID (infrastructure/substrate failure is never scientific falsification).",
+      "falsifier_control": "NC-NO-LEAK; firing -> F-LEAK -> MIXED (a leaked binding destroys the intended asymmetry).",
+      "liveness_controls": "PC-EXACT-REPLAY == 1.0 and T >= 0.80 at every band are required for a SUPPORTS or a FALSIFIES reading; a treatment/PC failure -> MIXED.",
+      "diagnostic_controls": "NC-EMPTIED-CONTEXT, NC-SHUFFLED-BINDING, NC-FAMILY-ISOLATION, NC-NO-DISCOVERY-DIRECT, NC-RETAIN-RECEIPT, NC-MECHANISM-OFF, NC-K-SWEEP. Read diagnostically: SUPPORTS expects the non-degenerate reading; FALSIFIES expects the DEGENERATE reading (comparators, NC-EMPTIED-CONTEXT and NC-RETAIN-RECEIPT all at/above ceiling). They are NEVER required to equal a single pre-set value for a FALSIFIES reading."
+    }
+  },
+  "decision_rule": {
+    "family_certifies": "A family certifies iff, at novelty >= 0.50, B-COLD-RE-DERIVE < 0.95 AND B-RETRIEVAL-SHAPED < 0.95, AND every scored arm (T, COLD, RETRIEVAL, PC) has success_rate >= 0.80 AND matched_correctness >= 0.80 at every band (matched_correctness == success_rate by exact-match scoring), AND behavioural distinction holds (at least 2 of the 4 counter dimensions http_requests/retrieval_calls/verification_calls/repair_attempts distinct between T and each comparator AND success margins T-COLD >= 1/8 AND T-RETRIEVAL >= 1/8 at novelty >= 0.5).",
+    "SUPPORTS": ">= 1 family certifies AND validity gates V1-V7 pass AND NC-NO-LEAK is clean AND liveness holds (PC=1.0, T>=0.80 at every band) AND the DIAGNOSTIC controls are consistent with the NON-DEGENERATE reading (NC-EMPTIED-CONTEXT ~ comparator rate 0.875 at novelty >= 0.5; NC-MECHANISM-OFF -> certificate FALSE; NC-RETAIN-RECEIPT >= 0.80 at novelty 0.50; NC-NO-DISCOVERY-DIRECT 1.0 at 0.00 / 0.0 at >= 0.25) -> deliver the certified bank (task manifests, stdlib HTTP protocol, executor policy definitions, scored evidence, contamination certificate) as a reusable substrate for the B2 benchmark; C-MEAS-VALID substrate-validity evidence only, no claim status change, no promotion.",
+    "FALSIFIES": "zero families certify AND validity gates V1-V7 pass AND NC-NO-LEAK is clean AND liveness holds (PC=1.0, T>=0.80) AND the non-certification is comparator-attributable (in BOTH families either a comparator success_rate >= 0.95 at novelty >= 0.5, i.e. the certificate is unsatisfiable on the frozen class, or a comparator success_rate < 0.80 at some band, i.e. the bank is below floor) AND the DIAGNOSTIC controls are consistent with the DEGENERATE reading (comparators, NC-EMPTIED-CONTEXT and NC-RETAIN-RECEIPT all at/above ceiling; this is EXPECTED under degeneracy and does NOT convert the outcome to MIXED) -> bounded substrate-class negative: the SESSION-BINDING-AMORTIZED class is closed for credential-free stdlib deterministic substrates -> flag the Global Director that the flagship benchmark class requires credentialed substrates or a changed product thesis. Reachability: the diagnostic controls are NOT equality-frozen for FALSIFIES; the pre-registered NC-MECHANISM-OFF configuration independently witnesses that the certificate procedure returns FALSE, and the rule-level classifier probe synthesizes a degenerate world (comparators 1.0 with diagnostic controls tracking them) and returns FALSIFIES (not MIXED).",
+    "MIXED": "validity gates V1-V7 pass and the outcome is neither SUPPORTS nor FALSIFIES: NC-NO-LEAK fires (F-LEAK); OR exactly one family certifies while the other fails (partial dynamic range); OR a treatment-side failure (T < 0.80, or PC < 1.0) makes the bank undeliverable without closing the substrate class; OR the solvability witness NC-RETAIN-RECEIPT = 0.0 at novelty 0.50 (chain task unreachable by ANY memory actor -> substrate-solvability failure); OR a diagnostic control is inconsistent with BOTH the non-degenerate and the degenerate readings -> the bank is not deliverable as certified; emit the exact repair list. NC-RETAIN-RECEIPT is otherwise a NOT-a-gate diagnostic.",
+    "MEASUREMENT_INVALID": "any validity gate V1-V7 fails (infrastructure failure, double-run divergence, counter inconsistency, frozen-file modification, arm protocol violation, stdlib-only breach, missing code-fidelity manifest, matched-manifest mismatch, server-enforcement failure) -> no scientific reading; record the diagnosis and the smallest unblocking next action. Infrastructure/substrate failure is never encoded as scientific falsification.",
+    "boundary_note": "per-cell rates are exact rationals with denominator 20*K; (K-1)/K for K in {7,8,9,10} equals neither 0.95 nor 0.80, so the < 0.95 and >= 0.80 inequalities cannot land on their boundaries. The distinction success margin T-COLD = T-RETRIEVAL = 1/8 exactly; because rates are exact rationals (no stochastic sampling) the closed >= 1/8 inequality is stable, and the counter-dimension clause (3/4 and 4/4) is the primary distinction evidence."
+  },
+  "product_consequence_positive": "Runtime delivers a certified, reusable asymmetric-discovery task bank (frozen manifests, stdlib HTTP protocol, executor policy definitions, scored evidence, contamination certificate) that unblocks the flagship inheritance benchmark B2: external agents can be benchmarked on a substrate where cold re-derivation and retrieval-shaped baselines score 0.875 (off the 1.0 ceiling, above the 0.80 floor) while an amortized inheritor scores 1.0 at strictly lower http/verification/repair cost. B2 was previously gated on 'benchmark degeneracy: cold/retrieval at the 1.0 ceiling on the tested class'. No product promotion and no claim status change; C-MEAS-VALID substrate-validity evidence only, bounded to two task families on a credential-free stdlib substrate.",
+  "product_consequence_negative": "If zero families certify (comparator-attributable, all gates and controls clean), record a bounded substrate-class negative for the SESSION-BINDING-AMORTIZED class: credential-free stdlib deterministic substrates with one-time session-scoped discovery cannot deliver benchmark dynamic range; the flagship B2 class is closed on this substrate family and the factory must seek credentialed substrates or change the product thesis. Nothing is promoted and no claim is advanced. If a validity gate fails, deliver the exact repair list instead of a bank. The freeze-nothing escape clause is preserved for any unsatisfiable variant.",
+  "estimated_cost": {
+    "scored": "640 scored sessions (2 families x 4 bands x 4 arms x 20 sessions) = 5120 scored tasks",
+    "controls": "NC-EMPTIED-CONTEXT 160, NC-SHUFFLED-BINDING 160, NC-FAMILY-ISOLATION 160, NC-NO-DISCOVERY-DIRECT 160, NC-MECHANISM-OFF 160, NC-RETAIN-RECEIPT 160, NC-K-SWEEP K in {7,9,10} 480; plus a full NC-DOUBLE-RUN of the scored matrix (640) and NC-NO-LEAK scans",
+    "requests": "roughly 50-80k loopback HTTP requests (17-25 per session, ~2640 sessions total)",
+    "compute": "< 20 min single-process CPU on a standard CI runner; < 100 MB RAM",
+    "model_cost": "0 USD (deterministic executors; no LLM calls)",
+    "external_cost": "0 USD (loopback only; stdlib only; no credentials)"
+  },
+  "expected_information_gain": "High and decision-changing in both extremes. Positive: B2 - currently gated on benchmark degeneracy - receives a certified non-degenerate substrate plus a mechanically verified contamination certificate, and downstream lanes can preregister this substrate for C-FRESHNESS / C-DELTA-REPAIR / C-LLM-INHERIT work. Negative: the certification attempt closes the credential-free stdlib one-time-session substrate family with a bounded negative, forcing the credentialed-substrate or thesis-change decision instead of further degenerate benchmark cycles. This packet also corrects the prior same-mandate attempts' structural defect (equality gates on every scored cell made the falsifying branch unreachable) by separating validity gates from measured scientific rates, adds NC-BINDING-UNIQUENESS, exposes the closed-form certificate arithmetic, and re-verifies every claim with fresh DESIGN-time probes (the predecessor's probes no longer exist). Claims that would NOT change any decision are explicitly not made: the bank is not a claim about real-agent capability, and novelty monotonicity is not preregistered.",
+  "pre_freeze_arithmetic_certificate": {
+    "method": "closed-form arithmetic over the frozen literals plus a rule-level simulation and a real loopback stdlib transport probe, all executed at DESIGN time as cheap non-outcome-bearing satisfiability probes (no confirmatory bank run, no measurement of the frozen experiment's scored cells outside probe transcripts)",
+    "probes": {
+      "probe_env": {
+        "path": "/tmp/opencode/exp38151074771/probe_env.py",
+        "sha256": "596c4b7f373e9e34d89086048994c5d027cac2f5d0997a7730471ea21709630e",
+        "result": "python 3.12.15; http.server/http.client/urllib.request/hashlib/hmac/secrets/threading/json/socket import OK; output sha256 d965caff1ca8775883b6d84e5d7cbbaeccfb35f3905a5a9f2f8643cfc4127333"
+      },
+      "probe_transport": {
+        "path": "/tmp/opencode/exp38151074771/probe_transport.py",
+        "sha256": "6bfb3c6f913d29882f2e99fbcdad6209b0f0b24655f83c67806f7d38bb5b4105",
+        "result": "real in-process stdlib ThreadingHTTPServer on 127.0.0.1: 20/20 checks true - session 200 (binding absent); ordinary task 200 with a resource_id; chain task 200 with resource_id null; missing-token commit 400; ordinary commit 200; precursor commit 200 revealing chain_resource_id exactly once (field name verified: chain_resource_id present, next_resource_id absent); precursor re-commit 409 with no re-reveal; wrong binding 400; foreign-session binding 400; valid chain commit 200; chain re-commit 409; no binding leak in any idempotent/error body; NC-MECHANISM-OFF exposes the binding; output sha256 efcc3710e1415b708a679a0d6ad94264b679650447edb54356d198b14a2a0f1c"
+      },
+      "probe_certificate": {
+        "path": "/tmp/opencode/exp38151074771/probe_certificate.py",
+        "sha256": "a80adcad1a8c1e4b0f4967b5a0470509987a098ff9c84d983e496845ee8c58f9",
+        "result": "certificate_satisfiable=true; both families certify (comparators 7/8=0.875 in [0.80,0.95)); NC-MECHANISM-OFF flips comparators to 1.0 -> certificate FALSE (mechanism_off_flips_to_false=true); distinction T-vs-COLD 3/4 dims, T-vs-RETRIEVAL 4/4; rule-level DECISION-RULE CLASSIFIER over synthetic worlds returns SUPPORTS/FALSIFIES/MIXED(one-family)/MIXED(leak)/MEASUREMENT_INVALID -> all_branches_inhabited=true (the FALSIFIES reachability fix); chain indexes 0.50 -> chain 5 / precursor 4, 0.75 -> chain 7 / precursor 5; K-sweep {7:6/7,8:7/8,9:8/9,10:9/10} all in [0.80,0.95); 160/160 bindings pairwise distinct (48-bit); output sha256 78c93c40957064f28d67d8d4ec605009146cbe4dcc0cc3280efdcb99e75eef61"
+      }
+    },
+    "durability_note": "The probe files are DESIGN-time ephemeral under /tmp and are NOT interpretation dependencies: the full arithmetic is frozen in this spec.json and in prereg.md and is re-derivable from those literals; the deterministic freezer hashes request.json/spec.json/prereg.md/design_review.json themselves.",
+    "closed_form": "At novelty <= 0.25 no chain task exists and every task's resource_id is spec-explicit -> all arms 1.0. At novelty >= 0.5 each session has exactly ONE chain task at index chain(K,band) whose correct resource_id is the one-time 48-bit binding (revealed once at precursor(K,band) under chain_resource_id); T and PC hold the binding, so their session rate is 8/8 = 1.0; B-COLD and B-RETRIEVAL cannot recover it (~2^47 guesses vs a 128-request budget; no idempotent channel reveals it; prior-session-store values are never the current binding by NC-BINDING-UNIQUENESS), so exactly the chain task fails and their session rate is (K-1)/K = 7/8 = 0.875. Per-cell rate = [20 sessions x (7/8) x 8 tasks] / 160 tasks = 140/160 = 0.875. Boundary: a memory-enabled policy that RETAINS the precursor receipt recovers the binding without extra requests and reaches 1.0 (NC-RETAIN-RECEIPT); the certificate therefore certifies dynamic range against the memoryless-per-task convention, not difficulty for a memory-enabled agent (substrate.bounds_disclosure).",
+    "per_cell_success": {
+      "novelty_0.00": "T=1.0, COLD=1.0, RETRIEVAL=1.0, PC=1.0 (160/160 each family)",
+      "novelty_0.25": "T=1.0, COLD=1.0, RETRIEVAL=1.0, PC=1.0 (160/160 each family)",
+      "novelty_0.50": "T=1.0, PC=1.0; COLD=0.875 (140/160), RETRIEVAL=0.875 (140/160) - both families",
+      "novelty_0.75": "T=1.0, PC=1.0; COLD=0.875 (140/160), RETRIEVAL=0.875 (140/160) - both families"
+    },
+    "gate_evaluation": "F1-RECORDS and F2-WIDGETS BOTH certify: COLD=0.875 < 0.95 AND RETRIEVAL=0.875 < 0.95 at novelty 0.50 and 0.75; min arm correctness = 0.875 >= 0.80; T/PC anchor 1.0. Margin 0.075 below the ceiling and 0.075 above the floor. Boundary note: all rates are exact rationals with denominator 20*K; (K-1)/K for K in {7,8,9,10} never equals 0.95 or 0.80, so threshold-boundary ambiguity is impossible.",
+    "behavioral_distinction": "success margin T-COLD = T-RETRIEVAL = 0.125 >= 1/8 (K=8) at novelty >= 0.5; counter dimensions: T vs COLD distinct on http (17<25), verification (8<9), repair (0<1) -> 3/4; T vs RETRIEVAL distinct on all 4 (17<25, 0<8, 8<9, 0<1) -> 4/4. Rule requires >= 2 of 4.",
+    "k_sweep": "K=7: 0.8571; K=8: 0.8750; K=9: 0.8889; K=10: 0.9000; all strictly in [0.80,0.95) -> non-degeneracy is not knife-edge on K.",
+    "control_predictions": "PC=1.0; NC-EMPTIED-CONTEXT=0.875 (non-degenerate) / tracks comparators (degenerate); NC-SHUFFLED-BINDING=0.875; NC-FAMILY-ISOLATION=0.875; NC-NO-DISCOVERY-DIRECT 1.0 at 0.00 / 0.0 at >= 0.25; NC-RETAIN-RECEIPT 1.0 at 0.50 / 0.875 at 0.75 (non-degenerate) / at-ceiling (degenerate); NC-MECHANISM-OFF: COLD=RETRIEVAL=1.0 -> certificate FALSE (negative branch inhabited); NC-NO-LEAK clean in the mechanism-intact run.",
+    "binding_uniqueness": "160 scored-matrix bindings, pairwise distinct (probe-verified).",
+    "novelty_monotonicity": "NOT preregistered and NOT gated: identical 0.875 at bands 0.50 and 0.75 is expected by construction (the same one-time-binding failure mechanism at both carry distances).",
+    "chain_and_precursor_indexes": {
+      "K=8, 0.50": {
+        "chain": 5,
+        "precursor": 4,
+        "carry_distance": 1
+      },
+      "K=8, 0.75": {
+        "chain": 7,
+        "precursor": 5,
+        "carry_distance": 2
+      },
+      "formula": "chain(K,0.50)=K-3, precursor(K,0.50)=K-4; chain(K,0.75)=K-1, precursor(K,0.75)=K-3"
+    },
+    "branch_reachability": "Rule-level classifier (probe_certificate) over synthetic worlds: SUPPORTS (comparators 0.875, non-degenerate diagnostics), FALSIFIES (comparators 1.0 with diagnostics tracking them), MIXED (one-family certified; and leak-fired), MEASUREMENT_INVALID (gate failure) - all five evaluate to their intended branch (all_branches_inhabited=true)."
+  },
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All four branches are arithmetically reachable and were verified by a DESIGN-time rule-level classifier over synthetic worlds (probe_certificate, all_branches_inhabited=true). SUPPORTS: both families are predicted to certify (comparators 0.875 in [0.80,0.95), T/PC 1.0, matched_correctness == success_rate >= 0.875 for every arm, distinction 3/4 and 4/4 counter dims, margins 0.125 >= 1/8); the classifier returns SUPPORTS with non-degenerate diagnostics. FALSIFIES: the classifier synthesizes a degenerate mechanism-intact world (comparators 1.0 with NC-EMPTIED-CONTEXT and NC-RETAIN-RECEIPT tracking them) and returns FALSIFIES, NOT MIXED, because diagnostic controls are not equality-frozen for FALSIFIES; independently, NC-MECHANISM-OFF drives both comparators to 1.0 >= 0.95 -> certificate FALSE (probe-verified). The primary comparator rates are MEASURED OUTPUTS, not equality-frozen, so any realized degeneration of the mechanism-intact class maps to FALSIFIES. MIXED is reachable via NC-NO-LEAK firing (F-LEAK), exactly one family certifying, a liveness failure (T<0.80 or PC<1.0), or NC-RETAIN-RECEIPT=0.0 at 0.50. MEASUREMENT_INVALID is reachable via any validity gate V1-V7 failure.",
+      "evidence_refs": [
+        "/tmp/opencode/exp38151074771/probe_certificate.py sha256 a80adcad1a8c1e4b0f4967b5a0470509987a098ff9c84d983e496845ee8c58f9 (branch_reachability all_branches_inhabited=true; certificate_satisfiable=true; mechanism_off_flips_to_false=true)",
+        "/tmp/opencode/exp38151074771/probe_certificate.out.json sha256 78c93c40957064f28d67d8d4ec605009146cbe4dcc0cc3280efdcb99e75eef61",
+        "spec.json decision_rule (control taxonomy and branch definitions)",
+        "codex/experiments/EXP-PRODUCT-37989728440 (REST-class COLD=RETRIEVAL=1.0 -> certificate FALSE on the excluded class)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every hard prerequisite is present NOW. python 3.12.15 is installed; http.server/http.client/urllib.request/hashlib/json/hmac/secrets/threading import successfully (probe_env); a live in-process stdlib HTTPServer on 127.0.0.1 answered all 20 frozen protocol checks (probe_transport): session 200 without binding; chain task 200 with null resource_id; missing token 400; ordinary commit 200; precursor commit 200 revealing chain_resource_id exactly once; precursor re-commit 409 without re-reveal; wrong/foreign binding 400; valid chain commit 200; chain re-commit 409; binding absent from every idempotent/error body; NC-MECHANISM-OFF exposes the binding. server_secret is deterministic from run_seed (no `secrets` randomization). No credentials, browser, dataset, external endpoint or model access is required. There is NO prerequisite deferred to EXECUTE.",
+      "evidence_refs": [
+        "/tmp/opencode/exp38151074771/probe_env.py sha256 596c4b7f373e9e34d89086048994c5d027cac2f5d0997a7730471ea21709630e",
+        "/tmp/opencode/exp38151074771/probe_transport.py sha256 6bfb3c6f913d29882f2e99fbcdad6209b0f0b24655f83c67806f7d38bb5b4105",
+        "/tmp/opencode/exp38151074771/probe_transport.out.json sha256 efcc3710e1415b708a679a0d6ad94264b679650447edb54356d198b14a2a0f1c",
+        "spec.json substrate.transport, substrate.determinism"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The two mandated comparators are distinct frozen policies with distinct predicted counter profiles (retrieval 8 vs 0) and identical off-ceiling predicted success 0.875 at novelty >= 0.5, distinguishable from the 1.0 treatment, from the 1.0 low-novelty band, from the 0.95 ceiling (margin 0.075), from the 0.80 floor (margin 0.075). The floor is independently anchored at 0.0 by NC-NO-DISCOVERY-DIRECT (which has a valid session but ignores the schema, so the 0.0 isolates schema applicability, not token absence). No arm pair is guaranteed identical: success margins T-COLD = T-RETRIEVAL = 0.125 and at least 2 of 4 counter dimensions differ between T and each comparator (3/4 vs COLD, 4/4 vs RETRIEVAL). The K-sweep shows the comparator rate is not pinned to a single construction parameter, and the boundary note shows rates cannot land on 0.95/0.80.",
+      "evidence_refs": [
+        "spec.json baselines, arms, counters, pre_freeze_arithmetic_certificate",
+        "/tmp/opencode/exp38151074771/probe_certificate.out.json sha256 78c93c40957064f28d67d8d4ec605009146cbe4dcc0cc3280efdcb99e75eef61",
+        "codex/experiments/EXP-PRODUCT-37989728440 (excluded-class 1.0 ceiling reference)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Each control has a distinct predicted value and failure mode, all verified at DESIGN time under the explicit control taxonomy. Liveness: PC-EXACT-REPLAY 1.0. Falsifier: NC-NO-LEAK clean in the mechanism-intact run; firing -> F-LEAK -> MIXED. Diagnostics: NC-NO-DISCOVERY-DIRECT 0.0 at novelty >= 0.25 (schema genuinely required; floor); NC-EMPTIED-CONTEXT 0.875 non-degenerate / tracks comparators degenerate (retention is the operative T property); NC-SHUFFLED-BINDING 0.875 and NC-FAMILY-ISOLATION 0.875 (well-formed foreign/other-family bindings rejected by the live registry); NC-RETAIN-RECEIPT 1.0 at 0.50 / 0.875 at 0.75 (solvable, memory-depth-sensitive); NC-MECHANISM-OFF flips the certificate to FALSE (negative branch inhabited - probe-verified); NC-BINDING-UNIQUENESS 160/160 pairwise distinct (probe-verified); NC-K-SWEEP non-degenerate at K in {7,9,10} (probe-verified); NC-DOUBLE-RUN; NC-COUNTER-INTEGRITY. No control is tautological or impossible, and each is scored by the exact same arm-blind scorer.",
+      "evidence_refs": [
+        "spec.json controls, null_control, positive_control, measurement_validity.control_taxonomy and validity_gates",
+        "/tmp/opencode/exp38151074771/probe_certificate.out.json sha256 78c93c40957064f28d67d8d4ec605009146cbe4dcc0cc3280efdcb99e75eef61",
+        "/tmp/opencode/exp38151074771/probe_transport.out.json sha256 efcc3710e1415b708a679a0d6ad94264b679650447edb54356d198b14a2a0f1c"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "T-AMORTIZED-DISCOVERY is a deterministic stdlib actor whose exact control flow (bootstrap /session once, retain all receipts, capture chain_resource_id from the precursor receipt, commit each task once with the captured binding) is executable against the transport proven live by probe_transport (session 200, precursor receipt 200 revealing chain_resource_id, chain commit 200 with the valid binding, stale/foreign 400), and the rule-level simulation reaches 1.0 with the predicted counter vector (http=17, retr=0, verif=8, repair=0). PC-EXACT-REPLAY is the T-liveness anchor: T must equal PC at 1.0, so a broken receipt-capture loop drops T and trips the distinction gate (SUPPORTS becomes unreachable with a dead treatment). This is a measurement-substrate treatment (a benchmark inheritor stand-in), not a SPIDER-kernel integration, so no kernel dependency gates it. EXECUTE additionally hardens liveness via NC-EMPTIED-CONTEXT (T's retention actually matters).",
+      "evidence_refs": [
+        "spec.json arms.T-AMORTIZED-DISCOVERY, positive_control.PC-EXACT-REPLAY",
+        "/tmp/opencode/exp38151074771/probe_transport.py sha256 6bfb3c6f913d29882f2e99fbcdad6209b0f0b24655f83c67806f7d38bb5b4105 (T receipt-capture control flow exercised over real loopback HTTP)",
+        "/tmp/opencode/exp38151074771/probe_certificate.out.json sha256 78c93c40957064f28d67d8d4ec605009146cbe4dcc0cc3280efdcb99e75eef61 (T arm simulated at 1.0 with the predicted counter vector)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "At freeze time there is NO mutable local code, task-bank, dataset or fixture whose identity could change this experiment's interpretation: the bank generator, server, executors, scorer and counter extractor do not yet exist and are authored only at EXECUTE from literals fully frozen in spec.json and prereg.md (construction rules, seeds, arm policies, protocol statuses, counter semantics, thresholds, control taxonomy), which the deterministic freezer hashes itself. Any variation in EXECUTE-authored code that could change the interpretation is bound mechanically: V1 requires a code-fidelity manifest (EXECUTE-authored generator/server/executors/scorer paths + SHA-256 recorded in result.json.artifacts), V1 also enforces packet immutability and the stdlib-only measurement path, V3 the counter integration, V5 matched manifests, and V6 the binding entropy - a divergent source would fail a gate and yield MEASUREMENT_INVALID rather than a silent reinterpretation. Two artifact channels are kept separate: spec.freeze_artifacts is the freeze-time hash list (empty here because no such file exists at freeze), while EXECUTE-authored sources are recorded at run time in result.json.artifacts. Freeze-time instruction: EXECUTE must record generator/executor/scorer source paths plus SHA-256 in result.json.artifacts for AUDIT reproducibility, and must not import research/runtime/*.py or any other repository module into the measurement path.",
+      "evidence_refs": [
+        "spec.json measurement_validity.gate_classes and validity_gates V1-V7",
+        "spec.json substrate.prohibition",
+        "scripts/freeze_experiment.py (for v2 the freezer hashes request.json/spec.json/prereg.md/design_review.json; freeze_artifacts must be empty when this check is NOT_APPLICABLE)"
+      ]
     }
   },
   "freeze_artifacts": []
