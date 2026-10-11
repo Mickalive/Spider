@@ -53,6 +53,8 @@ def score(rows: list[dict], *, require_cache: bool = False) -> dict:
     arms = ARMS + ((COMPETITOR_ARM,) if require_cache else ())
     paired = defaultdict(dict)
     for r in rows:
+        if r.get("cost_accounting_complete") is not True:
+            raise ValueError("incomplete cost accounting; a raw pilot is not an economic benchmark")
         key = (r["task_id"], r["replicate"])
         if r["arm"] in paired[key]:
             raise ValueError(f"duplicate arm {r['arm']} for {key}")
