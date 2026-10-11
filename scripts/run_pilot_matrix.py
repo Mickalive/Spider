@@ -63,7 +63,8 @@ def main():
     for row in plan:
         cmd = [sys.executable, str(runner), "--arm", row["arm"], "--family",
                row["family"], "--id", row["identifier"],
-               "--provider", args.provider, "--allow-model-charges",
+               "--provider", args.provider, "--replicate", str(row["replicate"]),
+               "--allow-model-charges",
                "--output", str(args.output)]
         if args.model:
             cmd += ["--model", args.model]
