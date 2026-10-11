@@ -15,6 +15,13 @@ from pathlib import Path
 
 ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER")
 COMPETITOR_ARM = "CACHE"  # independently measured Stagehand/compiled workflow, never synthesized
+COST_COMPONENTS = (
+    "model", "browser", "retrieval", "verification",
+    "memory_read_write", "training_amortized", "repair", "other",
+)
+# Inputs are externally audited accounting records, NEVER inferred from an
+# agent final answer. Missing or unpriced components must not be silently zeroed.
+
 REQUIRED = ("task_id", "replicate", "family", "phase", "arm",
             "success", "safe", "cost_usd", "latency_ms", "tokens", "cost_accounting_complete")
 
@@ -32,6 +39,21 @@ def read_trials(path: Path) -> list[dict]:
             raise ValueError(f"line {lineno}: unknown arm")
         if row["cost_accounting_complete"] is not True:
             raise ValueError(f"line {lineno}: incomplete cost accounting; do not score raw pilot traces")
+        if row.get("manual_fixture_seed") is True:
+            raise ValueError(f"line {lineno}: manual fixture seeding cannot establish product economics")
+        components = row.get("cost_components_usd")
+        if not isinstance(components, dict) or set(components) != set(COST_COMPONENTS):
+            raise ValueError(f"line {lineno}: unitemized total cost (all cost components required)")
+        for name in COST_COMPONENTS:
+            v = components[name]
+            if type(v) not in (int, float) or not math.isfinite(v) or v < 0:
+                raise ValueError(f"line {lineno}: invalid cost component {name}")
+        total = sum(components.values())
+        if type(row["cost_usd"]) not in (int, float) or not math.isclose(
+            total, row["cost_usd"], rel_tol=0, abs_tol=1e-8
+        ):
+            raise ValueError(f"line {lineno}: cost components do not reconcile")
+
         if type(row["success"]) is not bool or type(row["safe"]) is not bool:
             raise ValueError(f"line {lineno}: success and safe must be booleans")
         for metric in ("cost_usd", "latency_ms", "tokens"):
@@ -55,6 +77,16 @@ def score(rows: list[dict], *, require_cache: bool = False) -> dict:
     for r in rows:
         if r.get("cost_accounting_complete") is not True:
             raise ValueError("incomplete cost accounting; a raw pilot is not an economic benchmark")
+        # Apply identical itemization and manual-seed guards to direct callers.
+        if r.get("manual_fixture_seed") is True:
+            raise ValueError("manual fixture seeding cannot establish product economics")
+        parts = r.get("cost_components_usd")
+        if not isinstance(parts, dict) or set(parts) != set(COST_COMPONENTS):
+            raise ValueError("complete benchmark requires reconciled cost components")
+        if any(type(v) not in (int, float) or not math.isfinite(v) or v < 0 for v in parts.values()):
+            raise ValueError("invalid cost component")
+        if not math.isclose(sum(parts.values()), r["cost_usd"], rel_tol=0, abs_tol=1e-8):
+            raise ValueError("cost components do not reconcile")
         key = (r["task_id"], r["replicate"])
         if r["arm"] in paired[key]:
             raise ValueError(f"duplicate arm {r['arm']} for {key}")
@@ -88,6 +120,8 @@ def score(rows: list[dict], *, require_cache: bool = False) -> dict:
         "phases": sorted({r["phase"] for r in rows}),
         "baseline_ceiling_warning": all(rate == 1 for rate in comparator_rates),
         "strong_cache_competitor_included": require_cache,
+        "cost_breakdown_itemized": True,
+        "eligibility": "DESCRIPTIVE_ONLY_EXTERNAL_AUDIT_AND_STAGEHAND_NATIVE_CACHE_STILL_REQUIRED",
         "arms": stats,
         "note": "External-agent validation, task provenance, setup amortization and preregistration must be independently audited.",
     }
