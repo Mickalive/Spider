@@ -161,10 +161,7 @@ def compiled_result(task: PublicTask) -> str:
         if task.family == "pypi":
             diagnostic = _PyPIHeader()
             diagnostic.feed(raw.decode("utf-8", errors="replace"))
-            detail = " headings=" + repr([
-                h[:120] for h in diagnostic.headings if
-                ("pydantic" in h.lower() or "release files" in h.lower())
-            ][:8])
+            detail = " bytes=" + str(len(raw)) + " first_headers=" + repr(diagnostic.headings[:8]) + " sample=" + repr(raw[:140])
         raise ValueError("unreadable public page (abstain)" + detail)
     return version
 
