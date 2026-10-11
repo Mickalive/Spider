@@ -1,50 +1,147 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-INTEL-38106207218",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": [
+    "C-LLM-INHERIT"
+  ],
+  "title": "Prompt ablation: does goal+schema in system prompt complete the click-then-answer sequence?",
+  "question": "Under the same credential-free, CPU-quantized constraints as EXP-INTEL-37982024058, does supplying the task goal and action schema in the system prompt (parent-style grandparent prompt) convert M-7B-QWEN or M-3B-QWEN from step-0 reveal-click only to full click-then-answer completion?",
+  "hypothesis": "H1: With goal+schema enriched system prompt (P-TREAT-GOAL-SCHEMA), at least one of M-7B-QWEN or M-3B-QWEN clears the capability bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over 5 seeded episodes). H2: Under the underspecified comparator prompt (P-COMP-UNDERSPECIFIED), both models fail to clear the bar (replicating parent).",
+  "falsifier": "H0: With P-TREAT-GOAL-SCHEMA, neither model clears the bar; comparator cells also reproduce 0/5 success with re-click loop.",
+  "prompt_conditions": {
+    "P_TREAT_GOAL_SCHEMA": {
+      "stable_id": "P-TREAT-GOAL-SCHEMA",
+      "field": "prompts.system",
+      "provenance": "Derived from grandparent min_webagent.py; adapted ref->selector to match parent schema.",
+      "verbatim": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it."
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "P_COMP_UNDERSPECIFIED": {
+      "stable_id": "P-COMP-UNDERSPECIFIED",
+      "field": "prompts.system",
+      "provenance": "Byte-identical to parent EXP-INTEL-37982024058 system prompt.",
+      "verbatim": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown."
     }
   },
-  "freeze_artifacts": []
+  "metrics_stable_ids": [
+    "parseable_action_rate_step1",
+    "task_success_rate",
+    "answer_action_emission_rate",
+    "mean_inference_latency_s",
+    "mean_completion_tokens",
+    "positive_control_pass_rate"
+  ],
+  "baselines": [
+    {
+      "id": "B-UNDERSPECIFIED-PROMPT-7B",
+      "type": "within_experiment_protocol_comparator",
+      "description": "M-7B-QWEN under P-COMP-UNDERSPECIFIED on seeds 42-46; expected to replicate parent 0/5.",
+      "expected_outcome": "task_success_rate=0.0, answer_action_emission_rate=0.0",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
+      ]
+    },
+    {
+      "id": "B-UNDERSPECIFIED-PROMPT-3B",
+      "type": "within_experiment_protocol_comparator",
+      "description": "M-3B-QWEN under P-COMP-UNDERSPECIFIED; expected 0/5.",
+      "expected_outcome": "task_success_rate=0.0",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
+      ]
+    },
+    {
+      "id": "B-RANDOM-ACTION",
+      "type": "negative_baseline",
+      "description": "Random valid JSON actions, seeded, against served page.",
+      "expected_outcome": "parseable 1.0, task_success < 0.6",
+      "evidence_refs": [
+        "research/intel/run_exp_37982024058.py"
+      ]
+    }
+  ],
+  "positive_control": {
+    "id": "PC-JSON-CONSTRAINED-DECODING",
+    "type": "positive_control_suite",
+    "description": "PC-JSON-CONSTRAINED-DECODING 10/10 per model per prompt condition; PC-ORACLE-EPISODE 5/5 scripted success through same scorer.",
+    "success_criterion": "PC-JSON 10/10; PC-ORACLE 5/5 task_success=true",
+    "failure_mode_policy": "PC failure -> candidate excluded; PC-ORACLE < 5/5 -> MEASUREMENT_INVALID."
+  },
+  "null_control": {
+    "id": "NC-NO-MODEL-ACTION",
+    "type": "no_model_baseline",
+    "description": "Fixed non-JSON content",
+    "success_criterion": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0."
+  },
+  "measurement_validity": [
+    "Same task, harness (run_exp_37982024058.py), grammar, sampling as parent; config-driven only.",
+    "Controls run against served page (repaired navigation) - preflight verifies.",
+    "Strict JSON schema, mechanical verification via Playwright.",
+    "Temperature 0, fixed seeds 42-46; deterministic protocol.",
+    "Both prompt conditions for each evaluated candidate; comparator unconditional before decision.",
+    "Complete-cell rule: < 5 completed episodes -> measurement failure for candidate."
+  ],
+  "decision_rule": "OUTCOME {SUPPORTS,FALSIFIES,MEASUREMENT_INVALID}. Bar: task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over 5 episodes. Preflight: PC-ORACLE 5/5, NC 0/0, B-RANDOM parseable 1.0 with success < 0.6; else MEASUREMENT_INVALID. Order M-7B-QWEN then M-3B-QWEN. For each: A1 PC-JSON under P_treat (10/10 else exclude); A2 5 episodes under P_treat (T,P1,AER); A3 5 under P_comp (C); A4 if clears -> SUPPORTS (attribution PROMPT_ATTRIBUTED if C<0.6, else NOT_PROMPT_ATTRIBUTED if C>=0.6, else UNDETERMINED) and STOP. If none clear after evaluating all, OUTCOME=FALSIFIES, prompt_attribution=UNDETERMINED. Fail-closed on incomplete cells.",
+  "product_consequence_positive": "Readiness condition (3) for C-LLM-INHERIT satisfied by prompt as driver; enables running frozen four-arm benchmark with verified prompt.",
+  "product_consequence_negative": "Prompt ablation does not enable full completion under identical constraints; re-scope decision needs to consider ceiling.",
+  "estimated_cost": "~30-60 min, CPU-only.",
+  "expected_information_gain": "Directly answers the Director's question and resolves audit VF-01 vs capability ceiling distinction.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "FSM complete: SUPPORTS reachable (oracle proves path exists, treatment changes only prompt); FALSIFIES reachable (parent failure replicable); MEASUREMENT_INVALID reachable via preflight/provisioning/cell completeness; 3/5 threshold attainable; early-stop prevents shadowing.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38013769440/prereg.md#section-9",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/intel/run_exp_37982024058.py"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Same verified stack as parent: llama.cpp 0.2.90, Playwright 1.63.0, Chrome, CPU-only nproc=4, huggingface resolve-redirect; pinned URLs+sha256 from parent evidence (7B shards, 3B), digest mismatch -> provisioning_failure; harness and repaired controls driver materialized from frozen strings.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
+        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+        "research/intel/run_exp_37982024058.py"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Only prompts.system differs between treatment/comparator; all else identical; paired comparator collected unconditionally per candidate; oracle proves 5/5 reachable, parent shows 0/5 on same task - differentiation surface non-zero and neither arm at impossible extremes in a way that collapses identifiability.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-01"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "PC-JSON, PC-ORACLE, NC, B-RANDOM all run against served page via same scorer. Repaired navigation prevents about:blank defect; PC-ORACLE 5/5 proves success path registerable; NC rejects non-parseable; B-RANDOM parseable 1.0, task_success < 0.6 and chance-consistent.",
+      "evidence_refs": [
+        "research/intel/run_exp_37982024058.py",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "Treatment is config string only (no code mutation). PC-ORACLE proves executable behavior via same scorer; harness is audited and config-driven. Product-relevant claim.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
+        "research/intel/run_exp_37982024058.py"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All mutable local dependencies pinned: parent harness run_exp_37982024058.py, parent fixture harness_config.json, grandparent min_webagent.py. Per-condition configs and controls driver are EXECUTE-time materializations from frozen strings in prereg (sha256-recorded); no other mutable files.",
+      "evidence_refs": [
+        "research/intel/run_exp_37982024058.py",
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/intel/run_exp_37982024058.py",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+  ]
 }
