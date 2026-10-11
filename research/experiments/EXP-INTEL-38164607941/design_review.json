@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All three outcome branches (SUPPORTS, FALSIFIES, MEASUREMENT_INVALID) are arithmetically reachable. SUPPORTS requires a COMPLETE treatment cell with task_success_rate>=0.6 (>=3/5) and parseable_action_rate_step1>=0.6 with a COMPLETE-and-VALID contemporaneous comparator; the PC-ORACLE-EPISODE canary (5/5 through real scorer) proves the ceiling is registerable, and the parent anchor (0/5 task success) shows the comparator floor. FALSIFIES triggers when at least one COMPLETE treatment cell fails to clear (parent realized this). MEASUREMENT_INVALID is reachable via preflight failure (rule 1), partial cells (rule 2c), comparator confound (rule 2d), unattributable clearing treatment (rule 2g), or no complete treatment cells (rule 4). Threshold 0.6 over 5 episodes (k>=3) is fully attainable. Precedence 1..4 has no unreachable later rule: rule 2 executes only if rule 1 passes; rule 3 fires when loop completes with COMPLETE treatments but no clears; rule 4 covers the residual. Early stop at 2f is intentional and does not shadow comparator validity (comparator collected unconditionally at 2a).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-03",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-7",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#Appendix-B"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is verified at DESIGN time or pinned with fail-closed verification: (a) Stack assemblable in this factory — Python 3.12.15, pip 26.2.1, cmake 3.31.6, gcc/g++ 13.3.0, /usr/bin/google-chrome, nproc=4, ~15 GB RAM all present; llama-cpp-python and playwright are not preinstalled but their build dependencies (cmake, gcc) are verified, and the parent successfully built them. (b) GBNF grammar well-formed — all 7 rules defined/referenced, string sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65 matches frozen harness_config.json. (c) Model URLs live at design time via huggingface.co resolve-redirect: 3B 200, 7B shard1 200, shard2 200, 7B single-file 404 (documented); sha256 digests pinned from raw/gguf_sha256.txt (mismatch -> provisioning_failure -> MEASUREMENT_INVALID). (d) Harness and fixture are bound repo files (freeze_artifacts) whose logic was executed end-to-end by the audited parent. (e) Serving page and Playwright flow proven by parent. (f) Scorer/controls liveness executed at DESIGN time as non-outcome-bearing canary through REAL frozen run_episode scorer and REAL browser (Playwright + Chrome) against served page (prereg.md Appendix B). No prerequisite is deferred to EXECUTE in a way that determines measurement possibility.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-10",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#Appendix-B"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (P-TREAT-GOAL-SCHEMA) and comparator (P-COMP-UNDERSPECIFIED) differ ONLY in prompts.system (byte-diffed at design time: treatment sha256 36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716 vs comparator sha256 1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876). Both run through the SAME frozen parent runner (sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00) with identical task page, GBNF grammar, user template, sampling schedule, seeds, model artifacts, and code path. Dynamic range is non-degenerate: PC-ORACLE-EPISODE canary registered 5/5 task_success at ceiling; parent comparator anchor 0/5 task_success at floor with 5/5 parseable; random baseline analytic P(task_success_rate>=3/5) ~ 1.15e-3. Cost observables (mean_inference_latency_s, mean_completion_tokens) are descriptive per cell and identical in kind for both arms. Comparator cells are re-measured contemporaneously (not inherited-only), 5 episodes per evaluated cell. No ceiling/floor situation where all arms are guaranteed identical.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-01",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-6",
+        "research/experiments/EXP-INTEL-38164607941/spec.json#prompt_conditions"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls were executed at design time as non-outcome-bearing canaries through the REAL frozen run_episode scorer with a REAL browser (Playwright + /usr/bin/google-chrome) against the SERVED task page (navigation repaired from parent's about:blank defect). PC-ORACLE-EPISODE fired 5/5 task_success (each episode: click #reveal-btn -> reveal TARGET-42 -> answer TARGET-42, target visible) proving the positive control fires and the full completion path is registerable. NC-NO-MODEL-ACTION stayed parseable 0.0 and task_success 0.0 (verification rejects non-JSON). B-RANDOM-ACTION (repaired navigation) achieved parseable 1.0 (valid JSON by construction) and task_success_rate 0.2 (< 0.6), with analytic P(>=3/5) ~ 1.15e-3 confirming the bar is effectively unreachable by chance. PC-JSON-CONSTRAINED-DECODING achieved 10/10 for both models in the audited parent under identical grammar and probe, re-verified per cell at EXECUTE. No control is tautological (none contains the target answer supplied to the model) or structurally impossible. Distinct controls cover decoding, scoring liveness, null rejection, and chance-level task success.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls",
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#random_baseline",
+        "research/intel/run_exp_37982024058.py#make_random_producer",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-6",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#Appendix-B"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm (P-TREAT-GOAL-SCHEMA) is structurally live: it enumerates exactly the two matched actions admitted by the frozen action schema ('click' with 'selector', 'answer' with 'text') using the grammar's required key names. The audited parent's PC-JSON-CONSTRAINED-DECODING (10/10 both models) and comparator episodes (5/5 step-1 parseable both models) show this model class reliably emits parseable matched actions under constrained decoding. The success path (click then answer) is grammar-admissible: strchar ::= [^\"\\\\] admits '-', digits, uppercase, so \"text\":\"TARGET-42\" and \"selector\":\"#reveal-btn\" are valid grammar strings. The PC-ORACLE-EPISODE canary fired 5/5 through the real run_episode scorer with a real browser at design time, including the exact Appendix A.3 string-returning producer contract (prereg Appendix B). Provisioning feasibility of exact model artifacts is verified by parent receipts and design-time URL liveness probes. The treatment does NOT leak '#reveal-btn' or 'TARGET-42' (verified at design time: substrings absent). Self-attack acknowledged: the frozen GBNF admits schema-mismatched objects (e.g., answer+selector) that parse_action rejects, so liveness rests on empirical decoding behavior plus the rule that parseable_action_rate_step1 < 0.6 can never clear the bar — not on a syntactic claim.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38164607941/spec.json#prompt_conditions.P-TREAT-GOAL-SCHEMA",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-10",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#Appendix-B"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All five mutable local code/data/fixture dependencies whose identity could change the interpretation are listed in spec.freeze_artifacts and verified to exist with matching hashes: (1) research/intel/run_exp_37982024058.py (sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00) — the frozen parent runner containing parsing/episode/scorer logic; (2) research/experiments/EXP-INTEL-37982024058/raw/harness_config.json (sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb) — the exact grammar/prompts/sampling/task/thresholds; (3) research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py (sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862) — grandparent SYS provenance for treatment prompt; (4) research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt (sha256 93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd) — GGUF digest anchors; (5) research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json (sha256 7b1e50436e75292baa88029264938773342b99785536a94c185d8371b74693f0) — provisioning/packaging evidence. Per-cell configs are deterministic transforms of the frozen parent config (load and replace ONLY prompts.system with the verbatim frozen condition strings), so every other key is inherited byte-for-byte. Remote GGUFs are frozen as URLs + digests, not bytes. prereg.md is hashed into freeze.json. The thin EXECUTE controls/evaluator driver (Appendix A) does not exist at freeze time; its behavior is fully determined by the frozen prereg Appendix A text, and the evaluator is a pure deterministic function of raw evidence records plus frozen thresholds (no model calls, no free parameters, no outcome inspection). Any deviation from Appendix A is recorded in result.json.validity_notes.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38164607941/spec.json#freeze_artifacts",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-4.2",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#Appendix-A"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "rationale": "All six satisfiability/identifiability checks pass with concrete evidence. The decision rule has reachable branches in both directions (SUPPORTS and FALSIFIES) with no shadowed or empty branches. All measurement prerequisites are verified at design time or pinned with fail-closed checks. Treatment and comparator are identifiable with certified dynamic range (oracle 5/5 ceiling, parent 0/5 floor). Controls are sensitive and were executed through the real scorer/browser at design time. The treatment prompt is structurally live and empirically supported by parent PC/comparator behavior. All mutable local dependencies are bound in freeze_artifacts with verified hashes. No blocking or non-blocking findings require design revision. The experiment is ready to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38164607941/spec.json",
+    "research/experiments/EXP-INTEL-38164607941/prereg.md",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
+    "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+    "research/intel/run_exp_37982024058.py",
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+  ]
+}
