@@ -1,50 +1,102 @@
 {
+  "schema_version": 1,
+  "design_contract_version": 2,
   "experiment_id": "EXP-RUNTIME-38166224613",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "question": "Can a credential-free task bank engineered for ASYMMETRIC discovery - multi-task sessions in which one-time session/resource/schema discovery is amortized or cached across tasks, and therefore materially different from the bounded-negative mandatory-discovery deterministic REST class - receive a PRE-FREEZE, arithmetically checkable dynamic-range certificate (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.50 on at least one family, matched correctness >= 0.80 for all arms, and a treatment/comparator distinction) so that it can serve as the reusable substrate that unblocks the flagship inheritance benchmark (B2), recording a bounded substrate-class negative and freezing nothing if the certificate is unsatisfiable on every credential-free substrate tested?",
+  "hypothesis": "There exists at least one credential-free asymmetric-discovery task bank family such that, under the frozen arithmetic certificate, the retrieval-shaped comparator and the cold re-derive arm are NOT at ceiling (success < 0.95) while matched correctness >= 0.80 for all arms and treatment/comparator are distinguishable; otherwise the substrate class is bounded negative and no freeze occurs.",
+  "falsifier": "For every credential-free asymmetric-discovery task bank candidate examined in the pre-freeze scan, the arithmetical certificate is unsatisfiable (either B-COLD-RE-DERIVE >= 0.95 and B-RETRIEVAL-SHAPED >= 0.95 at novelty>=0.50 on all eligible families, or matched correctness < 0.80 on any arm, or treatment/comparator distinction is not demonstrable), with the scan covering at least two independent families and all mandatory checks PASS as preconditions. The result is a bounded substrate-class negative recorded per packet contract; no freeze occurs.",
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "type": "cold_rederive",
+      "description": "No reuse beyond minimal environment setup; session/resource/schema discovery performed when required per task (cold re-derivation). Baseline for ceiling detection in asymmetric-discovery setting.",
+      "metric": "success_rate",
+      "target_operator": "lt",
+      "target_value": 0.95,
+      "threshold_basis": "prevents conflating mandatory discovery with amortized discovery; ensures dynamic range exists"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "type": "retrieval_shaped_comparator",
+      "description": "Strong retrieval-shaped comparator over prior trajectories/fragments (instruction+retrieval style comparator) matched to tasks, to certify it is not at ceiling when amortization exists.",
+      "metric": "success_rate",
+      "target_operator": "lt",
+      "target_value": 0.95,
+      "threshold_basis": "guards against 1.0 retrieval ceiling observed in prior product packets"
     }
+  ],
+  "positive_control": {
+    "id": "PC-MATCHED-CORRECTNESS",
+    "description": "Matched correctness guard: all arms (B-COLD-RE-DERIVE, B-RETRIEVAL-SHAPED, any T candidate) must achieve matched_correctness >= 0.80 under identical task instantiation to ensure the ceiling test is not driven by correctness collapse.",
+    "metric": "matched_correctness",
+    "target_operator": "ge",
+    "target_value": 0.80,
+    "must_fire_if_valid": true
   },
-  "freeze_artifacts": []
+  "null_control": {
+    "id": "NC-TREATMENT-IDENTITY",
+    "description": "Treatment/comparator distinction control: the candidate treatment T must be structurally/computationally distinguishable from B-RETRIEVAL-SHAPED and from B-COLD-RE-DERIVE (different mechanism path/affordance or non-identical action set under arm-blind scoring). Identity is a design failure.",
+    "metric": "treatment_distinct",
+    "target_operator": "eq",
+    "target_value": true,
+    "must_fire_if_valid": true
+  },
+  "measurement_validity": [
+    {
+      "id": "MV-ARM-BLIND-SCORING",
+      "description": "Scoring must be arm-blind (no arm label available to scorer); violations are not tolerated."
+    },
+    {
+      "id": "MV-NOVELTY-FRACTION",
+      "description": "Certificate requires novelty >= 0.50 on at least one family to avoid trivial mandatory-discovery cases."
+    },
+    {
+      "id": "MV-ASYMMETRIC-DISCOVERY",
+      "description": "Candidate bank is credential-free and exhibits asymmetric discovery (amortizable one-time session/resource/schema discovery across tasks). Mandatory-discovery-only deterministic REST classes are excluded by design."
+    },
+    {
+      "id": "MV-FAMILY-INDEPENDENCE",
+      "description": "Scan includes >= 2 independent task families; certificate requires the condition on >= 1 family."
+    },
+    {
+      "id": "MV-MATCHED-TASKS",
+      "description": "Task instantiation is matched across arms (same goal/constraints, controlled novelty) to prevent comparing different task sets."
+    }
+  ],
+  "decision_rule": {
+    "type": "pre_freeze_certificate",
+    "preconditions": [
+      "All MV-* satisfied",
+      "PC-MATCHED-CORRECTNESS >= 0.80 for all arms",
+      "NC-TREATMENT-IDENTITY == true"
+    ],
+    "certificate_criteria": [
+      "(B-COLD-RE-DERIVE.success_rate < 0.95 at novelty>=0.50) AND (B-RETRIEVAL-SHAPED.success_rate < 0.95 at novelty>=0.50)",
+      "All arms have matched_correctness >= 0.80",
+      "Treatment/comparator distinguishable and live (where T exists)"
+    ],
+    "success_outcome_if_met": "CERTIFICATE_SATISFIABLE (dynamic range exists) — DESIGN may proceed to freeze eligibility PASS for this bounded certificate; experiment remains pre-freeze (no execution of confirmatory measurements).",
+    "failure_outcome_if_not_met": "CERTIFICATE_UNSATISFIABLE — bounded substrate-class negative recorded; spec.freeze_eligibility cannot reach full freeze (treatment_liveness not satisfied or ceiling persists); no freeze.json produced by execution path."
+  },
+  "product_consequence_positive": "Establishes a reusable credential-free substrate with certified dynamic range for B2 (unblocks flagship inheritance benchmark) under C-MEAS-VALID.",
+  "product_consequence_negative": "Records a bounded negative for the asymmetric-discovery credential-free substrate class with arithmetic justification; avoids rediscovering ceiling degeneracy and preserves critical-path resources.",
+  "estimated_cost": "low (pre-freeze satisfiability scan only; no outcome-bearing execution)",
+  "expected_information_gain": "high (resolves B2 blocker before expensive C-LLM-INHERIT execution)",
+  "freeze_eligibility": {
+    "decision_rule_reachability": "PASS",
+    "measurement_prerequisites": "NOT_APPLICABLE",
+    "baseline_identifiability": "PASS",
+    "control_sensitivity": "PASS",
+    "treatment_liveness": "NOT_APPLICABLE",
+    "freeze_artifacts_bound": "PASS"
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-RUNTIME-38166224613/spec.json",
+    "research/experiments/EXP-RUNTIME-38166224613/prereg.md",
+    "research/experiments/EXP-RUNTIME-38166224613/request.json"
+  ]
 }
