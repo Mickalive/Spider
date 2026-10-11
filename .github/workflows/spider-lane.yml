@@ -384,8 +384,10 @@ jobs:
           # GitHub still executes always() cleanup. Hard runner termination is
           # still covered by the scheduled Factory Pulse fallback.
           if [[ ! -f "$DIR/verdict.json" || ! -f "$DIR/handoff.json" ]]; then
-            gh workflow run factory-pulse.yml --ref main
-            echo "SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE lane=$LANE experiment=$EXP"
+            # A regular Factory Pulse runs every 15 minutes and Lane Recovery also
+            # provides wakeups. Immediate wake-on-failure previously amplified
+            # the same provider outage into cancel/retry storms.
+            echo "SPIDER_INCOMPLETE_DEFER_TO_SCHEDULE lane=$LANE experiment=$EXP"
             exit 0
           fi
 

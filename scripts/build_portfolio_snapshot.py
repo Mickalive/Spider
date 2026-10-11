@@ -75,6 +75,21 @@ def compact_experiment(entry: dict) -> dict:
     }
 
 
+def audit_friction(entries: list[dict]) -> dict:
+    """Descriptive attrition signal, not scientific hypothesis success/failure."""
+    statuses = ("PASS", "REVISE", "MEASUREMENT_INVALID", "FAIL", "BLOCKED")
+    counts = {status: sum(entry.get("audit_status") == status for entry in entries) for status in statuses}
+    observed = sum(counts.values())
+    return {
+        "observed_audits": observed,
+        "counts": counts,
+        "revise_or_invalid_rate": (
+            (counts["REVISE"] + counts["MEASUREMENT_INVALID"]) / observed if observed else None
+        ),
+        "warning": "Audit PASS is not positive scientific evidence; avoid mechanically rewarding PASS.",
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cycle-id", required=True)
@@ -257,6 +272,7 @@ def main() -> None:
             "dominant_recent_claim": dominant_recent_claim,
             "dominant_recent_count_last10": dominant_recent_count,
             "tunnel_flag": tunnel,
+            "last10_audit_friction": audit_friction(last_ten),
             "neglected_priority_claims": neglected_priority,
             "recent_claim_counts": lane_recent_counts,
             "recent_experiments": [compact_experiment(e) for e in history],
@@ -278,6 +294,7 @@ def main() -> None:
             "quarantined_experiments": len(quarantine_by_id),
             "recent_window": args.recent_window,
             "recent_experiments": len(recent_global),
+            "recent_audit_friction": audit_friction(recent_global),
             "starved_claims": starved_claims,
             "claim_recent_counts": global_recent_counts,
         },
