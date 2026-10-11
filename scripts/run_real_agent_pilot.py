@@ -93,7 +93,7 @@ def seed_fixture_mechanism(registry: MechanismRegistry, family: str, base: str) 
 
 
 def run_trial(arm: str, family: str, identifier: str, provider: str,
-              model: str | None, seeded_fixture: bool) -> dict:
+              model: str | None, seeded_fixture: bool, replicate: int = 0) -> dict:
     expected = truth(family, identifier)
     if expected is None:
         raise ValueError("unknown local fixture reference")
@@ -148,8 +148,8 @@ def run_trial(arm: str, family: str, identifier: str, provider: str,
             answer = value.get("answer") if isinstance(value, dict) else None
             usage = value if path == "agent" and isinstance(value, dict) else {}
             return {
-                "task_id": f"{family}:{identifier}", "replicate": 0,
-                "family": family, "phase": "seeded-repeat" if seeded_fixture else "cold",
+                "task_id": f"{family}:{identifier}", "replicate": replicate,
+                "family": family, "phase": "fixture-v1",
                 "arm": arm, "success": checked_answer(answer, expected),
                 "safe": path != "unknown",
                 "path": path, "reason": reason, "answer": answer,
@@ -173,6 +173,7 @@ def main():
     ap.add_argument("--arm", choices=["COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER"], required=True)
     ap.add_argument("--family", choices=sorted(DATA), required=True)
     ap.add_argument("--id", required=True, dest="identifier")
+    ap.add_argument("--replicate", type=int, default=0)
     ap.add_argument("--provider", choices=["google", "browser-use"], default="google")
     ap.add_argument("--model")
     ap.add_argument("--seeded-fixture", action="store_true", help="Manually seed known fixture API; not learned inheritance")
@@ -182,7 +183,7 @@ def main():
     if not args.allow_model_charges:
         ap.error("Provider cost permission required; pilot performs no model requests by default")
     result = run_trial(args.arm, args.family, args.identifier, args.provider,
-                       args.model, args.seeded_fixture)
+                       args.model, args.seeded_fixture, args.replicate)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(result, sort_keys=True) + "\n")
