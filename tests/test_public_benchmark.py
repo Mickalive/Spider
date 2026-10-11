@@ -35,6 +35,7 @@ class PublicSiteTests(unittest.TestCase):
             report = {
                 "checked_at": datetime.now(timezone.utc).isoformat(),
                 "family_ready": {"github": True, "pypi": False},
+                "training_and_holdout_probed": True,
             }
             path.write_text(json.dumps(report))
             self.assertTrue(confirmed_family_ready(path, "github"))
