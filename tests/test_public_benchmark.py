@@ -40,6 +40,8 @@ class PublicSiteTests(unittest.TestCase):
         task = PublicTask("pypi", "httpx")
         body = b'<html><h1 class="package-header__name">httpx 0.28.1</h1></html>'
         self.assertEqual(parse_page(task, body, task.target_url), "0.28.1")
+        modern = b'<section><h2>Release files for <span>httpx</span> 0.28.1</h2></section>'
+        self.assertEqual(parse_page(task, modern, task.target_url), "0.28.1")
         self.assertIsNone(parse_page(task, body, "http://pypi.org/project/httpx/"))
         self.assertIsNone(parse_page(task, body, "https://pypi.org/project/pytest/"))
 
