@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "decision": "FALSIFIES",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded falsification at goal/schema protocol ceiling: supplying task goal+schema in system prompt did not convert step-0 reveal-click to full click-then-answer for credential-free CPU-quantized Qwen2.5 3B-8B Q4_K_M (M-7B-QWEN 0/5, M-3B-QWEN 0/5; both passed PC 10/10). Audit PASS (producer_claim_supported=true). Prompt-underspecification alone does not explain parent failure; capability bar not met by this class. Claim not globally rejected - scope bounded to tested family/quant/task/protocol."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
+  "reason": "Valid bounded negative (COMPLETE, outcome FALSIFIES, audit PASS). Both treatment cells failed capability bar (task_success_rate 0/5, parseable_action_rate_step1 1.0). Comparator replicated parent anchor (REPLICATION_ANCHOR_EXACT). Preflight/controls all PASS. No COMPLETE treatment cleared; decision rule rule3 applies. The credential-free local 3B-8B path does not satisfy readiness condition (3); benchmark must re-direct to hosted endpoints or different model class. C-LLM-INHERIT remains HYPOTHESIS at protocol ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38164607941/result.json",
+    "research/experiments/EXP-INTEL-38164607941/audit.json",
+    "research/experiments/EXP-INTEL-38164607941/report.md",
+    "research/experiments/EXP-INTEL-38164607941/provenance.json",
+    "research/experiments/EXP-INTEL-38164607941/spec.json",
+    "research/experiments/EXP-INTEL-38164607941/freeze.json",
+    "research/experiments/EXP-INTEL-38164607941/prereg.md",
+    "research/experiments/EXP-INTEL-37982024058/handoff.json",
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/experiments/EXP-INTEL-37973264582/handoff.json"
+  ]
+}
