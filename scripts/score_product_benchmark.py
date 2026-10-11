@@ -14,8 +14,9 @@ from collections import defaultdict
 from pathlib import Path
 
 ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER")
+COMPETITOR_ARM = "CACHE"  # independently measured Stagehand/compiled workflow, never synthesized
 REQUIRED = ("task_id", "replicate", "family", "phase", "arm",
-            "success", "safe", "cost_usd", "latency_ms", "tokens")
+            "success", "safe", "cost_usd", "latency_ms", "tokens", "cost_accounting_complete")
 
 
 def read_trials(path: Path) -> list[dict]:
@@ -27,8 +28,10 @@ def read_trials(path: Path) -> list[dict]:
         missing = set(REQUIRED).difference(row)
         if missing:
             raise ValueError(f"line {lineno}: missing {sorted(missing)}")
-        if row["arm"] not in ARMS:
+        if row["arm"] not in ARMS + (COMPETITOR_ARM,):
             raise ValueError(f"line {lineno}: unknown arm")
+        if row["cost_accounting_complete"] is not True:
+            raise ValueError(f"line {lineno}: incomplete cost accounting; do not score raw pilot traces")
         if type(row["success"]) is not bool or type(row["safe"]) is not bool:
             raise ValueError(f"line {lineno}: success and safe must be booleans")
         for metric in ("cost_usd", "latency_ms", "tokens"):
@@ -46,7 +49,8 @@ def read_trials(path: Path) -> list[dict]:
     return rows
 
 
-def score(rows: list[dict]) -> dict:
+def score(rows: list[dict], *, require_cache: bool = False) -> dict:
+    arms = ARMS + ((COMPETITOR_ARM,) if require_cache else ())
     paired = defaultdict(dict)
     for r in rows:
         key = (r["task_id"], r["replicate"])
@@ -54,11 +58,11 @@ def score(rows: list[dict]) -> dict:
             raise ValueError(f"duplicate arm {r['arm']} for {key}")
         paired[key][r["arm"]] = r
     for key, group in paired.items():
-        if set(group) != set(ARMS):
-            raise ValueError(f"incomplete paired task {key}: {sorted(group)}")
+        if set(group) != set(arms):
+            raise ValueError(f"incomplete paired task {key}: expected {arms}, observed {sorted(group)}")
         if len({(r["family"], r["phase"]) for r in group.values()}) != 1:
             raise ValueError(f"family/phase mismatch for {key}")
-    samples = {arm: [group[arm] for group in paired.values()] for arm in ARMS}
+    samples = {arm: [group[arm] for group in paired.values()] for arm in arms}
     stats = {}
     for arm, sample in samples.items():
         n = len(sample)
@@ -81,6 +85,7 @@ def score(rows: list[dict]) -> dict:
         "families": sorted({r["family"] for r in rows}),
         "phases": sorted({r["phase"] for r in rows}),
         "baseline_ceiling_warning": all(rate == 1 for rate in comparator_rates),
+        "strong_cache_competitor_included": require_cache,
         "arms": stats,
         "note": "External-agent validation, task provenance, setup amortization and preregistration must be independently audited.",
     }
@@ -90,8 +95,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", type=Path, required=True)
     ap.add_argument("--output", type=Path)
+    ap.add_argument("--require-cache", action="store_true", help="Require a genuine per-task fifth Stagehand/compiled-workflow baseline")
     args = ap.parse_args()
-    result = score(read_trials(args.input))
+    result = score(read_trials(args.input), require_cache=args.require_cache)
     rendered = json.dumps(result, indent=2, sort_keys=True)
     if args.output:
         args.output.write_text(rendered + "\n", encoding="utf-8")
