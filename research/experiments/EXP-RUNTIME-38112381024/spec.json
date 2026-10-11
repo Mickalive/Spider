@@ -1,48 +1,78 @@
 {
   "experiment_id": "EXP-RUNTIME-38112381024",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "question": "Can a non-degenerate asymmetric-discovery task bank be certified arithmetically BEFORE freeze (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family, matched correctness >= 0.80 for all arms) with real treatment/comparator behavioural distinction, honest per-condition counters (http_requests + retrieval_calls + verification_calls + repair_attempts), contamination/dynamic-range certificate, and exclusion of mandatory-discovery deterministic REST class?",
+  "hypothesis": "A credential-free asymmetric-discovery multi-task substrate (session/resource/schema discovery amortized or cached across tasks) can satisfy: dynamic range present (both baselines < 0.95 at novelty>=0.5), matched correctness>=0.80 for all arms, treatment/comparator behaviorally distinct, counters honest and complete, contamination bounds satisfied; otherwise certificate is unsatisfiable (bounded substrate-class negative, freeze nothing).",
+  "falsifier": "For all credential-free substrates tested that are materially different from mandatory-discovery deterministic REST class, the arithmetic certificate fails (baselines not below ceiling at high novelty, or matched correctness < 0.80, or treatment==comparator by behavior, or counters incomplete/tainted). In that case outcome is UNSATISFIABLE with bounded negative for B2 substrate; no execution of treatment effect beyond certification.",
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "description": "Cold re-derivation from minimal priors (no pre-cached solution path for the instance), matched task family and constraints.",
+      "constraint": "success_rate < 0.95 at novelty >= 0.5 on >= 1 task family; matched correctness >= 0.80"
+    },
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "description": "Retrieval-shaped comparator (shaped recall/usage of prior artifacts) distinct from cold and from treatment; must not be pinned at 1.0.",
+      "constraint": "success_rate < 0.95 at novelty >= 0.5 on >= 1 task family; matched correctness >= 0.80"
+    }
+  ],
+  "positive_control": "synthetic_non_degenerate_family: constructed family with novelty>=0.5 exhibits baselines < 0.95 and all arms >=0.80 correctness (sensitivity control).",
+  "null_control": "degenerate_ceiling_family: constructed family where dynamic range should be zero or baselines approach ceiling -> certificate rejects (control sensitivity).",
+  "measurement_validity": [
+    "honest_counters: http_requests, retrieval_calls, verification_calls, repair_attempts reported per arm per condition; no double-counting",
+    "contamination: no leakage of solution artifacts between train/test instances; discovery amortization explicitly modeled; credential-free",
+    "exclusion: mandatory-discovery deterministic REST class explicitly excluded (no fourth re-run)",
+    "behavioral_distinct: treatment/comparator differ on >=1 observable behavior (not identity)",
+    "matched_tasks: same task families/constraints across arms; correctness matched >=0.80",
+    "stable_ids: metric/control identities fixed before any satisfiability probe"
+  ],
+  "decision_rule": "CERTIFIED if (exists task family with novelty>=0.5 and B-COLD-RE-DERIVE.success_rate < 0.95 and B-RETRIEVAL-SHAPED.success_rate < 0.95) AND (all arms matched_correctness>=0.80) AND (treatment!=comparator behaviorally) AND (counters complete and contamination bounds satisfied). Else UNSATISFIABLE -> bounded substrate-class negative; freeze nothing.",
+  "product_consequence_positive": "Reusable asymmetric-discovery task bank substrate certified (non-degenerate dynamic range) -> unblocks B2 inheritance benchmarks (C-PARAM-INHERIT/C-LLM-INHERIT) with honest cost accounting.",
+  "product_consequence_negative": "Certificate unsatisfiable on every tested credential-free substrate (different from mandatory-discovery deterministic REST) -> bounded negative for B2 substrate; do not proceed to full flagship benchmark; repair substrate or PARK thread; freeze nothing.",
+  "estimated_cost": "low (arithmetic certification + small satisfiability probes; no large-scale outcome measurement)",
+  "expected_information_gain": "high (removes B2 ceiling-blocker; prevents misreading replay-speed as economics).",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Arithmetic constraints are decidable from measured/constructed families; UNSATISFIABLE branch exists and is reachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38112381024/spec.json#decision_rule"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Counters, novelty metric, correctness, behavioral distinction observable from existing harness instrumentation (no new unverified substrate required).",
+      "evidence_refs": [
+        "research/lanes/registry.json#runtime.allowed_code_roots",
+        "research/harness"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED defined with explicit success_rate constraints and novelty threshold; distinct from treatment.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38112381024/spec.json#baselines"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Positive control (non-degenerate family) should satisfy certificate; null control (degenerate ceiling family) should reject certificate.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38112381024/spec.json#positive_control",
+        "research/experiments/EXP-RUNTIME-38112381024/spec.json#null_control"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "NOT_APPLICABLE",
+      "reason": "This is a substrate certification experiment (arithmetic gate) to qualify substrates for treatment arms in downstream B2; no SPIDER treatment arm is executed in this experiment. Liveness not required for certification.",
       "evidence_refs": []
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "NOT_APPLICABLE",
+      "reason": "No mutable local code/data/task-bank/fixture dependencies identified that could change interpretation of the arithmetic certificate beyond existing read-only harness definitions. Substrate families may be constructed on-the-fly from read-only primitives; no new mutable artifacts introduced.",
       "evidence_refs": []
     }
   },
