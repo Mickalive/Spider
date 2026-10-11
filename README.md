@@ -19,6 +19,16 @@ A results-driven **product delivery loop** and the independent **scientific rese
 
 See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md). Prototype code on the strategy branch is **not promoted**, and the benchmark scorer is descriptive only; no externally validated product saving has yet been measured.
 
+## Executable product pilot — independently gated
+
+The optional Browser Use integration, real Playwright/Chromium compiled-workflow baseline,
+read-only Spider mechanism bridge, two-family portal, and no-spend randomized
+five-arm plan are described in [the product pilot runbook](docs/PRODUCT_PILOT_RUNBOOK.md).
+
+No model/API payments are invoked by the default tests. Fully loaded economic
+measurements remain **unverified**, and this product branch must not bypass the
+independent Product-lane promotion audit.
+
 ## Active lanes
 
 Six independent lanes run without synchronizing on one another:
