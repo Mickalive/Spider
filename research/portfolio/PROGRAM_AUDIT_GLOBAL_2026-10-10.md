@@ -1,6 +1,6 @@
-# SPIDER — Global scientific-to-product audit (10 October 2026)
+# SPIDER — Global scientific-to-product audit (10 October 2026; updated 11 October 2026)
 
-**Nature:** strategic synthesis, not canonical scientific evidence. **As-of:** all 1,401 uniquely indexed historical source artifacts plus the 434 subsequently finalized Research 2.0 packets, at the last verified R2 synchronization commit `8b0af54c2fa1e04e39d7ded0234c37ec896b1b4c`. **Continuity update:** the original 22 MB historical blob is now present byte-for-byte on `main` at `codex/sources/0000-historical-evidence.md`; both eras are in ONE generated `SPIDER_CODEX.md`, ONE `codex/index.json` and ONE `codex/claim_state.json`. This is a complete inventory and synthesis with selected original primary-evidence checks, **not** independent re-execution or line-by-line validation of every artifact.
+**Nature:** strategic synthesis, not canonical scientific evidence. **As-of:** all 1,401 uniquely indexed historical source artifacts plus the 436 subsequently finalized Research 2.0 packets, at verified cumulative main commit `8a64e6f323551668fbcb6e87a7768c628a4e5fa3` (2026-10-11 15:56 UTC). **Continuity update:** the original 22 MB historical blob is now present byte-for-byte on `main` at `codex/sources/0000-historical-evidence.md`; both eras are in ONE generated `SPIDER_CODEX.md`, ONE `codex/index.json` and ONE `codex/claim_state.json`. This is a complete inventory and synthesis with selected original primary-evidence checks, **not** independent re-execution or line-by-line validation of every artifact.
 
 ## Decision in one paragraph
 
@@ -9,29 +9,29 @@
 ## 1. Sources and counting rules
 
 1. **Historical first epoch (original, lossless)**: `codex/sources/0000-historical-evidence.md`, a byte-identical Git-blob source also frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md` (`9bb76113aeaf46d9aecdd8a38349a3a7741e57c3`), 21,974,490 characters and 1,401 unique scientific artifacts. Source-line metadata for all artifacts is joined into `codex/index.json.historical.artifacts`. A compact source-anchored precedent for each scientific claim is joined into `codex/claim_state.json.historical_precedents_by_claim`. Selected original passages were inspected: corrected Graph speed (4.114), WP-003 invalidity (4.203), WP-003B bounded follow-up (4.237), and Product synthesis (4.697). Full inventory is **not** a fresh line-by-line independent audit.
-2. **Subsequent Research 2.0 packets, same Codex**: `SPIDER_CODEX.md` at the above sync. All **434 subsequent experiment rows** were read and counted. **0 coverage gaps and 2 quarantined packets** are reported by the compiler; they do not imply every experiment is valid or reproducible. The current Codex was updated **after** the dated 433-experiment program audit.
+2. **Subsequent Research 2.0 packets, same Codex**: `SPIDER_CODEX.md` at the above sync. All **436 subsequent experiment rows** were read and counted. **0 coverage gaps and 2 quarantined packets** are reported by the compiler; they do not imply every experiment is valid or reproducible. The current Codex was updated **after** the dated 433-experiment program audit.
 3. **One cumulative claim state**: current effective-claim table in `SPIDER_CODEX.md`, preceded by explicit historical findings in `codex/claim_state.json`, cross-checked against `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` (433-experiment snapshot) and `research/claims/registry.json`. An operational packet state must never overwrite a previous accepted epistemic status.
 4. **Selected primary packets**: `EXP-PRODUCT-37973256064`, `EXP-PRODUCT-37989728440`, `EXP-GRAPH-37992949248`, together with the dated audit's referenced packets for measurement, model capability and Physics. **Source-level checks**: `src/spider/kernel.py` and `src/spider/__init__.py`.
-5. **Not done**: re-run code, independently verify every historical raw artifact, inspect all 434 packets one by one, or compare every live lane branch HEAD with `main`. These must not be claimed as completed.
+5. **Not done**: re-run code, independently verify every historical raw artifact, inspect all 436 packets one by one, or compare every live lane branch HEAD with `main`. These must not be claimed as completed.
 
 **Count warning:** pre-2.0 science blobs, archived workflow runs, Research 2.0 packets and PASS audits have **different units**. Do not add them into a fictional total of independent successful experiments.
 
-## 2. Research 2.0 portfolio, exhaustive index-level reconciliation (434)
+## 2. Research 2.0 portfolio, exhaustive index-level reconciliation (436)
 
 | Lane | Packets | PASS audit | REVISE | MEASUREMENT_INVALID | FAIL | BLOCKED |
 |---|---:|---:|---:|---:|---:|---:|
 | Graph | 79 | 28 | 16 | 23 | 7 | 5 |
-| Physics | 68 | 13 | 21 | 29 | 5 | 0 |
+| Physics | 70 | 15 | 21 | 29 | 5 | 0 |
 | Runtime | 68 | 30 | 21 | 16 | 1 | 0 |
 | Product | 83 | 34 | 25 | 21 | 2 | 1 |
 | Frontier | 58 | 21 | 17 | 17 | 3 | 0 |
 | Intel | 78 | 24 | 42 | 7 | 3 | 2 |
-| **Total** | **434** | **150** | **142** | **113** | **21** | **8** |
+| **Total** | **436** | **152** | **142** | **113** | **21** | **8** |
 
-- PASS means **audit PASS**, not a positive scientific hypothesis verdict. PASS includes valid falsifications and valid demonstrations of **infeasibility** or correct rejection. It is not a 150/434 product success rate.
-- `REVISE + MEASUREMENT_INVALID = 255 / 434 = 58.8%`: enormous validation/design friction. These categories are not all wasted science, but they expose poor yield per unit of factory work. `MEASUREMENT_INVALID = 113 / 434 = 26.0%`.
-- The 434th accepted canonical packet is Graph `EXP-GRAPH-37992949248`, audit PASS. It **replicates a repaired extraction certificate** but finds a **single-anchor, transport-coupled D1V population**, inadequate for a clustered false-accept estimate. It is **not** a product promotion and **does not validate freshness**.
-- The prior strategic audit at `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` is stale by **one packet**; otherwise its central product conclusion remains consistent with this sync.
+- PASS means **audit PASS**, not a positive scientific hypothesis verdict. PASS includes valid falsifications and valid demonstrations of **infeasibility** or correct rejection. It is not a 152/436 product success rate.
+- `REVISE + MEASUREMENT_INVALID = 255 / 436 = 58.5%`: enormous validation/design friction. These categories are not all wasted science, but they expose poor yield per unit of factory work. `MEASUREMENT_INVALID = 113 / 436 = 25.9%`.
+- The 434th canonical packet is Graph `EXP-GRAPH-37992949248`, audit PASS. It **replicates a repaired extraction certificate** but finds a **single-anchor, transport-coupled D1V population**, inadequate for a clustered false-accept estimate. It is **not** a product promotion and **does not validate freshness**.
+- The prior strategic audit at `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` is stale by **three packets**; its central product conclusion remains consistent. The two later Physics packets are assessed below.
 
 ## 2A. Continuity review — what the ORIGINAL research actually established
 
@@ -50,6 +50,16 @@ The original research is not discarded and its results are not counted as a new 
 **Longitudinal reading:** from the earliest WP tasks to the latest credential-free live HTTP work, SPIDER increasingly supports a practical distinction between **reusable procedures/mechanisms** and **unreliable ephemeral site state**. It has repeatedly failed to establish robust universal site-held-out dynamics and has not shown superior end-to-end agent economics. That consistency makes the procedural-inheritance product thesis worth **one decisive fair test**, not endless mechanism proliferation.
 
 **Critical guard:** early historical PASS/VALIDATED labels and later R2 audit PASS have different source-specific semantics; the joint Codex records both as provenance without pretending that source artifact tokens are equivalent to final scientific decisions.
+
+
+### New evidence since the prior 434-packet review — bounded Physics update
+
+Two audited Physics packets have been added to the unified Codex; neither upgrades the broad `C-WEB-DYNAMICS` hypothesis or resolves the product-critical comparison.
+
+- **`EXP-PHYSICS-37992957068` (audit PASS, scientific outcome INCONCLUSIVE):** a 57-endpoint credential-free GET-only experiment tested retry, spacing, fresh sessions, and adaptation. The nominal adaptive arm used about 2.48 fewer requests per exposed episode, but the audit notes that this economic result is substantially a consequence of the defined arm behavior on endpoint-constant access barriers. Predictive schedule-dependent gain was not established (`SKILL_LL=0.00514` nats/request, CI95 including zero); there were no onset events in the relevant stratum. Not a general discovery of Web physics.
+- **`EXP-PHYSICS-38074818597` (audit PASS, scientific outcome S1_STATIONARY):** 57 endpoint pool, one network vantage and ~30-minute measurement window; intrinsic access barriers remained stable to 1800 seconds in the measured sample, with `STATIONARITY_SKILL=0.3196` nats and permutation `p≈0.0001`; the bounded intrinsic denylist had zero observed false-accept/false-reject under its predeclared population. The auditor nevertheless notes pre-freeze documentary inconsistencies and unmeasured generalization beyond that vantage, pool and horizon. **This is an actionable bounded access-barrier observation, not a universal law nor a demonstrated reduction in real-agent task cost.**
+
+The additional evidence *sharpens* a procedure-focused strategy: persistent intrinsic access restrictions may be cached briefly within a validated scope, whereas ephemeral tokens and transient rate limits demand fresh observation. It does not supersede the negative finding on server-minted value persistence (`EXP-PHYSICS-37973239386`). Historical `WP-003` remains measurement-invalid regardless of the recent result.
 
 ## 3. Claims: what is truly known and what is still missing
 
@@ -78,7 +88,7 @@ The original research is not discarded and its results are not counted as a new 
 
 ## 5. Historical pre-2.0 lessons — continuity, NOT a newly certified re-audit
 
-The original Codex source is frozen as **historical evidence within one cumulative scientific record**. Its 1,401 individually indexed evidence artefacts and the 434 subsequent canonical experiment packets are joined through `SPIDER_CODEX.md`, `codex/index.json` and `codex/claim_state.json`. They retain distinct provenance and incomparable counting units, but **not separate research programs**. Do not confuse archived source blobs or historical run memories with independent R2 experiment packets.
+The original Codex source is frozen as **historical evidence within one cumulative scientific record**. Its 1,401 individually indexed evidence artefacts and the 436 subsequent canonical experiment packets are joined through `SPIDER_CODEX.md`, `codex/index.json` and `codex/claim_state.json`. They retain distinct provenance and incomparable counting units, but **not separate research programs**. Do not confuse archived source blobs or historical run memories with independent R2 experiment packets.
 
 Earlier project-level work reported three relevant failure patterns, which require line-level cross-checks against the large archive before being treated as revalidated:
 
@@ -98,7 +108,7 @@ Earlier project-level work reported three relevant failure patterns, which requi
 - Independent DESIGN REVIEW and frozen-design checks reduce new avoidable invalids; **the reduction has not yet been quantified prospectively**.
 
 ### Material liabilities
-- **255/434** packets are REVISE or MEASUREMENT_INVALID. Activity and correctness of workflow infrastructure risk substituting for progress.
+- **255/436** packets are REVISE or MEASUREMENT_INVALID. Activity and correctness of workflow infrastructure risk substituting for progress.
 - Benchmark families have repeatedly measured ceiling baselines, not value.
 - Six lanes + Scout + Global Director + audits + Codex reconciliation are an expensive self-hosted research factory; no evidence yet that this complexity pays for itself.
 - Work on marginal freshness estimators, Web dynamics or benchmark mechanics can be rational locally but useless to the near-term product.
