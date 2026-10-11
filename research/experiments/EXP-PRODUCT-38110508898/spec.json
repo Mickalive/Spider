@@ -1,50 +1,136 @@
 {
   "experiment_id": "EXP-PRODUCT-38110508898",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "metric_ids": [
+    "retrieval_calls",
+    "verification_calls",
+    "repair_attempts",
+    "http_requests",
+    "model_calls",
+    "model_tokens",
+    "browser_actions",
+    "latency_ms"
+  ],
+  "question": "Can the already-audited parameterized mechanism carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) be installed byte-identically at the shipping kernel path src/spider/kernel.py, with a binding pre-freeze positive/negative certificate whose CONFIDENCE FLOW is not defeated by the literal distill() candidate confidence 0.5 versus the default resolve() execution threshold min_confidence 0.8, so that the shipped package (a) executes one known-positive inherited parameterized binding on an UNSEEN held-out identifier (distill_parameterized of three+ induction observations -> resolve EXECUTABLE with a correctly bound non-null action at confidence 0.9 -> deterministic fixture execute status 200 -> verify true), (b) refuses one known-negative family of unsafe bindings (out-of-support / missing-parameter / wrong-intent) with a recorded reason and a null bound action - and returns exactly ResolutionStatus.UNKNOWN for the no-applicable-mechanism (wrong-intent) case rather than a wrong execution, (c) keeps the inherited-path counters honest, and (d) keeps the installed identity equal to the frozen carrier git blob/sha256, thereby discharging blocker B1 and enabling promotion ONLY on independent audit PASS?",
+  "hypothesis": "The audited parameterized carrier can be installed byte-identically at the shipping kernel path and its parameterized path crosses the 0.8 execution gate at confidence 0.9 while the literal distill() path (0.5) is refused, so the full organic certificate B0..B5 (byte-identity, unseen held-out positive, three known-negative refusals with UNKNOWN for wrong-intent, exact-vector honest counters, literal-null gate, pre-repair causal baseline) is satisfiable as a unit. The confidence flow is not defeated by the literal candidate: both candidates exist in the same registry, and the 0.8 threshold cleanly separates 0.9 (EXECUTABLE) from 0.5 (EXPLORE), so the parameterized inheritance path is the sole crossing mechanism and the audited carrier is promotion-ready at the shipping path pending independent audit PASS.",
+  "falsifier": "Any of the six certificate checks fails: (B0) installed src/spider/kernel.py is NOT byte-identical to carrier blob b15ed848 / sha256 718efa6a (or installed models.py/registry.py differ from their audited blobs f08608c3... / 986317f7...), or post-install kernel lacks the distill_parameterized attribute; (B1) the positive held-out binding does NOT reach resolve EXECUTABLE at confidence 0.9 with a correctly bound non-null action, or the deterministic fixture execute does NOT return 200, or verify does NOT return True; (B2) any known-negative family yields a wrong execution (EXECUTABLE or non-null bound action) or the wrong-intent case does NOT return exactly ResolutionStatus.UNKNOWN with mechanism_id None and bound_action None; (B4) the literal distill() candidate executes (EXECUTABLE) under the default 0.8 threshold, or the 0.5-vs-0.8 confidence gate is otherwise defeated; (B5) the preserved pre-install kernel (expected blob cfec9866) already satisfies the positive check (no causal attribution) or its preserved bytes do not match the documented pre-install blob. Instrumentation-failure branch (B3): inherited-path counters do not match the exact expected vector for the fixed certificate sequence (retrieval_calls=5, verification_calls=1, repair_attempts=1, http_requests=1, model_calls=0, model_tokens=0, browser_actions=0, latency_ms=0.0), or the reference carrier file mutated after freeze (bound-artifact hash mismatch caught at EXECUTE identity verification), or the fixture infrastructure cannot start - any of which renders the measurement INVALID rather than a scientific negative.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Null/ablation on the SAME installed kernel: a mechanism induced via literal distill() carries confidence 0.5. Under the default resolve() execution threshold min_confidence 0.8 it must yield EXPLORE with bound_action None and a recorded reason ('candidate exists but confidence is below execution threshold'). If it ever returns EXECUTABLE, the confidence flow is defeated and the certificate fails (B4). Isolates the parameterized path as the sole confidence-crossing mechanism and re-anchors the shipped C-PARAM-INHERIT precedent (EXP-PRODUCT-36314204238: literal candidate 0.5 < 0.8).",
+      "type": "null_control"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-PRE-REPAIR-KERNEL",
+      "description": "Baseline: the pre-install shipping kernel, preserved byte-copy in raw_evidence/pre_install_kernel.py before the carrier install. Expected identity: git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50 / sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (verified pre-freeze). It structurally lacks the distill_parameterized attribute (hasattr False), so the positive certificate path is unreachable on it - the causal attribution that the install of the audited carrier, and nothing else, delivers the behavior. If the pre-repair kernel already passed the positive check, B5 fails.",
+      "type": "baseline"
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "PC-EXACT-REPLAY",
+      "description": "Positive control on the SSAME installed kernel: the three existing regression tests (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention in tests/test_kernel.py, bound artifact) must still pass after install under PYTHONPATH=src, proving the basic resolve/execute/verify/invalidate semantics and the UNKNOWN default survived the install byte-identically.",
+      "type": "positive_control"
+    }
+  ],
+  "positive_control": "PC-IDENTITY (cryptographic byte-equality of installed kernel.py against frozen carrier blob b15ed848 / sha256 718efa6a, and of src models/registry against audited blobs, plus presence of distill_parameterized) AND PC-EXACT-REPLAY (existing regression suite passes post-install). PC-IDENTITY failing makes the whole measurement invalid (wrong treatment measured); PC-EXACT-REPLAY failing means the install broke the baseline kernel semantics.",
+  "null_control": {
+    "id": "B-LITERAL-KERNEL",
+    "description": "Literal distill() candidate at confidence 0.5 vs default resolve() execution threshold min_confidence 0.8 on the installed kernel.",
+    "expected_behavior": "resolve returns EXPLORE (never EXECUTABLE) with bound_action None and recorded reason 'candidate exists but confidence is below execution threshold' - the exact confidence-flow separation probed pre-freeze (0.5 < 0.8 < 0.9)."
+  },
+  "measurement_validity": [
+    "Deterministic credential-free substrate: stdlib-only local http.server on 127.0.0.1 with an ephemeral port; no model API, no browser, no external network. model_calls==0, model_tokens==0, browser_actions==0 are hard-mandated and checked in the exact counter vector.",
+    "Binding pre-freeze certificate: the FULL certificate was executed as a satisfiability probe during DESIGN (2026-10-11) against the audited carrier - induction ids {142,937,508} infer support '^[0-9]{3}$'; unseen held-out 671 resolves EXECUTABLE at confidence 0.9 with non-null correctly bound action; oos '12' -> EXPLORE, missing-param {} -> EXPLORE, wrong-intent 'no-such-intent' -> exactly ResolutionStatus.UNKNOWN; literal distill -> EXPLORE at 0.5 < 0.8; counters fire only on real kernel actions. The probe recipe is embedded verbatim in prereg.md so EXECUTE and AUDIT can re-derive it independently.",
+    "Confidence-flow dynamic range: two confidence values (0.5 literal, 0.9 parameterized) flank the single 0.8 threshold on identical registry/inputs; the gate is not pinned at a floor or ceiling and both sides are observable (EXPLORE vs EXECUTABLE), so a defeated gate is directly detected (B4).",
+    "Causal attribution: B-PRE-REPAIR-KERNEL (preserved pre-install bytes, blob cfec9866) lacks distill_parameterized, so the positive path is structurally unreachable before install; the only delta is the byte-identical carrier install (B5).",
+    "Identity is cryptographic: git blob via git hash-object AND sha256sum on installed vs frozen reference bytes; exact equality, no tolerance.",
+    "Known-negative semantics: three refusal categories with distinct recorded reasons and bound_action == None; wrong-intent uses an intent absent from all registered mechanisms so the audited resolve loop skips mechanisms before any refusal generation and returns exactly ResolutionStatus.UNKNOWN - never a wrong execution (B2).",
+    "Honest inherited-path counters: fixed 8-call certificate sequence against a single fresh trajectory; exact expected vector retrieval_calls=5, verification_calls=1, repair_attempts=1, http_requests=1, model_calls=0, model_tokens=0, browser_actions=0, latency_ms=0.0 (B3). Counter events are emitted by the kernel on real actions only; the harness records, never injects.",
+    "Treatment identity continuity: the treatment arm T-SPIDER-PARAM (parent EXP-PRODUCT-37989728440) was bound to blob b15ed848 via provenance; this experiment installs that same blob at the shipping path, so the identity is strengthened from recorded-provenance to frozen-artifact byte-equality.",
+    "Equal tooling: treatment and all controls execute in the same installed package and process; no external variance.",
+    "Pinned harness semantics: the EXECUTE harness has no free design degrees - the certificate sequence, inputs, expected outcomes, reasons and counter vector are fixed in the frozen spec/prereg; harness code sha256 must still be recorded in result.json/provenance.json because freeze.json cannot hash EXECUTE-created files (known control-plane limitation documented in the prior cycle), and the reference carrier files bound in freeze_artifacts pin the only interpretation-dependent source.",
+    "Prerequisite verified: python >= 3.11 available (3.12.15); spider imports under PYTHONPATH=src (regression suite runs); simulated install (carrier kernel over src kernel) passes 3/3 existing tests - all confirmed pre-freeze."
+  ],
+  "decision_rule": {
+    "CERTIFICATE_SEQUENCE": "Fixed 8-call sequence on one fresh kernel instance + one fresh TrajectoryCounters set. (1) distill_parameterized(obs[142], obs[937], obs[508]) -> mechanism M, confidence 0.9. (2) resolve('fetch-item', ctx, {'item':'671'}) -> EXECUTABLE, confidence 0.9, bound action {method GET, url fixture_base + '/items/671', params {'item':'671'}}. (3) fixture execute GET /items/671 -> 200 {'status':200,'item_id':'671','ok':true} (http_requests +1). (4) verify(M, next_state{'status':200,'item_id':'671','ok':true}, {'item':'671'}) -> True (verification_calls +1). (5) resolve('fetch-item', ctx, {'item':'12'}) -> EXPLORE, bound None, reason 'parameter item outside inferred support' (retrieval_calls +1). (6) resolve('fetch-item', ctx, {}) -> EXPLORE, bound None, reason 'missing required parameter item' (retrieval_calls +1). (7) resolve('no-such-intent', ctx, {}) -> exactly ResolutionStatus.UNKNOWN, mechanism_id None, bound None, reason 'no applicable validated mechanism' (retrieval_calls +1). (8) rebind('no-such-intent', ctx, {}) -> UNKNOWN (repair_attempts +1, retrieval_calls +1). Expected totals: retrieval_calls=5, verification_calls=1, repair_attempts=1, http_requests=1, model_calls=0, model_tokens=0, browser_actions=0, latency_ms=0.0.",
+    "B0_identity": "Installed src/spider/kernel.py byte-identical to frozen carrier (git hash-object == b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 AND sha256 == 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72); src/spider/models.py unchanged == f08608c36b1c7b536d553b690acd91cd63f590f7; src/spider/registry.py unchanged == 986317f71c4a7d5506e3295991bc7217e2a8d2da; installed kernel hasattr distill_parameterized == True.",
+    "B1_positive": "Certificate steps (1)-(4) produce exactly the expected outcomes: mechanism confidence == 0.9; resolve status == EXECUTABLE with bound method GET and url == fixture_base + '/items/671' and params {'item':'671'}; fixture execute returns status 200; verify returns True. Held-out id 671 appears in NO induction observation (induction ids {142,937,508}).",
+    "B2_known_negative": "Certificate steps (5)-(7): out-of-support '12' -> EXPLORE with recorded support-violation reason and bound None; missing-param {} -> EXPLORE with recorded missing-parameter reason and bound None; wrong-intent 'no-such-intent' -> EXACTLY ResolutionStatus.UNKNOWN with mechanism_id None and bound None. Any EXECUTABLE or non-null bound in steps (5)-(7) fails B2.",
+    "B3_counters_honest": "Counter vector over the full 8-step sequence == expected exactly: {'retrieval_calls':5, 'verification_calls':1, 'repair_attempts':1, 'http_requests':1, 'model_calls':0, 'model_tokens':0, 'browser_actions':0, 'latency_ms':0.0}. No events other than the sequence steps; no injected or duplicated events. Failure = measurement-integrity defect.",
+    "B4_literal_null": "A mechanism induced via literal distill() on the installed kernel resolves at confidence 0.5 -> EXPLORE, bound None, reason 'candidate exists but confidence is below execution threshold' under the default min_confidence 0.8. If it resolves EXECUTABLE, the confidence flow is defeated and the certificate fails.",
+    "B5_causal_baseline": "Preserved pre-install kernel bytes match blob cfec98660b0277ccbf295e8a4119e8d81ddccf50 / sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 AND hasattr(pre_install_kernel_module, 'distill_parameterized') == False AND the regression suite (tests/test_kernel.py, bound artifact) passes post-install under PYTHONPATH=src (PC-EXACT-REPLAY). Any failure isolates a broken/absent causal attribution.",
+    "OVERALL_OUTCOME": {
+      "SUPPORTS": "B0, B1, B2, B4, B5 all PASS and B3 exact-vector PASS -> 'B1 carrier-install certificate satisfied'. Installed shipping kernel == audited carrier; parameterized inheritance executes on an unseen identifier; known negatives refused with correct semantics; counters honest; confidence flow not defeated. promotion_ready = true ONLY pending independent audit PASS (audit status PASS and verdict promote_to_product). Enabled: four-arm C-LLM-INHERIT benchmark bound to recorded carrier identity; C-RESIDUAL-NOVELTY / C-PRODUCT-ECON unblocked from B1.",
+      "FALSIFIES": "Any of B0, B1, B2, B4, B5 FAILS -> 'B1 carrier-install certificate NOT satisfied'. Do NOT promote. Record the exact failing check and preserve raw evidence (pre-install bytes, installed bytes, harness outputs). The specific failure names the component to repair next cycle (identity/pinning, positive path, refusal semantics, confidence gate, attribution).",
+      "MEASUREMENT_INVALID": "B3 FAILS (counter instrumentation integrity) OR the reference carrier file mutated after freeze (EXECUTE identity verification against the frozen artifact_hashes fails; i.e., the bound reference bytes changed) OR the fixture infrastructure cannot start (stdlib server exception, python < 3.11). Infrastructure/instrumentation failures are NOT scientific negatives; record the exact failure and the smallest unblocking action."
     }
   },
-  "freeze_artifacts": []
+  "product_consequence_positive": "Blocker B1 is discharged: src/spider/kernel.py now byte-contains the audited parameterized carrier (blob b15ed848 / sha256 718efa6a), the shipping package demonstrates the frozen positive/negative/counter/identity certificate, and ledger identity for the later four-arm C-LLM-INHERIT benchmark is recorded. C-PARAM-INHERIT moves from harness-only to shipping-path capability; promotion to Product Core is enabled ONLY by the independent audit PASS in the serialized workflow (audit status PASS + verdict promote_to_product) - this experiment alone does NOT advance any claim status.",
+  "product_consequence_negative": "If the certificate is FALSIFIED (any of B0/B1/B2/B4/B5), the blocker stays open with a precise diagnosis; no promotion, no claim advance. Preserve pre-install kernel bytes and installed bytes as raw evidence and report the exact failing check to the Director, who may order revert via the product-reject workflow (scripts/revert_product_reject.py). Explicitly NOT a claim rejection: the carrier is audited and has been measured harness-side; a certificate failure here names the shipping-path integration defect to repair. If MEASUREMENT_INVALID (B3 or bound-artifact mutation or infrastructure), do not classify as negative - report the instrumentation/control-plane defect with the smallest unblocking action.",
+  "estimated_cost": "Trivial: stdlib-only; one localhost HTTP server (ephemeral port) receiving <= 2 requests; a few thousand instructions in distill_parameterized/resolve/verify; zero model/browser/external costs; wall time < 60 seconds. No new credentials, no cloud resources.",
+  "expected_information_gain": "Decisive for the B1 blocker: this is the first binding byte-identity + organic positive/negative certificate executed at the SHIPPING kernel path (prior carrier-adjacent verdicts deliberately did not touch src/spider/kernel.py and did not discharge B1). A SUPPORTS outcome converts the inheritance pipeline from harness capability to promotion-ready shipping product and unblocks every downstream C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON run; a FALSIFIES outcome names the exact defect to repair once, preventing repeated re-discoveries of the same absence; MEASUREMENT_INVALID pinpoints an instrumentation or control-plane defect explicitly.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Every decision branch is reachable and was exercised as a pre-freeze satisfiability probe (2026-10-11, big-pickle, deterministic and rerunnable from the prereg.md recipe): ALL-PASS branch live - induction ids {142,937,508} infer support '^[0-9]{3}$' and unseen held-out 671 resolves EXECUTABLE at confidence 0.9 with non-null correctly bound action, fixture 200, verify True; each FALSIFY branch reachable by construction - B0 fails on any non-identical install (the pre-repair kernel blob cfec9866 is the concrete witness), B1/B2 fail on the pre-repair kernel (no distill_parameterized, literals at 0.5), B4 is protected by the observed 0.5<0.8 EXPLORE while 0.9 reaches EXECUTABLE (both sides of the threshold observable, no ceiling/floor pinning), B5 fails if the baseline already satisfies the positive. No empty branches, no arithmetic impossibility, no saturated baseline inside the decision set.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py (carrier: default min_confidence=0.8, literal distill confidence 0.5, support inference common-prefix + char-class/length)",
+        "DESIGN satisfiability probe (rerunnable from prereg.md 'Satisfiability evidence'): ALL-PASS + individual FALSIFY branches demonstrated pre-freeze; probe toolchain stdlib-only, deterministic"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Python 3.12.15 stdlib available and verified (spider imports under PYTHONPATH=src; existing suite executes 3/3). Audited carrier exists at the referenced path with pinned identity blob b15ed848 / sha256 718efa6a (verified by git hash-object and sha256sum). src/spider/models.py and src/spider/registry.py verified byte-identical to the audited models/registry. A simulated install (carrier kernel copied over the shipping kernel in a temp tree) imports and passes 3/3 existing tests - all confirmed pre-freeze. No model credentials, browser, or external network; localhost stdlib HTTP fixture on an ephemeral port avoids collisions. pyproject.toml requires-python >= 3.11 and src layout confirmed.",
+      "evidence_refs": [
+        "src/spider/kernel.py (pre-install blob cfec9866)",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py (carrier blob b15ed848)",
+        "src/spider/models.py, src/spider/registry.py (blobs f08608c3..., 986317f7...)",
+        "tests/test_kernel.py",
+        "pyproject.toml (requires-python >= 3.11, src layout, package spider-web-inheritance)",
+        "DESIGN install-feasibility probe: temp package = carrier kernel.py + existing models/registry/__init__; imports OK; 3/3 existing tests pass under PYTHONPATH"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "B-LITERAL-KERNEL is a discriminating null with free dynamic range: expected 0.5 < 0.8 -> EXPLORE while the treatment sits at 0.9 >= 0.8 -> EXECUTABLE on the same registry and kernel; two confidence values flank one threshold, so neither arm is pinned to a ceiling or floor and a defeated gate flips the null to EXECUTABLE (detectable). B-PRE-REPAIR-KERNEL is identifiable by a fixed blob/sha256 and the structural absence of distill_parameterized, isolating the install as the only behavioral delta. PC-EXACT-REPLAY anchors the unchanged basic resolve/execute/verify/invalidate semantics. No baseline saturates: every control has a reachable fail state (wrong bytes, missing attribute, gate defeat, broken install).",
+      "evidence_refs": [
+        "Probe: literal distill candidate -> EXPLORE, bound None, reason 'candidate exists but confidence is below execution threshold'; parameterized -> EXECUTABLE at 0.9 (0.5 < 0.8 <= 0.9 separation)",
+        "git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50 (pre-install kernel; no distill_parameterized by inspection)",
+        "tests/test_kernel.py (PC-EXACT-REPLAY semantics: literal 0.95 mechanism binds, invalidate abstains, unknown default)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control fires on exact predicates in both directions. PC-IDENTITY is cryptographic byte-equality (any single-byte mismatch fails). PC-EXACT-REPLAY depends on live resolve/execute/verify/invalidate semantics and fails if the install broke the kernel. NC-OUT-OF-SUPPORT / NC-MISSING-PARAMETER / NC-WRONG-INTENT invert the positive on the same kernel: the probe shows identical code yields EXPLORE/EXPLORE/UNKNOWN with null bound actions on these inputs while the in-support unseen input executes - the refusal predicates are sensitive, not inert. B4 fails the instant the confidence gate is defeated (0.5 candidate executes). B5 fails on the pre-repair baseline satisfying the positive. B3 is exact-vector equality over eight steps - maximally sensitive to added, missing, duplicated or injected counter events.",
+      "evidence_refs": [
+        "Probe outputs for the five input classes on the same carrier code: EXECUTABLE@0.9 vs EXPLORE (oos) vs EXPLORE (missing) vs UNKNOWN (wrong-intent) vs EXPLORE (literal 0.5)",
+        "Carrier resolve loop semantics: intents not matching any registered mechanism return UNKNOWN 'no applicable validated mechanism' before refusal generation (probed)",
+        "Expected counter vector retrieval_calls=5 / verification_calls=1 / repair_attempts=1 / http_requests=1 / model=0 / tokens=0 / browser=0 / latency=0.0 over the fixed certificate sequence (probed call-by-call)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The shipped SPIDER treatment (installed distill_parameterized -> resolve -> execute -> verify round trip) is live: the pre-freeze probe produced EXECUTABLE at confidence 0.9 with a correctly bound non-null action on an unseen in-support identifier, fixture 200, verify True, and also demonstrated refusal on all three known-negative families and the literal-null EXPLORE. This is a deterministic, rerunnable sequence embedded verbatim in the frozen spec/prereg - not a promise contingent on the confirmatory run. A structurally inert treatment (unable to reach EXECUTABLE on any input) would have failed the liveness probe and the design would have been revised pre-freeze.",
+      "evidence_refs": [
+        "DESIGN liveness probe (recipe in prereg.md 'Satisfiability evidence'): confidence 0.9 >= 0.8 -> EXECUTABLE; bound action GET fixture_base/items/671; verify True; oos/missing/wrong-intent -> EXPLORE/EXPLORE/UNKNOWN with bound None",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py (distill_parameterized, resolve, verify, rebind implementations)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity changes interpretation of the result is bound: (1) audited carrier kernel.py - the frozen treatment identity for the install (B0 compares installed bytes to this file's hash); (2) audited models.py - must equal installed/untouched src/spider/models.py (B0); (3) audited registry.py - must equal installed/untouched src/spider/registry.py (B0); (4) tests/test_kernel.py - the regression suite whose passing defines PC-EXACT-REPLAY (B5) and which EXECUTE must not alter. The certificate sequence, inputs, expected statuses/reasons and exact counter vector are embedded verbatim in the frozen spec/prereg, leaving the EXECUTE harness zero free design degrees; the harness sha256 must still be recorded in result.json/provenance.json because freeze.json cannot hash EXECUTE-created code (prior-cycle limitation). If any bound reference file mutates post-freeze, the EXECUTE identity verification catches it (MEASUREMENT_INVALID branch).",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+        "tests/test_kernel.py"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+    "tests/test_kernel.py"
+  ]
 }
