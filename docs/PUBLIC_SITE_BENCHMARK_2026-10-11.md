@@ -19,14 +19,24 @@ PYTHONPATH=src python scripts/run_public_benchmark.py --mode probe --output /tmp
 
 `plan` produces 24 paired task slots, including `DIRECT_API` as the strongest
 simple comparator. Adding `--include-stagehand` produces 28 slots. These are
-**plans, not results**. `probe` fetches exactly four public pages and official
+**plans, not results**. `probe` fetches exactly eight public pages (TRAIN + HOLDOUT) and official
 public read-only APIs without an LLM. Any disagreement results in `all_match:
 false`; do not start a paid benchmark on an unverified site/task.
 
-Github Actions `public-sites-probe.yml` actually executes `probe` on PRs
-and fails if any benchmark page cannot be verified. Network errors, public
-rate limits or site redesigns are **invalid measurement substrate**, not
-evidence for or against Spider.
+GitHub Actions `public-sites-probe.yml` actually executes `probe` on PRs.
+Its report includes a per-family `family_ready` result and an explicit
+`training_and_holdout_probed` flag. **Github is currently the verified
+family. PyPI is quarantined because some public pages deliver a ~3 KB
+anti-bot/verification interstitial to CI instead of package content.**
+The workflow reports this quarantine, but does not block the functioning
+GitHub family. Model-backed trials **require** a fresh (under 24 hours)
+readiness receipt with a PASS for that family. No paid PyPI calls should
+run until actual public HTML can be read without circumventing access
+controls. Network errors, protection challenges and site redesigns are
+**invalid substrate**, not evidence against Spider.
+
+`--mode plan` may still include quarantined families, but **plan does
+not execute**, and the paid runner refuses them.
 
 ## Explicitly authorized provider calls only
 
@@ -36,6 +46,7 @@ Run a single real-agent task (one paid model run maximum per invocation):
 export GOOGLE_API_KEY="<your-own-key>"
 PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode trial --family pypi --id httpx --arm COLD \
+  --readiness-file /tmp/spider-public-probe.json \
   --allow-model-charges --output /tmp/spider-public-trials.jsonl
 ```
 
@@ -45,13 +56,13 @@ independent training records:
 ```bash
 PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode learn --family pypi --memory-path /tmp/spider-public-memory.jsonl \
-  --allow-model-charges --output /tmp/spider-public-train-pypi.json
+  --readiness-file /tmp/spider-public-probe.json --allow-model-charges --output /tmp/spider-public-train-pypi.json
 PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode learn --family github --memory-path /tmp/spider-public-memory.jsonl \
-  --allow-model-charges --output /tmp/spider-public-train-github.json
+  --readiness-file /tmp/spider-public-probe.json --allow-model-charges --output /tmp/spider-public-train-github.json
 PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode trial --family pypi --id urllib3 --arm SPIDER \
-  --memory-path /tmp/spider-public-memory.jsonl --allow-model-charges \
+  --memory-path /tmp/spider-public-memory.jsonl --readiness-file /tmp/spider-public-probe.json --allow-model-charges \
   --output /tmp/spider-public-trials.jsonl
 ```
 
