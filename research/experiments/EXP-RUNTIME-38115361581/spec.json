@@ -1,50 +1,94 @@
 {
   "experiment_id": "EXP-RUNTIME-38115361581",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "question": "Can a non-degenerate asymmetric-discovery task bank be certified arithmetically BEFORE freeze - with cold re-derivation and a retrieval-shaped comparator demonstrably below the success ceiling at high residual novelty (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED success_rate < 0.95 at novelty >= 0.5 on at least one task family, matched correctness >= 0.80 for all arms), a real treatment/comparator behavioural distinction, honest per-condition counters (http_requests + retrieval_calls + verification_calls + repair_attempts) and a preregistered contamination/dynamic-range certificate - and be delivered as a reusable substrate that unblocks the flagship inheritance benchmark (B2)?",
+  "hypothesis": "There exists a credential-free asymmetric-discovery task bank (multi-task sessions where one-time session/resource/schema discovery is amortized or cached across tasks, i.e. NOT the mandatory-discovery deterministic REST class) such that B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED show success_rate < 0.95 at novelty>=0.5 on >=1 task family, with matched correctness>=0.80 for all arms. If no such bank exists among tested credential-free substrates, the certificate is unsatisfiable and the correct outcome is a bounded substrate-class negative.",
+  "falsifier": "Either the dynamic-range certificate cannot be satisfied (both cold re-derive and retrieval-shaped remain >=0.95 at novelty>=0.5 on all tested task families, or matched correctness falls below 0.80 for any arm, or a required control/treatment distinction fails) OR contamination bounds cannot be satisfied (index leakage, session reuse across arms, or identifier leakage detected by contamination audit).",
+  "baselines": [
+    {
+      "id": "B-COLD-RE-DERIVE",
+      "description": "Cold start: no persistent parameterization/procedure cache carried over from prior solutions of same task family; re-derives from primitives. Asymmetric-discovery sessions may amortize session/resource/schema discovery across tasks within the session, but not across independent cold trials.",
+      "type": "strong_baseline",
+      "success_criterion": "success_rate < 0.95 at novelty>=0.5 on >=1 task family; matched correctness>=0.80"
+    },
+    {
+      "id": "B-RETRIEVAL-SHAPED",
+      "description": "Retrieval-shaped comparator: has access to relevant artifacts but without the treatment's parameterization/distillation path; designed to be plausibly strong without reaching ceiling on high-novelty subset.",
+      "type": "strong_baseline",
+      "success_criterion": "success_rate < 0.95 at novelty>=0.5 on >=1 task family; matched correctness>=0.80"
+    }
+  ],
+  "positive_control": "At least one synthetic sanity task family where treatment is expected to help (and which does not trivially produce ceiling across all arms) to confirm instrument sensitivity. If the chosen bank cannot produce any sub-ceiling case, this confirms the 'no dynamic range' class.",
+  "null_control": "Contamination controls: cross-arm identity isolation, no index leakage between cold and retrieval arms, session cache scoping prevents cross-trial carryover, identifier canonicalization prevents trivial matches. A contamination detection must be explicit.",
+  "measurement_validity": [
+    {
+      "aspect": "counters_honest",
+      "check": "Per-condition counters (http_requests, retrieval_calls, verification_calls, repair_attempts) are recorded independently and sum logically; no counter double-counting or inferred zeros without evidence."
+    },
+    {
+      "aspect": "matched_correctness",
+      "check": "All arms satisfy matched correctness >= 0.80 on the evaluation set; correctness definition is shared and arm-blind."
+    },
+    {
+      "aspect": "novelty_stratification",
+      "check": "Tasks stratified by novelty score (0-1); certificate requires success_rate < 0.95 at novelty>=0.5 on >=1 task family for both B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED."
+    },
+    {
+      "aspect": "contamination_bound",
+      "check": "Explicit contamination audit passes: no observed cross-arm leakage, cache/session scope verified, task ids/fixtures hashed and uncorrelated across arms."
+    },
+    {
+      "aspect": "exclude_mandatory_discovery_rest",
+      "check": "The tested substrate is NOT the mandatory-discovery deterministic REST class (multi-task sessions where one-time session/resource/schema discovery is amortized or cached across tasks). A fourth re-run of the mandatory-discovery deterministic REST certificate is explicitly excluded."
+    }
+  ],
+  "decision_rule": "CERTIFY (PASS dynamic-range certificate for B2 unblocking): (1) for >=1 task family with novelty>=0.5, B-COLD-RE-DERIVE.success_rate < 0.95 AND B-RETRIEVAL-SHAPED.success_rate < 0.95; (2) matched correctness >= 0.80 for all arms; (3) treatment vs comparators show real behavioural distinction (not identical traces/counters) on >=1 certified family; (4) honest per-condition counters recorded; (5) contamination audit passes; (6) tested substrate != mandatory-discovery deterministic REST class. BOUNDED_NEGATIVE: cannot satisfy all conditions on any credential-free substrate tested within time/budget -> do not freeze a degenerate bank; record substrate-class negative and explain why. MEASUREMENT_INVALID: infrastructure/substrate failure prevents certificate arithmetic. INCONCLUSIVE: otherwise.",
+  "product_consequence_positive": "B2 (flagship inheritance benchmark) can be preregistered with certified dynamic range; unblocks C-LLM-INHERIT/C-PRODUCT-ECON gate with non-degenerate baselines.",
+  "product_consequence_negative": "Cannot safely run B2 against strong baselines yet; do not proceed to full benchmark; must find/construct a different non-degenerate credential-free substrate or PARK Runtime B2 work for now. This is a bounded substrate-class negative, not a general C-MEAS-VALID downgrade.",
+  "estimated_cost": "low (design-stage arithmetic + cheap satisfiability probes on candidate credential-free substrates; no expensive full benchmark runs)",
+  "expected_information_gain": "high (binary/blocking gate for flagship; prevents wasting benchmark budget on ceiling-degenerate comparisons)",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "NOT_APPLICABLE",
+      "reason": "This is a design-stage certificate (arithmetic satisfiability) before any freeze that would commit to EXECUTE measurements; reachability checked via probes, not execution of full frozen measurement set.",
       "evidence_refs": []
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "All required measurement structures (task stratification by novelty, per-condition counters, correctness definition, contamination audit checklist) are specifiable without outcome measurements.",
       "evidence_refs": []
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED are explicitly defined with success criteria; matched correctness constraint makes them identifiable and prevents collapsing to trivial comparators.",
       "evidence_refs": []
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Positive/null/contamination controls specified; sensitivity tested by requiring < 0.95 at novelty>=0.5 and >=0.80 matched correctness - arithmetic constraints that fail if insensitive/degenerate.",
       "evidence_refs": []
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "NOT_APPLICABLE",
+      "reason": "No SPIDER treatment arm is being 'executed' in the sense of measuring treatment effect at EXECUTE stage of this certificate - this experiment certifies the bank (substrate) can support discrimination. If a treatment becomes involved later (B2), it will have its own liveness check.",
       "evidence_refs": []
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Mutable local artifacts that could affect interpretation are the candidate task bank definitions, stratification code, counter instrumentation, and contamination checks. These are bound below; no other unbound mutable dependencies identified.",
       "evidence_refs": []
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/runtime/task_banks/asymmetric_discovery/__init__.py",
+    "research/runtime/task_banks/asymmetric_discovery/schema.py",
+    "research/runtime/task_banks/asymmetric_discovery/families.py",
+    "research/runtime/task_banks/counters.py",
+    "research/runtime/task_banks/novelty.py",
+    "research/runtime/task_banks/contamination.py",
+    "research/runtime/task_banks/dynamic_range_cert.py"
+  ]
 }
