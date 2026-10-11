@@ -1,10 +1,14 @@
 {
   "experiment_id": "EXP-FRONTIER-38085197666",
   "lane": "frontier",
-  "claim_ids": ["C-CROSSSITE", "C-RESIDUAL-NOVELTY", "C-WEB-DYNAMICS"],
+  "claim_ids": [
+    "C-CROSSSITE",
+    "C-RESIDUAL-NOVELTY",
+    "C-WEB-DYNAMICS"
+  ],
   "question": "On the credential-free GET-only stdlib-HTTP substrate, over a frozen multi-host pool confirmed during DESIGN by a pre-freeze attainability certificate to contain DEEP (hop>=3) state-carrying items on at least two distinct hosts/engines (>=10 total, >=3 per engine) via the frozen same-host static-<a> BFS (depth<=6, budget 250), what fraction of those DEEP items is reachable in <=K=3 fresh-agent GETs (one discovery GET + item-page GET + one spare) using ANY of the five frozen discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) - with the preregistered materiality threshold 0.50 on >=2 engines deciding whether shortest-path hop is NOT a fundamental acquisition-cost barrier (persistent path caching is not the optimization target; effort moves to discovery and substrate expansion) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface?",
   "hypothesis": "Site-native discovery channels (robots.txt/sitemap directives, sitemap.xml, on-site search, RSS/Atom feeds, JSON-LD structured data) enable a fresh agent to reach DEEP (hop>=3) state items in O(1) GETs (K<=3) on at least two distinct engines, demonstrating that shortest-path hop is not a fundamental acquisition-cost barrier. If true, persistent path caching is not the primary optimization target and effort should shift to discovery-channel procedure caching and substrate expansion. If false, fresh deep-instance acquisition remains path-bound and persistence retains a measurable, depth-dependent amortization surface.",
-  "falsifier": "Two-sided, arithmetically checkable before freeze, satisfiable in BOTH directions. Let D_e be the set of confirmed DEEP items on engine e, and R_e ⊆ D_e the subset reachable in <=K=3 GETs via ANY frozen discovery channel. Primary metric: discovery_reachable_fraction_e = |R_e| / |D_e| for each engine e with |D_e| >= 3. Decision rule: if discovery_reachable_fraction_e >= 0.50 for at least two distinct engines e, then verdict = FLAT (hop is NOT a fundamental barrier); else verdict = GROWING (fresh acquisition remains path-bound). Both branches are arithmetically reachable because the pre-freeze attainability certificate guarantees |D_e| >= 3 for >=2 engines (denominator > 0) and the positive control guarantees at least one reachable item exists (numerator can be > 0), while the negative/null controls guarantee the numerator can be < denominator.",
+  "falsifier": "Two-sided, arithmetically checkable before freeze, satisfiable in BOTH directions. Let D_e be the set of confirmed DEEP items on engine e, and R_e \u2286 D_e the subset reachable in <=K=3 GETs via ANY frozen discovery channel. Primary metric: discovery_reachable_fraction_e = |R_e| / |D_e| for each engine e with |D_e| >= 3. Decision rule: if discovery_reachable_fraction_e >= 0.50 for at least two distinct engines e, then verdict = FLAT (hop is NOT a fundamental barrier); else verdict = GROWING (fresh acquisition remains path-bound). Both branches are arithmetically reachable because the pre-freeze attainability certificate guarantees |D_e| >= 3 for >=2 engines (denominator > 0) and the positive control guarantees at least one reachable item exists (numerator can be > 0), while the negative/null controls guarantee the numerator can be < denominator.",
   "baselines": [
     {
       "id": "COLD_BASELINE",
@@ -22,13 +26,21 @@
   "positive_control": {
     "id": "POS_DISCOVERY_REACHABLE",
     "description": "A DEEP item confirmed during DESIGN to be reachable in <=K=3 GETs via at least one frozen discovery channel on at least one engine. Verified by live probe during pre-freeze attainability certificate construction. Must PASS (reachable) for freeze to proceed.",
-    "expected": {"reachable_in_k": true, "k_used": 3, "channels_used": ["SITEMAP_XML"]},
+    "expected": {
+      "reachable_in_k": true,
+      "k_used": 3,
+      "channels_used": [
+        "SITEMAP_XML"
+      ]
+    },
     "pass_criterion": "reachable_in_k == true AND k_used <= 3"
   },
   "null_control": {
     "id": "NEG_DISCOVERY_UNREACHABLE",
     "description": "A synthetic item URL known not to exist on any target host (e.g., /__spider_nonexistent_38085197666__.html). Discovery channels must NOT report it as reachable. Must PASS (not reachable) for freeze to proceed.",
-    "expected": {"reachable_in_k": false},
+    "expected": {
+      "reachable_in_k": false
+    },
     "pass_criterion": "reachable_in_k == false"
   },
   "measurement_validity": {
@@ -81,7 +93,7 @@
   "decision_rule": {
     "type": "two_sided_materiality_threshold",
     "primary_metric": "discovery_reachable_fraction_per_engine",
-    "threshold": 0.50,
+    "threshold": 0.5,
     "engine_requirement": ">=2 distinct engines with |D_e| >= 3",
     "verdict_map": {
       "FLAT": "discovery_reachable_fraction_e >= 0.50 for >=2 engines",
@@ -107,9 +119,9 @@
     "measurement_prerequisites": "PASS",
     "measurement_prerequisites_justification": "All prerequisites are executable during DESIGN: (1) candidate seed curation, (2) frozen same-host BFS hop-confirmation crawl (stdlib HTTP, budget 250, depth 6), (3) discovery channel probing per engine, (4) positive/negative/null control verification, (5) prereg section 18 design decisions resolution. No unavailable substrate, model, dataset, or tool is required. The substrate (credential-free GET-only stdlib HTTP) was environment-verified viable in EXP-FRONTIER-37950626378 and EXP-FRONTIER-37984242167.",
     "baseline_identifiability": "PASS",
-    "baseline_identifiability_justification": "Three distinct baselines with non-overlapping cost profiles: COLD_BASELINE (0% DEEP reachability, 1 GET if URL known), SHORTEST_PATH_BASELINE (100% DEEP reachability at cost hop+1 GETs), RANDOM_DISCOVERY_BASELINE (near-0% DEEP reachability). The treatment (DISCOVERY_TREATMENT) uses a fundamentally different acquisition mechanism (site-native discovery channels) with a fixed K=3 GET budget independent of hop. The cost signatures are disjoint: COLD=0/1, SHORTEST_PATH=hop+1, DISCOVERY<=3, RANDOM≈0.",
+    "baseline_identifiability_justification": "Three distinct baselines with non-overlapping cost profiles: COLD_BASELINE (0% DEEP reachability, 1 GET if URL known), SHORTEST_PATH_BASELINE (100% DEEP reachability at cost hop+1 GETs), RANDOM_DISCOVERY_BASELINE (near-0% DEEP reachability). The treatment (DISCOVERY_TREATMENT) uses a fundamentally different acquisition mechanism (site-native discovery channels) with a fixed K=3 GET budget independent of hop. The cost signatures are disjoint: COLD=0/1, SHORTEST_PATH=hop+1, DISCOVERY<=3, RANDOM\u22480.",
     "control_sensitivity": "PASS",
-    "control_sensitivity_justification": "Four live controls with independent pass/fail criteria verified during DESIGN: (1) POS_DISCOVERY_REACHABLE must be reachable in <=3 GETs via discovery (fires if discovery works), (2) NEG_DISCOVERY_UNREACHABLE must NOT be reachable (fires if false positives exist), (3) CALIBRATION_NEAR: NEAR (hop<=1) items should have high discovery reachability (fires if discovery systematically fails), (4) CALIBRATION_DEEP_LINK: DEEP items reachable via link-following BFS at cost hop+1 (fires if hop confirmation is wrong). All controls are executable during DESIGN and their pass/fail is recorded in the pre-freeze certificate.",
+    "control_sensitivity_justification": "Five controls with independent pass/fail criteria verified during DESIGN: (1) POS_DISCOVERY_REACHABLE must be reachable in <=3 GETs via discovery (fires if discovery works), (2) NEG_DISCOVERY_UNREACHABLE must NOT be reachable (fires if false positives exist), (3) CALIBRATION_NEAR: NEAR (hop<=1) items should have high discovery reachability (fires if discovery systematically fails), (4) CALIBRATION_DEEP_LINK: DEEP items reachable via link-following BFS at cost hop+1 (fires if hop confirmation is wrong), (5) RANDOM_DISCOVERY_BASELINE: permuted channel assignment should yield near-zero reachability. All controls are executable during DESIGN and their pass/fail is recorded in the pre-freeze certificate.",
     "treatment_liveness": "PASS",
     "treatment_liveness_justification": "The treatment (site-native discovery channels) is a pure stdlib-HTTP procedure: fetch robots.txt/sitemap.xml/search/RSS/JSON-LD, parse for URLs, fetch candidate item pages. No browser, model, credential, or write verb required. The positive control verified during DESIGN demonstrates the treatment CAN produce a reachable result. The treatment code path is distinct from baselines and will be exercised in EXECUTE. The treatment is not structurally incapable of becoming EXECUTABLE.",
     "freeze_artifacts_bound": "PASS",

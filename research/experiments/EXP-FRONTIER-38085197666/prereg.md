@@ -164,7 +164,7 @@ For each DEEP item, channels are attempted in order: ROBOTS_SITEMAP → SITEMAP_
 - **Purpose**: Fires if hop confirmation is wrong or BFS policy changed.
 - **Required for Freeze**: YES (recorded in certificate)
 
-### 8.4 RANDOM_DISCOVERY_BASELINE (Null Control)
+### 8.5 RANDOM_DISCOVERY_BASELINE (Null Control)
 - **Definition**: Discovery channel assignment randomly permuted across DEEP items (same channels, same K budget, wrong item-channel pairing).
 - **Expected**: Near-zero reachability.
 - **Purpose**: Measures chance alignment; must be << treatment effect.
