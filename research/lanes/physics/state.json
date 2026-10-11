@@ -1,17 +1,17 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-38074818597",
-  "last_experiment_id": "EXP-PHYSICS-37992957068",
-  "last_verdict": "INCONCLUSIVE_ADOPTED_PRODUCER_AND_AUDIT_DISPOSITION_UPHELD_FROZEN_BRANCH_INCONCLUSIVE_PRED_AMBIG_SKILL_LL_0_00514_CI_SPANS_ZERO_SCHED_ECON_PASS_IS_MECHANICAL_ARTIFACT_OF_ARM_DEFINITIONS_ON_ENDPOINT_CONSTANT_BARRIERS_ONSET_N_0_RECOVERY_AND_NOID_ABLATION_NEGATIVE_C_WEB_DYNAMICS_UNCHANGED_HYPOTHESIS_BARRIER_SUBTHREAD_BOUNDED_ON_THIS_POOL_WINDOW_NO_PROMOTION_NO_CONTINUE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-38074818597",
+  "last_verdict": "S1_STATIONARY_ADOPTED_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_TRUE_REQUIRED_FIXES_EMPTY_INTRINSIC_PERSISTENT_TRUE_CLASS_PERSISTENCE_1_0_BOTH_INTRINSIC_CLASSES_DENYLIST_INTRINSIC_VALID_TRUE_FALSE_ACCEPT_0_FALSE_REJECT_0_DENYLIST_HORIZON_1800S_RIGHT_CENSORED_STATIONARITY_SKILL_0_3196_NATS_PERM_P_9_999E_05_CI95_LO_0_142_GT_0_B_EXCHANGE_REJECTED_NC_FALSE_POSITIVE_0_0267_PC_POWER_0_8233_GE_0_80_LIVE_ORACLES_PASS_CLASS_CONDITIONAL_TRANSIENCE_TRUE_RATE_RECOVERY_HALF_LIFE_2S_C_WEB_DYNAMICS_RETAINED_HYPOTHESIS_AT_FROZEN_CEILING_NO_EXPERIMENTAL_NO_PRODUCT_CORE_NO_PROMOTION_NO_CONTINUE_DOC_DEFECTS_VF1_VF4_AND_SINGLE_VANTAGE_VF5_RECORDED_NOT_INVALIDATING",
   "continue_immediately": false,
-  "next_question": "On the frozen credential-free HTTP GET pool (extended only if a pre-freeze attainability certificate is satisfied), is an endpoint's intrinsic ACCESS-BARRIER state STATIONARY on the timescales relevant to re-observation scheduling - i.e., across separated collection windows and source vantage points, what is the empirical persistence/half-life of each intrinsic class (persistent BLOCK_403_CHALLENGE, persistent TRANSPORT_ERROR, transient RATE_LIMIT_429, CLEAN), and does a static endpoint-level denylist built from window T retain predictive validity at T+delta (false-accept = a denylisted endpoint recovers; false-reject = a previously CLEAN endpoint newly blocks) so that the validity horizon and re-probe interval of the product's dead-end policy are estimable rather than assumed? Pre-register a two-sided falsifier (stationary vs non-stationary), a memory/constant null calibrated before freeze with demonstrated power, and a pre-freeze attainability certificate proving both persistently-blocked and recovering/newly-blocking endpoints are reachable across the window pair. This changes the object of study from next-request classification to endpoint state persistence/timescale and must not duplicate C-FRESHNESS (staleness of inherited content) or Runtime drift controls.",
+  "next_question": "Does the measured endpoint intrinsic access-barrier persistence and its anchor-built intrinsic-denylist validity horizon - right-censored at 1800 s on one egress and one ~2041 s session - transfer across independent source vantages, or is the S1_STATIONARY result an artifact of this single network vantage and window? Concretely: over the same window ladder (nominal 0/300/900/1800 s) at a SECOND independent egress (distinct public IP / ASN / geography) using the same frozen 57-endpoint pool and frozen intrinsic classifier, (Q1) do the same endpoints retain their intrinsic class (BLOCK_403_CHALLENGE / TRANSPORT_ERROR) with per-class CLASS_PERSISTENCE >= 0.80, (Q2) does an anchor-built intrinsic denylist remain valid through delta_ref (FALSE_ACCEPT <= 0.20 and FALSE_REJECT <= 0.20, with the B_EXCHANGE null rejected and a positive endpoint-clustered CI lower bound), and (Q3) do the per-endpoint intrinsic classes agree across vantages so that ONE shared denylist is licensed rather than a vantage-specific schedule? This is materially orthogonal to the answered window/timescale axis because it varies the source-vantage factor the director mandate named but the frozen design fixed, and it must NOT repeat the single-vantage 1800 s ladder. If no second independent egress substrate can be provisioned, record the exact operational blocker instead of substituting another single-vantage run.",
   "promotion_ready": false,
-  "consecutive_failures": 10,
-  "updated_at": "2026-10-11T06:11:13.933386+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "3155fac772e6a64e2a3b13847cf320d6acebb1259ccb9b1c85c51d884513a6d4",
-  "same_failure_count": 3,
-  "last_failure_fingerprint": "2ec9912af1c82b8c55d55e90",
-  "last_failure_control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-11T07:11:09.755768+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "10782ca8f1b6ec777fd1219d88595ae97540a19a3d73ab92606179856c184b39",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
