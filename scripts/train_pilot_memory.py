@@ -14,7 +14,7 @@ import json
 import time
 import urllib.request
 from pathlib import Path
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 from spider.pilot_learning import compile_browser_traces, parse_verified_detail
 from spider.pilot_portal import TRAIN_IDS, start_portal
@@ -37,7 +37,7 @@ def observed_agent_example(base: str, family: str, identifier: str,
         parsed = urlsplit(url)
         if (parsed.scheme == "http" and parsed.netloc == expected_origin
                 and parsed.path == f"/portal/{family}/view"
-                and not parsed.fragment and parse_qs(parsed.query) == {"id": [identifier]}):
+                and not parsed.fragment and parse_qsl(parsed.query, keep_blank_values=True) == [("id", identifier)]):
             selected = url
             break
     if selected is None:
