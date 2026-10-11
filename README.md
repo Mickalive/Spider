@@ -19,6 +19,18 @@ A results-driven **product delivery loop** and the independent **scientific rese
 
 See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md). Prototype code on the strategy branch is **not promoted**, and the benchmark scorer is descriptive only; no externally validated product saving has yet been measured.
 
+## Executable first product pilot (experimental branch)
+
+The opt-in Browser Use integration, five-arm trial planner, read-only Spider bridge,
+independent Playwright compiled-workflow comparator and two-family HTTP fixture are
+documented in [the product pilot runbook](docs/PRODUCT_PILOT_RUNBOOK.md).
+
+Offline tests and a **real Chromium smoke test** do not use an LLM or paid model.
+Live LLM evaluations require explicit provider credentials and `--allow-model-charges`.
+Pilot traces deliberately leave full cost unknown and cannot be used to claim savings.
+Product code on this branch remains **unpromoted** until audited through the
+existing independent Product promotion gate.
+
 ## Active lanes
 
 Six independent lanes run without synchronizing on one another:
