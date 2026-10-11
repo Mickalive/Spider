@@ -12,7 +12,6 @@ import asyncio
 import json
 import os
 import re
-import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -99,7 +98,6 @@ def run_trial(arm: str, family: str, identifier: str, provider: str,
     if expected is None:
         raise ValueError("unknown local fixture reference")
     server, thread, base = start_portal()
-    registry = MechanismRegistry(Path(__file__).resolve().parent / ".spider-pilot-temporary-registry.jsonl")
     # Never leave fixture-derived state in the source tree or another user's run.
     import tempfile
     try:
@@ -147,7 +145,7 @@ def run_trial(arm: str, family: str, identifier: str, provider: str,
                 raise ValueError("unsupported arm")
 
             elapsed = time.monotonic() - start
-            answer = value.get("answer") if path == "agent" else (value.get("answer") if isinstance(value, dict) else None)
+            answer = value.get("answer") if isinstance(value, dict) else None
             usage = value if path == "agent" and isinstance(value, dict) else {}
             return {
                 "task_id": f"{family}:{identifier}", "replicate": 0,
