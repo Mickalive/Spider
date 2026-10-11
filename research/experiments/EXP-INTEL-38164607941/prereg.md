@@ -4,6 +4,7 @@ Lane: `intel` — design_contract_version 2
 Status: **DESIGN — NOT YET FROZEN**
 
 Parent experiment: EXP-INTEL-37982024058 (FALSIFIES; audit PASS).
+Request reference: `research/experiments/EXP-INTEL-38164607941/request.json` (file sha256 `0b182189707df4eb0b0e695bd96818dbb520d96b8f0f73d2c6a64753e4b96719`; canonical `request_hash` `6e12ac9fa91dbf8b541ae9ffb3a9d0ba964716ebddfb919b3dcc57a30cdd0534`).
 Parent handoff: `research/experiments/EXP-INTEL-37982024058/handoff.json`, sha256 `b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55`.
 Director mandate: `request.json#director_mandate` (allocation CONTINUE, claim `C-LLM-INHERIT`, `parent_handoff_disposition: SUPERSEDE`, `cognitive_reset: true`).
 Resumed pre-freeze sibling: EXP-INTEL-38123995594 (never froze; its only failure was the shared design-review model outage, fingerprint `3b9ff5e4e9e73f23e368efb4`).
@@ -147,7 +148,7 @@ Whether `C-LLM-INHERIT` advances from HYPOTHESIS toward EXPERIMENTAL is a DIRECT
 Design-time probes performed (allowed: cheap, non-outcome-bearing) and their results:
 
 1. **Stack.** `python 3.12.15`, `pip 26.2.1`, `cmake 3.31.6`, `gcc/g++ 13.3.0` present; `/usr/bin/google-chrome` present; `nproc=4`; ~15 GB total RAM. `llama-cpp-python` and `playwright` are NOT preinstalled ⇒ EXECUTE installs/builds them. `llama-cpp-python==0.2.90` has a PyPI sdist and no cp312 wheel, so the build path is required and feasible (the parent built it).
-2. **Grammar.** `raw/harness_config.json#gbnf_grammar` parsed rule-by-rule; all 7 rules (`root`, `ws`, `action`, `field`, `string`, `strchars`, `strchar`) defined and referenced; the parent constructed and executed it.
+2. **Grammar.** `raw/harness_config.json#gbnf_grammar` parsed rule-by-rule; all 7 rules (`root`, `ws`, `action`, `field`, `string`, `strchars`, `strchar`) defined and referenced; string sha256 `16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65` (re-verified by EXECUTE after per-cell overlay materialization); the parent constructed and executed it.
 3. **URLs.** Via the confirmed `huggingface.co` resolve-redirect route: 3B 200, 7B split shard1 200, shard2 200, 7B single-file 404 (parent-documented). Digests pinned from `raw/gguf_sha256.txt`: 3B `626b4a66…` (2104932768 bytes); 7B shard1 `dfce12e3…` (3993201344 bytes), shard2 `539cf93f…` (689872288 bytes).
 4. **Chance baseline.** Analytic and simulation results in section 6 (non-outcome-bearing).
 5. **Runner contract.** Read the frozen parent runner: `mode_probe_candidate` reads `<outdir>/raw/harness_config.json` and uses `cfg["prompts"]["system"]`, `cfg["positive_control"]`, `cfg["clearing_threshold"]`, `cfg["task"]`; it navigates to the served page (line 379). `mode_null_random` starts the page server but never navigates to it — the documented control defect this design repairs (section 6, Appendix A.2).
