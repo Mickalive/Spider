@@ -45,7 +45,7 @@ Run a single real-agent task (one paid model run maximum per invocation):
 ```bash
 export GOOGLE_API_KEY="<your-own-key>"
 PYTHONPATH=src python scripts/run_public_benchmark.py \
-  --mode trial --family pypi --id httpx --arm COLD \
+  --mode trial --family github --id astral-sh/ruff --arm COLD \
   --readiness-file /tmp/spider-public-probe.json \
   --allow-model-charges --output /tmp/spider-public-trials.jsonl
 ```
@@ -55,13 +55,10 @@ independent training records:
 
 ```bash
 PYTHONPATH=src python scripts/run_public_benchmark.py \
-  --mode learn --family pypi --memory-path /tmp/spider-public-memory.jsonl \
-  --readiness-file /tmp/spider-public-probe.json --allow-model-charges --output /tmp/spider-public-train-pypi.json
-PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode learn --family github --memory-path /tmp/spider-public-memory.jsonl \
   --readiness-file /tmp/spider-public-probe.json --allow-model-charges --output /tmp/spider-public-train-github.json
 PYTHONPATH=src python scripts/run_public_benchmark.py \
-  --mode trial --family pypi --id urllib3 --arm SPIDER \
+  --mode trial --family github --id pydantic/pydantic --arm SPIDER \
   --memory-path /tmp/spider-public-memory.jsonl --readiness-file /tmp/spider-public-probe.json --allow-model-charges \
   --output /tmp/spider-public-trials.jsonl
 ```
@@ -85,8 +82,9 @@ server-side cache. We implement Stagehand's real `browserbase.launch` and
 python -m pip install stagehand pydantic
 export BROWSERBASE_API_KEY="<your-own-key>"
 PYTHONPATH=src python scripts/run_public_benchmark.py \
-  --mode trial --family pypi --id httpx \
+  --mode trial --family github --id astral-sh/ruff \
   --arm STAGEHAND_V4_SERVER_CACHE \
+  --readiness-file /tmp/spider-public-probe.json \
   --allow-model-charges --allow-browserbase-charges \
   --output /tmp/spider-public-trials.jsonl
 ```
