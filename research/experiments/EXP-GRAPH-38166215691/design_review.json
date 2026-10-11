@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38166215691",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both primary branches are arithmetically reachable and the accept region cannot be emptied by the abstention targets. The DESIGN probe (stdlib tokenisation only) shows: primary set size = 93 >= 80; B-LEXICAL-OVERLAP accuracy = 49/93 = 0.5269 (headroom well below 0.99 ceiling, well above 0.20 chance floor); all 5 resource families represented (users 19, posts 17, comments 19, albums 19, photos 19) so family-blocked bootstrap with B=10000 is non-degenerate; every surviving goal has max Jaccard < 0.60 against every prior authored string. A-EMBED-COSINE is unmeasured in DESIGN. V9-NON-TAUTOLOGY requires decision vectors to differ on >= 1 goal and lexical accuracy < 0.99, preventing silent absorption. D-ABSTENTION is explicitly decoupled (non-gating) with its own reachable AB-NOT-MET branch. No branch makes another unreachable. The claim-bearing metric is not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#10-decision-rule",
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#decision_rule.reachability",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#15-design-probe-record"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites exist or are installable from reachable indexes. (a) The 8 bound code modules (4 harness + 4 spider) exist and are tracked in freeze_artifacts. (b) The embedding stack is pinned to the environment recorded in EXP-GRAPH-36287167610/provenance.json (sentence-transformers 3.0.1, torch 2.4.0, numpy 1.26.4, scikit-learn 1.5.1, model all-MiniLM-L6-v2 revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf). DESIGN executed the exact bootstrap (pip install numpy==1.26.4 scipy==1.13.1 scikit-learn==1.5.1; pip install --index-url https://download.pytorch.org/whl/cpu torch==2.4.0; pip install sentence-transformers==3.0.1) and confirmed all imports and the treatment-liveness smoke probe. (c) HTTP 200 confirmed from huggingface.co (model config) and pypi.org. (d) The goal bank is frozen verbatim in prereg.md (sha256 fb4d3246990731c95f4cf4cfa5870ac7f02da8832eed324580be5f75b1456c6e). (e) If any prerequisite is unavailable at EXECUTE, the runner writes status=BLOCKED (operational), never FALSIFIES. No prerequisite is marked NOT_APPLICABLE without justification.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#6-environment-and-prerequisites",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#15-design-probe-record"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (A-EMBED-COSINE: dense 384-d cosine over normalized sentence embeddings) and comparator (B-LEXICAL-OVERLAP: whitespace-token set-Jaccard) are genuinely distinct functions with different inductive biases. The frozen bank is not lexically trivial: DESIGN probe shows B-LEXICAL-OVERLAP accuracy = 0.5269 on the 93-goal primary set, with every surviving goal having max Jaccard < 0.60 against every prior authored string (including the 20 intents). This provides headroom below the 0.99 V9 ceiling and headroom above the 0.20 chance floor. V9-NON-TAUTOLOGY operationally requires the two decision vectors to disagree on >= 1 primary goal AND lexical accuracy < 0.99. V7-TREATMENT-LIVENESS requires the treatment to select >= 2 distinct valid mechanism IDs. B-INTERNAL-ID-ORACLE provides a 1.0 ceiling by construction (fallible on label defects via V6). B-RANDOM-ROLE provides a ~0.20-0.35 floor (V8). No arm is a reparameterization of another. Arm accuracies are outcomes, not fixed in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#baselines",
+        "research/harness/candidate_resolver.py::LexicalOverlapResolver",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#15-design-probe-record"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, non-tautological failure mode under the same implementation that scores the experiment. PC-LIVENESS-AND-INTEGRITY: sub-check (i) fails on duplicate/ambiguous fixture; (ii) fails on broken kernel registry/loader/confidence threshold; (iii) fails on wrong/mismatched model or registry order (disclosed as near-tautological for deterministic encoder; substantive fallibility in (i)/(ii)). NC-SHUFFLED-LABEL fails if embedding selection tracks the deranged labels (leaked fixture structure). NC-RANDOM-SCORE fails if the shared argmax+credit pipeline is broken (RFX-02/RFX-03 denominator defect class). B-INTERNAL-ID-ORACLE fails on label/fixture defects (V6). V8-FLOOR-SANITY fails if random floor exceeds 0.35. V9-NON-TAUTOLOGY fails if comparator and treatment agree everywhere or comparator saturates. V10-NC-SHUFFLE fails if either null exceeds its bound. V3-CONTAM-SCREEN is non-vacuous: DESIGN probe flagged 9 goals at >= 0.60, including 2 verbatim reproductions of prior PARAPHRASES entries (app_001, app_081). All controls are re-verified at EXECUTE before the primary read.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#11-controls",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#12-measurement-gates-v1-v12",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#15-design-probe-record"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "A-EMBED-COSINE (EmbeddingArgmaxResolver) is a pre-existing resolver that structurally never abstains (always returns finite argmax over 20 normalized intent embeddings). DESIGN ran a non-outcome-bearing liveness smoke probe: the frozen EmbeddingArgmaxResolver over create_fixture() (20 mechanisms) with SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2') resolved all 20 verbatim mechanism intents to a valid fixture mechanism ID with resolution_status=EXECUTABLE and finite confidence, selecting 20 distinct mechanisms. No bank goal was scored and no claim prediction was made. Liveness is further enforced at EXECUTE by V7-TREATMENT-LIVENESS (>= 2 distinct valid mechanism selections on the primary set). If the model cannot load, the runner writes status=BLOCKED (operational), not a silently dead measurement. The treatment is demonstrably live end-to-end before expensive arms run.",
+      "evidence_refs": [
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#15-design-probe-record",
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility.treatment_liveness"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed in spec.freeze_artifacts and will be hashed into freeze.json.artifact_hashes: the 4 research/harness modules (candidate_resolver.py, goal_generator.py, http_server.py, experiment_runner.py) and the 4 src/spider modules (kernel.py, registry.py, models.py, __init__.py). The independently authored goal bank has no mutable file dependency because it is embedded verbatim in prereg.md between BEGIN/END GOAL BANK markers and therefore bound by freeze.json.hashes['prereg.md'] (canonical block sha256 fb4d3246990731c95f4cf4cfa5870ac7f02da8832eed324580be5f75b1456c6e). The orchestration script is a verbatim transcription embedded in prereg.md section 14 and its sha256 (065b7557ad94c3b01844c8a3d6a518dce103db32f97f0ce067af47e77e600468) is recorded in provenance.json at EXECUTE. No unbound mutable code, task bank, dataset, or fixture remains. The runner's V12-FREEZE-BINDING gate recomputes all 8 file hashes and compares to freeze.json.artifact_hashes.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#4-frozen-independent-goal-bank",
+        "research/experiments/EXP-GRAPH-38166215691/prereg.md#14-frozen-orchestration-script"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "finding": "Contamination screen and lexical comparator share the same tokenization (lowercase whitespace split, set Jaccard). This couples the screen's exclusion criterion to the comparator's similarity measure. While intentional and disclosed (VN-04), it means goals that the lexical baseline would score highly on its correct intent may be excluded if that same overlap exists against a prior paraphrase. The residual independence claim is bounded accordingly.",
+      "severity": "nonblocking"
+    },
+    {
+      "finding": "Single embedding model (all-MiniLM-L6-v2), single 20-mechanism fixture, single 140-goal bank. Bootstrap CI covers family-blocked resampling variability only, not model/fixture/bank variability. Generalization beyond this checkpoint requires separate evidence.",
+      "severity": "nonblocking"
+    },
+    {
+      "finding": "Abstention evaluation (D-ABSTENTION) fits a single global threshold t* on the calibration split of the same bank and evaluates on test. With 19 out-of-scope test goals, each executed negative moves pooled_false_accept by ~0.053, making precision estimates noisy. This is a bounded risk-coverage read, not a shipped policy.",
+      "severity": "nonblocking"
+    },
+    {
+      "finding": "Independent authorship provenance is bounded: a competent author given the same resource/operation framing can converge on common phrasings below the 0.60 Jaccard threshold. The extended screen removes verbatim/near-copy overlap but residual stylistic convergence may remain. This is disclosed (VN-01 in prereg.md) and does not re-introduce the verbatim-template confound the screen targets.",
+      "severity": "nonblocking"
+    }
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The design fixes the three control-plane/design defects that invalidated prior packets (joint-authorship confound, tautological comparator, unattainable ECE/abstention coupling) and adds operational gates (V1-V12) that are arithmetically checkable. The treatment is live-verified, controls are sensitive, prerequisites are installable with BLOCKED fallback, and all mutable artifacts are bound. No blocking defects found. The non-blocking findings are disclosed validity threats that bound the strength of inference but do not invalidate the design.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38166215691/request.json",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md",
+    "research/harness/candidate_resolver.py",
+    "research/harness/goal_generator.py",
+    "research/harness/experiment_runner.py",
+    "research/harness/http_server.py",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "src/spider/__init__.py"
+  ]
+}
