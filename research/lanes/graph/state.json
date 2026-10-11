@@ -8,7 +8,7 @@
   "next_question": "Given that the transport-value coupling is now confirmed time-stable across two independent capture dates (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors) and that the anchor-clustered bootstrap is certified capable of non-degenerate bounds (GATE F PASS), can a value-only-rotation (D1V) population spanning >=2 credential-free, server-rendered, no-JavaScript GET-only anchors be constructed -- either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators and token-bearing final_urls from value rotation -- such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate, thereby licensing INCUMBENT-BLIND-CONFIRMED (CH-PRECOND-BINDING necessary) or INCUMBENT-NOT-BLIND (value-aware channel deletable); or, if no such population/redesign is constructible on the credential-free GET-only substrate, should the four-anchor Part II route be PARKed and C-FRESHNESS redirected to a materially different objective (e.g., a guard false-accept/calibration measurement on a broader anchor population, or a different freshness sub-mechanism)?",
   "promotion_ready": false,
   "consecutive_failures": 14,
-  "updated_at": "2026-10-11T01:42:33.984161+00:00",
+  "updated_at": "2026-10-11T02:01:02.710739+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "4dd5f69fc4909b8531e1901a1dc0cef5ad3eb76f18d1c2581ba797124a51c780",
   "same_failure_count": 9,
