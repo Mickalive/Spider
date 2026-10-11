@@ -159,8 +159,9 @@ investigate, do not proceed; see section 11).
   from the DESIGN probes).
 - Harness load path: `Llama(model_path=paths[0], n_ctx=2048, n_threads=4,
   verbose=False, chat_format="qwen", seed=42)`; llama.cpp auto-locates the
-  companion shard from the `-NNNNN-of-NNNNN` naming pattern (probe P-5 confirmed:
-  7B load 0.499 s, 3B load 0.289 s).
+  companion shard from the `-NNNNN-of-NNNNN` naming pattern (probe P-5, re-verified
+  on DESIGN re-dispatch: 7B load 0.433 s, 3B load 0.316 s; load time is
+  host-state-dependent, while the sha256 and grammar-valid emission pins are stable).
 - The provisioning receipt to record at EXECUTE: URLs, byte sizes, sha256,
   load_time_s, load_status, chat_format, n_ctx, n_threads, llama_seed — per cell in
   `raw/model_receipts.json` (the harness already emits this).
@@ -226,7 +227,8 @@ encoded as scientific falsification`.
 **Reachability arithmetic (probe P-4, DESIGN-time):** success counts are integers
 0..5; the bar is k>=3 on 5 episodes. (TREAT, COMP) pair outcomes under the ANCHOR
 rule (COMP <= 2): T=0,1,2 -> FALSIFIES-class; T>=3 with (T-C)>=2 -> SUPPORTS-class;
-T>=3 with (T-C)<2 i.e. C=T-1 or C=T (C<=2) -> MIXED-class. No branch is empty:
+T>=3 with (T-C)<2 and COMP<=2 -> exactly (T,C)=(3,2) (lift 1; T=4,C=2 already has
+lift 2) -> MIXED-class. No branch is empty:
 T5C0 (SUPPORTS), T3C2 (MIXED), T2C0 (FALSIFIES), T3C? with C>=3 (ANCHOR invalidation)
 are all constructible integer outcomes, and PC-ORACLE 5/5 (probe P-3) demonstrates
 the scorer can register T=5.
@@ -289,17 +291,19 @@ Measurement-validity commitments (full list in `spec.json#measurement_validity`)
 
 ## 10. Pre-freeze satisfiability probes (DESIGN-time, non-outcome-bearing)
 
-All probes ran in this environment (python 3.12.15, 4 cores, 15 GB RAM). Raw probe
+All probes were re-run and re-verified on the DESIGN re-dispatch (fresh runner:
+the pinned packages were re-installed from the frozen versions and the GGUF files
+re-downloaded with streaming sha256 verification against the manifest). Raw probe
 values are recorded here as frozen expectations for EXECUTE/AUDIT.
 
 | probe | what | result (evidence) |
 |---|---|---|
-| P-0 stack | python 3.12.15; llama-cpp-python 0.2.90; playwright 1.63.0; `/usr/bin/google-chrome` present; 4 cores; 15 GB RAM | PASS |
+| P-0 stack | python 3.12.15; llama-cpp-python 0.2.90; playwright 1.63.0 (both re-installed and import-verified on DESIGN re-dispatch); `/usr/bin/google-chrome` present; 4 cores; 15 GB RAM | PASS |
 | P-1 grammar | `LlamaGrammar.from_string(frozen gbnf_grammar)` compiles; fields restrict to click/answer x selector/text | PASS |
 | P-2 configs | deterministic transcription of CFG-TREAT/COMP/CONTROLS; sha256 988751c6..., 4a2ef4be..., 14589f7c...; TREAT top-level diff = {fixture_id, prompts, source}; COMP diff = {fixture_id, source}; leakage scoped to prompts.system = none | PASS (hashes pinned section 4) |
 | P-3 controls | Appendix-A driver through the REAL `run_episode` on the served page: oracle_success_rate=1.0 (5/5); NC=[0.0,0.0]; RANDOM=[1.0, 0.2], vector [True,False,False,False,False]; `raw/control_episodes.json` schema conforms | PASS |
-| P-4 URLs | 7B shard1/shard2 302; 7B single-file 404 (documented); 3B 302; all via resolve/main (Xet CDN) | PASS (VF-02 intact) |
-| P-5 load+liveness | GGUF sha256 all match manifest; `load_model` 7B 0.499 s (split-shard auto-locate), 3B 0.289 s; under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action":"click","selector":"#reveal-btn"}` (M-7B and M-3B) — mechanism alive, outcome not measured | PASS |
+| P-4 URLs | 7B shard1/shard2 resolve -> Xet CDN (HEAD final 200; Content-Length 3993201344/689872288 matches manifest); 7B single-file 404 (documented, VF-02); 3B resolve -> Xet CDN (final 200; 2104932768) | PASS (VF-02 intact) |
+| P-5 load+liveness | GGUF sha256 all match manifest (fresh download on DESIGN re-dispatch, streaming verify: dfce12e3..., 539cf93f..., 626b4a66...); `load_model` 7B 0.433 s (split-shard auto-locate), 3B 0.316 s (load time host-state-dependent); under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action":"click","selector":"#reveal-btn"}` (M-7B emit 10.5 s, M-3B emit 4.3 s) — mechanism alive, outcome not measured | PASS |
 
 The byte-level diff is verified by re-deriving each config from the frozen
 template and exercising the pinned sha256 from section 4 as the authoritative
@@ -335,15 +339,21 @@ preflight/controls_driver.py             <- Appendix A bytes (sha256 fdbcdc28...
    --n-threads 4`. Order: COMP-M7B, TREAT-M7B; early stop after a clearing TREAT
    cell (M-3B cells skipped). Validate rule 2 per cell (PC 10/10, LOADED,
    COMPLETE).
-6. **Derive metrics** from `raw/task_episodes.json` + `raw/model_receipts.json`
-   with the stable ids of section 6 (incl. derived click_reveal_rate and
-   answer_action_emission_rate from episode `steps`).
+6. **Derive metrics** — the harness writes episode records inside
+   `raw/model_receipts.json` (per-candidate `episodes` arrays, each with `steps`,
+   `step1_parse_ok`, `clicked_reveal`, `revealed_value`, `final_answer`,
+   `task_success`, `seed`); EXECUTE extracts them into a derived convenience file
+   `raw/task_episodes.json` (`{"experiment_id", "candidates", "controls"}`, per the
+   parent precedent) and computes the metrics with the stable ids of section 6
+   (incl. derived click_reveal_rate and answer_action_emission_rate from episode
+   `steps`).
 7. **Apply decision rule** (section 7, precedence) -> `result.json`,
    `report.md`, `provenance.json` (packet shapes per EXPERIMENT_PACKET.md),
    preserving control identifiers and evidence paths.
 8. **Preserve raw evidence**: `raw/harness_config.json` (per cell),
-   `raw/control_episodes.json`, `raw/model_receipts.json`, `raw/task_episodes.json`,
-   episode traces, receipts, command logs.
+   `raw/control_episodes.json`, `raw/model_receipts.json` (authoritative episode
+   source), derived `raw/task_episodes.json` (step 6), episode traces, receipts,
+   command logs.
 
 **Failure policy:** a LOAD_FAILED/Load error in a cell, download mismatch, or any
 runtime harness error is an infrastructure event: record it in `result.json`
