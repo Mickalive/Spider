@@ -1,0 +1,562 @@
+{
+  "app_001": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 1.0
+  },
+  "app_002": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.5714
+  },
+  "app_003": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_004": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.5
+  },
+  "app_005": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.375
+  },
+  "app_006": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 0.375
+  },
+  "app_007": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_008": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.375
+  },
+  "app_009": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_010": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.3
+  },
+  "app_011": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_012": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_013": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.25
+  },
+  "app_014": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_015": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_016": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_017": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_018": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.25
+  },
+  "app_019": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_020": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_021": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.6667
+  },
+  "app_022": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_023": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_024": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.8
+  },
+  "app_025": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_026": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_027": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_028": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_029": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_030": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.2
+  },
+  "app_031": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 0.6667
+  },
+  "app_032": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "app_033": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_034": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_035": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2222
+  },
+  "app_036": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_037": {
+    "max_intent_jaccard": 0.4,
+    "max_prior_jaccard": 0.4
+  },
+  "app_038": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2222
+  },
+  "app_039": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_040": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_041": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.8
+  },
+  "app_042": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_043": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_044": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_045": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_046": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_047": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.25
+  },
+  "app_048": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.375
+  },
+  "app_049": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_050": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.2
+  },
+  "app_051": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_052": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "app_053": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.4
+  },
+  "app_054": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_055": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_056": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_057": {
+    "max_intent_jaccard": 0.4,
+    "max_prior_jaccard": 0.4
+  },
+  "app_058": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_059": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_060": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_061": {
+    "max_intent_jaccard": 0.6,
+    "max_prior_jaccard": 0.8
+  },
+  "app_062": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_063": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_064": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_065": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_066": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_067": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.4
+  },
+  "app_068": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.375
+  },
+  "app_069": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_070": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.2
+  },
+  "app_071": {
+    "max_intent_jaccard": 0.5714,
+    "max_prior_jaccard": 0.5714
+  },
+  "app_072": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "app_073": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.4
+  },
+  "app_074": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_075": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2222
+  },
+  "app_076": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_077": {
+    "max_intent_jaccard": 0.4,
+    "max_prior_jaccard": 0.4
+  },
+  "app_078": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_079": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_080": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_081": {
+    "max_intent_jaccard": 0.6,
+    "max_prior_jaccard": 1.0
+  },
+  "app_082": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_083": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_084": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "app_085": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_086": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_087": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_088": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.375
+  },
+  "app_089": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "app_090": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.2
+  },
+  "app_091": {
+    "max_intent_jaccard": 0.375,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_092": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "app_093": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_094": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_095": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_096": {
+    "max_intent_jaccard": 0.4286,
+    "max_prior_jaccard": 0.4286
+  },
+  "app_097": {
+    "max_intent_jaccard": 0.4,
+    "max_prior_jaccard": 0.4
+  },
+  "app_098": {
+    "max_intent_jaccard": 0.2222,
+    "max_prior_jaccard": 0.2857
+  },
+  "app_099": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "app_100": {
+    "max_intent_jaccard": 0.1667,
+    "max_prior_jaccard": 0.1667
+  },
+  "oos_001": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.5714
+  },
+  "oos_002": {
+    "max_intent_jaccard": 0.1111,
+    "max_prior_jaccard": 0.375
+  },
+  "oos_003": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_004": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.2222
+  },
+  "oos_005": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "oos_006": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.2222
+  },
+  "oos_007": {
+    "max_intent_jaccard": 0.1111,
+    "max_prior_jaccard": 0.1111
+  },
+  "oos_008": {
+    "max_intent_jaccard": 0.1111,
+    "max_prior_jaccard": 0.2222
+  },
+  "oos_009": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.625
+  },
+  "oos_010": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_011": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "oos_012": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.4286
+  },
+  "oos_013": {
+    "max_intent_jaccard": 0.5,
+    "max_prior_jaccard": 0.5
+  },
+  "oos_014": {
+    "max_intent_jaccard": 0.2,
+    "max_prior_jaccard": 0.5
+  },
+  "oos_015": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_016": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_017": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.375
+  },
+  "oos_018": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.3333
+  },
+  "oos_019": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.0
+  },
+  "oos_020": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.2222
+  },
+  "oos_021": {
+    "max_intent_jaccard": 0.1111,
+    "max_prior_jaccard": 0.3333
+  },
+  "oos_022": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.2
+  },
+  "oos_023": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.4286
+  },
+  "oos_024": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "oos_025": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.4286
+  },
+  "oos_026": {
+    "max_intent_jaccard": 0.3333,
+    "max_prior_jaccard": 0.3333
+  },
+  "oos_027": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_028": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.6667
+  },
+  "oos_029": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.4444
+  },
+  "oos_030": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.1429
+  },
+  "oos_031": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_032": {
+    "max_intent_jaccard": 0.125,
+    "max_prior_jaccard": 0.4444
+  },
+  "oos_033": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.2857
+  },
+  "oos_034": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.125
+  },
+  "oos_035": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.375
+  },
+  "oos_036": {
+    "max_intent_jaccard": 0.1429,
+    "max_prior_jaccard": 0.3333
+  },
+  "oos_037": {
+    "max_intent_jaccard": 0.0,
+    "max_prior_jaccard": 0.0
+  },
+  "oos_038": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.25
+  },
+  "oos_039": {
+    "max_intent_jaccard": 0.2857,
+    "max_prior_jaccard": 0.3
+  },
+  "oos_040": {
+    "max_intent_jaccard": 0.25,
+    "max_prior_jaccard": 0.3333
+  }
+}
