@@ -50,7 +50,7 @@ PYTHONPATH=src python scripts/run_public_benchmark.py \
   --mode learn --family github --memory-path /tmp/spider-public-memory.jsonl \
   --allow-model-charges --output /tmp/spider-public-train-github.json
 PYTHONPATH=src python scripts/run_public_benchmark.py \
-  --mode trial --family pypi --id pydantic --arm SPIDER \
+  --mode trial --family pypi --id urllib3 --arm SPIDER \
   --memory-path /tmp/spider-public-memory.jsonl --allow-model-charges \
   --output /tmp/spider-public-trials.jsonl
 ```
