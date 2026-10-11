@@ -8,7 +8,7 @@
   "next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
   "promotion_ready": false,
   "consecutive_failures": 18,
-  "updated_at": "2026-10-11T02:00:05.377288+00:00",
+  "updated_at": "2026-10-11T02:01:16.228638+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55",
   "same_failure_count": 3,
