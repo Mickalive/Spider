@@ -96,7 +96,7 @@ Per engine: n_deep (live admitted DEEP items), n_dead_excluded, limited flag (> 
 2. **B-PERSISTED-PATH-REACQUISITION** — inherited context ONLY, NOT re-measured: parent EXP-FRONTIER-37950626378 RACQ_PATH NEAR=2.0/MID=3/DEEP=4 (~hop+1), 1532/1532 items with path_len == hop+1 on the single DEEP-bearing engine of that pool.
 3. **B-DIRECT-URL-REPLAY** — inherited context ONLY, NOT re-measured: parent RACQ_URL = 1 GET for a known URL.
 
-## 9. Controls (stable identifiers; 13 checks; run by `--stage controls`)
+## 9. Controls (stable identifiers; 13 distinct control identities producing 15 pass rows; run by `--stage controls`)
 
 | control | expected (pass iff) | DESIGN-observed |
 |---|---|---|
@@ -109,10 +109,12 @@ Per engine: n_deep (live admitted DEEP items), n_dead_excluded, limited flag (> 
 | PC_PARSER_CANARY_feed_rss | urls == [https://example.com/p1] | PASS |
 | PC_PARSER_CANARY_feed_atom | urls == [https://example.com/p2] | PASS |
 | PC_PARSER_CANARY_jsonld | urls == [https://example.com/p3] | PASS |
+| PC_REACHABILITY_LISTED_LIVE | items listed by SITEMAP_XML / JSON_LD / search and live are reachable | 3/3 reachable — PASS |
+| NC_REACHABILITY_UNLISTED_OR_DEAD | a live-but-unlisted item and a listed-but-dead (404) item are NOT reachable | both False (dead status 404) — PASS |
 | PC_ENV | python + stdlib urllib + default TLS recorded | 3.12.15 — PASS |
 | NC_SYNTHETIC_UNREACHABLE_ITEM_direct (x3) | real HTTP status >= 400 on synthetic url | 404 on doc.rust-lang.org, docs.python.org, numpy.org — PASS |
 
-Design-time failures caught by these controls and fixed pre-freeze (evidence of sensitivity): PC_PARSER_CANARY_jsonld initially FAILED (canary extraction bug — split(">") also split `</script>`); NC_SYNTHETIC_UNREACHABLE_ITEM_direct initially FAILED (fetch collapsed HTTPError to status=None; fixed to record real 4xx/5xx status). Final certificate 13/13 PASS.
+Design-time failures caught by these controls and fixed pre-freeze (evidence of sensitivity): PC_PARSER_CANARY_jsonld initially FAILED (canary extraction bug — split(">") also split `</script>`); NC_SYNTHETIC_UNREACHABLE_ITEM_direct initially FAILED (fetch collapsed HTTPError to status=None; fixed to record real 4xx/5xx status). Final certificate 15/15 PASS rows (13 distinct control identities; the null direct-404 control is run once per probe host, 3 rows at DESIGN).
 
 ## 10. Decision rule (frozen, evaluated in order; implemented in section 16; maps to result.json)
 
@@ -129,40 +131,40 @@ Per-engine rows, per-channel coverage, zero-admission channels, hop distribution
 
 Ran 2026-10-11 (same runner class as EXECUTE: bare CPython 3.12.15, stdlib only, network enabled).
 
-**(a) 2026-10-11T19:40:43Z seed probe** (transcript `/tmp/opencode/design_probe_transcript_38164611798.json`, outside repo): all 20 seeds returned HTTP 200 text/html.
+**(a) Seed probe** (re-run at DESIGN on the actual runner class, 2026-10-11): all 20 frozen seeds returned HTTP 200 text/html; transcript outside the repo.
 
-**(b) Controls certificate** (`--stage controls`, out `/tmp/opencode/design_out_38164611798/raw/controls.jsonl`): 13/13 PASS, exit 0; observed values in section 9.
+**(b) Controls certificate** (`--stage controls`): 15/15 PASS rows (exit 0) over 13 distinct control identities; observed values in section 9.
 
-**(c) Inventory certificate** (`--stage inventory`, out `/tmp/opencode/design_out_38164611798/raw/channel_docs.jsonl`): 20/20 seeds HTTP 200; per-host channel endpoint liveness:
+**(c) Inventory certificate** (`--stage inventory`, out `<out_dir>/raw/channel_docs.jsonl`, outside the repo): 20/20 seeds HTTP 200; per-host channel endpoint liveness (re-observed at DESIGN 2026-10-11):
 
 | host | seed | generator | robots | sm.xml | sm.idx | child | feed | jsonld urls | search form |
 |---|---|---|---|---|---|---|---|---|---|
-| blog.wordpress.org | 200 | WordPress 7.2-a | 200 | 200 | - | - | 200 | 6 | wordpress.org/do-search.php?s |
-| developer.mozilla.org | 200 | - | 200 | 200 | - | 200 | 200 | 0 | NONE |
-| doc.rust-lang.org | 200 | - | 200 | 404 | 404 | - | - | 0 | ?searchbar |
-| docs.gitbook.com | 200 | GitBook a0c1bdf | 200 | 200 | - | 200 | - | 0 | NONE (seed truncated) |
-| docs.github.com | 200 | - | 200 | 404 | 404 | - | - | 0 | /en?survey-token |
-| docs.pytest.org | 200 | - | 200 | 200 | - | - | - | 0 | search.html?q |
-| docs.python.org | 200 | - | 200 | 200 | - | - | - | 0 | search.html?q |
-| docs.readthedocs.io | 200 | - | 200 | 200 | - | - | - | 0 | search.html?q |
-| docusaurus.io | 200 | Docusaurus v4 | 200 | 200 | - | - | 200 | 2 | NONE |
-| en.wikipedia.org | 200 | MediaWiki wmf.23 | 200 | 404 | 404 | - | 200 | 5 | w/index.php?search |
-| forums.gentoo.org | 200 | - | 403 | 404 | 404 | - | 200 | 0 | NONE |
-| gohugo.io | 200 | Hugo 0.167 | 404 | 200 | - | - | - | 0 | NONE |
-| jekyllrb.com | 200 | Jekyll v4.4.1 | 200 | 200 | - | - | 200 | 4 | NONE |
-| kubernetes.io | 200 | - | 200 | 200 | - | 200 | - | 4 | NONE |
-| numpy.org | 200 | - | 200 | 200 | - | 200 | - | 0 | search.html?q |
-| pandas.pydata.org | 200 | - | 200 | 404 | 404 | - | - | 0 | search.html?q |
-| quotes.toscrape.com | 200 | - | 404 | 404 | 404 | - | - | 0 | NONE |
+| doc.rust-lang.org | 200 | - | 200 | 404 | 404 | - | - | 0 | doc.rust-lang.org/stable/book/?searchbar |
+| docs.python.org | 200 | - | 200 | 200 | - | - | - | 0 | docs.python.org/3/search.html?q |
+| numpy.org | 200 | - | 200 | 200 | - | - | - | 0 | numpy.org/doc/stable/search.html?q |
+| pandas.pydata.org | 200 | - | 200 | 404 | 404 | - | - | 0 | pandas.pydata.org/docs/search.html?q |
 | react.dev | 200 | - | 200 | 404 | 404 | - | - | 0 | NONE |
-| www.gnu.org | 200 | - | 200 | 200 | - | 200 | 200 | 0 | NONE |
-| www.mediawiki.org | 200 | MediaWiki wmf.22 | 200 | 404 | 404 | - | 200 | 5 | w/index.php?search |
+| docusaurus.io | 200 | Docusaurus v4 | 200 | 200 | - | - | - | 2 | NONE |
+| docs.readthedocs.io | 200 | - | 200 | 200 | - | - | - | 0 | docs.readthedocs.io/en/stable/search.html?q |
+| docs.pytest.org | 200 | - | 200 | 200 | - | - | - | 0 | docs.pytest.org/en/stable/search.html?q |
+| gohugo.io | 200 | Hugo 0.167 | 404 | 200 | - | - | - | 0 | NONE |
+| jekyllrb.com | 200 | - | 200 | 200 | - | - | 10 | 4 | NONE |
+| docs.gitbook.com | 200 | GitBook a0c1bdf | 200 | 200 | - | 5 | - | 0 | NONE |
+| kubernetes.io | 200 | - | 200 | 200 | - | 5 | - | 4 | NONE |
+| developer.mozilla.org | 200 | - | 200 | 200 | - | 5 | 71 | 0 | NONE |
+| docs.github.com | 200 | - | 200 | 404 | 404 | - | - | 0 | docs.github.com/en?survey-token |
+| en.wikipedia.org | 200 | MediaWiki wmf.23 | 200 | 404 | 404 | - | 10 | 5 | en.wikipedia.org/w/index.php?search |
+| www.mediawiki.org | 200 | MediaWiki wmf.22 | 200 | 404 | 404 | - | 43 | 5 | www.mediawiki.org/w/index.php?search |
+| quotes.toscrape.com | 200 | - | 404 | 404 | 404 | - | - | 0 | NONE |
+| www.gnu.org | 200 | - | 200 | 200 | - | 1 | 60 | 0 | NONE |
+| forums.gentoo.org | 200 | - | 403 | 404 | 404 | - | 15 | 0 | NONE |
+| blog.wordpress.org | 200 | WordPress 7.2-a | 200 | 200 | - | - | 10 | 6 | wordpress.org/search/do-search.php?s |
 
-Channel liveness census (each channel live on >= 1 frozen host): ROBOTS_SITEMAP 7 hosts, SITEMAP_XML 9, ON_SITE_SEARCH 10, RSS_ATOM 7, JSON_LD 6. Quirks recorded (VN-A2): docs.gitbook.com seed truncated at cap; forums.gentoo.org robots 403; gohugo.io robots 404 while sitemap.xml 200; react.dev and quotes.toscrape.com have zero channels (honest zero admission expected — reported as such); blog.wordpress.org search action cross-host to wordpress.org; MediaWiki robots has no Sitemap: line (its REST sitemap is not part of the frozen protocol).
+Channel liveness census (each channel live on >= 1 frozen host; counted by membership-set non-emptiness): ROBOTS_SITEMAP 7 hosts, SITEMAP_XML 9, ON_SITE_SEARCH 10, RSS_ATOM 7, JSON_LD 6. Quirks recorded (VN-A2): docs.gitbook.com seed truncated at cap; forums.gentoo.org robots 403; gohugo.io robots 404 while sitemap.xml 200; react.dev and quotes.toscrape.com have zero channels (honest zero admission expected — reported as such); blog.wordpress.org search action cross-host to wordpress.org; MediaWiki robots has no Sitemap: line (its REST sitemap is not part of the frozen protocol); developer.mozilla.org / kubernetes.io / docs.gitbook.com / www.gnu.org sitemaps are indexes whose child lists are recorded but do not populate a membership set unless the frozen FIRST-child fetch is followed.
 
-**(d) Toy-liveness** (offline, local HTTP server; outcome-free, distinct from the frozen pool): the complete per-item evaluation chain (search results GET + static-link membership, JSON-LD membership, liveness re-GET) executed without errors: JSON_LD member + live → reachable=True; non-member + live → False; dead 404 → False; search member when the results page links the item → True.
+**(d) Reachability fixture (realized as controls)** (offline, local HTTP server, outcome-free, distinct from the frozen pool): `PC_REACHABILITY_LISTED_LIVE` drives the actual `evaluate_items` scoring path and requires that items listed by SITEMAP_XML, JSON_LD and ON_SITE_SEARCH and live are `reachable_any=True` (3/3 observed); `NC_REACHABILITY_UNLISTED_OR_DEAD` requires that a live item listed by no channel is NOT reachable and a listed item whose liveness GET returns 404 is NOT reachable (both observed False). This certifies the scoring implementation itself, not only its parsers.
 
-**(e) Decision-branch smoke test** (synthetic metrics inputs; outcome-free): all-zero → INCONCLUSIVE; two engines at >= 0.50 → SUPPORTS; one at threshold → FALSIFIES; all DEEP-admitting engines > 10% dead → INCONCLUSIVE (limited); partial-limited with one at threshold → FALSIFIES counting only eligible engines. Every branch fires; no branch is empty or unreachable; no 0/0 denominator enters thresholding (V5).
+**(e) Decision-branch reachability (structural argument, outcome-free).** The frozen rule is satisfiable in BOTH directions by construction. Given any attained pool with >= 1 engine admitting >= 1 eligible DEEP item, the branches partition exhaustively on the number of threshold-meeting engines: if >= 2 distinct engines reach fraction >= 0.50, G5 fires SUPPORTS; otherwise G6 fires FALSIFIES (so at least one of the two always fires and neither is empty). G3 (zero DEEP items anywhere) is a reachable INCONCLUSIVE branch with an explicit attainability reason; G2 (seed failure on EVERY host) is the reachable infrastructure-signature branch; G4 (EVERY DEEP-admitting engine has > 10% dead admitted items) is reachable because the item liveness re-GET can return 404. No 0/0 denominator can enter thresholding: an engine with n_deep=0 has fraction null and is routed to the zero-DEEP census instead (V5). The instrument's ability to separate flat from growing acquisition cost is independently certified by NC_BFS_CALIBRATION_FLAT (R=2.0) and NC_BFS_CALIBRATION_GROWING (R=6.5).
 
 **(f) Env**: Python 3.12.15 (GCC 13.3.0); stdlib urllib + default TLS verified outbound; module imports are stdlib-only (`urllib`, `gzip`, `xml.etree`, `html.parser`, `http.server`, `hashlib`, `json`, `math`, `re`, `threading`, `time`, `pathlib`, `sys`); zero pip/model/browser/Docker dependencies.
 
@@ -185,24 +187,24 @@ Channel liveness census (each channel live on >= 1 frozen host): ROBOTS_SITEMAP 
 
 ## 14. Estimated cost and expected information gain
 
-- **Cost**: stdlib only; EXECUTE worst case <= ~15,200 GETs (structural 20×251, discovery <= 2×250×20 items, channel docs ~120, controls ~30); typical 5,000–10,000; wall ~15–40 min (timeout 12 s, DELAY 0.1 s). DESIGN certificate cost already paid (section 11).
-- **Gain**: the first valid measurement of the question both prior designs never measured (v1 empty frame; v2 fabricated PASS). Attainability is the measured object, so every branch yields decision-relevant artifacts: DEEP census per engine/host, per-channel coverage with zero-admission channels reported as such, and a preregistered Q3 verdict satisfiable in both directions. The embedded code + re-run gates preclude the prior failure modes.
+- **Cost**: stdlib only; EXECUTE worst case <= ~15,200 GETs (structural 20×251, discovery <= 2×250×20 items, channel docs ~120, controls ~15); typical 5,000–10,000; wall ~15–40 min (timeout 12 s, DELAY 0.1 s). DESIGN certificate cost already paid (section 11).
+- **Gain**: the first valid measurement of the question both prior designs never measured (v1 empty frame; v2 declared all six checks PASS with its declared artifacts absent). Attainability is the measured object, so every branch yields decision-relevant artifacts: DEEP census per engine/host, per-channel coverage with zero-admission channels reported as such, and a preregistered Q3 verdict satisfiable in both directions. The embedded code + re-run gates preclude the prior failure modes.
 
 ## 15. Freeze-eligibility mapping (mirrors spec.json)
 
-1. **decision_rule_reachability — PASS**: every branch fired in the DESIGN smoke test (section 11e); instrument dynamic range certified both directions (section 9); zero-DEEP branch realistic (quotes.toscrape.com is flat with no channels); no 0/0 denominators (V5).
-2. **measurement_prerequisites — PASS**: 20/20 seeds 200 (probe + certificate); all five channels live on >= 1 host; 13/13 controls; toy-liveness of the full pipeline; stdlib-only (no pip/model/browser/Docker).
+1. **decision_rule_reachability — PASS**: the branches partition exhaustively, so SUPPORTS and FALSIFIES are both reachable for any attained pool with >= 1 eligible DEEP item (section 11e); the zero-DEEP / all-limited / all-seed-fail branches are reachable INCONCLUSIVE branches with explicit reasons; instrument dynamic range certified both directions (section 9); no 0/0 denominators (V5).
+2. **measurement_prerequisites — PASS**: 20/20 seeds 200 (probe + certificate); all five channels live on >= 1 host; 15/15 control pass rows (13 distinct identities); the scoring path is itself fixture-controlled (PC/NC_REACHABILITY, section 11d); stdlib-only (no pip/model/browser/Docker).
 3. **baseline_identifiability — PASS**: three stable distinct baselines (section 8); the in-pool measured B-LINK-FOLLOWING-BFS per-item cost is the comparator the <= K=3 discovery claim must beat; calibration controls separate flat from growing regimes.
-4. **control_sensitivity — PASS**: every control fires both directions; two controls caught real DESIGN defects pre-freeze (section 9); 0.50/2-engines are hard gates; zero-admission channels reported as such.
-5. **treatment_liveness — PASS**: all five channels live on >= 1 frozen host with concrete endpoints (section 11c); complete pipeline executed end-to-end offline (toy-liveness, section 11d); confirmatory pool never evaluated at DESIGN.
-6. **freeze_artifacts_bound — NOT_APPLICABLE**: the complete outcome-bearing code is frozen VERBATIM in prereg section 16 with CODE_SHA256 (transitively hashed via freeze.json); pool/constants/fixtures/decision rule all embedded; no local mutable artifacts; remote endpoints are pinned by URL and recorded; check_scope.py forbids DESIGN-time repo files; same basis as accepted precedent EXP-FRONTIER-38078430316.
+4. **control_sensitivity — PASS**: every control fires both directions; the scoring path is fixture-controlled by `PC_REACHABILITY_LISTED_LIVE` (listed+live → reachable) and `NC_REACHABILITY_UNLISTED_OR_DEAD` (unlisted-live and listed-dead → not reachable); two controls caught real DESIGN defects pre-freeze (section 9); 0.50/2-engines are hard gates; zero-admission channels reported as such.
+5. **treatment_liveness — PASS**: all five channels live on >= 1 frozen host with concrete endpoints (section 11c); the complete per-item scoring pipeline executed end-to-end offline against the local reachability fixture (PC/NC_REACHABILITY, section 11d); confirmatory pool never evaluated at DESIGN.
+6. **freeze_artifacts_bound — NOT_APPLICABLE**: the complete outcome-bearing code is frozen VERBATIM in prereg section 16 with CODE_SHA256 (transitively hashed via freeze.json); pool/constants/fixtures/decision rule all embedded; no local mutable artifacts; remote endpoints are pinned by URL and recorded; check_scope.py forbids DESIGN-time repo files; basis is EXPERIMENT_PACKET.md section 2 (identical NOT_APPLICABLE basis as the earlier v2 experiment EXP-FRONTIER-38078430316).
 
 ## 16. Frozen code (transcription contract)
 
-EXECUTE must transcribe the module between `CODE_BEGIN` and `CODE_END` byte-identically as the outcome-bearing program. CODE_SHA256 = sha256 of those exact bytes:
+EXECUTE must transcribe the frozen module as the outcome-bearing program. Transcription is unique: let `block` be the bytes strictly between the CODE_BEGIN marker line and the CODE_END marker line, and let `C = block.strip()` (leading and trailing ASCII whitespace removed). Instantiate `C` as the module file. CODE_SHA256 = sha256(C):
 
 ```
-CODE_SHA256 = 6ae1db420920de88426714a5330a726ec250ca3010b054150a3c13ab39dc8e1b
+CODE_SHA256 = 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a
 ```
 
 If EXECUTE's transcription differs (hash mismatch against V1), status = MEASUREMENT_INVALID and no outcome stages may run.
@@ -211,8 +213,11 @@ If EXECUTE's transcription differs (hash mismatch against V1), status = MEASUREM
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 # FROZEN EXECUTE MODULE for EXP-FRONTIER-38164611798 (frontier lane, C-CROSSSITE).
-# Embedding contract: prereg.md section 16 contains this file byte-identically;
-# CODE_SHA256 = sha256 of the bytes between the BEGIN/END markers in prereg.md.
+# Embedding contract (UNIQUE, unambiguous): prereg.md section 16 contains this
+# module byte-identically. Transcribe:
+#     block = bytes strictly between the CODE_BEGIN and CODE_END marker lines
+#     C     = block.strip()          # strip leading/trailing ASCII whitespace
+# CODE_SHA256 = sha256(C). Instantiate C as the module file at EXECUTE.
 # If EXECUTE's transcription differs, status=MEASUREMENT_INVALID.
 #
 # DESIGN-time usage (non-outcome-bearing):  --stage controls | inventory
@@ -1041,6 +1046,77 @@ def run_controls(out_dir: Path):
     rows.append({"control": "PC_PARSER_CANARY_jsonld",
                  "pass": set(jl) == set(canaries["jsonld"][1]), "observed": sorted(jl)})
 
+    # (3b) reachability fixture: positive + null controls over the SCORING
+    #      implementation itself (evaluate_items membership + liveness),
+    #      executed against a local HTTP fixture, disjoint from the frozen pool.
+    rpages = {
+        "/deep/listed.html": "<html><body><form><input name='field'></form></body></html>",
+        "/deep/jsonld.html": "<html><body><form><input name='field'></form></body></html>",
+        "/deep/searchhit.html": "<html><body><form><input name='field'></form></body></html>",
+        "/deep/unlisted.html": "<html><body><form><input name='field'></form></body></html>",
+        # search results page links ONLY /deep/searchhit.html
+        "/search": "<html><body><a href='/deep/searchhit.html'>hit</a></body></html>",
+    }
+
+    class RH(BaseHTTPRequestHandler):
+        def do_GET(self):
+            path = urllib.parse.urlsplit(self.path).path
+            body = rpages.get(path)
+            if body is None:
+                self.send_response(404)
+                self.end_headers()
+                return
+            data = body.encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+
+        def log_message(self, *a):
+            pass
+
+    rsrv = ThreadingHTTPServer(("127.0.0.1", 0), RH)
+    threading.Thread(target=rsrv.serve_forever, daemon=True).start()
+    rbase = f"http://127.0.0.1:{rsrv.server_address[1]}"
+    listed = rbase + "/deep/listed.html"
+    jsonld_u = rbase + "/deep/jsonld.html"
+    search_u = rbase + "/deep/searchhit.html"
+    unlisted = rbase + "/deep/unlisted.html"
+    dead = rbase + "/deep/dead.html"
+    rdocs = {
+        "host": "127.0.0.1",
+        "search_form": {"action": rbase + "/search", "input": "q"},
+        "channel_urls": {
+            "ROBOTS_SITEMAP": [],
+            "SITEMAP_XML": [listed, dead],
+            "ON_SITE_SEARCH": None,
+            "RSS_ATOM": [],
+            "JSON_LD": [jsonld_u],
+        },
+    }
+    ritems = [
+        {"url": listed, "hop": 3, "ordinal": 12, "bytes": 64},
+        {"url": jsonld_u, "hop": 3, "ordinal": 13, "bytes": 64},
+        {"url": search_u, "hop": 3, "ordinal": 14, "bytes": 64},
+        {"url": unlisted, "hop": 3, "ordinal": 15, "bytes": 64},
+        {"url": dead, "hop": 3, "ordinal": 16, "bytes": 0},
+    ]
+    rev = {e["url"]: e for e in evaluate_items({}, rdocs, ritems)}
+    rows.append({"control": "PC_REACHABILITY_LISTED_LIVE",
+                 "pass": bool(rev[listed]["reachable_any"]) and bool(rev[jsonld_u]["reachable_any"])
+                         and bool(rev[search_u]["reachable_any"]),
+                 "observed": {"sitemap_listed_live": rev[listed]["reachable_any"],
+                              "jsonld_listed_live": rev[jsonld_u]["reachable_any"],
+                              "search_listed_live": rev[search_u]["reachable_any"]}})
+    rows.append({"control": "NC_REACHABILITY_UNLISTED_OR_DEAD",
+                 "pass": (not rev[unlisted]["reachable_any"]) and (not rev[dead]["reachable_any"]),
+                 "observed": {"unlisted_live_reachable": rev[unlisted]["reachable_any"],
+                              "dead_live_status": rev[dead]["live_status"],
+                              "dead_reachable": rev[dead]["reachable_any"]}})
+    rsrv.shutdown()
+    rsrv.server_close()
+
     # (4) env probe
     rows.append({"control": "PC_ENV",
                  "pass": True,
@@ -1071,6 +1147,7 @@ def main():
     if "--out" in sys.argv:
         out_dir = Path(sys.argv[sys.argv.index("--out") + 1])
     out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "raw").mkdir(parents=True, exist_ok=True)
 
     if stage in ("controls", "all"):
         rows = run_controls(out_dir)
@@ -1195,5 +1272,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 <!-- CODE_END -->
