@@ -230,7 +230,8 @@ def main():
     elif args.mode == "probe":
         payload = {"status": "EXTERNAL_READ_ONLY_NO_MODEL", "results": [],
                    "checked_at": datetime.now(timezone.utc).isoformat()}
-        for task in allowlisted_tasks("holdout"):
+        for phase in ("train", "holdout"):
+          for task in allowlisted_tasks(phase):
             try:
                 value = compiled_result(task)
                 verdict = oracle(task)
@@ -244,6 +245,7 @@ def main():
             family: all(item["match"] for item in payload["results"] if item["id"].startswith(family + ":"))
             for family in TRAIN
         }
+        payload["training_and_holdout_probed"] = True
         payload["all_match"] = all(payload["family_ready"].values())
     elif args.mode == "learn":
         if not args.memory_path or not args.family:
