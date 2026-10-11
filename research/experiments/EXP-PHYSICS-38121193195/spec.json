@@ -1,607 +1,504 @@
 {
-  "experiment_id": "EXP-PHYSICS-38121193195",
+ "schema_version": 1,
+ "experiment_id": "EXP-PHYSICS-38121193195",
+ "lane": "physics",
+ "claim_ids": [
+  "C-WEB-DYNAMICS"
+ ],
+ "guard_claim_ids": [
+  "C-MEAS-VALID",
+  "C-CROSSSITE"
+ ],
+ "design_contract_version": 2,
+ "title": "Cross-vantage transfer of endpoint intrinsic access-barrier persistence and anchor-built intrinsic-denylist validity (same frozen 57-endpoint pool and frozen intrinsic classifier; direct runner egress V1 vs a second independent Tor-exit egress V2)",
+ "reason": "global-director-REOPEN",
+ "director_mandate_trace": {
+  "action": "REOPEN",
+  "claim_id": "C-WEB-DYNAMICS",
+  "cycle_id": "38120577942",
   "lane": "physics",
-  "claim_ids": [
-    "C-WEB-DYNAMICS"
-  ],
-  "title": "Cross-vantage transfer of endpoint intrinsic ACCESS-BARRIER persistence and the anchor-built intrinsic-denylist validity horizon (V1 datacenter egress vs V2 pinned independent Tor egress, same frozen 57-endpoint pool, same window ladder)",
-  "question": "Per director_mandate (action REOPEN, target C-WEB-DYNAMICS): does the measured endpoint intrinsic access-barrier persistence and its anchor-built intrinsic-denylist validity horizon - right-censored at 1800 s on one egress and one ~2041 s session (accepted S1_STATIONARY, EXP-PHYSICS-38074818597, audit PASS, declared single-vantage boundary VF5) - transfer across independent source vantages, or is the S1_STATIONARY result an artifact of that single network vantage and window? Concretely: over the same window ladder (nominal 0/300/900/1800 s) at a SECOND independent egress (distinct public IP / ASN / geography; realized here as a pinned Tor exit, provisioned and verified pre-freeze) using the same frozen 57-endpoint pool and frozen intrinsic classifier, (Q1) do the same endpoints retain their intrinsic class (BLOCK_403_CHALLENGE / TRANSPORT_ERROR) at the second vantage with per-class CLASS_PERSISTENCE >= 0.80, (Q2) does an anchor-built intrinsic denylist at the second vantage remain valid through delta_ref (FALSE_ACCEPT <= 0.20 and FALSE_REJECT <= 0.20, with the within-vantage B_EXCHANGE null rejected and a positive endpoint-clustered CI lower bound), and (Q3) do the per-endpoint intrinsic classes agree across vantages so that ONE shared denylist is licensed rather than a vantage-specific schedule? The experiment runs a PAIRED two-vantage session: the same session, same pool, same ladder, same classifier is observed simultaneously from V1 (the runner's direct datacenter egress, AS8075 Microsoft) and V2 (the pinned independent Tor egress, distinct ASN/geography). It does NOT repeat the single-vantage ladder. If no second independent egress substrate can be provisioned and held constant (pin verification failure, exit rotation, route loss), the exact operational blocker is recorded as MEASUREMENT_INVALID instead of substituting another single-vantage run.",
-  "hypothesis": {
-    "H1_vantage_robust": "The intrinsic barrier state and its anchor denylist transfer across vantages: at V2 the intrinsic classes present at the V2 anchor persist to the V2 reference rung (per-class CLASS_PERSISTENCE >= 0.80), the V2 anchor-built intrinsic denylist is valid at delta_ref (FALSE_ACCEPT <= 0.20 and FALSE_REJECT <= 0.20), the V2 anchor->lag barrier indicator carries information beyond the exchangeable constant null within V2 (V2_STATIONARITY_SKILL >= 0.05 nats, B_EXCHANGE_V2 permutation p < 0.05, clustered CI lower > 0), the V1-anchor and V2-anchor barrier indicators agree beyond the cross-vantage exchangeable null (CV_SKILL >= 0.05 nats, B_CROSSVANTAGE permutation p < 0.05, clustered CI lower > 0), and the V1-anchor denylist transfers to V2 at delta_ref (CV_DENYLIST_FALSE_ACCEPT <= 0.20 and CV_DENYLIST_FALSE_REJECT <= 0.20). Product consequence: ONE shared intrinsic denylist (one class-conditional barrier policy) is licensed across the two tested egresses on this pool/window.",
-    "H0_vantage_specific": "The intrinsic barrier state or its denylist does NOT transfer: on the valid paired run, at least one of the five T1 clauses fails (V2 per-class persistence < 0.80 for a present intrinsic class; V2 denylist invalid; V2 anchor->lag information not above the exchangeable null; cross-vantage anchor agreement not above the cross-vantage null; or cross-vantage denylist transfer invalid). Product consequence: the intrinsic barrier access decision is vantage-specific on this pool/window (within the tested datacenter <-> Tor egress pair); a single shared denylist is falsified as a universal prior and a per-egress (per-egress-type) schedule is required.",
-    "H_null": "B_CROSSVANTAGE: the V2 anchor barrier indicator is independent of the V1 anchor barrier indicator beyond its marginal (exchangeable endpoints), so CV_SKILL ~ 0 and a denylist built at V1 is no better than the no-denylist constant prior at V2. B_EXCHANGE_V2: within V2, the lag barrier indicator is independent of the V2 anchor indicator beyond its marginal. Both nulls are calibrated before freeze with demonstrated power (see PC_CROSS_SYNTHETIC_STATIONARY and NC_CROSS_SYNTHETIC_EXCHANGEABLE) and a false-positive bound, exactly as the parent's B_EXCHANGE was.",
-    "relation_to_claim": "H1/H0/H_null are orthogonal falsifiable programs on the C-WEB-DYNAMICS next_gate axis 'barriers' (source-vantage factor), i.e. the declarative single-vantage boundary VF5 of the accepted S1_STATIONARY packet. No branch here upgrades C-WEB-DYNAMICS above HYPOTHESIS and no PRODUCT_CORE promotion follows from this single egress-pair/window ladder."
+  "parent_handoff_disposition": "USE",
+  "binding_direction": "Vary the SOURCE-VANTAGE factor the accepted S1_STATIONARY packet explicitly fixed and declared a scope boundary (VF5). Do not extend the answered window/timescale ladder at one egress. If a second independent egress cannot be provisioned, record the exact operational blocker; do not substitute a single-vantage run.",
+  "three_questions": {
+   "Q1": "At a second independent egress, do the same endpoints retain their intrinsic class (BLOCK_403_CHALLENGE/TRANSPORT_ERROR) with per-class CLASS_PERSISTENCE >= 0.80?",
+   "Q2": "At the second egress, does an anchor-built intrinsic denylist remain valid through delta_ref (FALSE_ACCEPT <= 0.20 and FALSE_REJECT <= 0.20), with the B_EXCHANGE null rejected and a positive endpoint-clustered CI lower bound?",
+   "Q3": "Do per-endpoint intrinsic classes agree across vantages so that ONE shared denylist is licensed rather than a vantage-specific schedule?"
   },
-  "falsifier": "TWO-SIDED AND FROZEN; both directions are reachable through the frozen metrics and branch logic (verified by the pre-freeze offline calibration on synthetic worlds implementing the EXACT branch rule; see prereg.md 'Null calibration and branch reachability'). Frozen thresholds: delta_ref_s = 1800; delta_ref_min_actual_s = 1500 (per vantage); intrinsic_persistence_min = 0.80; tau_FA = tau_FR = 0.20; alpha = 0.05; delta_SKILL_nats = 0.05; pc_power_min = 0.80; nc_false_positive_max = 0.05; min_t0_intrinsic = 3 and min_t0_barrier = 3 per vantage; bootstrap_resamples = 10000; permutations = 10000. Definitions: V2_CLASS_PERSISTENCE[c] = fraction of endpoints whose V2 ambient class at the V2 anchor equals intrinsic class c and whose V2 ambient class at the V2 delta_ref rung is also c. V2_INTRINSIC_PERSISTENT = (n_t0_intrinsic_V2 >= 3) AND (for every intrinsic class c present at the V2 anchor: V2_CLASS_PERSISTENCE[c] >= 0.80). V2_DENYLIST_FALSE_ACCEPT = |{V2 anchor intrinsic, non-intrinsic at V2 delta_ref}| / |V2 anchor intrinsic|; V2_DENYLIST_FALSE_REJECT = |{V2 anchor non-intrinsic, intrinsic at V2 delta_ref}| / |V2 anchor non-intrinsic|; V2_DENYLIST_INTRINSIC_VALID = (FALSE_ACCEPT <= 0.20) AND (FALSE_REJECT <= 0.20). V2_STATIONARITY_SKILL = plug-in mutual information I(B_V2_T0; B_V2_delta_ref) in nats over the binary barrier indicator (B = 1 iff ambient class in barrier_set). V2_STAT_SIG = (V2_STATIONARITY_SKILL >= 0.05) AND (B_EXCHANGE_V2 permutation p < 0.05) AND (endpoint-clustered bootstrap CI lower > 0). CV_SKILL = plug-in I(B_V1_T0; B_V2_T0) in nats. CV_AGREEMENT_SIG = (CV_SKILL >= 0.05) AND (B_CROSSVANTAGE permutation p < 0.05) AND (endpoint-clustered bootstrap CI lower > 0). CV_DENYLIST_FALSE_ACCEPT = |{V1 anchor intrinsic, non-intrinsic at V2 delta_ref}| / |V1 anchor intrinsic|; CV_DENYLIST_FALSE_REJECT = |{V1 anchor non-intrinsic, intrinsic at V2 delta_ref}| / |V1 anchor non-intrinsic|; CV_DENYLIST_TRANSFER_VALID = (FALSE_ACCEPT <= 0.20) AND (FALSE_REJECT <= 0.20). T1_VANTAGE_ROBUST iff V2_INTRINSIC_PERSISTENT AND V2_DENYLIST_INTRINSIC_VALID AND V2_STAT_SIG AND CV_AGREEMENT_SIG AND CV_DENYLIST_TRANSFER_VALID. T0_VANTAGE_SPECIFIC iff the measurement is valid and NOT T1_VANTAGE_ROBUST; the frozen T0 evidence classes are (a) v2_intrinsic_break (a durable intrinsic barrier at V2 changed class), (b) v2_denylist_violation (a V2-denylisted endpoint recovered, or a V2-clean endpoint newly and durably blocked), (c) v2_no_anchor_information (V2 anchor->lag barrier information is no better than the within-V2 exchangeable constant null), (d) no_cross_vantage_information (V1 vs V2 anchor barrier agreement is no better than the cross-vantage exchangeable null), (e) cross_vantage_transfer_violation (the V1-anchor denylist does not transfer to V2 at delta_ref: FALSE_ACCEPT > 0.20 or FALSE_REJECT > 0.20). MEASUREMENT_INVALID is reserved exclusively for prerequisite/control/substrate failure (including egress pinning or constancy failure and any route-health failure) and MUST NOT be used for a scientific T0. Pre-freeze synthetic calibration (script sha256 7b35e2e0e0e78fb638269127b0053a5bfe06a52abadaec64472982e194ae14db, output sha256 fbaabfeac1f4e9c612f9b4e34b9190ad63e75d01f2f2fa000b627370bce5a6bc): PC planted rho=0.98 -> T1 in 245/300 (0.8167 >= 0.80; CV permutation-significant in 300/300); PC rho=0.92 -> T1 in 0.73; NC exchangeable -> T1 in 0/300 with CV permutation-significant fraction 0.04 (<= 0.05); NEG vantage-superset (>= 11 of the 50 V1-clean endpoints blocked at V2) -> T1 in 0/300 (T0 via cross_vantage_transfer_violation); NEG independent-but-stationary vantages -> T1 in 0/300 (T0 via no_cross_vantage_information).",
-  "baselines": {
-    "B_EXCHANGE_V2": {
-      "id": "B_EXCHANGE_V2",
-      "description": "Within-vantage memory/constant null at the SECOND vantage: a GLOBAL uniform permutation of the V2 lag barrier indicator B_V2_delta_ref across all 57 endpoints (10000 permutations, seed 38121193195), preserving both marginals, recomputing I(B_V2_T0; B_V2_delta_ref) each time. This is the same statistic family as the parent's accepted B_EXCHANGE, applied to V2 data; it asserts the V2 anchor state carries no information about the V2 lag state beyond its marginal.",
-      "role": "primary strong null for V2_STATIONARITY_SKILL (mandate Q2)"
-    },
-    "B_CROSSVANTAGE": {
-      "id": "B_CROSSVANTAGE",
-      "description": "Cross-vantage exchangeable null (mandate Q3): a GLOBAL uniform permutation of the V2 anchor barrier indicator B_V2_T0 across all 57 endpoints (10000 permutations, seed 38121193195), preserving both marginals, recomputing I(B_V1_T0; B_V2_T0) each time. This is the null that the V1 anchor state carries no information about the V2 anchor state beyond its marginal (exchangeable endpoints). It is exactly the WP-002B guard realized: class agreement across vantages is measured with endpoint-clustered uncertainty and a permutation null, never assumed.",
-      "role": "primary strong null for CV_SKILL (mandate Q3)"
-    },
-    "B_CONSTANT_USABLE": {
-      "id": "B_CONSTANT_USABLE",
-      "description": "No-denylist floor (predict non-intrinsic for every endpoint at every rung at V2). Reference for the secondary V2_DENYLIST_SKILL log-loss improvement.",
-      "role": "floor / no-denylist product baseline"
-    },
-    "B_MARGINAL_V2": {
-      "id": "B_MARGINAL_V2",
-      "description": "Predict the V2 lag intrinsic class from the V2 lag-period marginal class frequency (constant-marginal null).",
-      "role": "constant-marginal diagnostic"
-    },
-    "B_LASTSWEEP_V2": {
-      "id": "B_LASTSWEEP_V2",
-      "description": "Predict the next V2 rung's barrier indicator from the immediately preceding V2 rung rather than from the V2 anchor (re-probe interval diagnostic at V2).",
-      "role": "recent-memory diagnostic"
-    },
-    "comparison": "V2_STATIONARITY_SKILL is tested against B_EXCHANGE_V2; CV_SKILL is tested against B_CROSSVANTAGE; the denylist decisions are compared with B_CONSTANT_USABLE via V2_DENYLIST_SKILL. B_MARGINAL_V2 and B_LASTSWEEP_V2 are reported diagnostics only."
+  "substrate_dependency": "a second independent egress with distinct public IP / ASN / geography; provisioned pre-freeze in DESIGN as a pinned Tor exit (see vantages.V2); if unpinnable at EXECUTE, MEASUREMENT_INVALID with exact blocker, never a single-vantage substitute."
+ },
+ "parent_handoff_disposition": {
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "path": "research/experiments/EXP-PHYSICS-38074818597/handoff.json",
+  "sha256": "10782ca8f1b6ec777fd1219d88595ae97540a19a3d73ab92606179856c184b39",
+  "disposition": "USE",
+  "preserved_carry_forward": {
+   "established": [
+    "MEASUREMENT-VALID AUDIT-PASS packet; frozen branch S1_STATIONARY holds at delta_ref=1800 s on the frozen 57-endpoint pool, one stdlib client, ONE egress vantage, one ~2041 s session.",
+    "n_t0_intrinsic=7 (6 BLOCK_403_CHALLENGE + 1 TRANSPORT_ERROR); CLASS_PERSISTENCE=1.0 for both; pooled INTRINSIC_PERSISTENCE=1.0.",
+    "Anchor-built intrinsic denylist stayed valid to a right-censored 1800 s: DENYLIST_FALSE_ACCEPT=0.0, DENYLIST_FALSE_REJECT=0.0.",
+    "STATIONARITY_SKILL=0.3196006958197081 nats; B_EXCHANGE p=9.999e-05 (10000 perms, seed 38074818597); endpoint-clustered CI95 [0.1424309377617678, 0.4954113328700338] lower>0.",
+    "Controls passed: PC_SYNTHETIC_STATIONARY rho=0.98 S1 fraction 0.8233>=0.80; NC_SYNTHETIC_EXCHANGEABLE false-positive 0.0267<=0.05; live oracle controls correct; classifier replay 0 mismatches.",
+    "Reported diagnostics only (never gating): CLASS_CONDITIONAL_TRANSIENCE, ANYBARRIER_FALSE_ACCEPT=0.125, RATE_ONSET_n=0.",
+    "Bounded positive at the HYPOTHESIS ceiling ONLY; timescale axis bounded not closed."
+   ],
+   "rejected": [
+    "All three frozen S0_NON_STATIONARY change classes absent on that pool/window/one egress.",
+    "A POOLED any-barrier denylist is NOT as valid as the intrinsic-only denylist (ANYBARRIER_FALSE_ACCEPT=0.125).",
+    "Any reading of the parent packet as validating C-WEB-DYNAMICS beyond HYPOTHESIS, as closing the barrier/timescale sub-thread, or as licensing any product denylist policy.",
+    "The pre-freeze textual attainability certificate's concrete figures are not reproducible artifacts."
+   ],
+   "unknown": [
+    "Source-vantage generalization (the object of THIS experiment).",
+    "Horizon beyond the 1800 s right-censoring.",
+    "ONSET (CLEAN->intrinsic) under higher rates / longer sequences; untested, not falsified.",
+    "Pool generalization beyond the curated 57-endpoint pool.",
+    "Protocol self-induction of ambient barrier prevalence.",
+    "Rate-limit behaviour beyond single ambient/induced 429 events."
+   ],
+   "do_not_assume": [
+    "Do NOT advance C-WEB-DYNAMICS above HYPOTHESIS from a single-vantage result.",
+    "Do NOT generalize beyond pool / client / UA / egress / window.",
+    "Do NOT read DENYLIST_HORIZON=1800 as valid beyond 1800 s (right-censored).",
+    "Do NOT generalize to JS/DOM/SPA/authenticated/edge/mobile/GraphQL/WebSocket substrates.",
+    "Do NOT conflate this endpoint access-barrier object with C-FRESHNESS or Runtime C-MEAS-VALID drift controls.",
+    "Do NOT treat /tmp pre-freeze certificate text as durable evidence.",
+    "Do NOT treat ONSET as falsified (0 events observed).",
+    "Do NOT promote any product action/denylist/scheduling policy on this evidence.",
+    "Do NOT treat parent next_question as authorization; a NEW experiment needs a director_mandate.",
+    "Do NOT re-run/retune/repair the parent packet in place, and do NOT recode its PASS as infrastructure failure.",
+    "Do NOT import the parent analysis into another lane except via exact packet paths/hashes or accepted Codex evidence."
+   ]
   },
-  "positive_control": {
-    "PC_CROSS_SYNTHETIC_STATIONARY": {
-      "id": "PC_CROSS_SYNTHETIC_STATIONARY",
-      "description": "Offline planted robust-transfer generator on the parent pilot marginal (46 CLEAN, 5 BLOCK_403_CHALLENGE, 1 TRANSPORT_ERROR, 5 OTHER_NONBARRIER; the same marginal used for the parent's PC): the V2 anchor classes equal the V1 anchor classes (perfect cross-vantage agreement at the anchor) and the V2 lag class equals the V1 anchor class with probability rho, else is redrawn from the marginal. The EXACT frozen branch rule (V2 persistence + V2 denylist + V2_STAT_SIG + CV_AGREEMENT_SIG + CV_DENYLIST_TRANSFER_VALID, with within-vantage and cross-vantage permutation tests and endpoint-clustered bootstrap CI clauses) is applied to every replication.",
-      "literal_design_values": {
-        "rng_master_seed": 38121193195,
-        "replications_R": 300,
-        "n_endpoints": 57,
-        "perms_per_rep": 500,
-        "boot_resamples_per_rep": 500,
-        "alpha": 0.05,
-        "delta_SKILL_nats": 0.05,
-        "intrinsic_persistence_min": 0.8,
-        "tau_FA": 0.2,
-        "tau_FR": 0.2
-      },
-      "power_requirement": "Fraction of replications selecting T1_VANTAGE_ROBUST must be >= 0.80 at rho=0.98, and is reported at rho=0.92.",
-      "fresh_design_calibration": {
-        "rho=0.98_T1_fraction": 0.8167,
-        "rho=0.98_CV_perm_sig_rate": 1.0,
-        "rho=0.98_CV_skill_mean_nats": 0.3312,
-        "rho=0.92_T1_fraction": 0.73,
-        "rho=0.92_CV_perm_sig_rate": 1.0
-      },
-      "construct_boundary": "Validates that the estimator and the five-part branch logic recover a known jointly-stationary two-vantage endpoint population at n=57; it does not assert that any real endpoint is robust across vantages."
-    },
-    "PC_ORACLE_BARRIER": {
-      "id": "PC_ORACLE_BARRIER",
-      "description": "Live positive control on non-pool hosts with deterministic status, executed on BOTH vantages (V1 direct opener and V2 pinned-tunnel opener): https://httpbin.org/status/429 and redundant https://httpbingo.org/status/429 must classify RATE_LIMIT_429; https://no-such-host.invalid/ must classify TRANSPORT_ERROR (through the V2 tunnel the expected error is 'Tunnel connection failed: 503 Service Unavailable (resolve failed)' which still yields status None -> TRANSPORT_ERROR); https://httpbin.org/status/403 must classify UNAVAILABLE_403 (proving 403-as-plain is not read as a challenge block on either egress).",
-      "literal_design_values": {
-        "hosts": [
-          "https://httpbin.org/status/429",
-          "https://httpbingo.org/status/429",
-          "https://no-such-host.invalid/",
-          "https://httpbin.org/status/403"
-        ],
-        "per_host_requests": 2,
-        "vantages": [
-          "V1",
-          "V2"
-        ]
-      },
-      "pass_condition": "Every oracle request on every vantage classified into its expected class; otherwise MEASUREMENT_INVALID.",
-      "construct_boundary": "Confirms the live collection+classifier path registers barriers identically through both egresses and separates 403-as-block from 403-as-plain; not a natural Web barrier."
-    }
+  "this_experiment_varies": "source vantage (V1 direct runner egress vs V2 second independent egress); protocol, pool, classifier and window ladder are held frozen for comparability."
+ },
+ "question": "Does the measured endpoint intrinsic access-barrier persistence and anchor-built intrinsic-denylist validity - right-censored at 1800 s on one egress and one session - transfer across independent source vantages, or is S1_STATIONARY an artifact of a single network vantage? Over nominal rungs 0/300/900/1800 s at V2 (second independent egress: distinct public IP/ASN/geography) using the frozen 57-endpoint pool and frozen intrinsic classifier: (Q1) do the same endpoints retain their intrinsic class with per-class CLASS_PERSISTENCE >= 0.80; (Q2) does a V2-anchor-built intrinsic denylist remain valid through delta_ref (FALSE_ACCEPT <= 0.20, FALSE_REJECT <= 0.20, B_EXCHANGE_V2 rejected, positive endpoint-clustered CI lower bound); (Q3) do per-endpoint intrinsic classes agree across V1 and V2 so that ONE shared denylist is licensed rather than a vantage-specific schedule?",
+ "hypothesis": "H1_VANTAGE_ROBUST: the intrinsic barrier classes BLOCK_403_CHALLENGE and TRANSPORT_ERROR are properties of the endpoint, not of the source vantage. Concretely, at a second independent egress V2 the same endpoints retain their intrinsic class (per-class CLASS_PERSISTENCE >= 0.80), a V2-anchor-built intrinsic denylist stays valid through delta_ref (FALSE_ACCEPT<=0.20, FALSE_REJECT<=0.20), the V2 anchor barrier indicator carries information beyond the exchangeable null (B_EXCHANGE_V2 rejected, positive endpoint-clustered CI), the V1 and V2 anchor classes agree (CV_SKILL significant, positive CI), and the V1-anchor intrinsic denylist transfers to V2 delta_ref (CV FALSE_ACCEPT<=0.20, CV FALSE_REJECT<=0.20). One shared intrinsic denylist is then licensed modulo the frozen pool.",
+ "falsifier": "The hypothesis is falsified at the frozen thresholds if, with all measurement-validity prerequisites passing, the frozen branch rule selects S0_VANTAGE_SPECIFIC: any of (a) V2_INTRINSIC_PERSISTENT false; (b) V2_DENYLIST_INTRINSIC_VALID false; (c) V2_STAT_SIG false; (d) CV_AGREEMENT_SIG false; (e) CV_DENYLIST_TRANSFER_VALID false (CV FALSE_ACCEPT>0.20 or CV FALSE_REJECT>0.20). Falsification is a scientific result, not a measurement failure; a second egress that cannot be provisioned, pinned or held stable is MEASUREMENT_INVALID, not falsification.",
+ "estimators": {
+  "plugin_mutual_information_binary_nats": "I(X;Y) = sum_cells p(x,y) * ln(p(x,y)/(p(x)p(y))) over the 2x2 table of binary barrier indicators, natural log; X=anchor, Y=delta_ref (within-vantage) or Y=V2 anchor (cross-vantage, X=V1 anchor).",
+  "permutation_null": "B_EXCHANGE_V2: permute the V2 delta_ref barrier indicator across the 57 endpoints (preserving the marginal) and recompute I(B_V2_T0; B_V2_delta), 10000 permutations, seed 38121193195; p=(1+#{perm>=obs})/(1+10000). B_CROSSVANTAGE: permute the V2 anchor barrier indicator across endpoints and recompute I(B_V1_T0; B_V2_T0), same count/seed. Neither null is a scientific comparator; it is a sampling-exchangeability reference.",
+  "cluster_bootstrap_ci": "Nonparametric bootstrap resampling CLUSTERS with replacement, 5000 resamples: primary clusters = endpoint (57), secondary clusters = registrable domain (53, collapsing 7 endpoints on archlinux.org/djangoproject.com/spring.io). CI=[2.5th,97.5th] percentile; a significance clause requires BOTH lower bounds > 0. This only quantifies sampling uncertainty under the frozen pool; it does not license Web-wide generalization.",
+  "class_agreement": "CV_INTRINSIC_CLASS_AGREEMENT = fraction of endpoints intrinsic at BOTH anchors with the same intrinsic class. CV_CLASS_AGREEMENT_ANY = fraction with identical class over all 6 classes. CV_MI_CLASS_T0 = plug-in MI over the 6x6 class table at the anchors (secondary).",
+  "denylist_transfer": "denylist = the V1-anchor intrinsic endpoint set. CV_DENYLIST_FALSE_ACCEPT = fraction of V1-anchor intrinsic endpoints that are non-intrinsic at V2 delta_ref. CV_DENYLIST_FALSE_REJECT = fraction of V1-anchor non-intrinsic endpoints that are intrinsic at V2 delta_ref. V2_* analog uses the V2-anchor intrinsic set."
+ },
+ "baselines": {
+  "B_EXCHANGE_V2": "Permutation/constant reference for within-V2 temporal association (see estimators).",
+  "B_CROSSVANTAGE": "Permutation reference for V1-anchor vs V2-anchor class agreement (endpoint relabelling null).",
+  "B_CONSTANT_USABLE": "Floor log-loss of predicting the V2 delta_ref barrier indicator from the constant anchor barrier prevalence.",
+  "B_MARGINAL_V2": "Log-loss of predicting V2 delta_ref barrier from the V2 anchor marginal only (no endpoint identity).",
+  "B_LASTSWEEP_V2": "Class persistence baseline: predict V2 delta_ref class = V2 anchor class."
+ },
+ "positive_control": {
+  "PC_CROSS_SYNTHETIC_STATIONARY": "Synthetic world with planted perfect cross-vantage agreement (V2 anchor class = V1 anchor class) and temporal persistence rho=0.98 from the V2 anchor to V2 delta_ref. FROZEN threshold: T1 selection fraction over R=400 synthetic worlds (perms=2000, boot=500, seed 38121193195) must be >= pc_power_min=0.80. DESIGN pre-freeze calibration (R=300, perms=1000, boot=1000): T1 fraction 0.9333 (CV-significant fraction 0.9767); rho=0.92 -> 0.76.",
+  "PC_SYNTHETIC_STATIONARY": "Single-vantage replica control: rho=0.98 internal stationarity; frozen threshold S1 fraction >= 0.80. DESIGN pre-freeze calibration 0.9333.",
+  "PC_ORACLE_BARRIER": "LIVE arena liveness control executed at BOTH vantages at each rung start: httpbin.org/status/429 and httpbingo.org/status/429 -> RATE_LIMIT_429; no-such-host.invalid -> TRANSPORT_ERROR; httpbin.org/status/403 -> UNAVAILABLE_403. Failure -> MEASUREMENT_INVALID. DESIGN pre-freeze probe: 7/7 oracle hosts classified correctly through the V2 tunnel and on V1."
+ },
+ "null_control": {
+  "NC_SYNTHETIC_EXCHANGEABLE": "Synthetic world with V1 anchor, V2 anchor and V2 delta_ref i.i.d. from the parent anchor marginal (no endpoint identity, no vantage structure). FROZEN threshold: T1 selection fraction over R=400 worlds (seed 38121193196) must be <= nc_false_positive_max=0.05. DESIGN pre-freeze calibration (R=300): T1=0.0, CV-significant fraction 0.01.",
+  "NC_INDEPENDENT_STATIONARY": "Synthetic world where each vantage is internally stationary (rho=0.98) but the two vantages are mutually independent. Isolates the cross-vantage agreement clause: T1 fraction must be <= 0.05. DESIGN pre-freeze calibration (R=300, seed 38121193197): T1=0.0, CV-significant fraction 0.0067.",
+  "NC_CROSS_SUPERSET": "Synthetic world where V2 blocks strictly more than V1 (every V1 barrier stays a barrier, plus extra BLOCK_403_CHALLENGE). Must select S0_VANTAGE_SPECIFIC (T1=0). DESIGN pre-freeze calibration (R=300, seed 38121193198): T1=0.0 (CV-significant fraction 0.7933 shows the transfer clause, not the agreement clause, does the work - it is not a vacuous control).",
+  "NC_CLEAN_ORACLE": "LIVE arena cleanliness control at BOTH vantages: httpbin.org/status/200, httpbin.org/uuid, example.com -> CLEAN. Failure -> MEASUREMENT_INVALID."
+ },
+ "measurement_validity": {
+  "branch_on_failure": "MEASUREMENT_INVALID (never FALSIFIES)",
+  "prerequisites": {
+   "MV1_vantage_distinct": "V1 public IP != V2 exit public IP AND V1 ASN != V2 exit ASN AND country/geo differ; recorded at session start and session end.",
+   "MV2_vantage_pinned": "V2 exit relay pinned (SETCONF ExitNodes=<fingerprint> StrictNodes=1) and identical at session start, mid and end; any rotation -> INVALID.",
+   "MV3_anchor_complete": "57/57 endpoints classified at T0 on BOTH vantages; 57/57 at delta_ref on BOTH.",
+   "MV3a_pool_exercises": "At least one vantage anchor (V1 or V2) has >= 1 intrinsic endpoint AND at least one has >= 1 non-intrinsic endpoint; if the frozen pool yields zero intrinsic endpoints at BOTH anchors the classifier/pool did not exercise and the run is INVALID.",
+   "MV4_horizon": "delta_ref_actual_s >= 1500 s.",
+   "MV5_classifier_replay": "Frozen classifier replayed on the parent raw file (research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl, 228 rows) with 0 mismatches AND every live record double-classified from raw fields with 0 mismatches.",
+   "MV6_oracles": "PC_ORACLE_BARRIER and NC_CLEAN_ORACLE pass at both vantages and every rung.",
+   "MV6a_v2_transport_discriminator": "A V2 endpoint-level TRANSPORT_ERROR is accepted as an intrinsic class ONLY if the same-rung V2 control-plane fetches succeeded (the HTTPTunnelPort proxy was reachable and the oracle hosts above classified correctly). A proxy-level failure (connection to 127.0.0.1:19051 refused/timed out) is a tunnel failure -> MEASUREMENT_INVALID and must NOT be recorded as an endpoint TRANSPORT_ERROR; an endpoint-specific resolve/timeout failure through a healthy tunnel IS a legitimate intrinsic class.",
+   "MV7_controls": "ALL declared controls pass their frozen thresholds: PC_CROSS_SYNTHETIC_STATIONARY >= 0.80, PC_SYNTHETIC_STATIONARY >= 0.80, NC_SYNTHETIC_EXCHANGEABLE <= 0.05, NC_INDEPENDENT_STATIONARY <= 0.05, NC_CROSS_SUPERSET == 0.",
+   "MV8_v1_egress_stable": "V1 ASN constant across all four rungs; a mid-session V1 egress change -> INVALID.",
+   "MV9_tunnel_live": "Tor bootstrap reached 100% and the HTTPTunnelPort proxy served every V2 GET without tunnel error.",
+   "MV10_no_pool_drift": "The 57 endpoints are byte-identical (URL strings) to the bound parent spec pool."
   },
-  "null_control": {
-    "NC_CROSS_SYNTHETIC_EXCHANGEABLE": {
-      "id": "NC_CROSS_SYNTHETIC_EXCHANGEABLE",
-      "description": "Offline exchangeable generator: V1 anchor, V2 anchor and V2 lag states drawn independently from the same marginal (equal to the observed V1 anchor marginal); the EXACT frozen branch rule is applied.",
-      "literal_design_values": {
-        "rng_master_seed": 38121193196,
-        "replications_R": 300,
-        "n_endpoints": 57,
-        "perms_per_rep": 10000
-      },
-      "pass_condition": "Fraction of R replications with B_CROSSVANTAGE permutation p < 0.05 must be <= 0.05 (and T1 fraction must be 0).",
-      "fresh_design_calibration": {
-        "CV_perm_sig_fraction": 0.04,
-        "T1_fraction": 0.0,
-        "cv_skill_mean_nats": 0.0106
-      },
-      "construct_boundary": "A genuinely exchangeable two-vantage endpoint population must not yield spurious cross-vantage skill."
-    },
-    "NC_CLEAN_ORACLE": {
-      "id": "NC_CLEAN_ORACLE",
-      "description": "Live negative control on https://httpbin.org/status/200, https://httpbin.org/uuid and https://example.com/, which must classify CLEAN on BOTH vantages.",
-      "literal_design_values": {
-        "hosts": [
-          "https://httpbin.org/status/200",
-          "https://httpbin.org/uuid",
-          "https://example.com/"
-        ],
-        "per_host_requests": 2,
-        "vantages": [
-          "V1",
-          "V2"
-        ]
-      },
-      "pass_condition": "All requests classify CLEAN on both vantages; otherwise MEASUREMENT_INVALID.",
-      "construct_boundary": "Confirms the classifier does not fire on clean responses through either egress."
-    },
-    "C_VANTAGE_EVIDENCE": {
-      "id": "C_VANTAGE_EVIDENCE",
-      "description": "Validity control for the second-egress construct, NOT a statistical null: at the anchor, record V2 identity via https://api.ipify.org (IP), https://ifconfig.co/json (IP, ASN, asn_org, country, country_iso, hostname), https://ipwho.is/ (redundant ASN/geo), https://check.torproject.org/api/ip (IsTor must be true) and V1 identity via http://ip-api.com/json (IP, ASN, country) and https://api.ipify.org (IP); at every rung, record the V2 exit IP via the tunnel (must equal the pinned rung-0 exit IP), the V2 route-health oracle https://httpbin.org/status/200 via the tunnel (must classify CLEAN), the V1 IP via direct ipify, and the V1 ASN via direct ip-api (must stay constant). ipinfo.io and ip-api.com are known to be blocked through the Tor tunnel (pre-freeze probe) and are NOT used for V2 identity.",
-      "literal_design_values": {
-        "pinned_exit_requirement": "V2 exit IP identical across all four rungs and equal to the pre-flight pinned IP",
-        "distinctness_requirement": "V2 exit IP != V1 IP; V2 ASN != V1 ASN; V2 country != V1 country",
-        "v1_constancy_requirement": "V1 ASN identical across all four rungs",
-        "route_health_requirement": "V2 httpbin/status/200 oracle classifies CLEAN before every rung sweep",
-        "check_interval": "per rung"
-      },
-      "pass_condition": "All four requirements hold for all rungs; otherwise MEASUREMENT_INVALID with the exact egress series recorded.",
-      "construct_boundary": "Certifies the 'one second independent egress' construct (distinct IP/ASN/geo, held constant); it is a substrate-integrity gate, not a scientific claim."
-    },
-    "C_PROBE_SELF_INDUCTION": {
-      "id": "C_PROBE_SELF_INDUCTION",
-      "description": "Validity control for protocol self-induction at each vantage, NOT a statistical null: ambient barrier prevalence across the ladder rungs per vantage on the 52 non-stress endpoints (the parent's stratum), plus a two-sided trend whose clustered CI excludes 0, reported as a disclosure (mirrors the parent's C_PROBE_SELF_INDUCTION).",
-      "literal_design_values": {
-        "endpoints": "the 52 frozen endpoints outside stratum_stress (inherited)",
-        "rungs": [
-          0,
-          300,
-          900,
-          1800
-        ],
-        "direction": "two-sided"
-      },
-      "pass_condition": "No hard pass/fail; reported transparently in result.json.",
-      "construct_boundary": "Detects whether the repeated two-vantage probing protocol itself changes ambient barrier prevalence at either vantage."
-    }
-  },
-  "measurement_validity": {
-    "target_integrity": "Every request stores raw HTTP status, response headers (server, cf-mitigated, retry-after), body SHA-256, body byte length, elapsed ms, transport error string, transport error class, and a printable 8192-char body prefix; plus vantage tag (V1/V2) and rung. Classification is a pure deterministic function of those stored fields, so AUDIT can recompute the class exactly on either vantage.",
-    "split_integrity": "The anchor T0 and all rungs are independent observations of the SAME endpoints; there is no train/test split. All primary metrics are closed-form functions of per-endpoint class sequences per vantage. Sampling order within a rung is a frozen seeded permutation (seed 38121193195) and does not depend on outcomes.",
-    "sampling_integrity": "The 57-endpoint universe is frozen and may not be substituted, added to, or dropped. Per-rung probe order is the frozen seeded permutation. No endpoint may be dropped after seeing its outcomes. The V2-then-V1 per-endpoint pairing order is fixed and does not depend on outcomes.",
-    "uncertainty_integrity": "Endpoint-permutation nulls: 10000 GLOBAL uniform shuffles of the lag (or V2-anchor) barrier indicator across all 57 endpoints (seed 38121193195) for both B_EXCHANGE_V2 and B_CROSSVANTAGE. Endpoint-clustered bootstrap: cluster = registrable_domain (URL host with one leading 'www.' stripped and the final two dot-separated labels retained; no multi-label public suffix occurs in the frozen 57); 10000 resamples (seed 38121193195), percentile 95% CIs, for both V2_STATIONARITY_SKILL and CV_SKILL.",
-    "representation_integrity": "One stdlib-HTTP client implementation (Python 3.12 standard library ONLY; numpy NOT required or imported) realized as two openers: V1 = direct default route, V2 = same client routed through the pinned Tor HTTPTunnelPort CONNECT proxy (urllib ProxyHandler), which is byte-transparent for TLS so origin responses are preserved; one continuous session. The frozen classifier and all constants are literal in this spec. Results describe this frozen pool, this datacenter <-> Tor egress pair and this window ladder only.",
-    "control_integrity": "PC_CROSS_SYNTHETIC_STATIONARY T1-power (permutation significance under planted robust transfer) must be >= 0.80; NC_CROSS_SYNTHETIC_EXCHANGEABLE cross-vantage false-positive must be <= 0.05; PC_ORACLE_BARRIER and NC_CLEAN_ORACLE live classifications must be correct on BOTH vantages. Any failure => status MEASUREMENT_INVALID, never a scientific negative.",
-    "prerequisite_integrity": "Both vantages must reach the frozen universe and both oracle host groups. On EACH vantage, at T0, >= 3 ambient intrinsic endpoints and >= 3 ambient barrier endpoints; anchor sweep and delta_ref=1800 s rung complete with actual delta >= 1500 s. Egress gates (C_VANTAGE_EVIDENCE): V2 exit pinned and identical across rungs, distinct IP/ASN/geo from V1, IsTor true at anchor; V1 ASN constant across rungs. V2 route-health oracle classes CLEAN before every rung. Any shortfall => MEASUREMENT_INVALID (attainability/substrate failure, recorded as the exact blocker receipt the mandate allows).",
-    "power_integrity": "Detection power at the observed V2 anchor intrinsic counts is REPORTED (POWER_AT_RHO98, POWER_AT_RHO92 with the frozen calibration); it is not a gate. No branch depends on non-significance being read as falsification: T0 requires at least one of the five enumerated positive change classes.",
-    "egress_integrity": "The second egress is provisioned as a purpose-built anonymous-network exit via a tor 0.4.x instance started by EXECUTE with SocksPort 0, HTTPTunnelPort 127.0.0.1:19051, ControlPort + CookieAuthentication for SETCONF, MaxCircuitDirtiness 7200, NewCircuitPeriod 7200. Pre-flight: discover the unpinned exit IP via https://api.ipify.org through the tunnel; pin it with SETCONF ExitNodes=<ip> StrictNodes=1; SIGNAL NEWNYM; verify api.ipify.org through the tunnel returns the pinned IP (up to 3 attempts). Pinning to the exact IP literal (not a /24) was verified pre-freeze to hold a constant exit IP across repeated checks while /24 pinning rotated within the subnet; exit rotation otherwise occurs within minutes on an unpinned instance (pre-freeze observation). If pin verification fails, EXECUTE records the exact error series and terminates as MEASUREMENT_INVALID (substrate blocker).",
-    "timing_integrity": "Session start S is defined after pre-flight (egress pin verified, oracle battery passed). Each rung k starts at nominal offset LADDERS[k] from S. Within a rung, endpoints are visited in the frozen seeded order, and for each endpoint the V2 fetch is executed first, then the V1 fetch (per-endpoint inter-vantage skew of seconds; disclosed). Actual per-request and per-rung timestamps are recorded; per-rung metrics use nominal rungs; delta_ref_actual is measured per vantage and must be >= 1500 s for both. Within-vantage same-endpoint spacing remains >= 300 s exactly as in the parent protocol.",
-    "activity_disclosure": "The only pre-freeze activity is non-outcome-bearing and DESIGN-local: (i) egress-substrate probes on neutral/oracle hosts only (NEVER the frozen 57 pool, whose V2-side classes are the scientific outcome): tor installation and bootstrap, HTTPTunnelPort CONNECT tunneling with the stdlib urllib client, oracle-host classification through both egresses (probe_tunnel.py sha256 ba96913d25c7343a28f39bd3eb6e2e020fb669289cab3c55f11cf9df56b6e3bc, output ae7586a75338a7b5c1ac689659d0766555195feae2d56f33aef9deaa1d89e90a), exit pinning via control port (pin_test.py sha256 59f62f4c1e89b0b6c67a1874fba3e03653b75a94721d47a71dbfd11c2c38558b, output 94db550abb39f768fa22dd192ad3cf4be7ae7e87ba114d8e7d036ba1788fc702), and egress-identity service availability through the tunnel (api.ipify.org, ifconfig.co/json, ipwho.is, cloudflare cdn-cgi/trace, check.torproject.org/api/ip usable; ipinfo.io and ip-api.com blocked by the tunnel - documented); (ii) offline estimator/PC/NC/negative-reachability calibration on synthetic worlds with the EXACT frozen branch rule (calibrate_cv.py sha256 7b35e2e0e0e78fb638269127b0053a5bfe06a52abadaec64472982e194ae14db, output fbaabfeac1f4e9c612f9b4e34b9190ad63e75d01f2f2fa000b627370bce5a6bc). These establish attainability, calibration and branch reachability only; EXECUTE re-verifies all floors and controls from its own data; the raw probe artifacts are DESIGN-local (/tmp) and are NOT interpretation dependencies."
-  },
-  "frozen_intrinsic_classifier": {
-    "CHALLENGE_RE_LITERAL": "(?i)(just a moment|cf-browser-verification|cf[-_]chl[-_]|challenge-platform|cf-challenge|cdn-cgi/challenge|attention required|checking your browser|enable javascript and cookies|verify you are human|please complete the security check|g-recaptcha|hcaptcha|recaptcha|cf-turnstile|<title>\\s*just a moment)",
-    "match_scope": "CHALLENGE_RE is applied to the first 262144 bytes of the response body decoded as utf-8 with errors ignored. cf-mitigated is lowercased and compared to the string 'challenge'.",
-    "CLEAN": "HTTP status in 200..299 (2xx) AND body does not match CHALLENGE_RE.",
-    "RATE_LIMIT_429": "HTTP status == 429.",
-    "BLOCK_403_CHALLENGE": "HTTP status == 403 AND (lowercase(cf-mitigated) == 'challenge' OR body matches CHALLENGE_RE).",
-    "UNAVAILABLE_403": "HTTP status == 403 without any challenge marker.",
-    "TRANSPORT_ERROR": "No HTTP response (DNS failure, connection refused, TLS failure, timeout, or tunnel failure).",
-    "OTHER_NONBARRIER": "Any other HTTP status (404, 500, redirect chains to error) OR a 2xx carrying a challenge marker.",
-    "barrier_set": [
-      "RATE_LIMIT_429",
-      "BLOCK_403_CHALLENGE",
-      "TRANSPORT_ERROR"
-    ],
-    "ordinary_unavailability_set": [
-      "UNAVAILABLE_403",
-      "OTHER_NONBARRIER"
-    ],
-    "intrinsic_classes": [
-      "BLOCK_403_CHALLENGE",
-      "TRANSPORT_ERROR"
-    ],
-    "severity_rank": {
-      "TRANSPORT_ERROR": 5,
-      "RATE_LIMIT_429": 4,
-      "BLOCK_403_CHALLENGE": 3,
-      "UNAVAILABLE_403": 2,
-      "OTHER_NONBARRIER": 1,
-      "CLEAN": 0
-    },
-    "label_determinism": "All classes are functions of a single request's stored fields only; none depends on prior requests or on the vantage tag."
-  },
-  "frozen_universe": {
-    "frozen": true,
-    "n_endpoints": 57,
-    "source": "verbatim endpoints of EXP-PHYSICS-37992957068, inherited unchanged by EXP-PHYSICS-38074818597 and reused VERBATIM here; NOT extended. EXECUTE may not substitute, add to, or drop endpoints.",
-    "endpoints": [
-      "https://gitlab.com/users/sign_in",
-      "https://gitlab.gnome.org/users/sign_in",
-      "https://invent.kde.org/users/sign_in",
-      "https://salsa.debian.org/users/sign_in",
-      "https://gitlab.freedesktop.org/users/sign_in",
-      "https://gitlab.archlinux.org/users/sign_in",
-      "https://codeberg.org/user/login",
-      "https://gitea.com/user/login",
-      "https://git.disroot.org/user/login",
-      "https://discuss.python.org/",
-      "https://community.openai.com/",
-      "https://discuss.elastic.co/",
-      "https://community.cloudflare.com/",
-      "https://forum.freecodecamp.org/",
-      "https://discuss.hashicorp.com/",
-      "https://discuss.kubernetes.io/",
-      "https://community.home-assistant.io/",
-      "https://discourse.julialang.org/",
-      "https://discuss.rubyonrails.org/",
-      "https://discussion.fedoraproject.org/",
-      "https://forum.manjaro.org/",
-      "https://forum.endeavouros.com/",
-      "https://en.wikipedia.org/w/index.php?title=Special:UserLogin",
-      "https://wiki.archlinux.org/index.php?title=Special:UserLogin",
-      "https://wiki.gentoo.org/index.php?title=Special:UserLogin",
-      "https://wiki.openstreetmap.org/w/index.php?title=Special:UserLogin",
-      "https://www.mediawiki.org/w/index.php?title=Special:UserLogin",
-      "https://www.wikidata.org/w/index.php?title=Special:UserLogin",
-      "https://www.djangoproject.com/accounts/login/",
-      "https://www.djangoproject.com/admin/login/",
-      "https://pypi.org/account/login/",
-      "https://docs.djangoproject.com/",
-      "https://bitbucket.org/account/signin/",
-      "https://rubygems.org/session/new",
-      "https://www.reddit.com/login/",
-      "https://news.ycombinator.com/login",
-      "https://basecamp.com/",
-      "https://pragprog.com/",
-      "https://www.npmjs.com/login",
-      "https://dev.to/enter",
-      "https://start.spring.io/",
-      "https://spring.io/",
-      "https://wordpress.org/wp-login.php",
-      "https://wordpress.com/log-in",
-      "https://www.phpbb.com/community/",
-      "https://discuss.flarum.org/",
-      "https://community.nodebb.org/",
-      "https://community.invisioncommunity.com/",
-      "https://www.joomla.org/",
-      "https://www.concretecms.org/",
-      "https://craftcms.com/",
-      "https://www.okta.com/login/",
-      "https://auth0.com/",
-      "https://login.microsoftonline.com/",
-      "https://duckduckgo.com/html/?q=test",
-      "https://www.bing.com/search?q=test",
-      "https://search.brave.com/search?q=test"
-    ]
-  },
-  "sweep_protocol": {
-    "unit": "(endpoint, vantage, sweep_index); anchor = sweep 0 (T0) on each vantage",
-    "sweep_target_offsets_s": [
-      0,
-      300,
-      900,
-      1800
-    ],
-    "ladder_s": [
-      300,
-      900,
-      1800
-    ],
-    "delta_ref_s": 1800,
-    "session_start": "S = the instant the pre-flight (tor provision + exit pin verification + oracle battery + egress identity record) completes successfully; both vantages share S.",
-    "ambient_probe": "For EVERY (endpoint, vantage): a fresh cookie jar, then exactly ONE HTTP GET; store raw fields; ambient_class = frozen classifier output. Endpoints are visited in a per-rung frozen seeded permutation order (seed 38121193195). For each endpoint the V2 fetch is executed FIRST through the pinned tunnel opener, THEN the V1 fetch through the direct opener. Inter-endpoint gap 0.30 s. The ambient ladder is the PRIMARY state for all metrics.",
-    "per_rung_pre_checks": "Immediately before each rung sweep: (i) V2 exit IP via https://api.ipify.org through the tunnel - must equal the pinned pre-flight exit IP; (ii) V2 route-health oracle https://httpbin.org/status/200 through the tunnel - must classify CLEAN; (iii) V1 IP via direct https://api.ipify.org and V1 ASN via direct http://ip-api.com/json - ASN must equal the anchor V1 ASN. Any failure => MEASUREMENT_INVALID with the exact egress series recorded.",
-    "anchor_egress_record": "At the anchor only: V2 via https://ifconfig.co/json (IP/ASN/asn_org/country/hostname), https://ipwho.is/ (redundant), https://check.torproject.org/api/ip (IsTor must be true), https://api.ipify.org; V1 via http://ip-api.com/json and https://api.ipify.org. Distinctness gate: V2 IP != V1 IP AND V2 ASN != V1 ASN AND V2 country != V1 country.",
-    "request_headers": "Frozen User-Agent 'SPIDER-research2/1.0 (+credential-free access-state persistence probe)' and Accept: */*; HTTP GET only; no authentication; no JavaScript.",
-    "request_policy": {
-      "method": "GET",
-      "follow_redirects": true,
-      "max_redirects": 5,
-      "timeout_s": 30,
-      "retries": 0,
-      "attempts_per_observation": 1,
-      "tls_verify": true,
-      "v1_opener": "direct default route urllib opener (as the parent)",
-      "v2_opener": "same urllib client with ProxyHandler({'http','https'}: http://127.0.0.1:19051) routing through the pinned tor HTTPTunnelPort CONNECT proxy (byte-transparent TLS tunnel)",
-      "note": "No retry, so a DNS/connect/TLS/timeout/tunnel failure is directly TRANSPORT_ERROR. The per_host_requests=2 oracle controls are two independent observations, not retries."
-    },
-    "wall_clock_cap_minutes": 75,
-    "partial_ladder_rule": "Analysis labels each sweep by its NOMINAL rung; per-rung metrics use nominal rungs. Actual elapsed deltas are recorded and reported per vantage. If on EITHER vantage the anchor fails entirely, or the delta_ref sweep actual delta < 1500 s, or fewer than 3 T0 intrinsic / 3 T0 barrier endpoints are observed, or the egress/route gates fail at any rung, the run is MEASUREMENT_INVALID."
-  },
-  "strata": {
-    "stratum_intrinsic_candidates": {
-      "definition": "Fixed pre-registered towards-persistent candidates inherited from the parent's accepted V1 anchor evidence (result O9) and the parent census; reported as a diagnostic subgroup (the PARENT_V1_DENYLIST), NOT selected from this run's outcomes.",
-      "endpoints": [
-        "https://gitlab.com/users/sign_in",
-        "https://community.cloudflare.com/",
-        "https://www.npmjs.com/login",
-        "https://wordpress.com/log-in",
-        "https://www.phpbb.com/community/",
-        "https://community.nodebb.org/",
-        "https://community.invisioncommunity.com/"
-      ]
-    },
-    "stratum_stress": {
-      "definition": "The parent's fixed pre-registered rate-limit-capable stratum, EXCLUDED from the 52-endpoint non-stress robustness subset but INCLUDED in the full-pool primary inference population. No induced-transience probe is run in this experiment (the parent answered Q3; the mandate varies the vantage axis, not the rate-transience axis).",
-      "endpoints": [
-        "https://www.djangoproject.com/admin/login/",
-        "https://www.djangoproject.com/accounts/login/",
-        "https://auth0.com/",
-        "https://search.brave.com/search?q=test",
-        "https://community.home-assistant.io/"
-      ]
-    },
-    "primary_inference_population": "The full frozen 57-endpoint pool for all primary metrics on both vantages; CV_SKILL_NO_STRESS and per-vantage barrier-prevalence trends on the 52 non-stress endpoints are the pre-registered robustness replicas."
-  },
-  "stable_identifiers": {
-    "primary_metrics": [
-      "V2_STATIONARITY_SKILL",
-      "CV_SKILL"
-    ],
-    "decision_quantities": [
-      "V2_INTRINSIC_PERSISTENT",
-      "V2_DENYLIST_INTRINSIC_VALID",
-      "V2_STAT_SIG",
-      "CV_AGREEMENT_SIG",
-      "CV_DENYLIST_TRANSFER_VALID"
-    ],
-    "secondary_metrics": [
-      "V2_STATIONARITY_SKILL_BY_RUNG",
-      "V2_STATIONARITY_SKILL_B_EXCHANGE_p",
-      "V2_STATIONARITY_SKILL_CI95",
-      "V2_MI_CLASS",
-      "V2_CLASS_PERSISTENCE",
-      "V2_INTRINSIC_PERSISTENCE",
-      "V2_DENYLIST_FALSE_ACCEPT",
-      "V2_DENYLIST_FALSE_REJECT",
-      "V2_DENYLIST_BY_RUNG",
-      "V2_DENYLIST_HORIZON",
-      "V2_ANYBARRIER_FALSE_ACCEPT",
-      "V2_DENYLIST_SKILL",
-      "V2_BARRIER_PREVALENCE_BY_RUNG",
-      "V2_NO_STRESS_STATIONARITY_SKILL",
-      "V1_STATIONARITY_SKILL",
-      "V1_CLASS_PERSISTENCE",
-      "V1_INTRINSIC_PERSISTENCE",
-      "V1_DENYLIST_FALSE_ACCEPT",
-      "V1_DENYLIST_FALSE_REJECT",
-      "V1_DENYLIST_INTRINSIC_VALID",
-      "V1_n_t0_intrinsic",
-      "V1_n_t0_barrier",
-      "V1_f_b_obs",
-      "V1_REPLICATION_PARENT_DENYLIST_OVERLAP",
-      "CV_STATIONARITY_SKILL",
-      "CV_SKILL_B_CROSSVANTAGE_p",
-      "CV_SKILL_CI95",
-      "CV_MI_CLASS",
-      "CV_CLASS_AGREEMENT_T0",
-      "CV_INTRINSIC_AGREEMENT_T0",
-      "CV_DENYLIST_FALSE_ACCEPT",
-      "CV_DENYLIST_FALSE_REJECT",
-      "CV_AGREEMENT_BY_RUNG",
-      "CV_SKILL_NO_STRESS",
-      "PARENT_DENYLIST_FALSE_ACCEPT",
-      "PARENT_DENYLIST_FALSE_REJECT",
-      "PARENT_DENYLIST_TRANSFER_VALID",
-      "PARENT_DENYLIST_VERIFIED_AGAINST_RAW",
-      "n_t0_intrinsic_V1",
-      "n_t0_intrinsic_V2",
-      "n_t0_barrier_V1",
-      "n_t0_barrier_V2",
-      "f_b_obs_V1",
-      "f_b_obs_V2",
-      "EGRESS_V1_IP",
-      "EGRESS_V1_ASN",
-      "EGRESS_V2_IP",
-      "EGRESS_V2_ASN",
-      "EGRESS_V2_COUNTRY",
-      "EGRESS_V2_HOSTNAME",
-      "EGRESS_V2_ISTOR",
-      "EGRESS_V2_PINNED_TARGET",
-      "EGRESS_V2_CONSTANT",
-      "EGRESS_V1_ASN_CONSTANT",
-      "EGRESS_DISTINCT",
-      "RUNG_ACTUAL_DELTA_S_V1",
-      "RUNG_ACTUAL_DELTA_S_V2",
-      "DELTA_REF_ACTUAL_S_V1",
-      "DELTA_REF_ACTUAL_S_V2",
-      "V2_ROUTE_HEALTH_BY_RUNG",
-      "BARRIER_PREVALENCE_TREND_V1",
-      "BARRIER_PREVALENCE_TREND_V2",
-      "CLASSIFIER_REPLAY_MISMATCHES",
-      "POWER_AT_RHO98",
-      "POWER_AT_RHO92",
-      "NC_CROSS_FALSE_POSITIVE"
-    ],
-    "baseline_ids": [
-      "B_EXCHANGE_V2",
-      "B_CROSSVANTAGE",
-      "B_CONSTANT_USABLE",
-      "B_MARGINAL_V2",
-      "B_LASTSWEEP_V2"
-    ],
-    "control_ids": [
-      "PC_CROSS_SYNTHETIC_STATIONARY",
-      "PC_ORACLE_BARRIER",
-      "NC_CROSS_SYNTHETIC_EXCHANGEABLE",
-      "NC_CLEAN_ORACLE",
-      "C_VANTAGE_EVIDENCE",
-      "C_PROBE_SELF_INDUCTION"
-    ],
-    "policy_ids": [
-      "POLICY_SHARED_DENYLIST",
-      "POLICY_PER_EGRESS_DENYLIST"
-    ],
-    "class_ids": [
-      "CLEAN",
-      "RATE_LIMIT_429",
-      "BLOCK_403_CHALLENGE",
-      "UNAVAILABLE_403",
-      "TRANSPORT_ERROR",
-      "OTHER_NONBARRIER"
-    ],
-    "branch_ids": [
-      "T1_VANTAGE_ROBUST",
-      "T0_VANTAGE_SPECIFIC",
-      "MEASUREMENT_INVALID"
-    ],
-    "seeds": {
-      "probe_order": 38121193195,
-      "bootstrap": 38121193195,
-      "permutation": 38121193195,
-      "pc_cross_synthetic": 38121193195,
-      "nc_cross_synthetic": 38121193196,
-      "neg_reachability_worlds": [
-        38121193197,
-        38121193198
-      ]
-    }
-  },
-  "decision_rule": {
-    "primary_metric": "V2_STATIONARITY_SKILL for the within-vantage replication of the accepted S1 result at the second egress; CV_SKILL for the cross-vantage agreement (mandate Q3).",
-    "metric_definition": "V2_STATIONARITY_SKILL(delta) = plug-in mutual information I(B_V2_T0; B_V2_delta) in nats over the V2 binary barrier indicator, with B_EXCHANGE_V2 global endpoint-permutation p-value (10000 permutations) and endpoint-clustered bootstrap 95% CI. CV_SKILL = plug-in I(B_V1_T0; B_V2_T0) in nats with B_CROSSVANTAGE global endpoint-permutation p-value (10000 permutations) and endpoint-clustered bootstrap 95% CI. Higher = more information carried across time (V2) or across vantages (CV).",
-    "primary_decision_quantities": {
-      "V2_INTRINSIC_PERSISTENT": "(n_t0_intrinsic_V2 >= 3) AND for every intrinsic class c in {BLOCK_403_CHALLENGE, TRANSPORT_ERROR} present at the V2 anchor: V2_CLASS_PERSISTENCE[c] at delta_ref >= 0.80.",
-      "V2_DENYLIST_INTRINSIC_VALID": "V2_DENYLIST_FALSE_ACCEPT(delta_ref) <= 0.20 AND V2_DENYLIST_FALSE_REJECT(delta_ref) <= 0.20, both computed on the V2 intrinsic set only.",
-      "V2_STAT_SIG": "V2_STATIONARITY_SKILL(delta_ref) >= 0.05 AND B_EXCHANGE_V2 permutation p < 0.05 AND endpoint-clustered CI lower > 0.",
-      "CV_AGREEMENT_SIG": "CV_SKILL(T0) >= 0.05 AND B_CROSSVANTAGE permutation p < 0.05 AND endpoint-clustered CI lower > 0.",
-      "CV_DENYLIST_TRANSFER_VALID": "CV_DENYLIST_FALSE_ACCEPT <= 0.20 AND CV_DENYLIST_FALSE_REJECT <= 0.20, building the denylist on the V1 anchor intrinsic set and testing at V2 delta_ref (denominators |V1 anchor intrinsic| and |V1 anchor non-intrinsic|)."
-    },
-    "secondary_quantities": {
-      "V2_STATIONARITY_SKILL_BY_RUNG": "V2_STATIONARITY_SKILL at each rung in {300, 900, 1800}.",
-      "V2_STATIONARITY_SKILL_NO_STRESS": "V2_STATIONARITY_SKILL(delta_ref) restricted to the 52 non-stress endpoints with its own permutation p.",
-      "CV_SKILL_NO_STRESS": "CV_SKILL(T0) restricted to the 52 non-stress endpoints with its own permutation p.",
-      "V2_MI_CLASS": "plug-in 6-class mutual information I(C_V2_T0; C_V2_delta_ref).",
-      "CV_MI_CLASS": "plug-in 6-class mutual information I(C_V1_T0; C_V2_T0).",
-      "CV_CLASS_AGREEMENT_T0 / CV_INTRINSIC_AGREEMENT_T0": "fraction of endpoints whose ambient class (or intrinsic indicator) is identical between V1 and V2 at the anchor.",
-      "V2_CLASS_PERSISTENCE / V2_INTRINSIC_PERSISTENCE": "as defined in the falsifier; within-V2 replica of the parent metrics.",
-      "V1_*": "the same within-vantage metrics computed on the V1 arm (the reference egress), replicating the parent's accepted metrics on this session's V1 side: V1_STATIONARITY_SKILL, V1_CLASS_PERSISTENCE, V1_INTRINSIC_PERSISTENCE, V1_DENYLIST_*, V1_n_t0_intrinsic, V1_n_t0_barrier, V1_f_b_obs, V1_REPLICATION_PARENT_DENYLIST_OVERLAP (|V1 anchor intrinsic set intersect parent O9 set| / |parent O9 set|).",
-      "V2_DENYLIST_BY_RUNG / V2_DENYLIST_HORIZON": "within-V2 denylist validity per rung and the largest contiguous valid prefix (censored at 1800 s).",
-      "V2_ANYBARRIER_FALSE_ACCEPT": "fraction of V2 anchor barrier_set endpoints non-barrier at V2 delta_ref (the cost of a naive pooled denylist including rate-limits at V2).",
-      "V2_DENYLIST_SKILL": "log-loss improvement (nats/endpoint) of the V2 anchor intrinsic-transfer predictor over B_CONSTANT_USABLE at V2 delta_ref (eps=1e-6 as in the parent, operational definition recorded).",
-      "CV_AGREEMENT_BY_RUNG": "CV_SKILL computed per rung (V1_r vs V2_r).",
-      "PARENT_DENYLIST_*": "secondary direct test of the ACCEPTED artifact: build the denylist on the parent's frozen V1 anchor intrinsic set (result O9, 7 endpoints), test at V2 delta_ref: PARENT_DENYLIST_FALSE_ACCEPT, PARENT_DENYLIST_FALSE_REJECT, PARENT_DENYLIST_TRANSFER_VALID. PARENT_DENYLIST_VERIFIED_AGAINST_RAW = the parent raw ambient_collection.jsonl (bound artifact) recomputed through the frozen classifier at its T0 sweep reproduces exactly the 7-endpoint O9 set; a mismatch is MEASUREMENT_INVALID. This conflates session-time with vantage and is a secondary diagnostic, never a gate.",
-      "EGRESS_*": "V1/V2 identity series per rung (ip, ASN, country, hostname, IsTor) and the gates EGRESS_V2_CONSTANT, EGRESS_V1_ASN_CONSTANT, EGRESS_DISTINCT.",
-      "RUNG_ACTUAL_DELTA_S_*/DELTA_REF_ACTUAL_S_*": "actual elapsed deltas per vantage.",
-      "V2_ROUTE_HEALTH_BY_RUNG": "per-rung V2 httpbin/status/200 classification.",
-      "BARRIER_PREVALENCE_TREND_V1 / _V2": "two-sided trend of ambient barrier prevalence across rungs per vantage on the 52 non-stress endpoints, with clustered CI.",
-      "CLASSIFIER_REPLAY_MISMATCHES": "number of stored records whose class recomputed by the frozen classifier differs from the stored class (must be 0).",
-      "POWER_AT_RHO98 / POWER_AT_RHO92": "reported detection power of the branch rule using the frozen calibration.",
-      "NC_CROSS_FALSE_POSITIVE": "observed NC_CROSS_SYNTHETIC_EXCHANGEABLE cross-vantage permutation-significant fraction."
-    },
-    "thresholds_frozen": {
-      "tau_FA": 0.2,
-      "tau_FR": 0.2,
-      "alpha": 0.05,
-      "delta_SKILL_nats": 0.05,
-      "pc_power_min": 0.8,
-      "nc_false_positive_max": 0.05,
-      "intrinsic_persistence_min": 0.8,
-      "min_t0_intrinsic": 3,
-      "min_t0_barrier": 3,
-      "delta_ref_s": 1800,
-      "delta_ref_min_actual_s": 1500,
-      "bootstrap_resamples": 10000,
-      "permutations": 10000,
-      "pc_perms_per_rep": 500,
-      "pc_boot_resamples_per_rep": 500,
-      "replications_R": 300,
-      "egress_pin_attempts": 3
-    },
-    "branch_precedence": [
-      "1. MEASUREMENT_INVALID if ANY measurement_validity prerequisite fails: network unreachable to universe or oracle hosts on either vantage; classifier not reproducible (CLASSIFIER_REPLAY_MISMATCHES > 0); PC_CROSS_SYNTHETIC_STATIONARY power < 0.80; NC_CROSS_SYNTHETIC_EXCHANGEABLE false-positive > 0.05; an oracle misclassified on either vantage; fewer than 3 T0 ambient intrinsic or fewer than 3 T0 ambient barrier endpoints on EITHER vantage; anchor incomplete or delta_ref actual delta < 1500 s on either vantage; tor provision/pin/verification failure; EGRESS_V2_CONSTANT false; EGRESS_DISTINCT false; EGRESS_V1_ASN_CONSTANT false; V2 route-health oracle not CLEAN at any rung; PARENT_DENYLIST_VERIFIED_AGAINST_RAW false.",
-      "2. T1_VANTAGE_ROBUST iff V2_INTRINSIC_PERSISTENT AND V2_DENYLIST_INTRINSIC_VALID AND V2_STAT_SIG AND CV_AGREEMENT_SIG AND CV_DENYLIST_TRANSFER_VALID.",
-      "3. T0_VANTAGE_SPECIFIC otherwise, with the positive change class(es) reported among {v2_intrinsic_break, v2_denylist_violation, v2_no_anchor_information, no_cross_vantage_information, cross_vantage_transfer_violation}.",
-      "MEASUREMENT_INVALID is reserved exclusively for prerequisite/control/substrate failure and MUST NOT be reported as T0_VANTAGE_SPECIFIC."
-    ],
-    "measurement_invalid_conditions": "Network unreachable on either vantage; classifier non-reproducible; PC power < 0.80; NC false-positive > 0.05; any oracle misclassified on either vantage; fewer than 3 T0 intrinsic or fewer than 3 T0 barrier endpoints on either vantage; anchor incomplete or delta_ref actual delta < 1500 s on either vantage; tor subtype unavailable (apt install failure, bootstrap timeout, pin verification failure after 3 attempts), exit rotation (EGRESS_V2_CONSTANT false), egress non-distinctness (EGRESS_DISTINCT false), V1 ASN change, per-rung V2 route-health failure, or PARENT_DENYLIST_VERIFIED_AGAINST_RAW false. These are attainability/measurement/substrate failures, not scientific results; each records the exact error series as the operational blocker receipt required by the mandate.",
-    "claim_ceiling": "At most C-WEB-DYNAMICS = HYPOTHESIS here. T1_VANTAGE_ROBUST bounds the source-vantage axis for this frozen pool, this window ladder and this datacenter <-> Tor egress pair (extending the accepted single-vantage S1_STATIONARY to a second independent egress); it does not by itself upgrade C-WEB-DYNAMICS and authorizes NO PRODUCT_CORE promotion and NO EXPERIMENTAL upgrade from this single egress-pair/window ladder. T0 bounds (does not reject) a shared static-denylist prior to per-egress scheduling on this pool/window and egress pair."
-  },
-  "product_consequence_positive": "If T1_VANTAGE_ROBUST: ONE shared intrinsic denylist (POLICY_SHARED_DENYLIST) is licensed across the two tested egress networks for this pool/window, so the dead-end policy can use a single class-conditional barrier schedule without per-egress class tables, and the V2 denylist horizon (V2_DENYLIST_HORIZON) quantifies the shared re-probe interval (right-censored at 1800 s). If PARENT_DENYLIST_TRANSFER_VALID additionally holds, the ACCEPTED single-vantage denylist artifact itself transfers to the independent vantage (secondary, time-conflated diagnostic). Construct boundary: adoption as a product prior still requires at least one non-Tor independent egress replication (Tor exits are purpose-built anonymity nodes with extreme WAF treatment).",
-  "product_consequence_negative": "If T0_VANTAGE_SPECIFIC: the intrinsic barrier access decision is vantage-specific on this pool/window within the tested datacenter <-> Tor egress pair; POLICY_PER_EGRESS_DENYLIST is required (per-egress or per-egress-type class tables and re-probe schedules), and a single shared intrinsic denylist is falsified as a universal prior for this pool. If EGRESS_DISTINCT is certified but deposition is a broad V2 over-block (many V1-clean endpoints intrinsic at V2), the negative is bounded to the Tor-egress type and does NOT rule out transfer across residential/datacenter egress pairs. Either way the finding is bounded to this frozen pool, this window ladder and this egress pair; C-WEB-DYNAMICS stays HYPOTHESIS.",
-  "estimated_cost": {
-    "http_requests_planned": 520,
-    "http_requests_worst_case": 620,
-    "http_requests_breakdown": "ambient pool 4 rungs x 57 endpoints x 2 vantages = 456; oracle battery 7 hosts x 2 requests x 2 vantages = 28; egress/health checks ~30 (anchor record ~6, per-rung 4 x 4 rungs = 16, pin verification ~2-6 retries); no retries",
-    "compute_hours": 0.5,
-    "storage_mb": 15,
-    "wall_clock_minutes": 55,
-    "model_calls": 0,
-    "browser": false,
-    "credentials": false
-  },
-  "expected_information_gain": "High and decision-changing. This resolves the declared single-vantage scope boundary (audit VF5) of the program's only accepted Physics positive on its named unsolved factor (the source-vantage axis), producing the quantities the dead-end policy needs: (i) V2 per-class persistence and denylist horizon (Q1/Q2) and (ii) whether ONE shared denylist is licensed or a per-egress schedule is required (Q3). Both T1 and T0 are decision-relevant, T0 is positive change evidence decoupled from mere MI non-significance, and MEASUREMENT_INVALID yields the exact blocker receipt the mandate prescribes if the substrate cannot be held.",
-  "parent_handoff_disposition": "request.json parent_handoff.path = research/experiments/EXP-PHYSICS-38074818597/handoff.json, sha256 10782ca8f1b6ec777fd1219d88595ae97540a19a3d73ab92606179856c184b39; director_mandate.allocation.parent_handoff_disposition = USE; disposition (from the packet verdict/result, read verbatim): established = S1_STATIONARY adopted on the frozen pool/window (INTRINSIC_PERSISTENT true; CLASS_PERSISTENCE 1.0 for both intrinsic classes; DENYLIST_INTRINSIC_VALID true, FALSE_ACCEPT 0 / FALSE_REJECT 0, horizon 1800 s right-censored; STATIONARITY_SKILL 0.3196 nats, B_EXCHANGE p 9.999e-05, CI95 [0.1424, 0.4954]; NC false-positive 0.0267; PC power 0.8233; live oracles pass; CLASS_CONDITIONAL_TRANSIENCE true with RATE_RECOVERY_HALF_LIFE 2 s; audit PASS with documentation findings VF1/VF4 and declared single-vantage boundary VF5; C-WEB-DYNAMICS retained HYPOTHESIS at the frozen claim ceiling). rejected = value-level next-state prediction (EXP-PHYSICS-37973239386); history-feature skill M_HISTORY_NOID; request-economy predictiveness (audit VF4); any promotion of C-WEB-DYNAMICS. unknown = the source-vantage axis (VF5), the horizon beyond 1800 s, ONSET outside the 8-GET burst, and generalization beyond this pool/vantage/window. do_not_assume = single-vantage S1 generalizes; the denylist is valid beyond 1800 s; measurement failure is falsification; any C-FRESHNESS or Runtime-drift conflation; any repeat of the single-vantage 1800 s ladder (explicitly forbidden by the mandate). This experiment targets exactly the unknown (VF5) and keeps all rejected readings rejected.",
-  "director_mandate_trace": {
-    "action": "REOPEN",
-    "target_claim": "C-WEB-DYNAMICS",
-    "cognitive_reset": true,
-    "parent_handoff_disposition": "USE",
-    "requirement_two_sided_falsifier": "satisfied: T1_VANTAGE_ROBUST vs T0_VANTAGE_SPECIFIC, both directions verified reachable pre-freeze by the offline calibration on synthetic worlds implementing the EXACT branch rule (PC planted rho=0.98 -> T1 245/300; NC exchangeable -> T1 0/300, CV p-sig 0.04; NEG vantage-superset -> T1 0/300 via cross_vantage_transfer_violation; NEG independent-but-stationary -> T1 0/300 via no_cross_vantage_information).",
-    "requirement_memory_constant_null_calibrated_before_freeze_with_power": "satisfied by B_EXCHANGE_V2 and B_CROSSVANTAGE (global 10000-permutation shuffles, seed 38121193195) with PC power (T1 0.8167 at rho=0.98, CV permutation-significant 1.0) and NC false-positive bound (CV p-sig fraction 0.04 <= 0.05), mirroring the parent's B_EXCHANGE calibration.",
-    "requirement_pre_freeze_attainability_certificate": "satisfied: (a) a second independent egress is provisionable (tor 0.4.x installed and bootstrapped 100% in ~7 s on this runner; HTTPTunnelPort CONNECT proxy works with the frozen stdlib urllib client, byte-transparent TLS); (b) a CONSTANT second egress is achievable (control-port SETCONF ExitNodes=<ip> StrictNodes=1 + NEWNYM held the exit IP across 5/5 consecutive checks, while unpinned exits rotate within minutes - observed); (c) the classifier path is egress-invariant on controls (all 7 oracle hosts classified identically direct vs tunnel, incl. 429->RATE_LIMIT_429, 403->UNAVAILABLE_403, no-such-host.invalid->TRANSPORT_ERROR via 'Tunnel connection failed: 503 (resolve failed)', clean hosts->CLEAN); (d) egress identity services work through the tunnel (api.ipify.org, ifconfig.co/json, ipwho.is, cloudflare cdn-cgi/trace, check.torproject.org/api/ip; ipinfo.io and ip-api.com are Tor-blocked and excluded); (e) V1 direct egress alive and stable (20.220.118.2, AS8075 Microsoft, Canada). The n_t0_intrinsic_V2 >= 3 and n_t0_barrier_V2 >= 3 floors rest on a disclosed general prior (anonymized exits are subject to broad WAF blocking on this pool) and are verified at the EXECUTE anchor; a shortfall yields the mandate's exact blocker receipt as MEASUREMENT_INVALID, never a substituted single-vantage run.",
-    "requirement_capped_budget": "satisfied; estimated_cost ~520 requests and wall_clock_cap_minutes = 75.",
-    "requirement_park_if_certificate_unsatisfiable": "the certificate IS satisfied pre-freeze so the experiment proceeds; if EXECUTE cannot re-verify any floor, control, egress gate or classifier property, the packet is MEASUREMENT_INVALID with the exact blocker text (the operational analogue of PARK).",
-    "non_drift_statement": "This experiment addresses exactly the mandate question (source-vantage transfer of the accepted S1_STATIONARY result) and does NOT re-run next-request barrier classification, value derivation/PMI, C-FRESHNESS, Runtime-drift controls, or the parent's induced-transience probe (already answered)."
-  },
-  "scope_boundaries": [
-    "Credential-free public HTTP GET only; no authentication, JavaScript, DOM, SPA, GraphQL or WebSocket.",
-    "Two network egresses in one continuous session: V1 = runner direct datacenter egress (AS8075), V2 = single pinned Tor exit (distinct ASN/geography, held constant); the conclusion is bounded to this egress PAIR TYPE (datacenter <-> anonymity-network exit), not to all egress pairs.",
-    "The frozen 57-endpoint universe is used unchanged and is NOT extended; no post-outcome substitution or dropping.",
-    "The window ladder is the same nominal 0/300/900/1800 s as the parent; the horizon is censored at delta_ref = 1800 s.",
-    "No LLM calls, no browser, no credentials, no numpy dependency; Python 3.12 stdlib only.",
-    "Persistence, denylist validity and cross-vantage agreement are tested only through the frozen intrinsic classifier and the frozen paired ambient ladder.",
-    "The egress identity services are exactly the pre-freeze-verified set (api.ipify.org, ifconfig.co/json, ipwho.is, cloudflare cdn-cgi/trace, check.torproject.org/api/ip, ip-api.com for V1 only); ipinfo.io and ip-api.com through the tunnel are documented Tor-blocks and are NOT used.",
-    "No induced-transience probe (parent Q3 answered); stratum_stress endpoints remain in the primary population and define the 52-endpoint non-stress robustness subset."
-  ],
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PASS",
-      "reason": "Both two-sided branches are reachable through the exact frozen branch logic, verified by the DESIGN-local offline calibration on synthetic worlds (no Web outcomes). T1_VANTAGE_ROBUST selected by the EXACT five-part rule (including both permutation tests and both endpoint-clustered CI clauses) in 245/300 planted robust-transfer replications at rho=0.98 (0.8167 >= 0.80) and 219/300 at rho=0.92 (0.73, reported); the CV permutation test was significant in 300/300 PC replications. T0_VANTAGE_SPECIFIC selected in 300/300 exchangeable replications (CV p-sig 0.04 <= 0.05), in 300/300 vantage-superset replications (T0 via cross_vantage_transfer_violation, FR ~ 0.30 > 0.20 while CV agreement itself stayed significant 0.92, proving the transfer clause adds discrimination), and in 300/300 independent-but-stationary replications (T0 via no_cross_vantage_information, CV p-sig 0.02). Thresholds are arithmetically attainable: with n_t0_intrinsic_V2 >= 3 and per-class persistence, V2_STATIONARITY_SKILL >= H(3/57) ~ 0.206 > 0.05 and CV_SKILL ~ I(marginals with high overlap) >= 0.05; FA tolerance is 1/7, FR tolerance 10/50, so both a strict-superset negative and a robust positive sit inside the decision space. Precedence has no trap: the five T0 change classes are each independently producible (calibration rows above) and MEASUREMENT_INVALID is reserved for prerequisite/control/substrate failure, exactly as the mandate requires for the blocker receipt.",
-      "evidence_refs": [
-        "spec.json:falsifier",
-        "spec.json:decision_rule.branch_precedence",
-        "prereg.md:Null calibration and branch reachability",
-        "prereg.md:Attainability certificate"
-      ]
-    },
-    "measurement_prerequisites": {
-      "status": "PASS",
-      "reason": "Prerequisites are stdlib Python 3.12 ONLY (numpy not required) plus a provisionable second egress and live network to the frozen universe and oracle hosts on both egresses. Pre-freeze probes: `sudo apt-get install -y tor` installed tor 0.4.9.11 on this runner; a dedicated tor instance with SocksPort 0 / HTTPTunnelPort 127.0.0.1:19051 bootstrapped 100% in ~7 s; the frozen stdlib urllib client with ProxyHandler through the CONNECT tunnel returned identical oracle classes on both egresses (httpbin 200/uuid, example.com -> CLEAN; httpbin 429, httpbingo 429 -> RATE_LIMIT_429; httpbin 403 -> UNAVAILABLE_403; no-such-host.invalid -> TRANSPORT_ERROR); control-port pinning (SETCONF ExitNodes=<ip> StrictNodes=1; NEWNYM) held the exit constant 5/5 checks; egress identity services (ipify, ifconfig.co, ipwho.is, cf-trace, check.torproject.org) all reachable through the tunnel; V1 direct egress alive and stable (AS8075). The >= 3 V2 anchor intrinsic/barrier floors are not measurable pre-freeze (probing the frozen pool from V2 would BE the outcome); they rest on a disclosed general prior that WAFs challenge anonymized exits broadly and are verified at the EXECUTE anchor; a shortfall is the mandate's blocker receipt (MEASUREMENT_INVALID), not a scientific negative. EXECUTE re-verifies all floors, controls and gates from its own data.",
-      "evidence_refs": [
-        "spec.json:measurement_validity.prerequisite_integrity",
-        "spec.json:measurement_validity.egress_integrity",
-        "prereg.md:Attainability certificate"
-      ]
-    },
-    "baseline_identifiability": {
-      "status": "PASS",
-      "reason": "Both nulls are non-degenerate and the metrics separate the regimes rather than sitting at a ceiling. Pre-freeze calibration on the exact statistic family: NC_CROSS_SYNTHETIC_EXCHANGEABLE gave CV p-sig fraction 0.04 (<= 0.05) with mean CV_SKILL 0.0106 nats and T1 0/300, while PC_CROSS_SYNTHETIC_STATIONARY gave mean CV_SKILL 0.3312 nats at rho=0.98 (T1 0.8167, CV p-sig 1.0) and 0.3316 at rho=0.92; the within-V2 statistic replicates the parent's accepted separation (parent NC 0.0102 vs PC 0.3261 nats). With equal marginals the maximum attainable CV_SKILL is H(f_b) ~ 0.41 nats at f_b ~ 0.14 >> the 0.05 threshold, and under the exchangeable null the mean (0.0106) sits far below it, so no ceiling/floor collapse is possible. B_CONSTANT_USABLE is distinct from the anchor-transfer predictor because the pool mixes clean and barrier endpoints (f_b_obs > 0), so MI is defined. The identifiers here are estimator-vs-strong-null pairs (within-V2 and cross-vantage), and the PC/NC pair brackets the admitted range exactly as in the accepted parent packet.",
-      "evidence_refs": [
-        "spec.json:baselines",
-        "spec.json:positive_control.PC_CROSS_SYNTHETIC_STATIONARY",
-        "spec.json:null_control.NC_CROSS_SYNTHETIC_EXCHANGEABLE",
-        "prereg.md:Null calibration and branch reachability"
-      ]
-    },
-    "control_sensitivity": {
-      "status": "PASS",
-      "reason": "Two disjoint synthetic controls bracket the pipeline with demonstrated, not asserted, sensitivity on the exact planned statistic and branch: PC_CROSS_SYNTHETIC_STATIONARY fires T1 in 245/300 (CV permutation-significant 300/300) while NC_CROSS_SYNTHETIC_EXCHANGEABLE stays T1 0/300 with CV p-sig 0.04. Two live controls validate the real collection+classifier path on BOTH planned egresses pre-freeze: PC_ORACLE_BARRIER classified httpbin 429 and httpbingo 429 as RATE_LIMIT_429 and no-such-host.invalid as TRANSPORT_ERROR both direct and through the tunnel; NC_CLEAN_ORACLE classified httpbin 200/uuid and example.com as CLEAN on both; httpbin 403 classified UNAVAILABLE_403 on both. C_VANTAGE_EVIDENCE adds the egress-distinctness/constancy/route-health gates with demonstrated failing modes (unpinned exit rotation observed in ~2 min; /24 pinning rotates within the subnet; ip-literal pinning holds) and C_PROBE_SELF_INDUCTION adds per-vantage protocol self-induction trends. EXECUTE re-runs all of these; any failure is MEASUREMENT_INVALID.",
-      "evidence_refs": [
-        "spec.json:positive_control",
-        "spec.json:null_control",
-        "prereg.md:Attainability certificate",
-        "prereg.md:Null calibration and branch reachability"
-      ]
-    },
-    "treatment_liveness": {
-      "status": "NOT_APPLICABLE",
-      "reason": "This is a Physics measurement/estimation experiment on a live Web substrate and contains NO SPIDER treatment arm (no inheritance/residual-novelty/LLM-inheritance/product-economics arm); the packet's treatment-liveness condition applies to SPIDER treatment arms. The estimable objects are the shared-vs-per-egress intrinsic-denylist decision and two deterministic policies (POLICY_SHARED_DENYLIST and POLICY_PER_EGRESS_DENYLIST), each a function of the observed classes and egress identity that returns a valid decision for every class combination and terminates.",
-      "evidence_refs": [
-        "spec.json:stable_identifiers.policy_ids",
-        "spec.json:product_consequence_positive"
-      ]
-    },
-    "freeze_artifacts_bound": {
-      "status": "PASS",
-      "reason": "One mutable local data dependency is bound in freeze_artifacts: research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl (the accepted parent's raw T0-..-delta ambient evidence, sha256 a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f), because the secondary PARENT_DENYLIST_TRANSFER test and its PARENT_DENYLIST_VERIFIED_AGAINST_RAW check depend on its identity (EXECUTE recomputes the parent T0 intrinsic set from this raw file and must reproduce the frozen 7-endpoint set; mismatch => MEASUREMENT_INVALID). Everything else interpretation-determining is literal in spec.json and prereg.md, which the deterministic freezer hashes: the 57-endpoint universe, the challenge-marker regex and full classifier, the client/TLS/redirect/timeout policy, the two-opener routing, the ladder, strata, thresholds, seeds, nulls, gates and branch precedence. The EXECUTE collection/analysis code does not exist at freeze and is authored at EXECUTE strictly as a literal realization of the embedded constants, with its hash recorded in provenance.json for AUDIT. Remote Web responses cannot be frozen; their target identifiers and sampling protocol are frozen in spec/prereg. The DESIGN-local pre-freeze probe scripts/outputs live in /tmp and are deliberately NOT interpretation dependencies (EXECUTE re-derives every quantity and floor from its own raw data).",
-      "evidence_refs": [
-        "research/EXPERIMENT_PACKET.md",
-        "spec.json:decision_rule.secondary_quantities.PARENT_DENYLIST_*",
-        "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl",
-        "prereg.md:Attainability certificate"
-      ]
-    }
-  },
-  "freeze_artifacts": [
-    "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl"
+  "validity_notes": [
+   "V2 is a PUBLIC TOR EXIT. It is a genuinely independent egress (distinct IP/ASN/geo) but carries a Tor-specific reputational blocking policy. Therefore a POSITIVE (T1) result is a CONSERVATIVE robustness result (classes survived a different blocking regime); a NEGATIVE (T0) result bounds the claim to 'V2 differs from V1 under a Tor exit' and cannot by itself separate generic vantage-specificity from Tor-specific blocking. Product adoption would require re-confirming on a non-Tor egress.",
+   "LOW-V2-INTRINSIC-CONVENTION: unlike the parent single-vantage packet (which mapped n_t0_intrinsic<3 to MEASUREMENT_INVALID because the floor certified that persistence could be estimated at all), here a validly measured second vantage that exhibits < 3 intrinsic endpoints is SCIENTIFIC EVIDENCE of cross-vantage class disagreement, so it routes to S0_VANTAGE_SPECIFIC with change_class v2_intrinsic_absent_or_insufficient, not to MEASUREMENT_INVALID. Only MV3a (zero intrinsic at BOTH anchors) is an instrument-exercise failure. This deviation from the parent convention is deliberate, justified by the changed research object (vantage, not timescale), and frozen before outcomes.",
+   "TREATMENT IDENTITY: the treatment is a SPECIFIC pinned exit relay, not 'Tor in general'. EXECUTE must record the pinned exit-relay fingerprint in result.json/provenance.json; changing the pinned exit mid-session is MV2 INVALID; a post-hoc switch to another exit would be a new treatment instantiation and is not licensed.",
+   "TUNNEL-VS-ENDPOINT DISCRIMINATOR: a proxy-level failure is MEASUREMENT_INVALID, not an endpoint intrinsic class (MV6a). Only endpoint-specific failures observed through a healthy, oracle-verified tunnel count as TRANSPORT_ERROR.",
+   "Endpoint-clustered bootstrap understates within-registrable-domain correlation for the 3 multi-endpoint domains; the domain-clustered CI is reported and BOTH must be positive.",
+   "Same-endpoint V2->V1 fixed request order within each rung can bias rate-sensitive classes; intrinsic classes are order-insensitive by construction and the rate classes are reported as diagnostics only.",
+   "delta_ref is right-censored at 1800 s exactly as in the parent; this experiment does not test horizons beyond the ladder."
   ]
+ },
+ "decision_rule": {
+  "zero_denominator_convention": "For every ratio num/den: if den>0 use num/den; if den==0 the rate is defined as 0.0 AND the companion boolean <NAME>_ESTIMABLE is set false. A clause evaluated with a 0.0-convention rate is satisfied by that 0.0. This is frozen and may not be changed after outcomes are visible.",
+  "clauses": {
+   "V2_INTRINSIC_PERSISTENT": "V2_n_t0_intrinsic >= 3 AND for every intrinsic class present at the V2 anchor, V2_CLASS_PERSISTENCE[class] >= 0.80. If V2_n_t0_intrinsic < 3 the clause is false (reason v2_intrinsic_absent_or_insufficient) and routes to S0, NOT to MEASUREMENT_INVALID (see measurement_validity.validity_notes LOW-V2-INTRINSIC-CONVENTION).",
+   "V2_DENYLIST_INTRINSIC_VALID": "V2_DENYLIST_FALSE_ACCEPT <= 0.20 AND V2_DENYLIST_FALSE_REJECT <= 0.20.",
+   "V2_STAT_SIG": "V2_STATIONARITY_SKILL_nats >= 0.05 AND V2_STATIONARITY_PERM_P < 0.05 AND V2_STATIONARITY_CI95_ENDPOINT.lower > 0 AND V2_STATIONARITY_CI95_DOMAIN.lower > 0.",
+   "CV_AGREEMENT_SIG": "CV_SKILL_nats >= 0.05 AND CV_STATIONARITY_PERM_P < 0.05 AND CV_CI95_ENDPOINT.lower > 0 AND CV_CI95_DOMAIN.lower > 0.",
+   "CV_DENYLIST_TRANSFER_VALID": "denominator(V1-anchor intrinsic) >= 1 AND CV_DENYLIST_FALSE_ACCEPT <= 0.20 AND CV_DENYLIST_FALSE_REJECT <= 0.20."
+  },
+  "branch_positive": {
+   "name": "S1_CROSS_VANTAGE_ROBUST",
+   "condition": "MV1..MV10 (incl. MV3a, MV6a) all hold AND V2_INTRINSIC_PERSISTENT AND V2_DENYLIST_INTRINSIC_VALID AND V2_STAT_SIG AND CV_AGREEMENT_SIG AND CV_DENYLIST_TRANSFER_VALID.",
+   "reading": "One shared intrinsic denylist is licensed modulo the frozen pool and the two tested vantages."
+  },
+  "branch_negative": {
+   "name": "S0_VANTAGE_SPECIFIC",
+   "condition": "MV1..MV10 (incl. MV3a, MV6a) all hold AND NOT S1_CROSS_VANTAGE_ROBUST.",
+   "change_classes": {
+    "v2_intrinsic_absent_or_insufficient": "V2_n_t0_intrinsic < 3 (the second egress sees too few intrinsic endpoints; a scientific vantage finding, NOT MEASUREMENT_INVALID since MV3a is separately checked) -> V2_INTRINSIC_PERSISTENT false.",
+    "v2_intrinsic_break": "V2_n_t0_intrinsic >= 3 but some intrinsic class present at the V2 anchor has V2_CLASS_PERSISTENCE < 0.80 -> V2_INTRINSIC_PERSISTENT false.",
+    "v2_intrinsic_denylist_violation": "V2_DENYLIST_INTRINSIC_VALID false (V2_DENYLIST_FALSE_ACCEPT > 0.20 or V2_DENYLIST_FALSE_REJECT > 0.20).",
+    "v2_within_vantage_nonstationary": "V2_STAT_SIG false at the second egress.",
+    "cross_vantage_class_disagreement": "CV_AGREEMENT_SIG false.",
+    "cross_vantage_transfer_violation": "CV_DENYLIST_TRANSFER_VALID false."
+   },
+   "primary_change_class_precedence": [
+    "v2_intrinsic_absent_or_insufficient",
+    "v2_intrinsic_break",
+    "v2_intrinsic_denylist_violation",
+    "v2_within_vantage_nonstationary",
+    "cross_vantage_class_disagreement",
+    "cross_vantage_transfer_violation"
+   ],
+   "reading": "No vantage-blind shared denylist is licensed; the schedule must be per-egress, or (given the Tor confound) the V2 result must be re-tested on a non-Tor egress before attributing the difference to generic vantage."
+  },
+  "branch_invalid": {
+   "name": "MEASUREMENT_INVALID",
+   "condition": "ANY of MV1..MV10 (incl. MV3a, MV6a) fails OR any live oracle control fails. Branch precedence above all scientific clauses.",
+   "reading": "Infrastructure/prerequisite failure; not evidence about H1. Record the exact failing prerequisite and its raw evidence."
+  },
+  "precedence": [
+   "MEASUREMENT_INVALID",
+   "S1_CROSS_VANTAGE_ROBUST",
+   "S0_VANTAGE_SPECIFIC"
+  ]
+ },
+ "frozen_inputs": {
+  "parent_request": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/request.json",
+   "sha256": "b692e03b3043584a2fa4118591d3b8a6a1c9998db07598969e6860cdb2c687c4"
+  },
+  "parent_spec": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/spec.json",
+   "sha256": "ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd"
+  },
+  "parent_prereg": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/prereg.md",
+   "sha256": "4a76861ec39b0155aa3b36df139af2077f590735633b49352f8f66ca7033d61b"
+  },
+  "parent_freeze": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/freeze.json",
+   "sha256": "47f1589c336740545313e40589e66138ea70d814c7ac4e43c26783e5c387f61a"
+  },
+  "parent_result": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/result.json",
+   "sha256": "194044d6d12acd8f6784f2482892be16de07257d27d46ebe67b8f38dc0d56f23"
+  },
+  "parent_audit": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/audit.json",
+   "sha256": "94f7b5ba218488a29fd108c4faffad44bb86a058f57a4a9b2a682c23025e0167"
+  },
+  "parent_verdict": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/verdict.json",
+   "sha256": "ddaf9f0ad4a2e668a6184befdd358313501347e712182724ca2cead7e3e2a72b"
+  },
+  "parent_handoff": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/handoff.json",
+   "sha256": "10782ca8f1b6ec777fd1219d88595ae97540a19a3d73ab92606179856c184b39"
+  },
+  "parent_raw_ambient": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl",
+   "sha256": "a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f"
+  },
+  "parent_lib": {
+   "path": "research/physics/exp_38074818597_lib.py",
+   "sha256": "c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e"
+  },
+  "parent_run": {
+   "path": "research/physics/exp_38074818597_run.py",
+   "sha256": "ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38"
+  },
+  "parent_design_review": {
+   "path": "research/experiments/EXP-PHYSICS-38074818597/design_review.json",
+   "sha256": "4e59fb3e4701c4d4f785efca7c614c037ec4e01aaa01532fb330e1de9a04d2fe"
+  }
+ },
+ "vantages": {
+  "V1": {
+   "id": "V1_direct_runner_egress",
+   "provisioning": "the GitHub Actions runner's own egress; no proxy.",
+   "design_probe": "public IP 52.157.33.34, AS AS8075 (Microsoft), US/California at DESIGN time; EXECUTE re-records and requires stability across the session (MV8)."
+  },
+  "V2": {
+   "id": "V2_independent_tor_exit",
+   "provisioning": "local Tor (apt-get install -y tor; binary /usr/bin/tor) configured with SocksPort 0, HTTPTunnelPort 127.0.0.1:19051, CookieAuthentication 1, MaxCircuitDirtiness 7200, NewCircuitPeriod 7200; pinned to one exit relay fingerprint via ControlPort SETCONF ExitNodes=<fingerprint> StrictNodes=1 (or an equivalent ip-literal pin).",
+   "design_probe": "PROVISIONABLE at DESIGN (2026-10-11, non-outcome-bearing): tor 0.4.9.11 installed rc=0; bootstrapped 100% in 73 s; unpinned exits rotated (true); ip-literal pin SETCONF -> 250 OK, SIGNAL NEWNYM -> 250 OK, post-NEWNYM exit IP == pinned target; V2 exit observed in NL (192.42.116.14/192.42.116.95), check.torproject.org IsTor=true; distinct from V1 AS8075/US. All 7 oracle hosts classified correctly through the tunnel and on V1.",
+   "construct_validity_caveat": "public Tor exit = independent egress but Tor-specific blocking policy; see measurement_validity.validity_notes."
+  }
+ },
+ "frozen_universe": {
+  "frozen": true,
+  "n_endpoints": 57,
+  "source": "inherited verbatim from research/experiments/EXP-PHYSICS-38074818597/spec.json.frozen_universe.endpoints (sha256 ef50435d...)",
+  "endpoints": [
+   "https://gitlab.com/users/sign_in",
+   "https://gitlab.gnome.org/users/sign_in",
+   "https://invent.kde.org/users/sign_in",
+   "https://salsa.debian.org/users/sign_in",
+   "https://gitlab.freedesktop.org/users/sign_in",
+   "https://gitlab.archlinux.org/users/sign_in",
+   "https://codeberg.org/user/login",
+   "https://gitea.com/user/login",
+   "https://git.disroot.org/user/login",
+   "https://discuss.python.org/",
+   "https://community.openai.com/",
+   "https://discuss.elastic.co/",
+   "https://community.cloudflare.com/",
+   "https://forum.freecodecamp.org/",
+   "https://discuss.hashicorp.com/",
+   "https://discuss.kubernetes.io/",
+   "https://community.home-assistant.io/",
+   "https://discourse.julialang.org/",
+   "https://discuss.rubyonrails.org/",
+   "https://discussion.fedoraproject.org/",
+   "https://forum.manjaro.org/",
+   "https://forum.endeavouros.com/",
+   "https://en.wikipedia.org/w/index.php?title=Special:UserLogin",
+   "https://wiki.archlinux.org/index.php?title=Special:UserLogin",
+   "https://wiki.gentoo.org/index.php?title=Special:UserLogin",
+   "https://wiki.openstreetmap.org/w/index.php?title=Special:UserLogin",
+   "https://www.mediawiki.org/w/index.php?title=Special:UserLogin",
+   "https://www.wikidata.org/w/index.php?title=Special:UserLogin",
+   "https://www.djangoproject.com/accounts/login/",
+   "https://www.djangoproject.com/admin/login/",
+   "https://pypi.org/account/login/",
+   "https://docs.djangoproject.com/",
+   "https://bitbucket.org/account/signin/",
+   "https://rubygems.org/session/new",
+   "https://www.reddit.com/login/",
+   "https://news.ycombinator.com/login",
+   "https://basecamp.com/",
+   "https://pragprog.com/",
+   "https://www.npmjs.com/login",
+   "https://dev.to/enter",
+   "https://start.spring.io/",
+   "https://spring.io/",
+   "https://wordpress.org/wp-login.php",
+   "https://wordpress.com/log-in",
+   "https://www.phpbb.com/community/",
+   "https://discuss.flarum.org/",
+   "https://community.nodebb.org/",
+   "https://community.invisioncommunity.com/",
+   "https://www.joomla.org/",
+   "https://www.concretecms.org/",
+   "https://craftcms.com/",
+   "https://www.okta.com/login/",
+   "https://auth0.com/",
+   "https://login.microsoftonline.com/",
+   "https://duckduckgo.com/html/?q=test",
+   "https://www.bing.com/search?q=test",
+   "https://search.brave.com/search?q=test"
+  ]
+ },
+ "frozen_intrinsic_classifier": {
+  "frozen": true,
+  "source": "inherited verbatim from parent spec.frozen_intrinsic_classifier and research/physics/exp_38074818597_lib.py",
+  "CHALLENGE_RE_LITERAL": "(?i)(just a moment|cf-browser-verification|cf[-_]chl[-_]|challenge-platform|cf-challenge|cdn-cgi/challenge|attention required|checking your browser|enable javascript and cookies|verify you are human|please complete the security check|g-recaptcha|hcaptcha|recaptcha|cf-turnstile|<title>\\s*just a moment)",
+  "match_scope": "CHALLENGE_RE is applied to the first 262144 bytes of the response body decoded as utf-8 with errors ignored. cf-mitigated is lowercased and compared to the string 'challenge'.",
+  "barrier_set": [
+   "RATE_LIMIT_429",
+   "BLOCK_403_CHALLENGE",
+   "TRANSPORT_ERROR"
+  ],
+  "intrinsic_classes": [
+   "BLOCK_403_CHALLENGE",
+   "TRANSPORT_ERROR"
+  ],
+  "severity_rank": {
+   "TRANSPORT_ERROR": 5,
+   "RATE_LIMIT_429": 4,
+   "BLOCK_403_CHALLENGE": 3,
+   "UNAVAILABLE_403": 2,
+   "OTHER_NONBARRIER": 1,
+   "CLEAN": 0
+  },
+  "rules": {
+   "CLEAN": "HTTP status in 200..299 (2xx) AND body does not match CHALLENGE_RE.",
+   "RATE_LIMIT_429": "HTTP status == 429.",
+   "BLOCK_403_CHALLENGE": "HTTP status == 403 AND (lowercase(cf-mitigated) == 'challenge' OR body matches CHALLENGE_RE).",
+   "UNAVAILABLE_403": "HTTP status == 403 without any challenge marker.",
+   "TRANSPORT_ERROR": "No HTTP response (DNS failure, connection refused, TLS failure, or timeout).",
+   "OTHER_NONBARRIER": "Any other HTTP status (404, 500, redirect chains to error) OR a 2xx carrying a challenge marker."
+  },
+  "reuse_requirement": "EXECUTE MUST import the classification function from the BOUND research/physics/exp_38074818597_lib.py (or byte-replicate its constants) and pass MV5 replay (0/228 on the parent raw file). A divergent reimplementation is a measurement-validity failure."
+ },
+ "sweep_protocol": {
+  "rungs_nominal_s": [
+   0,
+   300,
+   900,
+   1800
+  ],
+  "delta_ref_nominal_s": 1800,
+  "delta_ref_actual_min_s": 1500,
+  "session_t0": "the instant of the first V2 GET of rung 0",
+  "per_rung_order": "deterministic shuffle seeded by (38121193195 + rung_index) so order is reproducible; record order_pos.",
+  "per_endpoint_per_rung": "one V2 GET (through the Tor HTTPTunnelPort) immediately followed by one V1 GET (direct), same endpoint, then next endpoint.",
+  "http": {
+   "method": "GET",
+   "timeout_s": 30,
+   "redirects": "follow (urllib default)",
+   "tls_verify": true,
+   "cookies": "fresh CookieJar per call; never persisted",
+   "user_agent": "frozen UA string identical to parent",
+   "retries": 0,
+   "credential_free": true,
+   "js": false,
+   "browser": false
+  },
+  "total_gets": 456,
+  "anchors": {
+   "V1_anchor": "V1 classes at rung 0",
+   "V2_anchor": "V2 classes at rung 0",
+   "V1_delta": "V1 classes at rung 1800",
+   "V2_delta": "V2 classes at rung 1800"
+  },
+  "raw_record_fields": [
+   "vantage",
+   "rung_index",
+   "nominal_rung_s",
+   "actual_offset_s",
+   "t_start",
+   "t_end",
+   "endpoint_index",
+   "order_pos",
+   "url",
+   "status",
+   "final_url",
+   "error",
+   "elapsed_ms",
+   "retry_after",
+   "content_length",
+   "body_len",
+   "body_sha256",
+   "body_prefix",
+   "server",
+   "cf_mitigated",
+   "challenge_matched",
+   "challenge_match_span",
+   "class"
+  ]
+ },
+ "metrics_primary": {
+  "V2_STATIONARITY_SKILL_nats": "I(B_V2_T0; B_V2_delta) plugin MI in nats.",
+  "V2_STATIONARITY_PERM_P": "B_EXCHANGE_V2 permutation p-value.",
+  "V2_STATIONARITY_CI95_ENDPOINT": "endpoint-clustered bootstrap 95% CI (57 clusters).",
+  "V2_STATIONARITY_CI95_DOMAIN": "registrable-domain-clustered bootstrap 95% CI (53 clusters).",
+  "V2_INTRINSIC_PERSISTENCE": "pooled persistence of the V2 anchor intrinsic set to V2 delta.",
+  "V2_CLASS_PERSISTENCE": "per-intrinsic-class persistence at V2.",
+  "V2_DENYLIST_FALSE_ACCEPT": "fraction of V2 anchor intrinsic endpoints non-intrinsic at V2 delta.",
+  "V2_DENYLIST_FALSE_REJECT": "fraction of V2 anchor non-intrinsic endpoints intrinsic at V2 delta.",
+  "V2_DENYLIST_INTRINSIC_VALID": "boolean; V2 clause.",
+  "V2_DENYLIST_HORIZON_s": "right-censored horizon in seconds (=delta_ref_actual at the last rung tested).",
+  "V2_n_t0_intrinsic": "count of V2 anchor intrinsic endpoints.",
+  "V2_n_t0_barrier": "count of V2 anchor barrier endpoints.",
+  "V2_f_b_obs": "V2 anchor barrier prevalence.",
+  "CV_SKILL_nats": "I(B_V1_T0; B_V2_T0) plugin MI in nats.",
+  "CV_STATIONARITY_PERM_P": "B_CROSSVANTAGE permutation p-value.",
+  "CV_CI95_ENDPOINT": "endpoint-clustered bootstrap 95% CI for CV_SKILL.",
+  "CV_CI95_DOMAIN": "registrable-domain-clustered bootstrap 95% CI for CV_SKILL.",
+  "CV_INTRINSIC_CLASS_AGREEMENT": "fraction of endpoints intrinsic at both anchors with identical intrinsic class.",
+  "CV_CLASS_AGREEMENT_ANY": "fraction of endpoints with identical class across all 6 classes at the anchors.",
+  "CV_DENYLIST_FALSE_ACCEPT": "fraction of V1 anchor intrinsic endpoints non-intrinsic at V2 delta.",
+  "CV_DENYLIST_FALSE_REJECT": "fraction of V1 anchor non-intrinsic endpoints intrinsic at V2 delta.",
+  "CV_DENYLIST_TRANSFER_VALID": "boolean; Q3 shared-denylist clause."
+ },
+ "metrics_secondary": {
+  "CV_MI_CLASS_T0": "plug-in MI over the 6x6 anchor class table.",
+  "V2_MI_CLASS": "plug-in MI over the 6x6 V2 anchor/delta class table.",
+  "V2_ANYBARRIER_FALSE_ACCEPT": "pooled any-barrier denylist false accept at V2 (diagnostic; parent rejected at 0.125).",
+  "PARENT_DENYLIST_FALSE_ACCEPT": "the parent's accepted 7-endpoint intrinsic denylist measured at V2 delta.",
+  "PARENT_DENYLIST_FALSE_REJECT": "parent denylist false-reject at V2 delta.",
+  "PARENT_DENYLIST_TRANSFER_VALID": "boolean; secondary test of the ACCEPTED artifact at the new vantage.",
+  "V1_STATIONARITY_SKILL_nats": "same-session V1 within-vantage replica (sanity comparator to the parent 0.3196 nats).",
+  "V2_n_t0_intrinsic_ESTIMABLE": "false iff V2_n_t0_intrinsic==0 (0-denominator convention).",
+  "CV_DENYLIST_FALSE_ACCEPT_ESTIMABLE": "false iff V1 anchor intrinsic denominator==0."
+ },
+ "product_consequence_positive": "S1_CROSS_VANTAGE_ROBUST licenses a SHARED mechanical intrinsic denylist across the two tested egress vantages modulo the frozen pool: exploration scheduling can carry one class-conditional barrier prior instead of per-egress calibration. C-WEB-DYNAMICS may then be considered for EXPERIMENTAL only via the normal DIRECTOR verdict path; DESIGN claims no promotion.",
+ "product_consequence_negative": "S0_VANTAGE_SPECIFIC means no vantage-blind shared denylist is licensed: scheduling/barrier policy must be built per egress (or re-tested per egress). This bounds S1_STATIONARY as vantage-conditional and prevents a false-accept-prone shared denylist from shipping. Under the Tor confound, a negative additionally requires a non-Tor egress before attributing the failure to generic vantage-specificity rather than Tor-specific blocking.",
+ "estimated_cost": {
+  "http_gets": 456,
+  "egresses": 2,
+  "rungs": 4,
+  "endpoints": 57,
+  "model_calls": 0,
+  "browser_or_js_work": 0,
+  "compute": "stdlib only; 2 permutation tests x 10000 perms; 4 cluster-bootstrap CIs x 5000 resamples; synthetic PC/NC R=400 each",
+  "wall_clock": "~1800 s ladder + ~75 s Tor bootstrap + overheads; single session",
+  "network": "credential-free, unauthenticated GETs; no paid substrate"
+ },
+ "expected_information_gain": "Directly tests the dominant external-validity threat to the program's only accepted Physics positive. A positive turns a single-vantage bounded result into a two-vantage robustness result and licenses a shared denylist; a negative bounds it as vantage-specific and prevents one. Either outcome changes the re-observe scheduling decision; the experiment is orthogonal to the answered timescale axis and reuses the frozen pool/classifier, so it adds no new mechanism to the inventory.",
+ "freeze_artifacts": [
+  "research/experiments/EXP-PHYSICS-38074818597/spec.json",
+  "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl",
+  "research/physics/exp_38074818597_lib.py",
+  "research/physics/exp_38074818597_run.py"
+ ],
+ "freeze_eligibility": {
+  "decision_rule_reachability": {
+   "status": "PASS",
+   "reason": "Both branches are reachable under the exact frozen rule. DESIGN pre-freeze offline calibration (R=300 worlds, perms=1000, boot=1000, stdlib, seed family 3812119319x): PC_CROSS_SYNTHETIC_STATIONARY rho=0.98 -> T1 fraction 0.9333 (>=0.80); NC_SYNTHETIC_EXCHANGEABLE -> T1 0.0 with CV-significant fraction 0.01 (<=0.05); NC_INDEPENDENT_STATIONARY -> T1 0.0 (CV 0.0067); NC_CROSS_SUPERSET -> T1 0.0 with CV 0.7933, proving the transfer clause is not vacuous. Every clause can be both true and false within the frozen thresholds.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#decision_rule",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
+   ]
+  },
+  "measurement_prerequisites": {
+   "status": "PASS",
+   "reason": "All prerequisites have an EXECUTE-obtainable substrate. Tor 0.4.9.11 installs and bootstraps (100% in 73 s), the HTTPTunnelPort served 5/5 identity hosts and 7/7 oracle hosts with correct classes, and an ip-literal pin held after SIGNAL NEWNYM, all verified DESIGN-locally on 2026-10-11 (non-outcome-bearing). The remaining prerequisite (delta_ref>=1500 s, 57/57 anchors) is a plain protocol requirement.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity"
+   ]
+  },
+  "baseline_identifiability": {
+   "status": "PASS",
+   "reason": "The within-V2 and cross-vantage MI signals are identifiable against their permutation nulls at the observed marginals (parent f_b_obs=0.1404; max binary MI at that marginal ~0.41 nats >> the 0.05 floor) and the calibrated PC/NC separation is large (0.9333 vs 0.01). Baselines B_EXCHANGE_V2/B_CROSSVANTAGE are endpoint-level permutation nulls; B_CONSTANT_USABLE/B_MARGINAL_V2/B_LASTSWEEP_V2 are computable from the same raw records.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#baselines",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#estimators"
+   ]
+  },
+  "control_sensitivity": {
+   "status": "PASS",
+   "reason": "Calibrated at DESIGN: PC power 0.9333 >= pc_power_min 0.80 and NC false-positive 0.01 <= nc_false_positive_max 0.05, with R=300 (in-run frozen R=400). The superset control returns T1=0 while showing CV significance 0.7933, so the discriminating clause is live rather than clamped.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
+   ]
+  },
+  "treatment_liveness": {
+   "status": "PASS",
+   "reason": "The treatment factor (second independent egress V2) is provisionable now, not merely stipulated: Tor installed and achieved a pinned, distinct egress (NL, IsTor=true) vs V1 (AS8075, US) in a live DESIGN probe. EXECUTE must reproduce the pin; if the exit cannot be held fixed, MV2 forces MEASUREMENT_INVALID rather than a silent single-vantage run.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages"
+   ],
+   "residual_risk": "Tor exit availability can vary at EXECUTE time; the exact-method fallback is documented in prereg.md (pin a different stable exit; still MEASUREMENT_INVALID if unpinnable)."
+  },
+  "freeze_artifacts_bound": {
+   "status": "PASS",
+   "reason": "Four existing repository files are bound because their identity can change the interpretation: the parent frozen pool spec, the parent raw 228-row collection that MV5 replays, and the parent classifier/run modules whose constants EXECUTE must reuse. All exist pre-freeze and are hashable.",
+   "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#freeze_artifacts",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json#frozen_intrinsic_classifier"
+   ]
+  }
+ },
+ "scope_boundaries": [
+  "Two egress vantages only (V1 direct runner, V2 pinned Tor exit); NOT a probability sample of vantages.",
+  "Pool, window ladder and classifier are frozen to the parent for comparability; no pool extension.",
+  "No horizon claim beyond the right-censored delta_ref.",
+  "No JS/DOM/SPA/authenticated/edge/mobile/GraphQL/WebSocket substrate.",
+  "No product code, no denylist shipping, no C-WEB-DYNAMICS promotion from this packet.",
+  "No ONSET/rate-sweep change of factor (stays as parent diagnostics only)."
+ ]
 }
