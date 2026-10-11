@@ -1,50 +1,117 @@
 {
   "experiment_id": "EXP-PRODUCT-38104960635",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Per director_mandate.allocation: can the audited parameterized inherited carrier (research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py, git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) be landed into the shipped kernel src/spider/kernel.py through the sanctioned promotion path so that the shipped execution path contains a concrete parameterized mechanism that an inherited procedure visibly instantiates and executes (distill_parameterized -> resolve -> execute -> verify), together with a companion known-negative refusal certificate, satisfying blocker B1 and the pre-freeze executable-mechanism requirement of readiness condition (1) - rather than once more running the four-arm economics benchmark on a kernel that still emits literals below the execution threshold? The mandated comparison is between the SHIPPED kernel after the sanctioned landing and the shipped literal pre-repair kernel at the same min_confidence=0.8 gate, on the same observed treatment.",
+  "hypothesis": "On the shipped import path (PYTHONPATH=src, module spider.kernel), after the audited carrier blob b15ed848 (sha256 718efa6a...) is landed as src/spider/kernel.py on the Product branch as the only code delta, the shipped kernel (a) exposes distill_parameterized and induces a parameterized mechanism with confidence >= 0.8 from >= 2 consistent successful same-intent observations; (b) resolves unseen in-support identifiers to ResolutionStatus.EXECUTABLE and re-verifies True after a real, credential-free localhost HTTP execute, for two independent identifier families (docs: doc-555; records: rec-999) never present in the induction observations; (c) refuses missing-parameter, out-of-support and wrong-intent requests with bound_action=null and typed reasons ('missing required parameter', 'outside inferred support', 'no applicable validated mechanism'); (d) the pre-repair literal distill() path alone (hardcoded confidence 0.5) yields resolution EXPLORE with bound_action=null on the same requests; and (e) the exact three shell commands product-promote.yml runs over the landing delta (python -m compileall -q src scripts; python scripts/validate_repo.py; PYTHONPATH=src python -m unittest discover -s tests -v) all succeed, with the delta confined to the allowed code roots and all frozen interpretation artifacts byte-identical.",
+  "falsifier": "Any one of the following falsifies the hypothesis: (F-a) after landing, sha256(src/spider/kernel.py) != 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 or git hash-object != b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, or it equals the pre-landing sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61; (F-b) the shipped module cannot expose a parameterized mechanism that resolves unseen in-support identifiers to EXECUTABLE (i.e. positive round-trip fails for either family); (F-c) post-execution verify() does not return True for either family; (F-d) any of the three known-negative categories is not refused with bound_action=null and a non-empty typed reason; (F-e) the literal ablation path executes (EXECUTABLE) instead of EXPLORE at min_confidence=0.8; (F-f) the landing delta touches a path outside the allowed code roots, breaks any existing tests/test_kernel.py test, or fails compileall/validate_repo/unittest; (F-g) any freeze_artifact listed in spec.freeze_artifacts changes sha256 between freeze and the confirmatory measurement. A failure of F-a/F-b/F-d is scientific FALSIFIES for this landing; a failure of F-c/F-e/F-f/F-g is MIXED (the shipped parameterized path may still work, but either causality, landability or interpretation-binding is not established).",
+  "baselines": [
+    {
+      "id": "B-LITERAL-ABLATION",
+      "role": "causal-attribution ablation / same-substrate pre-repair comparator",
+      "description": "The pre-repair literal path: the landed kernel's own distill() (hardcoded confidence 0.5, no parameter_slots) upserted into a fresh registry, resolved at the same min_confidence=0.8 on exactly the same context and params as the treatment arm. Expected: ResolutionStatus.EXPLORE, bound_action=null, reason 'candidate exists but confidence is below execution threshold' for both families. Metric: M-ABLATION-LITERAL-EXECUTABLE-COUNT == 0. This isolates the parameterized induction + support-guard as the cause of execution, not the substrate or the server.",
+      "frozen_source": "landed src/spider/kernel.py (same file as treatment; only the code path differs)"
+    },
+    {
+      "id": "N-EMPTY-REGISTRY",
+      "role": "null control / no-mechanism abstention",
+      "description": "A fresh SpiderKernel over an empty registry is queried with the same intent/context/params. Expected: ResolutionStatus.UNKNOWN, bound_action=null, reason 'no applicable validated mechanism'. Metric: M-NULL-EMPTY-EXECUTABLE-COUNT == 0. Rules out the harness/server manufacturing an EXECUTABLE result without a mechanism.",
+      "frozen_source": "landed src/spider/kernel.py"
+    },
+    {
+      "id": "B-PRE-LANDING-KERNEL",
+      "role": "documented pre-repair shipped comparator (identity only)",
+      "description": "The pre-landing shipped kernel, sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50), which has no distill_parameterized and whose resolve() silently drops candidates with missing parameters. Used only to pin the before-state identity of the shipped file (F-a) and to state the exact diff being promoted; its own behavior is already established by B1 at source and is not re-measured as the confirmatory outcome.",
+      "frozen_source": "base_sha src/spider/kernel.py"
+    }
+  ],
+  "positive_control": "PC-PARAM-ROUNDTRIP: for each family independently (docs: train doc-102/doc-247/doc-391; records: train rec-514/rec-628/rec-736), distill_parameterized over three successful real-HTTP observations must produce a mechanism with confidence 0.9 (>= 0.8) and support descriptors; then resolve('update_resource', {'authenticated': true, 'role': 'owner'}, {<id-slot>: <unseen>, 'value': 'draft-7'}) for the unseen in-support identifier (doc-555 / rec-999, absent from induction) must return EXECUTABLE with a non-null bound_action whose url targets the unseen identifier; executing that bound_action over the localhost server must return the expected JSON and verify(mechanism_id, response_body, params) must return True. Expected: M-PC-ROUNDTRIP-EXECUTABLE-COUNT == 2 and M-PC-ROUNDTRIP-VERIFY-COUNT == 2. PC-SUPPORT-BOUNDARY: the same mechanisms must accept the unseen in-support identifiers and refuse the near-miss out-of-support identifiers (doc-55, rec-55) with reason 'outside inferred support'; expected accept=2, refuse=2. This control proves the treatment is live and that the support guard is sensitive rather than trivially permissive.",
+  "null_control": "N-EMPTY-REGISTRY (see baselines) plus N-ABSTENTION-NO-REQUEST: for every refused resolution (known negatives and near-misses), no HTTP request may be sent by the treatment path (the resolve result has bound_action=null, so nothing is executed); M-ABSTENTION-HTTP-REQUESTS == 0. This guards against the harness executing a fallback or the server logging traffic that should not exist.",
+  "measurement_validity": [
+    "Shipped-path identity: the measurement MUST import spider.kernel with PYTHONPATH=src from the repository root, not a vendored harness copy; the harness resolves the module file path via spider.kernel.__file__ and records it. If it resolves outside src/spider, the run is MEASUREMENT_INVALID.",
+    "Substrate is credential-free and deterministic: a stdlib ThreadingHTTPServer bound to 127.0.0.1 on an ephemeral port, no external network, no model calls, no randomness. Each family uses one fixed base_url/port for both induction and test so the parameterized URL template is internally consistent.",
+    "Real execution is required: verify() is measured on the actual HTTP response body, not on a replayed or fabricated dict. Raw response bodies are preserved.",
+    "Ablation and null controls run in fresh registries on the same landed kernel, so they cannot be contaminated by the treatment registry.",
+    "Unseen identifiers are declared absent from the induction set by construction (doc-555 not in {doc-102,doc-247,doc-391}; rec-999 not in {rec-514,rec-628,rec-736}) and are in-support by the inferred grammar ^doc\\-[0-9]{3}$ / ^rec\\-[0-9]{3}$; near-misses (doc-55, rec-55) differ only in digit count.",
+    "Test isolation: the new test file creates its mechanisms in a tempfile-backed registry, not the committed src/spider/mechanisms.jsonl, so promotion does not mutate shipped data.",
+    "Promotion landability is measured locally by running the exact commands product-promote.yml runs over the delta; the main-branch application itself is a scheduled, connection-gated workflow and is therefore NOT claimed as an observed outcome of this experiment (see prereg 6.E). A MEASUREMENT_INVALID is declared if python/git tooling needed for those commands is unavailable.",
+    "Counter honesty: model_calls and model_tokens are asserted 0; no counter events are injected; only the kernel's own TrajectoryCounters surface (if used) is read.",
+    "Freeze artifacts are sha256-verified before the confirmatory measurement; any drift makes the interpretation-binding clause fail (MIXED), not silently pass.",
+    "Known threats: (1) the inferred support grammar could be broader than the generator's true support class - mitigated by declaring only same-grammar unseen positives and digit-count near-miss negatives; (2) localhost socket availability in the runner - declared a prerequisite, and an unstartable server invalidates the run rather than being scored as a negative; (3) the parameter slot name is derived structurally (doc/record) and is asserted by behavior (accept/reject), not by a hardcoded slot string."
+  ],
+  "decision_rule": "Frozen rule (all clauses evaluated mechanically; see prereg.md section 6 for formulas and expected values). DR-1 treatment_identity (HARD): after landing, sha256(src/spider/kernel.py) == 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 AND git hash-object == b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 AND != 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. DR-2 positive_roundtrip (HARD): for BOTH families, an unseen in-support identifier resolves EXECUTABLE with non-null bound_action targeting that identifier, real HTTP executes, and verify() returns True; M-PC-ROUNDTRIP-EXECUTABLE-COUNT == 2 and M-PC-ROUNDTRIP-VERIFY-COUNT == 2. DR-3 causal_ablation: B-LITERAL-ABLATION yields EXPLORE with bound_action=null for both families; M-ABLATION-LITERAL-EXECUTABLE-COUNT == 0. DR-4 known_negative_refusal (HARD): all three categories (out-of-support identifier, missing required parameter, wrong intent) are refused with bound_action=null, non-empty reason and the typed reason predicate; M-KN-REFUSAL-RATE == 1.0 and M-KN-REASON-CORRECT-COUNT == 3 out of M-KN-TOTAL == 3. DR-5 null_control: N-EMPTY-REGISTRY yields UNKNOWN with bound_action=null; M-NULL-EMPTY-EXECUTABLE-COUNT == 0. DR-6 boundary_sensitivity: PC-SUPPORT-BOUNDARY accepts both unseen in-support identifiers and refuses both near-miss out-of-support identifiers; M-BOUNDARY-ACCEPT-COUNT == 2 and M-BOUNDARY-REFUSE-COUNT == 2. DR-7 shipped_path_import: the certificate was produced by importing spider.kernel from src/ (resolved module path recorded); spider.kernel exposes distill_parameterized, resolve, verify; no vendored copy was used. DR-8 promotion_landability: the experiment delta contains only paths under {src, tests}; the landing is confined to src/spider/kernel.py (carrier bytes) plus the new tests/test_product_param_promotion.py; AND python -m compileall -q src scripts exits 0 AND python scripts/validate_repo.py exits 0 AND PYTHONPATH=src python -m unittest discover -s tests -v exits 0 including the 3 pre-existing tests/test_kernel.py tests. DR-9 freeze_integrity_and_accounting: every freeze_artifact sha256 is unchanged from freeze.json.artifact_hashes AND M-MODEL-CALLS == 0 AND M-MODEL-TOKENS == 0 AND M-ABSTENTION-HTTP-REQUESTS == 0. OVERALL: SUPPORTS iff DR-1..DR-9 all PASS; FALSIFIES iff DR-1, DR-2 or DR-4 fails; MIXED iff DR-1/DR-2/DR-4 pass but any of DR-3, DR-5, DR-6, DR-7, DR-8, DR-9 fails; MEASUREMENT_INVALID iff a declared prerequisite is missing (carrier file absent or hash mismatch; landed module cannot be imported; localhost server cannot bind; required python/git tooling unavailable) - a missing prerequisite is never scored as a scientific negative.",
+  "product_consequence_positive": "B1 is closed at source: the shipped src/spider/kernel.py (pinned at sha256 718efa6a... / git blob b15ed848...) exposes a parameterized mechanism that an inherited procedure visibly instantiates, executes and re-verifies on unseen in-support identifiers, with a companion known-negative refusal certificate and a binary causal ablation against the literal 0.5 path. The landing delta is authored on the Product branch within the allowed roots and passes the exact promotion-workflow validation, so the DIRECTOR can set promote_to_product=true and the sanctioned product-promote.yml can apply it to main without a manual copy. This satisfies readiness condition (1) and satisfies blocker B1's exit criteria (distill_parameterized -> resolve -> execute -> verify/UNKNOWN inside src/spider/, one known positive and one known negative, pinned shipped version), unblocking the dependent B2 task-bank and B3 capability work and the deferred four-arm C-LLM-INHERIT benchmark. It is a shipment/prerequisite result, NOT an economics or generalization result; C-PARAM-INHERIT remains EXPERIMENTAL until the deferred benchmark supplies its 'learn on A, succeed on unseen B against strong baselines' gate.",
+  "product_consequence_negative": "B1 remains open and src/spider remains on the literal-only kernel at base_sha. No kernel change is proposed for promotion. The report must state the exact failing clause: if DR-1/DR-2/DR-4 fail, the carrier is not landable as-is and the gap is bounded to the landing/inducement/support-guard (not to parameterized inheritance generally, which parent EXP-PRODUCT-37973256064 established); if only DR-3/DR-5/DR-6/DR-7/DR-8/DR-9 fail, the parameterized path works but causality, boundary sensitivity, shipped-path hygiene, promotion landability or freeze integrity is unproven and must be repaired before any promotion. The smallest next action is recorded (fix packaging/import hygiene for DR-7, fix promotion-validation or test issues for DR-8, re-derive the instrument for DR-3/DR-6). No status is advanced and no promotion is authorized by a MIXED or FALSIFIES outcome.",
+  "estimated_cost": "Very low. Fully local and deterministic: one 127.0.0.1 stdlib HTTP server on an ephemeral port, ~6 real HTTP POSTs (3 per family induction + 2 treatment executes), a handful of in-process resolutions, one file copy of a 19004-byte kernel plus a new test file, and three validation commands (compileall, validate_repo, unittest discover). No model calls, no external network, no browser, target wall time under a few minutes on the standard runner; single execute transaction, no sweep.",
+  "expected_information_gain": "High and decisive for the program's first binding blocker. This is the first test that moves the audited parameterized carrier from an experiment-only harness copy onto the shipped import path and binds it to a binary causal ablation plus typed known-negative refusals, producing exactly the positive/negative certificates and pinned shipped version that blocker B1's exit criteria demand. A SUPPORTS outcome removes the single prerequisite that blocks readiness condition (1) and the deferred benchmark; a negative or MIXED outcome is equally informative because it bounds the residual gap to a specific clause (identity, inducement, support guard, causality, boundary, import hygiene, landability, or freeze integrity) instead of re-litigating parameterized inheritance. It also fixes the prior unreachable-branch flaw (EXP-PRODUCT-38094123727) by measuring landability via the exact promotion-workflow commands rather than claiming an out-of-process main-branch merge.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every DR clause has a reachable, discriminating branch on the frozen fixtures. DESIGN-time non-outcome-bearing satisfiability probes (stdlib localhost server, /tmp only, not part of the confirmatory measurement) produced: F1 induces slots {value, doc} with supports {value: ^draft\\-[0-9]{1}$, doc: ^doc\\-[0-9]{3}$} at confidence 0.9; unseen doc-555 -> EXECUTABLE with bound_action url .../api/docs/doc-555 and verify True; near-miss doc-55 -> EXPLORE 'out of support'; missing params -> EXPLORE 'missing required parameter'; wrong intent -> UNKNOWN 'no applicable validated mechanism'. F2 likewise (rec-999 EXECUTABLE/verify True, rec-55 refused). Literal ablation -> EXPLORE at confidence 0.5, bound_action null. Empty registry -> UNKNOWN. No arithmetic impossibility: the audited-confirmed thresholds (confidence 0.9 >= 0.8; EXECUTABLE/verify reachable) are achievable on these fixtures, and every negative path is reachable and distinguishable from the positive. The identity clause is decidable by sha256/git hash. DR-8 is decidable by exit codes of the three frozen commands. All nine clauses can individually return PASS or fail; the SUPPORTS/FALSIFIES/MIXED/MEASUREMENT_INVALID mapping is total.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#12-design-self-attack-satisfiability-probes-non-confirmatory",
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#6-decision-rule-frozen-before-execution",
+        "research/experiments/EXP-PRODUCT-37989728440/result.json",
+        "research/experiments/EXP-PRODUCT-37989728440/audit.json"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All prerequisites exist and were verified in the frozen tree at base_sha d77b4f54: the treatment source file research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py exists with sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 and git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796; src/spider/{models.py,registry.py} are byte-identical to the carrier's, so no hidden dependency blocks the landing; src/spider/__init__.py already exports the names the certificate imports; Python 3.12 stdlib provides http.server/urllib/unittest; the repo's existing tests/test_kernel.py passes against the carrier (3/3 OK, verified in a temp package with PYTHONPATH). The only needed tooling is python and git, both standard on the runner. Missing prerequisites (carrier absent/hash mismatch, import failure, server bind failure, absent tooling) are mapped to MEASUREMENT_INVALID, not to a negative result.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "src/spider/models.py",
+        "src/spider/registry.py",
+        "src/spider/__init__.py",
+        "tests/test_kernel.py",
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#5-fixtures-and-instrument"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The comparator is identified by code identity, not by narrative: the treatment is the landed kernel file whose sha256 must equal the carrier 718efa6a.../blob b15ed848..., while B-LITERAL-ABLATION is the same file's literal distill() path at confidence 0.5 in a fresh registry; B-PRE-LANDING-KERNEL is pinned by sha256 46929b3a.../blob cfec9866... and is used only for the before/after identity clause. All arms run on the same substrate, same fixed base_url, same intent/context/params, and the same min_confidence=0.8, so the only difference between the treatment and ablation arms is the presence/absence of parameterized induction and support guards. The design deliberately does NOT identify a baseline by trusting a favourable correctness rate under a weak comparator: the ablation is a binary code-path difference on identical inputs, which is identifiable without any ceiling/degeneracy assumption.",
+      "evidence_refs": [
+        "src/spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/result.json",
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#4-arms-and-identities"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Each control has a demonstrated contrasting state on the frozen fixtures. The literal ablation sits at the hard confidence gate (0.5 < 0.8) and returns EXPLORE with bound_action null, while the parameterized treatment returns EXECUTABLE (confidence 0.9): a one-line code-path change flips the outcome, so the control is sensitive. The empty-registry null returns UNKNOWN and cannot execute. The boundary control is two-sided: unseen doc-555/rec-999 are accepted while digit-count near-misses doc-55/rec-55 are refused with 'outside inferred support', so a trivially permissive or trivially restrictive support grammar both fail. The three known negatives span three distinct mechanisms (support guard, missing-parameter guard, intent matching) with three distinct typed reasons, so a single broken guard surfaces as a wrong reason or an EXECUTABLE. DESIGN probes confirmed all contrasting outcomes are reachable. If a control were insensitive (e.g. ablation also EXPLORABLE due to a shared bug), DR-3 would fail and the outcome would be MIXED, not a false SUPPORTS.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#12-design-self-attack-satisfiability-probes-non-confirmatory",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment is live and causally attributable before freeze: (a) lineage - the carrier was demonstrated live by EXP-PRODUCT-37973256064 (distill_parameterized -> resolve -> execute/verify on a real credential-free substrate) and the parent EXP-PRODUCT-37989728440 confirmed the live parameterized path in-harness while failing on a different certificate; (b) direct DESIGN-time satisfiability probes on the exact frozen fixtures produced EXECUTABLE + real HTTP execute + verify True for both families with confidence 0.9, and the exact negative/boundary/ablation/empty-registry branches; (c) the landed object is byte-identical to the audited carrier (sha256 718efa6a...), so liveness cannot be lost by the landing itself; (d) the only new code is a hermetic test that imports the shipped module via PYTHONPATH=src, which was already verified to import and pass the existing suite. This satisfies the mandate's pre-freeze executable-mechanism requirement without running the excluded four-arm benchmark.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/result.json",
+        "research/experiments/EXP-PRODUCT-38104960635/prereg.md#12-design-self-attack-satisfiability-probes-non-confirmatory",
+        "codex/legacy_brief.json"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All mutable local interpretation dependencies are enumerated in freeze_artifacts and exist as repo files that the freezer will hash into freeze.json.artifact_hashes: the treatment-source oracle (carrier kernel.py), the three landed kernel dependencies that must remain unchanged through the landing (models.py, registry.py, __init__.py), and the existing regression suite (tests/test_kernel.py) whose weakening would let DR-8 pass illegitimately. The treatment target src/spider/kernel.py is intentionally NOT frozen because EXECUTE must modify it; instead its post-landing identity is pinned by the HARD DR-1 hash clause, and every other mutable dependency is frozen. Nothing outside these files can change the interpretation of the measurements.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "src/spider/models.py",
+        "src/spider/registry.py",
+        "src/spider/__init__.py",
+        "tests/test_kernel.py"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/__init__.py",
+    "tests/test_kernel.py"
+  ]
 }
