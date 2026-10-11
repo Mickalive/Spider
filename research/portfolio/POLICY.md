@@ -18,8 +18,8 @@ The Director is also responsible for research liveness. A lane that has stopped,
 
 The Director reasons across:
 
-- the complete accepted Research 2.0 Codex and claim state, using `effective_event_by_claim` for current epistemic status and raw latest events only for chronology;
-- the immutable pre-2.0 Codex via `codex/legacy_brief.json` and `codex/legacy_artifact_index.json`, with targeted source/audit reads from `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md` where relevant;
+- the ONE cumulative Codex and claim state covering original source evidence and subsequently accepted audited experiments, using `effective_event_by_claim` for current epistemic status and raw latest events only for chronology;
+- historical evidence within that same Codex via `codex/legacy_brief.json`, `codex/index.json.historical.artifacts`, and targeted original source/audit reads from `codex/sources/0000-historical-evidence.md` (pinned to the frozen archive Git blob) where relevant;
 - the missions and capabilities of all six lanes;
 - recent and historical experiment trajectories;
 - unresolved central claims and current product bottlenecks;
@@ -27,7 +27,7 @@ The Director reasons across:
 - the last handoff proposed by each lane;
 - general knowledge about autonomous agents, planning, exploration/exploitation, local optima, path dependence, long-horizon error accumulation, research strategy and measurement design.
 
-Historical verdict-token co-occurrence is NOT an accepted scientific claim and cannot promote a Research 2.0 status. The pre-2.0 and Research 2.0 corpus are distinct; a previous negative, invalid or blocked design is a clue for whether a new experiment is redundant or requires stronger controls.
+Historical verdict-token co-occurrence is NOT an accepted scientific claim and cannot promote a Research 2.0 status. The two generations form one continuous scientific corpus, while retaining distinct provenance and audit semantics; a previous negative, invalid or blocked design is a clue for whether a new experiment is redundant or requires stronger controls.
 
 General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
