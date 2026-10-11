@@ -1,50 +1,153 @@
 {
   "experiment_id": "EXP-GRAPH-38112374668",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_scope_note": "Bounded test of one sub-mechanism of C-SEMANTIC-RESOLVE: whether max-cosine selection over intent embeddings binds the correct registry mechanism on goals that were authored independently of the registry intent strings, and by how much it exceeds a token-overlap null on those same goals. It does NOT test parameter binding, execution correctness, abstention calibration, or cross-app generalization; those remain open. A positive result licenses EXPERIMENTAL for the embedding-selection sub-claim only; it does not promote the full claim.",
+  "question": "On a stdlib-only locally served multi-endpoint multi-verb HTTP application whose goal texts are authored by a process that never sees the mechanism intent strings, with a preregistered contamination screen measuring every goal's token overlap against EVERY intent in the registry, a preregistered authoring-provenance record, a reference/null arm provably distinct from the candidate, and positive/null/dynamic-range controls that are each arithmetically able to fail and are re-verified before the primary read: does max-cosine-similarity selection over intent embeddings (A-EMBED-COSINE) still bind the correct mechanism on goals never seen at authoring time, and by how much does it exceed a token-overlap null (B-LEXICAL-OVERLAP) on those same independently authored goals - i.e. does the bounded 45/52 vs 33/52 Research 2.0 advantage (paired family-blocked difference 0.2308, 95% CI [0.1136,0.3509], from EXP-GRAPH-36287167610 on jointly authored goals) survive removal of the joint-authorship confound, or was it an artifact of intents and goal templates being authored in the same file by the same agent?",
+  "hypothesis": "On a 100-goal bank of independently authored single-operation goals (5 per resource x operation cell over users/posts/comments/albums/photos x create/read/update/delete), the independently authored goals use operation verbs that are systematically different from the registry intent verbs (add/register/make/publish/insert for create; fetch/show/look up/give/retrieve for read; edit/modify/change/revise for update; remove/delete/erase/drop/get rid of for delete). Max-cosine selection over sentence-embedding representations of the 20 registry intent strings (A-EMBED-COSINE) recovers verb synonymy that a set-Jaccard token-overlap null (B-LEXICAL-OVERLAP) cannot, so A-EMBED-COSINE mechanism-identity accuracy on the contamination-screened independently authored applicable set exceeds B-LEXICAL-OVERLAP accuracy with a paired family-blocked 95% bootstrap lower bound strictly above zero, even though no goal shares more than a small token overlap with its own target intent. The prior 0.2308 advantage is a real semantic-selection effect, not a joint-authorship artifact.",
+  "falsifier": "The joint-authorship confound was the whole effect: A-EMBED-COSINE mechanism-identity accuracy on the contamination-screened independently authored applicable set does NOT exceed B-LEXICAL-OVERLAP (paired family-blocked bootstrap observed difference <= 0), OR the observed difference is positive but its paired family-blocked 95% bootstrap lower bound is <= 0 (no decisive advantage). Either branch is a valid scientific negative: it falsifies or fails to support the embedding-selection sub-mechanism of C-SEMANTIC-RESOLVE on independently authored goals and forbids citing the prior 45/52-vs-33/52 number as confound-free.",
+  "baselines": [
+    {
+      "id": "B-LEXICAL-OVERLAP",
+      "description": "Strong null: selects the mechanism whose intent string has maximum token set-Jaccard overlap with the goal (research/harness/candidate_resolver.py::LexicalOverlapResolver, bound by freeze artifact). Never abstains. This is the exact null the treatment must beat.",
+      "expected_behavior": "Non-degenerate by construction and not pinned at a ceiling or floor: the goals are independently authored and are not the intent strings, while the resource nouns (user/post/comment/album/photo) are shared, so token overlap is neither 1.0 nor 0.0 (DESIGN instrument probe: maximum goal-to-intent Jaccard over the 100 applicable goals is 0.50 < 1.0). The comparator's actual accuracy is an outcome and is not fixed here. Must not be at the 1.0 ceiling."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "description": "Null: selects uniformly at random among mechanisms whose declared role matches the goal-inferred role (research/harness/candidate_resolver.py::RandomRoleResolver, seed 4242, bound). Never abstains.",
+      "expected_behavior": "Chance-level: each inferred role has exactly 5 candidate mechanisms, so accuracy is at most 1/5 = 0.20 conditional on a correct role and lower with role-inference errors; expected <= 0.20 on the primary set. Floor sanity check, not a gate on the treatment."
+    },
+    {
+      "id": "B-INCUMBENT-KERNEL",
+      "description": "Product baseline measured, not assumed: shipped src/spider/kernel.py::SpiderKernel.resolve over a registry distilled from exact intent strings, with min_confidence=0.8. Its resolve() requires exact intent string equality, so it cannot bind any independently authored goal.",
+      "expected_behavior": "Mechanism-identity accuracy = 0.0 on the independently authored applicable set by construction (no goal is an exact intent); mechanism-identity accuracy = 1.0 on the PC-VERBATIM-INTENT positive control. Denominator is the full primary set; measured on the same implementation that scores the experiment."
+    },
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "description": "Ceiling oracle: receives the true target mechanism_id for each goal and returns that mechanism (research/harness/candidate_resolver.py::InternalIdOracle, bound). Establishes the fixture difficulty ceiling.",
+      "expected_behavior": "Mechanism-identity accuracy = 1.0 on all applicable goals by construction. If < 1.0 the fixture/label mapping is defective -> MEASUREMENT_INVALID (V-ORACLE-CEILING)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-VERBATIM-INTENT",
+    "description": "The 20 registry intent strings themselves, used as goals (labelled with their own mechanism_id). A working embedding model must map each intent to itself at maximum cosine.",
+    "expected_behavior": "A-EMBED-COSINE mechanism-identity accuracy = 1.0 on 20/20 with denominator > 0. B-INCUMBENT-KERNEL accuracy = 1.0 on 20/20. B-LEXICAL-OVERLAP accuracy = 1.0 on 20/20. Any arm below 1.0, or denominator = 0, is MEASUREMENT_INVALID (V-PC). This control is arithmetically able to fail: it fires only if the model/registry/loader are intact."
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-LABEL",
+    "description": "Instrument null: the intent-to-mechanism_id mapping is permuted by a fixed preregistered permutation (seed 38112374668) so that every intent string is labelled with a wrong mechanism_id, then A-EMBED-COSINE is re-scored against the shuffled labels. If the metric measured genuine goal-to-intent semantic match, accuracy must collapse to chance.",
+    "expected_behavior": "A-EMBED-COSINE shuffled-label accuracy <= 0.20 (chance = 1/20 = 0.05, allow margin for self-labelled fixes). If > 0.20 the metric is leaking fixture structure or the label mapping is broken -> MEASUREMENT_INVALID (V-NC-SHUFFLE). Arithmetically able to fail in both directions (too high = leakage; exact 0.0 with n>0 also impossible if the permuted identity is present)."
+  },
+  "measurement_validity": [
+    "V1-METRIC-DEFINITION: primary metric is mechanism-identity binding correctness: selected_mechanism_id == target_mechanism_id on the contamination-screened independently authored applicable set. Selection is scored regardless of EXECUTABLE/DEFER/UNKNOWN status (parameter binding is out of scope). Denominator = number of goals in the primary set and is reported explicitly.",
+    "V2-PRIMARY-SET: primary set = the 100 independently authored applicable goals minus any goal flagged contaminated by V-CONTAM-SCREEN. If |primary_set| < 80 -> MEASUREMENT_INVALID (insufficient power). The excluded ids, count and reason are logged.",
+    "V3-CONTAM-SCREEN: for every goal in the full bank (applicable, out-of-scope, and verbatim), compute max token set-Jaccard against EVERY one of the 20 registry intents (the same tokenisation used by B-LEXICAL-OVERLAP: lowercase whitespace split, set comparison). A goal is flagged contaminated iff max Jaccard >= 0.60. Record per-goal max, argmax intent, flagged count and the frozen bank sha256. DESIGN instrument probe (tokenisation only; no arm decision was scored): maximum goal-to-intent Jaccard over the 100 applicable goals is 0.50 and 0 are flagged at 0.60, so the screen is non-vacuous (a near-verbatim goal would be flagged) and non-degenerate.",
+    "V4-AUTHORSHIP-PROVENANCE: prereg.md records the independent authoring provenance: author identity (fresh-context agent), the exact schema it was given (resource x operation only), the explicit statement that it was given no access to the 20 registry intent strings, the authoring timestamp and the canonical sha256 of its output. The goal bank is embedded verbatim in prereg.md and is therefore frozen by freeze.json.hashes; EXECUTE must not edit any goal text.",
+    "V5-PC: PC-VERBATIM-INTENT must score 1.0 for every arm with any signal (A-EMBED-COSINE, B-LEXICAL-OVERLAP, B-INCUMBENT-KERNEL) with denominator 20; else MEASUREMENT_INVALID.",
+    "V6-ORACLE-CEILING: B-INTERNAL-ID-ORACLE must score 1.0 on the primary set; else MEASUREMENT_INVALID.",
+    "V7-TREATMENT-LIVENESS: A-EMBED-COSINE must actually execute and vary: it must select at least 2 distinct mechanism ids on the primary set (non-constant output) and at least one selected id must be a valid registry mechanism. B-RANDOM-ROLE accuracy must be <= 0.30 (floor sanity). The comparison A-EMBED-COSINE vs B-RANDOM-ROLE is reported but is a scientific outcome, not a validity gate: a treatment that is merely weak is a valid negative, not an invalid measurement. Only a structurally inert treatment (constant or empty output) is MEASUREMENT_INVALID.",
+    "V8-NC-SHUFFLE: NC-SHUFFLED-LABEL accuracy must be <= 0.20; else MEASUREMENT_INVALID.",
+    "V9-NON-TAUTOLOGY: A-EMBED-COSINE and B-LEXICAL-OVERLAP must not produce identical decision vectors on the primary set (they must disagree on >= 1 goal), and B-LEXICAL-OVERLAP accuracy must be < 0.99 (the token-overlap comparator must have headroom; a saturated null means the bank is lexically trivial and the semantic contrast is uninformative). Violation -> MEASUREMENT_INVALID. A treatment at the 1.0 ceiling is NOT a violation: with a headroom comparator it is the maximum-contrast positive case.",
+    "V10-FAMILY-BLOCKED-UNCERTAINTY: uncertainty uses paired family-blocked bootstrap (research/harness/experiment_runner.py::paired_bootstrap, bound) with blocking unit = resource family (5 families), B=10000, alpha=0.05. The function uses the global numpy RNG, so EXECUTE must call numpy.random.seed(38112374668 % 2**32 = 3752636300) immediately before each call and record the seed (the raw id seed 38112374668 exceeds numpy's 2**32-1 limit).",
+    "V11-CODE-BOUND: all outcome-bearing modules are frozen by freeze.json.artifact_hashes: research/harness/candidate_resolver.py, research/harness/goal_generator.py, research/harness/http_server.py, research/harness/experiment_runner.py (metric estimators), src/spider/kernel.py, src/spider/registry.py, src/spider/models.py, src/spider/__init__.py. The orchestration script is a verbatim transcription of the frozen runner listed in prereg.md; EXECUTE must write it unmodified, record its sha256 in provenance.json, and include its source as a raw artifact. Any mismatch -> MEASUREMENT_INVALID."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-PAIRED-DIFF-EMBED-MINUS-LEXICAL",
+    "definition": "Paired per-goal difference (A-EMBED-COSINE correct - B-LEXICAL-OVERLAP correct) over the contamination-screened independently authored applicable set; mean difference with paired family-blocked 95% bootstrap CI lower/upper, B=10000, families = 5 resource families, numpy seed = 38112374668 % 2**32 = 3752636300.",
+    "report": [
+      "M-MECH-ACC-EMBED (A-EMBED-COSINE accuracy, numerator/denominator)",
+      "M-MECH-ACC-LEXICAL (B-LEXICAL-OVERLAP accuracy, numerator/denominator)",
+      "M-MECH-ACC-RANDOM (B-RANDOM-ROLE accuracy)",
+      "M-MECH-ACC-INCUMBENT (B-INCUMBENT-KERNEL accuracy)",
+      "M-MECH-ACC-ORACLE (B-INTERNAL-ID-ORACLE accuracy)",
+      "M-PAIRED-DIFF-EMBED-MINUS-LEXICAL (obs_diff, ci_lower, ci_upper)",
+      "M-CONTAM-MAX-JACCARD (max, mean, argmax distribution)",
+      "M-N-CONTAM-FLAGGED",
+      "M-N-PRIMARY",
+      "M-MECH-ACC-EMBED-SHUFFLED (NC-SHUFFLED-LABEL accuracy)"
+    ],
+    "outcomes": {
+      "SUPPORTS": "All V1-V11 gates PASS AND PC PASS AND NC-SHUFFLE PASS AND V9-NON-TAUTOLOGY PASS AND |primary_set| >= 80 AND M-PAIRED-DIFF-EMBED-MINUS-LEXICAL.obs_diff > 0 AND .ci_lower > 0.",
+      "FALSIFIES": "All measurement-validity gates PASS AND M-PAIRED-DIFF-EMBED-MINUS-LEXICAL.obs_diff <= 0 (embedding selection does not exceed the token-overlap null on independently authored goals).",
+      "MIXED": "All measurement-validity gates PASS AND obs_diff > 0 but ci_lower <= 0 (positive point estimate, not decisive).",
+      "MEASUREMENT_INVALID": "Any of V1-V11 fails, or a hard prerequisite (embedding model load, fixture load, goal bank extraction) is unavailable. Reported as packet status MEASUREMENT_INVALID or BLOCKED with the exact failure; never encoded as FALSIFIES. The HTTP server is imported transitively (bound) but is not started, because this packet measures binding, not execution."
+    },
+    "precedence": "MEASUREMENT_INVALID > FALSIFIES > MIXED > SUPPORTS.",
+    "reachability": "Both decision branches are arithmetically reachable. Positive branch: the embedding arm can capture verb synonymy (add/register/make -> create, fetch/show/look up -> read, edit/modify/change/revise -> update, remove/erase/drop/get rid of -> delete) that set-Jaccard need not capture. Negative branch: if lexical overlap and embedding agree, obs_diff <= 0. Neither arm is pinned by a ceiling or floor: the comparator's maximum goal-to-intent Jaccard is 0.50 (< 1.0) so it is not forced to the ceiling and the shared resource nouns keep it off the floor, while the oracle is 1.0 by construction and random is <= 0.20 by construction. Neither the accept nor the reject region is excluded. The comparator's and treatment's accuracies are outcomes and are NOT measured in DESIGN."
+  },
+  "product_consequence_positive": "First contamination-free evidence that embedding-based semantic resolution binds unseen, independently authored natural-language goals above a token-overlap null. This licenses moving the embedding-selection sub-mechanism of C-SEMANTIC-RESOLVE toward EXPERIMENTAL and supports keeping semantic resolution on the shipped observe->distill->registry->resolve->execute path; it unblocks the parameter-binding and abstention-calibration follow-ups and reduces risk on C-LLM-INHERIT/C-PRODUCT-ECON that depend on addressable inheritance. No product promotion is granted by this experiment.",
+  "product_consequence_negative": "The bounded 45/52-vs-33/52 advantage was (at least substantially) a joint-authorship artifact: on genuinely independent goals, max-cosine embedding selection does not beat simple token overlap. C-SEMANTIC-RESOLVE stays HYPOTHESIS; embedding-argmax resolution must not be relied on as a load-bearing component, and the next attempt must change architecture (e.g., learned paraphrase training, structured parameter/slot reasoning, or a retrieval model trained on independently authored goals) rather than re-tune thresholds. The claim is not retired; the domain stays open.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": "1 stdout HTTPS download of the pinned sentence-transformers model from huggingface.co (cached after first fetch); no external HTTP task traffic and no local server traffic (binding-only measurement)",
+    "estimated_wall_clock_seconds": 300,
+    "compute_notes": "CPU-only. One SentenceTransformer(all-MiniLM-L6-v2, revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf) load; 20 intent embeddings computed once; ~180 short goal encodings (100 primary + 20 out-of-scope + 20 verbatim + shuffled re-scoring). No LLM calls, no browser, no server, no sklearn fitting required for the primary metric."
+  },
+  "expected_information_gain": "High and decision-relevant in both directions. This is the first packet in the thread whose numbers are interpretable without the joint-authorship confound, because the goal bank is authored by a process that never saw the intent strings, the contamination of every goal against every intent is measured and reported, the comparator is a real distinct function, and the controls are re-verified before the primary read. A positive result is the first confound-free evidence for the resolve step on the shipped path; a negative result decisively bounds the embedding-argmax architecture and redirects the lane instead of re-running an uninterpretable threshold retune. Either branch changes the C-SEMANTIC-RESOLVE product decision.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Both branches are arithmetically reachable on the frozen fixture. Primary N=100 (>=80 after screening). Neither arm is pinned: the comparator's maximum goal-to-intent Jaccard is 0.50 (< 1.0) and the shared resource nouns keep it off the floor; B-INTERNAL-ID-ORACLE is 1.0 by construction and B-RANDOM-ROLE <= 0.20 by construction. So the primary quantity can land above 0 (SUPPORTS), at/below 0 (FALSIFIES) or positive-with-CI-including-0 (MIXED). No branch makes a later branch unreachable; precedence is explicit. The comparator's and treatment's accuracies are outcomes and are NOT measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38112374668/prereg.md#6-decision-rule",
+        "research/experiments/EXP-GRAPH-38112374668/spec.json#decision_rule.reachability",
+        "design instrument probe: max token Jaccard of the 100 frozen applicable goals to any of the 20 bound intents is 0.50 (0 flagged at 0.60), recomputed at EXECUTE as V-CONTAM-SCREEN"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All hard prerequisites exist or are pinned and reachable. (a) stdlib HTTP substrate and all arms are pre-existing, tracked files bound in freeze_artifacts. (b) The embedding model is pinned to sentence-transformers==3.0.1 / torch==2.4.0 / numpy==1.26.4 / all-MiniLM-L6-v2 revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf, exactly the environment recorded in research/experiments/EXP-GRAPH-36287167610/provenance.json; DESIGN probed https://huggingface.co and the pinned config.json (HTTP 200) and pypi.org (HTTP 200) as cheap non-outcome-bearing checks. (c) The goal bank is frozen in prereg.md. (d) If the model or network is unavailable at EXECUTE, the packet is BLOCKED (operational), not FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json (sentence-transformers 3.0.1, torch 2.4.0, numpy 1.26.4, model revision c9745ed...)",
+        "research/harness/candidate_resolver.py, research/harness/http_server.py, src/spider/kernel.py (all exist and are tracked)",
+        "DESIGN probe: HTTP 200 from huggingface.co, huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json and pypi.org"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Comparator and treatment are genuinely distinct functions (dense cosine over 384-d embeddings vs set-Jaccard over whitespace tokens) and the bank is not lexically trivial (max goal-to-intent Jaccard 0.50), so neither a ceiling nor a floor is forced and neither arm is a reparameterization of the other. V9-NON-TAUTOLOGY additionally requires the two decision vectors to differ on >=1 goal and the comparator to stay below 0.99, so the tautological-comparator failure of EXP-GRAPH-36287167610 cannot pass silently. V7 gains the treatment-liveness check (non-constant, valid selections) without gating on the treatment beating the floor. The arms' accuracies are outcomes and are not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38112374668/prereg.md#5-arms",
+        "research/harness/candidate_resolver.py::LexicalOverlapResolver, ::EmbeddingArgmaxResolver, ::InternalIdOracle, ::RandomRoleResolver",
+        "design instrument probe: max goal-to-intent Jaccard 0.50 on the frozen bank (instrument property, independent of any arm)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Each control can fail under the same implementation that scores the experiment. PC-VERBATIM-INTENT must be 1.0 for A-EMBED/B-LEXICAL/B-INCUMBENT and fails if the model/loader/registry is broken. NC-SHUFFLED-LABEL must be <=0.20 and fails (>0.20) if the metric leaks fixture structure. B-INTERNAL-ID-ORACLE must be 1.0 and fails on label defects. V9-NON-TAUTOLOGY fails if comparator and treatment are identical, or if the comparator saturates. V-CONTAM-SCREEN is non-vacuous (instrument probe: max goal-to-intent Jaccard 0.50, 0 flagged at 0.60; a near-verbatim goal would be flagged). None is tautological.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38112374668/prereg.md#7-controls",
+        "design instrument probe: contamination max 0.50, 0 flagged at 0.60 (fixture property only)"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "A-EMBED-COSINE is the pre-existing EmbeddingArgmaxResolver, which always returns a finite argmax over 20 intent embeddings (never structurally abstains), so it can produce a mechanism choice on every goal once the model loads. Liveness is enforced by V-PC (self-match 1.0 on the 20 verbatim intents) and V7 (>=2 distinct valid mechanism selections on the primary set, i.e. non-constant output). If the model cannot load, the packet is BLOCKED, not silently dead.",
+      "evidence_refs": [
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-38112374668/prereg.md#5-arms"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed in freeze_artifacts and hashed into freeze.json.artifact_hashes: the four research/harness modules (arms, goal generator, HTTP substrate, metric estimators), the shipped src/spider kernel/registry/models and package init. The independently authored goal bank has no mutable file dependency because it is embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']; the orchestration script is a verbatim transcription of the frozen reference runner embedded in prereg.md. No unbound mutable code, task bank, dataset or fixture remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38112374668/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38112374668/prereg.md#4-frozen-goal-bank (sha256 1fc5fca59d96b678ee2220c91ba8c27182775a59d4d3f1dbbe51d285f55e4f70)"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/harness/candidate_resolver.py",
+    "research/harness/goal_generator.py",
+    "research/harness/http_server.py",
+    "research/harness/experiment_runner.py",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "src/spider/__init__.py"
+  ]
 }
