@@ -1,0 +1,45 @@
+{
+  "certified_families": [
+    "F1-RECORDS",
+    "F2-WIDGETS"
+  ],
+  "check_decision_supports": true,
+  "check_evaluator_matches_probe": true,
+  "counter_identification": {
+    "F1-RECORDS": {
+      "T_vs_COLD_distinct_dimensions": 2,
+      "T_vs_RETRIEVAL_distinct_dimensions": 3,
+      "margin_COLD": 0.125,
+      "margin_RETRIEVAL": 0.125
+    },
+    "F2-WIDGETS": {
+      "T_vs_COLD_distinct_dimensions": 2,
+      "T_vs_RETRIEVAL_distinct_dimensions": 3,
+      "margin_COLD": 0.09999999999999998,
+      "margin_RETRIEVAL": 0.09999999999999998
+    }
+  },
+  "decision": "SUPPORTS",
+  "gates": {
+    "V1_code_fidelity_manifest": true,
+    "V2_transport_conformance": true,
+    "V3_no_leak": true,
+    "V4_determinism": true,
+    "V5_arm_liveness": true,
+    "V6_counter_instrumentation": true,
+    "V7_matched_correctness": true,
+    "V8_ceiling_band": true,
+    "V8_mechanism_off": true
+  },
+  "note": "non-outcome-bearing: assemble_decision() (all V1-V8 gates + decision rule) exercised on probe-derived synthetic cells",
+  "probe_certified_families": [
+    "F1-RECORDS",
+    "F2-WIDGETS"
+  ],
+  "world": {
+    "certified_families": 2,
+    "comparator_attributable": false,
+    "gates_pass": true,
+    "total_families": 2
+  }
+}

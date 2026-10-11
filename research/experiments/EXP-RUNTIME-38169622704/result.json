@@ -1,0 +1,746 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38169622704",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "substrate_class": "SBA-CREDENTIAL-FREE-V2",
+    "run_seed": "SPIDER-RUNTIME-SBA-V2-2026",
+    "sessions_per_cell": 20,
+    "scored_band_novelty_min": 0.5,
+    "scored_cells": 32,
+    "scored_sessions": 640,
+    "matrix_passes": 2,
+    "decision": "SUPPORTS",
+    "determinism_ok": true,
+    "certified_families": [
+      "F1-RECORDS",
+      "F2-WIDGETS"
+    ],
+    "certified_family_count": 2,
+    "total_families": 2,
+    "gates_V1_V8": {
+      "V1_code_fidelity_manifest": true,
+      "V2_transport_conformance": true,
+      "V3_no_leak": true,
+      "V4_determinism": true,
+      "V5_arm_liveness": true,
+      "V6_counter_instrumentation": true,
+      "V7_matched_correctness": true,
+      "V8_ceiling_band": true,
+      "V8_mechanism_off": true
+    },
+    "mechanism_off_control": {
+      "mechanism_off_cold_rate": {
+        "F1-RECORDS": 1.0,
+        "F2-WIDGETS": 1.0
+      },
+      "mechanism_off_destroys_certificate": true
+    },
+    "per_family": {
+      "F1-RECORDS": {
+        "K": 8,
+        "comparator_closed_form": 0.875,
+        "success_rate": {
+          "T-AMORTIZED-DISCOVERY": 1.0,
+          "B-COLD-RE-DERIVE": 0.875,
+          "B-RETRIEVAL-SHAPED": 0.875,
+          "PC-EXACT-REPLAY": 1.0
+        },
+        "successes_tasks": {
+          "T-AMORTIZED-DISCOVERY": [
+            160,
+            160
+          ],
+          "B-COLD-RE-DERIVE": [
+            140,
+            160
+          ],
+          "B-RETRIEVAL-SHAPED": [
+            140,
+            160
+          ],
+          "PC-EXACT-REPLAY": [
+            160,
+            160
+          ]
+        },
+        "margin_T_minus_cold": 0.125,
+        "margin_T_minus_retrieval": 0.125,
+        "distinct_counter_dims_T_vs_cold": 2,
+        "distinct_counter_dims_T_vs_retrieval": 3,
+        "certifies": true
+      },
+      "F2-WIDGETS": {
+        "K": 10,
+        "comparator_closed_form": 0.9,
+        "success_rate": {
+          "T-AMORTIZED-DISCOVERY": 1.0,
+          "B-COLD-RE-DERIVE": 0.9,
+          "B-RETRIEVAL-SHAPED": 0.9,
+          "PC-EXACT-REPLAY": 1.0
+        },
+        "successes_tasks": {
+          "T-AMORTIZED-DISCOVERY": [
+            200,
+            200
+          ],
+          "B-COLD-RE-DERIVE": [
+            180,
+            200
+          ],
+          "B-RETRIEVAL-SHAPED": [
+            180,
+            200
+          ],
+          "PC-EXACT-REPLAY": [
+            200,
+            200
+          ]
+        },
+        "margin_T_minus_cold": 0.09999999999999998,
+        "margin_T_minus_retrieval": 0.09999999999999998,
+        "distinct_counter_dims_T_vs_cold": 2,
+        "distinct_counter_dims_T_vs_retrieval": 3,
+        "certifies": true
+      }
+    },
+    "counter_identification": {
+      "F1-RECORDS": {
+        "T_vs_COLD_distinct_dimensions": 2,
+        "T_vs_RETRIEVAL_distinct_dimensions": 3,
+        "margin_COLD": 0.125,
+        "margin_RETRIEVAL": 0.125
+      },
+      "F2-WIDGETS": {
+        "T_vs_COLD_distinct_dimensions": 2,
+        "T_vs_RETRIEVAL_distinct_dimensions": 3,
+        "margin_COLD": 0.09999999999999998,
+        "margin_RETRIEVAL": 0.09999999999999998
+      }
+    },
+    "code_fidelity_manifest_v1": {
+      "harness_sha256": "28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da",
+      "python": "3.12.15"
+    },
+    "cell_table": {
+      "F1-RECORDS|0.0|B-COLD-RE-DERIVE": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.0|B-RETRIEVAL-SHAPED": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 0,
+          "retrieval_calls": 160,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.0|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.0|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.25|B-COLD-RE-DERIVE": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.25|B-RETRIEVAL-SHAPED": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 0,
+          "retrieval_calls": 160,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.25|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.25|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.5|B-COLD-RE-DERIVE": {
+        "success_rate": 0.875,
+        "matched_correctness": 0.875,
+        "successes": 140,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 20,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.5|B-RETRIEVAL-SHAPED": {
+        "success_rate": 0.875,
+        "matched_correctness": 0.875,
+        "successes": 140,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 20,
+          "retrieval_calls": 160,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.5|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.5|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.75|B-COLD-RE-DERIVE": {
+        "success_rate": 0.875,
+        "matched_correctness": 0.875,
+        "successes": 140,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 20,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.75|B-RETRIEVAL-SHAPED": {
+        "success_rate": 0.875,
+        "matched_correctness": 0.875,
+        "successes": 140,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 480,
+          "repair_calls": 20,
+          "retrieval_calls": 160,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.75|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F1-RECORDS|0.75|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 160,
+        "tasks": 160,
+        "counters": {
+          "http_calls": 340,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 160
+        }
+      },
+      "F2-WIDGETS|0.0|B-COLD-RE-DERIVE": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.0|B-RETRIEVAL-SHAPED": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 0,
+          "retrieval_calls": 200,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.0|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.0|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.25|B-COLD-RE-DERIVE": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.25|B-RETRIEVAL-SHAPED": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 0,
+          "retrieval_calls": 200,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.25|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.25|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.5|B-COLD-RE-DERIVE": {
+        "success_rate": 0.9,
+        "matched_correctness": 0.9,
+        "successes": 180,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 20,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.5|B-RETRIEVAL-SHAPED": {
+        "success_rate": 0.9,
+        "matched_correctness": 0.9,
+        "successes": 180,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 20,
+          "retrieval_calls": 200,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.5|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.5|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.75|B-COLD-RE-DERIVE": {
+        "success_rate": 0.9,
+        "matched_correctness": 0.9,
+        "successes": 180,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 20,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.75|B-RETRIEVAL-SHAPED": {
+        "success_rate": 0.9,
+        "matched_correctness": 0.9,
+        "successes": 180,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 600,
+          "repair_calls": 20,
+          "retrieval_calls": 200,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.75|PC-EXACT-REPLAY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      },
+      "F2-WIDGETS|0.75|T-AMORTIZED-DISCOVERY": {
+        "success_rate": 1.0,
+        "matched_correctness": 1.0,
+        "successes": 200,
+        "tasks": 200,
+        "counters": {
+          "http_calls": 420,
+          "repair_calls": 0,
+          "retrieval_calls": 0,
+          "verification_calls": 200
+        }
+      }
+    },
+    "cross_check_probe_output_sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+    "design_probe_output_sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+    "cross_check_selftest_output_sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931",
+    "design_selftest_output_sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931"
+  },
+  "controls": {
+    "PC-EXACT-REPLAY": {
+      "type": "positive_control",
+      "expected": "success_rate == 1.0 at every (family, novelty band)",
+      "observed": {
+        "F1-RECORDS": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "F2-WIDGETS": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json cells"
+    },
+    "B-COLD-RE-DERIVE": {
+      "type": "comparator_baseline",
+      "expected": "success_rate == (K-1)/K at novelty>=0.50 (0.875 F1 / 0.900 F2); ==1.0 below 0.50",
+      "observed": {
+        "F1-RECORDS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 0.875,
+          "0.75": 0.875
+        },
+        "F2-WIDGETS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 0.9,
+          "0.75": 0.9
+        }
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json cells"
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "type": "comparator_baseline",
+      "expected": "as cold; stale foreign-session binding for the chain task; retrieval_calls == K per session",
+      "observed": {
+        "F1-RECORDS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 0.875,
+          "0.75": 0.875
+        },
+        "F2-WIDGETS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 0.9,
+          "0.75": 0.9
+        }
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json cells"
+    },
+    "T-AMORTIZED-DISCOVERY": {
+      "type": "treatment",
+      "expected": "success_rate == 1.0 at every (family, novelty band)",
+      "observed": {
+        "F1-RECORDS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 1.0,
+          "0.75": 1.0
+        },
+        "F2-WIDGETS": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 1.0,
+          "0.75": 1.0
+        }
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json cells"
+    },
+    "NC-MECHANISM-OFF": {
+      "type": "sensitivity_null",
+      "expected": "exposing the one-time binding via the session endpoint raises cold to >=0.95 so the certificate flips FALSE (V8_mechanism_off)",
+      "observed": {
+        "mechanism_off_cold_rate": {
+          "F1-RECORDS": 1.0,
+          "F2-WIDGETS": 1.0
+        },
+        "mechanism_off_destroys_certificate": true
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json controls + artifacts/probe_mode.json mechanism_off"
+    },
+    "NC-CEILING-BAND": {
+      "type": "band_sensitivity",
+      "expected": "at novelty 0.0 the chain mechanism is not engaged -> every arm ==1.0; certificate not evaluated there",
+      "observed": true,
+      "pass": true,
+      "evidence": "artifacts/run_scored.json gates.V8_ceiling_band + artifacts/probe_mode.json checks.ceiling_band_all_arms_one"
+    },
+    "NC-EMPTIED-CONTEXT": {
+      "type": "diagnostic",
+      "expected": "memoryless comparator tracks (K-1)/K at novelty>=0.50",
+      "observed": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "pass": true,
+      "evidence": "artifacts/run_scored.json cells (B-COLD-RE-DERIVE at novelty 0.5)"
+    },
+    "NC-NO-LEAK": {
+      "type": "contamination_gate",
+      "expected": "F-LEAK clean: binding never appears in session/task/error bodies; revealed only once in its own precursor receipt",
+      "observed": {
+        "session_never_reveals_binding": true,
+        "no_binding_in_session_body": true,
+        "no_binding_in_task_bodies": true,
+        "no_binding_in_error_body": true,
+        "wrong_binding_400_no_leak": true,
+        "precursor_recommit_409_no_reveal": true,
+        "precursor_reveals_binding_once": true
+      },
+      "pass": true,
+      "evidence": "artifacts/probe_mode.json checks.protocol_invariants + artifacts/run_scored.json gates.V3_no_leak"
+    },
+    "NC-RETAIN-RECEIPT": {
+      "type": "amortization_boundary_diagnostic",
+      "expected": "retain only immediate predecessor receipt -> 1.0 at novelty 0.5 (carry distance 1), (K-1)/K at novelty 0.75 (carry distance 2)",
+      "observed": {
+        "0.5": 1.0,
+        "0.75": 0.875
+      },
+      "pass": true,
+      "evidence": "artifacts/probe_mode.json no_discovery_direct/retain_receipt (non-outcome-bearing diagnostic re-run at EXECUTE)"
+    },
+    "NC-NO-DISCOVERY-DIRECT": {
+      "type": "diagnostic",
+      "expected": "valid session token but ignores schema/receipts -> 1.0 at novelty 0.0, 0.0 at novelty>=0.25",
+      "observed": {
+        "0.0": 1.0,
+        "0.5": 0.0
+      },
+      "pass": true,
+      "evidence": "artifacts/probe_mode.json checks.no_discovery_direct_expected"
+    },
+    "NC-BINDING-UNIQUENESS": {
+      "type": "identifiability",
+      "expected": "48-bit session bindings pairwise distinct over the scored matrix (no collisions)",
+      "observed": {
+        "binding_bits": 48,
+        "collisions": 0,
+        "sampled": 160
+      },
+      "pass": true,
+      "evidence": "artifacts/probe_mode.json binding_uniqueness"
+    },
+    "NC-MEMORYFUL": {
+      "type": "disclosed_boundary_diagnostic",
+      "expected": "a within-session-memoryful cold agent reaches 1.0 by retaining the precursor receipt; NOT a certificate input",
+      "observed": "analytic (disclosed in prereg section 11); not instrumented in the frozen scored matrix",
+      "pass": "DISCLOSED",
+      "evidence": "spec.json controls.NC-MEMORYFUL + prereg.md section 11"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/run_experiment.py",
+      "sha256": "28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/run_scored.json",
+      "sha256": "a8acd9a7ba25c84d5490f4a4c5d9ebb8de32d8a5b3f212c814cc0ee11c7897bf",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/probe_mode.json",
+      "sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/selftest_stdout.json",
+      "sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/scored_stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/scored_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Frozen harness written to research/experiments/EXP-RUNTIME-38169622704/run_experiment.py (sha256 28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da) exactly matches spec.design_satisfiability_probe.source_sha256 and the prereg BEGIN/END SBA-HARNESS block.",
+    "python3 --version = 3.12.15 (V1 code-fidelity manifest recorded in result.metrics.code_fidelity_manifest_v1).",
+    "scored mode exited 0; stdout and stderr empty; wall clock 11m24s; two independent matrix passes (640 sessions each) produced byte-identical cells (determinism_ok=true).",
+    "All V1-V8 gates evaluated true: {\"V1_code_fidelity_manifest\": true, \"V2_transport_conformance\": true, \"V3_no_leak\": true, \"V4_determinism\": true, \"V5_arm_liveness\": true, \"V6_counter_instrumentation\": true, \"V7_matched_correctness\": true, \"V8_ceiling_band\": true, \"V8_mechanism_off\": true}",
+    "At novelty>=0.50 B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED measured 140/160=0.875 (F1-RECORDS, K=8) and 180/200=0.900 (F2-WIDGETS, K=10); both equal the frozen closed form (K-1)/K.",
+    "At novelty 0.0 and 0.25 every arm (T, both comparators, PC) measured success_rate 1.0 in both families (ceiling band, certificate not evaluated there).",
+    "T-AMORTIZED-DISCOVERY and PC-EXACT-REPLAY measured success_rate 1.0 in all 8 (family, novelty) cells.",
+    "matched_correctness == success_rate in all 32 scored cells (exact-match scoring, V7 true).",
+    "Counter profiles per session matched the frozen predictions: T http_calls 17 (F1)/21 (F2); comparators 24/30; B-RETRIEVAL-SHAPED added retrieval_calls 8/10; comparators incurred repair_calls 1 on the chain task at novelty>=0.50.",
+    "NC-MECHANISM-OFF: exposing the binding via the session endpoint raised cold to 1.0 in both families (mechanism_off_destroys_certificate=true).",
+    "NC-NO-LEAK / protocol conformance scan returned all true (session never reveals binding; binding absent from session/task/error bodies; wrong binding 400 with no leak; precursor re-commit 409 with no re-reveal; chain task resource null; correct binding 200; repeat chain commit 409).",
+    "EXECUTE probe-mode stdout sha256 023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77 equals the DESIGN-time probe output_sha256 in spec.json; EXECUTE selftest stdout sha256 7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931 equals spec.execute_evaluator_selftest_sha256.",
+    "NC-RETAIN-RECEIPT measured 1.0 at novelty 0.50 and 0.875 at novelty 0.75; NC-NO-DISCOVERY-DIRECT measured 1.0 at novelty 0.0 and 0.0 at novelty 0.50; NC-BINDING-UNIQUENESS 0 collisions over 160 sampled 48-bit bindings."
+  ],
+  "validity_notes": [
+    "Design-contract v2. freeze.artifact_hashes is empty as declared; the only mutable interpretation dependency is the EXECUTE copy of the frozen harness, pinned by sha256 28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da and recorded in the V1 manifest.",
+    "The substrate is a synthetic credential-free stdlib-only HTTP task bank generated from frozen literals; the measured dynamic range is an engineered construction property ((K-1)/K) and is not a claim about baseline strength on natural Web tasks.",
+    "NC-MEMORYFUL is a disclosed boundary: a within-session-memoryful cold agent reaches 1.0 by retaining the precursor receipt. The certificate therefore bounds the amortization rate, not agent capability.",
+    "Scope bound: one construction class (SBA-CREDENTIAL-FREE-V2) and two families (K=8, K=10) were tested; the positive result does not generalize to other credential-free or economically-bearing carriers.",
+    "No claim status changes: this packet produces substrate-validity evidence for C-MEAS-VALID only; it does not promote any mechanism and does not run the flagship four-arm inheritance benchmark.",
+    "Outcome-bearing scored path was executed exactly once (internally two determinism passes plus controls); probe/selftest re-runs at EXECUTE are non-outcome-bearing diagnostics and reproduce the frozen DESIGN hashes.",
+    "No credentials, browser, model, external endpoint or network beyond 127.0.0.1 loopback were used; server_secret is deterministic with no secrets, clock or os.urandom.",
+    "EXECUTE environment note: the repository scope guard (scripts/check_scope.py) reported SPIDER_CONTROL_OVERLAY_DIRTY for concurrent control-plane writes (SPIDER_CODEX.md and codex/experiments/EXP-GRAPH-38175554380/*) plus a gitignored scripts/__pycache__ bytecode file. None are under research/experiments/EXP-RUNTIME-38169622704/ and the frozen inputs are unmodified; the guard exits before evaluating lane paths. This is a control-plane/concurrency condition, not an experiment-measurement condition."
+  ],
+  "unresolved": [
+    "Whether the certified bank retains its property under independent audit recomputation and under a different K than the frozen {8,10} (the closed-form K-sweep is arithmetically in band for 6..12 but only K=8 and K=10 were measured in the scored matrix).",
+    "Whether the engineered dynamic range predicts comparator behaviour on natural or economically-bearing Web tasks; this packet deliberately measures only the B2 dynamic-range prerequisite.",
+    "The flagship four-arm C-LLM-INHERIT benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER) was not run and remains the downstream test this substrate is intended to unblock.",
+    "Absolute C-MEAS-VALID claim status is unchanged; the Director must decide whether this substrate-validity certificate discharges the B2 readiness blocker."
+  ]
+}
