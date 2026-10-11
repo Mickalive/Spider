@@ -270,15 +270,32 @@ byte-identically. No goal text was authored in this re-issue; the only executabl
   numpy 1.26.4, scikit-learn 1.5.1, model `sentence-transformers/all-MiniLM-L6-v2`.
 - Model revision pinned to `c9745ed1d9f207416be6d2e6f8de32d1f161f9bf`; the runner requests the
   revision and falls back to the unpinned model name if unavailable, recording which was used.
+- **EXECUTE bootstrap (mandatory).** The CI setup-python toolcache does not ship the scientific
+  stack; during DESIGN, `numpy`, `scipy`, `scikit-learn`, `torch` and `sentence-transformers` were
+  all absent from the interpreter that runs the runner. EXECUTE must therefore make the following
+  stack importable **before** executing the frozen runner (installing it if absent):
+  `python3 -m pip install numpy==1.26.4 scipy==1.13.1 scikit-learn==1.5.1`,
+  `python3 -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.4.0`, and
+  `python3 -m pip install sentence-transformers==3.0.1`. This was verified at DESIGN (all imports
+  succeeded: numpy 1.26.4, scipy 1.13.1, scikit-learn 1.5.1, torch 2.4.0+cpu, sentence-transformers
+  3.0.1 -> transformers 4.57.6). The pip bootstrap is **not** part of the measurement: its traffic,
+  time and any failure are excluded from the metric and a bootstrap failure yields `status=BLOCKED`,
+  **not** FALSIFIES. It must be re-run per job if the runner image does not already provide the
+  stack, because CI images fluctuate (an earlier graph run, `EXP-GRAPH-35010853847`, had no torch and
+  fell back to TF-IDF; `EXP-GRAPH-36279237023` recorded torch 2.14.0).
 - DESIGN probed pre-freeze (non-outcome-bearing): `https://huggingface.co/sentence-transformers/
   all-MiniLM-L6-v2/resolve/main/config.json` -> HTTP 200; `https://pypi.org/simple/
-  sentence-transformers/` -> HTTP 200.
+  sentence-transformers/` -> HTTP 200; and the frozen `EmbeddingArgmaxResolver` was constructed over
+  `create_fixture()` (20 mechanisms) with `SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')`
+  and resolved all 20 verbatim mechanism intents to a valid fixture mechanism id with
+  `resolution_status=EXECUTABLE` and finite confidence (20 distinct selections; no bank goal scored).
 - If the embedding model, torch, numpy, scikit-learn or sentence_transformers cannot be loaded at
   EXECUTE, the runner writes `status=BLOCKED`, `outcome=INCONCLUSIVE` (operational), never
   FALSIFIES and never a fabricated result.
-- This experiment does **not** start the HTTP server and makes **no** LLM or browser calls; the
-  only network interaction is the one-time pinned model download. `http_server.py` is imported
-  transitively (and hash-bound) to prove the substrate exists, but is not started.
+- This experiment does **not** start the HTTP server and makes **no** LLM or browser calls. Outside
+  the excluded pip bootstrap, the only network interaction is the one-time pinned model download.
+  `http_server.py` is imported transitively (and hash-bound) to prove the substrate exists, but is
+  not started.
 
 ## 7. Fixture
 
@@ -1076,10 +1093,21 @@ no prediction on the claim was made.
   (39+19), test 73 (54+19); family counts users 19 / posts 17 / comments 19 / albums 19 / photos 19.
 - B-LEXICAL-OVERLAP accuracy on the primary set: 49/93 = 0.5269 (headroom vs the 0.99 ceiling and
   no floor pinning).
-- B-RANDOM-ROLE accuracy: approximate 0.25-0.29 (numpy absent in the DESIGN environment; exact
-  value recomputed at EXECUTE with the same seed).
+- B-RANDOM-ROLE accuracy: approximate 0.25-0.29 from the role-uniform construction (the exact
+  seeded value is recomputed once at EXECUTE with the same seed; this is a null, not the claim).
 - B-INCUMBENT-KERNEL on the primary set: 0 by construction (no goal is an exact intent string).
 - Network/model prerequisites: HTTP 200 from huggingface.co (model config) and pypi.org.
+- **Treatment-liveness smoke probe (non-outcome-bearing).** The frozen `EmbeddingArgmaxResolver`
+  was constructed over `create_fixture()` (20 mechanisms) with
+  `SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')` and asked to resolve the 20
+  verbatim mechanism intents. Result: 20/20 returned a mechanism id present in the fixture with
+  `resolution_status=EXECUTABLE` and finite confidence, and 20 distinct mechanisms were selected.
+  No goal from the frozen 140-goal bank was scored and no claim prediction was made.
+- **Environment/import probe.** The setup-python toolcache had no scientific stack; DESIGN installed
+  the preregistered pins (numpy 1.26.4, scipy 1.13.1, scikit-learn 1.5.1, torch 2.4.0+cpu from
+  download.pytorch.org/whl/cpu, sentence-transformers 3.0.1 -> transformers 4.57.6) and confirmed
+  all imports and the smoke probe above. This establishes that the frozen treatment executes and
+  that its stack is installable from the reachable indexes; it does **not** measure the claim.
 - Seed derivation: `38166215691 % 2**32 = 3806477323`.
 - Runner: py_compile clean; sha256 `065b7557ad94c3b01844c8a3d6a518dce103db32f97f0ce067af47e77e600468`.
 - Re-issue note: the stdlib-tokenisation probe above was independently re-run for this packet and
@@ -1124,4 +1152,6 @@ attempt must change architecture rather than retune thresholds.
 
 `derived/measurements.json.env` records python, numpy, scikit-learn, torch, sentence_transformers
 versions and the model name/revision actually used. EXECUTE copies this into `provenance.json`
-alongside the runner sha256 and the exact `git rev-parse HEAD`.
+alongside the runner sha256 and the exact `git rev-parse HEAD`, and additionally records whether the
+scientific stack was already present or had to be pip-installed (with the exact bootstrap commands)
+so the prerequisite handling is auditable.
