@@ -12,9 +12,18 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, quote, urlsplit
 
 DATA = {
-    "invoices": {"A-101": "CHF 138.45", "A-202": "CHF 251.30"},
-    "shipments": {"S-501": "Delivered", "S-902": "In transit"},
+    "invoices": {
+        "A-101": "CHF 138.45", "A-202": "CHF 251.30",
+        "A-303": "CHF 875.00", "A-404": "CHF 16.70",
+    },
+    "shipments": {
+        "S-501": "Delivered", "S-902": "In transit",
+        "S-606": "Pending customs", "S-707": "Out for delivery",
+    },
 }
+# Crucial: the trace compiler never observes evaluation identifiers.
+TRAIN_IDS = {"invoices": ("A-101", "A-202"), "shipments": ("S-501", "S-902")}
+EVAL_IDS = {"invoices": ("A-303", "A-404"), "shipments": ("S-606", "S-707")}
 
 
 def truth(family: str, identifier: str) -> str | None:
