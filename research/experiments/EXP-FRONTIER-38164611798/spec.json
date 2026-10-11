@@ -1,49 +1,145 @@
 {
+  "spec_schema_version": 2,
   "experiment_id": "EXP-FRONTIER-38164611798",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "question": "Binding Director question (director_mandate.allocation.question, PIVOT with cognitive_reset; SUPERSEDES EXP-FRONTIER-37984242167 and EXP-FRONTIER-38085197666): \"On the credential-free GET-only stdlib-HTTP substrate, over a broadened frozen multi-host pool enumerated by DESIGN WITHOUT a required engine-count precondition, treat attainability itself as the measured object: (Q1) for each host/engine, how many state-carrying items sit at shortest-path hop >= 3 under the frozen same-host static-<a> BFS (depth <= 6, budget 250), reported per engine with an explicit count of engines that yield ZERO DEEP items; (Q2) conditional on the attained pool, what fraction of those DEEP items is reachable in <= K = 3 fresh-agent GETs (one discovery GET + item-page GET + one spare) via ANY of the five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD), with per-channel coverage disclosed and any channel yielding zero admitted DEEP items reported as such rather than counted as a null; and (Q3) is that O(1)-reachable fraction >= 0.50 on at least two distinct hosts/engines?\" Operationalized on the frozen 20-host pool (prereg section 6) with the frozen structural pass (Q1), the frozen discovery protocol with per-channel charged costs <= K (Q2) and the frozen materiality threshold 0.50 on >= 2 distinct engines (Q3), all measured by the code block frozen verbatim in prereg section 16 (CODE_SHA256 6ae1db420920de88426714a5330a726ec250ca3010b054150a3c13ab39dc8e1b).",
+  "hypothesis": "H1 (SUPPORTS condition). On the credential-free GET-only stdlib-HTTP substrate over the frozen 20-host pool, at least two distinct hosts/engines reach a discovery-reachable fraction of DEEP (shortest-path hop >= 3, depth <= 6, budget 250) state-carrying items of >= 0.50 within K = 3 fresh-agent GETs via any of the five frozen site-native discovery channels, with the per-channel coverage ledger and the zero-admission channel ledger disclosed. If Q3 holds, shortest-path hop is NOT a fundamental acquisition-cost barrier for discovery-enabled acquisition: site-native indexes make deep acquisition O(1), retiring traversal-and-cache as the optimization target and moving effort to discovery-channel coverage and substrate expansion. This bounds C-CROSSSITE upward on this substrate class.",
+  "falsifier": "F1 (FALSIFIES condition). Fewer than two distinct engines reach the 0.50 threshold while at least one engine admits >= 1 DEEP item (engine-stratified bounded negative): on this substrate class and frozen pool, site-native discovery is NOT an O(1) shortcut for deep state-carrying acquisition; the discovery axis is closed on this substrate and the persistence-maintenance axis (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost, scaling with hop and elapsed time - the Director's recorded runner-up) is handed to the next mandate. A valid FALSIFIES is a bounded replication negative, never an infrastructure failure. INCONCLUSIVE (never a negative, never a SUPPORTS): zero DEEP items admitted across the frozen pool (Q1 measured; Q2/Q3 vacuous; the vacuity is an attainability fact recorded with the explicit zero-DEEP engine census), or every DEEP-admitting engine is LIMITED with > 10% of its admitted DEEP items dead to the liveness re-GET (Q1/Q2 measured but Q3 not determinable), or seed fetch fails on every pool host (infrastructure signature per EXPERIMENT_PACKET.md section 1, NOT a scientific null; outcome stages never produce a measurement from it).",
+  "baselines": [
+    {
+      "id": "B-LINK-FOLLOWING-BFS",
+      "kind": "primary_comparator_measured_in_pool",
+      "definition": "the a-priori acquisition path that the O(1) discovery claim must beat: same-host static-<a> item-blind FIFO BFS under the frozen policy (budget 250, depth 6). Per admitted DEEP item, fresh-agent link-following cost = the 1-based BFS discovery/fetch ordinal (requests column), which is <= 250 for every admitted item because admission requires a BFS fetch, and in a clean chain equals hop + 1. Measured in-pool per item at EXECUTE; the cost contrast to the <= K = 3 charged discovery cost is the decision-relevant comparison."
+    },
+    {
+      "id": "B-PERSISTED-PATH-REACQUISITION",
+      "kind": "inherited_context_reference_not_remeasured",
+      "definition": "parent packet EXP-FRONTIER-37950626378 RACQ_PATH: re-acquiring a persisted path cost NEAR=2.0 / MID=3 / DEEP=4 fresh GETs (approximately hop+1), 1532/1532 items with path_len == hop+1 on the single DEEP-bearing engine (doc.rust-lang.org mdBook) of that pool. Carried as inherited context ONLY; labeled not re-measured by this experiment; identifies the path-bound acquisition cost that discovery must undercut."
+    },
+    {
+      "id": "B-DIRECT-URL-REPLAY",
+      "kind": "inherited_context_reference_not_remeasured",
+      "definition": "parent packet EXP-FRONTIER-37950626378 RACQ_URL: acquiring a known URL costs exactly 1 fresh GET. Carried as inherited context ONLY; labeled not re-measured; the 1-GET floor that a discovery channel plus item GET approaches when the item is listed."
+    }
+  ],
+  "positive_control": "PC-PARSER-CANARY-* (seven offline parser canaries with exact expected URL sets: PC_PARSER_CANARY_sitemap_xml, PC_PARSER_CANARY_sitemap_index, PC_PARSER_CANARY_sitemap_txt, PC_PARSER_CANARY_robots, PC_PARSER_CANARY_feed_rss, PC_PARSER_CANARY_feed_atom, PC_PARSER_CANARY_jsonld) + PC-SEED-LIVENESS (all 20 frozen seeds must return HTTP 200 at the EXECUTE inventory gate; a seed failure is recorded and that host's census is left-with-reason, never a scientific null). Any parser canary mismatch or a wrong seed status is a chain-failure signal: controls gate G1 FAIL -> measurement invalid, never a scientific branch.",
+  "null_control": "NC-BFS-CALIBRATION-FLAT (offline chain fixture; pass iff R_hop3_over_hop1 <= 3.0; DESIGN-observed 2.0) and NC-BFS-CALIBRATION-GROWING (offline fanout fixture; pass iff R_hop3_over_hop1 > 3.0; DESIGN-observed 6.5) certify the instrument's dynamic range in BOTH directions (flat/O(1)-like vs path-bound). NC-SYNTHETIC-UNREACHABLE-ITEM-direct (synthetic urls under spider-nonexistent-38164611798-* on the frozen pool must return real HTTP status >= 400; DESIGN-observed 404 on doc.rust-lang.org, docs.python.org, numpy.org) proves false-discovery is rejected with a real status code. PC_ENV records the runtime (Python 3.12.15, stdlib urllib, default TLS).",
+  "measurement_validity": [
+    {
+      "id": "V1",
+      "name": "code_canary",
+      "rule": "EXECUTE transcribes the outcome-bearing module byte-identically from prereg.md section 16 (block between CODE_BEGIN/CODE_END markers); sha256 of the transcribed bytes must equal CODE_SHA256 = 6ae1db420920de88426714a5330a726ec250ca3010b054150a3c13ab39dc8e1b. Any mismatch -> status=MEASUREMENT_INVALID."
+    },
+    {
+      "id": "V2",
+      "name": "controls_gate",
+      "rule": "EXECUTE re-runs --stage controls before any outcome stage; all 13 controls must PASS (exit 0). Any FAIL -> no outcome stages run; status=MEASUREMENT_INVALID with the failing control recorded."
+    },
+    {
+      "id": "V3",
+      "name": "inventory_gate_and_seed_liveness",
+      "rule": "EXECUTE re-runs --stage inventory before outcome stages; the frozen channel liveness record (all five channels live on >= 1 frozen host at DESIGN) is the liveness baseline. A seed fetch failure is recorded per host in metrics.seed_error_hosts and that host is excluded with reason (structural row carries seed_error); seed errors on EVERY pool host are an infrastructure signature -> outcome stages produce INCONCLUSIVE with the explicit 'not a scientific null' reason (BLOCKED-class disposition at EXECUTE), never FALSIFIES."
+    },
+    {
+      "id": "V4",
+      "name": "budget_depth_fidelity",
+      "rule": "per-seed discovery is hard-capped at BUDGET=250 pages and DEPTH=6 (cap enforced inside the per-page link loop even for a single page with thousands of links); every admitted item has structural hop in DEEP_BAND=(3,4,5,6) and >= 1 named input/select on the page (page-level state-carrying unit); ordinal/requests is the 1-based discovery ordinal."
+    },
+    {
+      "id": "V5",
+      "name": "denominator_guard",
+      "rule": "reachable fraction per engine uses live admitted DEEP items as denominator; n=0 -> fraction null, never a 0/0 entering thresholding; engines with zero DEEP items appear in the explicit engines_with_zero_deep census over the FULL frozen pool (pool_engines_census), and each of the 20 hosts appears in host_census."
+    },
+    {
+      "id": "V6",
+      "name": "membership_equality",
+      "rule": "channel membership uses frozen norm_eq: defragment + lowercase host + strip default port + equality after stripping AT MOST ONE trailing '/' (canonical slash variants); no redirect chasing of channel URLs; cross-host URLs can never match a same-host item (no extra rule needed)."
+    },
+    {
+      "id": "V7",
+      "name": "liveness_severity",
+      "rule": "item liveness is a fresh GET of the item URL (the item-page GET charged by every channel); an item is reachable iff (member of >= 1 channel) AND live; an engine whose admitted DEEP items die at a rate > 10% (DEAD_LIMIT) is flagged limited:true in per_engine and listed in engines_limited, and is excluded from the Q3 threshold census while its data stays disclosed."
+    },
+    {
+      "id": "V8",
+      "name": "charged_ledger",
+      "rule": "per-channel charged protocol costs (fresh-agent semantics, <= K=3 by construction): ROBOTS_SITEMAP=3 (robots GET + sitemap GET + item GET), SITEMAP_XML=2 (sitemap GET + item GET), ON_SITE_SEARCH=3 (seed GET to find the form + results GET + item GET), RSS_ATOM=3 (seed GET + feed GET + item GET), JSON_LD=2 (seed GET + item GET); every redirect leg counts toward K (counting redirect handler in transport); discovery-document GETs are amortized at EXECUTE (fetched once per host/channel) while the item-page GET is per item; actual vs charged GET ledger is disclosed in the report (raw/ + derived/ artifacts)."
+    },
+    {
+      "id": "V9",
+      "name": "representation",
+      "rule": "body cap MAX_BODY=600000 bytes, truncation flagged per fetch (docs.gitbook.com seed observed truncated at DESIGN), gzip handled; sitemap protocol: unified XML/TXT/gz parser, /sitemap.xml with /sitemap_index.xml fallback, index -> FIRST child only (uses the spare GET); robots.txt -> FIRST Sitemap: line only; RSS/Atom -> first alternate feed link in seed HTML head; JSON-LD channel = URL strings extracted from the SEED page's application/ld+json blocks (hub enumeration, over-inclusive by design and disclosed)."
+    },
+    {
+      "id": "V10",
+      "name": "search_semantics",
+      "rule": "ON_SITE_SEARCH query = item slug (last non-empty path segment, percent-encoded) via the frozen live seed-HTML form finder (first GET form with a named text-like input); membership = static links of the results page; a seed without a named GET form makes that channel NOT_PROBEABLE (recorded), never a null; cross-host search actions (e.g., blog.wordpress.org do-search.php on wordpress.org) are disclosed, not followed as a membership shortcut."
+    },
+    {
+      "id": "V11",
+      "name": "engine_identity",
+      "rule": "engine_class = <meta name='generator'> content when present (WordPress 7.2-alpha-64252, Docusaurus v4.0.0, Hugo 0.167.0, Jekyll v4.4.1, GitBook a0c1bdf, MediaWiki 1.47.0-wmf.23/22 observed at DESIGN), else the DESIGN-recorded documented platform (mdBook, Sphinx, Sphinx-RTD, Hugo-k8s, MDN-Yari, GitHubDocs, custom, GNU-web, phpBB); Q3 requires >= 2 DISTINCT engine classes on distinct base-domain hosts."
+    }
+  ],
+  "decision_rule": "Frozen, evaluated in order at EXECUTE by the module in prereg section 16 (--stage all) and mapped to result.json: G1 measurement validity (controls gate V2, code canary V1, inventory gate V3): any FAIL -> status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE (infrastructure/substrate or control-chain failure; never a scientific answer). G2 fake-seed signature: seed fetch failed on EVERY pool host -> outcome=INCONCLUSIVE, reason explicitly 'infrastructure signature, NOT a scientific null' (BLOCKED-class disposition), Q1/Q2/Q3 produce no measurement. G3 attainability: zero DEEP items admitted across the frozen pool -> outcome=INCONCLUSIVE (Q1 measured: engines_with_zero_deep census + host_census + per-engine stats; Q2/Q3 vacuous; the vacuity is an attainability fact, not a negative). G4 limited-only: every DEEP-admitting engine is limited (>10% admitted-item death) -> outcome=INCONCLUSIVE (Q1/Q2 measured and disclosed; Q3 not determinable). G5 Q3 materiality: engines at-or-above threshold = engines with n_deep>0, not limited, fraction>=0.50; if |at_or_above| >= MIN_ENGINES=2 -> outcome=SUPPORTS (shortest-path hop is NOT a fundamental acquisition-cost barrier for discovery-enabled acquisition; effort moves to discovery-channel coverage and substrate expansion). G6 otherwise (>=1 eligible DEEP-admitting engine but <2 at threshold) -> outcome=FALSIFIES, engine-stratified bounded negative (discovery is not an O(1) shortcut on this substrate class; close the discovery axis; hand the persistence-maintenance axis to the next mandate), with engines_limited and engines_with_zero_deep disclosed. Every engine row, per-channel coverage, zero-admission channels, hop distributions and the actual GET ledger are reported regardless of outcome.",
+  "product_consequence_positive": "If SUPPORTS: C-CROSSSITE advances toward EXPERIMENTAL (bounded: frozen 20-host pool, credential-free GET-only stdlib-HTTP substrate, K=3, five frozen channels, threshold 0.50 on >=2 engines). The architectural target for deep state-carrying acquisition moves off traversal-and-cache: discovery-enabled acquisition (sitemap/feed/on-site-search/JSON-LD), covered per the per-channel coverage ledger, becomes the default deep-instance acquisition path; the frontier priority shifts to discovery-channel coverage and substrate expansion (more channel classes, more engines/hosts, non-static pages), and C-FRESHNESS/C-PRODUCT-ECON (the Director's recorded runner-up: re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost) becomes the scheduled next mandate rather than the fallback.",
+  "product_consequence_negative": "If FALSIFIES: engine-stratified bounded negative on this substrate class - site-native discovery is NOT an O(1) shortcut for deep acquisition within K=3; no promotion of the discovery shortcut; the discovery axis is closed on this substrate and the persistence-maintenance/invalidation economics (runner-up recorded by the Director; owned by Graph/Product) is the conditional next mandate. If INCONCLUSIVE (zero DEEP or all-LIMITED): the Q1 attainability census (engines_with_zero_deep, host_census, per-engine DEEP counts with hop distributions) and the per-channel zero-admission ledger become the durable deliverable - an explicit map of where deep state-carrying content does and does not exist on this pool - with no claim update and no promotion; a future design re-targets pools/engines based on that census rather than re-spending on the same attainability.",
+  "estimated_cost": "stdlib-only (urllib + gzip + xml.etree + html.parser + http.server); zero pip installs, zero model calls, zero browser/Docker, no credentials. EXECUTE worst case: structural pass 20 seeds x <=251 GETs = 5,020; discovery per item <=2 GETs (search results + item liveness) x <=250 DEEP items x 20 hosts = 10,000; channel documents ~120; controls ~30; total <= ~15,200 GETs, typical 5,000-10,000 depending on attained DEEP counts (Q1 is itself measured, so the spend scales with the census). Wall time ~15-40 min at timeout 12 s per GET and DELAY 0.1 s between hosts. DESIGN certificate cost already paid and embedded in prereg section 11: 13 controls + 20-host inventory (~120 live GETs), run 2026-10-11 ~19:50Z on the actual runner.",
+  "expected_information_gain": "First valid measurement of the Director's architectural question (v1 EXP-FRONTIER-37984242167 committed an empty sampling frame with an absent pre-freeze certificate; v2 EXP-FRONTIER-38085197666 declared all six checks PASS with absent declared artifacts). This design cannot be blocked by an unattainable prerequisite because attainability (Q1) IS the measured object: it produces, in every branch, the DEEP-item census per engine/host, the per-channel coverage ledger with zero-admission channels reported as such, and the Q3 decision with a preregistered materiality threshold satisfiable in both directions. Either outcome materially changes the frontier architecture decision (traversal-and-cache retirement vs discovery-axis closure with a scheduled persistence-maintenance handoff), and the certificate-embedded code + re-run gates (V1-V3) preclude the prior designs' failure modes.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All branches of the frozen decision rule are reachable and were exercised at DESIGN on synthetic data (offline smoke test, prereg section 11, record embedded): all-zero items -> INCONCLUSIVE (Q1 census), two engines at >= 0.50 -> SUPPORTS, one at threshold -> FALSIFIES, all DEEP-admitting engines > 10% dead -> INCONCLUSIVE-LIMITED, partial-limited -> FALSIFIES counting only eligible engines. The instrument's dynamic range is certified in both directions by the offline BFS calibrations (FLAT R=2.0 <= 3.0 and GROWING R=6.5 > 3.0). The zero-DEEP branch is realistic (quotes.toscrape.com is a flat paginated demo site at hop<=1 with no discovery channels; react.dev has no search form/sitemap/feed). No 0/0 denominators can enter thresholding: n=0 -> fraction null and the engine appears in the zero-DEEP census instead; infra-wide seed failure maps to an explicit non-null INCONCLUSIVE (V3).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 10 (decision rule), section 11 (satisfiability evidence incl. branch smoke record), section 9 (controls, calibration values)",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json (empty-frame precedent to avoid)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All prerequisites were probed at DESIGN on the actual runner class (bare CPython 3.12.15, network enabled, stdlib urllib with default TLS): (a) 20/20 frozen seeds returned HTTP 200 text/html at probe 2026-10-11T19:40:43Z AND again in the DESIGN inventory certificate 2026-10-11 ~19:50Z; (b) all five discovery channels live on >= 1 frozen host per the certificate (ROBOTS_SITEMAP 7 hosts, SITEMAP_XML 9, ON_SITE_SEARCH 10, RSS_ATOM 7, JSON_LD 6), including generators, forms and feeds recorded per host; (c) 13/13 controls passed on the runner (observed values embedded, prereg section 11); (d) the full per-item evaluation pipeline (search results fetch, channel membership, liveness) was executed end-to-end offline against the local calibration fixture without errors (toy-liveness; distinct from the frozen pool). EXECUTE re-runs --stage controls and --stage inventory as frozen gates (V2/V3) before any outcome stage.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11 (probe transcript + DESIGN certificate: seeds, channels, controls, env)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code, stdlib-only imports)"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Three stable, mutually distinct baselines: B-LINK-FOLLOWING-BFS (measured IN-pool per item as the 1-based BFS discovery/fetch ordinal, <= 250 for every admitted item, ~hop+1 in a clean chain; the primary a-priori acquisition path the O(1) claim must beat), B-PERSISTED-PATH-REACQUISITION (inherited parent RACQ_PATH ~hop+1, 1532/1532 items; NOT re-measured, labeled inherited context) and B-DIRECT-URL-REPLAY (inherited RACQ_URL = 1 GET; NOT re-measured). The charged discovery cost (<= K=3) is compared against the measured link-following cost per item, so the O(1)-vs-path-bound contrast is directly identifiable; the instrument's ability to separate flat from growing acquisition cost is certified by the two BFS calibration controls.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json baselines[]",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 8 (baselines), section 9 (calibration controls)",
+        "research/experiments/EXP-FRONTIER-37950626378/result.json (parent RACQ_PATH/RACQ_URL, inherited context)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control can fire in both directions: NC_BFS_CALIBRATION_FLAT (pass iff R <= 3.0; observed 2.0) and NC_BFS_CALIBRATION_GROWING (pass iff R > 3.0; observed 6.5) certify the whole dynamic range of the instrument; the seven PC_PARSER_CANARY_* controls fail loudly on extraction errors (PC_PARSER_CANARY_jsonld FAILED at DESIGN with a buggy canary extraction and was fixed pre-freeze - evidence of sensitivity, prereg section 11); NC_SYNTHETIC_UNREACHABLE_ITEM_direct passes only on a real HTTP status >= 400 (observed 404 on doc.rust-lang.org, docs.python.org, numpy.org; its pre-fix failure - fetch collapsed HTTP errors to status=None - was found and fixed at DESIGN, proving the control bites); PC_ENV pins the runtime record. The 0.50 materiality threshold and MIN_ENGINES=2 are hard gates; per-channel zero admissions are reported as such, not as nulls.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 9 (control identifiers + pass criteria), section 11 (certificate with observed values incl. the two DESIGN-time failures caught by the controls)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (controls implementation)"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment (five site-native discovery channels) is not an empty shell: the DESIGN inventory certificate (prereg section 11) shows every frozen channel live on >= 1 frozen host with concrete endpoints (ROBOTS_SITEMAP 7 hosts incl. rust/python/readthedocs Sitemap-lines; SITEMAP_XML 9 hosts incl. XML and gz and index-first-child paths; ON_SITE_SEARCH 10 hosts with real GET search forms; RSS_ATOM 7 hosts with alternate feed links; JSON_LD 6 hosts with seed-page JSON-LD blocks), and the complete pipeline (parsers, channel-document discovery, per-item evaluation incl. results-page membership and liveness re-GET, metrics, decision branches) was executed end-to-end offline on the local calibration fixture (toy-liveness with a local HTTP server, distinct from the frozen pool) without errors; the confirmatory pool was never evaluated at DESIGN. EXECUTE re-runs the inventory certificate before outcome stages (V3).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11 (per-host channel liveness table, toy-liveness record)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "There is no mutable local file, task bank, dataset or fixture whose identity could change the interpretation: the complete outcome-bearing code (module with pool, channels, charged costs, parsers, BFS, per-item evaluation, metrics, controls and decision rule) is frozen VERBATIM inside prereg.md section 16 with CODE_SHA256 31bc4748..., which freeze.json hashes transitively through prereg.md; the pool, budget/depth/K/threshold constants, fixtures and decision rule are all embedded in prereg; no local fixture files exist (BFS calibration and parser fixtures are generated in-memory by the frozen control code). The only external dependencies are live Web endpoints, which are remote artifacts pinned by URL and recorded (never local mutable state). Per EXPERIMENT_PACKET.md section 2: 'If no mutable local dependency exists, freeze_artifacts_bound must be NOT_APPLICABLE with a reason and the list is empty.' The DESIGN-stage write restriction (scripts/check_scope.py: only spec.json/prereg.md may be written in DESIGN) makes pre-freeze artifact files impossible by construction, and the prereg-embedded code is strictly stronger (hash-bound). Same basis as the accepted precedent EXP-FRONTIER-38078430316.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code block + CODE_SHA256)",
+        "scripts/check_scope.py (design-stage allowed writes)",
+        "research/EXPERIMENT_PACKET.md section 2",
+        "research/experiments/EXP-FRONTIER-38078430316/spec.json (accepted precedent, freeze_eligibility.freeze_artifacts_bound)"
+      ]
     }
   },
   "freeze_artifacts": []
