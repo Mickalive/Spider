@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38180719830",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-CERT-PASS": {
+      "D0_IDENTITY": "PASS",
+      "D1_POSITIVE": "PASS",
+      "D2_NEGATIVE": "PASS",
+      "D3_COUNTERS": "PASS",
+      "D4_CONTROLS": "PASS",
+      "V8_FREEZE_BINDING": "PASS",
+      "certificate_pass": true,
+      "promotion_enabled_prerequisite": "certificate PASS AND independent audit PASS (mandate; this packet enables, does not grant)"
+    },
+    "M-IDENTITIES": {
+      "pre_install_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "pre_install_git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "pre_install_expected_in": ["46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61", "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"],
+      "carrier_source_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "post_install_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "post_install_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "installed_bytes_equal_carrier_blob": true
+    },
+    "M-POSITIVE": {
+      "resolution_status": "EXECUTABLE",
+      "resolution_confidence": 0.9,
+      "held_out_identifier": "item-007",
+      "held_out_unseen": true,
+      "bound_action": {"method": "GET", "url": "http://127.0.0.1:33173/api/items/item-007"},
+      "bound_action_url_contains_held_out": true,
+      "fixture_status": 200,
+      "verify": true,
+      "clause_pass": true
+    },
+    "M-NEGATIVES": {
+      "probes_total": 7,
+      "refusals_with_null_action": 7,
+      "refusals_with_recorded_reason": 7,
+      "refusals_status_not_executable": 7,
+      "out_of_support": {"expected": "EXPLORE + reason containing 'support' + null action", "observed": ["EXPLORE: parameter 'item' outside inferred support", "EXPLORE: parameter 'item' outside inferred support", "EXPLORE: parameter 'item' outside inferred support"], "count": 3, "pass": true},
+      "missing_parameter": {"expected": "EXPLORE + reason containing 'parameter' + null action", "observed": ["EXPLORE: missing required parameter 'item'", "EXPLORE: missing required parameter 'item'"], "count": 2, "pass": true},
+      "wrong_intent_delete_item": {"status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "no_applicable_mechanism_never_seen_intent": {"status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "clause_pass": true
+    },
+    "M-COUNTERS": {
+      "retrieval_calls": 9,
+      "verification_calls": 1,
+      "repair_attempts": 1,
+      "model_calls": 0,
+      "model_tokens": 0,
+      "browser_actions": 0,
+      "http_requests": 0,
+      "expected_from_transcript": {"retrieval_calls": 9, "verification_calls": 1, "repair_attempts": 1},
+      "counters_equal_transcript": true,
+      "transcript_length": 16,
+      "clause_pass": true
+    },
+    "M-PC-EXACT-REPLAY": {
+      "executable": 5,
+      "total": 5,
+      "statuses": ["EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE"],
+      "pass": true
+    },
+    "M-ABLATION": {
+      "blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "has_distill_parameterized": false,
+      "pass": true
+    },
+    "M-REGRESSION": {
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0,
+      "successful": true,
+      "suite": "tests/test_kernel.py (discovered via tests/test_*.py)",
+      "pass": true
+    },
+    "M-SUPPORT": {
+      "mechanism_id": "mech-783a6a3f99ee47b8",
+      "parameter_slots": ["item"],
+      "induced_support": {"item": "^item\\-00[0-9]{1}$"},
+      "confidence": 0.9,
+      "induction_observations": 5
+    }
+  },
+  "controls": {
+    "B-LITERAL-KERNEL": {
+      "type": "ablation",
+      "expected_behavior": "literal kernel (git blob cfec98660b..., sha256 46929b3a...) loaded in hermetic temp package with the same models.py/registry.py/__init__.py must NOT have distill_parameterized",
+      "observed_behavior": "has_distill_parameterized == false on the frozen literal blob in the hermetic temp package",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D4_CONTROLS.literal_ablation"]
+    },
+    "B-PRE-INSTALL-KERNEL": {
+      "type": "identity_baseline",
+      "expected_behavior": "pre-install src/spider/kernel.py sha256 in {46929b3a... (literal), 718efa6a... (already-installed carrier)}; any other state -> BLOCKED",
+      "observed_behavior": "pre_install_sha256 = 46929b3a... (shipped literal, first run)",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#identities.pre_install_sha256"]
+    },
+    "PC-EXACT-REPLAY": {
+      "type": "positive_control",
+      "expected_behavior": "5/5 training ids (item-001..item-005) re-resolve EXECUTABLE on the installed carrier",
+      "observed_behavior": "5/5 EXECUTABLE",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D4_CONTROLS.pc_exact_replay"]
+    },
+    "NC-OUT-OF-SUPPORT-ID": {
+      "type": "null_control",
+      "expected_behavior": "resolve(item-010), resolve(item-999), resolve(item-xyz) -> EXPLORE with reason containing 'support', bound_action null (3/3)",
+      "observed_behavior": "3/3 EXPLORE, reason \"parameter 'item' outside inferred support\" (contains 'support'), bound_action null",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D2_NEGATIVE.negatives"]
+    },
+    "NC-MISSING-PARAMETER": {
+      "type": "null_control",
+      "expected_behavior": "resolve with parameter dict {} and {'wrong_key':'x'} -> EXPLORE with reason containing 'parameter', bound_action null (2/2)",
+      "observed_behavior": "2/2 EXPLORE, reason \"missing required parameter 'item'\" (contains 'parameter'), bound_action null",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D2_NEGATIVE.negatives"]
+    },
+    "NC-WRONG-INTENT": {
+      "type": "null_control",
+      "expected_behavior": "resolve('delete_item', ctx, valid params) -> EXACTLY ResolutionStatus.UNKNOWN with non-empty reason, bound_action null (no-applicable-mechanism case)",
+      "observed_behavior": "UNKNOWN, reason \"no applicable validated mechanism\", bound_action null",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D2_NEGATIVE.negatives"]
+    },
+    "NC-NO-APPLICABLE-MECHANISM": {
+      "type": "null_control",
+      "expected_behavior": "resolve('never_seen_intent', {}, {}) -> EXACTLY ResolutionStatus.UNKNOWN with recorded reason, bound_action null",
+      "observed_behavior": "UNKNOWN, reason \"no applicable validated mechanism\", bound_action null",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json#certificate.D2_NEGATIVE.negatives"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/harness/run_certificate.py", "sha256": "a114804c391aa8360d0616fa27a4b217783abea4f005a29f87d22f7566daf2f3", "role": "code", "note": "FROZEN RUNNER materialized byte-exact from prereg.md section 14; sha256 equals CANONICAL-HASHES"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json", "sha256": "17c442b0493ea3b154ef85fbc9dda0708325f926a3005254da665e27530da3b4", "role": "raw", "note": "single JSON document on stdout; full certificate clauses, identities, counters, transcript, negatives"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/run_certificate.log", "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2", "role": "raw", "note": "stderr: unittest banner 'Ran 3 tests in 0.002s OK' only"},
+    {"path": "src/spider/kernel.py", "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72", "role": "treatment_outcome", "note": "post-install file byte-identical to frozen carrier git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796; tree intentionally left in this state for the DIRECTOR verdict stage (prereg section 16 step 6)"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/prereg.md", "sha256": "019c88f5640200405acabd4d4752c97a87b6da984bef67bdc9410a37d66928fa", "role": "fixture", "note": "frozen preregistration (V8-A re-verified at runtime)"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/freeze.json", "sha256": "0b98b36d464ce4ce92d9de23c01279bbfb6ca8c0a1e1cc60be41e3d7e0a6bce3", "role": "fixture", "note": "frozen binding; existence and contents enforced by V8 at runtime; AGENTS.md allows dst-dir write-artifacts in the experiment packet directory (report.md/provenance.json)"}
+  ],
+  "observations": [
+    {"type": "raw", "item": "runner exit code 0; stdout is a single parseable JSON document (7718 bytes); stderr contains only the unittest banner 'Ran 3 tests in 0.002s / OK' (regression output goes to stderr by design)"},
+    {"type": "raw", "item": "run_config: carrier_src=git:b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796, literal_src=git:cfec98660b0277ccbf295e8a4119e8d81ddccf50, probe_mode=false, sources_are_git=true, repo_root=/home/runner/work/Spider/Spider (auto-detected); executed with no EXP_* environment overrides"},
+    {"type": "raw", "item": "V8 binding enforced at EXECUTE: prereg_sha_matches=true, runner_source_matches_frozen_block=true, artifact_hashes_match=true (freeze.json present and readable)"},
+    {"type": "raw", "item": "pre-install identity observed: src/spider/kernel.py sha256 46929b3a... == shipped literal (blob cfec9866...), expected literal state for a first run"},
+    {"type": "raw", "item": "literal ablation package (hermetic temp dir, same models.py/registry.py/__init__.py) has_distill_parameterized == false"},
+    {"type": "raw", "item": "post-install identity: src/spider/kernel.py sha256 718efa6a...; file cmp == git blob b15ed848... byte-identical"},
+    {"type": "derived", "item": "distilled mechanism mech-783a6a3f99ee47b8, parameter_slots ['item'], induced support {item: ^item\\-00[0-9]{1}$}, confidence 0.9 (arithmetic function of the 5 induction observations)"},
+    {"type": "raw", "item": "D1 execute: single fixture HTTP GET http://127.0.0.1:33173/api/items/item-007 -> status 200, body {\"type\":\"item\",\"id\":\"item-007\",\"data\":\"res:item-007\"}; verify(mech, body, params) == true"},
+    {"type": "raw", "item": "7/7 refusal probes: bound_action==null in all; EXPLORE ('support' reason) for item-010/item-999/item-xyz; EXPLORE ('parameter' reason) for {} and {'wrong_key':'x'}; EXACTLY UNKNOWN for delete_item and never_seen_intent"},
+    {"type": "raw", "item": "counters at snapshot (frozen rebind point): retrieval_calls=9, verification_calls=1, repair_attempts=1, model_calls=0, model_tokens=0, http_requests=0 (kernel does not auto-increment http_requests; runner-side only, per prereg section 10); equal to transcript counts at that point; transcript length 16 entries"},
+    {"type": "raw", "item": "PC-EXACT-REPLAY: item-001..item-005 all EXECUTABLE (5/5); regression suite (tests/test_*.py discovery) ran 3 tests, 0 failures, 0 errors on the installed carrier"},
+    {"type": "raw", "item": "working tree after the run intentionally contains the carrier at src/spider/kernel.py (treatment outcome, prereg section 16 step 6); no revert/commit performed; only experiment scope: harness/, run_certificate.out.json, run_certificate.log, and src/spider/kernel.py were touched by EXECUTE"}
+  ],
+  "validity_notes": [
+    "V1-DETERMINISM: stdlib http.server.ThreadingHTTPServer on 127.0.0.1:0 (ephemeral port), fixed JSON responses, no RNG/wall-clock/external network; induced support and confidence (0.9) are deterministic arithmetic functions of the 5 induction observations.",
+    "V2-CREDENTIAL-FREE: model_calls == 0 and model_tokens == 0 asserted (D3 PASS); the only HTTP activity is the loopback GET to the in-process fixture (exactly 1 execute request); no API keys, no browser, no external egress.",
+    "V3-IDENTITY-THREE-PART PASS: (i) pre-install sha 46929b3a... (shipped literal; in the allowed {literal, carrier} set); (ii) carrier source sha 718efa6a... == frozen identity; (iii) post-install file bytes == git blob b15ed848... and file sha 718efa6a....",
+    "V4-STOP-TRIGGER: not fired (identity certificate held on the first attempt); D0 PASS before any outcome measurement on the installed carrier.",
+    "V5-HELD-OUT-INSIDE-SUPPORT: unseen item-007 is inside the induced support ^item\\-00[0-9]{1}$ and resolved EXECUTABLE@0.9; the audited failure-mode id item-010 (two-digit suffix) is used as an out-of-support negative exactly as frozen.",
+    "V6-REFUSAL-SEMANTICS PASS: all 7 probes have bound_action null, non-empty reason, status != EXECUTABLE; out-of-support and missing-parameter refusals are EXPLORE with the correct reason class ('support'/'parameter'); wrong-intent and no-applicable are EXACTLY UNKNOWN.",
+    "V7-TRANSCRIPT-HONESTY PASS as frozen: counters equal the invocation transcript at the D3 snapshot (retrieval 9 == 8 resolve calls up to rebind + 1 rebind; verification 1; repair 1). The 5 replay resolves occur after the snapshot; against the FULL recorded 16-entry transcript the final kernel state would be retrieval 14 (13 resolve + 1 rebind), verification 1, repair 1 - equally transcript-consistent. The runner snapshots at the frozen rebind point matching the prereg probe values (9/1/1).",
+    "V8-FREEZE-BINDING PASS (EXECUTE mode): freeze.json present and readable; sha256(prereg.md) == freeze.json.hashes['prereg.md'] (019c88f5...); running source == FROZEN RUNNER block (runner sha a114804c...); all 5 freeze artifact hashes match.",
+    "V9-REGRESSION PASS: tests/test_kernel.py suite 3/3 (0 failures, 0 errors) on the installed carrier.",
+    "V10-ABLATION-ATTRIBUTION PASS: the literal kernel (blob cfec9866..., sha 46929b3a...) has no distill_parameterized, so the positive certificate is attributable to the installed carrier only.",
+    "DISCLOSED LIMITATIONS (inherited from prereg section 11, all unchanged): (i) induced support is a conservative char-class/quantifier inference; the bank exploits it deliberately (single-digit positives, two-digit negatives); (ii) the fixture is a minimal REST server, so execution correctness is verified only for the GET/JSON shape the induction encodes; (iii) latent pretrained knowledge of the carrier's source cannot be excluded - attribution rests on the byte-pinned blob identity plus the literal ablation, not on authorship narratives.",
+    "The kernel's http_requests counter reads 0 by construction (TrajectoryCounters does not auto-increment http_requests; it is runner-side per prereg section 10); the certificate does not gate on it, and the actual fixture request count (1) is recorded in observations.",
+    "Measurement transaction is valid: status=COMPLETE/outcome=SUPPORTS is a certificate PASS under the frozen decision rule with V8 enforced; it is NOT a claim advance and NOT a promotion (C-PARAM-INHERIT remains EXPERIMENTAL in all branches; promotion requires independent audit PASS then a DIRECTOR verdict)."
+  ],
+  "unresolved": [
+    "Whether the audited carrier's application of support predicates to free-form payload values is a defect remains untested here (inherited from parent EXP-PRODUCT-37989728440 unresolved[2]): the task bank keeps target values inside the induced support grammar and the kernel itself is frozen/untouched, so this run adds no evidence about free-form payload support generalization.",
+    "Independent audit re-verification of this certificate and the DIRECTOR promotion decision are downstream stages, not producer-settable questions."
+  ]
+}

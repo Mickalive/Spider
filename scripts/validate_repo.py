@@ -170,7 +170,12 @@ def main():
     require("SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET" in lane_wf, "wake must verify remote packet durability")
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
     require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
-    require("SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE" in lane_wf and "gh workflow run factory-pulse.yml" in lane_wf, "incomplete lane runs must self-wake global direction from always() cleanup")
+    require(
+        "SPIDER_INCOMPLETE_DEFER_TO_SCHEDULE" in lane_wf
+        and "SPIDER_LANE_CIRCUIT_OPEN" in text(".github/workflows/factory-pulse.yml")
+        and "schedule:" in text(".github/workflows/factory-pulse.yml"),
+        "incomplete lane runs must defer to scheduled guarded recovery rather than spin immediately",
+    )
     require("spider_design_reviewer" in lane_wf and "validate_design_review.py" in lane_wf and "SPIDER_DESIGN_REVIEW_REVISE" in lane_wf, "v2 DESIGN must pass independent pre-freeze review")
     require("checkpoint.sh design-draft" in lane_wf, "v2 DESIGN must durably checkpoint the proposed design before reviewer fallback")
     require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
@@ -200,7 +205,7 @@ def main():
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
     require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
-    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
+    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "SPIDER_LANE_RECOVERY_DEFER_TO_SCHEDULE" in recovery_wf, "failed/cancelled lane recovery must defer to scheduled guarded Factory rather than amplify a provider outage")
     require('cron: "*/5 * * * *"' in recovery_wf and "SPIDER_LANE_RECOVERY_PENDING" in recovery_wf and "SPIDER_LANE_RECOVERY_ALREADY_CONSIDERED" in recovery_wf, "Lane recovery must poll independently of GITHUB_TOKEN workflow_run delivery and avoid replaying failures already considered by a newer Factory")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("actions: write" in codex_wf and "Wake global direction after canonicalization" in codex_wf and "gh workflow run factory-pulse.yml" in codex_wf, "Codex sync must explicitly wake global direction after canonicalization")
@@ -240,10 +245,10 @@ def main():
 
     global_director = text(".opencode/agents/spider_portfolio_director.md")
     require("Research Scout" in global_director and "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE" in global_director, "Global Director lacks Scout/decision contract")
-    require("PROGRAM_AUDIT_2026-10-10.md" in global_director and "ALL THREE readiness conditions" in global_director, "Global Director must use current audit and enforce flagship readiness")
+    require("PROGRAM_AUDIT_GLOBAL_2026-10-10.md" in global_director and "ALL THREE readiness conditions" in global_director, "Global Director must use current audit and enforce flagship readiness")
     scout_prompt = text(".opencode/agents/spider_research_scout.md")
-    require("PROGRAM_AUDIT_2026-10-10.md" in scout_prompt, "Scout must use current program audit")
-    require((ROOT / "research/portfolio/PROGRAM_AUDIT_2026-10-10.md").exists(), "current program audit missing")
+    require("PROGRAM_AUDIT_GLOBAL_2026-10-10.md" in scout_prompt, "Scout must use current program audit")
+    require((ROOT / "research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md").exists(), "current program audit missing")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):

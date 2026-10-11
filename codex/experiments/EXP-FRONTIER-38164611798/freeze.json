@@ -1,0 +1,13 @@
+{
+  "artifact_hashes": {},
+  "design_contract_version": 2,
+  "experiment_id": "EXP-FRONTIER-38164611798",
+  "frozen_at": "2026-10-11T22:58:08.747338+00:00",
+  "hashes": {
+    "design_review.json": "e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e",
+    "prereg.md": "61472fa8d8c2aab16a86456fd1e17201c342bb1f260a18447bf80c7766d8e770",
+    "request.json": "f9e5010e64e6da219131493212698835be082299b11412b801e7a4ced4616508",
+    "spec.json": "e53719b2d8505d4c15312020e8be5f1c36a257bf9fe3cf85011dc9303a05d467"
+  },
+  "schema_version": 1
+}

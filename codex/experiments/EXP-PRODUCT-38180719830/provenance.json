@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38180719830",
+  "lane": "product",
+  "github_run_id": 38180719830,
+  "commits": {
+    "base_sha": "80c74f86d59ba0a483badddf7ae0e775d2a32a8f",
+    "base_sha_source": "request.json (frozen field); git object type is commit",
+    "freeze_commit": "07478668 (R2 product: freeze EXP-PRODUCT-38180719830)",
+    "head_at_execution": "869f18745bd4f77c81769578fd8005d71d041868 (R2 product: execution base EXP-PRODUCT-38180719830)",
+    "commit_made_during_execute": false
+  },
+  "frozen_inputs": {
+    "request.json": {"sha256": "bb8b4a0103f7d427b36786e28b3ce578e5e3c21b38225843c0184618a7dcb936", "verified": true},
+    "spec.json": {"sha256": "166f502140540b85ac2c749aa7c5c49e1512a68eed9aad2d893bbe0ddff1acce", "verified": true},
+    "prereg.md": {"sha256": "019c88f5640200405acabd4d4752c97a87b6da984bef67bdc9410a37d66928fa", "verified": true, "note": "equals freeze.json.hashes['prereg.md']; V8-A enforced at runtime"},
+    "freeze.json": {"sha256": "0b98b36d464ce4ce92d9de23c01279bbfb6ca8c0a1e1cc60be41e3d7e0a6bce3", "verified": true, "note": "file hash computed at EXECUTE; existence and contents enforced by V8 at runtime"},
+    "design_review.json": {"sha256": "ebf6ca11e862417d943419c5ae35f0a88d69f8b9326342f4fb893df14bb88abb", "verified": true}
+  },
+  "freeze_artifact_hashes_reverified": {
+    "pyproject.toml": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "tests/test_kernel.py": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+  },
+  "treatment_identity": {
+    "shipped_literal_kernel": {
+      "git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "lines": 132
+    },
+    "frozen_carrier_kernel": {
+      "git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "lines": 491,
+      "origin": "EXP-PRODUCT-37989728440 audited carrier (byte-pinned)"
+    },
+    "pre_install_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "post_install_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "post_install_matches_carrier_blob_bytes": true,
+    "note": "working tree intentionally contains the carrier at src/spider/kernel.py after EXECUTE (treatment outcome, prereg section 16 step 6); not reverted, not committed"
+  },
+  "code_paths": {
+    "runner": {
+      "path": "research/experiments/EXP-PRODUCT-38180719830/harness/run_certificate.py",
+      "sha256": "a114804c391aa8360d0616fa27a4b217783abea4f005a29f87d22f7566daf2f3",
+      "note": "materialized byte-exact from prereg.md section 14 FROZEN RUNNER block (sha256 of the block equals CANONICAL-HASHES); V8-B runner_source_matches_frozen_block=true"
+    },
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "pre_install_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "post_install_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"
+    }
+  },
+  "datasets_or_fixtures": {
+    "task_bank": "not persisted on disk; synthesized deterministically inside the frozen runner (5 induction observations + held-out item-007 + 4 out-of-support/missing/wrong-intent negatives + 5 replay ids); fixture is a stdlib http.server ThreadingHTTPServer on 127.0.0.1:0 with fixed JSON responses",
+    "fixture_http_requests_total": 1,
+    "note": "no mutable local task-bank/fixture files existed at freeze beyond the freeze_artifacts already listed; freeze_artifacts_bound PASS with the listed artifact set"
+  },
+  "environment": {
+    "os": "linux",
+    "python": "3.12.15",
+    "dependencies": "python stdlib only (http.server, threading, unittest, json, hashlib, tempfile, importlib, subprocess, sys)",
+    "network": "loopback 127.0.0.1 only; no external egress, no API keys, no browser, no docker",
+    "model_calls": 0,
+    "model_tokens": 0,
+    "env_overrides_monitoring": "executed with env -i PATH=... HOME=... (all EXP_* variables cleared); run_config probe_mode=false, sources_are_git=true, repo_root auto-detected upward from harness dir = /home/runner/work/Spider/Spider"
+  },
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json", "sha256": "17c442b0493ea3b154ef85fbc9dda0708325f926a3005254da665e27530da3b4", "role": "raw", "note": "stdout; full certificate JSON with clauses D0-D4, V8, identities, counters, 16-entry transcript, negatives, run_config"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/run_certificate.log", "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2", "role": "raw", "note": "stderr; only the unittest banner 'Ran 3 tests in 0.002s OK'"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/result.json", "role": "derived", "note": "producer packet; status COMPLETE outcome SUPPORTS (all mandatory keys present per EXPERIMENT_PACKET.md section 4)"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/report.md", "role": "derived", "note": "narrative bounded by the frozen claim"},
+    {"path": "research/experiments/EXP-PRODUCT-38180719830/provenance.json", "role": "derived", "note": "this file"}
+  ],
+  "commands": [
+    "git rev-parse HEAD && git cat-file -t <base_sha>  (execution base verification)",
+    "python3 -c 'import hashlib,sys; print(hashlib.sha256(open(sys.argv[1],\"rb\").read()).hexdigest(), sys.argv[1])' over request/spec/prereg/freeze/design_review/freeze_artifacts (frozen-input re-verification)",
+    "git cat-file blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 | sha256sum  (carrier blob identity)",
+    "python3 harness/run_certificate.py > run_certificate.out.json 2> run_certificate.log  (executed from research/experiments/EXP-PRODUCT-38180719830 with env -i, exit 0)",
+    "sha256sum src/spider/kernel.py && cmp <(git cat-file blob b15ed848...) src/spider/kernel.py (post-install byte-identity check)"
+  ],
+  "evidence_chain": "stdout JSON -> result.json metrics/controls -> report.md interpretation; raw evidence files unmodified since capture"
+}

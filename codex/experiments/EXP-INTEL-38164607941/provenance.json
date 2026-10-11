@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "run": {
+    "kind": "github_actions",
+    "run_id": "38169631787",
+    "run_attempt": 1,
+    "server_url": "https://github.com",
+    "repository": "Mickalive/Spider",
+    "branch": "lab2/intel",
+    "commit": "da76bcc1ec2a634ca190ef9da0e06e2865e305a0",
+    "commit_short": "da76bcc1"
+  },
+  "frozen_inputs": {
+    "request.json": {"sha256": "0b182189707df4eb0b0e695bd96818dbb520d96b8f0f73d2c6a64753e4b96719", "path": "research/experiments/EXP-INTEL-38164607941/request.json"},
+    "spec.json": {"sha256": "fb6d382a3decfb282958c250e698ebb5bbd61bdaca919ed1aef05839e60afa1e", "path": "research/experiments/EXP-INTEL-38164607941/spec.json"},
+    "prereg.md": {"sha256": "265a25bdee4268453b985fb6f93e06b9fc8b20db7caa87eca7fca30a9b8da2c9", "path": "research/experiments/EXP-INTEL-38164607941/prereg.md"},
+    "design_review.json": {"sha256": "dc9058f709b9eebdddf4b238c7cf41bd83f8de6651d07fbf79531a9c6484b9c0", "path": "research/experiments/EXP-INTEL-38164607941/design_review.json", "status": "PASS"},
+    "freeze.json": {"path": "research/experiments/EXP-INTEL-38164607941/freeze.json"}
+  },
+  "freeze_artifacts": {
+    "note": "All five hashes in freeze.json.artifact_hashes were re-verified on disk before and after EXECUTE; all match.",
+    "entries": [
+      {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "match": true},
+      {"path": "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt", "match": true},
+      {"path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json", "match": true},
+      {"path": "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json", "match": true},
+      {"path": "research/intel/run_exp_37982024058.py", "match": true, "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"}
+    ]
+  },
+  "prompt_strings": {
+    "P-COMP-UNDERSPECIFIED": {"sha256": "1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876", "note": "byte-identical to parent harness_config.json prompts.system"},
+    "P-TREAT-GOAL-SCHEMA": {"sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716", "note": "contains neither '#reveal-btn' nor 'TARGET-42'"}
+  },
+  "harness_config_hashes": {
+    "P-TREAT-GOAL-SCHEMA_overlay": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee",
+    "P-COMP-UNDERSPECIFIED_overlay": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47",
+    "parent_harness_config": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"
+  },
+  "models": {
+    "note": "GGUF byte-identity verified fail-closed by sha256 against the frozen parent receipts in research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt. Files live outside the repo at /tmp/opencode/gguf/ and are runtime provisioning, not durable repo artifacts.",
+    "M-7B-QWEN": {
+      "hf_repo": "Qwen/Qwen2.5-7B-Instruct-GGUF",
+      "quantization": "Q4_K_M",
+      "files": [
+        {"path": "/tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf", "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db", "bytes": 3993201344},
+        {"path": "/tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf", "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a", "bytes": 689872288}
+      ],
+      "packaging_deviation": "Frozen single-file URL returns HTTP 404; same-repo, same-model, same-quantization split shards used instead. No model or quantization substitution."
+    },
+    "M-3B-QWEN": {
+      "hf_repo": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+      "quantization": "Q4_K_M",
+      "files": [
+        {"path": "/tmp/opencode/gguf/qwen2.5-3b-instruct-q4_k_m.gguf", "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d", "bytes": 2104932768}
+      ]
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "cpu_count": 4,
+    "memory_gib_total": 15,
+    "disk_free_gib": 79,
+    "chrome": "Google Chrome 154.0.8037.97",
+    "playwright": "1.63.0 (system site-packages)",
+    "llama_cpp_python": "0.2.90 (built from sdist into /tmp/opencode/venv --system-site-packages)",
+    "venv": "/tmp/opencode/venv",
+    "gguf_dir": "/tmp/opencode/gguf",
+    "logs_dir": "/tmp/opencode/logs",
+    "network": "PyPI + huggingface.co reachable at provisioning time",
+    "runtime": "CPU-only; llama-grammar constrained decoding; temperature=0.0; llama_seed=42; per-episode seeds 42-46; n_threads=4"
+  },
+  "commands": {
+    "positive_and_null_controls": "/tmp/opencode/venv/bin/python research/intel/exp_38164607941_controls.py",
+    "materialize_overlays": "/tmp/opencode/venv/bin/python research/intel/exp_38164607941_materialize.py",
+    "cell_M-7B-QWEN_P-TREAT-GOAL-SCHEMA": "timeout 2400 /tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA --candidate M-7B-QWEN --gguf /tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf /tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "cell_M-7B-QWEN_P-COMP-UNDERSPECIFIED": "timeout 2400 /tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED --candidate M-7B-QWEN --gguf /tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf /tmp/opencode/gguf/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "cell_M-3B-QWEN_P-TREAT-GOAL-SCHEMA": "timeout 2400 /tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA --candidate M-3B-QWEN --gguf /tmp/opencode/gguf/qwen2.5-3b-instruct-q4_k_m.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "cell_M-3B-QWEN_P-COMP-UNDERSPECIFIED": "timeout 2400 /tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED --candidate M-3B-QWEN --gguf /tmp/opencode/gguf/qwen2.5-3b-instruct-q4_k_m.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "evaluate_decision": "/tmp/opencode/venv/bin/python research/intel/exp_38164607941_eval.py"
+  },
+  "authored_code": [
+    {"path": "research/intel/exp_38164607941_controls.py", "sha256": "465d7d9db3842fcc669e4929828fa145e89c8e3fdeed3fb77e481eece9fa888d", "role": "code", "note": "Appendix A positive/null/baseline controls driver"},
+    {"path": "research/intel/exp_38164607941_materialize.py", "sha256": "852e012f9a1ae6609ef7feecc08cc6ef573e826b8d88550d8376273049dfb2d5", "role": "code", "note": "section-4.2 per-cell config overlay materializer"},
+    {"path": "research/intel/exp_38164607941_eval.py", "sha256": "9a2c94ed5237f28052b8d5862e31ffb970fe28ea292d48ce02088681f046d137", "role": "code", "note": "Appendix A.5 evaluator applying the frozen decision rule"}
+  ],
+  "outcome_determining_code": {
+    "path": "research/intel/run_exp_37982024058.py",
+    "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+    "note": "Unmodified frozen parent runner; all model invocation, parsing and scoring executed through it."
+  },
+  "raw_evidence": [
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/preflight.json", "sha256": "cdcb4cfa91cc8cf2b5fa6cef7d45ae7fbbcb2c1f309abea6c578c9a0590a0abb"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/controls.json", "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/materialized_configs.json", "sha256": "59b4b43526112080fc2cfd68201094ed99ea8d0171557c0435aa1e0344faf96c"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/decision.json", "sha256": "d33cbcd43689ff655c9e7ffd3684c1ee068045493db6c8c4d36f106b0b8da781"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json", "sha256": "5ceb74f4370e93170d0151059047d620d0c1484ae1babd4c1d5346b945fa0235"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json", "sha256": "380abd91b91b3b3092cef0218d8400726f6947a64dc43f6725b24c6ebb2ee767"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json", "sha256": "194175592911bc389ff1365f82fcb03ba84bdaba6f716ee06ef8a525bff9376d"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json", "sha256": "5344d79a8ef6f5a53b608a67aede8c55f549d4d0369063d1d78ddf2ba0b3eb74"}
+  ],
+  "notes": [
+    "Immutable interpretation dependencies (freeze.artifact_hashes) were read but never modified.",
+    "The only varied dimension between paired cells was prompts.system; comparator overlays are byte-identical to the frozen parent harness_config.json, treatment overlays differ only in prompts.system (see raw/materialized_configs.json).",
+    "No outcome-bearing measurement or prompt tuning was performed before freezing; this EXECUTE run is the first observation of cell outcomes.",
+    "B-RANDOM-ACTION uses a synthetic random-action policy (seed 42) evaluated on the served page; it is a random floor, not a model."
+  ]
+}

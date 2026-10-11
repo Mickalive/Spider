@@ -204,6 +204,13 @@ jobs:
 
             PAUSED=$(jq -r '.human_paused // false' <<<"$STATE")
             [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; continue; }
+            # Apply the same circuit to PREFREEZE as to FROZEN/EXECUTED.
+            # An exhausted model pool must not restart a new experiment every pulse.
+            CIRCUIT=$(python scripts/research_circuit.py --state-json "$STATE" --control-rev "$CONTROL_REV")
+            if [[ "$CIRCUIT" == OPEN:* ]]; then
+              echo "SPIDER_LANE_CIRCUIT_OPEN lane=$LANE $CIRCUIT"
+              continue
+            fi
 
             if [[ "$LANE" == product && "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]]; then
               echo "SPIDER_PRODUCT_PROMOTION_PENDING experiment=$(jq -r '.last_experiment_id // empty' <<<"$STATE")"
