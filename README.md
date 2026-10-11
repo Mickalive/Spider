@@ -13,6 +13,12 @@ SPIDER has **one cumulative scientific Codex**: `SPIDER_CODEX.md` and `codex/ind
 
 Active architecture: `SPIDER_ARCHITECTURE_RESEARCH2.md`.
 
+## Current two-factory direction (11 October 2026)
+
+A results-driven **product delivery loop** and the independent **scientific research factory** now have distinct success criteria. The product may compose existing Browser Use / Stagehand / Playwright-style agents with SPIDER's conservative reusable-mechanism bridge; Physics is not a prerequisite. The research factory keeps six lanes and the *same* historical-and-current Codex, but should fund experiments according to decision-changing information value and strong baselines.
+
+See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md). Prototype code on the strategy branch is **not promoted**, and the benchmark scorer is descriptive only; no externally validated product saving has yet been measured.
+
 ## Active lanes
 
 Six independent lanes run without synchronizing on one another:

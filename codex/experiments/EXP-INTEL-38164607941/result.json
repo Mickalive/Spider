@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim_ids": ["C-LLM-INHERIT"],
+  "summary": "Frozen single-factor prompt ablation (only prompts.system varies) on the audited parent harness. All four cells (M-7B-QWEN and M-3B-QWEN, each under P-TREAT-GOAL-SCHEMA and P-COMP-UNDERSPECIFIED) passed the constrained-decoding positive control 10/10, loaded, and recorded exactly 5 episodes. Every one of the 20 treatment/comparator episodes showed the identical parent failure mode: step-0 reveal-click succeeds (revealed_value=TARGET-42), then the model re-emits a click on the now-hidden #reveal-btn for every remaining step and never emits an answer action (answer_action_emission_rate=0/5 in all cells; task_success_rate=0/5 in all cells; parseable_action_rate_step1=1.0 in all cells). The treatment prompt that supplies the task goal and action-schema enumeration therefore does NOT convert the step-0 reveal-click into a full click-then-answer completion. Per frozen decision_rule precedence: preflight PASS (rule 1); both candidate pairs run (rule 2a); both comparator cells are COMPLETE-and-VALID and match the parent anchor exactly (rule 2e REPLICATION_ANCHOR_EXACT); neither treatment cell clears (rule 2h TREATMENT_FAILS_BAR); at least one COMPLETE treatment cell exists and none cleared (rule 3) -> OUTCOME=FALSIFIES, status=COMPLETE.",
+  "metrics": {
+    "M-7B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction"},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "mean_inference_latency_s": {"value": 6.2247, "n_calls": 35, "unit": "s"},
+      "mean_completion_tokens": {"value": 15.0, "n_calls": 35, "unit": "tokens"}
+    },
+    "M-7B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction"},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "mean_inference_latency_s": {"value": 6.2394, "n_calls": 35, "unit": "s"},
+      "mean_completion_tokens": {"value": 15.0, "n_calls": 35, "unit": "tokens"}
+    },
+    "M-3B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction"},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "mean_inference_latency_s": {"value": 2.7325, "n_calls": 35, "unit": "s"},
+      "mean_completion_tokens": {"value": 12.1429, "n_calls": 35, "unit": "tokens"}
+    },
+    "M-3B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction"},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "mean_inference_latency_s": {"value": 2.7389, "n_calls": 35, "unit": "s"},
+      "mean_completion_tokens": {"value": 12.1429, "n_calls": 35, "unit": "tokens"}
+    },
+    "PC-ORACLE-EPISODE": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"}
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"}
+    },
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.2, "k": 1, "n": 5, "unit": "fraction"}
+    },
+    "capability_bar": {
+      "threshold_task_success_rate": 0.6,
+      "threshold_parseable_action_rate_step1": 0.6,
+      "cleared_by_any_candidate": false,
+      "cells_complete": 4,
+      "cells_excluded": 0,
+      "cells_partial": 0
+    },
+    "preflight_pass": true,
+    "decision_trace": [
+      "rule1_preflight_pass",
+      "rule2a_run_pair:M-7B-QWEN treat=COMPLETE comp=COMPLETE",
+      "rule2e_comparator:M-7B-QWEN=REPLICATION_ANCHOR_EXACT",
+      "rule2h_treatment_fails_bar:M-7B-QWEN",
+      "rule2a_run_pair:M-3B-QWEN treat=COMPLETE comp=COMPLETE",
+      "rule2e_comparator:M-3B-QWEN=REPLICATION_ANCHOR_EXACT",
+      "rule2h_treatment_fails_bar:M-3B-QWEN",
+      "rule3_falsifies"
+    ]
+  },
+  "controls": {
+    "PC-SUITE-EXP-INTEL-38164607941": {
+      "role": "positive_control_suite",
+      "expected": "PC-JSON-CONSTRAINED-DECODING 10/10 per evaluated cell; PC-ORACLE-EPISODE 5/5 at preflight",
+      "observed": "PC-JSON-CONSTRAINED-DECODING 10/10 in all four cells; PC-ORACLE-EPISODE 5/5",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json; raw/preflight.json; cells/*/*/raw/model_receipts.json"
+    },
+    "PC-JSON-CONSTRAINED-DECODING": {
+      "role": "positive_control",
+      "expected": "10/10 syntactically valid JSON matching the action schema per evaluated cell",
+      "observed": "M-7B-QWEN P-TREAT 10/10; M-7B-QWEN P-COMP 10/10; M-3B-QWEN P-TREAT 10/10; M-3B-QWEN P-COMP 10/10 (pass_rate=1.0 each)",
+      "verdict": "PASS",
+      "evidence_ref": "cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json#0.positive_control; the other three cell receipts likewise"
+    },
+    "PC-ORACLE-EPISODE": {
+      "role": "positive_control_episode",
+      "expected": "5/5 task_success=true through the real frozen run_episode scorer against the served page",
+      "observed": "5/5 task_success=true; each episode 2 steps (click #reveal-btn -> reveal TARGET-42 -> answer TARGET-42, final_target_visible=true)",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#PC-ORACLE-EPISODE"
+    },
+    "NC-NO-MODEL-ACTION": {
+      "role": "null_control",
+      "expected": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0",
+      "observed": "parseable_action_rate_step1=0.0 (0/5); task_success_rate=0.0 (0/5)",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#NC-NO-MODEL-ACTION"
+    },
+    "B-RANDOM-ACTION": {
+      "role": "negative_baseline",
+      "expected": "parseable_action_rate_step1=1.0 AND task_success_rate < 0.6 on the SERVED page (navigation repaired)",
+      "observed": "parseable_action_rate_step1=1.0 (5/5); task_success_rate=0.2 (1/5, seed-42 realization), matches the design-time simulation and stays below the bar; analytic P(task_success_rate>=3/5) ~ 1.15e-3",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#B-RANDOM-ACTION"
+    },
+    "B-UNDERSPECIFIED-PROMPT-7B": {
+      "role": "within_experiment_protocol_comparator",
+      "expected": "fail the bar (task_success_rate<0.6) with parseable_action_rate_step1>=0.6, ideally reproducing the parent anchor (0/5, 1.0, zero answer actions)",
+      "observed": "COMPLETE; task_success_rate=0.0 (0/5); parseable_action_rate_step1=1.0 (5/5); answer_action_emission_rate=0.0 (0/5) -> REPLICATION_ANCHOR_EXACT",
+      "verdict": "PASS",
+      "evidence_ref": "cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json"
+    },
+    "B-UNDERSPECIFIED-PROMPT-3B": {
+      "role": "within_experiment_protocol_comparator",
+      "expected": "fail the bar (task_success_rate<0.6) with parseable_action_rate_step1>=0.6, ideally reproducing the parent anchor (0/5, 1.0, zero answer actions)",
+      "observed": "COMPLETE; task_success_rate=0.0 (0/5); parseable_action_rate_step1=1.0 (5/5); answer_action_emission_rate=0.0 (0/5) -> REPLICATION_ANCHOR_EXACT",
+      "verdict": "PASS",
+      "evidence_ref": "cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json"
+    },
+    "B-0.5B-QWEN-LOCAL": {
+      "role": "carried_reference_baseline",
+      "expected": "FAIL (carried reference; not re-run)",
+      "observed": "not re-run; parent/grandparent evidence: Qwen2.5-0.5B-Instruct Q4_K_M emitted prose with no parseable JSON action, 0/5",
+      "verdict": "UNKNOWN_NOT_RERUN",
+      "evidence_ref": "research/experiments/EXP-INTEL-37982024058/result.json#controls.B-0.5B-QWEN-LOCAL"
+    },
+    "B-POLLINATIONS-PROXY": {
+      "role": "carried_reference_baseline",
+      "expected": "FAIL (carried reference; not re-run)",
+      "observed": "not re-run; parent evidence: empty/reasoning-only content, ~197-token cap, intermittent HTTP 402, no SLA/pinning",
+      "verdict": "UNKNOWN_NOT_RERUN",
+      "evidence_ref": "research/experiments/EXP-INTEL-37982024058/result.json#controls.B-POLLINATIONS-PROXY"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/materialized_configs.json", "sha256": "59b4b43526112080fc2cfd68201094ed99ea8d0171557c0435aa1e0344faf96c", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/preflight.json", "sha256": "cdcb4cfa91cc8cf2b5fa6cef7d45ae7fbbcb2c1f309abea6c578c9a0590a0abb", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/controls.json", "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/raw/decision.json", "sha256": "d33cbcd43689ff655c9e7ffd3684c1ee068045493db6c8c4d36f106b0b8da781", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json", "sha256": "5ceb74f4370e93170d0151059047d620d0c1484ae1babd4c1d5346b945fa0235", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/harness_config.json", "sha256": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json", "sha256": "380abd91b91b3b3092cef0218d8400726f6947a64dc43f6725b24c6ebb2ee767", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/harness_config.json", "sha256": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json", "sha256": "194175592911bc389ff1365f82fcb03ba84bdaba6f716ee06ef8a525bff9376d", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA/raw/harness_config.json", "sha256": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json", "sha256": "5344d79a8ef6f5a53b608a67aede8c55f549d4d0369063d1d78ddf2ba0b3eb74", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/harness_config.json", "sha256": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-7B-QWEN_P-TREAT-GOAL-SCHEMA.json", "sha256": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-7B-QWEN_P-COMP-UNDERSPECIFIED.json", "sha256": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47", "role": "fixture"},
+    {"path": "research/intel/exp_38164607941_materialize.py", "sha256": "852e012f9a1ae6609ef7feecc08cc6ef573e826b8d88550d8376273049dfb2d5", "role": "code"},
+    {"path": "research/intel/exp_38164607941_controls.py", "sha256": "465d7d9db3842fcc669e4929828fa145e89c8e3fdeed3fb77e481eece9fa888d", "role": "code"},
+    {"path": "research/intel/exp_38164607941_eval.py", "sha256": "9a2c94ed5237f28052b8d5862e31ffb970fe28ea292d48ce02088681f046d137", "role": "code"}
+  ],
+  "observations": [
+    "Preflight (rule 1) passed every frozen check: PC-ORACLE-EPISODE 5/5 task_success; NC-NO-MODEL-ACTION parseable 0.0 / success 0.0; B-RANDOM-ACTION parseable 1.0 / task_success_rate 0.2 (<0.6); all five freeze_artifact sha256 matches; required stack imports OK; all three GGUF digest checks PASS (7B shard1 dfce12e3..., shard2 539cf93f..., 3B 626b4a66...; sizes 3993201344 / 689872288 / 2104932768).",
+    "All four model cells loaded (load_status=LOADED) and ran to completion (run_status=COMPLETE), each with the PC gate 10/10 and exactly 5 episode records: 4 COMPLETE, 0 EXCLUDED, 0 PARTIAL.",
+    "M-7B-QWEN under P-TREAT-GOAL-SCHEMA (goal + action schema supplied): every one of the 5 episodes emitted {\"action\":\"click\",\"selector\":\"#reveal-btn\"} at step 0 (click_ok=true), the reveal fired (revealed_value=TARGET-42), then steps 1-4 each re-emitted the same click on the now-hidden button (click_ok=false) and no answer action was ever emitted; step_count=5 in all episodes; task_success=false 0/5.",
+    "M-7B-QWEN under P-COMP-UNDERSPECIFIED produced an identical trace structure (step-0 reveal-click, steps 1-4 hidden-button re-click, no answer action, 0/5 task_success), reproducing the parent anchor.",
+    "M-3B-QWEN under P-TREAT-GOAL-SCHEMA produced an identical trace structure (step-0 reveal-click with raw '{\"action\": \"click\", \"selector\": \"#reveal-btn\"}', steps 1-4 hidden-button re-click, no answer action, 0/5 task_success).",
+    "M-3B-QWEN under P-COMP-UNDERSPECIFIED produced an identical trace structure (0/5 task_success), reproducing the parent anchor.",
+    "answer_action_emission_rate (new metric) = 0.0 (0/5) in all four cells: no cell ever emitted a terminal answer action.",
+    "The only varied dimension between paired cells was prompts.system: the comparator overlay is byte-identical to the frozen parent harness_config.json (sha256 a9a6c54f...), and the treatment overlay (sha256 8283aae1...) differs from the parent only in prompts.system (verified programmatically; materialized_configs.json records diff_confined_to_prompts_system=true and overlay_is_parent_byte_identical=false for treatment, true for comparator).",
+    "The treatment system string (sha256 36a4240a...6) contains neither '#reveal-btn' nor 'TARGET-42', so the treatment positive path could not be an answer-leakage artifact.",
+    "PC-ORACLE-EPISODE drove the frozen real run_episode scorer 5/5 through a real browser against the served page, so the full click-then-answer completion path is registerable and the mechanical verification is live.",
+    "B-RANDOM-ACTION was run on the SERVED page (navigation repaired relative to the parent's about:blank defect); its realized task_success_rate was 0.2 (1/5) matching the design-time seed-42 simulation, with parseable_action_rate_step1=1.0.",
+    "Observed CPU-only inference cost: M-7B mean latency 6.22-6.24 s/call at mean 15.0 completion tokens; M-3B mean latency 2.73-2.74 s/call at mean 12.14 completion tokens (n_calls=35 per cell = 10 PC probes + 25 episode-step calls).",
+    "Frozen input integrity re-verified on disk at EXECUTE: request.json, spec.json, prereg.md and design_review.json match freeze.json.hashes; all five freeze_artifact hashes match freeze.json.artifact_hashes."
+  ],
+  "validity_notes": [
+    "status=COMPLETE and outcome=FALSIFIES is a valid bounded scientific negative, not an infrastructure failure: preflight passed every gate, both models loaded, positive controls fired 10/10 in all four cells, and the scorer registered the full completion path 5/5 in PC-ORACLE-EPISODE.",
+    "The measurement transaction followed the frozen design exactly. The only new code authored at EXECUTE is the Appendix A controls driver, the section-4.2 materializer and the Appendix A.5 evaluator (all under research/intel); outcome-determining model invocation, parsing and scoring were executed by the unmodified frozen parent runner research/intel/run_exp_37982024058.py (sha256 2b5d5bb5...).",
+    "Deterministic protocol (temperature=0.0, per-episode seeds 42-46, llama_seed=42): all 5 episodes per cell were identical in trace structure, so there is zero within-cell variance; the 3/5 rule is the pre-declared adequacy rule for the capability gate, not a statistical threshold, and no variance estimate or p-value is reported.",
+    "Small n: 5 episodes per cell, 5 episodes per control. This is the frozen adequacy rule (parent audit VF-05), appropriate for a capability gate.",
+    "Bundled treatment / second-order attribution limit: P-TREAT-GOAL-SCHEMA bundles (a) the goal sentence, (b) the action-schema enumeration, and (c) the grandparent's exact phrasing. This packet identifies the bundled 'goal/schema system prompt vs underspecified system prompt' effect (the Director's operational question); it does not decompose goal-only vs schema-only vs phrasing vs generic longer-prompt effects. That decomposition is out of scope and remains unresolved.",
+    "The comparator cells were collected unconditionally before any decision and are contemporaneous within-run pairs (same model, task, grammar, sampling, seeds, artifacts and code path; only prompts.system differs). Both comparators reproduced the frozen parent anchor exactly (REPLICATION_ANCHOR_EXACT: task_success_rate=0.0, parseable_action_rate_step1=1.0, answer_action_emission_rate=0.0), so the treatment negative is not attributable to run-level environment drift.",
+    "H1b attribution (PROMPT_ATTRIBUTED) is only defined for a clearing candidate; since no treatment cell cleared, attribution is not exercised and the comparators are descriptive anchor replications, not an attribution contrast for a positive.",
+    "Representation loss: state is the simplified text DOM (PAGE_TEXT/ELEMENTS/HISTORY). After the reveal ELEMENTS is empty and PAGE_TEXT contains TARGET-42, so the repeated hidden-button re-click is not attributable to missing page text. This is inherited unchanged from the parent and is a scope/limitation, not a confound for the prompt contrast.",
+    "Single-task, single-model-family scope: this is a capability gate on one minimal synthetic task in the Qwen2.5 3B-8B Q4_K_M class under this harness; failing it is bounded to that class/protocol and does not close other model classes, larger models, hosted endpoints or the Physics/other domains.",
+    "Packaging/provisioning deviation inherited from the parent: the frozen 7B single-file URL is HTTP 404; the same-repo, same-model, same-quant (Q4_K_M) split shards were re-downloaded and fail-closed digest-verified against raw/gguf_sha256.txt. No model or quantization substitution. Requirements provisioned at EXECUTE: llama-cpp-python 0.2.90 built from sdist into a venv (--system-site-packages), Playwright 1.63.0 with /usr/bin/google-chrome 154.0.8037.97 headless --no-sandbox.",
+    "GGUF byte-identity is verified by sha256 against the frozen parent receipts (download-time digests); the files live outside the repo at /tmp/opencode/gguf/ and are not durable repo artifacts, so their digests are recorded in preflight.json and provenance.json rather than as repo artifact entries.",
+    "mean_inference_latency_s and mean_completion_tokens are computed over all 35 model calls per cell (10 positive-control probes + 25 episode-step calls) and are descriptive CPU-only cost observables; they are not part of the decision rule.",
+    "No post-freeze design change, no prompt tuning after seeing outcomes, no model substitution, no weakening of the frozen decision rule. The frozen inputs were treated as immutable and re-verified after execution."
+  ],
+  "unresolved": [
+    "The goal+schema treatment prompt did not convert the step-0 reveal-click into a completion; the mechanism is not decomposed. Whether supplying only the goal sentence, only the action-schema enumeration, a different phrasing, or a shorter/different representation would change the outcome is untested (second-order attribution limit).",
+    "Why both models re-emit a click on the now-hidden #reveal-btn across all remaining steps instead of answering, even when the goal sentence and terminal answer action are explicitly enumerated, remains an open behavioural question (small-model multi-step planning/state-tracking deficit vs residual prompt/harness effect).",
+    "Whether larger (14B+) or non-Qwen CPU-quantized GGUFs, or a hosted programmatic endpoint, clear the bar under this task is out of the frozen 3B-8B Qwen scope and untested.",
+    "H1b (PROMPT_ATTRIBUTED) was not exercised because no treatment cell cleared; a positive prompt effect remains unmeasured by this packet."
+  ],
+  "frozen_input_verification": {
+    "request.json": {"expected_sha256": "0b182189707df4eb0b0e695bd96818dbb520d96b8f0f73d2c6a64753e4b96719", "match": true},
+    "spec.json": {"expected_sha256": "fb6d382a3decfb282958c250e698ebb5bbd61bdaca919ed1aef05839e60afa1e", "match": true},
+    "prereg.md": {"expected_sha256": "265a25bdee4268453b985fb6f93e06b9fc8b20db7caa87eca7fca30a9b8da2c9", "match": true},
+    "design_review.json": {"expected_sha256": "dc9058f709b9eebdddf4b238c7cf41bd83f8de6651d07fbf79531a9c6484b9c0", "match": true},
+    "freeze_artifacts_all_match": true
+  }
+}

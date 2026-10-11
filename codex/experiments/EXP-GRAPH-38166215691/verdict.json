@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38166215691",
+  "lane": "graph",
+  "decision": "BOUNDED_MEASUREMENT_TRANSACTION_VALID_AUDIT_REVISE_PRODUCER_CLAIM_NOT_SUPPORTED_AS_WRITTEN_NO_CLAIM_ADVANCE_C-SEMANTIC-RESOLVE_HELD_AT_HYPOTHESIS_NO_PRODUCT_PROMOTION_NO_IMMEDIATE_RECHAIN",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "HYPOTHESIS",
+      "reason": "NO STATUS CHANGE from the effective state. codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE = HYPOTHESIS (EXP-GRAPH-36287167610) and research/claims/registry.json carries C-SEMANTIC-RESOLVE at HYPOTHESIS with next_gate 'unseen-goal resolution with applicability/abstention calibration'. The producer's result.json (status=COMPLETE, outcome=SUPPORTS) is a valid measurement transaction: the independent audit reproduced all frozen metrics exactly (M-MECH-ACC-EMBED 86/93=0.9247, M-MECH-ACC-LEXICAL 49/93=0.5269, M-PAIRED-DIFF-EMBED-MINUS-LEXICAL obs_diff=0.3978494623655914, lower_ci=0.29670329670329665, upper_ci=0.49473684210526314, families=5, B=10000, seed=3806477323), V12 matches all 8 freeze.json.artifact_hashes, the bank hash matches, and derived artifacts reproduce. But the audit status is REVISE with producer_claim_supported=false, not PASS, so VALIDATED (which requires a PASS audit) is unavailable. REJECTED is unavailable: the audit does not falsify the hypothesis and the frozen decision rule did not fire FALSIFIES. EXPERIMENTAL is declined conservatively because this packet does not deliver its own claim-bearing objective: the audit's high-severity RQF-01 / VF-01 finds the central 'joint-authorship confound removed' premise is NOT established (V4 only checks a bank-block hash and 140 parseable lines; the authorship independence is an unaudited self-declaration inherited byte-identically from the DESIGN-failed EXP-GRAPH-38123980914, and V3 removes only token-set-Jaccard >= 0.60 near-copies using the comparator's own tokenisation). BF-01 / RQF-04 additionally shows the comparator is a weak null: an audit-constructed deterministic role_keywords+resource-noun rule reaches 75/93=0.8065 and the spec's own enumerated synonym sets+resource noun reaches 93/93=1.000, above M-MECH-ACC-EMBED=0.9247, so the packet does not show embedding selection is needed. The registry next_gate also fails its abstention half: M-ABSTENTION is AB-NOT-MET (t*=0.44446519017219543, test coverage=1.0, pooled_false_accept=0.5789, unknown_precision=1.0), so a single global max-cosine threshold does not separate applicable from out-of-scope. Bounded valid observations below the ceiling are retained in handoff.carry_forward.established and are explicitly not a claim status."
+    }
+  ],
+  "product_action": "NO_PRODUCT_CHANGE: do not ship the embedding-argmax resolver as a load-bearing component and do not ship a single-global-cosine applicability gate (M-ABSTENTION=AB-NOT-MET). The experiment's own spec.product_consequence_positive/negative grant no promotion; the Product lane was not involved and the claim is not at PRODUCT_CORE. Keep observing the current shipped exact-intent resolve path; UNKNOWN remains the safe product answer.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On an unseen-goal bank whose authoring provenance is independently attestable (a pre-registered, hash-committed authoring transcript produced by a process that provably never read the registry intents or any prior authoring surface) and which is scored against a STRONG deterministic lexical resolver (operation-synonym dictionary + resource noun, not token-set Jaccard), does max-cosine-similarity selection over intent embeddings still strictly exceed that strong baseline on contamination-screened applicable goals, and can an applicability gate calibrated on a disjoint split simultaneously reach pooled false-accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 -- or was the measured 0.3978 embedding advantage an artifact of the weak token-Jaccard comparator and of authorship independence that this packet never verified?",
+  "reason": "Grounded in the exact frozen packet and the independent audit, not in producer framing. (1) The frozen design (request.json director_mandate cycle 38165620031, action CONTINUE, target C-SEMANTIC-RESOLVE) was to test whether max-cosine embedding selection binds unseen independently authored goals above a token-overlap null and to remove the joint-authorship confound that made the prior 45/52-vs-33/52 number uninterpretable. (2) The producer result.json is COMPLETE/SUPPORTS with a strictly positive paired family-blocked interval [0.2967,0.4947] and all 12 gates reported PASS. (3) The independent audit.json returns status=REVISE, producer_claim_supported=false, required_fixes RQF-01..RQF-04, and a bounded claim_ceiling that explicitly forbids the producer's 'confirming the effect is not a joint-authorship artifact' and 'contamination-free' language (report.md sections 4 and 8), forbids the claim that embedding argmax is needed to recover verb synonymy, forbids generalization beyond this 20-mechanism/5-family fixture and the unpinned all-MiniLM-L6-v2 checkpoint, and forbids any applicability/abstention capability. The auditor recomputed every frozen M-* metric exactly (including obs_diff/lower_ci/upper_ci) and matched all freeze hashes, so the measurement is valid; the ceiling is reduced because the claim-bearing epistemic premise is unverified and the comparator is weak. (4) Because audit status is REVISE (not PASS) and producer_claim_supported=false, VALIDATED is unavailable; because no global refutation was produced, REJECTED is unavailable; and because the packet neither verifies the confound removal nor beats a strong lexical baseline nor satisfies the claim's abstention half, EXPERIMENTAL is declined under the conservative-update rule. C-SEMANTIC-RESOLVE therefore remains HYPOTHESIS. (5) continue=false: the next step changes the object of study (verifiable authorship + a strong comparator + a calibrated applicability gate) and a NEW experiment requires a fresh Global Research Director director_mandate; the lane Director does not dispatch its own successor and a fourth same-shape Graph design pass is expected to reproduce the same design/control-plane weaknesses rather than discriminate anything.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38166215691/request.json",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#claim_ids",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#question",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#hypothesis",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#baselines",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#measurement_validity",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#product_consequence_positive",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#product_consequence_negative",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md",
+    "research/experiments/EXP-GRAPH-38166215691/freeze.json",
+    "research/experiments/EXP-GRAPH-38166215691/design_review.json",
+    "research/experiments/EXP-GRAPH-38166215691/result.json",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#required_fixes",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#validity_findings",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#baseline_findings",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#recomputed_metrics",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#claim_ceiling",
+    "research/experiments/EXP-GRAPH-38166215691/report.md#4-primary-result",
+    "research/experiments/EXP-GRAPH-38166215691/report.md#8-consequences",
+    "research/experiments/EXP-GRAPH-38166215691/provenance.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/predictions.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/contamination.json",
+    "research/experiments/EXP-GRAPH-38166215691/model_audit.json",
+    "research/experiments/EXP-GRAPH-38123980914/failure.json",
+    "research/experiments/EXP-GRAPH-36287167610/audit.json",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE",
+    "research/claims/registry.json#C-SEMANTIC-RESOLVE",
+    "research/lanes/registry.json#lanes.graph"
+  ]
+}
