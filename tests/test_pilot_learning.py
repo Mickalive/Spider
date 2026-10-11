@@ -65,6 +65,10 @@ class BrowserTraceCompilerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             compile_browser_traces("invoices", examples)
         examples = traces()
+        examples[1]["final_url"] += "&secret="
+        with self.assertRaises(ValueError):
+            compile_browser_traces("invoices", examples)
+        examples = traces()
         examples[1]["identifier"] = examples[0]["identifier"]
         with self.assertRaises(ValueError):
             compile_browser_traces("invoices", examples)
