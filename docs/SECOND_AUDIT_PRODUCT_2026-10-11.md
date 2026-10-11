@@ -23,6 +23,7 @@
 - `scripts/train_pilot_memory.py`: two real Chromium explorations per family produce durable parameterized relative GET procedures. Record training cost in a manifest; never hide the onboarding work.
 - `src/spider/pilot_portal.py` + `scripts/run_pilot_matrix.py`: disjoint train/eval identifiers and controlled reproducible paired five-arm plans. Held-out replay can run in a new server session/port.
 - `run_real_agent_pilot.py`: opt-in persistent scoped registry and read-only exact-path authorization; independent page-reference + answer verification; explicit Browser Use token/cost instrumentation, model identities and no automatic provider charges.
+- `train_pilot_memory.py --source browser-use`: optional, explicit-billing route to ingest **actual** Browser Use visited URLs, re-fetch the exact observed same-origin record and corroborate the final answer before admitting a parameterized procedure; mock-only CI, not yet credentialed live validation.
 - `scripts/smoke_compiled_browser.py` and Playwright workflow: actual Chromium learn/compile/persist/replay cycle over both families and never-observed IDs, no provider credentials.
 - `score_product_benchmark.py`: componentized model, browser, retrieval, verification, memory, amortized training, repair and other; cost components must reconcile with total; manually preseeded Spider rows cannot establish economic value. The score is still labelled descriptive, not independently audited.
 
@@ -36,7 +37,7 @@
 
 ## Still NOT demonstrated
 
-- A real LLM browser agent completing the fixture or recording the exact training traces. The current source agent is the *scripted Playwright* baseline, not an autonomous navigator.
+- A real LLM browser agent completing the fixture or recording accepted traces **in a live provider run**. An optional Browser Use history ingestion path now exists, but only mock tests validate it. The default tested training source is *scripted Playwright*.
 - General-purpose learning, safely compiled arbitrary HTTP actions, graph-fractal memory, incremental repair under actual drift, authenticated/session use, or across-site transfer.
 - Measured total marginal cost per safe success, including tracing/onboarding/amortization, or Stagehand-native cache behavior.
 - Commercial superiority: a simple deterministic Playwright script and a flat cache may already be comparably cheap on this particular toy substrate.
