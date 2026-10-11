@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Under a design-contract v2 protocol (six freeze_eligibility checks: decision_rule_reachability, measurement_prerequisites, baseline_identifiability, control_sensitivity, treatment_liveness, freeze_artifacts_bound; plus independent design_review.json before freeze), can the SAME site-native-discovery acquisition question be made satisfiable and measured: on the credential-free GET-only stdlib-HTTP substrate, over a multi-host pool confirmed during DESIGN to contain DEEP (hop>=3) state items on >=2 distinct hosts/engines (>=10 total, >=3 per engine) via the frozen same-host static-<a> BFS (depth<=6, budget 250), what fraction of those DEEP items is reachable in <=K=3 fresh-agent GETs (one discovery GET + item-page GET + one spare) using ANY of the five frozen discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) - with the preregistered materiality threshold 0.50 on >=2 engines deciding whether shortest-path hop is NOT a fundamental acquisition-cost barrier (persistent path caching is not the optimization target; effort moves to discovery and substrate expansion) versus fresh deep-instance acquisition remaining path-bound with a computable persistence break-even surface - given that the v1 freeze of this exact mandate (EXP-FRONTIER-37984242167) committed an empty sampling frame (0 seeds, 0 DEEP items, 0 hosts), an absent pre-freeze control certificate, and a 0/0 primary metric unreachable in both falsifier directions, so the question remains entirely unmeasured; the explicitly recorded maintenance/invalidation alternative (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost, scaling with hop and elapsed time) remains available to the Global Research Director for allocation instead.",
   "promotion_ready": false,
-  "consecutive_failures": 14,
-  "updated_at": "2026-10-10T23:11:30.227821+00:00",
+  "consecutive_failures": 15,
+  "updated_at": "2026-10-11T00:05:21.232646+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "1b220e4114e490b3fd935b29de14e88fc611b919471483e2243d7dc0281ef6bf",
-  "same_failure_count": 12,
+  "same_failure_count": 13,
   "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
   "last_failure_control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
 }
