@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38164611798",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-freeze is required before any outcome can be measured. The frozen outcome-bearing module (prereg.md section 16, CODE_SHA256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a) is not executable: execute_module.py:995 (host_census) and execute_module.py:1000 (items comprehension) evaluate `v.get(\"controls_seen\", 0) > 0` while execute_module.py:443-444 writes `controls_seen: None` for discovered-but-unfetched pages, so the discovery stage raises `TypeError: '>' not supported between instances of 'NoneType' and 'int'` on the first host. Replace with `(v.get(\"controls_seen\") or 0) > 0` at both sites (prereg.md section 16 must be re-frozen; frozen files may not be edited).",
+    "Redesign the Q1 attainability census so it actually measures state-carrying items at depth. Under the frozen item-blind FIFO BFS (budget=250, depth=6) only 72 of 556 discovered hop>=3 pages (12.95%) were ever fetched, so `deep_with_controls` conflates 'no named input/select at depth' with 'deep page never fetched'. mdBook/doc.rust-lang.org (220 deep) and Sphinx/pandas.pydata.org (9 deep) fetched ZERO deep pages. The census must (a) fetch/observe a defined sample of DEEP pages, or (b) report two separate quantities: DEEP pages discovered vs DEEP pages fetched with controls observed, and must not emit `engines_with_zero_deep` as if deep state-carrying absence were measured when it was not.",
+    "Before freeze, add an executable smoke test of the exact outcome entry point: run `--stage discovery` (or `--stage all`) against a frozen in-memory/committed fixture whose structural graph contains discovered-but-unfetched pages, and fail freeze if it does not exit 0. The current v2 treatment_liveness check (design_review.json) exercised parser/evaluate_items/bfs_structural helpers but never the main() discovery loop, so it declared PASS while the measured object was non-executable.",
+    "Regenerate result.json.per_engine from the frozen compute_metrics implementation (or label it explicitly as an external derivation and ship the derivation artifact). As written it is internally inconsistent: Sphinx-RTD reports n_deep=32 but hop_distribution summing to 196, while Docusaurus/Jekyll/Sphinx/custom/mdBook (deep_total 8/24/9/99/220) report empty hop_distribution. `pool_engines_census` duplicates the same quantity and is not clearly defined.",
+    "Correct the producer's observation-level error in result.json#observations[4] and report.md sections 2.2/2.3: the deep pages of jekyllrb.com (23/24 fetched), react.dev/Docusaurus (7/8 fetched) and quotes.toscrape.com (10/99 fetched) were fetched with controls_seen=0 (genuine zero under named_controls), NOT 'all ... unfetched (controls_seen=null) due to BFS budget exhaustion'. The report table notes 'All unfetched (budget)' for jekyllrb.com and quotes.toscrape.com are false.",
+    "Fix the provenance freeze-identity record. provenance.json#freeze.freeze_json_sha256 and provenance.json#frozen_inputs['freeze.json'] cite e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e, which is the design_review.json hash; the actual freeze.json sha256 is 53dd0c56089be41586192c0d4ec711a96fb3ed5a9f5368df2bbe511b34ace6cd.",
+    "Disclose the provenance of the externally computed Q1 census values placed in result.json.metrics (host_census, per_engine, pool_engines_census). The frozen module crashed before computing host_census, so these numbers were produced outside the frozen outcome-bearing code and are not covered by the V1 code canary. They are reproducible from raw/structural.jsonl (audit verified 20/20 host rows), but the derivation method/artifact is absent from the packet."
+  ],
+  "validity_findings": [
+    {
+      "id": "AUDIT-VF-01",
+      "severity": "decisive",
+      "finding": "Independent reproduction confirms the frozen outcome-bearing code is fatally defective, so the Q2/Q3 measurement transaction genuinely could not complete. Running the frozen execute_module.py `--stage discovery` offline against the producer's own raw/channel_docs.jsonl and raw/structural.jsonl exits 1 with `TypeError: '>' not supported between instances of 'NoneType' and 'int'` at execute_module.py:995 (host_census) and would also fail at :1000. Cause: bfs_structural deliberately writes controls_seen=None for discovered-but-unfetched pages (execute_module.py:443-444), but the discovery loop assumes an int. The crash occurs on the first pool host (doc.rust-lang.org, 220 unfetched hop-3 pages) before evaluate_items or compute_metrics run, so no items.jsonl exists. The producer's status=MEASUREMENT_INVALID / outcome=NOT_APPLICABLE mapping is therefore correct per EXPERIMENT_PACKET.md section 1 (code/substrate failure must not be encoded as scientific falsification).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py#L995",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py#L1000",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py#L443-L444",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#validity_notes.VN-FROZEN-CODE-BUG",
+        "audit rerun of --stage discovery against copied raw/structural.jsonl (traceback at line 992/995)"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-02",
+      "severity": "high",
+      "finding": "The Q1 'state-carrying DEEP item' census that the producer presents as partial evidence is confounded by the frozen crawl policy and does not measure what the mandate's Q1 asks. Recomputed from raw/structural.jsonl: 556 hop>=3 pages were discovered across the pool, but only 72 (12.95%) were ever fetched, so their state-carrying status is unobserved. Per host: doc.rust-lang.org 0/220 fetched, pandas.pydata.org 0/9, docs.pytest.org 4/160, quotes.toscrape.com 10/99, jekyllrb.com 23/24, react.dev 7/8, docs.readthedocs.io 28/36. `engines_with_zero_deep`=14 therefore mixes engines where deep pages were fetched and genuinely had no named input/select (Jekyll, custom, Docusaurus among fetched subsets) with engines where deep pages were never fetched at all (mdBook=220, Sphinx/pandas=9). The mandate's Q1 is not answered for the unmeasured engines; the census measures crawl observability, not the prevalence of deep state-carrying content.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#metrics.host_census",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#metrics.engines_with_zero_deep",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#validity_notes.VN-BUDGET-LIMIT",
+        "research/experiments/EXP-FRONTIER-38164611798/report.md#2.2"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-03",
+      "severity": "high",
+      "finding": "A producer observation is factually wrong. result.json#observations[4] and report.md sections 2.2/2.3 assert that the zero-DEEP engines' deep pages were 'all ... unfetched (controls_seen=null) due to BFS budget exhaustion', and the report table marks jekyllrb.com and quotes.toscrape.com as 'All unfetched (budget)'. Recomputation from raw/structural.jsonl shows jekyllrb.com fetched 23 of 24 deep pages (all controls_seen=0), react.dev/Docusaurus fetched 7 of 8 (all 0), and quotes.toscrape.com fetched 10 of 99 (all 0). Those zeros are measured absences of the named_controls unit, not budget artifacts. The budget artifact is real only for doc.rust-lang.org (mdBook 220 unfetched) and pandas.pydata.org (Sphinx 9 unfetched) on the deep frontier. This misattributes genuine observations to non-observation and inflates the claimed budget confound in one direction while understating the genuine zero.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#observations[4]",
+        "research/experiments/EXP-FRONTIER-38164611798/report.md#2.2",
+        "research/experiments/EXP-FRONTIER-38164611798/report.md#2.3",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-04",
+      "severity": "medium",
+      "finding": "result.json.metrics.per_engine was not produced by the frozen outcome-bearing code (which crashed before compute_metrics at execute_module.py:685 ran) and is internally inconsistent. Sphinx-RTD reports n_deep=32 but hop_distribution={'3':94,'4':101,'5':1} summing to 196; the frozen compute_metrics builds hop_distribution only from the live admitted items (execute_module.py:729), so 32 is the only value consistent with its own rule. Five engines with deep_total>0 (Docusaurus 8, Jekyll 24, Sphinx 9, custom 99, mdBook 220) report empty hop_distribution. pool_engines_census duplicates a deep_with_controls count (Sphinx-RTD=32) under an ambiguous name. No derived artifact or script documents the external computation. The host-level host_census is reproducible (audit matched all 20 host rows exactly from raw), but the engine-level block is not trustworthy as written.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#metrics.per_engine",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#metrics.pool_engines_census",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py#L685-L731",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-05",
+      "severity": "medium",
+      "finding": "The design-contract-v2 gate treatment_liveness passed without certifying that the measured object is executable. design_review.json and spec.json.freeze_eligibility.treatment_liveness assert the complete pipeline 'was executed end-to-end offline ... without errors', but the actual frozen discovery entry point fails immediately on the real structural graph (AUDIT-VF-01). The offline fixture (run_controls) exercises bfs_structural and evaluate_items directly and never constructs a structural row containing discovered-but-unfetched pages, so the fatal path was untested. This is the same failure class the Director flagged for the superseded EXP-FRONTIER-38085197666 (checks declared PASS while the underlying object was not runnable); freeze_eligibility as implemented did not prevent it.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/design_review.json#checks.treatment_liveness",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json#freeze_eligibility.treatment_liveness",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py#run_controls"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-06",
+      "severity": "low",
+      "finding": "provenance.json records a wrong freeze identity. provenance.json#freeze.freeze_json_sha256 and provenance.json#frozen_inputs['freeze.json'] both cite e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e, which is the design_review.json hash (and matches freeze.json.hashes.design_review.json); the actual freeze.json sha256 is 53dd0c56089be41586192c0d4ec711a96fb3ed5a9f5368df2bbe511b34ace6cd. freeze.json is unchanged at its sole commit 9db63400, so this is a provenance-record defect rather than post-freeze tampering, but it defeats frozen-input verification through provenance alone.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/provenance.json#freeze",
+        "research/experiments/EXP-FRONTIER-38164611798/provenance.json#frozen_inputs",
+        "research/experiments/EXP-FRONTIER-38164611798/freeze.json",
+        "git commit 9db63400:research/experiments/EXP-FRONTIER-38164611798/freeze.json"
+      ]
+    },
+    {
+      "id": "AUDIT-VF-07",
+      "severity": "low",
+      "finding": "Packet-state labeling is defensible but not defined by the frozen rule. The frozen decision_rule G1 maps only V1/V2/V3 failures to MEASUREMENT_INVALID; it does not specify the disposition for a runtime defect in the outcome code. The producer's MEASUREMENT_INVALID/NOT_APPLICABLE mapping is reasonable under EXPERIMENT_PACKET.md section 1, though BLOCKED is an equally defensible packet state (the outcome stage never executed end to end). Recorded for traceability; no scientific consequence.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json#decision_rule",
+        "research/experiments/EXP-FRONTIER-38164611798/result.json#status",
+        "research/EXPERIMENT_PACKET.md"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-LINK-FOLLOWING-BFS",
+      "status": "UNKNOWN",
+      "finding": "spec.json labels this 'primary_comparator_measured_in_pool' and it should equal the 1-based BFS discovery/fetch ordinal per admitted DEEP item. It was NOT measured: the discovery stage crashed before evaluate_items and no raw/items.jsonl exists, so no admitted item set was produced. The ordinal ('requests') values for the 32 deep pages are present in raw/structural.jsonl and are in principle recoverable, but the producer did not report the baseline. The comparison the O(1) discovery claim was to be tested against is unmeasured."
+    },
+    {
+      "baseline_id": "B-PERSISTED-PATH-REACQUISITION",
+      "status": "UNKNOWN",
+      "finding": "Declared in spec.json as inherited context from parent EXP-FRONTIER-37950626378 (RACQ_PATH NEAR=2.0/MID=3/DEEP=4, 1532/1532 items) and explicitly 'not re-measured'. It was never intended to be measured here and remains unvalidated for this pool; it is not a measurement of this experiment. Consistent with the packet's label."
+    },
+    {
+      "baseline_id": "B-DIRECT-URL-REPLAY",
+      "status": "UNKNOWN",
+      "finding": "Declared inherited context only (parent RACQ_URL = 1 GET), 'not re-measured'. Not exercised here; unvalidated for this pool. Consistent with the packet's label."
+    }
+  ],
+  "recomputed_metrics": {
+    "code_canary_V1_sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+    "code_canary_V1_match": true,
+    "code_canary_V1_note": "sha256 of execute_module.py and of prereg.md section 16 block.strip() are byte-identical; the defect is genuinely in the frozen design.",
+    "prereg_md_sha256": "61472fa8d8c2aab16a86456fd1e17201c342bb1f260a18447bf80c7766d8e770",
+    "prereg_md_sha256_matches_freeze": true,
+    "freeze_json_actual_sha256": "53dd0c56089be41586192c0d4ec711a96fb3ed5a9f5368df2bbe511b34ace6cd",
+    "freeze_json_provenance_declared_sha256": "e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e",
+    "freeze_json_provenance_hash_is_design_review_hash": true,
+    "frozen_code_bug_reproduced": true,
+    "frozen_code_bug_error": "TypeError: '>' not supported between instances of 'NoneType' and 'int'",
+    "frozen_code_bug_lines": [
+      "execute_module.py:995",
+      "execute_module.py:1000"
+    ],
+    "controls_rows": 15,
+    "controls_distinct_identities": 13,
+    "controls_all_pass": true,
+    "seed_liveness_http_200": "20/20",
+    "seed_error_hosts": [],
+    "channels_live_host_counts_recomputed": {
+      "ROBOTS_SITEMAP": 7,
+      "SITEMAP_XML": 9,
+      "ON_SITE_SEARCH": 10,
+      "RSS_ATOM": 7,
+      "JSON_LD": 6
+    },
+    "host_census_reproduced_from_raw": true,
+    "host_census_match": "20/20 host rows (deep_with_controls, deep_total, hop_distribution) match result.json#metrics.host_census",
+    "q1_deep_total_discovered": 556,
+    "q1_deep_fetched": 72,
+    "q1_deep_with_controls_named_input_or_select": 32,
+    "q1_deep_observability_fraction": 0.12949640287769784,
+    "q1_deep_with_controls_per_engine": {
+      "Sphinx-RTD": 32,
+      "mdBook": 0,
+      "custom": 0,
+      "Jekyll": 0,
+      "Sphinx": 0,
+      "Docusaurus": 0
+    },
+    "q1_engines_with_unfetched_deep_frontier": {
+      "mdBook": {"host": "doc.rust-lang.org", "deep_total": 220, "deep_fetched": 0},
+      "Sphinx": {"hosts": ["pandas.pydata.org", "docs.python.org", "numpy.org"], "deep_total": 9, "deep_fetched": 0},
+      "Sphinx-RTD": {"hosts": ["docs.pytest.org", "docs.readthedocs.io"], "deep_total": 196, "deep_fetched": 32},
+      "custom": {"host": "quotes.toscrape.com", "deep_total": 99, "deep_fetched": 10}
+    },
+    "per_engine_internal_inconsistency": {
+      "Sphinx-RTD": {"n_deep": 32, "reported_hop_distribution_sum": 196},
+      "engines_deep_total_gt_0_with_empty_reported_hop_distribution": ["Docusaurus", "Jekyll", "Sphinx", "custom", "mdBook"]
+    },
+    "per_engine_metrics_produced_by_frozen_compute_metrics": false,
+    "discovery_stage_exit_code": 1,
+    "items_jsonl_present": false
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID. No scientific claim about site-native discovery reachability (the mandate's Q2/Q3 and the H1/F1 tests) is supportable from this transaction; C-CROSSSITE retains its Codex effective status HYPOTHESIS and must not be updated by this packet. Independently confirmed and admissible: (a) a design/process-defect receipt - the frozen outcome-bearing module (CODE_SHA256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a, verified equal to prereg.md section 16) crashes with a TypeError in its discovery entry point at execute_module.py:995/1000, so the Q2/Q3 measurement could not be taken and this is not a SUPPORTS, FALSIFIES or INCONCLUSIVE scientific result; (b) a bounded, externally derived and independent-reproduced Q1 observability census over the frozen 20-host pool - 556 hop>=3 pages discovered, 72 (12.95%) fetched, 32 carrying >=1 named input/select, all 32 on the single engine Sphinx-RTD (docs.readthedocs.io 28, docs.pytest.org 4). That census measures crawl observability under the frozen item-blind BFS budget=250, NOT the prevalence of deep state-carrying content: mdBook (220 deep) and Sphinx/pandas.pydata.org (9 deep) fetched zero deep pages, and the producer's claim that all zero-DEEP engines' deep pages were unfetched is false for jekyllrb.com, react.dev and quotes.toscrape.com. Do not read engines_with_zero_deep=14 as a Web fact; do not read per_engine.hop_distribution as valid; do not promote the discovery shortcut and do not close the discovery axis on this packet. The Director's recorded runner-up (persistence-maintenance/invalidation economics) remains an allocation decision, not a result of this experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38164611798/request.json",
+    "research/experiments/EXP-FRONTIER-38164611798/spec.json",
+    "research/experiments/EXP-FRONTIER-38164611798/prereg.md",
+    "research/experiments/EXP-FRONTIER-38164611798/freeze.json",
+    "research/experiments/EXP-FRONTIER-38164611798/design_review.json",
+    "research/experiments/EXP-FRONTIER-38164611798/result.json",
+    "research/experiments/EXP-FRONTIER-38164611798/report.md",
+    "research/experiments/EXP-FRONTIER-38164611798/provenance.json",
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/controls.jsonl",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/channel_docs.jsonl",
+    "research/EXPERIMENT_PACKET.md",
+    "research/experiments/EXP-FRONTIER-37984242167/handoff.json",
+    "research/experiments/EXP-FRONTIER-37950626378/result.json",
+    "codex/claim_state.json",
+    "research/lanes/registry.json"
+  ],
+  "unresolved": [
+    "What fraction of DEEP (hop>=3) state-carrying items on the frozen pool is reachable in <=K=3 fresh-agent GETs via the five frozen channels (mandate Q2), and whether >=0.50 on >=2 engines (Q3) - entirely unmeasured; nothing in this packet is a positive or negative answer.",
+    "Whether the single DEEP-admitting engine Sphinx-RTD (32/196 observed deep pages) would reach the 0.50 threshold through any frozen channel is unmeasured; the discovery stage never ran.",
+    "How many state-carrying items actually sit at hop>=3 on mdBook/doc.rust-lang.org (220 discovered, 0 fetched) and Sphinx/pandas.pydata.org (9 discovered, 0 fetched), and on the unfetched deep frontiers of docs.pytest.org (156 unfetched) and quotes.toscrape.com (89 unfetched) - the frozen BFS budget makes this unmeasured; a deeper or state-targeted crawl is required.",
+    "Whether the design could ever have produced a valid Q3 decision on this pool: even with the TypeError fixed, only one engine (Sphinx-RTD) observed any deep state-carrying items, so G6 would likely fire on an observability artifact rather than a measured absence; the decision-rule reachability claim in spec/design_review is not empirically demonstrated.",
+    "Why the design-contract-v2 treatment_liveness check passed while the frozen outcome entry point was non-executable, and why DESIGN/design review did not smoke-test `--stage discovery`; a governance question for the freezer/DESIGN reviewer that this packet records but cannot fix retroactively.",
+    "Whether the producer's externally computed per_engine block can be regenerated reproducibly, and by which script/fixture; no derivation artifact is present in the packet.",
+    "The correct packet state for a frozen-code runtime defect (MEASUREMENT_INVALID vs BLOCKED) is not settled by the frozen decision rule; recorded for the Director rather than resolved here."
+  ]
+}
