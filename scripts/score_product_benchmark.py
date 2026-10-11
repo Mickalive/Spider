@@ -14,7 +14,9 @@ from collections import defaultdict
 from pathlib import Path
 
 ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER")
-COMPETITOR_ARM = "CACHE"  # independently measured Stagehand/compiled workflow, never synthesized
+COMPETITOR_ARM = "CACHE"  # fixture-specific compiled workflow
+PUBLIC_ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER", "COMPILED", "DIRECT_API")
+NATIVE_CACHE_ARM = "STAGEHAND_V4_SERVER_CACHE"
 COST_COMPONENTS = (
     "model", "browser", "retrieval", "verification",
     "memory_read_write", "training_amortized", "repair", "other",
@@ -35,7 +37,7 @@ def read_trials(path: Path) -> list[dict]:
         missing = set(REQUIRED).difference(row)
         if missing:
             raise ValueError(f"line {lineno}: missing {sorted(missing)}")
-        if row["arm"] not in ARMS + (COMPETITOR_ARM,):
+        if row["arm"] not in ARMS + (COMPETITOR_ARM,) + PUBLIC_ARMS + (NATIVE_CACHE_ARM,):
             raise ValueError(f"line {lineno}: unknown arm")
         if row["cost_accounting_complete"] is not True:
             raise ValueError(f"line {lineno}: incomplete cost accounting; do not score raw pilot traces")
@@ -71,8 +73,14 @@ def read_trials(path: Path) -> list[dict]:
     return rows
 
 
-def score(rows: list[dict], *, require_cache: bool = False) -> dict:
-    arms = ARMS + ((COMPETITOR_ARM,) if require_cache else ())
+def score(rows: list[dict], *, require_cache: bool = False,
+          public: bool = False, require_native_cache: bool = False) -> dict:
+    if require_native_cache and not public:
+        raise ValueError("Stagehand v4 native-cache requirement applies only to the public benchmark")
+    arms = (
+        PUBLIC_ARMS + ((NATIVE_CACHE_ARM,) if require_native_cache else ())
+        if public else ARMS + ((COMPETITOR_ARM,) if require_cache else ())
+    )
     paired = defaultdict(dict)
     for r in rows:
         if r.get("cost_accounting_complete") is not True:
@@ -119,7 +127,9 @@ def score(rows: list[dict], *, require_cache: bool = False) -> dict:
         "families": sorted({r["family"] for r in rows}),
         "phases": sorted({r["phase"] for r in rows}),
         "baseline_ceiling_warning": all(rate == 1 for rate in comparator_rates),
-        "strong_cache_competitor_included": require_cache,
+        "strong_cache_competitor_included": require_cache if not public else require_native_cache,
+        "direct_api_comparator_included": public,
+        "native_stagehand_cache_included": require_native_cache,
         "cost_breakdown_itemized": True,
         "eligibility": "DESCRIPTIVE_ONLY_EXTERNAL_AUDIT_AND_STAGEHAND_NATIVE_CACHE_STILL_REQUIRED",
         "arms": stats,
@@ -131,9 +141,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", type=Path, required=True)
     ap.add_argument("--output", type=Path)
-    ap.add_argument("--require-cache", action="store_true", help="Require a genuine per-task fifth Stagehand/compiled-workflow baseline")
+    ap.add_argument("--require-cache", action="store_true", help="Require the compiled-workflow comparator on fixture tasks")
+    ap.add_argument("--public", action="store_true", help="Use public-site six-arm manifest including strongest direct API")
+    ap.add_argument("--require-native-stagehand", action="store_true", help="Require actual Browserbase Stagehand v4 server cache for each public task")
     args = ap.parse_args()
-    result = score(read_trials(args.input), require_cache=args.require_cache)
+    result = score(read_trials(args.input), require_cache=args.require_cache,
+                   public=args.public, require_native_cache=args.require_native_stagehand)
     rendered = json.dumps(result, indent=2, sort_keys=True)
     if args.output:
         args.output.write_text(rendered + "\n", encoding="utf-8")
