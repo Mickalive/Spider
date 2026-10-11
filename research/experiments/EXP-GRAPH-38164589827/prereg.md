@@ -1,0 +1,3 @@
+# EXP-GRAPH-38164589827 preregistration
+
+DESIGN NOT YET FROZEN.
