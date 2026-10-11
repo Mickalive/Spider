@@ -1,0 +1,15 @@
+{"control": "NC_BFS_CALIBRATION_FLAT", "observed": {"R_hop3_over_hop1": 2.0, "p1_requests": 2, "p3_requests": 4}, "pass": true}
+{"control": "NC_BFS_CALIBRATION_GROWING", "observed": {"R_hop3_over_hop1": 6.5, "first_hop3_requests": 13, "hop1_requests": 2, "nodes_fetched": 250}, "pass": true}
+{"control": "PC_PARSER_CANARY_sitemap_xml", "observed": {"child_sitemaps": [], "is_index": false, "urls": ["https://example.com/a"]}, "pass": true}
+{"control": "PC_PARSER_CANARY_sitemap_index", "observed": {"child_sitemaps": ["https://example.com/s1.xml"], "is_index": true, "urls": []}, "pass": true}
+{"control": "PC_PARSER_CANARY_sitemap_txt", "observed": {"child_sitemaps": [], "is_index": false, "urls": ["https://example.com/a", "https://example.com/b"]}, "pass": true}
+{"control": "PC_PARSER_CANARY_robots", "observed": ["https://example.com/s.xml"], "pass": true}
+{"control": "PC_PARSER_CANARY_feed_rss", "observed": ["https://example.com/p1"], "pass": true}
+{"control": "PC_PARSER_CANARY_feed_atom", "observed": ["https://example.com/p2"], "pass": true}
+{"control": "PC_PARSER_CANARY_jsonld", "observed": ["https://example.com/p3"], "pass": true}
+{"control": "PC_REACHABILITY_LISTED_LIVE", "observed": {"jsonld_listed_live": true, "search_listed_live": true, "sitemap_listed_live": true}, "pass": true}
+{"control": "NC_REACHABILITY_UNLISTED_OR_DEAD", "observed": {"dead_live_status": 404, "dead_reachable": false, "unlisted_live_reachable": false}, "pass": true}
+{"control": "PC_ENV", "observed": {"python": "3.12.15", "ssl_default": true, "stdlib_urllib": true}, "pass": true}
+{"control": "NC_SYNTHETIC_UNREACHABLE_ITEM_direct", "observed": {"error": "HTTPError 404: Not Found", "host": "doc.rust-lang.org", "status": 404}, "pass": true}
+{"control": "NC_SYNTHETIC_UNREACHABLE_ITEM_direct", "observed": {"error": "HTTPError 404: Not Found", "host": "docs.python.org", "status": 404}, "pass": true}
+{"control": "NC_SYNTHETIC_UNREACHABLE_ITEM_direct", "observed": {"error": "HTTPError 404: Not Found", "host": "numpy.org", "status": 404}, "pass": true}
