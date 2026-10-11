@@ -28,11 +28,11 @@ Parent handoff (continuity, not authorization): research/experiments/EXP-INTEL-3
 
 P-COMP-UNDERSPECIFIED (comparator; frozen expected anchor):
   "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown."
-  Provenance: byte-identical to EXP-INTEL-37982024058 raw/harness_config.json#prompts.system (sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb).
+  Provenance: byte-identical to EXP-INTEL-37982024058 raw/harness_config.json#prompts.system (parent file sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb; prompts.system string sha256 1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876).
 
 P-TREAT-GOAL-SCHEMA (treatment):
   "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it."
-  Provenance: grandparent raw/code/min_webagent.py SYS (sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862) with the single ref->selector schema alignment. Justification: the frozen GBNF admits only the keys "selector" and "text"; the grandparent prompt's "ref" key is not in the grammar, so aligning the prompt's named schema to the grammar-enforced schema ensures the treatment measures the goal+schema content rather than a prompt/grammar key mismatch. No '#reveal-btn' or 'TARGET-42' leakage (design-time verified).
+  Provenance: grandparent raw/code/min_webagent.py SYS (file sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862; SYS string sha256 742e5aae5b5ffd72ccb43cb18658a14483660e7659640df651e91011e9b6dc12; adapted treatment string sha256 36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716) with the single ref->selector schema alignment. Justification: the frozen GBNF admits only the keys "selector" and "text"; the grandparent prompt's "ref" key is not in the grammar, so aligning the prompt's named schema to the grammar-enforced schema ensures the treatment measures the goal+schema content rather than a prompt/grammar key mismatch. No '#reveal-btn' or 'TARGET-42' leakage (design-time verified).
 
 ## 4) Protocol, Controls, and Comparator Validity
 
@@ -48,7 +48,7 @@ P-TREAT-GOAL-SCHEMA (treatment):
 
 4.4 Null/negative controls
 - NC-NO-MODEL-ACTION: 5 episodes of fixed non-JSON content ("I will click the button") through the real scorer against the SERVED page. Must be parseable 0.0 and success 0.0; any parseable/success -> MEASUREMENT_INVALID.
-- B-RANDOM-ACTION: seeded RNG random.Random(42) created once and reused across episodes (as in the parent), run against the SERVED page (navigation repaired vs the parent's about:blank defect), 5-action uniform space, valid JSON by construction. Must be parseable_action_rate_step1 == 1.0 and task_success_rate < 0.6 (per-episode success probability <= 1/25, so P(bar cleared by chance) < 4e-4). If task_success_rate >= 0.6 -> MEASUREMENT_INVALID (control broken).
+- B-RANDOM-ACTION: seeded RNG random.Random(42) created once and reused across episodes (as in the parent), run against the SERVED page (navigation repaired vs the parent's about:blank defect), 5-action uniform space, valid JSON by construction. Must be parseable_action_rate_step1 == 1.0 and task_success_rate < 0.6 (per-episode success probability = 0.04992 over the frozen 5-action space, so P(bar cleared by chance) ~ 1.15e-3). If task_success_rate >= 0.6 -> MEASUREMENT_INVALID (control broken).
 
 4.5 Comparator validity (fail-closed, refined anchor policy)
 - For each evaluated candidate, the P-COMP comparator cell is collected unconditionally BEFORE any outcome decision, in the same run as the treatment cell. The identification contrast is this contemporaneous within-run pair (same model, same harness, same sampling schedule, same environment; only prompts.system differs).
@@ -56,47 +56,25 @@ P-TREAT-GOAL-SCHEMA (treatment):
 - EXPECTED ANCHOR: the frozen parent tuple (task_success_rate=0.0, parseable_action_rate_step1=1.0, answer_action_emission_rate=0.0) from EXP-INTEL-37982024058 result.json#metrics. Exact match -> record REPLICATION_ANCHOR_EXACT. A bar-failing deviation that preserves parseability -> record REPLICATION_ANCHOR_DRIFT as a validity note; the paired contrast remains identifiable and the packet need not be invalidated, but the report must state that the historical parent anchor was not exactly reproduced.
 - Rationale: the comparator's role is a contemporaneous control, not a byte-replay of history; historical exactness is a drift monitor. This prevents a spurious infrastructure invalidation (e.g., a rebuild producing minor floating-point drift) while preserving attribution.
 
-4.6 Byte-exact frozen blocks (bound for EXECUTE materialization)
+4.6 Per-cell config materialization (bound for EXECUTE)
 
-Per-condition config blocks (identical structure to the parent harness_config; only prompts.system differs).
+The per-cell config is NOT re-authored. EXECUTE deterministically materializes it by loading the frozen parent fixture `research/experiments/EXP-INTEL-37982024058/raw/harness_config.json` (file sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb) and replacing ONLY `prompts.system` with the condition string below; every other key is inherited byte-for-byte from the parent file. This binds every outcome-relevant key the parent runner consumes, including:
 
-Config P-COMP-UNSPEC (byte-exact reference string content):
-```
-{
-  "gbnf_grammar": "root ::= ws \"{\" ws \"\\\"action\\\"\" ws \":\" ws action ws \",\" ws field ws \"}\" ws\nws ::= [ \\t\\n]*\naction ::= \"\\\"click\\\"\" | \"\\\"answer\\\"\"\nfield ::= \"\\\"selector\\\"\" ws \":\" ws string | \"\\\"text\\\"\" ws \":\" ws string\nstring ::= \"\\\"\" strchars \"\\\"\"\nstrchars ::= strchar strchars | strchar\nstrchar ::= [^\"\\\\] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F])\n",
-  "prompts": {
-    "system": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.",
-    "user_template": "PAGE_TEXT: {page_text}\nELEMENTS: {elements_json}\nHISTORY: {history}\nNext action (JSON only): "
-  },
-  "sampling": {
-    "temperature": 0.0,
-    "max_tokens": 512,
-    "base_seed": 42,
-    "episode_seed_offset": "42 + episode_idx",
-    "n_ctx": 2048,
-    "chat_format": "qwen",
-    "llama_seed": 42
-  },
-  "task": {"max_steps_per_episode": 5},
-  "clearing_threshold": {"task_success_rate_min": 0.6, "parseable_action_rate_step1_min": 0.6, "episodes": 5}
-}
-```
+- `prompts.positive_control_probe` = "Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}"; `positive_control` = {"id":"PC-JSON-CONSTRAINED-DECODING","probes":10,...}
+- `null_control` = {"id":"NC-NO-MODEL-ACTION","episodes":5,"fixed_invalid_content":"I will click the button",...}
+- `random_baseline` = {"id":"B-RANDOM-ACTION","episodes":5,"action_space":[click #reveal-btn; answer TARGET-41; answer TARGET-42; answer TARGET-43; answer unknown]}
+- `task.page_html`, `gbnf_grammar` (string sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65), `sampling`, `clearing_threshold`, `action_schema`, `metrics_stable_ids`.
 
-Config P-TREAT-GOAL-SCHEMA (only system differs):
-```
-{
-  "gbnf_grammar": "root ::= ws \"{\" ws \"\\\"action\\\"\" ws \":\" ws action ws \",\" ws field ws \"}\" ws\nws ::= [ \\t\\n]*\naction ::= \"\\\"click\\\"\" | \"\\\"answer\\\"\"\nfield ::= \"\\\"selector\\\"\" ws \":\" ws string | \"\\\"text\\\"\" ws \":\" ws string\nstring ::= \"\\\"\" strchars \"\\\"\"\nstrchars ::= strchar strchars | strchar\nstrchar ::= [^\"\\\\] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F])\n",
-  "prompts": {
-    "system": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
-    "user_template": "PAGE_TEXT: {page_text}\nELEMENTS: {elements_json}\nHISTORY: {history}\nNext action (JSON only): "
-  },
-  "sampling": {"temperature": 0.0, "max_tokens": 512, "base_seed": 42, "episode_seed_offset": "42 + episode_idx", "n_ctx": 2048, "chat_format": "qwen", "llama_seed": 42},
-  "task": {"max_steps_per_episode": 5},
-  "clearing_threshold": {"task_success_rate_min": 0.6, "parseable_action_rate_step1_min": 0.6, "episodes": 5}
-}
-```
+Condition strings (the ONLY `prompts.system` override):
 
-Controls driver requirements (EXECUTE materialization): random baseline and NC must navigate to the served page before selecting actions (fix parent about:blank defect); PC-ORACLE runs through the real scorer; all controls use the same run_episode scorer as the candidates.
+- P-COMP-UNSPEC `prompts.system` (string sha256 1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876):
+  "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown."
+- P-TREAT-GOAL-SCHEMA `prompts.system` (string sha256 36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716):
+  "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it."
+
+The two materialized configs therefore differ from each other ONLY in `prompts.system`; their sha256 is recorded in provenance.json. EXECUTE must NOT hand-author a reduced config (a partial config omitting positive_control/null_control/random_baseline would crash the imported `run_positive_control` and the control driver); the overlay rule removes that failure mode.
+
+Controls driver requirements (EXECUTE materialization): random baseline and NC must navigate to the served page before selecting actions (fix parent about:blank defect); PC-ORACLE-EPISODE runs through the real scorer; all controls use the same run_episode scorer as the candidates.
 
 Harness delta: new runner `research/intel/run_exp_38123995594.py` (thin; imports parse_action / regex_parse_action / run_episode / control producers from the frozen `research/intel/run_exp_37982024058.py`, accepts per-cell config path and model paths, enforces digest checks, runs PC gates, collects comparator unconditionally, runs repaired controls, applies precedence 1..6). Its content is bound by Appendix A; EXECUTE records its sha256.
 
@@ -127,7 +105,7 @@ report.md must record, per evaluated candidate, the failure-mode descriptor (ans
 - SUPPORTS reachable: PC-ORACLE-EPISODE 5/5 proves the scorer registers the full click-then-answer path; the treatment prompt is feasible under the frozen GBNF. Comparator expected to fail the bar preserves attribution.
 - FALSIFIES reachable: the parent already realized 0/5 under the comparator prompt; the treatment may also fail (recurring loop, zero answer action) with at most 2 candidates evaluated under early stop.
 - MEASUREMENT_INVALID reachable via preflight failure, comparator clearing the bar / losing parseability, cell incompleteness, freeze-artifact hash mismatch, GGUF digest mismatch, provisioning failure, or PC failure. No rule shadows another: comparator cells are collected unconditionally before (4); (6) fires only when complete, comparator-valid, and no treatment cleared.
-- Threshold 0.6 over 5 episodes (>=3/5) is attainable for both extremes; the random baseline is strictly below the bar by construction (P(chance clearance) < 4e-4).
+- Threshold 0.6 over 5 episodes (>=3/5) is attainable for both extremes; the random baseline is strictly below the bar by construction (per-episode success probability = 0.04992; P(chance clearance) ~ 1.15e-3).
 
 ## 8) Non-Outcome-Bearing Satisfiability Probes (design-contract v2)
 
@@ -153,13 +131,13 @@ Performed at DESIGN (logged for EXECUTE preflight):
 
 Each named v2 DESIGN-failure class was actively attacked and resolved:
 
-- Empty/unreachable branches: precedence 1..6 is fully enumerated; SUPPORTS needs >=3/5 in a treatment cell (registerable per PC-ORACLE), FALSIFIES needs all treatment cells <0.6 (parent realized this), MEASUREMENT_INVALID is reachable via preflight/comparator/incompleteness. No rule is shadowed; comparator cells are collected before any decision. (Section 7.)
+- Empty/unreachable branches: precedence 1..6 is fully enumerated; SUPPORTS needs >=3/5 in a treatment cell (registerable per PC-ORACLE-EPISODE), FALSIFIES needs all treatment cells <0.6 (parent realized this), MEASUREMENT_INVALID is reachable via preflight/comparator/incompleteness. No rule is shadowed; comparator cells are collected before any decision. (Section 7.)
 - Arithmetic impossibility: threshold 3/5 over 5 episodes is attainable for both extremes; early stop means at most 2 candidates are evaluated; no branch requires more episodes than the frozen 5.
-- Ceiling/floor baselines: comparator sits at the realized floor (0/5), PC-ORACLE at the ceiling (5/5); dynamic range is full, so a treatment effect is identifiable. The random control is strictly below the bar (P(clearance) < 4e-4), so the bar cannot be cleared by chance.
-- Treatment/comparator identity: byte-diffed at design time; only prompts.system changes; all other outcome-relevant config keys are byte-identical to the parent fixture (verified by parsing both section 4.5 blocks). No leakage of the selector or the answer text into the treatment.
-- Insensitive controls: PC-JSON fires 10/10 (parent-verified) and PC-ORACLE fires 5/5; NC stays 0/0; B-RANDOM cannot reach 0.6. Each control has a distinct, attainable expected value.
+- Ceiling/floor baselines: comparator sits at the realized floor (0/5), PC-ORACLE-EPISODE at the ceiling (5/5); dynamic range is full, so a treatment effect is identifiable. The random control is strictly below the bar (per-episode success probability = 0.04992; P(clearance) ~ 1.15e-3), so the bar cannot realistically be cleared by chance.
+- Treatment/comparator identity: byte-identified at design time (prompt string sha256s in section 3); the two per-cell configs are materialized by the section 4.6 overlay and differ ONLY in prompts.system, so all other outcome-relevant config keys are inherited byte-for-byte from the parent fixture. No leakage of the selector or the answer text into the treatment.
+- Insensitive controls: PC-JSON fires 10/10 (parent-verified) and PC-ORACLE-EPISODE fires 5/5; NC stays 0/0; B-RANDOM cannot reach 0.6. Each control has a distinct, attainable expected value.
 - Missing prerequisites: Python 3.12.15, cmake 3.31.6, gcc/g++ 13.3, Python.h, pip 26.2.1, /usr/bin/google-chrome verified; llama-cpp-python 0.2.90 sdist present on PyPI (no cp312 wheel) so the build path is required and feasible; playwright 1.63.0 installable; all three GGUF resolve URLs verified live (7B single-file 404 documented); parent end-to-end execution proves the task/scorer path.
-- Unbound mutable artifacts: five existing freeze_artifacts hashed; the outcome-determining parsing/scoring/episode code is bound by importing the frozen parent runner (no re-implementation); the only EXECUTE-created files (per-cell configs, thin driver) are bound by byte-exact prereg section 4.5 / Appendix A and their sha256 recorded in provenance.json.
+- Unbound mutable artifacts: five existing freeze_artifacts hashed; the outcome-determining parsing/scoring/episode code is bound by importing the frozen parent runner (no re-implementation); the only EXECUTE-created files (per-cell configs, thin driver) are bound by the deterministic prereg section 4.6 overlay rule / Appendix A and their sha256 recorded in provenance.json.
 
 Residual risks (documented, not hidden): (R1) a rebuilt llama.cpp could produce minor floating-point drift from the parent build - handled by the comparator policy (drift note vs hard invalidation), not by changing the science; (R2) the thin driver itself is not a freeze artifact (it cannot exist at freeze time) - mitigated by the import binding and Appendix A; (R3) a treatment clearance would not decompose goal-sentence vs schema-enumeration vs generic longer instruction - recorded as unresolved; (R4) the split-shard 7B packaging could change in future repo revisions - the current digests pin the exact artifacts.
 
@@ -193,11 +171,11 @@ Stable IDs to reuse across EXECUTE/AUDIT/DIRECTOR:
 
 All six required checks PASS with concrete evidence_refs in spec.freeze_eligibility:
 decision_rule_reachability PASS; measurement_prerequisites PASS; baseline_identifiability PASS; control_sensitivity PASS; treatment_liveness PASS; freeze_artifacts_bound PASS.
-Before freezing, EXECUTE must verify hash equality of freeze_artifacts and byte-exact equality of the two per-condition configs materialized from section 4.5/Appendix A.
+Before freezing, EXECUTE must verify hash equality of freeze_artifacts and confirm that the two per-cell configs materialized by the section 4.6 overlay differ ONLY in `prompts.system` (their sha256 is recorded in provenance.json).
 
 ## 14) Execution Procedure (EXECUTE-time, not performed in DESIGN)
 
-1. Verify sha256 of the five spec.freeze_artifacts against freeze.json.artifact_hashes. Materialize the per-cell configs from section 4.5 (byte-exact) and verify their sha256 against the frozen blocks recorded in freeze.json/provenance.
+1. Verify sha256 of the five spec.freeze_artifacts against freeze.json.artifact_hashes. Materialize the per-cell configs by the section 4.6 overlay rule (load the frozen parent harness_config.json; replace ONLY prompts.system with the condition string) and record their sha256 in provenance.json.
 2. Provision GGUFs: download the M-7B-QWEN split shards (00001/00002) and the M-3B-QWEN single file to /tmp/opencode/gguf/, verify sha256 against the pinned values; the 7B single-file URL is expected to 404 and must not be used. On mismatch -> provisioning_failure -> MEASUREMENT_INVALID.
 3. Build/install llama-cpp-python 0.2.90 from sdist (cmake+gcc present); install playwright 1.63.0 and confirm Chrome at /usr/bin/google-chrome.
 4. PREFLIGHT: PC-ORACLE-EPISODE 5/5, NC (parseable 0.0, success 0.0), B-RANDOM (parseable 1.0, success < 0.6), stack imports OK, digest checks PASS. Else MEASUREMENT_INVALID.
@@ -214,7 +192,7 @@ Before freezing, EXECUTE must verify hash equality of freeze_artifacts and byte-
 
 ## Appendix A: Byte-exact materialization notes (EXECUTE)
 
-- Config files to materialize (deterministic names): `configs/exp_38123995594_pcomp_unspec.json`, `configs/exp_38123995594_ptreat_goalschema.json` - content must equal the JSON blocks in section 4.5 byte-for-byte (including whitespace/quotes). sha256 computed at freeze time; re-verified at EXECUTE and recorded in provenance.json.
+- Config files to materialize (deterministic names): `configs/exp_38123995594_pcomp_unspec.json`, `configs/exp_38123995594_ptreat_goalschema.json`. Each is produced by loading the frozen parent fixture `research/experiments/EXP-INTEL-37982024058/raw/harness_config.json` (file sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb), deep-copying it, replacing ONLY `prompts.system` with the condition string from section 4.6, and serializing deterministically (json.dumps with sort_keys=True). All other keys (positive_control probe string/count, null_control content, random_baseline action space, task.page_html, gbnf_grammar, sampling, clearing_threshold) are thereby inherited byte-for-byte. Verify at EXECUTE that the two materialized configs differ ONLY in prompts.system, and record each sha256 in provenance.json.
 - Harness delta `research/intel/run_exp_38123995594.py` must: (a) import parse_action / regex_parse_action / run_episode / make_null_producer / make_random_producer / make_model_producer / start_page_server from `research/intel/run_exp_37982024058.py` (the frozen parent runner) and MUST NOT copy or re-implement that logic (the file is a freeze artifact, so the parsing/scoring/episode semantics are bound to its sha256), (b) accept `--config`, `--model` (model paths list for 7B shards), `--cell` (comp|treat|random|nc|pc_oracle), `--episodes`, `--out`, (c) enforce GGUF digest checks against the pinned map, (d) implement navigation-repaired controls, (e) collect the comparator cell unconditionally before any treatment decision, (f) enforce the PC gates, (g) apply decision precedence 1..6 and write packet artifacts to the experiment dir, (h) compute answer_action_emission_rate from raw steps.
 - Navigation repair is mandatory and explicit: the repaired controls driver MUST call `page.goto("http://127.0.0.1:<served_port>/")` on the Playwright page before each control episode (the frozen run_episode opens with `page.goto(page.url)`; if the page were left at about:blank - the parent's defect - the control would be structurally zeroed). The candidate cells inherit the frozen parent runner's own correct navigation and are unaffected. After running, verify the control's terminal page state (`final_target_visible` for NC must be false) as an additional mechanical check.
 - EXECUTE must record the materialized sha256 of the driver and of both per-cell configs (and of the parent runner re-verified to its freeze hash) in provenance.json#code / provenance.json#fixtures.
