@@ -1,0 +1,642 @@
+{
+  "app_001": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.4
+  },
+  "app_002": {
+    "max_token_jaccard": 0.4286,
+    "max_trigram_jaccard": 0.2703
+  },
+  "app_003": {
+    "max_token_jaccard": 0.4286,
+    "max_trigram_jaccard": 0.3158
+  },
+  "app_004": {
+    "max_token_jaccard": 0.8333,
+    "max_trigram_jaccard": 0.75
+  },
+  "app_005": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2222
+  },
+  "app_006": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2619
+  },
+  "app_007": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4688
+  },
+  "app_008": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.3478
+  },
+  "app_009": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1818
+  },
+  "app_010": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.3191
+  },
+  "app_011": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.25
+  },
+  "app_012": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.3
+  },
+  "app_013": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4848
+  },
+  "app_014": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1923
+  },
+  "app_015": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2
+  },
+  "app_016": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2632
+  },
+  "app_017": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2955
+  },
+  "app_018": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1864
+  },
+  "app_019": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5484
+  },
+  "app_020": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1957
+  },
+  "app_021": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.24
+  },
+  "app_022": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2157
+  },
+  "app_023": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2037
+  },
+  "app_024": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.2182
+  },
+  "app_025": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.5217
+  },
+  "app_026": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.3667
+  },
+  "app_027": {
+    "max_token_jaccard": 0.4286,
+    "max_trigram_jaccard": 0.3171
+  },
+  "app_028": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4667
+  },
+  "app_029": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2162
+  },
+  "app_030": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2286
+  },
+  "app_031": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5
+  },
+  "app_032": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.3111
+  },
+  "app_033": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1455
+  },
+  "app_034": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.3182
+  },
+  "app_035": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1765
+  },
+  "app_036": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.2692
+  },
+  "app_037": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4848
+  },
+  "app_038": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1667
+  },
+  "app_039": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.22
+  },
+  "app_040": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.18
+  },
+  "app_041": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2157
+  },
+  "app_042": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2037
+  },
+  "app_043": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5484
+  },
+  "app_044": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1702
+  },
+  "app_045": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2075
+  },
+  "app_046": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1579
+  },
+  "app_047": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1887
+  },
+  "app_048": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.1897
+  },
+  "app_049": {
+    "max_token_jaccard": 0.6,
+    "max_trigram_jaccard": 0.6364
+  },
+  "app_050": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.3333
+  },
+  "app_051": {
+    "max_token_jaccard": 0.4286,
+    "max_trigram_jaccard": 0.3611
+  },
+  "app_052": {
+    "max_token_jaccard": 0.6667,
+    "max_trigram_jaccard": 0.56
+  },
+  "app_053": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.1765
+  },
+  "app_054": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2353
+  },
+  "app_055": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5143
+  },
+  "app_056": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2955
+  },
+  "app_057": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1633
+  },
+  "app_058": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.359
+  },
+  "app_059": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1887
+  },
+  "app_060": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.2642
+  },
+  "app_061": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5278
+  },
+  "app_062": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1702
+  },
+  "app_063": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2174
+  },
+  "app_064": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2
+  },
+  "app_065": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2115
+  },
+  "app_066": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2037
+  },
+  "app_067": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5882
+  },
+  "app_068": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1739
+  },
+  "app_069": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2041
+  },
+  "app_070": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.1636
+  },
+  "app_071": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1887
+  },
+  "app_072": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.1897
+  },
+  "app_073": {
+    "max_token_jaccard": 0.6,
+    "max_trigram_jaccard": 0.6
+  },
+  "app_074": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.3226
+  },
+  "app_075": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4
+  },
+  "app_076": {
+    "max_token_jaccard": 1.0,
+    "max_trigram_jaccard": 0.9524
+  },
+  "app_077": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2368
+  },
+  "app_078": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2353
+  },
+  "app_079": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4848
+  },
+  "app_080": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2826
+  },
+  "app_081": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.2203
+  },
+  "app_082": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.375
+  },
+  "app_083": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2105
+  },
+  "app_084": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.2778
+  },
+  "app_085": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5
+  },
+  "app_086": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1667
+  },
+  "app_087": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.2963
+  },
+  "app_088": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2857
+  },
+  "app_089": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2456
+  },
+  "app_090": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2407
+  },
+  "app_091": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5625
+  },
+  "app_092": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1702
+  },
+  "app_093": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.2807
+  },
+  "app_094": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2667
+  },
+  "app_095": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2203
+  },
+  "app_096": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.2034
+  },
+  "app_097": {
+    "max_token_jaccard": 0.6,
+    "max_trigram_jaccard": 0.6
+  },
+  "app_098": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.3448
+  },
+  "app_099": {
+    "max_token_jaccard": 0.4286,
+    "max_trigram_jaccard": 0.3158
+  },
+  "app_100": {
+    "max_token_jaccard": 0.6667,
+    "max_trigram_jaccard": 0.5357
+  },
+  "app_101": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.3333
+  },
+  "app_102": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2857
+  },
+  "app_103": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.4848
+  },
+  "app_104": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2826
+  },
+  "app_105": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1695
+  },
+  "app_106": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.3333
+  },
+  "app_107": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2453
+  },
+  "app_108": {
+    "max_token_jaccard": 0.4,
+    "max_trigram_jaccard": 0.3111
+  },
+  "app_109": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5
+  },
+  "app_110": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1667
+  },
+  "app_111": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2128
+  },
+  "app_112": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2
+  },
+  "app_113": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.283
+  },
+  "app_114": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.25
+  },
+  "app_115": {
+    "max_token_jaccard": 0.5714,
+    "max_trigram_jaccard": 0.5625
+  },
+  "app_116": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1702
+  },
+  "app_117": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.1961
+  },
+  "app_118": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.1636
+  },
+  "app_119": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2545
+  },
+  "app_120": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.22
+  },
+  "oos_001": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.4528
+  },
+  "oos_002": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.3056
+  },
+  "oos_003": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.3621
+  },
+  "oos_004": {
+    "max_token_jaccard": 0.375,
+    "max_trigram_jaccard": 0.3333
+  },
+  "oos_005": {
+    "max_token_jaccard": 0.1538,
+    "max_trigram_jaccard": 0.1724
+  },
+  "oos_006": {
+    "max_token_jaccard": 0.4545,
+    "max_trigram_jaccard": 0.3396
+  },
+  "oos_007": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.2742
+  },
+  "oos_008": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2727
+  },
+  "oos_009": {
+    "max_token_jaccard": 0.1667,
+    "max_trigram_jaccard": 0.2128
+  },
+  "oos_010": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.1875
+  },
+  "oos_011": {
+    "max_token_jaccard": 0.3636,
+    "max_trigram_jaccard": 0.4082
+  },
+  "oos_012": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.254
+  },
+  "oos_013": {
+    "max_token_jaccard": 0.1818,
+    "max_trigram_jaccard": 0.3421
+  },
+  "oos_014": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2083
+  },
+  "oos_015": {
+    "max_token_jaccard": 0.4444,
+    "max_trigram_jaccard": 0.439
+  },
+  "oos_016": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2667
+  },
+  "oos_017": {
+    "max_token_jaccard": 0.5,
+    "max_trigram_jaccard": 0.3846
+  },
+  "oos_018": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2115
+  },
+  "oos_019": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.2791
+  },
+  "oos_020": {
+    "max_token_jaccard": 0.1818,
+    "max_trigram_jaccard": 0.2097
+  },
+  "oos_021": {
+    "max_token_jaccard": 0.2857,
+    "max_trigram_jaccard": 0.1739
+  },
+  "oos_022": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.1818
+  },
+  "oos_023": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2364
+  },
+  "oos_024": {
+    "max_token_jaccard": 0.7143,
+    "max_trigram_jaccard": 0.7059
+  },
+  "oos_025": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.1695
+  },
+  "oos_026": {
+    "max_token_jaccard": 0.7143,
+    "max_trigram_jaccard": 0.6364
+  },
+  "oos_027": {
+    "max_token_jaccard": 0.2727,
+    "max_trigram_jaccard": 0.2321
+  },
+  "oos_028": {
+    "max_token_jaccard": 0.1429,
+    "max_trigram_jaccard": 0.1961
+  },
+  "oos_029": {
+    "max_token_jaccard": 0.25,
+    "max_trigram_jaccard": 0.25
+  },
+  "oos_030": {
+    "max_token_jaccard": 0.1667,
+    "max_trigram_jaccard": 0.1429
+  },
+  "oos_031": {
+    "max_token_jaccard": 0.2857,
+    "max_trigram_jaccard": 0.4
+  },
+  "oos_032": {
+    "max_token_jaccard": 0.25,
+    "max_trigram_jaccard": 0.2105
+  },
+  "oos_033": {
+    "max_token_jaccard": 0.2,
+    "max_trigram_jaccard": 0.2162
+  },
+  "oos_034": {
+    "max_token_jaccard": 0.2222,
+    "max_trigram_jaccard": 0.24
+  },
+  "oos_035": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.2321
+  },
+  "oos_036": {
+    "max_token_jaccard": 0.1818,
+    "max_trigram_jaccard": 0.2115
+  },
+  "oos_037": {
+    "max_token_jaccard": 0.1818,
+    "max_trigram_jaccard": 0.1791
+  },
+  "oos_038": {
+    "max_token_jaccard": 0.3333,
+    "max_trigram_jaccard": 0.2941
+  },
+  "oos_039": {
+    "max_token_jaccard": 0.125,
+    "max_trigram_jaccard": 0.1852
+  },
+  "oos_040": {
+    "max_token_jaccard": 0.3,
+    "max_trigram_jaccard": 0.2308
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M-N-CONTAM-FLAGGED": 9,
+    "M-CONTAM-FLAGGED-IDS": [
+      "app_004",
+      "app_049",
+      "app_052",
+      "app_073",
+      "app_076",
+      "app_097",
+      "app_100",
+      "oos_024",
+      "oos_026"
+    ],
+    "M-CONTAM-MAX-JACCARD": {
+      "max_token_jaccard": 1.0,
+      "max_trigram_jaccard": 0.9524,
+      "thresholds": {
+        "token": 0.6,
+        "trigram": 0.75
+      }
+    },
+    "M-N-PRIMARY": 113,
+    "M-N-CAL": {
+      "applicable": 57,
+      "oos": 20
+    },
+    "M-N-TEST": {
+      "applicable": 56,
+      "oos": 18
+    },
+    "M-MECH-ACC-EMBED": {
+      "value": 0.6902654867256637,
+      "numerator": 78,
+      "denominator": 113
+    },
+    "M-MECH-ACC-STRONGLEX": {
+      "value": 0.8584070796460177,
+      "numerator": 97,
+      "denominator": 113,
+      "abstentions": 11,
+      "oos_false_accepts_unflagged": 14
+    },
+    "M-MECH-ACC-LEARNED": {
+      "value": 0.13274336283185842,
+      "numerator": 15,
+      "denominator": 113
+    },
+    "M-MECH-ACC-LEXTOK": {
+      "value": 0.08849557522123894,
+      "numerator": 10,
+      "denominator": 113
+    },
+    "M-MECH-ACC-RANDOM": {
+      "value": 0.168141592920354,
+      "numerator": 19,
+      "denominator": 113
+    },
+    "M-MECH-ACC-ORACLE": {
+      "value": 1.0,
+      "numerator": 113,
+      "denominator": 113
+    },
+    "M-MECH-ACC-INCUMBENT": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 113
+    },
+    "M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX": {
+      "obs_diff": -0.16814159292035402,
+      "lower_ci": -0.3076923076923077,
+      "upper_ci": -0.02678571428571419
+    },
+    "M-PAIRED-DIFF-EMBED-MINUS-LEARNED": {
+      "obs_diff": 0.5575221238938053,
+      "lower_ci": 0.36936936936936937,
+      "upper_ci": 0.7727272727272728
+    },
+    "M-BOOTSTRAP-ARGS": {
+      "n_resamples": 10000,
+      "alpha": 0.05,
+      "seed": 3815816012,
+      "n_families": 5
+    },
+    "M-NON-TAUTOLOGY": {
+      "disagreement_count": 40,
+      "stronglex_accuracy": 0.8584070796460177
+    },
+    "M-EMBED-DISTINCT-SELECTIONS": 20,
+    "M-PC-LIVENESS-AND-INTEGRITY": {
+      "fixture_unique": true,
+      "incumbent_verbatim": 20,
+      "embed_self": 20
+    },
+    "M-NC-SHUFFLED": {
+      "nc_shuffled_label": 0.0265,
+      "nc_random_score": 0.0796
+    },
+    "M-GATE-LOGISTIC-2F": {
+      "feasible": false,
+      "t_star": 1.0,
+      "test_coverage": 0.0,
+      "test_selective_accuracy": null,
+      "test_pooled_false_accept": 0.0,
+      "test_unknown_precision": 0.24324324324324326,
+      "test_exec_app": 0,
+      "test_exec_oos": 0,
+      "test_abst_app": 56,
+      "test_abst_oos": 18,
+      "class": "GATE-NOT-MET"
+    },
+    "M-GATE-GLOBAL-THRESHOLD": {
+      "feasible": false,
+      "t_star": 1.0,
+      "test_coverage": 0.0,
+      "test_selective_accuracy": null,
+      "test_pooled_false_accept": 0.0,
+      "test_unknown_precision": 0.24324324324324326,
+      "test_exec_app": 0,
+      "test_exec_oos": 0,
+      "test_abst_app": 56,
+      "test_abst_oos": 18,
+      "class": "GATE-NOT-MET"
+    },
+    "M-ECE-GLOBAL": {
+      "value": 0.1955746732718122,
+      "note": "descriptive, NOT gated"
+    }
+  },
+  "controls": {
+    "PC-LIVENESS-AND-INTEGRITY": {
+      "expected": "fixture 20/20 unique; incumbent verbatim 20/20; embed_self 20/20",
+      "observed": "fixture_unique=True, incumbent_verbatim=20/20, embed_self=20/20",
+      "pass": true,
+      "evidence_ref": "derived/predictions.json"
+    },
+    "NC-SHUFFLED-LABEL": {
+      "expected": "<= 0.2",
+      "observed": "0.0265",
+      "pass": true,
+      "evidence_ref": "derived/predictions.json"
+    },
+    "NC-RANDOM-SCORE": {
+      "expected": "<= 0.25",
+      "observed": "0.0796",
+      "pass": true,
+      "evidence_ref": "derived/predictions.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "derived/predictions.json",
+      "role": "raw"
+    },
+    {
+      "path": "derived/contamination.json",
+      "role": "derived"
+    },
+    {
+      "path": "derived/measurements.json",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "OBS-D-GATE(2F): {\"feasible\": false, \"t_star\": 1.0, \"test_coverage\": 0.0, \"test_selective_accuracy\": null, \"test_pooled_false_accept\": 0.0, \"test_unknown_precision\": 0.24324324324324326, \"test_exec_app\": 0, \"test_exec_oos\": 0, \"test_abst_app\": 56, \"test_abst_oos\": 18, \"class\": \"GATE-NOT-MET\"}",
+    "OBS-D-GATE(global): {\"feasible\": false, \"t_star\": 1.0, \"test_coverage\": 0.0, \"test_selective_accuracy\": null, \"test_pooled_false_accept\": 0.0, \"test_unknown_precision\": 0.24324324324324326, \"test_exec_app\": 0, \"test_exec_oos\": 0, \"test_abst_app\": 56, \"test_abst_oos\": 18, \"class\": \"GATE-NOT-MET\"}",
+    "OBS-CONTAMINATION: 9/160 flagged (token>=0.6 or trigram>=0.75); ids=['app_004', 'app_049', 'app_052', 'app_073', 'app_076', 'app_097', 'app_100', 'oos_024', 'oos_026']",
+    "OBS-PRIMARY-SET: |primary|=113 (cal 57app/20oos; test 56app/18oos)",
+    "OBS-ACCURACIES: embed=78/113, stronglex=97/113 (abstain 11), learned=15/113, lextok=10/113, random=19/113, incumbent=0/113, oracle=113/113",
+    "OBS-PAIRED-DIFF-STRONGLEX: obs=-0.1681 CI=[-0.3077,-0.0268] (families=5, B=10000, seed=3815816012)",
+    "OBS-D-RESOLVER: FALSIFIES"
+  ],
+  "validity_notes": [
+    "VN-01: binding-only; no HTTP server, no task traffic; one HuggingFace model download (revision recorded).",
+    "VN-02: mechanism-identity correctness ignores parameter binding (out of scope).",
+    "VN-03: bootstrap covers resampling variability only (family-blocked, 5 blocks); one model.",
+    "VN-04: contamination screen uses token-set Jaccard (>=0.60) OR char-trigram Jaccard (>=0.75) against goal_generator surfaces plus the parent 140-goal bank; the trigram representation differs from every arm.",
+    "VN-05: ECE descriptive only, not gated.",
+    "VN-06: B-LEX-STRONG-LEARNED is a sensitivity bound, not the claim-bearing comparator.",
+    "VN-07: residual authorship limitation: the fresh-context authors had no file/tool access and their prompts contained no intent strings, but latent pretrained knowledge cannot be cryptographically excluded (see prereg V4).",
+    "VN-08: checkpoint identity: the frozen revision is requested but, as in the parent packet (which could not fetch it and resolved to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41), an unpinned fallback is recorded in env.model_revision/model_revision_resolved; results are interpretable only for the actually-resolved checkpoint (continuity with parent UNRES-04).",
+    "VN-09: in derived/predictions.json a resolver that ABSTAINS is stored as the empty string '' (not null) for stronglex_mechanism_id/learned_mechanism_id/lexical_mechanism_id; the abstention count is also recorded explicitly in M-MECH-ACC-STRONGLEX.abstentions. An abstention scores as incorrect in all accuracy metrics."
+  ],
+  "unresolved": [],
+  "gates": {
+    "V12-FREEZE-BINDING": true,
+    "V4-AUTHORSHIP-PROVENANCE": true,
+    "V3-CONTAM-SCREEN": true,
+    "V2-PRIMARY-SET": true,
+    "V1-METRIC-DEFINITION": true,
+    "V11-BOOTSTRAP-SEED": true,
+    "V9-NON-TAUTOLOGY": true,
+    "V7-TREATMENT-LIVENESS": true,
+    "V5-PC": true,
+    "V6-ORACLE-CEILING": true,
+    "V8-FLOOR-SANITY": true,
+    "V10-NC-SHUFFLE": true,
+    "V13-GATE-VALIDITY": true
+  },
+  "env": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_revision": null,
+    "model_revision_requested": "c9745ed1d9f207416be6d2e6f8de32d1f161f9bf",
+    "model_revision_resolved": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "seed": 3815816012
+  }
+}

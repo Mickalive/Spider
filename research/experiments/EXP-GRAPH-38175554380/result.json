@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "reason": "D-RESOLVER falsified in the predicted-strong-comparator direction: on the contamination-screened primary set (|primary|=113) A-EMBED-COSINE attained 78/113=0.6903 while the fixed bank-blind deterministic B-LEX-STRONG attained 97/113=0.8584; the paired family-blocked difference (embed - stronglex) is -0.1681 with 95% CI [-0.3077, -0.0268], upper bound strictly below 0. All V1-V12 validity gates PASS. D-GATE is independently GATE-NOT-MET (both G-LOGISTIC-2F and G-GLOBAL-THRESHOLD), which is a bounded separate negative and does not downgrade D-RESOLVER.",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "metrics": {
+    "M-MECH-ACC-EMBED": {"value": 0.6902654867256637, "numerator": 78, "denominator": 113, "role": "treatment A-EMBED-COSINE"},
+    "M-MECH-ACC-STRONGLEX": {"value": 0.8584070796460177, "numerator": 97, "denominator": 113, "abstentions": 11, "oos_false_accepts_unflagged": 14, "role": "PRIMARY comparator B-LEX-STRONG"},
+    "M-MECH-ACC-LEARNED": {"value": 0.13274336283185842, "numerator": 15, "denominator": 113, "role": "sensitivity B-LEX-STRONG-LEARNED"},
+    "M-MECH-ACC-LEXTOK": {"value": 0.08849557522123894, "numerator": 10, "denominator": 113, "role": "continuity weak null B-LEXTOK-JACCARD"},
+    "M-MECH-ACC-RANDOM": {"value": 0.168141592920354, "numerator": 19, "denominator": 113, "role": "floor B-RANDOM-ROLE"},
+    "M-MECH-ACC-ORACLE": {"value": 1.0, "numerator": 113, "denominator": 113, "role": "ceiling B-INTERNAL-ID-ORACLE"},
+    "M-MECH-ACC-INCUMBENT": {"value": 0.0, "numerator": 0, "denominator": 113, "role": "product baseline B-INCUMBENT-KERNEL"},
+    "M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX": {"obs_diff": -0.16814159292035402, "lower_ci": -0.3076923076923077, "upper_ci": -0.02678571428571419, "unit": "per-goal mechanism-identity correctness", "method": "paired family-blocked bootstrap, 5 resource families, B=10000, alpha=0.05, seed=3815816012"},
+    "M-PAIRED-DIFF-EMBED-MINUS-LEARNED": {"obs_diff": 0.5575221238938053, "lower_ci": 0.36936936936936937, "upper_ci": 0.7727272727272728, "unit": "per-goal mechanism-identity correctness", "method": "paired family-blocked bootstrap, B=10000, alpha=0.05, seed=3815816012"},
+    "M-BOOTSTRAP-ARGS": {"n_resamples": 10000, "alpha": 0.05, "seed": 3815816012, "n_families": 5},
+    "M-NON-TAUTOLOGY": {"disagreement_count": 40, "stronglex_accuracy": 0.8584070796460177},
+    "M-EMBED-DISTINCT-SELECTIONS": 20,
+    "M-PC-LIVENESS-AND-INTEGRITY": {"fixture_unique": true, "incumbent_verbatim": 20, "embed_self": 20},
+    "M-NC-SHUFFLED": {"nc_shuffled_label": 0.0265, "nc_random_score": 0.0796},
+    "M-N-CONTAM-FLAGGED": 9,
+    "M-CONTAM-FLAGGED-IDS": ["app_004", "app_049", "app_052", "app_073", "app_076", "app_097", "app_100", "oos_024", "oos_026"],
+    "M-CONTAM-MAX-JACCARD": {"max_token_jaccard": 1.0, "max_trigram_jaccard": 0.9524, "thresholds": {"token": 0.6, "trigram": 0.75}},
+    "M-N-PRIMARY": 113,
+    "M-N-CAL": {"applicable": 57, "oos": 20},
+    "M-N-TEST": {"applicable": 56, "oos": 18},
+    "M-GATE-LOGISTIC-2F": {"feasible": false, "t_star": 1.0, "test_coverage": 0.0, "test_selective_accuracy": null, "test_pooled_false_accept": 0.0, "test_unknown_precision": 0.24324324324324326, "test_exec_app": 0, "test_exec_oos": 0, "test_abst_app": 56, "test_abst_oos": 18, "class": "GATE-NOT-MET"},
+    "M-GATE-GLOBAL-THRESHOLD": {"feasible": false, "t_star": 1.0, "test_coverage": 0.0, "test_selective_accuracy": null, "test_pooled_false_accept": 0.0, "test_unknown_precision": 0.24324324324324326, "test_exec_app": 0, "test_exec_oos": 0, "test_abst_app": 56, "test_abst_oos": 18, "class": "GATE-NOT-MET"},
+    "M-ECE-GLOBAL": {"value": 0.1955746732718122, "note": "descriptive, NOT gated"}
+  },
+  "controls": {
+    "PC-LIVENESS-AND-INTEGRITY": {
+      "role": "positive control (plumbing/integrity)",
+      "expected": "fixture 20/20 unique mechanism ids and 20/20 unique intent strings; incumbent verbatim 20/20; embedding self-match 20/20",
+      "observed": "fixture_unique=True, incumbent_verbatim=20/20, embed_self=20/20",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-PC-LIVENESS-AND-INTEGRITY, #gates.V5-PC"
+    },
+    "NC-SHUFFLED-LABEL": {
+      "role": "negative control (permuted-label null)",
+      "expected": "<= 0.20",
+      "observed": "0.0265",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-NC-SHUFFLED, #gates.V10-NC-SHUFFLE"
+    },
+    "NC-RANDOM-SCORE": {
+      "role": "negative control (shared argmax+credit pipeline)",
+      "expected": "<= 0.25",
+      "observed": "0.0796",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-NC-SHUFFLED, #gates.V10-NC-SHUFFLE"
+    },
+    "B-LEX-STRONG": {
+      "role": "PRIMARY comparator (strong deterministic lexical resolver)",
+      "expected": "live and non-degenerate (DESIGN structural probe: abstains on 11/113, resolves 102; mis-resolves 14/38 unflagged OOS); accuracy is an outcome",
+      "observed": "accuracy 97/113=0.8584, abstentions 11/113, unflagged OOS false accepts 14/38",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-STRONGLEX, #gates.V9-NON-TAUTOLOGY"
+    },
+    "B-LEX-STRONG-LEARNED": {
+      "role": "secondary strong-comparator sensitivity (op map learned only from calibration labels)",
+      "expected": "structurally live; expected to degrade on test because test-split operation phrasings are disjoint from calibration phrasings",
+      "observed": "accuracy 15/113=0.1327",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-LEARNED"
+    },
+    "B-LEXTOK-JACCARD": {
+      "role": "continuity weak null (parent comparator)",
+      "expected": "near or below chance on the primary set",
+      "observed": "accuracy 10/113=0.0885",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-LEXTOK"
+    },
+    "B-RANDOM-ROLE": {
+      "role": "null floor",
+      "expected": "<= 0.35 (V8-FLOOR-SANITY)",
+      "observed": "accuracy 19/113=0.1681",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-RANDOM, #gates.V8-FLOOR-SANITY"
+    },
+    "B-INCUMBENT-KERNEL": {
+      "role": "product baseline (measured, not assumed; near-tautological by construction)",
+      "expected": "0.0 on the primary set (no goal is an exact intent string)",
+      "observed": "accuracy 0/113",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-INCUMBENT"
+    },
+    "B-INTERNAL-ID-ORACLE": {
+      "role": "ceiling oracle (near-tautological by construction)",
+      "expected": "1.0 on the primary set (V6-ORACLE-CEILING)",
+      "observed": "accuracy 113/113=1.0",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json#metrics.M-MECH-ACC-ORACLE, #gates.V6-ORACLE-CEILING"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-38175554380/run_experiment.py", "sha256": "17d743781d853d88c07a4f4dde16a7d2aaa9a11965a95319d227791ecb88d293", "role": "code", "note": "verbatim extraction of the frozen FROZEN RUNNER block of prereg.md; V12-B equality verified at run time"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/derived/predictions.json", "sha256": "a973e134fb56cb9627894965e666680a87c4f617ca4ffee094bf57d8db58b344", "role": "raw", "note": "per-goal selections for every arm, embedding max-cos/margin features"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/derived/contamination.json", "sha256": "6bec05b0a555adfed94ac4940f4d3181bf5f08b034a437c8a0a74ff1e4d0b59a", "role": "derived", "note": "max token and char-trigram Jaccard per goal vs all prior surfaces"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json", "sha256": "0f7c64a0e78f392a9699af4896570eb0282378fc3c6091e73e993c8d81565004", "role": "derived", "note": "full runner output object (metrics, controls, gates, env)"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/derived/kernel_registry.jsonl", "sha256": "163f534d21a12029196d8a1b0d223c1dd6c02fdc9c4614cf15922b76438bb1e5", "role": "fixture", "note": "registry built from the 20 exact fixture intents for B-INCUMBENT-KERNEL"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stdout.txt", "sha256": "ee8621d8ee53c2286b9dadaac089c45c303e17a25406bf78fda2fcb0522fafa8", "role": "raw", "note": "console stdout of the frozen runner"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stderr.txt", "sha256": "1476780f0e0e02ec605a560979f915aa9d1667d33cf384fab989c4b2860c6d6f", "role": "raw", "note": "console stderr of the frozen runner (sentence-transformers mean-pooling fallback notice)"},
+    {"path": "research/experiments/EXP-GRAPH-38175554380/raw_evidence/environment.json", "sha256": "1725188e6a76a59d9766cfb0f04f4d3569a4cf8e56aacc071965ea75752e866a", "role": "raw", "note": "installed interpreter/package versions at run time"}
+  ],
+  "observations": [
+    "OBS-CONTAMINATION: 9/160 goals flagged (token>=0.60 or trigram>=0.75); ids=['app_004','app_049','app_052','app_073','app_076','app_097','app_100','oos_024','oos_026']; within the <=20 budget (V3 PASS).",
+    "OBS-PRIMARY-SET: |primary|=113 (cal 57 app/20 oos; test 56 app/18 oos); all 5 resource families present (users 23, posts 24, comments 22, albums 22, photos 22).",
+    "OBS-ACCURACIES: embed=78/113, stronglex=97/113 (abstain 11), learned=15/113, lextok=10/113, random=19/113, incumbent=0/113, oracle=113/113.",
+    "OBS-PAIRED-DIFF-STRONGLEX: obs_diff=-0.1681, 95% CI=[-0.3077,-0.0268] (families=5, B=10000, alpha=0.05, seed=3815816012).",
+    "OBS-D-RESOLVER: FALSIFIES (upper_ci <= 0).",
+    "OBS-D-GATE(2F): {\"feasible\": false, \"t_star\": 1.0, \"test_coverage\": 0.0, \"test_selective_accuracy\": null, \"test_pooled_false_accept\": 0.0, \"test_unknown_precision\": 0.24324324324324326, \"test_exec_app\": 0, \"test_exec_oos\": 0, \"test_abst_app\": 56, \"test_abst_oos\": 18, \"class\": \"GATE-NOT-MET\"}",
+    "OBS-D-GATE(global): {\"feasible\": false, \"t_star\": 1.0, \"test_coverage\": 0.0, \"test_selective_accuracy\": null, \"test_pooled_false_accept\": 0.0, \"test_unknown_precision\": 0.24324324324324326, \"test_exec_app\": 0, \"test_exec_oos\": 0, \"test_abst_app\": 56, \"test_abst_oos\": 18, \"class\": \"GATE-NOT-MET\"}",
+    "OBS-CHECKPOINT: model_revision_requested=c9745ed1d9f207416be6d2e6f8de32d1f161f9bf (unavailable, fallback taken); model_revision=null; model_revision_resolved=1110a243fdf4706b3f48f1d95db1a4f5529b4d41 (identical to the parent packet EXP-GRAPH-38166215691's resolved checkpoint).",
+    "OBS-CONTAM-MAX: the single largest contamination score is app_076 ('Set up one new photo set.') with token-Jaccard 1.0 and trigram-Jaccard 0.9524; it is inside the flagged set and excluded from the primary set.",
+    "OBS-NON-TAUTOLOGY: B-LEX-STRONG disagrees with A-EMBED-COSINE on 40 of 113 primary goals and abstains on 11; the two arms are not a reparameterization (V9 PASS).",
+    "OBS-ALL-GATES: V1-V12 all PASS (V13 = true, calibration/test classes non-empty).",
+    "OBS-ENV: python 3.12.15, numpy 1.26.4, scipy 1.17.1, scikit-learn 1.5.1, torch 2.4.0+cpu, sentence-transformers 3.0.1, as installed for this EXECUTE.",
+    "OBS-PROVENANCE-CONTINUITY: on the contamination screen, measured flags exactly match the DESIGN structural probe (7 applicable: app_004, app_049, app_052, app_073, app_076, app_097, app_100; 2 OOS: oos_024, oos_026) and |primary|=113 exactly matches the design prediction."
+  ],
+  "validity_notes": [
+    "VN-01: binding-only; no HTTP server, no task traffic; one HuggingFace model download (revision identity recorded in env).",
+    "VN-02: mechanism-identity correctness ignores parameter binding (out of scope).",
+    "VN-03: bootstrap covers resampling variability only (family-blocked, 5 blocks); a single model and a single bank.",
+    "VN-04: contamination screen uses token-set Jaccard (>=0.60) OR char-trigram Jaccard (>=0.75) against goal_generator surfaces plus the parent 140-goal bank; the trigram representation differs from every arm mechanism.",
+    "VN-05: ECE descriptive only, not gated.",
+    "VN-06: B-LEX-STRONG-LEARNED is a sensitivity bound, not the claim-bearing comparator; its low 15/113 is expected because test-split operation phrasings are disjoint from calibration phrasings and is not evidence about B-LEX-STRONG.",
+    "VN-07: residual authorship limitation: the fresh-context authors had no file/tool access and their prompts contained no intent strings (V4 checks the prompt block for exact-intent leaks and near-prior-surface proximity), but latent pretrained knowledge cannot be cryptographically excluded (see prereg V4).",
+    "VN-08: checkpoint identity: the frozen revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf was requested but not available at EXECUTE; the runner used the unpinned fallback, resolved checkpoint 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 (same as the parent packet). Results are interpretable only for the actually-resolved checkpoint (continuity with parent UNRES-04).",
+    "VN-09: in derived/predictions.json a resolver abstention is stored as the empty string '' (not null) for stronglex/learned/lexical mechanism ids; the abstention count is also explicit in M-MECH-ACC-STRONGLEX.abstentions. An abstention scores as incorrect in all accuracy metrics.",
+    "VN-10: sentence-transformers emitted 'No sentence-transformers model found with name sentence-transformers/all-MiniLM-L6-v2. Creating a new one with mean pooling.' on stderr. The treatment remained live and non-degenerate (20 distinct valid mechanism selections; embedding self-match 20/20), so this is a load-path notice, not a dead treatment; it is preserved verbatim in raw_evidence/runner_stderr.txt for AUDIT to assess.",
+    "VN-11: the outcome FALSIFIES is a valid scientific negative, not an infrastructure failure. The frozen runner exited 0 and all V1-V12 gates PASS. The embedding treatment executed and varied; it simply scored below the strong deterministic comparator.",
+    "VN-12: 'FALSIFIES' here is the preregistered D-RESOLVER branch label (upper_ci <= 0) and is scoped to the embedding-necessity sub-claim on this single frozen 113-goal primary set, this 20-mechanism/5-family fixture and the resolved all-MiniLM-L6-v2 checkpoint; it is not a global falsification of C-SEMANTIC-RESOLVE (per packet and parent handoff distinctions).",
+    "VN-13: D-GATE is reported independently and is GATE-NOT-MET for both the two-feature logistic gate and the single-feature global-threshold gate. Per the frozen decoupling it does NOT downgrade D-RESOLVER and does not make the packet MEASUREMENT_INVALID.",
+    "VN-14: the B-LEX-STRONG comparator lexicon was authored bank-blind per the prereg V4 provenance, but its fixed synonym breadth is a curation choice; the secondary learned arm does not cleanly bound that choice on this split because its train and test phrasings are disjoint (see unresolved)."
+  ],
+  "unresolved": [
+    "Whether the authorship independence recorded by the V4 prompt/blindness checks is a true guarantee or only an operational mitigation: latent pretrained knowledge of the 20 intent strings cannot be cryptographically excluded (VN-07).",
+    "Whether the stronglex advantage generalizes beyond this 20-mechanism fixture, the 5 resource families, this single 160-goal bank and the resolved all-MiniLM-L6-v2 checkpoint; the family-blocked bootstrap has only 5 resampling blocks (VN-08).",
+    "Whether the frozen intent embeddings (the checkpoint c9745ed... was unavailable; resolved 1110a24...) would have produced a materially different A-EMBED-COSINE accuracy than the 78/113 measured here.",
+    "Whether B-LEX-STRONG's 97/113 is sensitive to the breadth/wording of its fixed synonym dictionary. The secondary learned arm cannot answer this on this split because test-split operation phrasings are disjoint from calibration ones (M-MECH-ACC-LEARNED=15/113).",
+    "Whether any applicability gate with a different score/feature geometry can ever meet test pooled_false_accept <= 0.10, unknown_precision >= 0.85 and coverage >= 0.50; both frozen gates were GATE-NOT-MET with coverage collapsing to 0 at t*=1.0.",
+    "Whether the stderr mean-pooling fallback changed embedding semantics relative to a normal sentence-transformers module load; the liveness/self-match evidence bounds this but does not settle it (VN-10)."
+  ],
+  "gates": {
+    "V1-METRIC-DEFINITION": true,
+    "V2-PRIMARY-SET": true,
+    "V3-CONTAM-SCREEN": true,
+    "V4-AUTHORSHIP-PROVENANCE": true,
+    "V5-PC": true,
+    "V6-ORACLE-CEILING": true,
+    "V7-TREATMENT-LIVENESS": true,
+    "V8-FLOOR-SANITY": true,
+    "V9-NON-TAUTOLOGY": true,
+    "V10-NC-SHUFFLE": true,
+    "V11-BOOTSTRAP-SEED": true,
+    "V12-FREEZE-BINDING": true,
+    "V13-GATE-VALIDITY": true
+  },
+  "env": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_revision": null,
+    "model_revision_requested": "c9745ed1d9f207416be6d2e6f8de32d1f161f9bf",
+    "model_revision_resolved": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "seed": 3815816012,
+    "python_version": "3.12.15",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.17.1",
+    "scikit_learn_version": "1.5.1",
+    "torch_version": "2.4.0+cpu",
+    "sentence_transformers_version": "3.0.1"
+  }
+}

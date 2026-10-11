@@ -1,0 +1,8 @@
+{
+  "python_version": "3.12.15",
+  "numpy_version": "1.26.4",
+  "scipy_version": "1.17.1",
+  "scikit_learn_version": "1.5.1",
+  "torch_version": "2.4.0+cpu",
+  "sentence_transformers_version": "3.0.1"
+}

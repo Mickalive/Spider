@@ -1,0 +1,11 @@
+{
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "obs_diff": -0.16814159292035402,
+  "lower_ci": -0.3076923076923077,
+  "upper_ci": -0.02678571428571419,
+  "embed_acc": 0.6902654867256637,
+  "stronglex_acc": 0.8584070796460177,
+  "learned_acc": 0.13274336283185842,
+  "gate2f": "GATE-NOT-MET"
+}
