@@ -157,7 +157,15 @@ def compiled_result(task: PublicTask) -> str:
     raw, final_url = http_get(task.target_url)
     version = parse_page(task, raw, final_url)
     if version is None:
-        raise ValueError("unreadable public page (abstain)")
+        detail = ""
+        if task.family == "pypi":
+            diagnostic = _PyPIHeader()
+            diagnostic.feed(raw.decode("utf-8", errors="replace"))
+            detail = " headings=" + repr([
+                h[:120] for h in diagnostic.headings if
+                ("pydantic" in h.lower() or "release files" in h.lower())
+            ][:8])
+        raise ValueError("unreadable public page (abstain)" + detail)
     return version
 
 
