@@ -9,7 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from spider.pilot_portal import DATA
+from spider.pilot_portal import EVAL_IDS
 
 ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER", "CACHE")
 
@@ -20,8 +20,8 @@ def make_plan(seed: int = 20261011, replicates: int = 1) -> list[dict]:
     rng = random.Random(seed)
     rows = []
     for replicate in range(replicates):
-        for family, entries in DATA.items():
-            for identifier in entries:
+        for family, identifiers in EVAL_IDS.items():
+            for identifier in identifiers:
                 arms = list(ARMS)
                 rng.shuffle(arms)
                 for arm in arms:
@@ -46,9 +46,12 @@ def main():
     ap.add_argument("--provider", choices=("google", "browser-use"), default="google")
     ap.add_argument("--model")
     ap.add_argument("--seeded-fixture", action="store_true")
+    ap.add_argument("--memory-path", type=Path)
     args = ap.parse_args()
 
     plan = make_plan(args.seed, args.replicates)
+    if args.seeded_fixture and args.memory_path:
+        ap.error("manual fixture seed cannot be combined with learned persistent memory")
     if len(plan) > args.max_trials:
         ap.error(f"plan has {len(plan)} trials; max-trials is {args.max_trials}")
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -70,6 +73,8 @@ def main():
             cmd += ["--model", args.model]
         if args.seeded_fixture and row["arm"] == "SPIDER":
             cmd += ["--seeded-fixture"]
+        if args.memory_path and row["arm"] == "SPIDER":
+            cmd += ["--memory-path", str(args.memory_path)]
         subprocess.run(cmd, check=True)
     print("SPIDER_PILOT_RAW_TRACES_COMPLETE (cost_accounting_complete=false; no market claim)")
 
