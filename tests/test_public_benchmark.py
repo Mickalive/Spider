@@ -9,7 +9,7 @@ from spider.registry import MechanismRegistry
 from spider.kernel import SpiderKernel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from run_public_benchmark import ARMS, STAGEHAND_ARM, plan, trial
+from run_public_benchmark import ARMS, STAGEHAND_ARM, plan, trial, confirmed_family_ready
 
 
 def examples(family):
@@ -26,6 +26,23 @@ def examples(family):
 
 
 class PublicSiteTests(unittest.TestCase):
+    def test_readiness_is_family_scoped_and_expires(self):
+        import json
+        import tempfile
+        from datetime import datetime, timedelta, timezone
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "probe.json"
+            report = {
+                "checked_at": datetime.now(timezone.utc).isoformat(),
+                "family_ready": {"github": True, "pypi": False},
+            }
+            path.write_text(json.dumps(report))
+            self.assertTrue(confirmed_family_ready(path, "github"))
+            self.assertFalse(confirmed_family_ready(path, "pypi"))
+            report["checked_at"] = (datetime.now(timezone.utc) - timedelta(days=2)).isoformat()
+            path.write_text(json.dumps(report))
+            self.assertFalse(confirmed_family_ready(path, "github"))
+
     def test_holdout_and_plan_are_reproducible(self):
         self.assertEqual(plan(8, 2), plan(8, 2))
         self.assertEqual(len(plan(8, 2)), 48)
