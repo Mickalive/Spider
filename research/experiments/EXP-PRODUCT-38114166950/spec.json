@@ -1,50 +1,106 @@
 {
   "experiment_id": "EXP-PRODUCT-38114166950",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the already-audited parameterized mechanism carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) be installed byte-identically at the shipping kernel path src/spider/kernel.py, and does the resulting shipped package satisfy a binding pre-freeze positive/negative certificate whose confidence flow is NOT defeated by the literal distill() candidate confidence 0.5 versus the default resolve() execution threshold min_confidence 0.8 - i.e. (a) distill_parameterized of >=3 induction observations yields resolve EXECUTABLE with a correctly bound non-null action for an UNSEEN held-out identifier at confidence 0.9 -> deterministic fixture execute status 200 -> verify true; (b) unsafe bindings (out-of-support / missing-parameter / wrong-intent) are refused with a recorded reason and null bound_action, and the no-applicable-mechanism case returns exactly ResolutionStatus.UNKNOWN rather than a wrong execution; (c) inherited-path counters stay honest; and (d) the installed identity equals the frozen carrier - thereby discharging blocker B1 and enabling promotion ONLY on independent audit PASS?",
+  "hypothesis": "H1 (install identity): copying the frozen carrier bytes to src/spider/kernel.py with the already-shipped src/spider/models.py (338aaf4d) and src/spider/registry.py (51fb440d) makes the installed kernel byte-identical to the carrier (sha256 718efa6a, git blob b15ed848) and different from the pre-install literal kernel (sha256 46929b3a, git blob cfec9866). H2 (confidence flow): on the same package, parameterized mechanisms distilled from >=3 successful same-intent induction observations reach confidence 0.9 >= min_confidence 0.8 and can resolve EXECUTABLE, whereas literal distill() candidates sit at exactly 0.5 < 0.8 and can never reach EXECUTABLE at the default threshold, so the shipped 0.8 gate does not suppress the parameterized path. H3 (positive inheritance on unseen identifiers): for each of the six frozen SYNTH-INDUCTION-BANK-v1 families, distill_parameterized over 4 induction observations plus the held-out parameter values (none of which were observed) resolves EXECUTABLE at confidence 0.9, binds the requested unseen identifier in the action, executes against the deterministic fixture with status 200, and verify() returns true. H4 (safe refusal): the 24 declared negative cases (out-of-support, missing-parameter, wrong-intent) are all refused - status != EXECUTABLE with a non-empty reason and null bound_action - and wrong-intent / no-applicable-mechanism inputs return exactly ResolutionStatus.UNKNOWN, not a wrong execution. H5 (attribution): the correct-binding advantage of the installed parameterized treatment over the frozen literal retrieval comparator (fx.retrieval_comparator_action) on unseen held-out identifiers is strictly positive. H6 (honesty): the installed kernel's TrajectoryCounters advance exactly as declared (retrieval_calls=3, verification_calls=2, repair_attempts=1) with model_calls=model_tokens=browser_actions=http_requests=latency_ms=0.",
+  "falsifier": "The experiment FALSIFIES the promotion certificate (and therefore the shipped-parameterized-kernel product claim) if, with the carrier demonstrably installed (AD-IDENTITY-BINDING passes): (F-H2) CONFIDENCE-FLOW fails - i.e. the parameterized mechanism confidence is below 0.8, or the literal distill() confidence is not 0.5, or no parameterized resolution reaches EXECUTABLE, so the shipped 0.8 gate defeats the parameterized path exactly as it defeats the literal path; or (F-H3) zero of the six held-out positive cases reach EXECUTABLE -> 200 -> verify true; or (F-H4) any declared negative case is executed (bound_action non-null or status EXECUTABLE) or the wrong-intent / no-applicable-mechanism case does not return UNKNOWN. A partial positive (1-5 of 6 families, with all refusals and confidence flow intact) is MIXED, not SUPPORTS. Falsification of H2-H4 is a scientific negative about the shipped package. Failure of AD-IDENTITY-BINDING, of the measured prerequisite (carrier/fixture/import present), or of NC-EMPTY-REGISTRY / NC-ZERO-CONTRAST (an instrument that cannot distinguish) is MEASUREMENT_INVALID / infrastructure, never a scientific negative.",
+  "baselines": [
+    "B-LITERAL-KERNEL (in-package causal floor): the same installed package's literal distill() path at the default min_confidence=0.8. distill() candidates carry confidence 0.5, so on the identical held-out scenarios this path yields 0 EXECUTABLE resolutions; it isolates the parameterized code path from the rest of the shipped kernel. Control id: B-LITERAL-KERNEL.",
+    "B-SHIPPED-PRE-INSTALL (strong pre-repair substrate baseline): the exact pre-install kernel bytes at base_sha d77b4f54 (src/spider/kernel.py sha256 46929b3a / git blob cfec9866), which has literal-only distill() and no distill_parameterized(). It is the actual competitor for the promotion decision. Control id: B-SHIPPED-PRE-INSTALL.",
+    "AD-TREATMENT-CONTRAST / frozen retrieval comparator: fx.retrieval_comparator_action (K=5 structural-nearest literal action, no model/network) is the strong retrieval-shaped comparator on the same unseen held-out identifiers. The discriminating measurement is correct-binding advantage (treatment_correct_binding_rate - comparator_correct_binding_rate), not a guaranteed action-inequality; a retrieval-shaped agent imitates observed identifiers and therefore binds a wrong unseen identifier. Control id: AD-TREATMENT-CONTRAST.",
+    "NC-ZERO-CONTRAST (two-sided instrument-sensitivity null): the same correct-binding formula must report EXACTLY zero advantage for a placebo (the frozen comparator used as its own treatment) AND a strictly positive advantage for a known-correct oracle action (build_action of the held-out values). A formula that always reports a win fails the placebo side; a formula that can never report a win fails the oracle side. Control id: NC-ZERO-CONTRAST.",
+    "NC-EMPTY-REGISTRY (no-applicable-mechanism null): an empty MechanismRegistry must resolve to exactly ResolutionStatus.UNKNOWN with null bound_action and a non-empty reason. Control id: NC-EMPTY-REGISTRY."
+  ],
+  "positive_control": "PC-PARAM-ROUNDTRIP (control id AD-POSITIVE-ROUNDTRIP): the six frozen families' held-out parameter values are unseen by construction; a mechanism distilled from 4 induction observations must bind the requested unseen identifier, execute with status 200, and verify true. This is the mandate's known-positive. PC-ACCOUNTING-FIDELITY is a second positive control: the installed TrajectoryCounters must move exactly as declared while the zero fields stay zero.",
+  "null_control": "NC-EMPTY-REGISTRY: with an empty MechanismRegistry, resolve(...) must return exactly ResolutionStatus.UNKNOWN (value, not merely non-EXECUTABLE), bound_action null, with a non-empty reason - proving the package abstains rather than fabricates an execution. NC-ZERO-CONTRAST is a two-sided instrument null: the correct-binding formula must yield exactly zero advantage when the comparator is used as its own treatment (placebo) and a strictly positive advantage for a known-correct oracle action. B-LITERAL-KERNEL additionally serves as a structural null for the parameterized path (0 EXECUTABLE on the same inputs).",
+  "measurement_validity": [
+    "Identity binding is the treatment-assignment check, not an outcome: AD-IDENTITY-BINDING recomputes sha256 (718efa6a...) and git blob (b15ed848...) of the installed src/spider/kernel.py after install, and requires it to differ from the pre-install sha256 (46929b3a) / blob (cfec9866). If it fails, the carrier was not installed as designed and the run is MEASUREMENT_INVALID, never FALSIFIES.",
+    "Confidence-flow is the mandate's explicit anti-defeat check: the literal 0.5 floor and the 0.8 threshold are asserted separately from the 0.9 parameterized confidence, so a passing positive cannot hide a literal path that the gate still blocks.",
+    "The positive control is near-deterministic once the audited carrier is present; therefore the treatment's own success rate is a liveness/durability check, and the discriminating quantities are the frozen-vs-installed contrast, the confidence-floor separation, the typed refusals, and the pinned identity. This bounded information ceiling is disclosed; the certificate is a promotion/integration gate, not new causal evidence about open-web behavior.",
+    "Unseen-identifier discipline: held-out values are disjoint from the induction set by construction, so a correct binding cannot be a memorized replay; the retrieval comparator on the same inputs is the strong baseline that would pass if memorized imitation sufficed.",
+    "Fixture determinism: fx.fixture_execute is a credential-free, network-free, standard-library deterministic function keyed by family grammar (200 only for a grammar-valid bound identifier; 412/422 otherwise); there is no flakiness term, so measurement variance is zero and single-run determinism is valid.",
+    "Refusal is not failure: a refused resolution (EXPLORE/UNKNOWN, null action, recorded reason) is the correct scientific behavior for unsafe inputs and is scored as a pass under AD-NEGATIVE-ROUNDTRIP; only an executed unsafe binding is a failure.",
+    "Accounting honesty: counters are read from the installed package's TrajectoryCounters after a fixed scenario; the declared increments are derived from that scenario, and all external-resource counters must remain exactly zero (no model, no browser, no network, no latency).",
+    "Freeze integrity: every file in freeze.artifact_hashes is a mutable interpretation dependency; the certificate must confirm each sha256 is unchanged, otherwise interpretation is unbound and the run is MEASUREMENT_INVALID.",
+    "Scope: the certificate makes no economics, latency or open-web generalization claim and cannot advance C-PRODUCT-ECON, C-LLM-INHERIT, C-RESIDUAL-NOVELTY or any non-product claim."
+  ],
+  "decision_rule": "Checks (control ids, all frozen): HARD GATES = AD-IDENTITY-BINDING, CONFIDENCE-FLOW, AD-POSITIVE-ROUNDTRIP, AD-NEGATIVE-ROUNDTRIP. SUPPORTING = AD-TREATMENT-CONTRAST, NC-ZERO-CONTRAST, NC-EMPTY-REGISTRY, PC-ACCOUNTING-FIDELITY, B-LITERAL-KERNEL. AD-POSITIVE-ROUNDTRIP passes only if all six families (each with >=3, in fact 4, induction observations) bind the requested unseen identifier, execute 200, and verify true. AD-NEGATIVE-ROUNDTRIP passes only if all 24 declared negative cases are refused (non-EXECUTABLE, null bound_action, non-empty reason) and wrong-intent/no-applicable-mechanism cases return exactly UNKNOWN. CONFIDENCE-FLOW passes only if every parameterized confidence is >= 0.8, the literal distill() confidence set is exactly {0.5}, and the parameterized in-support executable rate is > 0. NC-ZERO-CONTRAST passes only if the placebo advantage is exactly zero AND the oracle advantage is strictly positive. OVERALL: SUPPORTS iff all four hard gates AND all five supporting checks PASS, AND freeze-integrity holds. FALSIFIES iff AD-IDENTITY-BINDING passes AND (CONFIDENCE-FLOW fails OR AD-POSITIVE-ROUNDTRIP has 0/6 passes OR AD-NEGATIVE-ROUNDTRIP fails). MIXED iff AD-IDENTITY-BINDING, CONFIDENCE-FLOW and AD-NEGATIVE-ROUNDTRIP pass while AD-POSITIVE-ROUNDTRIP is partial (1-5/6), or any supporting check fails with all hard gates passing. MEASUREMENT_INVALID iff AD-IDENTITY-BINDING fails, a measured prerequisite is missing (carrier fixture/import/tooling absent or hash-mismatched), NC-EMPTY-REGISTRY or NC-ZERO-CONTRAST is insensitive, or freeze-integrity fails. Only SUPPORTS authorizes DIRECTOR to consider promotion of the parameterized carrier into Product Core; SUPPORTS alone does not promote - an independent AUDIT PASS is still required. Every non-SUPPORTS outcome keeps B1 open with the exact failing check(s) recorded.",
+  "product_consequence_positive": "If SUPPORTS: blocker B1 is discharged with pinned identity - the shipping kernel at src/spider/kernel.py demonstrably executes parameterized inherited bindings on unseen identifiers, refuses unsafe bindings as typed abstentions, keeps counters honest, and separates the 0.9 parameterized confidence from the 0.5 literal floor at the 0.8 gate. DIRECTOR may then (subject to independent AUDIT PASS) promote the parameterized carrier into Product Core, unblocking the C-PARAM-INHERIT consumer path so external agents can actually consume the inheritance the program has been building. The next Director cycle can then, and only then, consider the dependent C-LLM-INHERIT / readiness-gated work.",
+  "product_consequence_negative": "If FALSIFIES: the shipped package cannot execute parameterized inheritance (or cannot refuse unsafe bindings safely) even with the audited carrier installed; B1 stays open, Product Core is NOT promoted, and the finding is recorded as a bounded negative about the shipped kernel with the exact failing check(s). The next step would be a bounded repair experiment on the specific failing sub-claim (confidence flow vs positive round trip vs refusal) rather than another promotion attempt. If MEASUREMENT_INVALID: no scientific conclusion; the smallest unblock action is to restore the measured prerequisite (carrier/fixture/import/tooling or the identity install) and re-run the identical frozen certificate. If MIXED: partial capability only; promotion is withheld and the partial families/checks are recorded so the next cycle can target them. In all non-SUPPORTS cases the parameterized carrier remains experimental; no economics, latency or generalization claim is created.",
+  "estimated_cost": "~0 model calls, 0 model tokens, 0 browser actions, 0 network requests. EXECUTE is a deterministic local copy plus one stdlib Python process; the certificate runs in well under a second. No external endpoint, credential or dataset is required.",
+  "expected_information_gain": "High and decision-shaped: one cheap, high-information transaction decides the single fully-unblocked product blocker B1. It converts the audited-but-unshipped parameterized carrier into either a pinned, executable shipping artifact (discharging B1 and authorizing a promotion decision) or an explicit bounded negative naming the failing sub-claim, and it retires the long-running ambiguity about whether the 0.8 gate silently defeats the 0.9 parameterized confidence. It cannot be a duplicate of the withdrawn pre-2.0 replay-cost (P2-REPLAY-COST), blind-composition (P2-BLIND-COMPOSITION) or Mind2Web results because it asserts no cost, no transfer and no open-web behavior; identity, not narrative, is the measured object.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every branch of the decision rule is reachable and was exercised in a non-confirmatory DESIGN replica probe: AD-POSITIVE-ROUNDTRIP 6/6 (EXECUTABLE at 0.9 -> fixture 200 -> verify true), CONFIDENCE-FLOW parameterized {0.9} vs literal {0.5}, AD-NEGATIVE-ROUNDTRIP 24/24 refused with wrong-intent -> UNKNOWN, AD-TREATMENT-CONTRAST advantage 1.0, NC-ZERO-CONTRAST two-sided (placebo 0.0 / oracle 1.0), NC-EMPTY-REGISTRY -> UNKNOWN, PC-ACCOUNTING-FIDELITY exact, AD-IDENTITY-BINDING true, B-LITERAL-KERNEL 0 executable. FALSIFIES and MIXED branches are reachable because AD-POSITIVE-ROUNDTRIP is scored per family (a partial result is observable) and the confidence floor is asserted independently of the ceiling, so no single outcome collapses the rule. MEASUREMENT_INVALID is reachable because identity/prerequisite insensitivity is separately detected.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38114166950/prereg.md#8-design-satisfiability-probe-non-confirmatory",
+        "research/experiments/EXP-PRODUCT-38114166950/prereg.md#6-frozen-instrument",
+        "src/spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All measured inputs exist at base_sha d77b4f54 and their hashes were verified during DESIGN: carrier kernel 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796), carrier models 338aaf4d (== shipped src/spider/models.py), carrier registry 51fb440d (== shipped src/spider/registry.py), fixture b0ffcbba5041871f58408c4766268b31bb84cb81ccef965cd944c486fd4dd6cf, tests ff9c1561. Python 3.12 stdlib and git are available; the fixture is credential-free, network-free and deterministic, so no live endpoint or dataset is needed.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+        "src/spider/models.py",
+        "src/spider/registry.py",
+        "src/spider/__init__.py",
+        "tests/test_kernel.py"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Comparators are identified by exact code identity (git blob/sha256), not by narrative. B-LITERAL-KERNEL is the installed package's own literal distill() path (confidence exactly 0.5 < 0.8) and B-SHIPPED-PRE-INSTALL is the base_sha bytes (46929b3a / cfec9866) - both differ from the treatment by code path on identical inputs and are therefore not ceiling/floor aliases of it. The discriminating measurement is per-family correct-binding advantage over the frozen retrieval comparator, and the frozen comparator is separately nulled by NC-ZERO-CONTRAST, so a treatment win cannot be an artifact of the instrument.",
+      "evidence_refs": [
+        "src/spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Each control has a required firing and a distinguishable null state, confirmed in the DESIGN probe: positive control fires (6/6 at 0.9); literal/retrieval floor and NC-EMPTY-REGISTRY produce 0 executable / EXECUTABLE-vs-UNKNOWN contrast (empty registry -> UNKNOWN, null action, reason 'no applicable validated mechanism'); the 24 negatives are sensitive to support-grammar, missing-slot and intent-mismatch perturbations (24/24 refused, wrong-intent -> UNKNOWN); NC-ZERO-CONTRAST is genuinely two-sided (placebo advantage exactly 0.0 and oracle advantage 1.0); PC-ACCOUNTING-FIDELITY moves exactly 3/2/1 with zero external counters. No control is insensitive or shares an identity with the treatment.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38114166950/prereg.md#7-controls-and-identities",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+        "src/spider/kernel.py"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment provably functions before freeze. The carrier is the already-audited R2 parameterized kernel; in the DESIGN replica probe the installed package distilled parameterized mechanisms from 4 induction observations, resolved six unseen held-out identifiers to EXECUTABLE at confidence 0.9, executed them with fixture status 200 and verify true, and refused all 24 unsafe cases. The installed kernel bytes are byte-identical to the frozen carrier blob. Because the mechanism is deterministic and its substrate (fixture) is frozen, the confirmatory run cannot be an empty/never-firing arm.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38114166950/prereg.md#8-design-satisfiability-probe-non-confirmatory",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every mutable local interpretation dependency is listed in freeze_artifacts and exists as a file at base_sha: the carrier source oracle (kernel/models/registry in the parent harness), the frozen task bank/executor (fixture.py), the shipped import surface (src/spider/models.py, registry.py, __init__.py) and the repository regression test (tests/test_kernel.py). src/spider/kernel.py is deliberately NOT listed because EXECUTE must mutate it; its post-install identity is instead bound by the frozen constant AD-IDENTITY-BINDING, and the frozen instrument text is bound by the prereg.md hash. No unbound mutable task-bank, fixture or code dependency remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+        "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+        "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+        "src/spider/models.py",
+        "src/spider/registry.py"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/kernel.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/models.py",
+    "research/experiments/EXP-PRODUCT-37989728440/harness/audited_spider/registry.py",
+    "research/experiments/EXP-PRODUCT-37950607128/harness/fixture.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/__init__.py",
+    "tests/test_kernel.py"
+  ]
 }
