@@ -202,7 +202,8 @@ def confirmed_family_ready(path: Path, family: str) -> bool:
     except (KeyError, TypeError, ValueError):
         return False
     age = (datetime.now(timezone.utc) - checked).total_seconds()
-    return 0 <= age <= 86400 and data.get("family_ready", {}).get(family) is True
+    return (0 <= age <= 86400 and data.get("training_and_holdout_probed") is True
+            and data.get("family_ready", {}).get(family) is True)
 
 
 def main():
