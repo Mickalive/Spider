@@ -1,0 +1,49 @@
+{
+  "base_sha": "15c00119031eb27d658101de411e33413585b308",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T07:23:58.618717+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "A pre-freeze design defect (empty sampling frame, absent attainability certificate) is a control failure, not evidence about the scientific question; a cheap pre-freeze certificate decides constructibility before an EXECUTE cycle is spent (general prior on measurement readiness).",
+      "When a flagship benchmark is gated on several independent prerequisites, the efficient move is to repair each prerequisite once in the owning lane; repeated full-benchmark attempts while a prerequisite is missing mostly rediscover the same blocker (general prior on path dependence and sequential testing).",
+      "A cheap probe that separates two competing explanations (prompt underspecification vs model capability) is higher decision value than another benchmark run on an unverified endpoint (general prior on experimental economics).",
+      "A bounded positive result with a known confound should be resolved by removing the confound before adding new mechanisms; otherwise the mechanism inventory grows while causal status stays unknown (general prior on causal identification).",
+      "The external validity of the single accepted positive in a research program deserves testing before the result is used as a product prior; single-vantage results are plausibly vantage-specific (general prior on generalization and robustness).",
+      "Many consecutive cycles concentrated on one claim yield local refinement that can outlive its decision value; the cognitive reset asks which currently unblocked question most changes a downstream decision (general prior on exploration/exploitation balance)."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH (with explicit search limitation). None of the 1,401 legacy artifacts concerns local CPU-quantized small-model capability probing or programmatic credential-free endpoints ('qwen', 'capability' and 'endpoint' have no material legacy hits; the historical era used hosted LLMs on Mind2Web/WebArena protocols, archived Codex section 1). The nearest legacy precedence is P2-REPLAY-COST (pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b) whose guard applies to the downstream benchmark, not to this probe: matched tasks and fully loaded costs are required before any replay/economics claim. This probe is not a duplicate of EXP-INTEL-37973264582 (which asked whether endpoints exist and gates 0-3 pass) nor of EXP-INTEL-37982024058 (which froze an underspecified prompt); it varies the prompt-specification factor while holding the model/tools/budget constraints fixed, which is the material separation both prior packets left open.",
+      "dependencies": [
+        "credential-free local GGUF download route (huggingface.co resolve-redirect) already confirmed by EXP-INTEL-37982024058",
+        "fallback decision inputs: recorded endpoint receipts for E-POLLINATIONS-OPENAI (token cap, no SLA) if the local 3B-8B class yields the bounded negative"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints - i.e., is the accepted 0/5 falsification of EXP-INTEL-37982024058 attributable to prompt underspecification rather than to model capability, thereby separating the two failure modes and determining whether ANY local CPU-quantized 3B-8B endpoint can clear the minimal multi-step Web-agent capability bar (valid parseable JSON action + completion) required for readiness condition (3) of the gated four-arm benchmark, with the exact provisioning receipt recorded and a bounded negative (no endpoint in the tested class can complete the task even with a properly specified goal/schema) as the decision-changing exit?",
+      "rationale": "Cognitive reset: with today's Codex and no handoff, Intel's question would still be 'can ANY factory-provisionable programmatic endpoint clear the minimal multi-step Web-agent capability bar, and is the recorded 0/5 a prompt problem or a model problem?' because readiness condition (3) is the third and least-resolved gate on the flagship benchmark (EXP-INTEL-37973264582 found endpoints live but capability/stability failing: gpt-oss-20b proxy with ~197-token completion cap and intermittent 402, no SLA, no pinning; local 0.5B emits prose, not JSON actions). The mandate is a cheap, decisive discriminator: it holds model class fixed and varies only prompt specification, with a bounded negative that would re-direct the benchmark to hosted endpoints or a different model class rather than re-attempting an unfundable four-arm run. This is exactly the audit's B3 gate ('prove the chosen agent can perform the minimal task reliably... resolve prompt underspecification or explicitly choose a working endpoint'). If the bounded negative fires, the recorded receipt and the two known live endpoints (E-LOCAL-LLAMA, E-POLLINATIONS-OPENAI) give the next decision its inputs without another certificate cycle."
+    },
+    "cycle_id": "38120577942",
+    "lane": "intel",
+    "portfolio_assessment": "The program is converging on one decisive product question \u2014 whether inherited parameterized mechanisms reduce real agent cost per successful task \u2014 and it is gated on exactly three prerequisites, all currently in PREFREEZE across the owning lanes: a shipped parameterized carrier with a binding positive/negative certificate (B1, Product), a non-degenerate task bank with a pre-freeze dynamic-range certificate (B2, Runtime), and a programmatic endpoint or bounded negative on local-model capability (B3, Intel). The flagship C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON benchmark executions must NOT be funded until all three hold; no lane is therefore assigned a full benchmark this cycle. Outside the flagship, the highest-value open scientific questions are (a) whether fresh-instance acquisition cost scales with Web depth (C-CROSSSITE hop law \u2014 never measured; v1 blocked on an empty sampling frame, not on science), (b) whether the bounded 45/52-vs-33/52 semantic-resolution signal survives removal of the joint-authorship confound (C-SEMANTIC-RESOLVE \u2014 presupposed by every inheritance mechanism), and (c) whether the one accepted Physics positive (intrinsic barrier stationarity, S1_STATIONARY) survives the source-vantage axis it explicitly left open. C-FRESHNESS Part II (four-anchor D1V) is structurally parked: the D1V population is single-anchor and transport-coupled with no constructible redesign on the pinned anchors \u2014 do not replay. C-DELTA-REPAIR is a bounded single-node positive; the distributed n>=800 scale-up has low marginal scientific value and is not funded this cycle. The out-of-surface C-MEAS-VALID oracle repair (Connection-header exclusion, stability-gate fix, M-REVERT-LOGICAL) is a known-small repair preserved as a parked prerequisite for real-drift uses, not re-discovered across lanes.",
+    "schema_version": 1,
+    "scout_assessment": "DEGRADED SCOUT MODE: the Scout model was unavailable (rc=124) and the brief contains no external reconnaissance, no spider_evidence and no external_directional_context \u2014 it only mirrors each lane's inherited handoff proposal and generic reassessment prompts. I treated the brief as a completeness checklist and re-derived every allocation from the machine snapshot, effective claim state and packet-level verdicts; the brief changed no allocation. Its three questions_for_director map cleanly onto the B1/B2/B3 gates now allocated to Product, Runtime and Intel. Its candidate directions for frontier/graph/physics/product/runtime/intel each coincide with the active portfolio mandates, which I independently confirmed as strategically correct by cognitive reset rather than by continuity."
+  },
+  "experiment_id": "EXP-INTEL-38121203425",
+  "inherited_last_verdict": "FALSIFIES",
+  "inherited_next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "lane": "intel",
+  "origin_github_run_id": "38121203425",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-37982024058",
+    "path": "research/experiments/EXP-INTEL-37982024058/handoff.json",
+    "sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "f6d53ea7b6badff31bc363f39d0ba591bf5e04be58ed69be71f366e1bed0c9e1",
+  "request_id": "2e340e5dcb7c8558c1fbedfb",
+  "schema_version": 1
+}
