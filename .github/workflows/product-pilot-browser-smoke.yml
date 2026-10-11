@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "src/spider/pilot_portal.py"
+      - "src/spider/pilot_learning.py"
+      - "scripts/train_pilot_memory.py"
+      - "scripts/run_pilot_matrix.py"
       - "scripts/run_real_agent_pilot.py"
       - "scripts/smoke_compiled_browser.py"
       - ".github/workflows/product-pilot-browser-smoke.yml"
