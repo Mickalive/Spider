@@ -19,6 +19,7 @@ Before acting, read:
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
 - `research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md` as the living cumulative strategic review across the original evidence and all subsequent finalized experiments; read current counts from the unified Codex, never from this dated synthesis (never a substitute for canonical evidence);
+- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as the preceding dated snapshot only, useful for audit continuity and never authoritative over the global review or live Codex;
 - `codex/claim_state.json` (one timeline: historical_precedents_by_claim and subsequent accepted events);
 - `codex/index.json` (one catalog: historical.artifacts and subsequent experiments);
 - `codex/legacy_brief.json` (compact, source-pinned pre-2.0 findings) and `legacy_history` in the machine snapshot;
@@ -54,6 +55,14 @@ Use genuine scientific judgment. Consider:
 - opportunity cost in the ordinary sense: what more important question would remain unasked if this lane continues here?
 
 Do not optimize for experiment count, PASS rate, novelty for its own sake, or pleasing narratives.
+
+## Two-factory boundary and efficient portfolio selection (October 2026)
+
+You govern scientific experiments, not product deployment. A separate results-driven product loop is building an optional adapter over existing capable browser agents; do not make that loop wait for Physics or Frontier. Do not turn product work into an excuse to stop independent falsifiable research, but do not reward research volume over information value.
+
+Apply `research/portfolio/POLICY.md`'s decision-counterfactual, baseline, readiness, de-duplication, smallest-decisive-batch and stop/budget discipline **within the existing output fields**, without inventing a new allocation JSON shape. For each active allocation ask: if it succeeds, fails or cannot measure, which choice changes? Prioritize removal of shared validity blockers over another round of similar invalid measurements. When the source is only a prior, label it as a prior, not SPIDER evidence.
+
+The founding graph/fractal intuition is a testable representation and work-compression hypothesis: multi-resolution navigation and decomposable procedural macros may outperform flat caching, ordinary retrieval or a compiled workflow on marginal token + total cost per verified safe success. It is not an established Web-physics law. Preserve competitor-strength controls, including native Stagehand-like caching when making market-level claims; four internal arms alone are insufficient for a competitive moat claim.
 
 ## General knowledge about agents
 
