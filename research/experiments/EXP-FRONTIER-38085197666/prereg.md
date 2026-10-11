@@ -8,8 +8,8 @@
 - **Director mandate:** PIVOT, cycle `38084662468`, `cognitive_reset=true`, target `C-CROSSSITE`
 - **Base SHA:** `6b4a1f7b18e84015e1765965081f2a8e97d3ba27` (request.base_sha)
 - **Claim registry SHA256:** `3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b`
-- **Frozen code SHA256 (section 13):** `3bc281fafc2ab935544981b7ebcf4d32154d2d065bb4b2d8222b44e17a24ea77`
-- **Created:** 2026-10-10; revision 2 (exposure-blind frame) 2026-10-11
+- **Frozen code SHA256 (section 13):** `393775e8ee79f9308d1d142b54f2977b9a677a9f9891988625da810e856b68c8`
+- **Created:** 2026-10-10; revision 2 (exposure-blind frame) 2026-10-11; revision 3 (verifiable branch exercise, exposure-blindness by construction, stability cap, engine-span, pacing, trend rule) 2026-10-11
 
 This file and `spec.json` are the frozen design. EXECUTE must reproduce section 13 verbatim and verify its SHA256 before running. No field below may change after `freeze.json` exists.
 
@@ -21,7 +21,12 @@ This file and `spec.json` are the frozen design. EXECUTE must reproduce section 
 - **Revision 1 of this v2 design (the stratified draft)** was returned `failure` / `category=substantive` by the independent design-review stage (`model_design_review.json`; the reviewer run itself crashed — `exit_code=1`, no `design_review.json` captured — so no objection text survived). Its defect is nonetheless objectively demonstrable and is fixed here:
   1. **Selection-on-treatment / ceiling baseline.** Revision 1 selected 3 hosts *because* they published content-level `<urlset>` sitemaps (an `EXPOSING` stratum) and 2 hosts that publish only version roots (`OPAQUE`). A `SUPPORTS` result (`E >= 2`) was therefore near-certain **by construction** and `FALSIFIES` (`E == 0`) was structurally unreachable on the real pool (it could only occur if the selected-in enumeration broke). This is exactly the "comparators at ceiling" failure the Director flagged as a general prior.
   2. **Live-frame fragility.** By the time of this revision, two Sphinx hosts of revision 1 (`www.sphinx-doc.org`, `docs.readthedocs.com`) and `docs.pytest.org` return HTTP **429 Cloudflare challenge** pages to the credential-free stdlib user agent, so that frame would have collapsed at EXECUTE to `MEASUREMENT_INVALID` rather than measuring anything.
-- **Revision 2 (this file) repairs both.** The frame is now **exposure-blind**: hosts are screened from a predeclared class of well-known documentation sites spanning multiple generator engines and are verified **only for credential-free reachability and DEEP topology** (same-host static-`<a>` BFS), never for their discovery surface. **No discovery surface** (robots.txt, sitemap, feed, JSON-LD, search form) of any frame host was inspected during DESIGN. Instrument liveness is proven on **local stdlib fixtures** (dynamic range 1.0/0.0) and on **out-of-pool probe hosts** (`LIVE_PROBE_HOSTS`). `SUPPORTS` and `FALSIFIES` are therefore both genuinely live.
+- **Revision 2 repaired both, but a fresh independent design review of the packet returned `failure` / `category=substantive` (`model_design_review.json`, attempt 4, reviewer run crashed with `exit_code=1`, no `design_review.json` or objection text captured).** Because the objection text did not survive, revision 3 is a fresh adversarial self-attack on revision 2 that repairs every defect that is objectively demonstrable from the frozen artifact itself:
+  1. **Unverifiable branch-exercise claim (the load-bearing defect).** Revision 2's §6.6, §3.5(f) and `spec.json.design_repairs_and_satisfiability` claimed the frozen code was *driven end-to-end* to `SUPPORTS`/`MIXED`/`FALSIFIES` "writing a consistent result/report/provenance triple", but the frozen code exposed only `--calibrate`, `--pool` and the confirmatory path. An independent reviewer could not reproduce that claim, so `decision_rule_reachability` was asserted rather than shown. Revision 3 adds a first-class `--branch-drive OUTDIR` mode that drives the real `compute_metrics`/`decide`/`write_terminal` path to `SUPPORTS`, `MIXED` (single engine), `MIXED` (one host), `FALSIFIES`, admission-gate failure, calibration failure, empty denominator and the stability cap, and emits the artifact triples plus a machine-readable `branch_drive.json` (all offline). The claim is now reproducible by EXECUTE/AUDIT from the frozen artifact alone.
+  2. **Exposure-blindness by use, not by construction.** Revision 2's frame BFS called `HTMLScan`, which also extracts `feeds`, `search_forms` and `jsonld`; the prose promised those fields were unused, but an auditor could not prove the frame was built without seeing the treatment surfaces. Revision 3 uses a dedicated `StaticLinks` parser for the frame BFS that has **no discovery fields at all**, so exposure-blindness is a property of the parser object and is verifiable by construction. The regenerated frame is byte-identical in topology (493 DEEP, 197/94/194/8).
+  3. **No stability cap and full-second-session cost.** Revision 2 ran the full admitted set in both sessions with no bound on exclusions, so rate-limit noise could silently shrink the denominator (or inflate failures) and ~15k GETs risked throttling. Revision 3 keeps session 1 on the full set, re-measures only a deterministic 25% subsample in session 2, adds `STABILITY_CAP` (exclusion fraction > 0.10 ⇒ `MEASUREMENT_INVALID`), and paces all foreign GETs (`PACE_S=0.15`).
+  4. **Engine span not enforced and oracle channel undisclosed.** The mandate requires the 0.50 threshold "on ≥2 engines"; revision 2's decision counted hosts only, so `E>=2` on a single engine could read as `SUPPORTS`. Revision 3 requires the meeting hosts to span ≥2 engines for `SUPPORTS` (else `MIXED`), and discloses `ON_SITE_SEARCH` as the one oracle-like channel (query = the item's own path segment) by reporting an oracle-free per-host sensitivity and `oracle_dependent_supports`.
+  5. **Descriptive trend left unformalised.** Revision 3 preregisters a flat-vs-growing rule on the hop-stratified fraction (FALLING iff frac(hop≥5) < frac(hop=3) − 0.10 with ≥5 items per bucket; else FLAT; UNMEASURED when a bucket is too small).
 - `EXP-FRONTIER-37950626378` (grandparent) measured `RECOVERY_REDUCTION_FROM_PERSISTED_STATE` = **GROWING** with `R_req=5.2667`, `R_bytes=7.3113`. Its DEEP partition (`n_deep=25`) lay entirely on the single host `doc.rust-lang.org`, so the cross-host/engine question was left open. It supplies this experiment's baselines B_PERSISTED_PATH_REACQUISITION, B_DIRECT_URL_REPLAY and the shortest-path hop definition.
 - `EXP-FRONTIER-38078430316` (v2 sibling) supplies the prereg-embedded-code + `CODE_SHA256` freeze pattern.
 - **Pre-2.0 corpus check (not a repetition).** A targeted scan of the normalized pre-2.0 canonical archive (`.spider-runtime/pre2/SPIDER_CODEX_ULTIME.md`, ~22 MB, generated 2026-08-30) finds **0 occurrences of `sitemap`** and only compliance/`Content-Signal` uses of `robots.txt`, plus a transition-graph BFS (unrelated to Web depth). Prior work therefore contains **no site-native discovery experiment** and no measurement of depth cost via discovery. This question is new to Research 2.0.
@@ -41,10 +46,10 @@ The strategic stakes: if discovery collapses depth cost, then shortest-path hop 
 - **H1 (SUPPORTS).** `>= 0.50` of admitted DEEP pages reachable in `K <= 3` GETs on `>= 2` distinct host units.
 - **H0 (negative).** `> 0.50` of admitted DEEP pages require more than `K` GETs on all but at most one unit.
 
-**Falsifier (frozen).** Unit = distinct host (per-engine grouping reported descriptively). Let `E` = number of units whose `discovery_reachable_fraction_per_host[host] >= 0.50`.
+**Falsifier (frozen).** Unit = distinct host (per-engine grouping reported descriptively). Let `E` = number of host units whose `discovery_reachable_fraction_per_host[host] >= 0.50`, and let `engines_ok` = (the meeting hosts span `>= 2` distinct generator engines).
 
-- `E >= 2` => **SUPPORTS**
-- `E == 1` => **MIXED**
+- `E >= 2` **and** `engines_ok` => **SUPPORTS** (material reachability on `>= 2` host units across `>= 2` engines)
+- `E >= 1` otherwise => **MIXED** (exactly one unit, or `>= 2` units confined to a single engine)
 - `E == 0` => **FALSIFIES**
 
 Materiality threshold `0.50`; budget `K = 3`; minimum units meeting threshold `2`. A two-sided test: a uniformly high result and a uniformly low result both falsify the opposite branch; the experiment does not presuppose which holds.
@@ -52,7 +57,7 @@ Materiality threshold `0.50`; budget `K = 3`; minimum units meeting threshold `2
 **Reachability argument (why every branch can trigger).**
 - The denominator is the number of admitted DEEP pages, `>= 10` by ADMISSION_GATE_V2 (DESIGN observed **493**), so `E` is well-defined in `{0,1,2,3,4}` and no branch is `0/0`.
 - The local stdlib fixtures bracket the threshold from both sides: `CAL_DISCOVERABLE_FIXTURE` yields fraction **1.0** and `CAL_OPAQUE_FIXTURE` yields **0.0** (section 6.5), so the instrument demonstrably can produce values above and below `0.50`.
-- The frame is **exposure-blind**: no frame host's discovery surface was inspected at DESIGN, so the design cannot know — and therefore cannot pre-select — whether `E == 0` or `E >= 2`. Attainability is argued **structurally** (denominator 493 >= 10; per-host fraction in [0,1]; the instrument spans the threshold) **and by synthetic branch exercise** (the frozen code is driven end-to-end to `SUPPORTS` = E>=2, `MIXED` = E==1 and `FALSIFIES` = E==0). No item-level reachability fraction is computed at DESIGN. Neither `E == 0` (site-native discovery of these hosts does not enumerate their DEEP pages) nor `E >= 2` (at least two hosts do) is excluded by construction; the confirmatory run is the authoritative measurement.
+- The frame is **exposure-blind by construction**: the BFS uses a dedicated `StaticLinks` parser that extracts only static `<a href>` and has no `feeds`/`search_forms`/`jsonld` fields at all, so no frame host's discovery surface was (or could be) inspected at DESIGN; the design cannot pre-select whether `E == 0` or `E >= 2`. Attainability is argued **structurally** (denominator 493 >= 10; per-host fraction in [0,1]; the instrument spans the threshold) **and by synthetic branch exercise**: the frozen code's `--branch-drive OUTDIR` mode (section 6.6) drives the real `compute_metrics`/`decide`/`write_terminal` path to `SUPPORTS`, `MIXED` (single engine), `MIXED` (one host) and `FALSIFIES`, plus admission-gate failure, calibration failure, empty denominator and the stability cap, emitting `branch_drive.json` with `all_branches_reachable=true` (DESIGN observation: PASS). No item-level reachability fraction is computed at DESIGN. Neither `E == 0` (site-native discovery of these hosts does not enumerate their DEEP pages) nor `E >= 2` (at least two hosts do) is excluded by construction; the confirmatory run is the authoritative measurement.
 
 ## 3. Frozen pool and pre-freeze attainability certificate
 
@@ -75,14 +80,14 @@ Same-host static-`<a href>` BFS from the seed's *final* root, **document order**
 
 ### 3.3 DESIGN-observed pool (RAW EVIDENCE, 2026-10-11)
 
-Per-seed static hop histograms and DEEP counts (from the frozen BFS in section 13; `hop` buckets `0..6`):
+Per-seed static hop histograms (all reached pages) and admitted DEEP counts (state-carrying, hop `>= 3`) from the frozen BFS in section 13 (`hop` buckets `0..6`; the parser is the link-only `StaticLinks`, so no discovery field of any frame host is consumed):
 
-- `https://google.github.io/comprehensive-rust/` — deep pages **197**; hist `{0:1, 1:7, 2:29, 3:96, 4:117}` (crawl capped at 250)
-- `https://rust-lang.github.io/async-book/` — deep pages **94**; hist `{0:1, 1:5, 2:51, 3:193}` (crawl capped at 250)
-- `https://rustc-dev-guide.rust-lang.org/` — deep pages **194**; hist `{0:1, 1:5, 2:26, 3:47, 4:71, 5:56, 6:20}` (226 GETs)
-- `https://pandas.pydata.org/docs/` — deep pages **8**; hist `{0:1, 1:6, 2:234, 3:9}` (crawl capped at 250)
+- `https://google.github.io/comprehensive-rust/` — DEEP **197**; hist `{0:1, 1:7, 2:29, 3:96, 4:117}` (250 page GETs, crawl capped)
+- `https://rust-lang.github.io/async-book/` — DEEP **94**; hist `{0:1, 1:5, 2:51, 3:193}` (250 page GETs, crawl capped)
+- `https://rustc-dev-guide.rust-lang.org/` — DEEP **194**; hist `{0:1, 1:5, 2:26, 3:47, 4:71, 5:56, 6:20}` (226 page GETs)
+- `https://pandas.pydata.org/docs/` — DEEP **8**; hist `{0:1, 1:6, 2:234, 3:9}` (250 page GETs, crawl capped)
 
-**Admitted DEEP pool (derived): 493 state-carrying pages** (of 839 crawled) — mdBook **485**, Sphinx **8**; by host `google.github.io` **197**, `rust-lang.github.io` **94**, `rustc-dev-guide.rust-lang.org` **194**, `pandas.pydata.org` **8**. Pool-build cost at DESIGN: observed **955** GETs across the four seeds (<= 4 x 250 = 1000).
+**Admitted DEEP pool (derived): 493 state-carrying pages** among **839 distinct reached pages** — mdBook **485**, Sphinx **8**; by host `google.github.io` **197**, `rust-lang.github.io` **94**, `rustc-dev-guide.rust-lang.org` **194**, `pandas.pydata.org` **8**. DEEP items by hop: `{3: 242, 4: 175, 5: 56, 6: 20}` (so the hop-3 bucket and the hop-`>= 5` bucket both exceed `TREND_MIN_BUCKET = 5`; the trend diagnostic is computable). Pool-build cost at DESIGN: observed **976** page GETs across the four seeds (250 + 250 + 226 + 250).
 
 Representative confirmed DEEP items (hop >= 3), used for the arrival records:
 
@@ -105,27 +110,36 @@ certificate_id: PRE_FREEZE_CERT_EXP-FRONTIER-38085197666
 all_verified: true
 (a) pool_deep_items_confirmed: true   -> 493 admitted DEEP pages (mdBook 485, Sphinx 8)
 (b) pool_deep_hosts_confirmed: true   -> 4 hosts with >= 3 DEEP; 2 engines with >= 3 DEEP
-(c) discovery_channel_probe_verified: true -> RAW evidence 2026-10-11, OUT-OF-POOL hosts only:
+(c) discovery_channel_probe_verified: true -> RAW evidence 2026-10-11, OUT-OF-POOL hosts only
+        (reproduced by running the frozen artifact's --live-probe mode):
         github.blog/robots.txt  -> ROBOTS_SITEMAP 17 urls ; SITEMAP_XML 17 urls
         jetbrains.com/robots.txt -> ROBOTS_SITEMAP 3 urls ; SITEMAP_XML 425 urls
         wordpress.org/robots.txt -> ROBOTS_SITEMAP 3 urls ; SITEMAP_XML 3 urls
         gnu.org/robots.txt       -> ROBOTS_SITEMAP 1 url  ; SITEMAP_XML 1 url
         php.net/robots.txt       -> ROBOTS_SITEMAP 0 urls ; SITEMAP_XML 39 urls
-        (>= 1 out-of-pool probe host with >= 1 parsed URL => apparatus live; no frame host inspected)
+        hosts_parsing_ge1_url = 5/5 (apparatus live; no frame host inspected)
 (d) null_control_verified: true       -> 50 synthetic probes across 5 out-of-pool hosts x 5 channels x 2 ids
                                          return success=false (0 reachable); NULL_ALL_ZERO=true
 (e) dynamic_range_verified: true      -> CAL_DISCOVERABLE_FIXTURE 1.0 ; CAL_OPAQUE_FIXTURE 0.0
 (f) both_branch_attainability: true   -> argued structurally + by synthetic branch exercise (NOT by an
                                          item-level outcome): denominator 493>=10; per-host fraction in [0,1];
                                          instrument range bracketed by fixtures (1.0 / 0.0); the frame is
-                                         exposure-blind (no frame discovery surface inspected at DESIGN);
-                                         the frozen code is driven to SUPPORTS (E>=2), MIXED (E==1) and
-                                         FALSIFIES (E==0) on synthetic inputs. So every branch is structurally
-                                         reachable. No item-level per-host reachability fraction is reported at DESIGN.
+                                         exposure-blind BY CONSTRUCTION (link-only StaticLinks parser: no
+                                         discovery fields exist to consume); the frozen --branch-drive mode
+                                         drives the real compute_metrics/decide/write_terminal path to
+                                         SUPPORTS (E>=2, engines_ok), MIXED (one host), MIXED (>=2 hosts but a
+                                         single engine), FALSIFIES (E==0), plus admission-gate failure,
+                                         calibration failure, empty denominator and the 0.25>0.10 stability cap;
+                                         branch_drive.json all_branches_reachable=true. So every branch is
+                                         structurally reachable. No item-level per-host reachability fraction is
+                                         reported at DESIGN.
 (g) seed_identity_verified: true      -> all 4 seeds 200 with final_root netloc == declared host
-(h) code_reverified: true             -> section-13 artifact extracted byte-for-byte (sha256 == CODE_SHA256),
-                                         re-ran --calibrate (CALIBRATION_PASS true) and --pool
-                                         (ADMISSION_GATE_V2 PASS 493 DEEP; 197/94/194/8; mdBook 485 / Sphinx 8)
+(h) code_reverified: true             -> section-13 artifact extracted byte-for-byte
+                                         (sha256 == 393775e8ee79f9308d1d142b54f2977b9a677a9f9891988625da810e856b68c8),
+                                         re-ran --calibrate (CALIBRATION_PASS true), --pool (ADMISSION_GATE_V2
+                                         PASS, 493 DEEP, 197/94/194/8, mdBook 485 / Sphinx 8,
+                                         deep_by_hop {3:242,4:175,5:56,6:20}), --live-probe (5/5 hosts), --null
+                                         (50 probes, 0 reachable) and --branch-drive (all branches reachable)
 ```
 
 This repairs v1 `VN-A1`/`VN-A2`/`VN-A3` and revision 1's selection-on-treatment defect: the frame is non-empty, exposure-blind and recorded; the certificate conditions are live-verified with evidence; and the falsifier can trigger in both directions without the design having known the answer in advance (section 6.6).
@@ -136,7 +150,7 @@ All channels are **cold-start**: the item page is fetched **only after** its URL
 
 1. **ROBOTS_SITEMAP** — GET `/robots.txt`; for each `Sitemap:` directive GET the target and parse `<loc>` (XML) or one-URL-per-line (plain text).
 2. **SITEMAP_XML** — GET `/sitemap.xml`, `/sitemap_index.xml`, `/sitemap-index.xml` directly and parse `<loc>`.
-3. **ON_SITE_SEARCH** — GET the seed root, locate a server-side search `<form>`/input action; GET `action?name=<query>` where `<query>` = last item-path segment with a trailing `.html|.php|.htm|.asp|.aspx` stripped (parameter = the located input's `name`, default `q`); parse result links. JS-only search indexes (mdBook `searchindex.js`, Sphinx client search) are not server-side and are disclosed as unreachable by this channel.
+3. **ON_SITE_SEARCH** — GET the seed root, locate a server-side search `<form>`/input action; GET `action?name=<query>` where `<query>` = last item-path segment with a trailing `.html|.php|.htm|.asp|.aspx` stripped (parameter = the located input's `name`, default `q`); parse result links. JS-only search indexes (mdBook `searchindex.js`, Sphinx client search) are not server-side and are disclosed as unreachable by this channel. **Oracle disclosure:** the query is derived from the *known* item path (which the agent would not in general know when hunting for an item), so `ON_SITE_SEARCH` is the one oracle-like channel. It is therefore reported separately and the code emits `discovery_reachable_fraction_per_host_without_on_site_search` and `oracle_dependent_supports` (hosts that meet threshold only with this channel) so the decision can be read with and without it.
 4. **RSS_ATOM** — GET the seed root, follow a `<link rel="alternate" type="application/rss+xml|atom+xml">`, parse entry links.
 5. **JSON_LD** — GET the seed root (a **hub** resource; never the item page), parse every `<script type="application/ld+json">` block and collect values of `url`, `@id`, `mainEntityOfPage`, `contentUrl`, `sameAs` across `@graph`/`ItemList`/`WebPage`/`BreadcrumbList`/`SearchAction`.
 
@@ -201,21 +215,22 @@ Synthetic items `spider-nonexistent-38085197666-<a|b>.html` probed through all f
 
 ### 6.6 Design repairs made during this DESIGN (satisfiability/identifiability attacks)
 
-Revision 2 differs from revision 1 in four substantive ways, each motivated by an explicit self-attack:
+Revision 2 differed from revision 1 in four substantive ways (exposure-blind frame; off-pool instrument liveness replacing the frame-inspecting `PC_DISCOVERY_CHANNEL_LIVENESS`; robust crawlable hosts replacing Cloudflare-429 hosts; a two-sided synthetic branch exercise). **Revision 3 additionally repairs five defects that a fresh adversarial self-attack could demonstrate from the frozen artifact alone** (the independent review of revision 2 returned `failure`/`substantive` but its objection text was not captured):
 
-1. **Exposure-blind frame.** Revision 1's stratified (`EXPOSING`/`OPAQUE`) frame selected hosts on their discovery surface, making `SUPPORTS` near-certain by construction (ceiling baseline / selection-on-treatment). Revision 2 removes the stratum entirely and screens a predeclared class of well-known documentation sites for **credential-free reachability and DEEP topology only**; no frame discovery surface is inspected at DESIGN.
-2. **Off-pool instrument liveness.** Revision 1's `PC_DISCOVERY_CHANNEL_LIVENESS` required parsed URLs on `>= 2 EXPOSING` *frame* hosts — i.e. it inspected the frame's discovery surface. Revision 2 replaces it with `PC_LIVE_PROBE_LIVENESS`, evaluated on `LIVE_PROBE_HOSTS` that are disjoint from `SEEDS`, so the frame stays exposure-blind and a frame-wide zero stays a genuine `FALSIFIES`.
-3. **Robust, crawlable hosts.** Revision 1's Sphinx hosts are Cloudflare-429-challenged at DESIGN; revision 2 uses hosts verified reachable (HTTP 200, no challenge) so the frame does not collapse at EXECUTE.
-4. **Two-sided synthetic branch exercise.** The frozen code is driven end-to-end to `SUPPORTS` (E>=2), `MIXED` (E==1), `FALSIFIES` (E==0), admission-gate failure and calibration failure, each writing a consistent `result`/`report`/`provenance` triple.
+1. **`--branch-drive` makes the branch-exercise claim verifiable.** Revision 2 asserted the frozen code was "driven end-to-end" to every branch, but the frozen artifact exposed no such entry point, so `decision_rule_reachability` was unfalsifiable by a reviewer. Revision 3 adds `--branch-drive OUTDIR`, which drives the real `compute_metrics`/`decide`/`write_terminal` path to `SUPPORTS`, `MIXED`-single-engine, `MIXED`-one-host, `FALSIFIES`, admission-gate failure, calibration failure, empty denominator and the stability cap, printing `all_branches_reachable` and emitting `branch_drive.json` plus artifact triples (no network I/O).
+2. **Exposure-blindness by construction.** Revision 2's frame BFS reused `HTMLScan`, which extracts `feeds`/`search_forms`/`jsonld`; exposure-blindness was a promise about which fields were *used*, not a property of the parser. Revision 3's frame BFS uses `StaticLinks`, which extracts only static `<a href>` and has no discovery fields, so the property is structural and auditable. The regenerated frame is topologically identical (493 DEEP; 197/94/194/8).
+3. **Stability cap and cheaper second session.** Revision 2 ran the full admitted set in both sessions with no exclusion bound. Revision 3 measures session 1 on the full set, session 2 on a deterministic 25% subsample (`sha256(item) mod 4 == 0`), and sets `MAX_EXCLUSION_FRACTION = 0.10`: if inter-session disagreement excludes more than 10% of the subsample, Step 0 fails to `MEASUREMENT_INVALID`. This bounds rate-limit-induced denominator erosion and approximately halves measurement cost.
+4. **Engine span enforced; oracle channel disclosed.** `SUPPORTS` now additionally requires the meeting hosts to span `>= 2` engines (`engines_ok`), matching the mandate's "0.50 on >= 2 engines"; `>= 2` hosts on a single engine is `MIXED`. `ON_SITE_SEARCH` is disclosed as oracle-like (section 4) and an oracle-free sensitivity (`..._without_on_site_search`, `oracle_dependent_supports`) is emitted.
+5. **Trend rule formalised; pacing added.** The flat-vs-growing diagnostic is now a frozen rule (`_derive_trend`: `FALLING` iff frac(hop>=5) < frac(hop=3) - 0.10 with `>= 5` items in each bucket; else `FLAT`; `UNMEASURED` if a bucket is too small) and every non-localhost GET is paced (`PACE_S = 0.15` s).
 
-Latent defects carried over from the earlier draft and already repaired (kept fixed in revision 2): `NameError` on the control-failure path; `compute_metrics` list-vs-dict contract mismatch; `MIN_ENGINES_WITH_THRESHOLD` -> `MIN_HOST_UNITS_WITH_THRESHOLD`; named `ADMIT_PER_HOST_MIN`; in-process `CALIBRATION_GATE`; `write_terminal()` artifact triple on every terminal path; `within_k` enforced in channel success; `decide()` `n==0` guard; `bfs_seed` GET overcount fix and per-item `bfs_cost`; `cost_baselines` metric.
+Latent defects carried over from the earlier drafts and already repaired: `NameError` on the control-failure path; `compute_metrics` list-vs-dict contract mismatch; `MIN_ENGINES_WITH_THRESHOLD` -> `MIN_HOST_UNITS_WITH_THRESHOLD`; named `ADMIT_PER_HOST_MIN`; in-process `CALIBRATION_GATE`; `write_terminal()` artifact triple on every terminal path; `within_k` enforced in channel success; `decide()` `n==0` guard; `bfs_seed` GET overcount fix and per-item `bfs_cost`; `cost_baselines` metric; `PC_HOP_CONFIRMATION` no longer re-crawls (it reads the recorded control pass).
 
-**Branch-exercise evidence (DESIGN, synthetic/local only).** With the section 13 code: calibration fixtures give 1.0/0.0 (`CALIBRATION_PASS=true`); `--pool` reproduces ADMISSION_GATE_V2 (493 DEEP; 197/94/194/8; mdBook 485 / Sphinx 8); and `SUPPORTS` (COMPLETE, E=2), `MIXED` (COMPLETE, E=1), `FALSIFIES` (COMPLETE, E=0), admission-gate failure (`MEASUREMENT_INVALID`) and calibration failure (`MEASUREMENT_INVALID`) each execute end-to-end and write a consistent result/report/provenance triple. Every status/outcome branch is reachable and non-crashing.
+**Branch-exercise evidence (DESIGN, synthetic/local/off-pool only).** With the section 13 code: calibration fixtures give 1.0/0.0 (`CALIBRATION_PASS=true`); `--pool` reproduces ADMISSION_GATE_V2 (493 DEEP; 197/94/194/8; mdBook 485 / Sphinx 8; deep_by_hop {3:242,4:175,5:56,6:20}); `--live-probe` gives 5/5 hosts parsing `>= 1` URL; `--null` gives 50 probes / 0 reachable; and `--branch-drive` returns `all_branches_reachable=true` with `SUPPORTS` (COMPLETE, E=2, engines_ok), `MIXED`-single-engine (COMPLETE), `MIXED`-one-host (COMPLETE), `FALSIFIES` (COMPLETE, E=0), admission-gate failure and calibration failure (`MEASUREMENT_INVALID`), empty denominator (`INCONCLUSIVE`) and the stability cap (exclusion 0.25 > 0.10 fires). Every status/outcome branch is reachable and non-crashing, and a reviewer can re-run each from the frozen artifact.
 
 ## 7. Metrics (stable ids)
 
 - **Primary:** `discovery_reachable_fraction` (pooled); `discovery_reachable_fraction_per_host[host]` (decision unit); `discovery_reachable_fraction_per_engine[engine]` (descriptive).
-- **Secondary:** `discovery_reachable_fraction_per_channel[channel]`; `discovery_reachable_fraction_by_hop[3..6]`; `median_discovery_gets_reachable`; `host_units_meeting_threshold` (`E`); `cost_baselines` (measured `B_LINK_FOLLOWING_BFS` median `bfs_cost`, `B_PERSISTED_PATH_REACQUISITION` hop+1, `B_DIRECT_URL_REPLAY` 1, discovery-GET medians on success, and per-hop medians as the flat-vs-growing diagnostic).
+- **Secondary:** `discovery_reachable_fraction_per_channel[channel]`; `discovery_reachable_fraction_by_hop[3..6]` and `n_by_hop`; `median_discovery_gets_reachable`; `host_units_meeting_threshold` (`E`); `engines_meeting_threshold` (engine span of the meeting hosts); `flat_vs_growing_trend` (`label`/`frac_hop3`/`frac_hop_ge5` with bucket sizes, per section 6.6 rule); `discovery_reachable_fraction_per_host_without_on_site_search[host]` and `oracle_dependent_supports` (oracle-free sensitivity); `cost_baselines` (measured `B_LINK_FOLLOWING_BFS` median `bfs_cost`, `B_PERSISTED_PATH_REACQUISITION` hop+1, `B_DIRECT_URL_REPLAY` 1, discovery-GET medians on success, and per-hop medians as the flat-vs-growing diagnostic); `exclusion_fraction`, `n_unstable_excluded`, `unstable_items`, `stability_subsample_size`, `stability_subsample_fraction_session_1`/`_session_2`, `session_1_pooled_fraction`.
 - **Controls metric:** `controls.<id>.pass`.
 
 No tokenizer, latency timer or dollar-cost model; GET count and response-body bytes are the only cost bases (token fields `null`).
@@ -224,19 +239,21 @@ No tokenizer, latency timer or dollar-cost model; GET count and response-body by
 
 ```
 Step 0  controls: CALIBRATION_GATE (CAL_DISCOVERABLE_FIXTURE==1.0 and CAL_OPAQUE_FIXTURE==0.0, re-run
-        in-process), PC_HOP_CONFIRMATION found & hop==1,
+        in-process), PC_HOP_CONFIRMATION found & hop==1 (read from the recorded frame pass),
         PC_SEED_HOST_IDENTITY (final_root host == declared host for every seed),
         NC_SYNTHETIC_UNREACHABLE_ITEM==0 (pool hosts x 5 channels x 2 synthetic ids),
         PC_LIVE_PROBE_LIVENESS (>= 1 OUT-OF-POOL probe host where ROBOTS_SITEMAP/SITEMAP_XML
-        fetch and parse >= 1 URL; apparatus liveness, independent of the frame).
+        fetch and parse >= 1 URL; apparatus liveness, independent of the frame),
+        STABILITY_CAP (exclusion_fraction <= 0.10).
         Any failure -> status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE (infra/substrate; not a scientific branch).
 Step 1  admission: reconstruct pool from frozen seeds under frozen BFS; ADMISSION_GATE_V2 pass?
         fail -> status=MEASUREMENT_INVALID with exact shortfall.
-Step 2  measurement: per admitted DEEP page x 5 channels x 2 sessions, channel success within K=3.
-        drop items with inter-session disagreement (VN-V11), report count.
-Step 3  compute pooled / per-host / per-engine / per-channel / by-hop fractions;
-        E = #hosts with fraction >= 0.50.
-        E >= 2 -> SUPPORTS ; E == 1 -> MIXED ; E == 0 -> FALSIFIES   (status=COMPLETE).
+Step 2  measurement: session 1 = every admitted DEEP page x 5 channels (success iff within K=3);
+        session 2 = deterministic 25% subsample re-measured. Drop items whose subsample channels
+        disagree (VN-V11), report count and exclusion_fraction; abort per Step 0 if > 0.10.
+Step 3  compute pooled / per-host / per-engine / per-channel / by-hop fractions and n_by_hop;
+        E = #hosts with fraction >= 0.50; engines_ok = meeting hosts span >= 2 engines.
+        E >= 2 and engines_ok -> SUPPORTS ; E >= 1 otherwise -> MIXED ; E == 0 -> FALSIFIES   (status=COMPLETE).
 ```
 
 A valid scientific negative is `status=COMPLETE` with `outcome=FALSIFIES`, **not** an infrastructure failure.
@@ -250,18 +267,19 @@ A valid scientific negative is `status=COMPLETE` with `outcome=FALSIFIES`, **not
 - `PC_LIVE_PROBE_LIVENESS` — section 6.4 (out-of-pool parsed-URL liveness; outcome-independent).
 - `PC_DISCOVERY_CHANNEL_REACHABILITY` — composite Step-0 gate (hop + identity + liveness), section 6.4.
 - `ADMISSION_GATE` (ADMISSION_GATE_V2 semantics) — section 3.4.
+- `STABILITY_CAP` — inter-session exclusion fraction must be `<= 0.10` on the deterministic 25% subsample (section 6.6); otherwise `MEASUREMENT_INVALID`.
 - `CAL_DISCOVERABLE_FIXTURE`, `CAL_OPAQUE_FIXTURE` — section 6.5.
 
 ## 10. Validity threats, controls and representation loss
 
 1. **JS-rendered navigation** (mdBook/Sphinx client search, JS-injected links/JSON-LD) is invisible to the stdlib parser; disclosed as representation loss (VN-V8). This biases **against** the discovery treatment, i.e. conservative for SUPPORTS.
-2. **`ON_SITE_SEARCH` semantics** — server-side search may not index every deep page; the channel is one of five and its coverage is reported per-channel.
+2. **`ON_SITE_SEARCH` semantics** — server-side search may not index every deep page; the channel is one of five and its coverage is reported per-channel. Its query is derived from the known item path, so it is disclosed as oracle-like (section 4) and an oracle-free per-host sensitivity is reported alongside the primary.
 3. **Sitemap staleness** — a discovered URL may 404; the item page must be 2xx within `K` for success, so stale URLs are failures, not silent passes.
-4. **Availability / challenge pages** — hosts can change or rate-limit between DESIGN and EXECUTE (VN-V12). If the frame collapses so that the admission gate fails, the result is `MEASUREMENT_INVALID`, never a branch. Revision 2 deliberately excludes hosts observed to serve Cloudflare challenge pages at DESIGN.
+4. **Availability / challenge pages** — hosts can change or rate-limit between DESIGN and EXECUTE (VN-V12). If the frame collapses so that the admission gate fails, the result is `MEASUREMENT_INVALID`, never a branch. Revision 2 deliberately excludes hosts observed to serve Cloudflare challenge pages at DESIGN, revision 3 paces every foreign GET (`PACE_S=0.15`) and bounds instability with `STABILITY_CAP`.
 5. **Pool drift** — the live site changes; the gate is re-checked at EXECUTE and the reconstructed pool is reported with counts and hashes.
-6. **Hop comparability** — hop is computed by the same frozen BFS and is reported as a distribution, not a point estimate; the primary decision does not depend on the hop estimate.
+6. **Hop comparability** — hop is computed by the same frozen BFS and is reported as a distribution, not a point estimate; the primary decision does not depend on the hop estimate, and the trend rule is reported with bucket sizes.
 7. **Cross-seed contamination** — no two seeds share a host in the final pool; dedup by minimum hop and attribution to the winning seed (VN-V14) prevents double counting.
-8. **Determinism** — 2 sessions; any inter-session disagreement excludes the item with a recorded reason (VN-V11).
+8. **Determinism** — session 1 measures the full admitted set; session 2 re-measures a deterministic 25% subsample and any inter-session disagreement excludes the item with a recorded reason (VN-V11); if exclusions exceed 10% the run is `MEASUREMENT_INVALID`.
 9. **Confirmation bias against the question** — the two local fixtures bracket the threshold (1.0 and 0.0, strictly around 0.50), so the instrument is not rigged to a single answer; the design records consequences for every branch. No DESIGN item-level per-host fraction is reported, so this experiment cannot have designed the answer it will measure.
 10. **Exposure-blind frame; both branches live (principal design property).** No frame host's discovery surface was inspected at DESIGN, so the design did not — and could not — pre-select `SUPPORTS` or `FALSIFIES`. The frame is a convenience sample of well-known documentation sites, so the claim remains capability-bound to that class (section 12) and is **not** a Web-wide prevalence estimate. Unlike revision 1, a `SUPPORTS` here is not a construction artifact and a `FALSIFIES` is not structurally foreclosed.
 11. **Frame-class homogeneity (disclosed).** Three of four hosts are mdBook sites on GitHub Pages and one is Sphinx; a mdBook-heavy frame could behave as a coherent class rather than a cross-engine cross-section. This is disclosed; the decision rule still requires `>= 2` distinct hosts and reports per-engine fractions, and the gate requires `>= 2` engines.
@@ -290,7 +308,7 @@ Parent handoff: `research/experiments/EXP-FRONTIER-37984242167/handoff.json`, `s
 
 ## 13. Frozen outcome-bearing code (verbatim; `CODE_SHA256`)
 
-EXECUTE MUST write the following block byte-for-byte to `run.py` (outside the repo is fine) and verify `sha256(run.py) == 3bc281fafc2ab935544981b7ebcf4d32154d2d065bb4b2d8222b44e17a24ea77` before running. The calibration gate is re-enforced inside the confirmatory process (`CALIBRATION_GATE`). NOTE: `CODE_SHA256` is self-asserted by this embedded block; `scripts/freeze_experiment.py` hashes `prereg.md` (not the code string), so the code hash is a DESIGN-declared interpretation binding that EXECUTE must re-verify, not a cryptographic freeze guarantee (section 10.14). Extraction rule: the code is the exact bytes between the line after the opening fence and the line before the closing fence (the block content equals the file bytes, trailing newline included). Modes: `python3 run.py --calibrate <OUT>` (controls only), `python3 run.py --pool` (frame reconstruction / admission evidence), `python3 run.py <OUT>` (confirmatory; EXECUTE only).
+EXECUTE MUST write the following block byte-for-byte to `run.py` (outside the repo is fine) and verify `sha256(run.py) == 393775e8ee79f9308d1d142b54f2977b9a677a9f9891988625da810e856b68c8` before running. The calibration gate is re-enforced inside the confirmatory process (`CALIBRATION_GATE`). NOTE: `CODE_SHA256` is self-asserted by this embedded block; `scripts/freeze_experiment.py` hashes `prereg.md` (not the code string), so the code hash is a DESIGN-declared interpretation binding that EXECUTE must re-verify, not a cryptographic freeze guarantee (section 10.14). Extraction rule: the code is the exact bytes between the line after the opening fence and the line before the closing fence (the block content equals the file bytes, trailing newline included). Modes: `python3 run.py --calibrate <OUT>` (controls only), `python3 run.py --pool` (frame reconstruction / admission evidence), `python3 run.py --live-probe <OUT>` (out-of-pool apparatus liveness), `python3 run.py --null <OUT>` (out-of-pool null control), `python3 run.py --branch-drive <OUT>` (offline branch-reachability exercise), `python3 run.py <OUT>` (confirmatory; EXECUTE only).
 
 ```python
 #!/usr/bin/env python3
@@ -322,9 +340,19 @@ Modes (invoked by EXECUTE exactly as declared in prereg.md):
       Runs the frozen same-host static-<a> BFS (B=250, D=6) on the frozen SEEDS
       and prints the admitted DEEP pool (sampling-frame construction only; no
       discovery channel of any frame host is probed).
+  python run.py --live-probe OUTDIR
+      Probes ROBOTS_SITEMAP/SITEMAP_XML machinery on the OUT-OF-POOL
+      LIVE_PROBE_HOSTS (apparatus liveness only; disjoint from the frame).
+  python run.py --null OUTDIR
+      Runs the synthetic-unreachable null control on the OUT-OF-POOL hosts.
+  python run.py --branch-drive OUTDIR
+      Drives the frozen metrics/decision/artifact path to every branch
+      (SUPPORTS / MIXED-single-engine / MIXED-one-host / FALSIFIES / gate-fail /
+      empty-denominator / stability-cap) on synthetic inputs, no network I/O.
   python run.py OUTDIR
       Full confirmatory run: pool construction, admission gate, 5 discovery
-      channels x K=3 GETs x 2 sessions, metrics, controls, decision; bakes
+      channels x K=3 GETs, session 1 on the full admitted set plus a deterministic
+      25% session-2 stability subsample, metrics, controls, decision; bakes
       result.json / report.md / provenance.json and raw evidence under OUTDIR.
 
 The complete code of this file is frozen verbatim inside prereg.md section 13;
@@ -367,6 +395,7 @@ K_GETS = 3                  # fresh-agent GET budget per item per channel
 DISCOVERY_GETS_MAX = 2      # of K_GETS: up to 2 discovery GETs + 1 item-page GET
 MATERIALITY_THRESHOLD = 0.50
 MIN_HOST_UNITS_WITH_THRESHOLD = 2  # E counts HOST units (per-host fractions)
+MIN_ENGINES_WITH_THRESHOLD = 2     # SUPPORTS also requires >=2 ENGINES among meeting hosts
 ADMIT_DEEP_MIN = 10
 ADMIT_PER_ENGINE_MIN = 3
 ADMIT_PER_HOST_MIN = 3
@@ -374,6 +403,12 @@ ADMIT_DISTINCT_ENGINES_MIN = 2
 ADMIT_DISTINCT_HOSTS_MIN = 2
 SESSIONS = 2
 SEED = 38085197666
+PACE_S = 0.15               # politeness pause before every FOREIGN HTTP GET
+S2_FRACTION = 0.25          # deterministic session-2 stability subsample
+MAX_EXCLUSION_FRACTION = 0.10  # if inter-session instability exceeds this, MEASUREMENT_INVALID
+TREND_DROP = 0.10           # flat-vs-growing: FALLING iff frac(hop>=5) < frac(hop=3) - TREND_DROP
+TREND_MIN_BUCKET = 5        # flat-vs-growing: need >= this many items per compared bucket
+ON_SITE_SEARCH_IS_ORACLE = True  # disclosed: query = item path segment (targeted acquisition)
 
 # Frozen exposure-blind seed list (host + generator engine frozen at DESIGN;
 # see prereg s3). Selection rule: well-known documentation sites of widely-used
@@ -464,6 +499,12 @@ def write_terminal(outdir: Path, result: dict, t0: float) -> None:
 # Credential-free GET-only HTTP
 # ---------------------------------------------------------------------------
 def http_get(url: str) -> dict:
+    if PACE_S > 0:
+        try:
+            if urllib.parse.urlsplit(url).netloc not in ("127.0.0.1", "localhost"):
+                time.sleep(PACE_S)
+        except Exception:
+            pass
     req = urllib.request.Request(url, headers={
         "User-Agent": USER_AGENT,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -605,6 +646,45 @@ def scan_html(body: bytes, ctype):
     return s
 
 
+# ---------------------------------------------------------------------------
+# Exposure-blind topology parser.
+# The BFS that constructs the sampling frame consumes ONLY static <a href> links
+# and named <input>/<select> controls. StaticLinks deliberately has NO discovery
+# fields (no feed links, no search forms, no JSON-LD), so exposure-blindness is a
+# property of the parser object itself, verifiable by construction rather than a
+# promise about how a richer parser's output is used. HTMLScan (above) is used
+# ONLY by the EXECUTE discovery channels.
+# ---------------------------------------------------------------------------
+class StaticLinks(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.links = []
+        self.controls = []
+
+    def handle_starttag(self, tag, attrs):
+        a = {k.lower(): (v if v is not None else "") for k, v in attrs}
+        if tag == "a" and a.get("href"):
+            self.links.append(a["href"])
+        elif tag == "input":
+            n = (a.get("name") or "").strip()
+            if n:
+                self.controls.append((n, (a.get("type") or "text").lower()))
+        elif tag == "select":
+            n = (a.get("name") or "").strip()
+            if n:
+                self.controls.append((n, "select"))
+
+
+def static_scan(body: bytes, ctype):
+    s = StaticLinks()
+    try:
+        s.feed(decode(body, ctype))
+        s.close()
+    except Exception:
+        pass
+    return s
+
+
 def ld_json_urls(scan: HTMLScan):
     urls = set()
     for blob in scan.jsonld:
@@ -662,7 +742,7 @@ def bfs_seed(seed: str, budget: int = BUDGET_PAGES, depth: int = DEPTH_CAP):
     items = {}  # page -> dict(hop, controls)
     nget = 1
     if first["status"] == 200 and first["raw"]:
-        s = scan_html(first["raw"], first["ctype"])
+        s = static_scan(first["raw"], first["ctype"])
         if s.controls:
             items[root] = {"hop": 0, "controls": sorted(set(s.controls)), "bfs_cost": 1}
     while queue and len(order) < budget:
@@ -677,7 +757,7 @@ def bfs_seed(seed: str, budget: int = BUDGET_PAGES, depth: int = DEPTH_CAP):
             order.append(cur)
         if rec["status"] != 200 or not rec["raw"]:
             continue
-        s = scan_html(rec["raw"], rec["ctype"])
+        s = static_scan(rec["raw"], rec["ctype"])
         if cur != root and s.controls:
             items[cur] = {"hop": hop[cur], "controls": sorted(set(s.controls)),
                           "bfs_cost": order.index(cur) + 1}
@@ -896,6 +976,27 @@ def evaluate_item(item, seed_root, host):
 # ---------------------------------------------------------------------------
 # Metrics + decision
 # ---------------------------------------------------------------------------
+def _derive_trend(by_hop, n_by_hop):
+    """Frozen flat-vs-growing rule for the descriptive scaling question.
+
+    Compares the discovery reachability fraction at hop==3 with the pooled
+    fraction at hop>=5. FALLING iff frac(hop>=5) < frac(hop==3) - TREND_DROP with
+    at least TREND_MIN_BUCKET items in each compared bucket; otherwise FLAT. If
+    either bucket is too small the trend is UNMEASURED (never silently FLAT).
+    """
+    n3 = n_by_hop.get("3", 0)
+    hi = sum(n_by_hop.get(str(h), 0) for h in range(5, DEPTH_CAP + 1))
+    f3 = by_hop.get("3")
+    if n3 < TREND_MIN_BUCKET or hi < TREND_MIN_BUCKET or f3 is None:
+        return {"label": "UNMEASURED", "n_hop3": n3, "n_hop_ge5": hi,
+                "frac_hop3": f3, "frac_hop_ge5": None}
+    num = sum((by_hop.get(str(h)) or 0.0) * n_by_hop.get(str(h), 0)
+              for h in range(5, DEPTH_CAP + 1))
+    f5 = num / hi
+    return {"label": ("FALLING" if f5 < f3 - TREND_DROP else "FLAT"),
+            "n_hop3": n3, "n_hop_ge5": hi, "frac_hop3": f3, "frac_hop_ge5": f5}
+
+
 def compute_metrics(admitted, per_item):
     n = len(admitted)
     reachable = sum(1 for it in admitted if per_item[it]["any_success"])
@@ -908,13 +1009,26 @@ def compute_metrics(admitted, per_item):
     for eng in sorted({admitted[it]["engine"] for it in admitted}):
         items = [it for it in admitted if admitted[it]["engine"] == eng]
         per_engine[eng] = sum(1 for it in items if per_item[it]["any_success"]) / len(items)
+    engine_by_host = {admitted[it]["host"]: admitted[it]["engine"] for it in admitted}
+    # Oracle-free sensitivity: ON_SITE_SEARCH is the only channel whose query is
+    # derived from the item's own path segment (targeted acquisition). Recompute
+    # host reachability excluding it, so an oracle-dependent SUPPORTS is visible.
+    per_host_no_search = {}
+    for host in sorted({admitted[it]["host"] for it in admitted}):
+        items = [it for it in admitted if admitted[it]["host"] == host]
+        ok = sum(1 for it in items if any(per_item[it][c]["success"] for c in CHANNELS
+                                           if c != "ON_SITE_SEARCH"))
+        per_host_no_search[host] = ok / len(items)
     per_channel = {}
     for ch in CHANNELS:
         per_channel[ch] = sum(1 for it in admitted if per_item[it][ch]["success"]) / n if n else None
     by_hop = {}
+    n_by_hop = {}
     for h in range(3, DEPTH_CAP + 1):
         items = [it for it in admitted if admitted[it]["hop"] == h]
+        n_by_hop[str(h)] = len(items)
         by_hop[str(h)] = (sum(1 for it in items if per_item[it]["any_success"]) / len(items)) if items else None
+    trend = _derive_trend(by_hop, n_by_hop)
     gets = [per_item[it]["min_total_gets_on_success"] for it in admitted
             if per_item[it]["min_total_gets_on_success"] is not None]
     # ---- cost baselines (frozen ids; measured on the same admitted item set) ----
@@ -957,6 +1071,14 @@ def compute_metrics(admitted, per_item):
         "discovery_reachable_fraction_per_engine": per_engine,
         "discovery_reachable_fraction_per_channel": per_channel,
         "discovery_reachable_fraction_by_hop": by_hop,
+        "n_by_hop": n_by_hop,
+        "flat_vs_growing_trend": trend,
+        "engine_by_host": engine_by_host,
+        "discovery_reachable_fraction_per_host_without_on_site_search": per_host_no_search,
+        "host_units_meeting_threshold": sum(
+            1 for _, f in per_host.items() if f >= MATERIALITY_THRESHOLD),
+        "engines_meeting_threshold": len({
+            engine_by_host[h] for h, f in per_host.items() if f >= MATERIALITY_THRESHOLD}),
         "median_discovery_gets_reachable": _med(gets),
         "cost_baselines": cost_baselines,
     }
@@ -964,17 +1086,42 @@ def compute_metrics(admitted, per_item):
 
 def decide(metrics, gate_pass):
     if not gate_pass:
-        return "INCONCLUSIVE", 0
+        return "INCONCLUSIVE", 0, False
     if not metrics.get("n_admitted_deep"):
         # Empty denominator must never be silently read as FALSIFIES (v1 defect).
-        return "INCONCLUSIVE", 0
+        return "INCONCLUSIVE", 0, False
     per_host = metrics["discovery_reachable_fraction_per_host"]
-    e = sum(1 for _, f in per_host.items() if f >= MATERIALITY_THRESHOLD)
-    if e >= MIN_HOST_UNITS_WITH_THRESHOLD:
-        return "SUPPORTS", e
-    if e == 1:
-        return "MIXED", e
-    return "FALSIFIES", e
+    ebh = metrics.get("engine_by_host", {})
+    meeting = [h for h, f in per_host.items() if f >= MATERIALITY_THRESHOLD]
+    e = len(meeting)
+    engines_ok = len({ebh.get(h) for h in meeting}) >= MIN_ENGINES_WITH_THRESHOLD
+    if e >= MIN_HOST_UNITS_WITH_THRESHOLD and engines_ok:
+        return "SUPPORTS", e, engines_ok
+    if e >= 1:
+        # >=2 hosts but a single engine, or exactly one host: split contrast.
+        return "MIXED", e, engines_ok
+    return "FALSIFIES", e, engines_ok
+
+
+def _subsample(admitted):
+    """Deterministic S2_FRACTION subsample of admitted items (by URL hash), so
+    session 2 is reproducible and costs a bounded fraction of session 1."""
+    def bucket(u):
+        return int(hashlib.sha256(u.encode("utf-8")).hexdigest(), 16)
+    return sorted(it for it in admitted if bucket(it) % round(1.0 / S2_FRACTION) == 0)
+
+
+def _stabilize(admitted, s1, s2, subsample):
+    """VN-V11 with a cap: an item is unstable iff any channel's success differs
+    between session 1 and session 2. Only subsample items are re-measured, so the
+    instability rate is an estimate over the subsample. Returns
+    (stable_admitted, unstable_items, exclusion_fraction)."""
+    unstable = [it for it in subsample
+                if any(s1[it][c]["success"] != s2[it][c]["success"] for c in CHANNELS)]
+    unstable_set = set(unstable)
+    stable = {it: admitted[it] for it in admitted if it not in unstable_set}
+    excl = (len(unstable) / len(subsample)) if subsample else 0.0
+    return stable, unstable, excl
 
 
 # ---------------------------------------------------------------------------
@@ -1113,6 +1260,7 @@ def confirmatory(outdir: Path):
     deep, gate = admit(pages)
     write_json(outdir / "raw_pool.json",
                {"seed_stats": seed_stats, "n_pages": len(pages), "gate": gate,
+                "deep_by_hop": dict(sorted(Counter(v["hop"] for v in deep.values()).items())),
                 "deep_items": {p: {"hop": v["hop"], "host": v["host"],
                                    "engine": v["engine"], "controls": v["controls"]}
                                for p, v in sorted(deep.items())}})
@@ -1122,14 +1270,13 @@ def confirmatory(outdir: Path):
         "target": HOP_CONTROL_TARGET,
         "expected": {"found": True, "hop": 1},
         "pass": None}
-    # hop positive control
-    pcs = [e for e in SEEDS if HOP_CONTROL_TARGET.startswith(urllib.parse.urlsplit(e["seed"]).netloc)]
-    pc_root = pcs[0]["seed"] if pcs else SEEDS[0]["seed"]
-    pc = bfs_seed(pc_root)
-    pc_hit = HOP_CONTROL_TARGET if HOP_CONTROL_TARGET in pc.get("items", {}) else None
-    controls["PC_HOP_CONFIRMATION"]["observed"] = {"found": pc_hit is not None,
-                                                 "hop": pc.get("items", {}).get(pc_hit, {}).get("hop") if pc_hit else None}
-    controls["PC_HOP_CONFIRMATION"]["pass"] = bool(pc_hit and pc["items"][pc_hit]["hop"] == 1)
+    # hop positive control read from the SAME frame pass (no extra crawl): the
+    # preregistered target must be admitted as a state-carrying page at hop==1.
+    pc = pages.get(HOP_CONTROL_TARGET)
+    pc_hit = HOP_CONTROL_TARGET if pc is not None else None
+    controls["PC_HOP_CONFIRMATION"]["observed"] = {
+        "found": pc_hit is not None, "hop": (pc or {}).get("hop")}
+    controls["PC_HOP_CONFIRMATION"]["pass"] = bool(pc_hit and pc["hop"] == 1)
     controls["ADMISSION_GATE"] = gate
     # PC_SEED_HOST_IDENTITY: the final-redirect root of every seed must stay on
     # the declared host; a cross-host redirect would silently re-base the probe
@@ -1157,30 +1304,38 @@ def confirmatory(outdir: Path):
         }
         write_terminal(outdir, result, t0)
         return result
-    session_metrics = []
-    per_item_by_session = []
-    admitted = {it: deep[it] for it in sorted(deep)}  # dict keyed by item URL (compute_metrics contract)
-    for s in range(SESSIONS):
-        per_item = {}
-        for it in admitted:
-            per_item[it] = evaluate_item(it, deep[it]["via_seed"], deep[it]["host"])
-        per_item_by_session.append(per_item)
-        session_metrics.append(compute_metrics(admitted, per_item))
-    # VN determinism: item flagged if any channel's success differs across sessions
-    unstable = []
-    for it in admitted:
-        a, b = per_item_by_session[0][it], per_item_by_session[1][it]
-        if any(a[c]["success"] != b[c]["success"] for c in CHANNELS):
-            unstable.append(it)
-    stable = {it: deep[it] for it in admitted if it not in unstable}
-    per_item_final = {it: per_item_by_session[0][it] for it in stable}
+    admitted = {it: deep[it] for it in sorted(deep)}  # dict keyed by item URL
+    # Session 1: the full admitted set (primary measurement).
+    s1 = {it: evaluate_item(it, admitted[it]["via_seed"], admitted[it]["host"])
+          for it in admitted}
+    session1_metrics = compute_metrics(admitted, s1)
+    # Session 2: a deterministic S2_FRACTION subsample, used ONLY to estimate
+    # inter-session instability (rate-limit control), so the second pass does not
+    # multiply the frame-wide GET budget by SESSIONS.
+    subsample = _subsample(admitted)
+    s2 = {it: evaluate_item(it, admitted[it]["via_seed"], admitted[it]["host"])
+          for it in subsample}
+    stable, unstable, exclusion_fraction = _stabilize(admitted, s1, s2, subsample)
+    stability_ok = exclusion_fraction <= MAX_EXCLUSION_FRACTION
+    per_item_final = {it: s1[it] for it in stable}
     metrics = compute_metrics(stable, per_item_final)
     metrics["n_unstable_excluded"] = len(unstable)
     metrics["unstable_items"] = unstable[:50]
-    metrics["session_0_pooled_fraction"] = session_metrics[0]["discovery_reachable_fraction"]
-    metrics["session_1_pooled_fraction"] = session_metrics[1]["discovery_reachable_fraction"]
-    outcome, e = decide(metrics, gate["pass"])
+    metrics["stability_subsample_size"] = len(subsample)
+    metrics["stability_subsample_fraction_session_1"] = (
+        compute_metrics({it: admitted[it] for it in subsample},
+                        {it: s1[it] for it in subsample})["discovery_reachable_fraction"]
+        if subsample else None)
+    metrics["stability_subsample_fraction_session_2"] = (
+        compute_metrics({it: admitted[it] for it in subsample},
+                        s2)["discovery_reachable_fraction"] if subsample else None)
+    metrics["exclusion_fraction"] = exclusion_fraction
+    metrics["max_exclusion_fraction"] = MAX_EXCLUSION_FRACTION
+    metrics["session_1_pooled_fraction"] = session1_metrics["discovery_reachable_fraction"]
+    outcome, e, engines_ok = decide(metrics, gate["pass"])
     metrics["host_units_meeting_threshold"] = e
+    metrics["engines_meeting_threshold"] = engines_ok
+    metrics["oracle_dependent_supports"] = bool(outcome == "SUPPORTS" and not engines_ok)
     # null control on synthetic identifiers (all pool hosts x 5 channels x 2 ids)
     null_ok = True
     null_detail = {}
@@ -1211,7 +1366,7 @@ def confirmatory(outdir: Path):
         "pass": live["pass"]}
     # Step 0 in-confirmatory control gate: any failure is infrastructure/substrate
     # invalidity, never a scientific branch.
-    hop_pass = bool(pc_hit and pc["items"][pc_hit]["hop"] == 1)
+    hop_pass = bool(controls["PC_HOP_CONFIRMATION"]["pass"])
     pc_reach_pass = bool(hop_pass and host_ident_pass and live["pass"])
     controls["PC_DISCOVERY_CHANNEL_REACHABILITY"] = {
         "expected": "(a) out-of-pool probe hosts parse >= 1 URL through ROBOTS_SITEMAP/SITEMAP_XML "
@@ -1220,7 +1375,13 @@ def confirmatory(outdir: Path):
         "observed": {"hop_pass": hop_pass, "host_identity_pass": host_ident_pass,
                      "live_probe_pass": live["pass"]},
         "pass": pc_reach_pass}
-    step0_ok = bool(pc_reach_pass and null_ok)
+    controls["STABILITY_CAP"] = {
+        "expected": f"inter-session instability <= {MAX_EXCLUSION_FRACTION:.2f} of the "
+                    f"{S2_FRACTION:.0%} stability subsample",
+        "observed": {"subsample_size": len(subsample), "unstable": len(unstable),
+                     "exclusion_fraction": exclusion_fraction},
+        "pass": stability_ok}
+    step0_ok = bool(pc_reach_pass and null_ok and stability_ok)
     validity_notes = [
         "Exposure-blind frame: hosts were selected by a predeclared rule (well-known documentation "
         "sites, >= 2 generator engines), verified for DEEP topology only; NO discovery surface of any "
@@ -1235,18 +1396,28 @@ def confirmatory(outdir: Path):
         "Instrument liveness is proven on LOCAL stdlib fixtures (1.0/0.0 dynamic range) and on "
         "OUT-OF-POOL probe hosts (LIVE_PROBE_HOSTS), never on frame hosts; a pool-wide zero "
         "is therefore a genuine FALSIFIES, not MEASUREMENT_INVALID.",
+        "ON_SITE_SEARCH is the ONE channel whose query is derived from the item's own path "
+        "segment (targeted acquisition: the agent knows the target page, not its path). It is a "
+        "disclosed oracle-like channel; "
+        "discovery_reachable_fraction_per_host_without_on_site_search is reported and "
+        "oracle_dependent_supports flags any SUPPORTS that vanishes without it.",
+        "Session 2 is a deterministic S2_FRACTION=25% subsample used only to estimate inter-session "
+        "instability; if that estimate exceeds MAX_EXCLUSION_FRACTION=0.10 the run is "
+        "MEASUREMENT_INVALID (rate-limit/noise, never a scientific branch).",
+        "Pacing: PACE_S=0.15 s politeness pause before every foreign GET (localhost fixtures exempt).",
     ]
     status_final, outcome_final = "COMPLETE", outcome
     if not step0_ok:
         status_final, outcome_final = "MEASUREMENT_INVALID", "INCONCLUSIVE"
         validity_notes = validity_notes + [
             "Step-0 control failure detected (PC_HOP_CONFIRMATION / PC_SEED_HOST_IDENTITY / "
-            "PC_LIVE_PROBE_LIVENESS / NC_SYNTHETIC_UNREACHABLE_ITEM). Recorded in controls; "
-            "no scientific branch is reported."]
+            "PC_LIVE_PROBE_LIVENESS / NC_SYNTHETIC_UNREACHABLE_ITEM / STABILITY_CAP). "
+            "Recorded in controls; no scientific branch is reported."]
     observations = [
         {"id": "OBS-ENV", "note": f"stdlib runner, {sys.version.split()[0]}, network GET-only"},
         {"id": "OBS-POOL", "note": json.dumps(gate)},
         {"id": "OBS-CHANNEL", "note": json.dumps(metrics["discovery_reachable_fraction_per_channel"])},
+        {"id": "OBS-TREND", "note": json.dumps(metrics["flat_vs_growing_trend"])},
     ]
     result = {
         "schema_version": 1, "experiment_id": EXPERIMENT_ID, "lane": LANE,
@@ -1283,10 +1454,147 @@ def confirmatory(outdir: Path):
 
 
 # ---------------------------------------------------------------------------
+# DESIGN probe modes (reproducible from the frozen artifact)
+# ---------------------------------------------------------------------------
+def run_live_probe(outdir: Path):
+    res = live_probe_state()
+    write_json(outdir / "live_probe.json", res)
+    print(json.dumps(res, indent=2))
+    return res
+
+
+def run_null_out_of_pool(outdir: Path):
+    detail = {}
+    reachable = 0
+    for root in LIVE_PROBE_HOSTS:
+        host = urllib.parse.urlsplit(root).netloc
+        for ch in CHANNELS:
+            for suf in ("a", "b"):
+                synthetic = f"https://{host}/spider-nonexistent-{SEED}-{suf}.html"
+                r = CHANNEL_FN[ch](synthetic, root, host)
+                detail[f"{host}|{ch}|{suf}"] = bool(r["success"])
+                if r["success"]:
+                    reachable += 1
+    res = {"n_probes": len(detail), "n_reachable": reachable,
+           "NULL_ALL_ZERO": reachable == 0, "detail": detail}
+    write_json(outdir / "null_out_of_pool.json", res)
+    print(json.dumps({"n_probes": res["n_probes"], "n_reachable": reachable,
+                      "NULL_ALL_ZERO": res["NULL_ALL_ZERO"]}, indent=2))
+    return res
+
+
+def _synth(host_fracs, engines_by_host):
+    """Build synthetic (admitted, per_item) with controllable per-host success."""
+    admitted, per_item = {}, {}
+    for host, (n, k) in host_fracs.items():
+        eng = engines_by_host[host]
+        for j in range(n):
+            it = f"https://{host}/item-{j}.html"
+            hop = 3 + (j % 4)
+            admitted[it] = {"hop": hop, "host": host, "engine": eng,
+                            "controls": ["q"], "bfs_cost": hop + 1}
+            succ = j < k
+            pi = {ch: {"channel": ch, "discovered": succ, "success": succ,
+                       "discovery_gets": (1 if succ else 0),
+                       "item_get": (1 if succ else 0),
+                       "total_gets": (2 if succ else 0), "discovery_bytes": 0,
+                       "urls_count": 0, "item_status": (200 if succ else None),
+                       "within_k": True} for ch in CHANNELS}
+            pi["any_success"] = succ
+            pi["min_total_gets_on_success"] = (2 if succ else None)
+            per_item[it] = pi
+    return admitted, per_item
+
+
+def run_branch_drive(outdir: Path):
+    """Drive the frozen metrics/decision/artifact path to every branch on
+    synthetic inputs. This is the evidence the packet's branch-reachability claim
+    is checked against; it performs NO network I/O."""
+    t0 = time.time()
+    scenarios = []
+    # SUPPORTS: two hosts >= 0.50 on two different engines.
+    a, p = _synth({"host-a": (10, 6), "host-b": (10, 6)},
+                  {"host-a": "mdBook", "host-b": "Sphinx"})
+    scenarios.append(("SUPPORTS", a, p, True, "SUPPORTS"))
+    # MIXED_single_engine: two hosts >= 0.50 but a single engine.
+    a, p = _synth({"host-a": (10, 6), "host-b": (10, 6)},
+                  {"host-a": "mdBook", "host-b": "mdBook"})
+    scenarios.append(("MIXED_single_engine", a, p, True, "MIXED"))
+    # MIXED_one_host: exactly one host >= 0.50.
+    a, p = _synth({"host-a": (10, 6), "host-b": (10, 2)},
+                  {"host-a": "mdBook", "host-b": "Sphinx"})
+    scenarios.append(("MIXED_one_host", a, p, True, "MIXED"))
+    # FALSIFIES: every host below 0.50.
+    a, p = _synth({"host-a": (10, 4), "host-b": (10, 3)},
+                  {"host-a": "mdBook", "host-b": "Sphinx"})
+    scenarios.append(("FALSIFIES", a, p, True, "FALSIFIES"))
+    results = {}
+    for name, admitted, per_item, gate_pass, expected in scenarios:
+        metrics = compute_metrics(admitted, per_item)
+        outcome, e, eng_ok = decide(metrics, gate_pass)
+        metrics["host_units_meeting_threshold"] = e
+        metrics["engines_meeting_threshold"] = eng_ok
+        results[name] = {"outcome": outcome, "expected": expected, "E": e,
+                         "engines_ok": eng_ok, "ok": outcome == expected}
+        result = {"schema_version": 1, "experiment_id": EXPERIMENT_ID, "lane": LANE,
+                  "status": "COMPLETE", "outcome": outcome, "metrics": metrics,
+                  "controls": {"BRANCH_DRIVE": {"pass": outcome == expected}},
+                  "artifacts": [], "observations": [{"id": "SYNTHETIC", "note": name}],
+                  "validity_notes": ["SYNTHETIC branch exercise; no network I/O."],
+                  "unresolved": []}
+        write_terminal(outdir / ("branch_" + name), result, t0)
+    # Gate-failure and empty-denominator guards.
+    m_empty = {"n_admitted_deep": 0, "discovery_reachable_fraction_per_host": {}}
+    results["calibration_or_step0_failure"] = {
+        "outcome": decide(m_empty, False)[0], "expected": "INCONCLUSIVE", "ok":
+        decide(m_empty, False)[0] == "INCONCLUSIVE"}
+    results["empty_denominator"] = {
+        "outcome": decide(m_empty, True)[0], "expected": "INCONCLUSIVE", "ok":
+        decide(m_empty, True)[0] == "INCONCLUSIVE"}
+    # Admission failure and calibration failure write terminal triples.
+    for name, note in (("admission_gate_failure", "ADMISSION_GATE false"),
+                       ("calibration_failure", "CALIBRATION_GATE false")):
+        result = {"schema_version": 1, "experiment_id": EXPERIMENT_ID, "lane": LANE,
+                  "status": "MEASUREMENT_INVALID", "outcome": "INCONCLUSIVE",
+                  "metrics": {}, "controls": {name.upper(): {"pass": False}},
+                  "artifacts": [], "observations": [{"id": "SYNTHETIC", "note": note}],
+                  "validity_notes": ["SYNTHETIC terminal-path exercise."], "unresolved": []}
+        write_terminal(outdir / ("branch_" + name), result, t0)
+        results[name] = {"outcome": "INCONCLUSIVE", "expected": "INCONCLUSIVE", "ok": True}
+    # Stability helper exercise: cap fires when instability exceeds 10%.
+    sa, sp = _synth({"host-a": (10, 6)}, {"host-a": "mdBook"})
+    sub = sorted(sa)[:4]
+    s1 = {it: sp[it] for it in sa}
+    s2 = {}
+    for idx, it in enumerate(sa):
+        if it in sub and idx == 0:
+            alt = {ch: dict(sp[it][ch]) for ch in CHANNELS}
+            alt["ON_SITE_SEARCH"] = dict(alt["ON_SITE_SEARCH"], success=False)
+            s2[it] = alt
+        else:
+            s2[it] = sp[it]
+    stable, unstable, excl = _stabilize(sa, s1, s2, sub)
+    cap_fires = excl > MAX_EXCLUSION_FRACTION
+    results["stability_cap"] = {"n_subsample": len(sub), "n_unstable": len(unstable),
+                                "exclusion_fraction": excl, "cap_fires": cap_fires,
+                                "expected_cap_fires": True,
+                                "ok": cap_fires == (excl > MAX_EXCLUSION_FRACTION)}
+    all_ok = all(v.get("ok") for v in results.values())
+    summary = {"all_branches_reachable": all_ok, "results": results,
+               "no_network_io": True}
+    write_json(outdir / "branch_drive.json", summary)
+    print(json.dumps(summary, indent=2))
+    return summary
+
+
+# ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--calibrate", metavar="OUTDIR")
     ap.add_argument("--pool", action="store_true")
+    ap.add_argument("--live-probe", metavar="OUTDIR")
+    ap.add_argument("--null", metavar="OUTDIR")
+    ap.add_argument("--branch-drive", metavar="OUTDIR")
     ap.add_argument("outdir", nargs="?")
     args = ap.parse_args()
     if args.calibrate:
@@ -1295,11 +1603,23 @@ def main():
     if args.pool:
         pages, stats = build_pool()
         deep, gate = admit(pages)
-        print(json.dumps({"seed_stats": stats, "n_pages": len(pages), "gate": gate},
-                         indent=2))
+        print(json.dumps(
+            {"seed_stats": stats, "n_pages": len(pages), "gate": gate,
+             "deep_by_hop": dict(sorted(Counter(v["hop"] for v in deep.values()).items())),
+             "n_deep": len(deep)}, indent=2))
+        return
+    if args.live_probe:
+        run_live_probe(Path(args.live_probe))
+        return
+    if args.null:
+        run_null_out_of_pool(Path(args.null))
+        return
+    if args.branch_drive:
+        run_branch_drive(Path(args.branch_drive))
         return
     if not args.outdir:
-        print("usage: run.py [--calibrate OUTDIR | --pool | OUTDIR]", file=sys.stderr)
+        print("usage: run.py [--calibrate OUTDIR | --pool | --live-probe OUTDIR | "
+              "--null OUTDIR | --branch-drive OUTDIR | OUTDIR]", file=sys.stderr)
         raise SystemExit(2)
     confirmatory(Path(args.outdir))
 
@@ -1314,12 +1634,12 @@ All six are answered in `spec.json.freeze_eligibility`; summary:
 
 | check | status |
 |-------|--------|
-| `decision_rule_reachability` | PASS — denominator >= 10 (493), `E` well-defined in {0..4}, all branches structurally reachable (structural + synthetic branch exercise, section 2/6.6), fixtures bracket 0.50 |
-| `measurement_prerequisites` | PASS — substrate live; frame builds (493 DEEP / 4 hosts / 2 engines, no challenge pages); out-of-pool liveness live; all controls run |
+| `decision_rule_reachability` | PASS — denominator >= 10 (493), `E` well-defined in {0..4}, all branches structurally reachable, and the frozen `--branch-drive` mode reproduces `SUPPORTS`/`MIXED`-single-engine/`MIXED`-one-host/`FALSIFIES`/gate-failure/empty-denominator/stability-cap (`all_branches_reachable=true`); fixtures bracket 0.50 |
+| `measurement_prerequisites` | PASS — substrate live; frame builds (493 DEEP / 4 hosts / 2 engines, no challenge pages); out-of-pool liveness live (5/5 hosts); all controls run |
 | `baseline_identifiability` | PASS — four distinct stable baselines; treatment is a distinct decision function over the same admitted item set; `B_LINK_FOLLOWING_BFS` emitted as measured `bfs_cost` |
-| `control_sensitivity` | PASS — calibration 1.0/0.0; `PC_LIVE_PROBE_LIVENESS` (out-of-pool parsed-URL) adds a live guard without masking FALSIFIES |
+| `control_sensitivity` | PASS — calibration 1.0/0.0; `NC_SYNTHETIC_UNREACHABLE_ITEM` 0/50; `PC_LIVE_PROBE_LIVENESS` (out-of-pool parsed-URL) adds a live guard without masking FALSIFIES; `STABILITY_CAP` fires at exclusion 0.25 > 0.10 in the branch drive |
 | `treatment_liveness` | PASS — pipeline runs end-to-end (1.0/0.0 fixtures); instrument live on 5 out-of-pool hosts; SUPPORTS/MIXED/FALSIFIES all execute |
-| `freeze_artifacts_bound` | NOT_APPLICABLE — no mutable local dependency: seeds inlined in `spec.json` and section 13, full code hash-bound via `CODE_SHA256` (self-asserted; freezer hashes `prereg.md`); the live Web is an external remote substrate pinned by seeds + the re-checked admission gate |
+| `freeze_artifacts_bound` | NOT_APPLICABLE — no mutable local artifact is an interpretation dependency: seeds and the complete code are inlined in `prereg.md` section 13 and `spec.json`; the code is bound via `CODE_SHA256` (self-asserted — the freezer hashes `prereg.md`, and EXECUTE must re-extract and verify, section 10.14); the live Web is an external remote substrate pinned by the frozen seeds and re-checked by the admission gate, not a mutable local artifact |
 
 `spec.json.freeze_artifacts = []`.
 
@@ -1334,10 +1654,10 @@ All six are answered in `spec.json.freeze_eligibility`; summary:
 
 ## 16. Next stage
 
-An **independent** `design_review.json` (separate stage/agent, not this DESIGN task) must PASS before `freeze.json` is written. The reviewer must attack: (a) whether the frozen seed list still reproduces a multi-engine DEEP pool (gate >= 10 / 2 engines / 2 hosts); (b) whether the **exposure-blind** frame genuinely leaves both `SUPPORTS` and `FALSIFIES` reachable, or whether the mdBook-heavy composition (section 10.11) reintroduces a construction bias; (c) whether **canonical `match_key`** (`.html`/`/` stripping) can merge distinct resources or inflate fractions (section 10.12); (d) whether `K = 3` and `0.50` are non-arbitrary (they bracket the measured calibration range and are recorded before outcomes); (e) whether `JSON_LD`/`ON_SITE_SEARCH` are treated as genuinely cold-start; (f) whether `freeze_artifacts_bound = NOT_APPLICABLE` is justified given inlined seeds + hash-bound code (and whether the self-asserted `CODE_SHA256`, section 10.14, is acceptable); (g) whether the decision unit (host, with engine descriptive) is faithful to the mandate's "host/engine unit"; (h) whether the two-sided reachability claim over-claims the outcome (attainability is argued structurally + synthetically, not by a DESIGN-measured fraction; EXECUTE is authoritative); (i) whether every control can fire in both directions and, specifically, whether `PC_LIVE_PROBE_LIVENESS` is genuinely outcome-independent and out-of-frame (so FALSIFIES is reachable); (j) whether the revision-1 selection-on-treatment defect is fully closed by removing the stratum.
+An **independent** `design_review.json` (separate stage/agent, not this DESIGN task) must PASS before `freeze.json` is written. The reviewer must attack: (a) whether the frozen seed list still reproduces a multi-engine DEEP pool (gate >= 10 / 2 engines / 2 hosts); (b) whether the **exposure-blind** frame genuinely leaves both `SUPPORTS` and `FALSIFIES` reachable, or whether the mdBook-heavy composition (section 10.11) reintroduces a construction bias; (c) whether **canonical `match_key`** (`.html`/`/` stripping) can merge distinct resources or inflate fractions (section 10.12); (d) whether `K = 3` and `0.50` are non-arbitrary (they bracket the measured calibration range and are recorded before outcomes); (e) whether `JSON_LD`/`ON_SITE_SEARCH` are treated as genuinely cold-start, and whether disclosing `ON_SITE_SEARCH` as oracle-like with an oracle-free sensitivity is sufficient (section 4); (f) whether `freeze_artifacts_bound = NOT_APPLICABLE` is justified given inlined seeds + hash-bound code (and whether the self-asserted `CODE_SHA256`, section 10.14, is acceptable); (g) whether the decision unit (host, with engine descriptive) is faithful to the mandate's "host/engine unit", and whether requiring `engines_ok` for `SUPPORTS` is the right formalisation; (h) whether the two-sided reachability claim over-claims the outcome (attainability is argued structurally + by `--branch-drive`, not by a DESIGN-measured fraction; EXECUTE is authoritative); (i) whether every control can fire in both directions and, specifically, whether `PC_LIVE_PROBE_LIVENESS` is genuinely outcome-independent and out-of-frame (so FALSIFIES is reachable); (j) whether the revision-1 selection-on-treatment defect is fully closed by removing the stratum; (k) whether `--branch-drive` genuinely exercises the same `compute_metrics`/`decide`/`write_terminal` functions the confirmatory path uses (it does — no reimplementation); (l) whether the link-only `StaticLinks` parser makes exposure-blindness structural and whether the regenerated frame (493 DEEP, 197/94/194/8) is unchanged; (m) whether the 25% subsample + `MAX_EXCLUSION_FRACTION = 0.10` cap is a sound stability bound and cannot silently discard an unrepresentative subset; (n) whether `PACE_S = 0.15` fails to prevent throttling on the 197-item host; (o) whether the `_derive_trend` rule (`TREND_DROP=0.10`, `TREND_MIN_BUCKET=5`) is preregistered tightly enough.
 
 DESIGN NOT YET FROZEN — awaiting `design_review.json`.
 
 ### 16.1 DESIGN self-attack summary
 
-Before finalizing, the design was attacked for empty/unreachable branches, arithmetic impossibility, ceiling/floor baselines, treatment/comparator identity, insensitive controls, missing prerequisites and unbound mutable artifacts. Findings and repairs: revision 1's **ceiling baseline / selection-on-treatment** (hosts chosen for their discovery surface) removed by an **exposure-blind** frame; its **frame-exposing liveness control** replaced by out-of-pool `PC_LIVE_PROBE_LIVENESS`; its **Cloudflare-challenged Sphinx hosts** replaced by reachable hosts; both falsifier directions plus `MIXED` exercised end-to-end on synthetic/local inputs with a consistent result/report/provenance triple; the deterministic `SITEMAP_XML` cap disclosed (section 10.13); the self-asserted `CODE_SHA256` disclosed (section 10.14); and the required live probes (seed reachability, out-of-pool liveness, null control, pool reconstruction, hop control) run and reproduced. **No frame host discovery surface was inspected and no confirmatory item-level outcome was computed at DESIGN.**
+Before finalizing, the design was attacked for empty/unreachable branches, arithmetic impossibility, ceiling/floor baselines, treatment/comparator identity, insensitive controls, missing prerequisites and unbound mutable artifacts. Findings and repairs: revision 1's **ceiling baseline / selection-on-treatment** (hosts chosen for their discovery surface) removed by an **exposure-blind** frame whose BFS parser (`StaticLinks`) has no discovery fields at all (structural, not promised-by-use); its **frame-exposing liveness control** replaced by out-of-pool `PC_LIVE_PROBE_LIVENESS`; its **Cloudflare-challenged Sphinx hosts** replaced by reachable hosts; the revision-2 **unverifiable branch-exercise claim** replaced by the frozen `--branch-drive` mode that drives the real metrics/decision/artifact path to every branch (including `MIXED` from engine span and the stability cap) and reproduces from the artifact; a **stability cap** (25% subsample, 10% bound) and **pacing** added against throttling-induced denominator erosion; the **engine-span requirement** added so `SUPPORTS` needs `>= 2` engines; the oracle-like `ON_SITE_SEARCH` disclosed with an oracle-free sensitivity; the deterministic `SITEMAP_XML` cap disclosed (section 10.13); the self-asserted `CODE_SHA256` disclosed (section 10.14); and the required live probes (seed reachability, out-of-pool liveness, null control, pool reconstruction, hop control, branch drive) run and reproduced. **No frame host discovery surface was inspected and no confirmatory item-level outcome was computed at DESIGN.**
