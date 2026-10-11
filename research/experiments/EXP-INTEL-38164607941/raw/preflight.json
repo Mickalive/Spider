@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "B_RANDOM_parseable_1_and_success_lt_0.6": true,
+    "NC_parseable_0_and_success_0": true,
+    "PC_ORACLE_EPISODE_5of5": true,
+    "freeze_artifact_hashes_match": true,
+    "gguf_digest_checks_pass": true,
+    "required_stack_imports_ok": true
+  },
+  "freeze_artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": {
+      "exists": true,
+      "expected_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+      "match": true,
+      "observed_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"
+    },
+    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt": {
+      "exists": true,
+      "expected_sha256": "93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd",
+      "match": true,
+      "observed_sha256": "93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd"
+    },
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": {
+      "exists": true,
+      "expected_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+      "match": true,
+      "observed_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"
+    },
+    "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json": {
+      "exists": true,
+      "expected_sha256": "7b1e50436e75292baa88029264938773342b99785536a94c185d8371b74693f0",
+      "match": true,
+      "observed_sha256": "7b1e50436e75292baa88029264938773342b99785536a94c185d8371b74693f0"
+    },
+    "research/intel/run_exp_37982024058.py": {
+      "exists": true,
+      "expected_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+      "match": true,
+      "observed_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+    }
+  },
+  "gguf_digests": {
+    "qwen2.5-3b-instruct-q4_k_m.gguf": {
+      "exists": true,
+      "expected_bytes": 2104932768,
+      "expected_sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+      "match": true,
+      "observed_bytes": 2104932768,
+      "observed_sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d"
+    },
+    "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf": {
+      "exists": true,
+      "expected_bytes": 3993201344,
+      "expected_sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+      "match": true,
+      "observed_bytes": 3993201344,
+      "observed_sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db"
+    },
+    "qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf": {
+      "exists": true,
+      "expected_bytes": 689872288,
+      "expected_sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a",
+      "match": true,
+      "observed_bytes": 689872288,
+      "observed_sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a"
+    }
+  },
+  "pass": true,
+  "run_error": null,
+  "stack_imports": {
+    "has_make_null_producer": true,
+    "has_make_random_producer": true,
+    "has_parse_action": true,
+    "has_run_episode": true,
+    "has_start_page_server": true,
+    "llama_cpp": true,
+    "parent_runner_import": true,
+    "playwright": true
+  }
+}

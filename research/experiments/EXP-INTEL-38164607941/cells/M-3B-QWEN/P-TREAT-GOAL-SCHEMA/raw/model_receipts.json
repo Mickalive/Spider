@@ -1,0 +1,764 @@
+[
+  {
+    "candidate_id": "M-3B-QWEN",
+    "config_sampling": {
+      "base_seed": 42,
+      "chat_format": "qwen",
+      "episode_seed_offset": "42 + episode_idx",
+      "llama_seed": 42,
+      "max_tokens": 512,
+      "n_ctx": 2048,
+      "temperature": 0.0
+    },
+    "episodes": [
+      {
+        "clicked_reveal": true,
+        "episode": 0,
+        "final_answer": null,
+        "final_target_text": "TARGET-42",
+        "final_target_visible": true,
+        "revealed_value": "TARGET-42",
+        "seed": 42,
+        "step1_parse_ok": true,
+        "step_count": 5,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": true,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.69,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 1
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.622,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 2
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.29,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 3
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 2
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.3,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 4
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 3
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.312,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 5
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 4
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": true,
+        "episode": 1,
+        "final_answer": null,
+        "final_target_text": "TARGET-42",
+        "final_target_visible": true,
+        "revealed_value": "TARGET-42",
+        "seed": 43,
+        "step1_parse_ok": true,
+        "step_count": 5,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": true,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.271,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 1
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.66,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 2
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.287,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 3
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 2
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.309,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 4
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 3
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.298,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 5
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 4
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": true,
+        "episode": 2,
+        "final_answer": null,
+        "final_target_text": "TARGET-42",
+        "final_target_visible": true,
+        "revealed_value": "TARGET-42",
+        "seed": 44,
+        "step1_parse_ok": true,
+        "step_count": 5,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": true,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.27,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 1
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.633,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 2
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.302,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 3
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 2
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.296,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 4
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 3
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.301,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 5
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 4
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": true,
+        "episode": 3,
+        "final_answer": null,
+        "final_target_text": "TARGET-42",
+        "final_target_visible": true,
+        "revealed_value": "TARGET-42",
+        "seed": 45,
+        "step1_parse_ok": true,
+        "step_count": 5,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": true,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.275,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 1
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.638,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 2
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.308,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 3
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 2
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.294,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 4
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 3
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.291,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 5
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 4
+          }
+        ],
+        "task_success": false
+      },
+      {
+        "clicked_reveal": true,
+        "episode": 4,
+        "final_answer": null,
+        "final_target_text": "TARGET-42",
+        "final_target_visible": true,
+        "revealed_value": "TARGET-42",
+        "seed": 46,
+        "step1_parse_ok": true,
+        "step_count": 5,
+        "steps": [
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": true,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.27,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 1
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 0
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.656,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 2
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 1
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.308,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 3
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 2
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.305,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 4
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 3
+          },
+          {
+            "action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "click_ok": false,
+            "click_selector": "#reveal-btn",
+            "completion_tokens": 13,
+            "latency_s": 3.31,
+            "parse_detail": "ok",
+            "parse_ok": true,
+            "producer_meta": {
+              "call": 5
+            },
+            "raw": "{\"action\": \"click\", \"selector\": \"#reveal-btn\"}",
+            "regex_action": {
+              "action": "click",
+              "selector": "#reveal-btn"
+            },
+            "step": 4
+          }
+        ],
+        "task_success": false
+      }
+    ],
+    "frozen_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf",
+    "gguf_bytes": [
+      2104932768
+    ],
+    "gguf_paths": [
+      "/tmp/opencode/gguf/qwen2.5-3b-instruct-q4_k_m.gguf"
+    ],
+    "gguf_sha256": [
+      "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d"
+    ],
+    "load_error": null,
+    "load_meta": {
+      "chat_format": "qwen",
+      "llama_seed": 42,
+      "n_ctx": 2048,
+      "n_threads": 4
+    },
+    "load_status": "LOADED",
+    "load_time_s": 0.434,
+    "model": "Qwen2.5-3B-Instruct",
+    "positive_control": {
+      "control_id": "PC-JSON-CONSTRAINED-DECODING",
+      "criterion": "10/10 syntactically valid JSON matching action schema",
+      "n_pass": 10,
+      "n_total": 10,
+      "pass": true,
+      "pass_rate": 1.0,
+      "probes": [
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 2.543,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 0,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.943,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 1,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.951,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 2,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.954,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 3,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.956,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 4,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.971,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 5,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.956,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 6,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.959,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 7,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.959,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 8,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        },
+        {
+          "action": {
+            "action": "click",
+            "selector": "#test"
+          },
+          "completion_tokens": 10,
+          "latency_s": 0.95,
+          "parse_detail": "ok",
+          "parse_ok": true,
+          "probe": 9,
+          "raw": "{\"action\":\"click\",\"selector\":\"#test\"}"
+        }
+      ]
+    },
+    "quant": "Q4_K_M",
+    "role": "fallback",
+    "run_status": "COMPLETE"
+  }
+]

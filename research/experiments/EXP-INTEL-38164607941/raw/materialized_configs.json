@@ -1,0 +1,64 @@
+{
+  "cells": {
+    "M-3B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "candidate": "M-3B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED",
+      "condition": "P-COMP-UNDERSPECIFIED",
+      "diff_confined_to_prompts_system": true,
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-3B-QWEN_P-COMP-UNDERSPECIFIED.json",
+      "overlay_is_parent_byte_identical": false,
+      "overlay_path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/harness_config.json",
+      "overlay_sha256": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47",
+      "system_string": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.",
+      "system_string_sha256": "1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876"
+    },
+    "M-3B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "candidate": "M-3B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA",
+      "condition": "P-TREAT-GOAL-SCHEMA",
+      "diff_confined_to_prompts_system": true,
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-3B-QWEN_P-TREAT-GOAL-SCHEMA.json",
+      "overlay_is_parent_byte_identical": false,
+      "overlay_path": "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA/raw/harness_config.json",
+      "overlay_sha256": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee",
+      "system_string": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
+      "system_string_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716"
+    },
+    "M-7B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "candidate": "M-7B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED",
+      "condition": "P-COMP-UNDERSPECIFIED",
+      "diff_confined_to_prompts_system": true,
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-7B-QWEN_P-COMP-UNDERSPECIFIED.json",
+      "overlay_is_parent_byte_identical": false,
+      "overlay_path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/harness_config.json",
+      "overlay_sha256": "a9a6c54ff3b48b2493f8521e54797acd8eed37658e03d55d541d522a3442cb47",
+      "system_string": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.",
+      "system_string_sha256": "1294954da7b1d6b9570b07e1e39cb48515b925355d0f33d5fabf72c8e8ce3876"
+    },
+    "M-7B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "candidate": "M-7B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA",
+      "condition": "P-TREAT-GOAL-SCHEMA",
+      "diff_confined_to_prompts_system": true,
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38164607941/configs/config_M-7B-QWEN_P-TREAT-GOAL-SCHEMA.json",
+      "overlay_is_parent_byte_identical": false,
+      "overlay_path": "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/harness_config.json",
+      "overlay_sha256": "8283aae1e4ff32b2aaf0a5a2f3e8b4d889a10eb6a89636e36a1eba9fb5b2dfee",
+      "system_string": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
+      "system_string_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716"
+    }
+  },
+  "experiment_id": "EXP-INTEL-38164607941",
+  "parent_config_path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+  "parent_config_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+  "schema_version": 1
+}
