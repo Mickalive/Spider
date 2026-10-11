@@ -170,7 +170,12 @@ def main():
     require("SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET" in lane_wf, "wake must verify remote packet durability")
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
     require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
-    require("SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE" in lane_wf and "gh workflow run factory-pulse.yml" in lane_wf, "incomplete lane runs must self-wake global direction from always() cleanup")
+    require(
+        "SPIDER_INCOMPLETE_DEFER_TO_SCHEDULE" in lane_wf
+        and "SPIDER_LANE_CIRCUIT_OPEN" in text(".github/workflows/factory-pulse.yml")
+        and "schedule:" in text(".github/workflows/factory-pulse.yml"),
+        "incomplete lane runs must defer to scheduled guarded recovery rather than spin immediately",
+    )
     require("spider_design_reviewer" in lane_wf and "validate_design_review.py" in lane_wf and "SPIDER_DESIGN_REVIEW_REVISE" in lane_wf, "v2 DESIGN must pass independent pre-freeze review")
     require("checkpoint.sh design-draft" in lane_wf, "v2 DESIGN must durably checkpoint the proposed design before reviewer fallback")
     require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
