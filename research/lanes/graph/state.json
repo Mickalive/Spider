@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Given that a bank-blind, model-free deterministic operation-synonym + resource-noun resolver already exceeds max-cosine embedding selection for unseen-goal mechanism identity on the frozen 113-goal primary set (97/113=0.8584 vs 78/113=0.6903; paired family-blocked 95% bootstrap diff -0.1681, CI [-0.3077,-0.0268]) while both the two-feature cosine/margin logistic gate and the single global cosine threshold collapse to GATE-NOT-MET (t*=1.0, coverage 0.0), does a model-free resolver whose OWN ambiguity/coverage signal (e.g. unresolved operation synonym, tied/absent resource-noun match, missing required slot) supplies the abstention decision simultaneously reach pooled false-accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 on a disjoint calibration/test split, and does that deterministic resolve()+ambiguity-gate pair retain its selection advantage on a held-out mechanism set and under a differently curated synonym lexicon -- thereby deciding whether resolve() ships as a deterministic resolver plus ambiguity gate with the embedding path retired, or whether unseen-goal resolution must move to a structured slot/parameter or retrieval-model architecture trained on independently authored goals?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-11T23:37:22.767342+00:00",
-  "last_failure_retryable": false,
+  "consecutive_failures": 2,
+  "updated_at": "2026-10-11T23:46:30.509144+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "207568710d1d00f0aa82aeaf7cb2deb3469f8dfdade645de65edb962fc231d9e",
   "same_failure_count": 1,
-  "last_failure_fingerprint": "99d5de70fdea9d3ed1707774",
+  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
   "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
 }
