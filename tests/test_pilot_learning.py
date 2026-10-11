@@ -3,6 +3,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from spider.pilot_learning import compile_browser_traces, parse_verified_detail
 from spider.pilot_portal import EVAL_IDS, TRAIN_IDS
@@ -11,6 +12,8 @@ from spider.kernel import SpiderKernel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from run_real_agent_pilot import run_trial
+from train_pilot_memory import observed_agent_example, train
+from spider.pilot_portal import start_portal
 
 
 def traces(family="invoices"):
@@ -69,6 +72,42 @@ class BrowserTraceCompilerTests(unittest.TestCase):
         examples[0]["answer"] = "fake answer"
         with self.assertRaises(ValueError):
             compile_browser_traces("invoices", examples)
+
+    def test_agent_source_requires_explicit_spend_consent(self):
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaisesRegex(ValueError, "permission"):
+                train(Path(td) / "memory.jsonl", "invoices",
+                      source="browser-use", allow_model_charges=False)
+
+    def test_mocked_real_agent_urls_are_corroborated_before_compilation(self):
+        server, thread, base = start_portal()
+        async def agent_ok(*_args, **_kwargs):
+            return {"answer": "CHF 138.45",
+                    "visited_urls": [base + "/portal/invoices/view?id=A-101"],
+                    "tokens": 17, "model_cost_usd": 0.02, "steps": 4}
+        async def agent_wrong(*_args, **_kwargs):
+            return {"answer": "invented result",
+                    "visited_urls": [base + "/portal/invoices/view?id=A-101"],
+                    "tokens": 17, "model_cost_usd": 0.02, "steps": 4}
+        async def agent_external(*_args, **_kwargs):
+            return {"answer": "CHF 138.45",
+                    "visited_urls": ["http://evil.example/portal/invoices/view?id=A-101"],
+                    "tokens": 17, "model_cost_usd": 0.02, "steps": 4}
+        try:
+            with patch("train_pilot_memory.execute_browser_use", side_effect=agent_ok):
+                evidence, metrics = observed_agent_example(base, "invoices", "A-101", "google", None)
+                self.assertEqual(evidence["answer"], "CHF 138.45")
+                self.assertEqual(metrics["tokens"], 17)
+            with patch("train_pilot_memory.execute_browser_use", side_effect=agent_wrong):
+                with self.assertRaisesRegex(ValueError, "not corroborated"):
+                    observed_agent_example(base, "invoices", "A-101", "google", None)
+            with patch("train_pilot_memory.execute_browser_use", side_effect=agent_external):
+                with self.assertRaisesRegex(ValueError, "never visited"):
+                    observed_agent_example(base, "invoices", "A-101", "google", None)
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
 
     def test_verification_requires_matching_record_and_id(self):
         html = '<p>Reference: A-303</p><strong id="answer">CHF 875.00</strong>'
