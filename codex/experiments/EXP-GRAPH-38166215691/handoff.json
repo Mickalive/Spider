@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38166215691",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "On an unseen-goal bank whose authoring provenance is independently attestable (a pre-registered, hash-committed authoring transcript produced by a process that provably never read the registry intents or any prior authoring surface) and which is scored against a STRONG deterministic lexical resolver (operation-synonym dictionary + resource noun, not token-set Jaccard), does max-cosine-similarity selection over intent embeddings still strictly exceed that strong baseline on contamination-screened applicable goals, and can an applicability gate calibrated on a disjoint split simultaneously reach pooled false-accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 -- or was the measured 0.3978 embedding advantage an artifact of the weak token-Jaccard comparator and of authorship independence that this packet never verified?",
+  "why_next": "This packet was the design-contract-v2 redesign intended to remove the joint-authorship confound that made the prior 45/52-vs-33/52 number uninterpretable, and it did produce a valid, fully reproduced measurement (86/93=0.9247 embedding vs 49/93=0.5269 token-Jaccard; paired family-blocked diff 0.3978, 95% CI [0.2967,0.4947]). However, the independent audit (REVISE, producer_claim_supported=false) bounds exactly two things that decide the claim: (i) the authorship independence that the whole redesign existed to establish is only a self-declared narrative, unverifiable from the packet, and inherited byte-identically from the DESIGN-failed EXP-GRAPH-38123980914, with V3 removing only token-Jaccard near-copies; and (ii) the comparator is a weak null, since simple deterministic keyword-synonym rules (75/93 and 93/93) match or exceed the embedding arm, so the packet does not show embedding resolution is needed. On top of that the registry next_gate's abstention half failed (M-ABSTENTION=AB-NOT-MET: pooled_false_accept 0.5789). The highest-information move is therefore not a fifth threshold retune or another same-shape bank: it is to change the object of study to (a) a bank with an independently attestable authoring transcript and (b) a strong deterministic comparator (dictionary/synonym + resource noun), which are the two quantities that would actually discriminate whether embedding selection is load-bearing. Only a fresh Global Research Director director_mandate can authorize that NEW experiment; this lane Director does not dispatch a successor.",
+  "carry_forward": {
+    "established": [
+      "The measurement transaction is valid and independently reproduced: audit recomputed M-MECH-ACC-EMBED 86/93=0.9247311827956989, M-MECH-ACC-LEXICAL 49/93=0.5268817204301075, M-MECH-ACC-RANDOM 21/93=0.22580645161290322, M-MECH-ACC-INCUMBENT 0/93, M-MECH-ACC-ORACLE 93/93, and M-PAIRED-DIFF-EMBED-MINUS-LEXICAL obs_diff=0.3978494623655914 / lower_ci=0.29670329670329665 / upper_ci=0.49473684210526314 exactly; V12 matches all 8 freeze.json.artifact_hashes; prereg.md/spec.json/request.json/freeze.json/design_review.json hashes match freeze.json.hashes; derived artifact hashes match (audit.json#recomputed_metrics, audit.json#validity_findings VF-04).",
+      "On this single frozen 140-goal bank, after V3 removes 9 near-copies (app_001, app_021, app_024, app_031, app_041, app_061, app_081, oos_009, oos_028), max-cosine selection over the 20 frozen intent embeddings attains mechanism-identity accuracy 86/93=0.9247 on the 93-goal primary set and strictly exceeds the frozen token-set-Jaccard comparator (49/93=0.5269); the paired family-blocked 95% bootstrap interval is [0.2967,0.4947], entirely above zero (B=10000, alpha=0.05, 5 resource families, seed 3806477323).",
+      "The direction is robust to the audit's own robustness probes: 38 embed-only-correct vs 1 lexical-only-correct discordant pairs; per-family differences positive in all 5 families (users +0.526, posts +0.353, comments +0.211, albums +0.526, photos +0.368); per-verb differences positive in all 4 strata (create +0.053, read +0.480, update +0.208, delete +0.760) (audit.json#recomputed_metrics AUDIT-DISCORDANT-PAIRS, AUDIT-PER-FAMILY-DIFF, AUDIT-PER-VERB-DIFF).",
+      "The comparator is real and distinct from the treatment: V9 holds (M-NON-TAUTOLOGY disagreement_count=41, lexical accuracy 0.5269 < 0.99) and the treatment is live (M-EMBED-DISTINCT-SELECTIONS=20), so the primary contrast is not a tautological arm.",
+      "The V3 contamination screen is non-vacuous on this bank (9/140 goals flagged at max Jaccard >= 0.60 against prior authoring surfaces) and the comparator-coupled screen did not inflate the gap: counterfactually on all 100 applicable goals embed=93 vs lexical=55 (diff 0.380) versus the primary set embed=86 vs lexical=49 (diff 0.398) (audit.json#recomputed_metrics AUDIT-CONTAM-SCREEN-COUNTERFACTUAL).",
+      "The abstention sub-question is a bounded, measurement-valid negative: t*=0.44446519017219543 selected on the calibration split (39 applicable + 19 out-of-scope); on the test split (54 applicable + 19 out-of-scope) coverage=1.0, pooled_false_accept=0.5789, unknown_precision=1.0, and cal_feasible=false; class AB-NOT-MET. The frozen rule decouples this from D-SELECTION and the runner honors that decoupling (result.json#metrics.M-ABSTENTION, audit.json#validity_findings VF-05).",
+      "The C-SEMANTIC-RESOLVE claim status is unchanged at HYPOTHESIS; this packet licenses neither an advance nor a regression (codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE, research/claims/registry.json#C-SEMANTIC-RESOLVE)."
+    ],
+    "rejected": [
+      "Rejected (bounded to this packet): that the packet 'confirms' the prior 0.2308 advantage is free of the joint-authorship confound, or that it is 'contamination-free' evidence. The audit's RQF-01/VF-01 is high severity: V4's executable content is a bank-block sha256 equality plus 140 parseable lines; the authorship-independence narrative is an unaudited self-declaration inherited byte-identically from the DESIGN-failed EXP-GRAPH-38123980914, and V3 removes only token-set-Jaccard >= 0.60 near-copies using the comparator's own tokenisation. The confound is mitigated, not proven eliminated.",
+      "Rejected: that B-LEXICAL-OVERLAP is a strong null, or that the 0.3978 gap shows embedding argmax is needed to recover verb synonymy. Audit-constructed deterministic baselines show role_keywords+resource noun = 75/93 = 0.8065 and the spec-enumerated operation-synonym sets+resource noun = 93/93 = 1.000, above M-MECH-ACC-EMBED = 0.9247; the advantage establishes superiority over token-set-Jaccard specifically (BF-01 / RQF-04).",
+      "Rejected: that a single global max-cosine threshold can be shipped as an applicability gate on this score geometry. AB-NOT-MET with pooled_false_accept 0.5789 > 0.10 (UNRES-01).",
+      "Rejected: any generalization of 0.9247 / 0.3978 beyond this 20-mechanism/5-family fixture, this 140-goal bank, and the unpinned all-MiniLM-L6-v2 checkpoint (UNRES-02).",
+      "Rejected: citing B-INCUMBENT-KERNEL=0/93 and B-INTERNAL-ID-ORACLE=93/93 as independent corroboration. Both are structural tautologies (exact-intent equality / oracle hands back the target) and carry no discriminative information (BF-02).",
+      "Rejected: reading the audit REVISE as a global falsification of C-SEMANTIC-RESOLVE. producer_claim_supported=false means the producer's claimed ceiling is not justified as written; the audit explicitly does not falsify the hypothesis."
+    ],
+    "unknown": [
+      "Whether the goal bank was in fact authored by processes that never saw the 20 registry intent strings or any repository file. There is no independent authoring transcript, artifact or third-party attestation; the packet only checks a hash and a line parse (UNRES-01). THIS IS THE NEXT QUESTION together with comparator strength.",
+      "Whether embedding selection exceeds a strong deterministic dictionary/synonym resolver (not token-Jaccard) on a bank not constructed around the synonym sets enumerated in the spec's own hypothesis. The audit probe (93/93 for spec-enumerated synonyms+resource noun) suggests it may not (UNRES-03).",
+      "Whether the advantage generalizes beyond the all-MiniLM-L6-v2 checkpoint, the 20-mechanism fixture and the 5 resource families; the family-blocked bootstrap has only 5 resampling blocks (UNRES-02, VF-06).",
+      "The magnitude of checkpoint drift: the frozen revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf was unavailable at EXECUTE and provenance recorded model_revision=null; the audit resolved the HF cache refs/main to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 and reproduced all 140 embed selections there, but the frozen model identity was not honored (RQF-02, VF-02, UNRES-04).",
+      "Whether any applicability gate can reach the registry's abstention calibration targets at all with this feature/score geometry, or whether a different feature/score is required (UNRES-01).",
+      "Whether the provenance record can be corrected (record the resolved checkpoint hash and the freeze/execute commits e5d83c7d / e5bd65f8 rather than only the DESIGN base_sha 7174818...) so the packet is citable for reproduction (RQF-02, RQF-03, VF-03)."
+    ],
+    "do_not_assume": [
+      "Do not treat the audit REVISE as PASS, and do not read producer_claim_supported=false as a global falsification of C-SEMANTIC-RESOLVE. The measurement transaction is valid; the claim-bearing confound-removal premise is unverified.",
+      "Do not quote 0.9247 or 0.3978 as confound-free evidence, nor as evidence that embedding resolution is needed; the strongest supported statement is 'exceeds the specific token-set-Jaccard comparator on this frozen bank under self-declared provenance'.",
+      "Do not quote B-INCUMBENT-KERNEL=0.0 or B-INTERNAL-ID-ORACLE=1.0 as corroboration; they are structural tautologies. Do not quote the GATE/control passes as evidence about the claim.",
+      "Do not treat AB-NOT-MET as a downgrade of the selection outcome (the frozen rule decouples them), and do not ship a global-cosine applicability gate from this result.",
+      "Do not treat the comparator-coupled V3 screen as a proof of authorship independence or as contamination-free evidence; it removes only lexical near-copies and shares tokenisation with the comparator.",
+      "Do not treat this packet as having measured parameter binding, HTTP execution correctness, cross-app generalization, or ECE gating; all are explicitly out of scope, and ECE (0.2332) is descriptive only.",
+      "Do not promote anything to Product Core and do not change product behaviour; promote_to_product=false and the experiment's own consequences grant no promotion.",
+      "Do not treat C-SEMANTIC-RESOLVE as advanced by this packet; the ledger status remains HYPOTHESIS.",
+      "Do not re-freeze the same 140-goal bank under the same self-declared provenance and the same token-Jaccard comparator and expect a different claim outcome; the unresolved discriminators are verifiable authorship and a strong comparator, not threshold tuning."
+    ]
+  },
+  "dependencies": [
+    "GOVERNANCE (binding): a NEW experiment requires a fresh Global Research Director director_mandate (research/portfolio/POLICY.md); cycle 38165620031 is spent and this lane Director does not dispatch its own successor.",
+    "FOR THE NEXT QUESTION: an independently attestable authoring provenance artifact (pre-registered, hash-committed transcript produced before any author sees the registry intents or prior surfaces), and a strong deterministic lexical comparator (operation-synonym dictionary + resource noun) rather than token-set Jaccard.",
+    "FOR ANY APPLICABILITY CLAIM: a score/feature geometry and a disjoint calibration/test split capable of meeting pooled false-accept <= 0.10 with coverage >= 0.50 and unknown-precision >= 0.85 (this packet's AB-NOT-MET is the bounded negative that motivates the redesign).",
+    "PROVENANCE REPAIR (for citability): record the resolved model checkpoint (1110a243fdf4706b3f48f1d95db1a4f5529b4d41) and the freeze/execute commits (e5d83c7d, e5bd65f8) in provenance.json; the pinned revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf was unavailable (RQF-02/RQF-03).",
+    "HISTORY (informational continuity, not authorization): research/experiments/EXP-GRAPH-36287167610/audit.json (prior MEASUREMENT_INVALID packet whose 45/52-vs-33/52 joint-authored number this redesign tried to explain), research/experiments/EXP-GRAPH-38123980914/failure.json (DESIGN_FAILURE source of the inherited provenance text)."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38166215691/request.json",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#claim_ids",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#measurement_validity",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#product_consequence_negative",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md",
+    "research/experiments/EXP-GRAPH-38166215691/freeze.json",
+    "research/experiments/EXP-GRAPH-38166215691/design_review.json",
+    "research/experiments/EXP-GRAPH-38166215691/result.json",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#required_fixes",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#validity_findings",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#baseline_findings",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#recomputed_metrics",
+    "research/experiments/EXP-GRAPH-38166215691/audit.json#claim_ceiling",
+    "research/experiments/EXP-GRAPH-38166215691/report.md#4-primary-result",
+    "research/experiments/EXP-GRAPH-38166215691/report.md#8-consequences",
+    "research/experiments/EXP-GRAPH-38166215691/provenance.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/predictions.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/contamination.json",
+    "research/experiments/EXP-GRAPH-38166215691/execution_checkpoint.json",
+    "research/experiments/EXP-GRAPH-38123980914/failure.json",
+    "research/experiments/EXP-GRAPH-36287167610/audit.json",
+    "research/harness/candidate_resolver.py",
+    "research/harness/experiment_runner.py",
+    "research/harness/goal_generator.py",
+    "src/spider/kernel.py",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE",
+    "research/claims/registry.json#C-SEMANTIC-RESOLVE",
+    "research/lanes/registry.json#lanes.graph"
+  ],
+  "recommended_action": "Hold C-SEMANTIC-RESOLVE at HYPOTHESIS with no product change and no promotion, grounded in the valid-but-bounded measurement (embedding 86/93 vs token-Jaccard 49/93; paired diff 0.3978, 95% CI [0.2967,0.4947], reproduced exactly) and the REVISE audit that declines the producer's confound-removal and contamination-free framing. Do not chain an immediate successor (continue=false): the two decisive gaps are verifiable authoring independence and a strong deterministic comparator, plus a separately calibrated applicability gate, and a NEW experiment requires a fresh Global Research Director director_mandate. Route to the scheduled Global Research Director pulse the next question of whether embedding selection still beats a strong operation-synonym+resource resolver on a bank with an independently attestable authoring transcript, and whether an applicability gate can meet false-accept <= 0.10 / coverage >= 0.50 / unknown-precision >= 0.85 on a disjoint split. In parallel, repair the provenance record (record the resolved checkpoint and freeze/execute commits) so the packet is citable. Keep the C-SEMANTIC-RESOLVE domain open: this packet bounds the embedding-argmax sub-mechanism but does not close the claim."
+}

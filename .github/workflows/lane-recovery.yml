@@ -69,5 +69,6 @@ jobs:
             exit 0
           fi
 
-          gh workflow run factory-pulse.yml --ref main
-          echo "SPIDER_LANE_RECOVERY_WAKE"
+          # Do not amplify a shared provider failure by waking the factory
+          # on every completion. The factory's scheduled pulse owns backoff.
+          echo "SPIDER_LANE_RECOVERY_DEFER_TO_SCHEDULE"

@@ -37,6 +37,8 @@ jobs:
           python scripts/validate_main_safety.py
           python scripts/test_direction_governance.py
           python scripts/test_design_review_contract.py
+          python scripts/test_free_model_config.py
+          python scripts/test_research_circuit.py
 
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v

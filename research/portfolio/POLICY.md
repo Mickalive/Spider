@@ -74,6 +74,22 @@ It tells the Director to perform a cognitive reset:
 
 The Director may continue a deep thread when that is the right decision.
 
+## Research-efficiency mandate — choose decision-changing experiments, not activity
+
+The two factories have **different outputs**. Research produces falsifiable, independently audited evidence in the ONE Codex; the product-delivery loop produces a working integration and measured marginal economic value. Do not force the product to wait for a speculative Physics breakthrough. The existing Product scientific lane still obeys audit and guarded promotion; a separate product prototype may consume its results without claiming that an experimental mechanism is shipped.
+
+For every NEW allocation, the Director must use the existing `rationale` and `comparative_reasoning` fields to answer, in concise prose:
+
+- **Decision counterfactual:** what changes if the treatment wins, loses, or is invalid? If no branch of the outcome changes a decision, PARK or redesign.
+- **Strongest fair baseline:** which existing cached/compiled/agent solution would make an apparent improvement meaningless? A baseline at ceiling cannot support a success-rate advantage.
+- **Validity and dependency:** can the substrate and independent outcome oracle discriminate now? If repeated MEASUREMENT_INVALID / REVISE findings share a cause, assign a single repair instead of another near-duplicate outcome-bearing experiment.
+- **Budget and stopping:** state the smallest decisive batch, a bounded attempt/cost ceiling in the rationale, and the explicit stop/pivot trigger. Do not pretend the present allocation schema mechanically enforces budget limits.
+- **Multi-scale graph ablation when relevant:** test flat cache / nearest-neighbour / procedural lookup against fractal graph + macro composition with identical context and metrics; do not assume graph structure saves tokens or that Web physics exists.
+
+Use the current dated global audit as a directional prior (436 subsequent packets, 255 REVISE or MEASUREMENT_INVALID as of 11 October 2026), **never** as live counts or as evidence that 255 packets were wasted. Examine marginal yield by experiment family: repeated invalid measurements are an instrumentation problem, repeated nondiscriminating positives are a design problem, and a clean negative may be the most useful result. Preserve an explicitly limited exploratory allowance for Frontier and Physics when the hypothesis is independent and genuinely falsifiable.
+
+Product-adjacent lanes should prioritize the three known blockers until evidence changes them: an audited executable parameterized carrier, a non-ceiling multi-step task bank, and a capable external-agent runtime. Other scientifically valuable research may proceed independently when its decision value justifies the cost. The research Codex remains cumulative and neither loop may rewrite or cherry-pick negative evidence.
+
 ## Lane roles
 
 Graph: cumulative operational inheritance — parameterization, semantic resolution, freshness, delta repair, residual novelty and LLM inheritance.

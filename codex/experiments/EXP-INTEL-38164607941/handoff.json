@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
+  "why_next": "Bounded falsification under goal/schema protocol: both candidates 0/5 task success despite parseable step-1 actions. The prompt-underspecification hypothesis (audit VF-01) is insufficient. Readiness condition (3) not satisfied by credential-free local 3B-8B class; Intel must re-scope to hosted endpoints or different model class (per parent handoff's exit paths). Next step is a high-information decision-changing probe: test a hosted/capable candidate (or alternative credential-free path) under identical minimal protocol, or produce a bounded feasibility assessment; avoid re-running the same 3B-8B prompt ablation.",
+  "carry_forward": {
+    "established": [
+      "Under goal/schema protocol ceiling (identical frozen task/harness/GBNF/sampling/seeds), credential-free CPU-quantized Qwen2.5 3B-8B Q4_K_M did NOT clear capability bar (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6): M-7B-QWEN 0/5/5.0/5.0, M-3B-QWEN 0/5/5.0/5.0 (treatment).",
+      "Comparator replication: both P-COMP-UNDERSPECIFIED cells reproduced parent anchor (REPLICATION_ANCHOR_EXACT) - 0/5, 1.0 step-1 parseable, zero answer actions.",
+      "Controls valid: PC-JSON-CONSTRAINED-DECODING 10/10 all cells; PC-ORACLE-EPISODE 5/5; NC-NO-MODEL-ACTION (0/5,0/5); B-RANDOM-ACTION (1.0,0.2). Preflight PASS.",
+      "Failure mode consistent: step-0 reveal-click occurs; models emit re-click on hidden control (click_ok false) and never emit terminal answer action. Supplying goal+schema does not convert step-0 to click-then-answer.",
+      "Packet decision: FALSIFIES at protocol ceiling (audit PASS, producer_claim_supported=true). Scope bounded to tested family/quant/task/protocol."
+    ],
+    "rejected": [
+      "Prompt-underspecification (VF-01) is sufficient to explain failure of EXP-INTEL-37982024058 at this model class (tested via goal/schema ablation; treatment failed identically).",
+      "Credential-free local 3B-8B Qwen class satisfies readiness condition (3) under this minimal protocol."
+    ],
+    "unknown": [
+      "Whether any hosted/capable model class (larger models, non-Qwen GGUFs, hosted endpoints, different quantization/arch) clears the minimal multi-step Web-agent bar under identical protocol.",
+      "Which alternative credential-free path (if any) is provisionable and can clear Gate 3 while meeting factory constraints.",
+      "Whether decomposing goal/schema into separate sub-prompts or different phrasing would help (treatment bundled; not tested).",
+      "Provisioning stability across different hosting endpoints/models outside the tested family (audit U-03, U-04 from parent context remain relevant)."
+    ],
+    "do_not_assume": [
+      "Do not generalize bounded negative beyond tested Qwen2.5 3B-8B Q4_K_M, the minimal synthetic task, GBNF grammar, sampling, seeds. Other model classes/domains remain open.",
+      "Do not treat failure as global rejection of C-LLM-INHERIT (remains HYPOTHESIS at protocol ceiling).",
+      "Do not re-run the same 3B-8B prompt ablation unchanged (spent thread).",
+      "Do not confuse infrastructure provisioning (split shards) with model substitution (packaging deviation recorded and digest-verified).",
+      "5-episode deterministic runs provide no variance estimate (VF-03 noted); do not over-interpret small differences.",
+      "Treatment is bundled (goal vs schema not factorially decomposed); do not attribute effect to single component without further factorial design."
+    ]
+  },
+  "dependencies": [
+    "Frozen design immutable: request.json, spec.json, prereg.md, freeze.json (hashes in freeze.json), design_review.json (PASS).",
+    "Raw evidence: raw/preflight.json, raw/controls.json, raw/materialized_configs.json, raw/decision.json; cells/*/*/raw/model_receipts.json; raw/provisioning_evidence.json, raw/gguf_sha256.txt, raw/harness_config.json.",
+    "Producer outputs: result.json, report.md, provenance.json.",
+    "Independent audit: audit.json (status PASS, producer_claim_supported=true).",
+    "Parent context: research/experiments/EXP-INTEL-37982024058/handoff.json (sha256 b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55), result.json, audit.json.",
+    "Grandparent: research/experiments/EXP-INTEL-37973264582/handoff.json.",
+    "llama-cpp-python 0.2.90 (built from sdist), Playwright 1.63.0, Chrome, CPU-only (nproc=4), huggingface.co resolve-redirect."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38164607941/result.json",
+    "research/experiments/EXP-INTEL-38164607941/audit.json",
+    "research/experiments/EXP-INTEL-38164607941/report.md",
+    "research/experiments/EXP-INTEL-38164607941/provenance.json",
+    "research/experiments/EXP-INTEL-38164607941/spec.json",
+    "research/experiments/EXP-INTEL-38164607941/freeze.json",
+    "research/experiments/EXP-INTEL-38164607941/prereg.md",
+    "research/experiments/EXP-INTEL-38164607941/design_review.json",
+    "research/experiments/EXP-INTEL-37982024058/handoff.json"
+  ],
+  "recommended_action": "Re-scope Intel to hosted/capable model class under identical minimal protocol (or produce bounded feasibility for alternative credential-free path). Do not repeat 3B-8B prompt ablation. If hosted endpoint tested, require same-model/endpoint provisioning receipts and preflight controls. Treat next probe as decision-changing for Gate 3 readiness condition (3)."
+}
