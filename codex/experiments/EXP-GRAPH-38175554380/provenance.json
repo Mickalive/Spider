@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "github_run_id": "38175554380",
+  "execution": {
+    "executed_at": "2026-10-11",
+    "mode": "local deterministic replay of the frozen runner from the frozen prereg.md",
+    "command": "python3 research/experiments/EXP-GRAPH-38175554380/run_experiment.py",
+    "exit_code": 0,
+    "runner_source_origin": "verbatim extraction of the <!-- BEGIN FROZEN RUNNER --> block of research/experiments/EXP-GRAPH-38175554380/prereg.md; V12-B equality between the running file and the frozen block was asserted by the runner itself",
+    "runner_block_sha256": "a7e5d9f7616ac2628349991607fa7640e40c0d419fb2a05ca456042ecc99892a",
+    "runner_file_sha256": "17d743781d853d88c07a4f4dde16a7d2aaa9a11965a95319d227791ecb88d293"
+  },
+  "commits": {
+    "repo_head_at_execute": "2ca17a0f0d056862618d689869b0abea1ee42974",
+    "execution_base": "2ca17a0f",
+    "freeze_commit": "6d2ae9be",
+    "design_commit": "fcc57b80",
+    "allocate_commit": "ea61f565",
+    "design_base_sha": "7ff6752ff348f662a3c13f6540e6434dbb3b790a",
+    "execution_checkpoint_pre_execute_sha": "6d2ae9beb53b07e90890e9267c220e8cd685b452"
+  },
+  "frozen_inputs": {
+    "request.json": "867cb30ea50d3f614369dc7dca20a2298af6400e2965f8aa21c821a1e35423bc",
+    "spec.json": "539a42ecdad7ab54db96acdc239982130936fd8bc23bae7297225c5c7e7c1c5b",
+    "prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "design_review.json": "50aad74ae1665d703ba1a650e73a43ebec10922ed59e2d8305a8e9442c74b292",
+    "freeze.json": "research/experiments/EXP-GRAPH-38175554380/freeze.json (hash values recorded in freeze.json.hashes)"
+  },
+  "freeze_artifact_hashes": {
+    "research/harness/candidate_resolver.py": "8ff7abe799e050f0ef708ce2329940e61cb6ba113849246d1a0fe7a66066d115",
+    "research/harness/experiment_runner.py": "c249ade23e1fda54c1e08a5835050afda32462ab36d0b2e9d2dc9f05b3549705",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f",
+    "research/harness/http_server.py": "25619aaf840ab833e963541aca93addca6ff17d2f2e9d4a1f76e528d7642390f",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "datasets_fixtures": {
+    "applicable_bank": {
+      "location": "research/experiments/EXP-GRAPH-38175554380/prereg.md#GOAL BANK block",
+      "block_sha256": "3a30e67f171385f9b5207e793a46575102aca7f4d8e53772e16894d92ba289dd",
+      "description": "120 independently authored applicable single-operation goals (5 families x 4 ops x 6 phrasings)"
+    },
+    "oos_bank": {
+      "location": "research/experiments/EXP-GRAPH-38175554380/prereg.md#OOS BANK block",
+      "block_sha256": "3b74d933940c4cf6e4f43293cbc3d1e8c5ebd558a66d5029f38b23d59f24e5c1",
+      "description": "40 independently authored out-of-scope goals naming one supported family but an unsupported operation"
+    },
+    "lexicon": {
+      "location": "research/experiments/EXP-GRAPH-38175554380/prereg.md#LEXICON block",
+      "block_sha256": "56d874db361b2377f6faf767f5c2aa652066f6b0b50d7a6081512af141ae9e5e",
+      "description": "bank-blind operation-synonym dictionary and resource-noun lexicon for B-LEX-STRONG"
+    },
+    "prior_parent_bank_texts": {
+      "location": "research/experiments/EXP-GRAPH-38175554380/prereg.md#PRIOR-PARENT-BANK-TEXTS block",
+      "block_sha256": "b1deb80890cf29aeaf39fb5b56c777b548d8606401b8e36a5bf82bad9e324f6a",
+      "description": "140 parent-packet goal texts used only as contamination surfaces"
+    },
+    "author_prompts": {
+      "location": "research/experiments/EXP-GRAPH-38175554380/prereg.md#AUTHOR-PROMPTS block",
+      "block_sha256": "2d2f0ad1a4a1c90694f6ba66ba93299bb5548e42c1db98218577c8fc663a9ccc",
+      "description": "hash-committed blind authoring transcripts for the applicable, OOS and lexicon authors"
+    },
+    "kernel_registry_fixture": {
+      "path": "research/experiments/EXP-GRAPH-38175554380/derived/kernel_registry.jsonl",
+      "sha256": "163f534d21a12029196d8a1b0d223c1dd6c02fdc9c4614cf15922b76438bb1e5",
+      "description": "registry of the 20 exact fixture intents for B-INCUMBENT-KERNEL"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.15",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.17.1",
+    "scikit_learn_version": "1.5.1",
+    "torch_version": "2.4.0+cpu",
+    "sentence_transformers_version": "3.0.1",
+    "bootstrap_note": "CPU scientific stack installed at EXECUTE from public indexes to match the parent packet's recorded pins (EXP-GRAPH-36287167610/provenance.json: sentence-transformers 3.0.1, torch 2.4.0, numpy 1.26.4, scikit-learn 1.5.1). A bootstrap failure would have yielded status=BLOCKED, not FALSIFIES; no failure occurred."
+  },
+  "model": {
+    "name": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision_requested": "c9745ed1d9f207416be6d2e6f8de32d1f161f9bf",
+    "revision_resolved": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "revision_unavailable_fallback": true,
+    "load_notice": "stderr: 'No sentence-transformers model found with name sentence-transformers/all-MiniLM-L6-v2. Creating a new one with mean pooling.' (raw_evidence/runner_stderr.txt)"
+  },
+  "seeds": {
+    "primary_bootstrap_seed": 3815816012,
+    "primary_bootstrap_seed_derivation": "38175554380 % 2**32",
+    "random_role_seed": 4242,
+    "logistic_regression_seed": 42,
+    "shuffled_label_derangement_seed": 3815816112,
+    "random_score_seed": 3815816113
+  },
+  "derived_artifacts": {
+    "research/experiments/EXP-GRAPH-38175554380/derived/predictions.json": "a973e134fb56cb9627894965e666680a87c4f617ca4ffee094bf57d8db58b344",
+    "research/experiments/EXP-GRAPH-38175554380/derived/contamination.json": "6bec05b0a555adfed94ac4940f4d3181bf5f08b034a437c8a0a74ff1e4d0b59a",
+    "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json": "0f7c64a0e78f392a9699af4896570eb0282378fc3c6091e73e993c8d81565004",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stdout.txt": "ee8621d8ee53c2286b9dadaac089c45c303e17a25406bf78fda2fcb0522fafa8",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stderr.txt": "1476780f0e0e02ec605a560979f915aa9d1667d33cf384fab989c4b2860c6d6f",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/environment.json": "1725188e6a76a59d9766cfb0f04f4d3569a4cf8e56aacc071965ea75752e866a"
+  },
+  "reproduction": {
+    "steps": [
+      "Verify sha256(prereg.md)==freeze.json.hashes['prereg.md'] and every freeze.json.artifact_hashes entry (V12).",
+      "Extract the FROZEN RUNNER block from prereg.md to run_experiment.py; the runner re-checks its own source against that block (V12-B).",
+      "Install the pinned CPU stack: torch==2.4.0 (CPU index), sentence-transformers==3.0.1, numpy==1.26.4, scikit-learn==1.5.1.",
+      "Run `python3 research/experiments/EXP-GRAPH-38175554380/run_experiment.py` from the repository root.",
+      "Compare derived/measurements.json against result.json; decisions are deterministic given the resolved model checkpoint."
+    ],
+    "checkpoint_dependency": "A-EMBED-COSINE selections depend on the resolved all-MiniLM-L6-v2 checkpoint (1110a243...); B-LEX-STRONG, the controls, the contamination screen and the bootstrap are deterministic pure-string/numeric operations."
+  },
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38175554380/request.json",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/design_review.json",
+    "research/experiments/EXP-GRAPH-38175554380/freeze.json",
+    "research/experiments/EXP-GRAPH-38175554380/execution_checkpoint.json",
+    "research/experiments/EXP-GRAPH-38175554380/result.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/predictions.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/contamination.json",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stdout.txt",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stderr.txt",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/environment.json",
+    "research/experiments/EXP-GRAPH-38166215691/handoff.json",
+    "research/experiments/EXP-GRAPH-36287167610/provenance.json"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt": "93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+    "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json": "7b1e50436e75292baa88029264938773342b99785536a94c185d8371b74693f0",
+    "research/intel/run_exp_37982024058.py": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "frozen_at": "2026-10-11T20:19:57.204485+00:00",
+  "hashes": {
+    "design_review.json": "dc9058f709b9eebdddf4b238c7cf41bd83f8de6651d07fbf79531a9c6484b9c0",
+    "prereg.md": "265a25bdee4268453b985fb6f93e06b9fc8b20db7caa87eca7fca30a9b8da2c9",
+    "request.json": "0b182189707df4eb0b0e695bd96818dbb520d96b8f0f73d2c6a64753e4b96719",
+    "spec.json": "fb6d382a3decfb282958c250e698ebb5bbd61bdaca919ed1aef05839e60afa1e"
+  },
+  "schema_version": 1
+}

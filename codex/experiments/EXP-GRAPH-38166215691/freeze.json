@@ -1,0 +1,22 @@
+{
+  "artifact_hashes": {
+    "research/harness/candidate_resolver.py": "8ff7abe799e050f0ef708ce2329940e61cb6ba113849246d1a0fe7a66066d115",
+    "research/harness/experiment_runner.py": "c249ade23e1fda54c1e08a5835050afda32462ab36d0b2e9d2dc9f05b3549705",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f",
+    "research/harness/http_server.py": "25619aaf840ab833e963541aca93addca6ff17d2f2e9d4a1f76e528d7642390f",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-GRAPH-38166215691",
+  "frozen_at": "2026-10-11T19:44:08.394205+00:00",
+  "hashes": {
+    "design_review.json": "7a1e9770aedb76f1d3d2230339655e6f7419a653cb4b1668c43eb960cdd87924",
+    "prereg.md": "1c3c2120c7351e5fa45e9dee40444c0330e928aee729753da023986110410b5d",
+    "request.json": "e7917569e8a34176a9e766b4486adfb85812206b82cc05e7bc64cd006aa9cc49",
+    "spec.json": "bd25c0e59c95b2b766a177df787925d2e1fff5ccffc1603f35184937a9d12dce"
+  },
+  "schema_version": 1
+}
