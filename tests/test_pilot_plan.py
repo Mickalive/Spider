@@ -11,7 +11,7 @@ class PilotPlanTests(unittest.TestCase):
     def test_plan_is_randomized_but_complete_and_reproducible(self):
         rows = make_plan(101, 2)
         self.assertEqual(rows, make_plan(101, 2))
-        self.assertEqual(len(rows), 32)
+        self.assertEqual(len(rows), 40)
         buckets = {}
         for row in rows:
             buckets.setdefault((row["task_id"], row["replicate"]), set()).add(row["arm"])
