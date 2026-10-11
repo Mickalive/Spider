@@ -96,24 +96,28 @@ def oracle(task: PublicTask) -> str:
 
 
 class _PyPIHeader(HTMLParser):
+    """Version comes only from known headings, never arbitrary page text."""
     def __init__(self):
         super().__init__()
         self.depth = 0
-        self.text = []
+        self.headings: list[str] = []
+        self.buf: list[str] = []
 
     def handle_starttag(self, tag, attrs):
         if self.depth:
             self.depth += 1
-        elif tag == "h1" and "package-header__name" in dict(attrs).get("class", "").split():
-            self.depth = 1
+        elif tag in ("h1", "h2", "h3"):
+            self.depth, self.buf = 1, []
 
     def handle_endtag(self, tag):
         if self.depth:
             self.depth -= 1
+            if self.depth == 0:
+                self.headings.append(" ".join(" ".join(self.buf).split()))
 
     def handle_data(self, data):
         if self.depth:
-            self.text.append(data)
+            self.buf.append(data)
 
 
 def parse_page(task: PublicTask, raw: bytes, final_url: str) -> str | None:
@@ -130,11 +134,18 @@ def parse_page(task: PublicTask, raw: bytes, final_url: str) -> str | None:
         return None
     parser = _PyPIHeader()
     parser.feed(raw.decode("utf-8", errors="replace"))
-    text = " ".join(" ".join(parser.text).split())
-    # The page title must contain the exact package name, followed by the version.
-    match = re.fullmatch(rf"{re.escape(task.identifier)}\s+([A-Za-z0-9][A-Za-z0-9.+_-]{{0,99}})", text)
-    return match.group(1) if match else None
-
+    # Real PyPI's release-file heading is stable even when the old package
+    # header's CSS class disappears. Require an exact matching project id.
+    patterns = (
+        rf"Release files for\s+{re.escape(task.identifier)}\s+([A-Za-z0-9][A-Za-z0-9.+_-]{{0,99}})",
+        rf"{re.escape(task.identifier)}\s+([A-Za-z0-9][A-Za-z0-9.+_-]{{0,99}})",
+    )
+    for heading in parser.headings:
+        for pattern in patterns:
+            match = re.fullmatch(pattern, heading, flags=re.IGNORECASE)
+            if match:
+                return match.group(1)
+    return None
 
 def direct_result(task: PublicTask) -> str:
     """Strong direct API comparator; never call this a Spider result."""
