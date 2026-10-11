@@ -1,48 +1,120 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-GRAPH-38106195548",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-FRESHNESS"
+  ],
+  "claim_scope_note": "The only claim addressed by this packet is C-FRESHNESS (owner_lanes graph/runtime/product). This is a feasibility/design experiment testing whether a D1V population spanning >=2 credential-free, server-rendered, no-JavaScript GET-only anchors can be constructed via a materially different anchor population or instrument redesign. No false-accept guard bound is measured as an outcome; only constructability and the structural blockers.",
+  "director_mandate_binding": {
+    "cycle_id": "38105755182",
+    "action": "PIVOT",
+    "target_claim": "C-FRESHNESS",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "SUPERSEDE",
+    "binding_strategic_question": "Given that transport-value coupling is confirmed time-stable across two independent capture dates and the anchor-clustered bootstrap is certified non-degenerate, can a value-only-rotation (D1V) population spanning >=2 credential-free, server-rendered, no-JavaScript GET-only anchors be constructed - either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators and token-bearing final_urls from value rotation - such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential is non-degenerate, or if not constructible, should the four-anchor Part II route be PARKed?",
+    "mandate_escape_clause": "If no such population/redesign is constructible on the credential-free GET-only substrate, the experiment must record the decisive bounded reason for non-constructability and the recommendation to PARK the four-anchor Part II route.",
+    "treatment_of_parent_handoff": "SUPERSEDE. The parent handoff EXP-GRAPH-37992949248 is continuity evidence only. Its proposed remedies are the options to be systematically evaluated here."
+  },
+  "parent_handoff_continuity": {
+    "parent_experiment_id": "EXP-GRAPH-37992949248",
+    "parent_handoff_path": "research/experiments/EXP-GRAPH-37992949248/handoff.json",
+    "parent_handoff_sha256": "4dd5f69fc4909b8531e1901a1dc0cef5ad3eb76f18d1c2581ba797124a51c780",
+    "disposition": "SUPERSEDE as authorization. Retained as continuity evidence only.",
+    "inherited_established": [
+      "Transport-value coupling is time-stable: M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors across two capture dates",
+      "Anchor-clustered bootstrap is certified non-degenerate (GATE F PASS on synthetic fixtures)",
+      "D1V population on original 4 anchors spans exactly 1 anchor (CAL-POS-2); degeneracy mode ANCHOR_TRANSPORT_COUPLING",
+      "CAL-POS-1 has BODY_DERIVED_ETAG; CAL-POS-3 has TOKEN_BEARING_FINAL_URL; CAL-POS-4 is NO_FIELD"
+    ],
+    "inherited_rejected": [
+      "Reading Part II guard bound on original 4 anchors as non-degenerate"
+    ],
+    "inherited_unknown": [
+      "Whether a multi-anchor D1V population is constructible via different anchors or instrument redesign"
+    ],
+    "inherited_do_not_assume": [
+      "Do not re-freeze the same four anchors expecting non-degenerate Part II"
+    ]
+  },
+  "question": "Can a D1V (value-only rotation) population spanning >= 2 credential-free, server-rendered, no-JavaScript GET-only anchors be constructed, either by admitting a materially different anchor population with transport validators independent of the rotating value, or by an instrument redesign that decouples body-derived validators and token-bearing final_urls from value rotation?",
+  "hypothesis": "H-CONSTRUCT: Either (a) there exists a materially different anchor population (>=2 anchors meeting inclusion criteria) whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, enabling M-N-D1V-ANCHORS >= 2, or (b) an instrument redesign (decoupling body-derived ETag from body value or decoupling token-bearing final_url from value rotation) yields M-N-D1V-ANCHORS >= 2 on a feasible population while preserving the frozen D1V definition and credential-free GET-only substrate. H-NOT-CONSTRUCT: No such anchor population and no feasible instrument redesign satisfy all inclusion constraints (credential-free, server-rendered, no-JavaScript, GET-only), so M-N-D1V-ANCHORS >= 2 is not constructible and the four-anchor Part II route should be PARKed.",
+  "falsifier": "F-CONSTRUCTABLE: Discovery of >=2 anchors meeting all criteria with M-N-D1V-ANCHORS >= 2 under the chosen construction (population-based or redesign-based), with non-degenerate anchor-clustered estimator controls passing for the population. F-NOT-CONSTRUCTABLE: Systematic search over candidate populations and documented instrument redesigns fails to produce >=2 anchors satisfying all criteria; all candidates are blocked by transport-value coupling or substrate constraints, and estimator controls confirm the degeneracy is attributable to population (not estimator).",
+  "baselines": [
+    {
+      "id": "B-ORIGINAL-4",
+      "description": "The original four anchors (CAL-POS-1..4) with frozen transport signature",
+      "expected_behavior": "M-N-D1V-ANCHORS == 1; ANCHOR_TRANSPORT_COUPLING"
+    },
+    {
+      "id": "B-POPULATION-SEARCH",
+      "description": "Systematic screening of candidate credential-free GET-only anchors against transport independence criteria",
+      "expected_behavior": "May yield >=2 anchors with transport validators independent of value rotation, or zero"
+    },
+    {
+      "id": "B-INSTRUMENT-REDESIGN",
+      "description": "Alternative D1V/transport extraction strategies that decouple body-derived validators from value rotation",
+      "expected_behavior": "May render transport_change insensitive to value rotation for previously blocked anchors, or may violate substrate constraints"
+    }
+  ],
+  "positive_control": "PC-ESTIMATOR-CAPABLE: Apply same anchor-clustered estimator positive controls (GATE F) to any candidate population with >=2 anchors - heterogeneous 2-anchor fixture must yield non-degenerate positive-width interval.",
+  "null_control": "NC-TRANSPORT-INDEPENDENCE: For any candidate anchor in D1V population, demonstrate transport validators (ETag/LM/Cache-Control/Vary/final_url) do not vary as a deterministic function of the rotating value under the proposed construction.",
+  "measurement_validity": [
+    {
+      "id": "V01-DESIGN-NOT-EXECUTE",
+      "blocking": true,
+      "requirement": "This is DESIGN ONLY. No outcome-bearing measurements of guard false-accept rates are performed. All feasibility checks are pre-freeze satisfiability/constructability assessments."
+    },
+    {
+      "id": "V02-V2-FREEZE-ELIGIBILITY",
+      "blocking": true,
+      "requirement": "For design_contract_version==2, all six freeze_eligibility checks must be addressed with PASS or justified NOT_APPLICABLE; freeze_artifacts must list all mutable local dependencies."
+    },
+    {
+      "id": "V03-SUBSTRATE-CONSTRAINTS",
+      "blocking": true,
+      "requirement": "Candidate anchors must satisfy: credential-free, server-rendered, no-JavaScript, GET-only. Any proposed instrument redesign must preserve these constraints."
+    },
+    {
+      "id": "V04-PRESERVE-FROZEN-DEFINITIONS",
+      "blocking": true,
+      "requirement": "The D1V definition, transport_signature fields, and guard structure remain frozen as defined; redesign means decoupling strategy, not redefining semantics."
+    }
+  ],
+  "decision_rule": "DECISION-CONSTRUCTABLE if >=2 anchors form a D1V population with M-N-D1V-ANCHORS >= 2 and transport validators provably independent of value rotation, passing estimator capability controls. DECISION-NOT-CONSTRUCTABLE if systematic search yields no such population and all instrument redesigns are infeasible while satisfying constraints; in this case recommend PARKing the four-anchor Part II route and redirecting C-FRESHNESS to alternative objective.",
+  "product_consequence_positive": "Enables non-degenerate guard false-accept measurement for freshness, potentially allowing validation/refinement of C-FRESHNESS with measurable bounds.",
+  "product_consequence_negative": "Confirms four-anchor Part II route cannot power the non-degenerate read under the frozen definitions; avoids wasted EXECUTE cycles on structurally degenerate population and directs effort to alternative approaches.",
+  "estimated_cost": "LOW (design/feasibility assessment; no large-scale measurement runs planned in DESIGN)",
+  "expected_information_gain": "HIGH (resolves the blocking degeneracy question decisively, preventing uninformative EXECUTE attempts)",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Decision rule has two reachable outcomes (CONSTRUCTABLE and NOT_CONSTRUCTABLE) determinable by systematic evaluation of candidate populations and instrument redesigns.",
       "evidence_refs": []
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Feasibility assessment uses conceptual/structural analysis; any light probes needed are satisfiable via standard HTTP inspection without outcome-bearing guard measurements.",
       "evidence_refs": []
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Baselines B-ORIGINAL-4, B-POPULATION-SEARCH, B-INSTRUMENT-REDESIGN are clearly defined and distinguishable.",
       "evidence_refs": []
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Controls PC-ESTIMATOR-CAPABLE and NC-TRANSPORT-INDEPENDENCE are well-defined and testable.",
       "evidence_refs": []
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "PASS",
+      "reason": "Treatment approaches (population search and instrument redesign strategies) are conceptually executable under stated constraints; no structurally impossible treatment.",
       "evidence_refs": []
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
+      "status": "NOT_APPLICABLE",
+      "reason": "DESIGN-only feasibility experiment with no outcome-bearing measurements; no mutable local code/data/task-bank/fixture dependencies whose identity changes interpretation of the design decision. Design relies on frozen definitions from parent packet.",
       "evidence_refs": []
     }
   },
