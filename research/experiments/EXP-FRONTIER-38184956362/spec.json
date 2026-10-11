@@ -1,50 +1,156 @@
 {
+  "spec_schema_version": 2,
   "experiment_id": "EXP-FRONTIER-38184956362",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "question": "Binding Director mandate (director_mandate.allocation.question, CONTINUE on C-CROSSSITE, cognitive_reset=true, parent_handoff_disposition=USE; SUPERSEDES the three prior attempts EXP-FRONTIER-37984242167 / EXP-FRONTIER-38085197666 / EXP-FRONTIER-38164611798). On the credential-free GET-only stdlib-HTTP substrate, the design must FIRST prove its instrument and its substrate before any outcome is measured: (PC-1) smoke-test the EXACT frozen discovery entry point (--stage discovery / --stage all) to mechanical completion at pre-freeze cost and bind the executed code identity so a v2 freeze-eligibility check cannot again pass on a non-executable measured object; (PC-2) freeze a Q1 census that separates DEEP-discovered from DEEP-fetched with OBSERVED controls and fetch the unfetched deep frontiers (mdBook/doc.rust-lang.org 220, docs.pytest.org 160, quotes.toscrape.com 99, docs.readthedocs.io 36, jekyllrb.com 24, react.dev 8, pandas.pydata.org 9 discovered-but-unfetched hop>=3 pages per the bound parent frame), so Q1 measures state-carrying prevalence rather than crawl observability; (PC-3) require >=2 distinct hosts/engines on which DEEP state-carrying items are actually observable. ONLY if PC-1..PC-3 hold: (Q2) what fraction of DEEP (hop 3..6) state-carrying items is reachable in <=K=3 fresh-agent GETs via ANY of the five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD), with per-channel coverage disclosed; and (Q3) is that fraction >= 0.50 on >=2 distinct engines? If PC-1, PC-2 or PC-3 cannot be satisfied at pre-freeze cost the design must fail loudly and record BLOCKED with the exact unmet precondition instead of freezing a weaker run; this bounded thread is then TERMINATED. Operationalized on the frozen 20-host pool with the frozen parent discovery frame as the Q1 frame, the frozen discovery protocol with per-channel charged costs <=K, and the frozen materiality threshold 0.50 on >=2 distinct engines, all measured by the outcome module embedded verbatim in prereg section 7 between FROZEN_CODE_BEGIN and FROZEN_CODE_END (DERIVED_SHA256 b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f, derived from the bound base module BASE_SHA256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a).",
+  "hypothesis": "H1 (SUPPORTS condition). On the credential-free GET-only stdlib-HTTP substrate over the frozen 20-host pool, at least two distinct engines reach a discovery-reachable fraction of admitted DEEP (hop 3..6) state-carrying items of >= 0.50 within K=3 fresh-agent GETs via any of the five frozen site-native discovery channels, with the per-channel coverage ledger and every zero-admission channel disclosed. If Q3 holds, site-native indexes make deep state-carrying acquisition O(1) within the K budget, so shortest-path hop is NOT a fundamental acquisition-cost barrier: effort moves from traversal-and-cache to discovery-channel coverage and substrate expansion. This bounds C-CROSSSITE upward on this substrate class.",
+  "falsifier": "F1 (FALSIFIES condition). Fewer than two distinct engines reach the 0.50 threshold while at least one engine admits >=1 DEEP item (engine-stratified bounded negative): on this substrate class and frozen frame, site-native discovery is NOT an O(1) shortcut for deep state-carrying acquisition; the discovery axis is closed on this substrate and the persistence-maintenance axis (re-validation GETs/bytes plus stale-replay false-accept rate vs re-derivation cost, scaling with hop and elapsed time - the Director's recorded runner-up) is handed to the next mandate. A valid FALSIFIES is a bounded replication negative, never an infrastructure failure. INCONCLUSIVE (never a negative, never a SUPPORTS): zero DEEP items admitted across the frozen frame (Q1 measured; Q2/Q3 vacuous; the vacuity is an attainability fact recorded with the explicit zero-DEEP engine census), or every DEEP-admitting engine is LIMITED (>10% of its admitted DEEP items dead to the liveness re-GET), or seed fetch fails on every pool host (infrastructure signature per EXPERIMENT_PACKET.md section 1, NOT a scientific null; outcome stages never produce a measurement from it).",
+  "baselines": [
+    {
+      "id": "B-SAME-HOST-BFS-PATH-COST",
+      "kind": "primary_comparator_measured_in_pool",
+      "definition": "The a-priori acquisition path the O(1) discovery claim must beat: the frozen same-host static-<a> item-blind FIFO BFS (budget 250, depth 6) that DISCOVERED the Q1 frame. Per admitted DEEP item, fresh-agent link-following cost = the 1-based BFS discovery/fetch ordinal (requests column of the bound frame), <=250 for every item because the parent BFS discovered it within budget, and ~hop+1 on a clean chain. The charged discovery cost (<=K=3) is compared against this measured per-item path cost."
+    },
+    {
+      "id": "B-PERSISTED-PATH-REACQUISITION",
+      "kind": "inherited_context_reference_not_remeasured",
+      "definition": "Parent packet EXP-FRONTIER-37950626378 RACQ_PATH: re-acquiring a persisted path cost ~hop+1 fresh GETs (1532/1532 items with path_len == hop+1) on the single DEEP-bearing engine of that pool. Carried as inherited context ONLY; labeled not re-measured; identifies the path-bound cost discovery must undercut."
+    },
+    {
+      "id": "B-DIRECT-URL-REPLAY",
+      "kind": "inherited_context_reference_not_remeasured",
+      "definition": "Parent packet EXP-FRONTIER-37950626378 RACQ_URL: acquiring a known URL costs exactly 1 fresh GET. Carried as inherited context ONLY; labeled not re-measured; the 1-GET floor a discovery channel plus item GET approaches when the item is listed."
+    }
+  ],
+  "positive_control": "PC_REACHABILITY_LISTED_LIVE (drives the actual evaluate_items scoring path against a local HTTP fixture: items listed by SITEMAP_XML, JSON_LD and ON_SITE_SEARCH and live must be reachable; DESIGN-observed 3/3 True) + PC_PARSER_CANARY_* (seven offline parser canaries with exact expected URL sets: PC_PARSER_CANARY_sitemap_xml, PC_PARSER_CANARY_sitemap_index, PC_PARSER_CANARY_sitemap_txt, PC_PARSER_CANARY_robots, PC_PARSER_CANARY_feed_rss, PC_PARSER_CANARY_feed_atom, PC_PARSER_CANARY_jsonld) + PC-CENSUS-DEEP-FETCH (the census must actually FETCH the discovered DEEP frontiers: n_deep_fetched == n_deep_discovered for every non-seed-error host, and n_deep_with_controls >= 1 on >=2 engines; this is the PC-2/PC-3 gate) + PC-SEED-LIVENESS (all 20 frozen seeds must return HTTP 200 at the EXECUTE inventory gate; a seed failure is recorded and that host's census is left-with-reason, never a scientific null). Any mismatch is a chain-failure signal: controls gate FAIL -> MEASUREMENT_INVALID, never a scientific branch.",
+  "null_control": "NC_BFS_CALIBRATION_FLAT (offline chain fixture; pass iff R_hop3_over_hop1 <= 3.0; DESIGN-observed 2.0) and NC_BFS_CALIBRATION_GROWING (offline fanout fixture; pass iff R_hop3_over_hop1 > 3.0; DESIGN-observed 6.5) certify the instrument's dynamic range in BOTH directions. NC_REACHABILITY_UNLISTED_OR_DEAD (same evaluate_items scoring path: a live item listed by no channel and a listed item whose liveness GET is 404 must both be NOT reachable; DESIGN-observed both False). NC_SYNTHETIC_UNREACHABLE_ITEM_direct (synthetic urls under spider-nonexistent-38184956362-* on the frozen pool must return real HTTP status >= 400; DESIGN-observed 404 on doc.rust-lang.org, docs.python.org, numpy.org) proves false-discovery is rejected with a real status code. NC-ZERO-CHANNEL-COVERAGE (an engine whose five channels all have zero membership must report fraction 0.0, not null). PC_ENV records the runtime.",
+  "measurement_validity": [
+    {
+      "id": "V1",
+      "name": "code_identity_gate",
+      "rule": "EXECUTE extracts the frozen module from prereg section 7: let block be the bytes strictly after the FROZEN_CODE_BEGIN line and strictly before the FROZEN_CODE_END line, and C = block.strip(). sha256(C) must equal DERIVED_SHA256 = b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f. Provenance (not a run input): C is the bound base module research/experiments/EXP-FRONTIER-38164611798/execute_module.py (BASE_SHA256=75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a) with the three repairs enumerated in prereg section 7 step 4 and no other change. Any mismatch -> status=MEASUREMENT_INVALID before any outcome stage."
+    },
+    {
+      "id": "V2",
+      "name": "controls_gate",
+      "rule": "EXECUTE re-runs --stage controls before any outcome stage; all control pass rows must PASS (exit 0). Any FAIL -> no outcome stages run; status=MEASUREMENT_INVALID with the failing control recorded."
+    },
+    {
+      "id": "V3",
+      "name": "inventory_gate_and_seed_liveness",
+      "rule": "EXECUTE re-runs --stage inventory before outcome stages. A seed fetch failure is recorded per host and that host is excluded with reason; seed errors on EVERY pool host are an infrastructure signature -> outcome INCONCLUSIVE with the explicit 'not a scientific null' reason, never FALSIFIES."
+    },
+    {
+      "id": "V4",
+      "name": "frame_fidelity",
+      "rule": "The Q1 DEEP frame is the BOUND parent record research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (sha256 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747). The structural stage MUST consume exactly this frame (--frame <that path>) and never a fresh live crawl. Host count must be 20 and the total discovered DEEP item count must equal 556, else MEASUREMENT_INVALID (frame tampering / transcription failure)."
+    },
+    {
+      "id": "V5",
+      "name": "census_completeness",
+      "rule": "PC-2: the census attempts exactly one GET of EVERY discovered DEEP item in the frame and records census.jsonl per host with n_deep_discovered, n_deep_fetched, n_deep_with_controls. n_deep_fetched must equal n_deep_discovered for every non-seed-error host (no censoring); the DEEP-discovered vs DEEP-fetched separation is reported explicitly."
+    },
+    {
+      "id": "V6",
+      "name": "denominator_guard",
+      "rule": "reachable fraction per engine uses live admitted DEEP items as denominator; n=0 -> fraction null, never a 0/0 entering thresholding; every pool engine (including zero-DEEP) appears in pool_engines_census; each of the 20 hosts appears in host_census."
+    },
+    {
+      "id": "V7",
+      "name": "membership_equality",
+      "rule": "channel membership uses frozen norm_eq: defragment + lowercase host + strip default port + equality after stripping AT MOST ONE trailing '/'; no redirect chasing of channel URLs; cross-host URLs can never match a same-host item."
+    },
+    {
+      "id": "V8",
+      "name": "liveness_severity",
+      "rule": "item liveness is a fresh GET of the item URL; an item is reachable iff (member of >=1 channel) AND live; an engine whose admitted DEEP items die at a rate >10% (DEAD_LIMIT) is flagged limited:true and excluded from the Q3 threshold census while its data stays disclosed."
+    },
+    {
+      "id": "V9",
+      "name": "charged_ledger",
+      "rule": "per-channel charged protocol costs (fresh-agent semantics, <=K=3 by construction): ROBOTS_SITEMAP=3, SITEMAP_XML=2, ON_SITE_SEARCH=3, RSS_ATOM=3, JSON_LD=2; every redirect leg counts toward K; discovery-document GETs amortized at EXECUTE while the item-page GET is per item; actual vs charged GET ledger disclosed."
+    },
+    {
+      "id": "V10",
+      "name": "representation",
+      "rule": "body cap MAX_BODY=600000 bytes, truncation flagged per fetch (docs.gitbook.com seed observed truncated at DESIGN), gzip handled; sitemap protocol unified XML/TXT/gz parser with /sitemap.xml then /sitemap_index.xml fallback; an index selects the child whose last path segment best matches the seed path (deterministic, no extra GET), falling back to the first child; robots.txt -> FIRST Sitemap: line; RSS/Atom -> first alternate feed link in seed HTML head; JSON-LD = URL strings extracted from the SEED page's application/ld+json blocks (over-inclusive by design and disclosed)."
+    },
+    {
+      "id": "V11",
+      "name": "search_semantics",
+      "rule": "ON_SITE_SEARCH query = item slug (last non-empty path segment, percent-encoded) via the frozen live seed-HTML form finder; membership = static links of the results page; a seed without a named GET form makes that channel NOT_PROBEABLE (recorded), never a null; cross-host search actions are disclosed, not followed."
+    },
+    {
+      "id": "V12",
+      "name": "engine_identity",
+      "rule": "engine_class = <meta name='generator'> content when present, else the DESIGN-recorded documented platform from the frozen POOL table; Q3 requires >=2 DISTINCT engine classes on distinct base-domain hosts."
+    }
+  ],
+  "decision_rule": "Frozen, evaluated in order by the reconstructed module (--stage all): G1 measurement validity (V1 code identity, V2 controls, V3 inventory, V4 frame fidelity): any FAIL -> status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. G2 fake-seed signature (seed fetch failed on EVERY pool host) -> INCONCLUSIVE, reason explicitly 'infrastructure signature, NOT a scientific null'. G3 attainability (zero DEEP items admitted across the frozen frame) -> INCONCLUSIVE (Q1 measured; Q2/Q3 vacuous; an attainability fact, not a negative). G4 limited-only (every DEEP-admitting engine >10% admitted-item death) -> INCONCLUSIVE (Q1/Q2 measured; Q3 not determinable). G5 Q3 materiality (>=MIN_ENGINES=2 distinct engines with n_deep>0, not limited, fraction>=0.50) -> SUPPORTS. G6 otherwise (>=1 eligible DEEP-admitting engine but <2 at threshold) -> FALSIFIES, engine-stratified bounded negative, with engines_limited and engines_with_zero_deep disclosed. Every engine row, per-channel coverage, zero-admission channels, hop distributions and the actual GET ledger are reported regardless of outcome.",
+  "product_consequence_positive": "If SUPPORTS: C-CROSSSITE advances toward EXPERIMENTAL (bounded to this substrate class, frame, K=3 and five channels). The architectural target for deep state-carrying acquisition moves off traversal-and-cache; discovery-enabled acquisition becomes the default deep-instance path; frontier priority shifts to discovery-channel coverage and substrate expansion, and the C-FRESHNESS/C-PRODUCT-ECON runner-up becomes the scheduled next mandate rather than the fallback.",
+  "product_consequence_negative": "If FALSIFIES: engine-stratified bounded negative - site-native discovery is NOT an O(1) shortcut for deep acquisition within K=3 on this substrate class; no promotion of any discovery shortcut; the discovery axis is closed on this substrate and the persistence-maintenance/invalidation economics (runner-up recorded by the Director; owned by Graph/Product) is the conditional next mandate. If INCONCLUSIVE: the Q1 attainability census (engines_with_zero_deep, host_census, per-engine DEEP counts with hop distributions) and the per-channel zero-admission ledger become the durable deliverable - an explicit map of where deep state-carrying content does and does not exist on this frame - with no claim update and no promotion.",
+  "estimated_cost": "stdlib-only (urllib + gzip + xml.etree + html.parser + http.server); zero pip installs, zero model calls, zero browser/Docker, no credentials. EXECUTE: frame census = one GET of each of the 556 discovered DEEP items plus channel documents (~120 GETs); discovery = up to 2 GETs per admitted DEEP item (ON_SITE_SEARCH results + item liveness GET); controls ~15 (mostly offline). Typical total ~1,500-2,500 GETs; wall time ~10-25 min at timeout 12s and DELAY=0.1s between hosts. DESIGN certificate cost already paid and embedded in prereg section 11.",
+  "expected_information_gain": "First valid measurement of the Director's architectural question: v1 EXP-FRONTIER-37984242167 committed an empty sampling frame; v2 EXP-FRONTIER-38085197666 declared all six checks PASS with absent declared artifacts; v3 EXP-FRONTIER-38164611798 froze outcome code whose entry point TypeErrors on its own frame. This design fixes all three failure modes with pre-freeze re-run gates (V1 code identity, V2/V3 controls+inventory, V4 frame fidelity, V5 census completeness) and produces in EVERY branch the DEEP-item census per engine/host, the per-channel coverage ledger with zero-admission channels reported as such, and the Q3 decision satisfiable in both directions. Either outcome materially changes the frontier architecture decision.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The frozen decision rule is satisfiable in BOTH directions by construction with no empty or unreachable execution branch. The gates partition exhaustively: for any attained pool with >=1 engine admitting >=1 live eligible DEEP item, G5 (SUPPORTS) fires when >=2 distinct engines reach fraction>=0.50 and G6 (FALSIFIES) fires otherwise, so exactly one decision-changing branch always triggers; G2 (seed failure on EVERY host), G3 (zero DEEP items admitted) and G4 (every DEEP-admitting engine >10% item death) are reachable INCONCLUSIVE branches with explicit non-null reasons. The instrument's dynamic range is certified in both directions by NC_BFS_CALIBRATION_FLAT (R=2.0<=3.0) and NC_BFS_CALIBRATION_GROWING (R=6.5>3.0) and by the reachability fixture pair PC_REACHABILITY_LISTED_LIVE (True) / NC_REACHABILITY_UNLISTED_OR_DEAD (False). No 0/0 denominator can enter thresholding (V6). PC-3 is satisfiable: the census-fetched deep frontiers carry named controls on >=2 engines (mdBook/doc.rust-lang.org 'searchbar'; Sphinx/pandas.pydata.org 'q'; Sphinx-RTD/docs.pytest.org 'q'), certified at DESIGN (prereg section 11c) and gated at EXECUTE by PC-CENSUS-DEEP-FETCH. The SUPPORTS branch is a real state of the world for this instrument (a credential-free host exposing a deep-complete sitemap and deep static controls exists in-substrate, certified at DESIGN); no pre-freeze fraction was measured, so the branch is NOT engineered and its a-priori probability is expressly NOT claimed. See prereg section 11e for the branch-reachability argument and section 14 for the disclosed empirical-tilt validity threat.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11e (branch-reachability argument)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#9 (controls and calibration values)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11c (PC-3 observability certificate)",
+        "research/experiments/EXP-FRONTIER-37984242167/spec.json (empty-frame precedent this design avoids)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "PC-1: the EXACT frozen entry point (main() with --stage inventory/structural/discovery, i.e. the --stage all path) was executed at pre-freeze cost on the reconstructed module over an offline synthetic site whose structural row contains discovered-but-unfetched DEEP pages (controls_seen=None) and controls-bearing deep pages; it ran to mechanical completion and emitted a decision, while the bound PARENT module on the same record raises TypeError ('>' not supported between NoneType and int) and, when items are admitted, KeyError 'live'. Both latent non-executability defects are thus fixed and proven fixed (prereg section 11a). PC-2/PC-3: the Q1 frame is bound (sha256 2afe65b6...; 20 hosts, 556 DEEP-discovered, 72 DEEP-fetched, 32 with controls) and the census admits observable deep controls on >=3 engines (prereg section 11b/11c). Substrate prerequisites are live: network + stdlib urllib + default TLS on the runner (PC_ENV), 20/20 frozen seeds HTTP 200, five channels live on >=1 host. EXECUTE re-runs --stage controls and --stage inventory as frozen gates before any outcome stage.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11a (PC-1 smoke transcript)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11b (frame census certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#7 (frozen code reconstruction protocol)"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Three stable, mutually distinct baselines: B-SAME-HOST-BFS-PATH-COST (measured IN-frame per item as the 1-based BFS discovery/fetch ordinal from the bound frame, <=250 for every admitted item; the primary a-priori path the O(1) claim must beat), B-PERSISTED-PATH-REACQUISITION (inherited parent RACQ_PATH ~hop+1; NOT re-measured, labeled inherited context) and B-DIRECT-URL-REPLAY (inherited RACQ_URL = 1 GET; NOT re-measured). The charged discovery cost (<=K=3) is compared against the measured per-item path cost, so the O(1)-vs-path-bound contrast is directly identifiable; the flat/growing calibration controls certify the instrument separates the two.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (requests ordinals)",
+        "research/experiments/EXP-FRONTIER-37950626378/result.json (inherited RACQ_PATH/RACQ_URL)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control can fire in both directions. NC_BFS_CALIBRATION_FLAT (pass iff R<=3.0; observed 2.0) and NC_BFS_CALIBRATION_GROWING (pass iff R>3.0; observed 6.5) certify the instrument's full dynamic range. PC_REACHABILITY_LISTED_LIVE (3/3 True) and NC_REACHABILITY_UNLISTED_OR_DEAD (both False) drive the ACTUAL evaluate_items scoring path on a local fixture, so the positive control fires and the null stays null under the same code that scores the experiment. The seven PC_PARSER_CANARY_* controls fail loudly on extraction errors (a jsonld canary extraction bug was detected and fixed at DESIGN, evidence of sensitivity). NC_SYNTHETIC_UNREACHABLE_ITEM_direct passes only on a real HTTP status >=400 (observed 404 on three hosts; its pre-fix collapse of HTTP errors to status=None was found and fixed at DESIGN, proving the control bites). PC_ENV pins the runtime. The 0.50 threshold and MIN_ENGINES=2 are hard gates; per-channel zero admissions are reported as such, never as nulls.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#9 (controls ledger with observed values)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11 (DESIGN certificate)"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment (the discovery entry point) has been EXECUTED at pre-freeze cost, not merely declared executable: the reconstructed module ran --stage inventory + --stage structural --frame + --stage discovery to mechanical completion over an offline synthetic site and emitted a decision, and the bound PARENT module was shown to crash on the identical record (prereg section 11a). The frozen entry point's non-executability class (audit AUDIT-VF-05 / the EXP-FRONTIER-38085197666 declared-PASS-while-absent class) is therefore closed. EXECUTE re-runs V1 code identity and V2 controls as hard gates before producing any outcome. The modules stage interface (--stage controls|inventory|structural|discovery|all, --out, --frame) and required outputs (raw/census.jsonl, raw/structural.jsonl, raw/channel_docs.jsonl, raw/items.jsonl, raw/controls.jsonl) are frozen in prereg sections 7-8.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11a (entry-point execution transcript)",
+        "research/experiments/EXP-FRONTIER-38164611798/handoff.json carry_forward.do_not_assume[4] (AUDIT-VF-05)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Two immutable files whose identity can change the interpretation are bound: (1) the Q1 frame research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (sha256 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747) consumed via --frame; and (2) the code base research/experiments/EXP-FRONTIER-38164611798/execute_module.py (sha256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a) from which the embedded outcome module derives. The executed module itself is pinned by DERIVED_SHA256 b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f applied to the frozen prereg.md block (prereg.md is itself hashed in freeze.json.hashes). No other mutable local code/data/task-bank/fixture is an interpretation dependency: the pool is pinned in the code and all controls run offline against in-process fixtures.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#7 (patch + hashes)"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl",
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py"
+  ]
 }
