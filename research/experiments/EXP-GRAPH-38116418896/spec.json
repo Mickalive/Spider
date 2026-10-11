@@ -1,50 +1,127 @@
 {
   "experiment_id": "EXP-GRAPH-38116418896",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "On a stdlib-only locally served multi-endpoint multi-verb HTTP application whose goal texts are authored by a process that never sees the mechanism intent strings, with a preregistered contamination screen measuring every goal's overlap against EVERY registry intent (not only its own family), a preregistered authoring-provenance record, a reference arm provably distinct from the candidate (the prior argmax-w*cos+b arm was provably identical to the candidate), and positive/null/dynamic-range controls each arithmetically able to fail and live-verified before freeze: does max-cosine-similarity selection over intent embeddings still bind the correct mechanism on goals never seen at authoring time, and by how much does it exceed a token-overlap null on those same independently authored goals - i.e., does the bounded 45/52 vs 33/52 advantage (paired family-blocked difference 0.2308, 95% CI [0.1136, 0.3509]) survive removal of the joint-authorship confound, or was it an artifact of intents and goal templates authored in the same execute-time file by the same agent, with abstention scored as its own class, pooled false-accept <= 0.10, UNKNOWN precision >= 0.85 and ECE <= 0.15 (bootstrap upper <= 0.18)?",
+  "hypothesis": "Max-cosine-similarity selection over sentence-transformer embeddings (all-MiniLM-L6-v2) with a fitted logistic regression calibration gate will achieve mechanism-identity binding accuracy strictly above the token-overlap null on independently authored goals, with calibrated abstention achieving UNKNOWN precision >= 0.85, pooled false-accept rate <= 0.10, and global ECE <= 0.15 (bootstrap 95% upper bound <= 0.18). The candidate's advantage over the lexical null on paraphrased and composite goals will survive the contamination screen and independent authorship.",
+  "falsifier": "Any of: (1) candidate mechanism-identity accuracy on applicable goals does not exceed B-LEXICAL-OVERLAP by a paired family-blocked bootstrap one-sided 95% lower bound > 0; (2) candidate pooled false-accept rate > 0.10 (Wilson upper bound); (3) candidate UNKNOWN precision < 0.85 (Wilson lower bound); (4) candidate global ECE bootstrap 95% upper bound > 0.18; (5) candidate fails to exceed B-RANDOM-ROLE on applicable goals; (6) positive control PC-VERBATIM-INTENT fails (accuracy < 1.0 on verbatim goals); (7) oracle ceiling B-INTERNAL-ID-ORACLE < 1.0 on applicable goals; (8) contamination screen detects max token Jaccard >= 0.3 between any goal and any non-target-family intent; (9) reference arm A-REFERENCE-DISTINCT-EMBEDDING achieves equal or higher primary metric than candidate.",
+  "baselines": {
+    "B-LEXICAL-OVERLAP": {
+      "type": "strong_null",
+      "description": "Token Jaccard overlap between goal text and mechanism intent strings; selects mechanism with max overlap, never abstains, no calibration",
+      "stable_id": "B-LEXICAL-OVERLAP",
+      "expected_behavior": "Strong baseline on verbatim goals (1.0), weaker on paraphrased/composite; structural ceiling on all-80 accuracy = applicable_fraction (52/80=0.65) because it never abstains on no-applicable goals"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "B-RANDOM-ROLE": {
+      "type": "null_control",
+      "description": "Random selection among mechanisms sharing the inferred role keyword; abstains when no role keyword matches",
+      "stable_id": "B-RANDOM-ROLE",
+      "expected_behavior": "Chance-level ~1/4 = 0.25 on applicable goals per family"
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "B-INTERNAL-ID-ORACLE": {
+      "type": "oracle_ceiling",
+      "description": "Cheating oracle that selects by exact mechanism_id match; abstains on no-applicable goals",
+      "stable_id": "B-INTERNAL-ID-ORACLE",
+      "expected_behavior": "1.0 accuracy on applicable goals, 0 on no-applicable; declares difficulty ceiling"
     },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "A-REFERENCE-DISTINCT-EMBEDDING": {
+      "type": "reference_comparison",
+      "description": "Max-cosine-similarity over all-mpnet-base-v2 embeddings (different model from candidate's all-MiniLM-L6-v2) with independent fitted logistic regression calibration gate; provably architecturally distinct from candidate",
+      "stable_id": "A-REFERENCE-DISTINCT-EMBEDDING",
+      "expected_behavior": "Non-empty executable leg (EXECUTABLE on all applicable goals at its operating threshold); may exceed or fall below candidate; provides independent evidence on whether embedding model choice drives the effect"
     }
   },
-  "freeze_artifacts": []
+  "positive_control": {
+    "stable_id": "PC-VERBATIM-INTENT",
+    "description": "Candidate resolver evaluated on verbatim-intent goals (exact string match to distillation intents); must achieve 1.0 mechanism-identity accuracy, 0.0 false-accept, 1.0 UNKNOWN precision, ECE=0.0, denominator > 0",
+    "expected_behavior": "PASS (accuracy=1.0, denom=12 verbatim goals per family-blocked design). Failure triggers MEASUREMENT_INVALID."
+  },
+  "null_control": {
+    "stable_id": "NC-NO-APPLICABLE",
+    "description": "Candidate resolver evaluated on goals with no applicable mechanism (8 no_applicable + 20 OOD = 28 goals); must achieve abstention_rate=1.0, UNKNOWN precision=1.0, false_accept=0.0, denominator > 0",
+    "expected_behavior": "PASS (abstention_rate=1.0 on all 28). Failure triggers MEASUREMENT_INVALID."
+  },
+  "measurement_validity": {
+    "V1_CONSTRUCT_VALIDITY": "Primary metric is mechanism-identity binding accuracy on applicable goals (selected_mechanism_id == target_mechanism_id); HTTP execution is a separate verification measure, not the primary metric",
+    "V2_INDEPENDENT_GOAL_AUTHORING": "Goal generator process never receives mechanism intent strings; provenance record (hash + timestamp + generating code hash) frozen before any resolver arm runs; max token Jaccard between any goal and any intent < 0.3",
+    "V3_CONTAMINATION_SCREEN": "For every goal, compute token Jaccard against ALL 20 registry intents (not just target family); max cross-family overlap < 0.3 required; screen output logged before any arm runs",
+    "V4_PAIRED_DESIGN": "Each task evaluated by all arms in randomized order; family-blocked bootstrap (5 families: users, posts, comments, albums, photos) for primary inference",
+    "V5_PER_TASK_STATE_RESET": "HTTP application state reset to identical hash before every arm request; verified by single state hash across all tasks",
+    "V6_CALIBRATION_GATE_LIVE": "Logistic regression gate fitted on held-out validation split (not test); parameters move across independent train splits (independent_refit_spread > 1.0); gate threshold selected to achieve target coverage on validation; gate MUST fire on > 0 applicable validation goals (non-inert)",
+    "V7_CLOSED_TOP_BIN_ECE": "ECE uses 10 equal-mass bins with top bin [0.9, 1.0] inclusive; no rows dropped",
+    "V8_UNKNOWN_PRECISION_DEFINED": "UNKNOWN precision = TP_abstain / (TP_abstain + FP_abstain) where TP_abstain = no-mechanism AND abstain, FP_abstain = mechanism AND abstain; not an OOD abstention rate",
+    "V9_CODE_HASHED_INTO_FREEZE": "All outcome-bearing code files listed in freeze_artifacts are hashed by the deterministic freezer into freeze.json.artifact_hashes; verified at execution start",
+    "V10_FIXTURE_DISCRIMINATION": "Registry has 20 mechanisms (5 families x 4 CRUD), all with non-empty parameter_slots, executable action_templates, and distinct intents; verified before evaluation",
+    "V11_DEGENERACY_SCREEN": "B-LEXICAL-OVERLAP accuracy on applicable goals only < 0.90 (structural cap 0.65 on all-80 is non-binding); A-REFERENCE-DISTINCT-EMBEDDING executable_count == n_applicable (non-empty leg declared before candidate runs)",
+    "V12_AUTHORING_PROVENANCE": "Goal generation code hash, timestamp, and output goals.json hash recorded in authoring_provenance.json BEFORE any resolver arm executes; this file is immutable for the experiment",
+    "V13_DYNAMIC_RANGE_CONTROLS": "The set of control arms (PC-VERBATIM-INTENT, NC-NO-APPLICABLE, B-INTERNAL-ID-ORACLE, B-LEXICAL-OVERLAP, B-RANDOM-ROLE, A-REFERENCE-DISTINCT-EMBEDDING) verified on calibration split to collectively span a non-degenerate range of primary metric values (min_across_arms < max_across_arms); ensures controls are not degenerate/identical"
+  },
+  "decision_rule": {
+    "gate_order": [
+      "V1-V13 measurement validity (short-circuit on any FAIL -> MEASUREMENT_INVALID)",
+      "V11 degeneracy screen (PASS required)",
+      "PC-VERBATIM-INTENT positive control (PASS required, else MEASUREMENT_INVALID)",
+      "B-INTERNAL-ID-ORACLE oracle ceiling (PASS required, else MEASUREMENT_INVALID)",
+      "NC-NO-APPLICABLE null control (PASS required, else MEASUREMENT_INVALID)",
+      "V13 dynamic range controls (PASS required)",
+      "V6 calibration gate non-inert check (PASS required)",
+      "Primary gate: candidate mechanism_identity_accuracy > B-LEXICAL-OVERLAP on applicable goals (paired family-blocked bootstrap one-sided 95% lower bound > 0)",
+      "Secondary gates (all must PASS for SUPPORTS): candidate pooled_false_accept <= 0.10 (Wilson upper), candidate unknown_precision >= 0.85 (Wilson lower), candidate ece_global_bootstrap_upper_95 <= 0.18, candidate > B-RANDOM-ROLE on applicable"
+    ],
+    "outcomes": {
+      "COMPLETE_SUPPORTS": "All measurement validity gates PASS, all controls PASS, primary gate PASS, all secondary gates PASS",
+      "COMPLETE_FALSIFIES": "All measurement validity gates PASS, all controls PASS, primary gate FAILS",
+      "COMPLETE_MIXED": "All measurement validity gates PASS, all controls PASS, primary gate PASS but >=1 secondary gate FAILS",
+      "MEASUREMENT_INVALID": "Any V1-V13 gate FAILS, or PC-VERBATIM-INTENT FAILS, or B-INTERNAL-ID-ORACLE FAILS, or NC-NO-APPLICABLE FAILS, or V13 FAILS, or V6 FAILS"
+    }
+  },
+  "product_consequence_positive": "C-SEMANTIC-RESOLVE advances from HYPOTHESIS to EXPERIMENTAL with evidence that semantic resolution via embedding similarity works on independently authored goals against strong baselines, with calibrated abstention. This enables the product capability 'semantic resolution' (goals resolved to applicable mechanisms without internal ids) and unlocks downstream work on parameterized inheritance (C-PARAM-INHERIT) and LLM inheritance (C-LLM-INHERIT). Product may integrate a calibrated embedding resolver behind the semantic resolution interface.",
+  "product_consequence_negative": "C-SEMANTIC-RESOLVE remains HYPOTHESIS or is bounded to REJECTED for the embedding-similarity approach. The joint-authorship confound is confirmed as the driver of prior positive signal. Product must not ship embedding-based semantic resolution; alternative approaches (cross-encoder, LLM-based resolution, structured retrieval) must be tested. The 45/52 vs 33/52 advantage is retired as an artifact.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "http_requests": 480,
+    "cpu_seconds": 120,
+    "wall_clock_seconds": 180,
+    "external_api_calls": 0
+  },
+  "expected_information_gain": "High. This is a decisive retest of the only positive signal for C-SEMANTIC-RESOLVE (45/52 vs 33/52) with the confound removed. A clean positive upgrades the claim to EXPERIMENTAL with calibrated evidence. A clean negative retires the only positive signal and forces a pivot to alternative resolution mechanisms. Either outcome changes the product decision on semantic resolution.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "justification": "Decision rule is a deterministic gate cascade with explicit PASS/FAIL conditions at each step. No arithmetic impossibility: primary gate uses paired family-blocked bootstrap one-sided lower bound > 0, which is reachable (observed 0.1136 in prior run). Secondary gates use Wilson/ECE bounds with explicit thresholds. No empty branches: every gate has a defined outcome mapping."
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "justification": "All prerequisites exist: (1) stdlib HTTP server code (http_server.py) runs locally; (2) sentence-transformers all-MiniLM-L6-v2 and all-mpnet-base-v2 cached locally (no external API); (3) fixture definition (fixture_def.py) produces 20 mechanisms with distinct intents; (4) goal generator (goal_generator.py) produces 80 goals with independent authorship provenance; (5) calibration split (42 train / 10 val / 28 test per family-blocked design) logged before main evaluation; (6) metric estimators (metric_estimators.py) include Wilson CI, bootstrap, ECE with unit tests passing."
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "justification": "B-LEXICAL-OVERLAP has structural ceiling 0.65 on all-80 (52/80 applicable) but operates on applicable-only denominator (52) for primary comparison, where prior run showed 0.6923 accuracy with headroom to 1.0. B-RANDOM-ROLE chance level 0.25. B-INTERNAL-ID-ORACLE ceiling 1.0. A-REFERENCE-DISTINCT-EMBEDDING uses different model (all-mpnet-base-v2) guaranteeing architectural distinction. No ceiling/floor saturation: lexical null at 0.6923 on applicable, candidate at 0.9286 in prior valid run (EXP-GRAPH-36287167610) showed separation. Current design removes confound so true separation is measurable."
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "justification": "All controls arithmetically able to fail and live-verified before freeze via V13: (1) PC-VERBATIM-INTENT can fail if candidate gate miscalibrates on verbatim (threshold too high); (2) NC-NO-APPLICABLE can fail if gate doesn't abstain on no-applicable goals (observed in prior runs); (3) B-INTERNAL-ID-ORACLE can fail if fixture defective (<1.0 on applicable); (4) B-LEXICAL-OVERLAP can exceed candidate if embeddings add no value; (5) A-REFERENCE-DISTINCT-EMBEDDING can exceed candidate if mpnet better; (6) calibration gate non-inert check (V6) fails if gate fires on 0 applicable validation goals. V13 verifies control arms collectively span non-degenerate range (min_across_arms < max_across_arms) on calibration split. All verified on calibration split before main evaluation."
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "justification": "Candidate resolver (candidate_resolver.py) is a pure-Python module using cached sentence-transformers models, stdlib HTTP, and logistic regression from sklearn. No external dependencies at runtime. The resolver function signature (resolve(goal, registry)) is executable in isolation. Code hash recorded in freeze_artifacts. No structural barrier to execution."
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "justification": "All mutable local interpretation dependencies listed in freeze_artifacts below. The deterministic freezer (scripts/freeze_experiment.py) will hash each file into freeze.json.artifact_hashes. No omitted dependencies: code, fixture, goals, and metric estimators are all bound."
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/candidate_resolver.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/reference_resolver.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/null_resolvers.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/positive_control.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/fixture_def.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/goal_generator.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/http_server.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/experiment_runner.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/metric_estimators.py",
+    "research/experiments/EXP-GRAPH-38116418896/artifacts/contamination_screen.py"
+  ]
 }
