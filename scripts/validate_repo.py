@@ -245,10 +245,10 @@ def main():
 
     global_director = text(".opencode/agents/spider_portfolio_director.md")
     require("Research Scout" in global_director and "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE" in global_director, "Global Director lacks Scout/decision contract")
-    require("PROGRAM_AUDIT_2026-10-10.md" in global_director and "ALL THREE readiness conditions" in global_director, "Global Director must use current audit and enforce flagship readiness")
+    require("PROGRAM_AUDIT_GLOBAL_2026-10-10.md" in global_director and "ALL THREE readiness conditions" in global_director, "Global Director must use current audit and enforce flagship readiness")
     scout_prompt = text(".opencode/agents/spider_research_scout.md")
-    require("PROGRAM_AUDIT_2026-10-10.md" in scout_prompt, "Scout must use current program audit")
-    require((ROOT / "research/portfolio/PROGRAM_AUDIT_2026-10-10.md").exists(), "current program audit missing")
+    require("PROGRAM_AUDIT_GLOBAL_2026-10-10.md" in scout_prompt, "Scout must use current program audit")
+    require((ROOT / "research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md").exists(), "current program audit missing")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):
