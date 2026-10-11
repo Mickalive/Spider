@@ -6,9 +6,10 @@
 
 - A real local HTTP portal with two independent families (`invoices`, `shipments`), several IDs and a click -> search -> open sequence.
 - An optional Browser Use LLM agent runner that can navigate Chromium to solve the portal task. Requires an explicit user-provided model credential and opt-in to model charges. Nothing paid is invoked by CI, tests or defaults.
+- A real deterministic Playwright Chromium workflow is the `CACHE` arm (a compiled selector cache / workflow baseline, **not** Stagehand itself).
 - An opt-in Spider adapter that consumes **a manually seeded, fixture-known, read-only HTTP mechanism**. It does *not* discover or distill a parameterized mechanism by observing Browser Use. When no applicable mechanism exists, it uses the same Browser Use agent.
 - An independent server-side truth oracle, temporary registry, read-only URL authorization, error accounting and raw trace output.
-- A strict four-arm descriptive scorer, plus an optional **required fifth CACHE competitor** from independently measured Stagehand/compiled workflow input.
+- A strict four-arm descriptive scorer, plus a fifth CACHE competitor from an actual compiled Playwright browser workflow. A Stagehand v4 server-cache comparison is **still required independently** before a claim of superiority over Stagehand.
 - All raw pilot traces have `cost_accounting_complete=false` and `cost_usd=null`. They are rejected by the economic scorer until actual fully loaded costs (tokens, browser, retrieval, verification, writing, storage and amortization) are measured. Never replace null with zero.
 
 ## Local use
@@ -18,17 +19,18 @@ Python >=3.11. From repo root:
 ```bash
 python -m pip install -e .
 PYTHONPATH=src python -m unittest discover -s tests -v
-python -m pip install browser-use
+python -m pip install browser-use playwright
 uvx browser-use install
+python -m playwright install chromium
 ```
 
-Generate a **matched, randomized four-arm plan without invoking any model or spending money**:
+Generate a **matched, randomized five-arm plan without invoking any model or spending money**:
 
 ```bash
 PYTHONPATH=src python scripts/run_pilot_matrix.py --output /tmp/spider-raw.jsonl
 ```
 
-To actually execute its 16 task/arm combinations, add `--execute --allow-model-charges`, a provider key, and an explicit `--max-trials` cap. The generated `.plan.json` is retained. The optional `--seeded-fixture` arm is only a hand-built upper bound, not autonomous discovery. The resulting raw traces are intentionally rejected by the economic scorer until all cost components can be independently priced.
+To actually execute its 20 task/arm combinations, add `--execute --allow-model-charges`, a provider key, and an explicit `--max-trials` cap. The generated `.plan.json` is retained. The optional `--seeded-fixture` arm is only a hand-built upper bound, not autonomous discovery. The resulting raw traces are intentionally rejected by the economic scorer until all cost components can be independently priced.
 
 To use a real agent (not executed automatically by CI):
 
