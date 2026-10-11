@@ -1,0 +1,347 @@
+{
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "computed_at": "2026-10-11T06:53:46.332111+00:00",
+  "metrics": {
+    "STATIONARITY_SKILL": 0.3196006958197081,
+    "STATIONARITY_SKILL_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_CI95": [
+      0.1424309377617678,
+      0.4954113328700338
+    ],
+    "STATIONARITY_SKILL_BY_RUNG": {
+      "300": 0.4055999179949117,
+      "900": 0.4055999179949117,
+      "1800": 0.3196006958197081
+    },
+    "STATIONARITY_SKILL_NO_STRESS": 0.3950671208304353,
+    "STATIONARITY_SKILL_NO_STRESS_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_NO_STRESS_CI95": [
+      0.20619205063323182,
+      0.5455945739691843
+    ],
+    "MI_CLASS": 0.6673804169863701,
+    "CLASS_PERSISTENCE": {
+      "CLEAN": 1.0,
+      "RATE_LIMIT_429": 0.0,
+      "BLOCK_403_CHALLENGE": 1.0,
+      "TRANSPORT_ERROR": 1.0,
+      "OTHER_NONBARRIER": 1.0
+    },
+    "INTRINSIC_PERSISTENCE": 1.0,
+    "INTRINSIC_PERSISTENT": true,
+    "present_intrinsic_classes": [
+      "BLOCK_403_CHALLENGE",
+      "TRANSPORT_ERROR"
+    ],
+    "DENYLIST_FALSE_ACCEPT": 0.0,
+    "DENYLIST_FALSE_REJECT": 0.0,
+    "DENYLIST_INTRINSIC_VALID": true,
+    "DENYLIST_BY_RUNG": {
+      "300": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "900": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "1800": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      }
+    },
+    "DENYLIST_HORIZON": 1800,
+    "ANYBARRIER_FALSE_ACCEPT": 0.125,
+    "DENYLIST_SKILL": 1.6966415246622164,
+    "DENYLIST_SKILL_definition": "logloss(nats/endpoint) of B_CONSTANT_USABLE(0) minus anchor intrinsic-transfer predictor on the delta_ref intrinsic indicator; positive = anchor denylist better",
+    "RATE_ONSET_n": 0,
+    "RATE_RECOVERY_n": 1,
+    "RATE_RECOVERY_HALF_LIFE_s": 2,
+    "AMBIENT_RATE_ONSET_n": 0,
+    "AMBIENT_RATE_RECOVERY_n": 1,
+    "CLASS_CONDITIONAL_TRANSIENCE": true,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_slope_per_s": 0.0,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_CI95": [
+      0.0,
+      0.0
+    ],
+    "STATIONARITY_SKILL_NO_STRESS_TREND_excludes_zero": false,
+    "barrier_prevalence_by_rung_no_stress": {
+      "0": 0.1346153846153846,
+      "300": 0.1346153846153846,
+      "900": 0.1346153846153846,
+      "1800": 0.1346153846153846
+    },
+    "n_t0_intrinsic": 7,
+    "n_t0_barrier": 8,
+    "f_b_obs": 0.14035087719298245,
+    "POWER_AT_RHO98": 0.8233333333333334,
+    "POWER_AT_RHO92": 0.6766666666666666,
+    "POWER_AT_RHO98_FIXED_ENDOWMENT": 0.8790035587188612,
+    "POWER_AT_RHO92_FIXED_ENDOWMENT": 0.7275985663082437,
+    "branch": "S1_STATIONARY",
+    "change_evidence_classes": [],
+    "measurement_valid": true,
+    "class_counts_by_sweep": [
+      {
+        "CLEAN": 45,
+        "OTHER_NONBARRIER": 4,
+        "BLOCK_403_CHALLENGE": 6,
+        "RATE_LIMIT_429": 1,
+        "TRANSPORT_ERROR": 1
+      },
+      {
+        "OTHER_NONBARRIER": 4,
+        "CLEAN": 45,
+        "TRANSPORT_ERROR": 1,
+        "RATE_LIMIT_429": 1,
+        "BLOCK_403_CHALLENGE": 6
+      },
+      {
+        "CLEAN": 45,
+        "RATE_LIMIT_429": 1,
+        "BLOCK_403_CHALLENGE": 6,
+        "OTHER_NONBARRIER": 4,
+        "TRANSPORT_ERROR": 1
+      },
+      {
+        "CLEAN": 46,
+        "BLOCK_403_CHALLENGE": 6,
+        "OTHER_NONBARRIER": 4,
+        "TRANSPORT_ERROR": 1
+      }
+    ],
+    "rung_actual_delta_s": {
+      "0": 1.1920928955078125e-06,
+      "1": 300.00021171569824,
+      "2": 900.0002288818359,
+      "3": 1800.0002045631409
+    },
+    "delta_ref_actual_s": 1800.0002045631409
+  },
+  "controls": {
+    "PC_SYNTHETIC_STATIONARY": {
+      "expected": "S1 selection fraction >= 0.80 at rho=0.98",
+      "observed": {
+        "rho98": {
+          "replications": 300,
+          "rho": 0.98,
+          "S1_fraction": 0.8233333333333334,
+          "S1_fraction_given_n_t0_intrinsic_ge_3": 0.8790035587188612,
+          "reps_with_n_t0_intrinsic_ge_3": 281,
+          "perm_sig_rate": 1.0,
+          "mi_mean_nats": 0.3123242382866415
+        },
+        "rho92": {
+          "replications": 300,
+          "rho": 0.92,
+          "S1_fraction": 0.6766666666666666,
+          "S1_fraction_given_n_t0_intrinsic_ge_3": 0.7275985663082437,
+          "reps_with_n_t0_intrinsic_ge_3": 279,
+          "perm_sig_rate": 1.0,
+          "mi_mean_nats": 0.2754936549667933
+        }
+      },
+      "pass": true
+    },
+    "NC_SYNTHETIC_EXCHANGEABLE": {
+      "expected": "B_EXCHANGE p<0.05 fraction <= 0.05",
+      "observed": {
+        "replications": 300,
+        "perm_sig_fraction": 0.02666666666666667,
+        "S1_fraction": 0.0,
+        "mi_mean_nats": 0.01016234611127174
+      },
+      "pass": true
+    },
+    "PC_ORACLE_BARRIER": {
+      "expected": "every oracle request classified into its expected class",
+      "observed": [
+        {
+          "url": "https://httpbin.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbingo.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbingo.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://no-such-host.invalid/",
+          "class": "TRANSPORT_ERROR",
+          "expected": "TRANSPORT_ERROR",
+          "ok": true,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://no-such-host.invalid/",
+          "class": "TRANSPORT_ERROR",
+          "expected": "TRANSPORT_ERROR",
+          "ok": true,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://httpbin.org/status/403",
+          "class": "UNAVAILABLE_403",
+          "expected": "UNAVAILABLE_403",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/403",
+          "class": "UNAVAILABLE_403",
+          "expected": "UNAVAILABLE_403",
+          "ok": true,
+          "error": null
+        }
+      ],
+      "pass": true
+    },
+    "NC_CLEAN_ORACLE": {
+      "expected": "all requests classify CLEAN",
+      "observed": [
+        {
+          "url": "https://httpbin.org/status/200",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/200",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/uuid",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/uuid",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://example.com/",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://example.com/",
+          "class": "CLEAN",
+          "error": null
+        }
+      ],
+      "pass": true
+    },
+    "C_PROBE_SELF_INDUCTION": {
+      "expected": "no hard pass/fail; report self-induction trend",
+      "observed": {
+        "barrier_prevalence_by_rung_no_stress": {
+          "0": 0.1346153846153846,
+          "300": 0.1346153846153846,
+          "900": 0.1346153846153846,
+          "1800": 0.1346153846153846
+        },
+        "slope_per_s": 0.0,
+        "slope_ci95": [
+          0.0,
+          0.0
+        ],
+        "slope_excludes_zero": false,
+        "STATIONARITY_SKILL_NO_STRESS": 0.3950671208304353,
+        "STATIONARITY_SKILL_NO_STRESS_p": 9.999000099990002e-05
+      },
+      "pass": null
+    },
+    "B_EXCHANGE": {
+      "expected": "primary strong null: anchor barrier indicator carries no info beyond marginal",
+      "observed": {
+        "p_value": 9.999000099990002e-05,
+        "permutations": 10000,
+        "seed": 38074818597
+      },
+      "pass": null
+    },
+    "B_CONSTANT_USABLE": {
+      "expected": "no-denylist floor (predict non-barrier)",
+      "observed": {
+        "logloss_nats": 1.6966425246627164,
+        "logloss_intrinsic": 1.6966425246627164
+      },
+      "pass": null
+    },
+    "B_MARGINAL": {
+      "expected": "constant-marginal diagnostic",
+      "observed": {
+        "logloss_nats": 0.37248071845219044,
+        "marginal_p": 0.12280701754385964
+      },
+      "pass": null
+    },
+    "B_LASTSWEEP": {
+      "expected": "recent-memory diagnostic",
+      "observed": {
+        "accuracy": 0.9941520467836257,
+        "mi_prev_next": 0.4055999179949117
+      },
+      "pass": null
+    }
+  },
+  "validity_failures": [],
+  "measurement_valid": true,
+  "classifier_replay_mismatches": [],
+  "collection_meta": {
+    "experiment_id": "EXP-PHYSICS-38074818597",
+    "seed_probe_order": 38074818597,
+    "seed_permutation": 38074818597,
+    "seed_bootstrap": 38074818597,
+    "spec_sha256": "ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd",
+    "run_code_sha256": "ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38",
+    "lib_code_sha256": "c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e",
+    "t0_unix": 1791699568.2804365,
+    "t_begin_unix": 1791699565.7193506,
+    "t_oracles_done_unix": 1791699568.2804306,
+    "t_ambient_done_unix": 1791701412.6919718,
+    "t_end_unix": 1791701606.9691992,
+    "rung_start_unix": {
+      "0": 1791699568.2804377,
+      "1": 1791699868.2806482,
+      "2": 1791700468.2806654,
+      "3": 1791701368.280641
+    },
+    "rung_actual_delta_s": {
+      "0": 1.1920928955078125e-06,
+      "1": 300.00021171569824,
+      "2": 900.0002288818359,
+      "3": 1800.0002045631409
+    },
+    "delta_ref_actual_s": 1800.0002045631409,
+    "n_endpoints": 57,
+    "n_ambient_records": 228,
+    "n_oracle_records": 14,
+    "wall_clock_s": 2041.2498486042023,
+    "wall_clock_cap_minutes": 60
+  }
+}
