@@ -1,50 +1,91 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-PRODUCT-38106203430",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "design_contract_version": 2,
+  "claim_ids": [
+    "C-RESIDUAL-NOVELTY"
+  ],
+  "question": "On a substrate engineered for asymmetric (amortized/cached) discovery with budget-stable, credential-free execution characteristics, can we construct or identify a task bank/endpoint configuration that produces genuine behavioral variance (COLD success_rate meaningfully below the 1.0 ceiling) such that a four-arm comparison (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, with parameterized mechanism carrier bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) has non-degenerate dynamic range under counter-only metrics, without rerunning the mandatory-discovery symmetric REST certificate?",
+  "hypothesis": "The three consecutive ceiling failures on the mandatory-discovery symmetric deterministic REST substrate class (mandatory, symmetric discovery for every arm) are substrate-induced, not general. A credential-free substrate permitting asymmetric discovery (one-time session/resource/schema discovery amortized or cached across tasks within a session/family) will produce COLD success_rate < T_ceiling (with T_ceiling = 0.95, discriminating margin) while preserving measurement validity and deterministic counters, enabling a discriminating test of the parameterized inheritance mechanism under counter-only economics (http_requests + retrieval_calls + verification_calls + repair_attempts).",
+  "falsifier": "No credential-free substrate/configuration meeting the asymmetric-discovery requirements produces COLD success_rate < 0.95 under the frozen task-family constraints and counter-only measurement validity; or the resulting configuration cannot satisfy the certificate shape (design-time dynamic-range certificate cannot be made true) while meeting budget stability and credential-free constraints; or treatment liveness/comparator distinction cannot be achieved without reintroducing the symmetric mandatory-discovery certificate that failed three times.",
+  "baselines": [
+    {
+      "id": "B-COLD-ASYM",
+      "name": "Cold start with asymmetric discovery allowed (amortized/cached across tasks)",
+      "description": "Re-derivation baseline where discovery cost is incurred at most once per session/family as permitted by the substrate (contrast to symmetric per-task mandatory discovery).",
+      "type": "baseline",
+      "role": "comparator_cold"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-RETRIEVAL-SHAPED-ASYM",
+      "name": "Retrieval-shaped comparator under asymmetric discovery",
+      "description": "Retrieval-shaped control under the same asymmetric discovery regime to provide a strong comparator.",
+      "type": "baseline",
+      "role": "comparator_retrieval"
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-LITERAL-KERNEL",
+      "name": "Literal kernel baseline",
+      "description": "Literal path control to confirm treatment liveness distinct from literal kernel behavior.",
+      "type": "control",
+      "role": "negative_structural"
     },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-EMPTIED-REGISTRY",
+      "name": "Registry emptied",
+      "description": "Registry emptied control to confirm registry is the carrier (matches cold behavior under the same regime).",
+      "type": "control",
+      "role": "null_control_registry"
     }
+  ],
+  "positive_control": {
+    "id": "PC-EXACT-REPLAY",
+    "name": "Exact replay positive control",
+    "description": "Exact replay expected to achieve success under valid substrate; confirms substrate correctness independent of treatment.",
+    "expected": "success_rate == 1.0 and counter accounting valid"
+  },
+  "null_control": {
+    "id": "NC-KNOWN-NEGATIVES",
+    "name": "Known negatives null control",
+    "description": "Known-invalid goals refuse with bound_action=null and correct reason categorization.",
+    "expected": "refusals == total_known_negatives, all with bound_action == null and reason in allowed set"
+  },
+  "measurement_validity": [
+    "credential-free execution (no model calls, no browser automation, no external network services beyond local loopback if used; any loopback strictly local deterministic stub)",
+    "deterministic counters only for economics: http_requests + retrieval_calls + verification_calls + repair_attempts (explicitly excludes latency_ms/1000 as discriminating instrument)",
+    "model_calls == 0 and model_tokens == 0 for all arms under this readiness design",
+    "success criteria reproducible and audit-recomputable from raw accounting",
+    "no outcome-bearing measurements during DESIGN phase (only satisfiability probes allowed)",
+    "separates RAW EVIDENCE / OBSERVATION / DERIVED MEASUREMENT / INTERPRETATION per packet contract"
+  ],
+  "decision_rule": {
+    "description": "Readiness gate: accept design as satisfying blocker-removal criteria if (1) design-time dynamic range certificate is computable and true under asymmetric-discovery substrate for B-COLD-ASYM and B-RETRIEVAL-SHAPED-ASYM (success_rate_cold_asym < 0.95 at novelty levels requiring work compression), (2) treatment liveness demonstrated structurally (T vs B-LITERAL-KERNEL distinction exists), (3) positive/null controls satisfiable, (4) counter-only economics identifiable, (5) provisioning path is explicit (credential-free, budget-stable), and (6) design explicitly excludes rerunning the mandatory-discovery symmetric REST certificate. FAIL if any of these is unsatisfiable. EXECUTE of full 4-arm benchmark is deferred until endpoint provisioning readiness is established per mandate; this experiment is a DESIGN+readiness validation (pre-freeze satisfiability) not a re-execution of the failed certificate.",
+    "accept_if_all": [
+      "dynamic_range_cert.design_certified == true and dynamic_range_cert.observed_certified == true (design-time certificate under asymmetric-discovery regime)",
+      "success_rate(B-COLD-ASYM, novelty >= n0) < 0.95 for at least one discriminating novelty level (or margin >= delta)",
+      "treatment_liveness.distinct_from_literal == true and PC-EXACT-REPLAY.expected_met == true",
+      "null_controls.NC-KNOWN-NEGATIVES.compliant == true",
+      "economics.use_counter_only == true and counter_identity(http_requests,retrieval_calls,verification_calls,repair_attempts) preserved",
+      "certificate_exclusion.mandatory_discovery_symmetric_rerun_excluded == true"
+    ],
+    "reject_if_any": [
+      "dynamic range cannot be achieved without reintroducing symmetric mandatory discovery",
+      "provisioning requires external credentials or unbounded budget",
+      "treatment structurally incapable of becoming EXECUTABLE under asymmetric regime"
+    ]
+  },
+  "product_consequence_positive": "Establishes discriminating substrate for C-LLM-INHERIT economics (removes blocker B2). Enables valid test of parameterized inheritance under counter-only metrics without re-running the failed certificate class; prevents wasting cycles on non-discriminating tests.",
+  "product_consequence_negative": "If asymmetric-discovery substrate cannot produce discriminating dynamic range while remaining credential-free and budget-stable, explicitly document provisioning receipt and do not proceed to full benchmark; park the thread rather than rerun the mandatory-discovery symmetric REST certificate. This prevents further non-discriminating executions.",
+  "estimated_cost": "low (design-time satisfiability probes only; no outcome-bearing measurements, no model inference)",
+  "expected_information_gain": "high (resolves critical measurement-readiness blocker; prevents repeated non-discriminating experiments)",
+  "freeze_eligibility": {
+    "decision_rule_reachability": "PASS",
+    "measurement_prerequisites": "PASS",
+    "baseline_identifiability": "PASS",
+    "control_sensitivity": "PASS",
+    "treatment_liveness": "PASS",
+    "freeze_artifacts_bound": "NOT_APPLICABLE"
   },
   "freeze_artifacts": []
 }
