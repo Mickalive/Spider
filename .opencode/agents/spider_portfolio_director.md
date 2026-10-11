@@ -18,8 +18,7 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md` as the cumulative strategic review of original science plus 434 subsequent experiments (never a substitute for canonical evidence);
-- `research/portfolio/PROGRAM_AUDIT_2026-10-10.md` as the preceding 433-packet historical snapshot;
+- `research/portfolio/PROGRAM_AUDIT_GLOBAL_2026-10-10.md` as the living cumulative strategic review across the original evidence and all subsequent finalized experiments; read current counts from the unified Codex, never from this dated synthesis (never a substitute for canonical evidence);
 - `codex/claim_state.json` (one timeline: historical_precedents_by_claim and subsequent accepted events);
 - `codex/index.json` (one catalog: historical.artifacts and subsequent experiments);
 - `codex/legacy_brief.json` (compact, source-pinned pre-2.0 findings) and `legacy_history` in the machine snapshot;
