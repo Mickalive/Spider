@@ -1,308 +1,84 @@
 {
-  "schema_version": 1,
-  "design_contract_version": 2,
   "experiment_id": "EXP-INTEL-38013769440",
   "lane": "intel",
   "claim_ids": ["C-LLM-INHERIT"],
-  "claim_scope_note": "Addresses ONLY C-LLM-INHERIT, an intel priority_claim and the director_mandate target (cycle 38013054267, action REOPEN). This packet determines readiness condition (3) of the four-arm C-LLM-INHERIT benchmark and returns an explicit close/re-scope recommendation. It does not promote the claim; claim adjudication belongs to DIRECTOR.",
-
-  "director_mandate_binding": {
-    "cycle_id": "38013054267",
-    "action": "REOPEN",
-    "target_claim": "C-LLM-INHERIT",
-    "cognitive_reset": false,
-    "parent_handoff_disposition": "USE",
-    "binding_strategic_question": "Under the same credential-free, CPU-quantized constraints, does supplying the task goal/schema in the system prompt (removing the underspecification the parent harness did not have) convert the step-0 reveal-click into a full multi-step click-then-answer completion for the largest obtainable credential-free models, and if not, what is the demonstrable capability ceiling for the minimal Web-agent task across ALL credential-free endpoints and local models actually available to the factory? Return an explicit close/re-scope recommendation so that readiness condition (3) is either satisfied by a proven same-model driver or the four-arm C-LLM-INHERIT benchmark is re-scoped off the credential-free path. Include a bounded external check of the published capability envelope for comparably sized local models.",
-    "mandate_escape_clause": "The mandate licenses BOTH directions. This design preregisters a reachable SUPPORTS branch and reachable FALSIFIES/MIXED branches; no branch is empty.",
-    "explicitly_not_authorized": [
-      "adding/deleting/prompt-tuning any candidate, grammar, seed or episode count after freeze",
-      "new endpoint provisioning, GPU, paid APIs, Docker/ollama routes, or human-issued credentials",
-      "measuring C-PRODUCT-ECON economics, executing the four-arm benchmark, or promoting any credential-free endpoint into Product Core",
-      "re-litigating the audited carried negatives under their own protocols; M-0.5B-QWEN is instead MEASURED under this experiment's frozen GBNF protocol",
-      "re-running the bounded endpoint/comparator census (EXP-INTEL-37973264582)",
-      "generalizing a minimal two-step synthetic result to arbitrary multi-step web tasks"
-    ]
-  },
-
-  "parent_handoff_continuity": {
-    "parent_experiment_id": "EXP-INTEL-37982024058",
-    "parent_handoff_path": "research/experiments/EXP-INTEL-37982024058/handoff.json",
-    "parent_handoff_sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55",
-    "disposition": "USE",
-    "established": [
-      "Under the frozen underspecified-prompt protocol (no goal/schema; constrained GBNF; temp=0; seeds 42-46; CPU-only llama.cpp 0.2.90; Qwen2.5 3B/7B Q4_K_M), no measured credential-free model cleared the minimal Web-agent bar: M-7B-QWEN 0/5, M-3B-QWEN 0/5; parseable_action_rate_step1 1.0; audit PASS.",
-      "Constrained decoding works: both models passed PC-JSON-CONSTRAINED-DECODING 10/10; the failure is planning, not formatting.",
-      "Prompt-sensitive failure mode: step-0 reveal-click succeeds (TARGET-42 surfaces), then both models re-emit a click on the now-hidden #reveal-btn for all remaining steps and never emit an answer."
-    ],
-    "rejected": [
-      "Bounded to the frozen 3B-8B Qwen class under the frozen underspecified prompt; not a general rejection of the credential-free path.",
-      "M-0.5B-QWEN emits prose under the CENSUS unconstrained harness (0% parseable); this does NOT determine its outcome under this experiment's frozen GBNF protocol.",
-      "gpt-oss-20b via the Pollinations anonymous proxy (E-POLLINATIONS-OPENAI) cannot drive the task: empty/reasoning-only content, ~197-token cap, intermittent HTTP 402; timestamp-bound and not reproducible (carried endpoint-layer negative; not re-measured here)."
-    ],
-    "unknown": [
-      "Whether a parent-style goal/schema prompt converts the step-0 click into a full click-then-answer (this packet tests it).",
-      "Whether the failure is general small-model multi-step planning or prompt-specific.",
-      "Whether 14B Qwen or a non-Qwen architecture clears the bar.",
-      "Whether M-0.5B-QWEN clears under the frozen GBNF protocol."
-    ],
-    "do_not_assume": [
-      "Frozen-protocol ceiling only: do not generalize the parent FALSIFIES to other prompts, architectures or models.",
-      "The 7B single-file URL 404s; same-model same-quant split shards are used (not a model substitution).",
-      "Do not treat NOT_ATTEMPTED/NOT_IN_OBTAINABLE_SET/NOT_MEASURED records (early stop, availability gate, run error, PC-fail) as scientific negatives.",
-      "CORRECTION (parent control bug, verified at DESIGN from raw/control_episodes.json): the parent B-RANDOM-ACTION and NC-NO-MODEL-ACTION controls were executed without a prior page.goto, so run_episode reloaded about:blank. Every B-RANDOM click recorded click_ok=False and final_target_visible=False. The parent 'B-RANDOM 5/5 valid JSON, 0/5 success (chance-consistent)' is therefore NOT evidence that a loaded page rejects chance actions; this experiment re-runs both controls on the loaded task page.",
-      "CORRECTION (prior-design scope claim): non-Qwen open-weight GGUFs ARE HTTP-reachable via the same huggingface.co resolve route (verified live at DESIGN). They are deferred by explicit bounded scope, not by unreachability.",
-      "Do not re-run the endpoint/comparator census."
-    ]
-  },
-
-  "question": "Under the same credential-free, CPU-quantized constraints (huggingface.co resolve-redirect GGUF; llama.cpp constrained decoding; CPU-only nproc=4; no credential; no paid endpoint), does supplying the task goal and action schema in the system prompt convert the step-0 reveal-click into a full click-then-answer completion (click #reveal-btn, then answer TARGET-42) for the obtainable credential-free model set {M-0.5B-QWEN, M-3B-QWEN, M-7B-QWEN, M-14B-QWEN, M-LLAMA-3.2-3B (architecture-diversity probe)} -- and if not, what is the demonstrable capability ceiling for the minimal Web-agent task across the credential-free endpoints actually available to the factory {E-LOCAL-LLAMA; E-POLLINATIONS-OPENAI carried negative}? Return an explicit close/re-scope recommendation for readiness condition (3).",
-
-  "hypothesis": "The parent 0/5 negatives for M-7B-QWEN and M-3B-QWEN are caused at least partly by system-prompt underspecification (audit VF-01), not by an immutable capability ceiling. Under PR-SPECIFIED (the frozen parent system prompt augmented by exactly the action-schema enumeration and the goal sentence 'Click the button to reveal the code, then answer it.'), the models' step-0 reveal-click (observed 5/5 in the parent) converts into a full click-then-answer completion: at least one candidate in the obtainable set {M-0.5B-QWEN, M-3B-QWEN, M-7B-QWEN, M-14B-QWEN} clears the bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over the 5-episode arm), with all other constraints byte-identical to the parent (same GBNF, user template, task HTML, seeds 42-46, temperature 0.0, max_tokens 512, n_ctx 2048, chat_format qwen, same shards, CPU-only).",
-
-  "falsifier": "Under the same constraints with PR-SPECIFIED, no model in the obtainable set {M-0.5B-QWEN, M-3B-QWEN, M-7B-QWEN, M-14B-QWEN} measured under the frozen protocol clears the bar, while CV-UNDERSPEC-REPLICATION confirms behavioral continuity with the parent (0/5 + reveal-click loop on M-7B-QWEN and M-3B-QWEN under PR-UNDERSPEC) and PC-SCRIPTED-ORACLE confirms the task/verifier rewards a correct click-then-answer (5/5). Exhaustion of the obtainable credential-free model range under identical frozen constraints, together with the carried endpoint-layer negative B-POLLINATIONS-PROXY, closes the credential-free external-agent path and licenses the explicit close/re-scope decision that readiness condition (3) is NOT satisfied: the four-arm C-LLM-INHERIT benchmark must be re-scoped off the credential-free path (drop Gate 3's same-model external anchor; re-anchor on internally re-run comparators on a task bank with demonstrable dynamic range, since readiness condition (2) is also open per the mandate's B2).",
-
-  "model_set": {
-    "obtainable_primary_set": ["M-0.5B-QWEN", "M-3B-QWEN", "M-7B-QWEN", "M-14B-QWEN"],
-    "architecture_diversity_probe": ["M-LLAMA-3.2-3B"],
-    "obtainable_definition": "S_primary = models obtainable via the confirmed credential-free resolve route (E-LOCAL-LLAMA family) under CPU-only llama.cpp on the runner (~16 GiB RAM). M-0.5B-QWEN, M-3B-QWEN, M-7B-QWEN are always obtainable. M-14B-QWEN joins iff all 3 shards download with pinned content-lengths AND available RAM >= 11 GiB at load time; otherwise it is recorded NOT_IN_OBTAINABLE_SET (reason RAM or PROVISIONING) and excluded by this pre-declared definition. Qwen2.5-32B Q4_K_M (~18.49 GiB across 5 shards; first shard 3,961,498,272 B, HTTP-verified at DESIGN) and 72B exceed runner RAM and are NOT_IN_OBTAINABLE_SET by the same definition; the E-LOCAL-LLAMA runnable Q4_K_M range ends at 14B.",
-    "architecture_probe_scope": "M-LLAMA-3.2-3B is measured as a bounded cross-architecture probe (same ~3B size class as M-3B-QWEN) to separate a Qwen-specific ceiling from a small-model ceiling. It is gated on the frozen llama-cpp-python 0.2.90 runtime exposing a usable chat template (chat_format 'llama-3'); if the template cannot be constructed it is recorded NOT_MEASURED-RUNTIME, NOT a capability negative. Its result is reported as generalization evidence and does NOT gate the primary SUPPORTS/FALSIFIES branch.",
-    "other_reachable_but_not_measured": ["Llama-3.1-8B", "Gemma-2-2B", "Gemma-2-9B", "Phi-3.5-mini"],
-    "reachable_but_not_measured_reason": "Verified HTTP-reachable at DESIGN via the same huggingface.co resolve route (content-lengths recorded in measurement_validity). They are deliberately out of the bounded confirmatory scope to keep the experiment small; this is a declared scope boundary, not a capability or availability claim. The external_capability_envelope_check covers the comparably sized published envelope instead."
-  },
-
+  "question": "Under the same credential-free, CPU-quantized constraints as EXP-INTEL-37982024058, does supplying the task goal and action schema in the system prompt (removing the underspecification identified by audit VF-01) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN, and if not, what is the demonstrable capability ceiling for the minimal Web-agent task across ALL credential-free endpoints and local models actually available to the factory?",
+  "hypothesis": "At least one of M-7B-QWEN or M-3B-QWEN will clear the minimal Web-agent capability bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6) when the system prompt enumerates the task goal ('click the button, then answer the revealed code') and the action schema, thereby converting the parent experiment's FALSIFIES outcome to SUPPORTS at the goal/schema prompt protocol and unblocking the frozen C-LLM-INHERIT four-arm benchmark.",
+  "falsifier": "Even with the goal/schema-enriched system prompt, neither M-7B-QWEN nor M-3B-QWEN clears the capability bar. The capability ceiling for credential-free CPU-quantized models under factory constraints is below the minimal Web-agent task threshold. A bounded external check of published benchmarks for Qwen2.5-3B/7B-Instruct and comparable local models on Web-agent/tool-use tasks confirms no credential-free model in the factory's accessible range clears this bar, licensing an explicit re-scope of the four-arm benchmark off the credential-free path.",
   "baselines": [
     {
-      "id": "B-UNDERSPEC-CARRIED",
-      "type": "comparator_baseline (parent published)",
-      "description": "Parent numbers under PR-UNDERSPEC (EXP-INTEL-37982024058): M-7B-QWEN and M-3B-QWEN both task_success_rate 0/5, parseable_action_rate_step1 1.0, PC 10/10. External comparator for the treatment; re-anchored in-experiment by CV-UNDERSPEC-REPLICATION on the same harness/conditions.",
-      "expected_outcome": "Replication expected to reproduce 0/5 task success + step-0 reveal-click loop on both models"
+      "id": "B-UNDERSPECIFIED-PROMPT-7B",
+      "type": "protocol_comparator",
+      "description": "M-7B-QWEN under the frozen underspecified system prompt from EXP-INTEL-37982024058 ('You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.'). Task success rate 0/5, parseable_action_rate_step1 1.0, answer_action_emission_rate 0.0. Established by parent experiment (audit PASS).",
+      "expected_outcome": "FAIL - task_success_rate=0.0, answer_action_emission_rate=0.0 (re-click loop)"
+    },
+    {
+      "id": "B-UNDERSPECIFIED-PROMPT-3B",
+      "type": "protocol_comparator",
+      "description": "M-3B-QWEN under the frozen underspecified system prompt from EXP-INTEL-37982024058. Task success rate 0/5, parseable_action_rate_step1 1.0, answer_action_emission_rate 0.0. Established by parent experiment (audit PASS).",
+      "expected_outcome": "FAIL - task_success_rate=0.0, answer_action_emission_rate=0.0 (re-click loop)"
     },
     {
       "id": "B-RANDOM-ACTION",
-      "type": "null_control (chance floor)",
-      "description": "Per-step uniform random action (the TRUE parent semantics: harness_config.random_baseline.action_space of 5 entries; make_random_producer draws rng.choice() at every step), drawn from [click #reveal-btn; answer TARGET-41; answer TARGET-42; answer TARGET-43; answer unknown], max_steps=5, base_seed=42. FIXES the parent implementation bug by navigating to the loaded task page before every episode (parent ran this control on about:blank). Analytical chance: with q=P(click)=1/5, an episode succeeds iff the first non-click action drawn is the TARGET-42 answer, giving per-episode P(success)=r/(1-q)=(1/5)/(4/5)=0.25, hence P(clearing the >=3/5 bar by chance)~=0.104. The realized value with the frozen seeds is reported as the empirical chance floor.",
-      "expected_outcome": "Chance-consistent: valid JSON 5/5; task_success_rate near the ~0.25 per-episode chance level, and the run either does or does not clear the bar - recorded as the realized chance floor, never used to inflate a treatment claim."
-    },
-    {
-      "id": "B-ANSWER-NO-REVEAL",
-      "type": "null_control (floor-exact)",
-      "description": "Deterministic policy that emits {'action':'answer','text':'TARGET-42'} on the loaded page WITHOUT ever clicking #reveal-btn, 5 episodes. Because success requires clicked_reveal==True, P(task success)==0 deterministically while parseable_action_rate_step1==1.0.",
-      "expected_outcome": "FAIL - 0/5 task success, 5/5 parseable (isolates 'answer text alone is insufficient without the reveal click')."
+      "type": "negative_baseline",
+      "description": "Uniform random action selection from valid action space {click #reveal-btn, answer TARGET-42}. Establishes chance-level task completion and parseable action rates.",
+      "expected_outcome": "FAIL - near-zero task completion, parseable_action_rate_step1=1.0 (valid JSON by construction)"
     },
     {
       "id": "B-0.5B-QWEN-LOCAL",
-      "type": "negative_baseline (carried, DIFFERENT protocol, contextual only)",
-      "description": "Qwen2.5-0.5B-Instruct-Q4_K_M from EXP-INTEL-37973264582 Gate 2: emits prose under UNCONSTRAINED decoding, 0% parseable. Contextual only; does NOT determine M-0.5B-QWEN's outcome under this experiment's frozen GBNF protocol.",
-      "expected_outcome": "REFERENCE ONLY - not used for the ceiling claim"
+      "type": "carried_reference_baseline",
+      "description": "Qwen2.5-0.5B-Instruct-Q4_K_M via llama.cpp (parent EXP-INTEL-37973264582 E-LOCAL-LLAMA). Expected: 0% parseable actions, 0% task success. Not re-run; carried as reference.",
+      "expected_outcome": "FAIL - no parseable JSON action, task not completed"
     },
     {
       "id": "B-POLLINATIONS-PROXY",
-      "type": "negative_baseline (carried, timestamp-bound)",
-      "description": "Pollinations anonymous proxy (gpt-oss-20b, E-POLLINATIONS-OPENAI) from EXP-INTEL-37973264582: empty/reasoning-only content, ~197-token cap, intermittent HTTP 402, no SLA. Endpoint-layer negative; not re-measured.",
-      "expected_outcome": "FAIL - empty/reasoning-only content, token cap, budget instability (carried)"
+      "type": "carried_reference_baseline",
+      "description": "Pollinations gpt-oss-20b anonymous proxy (parent EXP-INTEL-37973264582 E-POLLINATIONS-OPENAI). Expected: 0% task success (token cap, empty content, budget instability). Not re-run; carried as reference.",
+      "expected_outcome": "FAIL - empty/reasoning-only content, token cap, budget instability"
     }
   ],
-
   "positive_control": {
-    "PC-SCRIPTED-ORACLE": {
-      "id": "PC-SCRIPTED-ORACLE",
-      "type": "verifier_ceiling_positive_control",
-      "description": "A deterministic NON-MODEL scripted policy emits at step 1 {'action':'click','selector':'#reveal-btn'} and at step 2 {'action':'answer','text':'TARGET-42'}, through the identical episode pipeline (same page server, Playwright/chrome, parser, verifier), on the loaded page. 5 episodes. Certifies the ceiling (a correct multi-step sequence is rewarded at 1.0), which no grammar-only control can do.",
-      "success_criterion": "scripted_oracle_task_success_rate == 5/5. Any value < 5/5 => OUTCOME=MEASUREMENT_INVALID (the task/verifier cannot reward a correct click-then-answer; no candidate negative would be interpretable).",
-      "why_it_is_a_real_control": "It can fail (broken page server, Playwright binding, click mechanics or verifier all yield < 5/5), separating task/verifier integrity from model capability."
-    },
-    "PC-JSON-CONSTRAINED-DECODING": {
-      "id": "PC-JSON-CONSTRAINED-DECODING",
-      "type": "constrained_decoding_verification",
-      "description": "10 probes 'Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}' per candidate through the identical LlamaGrammar path used for episodes. Isolates model reasoning from decoding infrastructure.",
-      "success_criterion": "10/10 syntactically valid schema JSON per candidate, before any task episode of that candidate.",
-      "why_it_is_a_real_control": "It can fail (broken grammar/build does), separating decoding infrastructure from model capability; identical to the parent's passing control."
-    }
+    "id": "PC-JSON-CONSTRAINED-DECODING",
+    "type": "constrained_decoding_verification",
+    "description": "Verify that llama.cpp + GBNF constrained decoding produces syntactically valid JSON actions on a trivial prompt for each candidate model under the TREATMENT prompt condition (goal/schema-enriched). This is the gate for treatment evaluation. Comparator prompt PC is run for reference evidence but is not decision-critical.",
+    "success_criterion": "100% syntactically valid JSON output on 10/10 constrained-decoding probes per model under treatment prompt"
   },
-
   "null_control": {
-    "NC-NO-MODEL-ACTION": {
-      "id": "NC-NO-MODEL-ACTION",
-      "type": "no_model_baseline",
-      "description": "Run the minimal task on the loaded page with a fixed invalid content producer ('I will click the button'), 5 episodes.",
-      "success_criterion": "0% parseable JSON actions and 0% task completion.",
-      "why": "Confirms the verifier rejects non-parseable actions and that completion requires model-driven actions. Unlike the parent, this runs on the loaded page."
-    }
+    "id": "NC-NO-MODEL-ACTION",
+    "type": "no_model_baseline",
+    "description": "Harness runs the minimal Web-agent task with no model endpoint (actions generated by a fixed script emitting invalid/non-JSON content). Confirms task verification logic correctly rejects non-parseable actions.",
+    "success_criterion": "0% task completion, 0% parseable JSON actions"
   },
-
-  "metric_registry": {
-    "task_success_rate": {"definition": "fraction of episodes with clicked_reveal=True AND revealed_value=='TARGET-42' AND final answer text == 'TARGET-42'", "bar": ">= 0.6", "reused_from_parent": true},
-    "parseable_action_rate_step1": {"definition": "fraction of episodes whose step-1 action parsed to valid schema JSON", "bar": ">= 0.6", "reused_from_parent": true},
-    "positive_control_pass_rate": {"definition": "PC-JSON-CONSTRAINED-DECODING passes / 10 per candidate", "requirement": "10/10 pre-task", "reused_from_parent": true},
-    "scripted_oracle_task_success_rate": {"definition": "PC-SCRIPTED-ORACLE successes / 5", "requirement": "5/5", "new": true},
-    "answer_action_emission_rate": {"definition": "fraction of episodes emitting >= 1 parseable 'answer' action (click-then-answer conversion metric)", "new": true},
-    "step0_reveal_click_rate": {"definition": "fraction of episodes with a click on '#reveal-btn' at step 1 (parent observed 5/5)", "reused_from_parent": true},
-    "loop_signature_rate": {"definition": "fraction of episodes with >= 1 post-reveal click on the now-hidden '#reveal-btn'", "new": true},
-    "mean_inference_latency_s": {"definition": "mean per-step inference latency per candidate", "role": "economics record"},
-    "mean_completion_tokens": {"definition": "mean per-step completion tokens per candidate", "role": "economics record"},
-    "candidate_cleared_bar": {"definition": "derived bool: parseable_action_rate_step1 >= 0.6 AND task_success_rate >= 0.6 over the 5-episode PR-SPECIFIED arm", "derived": true},
-    "obtainable_set_complete": {"definition": "derived bool: every model in the pre-declared S_primary obtainable set was measured under PR-SPECIFIED (no NOT_MEASURED record)", "derived": true}
-  },
-
-  "control_registry": {
-    "PC-SCRIPTED-ORACLE": {"kind": "positive", "expected": "5/5", "failure_means": "MEASUREMENT_INVALID"},
-    "PC-JSON-CONSTRAINED-DECODING": {"kind": "positive", "expected": "10/10 per candidate", "failure_means": "candidate NOT_MEASURED-PC-FAIL; both-7B-and-3B => MEASUREMENT_INVALID"},
-    "NC-NO-MODEL-ACTION": {"kind": "null", "expected": "0 parseable / 0 success on the loaded page", "failure_means": "MEASUREMENT_INVALID (verifier not rejecting)"},
-    "B-RANDOM-ACTION": {"kind": "null_random", "expected": "chance-consistent (~0.25 per-episode success); realized value recorded", "failure_means": "if it clears the >=0.6 bar, the 5-episode bar is too weak for this seed set and SUPPORTS requires task_success_rate>=0.8 for the clearing model"},
-    "B-ANSWER-NO-REVEAL": {"kind": "null_deterministic", "expected": "0/5 success, 5/5 parseable", "failure_means": "MEASUREMENT_INVALID (verifier accepts an answer without the reveal click)"},
-    "CV-UNDERSPEC-REPLICATION": {"kind": "continuity_replication", "expected": "0/5 + reveal-click loop on M-7B-QWEN and M-3B-QWEN under PR-UNDERSPEC", "failure_means": "MEASUREMENT_INVALID (ablation unidentifiable)"}
-  },
-
   "measurement_validity": [
-    "Task (frozen, identical to parent): synthetic page with #reveal-btn and a hidden #target div text TARGET-42, served via a local http.server on 127.0.0.1 random port. Success = click #reveal-btn (clicked_reveal=True, revealed_value==TARGET-42) THEN an answer action with text exactly 'TARGET-42'. The EXECUTE harness MUST navigate to the served task URL before EVERY episode (including all controls), fixing the parent about:blank control bug.",
-    "Parsing rule (frozen): an action must parse as JSON matching {\"action\":\"click\"|\"answer\", \"selector\"?:string, \"text\"?:string} with required click.selector / answer.text; any parse error, schema violation or missing field is a parse failure. Regex-parse fallback recorded as raw evidence only.",
-    "Constrained decoding (frozen): GBNF grammar from the parent fixture byte-for-byte; chat_format='qwen' for the Qwen candidates; llama-cpp-python==0.2.90 primary. The PyPI sdist was verified live at DESIGN (llama_cpp_python-0.2.90.tar.gz, 63,762,953 bytes); the identical source build already succeeded in the parent EXECUTE under this workflow. A 0.3.x wheel fallback is documented ONLY if the 0.2.90 build fails, gated by CV-UNDERSPEC-REPLICATION continuity.",
-    "Sampling (frozen): temperature=0.0, max_tokens=512, n_ctx=2048, llama_seed=42, base_seed=42, episode seed = 42+episode_idx (5 episodes/arm/model), CPU-only nproc=4.",
-    "User template (frozen): 'PAGE_TEXT: {page_text}\\nELEMENTS: {elements_json}\\nHISTORY: {history}\\nNext action (JSON only): '.",
-    "Treatment definition (frozen, single variable): PR-UNDERSPEC = the parent harness_config.json prompts.system literal VERBATIM = 'You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown.'. PR-SPECIFIED = PR-UNDERSPEC + ' ' + 'Actions available: {\"action\":\"click\",\"selector\":\"<css selector>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.'. PR-SPECIFIED therefore differs from PR-UNDERSPEC ONLY by an appended schema enumeration and the goal sentence; the opening instruction sentence is byte-identical. The schema keys are written to match the frozen grammar (selector/text); the goal sentence is verbatim from the grand-parent census SYS literal (research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py). Leak guard (P2-BLIND-COMPOSITION): neither prompt contains '#reveal-btn' nor 'TARGET-42'. Component-wise isolation (schema-only vs goal-only) is out of scope for this packet and is recorded as a refinement for a possible follow-up, not as a missing control; comparing the bundle against its own no-goal/no-schema comparator is the preregistered single variable.",
-    "GGUF identity: M-3B-QWEN sha256 626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d (2,104,932,768 B); M-7B-QWEN shard1 dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db (3,993,201,344 B), shard2 539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a (689,872,288 B) from parent raw/gguf_sha256.txt; M-0.5B-QWEN sha256 74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db (491,400,032 B) from census receipts. All content-lengths re-verified live at DESIGN: M-3B 2,104,932,768; M-7B 3,993,201,344 + 689,872,288; M-14B 3,991,999,872 + 3,989,373,504 + 1,006,737,120; M-0.5B 491,400,032; M-LLAMA-3.2-3B 2,019,377,696. 14B and Llama-3.2-3B shas are recomputed at download (no pre-pinned sha available). A shard hash mismatch is NOT_MEASURED with reason SHA-MISMATCH, never a substitution.",
-    "Environment continuity: google-chrome 154.0.8037.97 at /usr/bin/google-chrome (preinstalled in the runner image, so no browser binary download is required); playwright 1.63.0 and llama-cpp-python 0.2.90 are provisioned at EXECUTE from public PyPI (see freeze_eligibility.measurement_prerequisites); nproc=4; disk 85 GiB free; RAM 15,989 MiB total / 14,471 MiB available at DESIGN (14B arm gated on >= 11 GiB available).",
-    "Raw evidence per episode preserved (load time, latency, tokens, raw completion, parsed action, regex fallback, clicked_reveal, revealed_value, final_target_visible, final answer, seed); code+fixture bound by sha256 at EXECUTE. PC-SCRIPTED-ORACLE runs before any model episode; all controls run on the loaded page; NOT_ATTEMPTED / NOT_IN_OBTAINABLE_SET / NOT_MEASURED are census records never negatives; infrastructure failures are MEASUREMENT_INVALID never FALSIFIES."
+    "Same minimal Web-agent task as parent (click #reveal-btn then answer TARGET-42 on synthetic page) for direct comparability to EXP-INTEL-37982024058 and EXP-INTEL-37973264582 Gate 2 evidence.",
+    "Identical parsing rule: action must be valid JSON matching schema {\"action\": \"click\"|\"answer\", \"selector\"?: string, \"text\"?: string}.",
+    "Identical mechanical verification: Playwright drives system Chrome; success = correct final answer TARGET-42 extracted from page.",
+    "Constrained JSON decoding (GBNF) enforced for all candidate models under both prompt conditions to isolate model reasoning from formatting failures.",
+    "Same llama.cpp version (0.2.90) and chat_format=\"qwen\" for Qwen models.",
+    "Same hardware constraints: CPU-only (nproc=4), no GPU, 4GB+ RAM for 7B model.",
+    "GGUF download via huggingface.co resolve-redirect only (cdn-lfs.huggingface.co and api-inference.huggingface.co confirmed non-resolving in this factory).",
+    "Deterministic temperature=0.0, max_tokens=512, fixed seed for reproducibility (seeds 42-46 per episode).",
+    "Candidate model set frozen: primary Qwen2.5-7B-Instruct-Q4_K_M (M-7B-QWEN), fallback Qwen2.5-3B-Instruct-Q4_K_M (M-3B-QWEN). No post-freeze additions.",
+    "Each model tested under TWO prompt conditions: (A) goal/schema-enriched system prompt (treatment), (B) frozen underspecified system prompt (comparator, re-run for direct within-experiment comparison).",
+    "Per model per prompt condition: (a) constrained-decoding verification (positive control), (b) minimal Web-agent task over 5 episodes.",
+    "Raw evidence preserved: model load time, inference latency, token usage, raw completions, parsed actions, task success/failure per episode, answer_action_emitted (bool), GGUF sha256, prompt condition identifier.",
+    "Bounded external capability check: systematic search of published benchmarks (WebArena, Mind2Web, MiniWoB++, τ-bench, AgentBench, BMTools, ToolBench, API-Bank, HuggingFace Open LLM Leaderboard tool-use subset, GAIA, WebShop) for Qwen2.5-3B/7B-Instruct and comparable local models (Llama-3.2-3B/8B, Gemma-2-2B/9B, Phi-3.5-mini) on multi-step Web-agent or tool-use tasks, reported as structured capability envelope with source URLs and dates."
   ],
-
-  "decision_rule": "Arms (frozen). Candidate order: M-7B-QWEN -> M-3B-QWEN -> (conditional) M-14B-QWEN -> (census-completeness) M-0.5B-QWEN -> (architecture-diversity probe) M-LLAMA-3.2-3B. Per candidate: PC-JSON (10/10) -> PR-UNDERSPEC (5 episodes; M-7B-QWEN and M-3B-QWEN = CV-UNDERSPEC-REPLICATION; also for M-LLAMA-3.2-3B if measured) -> PR-SPECIFIED (5 episodes). M-14B-QWEN and M-0.5B-QWEN run PR-SPECIFIED only, after PC; their PR-SPECIFIED success is a capability result, and the prompt-conversion attribution rests on CV-UNDERSPEC-REPLICATION for M-7B-QWEN and M-3B-QWEN. PC-SCRIPTED-ORACLE runs once before any model episode. All controls navigate to the loaded task page before each episode.\n\nBar cleared iff parseable_action_rate_step1 >= 0.6 AND task_success_rate >= 0.6 over the 5-episode PR-SPECIFIED arm (>= 3/5 both; success mechanically requires clicked_reveal==True and exact answer TARGET-42). For SUPPORTS robustness, if the realized B-RANDOM-ACTION control clears the >=0.6 bar, the clearing model must then reach task_success_rate >= 0.8 to count as a proven driver (guards against the ~0.10 chance-clearing probability of the 5-episode bar).\n\nOrdered evaluation (outcome in {SUPPORTS, FALSIFIES, MIXED, MEASUREMENT_INVALID}; status in {COMPLETE, BLOCKED, MEASUREMENT_INVALID}):\n1. PC-SCRIPTED-ORACLE != 5/5 => MEASUREMENT_INVALID. B-ANSWER-NO-REVEAL != 0/5 success => MEASUREMENT_INVALID. NC-NO-MODEL-ACTION != 0 parseable => MEASUREMENT_INVALID. PC-JSON fails on BOTH M-7B-QWEN and M-3B-QWEN => MEASUREMENT_INVALID. A candidate whose PC-JSON fails is NOT_MEASURED-PC-FAIL (not a capability negative).\n2. CV-UNDERSPEC-REPLICATION PASS iff for EACH of M-7B-QWEN and M-3B-QWEN: task_success_rate == 0/5 AND step0_reveal_click_rate >= 0.8 AND loop_signature_rate >= 0.2 AND parseable_action_rate_step1 >= 0.8. ANY unmet condition => REPLICATION-DEVIATION => MEASUREMENT_INVALID.\n3. SUPPORTS iff some model in S_primary clears the bar (with the B-RANDOM guard applied) under PR-SPECIFIED; record the driver id + shard hashes.\n4. FALSIFIES iff PC/oracle/replication all PASS and EVERY model in S_primary is measured under PR-SPECIFIED and fails the bar. M-14B is either in S_primary and measured or excluded by the pre-declared availability definition, so S_primary is always fully measurable when downloads succeed.\n5. MIXED iff at least one S_primary model is unresolved for a non-capability reason (download/shard/load/build/PC failure) while no model clears the bar.\nThe M-LLAMA-3.2-3B architecture probe is reported separately as generalization evidence and does not change steps 3-5.",
-
-  "claim_ceiling_rules": "The result bounds capability ONLY for the frozen minimal two-step synthetic task, the frozen prompts, the frozen sampling and the measured credential-free candidates. SUPPORTS licenses readiness condition (3) for this task class with the recorded driver; FALSIFIES/MIXED bounds the credential-free driver set for this task class. No generalization to arbitrary multi-step web tasks; no Product-Core promotion; no claim-status change by this packet.",
-
-  "code_binding": {
-    "note": "freeze_artifacts lists the pre-existing mutable local inputs whose identity can change the interpretation; the freezer hashes them into freeze.json.artifact_hashes and they are immutable for this transaction. The EXECUTE harness (research/intel/run_exp_38013769440.py) and its derived fixture do not exist at freeze time (DESIGN writes only spec/prereg), so they are bound at EXECUTE by sha256 into result.json.artifacts (roles 'code'/'fixture') and provenance.json; AUDIT re-verifies the derived harness_config.json and both prompt strings byte-for-byte against the frozen prereg, and checks that every control episode navigates to the loaded task page.",
-    "ancestor_harness": {"path": "research/intel/run_exp_37982024058.py", "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00", "role": "fork source; its run_episode/parse/observe logic is reused, with the about:blank control navigation bug fixed"},
-    "reused_fixture": {"path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json", "sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"},
-    "gguf_receipts": {"path": "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt", "sha256": "93836c2594b0c156c0fa913fb384e913586cb03adbd501773fdf6fd450176dbd"},
-    "census_receipts": {"path": "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json", "sha256": "b7f5c850c4cee3dbac892e28188c1ef18b32c44dc926cf42de121e731db294e9"},
-    "treatment_source": {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862", "role": "provenance of the PR-SPECIFIED schema enumeration + goal sentence (census SYS literal); the goal sentence is reproduced verbatim in prereg section 3"}
-  },
-
-  "external_capability_envelope_check": {
-    "status": "COMPLETED AT DESIGN (bounded, non-outcome-bearing, EXTERNAL_PRIOR_ART only; cannot alter the primary outcome)",
-    "anchors": [
-      {"source": "WebArena (arXiv:2307.13854, ICLR 2024)", "fact": "Best GPT-4 agent end-to-end task success 14.41%; GPT-3.5 8.75%; human 78.24%; on 812 long-horizon web tasks.", "classification": "PEER_REVIEWED_EXTERNAL_PRIOR_ART", "verified_at": "2026-10-10"},
-      {"source": "Docker Inc. local-vs-cloud tool-selection evaluation (June 2025, secondary reporting)", "fact": "Tool-selection F1: GPT-4 0.974; Qwen3-14B 0.971; Claude 3 Haiku 0.933; Qwen3-8B 0.933. Reported by a vendor guide citing Docker; the primary eval was not retrieved.", "classification": "NON_PEER_REVIEWED_VENDOR_SNAPSHOT"},
-      {"source": "Community tool-calling benchmark (21 small CPU models, 20 runs each) and a 187-prompt local 7B agent field report", "fact": "Small models can emit valid tool calls but fail restraint/judgment; local 7B models 'start losing coherence after 2-3 steps'; format compliance is model-specific; sample size materially changes rankings.", "classification": "NON_PEER_REVIEWED_COMMUNITY_EVIDENCE", "verified_at": "2026-10-10"},
-      {"source": "Qwen2.5 official function-calling documentation (qwen.readthedocs.io v2.5)", "fact": "Function calling is prompt/template dependent; the model 'can fall into a loop and require calling the same function again and again'; protocol/schema conformance is not guaranteed. Qwen2.5 is the smallest family shipping native tool-calling templates.", "classification": "VENDOR_DOCUMENTATION"}
-    ],
-    "interpretation_boundary": "The external anchors are consistent with (a) a low but non-zero published envelope for strong cloud models on realistic long-horizon web tasks and (b) documented small-model multi-step loop/format fragility. They are NOT measurements of this task, these quantized GGUF builds or this frozen prompt, and they do not substitute for the in-experiment controls. The external check cannot alter the primary outcome; EXECUTE records it as context only."
-  },
-
-  "pre_freeze_satisfiability_dry_run": {
-    "status": "EXECUTED BY DESIGN as a satisfiability/identifiability probe only; no model outcome and no confirmatory episode. Probes: credential-free HEAD/range requests against the frozen GGUF URLs, PyPI artifact checks, local toolchain/version checks.",
-    "environment_probes": [
-      {"probe": "nproc", "observed": "4", "pass": true},
-      {"probe": "RAM MiB (free/available/total), DESIGN snapshot", "observed": "11192 / 14471 / 15989", "pass": true, "note": "14B Q4_K_M ~8.37 GiB weights; gated on available RAM >= 11 GiB (available 14.1 GiB >= 11 GiB)."},
-      {"probe": "free disk GiB", "observed": "85", "pass": true},
-      {"probe": "python", "observed": "3.12.15", "pass": true},
-      {"probe": "gcc / cmake / make", "observed": "gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3", "pass": true, "note": "sufficient to build llama-cpp-python 0.2.90; pip build isolation fetches its PEP517 backend."},
-      {"probe": "PyPI llama-cpp-python 0.2.90 sdist", "observed": "llama_cpp_python-0.2.90.tar.gz 63,762,953 B (PyPI JSON, live)", "pass": true, "note": "the identical build already succeeded in the parent EXECUTE."},
-      {"probe": "PyPI playwright 1.63.0 wheel", "observed": "playwright-1.63.0 manylinux wheel present (PyPI JSON, live)", "pass": true},
-      {"probe": "huggingface.co resolve-redirect Qwen GGUFs", "observed": "HTTP 200 with pinned content-lengths (0.5B 491,400,032; 3B 2,104,932,768; 7B 3,993,201,344 + 689,872,288; 14B 3,991,999,872 + 3,989,373,504 + 1,006,737,120 B)", "pass": true},
-      {"probe": "huggingface.co resolve-redirect non-Qwen GGUFs", "observed": "HTTP 200 (Llama-3.2-3B 2,019,377,696; Llama-3.1-8B 4,920,739,232; Gemma-2-2B 1,708,582,752; Gemma-2-9B 5,761,057,728; Phi-3.5-mini 2,393,232,672 B)", "pass": true, "note": "corrects the prior-design claim that non-Qwen models are not obtainable."},
-      {"probe": "huggingface.co resolve-redirect Qwen2.5-32B shard1", "observed": "HTTP 200, 3,961,498,272 B", "pass": true, "note": "32B ~18.49 GiB > runner RAM; recorded NOT_IN_OBTAINABLE_SET by the memory definition."},
-      {"probe": "google-chrome binary", "observed": "Google Chrome 154.0.8037.97 at /usr/bin/google-chrome", "pass": true, "note": "browser binary preinstalled; only the Python playwright package is needed."},
-      {"probe": "llama_cpp / playwright importability in DESIGN host", "observed": "not importable in the DESIGN host (provisioned at EXECUTE from public PyPI; exact pinned versions verified to exist)", "pass": true, "note": "not a prerequisite gap: the parent EXECUTE downloaded, built and ran the identical 0.2.90 stack under the same workflow budget."}
-    ],
-    "branch_reachability_matrix": {
-      "SUPPORTS": "any S_primary candidate clears the bar under PR-SPECIFIED (completion mechanically verified).",
-      "FALSIFIES": "PC-SCRIPTED-ORACLE 5/5, B-ANSWER-NO-REVEAL 0/5, NC 0 parseable, replication PASS, and EVERY S_primary candidate measured and failing; 14B is either in S_primary and measured or excluded by the pre-declared availability definition, so S_primary is always fully measurable when downloads succeed.",
-      "MIXED": "an S_primary candidate is unresolved (download/shard/load/build/PC failure) while none clears.",
-      "MEASUREMENT_INVALID": "PC-SCRIPTED-ORACLE < 5/5; B-ANSWER-NO-REVEAL > 0/5; NC > 0 parseable; PC-JSON fails on both 7B and 3B; replication not PASS; playwright/chrome/server/build failure."
-    },
-    "arithmetic_check": "Bar = >= 3 of 5 episodes on BOTH metrics. B-RANDOM-ACTION analytical per-episode chance = r/(1-q) = 0.25 and bar-clearing chance ~= 0.104 (documented; a B-RANDOM guard and the deterministic B-ANSWER-NO-REVEAL control are pre-registered). Ceiling certified at 1.0 by PC-SCRIPTED-ORACLE. Comparator/treatment differ only in the frozen appended goal/schema string.",
-    "self_attack_resolutions": [
-      "CEILING: PC-SCRIPTED-ORACLE 5/5 so a universal negative cannot be an unpassable-task artifact.",
-      "AVAILABILITY: 14B is gated by a pre-declared definition (RAM>=11 GiB and shard download), recorded NOT_IN_OBTAINABLE_SET rather than silently forced into FALSIFIES.",
-      "LARGEST-OBTAINABLE DEFINITION: the E-LOCAL-LLAMA runnable Q4_K_M range ends at 14B because 32B (~18.49 GiB) and 72B exceed the runner's ~16 GiB RAM; the 'largest obtainable' clause is satisfied by a pre-declared memory definition.",
-      "REPLICATION MIDDLE: CV-UNDERSPEC-REPLICATION is all-or-nothing; any partial deviation => REPLICATION-DEVIATION => MEASUREMENT_INVALID (no undefined middle).",
-      "PROTOCOL-MISMATCHED NEGATIVE: M-0.5B-QWEN is measured under the frozen GBNF protocol (the census unconstrained result is a different protocol and does not transfer).",
-      "TREATMENT IDENTITY: PR-SPECIFIED is a strict append to the byte-identical PR-UNDERSPEC opening sentence, so the ablation changes only goal/schema presence - removing the prior-design confound where the opening instruction sentence also changed.",
-      "CONTROL VALIDITY: the parent ran NC and B-RANDOM on about:blank; this design runs every control on the loaded task page and adds the floor-exact B-ANSWER-NO-REVEAL control; the realized B-RANDOM value and the ~0.10 chance-clearing probability are documented.",
-      "SCOPE HONESTY: non-Qwen GGUFs are HTTP-reachable and this is stated; one same-size cross-architecture probe (M-LLAMA-3.2-3B) is added, and the remaining reachable non-Qwen models are declared out of the bounded confirmatory scope.",
-      "PREREQUISITE HONESTY: the runner image ships chrome but not llama-cpp-python/playwright; both are pinned, PyPI-verified at DESIGN and were already built/run in the parent EXECUTE - a reproduced provisioning path, not an unproven assumption.",
-      "ARTIFACTS: freeze_artifacts lists the pre-existing mutable local inputs (incl. the treatment-provenance source min_webagent.py); the EXECUTE harness does not exist at freeze and is bound at EXECUTE.",
-      "CONTROL SENSITIVITY: NC-NO-MODEL-ACTION (verifier rejects), B-ANSWER-NO-REVEAL (answer without click fails) and B-RANDOM-ACTION (verifier does not accept chance) all exercise the same scoring path on the loaded page; PC-JSON and PC-SCRIPTED-ORACLE certify decoding and ceiling on that same path."
-    ],
-    "no_outcome_claim": "No confirmatory episode was executed and no model completion on the task was observed during DESIGN."
-  },
-
-  "preregistration_timing": "spec.json and prereg.md are written before any confirmatory episode is executed. DESIGN performed no outcome-bearing measurement: no model was loaded and no task episode was run.",
-
-  "product_consequence_positive": "Readiness condition (3) is satisfied by a proven credential-free same-model driver (model id + shard hashes). The four-arm C-LLM-INHERIT benchmark becomes executable as frozen: same model/tools/budget across COLD, INSTRUCTIONS, RETRIEVAL, SPIDER arms on a task bank with dynamic range (readiness condition (2) remains separately owned). Intel hands Product/Graph a verified credential-free endpoint certificate (E-LOCAL-LLAMA + model receipt). C-LLM-INHERIT advances from HYPOTHESIS toward EXPERIMENTAL (DIRECTOR decision).",
-
-  "product_consequence_negative": "Readiness condition (3) is demonstrated NOT satisfiable on the credential-free path up to the measured ceiling. C-LLM-INHERIT must be re-scoped: drop Gate 3's same-model external published-baseline anchor; require internally re-run comparators (same harness, frozen seeds) on a task bank with demonstrable dynamic range (cold and retrieval must NOT saturate at 1.0 at high novelty, per the mandate's B2 and EXP-PRODUCT-37973256064/EXP-PRODUCT-37950607128). The close/re-scope recommendation is the deliverable for the Global Research Director; no promotion of any credential-free endpoint into Product Core is authorized by this experiment.",
-
-  "estimated_cost": "Downloads: M-0.5B 491,400,032 B + M-3B 2,104,932,768 B + M-7B 4,683,073,632 B = 7.28 GB (6.78 GiB) baseline; +8.99 GB (8.37 GiB, M-14B) if escalation triggers; +2.02 GB (M-LLAMA-3.2-3B) if the architecture probe runs; ~18.3 GB worst case, all via huggingface.co resolve-redirect. llama-cpp-python==0.2.90 source build ~10-20 min; playwright wheel install <1 min. CPU-only (nproc=4) inference: 7B ~5-10 s/step, 3B ~2-5 s/step, 14B ~15-20 s/step, 0.5B <1 s/step; ~50-85 episode-equivalents incl. controls ~1.5-3 h. Total wall time ~2-4.5 h, within the 360-min workflow budget; zero monetary cost.",
-
-  "expected_information_gain": "Decisive for readiness condition (3). It resolves the single open ambiguity named by the audit (VF-01): whether the parent's 0/5 is a prompt-underspecification artifact or an immutable capability ceiling for a minimal multi-step Web-agent task, and grounds the ceiling claim across the obtainable local models under the identical frozen protocol (fixing the census's unconstrained-0.5B protocol gap). Both directions change a program decision: SUPPORTS unblocks the flagship four-arm benchmark as frozen; FALSIFIES/MIXED closes the credential-free path with an explicit accountable re-scope and removes a three-claim bottleneck (C-LLM-INHERIT, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON). The within-experiment replication arm makes this an identifiability-safe ablation rather than a version-fragile re-run, and the corrected controls (loaded-page NC/B-RANDOM plus floor-exact B-ANSWER-NO-REVEAL) repair the parent's invalid chance bound.",
-
+  "decision_rule": "For each candidate model in order (M-7B-QWEN then M-3B-QWEN):\n1. Run positive control (PC-JSON-CONSTRAINED-DECODING) under TREATMENT prompt (goal/schema-enriched). If pass_rate < 1.0 (10/10): EXCLUDE this model from treatment evaluation (decoding_infrastructure_failure). Continue to next model.\n2. Else evaluate minimal Web-agent task over 5 episodes under TREATMENT prompt.\n3. Model CLEARS capability bar under treatment iff: task_success_rate >= 0.6 (>=3/5) AND parseable_action_rate_step1 >= 0.6 (>=3/5).\n4. If any model clears bar under treatment -> OUTCOME=SUPPORTS. Stop. Status=COMPLETE.\n5. After all candidates exhausted under treatment:\n   a. If ALL candidates were excluded at positive control (zero models evaluated on task): OUTCOME=MEASUREMENT_INVALID. Status=COMPLETE.\n   b. Else (at least one model evaluated on task, none cleared bar): Run comparator prompt (frozen underspecified) for all candidates (5 episodes each, seeds 42-46) for direct within-experiment comparison. Execute bounded external capability check.\n   c. If external_capability_envelope.ceiling_above_bar == false: OUTCOME=FALSIFIES. Status=COMPLETE.\n   d. If external_capability_envelope.ceiling_above_bar == true: OUTCOME=MIXED. Status=COMPLETE.\n6. External capability check result recorded in metrics.external_capability_envelope with structured findings; informs re-scope recommendation but does not override treatment outcome.",
+  "product_consequence_positive": "Gate 2 of the frozen C-LLM-INHERIT four-arm benchmark converts from FAIL to PASS at the goal/schema prompt protocol. The benchmark becomes executable as specified (same model/tools/budget across COLD, INSTRUCTIONS, RETRIEVAL, SPIDER arms). Intel can hand off a verified credential-free model endpoint with goal/schema prompt to Product/Graph for the full benchmark run. C-LLM-INHERIT advances from HYPOTHESIS toward EXPERIMENTAL/VALIDATED. Readiness condition (3) satisfied.",
+  "product_consequence_negative": "Credential-free 3B-8B GGUF range exhausted under factory constraints (CPU-only, huggingface.co resolve-redirect only, llama.cpp) even with goal/schema prompt. The frozen four-arm benchmark DESIGN_COMPROMISED outcome is confirmed as a stable boundary at the protocol ceiling. Global Research Director must explicitly re-scope: drop Gate 3's same-model external published-baseline anchor; require internally re-run comparators with retrieval quality metrics (precision@5, recall@5, mean_similarity) on a dynamic-range task bank where cold/retrieval arms are NOT at ceiling (per EXP-PRODUCT-37973256064). Product's committed kernel path (blob b15ed848) remains the treatment carrier. Readiness condition (3) NOT satisfied; explicit close/re-scope recommendation delivered.",
+  "estimated_cost": "~45-90 minutes wall time: 2-3 GB download (7B Q4_K_M split shards, 3B Q4_K_M), ~20-40s model load per candidate, ~5-10s/step inference x 5 episodes x 2 models x 2 prompt conditions = ~200-400s inference. External capability check: ~15-30 min bounded search. Total compute: CPU-only, no GPU cost. Bandwidth: ~3-4 GB download via huggingface.co CDN.",
+  "expected_information_gain": "High. This is the single most decision-changing open measurement for three flagship claims (C-LLM-INHERIT, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON). A positive treatment outcome unblocks the flagship four-arm benchmark; a negative treatment outcome combined with the external capability ceiling confirmation closes the credential-free path and forces an explicit, accountable re-scope decision. The prompt ablation design isolates the VF-01 underspecification threat. The bounded external check prevents infinite model census.",
   "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PASS",
-      "reason": "Every outcome branch is reachable from frozen, mechanically verifiable states (see pre_freeze_satisfiability_dry_run.branch_reachability_matrix). SUPPORTS: any measured S_primary candidate clears under PR-SPECIFIED (completion verified mechanically). FALSIFIES: PC-SCRIPTED-ORACLE 5/5, B-ANSWER-NO-REVEAL 0/5, NC 0 parseable, replication PASS, and every S_primary candidate measured and failing; because M-14B is either in S_primary (and measured) or excluded by the pre-declared availability definition, S_primary is always fully measurable when downloads succeed, so FALSIFIES is reachable independently of the RAM gate. MIXED: an S_primary candidate is unresolved for a non-capability reason. MEASUREMENT_INVALID: scripted-oracle failure, B-ANSWER-NO-REVEAL > 0, NC > 0, both-PC failure, replication deviation, or infra failure - all defined. Thresholds (>=3/5, and the conditional >=0.8 B-RANDOM guard) are arithmetically attainable (0..5 range). Precedence is acyclic: the oracle/null/PC/replication gates precede the capability verdict and never make a later branch unreachable for a valid run.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-38013769440/spec.json#pre_freeze_satisfiability_dry_run",
-        "research/experiments/EXP-INTEL-38013769440/spec.json#decision_rule",
-        "research/experiments/EXP-INTEL-37982024058/result.json"
-      ]
-    },
-    "measurement_prerequisites": {
-      "status": "PASS",
-      "reason": "All hard prerequisites were verified live at DESIGN by non-outcome-bearing probes (pre_freeze_satisfiability_dry_run.environment_probes). Already present in the runner image: python 3.12.15; gcc 13.3.0 / cmake 3.31.6 / GNU Make 4.3 (sufficient to build the llama-cpp-python sdist); Google Chrome 154.0.8037.97 at /usr/bin/google-chrome (the browser binary, so no Playwright browser download is required); nproc=4; disk 85 GiB free; RAM 14,471 MiB available; live huggingface.co resolve-redirect for all pinned GGUFs. Provisioned at EXECUTE from public PyPI, pinned and verified to exist live at DESIGN: llama-cpp-python==0.2.90 sdist 63,762,953 B and playwright==1.63.0 manylinux wheel. This is not an unproven 'created during EXECUTE' step: the parent EXECUTE (EXP-INTEL-37982024058) already downloaded, built and ran the identical 0.2.90 + Playwright 1.63.0 stack, loaded the same 3B/7B shards and executed 5/5 episodes under this same workflow/runner image (raw/model_receipts.json, raw/provisioning_evidence.json). No credential, paid endpoint, GPU or new substrate is required.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-38013769440/spec.json#pre_freeze_satisfiability_dry_run.environment_probes",
-        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
-        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json",
-        "research/experiments/EXP-INTEL-37982024058/result.json",
-        "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
-        "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json"
-      ]
-    },
-    "baseline_identifiability": {
-      "status": "PASS",
-      "reason": "PR-SPECIFIED vs PR-UNDERSPEC differ ONLY in the system-prompt string: PR-SPECIFIED is PR-UNDERSPEC plus an appended action-schema enumeration and the goal sentence, with the opening instruction sentence byte-identical. GBNF grammar, task HTML, user template, seeds (42-46), temperature 0.0, max_tokens 512, n_ctx 2048, chat_format qwen, model shards (byte-pinned), verifier and episode count are identical to the parent fixture (path+sha256). The comparator is re-anchored in-experiment by CV-UNDERSPEC-REPLICATION (expected 0/5 + loop on both 7B and 3B), so drift fires an identifiable discontinuity. This is NOT a ceiling/floor situation: the parent already shows partial capability (step-1 reveal-click 5/5, parseable 1.0) so the arms are not guaranteed identical; B-RANDOM and B-ANSWER-NO-REVEAL bound the chance/floor, and PC-SCRIPTED-ORACLE bounds the ceiling at 1.0. Cost metrics (mean_inference_latency_s, mean_completion_tokens) are recorded identically for both arms",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
-        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
-        "research/experiments/EXP-INTEL-38013769440/prereg.md"
-      ]
-    },
-    "control_sensitivity": {
-      "status": "PASS",
-      "reason": "Every control has a pre-declared expected value and failure meaning (control_registry) and runs through the same episode/scoring implementation on the loaded task page. PC-SCRIPTED-ORACLE must return 5/5 and can fail if the page/verifier is broken (certifies the ceiling at 1.0). PC-JSON-CONSTRAINED-DECODING must return 10/10 and can fail on a broken grammar/build. NC-NO-MODEL-ACTION must return 0 parseable/0 success (verifier rejects non-actions). B-ANSWER-NO-REVEAL must return 0/5 success with 5/5 parseable (the reveal click is required). B-RANDOM-ACTION must return chance-consistent success with valid JSON and can (rarely, ~10% over 5 episodes) clear the bar, which is why the guard exists. CV-UNDERSPEC-REPLICATION must reproduce 0/5+loop and fires if the harness/environment drifts. No control is tautological or impossible.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/result.json",
-        "research/experiments/EXP-INTEL-37982024058/raw/control_episodes.json",
-        "research/experiments/EXP-INTEL-38013769440/spec.json#control_registry"
-      ]
-    },
-    "treatment_liveness": {
-      "status": "PASS",
-      "reason": "The treatment (PR-SPECIFIED) is a static system-prompt swap on the same executable path proven live in the parent: candidate GGUFs downloaded and served (7B/3B receipts; 14B/0.5B/Llama-3.2-3B URLs HTTP-verified at DESIGN), llama.cpp Llama + LlamaGrammar verified 10/10, Playwright 1.63.0 + chrome 154.0.8037.97 ran 5/5 episodes with verifiable click mechanics. The prompt is fully specified byte-for-byte in the frozen prereg and the EXECUTE harness constructs it from the frozen text with no discretion (the treatment is a literal string). PC-SCRIPTED-ORACLE independently proves the task is passable end-to-end before expensive arms run. Reachability of M-14B-QWEN, M-0.5B-QWEN and the non-Qwen probe is HTTP-verified at DESIGN; their runtime loadability is gated to NOT_IN_OBTAINABLE_SET / NOT_MEASURED-RUNTIME rather than assumed.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/result.json",
-        "research/experiments/EXP-INTEL-37982024058/raw/model_receipts.json",
-        "research/experiments/EXP-INTEL-38013769440/prereg.md"
-      ]
-    },
-    "freeze_artifacts_bound": {
-      "status": "PASS",
-      "reason": "freeze_artifacts lists every pre-existing mutable local input whose identity can change the interpretation: the reused parent fixture (task HTML + GBNF + PR-UNDERSPEC + user template + sampling), the ancestor EXECUTE harness (fork source + success mechanics + the control-navigation bug being fixed), the GGUF sha256 receipts, the census endpoint receipts, and the treatment-provenance source min_webagent.py (the SYS literal from which the PR-SPECIFIED goal/schema is derived). The freezer hashes them into freeze.json.artifact_hashes and they become immutable for this transaction. The only interpretation dependency not pre-existing is the EXECUTE harness and its derived fixture, which cannot be frozen because DESIGN writes only spec.json/prereg.md; they are bound at EXECUTE by sha256 into result.json.artifacts and provenance.json, and AUDIT re-verifies the derived fixture and both prompt strings byte-for-byte against the frozen prereg. Remote GGUF responses are pinned by URL + content-length + sha256 (recomputed at download) rather than by a pre-existing file hash.",
-      "evidence_refs": [
-        "scripts/freeze_experiment.py",
-        "research/experiments/EXP-INTEL-38013769440/spec.json#code_binding",
-        "research/experiments/EXP-INTEL-38013769440/prereg.md"
-      ]
-    }
+    "decision_rule_reachability": "PASS",
+    "measurement_prerequisites": "PASS",
+    "baseline_identifiability": "PASS",
+    "control_sensitivity": "PASS",
+    "treatment_liveness": "PASS",
+    "freeze_artifacts_bound": "PASS"
   },
-
   "freeze_artifacts": [
-    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
-    "research/intel/run_exp_37982024058.py",
-    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
-    "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json",
-    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+    "research/intel/run_exp_38013769440.py",
+    "research/experiments/EXP-INTEL-38013769440/raw/harness_config.json"
   ]
 }
