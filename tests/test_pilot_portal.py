@@ -62,6 +62,16 @@ class PortalFixtureTests(unittest.TestCase):
                 self.assertIsNone(report["cost_usd"])
                 self.assertEqual(report["http_requests_from_spider"], 1)
 
+    def test_compiled_browser_comparator_contract(self):
+        with patch("run_real_agent_pilot.execute_compiled_playwright", return_value={
+            "answer": "CHF 251.30", "tokens": 0, "model_cost_usd": 0.0, "steps": 5
+        }):
+            report = run_trial("CACHE", "invoices", "A-202", "google", None, False)
+            self.assertEqual(report["path"], "compiled-browser")
+            self.assertTrue(report["success"])
+            self.assertEqual(report["tokens"], 0)
+            self.assertFalse(report["cost_accounting_complete"])
+
     def test_unseeded_spider_uses_actual_agent_callback_contract(self):
         async def fake_agent(*_args, **_kwargs):
             return {"answer": "Delivered", "tokens": 11, "model_cost_usd": 0.01}
