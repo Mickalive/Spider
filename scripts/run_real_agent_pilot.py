@@ -77,6 +77,27 @@ async def execute_browser_use(prompt: str, provider: str, model: str | None) -> 
     }
 
 
+def execute_compiled_playwright(base: str, family: str, identifier: str) -> dict:
+    """Strong deterministic browser-workflow baseline (not a Stagehand cache run)."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError as exc:
+        raise RuntimeError("Install playwright and its Chromium browser for CACHE baseline") from exc
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        try:
+            page = browser.new_page()
+            page.goto(base + "/", wait_until="domcontentloaded")
+            page.get_by_role("link", name=family.title()).click()
+            page.get_by_role("textbox", name="Reference ID").fill(identifier)
+            page.get_by_role("button", name="Find record").click()
+            page.get_by_role("link", name="Open matching record").click()
+            return {"answer": page.locator("#answer").inner_text(),
+                    "tokens": 0, "model_cost_usd": 0.0, "steps": 5}
+        finally:
+            browser.close()
+
+
 def seed_fixture_mechanism(registry: MechanismRegistry, family: str, base: str) -> None:
     """EXPERIMENT-ONLY oracle/template seed, not automatic SPIDER learning."""
     registry.upsert(Mechanism(
@@ -141,12 +162,16 @@ def run_trial(arm: str, family: str, identifier: str, provider: str,
                 path = "agent"
                 value = fallback()
                 reason = "ordinary Browser Use agent"
+            elif arm == "CACHE":
+                path = "compiled-browser"
+                value = execute_compiled_playwright(base, family, identifier)
+                reason = "independent deterministic Chromium workflow; NOT Stagehand's remote cache"
             else:
                 raise ValueError("unsupported arm")
 
             elapsed = time.monotonic() - start
             answer = value.get("answer") if isinstance(value, dict) else None
-            usage = value if path == "agent" and isinstance(value, dict) else {}
+            usage = value if path in ("agent", "compiled-browser") and isinstance(value, dict) else {}
             return {
                 "task_id": f"{family}:{identifier}", "replicate": replicate,
                 "family": family, "phase": "fixture-v1",
@@ -170,7 +195,7 @@ def run_trial(arm: str, family: str, identifier: str, provider: str,
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--arm", choices=["COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER"], required=True)
+    ap.add_argument("--arm", choices=["COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER", "CACHE"], required=True)
     ap.add_argument("--family", choices=sorted(DATA), required=True)
     ap.add_argument("--id", required=True, dest="identifier")
     ap.add_argument("--replicate", type=int, default=0)
@@ -180,8 +205,8 @@ def main():
     ap.add_argument("--allow-model-charges", action="store_true", help="Explicit opt-in to provider billing, including possible fallback")
     ap.add_argument("--output", type=Path, required=True)
     args = ap.parse_args()
-    if not args.allow_model_charges:
-        ap.error("Provider cost permission required; pilot performs no model requests by default")
+    if not args.allow_model_charges and args.arm != "CACHE":
+        ap.error("Provider cost permission required for possible agent fallback; no model request made")
     result = run_trial(args.arm, args.family, args.identifier, args.provider,
                        args.model, args.seeded_fixture, args.replicate)
     args.output.parent.mkdir(parents=True, exist_ok=True)
