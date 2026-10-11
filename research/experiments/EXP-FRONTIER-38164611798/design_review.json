@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38164611798",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The frozen decision rule partitions the outcome space exhaustively with no logically unreachable branches. G1–G4 are INCONCLUSIVE gates with explicit reasons (measurement invalidity, infrastructure signature, zero DEEP census, all-engines-limited). For any attained pool with ≥1 eligible DEEP-admitting engine (n_deep>0, not limited), G5 (SUPPORTS: ≥2 distinct engines with discovery-reachable fraction ≥0.50) and G6 (FALSIFIES: <2 such engines) are mutually exclusive and exhaustive. Thresholds (0.50, MIN_ENGINES=2) are arithmetically attainable given 15 engine classes in the frozen 20-host pool. Precedence order (G1→G2→G3→G4→G5→G6) does not render G5 or G6 unreachable; G5/G6 are evaluated only when G1–G4 pass. The instrument's dynamic range is independently certified in both directions by NC_BFS_CALIBRATION_FLAT (R=2.0 ≤ 3.0) and NC_BFS_CALIBRATION_GROWING (R=6.5 > 3.0). No 0/0 denominator can enter thresholding (V5: n=0 → fraction null, routed to zero-DEEP census).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 10 (decision rule gates G1–G6)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11e (branch-reachability structural argument)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 9 (calibration controls with observed values)",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json measurement_validity V5 (denominator_guard)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites were verified at DESIGN on the actual EXECUTE runner class (bare CPython 3.12.15, stdlib-only, network enabled): (a) 20/20 frozen seeds returned HTTP 200 text/html (seed probe re-run 2026-10-11); (b) all five discovery channels live on ≥1 frozen host per inventory certificate (ROBOTS_SITEMAP 7, SITEMAP_XML 9, ON_SITE_SEARCH 10, RSS_ATOM 7, JSON_LD 6) with concrete endpoints recorded per host; (c) 15/15 control pass rows (13 distinct identities) passed including the evaluate_items scoring fixture (PC_REACHABILITY_LISTED_LIVE / NC_REACHABILITY_UNLISTED_OR_DEAD); (d) the full per-item evaluation pipeline executed end-to-end offline against the local calibration fixture without errors. EXECUTE re-runs --stage controls and --stage inventory as frozen gates (V2/V3) before outcome stages. Seed failures at EXECUTE are handled per-host (excluded with reason, V3) and only an all-host seed failure triggers the infrastructure-signature INCONCLUSIVE (G2), never a scientific null. No external credentials, browsers, Docker, model keys, or pip packages are required.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11 (probe transcript + DESIGN certificate: seeds, channels, controls, env)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code, stdlib-only imports)",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json measurement_validity V1–V3 (code_canary, controls_gate, inventory_gate_and_seed_liveness)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Three stable, mutually distinct baselines are defined: (1) B-LINK-FOLLOWING-BFS measured in-pool per admitted DEEP item as the 1-based BFS discovery/fetch ordinal (requests), which for DEEP items (hop≥3) is ≥4 in a clean chain and up to 250; this is the primary a-priori acquisition path the O(1) discovery claim must beat. (2) B-PERSISTED-PATH-REACQUISITION (inherited context only, NOT re-measured): parent EXP-FRONTIER-37950626378 RACQ_PATH NEAR=2.0/MID=3/DEEP=4 (~hop+1), 1532/1532 items. (3) B-DIRECT-URL-REPLAY (inherited context only): parent RACQ_URL = 1 GET for a known URL. The treatment's charged protocol cost (≤K=3 fresh-agent GETs by construction: ROBOTS_SITEMAP=3, SITEMAP_XML=2, ON_SITE_SEARCH=3, RSS_ATOM=3, JSON_LD=2) is directly compared against the measured per-item BFS ordinal cost. The instrument's ability to separate flat from growing acquisition cost is certified by the two BFS calibration controls. No ceiling/floor situation: treatment reaches a fraction of DEEP items at cost ≤3; baseline reaches all admitted DEEP items at cost ≥4. Cost metrics are commensurate (fresh-agent GETs); actual vs charged ledger disclosed (V8).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json baselines[]",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 8 (baselines), section 9 (calibration controls)",
+        "research/experiments/EXP-FRONTIER-37950626378/result.json (parent RACQ_PATH/RACQ_URL, inherited context)",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json measurement_validity V8 (charged_ledger)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control fires in both directions and drives the actual scoring implementation: (1) NC_BFS_CALIBRATION_FLAT (pass iff R≤3.0; observed 2.0) and NC_BFS_CALIBRATION_GROWING (pass iff R>3.0; observed 6.5) certify the instrument's full dynamic range on offline fixtures. (2) PC_REACHABILITY_LISTED_LIVE (listed+live → reachable via sitemap/JSON-LD/search; observed 3/3 True) and NC_REACHABILITY_UNLISTED_OR_DEAD (unlisted-live and listed-but-404 → not reachable; observed both False) exercise the exact evaluate_items scoring path on a local HTTP fixture disjoint from the frozen pool. (3) Seven PC_PARSER_CANARY_* controls validate each parser against exact expected URL sets; PC_PARSER_CANARY_jsonld initially FAILED at DESIGN (extraction bug splitting </script>) and was fixed pre-freeze — evidence of sensitivity. (4) NC_SYNTHETIC_UNREACHABLE_ITEM_direct passes only on real HTTP status ≥400 (observed 404 on three probe hosts); its pre-fix failure (fetch collapsed HTTPError to status=None) was caught and fixed at DESIGN. (5) PC_ENV pins the runtime record. All 15 control rows (13 distinct identities; null direct-404 runs once per probe host) passed at DESIGN. Controls gate (V2) runs before any outcome stage; any FAIL → MEASUREMENT_INVALID. The 0.50 materiality threshold and MIN_ENGINES=2 are hard gates; per-channel zero admissions are reported as such, not as nulls.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 9 (control identifiers + pass criteria), section 11 (certificate with observed values incl. two DESIGN-time failures caught by controls)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (controls implementation in run_controls)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment (five site-native discovery channels) is fully implemented and executable: the DESIGN inventory certificate (prereg section 11c) shows every frozen channel live on ≥1 frozen host with concrete endpoints (ROBOTS_SITEMAP 7 hosts incl. rust/python/readthedocs Sitemap lines; SITEMAP_XML 9 hosts incl. XML/gz and index-first-child paths; ON_SITE_SEARCH 10 hosts with real GET search forms; RSS_ATOM 7 hosts with alternate feed links; JSON_LD 6 hosts with seed-page JSON-LD blocks). The complete per-item scoring pipeline (parsers, channel-document discovery, membership via frozen norm_eq, liveness re-GET, metrics, decision branches) was executed end-to-end offline against the local calibration fixture (PC_REACHABILITY_LISTED_LIVE / NC_REACHABILITY_UNLISTED_OR_DEAD, distinct from the frozen pool) without errors. The confirmatory pool was never evaluated at DESIGN. EXECUTE re-runs the inventory certificate before outcome stages (V3 inventory_gate_and_seed_liveness). The treatment is not a stub; it produces non-null executable behavior (channel fetches, parsing, membership tests, liveness checks) before expensive structural/discovery arms run.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11c (per-host channel liveness table with concrete endpoints)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 11d (reachability fixture record: PC/NC_REACHABILITY driving evaluate_items)",
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code: channel_documents, evaluate_items, full pipeline)",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json measurement_validity V3 (inventory_gate_and_seed_liveness)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "No mutable local file, task bank, dataset, or fixture exists whose identity could change the interpretation. The complete outcome-bearing code (module with pool, channels, charged costs, parsers, BFS, per-item evaluation, metrics, controls, decision rule) is frozen VERBATIM inside prereg.md section 16 with CODE_SHA256 = 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a, which freeze.json hashes transitively through prereg.md. The pool, budget/depth/K/threshold constants, fixtures, and decision rule are all embedded in prereg. Control fixtures (BFS calibration chains, parser canary strings, reachability fixture pages) are generated in-memory by the frozen control code. The only external dependencies are live Web endpoints, which are remote artifacts pinned by URL in the frozen POOL and recorded (never local mutable state). Per EXPERIMENT_PACKET.md section 2: 'If no mutable local dependency exists, freeze_artifacts_bound must be NOT_APPLICABLE with a reason and the list is empty.' The DESIGN-stage write restriction (scripts/check_scope.py: only spec.json/prereg.md may be written in DESIGN) makes pre-freeze artifact files impossible by construction; the prereg-embedded code is strictly stronger (hash-bound).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (frozen code block + CODE_SHA256)",
+        "research/experiments/EXP-FRONTIER-38164611798/spec.json freeze_artifacts (empty array)",
+        "scripts/check_scope.py (design-stage allowed writes)",
+        "research/EXPERIMENT_PACKET.md section 2"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The SUPPORTS branch (G5) requires ≥2 distinct engines achieving discovery-reachable fraction ≥0.50. While logically reachable per the decision rule, the empirical probability depends on whether the frozen 20-host pool yields DEEP state-carrying items on ≥2 engines AND whether the five frozen channels (with their FIRST-child/first-feed/seed-only limitations) cover ≥50% of those items. The parent experiment (EXP-FRONTIER-37950626378) found DEEP items on only one engine (mdBook). This is a risk for outcome direction, not a design flaw — the design explicitly treats attainability as the measured object (Q1) so both branches remain decision-changing.",
+    "VN-A3 (amortization vs charged ledger): charged protocol costs use fresh-agent semantics (≤K=3) while EXECUTE amortizes discovery documents (fetched once per host/channel). The actual vs charged ledger is disclosed (V8), but the decision threshold uses charged costs. This is a validity threat disclosed in prereg, not a design defect."
+  ],
+  "rationale": "All six freeze_eligibility checks are satisfied. The decision rule is logically satisfiable in both directions with no unreachable branches. All measurement prerequisites are verified at DESIGN on the actual runner class with stdlib-only dependencies. Baselines are identifiable and distinct (treatment ≤3 GETs vs baseline ≥4 GETs for DEEP items). Controls are sensitive in both directions, driving the actual scoring implementation, and caught two real bugs at DESIGN. The treatment (five discovery channels) is fully implemented and live on multiple hosts; the complete pipeline was validated end-to-end on a local fixture. No mutable local artifacts exist; the complete frozen design is hash-bound in prereg.md. The design successfully reframes the previously unattainable prerequisite (DEEP item census) as the measured object (Q1), making every branch informative. No blocking findings; the experiment is ready for freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38164611798/request.json (director_mandate, inherited_last_verdict, inherited_next_question)",
+    "research/experiments/EXP-FRONTIER-38164611798/spec.json (full spec with freeze_eligibility)",
+    "research/experiments/EXP-FRONTIER-38164611798/prereg.md (complete preregistration with DESIGN certificate)",
+    "research/experiments/EXP-FRONTIER-37984242167/spec.json (v1 empty-frame precedent)",
+    "research/experiments/EXP-FRONTIER-38085197666/failure.json (v2 design-contract violation, exit 65)",
+    "research/experiments/EXP-FRONTIER-37950626378/result.json (parent measurement for inherited baselines)"
+  ]
+}
