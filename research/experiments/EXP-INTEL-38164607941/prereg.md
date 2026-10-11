@@ -50,8 +50,9 @@ For every cell we materialize a per-cell `raw/harness_config.json` by loading th
 - `P-TREAT-GOAL-SCHEMA` (treatment; sha256 `36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716`):
   `You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {"action":"click","selector":"<id>"} or {"action":"answer","text":"<code>"}. Click the button to reveal the code, then answer it.`
 
-Every other config key (`positive_control`, `null_control`, `random_baseline`, `clearing_threshold`, `gbnf_grammar`, `prompts.user_template`, `prompts.positive_control_probe`, `task`, `sampling`, `candidate_models_frozen`, `metrics_stable_ids`, `action_schema`) is inherited byte-for-byte from the frozen parent file. Materialized per-cell configs are:
-`configs/config_<candidate_id>_<condition_id>.json` with deterministic names and sha256 recorded in `provenance.json`. EXECUTE must verify the byte-exact difference is confined to `prompts.system`.
+Every other config key (`positive_control`, `null_control`, `random_baseline`, `clearing_threshold`, `gbnf_grammar`, `prompts.user_template`, `prompts.positive_control_probe`, `task`, `sampling`, `candidate_models_frozen`, `metrics_stable_ids`, `action_schema`) is inherited byte-for-byte from the frozen parent file.
+
+**Materialization path (binding).** The frozen runner's `load_config(outdir)` reads exactly `os.path.join(outdir, "raw", "harness_config.json")` (verified by reading `run_exp_37982024058.py`; section 10.5). Each per-cell config must therefore be materialized at **`<per-cell-outdir>/raw/harness_config.json`**, where `<per-cell-outdir>` is the `--outdir` passed to the frozen runner for that cell. The runner is invoked with `--outdir <per-cell-outdir>`, so no `--config` flag exists for model cells. A mirror copy for provenance is additionally recorded at `configs/config_<candidate_id>_<condition_id>.json` (deterministic names; both sha256 recorded in `provenance.json`). EXECUTE must verify the byte-exact difference between the materialized config and the frozen parent config is confined to `prompts.system`.
 
 Provenance of the treatment string: the grandparent SYS constant enumerates a goal and a `ref`→selector schema; the parent task's frozen GBNF admits only the keys `selector` and `text`, so the single alignment (`ref`→`selector`) makes the prompt's named schema match the grammar-enforced schema. The treatment adds exactly the two dimensions audit VF-01 says the parent prompt lacked: (a) enumeration of the action schema, (b) the task goal sentence. It does **not** contain the substrings `#reveal-btn` or `TARGET-42` (design-time verified), so a positive outcome cannot be attributed to answer leakage.
 
@@ -65,7 +66,7 @@ python research/intel/run_exp_37982024058.py --mode probe-candidate \
   --chrome /usr/bin/google-chrome --n-threads 4
 ```
 
-The per-cell dir contains the section-4.2 config. `mode_probe_candidate` runs the frozen `PC-JSON-CONSTRAINED-DECODING` gate, then (only if it passes) the 5 frozen seeded episodes against the served task page, writing `raw/model_receipts.json`. No new model-path or scoring code is authored.
+`<per-cell-dir>/raw/harness_config.json` is the section-4.2 overlay (the frozen runner's `load_config` reads exactly this path; no other config argument exists). `mode_probe_candidate` runs the frozen `PC-JSON-CONSTRAINED-DECODING` gate, then (only if it passes) the 5 frozen seeded episodes against the served task page, writing `raw/model_receipts.json`. No new model-path or scoring code is authored.
 
 The three mechanical controls (`PC-ORACLE-EPISODE`, `NC-NO-MODEL-ACTION`, `B-RANDOM-ACTION`) and the evaluator are provided by the thin driver specified in **Appendix A**. That driver must import the frozen parent primitives (`run_episode`, `make_null_producer`, `make_random_producer`, `parse_action`, `start_page_server`) rather than re-implement them, and must navigate the page to the served task URL before running any episode (repairing the parent's control defect, Appendix A.2).
 
@@ -148,11 +149,12 @@ Whether `C-LLM-INHERIT` advances from HYPOTHESIS toward EXPERIMENTAL is a DIRECT
 Design-time probes performed (allowed: cheap, non-outcome-bearing) and their results:
 
 1. **Stack.** `python 3.12.15`, `pip 26.2.1`, `cmake 3.31.6`, `gcc/g++ 13.3.0` present; `/usr/bin/google-chrome` present; `nproc=4`; ~15 GB total RAM. `llama-cpp-python` and `playwright` are NOT preinstalled ⇒ EXECUTE installs/builds them. `llama-cpp-python==0.2.90` has a PyPI sdist and no cp312 wheel, so the build path is required and feasible (the parent built it).
-2. **Grammar.** `raw/harness_config.json#gbnf_grammar` parsed rule-by-rule; all 7 rules (`root`, `ws`, `action`, `field`, `string`, `strchars`, `strchar`) defined and referenced; string sha256 `16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65` (re-verified by EXECUTE after per-cell overlay materialization); the parent constructed and executed it.
+2. **Grammar.** `raw/harness_config.json#gbnf_grammar` parsed rule-by-rule; all 7 rules (`root`, `ws`, `action`, `field`, `string`, `strchars`, `strchar`) defined and referenced; string sha256 `16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65` (re-verified by EXECUTE after per-cell overlay materialization); the parent constructed and executed it. **Success-path feasibility (no floor degeneracy):** `strchar ::= [^"\\]` admits every character except `"` and `\`, so both `"text":"TARGET-42"` and `"selector":"#reveal-btn"` are grammar-admissible strings; the click-then-answer completion path is NOT blocked by the grammar, so a treatment success is grammatically possible and FALSIFIES cannot be a grammar artifact.
 3. **URLs.** Via the confirmed `huggingface.co` resolve-redirect route: 3B 200, 7B split shard1 200, shard2 200, 7B single-file 404 (parent-documented). Digests pinned from `raw/gguf_sha256.txt`: 3B `626b4a66…` (2104932768 bytes); 7B shard1 `dfce12e3…` (3993201344 bytes), shard2 `539cf93f…` (689872288 bytes).
 4. **Chance baseline.** Analytic and simulation results in section 6 (non-outcome-bearing).
 5. **Runner contract.** Read the frozen parent runner: `mode_probe_candidate` reads `<outdir>/raw/harness_config.json` and uses `cfg["prompts"]["system"]`, `cfg["positive_control"]`, `cfg["clearing_threshold"]`, `cfg["task"]`; it navigates to the served page (line 379). `mode_null_random` starts the page server but never navigates to it — the documented control defect this design repairs (section 6, Appendix A.2).
 6. **Sibling resume check.** EXP-INTEL-38123995594 has a complete spec (six checks PASS) but no `freeze.json`; its failure was the shared review-model outage. This packet preserves its control/metric identities and adds the two strengthenings recorded in `spec.comparative_reasoning`.
+7. **Control/scorer canary (executed at design time).** The three mechanical controls were driven through the REAL frozen `run_episode` scorer with a REAL browser (Playwright + `/usr/bin/google-chrome`, headless, `--no-sandbox`) against the served task page, using the `step_producer` contracts of Appendix A.3: `PC-ORACLE-EPISODE` = 5/5 `task_success` (each episode 2 steps, `revealed_value=TARGET-42`, `final_answer=TARGET-42`, `final_target_visible=true`); `NC-NO-MODEL-ACTION` = parseable 0.0, task_success 0.0; `B-RANDOM-ACTION` (repaired navigation to the served page) = parseable 1.0, task_success 0.2. This proves the scorer registers the full completion path, rejects non-JSON, and that the chance baseline stays below the 0.6 bar when navigation is repaired (non-outcome-bearing: no model was under test; see Appendix B disclosure).
 
 Provisioning plan: download the pinned GGUFs (digest-verified, fail-closed), build `llama-cpp-python==0.2.90`, install `playwright`, then run preflight controls.
 
@@ -194,12 +196,18 @@ All six `freeze_eligibility` checks are PASS with evidence refs in `spec.json`. 
 The driver is the only new outcome-adjacent code. It must be minimal and must import, not re-implement, the frozen parent primitives.
 
 **A.1 CLI.** `research/intel/exp_38164607941_controls.py` with a single mode `preflight-and-controls`:
-`--outdir <dir> --config <per-cell-config> --chrome /usr/bin/google-chrome`.
-It writes `raw/controls.json` (PC-ORACLE-EPISODE, NC-NO-MODEL-ACTION, B-RANDOM-ACTION records) and `raw/preflight.json`.
+`--outdir <dir> --config <config.json> --chrome /usr/bin/google-chrome`.
+`<config.json>` may be the frozen parent config or any per-cell overlay: all controls-relevant keys (`task`, `null_control`, `random_baseline`, `sampling`) are inherited byte-for-byte and identical across cells (section 4.2). It writes `raw/controls.json` (PC-ORACLE-EPISODE, NC-NO-MODEL-ACTION, B-RANDOM-ACTION records) and `raw/preflight.json`.
 
 **A.2 Server + navigation repair.** Start the page server via the frozen `start_page_server(cfg["task"]["page_html"])`; launch Chromium with `executable_path=--chrome, headless=True, args=["--no-sandbox"]`; **explicitly `page.goto("http://127.0.0.1:<port>/")` before any episode** (repair of the parent's `mode_null_random` about:blank defect). `run_episode` re-navigates to `page.url`, so the served page persists across episodes.
 
-**A.3 Imported frozen primitives (no reimplementation).** From `run_exp_37982024058.py`: `run_episode`, `make_null_producer`, `make_random_producer`, `start_page_server`, and (for sanity) `parse_action`. For PC-ORACLE-EPISODE the step producer is a fixed scripted producer returning `{"action":"click","selector":"#reveal-btn"}` on step 0 and `{"action":"answer","text":"TARGET-42"}` thereafter, fed through the real `run_episode`. For NC use `make_null_producer(cfg["null_control"]["fixed_invalid_content"])`. For B-RANDOM use `make_random_producer(cfg["random_baseline"]["action_space"], random.Random(cfg["sampling"]["base_seed"]))`.
+**A.3 Imported frozen primitives (no reimplementation).** From `run_exp_37982024058.py`: `run_episode`, `make_null_producer`, `make_random_producer`, `start_page_server`, and (for sanity) `parse_action`.
+
+**Producer contract (binding).** The frozen `step_producer(obs, step) -> (raw, latency_s, completion_tokens, producer_meta)` passes `raw` directly to the frozen `parse_action`, which requires the completion **string** and calls `json.loads` on it. Every step producer therefore returns `raw` as a **string**: `json.dumps(...)` of the action object. Returning a dict (unserialized) is a contract violation that would make even the oracle fail `parse_action`; the design-time canary (Appendix B) validated the exact string-returning oracle through the real `run_episode` with a real browser (5/5).
+
+- For **PC-ORACLE-EPISODE** the step producer is a fixed scripted producer returning `json.dumps({"action":"click","selector":"#reveal-btn"})` on step 0 and `json.dumps({"action":"answer","text":"TARGET-42"})` on steps ≥ 1 (the episode terminates after the first answered step), fed through the real `run_episode`.
+- For **NC** use `make_null_producer(cfg["null_control"]["fixed_invalid_content"])` (raw = the fixed non-JSON string).
+- For **B-RANDOM** use `make_random_producer(cfg["random_baseline"]["action_space"], random.Random(cfg["sampling"]["base_seed"]))` (raw = `json.dumps` of the chosen action; the frozen runner already returns strings here).
 
 **A.4 Preflight outputs.** `PC-ORACLE-EPISODE` = 5/5 `task_success`; `NC` = parseable 0.0 & success 0.0; `B-RANDOM` = parseable 1.0 & `task_success_rate < 0.6`. Any deviation ⇒ `preflight.json.pass=false` ⇒ section 7 rule 1.
 
@@ -213,10 +221,16 @@ Appendix A code is bound by this prereg; EXECUTE records its sha256 in `provenan
 |---|---|
 | Python/pip/cmake/gcc/Chrome/nproc/RAM | present as in section 10.1 |
 | GBNF rule parse | 7/7 rules defined/referenced |
+| GBNF success-path feasibility | `strchar ::= [^"\\]` admits `-`/digits/uppercase ⇒ `"text":"TARGET-42"` and `"selector":"#reveal-btn"` grammar-admissible (no floor degeneracy) |
 | 3B / 7B-shard1 / 7B-shard2 / 7B-single URL HEAD | 200 / 200 / 200 / 404 |
 | Random-baseline analytic | p=0.04992; P(≥3/5)≈1.15e-3 |
 | Random-baseline seed-42 simulation | task_success_rate=0.2 (descriptive) |
 | Parent `mode_probe_candidate` navigation | serves page (line 379) |
 | Parent `mode_null_random` navigation | about:blank defect confirmed |
+| **PC-ORACLE-EPISODE canary** (real Playwright+Chrome+real frozen `run_episode`; scripted string-returning producer per Appendix A.3) | 5/5 `task_success`; each episode step_count=2, revealed TARGET-42, final answer TARGET-42, final target visible |
+| **NC-NO-MODEL-ACTION canary** (real scorer, served page) | parseable_action_rate_step1=0.0, task_success_rate=0.0 |
+| **B-RANDOM-ACTION canary** (real scorer, served page, repaired navigation) | parseable_action_rate_step1=1.0, task_success_rate=0.2 (< 0.6) |
+
+**Canary disclosure.** The canary ran at DESIGN time as a cheap non-outcome-bearing satisfiability probe (allowed by the DESIGN contract: no model was under test, no confirmatory measurement was taken). It used a **name-only `llama_cpp` import stub** (no GGUF load, no model inference) so the frozen parent runner could be imported without a multi-GB build, alongside the REAL Playwright/Chromium browser and the REAL frozen `run_episode`/`parse_action`/`make_*_producer` scoring code. It lives outside the repo (`/tmp/opencode/canary.py`, not a repo artifact), is NOT augmented into the evidence chain as model-behavior evidence, and is cited only to certify: (a) the positive completion path is registerable by the frozen scorer; (b) the null is rejected; (c) the repaired random baseline stays below the bar; (d) the Appendix A.3 producer contract (string-returning `step_producer`) is executable.
 
 No confirmatory or outcome-bearing measurement was run during DESIGN.
