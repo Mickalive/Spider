@@ -1,0 +1,11 @@
+{
+  "stage": "execute",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid result outcome: GATE-NOT-MET",
+  "retryable": false,
+  "fingerprint": "99d5de70fdea9d3ed1707774",
+  "recorded_at": "2026-10-11T23:00:58.002680+00:00",
+  "github_run_id": "38180711589",
+  "github_run_attempt": "1",
+  "control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+}
