@@ -1,0 +1,42 @@
+{
+  "base_sha": "d77b4f54e90ef4af8aff5b1cc991a00a0c73374f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T02:46:28.316639+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior (exploration/exploitation, local optima, measurement readiness, path dependence) explicitly distinguished from SPIDER evidence; used to assess opportunity cost and dynamic-range/blocker sequencing.",
+      "Agent prior on benchmark ceiling effects (discriminating baselines) distinguished from SPIDER evidence showing mandatory-discovery deterministic REST produced 1.0 ceiling for cold/retrieval comparators."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH as full benchmark rerun. P2-REPLAY-COST/P2-BLIND-COMPOSITION/P2-MIND2WEB are bounded historical findings (SHAs 9687ff787f2d74460bb7006826008852f5b4416b, 017a80aeb9a6759c8f6913a37031ff1616ec1bda, archived Codex sec1 V0.50, archive blob 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3) warning against naive reruns; this is a small diagnostic test varying a single prompt factor under identical constraints. Not a rerun of economics; it\u2019s baseline verification. No duplicate prior found.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+      "rationale": "Intel focuses on baselines/prior art that materially alter SPIDER decisions. This is a cheap, targeted diagnostic that directly interrogates the C-LLM-INHERIT failure mode: missing goal/schema in system prompt could explain the step-0 reveal-click outcome. The result will change interpretation of prior runs and inform whether the gap is due to missing instruction context or deeper inheritance issue. Also supports readiness condition (3) understanding. Fits Intel\u2019s charter precisely."
+    },
+    "cycle_id": "38105755182",
+    "lane": "intel",
+    "portfolio_assessment": "Scout is DEGRADED SCOUT MODE (no external reconnaissance). Core program state: C-MEAS-VALID is effectively VALIDATED but the out-of-surface oracle remains the last scope bound; frontier has an active PREFREEZE PIVOT mandate targeting C-CROSSSITE (deep-hop site-native discovery) to fix the empty sampling frame from v1; C-FRESHNESS has confirmed transport-value coupling stability and now requires D1V anchor population/redesign or explicit park; C-RESIDUAL-NOVELTY/C-LLM-INHERIT readiness conditions (non-ceiling dynamic range + programmatic endpoint + executable parameterized mechanism) are not fully satisfied, so expensive benchmark execution must be deferred until blockers cleared. Several lanes have prefreeze states requiring explicit reactivation decisions. Prioritize measurement readiness and single-instance repair of substrate blockers over duplicating failed threads.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is staff advice only and degraded (unavailable). Its candidate directions align with snapshot next_gates in several cases (frontier deep-hop discovery, runtime oracle repair, product dynamic-range+endpoint, physics barrier stationarity, graph D1V redesign, intel prompt diagnostic). However, the brief did not force pivots; decisions are grounded in canonical snapshot/Codex evidence and the explicit readiness conditions. Degraded mode did not prevent or compel any allocation; I rejected treating its prose as authority."
+  },
+  "experiment_id": "EXP-INTEL-38106207218",
+  "inherited_last_verdict": "FALSIFIES",
+  "inherited_next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "lane": "intel",
+  "origin_github_run_id": "38106207218",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-37982024058",
+    "path": "research/experiments/EXP-INTEL-37982024058/handoff.json",
+    "sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "6718d2e75593d23df062b121d724744d8066241e7fbe9e83118ecac7552e2018",
+  "request_id": "74cb64d4f8d76f18962682e4",
+  "schema_version": 1
+}
