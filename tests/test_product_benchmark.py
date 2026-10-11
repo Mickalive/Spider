@@ -7,9 +7,14 @@ class BenchmarkScorerTests(unittest.TestCase):
     def trials(self):
         rows = []
         for arm in ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER"):
+            cost = 2 if arm != "SPIDER" else 1
             rows.append(dict(task_id="test", replicate=0, family="portal",
                              phase="repeat", arm=arm, success=True, safe=True,
-                             cost_usd=2 if arm != "SPIDER" else 1,
+                             cost_usd=cost, cost_components_usd={
+                                 "model": cost, "browser": 0, "retrieval": 0,
+                                 "verification": 0, "memory_read_write": 0,
+                                 "training_amortized": 0, "repair": 0, "other": 0,
+                             },
                              latency_ms=100, tokens=100, cost_accounting_complete=True))
         return rows
 
@@ -30,8 +35,23 @@ class BenchmarkScorerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "incomplete paired"):
             score(self.trials(), require_cache=True)
         rows = self.trials()
-        rows.append(dict(rows[0], arm="CACHE", cost_usd=1.2))
+        rows.append(dict(rows[0], arm="CACHE", cost_usd=1.2,
+                         cost_components_usd={**rows[0]["cost_components_usd"], "model": 1.2}))
         self.assertTrue(score(rows, require_cache=True)["strong_cache_competitor_included"])
+
+    def test_refuse_manual_seed_or_missing_itemization(self):
+        rows = self.trials()
+        rows[-1]["manual_fixture_seed"] = True
+        with self.assertRaisesRegex(ValueError, "manual fixture"):
+            score(rows)
+        rows = self.trials()
+        del rows[-1]["cost_components_usd"]
+        with self.assertRaisesRegex(ValueError, "cost components"):
+            score(rows)
+        rows = self.trials()
+        rows[-1]["cost_components_usd"]["model"] = 100
+        with self.assertRaisesRegex(ValueError, "reconcile"):
+            score(rows)
 
     def test_missing_arm_fails_closed(self):
         with self.assertRaisesRegex(ValueError, "incomplete paired"):
