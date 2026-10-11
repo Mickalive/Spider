@@ -1,28 +1,168 @@
 {
-  "schema_version": 1,
-  "experiment_id": "EXP-INTEL-38106207218",
-  "lane": "intel",
+  "baselines": [
+    {
+      "description": "M-7B-QWEN under P-COMP-UNDERSPECIFIED on seeds 42-46, re-run in THIS experiment through the same harness, same artifacts, same sampling, as a within-packet paired comparator for the M-7B-QWEN treatment cell. Frozen parent anchor (audit PASS): task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5), answer_action_emission_rate=0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-01"
+      ],
+      "expected_outcome": "Exact replication of the parent cell: task_success_rate=0.0, parseable_action_rate_step1=1.0, answer_action_emission_rate=0.0. ANY deviation -> replication-anchor deviation -> MEASUREMENT_INVALID.",
+      "id": "B-UNDERSPECIFIED-PROMPT-7B",
+      "type": "within_experiment_protocol_comparator"
+    },
+    {
+      "description": "M-3B-QWEN under P-COMP-UNDERSPECIFIED; same anchoring as the 7B comparator.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
+      ],
+      "expected_outcome": "Exact replication of the parent cell (0/5 success, 5/5 step-1 parseable, 0/5 answer emission); deviation -> MEASUREMENT_INVALID.",
+      "id": "B-UNDERSPECIFIED-PROMPT-3B",
+      "type": "within_experiment_protocol_comparator"
+    },
+    {
+      "description": "Uniform random selection from the frozen 5-action valid space (click #reveal-btn, answer TARGET-41/42/43, unknown), 5 episodes, seeded RNG random.Random(42) created once and reused across episodes (as in the parent harness), run against the SERVED task page through the same run_episode scorer via the repaired controls driver (prereg section 4.8, Appendix A). NOTE: the parent measured this control on an un-navigated about:blank page (its null-random mode never calls page.goto to the served port), which made click_ok=false and task_success structurally 0; this experiment repairs that control-sensitivity defect (verified mechanically at DESIGN time by probe P-3 and by running the frozen driver).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#random_baseline"
+      ],
+      "expected_outcome": "parseable_action_rate_step1=1.0 (valid JSON by construction); task_success_rate = 0.2 (exactly 1/5, deterministic seeded stream, P-3 frozen value) < 0.6 bar. A-priori per-episode i.i.d. success probability p = 1/16 = 0.0625 (click-reveal then answer TARGET-42 before any other answer; see prereg section 6), so the 3/5 bar is arithmetically unreachable by the frozen random baseline.",
+      "id": "B-RANDOM-ACTION",
+      "type": "negative_baseline"
+    },
+    {
+      "description": "Qwen2.5-0.5B-Instruct Q4_K_M (grandparent E-LOCAL-LLAMA); NOT re-run. Parent evidence: prose with no parseable JSON action, 0/5.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls"
+      ],
+      "expected_outcome": "not re-run; carried reference",
+      "id": "B-0.5B-QWEN-LOCAL",
+      "type": "carried_reference_baseline"
+    },
+    {
+      "description": "Pollinations gpt-oss-20b anonymous proxy (grandparent E-POLLINATIONS-OPENAI); NOT re-run. Parent evidence: 0/5.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls"
+      ],
+      "expected_outcome": "not re-run; carried reference",
+      "id": "B-POLLINATIONS-PROXY",
+      "type": "carried_reference_baseline"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "M-7B-QWEN",
+      "files": [
+        {
+          "bytes": 3993201344,
+          "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+        },
+        {
+          "bytes": 689872288,
+          "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf"
+        }
+      ],
+      "model": "Qwen2.5-7B-Instruct",
+      "quant": "Q4_K_M",
+      "role": "primary"
+    },
+    {
+      "candidate_id": "M-3B-QWEN",
+      "files": [
+        {
+          "bytes": 2104932768,
+          "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf"
+        }
+      ],
+      "model": "Qwen2.5-3B-Instruct",
+      "quant": "Q4_K_M",
+      "role": "fallback"
+    }
+  ],
   "claim_ids": [
     "C-LLM-INHERIT"
   ],
-  "title": "Prompt ablation: does goal+schema in system prompt complete the click-then-answer sequence?",
-  "question": "Under the same credential-free, CPU-quantized constraints as EXP-INTEL-37982024058, does supplying the task goal and action schema in the system prompt (parent-style grandparent prompt) convert M-7B-QWEN or M-3B-QWEN from step-0 reveal-click only to full click-then-answer completion?",
-  "hypothesis": "H1: With goal+schema enriched system prompt (P-TREAT-GOAL-SCHEMA), at least one of M-7B-QWEN or M-3B-QWEN clears the capability bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over 5 seeded episodes). H2: Under the underspecified comparator prompt (P-COMP-UNDERSPECIFIED), both models fail to clear the bar (replicating parent).",
-  "falsifier": "H0: With P-TREAT-GOAL-SCHEMA, neither model clears the bar; comparator cells also reproduce 0/5 success with re-click loop.",
-  "prompt_conditions": {
-    "P_TREAT_GOAL_SCHEMA": {
-      "stable_id": "P-TREAT-GOAL-SCHEMA",
-      "field": "prompts.system",
-      "provenance": "Derived from grandparent min_webagent.py; adapted ref->selector to match parent schema.",
-      "verbatim": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it."
+  "decision_rule": "OUTCOME in {SUPPORTS, FALSIFIES, MEASUREMENT_INVALID}; status=COMPLETE unless infrastructure blocks the packet. Bar: cell clears iff task_success_rate >= 0.6 (>=3/5) AND parseable_action_rate_step1 >= 0.6 (>=3/5). Precedence (first matching rule wins): (1) PREFLIGHT: PC-ORACLE-EPISODE == 5/5 AND NC-NO-MODEL-ACTION == (0.0 parseable, 0.0 success) AND B-RANDOM-ACTION == (1.0 parseable, success == 1/5 frozen deterministic value) AND all freeze_artifact hashes match AND required stack imports OK -> else OUTCOME=MEASUREMENT_INVALID (preflight failure). (2) REPLICATION-ANCHOR: any evaluated comparator cell with (task_success_rate, parseable_action_rate_step1, answer_action_emission_rate) != (0.0, 1.0, 0.0) -> OUTCOME=MEASUREMENT_INVALID (replication-anchor deviation; deterministic protocol means deviation = drift). (3) INCOMPLETE: if both candidate pairs are incomplete -> OUTCOME=MEASUREMENT_INVALID. (4) Evaluate the M-7B-QWEN pair (TREAT cell: PC-JSON 10/10 then 5 episodes; COMP cell: PC-JSON 10/10 then 5 episodes). If the TREAT cell clears -> OUTCOME=SUPPORTS; attribution = PROMPT_ATTRIBUTED if the COMP cell fails the bar (frozen anchor), UNDETERMINED if the COMP cell is incomplete/missing; STOP (M-3B not evaluated). (5) Else evaluate the M-3B-QWEN pair identically; if its TREAT cell clears -> OUTCOME=SUPPORTS with the same attribution rule; STOP. (6) Else (no TREAT cell cleared, at least one pair complete) -> OUTCOME=FALSIFIES. Attribution summary and failure-mode descriptors (re-click loop vs answer-without-click vs parse failure) are recorded in result.json observations. A valid scientific negative is status=COMPLETE with outcome=FALSIFIES.",
+  "estimated_cost": "CPU-only (nproc=4). Up to 4 model invocations (2 conditions x 2 candidates; early-stop after the first clearing TREAT cell). Per invocation: 10 PC probes + up to 5 episodes x up to 5 steps of llama.cpp inference. Parent measured mean latency 5.065 s/call (7B) and 2.154 s/call (3B), mean 13-17 completion tokens/call. Estimated inference: ~10-15 min (7B cell), ~5-8 min (3B cell), ~40 min worst-case all four cells; plus re-download of ~6.8 GB GGUFs (digest-pinned) and <5 min controls/preflight. No external API spend. Wall-clock estimate 45-120 min including provisioning.",
+  "expected_information_gain": "Directly answers the Director's PIVOT question and resolves the audit VF-01 vs capability-ceiling fork at the exact frozen protocol: a single-factor prompt ablation on the highest-information candidate pair with a fail-closed replication anchor. Both principal outcomes are decision-changing for C-LLM-INHERIT readiness condition (3) (mandate rationale). Highest information per cost among candidate intel probes; explicitly sanctioned as baseline verification (NOT a census rerun) by the mandate's comparative_reasoning and the bounded legacy findings P2-REPLAY-COST / P2-BLIND-COMPOSITION / P2-MIND2WEB.",
+  "experiment_id": "EXP-INTEL-38106207218",
+  "falsifier": "H0: neither M-7B-QWEN nor M-3B-QWEN clears the bar under P-TREAT-GOAL-SCHEMA (all treatment cells task_success_rate < 0.6), i.e. the goal/schema prompt does not convert the step-0 reveal-click into a full completion; the audited VF-01 failure mode (step-0 reveal click, re-click loop, zero answer actions) recurs under the enriched prompt. Comparator cells are expected to replicate the frozen parent result exactly (task_success_rate=0.0, parseable_action_rate_step1=1.0, answer_action_emission_rate=0.0); any deviation is a fail-closed replication-anchor deviation -> MEASUREMENT_INVALID.",
+  "freeze_artifacts": [
+    "research/intel/run_exp_37982024058.py",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
+    "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
+    "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json"
+  ],
+  "freeze_eligibility": {
+    "baseline_identifiability": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-6",
+        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-01",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
+      ],
+      "reason": "Treatment and comparator differ ONLY in prompts.system (probe P-2 byte-diff); all other protocol dimensions identical, so any difference in task_success_rate / parseable_action_rate_step1 / answer_action_emission_rate is attributable to the prompt. The task population is non-degenerate: the same scorer registers 5/5 (PC-ORACLE) at the top and the parent produced 0/5 at the bottom (result.json#metrics), and the random baseline registers a deterministic 1/5 (probe P-3), so the bar (0.6) sits between floor and ceiling with neither arm guaranteed identical. Cost observables (latency, tokens) are descriptive per cell and identical in kind for both arms; no cost dimension is omitted for one comparator.",
+      "status": "PASS"
     },
-    "P_COMP_UNDERSPECIFIED": {
-      "stable_id": "P-COMP-UNDERSPECIFIED",
-      "field": "prompts.system",
-      "provenance": "Byte-identical to parent EXP-INTEL-37982024058 system prompt.",
-      "verbatim": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown."
+    "control_sensitivity": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-10",
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#Appendix-A",
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls"
+      ],
+      "reason": "All controls run against the SERVED task page through the SAME run_episode scorer as the candidates (repaired navigation; parent's about:blank defect documented and fixed). Probe P-3 and an independent run of the frozen controls driver prove: PC-ORACLE-EPISODE 5/5 task_success=true (the positive control fires and the success path is registerable); NC-NO-MODEL-ACTION 0/5 parseable, 0/5 success (the null stays null; verification rejects non-JSON); B-RANDOM-ACTION parseable 5/5 and task_success_rate exactly 1/5 < 0.6 (deterministic seeded stream; bar unreachable by chance). PC-JSON-CONSTRAINED-DECODING fired 10/10 for both models in the audited parent under the identical grammar and probe; the cell-gated re-run at EXECUTE re-verifies it per condition. No control is tautological or structurally impossible.",
+      "status": "PASS"
+    },
+    "decision_rule_reachability": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-7",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
+      ],
+      "reason": "Every outcome is arithmetically reachable and no branch shadows another: SUPPORTS requires a TREAT cell >= 3/5 task_success, which the PC-ORACLE canary (5/5 through the real scorer, probe P-3) proves registerable; FALSIFIES requires all TREAT cells < 0.6, which the parent demonstrated at identical mechanics (0/5, result.json#metrics); MEASUREMENT_INVALID is reachable via preflight failure, replication-anchor deviation or cell incompleteness. Thresholds: 0.6 over 5 episodes = k>=3, k in 0..5 all attainable; precedence order 1..6 has no later rule unreachable: rule (4) executes only if rules (1)-(3) did not fire; rule (6) fires exactly when no TREAT cell cleared and at least one pair is complete. Early-stop (rule 4) cannot shadow rule (2) because the comparator cell is collected unconditionally before the decision.",
+      "status": "PASS"
+    },
+    "freeze_artifacts_bound": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/spec.json#freeze_artifacts",
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-4.5",
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#Appendix-A"
+      ],
+      "reason": "Every mutable local code/data/fixture dependency that could change interpretation is listed in spec.freeze_artifacts (harness runner, fixture config template, grandparent SYS provenance, GGUF digest anchors, provisioning/packaging evidence) - all existing repo files, hashed at freeze time and verified at EXECUTE (mismatch -> MEASUREMENT_INVALID). The three per-condition configs and the repaired controls driver have NO local file existence yet: they are frozen as byte-exact blocks with sha256 inside prereg.md (section 4.5 and Appendix A), and prereg.md itself is hashed into freeze.json, so their content is interpretation-bound before EXECUTE materializes them. Remote content (GGUFs) cannot be frozen as bytes; their target identifiers (URLs) and digests are frozen in spec/prereg per the transmission contract, with parent receipts proving the route. No other mutable local dependencies exist.",
+      "status": "PASS"
+    },
+    "measurement_prerequisites": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-9",
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-10",
+        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt"
+      ],
+      "reason": "Every hard prerequisite is either verified present at DESIGN time or pinned to a frozen, previously-satisfied contract with fail-closed verification: (a) stack assemblable in this factory - llama-cpp-python==0.2.90 and playwright installed and importable (probe P-0), Chrome 154 at /usr/bin/google-chrome (P-0), Python 3.12.15, CPU-only nproc=4, 14 GB RAM (sufficient for sequential model loads); (b) GBNF grammar constructible (LlamaGrammar.from_string, probe P-1); (c) model URLs resolved at DESIGN time - 3B single 200, 7B shard1 200, 7B shard2 200, 7B single-file 404 (parent-documented packaging deviation, provisioning_evidence.json), with sha256 pinned from raw/gguf_sha256.txt (digest mismatch -> provisioning_failure -> MEASUREMENT_INVALID); (d) harness and fixture are bound repo files (freeze_artifacts) already executed end-to-end by the audited parent; (e) controls preflight mechanically verified (probe P-3 / frozen driver run). The only EXECUTE-time creations - GGUF re-download and per-condition config materialization - are fully determined by frozen target identifiers/digests and frozen byte blocks (prereg section 4.5), and their feasibility is established by parent receipts and probes P-0..P-3, not asserted.",
+      "status": "PASS"
+    },
+    "treatment_liveness": {
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-4",
+        "research/experiments/EXP-INTEL-38106207218/prereg.md#section-10",
+        "research/intel/run_exp_37982024058.py"
+      ],
+      "reason": "The treatment is a pure configuration string (prompts.system) consumed by the audited, config-driven harness (research/intel/run_exp_37982024058.py) that the parent executed end-to-end with a config of identical shape - the config-slot mechanism is proven executable. Liveness of the EXACT frozen treatment is demonstrated at DESIGN time without outcome-bearing measurement: probe P-2 constructs the full treatment config bytes (sha256 frozen) and verifies JSON validity, template compatibility (only fixture_id/source/prompts.system differ) and that the harness's parse_action accepts both actions enumerated by the treatment's schema; probe P-1 verifies the frozen grammar that constrains the treatment cell; the treatment string contains the goal and schema enumeration and leaks neither #reveal-btn nor TARGET-42. A model-backed smoke test is excluded pre-freeze by contract (it would be the confirmatory outcome), and the per-cell PC-JSON 10/10 gate + PC-ORACLE 5/5 preflight constitute the run-time liveness gate.",
+      "status": "PASS"
     }
   },
+  "hypothesis": "H1 (capability): at least one of M-7B-QWEN (primary, evaluated first) or M-3B-QWEN (fallback) clears the pre-declared capability bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over the 5 frozen seeded episodes) under P-TREAT-GOAL-SCHEMA, thereby converting the parent FALSIFIES (bounded by audit VF-01 to the underspecified prompt) into a SUPPORTS at the goal/schema protocol. H1b (attribution): for each clearing candidate, the within-experiment paired comparator cell under P-COMP-UNDERSPECIFIED (byte-identical to the parent prompt) fails the bar, so the goal/schema prompt is identified as the driver (PROMPT_ATTRIBUTED).",
+  "lane": "intel",
+  "measurement_validity": [
+    "Only prompts.system varies between treatment and comparator cells; task, harness code, GBNF grammar, sampling, seeds, model artifacts and environment are identical. Verified by pre-freeze probe P-2 (byte-diff of the transcribed configs vs the frozen template).",
+    "Deterministic protocol: temperature=0.0, llama_seed=42, episode seeds 42-46. Parent traces were exactly uniform across episodes; this design inherits the deterministic-protocol read (no variance estimate; the 3/5 rule is the pre-declared adequacy rule, not a statistical threshold).",
+    "Controls run against the SERVED task page through the same run_episode scorer via the repaired controls driver (preflight + probes P-3); the parent's null-random mode ran on an un-navigated about:blank page, a documented control-sensitivity defect repaired here.",
+    "Comparator cells are collected unconditionally for every evaluated candidate BEFORE any outcome decision; each comparator cell must exactly replicate its frozen parent cell (0/5 success, 5/5 step-1 parseable, 0/5 answer action emission), else the packet is fail-closed MEASUREMENT_INVALID (replication-anchor deviation).",
+    "Positive control gates every cell: PC-JSON-CONSTRAINED-DECODING 10/10 per cell before that cell's episodes; PC-ORACLE-EPISODE 5/5 at preflight proves the success path is registerable by the scorer.",
+    "Complete-cell rule: fewer than 5 completed episode records for any cell (harness crash / run error) -> that cell is incomplete; candidate pair incomplete -> candidate skipped; both pairs incomplete -> MEASUREMENT_INVALID.",
+    "Strict mechanical verification: Playwright DOM assertions + json schema parse; no LLM grading.",
+    "No prompt tuning, no model substitution, no post-freeze design changes; provisioning is digest-fail-closed (sha256 of raw/gguf_sha256.txt)."
+  ],
   "metrics_stable_ids": [
     "parseable_action_rate_step1",
     "task_success_rate",
@@ -31,117 +171,50 @@
     "mean_completion_tokens",
     "positive_control_pass_rate"
   ],
-  "baselines": [
-    {
-      "id": "B-UNDERSPECIFIED-PROMPT-7B",
-      "type": "within_experiment_protocol_comparator",
-      "description": "M-7B-QWEN under P-COMP-UNDERSPECIFIED on seeds 42-46; expected to replicate parent 0/5.",
-      "expected_outcome": "task_success_rate=0.0, answer_action_emission_rate=0.0",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
-      ]
-    },
-    {
-      "id": "B-UNDERSPECIFIED-PROMPT-3B",
-      "type": "within_experiment_protocol_comparator",
-      "description": "M-3B-QWEN under P-COMP-UNDERSPECIFIED; expected 0/5.",
-      "expected_outcome": "task_success_rate=0.0",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/result.json#metrics"
-      ]
-    },
-    {
-      "id": "B-RANDOM-ACTION",
-      "type": "negative_baseline",
-      "description": "Random valid JSON actions, seeded, against served page.",
-      "expected_outcome": "parseable 1.0, task_success < 0.6",
-      "evidence_refs": [
-        "research/intel/run_exp_37982024058.py"
-      ]
-    }
-  ],
-  "positive_control": {
-    "id": "PC-JSON-CONSTRAINED-DECODING",
-    "type": "positive_control_suite",
-    "description": "PC-JSON-CONSTRAINED-DECODING 10/10 per model per prompt condition; PC-ORACLE-EPISODE 5/5 scripted success through same scorer.",
-    "success_criterion": "PC-JSON 10/10; PC-ORACLE 5/5 task_success=true",
-    "failure_mode_policy": "PC failure -> candidate excluded; PC-ORACLE < 5/5 -> MEASUREMENT_INVALID."
-  },
   "null_control": {
+    "failure_policy": "any parseable or successful episode -> verification logic broken -> MEASUREMENT_INVALID",
     "id": "NC-NO-MODEL-ACTION",
-    "type": "no_model_baseline",
-    "description": "Fixed non-JSON content",
-    "success_criterion": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0."
+    "protocol": "5 episodes of fixed non-JSON content ('I will click the button') through the real scorer against the served page (repaired navigation)",
+    "success_criterion": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0",
+    "type": "no_model_baseline"
   },
-  "measurement_validity": [
-    "Same task, harness (run_exp_37982024058.py), grammar, sampling as parent; config-driven only.",
-    "Controls run against served page (repaired navigation) - preflight verifies.",
-    "Strict JSON schema, mechanical verification via Playwright.",
-    "Temperature 0, fixed seeds 42-46; deterministic protocol.",
-    "Both prompt conditions for each evaluated candidate; comparator unconditional before decision.",
-    "Complete-cell rule: < 5 completed episodes -> measurement failure for candidate."
-  ],
-  "decision_rule": "OUTCOME {SUPPORTS,FALSIFIES,MEASUREMENT_INVALID}. Bar: task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over 5 episodes. Preflight: PC-ORACLE 5/5, NC 0/0, B-RANDOM parseable 1.0 with success < 0.6; else MEASUREMENT_INVALID. Order M-7B-QWEN then M-3B-QWEN. For each: A1 PC-JSON under P_treat (10/10 else exclude); A2 5 episodes under P_treat (T,P1,AER); A3 5 under P_comp (C); A4 if clears -> SUPPORTS (attribution PROMPT_ATTRIBUTED if C<0.6, else NOT_PROMPT_ATTRIBUTED if C>=0.6, else UNDETERMINED) and STOP. If none clear after evaluating all, OUTCOME=FALSIFIES, prompt_attribution=UNDETERMINED. Fail-closed on incomplete cells.",
-  "product_consequence_positive": "Readiness condition (3) for C-LLM-INHERIT satisfied by prompt as driver; enables running frozen four-arm benchmark with verified prompt.",
-  "product_consequence_negative": "Prompt ablation does not enable full completion under identical constraints; re-scope decision needs to consider ceiling.",
-  "estimated_cost": "~30-60 min, CPU-only.",
-  "expected_information_gain": "Directly answers the Director's question and resolves audit VF-01 vs capability ceiling distinction.",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PASS",
-      "reason": "FSM complete: SUPPORTS reachable (oracle proves path exists, treatment changes only prompt); FALSIFIES reachable (parent failure replicable); MEASUREMENT_INVALID reachable via preflight/provisioning/cell completeness; 3/5 threshold attainable; early-stop prevents shadowing.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-38013769440/prereg.md#section-9",
-        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
-        "research/intel/run_exp_37982024058.py"
-      ]
+  "positive_control": {
+    "failure_mode_policy": "PC-JSON failure -> cell exclusion as above; PC-ORACLE < 5/5 -> MEASUREMENT_INVALID.",
+    "id": "PC-SUITE-EXP-INTEL-38106207218",
+    "members": [
+      {
+        "failure_policy": "cell PC failure -> that cell is EXCLUDED (no episodes for the cell); if BOTH candidates' treatment-cell PCs fail -> MEASUREMENT_INVALID; comparator-cell PC failure -> comparator cell incomplete (attribution UNDETERMINED if the treatment cell clears).",
+        "id": "PC-JSON-CONSTRAINED-DECODING",
+        "protocol": "10 probes per cell (each candidate under BOTH prompt conditions): 'Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}' under the cell's own prompts.system with the frozen GBNF grammar.",
+        "success_criterion": "10/10 syntactically valid JSON matching the action schema (positive_control_pass_rate=1.0)"
+      },
+      {
+        "failure_policy": "<5/5 -> preflight failure -> MEASUREMENT_INVALID",
+        "id": "PC-ORACLE-EPISODE",
+        "protocol": "5/5 scripted episodes (click #reveal-btn then answer TARGET-42) through the REAL run_episode scorer against the served page (frozen controls driver, prereg Appendix A)",
+        "success_criterion": "5/5 task_success=true (proves the scorer registers the full completion path)"
+      }
+    ],
+    "success_criterion": "PC-JSON 10/10 per cell; PC-ORACLE 5/5",
+    "type": "positive_control_suite"
+  },
+  "product_consequence_negative": "If no candidate clears under P-TREAT-GOAL-SCHEMA (FALSIFIES at the prompt-ablated ceiling): the step-0-reveal re-click loop is NOT caused by missing instruction context at this model class; the capability ceiling for credential-free 3B/7B Qwen under this task/harness is real and the four-arm benchmark's credential-free path remains DESIGN_COMPROMISED. The actionable re-scope set (drop the Gate-3 external same-model anchor, internally re-run comparators on a dynamic-range task bank, or pursue orthogonal mechanisms) is handed to the Global Research Director; this packet does not pre-decide it. A MEASUREMENT_INVALID outcome changes nothing and requires the recorded repair before any claim update.",
+  "product_consequence_positive": "If any candidate completes click-then-answer under P-TREAT-GOAL-SCHEMA while its comparator cell replicates the parent 0/5 (PROMPT_ATTRIBUTED): audit VF-01's prompt-underspecification hypothesis is confirmed as the driver of the parent failure; C-LLM-INHERIT readiness condition (3) is satisfied at mechanism level (an executable, parameterized mechanism exists and is measurable on a non-ceiling dynamic range); the frozen four-arm benchmark (cold vs instructions vs retrieval vs SPIDER) becomes executable with the verified goal/schema prompt, and the claim may advance from HYPOTHESIS on the Director's adjudication of this bounded result.",
+  "prompt_conditions": {
+    "P_COMP_UNDERSPECIFIED": {
+      "field": "prompts.system",
+      "provenance": "Byte-identical to the frozen system prompt of the audited parent EXP-INTEL-37982024058 (raw/harness_config.json#prompts.system), bound in freeze_artifacts. This is the comparator condition; its parent cell outcome (0/5) is the frozen replication anchor.",
+      "stable_id": "P-COMP-UNDERSPECIFIED",
+      "verbatim": "You are a web agent. Reply with ONLY a valid JSON action per the schema. No prose, no reasoning, no markdown."
     },
-    "measurement_prerequisites": {
-      "status": "PASS",
-      "reason": "Same verified stack as parent: llama.cpp 0.2.90, Playwright 1.63.0, Chrome, CPU-only nproc=4, huggingface resolve-redirect; pinned URLs+sha256 from parent evidence (7B shards, 3B), digest mismatch -> provisioning_failure; harness and repaired controls driver materialized from frozen strings.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/raw/gguf_sha256.txt",
-        "research/experiments/EXP-INTEL-37982024058/raw/provisioning_evidence.json",
-        "research/intel/run_exp_37982024058.py"
-      ]
-    },
-    "baseline_identifiability": {
-      "status": "PASS",
-      "reason": "Only prompts.system differs between treatment/comparator; all else identical; paired comparator collected unconditionally per candidate; oracle proves 5/5 reachable, parent shows 0/5 on same task - differentiation surface non-zero and neither arm at impossible extremes in a way that collapses identifiability.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
-        "research/experiments/EXP-INTEL-37982024058/audit.json#VF-01"
-      ]
-    },
-    "control_sensitivity": {
-      "status": "PASS",
-      "reason": "PC-JSON, PC-ORACLE, NC, B-RANDOM all run against served page via same scorer. Repaired navigation prevents about:blank defect; PC-ORACLE 5/5 proves success path registerable; NC rejects non-parseable; B-RANDOM parseable 1.0, task_success < 0.6 and chance-consistent.",
-      "evidence_refs": [
-        "research/intel/run_exp_37982024058.py",
-        "research/experiments/EXP-INTEL-37982024058/result.json#controls"
-      ]
-    },
-    "treatment_liveness": {
-      "status": "PASS",
-      "reason": "Treatment is config string only (no code mutation). PC-ORACLE proves executable behavior via same scorer; harness is audited and config-driven. Product-relevant claim.",
-      "evidence_refs": [
-        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
-        "research/intel/run_exp_37982024058.py"
-      ]
-    },
-    "freeze_artifacts_bound": {
-      "status": "PASS",
-      "reason": "All mutable local dependencies pinned: parent harness run_exp_37982024058.py, parent fixture harness_config.json, grandparent min_webagent.py. Per-condition configs and controls driver are EXECUTE-time materializations from frozen strings in prereg (sha256-recorded); no other mutable files.",
-      "evidence_refs": [
-        "research/intel/run_exp_37982024058.py",
-        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
-        "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
-      ]
+    "P_TREAT_GOAL_SCHEMA": {
+      "field": "prompts.system",
+      "provenance": "Derived from the grandparent harness SYS constant in research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py (bound in freeze_artifacts), with the single field-name adaptation ref -> selector required by the parent task schema. Adds exactly the two dimensions audit VF-01 says the parent prompt lacked: (a) enumeration of the action schema and (b) the task goal sentence 'Click the button to reveal the code, then answer it.' Does NOT leak #reveal-btn or TARGET-42 (verified by pre-freeze probe P-2).",
+      "stable_id": "P-TREAT-GOAL-SCHEMA",
+      "verbatim": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it."
     }
   },
-  "freeze_artifacts": [
-    "research/intel/run_exp_37982024058.py",
-    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
-    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
-  ]
+  "question": "Under the same credential-free, CPU-quantized constraints as the audited parent EXP-INTEL-37982024058 (identical task, harness, GBNF grammar, sampling, seeds, model artifacts), does supplying the task goal and action schema in the system prompt \u2014 condition P-TREAT-GOAL-SCHEMA, derived from the grandparent harness SYS prompt (min_webagent.py) with the single ref->selector adaptation \u2014 convert M-7B-QWEN's or M-3B-QWEN's step-0 reveal-click into a full click-then-answer completion of the minimal Web-agent task, where the only varied dimension between treatment and comparator cells is prompts.system?",
+  "schema_version": 1,
+  "title": "Prompt ablation: does goal+schema in the system prompt convert the step-0 reveal-click into full click-then-answer completion for M-7B-QWEN / M-3B-QWEN under the same credential-free CPU-quantized constraints as EXP-INTEL-37982024058?"
 }
