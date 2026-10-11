@@ -1,50 +1,66 @@
 {
   "experiment_id": "EXP-PRODUCT-38107837348",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the already-audited parameterized mechanism carrier be installed into the shipped kernel and promoted through the audited product promotion path with a binding pre-freeze positive/negative certificate - src/spider/kernel.py gains a distill_parameterized -> resolve -> execute -> verify/UNKNOWN path whose confidence flow is not defeated by the current literal distill() candidate confidence 0.5 versus default execution threshold 0.8; the frozen experiment demonstrates one known-positive executable binding (an unseen-identifier parameterized mechanism executes) and one known-negative refusal (a binding the carrier cannot safely resolve returns UNKNOWN rather than a wrong execution), records the honest counters and the pinned git blob / sha256 of the shipped version for the later four-arm benchmark, and triggers promotion only on independent audit PASS - thereby discharging blocker B1?",
+  "hypothesis": "The audited parameterized mechanism carrier (git blob b15ed848, sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) can be integrated into the shipped kernel at src/spider/kernel.py such that distill_parameterized is available, resolution uses parameter_slots/support predicates correctly, literal distill() (confidence 0.5) remains below min_confidence (0.8) preserving separation, and the kernel produces one known-positive executable binding on unseen identifiers and one known-negative refusal returning UNKNOWN with bound_action null. The integration preserves existing kernel behavior and passes the promotion-path gate with independent audit PASS.",
+  "falsifier": "Any of: (1) distill_parameterized not present/importable in src/spider/kernel.py; (2) known-positive test case does not produce ResolutionStatus.EXECUTABLE with correct bound_action; (3) known-negative test case produces EXECUTABLE or a wrong execution (bound_action not null when unsafe); (4) literal distill() candidate causes false EXECUTABLE (confidence threshold defeated); (5) kernel integration breaks existing basic behavior (tests/test_kernel.py regression); (6) cannot pin and record the shipped kernel identity (blob/sha256) for downstream benchmark; (7) promotion gate fails independent audit.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Literal distill() only behavior - mechanism with confidence 0.5 must NOT be executable under min_confidence 0.8",
+      "type": "negative_control"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-EMPTY-REGISTRY",
+      "description": "No applicable mechanisms - resolution must return UNKNOWN",
+      "type": "null_control"
+    }
+  ],
+  "positive_control": "PC-KNOWN-POSITIVE",
+  "null_control": {
+    "id": "NC-KNOWN-NEGATIVE",
+    "description": "Binding that carrier cannot safely resolve must return UNKNOWN rather than wrong execution",
+    "expected_behavior": "ResolutionStatus.UNKNOWN with bound_action null"
+  },
+  "measurement_validity": [
+    "Integration targets only src/spider/kernel.py within Product lane allowed scope",
+    "Preserve existing kernel separation: literal distill() confidence 0.5 < min_confidence 0.8",
+    "No outcome-bearing measurement during DESIGN; cheap pre-freeze satisfiability probes allowed",
+    "Known-negative must test unsafe binding (out of support / missing params / wrong intent) and return UNKNOWN with bound_action null",
+    "Honest counters recorded (model_calls/model_tokens/retrieval_calls/verification_calls/repair_attempts/http_requests/latency_ms) where applicable",
+    "Kernel identity (git blob sha256/path) pinned and recorded for downstream four-arm benchmark"
+  ],
+  "decision_rule": {
+    "C1_DISTILL_PARAM_PRESENT": "src/spider.kernel has distill_parameterized method callable",
+    "C2_KNOWN_POSITIVE_EXECUTABLE": "Known-positive test yields ResolutionStatus.EXECUTABLE with correct bound_action and verified postconditions",
+    "C3_KNOWN_NEGATIVE_UNKNOWN": "Known-negative test yields ResolutionStatus.UNKNOWN with bound_action == null (no wrong execution)",
+    "C4_LITERAL_BELOW_THRESHOLD": "Literal distill() candidate confidence 0.5 < min_confidence 0.8 prevents EXECUTABLE; ablation confirms separation",
+    "C5_REGRESSION_FREE": "Existing tests/test_kernel.py still pass; no behavior regression",
+    "C6_IDENTITY_PINNED": "Kernel identity recorded: path, git blob/sha256, file hash pinned for downstream use",
+    "C7_ACCOUNTING_HONEST": "Counters recorded honestly (model_calls/model_tokens == 0 for this credential-free test path; retrieval_calls counted correctly)",
+    "OVERALL_OUTCOME": {
+      "SUPPORTS": "C1 through C7 all PASS",
+      "FALSIFIES": "Any of C1-C7 fails",
+      "MIXED": "Not applicable - binary gate",
+      "MEASUREMENT_INVALID": "Infrastructure failure preventing test execution"
     }
   },
-  "freeze_artifacts": []
+  "product_consequence_positive": "B1 discharged: shipped kernel now has parameterized mechanism carrier with verified liveness (known-positive) and verified abstention (known-negative). Carrier identity pinned for four-arm benchmark. Promotion authorized only after independent audit PASS.",
+  "product_consequence_negative": "B1 not discharged; parameterized carrier remains experimental code not in shipped kernel. Do not proceed to four-arm benchmark using shipped kernel path until C1-C7 all PASS and audit PASS.",
+  "estimated_cost": "Low: in-process unit tests, no external network, no model calls, trivial runtime (< 10 seconds).",
+  "expected_information_gain": "High: Enables the entire downstream benchmark chain (B1 prerequisite). Establishes both liveness and correct abstention (UNKNOWN over wrong execution) - critical for product safety.",
+  "design_contract_version": 2,
+  "freeze_eligibility": {
+    "decision_rule_reachability": "PASS",
+    "measurement_prerequisites": "PASS",
+    "baseline_identifiability": "PASS",
+    "control_sensitivity": "PASS",
+    "treatment_liveness": "PASS",
+    "freeze_artifacts_bound": "NOT_APPLICABLE",
+    "freeze_artifacts_bound_reason": "No mutable local code/data/task-bank/fixture dependencies outside the kernel code path being tested that can change interpretation; kernel source is the artifact under test and will be part of the shipped state - but design contract v2 requires listing if mutable; the only mutable artifact relevant to interpretation is src/spider/kernel.py itself which is the treatment target. However, we list it as freeze artifact to bind its identity."
+  },
+  "freeze_artifacts": [
+    "src/spider/kernel.py"
+  ]
 }
