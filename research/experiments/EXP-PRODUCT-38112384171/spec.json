@@ -1,50 +1,83 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-PRODUCT-38112384171",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "design_contract_version": 2,
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the audited parameterized mechanism carrier be installed at src/spider/kernel.py with frozen identity b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 and pass a binding pre-freeze certificate: positive EXECUTABLE with confidence 0.9 and verified execute(200,true); negative returns ResolutionStatus.UNKNOWN with null bound action; inherited counters remain honest and identity preserved?",
+  "hypothesis": "Installing the frozen carrier byte-identically at src/spider/kernel.py (or an equivalent packaging path) produces a kernel where (a) distill_parameterized from >=3 induction observations yields resolve EXECUTABLE with confidence >= 0.9 and a deterministic fixture execute returns status 200 and verified true, (b) known-negative bindings produce ResolutionStatus.UNKNOWN (no applicable mechanism) with recorded reason and null bound action, (c) inherited-path counters (reused/novel/inherited) are consistent and not double-counted, (d) installed identity equals the frozen git blob/sha256.",
+  "falsifier": "Any of (a)-(d) fails under the frozen certificate (wrong status, confidence < 0.9, execute mismatch, returns EXECUTABLE for unsafe/unknown case, counter integrity violation, or identity hash mismatch).",
+  "baselines": [
+    {
+      "id": "B-LITERAL-DISTILL",
+      "description": "Current literal distill() behavior (confidence 0.5) below min_confidence 0.8 threshold - not executable. Used to confirm non-ceiling dynamic range on the resolve path.",
+      "expected": "resolve does not become EXECUTABLE under threshold; negative control confirms gating is active.",
+      "discriminating": true
     }
+  ],
+  "positive_control": {
+    "id": "PC-PARAM-BOUND",
+    "description": "Frozen carrier parameterized binding derived from >=3 induction observations on an unseen held-out identifier family.",
+    "expected": "ResolutionStatus.EXECUTABLE, confidence >= 0.9, bound action non-null, execute fixture returns status=200 and verified=true.",
+    "pass_criteria": [
+      "status == EXECUTABLE",
+      "confidence >= 0.9",
+      "bound_action != null",
+      "execute.status == 200",
+      "execute.verified == true"
+    ]
   },
-  "freeze_artifacts": []
+  "null_control": {
+    "id": "NC-UNSAFE-UNKNOWN",
+    "description": "Known-negative cases: out-of-support, missing parameters, wrong intent - no applicable mechanism.",
+    "expected": "ResolutionStatus.UNKNOWN, reason recorded, bound action is null (exactly). No execution attempt that produces wrong execution.",
+    "pass_criteria": [
+      "status == UNKNOWN",
+      "bound_action == null",
+      "recorded reason present",
+      "no EXECUTABLE returned"
+    ]
+  },
+  "measurement_validity": {
+    "criteria": [
+      "Installed identity hash equals frozen carrier identity (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72)",
+      "distill_parameterized exists and is callable with documented signature",
+      "Counter invariants hold (reused+novel = inherited_total or equivalent invariant for the path; no double-counting)",
+      "Fixture execution is deterministic (status/verified stable)",
+      "Treatment/comparator identities distinct (param vs literal) and not conflated"
+    ],
+    "threats": [
+      "Packaging/path drift (mutable deps)",
+      "Identity substitution",
+      "Counter accounting conflation",
+      "Non-deterministic fixture",
+      "Confidence threshold regression"
+    ]
+  },
+  "decision_rule": {
+    "preconditions": [
+      "installed_identity_hash_sha256 == '718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72'",
+      "positive_control passes all pass_criteria",
+      "null_control passes all pass_criteria",
+      "baselines behave as specified",
+      "counter_invariants_valid == true"
+    ],
+    "success": "ALL preconditions true",
+    "failure_if_any": true
+  },
+  "product_consequence_positive": "Discharges B1 blocker (parameterized mechanism carrier shipped at kernel path) enabling promotion ONLY after independent audit PASS. Allows moving to readiness conditions (B2/B3) without degeneracy.",
+  "product_consequence_negative": "B1 remains blocked; kernel path unchanged; do not promote; document specific failing criterion and required minimal fix without weakening prereg.",
+  "estimated_cost": "low",
+  "expected_information_gain": "high",
+  "freeze_eligibility": {
+    "decision_rule_reachability": "PASS",
+    "measurement_prerequisites": "PASS",
+    "baseline_identifiability": "PASS",
+    "control_sensitivity": "PASS",
+    "treatment_liveness": "PASS",
+    "freeze_artifacts_bound": "PASS"
+  },
+  "freeze_artifacts": [
+    "src/spider/kernel.py"
+  ]
 }
