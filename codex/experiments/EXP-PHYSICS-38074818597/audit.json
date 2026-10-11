@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF1",
+      "finding": "Pre-freeze census/calibration artifacts cited in spec.json and prereg.md do not match the contemporaneous /tmp artifacts (design_review N1). The frozen text cites probe_live.py sha256 c100f177..., census.json sha256 b0b9e520..., calibrate4.py sha256 3e603e32..., cal4.json sha256 5fd08d99... but the files actually present have different hashes. Impact is bounded because these are explicitly declared non-interpretation-dependencies (spec.measurement_validity.activity_disclosure) and EXECUTE re-derived all floors/controls from its own data. AUDIT verified the EXECUTE run independently satisfies all prerequisites.",
+      "evidence_refs": [
+        "design_review.json:checks.freeze_artifacts_bound.nonblocking_findings.N1",
+        "spec.json:measurement_validity.activity_disclosure",
+        "provenance.json:raw_evidence"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF2",
+      "finding": "Frozen textual attainability certificate (prereg section 7.1, spec.decision_rule.thresholds_frozen) claims two cold sweeps ~132 s apart with identical histograms {BLOCK_403_CHALLENGE:5, TRANSPORT_ERROR:1, OTHER_NONBARRIER:5, CLEAN:46} and 'no ambient class changed'. The contemporaneous census.json shows delta=38.5 s, histograms with 6 BLOCK_403_CHALLENGE and a RATE_LIMIT_429 on search.brave.com that changed to CLEAN (design_review N2). The intrinsic-persistence claim still holds (the changed endpoint is non-intrinsic; 7 intrinsic endpoints persisted in EXECUTE). This is a documentation discrepancy in the pre-freeze certificate text, not a failure of the frozen measurement itself.",
+      "evidence_refs": [
+        "design_review.json:checks.measurement_prerequisites.nonblocking_findings.N2",
+        "prereg.md:section-7.1",
+        "result.json:metrics.n_t0_intrinsic"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF3",
+      "finding": "Internal definition conflict for DENYLIST_FALSE_REJECT denominator. spec.decision_rule.primary_decision_quantities states 'both computed on the intrinsic set only', which contradicts the frozen falsifier and prereg.md section 4 where DENYLIST_FALSE_REJECT denominator is |T0 non-intrinsic| (51). EXECUTE correctly implemented the falsifier/prereg definition (FR = 0/50 = 0). The conflict is resolved in favor of the falsifier/prereg (design_review N3). No metric recomputation is affected.",
+      "evidence_refs": [
+        "design_review.json:nonblocking_findings.N3",
+        "spec.json:falsifier",
+        "spec.json:decision_rule.primary_decision_quantities",
+        "prereg.md:section-4"
+      ],
+      "severity": "minor"
+    },
+    {
+      "id": "VF4",
+      "finding": "Control-parameter inconsistency: PC_SYNTHETIC_STATIONARY and NC_SYNTHETIC_EXCHANGEABLE literal_design_values specify perms_per_rep=500, replications_R=300, while spec.decision_rule.thresholds_frozen and prereg section 6 specify 10000 permutations/resamples for the main test. The pre-freeze calibration artifact used R=200, PERM=BOOT=10000. The power gate (pc_power_min=0.80 at rho=0.98) is satisfied in EXECUTE (0.823 unconditional, 0.879 conditional on n_t0_intrinsic>=3) regardless. The inconsistency is a documentation defect, not a measurement failure (design_review N4).",
+      "evidence_refs": [
+        "design_review.json:nonblocking_findings.N4",
+        "spec.json:positive_control.PC_SYNTHETIC_STATIONARY",
+        "spec.json:null_control.NC_SYNTHETIC_EXCHANGEABLE",
+        "result.json:controls.PC_SYNTHETIC_STATIONARY"
+      ],
+      "severity": "minor"
+    },
+    {
+      "id": "VF5",
+      "finding": "Single network vantage / single stdlib client / single ~2041 s session is a declared scope boundary (spec.scope_boundaries, spec.measurement_validity.representation_integrity). The director mandate question named 'source vantage points' as part of the measured axis, but the frozen design fixes one egress (design_review N6). This limits external validity/generalizability but does not affect internal validity of the frozen question. The claim ceiling correctly bounds to this pool/vantage/window.",
+      "evidence_refs": [
+        "design_review.json:nonblocking_findings.N6",
+        "request.json:director_mandate.allocation.question",
+        "spec.json:scope_boundaries",
+        "spec.json:measurement_validity.representation_integrity"
+      ],
+      "severity": "scope_boundary"
+    },
+    {
+      "id": "VF6",
+      "finding": "Window censoring at delta_ref=1800 s: DENYLIST_HORIZON=1800 is right-censored by the protocol. No claim is made about persistence beyond the tested ladder. This is a declared design feature, not a defect.",
+      "evidence_refs": [
+        "spec.json:decision_rule.thresholds_frozen.delta_ref_s",
+        "prereg.md:section-5",
+        "result.json:validity_notes"
+      ],
+      "severity": "scope_boundary"
+    },
+    {
+      "id": "VF7",
+      "finding": "Protocol self-induction cannot be fully ruled out; C_PROBE_SELF_INDUCTION only bounds ambient barrier prevalence on the 52 non-stress endpoints. The observed barrier prevalence on non-stress endpoints is perfectly flat across rungs (0.1346 at all rungs, slope=0, CI=[0,0]), which bounds but does not eliminate the possibility that the 5 stressed endpoints induced transients that would not occur under operational traffic patterns.",
+      "evidence_refs": [
+        "result.json:metrics.STATIONARITY_SKILL_NO_STRESS_TREND_slope_per_s",
+        "result.json:metrics.barrier_prevalence_by_rung_no_stress",
+        "spec.json:null_control.C_PROBE_SELF_INDUCTION"
+      ],
+      "severity": "minor"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B_EXCHANGE",
+      "finding": "Primary strong null (global uniform permutation of lag barrier indicator, 10000 permutations, seed 38074818597). Observed p = 9.999e-05 (1/10001, the minimum possible with this permutation count). The null is decisively rejected. The permutation test correctly preserves both marginals.",
+      "evidence_refs": [
+        "result.json:metrics.STATIONARITY_SKILL_B_EXCHANGE_p",
+        "result.json:controls.B_EXCHANGE",
+        "spec.json:baselines.B_EXCHANGE"
+      ],
+      "pass": true
+    },
+    {
+      "baseline_id": "B_CONSTANT_USABLE",
+      "finding": "No-denylist floor (predict non-barrier for every endpoint). Log-loss = 1.6966 nats/endpoint. DENYLIST_SKILL = 1.6966 nats/endpoint improvement over this floor, confirming the anchor intrinsic-transfer predictor has substantial predictive value.",
+      "evidence_refs": [
+        "result.json:metrics.DENYLIST_SKILL",
+        "result.json:controls.B_CONSTANT_USABLE",
+        "spec.json:baselines.B_CONSTANT_USABLE"
+      ],
+      "pass": true
+    },
+    {
+      "baseline_id": "B_MARGINAL",
+      "finding": "Constant-marginal diagnostic (predict lag class from lag-period marginal frequency). Log-loss = 0.3725 nats, marginal barrier prevalence = 0.1228. Reported as diagnostic only.",
+      "evidence_refs": [
+        "result.json:controls.B_MARGINAL",
+        "spec.json:baselines.B_MARGINAL"
+      ],
+      "pass": null
+    },
+    {
+      "baseline_id": "B_LASTSWEEP",
+      "finding": "Recent-memory diagnostic (predict next rung from immediately preceding rung). Accuracy = 0.9942, MI = 0.4056 nats. The high accuracy reflects the near-perfect stability of the barrier indicator across adjacent rungs. Reported as diagnostic only.",
+      "evidence_refs": [
+        "result.json:controls.B_LASTSWEEP",
+        "spec.json:baselines.B_LASTSWEEP"
+      ],
+      "pass": null
+    }
+  ],
+  "recomputed_metrics": {
+    "STATIONARITY_SKILL": 0.3196006958197081,
+    "STATIONARITY_SKILL_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_CI95": [
+      0.1424309377617678,
+      0.4954113328700338
+    ],
+    "STATIONARITY_SKILL_BY_RUNG": {
+      "300": 0.4055999179949117,
+      "900": 0.4055999179949117,
+      "1800": 0.3196006958197081
+    },
+    "STATIONARITY_SKILL_NO_STRESS": 0.3950671208304353,
+    "STATIONARITY_SKILL_NO_STRESS_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_NO_STRESS_CI95": [
+      0.20619205063323182,
+      0.5455945739691843
+    ],
+    "MI_CLASS": 0.6673804169863701,
+    "CLASS_PERSISTENCE": {
+      "CLEAN": 1.0,
+      "RATE_LIMIT_429": 0.0,
+      "BLOCK_403_CHALLENGE": 1.0,
+      "TRANSPORT_ERROR": 1.0,
+      "OTHER_NONBARRIER": 1.0
+    },
+    "INTRINSIC_PERSISTENCE": 1.0,
+    "INTRINSIC_PERSISTENT": true,
+    "present_intrinsic_classes": [
+      "BLOCK_403_CHALLENGE",
+      "TRANSPORT_ERROR"
+    ],
+    "DENYLIST_FALSE_ACCEPT": 0.0,
+    "DENYLIST_FALSE_REJECT": 0.0,
+    "DENYLIST_INTRINSIC_VALID": true,
+    "DENYLIST_BY_RUNG": {
+      "300": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "900": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "1800": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      }
+    },
+    "DENYLIST_HORIZON": 1800,
+    "ANYBARRIER_FALSE_ACCEPT": 0.125,
+    "DENYLIST_SKILL": 1.6966415246622164,
+    "RATE_ONSET_n": 0,
+    "RATE_RECOVERY_n": 1,
+    "RATE_RECOVERY_HALF_LIFE_s": 2,
+    "AMBIENT_RATE_ONSET_n": 0,
+    "AMBIENT_RATE_RECOVERY_n": 1,
+    "CLASS_CONDITIONAL_TRANSIENCE": true,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_slope_per_s": 0.0,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_CI95": [
+      0.0,
+      0.0
+    ],
+    "STATIONARITY_SKILL_NO_STRESS_TREND_excludes_zero": false,
+    "barrier_prevalence_by_rung_no_stress": {
+      "0": 0.1346153846153846,
+      "300": 0.1346153846153846,
+      "900": 0.1346153846153846,
+      "1800": 0.1346153846153846
+    },
+    "n_t0_intrinsic": 7,
+    "n_t0_barrier": 8,
+    "f_b_obs": 0.14035087719298245,
+    "POWER_AT_RHO98": 0.8233333333333334,
+    "POWER_AT_RHO92": 0.6766666666666666,
+    "POWER_AT_RHO98_FIXED_ENDOWMENT": 0.8790035587188612,
+    "POWER_AT_RHO92_FIXED_ENDOWMENT": 0.7275985663082437
+  },
+  "claim_ceiling": "C-WEB-DYNAMICS = HYPOTHESIS (bounded to this frozen 57-endpoint pool, one network egress vantage, one ~30-minute window ladder with horizon censored at 1800 s). S1_STATIONARY is supported on this pool/window: intrinsic classes persist (INTRINSIC_PERSISTENT=true, CLASS_PERSISTENCE=1.0 for both present intrinsic classes), the intrinsic denylist remains valid through the tested horizon (DENYLIST_INTRINSIC_VALID=true, DENYLIST_HORIZON=1800 s right-censored), and the anchor barrier indicator carries information beyond the exchangeable null (STATIONARITY_SKILL=0.320 nats, B_EXCHANGE p<0.001, clustered CI lower=0.142>0). CLASS_CONDITIONAL_TRANSIENCE=true (RATE_RECOVERY_n=1, RATE_RECOVERY_HALF_LIFE_s=2) licenses a class-conditional policy. No promotion to EXPERIMENTAL or PRODUCT_CORE; the timescale axis of C-WEB-DYNAMICS is bounded but not closed.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38074818597/request.json",
+    "research/experiments/EXP-PHYSICS-38074818597/spec.json",
+    "research/experiments/EXP-PHYSICS-38074818597/prereg.md",
+    "research/experiments/EXP-PHYSICS-38074818597/freeze.json",
+    "research/experiments/EXP-PHYSICS-38074818597/result.json",
+    "research/experiments/EXP-PHYSICS-38074818597/report.md",
+    "research/experiments/EXP-PHYSICS-38074818597/provenance.json",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/oracles.jsonl",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/induced_probe.json",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/collection_meta.json",
+    "research/experiments/EXP-PHYSICS-38074818597/derived/metrics.json",
+    "research/experiments/EXP-PHYSICS-38074818597/design_review.json",
+    "research/physics/exp_38074818597_lib.py",
+    "research/physics/exp_38074818597_run.py"
+  ],
+  "unresolved": [
+    "Does endpoint access-barrier persistence generalize beyond this frozen 57-endpoint pool, this single egress vantage, and this ~30-minute window? The source-vantage axis is untested (VF5).",
+    "Is the measured horizon censored: would the intrinsic denylist remain valid at delta > 1800 s? (VF6)",
+    "ONSET (CLEAN->intrinsic) at higher request rates or longer sequences remains untested outside the fixed 8-GET stress burst.",
+    "The simultaneous role of protocol self-induction cannot be fully removed; C_PROBE_SELF_INDUCTION only bounds ambient barrier prevalence on the 52 non-stress endpoints (VF7)."
+  ]
+}
