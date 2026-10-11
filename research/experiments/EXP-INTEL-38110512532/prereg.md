@@ -117,7 +117,7 @@ conformance with the frozen GBNF grammar and `action_schema` (keys `selector`/`t
 only). The comparator is the byte-identical parent anchor prompt (project copy in
 the frozen template).
 
-**Config transcription rule (frozen, deterministic):** ECXUTE deep-copies the
+**Config transcription rule (frozen, deterministic):** EXECUTE deep-copies the
 frozen template `research/experiments/EXP-INTEL-37982024058/raw/harness_config.json`
 (sha256 `7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb`) and
 applies EXACTLY these edits, then serializes with
@@ -155,12 +155,20 @@ investigate, do not proceed; see section 11).
   the deviation is recorded (packaging, not model, substitution).
 - Download at EXECUTE via `urllib` GET on the `resolve/main` URLs (probe P-4: all
   return 302 to the Xet CDN today); verify sha256 (streaming) against the manifest;
-  reuse existing files if and only if the hash matches (files are already present
-  from the DESIGN probes).
+  reuse existing files if and only if the hash matches. Fresh-runner note: the GGUF
+  cache was absent on the DESIGN re-dispatch, so EXECUTE must not assume
+  `/tmp/opencode/gguf/` is populated — always verify-then-download.
+- Runtime prerequisites are NOT preinstalled on a fresh runner. Frozen setup recipe
+  (first-hand verified on the DESIGN re-dispatch): `pip install playwright==1.63.0`,
+  then `CMAKE_ARGS=-DLLAMA_NATIVE=off pip install --no-binary llama-cpp-python
+  llama-cpp-python==0.2.90`. The `--no-binary` sdist build produces a glibc-linked
+  `libllama.so` (~56 s here); the prebuilt abetlen `linux_x86_64` CPU wheel is
+  musl-linked and fails to import (`libc.musl-x86_64.so.1` missing) — do not use it.
+  Chrome is supplied via `executable_path`, so `playwright install` is not required.
 - Harness load path: `Llama(model_path=paths[0], n_ctx=2048, n_threads=4,
   verbose=False, chat_format="qwen", seed=42)`; llama.cpp auto-locates the
   companion shard from the `-NNNNN-of-NNNNN` naming pattern (probe P-5, re-verified
-  on DESIGN re-dispatch: 7B load 0.433 s, 3B load 0.316 s; load time is
+  on DESIGN re-dispatch: 7B load 0.671 s, 3B load 0.372 s; load time is
   host-state-dependent, while the sha256 and grammar-valid emission pins are stable).
 - The provisioning receipt to record at EXECUTE: URLs, byte sizes, sha256,
   load_time_s, load_status, chat_format, n_ctx, n_threads, llama_seed — per cell in
@@ -298,12 +306,12 @@ values are recorded here as frozen expectations for EXECUTE/AUDIT.
 
 | probe | what | result (evidence) |
 |---|---|---|
-| P-0 stack | python 3.12.15; llama-cpp-python 0.2.90; playwright 1.63.0 (both re-installed and import-verified on DESIGN re-dispatch); `/usr/bin/google-chrome` present; 4 cores; 15 GB RAM | PASS |
+| P-0 stack | fresh runner: python 3.12.15, 4 cores, 15 GB RAM, `/usr/bin/google-chrome` present; dependencies NOT preinstalled — `llama-cpp-python 0.2.90` built from sdist (`--no-binary`, glibc `libllama.so`, ~56 s) and `playwright 1.63.0` installed, both import-verified; prebuilt abetlen musl wheel rejected (`libc.musl-x86_64.so.1` missing) | PASS |
 | P-1 grammar | `LlamaGrammar.from_string(frozen gbnf_grammar)` compiles; fields restrict to click/answer x selector/text | PASS |
 | P-2 configs | deterministic transcription of CFG-TREAT/COMP/CONTROLS; sha256 988751c6..., 4a2ef4be..., 14589f7c...; TREAT top-level diff = {fixture_id, prompts, source}; COMP diff = {fixture_id, source}; leakage scoped to prompts.system = none | PASS (hashes pinned section 4) |
 | P-3 controls | Appendix-A driver through the REAL `run_episode` on the served page: oracle_success_rate=1.0 (5/5); NC=[0.0,0.0]; RANDOM=[1.0, 0.2], vector [True,False,False,False,False]; `raw/control_episodes.json` schema conforms | PASS |
 | P-4 URLs | 7B shard1/shard2 resolve -> Xet CDN (HEAD final 200; Content-Length 3993201344/689872288 matches manifest); 7B single-file 404 (documented, VF-02); 3B resolve -> Xet CDN (final 200; 2104932768) | PASS (VF-02 intact) |
-| P-5 load+liveness | GGUF sha256 all match manifest (fresh download on DESIGN re-dispatch, streaming verify: dfce12e3..., 539cf93f..., 626b4a66...); `load_model` 7B 0.433 s (split-shard auto-locate), 3B 0.316 s (load time host-state-dependent); under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action":"click","selector":"#reveal-btn"}` (M-7B emit 10.5 s, M-3B emit 4.3 s) — mechanism alive, outcome not measured | PASS |
+| P-5 load+liveness | GGUF sha256 all match manifest (fresh download on DESIGN re-dispatch, streaming verify: dfce12e3..., 539cf93f..., 626b4a66...); `load_model` 7B 0.671 s (split-shard auto-locate), 3B 0.372 s (load time host-state-dependent); under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action":"click","selector":"#reveal-btn"}` (M-7B emit 10.4 s, M-3B emit 4.6 s) at step 0 pre-reveal — mechanism alive, task outcome not measured | PASS |
 
 The byte-level diff is verified by re-deriving each config from the frozen
 template and exercising the pinned sha256 from section 4 as the authoritative
@@ -322,6 +330,11 @@ cells/TREAT-M3B/raw/harness_config.json  <- CFG-TREAT bytes
 preflight/controls_driver.py             <- Appendix A bytes (sha256 fdbcdc28...)
 ```
 
+0. **Setup runtime** (fresh runner; verify, then install): `pip install
+   playwright==1.63.0` and `CMAKE_ARGS=-DLLAMA_NATIVE=off pip install --no-binary
+   llama-cpp-python llama-cpp-python==0.2.90` (do not use the prebuilt abetlen CPU
+   wheel — musl-linked, fails to import). Re-verify `import llama_cpp` == 0.2.90 and
+   grammar compile. Record the exact commands + versions in `provenance.json`.
 1. **Generate + verify configs** (P-2 rule, section 4): write the five config
    files; verify each sha256 equals the pinned value; mismatch -> STOP (do not
    proceed; record in `raw/` and mark BLOCKED, not a scientific result).
