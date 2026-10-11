@@ -8,7 +8,7 @@ MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-7}"
 RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-25}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-600}"
 MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-3600}"
-NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found)|HTTP[^0-9]*403)'
+NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found|deprecated)|has been deprecated|HTTP[^0-9]*403)'
 LOG=$(mktemp)
 STALL_FLAG=$(mktemp)
 TIMEOUT_FLAG=$(mktemp)
@@ -37,12 +37,21 @@ cleanup(){
 }
 trap cleanup EXIT INT TERM
 
+# Never auto-append a discovered "free" model. Discovery once selected a
+# deprecated endpoint and aborted independent design review across lanes.
+# Free tier pricing is verified by a CURATED allowlist; providers can still
+# alter prices, so an account-side zero-spend cap remains recommended.
+[[ "$(jq -r '.free_only // false' config/models.json)" == true ]] || {
+  echo "::error::SPIDER_FREE_ONLY_REQUIRED"; exit 69;
+}
 mapfile -t CONFIGURED < <(jq -r --arg role "$ROLE" '.roles[$role][]? // empty' config/models.json)
-DISCOVERED=()
-if [[ -x "$REAL" ]]; then
-  while IFS= read -r m; do [[ -n "$m" ]] && DISCOVERED+=("$m"); done < <("$REAL" models opencode 2>/dev/null | grep -Eo 'opencode/[A-Za-z0-9._:-]*free[A-Za-z0-9._:-]*' | sort -u || true)
-fi
-mapfile -t MODELS < <(printf '%s\n' "${CONFIGURED[@]}" "${DISCOVERED[@]}" | awk 'NF && !seen[$0]++')
+mapfile -t ALLOWED < <(jq -r '.free_only_allowed_models[]? // empty' config/models.json)
+for model in "${CONFIGURED[@]}"; do
+  printf '%s\n' "${ALLOWED[@]}" | grep -Fxq "$model" || {
+    echo "::error::SPIDER_UNAPPROVED_MODEL role=$ROLE model=$model"; exit 69;
+  }
+done
+mapfile -t MODELS < <(printf '%s\n' "${CONFIGURED[@]}" | awk 'NF && !seen[$0]++')
 
 if [[ ( "$ROLE" == audit || "$ROLE" == design_review ) && -z "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   echo "::error::Independent $ROLE requires a known producer model to exclude" >&2
@@ -52,6 +61,10 @@ if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   mapfile -t MODELS < <(printf '%s\n' "${MODELS[@]}" | grep -Fxv "$SPIDER_EXCLUDE_MODEL" || true)
 fi
 (( ${#MODELS[@]} > 0 )) || { echo "::error::No model candidates role=$ROLE"; exit 75; }
+# In a provider outage don't cycle the same failing free models seven times.
+# Exhaust the independent configured pool once, then defer to lane circuit.
+if (( MAX_ATTEMPTS > ${#MODELS[@]} )); then MAX_ATTEMPTS="${#MODELS[@]}"; fi
+
 
 write_receipt(){
   local status="$1" model="$2" attempt="$3" rc="$4" category="$5"
