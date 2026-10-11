@@ -20,7 +20,7 @@ TRAIN = {
     "github": ("pallets/flask", "psf/requests"),
 }
 HOLDOUT = {
-    "pypi": ("httpx", "pydantic"),
+    "pypi": ("httpx", "urllib3"),
     "github": ("astral-sh/ruff", "pydantic/pydantic"),
 }
 VERS = re.compile(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,99}\Z")
