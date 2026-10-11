@@ -7,10 +7,10 @@
 - A real local HTTP portal with two independent families (`invoices`, `shipments`), several IDs and a click -> search -> open sequence.
 - An optional Browser Use LLM agent runner that can navigate Chromium to solve the portal task. Requires an explicit user-provided model credential and opt-in to model charges. Nothing paid is invoked by CI, tests or defaults.
 - A real deterministic Playwright Chromium workflow is the `CACHE` arm (a compiled selector cache / workflow baseline, **not** Stagehand itself).
-- An opt-in Spider adapter that consumes **a manually seeded, fixture-known, read-only HTTP mechanism**. It does *not* discover or distill a parameterized mechanism by observing Browser Use. When no applicable mechanism exists, it uses the same Browser Use agent.
-- An independent server-side truth oracle, temporary registry, read-only URL authorization, error accounting and raw trace output.
+- An opt-in Spider adapter that can consume **a persisted parameterized mechanism compiled from two observed Chromium browser trajectories**, only for this fixed local fixture schema. A separate manual-seed path is retained for negative controls. When no applicable mechanism exists, the same Browser Use agent is the fallback. This is **not** learning from an autonomous LLM browser agent or the production `distill_parameterized()`.
+- An independent server-side truth oracle, optional **persistent** registry, read-only URL authorization, error accounting and raw trace output. Learning uses training identifiers disjoint from all evaluation identifiers.
 - A strict four-arm descriptive scorer, plus a fifth CACHE competitor from an actual compiled Playwright browser workflow. A Stagehand v4 server-cache comparison is **still required independently** before a claim of superiority over Stagehand.
-- All raw pilot traces have `cost_accounting_complete=false` and `cost_usd=null`. They are rejected by the economic scorer until actual fully loaded costs (tokens, browser, retrieval, verification, writing, storage and amortization) are measured. Never replace null with zero.
+- All raw pilot traces have `cost_accounting_complete=false` and `cost_usd=null`. They are rejected by the economic scorer until fully loaded costs are priced **and** broken down into eight audited components (model, browser, retrieval, verification, memory read/write, amortized training, repair and other). Never replace null with zero.
 
 ## Local use
 
@@ -23,6 +23,22 @@ python -m pip install browser-use playwright
 uvx browser-use install
 python -m playwright install chromium
 ```
+
+First, exercise **real Chromium trace learning and held-out inheritance without using an LLM**:
+
+```bash
+PYTHONPATH=src python scripts/smoke_compiled_browser.py
+PYTHONPATH=src python scripts/train_pilot_memory.py \
+  --memory-path /tmp/spider-fixture-memory.jsonl \
+  --manifest /tmp/spider-fixture-learning.json
+PYTHONPATH=src python scripts/run_real_agent_pilot.py \
+  --arm CACHE --family invoices --id A-303 \
+  --output /tmp/spider-raw.jsonl
+```
+
+The CACHE baseline is a deterministic compiled Playwright workflow, not Stagehand's own cache. To replay an observed mechanism on a **previously unseen** identifier, run `run_real_agent_pilot.py --arm SPIDER --family invoices --id A-303 --memory-path /tmp/spider-fixture-memory.jsonl --allow-model-charges --output /tmp/spider-raw.jsonl`. The spending permission remains mandatory because a missing or invalidated mechanism may trigger the paid LLM fallback. A correctly trained fixture mechanism runs without invoking the model.
+
+The manifest exposes the two browser discovery costs per family. It is **not** acceptable to divide a later task's near-zero model cost without including this discovery and validation expenditure. These traces and the scorer continue to reject a commercial win because provider token prices, full runtime costs, model reliability and Stagehand-native caching are not yet independently audited.
 
 Generate a **matched, randomized five-arm plan without invoking any model or spending money**:
 
@@ -42,12 +58,12 @@ PYTHONPATH=src python scripts/run_real_agent_pilot.py --arm SPIDER --family invo
 
 `--allow-model-charges` is mandatory even if a provider sometimes offers a free quota. The OpenCode research model fallback is a **different** mechanism and is constrained to documented-free candidates; this browser-agent example makes no free-model guarantee. Use account-level spending caps.
 
-The seeded Spider path intentionally bypasses LLM inference, but **the seed was hand-written from fixture implementation**. That is a technical integration test, not proof that a first independent browser agent could have learned it. Do not claim end-to-end inheritance economics from this seed.
+Manual seed remains only an explicit upper-bound control and is now rejected by the complete-cost scorer. The trace-compiled path genuinely extracts a parameterized **detail-page URL from two real deterministic Chromium runs**, persists it, and retrieves previously unseen IDs. It does **not** yet learn from an independent LLM navigator, nor show a cross-site transfer or a graph/fractal advantage. This separation is mandatory for honest benchmarking.
 
 ## Genuine launch gates
 
-1. Verify that the same real model can complete unseen, multi-step tasks unaided, with auditable terminal result and usage.
-2. Implement and independently audit `distill_parameterized` from agent/network traces, including reusing a newly seen ID, refusal on out-of-support IDs, and scope/freshness guards. Promote through the preexisting research Product lane gate; do not hand-copy experimental code into main.
+1. Verify the same real model on unseen, multi-step tasks unaided, using Browser Use `calculate_cost=True` and independent terminal correctness/safety. This model-capability test has not been run in CI.
+2. Advance the fixture trace compiler to independent **LLM-agent-observed traces** and real-world guarded `distill_parameterized`; add URL/parameter scope, out-of-support refusal, drift and freshness. Promote through the preexisting research Product lane gate; do not hand-copy experimental code into main.
 3. Build an independently scored task bank with non-ceiling cold/retrieval performance, two distinct families, page drift, and a blinded oracle.
 4. Collect matched `COLD`, `INSTRUCTIONS`, `RETRIEVAL`, `SPIDER` and real `CACHE` runs (Stagehand v4 caching / comparably strong compiled workflow). Same model, tools, budgets and task distribution, randomized arm order.
 5. Produce exact amortized total cost per verified *safe success*. The scorer refuses incomplete accounting and requires the fifth arm when `--require-cache` is set.
