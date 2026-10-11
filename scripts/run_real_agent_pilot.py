@@ -77,6 +77,7 @@ async def execute_browser_use(prompt: str, provider: str, model: str | None) -> 
         "model_cost_usd": cost,
         "steps": len(history.action_names()),
         "agent_errors": history.errors(),
+        "visited_urls": history.urls(),
         "agent_reported_success": history.is_successful(),
         "reported_usage_models": sorted(usage.by_model) if usage is not None else [],
         "model_usage_present": usage is not None,
