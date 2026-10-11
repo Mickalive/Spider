@@ -1,0 +1,42 @@
+{
+  "base_sha": "d77b4f54e90ef4af8aff5b1cc991a00a0c73374f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T02:46:18.787768+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior (exploration/exploitation, local optima, measurement readiness, path dependence) explicitly distinguished from SPIDER evidence; used to assess opportunity cost and dynamic-range/blocker sequencing.",
+      "Agent prior on benchmark ceiling effects (discriminating baselines) distinguished from SPIDER evidence showing mandatory-discovery deterministic REST produced 1.0 ceiling for cold/retrieval comparators."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION over prior economics work. P2-REPLAY-COST (pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b) showed 1.002x on matched tasks and warned against framing replay as economics without matched tasks and fully-loaded counterfactual costs. P2-BLIND-COMPOSITION (artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda) showed need to remove keyword/oracle and use strong comparators. P2-MIND2WEB (archived Codex sec1 V0.50) bounded route imitation claims. This proposal explicitly addresses ceiling effects and comparator strength (counter-only metrics, asymmetric discovery) before execution - learning from those guards rather than rerunning. Not a duplicate.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Now that the mandatory-discovery deterministic REST substrate produced both cold re-derivation and retrieval-shaped comparators at 1.0 correctness ceiling (dynamic range unsatisfiable for the frozen cost/novelty test), can we construct or identify a programmatic, budget-stable, credential-free model endpoint and/or task bank engineered for ASYMMETRIC discovery (multi-task sessions where one-time discovery is amortized/cached across tasks) such that the four-arm C-LLM-INHERIT benchmark (same model/tools/budget: COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, parameterized mechanism carrier bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) produces genuine behavioral variance (COLD success_rate meaningfully below 1.0 ceiling) and treatment/comparator distinction exists? If not provisionable, produce explicit provisioning receipt and do not rerun the mandatory-discovery deterministic REST certificate. Focus on counter-only metrics (http_requests + retrieval_calls + verification_calls + repair_attempts) and novelty-monotonicity. This addresses readiness conditions (2) and (3) before executing expensive LLM-inheritance economics.",
+      "rationale": "Product owns external-agent behavior and product economics. The three readiness conditions for expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON are not satisfied (dynamic range/endpoint missing). Rather than funding full benchmark, Product must remove blockers first. The question targets exactly (2) and (3): create discriminating baselines via asymmetric discovery or alternative substrate, and secure programmatic endpoint prerequisites. This is the highest-leverage action for product claims; it prevents spending cycles on non-discriminating tests."
+    },
+    "cycle_id": "38105755182",
+    "lane": "product",
+    "portfolio_assessment": "Scout is DEGRADED SCOUT MODE (no external reconnaissance). Core program state: C-MEAS-VALID is effectively VALIDATED but the out-of-surface oracle remains the last scope bound; frontier has an active PREFREEZE PIVOT mandate targeting C-CROSSSITE (deep-hop site-native discovery) to fix the empty sampling frame from v1; C-FRESHNESS has confirmed transport-value coupling stability and now requires D1V anchor population/redesign or explicit park; C-RESIDUAL-NOVELTY/C-LLM-INHERIT readiness conditions (non-ceiling dynamic range + programmatic endpoint + executable parameterized mechanism) are not fully satisfied, so expensive benchmark execution must be deferred until blockers cleared. Several lanes have prefreeze states requiring explicit reactivation decisions. Prioritize measurement readiness and single-instance repair of substrate blockers over duplicating failed threads.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is staff advice only and degraded (unavailable). Its candidate directions align with snapshot next_gates in several cases (frontier deep-hop discovery, runtime oracle repair, product dynamic-range+endpoint, physics barrier stationarity, graph D1V redesign, intel prompt diagnostic). However, the brief did not force pivots; decisions are grounded in canonical snapshot/Codex evidence and the explicit readiness conditions. Degraded mode did not prevent or compel any allocation; I rejected treating its prose as authority."
+  },
+  "experiment_id": "EXP-PRODUCT-38106203430",
+  "inherited_last_verdict": "BOUNDED_SUBSTRATE_CLASS_NEGATIVE_ADOPTED_UNDER_FROZEN_OVERALL_FALSIFIES_ROW_C1_DYNAMIC_RANGE_CERTIFICATE_UNSATISFIABLE_AND_C5_NOVELTY_MONOTONICITY_FAILS_TREATMENT_TIES_COLD_ON_DETERMINISTIC_COUNTERS_FREEZE_GATE_NOT_ENFORCED_GOVERNANCE_DEFECT_RECORDED_NO_CLAIM_ADVANCE_NO_PROMOTION_NO_CONTINUE",
+  "inherited_next_question": "Now that the pre-freeze dynamic-range certificate is unsatisfiable on the mandatory-discovery deterministic credential-free REST substrate class (B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED both at the 1.0 correctness ceiling at novelty >= 0.5 in families F1 and F2, so the parameterized treatment cannot save http_requests and the frozen cost/novelty test is non-discriminating), the materially orthogonal question is: on a programmatic, budget-stable, credential-free model endpoint (the prerequisite Intel showed is missing, EXP-INTEL-37973264582), can the frozen four-arm C-LLM-INHERIT benchmark (same model/tools/budget: COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, with the parameterized mechanism carrier bound to git blob b15ed848 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) produce genuine behavioral variance (COLD success_rate meaningfully below the 1.0 ceiling) and, if so, does the SPIDER arm beat COLD, INSTRUCTIONS and RETRIEVAL on cost per SUCCESSFUL task on an honest counter-only metric (http_requests + retrieval_calls + verification_calls + repair_attempts, excluding latency_ms/1000)? If no such endpoint can be provisioned, the fallback is a credential-free substrate engineered for ASYMMETRIC discovery (multi-task sessions where one-time session/resource/schema discovery is amortized or cached across tasks), tested against the same certificate and the same counter-only novelty-monotonicity criterion; a fourth re-run of the mandatory-discovery deterministic REST certificate is explicitly excluded.",
+  "lane": "product",
+  "origin_github_run_id": "38106203430",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-37989728440",
+    "path": "research/experiments/EXP-PRODUCT-37989728440/handoff.json",
+    "sha256": "911f765d04a83974f20d113da206b4075337c3a9bed4c5a77a8f06ffb4773ed9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "b36248567c89a02655efe1e9d50a6925b4bc4e009760d22066846b6b257cb9fe",
+  "request_id": "fb7599b3ed11c11564e7fa33",
+  "schema_version": 1
+}
