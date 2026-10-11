@@ -10,7 +10,7 @@ from __future__ import annotations
 import hashlib
 import re
 from html.parser import HTMLParser
-from urllib.parse import parse_qs, quote, urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 from .models import Mechanism
 
@@ -71,7 +71,7 @@ def compile_browser_traces(family: str, examples: list[dict]) -> Mechanism:
             raise ValueError("only local recorded fixture URLs are accepted")
         if url.path != f"/portal/{family}/view":
             raise ValueError("not a verified detail-route trace")
-        if parse_qs(url.query, strict_parsing=True) != {"id": [identifier]}:
+        if parse_qsl(url.query, keep_blank_values=True, strict_parsing=True) != [("id", identifier)]:
             raise ValueError("detail URL does not bind the exact observed ID")
         if example.get("answer") != parse_verified_detail(example.get("page_html", ""), identifier):
             raise ValueError("page trace does not verify the same record and answer")
