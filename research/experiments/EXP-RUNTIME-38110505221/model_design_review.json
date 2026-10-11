@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/exo-free",
+  "attempt": 4,
+  "exit_code": 1,
+  "category": "substantive",
+  "github_run_id": "38110505221",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-11T04:20:44.768042+00:00"
+}
