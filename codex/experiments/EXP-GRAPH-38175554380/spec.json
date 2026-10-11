@@ -1,0 +1,189 @@
+{
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_scope_note": "Bounded test of ONE sub-mechanism of C-SEMANTIC-RESOLVE: whether max-cosine selection over intent embeddings (A-EMBED-COSINE) STRICTLY exceeds a strong NON-embedding deterministic resolver (B-LEX-STRONG = fixed operation-synonym dictionary + resource-noun lexicon, authored by a process that never saw the goal bank), on a contamination-screened independently-authored unseen-goal bank; and, separately, whether an applicability gate (logistic on [max-cosine, cosine-margin]) calibrated on a DISJOINT split simultaneously reaches pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85. This REPLACES the weak token-set-Jaccard comparator of EXP-GRAPH-38166215691 with the strong comparator the Global Research Director mandates and replaces the single global cosine threshold with a two-feature calibrated gate. The claim-bearing decision D-RESOLVER is deliberately decoupled from the applicability-gate sub-question D-GATE, which is scored as its own class and does NOT downgrade D-RESOLVER (mandate item iii; the parent's single-threshold gate was AB-NOT-MET at pooled_false_accept 0.5789). This packet does NOT test parameter binding, execution correctness, cross-app generalization, ECE, or browser/substrate behaviour. A positive D-RESOLVER licenses EXPERIMENTAL for the embedding-selection sub-claim only; the full claim is not promoted.",
+  "question": "On a 160-goal bank (120 independently authored applicable single-operation goals, 6 per resource x operation cell over users/posts/comments/albums/photos x create/read/update/delete, plus 40 independently authored out-of-scope goals) whose authoring transcript is pre-registered and hash-committed and whose author was given NO repository or intent-string access, scored against a strong deterministic lexical resolver (independently authored operation-synonym dictionary + resource-noun lexicon; NOT token-set Jaccard): (A) does max-cosine-similarity selection over the 20 intent embeddings (A-EMBED-COSINE) still STRICTLY exceed B-LEX-STRONG on the contamination-screened applicable set (paired family-blocked 95% bootstrap lower bound > 0); and (B) can a two-feature applicability gate (max-cosine and top1-minus-top2 margin) fitted on a DISJOINT calibration split simultaneously reach pooled_false_accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 on the test split -- thereby deciding whether the product resolve() path must retain embeddings plus a calibrated abstention gate, or whether a deterministic lexical resolver with a calibrated gate suffices and the embedding path should be retired?",
+  "hypothesis": "On the 160-goal bank (120 applicable 6-per-cell, 40 out-of-scope), after the extended contamination screen removes goals that are near-copies of any prior authoring surface (measured with token-set Jaccard >= 0.60 OR char-trigram Jaccard >= 0.75 against the 20 registry intents, all prior PARAPHRASES/NO_APPLICABLE/OOD templates and the parent packet's 140-goal bank), the surviving primary set uses operation verbs and resource nouns that are NOT the registry intent wording. A strong deterministic resolver built from an INDEPENDENTLY AUTHORED operation-synonym dictionary + resource-noun lexicon (B-LEX-STRONG) resolves most surviving goals, so the large 0.3978 advantage measured against the weak token-Jaccard null (EXP-GRAPH-38166215691) will SHRINK substantially, and may vanish. The scientific question is whether dense embeddings (A-EMBED-COSINE) still retain a STRICT advantage over that strong comparator: if they do not (point estimate <= 0, or CI containing 0), a deterministic lexical resolver suffices for the resolve() alias space and the embedding path is not justified. Separately, a two-feature gate calibrated on a disjoint split can, or cannot, reach the applicability targets; a single global cosine threshold is expected to be insufficient. Neither the arms' accuracies nor the gate's attainability are measured in DESIGN.",
+  "falsifier": "The strong-comparator result is decisive in BOTH directions. FALSIFIES-EMBED (i.e. supports deterministic sufficiency): A-EMBED-COSINE accuracy on the contamination-screened primary set does NOT exceed B-LEX-STRONG (paired family-blocked bootstrap observed difference <= 0, or positive with 95% lower bound <= 0). In that branch the measured 0.3978 advantage was an artifact of the weak token-Jaccard comparator, B-LEX-STRONG is an adequate resolve() mechanism, and the embedding path must not be relied on. SUPPORTS-EMBED: observed difference > 0 with lower bound > 0, i.e. dense semantics recover synonymy the strong deterministic lexicon misses. Either branch changes the resolve() product decision. D-GATE is falsified as an applicability gate if G-LOGISTIC-2F misses any of the three targets on the test split (GATE-NOT-MET).",
+  "baselines": [
+    {
+      "id": "B-LEX-STRONG",
+      "description": "PRIMARY comparator (mandate): a deterministic operation-synonym dictionary + resource-noun lexicon resolver. The lexicon was authored by a SEPARATE fresh-context process given only the five family names and four CRUD operation names, with no bank access and no tools (prereg.md section 4 (Authorship provenance and frozen blocks)). The resolver (a) finds the unique longest resource-noun phrase (whole-token match, simple plural normalisation), removes its span, then finds the unique longest operation phrase on the remainder; (b) alternately finds the unique longest operation phrase, removes it, then the unique longest resource noun on the remainder; (c) resolves only if (a) and (b) agree (or exactly one is defined), else abstains, returning mech_{family}_{op}. Never loads an embedding model. This is a DISTINCT non-embedding function (V9-NON-TAUTOLOGY is the structural check that it imports no embedding model).",
+      "expected_behavior": "Non-degenerate by construction: DESIGN structural probe (no gold labels) shows the frozen resolver ABSTAINS on 11 of the 113 unflagged applicable goals and does not abstain on the other 102, and it also incorrectly resolves 14 of the 38 unflagged out-of-scope goals (so it is neither a constant-abstain nor a constant-resolve function). Its EXECUTE accuracy is an outcome and is NOT fixed here."
+    },
+    {
+      "id": "B-LEX-STRONG-LEARNED",
+      "description": "SECONDARY strong-comparator sensitivity: the SAME fixed resource-noun lexicon, but the operation lexeme map is LEARNED from the calibration split labels only (for each token, argmax operation/family by co-occurrence over calibration applicable goals with frequency >= 2). It sees zero hand-written operation synonyms and no test wording. This directly bounds the concern that B-LEX-STRONG's fixed dictionary was reverse-engineered from the bank: if a lexicon that never saw the bank's test vocabulary is also competitive, the deterministic result is not a curation artifact.",
+      "expected_behavior": "Structurally live (DESIGN prerequisite probe: every one of the 20 (family, operation) cells has at least one unflagged calibration goal, so the map is learnable). Because the test-split operation verbs are disjoint from the calibration-split operation verbs (phrasings 1-3 vs 4-6 of each 6-goal cell), this arm is expected to degrade on test; that degradation is a sensitivity observation, NOT the claim-bearing metric."
+    },
+    {
+      "id": "B-LEXTOK-JACCARD",
+      "description": "Parent-packet continuity null: research/harness/candidate_resolver.py::LexicalOverlapResolver, max token set-Jaccard against the 20 intent strings with first-max tie-break; never abstains. Included only to reproduce the weak comparator the current mandate replaces.",
+      "expected_behavior": "Near or below chance on the primary set (the parent measured 0.5269 and the audit found it too weak); reported for continuity, never used as the decision comparator."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "description": "Null floor: research/harness/candidate_resolver.py::RandomRoleResolver, uniform over the 5 mechanisms whose declared role matches the goal-inferred role, np.random.RandomState seed 4242; never abstains.",
+      "expected_behavior": "Chance-level (<= 1/5 = 0.20 conditional on correct role, modestly higher with role-keyword hits). Floor sanity gate V8 requires <= 0.35."
+    },
+    {
+      "id": "B-INCUMBENT-KERNEL",
+      "description": "Product baseline measured, not assumed: shipped src/spider/kernel.py::SpiderKernel.resolve over a registry distilled from the 20 exact intent strings with min_confidence=0.8. resolve() requires exact intent-string equality.",
+      "expected_behavior": "Mechanism-identity accuracy = 0.0 on the primary set by construction (no goal is an exact intent string); resolves all 20 verbatim intents EXECUTABLE (part of PC-LIVENESS-AND-INTEGRITY)."
+    },
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "description": "Ceiling oracle: research/harness/candidate_resolver.py::InternalIdOracle, returns the true target_mechanism_id for each goal. Establishes the fixture/label ceiling.",
+      "expected_behavior": "Mechanism-identity accuracy = 1.0 on all applicable goals by construction, PROVIDED the fixture/label mapping is intact; any goal whose target_mechanism_id is empty or not in the registry makes the oracle abstain and drop below 1.0 -> MEASUREMENT_INVALID (V6)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-LIVENESS-AND-INTEGRITY",
+    "description": "Plumbing positive control with three arithmetically fallible sub-checks, each required 20/20: (i) FIXTURE-UNIQUENESS: create_fixture() has exactly 20 unique mechanism ids and 20 unique intent strings; (ii) INCUMBENT-VERBATIM: SpiderKernel.resolve returns EXECUTABLE at the correct mechanism id for each of the 20 verbatim intents; (iii) RESOLVER-SELF-MATCH: EmbeddingArgmaxResolver returns each intent's own mechanism on the 20 verbatim intents.",
+    "expected_behavior": "All three sub-checks 20/20; any value < 20 or a denominator other than 20 is MEASUREMENT_INVALID (V5). The control can genuinely fail on a duplicate/ambiguous fixture (i), a broken registry/loader/threshold (ii), or a wrong/mismatched model or registry order (iii)."
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-LABEL",
+    "description": "Instrument null with two arithmetically fallible sub-checks. (i) NC-SHUFFLED-LABEL: the mechanism-index assignment is permuted by a fixed derangement derived from seed 3815816012 and A-EMBED-COSINE selection is scored against the shifted target; must collapse toward chance. (ii) NC-RANDOM-SCORE: each goal's cosine vector is replaced by a fixed seeded i.i.d. uniform score vector passed through the SAME argmax-over-20 then mechanism-id-credit pipeline; must collapse toward chance. Sub-check (ii) fails if the credit rule is broken (abstentions credited, wrong denominator, lax match) -- the RFX-02/RFX-03 denominator defect class.",
+    "expected_behavior": "NC-SHUFFLED-LABEL accuracy <= 0.20 AND NC-RANDOM-SCORE accuracy <= 0.25 (chance ~ 1/20 = 0.05; the bound leaves room for the first-max tie-break). If either exceeds its bound -> MEASUREMENT_INVALID (V10)."
+  },
+  "measurement_validity": [
+    "V1-METRIC-DEFINITION: primary metric is paired per-goal mechanism-identity correctness (selected_mechanism_id == target_mechanism_id) on the primary set, scored regardless of parameter binding (out of scope). An abstention counts as incorrect. The gate is operational: every arm's denominator must equal |primary_set| and be > 0.",
+    "V2-PRIMARY-SET: primary set = the 120 applicable goals minus any goal flagged by V3-CONTAM-SCREEN. DESIGN structural probe on the frozen bank: 7 applicable goals flagged, so |primary_set| = 113 >= 80. If |primary_set| < 80 at EXECUTE -> MEASUREMENT_INVALID. Excluded ids/count/reason are logged.",
+    "V3-CONTAM-SCREEN: for every goal in the full 160-goal bank compute (a) max token set-Jaccard and (b) max char-trigram Jaccard against EVERY prior authoring surface: the 20 registry intents, all PARAPHRASES values, NO_APPLICABLE_TEMPLATES and OOD_PARAPHRASES from the bound research/harness/goal_generator.py PLUS the parent packet's 140 frozen bank texts (bound verbatim in prereg.md as PRIOR-PARENT-BANK-TEXTS). A goal is flagged iff max token-Jaccard >= 0.60 OR max char-trigram Jaccard >= 0.75. The char-trigram representation is deliberately DIFFERENT from any arm's mechanism to avoid the parent's coupling critique (RQF-01/VF-01). If more than 20 goals are flagged -> MEASUREMENT_INVALID. DESIGN probe: 9 flagged (applicable goal_ids app_004, app_049, app_052, app_073, app_076, app_097, app_100; out-of-scope goal_ids oos_024, oos_026), so the screen is non-vacuous.",
+    "V4-AUTHORSHIP-PROVENANCE: prereg.md records hash-committed authoring transcripts for (a) the applicable-goal author, (b) the out-of-scope-goal author and (c) the lexicon author: the exact prompt, the raw output, and a sha256 for each block. The gate is operational: the extracted block hashes must equal the canonical values; each authoring prompt must contain NONE of the 20 registry intent strings (exact-substring check) and must have max token-Jaccard < 0.60 against every prior authoring surface (TRANSCRIPT-BLIND check); each raw bank output must contain no exact intent string. Any mismatch -> MEASUREMENT_INVALID. RESIDUAL LIMITATION (disclosed, not fixable in this environment): a fresh-context author that never read the repository cannot be cryptographically proven not to hold the intent strings in its pretrained latent knowledge; the operational no-file-access, blind-prompt and contamination-screen controls bound but do not eliminate this.",
+    "V5-PC: PC-LIVENESS-AND-INTEGRITY sub-checks (i) 20/20 fixture uniqueness, (ii) 20/20 incumbent verbatim resolution, (iii) 20/20 embedding self-match; else MEASUREMENT_INVALID.",
+    "V6-ORACLE-CEILING: B-INTERNAL-ID-ORACLE must score 1.0 on the primary set; else MEASUREMENT_INVALID.",
+    "V7-TREATMENT-LIVENESS: A-EMBED-COSINE must execute and vary: at least 2 distinct valid mechanism ids on the primary set. A structurally inert treatment (constant/empty/model-failure output) is MEASUREMENT_INVALID; a merely weak treatment is a valid negative.",
+    "V8-FLOOR-SANITY: B-RANDOM-ROLE accuracy <= 0.35 on the primary set; else MEASUREMENT_INVALID.",
+    "V9-NON-TAUTOLOGY: A structural distinctness check. B-LEX-STRONG must be a pure-string function whose implementation does not import, instantiate or query any sentence-embedding model (asserted by static inspection of the frozen runner source: the tokens 'sentence_transformers', 'embed' and 'model' must not appear inside the B-LEX-STRONG code path), AND the comparator must be non-degenerate with respect to the treatment: its decision vector on the primary set differs from A-EMBED-COSINE on >= 1 goal OR it abstains on >= 1 primary goal. A comparator that is a reparameterization of the treatment (identical selections with no abstentions) IS a violation.",
+    "V10-NC-SHUFFLE: NC-SHUFFLED-LABEL accuracy <= 0.20 AND NC-RANDOM-SCORE accuracy <= 0.25; else MEASUREMENT_INVALID. Both run through the same argmax-then-credit pipeline as the treatment.",
+    "V11-BOOTSTRAP-SEED: uncertainty uses paired family-blocked bootstrap (research/harness/experiment_runner.py::paired_bootstrap, bound) with blocking unit = resource family, B = 10000, alpha = 0.05. EXECUTE must record the actual call arguments and verify n_resamples == 10000, alpha == 0.05 and 5 families; else MEASUREMENT_INVALID. numpy.random.seed(38175554380 % 2**32 = 3815816012) is called immediately before it.",
+    "V12-FREEZE-BINDING: three-part operational binder. (A) sha256(prereg.md) must equal freeze.json.hashes['prereg.md']. (B) the running orchestration source (__file__) must equal the FROZEN RUNNER block inside the now-hash-bound prereg.md (normalized only for a trailing newline and CRLF). (C) sha256 of every file listed in spec.freeze_artifacts must equal freeze.json.artifact_hashes[rel]: research/harness/candidate_resolver.py, research/harness/goal_generator.py, research/harness/http_server.py, research/harness/experiment_runner.py, src/spider/kernel.py, src/spider/registry.py, src/spider/models.py, src/spider/__init__.py. Any mismatch -> MEASUREMENT_INVALID; a missing/unreadable freeze.json -> BLOCKED. The embedded bank/lexicon/prompts blocks are separately re-verified against the CANONICAL-HASHES block (V4).",
+    "V13-GATE-VALIDITY: the calibration split must be non-empty in both classes (applicable and out-of-scope) and the two features (max-cosine, margin) must be finite for every calibration goal; G-LOGISTIC-2F must fit and yield a defined threshold t*. If not -> D-GATE is GATE-INVALID (a bounded negative for the gate sub-question only; it does NOT make the packet MEASUREMENT_INVALID and does NOT downgrade D-RESOLVER)."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX",
+    "decisions": {
+      "D-RESOLVER": {
+        "role": "PRIMARY, claim-bearing",
+        "definition": "Paired per-goal difference (A-EMBED-COSINE correct - B-LEX-STRONG correct) over the contamination-screened primary set (|primary_set| = 113 on the frozen bank); mean difference with paired family-blocked 95% bootstrap CI, B = 10000, alpha = 0.05, 5 resource families, numpy seed = 3815816012. An abstention scores 0.",
+        "outcomes": {
+          "SUPPORTS": "All V-gates that can invalidate the primary metric PASS AND obs_diff > 0 AND lower_ci > 0 -> embeddings STRICTLY exceed the strong deterministic resolver.",
+          "FALSIFIES": "All such gates PASS AND upper_ci <= 0 -> embeddings do NOT exceed the strong comparator (deterministic sufficiency).",
+          "MIXED": "All such gates PASS AND the CI contains 0, i.e. obs_diff > 0 with lower_ci <= 0 or obs_diff <= 0 with upper_ci > 0 -> not decisive; embeddings do not demonstrably earn their keep over the strong comparator."
+        }
+      },
+      "D-GATE": {
+        "role": "SECONDARY, reported, NON-GATING",
+        "definition": "G-LOGISTIC-2F: a logistic-regression applicability classifier on features (max-cosine over the 20 intents, margin = top1-minus-top2 cosine), fit on the calibration split (57 applicable + 20 out-of-scope), threshold t* selected by the predeclared objective-direct rule: the smallest observed calibration score t such that cal pooled_false_accept(t) <= 0.10 AND cal unknown_precision(t) >= 0.85; if no such t exists, t* = argmin |cal pooled_false_accept(t) - 0.10| subject to cal unknown_precision(t) >= 0.85, else t* = 1.0. Then on the test split (56 applicable + 18 out-of-scope) report coverage, selective mechanism-identity accuracy, pooled_false_accept and unknown_precision at t*. Semantics (identical to prior packets): pooled_false_accept = executed out-of-scope / all out-of-scope; unknown_precision = abstained out-of-scope / all abstained (None when nothing abstains); coverage = executed applicable / all applicable. G-GLOBAL-THRESHOLD (identical rule but a single threshold on max-cosine alone, as in EXP-GRAPH-38166215691) is reported for continuity.",
+        "outcomes": {
+          "GATE-MET": "test pooled_false_accept(t*) <= 0.10 AND unknown_precision(t*) is defined and >= 0.85 AND coverage(t*) >= 0.50.",
+          "GATE-NOT-MET": "any target missed; report the attained triplet, both gates, and the risk-coverage frontier.",
+          "GATE-INVALID": "the calibration split or score extraction is malformed (V13)."
+        },
+        "non_gating_note": "GATE-NOT-MET / GATE-INVALID are bounded negatives for the applicability-gate sub-mechanism only; they do NOT downgrade D-RESOLVER and do NOT make the packet MEASUREMENT_INVALID. This decoupling is preregistered (the parent's single-threshold gate was AB-NOT-MET at 0.5789)."
+      }
+    },
+    "overall_outcome_mapping": "status = MEASUREMENT_INVALID with outcome = INCONCLUSIVE if any gate that invalidates the primary metric (V1-V12 as applicable to D-RESOLVER) fails or the bank/model prerequisite is unusable; status = BLOCKED with outcome = INCONCLUSIVE if the embedding stack cannot be loaded; otherwise status = COMPLETE with outcome equal to the D-RESOLVER outcome (SUPPORTS / FALSIFIES / MIXED). D-GATE is recorded independently in observations as GATE-MET / GATE-NOT-MET / GATE-INVALID and MUST NOT be collapsed into the D-RESOLVER outcome.",
+    "report": [
+      "M-MECH-ACC-EMBED (A-EMBED-COSINE accuracy, numerator/denominator)",
+      "M-MECH-ACC-STRONGLEX (B-LEX-STRONG accuracy and abstention count)",
+      "M-MECH-ACC-LEARNED (B-LEX-STRONG-LEARNED accuracy, secondary sensitivity)",
+      "M-MECH-ACC-LEXTOK (B-LEXTOK-JACCARD accuracy, continuity)",
+      "M-MECH-ACC-RANDOM (B-RANDOM-ROLE accuracy)",
+      "M-MECH-ACC-INCUMBENT (B-INCUMBENT-KERNEL accuracy)",
+      "M-MECH-ACC-ORACLE (B-INTERNAL-ID-ORACLE accuracy)",
+      "M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX (obs_diff, lower_ci, upper_ci)",
+      "M-PAIRED-DIFF-EMBED-MINUS-LEARNED (obs_diff, lower_ci, upper_ci)",
+      "M-PC-LIVENESS-AND-INTEGRITY (fixture_unique, incumbent_verbatim, embed_self)",
+      "M-NC-SHUFFLED (NC-SHUFFLED-LABEL accuracy and NC-RANDOM-SCORE accuracy)",
+      "M-NON-TAUTOLOGY (embedding-model references inside B-LEX-STRONG path; disagreement count)",
+      "M-CONTAM-MAX-JACCARD (token and trigram maxima over all 160 goals)",
+      "M-N-CONTAM-FLAGGED",
+      "M-N-PRIMARY",
+      "M-GATE-LOGISTIC-2F (t*, coverage, selective accuracy, pooled_false_accept, unknown_precision, class) [secondary]",
+      "M-GATE-GLOBAL-THRESHOLD (t*, coverage, pooled_false_accept, unknown_precision, class) [secondary]",
+      "M-ECE-GLOBAL (descriptive only, NOT gated)"
+    ],
+    "precedence": "MEASUREMENT_INVALID > FALSIFIES > MIXED > SUPPORTS.",
+    "reachability": "Both D-RESOLVER branches are arithmetically reachable. (a) |primary_set| = 113 (>= 80) on the frozen bank (DESIGN structural probe). (b) No arm is pinned: B-LEX-STRONG is live and non-degenerate (abstains on 11 of 113 unflagged applicable goals, resolves the other 102, and mis-resolves 14 of 38 unflagged out-of-scope goals), B-INTERNAL-ID-ORACLE is 1.0 by construction, B-RANDOM-ROLE is <= 0.35 by construction, and A-EMBED-COSINE is an unmeasured outcome. So obs_diff can be > 0 with lower_ci > 0 (SUPPORTS), <= 0 with upper_ci <= 0 (FALSIFIES) or have a CI containing 0 (MIXED). (c) All 5 families are represented in the primary set, so the family-blocked bootstrap is non-degenerate. (d) Because B-LEX-STRONG is a genuinely strong comparator (frozen lexicon, not reverse-engineered from the bank) the FALSIFIES/MIXED region is realistically reachable, which is the point of the mandate; because it abstains on ambiguous compounds (note / photo collection / photo set) the SUPPORTS region is also reachable. (e) D-GATE is decoupled with its own reachable GATE-NOT-MET branch (the parent's single-threshold gate was NOT-MET at 0.5789), so the accept region cannot be emptied by the gate targets. Arm accuracies and the gate's attainability are outcomes and are NOT measured in DESIGN. Arithmetic for the gate: with 56 test applicable and 18 test out-of-scope, unknown_precision >= 0.85 forces abstaining on essentially all 18 out-of-scope and <= 3 applicable, while pooled_false_accept <= 0.10 allows <= 1 accepted out-of-scope; the region is demandingly small but non-empty (e.g. accept 55 applicable and 0 out-of-scope), so GATE-MET is reachable in principle."
+  },
+  "product_consequence_positive": "If D-RESOLVER = SUPPORTS (embeddings strictly exceed the strong deterministic comparator) and D-GATE = GATE-MET, the product resolve() path keeps embeddings plus the calibrated two-feature applicability gate, is unblocked to ship an applicability/abstention contract, and the deterministic resolver is retained only as a cheap fallback: this licenses EXPERIMENTAL for the embedding-selection sub-claim of C-SEMANTIC-RESOLVE and reduces risk on C-LLM-INHERIT and C-PRODUCT-ECON. If D-RESOLVER = FALSIFIES/MIXED (deterministic sufficiency) and D-GATE = GATE-MET, resolve() moves to the deterministic lexical resolver with the calibrated gate and the embedding path is retired: a cheaper, fully inspectable, zero-model-call resolver ships, which is a direct product-architecture win. No claim is promoted above EXPERIMENTAL by this packet.",
+  "product_consequence_negative": "If D-RESOLVER = FALSIFIES/MIXED and D-GATE = GATE-NOT-MET, NEITHER mechanism is shippable as an unseen-goal resolver: embeddings do not beat the strong deterministic comparator AND no calibrated gate can certify applicability, so resolve() must remain un-shipped for unseen goals and the next step must change architecture (retrieval model trained on independently authored goals, structured slot/parameter reasoning, or a human-in-the-loop confirmation) rather than re-tune thresholds. If D-RESOLVER = SUPPORTS but D-GATE = GATE-NOT-MET, embeddings win selection but cannot be safely gated, so the gated resolver must not ship. Either negative keeps C-SEMANTIC-RESOLVE at HYPOTHESIS and forbids citing the parent's 0.3978 number as load-bearing.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": "1 stdout HTTPS download of the pinned sentence-transformers model from huggingface.co (cached after first fetch); no external HTTP task traffic and no local server traffic (binding-only measurement). Excluded from the measurement: a one-time pip bootstrap of the pinned CPU scientific stack when the runner image lacks it (numpy/scipy/scikit-learn; torch 2.4.0+cpu; sentence-transformers); a bootstrap failure yields status=BLOCKED, not FALSIFIES.",
+    "estimated_wall_clock_seconds": 480,
+    "compute_notes": "CPU-only. One SentenceTransformer(all-MiniLM-L6-v2) load; 20 intent embeddings once; ~200 short goal encodings (160 bank + 20 verbatim + self-match + shuffles). One sklearn LogisticRegression fit on 77 calibration points; no LLM, no browser, no server."
+  },
+  "expected_information_gain": "High and decision-relevant in both directions. The parent's 0.3978 embedding advantage was measured only against a weak token-Jaccard null, and the Director's prior is that deterministic lexical resolvers are often competitive on narrow alias spaces. This packet replaces the weak null with the strong deterministic comparator the mandate requires, authored by a process that never saw the bank, and separately tests a disjoint-calibrated two-feature gate. A FALSIFIES/MIXED result decisively retires a model-dependent resolve() component and redirects the lane; a SUPPORTS result is the first strong-comparator-surviving evidence for embeddings and, with GATE-MET, unblocks the shipped resolve()+gate contract. Either branch changes the C-SEMANTIC-RESOLVE product decision and neither is a threshold retune.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both D-RESOLVER branches are arithmetically reachable and the accept region cannot be emptied by the gate targets. |primary_set| = 113 >= 80 (DESIGN structural probe). No arm is pinned: B-LEX-STRONG abstains on 11 of 113 unflagged applicable goals and resolves 102 (live, non-degenerate) and mis-resolves 14 of 38 unflagged out-of-scope goals; B-INTERNAL-ID-ORACLE is 1.0 by construction; B-RANDOM-ROLE is <= 0.35 by construction; A-EMBED-COSINE is an unmeasured outcome. So M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX can be positive with lower_ci > 0 (SUPPORTS), non-positive with upper_ci <= 0 (FALSIFIES) or have a CI containing 0 (MIXED). All 5 families are represented in the primary set (users/posts/comments/albums/photos: 113 total over 20 cells), so the family-blocked bootstrap is non-degenerate. D-GATE is a separate class with a reachable GATE-NOT-MET branch, so no branch makes another unreachable. The claim-bearing metric is NOT measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/spec.json#decision_rule.reachability",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md section 10 (Decision rules)",
+        "DESIGN structural probe (stdlib tokenisation only; no arm scored with the model, no gold accuracy): frozen-bank primary set 113; B-LEX-STRONG abstains 11/113 applicable, resolves 102; mis-resolves 14/38 out-of-scope; every flagged goal listed"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites exist or are installable from a reachable index. (a) The resolver arms and metric estimators are pre-existing tracked files bound in freeze_artifacts (research/harness/{candidate_resolver,goal_generator,experiment_runner,http_server}.py; src/spider/{kernel,registry,models,__init__}.py). (b) The embedding stack is pinned to the environment previously recorded by this lane (EXP-GRAPH-36287167610/provenance.json: sentence-transformers 3.0.1, torch 2.4.0, numpy 1.26.4, scikit-learn 1.5.1, model sentence-transformers/all-MiniLM-L6-v2). The runner requests the recorded revision and falls back to the unpinned model name if unavailable, recording which was used and the installed versions. (c) The goal bank, the lexicon and the contamination constants are frozen verbatim in prereg.md; the new B-LEX-STRONG resolver is a verbatim transcription in prereg.md. (d) sklearn LogisticRegression is available in the pinned stack used by the bound candidate_resolver module. If the model, sklearn or network is unavailable after bootstrap, the runner writes status=BLOCKED (operational), never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json (sentence-transformers/torch/numpy/scikit-learn pins, all-MiniLM-L6-v2 revision)",
+        "research/harness/candidate_resolver.py, research/harness/experiment_runner.py, src/spider/kernel.py (exist and tracked)",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 4-5 (GOAL BANK/OOS BANK/LEXICON blocks and schema), 7 (B-LEX-STRONG), 13 (Frozen runner source)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and primary comparator are genuinely distinct functions: A-EMBED-COSINE is a dense 384-d cosine argmax requiring the model, while B-LEX-STRONG is a pure-string longest-phrase dictionary resolver that loads no model (V9-NON-TAUTOLOGY is the structural check that the B-LEX-STRONG code path references no embedder). The frozen bank is not lexically trivial: the strong comparator abstains on 11 of 113 unflagged applicable goals and mis-resolves 14 of 38 out-of-scope goals, i.e. it is neither a constant-abstain nor a constant-resolve function and is not pinned at a ceiling. B-LEX-STRONG-LEARNED additionally bounds the concern that the fixed dictionary encodes the bank. Arm accuracies are outcomes and are not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 6 (Arms), 4 (LEXICON block), 7 (B-LEX-STRONG)",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver, ::LexicalOverlapResolver, ::InternalIdOracle, ::RandomRoleResolver",
+        "DESIGN structural probe: B-LEX-STRONG abstains 10/113 applicable, mis-resolves 14/38 out-of-scope (no gold accuracy computed)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each gated control has a concrete failure mode under the same implementation. PC-LIVENESS-AND-INTEGRITY fails on a duplicate/ambiguous fixture (i), a broken registry/loader/threshold (ii) or a wrong/mismatched model or registry order (iii). NC-SHUFFLED-LABEL fails if the embedding selection tracks the shifted labels; NC-RANDOM-SCORE fails if the shared argmax+credit pipeline is broken (RFX-02/RFX-03 denominator class). B-INTERNAL-ID-ORACLE fails on label defects; V6 catches it. V8-FLOOR-SANITY fails if the random floor exceeds 0.35. V9 fails if the comparator references an embedder or is a reparameterization of the treatment. V1 fails on a missing/mismatched denominator; V11 fails if the bootstrap arguments are not (10000, 0.05, 5 families); V12 fails if a bound artifact hash does not match freeze.json; V3 fails if more than 20 goals are contaminated; V13 fails on an empty calibration class. V3-CONTAM-SCREEN is non-vacuous (DESIGN probe: 9 goals flagged at token>=0.60 or trigram>=0.75).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md section 8 (Controls)",
+        "DESIGN structural probe: 9 flagged (7 applicable, 2 out-of-scope)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "A-EMBED-COSINE is the pre-existing EmbeddingArgmaxResolver, which always returns a finite argmax over the 20 normalized intent embeddings and never structurally abstains; the parent packet's non-outcome-bearing smoke probe showed it resolves all 20 verbatim mechanism intents to a valid fixture mechanism id with resolution_status=EXECUTABLE and 20 distinct selections, and the same frozen module and pinned model are reused here. EXECUTE re-enforces liveness by V7 (>= 2 distinct valid mechanism selections on the primary set). If the model cannot load, the runner writes status=BLOCKED rather than a silently dead measurement. The new B-LEX-STRONG comparator is separately proven live and non-degenerate by the DESIGN structural probe (102/113 non-abstain). No bank goal is scored with the model in DESIGN.",
+      "evidence_refs": [
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility.treatment_liveness (parent smoke probe)",
+        "DESIGN structural probe: B-LEX-STRONG non-abstain 102/113 applicable"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed in freeze_artifacts and hashed into freeze.json.artifact_hashes: the four research/harness modules (resolver arms incl. the floor/weak null/ceiling, the intent+prior-template registry used by the contamination screen, the HTTP substrate, the bootstrap/metric estimators) and the shipped src/spider kernel/registry/models/package init. The independently authored goal bank, the contamination constants (incl. the parent bank texts) and the independently authored operation/resource lexicon have no mutable file dependency because they are embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']; the B-LEX-STRONG resolver and orchestration script are verbatim transcriptions embedded in prereg.md and their sha256 are recorded in provenance.json. No unbound mutable code, task bank, dataset or fixture remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 4-5 (GOAL BANK/OOS BANK/LEXICON blocks and schema), 7 (B-LEX-STRONG), 13 (Frozen runner source)"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/harness/candidate_resolver.py",
+    "research/harness/goal_generator.py",
+    "research/harness/http_server.py",
+    "research/harness/experiment_runner.py",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "src/spider/__init__.py"
+  ]
+}

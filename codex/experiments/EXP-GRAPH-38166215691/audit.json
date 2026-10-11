@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38166215691",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "RQF-01",
+      "severity": "high",
+      "target": "report.md sections 4 and 8; result.json observations OBS-AUTHOR-INDEPENDENCE / OBS-PAIRED-DIFF",
+      "finding": "The packet's claim-bearing question (spec.json#question, spec.json#hypothesis) is that the bounded 0.2308 advantage 'survives removal of the joint-authorship confound' and 'is a real semantic-selection effect, not a joint-authorship artifact'. report.md section 4 asserts the current 0.3978 'confirm[s] the effect is not a joint-authorship artifact' and section 8 calls it 'First contamination-free evidence'. The only executable authorship evidence is freeze-gate V4 = extracted bank-block sha256 == fb4d3246990731c95f4cf4cfa5870ac7f02da8832eed324580be5f75b1456c6e plus 140 parseable lines. The authorship narrative (prereg.md sections 4-5) is a self-declaration, is inherited byte-identically from the DESIGN-failed packet EXP-GRAPH-38123980914 (failure.json category DESIGN_FAILURE, exit 1), and has no independent artifact, transcript or third-party attestation. V3-CONTAM-SCREEN only removes goals with token set-Jaccard >= 0.60 to a prior authored string and shares its tokenisation with the B-LEXICAL-OVERLAP comparator, so it cannot exclude semantic/style convergence or a curated bank. The maximum justified statement is that the advantage is reproduced on this frozen bank under this self-declared provenance and screen; the confound is mitigated, not proven eliminated.",
+      "required_correction": "Downgrade report.md sections 4/8 and the corresponding observations to the bounded statement (mitigation, not elimination); do not use 'confirming' or 'contamination-free'."
+    },
+    {
+      "id": "RQF-02",
+      "severity": "medium",
+      "target": "provenance.json#environment, result.json#validity_notes VN-07, derived/measurements.json#env",
+      "finding": "The frozen model identity was requested as sentence-transformers/all-MiniLM-L6-v2 revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf (prereg.md section 6, frozen_runner.py MODEL_REV). The runner fell back to the unpinned default and records model_revision=null. The audit resolved the HF cache refs/main to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 and reproduced the producer's 140/140 embed_mechanism_id selections exactly at that revision. 'null' is therefore incomplete: the actual checkpoint used is knowable and should be recorded, because a floating main revision is not a stable measurement identity and may drift between re-runs.",
+      "required_correction": "Record the resolved checkpoint hash (main = 1110a243fdf4706b3f48f1d95db1a4f5529b4d41) as the model identity used, and keep the disclosure that the pinned revision was unavailable."
+    },
+    {
+      "id": "RQF-03",
+      "severity": "medium",
+      "target": "provenance.json#git, provenance.json#execution",
+      "finding": "provenance.json#git.commit records 7174818443e126da8be7919c825320999f568486, which is request.json#base_sha (the DESIGN base commit), not the commit at which the run was frozen/executed. git log shows the freeze commit e5d83c7d (R2 graph: freeze EXP-GRAPH-38166215691) and the execute commit e5bd65f8 (R2 graph: execute EXP-GRAPH-38166215691); execution_checkpoint.json#pre_execute_sha also records e5d83c7d. So provenance.json does not pin the execution commit or the pre-execute tree, which contract section 5 requires where practical.",
+      "required_correction": "Record the freeze (e5d83c7d) and/or execute (e5bd65f8) commit in provenance.json, or record base and execution commits explicitly."
+    },
+    {
+      "id": "RQF-04",
+      "severity": "medium",
+      "target": "spec.json#baselines[B-LEXICAL-OVERLAP], report.md section 4 and section 6",
+      "finding": "spec.json labels B-LEXICAL-OVERLAP a 'Strong null'. It is the frozen comparator and it does retain headroom (0.5269 vs the 0.99 ceiling), so V9 is satisfied. But it is weak in absolute terms: an audit-constructed deterministic rule using ONLY the frozen RandomRoleResolver role_keywords plus the resource noun reaches 75/93 = 0.8065, and using the operation-synonym sets that the spec's own hypothesis enumerates (add/register/make/set up/insert; fetch/show/look up/view/bring up; edit/modify/change/revise/adjust/fix; remove/erase/drop/destroy/wipe) plus the resource noun reaches 93/93 = 1.000, above M-MECH-ACC-EMBED = 86/93 = 0.9247. The claim must therefore be stated as 'exceeds the specific token-set-Jaccard null B-LEXICAL-OVERLAP', not as evidence that embedding selection is needed to recover verb synonymy.",
+      "required_correction": "Either add a keyword-synonym/resource deterministic baseline and report it, or explicitly bound the claim to the token-overlap null only."
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "severity": "high",
+      "scope": "V4-AUTHORSHIP-PROVENANCE / joint-authorship confound",
+      "finding": "V4's executable portion is a hash equality and a 140-line parse; the completeness/independence claims of the provenance record (prereg.md sections 4-5) are not measured. The record is inherited byte-identically from EXP-GRAPH-38123980914, which ended in DESIGN_FAILURE, and is an unaudited self-declaration by the same design process that assembled the bank. The contamination screen mitigates lexical near-copies but shares tokenisation with the comparator and thresholds only token Jaccard, so it cannot establish independence from the registry intents. Per the transmission contract this is a missing measurement, not a negative result: it caps the claim, it does not falsify it."
+    },
+    {
+      "id": "VF-02",
+      "severity": "low",
+      "scope": "model identity",
+      "finding": "Pinned revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf was unavailable and the run used the unpinned default revision (resolved at audit to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41). The fallback was preregistered and disclosed (VN-07), and the audit reproduced all 140 embed selections at the fallback revision, so the measurement is valid; but the frozen model identity was not honored and the checkpoint is not fully pinned."
+    },
+    {
+      "id": "VF-03",
+      "severity": "low",
+      "scope": "provenance commit recording",
+      "finding": "provenance.json#git.commit is the design base_sha, not the freeze/execute commit (see RQF-03). provenance.json#environment.bootstrap_commands_executed='None' and network_interactions='Single HTTPS download ... (cached after first fetch)' are consistent with the HF cache predating the run (snapshot mtime 19:34 vs run ~19:48-19:54), so no network fetch may actually have occurred at EXECUTE. This does not affect the metric but weakens the reproduction receipt."
+    },
+    {
+      "id": "VF-04",
+      "severity": "informational",
+      "scope": "gate integrity (contrast with EXP-GRAPH-36287167610)",
+      "finding": "Recomputed independently: V12 matches all 8 freeze.json.artifact_hashes to the working-tree files; prereg.md (1c3c2120...), spec.json (bd25c0e5...), request.json (e7917569...), freeze.json (43cb2413...) and design_review.json (7a1e9770...) hashes match freeze.json.hashes; the runner body between the BEGIN/END FROZEN RUNNER markers equals frozen_runner.py (065b7557...) except for one trailing newline; derived artifact hashes in provenance.json match (predictions ee49aba0..., measurements bbdc1b01..., contamination e3fc0b77...). Unlike the prior packet, V1-V12 are computed rather than hard-coded literals. Disclosed near-tautologies remain: V6 (oracle hands back target), V5 sub-check (iii) (deterministic encoder self-match) and V11 (n_families==5 is implied by construction)."
+    },
+    {
+      "id": "VF-05",
+      "severity": "informational",
+      "scope": "M-ABSTENTION (secondary, non-gating)",
+      "finding": "Reproduced AB-NOT-MET: cal_feasible=false, t*=0.44446519017219543, test coverage=1.0, test_pooled_false_accept=0.5789, test_unknown_precision=1.0. The frozen rule decouples this from D-SELECTION and the runner honors the decoupling, so it does not downgrade the primary outcome. It does, however, mean the same max-cosine score geometry does not separate applicable from out-of-scope, which is a substantive boundary for any applicability gate; the producer reports this and does not promote to product."
+    },
+    {
+      "id": "VF-06",
+      "severity": "low",
+      "scope": "bootstrap uncertainty with 5 clusters",
+      "finding": "M-PAIRED-DIFF-EMBED-MINUS-LEXICAL is a family-blocked bootstrap over 5 resource families (B=10000). The seeded recomputation reproduces obs_diff=0.3978494623655914, lower_ci=0.29670329670329665, upper_ci=0.49473684210526314 exactly. With only 5 resampling blocks the percentile interval can be optimistic, so the CI should not be over-trusted; the qualitative conclusion is nevertheless robust because the discordant pairs are embed-only-correct b=38 vs lexical-only-correct c=1 and the per-family differences are positive in all 5 families (users +0.526, posts +0.353, comments +0.211, albums +0.526, photos +0.368) and all 4 verb strata are positive (+0.053 create, +0.480 read, +0.208 update, +0.760 delete)."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-01",
+      "severity": "high",
+      "control_id": "B-LEXICAL-OVERLAP",
+      "finding": "The frozen comparator is real and distinct (V9: disagreement_count=41, lexical accuracy 0.5269 < 0.99) and it is not pinned, so the primary contrast is genuine. But it is not a strong null. Audit-constructed deterministic baselines (NOT producer metrics, added only to probe comparator strength): (a) frozen RandomRoleResolver role_keywords + resource noun = 75/93 = 0.8065; (b) the operation-synonym sets enumerated in the spec's own hypothesis + resource noun = 93/93 = 1.000. Both are simple lexical/dictionary procedures; (b) exceeds M-MECH-ACC-EMBED = 0.9247. The measured advantage therefore establishes superiority over token-set-Jaccard specifically, not over lexical resolution in general."
+    },
+    {
+      "id": "BF-02",
+      "severity": "medium",
+      "control_id": "B-RANDOM-ROLE / B-INCUMBENT-KERNEL / B-INTERNAL-ID-ORACLE",
+      "finding": "Reproduced B-RANDOM-ROLE = 21/93 = 0.2258 (<= 0.35 gate, close to the 0.20 chance floor), B-INCUMBENT-KERNEL = 0/93 by construction (exact-intent equality), B-INTERNAL-ID-ORACLE = 93/93 by construction. The oracle and incumbent results are structural tautologies and carry no discriminative information; the random-role floor is genuine but only weakly above chance. These do not threaten the primary contrast but they cannot be cited as independent corroboration."
+    },
+    {
+      "id": "BF-03",
+      "severity": "low",
+      "control_id": "B-LEXICAL-OVERLAP / V3-CONTAM-SCREEN coupling",
+      "finding": "The screen that defines the primary set uses the comparator's tokenisation and screens against the comparator's reference strings, so it could in principle remove goals the comparator would answer and inflate the treatment-lexical gap. Recomputed counterfactually this does NOT happen on this bank: on all 100 applicable goals embed=93/100 and lexical=55/100 (diff 0.3800); on the 93-goal primary set embed=86/93 and lexical=49/93 (diff 0.3978). The 7 screen-removed applicable goals were embed-correct 7/7 and lexical-correct 6/7, so the screen slightly REDUCED the observed gap. The design_review.json nonblocking concern is thus empirically immaterial here, though the coupling remains a design property to carry forward."
+    },
+    {
+      "id": "BF-04",
+      "severity": "low",
+      "control_id": "NC-SHUFFLED-LABEL / NC-RANDOM-SCORE",
+      "finding": "Reproduced NC-SHUFFLED-LABEL=0.0 (<=0.20) and NC-RANDOM-SCORE=0.043 (<=0.25) through the shared argmax-over-20 + mechanism-id credit rule. These confirm the credit rule is not leaking fixture structure. NC-SHUFFLED-LABEL=0.0 exactly is expected for a derangement at 1/20 chance and is not itself informative beyond passing."
+    }
+  ],
+  "recomputed_metrics": {
+    "_note": "All values below were recomputed by the auditor from the frozen bank in prereg.md, the bound modules, and derived/predictions.json; producer metric identifiers are preserved exactly. Nothing in this object is a producer metric unless the identifier is one of the frozen M-* names.",
+    "M-MECH-ACC-EMBED": {
+      "value": 0.9247311827956989,
+      "numerator": 86,
+      "denominator": 93,
+      "match": true
+    },
+    "M-MECH-ACC-LEXICAL": {
+      "value": 0.5268817204301075,
+      "numerator": 49,
+      "denominator": 93,
+      "match": true
+    },
+    "M-MECH-ACC-RANDOM": {
+      "value": 0.22580645161290322,
+      "numerator": 21,
+      "denominator": 93,
+      "match": true
+    },
+    "M-MECH-ACC-INCUMBENT": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 93,
+      "match": true
+    },
+    "M-MECH-ACC-ORACLE": {
+      "value": 1.0,
+      "numerator": 93,
+      "denominator": 93,
+      "match": true
+    },
+    "M-PAIRED-DIFF-EMBED-MINUS-LEXICAL": {
+      "obs_diff": 0.3978494623655914,
+      "lower_ci": 0.29670329670329665,
+      "upper_ci": 0.49473684210526314,
+      "match": true,
+      "method": "paired family-blocked bootstrap, B=10000, alpha=0.05, families=5, numpy.random.seed(3806477323), research/harness/experiment_runner.py::paired_bootstrap"
+    },
+    "M-BOOTSTRAP-ARGS": {
+      "n_resamples": 10000,
+      "alpha": 0.05,
+      "seed": 3806477323,
+      "n_families": 5,
+      "match": true
+    },
+    "M-NON-TAUTOLOGY": {
+      "disagreement_count": 41,
+      "lexical_accuracy": 0.5268817204301075,
+      "match": true
+    },
+    "M-EMBED-DISTINCT-SELECTIONS": {
+      "value": 20,
+      "match": true
+    },
+    "M-PC-LIVENESS-AND-INTEGRITY": {
+      "fixture_unique": true,
+      "incumbent_verbatim": 20,
+      "lexical_self": 20,
+      "embed_self": 20,
+      "match": true
+    },
+    "M-NC-SHUFFLED": {
+      "nc_shuffled_label": 0.0,
+      "nc_random_score": 0.043,
+      "match": true
+    },
+    "M-N-CONTAM-FLAGGED": {
+      "value": 9,
+      "ids": [
+        "app_001",
+        "app_021",
+        "app_024",
+        "app_031",
+        "app_041",
+        "app_061",
+        "app_081",
+        "oos_009",
+        "oos_028"
+      ],
+      "match": true
+    },
+    "M-CONTAM-MAX-JACCARD": {
+      "max_prior_jaccard_over_140": 1.0,
+      "max_intent_jaccard_over_140": 0.6,
+      "max_prior_jaccard_over_primary_93": 0.5714,
+      "match": true
+    },
+    "M-N-PRIMARY": {
+      "value": 93,
+      "match": true
+    },
+    "M-N-CAL": {
+      "applicable": 39,
+      "oos": 19,
+      "match": true
+    },
+    "M-N-TEST": {
+      "applicable": 54,
+      "oos": 19,
+      "match": true
+    },
+    "M-ABSTENTION": {
+      "class": "AB-NOT-MET",
+      "cal_feasible": false,
+      "t_star": 0.44446519017219543,
+      "test_coverage": 1.0,
+      "test_pooled_false_accept": 0.5789,
+      "test_unknown_precision": 1.0,
+      "match": true
+    },
+    "M-ECE-GLOBAL": {
+      "value": 0.2332117720957725,
+      "match": true
+    },
+    "AUDIT-EMBED-SELECTION-REPRODUCTION": {
+      "agreement_with_producer": "140/140",
+      "max_abs_confidence_delta": 3.5762786865234375e-07,
+      "model_revision_resolved": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "role": "audit reproduction of A-EMBED-COSINE; not a frozen producer metric"
+    },
+    "AUDIT-DISCORDANT-PAIRS": {
+      "embed_only_correct": 38,
+      "lexical_only_correct": 1,
+      "role": "audit-added robustness probe consistent with M-PAIRED-DIFF-EMBED-MINUS-LEXICAL; not a frozen producer metric"
+    },
+    "AUDIT-PER-FAMILY-DIFF": {
+      "users": 0.5263,
+      "posts": 0.3529,
+      "comments": 0.2105,
+      "albums": 0.5263,
+      "photos": 0.3684,
+      "role": "audit-added; all positive"
+    },
+    "AUDIT-PER-VERB-DIFF": {
+      "CREATE": 0.0526,
+      "READ": 0.48,
+      "UPDATE": 0.2083,
+      "DELETE": 0.76,
+      "role": "audit-added; all positive"
+    },
+    "AUDIT-COMPARATOR-STRENGTH-PROBE": {
+      "frozen_role_keywords_plus_family": {
+        "value": 0.8064516129032258,
+        "numerator": 75,
+        "denominator": 93
+      },
+      "spec_enumerated_synonyms_plus_family": {
+        "value": 1.0,
+        "numerator": 93,
+        "denominator": 93
+      },
+      "role": "audit-constructed lexical baselines used ONLY to bound the strength of B-LEXICAL-OVERLAP; NOT producer metrics and NOT frozen comparators"
+    },
+    "AUDIT-CONTAM-SCREEN-COUNTERFACTUAL": {
+      "all_applicable_100": {
+        "embed": 93,
+        "lexical": 55
+      },
+      "primary_93": {
+        "embed": 86,
+        "lexical": 49
+      },
+      "role": "audit-added; tests whether the comparator-coupled screen inflates the gap (it does not)"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CLAIM (bounded, this packet only): On this single frozen 140-goal bank, after the frozen V3 token-overlap screen removes 9 near-copies, max-cosine-similarity selection over the 20 frozen intent embeddings (A-EMBED-COSINE, EmbeddingArgmaxResolver) attains mechanism-identity accuracy 86/93 = 0.9247 and strictly exceeds the frozen token-set-Jaccard comparator (B-LEXICAL-OVERLAP) at 49/93 = 0.5269 on the 93-goal contamination-screened primary set; the paired family-blocked difference M-PAIRED-DIFF-EMBED-MINUS-LEXICAL = 0.3978 with a seeded 95% bootstrap interval [0.2967, 0.4947], and the direction is robust across all 5 resource families and all 4 operation strata (38 embed-only-correct vs 1 lexical-only-correct). The measurement transaction is valid: freeze binding, bank hash, all 12 gates, controls and derived artifacts were independently reproduced. This does NOT license: (i) the claim that the prior 0.2308 advantage was 'confirmed' to be free of the joint-authorship confound, because the authorship independence rests on a self-declared narrative inherited from the DESIGN-failed EXP-GRAPH-38123980914 and V4 only checks a hash; (ii) 'contamination-free' evidence, because the screen removes only token-overlap near-copies; (iii) any claim that embedding argmax is needed to recover verb synonymy, because the comparator is a weak token-Jaccard null that simple keyword-synonym rules can exceed; (iv) generalization beyond this 20-mechanism/5-family fixture, this bank, or the unpinned all-MiniLM-L6-v2 checkpoint; (v) any applicability/abstention capability, since M-ABSTENTION is AB-NOT-MET; (vi) parameter binding, execution correctness or product promotion. The justified registry direction is bounded support for the embedding-selection sub-mechanism of C-SEMANTIC-RESOLVE (C-SEMANTIC-RESOLVE currently HYPOTHESIS in codex/claim_state.json.effective_event_by_claim), contingent on correcting the report.md over-claims in RQF-01.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38166215691/request.json",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#question",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#hypothesis",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#baselines",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#measurement_validity",
+    "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md#4-frozen-independent-goal-bank",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md#5-independent-authorship-provenance-v4",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md#9-contamination-screen-v3-extended-to-all-prior-authoring-surfaces",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md#10-decision-rule",
+    "research/experiments/EXP-GRAPH-38166215691/prereg.md#14-frozen-orchestration-script-verbatim-transcription",
+    "research/experiments/EXP-GRAPH-38166215691/freeze.json",
+    "research/experiments/EXP-GRAPH-38166215691/design_review.json",
+    "research/experiments/EXP-GRAPH-38166215691/result.json",
+    "research/experiments/EXP-GRAPH-38166215691/report.md",
+    "research/experiments/EXP-GRAPH-38166215691/provenance.json",
+    "research/experiments/EXP-GRAPH-38166215691/frozen_runner.py",
+    "research/experiments/EXP-GRAPH-38166215691/derived/predictions.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38166215691/derived/contamination.json",
+    "research/experiments/EXP-GRAPH-38166215691/execution_checkpoint.json",
+    "research/experiments/EXP-GRAPH-38166215691/model_execute.json",
+    "research/harness/candidate_resolver.py",
+    "research/harness/experiment_runner.py",
+    "research/harness/goal_generator.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-38123980914/failure.json",
+    "research/experiments/EXP-GRAPH-38123980914/prereg.md",
+    "research/experiments/EXP-GRAPH-36287167610/audit.json",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE",
+    "research/lanes/registry.json#lanes.graph",
+    "/home/runner/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/refs/main"
+  ],
+  "unresolved": [
+    "UNRES-01: Whether the goal bank was in fact authored by two fresh-context processes that never saw the intent strings is unverifiable from the packet; no independent authoring transcript, artifact or third-party attestation exists, and the provenance record is inherited from a packet that failed DESIGN.",
+    "UNRES-02: Whether the embedding-selection advantage generalizes beyond this 20-mechanism/5-family fixture, this 140-goal bank and the all-MiniLM-L6-v2 checkpoint is untested; the family-blocked bootstrap has only 5 resampling blocks.",
+    "UNRES-03: Whether a structured keyword-synonym or retrieval-based resolver would match or exceed A-EMBED-COSINE on a bank not constructed around the synonym sets enumerated in the spec's own hypothesis is unanswered; the audit probe (spec-enumerated synonyms + resource noun = 1.000) suggests it might.",
+    "UNRES-04: The embedding checkpoint used is the floating main revision (resolved to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41) rather than the frozen c9745ed1d9f207416be6d2e6f8de32d1f161f9bf, so exact reproduction depends on that revision remaining available; the drift effect on the metric is unmeasured.",
+    "UNRES-05: Parameter binding, HTTP execution correctness, cross-app generalization and ECE gating are out of scope and remain unmeasured; a positive D-SELECTION does not imply end-to-end usability."
+  ]
+}

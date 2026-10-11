@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38164607941",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Preflight passed all frozen gates: PC-ORACLE-EPISODE 5/5 task_success (real scorer, real browser, served page), NC-NO-MODEL-ACTION parseable 0.0/success 0.0, B-RANDOM-ACTION parseable 1.0/task_success 0.2 (<0.6), all five freeze_artifact hashes match, GGUF digests match (3B, 7B shard1, 7B shard2), required stack imports OK. Raw evidence: raw/preflight.json.",
+    "Single manipulated variable verified: prompts.system is the ONLY difference between paired treatment/comparator cells. materialized_configs.json confirms diff_confined_to_prompts_system=true for all four cells; treatment overlay sha256 8283aae1... differs from parent only in prompts.system; comparator overlay sha256 a9a6c54f... is byte-identical to parent harness_config.json. No leakage of '#reveal-btn' or 'TARGET-42' in treatment string (sha256 36a4240a...). Raw evidence: raw/materialized_configs.json, provenance.json#prompt_strings.",
+    "Positive controls fired as required: PC-JSON-CONSTRAINED-DECODING 10/10 in all four cells (model_receipts.json per cell); PC-ORACLE-EPISODE 5/5 at preflight proves the full click-then-answer path is registerable by the frozen scorer. Null control NC-NO-MODEL-ACTION correctly rejects non-JSON (0/5 parseable). Random baseline B-RANDOM-ACTION stays below the 0.6 bar (0.2, matching design-time seed-42 simulation) with parseable 1.0, run against the SERVED page (navigation repaired vs parent's about:blank defect). Raw evidence: raw/controls.json, cells/*/*/raw/model_receipts.json.",
+    "Comparator cells are contemporaneous within-run pairs (same model, task, grammar, sampling, seeds, artifacts, code path) and reproduce the frozen parent anchor exactly: task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5), answer_action_emission_rate=0.0 (0/5) -> REPLICATION_ANCHOR_EXACT for both M-7B-QWEN and M-3B-QWEN. This isolates the treatment effect from run-level environment drift. Raw evidence: cells/*/P-COMP-UNDERSPECIFIED/raw/model_receipts.json, result.json#controls.B-UNDERSPECIFIED-PROMPT-7B/3B.",
+    "All four model cells are COMPLETE (PC gate 10/10 + exactly 5 episodes), 0 EXCLUDED, 0 PARTIAL. Frozen decision rule precedence applied correctly: rule1_preflight_pass -> rule2a_run_pair (both candidates) -> rule2e_comparator=REPLICATION_ANCHOR_EXACT (both) -> rule2h_treatment_fails_bar (both) -> rule3_falsifies. Raw evidence: raw/decision.json, result.json#metrics.decision_trace.",
+    "Treatment prompt supplies the two dimensions audit VF-01 identified as missing from the parent prompt (goal sentence + action schema enumeration) with a single ref->selector alignment to match the frozen GBNF. The failure mode is post-reveal: all 20 episodes show step-0 click succeeds, reveal fires (TARGET-42 visible), then steps 1-4 re-click the hidden button with zero answer actions. This is a planning/state-tracking deficit, not a step-0 discovery failure or parse failure. Raw evidence: cells/*/*/raw/model_receipts.json (all 20 episodes).",
+    "Representation loss acknowledged: simplified text DOM (PAGE_TEXT/ELEMENTS/HISTORY) inherited unchanged from parent. After reveal, ELEMENTS is empty and PAGE_TEXT contains TARGET-42, so the re-click loop is not attributable to missing page text. This is a scope limitation, not a confound for the prompt contrast. Raw evidence: prereg.md section 8, parent audit VF-04.",
+    "Model provisioning is fail-closed on digest: GGUFs re-downloaded and sha256-verified against frozen parent receipts (raw/gguf_sha256.txt). 7B single-file URL 404 is a documented packaging deviation; same-repo same-model same-quant (Q4_K_M) split shards used. No model or quantization substitution. Raw evidence: preflight.json#gguf_digests, provenance.json#models."
+  ],
+  "baseline_findings": [
+    "B-UNDERSPECIFIED-PROMPT-7B and B-UNDERSPECIFIED-PROMPT-3B: within-experiment protocol comparators. Both COMPLETE, VALID, REPLICATION_ANCHOR_EXACT (task_success=0.0, parseable_step1=1.0, answer_emission=0.0). Exact replication of frozen parent anchor. Contrast remains identifiable for any treatment positive (not exercised here). Raw evidence: result.json#controls.B-UNDERSPECIFIED-PROMPT-7B/3B.",
+    "B-RANDOM-ACTION: negative baseline run on SERVED page (navigation repaired). parseable_action_rate_step1=1.0 (5/5), task_success_rate=0.2 (1/5, seed-42 realization). Analytic P(task_success>=3/5) ~ 1.15e-3. Stays well below 0.6 bar. Control-sensitivity defect in parent (about:blank) is repaired. Raw evidence: raw/controls.json#B-RANDOM-ACTION.",
+    "NC-NO-MODEL-ACTION: null control. parseable 0.0 (0/5), task_success 0.0 (0/5). Verification correctly rejects non-JSON. Raw evidence: raw/controls.json#NC-NO-MODEL-ACTION.",
+    "PC-ORACLE-EPISODE: positive control episode. 5/5 task_success through real frozen run_episode scorer with real browser against served page. Proves completion path is registerable and scorer is live. Raw evidence: raw/controls.json#PC-ORACLE-EPISODE.",
+    "PC-JSON-CONSTRAINED-DECODING: 10/10 per cell (40/40 total). Confirms constrained decoding infrastructure works for both models under both prompt conditions. Raw evidence: cells/*/*/raw/model_receipts.json#positive_control.",
+    "B-0.5B-QWEN-LOCAL and B-POLLINATIONS-PROXY: carried reference baselines (not re-run). Correctly recorded as UNKNOWN_NOT_RERUN with parent evidence references. Raw evidence: result.json#controls.B-0.5B-QWEN-LOCAL, B-POLLINATIONS-PROXY."
+  ],
+  "recomputed_metrics": {
+    "M-7B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "positive_control_pass_rate": 1.0,
+      "parseable_action_rate_step1": 1.0,
+      "answer_action_emission_rate": 0.0,
+      "task_success_rate": 0.0,
+      "mean_inference_latency_s": 6.2247,
+      "mean_completion_tokens": 15.0
+    },
+    "M-7B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "positive_control_pass_rate": 1.0,
+      "parseable_action_rate_step1": 1.0,
+      "answer_action_emission_rate": 0.0,
+      "task_success_rate": 0.0,
+      "mean_inference_latency_s": 6.2394,
+      "mean_completion_tokens": 15.0
+    },
+    "M-3B-QWEN|P-TREAT-GOAL-SCHEMA": {
+      "positive_control_pass_rate": 1.0,
+      "parseable_action_rate_step1": 1.0,
+      "answer_action_emission_rate": 0.0,
+      "task_success_rate": 0.0,
+      "mean_inference_latency_s": 2.7325,
+      "mean_completion_tokens": 12.1429
+    },
+    "M-3B-QWEN|P-COMP-UNDERSPECIFIED": {
+      "positive_control_pass_rate": 1.0,
+      "parseable_action_rate_step1": 1.0,
+      "answer_action_emission_rate": 0.0,
+      "task_success_rate": 0.0,
+      "mean_inference_latency_s": 2.7389,
+      "mean_completion_tokens": 12.1429
+    },
+    "PC-ORACLE-EPISODE": {
+      "parseable_action_rate_step1": 1.0,
+      "task_success_rate": 1.0
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": 0.0,
+      "task_success_rate": 0.0
+    },
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": 1.0,
+      "task_success_rate": 0.2
+    },
+    "capability_bar": {
+      "threshold_task_success_rate": 0.6,
+      "threshold_parseable_action_rate_step1": 0.6,
+      "cleared_by_any_candidate": false,
+      "cells_complete": 4,
+      "cells_excluded": 0,
+      "cells_partial": 0
+    }
+  },
+  "claim_ceiling": "FALSIFIES at the goal/schema protocol ceiling for the frozen credential-free CPU-quantized Qwen2.5 3B-8B Q4_K_M class under the exact frozen minimal task, harness, grammar, sampling, and seeds. The step-0 reveal-click is NOT converted to a full click-then-answer completion by supplying the task goal and action schema in the system prompt. Audit VF-01's prompt-underspecification hypothesis is NOT sufficient to explain the parent failure mode at this model class. The bounded negative is scoped to the tested model family, quantization, task, and protocol; it does not close larger models, non-Qwen GGUFs, hosted endpoints, or other domains. C-LLM-INHERIT readiness condition (3) is not satisfied by this model class; the credential-free path remains DESIGN_COMPROMISED.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38164607941/request.json",
+    "research/experiments/EXP-INTEL-38164607941/spec.json",
+    "research/experiments/EXP-INTEL-38164607941/prereg.md",
+    "research/experiments/EXP-INTEL-38164607941/freeze.json",
+    "research/experiments/EXP-INTEL-38164607941/result.json",
+    "research/experiments/EXP-INTEL-38164607941/report.md",
+    "research/experiments/EXP-INTEL-38164607941/provenance.json",
+    "research/experiments/EXP-INTEL-38164607941/raw/preflight.json",
+    "research/experiments/EXP-INTEL-38164607941/raw/controls.json",
+    "research/experiments/EXP-INTEL-38164607941/raw/materialized_configs.json",
+    "research/experiments/EXP-INTEL-38164607941/raw/decision.json",
+    "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38164607941/cells/M-7B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-TREAT-GOAL-SCHEMA/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38164607941/cells/M-3B-QWEN/P-COMP-UNDERSPECIFIED/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/experiments/EXP-INTEL-37982024058/audit.json",
+    "research/experiments/EXP-INTEL-37982024058/handoff.json"
+  ],
+  "unresolved": [
+    "Second-order attribution limit: the treatment bundles (a) goal sentence, (b) action-schema enumeration, (c) grandparent phrasing/wording. This design identifies the bundled 'goal/schema system prompt vs underspecified system prompt' effect (the Director's operational question); it does not decompose goal-only vs schema-only vs phrasing vs generic longer-prompt effects. Per prereg.md section 8 and validity_notes.",
+    "Why both models re-emit a click on the now-hidden #reveal-btn across all remaining steps instead of answering, even with the goal sentence and answer action explicitly enumerated, remains an open behavioural question (small-model multi-step planning/state-tracking deficit vs residual prompt/harness effect). Per result.json#unresolved.",
+    "Whether larger (14B+) or non-Qwen CPU-quantized GGUFs, or a hosted programmatic endpoint with pinning/SLA, clear the bar under this task is outside the frozen 3B-8B Qwen scope and untested. Per prereg.md section 8 and result.json#unresolved.",
+    "H1b (PROMPT_ATTRIBUTED) was not exercised because no treatment cell cleared; a positive prompt effect remains unmeasured by this packet. Per result.json#unresolved.",
+    "The deterministic protocol (temperature=0.0, fixed seeds) produces zero within-cell variance; the 3/5 rule is an adequacy rule for a capability gate, not a statistical threshold. No variance estimate or p-value is possible. Per prereg.md section 8 and validity_notes."
+  ]
+}
