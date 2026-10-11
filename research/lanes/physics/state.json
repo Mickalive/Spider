@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does the measured endpoint intrinsic access-barrier persistence and its anchor-built intrinsic-denylist validity horizon - right-censored at 1800 s on one egress and one ~2041 s session - transfer across independent source vantages, or is the S1_STATIONARY result an artifact of this single network vantage and window? Concretely: over the same window ladder (nominal 0/300/900/1800 s) at a SECOND independent egress (distinct public IP / ASN / geography) using the same frozen 57-endpoint pool and frozen intrinsic classifier, (Q1) do the same endpoints retain their intrinsic class (BLOCK_403_CHALLENGE / TRANSPORT_ERROR) with per-class CLASS_PERSISTENCE >= 0.80, (Q2) does an anchor-built intrinsic denylist remain valid through delta_ref (FALSE_ACCEPT <= 0.20 and FALSE_REJECT <= 0.20, with the B_EXCHANGE null rejected and a positive endpoint-clustered CI lower bound), and (Q3) do the per-endpoint intrinsic classes agree across vantages so that ONE shared denylist is licensed rather than a vantage-specific schedule? This is materially orthogonal to the answered window/timescale axis because it varies the source-vantage factor the director mandate named but the frozen design fixed, and it must NOT repeat the single-vantage 1800 s ladder. If no second independent egress substrate can be provisioned, record the exact operational blocker instead of substituting another single-vantage run.",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-10-11T18:37:58.050968+00:00",
+  "consecutive_failures": 5,
+  "updated_at": "2026-10-11T19:52:10.629658+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "10782ca8f1b6ec777fd1219d88595ae97540a19a3d73ab92606179856c184b39",
-  "same_failure_count": 4,
+  "same_failure_count": 5,
   "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
-  "last_failure_control_revision": "bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801"
+  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
 }
