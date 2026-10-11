@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Given that a bank-blind, model-free deterministic operation-synonym + resource-noun resolver already exceeds max-cosine embedding selection for unseen-goal mechanism identity on the frozen 113-goal primary set (97/113=0.8584 vs 78/113=0.6903; paired family-blocked 95% bootstrap diff -0.1681, CI [-0.3077,-0.0268]) while both the two-feature cosine/margin logistic gate and the single global cosine threshold collapse to GATE-NOT-MET (t*=1.0, coverage 0.0), does a model-free resolver whose OWN ambiguity/coverage signal (e.g. unresolved operation synonym, tied/absent resource-noun match, missing required slot) supplies the abstention decision simultaneously reach pooled false-accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 on a disjoint calibration/test split, and does that deterministic resolve()+ambiguity-gate pair retain its selection advantage on a held-out mechanism set and under a differently curated synonym lexicon -- thereby deciding whether resolve() ships as a deterministic resolver plus ambiguity gate with the embedding path retired, or whether unseen-goal resolution must move to a structured slot/parameter or retrieval-model architecture trained on independently authored goals?",
+  "why_next": "This packet decisively closed the two questions that blocked the parent's claim: (i) it replaced the parent's weak token-set-Jaccard comparator with a strong bank-blind deterministic operation-synonym + resource-noun resolver, and the parent's 0.3978 embedding advantage did not survive (embed 78/113=0.6903 vs B-LEX-STRONG 97/113=0.8584; paired diff -0.1681, 95% CI [-0.3077,-0.0268], upper bound strictly below 0); and (ii) it replaced the single global cosine threshold with a disjoint-calibrated two-feature gate, and both gates still collapsed (GATE-NOT-MET, t*=1.0, coverage 0.0). The selection half of the C-SEMANTIC-RESOLVE next_gate is now satisfied by a model-free deterministic resolver on this fixture, but the applicability/abstention half remains unmet, and the failure is specifically in the embedding-cosine score geometry (no threshold on cosine separates applicable from out-of-scope). The highest-information move is therefore not another threshold retune or a sixth same-shape embedding comparison: it is to change the abstention signal source and the resolver architecture -- test whether a model-free resolver's OWN ambiguity/coverage signal can certify applicability, and whether the deterministic advantage survives a held-out mechanism set and a differently curated lexicon. That is materially orthogonal to the failed embedding-cosine-threshold family and decides the same live product-architecture fork (deterministic resolver + gate with embeddings retired, vs structured slot/parameter or retrieval-model resolution). Only a fresh Global Research Director director_mandate can authorize that NEW experiment.",
+  "carry_forward": {
+    "established": [
+      "The measurement transaction is valid and independently reproduced. Audit status=PASS, V1-V13 all PASS, frozen runner exit 0; the audit recomputed every frozen metric exactly, including M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX obs_diff=-0.16814159292035402 / lower_ci=-0.3076923076923077 / upper_ci=-0.02678571428571419 (B=10000, alpha=0.05, 5 resource families, seed 3815816012), and matched all 8 freeze.json.artifact_hashes plus the sha256-bound prereg/fixture blocks (audit.json#recomputed_metrics, audit.json#validity_findings, freeze.json).",
+      "On the frozen contamination-screened primary set |primary|=113 (9/160 goals flagged: app_004, app_049, app_052, app_073, app_076, app_097, app_100, oos_024, oos_026; exactly matching the DESIGN structural probe), max-cosine embedding selection (A-EMBED-COSINE) does NOT strictly exceed the strong bank-blind deterministic operation-synonym + resource-noun resolver (B-LEX-STRONG): 78/113=0.6903 vs 97/113=0.8584, with the paired family-blocked 95% bootstrap interval entirely below zero (result.json#metrics.M-MECH-ACC-EMBED, M-MECH-ACC-STRONGLEX, M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX).",
+      "The parent's 0.3978 embedding advantage does not survive the strong comparator and was a property of the weak token-Jaccard null: B-LEXTOK-JACCARD = 10/113=0.0885 versus B-LEX-STRONG = 0.8584 (result.json#metrics.M-MECH-ACC-LEXTOK).",
+      "B-LEX-STRONG is live, non-degenerate and non-tautological: it abstains on 11/113 primary goals, disagrees with A-EMBED-COSINE on 40/113, and its behaviour exactly matches the DESIGN structural probe (V9 PASS); the two arms are not reparameterizations (result.json#metrics.M-NON-TAUTOLOGY, M-EMBED-DISTINCT-SELECTIONS=20).",
+      "The applicability-gate sub-question is a bounded, measurement-valid negative: both G-LOGISTIC-2F (two-feature: max-cosine + top1-minus-top2 margin) and G-GLOBAL-THRESHOLD collapse to t*=1.0 with test coverage 0.0, pooled_false_accept 0.0, unknown_precision 0.2432 -- neither reached the calibration target pooled_false_accept <= 0.10 AND unknown_precision >= 0.85, and neither reached coverage >= 0.50 (result.json#metrics.M-GATE-LOGISTIC-2F, M-GATE-GLOBAL-THRESHOLD). This replicates the parent's single-threshold failure with a stronger feature set.",
+      "Controls behaved as specified and are non-tautological design elements: PC-LIVENESS-AND-INTEGRITY 20/20/20 (V5), NC-SHUFFLED-LABEL 0.0265<=0.20 and NC-RANDOM-SCORE 0.0796<=0.25 (V10), B-RANDOM-ROLE floor 19/113=0.1681<=0.35 (V8). B-INCUMBENT-KERNEL=0/113 and B-INTERNAL-ID-ORACLE=113/113 are structural tautologies carrying no discriminative weight (result.json#gates, #controls).",
+      "The extended contamination screen is non-vacuous and uses a char-trigram representation independent of every arm mechanism (VN-04): measured flags and |primary|=113 exactly matched the DESIGN structural probe (result.json#observations OBS-PROVENANCE-CONTINUITY).",
+      "Authorship operational checks passed as designed: all three author prompt blocks satisfy the TRANSCRIPT-BLIND checks (no exact registry intent substring; max token-Jaccard 0.0207 against prior surfaces) (audit.json#validity_findings V4).",
+      "The C-SEMANTIC-RESOLVE claim status is unchanged at HYPOTHESIS; this packet licenses neither an advance nor a global regression (codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE, research/claims/registry.json#C-SEMANTIC-RESOLVE)."
+    ],
+    "rejected": [
+      "Rejected (bounded to this frozen fixture): that max-cosine embedding selection STRICTLY exceeds a strong bank-blind deterministic operation-synonym + resource-noun resolver for unseen-goal mechanism identity. On the 113-goal primary set the paired difference is negative with an upper 95% bound of -0.0268 (result.json#metrics.M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX).",
+      "Rejected (bounded): that either frozen applicability gate (two-feature logistic on [max-cosine, margin] or a single global max-cosine threshold) can meet pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on this split/score geometry; both are GATE-NOT-MET with t*=1.0 and coverage 0.0 (result.json#metrics.M-GATE-LOGISTIC-2F, M-GATE-GLOBAL-THRESHOLD).",
+      "Rejected: that the parent packet's 0.3978 embedding advantage is load-bearing. Replacing the weak token-set-Jaccard null (10/113=0.0885) with the strong deterministic comparator (97/113=0.8584) reverses the sign of the paired advantage.",
+      "Rejected: reading this packet as a global falsification of C-SEMANTIC-RESOLVE, of dense embeddings, or of unseen-goal resolution in general. The audit's claim_ceiling is explicitly bounded to this 20-mechanism/5-family/160-goal bank, this split and the resolved checkpoint 1110a243...; the domain remains open.",
+      "Rejected: quoting B-INCUMBENT-KERNEL=0.0 or B-INTERNAL-ID-ORACLE=1.0 as corroboration of the negative; both are structural tautologies (exact-intent equality / oracle hands back the target).",
+      "Rejected: treating the producer's FALSIFIES framing as endorsed as written. The audit sets producer_claim_supported=false even though it PASSes the measurement transaction, so the claim ceiling is the audit's bounded version, not the producer's phrasing (audit.json#producer_claim_supported, #claim_ceiling)."
+    ],
+    "unknown": [
+      "Whether ANY applicability gate with a different score/feature geometry can ever meet pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint split; both embedding-cosine-based gates collapsed at t*=1.0 (audit.json#unresolved; result.json#unresolved). THIS IS THE NEXT QUESTION.",
+      "Whether B-LEX-STRONG's 97/113 is sensitive to the breadth/wording of its fixed synonym dictionary. B-LEX-STRONG-LEARNED (15/113) cannot bound this on the current split because test-split operation phrasings are disjoint from calibration phrasings by construction (VN-06, VN-14).",
+      "Whether the strong-comparator advantage (and the embedding deficit) generalizes beyond this 20-mechanism fixture, these 5 resource families, this single 160-goal bank and the resolved all-MiniLM-L6-v2 checkpoint; the family-blocked bootstrap has only 5 resampling blocks (VN-03, VN-08).",
+      "Whether the frozen-but-unavailable model revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf would have produced a materially different A-EMBED-COSINE accuracy; the runner fell back to unpinned load and resolved 1110a243fdf4706b3f48f1d95db1a4f5529b4d41, identical to the parent packet (VN-08).",
+      "Whether the sentence-transformers stderr mean-pooling fallback changed embedding semantics relative to a normal module load; the treatment stayed live (20 distinct valid selections, embedding self-match 20/20) but this is not settled (VN-10, audit.json#unresolved).",
+      "Whether the V4 authorship-independence checks are a true guarantee or only an operational mitigation; latent pretrained knowledge of the 20 registry intent strings cannot be cryptographically excluded (VN-07)."
+    ],
+    "do_not_assume": [
+      "Do not treat producer outcome FALSIFIES as a global falsification of C-SEMANTIC-RESOLVE; the audit bounds it to the embedding-necessity sub-claim and the applicability-gate sub-mechanism on this fixture, bank, split and checkpoint.",
+      "Do not quote 0.8584, 0.6903 or -0.1681 as general properties of deterministic resolvers or embeddings beyond this fixture/split/checkpoint.",
+      "Do not assume the deterministic lexical resolver is shippable: the applicability gate is infeasible here, so resolve() must remain UNKNOWN on low-confidence input and neither mechanism may ship as a gated unseen-goal resolver.",
+      "Do not treat the audit status=PASS as producer_claim_supported=true; the audit PASS validates the measurement transaction but explicitly does not endorse the producer's claim as written.",
+      "Do not treat the V4 authorship checks or the extended contamination screen as proof of contamination-free / authorship-independent bank construction; they bound but do not eliminate latent-pretrained-knowledge leakage.",
+      "Do not promote anything to Product Core and do not change product behaviour; promote_to_product=false and the frozen consequences grant no promotion.",
+      "Do not treat C-SEMANTIC-RESOLVE as advanced by this packet; the ledger status remains HYPOTHESIS.",
+      "Do not re-run the same embedding-cosine-vs-lexical-strength comparison with another threshold retune and expect a different claim outcome; the live gaps are abstention-signal geometry/architecture and cross-fixture/lexicon-curation generalization, not thresholds."
+    ]
+  },
+  "dependencies": [
+    "GOVERNANCE (binding): a NEW experiment requires a fresh Global Research Director director_mandate (research/portfolio/POLICY.md); cycle 38174924331 is spent and this lane Director does not dispatch its own successor.",
+    "FOR THE NEXT GATE QUESTION: an implemented model-free resolver-ambiguity/coverage abstention feature (unresolved operation synonym, tied/absent resource-noun match, missing required slot) plus a disjoint calibration/test split capable of the stated targets (pooled_false_accept <= 0.10, coverage >= 0.50, unknown_precision >= 0.85).",
+    "FOR GENERALIZATION: a held-out mechanism set and/or an independently curated (differently worded) operation-synonym lexicon, so the strong-comparator result and the embedding deficit are tested outside the current 20-mechanism fixture and single dictionary.",
+    "PROVENANCE/SUBSTRATE REPAIR: pin and record a resolvable model revision at freeze time (the frozen c9745ed1... was unavailable and the runner fell back to 1110a243...), and preserve the mean-pooling load notice so future executors can rule out embedding-geometry drift (VN-08, VN-10).",
+    "CONSUMER (informational): the product resolve() path would consume whichever resolver+gate survives; but per this packet's frozen consequences resolve() stays UNKNOWN for low-confidence unseen goals until a valid gate exists."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38175554380/request.json",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json#claim_ids",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json#measurement_validity",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json#product_consequence_negative",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/freeze.json",
+    "research/experiments/EXP-GRAPH-38175554380/design_review.json",
+    "research/experiments/EXP-GRAPH-38175554380/result.json",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#metrics.M-MECH-ACC-EMBED",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#metrics.M-MECH-ACC-STRONGLEX",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#metrics.M-PAIRED-DIFF-EMBED-MINUS-STRONGLEX",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#metrics.M-GATE-LOGISTIC-2F",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#metrics.M-GATE-GLOBAL-THRESHOLD",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#controls",
+    "research/experiments/EXP-GRAPH-38175554380/result.json#unresolved",
+    "research/experiments/EXP-GRAPH-38175554380/audit.json",
+    "research/experiments/EXP-GRAPH-38175554380/audit.json#status",
+    "research/experiments/EXP-GRAPH-38175554380/audit.json#producer_claim_supported",
+    "research/experiments/EXP-GRAPH-38175554380/audit.json#claim_ceiling",
+    "research/experiments/EXP-GRAPH-38175554380/audit.json#unresolved",
+    "research/experiments/EXP-GRAPH-38175554380/report.md",
+    "research/experiments/EXP-GRAPH-38175554380/provenance.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/predictions.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38175554380/derived/contamination.json",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stdout.txt",
+    "research/experiments/EXP-GRAPH-38175554380/raw_evidence/runner_stderr.txt",
+    "research/experiments/EXP-GRAPH-38166215691/handoff.json",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE",
+    "research/claims/registry.json#C-SEMANTIC-RESOLVE",
+    "research/lanes/registry.json#lanes.graph"
+  ],
+  "recommended_action": "Hold C-SEMANTIC-RESOLVE at HYPOTHESIS with no claim advance, no product promotion and no product change. Accept the bounded measurement (embedding 78/113 vs strong deterministic resolver 97/113; paired diff -0.1681, 95% CI [-0.3077,-0.0268]) and the bounded gate negative (both GATE-NOT-MET) as the confirmed, audit-PASSed state, while noting producer_claim_supported=false bounds the producer's phrasing. Do not chain an immediate successor (continue=false): the two decisive remaining gaps are (a) an abstention signal capable of the calibration targets and (b) cross-fixture/lexicon-curation generalization, and a NEW experiment requires a fresh Global Research Director director_mandate. Route to the scheduled Global Research Director pulse the next question of whether a model-free resolver-ambiguity/coverage applicability gate (or a structured slot/parameter / retrieval-model architecture) reaches the targets and retains the selection advantage on a held-out mechanism set and a differently curated lexicon. In parallel, repair model-revision pinning. Keep the C-SEMANTIC-RESOLVE domain open: this packet bounds the embedding-cosine sub-mechanism and the cosine-threshold gate family but does not close the claim."
+}
