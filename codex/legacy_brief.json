@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "source": {
+    "ref": "archive/spider-codex-ultimate",
+    "path": "SPIDER_CODEX_ULTIME.md",
+    "blob_sha": "9bb76113aeaf46d9aecdd8a38349a3a7741e57c3",
+    "artifacts_index": "codex/legacy_artifact_index.json",
+    "artifact_count": 1401
+  },
+  "principle": "Frozen pre-2.0 evidence must be screened BEFORE new Research 2.0 direction. Artefacts are NOT independent experiments. Historic verdict tokens are untrusted navigation metadata; read exact source/audit before treating a result as established. Distinguish exact duplicate, bounded replication, new independent test, and unresolved prior.",
+  "findings": [
+    {
+      "key": "P2-REPLAY-COST",
+      "lanes": [
+        "graph",
+        "product",
+        "intel"
+      ],
+      "topic": "compiled replay / workflow inheritance / cost",
+      "source": "pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b",
+      "status": "HISTORICAL_AUDITED_BOUNDED",
+      "fact": "Original 8.5x speed claim withdrawn: 2.822s cold vs 2.816s replay on matched three tasks, 1.002x; matched route saved novel decisions, not proven net runtime savings.",
+      "guard": "Always use matched tasks and fully loaded counterfactual costs; do not frame scripted replay as real-agent economics."
+    },
+    {
+      "key": "P2-BLIND-COMPOSITION",
+      "lanes": [
+        "graph",
+        "product"
+      ],
+      "topic": "content-addressed reuse / iterative graph / composition",
+      "source": "pre2 product summary artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda",
+      "status": "HISTORICAL_BOUNDED_NEEDS_EXACT_PRIMARY_CHECK",
+      "fact": "G-H2 reported 3/3 unseen compositions vs 0/3 cold/verbatim/single-shot BFS; keywords, oracle-guided stopping and weak baselines restrict inference.",
+      "guard": "Repeat only with controls that remove keyword/oracle and strong comparators; never present as broad generalization."
+    },
+    {
+      "key": "P2-WP002B",
+      "lanes": [
+        "physics",
+        "intel",
+        "frontier"
+      ],
+      "topic": "next-state prediction / mechanics / website holdout",
+      "source": "archived Codex section 1 WP-002B",
+      "status": "HISTORICAL_BOUNDED",
+      "fact": "901 true next-state transitions from 300 trajectories; rule DIM-ACC 0.6238, NN 0.6295, shuffle 0.5706, repeated trajectory holdouts; no website-holdout result.",
+      "guard": "Do not claim rule beats nearest-neighbour or transfers cross-site."
+    },
+    {
+      "key": "P2-WP003",
+      "lanes": [
+        "physics",
+        "runtime",
+        "frontier"
+      ],
+      "topic": "Web physics / next action / leakage / bootstrap",
+      "source": "pre2 artifact 4.203 sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9",
+      "status": "MEASUREMENT_INVALID",
+      "fact": "Prior physics headline invalid due to prev_action target leakage and Gaussian jitter mislabeled bootstrap.",
+      "guard": "Never inherit negative or positive scientific conclusion; require non-leaking prospective controls."
+    },
+    {
+      "key": "P2-WP003B",
+      "lanes": [
+        "physics",
+        "frontier"
+      ],
+      "topic": "mechanics / variance explanation / action semantics",
+      "source": "pre2 artifact 4.237 sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e",
+      "status": "HISTORICAL_BOUNDED",
+      "fact": "Follow-up verified no leakage on 875 rows and reports action-only MSE 0.756 vs full MSE 0.735; pre-state mechanics <3% additional explained variance at tested granularity.",
+      "guard": "Avoid rerunning near-identical state-feature tests; different observables may warrant new experiments."
+    },
+    {
+      "key": "P2-MIND2WEB",
+      "lanes": [
+        "graph",
+        "product",
+        "intel"
+      ],
+      "topic": "task routes / compositionality / retrieval / semantic transfer",
+      "source": "archived Codex section 1 Mind2Web V0.50",
+      "status": "HISTORICAL_BOUNDED",
+      "fact": "Among 176 evaluated routes, 6 exact human-route matches (3.41%), strict causal chains 4/176 (2.27%) and retrieval 47/176 (26.7%); extraction covered 3843/6766 actions.",
+      "guard": "Do not assume human-route imitation or exact cache replay suffices; distinguish retrieval, operation overlap and causal composition."
+    },
+    {
+      "key": "P2-AUTOMATION",
+      "lanes": [
+        "graph",
+        "physics",
+        "runtime",
+        "product",
+        "intel",
+        "frontier"
+      ],
+      "topic": "automation / experimental governance / source integrity",
+      "source": "archived Codex section 2",
+      "status": "HISTORICAL_OPERATIONAL_LESSON",
+      "fact": "Immutable request identity, explicit write sets, hash-pinned inheritance, per-item recovery, separation of workflow completion and scientific validity.",
+      "guard": "Prevent repeated orchestration repairs from being treated as research advance."
+    }
+  ],
+  "decision_protocol": [
+    "Search legacy index by subject/experiment/path before proposing a new experiment.",
+    "Inspect specific original archived source and audit for any matching evidence, including invalids; index verdict tokens are not authoritative.",
+    "In comparative_reasoning, explicitly classify LEGACY: DUPLICATE / REPLICATION / DISTINCT_EXTENSION / NO_MATCH / UNCERTAIN, with source sha or an honest unavailable-source explanation.",
+    "If duplicate without improved design/independent replication rationale, propose pivot or park rather than execute.",
+    "Keep frozen historical source separate from accepted Research 2.0 claim updates; never automatically promote legacy verdicts."
+  ]
+}

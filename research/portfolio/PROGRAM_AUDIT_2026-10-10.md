@@ -4,7 +4,7 @@
 
 This is a dated strategic reading of canonical Research 2.0 evidence. Exact scientific claims remain subordinate to `codex/experiments/<experiment_id>/`, `codex/index.json` and `codex/claim_state.json`.
 
-Canonical corpus at audit: **431 experiments**. Coverage gaps: **0**. Quarantined packets: **2**.
+Canonical corpus at refreshed audit: **433 experiments**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Executive conclusion
 
@@ -32,9 +32,9 @@ The decisive missing proof remains integration into a shipped treatment plus a n
 | Physics | 68 | 13 | 21 | 29 | 5 | 0 |
 | Runtime | 68 | 30 | 21 | 16 | 1 | 0 |
 | Product | 83 | 34 | 25 | 21 | 2 | 1 |
-| Intel | 77 | 23 | 42 | 7 | 3 | 2 |
-| Frontier | 57 | 20 | 17 | 17 | 3 | 0 |
-| **Total** | **431** | **147** | **142** | **113** | **21** | **8** |
+| Frontier | 58 | 21 | 17 | 17 | 3 | 0 |
+| Intel | 78 | 24 | 42 | 7 | 3 | 2 |
+| **Total** | **433** | **149** | **142** | **113** | **21** | **8** |
 
 The dominant inefficiency is still not lack of activity. It is spending cycles on designs that later prove non-identifying, prerequisite-blocked, comparator-degenerate, or instrument-invalid. Design-contract v2 and independent DESIGN REVIEW materially reduce that risk for new transactions, but legacy/frozen transactions still expose older defects.
 
@@ -132,7 +132,7 @@ Intel `EXP-INTEL-37973264582` established an important blocker:
 - the anonymous proxy was unstable/capped and also failed;
 - comparator packages are obtainable, but published same-model benchmark anchors are absent for the attained models.
 
-Current Intel work is therefore correctly testing whether a larger credential-free 3B-8B local model or another stable anonymous endpoint can clear the minimal Web-agent capability bar.
+Intel `EXP-INTEL-37982024058` then tested larger credential-free CPU-quantized Qwen2.5 3B/7B candidates under constrained JSON decoding. The models cleared the decoding-format control but still completed the minimal click-then-answer task at **0/5 and 0/5** under the frozen underspecified prompt. That is a bounded negative at the protocol ceiling, not a global negative about 3B/7B agents. The current Intel experiment therefore asks the remaining discriminating question: whether supplying the task goal/schema removes that prompt underspecification; a negative result should explicitly close/re-scope the credential-free path rather than repeat provisioning cycles.
 
 ### C-PRODUCT-ECON — HYPOTHESIS
 
@@ -277,22 +277,30 @@ Scout/Director use `big-pickle` first; Scout failure produces a deterministic de
 
 ### B8 — Research-provider ordering
 
-**State at audit: FIX APPLIED IN CONTROL BRANCH, pending merge.**
+**State: FIXED ON MAIN.**
 
 All six sampled recent successful EXECUTE stages completed on `opencode/big-pickle`, typically after four or five earlier provider attempts. Intel and Frontier then shared the same failed EXECUTE fingerprint after exhausting the fallback chain.
 
-**Fix:** put `big-pickle` first for the Research role while retaining all other providers as fallbacks.
+**Fix:** `big-pickle` is now first for the Research role while retaining all other providers as fallbacks. The same ordering is used for Scout/Director where appropriate.
+
+### B9 — Lane-runner termination recovery
+
+**State: FIX APPLIED IN THIS REFRESH.**
+
+GitHub runner shutdown can occur after a stage has produced valid output but before normal `always()` cleanup runs. The event-driven `workflow_run` recovery path is not reliable enough on its own for runs dispatched by automation.
+
+**Fix:** Lane Recovery now also polls every 5 minutes. It detects the latest failed/cancelled run per lane, compares its creation time with the latest Factory Pulse, and wakes a fresh global direction cycle only when that failure has not already been considered. This makes runner death a bounded liveness problem rather than a dormant-lane failure.
 
 ## Live portfolio at audit time — NOT evidence
 
 These are execution states, not scientific results:
 
 - Graph: active C-FRESHNESS D1V multi-anchor continuation.
-- Physics: active C-WEB-DYNAMICS access-barrier onset/recovery experiment; previous DESIGN failure was retryable.
-- Intel: active C-LLM-INHERIT credential-free model-capability experiment, currently resuming EXECUTE.
-- Frontier: active C-RESIDUAL-NOVELTY site-native-discovery versus BFS experiment, currently resuming EXECUTE.
-- Runtime: Director has selected a PIVOT toward certifying a discriminating substrate/task family rather than continuing the long oracle-extension tunnel.
-- Product: Director has selected REOPEN on C-PARAM-INHERIT to produce a promotable shipped carrier before funding the real-agent benchmark.
+- Physics: active C-WEB-DYNAMICS access-barrier onset/recovery experiment.
+- Runtime: active PIVOT to certify a deliberately non-degenerate asymmetric-discovery task bank for the later flagship benchmark.
+- Product: active REOPEN on C-PARAM-INHERIT to install the audited parameterized carrier at the shipped kernel path and qualify it for pinned promotion.
+- Intel: active REOPEN on C-LLM-INHERIT to decide whether the 3B/7B failure was prompt underspecification or a genuine credential-free capability ceiling. The first refreshed run was interrupted by runner shutdown after DESIGN completion; Lane Recovery polling now covers this case.
+- Frontier: active REOPEN on C-RESIDUAL-NOVELTY to test site-native discovery against apparent BFS depth cost under design-contract v2.
 
 ## Priority order
 

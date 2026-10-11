@@ -68,6 +68,19 @@ def main() -> None:
         require(action in ACTIONS, f"{lane}: invalid action {action}")
         require(nonempty(item["rationale"]), f"{lane}: rationale must be non-empty")
         require(nonempty(item["comparative_reasoning"]), f"{lane}: comparative_reasoning must be non-empty")
+        # Fail closed when the Global Director did not even screen the immutable
+        # historical record. Scientific novelty is evaluated by the Director,
+        # not inferred mechanically from verdict tags.
+        legacy = item["comparative_reasoning"]
+        historical_labels = ("DUPLICATE", "REPLICATION", "DISTINCT_EXTENSION", "NO_MATCH", "UNCERTAIN")
+        require(
+            any(f"LEGACY: {label}" in legacy for label in historical_labels),
+            f"{lane}: missing explicit pre-2.0 LEGACY screening",
+        )
+        require(
+            not (item["action"] in ACTIVE_ACTIONS and "LEGACY: DUPLICATE" in legacy),
+            f"{lane}: historical duplicate cannot be allocated as new research",
+        )
         require(
             item["parent_handoff_disposition"] in HANDOFF_DISPOSITIONS,
             f"{lane}: invalid parent_handoff_disposition",

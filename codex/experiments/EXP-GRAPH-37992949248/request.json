@@ -1,0 +1,44 @@
+{
+  "base_sha": "e84398fc72ec41dfc345e53a623a56ea09bff761",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-09T21:21:49.120759+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (exploration/exploitation, path dependence, measurement readiness) explicitly distinguished from SPIDER evidence (Codex/packets/snapshot).",
+      "Agent prior (workflow compilation/caching, verification, end-to-end economics) distinguished from SPIDER evidence."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative PIVOT to C-DELTA-REPAIR would duplicate measurement-repair substrate questions better centralized later; C-LLM-INHERIT external-agent work is not Graph's primary lane. Completing the freshness instrument is highest marginal value given recent advance.",
+      "dependencies": [
+        "runtime.measurement_oracle_scope (if drift semantics needed)",
+        "physics.real_web_substrate_constraints"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "With GATE-C3 predicate repaired to disjunctive (name,value)-pair disjointness excluding the frozen allowlist, complete PART II of C-FRESHNESS on the four pinned credential-free anchors: obtain M-N-D1V >= 6 spanning MORE THAN ONE anchor (not all from CAL-POS-2) so that the incumbent value-blind guard's false-accept differential M-PAIRED-FA-DIFF-D1V is evaluable with a non-degenerate anchor-clustered 97.5% lower bound; report EXTRACTION-DEFECT-CONFIRMED (E3 PASS, D1 >=3/4) and the guard differential or bounded reason why population remains degenerate.",
+      "rationale": "EXP-GRAPH-37978902447 (audit PASS) established extraction defect on 4 anchors and advanced C-FRESHNESS to EXPERIMENTAL but left D1V degenerate (all trials from CAL-POS-2). Graph is PREFREEZE with active EXP-GRAPH-37989708763; tunnel_flag true but cognitive reset confirms continuation is merited. Completing D1V part II is the minimal next step to reach a discriminating decision on value-blind vs value-aware guard without broadening scope."
+    },
+    "cycle_id": "37991758372",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER is at an inflection: multiple lanes are FROZEN/PREFREEZE with bounded transactions. The core bottleneck is the external-agent (C-LLM-INHERIT) capability/stability constraint on credential-free endpoints (Intel EXP-INTEL-37973264582) and making economics decidable (Product task-bank dynamic range for C-RESIDUAL-NOVELTY). Acquisition cost scaling (Frontier hop>=3) and access-barrier predictability (Physics) are the highest-value orthogonal directions on real GET-only substrate. Graph must complete C-FRESHNESS D1V part II (multi-anchor non-degenerate) without re-litigating extraction defect. Runtime must close the authorship-separated Chromium/real-drift scope for C-MEAS-VALID before expanding substrate claims. No external Scout evidence (DEGRADED); decisions grounded in Codex/snapshot.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is DEGRADED (no external reconnaissance). Its internal candidates were treated as staff advice only; they failed to force pivots. Instead, Codex evidence (frozen active experiments, tunnel_flag diagnostics, recent verdicts) drove direction. Intel handoff on credential-free model provisioning is the strongest actionable item from Scout; adopted with scope constraints."
+  },
+  "experiment_id": "EXP-GRAPH-37992949248",
+  "inherited_last_verdict": "SUPPORTS_EXTRACTION_DEFECT_CONFIRMED_ON_4_PINNED_ANCHORS_C_FRESHNESS_ADVANCES_HYPOTHESIS_TO_EXPERIMENTAL_PART_II_D1V_DEGENERATE_UNREAD_NO_PRODUCT_PROMOTION",
+  "inherited_next_question": "Can a D1V (value-only rotation: STALE and NOT structural_change and NOT transport_change) drift population spanning >=2 anchors be constructed on a credential-free, server-rendered, no-JavaScript GET-only substrate -- either by admitting anchors whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators from value rotation -- such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate, thereby licensing either INCUMBENT-BLIND-CONFIRMED (CH-PRECOND-BINDING necessary) or INCUMBENT-NOT-BLIND (value-aware channel deletable) under CC-A..CC-I?",
+  "lane": "graph",
+  "origin_github_run_id": "37992949248",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-37978902447",
+    "path": "research/experiments/EXP-GRAPH-37978902447/handoff.json",
+    "sha256": "6d576cc5fd0bd22ed4a4c5c7cb1853be1eaee78e65701ba3a4a3728b7a8b7d68"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "67caa6a636b7199b40412eb0742905d06a576fd74c9ddf34e5a183ab5ecb1813",
+  "request_id": "49128c289ca89007adc1bde9",
+  "schema_version": 1
+}

@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-37992949248",
+  "lane": "graph",
+  "origin_github_run_id": "38040081974",
+  "recorded_at_utc": "2026-10-10T10:19:16.992627+00:00",
+  "base_sha": "e84398fc72ec41dfc345e53a623a56ea09bff761",
+  "environment": {
+    "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "stdlib_only": true,
+    "dependencies": [
+      "urllib",
+      "http.cookiejar",
+      "html.parser",
+      "re",
+      "ast",
+      "hashlib",
+      "json",
+      "math",
+      "random",
+      "statistics",
+      "platform",
+      "datetime",
+      "pathlib",
+      "time"
+    ],
+    "browser": null,
+    "docker": null,
+    "model_calls": 0,
+    "credentials": null
+  },
+  "frozen_seed": 37992949248,
+  "frozen_seed_parent": 37978902447,
+  "seed_mechanism": "random.Random(37992949248) for the single shared anchor-clustered bootstrap (estimator.anchor_clustered_paired_fa_diff); Python process-randomized hash() is never used as a seed or key. The parent's seed 37978902447 is retained only as FROZEN_SEED_PARENT for continuity; no parent-derived quantity is recomputed.",
+  "gate_f": true,
+  "M-D1V-DEGENERACY-MODE": "ANCHOR_TRANSPORT_COUPLING",
+  "secondary_label": "FEASIBILITY-D1V-SINGLE-ANCHOR-TRANSPORT-COUPLED",
+  "request_count": 40,
+  "request_cap": 200,
+  "method": "GET only",
+  "pacing_seconds_per_host": 2.0,
+  "anchors": {
+    "positive": [
+      {
+        "anchor_id": "CAL-POS-1",
+        "url": "https://gitlab.com/-/trial_registrations/new/"
+      },
+      {
+        "anchor_id": "CAL-POS-2",
+        "url": "https://auth.wikimedia.org/enwiki/w/index.php?title=Special:CreateAccount"
+      },
+      {
+        "anchor_id": "CAL-POS-3",
+        "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&action=form"
+      },
+      {
+        "anchor_id": "CAL-POS-4",
+        "url": "https://meta.discourse.org/"
+      }
+    ],
+    "negative": [
+      {
+        "anchor_id": "CAL-NEG-1",
+        "url": "https://www.iana.org/domains/reserved"
+      },
+      {
+        "anchor_id": "CAL-NEG-2",
+        "url": "https://cdn.jsdelivr.net/gh/python/cpython@v3.12.0/README.rst"
+      },
+      {
+        "anchor_id": "CAL-NEG-3",
+        "url": "https://www.debian.org/"
+      },
+      {
+        "anchor_id": "CAL-NEG-4",
+        "url": "https://httpbin.org/forms/post"
+      }
+    ],
+    "retired": [
+      {
+        "anchor_id": "CAL-POS-5",
+        "url": "https://bugs.launchpad.net/ubuntu/+reportbug",
+        "reason": "404x4 in parent; excluded from all denominators; not contacted"
+      }
+    ]
+  },
+  "sessions": {
+    "K_total": 4,
+    "ids": [
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ],
+    "recorded_session": "S1",
+    "current_sessions": [
+      "S2",
+      "S3",
+      "S4"
+    ]
+  },
+  "capture_utc_range": {
+    "first": "2026-10-10T10:18:59.572452+00:00",
+    "last": "2026-10-10T10:19:16.237060+00:00"
+  },
+  "frozen_input_verification": {
+    "before": {
+      "request.json": {
+        "expected": "675d088d1418db6e45b86718d385828d0d5ddeb1e94babe6bd1a8a446f455048",
+        "actual": "675d088d1418db6e45b86718d385828d0d5ddeb1e94babe6bd1a8a446f455048",
+        "match": true,
+        "when": "before"
+      },
+      "spec.json": {
+        "expected": "83f500c572f940bfa42c7485bbeffb3542b2ae2fe90ef73de3751ac31e005e2b",
+        "actual": "83f500c572f940bfa42c7485bbeffb3542b2ae2fe90ef73de3751ac31e005e2b",
+        "match": true,
+        "when": "before"
+      },
+      "prereg.md": {
+        "expected": "e71fe797afaa0e59739018b90acd7875dabd4cfd96a506c035672295f8897392",
+        "actual": "e71fe797afaa0e59739018b90acd7875dabd4cfd96a506c035672295f8897392",
+        "match": true,
+        "when": "before"
+      }
+    },
+    "after": {
+      "request.json": {
+        "expected": "675d088d1418db6e45b86718d385828d0d5ddeb1e94babe6bd1a8a446f455048",
+        "actual": "675d088d1418db6e45b86718d385828d0d5ddeb1e94babe6bd1a8a446f455048",
+        "match": true,
+        "when": "after"
+      },
+      "spec.json": {
+        "expected": "83f500c572f940bfa42c7485bbeffb3542b2ae2fe90ef73de3751ac31e005e2b",
+        "actual": "83f500c572f940bfa42c7485bbeffb3542b2ae2fe90ef73de3751ac31e005e2b",
+        "match": true,
+        "when": "after"
+      },
+      "prereg.md": {
+        "expected": "e71fe797afaa0e59739018b90acd7875dabd4cfd96a506c035672295f8897392",
+        "actual": "e71fe797afaa0e59739018b90acd7875dabd4cfd96a506c035672295f8897392",
+        "match": true,
+        "when": "after"
+      }
+    }
+  },
+  "code_attestation": {
+    "path_a_sha256": "9c3881c2cea24be5fe4ecfd4df30805e56b33de0e0d96317d33852597983a259",
+    "path_b_sha256": "43816d4e70916053134deb64a41dabdb1ec99e82e27eeeab8beebde0ded8010c",
+    "source_hashes_differ": true,
+    "path_b_imports": [
+      "__future__",
+      "re"
+    ],
+    "path_b_forbidden_imports": [],
+    "anchor_host_tokens_found_in_producer_sources": [],
+    "no_anchor_special_casing": true,
+    "perturbation_invariant": true,
+    "path_independence_pass": true
+  },
+  "estimator_controls": {
+    "M-ESTIMATOR-POSITIVE-CONTROL-PASS": true,
+    "M-ESTIMATOR-CONTROL-LOW": 0.3333333333333333,
+    "M-ESTIMATOR-CONTROL-UB97": 0.5,
+    "M-ESTIMATOR-CONTROL-HOMOGENEOUS-PASS": true,
+    "NC-ESTIMATOR-CONTROL-SENSITIVITY": true,
+    "nc_1anchor_null_pass": true,
+    "flexible_binding": "estimator.anchor_clustered_paired_fa_diff (same function/B/seed as the real read; V16)",
+    "fixtures": {
+      "SYN-ESTIMATOR-2ANCHOR": {
+        "LOW": 0.3333333333333333,
+        "UB97": 0.5,
+        "fa_inc_ub97": 0.5,
+        "fa_va_ub97": 0.0,
+        "degenerate": false,
+        "degenerate_reason": null,
+        "n_anchors": 2,
+        "n_trials": 5,
+        "B": 10000,
+        "seed": 37992949248,
+        "n_resamples": 10000
+      },
+      "SYN-ESTIMATOR-1ANCHOR": {
+        "LOW": null,
+        "UB97": null,
+        "fa_inc_ub97": null,
+        "fa_va_ub97": null,
+        "degenerate": true,
+        "degenerate_reason": "n_anchors<2",
+        "n_anchors": 1,
+        "n_trials": 1,
+        "B": 10000,
+        "seed": 37992949248,
+        "n_resamples": 0
+      },
+      "SYN-ESTIMATOR-HOMOGENEOUS": {
+        "LOW": 0.5,
+        "UB97": 0.5,
+        "fa_inc_ub97": 0.5,
+        "fa_va_ub97": 0.0,
+        "degenerate": true,
+        "degenerate_reason": "zero_width_interval",
+        "n_anchors": 2,
+        "n_trials": 4,
+        "B": 10000,
+        "seed": 37992949248,
+        "n_resamples": 10000
+      }
+    },
+    "reference_arithmetic": {
+      "SYN-ESTIMATOR-2ANCHOR": {
+        "LOW_expected": 0.3333333333333333,
+        "UB97_expected": 0.5
+      },
+      "SYN-ESTIMATOR-1ANCHOR": {
+        "LOW_expected": null,
+        "UB97_expected": null
+      },
+      "SYN-ESTIMATOR-HOMOGENEOUS": {
+        "LOW_expected": 0.5,
+        "UB97_expected": 0.5
+      }
+    },
+    "seed": 37992949248,
+    "B": 10000,
+    "note": "INSTRUMENT UNIT TEST ONLY (CC-J): synthetic pseudo-anchors; never scored; these numbers are never a measure of real anchors."
+  },
+  "write_scope": {
+    "all_writes_in_scope": true,
+    "n_writes": 50,
+    "offenders": []
+  },
+  "provenance_dependency": {
+    "path": "codex/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl",
+    "present": false,
+    "sha256": null,
+    "note": "reported absent; this packet's substrate_certificate declares only parent-packet artifacts (all present and re-verified at GATE C); the frontier codex file was referenced by the parent provenance and is retained here only as a completeness note. Not edited here."
+  },
+  "artifact_aggregates": {
+    "raw_records_sha256": "bdef74f6219ef0b2b8f18917fafffe3fac4eeb4cc7dcd98012017b426f5fc32f",
+    "n_body_files": 40
+  },
+  "commands": [
+    "python3 /home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-37992949248/code/run_experiment.py"
+  ]
+}

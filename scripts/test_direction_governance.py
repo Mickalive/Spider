@@ -45,7 +45,7 @@ def base_allocation() -> dict:
             "claim_id": claim,
             "question": f"Test strategic question for {lane}",
             "rationale": "Materially useful next direction.",
-            "comparative_reasoning": "Preferred after comparing the full program.",
+            "comparative_reasoning": "Preferred after comparing the full program. LEGACY: NO_MATCH (test fixture; historical screening recorded).",
             "parent_handoff_disposition": "USE" if action == "CONTINUE" else "SUPERSEDE",
             "dependencies": [],
             "cognitive_reset": False,
@@ -102,6 +102,23 @@ def main() -> None:
     rejected = run_validator(base_snapshot(), missing)
     if rejected.returncode == 0:
         raise SystemExit("validator accepted a structurally incomplete mandate")
+
+    # The combined historic+current Codex must be screened for every new mandate.
+    legacy_missing = base_allocation()
+    legacy_missing["allocations"]["graph"]["comparative_reasoning"] = (
+        "Preferred after comparing only the current experiment ledger."
+    )
+    rejected = run_validator(base_snapshot(), legacy_missing)
+    if rejected.returncode == 0:
+        raise SystemExit("validator accepted a mandate without historical screening")
+
+    historical_duplicate = base_allocation()
+    historical_duplicate["allocations"]["graph"]["comparative_reasoning"] = (
+        "LEGACY: DUPLICATE exact prior experiment without a replication mandate."
+    )
+    rejected = run_validator(base_snapshot(), historical_duplicate)
+    if rejected.returncode == 0:
+        raise SystemExit("validator accepted an active duplicate historical experiment")
 
     print("SPIDER_DIRECTION_GOVERNANCE_TEST_OK")
 

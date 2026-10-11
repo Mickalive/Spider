@@ -1,0 +1,364 @@
+{
+  "experiment_id": "EXP-PHYSICS-37992957068",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "title": "Access-barrier ONSET/RECOVERY dynamics beyond endpoint identity and persistence, with an adaptive-vs-unconditional-retry request economy test",
+
+  "question": "On the frozen 57-endpoint credential-free universe (parent EXP-PHYSICS-37973239386, verbatim), treat ACCESS BARRIERS as intrinsic response classes {RATE_LIMIT_429, BLOCK_403_CHALLENGE, TRANSPORT_ERROR} and ORDINARY UNAVAILABILITY as {UNAVAILABLE_403, OTHER_NONBARRIER (404/500), CLEAN}. (Q1) Do observable request-history features -- recent request rate, burstiness, inter-request spacing, session cookie-jar freshness/continuity, and within-session barrier history -- predict the NEXT request's barrier state with held-out skill BEYOND the strongest frozen null that models barriers as endpoint-constant plus persistence-memory (B_ENDPOINT_CONST, B_MEMORY_PERSIST) and beyond a rate-only null (B_RATE_ONLY)? (Q2) For ONSET (previous request CLEAN -> current request barrier) and RECOVERY (previous request barrier -> current request CLEAN) specifically, is that skill non-zero? (Q3) Does an adaptive scheduler A_ADAPT (response-driven: wait on 429, fresh session on transport error, stop on terminal 403) hold per-endpoint success near its no-barrier baseline while issuing FEWER requests than the unconditional retry baseline A_RETRY? (Q4) Are barriers separable from ordinary unavailability, i.e. is the UNAVAILABLE_403/OTHER_NONBARRIER class not predicted by the same history signal that predicts barriers?",
+
+  "hypothesis": {
+    "H1_predictability": "A history-conditioned predictor M_HISTORY achieves pooled held-out log-loss skill SKILL_LL >= 0.05 nats/observation over max(B_CONSTANT, B_ENDPOINT_CONST, B_MEMORY_PERSIST, B_RATE_ONLY) on next-request barrier-vs-nonbarrier, with endpoint-clustered bootstrap 95% CI lower bound > 0; and at least one of ONSET or RECOVERY has positive transition skill.",
+    "H2_intervention_economy": "On the barrier-exposed stratum, A_ADAPT attains success within 0.05 of the unconditional retry baseline A_RETRY and within 0.05 of the endpoint's no-barrier (first-request-clean) rate while issuing strictly fewer mean requests than A_RETRY.",
+    "H0_null": "Barriers are endpoint-constant and persistence-memory-bound: no history feature beyond endpoint identity + previous label adds predictive skill (SKILL_LL <= 0), AND A_ADAPT provides no request economy (mean requests ADAPT >= mean requests A_RETRY) because it cannot recover any barrier that unconditional retry could not. Under H0 the barrier sub-program of C-WEB-DYNAMICS is bounded on this pool/window: the product prior should be a static endpoint-identity denylist plus immediate terminal classification, not an online history model.",
+    "relation_to_claim": "H1/H2 support C-WEB-DYNAMICS (predictive dynamical structure beyond memory/similarity, here also beyond endpoint identity). H0 falsifies the barrier sub-thread of C-WEB-DYNAMICS on this frozen pool and window; it does NOT close the C-WEB-DYNAMICS domain."
+  },
+
+  "falsifier": "BOTH DIRECTIONS ARE SATISFIABLE AND FROZEN. Let SKILL_LL be the pooled held-out log-loss improvement of M_HISTORY over max(nil) with an endpoint-clustered bootstrap 95% CI [LO, HI]. Let d_Req = mean_requests(A_ADAPT) - mean_requests(A_RETRY) on the barrier-exposed stratum, and d_Succ = success(A_ADAPT) - success(A_RETRY). (S1 SUPPORTS) SKILL_LL >= 0.05 AND LO > 0 AND d_Req < 0 (ADAPT strictly fewer requests) AND success(A_ADAPT) >= endpoint_no_barrier_success - 0.05. (S0 FALSIFIES) SKILL_LL <= 0 AND HI < 0.05 AND d_Req >= 0 AND no transition class (ONSET or RECOVERY) shows positive skill. Both branches are reachable: the census proves the pool contains both endpoint-constant bars (5 persistent BLOCK_403_CHALLENGE endpoints, 1 persistent TRANSPORT_ERROR endpoint) that force S0-plausible behavior, and within-session RATE_LIMIT_429 transitions (www.djangoproject.com/admin/login, auth0.com) that force S1-plausible behavior. A pool with only static barriers yields SKILL_LL <= 0 and d_Req >= 0 (S0 is reachable). A pool with schedule-dependent 429 onset/recovery yields SKILL_LL > 0 and d_Req < 0 (S1 is reachable). MEASUREMENT_INVALID is reserved exclusively for prerequisite/control failure (network, classifier, planted-power, or null-calibration), never for a scientific S0.",
+
+  "baselines": {
+    "B_CONSTANT": {
+      "id": "B_CONSTANT",
+      "description": "Global training-period majority class of next-request barrier-vs-nonbarrier; memorization-free constant.",
+      "role": "floor"
+    },
+    "B_ENDPOINT_CONST": {
+      "id": "B_ENDPOINT_CONST",
+      "description": "Predict each endpoint's training-period modal barrier label (endpoint-identity null). Captures all static, per-endpoint-constant blocking.",
+      "role": "primary strong null (identity)"
+    },
+    "B_MEMORY_PERSIST": {
+      "id": "B_MEMORY_PERSIST",
+      "description": "Predict the previous request's barrier label (persistence/memory null) within the same session.",
+      "role": "primary strong null (memory)"
+    },
+    "B_RATE_ONLY": {
+      "id": "B_RATE_ONLY",
+      "description": "Logistic model on rate/burst/spacing features ONLY (recent request rate, burstiness, time since session start, inter-request gap), with NO endpoint identity and NO previous-label memory.",
+      "role": "schedule-only null; tests whether a pure rate effect (without identity or memory) suffices"
+    },
+    "comparison": "The primary skill metric is measured against max over all four baselines, so M_HISTORY must beat the STRONGEST null, not the weakest."
+  },
+
+  "positive_control": {
+    "PC_SYNTHETIC_DYNAMICS": {
+      "id": "PC_SYNTHETIC_DYNAMICS",
+      "description": "Offline planted-hazard generator: barrier probability depends on recent request rate and time-since-last-barrier according to a frozen hazard function; endpoint identities carry NO constant barrier propensity. Fed through the SAME feature pipeline, splitter, and model as the real data.",
+      "literal_design_values": {"rng_master_seed": 37992957068, "replications_R": 200, "per_replication_sequences": 114, "sequence_len": 6, "planted_effect_size_nats": 0.20, "alpha": 0.05},
+      "power_requirement": "Fraction of R replications with SKILL_LL CI lower > 0 must be >= 0.80.",
+      "construct_boundary": "Validates the analysis pipeline's ability to recover a known schedule-dependent effect; it does not validate that any real Web site behaves this way."
+    },
+    "PC_BARRIER_ORACLE": {
+      "id": "PC_BARRIER_ORACLE",
+      "description": "Live positive control on non-pool hosts whose barrier status is deterministic: https://httpbin.org/status/403 (must classify BLOCK_403_CHALLENGE or UNAVAILABLE_403 barrier-family), https://httpbin.org/status/429 (must classify RATE_LIMIT_429), and a deterministic transport failure against a guaranteed-unresolvable host (must classify TRANSPORT_ERROR).",
+      "literal_design_values": {"hosts": ["https://httpbin.org/status/403", "https://httpbin.org/status/429", "https://no-such-host.invalid/"], "per_host_requests": 2},
+      "pass_condition": "Every oracle request is classified into its expected intrinsic class; otherwise MEASUREMENT_INVALID.",
+      "construct_boundary": "Confirms the live collection+classifier code path can register barriers; it is not a natural Web barrier."
+    }
+  },
+
+  "null_control": {
+    "NC_SYNTHETIC_MEMORYLESS": {
+      "id": "NC_SYNTHETIC_MEMORYLESS",
+      "description": "Offline i.i.d. Bernoulli barrier generator with a per-endpoint constant propensity and NO schedule dependence; endpoint identities ARE constant barriers, so B_ENDPOINT_CONST should explain the data.",
+      "literal_design_values": {"rng_master_seed": 37992957069, "replications_R": 200, "per_replication_sequences": 114, "sequence_len": 6, "endpoint_propensity": "beta(0.5,0.5)", "alpha": 0.05},
+      "pass_condition": "Fraction of R replications with SKILL_LL CI lower > 0 must be <= 0.05 (false-positive rate).",
+      "construct_boundary": "Calibrates the null; a population of memoryless endpoint-constant barriers must NOT yield spurious history skill."
+    },
+    "NC_CLEAN_ORACLE": {
+      "id": "NC_CLEAN_ORACLE",
+      "description": "Live negative control on https://httpbin.org/status/200 and https://httpbin.org/uuid, which must classify CLEAN.",
+      "literal_design_values": {"hosts": ["https://httpbin.org/status/200", "https://httpbin.org/uuid"], "per_host_requests": 2},
+      "pass_condition": "All requests classify CLEAN; otherwise MEASUREMENT_INVALID.",
+      "construct_boundary": "Confirms the classifier does not fire on clean responses."
+    }
+  },
+
+  "measurement_validity": {
+    "target_integrity": "Every request stores raw HTTP status, response headers (server, cf-mitigated, retry-after), body SHA-256, byte length, elapsed ms, and any transport error string. Classification is a pure deterministic function of those stored fields (prereg.md Section 'Frozen intrinsic classifier'), so AUDIT can recompute it.",
+    "split_integrity": "Leave-one-session-out (primary) and leave-one-endpoint-out (robustness) cross-validation. Features for predicting request t use only observations < t within the same session, plus the request's own arm/gap/j (schedule features are known at issue time). No outcome leakage; the transition label of request t is response-intrinsic and does not depend on history.",
+    "sampling_integrity": "Arm assignment is a frozen block-randomized schedule: within each endpoint, the 12 sessions are assigned 3 per arm by a seeded permutation (seed 37992957068), so arms are balanced per endpoint and independent of observed outcomes. No endpoint may be dropped after seeing its outcomes.",
+    "uncertainty_integrity": "Endpoint-clustered bootstrap (cluster = registrable domain, 10000 resamples, seed 37992957068) for SKILL_LL and for d_Req/d_Succ; percentile 95% CIs.",
+    "representation_integrity": "One stdlib-HTTP client, one collection window, one frozen 57-endpoint universe; no JavaScript/DOM/SPA/websocket/edge observables. Rates and classes describe this pool and window only, not the Web.",
+    "control_integrity": "PC_SYNTHETIC_DYNAMICS power and NC_SYNTHETIC_MEMORYLESS false-positive rate must meet their frozen bounds; PC_BARRIER_ORACLE and NC_CLEAN_ORACLE live classifications must be correct. Any failure => status MEASUREMENT_INVALID, not a scientific negative.",
+    "prerequisite_integrity": "Live network must reach the frozen universe and both oracle hosts. The barrier-exposed stratum (endpoints with >= 1 intrinsic barrier event in the run) must contain >= 3 endpoints and the scheduler stratum >= 30 barrier events; otherwise MEASUREMENT_INVALID (attainability failure), because the pre-freeze census guarantees both are achievable.",
+    "activity_disclosure": "The only pre-freeze activity is a non-outcome-bearing reachability census (/tmp/opencode/phys379/census.py) on 14 endpoints establishing that barrier events are reachable; it is disclosed in prereg.md and its raw JSON hash is recorded in provenance by EXECUTE."
+  },
+
+  "frozen_arm_design": {
+    "unit": "endpoint x independent fresh-cookie-jar session (episode)",
+    "sessions_per_endpoint": 12,
+    "arms": {
+      "A_RETRY": {
+        "id": "A_RETRY",
+        "role": "REQUIRED no-adaptation / unconditional-retry baseline",
+        "policy": "Same cookie-jar session. Fixed inter-request gap 0.5s. Issue requests up to J_max=5, stopping at the first intrinsic CLEAN response. Retry on ANY non-CLEAN intrinsic class including barriers and transport errors.",
+        "adaptivity": "none (fixed action regardless of response class except the terminal CLEAN stop)"
+      },
+      "A_RETRY_SPACED": {
+        "id": "A_RETRY_SPACED",
+        "role": "no-adaptation rate/spacing baseline",
+        "policy": "Same as A_RETRY but fixed inter-request gap 4.0s; J_max=5; stop at first CLEAN.",
+        "adaptivity": "none"
+      },
+      "A_FRESH": {
+        "id": "A_FRESH",
+        "role": "no-adaptation session-freshness baseline",
+        "policy": "A fresh cookie jar is created before EACH request. Fixed gap 4.0s; J_max=5; stop at first CLEAN.",
+        "adaptivity": "none (manipulates session continuity only)"
+      },
+      "A_ADAPT": {
+        "id": "A_ADAPT",
+        "role": "TREATMENT adaptive scheduler",
+        "policy": "Response-driven. On CLEAN: stop. On RATE_LIMIT_429: if Retry-After header present honor it (capped at 30s) else wait W_429=8.0s in the same session, then retry. On BLOCK_403_CHALLENGE: stop (treat as terminal/persistent). On UNAVAILABLE_403 / OTHER_NONBARRIER: stop. On TRANSPORT_ERROR: retry once after 3.0s with a fresh cookie jar, then stop. J_max=5 total requests.",
+        "adaptivity": "full response-driven policy"
+      }
+    },
+    "max_requests_per_episode": 5,
+    "assignment": "Seeded block randomization per endpoint (seed 37992957068): within each endpoint the 12 sessions are assigned 3 to each arm by a frozen permutation.",
+    "request_headers": "Frozen single User-Agent string and Accept header recorded in prereg.md; no authentication, no credentials, GET only.",
+    "efficiency_note": "On endpoints whose first request is CLEAN, every arm stops after exactly 1 request, so most of the 57-endpoint budget is spent on barrier-capable endpoints."
+  },
+
+  "frozen_intrinsic_classifier": {
+    "CLEAN": "HTTP 2xx (200/202) AND body does not contain a challenge marker.",
+    "RATE_LIMIT_429": "HTTP 429.",
+    "BLOCK_403_CHALLENGE": "HTTP 403 AND (response header cf-mitigated == 'challenge' OR body matches the frozen challenge-marker regex recorded in prereg.md, e.g. Cloudflare 'Just a moment' / captcha interstitial).",
+    "UNAVAILABLE_403": "HTTP 403 without any challenge marker (ordinary forbidden/unavailable).",
+    "TRANSPORT_ERROR": "No HTTP response (DNS failure, connection refused, TLS failure, or timeout).",
+    "OTHER_NONBARRIER": "Any other HTTP status (404, 500, redirect chains to error, etc.).",
+    "barrier_set": ["RATE_LIMIT_429", "BLOCK_403_CHALLENGE", "TRANSPORT_ERROR"],
+    "ordinary_unavailability_set": ["UNAVAILABLE_403", "OTHER_NONBARRIER"],
+    "ONSET_event": "previous request intrinsic CLEAN and current request intrinsic in barrier_set",
+    "RECOVERY_event": "previous request intrinsic in barrier_set and current request intrinsic CLEAN",
+    "label_determinism": "All classes are functions of a single response's stored fields only; none depends on prior responses, so modeling prior responses is not label leakage."
+  },
+
+  "frozen_universe": {
+    "frozen": true,
+    "n_endpoints": 57,
+    "source": "verbatim candidate_universe.endpoints of EXP-PHYSICS-37973239386 (parent), used unchanged; EXECUTE may not substitute, add, or drop endpoints",
+    "endpoints": [
+      "https://gitlab.com/users/sign_in",
+      "https://gitlab.gnome.org/users/sign_in",
+      "https://invent.kde.org/users/sign_in",
+      "https://salsa.debian.org/users/sign_in",
+      "https://gitlab.freedesktop.org/users/sign_in",
+      "https://gitlab.archlinux.org/users/sign_in",
+      "https://codeberg.org/user/login",
+      "https://gitea.com/user/login",
+      "https://git.disroot.org/user/login",
+      "https://discuss.python.org/",
+      "https://community.openai.com/",
+      "https://discuss.elastic.co/",
+      "https://community.cloudflare.com/",
+      "https://forum.freecodecamp.org/",
+      "https://discuss.hashicorp.com/",
+      "https://discuss.kubernetes.io/",
+      "https://community.home-assistant.io/",
+      "https://discourse.julialang.org/",
+      "https://discuss.rubyonrails.org/",
+      "https://discussion.fedoraproject.org/",
+      "https://forum.manjaro.org/",
+      "https://forum.endeavouros.com/",
+      "https://en.wikipedia.org/w/index.php?title=Special:UserLogin",
+      "https://wiki.archlinux.org/index.php?title=Special:UserLogin",
+      "https://wiki.gentoo.org/index.php?title=Special:UserLogin",
+      "https://wiki.openstreetmap.org/w/index.php?title=Special:UserLogin",
+      "https://www.mediawiki.org/w/index.php?title=Special:UserLogin",
+      "https://www.wikidata.org/w/index.php?title=Special:UserLogin",
+      "https://www.djangoproject.com/accounts/login/",
+      "https://www.djangoproject.com/admin/login/",
+      "https://pypi.org/account/login/",
+      "https://docs.djangoproject.com/",
+      "https://bitbucket.org/account/signin/",
+      "https://rubygems.org/session/new",
+      "https://www.reddit.com/login/",
+      "https://news.ycombinator.com/login",
+      "https://basecamp.com/",
+      "https://pragprog.com/",
+      "https://www.npmjs.com/login",
+      "https://dev.to/enter",
+      "https://start.spring.io/",
+      "https://spring.io/",
+      "https://wordpress.org/wp-login.php",
+      "https://wordpress.com/log-in",
+      "https://www.phpbb.com/community/",
+      "https://discuss.flarum.org/",
+      "https://community.nodebb.org/",
+      "https://community.invisioncommunity.com/",
+      "https://www.joomla.org/",
+      "https://www.concretecms.org/",
+      "https://craftcms.com/",
+      "https://www.okta.com/login/",
+      "https://auth0.com/",
+      "https://login.microsoftonline.com/",
+      "https://duckduckgo.com/html/?q=test",
+      "https://www.bing.com/search?q=test",
+      "https://search.brave.com/search?q=test"
+    ]
+  },
+
+  "scheduler_strata": {
+    "stratum_barrier_exposed": "Endpoints with >= 1 intrinsic barrier event during this run. Canonical conditional subgroup; pre-registered and required to be non-empty (>= 3 endpoints, >= 30 barrier events) by the attainability certificate.",
+    "stratum_pre_freeze_candidates": {
+      "definition": "Fixed pre-freeze candidate set derived from parent accepted evidence + the pre-freeze census (disclosed; NOT derived from this run's outcomes).",
+      "endpoints": [
+        "https://gitlab.com/users/sign_in",
+        "https://community.cloudflare.com/",
+        "https://www.npmjs.com/login",
+        "https://wordpress.com/log-in",
+        "https://www.phpbb.com/community/",
+        "https://community.invisioncommunity.com/",
+        "https://search.brave.com/search?q=test",
+        "https://www.djangoproject.com/admin/login/",
+        "https://www.djangoproject.com/accounts/login/",
+        "https://auth0.com/",
+        "https://community.home-assistant.io/"
+      ]
+    },
+    "stratum_rate_limit_capable": [
+      "https://www.djangoproject.com/admin/login/",
+      "https://www.djangoproject.com/accounts/login/",
+      "https://auth0.com/",
+      "https://search.brave.com/search?q=test",
+      "https://community.home-assistant.io/"
+    ],
+    "primary_scheduler_inference": "stratum_barrier_exposed",
+    "reported_also": ["full 57-endpoint pool", "stratum_pre_freeze_candidates", "stratum_rate_limit_capable"]
+  },
+
+  "stable_identifiers": {
+    "primary_metric": "SKILL_LL",
+    "secondary_metrics": ["SKILL_BA", "ONSET_SKILL_LL", "RECOVERY_SKILL_LL", "SEPARABILITY_SKILL_LL", "d_Req", "d_Succ", "endpoint_no_barrier_success", "ADAPT_abs_requests", "RETRY_abs_requests"],
+    "models": ["M_HISTORY", "M_HISTORY_NOID"],
+    "baselines_ids": ["B_CONSTANT", "B_ENDPOINT_CONST", "B_MEMORY_PERSIST", "B_RATE_ONLY"],
+    "control_ids": ["PC_SYNTHETIC_DYNAMICS", "PC_BARRIER_ORACLE", "NC_SYNTHETIC_MEMORYLESS", "NC_CLEAN_ORACLE"],
+    "arm_ids": ["A_RETRY", "A_RETRY_SPACED", "A_FRESH", "A_ADAPT"],
+    "class_ids": ["CLEAN", "RATE_LIMIT_429", "BLOCK_403_CHALLENGE", "UNAVAILABLE_403", "TRANSPORT_ERROR", "OTHER_NONBARRIER"],
+    "seeds": {"assignment": 37992957068, "bootstrap": 37992957068, "pc_synthetic": 37992957068, "nc_synthetic": 37992957069}
+  },
+
+  "models": {
+    "M_HISTORY": {
+      "id": "M_HISTORY",
+      "class": "regularized logistic regression",
+      "features": ["arm (one-hot)", "request_index j", "inter_request_gap_s", "session_fresh (1 if new cookie jar this request)", "prev_intrinsic_label (one-hot)", "n_barrier_so_far", "time_since_last_barrier_s", "endpoint_id (categorical, one-hot)"],
+      "notes": "Includes endpoint identity AND memory AND schedule features; must beat the strongest null to count."
+    },
+    "M_HISTORY_NOID": {
+      "id": "M_HISTORY_NOID",
+      "class": "regularized logistic regression",
+      "features": ["arm (one-hot)", "request_index j", "inter_request_gap_s", "session_fresh", "prev_intrinsic_label (one-hot)", "n_barrier_so_far", "time_since_last_barrier_s"],
+      "notes": "Endpoint-identity ablation: if M_HISTORY_NOID still beats B_RATE_ONLY/B_MEMORY_PERSIST, the signal is not merely endpoint identity."
+    }
+  },
+
+  "decision_rule": {
+    "primary_metric": "SKILL_LL",
+    "metric_definition": "SKILL_LL = mean held-out (negative log-loss of max over nil) - (negative log-loss of M_HISTORY), in nats per held-out request, on next-request barrier-vs-nonbarrier; higher is better; leave-one-session-out CV; endpoint-clustered bootstrap 95% CI [LO, HI]. Thresholds: delta_SKILL = 0.05 nats; alpha = 0.05; margin_success = 0.05.",
+    "secondary_metrics": {
+      "SKILL_BA": "balanced-accuracy improvement of M_HISTORY over max(nulls).",
+      "ONSET_SKILL_LL": "SKILL_LL restricted to ONSET events (prev CLEAN -> current barrier).",
+      "RECOVERY_SKILL_LL": "SKILL_LL restricted to RECOVERY events (prev barrier -> current CLEAN).",
+      "SEPARABILITY_SKILL_LL": "held-out skill of M_HISTORY separating barrier_set from ordinary_unavailability_set (CLEAN excluded); tests mandate Q4.",
+      "d_Req": "mean_requests(A_ADAPT) - mean_requests(A_RETRY) on stratum_barrier_exposed; negative favors ADAPT.",
+      "d_Succ": "success(A_ADAPT) - success(A_RETRY) on stratum_barrier_exposed.",
+      "endpoint_no_barrier_success": "pooled first-request CLEAN fraction of each endpoint in stratum_barrier_exposed.",
+      "ADAPT_abs_requests": "mean requests per episode for A_ADAPT on the stratum.",
+      "RETRY_abs_requests": "mean requests per episode for A_RETRY on the stratum."
+    },
+    "thresholds_frozen": {
+      "delta_SKILL_nats": 0.05,
+      "alpha": 0.05,
+      "margin_success": 0.05,
+      "pc_power_min": 0.80,
+      "nc_false_positive_max": 0.05,
+      "min_barrier_exposed_endpoints": 3,
+      "min_scheduler_barrier_events": 30
+    },
+    "branch_precedence": [
+      "1. MEASUREMENT_INVALID if any measurement_validity prerequisite fails (network unreachable; classifier not reproducible; PC_SYNTHETIC_DYNAMICS power < 0.80; NC_SYNTHETIC_MEMORYLESS false-positive > 0.05; PC_BARRIER_ORACLE/NC_CLEAN_ORACLE misclassified; stratum_barrier_exposed < 3 endpoints or < 30 barrier events).",
+      "2. PRED_PASS = (SKILL_LL >= 0.05) AND (LO > 0). PRED_FAIL = (SKILL_LL <= 0) AND (HI < 0.05). PRED_AMBIG otherwise.",
+      "3. SCHED_ECON_PASS = (d_Req < 0 AND its clustered CI upper < 0) AND (d_Succ >= -0.05) AND (success(A_ADAPT) >= endpoint_no_barrier_success - 0.05). SCHED_ECON_FAIL = (d_Req >= 0) OR (success(A_ADAPT) < endpoint_no_barrier_success - 0.05). SCHED_AMBIG otherwise.",
+      "4. S1_SUPPORTS if PRED_PASS AND SCHED_ECON_PASS.",
+      "5. S0_FALSIFIES if PRED_FAIL AND SCHED_ECON_FAIL.",
+      "6. S2_MIXED if exactly one of {PRED_PASS, SCHED_ECON_PASS} is true and the other is an explicit FAIL (not AMBIG).",
+      "7. INCONCLUSIVE otherwise (any AMBIG present without a clean pass/fail pair)."
+    ],
+    "measurement_invalid_conditions": "Network unreachable to the frozen universe or oracle hosts; classifier not reproducible from stored raw fields; PC_SYNTHETIC_DYNAMICS power < 0.80; NC_SYNTHETIC_MEMORYLESS false-positive > 0.05; PC_BARRIER_ORACLE or NC_CLEAN_ORACLE misclassified; fewer than 3 barrier-exposed endpoints or fewer than 30 scheduler-stratum barrier events. These are attainability/measurement failures and MUST NOT be reported as S0.",
+    "claim_ceiling": "At most C-WEB-DYNAMICS = EXPERIMENTAL for this barrier sub-thread on this frozen pool/window; S0 additionally bounds (does not reject) the barrier sub-thread. No PRODUCT_CORE promotion."
+  },
+
+  "product_consequence_positive": "If S1_SUPPORTS, the exploration kernel can adopt a mechanical online prior: (a) treat endpoint-constant barriers (persistent 403-challenge, unresolvable transport) as terminal dead-endpoint denials, and (b) spend the remaining budget on rate-limit-aware scheduling (backoff on 429, fresh session on transport error) which recovers target success toward the no-barrier baseline using fewer requests than unconditional retry. This changes the scheduler and dead-end classification in the Web agent.",
+
+  "product_consequence_negative": "If S0_FALSIFIES, barriers on this pool/window are endpoint-constant + persistence and adaptive scheduling provides no request economy. The product decision is then to use a static per-endpoint dead-end denylist and immediate terminal classification, and NOT to invest in an online history model for barrier prediction. This bounds the barrier sub-thread of C-WEB-DYNAMICS without closing the C-WEB-DYNAMICS domain (geometry/timescale/factorization sub-threads remain open).",
+
+  "estimated_cost": {
+    "http_requests_planned": 2500,
+    "http_requests_worst_case": 3420,
+    "http_requests_breakdown": "684 episodes (57 endpoints x 12 sessions) x up to J_max=5; clean endpoints stop at 1; barrier-capable endpoints drive the rest",
+    "compute_hours": 0.5,
+    "storage_mb": 40,
+    "wall_clock_minutes": 40,
+    "model_calls": 0,
+    "browser": false,
+    "credentials": false
+  },
+
+  "expected_information_gain": "High and decision-changing. First falsification-first test on the parent frozen barrier pool that (i) separates endpoint-identity + persistence from schedule/history barrier dynamics with strong identity and memory nulls and a rate-only null, (ii) includes explicit ONSET and RECOVERY transition tasks, (iii) tests separability of barriers from ordinary unavailability, and (iv) directly measures the request economy of an adaptive scheduler against the REQUIRED unconditional-retry baseline. Either branch bounds or advances the barrier sub-thread of C-WEB-DYNAMICS and changes the product scheduler/dead-end policy.",
+
+  "parent_handoff_disposition": "request.json director_mandate.allocation.parent_handoff_disposition = USE. The parent handoff (EXP-PHYSICS-37973239386) is inherited as continuity evidence; its frozen 57-endpoint universe and its observed barrier classes are reused. The Director mandate (PIVOT onto C-WEB-DYNAMICS barrier dynamics) is the binding direction and supersedes the parent's own next_question only where they conflict; no parent-established result is rejected here.",
+
+  "director_mandate_trace": {
+    "action": "PIVOT",
+    "target_claim": "C-WEB-DYNAMICS",
+    "cognitive_reset": true,
+    "parent_handoff_disposition": "USE",
+    "requirement_unconditional_retry_baseline": "satisfied by A_RETRY (arms.A_RETRY)",
+    "requirement_pre_freeze_attainability_certificate": "satisfied; see prereg.md 'Attainability certificate' and freeze_eligibility.measurement_prerequisites",
+    "non_drift_statement": "This experiment addresses exactly the mandate question (onset/recovery of 403-challenge/429/transport barriers, beyond memory/constant null, separable from ordinary unavailability, with adaptive-vs-unconditional-retry economy)."
+  },
+
+  "scope_boundaries": [
+    "Credential-free public HTTP GET only; no authentication, no JavaScript, no DOM rendering, no SPA/GraphQL/WebSocket.",
+    "One stdlib-HTTP client, one collection window, one frozen 57-endpoint universe; rates and classes describe this pool and window, not the Web.",
+    "No new endpoint substitution; no post-outcome endpoint dropping or arm rebalancing.",
+    "No LLM calls, no browser, no credentials.",
+    "Barrier dynamics are tested only through the frozen intrinsic classifier and frozen arms."
+  ],
+
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All branches are arithmetically reachable. S0 is reachable because the census proves endpoint-constant barriers (5 persistent BLOCK_403_CHALLENGE, 1 persistent TRANSPORT_ERROR) that make max(null) skill ceilings explain the data (PRED_FAIL) and make A_ADAPT issue the same 5 requests as A_RETRY (d_Req >= 0, SCHED_ECON_FAIL). S1 is reachable because the census proves within-session RATE_LIMIT_429 transitions (www.djangoproject.com/admin/login CLEAN/RATE_LIMIT_429 alternation; auth0.com CLEAN->429) that a schedule-aware model can exploit (PRED_PASS) and that a waiting adaptive policy can recover with fewer requests (d_Req < 0, SCHED_ECON_PASS). S2_MIXED and INCONCLUSIVE are reachable as intermediate CI configurations. MEASUREMENT_INVALID is reserved for prerequisite/control failure and cannot be produced by a scientific outcome.",
+      "evidence_refs": ["prereg.md:Attainability certificate", "spec.json:falsifier", "spec.json:decision_rule.branch_precedence", "/tmp/opencode/phys379/census.json"]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "The pre-freeze census (14 endpoints, 2 sessions, J=6) reached the frozen universe live and observed 60 BLOCK_403_CHALLENGE, 16 RATE_LIMIT_429, 12 TRANSPORT_ERROR, and clean responses, proving barrier events are reachable and the classifier is executable in this environment. The live oracles (httpbin.org/status/200,200->CLEAN; /status/429->RATE_LIMIT_429; /status/403->barrier) confirm the collection+classifier path. EXECUTE must re-verify network reachability and oracle classifications before collecting; failure yields MEASUREMENT_INVALID.",
+      "evidence_refs": ["prereg.md:Attainability certificate", "/tmp/opencode/phys379/census.json", "spec.json:measurement_validity"]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The four nulls are non-degenerate and mutually distinguishable on the frozen pool because the pool mixes clean endpoints and barrier endpoints, so both classes occur in every held-out fold and pooled balanced accuracy is defined. PC_SYNTHETIC_DYNAMICS shows that when a schedule-dependent effect exists the nulls do NOT sit at the achievable ceiling and M_HISTORY exceeds them; NC_SYNTHETIC_MEMORYLESS shows that when barriers are endpoint-constant the identity/persistence nulls reach the ceiling and M_HISTORY does not exceed them. A design-time directional probe (non-outcome-bearing, no Web data) confirmed this separation: the same leave-one-endpoint-out logistic metric gave SKILL_LL = -0.079 (all 6 seeds <= 0) on the memoryless endpoint-constant plant, i.e. the endpoint-constant null is at the achievable ceiling and history adds nothing (S0 regime), and SKILL_LL = +0.077 (5/6 seeds > 0) on the schedule-dependent plant, i.e. the null is NOT at the ceiling (S1 regime). This establishes that the metric can separate the two regimes rather than being saturated by a ceiling baseline, so both S0 and S1 are reachable through the actual metric.",
+      "evidence_refs": ["spec.json:baselines", "spec.json:positive_control.PC_SYNTHETIC_DYNAMICS", "spec.json:null_control.NC_SYNTHETIC_MEMORYLESS", "prereg.md:Attainability certificate", "/tmp/opencode/phys379/probe_baseline_identifiability.py"]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Two disjoint synthetic controls bracket the pipeline: PC_SYNTHETIC_DYNAMICS requires >= 0.80 power to recover a planted schedule-dependent hazard, and NC_SYNTHETIC_MEMORYLESS requires <= 0.05 false-positive on endpoint-constant i.i.d. data. Two live controls validate the real code path: PC_BARRIER_ORACLE must classify deterministic 403/429/transport oracles as barriers, NC_CLEAN_ORACLE must classify 200/uuid as CLEAN. Sensitivity is thus demonstrated positive and negative, synthetically and live.",
+      "evidence_refs": ["spec.json:positive_control", "spec.json:null_control", "/tmp/opencode/phys379/census.json"]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "A_ADAPT is a bounded deterministic function of (intrinsic response class, attempt index) that returns a valid next action for every class and always terminates within J_max=5; it is structurally executable against every frozen endpoint. EXECUTE's first action is a non-network policy trace proving A_ADAPT terminates and returns a defined action for each class (recorded as a measurement prerequisite), so no treatment arm is structurally incapable of becoming EXECUTABLE. This is a Physics mechanism test, not a SPIDER product-inheritance arm, so no product-liveness substitution is claimed.",
+      "evidence_refs": ["spec.json:frozen_arm_design.arms.A_ADAPT", "prereg.md:Treatment liveness"]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "No pre-existing mutable local fixture, task bank, dataset, or code file is an interpretation dependency. Every interpretation-determining constant (frozen 57-endpoint universe, intrinsic classifier, arm definitions, model feature spec, thresholds delta_SKILL/alpha/margin/power/FP, seeds, branch logic, scheduler strata) is embedded verbatim in spec.json and prereg.md, which the deterministic freezer hashes directly (freeze.json.hashes.spec.json and prereg.md). The collection/analysis code is authored at EXECUTE strictly as a literal realization of those frozen literals and may not introduce or retune any decision-relevant constant; its hash must be recorded in provenance.json for AUDIT. Remote Web responses cannot be frozen. Therefore freeze_artifacts is empty and the binding is NOT_APPLICABLE.",
+      "evidence_refs": ["scripts/freeze_experiment.py:151-157", "research/EXPERIMENT_PACKET.md:49-51"]
+    }
+  },
+
+  "freeze_artifacts": []
+}

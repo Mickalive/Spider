@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-37992957068",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF1_ENDPOINT_CONSTANT_DOMINANCE",
+      "severity": "high",
+      "finding": "The frozen pool is dominated by endpoint-constant barriers: 240 BLOCK_403_CHALLENGE events concentrated in 5 persistent endpoints, 52 TRANSPORT_ERROR events in 1 persistent endpoint, and only 26 RATE_LIMIT_429 events. This matches the pre-freeze census and is a genuine S0-plausible regime, not a measurement failure. The null baselines (B_ENDPOINT_CONST, B_MEMORY_PERSIST) correctly capture this structure."
+    },
+    {
+      "id": "VF2_ONSET_COMPLETELY_UNOBSERVED",
+      "severity": "high",
+      "finding": "ONSET_n = 0 — zero clean-to-barrier transitions were observed in the entire 1254-request run. The central question of whether barrier ONSET is predictable from request history is unanswerable on this pool/window. The frozen decision rule's primary PRED_PASS/PRED_FAIL branch depends only on the pooled next-request task (which has 1254 rows), but the substantive scientific question about onset dynamics cannot be evaluated."
+    },
+    {
+      "id": "VF3_RECOVERY_SKILL_NEGATIVE",
+      "severity": "medium",
+      "finding": "RECOVERY_SKILL_LL = -0.1568 (CI95 [-0.258, -0.065]) — the M_HISTORY model performs WORSE than the best null at predicting barrier-to-CLEAN transitions. This is the opposite of the hypothesized adaptive recovery signal and actively contradicts the H1_predictability sub-hypothesis for recovery."
+    },
+    {
+      "id": "VF4_SCHEDULER_ECONOMY_IS_MECHANICAL_NOT_PREDICTIVE",
+      "severity": "high",
+      "finding": "SCHED_ECON_PASS (d_Req = -2.48, CI95 [-3.39, -1.69]) is a mechanical consequence of frozen arm definitions on endpoint-constant barriers, not demonstrated predictive scheduling. A_ADAPT stops immediately on BLOCK_403_CHALLENGE and UNAVAILABLE_403 (treating them as terminal), while A_RETRY retries up to J_max=5. Since barriers are endpoint-constant (persist across all retries), A_ADAPT issues ~1.27 requests vs A_RETRY ~3.76 purely by definition. The success rates are identical (0.333), and success does not approach the no-barrier baseline (0.25). This economy exists even under H0 and does not require any history-based prediction."
+    },
+    {
+      "id": "VF5_ENDPOINT_IDENTITY_IS_THE_ONLY_SIGNAL",
+      "severity": "high",
+      "finding": "M_HISTORY_NOID (endpoint-identity ablation) SKILL_LL = -0.1677 (CI95 [-0.208, -0.125]) — strongly negative. The full M_HISTORY SKILL_LL = +0.00514 is entirely driven by the endpoint_idx categorical features. Without endpoint identity, the model adds negative skill beyond the rate/memory nulls. This confirms the barrier dynamics on this pool are endpoint-constant, not schedule-dependent."
+    },
+    {
+      "id": "VF6_SEPARABILITY_SKILL_MISLEADING",
+      "severity": "medium",
+      "finding": "SEPARABILITY_SKILL_LL = 0.0206 (CI95 [0.0148, 0.0276]) appears positive for separating barrier_set from ordinary_unavailability_set. However, B_ENDPOINT_CONST achieves balanced accuracy 0.9984 (identical to M_HISTORY) on this task — the separability is entirely due to endpoint-constant barrier labels (BLOCK_403_CHALLENGE vs UNAVAILABLE_403/OTHER_NONBARRIER map to distinct endpoint clusters), not history-based discrimination."
+    },
+    {
+      "id": "VF7_CONTROLS_AND_PREREQUISITES_ALL_PASS",
+      "severity": "informational",
+      "finding": "All frozen controls and measurement-validity prerequisites pass: PC_SYNTHETIC_DYNAMICS power=0.98 (>0.80), NC_SYNTHETIC_MEMORYLESS FPR=0.01 (<0.05), PC_BARRIER_ORACLE and NC_CLEAN_ORACLE all correctly classified, classifier reproducible (0/1254 mismatches), stratum floors met (11 barrier-exposed endpoints, 318 barrier events). No MEASUREMENT_INVALID condition is triggered."
+    },
+    {
+      "id": "VF8_CENSUS_ARTIFACT_MISSING_FROM_REPO",
+      "severity": "low",
+      "finding": "The pre-freeze reachability census /tmp/opencode/phys379/census.json cited in spec.json for the attainability certificate is not present in the repository (hash=null in provenance). The run independently verifies attainability floors from observed data (O10_STRATUM_FLOORS), so this is a provenance gap, not a validity threat."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B_ENDPOINT_CONST",
+      "finding": "Held-out log-loss = 0.07115, balanced accuracy = 0.9522. This is the strongest null and captures nearly all explainable variance. M_HISTORY only improves log-loss by 0.00514 nats (7.2% relative), far below the delta_SKILL=0.05 threshold. The endpoint-constant structure dominates the data."
+    },
+    {
+      "baseline_id": "B_MEMORY_PERSIST",
+      "finding": "Held-out log-loss = 0.23608, balanced accuracy = 0.8438. Captures persistence but is weaker than B_ENDPOINT_CONST because barriers are endpoint-constant rather than session-persistent with state transitions."
+    },
+    {
+      "baseline_id": "B_RATE_ONLY",
+      "finding": "Held-out log-loss = 0.51042, balanced accuracy = 0.5820. Very weak — pure rate/burst/spacing features without endpoint identity or memory have minimal predictive power, consistent with the absence of schedule-dependent 429 onset in this window."
+    },
+    {
+      "baseline_id": "B_CONSTANT",
+      "finding": "Held-out log-loss = 0.56950, balanced accuracy = 0.5. Global majority baseline, substantially worse than identity/persistence nulls as expected given class imbalance."
+    },
+    {
+      "baseline_id": "M_HISTORY_NOID",
+      "finding": "Held-out log-loss = 0.23885, SKILL_LL = -0.1677 vs max(nulls). Without endpoint identity, the model performs WORSE than the best null (B_ENDPOINT_CONST at 0.07115). This is a critical negative ablation confirming that schedule/history features add no skill beyond endpoint identity."
+    }
+  ],
+  "recomputed_metrics": {
+    "SKILL_LL": 0.0051411334373070855,
+    "SKILL_LL_CI95": [-0.00933845159088395, 0.019388300216115453],
+    "SKILL_LL_NOID": -0.16769865144813678,
+    "SKILL_LL_NOID_CI95": [-0.20766734593518785, -0.12518679747297579],
+    "SKILL_BA": 0.004273504273504258,
+    "ONSET_SKILL_LL": null,
+    "ONSET_CI95": [null, null],
+    "ONSET_n": 0,
+    "RECOVERY_SKILL_LL": -0.15683934234527497,
+    "RECOVERY_CI95": [-0.2578014307332254, -0.06481082932141478],
+    "RECOVERY_n": 13,
+    "SEPARABILITY_SKILL_LL": 0.020645683265606084,
+    "SEPARABILITY_CI95": [0.014759963514801732, 0.027601150356357802],
+    "SEPARABILITY_n": 753,
+    "d_Req": -2.4848484848484853,
+    "d_Req_CI95": [-3.3900752464971458, -1.6916514227642279],
+    "d_Succ": 0.0,
+    "ADAPT_abs_requests": 1.2727272727272727,
+    "RETRY_abs_requests": 3.757575757575758,
+    "ADAPT_success": 0.3333333333333333,
+    "RETRY_success": 0.3333333333333333,
+    "endpoint_no_barrier_success": 0.25,
+    "n_barrier_exposed_endpoints": 11,
+    "n_scheduler_barrier_events": 318,
+    "branch": "INCONCLUSIVE",
+    "pred_disposition": "PRED_AMBIG",
+    "sched_disposition": "SCHED_ECON_PASS",
+    "measurement_invalid": false
+  },
+  "claim_ceiling": "C-WEB-DYNAMICS barrier sub-thread remains at most EXPERIMENTAL on this frozen 57-endpoint pool and collection window. The evidence favors the S0 regime (barriers are endpoint-constant + persistence-bound, adaptive scheduling provides no predictive economy beyond mechanical arm-definition differences) but does not reach the frozen PRED_FAIL threshold (SKILL_LL <= 0 with HI < 0.05). No product policy is licensed. The scheduler economy (SCHED_ECON_PASS) is a mechanical artifact of A_ADAPT stopping on persistent barriers while A_RETRY retries, not evidence of predictive barrier dynamics. ONSET predictability is unevaluated (zero events). RECOVERY predictability is actively contradicted (negative skill).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-37992957068/result.json (metrics, controls, observations O1-O11)",
+    "research/experiments/EXP-PHYSICS-37992957068/derived/metrics.json (core, core_noid, branch, scheduler_stratum, transition_detail, separability_detail)",
+    "research/experiments/EXP-PHYSICS-37992957068/raw/collection_meta.json (class_histogram, status_histogram, classifier_recomputation_mismatches=0)",
+    "research/experiments/EXP-PHYSICS-37992957068/raw/arm_assignment.json (frozen block-randomized assignment, seed 37992957068)",
+    "research/experiments/EXP-PHYSICS-37992957068/raw/policy_trace.json (A_ADAPT terminates within J_max, all classes defined)",
+    "research/experiments/EXP-PHYSICS-37992957068/raw/oracles.json (all 10 oracle requests pass)",
+    "research/physics/exp_37992957068_lib.py (frozen classifier, feature pipeline, CV, bootstrap, decision logic)",
+    "research/physics/exp_37992957068_run.py (collection, analysis, synthetic controls)",
+    "research/physics/exp_37992957068_finalize.py (result/report/provenance assembly)"
+  ],
+  "unresolved": [
+    {
+      "id": "UA1_ONSET_MECHANISM_UNANSWERED",
+      "question": "ONSET events (clean-to-barrier transitions) were completely absent on this pool/window. Which endpoints, if any, exhibit schedule-dependent onset under different rates/spacing/longer sequences? A targeted probe on the 4 RATE_LIMIT_CAPABLE endpoints (djangoproject/admin, djangoproject/accounts, auth0.com, search.brave.com, community.home-assistant.io) with higher request rates and longer sequences would be needed to evaluate onset predictability."
+    },
+    {
+      "id": "UA2_SCHEDULER_ECONOMY_REAL_VS_MECHANICAL",
+      "question": "The SCHED_ECON_PASS is real per the frozen metric but mechanistically explained by arm definitions on endpoint-constant barriers. To distinguish mechanical from predictive economy, a follow-up design must either (a) condition on barrier-exposed stratum where barriers are demonstrably non-persistent (recoverable 429s), or (b) compare A_ADAPT against a stronger baseline that also stops on persistent barriers (e.g., A_RETRY_STOP_ON_PERSISTENT)."
+    },
+    {
+      "id": "UA3_GENERALIZATION_WINDOW",
+      "question": "Do the observed barrier classes (persistent 403-challenge, persistent transport error, transient 429) and the complete absence of ONSET persist across collection windows and source IPs? This single-window result cannot distinguish stable structure from point-in-time artifact (V4_SINGLE_WINDOW_AND_CLIENT)."
+    },
+    {
+      "id": "UA4_CONSTRUCT_BOUNDARY",
+      "question": "The credential-free GET instrument cannot observe barrier dynamics on JavaScript-rendered, authenticated, SPA, or WebSocket substrates. The real-Web barrier dynamics for SPIDER's eventual exploration target may differ materially."
+    },
+    {
+      "id": "UA5_NEGATIVE_RECOVERY_SKILL_INTERPRETATION",
+      "question": "RECOVERY_SKILL_LL = -0.157 (n=13) indicates M_HISTORY is worse than the best null at predicting barrier-to-CLEAN transitions. Is this a finite-sample artifact (only 13 events), or does the model's endpoint-identity features actively mislead on the few recovery transitions that occur? A bootstrap-per-transition analysis would clarify."
+    }
+  ]
+}
