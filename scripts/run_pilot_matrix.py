@@ -11,7 +11,7 @@ from pathlib import Path
 
 from spider.pilot_portal import DATA
 
-ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER")
+ARMS = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER", "CACHE")
 
 
 def make_plan(seed: int = 20261011, replicates: int = 1) -> list[dict]:
@@ -42,7 +42,7 @@ def main():
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--execute", action="store_true")
     ap.add_argument("--allow-model-charges", action="store_true")
-    ap.add_argument("--max-trials", type=int, default=16)
+    ap.add_argument("--max-trials", type=int, default=20)
     ap.add_argument("--provider", choices=("google", "browser-use"), default="google")
     ap.add_argument("--model")
     ap.add_argument("--seeded-fixture", action="store_true")
