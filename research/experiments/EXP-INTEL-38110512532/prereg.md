@@ -61,6 +61,18 @@ but never froze; blocked by the shared design-review model routing failure
 exit 1, retryable=false). Its spec/prereg are unfrozen templates only; this packet
 is a fresh design under the same mandate, not an adoption of sibling files.
 
+**This experiment's own prior attempt** carries the identical signature
+(`model_design.json` success, model `opencode/big-pickle`, exit 0; then
+`model_design_review.json` failure, model `opencode/exo-free`, exit 1,
+category=substantive; `failure.json` stage=design, fingerprint
+`3b9ff5e4e9e73f23e368efb4`, control_revision
+`bfa3c519a2a0e6fa67418a49021072b9b7d8b316fb68952420df800a2e6c6801`,
+retryable=false). Per the mandate and the Director's `agent_priors_used`, four lanes
+failed review within minutes with this identical signature, i.e. a shared
+control-plane review-model routing fault, **not** a scientific design failure; the
+current re-dispatched DESIGN is the repair. The prior attempt never produced
+`freeze.json`, so no frozen file of this experiment is being modified.
+
 **Director mandate** (in request.json#director_mandate, action CONTINUE,
 parent_handoff_disposition **SUPERSEDE**, cognitive_reset=true, claim
 C-LLM-INHERIT): the strategic question quoted verbatim in section 3 is binding
@@ -154,12 +166,13 @@ investigate, do not proceed; see section 11).
   HTTP 404 (VF-02, established); the same-repo same-quant split shards are used and
   the deviation is recorded (packaging, not model, substitution).
 - Download at EXECUTE via `urllib` GET on the `resolve/main` URLs (probe P-4: all
-  return 302 to the Xet CDN today); verify sha256 (streaming) against the manifest;
+  resolve via redirect to the Xet CDN; final HTTP 206 with Content-Length matching
+  the manifest); verify sha256 (streaming) against the manifest;
   reuse existing files if and only if the hash matches. Fresh-runner note: the GGUF
-  cache was absent on the DESIGN re-dispatch, so EXECUTE must not assume
+  cache was absent on this DESIGN run, so EXECUTE must not assume
   `/tmp/opencode/gguf/` is populated — always verify-then-download.
 - Runtime prerequisites are NOT preinstalled on a fresh runner. Frozen setup recipe
-  (first-hand verified on the DESIGN re-dispatch): `pip install playwright==1.63.0`,
+  (first-hand verified on this DESIGN run): `pip install playwright==1.63.0`,
   then `CMAKE_ARGS=-DLLAMA_NATIVE=off pip install --no-binary llama-cpp-python
   llama-cpp-python==0.2.90`. The `--no-binary` sdist build produces a glibc-linked
   `libllama.so` (~56 s here); the prebuilt abetlen `linux_x86_64` CPU wheel is
@@ -167,8 +180,8 @@ investigate, do not proceed; see section 11).
   Chrome is supplied via `executable_path`, so `playwright install` is not required.
 - Harness load path: `Llama(model_path=paths[0], n_ctx=2048, n_threads=4,
   verbose=False, chat_format="qwen", seed=42)`; llama.cpp auto-locates the
-  companion shard from the `-NNNNN-of-NNNNN` naming pattern (probe P-5, re-verified
-  on DESIGN re-dispatch: 7B load 0.671 s, 3B load 0.372 s; load time is
+  companion shard from the `-NNNNN-of-NNNNN` naming pattern (probe P-5, first-hand
+  this run: 7B load 0.513 s, 3B load 0.428 s; load time is
   host-state-dependent, while the sha256 and grammar-valid emission pins are stable).
 - The provisioning receipt to record at EXECUTE: URLs, byte sizes, sha256,
   load_time_s, load_status, chat_format, n_ctx, n_threads, llama_seed — per cell in
@@ -299,19 +312,20 @@ Measurement-validity commitments (full list in `spec.json#measurement_validity`)
 
 ## 10. Pre-freeze satisfiability probes (DESIGN-time, non-outcome-bearing)
 
-All probes were re-run and re-verified on the DESIGN re-dispatch (fresh runner:
-the pinned packages were re-installed from the frozen versions and the GGUF files
+All probes were re-run and re-verified first-hand on the current DESIGN runner
+(the pinned packages were re-installed from the frozen versions and the GGUF files
 re-downloaded with streaming sha256 verification against the manifest). Raw probe
-values are recorded here as frozen expectations for EXECUTE/AUDIT.
+values are recorded here as frozen expectations for EXECUTE/AUDIT. Every P-2/P-3/P-5
+numeric pin below was reproduced exactly on this runner.
 
 | probe | what | result (evidence) |
 |---|---|---|
-| P-0 stack | fresh runner: python 3.12.15, 4 cores, 15 GB RAM, `/usr/bin/google-chrome` present; dependencies NOT preinstalled — `llama-cpp-python 0.2.90` built from sdist (`--no-binary`, glibc `libllama.so`, ~56 s) and `playwright 1.63.0` installed, both import-verified; prebuilt abetlen musl wheel rejected (`libc.musl-x86_64.so.1` missing) | PASS |
+| P-0 stack | current runner: python 3.12.15, 4 cores, ~15 GB RAM, `/usr/bin/google-chrome` present; dependencies NOT preinstalled — `llama-cpp-python 0.2.90` built from sdist (`--no-binary`, `CMAKE_ARGS=-DLLAMA_NATIVE=off`, glibc `libllama.so`) and `playwright 1.63.0` installed, both import-verified; prebuilt abetlen musl wheel rejected (`libc.musl-x86_64.so.1` missing) | PASS |
 | P-1 grammar | `LlamaGrammar.from_string(frozen gbnf_grammar)` compiles; fields restrict to click/answer x selector/text | PASS |
-| P-2 configs | deterministic transcription of CFG-TREAT/COMP/CONTROLS; sha256 988751c6..., 4a2ef4be..., 14589f7c...; TREAT top-level diff = {fixture_id, prompts, source}; COMP diff = {fixture_id, source}; leakage scoped to prompts.system = none | PASS (hashes pinned section 4) |
-| P-3 controls | Appendix-A driver through the REAL `run_episode` on the served page: oracle_success_rate=1.0 (5/5); NC=[0.0,0.0]; RANDOM=[1.0, 0.2], vector [True,False,False,False,False]; `raw/control_episodes.json` schema conforms | PASS |
-| P-4 URLs | 7B shard1/shard2 resolve -> Xet CDN (HEAD final 200; Content-Length 3993201344/689872288 matches manifest); 7B single-file 404 (documented, VF-02); 3B resolve -> Xet CDN (final 200; 2104932768) | PASS (VF-02 intact) |
-| P-5 load+liveness | GGUF sha256 all match manifest (fresh download on DESIGN re-dispatch, streaming verify: dfce12e3..., 539cf93f..., 626b4a66...); `load_model` 7B 0.671 s (split-shard auto-locate), 3B 0.372 s (load time host-state-dependent); under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action":"click","selector":"#reveal-btn"}` (M-7B emit 10.4 s, M-3B emit 4.6 s) at step 0 pre-reveal — mechanism alive, task outcome not measured | PASS |
+| P-2 configs | deterministic transcription of CFG-TREAT/COMP/CONTROLS; sha256 988751c6.../4491 B, 4a2ef4be.../4362 B, 14589f7c.../4366 B; TREAT top-level diff vs template = {fixture_id, prompts.system, source}; COMP diff = {fixture_id, source} (COMP `prompts.system` byte-identical to the parent anchor); leakage scoped to prompts.system = none | PASS (hashes pinned section 4) |
+| P-3 controls | the EXACT frozen Appendix-A driver (sha256 fdbcdc28..., 4637 B) over the EXACT CFG-CONTROLS bytes, through the REAL `run_episode` on the served page: `oracle_success_rate`=1.0 (5/5); NC=[0.0,0.0]; RANDOM=[1.0, 0.2], success_vector [True,False,False,False,False] — exact reproduction of the pinned values; `raw/control_episodes.json` schema conforms | PASS |
+| P-4 URLs | streaming GET follows redirects to the Xet CDN: 7B shard1 final 206 (Content-Length 3993201344, matches manifest), 7B shard2 final 206 (689872288), 3B single-file final 206 (2104932768); 7B single-file 404 (documented, VF-02 intact) | PASS |
+| P-5 load+liveness | GGUF sha256 all match manifest after fresh download (streaming verify: 626b4a66... 3B in 7.2 s, dfce12e3... 7B shard1 in 13.4 s, 539cf93f... 7B shard2 in 2.6 s); `load_model` 7B 0.513 s (split-shard auto-locate), 3B 0.428 s (load time host-state-dependent); under P-TREAT-GOAL-SCHEMA both models emit grammar-valid `{"action": "click", "selector": "#reveal-btn"}` (M-7B 9.79 s / 17 tokens, M-3B 4.19 s / 13 tokens) at step 0 pre-reveal — mechanism alive, task outcome not measured | PASS |
 
 The byte-level diff is verified by re-deriving each config from the frozen
 template and exercising the pinned sha256 from section 4 as the authoritative
@@ -338,7 +352,8 @@ preflight/controls_driver.py             <- Appendix A bytes (sha256 fdbcdc28...
 1. **Generate + verify configs** (P-2 rule, section 4): write the five config
    files; verify each sha256 equals the pinned value; mismatch -> STOP (do not
    proceed; record in `raw/` and mark BLOCKED, not a scientific result).
-2. **Write controls driver** from Appendix A verbatim; verify sha256
+2. **Write controls driver** from Appendix A verbatim: the fenced content plus
+   exactly one trailing newline (4637 bytes); verify sha256
    `fdbcdc28f9f4231278ac4ce4dca2593acbf9f0205cd5dbbad11b5a160bb8f5bb`.
 3. **Prep models**: for the candidates needed, download GGUF(s) to
    `/tmp/opencode/gguf/` (reuse if sha256 matches the manifest) — 7B: shard pair;
@@ -401,8 +416,10 @@ failures are measurement-validity events per rules 1-2.
 ## Appendix A — preflight controls driver (FROZEN text)
 
 sha256 of the file bytes below: `fdbcdc28f9f4231278ac4ce4dca2593acbf9f0205cd5dbbad11b5a160bb8f5bb`
-(4637 bytes). EXECUTE writes this file verbatim (fenced content only, no leading/
-trailing whitespace beyond the fence) as `<experiment_dir>/preflight/
+(4637 bytes). **Exact byte definition (verified at DESIGN): the file is the fenced
+content below (the block between, but excluding, the ```` ```python ```` and
+```` ``` ```` fence lines) followed by exactly one trailing `\n`.**
+EXECUTE writes these bytes verbatim as `<experiment_dir>/preflight/
 controls_driver.py`, verifies the sha256, then runs it. It reuses frozen harness
 functions; it adds ONLY the repaired served-page navigation and the oracle canary;
 it performs no model inference.
