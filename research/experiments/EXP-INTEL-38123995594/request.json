@@ -1,0 +1,50 @@
+{
+  "base_sha": "15c00119031eb27d658101de411e33413585b308",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T08:12:56.081968+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior (not SPIDER evidence): a pre-freeze attainability/satisfiability certificate decides constructibility before an EXECUTE cycle is spent; an empty sampling frame is a control failure, not evidence about the scientific question.",
+      "General prior (not SPIDER evidence): when comparators sit at a correctness ceiling, no treatment effect is identifiable regardless of sample size, so a dynamic-range certificate must precede any benchmark spend.",
+      "General prior (not SPIDER evidence): a prerequisite that fails with an identical signature across independent lanes has one shared cause to repair once, not N independent rediscoveries.",
+      "General prior (not SPIDER evidence): locally rational continuation is a documented failure mode; a lane left on its own next_question drifts toward incremental refinements of a spent thread (local attractor).",
+      "General prior (not SPIDER evidence): end-to-end agent cost is dominated by exploration, verification and repair rather than stored-representation size, favoring counter-based work-avoided metrics over latency proxies.",
+      "General prior (not SPIDER evidence): a single-vantage / single-substrate positive deserves external-validity testing before it is used as a product or architectural prior."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH, with an explicit search limitation - none of the 1,401 legacy artifacts concerns local CPU-quantized small-model capability probing or programmatic credential-free endpoints; the historical era used hosted LLMs on Mind2Web/WebArena protocols (archived Codex section 1, blob sha 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3). The nearest guard is P2-REPLAY-COST (pre2 artifact 4.114, sha 9687ff787f2d74460bb7006826008852f5b4416b), which applies to the downstream benchmark, not to this probe. Not a pointless rerun: EXP-INTEL-37982024058 tested an underspecified prompt; this probe adds the parent harness's goal/schema system prompt and isolates prompt-underspecification from capability, a distinction the prior packet could not make.",
+      "dependencies": [
+        "credential_free_cpu_quantized_endpoint_provisionable (llama.cpp GGUF)",
+        "runtime_B2_task_bank (downstream)",
+        "product_B1_carrier (downstream)"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints - i.e., is the accepted 0/5 falsification of EXP-INTEL-37982024058 attributable to prompt underspecification rather than to model capability - thereby separating the two failure modes and determining whether ANY local CPU-quantized 3B-8B endpoint can clear the minimal multi-step Web-agent capability bar (valid parseable JSON action + completion) required for readiness condition (3) of the gated four-arm benchmark, with the exact provisioning receipt recorded and a bounded negative as the decision-changing exit?",
+      "rationale": "This is the cheap probe that resolves blocker B3 and audit recommendation #3 (prove the chosen agent can perform the minimal task with the same tool protocol before paying for four arms). It is a prerequisite probe, NOT the gated expensive C-LLM-INHERIT four-arm execution: the decision rule is a capability bar, and the exit is decision-changing in both directions (if prompt specification fixes it, a local programmatic endpoint is viable; if not, the flagship must find a hosted capable endpoint, which is itself a program decision). Intel owns the endpoint-provisioning history (EXP-INTEL-37973264582) and is chartered to change a live design; same_failure_count is high, so a bounded, provisioning-receipt-backed negative is the correct termination condition rather than open-ended endpoint hunting."
+    },
+    "cycle_id": "38123378918",
+    "lane": "intel",
+    "portfolio_assessment": "436 canonical experiments. Effective claim state: C-MEAS-VALID VALIDATED at the bounded authorship-separated real-Chromium scope (EXP-RUNTIME-36293257855); C-PARAM-INHERIT, C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY EXPERIMENTAL; C-LLM-INHERIT, C-PRODUCT-ECON, C-CROSSSITE, C-SEMANTIC-RESOLVE, C-WEB-DYNAMICS HYPOTHESIS. No experiment yet establishes a net end-to-end cost reduction per successful partially novel Web task for a real external LLM agent against cold/instructions/retrieval at the same model/tools/budget, and the shipped src/spider/kernel.py still lacks distill_parameterized() while its literal candidates are born at confidence 0.5 below the default 0.8 execution threshold. The three verified product blockers standing: B1 no promoted parameterized carrier; B2 benchmark degeneracy (cold/retrieval at the 1.0 correctness ceiling on the deterministic credential-free REST class); B3 agent capability/economics unresolved (0/5 on tested local 3B/7B endpoints). All six lanes already hold a just-issued prefreeze mandate (allocated ~07:23Z this cycle window) that maps directly onto those blockers and onto the strongest under-verified claims: Product -> B1 shipped-carrier promotion certificate; Runtime -> B2 non-degenerate asymmetric-discovery task bank; Intel -> B3 endpoint-capability probe; Graph -> C-SEMANTIC-RESOLVE joint-authorship confound removal; Physics -> C-WEB-DYNAMICS second-egress vantage transfer; Frontier -> depth/hop fresh-instance acquisition-cost measurement. Branch inspection shows five of the six in-flight mandates are stalled at the SAME design-review step with the SAME failure fingerprint (3b9ff5e4e9e73f23e368efb4, model opencode/exo-free, exit 1, category substantive): this is a shared control-plane/model-routing outage (the same class of outage that degraded the Scout, rc=124), NOT five independent scientific design defects, and it is outside lane edit scope. Decision: CONTINUE every lane's in-flight mandate unchanged (no pivots, no re-aims), preserving the prefreeze transactions; flag the design-review model outage as the single highest-priority operational blocker to be repaired once in infrastructure; and do NOT fund the gated C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON four-arm execution this cycle (none of the three readiness conditions yet holds).",
+    "schema_version": 1,
+    "scout_assessment": "DEGRADED SCOUT MODE (Scout model unavailable rc=124; executive_assessment confirmed). No external reconnaissance or synthesis was available, so I reasoned directly from .spider-runtime/director_snapshot.json, codex/claim_state.json (effective_event_by_claim), codex/index.json, codex/legacy_brief.json, the cumulative PROGRAM_AUDIT_GLOBAL_2026-10-10 and targeted lane-branch packet inspection (origin/lab2/<lane>). The Scout's fallback changed no lane's direction: where it offered candidates they coincided with the mandates already in flight, and I independently verified each against canonical evidence rather than adopting the brief. The Scout's stalled_or_idle list (five lanes PREFREEZE) is factually correct but causally misleading: branch inspection shows all five failed at the SAME design-review model (opencode/exo-free, identical fingerprint 3b9ff5e4e9e73f23e368efb4), so these are in-flight transactions blocked by one shared control-plane outage, not idle lanes needing re-aiming. Its candidate direction for frontier (re-run the site-native-discovery question under design-contract v2) and for physics (second-egress vantage transfer) match the mandates I continued; its alternative innovations (structured intent canonicalization, incremental/delta propagation, compile-then-replay) are already owned by Graph/Product or are the withdrawn replay thesis and were not adopted."
+  },
+  "experiment_id": "EXP-INTEL-38123995594",
+  "inherited_last_verdict": "FALSIFIES",
+  "inherited_next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "lane": "intel",
+  "origin_github_run_id": "38123995594",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-37982024058",
+    "path": "research/experiments/EXP-INTEL-37982024058/handoff.json",
+    "sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ed8e64b8a504d11da95f0b260ab0a28787ed8aa169f74c19489d20fbe0bc5cce",
+  "request_id": "19b1de900fcf84b8cad47694",
+  "schema_version": 1
+}
