@@ -13,6 +13,7 @@ import asyncio
 import json
 import random
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from spider.agent_bridge import AgentBridge
@@ -193,6 +194,17 @@ def trial(task: PublicTask, arm: str, replicate: int, memory: Path | None,
     }
 
 
+def confirmed_family_ready(path: Path, family: str) -> bool:
+    """Never spend model/browser money against an unsupported public substrate."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        checked = datetime.fromisoformat(data["checked_at"]).astimezone(timezone.utc)
+    except (KeyError, TypeError, ValueError):
+        return False
+    age = (datetime.now(timezone.utc) - checked).total_seconds()
+    return 0 <= age <= 86400 and data.get("family_ready", {}).get(family) is True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["plan", "probe", "learn", "trial"], default="plan")
@@ -200,6 +212,7 @@ def main():
     ap.add_argument("--id", dest="identifier")
     ap.add_argument("--arm", choices=ARMS + (STAGEHAND_ARM,))
     ap.add_argument("--memory-path", type=Path)
+    ap.add_argument("--readiness-file", type=Path, help="required live per-family readiness probe for all paid workflows")
     ap.add_argument("--provider", choices=["google", "browser-use"], default="google")
     ap.add_argument("--model")
     ap.add_argument("--replicate", type=int, default=0)
@@ -215,7 +228,8 @@ def main():
         payload = {"status": "PLAN_ONLY_NO_COST", "trials": rows,
                    "count": len(rows), "strongest_baseline": "DIRECT_API"}
     elif args.mode == "probe":
-        payload = {"status": "EXTERNAL_READ_ONLY_NO_MODEL", "results": []}
+        payload = {"status": "EXTERNAL_READ_ONLY_NO_MODEL", "results": [],
+                   "checked_at": datetime.now(timezone.utc).isoformat()}
         for task in allowlisted_tasks("holdout"):
             try:
                 value = compiled_result(task)
@@ -226,12 +240,18 @@ def main():
             except Exception as exc:
                 payload["results"].append({"id": f"{task.family}:{task.identifier}",
                                            "match": False, "error": type(exc).__name__ + ": " + str(exc)})
-        payload["all_match"] = all(item["match"] for item in payload["results"])
+        payload["family_ready"] = {
+            family: all(item["match"] for item in payload["results"] if item["id"].startswith(family + ":"))
+            for family in TRAIN
+        }
+        payload["all_match"] = all(payload["family_ready"].values())
     elif args.mode == "learn":
         if not args.memory_path or not args.family:
             ap.error("learn requires --family and --memory-path")
         if not args.allow_model_charges:
             ap.error("live Browser Use learning requires --allow-model-charges")
+        if not args.readiness_file or not confirmed_family_ready(args.readiness_file, args.family):
+            ap.error("paid learning requires fresh PASS readiness for this family; run --mode probe first")
         payload = learn(args.family, args.memory_path, args.provider, args.model)
     else:
         if not args.family or not args.identifier or not args.arm:
@@ -239,6 +259,9 @@ def main():
         task = PublicTask(args.family, args.identifier)
         if task.identifier not in HOLDOUT[task.family]:
             ap.error("trial must use a held-out identifier")
+        if args.arm not in ("COMPILED", "DIRECT_API"):
+            if not args.readiness_file or not confirmed_family_ready(args.readiness_file, args.family):
+                ap.error("paid trial requires fresh PASS readiness for the family; run --mode probe first")
         if args.arm not in ("COMPILED", "DIRECT_API") and not args.allow_model_charges:
             ap.error("a live model or fallback requires --allow-model-charges")
         if args.arm == STAGEHAND_ARM and not args.allow_browserbase_charges:
