@@ -22,6 +22,14 @@ python -m pip install browser-use
 uvx browser-use install
 ```
 
+Generate a **matched, randomized four-arm plan without invoking any model or spending money**:
+
+```bash
+PYTHONPATH=src python scripts/run_pilot_matrix.py --output /tmp/spider-raw.jsonl
+```
+
+To actually execute its 16 task/arm combinations, add `--execute --allow-model-charges`, a provider key, and an explicit `--max-trials` cap. The generated `.plan.json` is retained. The optional `--seeded-fixture` arm is only a hand-built upper bound, not autonomous discovery. The resulting raw traces are intentionally rejected by the economic scorer until all cost components can be independently priced.
+
 To use a real agent (not executed automatically by CI):
 
 ```bash
