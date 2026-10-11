@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-38164607941",
-  "last_experiment_id": "EXP-INTEL-37982024058",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-38164607941",
   "last_verdict": "FALSIFIES",
   "continue_immediately": false,
-  "next_question": "Would supplying the task goal/schema in the system prompt (as the parent harness's SYS prompt did) convert the step-0 reveal-click into a full click-then-answer completion for M-7B-QWEN or M-3B-QWEN under the same credential-free CPU-quantized constraints?",
+  "next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
   "promotion_ready": false,
-  "consecutive_failures": 34,
-  "updated_at": "2026-10-11T19:49:55.554714+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "b2aee1adb07ba2e5aaa5096cd5ca3b7c630398f600ce33210320321c882d1a55",
-  "same_failure_count": 15,
-  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
-  "last_failure_control_revision": "6f87fb0b4593d1c2453bb9ba49117144028937f397af23b5b39bf3d3d73eb552"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-11T21:04:26.666299+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "edb7898856cc8dd9ea5a65f44468358cf780972faf0a58ddaf558d4f2f606f74",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
