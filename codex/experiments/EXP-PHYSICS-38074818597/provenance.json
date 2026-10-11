@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "lane": "physics",
+  "github_run_id": "38117210627",
+  "github_run_attempt": "1",
+  "origin_github_run_id": "38074818597",
+  "git_sha": "d77b4f54e90ef4af8aff5b1cc991a00a0c73374f",
+  "git_branch": "lab2/physics",
+  "base_sha": "176ab633ebcd2e066f6c21701a591faf0e128d18",
+  "recorded_at": "2026-10-11T06:53:46.336949+00:00",
+  "frozen_inputs": {
+    "request.json": "b692e03b3043584a2fa4118591d3b8a6a1c9998db07598969e6860cdb2c687c4",
+    "spec.json": "ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd",
+    "prereg.md": "4a76861ec39b0155aa3b36df139af2077f590735633b49352f8f66ca7033d61b",
+    "freeze.json": "47f1589c336740545313e40589e66138ea70d814c7ac4e43c26783e5c387f61a",
+    "design_review.json": "4e59fb3e4701c4d4f785efca7c614c037ec4e01aaa01532fb330e1de9a04d2fe"
+  },
+  "frozen_artifact_hashes": {},
+  "code": {
+    "run_script": {
+      "path": "research/physics/exp_38074818597_run.py",
+      "sha256": "ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38"
+    },
+    "finalize_script": {
+      "path": "research/physics/exp_38074818597_finalize.py",
+      "sha256": "52f16bcc18a95334eb82bedbcfaa52fcc5956ba5f80c3456ffb91a9d7ce29133"
+    },
+    "lib": {
+      "path": "research/physics/exp_38074818597_lib.py",
+      "sha256": "c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e"
+    }
+  },
+  "dataset": {
+    "type": "frozen_web_endpoint_universe",
+    "n_endpoints": 57,
+    "source": "verbatim endpoints of EXP-PHYSICS-37992957068 (inherited from EXP-PHYSICS-37973239386); used unchanged. EXECUTE may not substitute, add to, or drop endpoints.",
+    "endpoints_sha256": "24eaabd8cdb8861dad488bc54a3e6af66a60c0a62637e8383872bc7a67fda98c"
+  },
+  "raw_evidence": {
+    "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl": "a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/oracles.jsonl": "b8784f582159d48ec6d74f9065f877f268244af48c8f74381be1158f1ac56fed",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/induced_probe.json": "d8820a52c61c05f909b03d36873da75865f2ceebc0821d05d478ac07ae824f63",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/collection_meta.json": "b6727e7790cffc1c9bd20559aec404c652edff33c0505f77c248c34ac27e7945"
+  },
+  "environment": {
+    "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "implementation": "CPython",
+    "numpy_imported": false
+  },
+  "commands": [
+    "python3 research/physics/exp_38074818597_run.py --seed 38074818597",
+    "python3 research/physics/exp_38074818597_finalize.py"
+  ],
+  "seeds": {
+    "probe_order": 38074818597,
+    "bootstrap": 38074818597,
+    "permutation": 38074818597,
+    "pc_synthetic": 38074818597,
+    "nc_synthetic": 38074818598
+  },
+  "thresholds": {
+    "tau_FA": 0.2,
+    "tau_FR": 0.2,
+    "alpha": 0.05,
+    "delta_SKILL_nats": 0.05,
+    "pc_power_min": 0.8,
+    "nc_false_positive_max": 0.05,
+    "intrinsic_persistence_min": 0.8,
+    "min_t0_intrinsic": 3,
+    "min_t0_barrier": 3,
+    "delta_ref_s": 1800,
+    "delta_ref_min_actual_s": 1500,
+    "bootstrap_resamples": 10000,
+    "permutations": 10000
+  }
+}

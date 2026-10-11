@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-38074818597",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "branch": "S1_STATIONARY",
+  "claim_ids": [
+    "C-WEB-DYNAMICS"
+  ],
+  "claim_ceiling": "At most C-WEB-DYNAMICS = HYPOTHESIS here. H0/S0 and H2 bound (do not reject) a pooled static-denylist prior on this frozen pool/window and one vantage. No PRODUCT_CORE promotion; no EXPERIMENTAL upgrade from this single window ladder.",
+  "metrics": {
+    "STATIONARITY_SKILL": 0.3196006958197081,
+    "STATIONARITY_SKILL_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_CI95": [
+      0.1424309377617678,
+      0.4954113328700338
+    ],
+    "STATIONARITY_SKILL_BY_RUNG": {
+      "300": 0.4055999179949117,
+      "900": 0.4055999179949117,
+      "1800": 0.3196006958197081
+    },
+    "STATIONARITY_SKILL_NO_STRESS": 0.3950671208304353,
+    "STATIONARITY_SKILL_NO_STRESS_B_EXCHANGE_p": 9.999000099990002e-05,
+    "STATIONARITY_SKILL_NO_STRESS_CI95": [
+      0.20619205063323182,
+      0.5455945739691843
+    ],
+    "MI_CLASS": 0.6673804169863701,
+    "CLASS_PERSISTENCE": {
+      "CLEAN": 1.0,
+      "RATE_LIMIT_429": 0.0,
+      "BLOCK_403_CHALLENGE": 1.0,
+      "TRANSPORT_ERROR": 1.0,
+      "OTHER_NONBARRIER": 1.0
+    },
+    "INTRINSIC_PERSISTENCE": 1.0,
+    "INTRINSIC_PERSISTENT": true,
+    "present_intrinsic_classes": [
+      "BLOCK_403_CHALLENGE",
+      "TRANSPORT_ERROR"
+    ],
+    "DENYLIST_FALSE_ACCEPT": 0.0,
+    "DENYLIST_FALSE_REJECT": 0.0,
+    "DENYLIST_INTRINSIC_VALID": true,
+    "DENYLIST_BY_RUNG": {
+      "300": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "900": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      },
+      "1800": {
+        "valid": true,
+        "false_accept": 0.0,
+        "false_reject": 0.0
+      }
+    },
+    "DENYLIST_HORIZON": 1800,
+    "ANYBARRIER_FALSE_ACCEPT": 0.125,
+    "DENYLIST_SKILL": 1.6966415246622164,
+    "DENYLIST_SKILL_definition": "logloss(nats/endpoint) of B_CONSTANT_USABLE(0) minus anchor intrinsic-transfer predictor on the delta_ref intrinsic indicator; positive = anchor denylist better",
+    "RATE_ONSET_n": 0,
+    "RATE_RECOVERY_n": 1,
+    "RATE_RECOVERY_HALF_LIFE_s": 2,
+    "AMBIENT_RATE_ONSET_n": 0,
+    "AMBIENT_RATE_RECOVERY_n": 1,
+    "CLASS_CONDITIONAL_TRANSIENCE": true,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_slope_per_s": 0.0,
+    "STATIONARITY_SKILL_NO_STRESS_TREND_CI95": [
+      0.0,
+      0.0
+    ],
+    "STATIONARITY_SKILL_NO_STRESS_TREND_excludes_zero": false,
+    "barrier_prevalence_by_rung_no_stress": {
+      "0": 0.1346153846153846,
+      "300": 0.1346153846153846,
+      "900": 0.1346153846153846,
+      "1800": 0.1346153846153846
+    },
+    "n_t0_intrinsic": 7,
+    "n_t0_barrier": 8,
+    "f_b_obs": 0.14035087719298245,
+    "POWER_AT_RHO98": 0.8233333333333334,
+    "POWER_AT_RHO92": 0.6766666666666666,
+    "POWER_AT_RHO98_FIXED_ENDOWMENT": 0.8790035587188612,
+    "POWER_AT_RHO92_FIXED_ENDOWMENT": 0.7275985663082437,
+    "branch": "S1_STATIONARY",
+    "change_evidence_classes": [],
+    "measurement_valid": true,
+    "class_counts_by_sweep": [
+      {
+        "CLEAN": 45,
+        "OTHER_NONBARRIER": 4,
+        "BLOCK_403_CHALLENGE": 6,
+        "RATE_LIMIT_429": 1,
+        "TRANSPORT_ERROR": 1
+      },
+      {
+        "OTHER_NONBARRIER": 4,
+        "CLEAN": 45,
+        "TRANSPORT_ERROR": 1,
+        "RATE_LIMIT_429": 1,
+        "BLOCK_403_CHALLENGE": 6
+      },
+      {
+        "CLEAN": 45,
+        "RATE_LIMIT_429": 1,
+        "BLOCK_403_CHALLENGE": 6,
+        "OTHER_NONBARRIER": 4,
+        "TRANSPORT_ERROR": 1
+      },
+      {
+        "CLEAN": 46,
+        "BLOCK_403_CHALLENGE": 6,
+        "OTHER_NONBARRIER": 4,
+        "TRANSPORT_ERROR": 1
+      }
+    ],
+    "rung_actual_delta_s": {
+      "0": 1.1920928955078125e-06,
+      "1": 300.00021171569824,
+      "2": 900.0002288818359,
+      "3": 1800.0002045631409
+    },
+    "delta_ref_actual_s": 1800.0002045631409
+  },
+  "controls": {
+    "PC_SYNTHETIC_STATIONARY": {
+      "expected": "S1 selection fraction >= 0.80 at rho=0.98",
+      "observed": {
+        "rho98": {
+          "replications": 300,
+          "rho": 0.98,
+          "S1_fraction": 0.8233333333333334,
+          "S1_fraction_given_n_t0_intrinsic_ge_3": 0.8790035587188612,
+          "reps_with_n_t0_intrinsic_ge_3": 281,
+          "perm_sig_rate": 1.0,
+          "mi_mean_nats": 0.3123242382866415
+        },
+        "rho92": {
+          "replications": 300,
+          "rho": 0.92,
+          "S1_fraction": 0.6766666666666666,
+          "S1_fraction_given_n_t0_intrinsic_ge_3": 0.7275985663082437,
+          "reps_with_n_t0_intrinsic_ge_3": 279,
+          "perm_sig_rate": 1.0,
+          "mi_mean_nats": 0.2754936549667933
+        }
+      },
+      "pass": true
+    },
+    "NC_SYNTHETIC_EXCHANGEABLE": {
+      "expected": "B_EXCHANGE p<0.05 fraction <= 0.05",
+      "observed": {
+        "replications": 300,
+        "perm_sig_fraction": 0.02666666666666667,
+        "S1_fraction": 0.0,
+        "mi_mean_nats": 0.01016234611127174
+      },
+      "pass": true
+    },
+    "PC_ORACLE_BARRIER": {
+      "expected": "every oracle request classified into its expected class",
+      "observed": [
+        {
+          "url": "https://httpbin.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbingo.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbingo.org/status/429",
+          "class": "RATE_LIMIT_429",
+          "expected": "RATE_LIMIT_429",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://no-such-host.invalid/",
+          "class": "TRANSPORT_ERROR",
+          "expected": "TRANSPORT_ERROR",
+          "ok": true,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://no-such-host.invalid/",
+          "class": "TRANSPORT_ERROR",
+          "expected": "TRANSPORT_ERROR",
+          "ok": true,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://httpbin.org/status/403",
+          "class": "UNAVAILABLE_403",
+          "expected": "UNAVAILABLE_403",
+          "ok": true,
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/403",
+          "class": "UNAVAILABLE_403",
+          "expected": "UNAVAILABLE_403",
+          "ok": true,
+          "error": null
+        }
+      ],
+      "pass": true
+    },
+    "NC_CLEAN_ORACLE": {
+      "expected": "all requests classify CLEAN",
+      "observed": [
+        {
+          "url": "https://httpbin.org/status/200",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/status/200",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/uuid",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://httpbin.org/uuid",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://example.com/",
+          "class": "CLEAN",
+          "error": null
+        },
+        {
+          "url": "https://example.com/",
+          "class": "CLEAN",
+          "error": null
+        }
+      ],
+      "pass": true
+    },
+    "C_PROBE_SELF_INDUCTION": {
+      "expected": "no hard pass/fail; report self-induction trend",
+      "observed": {
+        "barrier_prevalence_by_rung_no_stress": {
+          "0": 0.1346153846153846,
+          "300": 0.1346153846153846,
+          "900": 0.1346153846153846,
+          "1800": 0.1346153846153846
+        },
+        "slope_per_s": 0.0,
+        "slope_ci95": [
+          0.0,
+          0.0
+        ],
+        "slope_excludes_zero": false,
+        "STATIONARITY_SKILL_NO_STRESS": 0.3950671208304353,
+        "STATIONARITY_SKILL_NO_STRESS_p": 9.999000099990002e-05
+      },
+      "pass": null
+    },
+    "B_EXCHANGE": {
+      "expected": "primary strong null: anchor barrier indicator carries no info beyond marginal",
+      "observed": {
+        "p_value": 9.999000099990002e-05,
+        "permutations": 10000,
+        "seed": 38074818597
+      },
+      "pass": null
+    },
+    "B_CONSTANT_USABLE": {
+      "expected": "no-denylist floor (predict non-barrier)",
+      "observed": {
+        "logloss_nats": 1.6966425246627164,
+        "logloss_intrinsic": 1.6966425246627164
+      },
+      "pass": null
+    },
+    "B_MARGINAL": {
+      "expected": "constant-marginal diagnostic",
+      "observed": {
+        "logloss_nats": 0.37248071845219044,
+        "marginal_p": 0.12280701754385964
+      },
+      "pass": null
+    },
+    "B_LASTSWEEP": {
+      "expected": "recent-memory diagnostic",
+      "observed": {
+        "accuracy": 0.9941520467836257,
+        "mi_prev_next": 0.4055999179949117
+      },
+      "pass": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl",
+      "sha256": "a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-38074818597/raw/oracles.jsonl",
+      "sha256": "b8784f582159d48ec6d74f9065f877f268244af48c8f74381be1158f1ac56fed",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-38074818597/raw/induced_probe.json",
+      "sha256": "d8820a52c61c05f909b03d36873da75865f2ceebc0821d05d478ac07ae824f63",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-38074818597/raw/collection_meta.json",
+      "sha256": "b6727e7790cffc1c9bd20559aec404c652edff33c0505f77c248c34ac27e7945",
+      "role": "raw"
+    },
+    {
+      "path": "research/physics/exp_38074818597_finalize.py",
+      "sha256": "52f16bcc18a95334eb82bedbcfaa52fcc5956ba5f80c3456ffb91a9d7ce29133",
+      "role": "code"
+    },
+    {
+      "path": "research/physics/exp_38074818597_lib.py",
+      "sha256": "c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e",
+      "role": "code"
+    },
+    {
+      "path": "research/physics/exp_38074818597_run.py",
+      "sha256": "ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-38074818597/derived/metrics.json",
+      "sha256": "f53a02103f0956572c09d403999c62f16d02fcbd88adf5bb6d84feb8e7a80bfe",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "id": "O1",
+      "text": "Anchor T0 ambient histogram: {'CLEAN': 45, 'OTHER_NONBARRIER': 4, 'BLOCK_403_CHALLENGE': 6, 'RATE_LIMIT_429': 1, 'TRANSPORT_ERROR': 1}",
+      "evidence": "raw/ambient_collection.jsonl"
+    },
+    {
+      "id": "O2",
+      "text": "delta_ref (nominal +1800s) ambient histogram: {'CLEAN': 46, 'BLOCK_403_CHALLENGE': 6, 'OTHER_NONBARRIER': 4, 'TRANSPORT_ERROR': 1}",
+      "evidence": "raw/ambient_collection.jsonl"
+    },
+    {
+      "id": "O3",
+      "text": "All-rung ambient histograms: [{'CLEAN': 45, 'OTHER_NONBARRIER': 4, 'BLOCK_403_CHALLENGE': 6, 'RATE_LIMIT_429': 1, 'TRANSPORT_ERROR': 1}, {'OTHER_NONBARRIER': 4, 'CLEAN': 45, 'TRANSPORT_ERROR': 1, 'RATE_LIMIT_429': 1, 'BLOCK_403_CHALLENGE': 6}, {'CLEAN': 45, 'RATE_LIMIT_429': 1, 'BLOCK_403_CHALLENGE': 6, 'OTHER_NONBARRIER': 4, 'TRANSPORT_ERROR': 1}, {'CLEAN': 46, 'BLOCK_403_CHALLENGE': 6, 'OTHER_NONBARRIER': 4, 'TRANSPORT_ERROR': 1}]",
+      "evidence": "raw/ambient_collection.jsonl"
+    },
+    {
+      "id": "O4",
+      "text": "n_t0_intrinsic=7, n_t0_barrier=8, f_b_obs=0.1404",
+      "evidence": "derived/metrics.json"
+    },
+    {
+      "id": "O5",
+      "text": "delta_ref actual delta = 1800.0002045631409s; rung actual deltas = {'0': 1.1920928955078125e-06, '1': 300.00021171569824, '2': 900.0002288818359, '3': 1800.0002045631409}",
+      "evidence": "raw/collection_meta.json"
+    },
+    {
+      "id": "O6",
+      "text": "oracle classifications: PC=[('https://httpbin.org/status/429', 'RATE_LIMIT_429'), ('https://httpbin.org/status/429', 'RATE_LIMIT_429'), ('https://httpbingo.org/status/429', 'RATE_LIMIT_429'), ('https://httpbingo.org/status/429', 'RATE_LIMIT_429'), ('https://no-such-host.invalid/', 'TRANSPORT_ERROR'), ('https://no-such-host.invalid/', 'TRANSPORT_ERROR'), ('https://httpbin.org/status/403', 'UNAVAILABLE_403'), ('https://httpbin.org/status/403', 'UNAVAILABLE_403')], NC=[('https://httpbin.org/status/200', 'CLEAN'), ('https://httpbin.org/status/200', 'CLEAN'), ('https://httpbin.org/uuid', 'CLEAN'), ('https://httpbin.org/uuid', 'CLEAN'), ('https://example.com/', 'CLEAN'), ('https://example.com/', 'CLEAN')]",
+      "evidence": "raw/oracles.jsonl"
+    },
+    {
+      "id": "O7",
+      "text": "induced bursts: {'https://www.djangoproject.com/admin/login/': ['CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN'], 'https://www.djangoproject.com/accounts/login/': ['CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN'], 'https://auth0.com/': ['CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'CLEAN'], 'https://search.brave.com/search?q=test': ['CLEAN', 'CLEAN', 'CLEAN', 'CLEAN', 'RATE_LIMIT_429', 'CLEAN', 'CLEAN', 'CLEAN'], 'https://community.home-assistant.io/': ['OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER', 'OTHER_NONBARRIER']}",
+      "evidence": "raw/induced_probe.json"
+    },
+    {
+      "id": "O8",
+      "text": "induced recovery series: {'https://www.djangoproject.com/admin/login/': [(2, 'CLEAN'), (5, 'CLEAN'), (15, 'CLEAN'), (60, 'CLEAN'), (180, 'CLEAN')], 'https://www.djangoproject.com/accounts/login/': [(2, 'CLEAN'), (5, 'CLEAN'), (15, 'CLEAN'), (60, 'CLEAN'), (180, 'CLEAN')], 'https://auth0.com/': [(2, 'CLEAN'), (5, 'CLEAN'), (15, 'CLEAN'), (60, 'CLEAN'), (180, 'CLEAN')], 'https://search.brave.com/search?q=test': [(2, 'CLEAN'), (5, 'CLEAN'), (15, 'CLEAN'), (60, 'CLEAN'), (180, 'CLEAN')], 'https://community.home-assistant.io/': [(2, 'OTHER_NONBARRIER'), (5, 'OTHER_NONBARRIER'), (15, 'OTHER_NONBARRIER'), (60, 'OTHER_NONBARRIER'), (180, 'OTHER_NONBARRIER')]}",
+      "evidence": "raw/induced_probe.json"
+    },
+    {
+      "id": "O9",
+      "text": "per-endpoint T0 vs delta_ref intrinsic transition: T0 intrinsic = ['https://gitlab.com/users/sign_in', 'https://community.cloudflare.com/', 'https://www.npmjs.com/login', 'https://wordpress.com/log-in', 'https://www.phpbb.com/community/', 'https://community.nodebb.org/', 'https://community.invisioncommunity.com/']",
+      "evidence": "raw/ambient_collection.jsonl"
+    },
+    {
+      "id": "O10",
+      "text": "classifier replay mismatches = 0 / 242 requests",
+      "evidence": "raw/ambient_collection.jsonl"
+    }
+  ],
+  "validity_notes": [
+    "Single network vantage / single stdlib client / single ~2041s session; the source-vantage axis is a declared scope boundary (spec.scope_boundaries).",
+    "The denylist horizon is right-censored at delta_ref=1800 s; no information beyond the tested ladder is claimed.",
+    "DENYLIST_FALSE_REJECT uses the frozen falsifier/prereg denominator |T0 non-intrinsic| (design_review N3 resolved in favour of falsifier/prereg over the conflicting decision_rule wording).",
+    "DENYLIST_SKILL is reported on the intrinsic indicator (anchor intrinsic-transfer predictor vs constant non-intrinsic); the frozen name does not specify the smoothing, so clipping eps=1e-6 is used and the operational definition is recorded in metrics.",
+    "PC_SYNTHETIC_STATIONARY uses the control's own literal perms_per_rep=500 and R=300 with a 500-resample clustered bootstrap for the CI clause (design_review N4 notes the 10000-permutation inconsistency in thresholds_frozen); the pass gate is the rho=0.98 S1 fraction.",
+    "The induced-transience probe interleaves the 5 stress endpoints' recovery ladders at each nominal delay after each endpoint's own burst rather than serializing whole endpoints; Q3 is a reported refinement that never gates S1/S0.",
+    "Body SHA-256 and the stored classifier prefix are the first 262144 bytes (the frozen match scope); a printable 8192-char prefix is stored for auditability.",
+    "The pre-freeze census/calibration /tmp artifacts cited in spec/prereg are absent and are declared non-interpretation-dependencies (design_review N1/N2); EXECUTE re-derived all floors, controls and metrics from its own raw data.",
+    "The pre-freeze census is outcome-adjacent pilot evidence on parent-inherited endpoints, not the frozen 4-sweep/1800 s measurement; it does not certify persistence at 1800 s (prereg validity threat 10)."
+  ],
+  "unresolved": [
+    "Does endpoint access-barrier persistence generalize beyond this frozen 57-endpoint pool, this single egress vantage and this ~30-minute window? The source-vantage axis is untested.",
+    "Is the measured horizon censored: would the intrinsic denylist remain valid at delta > 1800 s?",
+    "ONSET (CLEAN->intrinsic) at higher request rates or longer sequences remains untested outside the fixed 8-GET stress burst.",
+    "The simultaneous role of protocol self-induction cannot be fully removed; C_PROBE_SELF_INDUCTION only bounds ambient barrier prevalence on the 52 non-stress endpoints."
+  ]
+}
