@@ -50,6 +50,40 @@ Python 3.12 standard library only; `http.server.ThreadingHTTPServer` on `127.0.0
 - `B-COLD-RE-DERIVE`, `B-RETRIEVAL-SHAPED`, `PC-FOREKNOWN-SCHEMA`: one fresh per-task episode (24 independent episodes each; no cross-task state).
 - `CC-DEGENERATE` comparators: per-task episodes on the 4-task calibration bank.
 
+### 4.1 Canonical declaration object (gate I6 reference)
+
+The object below is the frozen declaration. EXECUTE renders the site from it and emits a canonical declaration ECHO: the declaration record containing exactly this key set with the values the render actually used. EXECUTE serializes that echo with `json.dumps(obj, sort_keys=True, separators=(',',':'))`; gate I6 requires that serialization to equal the canonical serialization of THIS object. Concrete per-session secrets, nonces and carry values are deliberately EXCLUDED from the echo (they regenerate deterministically from `seed` and the declaration) and so does an ephemeral port value; the echo contains only the declaration keys shown here. Nothing outside this key set may enter the comparison.
+
+```json
+{
+  "declaration_version": "ADB-v7",
+  "seed": 20261010,
+  "levels": ["0.0", "0.25", "0.5", "0.75"],
+  "high_novelty_levels": ["0.5", "0.75"],
+  "role_rule": "h(n) = round(8*n)",
+  "hidden_roles": {"0.0": 0, "0.25": 2, "0.5": 4, "0.75": 6},
+  "families": ["F1", "F2"],
+  "sessions_per_family": 3,
+  "tasks_per_session": 4,
+  "session_task_order": ["0.0", "0.25", "0.5", "0.75"],
+  "bootstrap_routes": ["/", "/hub", "/boot/1", "/boot/2", "/boot/3", "/boot/4", "/boot/5"],
+  "manifest_route": "/boot/5",
+  "tasks_route": "/tasks",
+  "verify_route": "/verify",
+  "discovery_routes": ["/disc/<role>/1", "/disc/<role>/2/<N_r>", "/disc/<role>/3/<P_r>"],
+  "discovery_carry_rule": "step2 requires the step1 value N_r; step3 requires the step2 value P_r",
+  "calibration_discovery_route": "/answer/<role>",
+  "budgets": {"0.0": 11, "0.25": 15, "0.5": 16, "0.75": 18},
+  "calibration_budgets": {"0.0": 11, "0.25": 13, "0.5": 15, "0.75": 17},
+  "transport": {"scheme": "http", "host": "127.0.0.1", "port": "ephemeral-not-frozen"},
+  "implementation": "python3.12-stdlib-only",
+  "counter_partition": ["bootstrap_requests", "tasks_page_requests", "discovery_calls", "verification_calls"],
+  "calibration_counter_partition": ["bootstrap_requests", "tasks_page_requests", "calibration_calls", "verification_calls"]
+}
+```
+
+The `port` value is the literal string `ephemeral-not-frozen`: the OS-chosen port is deliberately NOT part of the declaration identity, so I6 is well-defined without depending on an unresolvable runtime value. `disc` carry values, role ordering within the first `h(n)` registry draw, and listing order are generated deterministically from `seed` and the declaration, so they are reproducible by the recomputation and do not need to be embedded value-by-value.
+
 ## 5. Cost model and counters
 
 Per-task HTTP cost (server-logged, ground truth):
@@ -84,6 +118,35 @@ Calibration sibling CC-DEGENERATE (same transport, query-answerable): cold `8+h 
 **Certificate predicate.** `CERT(class) = TRUE` iff for EVERY high-novelty `(family, level)` cell the nominal per-task cost of BOTH comparators strictly exceeds `B(level)` AND the nominal per-task cost of the treatment is `<= B(level)` AND the positive control is `<= B(level)`. `CERT(ADB-v7)=TRUE`; `CERT(CC-DEGENERATE)=FALSE`. A constant-TRUE or constant-FALSE predicate is therefore excluded by construction (I11).
 
 `bank_manifest.json` will record the canonical digest of the fully-rendered bank, so the concrete rendered instance is bound post-hoc beyond the abstract declaration.
+
+### 6.1 Canonical certificate object (gate I6 reference)
+
+The object below is the frozen predicted certificate. EXECUTE recomputes the certificate from the rendered declaration (section 4.1) and gate I6 requires the canonical serialization `json.dumps(obj, sort_keys=True, separators=(',',':'))` of the recomputed certificate to equal the canonical serialization of THIS object. Nominal per-task costs (not the truncated observed ledger) are the certificate inputs.
+
+```json
+{
+  "levels": ["0.0", "0.25", "0.5", "0.75"],
+  "high_novelty_levels": ["0.5", "0.75"],
+  "budgets": {"0.0": 11, "0.25": 15, "0.5": 16, "0.75": 18},
+  "cold_nominal_http": {"0.0": 8, "0.25": 14, "0.5": 20, "0.75": 26},
+  "retrieval_nominal_total": {"0.0": 9, "0.25": 15, "0.5": 21, "0.75": 27},
+  "treatment_nominal_http": {"0.0": 9, "0.25": 7, "0.5": 7, "0.75": 7},
+  "positive_control_nominal_http": {"0.0": 8, "0.25": 10, "0.5": 12, "0.75": 14},
+  "predicted_success": {
+    "B-COLD-RE-DERIVE": {"0.0": true, "0.25": true, "0.5": false, "0.75": false},
+    "B-RETRIEVAL-SHAPED": {"0.0": true, "0.25": true, "0.5": false, "0.75": false},
+    "T-AMORT-REUSE": {"0.0": true, "0.25": true, "0.5": true, "0.75": true},
+    "PC-FOREKNOWN-SCHEMA": {"0.0": true, "0.25": true, "0.5": true, "0.75": true}
+  },
+  "certificate_ADB_v7": true,
+  "calibration_class_CC_DEGENERATE": {
+    "budgets": {"0.0": 11, "0.25": 13, "0.5": 15, "0.75": 17},
+    "cold_nominal_http": {"0.0": 8, "0.25": 10, "0.5": 12, "0.75": 14},
+    "retrieval_nominal_total": {"0.0": 9, "0.25": 11, "0.5": 13, "0.75": 15},
+    "certificate": false
+  }
+}
+```
 
 ## 7. Controls
 
@@ -121,7 +184,7 @@ If the DESIGN arithmetic shows `CERT = FALSE` on ADB-v7, on CC-DEGENERATE, and o
 1. Bring up the site on an ephemeral localhost port; bind the rendered declaration (gate I6) and write `bank_manifest.json`.
 2. Run the low-novelty block first as a post-freeze treatment-liveness abort gate (I9).
 3. Run the 4-arm x 4-level matrix; then NC-OOS-SCHEMA (5), NC-BUDGET-TRUNCATION (6), CC-DEGENERATE calibration (4 tasks x 2 comparators), M-REPAIR-TRANSIENT, PC-EXACT-SESSION-REPLAY (6).
-4. Recompute the certificate from the rendered bank and compare to section 6 (I6).
+4. Recompute the certificate from the rendered bank and compare to section 6.1 (I6).
 5. Any gate failure -> MEASUREMENT_INVALID with the exact gate; bring-up/transport failure -> INCONCLUSIVE.
 
 ## 11. Reusable substrate
@@ -130,9 +193,11 @@ On SUPPORTS, `research/runtime/adb_v7_bank.py` + `adb_v7_harness.py` + `bank_man
 
 ## 12. Design-phase probes (non-outcome-bearing)
 
-- stdlib import probe (python 3.12.15, `http.server`, `urllib.request`, `html.parser`, `json`, `hashlib`, `random`, `statistics`, `socket`, `threading`);
-- localhost `ThreadingHTTPServer` canary on `127.0.0.1:ephemeral` returning HTTP 200;
-- arithmetic certificate probe consuming only the frozen declaration (reproduced section 6 exactly).
+All three probes were run in DESIGN on the runner; outputs recorded verbatim:
+
+- stdlib import probe: `python 3.12.15`; imported `http.server, urllib.request, html.parser, json, hashlib, random, statistics, socket, threading` — 0 missing.
+- localhost `ThreadingHTTPServer` canary: bound `127.0.0.1:<OS-chosen ephemeral port>` and returned HTTP 200 to a `urllib.request` GET.
+- arithmetic/certificate probe over the frozen declaration only: Wilson two-sided 95% (z=1.959963984540054, n=12): k=0 → point 0.0, hi `0.242494`; k=6 → lo `0.253782`, hi `0.746218`; k=7 → lo `0.319511`, hi `0.806740`; k=12 → lo `0.757506`, point 1.0. Nominal costs: cold `3h+8={8,14,20,26}`; retrieval total `3h+9={9,15,21,27}`; treatment `{9,7,7,7}`; PC `h+8={8,10,12,14}`; CC-DEGENERATE cold `{8,10,12,14}` and retrieval total `{9,11,13,15}`. The probe reproduced section 6 exactly.
 
 No arm was run and no success was measured; the probes are satisfiability/attainability checks only.
 
@@ -142,9 +207,22 @@ No arm was run and no success was measured; the probes are satisfiability/attain
 - The asymmetry is within-session memory, disclosed openly; the comparators are the strongest bounded policies consistent with no cross-task persistence, and this is not a claim that an unrealized memory-carrying agent is bounded by them.
 - Retrieval's stratum-success profile coincides with cold (it saves only the fixed 2-request root/hub prefix); the two comparators jointly bracket the ceiling rather than testing independent mechanisms. Disclosed, not hidden.
 - The Wilson intervals are descriptive summaries over a fixed finite bank, not sampling-based confidence intervals.
-- Control-plane note: as of this design no `design_contract_version >= 2` experiment in the repository has reached `freeze.json`; the v2 design-review model step has produced no `design_review.json` anywhere. This is an external instrument risk to freezing, not a property of this design; it is recorded here so AUDIT/DIRECTOR do not misattribute a review-stage failure to this design's content.
+- Control-plane note: as of this design no `design_contract_version >= 2` experiment in the repository has reached `freeze.json` (0 of 68) and no `design_review.json` exists anywhere; prior v2 design-review model attempts have repeatedly failed to produce a review receipt. This is an external instrument risk to freezing, not a property of this design's content; it is recorded here so AUDIT/DIRECTOR do not misattribute a review-stage failure to this design's scientific content.
 
 ## 14. Artifacts
 
 - `research/experiments/EXP-RUNTIME-38094119952/spec.json`, `prereg.md` — frozen design.
 - EXECUTE: `research/runtime/adb_v7_bank.py`, `research/runtime/adb_v7_harness.py`, `bank_manifest.json`, `raw_evidence/*`, `derived/*`, `result.json`, `report.md`, `provenance.json`.
+
+## 15. DESIGN self-attack on the six freeze-eligibility checks
+
+DESIGN actively tried to disprove its own satisfiability before finalizing; each attack and its resolution is recorded so the independent review can re-test the same objects.
+
+1. `decision_rule_reachability` — **attack:** is the SUPPORTS branch arithmetically forced and the FALSIFIES branch unreachable? **resolution:** both reachable and demonstrated by probe. SUPPORTS if faithful render (comparator k=0/12). FALSIFIES if an integrity-passing render admits a shortcut so a comparator reaches high-novelty k>=7: hi `0.806740` >= treatment lo `0.757506`. MIXED if P1/P2 hold but a later proposition fails. Precedence is total (integrity gate first; then SUPPORTS; else FALSIFIES = NOT(P1 AND P2); else MIXED) with no branch masking a later one.
+2. `measurement_prerequisites` — **attack:** is the task bank a prerequisite "created during EXECUTE" that determines measurement possibility? **resolution:** the bank is the object under certification, not an external prerequisite; its full identity is the canonical declaration object embedded in section 4.1, fixed at freeze, and gate I6 forces the rendered object to equal it. The only hard prerequisites (Python 3.12 stdlib, localhost bind) are available now and were probed (section 12). No credential, dataset, browser, network egress or model endpoint is read.
+3. `baseline_identifiability` — **attack:** are the arms guaranteed identical, or does a cost metric omit a comparator dimension? **resolution:** the arms are provably distinct (cold `{T,T,F,F}`, retrieval `{T,T,F,F}`, treatment `{T,T,T,T}`) with non-overlapping high-novelty Wilson intervals (comparator hi `0.242494` < treatment lo `0.757506`). Every cost dimension is charged: retrieval's 3 index probes are counted as `retrieval_calls` and included in the gap total, never dropped; bootstrap differs (7 vs 5) and is exactly accounted. Not a floor/ceiling situation.
+4. `control_sensitivity` — **attack:** are any controls tautological or impossible? **resolution:** the calibration control I11 forces the certificate to produce BOTH outcomes (TRUE on ADB-v7, FALSE on CC-DEGENERATE whose comparators reach 4/4), so a constant certificate fails; the positive control is arithmetically solvable (PC cost <= B at every level); the refusal null is violated by a greedy fall-through resolver; NC-BUDGET-TRUNCATION under-funds to budget 10 (< the n=0.5 need of 20) so overrun is observable; M-REPAIR-TRANSIENT injects a concrete single 503 and checks `repair_attempts == 1`. Each failure maps to a distinct gate.
+5. `treatment_liveness` — **attack:** can the frozen treatment actually execute? **resolution:** T-AMORT-REUSE is a deterministic declared mechanism whose per-task costs `{9,7,7,7}` fit `B(n)={11,15,16,18}` at every level; the low-novelty block runs FIRST as an abort gate (I9) and the counter signature is disjoint from both comparators. No external Product carrier is required.
+6. `freeze_artifacts_bound` — **attack:** is a mutable local dependency left unbound? **resolution:** no pre-existing mutable file/fixture is consumed; the interpretation surface is fixed by the embedded canonical objects and gate I6. The DESIGN write scope is only spec.json/prereg.md, so the generator/bank cannot be authored (and hashed) at DESIGN; it is an EXECUTE deliverable fingerprinted in result.json.artifacts. With no bound artifacts, `freeze_artifacts=[]` and status `NOT_APPLICABLE` is the only consistent pairing.
+
+The intended bounded negative remains live: if a faithful render cannot make the certificate TRUE, section 9 records a substrate-class negative and the packet is NOT frozen.
