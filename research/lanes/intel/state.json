@@ -8,7 +8,7 @@
   "next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-10-11T21:28:53.891709+00:00",
+  "updated_at": "2026-10-11T22:31:21.826395+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "edb7898856cc8dd9ea5a65f44468358cf780972faf0a58ddaf558d4f2f606f74",
   "same_failure_count": 1,
