@@ -53,6 +53,23 @@ class BenchmarkScorerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "reconcile"):
             score(rows)
 
+    def test_public_benchmark_requires_direct_api_and_native_cache_when_requested(self):
+        rows = []
+        arms = ("COLD", "INSTRUCTIONS", "RETRIEVAL", "SPIDER", "COMPILED", "DIRECT_API")
+        for arm in arms:
+            rows.append(dict(self.trials()[0],
+                             task_id="pypi:httpx", family="pypi",
+                             phase="public-heldout-v1", arm=arm,
+                             manual_fixture_seed=False))
+        result = score(rows, public=True)
+        self.assertTrue(result["direct_api_comparator_included"])
+        with self.assertRaisesRegex(ValueError, "incomplete paired"):
+            score(rows[:-1], public=True)
+        with self.assertRaisesRegex(ValueError, "incomplete paired"):
+            score(rows, public=True, require_native_cache=True)
+        rows.append(dict(rows[0], arm="STAGEHAND_V4_SERVER_CACHE"))
+        self.assertTrue(score(rows, public=True, require_native_cache=True)["native_stagehand_cache_included"])
+
     def test_missing_arm_fails_closed(self):
         with self.assertRaisesRegex(ValueError, "incomplete paired"):
             score(self.trials()[:-1])
