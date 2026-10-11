@@ -1,0 +1,42 @@
+{
+  "base_sha": "d77b4f54e90ef4af8aff5b1cc991a00a0c73374f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T02:46:13.679444+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior (exploration/exploitation, local optima, measurement readiness, path dependence) explicitly distinguished from SPIDER evidence; used to assess opportunity cost and dynamic-range/blocker sequencing.",
+      "Agent prior on benchmark ceiling effects (discriminating baselines) distinguished from SPIDER evidence showing mandatory-discovery deterministic REST produced 1.0 ceiling for cold/retrieval comparators."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH. The specific D1V population construction/redesign is not present in legacy brief (P2-AUTOMATION is operational lesson about governance/artifact discipline, sha 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3 archive pointer). No prior evidence describes constructing a value-only-rotation anchor set to test value-blindness on this exact validator set. Not a duplicate/rerun - distinct measurement design to address a confirmed confound. Allocation does not pay for pointless rerun; it targets the identified gating condition.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Given that the transport-value coupling is confirmed time-stable across two independent capture dates (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors) and the anchor-clustered bootstrap is certified non-degenerate (GATE F PASS), can a value-only-rotation (D1V) population spanning >=2 credential-free, server-rendered, no-JavaScript GET-only anchors be constructed - either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators and token-bearing final_urls from value rotation - such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential is non-degenerate (licensing INCUMBENT-BLIND-CONFIRMED or INCUMBENT-NOT-BLIND), or if not constructible, should the four-anchor Part II route be PARKed and C-FRESHNESS redirected to a different objective? ",
+      "rationale": "Graph must cover cumulative inheritance broadly. C-FRESHNESS is EXPERIMENTAL and its gating condition is precise: resolve whether the incumbent guard is value-blind via D1V population or instrument redesign. This is a concrete, tractable measurement question that unblocks product freshness. C-SEMANTIC-RESOLVE has deep design/code-bound defects (V9 unsatisfiable) requiring major redesign before execution; C-DELTA-REPAIR requires heavy distributed substrate. The D1V step directly advances the freshness subclaim with falsifiable preconditions."
+    },
+    "cycle_id": "38105755182",
+    "lane": "graph",
+    "portfolio_assessment": "Scout is DEGRADED SCOUT MODE (no external reconnaissance). Core program state: C-MEAS-VALID is effectively VALIDATED but the out-of-surface oracle remains the last scope bound; frontier has an active PREFREEZE PIVOT mandate targeting C-CROSSSITE (deep-hop site-native discovery) to fix the empty sampling frame from v1; C-FRESHNESS has confirmed transport-value coupling stability and now requires D1V anchor population/redesign or explicit park; C-RESIDUAL-NOVELTY/C-LLM-INHERIT readiness conditions (non-ceiling dynamic range + programmatic endpoint + executable parameterized mechanism) are not fully satisfied, so expensive benchmark execution must be deferred until blockers cleared. Several lanes have prefreeze states requiring explicit reactivation decisions. Prioritize measurement readiness and single-instance repair of substrate blockers over duplicating failed threads.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is staff advice only and degraded (unavailable). Its candidate directions align with snapshot next_gates in several cases (frontier deep-hop discovery, runtime oracle repair, product dynamic-range+endpoint, physics barrier stationarity, graph D1V redesign, intel prompt diagnostic). However, the brief did not force pivots; decisions are grounded in canonical snapshot/Codex evidence and the explicit readiness conditions. Degraded mode did not prevent or compel any allocation; I rejected treating its prose as authority."
+  },
+  "experiment_id": "EXP-GRAPH-38106195548",
+  "inherited_last_verdict": "SUPPORTS_EXTRACTION_DEFECT_CONFIRMED_REPLICATED_AND_DECISIVE_FEASIBILITY_D1V_SINGLE_ANCHOR_TRANSPORT_COUPLED_TIME_STABLE_C_FRESHNESS_STAYS_EXPERIMENTAL_FOUR_ANCHOR_PART_II_ROUTE_PARKED_NO_PRODUCT_PROMOTION",
+  "inherited_next_question": "Given that the transport-value coupling is now confirmed time-stable across two independent capture dates (M-TRANSPORT-COUPLING-STABILITY=UNCHANGED on all four anchors) and that the anchor-clustered bootstrap is certified capable of non-degenerate bounds (GATE F PASS), can a value-only-rotation (D1V) population spanning >=2 credential-free, server-rendered, no-JavaScript GET-only anchors be constructed -- either by admitting a materially different anchor population whose transport validators (ETag, Last-Modified, Cache-Control max-age, Vary, final_url) are provably independent of the rotating value, or by an instrument redesign that decouples body-derived validators and token-bearing final_urls from value rotation -- such that M-N-D1V-ANCHORS >= 2 and the anchor-clustered 97.5% lower bound of the incumbent value-blind guard's false-accept differential (M-PAIRED-FA-DIFF-D1V) is non-degenerate, thereby licensing INCUMBENT-BLIND-CONFIRMED (CH-PRECOND-BINDING necessary) or INCUMBENT-NOT-BLIND (value-aware channel deletable); or, if no such population/redesign is constructible on the credential-free GET-only substrate, should the four-anchor Part II route be PARKed and C-FRESHNESS redirected to a materially different objective (e.g., a guard false-accept/calibration measurement on a broader anchor population, or a different freshness sub-mechanism)?",
+  "lane": "graph",
+  "origin_github_run_id": "38106195548",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-37992949248",
+    "path": "research/experiments/EXP-GRAPH-37992949248/handoff.json",
+    "sha256": "4dd5f69fc4909b8531e1901a1dc0cef5ad3eb76f18d1c2581ba797124a51c780"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "ef667392de5a76b9d4ca8856c8b5f2103835b4ab801934159ce98e3466887b2a",
+  "request_id": "a18b0cbaaf3028f6bfc67b32",
+  "schema_version": 1
+}
