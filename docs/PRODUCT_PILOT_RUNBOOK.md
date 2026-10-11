@@ -38,6 +38,15 @@ PYTHONPATH=src python scripts/run_real_agent_pilot.py \
 
 The CACHE baseline is a deterministic compiled Playwright workflow, not Stagehand's own cache. To replay an observed mechanism on a **previously unseen** identifier, run `run_real_agent_pilot.py --arm SPIDER --family invoices --id A-303 --memory-path /tmp/spider-fixture-memory.jsonl --allow-model-charges --output /tmp/spider-raw.jsonl`. The spending permission remains mandatory because a missing or invalidated mechanism may trigger the paid LLM fallback. A correctly trained fixture mechanism runs without invoking the model.
 
+You can also instrument **actual Browser Use agents** as the exploration source, but this optional mode requires credentials and opt-in billing:
+
+```bash
+export GOOGLE_API_KEY="<user-provided-key>"
+PYTHONPATH=src python scripts/train_pilot_memory.py --source browser-use --provider google --allow-model-charges --memory-path /tmp/spider-agent-learned.jsonl --manifest /tmp/spider-agent-learning.json
+```
+
+This mode reads the agent's *actual* visited URLs, selects only the exact same-origin detail page corresponding to the requested training ID, re-fetches that page read-only and corroborates the agent's final answer before compiling anything. It refuses hallucinated successful answers or off-origin navigation. CI tests this wiring with mocked agent reports; **no credentialed real-agent training run has yet been performed or validated**.
+
 The manifest exposes the two browser discovery costs per family. It is **not** acceptable to divide a later task's near-zero model cost without including this discovery and validation expenditure. These traces and the scorer continue to reject a commercial win because provider token prices, full runtime costs, model reliability and Stagehand-native caching are not yet independently audited.
 
 Generate a **matched, randomized five-arm plan without invoking any model or spending money**:
@@ -58,7 +67,7 @@ PYTHONPATH=src python scripts/run_real_agent_pilot.py --arm SPIDER --family invo
 
 `--allow-model-charges` is mandatory even if a provider sometimes offers a free quota. The OpenCode research model fallback is a **different** mechanism and is constrained to documented-free candidates; this browser-agent example makes no free-model guarantee. Use account-level spending caps.
 
-Manual seed remains only an explicit upper-bound control and is now rejected by the complete-cost scorer. The trace-compiled path genuinely extracts a parameterized **detail-page URL from two real deterministic Chromium runs**, persists it, and retrieves previously unseen IDs. It does **not** yet learn from an independent LLM navigator, nor show a cross-site transfer or a graph/fractal advantage. This separation is mandatory for honest benchmarking.
+Manual seed remains only an explicit upper-bound control and is now rejected by the complete-cost scorer. The trace-compiled path genuinely extracts a parameterized **detail-page URL from two real deterministic Chromium runs**, persists it, and retrieves previously unseen IDs. It now offers an opt-in path for independently navigated Browser Use agent histories, but that path remains **unverified with a live model**. It does not yet show cross-site transfer or a graph/fractal advantage. This separation is mandatory for honest benchmarking.
 
 ## Genuine launch gates
 
