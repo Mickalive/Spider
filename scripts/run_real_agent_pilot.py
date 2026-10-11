@@ -65,7 +65,9 @@ async def execute_browser_use(prompt: str, provider: str, model: str | None) -> 
     else:
         raise ValueError(f"unsupported provider {provider}")
 
-    history = await Agent(task=prompt, llm=llm).run(max_steps=22)
+    # Browser Use defaults to calculate_cost=False. Track provider-reported
+    # usage explicitly; the total is still NOT a fully loaded product cost.
+    history = await Agent(task=prompt, llm=llm, calculate_cost=True).run(max_steps=22)
     usage = getattr(history, "usage", None)
     tokens = getattr(usage, "total_tokens", None) if usage is not None else None
     cost = getattr(usage, "total_cost", None) if usage is not None else None
@@ -75,6 +77,8 @@ async def execute_browser_use(prompt: str, provider: str, model: str | None) -> 
         "model_cost_usd": cost,
         "steps": len(history.action_names()),
         "agent_errors": history.errors(),
+        "agent_reported_success": history.is_successful(),
+        "reported_usage_models": sorted(usage.by_model) if usage is not None else [],
         "model_usage_present": usage is not None,
     }
 
