@@ -1,34 +1,64 @@
 {
   "schema_version": 1,
-  "note": "Only OpenCode Zen models listed in official public free pricing. No automatic discovery, no paid fallback; free promotion may change. Availability remains unverified without a successful provider call.",
+  "note": "Free-only catalog confirmed from official OpenCode Console pricing table on 2026-10-12. Promotional offers can change. All inference roles and attempts MUST be selected exclusively from this explicit reviewed zero-input/zero-output-cost list; runtime availability checked separately. No paid fallback, no paid auto-discovery. Avoid logging confidential research data to promotional free models.",
   "roles": {
     "research": [
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/ling-3.1-flash-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/nemotron-3-ultra-free",
+      "opencode/exo-free",
       "opencode/big-pickle",
       "opencode/mimo-v2.5-free",
-      "opencode/ling-3.0-flash-fin-free"
+      "opencode/step-5-preview-free"
     ],
     "audit": [
       "opencode/nemotron-3.5-lightning-free",
+      "opencode/space-bunny-free",
+      "opencode/ling-3.1-flash-free",
       "opencode/muse-spark-1.3-contributor-free",
-      "opencode/ling-3.0-flash-fin-free"
+      "opencode/nemotron-3-ultra-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/step-5-preview-free",
+      "opencode/exo-free"
     ],
     "director": [
+      "opencode/longcat-2.5-preview-free",
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/space-bunny-free",
+      "opencode/nemotron-3.5-lightning-free",
       "opencode/big-pickle",
-      "opencode/mimo-v2.5-free",
-      "opencode/nemotron-3.5-lightning-free"
+      "opencode/step-5-preview-free",
+      "opencode/exo-free",
+      "opencode/ling-3.1-flash-free"
     ],
     "coding": [
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/ling-3.1-flash-free",
+      "opencode/exo-free",
+      "opencode/nemotron-3-ultra-free",
       "opencode/big-pickle",
-      "opencode/mimo-v2.5-free",
-      "opencode/ling-3.0-flash-fin-free"
+      "opencode/step-5-preview-free",
+      "opencode/mimo-v2.5-free"
     ],
     "scout": [
-      "opencode/mimo-v2.5-free",
-      "opencode/ling-3.0-flash-fin-free",
+      "opencode/space-bunny-free",
+      "opencode/ling-3.1-flash-free",
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/step-5-preview-free",
+      "opencode/exo-free",
+      "opencode/nemotron-3-ultra-free",
       "opencode/big-pickle"
     ],
     "design_review": [
-      "opencode/ling-3.0-flash-fin-free",
+      "opencode/ling-3.1-flash-free",
+      "opencode/nemotron-3.5-lightning-free",
+      "opencode/step-5-preview-free",
+      "opencode/space-bunny-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/exo-free",
       "opencode/nemotron-3-ultra-free",
       "opencode/muse-spark-1.3-contributor-free"
     ]
@@ -52,11 +82,19 @@
   ],
   "free_only": true,
   "free_only_allowed_models": [
-    "opencode/big-pickle",
+    "opencode/mimo-v2.6-flash-free",
+    "opencode/ling-3.1-flash-free",
+    "opencode/nemotron-3.5-lightning-free",
+    "opencode/nemotron-3-ultra-free",
+    "opencode/space-bunny-free",
+    "opencode/longcat-2.5-preview-free",
+    "opencode/step-5-preview-free",
+    "opencode/exo-free",
     "opencode/mimo-v2.5-free",
     "opencode/ling-3.0-flash-fin-free",
-    "opencode/nemotron-3-ultra-free",
-    "opencode/nemotron-3.5-lightning-free",
-    "opencode/muse-spark-1.3-contributor-free"
-  ]
+    "opencode/muse-spark-1.3-contributor-free",
+    "opencode/big-pickle"
+  ],
+  "free_price_evidence_url": "https://dev.opencode.ai/v2/docs/console/models",
+  "free_price_checked_date": "2026-10-12"
 }
