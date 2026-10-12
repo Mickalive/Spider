@@ -102,8 +102,8 @@ def run_probe(binary: str, model: str, deadline: int) -> str:
                   + ". Do not merely print or echo the token. Stop when done.")
         try:
             proc = subprocess.Popen(
-                [binary, "run", "--model", model, "--agent",
-                 "spider_provider_probe", prompt],
+                [binary, "run", "--dir", str(scratch), "--model", model,
+                 "--agent", "spider_provider_probe", prompt],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 text=True, errors="replace", start_new_session=True,
                 cwd=scratch, env=clean_environment(),
