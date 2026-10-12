@@ -52,7 +52,10 @@ DESIGN pre-freeze probe (2026-10-11, non-outcome-bearing; no frozen endpoint was
 (rc=0); bootstrapped 100% in 73 s; unpinned exits rotated; ip-literal pin returned `250 OK`, `SIGNAL NEWNYM`
 returned `250 OK`, and the post-NEWNYM exit IP equalled the pinned target; V2 exit observed in NL
 (192.42.116.14 / 192.42.116.95), `check.torproject.org` `IsTor=true`, distinct from V1 (AS8075, US); all 7 oracle
-hosts classified correctly through the tunnel and on V1.
+hosts classified correctly through the tunnel and on V1. RE-VERIFIED 2026-10-12 (non-outcome-bearing, no frozen
+endpoint touched): fresh runner has no tor binary but apt candidate `0.4.9.11-0ubuntu0.24.04.1` (same version) is
+available so EXECUTE installs via apt-get; V1 re-observed at 20.186.238.41 AS8075 US/Iowa/Des-Moines (`IsTor=false`),
+confirming V1 is dynamic within stable AS8075 (10-11: 52.157.33.34 California; 10-12: 20.186.238.41 Iowa).
 
 **Construct-validity caveat (frozen):** a public Tor exit is a genuinely independent egress but carries a
 Tor-specific blocking policy. Therefore a POSITIVE is a *conservative* robustness result; a NEGATIVE bounds the
@@ -117,7 +120,9 @@ Branch precedence:
 
 ## 7. Measurement-validity prerequisites (any failure → `MEASUREMENT_INVALID`)
 
-MV1 V1/V2 distinct in public IP, ASN and country; MV2 V2 exit pinned and identical start/mid/end; MV3 57/57 anchor
+MV1 V1/V2 distinct in public IP (hard) and ASN (hard) with a non-identical geo-tuple (at least one of
+country/region/city differs; country-differ reported as a conservative diagnostic but not itself a gate, so a
+same-country exit with distinct ASN/IP/region still passes); MV2 V2 exit pinned and identical start/mid/end; MV3 57/57 anchor
 and 57/57 delta on both vantages; MV3a the pool exercises the classifier — at least one anchor has ≥1 intrinsic
 endpoint and at least one has ≥1 non-intrinsic endpoint (zero intrinsic at BOTH anchors ⇒ INVALID); MV4
 `delta_ref_actual >= 1500 s`; MV5 classifier replay 0/228 on the bound parent raw file and 0 live
@@ -126,7 +131,7 @@ endpoint-level `TRANSPORT_ERROR` is accepted as an intrinsic class only when the
 succeeded (a proxy-level failure to `127.0.0.1:19051` is a tunnel failure ⇒ INVALID, never an endpoint class);
 MV7 **all** declared synthetic controls pass their frozen thresholds — `PC_CROSS_SYNTHETIC_STATIONARY >= 0.80`,
 `PC_SYNTHETIC_STATIONARY >= 0.80`, `NC_SYNTHETIC_EXCHANGEABLE <= 0.05`, `NC_INDEPENDENT_STATIONARY <= 0.05`,
-`NC_CROSS_SUPERSET == 0`; MV8 V1 ASN constant across rungs; MV9 tunnel reached bootstrap 100% and served every V2
+`NC_CROSS_SUPERSET <= 0.05`; MV8 V1 ASN constant across rungs; MV9 tunnel reached bootstrap 100% and served every V2
 GET; MV10 the 57 endpoint URLs are byte-identical to the bound pool.
 
 **Low-V2-intrinsic convention (frozen).** The parent single-vantage packet mapped `n_t0_intrinsic < 3` to
@@ -150,7 +155,8 @@ TRANSPORT_ERROR 1, RATE_LIMIT_429 1`, n=57) as the frozen design prior.
   **0.0**, CV-significant 0.01.
 * `NC_INDEPENDENT_STATIONARY` (each vantage internally stationary, mutually independent; seed 38121193197): require
   T1 `<= 0.05`. DESIGN calibration **0.0**, CV-significant 0.0067.
-* `NC_CROSS_SUPERSET` (V2 blocks strictly more than V1; seed 38121193198): require T1 `= 0`. DESIGN calibration
+* `NC_CROSS_SUPERSET` (V2 blocks strictly more than V1; seed 38121193198): require T1 `<= 0.05` (same budget as
+  the other nulls; a `== 0` point requirement would fail MV7 on sampling noise). DESIGN calibration
   **0.0** with CV-significant 0.7933 — evidence the transfer clause, not the agreement clause, is discriminating.
 * `PC_ORACLE_BARRIER` (live, both vantages, every rung): httpbin/httpbingo 429 → RATE_LIMIT_429;
   no-such-host.invalid → TRANSPORT_ERROR; httpbin 403 → UNAVAILABLE_403.
@@ -180,3 +186,23 @@ licensed by this packet.
 Two egress vantages only, frozen pool/window/classifier, no horizon claim past censoring, no non-GET substrates,
 no product code. The endpoint access-decision object is kept distinct from C-FRESHNESS content drift and from
 Runtime C-MEAS-VALID instrument-drift controls.
+
+Non-duplication (pre-2.0): `LEGACY: DISTINCT_EXTENSION` relative to legacy dynamics-transfer work, `NO_MATCH`
+for the specific measured object. The 1,401-artifact legacy index has zero hits for `egress`, `denylist`, `barrier`
+and `proxy` as standalone terms (`vantage` hits are `advantage` substrings; `429` hits are directives/README, not
+barrier-stationarity measurements; `tor` hits are `monitor` substrings) — verified 2026-10-12 against
+`codex/legacy_artifact_index.json` and the mounted `.spider-runtime/pre2/SPIDER_CODEX_ULTIME.md`
+(blob `9bb76113aeaf46d9aecdd8a38349a3a7741e57c3`, 22 MB; `denylist` count 0). Closest precedents: WP-002B
+(archived Codex §1: 901 transitions, rule 0.6238 vs NN 0.6295, no website holdout — guard: do not claim cross-site
+transfer of next-state prediction) and WP-003 (sha `292e3243d9bc7a3b88712788a7cb05709eb74eb9`,
+MEASUREMENT_INVALID — guard: never inherit conclusions from leaking designs); WP-003B
+(sha `f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e`) guards against rerunning state-feature tests. This packet
+inherits only the R2 accepted S1_STATIONARY result (EXP-PHYSICS-38074818597, audit PASS) and varies the
+source-vantage factor that packet left open; it does not rerun state-feature tests, next-request classification,
+or the Frontier `web-physics-volatility-freshness` content-volatility program (which closed PAUSE_CLOSE_NEGATIVE on
+structural data-insufficiency and never measured access-barrier persistence). The Q3 shared-denylist clause is
+explicitly guarded against the WP-002B lesson: class agreement across vantages is measured with
+endpoint-clustered uncertainty, never assumed. Material difference from pre-2.0: no pre-2.0 design measured
+endpoint intrinsic access-barrier persistence or denylist validity across independent source vantages with a pinned
+second egress, exchange-permutation nulls and endpoint-clustered CIs; repeating a single-vantage window ladder
+would be the degenerate repeat this design refuses (mandate: record the blocker rather than substitute).

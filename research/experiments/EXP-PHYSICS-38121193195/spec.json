@@ -96,13 +96,13 @@
  "null_control": {
   "NC_SYNTHETIC_EXCHANGEABLE": "Synthetic world with V1 anchor, V2 anchor and V2 delta_ref i.i.d. from the parent anchor marginal (no endpoint identity, no vantage structure). FROZEN threshold: T1 selection fraction over R=400 worlds (seed 38121193196) must be <= nc_false_positive_max=0.05. DESIGN pre-freeze calibration (R=300): T1=0.0, CV-significant fraction 0.01.",
   "NC_INDEPENDENT_STATIONARY": "Synthetic world where each vantage is internally stationary (rho=0.98) but the two vantages are mutually independent. Isolates the cross-vantage agreement clause: T1 fraction must be <= 0.05. DESIGN pre-freeze calibration (R=300, seed 38121193197): T1=0.0, CV-significant fraction 0.0067.",
-  "NC_CROSS_SUPERSET": "Synthetic world where V2 blocks strictly more than V1 (every V1 barrier stays a barrier, plus extra BLOCK_403_CHALLENGE). Must select S0_VANTAGE_SPECIFIC (T1=0). DESIGN pre-freeze calibration (R=300, seed 38121193198): T1=0.0 (CV-significant fraction 0.7933 shows the transfer clause, not the agreement clause, does the work - it is not a vacuous control).",
+    "NC_CROSS_SUPERSET": "Synthetic world where V2 blocks strictly more than V1 (every V1 barrier stays a barrier, plus extra BLOCK_403_CHALLENGE). Must select S0_VANTAGE_SPECIFIC: frozen threshold T1 fraction <= 0.05 (same false-positive budget as the other null controls; an ==0 point requirement would make MV7 fail on sampling noise even when the design is correct). DESIGN pre-freeze calibration (R=300, seed 38121193198): T1=0.0 (CV-significant fraction 0.7933 shows the transfer clause, not the agreement clause, does the work - it is not a vacuous control).",
   "NC_CLEAN_ORACLE": "LIVE arena cleanliness control at BOTH vantages: httpbin.org/status/200, httpbin.org/uuid, example.com -> CLEAN. Failure -> MEASUREMENT_INVALID."
  },
  "measurement_validity": {
   "branch_on_failure": "MEASUREMENT_INVALID (never FALSIFIES)",
   "prerequisites": {
-   "MV1_vantage_distinct": "V1 public IP != V2 exit public IP AND V1 ASN != V2 exit ASN AND country/geo differ; recorded at session start and session end.",
+    "MV1_vantage_distinct": "V1 public IP != V2 exit public IP (hard) AND V1 ASN != V2 exit ASN (hard) AND the geo-tuple (country, region, city) is not identical between vantages, i.e. at least one of country/region/city differs (hard); IP/ASN/geo recorded at session start, mid and end. Country-differ is additionally REPORTED as a conservative-reading diagnostic but is not itself a gate, so a non-US-pinned exit is preferred but a same-country exit with distinct ASN/IP/region still satisfies MV1. A same-ASN or same-IP observation at any check -> INVALID.",
    "MV2_vantage_pinned": "V2 exit relay pinned (SETCONF ExitNodes=<fingerprint> StrictNodes=1) and identical at session start, mid and end; any rotation -> INVALID.",
    "MV3_anchor_complete": "57/57 endpoints classified at T0 on BOTH vantages; 57/57 at delta_ref on BOTH.",
    "MV3a_pool_exercises": "At least one vantage anchor (V1 or V2) has >= 1 intrinsic endpoint AND at least one has >= 1 non-intrinsic endpoint; if the frozen pool yields zero intrinsic endpoints at BOTH anchors the classifier/pool did not exercise and the run is INVALID.",
@@ -110,7 +110,7 @@
    "MV5_classifier_replay": "Frozen classifier replayed on the parent raw file (research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl, 228 rows) with 0 mismatches AND every live record double-classified from raw fields with 0 mismatches.",
    "MV6_oracles": "PC_ORACLE_BARRIER and NC_CLEAN_ORACLE pass at both vantages and every rung.",
    "MV6a_v2_transport_discriminator": "A V2 endpoint-level TRANSPORT_ERROR is accepted as an intrinsic class ONLY if the same-rung V2 control-plane fetches succeeded (the HTTPTunnelPort proxy was reachable and the oracle hosts above classified correctly). A proxy-level failure (connection to 127.0.0.1:19051 refused/timed out) is a tunnel failure -> MEASUREMENT_INVALID and must NOT be recorded as an endpoint TRANSPORT_ERROR; an endpoint-specific resolve/timeout failure through a healthy tunnel IS a legitimate intrinsic class.",
-   "MV7_controls": "ALL declared controls pass their frozen thresholds: PC_CROSS_SYNTHETIC_STATIONARY >= 0.80, PC_SYNTHETIC_STATIONARY >= 0.80, NC_SYNTHETIC_EXCHANGEABLE <= 0.05, NC_INDEPENDENT_STATIONARY <= 0.05, NC_CROSS_SUPERSET == 0.",
+    "MV7_controls": "ALL declared controls pass their frozen thresholds: PC_CROSS_SYNTHETIC_STATIONARY >= 0.80, PC_SYNTHETIC_STATIONARY >= 0.80, NC_SYNTHETIC_EXCHANGEABLE <= 0.05, NC_INDEPENDENT_STATIONARY <= 0.05, NC_CROSS_SUPERSET <= 0.05.",
    "MV8_v1_egress_stable": "V1 ASN constant across all four rungs; a mid-session V1 egress change -> INVALID.",
    "MV9_tunnel_live": "Tor bootstrap reached 100% and the HTTPTunnelPort proxy served every V2 GET without tunnel error.",
    "MV10_no_pool_drift": "The 57 endpoints are byte-identical (URL strings) to the bound parent spec pool."
@@ -222,15 +222,15 @@
   }
  },
  "vantages": {
-  "V1": {
-   "id": "V1_direct_runner_egress",
-   "provisioning": "the GitHub Actions runner's own egress; no proxy.",
-   "design_probe": "public IP 52.157.33.34, AS AS8075 (Microsoft), US/California at DESIGN time; EXECUTE re-records and requires stability across the session (MV8)."
-  },
+   "V1": {
+    "id": "V1_direct_runner_egress",
+    "provisioning": "the GitHub Actions runner's own egress; no proxy.",
+    "design_probe": "V1 egress is dynamic within a stable ASN: observed 52.157.33.34 AS8075 (Microsoft) US/California on 2026-10-11 and 20.186.238.41 AS8075 (Microsoft) US/Iowa/Des-Moines on 2026-10-12 (check.torproject.org IsTor=false both times). EXECUTE re-records IP/ASN/geo at start/mid/end and requires ASN stability across the session (MV8); IP is expected to vary within AS8075 and is not itself a stability gate."
+   },
   "V2": {
    "id": "V2_independent_tor_exit",
    "provisioning": "local Tor (apt-get install -y tor; binary /usr/bin/tor) configured with SocksPort 0, HTTPTunnelPort 127.0.0.1:19051, CookieAuthentication 1, MaxCircuitDirtiness 7200, NewCircuitPeriod 7200; pinned to one exit relay fingerprint via ControlPort SETCONF ExitNodes=<fingerprint> StrictNodes=1 (or an equivalent ip-literal pin).",
-   "design_probe": "PROVISIONABLE at DESIGN (2026-10-11, non-outcome-bearing): tor 0.4.9.11 installed rc=0; bootstrapped 100% in 73 s; unpinned exits rotated (true); ip-literal pin SETCONF -> 250 OK, SIGNAL NEWNYM -> 250 OK, post-NEWNYM exit IP == pinned target; V2 exit observed in NL (192.42.116.14/192.42.116.95), check.torproject.org IsTor=true; distinct from V1 AS8075/US. All 7 oracle hosts classified correctly through the tunnel and on V1.",
+    "design_probe": "PROVISIONABLE at DESIGN (2026-10-11, non-outcome-bearing): tor 0.4.9.11 installed rc=0; bootstrapped 100% in 73 s; unpinned exits rotated (true); ip-literal pin SETCONF -> 250 OK, SIGNAL NEWNYM -> 250 OK, post-NEWNYM exit IP == pinned target; V2 exit observed in NL (192.42.116.14/192.42.116.95), check.torproject.org IsTor=true; distinct from V1 AS8075/US. All 7 oracle hosts classified correctly through the tunnel and on V1. RE-VERIFIED 2026-10-12 (non-outcome-bearing, no frozen endpoint touched): tor binary absent on the fresh runner but apt candidate 0.4.9.11-0ubuntu0.24.04.1 is available (same version as the 10-11 probe), so EXECUTE installs via apt-get; V1 re-observed at 20.186.238.41 AS8075 US (IsTor=false), confirming the stable-ASN/dynamic-IP model. No frozen-pool endpoint was fetched through any tunnel during DESIGN.",
    "construct_validity_caveat": "public Tor exit = independent egress but Tor-specific blocking policy; see measurement_validity.validity_notes."
   }
  },
@@ -443,23 +443,23 @@
   "research/physics/exp_38074818597_run.py"
  ],
  "freeze_eligibility": {
-  "decision_rule_reachability": {
-   "status": "PASS",
-   "reason": "Both branches are reachable under the exact frozen rule. DESIGN pre-freeze offline calibration (R=300 worlds, perms=1000, boot=1000, stdlib, seed family 3812119319x): PC_CROSS_SYNTHETIC_STATIONARY rho=0.98 -> T1 fraction 0.9333 (>=0.80); NC_SYNTHETIC_EXCHANGEABLE -> T1 0.0 with CV-significant fraction 0.01 (<=0.05); NC_INDEPENDENT_STATIONARY -> T1 0.0 (CV 0.0067); NC_CROSS_SUPERSET -> T1 0.0 with CV 0.7933, proving the transfer clause is not vacuous. Every clause can be both true and false within the frozen thresholds.",
-   "evidence_refs": [
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#decision_rule",
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
-   ]
-  },
-  "measurement_prerequisites": {
-   "status": "PASS",
-   "reason": "All prerequisites have an EXECUTE-obtainable substrate. Tor 0.4.9.11 installs and bootstraps (100% in 73 s), the HTTPTunnelPort served 5/5 identity hosts and 7/7 oracle hosts with correct classes, and an ip-literal pin held after SIGNAL NEWNYM, all verified DESIGN-locally on 2026-10-11 (non-outcome-bearing). The remaining prerequisite (delta_ref>=1500 s, 57/57 anchors) is a plain protocol requirement.",
-   "evidence_refs": [
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages",
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity"
-   ]
-  },
+   "decision_rule_reachability": {
+    "status": "PASS",
+    "reason": "Both branches are reachable under the exact frozen rule including both CI clauses. DESIGN pre-freeze offline calibration (R=300 worlds, perms=1000, boot=1000, stdlib, seed family 3812119319x, exact five-clause rule with endpoint AND domain CI gates): PC_CROSS_SYNTHETIC_STATIONARY rho=0.98 -> T1 fraction 0.9333 (>=0.80); NC_SYNTHETIC_EXCHANGEABLE -> T1 0.0 with CV-significant fraction 0.01 (<=0.05); NC_INDEPENDENT_STATIONARY -> T1 0.0 (CV 0.0067); NC_CROSS_SUPERSET -> T1 0.0 (<=0.05) with CV 0.7933, proving the transfer clause is not vacuous. Every clause can be both true and false within the frozen thresholds; S1 needs all five true (planted agreement+persistence achieves it) and S0 needs any one false (absence/break/violation/insignificance/disagreement each producible).",
+    "evidence_refs": [
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#decision_rule",
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
+    ]
+   },
+   "measurement_prerequisites": {
+    "status": "PASS",
+    "reason": "All prerequisites have an EXECUTE-obtainable substrate. Tor 0.4.9.11 installs and bootstraps (100% in 73 s), the HTTPTunnelPort served 5/5 identity hosts and 7/7 oracle hosts with correct classes, and an ip-literal pin held after SIGNAL NEWNYM, all verified DESIGN-locally on 2026-10-11 (non-outcome-bearing, no frozen endpoint touched); re-verified 2026-10-12 that the same tor candidate 0.4.9.11-0ubuntu0.24.04.1 is apt-available and V1 is stable at AS8075 (20.186.238.41 US), so EXECUTE installs via apt-get. MV1 requires distinct IP AND distinct ASN (hard) plus a non-identical geo-tuple, satisfiable by pinning a non-US exit and still satisfiable by a same-country exit with distinct ASN/region. The remaining prerequisites (delta_ref>=1500 s, 57/57 anchors, oracle passes, MV5 replay) are plain protocol requirements.",
+    "evidence_refs": [
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages",
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity"
+    ]
+   },
   "baseline_identifiability": {
    "status": "PASS",
    "reason": "The within-V2 and cross-vantage MI signals are identifiable against their permutation nulls at the observed marginals (parent f_b_obs=0.1404; max binary MI at that marginal ~0.41 nats >> the 0.05 floor) and the calibrated PC/NC separation is large (0.9333 vs 0.01). Baselines B_EXCHANGE_V2/B_CROSSVANTAGE are endpoint-level permutation nulls; B_CONSTANT_USABLE/B_MARGINAL_V2/B_LASTSWEEP_V2 are computable from the same raw records.",
@@ -468,22 +468,22 @@
     "research/experiments/EXP-PHYSICS-38121193195/spec.json#estimators"
    ]
   },
-  "control_sensitivity": {
-   "status": "PASS",
-   "reason": "Calibrated at DESIGN: PC power 0.9333 >= pc_power_min 0.80 and NC false-positive 0.01 <= nc_false_positive_max 0.05, with R=300 (in-run frozen R=400). The superset control returns T1=0 while showing CV significance 0.7933, so the discriminating clause is live rather than clamped.",
-   "evidence_refs": [
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
-   ]
-  },
-  "treatment_liveness": {
-   "status": "PASS",
-   "reason": "The treatment factor (second independent egress V2) is provisionable now, not merely stipulated: Tor installed and achieved a pinned, distinct egress (NL, IsTor=true) vs V1 (AS8075, US) in a live DESIGN probe. EXECUTE must reproduce the pin; if the exit cannot be held fixed, MV2 forces MEASUREMENT_INVALID rather than a silent single-vantage run.",
-   "evidence_refs": [
-    "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages"
-   ],
-   "residual_risk": "Tor exit availability can vary at EXECUTE time; the exact-method fallback is documented in prereg.md (pin a different stable exit; still MEASUREMENT_INVALID if unpinnable)."
-  },
+   "control_sensitivity": {
+    "status": "PASS",
+    "reason": "Calibrated at DESIGN on the exact frozen rule including BOTH endpoint-clustered and domain-clustered CI-lower clauses: PC power 0.9333 >= pc_power_min 0.80 and NC false-positive 0.01 <= nc_false_positive_max 0.05, with R=300 (in-run frozen R=400 with perms=2000/boot=500, a conservative increase in resolution). The superset control returns T1=0.0 <= 0.05 while showing CV significance 0.7933, so the discriminating clause is live rather than clamped; the <=0.05 budget (not a ==0 point requirement) keeps MV7 from failing on sampling noise.",
+    "evidence_refs": [
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control"
+    ]
+   },
+   "treatment_liveness": {
+    "status": "PASS",
+    "reason": "The treatment factor (second independent egress V2) is provisionable now, not merely stipulated: Tor installed and achieved a pinned, distinct egress (NL, IsTor=true) vs V1 (AS8075, US) in a live DESIGN probe on 2026-10-11, and the same tor version remains apt-installable on 2026-10-12. EXECUTE must reproduce the pin; if the exit cannot be held fixed, MV2 forces MEASUREMENT_INVALID rather than a silent single-vantage run.",
+    "evidence_refs": [
+     "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages"
+    ],
+    "residual_risk": "Tor exit availability can vary at EXECUTE time; the fallback is to pin a different stable exit (same-country with distinct ASN/region still satisfies the relaxed MV1 geo-tuple gate); still MEASUREMENT_INVALID if unpinnable, never a single-vantage substitute."
+   },
   "freeze_artifacts_bound": {
    "status": "PASS",
    "reason": "Four existing repository files are bound because their identity can change the interpretation: the parent frozen pool spec, the parent raw 228-row collection that MV5 replays, and the parent classifier/run modules whose constants EXECUTE must reuse. All exist pre-freeze and are hashable.",
