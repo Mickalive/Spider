@@ -1,0 +1,10 @@
+CMD: python3 research/experiments/EXP-PRODUCT-38189918141/harness/run_bank.py
+CWD: /home/runner/work/Spider/Spider
+ENV: EXP_PROBE_MODE=<unset> EXP_TARGET_ROOT=<unset>
+START: 2026-10-12T02:20:17Z
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+EXIT_CODE: 0
+END: 2026-10-12T02:20:18Z
