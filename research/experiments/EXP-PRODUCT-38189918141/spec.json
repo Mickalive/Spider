@@ -1,50 +1,181 @@
 {
   "experiment_id": "EXP-PRODUCT-38189918141",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-PARAM-INHERIT",
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_scope_note": "Product-local GENERALIZATION-BOUNDARY / OUT-OF-GRAMMAR FALSE-ACCEPT certificate for the byte-identical installed carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72, ALREADY the shipping kernel src/spider/kernel.py). This packet is the exact follow-up licensed by EXP-PRODUCT-38186502935 and its handoff (parent_handoff.sha256 4e4956df16f9e0e729083367c2c960a8fcb3ad0c6834dc369562a2d8761d9365): it does NOT re-run the readiness measurement (never-observed item-000 positive + zero-HTTP item-010 refusal already established), does NOT test a substituted carrier, does NOT re-run the excluded mandatory-discovery deterministic REST certificate, and does NOT fund or run the four-arm C-LLM-INHERIT benchmark (readiness (2) Runtime task bank and (3) Intel endpoint remain open and no new Director mandate exists for it). Measured object: whether, on a frozen materially varied / out-of-grammar payload bank, the shipped resolve() path either binds correctly or refuses safely with ZERO false accepts, and exactly where its induced-support generalization boundary lies. READ-ONLY: the runner never writes src/spider/ or any freeze artifact. C-PARAM-INHERIT stays EXPERIMENTAL and C-SEMANTIC-RESOLVE stays HYPOTHESIS in ALL branches; NO claim advance and NO product promotion is authorized by this packet; the carrier's code promotion already happened in EXP-PRODUCT-38180719830. No economics are measured (model_calls=0, model_tokens=0 by construction).",
+  "question": "On the byte-identical installed carrier at the shipped thresholds (default min_confidence=0.8, induced confidence 0.9, unmodified kernel), is the carrier's conservative single-pattern support inference (^item\\-00[0-9]{1}$ learned from 5 examples item-001..005) a product defect or a correct abstention boundary -- i.e. on a frozen materially varied / out-of-grammar payload bank does the carrier either bind correctly or refuse safely with ZERO false accepts, and exactly where does its generalization boundary lie? Concretely, on the current shipping tree (git clean): (GB-IDENTITY) is src/spider/kernel.py byte-identical to the frozen carrier (sha256 718efa6a...)? (GB-BANK) does the frozen 78-item bank (19 IN labelled by the declared grammar ^item-[0-9]{3}$ under intent==read_item and context=={resource_type:item,authenticated:true} and params=={item:value}; 59 OUT across length/alpha/case/separator/whitespace/injection/query/unicode/other/oversized/type/context classes) exhaustively exercise the boundary? (GB-SAFETY) does T-SHIPPED bind zero out-of-grammar payloads (false_accept_count==0), including zero non-string/context/intent payloads, and issue ZERO HTTP requests on any out-of-grammar payload? (GB-REFUSAL) do all refusals preserve bound_action=null, a non-empty reason, and status != EXECUTABLE (EXPLORE for out-of-support/missing-parameter, exactly UNKNOWN for wrong-intent/no-applicable)? (GB-BOUNDARY) what is the exact accepted in-grammar identifier set, and how many of the 19 declared 3-digit ids are refused (coverage)? (GB-COMPARATOR) does the strong safe-widening comparator B-WIDENED-3 (^item\\-[0-9]{3}$) achieve zero false accepts AND full coverage, i.e. does a safe complete alternative exist? (GB-CONTROLS) do the positive control PC-UNSAFE-COARSE (carrier's own __COARSE__ fallback) fire >=1 false accept, NC-REJECT-ALL (empty registry) accept nothing and issue zero HTTP, the ablation B-LITERAL-KERNEL lack distill_parameterized, PC-EXACT-REPLAY resolve 5/5 training ids, and the regression suite pass 3/3?",
+  "hypothesis": "On the current shipping tree the installed carrier passes the safety certificate while revealing a bounded, avoidable coverage limitation. GB-IDENTITY: src/spider/kernel.py sha256 == 718efa6a... (tree clean). GB-BANK: the 78-item bank is label-consistent (every in_grammar item IN, every other class OUT; unique bids). GB-SAFETY: T-SHIPPED false_accept_count == 0 AND silent_false_accept_count == 0 AND http_on_out_label == 0 -- the induced support ^item\\-00[0-9]{1}$ (arithmetic function of the 5 training segment values 'item-001'..'item-005': common prefix 'item-00', homogeneous digit class 0-9, uniform remainder length 1) binds only the cylinder {item-000..item-009}, so no malformed, non-string, wrong-context or wrong-intent payload can reach an executable bind, and every refusal preserves bound_action=null with a non-empty reason and status != EXECUTABLE. GB-BOUNDARY: the accepted in-grammar set is exactly {item-000..item-009}; the other 9 declared 3-digit ids (item-010, item-011, item-042, item-099, item-100, item-123, item-256, item-500, item-999) plus item-0/item-00 (outside the 3-digit scheme) are refused, giving coverage 10/19 and false_reject_count 9 among the 19 declared ids. GB-COMPARATOR: B-WIDENED-3 achieves false_accept_count == 0 AND coverage == 1.0, proving a safe, complete alternative to the over-narrow single-observation-length support exists. GB-CONTROLS: PC-UNSAFE-COARSE false_accept_count >= 1 (the carrier's own coarse fallback over-accepts, so the detector is sensitive); NC-REJECT-ALL accept_count == 0 and http_total == 0; B-LITERAL-KERNEL lacks distill_parameterized; PC-EXACT-REPLAY 5/5 EXECUTABLE; regression 3/3; the runner is deterministic across two independent runs modulo the ephemeral port. Consequently M-FALSE-ACCEPT-COUNT == 0 and the carrier's conservative abstention is SAFE on this bank, while M-COVERAGE 10/19 shows the abstention boundary is over-conservative relative to the declared 3-digit id scheme and B-WIDENED-3 is available as a safe complete alternative (decision SAFE_BUT_CONSERVATIVE, outcome MIXED). If instead GB-SAFETY fails (any out-of-grammar payload binds or any HTTP is issued on one), that is a SAFETY_DEFECT (outcome FALSIFIES) that must be fixed in resolve()/support before external agents may consume the carrier.",
+  "falsifier": "FALSIFIES (valid scientific negative, status COMPLETE) ONLY on a verified carrier identity (V3/V8 PASS, tree clean) if GB-SAFETY fails: T-SHIPPED binds at least one out-of-grammar payload to EXECUTABLE (false_accept_count > 0, in particular any silent false accept that returns oracle 200 and verify true) OR issues at least one HTTP request to any out-of-grammar payload (http_on_out_label > 0). In that branch the conservative-abstention hypothesis is rejected, decision=SAFETY_DEFECT, and the exact offending bids become the engineering-fix specification INSIDE Product before any external agent consumes the carrier. Note: false rejects / low coverage ALONE (false_accept_count == 0 but false_reject_count > 0) do NOT falsify safety -- they map to outcome MIXED (SAFE_BUT_CONSERVATIVE), the honest characterization of an over-conservative but safe boundary. MEASUREMENT_INVALID/BLOCKED (NEVER FALSIFIES) for identity/binding/instrument failures: shipping kernel sha != 718efa6a... (substituted carrier; V4 stop trigger), a validity gate failing (V8 freeze-binding mismatch, M-REGRESSION < 3/3, PC-DETERMINISM-REPEAT mismatch, PC-EXACT-REPLAY < 5/5, or B-LITERAL-KERNEL unexpectedly exposing distill_parameterized so attribution is broken), a sensitivity gate failing (PC-UNSAFE-COARSE false_accept_count == 0 meaning the detector is blind, or NC-REJECT-ALL accepting/issuing HTTP so the null floor is violated), missing git objects, or fixture/oracle failure.",
+  "baselines": [
+    {
+      "id": "B-WIDENED-3",
+      "description": "Strong safety comparator: the SAME shipped carrier mechanism with support overridden to ^item\\-[0-9]{3}$ (the declared 3-digit identifier grammar), loaded in a fresh isolated registry. This is the cheapest safe widening of the induced single-length support and is the alternative the lane would adopt only if it is BOTH safe and complete on the bank.",
+      "type": "strong_comparator",
+      "expected_behavior": "false_accept_count == 0 AND coverage == 1.0 (all 19 declared 3-digit ids bound, nothing out-of-grammar bound). If it achieves this, a safe complete alternative demonstrably exists and the shipped over-conservatism is avoidable. If it has false_accept_count > 0 the widening is unsafe and must NOT be recommended (recorded, not a hard gate).",
+      "source": "shipped carrier mechanism (git blob b15ed848...) with verification_rule support rewritten in-run; no source mutation"
+    },
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Ablation (attribution control, stable ID inherited from EXP-PRODUCT-37973256064 / 38180719830 / 38186502935): the shipped PRE-promotion literal kernel from git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61), loaded in a hermetic temp package with the SAME shipped models.py/registry.py/__init__.py. The literal SpiderKernel has NO distill_parameterized.",
+      "type": "ablation",
+      "expected_behavior": "hasattr(SpiderKernel, 'distill_parameterized') == False (structural check). If the literal kernel unexpectedly HAS the parameterized path, attribution is broken and the packet is MEASUREMENT_INVALID, never a negative.",
+      "source": "git:cfec98660b0277ccbf295e8a4119e8d81ddccf50 (frozen; hermetic temp package, repo untouched)"
+    },
+    {
+      "id": "PC-EXACT-REPLAY",
+      "description": "Positive control (execution-path integrity, stable ID inherited): after induction on item-001..005, re-resolve each of the 5 training ids; all must return EXECUTABLE. Failure means the installed carrier cannot replay its own learned identity (broken bind/registry).",
+      "type": "positive_control",
+      "expected_behavior": "5/5 EXECUTABLE; any value < 5/5 is a validity gate failure (MEASUREMENT_INVALID), never a scientific negative."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-UNSAFE-COARSE",
+    "description": "Detector-sensitivity positive control: the SAME shipped carrier mechanism with support overridden to the carrier's OWN coarse fallback sentinel __COARSE__ (accepts any non-empty string without whitespace or '/'). A safety oracle that never fires is useless, so the coarse arm MUST produce at least one false accept on the frozen bank. This control uses no new code: __COARSE__ is the shipped _COARSE_SUPPORT constant.",
+    "expected_behavior": "false_accept_count >= 1 on the frozen bank (non-vacuous detector). If 0, the safety certificate cannot be trusted -> MEASUREMENT_INVALID (never FALSIFIES)."
+  },
+  "null_control": {
+    "id": "NC-REJECT-ALL",
+    "description": "Null floor: an empty registry (no mechanisms) under the shipped carrier. It must accept nothing and issue no HTTP, anchoring the low end of M-FALSE-ACCEPT-COUNT and M-REFUSAL-ZERO-HTTP so the certificate's zero is meaningful (not an artifact of a broken resolver).",
+    "expected_behavior": "accept_count == 0 AND http_total == 0. If it accepts anything or issues HTTP, the null floor is violated -> MEASUREMENT_INVALID (never FALSIFIES)."
+  },
+  "measurement_validity": [
+    "V1-DETERMINISM: the oracle is a stdlib http.server.ThreadingHTTPServer on 127.0.0.1:0 (ephemeral port) returning fixed JSON {'type':'item','id':<id>,'data':'res:'+<id>} with 200 for /api/items/item-[0-9]{3} and 404 otherwise; no RNG, no wall-clock, no external network, no model. The induced support (^item\\-00[0-9]{1}$), slots (['item']) and confidence (0.9) are arithmetic functions of the 5 induction segment values (DESIGN probe: _infer_support(['item-001'..'item-005']) == '^item\\\\-00[0-9]{1}$'); the runner runs the WHOLE evaluation twice and asserts identical treatment/coarse metrics and mechanism identity (port-invariant; mechanism_id is excluded from the comparison).",
+    "V2-CREDENTIAL-FREE + MODEL-FREE: the runner makes NO model calls and NO browser actions and touches only loopback 127.0.0.1; the ONLY HTTP activity is urllib GETs to the in-process oracle, and the oracle's own request counter is the authoritative HTTP measure (http_delta per record). model_calls == 0 and model_tokens == 0 by construction (asserted by the absence of any model/browser dependency in the runner).",
+    "V3-IDENTITY-PREMISE-GATE: the as-installed shipping kernel src/spider/kernel.py must have sha256 == CARRIER_SHA256 718efa6a... (== recomputed sha256 of carrier git blob b15ed848...) on a git-clean tree (verified at DESIGN: sha == 718efa6a..., git status clean). Any other state (e.g. literal 46929b3a... or any other hash) means the carrier was substituted -> BLOCKED/MEASUREMENT_INVALID with the exact reason recorded; NEVER FALSIFIES.",
+    "V4-STOP-TRIGGER (parent handoff do_not_assume): if the shipping-path identity is not the frozen carrier, the runner records the exact blocker and exits BLOCKED/MEASUREMENT_INVALID BEFORE any outcome measurement; the bank is never measured against a substituted carrier, and the readiness measurement is never re-run.",
+    "V5-BANK-CONSTRUCTIBILITY + LABEL RULE (frozen, DESIGN-validated): the bank has 78 unique-bid items. Ground-truth label rule (the DECLARED identifier grammar under the fixed task schema): IN iff value is a str fullmatching ^item-[0-9]{3}$ AND intent == 'read_item' AND context == {'resource_type':'item','authenticated':True} AND params == {'item': value}; otherwise OUT. DESIGN validation: 19 IN / 59 OUT; every in_grammar item is IN and every other class is OUT; zero class/label mismatches; the 59 OUT items span length (5), alpha (4), case (2), separator (4), whitespace (8), injection (8), query/fragment (4), unicode (2), other prefixes (3), oversized (2), non-string types (10) and context/intent/param mismatch (7), so the boundary is exercised from both sides.",
+    "V6-REFUSAL-SEMANTICS: every refusal must have bound_action None, a non-empty reason string, status != EXECUTABLE, and ZERO HTTP (http_delta == 0); out-of-support and missing-parameter refusals must be ResolutionStatus.EXPLORE with the correct reason class ('outside inferred support' / 'missing required parameter'); wrong-intent and no-applicable refusals must be EXACTLY ResolutionStatus.UNKNOWN. DESIGN route probe on the shipped public API confirmed all 7 context/intent/param-mismatch routes refuse with null actions (5 UNKNOWN, 2 EXPLORE missing-parameter) BEFORE reaching the support check.",
+    "V7-BOUNDARY-HONESTY: M-BOUNDARY reports the exact accepted/refused in-grammar identifier sets and the induced support regex, and M-COVERAGE = (n_in - false_reject_count)/n_in, so 'safe' (false_accept_count == 0) is never conflated with 'complete' (coverage == 1.0). The over-conservatism finding is reported as false rejects / coverage, not as a safety claim.",
+    "V8-FREEZE-BINDING (EXECUTE mode): (A) sha256(prereg.md) == freeze.json.hashes['prereg.md']; (B) the running orchestration source (__file__) equals the FROZEN RUNNER block inside the hash-bound prereg.md (normalized only for trailing newline and CRLF); (C) sha256 of EVERY artifact in freeze.json.artifact_hashes matches (SIX artifacts incl. src/spider/kernel.py, which this read-only experiment never mutates). A missing freeze.json in EXECUTE mode, or any mismatch, is BLOCKED/MEASUREMENT_INVALID (binding is a validity gate, not a negative). Probe mode (EXP_PROBE_MODE=1) records UNBOUND-RUN and never fabricates the check.",
+    "V9-REGRESSION: tests/test_kernel.py must pass 3/3 on the as-installed shipping path with src on sys.path (DESIGN probe: 3/3 OK). A discovery result with < 3 tests or any failure/error is a validity gate failure (MEASUREMENT_INVALID).",
+    "V10-ABLATION-ATTRIBUTION: B-LITERAL-KERNEL is loaded from the frozen literal git blob in a hermetic temp package with the same shipped models/registry/init; if it exposes distill_parameterized the attribution logic is broken and the packet is MEASUREMENT_INVALID.",
+    "V11-CONTROL-SENSITIVITY (non-vacuous oracle): the coarse positive control must false-accept >= 1 on the bank (DESIGN value-level probe: __COARSE__ accepts 36 OUT payloads, so the sensitivity margin is large), and the null floor must accept 0 and issue 0 HTTP; otherwise the certificate's zero is uninformative and the packet is MEASUREMENT_INVALID."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-FALSE-ACCEPT-COUNT (T-SHIPPED count of OUT-labelled bank items whose resolve() status == EXECUTABLE) with the co-primary M-REFUSAL-ZERO-HTTP (T-SHIPPED total HTTP requests issued on OUT-labelled items)",
+    "secondary_metrics": [
+      "M-SILENT-FALSE-ACCEPT-COUNT (OUT items that reach oracle 200 and verify true)",
+      "M-FALSE-REJECT-COUNT / M-COVERAGE (declared in-grammar items refused)",
+      "M-BOUNDARY (exact accepted/refused in-grammar identifier sets and induced support)",
+      "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT",
+      "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT / HTTP-TOTAL",
+      "M-COMPARATOR-WIDENED3-FALSE-ACCEPT-COUNT / COVERAGE",
+      "M-IDENTITY / M-DETERMINISM / M-REGRESSION"
+    ],
+    "gates": {
+      "validity_gate": "ALL of V8-FREEZE-BINDING, M-IDENTITY, M-REGRESSION (3/3), PC-DETERMINISM-REPEAT, PC-EXACT-REPLAY (5/5) and B-LITERAL-KERNEL must PASS; otherwise status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE (instrument failure, never a negative).",
+      "sensitivity_gate": "PC-UNSAFE-COARSE false_accept_count >= 1 AND NC-REJECT-ALL accept_count == 0 AND NC-REJECT-ALL http_total == 0; otherwise status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE (vacuous oracle)."
+    },
+    "decisions": {
+      "SAFETY_DEFECT": {
+        "definition": "T-SHIPPED false_accept_count > 0 OR http_on_out_label > 0 on a verified carrier.",
+        "outcome": "FALSIFIES (status=COMPLETE): the conservative abstention is NOT safe on this bank; the exact offending bids (false_accept_bids, silent_false_accept_bids) become the engineering-fix spec inside resolve()/support before external consumption. Record the mechanism identity (support/slots/confidence)."
+      },
+      "SAFE_AND_COMPLETE": {
+        "definition": "T-SHIPPED false_accept_count == 0 AND http_on_out_label == 0 AND false_reject_count == 0.",
+        "outcome": "SUPPORTS (status=COMPLETE): the shipped support is both safe and complete on the declared bank; decision SAFE_AND_COMPLETE."
+      },
+      "SAFE_BUT_CONSERVATIVE": {
+        "definition": "T-SHIPPED false_accept_count == 0 AND http_on_out_label == 0 AND false_reject_count > 0.",
+        "outcome": "MIXED (status=COMPLETE): the carrier refuses safely (correct abstention boundary, zero false accepts) but over-conservatively (coverage < 1.0); if B-WIDENED-3 also passes (safe + complete) then the limitation is avoidable with a safe complete alternative, which is the product finding; decision SAFE_BUT_CONSERVATIVE."
+      }
+    },
+    "overall_outcome_mapping": "Precedence: MEASUREMENT_INVALID > FALSIFIES > (SUPPORTS vs MIXED). status=BLOCKED/MEASUREMENT_INVALID if V8/identity/validity/sensitivity/infrastructure fails (never a negative). Else status=COMPLETE with outcome FALSIFIES (SAFETY_DEFECT) if M-FALSE-ACCEPT-COUNT>0 or M-REFUSAL-ZERO-HTTP>0, SUPPORTS if false_reject_count==0, otherwise MIXED (SAFE_BUT_CONSERVATIVE).",
+    "report": [
+      "M-IDENTITY (shipping_kernel_sha256 vs 718efa6a..., git blobs, tree clean)",
+      "M-BANK (n_in=19, n_out=59, class/label mismatch count 0, unique bids 78)",
+      "M-FALSE-ACCEPT-COUNT / RATE, M-SILENT-FALSE-ACCEPT-COUNT, M-FALSE-REJECT-COUNT / RATE, M-COVERAGE, M-REFUSAL-ZERO-HTTP (T-SHIPPED)",
+      "M-BOUNDARY (induced support regex; accepted_in_grammar_ids; refused_in_grammar_ids)",
+      "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT (>=1 required)",
+      "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT / HTTP-TOTAL (==0 required)",
+      "M-COMPARATOR-WIDENED3-FALSE-ACCEPT-COUNT / COVERAGE",
+      "M-ABLATION (literal has_distill_parameterized)",
+      "M-PC-EXACT-REPLAY (5 replay statuses)",
+      "M-DETERMINISM (two-run identity of treatment/coarse metrics + support/slots/confidence)",
+      "M-REGRESSION (tests_run, failures, errors)"
+    ],
+    "reachability": "All three outcome branches are arithmetically reachable and were DESIGN-probed with non-outcome-bearing checks (no bank resolve() over the treatment was run; git status clean throughout): (a) SAFE_BUT_CONSERVATIVE / MIXED -- the shipped support ^item\\-00[0-9]{1}$ is a total predicate and the bank's 19 IN items split into {item-000..item-009} (bound, coverage 10/19) and 9 declared-but-refused ids (DESIGN value-level probe: _support_accepts(SHIPPED_SUPPORT,'item-000')==True, _support_accepts(SHIPPED_SUPPORT,'item-010')==False); (b) SAFE_AND_COMPLETE / SUPPORTS -- reachable if a bank revision made the declared scheme single-length; the frozen bank keeps 3-digit ids so this branch is the null-but-reachable upper anchor; (c) SAFETY_DEFECT / FALSIFIES -- reachable iff any OUT item binds; the frozen 59 OUT items include non-string types (which the coarse fallback provably accepts, so the detector margin is real) and the label rule guarantees none of them is legitimately IN; (d) MEASUREMENT_INVALID -- reachable via substituted carrier, tampered freeze artifact, or a failing validity/sensitivity gate. The decision function was unit-tested on synthetic records reproducing exactly the FALSIFIES, SUPPORTS and MIXED mappings from summarize().",
+    "claim_status_semantics": "C-PARAM-INHERIT remains EXPERIMENTAL and C-SEMANTIC-RESOLVE remains HYPOTHESIS in ALL branches. SAFE_AND_COMPLETE/SUPPORTS would be supporting evidence for the registered C-PARAM-INHERIT next_gate's abstention property (and C-SEMANTIC-RESOLVE's 'applicability/abstention calibration') but does NOT discharge that gate, which still requires the cold/replay/retrieval baseline comparison; SAFE_BUT_CONSERVATIVE/MIXED additionally documents that the shipped abstention boundary is over-conservative; SAFETY_DEFECT/FALSIFIES requires a Product-local engine fix before external consumption. No branch advances or promotes any claim."
+  },
+  "product_consequence_positive": "M-FALSE-ACCEPT-COUNT == 0 (SUPPORTS or MIXED) -> the shipped UNKNOWN-preferring path is shown SAFE to expose to external agents on this materially varied/out-of-grammar bank: no malformed, non-string, wrong-context or wrong-intent payload binds, and out-of-grammar payloads issue zero HTTP. If coverage == 1.0 (SUPPORTS) the boundary is also complete. If coverage < 1.0 (MIXED, likely here) the safety boundary is certified while the coverage limitation is documented and, when B-WIDENED-3 passes, shown to be avoidable via a safe complete widening -- a bounded, actionable Product finding that licenses external consumption with a known coverage caveat and a concrete remediation option, at zero model cost. C-PARAM-INHERIT/C-SEMANTIC-RESOLVE statuses are unchanged.",
+  "product_consequence_negative": "FALSIFIES on a verified carrier (M-FALSE-ACCEPT-COUNT > 0 or out-of-grammar HTTP > 0) -> the shipped carrier's abstention is NOT safe on materially varied inputs: at least one out-of-grammar payload binds (possibly silently executing with oracle 200 and verify true), so external agents consuming resolve() could be driven off-manifold; the exact offending bids and mechanism identity become the engineering-fix specification inside resolve()/support, external consumption stays blocked for this carrier, and readiness for the four-arm benchmark is not progressed. BLOCKED/MEASUREMENT_INVALID -> the boundary cannot be assessed; the exact operational blocker is recorded (substituted carrier, freeze-binding mismatch, missing git objects, fixture failure, vacuous controls). Infrastructure/measurement failure is never repackaged as a scientific negative. In every branch C-PARAM-INHERIT stays EXPERIMENTAL, C-SEMANTIC-RESOLVE stays HYPOTHESIS, and the four-arm benchmark remains unfunded.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": "0 external; loopback 127.0.0.1 only. Per evaluation run: 5 induction GETs + one GET per accepted item per arm (T-SHIPPED ~10, B-WIDENED-3 19, PC-UNSAFE-COARSE ~30-50, NC-REJECT-ALL 0); the whole run is executed twice for determinism, so roughly 2x that. No download, no credentials.",
+    "estimated_wall_clock_seconds": 20,
+    "compute_notes": "Pure stdlib (http.server, urllib, unittest, tempfile, hashlib, json, re, subprocess, threading, pathlib); one in-process ThreadingHTTPServer on 127.0.0.1:0 with a request counter; in-memory JSONL registries in one temp dir; one hermetic temp package for the literal ablation. No LLM, no GPU, no network egress, no write to src/spider/ or any freeze artifact."
+  },
+  "expected_information_gain": "High and decision-relevant in both directions, and the smallest decisive Product-local batch on the shipped bytes. It closes the exact property the parent packet flagged as untested (result.json#unresolved: whether the conservative single-pattern support inference generalizes or fails safely) in the bounded form the mandate asks, WITHOUT re-running readiness (1) and WITHOUT the externally gated four-arm benchmark. It is the first measurement of the shipped resolve() path over a 78-item materially varied / out-of-grammar payload bank with: a frozen, pre-registered ground-truth label rule over the declared identifier grammar; an explicit zero-HTTP safety requirement (a refusal that executes is a defect); a non-vacuous detector via the carrier's own __COARSE__ fallback (>=1 false accept required); a null floor; a strong safe-widening comparator that operationalizes 'is the over-conservatism avoidable'; and an exact boundary report (M-BOUNDARY). Outcomes change a concrete Product decision: MIXED/SUPPORTS -> the safety boundary is certified and external consumption is licensed with a documented coverage caveat (and, if B-WIDENED-3 passes, a safe complete remediation path); FALSIFIES -> an engine fix inside resolve()/support is mandatory before external consumption. Either way C-PARAM-INHERIT stays EXPERIMENTAL; the packet informs when the gated benchmark may proceed and does not fund it.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All outcome branches are total and reachable, and the decision function was exercised on synthetic records: summarize() + the main() mapping reproduced FALSIFIES (false_accept_count 1 -> FALSIFIES/SAFETY_DEFECT), SUPPORTS (0 false accepts, 0 false rejects, coverage 1.0 -> SUPPORTS/SAFE_AND_COMPLETE) and MIXED (0 false accepts, 1 false reject -> MIXED/SAFE_BUT_CONSERVATIVE) exactly. The frozen bank was built and validated in DESIGN (78 unique bids; 19 IN / 59 OUT; 0 class/label mismatches), the shipped support predicate was probed at the boundary (item-000 accepted, item-010 refused) and the coarse fallback was probed to accept 36 OUT payloads (non-vacuous detector). The runner compiles under python3.12.15 (py_compile OK) and its helpers (bank/label/summarize) were imported and unit-checked. No treatment resolve() over the frozen bank was run in DESIGN; git status stayed clean.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#decision_rule (all three decision objects + overall mapping)",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md sections 6-9 (bank/label/metrics/decision) and section 14 (FROZEN RUNNER)",
+        "request.json#director_mandate.allocation.question (bind correctly or refuse safely with ZERO false accepts; exact boundary)",
+        "DESIGN non-outcome probes: py_compile OK; importlib load of the frozen runner with EXP_TARGET_ROOT set; _bank_spec 78 items 19 IN/59 OUT 0 mismatches; summarize() synthetic-record checks for SUPPORTS/MIXED/FALSIFIES"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) python3.12.15 present with stdlib only; (b) both git blobs exist and were byte-verified (carrier b15ed848... -> sha256 718efa6a...; literal cfec9866... -> sha256 46929b3a...); (c) the shipping kernel src/spider/kernel.py currently has sha256 == 718efa6a... (carrier IS installed) on a git-clean tree; (d) all SIX freeze artifacts exist with the recorded sha256 (pyproject.toml 5f03fb59..., src/spider/__init__.py 3d173722..., src/spider/models.py 338aaf4d..., src/spider/registry.py 51fb440d..., src/spider/kernel.py 718efa6a..., tests/test_kernel.py ff9c1561...); (e) the public API (spider.SpiderKernel/Mechanism/Observation/Resolution/ResolutionStatus; spider.kernel.TrajectoryCounters; spider.registry.MechanismRegistry) imports cleanly and SpiderKernel.__init__ default min_confidence == 0.8; (f) tests/test_kernel.py passes 3/3 with src on sys.path. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 15 (CANONICAL-HASHES)",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#freeze_artifacts",
+        "DESIGN probes: git cat-file blob b15ed848|sha256sum == 718efa6a...; git cat-file blob cfec9866|sha256sum == 46929b3a...; sha256sum src/spider/kernel.py == 718efa6a...; git status clean; API/threshold probe; regression 3/3 OK; py_compile OK"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Treatment and comparators are structurally distinct objects built from the SAME frozen carrier mechanism: T-SHIPPED = shipped induced support ^item\\-00[0-9]{1}$ (5-example induction, arithmetic function of item-001..005); B-WIDENED-3 = the same mechanism with support rewritten to ^item\\-[0-9]{3}$ (safe complete alternative); PC-UNSAFE-COARSE = the same mechanism with support rewritten to the shipped __COARSE__ sentinel (fails-open reference that must over-accept); NC-REJECT-ALL = empty registry (does nothing); B-LITERAL-KERNEL = a DIFFERENT frozen git blob (cfec9866...) lacking distill_parameterized. Because every permissive arm is the identical treatment mechanism with ONLY the verification_rule support changed, any difference in false-accept/coverage is attributable to the support descriptor alone; the empty registry and literal ablation anchor the zero-mechanism and no-parameterization ends. No unbound mutable code can masquerade as the treatment: the carrier bytes are pinned by an explicit sha256, the freeze-artifact hash, and the parent's canonical identites.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 7 (arms) and 14 (FROZEN RUNNER: make_arm_mechanism rewrites only verification_rule)",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#baselines / #positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38186502935/handoff.json#carry_forward.established (frozen carrier identity + stable control IDs)",
+        "DESIGN probe: _support_accepts arithmetic on the shipped predicate and on __COARSE__ (value-level, bank construction)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, reachable failure mode under the exact code path that produces the certificate: PC-EXACT-REPLAY fails (<5/5) if the carrier cannot rebind its own identity; PC-DETERMINISM-REPEAT fails if two runs diverge; M-REGRESSION fails if the package surface drifts; B-LITERAL-KERNEL fails if the literal blob unexpectedly exposes distill_parameterized (attribution break); the SAFETY oracle itself is proven sensitive by PC-UNSAFE-COARSE, which the DESIGN value-level probe shows will false-accept 36 OUT string payloads (margin >> 0), and by NC-REJECT-ALL which must accept nothing and issue no HTTP; V8 fails on any prereg/runner/artifact hash mismatch. The controls are non-vacuous specifically for THIS gate: a detector that never fires would yield a meaningless zero false-accept count, so PC-UNSAFE-COARSE >= 1 is required and pre-established by probe.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 7 (controls) and 8 (decision rule gates)",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#measurement_validity (V6, V8, V10, V11)",
+        "DESIGN value-level probe: __COARSE__ accepts 36 OUT payloads -> M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT margin >= 1 by construction"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The carrier's liveness on the SAME credential-free substrate class is inherited accepted evidence: EXP-PRODUCT-38180719830 promoted the carrier after D1-D4 PASS, and EXP-PRODUCT-38186502935 then ran the FULL shipped path end-to-end on the byte-identical installed bytes with an independent audit PASS (5 executed induction GETs -> distill_parameterized -> mechanism support ^item\\-00[0-9]{1}$ / confidence 0.9 -> item-000 EXECUTABLE -> oracle 200 -> verify true). This packet re-runs that same induction path and additionally requires PC-EXACT-REPLAY 5/5 and M-REGRESSION 3/3 in the validity gate, so a silently dead treatment yields BLOCKED/MEASUREMENT_INVALID, never a negative. The treatment bytes are frozen by sha256 + freeze-artifact hash, so no unbound mutable code can masquerade as the carrier.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/handoff.json#carry_forward.established (readiness (1) discharged; audit PASS)",
+        "research/experiments/EXP-PRODUCT-38186502935/result.json#metrics.M-POSITIVE / M-E2E-PASS",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 5 (inherited liveness) and 11 (gates)",
+        "request.json#inherited_last_verdict and #inherited_next_question"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "freeze_artifacts lists the SIX existing immutable files whose identity can change the interpretation of this experiment: pyproject.toml (package definition), src/spider/__init__.py + models.py + registry.py (the package surface the shipped kernel imports), src/spider/kernel.py (THE SHIPPED TREATMENT - freezeable because this experiment is READ-ONLY and never writes it), tests/test_kernel.py (regression suite). All six exist with sha256 recorded at DESIGN (kernel.py 718efa6a... == carrier) and are re-hashed by V8 clause (C). The FROZEN RUNNER (section 14) and CANONICAL-HASHES (section 15) are embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']; the frozen bank, oracle and label rule are fully in-process inside the runner (no unbound dataset/task bank/fixture). No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 13 (binding model), 14 (FROZEN RUNNER), 15 (CANONICAL-HASHES)",
+        "request.json#director_mandate.allocation.dependencies",
+        "research/experiments/EXP-PRODUCT-38186502935/freeze.json#artifact_hashes (parent v2 precedent, six artifacts incl. kernel.py)"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "pyproject.toml",
+    "src/spider/__init__.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/kernel.py",
+    "tests/test_kernel.py"
+  ]
 }
