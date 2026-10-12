@@ -66,6 +66,7 @@ def run():
         args = fake.call_args.args[0]
         assert "--model" in args and args[args.index("--model")+1] in config["free_only_allowed_models"]
         assert args[args.index("--agent")+1] == "spider_provider_probe"
+        assert Path(args[args.index("--dir")+1]) == fake.call_args.kwargs["cwd"]
         assert fake.call_args.kwargs["cwd"] != root
         assert fake.call_args.kwargs["cwd"].name.startswith("spider-provider-")
         assert "OPENCODE_CONFIG_CONTENT" not in fake.call_args.kwargs["env"]
