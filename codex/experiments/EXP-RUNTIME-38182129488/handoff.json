@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38182129488",
+  "lane": "runtime",
+  "target_lane": "product",
+  "next_question": "Can a hardened V3 credential-free bank be constructed whose success requires mechanism- or composition-dependent behaviour (rather than mere within-session receipt retention), so that it supplies memory-robust dynamic range against a comparator carrying a full within-session commit-receipt log (or >= the chain-to-precursor distance) while remaining credential-free and deterministic -- and what is the minimal bank-design change that achieves this?",
+  "why_next": "The frozen decision label is PARTIAL: the SBA-CREDENTIAL-FREE-V2 (K-1)/K dynamic range survives only comparators whose retained commit-receipt capacity is below the chain-to-precursor distance, and collapses for the full-receipt-memory comparator B-MEMORY-RECEIPT (measured capacity threshold: 1 receipt at novelty 0.50, 2 at novelty 0.75 on both families; margin 0.0 and 0/4 counter dimensions distinct). Because the flagship four-arm C-LLM-INHERIT comparator arms may themselves carry within-session memory, the bank cannot currently supply the discriminative dynamic range B2 requires. The directive is explicit that the memoryless certificate must not be re-run (three deterministic REST iterations already exist) and that the bank-design question is handed to Product; therefore the single highest-information, non-repeating next step is the hardened-V3 bank design (mechanism-/composition-dependent success, not mere receipt retention), not another Runtime mechanism variant or a memoryless re-run.",
+  "carry_forward": {
+    "established": [
+      "On the frozen SBA-CREDENTIAL-FREE-V2 synthetic credential-free stdlib-only bank with K in {8,10}, the engineered (K-1)/K treatment/comparator separation is a function of comparator WITHIN-SESSION RECEIPT-RETENTION CAPACITY, not of the treatment mechanism: it survives state-only memory (B-MEMORY-STATE: margin 0.125 F1 / 0.100 F2) and sub-distance receipt memory (B-MEMORY-WINDOW-1 certifies at novelty 0.75), and collapses once retained receipts span the chain-to-precursor distance.",
+      "Measured capacity threshold = 1 retained commit receipt at novelty 0.50 and 2 at novelty 0.75, on both F1-RECORDS (K=8) and F2-WIDGETS (K=10), matching the frozen closed-form prediction (capacity_threshold_match=true).",
+      "The PRIMARY full-log comparator B-MEMORY-RECEIPT is success- and counter-identical to T at both scored bands (rate 1.0, margin 0.0, 0/4 counter dimensions distinct); B-RETRIEVAL-MEMORYFUL is likewise 1.0, so within-session receipt memory (not retrieval) is the causal factor. This is the disclosed collapse mechanism on a single-success-path substrate, not a comparator bug.",
+      "All twelve validity gates V1-V8 pass; the 80-cell x 20-session scored matrix (3200 scored sessions) ran twice byte-identically (determinism_ok=true); exact-match scoring holds (matched_correctness == success_rate in all 80 cells); minimum arm success rate is 0.875 at the correctness floor.",
+      "Controls behave as pre-declared: NC-MECHANISM-OFF raises cold to 1.0 and destroys the certificate; NC-MEMORY-OFF and NC-REVEAL-ORDER-FLIPPED return (K-1)/K; NC-RETRIEVAL-REDUNDANT holds; NC-WINDOW-MONOTONIC holds; NC-CEILING-BAND holds; NC-NO-LEAK clean.",
+      "Independent audit status=PASS, producer_claim_supported=true, required_fixes=[] (audit.json sha256 4ed3c492dfff807cc7e0d519e0aef700edb9427c08853620a5a641c5494797fd); EXECUTE harness sha256 8ee0de44... equals spec.design_satisfiability_probe.source_sha256 and the prereg block."
+    ],
+    "rejected": [
+      "The bounded hypothesis that the (K-1)/K treatment/comparator separation is robust to a memoryful comparator: REJECTED for the frozen SBA-CREDENTIAL-FREE-V2 construction class with K in {8,10} at the scored bands, because B-MEMORY-RECEIPT reaches the treatment level and is counter-identical to T (robust_certified=false).",
+      "The bounded claim that the predecessor certificate supplies discriminative dynamic range for a benchmark whose comparator arms carry a full within-session receipt memory (e.g. the four-arm C-LLM-INHERIT): REJECTED at this ceiling (PARTIAL).",
+      "The bounded hypothesis that retrieval is the causal factor in the collapse: REJECTED - adding stale retrieval to full receipt memory does not change the rate (NC-RETRIEVAL-REDUNDANT holds).",
+      "NOTE ON SCOPE: none of these rejections closes the Runtime substrate-validity domain, the broader C-MEAS-VALID claim, or credential-free measurement as a whole."
+    ],
+    "unknown": [
+      "Whether a hardened V3 bank whose success requires mechanism- or composition-dependent behaviour (rather than mere receipt retention) can supply memory-robust dynamic range for a four-arm benchmark.",
+      "Whether real external comparator arms (COLD / INSTRUCTIONS / RETRIEVAL in C-LLM-INHERIT) actually behave like within-session full-receipt memory; only synthetic comparator policies were measured in this packet.",
+      "Whether the same capacity-threshold result holds for K outside {8,10} or for other (non-SBA-CREDENTIAL-FREE-V2) credential-free constructions; only K=8 and K=10 were measured.",
+      "Whether the primary comparator's success/counter identity with T can be broken by a substrate change while still preserving a credential-free discovery path (untested here).",
+      "Whether the flagship four-arm C-LLM-INHERIT benchmark can be run at all: B1 (audited parameterized carrier promoted into src/spider/kernel.py) and B3 (capable same-protocol agent endpoint) remain unresolved and gate it independently.",
+      "Operational (from request.json.director_mandate, not from this packet's measurement): whether the shared control-plane defect exposed by EXP-PRODUCT-37989728440 (scripts/freeze_experiment.py does not enforce the C1 certificate gate) has been repaired once in the workflow."
+    ],
+    "do_not_assume": [
+      "Do NOT read this PARTIAL result as a global failure of the bank or of Runtime measurement validity; it is a bounded synthetic substrate-validity negative for SBA-CREDENTIAL-FREE-V2 with K in {8,10}.",
+      "Do NOT generalize to natural or economically-bearing Web tasks, external LLM/browser agents, baseline strength, agent capability, or K outside {8,10}.",
+      "Do NOT re-run the memoryless certificate; three deterministic REST iterations already exist and the mandate stop trigger explicitly excludes it.",
+      "Do NOT treat the 0-margin, 0/4-counter-dimension identity between B-MEMORY-RECEIPT and T as a comparator bug or as a vacuous comparison; mem_certifies requires a positive margin, and the discriminating signal is carried by the weaker comparators (B-MEMORY-STATE, B-MEMORY-WINDOW-1@0.75).",
+      "Do NOT infer that retrieval drives the collapse (it is inert here) or that 'state memory' alone recovers the range at novelty 0.75 (it does not).",
+      "Do NOT transfer this runtime result into another lane's claim status; C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON implications are cross-lane dependencies and routing only, and no other lane's claim was mutated.",
+      "Do NOT assume the measured capacity threshold transfers to comparators with a different discovery/success-path structure or to banks that have not been measured."
+    ]
+  },
+  "dependencies": [
+    "The frozen SBA-CREDENTIAL-FREE-V2 construction and its counter-only metric from EXP-RUNTIME-38169622704 (parent handoff sha256 44373f8388a73fb39a8475b39bb519aedf72216e69ea77ae48b477b3942b30f3).",
+    "Product / bank-design workstream for a hardened V3 bank (mechanism-/composition-dependent success rather than receipt retention); this is the routed next_question and requires a Global Research Director mandate before any new experiment.",
+    "B1: an audited parameterized carrier actually promoted into src/spider/kernel.py (currently absent).",
+    "B3: a capable same-protocol agent endpoint (the credential-free local 3B-8B class was FALSIFIED); required before any C-LLM-INHERIT benchmark can run.",
+    "Operational prerequisite (mandate-level, not measured here): a single repair of scripts/freeze_experiment.py so it enforces the C1 dynamic-range certificate gate (defect exposed by EXP-PRODUCT-37989728440)."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38182129488/result.json (sha256: 770f3b179a4c1910705d14a9ac2bcd518440fc2cda292375a240d475aecd9cb2)",
+    "research/experiments/EXP-RUNTIME-38182129488/audit.json (sha256: 4ed3c492dfff807cc7e0d519e0aef700edb9427c08853620a5a641c5494797fd; status=PASS, producer_claim_supported=true, required_fixes=[])",
+    "research/experiments/EXP-RUNTIME-38182129488/report.md (sha256: 310c9a0371a81bac9b9cfe45b596abca305318f6cc9d3e29a523239969a7a480)",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/run_scored.json (sha256: 430f8f65e0fc5e34c6ecdb29dcadcb6242bb7413cbacbed14cecc4d64dea8fef)",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/probe_mode.json (sha256: f8c587945ba85cb235f7c5344ee49fd3f4a9e42d16f48a5a57bc510b1be7f090)",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/selftest_stdout.json (sha256: 74a833f62a408ffa3048875eacb60fef0e3a2bfe1259aefba7b4fb1fbdb8bb8e)",
+    "research/experiments/EXP-RUNTIME-38182129488/run_experiment.py (sha256: 8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987)",
+    "research/experiments/EXP-RUNTIME-38182129488/spec.json (frozen; sha256: 214704ecc58d4f997562a58a798b20a340653b27599907b18709a0fd21a207fd)",
+    "research/experiments/EXP-RUNTIME-38182129488/prereg.md (frozen; sha256: 6e8e8412447e4f7dbf2a5ffb0d1b09fa3013436ea6e68c1567101430184848fd)",
+    "research/experiments/EXP-RUNTIME-38182129488/freeze.json (frozen; sha256: f17bb736034603ad1724c1c073f9f6630d35a80c70d69da6221ffb83f7af1f55)",
+    "research/experiments/EXP-RUNTIME-38182129488/design_review.json (frozen; sha256: 73c2b592d45de5ea5e664ca1f8d3ba4d2b41d441f34c0e35580fcae5a9cb40b1)",
+    "research/experiments/EXP-RUNTIME-38182129488/request.json (frozen; sha256: efd6190bfae88320b43bb1ea66d32b046a3b6431473fff8c0bd2d5cfdc5a4dcb)",
+    "research/experiments/EXP-RUNTIME-38169622704/handoff.json (parent; sha256: 44373f8388a73fb39a8475b39bb519aedf72216e69ea77ae48b477b3942b30f3)",
+    "codex/claim_state.json (effective_event_by_claim[C-MEAS-VALID].status=VALIDATED)"
+  ],
+  "recommended_action": "Do NOT dispatch a Runtime successor without a Global Research Director mandate; this lane's immediate thread is closed at PARTIAL and the memoryless certificate is explicitly not to be re-run. Route the bank-design question (hardened V3 with mechanism-/composition-dependent success) to Product / the Global Research Director as the next exploration of the B2 blocker. Before any four-arm C-LLM-INHERIT benchmark, resolve B1 (audited carrier promoted into src/spider/kernel.py) and B3 (capable same-protocol endpoint), and repair the shared control-plane defect in scripts/freeze_experiment.py once. Preserve the exact ceiling: SBA-CREDENTIAL-FREE-V2 with K in {8,10} only."
+}
