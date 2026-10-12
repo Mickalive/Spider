@@ -1,0 +1,16 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-FRONTIER-38184956362",
+  "frozen_at": "2026-10-12T00:07:25.941643+00:00",
+  "hashes": {
+    "design_review.json": "8e5f9284730e10464f9add09b485d4ecc02950d4f73cf477f538799c58911664",
+    "prereg.md": "fbf0b8f3bc8835a2018e798ab783ed32aaeb057739f713e901de07138c34f3a3",
+    "request.json": "b486067df3f872c311a8e47598717ad6f60d7747d0629cc9cb87ec49e7ec3485",
+    "spec.json": "67439304c01a1425a18779358f9508232a743167bdbfb70e991b38fff5ea5adf"
+  },
+  "schema_version": 1
+}

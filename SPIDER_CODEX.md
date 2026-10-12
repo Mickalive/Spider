@@ -26,7 +26,7 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **442**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **443**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
@@ -473,6 +473,7 @@ Finalized subsequent packets: **442**. Coverage gaps: **0**. Quarantined packets
 | EXP-RUNTIME-38169622704 | runtime | PASS | SUPPORTS_SUBSTRATE_VALIDITY_CERTIFICATE_ADOPTED_UNDER_FROZEN_OVERALL_SUPPORTS_ROW: the frozen SBA-CREDENTIAL-FREE-V2 design yields a satisfiable, reproducible, counter-identifiable pre-freeze dynamic-range certificate on BOTH tested families (F1-RECORDS K=8 comparator 0.875 = 140/160; F2-WIDGETS K=10 comparator 0.900 = 180/200; both strictly inside [0.80,0.95) with T-AMORTIZED-DISCOVERY and PC-EXACT-REPLAY at 1.0, matched_correctness == success_rate in all 32 cells, T-vs-comparator counter distinctness 2/4 (COLD) and 3/4 (RETRIEVAL), margins 0.125/0.100 >= MARGIN_FLOOR 0.05). ALL validity gates V1-V8 true; NC-MECHANISM-OFF drives cold to 1.0 and destroys the certificate; NC-NO-LEAK clean on all 7 protocol invariants; two independent matrix passes byte-identical (determinism_ok=true). DIRECTOR SOURCE VERIFICATION ON DISK: freeze.json hashes match for request.json/spec.json/prereg.md/design_review.json; harness sha256 28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da equals spec.design_satisfiability_probe.source_sha256 and the prereg BEGIN/END SBA-HARNESS block; artifacts/run_scored.json a8acd9a7ba25c84d5490f4a4c5d9ebb8de32d8a5b3f212c814cc0ee11c7897bf, artifacts/probe_mode.json 023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77 and artifacts/selftest_stdout.json 7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931 exist and match the provenance/result declarations; EXECUTE probe and selftest stdout reproduce the DESIGN hashes. INDEPENDENT AUDIT ADOPTED: audit.json status=PASS, producer_claim_supported=true, required_fixes=[]. NO CLAIM STATUS CHANGE: C-MEAS-VALID effective status is retained at VALIDATED (bounded authorship-separated real-Chromium-transport scope established by EXP-RUNTIME-36293257855); this packet adds a bounded substrate-validity instance only and neither advances nor downgrades the claim. BOUNDED CONCLUSION: Runtime's B2 readiness blocker is discharged AT THIS CEILING ONLY -- the SBA-CREDENTIAL-FREE-V2 synthetic, credential-free, stdlib-only construction class with K in {8,10} and memoryless comparators; the engineered (K-1)/K range is a construction property, not evidence about baseline strength on natural Web tasks, and the NC-MEMORYFUL disclosed boundary (a within-session receipt-retaining cold agent reaches 1.0) bounds the amortization rate, not agent capability. NO PRODUCT PROMOTION (lane=runtime); NO CONTINUE (any successor needs a Global Research Director mandate). | C-MEAS-VALID | `70f9fc623bec` |
 | EXP-GRAPH-38175554380 | graph | PASS | BOUNDED_MEASUREMENT_TRANSACTION_VALID_AUDIT_PASS_PRODUCER_CLAIM_NOT_SUPPORTED_AS_WRITTEN_D-RESOLVER_FALSIFIES_STRONG_DETERMINISTIC_COMPARATOR_EXCEEDS_EMBEDDING_ON_THIS_FIXTURE_D-GATE_NOT-MET_NO_CLAIM_ADVANCE_C-SEMANTIC-RESOLVE_HELD_AT_HYPOTHESIS_NO_PRODUCT_PROMOTION_NO_IMMEDIATE_RECHAIN | C-SEMANTIC-RESOLVE | `74c8803b1354` |
 | EXP-PRODUCT-38180719830 | product | PASS | PROMOTION_GATE_CERTIFICATE_PASS_ALL_D0_D4_V8_CLAUSES_PASS_ON_BYTE_IDENTICAL_CARRIER_INDEPENDENT_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_TRUE_PROMOTION_GRANTED_PROMOTION_READY_TRUE_DISCHARGES_BLOCKER_B1_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_NO_CLAIM_ADVANCE_NO_CONTINUE_AWAITS_RUNTIME_B2_INTEL_B3_AND_NEW_DIRECTOR_MANDATE | C-PARAM-INHERIT | `c93497fb5d22` |
+| EXP-FRONTIER-38184956362 | frontier | PASS | FALSIFIES_ADOPTED_VALID_ENGINE_STRATIFIED_BOUNDED_NEGATIVE_SITE_NATIVE_DISCOVERY_0_OF_208_DEEP_STATE_CARRYING_ITEMS_IN_CHARGED_LE_K3_ACROSS_FIVE_FROZEN_CHANNELS_ON_FROZEN_20_HOST_556_ITEM_FRAME_ZERO_ENGINES_AT_THRESHOLD_0_50_OVER_THREE_DEEP_ADMITTING_ENGINES_C_CROSSSITE_RETAINED_HYPOTHESIS_DISCOVERY_AXIS_CLOSED_ON_THIS_SUBSTRATE_CLASS_NO_PROMOTION_NO_CONTINUE_NEXT_STEP_REQUIRES_NEW_GLOBAL_RESEARCH_DIRECTOR_ALLOCATION | C-CROSSSITE | `b5f5eaeb1dcf` |
 
 ## Effective claim state
 
@@ -480,7 +481,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 
 | Claim | Status | Source |
 |---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38164611798 |
+| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38184956362 |
 | C-DELTA-REPAIR | EXPERIMENTAL | EXP-GRAPH-36018188168 |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38164607941 |
@@ -497,7 +498,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38164611798 | frontier |
+| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38184956362 | frontier |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-36106653880 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38164607941 | intel |
