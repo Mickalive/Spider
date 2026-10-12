@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38210179652",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "origin_github_run_id": "38210179652",
+  "request_id": "58b3501454f1325e654e127f",
+  "base_sha": "d01382e70dc98a0300227a91377c8c807c51bd42",
+  "git_head_at_execute": "64e05f77a1858ba6a79a0a23fa9c981f99677179",
+  "git_recent_commits": [
+    "64e05f77 R2 product: execution base EXP-PRODUCT-38210179652",
+    "e2bdc854 R2 product: freeze EXP-PRODUCT-38210179652",
+    "d91c5501 R2 product: proposed design EXP-PRODUCT-38210179652",
+    "cc77d6de R2 product: allocate EXP-PRODUCT-38210179652",
+    "1abf4a1c Merge remote-tracking branch 'origin/main' into lab2/product"
+  ],
+  "working_tree_clean_for_frozen_paths": true,
+  "commands": [
+    "python3 - <<'PY'  # extract FROZEN RUNNER block verbatim from prereg.md -> raw_evidence/run_prov_grow.py",
+    "EXP_PROBE_MODE=1 PYTHONPATH=src SPIDER_SRC=src EXP_PACKET_DIR=research/experiments/EXP-PRODUCT-38210179652 python3 research/experiments/EXP-PRODUCT-38210179652/raw_evidence/run_prov_grow.py > raw_evidence/raw_run_output.json 2> raw_evidence/raw_run_stderr.txt",
+    "EXP_PROBE_MODE=1 PYTHONPATH=src SPIDER_SRC=src EXP_PACKET_DIR=research/experiments/EXP-PRODUCT-38210179652 python3 research/experiments/EXP-PRODUCT-38210179652/raw_evidence/run_prov_grow.py > raw_evidence/raw_run_output_run2.json 2> raw_evidence/raw_run_stderr_run2.txt",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_*.py'"
+  ],
+  "runner_extraction": {
+    "source": "prereg.md between '<!-- BEGIN FROZEN RUNNER -->' and closing fence, first line after the opening fence excluded",
+    "materialized_path": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/run_prov_grow.py",
+    "raw_byte_sha256": "99d4edf542b3aad2acce14ce702f8e3caf5478922eae720de5f33b63cc2ab820",
+    "declared_frozen_runner_sha256": "99d4edf542b3aad2acce14ce702f8e3caf5478922eae720de5f33b63cc2ab820",
+    "matches": true
+  },
+  "frozen_inputs": {
+    "design_review.json": "a0284ab907a8450f4485f8c56de618da6a33b8ad9062cfda78461bf413d00493",
+    "prereg.md": "5c35fa410bbb3025b328071d9516b94702a9cc3ee13412b8a2049c821718b66a",
+    "request.json": "1c4bd07cf59148ae07cd636e3e1280b813e0e1e101302a7f3b1737bab7190283",
+    "spec.json": "f8ec4cae69e9a55794bf37363fe36183b2e96ef94966bfee53666c767d87f116"
+  },
+  "freeze_artifact_hashes_rehashed_after_run": {
+    "pyproject.toml": {
+      "expected": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+      "actual": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+      "match": true
+    },
+    "src/spider/__init__.py": {
+      "expected": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+      "actual": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+      "match": true
+    },
+    "src/spider/kernel.py": {
+      "expected": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "actual": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "match": true
+    },
+    "src/spider/models.py": {
+      "expected": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "actual": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "match": true
+    },
+    "src/spider/registry.py": {
+      "expected": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "actual": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "match": true
+    },
+    "tests/test_kernel.py": {
+      "expected": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "actual": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "match": true
+    }
+  },
+  "code_paths": {
+    "carrier": "src/spider/kernel.py#SpiderKernel.ingest_declaration / module-level certify_declaration",
+    "carrier_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "carrier_modified_by_packet": false,
+    "runner": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/run_prov_grow.py"
+  },
+  "raw_evidence": {
+    "primary_stdout": {
+      "path": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_output.json",
+      "sha256": "3242f89d1f79d1a2eadbca634e978704fb160abf4da3680d7ba7c5bf5f6920df"
+    },
+    "primary_stderr": {
+      "path": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "second_stdout": {
+      "path": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_output_run2.json",
+      "sha256": "40b43bf4e01dc8886725924cf477e36ec0ab072d3059a96a9b0bdb0a7b3f68fd"
+    },
+    "second_stderr": {
+      "path": "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_stderr_run2.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "determinism": {
+    "in_process_two_run_once_identical": true,
+    "cross_process_full_rerun_nontiming_identical": true,
+    "excluded_metrics": [
+      "M-T-GROW-LATENCY-MS"
+    ],
+    "latency_run1_ms": 134.26,
+    "latency_run2_ms": 134.787
+  },
+  "regression": {
+    "command": "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_*.py'",
+    "tests_run": 3,
+    "failures": 0,
+    "errors": 0,
+    "ok": true
+  },
+  "fixtures": {
+    "bank": "in-process synthetic eight-family expansion bank declared in the FROZEN RUNNER (no external dataset)",
+    "oracles": "two loopback ThreadingHTTPServer instances on 127.0.0.1 ephemeral ports, grammars from the frozen true-grammar table",
+    "probe_space": "deterministic seed 38210179, alphabet '0123456789abcdef', lengths 1..4, PROBE_BUDGET=256/family",
+    "allowlist": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ]
+  },
+  "environment": {
+    "python": "3.12.15",
+    "python_full": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "network": "loopback 127.0.0.1 only; no external network, no model/token calls",
+    "credentials": "none"
+  },
+  "artifacts": {
+    "result": "result.json",
+    "report": "report.md",
+    "raw_stdout_sha256": "3242f89d1f79d1a2eadbca634e978704fb160abf4da3680d7ba7c5bf5f6920df"
+  }
+}

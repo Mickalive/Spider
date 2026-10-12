@@ -1,0 +1,793 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38210179652",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "decision": "PROVENANCE_CERT_SAFE_AND_EXPANSIVE",
+  "metrics": {
+    "M-T-FALSE-ACCEPT-COUNT": 0,
+    "M-T-HTTP-ON-OUT-COUNT": 0,
+    "M-T-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-T-COVERAGE": 1.0,
+    "M-T-COVERAGE-DELTA-VS-SHIPPED": 0.5333333333333333,
+    "M-T-BOUNDARY-FALSE-ACCEPT-COUNT": 3,
+    "M-T-PROBE-CANDIDATES": 1792,
+    "M-T-ORACLE-CALLS": 168,
+    "M-T-GROW-LATENCY-MS": 134.26,
+    "M-T-CERTIFIED-COUNT": 5,
+    "M-T-REFUSED-COUNT": 2,
+    "M-T-PROVENANCE-REFUSED-COUNT": 1,
+    "M-B-SHIPPED-COVERAGE": 0.4666666666666667,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-B-ORACLE-COVERAGE": 1.0,
+    "M-B-ORACLE-FALSE-ACCEPT-COUNT": 0,
+    "M-C-FROZEN-FALSE-ACCEPT-COUNT": 9,
+    "M-C-FROZEN-HTTP-ON-OUT-COUNT": 9,
+    "M-C-FROZEN-COVERAGE": 1.0,
+    "M-A-RAW-FALSE-ACCEPT-COUNT": 9,
+    "M-A-PROV-NO-GROW-FALSE-ACCEPT-COUNT": 6,
+    "M-A-GROW-NO-PROV-FALSE-ACCEPT-COUNT": 3,
+    "M-A-GROW-NO-PROV-COVERAGE": 1.0,
+    "M-A-PROV-STRICT-FALSE-ACCEPT-COUNT": 0,
+    "M-A-PROV-STRICT-COVERAGE": 0.4666666666666667,
+    "M-COVERAGE-IN-ITEMS": 30,
+    "M-CERT-ADMITS-SOUND-COUNT": 4,
+    "M-CERT-REFUSES-PROBEABLE-COUNT": 2,
+    "M-CERT-ADMITS-HIDDEN-COUNT": 2,
+    "M-MECHANISM-COUNT": 8,
+    "M-EVAL-ORACLE-CALLS": 266,
+    "M-R-DRIFT-STALE-FA": 16,
+    "M-R-DRIFT-REMINE-FA": 0,
+    "M-REGRESSION-TESTS-RUN": 3
+  },
+  "controls": {
+    "PC-CERT-ADMITS-SOUND": {
+      "expected": "all 4 sound declarations CERTIFIED",
+      "observed": "4/4",
+      "pass_": true
+    },
+    "PC-CERT-REFUSES-PROBEABLE": {
+      "expected": "all 2 probeable evaders REFUSED after growth",
+      "observed": "2/2",
+      "pass_": true
+    },
+    "PC-GROW-MISSES-HIDDEN": {
+      "expected": "both hidden evaders admitted (probe-unreachable)",
+      "observed": "2/2",
+      "pass_": true
+    },
+    "PC-PROV-REFUSES-UNAUDITED": {
+      "expected": "T refuses H8 by origin even though the certificate would admit it, and A-GROW-NO-PROV false-accepts it",
+      "observed": {
+        "T_H8_provenance": "REFUSED_ORIGIN",
+        "T_H8_effective_support": "^pay\\-00[0-9]{1}$",
+        "cert_would_admit_H8": true,
+        "A_GNP_H8_fa": 3
+      },
+      "pass_": true
+    },
+    "PC-UNSAFE-RAW": {
+      "expected": "A-RAW-DECL false-accepts > 0",
+      "observed": 9,
+      "pass_": true
+    },
+    "PC-DISCRIMINATION": {
+      "expected": "T FA==0 while C-FROZEN FA>0 at equal coverage",
+      "observed": {
+        "T": 0,
+        "C_FROZEN": 9,
+        "T_cov": 1.0,
+        "C_cov": 1.0
+      },
+      "pass_": true
+    },
+    "PC-INGEST-REFUSED-ABSTAINS": {
+      "expected": "real ingest_declaration refuses H5 and preserves support",
+      "observed": {
+        "status": "REFUSED",
+        "support_preserved": true,
+        "refused": true
+      },
+      "pass_": true
+    },
+    "PC-GROW-CATCHES-EVADER": {
+      "expected": "A-PROV-NO-GROW FA>0 (growth needed)",
+      "observed": 6,
+      "pass_": true
+    },
+    "NC-REJECT-ALL": {
+      "expected": "empty-declaration registry accepts nothing, HTTP 0",
+      "observed": {
+        "accept": 0,
+        "http": 0
+      },
+      "pass_": true
+    },
+    "BP-HIDDEN-FAILS": {
+      "expected": "T boundary H7 FA>=1",
+      "observed": 3,
+      "pass_": true
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "expected": "two independent runs identical",
+      "observed": true,
+      "pass_": true
+    }
+  },
+  "validity": {
+    "M-MECHANISM-COUNT-8": true,
+    "M-SINGLE-SLOT": true,
+    "M-CONFIDENCE-0.9": true,
+    "B-SHIPPED-FA0": true,
+    "B-ORACLE-CEILING": true,
+    "T-REFUSAL-VIOL-0": true,
+    "M-SUPPORT-IDENTITY": true,
+    "M-REGRESSION": true
+  },
+  "gates": {
+    "validity_gate": true,
+    "sensitivity_gate": true,
+    "provenance_gate": true,
+    "growth_gate": true,
+    "boundary_gate": true,
+    "v8": {
+      "gate": "V8_FREEZE_BINDING",
+      "status": "PASS",
+      "mode": "BOUND",
+      "checks": {
+        "runner_block": true,
+        "prereg_sha": true,
+        "pyproject.toml": true,
+        "src/spider/__init__.py": true,
+        "src/spider/kernel.py": true,
+        "src/spider/models.py": true,
+        "src/spider/registry.py": true,
+        "tests/test_kernel.py": true
+      }
+    }
+  },
+  "induced_supports": {
+    "H1": "^txn\\-00[0-9]{1}$",
+    "H2": "^usr\\-[a-z]{3}$",
+    "H3": "^ord\\-00[0-9]{1}$",
+    "H4": "^shp\\-[a-z]{3}$",
+    "H5": "^inv\\-00[0-9]{1}$",
+    "H6": "^shl\\-[a-z]{3}$",
+    "H7": "^not\\-[a-z]{3}$",
+    "H8": "^pay\\-00[0-9]{1}$"
+  },
+  "slots": {
+    "H1": [
+      "txn"
+    ],
+    "H2": [
+      "usr"
+    ],
+    "H3": [
+      "ord"
+    ],
+    "H4": [
+      "shp"
+    ],
+    "H5": [
+      "inv"
+    ],
+    "H6": [
+      "shl"
+    ],
+    "H7": [
+      "not"
+    ],
+    "H8": [
+      "pay"
+    ]
+  },
+  "arms": {
+    "T-PROV-GROW": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 14,
+      "total_in": 30,
+      "coverage": 0.4666666666666667,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "false_accept_count": 9,
+      "http_on_out_count": 9,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "false_accept_count": 9,
+      "http_on_out_count": 9,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-PROV-NO-GROW": {
+      "false_accept_count": 6,
+      "http_on_out_count": 6,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-GROW-NO-PROV": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 30,
+      "total_in": 30,
+      "coverage": 1.0,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "H5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-PROV-STRICT": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 14,
+      "total_in": 30,
+      "coverage": 0.4666666666666667,
+      "per_family": {
+        "H1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.3333333333333333
+        },
+        "H5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "H6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "H8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "boundary": {
+    "T-PROV-GROW": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-PROV-NO-GROW": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-GROW-NO-PROV": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-PROV-STRICT": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "H7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "drift": {
+    "H1": {
+      "stale_fa": 4,
+      "remine_fa": 0,
+      "remine_bank": 48,
+      "stale_cert": "CERTIFIED",
+      "remine_cert": "REFUSED"
+    },
+    "H2": {
+      "stale_fa": 4,
+      "remine_fa": 0,
+      "remine_bank": 4,
+      "stale_cert": "CERTIFIED",
+      "remine_cert": "REFUSED"
+    },
+    "H3": {
+      "stale_fa": 4,
+      "remine_fa": 0,
+      "remine_bank": 48,
+      "stale_cert": "CERTIFIED",
+      "remine_cert": "REFUSED"
+    },
+    "H4": {
+      "stale_fa": 4,
+      "remine_fa": 0,
+      "remine_bank": 4,
+      "stale_cert": "CERTIFIED",
+      "remine_cert": "REFUSED"
+    }
+  },
+  "cost": {
+    "bank_sizes": {
+      "H1": 0,
+      "H2": 0,
+      "H3": 0,
+      "H4": 0,
+      "H5": 48,
+      "H6": 4,
+      "H7": 0,
+      "H8": 0
+    },
+    "probes": {
+      "H1": 256,
+      "H2": 256,
+      "H3": 256,
+      "H4": 256,
+      "H5": 256,
+      "H6": 256,
+      "H7": 256,
+      "H8": 0
+    },
+    "oracle_calls": {
+      "H1": 52,
+      "H2": 4,
+      "H3": 52,
+      "H4": 4,
+      "H5": 52,
+      "H6": 4,
+      "H7": 0,
+      "H8": 0
+    },
+    "grow_latency_ms": {
+      "H1": 52.495002000114255,
+      "H2": 2.671225000085542,
+      "H3": 35.72938399997838,
+      "H4": 2.8923899999426794,
+      "H5": 37.270882000029815,
+      "H6": 3.0055589998028154,
+      "H7": 0.1959049998276896,
+      "H8": 0.0
+    }
+  },
+  "certification": {
+    "H1": {
+      "origin": "O1",
+      "role": "SOUND",
+      "declaration": "^txn\\-[0-9]{3,4}$",
+      "cert": "CERTIFIED"
+    },
+    "H2": {
+      "origin": "O2",
+      "role": "SOUND",
+      "declaration": "^usr\\-[a-z]{3,4}$",
+      "cert": "CERTIFIED"
+    },
+    "H3": {
+      "origin": "O2",
+      "role": "SOUND",
+      "declaration": "^ord\\-[0-9]{3,4}$",
+      "cert": "CERTIFIED"
+    },
+    "H4": {
+      "origin": "O3",
+      "role": "SOUND",
+      "declaration": "^shp\\-[a-z]{3,4}$",
+      "cert": "CERTIFIED"
+    },
+    "H5": {
+      "origin": "O3",
+      "role": "EVADER_P",
+      "declaration": "^inv\\-[0-9]{3,4}$",
+      "cert": "REFUSED"
+    },
+    "H6": {
+      "origin": "O4",
+      "role": "EVADER_P",
+      "declaration": "^shl\\-[a-z]{3,4}$",
+      "cert": "REFUSED"
+    },
+    "H7": {
+      "origin": "O1",
+      "role": "EVADER_H",
+      "declaration": "^(?:not\\-[a-z]{3}|not\\-[A-Z]{3})$",
+      "cert": "CERTIFIED"
+    },
+    "H8": {
+      "origin": "O5",
+      "role": "EVADER_H",
+      "declaration": "^(?:pay\\-[0-9]{3}|pay\\-[A-Z]{3})$",
+      "cert": "NONE"
+    }
+  },
+  "determinism_repeat_identical": true
+}
