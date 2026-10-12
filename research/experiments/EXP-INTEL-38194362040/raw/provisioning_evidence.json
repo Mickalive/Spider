@@ -1,0 +1,126 @@
+{
+  "candidates": [
+    {
+      "attempts": [
+        {
+          "bytes": 8988110976,
+          "fingerprint": {
+            "block_count": 48,
+            "context_length": 32768,
+            "embedding_length": 5120,
+            "general.architecture": "qwen2",
+            "general.file_type": 15,
+            "general.name": "Qwen2.5 14B Instruct",
+            "gguf_version": 3,
+            "has_tokenizer_chat_template": true,
+            "kv_count": 38,
+            "tensor_count": 579
+          },
+          "identity_pass": true,
+          "sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008"
+        }
+      ],
+      "candidate_id": "M-14B-QWEN",
+      "disposition": "IDENTITY_PASS",
+      "disposition_rule": "frozen rule 3a: IDENTITY-PASS iff bytes+sha256+fingerprint all equal frozen pins; persistent mismatch -> UNMEASURED_LOAD_FAILED (no substitution)",
+      "frozen_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/05244aa5d871c661c80082a15d3bce44714d068d/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "identity_pass": true,
+      "load_attempted": false,
+      "local_path": "/tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "main_ref_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "n_download_attempts": 1,
+      "observed_bytes": 8988110976,
+      "observed_fingerprint": {
+        "block_count": 48,
+        "context_length": 32768,
+        "embedding_length": 5120,
+        "general.architecture": "qwen2",
+        "general.file_type": 15,
+        "general.name": "Qwen2.5 14B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 38,
+        "tensor_count": 579
+      },
+      "observed_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "pinned_bytes": 8988110976,
+      "pinned_fingerprint": {
+        "block_count": 48,
+        "context_length": 32768,
+        "embedding_length": 5120,
+        "general.architecture": "qwen2",
+        "general.file_type": 15,
+        "general.name": "Qwen2.5 14B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 38,
+        "tensor_count": 579
+      },
+      "pinned_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "revision_sha": "05244aa5d871c661c80082a15d3bce44714d068d"
+    },
+    {
+      "attempts": [
+        {
+          "bytes": 4920739232,
+          "fingerprint": {
+            "block_count": 32,
+            "context_length": 131072,
+            "embedding_length": 4096,
+            "general.architecture": "llama",
+            "general.file_type": 15,
+            "general.name": "Meta Llama 3.1 8B Instruct",
+            "gguf_version": 3,
+            "has_tokenizer_chat_template": true,
+            "kv_count": 33,
+            "tensor_count": 292
+          },
+          "identity_pass": true,
+          "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c"
+        }
+      ],
+      "candidate_id": "M-8B-LLAMA",
+      "disposition": "IDENTITY_PASS",
+      "disposition_rule": "frozen rule 3a: IDENTITY-PASS iff bytes+sha256+fingerprint all equal frozen pins; persistent mismatch -> UNMEASURED_LOAD_FAILED (no substitution)",
+      "frozen_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/bf5b95e96dac0462e2a09145ec66cae9a3f12067/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "identity_pass": true,
+      "load_attempted": false,
+      "local_path": "/tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "main_ref_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "n_download_attempts": 1,
+      "observed_bytes": 4920739232,
+      "observed_fingerprint": {
+        "block_count": 32,
+        "context_length": 131072,
+        "embedding_length": 4096,
+        "general.architecture": "llama",
+        "general.file_type": 15,
+        "general.name": "Meta Llama 3.1 8B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 33,
+        "tensor_count": 292
+      },
+      "observed_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "pinned_bytes": 4920739232,
+      "pinned_fingerprint": {
+        "block_count": 32,
+        "context_length": 131072,
+        "embedding_length": 4096,
+        "general.architecture": "llama",
+        "general.file_type": 15,
+        "general.name": "Meta Llama 3.1 8B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 33,
+        "tensor_count": 292
+      },
+      "pinned_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "revision_sha": "bf5b95e96dac0462e2a09145ec66cae9a3f12067"
+    }
+  ],
+  "experiment_id": "EXP-INTEL-38194362040",
+  "method": "full-download served body; compute byte count + sha256 + GGUF header fingerprint; IDENTITY-PASS iff all three equal the frozen pins",
+  "pin_policy": "sha256 of fully downloaded served body (NOT HF etag/xetHash metadata)",
+  "schema_version": 1
+}

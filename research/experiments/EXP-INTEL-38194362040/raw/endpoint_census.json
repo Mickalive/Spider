@@ -1,0 +1,170 @@
+{
+  "any_provisionable_credentialed": false,
+  "counts": {
+    "CREDENTIAL_FREE_OPERATIONALLY_CAPPED": 1,
+    "CREDENTIAL_REQUIRED": 10,
+    "PROVISIONABLE_CREDENTIATED": 0,
+    "UNREACHABLE": 1
+  },
+  "experiment_id": "EXP-INTEL-38194362040",
+  "method": "env-var presence + unauthenticated GET to model-list endpoint; no API key, no model invocation",
+  "providers": [
+    {
+      "blocker": "missing credential env var OPENAI_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "OPENAI_API_KEY",
+      "credential_env_names": [
+        "OPENAI_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "OpenAI",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.openai.com/v1/models"
+    },
+    {
+      "blocker": "missing credential env var ANTHROPIC_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "ANTHROPIC_API_KEY",
+      "credential_env_names": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Anthropic",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.anthropic.com/v1/models"
+    },
+    {
+      "blocker": "missing credential env var GEMINI_API_KEY|GOOGLE_API_KEY (unauthenticated model-list returned HTTP 403)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "GEMINI_API_KEY|GOOGLE_API_KEY",
+      "credential_env_names": [
+        "GEMINI_API_KEY",
+        "GOOGLE_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Google Gemini",
+      "reachability_http_status": 403,
+      "reachability_url": "https://generativelanguage.googleapis.com/v1beta/models"
+    },
+    {
+      "blocker": "missing credential env var MISTRAL_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "MISTRAL_API_KEY",
+      "credential_env_names": [
+        "MISTRAL_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Mistral",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.mistral.ai/v1/models"
+    },
+    {
+      "blocker": "missing credential env var GROQ_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "GROQ_API_KEY",
+      "credential_env_names": [
+        "GROQ_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Groq",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.groq.com/openai/v1/models"
+    },
+    {
+      "blocker": "missing credential env var TOGETHER_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "TOGETHER_API_KEY",
+      "credential_env_names": [
+        "TOGETHER_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Together",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.together.xyz/v1/models"
+    },
+    {
+      "blocker": "public model list reachable (HTTP 200) but inference requires missing credential env var OPENROUTER_API_KEY",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "OPENROUTER_API_KEY",
+      "credential_env_names": [
+        "OPENROUTER_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "OpenRouter",
+      "reachability_http_status": 200,
+      "reachability_url": "https://openrouter.ai/api/v1/models"
+    },
+    {
+      "blocker": "missing credential env var DEEPSEEK_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "DEEPSEEK_API_KEY",
+      "credential_env_names": [
+        "DEEPSEEK_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "DeepSeek",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.deepseek.com/v1/models"
+    },
+    {
+      "blocker": "connection error: URLError: <urlopen error [Errno -5] No address associated with hostname>",
+      "classification": "UNREACHABLE",
+      "connection_error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+      "credential_env": "HF_TOKEN|HUGGINGFACEHUB_API_TOKEN",
+      "credential_env_names": [
+        "HF_TOKEN",
+        "HUGGINGFACEHUB_API_TOKEN"
+      ],
+      "credential_present": false,
+      "provider": "HuggingFace Inference",
+      "reachability_http_status": null,
+      "reachability_url": "https://api-inference.huggingface.co/models"
+    },
+    {
+      "blocker": "missing credential env var FIREWORKS_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "FIREWORKS_API_KEY",
+      "credential_env_names": [
+        "FIREWORKS_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Fireworks",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.fireworks.ai/inference/v1/models"
+    },
+    {
+      "blocker": "missing credential env var COHERE_API_KEY (unauthenticated model-list returned HTTP 401)",
+      "classification": "CREDENTIAL_REQUIRED",
+      "connection_error": null,
+      "credential_env": "COHERE_API_KEY",
+      "credential_env_names": [
+        "COHERE_API_KEY"
+      ],
+      "credential_present": false,
+      "provider": "Cohere",
+      "reachability_http_status": 401,
+      "reachability_url": "https://api.cohere.com/v1/models"
+    },
+    {
+      "blocker": "reasoning-only content + ~197 completion-token cap + intermittent HTTP 402 + no model pinning/SLA (carried from EXP-INTEL-37973264582; not re-run as an agent)",
+      "classification": "CREDENTIAL_FREE_OPERATIONALLY_CAPPED",
+      "connection_error": null,
+      "credential_env": null,
+      "credential_env_names": [],
+      "credential_present": false,
+      "provider": "Pollinations",
+      "reachability_http_status": 200,
+      "reachability_url": "https://text.pollinations.ai/models"
+    }
+  ],
+  "schema_version": 1
+}

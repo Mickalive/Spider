@@ -1,0 +1,43 @@
+{
+  "attempts": [
+    {
+      "bytes": 4920739232,
+      "fingerprint": {
+        "block_count": 32,
+        "context_length": 131072,
+        "embedding_length": 4096,
+        "general.architecture": "llama",
+        "general.file_type": 15,
+        "general.name": "Meta Llama 3.1 8B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 33,
+        "tensor_count": 292
+      },
+      "identity_pass": true,
+      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c"
+    }
+  ],
+  "candidate_id": "M-8B-LLAMA",
+  "episodes": [],
+  "identity_pass": true,
+  "load_error": null,
+  "load_status": "PROVISIONED",
+  "local_path": "/tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+  "observed_bytes": 4920739232,
+  "observed_fingerprint": {
+    "block_count": 32,
+    "context_length": 131072,
+    "embedding_length": 4096,
+    "general.architecture": "llama",
+    "general.file_type": 15,
+    "general.name": "Meta Llama 3.1 8B Instruct",
+    "gguf_version": 3,
+    "has_tokenizer_chat_template": true,
+    "kv_count": 33,
+    "tensor_count": 292
+  },
+  "observed_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+  "positive_control": null,
+  "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-8B-LLAMA"
+}

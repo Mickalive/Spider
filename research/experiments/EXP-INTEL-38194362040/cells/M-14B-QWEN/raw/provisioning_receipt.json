@@ -1,0 +1,43 @@
+{
+  "attempts": [
+    {
+      "bytes": 8988110976,
+      "fingerprint": {
+        "block_count": 48,
+        "context_length": 32768,
+        "embedding_length": 5120,
+        "general.architecture": "qwen2",
+        "general.file_type": 15,
+        "general.name": "Qwen2.5 14B Instruct",
+        "gguf_version": 3,
+        "has_tokenizer_chat_template": true,
+        "kv_count": 38,
+        "tensor_count": 579
+      },
+      "identity_pass": true,
+      "sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008"
+    }
+  ],
+  "candidate_id": "M-14B-QWEN",
+  "episodes": [],
+  "identity_pass": true,
+  "load_error": null,
+  "load_status": "PROVISIONED",
+  "local_path": "/tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+  "observed_bytes": 8988110976,
+  "observed_fingerprint": {
+    "block_count": 48,
+    "context_length": 32768,
+    "embedding_length": 5120,
+    "general.architecture": "qwen2",
+    "general.file_type": 15,
+    "general.name": "Qwen2.5 14B Instruct",
+    "gguf_version": 3,
+    "has_tokenizer_chat_template": true,
+    "kv_count": 38,
+    "tensor_count": 579
+  },
+  "observed_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+  "positive_control": null,
+  "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-14B-QWEN"
+}

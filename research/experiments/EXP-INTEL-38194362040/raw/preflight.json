@@ -1,0 +1,42 @@
+{
+  "checks": {
+    "B_RANDOM_parseable_1_and_success_lt_0.6": true,
+    "NC_parseable_0_and_success_0": true,
+    "PC_ORACLE_EPISODE_5of5": true,
+    "freeze_artifact_hashes_match": true,
+    "required_stack_imports_ok": true
+  },
+  "freeze_artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": {
+      "exists": true,
+      "expected_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+      "match": true,
+      "observed_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"
+    },
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": {
+      "exists": true,
+      "expected_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+      "match": true,
+      "observed_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"
+    },
+    "research/intel/run_exp_37982024058.py": {
+      "exists": true,
+      "expected_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+      "match": true,
+      "observed_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+    }
+  },
+  "pass": true,
+  "run_error": null,
+  "stack_imports": {
+    "has_make_null_producer": true,
+    "has_make_random_producer": true,
+    "has_parse_action": true,
+    "has_run_episode": true,
+    "has_start_page_server": true,
+    "llama_cpp": true,
+    "llama_cpp_version": "0.2.90",
+    "parent_runner_import": true,
+    "playwright": true
+  }
+}

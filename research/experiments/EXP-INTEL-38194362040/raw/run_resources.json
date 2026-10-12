@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "method": "Each candidate cell was executed under GNU /usr/bin/time -v; the wall-clock and maximum resident set size below are captured verbatim from those wrappers. These are operational resource diagnostics, not outcome-bearing measurements.",
+  "cells": {
+    "M-14B-QWEN": {
+      "candidate_id": "M-14B-QWEN",
+      "elapsed_wall_clock": "10:20",
+      "max_resident_set_size_kb": 9403264,
+      "max_resident_set_size_gb": 8.97,
+      "user_time_s": null,
+      "system_time_s": null,
+      "exit_status": 0,
+      "note": "14B Q4_K_M (~9.0 GB weights) fit on the 15 GB runner; no load failure."
+    },
+    "M-8B-LLAMA": {
+      "candidate_id": "M-8B-LLAMA",
+      "elapsed_wall_clock": "6:29.83",
+      "elapsed_wall_clock_s": 389.83,
+      "max_resident_set_size_kb": 5249216,
+      "max_resident_set_size_gb": 5.01,
+      "user_time_s": 785.61,
+      "system_time_s": 3.67,
+      "cpu_percent": 202,
+      "exit_status": 0,
+      "note": "8B Q4_K_M (~4.9 GB weights)."
+    }
+  }
+}
