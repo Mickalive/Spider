@@ -5,10 +5,19 @@ RECEIPT=${2:?receipt path}
 shift 2
 REAL="${OPENCODE_BIN:-$HOME/.opencode/bin/opencode}"
 MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-7}"
-RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-25}"
-STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-600}"
-MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-3600}"
+RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-5}"
+STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-240}"
+MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-1200}"
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found|deprecated)|has been deprecated|HTTP[^0-9]*403)'
+PERMISSION_RE='(The user rejected permission to use this specific tool call|permission denied|requires permission approval)'
+# Github Actions has no interactive permission dialog. Explicitly fail closed on
+# unknown external paths and loop prompts rather than silently rejecting tools.
+if [[ "${GITHUB_ACTIONS:-}" == true ]]; then
+  [[ -f .github/scripts/opencode-ci-permissions.json ]] || { echo "::error::Missing headless permission policy"; exit 69; }
+  export OPENCODE_CONFIG_CONTENT
+  OPENCODE_CONFIG_CONTENT=$(cat .github/scripts/opencode-ci-permissions.json)
+  echo "SPIDER_HEADLESS_PERMISSIONS_CONFIGURED"
+fi
 LOG=$(mktemp)
 STALL_FLAG=$(mktemp)
 TIMEOUT_FLAG=$(mktemp)
@@ -210,6 +219,14 @@ while (( attempt <= MAX_ATTEMPTS )); do
     retry_from_clean_baseline "$model" "$attempt" 76 output-missing
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
+  fi
+
+  # A headless permission rejection is not a provider outage. Retrying all
+  # free models cannot fix a denied command or inaccessible external path.
+  if grep -Eiq "$PERMISSION_RE" "$LOG"; then
+    write_receipt failure "$model" "$attempt" 67 headless-permission-denied
+    echo "::error::SPIDER_HEADLESS_PERMISSION_DENIED role=$ROLE model=$model" >&2
+    exit 67
   fi
 
   if [[ "$rc" -eq 75 || "$rc" -eq 124 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
