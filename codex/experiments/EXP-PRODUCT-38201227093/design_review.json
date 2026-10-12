@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38201227093",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The decision mapping is total and every branch is concretely reachable on the frozen decision function. SUPPORTS (DECLARED_GUARD_SAFE_AND_COMPLETE) is the frozen DESIGN point-prediction (T-DECLARED-GUARD FA=0, cov=1.0) and is reachable. The secondary OBSERVATIONAL_GUARD_UNSAFE disposition is reachable AND predicted: T-AMBIGUITY-GUARD false-accepts 4 FAM-F items (case-abc, case-aab, case-bcd, case-xyz) under the widened ^case\\-[a-z]{3}$; PC-OVERWIDE-OPEN independently proves the same metric fires (FA=91). MIXED (DECLARED_GUARD_SAFE_BUT_INCOMPLETE) is reachable via PC-DECL-UNDER (too-narrow declaration refused by gate → shipped fallback → safe but coverage<1, exercising the identical decision branch). FALSIFIES (DECLARED_GUARD_UNSAFE) is reachable on the SAME decision function via BP-DECL-OVERWIDE (unsound over-wide declaration passes training-consistency gate → adopted → FA=201 → DECLARED_GUARD_UNSAFE), so the negative branch is not vacuous. On the main bank with SOUND declarations, FALSIFIES is structurally excluded by the gate's premise (any false accept would be a bank bug, anchored by B-SHIPPED/B-DECLARED-FULL validity gates). MEASUREMENT_INVALID is reachable via substituted carrier, support drift, tampered freeze artifact, bank/label inconsistency, or failing validity/sensitivity gates. No branch is empty or arithmetically impossible. Precedence (MEASUREMENT_INVALID > FALSIFIES > SUPPORTS/MIXED) is free of shadowing.",
+      "evidence_refs": [
+        "spec.json#decision_rule.decisions",
+        "spec.json#decision_rule.reachability",
+        "prereg.md sections 8-9 (decision rule, reachability)",
+        "request.json#director_mandate.allocation.question",
+        "DESIGN non-outcome probes: T-DECLARED FA=0 cov=1.0; T-AMBIGUITY FA=4 cov=0.9167 disposition UNSAFE (FAM-F); B-SHIPPED FA=0 cov=0.6750; B-DATA-WIDENED FA=18 cov=0.9167; B-DECLARED-FULL FA=0 cov=1.0; PC-COARSE FA=271; PC-OVERWIDE FA=91; PC-DECL-UNDER refused-all FA=0; BP-DECL-OVERWIDE adopted-all FA=201"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are verified present at DESIGN time, not deferred to EXECUTE: (a) python3.12.15 with stdlib only; (b) both git blobs exist (carrier b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 and literal cfec98660b0277ccbf295e8a4119e8d81ddccf50, git cat-file -t OK); (c) shipping kernel src/spider/kernel.py sha256 == 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 (carrier IS installed); (d) all SIX freeze artifacts exist with recorded sha256 (pyproject.toml, src/spider/__init__.py, models.py, registry.py, kernel.py, tests/test_kernel.py); (e) public API imports cleanly and SpiderKernel.__init__ default min_confidence == 0.8; (f) REAL-CARRIER induction path probed for all seven families: distill_parameterized yields single slot (item/account/doc/region/invoice/case/token), confidence 0.9 >= 0.8, support == EXPECTED_SHIPPED exactly (liveness/prerequisite probe, not outcome measurement); (g) frozen runner compiles (py_compile OK) and pure helpers imported/unit-checked; (h) tests/test_kernel.py passes 3/3 with src on sys.path. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES. No prerequisite claims 'will be created during EXECUTE'.",
+      "evidence_refs": [
+        "prereg.md section 12 (CANONICAL-HASHES) and section 14 (FROZEN RUNNER)",
+        "DESIGN probes: sha256sum of six artifacts; git cat-file blob checks; API/threshold probe; real-carrier induction-path probe for all seven families (slot/confidence/support); unittest 3/3 with PYTHONPATH=src; py_compile OK; V8 clause-B extraction check over written prereg.md"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms are structurally distinct objects built from the SAME seven frozen induced mechanisms, with ONLY verification_rule['parameter_supports'] rewritten (V12: mechanism_id is support-independent). B-SHIPPED keeps induced supports (over-conservative, safe, cov=0.6750). B-DECLARED-FULL injects raw oracle-declared grammar WITHOUT the gate (ceiling: must be FA=0, cov=1.0; any failure → MEASUREMENT_INVALID). T-DECLARED-GUARD = gate + shipped fallback (coincides with ceiling on SOUND declarations BY DESIGN; the gate's existence is exercised by PC-DECL-UNDER [refuses, falls back] and BP-DECL-OVERWIDE [adopts unsound, inherits FA=201]). T-AMBIGUITY-GUARD = observational refusal rule (refuses D,G; distinct supports on A/B/C/E/F). B-DATA-WIDENED = parent widening (differs from ambiguity guard on D/G and from B-SHIPPED on A/B/C/E). PC-UNSAFE-COARSE/PC-OVERWIDE-OPEN/NC-REJECT-ALL are distinct positive/null controls. B-LITERAL-KERNEL is a DIFFERENT frozen git blob lacking distill_parameterized. Carrier pinned by explicit sha256 + M-SUPPORT-IDENTITY gate (shipped/widened/ambiguity supports == frozen constants) + V8 artifact hashes. Treatment (T-DECLARED-GUARD) is separable from ceiling (B-DECLARED-FULL) through distinctive behavior on inconsistent inputs. No ceiling/floor situation where all arms are guaranteed identical. Cost metrics: model_calls=0, model_tokens=0, loopback only — no omitted cost dimension used by any comparator.",
+      "evidence_refs": [
+        "spec.json#baselines / #positive_control / #null_control / #measurement_validity (V12, V13)",
+        "prereg.md section 4 (arms) and 14 (FROZEN RUNNER: make_arm_registry rewrites only verification_rule)",
+        "EXP-PRODUCT-38197856050/handoff.json#carry_forward.established (frozen carrier identity; support descriptor is the only mutated object)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, reachable failure mode on the exact code path that produces the certificate, verified by DESIGN value-level probes: PC-UNSAFE-COARSE (FA>=1, predicted 271 using carrier's own _support_accepts semantics for __COARSE__); PC-OVERWIDE-OPEN (FA>=1, predicted 91); PC-DECL-UNDER (adopted==all-false, FA=0 — gate refuses too-narrow declaration, falls back to shipped); BP-DECL-OVERWIDE (adopted==all-true, FA=201 — proves FALSIFIES branch of decision function is live when declaration is unsound); NC-REJECT-ALL (accept_count==0, http_total==0); PC-EXACT-REPLAY (61/61); PC-DETERMINISM-REPEAT (two runs identical); M-REGRESSION (3/3). DESIGN value-level probes confirmed sensitivity margin >> 0: __COARSE__ FA=271, open-width FA=91, gate-refusal FA=0, BP-DECL-OVERWIDE FA=201. A detector that never fires would yield a meaningless zero false-accept count; all requirements are pre-established by probe.",
+      "evidence_refs": [
+        "spec.json#positive_control / #null_control / #measurement_validity (V11)",
+        "prereg.md section 4 (controls) and 8 (gates)",
+        "DESIGN value-level probe: __COARSE__ FA=271; open-width FA=91; gate-refusal FA=0; BP-DECL-OVERWIDE FA=201; NC-REJECT-ALL 0/0"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "Both treatments are structurally live on the SAME credential-free substrate class. REAL-CARRIER induction probe (DESIGN, non-outcome) reproduced for all seven families a single-slot parameterized mechanism at confidence 0.9 (>= frozen min_confidence 0.8) with supports exactly equal to EXPECTED_SHIPPED. All 61 training ids fullmatch shipped, widened, declared, and ambiguity supports, so every arm binds every training id (PC-EXACT-REPLAY 61/61 expected). Liveness is inherited from the underlying carrier (EXP-PRODUCT-38180719830 promoted it after D1-D4; EXP-PRODUCT-38186502935 ran the full shipped path end-to-end with independent audit PASS). Because both guards only rewrite the support descriptor (V12), a widened/declared support that is a strict superset of the shipped support cannot reduce liveness on the training ids. A silently dead treatment is caught by the PC-EXACT-REPLAY 61/61 gate → BLOCKED/MEASUREMENT_INVALID, never a negative. Treatment bytes are frozen by sha256 + freeze-artifact hashes. This is a Product experiment targeting C-PARAM-INHERIT; treatment_liveness is correctly PASS (not NOT_APPLICABLE).",
+      "evidence_refs": [
+        "DESIGN real-carrier induction-path probe (prereg.md D3): slots item/account/doc/region/invoice/case/token; confidence 0.9; support == EXPECTED_SHIPPED for all seven families",
+        "DESIGN liveness predicate: all 61 training ids fullmatch shipped/widened/declared/ambiguity supports",
+        "EXP-PRODUCT-38186502935/handoff.json#carry_forward.established (carrier liveness, audit PASS)",
+        "EXP-PRODUCT-38197856050/handoff.json#carry_forward.established (shipped carrier identity + safe boundary + FAM-D identifiability limit)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists the SIX existing immutable files whose identity can change the interpretation of this experiment: pyproject.toml (package definition), src/spider/__init__.py + models.py + registry.py (the package surface the shipped kernel imports), src/spider/kernel.py (THE SHIPPED CARRIER — freezeable because this experiment is READ-ONLY and never writes it; both guard rules are candidates injected in-run, not source changes), tests/test_kernel.py (regression suite). All six exist with sha256 recorded at DESIGN (kernel.py 718efa6a... == carrier) and are re-hashed by V8 clause (C). The FROZEN RUNNER and CANONICAL-HASHES are embedded verbatim in prereg.md (the V8 clause-B invariant norm(runner)==norm(block) was verified at DESIGN on the written file) and are therefore bound by freeze.json.hashes['prereg.md']. The frozen bank, oracle, label rule, and both guard rules are fully in-process inside the runner (no unbound dataset/task bank/fixture). No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "prereg.md sections 11 (binding model), 12 (CANONICAL-HASHES), 14 (FROZEN RUNNER)",
+        "DESIGN probe: extracted FROZEN RUNNER block from written prereg.md == normed runner source (V8 clause B); artifact sha256s recorded"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The experiment correctly excludes re-running the parent support-widening certificate, readiness, and the four-arm C-LLM-INHERIT benchmark per the Director mandate exclusions.",
+    "The secondary observational guard disposition (UNSAFE on FAM-F) is a bounded negative about the purely observational mechanism class and does not advance or demote any claim — correctly implemented as a mandatory co-report rather than a claim update.",
+    "The carrier identity (sha256 718efa6a...) is the same byte-identical promoted carrier from EXP-PRODUCT-38180719830/38186502935; no substitution risk.",
+    "All six freeze artifacts are existing repository files with recorded hashes; no synthetic or generated artifacts are introduced."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass with concrete evidence from DESIGN-time non-outcome probes. The decision rule is total and every branch is reachable (SUPPORTS predicted; FALSIFIES exercised by BP-DECL-OVERWIDE on the same decision function; MIXED exercised by PC-DECL-UNDER; secondary UNSAFE exercised by T-AMBIGUITY-GUARD on FAM-F and independently by PC-OVERWIDE-OPEN). All hard prerequisites are available now (git blobs, carrier installed, six freeze artifacts, API imports, real-carrier induction probe for all 7 families, tests 3/3). Baselines are structurally distinct and identifiable via support-descriptor-only mutations on the same seven induced mechanisms (V12), with carrier pinned by sha256 + V8 + M-SUPPORT-IDENTITY. Controls are proven sensitive: PC-UNSAFE-COARSE (FA=271), PC-OVERWIDE-OPEN (FA=91), PC-DECL-UNDER (gate refuses), BP-DECL-OVERWIDE (gate adopts unsound, FA=201), NC-REJECT-ALL (0/0). Treatment liveness is inherited from the shipped carrier (audit PASS) and confirmed by real-carrier induction probe (7/7 families, confidence 0.9, all 61 training ids bind). Freeze artifacts bound: six existing immutable files + FROZEN RUNNER embedded in prereg.md hash. No blocking findings. The design is satisfiable and identifiable; freeze is authorized.",
+  "evidence_refs": [
+    "spec.json (all sections)",
+    "prereg.md (all sections, especially 3-9, 11-14)",
+    "request.json#director_mandate.allocation",
+    "EXP-PRODUCT-38197856050/handoff.json",
+    "EXP-PRODUCT-38186502935/handoff.json",
+    "DESIGN non-outcome probes (value-level predicates, real-carrier induction, git blob checks, sha256 verification, unittest, py_compile, V8 extraction)"
+  ]
+}

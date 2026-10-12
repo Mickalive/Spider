@@ -151,6 +151,32 @@ def _support_accepts(support: str | None, value: Any) -> bool:
     return re.fullmatch(support, text) is not None
 
 
+def certify_declaration(declaration: str, positives: list[Any], negatives: list[Any]) -> tuple[bool, str]:
+    """Closed-world certificate for an ingested applicability grammar.
+
+    A declared grammar may be adopted in place of the inferred parameter support
+    only when it is a valid regular expression that (1) accepts every observed
+    training positive and (2) rejects every value in the audited negative bank.
+    The certificate is deliberately CLOSED-WORLD: it bounds a declaration to the
+    audited negatives and is not a general proof that the declaration's accept set
+    equals the true admissible set, so callers must keep the audited bank under
+    change control and prefer abstention over execution for uncertified values.
+    """
+    if not isinstance(declaration, str) or not declaration:
+        return False, "declaration is not a non-empty string"
+    try:
+        pattern = re.compile(declaration)
+    except re.error as exc:
+        return False, "declaration is not a valid regex: " + str(exc)
+    for value in positives:
+        if pattern.fullmatch(str(value)) is None:
+            return False, "declaration rejects a training positive"
+    for value in negatives:
+        if pattern.fullmatch(str(value)) is not None:
+            return False, "declaration accepts an audited negative"
+    return True, "certified against the audited negative bank"
+
+
 def _derive_structural_name(prefix: str) -> str:
     segment = prefix.rstrip("/").split("/")[-1]
     segment = re.sub(r"[^A-Za-z0-9_]+", "_", segment).strip("_")
@@ -404,6 +430,38 @@ class SpiderKernel:
                 self_verified = False
                 break
         mechanism.confidence = self._parameterized_confidence() if self_verified else 0.5
+        return mechanism
+
+    def ingest_declaration(
+        self,
+        mechanism: Mechanism,
+        declaration: str,
+        positives: list[Any],
+        negative_bank: list[Any],
+        slot: str,
+    ) -> Mechanism:
+        """Adopt an ingested declared grammar only when it passes the closed-world
+        certificate; otherwise keep the conservative inferred supports.
+
+        On certificate success the named slot's support is replaced by the declared
+        grammar (safe widening of the applicability boundary).  On failure the
+        inferred supports are preserved unchanged and the failed certificate is
+        recorded on the mechanism, so resolution keeps the shipped conservative
+        boundary and abstains (UNKNOWN/EXPLORE) instead of executing a value the
+        uncertified declaration cannot justify.
+        """
+        certified, reason = certify_declaration(declaration, positives, negative_bank)
+        rule = dict(mechanism.verification_rule or {})
+        supports = dict(rule.get("parameter_supports", {}))
+        rule["declaration_certificate"] = {
+            "status": "CERTIFIED" if certified else "REFUSED",
+            "reason": reason,
+            "slot": slot,
+        }
+        if certified:
+            supports[slot] = declaration
+        rule["parameter_supports"] = supports
+        mechanism.verification_rule = rule
         return mechanism
 
     def resolve(self, intent: str, context: dict[str, Any], params: dict[str, Any] | None = None) -> Resolution:

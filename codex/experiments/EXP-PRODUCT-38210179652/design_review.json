@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38210179652",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches are reachable and mutually exclusive. SUPPORTS realized by DESIGN probe (T FA=0, HTTP-on-OUT=0, refusal-viol=0, coverage=1.0 > B-SHIPPED 0.4667 and >= 0.6750). FALSIFIES reachable via C-FROZEN-CERT and A-RAW-DECL (within-envelope FA=9). MIXED reachable via A-PROV-STRICT (empty allowlist, coverage=0.4667==B-SHIPPED, FA=0). MEASUREMENT_INVALID reachable via any gate failure (carrier hash mismatch, induction failure, regression failure, control failure). Gate precedence (validity/sensitivity/provenance/growth/boundary -> MEASUREMENT_INVALID) does not shadow later branches; safety violations (FALSIFIES) checked before coverage comparison (SUPPORTS vs MIXED). Arithmetic thresholds attainable: coverage in [0,1], FA counts bounded by 25 within-envelope OUT items.",
+      "evidence_refs": [
+        "spec.json#decision_rule#decisions",
+        "prereg.md FROZEN RUNNER decision block (lines 96-100)",
+        "DESIGN probe output: SUPPORTS with all five gates PASS; C-FROZEN-CERT FA=9; A-PROV-STRICT coverage 0.4667"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) Python 3.12 stdlib only; (b) src/spider/kernel.py frozen shipped carrier sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3 confirmed unmodified; (c) all six freeze_artifacts exist with recorded sha256 (pyproject.toml, src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py, tests/test_kernel.py); (d) public API imports under PYTHONPATH=src work; SpiderKernel default min_confidence=0.8 confirmed; (e) REAL induction path probed for all eight families: distill_parameterized yields one slot each at confidence 0.9 >= 0.8 (M-MECHANISM-COUNT=8, M-SINGLE-SLOT, M-CONFIDENCE-0.9 all True); (f) two loopback oracles start and answer on 127.0.0.1 ephemeral ports; (g) runner executed end-to-end twice in probe mode with all gates PASS and determinism True; (h) tests/test_kernel.py passes 3/3 under PYTHONPATH=src. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "spec.json#measurement_validity V1-V11",
+        "prereg.md sections 1 and 7 (CANONICAL-HASHES; FROZEN RUNNER)",
+        "Verified: all six artifact hashes match; imports ok; unittest 3/3; induction probe 8/8 families ok; full probe-mode run COMPLETE SUPPORTS"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All eight arms constructed from the SAME eight frozen induced mechanisms (same carrier, same observations); only verification_rule['parameter_supports'] mutated via the real ingest_declaration path (certificate arms) or direct support substitution (B-ORACLE, A-RAW). Arms separate clearly on the frozen expansion bank: T-PROV-GROW within-envelope FA=0 vs C-FROZEN-CERT FA=9 and A-RAW-DECL FA=9 at equal coverage 1.0 (discriminating axis is safety, not coverage); A-PROV-NO-GROW FA=6 isolates growth necessity; A-GROW-NO-PROV FA=3 isolates provenance necessity; B-SHIPPED and A-PROV-STRICT anchor floor at FA=0/coverage 0.4667; B-ORACLE anchors ceiling at FA=0/coverage 1.0. No ceiling/floor degeneracy where every arm is forced identical. Cost dimensions identical across arms except the growth step (probe/oracle counts), which is separately attributed in metrics.",
+      "evidence_refs": [
+        "spec.json#baselines / #positive_control / #null_control",
+        "prereg.md FROZEN RUNNER arm-construction functions (arm_T_prov_grow, arm_ingest_only, arm_raw, arm_oracle)",
+        "DESIGN probe arm table: T=0, C-FROZEN=9, A-RAW=9, A-PROV-NO-GROW=6, A-GROW-NO-PROV=3, B-SHIPPED=0, A-PROV-STRICT=0, B-ORACLE=0"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a reachable failure mode on the exact code path it guards. PC-CERT-ADMITS-SOUND fails if certificate rejects a sound declaration; PC-CERT-REFUSES-PROBEABLE fails if growth does not surface the probeable over-accept; PC-GROW-MISSES-HIDDEN fails if the hidden over-accept becomes reachable (non-adversarial probe); PC-PROV-REFUSES-UNAUDITED fails if the origin gate is inert or leaks the hidden non-allowlisted evader; PC-UNSAFE-RAW (A-RAW FA=9) proves the oracle is not blind; PC-DISCRIMINATION proves T strictly dominates the incumbent; PC-INGEST-REFUSED-ABSTAINS exercises the REAL refusal path; PC-GROW-CATCHES-EVADER proves growth necessity; NC-REJECT-ALL / A-PROV-STRICT proves the null floor; BP-HIDDEN-FAILS proves the boundary is genuinely reachable (T boundary H7 FA=3). The DESIGN probe exercised every one with the real carrier: all fired as specified (4/4 sound CERTIFIED, 2/2 probeable REFUSED, 2/2 hidden admitted, H8 provenance-refused while certificate-would-admit, A-RAW FA=9, discrimination 0 vs 9, ingest refuse preserved, A-PROV-NO-GROW FA=6, boundary FA=3). None is vacuous or tautological.",
+      "evidence_refs": [
+        "spec.json#positive_control / #null_control",
+        "prereg.md FROZEN RUNNER controls block (lines 698-736)",
+        "DESIGN probe controls: all 12 controls pass_=True"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is the SHIPPED carrier code path (SpiderKernel.ingest_declaration + certify_declaration), invoked unchanged. The DESIGN probe exercised it on all eight families: for the four allowlisted SOUND families the declaration was CERTIFIED and the support widened (their IN items resolved EXECUTABLE); for the two probeable evaders growth fed negatives and ingest_declaration REFUSED while preserving the support (PC-INGEST-REFUSED-ABSTAINS PASS); for the non-allowlisted hidden evader the origin gate refused and the conservative support was byte-equal to the induced support (PC-PROV-REFUSES-UNAUDITED PASS). T-PROV-GROW resolved 30/30 within-envelope IN items with FA=0, so the treatment is structurally live and executable, not dead. A structurally dead treatment would be caught by T coverage <= B-SHIPPED (MIXED) or by a failing gate (MEASUREMENT_INVALID), never silently reported as a negative. No product code is written by this packet, so treatment_liveness concerns only the invoked shipped path, which is shown live. As a Product experiment targeting C-PARAM-INHERIT, treatment_liveness must be PASS (not NOT_APPLICABLE).",
+      "evidence_refs": [
+        "prereg.md FROZEN RUNNER arm_T_prov_grow / refusal_violation_check / run_once",
+        "DESIGN probe: T-PROV-GROW coverage 30/30=1.0, FA=0; ingest refuse preserved; provenance refuse preserved; M-T-CERTIFIED-COUNT=5, M-T-REFUSED-COUNT=2, M-T-PROVENANCE-REFUSED-COUNT=1"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly the six existing immutable files whose identity can change the interpretation: pyproject.toml (package definition), src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py (the SHIPPED carrier that this measurement-only packet invokes but does NOT modify), and tests/test_kernel.py (regression suite). All six exist with sha256 recorded at DESIGN (verified: 5f03fb59..., 3d173722..., 338aaf4d..., 51fb440d..., 3a6caf97..., ff9c1561...). The frozen bank, both oracles, the label rule, the probe space, the allowlist, all arm definitions and the decision function are in-process inside the FROZEN RUNNER block embedded in prereg.md, which is bound by freeze.json.hashes['prereg.md']; there is no external dataset or fixture. The only timing-dependent quantity (M-T-GROW-LATENCY-MS) is excluded from the determinism equality projection. No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "prereg.md sections 1, 5, and 7 (CANONICAL-HASHES, freeze artifacts list, FROZEN RUNNER)",
+        "Verified: all six artifact hashes match recorded values"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is total and all branches are arithmetically reachable; measurement prerequisites are fully satisfied at DESIGN time with no 'will be created during EXECUTE' dependencies; baselines are identifiable and separate on the discriminating safety axis; all controls are sensitive and non-vacuous; the shipped carrier treatment is live and executable; and all mutable interpretation dependencies are bound in freeze_artifacts. The experiment is capable of answering its question and should proceed to freeze.",
+  "evidence_refs": [
+    "spec.json",
+    "prereg.md",
+    "request.json",
+    "Verified artifact hashes (6/6 match)",
+    "Verified induction (8/8 families, single slot, confidence 0.9)",
+    "Verified regression tests (3/3 pass)",
+    "Verified probe-mode execution (COMPLETE, SUPPORTS, all 5 gates PASS, determinism True)"
+  ]
+}

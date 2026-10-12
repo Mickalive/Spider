@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38194351940",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "All twelve V1-V8 validity gates PASS: V1_code_fidelity_manifest (harness sha256 matches frozen source_sha256 acbb1e1f...), V2_transport_conformance (stdlib HTTP on loopback), V3_no_leak (15/15 protocol invariants hold, chain task resource_id null in scored sessions, no answer leak), V4_determinism (two scored runs byte-identical), V5_arm_liveness (T=1.0 and PC=1.0 at all 8 family/novelty cells), V6_counter_instrumentation (all four counters with matched accounting), V7_matched_correctness (exact-match, matched_correctness==success_rate in all 56 cells), V8_ceiling_band (all arms 1.0 at novelty 0.0), V8_identity_disclosure (B-CROSS-SESSION-COMPILE success- and counter-identical to T), V8_mechanism_nondegenerate (100 instances: a_zero=0, duplicate_x=0, solve_fail=0, query_collision=0, min_query_gap=399759921), V8_mechanism_off (NC-MECHANISM-OFF drives within-session comparator to 1.0), V8_retention_counter_distinctness (T vs retention comparators: 2-3/4 dims distinct, >= MIN_DISTINCT_DIMS=2).",
+    "Harness fidelity verified: run_experiment.py sha256 equals frozen spec.design_satisfiability_probe.source_sha256; probe-mode and selftest-mode stdout reproduce frozen sha256 byte-for-byte.",
+    "No leakage detected: protocol_invariants.json confirms all 15 invariants hold; the chain task resource_id is null in scored sessions; the required answer M(x_q) and M(M(x_q)) appears in no scored session/task/error body; calibration labels appear only in their own calibration receipts.",
+    "Determinism verified: two independent scored matrix runs (56 cells x 20 sessions = 1120 bank instances each) produced byte-identical outcomes.",
+    "Arm liveness verified: T-MECHANISM-INHERIT and PC-EXACT-REPLAY achieve 1.0 success rate at every band (novelty 0.0, 0.25, 0.5, 0.75) for both families.",
+    "Counter distinctness verified at novelty 0.5: B-WITHIN-SESSION-RECEIPT (2/4), B-WITHIN-SESSION-COMPOSE (2/4), B-RETRIEVAL-REPLAY (3/4), B-MEMORYLESS (2/4) — all meet MIN_DISTINCT_DIMS=2.",
+    "NC-MECHANISM-OFF sensitivity control verified: exposing the chain answer drives within-session retention comparator to 1.0 in both families, destroying the certificate as designed.",
+    "NC-MECHANISM-NONDEGENERATE verified: affine mechanism is genuine (a != 0, distinct calibration inputs, exact affine recovery, no query collision over 100 instances).",
+    "The retention ladder (no retention-only scope closes the range) is correctly treated as a declared control/predictor, NOT a validity gate — a closing scope is a scientific COLLAPSED/PARTIAL outcome, not MEASUREMENT_INVALID."
+  ],
+  "baseline_findings": [
+    "The three retention comparators (B-WITHIN-SESSION-RECEIPT, B-WITHIN-SESSION-COMPOSE, B-RETRIEVAL-REPLAY) are correctly pinned at the information-theoretic (K-1)/K rate by construction: F1-RECORDS (K=8) = 0.875, F2-WIDGETS (K=10) = 0.900 at both scored bands (novelty 0.5 and 0.75). This matches the frozen retention_lattice_arithmetic closed-form prediction exactly.",
+    "B-MEMORYLESS baseline also achieves (K-1)/K at scored bands, as predicted (fresh session per task, no retention).",
+    "Treatment margins over all three retention comparators are 0.125 (F1) and 0.100 (F2) at both scored bands, exceeding MARGIN_FLOOR=0.05 by factors of 2.5x and 2.0x respectively.",
+    "All three retention comparators satisfy retention_certifies at all four scored cells (12/12): comparator_rate < COMPARATOR_MAX (0.95), all arm rates >= CORRECTNESS_FLOOR (0.80), matched_correctness >= 0.80, margin >= 0.05.",
+    "The identity control B-CROSS-SESSION-COMPILE is success- and counter-identical to T (margin 0) by construction, as disclosed. It is correctly excluded from retention_certifies (which requires positive margin) and does not count as a certificate comparator.",
+    "Counter accounting matches frozen per-instance predictions exactly (e.g., T F1: 34 http, 16 verification, 0 retrieval, 0 repair per instance; B-RETRIEVAL-REPLAY F1: 36 http, 8 retrieval, 16 verification, 1 repair per instance)."
+  ],
+  "recomputed_metrics": {
+    "success_rate_matrix": {
+      "F1-RECORDS": {
+        "0.0": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-MEMORYLESS": 1.0
+        },
+        "0.25": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-MEMORYLESS": 1.0
+        },
+        "0.5": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-MEMORYLESS": 0.875
+        },
+        "0.75": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-MEMORYLESS": 0.875
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-MEMORYLESS": 1.0
+        },
+        "0.25": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-MEMORYLESS": 1.0
+        },
+        "0.5": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-MEMORYLESS": 0.9
+        },
+        "0.75": {
+          "T-MECHANISM-INHERIT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-MEMORYLESS": 0.9
+        }
+      }
+    },
+    "retention_certification_all_cells": {
+      "B-WITHIN-SESSION-RECEIPT": {
+        "F1-RECORDS|0.5": {"certifies": true, "margin": 0.125},
+        "F1-RECORDS|0.75": {"certifies": true, "margin": 0.125},
+        "F2-WIDGETS|0.5": {"certifies": true, "margin": 0.1},
+        "F2-WIDGETS|0.75": {"certifies": true, "margin": 0.1}
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "F1-RECORDS|0.5": {"certifies": true, "margin": 0.125},
+        "F1-RECORDS|0.75": {"certifies": true, "margin": 0.125},
+        "F2-WIDGETS|0.5": {"certifies": true, "margin": 0.1},
+        "F2-WIDGETS|0.75": {"certifies": true, "margin": 0.1}
+      },
+      "B-RETRIEVAL-REPLAY": {
+        "F1-RECORDS|0.5": {"certifies": true, "margin": 0.125},
+        "F1-RECORDS|0.75": {"certifies": true, "margin": 0.125},
+        "F2-WIDGETS|0.5": {"certifies": true, "margin": 0.1},
+        "F2-WIDGETS|0.75": {"certifies": true, "margin": 0.1}
+      }
+    },
+    "counter_distinctness_vs_T_at_0.5": {
+      "F1-RECORDS": {
+        "B-WITHIN-SESSION-RECEIPT": 2,
+        "B-WITHIN-SESSION-COMPOSE": 2,
+        "B-RETRIEVAL-REPLAY": 3,
+        "B-MEMORYLESS": 2
+      },
+      "F2-WIDGETS": {
+        "B-WITHIN-SESSION-RECEIPT": 2,
+        "B-WITHIN-SESSION-COMPOSE": 2,
+        "B-RETRIEVAL-REPLAY": 3,
+        "B-MEMORYLESS": 2
+      }
+    },
+    "gates_all_pass": true,
+    "determinism_ok": true,
+    "decision_label": "ROBUST",
+    "outcome_mapping": "ROBUST -> SUPPORTS (per spec.decision_rule.outcome_enum_mapping)"
+  },
+  "claim_ceiling": "A hardened V3 credential-free bank (SBA-CREDENTIAL-FREE-V3, Session-Mechanism-Inheritance class, affine mechanism M(x)=(a*x+b) mod P with P=2**40-87, K in {8,10}) is constructible and certified pre-freeze such that: (1) the treatment arm carrying a compiled mechanism across the session boundary achieves success_rate=1.0 at all scored bands; (2) all three retention-only comparators (within-session full-receipt log, within-session compose, cross-session raw-example replay) are pinned at the information-theoretic (K-1)/K rate (0.875 F1, 0.900 F2) with treatment margins of 0.125 and 0.100 respectively, exceeding MARGIN_FLOOR=0.05; (3) all twelve V1-V8 validity gates pass; (4) the separation is compile-vs-retain over identical raw information (scored session contains no labelled (x,M(x)) pair). This discharges readiness blocker B2 **for this specific substrate construction only**. The result does not promote any mechanism to Product Core, does not change C-MEAS-VALID status, and does not authorize the four-arm benchmark (which independently requires B1 and B3).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38194351940/request.json",
+    "research/experiments/EXP-RUNTIME-38194351940/spec.json",
+    "research/experiments/EXP-RUNTIME-38194351940/prereg.md",
+    "research/experiments/EXP-RUNTIME-38194351940/freeze.json",
+    "research/experiments/EXP-RUNTIME-38194351940/design_review.json",
+    "research/experiments/EXP-RUNTIME-38194351940/result.json",
+    "research/experiments/EXP-RUNTIME-38194351940/report.md",
+    "research/experiments/EXP-RUNTIME-38194351940/provenance.json",
+    "research/experiments/EXP-RUNTIME-38194351940/artifacts/run_scored.json (sha256: 940c5609adfb8cae4de92c0a416ffb223b0aeca838c817932811f4848ba2fa1a)",
+    "research/experiments/EXP-RUNTIME-38194351940/artifacts/derived_metrics.json (sha256: 1205502eda7b093dbe14d8296792a526a412c842775d90a3fc2623e4632eb446)",
+    "research/experiments/EXP-RUNTIME-38194351940/artifacts/protocol_invariants.json (sha256: e3c1aec1e6fecd070dc8eb8ac051eeef2524aec48725a8026754b180bb887412)",
+    "research/experiments/EXP-RUNTIME-38194351940/artifacts/probe_stdout.json (sha256: 92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e)",
+    "research/experiments/EXP-RUNTIME-38194351940/artifacts/selftest_stdout.json (sha256: 208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c)",
+    "research/experiments/EXP-RUNTIME-38182129488/handoff.json (parent, sha256: 2192ce4494fd533557135b7696e6068880fe4b962495707d71d59f46bb6650c5)"
+  ],
+  "unresolved": [
+    "Whether real external comparator arms (e.g., COLD / INSTRUCTIONS / RETRIEVAL in a future C-LLM-INHERIT benchmark) actually behave like within-session full-receipt memory; only synthetic comparator policies were measured here.",
+    "Whether the same memory-robust range holds for K outside {8,10} or for non-affine / non-SBA-CREDENTIAL-FREE-V3 hidden mechanisms; only K in {8,10} and one affine family were measured.",
+    "Whether the flagship four-arm C-LLM-INHERIT benchmark can be run at all: B1 (audited parameterized carrier promoted into the kernel) and B3 (capable same-protocol agent endpoint) remain unresolved and gate it independently.",
+    "Whether the identity control B-CROSS-SESSION-COMPILE can be separated from T by a substrate change while preserving a credential-free discovery path; untested here.",
+    "The experiment's scope is bounded to a synthetic credential-free stdlib-only HTTP bank on 127.0.0.1 loopback; it does not measure a real external LLM/browser agent or any natural/economically-bearing Web task."
+  ]
+}

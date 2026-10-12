@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "decision": "MIXED-TRADEOFF",
+  "claim_updates": [
+    {
+      "claim_id": "C-DELTA-REPAIR",
+      "status": "EXPERIMENTAL",
+      "reason": "Valid, audit-PASSed transaction (result.json status=COMPLETE, outcome=MIXED, invalid_reasons=[]; audit.json status=PASS, producer_claim_supported=true, required_fixes=[], V1-V12 all PASS; runner self-sha 0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1 equals CANONICAL-RUNNER-SHA256; carrier hashes match freeze.json.artifact_hashes). Frozen decision rule yields MIXED-TRADEOFF on all three perturbation classes (P1-ENDPOINT/P2-STRUCTURE/P3-PERMISSION). Functional half (H1) supported: signal-driven local repair of the shipped parameterized carrier restored end-to-end success 12/12 per class (M-REPAIR-SUCCESS=1.0, Wilson 95% lower=0.7575>=0.60) with guard fire rate 1.0. Locality half (H2) supported: write set max=1, contamination 0/48 probes (M-CONTAMINATION-RATE=0.0), NC-OVERBROAD-REPAIR detected 4/4. Cost half (H3) falsified as a strict win: registered equal-weight product counter ratio = 1.0526315789473684 (>1.00) at L=3, 1.1111111111111112 at L=2 and 1.0 at L=4 (stable across cold budgets), while fetch ratio = 0.7777777777777778 / 0.6666666666666666 / 0.7777777777777778. The mandate's strict cost claim (product_ratio<1.00 AND fetch_ratio<=0.90) is therefore falsified at this scope; the result is a network-cost-only maintenance benefit. Status RETAINED at EXPERIMENTAL (prior effective_event_by_claim.C-DELTA-REPAIR = EXPERIMENTAL, EXP-GRAPH-36018188168); this packet neither upgrades to VALIDATED (no PASS on the strict cost claim) nor globally REJECTS the claim (bounded single credential-free substrate; no live-site/cross-site evidence). Nuance (network-cheaper but product-counter-neutral-to-regressive) is a bounded finding, not a change in the claim's effective epistemic state."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE local repair. Restrict C-DELTA-REPAIR to a network-cost-only maintenance benefit at the credential-free single-substrate ceiling; keep the registered equal-weight product counter {http_requests, retrieval_calls, verification_calls, repair_attempts} as the binding product-economics constraint. Do not add local repair to the treatment arm of the gated product-economics benchmark on this evidence. Any future product integration must be a separate Product-lane, frozen, PASS-audited experiment against the shipping tree.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a local-repair policy on the shipped parameterized carrier (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify) eliminate the repair path's extra retrieval/verification overhead (reusing the freshness-guard probe observation, not double-charging verification) so that repair becomes strictly product-counter-cheaper than cold re-derivation on the registered equal-weight counter (ratio < 1.00 at the carrier minimum viable budget L=2, where the observed ratio is 1.1111111111111112 and 1.0526315789473684 at L=3), or is the ~5.3% product-counter regression intrinsic to localized repair under that counter -- and does the network-fetch-only win (fetch ratio 0.6666666666666666-0.7777777777777778) translate into a net end-to-end cost win on a substrate where fetches rather than model calls are the scarce resource?",
+  "reason": "Producer EXECUTE completed validly (status=COMPLETE, outcome=MIXED, invalid_reasons=[]) and the independent audit returned PASS with producer_claim_supported=true and no required fixes. The frozen decision rule deterministically yields MIXED-TRADEOFF on all three perturbation classes, so the mandate's strict-cost claim (functional AND local AND strictly product-counter-cheaper) is NOT met. Grounded in exact upstream evidence: functional (result.json#metrics.M-CLASSES[*].M-REPAIR-SUCCESS=1.0, Wilson lower 0.7575; M-GUARD-FIRE-RATE=1.0), local (M-WRITE-SET-MAX=1, M-CONTAMINATION-RATE=0.0), but cost-regressive on the product counter (M-COST-PRODUCT-RATIO=1.0526315789473684 at L=3; 1.1111111111111112 at L=2; 1.0 at L=4) while network-cheaper (M-COST-FETCH-RATIO=0.7777777777777778/0.6666666666666666/0.7777777777777778). Controls were sensitive and non-tautological: B-LITERAL-REPLAY=0.0, B-NO-REPAIR=0.0, B-COLD=1.0, PC-BASE-LIVENESS 36/36, NC-NO-PERTURBATION and NC-NOISE stayed fresh, NC-OVERBROAD-REPAIR detected 4/4 (with a prereg class-specific prediction miss in the control, not a confirmatory failure). Per spec.product_consequence_negative, a MIXED-TRADEOFF means local repair is not promoted and the claim is restricted to a network-cost-only maintenance benefit. C-DELTA-REPAIR remains EXPERIMENTAL (prior effective state), now bounded to this credential-free, locally served, in-process stdlib HTTP substrate; no live-site, cross-site or structural generality is established. No immediate chaining: a NEW experiment requires a fresh Global Research Director director_mandate, and the mandate explicitly superseded the parent handoff direction.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38197849043/request.json",
+    "research/experiments/EXP-GRAPH-38197849043/request.json#director_mandate",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json#claim_ids",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json#falsifier",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json#product_consequence_negative",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json#freeze_eligibility",
+    "research/experiments/EXP-GRAPH-38197849043/prereg.md",
+    "research/experiments/EXP-GRAPH-38197849043/freeze.json#artifact_hashes",
+    "research/experiments/EXP-GRAPH-38197849043/design_review.json",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#status",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#outcome",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#metrics.M-CLASSES",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#metrics.M-CLASS-COST-VERDICTS",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#metrics.M-REPAIR-VS-COLD-PRODUCT-RATIO",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#metrics.M-REPAIR-VS-COLD-FETCH-RATIO",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#controls",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#observations",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#validity_notes",
+    "research/experiments/EXP-GRAPH-38197849043/result.json#unresolved",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#status",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#producer_claim_supported",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#validity_findings",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#baseline_findings",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#recomputed_metrics",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#claim_ceiling",
+    "research/experiments/EXP-GRAPH-38197849043/audit.json#unresolved",
+    "research/experiments/EXP-GRAPH-38197849043/report.md",
+    "research/experiments/EXP-GRAPH-38197849043/provenance.json",
+    "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_result_raw.json",
+    "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_delta_repair.py",
+    "codex/claim_state.json#effective_event_by_claim.C-DELTA-REPAIR",
+    "research/lanes/registry.json#lanes.graph"
+  ]
+}

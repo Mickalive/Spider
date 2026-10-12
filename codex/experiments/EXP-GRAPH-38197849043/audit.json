@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "gate": "V1-FREEZE_BINDING",
+      "status": "PASS",
+      "detail": "Extracted runner bytes SHA256 (0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1) matches prereg CANONICAL-RUNNER-SHA256; request/prereg/spec/design_review hashes match freeze.json.hashes; freeze.json.artifact_hashes match live carrier module hashes."
+    },
+    {
+      "gate": "V2-SUBSTRATE_ISOLATION",
+      "status": "PASS",
+      "detail": "Runner uses Python 3.12 stdlib only (http.server, urllib, json, hashlib, threading, tempfile, etc.); no LLM, credential, external network, browser, nginx, gunicorn, Redis, or WAL. Registry state isolated in fresh per-process tempfile.mkdtemp directory; no cross-run mechanism leakage."
+    },
+    {
+      "gate": "V3-DETERMINISM",
+      "status": "PASS",
+      "detail": "Two independent --mechanics-only canary runs are byte-identical (SHA256 473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a both). Scored run executed once under fixed seeds as preregistered; determinism gate satisfied by canary pair."
+    },
+    {
+      "gate": "V4-PERTURBATION_BITES",
+      "status": "PASS",
+      "detail": "B-LITERAL-REPLAY success = 0.0 on all three classes (P1, P2, P3), well below the 0.10 threshold. Perturbation genuinely breaks the inherited mechanism."
+    },
+    {
+      "gate": "V5-COLD_BASELINE_LIVE",
+      "status": "PASS",
+      "detail": "B-COLD success = 1.0 on all three classes, exceeding the 0.90 threshold. Cold re-derivation is a live, strong baseline."
+    },
+    {
+      "gate": "V6-NO_REPAIR_INERT",
+      "status": "PASS",
+      "detail": "B-NO-REPAIR success = 0.0 on all classes, below the 0.10 threshold. Abstention control correctly fails."
+    },
+    {
+      "gate": "V7-GUARD_LIVENESS",
+      "status": "PASS",
+      "detail": "Guard fire rate = 1.0 on all 36 perturbed trials (>= 0.80 threshold). NC-NO-PERTURBATION stale=false, NC-NOISE stale=false; guard correctly silent on both negative controls."
+    },
+    {
+      "gate": "V8-NO_TARGET_LEAKAGE",
+      "status": "PASS",
+      "detail": "Repair write set max = 1 in all 36 trials (M-WRITE-SET-MAX=1, mean=1.0). Contamination measured only on the four genuinely unaffected resources; M-CONTAMINATION-RATE = 0.0 (0/48 probes)."
+    },
+    {
+      "gate": "V9-INTEGER_COUNTERS",
+      "status": "PASS",
+      "detail": "All cost counters are integer counts from the shipped TrajectoryCounters surface plus the runner's honest HTTP counter. Observed product means: repair=20, cold=19, cold_min=18, cold_deep=20; fetch means: repair=7/6/7, cold=9. No estimated or model-token quantities."
+    },
+    {
+      "gate": "V10-THRESHOLD_NOT_FITTED",
+      "status": "PASS",
+      "detail": "JACCARD_THRESHOLD=0.85, PRODUCT_COST_BAR=1.00, PRODUCT_COST_MAX=1.15, FETCH_COST_BAR=0.90 are hardcoded in the frozen runner and prereg; no post-hoc tuning against scored run."
+    },
+    {
+      "gate": "V11-N_CONTROLLED",
+      "status": "PASS",
+      "detail": "TRIALS_PER_CLASS=12 scored trials per class (36 total) with targets rotating over users/posts/comments (4 each per class). All trials valid."
+    },
+    {
+      "gate": "V12-POSITIVE_CONTROL",
+      "status": "PASS",
+      "detail": "PC-BASE-LIVENESS true (base_liveness=true) in all 36 trials before perturbation; all learned mechanisms resolve EXECUTABLE and first read verifies."
+    },
+    {
+      "gate": "NC-OVERBROAD-REPAIR_PREDICTION",
+      "status": "NOTE",
+      "detail": "Prereg anticipated >0 contamination for P2-STRUCTURE only (schema change) and 0 for P1/P3 (stable schema). Observed 4/4 contamination for ALL classes because each resource's distilled mechanism carries resource-specific literal postconditions (e.g., kind=user vs kind=post). Applying target's postconditions to all mechanisms breaks others regardless of class. Control still demonstrates contamination metric sensitivity (global rewrite detected); prediction miss in control design does not affect confirmatory metrics or decision (invalid_reasons=[])."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-COLD",
+      "role": "primary cost comparator",
+      "status": "LIVE_AND_STRONG",
+      "detail": "Cold re-derivation (L=3) succeeds 12/12 on all classes. Cost: product=19 (http=9, retrieval=5, verification=5, repair=0). This is the mandate's strong cold/retrieval comparator on the SAME perturbed task."
+    },
+    {
+      "baseline": "B-COLD-MIN",
+      "role": "cost sensitivity (L=2)",
+      "status": "LIVE",
+      "detail": "Cold re-derivation (L=2) succeeds 12/12 on all classes. Cost: product=18 (http=8, retrieval=5, verification=5, repair=0). Repair product ratio vs L=2 = 1.111 (regression larger)."
+    },
+    {
+      "baseline": "B-COLD-DEEP",
+      "role": "cost sensitivity (L=4)",
+      "status": "LIVE",
+      "detail": "Cold re-derivation (L=4) succeeds 12/12 on all classes. Cost: product=20 (http=10, retrieval=5, verification=5, repair=0). Repair product ratio vs L=4 = 1.0 (break-even). Cost verdict stable across all three budgets."
+    },
+    {
+      "baseline": "B-LITERAL-REPLAY",
+      "role": "mechanism control (must fail)",
+      "status": "FAILS_AS_EXPECTED",
+      "detail": "Literal replay of inherited unrepaired mechanism: success=0.0 on all classes. Perturbation bites; control is sensitive."
+    },
+    {
+      "baseline": "B-NO-REPAIR",
+      "role": "abstention control (must fail)",
+      "status": "FAILS_AS_EXPECTED",
+      "detail": "Guard fires but system abstains: success=0.0 on all classes. Explicitly NOT the cost denominator (per prereg §7). Control is sensitive."
+    },
+    {
+      "baseline": "PC-BASE-LIVENESS",
+      "role": "positive control",
+      "status": "PASS",
+      "detail": "Pre-perturbation, all mechanisms resolve EXECUTABLE and first read verifies in all 36 trials."
+    },
+    {
+      "baseline": "NC-NO-PERTURBATION",
+      "role": "negative control",
+      "status": "PASS",
+      "detail": "Guard does not fire without perturbation: stale=false, jaccard=1.0."
+    },
+    {
+      "baseline": "NC-NOISE",
+      "role": "negative control",
+      "status": "PASS",
+      "detail": "Non-semantic observed_at churn does not trigger guard: stale=false, jaccard=1.0. Required-field-filtered Jaccard correctly ignores non-semantic fields."
+    },
+    {
+      "baseline": "NC-OVERBROAD-REPAIR",
+      "role": "negative control (contamination sensitivity)",
+      "status": "PASS_WITH_PREDICTION_MISS",
+      "detail": "Global rewrite detected as contaminated (4/4 unaffected resources broken) on ALL classes, not only P2-STRUCTURE as predicted. Sensitivity demonstrated; class-specific prediction was incorrect due to resource-specific literal postconditions in all mechanisms. Does not affect decision."
+    }
+  ],
+  "recomputed_metrics": {
+    "M-CLASSES": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 7.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.7777777777777778
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.6666666666666666
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 7.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.7777777777777778
+      }
+    },
+    "M-POOLED-REPAIR-SUCCESS": 1.0,
+    "M-POOLED-CONTAMINATION-RATE": 0.0,
+    "M-REPAIR-VS-COLD-PRODUCT-RATIO": {
+      "P1-ENDPOINT": 1.0526315789473684,
+      "P2-STRUCTURE": 1.0526315789473684,
+      "P3-PERMISSION": 1.0526315789473684
+    },
+    "M-REPAIR-VS-COLD-FETCH-RATIO": {
+      "P1-ENDPOINT": 0.7777777777777778,
+      "P2-STRUCTURE": 0.6666666666666666,
+      "P3-PERMISSION": 0.7777777777777778
+    },
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "M-TRIALS-TOTAL": 36,
+    "PER_CLASS_COST_VERDICT": {
+      "P1-ENDPOINT": "MIXED-TRADEOFF",
+      "P2-STRUCTURE": "MIXED-TRADEOFF",
+      "P3-PERMISSION": "MIXED-TRADEOFF"
+    },
+    "AGGREGATE_DECISION": "MIXED-TRADEOFF",
+    "AGGREGATE_OUTCOME": "MIXED"
+  },
+  "claim_ceiling": "C-DELTA-REPAIR is bounded to a network-cost-only maintenance benefit (MIXED-TRADEOFF) on a single credential-free, locally served, perturbable stdlib HTTP substrate. The deterministic freshness guard plus signal-driven local repair of the shipped parameterized carrier is functional (1.0 success, Wilson 95% lower 0.7575) and local (write set max=1, contamination rate=0.0), but is NOT strictly cheaper than cold re-derivation on the registered equal-weight product counter (product_ratio=1.0526 > 1.00 at L=3; 1.1111 at L=2; 1.0 at L=4). The win exists only on live network fetches (fetch_ratio=0.667-0.778 <= 0.90). No live-site, cross-site, or structural generality is established. The mandate's strict cost claim (product_ratio < 1.00 AND fetch_ratio <= 0.90) is falsified; the result is correctly reported as MIXED-TRADEOFF.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_result_raw.json (sha256: 00c805de25116807f729e944a437bb2ec88a58bfd0e4c01d2ad87f79085537e4)",
+    "research/experiments/EXP-GRAPH-38197849043/result.json",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json",
+    "research/experiments/EXP-GRAPH-38197849043/prereg.md",
+    "research/experiments/EXP-GRAPH-38197849043/freeze.json",
+    "research/experiments/EXP-GRAPH-38197849043/design_review.json",
+    "research/experiments/EXP-GRAPH-38197849043/provenance.json"
+  ],
+  "unresolved": [
+    "Whether any local-repair policy can be STRICTLY product-counter-cheaper than cold re-derivation on this carrier (all classes currently regress ~5.3% at L=3; ratio >1.0 at L=2 and L=3 and exactly 1.0 at L=4). Candidate direction: reduce the retrieve/verify overhead of the repair path so the saved fetches dominate the one repair_attempt.",
+    "Whether the MIXED-TRADEOFF holds on a materially different substrate (live sites, non-string ids, nested schemas) or is an artifact of this minimal JSON API.",
+    "Why NC-OVERBROAD-REPAIR contaminates P1/P3 as well as P2 (resource-specific literal postconditions in all distilled mechanisms); if a class-specific over-broad prediction is required in future, the control should be redesigned to isolate the schema-change class.",
+    "Whether the equal-weight product counter is the right product-economics constraint, or whether a network-weighted counter would be the appropriate decision surface (the current registered counter is the preregistered constraint and yields MIXED-TRADEOFF).",
+    "The Wilson 95% lower bound >= 0.60 with n=12 requires 11/12 successes (91.7%), making the functional_ok bar extremely strict. This is a design choice that reduces statistical power; a future iteration may consider whether the bound is appropriately calibrated."
+  ]
+}

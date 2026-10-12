@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38189918141",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "V8-FREEZE-BINDING PASS: freeze.json exists; prereg.md sha256 (6d09ebc9aa83f98c93ef5c44dc61f4ce4d6009d8c6d893dabca1c9b1cdc5ebb3) matches freeze.json.hashes['prereg.md']; running runner source (harness/run_bank.py) matches FROZEN RUNNER block verbatim (normalized); all six artifact hashes match freeze.json.artifact_hashes. Verified independently.",
+    "M-IDENTITY PASS: src/spider/kernel.py sha256 = 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 == carrier git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796. Verified via git cat-file and direct file hash.",
+    "M-REGRESSION PASS: tests/test_kernel.py discovers and passes 3 tests (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention) with 0 failures/errors. Verified via PYTHONPATH=src python3 -m unittest.",
+    "PC-EXACT-REPLAY PASS: 5/5 training ids (item-001..item-005) re-resolve EXECUTABLE on the induced mechanism. Confirmed in raw treatment_records.",
+    "B-LITERAL-KERNEL PASS: pre-promotion literal kernel (git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50, sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61) loaded in hermetic temp package lacks distill_parameterized (has_distill_parameterized=false). Attribution intact.",
+    "PC-DETERMINISM-REPEAT PASS: runner-internal two-run comparison shows identical treatment/coarse metrics and mechanism identity (port-invariant). Additionally, two independent external process runs produced byte-identical stdout JSON (sha256 7c8e90019a781af9e9cc3e573680b86fdb50c3b6e2589d56b02de0180def04b6). Verified independently.",
+    "PC-UNSAFE-COARSE PASS (sensitivity gate): carrier's __COARSE__ fallback yields false_accept_count=38 on the 59 OUT items (35 issued HTTP 404). Margin >> 1. The detector is demonstrably non-vacuous. Note: DESIGN probe predicted 36 OUT string accepts; EXECUTE observed 38 because coarse predicate also accepts 10 non-string type payloads via str() coercion - this strengthens, not weakens, sensitivity.",
+    "NC-REJECT-ALL PASS (null floor): empty registry yields accept_count=0, http_total=0. Anchors the zero floor for M-FALSE-ACCEPT-COUNT and M-REFUSAL-ZERO-HTTP.",
+    "Bank constructibility V5 PASS: 78 unique bids; label rule yields 19 IN / 59 OUT; 0 class/label mismatches. Verified by inspecting _bank_spec() and label_of() logic against frozen bank.",
+    "Refusal semantics V6 PASS: all 59 OUT refusals have bound_action=null, non-empty reason, status != EXECUTABLE, http_delta=0. Context/intent/param-mismatch routes: 5 UNKNOWN (no applicable mechanism), 2 EXPLORE missing-parameter. Zero refusal-semantics violations.",
+    "No model calls, browser actions, or external network requests (model_calls=0, model_tokens=0, browser_actions=0, external_network_requests=0 by construction). Only loopback HTTP to in-process oracle.",
+    "V1 determinism: induced support (^item\\-00[0-9]{1}$), slots (['item']), confidence (0.9) are arithmetic functions of the 5 induction values (item-001..005). Runner uses no RNG, wall-clock, or external state. Mechanism identity (slots/support/confidence) stable across runs; mechanism_id (ephemeral-port-bearing) correctly excluded from comparison."
+  ],
+  "baseline_findings": [
+    "T-SHIPPED (treatment): Shipped carrier + 5-example induction. Primary measurement arm. Zero false accepts on OUT, zero HTTP on OUT. Coverage 10/19 on declared IN items. Correctly measures the safety boundary of the induced single-observation-length support.",
+    "B-WIDENED-3 (strong comparator): Same carrier mechanism with support overridden to ^item\\-[0-9]{3}$ (declared 3-digit grammar). Achieves false_accept_count=0 AND coverage=1.0 (19/19 IN accepted, 0/59 OUT accepted). Proves a safe, complete alternative exists on this bank. Not a hard gate but critical for claim ceiling: the over-conservatism is avoidable.",
+    "PC-UNSAFE-COARSE (positive control / detector sensitivity): Same carrier mechanism with support overridden to __COARSE__ (carrier's own coarse fallback sentinel accepting any non-empty string without whitespace or '/'). Must false-accept >= 1; observed 38. Non-vacuous detector confirmed. Uses no new code - __COARSE__ is the shipped _COARSE_SUPPORT constant.",
+    "NC-REJECT-ALL (null control): Empty registry. Must accept nothing and issue zero HTTP; observed 0/0. Anchors the measurement floor. If it accepted anything, the safety certificate's zero would be meaningless.",
+    "B-LITERAL-KERNEL (ablation / attribution): Pre-promotion literal kernel (git blob cfec9866...) loaded in hermetic temp package with same shipped models/registry/init. Must lack distill_parameterized; confirmed false. If it unexpectedly had the parameterized path, attribution of the positive to the installed carrier would break -> MEASUREMENT_INVALID.",
+    "PC-EXACT-REPLAY (positive control / execution-path integrity): After induction, re-resolve each of the 5 training ids; all 5 must be EXECUTABLE. Confirmed 5/5. Failure would indicate broken bind/registry -> MEASUREMENT_INVALID.",
+    "All arms share the identical carrier mechanism code path (src/spider/kernel.py); only the verification_rule support descriptor differs. This isolates the effect of the support predicate from other mechanism behavior. Carrier bytes pinned by sha256 + freeze-artifact hash + parent handoff identity."
+  ],
+  "recomputed_metrics": {
+    "M-FALSE-ACCEPT-COUNT": 0,
+    "M-FALSE-ACCEPT-RATE": 0.0,
+    "M-SILENT-FALSE-ACCEPT-COUNT": 0,
+    "M-FALSE-REJECT-COUNT": 9,
+    "M-COVERAGE": 0.5263157894736842,
+    "M-REFUSAL-ZERO-HTTP": 0,
+    "M-HTTP-TOTAL-T-SHIPPED": 10,
+    "M-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-BOUNDARY": {
+      "induced_support": {
+        "item": "^item\\-00[0-9]{1}$"
+      },
+      "slots": [
+        "item"
+      ],
+      "confidence": 0.9,
+      "accepted_in_grammar_ids": [
+        "item-000",
+        "item-001",
+        "item-002",
+        "item-003",
+        "item-004",
+        "item-005",
+        "item-006",
+        "item-007",
+        "item-008",
+        "item-009"
+      ],
+      "refused_in_grammar_ids": [
+        "item-010",
+        "item-011",
+        "item-042",
+        "item-099",
+        "item-100",
+        "item-123",
+        "item-256",
+        "item-500",
+        "item-999"
+      ],
+      "accepted_in_grammar_count": 10,
+      "refused_in_grammar_count": 9
+    },
+    "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT": 38,
+    "M-CONTROL-PC-COARSE-HTTP-ON-OUT": 35,
+    "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT": 0,
+    "M-CONTROL-NC-REJECT-ALL-HTTP-TOTAL": 0,
+    "M-COMPARATOR-WIDENED3-FALSE-ACCEPT-COUNT": 0,
+    "M-COMPARATOR-WIDENED3-COVERAGE": 1.0,
+    "M-ABLATION-LITERAL-HAS-DISTILL-PARAMETERIZED": false,
+    "M-PC-EXACT-REPLAY": "PASS",
+    "M-DETERMINISM": "PASS",
+    "M-EXTERNAL-REPEAT-BYTE-IDENTICAL": true,
+    "M-REGRESSION": {
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    "V8-FREEZE-BINDING": "PASS",
+    "model_calls": 0,
+    "model_tokens": 0,
+    "browser_actions": 0,
+    "external_network_requests": 0
+  },
+  "claim_ceiling": "The shipped carrier's conservative abstention boundary is SAFE on the frozen 78-item materially varied/out-of-grammar bank: M-FALSE-ACCEPT-COUNT == 0, M-SILENT-FALSE-ACCEPT-COUNT == 0, M-REFUSAL-ZERO-HTTP == 0. Zero out-of-grammar payloads bind EXECUTABLE; zero out-of-grammar HTTP requests issued. The boundary is over-conservative: M-COVERAGE = 10/19 (9 of 19 declared 3-digit ids refused: item-010, item-011, item-042, item-099, item-100, item-123, item-256, item-500, item-999). The strong comparator B-WIDENED-3 (support ^item\\-[0-9]{3}$) achieves false_accept_count=0 AND coverage=1.0, demonstrating a safe complete alternative exists on this bank. This certifies the safety boundary for external consumption with a documented coverage caveat and a concrete remediation option. C-PARAM-INHERIT remains EXPERIMENTAL and C-SEMANTIC-RESOLVE remains HYPOTHESIS in all branches; no claim advance or product promotion is authorized. The four-arm C-LLM-INHERIT benchmark remains externally gated on Runtime readiness (2) and Intel readiness (3).",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38189918141/run_bank.out.json (raw evidence, sha256 7c8e90019a781af9e9cc3e573680b86fdb50c3b6e2589d56b02de0180def04b6)",
+    "research/experiments/EXP-PRODUCT-38189918141/run_bank.repeat.out.json (byte-identical repeat, same sha256)",
+    "research/experiments/EXP-PRODUCT-38189918141/freeze.json (artifact hashes and input hashes)",
+    "research/experiments/EXP-PRODUCT-38189918141/prereg.md (frozen bank, label rule, FROZEN RUNNER, canonical hashes)",
+    "research/experiments/EXP-PRODUCT-38189918141/spec.json (frozen design: decision_rule, baselines, controls, measurement_validity)",
+    "research/experiments/EXP-PRODUCT-38189918141/result.json (producer handoff with metrics, controls, observations)",
+    "research/experiments/EXP-PRODUCT-38189918141/provenance.json (execution provenance, commands, environment)",
+    "research/experiments/EXP-PRODUCT-38189918141/design_review.json (independent design review PASS on all six checks)",
+    "src/spider/kernel.py (shipping carrier, sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72)",
+    "tests/test_kernel.py (regression suite, sha256 ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6)"
+  ],
+  "unresolved": [
+    "Whether the carrier's abstention boundary generalizes beyond the single induced support grammar (^item\\-00[0-9]{1}$) to multi-resource or genuinely free-form payloads is untested (single resource shape /api/items/item-NNN and in-process oracle only).",
+    "Whether the safe complete B-WIDENED-3 widening should be adopted into the shipped support inference is a product decision not licensed by this measurement; the packet neither advances nor promotes any claim.",
+    "Whether the shipped carrier beats cold/instructed/retrieval baselines on cost per successful task remains unaddressed; the four-arm C-LLM-INHERIT benchmark stays externally gated on Runtime B2 (certified asymmetric-discovery task bank) and Intel B3 (budget-stable credential-free endpoint) plus a new Director mandate.",
+    "No latency/token/browser economics are measured for the carrier path (all zero by construction on this credential-free substrate).",
+    "The oracle is a non-echo 200/404 fixture; zero HTTP on out-of-grammar is a necessary but not sufficient safety condition; no external side effects are modeled.",
+    "B-WIDENED-3 covers only a 3-digit family boundary; a genuinely free-form grammar is out of scope.",
+    "The bank's OUT set is a designed stress set encoding the declared grammar, not a random sample of production traffic."
+  ]
+}
