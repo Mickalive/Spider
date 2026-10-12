@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38244432934",
+  "lane": "runtime",
+  "origin_github_run_id": "38244432934",
+  "github_run_attempt": "1",
+  "executed_at": "2026-10-12T13:44:00Z",
+  "repo_root": "/home/runner/work/Spider/Spider",
+  "git": {
+    "head_sha": "dde94a537fac89310b031c8f47929d7b9e184bd5",
+    "head_subject": "R2 runtime: execution base EXP-RUNTIME-38244432934",
+    "request_base_sha": "922eee8638c6fed694076d611433d41a5ef75b21",
+    "pre_execute_sha": "d5a572ed4f265131814fc05b4d54350d64ebf04b"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP x86_64",
+    "dependencies": "Python standard library only (ThreadingHTTPServer, urllib, hashlib, json, ...)",
+    "external_network": false,
+    "credentials": false,
+    "llm": false
+  },
+  "runner": {
+    "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py",
+    "sha256": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+    "bytes": 60855,
+    "extraction": "prereg.md split on '<!-- BEGIN FROZEN-RUNNER -->\\n' then '<!-- END FROZEN-RUNNER -->', trailing newline preserved",
+    "canonical_runner_sha256_expected": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+    "seed": 3884694566
+  },
+  "frozen_input_verification": {
+    "request.json": {
+      "sha256": "c8ee0a20b35d9e020b8ce40e8f6f275e4cd4f9997b8e73d170ee6eb884a3d60e",
+      "matches_freeze": true
+    },
+    "spec.json": {
+      "sha256": "bcdd3529a941fd40bccdf905d9a2ed4450acfb4f87ea32a0a274c06b36b68203",
+      "matches_freeze": true
+    },
+    "prereg.md": {
+      "sha256": "1bd397fe74c1480b59f18beaf21f3feb3a0c48a6b807e6392ec7bde0aa97ac95",
+      "matches_freeze": true
+    },
+    "design_review.json": {
+      "sha256": "78028002869907b494f99940b3f3b08f28cdc3ddc4274cfe424c46311db866e6",
+      "matches_freeze": true
+    },
+    "freeze.json": {
+      "sha256": "bbc64a144af4f06365a37439875482c2d5d2bee14e0d4a79272b54b907afa99d"
+    }
+  },
+  "carrier_artifact_verification": {
+    "src/spider/kernel.py": {
+      "sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "matches_freeze": true
+    },
+    "src/spider/models.py": {
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "matches_freeze": true
+    },
+    "src/spider/registry.py": {
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "matches_freeze": true
+    }
+  },
+  "commands": [
+    "python3 raw_evidence/runner_delta_repair_reuse_v2.py --mechanics-only  # x2 determinism canary",
+    "python3 raw_evidence/runner_delta_repair_reuse_v2.py > raw_evidence/runner_result_raw.json"
+  ],
+  "substrate": {
+    "type": "in-process ThreadingHTTPServer JSON API on 127.0.0.1 ephemeral port",
+    "resources": [
+      "users",
+      "posts",
+      "comments",
+      "albums",
+      "photos"
+    ],
+    "task_ids": [
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "learn_ids": [
+      11,
+      12,
+      13
+    ],
+    "learn_ids_min_L2": [
+      11,
+      12
+    ],
+    "learn_ids_deep_L4": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "in_support_probe_id": 14,
+    "trials_per_class": 12,
+    "classes": [
+      "P1-ENDPOINT",
+      "P2-STRUCTURE",
+      "P3-PERMISSION"
+    ],
+    "external_datasets_fixtures_read": []
+  },
+  "raw_evidence": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+      "sha256": "b2ac28d4e5e9528b2dbe9390518cc9075cfb262e06d10a9cca72c0330f8b996c"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/mechanics_only_run1.json",
+      "sha256": "99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/mechanics_only_run2.json",
+      "sha256": "99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff"
+    }
+  ]
+}

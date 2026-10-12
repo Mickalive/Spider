@@ -1,0 +1,279 @@
+{
+  "status": "DESIGN-MECHANICS-ONLY",
+  "experiment_id": "EXP-RUNTIME-38244432934",
+  "lane": "runtime",
+  "runner_self_sha": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+  "seed": 3884694566,
+  "carrier": {
+    "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "canary": [
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "overbroad_contamination_n": 4,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "repair_oplog": [
+        "resolve",
+        "fetch",
+        "fetch",
+        "repair_attempt",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ],
+      "legacy_oplog": [
+        "resolve",
+        "fetch",
+        "fetch",
+        "rebind+resolve",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ]
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "overbroad_contamination_n": 4,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "repair_oplog": [
+        "resolve",
+        "fetch",
+        "verify",
+        "repair_attempt",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ],
+      "legacy_oplog": [
+        "resolve",
+        "fetch",
+        "verify",
+        "rebind+resolve",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ]
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "overbroad_contamination_n": 4,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "repair_oplog": [
+        "resolve",
+        "fetch",
+        "fetch",
+        "repair_attempt",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ],
+      "legacy_oplog": [
+        "resolve",
+        "fetch",
+        "fetch",
+        "rebind+resolve",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify",
+        "resolve",
+        "fetch",
+        "verify"
+      ]
+    }
+  ],
+  "nc_no_perturbation": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  },
+  "nc_noise": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  }
+}
