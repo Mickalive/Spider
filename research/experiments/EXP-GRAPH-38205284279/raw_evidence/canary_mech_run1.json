@@ -1,0 +1,293 @@
+{
+  "status": "DESIGN-MECHANICS-ONLY",
+  "experiment_id": "EXP-GRAPH-38205284279",
+  "lane": "graph",
+  "runner_self_sha": "d9edd0dc9e6a243847758c062744f4db6ffc9a93c986dcbf863f6a31bb7ffd4c",
+  "axes": {
+    "AXIS-G3-NEW": {
+      "bound": 115,
+      "flagged": [
+        "app_009",
+        "app_026",
+        "app_030",
+        "app_036",
+        "app_076"
+      ],
+      "cal_n": [
+        39,
+        20
+      ],
+      "cal_metrics": {
+        "tframeplus": {
+          "coverage": 0.9743589743589743,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.9523809523809523,
+          "executed": 38,
+          "executed_oos": 0,
+          "executed_app": 38,
+          "abstained_resolved": 6,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 1
+        },
+        "tframe_frozen": {
+          "coverage": 0.9743589743589743,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.9523809523809523,
+          "executed": 38,
+          "executed_oos": 0,
+          "executed_app": 38,
+          "abstained_resolved": 6,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 1
+        },
+        "incumbent": {
+          "coverage": 0.9743589743589743,
+          "pooled_false_accept": 0.05,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.95,
+          "executed": 39,
+          "executed_oos": 1,
+          "executed_app": 38,
+          "abstained_resolved": 5,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 1
+        },
+        "gatefree": {
+          "coverage": 0.9743589743589743,
+          "pooled_false_accept": 0.3,
+          "unknown_precision": null,
+          "unknown_precision_inclusive": 0.9333333333333333,
+          "executed": 44,
+          "executed_oos": 6,
+          "executed_app": 38,
+          "abstained_resolved": 0,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 1
+        }
+      },
+      "cal_feasible_tframeplus": true
+    },
+    "AXIS-G2-RETEST": {
+      "bound": 120,
+      "flagged": [],
+      "cal_n": [
+        40,
+        20
+      ],
+      "cal_metrics": {
+        "tframeplus": {
+          "coverage": 0.875,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.8,
+          "executed": 35,
+          "executed_oos": 0,
+          "executed_app": 35,
+          "abstained_resolved": 12,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "tframe_frozen": {
+          "coverage": 0.875,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.8,
+          "executed": 35,
+          "executed_oos": 0,
+          "executed_app": 35,
+          "abstained_resolved": 12,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "incumbent": {
+          "coverage": 0.875,
+          "pooled_false_accept": 0.05,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.7916666666666666,
+          "executed": 36,
+          "executed_oos": 1,
+          "executed_app": 35,
+          "abstained_resolved": 11,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "gatefree": {
+          "coverage": 0.875,
+          "pooled_false_accept": 0.6,
+          "unknown_precision": null,
+          "unknown_precision_inclusive": 0.6153846153846154,
+          "executed": 47,
+          "executed_oos": 12,
+          "executed_app": 35,
+          "abstained_resolved": 0,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        }
+      },
+      "cal_feasible_tframeplus": true
+    },
+    "AXIS-G1-PRIMARY": {
+      "bound": 151,
+      "flagged": [
+        "app_004",
+        "app_049",
+        "app_052",
+        "app_073",
+        "app_076",
+        "app_097",
+        "app_100",
+        "oos_024",
+        "oos_026"
+      ],
+      "cal_n": [
+        57,
+        20
+      ],
+      "cal_metrics": {
+        "tframeplus": {
+          "coverage": 0.8596491228070176,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.7142857142857143,
+          "executed": 49,
+          "executed_oos": 0,
+          "executed_app": 49,
+          "abstained_resolved": 9,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 8
+        },
+        "tframe_frozen": {
+          "coverage": 0.8596491228070176,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.7142857142857143,
+          "executed": 49,
+          "executed_oos": 0,
+          "executed_app": 49,
+          "abstained_resolved": 9,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 8
+        },
+        "incumbent": {
+          "coverage": 0.8596491228070176,
+          "pooled_false_accept": 0.1,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.6923076923076923,
+          "executed": 51,
+          "executed_oos": 2,
+          "executed_app": 49,
+          "abstained_resolved": 7,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 8
+        },
+        "gatefree": {
+          "coverage": 0.8596491228070176,
+          "pooled_false_accept": 0.45,
+          "unknown_precision": null,
+          "unknown_precision_inclusive": 0.5789473684210527,
+          "executed": 58,
+          "executed_oos": 9,
+          "executed_app": 49,
+          "abstained_resolved": 0,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 8
+        }
+      },
+      "cal_feasible_tframeplus": true
+    },
+    "AXIS-G1-ALTLEX": {
+      "bound": 151,
+      "flagged": [
+        "app_004",
+        "app_049",
+        "app_052",
+        "app_073",
+        "app_076",
+        "app_097",
+        "app_100",
+        "oos_024",
+        "oos_026"
+      ],
+      "cal_n": [
+        57,
+        20
+      ],
+      "cal_metrics": {
+        "tframeplus": {
+          "coverage": 0.9122807017543859,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.8,
+          "executed": 52,
+          "executed_oos": 0,
+          "executed_app": 52,
+          "abstained_resolved": 8,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "tframe_frozen": {
+          "coverage": 0.9122807017543859,
+          "pooled_false_accept": 0.0,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.8,
+          "executed": 52,
+          "executed_oos": 0,
+          "executed_app": 52,
+          "abstained_resolved": 8,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "incumbent": {
+          "coverage": 0.9122807017543859,
+          "pooled_false_accept": 0.1,
+          "unknown_precision": 1.0,
+          "unknown_precision_inclusive": 0.782608695652174,
+          "executed": 54,
+          "executed_oos": 2,
+          "executed_app": 52,
+          "abstained_resolved": 6,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        },
+        "gatefree": {
+          "coverage": 0.9122807017543859,
+          "pooled_false_accept": 0.4,
+          "unknown_precision": null,
+          "unknown_precision_inclusive": 0.7058823529411765,
+          "executed": 60,
+          "executed_oos": 8,
+          "executed_app": 52,
+          "abstained_resolved": 0,
+          "selective_acc": 1.0,
+          "unresolved_applicable": 5
+        }
+      },
+      "cal_feasible_tframeplus": true
+    }
+  },
+  "c7_firing": {
+    "AXIS-G3-NEW": {
+      "app": 0,
+      "oos": 2
+    },
+    "AXIS-G2-RETEST": {
+      "app": 0,
+      "oos": 4
+    },
+    "AXIS-G1-PRIMARY": {
+      "app": 0,
+      "oos": 2
+    },
+    "AXIS-G1-ALTLEX": {
+      "app": 0,
+      "oos": 1
+    }
+  },
+  "liveness": {
+    "g3_cal_executed": 38,
+    "g3_cal_unresolved": 1
+  },
+  "embedding_status": "REPLACED-BY-B-RETRIEVAL-TFIDF-STDLIB"
+}

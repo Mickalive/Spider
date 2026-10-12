@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38205284279",
+  "lane": "graph",
+  "stage": "EXECUTE",
+  "github": {
+    "origin_github_run_id": "38205284279",
+    "prior_execute_failure_run_id": "38244426211",
+    "model_retry_run_id": "38257466639",
+    "current_git_head": "bf7610fc39c4ea736f1682cd939ff8d67b9b9abf",
+    "request_base_sha": "40dfc33d90d4c3b0a139fc8c3f434257de623eb5"
+  },
+  "frozen_inputs": {
+    "request.json": "7fa0527b1452b6c6b02b6e38b32cc5c023defb4b5a1804a855e5cb14f154f617",
+    "spec.json": "70315690d408b6f3d7f80f188fd524eca21a05ccd4e62e0df7db6aab3e69aa80",
+    "prereg.md": "3a7935ae9f7779f39b21f0af7043f48f1e2a05d7f5be61cea35725c6b3556346",
+    "freeze.json": "6d212133734e1e850ee28501f5ae09464b500576850356add99529565ff0e5ee",
+    "design_review.json": "fbb434db0b61642e230896908948c26cddc9cfa1bcaf749883bc290efcbc7a34"
+  },
+  "freeze_artifact_hashes_verified": {
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md": "5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+  },
+  "runner": {
+    "path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py",
+    "sha256": "d9edd0dc9e6a243847758c062744f4db6ffc9a93c986dcbf863f6a31bb7ffd4c",
+    "canonical_runner_sha256": "d9edd0dc9e6a243847758c062744f4db6ffc9a93c986dcbf863f6a31bb7ffd4c",
+    "extraction": "extracted from prereg.md FROZEN-RUNNER block; block content restored with exactly one trailing newline; the three freeze_artifacts paths were re-hashed and matched freeze.json.artifact_hashes byte-for-byte before execution"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "linux",
+    "third_party_packages": "none used; numpy/sklearn/sentence_transformers absent",
+    "network": false,
+    "model": false,
+    "browser": false,
+    "credential": false,
+    "seed": 38205284279
+  },
+  "commands": [
+    "python3 research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py --mechanics-only   # canary 1",
+    "python3 research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py --mechanics-only   # canary 2 (byte-identical to canary 1)",
+    "python3 research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py > research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json   # scored run",
+    "python3 research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py > research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output_rerun.json   # determinism re-run (byte-identical)"
+  ],
+  "determinism_checks": {
+    "canary_mechanics_only_1_sha256": "7e1c5f7281d3d3f34bc73e9a72eba01fe754f37b493ebb43b3024b08316f52e2",
+    "canary_mechanics_only_2_sha256": "7e1c5f7281d3d3f34bc73e9a72eba01fe754f37b493ebb43b3024b08316f52e2",
+    "canary_byte_identical": true,
+    "scored_run_sha256": "c80a8f427c7d7c43d3fce30ac77b59984f9628973f1f364734d27bfa0e22f27d",
+    "scored_rerun_sha256": "c80a8f427c7d7c43d3fce30ac77b59984f9628973f1f364734d27bfa0e22f27d",
+    "scored_byte_identical": true
+  },
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/runner_tframe_g3.py", "sha256": "d9edd0dc9e6a243847758c062744f4db6ffc9a93c986dcbf863f6a31bb7ffd4c", "role": "raw_code"},
+    {"path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json", "sha256": "c80a8f427c7d7c43d3fce30ac77b59984f9628973f1f364734d27bfa0e22f27d", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output_rerun.json", "sha256": "c80a8f427c7d7c43d3fce30ac77b59984f9628973f1f364734d27bfa0e22f27d", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/canary_mech_run1.json", "sha256": "7e1c5f7281d3d3f34bc73e9a72eba01fe754f37b493ebb43b3024b08316f52e2", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38205284279/raw_evidence/canary_mech_run2.json", "sha256": "7e1c5f7281d3d3f34bc73e9a72eba01fe754f37b493ebb43b3024b08316f52e2", "role": "raw"}
+  ],
+  "datasets_fixtures": {
+    "LEXICON-G3": "embedded in frozen prereg (blind-authored, public-transit fleet domain)",
+    "GOAL-BANK-G3": "embedded in frozen prereg; 80 applicable rows, 5 dropped by frozen contamination screen -> 75 bound",
+    "OOS-BANK-G3": "embedded in frozen prereg; 40 OOS rows, 0 dropped",
+    "LEXICON-G1 / LEXICON-G1-ALT / LEXICON-G2-HELDOUT / GOAL-BANK-G1 / GOAL-BANK-G2 / OOS-BANK-G1 / OOS-BANK-G2": "frozen parent prereg research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "PRIOR-PARENT-BANK-TEXTS": "frozen grandparent prereg research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "goal_generator priors": "research/harness/goal_generator.py"
+  },
+  "notes": [
+    "No frozen input was modified after freeze. Only EXECUTE outputs were created.",
+    "The frozen runner emitted status=MEASUREMENT_INVALID with decision=null (see result.json).",
+    "A pre-existing failure.json (prior EXECUTE exit 75, run 38244426211) and model_execute.json (retry) were present in the experiment directory; they are operational records and were not modified by this stage."
+  ]
+}
