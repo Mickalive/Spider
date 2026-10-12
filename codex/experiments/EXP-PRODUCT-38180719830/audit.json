@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38180719830",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "V1-DETERMINISM HOLDS: The fixture is an in-process stdlib ThreadingHTTPServer on 127.0.0.1:0 with fixed JSON responses. No RNG, wall-clock, or external network. Induced support regex ^item\\-00[0-9]{1}$ and confidence 0.9 are deterministic arithmetic functions of the 5 induction observations (item-001..item-005). Verified in run_certificate.out.json observations and runner code (prereg.md section 14).",
+    "V2-CREDENTIAL-FREE HOLDS: model_calls == 0 and model_tokens == 0 asserted in D3_COUNTERS (PASS). The only HTTP activity is exactly 1 loopback GET to the fixture (observed in transcript and run_certificate.log). No API keys, browser, or external egress. Verified in run_certificate.out.json counters and transcript.",
+    "V3-IDENTITY-THREE-PART HOLDS: (i) pre-install sha256 46929b3a... == shipped literal blob cfec9866... (allowed set {literal, carrier}); (ii) carrier source sha256 718efa6a... == frozen identity blob b15ed848...; (iii) post-install file bytes == git blob b15ed848... and file sha256 718efa6a... Verified in run_certificate.out.json identities and runner D0_IDENTITY clause.",
+    "V4-STOP-TRIGGER NOT FIRED: Identity certificate held on first attempt (D0_IDENTITY PASS). The stop trigger (substituted carrier -> BLOCKED, kernel untouched) was demonstrated in DESIGN probes (design_reasoning.json checks) but correctly did not fire in EXECUTE. This is correct behavior.",
+    "V5-HELD-OUT-INSIDE-SUPPORT HOLDS: Unseen item-007 (single-digit suffix) is inside induced support ^item\\-00[0-9]{1}$ and resolved EXECUTABLE@0.9. The audited failure-mode id item-010 (two-digit suffix) is correctly used as out-of-support negative. Verified in run_certificate.out.json D1_POSITIVE and D2_NEGATIVE.",
+    "V6-REFUSAL-SEMANTICS HOLDS: All 7 probes have bound_action=null, non-empty reason, status!=EXECUTABLE. Out-of-support (3) and missing-parameter (2) are EXPLORE with correct reason class ('support'/'parameter'). Wrong-intent (delete_item) and no-applicable (never_seen_intent) are EXACTLY UNKNOWN. Verified in run_certificate.out.json D2_NEGATIVE.negatives array.",
+    "V7-TRANSCRIPT-HONESTY HOLDS AT FROZEN SNAPSHOT: At the D3 snapshot (after rebind, before replay), transcript has 8 resolve + 1 rebind = 9 retrieval calls, 1 verify, 1 repair. Counters match exactly (retrieval_calls=9, verification_calls=1, repair_attempts=1). The 5 replay resolves occur after the snapshot; final kernel state would be retrieval=14 but the frozen decision rule checks at the rebind point matching prereg probe values. This is explicitly disclosed in result.json validity_notes and is by design.",
+    "V8-FREEZE-BINDING HOLDS (EXECUTE MODE): freeze.json present and readable; sha256(prereg.md) == freeze.json.hashes['prereg.md'] (019c88f5...); running runner source == FROZEN RUNNER block (sha256 a114804c...); all 5 freeze artifact hashes match. Verified in run_certificate.out.json V8_FREEZE_BINDING clause.",
+    "V9-REGRESSION HOLDS: tests/test_kernel.py suite 3/3 (0 failures, 0 errors) on installed carrier. Verified in run_certificate.out.json D4_CONTROLS.regression and run_certificate.log stderr.",
+    "V10-ABLATION-ATTRIBUTION HOLDS: Literal kernel (blob cfec9866..., sha256 46929b3a...) loaded in hermetic temp package with same models.py/registry.py/__init__.py has has_distill_parameterized == false. Verified in run_certificate.out.json D4_CONTROLS.literal_ablation. This supports causal attribution of the positive certificate to the installed carrier.",
+    "DISCLOSED LIMITATIONS (unchanged from prereg §11, no new threats observed): (i) Induced support is a conservative char-class/quantifier inference; the bank exploits this deliberately (single-digit positives, two-digit negatives). (ii) Fixture is a minimal REST server; execution correctness verified only for the GET/JSON shape the induction encodes. (iii) Latent pretrained knowledge of the carrier's source cannot be excluded; attribution rests on byte-pinned blob identity plus literal ablation, not authorship narratives. These are explicitly disclosed and do not invalidate the certificate within its declared scope.",
+    "NO LEAKAGE DETECTED: The treatment (carrier installation) and measurement are properly isolated. The literal ablation runs in a hermetic temp package with independent module reload (sys.path manipulation + drop_module). The fixture is in-process and ephemeral. The freeze binding (V8) ensures the runner, prereg, and artifacts are exactly the frozen versions. No external state or prior runs contaminate the measurement."
+  ],
+  "baseline_findings": [
+    "B-LITERAL-KERNEL (ablation): Structural distinction verified. Literal kernel (132 lines, blob cfec9866..., no distill_parameterized, confidence floor 0.5 < min_confidence 0.8) vs carrier (491 lines, blob b15ed848..., has distill_parameterized, confidence 0.9 path). Loaded in hermetic temp package from frozen blob with same models/registry/__init__.py. has_distill_parameterized == false confirmed. This is a strong attribution baseline — the positive certificate is impossible on the ablation, confirming the installed carrier is the cause.",
+    "B-PRE-INSTALL-KERNEL (identity baseline): Pre-install sha256 46929b3a... matches shipped literal (first run). This is the correct precondition for the certificate. Any other state would have triggered BLOCKED/MEASUREMENT_INVALID per D0/P0 gate. Verified in run_certificate.out.json identities.pre_install_sha256.",
+    "PC-EXACT-REPLAY (positive control): 5/5 training ids (item-001..item-005) re-resolve EXECUTABLE on installed carrier. This anchors the learned mechanism identity and confirms the carrier preserves behavior on the induction set. Verified in run_certificate.out.json D4_CONTROLS.pc_exact_replay.",
+    "NC-OUT-OF-SUPPORT-ID (null control): 3/3 probes (item-010, item-999, item-xyz) -> EXPLORE with reason containing 'support', bound_action null. The support boundary is correctly enforced. Verified in run_certificate.out.json D2_NEGATIVE.negatives[0..2].",
+    "NC-MISSING-PARAMETER (null control): 2/2 probes ({}, {'wrong_key':'x'}) -> EXPLORE with reason containing 'parameter', bound_action null. Parameter requirement correctly enforced. Verified in run_certificate.out.json D2_NEGATIVE.negatives[3..4].",
+    "NC-WRONG-INTENT (null control): delete_item with valid params -> EXACTLY UNKNOWN with reason 'no applicable validated mechanism', bound_action null. Mandate clause (b) satisfied. Verified in run_certificate.out.json D2_NEGATIVE.negatives[5].",
+    "NC-NO-APPLICABLE-MECHANISM (null control): never_seen_intent -> EXACTLY UNKNOWN with reason 'no applicable validated mechanism', bound_action null. Mandate clause (b) satisfied. Verified in run_certificate.out.json D2_NEGATIVE.negatives[6].",
+    "ALL CONTROLS EXERCISED WITH CONCRETE FAILURE MODES: Design_review.json demonstrates each control has a reachable failure mode under the same code path (e.g., substituted carrier -> D0 FAIL/BLOCKED; tampered freeze.json -> V8 FAIL/BLOCKED; literal ablation would FAIL if it unexpectedly had distill_parameterized). The control set is non-vacuous."
+  ],
+  "recomputed_metrics": {
+    "M-CERT-PASS": {
+      "D0_IDENTITY": "PASS",
+      "D1_POSITIVE": "PASS",
+      "D2_NEGATIVE": "PASS",
+      "D3_COUNTERS": "PASS",
+      "D4_CONTROLS": "PASS",
+      "V8_FREEZE_BINDING": "PASS",
+      "certificate_pass": true,
+      "overall_outcome": "SUPPORTS (all clauses PASS with V8 enforced)",
+      "promotion_gate_status": "ENABLED (certificate PASS is necessary prerequisite; promotion additionally requires independent audit PASS + DIRECTOR verdict per mandate)"
+    },
+    "M-IDENTITIES": {
+      "pre_install_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "pre_install_git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "carrier_source_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "post_install_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "post_install_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "installed_bytes_equal_carrier_blob": true,
+      "identity_three_part_verified": true
+    },
+    "M-POSITIVE": {
+      "resolution_status": "EXECUTABLE",
+      "resolution_confidence": 0.9,
+      "held_out_identifier": "item-007",
+      "held_out_unseen": true,
+      "held_out_inside_induced_support": true,
+      "bound_action": {"method": "GET", "url": "http://127.0.0.1:33173/api/items/item-007"},
+      "bound_action_url_contains_held_out": true,
+      "fixture_status": 200,
+      "verify": true,
+      "induction_observations": 5,
+      "induced_support": {"item": "^item\\-00[0-9]{1}$"},
+      "parameter_slots": ["item"]
+    },
+    "M-NEGATIVES": {
+      "probes_total": 7,
+      "refusals_with_null_action": 7,
+      "refusals_with_recorded_reason": 7,
+      "refusals_status_not_executable": 7,
+      "out_of_support": {"item-010": {"status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null}, "item-999": {"status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null}, "item-xyz": {"status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null}, "pass": true},
+      "missing_parameter": {"{}": {"status": "EXPLORE", "reason": "missing required parameter 'item'", "bound_action": null}, "wrong_key": {"status": "EXPLORE", "reason": "missing required parameter 'item'", "bound_action": null}, "pass": true},
+      "wrong_intent_delete_item": {"status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "no_applicable_mechanism_never_seen_intent": {"status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "clause_pass": true
+    },
+    "M-COUNTERS": {
+      "retrieval_calls": 9,
+      "verification_calls": 1,
+      "repair_attempts": 1,
+      "model_calls": 0,
+      "model_tokens": 0,
+      "browser_actions": 0,
+      "http_requests": 0,
+      "expected_from_transcript_at_snapshot": {"retrieval_calls": 9, "verification_calls": 1, "repair_attempts": 1},
+      "counters_equal_transcript_at_snapshot": true,
+      "transcript_length_at_snapshot": 11,
+      "full_transcript_length": 16,
+      "note": "Snapshot at rebind point (after negative probes, before replay); final kernel state would be retrieval=14 (13 resolve + 1 rebind) but frozen rule checks at snapshot matching prereg probe values",
+      "clause_pass": true
+    },
+    "M-PC-EXACT-REPLAY": {
+      "executable": 5,
+      "total": 5,
+      "statuses": ["EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE"],
+      "pass": true
+    },
+    "M-ABLATION": {
+      "blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "has_distill_parameterized": false,
+      "pass": true
+    },
+    "M-REGRESSION": {
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0,
+      "successful": true,
+      "suite": "tests/test_kernel.py (discovered via tests/test_*.py)",
+      "pass": true
+    },
+    "M-SUPPORT": {
+      "mechanism_id": "mech-783a6a3f99ee47b8",
+      "parameter_slots": ["item"],
+      "induced_support": {"item": "^item\\-00[0-9]{1}$"},
+      "confidence": 0.9,
+      "induction_observations": 5
+    }
+  },
+  "claim_ceiling": "Certificate PASS on C-PARAM-INHERIT with V8 freeze binding enforced. The audited parameterized mechanism carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) is installed byte-identically at the shipping kernel path src/spider/kernel.py and passes all five certificate clauses (D0-D4) with honest inherited-path counters. This ENABLES the promotion gate (readiness condition 1 / blocker B1 for the flagship C-LLM-INHERIT benchmark) but does NOT grant promotion — promotion additionally requires independent audit PASS on this certificate and a DIRECTOR verdict. C-PARAM-INHERIT remains EXPERIMENTAL in all branches; this packet does not advance it to VALIDATED, does not run the four-arm C-LLM-INHERIT benchmark, does not measure economics, and does not generalize beyond the carrier's induced support ^item\\-00[0-9]{1}$ on the deterministic credential-free localhost fixture.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38180719830/run_certificate.out.json (raw certificate output, sha256 17c442b0493ea3b154ef85fbc9dda0708325f926a3005254da665e27530da3b4)",
+    "research/experiments/EXP-PRODUCT-38180719830/run_certificate.log (stderr, sha256 50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2)",
+    "research/experiments/EXP-PRODUCT-38180719830/prereg.md (frozen, sha256 019c88f5640200405acabd4d4752c97a87b6da984bef67bdc9410a37d66928fa, V8-A verified at runtime)",
+    "research/experiments/EXP-PRODUCT-38180719830/freeze.json (frozen binding, sha256 0b98b36d464ce4ce92d9de23c01279bbfb6ca8c0a1e1cc60be41e3d7e0a6bce3, V8 enforced)",
+    "research/experiments/EXP-PRODUCT-38180719830/harness/run_certificate.py (FROZEN RUNNER materialized byte-exact, sha256 a114804c391aa8360d0616fa27a4b217783abea4f005a29f87d22f7566daf2f3, V8-B verified)",
+    "research/experiments/EXP-PRODUCT-38180719830/design_review.json (all six freeze_eligibility checks PASS with probe evidence)",
+    "research/experiments/EXP-PRODUCT-37973256064/audit.json (carrier audited live PASS on real credential-free substrate: 12/15 held-out EXECUTABLE, PC-EXACT-REPLAY 15/15, refusal 1.0)",
+    "research/experiments/EXP-PRODUCT-37989728440/handoff.json (parent handoff, sha256 911f765d04a83974f20d113da206b4075337c3a9bed4c5a77a8f06ffb4773ed9, disposition SUPERSEDE)"
+  ],
+  "unresolved": [
+    "Whether the audited carrier's application of support predicates to free-form payload values is a defect remains untested (inherited from parent EXP-PRODUCT-37989728440 unresolved[2]): the task bank keeps target values inside the induced support grammar and the kernel itself is frozen/untouched, so this run adds no evidence about free-form payload support generalization.",
+    "Independent audit re-verification of this certificate and the DIRECTOR promotion decision are downstream stages, not producer-settable questions (recorded in result.json unresolved).",
+    "The four-arm C-LLM-INHERIT benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER with the parameterized carrier) remains unfunded until readiness conditions (2) and (3) hold (Intel B3 capable-endpoint search and Runtime B2 asymmetric-discovery task-bank certificate). This certificate only discharges blocker B1 (shipped carrier installation).",
+    "The working tree intentionally contains the carrier at src/spider/kernel.py after EXECUTE (treatment outcome per prereg §16 step 6); the DIRECTOR verdict stage will decide whether to commit, revert, or further test this state."
+  ]
+}
