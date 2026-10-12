@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-pin candidate GGUF digests to the byte-level sha256 of the served body (verified by full download) and re-freeze, preserving candidate identities (model, quant, chat_format, URL) and correcting only the digest/bytes binding; OR vendor exact GGUF bytes in an immutable artifact store keyed by byte sha256; OR at DESIGN time compute candidate digests from downloaded bytes rather than HF server metadata (etag/xetHash).",
+    "Add a byte-verification step to the freeze_eligibility.freeze_artifacts_bound check for any experiment pinning remote GGUFs: the freeze must verify sha256 against downloaded body bytes, not server metadata (etag/xetHash/lfs.oid), and the provenance must record which hash source was used."
+  ],
+  "validity_findings": [
+    "The frozen capability ladder (primary gating component) was never executed: both candidates failed at frozen step 3a (byte-level digest verification) because the pinned sha256 values equal the HF tree-API xetHash / CDN etag, while the served body bytes hash to the tree-API lfs.oid. Three independent download routes reproduced identical body hashes and byte counts, confirming the served content is stable and authentic, and the frozen byte-level identity is unsatisfiable against it.",
+    "The spec.json note 'sha256 equals the HF LFS OID (CDN etag)' conflated two distinct HF metadata fields (xetHash/etag vs lfs.oid). The freeze_eligibility.freeze_artifacts_bound check (status PASS) appears to have been satisfied via server metadata inspection rather than byte download, allowing a metadata/body mismatch to silently pass freeze.",
+    "No model was loaded and no capability measurement was taken for either candidate (UNMEASURED_LOAD_FAILED, fail-closed per frozen rule 3a). The OUTCOME=MEASUREMENT_INVALID and B3_STATUS=UNRESOLVED are the correct frozen decision-rule mappings for zero COMPLETE cells (rule 4).",
+    "The PREFLIGHT controls (PC-ORACLE-EPISODE 5/5, NC-NO-MODEL-ACTION 0/0, B-RANDOM-ACTION parseable 1.0 / success 0.2) passed deterministically through the real frozen scorer against the served page, and raw/controls.json is byte-identical to the audited parent's (sha256 b0120e61...). The measurement substrate (scorer, browser, task page, parsing) is live and verified.",
+    "The endpoint census (12 providers, non-gating) and external-comparator readiness table (3 entries, all CANDIDATE_NOT_EVIDENCE) were executed correctly and recorded as observations; they do not override the frozen OUTCOME.",
+    "The per-candidate config overlays are confined to the predeclared three keys (prompts.system, sampling.chat_format, candidate_models_frozen) with no leakage; materialized configs' sha256s are recorded and verified.",
+    "This is a substrate/provisioning failure (unobtainable frozen GGUF byte identity), not a scientific negative. The producer correctly encodes it as MEASUREMENT_INVALID and does not promote, weaken, or falsify C-LLM-INHERIT."
+  ],
+  "baseline_findings": [
+    "PC-ORACLE-EPISODE: PASS — 5/5 task_success=true through real frozen run_episode scorer against served page; episode records byte-identical to audited parent (sha256 b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639), confirming deterministic protocol replication.",
+    "NC-NO-MODEL-ACTION: PASS — parseable_action_rate_step1=0.0, task_success_rate=0.0 as expected; null content correctly rejected by frozen parse_action.",
+    "B-RANDOM-ACTION: PASS — parseable_action_rate_step1=1.0 (valid JSON by construction), task_success_rate=0.2 (< 0.6); analytic P(task_success_rate >= 3/5) ≈ 1.15e-3, bar effectively unreachable by chance.",
+    "B-CARRIED-3B-8B-QWEN-GOAL-SCHEMA: CARRIED_NOT_RERUN — correctly preserved as protocol-hardness anchor (parent M-7B-QWEN 0/5, M-3B-QWEN 0/5, parseable 1.0), not used as within-run comparator.",
+    "B-POLLINATIONS-CARRIED: CARRIED_NOT_RERUN — correctly preserved as operational blocker record for the only credential-free hosted path.",
+    "PC-JSON-CONSTRAINED-DECODING: NOT_APPLICABLE — per-candidate 10-probe gate did not run because no candidate loaded; carried parent 10/10 recorded as context only, not as this experiment's evidence."
+  ],
+  "recomputed_metrics": {
+    "M-14B-QWEN": {
+      "positive_control_pass_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "UNMEASURED_LOAD_FAILED at frozen step 3a (pinned sha256 mismatch); fail-closed, no load attempted"},
+      "parseable_action_rate_step1": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "no episodes (UNMEASURED_LOAD_FAILED)"},
+      "task_success_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "no episodes (UNMEASURED_LOAD_FAILED)"},
+      "mean_inference_latency_s": {"value": null, "n_calls": 0, "unit": "s", "reason": "not measured"},
+      "mean_completion_tokens": {"value": null, "n_calls": 0, "unit": "tokens", "reason": "not measured"}
+    },
+    "M-8B-LLAMA": {
+      "positive_control_pass_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "UNMEASURED_LOAD_FAILED at frozen step 3a (pinned sha256 mismatch); fail-closed, no load attempted"},
+      "parseable_action_rate_step1": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "no episodes (UNMEASURED_LOAD_FAILED)"},
+      "task_success_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "no episodes (UNMEASURED_LOAD_FAILED)"},
+      "mean_inference_latency_s": {"value": null, "n_calls": 0, "unit": "s", "reason": "not measured"},
+      "mean_completion_tokens": {"value": null, "n_calls": 0, "unit": "tokens", "reason": "not measured"}
+    },
+    "PC-ORACLE-EPISODE": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"}
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"}
+    },
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.2, "k": 1, "n": 5, "unit": "fraction"}
+    },
+    "capability_bar": {"task_success_rate": 0.6, "parseable_action_rate_step1": 0.6, "episodes": 5, "unit": "fraction"},
+    "cells_complete": {"value": 0, "n": 2, "unit": "cells"},
+    "census_counts": {
+      "PROVISIONABLE_CREDENTIATED": 0,
+      "CREDENTIAL_REQUIRED": 10,
+      "CREDENTIAL_FREE_OPERATIONALLY_CAPPED": 1,
+      "UNREACHABLE": 1
+    },
+    "comparators_enumerated": {"value": 3, "unit": "entries", "primary_sources_pinned": 3, "evidence_label": "CANDIDATE_NOT_EVIDENCE"},
+    "b3_status": "UNRESOLVED",
+    "preflight_pass": true
+  },
+  "claim_ceiling": "The capability question (whether M-14B-QWEN or M-8B-LLAMA clears the minimal multi-step Web-agent bar under the frozen protocol) remains entirely unmeasured. No claim advancement, weakening, or falsification of C-LLM-INHERIT is justified by this transaction. The inherited Codex effective event for C-LLM-INHERIT remains the parent EXP-INTEL-38164607941 FALSIFIES (bounded to the tested 3B–8B Qwen class under goal/schema prompt). The operational finding established is a freeze-process failure mode: HF GGUF pins from server metadata (xetHash/etag) can differ from served-body sha256 (lfs.oid) while byte counts match, silently defeating byte-identity gates.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json#models.M-14B-QWEN (pinned_sha256=d989c91d..., execute_observed_sha256=e47ad95d..., tree_lfs_oid=e47ad95d..., tree_xetHash=d989c91d..., cdn_etag=d989c91d...)",
+    "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json#models.M-8B-LLAMA (pinned_sha256=85450612..., execute_observed_sha256=7b064f58..., tree_lfs_oid=7b064f58..., tree_xetHash=85450612..., cdn_etag=85450612...)",
+    "research/experiments/EXP-INTEL-38175568787/raw/controls.json (sha256=b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639)",
+    "research/experiments/EXP-INTEL-38175568787/raw/preflight.json (sha256=5ccf07d150ff1f2a49ddacf060c0256563b52643a33760a9ec07be46d96bab70)",
+    "research/experiments/EXP-INTEL-38175568787/raw/endpoint_census.json (sha256=8e9775b5ef2f8bf23d9a0e066e13da20873670ff752a6d6007a7ed9e767b903a)",
+    "research/experiments/EXP-INTEL-38175568787/raw/external_comparators.json (sha256=2c1505a719dd8449ef97d2e09b5cd259c5eb9abda3d4a48c7fdf77a1e45c44ba)",
+    "research/experiments/EXP-INTEL-38175568787/raw/decision.json (sha256=22dfef6a8ed5e9981dd4fd081534317960c464c6b9377a693effd9a0604d8e9a)",
+    "research/experiments/EXP-INTEL-38175568787/freeze.json#artifact_hashes (3/3 match)",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#freeze_eligibility.freeze_artifacts_bound (status PASS, reason cites metadata verification not byte download)"
+  ],
+  "unresolved": [
+    "Whether the frozen pinned digests were incorrect at DESIGN time (metadata-only read of xetHash/etag) or became stale because the served body changed between design (2026-10-11) and execute (2026-10-12). Available evidence (pin==xetHash==etag; body==lfs.oid; multiple stable download routes) is consistent with a metadata-only design read, but the historical state was not captured at design time and is not directly reconstructable.",
+    "Whether the origin GGUF bytes that hash to the frozen pins (xetHash values) remain retrievable anywhere (the HF commits API listing did not surface these GGUF files and no old-OID blob could be fetched during EXECUTE).",
+    "The capability of the M-14B-QWEN and M-8B-LLAMA classes under the frozen minimal Web-agent protocol: entirely unmeasured, so the inherited 3B–8B local ceiling for C-LLM-INHERIT is neither extended nor re-confirmed.",
+    "Whether the HF Xet-bridge metadata/body mismatch (etag/xetHash path vs lfs.oid body) affects other pinned GGUFs used by other lanes; not surveyed here.",
+    "No capability evidence for any hosted provider was gathered (census is credential/reachability only); the smallest next action for the hosted branch remains a credentialed endpoint test, which this transaction could not provision."
+  ]
+}

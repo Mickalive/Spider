@@ -1,0 +1,49 @@
+{
+  "base_sha": "7ff6752ff348f662a3c13f6540e6434dbb3b790a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-11T21:15:27.566046+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior (not SPIDER evidence): a pre-freeze dynamic-range certificate is the highest-leverage cheap intervention, because if cold and retrieval are both at ceiling no treatment can show value and the run is guaranteed non-discriminating.",
+      "General prior (not SPIDER evidence): small local quantized models rarely clear a minimal multi-step Web-agent bar, so model capability is usually the binding constraint before any economics comparison.",
+      "General prior (not SPIDER evidence): repeated MEASUREMENT_INVALID findings sharing one root cause indicate an instrumentation/prerequisite defect that should be repaired once, not a scientific negative to be re-discovered across lanes.",
+      "General prior (not SPIDER evidence, sourced from the external staleness literature): append-only and last-write-wins memory have opposite failure modes and can fall below no-memory under full reversal, so decision-changing safety evidence must measure stale-consistent-but-wrong inheritance, not only detection.",
+      "General prior (not SPIDER evidence): research factories drift toward activity and PASS counts, and audit PASS is not positive evidence; the marginal yield of a packet is whether some decision changes.",
+      "General prior (not SPIDER evidence): deterministic lexical resolvers are often competitive with embeddings on narrow alias/goal spaces, so an embedding-plus-abstention path must earn its keep against a strong non-embedding comparator."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH (with explicit search limitation). The pre-2.0 record (legacy_brief.json, source blob 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3; P2-REPLAY-COST sha 9687ff787f2d74460bb7006826008852f5b4416b; P2-MIND2WEB archived Codex section 1) contains no hosted/capable-model capability trial and no same-model four-arm benchmark; the credential-free local Qwen 3B-8B falsification (EXP-INTEL-38164607941) is R2-era. A keyword search of the legacy index found no pre-2.0 artifact matching a hosted-endpoint capability bar, so this is recorded NO_MATCH rather than a duplicate; the limitation is that the 21.97 MB archive was screened only through the compact brief/index, not read line-by-line. Why not pointless: it is the single decision-changing probe for blocker B3 and it also bounds the benchmark's honest comparator set, which the Scout flagged as the field's convergence threat. I deferred the standalone external-baseline census as secondary to removing B3, but folded the comparator enumeration into this bounded probe so Intel still supplies fair baselines if the endpoint cannot be provisioned.",
+      "dependencies": [
+        "B3 endpoint readiness is parallel to, not dependent on, the Product carrier (B1) and Runtime task bank (B2)",
+        "any provisioned endpoint must be same-model/tools/budget-capable for the frozen four-arm benchmark"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar required by readiness condition (3) of the gated four-arm benchmark -- given that the credential-free local 3B-8B Qwen class failed even with goal/schema prompt (EXP-INTEL-38164607941, FALSIFIES) -- and, if no capable same-protocol endpoint can be provisioned, what is the exact credential/operational blocker, with the strongest externally published inheritance/memory systems (target-bound reuse notes QCR arXiv:2608.12847, compile-and-execute arXiv:2604.09718, site-memory/ColorBrowserAgent) enumerated as candidate fair comparators whose numbers and denominators must be reproduced before they may be used?",
+      "rationale": "Decision counterfactual: if a capable, budget-stable endpoint can drive the frozen minimal multi-step Web-agent test, Gate-3 readiness (B3) is satisfied and the flagship four-arm benchmark may be funded; if none is provisionable, recording the exact blocker forces an explicit re-scope of the benchmark away from the same-model external-baseline anchor, and the enumerated external comparators bound that re-scope -- both branches change a program decision. Strongest fair baseline: external published inheritance systems (QCR target-bound reuse notes, compile-and-execute, site-memory/ColorBrowserAgent) and, internally, INSTRUCTIONS/RETRIEVAL arms, so a SPIDER advantage must beat the strongest external class, not just COLD. Validity: the prior local 3B-8B failure is a capability bound on that specific class, not evidence that no capable credential-free path exists, so a bounded probe is warranted. Budget/stop: ONE bounded probe; do not re-run the spent 3B-8B prompt ablation; all external vendor numbers are non-evidence until reproduced with denominators."
+    },
+    "cycle_id": "38174924331",
+    "lane": "intel",
+    "portfolio_assessment": "The program has 438 canonical packets over 1401 frozen historical artifacts, and no claim stands above EXPERIMENTAL except C-MEAS-VALID=VALIDATED at a bounded authorship-separated Chromium-fixture scope. The decisive near-term objective is the ONE fair four-arm benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER, same model/tools/budget), which is gated by three readiness blockers: B1 a shipped, audited, executable parameterized carrier; B2 a non-ceiling multi-step task bank with an arithmetically checkable dynamic-range certificate; B3 a capable same-model endpoint that can drive the minimal multi-step Web-agent test. Product, Runtime and Intel own those three gates respectively and each now has a live/allocatable step, so I concentrate those lanes on blocker removal and fund no new flagship execution. Audit friction is 0.50 revise/invalid across the recent window, so I prefer few decisive tests and one-time prerequisite repairs over additional parameterizations. The external agent-memory field (QCR target-bound reuse notes, compile-and-execute blueprints, site-memory/ColorBrowserAgent replay, and TEPA/MemGuard/PlanFence staleness governance) has independently converged on record-once deterministic replay plus scoped repair, so SPIDER's defensible differentiation is now the audited freshness/verification contract and parameterized cross-identifier inheritance rather than replay alone; four internal arms alone cannot support a competitive-moat claim. Graph is kept on blocking inheritance-safety evidence, namely finishing the resolve() applicability/abstention decision that the last packet left open; the D1V four-anchor C-FRESHNESS route stays parked. Physics and Frontier continue bounded, orthogonal, both-directions programs that are not on the product critical path but retain genuine falsifiable decision value. No lane is left accidental: four lanes resume strategically correct pre-freeze transactions and two idle lanes are explicitly reopened.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief materially shaped this cycle and was used as staff advice, not authority. Its confirmation of the three blockers (B1 carrier, B2 task bank, B3 endpoint) kept Product, Runtime and Intel concentrated on blocker removal instead of funding the full four-arm benchmark, consistent with the gated-readiness rule. Its external-convergence signal lowered my prior that replay/locator-healing alone is novel and drove the emphasis on the freshness/verification contract and parameterized inheritance. I challenged two Scout suggestions: (1) it ranked the runtime out-of-surface oracle repair first, but I judged the B2 non-ceiling task bank to be the higher-priority runtime gate for the flagship benchmark this cycle and deferred the oracle repair, since Graph's chosen step is text-only and Physics does not consume that oracle; (2) it offered C-DELTA-REPAIR or a stale-inheritance false-accept measurement for Graph, but I kept Graph on the C-SEMANTIC-RESOLVE applicability/abstention decision because that is a cheaper, already-structured, blocking safety gate on the product resolve() path, and the neglected C-DELTA-REPAIR thread remains a named deferred alternative. I accepted the Scout's frontier caution (continue v2 only if its certificate is satisfiable, else record a bounded negative and close the axis) and its intel recommendation to reopen the endpoint/model-class feasibility probe; I deferred its external-baseline census as secondary to removing B3. All Scout external findings were treated as non-evidence."
+  },
+  "experiment_id": "EXP-INTEL-38175568787",
+  "inherited_last_verdict": "FALSIFIES",
+  "inherited_next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
+  "lane": "intel",
+  "origin_github_run_id": "38175568787",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-38164607941",
+    "path": "research/experiments/EXP-INTEL-38164607941/handoff.json",
+    "sha256": "edb7898856cc8dd9ea5a65f44468358cf780972faf0a58ddaf558d4f2f606f74"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "4a5daef0af42fef12e1d4bb0e647289f305977c2df7274523461996961f4f58d",
+  "request_id": "b5221791c4f3f9333b82fb82",
+  "schema_version": 1
+}

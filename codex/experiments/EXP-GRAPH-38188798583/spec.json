@@ -1,0 +1,197 @@
+{
+  "schema_version": 2,
+  "design_contract_version": 2,
+  "experiment_id": "EXP-GRAPH-38188798583",
+  "lane": "graph",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "question": "Which materially different resolution architecture - (A) a model-free structured slot/parameter binding with an explicit, independently checkable abstention condition, or (B) a retrieval/embedding resolver trained on independently authored goals - simultaneously reaches pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint calibration/test split AND retains the intact deterministic selection half (B-LEX-STRONG 97/113 = 0.8584) while generalizing its selection advantage to a held-out mechanism set and an independently curated synonym lexicon, thereby deciding whether resolve() ships as a deterministic resolver plus a valid abstention gate or must adopt the structured/retrieval architecture?",
+  "hypothesis": "Arm A (T-FRAME: the frozen deterministic selector kept byte-for-behaviour-identical to B-LEX-STRONG, plus an explicit structural frame-completeness abstention predicate C1-SUBOP / C3-NO-REFERENCE / C4-COMPLEMENT / C5-SET-QUANT / C6-SOURCE with zero tunable parameters) can reach pooled_false_accept <= 0.10 with coverage >= 0.50 and unknown_precision >= 0.85 on the disjoint AXIS-PRIMARY test split and on the AXIS-ALTLEX / AXIS-HELDOUT generalization axes while preserving the deterministic selection advantage (>= 0.80 per axis and >= 0.8584 on PRIMARY), without requiring the embedding stack. Arm B (retrieval/embedding) is a prerequisite-gated comparator, not a required arm.",
+  "falsifier": "Arm A is falsified as the shipping architecture if, on the frozen split, it fails any of: (i) pooled_false_accept_test <= 0.10 on AXIS-PRIMARY; (ii) coverage_test >= 0.50; (iii) unknown_precision_test >= 0.85; or if its selective accuracy on the executed applicable goals falls below 0.80 on any axis or below 0.8584 on AXIS-PRIMARY (selection not preserved). A bounded negative on AXIS-ALTLEX/AXIS-HELDOUT alone falsifies only the generalization claim (DECIDE_SHIP_A_SCOPED), not the primary architecture. This experiment does not retune the frozen integer signal S or the embedding-cosine-threshold family; a negative forces the structured/retrieval architecture and is not a global falsification of C-SEMANTIC-RESOLVE.",
+  "treatment": {
+    "id": "T-FRAME",
+    "arm": "A",
+    "mechanism": "Structured slot/parameter binding with an explicit, independently checkable abstention predicate. EXECUTE iff the frozen selector resolves a mechanism AND no named abstention clause fires. Zero tunable parameters (no score, no threshold, no calibration-fitted constant).",
+    "clauses": [
+      "C1-SUBOP",
+      "C3-NO-REFERENCE",
+      "C4-COMPLEMENT",
+      "C5-SET-QUANT",
+      "C6-SOURCE"
+    ],
+    "selection_rule": "B-LEX-STRONG (frozen comp() selector; behaviourally identical to the parent runner, 0 mech differences over 320 applicable goals)",
+    "runner": "research/experiments/EXP-GRAPH-38188798583/prereg.md#FROZEN-RUNNER (CANONICAL-RUNNER-SHA256 4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62)"
+  },
+  "baselines": [
+    {
+      "id": "B-LEX-STRONG",
+      "name": "Frozen deterministic lexical selection (strong)",
+      "type": "selection_baseline",
+      "description": "The frozen deterministic selector (comp()) that the parent measured at 97/113 = 0.8584 (test split 48/56 = 0.8571). Retention bar: M-SELECTION-B-LEX-STRONG >= 0.80 on every axis and >= 0.8584 on AXIS-PRIMARY.",
+      "must_preserve": true
+    },
+    {
+      "id": "B-LEX-ONLY",
+      "name": "Selector with no gate (gate-free)",
+      "type": "gate_free_baseline",
+      "description": "Same selector, no abstention predicate. Calibration pooled_false_accept 0.45 / 0.40 / 0.60; establishes the task bank is not at ceiling and that T-FRAME's abstentions are load-bearing."
+    },
+    {
+      "id": "T-LEX-AMBIG",
+      "name": "Frozen parent integer-signal gate S <= 0 at t*=0",
+      "type": "incumbent_gate",
+      "description": "The incumbent this design must beat: S = 1[famNONE]+1[opNONE]+1[opTIE]+1[noslot]+1[quant], t*=0. Parent disjoint-test pooled_false_accept 3/18 = 0.1667 (GATE-NOT-MET); calibration 0.10 / 0.10 / 0.05."
+    },
+    {
+      "id": "CTRL-ABSTAIN-ALL",
+      "name": "Abstain on everything",
+      "type": "degenerate_floor",
+      "description": "Trivial gate: coverage 0.0 and unknown_precision 1.0 by convention; prevents coverage gaming."
+    },
+    {
+      "id": "CTRL-RANDOM-GATE",
+      "name": "Random abstention at matched count",
+      "type": "randomized_control",
+      "description": "Abstain uniformly at random over the same count as T-FRAME (SEED 38188798583 mod 2^32). Calibration FA 0.50 / 0.50 / 0.45 and unknown_precision 0.3571 / 0.40 / 0.44 at n = 28 / 25 / 25; verifies abstentions are signal-informed."
+    },
+    {
+      "id": "NC-SHUFFLED-LABEL",
+      "name": "Shuffled applicable targets",
+      "type": "null_control",
+      "description": "Shuffle targets among executed applicable goals; expect near-chance (<= 0.20). Calibration 0.0612 / 0.0192 / 0.0857."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "name": "Random mechanism assignment",
+      "type": "negative_control",
+      "description": "Assign a uniformly random mechanism; expect <= 0.35. Calibration 0.0612 / 0.1346 / 0.1143."
+    },
+    {
+      "id": "B-INCUMBENT-KERNEL",
+      "name": "Incumbent kernel baseline",
+      "type": "negative_floor",
+      "description": "0.0 by construction."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-LIVENESS-AND-INTEGRITY",
+    "description": "All frozen blocks extract; all controls execute; the selector resolves its own bank mechanisms; T-FRAME executes a strictly non-empty and strictly non-full set on AXIS-PRIMARY calibration (observed 49 of 57 applicable, 8 unresolved applicable).",
+    "expected": "PASS"
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-LABEL",
+    "description": "Shuffled labels produce near-chance selection (<= 0.20); observed on calibration 0.0612 / 0.0192 / 0.0857.",
+    "expected": "PASS"
+  },
+  "measurement_validity": {
+    "gates": [
+      "V1-FREEZE_BINDING: runner bytes == CANONICAL-RUNNER-SHA256 and prereg/request/artifact hashes match freeze.json",
+      "V2-SPLIT_DISJOINT: calibration and test index sets are disjoint by the frozen i%splitmod rule",
+      "V3-CONTAMINATION_BOUNDS: token Jaccard < 0.60 and trigram Jaccard < 0.75; reproduced fingerprint 9 flags on PRIMARY/ALTLEX, 0 on HELDOUT",
+      "V4-NO_FITTED_PARAMETER: T-FRAME has no threshold; calibration is used only for feasibility/non-degeneracy, never to select a value",
+      "V5-ARM_B_PREREQ_HANDLED: Arm B absent embedding stack recorded as BLOCKED, never as a scientific negative; not required for a valid Arm A decision",
+      "V6-EXEC_VECTOR_NON_TAUTOLOGY: T-FRAME execution vector differs from B-LEX-ONLY and T-LEX-AMBIG on >= 1 goal",
+      "V7-NON_CEILING_FLOOR: calibration gate-free FA in (0,1) and coverage in (0,1) on every axis",
+      "V8-ARMS_INDEPENDENT: selection and abstention are separate code paths; clause booleans reported per goal",
+      "V9-EMBEDDER_PATH_ISOLATED: the claim-bearing path imports no embedder (stdlib only)",
+      "V10-UNKNOWN_PRECISION_N_SENSITIVITY: abstained_resolved count and unknown_precision_inclusive are reported; undefined precision on a test axis forces status=MEASUREMENT_INVALID",
+      "V11-BOOTSTRAP_SEED: NOT_APPLICABLE (no bootstrap attempted; SEED recorded for the randomized controls)",
+      "V12-FREEZE_ARTIFACTS_HASHED: the three freeze_artifacts are hashed into freeze.json.artifact_hashes",
+      "V13-DECISION_BRANCH_REACHABLE: each substantive decision branch has a concrete trigger (prereg section 7)"
+    ],
+    "contamination_thresholds": {
+      "max_token_jaccard": 0.60,
+      "max_trigram_jaccard": 0.75
+    },
+    "operating_points": {
+      "pooled_false_accept_max": 0.10,
+      "coverage_min": 0.50,
+      "unknown_precision_min": 0.85,
+      "unknown_precision_inclusive_min": 0.80,
+      "selection_min_each_axis": 0.80,
+      "selection_primary_min": 0.8584
+    }
+  },
+  "decision_rule": {
+    "primary": "GATE_MET(axis) := pooled_false_accept_test <= 0.10 AND coverage_test >= 0.50 AND unknown_precision_test >= 0.85. SELECTION_PRESERVED := selective accuracy >= 0.80 on all three axes AND >= 0.8584 on AXIS-PRIMARY. VALID := 0 < executed_app < applicable on AXIS-PRIMARY test AND unknown_precision defined on every test axis.",
+    "branches": [
+      "NOT VALID -> status=MEASUREMENT_INVALID, outcome=null (no claim update, no product change)",
+      "GATE_MET(PRIMARY) AND GATE_MET(ALTLEX) AND GATE_MET(HELDOUT) AND SELECTION_PRESERVED -> DECIDE_SHIP_A",
+      "GATE_MET(PRIMARY) AND SELECTION_PRESERVED (but a secondary axis misses) -> DECIDE_SHIP_A_SCOPED",
+      "otherwise -> DECIDE_REQUIRE_B"
+    ],
+    "secondary": "unknown_precision_inclusive >= 0.80 is diagnostic. If a test axis has zero resolved abstentions, unknown_precision is undefined and the run is MEASUREMENT_INVALID rather than reporting a fabricated precision.",
+    "tie_break": "Prefer the smallest architecture change consistent with the gate; prefer model-free Arm A over provisioning Arm B when Arm A meets gate+selection."
+  },
+  "product_consequence_positive": "License resolve() as a deterministic resolver plus the T-FRAME abstention predicate (DECIDE_SHIP_A fully; DECIDE_SHIP_A_SCOPED only on the generalization surface actually measured, keeping resolve() UNKNOWN on inputs resembling the failing secondary family). This packet alone does not self-promote the claim; DIRECTOR/AUDIT adjudicate any advance of C-SEMANTIC-RESOLVE.",
+  "product_consequence_negative": "Do not ship resolve() with a deterministic-plus-gate architecture. Require the structured/retrieval architecture (repairing the Arm B prerequisite first) and keep resolve() UNKNOWN for low-confidence unseen goals. No product behaviour change and no claim advance.",
+  "estimated_cost": {
+    "compute": "Bounded small batch executed on the calibration and disjoint test halves of the frozen banks (151 + 151 + 120 bound rows). Stdlib only. No LLM endpoint, no network, no browser.",
+    "time": "seconds to minutes.",
+    "notes": "Arm B is not required; if provisioned it is a separate comparator, not part of this decision rule."
+  },
+  "expected_information_gain": "High and decisive: it tests a materially different, threshold-free architecture against the same frozen fixture that falsified the parent's integer-signal gate, and returns a definite positive (ship A), a scoped positive with a named generalization gap, or a bounded negative directing the structured/retrieval architecture. It also resolves the parent's BLOCKED generalization question for the selection half on AXIS-ALTLEX/AXIS-HELDOUT without the embedding stack.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The precedence is total and non-overlapping (INVALID guard -> all three axes met + selection preserved -> PRIMARY only -> else), so no earlier branch makes a later branch unreachable. Positive branch reachable: all three axes are calibration-feasible (coverage 0.8596 / 0.9123 / 0.8750, pooled_false_accept 0.0 / 0.0 / 0.0, unknown_precision 1.0). Scoped branch reachable: AXIS-ALTLEX and AXIS-HELDOUT deliberately use an alternate/held-out lexicon whose surface verbs are absent from LEXICON-G1 (LEXICON-G1-ALT omits introduce/instantiate; LEXICON-G2-HELDOUT adds start/form/schedule/book/file/initiate/log/import), so held-out coverage/precision can differ from PRIMARY. Negative branch arithmetically reachable: on the disjoint 18-goal PRIMARY test split, two slipping OOS rows already exceed the target (2/18 = 0.1111 > 0.10), the clauses were not fitted to any test outcome, and the parent's own disjoint test contained at least three gate-defeating OOS rows. Thresholds are attainable (FA 0.10 => <= 1/18 or <= 2/20; coverage 0.50 => >= 28/56 or >= 20/40; unknown_precision 0.85 => >= 1 resolved abstention, calibration observed 9/8/12).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#7-decision-rule",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#4-frozen-inputs-splits-and-contamination-screen",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38180711589/result.json#metrics.M-GATE-TRIPLET-PRIMARY"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Claim-bearing path is python3-stdlib only and available now. Fixture banks/lexicons are available in the hash-bound parent prereg; prior texts are available in the hash-bound goal_generator.py; the split is disjoint by construction. No credentials, endpoints, browsers, or datasets are required. Arm B's embedding stack is absent (numpy import fails) but Arm B is explicitly NOT a prerequisite for a valid Arm A decision and is recorded as an operational BLOCKED comparator.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#3-arms-treatment-identity-and-comparator",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+        "research/harness/goal_generator.py"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines differ on the calibration population: T-FRAME pooled_false_accept 0.0 vs incumbent T-LEX-AMBIG 0.10 vs gate-free B-LEX-ONLY 0.45 / 0.40 / 0.60, with non-ceiling coverage 0.86-0.91. Selection identity is verified: comp() mech agrees with the parent runner comp() on all 120 G1 / 120 G1-ALT / 80 G2-HELDOUT applicable goals (0 differences), so the preserved selection half is the same code path, not a re-implementation. No cost metric is claimed, so no comparator omits a cost dimension.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38180711589/runner_frozen.py"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Controls fire under the same runner used to score the experiment (calibration-only): NC-SHUFFLED-LABEL 0.0612 / 0.0192 / 0.0857 and B-RANDOM-ROLE 0.0612 / 0.1346 / 0.1143 are far from the treatment's selection, and CTRL-RANDOM-GATE at matched abstention counts (28 / 25 / 25) yields pooled_false_accept 0.50 / 0.50 / 0.45 and unknown_precision 0.3571 / 0.40 / 0.44, both far from T-FRAME's 0.0 / 1.0. No control is tautological and no control is impossible.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#6-baselines-and-controls"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-FRAME executes today on the frozen fixture (stdlib only): calibration executed 49 / 52 / 35 applicable goals, strictly between 0 and the full applicable set, with 8 / 5 / 5 unresolved applicable and 9 / 8 / 12 resolved-but-abstained. Its execution vector differs from both B-LEX-ONLY and T-LEX-AMBIG. No embedder token is on the claim-bearing path.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#FROZEN-RUNNER"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local interpretation dependency is listed and hash-bound: the parent preregistration (fixture banks and lexicons), the grandparent preregistration (PRIOR-PARENT-BANK-TEXTS), and research/harness/goal_generator.py (contamination prior texts). The executable decision path itself is embedded verbatim in this experiment's prereg.md, bound by CANONICAL-RUNNER-SHA256 and by freeze.json.hashes.prereg.md. No other mutable local code, data, task bank or fixture affects interpretation.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#10-freeze-artifacts-and-canonical-hashes",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+        "research/harness/goal_generator.py"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/harness/goal_generator.py"
+  ]
+}
