@@ -8,7 +8,7 @@
   "next_question": "Does the certified SBA-CREDENTIAL-FREE-V2 dynamic range survive a memoryful comparator (the disclosed NC-MEMORYFUL boundary, where a within-session receipt-retaining cold agent reaches 1.0), or is the (K-1)/K treatment/comparator separation an artifact of the memoryless comparator construction -- and therefore can this bank provide discriminative dynamic range for the full four-arm C-LLM-INHERIT benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER), whose comparator arms may themselves carry memory, rather than only for the frozen memoryless B-COLD-RE-DERIVE / B-RETRIEVAL-SHAPED construction?",
   "promotion_ready": false,
   "consecutive_failures": 2,
-  "updated_at": "2026-10-12T00:04:12.428780+00:00",
+  "updated_at": "2026-10-12T00:39:14.731311+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "44373f8388a73fb39a8475b39bb519aedf72216e69ea77ae48b477b3942b30f3",
   "same_failure_count": 1,
