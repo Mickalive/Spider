@@ -6,7 +6,7 @@
   "last_verdict": "ADOPT_MEASUREMENT_VALID_AUDIT_PASSED_BOUNDED_POSITIVE_SHIPPED_CLOSED_WORLD_DECLARATION_CERTIFICATE_SAFE_AND_COMPLETE_ON_FROZEN_SEVEN_FAMILY_BANK_FALSE_ACCEPT0_HTTP_ON_OUT0_REFUSAL_EXECUTED0_COVERAGE1.0_VS_SHIPPED_0.675_REFUSES_AUDITED_OVERWIDE_FA0_VS_INCUMBENT_GATE_FA201_EVASION_CERT_PASS_FA7_CLOSED_WORLD_BOUNDARY_OPERATIONAL_PROMOTE_SHIPPED_GUARD_CODE_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_C_SEMANTIC_RESOLVE_RETAINED_HYPOTHESIS_NO_CLAIM_ADVANCE_CONTINUE_FALSE",
   "continue_immediately": false,
   "next_question": "Beyond the frozen audited negative bank, does a provenance-controlled declaration-soundness certification -- an audited-origin allowlist plus a defined negative-bank growth / adversarial-probing procedure -- provably expand the certified-safe declaration class without reintroducing false accepts, and at what real cost/staleness, or must the shipped kernel permanently cap declaration ingestion at the closed-world audited boundary and prefer UNKNOWN over unsafe inheritance?",
-  "promotion_ready": true,
+  "promotion_ready": false,
   "consecutive_failures": 0,
   "updated_at": "2026-10-12T05:22:38.746172+00:00",
   "last_failure_retryable": null,
@@ -14,7 +14,7 @@
   "same_failure_count": 0,
   "last_failure_fingerprint": null,
   "last_failure_control_revision": null,
-  "last_promoted_experiment_id": "EXP-PRODUCT-38180719830",
-  "last_promoted_source_sha": "c93497fb5d226be8e2ed6ed52122e1bdd9b531f1",
-  "last_promoted_at": "2026-10-11T23:24:35.188194+00:00"
+  "last_promoted_experiment_id": "EXP-PRODUCT-38205292822",
+  "last_promoted_source_sha": "a798cfd5db1b4a30fa94b7ed446da5cbaf1e17ad",
+  "last_promoted_at": "2026-10-12T05:24:08.416648+00:00"
 }
