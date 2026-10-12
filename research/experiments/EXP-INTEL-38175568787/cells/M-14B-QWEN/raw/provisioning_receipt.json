@@ -1,0 +1,8 @@
+{
+  "candidate_id": "M-14B-QWEN",
+  "episodes": [],
+  "load_error": "pinned GGUF sha256+bytes mismatch at EXECUTE: pinned d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b (8988110976 bytes) vs downloaded e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008 (8988110976 bytes); downloaded bytes equal the current remote HF LFS OID e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+  "load_status": "UNMEASURED_LOAD_FAILED",
+  "positive_control": null,
+  "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-14B-QWEN"
+}

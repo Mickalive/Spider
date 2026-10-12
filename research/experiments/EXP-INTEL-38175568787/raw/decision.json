@@ -1,0 +1,80 @@
+{
+  "any_provisionable_credentialed": false,
+  "b3_status": "UNRESOLVED",
+  "cells": {
+    "M-14B-QWEN": {
+      "candidate_id": "M-14B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN",
+      "config_path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/harness_config.json",
+      "config_sha256": "989f3f7681d4b00d590df240f5404e5179484414aba75ee3cde22b52cfadab43",
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "disposition_rule": "frozen decision rule 3a (pinned GGUF sha256+bytes mismatch)",
+      "load_error": "pinned GGUF sha256+bytes mismatch at EXECUTE: pinned d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b (8988110976 bytes) vs downloaded e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008 (8988110976 bytes); downloaded bytes equal the current remote HF LFS OID e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "load_status": "UNMEASURED_LOAD_FAILED",
+      "n_episodes": 0,
+      "positive_control": null,
+      "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-14B-QWEN",
+      "receipt_path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/provisioning_receipt.json",
+      "receipt_sha256": "9db473e69fbd922e52f659bd43b4f7b37ac1a5e852e6848f65bf2fe3541dd001"
+    },
+    "M-8B-LLAMA": {
+      "candidate_id": "M-8B-LLAMA",
+      "cell_dir": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA",
+      "config_path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/harness_config.json",
+      "config_sha256": "46cd2127317fe85eb68c6ac04c4e0492b706c69e99ddab591f5810b9440dc7f2",
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "disposition_rule": "frozen decision rule 3a (pinned GGUF sha256+bytes mismatch)",
+      "load_error": "pinned GGUF sha256+bytes mismatch at EXECUTE: pinned 854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a (4920739232 bytes) vs downloaded 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c (4920739232 bytes); downloaded bytes equal the current remote HF LFS OID 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "load_status": "UNMEASURED_LOAD_FAILED",
+      "n_episodes": 0,
+      "positive_control": null,
+      "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-8B-LLAMA",
+      "receipt_path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/provisioning_receipt.json",
+      "receipt_sha256": "935961f8b8fc9b98d873d1f93c75ed6192f9145bdc86992bc4b3eec854ae9f48"
+    }
+  },
+  "census_counts": {
+    "CREDENTIAL_FREE_OPERATIONALLY_CAPPED": 1,
+    "CREDENTIAL_REQUIRED": 10,
+    "PROVISIONABLE_CREDENTIATED": 0,
+    "UNREACHABLE": 1
+  },
+  "comparators_enumerated": 3,
+  "comparators_not_pinned": 0,
+  "controls": {
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": 1.0,
+      "task_success_rate": 0.2
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": 0.0,
+      "task_success_rate": 0.0
+    },
+    "PC-ORACLE-EPISODE": 1.0
+  },
+  "decision_trace": [
+    "rule1_preflight_pass",
+    "rule2_endpoint_census_recorded_non_gating:providers=12 provisionable_credentialed=0",
+    "rule3a_digest_mismatch:M-14B-QWEN=UNMEASURED_LOAD_FAILED (no load attempted, fail-closed)",
+    "rule3a_digest_mismatch:M-8B-LLAMA=UNMEASURED_LOAD_FAILED (no load attempted, fail-closed)",
+    "rule4_no_complete_cell->MEASUREMENT_INVALID"
+  ],
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "outcome": "MEASUREMENT_INVALID",
+  "preflight_checks": {
+    "B_RANDOM_parseable_1_and_success_lt_0.6": true,
+    "NC_parseable_0_and_success_0": true,
+    "PC_ORACLE_EPISODE_5of5": true,
+    "freeze_artifact_hashes_match": true,
+    "required_stack_imports_ok": true
+  },
+  "preflight_pass": true,
+  "provisioning_blocker": {
+    "category": "REMOTE_GGUF_DIGEST_DRIFT",
+    "detail": "At EXECUTE the remote content at both frozen GGUF URLs differs from the frozen-pinned sha256; downloaded bytes equal the current HF LFS OID (Xet content hash) on every route tried (resolve plain, ?download=true, hf.co). Byte counts match the pinned sizes. Per frozen rule 3a both candidates are UNMEASURED_LOAD_FAILED and no model was loaded (fail-closed; a digest mismatch never becomes a capability failure).",
+    "evidence_ref": "raw/provisioning_evidence.json"
+  },
+  "schema_version": 1,
+  "status": "MEASUREMENT_INVALID"
+}

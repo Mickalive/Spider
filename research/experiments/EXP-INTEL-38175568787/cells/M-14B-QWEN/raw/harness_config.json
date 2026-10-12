@@ -1,0 +1,104 @@
+{
+  "action_schema": {
+    "answer": {
+      "action_value": "answer",
+      "required": [
+        "action",
+        "text"
+      ]
+    },
+    "click": {
+      "action_value": "click",
+      "required": [
+        "action",
+        "selector"
+      ]
+    },
+    "description": "Valid actions; any parse error, schema violation, or missing required field = parse failure"
+  },
+  "candidate_models_frozen": [
+    {
+      "bytes": 8988110976,
+      "candidate_id": "M-14B-QWEN",
+      "frozen_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "model": "Qwen2.5-14B-Instruct",
+      "quant": "Q4_K_M",
+      "role": "primary",
+      "sha256": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b"
+    }
+  ],
+  "clearing_threshold": {
+    "episodes": 5,
+    "parseable_action_rate_step1_min": 0.6,
+    "task_success_rate_min": 0.6
+  },
+  "fixture_id": "FIX-CFG-EXP-INTEL-37982024058",
+  "gbnf_grammar": "root ::= ws \"{\" ws \"\\\"action\\\"\" ws \":\" ws action ws \",\" ws field ws \"}\" ws\nws ::= [ \\t\\n]*\naction ::= \"\\\"click\\\"\" | \"\\\"answer\\\"\"\nfield ::= \"\\\"selector\\\"\" ws \":\" ws string | \"\\\"text\\\"\" ws \":\" ws string\nstring ::= \"\\\"\" strchars \"\\\"\"\nstrchars ::= strchar strchars | strchar\nstrchar ::= [^\"\\\\] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F])\n",
+  "metrics_stable_ids": [
+    "parseable_action_rate_step1",
+    "task_success_rate",
+    "mean_inference_latency_s",
+    "mean_completion_tokens",
+    "positive_control_pass_rate"
+  ],
+  "null_control": {
+    "episodes": 5,
+    "fixed_invalid_content": "I will click the button",
+    "id": "NC-NO-MODEL-ACTION",
+    "success_criterion": "0% parseable JSON actions, 0% task completion"
+  },
+  "positive_control": {
+    "id": "PC-JSON-CONSTRAINED-DECODING",
+    "probes": 10,
+    "success_criterion": "10/10 syntactically valid JSON matching action schema"
+  },
+  "prompts": {
+    "positive_control_probe": "Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}",
+    "system": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
+    "user_template": "PAGE_TEXT: {page_text}\nELEMENTS: {elements_json}\nHISTORY: {history}\nNext action (JSON only): "
+  },
+  "random_baseline": {
+    "action_space": [
+      {
+        "action": "click",
+        "selector": "#reveal-btn"
+      },
+      {
+        "action": "answer",
+        "text": "TARGET-41"
+      },
+      {
+        "action": "answer",
+        "text": "TARGET-42"
+      },
+      {
+        "action": "answer",
+        "text": "TARGET-43"
+      },
+      {
+        "action": "answer",
+        "text": "unknown"
+      }
+    ],
+    "episodes": 5,
+    "id": "B-RANDOM-ACTION"
+  },
+  "sampling": {
+    "base_seed": 42,
+    "chat_format": "qwen",
+    "episode_seed_offset": "42 + episode_idx",
+    "llama_seed": 42,
+    "max_tokens": 512,
+    "n_ctx": 2048,
+    "temperature": 0.0
+  },
+  "source": "frozen prereg.md sections 3-6 and spec.json measurement_validity; constructed before any outcome-bearing measurement",
+  "task": {
+    "description": "Click #reveal-btn then answer TARGET-42 (identical semantic task to parent EXP-INTEL-37973264582 Gate 2)",
+    "max_steps_per_episode": 5,
+    "name": "MIN-WEBAGENT-CLICK-REVEAL-ANSWER",
+    "page_html": "<!DOCTYPE html>\n<html>\n<body>\n  <button id=\"reveal-btn\">Reveal</button>\n  <div id=\"target\" style=\"display:none\">TARGET-42</div>\n  <script>\n    document.getElementById('reveal-btn').onclick = () => {\n      document.getElementById('target').style.display = 'block';\n      document.getElementById('reveal-btn').style.display = 'none';\n    };\n  </script>\n</body>\n</html>\n",
+    "served_via": "local python http.server on 127.0.0.1 random port",
+    "threshold_target_text": "TARGET-42"
+  }
+}

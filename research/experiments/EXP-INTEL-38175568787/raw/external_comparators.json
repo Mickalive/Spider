@@ -1,0 +1,53 @@
+{
+  "comparators_enumerated": 3,
+  "comparators_not_pinned": 0,
+  "entries": [
+    {
+      "arxiv_id": "2608.12847",
+      "evidence_label": "CANDIDATE_NOT_EVIDENCE",
+      "primary_source_pinned": true,
+      "primary_source_url": "https://arxiv.org/abs/2608.12847",
+      "reported_numbers_with_denominators": [
+        "+10.7 pts success vs full-trajectory injection (denominator: reported benchmark success-rate points)",
+        "-48.9% tokens vs full-trajectory injection (denominator: reported token counts)",
+        "2,391 instances across WebArena/WorkArena/AppWorld (denominator: task instances)",
+        "stale-binding errors 46.9% -> 10.9% (reported; denominator: error-class counts over stated instance set)"
+      ],
+      "reproduction_prerequisites": "datasets (WebArena/WorkArena/AppWorld) + base model family + tool set + token-budget denominator + success-rate definition",
+      "system": "QCR (target-bound reuse notes)",
+      "title": "Beyond Retrieval: Query-Conditioned Reuse of Long-Horizon Agent Trajectories"
+    },
+    {
+      "arxiv_id": "2604.09718",
+      "evidence_label": "CANDIDATE_NOT_EVIDENCE",
+      "primary_source_pinned": true,
+      "primary_source_url": "https://arxiv.org/abs/2604.09718",
+      "reported_numbers_with_denominators": [
+        "5-step workflow, 500 iterations: ~$150 -> <$0.10 (denominator: 500 iterations of the stated 5-step workflow; pricing model)"
+      ],
+      "reproduction_prerequisites": "workflow/task identity + pricing model + iteration denominator + execution environment",
+      "system": "compile-and-execute (Agentic Compilation)",
+      "title": "Agentic Compilation: Mitigating the LLM Rerun Crisis for Minimized-Inference-Cost Web Automation"
+    },
+    {
+      "also_published": "ACL 2026 industry track (aclanthology.org/2026.acl-industry.46)",
+      "arxiv_id": "2601.07262",
+      "evidence_label": "CANDIDATE_NOT_EVIDENCE",
+      "primary_source_pinned": true,
+      "primary_source_url": "https://arxiv.org/abs/2601.07262",
+      "reported_numbers_with_denominators": [
+        "71.2% success rate on WebArena (denominator: reported WebArena task set; 812 tasks in the reference benchmark)",
+        "47.4% performance under zero-shot transfer on WebChoreArena (denominator: reported WebChoreArena task set)",
+        "19.3% relative user-satisfaction improvement in commercial deployment (denominator: reported deployment user-satisfaction metric)",
+        "52 distilled site-level rules from <1 person-day (denominator: 52 rules across GitLab 13/Map 7/Reddit 5/Shopping 9/Admin 18)"
+      ],
+      "reproduction_prerequisites": "primary source identity (arXiv 2601.07262 / ACL 2026.acl-industry.46) + task/site denominators (WebArena/WebChoreArena) + base VLM family + budget + knowledge-adaptation protocol",
+      "system": "site-memory / ColorBrowserAgent",
+      "title": "ColorBrowserAgent: Complex Long-Horizon Browser Agent with Adaptive Knowledge Evolution"
+    }
+  ],
+  "experiment_id": "EXP-INTEL-38175568787",
+  "purpose": "Conditional, non-gating deliverable of the Director mandate: enumerate the strongest externally published inheritance/memory systems as candidate fair comparators whose numbers and denominators must be reproduced before use. CANDIDATE_NOT_EVIDENCE; no vendor number is SPIDER evidence.",
+  "resolution_issues": [],
+  "schema_version": 1
+}

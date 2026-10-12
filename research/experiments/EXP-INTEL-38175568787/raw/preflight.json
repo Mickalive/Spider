@@ -1,0 +1,61 @@
+{
+  "candidate_gguf_digest_evidence": {
+    "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf": {
+      "exists": true,
+      "expected_bytes": 4920739232,
+      "expected_sha256": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+      "match": false,
+      "observed_bytes": 4920739232,
+      "observed_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c"
+    },
+    "Qwen2.5-14B-Instruct-Q4_K_M.gguf": {
+      "exists": true,
+      "expected_bytes": 8988110976,
+      "expected_sha256": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+      "match": false,
+      "observed_bytes": 8988110976,
+      "observed_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008"
+    }
+  },
+  "checks": {
+    "B_RANDOM_parseable_1_and_success_lt_0.6": true,
+    "NC_parseable_0_and_success_0": true,
+    "PC_ORACLE_EPISODE_5of5": true,
+    "freeze_artifact_hashes_match": true,
+    "required_stack_imports_ok": true
+  },
+  "freeze_artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": {
+      "exists": true,
+      "expected_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+      "match": true,
+      "observed_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"
+    },
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": {
+      "exists": true,
+      "expected_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+      "match": true,
+      "observed_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"
+    },
+    "research/intel/run_exp_37982024058.py": {
+      "exists": true,
+      "expected_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+      "match": true,
+      "observed_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+    }
+  },
+  "gguf_digests": {},
+  "pass": true,
+  "run_error": null,
+  "stack_imports": {
+    "has_make_null_producer": true,
+    "has_make_random_producer": true,
+    "has_parse_action": true,
+    "has_run_episode": true,
+    "has_start_page_server": true,
+    "llama_cpp": true,
+    "llama_cpp_version": "0.2.90",
+    "parent_runner_import": true,
+    "playwright": true
+  }
+}

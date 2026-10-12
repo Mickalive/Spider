@@ -1,0 +1,45 @@
+{
+  "base_config_path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+  "base_config_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+  "cells": {
+    "M-14B-QWEN": {
+      "candidate_entry_sha256": "c3c8a7d59abc9c7082a7f71456f1d66e130aa6845d9a0e18aa52fb46c3db43eb",
+      "candidate_id": "M-14B-QWEN",
+      "cell_dir": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN",
+      "chat_format": "qwen",
+      "diff_confined_to_allowed_keys": true,
+      "diff_paths": [
+        "candidate_models_frozen",
+        "prompts.system"
+      ],
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38175568787/configs/config_M-14B-QWEN.json",
+      "overlay_path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/harness_config.json",
+      "overlay_sha256": "989f3f7681d4b00d590df240f5404e5179484414aba75ee3cde22b52cfadab43",
+      "system_string_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716"
+    },
+    "M-8B-LLAMA": {
+      "candidate_entry_sha256": "bc2659dac711550075fd0b4111a0a90ca9c0b6def3a35ecf809e705949e9ae60",
+      "candidate_id": "M-8B-LLAMA",
+      "cell_dir": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA",
+      "chat_format": "llama-3",
+      "diff_confined_to_allowed_keys": true,
+      "diff_paths": [
+        "candidate_models_frozen",
+        "prompts.system",
+        "sampling.chat_format"
+      ],
+      "leakage_reveal_selector": false,
+      "leakage_target_value": false,
+      "mirror_path": "research/experiments/EXP-INTEL-38175568787/configs/config_M-8B-LLAMA.json",
+      "overlay_path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/harness_config.json",
+      "overlay_sha256": "46cd2127317fe85eb68c6ac04c4e0492b706c69e99ddab591f5810b9440dc7f2",
+      "system_string_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716"
+    }
+  },
+  "experiment_id": "EXP-INTEL-38175568787",
+  "schema_version": 1,
+  "system_string": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
+  "system_string_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716"
+}

@@ -1,0 +1,93 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "M-14B-QWEN",
+      "diagnosis": {
+        "downloaded_equals_tree_lfs_oid": true,
+        "pinned_equals_cdn_etag": true,
+        "pinned_equals_tree_xetHash": true,
+        "root_cause": "the frozen pin equals the HF tree API xetHash (Xet content hash) and the CDN etag, but the sha256 of the served bytes equals the tree API lfs.oid. The spec note claims 'sha256 equals the HF LFS OID (CDN etag)'; that conflates two distinct server fields: the pin is the xetHash/CDN-etag, NOT the lfs.oid. The design-time digest was therefore read from HF server metadata (etag/xetHash) rather than computed from downloaded bytes (or the served body changed from xet-hashed content to lfs-oid content between design and execute). Either way the frozen byte-level identity is unsatisfiable against the currently served, stable, authentic bytes."
+      },
+      "digest_match_pinned": false,
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "disposition_rule": "frozen decision rule 3a (pinned GGUF sha256+bytes mismatch -> UNMEASURED_LOAD_FAILED, continue); fail-closed, no model substitution permitted",
+      "downloaded_bytes": 8988110976,
+      "downloaded_exists": true,
+      "downloaded_path": "/tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "downloaded_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "frozen_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "hf_head": {
+        "content_length": "8988110976",
+        "etag": "\"d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b\"",
+        "final_status": 200,
+        "final_url": "https://us.aws.cdn.hf.co/xet-bridge-us/66e9d880343e8db235551e4d/d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b?xip=oFOYt3XPz6U&user_id=public&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27Qwen2.5-14B-Instruct-Q4_K_M.gguf%3B+filename%3D%22Qwen2.5-14B-Instruct-Q4_K_M.gguf%22%3B&Expires=1791771199&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjZlOWQ4ODAzNDNlOGRiMjM1NTUxZTRkL2Q5ODljOTFkZTM1ZjMyYzE4YmRiOGJlYzk2YTRiOWZmZjJjM2U1YmNhMDY2NTAzYzYzYTVjYTU0ZGQ1MzdhNGJcXD94aXA9b0ZPWXQzWFB6NlUmdXNlcl9pZD1wdWJsaWMmWC1YZXQtQ2FzLVVpZD1wdWJsaWMmcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj1pbmxpbmUlM0IrZmlsZW5hbWUlMkElM0RVVEYtOCUyNyUyN1F3ZW4yLjUtMTRCLUluc3RydWN0LVE0X0tfTS5nZ3VmJTNCK2ZpbGVuYW1lJTNEJTIyUXdlbjIuNS0xNEItSW5zdHJ1Y3QtUTRfS19NLmdndWYlMjIlM0IiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc5MTc3MTE5OX19fV19&Signature=MEUCIQCyDfRMGgfeol%7EGOyTR2OwS5oESAZ3WuB1jMk8UGpO4vgIgU7pFiMnVf9uiaodeZLBGSmOSXK%7Ee5h0D8Qcfl5R-ujk_&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F&Hash-Algorithm=SHA256",
+        "x-linked-etag": null
+      },
+      "hf_tree_api_entry": {
+        "lfs_oid": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+        "oid": "ad3f3af1d8a54464cca3bd6e8ecc3165765a80e9",
+        "path": "Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+        "size": 8988110976,
+        "xetHash": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b"
+      },
+      "load_attempted": false,
+      "observed_sha256_matches_current_lfs_oid": true,
+      "pinned_bytes": 8988110976,
+      "pinned_sha256": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+      "remote_current_lfs_oid": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "remote_current_size": 8988110976,
+      "remote_current_xet_hash": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+      "routes_verified": [
+        "https://huggingface.co/<repo>/resolve/main/<file>",
+        "https://huggingface.co/<repo>/resolve/main/<file>?download=true",
+        "https://hf.co/<repo>/resolve/main/<file>"
+      ]
+    },
+    {
+      "candidate_id": "M-8B-LLAMA",
+      "diagnosis": {
+        "downloaded_equals_tree_lfs_oid": true,
+        "pinned_equals_cdn_etag": true,
+        "pinned_equals_tree_xetHash": true,
+        "root_cause": "the frozen pin equals the HF tree API xetHash (Xet content hash) and the CDN etag, but the sha256 of the served bytes equals the tree API lfs.oid. The spec note claims 'sha256 equals the HF LFS OID (CDN etag)'; that conflates two distinct server fields: the pin is the xetHash/CDN-etag, NOT the lfs.oid. The design-time digest was therefore read from HF server metadata (etag/xetHash) rather than computed from downloaded bytes (or the served body changed from xet-hashed content to lfs-oid content between design and execute). Either way the frozen byte-level identity is unsatisfiable against the currently served, stable, authentic bytes."
+      },
+      "digest_match_pinned": false,
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "disposition_rule": "frozen decision rule 3a (pinned GGUF sha256+bytes mismatch -> UNMEASURED_LOAD_FAILED, continue); fail-closed, no model substitution permitted",
+      "downloaded_bytes": 4920739232,
+      "downloaded_exists": true,
+      "downloaded_path": "/tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "downloaded_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "frozen_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "hf_head": {
+        "content_length": "4920739232",
+        "etag": "\"854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a\"",
+        "final_status": 200,
+        "final_url": "https://us.aws.cdn.hf.co/xet-bridge-us/669fce02988201fd4f9ceddc/854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a?user_id=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf%3B+filename%3D%22Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf%22%3B&xip=oFOYt3XPz6U&X-Xet-Cas-Uid=public&Expires=1791771202&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjY5ZmNlMDI5ODgyMDFmZDRmOWNlZGRjLzg1NDUwNjEyM2I2ODM3MjQ5MmI4YTk5YmIzYTk5OTU5NDY3MmIzOTQ3OTFjZjExNTNmOGRhNWZmYjVmMWM1OWFcXD91c2VyX2lkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3TWV0YS1MbGFtYS0zLjEtOEItSW5zdHJ1Y3QtUTRfS19NLmdndWYlM0IrZmlsZW5hbWUlM0QlMjJNZXRhLUxsYW1hLTMuMS04Qi1JbnN0cnVjdC1RNF9LX00uZ2d1ZiUyMiUzQiZ4aXA9b0ZPWXQzWFB6NlUmWC1YZXQtQ2FzLVVpZD1wdWJsaWMiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc5MTc3MTIwMn19fV19&Signature=MEYCIQD6Vo7eHC9d08LcqLWT3htBkImcbpgkVrRmCeb6dBs1TAIhAIkDNHq3TBovi1P0Hj9oOqHUnz29MqQc6FDWLYaOs1al&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F&Hash-Algorithm=SHA256",
+        "x-linked-etag": null
+      },
+      "hf_tree_api_entry": {
+        "lfs_oid": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+        "oid": "261351a656a263e334c6f0eef9c1742f2587042c",
+        "path": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+        "size": 4920739232,
+        "xetHash": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a"
+      },
+      "load_attempted": false,
+      "observed_sha256_matches_current_lfs_oid": true,
+      "pinned_bytes": 4920739232,
+      "pinned_sha256": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+      "remote_current_lfs_oid": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "remote_current_size": 4920739232,
+      "remote_current_xet_hash": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+      "routes_verified": [
+        "https://huggingface.co/<repo>/resolve/main/<file>",
+        "https://huggingface.co/<repo>/resolve/main/<file>?download=true",
+        "https://hf.co/<repo>/resolve/main/<file>"
+      ]
+    }
+  ],
+  "experiment_id": "EXP-INTEL-38175568787",
+  "note": "Ladder step 3a fail-closed digest verification. At EXECUTE the remote content at the frozen GGUF URLs hashes to the CURRENT HF LFS OID (Xet hash) which differs from the frozen-pinned sha256. Multiple independent download routes agree (resolve plain, ?download=true, hf.co). Byte counts match the pinned sizes. No model load was attempted for any mismatched file; a digest mismatch marks the candidate UNMEASURED_LOAD_FAILED per frozen decision rule 3a.",
+  "schema_version": 1
+}

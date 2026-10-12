@@ -1,0 +1,8 @@
+{
+  "candidate_id": "M-8B-LLAMA",
+  "episodes": [],
+  "load_error": "pinned GGUF sha256+bytes mismatch at EXECUTE: pinned 854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a (4920739232 bytes) vs downloaded 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c (4920739232 bytes); downloaded bytes equal the current remote HF LFS OID 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+  "load_status": "UNMEASURED_LOAD_FAILED",
+  "positive_control": null,
+  "provisioning_evidence_ref": "raw/provisioning_evidence.json#candidates.M-8B-LLAMA"
+}
