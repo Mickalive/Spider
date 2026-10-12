@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38197856050",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim_ids": ["C-PARAM-INHERIT", "C-SEMANTIC-RESOLVE"],
+  "claim_status_semantics": "No claim advance or promotion in any branch, per frozen spec.json decision_rule.claim_status_semantics: C-PARAM-INHERIT remains EXPERIMENTAL and C-SEMANTIC-RESOLVE remains HYPOTHESIS. This packet is evidence only; it does not discharge the registered four-arm C-LLM-INHERIT gate.",
+  "decision": "WIDENING_UNSAFE",
+  "metrics": {
+    "M-BANK": {
+      "n_items": 292,
+      "n_in": 63,
+      "n_out": 229,
+      "per_family_n_in": {"A": 16, "B": 18, "C": 19, "D": 10},
+      "per_family_n_out": {"A": 56, "B": 55, "C": 53, "D": 65},
+      "all_bids_unique": true,
+      "label_rule": "IN iff str value fullmatches the family declared grammar AND intent == family intent AND context == {resource_type:<resource>, authenticated:true} AND params == {<resource>: value}; else OUT (frozen, outcome-independent)"
+    },
+    "M-T-WIDENED-FALSE-ACCEPT-COUNT": 9,
+    "M-T-WIDENED-SILENT-FALSE-ACCEPT-COUNT": 0,
+    "M-T-WIDENED-HTTP-ON-OUT": 9,
+    "M-T-WIDENED-FALSE-REJECT-COUNT": 10,
+    "M-T-WIDENED-COVERAGE": 0.8412698412698413,
+    "M-T-WIDENED-COVERAGE-BY-FAMILY": {"A": 1.0, "B": 1.0, "C": 0.47368421052631576, "D": 1.0},
+    "M-T-WIDENED-REFUSAL-EXECUTED-COUNT": 0,
+    "M-T-WIDENED-FALSE-ACCEPT-BIDS": ["FD-OG-WRONGRANGE00", "FD-OG-WRONGRANGE01", "FD-OG-WRONGRANGE02", "FD-OG-WRONGRANGE03", "FD-OG-WRONGRANGE04", "FD-OG-WRONGRANGE05", "FD-OG-WRONGRANGE06", "FD-OG-WRONGRANGE07", "FD-OG-WRONGRANGE08"],
+    "M-T-WIDENED-FALSE-REJECT-BIDS": ["FC-IN-E00", "FC-IN-E01", "FC-IN-E02", "FC-IN-E06", "FC-IN-E07", "FC-IN-E08", "FC-IN-E09", "FC-IN-E10", "FC-OG-LEN-TOO-SHORT1", "FC-OG-LEN-TOO-LONG1"],
+    "M-B-SHIPPED-COVERAGE": 0.5079365079365079,
+    "M-COVERAGE-DELTA": 0.33333333333333337,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-B-SHIPPED-FALSE-REJECT-COUNT": 31,
+    "M-B-SHIPPED-FALSE-REJECT-BY-FAMILY": {"A": 8, "B": 10, "C": 13, "D": 0},
+    "M-WIDENED-SUPPORT-BY-FAMILY": {"A": "^item\\-[0-9]{3}$", "B": "^acct\\-[0-9]{4}$", "C": "^doc\\-[0-9]{2}$", "D": "^region\\-[0-9]{3}$"},
+    "M-SHIPPED-SUPPORT-BY-FAMILY": {"A": "^item\\-00[0-9]{1}$", "B": "^acct\\-000[0-9]{1}$", "C": "^doc\\-0[0-9]{1}$", "D": "^region\\-00[0-9]{1}$"},
+    "M-B-DECLARED-FULL-FALSE-ACCEPT-COUNT": 0,
+    "M-B-DECLARED-FULL-COVERAGE": 1.0,
+    "M-B-DECLARED-FULL-FALSE-REJECT-COUNT": 0,
+    "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT": 153,
+    "M-CONTROL-PC-OVERWIDE-FALSE-ACCEPT-COUNT": 33,
+    "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT": 0,
+    "M-CONTROL-NC-REJECT-ALL-HTTP-TOTAL": 0,
+    "M-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-IDENTITY": "PASS",
+    "M-SUPPORT-IDENTITY": "PASS",
+    "M-REGRESSION": "PASS (3/3)",
+    "M-DETERMINISM": "PASS (two independent runs, identical treatment/shipped/declared metrics and support identity)",
+    "M-ABLATION": "PASS (literal kernel has_distill_parameterized=False)",
+    "model_calls": 0,
+    "model_tokens": 0
+  },
+  "controls": {
+    "B-SHIPPED": {
+      "role": "shipped_baseline",
+      "expected_behavior": "false_accept_count == 0 AND coverage < 1.0 (frozen DESIGN point-prediction: coverage 32/63 = 0.5079; false rejects A 8, B 10, C 13, D 0)",
+      "observed_behavior": "false_accept_count = 0, coverage = 0.5079365079365079 (32/63), false_reject_count = 31 per family A 8 / B 10 / C 13 / D 0, http_on_out_label = 0",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.B-SHIPPED"
+    },
+    "B-DECLARED-FULL": {
+      "role": "strong_comparator",
+      "expected_behavior": "false_accept_count == 0 AND coverage == 1.0 (safe+complete ceiling exists on this bank)",
+      "observed_behavior": "false_accept_count = 0, coverage = 1.0 (63/63), false_reject_count = 0, http_on_out_label = 0; per-family coverage 1.0 on A/B/C/D",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.B-DECLARED-FULL"
+    },
+    "B-LITERAL-KERNEL": {
+      "role": "ablation",
+      "expected_behavior": "hasattr(SpiderKernel, 'distill_parameterized') == False (pre-promotion literal blob cfec98660b..., sha256 46929b3a...)",
+      "observed_behavior": "has_distill_parameterized = False; loaded in hermetic temp package with shipped models.py/registry.py/__init__.py",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.B-LITERAL-KERNEL"
+    },
+    "PC-UNSAFE-COARSE": {
+      "role": "positive_control_sensitivity",
+      "expected_behavior": "false_accept_count >= 1 (frozen DESIGN point-prediction: 153)",
+      "observed_behavior": "false_accept_count = 153, http_on_out_label = 141",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.PC-UNSAFE-COARSE"
+    },
+    "PC-OVERWIDE-OPEN": {
+      "role": "positive_control_sensitivity",
+      "expected_behavior": "false_accept_count >= 1 (frozen DESIGN point-prediction: 33)",
+      "observed_behavior": "false_accept_count = 33, http_on_out_label = 33, coverage = 1.0 (96/96 accepted incl. wrong-width)",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.PC-OVERWIDE-OPEN"
+    },
+    "NC-REJECT-ALL": {
+      "role": "null_control",
+      "expected_behavior": "accept_count == 0 AND http_total == 0",
+      "observed_behavior": "accept_count = 0, http_total = 0, coverage = 0.0, false_reject_count = 63 (all IN)",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.NC-REJECT-ALL"
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "role": "determinism_anchor",
+      "expected_behavior": "two independent runs produce identical treatment/shipped/declared metrics and support identity",
+      "observed_behavior": "PASS: run1 and run2 metrics and support identity byte-identical (json sort_keys comparison)",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.PC-DETERMINISM-REPEAT"
+    },
+    "PC-EXACT-REPLAY": {
+      "role": "validity_anchor",
+      "expected_behavior": "all 25 training ids (A/B/C 5 each, D 10) re-resolve EXECUTABLE on the as-installed carrier (25/25)",
+      "observed_behavior": "25/25 EXECUTABLE (replay list in certificate)",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.PC-EXACT-REPLAY"
+    },
+    "V8-FREEZE-BINDING": {
+      "role": "instrument_identity",
+      "expected_behavior": "sha256(prereg.md) == freeze.json.hashes['prereg.md']; running source == FROZEN RUNNER block (norm); all six artifact hashes match",
+      "observed_behavior": "prereg_sha_matches = true, runner_source_matches_frozen_block = true, artifact_hashes_match = true",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json#certificate.V8_FREEZE_BINDING"
+    },
+    "M-REGRESSION": {
+      "role": "regression",
+      "expected_behavior": "tests/test_kernel.py passes 3/3 on the as-installed shipping path",
+      "observed_behavior": "tests_run = 3, failures = 0, errors = 0",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PRODUCT-38197856050/raw_run_stderr.txt"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json", "sha256": "ba894b69ef5b20ee675ef1b470578b43ebaf64db44a5eb6a4b456b5a74ecb4d0", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-38197856050/raw_run_stderr.txt", "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-38197856050/harness/run_bank.py", "sha256": "1088b2e20fa9227aa960b3a8462819aa741e40c5254b5b75508a9c0c81193dab", "role": "code"},
+    {"path": "research/experiments/EXP-PRODUCT-38197856050/prereg.md", "sha256": "0b702bc183b4a7cfb59d5244c8cdb938024115e370cd17d5179637e32513a0b6", "role": "frozen_input"},
+    {"path": "research/experiments/EXP-PRODUCT-38197856050/result.json", "sha256": null, "role": "derived"}
+  ],
+  "observations": [
+    "The shipping kernel src/spider/kernel.py has sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 == the frozen carrier byte-for-byte; the git tree is clean except for this packet's own EXECUTE outputs; all six freeze artifacts re-hash to their frozen values after the run.",
+    "Induction over the frozen training ids reproduced the expected shipped single-observation-length supports on all four families (^item\\-00[0-9]{1}$, ^acct\\-000[0-9]{1}$, ^doc\\-0[0-9]{1}$, ^region\\-00[0-9]{1}$) with confidence 0.9 >= min_confidence 0.8 and one bound slot each.",
+    "The oracle issued HTTP 404 for the 9 treatment-bound OUT items FD-OG-WRONGRANGE00..08 (region-010 .. region-999 family D wrong-subrange values), i.e. every treatment false accept produced a real non-success HTTP request; no OUT item was refused and then executed (refusal_executed_count = 0).",
+    "The two full evaluation passes were run against fresh oracle servers (ephemeral 127.0.0.1 ports) and produced identical treatment, shipped and declared summaries and identical mechanism/support identity (PC-DETERMINISM-REPEAT PASS).",
+    "tests/test_kernel.py ran 3 tests, 0 failures, 0 errors (M-REGRESSION PASS).",
+    "No model calls and no model tokens were consumed by construction (the runner contains no model code; model_calls=0, model_tokens=0)."
+  ],
+  "validity_notes": [
+    "V8-FREEZE-BINDING PASS: sha256(prereg.md)=0b702bc1... matches freeze.json; harness/run_bank.py extracted from the FROZEN RUNNER block matches under norm(); all six freeze artifact hashes match post-run (src/spider/kernel.py still 718efa6a...).",
+    "V1/V2: deterministic stdlib-only loopback oracle on 127.0.0.1:0; no RNG/wall-clock/external network/model; oracle request counter is the authoritative HTTP measure.",
+    "V3/V4: shipping kernel sha == frozen carrier sha; no substituted carrier; induced shipped supports equal the frozen constants (M-SUPPORT-IDENTITY PASS), so the bank was measured against the exact shipped induction path.",
+    "V5: bank composition matches the frozen prediction exactly (292 items, 63 IN, 229 OUT; A 16/56, B 18/55, C 19/53, D 10/65; all bids unique).",
+    "V6: zero refusal-semantics violations (no refused OUT item issued HTTP; silent_false_accept_count = 0).",
+    "V9: regression 3/3 PASS on the as-installed shipping path.",
+    "V10: B-LITERAL-KERNEL has no distill_parameterized, so attribution to the promotion is sound.",
+    "V11: sensitivity gates PASS with wide margins (PC-UNSAFE-COARSE 153 >= 1, PC-OVERWIDE-OPEN 33 >= 1, NC-REJECT-ALL accept=0 http=0); the certificate's zero interpretation is non-vacuous.",
+    "V12: all arms are the identical induced mechanism objects with only verification_rule['parameter_supports'] rewritten (mechanism_id support-independent), so arm differences are attributable to the support descriptor alone.",
+    "The run is a valid scientific negative: status=COMPLETE / outcome=FALSIFIES means the measurement transaction completed validly and the frozen data-driven widening rule is not unconditionally safe on this bank; it is NOT an infrastructure failure.",
+    "Representation scope: coverage is measured over the declared IN population of the four frozen families only, and HTTP-on-OUT is measured over OUT-labelled items actually executed; no economics (latency/tokens/network beyond loopback) were measured, by frozen design."
+  ],
+  "unresolved": [
+    "Whether an independent grammar/applicability guard (e.g., ingested declared grammar or a pre-bind verification/repair step) can make support widening safe on pinned-subrange families like FAM-D is NOT tested here; the frozen spec licenses only a future separate implementation+regression packet.",
+    "The registered C-PARAM-INHERIT next_gate (four-arm COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER benchmark on a certified task bank with a capable same-protocol endpoint) remains unmet and unfunded.",
+    "Whether widening would hold zero false accepts on declared grammars whose shared run is NOT observably pinned (e.g., non-digit suffixes or mixed-class varying remainders) was not measured; only the four frozen families define the certificate's scope."
+  ]
+}
