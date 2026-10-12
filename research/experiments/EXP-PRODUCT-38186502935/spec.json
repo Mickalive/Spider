@@ -1,50 +1,203 @@
 {
   "experiment_id": "EXP-PRODUCT-38186502935",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-PARAM-INHERIT"
+  ],
+  "claim_scope_note": "Shipped-carrier END-TO-END execution readiness demonstration ONLY for C-PARAM-INHERIT (registry status EXPERIMENTAL; lane owners graph+product). This packet does NOT run the four-arm C-LLM-INHERIT benchmark (readiness conditions (2) and (3) do not hold; policy forbids funding it), does NOT compare COLD/INSTRUCTIONS/RETRIEVAL arms, does NOT re-run the B1 promotion certificate (EXP-PRODUCT-38180719830 verdict explicitly excludes it; its result is inherited as established state), does NOT re-run the mandatory-discovery deterministic REST certificate (excluded by the parent handoff after three failures), and does NOT advance C-PARAM-INHERIT to VALIDATED (its registered next_gate 'learn on resource A, succeed on never-observed B against cold/replay/retrieval baselines' remains unfunded until readiness (2)+(3) and a NEW Director mandate). Measured object: whether the now-promoted, byte-identical shipped parameterized carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72, ALREADY the shipping kernel src/spider/kernel.py) executes the FULL shipped end-to-end path distill_parameterized -> resolve -> execute -> verify/UNKNOWN on a credential-free substrate, producing BOTH one known-positive on a never-observed identifier (item-000; never observed in ANY prior SPIDER run, inside the induced support) AND one known-negative refusal (item-010; abstention, no execution, zero HTTP), at the SHIPPED thresholds (kernel default min_confidence=0.8, induced confidence 0.9, unmodified kernel), thereby discharging readiness condition (1) as defined by the Director. This is a READ-ONLY measurement of the as-installed shipping path through the public package API: the runner NEVER writes src/spider/ (unlike the parent certificate, which installed the carrier); consequently src/spider/kernel.py enters freeze_artifacts for the first time because this experiment never mutates it. C-PARAM-INHERIT stays EXPERIMENTAL in ALL branches; no claim advance; no economics measured (model_calls=0, model_tokens=0 by construction).",
+  "question": "Does the now-promoted, byte-identical shipped parameterized carrier (git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 / sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72, installed at the shipping kernel path src/spider/kernel.py with a frozen D0-D4+V8 certificate PASS and an independent PASS audit) actually execute the full shipped end-to-end path distill_parameterized -> resolve -> execute -> verify/UNKNOWN on a credential-free substrate, producing BOTH one known-positive on a never-observed identifier AND one known-negative refusal (abstention) at the shipped confidence/thresholds -- thereby discharging readiness condition (1) -- or does the shipped path still fail to execute end-to-end? Concretely, on the current shipping tree (git clean): (E2E-IDENTITY) is src/spider/kernel.py byte-identical to the frozen carrier (sha256 718efa6a...), i.e. is the promotion merge actually in effect? (E2E-POSITIVE) do 5 actually-executed induction observations (item-001..005) distill a parameterized mechanism (slots ['item'], induced support ^item\\-00[0-9]{1}$, parameterized confidence 0.9 >= shipped min_confidence 0.8) that resolves the NEVER-observed identifier item-000 EXECUTABLE with a correctly bound non-null action, whose execution returns fixture status 200 and verify true? (E2E-ABSTENTION) do the known negatives refuse with bound_action null, a recorded reason, and the exact mandated statuses (item-010 -> EXPLORE 'outside inferred support'; never_seen_intent -> EXACTLY UNKNOWN), with ZERO HTTP requests issued for refused probes? (E2E-COUNTERS) do retrieval_calls/verification_calls/repair_attempts equal the invocation transcript with model_calls==0 and model_tokens==0, and does the runner-side fixture request counter equal the executed HTTP legs (6 = 5 induction + 1 positive; 0 abstention)? (E2E-CONTROLS) do the literal ablation, PC-EXACT-REPLAY (5/5 EXECUTABLE) and the regression suite (3/3) pass?",
+  "hypothesis": "On the current shipping tree, the installed carrier (bytes == git blob b15ed848 / sha256 718efa6a...) passes all five E2E clauses at the SHIPPED (unmodified) thresholds: E2E-IDENTITY - src/spider/kernel.py sha256 == 718efa6a... (promotion merge in effect, tree clean); E2E-POSITIVE - 5 induction GETs of item-001..005 through the in-process stdlib loopback fixture distill a mechanism with parameter_slots ['item'], support ^item\\-00[0-9]{1}$, confidence == 0.9 (self-verified on its own induction observations), which resolves the NEVER-observed item-000 (inside the induced support; never observed in ANY prior SPIDER run per repo-wide artifact sweep) as EXECUTABLE with a non-null bound action whose url contains item-000; executing the bound action returns fixture status 200; verify(mechanism_id, body, {'item':'item-000'}) == true; E2E-ABSTENTION - of the 7 refusal probes (item-010/item-999/item-xyz, missing {} and wrong-key, wrong-intent delete_item, never_seen_intent) each returns bound_action None with a non-empty reason and status != EXECUTABLE, out-of-support/missing-parameter probes return EXPLORE with the correct reason class, wrong-intent and no-applicable return EXACTLY ResolutionStatus.UNKNOWN, and the fixture request counter is UNCHANGED across the whole abstention phase (zero HTTP for refusals); E2E-COUNTERS - retrieval_calls/verification_calls/repair_attempts equal the invocation transcript (retrieval == #resolve + #rebind, verification == #verify, repair == #rebind), model_calls == 0 and model_tokens == 0 (no model anywhere on the credential-free path), and the runner-side fixture counter == executed HTTP legs (6 induction+positive; 0 abstention); E2E-CONTROLS - B-LITERAL-KERNEL (adjective git blob cfec9866...) lacks distill_parameterized so the positive clause is impossible without the installed carrier, PC-EXACT-REPLAY resolves all 5 training ids EXECUTABLE, and the regression suite passes 3/3 on the as-installed shipping path. All clauses PASS -> M-E2E-PASS true -> readiness condition (1) DISCHARGED; a FAIL on any outcome clause with identity verified is a valid bounded negative: the promoted carrier is not product-executable end-to-end at shipped thresholds and must be fixed inside Product before any benchmark spend.",
+  "falsifier": "FALSIFIES (valid scientific negative, status COMPLETE) ONLY on a verified shipping-path identity (E2E-IDENTITY PASS, tree clean) if any outcome-bearing clause fails: (1) E2E-POSITIVE: no/incorrect mechanism distilled (slots != ['item'], support != ^item\\-00[0-9]{1}$, confidence != 0.9), or never-observed item-000 does not resolve EXECUTABLE at confidence 0.9 with a non-null correctly bound action, or bound-action execute status != 200, or verify != true; (2) E2E-ABSTENTION: any of the 7 refusal probes returns bound_action != None, an empty reason, a wrong status class (out-of-support/missing-parameter must be EXPLORE with the correct reason; wrong-intent/no-applicable must be EXACTLY UNKNOWN), or the fixture request counter INCREASES during the abstention phase (a refusal must not execute); (3) E2E-COUNTERS: retrieval_calls/verification_calls/repair_attempts differ from the invocation transcript, model_calls != 0 or model_tokens != 0, or the runner-side http counter != the executed HTTP legs; (4) E2E-CONTROLS: B-LITERAL-KERNEL has distill_parameterized (attribution broken), PC-EXACT-REPLAY < 5/5 EXECUTABLE, or regression != 3/3 passing. MEASUREMENT_INVALID/BLOCKED (NEVER FALSIFIES) for identity/binding/infrastructure failures: shipping kernel sha != 718efa6a... (promotion merge not in effect or tree modified - unknown shipping-path state; V4 stop trigger: never test a substituted carrier), git objects missing, fixture failure, or V8 freeze-binding mismatch (freeze.json missing/unreadable, prereg hash mismatch, runner source != FROZEN RUNNER block, freeze artifact hash mismatch).",
+  "baselines": [
+    {
+      "id": "B-LITERAL-KERNEL",
+      "description": "Ablation (attribution control, stable ID inherited from EXP-PRODUCT-37973256064 and EXP-PRODUCT-38180719830): the shipped PRE-promotion literal kernel from git blob cfec98660b0277ccbf295e8a4119e8d81ddccf50 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61), loaded in a hermetic temp package with the SAME shipped models.py/registry.py/__init__.py. The literal SpiderKernel has NO distill_parameterized, so E2E-POSITIVE is IMPOSSIBLE on the ablation; the installed carrier is therefore the cause of any positive binding (causal attribution).",
+      "type": "ablation",
+      "expected_behavior": "hasattr(SpiderKernel, 'distill_parameterized') == False (structural check in the frozen runner, E2E-CONTROLS). If the literal kernel unexpectedly HAS the parameterized path, attribution is broken and E2E-CONTROLS FAILs (FALSIFIES branch).",
+      "source": "git:cfec98660b0277ccbf295e8a4119e8d81ddccf50 (frozen; hermetic temp package, repo untouched)"
+    },
+    {
+      "id": "B-SHIPPED-IDENTITY",
+      "description": "Identity baseline (this experiment's premise gate, replacing the parent's B-PRE-INSTALL-KERNEL): the as-installed shipping kernel src/spider/kernel.py must have sha256 == 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 (the frozen carrier) on a clean tree. The parent certificate INSTALLED the carrier and therefore accepted pre-install state in {literal, carrier}; THIS experiment measures the ALREADY-INSTALLED shipping path read-only, so the shipping kernel must ALREADY be the carrier.",
+      "type": "identity_baseline",
+      "expected_behavior": "shipping_kernel_sha256 == CARRIER_SHA256 718efa6a... and git tree clean; anything else (including the literal 46929b3a...) means the promotion merge did not take effect or the tree was modified -> status=BLOCKED, outcome=MEASUREMENT_INVALID with the exact reason recorded (E2E-IDENTITY, V4 stop trigger; NEVER tested further)."
+    },
+    {
+      "id": "PC-EXACT-REPLAY",
+      "description": "Positive control (stable ID inherited from EXP-PRODUCT-37973256064 and EXP-PRODUCT-38180719830): after inducing the mechanism on training ids item-001..005 (executed via the fixture), re-resolve each of the 5 training ids. All must return EXECUTABLE. Failure means the as-installed carrier cannot even replay its own learned identity (broken bind/registry/install).",
+      "type": "positive_control",
+      "expected_behavior": "5/5 EXECUTABLE on the as-installed carrier (E2E-CONTROLS); any value < 5/5 -> FALSIFIES."
+    },
+    {
+      "id": "NC-OUT-OF-SUPPORT-ID",
+      "description": "Null control, out-of-support identifiers (stable ID inherited): resolve(item-010), resolve(item-999), resolve(item-xyz) with the induced mechanism. item-010 is the audited failure-mode id (two-digit suffix outside the induced single-digit support; the designated known-negative abstention per the mandate); item-999 and item-xyz stress the char-class and quantifier boundaries. Expected: EXPLORE with reason containing 'outside inferred support', bound_action null, NO HTTP issued.",
+      "type": "null_control",
+      "expected_behavior": "3/3 EXPLORE with support reason, null bound action, zero http (E2E-ABSTENTION)."
+    },
+    {
+      "id": "NC-MISSING-PARAMETER",
+      "description": "Null control, missing-parameter bindings (stable ID inherited): resolve with parameter dict {} and with {'wrong_key': 'x'}. Expected: EXPLORE with reason containing 'missing required parameter', bound_action null (both probes).",
+      "type": "null_control",
+      "expected_behavior": "2/2 EXPLORE with parameter reason, null bound action, zero http (E2E-ABSTENTION)."
+    },
+    {
+      "id": "NC-WRONG-INTENT",
+      "description": "Null control, wrong-intent binding (stable ID inherited): resolve(delete_item, ctx, valid params). delete_item is not the induced mechanism's intent. Expected: EXACTLY ResolutionStatus.UNKNOWN with reason 'no applicable validated mechanism', bound_action null, zero http (mandate: no-applicable-mechanism case).",
+      "type": "null_control",
+      "expected_behavior": "exactly UNKNOWN, non-empty recorded reason, null bound action, zero http (E2E-ABSTENTION)."
+    },
+    {
+      "id": "NC-NO-APPLICABLE-MECHANISM",
+      "description": "Null control, never-seen intent (stable ID inherited): resolve(never_seen_intent, {}, {}). No mechanism, no refusal candidates. Expected: EXACTLY ResolutionStatus.UNKNOWN with recorded reason, bound_action null, zero http. This is the mandate's 'returning exactly ResolutionStatus.UNKNOWN for the no-applicable-mechanism case' and, together with NC-OUT-OF-SUPPORT-ID (item-010), covers the required known-negative refusal (abstention).",
+      "type": "null_control",
+      "expected_behavior": "exactly UNKNOWN, non-empty reason, null bound action, zero http (E2E-ABSTENTION)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-EXACT-REPLAY",
+    "description": "5 training ids item-001..item-005 re-resolve EXECUTABLE on the as-installed carrier (mechanism identity intact). Inherited stable ID from the audited predecessor; there it was 15/15 (live audit) and 5/5 (promotion certificate), here the induction bank is 5 ids >= 3 per the mandate.",
+    "expected_behavior": "5/5 EXECUTABLE; any < 5/5 is FALSIFIES (E2E-CONTROLS), never MEASUREMENT_INVALID."
+  },
+  "null_control": {
+    "id": "NC-NO-APPLICABLE-MECHANISM",
+    "description": "The decisive null for the UNKNOWN-exactness clause: a never-seen intent must return EXACTLY ResolutionStatus.UNKNOWN with zero HTTP. The companion probes NC-OUT-OF-SUPPORT-ID (incl. the designated item-010 abstention), NC-MISSING-PARAMETER and NC-WRONG-INTENT cover the other refusal categories with their distinct statuses/reasons and the same zero-HTTP requirement.",
+    "expected_behavior": "never_seen_intent -> exactly UNKNOWN, non-empty reason, null bound action, zero http; wrong_intent -> exactly UNKNOWN; out-of-support/missing-param -> EXPLORE with the correct reason class (E2E-ABSTENTION, 7 probes total, fixture request counter unchanged across the phase)."
+  },
+  "measurement_validity": [
+    "V1-DETERMINISM: the fixture is a stdlib http.server.ThreadingHTTPServer bound to 127.0.0.1:0 (ephemeral port) with a request counter; responses are fixed JSON {'type':'item','id':<id>,'data':'res:'+<id>} with status 200 for /api/items/<id> and 404 otherwise; no RNG, no wall-clock, no external network. The induced support (^item\\-00[0-9]{1}$), slots (['item']) and confidence (exactly 0.9) are arithmetic functions of the 5 induction GETs (DESIGN probe: _infer_support(['item-001'..'item-005']) == '^item\\\\-00[0-9]{1}$'; _parameterized_confidence() == 0.9).",
+    "V2-CREDENTIAL-FREE + HTTP-EXECUTION ACCOUNTING: model_calls == 0 and model_tokens == 0 are ASSERTED in E2E-COUNTERS; the only HTTP activity is urllib to the loopback fixture, counted by the fixture handler itself (runner-side; the kernel never auto-increments an http counter - prior validity note). The runner asserts the fixture counter equals the executed HTTP legs: exactly 6 total (5 induction GETs + 1 positive execute) and ZERO during the abstention phase; a refusal that issues HTTP is an E2E-ABSTENTION FAIL (execution on a refused probe is the exact behavior the abstention clause forbids).",
+    "V3-IDENTITY-PREMISE-GATE: the as-installed shipping kernel src/spider/kernel.py must have sha256 == CARRIER_SHA256 718efa6a... on a git-clean tree (verified at DESIGN: current sha == 718efa6a..., git status clean). Any other state (literal 46929b3a..., or any other hash) means the promotion merge did not take effect or the tree was modified -> BLOCKED with the exact reason, NEVER FALSIFIES (V4 stop trigger).",
+    "V4-STOP-TRIGGER (parent handoff do_not_assume): if the shipping-path identity is not the frozen carrier, the runner records the exact blocker and exits BLOCKED/MEASUREMENT_INVALID BEFORE any outcome measurement; the E2E path is never measured against a substituted carrier.",
+    "V5-HELD-OUT-NEVER-OBSERVED (satisfiability + novelty guard): the positive held-out identifier item-000 is INSIDE the induced support (DESIGN probe: _support_accepts('^item\\\\-00[0-9]{1}$','item-000') == True) and was NEVER observed in ANY prior SPIDER run: repo-wide artifact sweep (research/, codex/, src/, tests/, .spider-runtime/ raw trajectories and results) contains no 'item-000' occurrence; all prior runs used item-001..010 (live audit EXP-PRODUCT-37973256064 held-out bank item-006..010 all resolved), item-007 (promotion certificate held-out), and item-151..249 (older EXP-PRODUCT-3629/3631/3630 series). This is strictly stronger than the parent certificate's 'unseen' item-007, which had been resolved in the live audit's held-out bank. item-010 is the audited out-of-support failure mode id (two-digit suffix).",
+    "V6-REFUSAL-SEMANTICS: every refusal probe must have bound_action None, a non-empty non-null reason string, status != EXECUTABLE, and ZERO HTTP (fixture counter unchanged); out-of-support and missing-parameter refusals must be ResolutionStatus.EXPLORE with the correct reason class ('support' / 'missing required parameter'); wrong-intent and no-applicable must be EXACTLY ResolutionStatus.UNKNOWN. Verified reachable by the DESIGN sim-tree probe (7/7 probes correct, zero http).",
+    "V7-TRANSCRIPT-HONESTY: retrieval_calls must equal the number of resolve/rebind kernel invocations recorded in the invocation transcript, verification_calls the number of verify calls, repair_attempts the number of rebind calls (rebind internally re-invokes resolve -> +1 retrieval each, exercised in the probe); no counter is incremented without a real kernel call; model_calls/model_tokens never touched. The runner-side http counter is compared to the executed legs independently of kernel counters.",
+    "V8-FREEZE-BINDING (EXECUTE mode): (A) sha256(prereg.md) == freeze.json.hashes['prereg.md']; (B) the running orchestration source (__file__) equals the FROZEN RUNNER block inside the hash-bound prereg.md (normalized only for a trailing newline and CRLF); (C) sha256 of EVERY artifact in freeze.json.artifact_hashes matches - NOW INCLUDING src/spider/kernel.py (this experiment never mutates it; the parent certificate excluded kernel.py precisely because installing the carrier mutated it - design_review freeze_artifacts_bound; the graph-lane v2 precedent EXP-GRAPH-38175554380 froze kernel.py because unmutable, and this packet follows that precedent) plus pyproject.toml, src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, tests/test_kernel.py. Freeze.json missing/unreadable -> BLOCKED; any mismatch -> MEASUREMENT_INVALID. Probe mode (EXP_PROBE_MODE=1) records UNBOUND-RUN and does not fabricate the check.",
+    "V9-REGRESSION: tests/test_kernel.py (3 tests) must pass on the as-installed shipping path (DESIGN probe: 3/3 OK; suite exercises unknown-default, guarded parameterized binding and invalidation-forces-abstention on the public API).",
+    "V10-ABLATION-ATTRIBUTION: B-LITERAL-KERNEL is loaded from the frozen literal git blob in a hermetic temp package with the same shipped models/registry/init; if it has distill_parameterized the attribution logic is broken (E2E-CONTROLS FAIL)."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-E2E-PASS (binary conjunction of E2E-IDENTITY, E2E-POSITIVE, E2E-ABSTENTION, E2E-COUNTERS, E2E-CONTROLS with V8 enforced at EXECUTE)",
+    "decisions": {
+      "E2E-IDENTITY": {
+        "definition": "shipping kernel src/spider/kernel.py sha256 == CARRIER_SHA256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 (== git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 bytes) and git tree clean.",
+        "outcome_fail": "BLOCKED, outcome=MEASUREMENT_INVALID, exact blocker recorded (promotion merge not in effect / tree modified / unknown shipping-path state; stop trigger - never measure a substituted carrier)."
+      },
+      "E2E-POSITIVE": {
+        "definition": "5 actually-executed induction GETs (item-001..005, fixture 200 each) -> distill_parameterized -> mechanism with slots ['item'], induced support ^item\\-00[0-9]{1}$, confidence exactly 0.9 (self-verified); resolve on NEVER-observed held-out item-000 -> EXECUTABLE with non-null bound_action whose url contains item-000; executing bound action -> fixture status 200; verify(mechanism_id, observed_state, {'item':'item-000'}) == true.",
+        "outcome_pass": "clause PASS; outcome_fail: FALSIFIES."
+      },
+      "E2E-ABSTENTION": {
+        "definition": "7 probes: 3 out-of-support ids (item-010 designated known-negative, item-999, item-xyz) -> EXPLORE + reason containing 'outside inferred support' + null action; missing {} and {'wrong_key':'x'} -> EXPLORE + reason containing 'missing required parameter' + null action; wrong-intent delete_item -> EXACTLY UNKNOWN + reason + null action; no-applicable never_seen_intent -> EXACTLY UNKNOWN + reason + null action. All 7: bound_action null, reason non-empty, status != EXECUTABLE. Fixture request counter UNCHANGED across the entire abstention phase (zero HTTP for refusals).",
+        "outcome_pass": "clause PASS; outcome_fail: FALSIFIES."
+      },
+      "E2E-COUNTERS": {
+        "definition": "retrieval_calls == #resolve + #rebind in transcript; verification_calls == #verify in transcript; repair_attempts == #rebind in transcript; model_calls == 0; model_tokens == 0; runner-side fixture http counter == executed HTTP legs (6 = 5 induction + 1 positive; 0 abstention); rebind path exercises repair_attempts increment (probe-verified).",
+        "outcome_pass": "clause PASS; outcome_fail: FALSIFIES."
+      },
+      "E2E-CONTROLS": {
+        "definition": "B-LITERAL-KERNEL (git blob cfec9866...) has no distill_parameterized; PC-EXACT-REPLAY 5/5 EXECUTABLE on the as-installed carrier; regression tests/test_kernel.py 3/3 pass.",
+        "outcome_pass": "clause PASS; outcome_fail: FALSIFIES."
+      },
+      "V8-FREEZE-BINDING": {
+        "definition": "EXECUTE mode: freeze.json present and readable; (A) prereg sha match; (B) runner source == FROZEN RUNNER block; (C) freeze artifact hashes match - SIX artifacts incl. src/spider/kernel.py. Probe mode (EXP_PROBE_MODE=1, hermetic satisfiability probe only) records UNBOUND-RUN and does not fabricate the check.",
+        "outcome_fail": "BLOCKED, outcome=MEASUREMENT_INVALID (binding is a validity gate, not a negative result)."
+      }
+    },
+    "overall_outcome_mapping": "status=BLOCKED with outcome=MEASUREMENT_INVALID if E2E-IDENTITY/V8/infrastructure fails (shipping kernel != carrier sha, git objects missing, freeze.json missing/mismatch, fixture failure). Else status=COMPLETE with outcome=SUPPORTS if E2E-POSITIVE, E2E-ABSTENTION, E2E-COUNTERS, E2E-CONTROLS all PASS; outcome=FALSIFIES if any of those four clauses fails on a verified carrier (valid bounded negative: the promoted carrier is not product-executable end-to-end at shipped thresholds; exact blocker recorded; readiness (1) stays open; no re-run on substituted carrier). Precedence: MEASUREMENT_INVALID > FALSIFIES > SUPPORTS.",
+    "report": [
+      "M-E2E-PASS (E2E-IDENTITY, E2E-POSITIVE, E2E-ABSTENTION, E2E-COUNTERS, E2E-CONTROLS + V8 statuses)",
+      "M-IDENTITY (shipping_kernel_sha256, carrier expected 718efa6a..., git clean flag, git blobs)",
+      "M-POSITIVE (mechanism_id, slots, support, confidence, resolution_status, bound_action url, fixture_status, verify, held_out item-000 never-observed evidence)",
+      "M-ABSTENTIONS (7 probes: case, status, reason, bound_action; http_delta across phase == 0)",
+      "M-COUNTERS (retrieval_calls, verification_calls, repair_attempts, model_calls, model_tokens, transcript length, http_fixture_counter, expected_http_legs=6)",
+      "M-PC-EXACT-REPLAY (5 replay statuses)",
+      "M-ABLATION (literal has_distill_parameterized)",
+      "M-REGRESSION (tests_run, failures, errors)",
+      "M-SUPPORT (mechanism_id, parameter_slots, induced support regex, confidence)"
+    ],
+    "reachability": "Verified by DESIGN probes (hermetic, non-outcome-bearing on the shipping path): (a) SUPPORTS branch - full EXECUTE-mode satisfiability run of the exact frozen runner in a hermetic sim tree (freeze-absent, EXP_PROBE_MODE=1) with the carrier materialized at the shipping path passed all five E2E clauses (identity, positive on item-000 with support/confidence arithmetic, 7/7 abstentions with zero http, transcript-consistent counters, ablation/replay/regression controls); (b) FALSIFIES branch reachable by construction - each outcome clause has a concrete failing condition under the same code path (e.g. a fixture/bank drift making a next_state body mismatch fails E2E-POSITIVE; any refusal returning a non-null action or any http-delta > 0 fails E2E-ABSTENTION; counter-vs-transcript mismatch fails E2E-COUNTERS; ablation/replay/regression failures fail E2E-CONTROLS); (c) BLOCKED/MEASUREMENT_INVALID branch demonstrated - literal-kernel-substituted sim tree -> E2E-IDENTITY FAIL -> BLOCKED/MEASUREMENT_INVALID; tampered artifact hash -> V8 FAIL -> BLOCKED/MEASUREMENT_INVALID; missing freeze.json (EXECUTE semantics) -> BLOCKED. The claim-bearing certificate is NOT measured in DESIGN: probes ran on a sim-tree COPY of the repo, git status remained clean at all times. Independently, the exact same carrier bytes were audited live on the same substrate class in EXP-PRODUCT-37973256064 (12/15 held-out EXECUTABLE, PC-EXACT-REPLAY 15/15, known negatives refused 15/15) and in the promotion certificate EXP-PRODUCT-38180719830 (D1/D2/D3/D4 PASS), so treatment liveness is inherited accepted evidence, not a DESIGN measurement.",
+    "claim_status_semantics": "C-PARAM-INHERIT remains EXPERIMENTAL in ALL branches of this packet. SUPPORTS discharges readiness condition (1) (shipped end-to-end positive+known-negative demonstration at shipped thresholds) enabling, together with readiness (2)+(3), a future Director mandate for the four-arm benchmark; it does NOT advance the claim. FALSIFIES means the promoted carrier is not product-executable end-to-end at shipped thresholds -> engineering fix inside Product before any benchmark spend; the claim stays EXPERIMENTAL and the promotion event (B1) is NOT revoked by this packet (the certificate that granted it was already audited PASS)."
+  },
+  "product_consequence_positive": "M-E2E-PASS (SUPPORTS) -> readiness condition (1) is DISCHARGED: the shipped parameterized carrier demonstrably executes the full end-to-end path distill_parameterized -> resolve -> execute -> verify on a credential-free substrate with a known positive on a never-observed identifier (item-000) and a known-negative abstention (item-010) at the shipped thresholds, so the flagship C-LLM-INHERIT four-arm benchmark's treatment arm is real and instrumentable. Per the Director's rationale, the lane then awaits readiness (2) (Intel budget-stable credential-free endpoint) and (3) (Runtime certified task bank) plus a NEW Director mandate; no benchmark spend is authorized by this packet. C-PARAM-INHERIT stays EXPERIMENTAL; no claim advance; no economics claim (model_calls=model_tokens=0 by construction).",
+  "product_consequence_negative": "FALSIFIES on a verified carrier (E2E-IDENTITY PASS) -> the promoted carrier is NOT product-executable end-to-end at shipped thresholds: the shipped path fails one or more of positive/abstention/counters/controls, readiness condition (1) stays OPEN, and the benchmark must not be funded; EXECUTE records the exact frozen blocker (clause + observed values) as the engineering-fix specification INSIDE Product before any benchmark spend. BLOCKED/MEASUREMENT_INVALID -> readiness (1) cannot be assessed and the exact operational blocker is recorded (shipping kernel != carrier sha - promotion merge not in effect or tree modified; git objects missing; freeze binding failure; fixture failure); infrastructure failures are never repackaged as scientific negatives. In every negative branch C-PARAM-INHERIT stays EXPERIMENTAL and the four-arm benchmark remains unfunded.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": "0 external; only loopback 127.0.0.1 to the in-process stdlib fixture (exactly 6 GETs: 5 induction + 1 positive execute; 0 for abstentions).",
+    "estimated_wall_clock_seconds": 30,
+    "compute_notes": "Pure stdlib (http.server, urllib, unittest, tempfile, hashlib, json, re, subprocess, threading, dataclasses, pathlib); one in-process ThreadingHTTPServer on 127.0.0.1:0 with a request counter; one temp directory (hermetic literal-kernel package); no LLM, no GPU, no credentials, no download, no write to src/spider/. DESIGN probe of the full runner in a sim tree completed in ~2 seconds."
+  },
+  "expected_information_gain": "High and decision-relevant in BOTH directions per the Director mandate: readiness condition (1) is the last condition Product alone can discharge (rationale: 'the shipped end-to-end positive/negative demonstration wins over both a mechanism search and an economics run because it is the only blocker Product can remove without B2/B3'), and neither the promotion certificate nor the live audit directly answered it: the certificate INSTALLED the carrier and certified identity/binding on a single held-out id, and the live audit ran a PRE-promotion lane-branch carrier with cold/retrieval comparators on a 15-holder bank. This packet is the first measurement of the FULL shipped path distill->resolve->execute->verify/UNKNOWN on the AS-INSTALLED shipping kernel through the public package API, with (i) a genuinely never-observed positive identifier (item-000; strictly stronger than the certificate's item-007), (ii) a zero-HTTP abstention requirement making 'refusal' operational (no execution leg on refused probes), (iii) shipped (default) thresholds min_confidence=0.8 / induced 0.9 on an unmodified kernel, and (iv) the first v2 freeze that includes src/spider/kernel.py as an immutable artifact (this experiment never mutates it - the clean resolution of the parent design_review's freeze_artifacts_bound exclusion). Outcomes change whether the flagship benchmark question may be asked at all: SUPPORTS -> condition (1) discharged, benchmark waits on (2)+(3)+mandate; FALSIFIES -> engineering fix inside Product before any spend; BLOCKED -> exact operational blocker recorded. The 'never-observed' guard also closes the loop on the parent handoff's unknown 'whether the carrier's conservative support inference is a defect for free-form payload values' in the bounded form the mandate asks: item-000 tests the in-support boundary (suffix '0' never seen in training), item-010 tests the out-of-support boundary (two-digit suffix).",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All three outcome branches arithmetically reachable and demonstrated on the exact frozen runner in hermetic sim-tree probes (EXP_PROBE_MODE=1, freeze-absent; shipping path untouched, git status clean after every probe): (a) SUPPORTS - full E2E satisfiability run with the carrier materialized at the shipping path passed all five clauses (induction GETs -> mechanism support ^item\\\\-00[0-9]{1}$ / slots ['item'] / confidence 0.9 -> item-000 EXECUTABLE@0.9 -> fixture 200 -> verify true; 7/7 abstentions with correct statuses/reasons, null actions and zero http; counters transcript-consistent; literal ablation lacks distill_parameterized; replay 5/5; regression 3/3). (b) FALSIFIES - each outcome clause has a concrete failing condition under the same code path (postcondition-shape drift fails E2E-POSITIVE verify; a non-null refusal action or any http-delta fails E2E-ABSTENTION; counter-vs-transcript or http-vs-legs mismatch fails E2E-COUNTERS; ablation/replay/regression failures fail E2E-CONTROLS). (c) BLOCKED/MEASUREMENT_INVALID - demonstrated: literal-substituted kernel -> E2E-IDENTITY FAIL/BLOCKED; tampered freeze artifact hash -> V8 FAIL/BLOCKED; missing freeze.json (EXECUTE semantics) -> BLOCKED. Nothing claim-bearing measured in DESIGN; all probes ran on a COPY of the repo.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/spec.json#decision_rule.reachability",
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md sections 6-9, 14 (FROZEN RUNNER), 15 (CANONICAL-HASHES)",
+        "request.json#director_mandate.allocation.question (end-to-end positive + known-negative refusal; readiness (1) discharge)",
+        "DESIGN hermetic sim-tree probes (non-outcome-bearing, shipping path untouched, git status clean after every probe): full E2E run SUPPORTS; literal-substituted kernel BLOCKED; tampered artifact hash BLOCKED; missing freeze.json (EXECUTE semantics) BLOCKED",
+        "codex/experiments/EXP-GRAPH-38175554380/spec.json#freeze_eligibility.decision_rule_reachability (v2 probe-as-evidence precedent, also referenced by parent design_review)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) python3.12 (3.12.15) with stdlib only (runner needs no third-party packages); (b) both git blobs exist in the repo object store and were byte-verified: carrier b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 sha256 718efa6a..., literal cfec98660b0277ccbf295e8a4119e8d81ddccf50 sha256 46929b3a...; (c) the shipping kernel src/spider/kernel.py currently HAS sha256 == 718efa6a... (carrier IS installed) on a git-clean tree - the premise of the mandate holds; (d) all SIX freeze artifacts exist with the recorded sha256 (pyproject.toml 5f03fb59..., src/spider/__init__.py 3d173722..., src/spider/models.py 338aaf4d..., src/spider/registry.py 51fb440d..., src/spider/kernel.py 718efa6a..., tests/test_kernel.py ff9c1561...); (e) the public package API (from spider import SpiderKernel, Mechanism, Observation, Resolution, ResolutionStatus; from spider.registry import MechanismRegistry) imports cleanly from the shipping path with min_confidence default 0.8; (f) tests/test_kernel.py suite passes 3/3 on the shipping path (probe-verified). If a git object is unavailable, the regression discovery finds < 3 tests, or the package cannot import, the runner writes BLOCKED (operational), never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md section 15 (CANONICAL-HASHES: blobs, shas, artifact hashes)",
+        "research/experiments/EXP-PRODUCT-38186502935/spec.json#freeze_artifacts",
+        "DESIGN hermetic probes: git cat-file blob b15ed848 | sha256sum == 718efa6a...; git cat-file blob cfec9866 | sha256sum == 46929b3a...; sha256sum src/spider/kernel.py == 718efa6a...; git status clean; import probe P1 (public API surface, min_confidence default 0.8); regression probe P6 3/3 OK",
+        "/tmp/opencode/probes/probe_satisfiability.out.json (hermetic probe record: overall_pass true)"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Treatment and baselines are structurally distinct objects: the treatment is the AS-INSTALLED shipping carrier kernel (git blob b15ed848..., 491 lines, has distill_parameterized/_infer_support/_derive_structural_name(s)/_parameterized_confidence with TrajectoryCounters) read through the shipping package's public API; B-LITERAL-KERNEL is the shipped PRE-promotion literal kernel (git blob cfec9866..., 132 lines, no distill_parameterized; confidence floor 0.5 < min_confidence 0.8), loaded in a hermetic temp package from the frozen blob so the comparison is blob-vs-blob and independent of the shipping path; B-SHIPPED-IDENTITY is the premise gate making 'as-installed' operational (shipping kernel sha == carrier sha else BLOCKED). The induced support regex and confidence 0.9 are arithmetic functions of the induction bank (probe-verified: _infer_support on item-001..005 exactly '^item\\\\-00[0-9]{1}$', _parameterized_confidence exactly 0.9), so the positive certificate is attributable to the carrier's parameterized path (distill -> resolve -> execute -> verify) and not to the substrate or the literal kernel; PC-EXACT-REPLAY anchors the learned identity and regression anchors package integrity. Controls carry the stable IDs inherited from the audited predecessors (B-LITERAL-KERNEL, PC-EXACT-REPLAY, NC-OUT-OF-SUPPORT-ID, NC-MISSING-PARAMETER, NC-WRONG-INTENT, NC-NO-APPLICABLE-MECHANISM).",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md sections 1-3 (scope/carrier/literal), 7 (controls)",
+        "research/experiments/EXP-PRODUCT-38186502935/spec.json#baselines",
+        "research/experiments/EXP-PRODUCT-37973256064/spec.json#baselines and research/experiments/EXP-PRODUCT-38180719830/spec.json#baselines (stable control IDs)",
+        "DESIGN hermetic probes: literal ablation has_distill_parameterized == False (sim-tree E2E run); carrier E2E positive EXECUTABLE@0.9 on item-000; PC-EXACT-REPLAY 5/5",
+        "/tmp/opencode/probes/probe_satisfiability.out.json (P1/P2/P3)"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, exercised failure mode under the exact same code path that produces the E2E certificate: PC-EXACT-REPLAY fails (<5/5 EXECUTABLE) if the as-installed carrier cannot rebind/retrieve its own learned identity; B-LITERAL-KERNEL ablation FAILs if the literal blob unexpectedly contains distill_parameterized (attribution broken) - probe confirms literal lacks it; NC-OUT-OF-SUPPORT-ID (item-010/item-999/item-xyz) FAILs if the induced support over- or under-matches (each probe must be EXPLORE with 'support' reason + null action + zero http; item-010 acceptance would directly falsify the designated known-negative abstention); NC-MISSING-PARAMETER FAILs on any non-refusal; NC-WRONG-INTENT and NC-NO-APPLICABLE-MECHANISM FAIL if status != EXACTLY UNKNOWN (mandate clause); the zero-HTTP assertion FAILs if the fixture request counter moves during any refusal; regression FAILs if the shipping package surface drifts; V8 binding (now incl. kernel.py) FAILs on any prereg/runner/artifact hash mismatch (demonstrated: tampered artifact hash -> V8 FAIL/BLOCKED). The control set is non-vacuous: the DESIGN sim-tree probe exercised every control in SUPPORTS and BLOCKED configurations.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md section 7 (controls), 8 (decision rule), 11 (validity gates)",
+        "research/experiments/EXP-PRODUCT-38186502935/spec.json#measurement_validity (V6, V8, V9, V10)",
+        "DESIGN hermetic sim-tree probes: 7/7 refusal probes correct (EXPLORE support/parameter reasons, exactly UNKNOWN for wrong-intent/no-applicable, all null bound_action, http-delta 0) in SUPPORTS run; tampered artifact hash -> V8 FAIL/BLOCKED; literal-substituted kernel -> E2E-IDENTITY FAIL/BLOCKED"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The carrier is already audited LIVE on the same credential-free substrate class (EXP-PRODUCT-37973256064 audit PASS: 12/15 held-out EXECUTABLE on real localhost stdlib-HTTP, PC-EXACT-REPLAY 15/15, known negatives refused 15/15) and passed the promotion certificate's D1-D4 clauses byte-identically (EXP-PRODUCT-38180719830, installed copy). Its liveness at the SHIPPING path was additionally re-proven by DESIGN hermetic sim-tree probes with the exact frozen runner: induction GETs -> distill_parameterized -> mechanism (support ^item\\\\-00[0-9]{1}$, confidence 0.9) -> resolve(held-out item-000) EXECUTABLE with non-null correctly bound action -> fixture status 200 -> verify true; counters fire on real calls; regression green. Structural liveness is enforced at EXECUTE by E2E-POSITIVE (a mechanism must be distilled and bound) and V9 (regression), so a silently dead treatment is BLOCKED, never a negative. The treatment object is the frozen carrier blob + sha256 pinned through BOTH the CANONICAL-HASHES block and the freeze artifact hash of src/spider/kernel.py (this experiment never mutates it), so no unbound mutable code can masquerade as it.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-37973256064/audit.json + result.json (audited live carrier, same substrate class)",
+        "research/experiments/EXP-PRODUCT-38180719830/audit.json + result.json (promotion certificate D1-D4 PASS on byte-identical carrier)",
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md section 5 (satisfiability evidence), 14 (FROZEN RUNNER)",
+        "DESIGN hermetic sim-tree probe: full E2E run SUPPORTS (E2E-POSITIVE EXECUTABLE@0.9 -> 200 -> verify true on item-000)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "freeze_artifacts lists the SIX existing immutable files whose identity can change the interpretation of this experiment: pyproject.toml (src discovery), src/spider/__init__.py + models.py + registry.py (the package surface the shipping kernel imports), src/spider/kernel.py (THE SHIPPED TREATMENT - NOW FREEZEABLE because this experiment is a READ-ONLY measurement and never writes it; the parent certificate explicitly excluded kernel.py because INSTALLING the carrier mutated it, and its design_review cited the graph-lane precedent EXP-GRAPH-38175554380 that froze kernel.py exactly because it was unmutable - this packet follows that precedent), tests/test_kernel.py (regression suite). All six exist with recorded sha256 verified at DESIGN (kernel.py 718efa6a... == carrier). The canonical identities remain additionally pinned by the CANONICAL-HASHES block (bound via freeze.json.hashes['prereg.md']) and by the immutable Director mandate (clause d: identity pinned to git blob b15ed848 / sha256 718efa6a...). The E2E runner and canonical identities are embedded verbatim in prereg.md (FROZEN RUNNER and CANONICAL-HASHES blocks) and are therefore bound by freeze.json.hashes['prereg.md']; the fixture is in-process stdlib inside the runner. No unbound mutable code, task bank, dataset or fixture remains; the runner never writes to src/spider/ or any freeze artifact.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38186502935/prereg.md sections 13-15 (binding model, FROZEN RUNNER, CANONICAL-HASHES)",
+        "request.json#director_mandate.allocation.question + dependencies (identity pinned to git blob b15ed848 / sha256 718efa6a...)",
+        "research/experiments/EXP-PRODUCT-38180719830/design_review.json#checks.freeze_artifacts_bound (parent exclusion rationale for kernel.py: 'mutation is treatment'; here unmutable -> frozen, matching EXP-GRAPH-38175554380 v2 precedent)",
+        "codex/experiments/EXP-GRAPH-38175554380/freeze.json#artifact_hashes (v2 precedent)"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "pyproject.toml",
+    "src/spider/__init__.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/kernel.py",
+    "tests/test_kernel.py"
+  ]
 }
