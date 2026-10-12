@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38244432934",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "V1-FREEZE_BINDING: runner extracted by literal marker split preserves the trailing newline; sha256=d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608, 60855 bytes, matches CANONICAL-RUNNER-SHA256. request/spec/prereg/design_review sha256 match freeze.json.hashes; carrier src/spider/{kernel,models,registry}.py match freeze.json.artifact_hashes. PASS.",
+    "V2-SUBSTRATE_ISOLATION: Python 3.12.15 stdlib only (ThreadingHTTPServer on 127.0.0.1 ephemeral port); no LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL; fresh per-process registry directory per Arm. PASS.",
+    "V3-DETERMINISM: two independent --mechanics-only runs byte-identical (sha256 99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff). PASS.",
+    "V4-PERTURBATION_BITES: B-LITERAL-REPLAY success 0.0 on all classes; perturbation bites as expected. PASS.",
+    "V5-COLD_BASELINE_LIVE: B-COLD success 1.0 on all classes (>=0.90). PASS.",
+    "V6-NO_REPAIR_INERT: B-NO-REPAIR success 0.0 on all classes. PASS.",
+    "V7-GUARD_LIVENESS: guard fire rate 1.0 on perturbed trials; NC-NO-PERTURBATION and NC-NOISE stale=false (jaccard=1.0, status=200). PASS.",
+    "V8-NO_TARGET_LEAKAGE: M-WRITE-SET-MAX=1 on all classes; contamination measured only on the 4 genuinely unaffected resources. PASS.",
+    "V9-INTEGER_COUNTERS: all product counters are integer sums of the shipped TrajectoryCounters surface; no estimated or token quantities. PASS.",
+    "V10-THRESHOLD_NOT_FITTED: all decision bars and the weight grid are preregistered in spec/prereg and were not tuned against any scored run. PASS.",
+    "V11-N_CONTROLLED: TRIALS_PER_CLASS=12 with rotating targets; 36 valid trials. PASS.",
+    "V12-POSITIVE_CONTROL: PC-BASE-LIVENESS true in 36/36 scored trials. PASS.",
+    "V13-LEGACY_REPRODUCTION: T-REPAIR-LEGACY ratio_L2=1.1111111111111112 > 1.00; M-LEGACY-REGRESSION-REPRODUCED=true. PASS.",
+    "V14-REUSE_IDENTITY: T-REPAIR-REUSE and T-REPAIR-LEGACY share seeds, perturbations, substrate and cold baseline; oplogs present in every trial and differ only by the legacy extra first-task resolve/fetch/verify (legacy mean 19 ops vs reuse mean 17). PASS.",
+    "V15-CONTAMINATION-INSTRUMENT-LIVE (NEW F1 fix): M-CONTAMINATION-PROBES-TOTAL=144 > 0 and M-OVERBROAD-CONTAMINATION-RATE-MEAN=4.0 > 0.10; the parent's degenerate pinned-0.0 instrument is corrected; over-broad rewrite breaks all 4 unaffected probes in every trial. PASS."
+  ],
+  "baseline_findings": [
+    "B-COLD (cost baseline primary): cold re-derivation success 1.0 per class; equal-weight product 19 at L=3, 18 at L=2, 20 at L=4. The mandate's strong comparator and the ONLY cost denominator. Cold success >= 0.90 gate passed.",
+    "B-COLD-MIN (cost baseline sensitivity): identical to B-COLD but L=2 (LEARN_IDS_MIN=[11,12]); cold product = 18 at L=2. Sensitivity check passed.",
+    "B-COLD-DEEP (cost baseline sensitivity): identical to B-COLD but L=4 (LEARN_IDS_DEEP=[10,11,12,13]); cold product = 20 at L=4. Sensitivity check passed.",
+    "T-REPAIR-REUSE (treatment): product 17 at all L values; pr_L2=0.9444444444444444 (17/18), pr_L3=0.8947368421052632 (17/19), pr_L4=0.85 (17/20). L=3 fetch ratio = 0.6666666666666666 (P1/P3) / 0.5555555555555556 (P2). Strict product-counter win reproduces at equal weight on all classes.",
+    "T-REPAIR-CONSERVATIVE (system sensitivity upper bound): product 18; conservative ratio L2=1.00 exactly, L3=0.9473684210526315 (18/19). Does not by itself reverse the sign; enters the ROBUST tier test as a pre-declared bound.",
+    "T-REPAIR-LEGACY (replication control): product 20; ratio_L2=1.1111111111111112 (>1.00), ratio_L3=1.0526315789473684 (>1.00). Reproduces the prior product-counter regression (V13), certifying that any difference between arms is attributable to the repair system's accounting, not the substrate or baseline.",
+    "NC-OVERBROAD-REPAIR (negative control must be detected): over-broad contamination detected at rate 4.0 > 0.10 (4/4 unaffected probes broken in every trial) with the corrected in-support probe. The parent's degenerate id='1' instrument was structurally unable to fire this control; the F1 fix resolves this.",
+    "B-LITERAL-REPLAY (mechanism control must fail): replay of inherited (unrepaired) mechanism on perturbed resource; success 0.0 on all classes, confirming the perturbation bites.",
+    "B-NO-REPAIR (abstention control must fail): guard detects staleness but system abstains; success 0.0 on all classes. NEVER a cost denominator."
+  ],
+  "recomputed_metrics": {
+    "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+    "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+    "M-COST-FETCH-RATIO-L3-P1-P3": 0.6666666666666666,
+    "M-COST-FETCH-RATIO-L3-P2": 0.5555555555555556,
+    "M-WEIGHT-ROBUST-BOTH-P1-P3": 0.7777777777777778,
+    "M-WEIGHT-ROBUST-BOTH-P2": 0.6666666666666666,
+    "M-OVERBROAD-CONTAMINATION-RATE-MEAN": 4.0,
+    "M-CONTAMINATION-RATE": 0.0,
+    "M-REPAIR-SUCCESS": 1.0,
+    "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+    "M-GUARD-FIRE-RATE": 1.0,
+    "M-WRITE-SET-MAX": 1,
+    "M-LEGACY-REGRESSION-REPRODUCED": true,
+    "M-CONTAMINATION-PROBES-TOTAL": 144,
+    "M-BASE-LIVENESS-TRUE-TRIALS-TOTAL": 36,
+    "M-TRIALS-TOTAL": 36
+  },
+  "claim_ceiling": "SUPPORTS-COUNTER-DEPENDENT",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38244432934/result.json#metrics",
+    "research/experiments/EXP-RUNTIME-38244432934/spec.json#decision_rule",
+    "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-7",
+    "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.2",
+    "research/experiments/EXP-RUNTIME-38244432934/freeze.json",
+    "research/experiments/EXP-RUNTIME-38244432934/provenance.json",
+    "research/experiments/EXP-RUNTIME-38244432934/report.md#section-7",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py"
+  ],
+  "unresolved": [
+    "Whether localized repair should enter the product story is a DIRECTOR adjudication: this packet's frozen classifier yields SUPPORTS-COUNTER-DEPENDENT with outcome MIXED, which per spec.product_consequence_negative means the ~5.3% product-counter regression should be treated as effectively intrinsic/accounting-dependent, and localized repair must NOT be treated as robustly product-counter-cheaper.",
+    "Does the strict equal-weight win transfer to real Web tasks, a production carrier, or external agents? Not measured here (single synthetic credential-free substrate).",
+    "Is the registered equal-weight counter the product-correct counter? The result is counter-dependent by construction of the predeclared grid; the packet does not claim external weighting correctness.",
+    "Is T-REPAIR-LEGACY a faithful operation-sequence reconstruction or only a product-counter reconstruction? Oplogs are emitted in every trial but the prior system's real operation sequence is not independently known.",
+    "The structural reason the P2 weight-robust fraction (0.6667) is lower than P1/P3 (0.7778) is the P2 reuse vector shape (5,5,6,1) versus (6,5,5,1) on the predeclared {1,2,3}^4 weight grid."
+  ]
+}

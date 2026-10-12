@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38244432934",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Synthetic reachability probe confirms all 7 class branches (STRICT-WIN-ROBUST, STRICT-WIN-COUNTER-DEPENDENT, BOUNDED-WIN, MIXED-TRADEOFF, COST-FAIL, FUNCTIONAL-FAIL, COST-UNKNOWN) and all 6 aggregate decisions (SUPPORTS, SUPPORTS-COUNTER-DEPENDENT, MIXED-TRADEOFF, MIXED, FALSIFIES, INCONCLUSIVE) are reachable. Weight-grid probe confirms both sides reachable: knife-edge measured-shape fraction 0.7778 < 1.0 (COUNTER-DEPENDENT reachable), http-dominated robust fraction 1.0 (ROBUST reachable). Structural floor for equal-weight win is 0.5556; ROBUST_FRACTION_BAR=1.0 sits above floor (bar_is_discriminating=true). Critical repair weights finite: 2.0 (L=2) and 3.0 (L=3). No branch is shadowed; precedence order is clean.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.1",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.2",
+        "design_review_probe:decision_rule_reachability"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified at DESIGN time without outcome-bearing measurements. (a) Python 3.12 stdlib only - carrier imports execute successfully. (b) DESIGN liveness probe (--liveness-only) returned: server_ready=true, distill_live=true (5/5 resources), task_read_verified=true, contamination_instrument_live=true (in-support probe id=14 verified on all 5 resources), out_of_support_probe_degenerate=true (id='1' returns NO-RESOLVE on all 5), nc_no_perturbation_stale=false, nc_noise_stale=false. (c) Carrier counter surface (TrajectoryCounters.add) exists and is exercised. (d) No external task bank/dataset/fixture; substrate constructed inside frozen runner. (e) Repair-signal unit probe (--reachability-probe) produced patched mechanism with probe body for all three perturbation classes (P1-ENDPOINT, P2-STRUCTURE, P3-PERMISSION). (f) Corrected contamination instrument verified live: in-support baseline returns (200, id, verified=True) on all resources; over-broad rewrite breaks 4/4 unaffected resources (rate 1.0 > 0.10). (g) All decision branches reachable per decision_rule_reachability. No prerequisite is missing or assumed.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.4",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.5",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.3",
+        "design_review_probe:liveness_canary",
+        "design_review_probe:repair_signal"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Cost denominator is fixed in advance to B-COLD (cold re-derivation of the SAME carrier), never B-NO-REPAIR or fetch ratio alone. B-COLD is strong: success 1.0 (V5 >= 0.90), prior audited product counters 18 (L=2), 19 (L=3), 20 (L=4). Treatment (T-REPAIR-REUSE) shares carrier, substrate, seeds, perturbations and differs only in physical resolve/fetch/verify count for first task id (reuse 17 vs cold 18/19). Identity directly evidenced by emitted per-operation logs (A6 fix). T-REPAIR-CONSERVATIVE and T-REPAIR-LEGACY are explicitly excluded from classifier (controls/sensitivities only); conservative L=3 ratio used only as pre-declared bound in ROBUST tier. Registered equal-weight counter is NOT re-tuned; weight grid only reports sign changes on predeclared monotone reweightings.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-5",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings",
+        "design_review_probe:liveness_canary"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Distinct, non-tautological controls cover each failure mode; the previously degenerate control is now verified sensitive. Positive control: PC-BASE-LIVENESS scored inside every trial, base_liveness=true observed in DESIGN canary. Perturbation-bites: B-LITERAL-REPLAY must fail (observed 0.0 in DESIGN canary). Abstention: B-NO-REPAIR must fail (observed 0.0 with guard fired). Guard specificity: NC-NO-PERTURBATION and NC-NOISE must NOT fire (observed stale=false in DESIGN). Over-broad: NC-OVERBROAD-REPAIR must detect breakage; corrected instrument measures 4/4 unaffected breakage (rate 1.0 > 0.10) for all three classes, versus parent's structurally impossible 0.0 (audit F1/A1). Replication: T-REPAIR-LEGACY must reproduce prior >1.00 at L=2 (V13). No control is supplied the answer given to treatment (over-broad rewrite applied blindly from repaired target mechanism, not answer key).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.4",
+        "research/experiments/EXP-RUNTIME-38212966040/audit.json#validity_findings.A1-NC-OVERBROAD-VACUOUS",
+        "design_review_probe:overbroad_contamination"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "Treatment arm structurally capable of execution. Uses same shipped carrier that DESIGN probes executed end-to-end (distill -> resolve EXECUTABLE -> fetch 200 -> verify True). Repair-signal probe shows local_repair produces patched mechanism with probe body for all three classes. Corrected contamination probe uses in-support id (14) and returns verified live baseline on every resource. Prior audited packet showed this carrier's repair succeeds 12/12 on perturbed resources (contamination half invalidated only by helper, now fixed). Self-attacks recorded: (i) repair routine mis-parses live signal -> FUNCTIONAL-FAIL (reportable outcome, not design break); (ii) carrier support rejected task ids -> resolve EXPLORE (probes explicitly verify in-support resolution); (iii) advantage depends on repair not forced to re-resolve -> bounded by T-REPAIR-CONSERVATIVE surface AND directly tested by weight grid; (iv) success rates at 1.0 ceiling but outcome is cost ratio with live cost range (reuse 17 vs cold 18/19/20), certified in measurement_validity.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-5",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.3",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8.4",
+        "research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.T-REPAIR-REUSE",
+        "design_review_probe:repair_signal",
+        "design_review_probe:overbroad_contamination"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local code dependency whose identity can change interpretation is listed in spec.freeze_artifacts and hashed at freeze time: src/spider/kernel.py (counter/treatment semantics, support inference), src/spider/models.py (Mechanism/Observation/Resolution semantics), src/spider/registry.py (read/upsert/invalidate; locality). Verified hashes match spec/prereg: kernel.py=3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3, models.py=338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, registry.py=51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c. Executable decision path embedded verbatim in prereg.md section 12, bound by CANONICAL-RUNNER-SHA256=d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 (60855 bytes) plus freeze.json.hashes.prereg.md. No external task bank, dataset, or fixture is read; substrate constructed inside runner. List is complete; no unbound outcome-relevant local artifact exists.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/spec.json#freeze_artifacts",
+        "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-10",
+        "design_review_probe:carrier_hashes"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The success metric (repair_success) has no dynamic range at ceiling (1.0) for both treatment and baseline, but this is acceptable because the outcome metric is a cost ratio with live dynamic range (17 vs 18/19/20), explicitly certified in measurement_validity. This representation loss is disclosed and bounded.",
+    "The substrate is a simplified JSON API, not real websites; conclusions are about carrier/counter economics on this substrate, not real-web generalization. Scope is explicitly bounded in spec.measurement_validity.",
+    "The weight grid tests counter-choice robustness (sign-invariance across {1,2,3}^4), NOT whether external agents weight components this way. This is explicitly disclosed in spec.measurement_validity."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass with independently verified evidence. The corrected in-support contamination instrument (id=14 replacing degenerate id='1') is live and sensitive (over-broad contamination rate 1.0 > 0.10). The decision rule is satisfiable with all branches reachable and a discriminating robustness bar (1.0) above the structural floor (0.5556). Baselines are identifiable with the strong cold re-derivation comparator fixed in advance. Controls are sensitive and non-tautological. The treatment is structurally executable on the frozen carrier. All mutable interpretation dependencies are bound in freeze_artifacts. No blocking findings; the design is ready for freeze.",
+  "evidence_refs": [
+    "design_review_probe:decision_rule_reachability",
+    "design_review_probe:liveness_canary",
+    "design_review_probe:repair_signal",
+    "design_review_probe:overbroad_contamination",
+    "design_review_probe:carrier_hashes"
+  ]
+}
