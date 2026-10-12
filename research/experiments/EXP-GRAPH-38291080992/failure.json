@@ -1,0 +1,11 @@
+{
+  "stage": "design",
+  "category": "DESIGN_FAILURE",
+  "message": "stage exited with code 65",
+  "retryable": false,
+  "fingerprint": "f44d199ab3d7a1cc1ee6462e",
+  "recorded_at": "2026-10-12T18:46:15.219939+00:00",
+  "github_run_id": "38291080992",
+  "github_run_attempt": "1",
+  "control_revision": "25cae451082d6f7453f5d4085cec561e03c1fe8c41adea6f4e490f99a70edd56"
+}
