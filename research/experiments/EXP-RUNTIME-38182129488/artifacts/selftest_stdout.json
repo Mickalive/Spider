@@ -1,0 +1,26 @@
+{
+  "check_decision_is_partial": true,
+  "check_evaluator_matches_probe": true,
+  "decision": "PARTIAL",
+  "gates": {
+    "V1_code_fidelity_manifest": true,
+    "V2_transport_conformance": true,
+    "V3_no_leak": true,
+    "V4_determinism": true,
+    "V5_arm_liveness": true,
+    "V6_counter_instrumentation": true,
+    "V7_matched_correctness": true,
+    "V8_ceiling_band": true,
+    "V8_m0_counter_distinctness": true,
+    "V8_mechanism_off": true,
+    "V8_memory_off_attribution": true,
+    "V8_reveal_order_attribution": true
+  },
+  "note": "non-outcome-bearing: assemble_decision() (all gates + memory-lattice decision rule) exercised on probe-derived synthetic cells",
+  "probe_predicted_decision": "PARTIAL",
+  "world": {
+    "gates_pass": true,
+    "partial_certified": true,
+    "robust_certified": false
+  }
+}

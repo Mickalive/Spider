@@ -1,0 +1,1481 @@
+{
+  "arm_liveness": {
+    "B-COLD-RE-DERIVE": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        }
+      }
+    },
+    "B-KNOWLEDGE-NO-MEMORY": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        }
+      }
+    },
+    "B-MEMORY-RECEIPT": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        }
+      }
+    },
+    "B-MEMORY-STATE": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        }
+      }
+    },
+    "B-MEMORY-WINDOW-1": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 1,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        }
+      }
+    },
+    "B-MEMORY-WINDOW-2": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        }
+      }
+    },
+    "B-RETRIEVAL-MEMORYFUL": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        }
+      }
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 0,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 24,
+            "repair_calls": 1,
+            "retrieval_calls": 8,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 0.875,
+          "successes": 7
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 0,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 30,
+            "repair_calls": 1,
+            "retrieval_calls": 10,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 0.9,
+          "successes": 9
+        }
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        }
+      }
+    },
+    "T-AMORTIZED-DISCOVERY": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 17,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 8
+          },
+          "k": 8,
+          "rate": 1.0,
+          "successes": 8
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 21,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 10
+          },
+          "k": 10,
+          "rate": 1.0,
+          "successes": 10
+        }
+      }
+    }
+  },
+  "arms": [
+    "T-AMORTIZED-DISCOVERY",
+    "PC-EXACT-REPLAY",
+    "B-KNOWLEDGE-NO-MEMORY",
+    "B-COLD-RE-DERIVE",
+    "B-RETRIEVAL-SHAPED",
+    "B-MEMORY-STATE",
+    "B-MEMORY-WINDOW-1",
+    "B-MEMORY-WINDOW-2",
+    "B-MEMORY-RECEIPT",
+    "B-RETRIEVAL-MEMORYFUL"
+  ],
+  "binding_uniqueness": {
+    "binding_bits": 48,
+    "collisions": 0,
+    "sampled": 160
+  },
+  "branch_reachability": {
+    "COLLAPSED": "COLLAPSED",
+    "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+    "PARTIAL": "PARTIAL",
+    "ROBUST": "ROBUST"
+  },
+  "capacity_threshold": {
+    "F1-RECORDS": {
+      "0.5": 1,
+      "0.75": 2
+    },
+    "F2-WIDGETS": {
+      "0.5": 1,
+      "0.75": 2
+    }
+  },
+  "checks": {
+    "all_branches_inhabited": true,
+    "all_protocol_invariants_pass": true,
+    "binding_uniqueness_ok": true,
+    "capacity_threshold_expected": true,
+    "ceiling_band_all_arms_one": true,
+    "closed_form_matches_probe": true,
+    "counter_identification_diagnostic": {
+      "F1-RECORDS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.125,
+        "margin_M3": 0.0
+      },
+      "F2-WIDGETS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.1,
+        "margin_M3": 0.0
+      }
+    },
+    "k_sweep_all_in_band": true,
+    "mechanism_off_destroys_certificate": true,
+    "memory_off_matches_m0": true,
+    "no_discovery_direct_expected": true,
+    "no_rate_collides_with_095": true,
+    "no_rate_collides_with_floor": true,
+    "pc_exact_replay_all_novelties": true,
+    "predicted_decision": "PARTIAL",
+    "primary_collapses": true,
+    "protocol_invariants": {
+      "chain_binding_single_use_409": true,
+      "chain_task_resource_null": true,
+      "correct_binding_200": true,
+      "no_binding_in_error_body": true,
+      "no_binding_in_session_body": true,
+      "no_binding_in_task_bodies": true,
+      "precursor_recommit_409_no_reveal": true,
+      "precursor_reveals_binding_once": true,
+      "session_never_reveals_binding": true,
+      "wrong_binding_400_no_leak": true
+    },
+    "retrieval_redundant_no_gain": true,
+    "reveal_order_flipped_fails_chain": true,
+    "transport_stdlib_http": true,
+    "treatment_live_all_novelties": true,
+    "weak_comparator_in_band": true,
+    "window_monotonic": true
+  },
+  "closed_form": {
+    "10": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.9,
+      "in_band": true
+    },
+    "11": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.9090909090909091,
+      "in_band": true
+    },
+    "12": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.9166666666666666,
+      "in_band": true
+    },
+    "6": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.8333333333333334,
+      "in_band": true
+    },
+    "7": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.8571428571428571,
+      "in_band": true
+    },
+    "8": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.875,
+      "in_band": true
+    },
+    "9": {
+      "collides_095": false,
+      "collides_floor": false,
+      "comparator_rate": 0.8888888888888888,
+      "in_band": true
+    }
+  },
+  "closed_form_predictions": {
+    "B-COLD-RE-DERIVE": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.9,
+        "0.75": 0.9
+      }
+    },
+    "B-KNOWLEDGE-NO-MEMORY": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.9,
+        "0.75": 0.9
+      }
+    },
+    "B-MEMORY-RECEIPT": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      }
+    },
+    "B-MEMORY-STATE": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.9,
+        "0.75": 0.9
+      }
+    },
+    "B-MEMORY-WINDOW-1": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 0.875
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 0.9
+      }
+    },
+    "B-MEMORY-WINDOW-2": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      }
+    },
+    "B-RETRIEVAL-MEMORYFUL": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      }
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 0.9,
+        "0.75": 0.9
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      }
+    },
+    "T-AMORTIZED-DISCOVERY": {
+      "F1-RECORDS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "F2-WIDGETS": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0
+      }
+    }
+  },
+  "counter_identification": {
+    "F1-RECORDS": {
+      "T_vs_M0_distinct_dimensions": 2,
+      "T_vs_M3_distinct_dimensions": 0,
+      "margin_M0": 0.125,
+      "margin_M3": 0.0
+    },
+    "F2-WIDGETS": {
+      "T_vs_M0_distinct_dimensions": 2,
+      "T_vs_M3_distinct_dimensions": 0,
+      "margin_M0": 0.1,
+      "margin_M3": 0.0
+    }
+  },
+  "families": {
+    "F1-RECORDS": 8,
+    "F2-WIDGETS": 10
+  },
+  "mechanism_off": {
+    "cold_f1_rate": 1.0,
+    "k": 8,
+    "successes": 8
+  },
+  "memory_lattice": {
+    "decision": "PARTIAL",
+    "detail": {
+      "B-COLD-RE-DERIVE": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-MEMORY-RECEIPT": {
+        "F1-RECORDS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-MEMORY-STATE": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-MEMORY-WINDOW-1": {
+        "F1-RECORDS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-MEMORY-WINDOW-2": {
+        "F1-RECORDS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-RETRIEVAL-MEMORYFUL": {
+        "F1-RECORDS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": false,
+          "comparator_rate": 1.0,
+          "margin": 0.0,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-RETRIEVAL-SHAPED": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      }
+    },
+    "world": {
+      "gates_pass": true,
+      "partial_certified": true,
+      "robust_certified": false
+    }
+  },
+  "memory_off": {
+    "0.5": 0.875,
+    "0.75": 0.875
+  },
+  "no_discovery_direct": {
+    "0.0": 1.0,
+    "0.5": 0.0
+  },
+  "novelties": [
+    0.0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "predicted_decision": "PARTIAL",
+  "primary_comparator": "B-MEMORY-RECEIPT",
+  "retrieval_redundant": {
+    "0.5": 1.0,
+    "0.75": 1.0
+  },
+  "reveal_order_flipped": {
+    "0.5": 0.875,
+    "0.75": 0.875
+  },
+  "scored_band": 0.5,
+  "seed": "SPIDER-RUNTIME-SBA-V2-2026"
+}
