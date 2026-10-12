@@ -8,7 +8,7 @@
   "next_question": "Given that the frozen model-free integer ambiguity signal S = 1[famNONE]+1[opNONE]+1[opTIE]+1[noslot]+1[quant] fails the pre-registered operating point on the disjoint AXIS-PRIMARY test split (pooled_false_accept 3/18=0.1667 > 0.10, coverage 0.9464 >= 0.50, unknown_precision 1.0 carried by only 2 signal-driven abstentions) and also misses the <=0.10 false-accept target on both secondary axes (AXIS-ALTLEX 0.1667, AXIS-HELDOUT 0.2000) while the deterministic selection half remains intact (B-LEX-STRONG 97/113=0.8584) and D-ALTLEX/D-HELDOUT retention is BLOCKED by the missing embedding stack: which materially different resolution architecture -- (A) structured slot/parameter binding with an explicit, independently checkable abstention condition, or (B) a retrieval/embedding model trained on independently authored goals -- simultaneously reaches pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint calibration/test split AND generalizes its selection advantage to a held-out mechanism set and an independently curated synonym lexicon, thereby deciding whether resolve() ships as a deterministic resolver plus a valid abstention gate or must adopt the structured/retrieval architecture?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-10-12T00:56:34.461969+00:00",
+  "updated_at": "2026-10-12T02:04:42.160991+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "38b65a0a835d4f0ac8d16d6e6d915ba57f15cb116b840eaaf59d1849260a24e2",
   "same_failure_count": 1,
