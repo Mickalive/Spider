@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the actually served body (verified by full download, not HF etag/xetHash metadata) and re-frozen, does either M-14B-QWEN or M-8B-LLAMA clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6), and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-12T02:04:58.290161+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-12T03:32:35.133715+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "df1150468c97dee8fd002d60fcd97fbbc96434cbc97749e0428325c58e0af942",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
+  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
 }
