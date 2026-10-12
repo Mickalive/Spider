@@ -1,49 +1,186 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-PRODUCT-38244439628",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "design_contract_version": 2,
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "claim_scope_note": "Product-lane bounded prerequisite/derisk under C-RESIDUAL-NOVELTY (codex effective status EXPERIMENTAL; latest_event_by_claim = EXP-PRODUCT-37982016598). The mandate explicitly funds NO agent arm and NO LLM (C-LLM-INHERIT gate condition (3) is unmet). This design targets only the representation/work-compression economics sub-question of the mandate, not the gated four-arm flagship.",
+  "parent_handoff_received": {
+    "experiment_id": "EXP-PRODUCT-38234098353",
+    "path": "research/experiments/EXP-PRODUCT-38234098353/handoff.json",
+    "sha256": "afd535847e31c0939734c09e898bf2b0fff40a85910be3c930ab5bfeef9a3e40"
+  },
+  "question": "On the certified non-ceiling credential-free bank (SBA-CREDENTIAL-FREE-V3) with the shipped byte-identical parameterized carrier, does the founding multi-scale representation/work-compression hypothesis hold -- i.e. does parameterized inheritance with decomposable/multi-resolution structure achieve strictly lower counter-cost (http_requests + retrieval_calls + verification_calls + repair_attempts) per VERIFIED SAFE success than strong internal baselines (flat exact-state cache, nearest-neighbour/retrieval, compiled procedural lookup, and the empty-registry inheritance ablation) at matched correctness, and does the advantage grow with controlled residual novelty rather than full task length -- with NO LLM agent required?",
+  "hypothesis": "As mandated: a treatment arm T-MULTIRES (parameterized inheritance whose inherited object is a decomposable/multi-resolution representation, reused and composed across the bank's resolution ladder) is predicted to reach 1.0 success at matched correctness and to achieve STRICTLY lower counter-cost per VERIFIED SAFE success than ALL four frozen baselines B-FLAT-CACHE (flat exact-state cache), B-NN (nearest-neighbour/retrieval), B-PROCEDURAL (compiled procedural lookup) and B-EMPTY (empty-registry inheritance ablation) at every scored (family, novelty) cell, with the margin GROWING with controlled residual novelty (novelty 0.50 -> 0.75) and NOT with full task length (family K).",
+  "falsifier": "The mandated claim is FALSIFIED (or shown non-identifiable) if, at any scored (family, novelty) cell, T-MULTIRES is not strictly lower in counter-cost per VERIFIED SAFE success than B-PROCEDURAL, OR if the T-vs-comparator margin does not grow with residual novelty while being invariant to family task length K. This design additionally reports as a DESIGN failure (not a scientific outcome) any cell where the treatment and a mandated baseline are counter- and success-identical.",
+  "baselines": [
+    {
+      "id": "B-FLAT-CACHE",
+      "role": "mandated strong internal baseline (flat exact-state cache)",
+      "policy": "Retain exact observed (x, y) commit-receipt states; answer every task by exact-key lookup; on the unseen chain input x_q (which is not a stored key) it cannot generalize and must fall back to a wrong/repair path.",
+      "frozen_expected_from_runtime_evidence": {
+        "nearest_runtime_arm": "B-WITHIN-SESSION-RECEIPT",
+        "success_rate": {"F1-RECORDS": 0.875, "F2-WIDGETS": 0.900},
+        "note": "Rates are the already-certified EXP-RUNTIME-38194351940 values; a fresh arm under a new name does not create new information."
+      }
+    },
+    {
+      "id": "B-NN",
+      "role": "mandated strong internal baseline (nearest-neighbour / retrieval)",
+      "policy": "Retain raw calibration (x, y) pairs across the session boundary; on the chain task retrieve the nearest stored x and replay its stored y (a memorized value, not M(x_q)).",
+      "frozen_expected_from_runtime_evidence": {
+        "nearest_runtime_arm": "B-RETRIEVAL-REPLAY",
+        "success_rate": {"F1-RECORDS": 0.875, "F2-WIDGETS": 0.900}
+      }
+    },
+    {
+      "id": "B-PROCEDURAL",
+      "role": "mandated strong internal baseline (compiled procedural lookup)",
+      "policy": "Compile a procedure from the observations and execute it on the chain input. Under the generalizing reading (the only reading under which this is a STRONG baseline) it recovers the affine mechanism (a, b) from the labelled calibration examples and applies it; under the exact-lookup reading it is identical to B-FLAT-CACHE.",
+      "frozen_expected_from_runtime_evidence": {
+        "generalizing_reading_arm": "T-MECHANISM-INHERIT / B-CROSS-SESSION-COMPILE",
+        "generalizing_reading_success_rate": {"F1-RECORDS": 1.0, "F2-WIDGETS": 1.0},
+        "exact_lookup_reading_arm": "B-WITHIN-SESSION-RECEIPT",
+        "exact_lookup_reading_success_rate": {"F1-RECORDS": 0.875, "F2-WIDGETS": 0.900},
+        "identifiability_warning": "Under the generalizing reading this baseline IS the treatment (counter- and success-identical); under the exact-lookup reading it duplicates B-FLAT-CACHE and the only live contrast is inheritance-vs-memorization, already certified. Either way the mandated T-vs-B-PROCEDURAL contrast carries no new discriminating information. See identifiability_analysis."
+      }
+    },
+    {
+      "id": "B-EMPTY",
+      "role": "mandated baseline (empty-registry inheritance ablation)",
+      "policy": "Fresh session per task; retain nothing (no inherited object at all).",
+      "frozen_expected_from_runtime_evidence": {
+        "nearest_runtime_arm": "B-MEMORYLESS",
+        "success_rate": {"F1-RECORDS": 0.875, "F2-WIDGETS": 0.900}
+      }
+    }
+  ],
+  "positive_control": "PC-EXACT-REPLAY (oracle): given (a, b) by construction, commits every task and answers the unique chain task exactly. Predicted 1.0 at every scored band (EXP-RUNTIME-38194351940 V5_arm_liveness PASS). Complementary disclosed identity control B-CROSS-SESSION-COMPILE: a comparator allowed to carry the compiled (a, b) across the session boundary -- measured counter- and success-identical to T-MECHANISM-INHERIT (F1 http/retr/ver/rep = 34/0/16/0, F2 = 42/0/20/0; success 1.0 at both scored bands). This disclosed identity is the direct measurement of the treatment/comparator identity at issue.",
+  "null_control": "NC-MECHANISM-OFF (sensitivity): expose the required chain answer directly as the chain task resource_id so no mechanism is needed; the within-session retention comparator then reaches 1.0 (probe-measured F1 rate 1.0) and the dynamic-range certificate becomes FALSE. Complementary nulls: NC-REPEAT-INPUT and NC-EXAMPLES-ISOLATION. All three are certified in EXP-RUNTIME-38194351940.",
+  "measurement_validity": {
+    "status": "would be inherited from EXP-RUNTIME-38194351940 V1-V8 gates if this design were freeze-eligible",
+    "gates": {
+      "V1_code_fidelity_manifest": "sha256 of every authored harness file recorded; reconstruction must reproduce the frozen bank construction",
+      "V2_transport_conformance": "full credential-free stdlib HTTP surface conformance before scoring",
+      "V3_no_leak": "no mechanism, calibration example or answer in any scored session/task/error body",
+      "V4_determinism": "two identical scored runs byte-identical; all derivations deterministic from RUN_SEED (no secrets/clock/urandom)",
+      "V5_arm_liveness": "every arm executes end-to-end",
+      "V6_counter_instrumentation": "all four counters recorded with matched accounting per arm/cell",
+      "V7_matched_correctness": "exact-match scoring; matched_correctness == success_rate per arm/cell",
+      "V8_sensitivity": "ceiling band at novelty 0.0; mechanism-off destroys the certificate (the ONLY representation-sensitive probe on this instrument)"
+    }
+  },
+  "decision_rule": {
+    "primary_metric": "M-COST-PER-VERIFIED-SAFE-SUCCESS(arm, family, novelty) = (http_calls + retrieval_calls + verification_calls + repair_calls) / (# VERIFIED SAFE successes), where a VERIFIED SAFE success is a task whose commit returned 200 for the expected value with no leak.",
+    "secondary_metrics": [
+      "M-SUCCESS-RATE(arm, family, novelty)",
+      "M-MARGIN-COST(arm, family, novelty) = M-COST-PER-VERIFIED-SAFE-SUCCESS(comparator) - M-COST-PER-VERIFIED-SAFE-SUCCESS(T)",
+      "M-NOVELTY-GROWTH = M-MARGIN-COST(0.75) - M-MARGIN-COST(0.50)",
+      "M-LENGTH-GROWTH = M-MARGIN-COST(K=10) - M-MARGIN-COST(K=8)"
+    ],
+    "SUPPORTS": "T strictly lower M-COST-PER-VERIFIED-SAFE-SUCCESS than ALL four baselines at every scored cell, at matched correctness (>= 0.80 floor), AND M-NOVELTY-GROWTH > 0 AND M-LENGTH-GROWTH <= 0.",
+    "FALSIFIES": "at some scored cell T is not strictly lower than B-PROCEDURAL, OR M-NOVELTY-GROWTH <= 0 / M-LENGTH-GROWTH > 0.",
+    "MIXED": "T strictly dominates the memorization baselines (B-FLAT-CACHE, B-NN, B-EMPTY) but ties or loses to B-PROCEDURAL, or the novelty/length growth pattern is only partially as predicted.",
+    "MEASUREMENT_INVALID": "any V1-V8 gate failure; never reported as a scientific SUPPORTS/FALSIFIES/MIXED.",
+    "identifiability_precedence": "Because the SUPPORTS branch is provably unreachable on the frozen instrument (see identifiability_analysis), this decision rule cannot be frozen."
+  },
+  "product_consequence_positive": "If the mandated pattern held (T strictly cheapest at matched correctness with the margin growing in residual novelty), the product decision would be to invest in a decomposable/multi-resolution inherited representation as a cost lever and to keep C-RESIDUAL-NOVELTY as a live discriminator for the gated flagship.",
+  "product_consequence_negative": "If T does not strictly dominate B-PROCEDURAL (the expected result on this bank), the product decision is that the multi-scale representation/work-compression moat is UNPROVEN on this substrate and MUST NOT be assumed (POLICY: 'do not assume graph structure saves tokens'); the only evidenced lever remains inheritance-vs-memorization (generalization), already certified, and the flagship's residual-novelty mechanism remains untested pending a substrate with genuinely decomposable structure.",
+  "estimated_cost": "One bounded harness reconstruction + a 56-cell scored matrix scored twice for determinism. As designed this EXECUTE would be wasted: the frozen runtime packet already contains the raw counters, success matrix and residual-novelty grid needed to answer every branch. Estimated DESIGN-time cost already incurred: inspection of the frozen runtime packet. No outcome-bearing run should be authorized.",
+  "expected_information_gain": "Approximately zero as a new EXECUTE: (i) the mandated positive contrast is a structural identity, (ii) the mandated novelty-growth prediction is arithmetically contradicted by already-frozen data, and (iii) the only live contrast is already certified ROBUST with audit PASS. The high-information product of this DESIGN is the negative identifiability finding plus the minimal re-scope, recorded here and in prereg.md.",
+  "substrate": {
+    "class": "SBA-CREDENTIAL-FREE-V3 (Session-Mechanism-Inheritance), certified non-ceiling by EXP-RUNTIME-38194351940 (status COMPLETE, outcome SUPPORTS, decision ROBUST, audit PASS, determinism_ok=true)",
+    "hidden_mechanism": "a single bank-wide affine map M(x) = (a*x + b) mod P per (family, bank-instance), P = 2**40 - 87 = 1099511627689 (prime), derived from RUN_SEED 'SPIDER-RUNTIME-SBA-V3-2026' (deterministic, no secrets/clock/urandom)",
+    "families": {"F1-RECORDS": 8, "F2-WIDGETS": 10},
+    "residual_novelty_ladder": [0.0, 0.25, 0.5, 0.75],
+    "scored_band": "novelty >= 0.50; exactly ONE chain task per scored session at index K-3 (novelty 0.50) or K-1 (novelty 0.75, where the required answer is the composed M(M(x_q)))",
+    "shipped_carrier": {
+      "path": "src/spider/kernel.py",
+      "git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "note": "The carrier induces a single-level support regex from labelled identifiers and resolves unseen ones. It is a FLAT (single-level) parameterized procedure; it has no dependency on, and cannot solve, the bank's numeric affine chain task. It is listed because the mandate names it, but it is not the mechanism that answers the bank."
+    },
+    "decomposable_structure_available_on_bank": "NONE. The bank's only compositional axis is the depth-1 vs depth-2 application of one affine map, and the calibration session always exposes only single-application examples; there is no hierarchy, no shared sub-mechanism across families/instances, and no multi-resolution object to decompose."
+  },
+  "arms": [
+    {"id": "T-MULTIRES", "role": "treatment (mandated): parameterized inheritance with decomposable/multi-resolution structure", "liveness": "NOT live as specified -- any instantiation collapses onto the plain compiled mechanism because the bank exposes no decomposable structure"},
+    {"id": "B-FLAT-CACHE", "role": "baseline (mandated)"},
+    {"id": "B-NN", "role": "baseline (mandated)"},
+    {"id": "B-PROCEDURAL", "role": "baseline (mandated), and structurally identical to T-MULTIRES under the generalizing reading"},
+    {"id": "B-EMPTY", "role": "baseline (mandated)"},
+    {"id": "PC-EXACT-REPLAY", "role": "positive control (oracle)"},
+    {"id": "B-CROSS-SESSION-COMPILE", "role": "disclosed identity control (already measured == T)"},
+    {"id": "NC-MECHANISM-OFF", "role": "null / sensitivity control"}
+  ],
+  "counters": {
+    "dimensions": ["http_requests", "retrieval_calls", "verification_calls", "repair_attempts"],
+    "frozen_runtime_aliases": {"http_requests": "http_calls", "repair_attempts": "repair_calls"},
+    "invariance_note": "All four dimensions are functions of the HTTP protocol call sequence only. Local representation build/inference/reuse/composition cost is NOT instrumented. Therefore any two representations that both contain the hidden mechanism and answer the chain task correctly record identical counters."
+  },
+  "identifiability_analysis": {
+    "verdict": "NON_IDENTIFIABLE / DESIGN_FAILURE",
+    "counter_invariance": "To answer the unique chain task correctly, any mechanism-containing representation must execute the minimal call sequence: one calibration session + K calibration task/commit calls + one scored session + K scored task calls + K scored commit calls. Counters are incremented only in the HTTP helpers, so all mechanism-containing representations are counter-identical. Measured example (EXP-RUNTIME-38194351940 result.json metrics.per_instance_counters_at_0.5): F1-RECORDS T-MECHANISM-INHERIT = B-CROSS-SESSION-COMPILE = PC-EXACT-REPLAY = {http 34, retrieval 0, verification 16, repair 0}; F2-WIDGETS = {http 42, retrieval 0, verification 20, repair 0}.",
+    "treatment_equals_baseline": "The mandate's 'compiled procedural lookup' baseline, under the only reading that makes it a STRONG baseline (it generalizes), recovers (a, b) from the labelled calibration examples and applies it -- which is exactly the runtime's treatment. It is therefore success-identical (1.0) and counter-identical (F1 50, F2 62) to T at every scored cell. Under the exact-key reading it duplicates B-FLAT-CACHE (0.875/0.900). In neither case does a T-vs-B-PROCEDURAL advantage exist.",
+    "novelty_growth_arithmetically_false": "At both scored novelties the memorization comparators score exactly (K-1)/K (F1 0.875, F2 0.900) because each scored session contains exactly one chain task regardless of novelty, and the treatment scores 1.0, so the success margin is 1/K = 0.125 (F1) / 0.100 (F2) at BOTH novelty 0.50 and 0.75. In cost per verified safe success the T-vs-flat-cache ratio is 7.5714/6.25 = 1.2114 (F1) and 7.2222/6.20 = 1.1649 (F2): IDENTICAL at novelty 0.50 and 0.75, and DECREASING in task length K. The mandate's prediction ('advantage grows with controlled residual novelty rather than full task length') is therefore false in both directions on this bank.",
+    "ceiling_floor": "At novelty 0.0 and 0.25 the mechanism is inactive and EVERY arm scores 1.0 (all-arm ceiling), so half the residual-novelty grid carries zero discriminating signal.",
+    "duplicate_of_certified_result": "The only live contrast (mechanism-containing inheritance vs memorization: flat cache / NN / empty) is already certified ROBUST with audit PASS in EXP-RUNTIME-38194351940, and that packet's frozen result.json already records the full 56-cell success matrix, per-instance counters at 0.5 and the residual-novelty grid. A new EXECUTE would re-derive existing raw numbers, violating the DESIGN instruction not to repeat prior work.",
+    "evidence_refs": [
+      "research/experiments/EXP-RUNTIME-38194351940/result.json (origin/lab2/runtime) metrics.per_instance_counters_at_0.5, metrics.success_rate_matrix, metrics.gates, metrics.determinism_ok",
+      "research/experiments/EXP-RUNTIME-38194351940/handoff.json",
+      "research/experiments/EXP-RUNTIME-38194351940/spec.json substance.arms / decision_rule",
+      "research/experiments/EXP-PRODUCT-37989728440 (prior C-RESIDUAL-NOVELTY dynamic-range-certificate failure, July 2026-10-09)"
+    ]
+  },
+  "design_disposition": "DESIGN_FAILURE_NON_IDENTIFIABLE_NOT_FROZEN. The mandate cannot be frozen as written: its treatment and its strongest mandated baseline are provably counter- and success-identical on the named instrument (treatment/comparator identity), the mandated novelty-growth prediction is arithmetically false, half the residual-novelty grid is at ceiling, and the only live contrast is already certified. Per EXPERIMENT_PACKET.md section 2 and the DESIGN satisfiability rules, this is a DESIGN failure, not something to discover during EXECUTE. No outcome-bearing run is authorized. Minimal re-scope for the Global Research Director (NOT adopted silently here): (R1) if the goal is the representation-economics question, authorize a substrate with GENUINELY decomposable structure and/or an instrumented local representation-cost counter dimension (build/compile/inference/reuse), NOT the frozen network-only counters; (R2) if the goal is only the product-economic summary, derive cost-per-VERIFIED-SAFE-success directly from the existing EXP-RUNTIME-38194351940 raw counters in a DIRECTOR/analysis step rather than a new experiment; (R3) if the goal is the residual-novelty mechanism, it is NOT testable on SBA-CREDENTIAL-FREE-V3 because that bank contains exactly one chain task per scored session at every scored novelty -- a bank with a monotone chain-count ladder would be required.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "FAIL",
+      "reason": "The SUPPORTS branch requires T strictly lower M-COST-PER-VERIFIED-SAFE-SUCCESS than B-PROCEDURAL at every scored cell. T and a generalizing B-PROCEDURAL are counter- and success-identical by the counter-invariance lemma, so SUPPORTS is unreachable. The M-NOVELTY-GROWTH > 0 requirement is additionally arithmetically impossible (margin = 1/K, constant in novelty). FALSIFIES/MIXED are reachable, but the mandated positive branch is not, so the decision rule cannot support the claim.",
+      "evidence_refs": [
+        "spec.json#identifiability_analysis",
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.success_rate_matrix (comparators 0.875/0.900 at BOTH 0.50 and 0.75)",
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.per_instance_counters_at_0.5 (T == B-CROSS-SESSION-COMPILE == PC-EXACT-REPLAY)"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The named substrate is executable and certified: the SBA-CREDENTIAL-FREE-V3 construction is deterministic, credential-free, stdlib-only and already ran end-to-end twice (determinism_ok=true) in EXP-RUNTIME-38194351940; the shipped carrier src/spider/kernel.py is present with sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72. Caveat: the bank harness lives on branch origin/lab2/runtime and is not in this workspace; any future run would first have to reconstruct it byte-faithfully from that immutable branch reference.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.determinism_ok=true",
+        "research/experiments/EXP-RUNTIME-38194351940/handoff.json",
+        "src/spider/kernel.py"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "FAIL",
+      "reason": "The mandate's strongest baseline, 'compiled procedural lookup', is not identifiable from the treatment on this instrument. Under the generalizing reading it IS the treatment (measured identical: success 1.0; counters F1 {34,0,16,0}, F2 {42,0,20,0}). Under the exact-key reading it duplicates B-FLAT-CACHE and the surviving contrast is the already-certified inheritance-vs-memorization contrast. No frozen cell can separate T-MULTIRES from B-PROCEDURAL.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.per_instance_counters_at_0.5",
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.gates.V8_identity_disclosure=true",
+        "spec.json#baselines B-PROCEDURAL.frozen_expected_from_runtime_evidence"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "For the only live contrast (mechanism-containing inheritance vs memorization), the controls are genuinely sensitive and already certified: NC-MECHANISM-OFF drives the within-session comparator to 1.0 (certificate destroyed), PC-EXACT-REPLAY is live at 1.0, and V8_retention_counter_distinctness shows >= 2 distinct counter dimensions between T and the flat-cache comparator. NOTE and boundary: no control on this instrument can separate two mechanism-containing representations, which is precisely the failure captured under baseline_identifiability.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.mechanism_off_within_session_rate",
+        "research/experiments/EXP-RUNTIME-38194351940/result.json metrics.counter_distinctness_vs_T_at_0.5"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "FAIL",
+      "reason": "The treatment AS SPECIFIED -- a representation carrying decomposable/multi-resolution structure -- cannot be instantiated as a distinct executable arm on SBA-CREDENTIAL-FREE-V3. The bank's hidden mechanism is a single affine map with no decomposable or hierarchical structure to represent, so every mechanism-containing representation collapses onto the plain compiled mechanism (== B-PROCEDURAL). The nearest executable object (T-MECHANISM-INHERIT) is live, but it is not the mandated treatment and is counter-identical to the mandated baseline. Per EXPERIMENT_PACKET.md section 2, a v2 Product inheritance/residual-novelty treatment that cannot become a distinct EXECUTABLE arm is a DESIGN failure.",
+      "evidence_refs": [
+        "spec.json#substrate.decomposable_structure_available_on_bank",
+        "spec.json#identifiability_analysis.treatment_equals_baseline",
+        "research/experiments/EXP-RUNTIME-38194351940/spec.json#hypothesis (hidden bank-wide affine mechanism M(x)=(a*x+b) mod P)"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "NOT_APPLICABLE",
+      "reason": "This design is not proceeding to freeze, so it introduces no new mutable local code/task-bank/dataset/fixture to bind. The only substantive dependency would be a byte-faithful reconstruction of the frozen SBA-CREDENTIAL-FREE-V3 bank, which exists as immutable branch history on origin/lab2/runtime rather than as a mutable workspace file. freeze_artifacts is therefore empty. If the Director authorizes the re-scope (R1) with a new instrumented substrate, that design must bind its authored harness and bank files explicitly.",
+      "evidence_refs": ["spec.json#design_disposition"]
     }
   },
   "freeze_artifacts": []
