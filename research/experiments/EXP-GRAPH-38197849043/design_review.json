@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All six aggregate decision branches (SUPPORTS, SUPPORTS-BOUNDED, MIXED, MIXED-TRADEOFF, FALSIFIES, MEASUREMENT_INVALID) were proven reachable by driving the frozen aggregate_and_decide code with synthetic trial rows (prereg §8.2). Per-class thresholds are arithmetically attainable: functional_ok requires repair_success >= 0.80 AND Wilson lower >= 0.60, which with TRIALS_PER_CLASS=12 requires >= 11/12 successes (91.7%) - strict but attainable. Contamination_rate <= 0.10 allows up to 4 contaminated probes across 48 unaffected-resource observations. Write_set_max <= 1 matches the single-mechanism upsert design. Guard_fire_rate >= 0.80 requires >= 10/12 guard fires. Cost verdict thresholds (product_ratio < 1.00, <= 1.00, <= 1.15 with fetch_ratio <= 0.90) are mutually exclusive and collectively exhaustive. Precedence order in the aggregate rule correctly checks MEASUREMENT_INVALID first, then strictly positive tiers, then mixed, then falsifies.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8.2",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#7-decision-rule",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#decision_rule"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are available at freeze time: Python 3.12 stdlib (http.server, urllib, json, hashlib, threading, tempfile, etc.), the three shipped carrier modules (src/spider/kernel.py, models.py, registry.py) which import successfully and provide the distill_parameterized/resolve/verify/rebind surface, and the in-process ThreadingHTTPServer substrate requiring no external credentials, network, browser, or LLM. The design satisfiability canary (--mechanics-only) executed deterministically with two independent runs producing byte-identical output, confirming the measurement path executes end-to-end. No prerequisite is deferred to EXECUTE.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#11-environment-and-execute-command",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#freeze_eligibility.measurement_prerequisites"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The primary cost comparator B-COLD (cold re-derivation L=3 on the same perturbed task) is live and distinct from treatment: canary shows cold_success=true while literal_replay fails (perturbation bites). B-NO-REPAIR (abstention control) is explicitly non-executing and never used as cost denominator (prereg §7 note). B-LITERAL-REPLAY and B-NO-REPAIR are required to fail (V4, V6 gates). B-COLD-MIN (L=2) and B-COLD-DEEP (L=4) provide cost sensitivity. No ceiling/floor: perturbations are designed to break literal replay but remain learnable by cold re-derivation (canary confirms). Cost metrics use the equal-weight registered TrajectoryCounters components {http_requests, retrieval_calls, verification_calls, repair_attempts} for both arms, so no dimension is omitted.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#7-decision-rule",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#9-measurement-validity-gates",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#baselines"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls are demonstrably sensitive on the real substrate per the canary: PC-BASE-LIVENESS shows base_liveness=true (all mechanisms EXECUTABLE and verify pre-perturbation). NC-NO-PERTURBATION shows stale=false (guard silent without perturbation). NC-NOISE shows stale=false (non-semantic observed_at churn filtered by required-field Jaccard). NC-OVERBROAD-REPAIR is designed to produce >0 contamination for P2-STRUCTURE where schema changes (kind→entity_type), and 0 for P1/P3 where schema is stable - proving the contamination metric detects semantic breakage. B-LITERAL-REPLAY shows literal_success=false (perturbation bites). B-NO-REPAIR shows norepair_success=false (guard fires but abstention fails). No control is tautological or impossible.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#9-measurement-validity-gates"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-LOCAL-REPAIR uses the shipped carrier unchanged (distill_parameterized -> resolve -> verify -> rebind). The canary confirms: for all three perturbation classes (P1-ENDPOINT, P2-STRUCTURE, P3-PERMISSION), repair_success=true, guard_fired=true, contamination=0/4, base_liveness=true. The repair routine branches purely on observed response signatures (redirect/403/200-drift) without being told the perturbation class, and restores successful execution on all 5 TASK_IDS. The carrier modules are frozen in freeze_artifacts and hash-verified. Treatment is structurally capable of non-null executable behavior before expensive arms run.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#4-substrate-treatment-identity-and-perturbation-classes",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#5-deterministic-freshness-guard-and-local-repair",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#freeze_artifacts"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All mutable local interpretation dependencies are explicitly listed in spec.freeze_artifacts and prereg §10: src/spider/kernel.py (treatment identity: distill_parameterized/resolve/verify/rebind), src/spider/models.py (Mechanism/Observation/Resolution semantics), src/spider/registry.py (registry read/upsert/invalidate semantics; locality). The executable decision path is embedded verbatim in the FROZEN-RUNNER block bound by CANONICAL-RUNNER-SHA256=0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1 (verified by exact extraction). No external task bank, dataset, or fixture is read; the substrate is constructed inside the runner. Remote Web responses are not used (credential-free local stdlib HTTP only).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#10-freeze-artifacts-and-canonical-hashes",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38197849043/spec.json#freeze_eligibility.freeze_artifacts_bound"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Wilson 95% lower bound >= 0.60 with n=12 requires 11/12 successes (91.7%), making the functional_ok bar extremely strict. This is a design choice, not a flaw, but reduces statistical power.",
+    "Canary cost ratios show repair product=20 vs cold product=19 (ratio=1.053), placing the single-trial result in MIXED-TRADEOFF tier. With n=12 the mean could shift, but the primary cost bar (product_ratio < 1.00 for STRICT-WIN) is demanding.",
+    "The runner hardcodes ROOT = Path('/home/runner/work/Spider/Spider') which assumes the GitHub Actions workspace layout. This is standard for the environment but worth noting for portability."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is reachable and non-tautological, measurement prerequisites are satisfied with a green deterministic canary, baselines are identifiable and live, controls are sensitive, the treatment is live on the shipped carrier, and all mutable local dependencies are bound in freeze_artifacts. No blocking findings. The experiment is ready to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38197849043/request.json",
+    "research/experiments/EXP-GRAPH-38197849043/spec.json",
+    "research/experiments/EXP-GRAPH-38197849043/prereg.md",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ]
+}
