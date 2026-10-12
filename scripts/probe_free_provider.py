@@ -96,7 +96,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--bin", default=str(Path.home() / ".opencode/bin/opencode"))
     parser.add_argument("--max-models", type=int, default=3)
-    parser.add_argument("--per-model-seconds", type=int, default=45)
+    parser.add_argument("--per-model-seconds", type=int, default=85)
     args = parser.parse_args()
     if not (1 <= args.max_models <= 3 and 5 <= args.per_model_seconds <= 90):
         parser.error("bounded free model preflight only: <=3 models, 5–90 seconds each")
