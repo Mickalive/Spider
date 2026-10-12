@@ -1,0 +1,17 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+    "research/intel/run_exp_37982024058.py": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "frozen_at": "2026-10-12T02:24:19.804905+00:00",
+  "hashes": {
+    "design_review.json": "6a84d75b883eb6ab5beae4db371dcc7a52741dd1d4fdfd25c883e29aa40276f9",
+    "prereg.md": "f1429eaa0c544fe01a4c8589b263f8f10cd0086f68ab4677d414348a2a5e4e86",
+    "request.json": "38039a17f7b788fd0c30684dc409ecf92903ce2325ce6cf50caa800140eb80c5",
+    "spec.json": "2f787080676a617a06399852742699b13ae810367dc500252debed649d7c0285"
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "run": {
+    "kind": "github_actions",
+    "run_id": "38212976602",
+    "run_attempt": "1",
+    "repository": "Mickalive/Spider",
+    "server_url": "https://github.com",
+    "github_sha": "239c934b3c30e867bb221489ec10d0b570cbc690",
+    "repo_head": "50bc0c511cdc81e8100857903d428d780328c930",
+    "branch": "lab2/intel",
+    "execution_checkpoint": {
+      "path": "research/experiments/EXP-INTEL-38194362040/execution_checkpoint.json",
+      "github_run_id": "38194362040",
+      "pre_execute_sha": "80662c80feb21351aaca63073f74b6b505e0b570",
+      "note": "Prior EXECUTE attempts failed with exit 75 (transient model-pool exhaustion) before producing evidence; this transaction ran the frozen design to completion."
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/request.json",
+      "sha256": "38039a17f7b788fd0c30684dc409ecf92903ce2325ce6cf50caa800140eb80c5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/spec.json",
+      "sha256": "2f787080676a617a06399852742699b13ae810367dc500252debed649d7c0285"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-38194362040/prereg.md",
+      "sha256": "f1429eaa0c544fe01a4c8589b263f8f10cd0086f68ab4677d414348a2a5e4e86"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/freeze.json",
+      "sha256": "9145a55f80bd95252c287dce84710b8fd7a8a87d997664c709ccd49232921ecd"
+    },
+    "design_review.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/design_review.json",
+      "sha256": "6a84d75b883eb6ab5beae4db371dcc7a52741dd1d4fdfd25c883e29aa40276f9"
+    },
+    "freeze_hashes_match": {
+      "request.json": true,
+      "spec.json": true,
+      "prereg.md": true,
+      "design_review.json": true
+    },
+    "freeze_artifacts_all_match": true
+  },
+  "freeze_artifacts": {
+    "note": "All hashes in freeze.json.artifact_hashes were re-verified on disk before EXECUTE; match status is derived from raw/preflight.json.",
+    "entries": [
+      {
+        "path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
+        "match": true,
+        "expected_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+        "observed_sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+        "match": true,
+        "expected_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+        "observed_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"
+      },
+      {
+        "path": "research/intel/run_exp_37982024058.py",
+        "match": true,
+        "expected_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+        "observed_sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+      }
+    ]
+  },
+  "prompt_strings": {
+    "P-TREAT-GOAL-SCHEMA": {
+      "sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716",
+      "note": "frozen prompt treatment applied to both candidate cells; contains neither '#reveal-btn' nor 'TARGET-42'"
+    }
+  },
+  "harness_config_hashes": {
+    "base_config": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "base_config_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+    "M-14B-QWEN_overlay_sha256": "2f17520b9b58b6dba6c262cdcd66f48e124178e4c8b94af6868087b62464719e",
+    "M-8B-LLAMA_overlay_sha256": "2945f5fecf85ee16e469a1fb7b85ebf555b1085bde3bc9b683dbb84ae840a813",
+    "M-14B-QWEN_diff_paths": [
+      "candidate_models_frozen",
+      "prompts.system"
+    ],
+    "M-8B-LLAMA_diff_paths": [
+      "candidate_models_frozen",
+      "prompts.system",
+      "sampling.chat_format"
+    ]
+  },
+  "models": {
+    "M-14B-QWEN": {
+      "frozen_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/05244aa5d871c661c80082a15d3bce44714d068d/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "revision_sha": "05244aa5d871c661c80082a15d3bce44714d068d",
+      "pinned_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "pinned_bytes": 8988110976,
+      "observed_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "observed_bytes": 8988110976,
+      "identity_pass": true,
+      "n_download_attempts": 1,
+      "local_path": "/tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf"
+    },
+    "M-8B-LLAMA": {
+      "frozen_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/bf5b95e96dac0462e2a09145ec66cae9a3f12067/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "revision_sha": "bf5b95e96dac0462e2a09145ec66cae9a3f12067",
+      "pinned_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "pinned_bytes": 4920739232,
+      "observed_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "observed_bytes": 4920739232,
+      "identity_pass": true,
+      "n_download_attempts": 1,
+      "local_path": "/tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
+    }
+  },
+  "environment": {
+    "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.15",
+    "venv": "/tmp/opencode/venv",
+    "llama_cpp_python": "0.2.90",
+    "playwright": "1.63.0",
+    "chrome_path": "/usr/bin/google-chrome",
+    "cpu_cores": 4,
+    "mem_total_gb": 15.6,
+    "n_threads": 4,
+    "network": "huggingface.co (GGUF bodies) and PyPI reachable; no hosted-provider credentials present"
+  },
+  "commands": [
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_materialize.py",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_provision.py",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_controls.py --outdir research/experiments/EXP-INTEL-38194362040 --config research/experiments/EXP-INTEL-37982024058/raw/harness_config.json --chrome /usr/bin/google-chrome",
+    "/tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN --candidate M-14B-QWEN --gguf /tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "/tmp/opencode/venv/bin/python research/intel/run_exp_37982024058.py --mode probe-candidate --outdir research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA --candidate M-8B-LLAMA --gguf /tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf --chrome /usr/bin/google-chrome --n-threads 4",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_census.py research/experiments/EXP-INTEL-38194362040",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_comparators.py research/experiments/EXP-INTEL-38194362040",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_eval.py",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38194362040_assemble.py"
+  ],
+  "authored_code": [
+    {
+      "path": "research/intel/exp_38194362040_materialize.py",
+      "sha256": "0ed8c182f4ac0a8eadd66b90c03d6cf6b684823f9f8166ec34779435a2ad86b7",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_provision.py",
+      "sha256": "6665df59eaadd9b08a0b3fa1755bd46e631b3b92540cd5e75597c80bc0384840",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_controls.py",
+      "sha256": "14a9ab67ebc43ae10c70985def8cd54834ce73684985bf802e547910fad2c497",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_census.py",
+      "sha256": "da199e64aab157ebb48f521bf83c7306242f9ce28a9de0c016674e12c1548f17",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_comparators.py",
+      "sha256": "7176e3d645e5c1b05cabd55695dab0bae78b5b89a7169fb40a2e2c05a09ffbb4",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_eval.py",
+      "sha256": "8dd702d986716fb1637b9eace4dae7ca3711338922b621f44cf052b44fc41a84",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_assemble.py",
+      "sha256": "9797e3bb4667b454880552bbfc4a07a0984d217c0ab80eca28bb229cf013cfac",
+      "role": "code"
+    }
+  ],
+  "raw_evidence": [
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/preflight.json",
+      "sha256": "b81e729d747a8c4217ed17409c2eb6a4c408c6d352dca5ebf1bbc8d62fb8369c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/run_resources.json",
+      "sha256": "27fc2cc37057087ccb4333abefb606d071f44d7d948e6441b78973572c664cff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/controls.json",
+      "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/materialized_configs.json",
+      "sha256": "e872ccaa7f24121628f8b54598d8f7b7c6c727753ad9e89837540e4d2f4e2f4a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/provisioning_evidence.json",
+      "sha256": "ec0b620c3f104bf9644a54644ba1a927e656f88935a1b66044fb811e384739fd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/endpoint_census.json",
+      "sha256": "512f190a8e587b13ce91e7816dcf89f11f8ecd8aa6f7cdb7ab8fe9d6d8298cea",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/external_comparators.json",
+      "sha256": "c25b6811c99b520f9c058542ff8d2138bb9d5e8e469e3856e26bc4cc07a86900",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/decision.json",
+      "sha256": "b0b1ea0e97d093e66cf786cf5bfb0f1c640cfc6e07698f714b45dca232576c34",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/harness_config.json",
+      "sha256": "2f17520b9b58b6dba6c262cdcd66f48e124178e4c8b94af6868087b62464719e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/provisioning_receipt.json",
+      "sha256": "d6b258fbbb9c0fb8c6038b2ad8b75d34999a619ec411372ab65d3ca05e0be38a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/model_receipts.json",
+      "sha256": "3536c4a4722ee5a4ecd369abc403c022422ec880c890f292ba7d63b5bdf9f0b0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/harness_config.json",
+      "sha256": "2945f5fecf85ee16e469a1fb7b85ebf555b1085bde3bc9b683dbb84ae840a813",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/provisioning_receipt.json",
+      "sha256": "17e5a4262ad9b72e7d4146dbba715d01f2e7ea296b865d65d2441eeeb9d97e48",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/model_receipts.json",
+      "sha256": "34c1d78571e08752ff8b798656f0c74195e0462100b938ae5703599739f5f8b2",
+      "role": "raw"
+    }
+  ],
+  "notes": [
+    "The GGUF bodies were downloaded to /tmp/opencode/gguf (ephemeral, outside the repo); their observed bytes/sha256/fingerprints are recorded in raw/provisioning_evidence.json.",
+    "Content-identity repair succeeded: observed served-body sha256 equals the frozen served_body_sha256 pins (= HF tree-API lfs.oid), so the parent's metadata-vs-body mismatch did not recur.",
+    "No hosted provider was invoked; the census is credential/reachability only (no API keys were present)."
+  ]
+}
