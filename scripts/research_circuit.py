@@ -17,7 +17,7 @@ def parse_utc(value: str) -> datetime:
 
 
 def circuit_decision(state: dict, control_revision: str, now: datetime | None = None,
-                     threshold: int = 3, cooldown_hours: int = 6) -> tuple[bool, str]:
+                     threshold: int = 3, cooldown_hours: int = 24) -> tuple[bool, str]:
     if int(state.get("same_failure_count") or 0) < threshold:
         return False, "below repeated-failure threshold"
     if state.get("last_failure_control_revision") != control_revision:
@@ -41,7 +41,7 @@ def main() -> None:
     parser.add_argument("--state-json", required=True)
     parser.add_argument("--control-rev", required=True)
     parser.add_argument("--threshold", type=int, default=3)
-    parser.add_argument("--cooldown-hours", type=int, default=6)
+    parser.add_argument("--cooldown-hours", type=int, default=24)
     args = parser.parse_args()
     if args.threshold < 1 or args.cooldown_hours < 1:
         parser.error("threshold and cooldown-hours must be positive")
