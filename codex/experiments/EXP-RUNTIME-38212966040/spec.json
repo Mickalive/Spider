@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "title": "Net end-to-end product-counter economics of signal-driven local repair vs cold re-derivation for the shipped parameterized carrier, on a fetch-scarce credential-free substrate, under the mandate's reused-probe semantics (does reuse remove the ~5.3% product-counter regression at L=2 and L=3, or is the regression intrinsic?)",
+  "experiment_id": "EXP-RUNTIME-38212966040",
+  "lane": "runtime",
+  "claim_ids": ["C-DELTA-REPAIR"],
+  "dependency_claim_ids": ["C-PRODUCT-ECON", "C-MEAS-VALID", "C-PARAM-INHERIT", "C-FRESHNESS"],
+  "question": "On a credential-free, locally served, perturbable HTTP substrate engineered so that network fetches - not model calls - are the scarce accounting resource, with the shipped parameterized carrier held fixed (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify) and the freshness-guard probe observation reused so retrieval/verification are not double-charged: does signal-driven local repair achieve a net end-to-end cost per successful task strictly below cold re-derivation under the registered equal-weight product counter (ratio < 1.00 at L=2 and L=3), or is the observed ~5.3% product-counter regression at L=3 (and >1.0 at L=2) intrinsic to localized repair, such that local repair must be dropped from the product story before the flagship benchmark is funded?",
+  "hypothesis": "H1 (functional): after a single LOCAL perturbation of one resource segment, reuse-based signal-driven local repair of the SHIPPED parameterized mechanism restores correct end-to-end success on the perturbed resource at rate >= 0.80 per class (Wilson 95% lower bound >= 0.60), with the deterministic guard firing on >= 0.80 of perturbed trials, for all three classes P1-ENDPOINT, P2-STRUCTURE, P3-PERMISSION. H2 (locality): the repair's write set is localized to the single perturbed mechanism (write_set_max <= 1) and behavioural contamination of the four unaffected resources is <= 0.10, while the deliberately over-broad all-mechanism rewrite (NC-OVERBROAD-REPAIR) is detected as contaminated. H3 (cost, the mandate's strict claim): under the mandate's reuse semantics the repair product-counter ratio is STRICTLY below 1.00 at BOTH L=2 and L=3 and the network-fetch ratio is <= 0.90. H4 (accounting-artifact test): the prior separate-guard-probe + full-batch system (T-REPAIR-LEGACY), measured on the SAME substrate and SAME cold baseline, reproduces the prior product-counter regression (ratio > 1.00 at L=2), confirming the substrate/carrier reproduce the prior regime so any verdict difference is attributable to the repair system and its accounting.",
+  "falsifier": "The experiment is a valid negative for the mandate's strict cost claim if, with H1 and H2 satisfied on every class, the repair product-counter ratio under the reuse semantics is >= 1.00 at L=2 OR at L=3 (the strict win is not achieved at the carrier's minimum viable re-derivation budget), or if the network-fetch ratio exceeds 0.90. A repair that is functional and local but only break-even or network-only-cheaper is MIXED (a trade-off), not a strict support. A repair that contaminates unaffected segments, whose guard fails to fire, or whose cold / literal-replay / no-repair baselines are not live is MEASUREMENT_INVALID or FALSIFIES and must never be reported as a positive.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "type": "cost_baseline_primary",
+      "description": "Cold re-derivation: one discovery probe fetch + L=3 fresh observation fetches over LEARN_IDS=[11,12,13], distill_parameterized -> resolve -> execute -> verify the 5 TASK_IDS=[14,15,16,17,18]. This is the mandate's strong comparator and the ONLY cost denominator.",
+      "expected_outcome": "task success 1.0 on unperturbed resources (V5 gate >= 0.90); cold product counter = 3n + 1 + L = 19 at L=3 over the equal-weight registered counter {http_requests, retrieval_calls, verification_calls, repair_attempts}.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/prereg.md", "src/spider/kernel.py"]
+    },
+    {
+      "id": "B-COLD-MIN",
+      "type": "cost_baseline_sensitivity",
+      "description": "Identical to B-COLD but L=2 (LEARN_IDS_MIN=[11,12]), the carrier's minimum viable re-derivation. Mandate decision bar L=2.",
+      "expected_outcome": "cold product counter = 18 at L=2.",
+      "evidence_refs": ["src/spider/kernel.py"]
+    },
+    {
+      "id": "B-COLD-DEEP",
+      "type": "cost_baseline_sensitivity",
+      "description": "Identical to B-COLD but L=4 (LEARN_IDS_DEEP=[10,11,12,13]).",
+      "expected_outcome": "cold product counter = 20 at L=4.",
+      "evidence_refs": ["src/spider/kernel.py"]
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "type": "mechanism_control_must_fail",
+      "description": "Replay the inherited (unrepaired) parameterized mechanism on the perturbed target. Establishes the perturbation actually bites (V4).",
+      "expected_outcome": "success <= 0.10 on every class; if it succeeds the perturbation did not bite -> MEASUREMENT_INVALID.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/result.json"]
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "type": "abstention_control_must_fail",
+      "description": "Guard detects staleness but the system abstains from repair. Non-executing; NEVER a cost denominator (V6).",
+      "expected_outcome": "success <= 0.10; else MEASUREMENT_INVALID.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/result.json"]
+    },
+    {
+      "id": "T-REPAIR-REUSE",
+      "type": "treatment",
+      "description": "Freshness check fused into the first task read; after repair the reused probe observation is charged once (one repair_attempts, one repair probe fetch, one post-repair verify of the live body); first task id NOT re-resolved/re-fetched/re-verified.",
+      "expected_outcome": "product counter = 17 (reuse) vs cold 18/19, i.e. ratio ~0.944 at L=2 and ~0.895 at L=3, fetch ratio ~0.667-0.75.",
+      "evidence_refs": ["src/spider/kernel.py"]
+    },
+    {
+      "id": "T-REPAIR-CONSERVATIVE",
+      "type": "system_sensitivity_upper_bound",
+      "description": "Same reuse semantics plus one carrier rebind (charges +1 retrieval_calls). Upper bound on repair cost; bounds dependence on not re-resolving.",
+      "expected_outcome": "product counter = 18 (ratio 1.0 at L=2, ~0.947 at L=3).",
+      "evidence_refs": ["src/spider/kernel.py"]
+    },
+    {
+      "id": "T-REPAIR-LEGACY",
+      "type": "replication_control",
+      "description": "Prior system: separate guard probe read before the batch, and full task batch re-executed after repair.",
+      "expected_outcome": "product counter = 20 -> ratio ~1.111 at L=2 and ~1.053 at L=3, reproducing the prior regression (V13).",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/result.json", "research/experiments/EXP-GRAPH-38197849043/prereg.md"]
+    }
+  ],
+  "positive_control": {
+    "id": "PC-BASE-LIVENESS",
+    "type": "positive_control_suite",
+    "success_criterion": "pre-perturbation every learned mechanism resolves EXECUTABLE and its first task read verifies (design probe: server_ready=true, distill_live=true, task_read_verified=true).",
+    "members": [
+      {
+        "id": "PC-BASE-LIVENESS",
+        "protocol": "Boot the local substrate, distill the mechanism from LEARN_IDS=[11,12,13] via the shipped distill_parameterized, resolve+fetch+verify one TASK_ID against the live server.",
+        "success_criterion": "resolve status EXECUTABLE and verify True",
+        "failure_policy": "failure -> MEASUREMENT_INVALID (carrier/substrate not live), never a scientific negative."
+      }
+    ]
+  },
+  "null_control": {
+    "id": "NC-NO-PERTURBATION+NC-NOISE",
+    "type": "negative_controls",
+    "protocol": "NC-NO-PERTURBATION: run the guard on an unperturbed live body (stale must be false). NC-NOISE: inject non-semantic observed_at churn outside the mechanism's postcondition paths (stale must be false). NC-OVERBROAD-REPAIR: apply the target's repaired postconditions to ALL mechanisms; the contamination metric must flag the genuine semantic breakage.",
+    "success_criterion": "NC-NO-PERTURBATION stale=false AND NC-NOISE stale=false; NC-OVERBROAD-REPAIR contamination rate > 0.10",
+    "failure_policy": "any false-firing guard -> guard not sensitive -> MEASUREMENT_INVALID."
+  },
+  "measurement_validity": [
+    "Frozen runner identity: the executable decision path is embedded verbatim in prereg.md section 12; EXECUTE extracts it byte-for-byte and it must hash to CANONICAL-RUNNER-SHA256 (2c96e57971d21c3396ca0392ee0617ec0a382ad27e3a0c109b39cd9d1723a88c). Mismatch -> MEASUREMENT_INVALID.",
+    "Carrier identity: the shipped carrier (src/spider/kernel.py, src/spider/models.py, src/spider/registry.py) is a freeze_artifact and is held fixed; EXECUTE re-verifies its sha256. Counter semantics are physical: every fetch +1 http_requests; every resolve (rebind calls resolve) +1 retrieval_calls; every verify +1 verification_calls; repair_attempts charged once per repair.",
+    "Substrate isolation: Python 3.12 stdlib only (ThreadingHTTPServer, localhost ephemeral port); no LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL; therefore no model call exists and fetches are the scarce accounting resource.",
+    "Registry isolation: a fresh per-run registry directory is created so no cross-run mechanism state leaks between arms or trials.",
+    "Identifier disjointness: TASK_IDS=[14,15,16,17,18] are disjoint from LEARN_IDS=[11,12,13]; both lie in the carrier-inferred support ^1[0-9]{1}$, so a re-derivation's observation reads are genuine acquisition reads, never a double-charge of a task read.",
+    "Physical accounting only: the only difference between T-REPAIR-REUSE and T-REPAIR-LEGACY is the number of physical resolve/fetch/verify operations performed for the first task id; no cost is added post hoc.",
+    "Thresholds are preregistered and not fitted: PRODUCT_COST_BAR=1.00, FETCH_COST_BAR=0.90 are the mandate's semantics; PRODUCT_COST_MAX=1.15 is an a priori 15% materiality band; LEGACY_REGRESSION_FLOOR=1.00 is the prior verdict's sign. No scored cost was used to choose any threshold.",
+    "Determinism: fixed seeds (SEED = origin_github_run_id 38212966040 % 2**32; per-trial seeds derived deterministically) and no wall-clock/port in output; two independent --mechanics-only runs must be byte-identical (V3).",
+    "n controlled: TRIALS_PER_CLASS=12 with rotating targets users/posts/comments.",
+    "Representation loss: the substrate is a simplified JSON API, not real websites; conclusions are about carrier/counter economics on this substrate, not real-web generalization. The cold denominator is cold re-derivation of the SAME carrier, not an external tool; external cost numbers are out of scope.",
+    "Scope bound: this packet does not execute the gated C-PRODUCT-ECON flagship benchmark and does not mutate any cross-lane claim status; it produces decision inputs for the Runtime DIRECTOR."
+  ],
+  "decision_rule": "OUTCOME in {SUPPORTS, FALSIFIES, MIXED, INCONCLUSIVE}. Per class c in {P1-ENDPOINT,P2-STRUCTURE,P3-PERMISSION} with n>=12 valid trials: functional_ok := repair_success >= 0.80 AND repair_success_wilson_lower >= 0.60 AND contamination_rate <= 0.10 AND write_set_max <= 1 AND guard_fire_rate >= 0.80. cost_verdict (first match wins): FUNCTIONAL-FAIL if not functional_ok; STRICT-WIN if pr_L2 < 1.00 AND pr_L3 < 1.00 AND fetch_ratio_L3 <= 0.90; BOUNDED-WIN if pr_L2 <= 1.00 AND pr_L3 <= 1.00 AND fetch_ratio_L3 <= 0.90; MIXED-TRADEOFF if max(pr_L2,pr_L3) <= 1.15 AND fetch_ratio_L3 <= 0.90; COST-FAIL otherwise; COST-UNKNOWN if the cold baseline is not live. where pr_L2 = mean(reuse product)/mean(cold L=2 product), pr_L3 = mean(reuse product)/mean(cold L=3 product), fetch_ratio_L3 = mean(reuse http)/mean(cold http) at L=3, all over the equal-weight registered counter. AGGREGATE (first match wins): (1) any class invalid (cold<0.90, literal>0.10, no-repair>0.10, negative-control not fresh, n<12, invalid trial) -> MEASUREMENT_INVALID, outcome=INCONCLUSIVE; (2) all classes STRICT-WIN -> outcome=SUPPORTS; (3) all classes in {STRICT-WIN,BOUNDED-WIN} -> outcome=SUPPORTS (bounded); (4) all classes in {STRICT-WIN,BOUNDED-WIN,MIXED-TRADEOFF} -> outcome=MIXED; (5) some class positive/neutral -> outcome=MIXED; (6) otherwise -> outcome=FALSIFIES. SYSTEM CONTROLS (reported, NOT in classifier): M-PRODUCT-RATIO-CONSERVATIVE-L2/L3 (upper bound) and M-PRODUCT-RATIO-LEGACY-L2/L3 (must reproduce >1.00 at L=2, else V13 caveat). PACKET MAPPING: SUPPORTS/FALSIFIES/MIXED -> result.status=COMPLETE; MEASUREMENT_INVALID -> result.status=MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If STRICT-WIN holds at both L=2 and L=3 (outcome SUPPORTS): the prior ~5.3% product-counter regression is a removable accounting overhead of the repair path, not an intrinsic tax on localized repair; signal-driven local repair earns a positive maintenance cost term and may enter the product story for the shipped carrier, and the flagship C-PRODUCT-ECON benchmark can be funded with localized repair included rather than excluded. Whether C-DELTA-REPAIR advances from EXPERIMENTAL remains a DIRECTOR adjudication.",
+  "product_consequence_negative": "If the reuse surface still shows ratio >= 1.00 at L=2 or L=3 (outcome FALSIFIES/MIXED): the product-counter regression is intrinsic to localized repair at the carrier's viable re-derivation budgets; local repair is network-cheaper but not product-counter-cheaper, so it must be dropped from the product story (or only used where fetches are the sole scarce resource) before the flagship benchmark is funded. This is a concrete product decision either way.",
+  "estimated_cost": "CPU-only, stdlib-only, no downloads and no external API spend. EXECUTE runs 3 classes x 12 trials x (reuse + conservative + legacy + cold + cold-min + cold-deep + literal + no-repair) on an in-process localhost server: ~10-40 minutes wall clock, negligible memory. No credential, model, browser or network dependency exists.",
+  "expected_information_gain": "High and decision-changing in both directions. The prior audited packet (EXP-GRAPH-38197849043, MIXED-TRADEOFF) left the exact fork: intrinsic vs removable. This experiment measures it directly with the same shipped carrier, the same substrate class, a frozen reuse semantics, three repair systems, cold budgets L=2/3/4, and a replication control that must reproduce the prior regression. Positive falsifies 'intrinsic'; negative confirms 'intrinsic' and drops local repair from the product story. Neither branch is available from any existing packet, and cheap non-outcome probes confirm the whole rule is satisfiable and reachable.",
+  "metrics_stable_ids": [
+    "M-REPAIR-SUCCESS",
+    "M-REPAIR-SUCCESS-WILSON-LOWER",
+    "M-CONSERVATIVE-SUCCESS",
+    "M-LEGACY-SUCCESS",
+    "M-COLD-SUCCESS",
+    "M-LITERAL-REPLAY-SUCCESS",
+    "M-NO-REPAIR-SUCCESS",
+    "M-GUARD-FIRE-RATE",
+    "M-CONTAMINATION-RATE",
+    "M-WRITE-SET-MAX",
+    "M-COST-REPAIR-REUSE-PRODUCT",
+    "M-COST-REPAIR-CONSERVATIVE-PRODUCT",
+    "M-COST-REPAIR-LEGACY-PRODUCT",
+    "M-COST-COLD-PRODUCT",
+    "M-PRODUCT-RATIO-REUSE-L2",
+    "M-PRODUCT-RATIO-REUSE-L3",
+    "M-PRODUCT-RATIO-REUSE-L4",
+    "M-PRODUCT-RATIO-CONSERVATIVE-L2",
+    "M-PRODUCT-RATIO-CONSERVATIVE-L3",
+    "M-PRODUCT-RATIO-LEGACY-L2",
+    "M-PRODUCT-RATIO-LEGACY-L3",
+    "M-COST-FETCH-RATIO-L3",
+    "M-LEGACY-REGRESSION-REPRODUCED",
+    "M-NC-NO-PERTURBATION-STALE",
+    "M-NC-NOISE-STALE"
+  ],
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The frozen pure classifier (cost_verdict + aggregate) was driven with synthetic rows at DESIGN time (non-substrate, non-outcome-bearing, --reachability-probe) and produced every class branch {STRICT-WIN, BOUNDED-WIN, MIXED-TRADEOFF, COST-FAIL, FUNCTIONAL-FAIL, COST-UNKNOWN} and every aggregate decision {SUPPORTS, SUPPORTS-BOUNDED, MIXED-TRADEOFF, MIXED, FALSIFIES, INCONCLUSIVE}; all_class_branches_reachable=true and all_aggregate_branches_reachable=true. No branch is shadowed: the aggregate precedence falls through from positive to negative tiers in order, and MEASUREMENT_INVALID is reachable via any V-gate. The substantive positive branch is also realizable on this system: with repair product 17 and cold 18/19 the reuse ratios are ~0.944/~0.895 at L=2/L=3, i.e. STRICT-WIN; the negative/neutral branches are realizable if the repair path necessarily re-resolves (the T-REPAIR-CONSERVATIVE surface yields 1.0/~0.947). The classifier is therefore satisfiable, non-tautological with respect to this system, and its outcomes are empirically open.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-12"]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are verified at DESIGN time. (a) Python 3.12 stdlib only; the shipped carrier imports cleanly (src/spider/kernel.py compiles and executes). (b) The DESIGN liveness probe (--liveness-only, non-outcome-bearing) returned server_ready=true, distill_live=true, task_read_verified=true, nc_no_perturbation_stale=false, nc_noise_stale=false; the mechanism distills from LEARN_IDS and resolves EXECUTABLE on TASK_IDS under the inferred support ^1[0-9]{1}$. (c) The carrier counter surface (TrajectoryCounters.add) is confirmed to exist. (d) No external task bank/dataset/fixture is read; the substrate is built inside the frozen runner. (e) The repair-signal unit probe (--reachability-probe) produced a patch for all three classes from synthetic signals. No confirmatory/outcome-bearing measurement was run during DESIGN.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8", "src/spider/kernel.py"]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The cost denominator is fixed in advance to B-COLD (cold re-derivation of the SAME carrier), never the B-NO-REPAIR abstention and never the fetch ratio quoted alone. B-COLD is strong (success 1.0 expected, V5>=0.90) and distinct from the treatment which shares the same carrier, substrate, seeds and perturbations, differing only in the physical number of resolve/fetch/verify operations for the first task id. T-REPAIR-CONSERVATIVE and T-REPAIR-LEGACY are controls/sensitivities, explicitly excluded from the classifier, so they cannot silently become comparators. The treatment/comparator identity is therefore well defined.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/prereg.md", "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-6"]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Distinct, non-tautological controls cover each failure mode. Positive: PC-BASE-LIVENESS (observed true in the DESIGN probe). Perturbation-bites: B-LITERAL-REPLAY must fail (<=0.10); the prior audited packet showed literal replay fails on perturbed resources while cold repair succeeds 12/12. Abstention: B-NO-REPAIR must fail. Guard-specificity: NC-NO-PERTURBATION and NC-NOISE must NOT fire (observed false/False in the DESIGN liveness probe), while the deterministic guard must fire >=0.80 on perturbed trials. Over-broad: NC-OVERBROAD-REPAIR must be detected as contaminated. Replication: T-REPAIR-LEGACY must reproduce the prior >1.00 at L=2 (V13), which certifies the substrate/carrier reproduce the prior regime; a failure is reported as a caveat, not hidden. No control contains the answer supplied to the treatment.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38197849043/result.json#controls", "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-6", "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8"]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm is structurally capable of becoming EXECUTABLE. It uses the same shipped carrier that the DESIGN liveness probe executed end-to-end (distill -> resolve EXECUTABLE -> fetch 200 -> verify True), and the synthetic repair-signal probe showed local_repair produces a patch and a probe body for all three perturbation signals. The prior audited packet showed this carrier's repair succeeds 12/12 on perturbed resources with contamination 0/48. The mandate's reuse semantics do not weaken liveness (they only reduce the charged operations). Self-attack recorded: (i) if the repair routine mis-parses a live signal the class falls to FUNCTIONAL-FAIL, which is a reportable outcome, not a design break; (ii) if the carrier's inferred support rejected the task ids, resolve would EXPLORE and no trial would execute, so the DESIGN liveness probe explicitly verifies a task read resolves+verifies under the current banks (fixed by using TASK_IDS in-support; verified true); (iii) the treatment's advantage depends on the repair not being forced to re-resolve - this is bounded and disclosed by the T-REPAIR-CONSERVATIVE surface.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8", "research/experiments/EXP-GRAPH-38197849043/result.json"]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local code dependency whose identity can change the interpretation is listed in spec.freeze_artifacts and hashed at freeze time: the shipped carrier modules src/spider/kernel.py (counter/treatment semantics), src/spider/models.py (Mechanism/Observation/Resolution semantics) and src/spider/registry.py (read/upsert/invalidate; locality). The executable decision path is embedded verbatim in prereg.md section 12 and bound by CANONICAL-RUNNER-SHA256 plus freeze.json.hashes.prereg.md. No external task bank, dataset or fixture is read (the substrate is constructed inside the runner), so the list is complete; there is no unbound outcome-relevant local artifact.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/spec.json#freeze_artifacts", "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-10"]
+    }
+  },
+  "freeze_artifacts": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ]
+}

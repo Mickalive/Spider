@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38212966040",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The frozen pure classifier (cost_verdict + aggregate) was driven with synthetic rows at DESIGN time (--reachability-probe) and produced every class branch {STRICT-WIN, BOUNDED-WIN, MIXED-TRADEOFF, COST-FAIL, FUNCTIONAL-FAIL, COST-UNKNOWN} and every aggregate decision {SUPPORTS, SUPPORTS-BOUNDED, MIXED-TRADEOFF, MIXED, FALSIFIES, INCONCLUSIVE}; all_class_branches_reachable=true and all_aggregate_branches_reachable=true. No branch is shadowed: the aggregate precedence falls through from positive to negative tiers in order, and MEASUREMENT_INVALID is reachable via any V-gate. The substantive positive branch (STRICT-WIN) is realizable on this system: the mechanics probe yields repair product=17 vs cold 18/19 at L=2/L=3 (ratios ~0.944/~0.895). The negative/neutral branches are realizable if the repair path necessarily re-resolves (T-REPAIR-CONSERVATIVE yields 1.0/~0.947). The classifier is satisfiable, non-tautological, and empirically open.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-12",
+        "reachability_probe_output: all_class_branches_reachable=true, all_aggregate_branches_reachable=true"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified at DESIGN time. (a) Python 3.12 stdlib only; the shipped carrier imports cleanly (src/spider/kernel.py, models.py, registry.py compile and execute). (b) The DESIGN liveness probe (--liveness-only) returned server_ready=true, distill_live=true, task_read_verified=true, nc_no_perturbation_stale=false, nc_noise_stale=false; the mechanism distills from LEARN_IDS and resolves EXECUTABLE on TASK_IDS under the inferred support ^1[0-9]{1}$. (c) The carrier counter surface (TrajectoryCounters.add with fields {http_requests, retrieval_calls, verification_calls, repair_attempts}) is confirmed to exist and operate. (d) No external task bank/dataset/fixture is read; the substrate is built inside the frozen runner. (e) The repair-signal unit probe (--reachability-probe.repair_signal_probe) produced a patched mechanism and probe body for all three perturbation classes (P1, P2, P3). No confirmatory/outcome-bearing measurement was run during DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8",
+        "liveness_probe_output: server_ready=true, distill_live=true, task_read_verified=true",
+        "repair_signal_probe_output: all three classes patched=true"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The cost denominator is fixed in advance to B-COLD (cold re-derivation of the SAME carrier), never the B-NO-REPAIR abstention and never the fetch ratio quoted alone. B-COLD is strong (success 1.0 expected, V5>=0.90) and distinct from the treatment which shares the same carrier, substrate, seeds and perturbations, differing only in the physical number of resolve/fetch/verify operations for the first task id. T-REPAIR-CONSERVATIVE and T-REPAIR-LEGACY are controls/sensitivities, explicitly excluded from the classifier, so they cannot silently become comparators. The treatment/comparator identity is therefore well defined and identifiable.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-6",
+        "mechanics_probe_output: cold product=19 at L=3, repair product=17, literal_replay=false"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Distinct, non-tautological controls cover each failure mode and were observed in the mechanics probe: Positive control PC-BASE-LIVENESS (task_read_verified=true). Perturbation-bites control B-LITERAL-REPLAY must fail (<=0.10); mechanics probe shows literal_success=false on all three classes. Abstention control B-NO-REPAIR must fail; mechanics probe shows norepair_success=false. Guard-specificity controls NC-NO-PERTURBATION and NC-NOISE must NOT fire (observed stale=false/false in both liveness and mechanics probes), while the deterministic guard must fire >=0.80 on perturbed trials (mechanics probe: repair_guard_fired=true on all three). Over-broad control NC-OVERBROAD-REPAIR must be detected as contaminated (mechanics probe shows contamination_n=0 for targeted repair; overbroad contamination will be measured at n=12). Replication control T-REPAIR-LEGACY must reproduce the prior >1.00 at L=2 (mechanics probe: legacy product=20 vs cold_min=18, ratio=1.111 > 1.00). No control contains the answer supplied to the treatment.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/result.json#controls",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-6",
+        "mechanics_probe_output: literal_success=false, norepair_success=false, nc_no_perturbation_stale=false, nc_noise_stale=false, legacy_ratio_L2=1.111"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm (T-REPAIR-REUSE) is structurally capable of becoming EXECUTABLE. It uses the same shipped carrier that the DESIGN liveness probe executed end-to-end (distill_parameterized -> resolve EXECUTABLE -> fetch 200 -> verify True), and the synthetic repair-signal probe showed local_repair produces a patched mechanism and probe body for all three perturbation signals. The mechanics probe confirms repair_success=true, conservative_success=true, legacy_success=true, guard_fired=true, contamination_n=0 on all three classes. The prior audited packet (EXP-GRAPH-38197849043, audit PASS) showed this carrier's repair succeeds 12/12 on perturbed resources with contamination 0/48. The mandate's reuse semantics do not weaken liveness (they only reduce the charged operations). Self-attack recorded: (i) if the repair routine mis-parses a live signal the class falls to FUNCTIONAL-FAIL, which is a reportable outcome, not a design break; (ii) if the carrier's inferred support rejected the task ids, resolve would EXPLORE and no trial would execute, so the DESIGN liveness probe explicitly verifies a task read resolves+verifies under the current banks (TASK_IDS in-support; verified true); (iii) the treatment's advantage depends on the repair not being forced to re-resolve - this is bounded and disclosed by the T-REPAIR-CONSERVATIVE surface.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-8",
+        "research/experiments/EXP-GRAPH-38197849043/result.json",
+        "mechanics_probe_output: repair_success=true on all three classes, guard_fired=true, contamination_n=0"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local code dependency whose identity can change the interpretation is listed in spec.freeze_artifacts and will be hashed at freeze time: the shipped carrier modules src/spider/kernel.py (treatment identity and counter semantics), src/spider/models.py (Mechanism/Observation/Resolution semantics) and src/spider/registry.py (registry read/upsert/invalidate semantics; locality). The executable decision path is embedded verbatim in prereg.md section 12 (between BEGIN/END FROZEN-RUNNER markers) and will be bound by CANONICAL-RUNNER-SHA256 plus freeze.json.hashes.prereg.md. No external task bank, dataset or fixture is read (the substrate is constructed inside the runner with fixed identifier banks and perturbation logic), so the list is complete; there is no unbound outcome-relevant local artifact.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#freeze_artifacts",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-10",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md#section-12"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The base_liveness diagnostic in the mechanics probe reads 'false' because the unaffected_behavior check uses a hardcoded id='1' which falls outside the inferred support ^1[0-9]{1}$ (requires exactly one digit after '1'). This is a diagnostic artifact only; the actual positive control (V12) uses TASK_IDS[0]=14 which is in-support and verified executable (task_read_verified=true in liveness probe). No validity threat.",
+    "The CANONICAL-RUNNER-SHA256 declared in prereg.md (2c96e57971d21c3396ca0392ee0617ec0a382ad27e3a0c109b39cd9d1723a88c) does not match the current extracted runner hash (fc150d1a95fb600b0eae08e821b367968ab99e1a99d843361a61ba5cbcb2f6b5). This is expected pre-freeze; the canonical hash will be computed and written at freeze time. EXECUTE gate V1-FREEZE_BINDING will enforce the match."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is reachable in all branches, all measurement prerequisites are satisfied with stdlib-only infrastructure, the strong baseline (B-COLD) is identifiable and distinct from the treatment, controls are sensitive and non-tautological, the treatment is live and executable, and all mutable interpretation dependencies are bound in freeze_artifacts. The mechanics probe confirms the expected cost arithmetic: T-REPAIR-REUSE product=17 vs B-COLD 18 (L=2) and 19 (L=3), yielding ratios ~0.944 and ~0.895 (STRICT-WIN achievable), while T-REPAIR-LEGACY reproduces the prior regression (ratio 1.111 at L=2). The experiment is ready to freeze.",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "liveness_probe_output",
+    "reachability_probe_output",
+    "mechanics_probe_output",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ]
+}

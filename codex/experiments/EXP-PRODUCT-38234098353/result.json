@@ -1,0 +1,1461 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38234098353",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "decision": "SCORED_ADEQ_CERT_SAFE_AND_EXPANSIVE",
+  "claim_ids": [
+    "C-PARAM-INHERIT"
+  ],
+  "metrics": {
+    "M-T-FALSE-ACCEPT-COUNT": 0,
+    "M-T-HTTP-ON-OUT-COUNT": 0,
+    "M-T-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-T-COVERAGE": 1.0,
+    "M-T-COVERAGE-DELTA-VS-SHIPPED": 0.5454545454545454,
+    "M-T-BOUNDARY-FALSE-ACCEPT-COUNT": 3,
+    "M-T-CERTIFIED-COUNT": 5,
+    "M-T-PROV-REFUSED-COUNT": 1,
+    "M-T-ADEQ-REFUSED-COUNT": 2,
+    "M-B-SHIPPED-COVERAGE": 0.45454545454545453,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-B-ORACLE-COVERAGE": 1.0,
+    "M-B-ORACLE-FALSE-ACCEPT-COUNT": 0,
+    "M-A-NO-ADEQ-FALSE-ACCEPT-COUNT": 6,
+    "M-A-NO-PROV-FALSE-ACCEPT-COUNT": 3,
+    "M-A-NO-GROW-FALSE-ACCEPT-COUNT": 9,
+    "M-C-FIAT-FALSE-ACCEPT-COUNT": 6,
+    "M-C-FIAT-OVER-FALSE-ACCEPT-COUNT": 3,
+    "M-C-FROZEN-FALSE-ACCEPT-COUNT": 18,
+    "M-A-RAW-FALSE-ACCEPT-COUNT": 18,
+    "M-A-WITHHOLD-FALSE-ACCEPT-COUNT": 0,
+    "M-A-WITHHOLD-COVERAGE": 0.45454545454545453,
+    "M-COVERAGE-IN-ITEMS": 44,
+    "M-CERT-ADMITS-SOUND-COUNT": 4,
+    "M-CERT-REFUSES-PROBEABLE-COUNT": 3,
+    "M-MECHANISM-COUNT": 11,
+    "M-REG-PROV-SCORES": {
+      "O1": 1.0,
+      "O2": 1.0,
+      "O3": 1.0,
+      "O4": 1.0,
+      "O5": 0.25,
+      "O6": 0.25
+    },
+    "M-INFERRED-ALLOWLIST": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ],
+    "M-ADEQUACY-CLASSIFIED": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true,
+      "B6": true,
+      "B7": false,
+      "B8": false,
+      "B9": true,
+      "B10": true,
+      "B11": true
+    },
+    "M-REGRESSION-TESTS-RUN": 3,
+    "M-T-INDUCED-SUPPORTS": {
+      "B1": "^txn\\-00[0-9]{1}$",
+      "B2": "^usr\\-[a-z]{3}$",
+      "B3": "^ord\\-00[0-9]{1}$",
+      "B4": "^shp\\-[a-z]{3}$",
+      "B5": "^inv\\-00[0-9]{1}$",
+      "B6": "^shl\\-[a-z]{3}$",
+      "B7": "^not\\-[a-z]{3}$",
+      "B8": "^rpt\\-[a-z]{3}$",
+      "B9": "^sku\\-000[0-9]{1}$",
+      "B10": "^tkt\\-[a-z]{3}$",
+      "B11": "^wgt\\-000[0-9]{1}$"
+    },
+    "M-SLOTS": {
+      "B1": [
+        "txn"
+      ],
+      "B2": [
+        "usr"
+      ],
+      "B3": [
+        "ord"
+      ],
+      "B4": [
+        "shp"
+      ],
+      "B5": [
+        "inv"
+      ],
+      "B6": [
+        "shl"
+      ],
+      "B7": [
+        "not"
+      ],
+      "B8": [
+        "rpt"
+      ],
+      "B9": [
+        "sku"
+      ],
+      "B10": [
+        "tkt"
+      ],
+      "B11": [
+        "wgt"
+      ]
+    },
+    "M-PROV-SCORES": {
+      "O1": 1.0,
+      "O2": 1.0,
+      "O3": 1.0,
+      "O4": 1.0,
+      "O5": 0.25,
+      "O6": 0.25
+    },
+    "M-DETERMINISM-REPEAT": true
+  },
+  "controls": {
+    "PC-PROV-SCORE-SEPARATES": {
+      "expected": "all trusted origins score 1.0, all untrusted score <= 0.25; inferred allowlist == O1..O4",
+      "observed": {
+        "scores": {
+          "O1": 1.0,
+          "O2": 1.0,
+          "O3": 1.0,
+          "O4": 1.0,
+          "O5": 0.25,
+          "O6": 0.25
+        },
+        "allowlist": [
+          "O1",
+          "O2",
+          "O3",
+          "O4"
+        ]
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-PROV-SCORE-SEPARATES",
+        "spec.json#positive_control.PC-PROV-SCORE-SEPARATES"
+      ]
+    },
+    "PC-PROV-ADMITS-TRUSTED": {
+      "expected": "every trusted-origin bank family is admitted by the inferred allowlist (not PROV_REFUSED)",
+      "observed": [
+        "B9"
+      ],
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-PROV-ADMITS-TRUSTED",
+        "spec.json#positive_control.PC-PROV-ADMITS-TRUSTED"
+      ]
+    },
+    "PC-PROV-REFUSES-UNTRUSTED": {
+      "expected": "B9 (untrusted O5) is withheld by the provenance gate and keeps the induced support",
+      "observed": {
+        "gate": "REFUSED_ORIGIN",
+        "support": "^sku\\-000[0-9]{1}$",
+        "induced": "^sku\\-000[0-9]{1}$"
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-PROV-REFUSES-UNTRUSTED",
+        "spec.json#positive_control.PC-PROV-REFUSES-UNTRUSTED"
+      ]
+    },
+    "PC-PROV-REFUSES-SPARSE": {
+      "expected": "certificate-with-growth WOULD certify B9 (probe misses the budget-sparse token) yet provenance withholds it; A-NO-PROV false-accepts it",
+      "observed": {
+        "cert_would_admit": true,
+        "a_no_prov_B9_fa": 3
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-PROV-REFUSES-SPARSE",
+        "spec.json#positive_control.PC-PROV-REFUSES-SPARSE"
+      ]
+    },
+    "PC-ADEQUACY-CLASSIFIES": {
+      "expected": "detector output equals frozen EXPECTED_ADEQUACY for all 11 families",
+      "observed": {
+        "B1": true,
+        "B2": true,
+        "B3": true,
+        "B4": true,
+        "B5": true,
+        "B6": true,
+        "B7": false,
+        "B8": false,
+        "B9": true,
+        "B10": true,
+        "B11": true
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-ADEQUACY-CLASSIFIES",
+        "spec.json#positive_control.PC-ADEQUACY-CLASSIFIES"
+      ]
+    },
+    "PC-ADEQUACY-DETECTS-INADEQUATE": {
+      "expected": "B7 and B8 flagged INADEQUATE",
+      "observed": {
+        "B7": false,
+        "B8": false
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-ADEQUACY-DETECTS-INADEQUATE",
+        "spec.json#positive_control.PC-ADEQUACY-DETECTS-INADEQUATE"
+      ]
+    },
+    "PC-ADEQUACY-PASSES-ADEQUATE": {
+      "expected": "B1-B6,B9,B10,B11 pass the adequacy detector",
+      "observed": {
+        "B1": true,
+        "B2": true,
+        "B3": true,
+        "B4": true,
+        "B5": true,
+        "B6": true,
+        "B9": true,
+        "B10": true,
+        "B11": true
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-ADEQUACY-PASSES-ADEQUATE",
+        "spec.json#positive_control.PC-ADEQUACY-PASSES-ADEQUATE"
+      ]
+    },
+    "PC-ADEQ-NEEDED": {
+      "expected": "A-NO-ADEQ false-accepts >= 1 (B7/B8 admitted)",
+      "observed": 6,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-ADEQ-NEEDED",
+        "spec.json#positive_control.PC-ADEQ-NEEDED"
+      ]
+    },
+    "PC-PROV-NEEDED": {
+      "expected": "A-NO-PROV false-accepts >= 1 (B9 admitted)",
+      "observed": 3,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-PROV-NEEDED",
+        "spec.json#positive_control.PC-PROV-NEEDED"
+      ]
+    },
+    "PC-GROW-NEEDED": {
+      "expected": "A-NO-GROW false-accepts >= 1 (probeable evaders admitted)",
+      "observed": 9,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-GROW-NEEDED",
+        "spec.json#positive_control.PC-GROW-NEEDED"
+      ]
+    },
+    "PC-CERT-ADMITS-SOUND": {
+      "expected": "all 4 sound declarations CERTIFIED",
+      "observed": "4/4",
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-CERT-ADMITS-SOUND",
+        "spec.json#positive_control.PC-CERT-ADMITS-SOUND"
+      ]
+    },
+    "PC-GROW-CATCHES-PROBEABLE": {
+      "expected": "all 3 probeable evaders REFUSED after growth",
+      "observed": "3/3",
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-GROW-CATCHES-PROBEABLE",
+        "spec.json#positive_control.PC-GROW-CATCHES-PROBEABLE"
+      ]
+    },
+    "PC-INGEST-REFUSED-ABSTAINS": {
+      "expected": "real ingest_declaration refuses B5 and preserves support",
+      "observed": {
+        "status": "REFUSED",
+        "support_preserved": true,
+        "refused": true,
+        "bank_size": 28
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-INGEST-REFUSED-ABSTAINS",
+        "spec.json#positive_control.PC-INGEST-REFUSED-ABSTAINS"
+      ]
+    },
+    "PC-UNSAFE-RAW": {
+      "expected": "A-RAW-DECL false-accepts > 0",
+      "observed": 18,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-UNSAFE-RAW",
+        "spec.json#positive_control.PC-UNSAFE-RAW"
+      ]
+    },
+    "PC-DISCRIMINATION": {
+      "expected": "T FA==0 while C-FIAT-ADEQ FA>0 at equal coverage",
+      "observed": {
+        "T": 0,
+        "C_FA": 6,
+        "T_cov": 1.0,
+        "C_cov": 1.0
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-DISCRIMINATION",
+        "spec.json#positive_control.PC-DISCRIMINATION"
+      ]
+    },
+    "PC-MEASURED-TRUST-DOMINATES-OVERTRUST": {
+      "expected": "a fiat allowlist that over-trusts O5 false-accepts B9 while the MEASURED trust root refuses it",
+      "observed": {
+        "C_over_fa": 3,
+        "T_fa": 0
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-MEASURED-TRUST-DOMINATES-OVERTRUST",
+        "spec.json#positive_control.PC-MEASURED-TRUST-DOMINATES-OVERTRUST"
+      ]
+    },
+    "PC-GROW-MISSES-SPARSE": {
+      "expected": "certificate-with-growth certifies B11 (trusted budget-sparse over-accept)",
+      "observed": {
+        "cert": true
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-GROW-MISSES-SPARSE",
+        "spec.json#positive_control.PC-GROW-MISSES-SPARSE"
+      ]
+    },
+    "BP-TRUSTED-SPARSE-FAILS": {
+      "expected": "T boundary B11 false-accepts >= 1 (irreducible residual)",
+      "observed": 3,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.BP-TRUSTED-SPARSE-FAILS",
+        "spec.json#positive_control.BP-TRUSTED-SPARSE-FAILS"
+      ]
+    },
+    "NC-REJECT-ALL": {
+      "expected": "A-WITHHOLD-ALL accepts no out-of-support value, coverage == B-SHIPPED",
+      "observed": {
+        "fa": 0,
+        "cov": 0.45454545454545453
+      },
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.NC-REJECT-ALL",
+        "spec.json#null_control"
+      ]
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "expected": "two independent runs identical",
+      "observed": true,
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#controls.PC-DETERMINISM-REPEAT",
+        "spec.json#positive_control.PC-DETERMINISM-REPEAT"
+      ]
+    },
+    "PC-REGRESSION": {
+      "expected": "the full tests/ suite passes (tests_run>=3, failures/errors=0) on the unmodified carrier",
+      "observed": "tests_run=3, ok=True, returncode=0",
+      "pass": true,
+      "status": "PASS",
+      "evidence_refs": [
+        "raw_evidence/raw_run_output_run1.json#validity.M-REGRESSION",
+        "raw_evidence/raw_run_output_run1.json#metrics.M-REGRESSION-TESTS-RUN",
+        "spec.json#positive_control.PC-REGRESSION"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/run_scored_adeq.py",
+      "sha256": "26e9fef024309d9c8ef20373786a78d7fc57a6688e8c32adec8843a63a678d47",
+      "role": "code",
+      "note": "FROZEN RUNNER extracted verbatim from prereg.md; raw-byte sha256 equals the declared FROZEN RUNNER source sha256 26e9fef024309d9c8ef20373786a78d7fc57a6688e8c32adec8843a63a678d47"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run1.json",
+      "sha256": "d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5",
+      "role": "raw",
+      "note": "stdout of the frozen command (probe flag inert; V8 in BOUND mode)"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run2.json",
+      "sha256": "d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5",
+      "role": "raw",
+      "note": "second independent process invocation; byte-identical to run1"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run1.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw",
+      "note": "empty stderr (0 bytes) for run1"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run2.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw",
+      "note": "empty stderr (0 bytes) for run2"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/prereg.md",
+      "sha256": "69d60f2f0752d402f0f2cc7db97d8f2f75a7a893938f82af25b0ca138611864f",
+      "role": "fixture",
+      "note": "frozen preregistration; FROZEN RUNNER source and freeze binding"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "role": "code",
+      "note": "SHIPPED carrier invoked unmodified by the treatment (ingest_declaration / certify_declaration)"
+    }
+  ],
+  "observations": [
+    "V8_FREEZE_BINDING PASS in BOUND mode: prereg sha256 matches freeze.json.hashes['prereg.md'], the running runner block is normalized-identical to the prereg block, and all six freeze_artifacts re-hash identically after the run.",
+    "All seven frozen gates PASS: validity_gate, sensitivity_gate, provenance_gate, adequacy_gate, growth_gate, necessity_gate, boundary_gate.",
+    "Induction is identity-valid: M-MECHANISM-COUNT=11, M-SINGLE-SLOT=True, M-CONFIDENCE-0.9=True, M-SUPPORT-IDENTITY=True (all eleven induced supports equal the frozen EXPECTED_INDUCED).",
+    "Measured provenance separates origins: M-REG-PROV-SCORES={O1:1.0,O2:1.0,O3:1.0,O4:1.0,O5:0.25,O6:0.25}; M-INFERRED-ALLOWLIST=['O1','O2','O3','O4'] at tau=0.5, recovering exactly the trusted set without any declared table.",
+    "Adequacy detector is deterministic and matches the frozen EXPECTED_ADEQUACY map: M-ADEQUACY-CLASSIFIED={B7:false,B8:false, all other families true}; B7/B8 (out-of-PROBE_ALPHA [A-Z] alternatives) are flagged INADEQUATE.",
+    "Treatment T-SCORED-ADEQ on within-envelope B1-B10: M-T-FALSE-ACCEPT-COUNT=0, M-T-HTTP-ON-OUT-COUNT=0, M-T-REFUSAL-SEMANTICS-VIOLATIONS=0, M-T-COVERAGE=1.0 (44/44) vs M-B-SHIPPED-COVERAGE=0.4545 (20/44), M-T-COVERAGE-DELTA-VS-SHIPPED=+0.5455, clearing the 0.6750 anchor.",
+    "Arm separation at equal coverage 1.0: C-FROZEN-CERT FA=18, A-RAW-DECL FA=18, A-NO-GROW FA=9, A-NO-ADEQ FA=6, C-FIAT-ADEQ FA=6, A-NO-PROV FA=3, C-FIAT-OVERTRUST FA=3, T-SCORED-ADEQ FA=0.",
+    "Necessity ablations each fire: M-A-NO-ADEQ-FALSE-ACCEPT-COUNT=6, M-A-NO-PROV-FALSE-ACCEPT-COUNT=3, M-A-NO-GROW-FALSE-ACCEPT-COUNT=9; the measured provenance gate withholds B9 (untrusted O5) while A-NO-PROV false-accepts it.",
+    "Measured trust dominates fiat over-trust: C-FIAT-OVERTRUST (allowlist including untrusted O5) false-accepts B9 (FA=3) while the measured trust root refuses B9 (T FA=0); PC-MEASURED-TRUST-DOMINATES-OVERTRUST PASS.",
+    "Certification outcomes on T: B1-B4 CERTIFIED; B5,B6,B10 REFUSED by execution-grounded growth; B7,B8 withheld by the adequacy gate (NONE); B9 withheld by the provenance gate (NONE). M-T-CERTIFIED-COUNT=5, M-T-PROV-REFUSED-COUNT=1, M-T-ADEQ-REFUSED-COUNT=2.",
+    "Refusal semantics preserved: PC-INGEST-REFUSED-ABSTAINS PASS; the real SpiderKernel.ingest_declaration on B5 records REFUSED and leaves the slot support unchanged (M-T-REFUSAL-SEMANTICS-VIOLATIONS=0).",
+    "Boundary B11 (trusted O4, budget-sparse within-alphabet over-accept): certificate-with-growth CERTIFIES it and T false-accepts B11 (M-T-BOUNDARY-FALSE-ACCEPT-COUNT=3); PC-GROW-MISSES-SPARSE and BP-TRUSTED-SPARSE-FAILS both PASS, exhibiting the irreducible probe-reachability residual.",
+    "Null floor A-WITHHOLD-ALL: M-A-WITHHOLD-FALSE-ACCEPT-COUNT=0 and M-A-WITHHOLD-COVERAGE=0.4545 == M-B-SHIPPED-COVERAGE; NC-REJECT-ALL PASS.",
+    "Ceiling/floor calibration: M-B-ORACLE-COVERAGE=1.0 with FA=0; M-B-SHIPPED-FALSE-ACCEPT-COUNT=0; the safety metric is not blind (PC-UNSAFE-RAW fires at FA=18).",
+    "Determinism: the in-process two-run comparison is identical (determinism_repeat_identical=True) across two run_once executions and across two independent process invocations whose full stdout is byte-identical (sha256 d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5).",
+    "Regression: the full tests/ suite passes on the unmodified carrier with tests_run=3, failures/errors=0 (PC-REGRESSION PASS)."
+  ],
+  "validity_notes": [
+    "V1-SUBSTRATE: deterministic, stdlib-only, credential-free; one loopback HTTP oracle on 127.0.0.1 ephemeral port serving bank and provenance-calibration resources; no external network, no model calls, no tokens.",
+    "V2-IDENTITY (V8_FREEZE_BINDING): PASS in BOUND mode; prereg.md sha256 == freeze.json.hashes['prereg.md'], running runner source is normalized-identical to the frozen block, and every freeze_artifacts artifact re-hashes identically after the run.",
+    "V3-CARRIER-IMMUTABLE: src/spider/kernel.py was not modified by this packet and re-hashes to sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3 both before and after the run.",
+    "V4-INDUCTION: for all eleven families the REAL distill_parameterized path yields exactly one parameter slot at confidence 0.9 >= min_confidence 0.8 (M-MECHANISM-COUNT=11, M-SINGLE-SLOT, M-CONFIDENCE-0.9, M-SUPPORT-IDENTITY all True).",
+    "V5-ORACLE-GROUNDED: the negative-bank growth, provenance scoring and evaluation all issue real loopback HTTP GETs; each value's label is defined by the frozen true grammar, independent of the arm's decision.",
+    "V6-DETERMINISM: two independent run_once executions and two independent process invocations produce identical decision-bearing output; no timing metric participates in the decision (the runner emits no latency metric).",
+    "V7-REGRESSION: the full tests/ suite passes on the unmodified carrier (tests_run=3, failures=0, errors=0).",
+    "V8-REFUSAL-SEMANTICS: M-T-REFUSAL-SEMANTICS-VIOLATIONS==0; the real REFUSED certificate never widened the slot support (PC-INGEST-REFUSED-ABSTAINS PASS).",
+    "V9-CEILING/FLOOR: B-ORACLE reaches coverage 1.0 with FA=0; B-SHIPPED and A-WITHHOLD-ALL stay FA=0; the safety metric is calibrated, and PC-UNSAFE-RAW (FA=18) shows the FALSIFIES branch is live.",
+    "V10-REPRESENTATION-LIMITS: the expansion bank, provenance ledgers, adequacy detector and probe space are local synthetic constructions on a loopback oracle with a fixed seed. Results bound THIS bank, THIS ledger, THIS detector and THIS carrier and are NOT an end-to-end external-agent measurement, NOT a general soundness proof and NOT a product-economics measurement.",
+    "V11-ADEQUACY-DETECTOR-CONSERVATISM: the syntactic adequacy detector flags a declaration whose accepted alphabet or length exceeds the probe envelope. On a sound declaration whose true alphabet legitimately exceeds PROBE_ALPHA (e.g. [a-z]) it would withhold a sound declaration, reducing coverage without affecting safety. This packet restricts SOUND grammars to the probe alphabet and therefore does NOT measure that false-positive cost; it is a disclosed representation limit, not a safety hole.",
+    "V12-MEASUREMENT-FAILURE-SEMANTICS: any prerequisite, identity, freeze, regression or gate failure would have been BLOCKED/MEASUREMENT_INVALID, never FALSIFIES. No such failure occurred.",
+    "V13-SCORER-ENDOGENEITY: the provenance score's trust signal is execution-grounded agreement of the shipped certificate with frozen historical truth labels; it is endogenous to the certificate (it measures whether our instruments can verify this origin's history), not an exogenous reputation source. In this construction the inferred allowlist coincides with the correct fiat list {O1,O2,O3,O4}; the demonstrated value of measuring is robustness to an OVER-PERMISSIVE fiat allowlist (C-FIAT-OVERTRUST FA=3 vs measured T FA=0), NOT that measurement beats a correct fiat list. A real deployment would need an independent provenance signal; this packet does not supply one.",
+    "Zero-false-accept is within-envelope by frozen construction (WITHIN_ENVELOPE excludes BOUNDARY B11). B11 is the deliberately reachable closed-world/probe-reachability boundary that DOES fire (T FA=3), so the guarantee is conditional and not general.",
+    "Cost figures are loopback HTTP counts and candidate counts only; real-world provenance/allowlist administration, ledger maintenance and negative-bank acquisition costs were not measured (model_calls=0, model_tokens=0 by construction).",
+    "M-T-COVERAGE is compared same-bank against M-B-SHIPPED-COVERAGE (20/44=0.4545); the absolute 0.6750 constant is the parent's historical shipped-coverage anchor on the frozen seven-family bank, retained only as a floor anchor."
+  ],
+  "unresolved": [
+    "The provenance scorer is endogenous to the certificate and this construction's inferred allowlist coincides with the correct declared list; whether provenance can be measured from an INDEPENDENT (non-certificate) signal remains unmeasured (spec V13).",
+    "Probe-space adequacy is detected only syntactically (alphabet / length / quantifier envelope); a within-alphabet, within-length, budget-sparse over-accept (B9/B11) is not detected and the trusted boundary B11 still false-accepts (T FA=3). Whether a bounded probe space can be made adequate in general remains open.",
+    "The real-world cost/staleness of obtaining and maintaining sound declared grammars, the provenance ledgers and the grown negative bank was not measured (loopback only).",
+    "Whether these results generalize beyond this synthetic eleven-family construction, this fixed seeded probe space, or to non-parameterized declarations is untested.",
+    "The registered C-PARAM-INHERIT next_gate (four-arm COLD/INSTRUCTIONS/RETRIEVAL/SPIDER cost-per-success benchmark on a non-ceiling task bank) remains unmet and is dependency-gated (Runtime B2, Intel B3, NEW mandate); this packet does not address it.",
+    "The syntactic adequacy detector's coverage cost on sound declarations whose true alphabet legitimately exceeds PROBE_ALPHA was not measured (V11)."
+  ],
+  "gates": {
+    "validity_gate": true,
+    "sensitivity_gate": true,
+    "provenance_gate": true,
+    "adequacy_gate": true,
+    "growth_gate": true,
+    "necessity_gate": true,
+    "boundary_gate": true,
+    "v8": {
+      "gate": "V8_FREEZE_BINDING",
+      "status": "PASS",
+      "mode": "BOUND",
+      "checks": {
+        "runner_block": true,
+        "prereg_sha": true,
+        "pyproject.toml": true,
+        "src/spider/__init__.py": true,
+        "src/spider/kernel.py": true,
+        "src/spider/models.py": true,
+        "src/spider/registry.py": true,
+        "tests/test_kernel.py": true
+      }
+    }
+  },
+  "validity": {
+    "M-MECHANISM-COUNT-11": true,
+    "M-SINGLE-SLOT": true,
+    "M-CONFIDENCE-0.9": true,
+    "B-SHIPPED-FA0": true,
+    "B-ORACLE-CEILING": true,
+    "T-REFUSAL-VIOL-0": true,
+    "M-SUPPORT-IDENTITY": true,
+    "M-ADEQ-DETERMINISTIC": true,
+    "M-SPARSE-TOKENS-MISSED": true,
+    "M-REGRESSION": true
+  },
+  "induced_supports": {
+    "B1": "^txn\\-00[0-9]{1}$",
+    "B2": "^usr\\-[a-z]{3}$",
+    "B3": "^ord\\-00[0-9]{1}$",
+    "B4": "^shp\\-[a-z]{3}$",
+    "B5": "^inv\\-00[0-9]{1}$",
+    "B6": "^shl\\-[a-z]{3}$",
+    "B7": "^not\\-[a-z]{3}$",
+    "B8": "^rpt\\-[a-z]{3}$",
+    "B9": "^sku\\-000[0-9]{1}$",
+    "B10": "^tkt\\-[a-z]{3}$",
+    "B11": "^wgt\\-000[0-9]{1}$"
+  },
+  "slots": {
+    "B1": [
+      "txn"
+    ],
+    "B2": [
+      "usr"
+    ],
+    "B3": [
+      "ord"
+    ],
+    "B4": [
+      "shp"
+    ],
+    "B5": [
+      "inv"
+    ],
+    "B6": [
+      "shl"
+    ],
+    "B7": [
+      "not"
+    ],
+    "B8": [
+      "rpt"
+    ],
+    "B9": [
+      "sku"
+    ],
+    "B10": [
+      "tkt"
+    ],
+    "B11": [
+      "wgt"
+    ]
+  },
+  "arms": {
+    "T-SCORED-ADEQ": {
+      "role": "treatment (measured-trust-root + adequacy + growth, real ingest_declaration)",
+      "within_envelope_false_accept_count": 0,
+      "within_envelope_http_on_out_count": 0,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-ADEQ": {
+      "role": "adequacy-necessity ablation",
+      "within_envelope_false_accept_count": 6,
+      "within_envelope_http_on_out_count": 6,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-PROV": {
+      "role": "provenance-necessity ablation",
+      "within_envelope_false_accept_count": 3,
+      "within_envelope_http_on_out_count": 3,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-GROW": {
+      "role": "growth-necessity ablation",
+      "within_envelope_false_accept_count": 9,
+      "within_envelope_http_on_out_count": 9,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-ADEQ": {
+      "role": "incumbent comparator: fiat allowlist + growth, NO adequacy",
+      "within_envelope_false_accept_count": 6,
+      "within_envelope_http_on_out_count": 6,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-OVERTRUST": {
+      "role": "fiat allowlist over-trusting untrusted O5",
+      "within_envelope_false_accept_count": 3,
+      "within_envelope_http_on_out_count": 3,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "role": "frozen-certificate incumbent (empty bank, no provenance, no adequacy)",
+      "within_envelope_false_accept_count": 18,
+      "within_envelope_http_on_out_count": 18,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "role": "unconditional adoption (unsound-adoption ablation)",
+      "within_envelope_false_accept_count": 18,
+      "within_envelope_http_on_out_count": 18,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 3,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-WITHHOLD-ALL": {
+      "role": "null control / MIXED realization (empty allowlist)",
+      "within_envelope_false_accept_count": 0,
+      "within_envelope_http_on_out_count": 0,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 0.45454545454545453,
+      "executed_in": 20,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "role": "safe-but-incomplete floor (no declaration widening)",
+      "within_envelope_false_accept_count": 0,
+      "within_envelope_http_on_out_count": 0,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 0.45454545454545453,
+      "executed_in": 20,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "role": "true-grammar support ceiling",
+      "within_envelope_false_accept_count": 0,
+      "within_envelope_http_on_out_count": 0,
+      "within_envelope_refusal_semantics_violations": 0,
+      "coverage": 1.0,
+      "executed_in": 44,
+      "total_in": 44,
+      "boundary_B11_false_accept_count": 0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "boundary": {
+    "T-SCORED-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-PROV": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-GROW": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-OVERTRUST": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-WITHHOLD-ALL": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "provenance_scores": {
+    "scores": {
+      "O1": 1.0,
+      "O2": 1.0,
+      "O3": 1.0,
+      "O4": 1.0,
+      "O5": 0.25,
+      "O6": 0.25
+    },
+    "allowlist": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ]
+  },
+  "adequacy": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true,
+    "B6": true,
+    "B7": false,
+    "B8": false,
+    "B9": true,
+    "B10": true,
+    "B11": true
+  },
+  "cost": {
+    "first_budget_size": 256
+  },
+  "determinism_repeat_identical": true,
+  "claim_status_semantics_note": "Frozen spec.json#decision_rule.claim_status_semantics: C-PARAM-INHERIT is RETAINED at EXPERIMENTAL in EVERY branch; this packet writes no product code and authorizes no product change. Any product decision on the measured trust contract is a downstream DIRECTOR decision."
+}

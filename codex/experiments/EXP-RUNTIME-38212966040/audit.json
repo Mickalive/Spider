@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38212966040",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "F1-CONTAMINATION-INSTRUMENT",
+      "blocks_claim": true,
+      "description": "The frozen contamination/locality instrument is structurally degenerate. `unaffected_behavior` (runner_delta_repair_reuse.py:623-639) hardcodes id=\"1\"; the frozen identifier bank is LEARN_IDS=[11,12,13]/TASK_IDS=[14,15,16,17,18], whose carrier-inferred support is ^1[0-9]{1}$, so resolve() returns EXPLORE (NO-RESOLVE) for BOTH the baseline and the post-repair/over-broad arms. `post != base_live[r]` can therefore never be true, so M-CONTAMINATION-RATE and M-OVERBROAD-CONTAMINATION-RATE are pinned at 0.0 by construction and the preregistered null control NC-OVERBROAD-REPAIR can never be detected. Reproduced independently: overbroad_contamination() returns 0 with id=\"1\" while base_live[resource]==(\"NO-RESOLVE\",None,False) for all 4 unaffected resources. Fix `unaffected_behavior` to use an in-support identifier (e.g. per-resource ids within ^1[0-9]{1}$ or TASK_IDS[0]=14) and re-run; NC-OVERBROAD-REPAIR must again show contamination > 0.10 (prior packet EXP-GRAPH-38197849043 observed 4.0 on all three classes).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py:623-639",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py:684-699",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json",
+        "codex/experiments/EXP-GRAPH-38197849043/result.json#controls.NC-OVERBROAD-REPAIR"
+      ]
+    },
+    {
+      "id": "F2-CONTROL-ATTESTATION",
+      "blocks_claim": true,
+      "description": "result.json attests control NC-OVERBROAD-REPAIR with pass=true while its own observed value (overbroad_contamination_n=0 on all 36 trials; M-OVERBROAD-CONTAMINATION-RATE=0.0) directly contradicts the frozen success criterion in spec.json.null_control ('NC-OVERBROAD-REPAIR contamination rate > 0.10'). The control must be re-attested fail/unknown (or re-measured per F1), not pass, and report.md's H2 'CONFIRMED (1/0.0/detected)' and 'All 14 preregistered validity gates pass' must be corrected.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#controls.NC-OVERBROAD-REPAIR",
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#null_control",
+        "research/experiments/EXP-RUNTIME-38212966040/report.md"
+      ]
+    },
+    {
+      "id": "F3-RESULT-RAW-RECONCILIATION",
+      "blocks_claim": false,
+      "description": "result.json reports M-REPAIR-SUCCESS-WILSON-LOWER=0.7575757575757576 (== 25/33) on all three classes, but the cited raw artifact raw_evidence/runner_result_raw.json contains the frozen runner's own value 0.7574992425007574 (runner wilson_lower(12,12)). result.json must be regenerated from / reconciled with the frozen raw output; the value is above the 0.60 bar either way, so this is a traceability defect, not a decision change.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#metrics.M-CLASSES",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    {
+      "id": "F4-POSITIVE-CONTROL-EVIDENCE",
+      "blocks_claim": false,
+      "description": "result.json control PC-BASE-LIVENESS cites raw_evidence/runner_result_raw.json for 'server_ready=true, distill_live=true, task_read_verified=true', but those keys are absent from that file; the scored run's own per-trial 'base_liveness' field is false on all 36 trials (the same out-of-support id='1' defect as F1). The positive-control attestation must cite the actual scored evidence or be re-measured inside the scored transaction.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#controls.PC-BASE-LIVENESS",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json#trials"
+      ]
+    },
+    {
+      "id": "F5-V1-FREEZE-BINDING-WORDING",
+      "blocks_claim": false,
+      "description": "V1-FREEZE_BINDING is reported PASS* on the claim that CANONICAL-RUNNER-SHA256 was a 'DESIGN-time placeholder'. That is factually wrong: 2c96e57971d21c3396ca0392ee0617ec0a382ad27e3a0c109b39cd9d1723a88c is exactly the SHA-256 of the runner embedded between the FROZEN-RUNNER markers in the frozen prereg.md. The actual mismatch is that raw_evidence/runner_delta_repair_reuse.py (fc150d1a..., 48363 bytes) is byte-identical to the prereg-embedded runner except for one dropped trailing newline (48364 bytes). The extraction must preserve the canonical bytes so the extracted file hashes to the declared value, and the attestation wording must state the real cause.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md:17",
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md:292-1398",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py",
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#measurement_validity"
+      ]
+    },
+    {
+      "id": "F6-REPAIR-SUCCESS-DENOMINATOR",
+      "blocks_claim": false,
+      "description": "run_repair_reuse returns success only from execute_batch(TASK_IDS[1:]) (runner lines 524-538); the fused first task read (TASK_IDS[0]=14) is fetched and verified but its verify result is discarded from M-REPAIR-SUCCESS. H1's 'end-to-end success on the perturbed resource' therefore covers only 4 of 5 task ids on the treatment arm. All trials pass, so this does not change the observed 1.0, but the metric definition must be documented or corrected.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py:500-540",
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#hypothesis"
+      ]
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "A1-NC-OVERBROAD-VACUOUS",
+      "severity": "critical",
+      "class": "control_sensitivity",
+      "finding": "Preregistered null control NC-OVERBROAD-REPAIR did not meet its frozen success criterion (spec.json.null_control: 'NC-OVERBROAD-REPAIR contamination rate > 0.10'). Observed M-OVERBROAD-CONTAMINATION-RATE=0.0 on all 36 trials / all 3 classes. Root cause verified by independent reproduction: unaffected_behavior uses id=\"1\" (out of support ^1[0-9]{1}$), so baseline and over-broad arms both return (\"NO-RESOLVE\",None,False) and the comparison is structurally always equal. The producer marked the control pass=true and H2 CONFIRMED.",
+      "producer_identifiers": ["NC-OVERBROAD-REPAIR", "M-OVERBROAD-CONTAMINATION-RATE", "M-CONTAMINATION-RATE", "H2"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#controls.NC-OVERBROAD-REPAIR",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py:623-656",
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#null_control",
+        "codex/experiments/EXP-GRAPH-38197849043/result.json#metrics.M-CLASSES"
+      ]
+    },
+    {
+      "id": "A2-CONTAMINATION-METRIC-DEGENERATE",
+      "severity": "critical",
+      "class": "measurement_validity",
+      "finding": "M-CONTAMINATION-RATE (a listed functional gate in spec.decision_rule's functional_ok) is structurally incapable of being non-zero for the same out-of-support id='1' reason, so the gate `contamination_rate <= 0.10` passes vacuously. The only valid locality evidence in the packet is M-WRITE-SET-MAX=1 from the mechanism-dict write-set comparison (runner lines 682-686), which is independent of the degenerate helper. The prior packet's same metric was backed by a sensitive NC-OVERBROAD-REPAIR (4/4); this packet's is not.",
+      "producer_identifiers": ["M-CONTAMINATION-RATE", "M-WRITE-SET-MAX", "functional_ok", "V8-NO_TARGET_LEAKAGE"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#decision_rule",
+        "research/experiments/EXP-RUNTIME-38212966040/spec.json#measurement_validity",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py:687-693"
+      ]
+    },
+    {
+      "id": "A3-V1-FREEZE-BINDING",
+      "severity": "low",
+      "class": "provenance",
+      "finding": "The declared CANONICAL-RUNNER-SHA256 matches the runner embedded in frozen prereg.md exactly; the extracted raw_evidence/runner_delta_repair_reuse.py differs by exactly one trailing newline (self-sha fc150d1a...). No substantive code mutation occurred (byte-identical modulo final newline), so this is a traceability/extraction defect, not a post-freeze rewrite. The producer's written explanation (declared hash was a 'DESIGN-time placeholder') is incorrect and should be corrected.",
+      "producer_identifiers": ["V1-FREEZE_BINDING", "CANONICAL-RUNNER-SHA256"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/prereg.md:17",
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#validity_notes"
+      ]
+    },
+    {
+      "id": "A4-POSITIVE-CONTROL-EVIDENCE-MISATTRIBUTED",
+      "severity": "medium",
+      "class": "provenance",
+      "finding": "V12/PC-BASE-LIVENESS is attested from fields (server_ready/distill_live/task_read_verified) that do not exist in the cited scored raw artifact; the scored run records base_liveness=false on all 36 trials. Carrier liveness is nevertheless indirectly evidenced by B-COLD success=1.0 and by all treatment/conservative/legacy arms executing, but the specific attestation is not backed as written.",
+      "producer_identifiers": ["PC-BASE-LIVENESS", "V12-POSITIVE_CONTROL", "base_liveness"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#controls.PC-BASE-LIVENESS",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json#trials"
+      ]
+    },
+    {
+      "id": "A5-RESULT-RAW-WILSON-MISMATCH",
+      "severity": "low",
+      "class": "provenance",
+      "finding": "result.json M-REPAIR-SUCCESS-WILSON-LOWER=0.7575757575757576 (25/33) differs from the cited raw value 0.7574992425007574 on all three classes. Both clear the 0.60 bar, so no decision change, but result.json is not a faithful transcription of the frozen raw measurement.",
+      "producer_identifiers": ["M-REPAIR-SUCCESS-WILSON-LOWER"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/result.json#metrics.M-CLASSES",
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    {
+      "id": "A6-V14-OP-LOGS-ABSENT",
+      "severity": "low",
+      "class": "provenance",
+      "finding": "V14-REUSE_IDENTITY asserts that T-REPAIR-REUSE and T-REPAIR-LEGACY 'raw op logs differ only in the extra first-task resolve/fetch/verify', but the artifacts contain only aggregate per-arm counters; no per-operation logs are emitted by the runner. The cost decompositions are consistent with the asserted mechanism but the identity is not directly evidenced.",
+      "producer_identifiers": ["V14-REUSE_IDENTITY", "T-REPAIR-REUSE", "T-REPAIR-LEGACY"],
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json#trials",
+        "research/experiments/EXP-RUNTIME-38212966040/provenance.json"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "role": "cost_baseline_primary / only cost denominator",
+      "expected": "success 1.0; product counter 19 at L=3",
+      "observed": "M-COLD-SUCCESS=1.0 all classes; cold product=19 (L=3), 18 (L=2), 20 (L=4); cost decomposition http 9 + retrieval 5 + verification 5 = 19",
+      "pass": true,
+      "assessment": "Strong, live, and correctly the cost denominator. Recomputes exactly from raw_evidence/runner_result_raw.json."
+    },
+    {
+      "id": "B-COLD-MIN",
+      "role": "L=2 sensitivity",
+      "expected": "product counter 18",
+      "observed": "cold_min product=18, success 1.0 all classes",
+      "pass": true,
+      "assessment": "Recomputes exactly."
+    },
+    {
+      "id": "B-COLD-DEEP",
+      "role": "L=4 sensitivity",
+      "expected": "product counter 20",
+      "observed": "cold_deep product=20, success 1.0 all classes",
+      "pass": true,
+      "assessment": "Recomputes exactly."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "role": "perturbation-bites control (must fail)",
+      "expected": "success <= 0.10 on every class",
+      "observed": "literal success 0.0 on all 36 trials",
+      "pass": true,
+      "assessment": "Perturbation definitively bites."
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "role": "abstention control (must fail; never a denominator)",
+      "expected": "success <= 0.10",
+      "observed": "norepair success 0.0, guard fired 1.0 on all 36 trials",
+      "pass": true,
+      "assessment": "Inert as required."
+    },
+    {
+      "id": "NC-NO-PERTURBATION",
+      "role": "guard specificity",
+      "expected": "stale=false",
+      "observed": "stale=false, jaccard=1.0",
+      "pass": true,
+      "assessment": "Guard does not false-fire on unperturbed body."
+    },
+    {
+      "id": "NC-NOISE",
+      "role": "guard specificity",
+      "expected": "stale=false under non-semantic observed_at churn",
+      "observed": "stale=false, jaccard=1.0",
+      "pass": true,
+      "assessment": "Guard does not false-fire on noise."
+    },
+    {
+      "id": "NC-OVERBROAD-REPAIR",
+      "role": "null control for the contamination metric (must be detected)",
+      "expected": "contamination rate > 0.10 (spec.null_control); prior packet observed 4/4",
+      "observed": "M-OVERBROAD-CONTAMINATION-RATE=0.0 on all 36 trials (overbroad_contamination_n=0 on every trial)",
+      "pass": false,
+      "assessment": "FAILED. The producer recorded pass=true. Because the helper uses out-of-support id='1', the over-broad rewrite is invisible by construction; this is an instrument defect (see A1/F1), not a scientific negative. It also invalidates the producer's H2 'over-broad rewrite detected' and the claim that all 14 validity gates pass."
+    },
+    {
+      "id": "PC-BASE-LIVENESS",
+      "role": "positive control",
+      "expected": "pre-perturbation mechanisms resolve EXECUTABLE and first task read verifies",
+      "observed": "result.json asserts server_ready/distill_live/task_read_verified true, but the cited scored raw file lacks these fields and records base_liveness=false on all 36 trials",
+      "pass": "unknown",
+      "assessment": "Attestation not backed by the cited artifact (see A4). Carrier liveness is indirectly evidenced by cold success 1.0 and the executing treatment arms."
+    },
+    {
+      "id": "T-REPAIR-LEGACY",
+      "role": "replication control (must reproduce prior regression)",
+      "expected": "product counter 20 -> ratio ~1.111 at L=2, ~1.053 at L=3",
+      "observed": "legacy product=20; ratio 20/18=1.1111 (L=2), 20/19=1.0526 (L=3); M-LEGACY-REGRESSION-REPRODUCED=true",
+      "pass": true,
+      "assessment": "Faithfully reproduces the prior audited regression (EXP-GRAPH-38197849043: 1.1111111111111112 / 1.0526315789473684), supporting the substrate/carrier replication premise."
+    },
+    {
+      "id": "T-REPAIR-CONSERVATIVE",
+      "role": "system sensitivity upper bound (excluded from classifier)",
+      "expected": "product 18 -> ratio 1.0 at L=2, ~0.947 at L=3",
+      "observed": "conservative product=18; ratio 1.0 (L=2), 0.9474 (L=3)",
+      "pass": true,
+      "assessment": "Bounding case recomputes exactly. Note the conservative surface is NOT strictly below 1.00 at L=2, so the strict-win result depends on the reuse accounting not requiring a re-resolve."
+    },
+    {
+      "id": "T-REPAIR-REUSE",
+      "role": "treatment",
+      "expected": "product counter 17 (reuse) vs cold 18/19",
+      "observed": "repair product=17; ratio 17/18=0.9444 (L=2), 17/19=0.8947 (L=3); fetch ratio 0.556-0.667",
+      "pass": true,
+      "assessment": "Cost arithmetic recomputes exactly from the raw counter surfaces. Counters are physical integer operations (http_requests/retrieval_calls/verification_calls/repair_attempts). Locality support rests on M-WRITE-SET-MAX=1 only, not on M-CONTAMINATION-RATE."
+    }
+  ],
+  "recomputed_metrics": {
+    "source_artifact": "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json",
+    "source_artifact_sha256": "c4eaa4a1c33ea64d0fe3abf74e064935f7982f630758e06d43f733e0852b89f3",
+    "runner_sha256": "fc150d1a95fb600b0eae08e821b367968ab99e1a99d843361a61ba5cbcb2f6b5",
+    "prereg_embedded_runner_sha256": "2c96e57971d21c3396ca0392ee0617ec0a382ad27e3a0c109b39cd9d1723a88c",
+    "prereg_embedded_runner_equals_raw_evidence_modulo_one_trailing_newline": true,
+    "carrier_hashes_match_freeze": true,
+    "M-TRIALS-TOTAL": 36,
+    "valid_trials": 36,
+    "class_cost_verdicts": {
+      "P1-ENDPOINT": "STRICT-WIN",
+      "P2-STRUCTURE": "STRICT-WIN",
+      "P3-PERMISSION": "STRICT-WIN"
+    },
+    "M-REPAIR-SUCCESS": 1.0,
+    "M-REPAIR-SUCCESS-WILSON-LOWER__raw_runner_value": 0.7574992425007574,
+    "M-REPAIR-SUCCESS-WILSON-LOWER__result_json_value": 0.7575757575757576,
+    "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+    "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+    "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+    "M-COST-COLD-PRODUCT": 19.0,
+    "M-COST-COLD-MIN-PRODUCT": 18.0,
+    "M-COST-COLD-DEEP-PRODUCT": 20.0,
+    "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+    "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+    "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+    "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+    "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+    "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+    "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+    "M-COST-FETCH-RATIO-L3": {
+      "P1-ENDPOINT": 0.6666666666666666,
+      "P2-STRUCTURE": 0.5555555555555556,
+      "P3-PERMISSION": 0.6666666666666666
+    },
+    "M-CONTAMINATION-RATE": 0.0,
+    "M-CONTAMINATION-RATE__diagnosis": "DEGENERATE: baseline and post-repair arms both resolve with out-of-support id='1' -> ('NO-RESOLVE',None,False); the metric is structurally always 0.",
+    "M-OVERBROAD-CONTAMINATION-RATE": 0.0,
+    "M-OVERBROAD-CONTAMINATION-RATE__diagnosis": "DEGENERATE / control failure: overbroad injection invisible for the same reason; prior packet observed 4.0. Reproduced independently that overbroad_contamination() returns 0.",
+    "M-WRITE-SET-MAX": 1,
+    "M-LEGACY-REGRESSION-REPRODUCED": true,
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "independent_reproduction_performed": "Imported the frozen runner and re-executed the guard/overbroad machinery on one P1 trial: local_repair patched the mechanism (product 17), base_live for all 4 unaffected resources = ('NO-RESOLVE',None,False), and overbroad_contamination() = 0. Cost decomposition and legacy reproduction recomputed from raw_evidence/runner_result_raw.json."
+  },
+  "claim_ceiling": "Within the frozen scope, the following is justified: on the credential-free, in-process stdlib HTTP substrate with the shipped carrier held fixed (src/spider/kernel.py hashes match freeze.json), under the mandate's preregistered reuse semantics and the equal-weight product counter {http_requests, retrieval_calls, verification_calls, repair_attempts}, T-REPAIR-REUSE (product 17) is below B-COLD at BOTH L=2 (18; ratio 0.9444) and L=3 (19; ratio 0.8947), with M-COST-FETCH-RATIO-L3 = 0.556-0.667, and T-REPAIR-LEGACY reproduces the prior audited product-counter regression (20/18=1.1111, 20/19=1.0526). On these counters the prior ~5.3% regression is attributable to the legacy path's extra resolve/fetch operations and is removable by the reuse accounting on THIS substrate. This does NOT establish, and must not be reported as established: (a) behavioural locality / zero contamination of unaffected resources -- M-CONTAMINATION-RATE and NC-OVERBROAD-REPAIR are degenerate (out-of-support id='1'), so the only valid locality evidence is the structural write-set M-WRITE-SET-MAX=1; (b) that the result is robust to the equal-weight counter choice (T-REPAIR-CONSERVATIVE is 1.00 at L=2, i.e. the strict win depends on the reuse semantics not requiring a re-resolve); (c) transfer to real-web tasks, external agents, or the gated C-PRODUCT-ECON flagship benchmark; (d) any claim that all 14 validity gates passed or that H2 was confirmed. The packet's headline outcome=SUPPORTS therefore exceeds what the measurements justify as written.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38212966040/request.json",
+    "research/experiments/EXP-RUNTIME-38212966040/spec.json",
+    "research/experiments/EXP-RUNTIME-38212966040/prereg.md",
+    "research/experiments/EXP-RUNTIME-38212966040/freeze.json",
+    "research/experiments/EXP-RUNTIME-38212966040/design_review.json",
+    "research/experiments/EXP-RUNTIME-38212966040/result.json",
+    "research/experiments/EXP-RUNTIME-38212966040/report.md",
+    "research/experiments/EXP-RUNTIME-38212966040/provenance.json",
+    "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py",
+    "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json",
+    "src/spider/kernel.py",
+    "codex/experiments/EXP-GRAPH-38197849043/result.json",
+    "codex/claim_state.json"
+  ],
+  "unresolved": [
+    "Would M-CONTAMINATION-RATE still be 0.0 if the instrument used an in-support id? M-WRITE-SET-MAX=1 (only the target mechanism dict changed) strongly suggests yes, but this packet cannot demonstrate it because the control is degenerate.",
+    "Does the strict cost win survive counter re-weighting? T-REPAIR-CONSERVATIVE is 1.00 at L=2, so the STRICT-WIN depends on the treatment not being charged a re-resolve; the equal-weight choice is preregistered but not independently defended.",
+    "Is T-REPAIR-LEGACY a faithful reconstruction of the prior repair system, or only a system that reproduces its product counter? The legacy implementation re-issues a separate probe and a full-batch re-execution; the prior packet's exact operation sequence was not re-audited here.",
+    "Does the reuse semantics transfer to a production carrier with more complex perturbation scenarios (semantic drift), as the producer's own unresolved list asks? Not answerable from this packet.",
+    "The scored run's positive control is not directly evidenced in the scored raw artifact (base_liveness=false on all 36 trials); carrier liveness is only inferred from cold/treatment success."
+  ]
+}
