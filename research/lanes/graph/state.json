@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-38205284279",
-  "last_experiment_id": "EXP-GRAPH-38197849043",
-  "last_verdict": "MIXED-TRADEOFF",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-38205284279",
+  "last_verdict": "MEASUREMENT_INVALID_VALID_DETERMINISTIC_TRANSACTION_FROZEN_LIVENESS_PREDICATE_SCOPE_DEFECT_C-SEMANTIC-RESOLVE_RETAINED_AT_HYPOTHESIS_NO_CLAIM_ADVANCE_NO_REJECTION_NO_PRODUCT_PROMOTION_NO_IMMEDIATE_RECHAIN",
   "continue_immediately": false,
-  "next_question": "Can a local-repair policy on the shipped parameterized carrier (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify) eliminate the repair path's extra retrieval/verification overhead (reusing the freshness-guard probe observation, not double-charging verification) so that repair becomes strictly product-counter-cheaper than cold re-derivation on the registered equal-weight counter (ratio < 1.00 at the carrier minimum viable budget L=2, where the observed ratio is 1.1111111111111112 and 1.0526315789473684 at L=3), or is the ~5.3% product-counter regression intrinsic to localized repair under that counter -- and does the network-fetch-only win (fetch ratio 0.6666666666666666-0.7777777777777778) translate into a net end-to-end cost win on a substrate where fetches rather than model calls are the scarce resource?",
+  "next_question": "Given that this frozen transaction was invalidated by a scope defect in the pre-declared treatment-liveness predicate (validated on G3 calibration as 38/39 applicable executed with 1 abstention, prereg.md#8.1, but evaluated on the G3 test split where the structural clauses abstained only on OOS rows so 36/36 applicable executed and the frozen predicate 0<executed_app<n_applicable_test evaluated False, emitting decision=null, result.json#metrics.liveness + audit.json#recomputed_metrics.liveness_predicate), and given the observed (derived, non-emitted) gate vector would resolve to DECIDE_REQUIRE_RETRIEVAL_B because AXIS-G2-RETEST unknown_precision=0.8333<0.85 while the now-measurable stdlib retrieval comparator Arm B is G3 gate-met at selective_acc 0.2727 vs T-FRAME+ 1.0 and collapses on G2 (pooled_false_accept 0.70): on a re-frozen run that keeps the SAME G3-NEW surface and the SAME zero-tunable-parameter clause set (no third independently authored surface per the mandate's stop rule 'do not iterate surface thrice', no refitting) but repairs the liveness predicate so it is pre-declared on the exact split where it is evaluated (or as a calibration-delineated non-degeneracy range per audit.json#required_fixes), does T-FRAME+ validly reach the frozen ship-scope branch, is the AXIS-G2-RETEST unknown_precision shortfall intrinsic to the no-refit deterministic clause set, and does the deterministic-vs-retrieval fork (BOTH_PASS_G3 with asymmetric selective_acc; Arm B G2 collapse) favour structure on this surface family - thereby deciding whether C-SEMANTIC-RESOLVE's prior EXPERIMENTAL elevation (EXP-GRAPH-38188798583, overwritten by Product-lane HYPOTHESIS records as a coordination artifact) can be re-asserted through a valid packet, or whether the deterministic resolver is bounded to the PRIMARY+ALTLEX surface with Product keeping the conservative shipped abstention boundary? Governance: a NEW experiment requires a fresh Global Research Director director_mandate; this is a local proposal only.",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-10-12T13:41:59.308135+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "7b144a1099a9eac71253784bf33f2c93c6e3a4b72298ce45c9406c59988e138e",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-12T14:05:07.071997+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "eed76bd6c21f4efd57599fd60e98bc0a5868f9a5dd55fc1ffc2e48078c715a47",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
