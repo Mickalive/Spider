@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38184956362",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "VF-01: All frozen measurement validity gates (V1 code identity, V2 controls 15/15 PASS, V3 inventory 20/20 seeds HTTP 200, V4 frame fidelity 20 hosts/556 DEEP items/hash match, V5 census completeness 556/556 fetched) passed. The measurement transaction is valid (status=COMPLETE) and the FALSIFIES outcome is a bounded scientific negative, not an infrastructure failure (result.json VN-1).",
+    "VF-02: The frozen entry-point executability defect class from the parent (AUDIT-VF-05: TypeError on controls_seen=None, KeyError 'live') is closed. The reconstructed module executed --stage controls/inventory/structural/discovery to completion (exit 0) on the real pool, and V1 bound the executed code identity (sha256 b9b2efdc...). Confirmed by provenance.json code_identity.v1_gate=PASS and the three audit repairs confirmed present.",
+    "VF-03: Construct degeneracy (prereg section 14.1, result.json VN-3): 'state-carrying' includes theme chrome inputs (mdBook 'searchbar', Sphinx/Sphinx-RTD 'q'). This was disclosed pre-hoc and NOT narrowed post-hoc. The zero discovery result (0/208) holds even with the inflated construct; a chrome-stripped construct would only reduce the semantic weight of the denominator, not change the decision.",
+    "VF-04: Empirical tilt (prereg section 14.2, result.json VN-4, design_review nonblocking finding 1): Hosts with static named search forms (mdBook, Sphinx, Sphinx-RTD) expose shallow site indexes (version roots only); hosts with deep-complete static indexes (Docusaurus, Hugo, Jekyll, MkDocs Material, Astro/Starlight) carry no named DEEP controls on this frame. The measured zero is consistent with this tilt. The FALSIFIES is correctly bounded to: credential-free GET-only stdlib-HTTP substrate, frozen 20-host pool, frozen 556-item frame, five frozen channels, K=3. It is NOT a proof that no site on the credential-free Web can enumerate deep content (the in-substrate positive pole docs.djangoproject.com cited at prereg 11e was deliberately excluded from the frozen frame).",
+    "VF-05: ON_SITE_SEARCH coverage gap (prereg 14.6, result.json VN-5): All 208 slug-query probes returned HTTP 200 but result pages contained no static <a> links (JS-rendered). Recorded as a disclosed coverage gap of the static-HTTP instrument, not as a null success. This is a validity boundary of the frozen mandate, not a measurement defect.",
+    "VF-06: docs.readthedocs.io frame property (result.json VN-7): The parent BFS followed the seed redirect (docs.readthedocs.io -> docs.readthedocs.com) and used final_url as link base. The 28 admitted items live on docs.readthedocs.com (different host). V7 exact-host membership semantics (frozen in spec.json V7) prevent cross-host matching; channel documents for docs.readthedocs.io contain only 1-2 URLs, none deep. Disclosed, not silently ignored.",
+    "VF-07: Single-vantage measurement (result.json VN-8, unresolved U-3): All fetches from one runner egress (no proxy rotation). Channel-document availability and liveness not re-checked from a second network vantage. Cross-vantage stationarity is a standing reproducibility caveat for this substrate class, carried to unresolved. Not a measurement invalidity for the frozen design.",
+    "VF-08: Frame staleness not a confound (result.json VN-6): 208/208 admitted item URLs were live (HTTP 200) at EXECUTE. No dead items to exclude.",
+    "VF-09: Engine distinctness (frozen V12): docs.pytest.org and docs.readthedocs.io are both Sphinx-RTD on distinct base-domain hosts. The frozen V12 rule defines engine_class = <meta name='generator'> else documented platform, with Q3 requiring >=2 distinct engine classes on distinct base-domain hosts. This is correctly applied; platform-infrastructure sharing (readthedocs.com) does not collapse engine classes under the frozen rule (result.json unresolved U-5).",
+    "VF-10: Baseline contrast properly measured (result.json metrics.baseline_B_SAME_HOST_BFS_PATH_COST): BFS path cost mean ordinal 166.0 (min 31, max 250) for 208 admitted items vs discovery 0/208 at charged cost <=K=3. The contrast is discriminating and measured in-frame."
+  ],
+  "baseline_findings": [
+    "BF-01: B-SAME-HOST-BFS-PATH-COST (primary comparator measured in-frame): Per admitted DEEP item, the 1-based BFS discovery/fetch ordinal from the bound frame (requests column) is the a-priori acquisition path the O(1) claim must beat. Measured: 208/208 items within budget; ordinal mean 166.0. Discovery reached 0/208 at charged <=3. The contrast is directly identifiable and measured in the same frame.",
+    "BF-02: B-PERSISTED-PATH-REACQUISITION (inherited RACQ_PATH ~hop+1 from EXP-FRONTIER-37950626378): Carried as inherited context only, labeled not re-measured. Identifies the path-bound cost discovery must undercut. Consistent with BFS path cost measurement.",
+    "BF-03: B-DIRECT-URL-REPLAY (inherited RACQ_URL = 1 GET from EXP-FRONTIER-37950626378): Carried as inherited context only, labeled not re-measured. The 1-GET floor a discovery channel plus item GET approaches when the item is listed. Not re-measured, correctly labeled.",
+    "BF-04: Null controls certify instrument dynamic range: NC_BFS_CALIBRATION_FLAT (R=2.0 <= 3.0 PASS) and NC_BFS_CALIBRATION_GROWING (R=6.5 > 3.0 PASS) demonstrate the BFS census logic separates flat and growing hop-cost regimes. Reachability fixture controls (PC_REACHABILITY_LISTED_LIVE 3/3 True, NC_REACHABILITY_UNLISTED_OR_DEAD both False) drive the ACTUAL evaluate_items scoring path, proving the reachability metric fires in both directions on the same code."
+  ],
+  "recomputed_metrics": {
+    "q1_census": {
+      "n_deep_discovered": 556,
+      "n_deep_fetched": 556,
+      "n_deep_with_controls": 208,
+      "per_engine_admitted": {
+        "mdBook": 13,
+        "Sphinx": 8,
+        "Sphinx-RTD": 187
+      },
+      "engines_with_zero_deep": 12,
+      "census_complete": true
+    },
+    "q2_discovery_reachable_fraction": {
+      "admitted_items": 208,
+      "live_items": 208,
+      "dead_items": 0,
+      "reachable_items": 0,
+      "overall_fraction": 0.0,
+      "per_engine_fraction": {
+        "mdBook": 0.0,
+        "Sphinx": 0.0,
+        "Sphinx-RTD": 0.0
+      },
+      "per_channel_membership": {
+        "ROBOTS_SITEMAP": 0,
+        "SITEMAP_XML": 0,
+        "ON_SITE_SEARCH": 0,
+        "RSS_ATOM": 0,
+        "JSON_LD": 0
+      }
+    },
+    "q3_materiality": {
+      "threshold": 0.5,
+      "min_engines": 2,
+      "engines_at_or_above_threshold": [],
+      "engines_limited": [],
+      "engines_with_any_deep": ["mdBook", "Sphinx", "Sphinx-RTD"],
+      "decision_rule_branch": "G6",
+      "outcome": "FALSIFIES"
+    },
+    "baseline_bfs_path_cost": {
+      "admitted_items": 208,
+      "ordinal_min": 31,
+      "ordinal_max": 250,
+      "ordinal_mean": 166.0,
+      "discovery_reached_within_K3": 0,
+      "contrast": "BFS path cost mean 166 vs discovery 0 at charged <=3"
+    },
+    "network_ledger": {
+      "inventory_channel_documents": 108,
+      "census_deep_fetches": 556,
+      "on_site_search_probes": 208,
+      "item_liveness_gets": 208,
+      "synthetic_null_probes": 3,
+      "total_approx": 1083,
+      "all_charged_costs_within_K": true
+    },
+    "code_identity_verification": {
+      "expected_sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+      "observed_sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+      "repairs_confirmed": [
+        "controls_seen None-guard in structural filter",
+        "controls_seen None-guard in discovery inclusion",
+        "live key added to evaluate_items output",
+        "census_deep() with --frame arg and seed-matching index child selection"
+      ]
+    },
+    "frame_fidelity_verification": {
+      "expected_sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+      "observed_sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+      "hosts": 20,
+      "deep_items": 556,
+      "seed_errors": 0
+    }
+  },
+  "claim_ceiling": "On the credential-free GET-only stdlib-HTTP substrate, over the frozen 20-host pool and the bound 556-item DEEP frame (hop 3..6) from EXP-FRONTIER-38164611798, with the five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD) at charged protocol cost <= K=3 fresh-agent GETs: zero of three DEEP-admitting engines (mdBook n=13, Sphinx n=8, Sphinx-RTD n=187) reach a discovery-reachable fraction >= 0.50. The FALSIFIES is an engine-stratified bounded negative (frozen decision rule G6). It does NOT generalize to: (a) JS/browser substrates, (b) pools containing hosts with deep-complete static indexes AND named deep controls (e.g., the in-substrate positive pole docs.djangoproject.com cited at prereg 11e, deliberately excluded from this frame), (c) channels beyond the five frozen ones, (d) credentialed or POST/PUT substrates. The zero result holds even with the construct-degenerate 'state-carrying' definition (includes theme chrome). Cross-vantage stationarity untested (single runner egress).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38184956362/result.json (metrics, controls, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-FRONTIER-38184956362/report.md (evidence chain, gates, Q1 census, Q2/Q3 measurement, baseline contrast, controls, validity threats)",
+    "research/experiments/EXP-FRONTIER-38184956362/provenance.json (run metadata, frozen inputs, code identity, commands, network ledger, validity flags)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/controls.jsonl (15/15 control rows PASS)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/channel_docs.jsonl (per-host channel documents, 20/20 seeds HTTP 200)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl (Q1 census: discovered/fetched/with-controls per host)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl (208 admitted items with per-channel membership + liveness)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl (censused frame, sha256 95a3f15f...)",
+    "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json (frozen compute_metrics output)",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (bound Q1 frame, sha256 2afe65b6...)",
+    "research/experiments/EXP-FRONTIER-38184956362/prereg.md (frozen instrument, decision rule, pre-freeze certificates, validity threats)",
+    "research/experiments/EXP-FRONTIER-38184956362/spec.json (frozen spec with measurement_validity V1..V12, decision_rule, baselines, controls)",
+    "research/experiments/EXP-FRONTIER-38184956362/freeze.json (artifact hashes)",
+    "research/experiments/EXP-FRONTIER-38184956362/design_review.json (independent design review, nonblocking finding 1 on empirical tilt)"
+  ],
+  "unresolved": [
+    "U-1: Whether a JS-executing substrate (browser-rendered search results) would change ON_SITE_SEARCH coverage — out of the frozen mandate's credential-free static-HTTP scope; remains untested (result.json U-1, prereg 14.6).",
+    "U-2: Whether a pool rebuilt from this Q1 census to select hosts with the deep-complete-static-index × named-deep-controls conjunction (e.g., the prereg 11e in-substrate positive pole docs.djangoproject.com) would reach the 0.50 threshold. SUPPORTS remains a real but unmeasured state of the world for this instrument on a different frame (result.json U-2).",
+    "U-3: Cross-vantage stationarity of channel documents (egress IP/ASN effects) was not measured; a single-vantage result is the standing reproducibility caveat for this substrate class (result.json VN-8, U-3).",
+    "U-4: A chrome/construct split (distribution of named-control types, e.g., searchbar vs q vs content form fields, per admitted item) was not recorded by the frozen module (it counts controls, not their names); a secondary split would require a new measurement outside the frozen scope (result.json U-4).",
+    "U-5: docs.readthedocs.io and docs.pytest.org are both Sphinx-RTD on distinct base-domain hosts but share the readthedocs.com platform infrastructure. 'Distinct engines' per frozen V12 means distinct engine classes on distinct base-domain hosts, not necessarily independent server origins (result.json U-5).",
+    "U-6: The ON_SITE_SEARCH channel's frozen semantics query the exact item slug via the seed-HTML form finder. The observed JS-rendered results are a known static-HTTP boundary; whether alternative query formulations (title, heading text, URL patterns) would yield static links is untested and outside the frozen design."
+  ]
+}
