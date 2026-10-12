@@ -1,50 +1,196 @@
 {
   "experiment_id": "EXP-FRONTIER-38188815194",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "design_contract_version": 2,
+  "claim_ids": [
+    "C-CROSSSITE",
+    "C-FRESHNESS",
+    "C-PRODUCT-ECON"
+  ],
+  "question": "On the frozen credential-free GET-only 20-host/556-item frame, against measured same-host BFS cost, does revalidating a persisted deep path (fresh GETs/bytes for liveness+change detection, scaling with hop and elapsed time) plus any session-scale stale-replay false-accepts undercut cold re-derivation, and at what break-even hop/elapsed time does persistence stop paying?",
+  "hypothesis": "For the 208 admitted deep state-carrying items, revalidation cost (including change detection and liveness probes) plus bounded session-scale stale-replay cost is < cold re-derivation cost over some non-empty window ladder (0, 300, 900, 1800 s); persistence becomes uneconomic above break-even hop/elapsed time and/or if revalidation cost >= re-derivation cost across all measured windows with sufficient power.",
+  "falsifier": "Persistence is not economically justified on this frame: (a) revalidation cost >= cold re-derivation cost for all windows in the ladder with measurement valid, OR (b) the measured stale-replay false-accept rate cannot be bounded without day-scale span (structurally undecidable) so no trustworthy false-accept contribution can be claimed, OR (c) measurement fails (infrastructure/representation) before a discriminating decision.",
+  "baselines": [
+    {
+      "id": "B-COLD-SAME-HOST-BFS",
+      "type": "cold_rediscovery",
+      "description": "Cold same-host BFS re-derivation cost from frozen frame; comparator per admitted deep item. Source: EXP-FRONTIER-38184956362 (in-frame measured).",
+      "expected": {
+        "units": ["GETs", "bytes", "elapsed_s"],
+        "distribution_ref": {
+          "path": "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json",
+          "field": "baseline_bfs_path_cost",
+          "notes": "ordinal min 31, max 250, mean 166.0 over 208 items"
+        },
+        "ceiling_effect_risk": "medium; must not assume replay speedup",
+        "memoryful": false
+      },
+      "stable_id": "B-COLD-SAME-HOST-BFS"
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-EXACT-PATH-REPLAY-NAIVE",
+      "type": "naive_cache",
+      "description": "Naive exact-path replay of a persisted deep path without revalidation (legacy guard). Used only to demonstrate replay alone is not assumed cheap; not treated as the economic answer.",
+      "expected": {
+        "units": ["GETs", "bytes", "elapsed_s"],
+        "notes": "Honor P2-REPLAY-COST guard: ~1.002x on matched tasks; treat as control/guard, not treatment."
+      },
+      "stable_id": "B-EXACT-PATH-REPLAY-NAIVE"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-PERSISTENCE-PAYS-WINDOW",
+    "description": "If a persisted path with bounded revalidation undercuts cold BFS at some window while change-detection/liveness remain measurable and false-accepts bounded, treatment outperforms cold baseline.",
+    "criterion": "persistence_econ.undercuts_cold == true for at least one window in {0,300,900,1800}s with valid measurement",
+    "stable_id": "PC-PERSISTENCE-PAYS-WINDOW"
+  },
+  "null_control": {
+    "id": "NC-PERSISTENCE-NOT-JUSTIFIED",
+    "description": "Revalidation cost >= cold re-derivation cost across all windows (persistence uneconomic) or measurement structurally undecidable for false-accept claim.",
+    "criterion": "all windows: reval_cost >= cold_cost - delta_eq (or equivalent) and no discriminating break-even",
+    "stable_id": "NC-PERSISTENCE-NOT-JUSTIFIED"
+  },
+  "measurement_validity": {
+    "prerequisites": [
+      "Frozen frame artifacts accessible and hashes match (structural.jsonl from parent frame; 20/20 seeds HTTP 200)",
+      "Credential-free GET-only stdlib HTTP; no model key/browser required",
+      "Baseline B-COLD-SAME-HOST-BFS available (parent metrics/ledger) for the same 208 admitted items",
+      "Can measure GET counts, bytes, elapsed per probe; session-scale timing controllable",
+      "Liveness/change detection signal measurable without requiring day-scale span; false-accept measurement bounded to session-scale regime only"
+    ],
+    "controls": [
+      {
+        "id": "MC-FRAME-INTEGRITY",
+        "type": "repro",
+        "description": "Re-verify frame identity against frozen hashes from parent (structural.jsonl sha256 from EXP-FRONTIER-38184956362) for the item set used.",
+        "pass_if": "hash match and item count matches 208 admitted deep items"
+      },
+      {
+        "id": "MC-BASELINE-AVAILABLE",
+        "type": "repro",
+        "description": "Cold BFS cost per item available for all 208 items; no NA introduced.",
+        "pass_if": "cold_cost present for every admitted item; mean/median consistent with 166.0±tolerance"
+      },
+      {
+        "id": "MC-LIVENESS-CHANGE-DETECT",
+        "type": "construct",
+        "description": "Revalidation probes can detect liveness and a controlled change for at least a small calibration set; change detection fires on synthetic modification and not spuriously.",
+        "pass_if": "calibration passes with false positive/negative within declared bounds or explicitly reports measurement failure"
+      },
+      {
+        "id": "MC-SESSION-SCALE-BOUND",
+        "type": "scope",
+        "description": "If false-accept rate is estimated, it must be bounded to session-scale regime; do not extrapolate to day-scale hazard. If cannot be bounded, record as measurement limitation (not negative science).",
+        "pass_if": "false_accept_regime == 'session' or 'not_measurable' with justification; no day-scale extrapolation"
+      },
+      {
+        "id": "MC-BUDGET",
+        "type": "resource",
+        "description": "HTTP budget bounded; do not exceed declared budget; respect retry/backpressure; count bytes/GETs/elapsed.",
+        "pass_if": "total GETs/bytes within declared ceiling; no unaccounted fetches"
+      }
+    ],
+    "validity_threats": [
+      "JS-rendered search pages may affect some channel probes (inherited scope boundary; parent frame already characterized)",
+      "Single-vantage egress (inherited; cross-vantage not required by mandate but reproducibility caveat)",
+      "Day-scale staleness hazard structurally undecidable on committed corpora (legacy program) - must not claim freshness detector",
+      "Construct 'state-carrying' items include chrome in some classes (pre-registered) - use the frozen admitted set",
+      "Ceiling/floor risk: if revalidation approaches zero overhead or if cold costs collapse, need sensitivity; frame gives diversity (min 31, max 250)"
+    ]
+  },
+  "decision_rule": {
+    "primary": {
+      "description": "Economic comparison: for each window w in {0,300,900,1800}, compute persistence break-even vs cold BFS. Persistence pays if reval_cost_w + delta_false_accept_w < cold_cost_i (per item or aggregated) over a decisive majority with valid measurement; report break-even hop/elapsed.",
+      "statistic": "break-even analysis (per-item and stratified by hop class), with confidence intervals where feasible; effect size in absolute cost (GETs/bytes/s) and relative.",
+      "alpha": 0.05,
+      "min_effect": ">= 10% relative reduction in mean cost OR >= 5 GETs absolute, whichever larger (pragmatic, declared)",
+      "outcome_mapping": {
+        "SUPPORTS": "any window shows persistence pays with min_effect and measurement valid",
+        "FALSIFIES": "no window shows persistence pays (reval_cost >= cold_cost across all windows) with measurement valid; or structurally cannot bound false-accepts as required",
+        "MIXED": "pays for some stratification (e.g. deep hop>h0, short elapsed) but not others",
+        "INCONCLUSIVE": "measurement invalid/blocked; cannot decide"
+      }
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
-    },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "safety": {
+      "require_valid_controls": true,
+      "treat_measurement_failure_separately": true,
+      "never_infer_negative_from_budget_overflow": true,
+      "forbid_day_scale_claims": true
     }
   },
-  "freeze_artifacts": []
+  "product_consequence_positive": "If persistence pays, invest in persisted inherited-path store with revalidation policy (liveness+change detection) gated by hop/elapsed break-even; feeds C-FRESHNESS/C-PRODUCT-ECON with explicit economics.",
+  "product_consequence_negative": "If persistence does not pay across measured windows, do not build general persisted-path cache for deep state-carrying items on this substrate class; redirect to cold re-derivation or different compression; PARK persistence subthread (no discovery rerun).",
+  "estimated_cost": {
+    "http_gets": 50000,
+    "bytes_out_mb": 5,
+    "bytes_in_mb": 500,
+    "elapsed_minutes": 30,
+    "model_calls": 0,
+    "notes": "Bounded by 208 items * (revalidation probes) * windows + calibration; reuse frozen frame; no LLM endpoint needed."
+  },
+  "expected_information_gain": "high if break-even exists (changes build decision); medium even if negative (prevents wasted work).",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Decision branches (SUPPORTS/FALSIFIES/MIXED/INCONCLUSIVE) are well-defined; baselines and windows specified."
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Parent frozen frame accessible; BFS baseline exists for 208 items; GET/bytes/elapsed measurable with stdlib HTTP."
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "B-COLD-SAME-HOST-BFS stable id and distribution reference from parent; naive replay included as guard."
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "MC-LIVENESS-CHANGE-DETECT + MC-SESSION-SCALE-BOUND provide sensitivity; calibration set required."
+    },
+    "treatment_liveness": {
+      "status": "NOT_APPLICABLE",
+      "reason": "No SPIDER treatment arm that requires kernel modification or new execution engine; this is a measurement/economics experiment using frozen frame and stdlib HTTP probes."
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Only frozen frame artifacts and parent metrics/ledgers are interpretation dependencies; listed in freeze_artifacts."
+    }
+  },
+  "freeze_artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl",
+      "role": "fixture",
+      "required": true,
+      "notes": "Frozen frame (sha256 from parent); defines hosts/items set"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json",
+      "role": "derived",
+      "required": true,
+      "notes": "Contains baseline BFS path cost distribution for admitted items"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl",
+      "role": "fixture",
+      "required": true,
+      "notes": "Admitted deep items (208) with per-channel membership/liveness"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl",
+      "role": "fixture",
+      "required": true,
+      "notes": "Census frame context"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/audit.json",
+      "role": "evidence",
+      "required": true,
+      "notes": "Claim ceiling and baseline findings"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38184956362/result.json",
+      "role": "evidence",
+      "required": true,
+      "notes": "Parent outcome context (bounded negative) - do not re-measure discovery"
+    }
+  ]
 }
