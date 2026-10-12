@@ -1,36 +1,38 @@
 {
   "schema_version": 1,
-  "note": "Explicit allowlist of models documented as free at configuration date; no automatic discovery or paid fallback. Availability/free offers can change. Prefer a provider-side zero-spend cap.",
+  "note": "Explicit documented-zero-price OpenCode Zen models only; no paid fallback or automatic discovery. Promotional access may change: fail closed with account spending cap. Candidate pools independent across producer/review roles.",
   "roles": {
     "research": [
+      "opencode/deepseek-v4-flash-free",
       "opencode/big-pickle",
-      "opencode/nemotron-3-ultra-free",
-      "opencode/ling-3.0-flash-fin-free"
+      "opencode/mimo-v2.5-free",
+      "opencode/north-mini-code-free"
     ],
     "audit": [
-      "opencode/nemotron-3-ultra-free",
-      "opencode/ling-3.0-flash-fin-free",
-      "opencode/big-pickle"
+      "opencode/nemotron-3.5-lightning-free",
+      "opencode/laguna-s-2.1-free",
+      "opencode/longcat-2.0-free",
+      "opencode/deepseek-v4-flash-free"
     ],
     "director": [
-      "opencode/big-pickle",
-      "opencode/nemotron-3-ultra-free",
-      "opencode/ling-3.0-flash-fin-free"
+      "opencode/deepseek-v4-flash-free",
+      "opencode/longcat-2.0-free",
+      "opencode/big-pickle"
     ],
     "coding": [
-      "opencode/big-pickle",
-      "opencode/nemotron-3-ultra-free",
+      "opencode/deepseek-v4-flash-free",
+      "opencode/north-mini-code-free",
       "opencode/mimo-v2.5-free"
     ],
     "scout": [
-      "opencode/big-pickle",
-      "opencode/ling-3.0-flash-fin-free",
-      "opencode/nemotron-3-ultra-free"
+      "opencode/longcat-2.0-free",
+      "opencode/north-mini-code-free",
+      "opencode/mimo-v2.5-free"
     ],
     "design_review": [
-      "opencode/nemotron-3-ultra-free",
+      "opencode/laguna-s-2.1-free",
+      "opencode/north-mini-code-free",
       "opencode/ling-3.0-flash-fin-free",
-      "opencode/muse-spark-1.3-contributor-free",
       "opencode/big-pickle"
     ]
   },
@@ -54,10 +56,14 @@
   "free_only": true,
   "free_only_allowed_models": [
     "opencode/big-pickle",
+    "opencode/deepseek-v4-flash-free",
+    "opencode/laguna-s-2.1-free",
     "opencode/ling-3.0-flash-fin-free",
+    "opencode/longcat-2.0-free",
+    "opencode/mimo-v2.5-free",
     "opencode/nemotron-3-ultra-free",
     "opencode/nemotron-3.5-lightning-free",
-    "opencode/mimo-v2.5-free",
+    "opencode/north-mini-code-free",
     "opencode/muse-spark-1.3-contributor-free"
   ]
 }

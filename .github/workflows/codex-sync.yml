@@ -4,7 +4,7 @@ run-name: Codex sync ${{ github.run_id }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "7,37 * * * *"
+    - cron: "37 * * * *"
 
 permissions:
   contents: write
@@ -50,15 +50,6 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
           bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed after Codex push; Codex remains accepted and the previous rescue pointer is preserved."
 
-      - name: Wake global direction after canonicalization
-        if: ${{ steps.materialize.outputs.changed == 'true' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          # Always dispatch the freshest canonical state. Factory Pulse has
-          # cancel-in-progress=true, so a fresh Codex decision supersedes any
-          # older direction cycle instead of being skipped behind stale work.
-          gh workflow run factory-pulse.yml --ref main
-          echo "SPIDER_FACTORY_WAKE_AFTER_CODEX"
+      # No factory wake on evidence-only updates. The next hourly pulse reads
+      # the freshest canonical Codex; an explicit Product promotion or control
+      # change can still trigger an immediate direction cycle.
