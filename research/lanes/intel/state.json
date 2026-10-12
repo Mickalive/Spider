@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-38194362040",
-  "last_experiment_id": "EXP-INTEL-38175568787",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-38194362040",
+  "last_verdict": "FALSIFIES",
   "continue_immediately": false,
-  "next_question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the actually served body (verified by full download, not HF etag/xetHash metadata) and re-frozen, does either M-14B-QWEN or M-8B-LLAMA clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6), and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test?",
+  "next_question": "Which re-scope does the Global Research Director authorize now that B3 is NOT_SATISFIED (no credential-free local Q4_K_M class through 14B or non-Qwen 8B clears the frozen minimal bar; 0 provisionable hosted providers; the sole credential-free hosted path is operationally capped): obtain a hosted credential (with model pinning/SLA) to test a frontier class under the identical protocol, re-scope Gate 3 by dropping the same-model external published-baseline anchor in favour of internally re-run comparators on a dynamic-range task bank (B2-owned), or authorize the materially orthogonal intel probe - suppressing the hidden reveal button from the ELEMENTS observation (or a full accessibility-tree observation) - to separate observation-representation failure from raw multi-step control capacity on the already-tested classes?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-10-12T06:32:19.643939+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "df1150468c97dee8fd002d60fcd97fbbc96434cbc97749e0428325c58e0af942",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-12T07:18:37.599596+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "b23deed94c4c843aeddd8d4510096673ebad51473435f04bee9973389ec3938f",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
