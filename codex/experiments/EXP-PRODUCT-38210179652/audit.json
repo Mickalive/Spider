@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38210179652",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "V8_FREEZE_BINDING PASS in BOUND mode: prereg sha256 matches freeze.json.hashes['prereg.md'], runner_block normalized identity holds, and all six freeze_artifacts re-hash identically (provenance.json#frozen_inputs, #freeze_artifact_hashes_rehashed_after_run).",
+    "All five frozen gates PASS: validity_gate, sensitivity_gate, provenance_gate, growth_gate, boundary_gate (result.json.gates, raw_run_output.json#gates).",
+    "Induction identity valid: M-MECHANISM-COUNT=8, M-SINGLE-SLOT=true, M-CONFIDENCE-0.9=true, M-SUPPORT-IDENTITY=true (all eight induced supports equal frozen EXPECTED_INDUCED in prereg.md section 3).",
+    "Carrier identity preserved: src/spider/kernel.py sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3 unchanged before/after (provenance.json#code_paths, #freeze_artifact_hashes_rehashed_after_run).",
+    "Determinism verified: in-process two-run identical=true; independent full re-execution reproduces all non-timing metrics/arms/boundary/certification identically (provenance.json#determinism).",
+    "Regression suite passes: tests_run=3, failures=0, errors=0 under PYTHONPATH=src (provenance.json#regression).",
+    "Substrate is deterministic, stdlib-only, credential-free with loopback HTTP oracles only; no external network, model calls, or tokens (V1-SUBSTRATE satisfied)."
+  ],
+  "baseline_findings": [
+    "B-SHIPPED (induced conservative supports, no declaration widening) is the correct safety floor: FA=0, coverage=14/30=0.4667 on the expansion bank. This matches the shipped conservative fallback behavior.",
+    "B-ORACLE (true grammar supports) correctly anchors the ceiling: FA=0, coverage=1.0.",
+    "C-FROZEN-CERT (shipped certificate with empty frozen bank, no provenance, no growth) is the correct incumbent comparator: FA=9 (H5=3, H6=3, H8=3), coverage=1.0. This demonstrates the unsafe behavior the treatment must dominate.",
+    "A-PROV-NO-GROW (provenance allowlist only, empty bank, no growth) isolates growth necessity: FA=6 (H5=3, H6=3) -- growth is necessary to catch probeable evaders.",
+    "A-GROW-NO-PROV (growth only, no provenance gate) isolates provenance necessity: FA=3 (H8=3) -- provenance gate is necessary to catch non-allowlisted hidden evader.",
+    "A-PROV-STRICT (empty allowlist) correctly realizes the null/MIXED floor: FA=0, coverage=0.4667 == B-SHIPPED.",
+    "A-RAW-DECL (unconditional adoption) confirms the oracle is not blind: FA=9.",
+    "All baselines are constructed from the SAME eight frozen induced mechanisms; only verification_rule['parameter_supports'] is mutated via the real ingest_declaration path or direct substitution. No ceiling/floor degeneracy exists."
+  ],
+  "recomputed_metrics": {
+    "M-T-FALSE-ACCEPT-COUNT": 0,
+    "M-T-HTTP-ON-OUT-COUNT": 0,
+    "M-T-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-T-COVERAGE": 1.0,
+    "M-T-COVERAGE-DELTA-VS-SHIPPED": 0.5333333333333333,
+    "M-T-BOUNDARY-FALSE-ACCEPT-COUNT": 3,
+    "M-B-SHIPPED-COVERAGE": 0.4666666666666667,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-C-FROZEN-FALSE-ACCEPT-COUNT": 9,
+    "M-A-PROV-NO-GROW-FALSE-ACCEPT-COUNT": 6,
+    "M-A-GROW-NO-PROV-FALSE-ACCEPT-COUNT": 3,
+    "M-A-PROV-STRICT-FALSE-ACCEPT-COUNT": 0,
+    "M-A-PROV-STRICT-COVERAGE": 0.4666666666666667,
+    "M-CERT-ADMITS-SOUND-COUNT": 4,
+    "M-CERT-REFUSES-PROBEABLE-COUNT": 2,
+    "M-CERT-ADMITS-HIDDEN-COUNT": 2,
+    "M-T-CERTIFIED-COUNT": 5,
+    "M-T-REFUSED-COUNT": 2,
+    "M-T-PROVENANCE-REFUSED-COUNT": 1,
+    "M-R-DRIFT-STALE-FA": 16,
+    "M-R-DRIFT-REMINE-FA": 0,
+    "M-REGRESSION-TESTS-RUN": 3
+  },
+  "claim_ceiling": "The provenance-controlled certification (T-PROV-GROW) safely expands the certified-safe declaration class on THIS synthetic eight-family expansion bank, THIS fixed seeded probe space (lengths 1-4 over '0123456789abcdef', PROBE_BUDGET=256/family), and THIS shipped carrier (src/spider/kernel.py sha256 3a6caf97...). Within-envelope (H1-H6,H8): zero false accepts, zero out-of-grammar HTTP executions, zero refusal-semantics violations, coverage 1.0 (30/30) vs B-SHIPPED 0.4667 (14/30), strictly dominating C-FROZEN-CERT (FA=9 at equal coverage 1.0). Both mechanism components are necessary: provenance alone misses probeable evaders (A-PROV-NO-GROW FA=6), growth alone misses non-allowlisted hidden evader (A-GROW-NO-PROV FA=3). The guarantee remains CONDITIONAL: boundary family H7 (allowlisted origin O1, certificate-admitted, over-accept outside probe alphabet) yields M-T-BOUNDARY-FALSE-ACCEPT-COUNT=3 (BP-HIDDEN-FAILS fires, PC-GROW-MISSES-HIDDEN passes). Drift probe shows stale certificate false-accepts after grammar change (M-R-DRIFT-STALE-FA=16) until re-mined (M-R-DRIFT-REMINE-FA=0). C-PARAM-INHERIT remains EXPERIMENTAL in all branches per frozen spec.json#decision_rule.claim_status_semantics; no code is promoted. This is a bounded measurement on a synthetic construction; NOT an end-to-end external-agent measurement, NOT a general soundness proof, NOT a product-economics measurement. The registered next_gate (four-arm C-LLM-INHERIT benchmark on non-ceiling task bank) remains unmet and unfunded.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38210179652/result.json",
+    "research/experiments/EXP-PRODUCT-38210179652/provenance.json",
+    "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_output.json",
+    "research/experiments/EXP-PRODUCT-38210179652/raw_evidence/raw_run_output_run2.json",
+    "research/experiments/EXP-PRODUCT-38210179652/spec.json",
+    "research/experiments/EXP-PRODUCT-38210179652/prereg.md",
+    "research/experiments/EXP-PRODUCT-38210179652/freeze.json",
+    "research/experiments/EXP-PRODUCT-38210179652/design_review.json"
+  ],
+  "unresolved": [
+    "Whether a bounded probe space can be made adequate in general: an allowlisted declaration whose over-accept lies outside the probe alphabet (H7) is CERTIFIED and false-accepts (FA=3). The guarantee is conditional on the allowlist AND the probing procedure's reachable token space covering the declaration's over-accepts.",
+    "The real-world cost/staleness of obtaining and maintaining sound declared grammars, the provenance allowlist, and the grown negative bank was not measured (loopback HTTP/latency only).",
+    "Whether the audited-origin allowlist can itself be trusted/scored reliably, and under what provenance guarantees, is not tested here.",
+    "Whether these results generalize beyond this synthetic eight-family construction or to non-parameterized declarations.",
+    "The registered C-PARAM-INHERIT next_gate (four-arm cost-per-success inheritance benchmark on a non-ceiling task bank with a capable same-protocol endpoint) remains unmet and is not addressed by this packet.",
+    "The drift probe is decoupled and non-gating; it measures staleness behavior but does not establish a maintenance-cost model."
+  ]
+}
