@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38184956362",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The six decision gates (G1-G6) partition the outcome space exhaustively with no arithmetically empty branches. Thresholds (THRESHOLD=0.50, MIN_ENGINES=2, DEAD_LIMIT=0.10) are attainable. Denominator guard (V6) ensures n=0 yields null fraction, never 0/0. The instrument's dynamic range is certified in both directions by NC_BFS_CALIBRATION_FLAT (R=2.0<=3.0) and NC_BFS_CALIBRATION_GROWING (R=6.5>3.0), and by the reachability fixture pair PC_REACHABILITY_LISTED_LIVE (3/3 True) / NC_REACHABILITY_UNLISTED_OR_DEAD (both False). PC-3 is satisfied at pre-freeze (>=3 engines with deep controls per section 11c). Both SUPPORTS (G5) and FALSIFIES (G6) are structurally reachable branches for this instrument; the designer discloses the empirical tilt making SUPPORTS a priori improbable on this frozen frame as a validity threat (prereg section 14.2), not a reachability defect. Precedence order does not render any branch unreachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#10 (decision rule)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#9 (controls ledger with observed values)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11c (PC-3 observability certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11e (branch-reachability argument)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#14.2 (empirical tilt validity threat)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are satisfied or explicitly gated. PC-1: the exact frozen discovery entry point (--stage all) was smoke-tested to mechanical completion on the reconstructed module over an offline synthetic frame with controls_seen=None, proving the TypeError/KeyError defects are fixed (prereg 11a). PC-2/PC-3: the Q1 frame is bound (sha256 2afe65b6... verified) with 556 DEEP-discovered items; DESIGN-time direct fetches confirm named controls on mdBook, Sphinx, and Sphinx-RTD engines (prereg 11c). Substrate prerequisites: stdlib-only (urllib, gzip, xml.etree, html.parser, http.server), network access to 20 frozen seeds (all HTTP 200 at DESIGN), five discovery channels live on >=1 host. EXECUTE re-runs --stage controls (V2) and --stage inventory (V3) as frozen gates before any outcome stage. No prerequisite is deferred to outcome-bearing execution.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11a (PC-1 smoke transcript)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11b (frame census certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11c (PC-3 observability certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11d (channel inventory certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/spec.json#measurement_validity (V1-V12 gates)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Three stable, mutually distinct baselines are defined. B-SAME-HOST-BFS-PATH-COST is the primary comparator measured in-frame: per admitted DEEP item, the 1-based BFS discovery/fetch ordinal from the bound frame (<=250, ~hop+1 on a clean chain). The charged discovery cost (<=K=3) is directly compared against this per-item path cost, so the O(1)-vs-path-bound contrast is identifiable. B-PERSISTED-PATH-REACQUISITION (inherited RACQ_PATH ~hop+1) and B-DIRECT-URL-REPLAY (inherited RACQ_URL = 1 GET) are carried as labeled inherited context only, not re-measured. No ceiling/floor situation exists: discovery may reach 0-100% of admitted items while BFS reaches 100% by construction. Cost metrics are complete: charged ledger (V9) discloses actual vs protocol GETs; BFS path cost uses the frame's requests ordinal.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#10b (baselines)",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (requests ordinals)",
+        "research/experiments/EXP-FRONTIER-37950626378/result.json (inherited RACQ_PATH/RACQ_URL)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control fires in both directions under the same implementation that scores the experiment. The BFS calibration pair (NC_BFS_CALIBRATION_FLAT pass at R=2.0<=3.0; NC_BFS_CALIBRATION_GROWING pass at R=6.5>3.0) certifies full dynamic range offline. Seven PC_PARSER_CANARY_* controls validate exact extraction against offline fixtures; a jsonld extraction bug was detected and fixed at DESIGN, proving sensitivity. The reachability fixture (PC_REACHABILITY_LISTED_LIVE 3/3 True; NC_REACHABILITY_UNLISTED_OR_DEAD both False) drives the ACTUAL evaluate_items scoring path on a local HTTP server, so the positive control fires and the null stays null under the production code. NC_SYNTHETIC_UNREACHABLE_ITEM_direct passes only on real HTTP status >=400 (observed 404 on three hosts); its pre-fix collapse of HTTP errors to status=None was found and fixed at DESIGN, proving the control bites. PC_ENV pins the runtime. Per-channel zero admissions are reported as 0.0, never null (NC-ZERO-CHANNEL-COVERAGE implicit in V6/V7).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#9 (controls ledger with DESIGN observed values)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11 (DESIGN certificate)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#998-1068 (reachability fixture using evaluate_items)",
+        "research/experiments/EXP-FRONTIER-38184956362/spec.json#positive_control"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment (the frozen discovery entry point --stage discovery / --stage all) has been EXECUTED at pre-freeze cost, not merely declared executable. The reconstructed module (with the three repairs: controls_seen None-guard, live key in evaluate_items, census_deep + --frame) ran --stage inventory + --stage structural --frame + --stage discovery to mechanical completion over an offline synthetic site whose frame contained discovered-but-unfetched DEEP pages (controls_seen=None) and controls-bearing deep pages, and emitted a decision (FALSIFIES). The bound parent module (BASE_SHA256=75a01d49...) was shown to crash on the identical record with TypeError ('>' not supported between NoneType and int) and KeyError: 'live', confirming the exact non-executability class (AUDIT-VF-05) is fixed. EXECUTE re-runs V1 (code identity gate) and V2 (controls gate) as hard preconditions before any outcome stage. The module's stage interface and required outputs are frozen in prereg sections 7-8.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#11a (entry-point execution transcript with parent crash evidence)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#7 (frozen code reconstruction protocol with three repairs)",
+        "research/experiments/EXP-FRONTIER-38164611798/handoff.json (AUDIT-VF-05 reference)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Two immutable interpretation dependencies are bound with verified hashes: (1) the Q1 frame research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (sha256 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747), consumed via --frame and verified by V4 frame_fidelity (host count=20, total DEEP=556); (2) the code base research/experiments/EXP-FRONTIER-38164611798/execute_module.py (sha256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a), from which the embedded outcome module derives. The executed module itself is pinned by DERIVED_SHA256=b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f applied to the frozen prereg.md block between FROZEN_CODE_BEGIN/END (prereg.md itself hashed in freeze.json.hashes at freeze time). The 20-host pool is pinned inside the frozen code (POOL list). All parser canaries and BFS calibration controls run offline against in-process fixtures. NC_SYNTHETIC_UNREACHABLE_ITEM_direct probes 3 frozen pool hosts at EXECUTE; its target identifiers are frozen in the POOL. No other mutable local code, data, task bank, or fixture can change the interpretation.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38184956362/spec.json#freeze_artifacts",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#13 (freeze_artifacts)",
+        "research/experiments/EXP-FRONTIER-38184956362/prereg.md#7 (patch + hashes)",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (verified sha256)",
+        "research/experiments/EXP-FRONTIER-38164611798/execute_module.py (verified sha256)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "check": "decision_rule_reachability",
+      "finding": "The SUPPORTS branch (G5) is empirically improbable on the frozen 20-host frame. The channel inventory (prereg 11d) shows: hosts with deep-complete static indexes (Docusaurus, Hugo, Jekyll, GitBook) mostly lack static named search or have JS-rendered results; hosts with static named search forms (mdBook, Sphinx, Sphinx-RTD) have shallow site indexes (e.g., doc.rust-lang.org robots->sitemap.txt with 3 top-level redirects not deep; docs.python.org sitemap.xml only 7 loc; pandas.pydata.org no sitemap; docs.pytest.org robots->sitemap.xml 15 version roots not deep; docs.readthedocs.io sitemap 1 loc). The designer discloses this as a validity threat (prereg 14.2: 'empirical tilt'). While SUPPORTS is structurally reachable (not mathematically impossible), a FALSIFIES outcome is strongly anticipated. This does not invalidate the design -- a bounded negative on this substrate class is a valid result -- but the a priori improbability should be noted in any downstream interpretation.",
+      "severity": "nonblocking"
+    },
+    {
+      "check": "measurement_prerequisites",
+      "finding": "PC-3 (>=2 engines with observable DEEP state-carrying items) is certified at DESIGN via direct fetches of unfetched frontiers (prereg 11c), but re-certified at EXECUTE via PC-CENSUS-DEEP-FETCH control. If the census finds fewer than 2 engines with deep controls at EXECUTE (e.g., due to frame staleness / dead URLs), the controls gate (V2) fails -> MEASUREMENT_INVALID. The Director mandate specifies that if PC-3 cannot be satisfied at pre-freeze cost, the design should 'fail loudly and record BLOCKED'. The design instead treats EXECUTE-time PC-3 failure as MEASUREMENT_INVALID. This is a minor discrepancy: the pre-freeze certificate claims PC-3 holds, so the design freezes; EXECUTE-time failure reflects world change, not pre-freeze unsatisfiability. However, if many deep pages die, an engine could become LIMITED (>10% death) pushing toward INCONCLUSIVE (G4) rather than BLOCKED. This is internally consistent with the decision rule but worth noting.",
+      "severity": "nonblocking"
+    },
+    {
+      "check": "treatment_liveness",
+      "finding": "The PC-1 smoke test was performed on an offline synthetic HTTP fixture, not the live 20-host pool. While this proves the entry point executes without the known TypeError/KeyError defects, it does not exercise the live channel document fetching (robots.txt, sitemaps, feeds, JSON-LD, search forms) against real servers. The EXECUTE inventory gate (V3) and controls gate (V2) re-run against the live pool before outcome stages, which mitigates this. No blocking issue, but the pre-freeze 'mechanical completion' certificate covers only the synthetic fixture path.",
+      "severity": "nonblocking"
+    }
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule partitions exhaustively with both SUPPORTS and FALSIFIES structurally reachable; thresholds are arithmetically sound; the instrument's dynamic range is certified in both directions. Measurement prerequisites are satisfied or gated with explicit infrastructure-signature handling. Baselines are identifiable: the primary comparator (BFS path cost per item) is measured in-frame and directly contrasted with the charged discovery cost (<=K=3). Controls are sensitive: the reachability fixture drives the actual scoring implementation, parser canaries caught a real bug, and the synthetic-null control bites on real HTTP status codes. Treatment liveness is proven: the exact frozen discovery entry point executed to completion at pre-freeze cost on a frame reproducing the parent's defects, while the parent module crashed. Freeze artifacts are bound: the Q1 frame and code base are pinned by sha256, the executed module by DERIVED_SHA256, the pool embedded in code. Three non-blocking findings are recorded: (1) empirical tilt makes SUPPORTS improbable on this frame (disclosed as validity threat), (2) EXECUTE-time PC-3 failure routes to MEASUREMENT_INVALID not BLOCKED (minor mandate discrepancy), (3) PC-1 smoke test used synthetic fixture not live pool (mitigated by V2/V3 gates). No blocking findings; the design is freezable.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38184956362/request.json",
+    "research/experiments/EXP-FRONTIER-38184956362/spec.json",
+    "research/experiments/EXP-FRONTIER-38184956362/prereg.md",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (sha256 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747)",
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py (sha256 75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a)",
+    "research/experiments/EXP-FRONTIER-38164611798/handoff.json",
+    "research/experiments/EXP-FRONTIER-37984242167/spec.json (empty-frame precedent)",
+    "research/experiments/EXP-FRONTIER-38085197666/failure.json (absent-artifact freeze precedent)"
+  ]
+}

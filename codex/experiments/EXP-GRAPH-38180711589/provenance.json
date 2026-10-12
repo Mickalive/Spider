@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38180711589",
+  "lane": "graph",
+  "stage": "execute",
+  "producer_model": "opencode/big-pickle",
+  "github": {
+    "run_ids": {
+      "design_and_checkpoint": "38180711589",
+      "prior_execute_attempt": "38184944432",
+      "prior_execute_attempt_attempt": "1"
+    },
+    "note": "execution_checkpoint.json records github_run_id 38180711589 (pre_execute_sha 1251b48af2f9a6a15ebcf87a34ee98e27f48a2c8). A prior execute attempt under github_run_id 38184944432 exited with code 75 (failure.json category EXECUTION_FAILURE; model_execute.json category transient-pool-exhausted). This run is the successful retry on the same frozen inputs."
+  },
+  "git": {
+    "head_commit": "66427823769b3288b63d09c84ee5caaaefe8c55f",
+    "head_subject": "R2 graph: execution base EXP-GRAPH-38180711589",
+    "branch": "lab2/graph",
+    "working_tree_dirty_paths": [
+      "SPIDER_CODEX.md",
+      "codex/claim_state.json",
+      "codex/index.json",
+      "research/experiments/EXP-GRAPH-38180711589/ (this experiment, untracked additions)"
+    ],
+    "note": "SPIDER_CODEX.md and codex/* are owned by the canonical Codex synchronization step and were not modified by EXECUTE. Only the experiment directory was written by EXECUTE."
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "numpy": "2.5.4",
+    "sentence_transformers": null,
+    "torch": null,
+    "scikit_learn": null,
+    "note": "numpy was absent when the frozen runner was first executed (raw embedding_status 'No module named numpy') and was bootstrapped afterwards only for the EXECUTE-side control harness (RandomState seed 4242). The sentence-embedding stack (torch/sentence_transformers/scikit-learn) is unavailable, so the retention comparator A-EMBED-COSINE is BLOCKED. The model-free D-PRIMARY path uses only the standard library."
+  },
+  "frozen_inputs": {
+    "research/experiments/EXP-GRAPH-38180711589/request.json": "465eff468cb6855a6465ba977c4b72f11481621ba97a32d40b8df2c2339befcd",
+    "research/experiments/EXP-GRAPH-38180711589/spec.json": "6eee55626f63ead379dd1e4ad043c6297ebf030f5be670054f72334d5aaf5ad8",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md": "5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0",
+    "research/experiments/EXP-GRAPH-38180711589/freeze.json": "76dc76c380cae42b978d81ec4b242d833435c85393bfb2fda88b67004f730599",
+    "research/experiments/EXP-GRAPH-38180711589/design_review.json": "9e06a693da4d35cfd0e9eed4bf4045db150c5c3480cb6e6fb023631bb967d55d"
+  },
+  "freeze_verification": {
+    "freeze_hashes_match": true,
+    "artifact_hashes_match": true,
+    "canonical_blocks_verified": "8/8",
+    "canonical_block_names": [
+      "G2-HELDOUT-INTENTS",
+      "GOAL-BANK-G1",
+      "GOAL-BANK-G2",
+      "LEXICON-G1",
+      "LEXICON-G1-ALT",
+      "LEXICON-G2-HELDOUT",
+      "OOS-BANK-G1",
+      "OOS-BANK-G2"
+    ],
+    "v12_freeze_binding": "PASS",
+    "v12_note": "A: sha256(freeze.json.hashes) match; B: sha256(FROZEN-RUNNER block) == sha256(extracted runner_frozen.py) == 5811a49524a012ba25483d61f78a0d696ccc82f0971386507217c0d9e2c9d6e5; C: all 9 spec.freeze_artifacts hashes match freeze.json.artifact_hashes."
+  },
+  "frozen_artifact_hashes": {
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "research/harness/candidate_resolver.py": "8ff7abe799e050f0ef708ce2329940e61cb6ba113849246d1a0fe7a66066d115",
+    "research/harness/experiment_runner.py": "c249ade23e1fda54c1e08a5835050afda32462ab36d0b2e9d2dc9f05b3549705",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f",
+    "research/harness/http_server.py": "25619aaf840ab833e963541aca93addca6ff17d2f2e9d4a1f76e528d7642390f",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "runner": {
+    "embedded_block": "prereg.md#FROZEN-RUNNER",
+    "extracted_path": "research/experiments/EXP-GRAPH-38180711589/runner_frozen.py",
+    "sha256": "5811a49524a012ba25483d61f78a0d696ccc82f0971386507217c0d9e2c9d6e5",
+    "seed": 3820973221,
+    "run_command": "python3 runner_frozen.py",
+    "exit_code": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "datasets_and_fixtures": {
+    "AXIS-PRIMARY": "GOAL-BANK-G1 (inline) + OOS-BANK-G1 (inline) filtered by V3 contamination screen over 20 registry intents + goal_generator PARAPHRASES/NO_APPLICABLE_TEMPLATES/OOD_PARAPHRASES + parent PRIOR-PARENT-BANK-TEXTS",
+    "AXIS-ALTLEX": "same banks scored with inline LEXICON-G1-ALT",
+    "AXIS-HELDOUT": "GOAL-BANK-G2 + OOS-BANK-G2 scored with inline LEXICON-G2-HELDOUT against G2-HELDOUT-INTENTS",
+    "kernel_fixture": "derived/kernel_registry.jsonl (20 mechanisms distilled from the 20 exact intent strings for B-INCUMBENT-KERNEL / PC sub-check ii), sha256 c2fb6acd953d6998e71ac94c4d166860c0501266ad1fdd7930beab9255be8192"
+  },
+  "commands": [
+    "python3 - <<'PY' (verify freeze.json.hashes and artifact_hashes) PY",
+    "python3 - <<'PY' (extract FROZEN-RUNNER block from prereg.md -> runner_frozen.py; verify sha 5811a495...) PY",
+    "python3 research/experiments/EXP-GRAPH-38180711589/runner_frozen.py > raw_evidence/runner_stdout.txt 2> raw_evidence/runner_stderr.txt",
+    "python3 research/experiments/EXP-GRAPH-38180711589/execute_controls.py",
+    "python3 research/experiments/EXP-GRAPH-38180711589/assemble_result.py"
+  ],
+  "result_artifacts": {
+    "research/experiments/EXP-GRAPH-38180711589/result.json": "562ddcb71808a9f393246d128c496265837ade393fca556b922b72d392a551a4",
+    "research/experiments/EXP-GRAPH-38180711589/raw_evidence/runner_result_raw.json": "860f9dbeca91dcad2338c4a7973e97c7685f4d33aae77de0665dba9167c35968",
+    "research/experiments/EXP-GRAPH-38180711589/raw_evidence/runner_stdout.txt": "860f9dbeca91dcad2338c4a7973e97c7685f4d33aae77de0665dba9167c35968",
+    "research/experiments/EXP-GRAPH-38180711589/derived/measurements.json": "860f9dbeca91dcad2338c4a7973e97c7685f4d33aae77de0665dba9167c35968",
+    "research/experiments/EXP-GRAPH-38180711589/derived/controls.json": "fd3944b30fa37e95d49ea002874bc5329996399c41d3e74090f9d5fdd169fcf6",
+    "research/experiments/EXP-GRAPH-38180711589/execute_controls.py": "ba8058d1b1000ea68c7f87207065de8e90d99204b5c4d993aa9e5fd305d2617e",
+    "research/experiments/EXP-GRAPH-38180711589/assemble_result.py": "84a0fba55478fffefaa547983f34e98d74a2e2ced090a78940cefb23ffdb749a"
+  },
+  "packet_output_hashes": {
+    "result.json": "562ddcb71808a9f393246d128c496265837ade393fca556b922b72d392a551a4",
+    "report.md": "c7577382285d3d0c927f8ff3f23bbebc0570d9b1195ae9db74a74b9bd8ee6f3a",
+    "provenance.json": null,
+    "note": "provenance.json's own hash is not self-referential; the sibling hashes of result.json/report.md are recorded here."
+  },
+  "parent": {
+    "experiment_id": "EXP-GRAPH-38175554380",
+    "prereg_sha256": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "role": "inherited GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1 and PRIOR-PARENT-BANK-TEXTS verbatim"
+  },
+  "notes": [
+    "All digest values in result.json#artifacts were recomputed from the on-disk files after the final regeneration; 14/14 hashes matched. No scientific number is duplicated by hand.",
+    "The frozen result.json emitted by runner_frozen.py was preserved as raw_evidence/runner_result_raw.json and derived/measurements.json before the canonical packet overwrote research/experiments/EXP-GRAPH-38180711589/result.json."
+  ]
+}
