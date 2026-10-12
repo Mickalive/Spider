@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38234107074",
+  "lane": "intel",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All six precedence branches are arithmetically reachable and no later rule is shadowed. SUPPORTS requires one COMPLETE treatment cell with task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6 (k>=3/5); reachable because the frozen scorer registers the full click-then-answer completion (carried PC-ORACLE-EPISODE 5/5), the GBNF admits the success path, and PC-OBSERVATION-CONTRAST asserts page_text contains TARGET-42 post-reveal. FALSIFIES requires at least one COMPLETE treatment cell reproducing the parent failure signature (answer_action_emission_rate==0.0, task_success_rate==0.0); reachable because the same classes already realized this under the frozen observation. MIXED is reachable via PARTIAL_SIGNAL (answer_action_emission_rate>0 or task_success_rate>base) or a BASE cell that CLEARS (reproduction anomaly). MEASUREMENT_INVALID is reachable via preflight failure, no COMPLETE base cell, or no COMPLETE treatment cell. Thresholds (5 episodes, k in 0..5) are attainable at both ends; early-stop at rule 4 cannot shadow FALSIFIES because a non-clearing run continues and a clearing run has nothing left to falsify. Operational failures (identity/load/PC/a11y-unavailable) are explicitly non-terminal and cannot empty the FALSIFIES/MIXED branches.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/result.json#metrics",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#decision_rule",
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#section-7",
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#clearing_threshold"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is verified at DESIGN time or pinned fail-closed: (a) stack probe: Python 3.12.15, nproc=4, 15 GB RAM (~14 GB available), 85 GB free disk, /usr/bin/google-chrome 154.0.8037.97 present; llama_cpp and playwright absent at DESIGN and installed at EXECUTE (same as parent); llama-cpp-python==0.2.90 sdist present on PyPI (verified, probe B8) and registers both 'llama-3' and 'qwen' (carried parent DESIGN verification); (b) both revision-pinned GGUF URLs answered HTTP 200 with content-length equal to pinned byte counts and x-linked-etag equal to pinned served_body_sha256 (probe B7); (c) observation patch applies to frozen runner with anchor count 1, py_compile passes, reconstructed file sha256 recorded, every mode branch reachable (probes B2, B3, B6); (d) a11y mode is fail-closed if API missing. No credential is required. The EXECUTE-time installs (llama-cpp-python, playwright) are standard dependencies identical to the parent and do not determine whether the measurement is possible.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#section-10",
+        "research/EXPERIMENT_PACKET.md#2-workflow"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The comparator is an in-run BASE cell on the SAME model bytes under the SAME runner/fixture/prompt/grammar/sampling/seeds/scorer, with the observation mode as the only varied factor. The frozen runner patch is bound by (frozen runner sha256 + patch fragment sha256 + reconstructed runner sha256) and verified before any episode. The parent's carried result (0/5 both classes) defines the expected reproduction signature, and REPRO_OK (answer_action_emission_rate==0.0 AND task_success_rate==0.0 AND step0_reveal_click_rate==1.0) is required before a treatment cell may be attributed. A BASE cell that CLEARS forces OUTCOME=MIXED with B3=UNRESOLVED rather than being silently read as a treatment success. Baseline identifiability does not rest on any stated model prior.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/result.json#metrics",
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-a"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "PC-OBSERVATION-CONTRAST is a direct manipulation check on the real served page and is sensitive to the exact defect: OBS-BASE post-reveal ELEMENTS must still list #reveal-btn (defect present), OBS-VISIBLE pre-reveal must contain #reveal-btn, OBS-VISIBLE post-reveal must NOT contain it, OBS-A11Y post-reveal exposes no clickable control named 'Reveal', and page_text must contain TARGET-42 post-reveal in every mode. A DESIGN-time semantic probe of the exact two JS element sources on a synthetic element with display:none and zero rect confirmed the filter drops the hidden button post-reveal while keeping it pre-reveal (probe B5); the same assertions are re-run on the real page at EXECUTE and a failure is MEASUREMENT_INVALID. NC-NO-MODEL-ACTION (0.0/0.0) and B-RANDOM-ACTION (parseable 1.0, success<0.6) are equally sensitive to a broken scorer, as the parent measured. PC-ORACLE-EPISODE (5/5 scripted) and PC-JSON-CONSTRAINED-DECODING (10/10 per cell) gate every cell before episodes. All control failures are MEASUREMENT_INVALID, never a capability result.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/raw/controls.json"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment (observation mode change) is structurally executable and was exercised in a non-outcome-bearing stub probe (probe B6): with the frozen runner patched (anchor count 1, py_compile OK) and heavy deps stubbed, SPIDER_OBS_MODE=visible and =a11y both dispatch to live branches that return a well-formed observation dict, the default resolves to 'base', the a11y mode falls back from Locator.aria_snapshot to Page.accessibility.snapshot and raises an explicit operational error when neither exists, and an unknown mode raises. The base branch is AST-identical to the frozen observe() body, so 'base' cannot silently become a treatment. No model, no browser, and no outcome-bearing measurement was used.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-b"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "The interpretation depends on three mutable local files, all listed in freeze_artifacts and hashed by the freezer: the frozen runner (2b5d5bb5...), the frozen base fixture (7aba9dc8...), and the prompt-provenance file (4e2b6710...). The only new code is the observation patch, embedded verbatim in prereg.md (itself hashed into freeze.json.hashes) and identified by patch_old_fragment_sha256=183d3c630e661de298567bdd4062a3b3d7cbbd6d2dac345dd2ff6334f4b8d654, patch_new_fragment_sha256=61d8bf3fa5ec66f77e4157ab103535dc397eacf5e1c447fb5c3d5787ef235a66, and reconstructed_runner_sha256=b2e3b7f9a1411176d66ba21f03659d9d21372fef5fa5b3ecad3ffd40dc7c0cd3. EXECUTE reconstructs the runner from the frozen runner bytes plus the frozen patch and fails closed on any mismatch; it never authors new code. No task bank or dataset is authored or mutated. Remote GGUF downloads are pinned by served-body sha256 (not server metadata) and revision-pinned URLs use commit sha.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/freeze.json",
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-a",
+        "research/experiments/EXP-INTEL-38234107074/prereg.md#appendix-c"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is fully reachable in all branches with no shadowing; every hard prerequisite is verified at DESIGN or pinned fail-closed; the in-run BASE comparator on identical model bytes with only the observation varied provides strong identifiability; controls are sensitive and manipulation checks are live; the treatment observation modes are structurally executable (verified by stub probe); and all mutable interpretation dependencies are bound in freeze_artifacts with the patch embedded in the hashed prereg. The experiment is capable of answering its question and should proceed to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38234107074/spec.json",
+    "research/experiments/EXP-INTEL-38234107074/prereg.md",
+    "research/experiments/EXP-INTEL-38194362040/handoff.json",
+    "research/experiments/EXP-INTEL-38194362040/result.json"
+  ]
+}
