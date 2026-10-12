@@ -24,6 +24,13 @@ def run():
     repo = Path(__file__).resolve().parents[1]
     config = json.loads((repo / "config/models.json").read_text())
     models = allowed_candidates(config, 3)
+    all_free = allowed_candidates(config, 12)
+    assert len(all_free) == 12
+    assert set(all_free) == set(config["free_only_allowed_models"])
+    assert "opencode/mimo-v2.6-flash-free" in all_free
+    assert "opencode/exo-free" in all_free
+    # A verified free model outside the former three-model pool MUST still be tried.
+    assert all_free[3:]
     assert len(models) == 3 and all(m in config["free_only_allowed_models"] for m in models)
     try:
         allowed_candidates({**config, "free_only": False}, 3)
@@ -48,6 +55,10 @@ def run():
     assert "steps.provider.outputs.ready" in pulse
     assert "scripts/probe_free_provider.py" in pulse
     assert ".spider-runtime/provider_preflight.json" in pulse
+    assert 'default=12' in (repo / "scripts/probe_free_provider.py").read_text()
+    assert 'selected_model' in (repo / "scripts/probe_free_provider.py").read_text()
+    assert 'selected_model=$PREFERRED' in pulse
+    assert 'preferred_free_model=$PREFERRED_FREE' in pulse
     probe_agent = (repo / ".opencode/agents/spider_provider_probe.md").read_text()
     assert "bash: deny" in probe_agent and "edit: deny" in probe_agent
     print("SPIDER_FREE_PROVIDER_PREFLIGHT_TEST_OK")
