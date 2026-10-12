@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-38180711589",
-  "last_experiment_id": "EXP-GRAPH-38175554380",
-  "last_verdict": "BOUNDED_MEASUREMENT_TRANSACTION_VALID_AUDIT_PASS_PRODUCER_CLAIM_NOT_SUPPORTED_AS_WRITTEN_D-RESOLVER_FALSIFIES_STRONG_DETERMINISTIC_COMPARATOR_EXCEEDS_EMBEDDING_ON_THIS_FIXTURE_D-GATE_NOT-MET_NO_CLAIM_ADVANCE_C-SEMANTIC-RESOLVE_HELD_AT_HYPOTHESIS_NO_PRODUCT_PROMOTION_NO_IMMEDIATE_RECHAIN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-38180711589",
+  "last_verdict": "BOUNDED_MEASUREMENT_TRANSACTION_VALID_AUDIT_PASS_PRODUCER_CLAIM_SUPPORTED_AS_WRITTEN_D-PRIMARY_GATE-NOT-MET_PRIMARY_TEST_FALSE_ACCEPT_0.1667_GT_0.10_D-ALTLEX_D-HELDOUT_BLOCKED_NO_CLAIM_ADVANCE_C-SEMANTIC-RESOLVE_HELD_AT_HYPOTHESIS_NO_PRODUCT_PROMOTION_NO_IMMEDIATE_RECHAIN",
   "continue_immediately": false,
-  "next_question": "Given that a bank-blind, model-free deterministic operation-synonym + resource-noun resolver already exceeds max-cosine embedding selection for unseen-goal mechanism identity on the frozen 113-goal primary set (97/113=0.8584 vs 78/113=0.6903; paired family-blocked 95% bootstrap diff -0.1681, CI [-0.3077,-0.0268]) while both the two-feature cosine/margin logistic gate and the single global cosine threshold collapse to GATE-NOT-MET (t*=1.0, coverage 0.0), does a model-free resolver whose OWN ambiguity/coverage signal (e.g. unresolved operation synonym, tied/absent resource-noun match, missing required slot) supplies the abstention decision simultaneously reach pooled false-accept <= 0.10, coverage >= 0.50 and unknown-precision >= 0.85 on a disjoint calibration/test split, and does that deterministic resolve()+ambiguity-gate pair retain its selection advantage on a held-out mechanism set and under a differently curated synonym lexicon -- thereby deciding whether resolve() ships as a deterministic resolver plus ambiguity gate with the embedding path retired, or whether unseen-goal resolution must move to a structured slot/parameter or retrieval-model architecture trained on independently authored goals?",
+  "next_question": "Given that the frozen model-free integer ambiguity signal S = 1[famNONE]+1[opNONE]+1[opTIE]+1[noslot]+1[quant] fails the pre-registered operating point on the disjoint AXIS-PRIMARY test split (pooled_false_accept 3/18=0.1667 > 0.10, coverage 0.9464 >= 0.50, unknown_precision 1.0 carried by only 2 signal-driven abstentions) and also misses the <=0.10 false-accept target on both secondary axes (AXIS-ALTLEX 0.1667, AXIS-HELDOUT 0.2000) while the deterministic selection half remains intact (B-LEX-STRONG 97/113=0.8584) and D-ALTLEX/D-HELDOUT retention is BLOCKED by the missing embedding stack: which materially different resolution architecture -- (A) structured slot/parameter binding with an explicit, independently checkable abstention condition, or (B) a retrieval/embedding model trained on independently authored goals -- simultaneously reaches pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint calibration/test split AND generalizes its selection advantage to a held-out mechanism set and an independently curated synonym lexicon, thereby deciding whether resolve() ships as a deterministic resolver plus a valid abstention gate or must adopt the structured/retrieval architecture?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-10-12T00:02:43.207361+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "207568710d1d00f0aa82aeaf7cb2deb3469f8dfdade645de65edb962fc231d9e",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-12T00:27:14.629231+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "38b65a0a835d4f0ac8d16d6e6d915ba57f15cb116b840eaaf59d1849260a24e2",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
