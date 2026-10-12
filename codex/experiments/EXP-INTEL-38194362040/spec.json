@@ -1,0 +1,306 @@
+{
+  "schema_version": 2,
+  "title": "Byte-verified credential-free capable-endpoint capability ladder (corrected freeze) and hosted-provisioning census under the frozen minimal multi-step Web-agent protocol, with a conditional external-comparator readiness/reproducibility table (readiness condition / blocker B3 for the gated four-arm benchmark).",
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "claim_ids": ["C-LLM-INHERIT"],
+  "question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the ACTUALLY SERVED BODY (verified by a full DESIGN-time download, NOT HF etag/xetHash tree-API metadata) and re-frozen with a revision-pinned URL, does either M-14B-QWEN (Qwen2.5-14B-Instruct Q4_K_M) or M-8B-LLAMA (Meta-Llama-3.1-8B-Instruct Q4_K_M) clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over the 5 frozen seeded episodes) - and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test; additionally recording, non-gating, whether any competitor-strength external comparator (QCR, compile-and-execute, site-memory/ColorBrowserAgent) is reproducible under this protocol. This is the corrected continuation of EXP-INTEL-38175568787 (MEASUREMENT_INVALID, substrate/provisioning failure, NOT a capability result): the frozen ladder was never executed because both candidates failed frozen step 3a - the pinned sha256 equaled the HF tree-API xetHash / CDN etag while the served body bytes (stable across three independent routes) hash to the tree-API lfs.oid at equal byte count.",
+  "hypothesis": "H1 (capability). At least one predeclared credential-free candidate class not previously tested - M-14B-QWEN (scale beyond the tested 3B-8B Qwen ceiling) or M-8B-LLAMA (non-Qwen family at the failed 7B size band) - clears the inherited bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over the 5 frozen seeded episodes) under the frozen minimal protocol and the frozen goal/schema system prompt, thereby satisfying readiness condition (3) at mechanism level with a factory-provisionable credential-free local endpoint. H2 (provisioning). No hosted same-protocol model endpoint is provisionable in this factory without a human-issued credential: every predeclared hosted provider is credential-gated (exact missing environment variable recorded) or unreachable, and the only reachable credential-free hosted path (Pollinations gpt-oss-20b) is operationally capped (reasoning-only content, small completion-token cap, intermittent HTTP 402, no model pinning/SLA). H3 (freeze-process repair, operational not scientific). The prior MEASUREMENT_INVALID was a freeze-process defect, not model behaviour: at DESIGN time the served-body sha256 of both candidates was obtained by full download and equals the tree-API lfs.oid, and the previously pinned xetHash/etag differs from it; re-pinning to the served body and adding a full-download byte-verification step makes the frozen content identity satisfiable against authentic served content.",
+  "falsifier": "H0 (bounded negative). No predeclared credential-free candidate clears the bar - every COMPLETE candidate cell has task_success_rate < 0.6 - AND the census finds no PROVISIONABLE_CREDENTIATED hosted provider, so no currently-provisionable same-protocol endpoint (credential-free local or hosted) can drive the minimal multi-step Web-agent test and readiness condition (3) is NOT_SATISFIED; the gated four-arm benchmark must be re-scoped (drop the same-model external published-baseline anchor in favour of internally re-run comparators on a dynamic-range task bank, or obtain a hosted credential, or pursue a different model class). FALSIFIES is asserted only over the COMPLETE, predeclared credential-free local candidate set (a capability bound on those tested classes/quantisation, not a global rejection of C-LLM-INHERIT and not a closure of hosted frontier classes, which remain UNRESOLVED-by-blocker). A candidate whose GGUF fails the byte-level content-identity verification or whose treatment PC gate fails is recorded as UNMEASURED_LOAD_FAILED / UNMEASURED_TREATMENT_PC_FAILED and is NOT counted as a capability failure; if no candidate is COMPLETE the packet is MEASUREMENT_INVALID, not a scientific negative.",
+  "baselines": [
+    {
+      "id": "B-CARRIED-3B-8B-QWEN-GOAL-SCHEMA",
+      "type": "carried_reference_baseline",
+      "description": "Protocol-hardness anchor, NOT re-run. Under the byte-identical frozen minimal protocol and the goal/schema prompt (P-TREAT-GOAL-SCHEMA, string sha256 36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716), both credential-free Qwen2.5 3B-8B Q4_K_M candidates failed the bar: M-7B-QWEN task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5), zero answer actions; M-3B-QWEN task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5). Establishes that the frozen protocol is hard for the tested class (the bar is not trivially met) while constrained decoding is live.",
+      "expected_outcome": "FAIL (carried reference; not re-run). Used only to certify protocol hardness and decoding liveness; it is not a comparator arm for the new candidates.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38164607941/result.json#metrics",
+        "research/experiments/EXP-INTEL-38164607941/audit.json",
+        "research/experiments/EXP-INTEL-38164607941/handoff.json"
+      ]
+    },
+    {
+      "id": "B-RANDOM-ACTION",
+      "type": "negative_baseline_chance",
+      "description": "Uniform random action selection from the frozen 5-action space (click #reveal-btn; answer TARGET-41; answer TARGET-42; answer TARGET-43; answer unknown), 5 episodes, seeded random.Random(42) created once and reused (as the frozen runner's make_random_producer does), run against the SERVED task page through the same frozen run_episode scorer as the candidates. The parent's null-random mode ran on about:blank (a navigation defect); this design runs every mechanical control against the served page.",
+      "expected_outcome": "parseable_action_rate_step1=1.0 (valid JSON by construction) and task_success_rate<0.6. Analytic per-episode success probability = sum_{j=1..4}(1/5)^(j+1) = 0.04992, so P(task_success_rate>=3/5)=P(Binomial(5,0.04992)>=3)~1.15e-3 and the 0.6 bar is effectively unreachable by chance. task_success_rate>=0.6 -> MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#random_baseline",
+        "research/experiments/EXP-INTEL-38164607941/prereg.md#section-6"
+      ]
+    },
+    {
+      "id": "B-POLLINATIONS-CARRIED",
+      "type": "carried_reference_baseline",
+      "description": "Credential-free hosted path, NOT re-run. Pollinations anonymous proxy (https://text.pollinations.ai/openai; GET /models resolves openai-fast -> gpt-oss-20b, tier anonymous, reasoning=true, tools=true). Under the same minimal Web-agent task the grandparent recorded: empty content with reasoning-only output and a ~197 completion-token cap despite max_tokens=1200, 1 step, 197 tokens; intermittent HTTP 402; no model pinning/SLA. Recorded in the census as CREDENTIAL_FREE_OPERATIONALLY_CAPPED with the exact operational blocker.",
+      "expected_outcome": "FAIL (carried reference; not re-run). Establishes the exact operational blocker for the only reachable credential-free hosted path.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37973264582/result.json#observations",
+        "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json",
+        "research/experiments/EXP-INTEL-38164607941/spec.json#baselines"
+      ]
+    }
+  ],
+  "positive_control": {
+    "id": "PC-SUITE-EXP-INTEL-38194362040",
+    "type": "positive_control_suite",
+    "success_criterion": "PC-JSON-CONSTRAINED-DECODING 10/10 per evaluated candidate cell; PC-ORACLE-EPISODE 5/5 at preflight",
+    "members": [
+      {
+        "id": "PC-JSON-CONSTRAINED-DECODING",
+        "protocol": "10 probes per evaluated candidate of the frozen probe string emitted by the frozen base config prompts.positive_control_probe ('Emit exactly: {\"action\":\"click\",\"selector\":\"#test\"}') under P-TREAT-GOAL-SCHEMA with the frozen GBNF grammar (string sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65). Executed by the frozen runner mode_probe_candidate.",
+        "success_criterion": "10/10 syntactically valid JSON matching the action schema (positive_control_pass_rate=1.0)",
+        "failure_policy": "a candidate whose PC gate fails is EXCLUDED (no episodes) and recorded UNMEASURED_TREATMENT_PC_FAILED; it is not a capability failure."
+      },
+      {
+        "id": "PC-ORACLE-EPISODE",
+        "protocol": "5 scripted episodes (click #reveal-btn then answer TARGET-42) driven through the REAL frozen run_episode scorer against the served page, with navigation repaired (page.goto before any episode). The scripted step producer returns json.dumps strings as required by the frozen parse_action contract.",
+        "success_criterion": "5/5 task_success=true (proves the scorer registers the full completion path and mechanical verification is live)",
+        "failure_policy": "<5/5 -> preflight failure -> OUTCOME=MEASUREMENT_INVALID (scorer broken, not model behaviour)."
+      }
+    ]
+  },
+  "null_control": {
+    "id": "NC-NO-MODEL-ACTION",
+    "type": "no_model_baseline",
+    "protocol": "5 episodes of fixed non-JSON content ('I will click the button') through the real frozen scorer against the SERVED task page (navigated).",
+    "success_criterion": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0",
+    "failure_policy": "any parseable or successful episode -> verification logic broken -> MEASUREMENT_INVALID"
+  },
+  "measurement_validity": [
+    "Corrected content-identity policy (the repair this experiment exists to make): each candidate is pinned to (i) sha256 of the FULLY DOWNLOADED served body, obtained at DESIGN time and equal to the HF tree-API lfs.oid, (ii) exact byte count, (iii) a repo-revision-pinned URL, and (iv) an independent GGUF metadata fingerprint (gguf_version, tensor_count, general.architecture, general.file_type, block_count, embedding_length, context_length, tokenizer.chat_template presence). The HF xetHash / CDN etag value is explicitly recorded as NOT a pin source. Full-download verification at DESIGN supersedes the parent's metadata-derived pin (see raw/design probe in prereg.md#appendix-b and spec.candidates[].digest_sources).",
+    "Frozen protocol identity: this packet reuses the audited frozen runner research/intel/run_exp_37982024058.py (file sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00) and the frozen base fixture research/experiments/EXP-INTEL-37982024058/raw/harness_config.json (file sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb). Both are freeze_artifacts; EXECUTE must re-verify their hashes and fail closed on mismatch.",
+    "Substrate identity: the task is the frozen single-page MIN-WEBAGENT-CLICK-REVEAL-ANSWER fixture (#reveal-btn reveals #target=TARGET-42; the reveal button is hidden after the first click), max_steps_per_episode=5, threshold_target_text=TARGET-42; served on 127.0.0.1 via the frozen start_page_server, driven by Playwright + /usr/bin/google-chrome.",
+    "Single manipulated dimension across candidates: only the model GGUF (and the model-family chat_format required to load it) differs between candidate cells. The task page, user template, system prompt (P-TREAT-GOAL-SCHEMA, string sha256 36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716), GBNF grammar (string sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65), sampling (temperature=0.0, max_tokens=512, n_ctx=2048, llama_seed=42, base_seed=42, episode seeds 42-46, n_threads=4), strict parse_action and the mechanical run_episode scorer are identical for every candidate.",
+    "Per-candidate config overlays are deterministic transformations of the frozen base config: load the base config bytes and replace ONLY prompts.system (with the frozen P-TREAT-GOAL-SCHEMA string), sampling.chat_format (with the candidate's family chat format) and candidate_models_frozen (with the single candidate's frozen entry). Every other key is inherited byte-for-byte. The overlay is written to the exact path the frozen runner reads: <per-candidate-outdir>/raw/harness_config.json. EXECUTE records each overlay's sha256 in provenance.json and verifies the object-level diff is confined to those three keys.",
+    "Strict mechanical verification: Playwright DOM assertions plus whole-string JSON-schema parse identical to the frozen parse_action (the entire completion must be valid JSON matching {action: click|answer, selector?: string, text?: string} with the action-appropriate required field); task_success additionally requires the mechanical reveal (#target visible with text TARGET-42) AND a terminal answer action whose text equals TARGET-42. No LLM grading.",
+    "Byte-level content identity is fail-closed and non-substituting: at frozen ladder step 3a EXECUTE streams the revision-pinned URL to a temp file, computes byte count + sha256, and parses the GGUF header fingerprint. IDENTITY-PASS requires bytes==pin AND sha256==pin AND fingerprint==pin. On sha256 mismatch the candidate is UNMEASURED_LOAD_FAILED (operational, not a capability failure); EXECUTE never substitutes a differing body, and records the observed body sha256, byte count and fingerprint as diagnostics. One re-download is permitted to distinguish transient transport corruption from a stable served-body drift; both attempts are logged.",
+    "The P-TREAT-GOAL-SCHEMA prompt leaks neither '#reveal-btn' nor 'TARGET-42' (design-time verified), so a treatment success cannot be attributed to answer leakage.",
+    "Deterministic protocol: temperature=0.0 + fixed seeds. Under the frozen adequacy rule (5 episodes, 3/5 = 0.6 exactly) there is no variance estimate; 0.6 is a pre-declared capability-gate adequacy rule, not a statistical threshold. This limitation is inherited and disclosed.",
+    "Representation loss (inherited): state is a simplified text observation (PAGE_TEXT 300 chars, ELEMENTS over button/a/input, HISTORY), not a full accessibility tree. After the reveal, PAGE_TEXT contains TARGET-42 and ELEMENTS lists the (now hidden) reveal button; the tested class re-clicks it rather than answering. This packet changes only the model class, not the observation representation.",
+    "The endpoint census is observational (env-var presence + unauthenticated HTTP status/reachability + carried receipts). It is not outcome-bearing and is non-gating for the capability OUTCOME; it exists to answer the mandate's 'exact credential/operational blocker' clause. Hosted model numbers are CANDIDATE_NOT_EVIDENCE.",
+    "The external-comparator readiness/reproducibility table is a literature-identity enumeration (pinned arXiv IDs/titles/dates, reported metric, denominator, reproduction prerequisites, and a mechanical reproducibility-feasibility classification against this factory's obtainable substrate), explicitly labelled CANDIDATE_NOT_EVIDENCE and non-gating. No external vendor number is used as SPIDER evidence.",
+    "Scope bound: FALSIFIES is bounded to the predeclared credential-free local Q4_K_M classes tested (Qwen2.5-14B, Llama-3.1-8B) plus the carried Qwen 3B-8B anchors and the recorded non-provisionable hosted census. It does not close hosted frontier classes (blocked, not tested), other quantisations, other tasks, or other domains, and it does not globally reject C-LLM-INHERIT."
+  ],
+  "decision_rule": "OUTCOME is exactly one of {SUPPORTS, FALSIFIES, MEASUREMENT_INVALID}. B3_STATUS is a separate derived field in {SATISFIED, NOT_SATISFIED, UNRESOLVED}. DEFINITIONS: a CELL(c) is one predeclared candidate c measured by the frozen runner research/intel/run_exp_37982024058.py (mode probe-candidate) with its per-candidate config overlay = a PC-JSON-CONSTRAINED-DECODING gate (10 probes) followed by an episode batch (clearing_threshold.episodes=5). CELL(c) is COMPLETE iff load_status==LOADED AND positive_control_pass_rate==1.0 AND exactly 5 episode records; EXCLUDED iff LOADED and the PC gate did not pass (no episodes); UNMEASURED_LOAD_FAILED iff the byte-level content-identity verification at 3a failed or the model failed to load; PARTIAL iff the PC gate passed but fewer than 5 episode records. CLEARS(c) iff COMPLETE and task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6. PRECEDENCE (first matching rule wins): (1) PREFLIGHT, executed once before the ladder: PC-ORACLE-EPISODE==5/5 AND NC-NO-MODEL-ACTION==(parseable 0.0, task_success 0.0) AND B-RANDOM-ACTION==(parseable 1.0, task_success_rate<0.6) AND all freeze_artifact hash checks match AND required stack imports succeed; else OUTCOME=MEASUREMENT_INVALID, B3_STATUS=UNRESOLVED, STOP. (2) ENDPOINT CENSUS, executed independently and non-gating: for each predeclared provider record credential_env, credential_present, unauthenticated reachability_http_status, classification in {PROVISIONABLE_CREDENTIATED, CREDENTIAL_REQUIRED, CREDENTIAL_FREE_OPERATIONALLY_CAPPED, UNREACHABLE} and blocker (exact missing env var / HTTP status / operational cap). (3) CAPABILITY LADDER over [M-14B-QWEN, M-8B-LLAMA] in order; for each candidate c: (3a) BYTE-LEVEL CONTENT-IDENTITY VERIFICATION - stream the revision-pinned URL to a temp path with no size cap, compute byte count and sha256, and parse the GGUF header fingerprint; IDENTITY-PASS iff bytes==pinned bytes AND sha256==pinned served_body_sha256 AND fingerprint==pinned fingerprint; on any mismatch allow ONE re-download, and if it still mismatches record observed bytes/sha256/fingerprint and mark UNMEASURED_LOAD_FAILED, continue (never substitute a differing body); (3b) load (failure -> UNMEASURED_LOAD_FAILED, continue); (3c) run the PC gate then the 5 episodes; if EXCLUDED -> UNMEASURED_TREATMENT_PC_FAILED, continue; if PARTIAL -> record and continue; (3d) if COMPLETE and CLEARS -> OUTCOME=SUPPORTS, B3_STATUS=SATISFIED, STOP (early stop on the first clearing candidate); (3e) if COMPLETE and does not CLEAR -> record TREATMENT_FAILS_BAR, continue. (4) AFTER THE LADDER (no candidate cleared): let measured = { c in ladder : CELL(c) COMPLETE and not CLEARS }; if measured is empty -> OUTCOME=MEASUREMENT_INVALID, B3_STATUS=UNRESOLVED, STOP; else OUTCOME=FALSIFIES and B3_STATUS = NOT_SATISFIED iff every predeclared hosted provider is CREDENTIAL_REQUIRED / UNREACHABLE / CREDENTIAL_FREE_OPERATIONALLY_CAPPED, else UNRESOLVED (a credentialed hosted provider is provisionable, so a hosted capability test remains the smallest next action). A candidate identity/load failure or PC failure is never encoded as a capability failure. Canonical packet mapping: SUPPORTS -> result.outcome=SUPPORTS, result.status=COMPLETE; FALSIFIES -> result.outcome=FALSIFIES, result.status=COMPLETE; MEASUREMENT_INVALID -> result.status=MEASUREMENT_INVALID, result.outcome=INCONCLUSIVE. B3_STATUS, the census records and the external-comparator table are written in result.metrics/observations and do not override the frozen OUTCOME.",
+  "product_consequence_positive": "If a predeclared credential-free candidate CLEARS the bar (OUTCOME=SUPPORTS): readiness condition (3) / blocker B3 is satisfiable with a factory-provisionable credential-free local endpoint (the clearing candidate's GGUF + llama.cpp). The gated four-arm benchmark COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER (same model/tools/budget) becomes executable at that model class with the verified goal/schema prompt, subject to B1 (shipped carrier) and B2 (non-ceiling dynamic-range task bank), which are owned by Product and Runtime and are parallel to, not dependent on, B3. Whether C-LLM-INHERIT advances from HYPOTHESIS toward EXPERIMENTAL remains a DIRECTOR adjudication. The external-comparator readiness/reproducibility table bounds the fair comparator set for the benchmark.",
+  "product_consequence_negative": "If no predeclared credential-free candidate CLEARS and no hosted provider is provisionable (OUTCOME=FALSIFIES, B3_STATUS=NOT_SATISFIED): the minimal multi-step Web-agent bar is not cleared by any credential-free Q4_K_M local class tested up to 14B and a non-Qwen 8B family, and the only reachable credential-free hosted path is operationally capped; readiness condition (3) is NOT_SATISFIED. The recorded exact blocker per hosted provider (missing credential environment variable or unreachable endpoint) and the census classification become decision inputs for the Global Research Director, who owns the re-scope choice: obtain a hosted credential (pinning/SLA), or drop Gate 3's same-model external published-baseline anchor in favour of internally re-run comparators on a task bank with a dynamic-range certificate, or provision a different model class. This packet does not pre-decide the re-scope. A MEASUREMENT_INVALID outcome changes no claim and requires the recorded repair before any re-run.",
+  "estimated_cost": "CPU-only (nproc=4, 15 GB RAM, ~14 GB available, 85 GB free disk; design-time probe: Python 3.12.15, /usr/bin/google-chrome present; llama_cpp/playwright/openai NOT preinstalled -> EXECUTE installs). Downloads (design-time full-download verified, digest-pinned to served body): M-14B-QWEN 8,988,110,976 bytes + M-8B-LLAMA 4,920,739,232 bytes = ~13.9 GB worst case (early stop after the first clearing candidate may avoid the second download; the DESIGN-time full downloads used ~13.9 GB once). llama-cpp-python build (sdist) ~5-15 min. Inference: frozen runner runs 10 PC probes + up to 5 episodes x up to 5 steps per candidate; at the parent's measured 6.22 s/call for 7B (2.73 s/call for 3B), scaling to ~10-12 s/call for 14B gives ~5-15 min per candidate. Endpoint census <5 min. No external API spend (no credential exists; census is unauthenticated reachability only). Wall-clock estimate 60-180 min.",
+  "expected_information_gain": "High and decision-changing in both directions, and strictly higher than a re-run of the invalid parent because the one blocking substrate defect is repaired and independently verified at DESIGN time. Positive: a credential-free capable class is found, B3 is cleared, and the flagship four-arm benchmark can proceed at that class. Negative: the credential-free Q4_K_M local path is bounded at the tested classes, the exact hosted-credential blocker is recorded per provider, B3 is explicitly NOT_SATISFIED, and the Director receives a concrete re-scope set plus a bounded external-comparator readiness/reproducibility table - so the four-arm benchmark is not funded on an unavailable anchor. It directly tests the parent handoff's declared unknown U-03 ('whether 14B+/non-Qwen GGUFs clear the bar') and the mandate's hosted-provisioning clause, and it does NOT re-run the spent 3B-8B prompt ablation or the spent Pollinations agent attempt. A third consecutive MEASUREMENT_INVALID is only possible if the served body drifts, in which case the recorded observed bytes/sha256/fingerprint is itself a durable substrate finding.",
+  "candidates": [
+    {
+      "candidate_id": "M-14B-QWEN",
+      "role": "primary",
+      "model": "Qwen2.5-14B-Instruct",
+      "quant": "Q4_K_M",
+      "chat_format": "qwen",
+      "repo": "bartowski/Qwen2.5-14B-Instruct-GGUF",
+      "revision_sha": "05244aa5d871c661c80082a15d3bce44714d068d",
+      "frozen_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/05244aa5d871c661c80082a15d3bce44714d068d/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "main_ref_url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "bytes": 8988110976,
+      "served_body_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "gguf_fingerprint": {
+        "gguf_version": 3,
+        "tensor_count": 579,
+        "kv_count": 38,
+        "general.architecture": "qwen2",
+        "general.name": "Qwen2.5 14B Instruct",
+        "general.file_type": 15,
+        "block_count": 48,
+        "embedding_length": 5120,
+        "context_length": 32768,
+        "has_tokenizer_chat_template": true
+      },
+      "digest_sources": {
+        "served_body_sha256": "DESIGN full download of both the revision-pinned URL and the main-ref URL (byte-identical); equals HF tree-API lfs.oid",
+        "tree_lfs_oid": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+        "tree_xetHash_NOT_A_PIN": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+        "cdn_etag_NOT_A_PIN": "\"d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b\"",
+        "parent_pinned_sha256_superseded": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+        "parent_execute_observed_served_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008"
+      },
+      "note": "Larger same-family class (scale beyond the tested 3B-8B ceiling). Single-file Q4_K_M. RAM risk: ~9.0 GB weights on a 15 GB box; a load failure is recorded UNMEASURED_LOAD_FAILED (operational, not a capability failure) and the ladder continues."
+    },
+    {
+      "candidate_id": "M-8B-LLAMA",
+      "role": "secondary",
+      "model": "Meta-Llama-3.1-8B-Instruct",
+      "quant": "Q4_K_M",
+      "chat_format": "llama-3",
+      "repo": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
+      "revision_sha": "bf5b95e96dac0462e2a09145ec66cae9a3f12067",
+      "frozen_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/bf5b95e96dac0462e2a09145ec66cae9a3f12067/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "main_ref_url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "bytes": 4920739232,
+      "served_body_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "gguf_fingerprint": {
+        "gguf_version": 3,
+        "tensor_count": 292,
+        "kv_count": 33,
+        "general.architecture": "llama",
+        "general.name": "Meta Llama 3.1 8B Instruct",
+        "general.file_type": 15,
+        "block_count": 32,
+        "embedding_length": 4096,
+        "context_length": 131072,
+        "has_tokenizer_chat_template": true
+      },
+      "digest_sources": {
+        "served_body_sha256": "DESIGN full download of both the revision-pinned URL and the main-ref URL (byte-identical); equals HF tree-API lfs.oid",
+        "tree_lfs_oid": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+        "tree_xetHash_NOT_A_PIN": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+        "cdn_etag_NOT_A_PIN": "\"854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a\"",
+        "parent_pinned_sha256_superseded": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+        "parent_execute_observed_served_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c"
+      },
+      "note": "Different (non-Qwen) family at the same size band as the failed Qwen 7B, isolating the family dimension from the scale dimension. If sampling.chat_format 'llama-3' is unsupported by the installed llama-cpp-python, the load fails and is recorded UNMEASURED_LOAD_FAILED (fail-closed, operational); DESIGN verified that llama-cpp-python 0.2.90 registers both 'llama-3' and 'qwen'."
+    }
+  ],
+  "remote_artifact_pin_policy": {
+    "pin_source": "sha256 of the fully downloaded served body (streamed), computed at DESIGN time, NOT any HF server metadata field",
+    "forbidden_pin_sources": ["HF tree-API xetHash", "CDN etag", "HF tree-API lfs.oid used WITHOUT a full-download confirmation"],
+    "revision_pinning": "the frozen URL uses the repo commit sha resolved at DESIGN time (resolve/<revision_sha>/<file>), so the served revision cannot move under the freeze even if 'main' advances; the concurrent main-ref URL is recorded for drift observation only",
+    "design_time_verification": "Both candidates were fully downloaded at DESIGN from both the revision-pinned URL and the main-ref URL; both routes yielded byte-identical sha256 and byte counts (see prereg.md#appendix-b). No outcome-bearing model measurement was taken.",
+    "freeze_process_requirement": "The freezer (and any freeze_eligibility byte check) MUST verify each remote pin against DOWNLOADED BODY BYTES, not against server metadata, and MUST record which hash source was used. A pin that cannot be confirmed against body bytes is not a valid pin and must not PASS freeze.",
+    "execute_verification": "frozen decision-rule step 3a performs the same full-download byte verification (plus GGUF header fingerprint) before any load; mismatch is UNMEASURED_LOAD_FAILED with observed-values recorded, never substituted"
+  },
+  "protocol": {
+    "runner": "research/intel/run_exp_37982024058.py (mode probe-candidate)",
+    "base_fixture": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "task_id": "MIN-WEBAGENT-CLICK-REVEAL-ANSWER",
+    "task_page_sha": "9c9e87a98e596eeb6b63d62637df5d12ef4a1431374156f87334fdb329b2d571 (sha256 of base fixture task.page_html, inherited byte-for-byte; the base fixture file itself is frozen)",
+    "system_prompt": "P-TREAT-GOAL-SCHEMA",
+    "system_prompt_verbatim": "You are a web agent. Reply ONLY with one JSON object per turn, no prose. Actions available: {\"action\":\"click\",\"selector\":\"<id>\"} or {\"action\":\"answer\",\"text\":\"<code>\"}. Click the button to reveal the code, then answer it.",
+    "system_prompt_sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716",
+    "system_prompt_provenance": "Grandparent harness SYS constant (research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py, file sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862) with the single ref->selector schema alignment already frozen by the parent experiment; does NOT contain '#reveal-btn' or 'TARGET-42'.",
+    "gbnf_grammar_sha256": "16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65",
+    "sampling": {"temperature": 0.0, "max_tokens": 512, "n_ctx": 2048, "base_seed": 42, "llama_seed": 42, "episode_seeds": [42, 43, 44, 45, 46], "n_threads": 4},
+    "parse_rule": "frozen parse_action: the whole completion must be valid JSON matching {action: click|answer, selector?: str, text?: str} with the action-appropriate required field",
+    "scorer": "frozen run_episode: mechanical reveal (#target visible with text TARGET-42) AND a terminal answer action whose text equals TARGET-42",
+    "bar": {"task_success_rate_min": 0.6, "parseable_action_rate_step1_min": 0.6, "episodes": 5},
+    "overlay_keys_changed": ["prompts.system", "sampling.chat_format", "candidate_models_frozen"]
+  },
+  "endpoint_census": {
+    "purpose": "Answer the mandate's exact credential/operational blocker clause; non-outcome-bearing and non-gating for OUTCOME.",
+    "method": "For each predeclared provider: check presence of its credential environment variable; issue an unauthenticated GET to its model-list endpoint with a short timeout and record the HTTP status or the exact connection error. No model is invoked.",
+    "classifications": ["PROVISIONABLE_CREDENTIATED", "CREDENTIAL_REQUIRED", "CREDENTIAL_FREE_OPERATIONALLY_CAPPED", "UNREACHABLE"],
+    "providers": [
+      {"provider": "OpenAI", "credential_env": "OPENAI_API_KEY", "reachability_url": "https://api.openai.com/v1/models"},
+      {"provider": "Anthropic", "credential_env": "ANTHROPIC_API_KEY", "reachability_url": "https://api.anthropic.com/v1/models"},
+      {"provider": "Google Gemini", "credential_env": "GEMINI_API_KEY|GOOGLE_API_KEY", "reachability_url": "https://generativelanguage.googleapis.com/v1beta/models"},
+      {"provider": "Mistral", "credential_env": "MISTRAL_API_KEY", "reachability_url": "https://api.mistral.ai/v1/models"},
+      {"provider": "Groq", "credential_env": "GROQ_API_KEY", "reachability_url": "https://api.groq.com/openai/v1/models"},
+      {"provider": "Together", "credential_env": "TOGETHER_API_KEY", "reachability_url": "https://api.together.xyz/v1/models"},
+      {"provider": "OpenRouter", "credential_env": "OPENROUTER_API_KEY", "reachability_url": "https://openrouter.ai/api/v1/models"},
+      {"provider": "DeepSeek", "credential_env": "DEEPSEEK_API_KEY", "reachability_url": "https://api.deepseek.com/v1/models"},
+      {"provider": "HuggingFace Inference", "credential_env": "HF_TOKEN|HUGGINGFACEHUB_API_TOKEN", "reachability_url": "https://api-inference.huggingface.co/models"},
+      {"provider": "Fireworks", "credential_env": "FIREWORKS_API_KEY", "reachability_url": "https://api.fireworks.ai/inference/v1/models"},
+      {"provider": "Cohere", "credential_env": "COHERE_API_KEY", "reachability_url": "https://api.cohere.com/v1/models"},
+      {"provider": "Pollinations", "credential_env": null, "reachability_url": "https://text.pollinations.ai/models", "expected_classification": "CREDENTIAL_FREE_OPERATIONALLY_CAPPED", "blocker": "reasoning-only content + ~197 completion-token cap + intermittent HTTP 402 + no model pinning/SLA (carried from EXP-INTEL-37973264582; not re-run as an agent)"}
+    ]
+  },
+  "external_comparators": {
+    "purpose": "Conditional, non-gating deliverable of the mandate: enumerate the strongest externally published inheritance/memory systems as candidate fair comparators whose numbers and denominators must be reproduced before use, and record mechanically whether each is reproducible under this protocol in this factory. CANDIDATE_NOT_EVIDENCE; no vendor number is SPIDER evidence.",
+    "reproducibility_feasibility_classes": ["FEASIBLE_WITH_CREDENTIALS", "NOT_FEASIBLE_MISSING_SUBSTRATE", "UNKNOWN"],
+    "required_entries": [
+      {"system": "QCR (target-bound reuse notes)", "arxiv_id": "2608.12847", "title": "Beyond Retrieval: Query-Conditioned Reuse of Long-Horizon Agent Trajectories", "reported_numbers_to_pin_with_denominator": ["+10.7 pts success vs full-trajectory injection", "-48.9% tokens", "2,391 instances (WebArena/WorkArena/AppWorld)", "stale-binding errors 46.9%->10.9%"], "reproduction_prerequisites": "datasets + base model family + tool set + token-budget denominator + success definition", "expected_reproducibility_feasibility": "NOT_FEASIBLE_MISSING_SUBSTRATE"},
+      {"system": "compile-and-execute", "arxiv_id": "2604.09718", "title": "Agentic Compilation: Mitigating the LLM Rerun Crisis for Minimized-Inference-Cost Web Automation", "reported_numbers_to_pin_with_denominator": ["5-step workflow, 500 iterations: ~$150 -> <$0.10"], "reproduction_prerequisites": "workflow/task identity + pricing model + iteration denominator + execution environment", "expected_reproducibility_feasibility": "NOT_FEASIBLE_MISSING_SUBSTRATE"},
+      {"system": "site-memory/ColorBrowserAgent", "arxiv_id": null, "title": "ColorBrowserAgent (site-memory replay)", "reported_numbers_to_pin_with_denominator": "TO BE LOCATED; if no primary pinned source is found, record NOT_PINNED and do not use", "reproduction_prerequisites": "primary source identity + task/site denominators + model family + budget", "expected_reproducibility_feasibility": "UNKNOWN"}
+    ]
+  },
+  "metrics_stable_ids": [
+    "positive_control_pass_rate",
+    "parseable_action_rate_step1",
+    "answer_action_emission_rate",
+    "task_success_rate",
+    "mean_inference_latency_s",
+    "mean_completion_tokens",
+    "served_body_digest_verified",
+    "gguf_metadata_fingerprint_matched",
+    "b3_status",
+    "providers_credential_required",
+    "providers_credential_free_operationally_capped",
+    "providers_provisionable_credentialed",
+    "candidates_measured_complete",
+    "comparators_enumerated"
+  ],
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Every branch is arithmetically reachable and no later rule is shadowed. SUPPORTS requires one COMPLETE candidate cell with task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6 (k>=3 of 5); the carried parent canary proved the same frozen scorer registers the full click-then-answer completion (PC-ORACLE-EPISODE 5/5, each episode revealing TARGET-42 and answering it) and the GBNF admits the success path (strchar ::= [^\\\"\\\\] admits '-', digits and uppercase, so \\\"selector\\\":\\\"#reveal-btn\\\" and \\\"text\\\":\\\"TARGET-42\\\" are grammar-admissible), so a clearing candidate can be registered; the candidates' true outcomes are empirically open, which is the point of the ladder. FALSIFIES is reachable whenever at least one candidate cell is COMPLETE and none clears; the carried anchor shows the parent realized exactly this failure mode at 3B-8B, and neither new candidate is guaranteed to clear. MEASUREMENT_INVALID is reachable via preflight failure (rule 1) or no COMPLETE cell (rule 4). The threshold (0.6 over 5 episodes, k in 0..5, k>=3) is attainable at both ends; early stop at rule 3d cannot shadow FALSIFIES because when a candidate clears there is nothing left to falsify and when it does not the ladder continues; the corrected step-3a content-identity failure, a load failure, or a PC failure is explicitly non-terminal (continue), so the FALSIFIES/UNRESOLVED branch is not emptied by operational failure. The DESIGN-time full-download probe confirmed the frozen served_body_sha256 pins equal the actually served bytes, so the specific prior 3a dead branch is repaired.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38164607941/result.json#metrics",
+        "research/experiments/EXP-INTEL-38164607941/audit.json",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is verified at DESIGN time or pinned fail-closed. (a) Stack (design-time probe): Python 3.12.15, nproc=4, 15 GB RAM / ~14 GB available, 85 GB free disk, /usr/bin/google-chrome present; curl/wget/git present; huggingface.co reachable (~127 MB/s). llama-cpp-python 0.2.90 has a PyPI sdist and no cp312 wheel (the parent built it from sdist); DESIGN downloaded that sdist and confirmed llama_chat_format.py registers BOTH 'llama-3' and 'qwen', so both candidates' chat_format load paths exist. playwright installs from PyPI without browser download when executable_path points at system Chrome. (b) Model provisioning (design-time FULL DOWNLOAD, not metadata): both candidate GGUFs were downloaded to completion from BOTH the revision-pinned URL and the main-ref URL and yielded byte-identical sha256 and byte counts (M-14B-QWEN 8,988,110,976 / e47ad95d...; M-8B-LLAMA 4,920,739,232 / 7b064f58...) equal to the HF tree-API lfs.oid and equal to the parent EXECUTE-observed served-body hashes; the parent's pinned xetHash/etag values are explicitly rejected as pins. (c) GBNF grammar: all 7 rules (root, ws, action, field, string, strchars, strchar) are defined and referenced (inherited frozen base fixture); string sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65; the success path is grammar-admissible (no floor degeneracy). (d) The frozen runner and base fixture are bound freeze_artifacts previously executed end-to-end by the audited parent; DESIGN re-verified all three freeze-artifact sha256 values (2b5d5bb5..., 7aba9dc8..., 4e2b6710...). (e) The scorer/controls liveness was verified at DESIGN/predecessor time by a non-outcome-bearing canary (prereg.md#appendix-b) on the byte-identical frozen runner with a real browser and a name-only llama_cpp stub: PC-ORACLE-EPISODE 5/5, NC 0/0, B-RANDOM parseable 1.0 / success 0.2. (f) The endpoint census method was probed live at predecessor design time (OpenAI/Anthropic/Groq unauthenticated models endpoints return HTTP 401; Pollinations /models returns HTTP 200). No confirmatory model measurement was run during DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#remote_artifact_pin_policy"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The capability decision is against a pre-declared absolute bar (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6), not against a within-run comparator, so there is no treatment/comparator identity problem. The measurement range is non-degenerate: the same frozen scorer registers 5/5 at the ceiling (PC-ORACLE-EPISODE) and the carried anchor produced 0/5 task success at the floor under the identical protocol, while the chance baseline is analytically confined below the bar (P(task_success_rate>=3/5)~1.15e-3). The manipulation across candidates is exactly the model weights (plus the family chat_format required to load them); task/prompt/grammar/sampling/parse/scorer are byte-inherited. The candidate content identity is now pinned to served-body sha256 + byte count + revision URL + GGUF header fingerprint, so a difference in task_success_rate is attributable to the model class and not to an unidentified artifact; any identity/load/PC failure is fail-closed and caught before the bar. The carried anchor is byte-identified and not re-run; its role is descriptive protocol-hardness certification, so a carried-anchor drift cannot silently become a comparator.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38164607941/result.json#metrics",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls are sensitive and were executed at DESIGN/predecessor time as a non-outcome-bearing canary through the REAL frozen run_episode scorer with a REAL browser (Playwright + /usr/bin/google-chrome; name-only llama_cpp import stub; no model under test) against the served task page (prereg.md#appendix-b): PC-ORACLE-EPISODE fired 5/5 task_success (each episode revealed TARGET-42 and answered it, proving the completion path is registerable); NC-NO-MODEL-ACTION stayed 0/5 parseable and 0/5 success (rejects non-JSON); B-RANDOM-ACTION was parseable 1.0 and task_success_rate=0.2 with the 0.6 bar effectively unreachable by chance (analytic P(>=3/5)~1.15e-3). PC-JSON-CONSTRAINED-DECODING 10/10 was realized per model in the audited parent under the identical grammar and probe and is re-verified per candidate at EXECUTE. Distinct controls cover decoding, scoring, null rejection and chance-level success; none is tautological (none contains the target answer supplied to the model) and none is structurally impossible. A control failure yields MEASUREMENT_INVALID, never a false capability result. This analysis is unchanged by the digest correction, which affects only the candidate provisioning step, not the controls.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls",
+        "research/experiments/EXP-INTEL-38175568787/raw/controls.json",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm (a new candidate under P-TREAT-GOAL-SCHEMA + frozen GBNF, driven by the frozen runner) is structurally live and now provably provisionable: (a) the prompt enumerates exactly the two actions admitted by the frozen grammar using the grammar's required key names ('click' with 'selector', 'answer' with 'text'); (b) the success path is grammar-admissible (strchar admits '#reveal-btn' and 'TARGET-42'); (c) the same frozen scorer registered the full click-then-answer completion 5/5 in the canary; (d) the carried parent cells show this task family reliably emits parseable matched actions under constrained decoding (10/10 PC; 5/5 step-1 parseable); (e) BOTH candidate GGUFs were fully downloaded at DESIGN and their served-body sha256 equals the pin (so step 3a can pass), each is a well-formed GGUF v3 with the expected architecture/tensor count/file_type and an embedded tokenizer.chat_template, and llama-cpp-python 0.2.90 registers both 'qwen' and 'llama-3' chat formats. Self-attack (recorded, not hidden): (i) the frozen GBNF does not by itself guarantee matched action/field pairs, so liveness rests on empirically verified decoding behaviour plus the rule that a below-0.6 step-1 parseable rate can never clear the bar; (ii) the 14B GGUF (~9.0 GB) may fail to load on a 15 GB box - that candidate is then UNMEASURED_LOAD_FAILED and the ladder continues, and the 8B Llama (~4.9 GB) is comfortably loadable, so at least one candidate is measurable; (iii) a served-body drift between DESIGN and EXECUTE would fail step 3a - but DESIGN verified byte-identity across two routes now and against the parent's prior-day execute observation, and any drift is recorded with observed values. The P-TREAT-GOAL-SCHEMA prompt leaks neither '#reveal-btn' nor 'TARGET-42' (design-time verified), so a positive is not an answer-leakage artifact.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38164607941/spec.json#prompt_conditions.P-TREAT-GOAL-SCHEMA",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every existing mutable local code/data/fixture dependency whose identity can change the interpretation is listed in spec.freeze_artifacts and hashed at freeze time, and EXECUTE re-verifies each (mismatch -> MEASUREMENT_INVALID): the frozen runner (research/intel/run_exp_37982024058.py - sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00 - the audited parse/episode/scorer logic the candidate cells execute directly and the controls import), the frozen base fixture (research/experiments/EXP-INTEL-37982024058/raw/harness_config.json - sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb - task, GBNF grammar, user template, sampling, thresholds, null/random controls), and the treatment-prompt provenance (research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py - sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862). DESIGN re-verified all three hashes (matching the parent freeze.json.artifact_hashes). BYTE-VERIFICATION REQUIREMENT (audit required-fix #2, satisfied here): for the remote candidate GGUFs the freeze/eligibility check binds the served-body sha256 obtained by FULL DOWNLOAD at DESIGN - not HF server metadata (etag/xetHash/lfs.oid) - and spec.remote_artifact_pin_policy records the hash source and the forbidden metadata sources; the transaction therefore cannot repeat the metadata-vs-body mismatch that passed freeze in EXP-INTEL-38175568787. The per-candidate config overlays need no local file at freeze time: each is a deterministic transformation of the bound base fixture (replace ONLY prompts.system, sampling.chat_format, candidate_models_frozen), so no outcome-relevant key is unbound. The thin materializer/controls/census/comparators/evaluator drivers are authored at EXECUTE and are fully specified by prereg.md section 4 and Appendices A and C; their behaviour is a deterministic function of the frozen base fixture, the pinned candidate digests and the frozen thresholds, and EXECUTE records their sha256 in provenance.json. Remote GGUFs are frozen as revision-pinned URLs + served-body digests, not bytes. prereg.md itself is a freeze input hashed into freeze.json.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/spec.json#freeze_artifacts",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#remote_artifact_pin_policy",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#section-4",
+        "research/experiments/EXP-INTEL-38175568787/audit.json#required_fixes"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/intel/run_exp_37982024058.py",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+  ],
+  "comparative_reasoning": {
+    "legacy_classification": "LEGACY: REPLICATION (corrected) plus DISTINCT_EXTENSION (per the Director mandate's allocation.comparative_reasoning), re-confirmed at design time against the cited pre-2.0 artifacts.",
+    "summary": "The Director mandate records LEGACY: REPLICATION (corrected) plus DISTINCT_EXTENSION, and explicitly classifies this as the corrected continuation of a Research 2.0-only substrate/provisioning failure (EXP-INTEL-38175568787, MEASUREMENT_INVALID, not a capability result). The spent tests were the 3B-8B Qwen goal/schema prompt ablation (EXP-INTEL-37982024058 / EXP-INTEL-38164607941) and the metadata-pinned ladder (EXP-INTEL-38175568787); neither is repeated. The distinct extension here is: (1) the one-time freeze/byte-identity repair the parent audit's required_fixes demanded (served-body sha256 pin verified by full download + revision-pinned URL + GGUF fingerprint, with a full-download verification step folded into frozen rule 3a and into freeze_eligibility.freeze_artifacts_bound); (2) the two capacity axes the parent handoff left explicitly open (U-03: >8B scale and non-Qwen family); (3) a provisioning census that answers the mandate's exact hosted credential/operational blocker clause; (4) a conditional external-comparator readiness/reproducibility table for QCR / compile-and-execute / site-memory. Nearest substantive precedents, not duplicates: P2-REPLAY-COST sha 9687ff787f2d74460bb7006826008852f5b4416b and P2-BLIND-COMPOSITION sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda (replay/composition economics, not a byte-identity-corrected local-endpoint capability ladder) and the grandparent EXP-INTEL-37973264582 (endpoint/comparator obtainability, Gate 2 FAIL) which this packet extends from obtainability to capability.",
+    "cited_artifacts": [
+      "research/experiments/EXP-INTEL-38175568787/handoff.json",
+      "research/experiments/EXP-INTEL-38175568787/audit.json#required_fixes",
+      "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json",
+      "research/experiments/EXP-INTEL-38164607941/result.json",
+      "research/experiments/EXP-INTEL-37973264582/raw/endpoint_receipts.json",
+      "codex/legacy_brief.json"
+    ]
+  }
+}

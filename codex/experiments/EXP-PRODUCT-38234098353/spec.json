@@ -1,0 +1,325 @@
+{
+  "experiment_id": "EXP-PRODUCT-38234098353",
+  "lane": "product",
+  "design_contract_version": 2,
+  "claim_ids": [
+    "C-PARAM-INHERIT"
+  ],
+  "claim_scope_note": "Single binding target C-PARAM-INHERIT (owner lanes graph+product; registry status EXPERIMENTAL; effective_event_by_claim=C-PARAM-INHERIT from EXP-PRODUCT-38205292822). This packet is a MEASUREMENT-ONLY extension: it does NOT modify src/spider/kernel.py (kept byte-identical, sha256 3a6caf97...) and does NOT re-run EXP-PRODUCT-38180719830, EXP-PRODUCT-38197856050 or EXP-PRODUCT-38210179652, nor substitute the carrier. It re-founds the declaration certificate on a MEASURED trust root (per-origin provenance scored by execution-grounded certificate agreement over frozen historical ledgers, allowlist INFERRED from the score) and adds a probe-space ADEQUACY detector over each declaration's reachable over-accept space, calling the shipped certificate/ingest code unmodified. C-SEMANTIC-RESOLVE is deliberately NOT listed: it is not measured or touched here.",
+  "parent_handoff_received": {
+    "experiment_id": "EXP-PRODUCT-38210179652",
+    "path": "research/experiments/EXP-PRODUCT-38210179652/handoff.json",
+    "sha256": "9e6a3a2e27825faa82891612586329b0ad403bbcbecc50be039d25c4f2f0d5ca",
+    "four_way_preserved": {
+      "established": [
+        "MEASUREMENT-VALID, AUDIT-PASSED bounded positive: on the parent's synthetic eight-family expansion bank, provenance-controlled certification (pre-declared allowlist O1-O4 + execution-grounded negative-bank growth) held within-envelope FA=0, HTTP-on-OUT=0, refusal-violations=0 at coverage 1.0 (30/30) vs B-SHIPPED 0.4667, and strictly dominated C-FROZEN-CERT (FA=9).",
+        "Both parent components were necessary on that bank: provenance alone (no growth) FA=6 (probeable evaders); growth alone (no provenance) FA=3 (non-allowlisted hidden evader).",
+        "The parent's guarantee was conditional with an irreducible hidden-evasion boundary: H7 (allowlisted, certificate-admitted, over-accept outside the probe alphabet) false-accepted 3/3.",
+        "Refusal semantics preserved: real ingest_declaration records REFUSED and leaves the support unchanged; carrier byte-identical sha256 3a6caf97..."
+      ],
+      "rejected": [
+        "BOUNDED: the frozen-certificate incumbent configuration (empty audited bank, no provenance, no growth) is unsafe on the parent bank (FA=9 at coverage 1.0).",
+        "BOUNDED: a declared provenance allowlist alone, without growth, is insufficient (FA=6).",
+        "BOUNDED: execution-grounded growth alone, without provenance, is insufficient (FA=3).",
+        "BOUNDED: unconditional adoption is unsound (A-RAW-DECL FA=9).",
+        "BOUNDED: the shipped conservative fallback is not a safety defect; it is over-conservative (FA=0, coverage 0.4667)."
+      ],
+      "unknown": [
+        "Whether the audited-origin allowlist can itself be trusted/scored reliably: in the parent O1-O4 were DECLARED by fiat and never measured.",
+        "Whether a bounded probe space can be made adequate in general: an allowlisted declaration whose over-accept lies outside the probe alphabet was CERTIFIED and false-accepted (H7).",
+        "The real-world cost/staleness of obtaining and maintaining sound declared grammars, the allowlist and the grown negative bank (loopback only).",
+        "Whether these results generalize beyond the synthetic construction, fixed seeded probe space, or to non-parameterized declarations.",
+        "The registered C-PARAM-INHERIT four-arm benchmark next_gate remains unmet and dependency-gated (Runtime B2, Intel B3, NEW mandate)."
+      ],
+      "do_not_assume": [
+        "Do NOT read the parent as advancing C-PARAM-INHERIT; it is RETAINED at EXPERIMENTAL, promote_to_product=false, no product code written.",
+        "Do NOT generalize the parent's within-envelope FA=0 into a general declaration-soundness, general safety or product-economics claim.",
+        "Do NOT treat the parent allowlist as trustworthy (fiat) or the probing procedure as adversarially adequate (H7 boundary).",
+        "Do NOT re-run the parent certificate or substitute the carrier; identity/binding failure is BLOCKED/MEASUREMENT_INVALID, never a scientific negative.",
+        "Do NOT self-dispatch a follow-up: this packet exists only because a NEW Global Research Director mandate (this request.director_mandate) authorized it."
+      ]
+    }
+  },
+  "question": "Can the provenance-controlled declaration certificate be re-founded on a MEASURED trust root rather than a fiat audited-origin allowlist plus a fixed seeded probe space -- i.e. (i) can provenance be INDEPENDENTLY SCORED from execution-grounded certificate agreement over frozen per-origin historical ledgers and the allowlist INFERRED from that score, and (ii) can probe-space INADEQUACY over a declaration's reachable over-accept space be DETECTED syntactically rather than assumed -- so that the certified-safe expansion holds zero false accepts on a bank whose allowlist membership is itself inferred, or is source trust combined with probe-space reachability the irreducible limit that permanently caps the shipped kernel at the documented conditional boundary?",
+  "hypothesis": "On an eleven-family expansion bank (B1-B10 within envelope, B11 boundary) whose origins O1-O6 are NOT labelled a priori, a measured-trust-root + adequacy treatment will: (i) score each origin's provenance from execution-grounded certificate agreement over a frozen 4-entry historical ledger (trusted origins 1.0, untrusted 0.25) and INFER the allowlist as the score >= tau=0.5 subset, recovering exactly {O1,O2,O3,O4}; (ii) syntactically DETECT probe inadequacy (B7,B8 carry an out-of-PROBE_ALPHA [A-Z] alternative) and withhold those declarations rather than certify them; (iii) hold M-T-FALSE-ACCEPT-COUNT=0, M-T-HTTP-ON-OUT-COUNT=0 and M-T-REFUSAL-SEMANTICS-VIOLATIONS=0 over B1-B10 while raising M-T-COVERAGE strictly above B-SHIPPED (0.4545) to 1.0, clearing the 0.6750 anchor; (iv) strictly dominate the fiat-allowlist/no-adequacy incumbent C-FIAT-ADEQ (FA=6) and the frozen-certificate incumbent C-FROZEN-CERT (FA=18); (v) demonstrate each of the three mechanisms is necessary -- adequacy (A-NO-ADEQ FA=6), provenance (A-NO-PROV FA=3), growth (A-NO-GROW FA=9); (vi) demonstrate that a FIAT allowlist that over-trusts O5 false-accepts B9 (C-FIAT-OVERTRUST FA=3) whereas the MEASURED trust root refuses it; and (vii) still be bounded: a TRUSTED-origin declaration whose over-accept is a within-alphabet, within-length, budget-sparse literal (B11) is CERTIFIED and false-accepts (boundary probe fires), so the guarantee remains conditional on inferred provenance AND on probe reachability, not general.",
+  "falsifier": "T-SCORED-ADEQ is FALSIFIED if it is unsafe where it must be safe: any of M-T-FALSE-ACCEPT-COUNT, M-T-HTTP-ON-OUT-COUNT or M-T-REFUSAL-SEMANTICS-VIOLATIONS is > 0 on B1-B10. The measured-trust-root/adequacy claim is weakened to MIXED if the treatment is safe but M-T-COVERAGE does not strictly exceed B-SHIPPED coverage (or falls below the 0.6750 anchor). Separately, failure of any gate (validity_gate, sensitivity_gate, provenance_gate, adequacy_gate, growth_gate, necessity_gate, boundary_gate) is MEASUREMENT_INVALID/BLOCKED, never a scientific negative; in particular, a necessity ablation that does not fire (PC-ADEQ-NEEDED / PC-PROV-NEEDED / PC-GROW-NEEDED not PASS) means a mechanism is not isolated and is MEASUREMENT_INVALID, not MIXED. BP-TRUSTED-SPARSE-FAILS must fire (T boundary B11 FA>=1) and PC-GROW-MISSES-SPARSE must hold; if the trusted budget-sparse boundary cannot be exhibited, the bound is not the residual and the packet is MEASUREMENT_INVALID rather than evidence of general soundness.",
+  "baselines": [
+    {
+      "id": "B-SHIPPED",
+      "description": "Induced conservative supports with NO declaration widening (the shipped conservative fallback). Expected FA=0 and coverage 20/44=0.4545 on this bank. Safety floor and coverage baseline the treatment must strictly exceed.",
+      "role": "safe-but-incomplete floor"
+    },
+    {
+      "id": "B-ORACLE",
+      "description": "Oracle/true grammar supports with no guard; safe+complete support ceiling. Expected coverage 1.0, FA=0.",
+      "role": "ceiling comparator / range of possible coverage"
+    },
+    {
+      "id": "C-FIAT-ADEQ",
+      "description": "The parent-style incumbent made explicit: a FIAT declared allowlist {O1,O2,O3,O4} + execution-grounded growth but NO adequacy detector. Expected within-envelope FA=6 (B7,B8 alphabet evaders). The treatment must strictly dominate it.",
+      "role": "incumbent comparator (fiat provenance, no adequacy)"
+    },
+    {
+      "id": "C-FIAT-OVERTRUST",
+      "description": "A FIAT allowlist that over-trusts: {O1,O2,O3,O4,O5} + adequacy + growth. Expected within-envelope FA=3 (B9 budget-sparse evader at untrusted O5). Demonstrates that a declared allowlist which includes an untrusted origin false-accepts where the MEASURED trust root refuses.",
+      "role": "fiat-allowlist over-trust comparator (measured-vs-declared trust contrast)"
+    },
+    {
+      "id": "C-FROZEN-CERT",
+      "description": "The shipped closed-world certificate applied to the SAME declarations with an EMPTY negative bank and NO provenance and NO adequacy -- the frozen-certificate incumbent configuration. Expected within-envelope FA=18 (B5,B6,B10 probeable 9 + B7,B8 alphabet 6 + B9 sparse 3), coverage 1.0.",
+      "role": "incumbent comparator (frozen audited bank / empty bank)"
+    },
+    {
+      "id": "A-RAW-DECL",
+      "description": "Unconditional adoption of every declaration with no guard/provenance/adequacy/growth (ablation and unsound-adoption positive control). Expected FA=18.",
+      "role": "unsound-adoption ablation"
+    },
+    {
+      "id": "A-NO-ADEQ",
+      "description": "Measured provenance + growth but NO adequacy detector (ablation isolating the adequacy step). Expected within-envelope FA=6 (B7,B8 admitted at trusted origins, over-accept outside the probe alphabet).",
+      "role": "adequacy-necessity ablation"
+    },
+    {
+      "id": "A-NO-PROV",
+      "description": "Adequacy + growth but NO provenance gate (ablation isolating the measured-provenance step). Expected within-envelope FA=3 (B9 admitted at untrusted O5).",
+      "role": "provenance-necessity ablation"
+    },
+    {
+      "id": "A-NO-GROW",
+      "description": "Measured provenance + adequacy but NO growth (ablation isolating the execution-grounded growth step). Expected within-envelope FA=9 (B5,B6,B10 probeable evaders admitted against an empty bank).",
+      "role": "growth-necessity ablation"
+    },
+    {
+      "id": "A-WITHHOLD-ALL",
+      "description": "Empty inferred allowlist (tau unreachable): every declaration withheld, conservative supports everywhere. Expected FA=0, coverage 20/44=0.4545. Null floor and the concrete realization of the MIXED (safe-but-no-expansion) instrument state.",
+      "role": "null control / MIXED realization"
+    }
+  ],
+  "positive_control": {
+    "PC-PROV-SCORE-SEPARATES": {
+      "expected_behavior": "the execution-grounded provenance scorer returns 1.0 for every trusted origin (O1-O4) and <= 0.25 for every untrusted origin (O5,O6); the inferred allowlist (score >= tau=0.5) equals {O1,O2,O3,O4}.",
+      "role": "provenance is genuinely MEASURED and separates trust, not a fiat table"
+    },
+    "PC-PROV-ADMITS-TRUSTED": {
+      "expected_behavior": "every bank family at a trusted origin is admitted by the inferred allowlist (no provenance_gate REFUSED_ORIGIN).",
+      "role": "the measured allowlist does not spuriously refuse a trusted origin"
+    },
+    "PC-PROV-REFUSES-UNTRUSTED": {
+      "expected_behavior": "B9 (untrusted O5) is withheld by the provenance gate and keeps its induced support byte-equal.",
+      "role": "an untrusted origin is withheld by the measured trust root"
+    },
+    "PC-PROV-REFUSES-SPARSE": {
+      "expected_behavior": "the certificate-with-growth WOULD certify B9 (the fixed probe misses its budget-sparse over-accept) yet the measured provenance withholds it; A-NO-PROV false-accepts B9.",
+      "role": "measured provenance is a live, necessary gate distinct from adequacy and growth"
+    },
+    "PC-ADEQUACY-CLASSIFIES": {
+      "expected_behavior": "the syntactic adequacy detector output equals the frozen EXPECTED_ADEQUACY map for all eleven families (B7,B8 INADEQUATE; all others ADEQUATE).",
+      "role": "the detector is deterministic and exactly reproduced"
+    },
+    "PC-ADEQUACY-DETECTS-INADEQUATE": {
+      "expected_behavior": "B7 and B8 (out-of-PROBE_ALPHA [A-Z] alternatives) are flagged INADEQUATE.",
+      "role": "probe-space inadequacy over the reachable over-accept space is DETECTED, not assumed"
+    },
+    "PC-ADEQUACY-PASSES-ADEQUATE": {
+      "expected_behavior": "B1-B6,B9,B10,B11 pass the adequacy detector (their over-accept envelope is within PROBE_ALPHA and PROBE_MAXLEN).",
+      "role": "the detector is not a reject-everything detector"
+    },
+    "PC-ADEQ-NEEDED": {
+      "expected_behavior": "A-NO-ADEQ within-envelope FA >= 1 (expected 6), proving the adequacy step is necessary.",
+      "role": "adequacy necessity"
+    },
+    "PC-PROV-NEEDED": {
+      "expected_behavior": "A-NO-PROV within-envelope FA >= 1 (expected 3), proving the measured-provenance step is necessary.",
+      "role": "provenance necessity"
+    },
+    "PC-GROW-NEEDED": {
+      "expected_behavior": "A-NO-GROW within-envelope FA >= 1 (expected 9), proving the growth step is necessary.",
+      "role": "growth necessity"
+    },
+    "PC-CERT-ADMITS-SOUND": {
+      "expected_behavior": "certify_declaration accepts all four sound declarations (B1-B4) against an empty bank.",
+      "role": "certificate is not a reject-everything detector"
+    },
+    "PC-GROW-CATCHES-PROBEABLE": {
+      "expected_behavior": "after execution-grounded growth, certify_declaration refuses all three probeable EVADER_P declarations (B5,B6,B10).",
+      "role": "growth makes the certificate sensitive to reachable over-accepts"
+    },
+    "PC-INGEST-REFUSED-ABSTAINS": {
+      "expected_behavior": "the REAL SpiderKernel.ingest_declaration on a refusing declaration (B5) records declaration_certificate.status=='REFUSED' and leaves the slot support unchanged.",
+      "role": "refusal semantics preserved; UNKNOWN over unsafe inheritance"
+    },
+    "PC-UNSAFE-RAW": {
+      "expected_behavior": "A-RAW-DECL false_accept_count >= 1 (expected 18).",
+      "role": "safety oracle is not blind; FALSIFIES branch is live"
+    },
+    "PC-DISCRIMINATION": {
+      "expected_behavior": "M-T-FALSE-ACCEPT-COUNT == 0 while M-C-FIAT-FALSE-ACCEPT-COUNT >= 1 at equal coverage 1.0.",
+      "role": "the measured-trust-root + adequacy treatment strictly dominates the fiat/no-adequacy incumbent"
+    },
+    "PC-MEASURED-TRUST-DOMINATES-OVERTRUST": {
+      "expected_behavior": "C-FIAT-OVERTRUST (fiat allowlist including untrusted O5) false-accepts B9 (FA>=1) while the MEASURED trust root refuses it (T FA==0).",
+      "role": "directly demonstrates the product value of measuring provenance instead of declaring it"
+    },
+    "PC-GROW-MISSES-SPARSE": {
+      "expected_behavior": "certificate-with-growth CERTIFIES B11 (trusted budget-sparse over-accept): the fixed probe does not sample its over-accept tokens.",
+      "role": "the residual boundary is genuinely reachable; required to hold"
+    },
+    "BP-TRUSTED-SPARSE-FAILS": {
+      "expected_behavior": "T boundary-family B11 false_accept_count >= 1 (expected 3).",
+      "role": "closed-world/probe-reachability boundary probe; required to fire"
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "expected_behavior": "two independent full runs produce identical arm/boundary/provenance metrics and identical non-timing metrics.",
+      "role": "reproducibility"
+    },
+    "PC-REGRESSION": {
+      "expected_behavior": "the full tests/ suite passes (tests_run>=3, failures/errors=0) on the unmodified carrier.",
+      "role": "carrier regression"
+    }
+  },
+  "null_control": {
+    "id": "NC-REJECT-ALL",
+    "role": "null floor; a safety detector that cannot be null is meaningless",
+    "expected_behavior": "A-WITHHOLD-ALL (empty inferred allowlist / unreachable tau) accepts no out-of-support value and issues no out-of-grammar HTTP: M-A-WITHHOLD-FALSE-ACCEPT-COUNT==0 and coverage == B-SHIPPED coverage (20/44)."
+  },
+  "measurement_validity": [
+    "V1-SUBSTRATE: Deterministic, stdlib-only, credential-free; one loopback HTTP oracle (127.0.0.1 ephemeral port) serving the bank and the provenance-calibration resources; no external network, no model calls, no tokens.",
+    "V2-IDENTITY: V8_FREEZE_BINDING: prereg.md sha256 == freeze.json.hashes['prereg.md'], running runner source == FROZEN RUNNER block normalized, and every freeze_artifacts artifact re-hashes identically. Probe mode reports UNBOUND-RUN PASS before freeze.json exists.",
+    "V3-CARRIER-IMMUTABLE: src/spider/kernel.py is NOT modified by this packet and is a frozen interpretation dependency (sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3). A carrier hash mismatch is BLOCKED/MEASUREMENT_INVALID.",
+    "V4-INDUCTION: For all eleven families the REAL distill_parameterized path yields exactly one parameter slot at confidence 0.9 >= min_confidence 0.8; induced supports are recorded (M-MECHANISM-COUNT=11, M-SINGLE-SLOT, M-CONFIDENCE-0.9).",
+    "V5-ORACLE-GROUNDED: The negative-bank growth, the provenance scoring and the evaluation all issue real loopback HTTP GETs; the label of every value is defined by the frozen true grammar, independent of the arm's decision.",
+    "V6-DETERMINISM: Two independent run_once executions must be identical (PC-DETERMINISM-REPEAT); no timing metric participates in the decision.",
+    "V7-REGRESSION: The full tests/ suite must pass on the unmodified carrier (PC-REGRESSION, tests_run>=3).",
+    "V8-REFUSAL-SEMANTICS: M-T-REFUSAL-SEMANTICS-VIOLATIONS==0; a REFUSED certificate must never have widened the slot support.",
+    "V9-CEILING/FLOOR: B-ORACLE must reach coverage 1.0 with FA=0 and B-SHIPPED/A-WITHHOLD-ALL must stay FA=0; otherwise the safety metric is uncalibrated.",
+    "V10-REPRESENTATION-LIMITS: The expansion bank, the provenance ledgers, the adequacy detector and the probe space are local synthetic constructions on a loopback oracle with a fixed seed; results bound THIS bank, THIS ledger, THIS detector and THIS carrier and are NOT an end-to-end external-agent measurement, NOT a general soundness proof and NOT a product-economics measurement.",
+    "V11-ADEQUACY-DETECTOR-CONSERVATISM: the syntactic adequacy detector flags a declaration whose accepted alphabet or length exceeds the probe envelope. On a declaration whose TRUE grammar legitimately spans an alphabet wider than PROBE_ALPHA (e.g. [a-z]) but is actually sound, the detector would withhold a sound declaration, reducing coverage without affecting safety. This packet restricts the SOUND grammars to the probe alphabet and therefore does NOT measure that false-positive cost; it is a disclosed representation limit, not a safety hole.",
+    "V12-MEASUREMENT-FAILURE-SEMANTICS: Any prerequisite, identity, freeze, regression or gate failure is BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+    "V13-SCORER-ENDOGENEITY: the provenance score's trust signal is execution-grounded agreement of the shipped certificate with frozen historical truth labels; it is endogenous to the certificate (it measures 'can our instruments verify this origin's history'), not an exogenous reputation source. In this construction the INFERRED allowlist coincides with the correct fiat list {O1,O2,O3,O4}; the demonstrated value of measuring is robustness to an OVER-PERMISSIVE fiat allowlist (C-FIAT-OVERTRUST FA=3 vs measured T FA=0), NOT that measurement beats a correct fiat list. A real deployment would need an independent provenance signal; this packet does not supply one."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-T-FALSE-ACCEPT-COUNT (T-SCORED-ADEQ within-envelope count of OUT-labelled bank items whose effective support makes them EXECUTABLE); co-primary M-T-HTTP-ON-OUT-COUNT, M-T-REFUSAL-SEMANTICS-VIOLATIONS, M-T-COVERAGE, M-T-COVERAGE-DELTA-VS-SHIPPED, M-T-BOUNDARY-FALSE-ACCEPT-COUNT.",
+    "secondary_metrics": [
+      "M-C-FIAT-FALSE-ACCEPT-COUNT / M-C-FIAT-OVER-FALSE-ACCEPT-COUNT / M-C-FROZEN-FALSE-ACCEPT-COUNT",
+      "M-A-NO-ADEQ-FALSE-ACCEPT-COUNT / M-A-NO-PROV-FALSE-ACCEPT-COUNT / M-A-NO-GROW-FALSE-ACCEPT-COUNT / M-A-RAW-FALSE-ACCEPT-COUNT / M-A-WITHHOLD-FALSE-ACCEPT-COUNT / M-A-WITHHOLD-COVERAGE",
+      "M-B-SHIPPED-COVERAGE / M-B-SHIPPED-FALSE-ACCEPT-COUNT / M-B-ORACLE-COVERAGE / M-B-ORACLE-FALSE-ACCEPT-COUNT",
+      "M-T-CERTIFIED-COUNT / M-T-PROV-REFUSED-COUNT / M-T-ADEQ-REFUSED-COUNT / M-CERT-ADMITS-SOUND-COUNT / M-CERT-REFUSES-PROBEABLE-COUNT",
+      "M-REG-PROV-SCORES / M-INFERRED-ALLOWLIST / M-ADEQUACY-CLASSIFIED",
+      "M-COVERAGE-IN-ITEMS / M-MECHANISM-COUNT / M-REGRESSION-TESTS-RUN"
+    ],
+    "gates": {
+      "validity_gate": "M-MECHANISM-COUNT-11 AND M-SINGLE-SLOT AND M-CONFIDENCE-0.9 AND B-SHIPPED-FA0 AND B-ORACLE-CEILING AND M-REGRESSION AND T-REFUSAL-VIOL-0 AND M-SUPPORT-IDENTITY AND M-ADEQ-DETERMINISTIC AND M-SPARSE-TOKENS-MISSED AND V8_FREEZE_BINDING PASS; otherwise MEASUREMENT_INVALID.",
+      "sensitivity_gate": "PC-CERT-ADMITS-SOUND AND PC-GROW-CATCHES-PROBEABLE AND PC-UNSAFE-RAW AND PC-DISCRIMINATION AND PC-MEASURED-TRUST-DOMINATES-OVERTRUST AND PC-INGEST-REFUSED-ABSTAINS all PASS; otherwise MEASUREMENT_INVALID. PC-DETERMINISM-REPEAT is evaluated after the two run_once executions in main(); a non-identical repeat forces status=MEASUREMENT_INVALID.",
+      "provenance_gate": "PC-PROV-SCORE-SEPARATES AND PC-PROV-ADMITS-TRUSTED AND PC-PROV-REFUSES-UNTRUSTED AND PC-PROV-REFUSES-SPARSE all PASS; otherwise MEASUREMENT_INVALID.",
+      "adequacy_gate": "PC-ADEQUACY-CLASSIFIES AND PC-ADEQUACY-DETECTS-INADEQUATE AND PC-ADEQUACY-PASSES-ADEQUATE all PASS; otherwise MEASUREMENT_INVALID.",
+      "growth_gate": "PC-GROW-NEEDED AND PC-GROW-CATCHES-PROBEABLE PASS; otherwise MEASUREMENT_INVALID.",
+      "necessity_gate": "PC-ADEQ-NEEDED AND PC-PROV-NEEDED AND PC-GROW-NEEDED all PASS; otherwise MEASUREMENT_INVALID (a redundant, non-attributable mechanism).",
+      "boundary_gate": "PC-GROW-MISSES-SPARSE AND BP-TRUSTED-SPARSE-FAILS PASS; otherwise MEASUREMENT_INVALID (non-adversarial/budget boundary probe, not evidence of general soundness)."
+    },
+    "decisions": {
+      "SCORED_ADEQ_CERT_SAFE_AND_EXPANSIVE": {
+        "definition": "all gates PASS AND M-T-FALSE-ACCEPT-COUNT==0 AND M-T-HTTP-ON-OUT-COUNT==0 AND M-T-REFUSAL-SEMANTICS-VIOLATIONS==0 AND M-T-COVERAGE > M-B-SHIPPED-COVERAGE AND M-T-COVERAGE >= 0.6750.",
+        "outcome": "SUPPORTS (status=COMPLETE)",
+        "meaning": "a MEASURED provenance trust root plus a syntactic probe-adequacy detector safely expands the certified class beyond the shipped fallback on a bank whose allowlist membership is inferred, strictly dominates both the fiat/no-adequacy and frozen-certificate incumbents, and still exhibits an irreducible probe-reachability boundary."
+      },
+      "SCORED_ADEQ_CERT_UNSAFE": {
+        "definition": "M-T-FALSE-ACCEPT-COUNT>0 OR M-T-HTTP-ON-OUT-COUNT>0 OR M-T-REFUSAL-SEMANTICS-VIOLATIONS>0.",
+        "outcome": "FALSIFIES (status=COMPLETE)",
+        "meaning": "the measured-trust-root/adequacy certification reintroduces unsafe inheritance; no out-of-bank widening is licensed."
+      },
+      "SCORED_ADEQ_CERT_SAFE_BUT_NO_EXPANSION": {
+        "definition": "all gates PASS, no safety violation, but M-T-COVERAGE <= M-B-SHIPPED-COVERAGE (or below the 0.6750 anchor).",
+        "outcome": "MIXED (status=COMPLETE)",
+        "meaning": "safe but no safe expansion over the shipped fallback; the closed-world cap stands. Concretely realized by the frozen A-WITHHOLD-ALL instrument state (coverage==B-SHIPPED, FA=0). A non-firing necessity ablation is NOT MIXED: it is a gate failure and therefore MEASUREMENT_INVALID."
+      },
+      "MEASUREMENT_INVALID": {
+        "definition": "any gate above is not PASS.",
+        "outcome": "NOT_APPLICABLE (status=MEASUREMENT_INVALID)",
+        "meaning": "instrument/binding/control failure; resumable from the frozen packet, never a negative result."
+      }
+    },
+    "overall_outcome_mapping": {
+      "SUPPORTS": "SCORED_ADEQ_CERT_SAFE_AND_EXPANSIVE",
+      "FALSIFIES": "SCORED_ADEQ_CERT_UNSAFE",
+      "MIXED": "SCORED_ADEQ_CERT_SAFE_BUT_NO_EXPANSION",
+      "NOT_APPLICABLE": "MEASUREMENT_INVALID"
+    },
+    "claim_status_semantics": {
+      "C-PARAM-INHERIT": "RETAINED at EXPERIMENTAL in EVERY branch (SUPPORTS, FALSIFIES, MIXED, MEASUREMENT_INVALID). This packet is a bounded extension measurement on synthetic out-of-bank constructions; even SUPPORTS is not the registered next_gate (the four-arm C-LLM-INHERIT benchmark on a non-ceiling task bank) and does not advance the claim. No code is promoted by this packet.",
+      "promotion": "promote_to_product=false: this packet writes no product code and authorizes no product change; any product decision on the measured trust contract is a downstream DIRECTOR decision."
+    },
+    "coverage_anchor_note": "M-T-COVERAGE is compared on the SAME bank against M-B-SHIPPED-COVERAGE (20/44=0.4545); the absolute 0.6750 constant is retained only as the historical shipped-coverage anchor measured by the parent on the frozen seven-family bank. SUPPORTS requires T coverage strictly greater than B-SHIPPED AND at or above 0.6750; the DESIGN probe gives T=1.0 (44/44), satisfying both."
+  },
+  "product_consequence_positive": "If SUPPORTS: the shipped closed-world guard can be re-founded on a MEASURED provenance trust contract -- per-origin reliability SCORED by execution-grounded certificate agreement over historical ledgers, with the allowlist INFERRED from that score rather than declared, plus a syntactic probe-adequacy detector that withholds declarations whose over-accept space the probe cannot reach. On this bank that safely ingests declarations originating from origins the operator did not pre-label, raises safe coverage from the shipped 0.4545 to 1.0 with zero false accepts, strictly dominates both the fiat/no-adequacy incumbent (FA=6) and the frozen-certificate incumbent (FA=18), and is robust to an over-permissive fiat allowlist (C-FIAT-OVERTRUST FA=3 vs measured T FA=0). This licenses the SPIDER arm of the future flagship to infer source trust from measured history instead of an operator-maintained allowlist, with the irreducible within-envelope budget-sparsity boundary recorded as the operational trust limit and re-scoring on drift as the maintenance requirement.",
+  "product_consequence_negative": "If FALSIFIES: the measured-trust-root/adequacy certification cannot be trusted, so the shipped kernel MUST permanently cap declaration ingestion at the closed-world audited boundary and prefer UNKNOWN over unsafe inheritance; disable out-of-bank declaration ingestion. If MIXED (safe but no expansion, or a redundant mechanism): keep the closed-world cap as the standing product answer -- inferring provenance and detecting probe adequacy add cost without a safe coverage gain or without an attributable mechanism -- and do not fund further trust-root breadth work this cycle. If MEASUREMENT_INVALID: no product change; retry from the frozen packet. In all non-SUPPORTS branches the flagship arm must not consume out-of-bank declarations.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "model_tokens": 0,
+    "external_network": "none (one loopback 127.0.0.1 ephemeral-port oracle serving bank + calibration resources only)",
+    "compute": "one CPU-scale deterministic run repeated twice for determinism: eleven-family real induction + 11 arms + 19 controls + a measured provenance scorer over 24 ledger entries; sub-minute.",
+    "risk": "low; no repository file is modified by this packet (measurement-only; carrier untouched)."
+  },
+  "expected_information_gain": "HIGH. Directly resolves the parent's two largest open boundaries at once: (a) whether the audited-origin allowlist can be MEASURED rather than declared, and (b) whether probe-space inadequacy can be DETECTED rather than assumed. It is a DISTINCT_EXTENSION, not a rerun: it introduces NEW origins with frozen historical ledgers, an execution-grounded per-origin provenance scorer with an INFERRED allowlist, and a syntactic adequacy detector; it reuses the shipped code without modification. It produces a decisive product answer either way (infer source trust by measurement, or document the permanent conditional cap), isolates each of the three mechanisms with separate ablations so the mechanism is attributable rather than asserted, and exhibits both a measured-vs-declared trust contrast and the residual budget-sparsity boundary.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The outcome mapping is total and every branch is reachable on the frozen instrument. SUPPORTS was realized by the DESIGN probe (T-SCORED-ADEQ within-envelope FA=0, HTTP-on-OUT=0, refusal-violations=0, coverage=1.0=44/44, delta +0.5454 over B-SHIPPED 0.4545). FALSIFIES is reachable on the identical decision expression: A-NO-ADEQ FA=6, A-NO-PROV FA=3, A-NO-GROW FA=9, C-FIAT-ADEQ FA=6, C-FIAT-OVERTRUST FA=3, C-FROZEN-CERT FA=18 and A-RAW-DECL FA=18 all evaluate the same safety predicate to >0, so the negative branch is not vacuous. MIXED is reachable: the frozen runner constructs A-WITHHOLD-ALL (empty allowlist) with coverage 20/44==B-SHIPPED and FA=0, and any withholding of expansion yields exactly that value of the decision expression. MEASUREMENT_INVALID is reachable via carrier substitution/hash mismatch, induction failure, support drift, adequacy drift, probe-token drift, regression failure, or any failing control. No branch is empty or arithmetically impossible: coverage in [0,1]; false-accept counts bounded by the 34 within-envelope OUT items ([0,34]); gate precedence does not shadow later branches.",
+      "evidence_refs": [
+        "spec.json#decision_rule/#decisions",
+        "prereg.md FROZEN RUNNER decision block",
+        "DESIGN probe (EXP_PROBE_MODE=1): SUPPORTS with all seven gates PASS; A-NO-ADEQ/A-NO-PROV/A-NO-GROW/C-FIAT/C-FIAT-OVER/C-FROZEN/A-RAW FA=6/3/9/6/3/18/18 prove FALSIFIES live; A-WITHHOLD-ALL coverage 0.4545==B-SHIPPED proves MIXED realizable; determinism True; regression 3/3"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) python3 stdlib only (observed 3.12.15); (b) src/spider/kernel.py is the frozen shipped carrier sha256 3a6caf97... and is UNMODIFIED; (c) the five other freeze artifacts exist with recorded sha256 (pyproject.toml 5f03fb59..., src/spider/__init__.py 3d173722..., src/spider/models.py 338aaf4d..., src/spider/registry.py 51fb440d..., tests/test_kernel.py ff9c1561...); (d) the public API imports under PYTHONPATH=src and SpiderKernel default min_confidence==0.8; (e) the REAL induction path was probed for all eleven families: distill_parameterized yields one slot each at confidence 0.9>=0.8 (M-MECHANISM-COUNT=11, M-SINGLE-SLOT, M-CONFIDENCE-0.9 all True, M-SUPPORT-IDENTITY True); (f) the loopback oracle starts and answers; (g) the runner executed end-to-end twice in probe mode with all seven gates PASS and determinism True; (h) the design-time satisfiability probe confirmed the three budget-sparse over-accept tokens {abcd,abef,beef} are NOT in the first PROBE_BUDGET=256 shuffled probe candidates for PROBE_SEED=38234098 (M-SPARSE-TOKENS-MISSED True), so the residual boundary and the provenance separation are genuinely reachable; (i) tests/test_kernel.py passes 3/3 under PYTHONPATH=src (bare 'discover -s tests' without PYTHONPATH fails to import spider, so EXECUTE must set PYTHONPATH=src; this is recorded in the runner). Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "prereg.md sections 1 and 7 (CANONICAL-HASHES; FROZEN RUNNER)",
+        "DESIGN probes: sha256 of all six freeze artifacts; induction probe for all eleven families; M-SPARSE-TOKENS-MISSED; unittest 3/3 under PYTHONPATH=src; full two-run probe-mode execution (all gates PASS, determinism True)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms are built from the SAME eleven frozen induced mechanisms (same carrier, same observations); the only mutated object is verification_rule['parameter_supports'] (via the real ingest_declaration code path for certificate arms, or by direct support substitution for B-ORACLE/A-RAW, or by a recorded gate for provenance/adequacy withholding). The arms separate on the frozen bank: T-SCORED-ADEQ within-envelope FA=0 vs C-FIAT-ADEQ FA=6, C-FIAT-OVERTRUST FA=3, C-FROZEN-CERT FA=18 and A-RAW-DECL FA=18 (the discriminating axis is safety, not coverage: all reach 1.0); A-NO-ADEQ FA=6 isolates adequacy, A-NO-PROV FA=3 isolates measured provenance, A-NO-GROW FA=9 isolates growth; B-SHIPPED and A-WITHHOLD-ALL anchor the floor at FA=0/coverage 0.4545; B-ORACLE anchors the ceiling at FA=0/coverage 1.0. No ceiling/floor degeneracy where every arm is forced identical. Cost is identical across arms except the growth step, which is separately attributed.",
+      "evidence_refs": [
+        "spec.json#baselines / #positive_control / #null_control",
+        "prereg.md FROZEN RUNNER arm-construction function arm_decl / arm_substitute_true",
+        "DESIGN probe arm table: T=0, C-FIAT=6, C-FIAT-OVER=3, C-FROZEN=18, A-RAW=18, A-NO-ADEQ=6, A-NO-PROV=3, A-NO-GROW=9, B-SHIPPED=0, A-WITHHOLD=0, B-ORACLE=0"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a reachable failure mode on the exact code path it guards. PC-PROV-SCORE-SEPARATES fails if the scorer does not separate trusted from untrusted origins; PC-PROV-ADMITS-TRUSTED fails if the inferred allowlist spuriously refuses a trusted origin; PC-PROV-REFUSES-UNTRUSTED fails if the provenance gate is inert; PC-PROV-REFUSES-SPARSE fails if growth surfaces the budget-sparse over-accept (making provenance redundant); PC-ADEQUACY-CLASSIFIES/DETECTS/PASSES fail if the detector is insensitive or a reject-everything; PC-ADEQ-NEEDED/PC-PROV-NEEDED/PC-GROW-NEEDED fail if the corresponding ablation does not false-accept (redundant mechanism); PC-CERT-ADMITS-SOUND fails if the certificate rejects a sound declaration; PC-GROW-CATCHES-PROBEABLE fails if growth does not surface the probeable over-accept; PC-UNSAFE-RAW (FA=18) proves the oracle is not blind; PC-DISCRIMINATION and PC-MEASURED-TRUST-DOMINATES-OVERTRUST prove T dominates the incumbents; PC-INGEST-REFUSED-ABSTAINS exercises the REAL refusal path; NC/A-WITHHOLD-ALL proves the null floor; PC-GROW-MISSES-SPARSE and BP-TRUSTED-SPARSE-FAILS prove the budget-sparsity boundary is genuinely reachable (T boundary B11 FA=3). The DESIGN probe exercised every one with the real carrier: all fired as specified.",
+      "evidence_refs": [
+        "spec.json#positive_control / #null_control",
+        "prereg.md FROZEN RUNNER controls block",
+        "DESIGN probe controls: all 20 controls pass_=True (provenance separation 1.0/0.25; allowlist O1-O4; adequacy classification B7/B8 False; ablations 6/3/9; incumbents 6/3/18; boundary FA=3; determinism True)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is the SHIPPED carrier code path (SpiderKernel.ingest_declaration + certify_declaration), invoked unchanged, gated by the measured provenance score and the syntactic adequacy detector. The DESIGN probe exercised it on all eleven families: for the four trusted SOUND families the declaration was CERTIFIED and the support widened (their IN items resolved EXECUTABLE); for the three probeable evaders growth fed negatives and ingest_declaration REFUSED while preserving the support (PC-INGEST-REFUSED-ABSTAINS PASS); for the untrusted-origin sparse evader the provenance gate withheld it (conservative support byte-equal); for the two alphabet evaders the adequacy detector withheld them. T-SCORED-ADEQ resolved 44/44 within-envelope IN items with FA=0, so the treatment is structurally live and executable, not dead. A structurally dead treatment would be caught by T coverage <= B-SHIPPED (MIXED) or by a failing gate (MEASUREMENT_INVALID), never silently reported as a negative. No product code is written, so treatment_liveness concerns only the invoked shipped path, which is shown live.",
+      "evidence_refs": [
+        "prereg.md FROZEN RUNNER arm_decl / refusal_violation_check / run_once",
+        "DESIGN probe: T-SCORED-ADEQ coverage 44/44=1.0, FA=0; M-T-CERTIFIED-COUNT=5, M-T-PROV-REFUSED-COUNT=1, M-T-ADEQ-REFUSED-COUNT=2; ingest refuse preserved"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly the six existing immutable files whose identity can change the interpretation: pyproject.toml (package definition), src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py (the SHIPPED carrier that this measurement-only packet invokes but does NOT modify), and tests/test_kernel.py (regression suite). All six exist with sha256 recorded at DESIGN. The frozen bank, the provenance ledgers, the adequacy detector, the oracle, the label rule, the probe space, the allowlist inference and the decision function are all in-process inside the FROZEN RUNNER block embedded in prereg.md, which is bound by freeze.json.hashes['prereg.md']; there is no external dataset or fixture. No timing-dependent quantity participates in the determinism equality projection. No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38210179652/freeze.json#artifact_hashes (precedent shape)",
+        "prereg.md sections 5 and 7; DESIGN probe verified all six artifact sha256 and a full two-run execution"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "pyproject.toml",
+    "src/spider/__init__.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "src/spider/kernel.py",
+    "tests/test_kernel.py"
+  ]
+}

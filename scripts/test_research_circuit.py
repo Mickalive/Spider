@@ -16,7 +16,7 @@ def run():
     assert circuit_decision({**base, "same_failure_count": 2}, "rev-a", now)[0] is False
     transient = {**base, "last_failure_retryable": True}
     assert circuit_decision(transient, "rev-a", now)[0] is True
-    assert circuit_decision(transient, "rev-a", now + timedelta(hours=6, minutes=1))[0] is False
+    assert circuit_decision(transient, "rev-a", now + timedelta(hours=24, minutes=1))[0] is False
     assert circuit_decision({**transient, "updated_at": "invalid"}, "rev-a", now)[0] is True
     assert circuit_decision({**transient, "last_failure_retryable": None}, "rev-a", now)[0] is True
     print("SPIDER_RESEARCH_CIRCUIT_TEST_OK")

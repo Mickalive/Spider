@@ -1,0 +1,42 @@
+name: SPIDER FREE model functional smoke
+on:
+  pull_request:
+    paths:
+      - "scripts/probe_free_provider.py"
+      - ".opencode/agents/spider_provider_probe.md"
+      - "scripts/test_provider_preflight.py"
+      - ".github/workflows/free-provider-real-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spider-free-real-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-free-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic free-model safety tests first
+        run: python scripts/test_provider_preflight.py
+      - name: Install same current OpenCode as working LexMachina
+        run: curl --retry 3 --retry-all-errors --retry-delay 10 -fsSL https://opencode.ai/install | bash
+      - name: Make real isolated tool-capability calls to free models ONLY
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/probe_free_provider.py \
+            --per-model-seconds 100 \
+            --output /tmp/spider-free-real-probe.json
+          jq '{ready, category, selected_model, catalog_status, catalog_present_count, attempts}' /tmp/spider-free-real-probe.json
+          jq -e '.ready == true and .free_only == true and .selected_model != null' /tmp/spider-free-real-probe.json >/dev/null
+          echo "SPIDER_REAL_FREE_TOOL_AGENT_VERIFIED"

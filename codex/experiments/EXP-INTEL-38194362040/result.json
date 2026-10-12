@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim_ids": [
+    "C-LLM-INHERIT"
+  ],
+  "summary": "Corrected byte-verified credential-free capable-endpoint capability ladder. Content-identity repair succeeded: both predeclared candidates were fully downloaded, their served-body sha256+bytes and GGUF header fingerprints match the frozen pins (IDENTITY-PASS), and both loaded. Each cell is COMPLETE (PC-JSON-CONSTRAINED-DECODING 10/10; 5/5 episodes) and neither CLEARS: M-14B-QWEN task_success_rate=0.0 (0/5) and M-8B-LLAMA task_success_rate=0.0 (0/5), both parseable_action_rate_step1=1.0, answer_action_emission_rate=0.0. Both classes click #reveal-btn at step 0 (revealing TARGET-42) then re-click the now-hidden button for all remaining steps, never answering. The endpoint census (non-gating) finds 0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations) and 1 UNREACHABLE (HuggingFace Inference). Frozen rule 4 therefore yields OUTCOME=FALSIFIES and B3_STATUS=NOT_SATISFIED: no currently-provisionable credential-free same-protocol endpoint clears the frozen minimal multi-step Web-agent bar, so readiness condition (3) is not satisfied. The 3-entry external-comparator readiness table is recorded as CANDIDATE_NOT_EVIDENCE. This is a valid scientific negative over the predeclared credential-free Q4_K_M classes tested; it is not a global rejection of C-LLM-INHERIT and does not close hosted frontier classes.",
+  "metrics": {
+    "M-14B-QWEN": {
+      "positive_control_pass_rate": {
+        "value": 1.0,
+        "k": 10,
+        "n": 10,
+        "unit": "fraction"
+      },
+      "parseable_action_rate_step1": {
+        "value": 1.0,
+        "k": 5,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "answer_action_emission_rate": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "task_success_rate": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "mean_inference_latency_s": {
+        "value": 12.535,
+        "n_calls": 35,
+        "unit": "s"
+      },
+      "mean_completion_tokens": {
+        "value": 15.0,
+        "n_calls": 35,
+        "unit": "tokens"
+      },
+      "served_body_digest_verified": {
+        "value": 1,
+        "unit": "bool"
+      },
+      "gguf_metadata_fingerprint_matched": {
+        "value": 1,
+        "unit": "bool"
+      },
+      "cell_state": "COMPLETE",
+      "clears": false
+    },
+    "M-8B-LLAMA": {
+      "positive_control_pass_rate": {
+        "value": 1.0,
+        "k": 10,
+        "n": 10,
+        "unit": "fraction"
+      },
+      "parseable_action_rate_step1": {
+        "value": 1.0,
+        "k": 5,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "answer_action_emission_rate": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "task_success_rate": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "mean_inference_latency_s": {
+        "value": 5.726,
+        "n_calls": 35,
+        "unit": "s"
+      },
+      "mean_completion_tokens": {
+        "value": 10.57,
+        "n_calls": 35,
+        "unit": "tokens"
+      },
+      "served_body_digest_verified": {
+        "value": 1,
+        "unit": "bool"
+      },
+      "gguf_metadata_fingerprint_matched": {
+        "value": 1,
+        "unit": "bool"
+      },
+      "cell_state": "COMPLETE",
+      "clears": false
+    },
+    "PC-ORACLE-EPISODE": {
+      "task_success_rate": {
+        "value": 1.0,
+        "k": 5,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "parseable_action_rate_step1": {
+        "value": 1.0,
+        "k": 5,
+        "n": 5,
+        "unit": "fraction"
+      }
+    },
+    "NC-NO-MODEL-ACTION": {
+      "task_success_rate": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "parseable_action_rate_step1": {
+        "value": 0.0,
+        "k": 0,
+        "n": 5,
+        "unit": "fraction"
+      }
+    },
+    "B-RANDOM-ACTION": {
+      "task_success_rate": {
+        "value": 0.2,
+        "k": 1,
+        "n": 5,
+        "unit": "fraction"
+      },
+      "parseable_action_rate_step1": {
+        "value": 1.0,
+        "k": 5,
+        "n": 5,
+        "unit": "fraction"
+      }
+    },
+    "capability_bar": {
+      "task_success_rate": 0.6,
+      "parseable_action_rate_step1": 0.6,
+      "episodes": 5,
+      "unit": "fraction"
+    },
+    "candidates_measured_complete": {
+      "value": 2,
+      "n": 2,
+      "unit": "cells"
+    },
+    "served_body_digest_verified": {
+      "value": 2,
+      "n": 2,
+      "unit": "candidates"
+    },
+    "gguf_metadata_fingerprint_matched": {
+      "value": 2,
+      "n": 2,
+      "unit": "candidates"
+    },
+    "b3_status": "NOT_SATISFIED",
+    "providers_credential_required": {
+      "value": 10,
+      "unit": "providers"
+    },
+    "providers_credential_free_operationally_capped": {
+      "value": 1,
+      "unit": "providers"
+    },
+    "providers_provisionable_credentialed": {
+      "value": 0,
+      "unit": "providers"
+    },
+    "providers_unreachable": {
+      "value": 1,
+      "unit": "providers"
+    },
+    "comparators_enumerated": {
+      "value": 3,
+      "unit": "entries",
+      "primary_sources_pinned": 3,
+      "evidence_label": "CANDIDATE_NOT_EVIDENCE"
+    },
+    "comparators_not_pinned": {
+      "value": 0,
+      "unit": "entries"
+    },
+    "preflight_pass": true,
+    "outcome": "FALSIFIES",
+    "status": "COMPLETE",
+    "decision_trace": [
+      "rule1_preflight_pass",
+      "rule2_endpoint_census_recorded_non_gating:providers=12 provisionable_credentialed=0",
+      "rule3c_complete:M-14B-QWEN tsr=0.0 parse=1.0 clears=False",
+      "rule3e_fails_bar:M-14B-QWEN=TREATMENT_FAILS_BAR",
+      "rule3c_complete:M-8B-LLAMA tsr=0.0 parse=1.0 clears=False",
+      "rule3e_fails_bar:M-8B-LLAMA=TREATMENT_FAILS_BAR",
+      "rule4_complete_cells_no_clear->FALSIFIES b3=NOT_SATISFIED"
+    ]
+  },
+  "controls": {
+    "PC-SUITE-EXP-INTEL-38194362040": {
+      "role": "positive_control_suite",
+      "members": [
+        "PC-JSON-CONSTRAINED-DECODING",
+        "PC-ORACLE-EPISODE"
+      ],
+      "expected": "PC-JSON-CONSTRAINED-DECODING 10/10 per candidate; PC-ORACLE-EPISODE 5/5",
+      "observed": "PC-JSON-CONSTRAINED-DECODING 10/10 on both candidates; PC-ORACLE-EPISODE 5/5",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json, cells/M-14B-QWEN/raw/model_receipts.json, cells/M-8B-LLAMA/raw/model_receipts.json"
+    },
+    "PC-JSON-CONSTRAINED-DECODING": {
+      "role": "positive_control_per_candidate_constrained_decoding_gate",
+      "expected": "10/10 parseable constrained-JSON probes per loaded candidate",
+      "observed": "10/10 for M-14B-QWEN and 10/10 for M-8B-LLAMA",
+      "verdict": "PASS",
+      "evidence_ref": "cells/M-14B-QWEN/raw/model_receipts.json#positive_control, cells/M-8B-LLAMA/raw/model_receipts.json#positive_control"
+    },
+    "PC-ORACLE-EPISODE": {
+      "role": "positive_control_episode",
+      "expected": "5/5 task_success=true through the real frozen run_episode scorer against the served page",
+      "observed": "5/5 task_success=true; parseable_action_rate_step1=1.0",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#PC-ORACLE-EPISODE"
+    },
+    "NC-NO-MODEL-ACTION": {
+      "role": "null_control_no_model",
+      "expected": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0",
+      "observed": "parseable_action_rate_step1=0.0, task_success_rate=0.0",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#NC-NO-MODEL-ACTION"
+    },
+    "B-RANDOM-ACTION": {
+      "role": "negative_baseline_random_actions",
+      "expected": "parseable_action_rate_step1=1.0 AND task_success_rate<0.6",
+      "observed": "parseable_action_rate_step1=1.0, task_success_rate=0.2 (1/5, <0.6)",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#B-RANDOM-ACTION"
+    },
+    "B-CARRIED-3B-8B-QWEN-GOAL-SCHEMA": {
+      "role": "carried_reference_baseline_protocol_hardness",
+      "status": "CARRIED_NOT_RERUN",
+      "expected": "carried FAIL: M-7B-QWEN 0/5 and M-3B-QWEN 0/5, parseable_action_rate_step1=1.0",
+      "observed": "carried from EXP-INTEL-38164607941; used only to certify protocol hardness/decoding liveness, not as a comparator arm",
+      "verdict": "NOT_APPLICABLE",
+      "evidence_ref": "research/experiments/EXP-INTEL-38164607941/result.json#metrics"
+    },
+    "B-POLLINATIONS-CARRIED": {
+      "role": "carried_hosted_credential_free_proxy_baseline",
+      "status": "CARRIED_NOT_RERUN",
+      "expected": "credential-free but operationally capped (reasoning-only, ~197-token cap, intermittent 402, no pinning/SLA)",
+      "observed": "census classified Pollinations CREDENTIAL_FREE_OPERATIONALLY_CAPPED (HTTP 200); not invoked for capability",
+      "verdict": "NOT_APPLICABLE",
+      "evidence_ref": "raw/endpoint_census.json#providers.Pollinations"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/preflight.json",
+      "sha256": "b81e729d747a8c4217ed17409c2eb6a4c408c6d352dca5ebf1bbc8d62fb8369c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/run_resources.json",
+      "sha256": "27fc2cc37057087ccb4333abefb606d071f44d7d948e6441b78973572c664cff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/controls.json",
+      "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/materialized_configs.json",
+      "sha256": "e872ccaa7f24121628f8b54598d8f7b7c6c727753ad9e89837540e4d2f4e2f4a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/provisioning_evidence.json",
+      "sha256": "ec0b620c3f104bf9644a54644ba1a927e656f88935a1b66044fb811e384739fd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/endpoint_census.json",
+      "sha256": "512f190a8e587b13ce91e7816dcf89f11f8ecd8aa6f7cdb7ab8fe9d6d8298cea",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/external_comparators.json",
+      "sha256": "c25b6811c99b520f9c058542ff8d2138bb9d5e8e469e3856e26bc4cc07a86900",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/raw/decision.json",
+      "sha256": "b0b1ea0e97d093e66cf786cf5bfb0f1c640cfc6e07698f714b45dca232576c34",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/harness_config.json",
+      "sha256": "2f17520b9b58b6dba6c262cdcd66f48e124178e4c8b94af6868087b62464719e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/provisioning_receipt.json",
+      "sha256": "d6b258fbbb9c0fb8c6038b2ad8b75d34999a619ec411372ab65d3ca05e0be38a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/model_receipts.json",
+      "sha256": "3536c4a4722ee5a4ecd369abc403c022422ec880c890f292ba7d63b5bdf9f0b0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/harness_config.json",
+      "sha256": "2945f5fecf85ee16e469a1fb7b85ebf555b1085bde3bc9b683dbb84ae840a813",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/provisioning_receipt.json",
+      "sha256": "17e5a4262ad9b72e7d4146dbba715d01f2e7ea296b865d65d2441eeeb9d97e48",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/model_receipts.json",
+      "sha256": "34c1d78571e08752ff8b798656f0c74195e0462100b938ae5703599739f5f8b2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/configs/config_M-14B-QWEN.json",
+      "sha256": "2f17520b9b58b6dba6c262cdcd66f48e124178e4c8b94af6868087b62464719e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-38194362040/configs/config_M-8B-LLAMA.json",
+      "sha256": "2945f5fecf85ee16e469a1fb7b85ebf555b1085bde3bc9b683dbb84ae840a813",
+      "role": "fixture"
+    },
+    {
+      "path": "research/intel/exp_38194362040_materialize.py",
+      "sha256": "0ed8c182f4ac0a8eadd66b90c03d6cf6b684823f9f8166ec34779435a2ad86b7",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_provision.py",
+      "sha256": "6665df59eaadd9b08a0b3fa1755bd46e631b3b92540cd5e75597c80bc0384840",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_controls.py",
+      "sha256": "14a9ab67ebc43ae10c70985def8cd54834ce73684985bf802e547910fad2c497",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_census.py",
+      "sha256": "da199e64aab157ebb48f521bf83c7306242f9ce28a9de0c016674e12c1548f17",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_comparators.py",
+      "sha256": "7176e3d645e5c1b05cabd55695dab0bae78b5b89a7169fb40a2e2c05a09ffbb4",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_eval.py",
+      "sha256": "8dd702d986716fb1637b9eace4dae7ca3711338922b621f44cf052b44fc41a84",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_38194362040_assemble.py",
+      "sha256": "9797e3bb4667b454880552bbfc4a07a0984d217c0ab80eca28bb229cf013cfac",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/run_exp_37982024058.py",
+      "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+      "sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py",
+      "sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "PREFLIGHT PASS (frozen rule 1) with all five checks true: PC-ORACLE-EPISODE 5/5 task_success and parseable_action_rate_step1=1.0; NC-NO-MODEL-ACTION parseable_action_rate_step1=0.0 and task_success_rate=0.0; B-RANDOM-ACTION parseable_action_rate_step1=1.0 and task_success_rate=0.2 (<0.6); all freeze_artifact sha256 checks match; required stack imports (llama_cpp 0.2.90, playwright, frozen runner producer symbols) succeed.",
+    "CONTENT-IDENTITY REPAIR CONFIRMED: at EXECUTE each candidate's revision-pinned served body was fully downloaded and its sha256 equals the frozen served_body_sha256 pin and the HF tree-API lfs.oid - M-14B-QWEN 8,988,110,976 bytes / e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008; M-8B-LLAMA 4,920,739,232 bytes / 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c. The parsed GGUF header fingerprints also equal the frozen fingerprints. Both candidates IDENTITY-PASS; the parent's metadata-vs-body mismatch did not recur.",
+    "M-14B-QWEN (Qwen2.5-14B-Instruct Q4_K_M, chat_format=qwen): loaded (load_time_s=0.543, max RSS ~9.4 GB); PC-JSON-CONSTRAINED-DECODING 10/10; 5/5 episode records -> COMPLETE. task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5), answer_action_emission_rate=0.0 (0/5). Every episode clicked #reveal-btn at step 0 (revealing TARGET-42) and then re-clicked the now-hidden #reveal-btn for all remaining steps, never emitting an answer action. mean latency 12.535 s/call (35 calls), mean completion tokens 15.0.",
+    "M-8B-LLAMA (Meta-Llama-3.1-8B-Instruct Q4_K_M, chat_format=llama-3): loaded (load_time_s=15.1, max RSS ~5.2 GB); PC-JSON-CONSTRAINED-DECODING 10/10; 5/5 episode records -> COMPLETE. task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0 (5/5), answer_action_emission_rate=0.0 (0/5). Same behavioural mode: reveal click at step 0, then repeated re-clicks of the hidden reveal button; no answer action in any episode. mean latency 5.726 s/call (35 calls), mean completion tokens 10.57.",
+    "Both candidate cells COMPLETE and neither CLEARS (task_success_rate 0.0 < 0.6 in both), so frozen rule 4 yields OUTCOME=FALSIFIES with B3_STATUS=NOT_SATISFIED (every predeclared hosted provider is CREDENTIAL_REQUIRED / UNREACHABLE / CREDENTIAL_FREE_OPERATIONALLY_CAPPED). status=COMPLETE.",
+    "ENDPOINT CENSUS (non-gating): 12 providers. PROVISIONABLE_CREDENTIATED=0; CREDENTIAL_REQUIRED=10 (OpenAI 401, Anthropic 401, Google Gemini 403, Mistral 401, Groq 401, Together 401, OpenRouter 200, DeepSeek 401, Fireworks 401, Cohere 401); CREDENTIAL_FREE_OPERATIONALLY_CAPPED=1 (Pollinations HTTP 200); UNREACHABLE=1 (HuggingFace Inference, connection error). No credential environment variable was present.",
+    "EXTERNAL COMPARATORS (non-gating readiness/reproducibility table): 3/3 entries enumerated with pinned primary sources, all labelled CANDIDATE_NOT_EVIDENCE (QCR arXiv:2608.12847; Agentic Compilation arXiv:2604.09718; site-memory/ColorBrowserAgent arXiv:2601.07262). No external number was reproduced and none is used as evidence.",
+    "The observed failure mode (step-0 reveal succeeds, then hidden-button re-click loop, zero answer actions) is the same mode inherited from the audited 3B-8B Qwen prompt ablation (EXP-INTEL-38164607941) and reproduced here at 14B Qwen and 8B Llama under the frozen protocol.",
+    "No claim is promoted or weakened by this transaction; the FALSIFIES outcome is bounded to the predeclared credential-free local Q4_K_M classes tested and the recorded non-provisionable hosted census."
+  ],
+  "validity_notes": [
+    "Bounded negative scope: FALSIFIES is asserted only over the COMPLETE predeclared credential-free local Q4_K_M candidate set tested (Qwen2.5-14B-Instruct, Meta-Llama-3.1-8B-Instruct) plus the carried Qwen 3B-8B anchors and the recorded non-provisionable hosted census. It does not close hosted frontier classes (blocked, not tested), other quantisations, other tasks or other domains, and does not globally reject C-LLM-INHERIT.",
+    "Deterministic protocol / no variance: temperature=0.0 + fixed seeds (42-46). The 3/5 (0.6) rule is a pre-declared capability-gate adequacy rule, not a statistical threshold; n=5 per candidate affords no variance estimate. This limitation is inherited from the frozen design and disclosed.",
+    "Representation loss (inherited): state is a simplified text observation (PAGE_TEXT 300 chars, ELEMENTS over button/a/input, HISTORY), not a full accessibility tree. After the reveal, PAGE_TEXT contains TARGET-42 and ELEMENTS still lists the (now hidden) reveal button; both tested classes re-click it rather than answering. This packet changes only the model class, not the observation representation, so the failure may partly reflect representation/affordance reasoning rather than raw capacity.",
+    "Grammar admission vs parse acceptance: the frozen GBNF admits any single-field object; liveness rests on the empirically verified PC 10/10 and 5/5 step-1 parseable behaviour. A candidate with parseable_action_rate_step1 < 0.6 cannot clear the bar, so this residual cannot manufacture a false SUPPORTS.",
+    "Task-bank granularity: the frozen task is a single near-deterministic page; clearing the bar is necessary but not sufficient for Gate-3 readiness (comparator-at-ceiling and dynamic range are B2-owned by Runtime).",
+    "Scale vs family are not separated within a candidate: both candidates failed, so the 14B scale test and the non-Qwen family test each individually bound those tested classes; this does not isolate scale from family-specific properties, and no interaction claim is made.",
+    "The endpoint census is observational (env-var presence + unauthenticated HTTP status/reachability + carried receipts); it cannot prove a credentialed provider would clear the bar, only that it is provisionable. Hosted model numbers are CANDIDATE_NOT_EVIDENCE.",
+    "The external-comparator readiness/reproducibility table is a literature-identity enumeration; no vendor number is SPIDER evidence and no external number is reproduced by this packet.",
+    "The 14B GGUF (~9 GB) loaded successfully on this 15 GB box (max RSS ~9.4 GB); no load failure occurred. No candidate was UNMEASURED_LOAD_FAILED or EXCLUDED, so the FALSIFIES branch is not emptied by operational failure.",
+    "The frozen runner and base fixture are byte-verified freeze_artifacts; the per-candidate overlays differ from the frozen base config only in prompts.system, sampling.chat_format and candidate_models_frozen.",
+    "In DESIGN terminology this is the Product-targeting C-LLM-INHERIT experiment for Intel, which only owns priority_claim C-LLM-INHERIT among the relevant Product claim set; the treatment arm is a candidate model under the frozen protocol. No governed Product code was modified."
+  ],
+  "unresolved": [
+    "Whether a hosted frontier class (credential-gated, not tested) clears the frozen minimal bar; no hosted model was invoked and no API credential exists in this factory.",
+    "Whether the failure is intrinsic to raw multi-step control capacity or to the frozen simplified observation representation (ELEMENTS exposes the hidden reveal button after reveal); this packet cannot separate those, and a representation-level follow-up (accessibility tree / hidden-element suppression) is a different factor.",
+    "Whether the tested classes could clear the bar under any prompt or decoding variation; the frozen single-factor protocol uses one fixed P-TREAT-GOAL-SCHEMA prompt, so prompt sensitivity is not explored here.",
+    "Whether the HF Xet metadata/body mismatch documented by the parent experiment (xetHash/etag vs lfs.oid) affects other lanes' pinned GGUFs; not surveyed.",
+    "Whether other quantisations or a different task would change the bounded negative; out of the frozen scope."
+  ],
+  "frozen_input_verification": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/request.json",
+      "sha256": "38039a17f7b788fd0c30684dc409ecf92903ce2325ce6cf50caa800140eb80c5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/spec.json",
+      "sha256": "2f787080676a617a06399852742699b13ae810367dc500252debed649d7c0285"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-38194362040/prereg.md",
+      "sha256": "f1429eaa0c544fe01a4c8589b263f8f10cd0086f68ab4677d414348a2a5e4e86"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/freeze.json",
+      "sha256": "9145a55f80bd95252c287dce84710b8fd7a8a87d997664c709ccd49232921ecd"
+    },
+    "design_review.json": {
+      "path": "research/experiments/EXP-INTEL-38194362040/design_review.json",
+      "sha256": "6a84d75b883eb6ab5beae4db371dcc7a52741dd1d4fdfd25c883e29aa40276f9"
+    },
+    "freeze_hashes_match": {
+      "request.json": true,
+      "spec.json": true,
+      "prereg.md": true,
+      "design_review.json": true
+    },
+    "freeze_artifacts_all_match": true
+  }
+}

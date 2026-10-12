@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All three outcome branches (SUPPORTS, FALSIFIES, MEASUREMENT_INVALID) are arithmetically reachable and no branch is shadowed by precedence. SUPPORTS triggers if either candidate is COMPLETE and CLEARS (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6 over 5 episodes; k>=3/5). The carried parent canary proved the frozen scorer registers the full click-then-answer path (PC-ORACLE-EPISODE 5/5) and the GBNF admits the success tokens. FALSIFIES triggers when at least one candidate is COMPLETE and neither clears, and all hosted providers are non-provisionable — the carried 3B-8B Qwen anchor demonstrates this failure mode is real. MEASUREMENT_INVALID triggers on preflight failure (rule 1) or zero COMPLETE cells (rule 4). The 0.6 threshold over 5 episodes (k=3,4,5) is attainable at both ends; the random baseline analytic P(k>=3)≈1.15e-3 confirms it is not trivially reachable by chance. Early stop at rule 3d does not shadow FALSIFIES because a clearing candidate terminates the ladder with nothing left to falsify; operational failures (UNMEASURED_LOAD_FAILED, UNMEASURED_TREATMENT_PC_FAILED) are non-terminal and continue the ladder. The DESIGN-time full-download probe confirmed the frozen served_body_sha256 pins equal the actually served bytes, repairing the parent's step-3a dead branch.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/spec.json#decision_rule",
+        "research/experiments/EXP-INTEL-38164607941/result.json#metrics",
+        "research/experiments/EXP-INTEL-38164607941/audit.json",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is verified at DESIGN time or pinned fail-closed. Stack: Python 3.12.15, nproc=4, 15 GB RAM (~14 GB available), 85 GB free disk, /usr/bin/google-chrome, curl/wget/git present, huggingface.co reachable (~127 MB/s). llama-cpp-python 0.2.90 not preinstalled but DESIGN downloaded the sdist and confirmed llama_chat_format.py registers both 'llama-3' and 'qwen' chat formats. playwright installs from PyPI with system Chrome executable_path. Frozen runner (sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00), base fixture (sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb), and prompt provenance (sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862) all hash-verified at DESIGN. Candidate GGUFs fully downloaded at DESIGN from both revision-pinned and main-ref URLs; byte-identical sha256 and byte counts equal HF tree-API lfs.oid and parent EXECUTE-observed body hashes; parent's xetHash/etag pins explicitly rejected. GBNF grammar (sha256 16c9877c0829b2099bd7180c212f28d8c545b095e9a4411afa7cabccd3fa6a65) inherited from frozen fixture; 7 rules defined, success path grammar-admissible (strchar admits '#reveal-btn' and 'TARGET-42'). Scorer/controls liveness verified by predecessor canary through real browser and frozen run_episode (PC-ORACLE 5/5, NC 0/0, B-RANDOM parseable 1.0/success 0.2). Endpoint census method probed live at predecessor design time. The 14B GGUF (~9 GB) RAM risk is acknowledged and handled as UNMEASURED_LOAD_FAILED (operational, not capability) with the 8B Llama (~4.9 GB) as comfortably loadable fallback.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#remote_artifact_pin_policy",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#section-10"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The capability decision is against a pre-declared absolute bar (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6), not a within-run comparator, eliminating treatment/comparator identity confounds. Measurement range is non-degenerate: ceiling demonstrated by PC-ORACLE-EPISODE 5/5 task_success (scorer registers full completion), floor by carried anchor M-7B-QWEN 0/5 and M-3B-QWEN 0/5 with parseable_action_rate_step1=1.0, and chance analytically confined below bar (P(k>=3/5)≈1.15e-3). The single manipulated dimension is model weights (+ family chat_format required to load); task, prompt, grammar, sampling, parse, and scorer are byte-inherited from frozen fixtures. Candidate content identity is pinned to served-body sha256 + byte count + revision URL + GGUF header fingerprint (gguf_version, tensor_count, architecture, file_type, block_count, embedding_length, context_length, tokenizer.chat_template), so any task_success_rate difference is attributable to model class. Carried anchor is byte-identified and not re-run; its role is descriptive protocol-hardness certification only.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38164607941/result.json#metrics",
+        "research/experiments/EXP-INTEL-37982024058/result.json#metrics",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls are sensitive and were executed at DESIGN/predecessor time as a non-outcome-bearing canary through the REAL frozen run_episode scorer with REAL browser (Playwright + /usr/bin/google-chrome) against the served task page (name-only llama_cpp stub, no model inference): PC-ORACLE-EPISODE fired 5/5 task_success (each episode revealed TARGET-42 and answered it, proving the completion path is registerable); NC-NO-MODEL-ACTION stayed 0/5 parseable and 0/5 success (rejects non-JSON fixed content); B-RANDOM-ACTION was parseable 1.0 (valid JSON by construction) and task_success_rate=0.2 with the 0.6 bar effectively unreachable by chance (analytic P(k>=3)≈1.15e-3). PC-JSON-CONSTRAINED-DECODING 10/10 realized per model in the audited parent under identical grammar and probe, re-verified per candidate at EXECUTE. Four distinct controls cover constrained decoding, end-to-end scoring, null rejection, and chance-level success; none is tautological (no control supplies the target answer to the model) and none is structurally impossible. A control failure yields MEASUREMENT_INVALID, never a false capability result. The digest correction affects only candidate provisioning, not controls.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/result.json#controls",
+        "research/experiments/EXP-INTEL-38175568787/raw/controls.json",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment arm (candidate under P-TREAT-GOAL-SCHEMA + frozen GBNF, driven by frozen runner) is structurally live and now provably provisionable: (a) the prompt enumerates exactly the two actions admitted by the frozen grammar using required key names ('click' with 'selector', 'answer' with 'text'); (b) the success path is grammar-admissible (strchar ::= [^\"\\\\] admits '#', '-', digits, uppercase, so 'selector':'#reveal-btn' and 'text':'TARGET-42' are admitted); (c) the same frozen scorer registered the full click-then-answer completion 5/5 in the canary; (d) carried parent cells show this task family reliably emits parseable matched actions under constrained decoding (10/10 PC; 5/5 step-1 parseable); (e) BOTH candidate GGUFs were fully downloaded at DESIGN, served-body sha256 equals the pin, each is well-formed GGUF v3 with expected architecture/tensor_count/file_type and embedded tokenizer.chat_template, and llama-cpp-python 0.2.90 registers both 'qwen' and 'llama-3' chat formats. Self-attack recorded: (i) GBNF does not guarantee matched action/field pairs; liveness rests on empirically verified decoding plus the rule that parseable_action_rate_step1 < 0.6 can never clear; (ii) 14B GGUF (~9 GB) may fail to load on 15 GB box — that candidate becomes UNMEASURED_LOAD_FAILED and ladder continues; 8B Llama (~4.9 GB) is comfortably loadable, so at least one candidate is measurable; (iii) served-body drift between DESIGN and EXECUTE would fail step 3a — but DESIGN verified byte-identity across two routes and against parent's prior-day EXECUTE observation. P-TREAT-GOAL-SCHEMA leaks neither '#reveal-btn' nor 'TARGET-42' (design-time verified). This is a Product experiment targeting C-LLM-INHERIT, so treatment_liveness must be PASS (not NOT_APPLICABLE).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json#gbnf_grammar",
+        "research/experiments/EXP-INTEL-38164607941/spec.json#prompt_conditions.P-TREAT-GOAL-SCHEMA",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#appendix-b",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#candidates"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local code/data/fixture dependency whose identity can change interpretation is listed in spec.freeze_artifacts and hashed at freeze time; EXECUTE re-verifies each (mismatch -> MEASUREMENT_INVALID): frozen runner (research/intel/run_exp_37982024058.py, sha256 2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00), frozen base fixture (research/experiments/EXP-INTEL-37982024058/raw/harness_config.json, sha256 7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb), treatment-prompt provenance (research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py, sha256 4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862). DESIGN re-verified all three hashes matching parent freeze.json.artifact_hashes. Per-candidate config overlays are deterministic transformations of the bound base fixture (replace ONLY prompts.system, sampling.chat_format, candidate_models_frozen) and need no separate local file at freeze time. Remote GGUFs are frozen as revision-pinned URLs + served-body sha256 digests (not bytes); the byte-verification requirement is recorded in spec.remote_artifact_pin_policy (forbidden pin sources: HF xetHash, CDN etag, lfs.oid without full-download confirmation) and freeze_eligibility.freeze_artifacts_bound. The prior experiment EXP-INTEL-38175568787 passed freeze with metadata-derived pins (xetHash/etag) that did not match served body; this design's full-download byte-verification at DESIGN and the frozen step-3a identity check prevent that failure mode. Thin drivers (materializer, provisioning, controls, census, comparators, evaluator) are authored at EXECUTE but fully specified by prereg.md Appendices A and C; their behavior is a deterministic function of frozen base fixture, pinned candidate digests, and frozen thresholds, with sha256 recorded in provenance.json.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-38194362040/spec.json#freeze_artifacts",
+        "research/experiments/EXP-INTEL-38194362040/spec.json#remote_artifact_pin_policy",
+        "research/experiments/EXP-INTEL-38194362040/prereg.md#section-4",
+        "research/experiments/EXP-INTEL-38175568787/audit.json#required_fixes"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "14B GGUF (~9 GB) RAM risk on 15 GB box: may fail to load, recorded as UNMEASURED_LOAD_FAILED (operational, not capability); ladder continues to 8B Llama (~4.9 GB) which is comfortably loadable.",
+    "Served-body temporal drift: if HF re-serves different bytes at the same revision between DESIGN and EXECUTE, step 3a fails closed -> MEASUREMENT_INVALID. Mitigated by revision-pinned URL, DESIGN byte-identity across two routes, and parent's prior-day EXECUTE match; any drift recorded as durable substrate finding.",
+    "Early stop on first CLEARS: if M-14B-QWEN clears, M-8B-LLAMA is not tested; family dimension remains untested (by design, disclosed).",
+    "Single near-deterministic task: clearing the bar is necessary but not sufficient for Gate-3 readiness (dynamic-range task bank is B2-owned by Runtime).",
+    "Endpoint census is observational (env-var presence + unauthenticated HTTP status); cannot prove a credentialed provider would clear the bar, only that it is provisionable.",
+    "External comparators enumerated as CANDIDATE_NOT_EVIDENCE; no vendor number is SPIDER evidence and no external number is reproduced by this packet.",
+    "Deterministic protocol (temperature=0.0 + fixed seeds); 3/5 rule is a pre-declared capability-gate adequacy rule, not a statistical threshold; no variance estimate possible (n=5 per candidate)."
+  ],
+  "rationale": "All six satisfiability/identifiability checks PASS. The design correctly repairs the parent's freeze-process defect (metadata-derived pins vs served-body bytes) by pinning to full-download verified served-body sha256, adding a frozen step-3a byte-verification gate, and binding the byte-verification requirement into freeze_eligibility.freeze_artifacts_bound. The decision rule is reachable in all branches with no shadowing. Prerequisites are verified at DESIGN time. Baselines identify a non-degenerate measurement range against an absolute bar. Controls are sensitive and non-tautological. Treatment is live and provisionable for at least one candidate. Freeze artifacts are completely bound with hashes verified. No blocking findings; the non-blocking findings are disclosed validity threats and design trade-offs, not defects. The experiment is ready to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38194362040/spec.json",
+    "research/experiments/EXP-INTEL-38194362040/prereg.md",
+    "research/experiments/EXP-INTEL-38194362040/request.json",
+    "research/experiments/EXP-INTEL-38175568787/handoff.json",
+    "research/experiments/EXP-INTEL-38175568787/audit.json",
+    "research/experiments/EXP-INTEL-38164607941/result.json",
+    "research/experiments/EXP-INTEL-37982024058/result.json",
+    "research/intel/run_exp_37982024058.py",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py"
+  ]
+}

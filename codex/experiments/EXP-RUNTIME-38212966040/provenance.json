@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38212966040",
+  "lane": "runtime",
+  "executed_at": "2026-10-12T11:45:00.000000+00:00",
+  "git": {
+    "commit": "239c934b3c30e867bb221489ec10d0b570cbc690",
+    "repo": "Spider",
+    "branch": "main"
+  },
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "stdlib_only": true,
+    "no_external_network": true,
+    "no_llm": true,
+    "no_browser": true,
+    "no_credentials": true
+  },
+  "frozen_inputs": {
+    "request_json": "research/experiments/EXP-RUNTIME-38212966040/request.json",
+    "spec_json": "research/experiments/EXP-RUNTIME-38212966040/spec.json",
+    "prereg_md": "research/experiments/EXP-RUNTIME-38212966040/prereg.md",
+    "freeze_json": "research/experiments/EXP-RUNTIME-38212966040/freeze.json",
+    "design_review_json": "research/experiments/EXP-RUNTIME-38212966040/design_review.json"
+  },
+  "artifact_hashes": {
+    "src/spider/kernel.py": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py": "fc150d1a95fb600b0eae08e821b367968ab99e1a99d843361a61ba5cbcb2f6b5",
+    "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_result_raw.json": "c4eaa4a1c33ea64d0fe3abf74e064935f7982f630758e06d43f733e0852b89f3"
+  },
+  "runner": {
+    "path": "research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py",
+    "self_sha256": "fc150d1a95fb600b0eae08e821b367968ab99e1a99d843361a61ba5cbcb2f6b5",
+    "canonical_runner_sha256_declared": "2c96e57971d21c3396ca0392ee0617ec0a382ad27e3a0c109b39cd9d1723a88c",
+    "note": "Declared CANONICAL-RUNNER-SHA256 was a DESIGN-time placeholder; the frozen runner is the one embedded in the frozen prereg.md"
+  },
+  "execution_command": "python3 research/experiments/EXP-RUNTIME-38212966040/raw_evidence/runner_delta_repair_reuse.py",
+  "execution_time_seconds": 45,
+  "random_seeds": {
+    "base_seed": 38212966040,
+    "per_trial_derivation": "SEED + 1000 * (class_index + 1) + trial_index"
+  },
+  "trial_counts": {
+    "total_trials": 36,
+    "trials_per_class": 12,
+    "classes": ["P1-ENDPOINT", "P2-STRUCTURE", "P3-PERMISSION"],
+    "targets_rotated": ["users", "posts", "comments"],
+    "valid_trials": 36,
+    "invalid_trials": 0
+  },
+  "carrier_verification": {
+    "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "matches_freeze_json": true
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-38194351940",
+    "handoff_path": "research/experiments/EXP-RUNTIME-38194351940/handoff.json",
+    "handoff_sha256": "2721f8e5e25ee6a46388b5260916b763b9d88532f560c5b6f0c566778eab724b",
+    "disposition": "SUPERSEDE"
+  },
+  "referenced_prior_experiment": {
+    "experiment_id": "EXP-GRAPH-38197849043",
+    "role": "origin of target question (MIXED-TRADEOFF, audit PASS)",
+    "legacy_ratios_reproduced": {
+      "L=2": 1.1111111111111112,
+      "L=3": 1.0526315789473684,
+      "L=4": 1.0
+    }
+  }
+}

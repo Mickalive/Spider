@@ -38,6 +38,7 @@ jobs:
           python scripts/test_direction_governance.py
           python scripts/test_design_review_contract.py
           python scripts/test_free_model_config.py
+          python scripts/test_provider_preflight.py
           python scripts/test_research_circuit.py
 
       - name: Test product kernel
