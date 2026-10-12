@@ -4,8 +4,8 @@
   "message": "stage exited with code 75",
   "retryable": true,
   "fingerprint": "fbf5825ef2ac96580695178f",
-  "recorded_at": "2026-10-12T08:00:51.228680+00:00",
-  "github_run_id": "38210191315",
+  "recorded_at": "2026-10-12T14:03:32.569399+00:00",
+  "github_run_id": "38257507482",
   "github_run_attempt": "1",
-  "control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+  "control_revision": "55eb2bfa50b87003c1db1dc855db899d75bed96d28a3a6df1ceac868b0459004"
 }
