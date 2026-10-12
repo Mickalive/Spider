@@ -1,0 +1,109 @@
+{
+  "status": "DESIGN-MECHANICS-ONLY",
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "runner_self_sha": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1",
+  "seed": 3838110675,
+  "carrier": {
+    "kernel": "/home/runner/work/Spider/Spider/src/spider/kernel.py",
+    "kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "canary": [
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      }
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      }
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "cold_success": true,
+      "literal_success": false,
+      "repair_guard_fired": true,
+      "contamination_n": 0,
+      "unaffected_n": 4,
+      "base_liveness": true,
+      "repair_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      }
+    }
+  ],
+  "nc_no_perturbation": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  },
+  "nc_noise": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  }
+}
