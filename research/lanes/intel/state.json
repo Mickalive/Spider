@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-38175568787",
-  "last_experiment_id": "EXP-INTEL-38164607941",
-  "last_verdict": "FALSIFIES",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-38175568787",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Which hosted/capable model class (or alternative credential-free path) can clear the minimal multi-step Web-agent bar for readiness condition (3) of the gated four-arm benchmark, given the credential-free local 3B-8B Qwen class failed even with goal/schema prompt?",
+  "next_question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the actually served body (verified by full download, not HF etag/xetHash metadata) and re-frozen, does either M-14B-QWEN or M-8B-LLAMA clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6), and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-10-12T00:56:39.518744+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "edb7898856cc8dd9ea5a65f44468358cf780972faf0a58ddaf558d4f2f606f74",
-  "same_failure_count": 2,
-  "last_failure_fingerprint": "f44d199ab3d7a1cc1ee6462e",
-  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
+  "consecutive_failures": 0,
+  "updated_at": "2026-10-12T01:22:12.869771+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "df1150468c97dee8fd002d60fcd97fbbc96434cbc97749e0428325c58e0af942",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
