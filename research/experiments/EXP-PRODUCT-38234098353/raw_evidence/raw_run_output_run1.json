@@ -1,0 +1,1179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38234098353",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "decision": "SCORED_ADEQ_CERT_SAFE_AND_EXPANSIVE",
+  "metrics": {
+    "M-T-FALSE-ACCEPT-COUNT": 0,
+    "M-T-HTTP-ON-OUT-COUNT": 0,
+    "M-T-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-T-COVERAGE": 1.0,
+    "M-T-COVERAGE-DELTA-VS-SHIPPED": 0.5454545454545454,
+    "M-T-BOUNDARY-FALSE-ACCEPT-COUNT": 3,
+    "M-T-CERTIFIED-COUNT": 5,
+    "M-T-PROV-REFUSED-COUNT": 1,
+    "M-T-ADEQ-REFUSED-COUNT": 2,
+    "M-B-SHIPPED-COVERAGE": 0.45454545454545453,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-B-ORACLE-COVERAGE": 1.0,
+    "M-B-ORACLE-FALSE-ACCEPT-COUNT": 0,
+    "M-A-NO-ADEQ-FALSE-ACCEPT-COUNT": 6,
+    "M-A-NO-PROV-FALSE-ACCEPT-COUNT": 3,
+    "M-A-NO-GROW-FALSE-ACCEPT-COUNT": 9,
+    "M-C-FIAT-FALSE-ACCEPT-COUNT": 6,
+    "M-C-FIAT-OVER-FALSE-ACCEPT-COUNT": 3,
+    "M-C-FROZEN-FALSE-ACCEPT-COUNT": 18,
+    "M-A-RAW-FALSE-ACCEPT-COUNT": 18,
+    "M-A-WITHHOLD-FALSE-ACCEPT-COUNT": 0,
+    "M-A-WITHHOLD-COVERAGE": 0.45454545454545453,
+    "M-COVERAGE-IN-ITEMS": 44,
+    "M-CERT-ADMITS-SOUND-COUNT": 4,
+    "M-CERT-REFUSES-PROBEABLE-COUNT": 3,
+    "M-MECHANISM-COUNT": 11,
+    "M-REG-PROV-SCORES": {
+      "O1": 1.0,
+      "O2": 1.0,
+      "O3": 1.0,
+      "O4": 1.0,
+      "O5": 0.25,
+      "O6": 0.25
+    },
+    "M-INFERRED-ALLOWLIST": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ],
+    "M-ADEQUACY-CLASSIFIED": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true,
+      "B6": true,
+      "B7": false,
+      "B8": false,
+      "B9": true,
+      "B10": true,
+      "B11": true
+    },
+    "M-REGRESSION-TESTS-RUN": 3
+  },
+  "controls": {
+    "PC-PROV-SCORE-SEPARATES": {
+      "expected": "all trusted origins score 1.0, all untrusted score <= 0.25; inferred allowlist == O1..O4",
+      "observed": {
+        "scores": {
+          "O1": 1.0,
+          "O2": 1.0,
+          "O3": 1.0,
+          "O4": 1.0,
+          "O5": 0.25,
+          "O6": 0.25
+        },
+        "allowlist": [
+          "O1",
+          "O2",
+          "O3",
+          "O4"
+        ]
+      },
+      "pass_": true
+    },
+    "PC-PROV-ADMITS-TRUSTED": {
+      "expected": "every trusted-origin bank family is admitted by the inferred allowlist (not PROV_REFUSED)",
+      "observed": [
+        "B9"
+      ],
+      "pass_": true
+    },
+    "PC-PROV-REFUSES-UNTRUSTED": {
+      "expected": "B9 (untrusted O5) is withheld by the provenance gate and keeps the induced support",
+      "observed": {
+        "gate": "REFUSED_ORIGIN",
+        "support": "^sku\\-000[0-9]{1}$",
+        "induced": "^sku\\-000[0-9]{1}$"
+      },
+      "pass_": true
+    },
+    "PC-PROV-REFUSES-SPARSE": {
+      "expected": "certificate-with-growth WOULD certify B9 (probe misses the budget-sparse token) yet provenance withholds it; A-NO-PROV false-accepts it",
+      "observed": {
+        "cert_would_admit": true,
+        "a_no_prov_B9_fa": 3
+      },
+      "pass_": true
+    },
+    "PC-ADEQUACY-CLASSIFIES": {
+      "expected": "detector output equals frozen EXPECTED_ADEQUACY for all 11 families",
+      "observed": {
+        "B1": true,
+        "B2": true,
+        "B3": true,
+        "B4": true,
+        "B5": true,
+        "B6": true,
+        "B7": false,
+        "B8": false,
+        "B9": true,
+        "B10": true,
+        "B11": true
+      },
+      "pass_": true
+    },
+    "PC-ADEQUACY-DETECTS-INADEQUATE": {
+      "expected": "B7 and B8 flagged INADEQUATE",
+      "observed": {
+        "B7": false,
+        "B8": false
+      },
+      "pass_": true
+    },
+    "PC-ADEQUACY-PASSES-ADEQUATE": {
+      "expected": "B1-B6,B9,B10,B11 pass the adequacy detector",
+      "observed": {
+        "B1": true,
+        "B2": true,
+        "B3": true,
+        "B4": true,
+        "B5": true,
+        "B6": true,
+        "B9": true,
+        "B10": true,
+        "B11": true
+      },
+      "pass_": true
+    },
+    "PC-ADEQ-NEEDED": {
+      "expected": "A-NO-ADEQ false-accepts >= 1 (B7/B8 admitted)",
+      "observed": 6,
+      "pass_": true
+    },
+    "PC-PROV-NEEDED": {
+      "expected": "A-NO-PROV false-accepts >= 1 (B9 admitted)",
+      "observed": 3,
+      "pass_": true
+    },
+    "PC-GROW-NEEDED": {
+      "expected": "A-NO-GROW false-accepts >= 1 (probeable evaders admitted)",
+      "observed": 9,
+      "pass_": true
+    },
+    "PC-CERT-ADMITS-SOUND": {
+      "expected": "all 4 sound declarations CERTIFIED",
+      "observed": "4/4",
+      "pass_": true
+    },
+    "PC-GROW-CATCHES-PROBEABLE": {
+      "expected": "all 3 probeable evaders REFUSED after growth",
+      "observed": "3/3",
+      "pass_": true
+    },
+    "PC-INGEST-REFUSED-ABSTAINS": {
+      "expected": "real ingest_declaration refuses B5 and preserves support",
+      "observed": {
+        "status": "REFUSED",
+        "support_preserved": true,
+        "refused": true,
+        "bank_size": 28
+      },
+      "pass_": true
+    },
+    "PC-UNSAFE-RAW": {
+      "expected": "A-RAW-DECL false-accepts > 0",
+      "observed": 18,
+      "pass_": true
+    },
+    "PC-DISCRIMINATION": {
+      "expected": "T FA==0 while C-FIAT-ADEQ FA>0 at equal coverage",
+      "observed": {
+        "T": 0,
+        "C_FA": 6,
+        "T_cov": 1.0,
+        "C_cov": 1.0
+      },
+      "pass_": true
+    },
+    "PC-MEASURED-TRUST-DOMINATES-OVERTRUST": {
+      "expected": "a fiat allowlist that over-trusts O5 false-accepts B9 while the MEASURED trust root refuses it",
+      "observed": {
+        "C_over_fa": 3,
+        "T_fa": 0
+      },
+      "pass_": true
+    },
+    "PC-GROW-MISSES-SPARSE": {
+      "expected": "certificate-with-growth certifies B11 (trusted budget-sparse over-accept)",
+      "observed": {
+        "cert": true
+      },
+      "pass_": true
+    },
+    "BP-TRUSTED-SPARSE-FAILS": {
+      "expected": "T boundary B11 false-accepts >= 1 (irreducible residual)",
+      "observed": 3,
+      "pass_": true
+    },
+    "NC-REJECT-ALL": {
+      "expected": "A-WITHHOLD-ALL accepts no out-of-support value, coverage == B-SHIPPED",
+      "observed": {
+        "fa": 0,
+        "cov": 0.45454545454545453
+      },
+      "pass_": true
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "expected": "two independent runs identical",
+      "observed": true,
+      "pass_": true
+    }
+  },
+  "validity": {
+    "M-MECHANISM-COUNT-11": true,
+    "M-SINGLE-SLOT": true,
+    "M-CONFIDENCE-0.9": true,
+    "B-SHIPPED-FA0": true,
+    "B-ORACLE-CEILING": true,
+    "T-REFUSAL-VIOL-0": true,
+    "M-SUPPORT-IDENTITY": true,
+    "M-ADEQ-DETERMINISTIC": true,
+    "M-SPARSE-TOKENS-MISSED": true,
+    "M-REGRESSION": true
+  },
+  "gates": {
+    "validity_gate": true,
+    "sensitivity_gate": true,
+    "provenance_gate": true,
+    "adequacy_gate": true,
+    "growth_gate": true,
+    "necessity_gate": true,
+    "boundary_gate": true,
+    "v8": {
+      "gate": "V8_FREEZE_BINDING",
+      "status": "PASS",
+      "mode": "BOUND",
+      "checks": {
+        "runner_block": true,
+        "prereg_sha": true,
+        "pyproject.toml": true,
+        "src/spider/__init__.py": true,
+        "src/spider/kernel.py": true,
+        "src/spider/models.py": true,
+        "src/spider/registry.py": true,
+        "tests/test_kernel.py": true
+      }
+    }
+  },
+  "induced_supports": {
+    "B1": "^txn\\-00[0-9]{1}$",
+    "B2": "^usr\\-[a-z]{3}$",
+    "B3": "^ord\\-00[0-9]{1}$",
+    "B4": "^shp\\-[a-z]{3}$",
+    "B5": "^inv\\-00[0-9]{1}$",
+    "B6": "^shl\\-[a-z]{3}$",
+    "B7": "^not\\-[a-z]{3}$",
+    "B8": "^rpt\\-[a-z]{3}$",
+    "B9": "^sku\\-000[0-9]{1}$",
+    "B10": "^tkt\\-[a-z]{3}$",
+    "B11": "^wgt\\-000[0-9]{1}$"
+  },
+  "slots": {
+    "B1": [
+      "txn"
+    ],
+    "B2": [
+      "usr"
+    ],
+    "B3": [
+      "ord"
+    ],
+    "B4": [
+      "shp"
+    ],
+    "B5": [
+      "inv"
+    ],
+    "B6": [
+      "shl"
+    ],
+    "B7": [
+      "not"
+    ],
+    "B8": [
+      "rpt"
+    ],
+    "B9": [
+      "sku"
+    ],
+    "B10": [
+      "tkt"
+    ],
+    "B11": [
+      "wgt"
+    ]
+  },
+  "arms": {
+    "T-SCORED-ADEQ": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-ADEQ": {
+      "false_accept_count": 6,
+      "http_on_out_count": 6,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-PROV": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-GROW": {
+      "false_accept_count": 9,
+      "http_on_out_count": 9,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-ADEQ": {
+      "false_accept_count": 6,
+      "http_on_out_count": 6,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-OVERTRUST": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "REFUSED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "false_accept_count": 18,
+      "http_on_out_count": 18,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "false_accept_count": 18,
+      "http_on_out_count": 18,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-WITHHOLD-ALL": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 20,
+      "total_in": 44,
+      "coverage": 0.45454545454545453,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 20,
+      "total_in": 44,
+      "coverage": 0.45454545454545453,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 0.25
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 44,
+      "total_in": 44,
+      "coverage": 1.0,
+      "per_family": {
+        "B1": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B2": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B3": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B4": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B5": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B6": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B7": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B8": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B9": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        },
+        "B10": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "boundary": {
+    "T-SCORED-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-PROV": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-NO-GROW": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-ADEQ": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FIAT-OVERTRUST": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "C-FROZEN-CERT": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "CERTIFIED",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-RAW-DECL": {
+      "false_accept_count": 3,
+      "http_on_out_count": 3,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 3,
+          "cert": "RAW",
+          "coverage": 1.0
+        }
+      }
+    },
+    "A-WITHHOLD-ALL": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-SHIPPED": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "NONE",
+          "coverage": 1.0
+        }
+      }
+    },
+    "B-ORACLE": {
+      "false_accept_count": 0,
+      "http_on_out_count": 0,
+      "refusal_semantics_violations": 0,
+      "executed_in": 2,
+      "total_in": 2,
+      "coverage": 1.0,
+      "per_family": {
+        "B11": {
+          "fa": 0,
+          "cert": "ORACLE",
+          "coverage": 1.0
+        }
+      }
+    }
+  },
+  "adequacy": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true,
+    "B6": true,
+    "B7": false,
+    "B8": false,
+    "B9": true,
+    "B10": true,
+    "B11": true
+  },
+  "provenance": {
+    "scores": {
+      "O1": 1.0,
+      "O2": 1.0,
+      "O3": 1.0,
+      "O4": 1.0,
+      "O5": 0.25,
+      "O6": 0.25
+    },
+    "allowlist": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ]
+  },
+  "cost": {
+    "first_budget_size": 256
+  },
+  "determinism_repeat_identical": true
+}
