@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38188798583",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four branches are reachable and mutually exclusive under the frozen precedence: (1) INVALID guard fires only on non-live/undefined measurement (calibration shows treatment live: 49/57 executed on PRIMARY cal, 9/8/12 resolved abstentions); (2) DECIDE_SHIP_A requires all three gates + selection preserved — calibration shows all three axes gate-feasible (FA=0.0, coverage 0.86–0.91, UP=1.0 with 9/8/12 resolved abstentions); (3) DECIDE_SHIP_A_SCOPED requires PRIMARY gate + selection only — reachable because ALTLEX/HELDOUT use lexicons with surface verbs outside LEXICON-G1 (LEXICON-G1-ALT omits introduce/instantiate; LEXICON-G2-HELDOUT adds start/form/schedule/book/file/initiate/log/import), so generalization can fail while PRIMARY passes; (4) DECIDE_REQUIRE_B is arithmetically reachable because parent disjoint test had 3/18=0.1667 FA on PRIMARY, and with 18 OOS just two slipping rows (2/18=0.1111) exceed the 0.10 target. Thresholds are attainable: FA<=0.10 allows <=1/18 (PRIMARY/ALTLEX) or <=2/20 (HELDOUT); coverage>=0.50 allows >=28/56 or >=20/40; UP>=0.85 requires >=1 resolved abstention on test (calibration has 9/8/12). No branch makes a later branch unreachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#7-decision-rule",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#4-frozen-inputs-splits-and-contamination-screen",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38180711589/result.json#metrics.M-GATE-TRIPLET-PRIMARY"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Claim-bearing path is Python 3 stdlib only (argparse, hashlib, json, re, random, sys, pathlib) — available in the EXECUTE environment. All fixture banks and lexicons are consumed verbatim from the hash-bound parent prereg (research/experiments/EXP-GRAPH-38180711589/prereg.md sha256 5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0). Prior texts for contamination screening come from the hash-bound grandparent prereg (research/experiments/EXP-GRAPH-38175554380/prereg.md sha256 dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b) and research/harness/goal_generator.py (sha256 cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f). Split is disjoint by construction (i%splitmod rule). No credentials, endpoints, browsers, or external datasets required. Arm B's embedding stack is absent (numpy/sentence-transformers import fails) but Arm B is explicitly NOT a prerequisite for a valid Arm A decision and is recorded as operational BLOCKED (embedding_status = 'BLOCKED: ModuleNotFoundError: No module named numpy'), never as a scientific negative.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#3-arms-treatment-identity-and-comparator",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+        "research/harness/goal_generator.py"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (T-FRAME) and strong baselines differ on the calibration population: T-FRAME pooled_false_accept = 0.0 vs incumbent T-LEX-AMBIG = 0.10/0.10/0.05 vs gate-free B-LEX-ONLY = 0.45/0.40/0.60, with non-ceiling coverage 0.86–0.91 on all axes. Selection identity is verified: the shared comp() selector produces 0 mechanism differences over all 320 applicable goals (120 G1 + 120 G1-ALT + 80 G2-HELDOUT) between the parent runner_frozen.py and the new runner_tframe.py. The retention bar (M-SELECTION-B-LEX-STRONG >= 0.80 all axes, >=0.8584 PRIMARY) measures the same frozen selector on the executed subset. No cost metric is claimed, so no comparator omits a cost dimension.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38180711589/runner_frozen.py"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls fire under the same runner used to score the experiment (calibration-only execution) and are far from the treatment: NC-SHUFFLED-LABEL selective accuracy 0.0612/0.0192/0.0857 (expect <=0.20 ~ chance); B-RANDOM-ROLE 0.0612/0.1346/0.1143 (expect <=0.35); CTRL-RANDOM-GATE at matched abstention counts (28/25/25) yields pooled_false_accept 0.50/0.50/0.45 and unknown_precision 0.3571/0.40/0.44 vs T-FRAME's 0.0/1.0; CTRL-ABSTAIN-ALL gives coverage 0.0, UP 1.0 by convention (degenerate floor); B-INCUMBENT-KERNEL = 0.0 by construction. No control is tautological or impossible. Positive control PC-LIVENESS-AND-INTEGRITY passes (all blocks extract, controls execute, T-FRAME executes strictly non-empty and non-full set on PRIMARY calibration: 49/57).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#6-baselines-and-controls"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-FRAME executes today on the frozen fixture (stdlib only): calibration executed 49/57 (PRIMARY), 52/57 (ALTLEX), 35/40 (HELDOUT) applicable goals — strictly between 0 and the full applicable set. It produces 8/5/5 unresolved applicable and 9/8/12 resolved-but-abstained goals, demonstrating the abstention predicate fires on real structure. Execution vector differs from both B-LEX-ONLY (gatefree: 58/60/47 executed) and T-LEX-AMBIG (incumbent: 51/54/36 executed). No embedder token appears on the claim-bearing path (imports: argparse, hashlib, json, re, random, sys, pathlib only; embedding probe is isolated in try/except at end of main). The runner self-verifies its SHA256 matches CANONICAL-RUNNER-SHA256 at runtime.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#FROZEN-RUNNER"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local interpretation dependency is listed in freeze_artifacts and hash-bound: (1) research/experiments/EXP-GRAPH-38180711589/prereg.md (fixture banks GOAL-BANK-G1, OOS-BANK-G1, LEXICON-G1, LEXICON-G1-ALT, GOAL-BANK-G2, OOS-BANK-G2, LEXICON-G2-HELDOUT) sha256 5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0; (2) research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS) sha256 dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b; (3) research/harness/goal_generator.py (INTENTS, PARAPHRASES, NO_APPLICABLE_TEMPLATES, OOD_PARAPHRASES for contamination prior texts) sha256 cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f. The executable decision path is embedded verbatim in this prereg.md (FROZEN-RUNNER block) and bound by CANONICAL-RUNNER-SHA256 = 4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62 (verified) plus freeze.json.hashes.prereg.md. No other mutable local code, data, task bank, or fixture affects interpretation.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38188798583/prereg.md#10-freeze-artifacts-and-canonical-hashes",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+        "research/harness/goal_generator.py"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Design degrees of freedom: T-FRAME clause set (C1-SUBOP, C3, C4, C5, C6) was developed during DESIGN on the calibration split and parent's aggregate failure. Disclosed in prereg §9; zero tunable parameters means this is not a threshold fit, but AUDIT should note the design-on-calibration cost.",
+    "Tight FA threshold: PRIMARY/ALTLEX test has only 18 OOS items, so 2 false accepts (2/18=0.1111) already fails the 0.10 target. This makes the gate stringent but arithmetically valid.",
+    "MEASUREMENT_INVALID guard on unknown_precision: if any test axis has zero resolved abstentions, the run is MEASUREMENT_INVALID rather than reporting fabricated precision. This correctly addresses the parent's n=2 problem but means a sparse abstention pattern on test could invalidate the measurement.",
+    "Arm B BLOCKED: embedding stack unavailable (numpy missing). This is correctly recorded as an unavailable-dependency state, not a scientific result. If Arm B is later provisioned, it becomes a separate comparator, not part of this decision rule."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule has reachable positive, scoped, and negative branches with attainable thresholds and clean precedence. Measurement prerequisites are satisfied for the claim-bearing Arm A path (stdlib only, frozen fixtures available). Baselines are identifiable: treatment differs from incumbents on gate behavior while preserving the frozen selector (0 mech differences over 320 goals). Controls are sensitive and non-tautological. Treatment is live and executable on the frozen fixture. All mutable interpretation dependencies are hash-bound in freeze_artifacts. No blocking findings. Non-blocking findings are disclosed design trade-offs that do not compromise satisfiability.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38188798583/spec.json",
+    "research/experiments/EXP-GRAPH-38188798583/prereg.md",
+    "research/experiments/EXP-GRAPH-38188798583/request.json",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38180711589/runner_frozen.py",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/harness/goal_generator.py"
+  ]
+}

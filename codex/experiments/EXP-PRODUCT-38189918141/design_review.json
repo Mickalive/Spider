@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38189918141",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The decision mapping is total with three outcome branches. The two claim-deciding branches (MIXED/SAFE_BUT_CONSERVATIVE and FALSIFIES/SAFETY_DEFECT) are both arithmetically reachable on the frozen bank: MIXED is the expected live outcome (shipped support ^item\\-00[0-9]{1}$ accepts exactly 10/19 declared IN items, yielding 9 false rejects, 0 false accepts); FALSIFIES is reachable if any of the 59 OUT items binds (the coarse fallback __COARSE__ provably accepts 36 OUT string payloads, proving detector sensitivity margin >> 0). SUPPORTS/SAFE_AND_COMPLETE is the completeness upper bound that the frozen data structurally excludes (9 declared IDs outside the single-observation-length cylinder are always refused), but it is explicitly included for mapping completeness and does not make other branches unreachable. Precedence MEASUREMENT_INVALID > FALSIFIES > (SUPPORTS vs MIXED) is free of dead branches. DESIGN non-outcome probes confirmed: summarize() unit-tested on synthetic records reproducing all three mappings; _support_accepts probes confirmed item-000 accepted, item-010 refused; coarse fallback accepts 36 OUT items.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#decision_rule",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md sections 6-9, 14",
+        "DESIGN probes: py_compile OK; summarize() synthetic-record checks; _support_accepts boundary probes; coarse fallback probe (36 OUT accepts)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time with concrete evidence: (a) python3.12.15 with stdlib only; (b) both git blobs exist and byte-verified (carrier b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 -> sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72; literal cfec98660b0277ccbf295e8a4119e8d81ddccf50 -> sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61); (c) shipping kernel src/spider/kernel.py currently has sha256 == 718efa6a... on git-clean tree (verified); (d) all SIX freeze artifacts exist with recorded sha256 matching prereg.md section 15; (e) public API (spider.SpiderKernel, Mechanism, Observation, Resolution, ResolutionStatus; spider.kernel.TrajectoryCounters; spider.registry.MechanismRegistry) imports cleanly with default min_confidence == 0.8; (f) tests/test_kernel.py passes 3/3 with src on sys.path. No external credentials, model keys, browsers, or network egress required; the oracle is an in-process stdlib ThreadingHTTPServer on 127.0.0.1:0. Any missing prerequisite triggers BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 15 (CANONICAL-HASHES)",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#freeze_artifacts",
+        "DESIGN probes: git cat-file blob verification; sha256sum src/spider/kernel.py; git status clean; API/threshold import probe; regression 3/3 OK; py_compile OK"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and all comparators are structurally distinct objects built from the SAME frozen carrier mechanism with ONLY the verification_rule support descriptor changed: T-SHIPPED (induced support ^item\\-00[0-9]{1}$ from 5-example induction); B-WIDENED-3 (same mechanism, support overridden to ^item\\-[0-9]{3}$); PC-UNSAFE-COARSE (same mechanism, support overridden to shipped __COARSE__ sentinel); NC-REJECT-ALL (empty registry); B-LITERAL-KERNEL (different frozen git blob cfec9866... lacking distill_parameterized). Because every permissive arm shares the identical treatment mechanism code path, any difference in false-accept/coverage is attributable solely to the support descriptor. The empty registry and literal ablation anchor the zero-mechanism and no-parameterization ends. Carrier bytes are pinned by explicit sha256, freeze-artifact hash, and parent canonical identities; no unbound mutable code can masquerade as the treatment.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md section 7, 14 (make_arm_mechanism rewrites only verification_rule)",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#baselines / #positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38186502935/handoff.json#carry_forward.established",
+        "DESIGN probe: _support_accepts arithmetic on shipped predicate and __COARSE__"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, reachable failure mode under the exact code path that produces the certificate: PC-EXACT-REPLAY fails (<5/5) if carrier cannot rebind its own identity; PC-DETERMINISM-REPEAT fails if two runs diverge; M-REGRESSION fails if package surface drifts; B-LITERAL-KERNEL fails if literal blob unexpectedly exposes distill_parameterized (attribution break); PC-UNSAFE-COARSE must false-accept >= 1 (DESIGN value-level probe: __COARSE__ accepts 36 OUT string payloads, margin >> 0); NC-REJECT-ALL must accept 0 and issue 0 HTTP; V8 fails on any prereg/runner/artifact hash mismatch. The safety oracle sensitivity is specifically proven non-vacuous by the coarse fallback's 36 OUT accepts on the frozen bank. All controls are non-tautological and non-impossible.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md sections 7, 8, 11",
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#measurement_validity (V6, V8, V10, V11)",
+        "DESIGN probe: __COARSE__ accepts 36 OUT payloads -> PC-UNSAFE-COARSE margin >= 1 by construction"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The carrier's liveness on the same credential-free substrate class is established by inherited accepted evidence: EXP-PRODUCT-38180719830 promoted the carrier after D1-D4 PASS; EXP-PRODUCT-38186502935 ran the FULL shipped path end-to-end on the byte-identical installed bytes with independent audit PASS (5 executed induction GETs -> distill_parameterized -> mechanism support ^item\\-00[0-9]{1}$ / confidence 0.9 -> item-000 EXECUTABLE -> oracle 200 -> verify true; zero-HTTP refusal on item-010). This packet re-runs the same induction path and requires PC-EXACT-REPLAY 5/5 and M-REGRESSION 3/3 in the validity gate, so a silently dead treatment yields BLOCKED/MEASUREMENT_INVALID, never a scientific negative. Treatment bytes are frozen by sha256 + freeze-artifact hash; no unbound mutable code can masquerade as the carrier. As a Product experiment targeting C-PARAM-INHERIT, treatment_liveness must be PASS (not NOT_APPLICABLE) and is satisfied.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38186502935/handoff.json#carry_forward.established",
+        "research/experiments/EXP-PRODUCT-38186502935/result.json#metrics.M-POSITIVE / M-E2E-PASS",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md sections 5, 11",
+        "request.json#inherited_last_verdict / #inherited_next_question"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists the SIX existing immutable files whose identity can change interpretation: pyproject.toml, src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py (read-only treatment), tests/test_kernel.py. All six exist with sha256 recorded at DESIGN time (prereg.md section 15, kernel.py 718efa6a... == carrier) and are re-hashed by V8 clause (C). The FROZEN RUNNER (section 14) and CANONICAL-HASHES (section 15) are embedded verbatim in prereg.md and bound by freeze.json.hashes['prereg.md']; the frozen bank, oracle, and label rule are fully in-process inside the runner (no unbound dataset/task-bank/fixture). No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38189918141/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38189918141/prereg.md sections 13, 14, 15",
+        "request.json#director_mandate.allocation.dependencies",
+        "research/experiments/EXP-PRODUCT-38186502935/freeze.json#artifact_hashes"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "SUPPORTS/SAFE_AND_COMPLETE branch is structurally unreachable with the frozen bank and shipped support (9 declared 3-digit IDs outside {item-000..item-009} are always refused). This is explicitly acknowledged in the design and does not impair the claim-deciding contrast between MIXED and FALSIFIES, both of which are reachable.",
+    "The experiment is explicitly scoped to the induced single-length support grammar and a designed stress bank, not a random sample of production traffic. This is a validity threat documented in prereg.md section 10 but does not affect satisfiability."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass with concrete DESIGN-time evidence. The decision rule has two reachable claim-deciding branches (MIXED vs FALSIFIES) on the frozen bank; all measurement prerequisites are verified present; treatment and comparators are structurally identifiable via support-descriptor isolation; controls are non-vacuous with proven sensitivity margins; treatment liveness is inherited from prior end-to-end audit PASS on byte-identical bytes; all mutable dependencies are bound in freeze_artifacts with no unbound fixtures. No blocking findings. The experiment is capable of answering its question and may proceed to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38189918141/request.json",
+    "research/experiments/EXP-PRODUCT-38189918141/spec.json",
+    "research/experiments/EXP-PRODUCT-38189918141/prereg.md"
+  ]
+}

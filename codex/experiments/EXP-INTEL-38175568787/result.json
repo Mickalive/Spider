@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "claim_ids": ["C-LLM-INHERIT"],
+  "summary": "Frozen two-candidate capability ladder (M-14B-QWEN primary, M-8B-LLAMA secondary) under the audited single-factor minimal Web-agent protocol, plus an independent 12-provider hosted-endpoint census and a 3-entry external-comparator readiness table. Step-1 PREFLIGHT PASSED all five frozen checks (PC-ORACLE-EPISODE 5/5; NC-NO-MODEL-ACTION (parseable 0.0, success 0.0); B-RANDOM-ACTION (parseable 1.0, success 0.2 < 0.6); all freeze_artifact hashes match; required stack imports OK) through the real frozen scorer and a served page. The ladder then failed at frozen step 3a for BOTH candidates: the downloaded GGUF bytes match the frozen byte counts but their sha256 differs from the frozen-pinned sha256. Investigation shows the frozen pin equals the HF tree API xetHash and the CDN etag, while the served bytes' sha256 equals the tree API lfs.oid; three independent download routes (resolve, ?download=true, hf.co) all reproduce the same body hash, so the served content is stable and authentic and the frozen pin is self-consistently mismatched with body bytes (the spec note 'sha256 equals the HF LFS OID (CDN etag)' conflated xetHash/etag with lfs.oid). Per frozen rule 3a every mismatched candidate is recorded UNMEASURED_LOAD_FAILED and no model was loaded (fail-closed; a digest mismatch is never converted into a capability failure). With no COMPLETE cell, frozen rule 4 yields OUTCOME=MEASUREMENT_INVALID and B3_STATUS=UNRESOLVED (canonical mapping: status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE). The endpoint census (non-gating) found 0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations) and 1 UNREACHABLE (HuggingFace Inference) provider; the external comparators table pinned 3/3 primary sources labelled CANDIDATE_NOT_EVIDENCE. No claim is promoted, weakened or falsified: the capability question remains unmeasured for operational/substrate reasons, not scientific ones.",
+  "metrics": {
+    "M-14B-QWEN": {
+      "positive_control_pass_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: candidate UNMEASURED_LOAD_FAILED at frozen ladder step 3a (pinned GGUF sha256+bytes mismatch); fail-closed, no load attempted"},
+      "parseable_action_rate_step1": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: no episodes (UNMEASURED_LOAD_FAILED)"},
+      "task_success_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: no episodes (UNMEASURED_LOAD_FAILED)"},
+      "mean_inference_latency_s": {"value": null, "n_calls": 0, "unit": "s", "reason": "not measured"},
+      "mean_completion_tokens": {"value": null, "n_calls": 0, "unit": "tokens", "reason": "not measured"}
+    },
+    "M-8B-LLAMA": {
+      "positive_control_pass_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: candidate UNMEASURED_LOAD_FAILED at frozen ladder step 3a (pinned GGUF sha256+bytes mismatch); fail-closed, no load attempted"},
+      "parseable_action_rate_step1": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: no episodes (UNMEASURED_LOAD_FAILED)"},
+      "task_success_rate": {"value": null, "k": 0, "n": 0, "unit": "fraction", "reason": "not measured: no episodes (UNMEASURED_LOAD_FAILED)"},
+      "mean_inference_latency_s": {"value": null, "n_calls": 0, "unit": "s", "reason": "not measured"},
+      "mean_completion_tokens": {"value": null, "n_calls": 0, "unit": "tokens", "reason": "not measured"}
+    },
+    "PC-ORACLE-EPISODE": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"}
+    },
+    "NC-NO-MODEL-ACTION": {
+      "parseable_action_rate_step1": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction"}
+    },
+    "B-RANDOM-ACTION": {
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction"},
+      "task_success_rate": {"value": 0.2, "k": 1, "n": 5, "unit": "fraction"}
+    },
+    "capability_bar": {"task_success_rate": 0.6, "parseable_action_rate_step1": 0.6, "episodes": 5, "unit": "fraction"},
+    "cells_complete": {"value": 0, "n": 2, "unit": "cells"},
+    "census_counts": {
+      "PROVISIONABLE_CREDENTIATED": 0,
+      "CREDENTIAL_REQUIRED": 10,
+      "CREDENTIAL_FREE_OPERATIONALLY_CAPPED": 1,
+      "UNREACHABLE": 1
+    },
+    "comparators_enumerated": {"value": 3, "unit": "entries", "primary_sources_pinned": 3, "evidence_label": "CANDIDATE_NOT_EVIDENCE"},
+    "b3_status": "UNRESOLVED",
+    "preflight_pass": true,
+    "decision_trace": [
+      "rule1_preflight_pass",
+      "rule2_endpoint_census_recorded_non_gating:providers=12 provisionable_credentialed=0",
+      "rule3a_digest_mismatch:M-14B-QWEN=UNMEASURED_LOAD_FAILED (no load attempted, fail-closed)",
+      "rule3a_digest_mismatch:M-8B-LLAMA=UNMEASURED_LOAD_FAILED (no load attempted, fail-closed)",
+      "rule4_no_complete_cell->MEASUREMENT_INVALID"
+    ]
+  },
+  "controls": {
+    "PC-SUITE-EXP-INTEL-38175568787": {
+      "role": "positive_control_suite",
+      "members": ["PC-JSON-CONSTRAINED-DECODING", "PC-ORACLE-EPISODE"],
+      "verdict": "PARTIAL_EXECUTED",
+      "note": "PC-ORACLE-EPISODE executed and passed 5/5; PC-JSON-CONSTRAINED-DECODING is the per-candidate 10-probe gate that would have run inside each candidate cell and did not execute because no candidate passed frozen step 3a (UNMEASURED_LOAD_FAILED).",
+      "evidence_ref": "raw/preflight.json, raw/controls.json"
+    },
+    "PC-JSON-CONSTRAINED-DECODING": {
+      "role": "positive_control_per_candidate_constrained_decoding_gate",
+      "status": "NOT_RUN",
+      "expected": "10/10 parseable constrained-JSON probes per loaded candidate",
+      "observed": "not run: no candidate loaded (both UNMEASURED_LOAD_FAILED at frozen step 3a)",
+      "verdict": "NOT_APPLICABLE",
+      "carried_prior": {"experiment_id": "EXP-INTEL-38164607941", "observed": "10/10 on all four loaded cells (M-7B-QWEN, M-3B-QWEN)", "evidence_ref": "research/experiments/EXP-INTEL-38164607941/raw/controls.json"},
+      "evidence_ref": "raw/decision.json#cells"
+    },
+    "PC-ORACLE-EPISODE": {
+      "role": "positive_control_episode",
+      "expected": "5/5 task_success=true through the real frozen run_episode scorer against the served page",
+      "observed": "5/5 task_success=true; identical episode records to the audited parent (byte-identical raw/controls.json sha256 b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639), confirming deterministic protocol replication",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#PC-ORACLE-EPISODE"
+    },
+    "NC-NO-MODEL-ACTION": {
+      "role": "null_control_no_model",
+      "expected": "parseable_action_rate_step1=0.0 AND task_success_rate=0.0",
+      "observed": "parseable_action_rate_step1=0.0, task_success_rate=0.0",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#NC-NO-MODEL-ACTION"
+    },
+    "B-RANDOM-ACTION": {
+      "role": "negative_baseline_random_actions",
+      "expected": "parseable_action_rate_step1=1.0 AND task_success_rate<0.6",
+      "observed": "parseable_action_rate_step1=1.0, task_success_rate=0.2",
+      "verdict": "PASS",
+      "evidence_ref": "raw/controls.json#B-RANDOM-ACTION"
+    },
+    "B-UNDERSPECIFIED-PROMPT-7B": {
+      "role": "carried_comparator_baseline",
+      "status": "CARRIED_NOT_RERUN",
+      "expected": "prior audited negative",
+      "observed": "0/5 in EXP-INTEL-38164607941",
+      "evidence_ref": "research/experiments/EXP-INTEL-38164607941/result.json"
+    },
+    "B-0.5B-QWEN-LOCAL": {
+      "role": "carried_baseline_floor",
+      "status": "CARRIED_NOT_RERUN",
+      "expected": "prior aimed local small-model failure",
+      "observed": "see EXP-INTEL-38164607941",
+      "evidence_ref": "research/experiments/EXP-INTEL-38164607941/result.json"
+    },
+    "B-POLLINATIONS-PROXY": {
+      "role": "carried_hosted_proxy_baseline",
+      "status": "CARRIED_NOT_RERUN",
+      "expected": "credential-free but operationally capped/open proxy",
+      "observed": "census classified Pollinations CREDENTIAL_FREE_OPERATIONALLY_CAPPED (HTTP 200); not invoked for capability in this transaction",
+      "evidence_ref": "raw/endpoint_census.json#providers.Pollinations"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/preflight.json", "sha256": "5ccf07d150ff1f2a49ddacf060c0256563b52643a33760a9ec07be46d96bab70", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/controls.json", "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/materialized_configs.json", "sha256": "ab49352bdf22a07bebf25431163a4bd6d3e3e84cae2133ced47550211e3f849a", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/endpoint_census.json", "sha256": "8e9775b5ef2f8bf23d9a0e066e13da20873670ff752a6d6007a7ed9e767b903a", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/external_comparators.json", "sha256": "2c1505a719dd8449ef97d2e09b5cd259c5eb9abda3d4a48c7fdf77a1e45c44ba", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json", "sha256": "19996ffabdcb79e0438facdb3d19e7ae11186e049a218db8f8119557e26f54ac", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/decision.json", "sha256": "22dfef6a8ed5e9981dd4fd081534317960c464c6b9377a693effd9a0604d8e9a", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/harness_config.json", "sha256": "989f3f7681d4b00d590df240f5404e5179484414aba75ee3cde22b52cfadab43", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/provisioning_receipt.json", "sha256": "9db473e69fbd922e52f659bd43b4f7b37ac1a5e852e6848f65bf2fe3541dd001", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/harness_config.json", "sha256": "46cd2127317fe85eb68c6ac04c4e0492b706c69e99ddab591f5810b9440dc7f2", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/provisioning_receipt.json", "sha256": "935961f8b8fc9b98d873d1f93c75ed6192f9145bdc86992bc4b3eec854ae9f48", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/configs/config_M-14B-QWEN.json", "sha256": "989f3f7681d4b00d590df240f5404e5179484414aba75ee3cde22b52cfadab43", "role": "fixture"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/configs/config_M-8B-LLAMA.json", "sha256": "46cd2127317fe85eb68c6ac04c4e0492b706c69e99ddab591f5810b9440dc7f2", "role": "fixture"},
+    {"path": "research/intel/exp_38175568787_materialize.py", "sha256": "d8f40bf690184235f30a317b2681429a1e29412d68994b696acb360698b013b2", "role": "code"},
+    {"path": "research/intel/exp_38175568787_controls.py", "sha256": "f64c70f4d17dfd5dcd756f409ec5a74a9ea92af2ac28faed4cf165ea3821fda5", "role": "code"},
+    {"path": "research/intel/exp_38175568787_census.py", "sha256": "ac2d2a8718c6a84089fcd29fb39b1b8294e2c47cb9914e75bc8ee61b56199a6b", "role": "code"},
+    {"path": "research/intel/exp_38175568787_comparators.py", "sha256": "099fc5c2213b5e86b9e693ad0a28fefbb5d60ab5ff9ad81392b4f6e14f4c30fb", "role": "code"},
+    {"path": "research/intel/exp_38175568787_provision.py", "sha256": "d7a7898d7eaa1db88ca67ab38c6907752f56708ce01c51fc2544d48ba813a4d2", "role": "code"},
+    {"path": "research/intel/exp_38175568787_eval.py", "sha256": "2cc88022c22e1f25d0ba73e36749f2e8293e31f0b60d594c5573522cb80c5765", "role": "code"},
+    {"path": "research/intel/run_exp_37982024058.py", "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00", "role": "code"}
+  ],
+  "observations": [
+    "PREFLIGHT PASS (frozen rule 1): PC-ORACLE-EPISODE 5/5 task_success through the real frozen run_episode scorer against the served page; NC-NO-MODEL-ACTION parseable_action_rate_step1=0.0 and task_success_rate=0.0; B-RANDOM-ACTION parseable_action_rate_step1=1.0 and task_success_rate=0.2 (<0.6); all freeze_artifact sha256 checks match; required stack imports (llama_cpp, playwright, and the frozen runner producer symbols) succeed.",
+    "The raw/controls.json produced here is byte-identical to the audited parent's (sha256 b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639), i.e. the oracle/null/random controls deterministically replicated across experiments.",
+    "M-14B-QWEN: frozen-pinned sha256 d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b and bytes 8988110976. Downloaded bytes are 8988110976 but sha256=e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008 -> frozen step 3a mismatch -> UNMEASURED_LOAD_FAILED (no load attempted).",
+    "M-8B-LLAMA: frozen-pinned sha256 854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a and bytes 4920739232. Downloaded bytes are 4920739232 but sha256=7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c -> frozen step 3a mismatch -> UNMEASURED_LOAD_FAILED (no load attempted).",
+    "Root cause of the mismatch: the frozen pin equals the HF tree-API xetHash and the CDN etag, whereas the served bytes' sha256 equals the tree-API lfs.oid. HF tree API: lfs.oid=e47ad95d.../7b064f58..., xetHash=d989c91d.../85450612.... CDN HEAD redirect path and etag header both carry the pinned xetHash; the response body hashes to the lfs.oid. The specification note 'sha256 equals the HF LFS OID (CDN etag)' conflated the xetHash/CDN-etag with the lfs.oid.",
+    "The served bytes are stable and authentic: three independent download routes (huggingface.co resolve, resolve?download=true, hf.co) reproduced identical body sha256 and identical byte counts. This is not transport corruption or a corrupted local copy; the frozen byte-level identity is unsatisfiable against the currently served content.",
+    "Failure-classification discipline: a frozen digest mismatch is an operational/substrate condition, not a capability result. No candidate was loaded, so no model behaviour was observed; the mismatch was never converted into a capability failure.",
+    "ENDPOINT CENSUS (non-gating): 12 providers. PROVISIONABLE_CREDENTIATED=0; CREDENTIAL_REQUIRED=10 (OpenAI 401, Anthropic 401, Google Gemini 403, Mistral 401, Groq 401, Together 401, OpenRouter 200, DeepSeek 401, Fireworks 401, Cohere 401); CREDENTIAL_FREE_OPERATIONALLY_CAPPED=1 (Pollinations, HTTP 200); UNREACHABLE=1 (HuggingFace Inference, connection error). any_provisionable_credentialed=false.",
+    "EXTERNAL COMPARATORS (non-gating readiness table): 3/3 entries enumerated, 3/3 primary sources pinned, all labelled CANDIDATE_NOT_EVIDENCE (QCR arXiv:2608.12847; Agentic Compilation arXiv:2604.09718; site-memory/ColorBrowserAgent arXiv:2601.07262, also ACL 2026 industry track). Reported numbers are recorded with denominators and reproduction prerequisites; none is treated as this experiment's evidence.",
+    "Frozen rule 4 application: after the ladder no candidate is COMPLETE, so OUTCOME=MEASUREMENT_INVALID and B3_STATUS=UNRESOLVED (canonical mapping status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE). The census and comparator records are written but do not override the frozen outcome.",
+    "Both materialized per-candidate overlays are confined to prompts.system, candidate_models_frozen and (for M-8B-LLAMA) sampling.chat_format relative to the frozen base config; config/overlay sha256s are recorded. No measurement code or task fixture was modified."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID transaction: the experiment's capability question was not answered. This is a substrate/provisioning failure (unobtainable frozen GGUF byte identity), not a scientific negative; it must not be encoded as FALSIFIES or as evidence about model capability.",
+    "No claim state changes: C-LLM-INHERIT remains at its inherited Codex effective event (parent EXP-INTEL-38164607941 FALSIFIES). This transaction neither promotes nor weakens it.",
+    "Primary blocker: at EXECUTE both frozen GGUF pins (byte count matches, sha256 mismatch) differ from the served bytes, whose sha256 equals the current HF lfs.oid while the pin equals xetHash/CDN-etag. No model was loaded (fail-closed, frozen rule 3a). Mismatched bytes were never substituted for the frozen candidates.",
+    "Smallest unblocking action: either (a) re-pin each candidate to the byte-level sha256 actually served (verified by full download) after an independent byte check, and re-freeze; or (b) vendor the exact GGUF bytes in an immutable artifact store keyed by byte sha256; or (c) at DESIGN time, compute the sha256 from downloaded bytes rather than from HF server metadata (etag/xetHash). Any re-freeze must keep the same candidate identities (model, quant, chat_format, URL) and only correct the digest/bytes binding.",
+    "Freeze-process validity threat (generic): the v2 freeze_eligibility check for candidate digest verification appears to have been satisfied via server metadata (etag/xetHash) rather than byte download. This experiment is an existence proof that metadata-vs-body mismatch can silently pass freeze; downstream experiments pinning HF GGUFs should byte-verify at freeze.",
+    "Positive-control coverage: PC-ORACLE-EPISODE, NC-NO-MODEL-ACTION and B-RANDOM-ACTION were executed through the real frozen scorer; the per-candidate 10-probe PC-JSON-CONSTRAINED-DECODING gate did not run because no candidate loaded (recorded NOT_APPLICABLE, with carried parent 10/10 as context only).",
+    "Census is a snapshot: classifications reflect env-var presence and unauthenticated reachability at EXECUTE time; no API keys were present and no provider model was invoked, so hosted capability remains untested by design.",
+    "The comparator table is a readiness/enumeration artifact (CANDIDATE_NOT_EVIDENCE); reported comparison numbers have not been reproduced under this protocol and are not used in the decision.",
+    "Determinism/leakage: per-candidate overlays differ from the frozen base only in the predeclared single factor (prompt treatment) plus frozen candidate bindings and chat_format; the reported leakage booleans are preserved in raw/materialized_configs.json."
+  ],
+  "unresolved": [
+    "Whether the frozen pinned digests were incorrect at DESIGN time (metadata-only read of xetHash/etag) or became stale because the served body changed between design (2026-10-11) and execute (2026-10-12). Available evidence (pin==xetHash==etag; body==lfs.oid; multiple stable routes) is consistent with a metadata-only design read, but the historical state was not captured at design time and is not directly reconstructable.",
+    "Whether the origin GGUF bytes that hash to the frozen pins remain retrievable anywhere (the HF commits API listing did not surface these GGUF files and no old-OID blob could be fetched during EXECUTE).",
+    "The capability of the M-14B-QWEN and M-8B-LLAMA classes under the frozen minimal Web-agent protocol: entirely unmeasured, so the inherited 3B-8B local ceiling for C-LLM-INHERIT is neither extended nor re-confirmed.",
+    "Whether the HF Xet-bridge metadata/body mismatch (etag/xetHash path vs lfs.oid body) affects other pinned GGUFs used by other lanes; not surveyed here.",
+    "No capability evidence for any hosted provider was gathered (census is reachability/credential only); the smallest next action for the hosted branch is unchanged from the frozen spec (a credentialed endpoint test), which this transaction could not provision."
+  ],
+  "frozen_input_verification": {
+    "request.json": {"expected_sha256": "f05ecb934bdbe833088d1950acc72f9eabc5512d8d5093b42c20faadf7edcf64", "match": true},
+    "spec.json": {"expected_sha256": "c490281c103e3869a9fa0ca34e4cde0f45229efd9ab081dabb2dcae9ad8172fe", "match": true},
+    "prereg.md": {"expected_sha256": "ff8073fb0720821dfba5451caba3a4cc4e1fc26934c9672326e82916b9703e8d", "match": true},
+    "design_review.json": {"expected_sha256": "79df25926166586654477d955d458ca5144244a5e89ab63d9894d9ce2b231603", "match": true},
+    "freeze_artifacts_all_match": true
+  }
+}

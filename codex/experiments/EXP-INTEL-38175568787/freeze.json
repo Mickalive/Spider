@@ -1,0 +1,17 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862",
+    "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+    "research/intel/run_exp_37982024058.py": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "frozen_at": "2026-10-11T23:10:31.023741+00:00",
+  "hashes": {
+    "design_review.json": "79df25926166586654477d955d458ca5144244a5e89ab63d9894d9ce2b231603",
+    "prereg.md": "ff8073fb0720821dfba5451caba3a4cc4e1fc26934c9672326e82916b9703e8d",
+    "request.json": "f05ecb934bdbe833088d1950acc72f9eabc5512d8d5093b42c20faadf7edcf64",
+    "spec.json": "c490281c103e3869a9fa0ca34e4cde0f45229efd9ab081dabb2dcae9ad8172fe"
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the actually served body (verified by full download, not HF etag/xetHash metadata) and re-frozen, does either M-14B-QWEN or M-8B-LLAMA clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6), and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test?",
+  "why_next": "This packet is a substrate/provisioning failure, not a scientific answer: zero COMPLETE cells -> MEASUREMENT_INVALID / B3_STATUS=UNRESOLVED (result.json#metrics.decision_trace; audit.json#claim_ceiling). The capability question for M-14B-QWEN and M-8B-LLAMA is therefore still entirely unmeasured, and the smallest unblocking action is a one-time freeze/byte-identity repair (audit.json#required_fixes; result.json#validity_notes): re-pin to served-body sha256 or vendor bytes keyed by byte sha256, then re-freeze with the same candidate identities and re-run the already-frozen ladder. This is genuinely decision-changing for readiness blocker B3 (a capable same-protocol endpoint/model gate on the flagship four-arm benchmark) and is not a repeat of a spent scientific test. It is orthogonal to the already-spent 3B-8B Qwen prompt ablation and to the credential-free hosted path, so it is the highest-information next probe available to Intel. A NEW experiment still requires a Global Research Director mandate; this handoff does not self-authorize it.",
+  "carry_forward": {
+    "established": [
+      "Operational freeze-process defect (generic, durable): for both frozen HF GGUFs the pinned sha256 equals the HF tree-API xetHash / CDN etag, while the sha256 of the bytes actually served equals the tree-API lfs.oid; byte counts match (M-14B-QWEN 8988110976; M-8B-LLAMA 4920739232) and three independent download routes (resolve, resolve?download=true, hf.co) reproduced identical body sha256 and byte counts. A digest pinned from HF server metadata can therefore be self-consistently unsatisfiable against authentic served content and can silently pass a metadata-based freeze_eligibility check (raw/provisioning_evidence.json#candidates; audit.json#validity_findings).",
+      "Measurement substrate is live and deterministic: PREFLIGHT passed all five frozen checks through the real frozen scorer against a served page (PC-ORACLE-EPISODE 5/5 task_success; NC-NO-MODEL-ACTION parseable 0.0/success 0.0; B-RANDOM-ACTION parseable 1.0/success 0.2 < 0.6 bar; freeze artifacts 3/3; required imports OK), and raw/controls.json is byte-identical to the audited parent (sha256 b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639).",
+      "Both candidates are UNMEASURED_LOAD_FAILED at frozen ladder step 3a and were fail-closed with no load attempted and no byte substitution: M-14B-QWEN pinned d989c91d... vs served e47ad95d...; M-8B-LLAMA pinned 85450612... vs served 7b064f58... (result.json#observations; raw/decision.json#cells).",
+      "Endpoint census snapshot at EXECUTE (reachability/credential only, no model invoked): 12 providers -> 0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations, HTTP 200), 1 UNREACHABLE (HuggingFace Inference); any_provisionable_credentialed=false (raw/endpoint_census.json).",
+      "External-comparator readiness table: 3/3 entries enumerated with 3/3 primary sources pinned, all labelled CANDIDATE_NOT_EVIDENCE (QCR arXiv:2608.12847; Agentic Compilation arXiv:2604.09718; site-memory/ColorBrowserAgent arXiv:2601.07262) (raw/external_comparators.json).",
+      "Packet disposition: producer status=MEASUREMENT_INVALID / outcome=INCONCLUSIVE, independent audit status=MEASUREMENT_INVALID with producer_claim_supported=false; the audit confirms this is a substrate failure, not a scientific negative, and C-LLM-INHERIT is neither promoted nor weakened (audit.json#validity_findings)."
+    ],
+    "rejected": [
+      "Rejected (bounded, evidenced): the hypothesis that the frozen metadata-derived GGUF sha256 pins (xetHash/CDN etag) identify the served body bytes. For both candidates the pinned digest differs from the sha256 of the served bytes while bytes match, so the frozen byte-level identity is unsatisfiable against currently served content.",
+      "Rejected (bounded): transport corruption, a corrupted local copy, or a byte-count change as the cause of the step-3a failure. Three independent download routes yielded identical body sha256 and byte counts matching the frozen byte counts.",
+      "Rejected for this packet: treating the step-3a digest mismatch as a capability failure of M-14B-QWEN or M-8B-LLAMA. The frozen rule explicitly records UNMEASURED_LOAD_FAILED and forbids converting a substrate mismatch into a capability result (result.json#validity_notes)."
+    ],
+    "unknown": [
+      "Whether the frozen pins were wrong at DESIGN time (metadata-only read of xetHash/etag rather than a byte download) or became stale because the served body changed between design (2026-10-11) and execute (2026-10-12). Not reconstructable from captured evidence.",
+      "Whether origin GGUF bytes that hash to the frozen pins (the xetHash values) remain retrievable anywhere; the HF commits API listing did not surface these GGUF files and no old-OID blob could be fetched during EXECUTE.",
+      "The capability of M-14B-QWEN and M-8B-LLAMA under the frozen minimal Web-agent protocol: entirely unmeasured; the inherited credential-free 3B-8B Qwen ceiling is neither extended nor re-confirmed.",
+      "Whether the HF Xet-bridge metadata/body mismatch (etag/xetHash path vs lfs.oid body) affects pinned GGUFs used by other lanes; not surveyed in this packet.",
+      "Whether a re-pinned, byte-verified re-freeze would execute and produce COMPLETE cells, and whether either class would clear the bar.",
+      "Capability of any hosted provider: the census is credential/reachability only and no provider model was invoked; the credentialed-endpoint branch remains unprovisioned."
+    ],
+    "do_not_assume": [
+      "Do not encode this packet as FALSIFIES or as any evidence about model capability; it is MEASUREMENT_INVALID by substrate/provisioning failure and M-14B-QWEN/M-8B-LLAMA capability is unknown.",
+      "Do not promote, downgrade or globally reject C-LLM-INHERIT. It remains HYPOTHESIS with the parent's bounded effective event (EXP-INTEL-38164607941 FALSIFIES, scoped to credential-free CPU-quantized Qwen2.5 3B-8B Q4_K_M under the goal/schema protocol).",
+      "Do not re-run the spent 3B-8B Qwen prompt ablation (EXP-INTEL-37982024058 / EXP-INTEL-38164607941).",
+      "Do not pin HF GGUF digests from server metadata (etag/xetHash/lfs.oid returned by the tree API) without hashing downloaded body bytes; the two can differ at equal byte count.",
+      "Do not generalize the inherited 3B-8B local ceiling to 14B or non-Qwen classes; those are untested, not refuted.",
+      "Do not treat the endpoint census as capability evidence; it records credential presence and unauthenticated reachability only, and no provider model was invoked.",
+      "Do not use the external-comparator table (QCR / compile-and-execute / site-memory-ColorBrowserAgent) as evidence for any SPIDER claim; all entries are CANDIDATE_NOT_EVIDENCE until reproduced with denominators under this protocol.",
+      "Do not treat a successful re-run of the corrected ladder as established inheritance capability: the frozen bar is a minimal single-page multi-step task, and clearing it is a prerequisite for the benchmark, not evidence for C-LLM-INHERIT at product scale."
+    ]
+  },
+  "dependencies": [
+    "Frozen design immutable: research/experiments/EXP-INTEL-38175568787/{request.json,spec.json,prereg.md,freeze.json,design_review.json} (hashes recorded in freeze.json#hashes).",
+    "Raw evidence: research/experiments/EXP-INTEL-38175568787/raw/{preflight.json,controls.json,materialized_configs.json,endpoint_census.json,external_comparators.json,provisioning_evidence.json,decision.json} and cells/{M-14B-QWEN,M-8B-LLAMA}/raw/{harness_config.json,provisioning_receipt.json}.",
+    "Producer outputs: result.json, report.md, provenance.json. Independent audit: audit.json (MEASUREMENT_INVALID, producer_claim_supported=false).",
+    "Prerequisite substrate repair before any retry: byte-level download-and-hash of each candidate GGUF at freeze; re-pin sha256 to served-body bytes (or vendor bytes in an immutable store keyed by byte sha256), preserving candidate identities (model, quant, chat_format, URL) and the frozen runner/fixture hashes.",
+    "Reusable frozen assets: research/intel/run_exp_37982024058.py (runner), research/experiments/EXP-INTEL-37982024058/raw/harness_config.json (base fixture), research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py (prompt provenance).",
+    "Execution environment: llama-cpp-python 0.2.90, Playwright 1.63.0, system Chrome, CPU-only (nproc=4), huggingface.co reachable.",
+    "New-experiment authority: a Global Research Director mandate is required; the lane does not self-authorize a child experiment.",
+    "Hosted branch prerequisite: provider credentials (10 providers require credentials; none present) or a provisionable credential-free endpoint that meets the same-model/tools/budget constraint."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38175568787/request.json#director_mandate",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#decision_rule",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#freeze_eligibility.freeze_artifacts_bound",
+    "research/experiments/EXP-INTEL-38175568787/freeze.json#artifact_hashes",
+    "research/experiments/EXP-INTEL-38175568787/design_review.json",
+    "research/experiments/EXP-INTEL-38175568787/result.json#metrics.decision_trace",
+    "research/experiments/EXP-INTEL-38175568787/result.json#observations",
+    "research/experiments/EXP-INTEL-38175568787/result.json#validity_notes",
+    "research/experiments/EXP-INTEL-38175568787/result.json#unresolved",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#claim_ceiling",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#required_fixes",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#validity_findings",
+    "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json#candidates",
+    "research/experiments/EXP-INTEL-38175568787/raw/controls.json",
+    "research/experiments/EXP-INTEL-38175568787/raw/decision.json#cells",
+    "research/experiments/EXP-INTEL-38175568787/raw/endpoint_census.json",
+    "research/experiments/EXP-INTEL-38175568787/raw/external_comparators.json",
+    "research/experiments/EXP-INTEL-38175568787/report.md",
+    "research/experiments/EXP-INTEL-38175568787/provenance.json",
+    "codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT",
+    "research/experiments/EXP-INTEL-38164607941/handoff.json",
+    "research/experiments/EXP-INTEL-38164607941/verdict.json"
+  ],
+  "recommended_action": "Do NOT treat this packet as a capability result and do NOT re-run the spent 3B-8B prompt ablation. First repair the freeze prerequisite once: byte-download and hash each candidate GGUF at freeze, reject HF server-metadata digests (etag/xetHash/lfs.oid) as pin sources, and re-pin sha256 to the served body (or vendor bytes keyed by byte sha256), preserving candidate identities and frozen runner/fixture hashes. Then, under a new Global Research Director mandate, re-freeze and re-run the already-designed two-candidate capability ladder (M-14B-QWEN primary, M-8B-LLAMA secondary) against the frozen absolute bar. Separately, record the HF Xet-bridge metadata-vs-body mismatch as a generic substrate validity threat in any lane that pins remote GGUFs, and keep B3 (capable same-protocol endpoint) explicitly UNRESOLVED when scheduling the flagship four-arm benchmark. If no credential or credential-free capable endpoint can be provisioned, escalate the exact credential/operational blocker to the Global Research Director so the benchmark can be re-scoped explicitly rather than silently weakened."
+}

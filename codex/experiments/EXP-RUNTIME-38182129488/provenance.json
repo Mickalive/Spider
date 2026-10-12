@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38182129488",
+  "lane": "runtime",
+  "stage": "EXECUTE",
+  "github": {
+    "origin_github_run_id": "38182129488",
+    "execute_github_run_id": "38188803789",
+    "pre_execute_sha": "ba3b779f3d5c8c8727fd47c42a3a3b13bc5c4dd2",
+    "execute_head_sha": "56c9638ca324f952c6d18b907d11a792b34105ed",
+    "request_base_sha": "b5da1b90e970d44e81fb3b3ab6ccf9bed7149aaa",
+    "request_id": "5196c9bd243c3315bc21f289",
+    "request_hash": "5b85f96ce805a37278e03e8e0608c55bc7e927eeab39b724142c5d75e5b6ee47",
+    "cycle_id": "38181497149"
+  },
+  "frozen_inputs_sha256": {
+    "request.json": "efd6190bfae88320b43bb1ea66d32b046a3b6431473fff8c0bd2d5cfdc5a4dcb",
+    "spec.json": "214704ecc58d4f997562a58a798b20a340653b27599907b18709a0fd21a207fd",
+    "prereg.md": "6e8e8412447e4f7dbf2a5ffb0d1b09fa3013436ea6e68c1567101430184848fd",
+    "design_review.json": "73c2b592d45de5ea5e664ca1f8d3ba4d2b41d441f34c0e35580fcae5a9cb40b1",
+    "freeze.json": "f17bb736034603ad1724c1c073f9f6630d35a80c70d69da6221ffb83f7af1f55"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "os": "linux",
+    "libraries": "Python standard library only (http.server, urllib.request, hashlib, json, threading, collections)",
+    "network": "loopback only (127.0.0.1 ephemeral port)",
+    "credentials": false,
+    "model_calls": 0
+  },
+  "datasets_fixtures": [],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/run_experiment.py",
+      "sha256": "8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+      "role": "frozen EXECUTE harness (extracted byte-identically from prereg.md/spec.design_satisfiability_probe.source)"
+    }
+  ],
+  "commands": [
+    "python3 run_experiment.py --mode probe > artifacts/probe_mode.json   # executed twice; byte-identical",
+    "python3 run_experiment.py --mode selftest > artifacts/selftest_stdout.json   # executed twice; byte-identical",
+    "python3 run_experiment.py --mode scored --out artifacts/run_scored.json   # outcome-bearing; wall clock ~28m38s"
+  ],
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/run_experiment.py",
+      "sha256": "8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/artifacts/run_scored.json",
+      "sha256": "430f8f65e0fc5e34c6ecdb29dcadcb6242bb7413cbacbed14cecc4d64dea8fef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/artifacts/probe_mode.json",
+      "sha256": "f8c587945ba85cb235f7c5344ee49fd3f4a9e42d16f48a5a57bc510b1be7f090",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/artifacts/selftest_stdout.json",
+      "sha256": "74a833f62a408ffa3048875eacb60fef0e3a2bfe1259aefba7b4fb1fbdb8bb8e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38182129488/artifacts/run_scored.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    }
+  ],
+  "cross_checks": {
+    "freeze_hashes_match_disk": true,
+    "harness_sha_equals_spec_source_sha256": true,
+    "harness_sha_equals_prereg_block": true,
+    "probe_stdout_sha256": "f8c587945ba85cb235f7c5344ee49fd3f4a9e42d16f48a5a57bc510b1be7f090",
+    "probe_stdout_matches_prereg_design_value": true,
+    "selftest_stdout_sha256": "74a833f62a408ffa3048875eacb60fef0e3a2bfe1259aefba7b4fb1fbdb8bb8e",
+    "selftest_stdout_matches_prereg_design_value": true,
+    "probe_runs_byte_identical": true,
+    "selftest_runs_byte_identical": true,
+    "scored_determinism_ok": true
+  },
+  "notes": "Credential-free, deterministic, stdlib-only synthetic HTTP experiment. No browser, model, credential, or external network dependency. freeze.artifact_hashes is empty; the only mutable interpretation dependency is the EXECUTE harness copy, pinned here by sha256 and by the V1 code-fidelity manifest."
+}
