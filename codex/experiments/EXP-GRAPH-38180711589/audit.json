@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38180711589",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "The primary gate signal S = 1[famNONE] + 1[opNONE] + 1[opTIE] + 1[noslot] + 1[quant] has critically low discriminative power on the AXIS-PRIMARY test split: it flags only 2 of 5 resolved out-of-scope goals (both at S=1) and 0 of 53 resolved applicable goals. This yields pooled_false_accept = 3/18 = 0.1667 vs target ≤0.10, missing by 0.0667.",
+    "The calibration split achieves exactly the FA target (2/20 = 0.10) with 7 abstained resolved OOS goals, but this does not generalize to the test split where only 2 OOS goals receive S>0. The signal distribution shifts: calibration has 9 resolved OOS (2 at S=0, 7 at S≥1) vs test has 5 resolved OOS (3 at S=0, 2 at S=1). The signal components do not capture the ambiguity cues present in the test OOS phrasings.",
+    "The primary unknown_precision = 1.0 is carried by only 2 signal-driven abstentions (both out-of-scope). This estimate is extremely unstable (effective n=2). The secondary unknown_precision_inclusive = 0.8333 (15/18 abstained including 3 unresolved applicable + 13 unresolved OOS) is below the 0.85 target, though correctly excluded from the primary decision per the pre-registered metric definition (V1).",
+    "The gate reduces the gate-free resolver's (B-LEX-ONLY) false-accept rate from 0.2778 to 0.1667 but not below the 0.10 threshold. CTRL-EXEC-ALL (B-LEX-ONLY) and CTRL-ABSTAIN-ALL correctly bound the operating space. CTRL-RANDOM-GATE (matched 18-goal abstention) yields FA=0.7222 and unknown_precision=0.2778, confirming the treatment's abstentions are signal-informed but insufficient.",
+    "D-ALTLEX and D-HELDOUT retention checks are BLOCKED due to unavailable sentence-embedding stack (torch/sentence_transformers). This is correctly handled per the frozen design (degrades to BLOCKED, not MEASUREMENT_INVALID) and does not affect D-PRIMARY. The deterministic resolver accuracies on these axes are reported (ALTLEX test 0.9464, HELDOUT test 0.975) but the paired bootstrap against the embedding comparator cannot be computed.",
+    "All D-PRIMARY-invalidating validity gates PASS: V2 (|primary applicable|=113 ≥80), V3 (9 flags, max token Jaccard 0.571<0.60, max trigram 0.588<0.75), V5 (PC 20/20/20), V6 (oracle 113/113=1.0), V7 (treatment live: 102 executed applicable ∈ (0,113)), V8 (random floor 0.186 ≤0.35), V9 (non-tautology: 9 execution disagreements, no embedder tokens in primary path), V10 (NC-SHUFFLED 0.044≤0.20, NC-CONSTANT unknown_precision undefined), V13 (calibration both classes non-empty). V12 freeze binding PASS (3-part). V11 NOT_APPLICABLE (bootstrap not attempted).",
+    "The NC-CONSTANT-SIGNAL control uses S=0 for all goals; the frozen calibrate() fallback returns t*=max(S)+1=1 which executes all resolved goals (since S≤1 always holds), yielding unknown_precision=None. The 'CAL-ABSTAIN-ALL' label in the frozen code is a misnomer observed as-is; V10 is satisfied because unknown_precision never reaches 0.85.",
+    "The contamination screen flags 9 goals (7 applicable, 2 OOS) reproducing the parent exactly. Max Jaccard is below thresholds. The residual authorship limitation (blind authors may hold latent knowledge of common intents) is disclosed in V4 and prereg.md section 3 and is bounded but not eliminated by the no-tool instruction and contamination screen."
+  ],
+  "baseline_findings": [
+    "B-LEX-STRONG selection accuracy on primary applicable: 97/113 = 0.8584 (test split 48/56 = 0.8571), confirming the parent's selection finding is intact on this axis.",
+    "B-LEX-ONLY (gate-free resolver) executes 53/56 test applicable and 5/18 test OOS (FA=0.2778); the gate reduces this to 3/18 but not below 0.10.",
+    "B-INTERNAL-ID-ORACLE scores 113/113 = 1.0, confirming the fixture/label ceiling is intact (V6).",
+    "B-INCUMBENT-KERNEL scores 0/113 = 0.0 on mechanism identity (by construction, no goal is a verbatim intent string), 20/20 on verbatim intents.",
+    "B-RANDOM-ROLE (RandomState 4242) scores 21/113 = 0.1858 ≤ 0.35 floor (V8 PASS).",
+    "B-LEXTOK-JACCARD scores 10/113 = 0.0885, near/below chance as expected.",
+    "NC-SHUFFLED-LABEL (fixed derangement, seed 3820973221) scores 5/113 = 0.0442 ≤ 0.20 (V10 PASS).",
+    "PC-LIVENESS-AND-INTEGRITY: all three sub-checks 20/20 (fixture unique IDs, fixture unique intents, incumbent verbatim resolution, B-LEX-STRONG self-match)."
+  ],
+  "recomputed_metrics": {
+    "M-GATE-TRIPLET-PRIMARY": {
+      "t_star": 0,
+      "cal_class": "CAL-FEASIBLE",
+      "coverage": 0.9464285714285714,
+      "pooled_false_accept": 0.16666666666666666,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.8333333333333334,
+      "targets_met": {
+        "pooled_false_accept": false,
+        "coverage": true,
+        "unknown_precision": true
+      },
+      "executed": 56,
+      "executed_applicable": 53,
+      "executed_out_of_scope": 3,
+      "abstained_resolved": 2,
+      "unresolved_applicable": 3,
+      "selective_acc_executed": 0.9056603773584906,
+      "calibration_metrics": {
+        "t": 0,
+        "coverage": 0.8596491228070176,
+        "pooled_false_accept": 0.1,
+        "unknown_precision": 1.0,
+        "unknown_precision_inclusive": 0.6923076923076923,
+        "abstained_resolved": 7,
+        "executed": 51,
+        "executed_oos": 2,
+        "executed_app": 49,
+        "selective_acc": 1.0,
+        "unresolved_applicable": 8
+      }
+    },
+    "M-DET-ACC-PRIMARY": {
+      "value": 0.8584070796460177,
+      "numerator": 97,
+      "denominator": 113,
+      "test_split": {
+        "value": 0.8571428571428571,
+        "numerator": 48,
+        "denominator": 56
+      }
+    },
+    "M-GATE-TRIPLET-ALTLEX": {
+      "t_star": 0,
+      "class": "CAL-FEASIBLE",
+      "coverage": 0.9464285714285714,
+      "pooled_false_accept": 0.16666666666666666,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.8333333333333334
+    },
+    "M-GATE-TRIPLET-HELDOUT": {
+      "t_star": 0,
+      "class": "CAL-FEASIBLE",
+      "coverage": 0.975,
+      "pooled_false_accept": 0.2,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.9411764705882353
+    },
+    "M-PC-LIVENESS-AND-INTEGRITY": {
+      "fixture_unique_ids": true,
+      "fixture_unique_intents": true,
+      "incumbent_verbatim": 20,
+      "resolver_self_match": 20,
+      "n_fixture": 20,
+      "pass": true
+    },
+    "M-NC-SHUFFLED": {
+      "value": 0.04424778761061947,
+      "numerator": 5,
+      "denominator": 113
+    },
+    "M-NC-CONSTANT-SIGNAL": {
+      "t_star": 1,
+      "cal_class": "CAL-ABSTAIN-ALL",
+      "unknown_precision": null,
+      "unknown_precision_defined": false
+    },
+    "M-MECH-ACC-RANDOM": {
+      "value": 0.18584070796460178,
+      "numerator": 21,
+      "denominator": 113
+    },
+    "M-MECH-ACC-ORACLE": {
+      "value": 1.0,
+      "numerator": 113,
+      "denominator": 113
+    },
+    "M-MECH-ACC-INCUMBENT": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 113
+    },
+    "M-MECH-ACC-LEXTOK": {
+      "value": 0.08849557522123894,
+      "numerator": 10,
+      "denominator": 113
+    },
+    "M-N-PRIMARY-APPLICABLE": 113,
+    "M-N-PRIMARY-OOS": 38,
+    "M-N-CAL": {
+      "applicable": 57,
+      "oos": 20
+    },
+    "M-N-TEST": {
+      "applicable": 56,
+      "oos": 18
+    },
+    "M-N-CONTAM-FLAGGED": 9,
+    "M-CONTAM-MAX-JACCARD": {
+      "max_token_jaccard": 0.5714285714285714,
+      "max_trigram_jaccard": 0.5882352941176471
+    },
+    "M-NON-TAUTOLOGY": {
+      "b_lex_only_vs_t_lex_ambig_disagreement_count": 9,
+      "primary_path_embedder_tokens": []
+    },
+    "M-GATE-TREATMENT-VECTOR": {
+      "t_star": 0,
+      "executed_applicable": 102,
+      "executed_total": 107,
+      "abstained_resolved": 9,
+      "unresolved_applicable": 11,
+      "n_primary_applicable": 113
+    }
+  },
+  "claim_ceiling": "On the frozen fixture (113 applicable / 38 OOS goals, LEXICON-G1, i%6∈{1,3,5} split), the deterministic resolver's integer ambiguity signal S = 1[famNONE]+1[opNONE]+1[opTIE]+1[noslot]+1[quant] does NOT reach the pre-registered operating point (pooled_false_accept ≤ 0.10, coverage ≥ 0.50, unknown_precision ≥ 0.85) on the disjoint test split. The gate misses the FA target by 0.0667 (3/18 vs ≤1.8/18). The signal abstains only 2 OOS goals on test vs 7 on calibration, indicating poor generalization of the ambiguity cues. This is a valid bounded negative (GATE-NOT-MET) for the specific signal definition and fixture; it does not falsify all possible model-free ambiguity signals, nor does it address parameter binding, execution, or cross-app generalization. C-SEMANTIC-RESOLVE remains at HYPOTHESIS. The retention advantage on held-out mechanisms (AXIS-HELDOUT) and alternate lexicon (AXIS-ALTLEX) remains UNKNOWN (BLOCKED) due to missing embedding dependencies.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38180711589/raw_evidence/runner_result_raw.json",
+    "research/experiments/EXP-GRAPH-38180711589/derived/controls.json",
+    "research/experiments/EXP-GRAPH-38180711589/derived/measurements.json",
+    "research/experiments/EXP-GRAPH-38180711589/freeze.json",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md (FROZEN-RUNNER block, CANONICAL-HASHES blocks)",
+    "research/experiments/EXP-GRAPH-38180711589/spec.json (decision_rule, baselines, measurement_validity)",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS for contamination screen)"
+  ],
+  "unresolved": [
+    "D-ALTLEX and D-HELDOUT retention outcomes are unknown (BLOCKED): the embedding comparator could not load. A future run with torch/sentence-transformers/all-MiniLM-L6-v2 available could settle whether the deterministic selection advantage survives the held-out mechanism set and the alternate lexicon.",
+    "Whether the pooled_false_accept miss (0.1667 vs 0.10) is specific to the frozen test-split phrasing or reflects a general ceiling of the integer ambiguity signal S is not identifiable from one split. The signal components (famNONE, opNONE, opTIE, noslot, quant) may not capture the ambiguity in the test OOS goals (e.g., 'page two', 'search by email', 'filter by date', 'bulk operations').",
+    "The primary unknown_precision = 1.0 has effective n=2 (two signal-driven abstentions, both OOS). The stability of this estimate under resampling is not assessed.",
+    "The contamination screen's max token-Jaccard (0.5714) is close to the 0.60 flag threshold; whether additional near-threshold goals materially affect the split is not settled here.",
+    "V11-BOOTSTRAP-SEED could not be exercised (retention bootstrap not attempted due to BLOCKED comparator)."
+  ]
+}

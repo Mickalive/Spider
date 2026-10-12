@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38169622704",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "claim_scope": "C-MEAS-VALID",
+  "request_id": "6e5f9d31d142f1da25acc9d1",
+  "origin_github_run_id": "38169622704",
+  "execute_github_run_id": "38175559810",
+  "generated_at": "2026-10-11T22:29:42.154038+00:00",
+  "base_sha": "b5ea45859c8a410e81318ae85ec317e96e46f462",
+  "head_sha": "27591381a36a95c1986916f192ff532ffb0c0160",
+  "frozen_inputs": {
+    "request.json": "aa62a6d3464444044eab5a1cf6cd2363d8d3fc1221858756b6c6509cf76750d6",
+    "spec.json": "bc80c7c06fee33b9284ecb1cf94adf84b765a85668e40ca47ae01e99f264eb52",
+    "prereg.md": "3d706af3a54d1763af721215421adf3ad96a6f6a4b0629331392f3847c4aed46",
+    "freeze.json": "cfbece9651388e12b623ebcc953b948f5c1b490d1ccaebff8a274852b9046fed",
+    "design_review.json": "184857b7276d5d58ae9c835da9009392a6b4e3e343569d6b0cbb2ae0e33c05dd"
+  },
+  "freeze_artifact_hashes": {},
+  "components": {
+    "run_experiment.py": "28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "linux",
+    "kernel": "6.17.0-1022-azure",
+    "substrate": "stdlib-only credential-free HTTP task bank (no model, browser, credentials, or non-loopback network)",
+    "scope_guard": "SPIDER_CONTROL_OVERLAY_DIRTY from concurrent codex/control-plane writes; all experiment outputs in scope"
+  },
+  "commands": {
+    "scored": "python3 run_experiment.py --mode scored --out artifacts/run_scored.json",
+    "probe": "python3 run_experiment.py --mode probe > artifacts/probe_mode.json",
+    "selftest": "python3 run_experiment.py --mode selftest"
+  },
+  "cross_checks": {
+    "execute_probe_sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+    "design_probe_sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+    "probe_byte_identical_to_design": true,
+    "execute_selftest_sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931",
+    "design_selftest_sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931",
+    "selftest_byte_identical_to_design": true,
+    "frozen_inputs_unchanged": true
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/run_experiment.py",
+      "sha256": "28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/run_scored.json",
+      "sha256": "a8acd9a7ba25c84d5490f4a4c5d9ebb8de32d8a5b3f212c814cc0ee11c7897bf",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/probe_mode.json",
+      "sha256": "023cc3e283ad50bb2828cd28bb857e1c735325b803f1f831f8bb964e6037ae77",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/selftest_stdout.json",
+      "sha256": "7456fc3bbe95f0c60d3dca755b05b3cf99c4f0eaa7f1d733b3906c819e636931",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/scored_stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/artifacts/scored_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/result.json",
+      "sha256": "e5ab7def11cb14c2d011e9ba27f424257402f3068cde8c20c7f5a850045325f4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38169622704/report.md",
+      "sha256": "be884a73a71525561ff188eb52d2725502ef2ba2edd01585873b3e2e53c1ae97",
+      "role": "derived"
+    }
+  ]
+}

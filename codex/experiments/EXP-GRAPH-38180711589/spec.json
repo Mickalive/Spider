@@ -1,0 +1,201 @@
+{
+  "experiment_id": "EXP-GRAPH-38180711589",
+  "lane": "graph",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_scope_note": "Bounded, model-free test of the ONE sub-mechanism the parent EXP-GRAPH-38175554380 left unidentified: whether the deterministic resolver's OWN ambiguity/coverage signal can supply an abstention gate that simultaneously reaches pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint calibration/test split, and whether the deterministic resolve()+gate pair RETAINS its selection advantage on a held-out mechanism set (teams/projects/events/tickets/files) and under a differently curated synonym lexicon. The parent already established the SELECTION half (B-LEX-STRONG 97/113 > A-EMBED-COSINE 78/113) and found no gate; this packet does NOT re-litigate selection on the primary axis. The claim-bearing primary decision D-PRIMARY is computed entirely in stdlib (no model, no network). The retention checks D-ALTLEX/D-HELDOUT use the pinned embedding comparator and are secondary. Out of scope: parameter binding, execution correctness, cross-app generalization, ECE, and browser/substrate behaviour. A positive D-PRIMARY licenses EXPERIMENTAL for the deterministic-resolver-plus-ambiguity-gate sub-mechanism only; C-SEMANTIC-RESOLVE is not promoted and the parent's numbers are not load-bearing.",
+  "question": "Given that a bank-blind, model-free deterministic operation-synonym + resource-noun resolver already exceeds max-cosine embedding selection for unseen-goal mechanism identity on the frozen 113-goal primary set (97/113=0.8584 vs 78/113=0.6903; paired family-blocked 95% bootstrap diff -0.1681, CI [-0.3077,-0.0268]) while both the two-feature cosine/margin logistic gate and the single global cosine threshold collapse to GATE-NOT-MET (t*=1.0, coverage 0.0): does a model-free resolver whose OWN ambiguity/coverage signal (unresolved operation synonym, tied/absent resource-noun match, missing single-item reference slot, multiplicity cue) supplies the abstention decision simultaneously reach pooled_false_accept <= 0.10, coverage >= 0.50 and unknown_precision >= 0.85 on a disjoint calibration/test split (AXIS-PRIMARY), and does that deterministic resolve()+ambiguity-gate pair retain its selection advantage on a held-out mechanism set (AXIS-HELDOUT) and under a differently curated synonym lexicon (AXIS-ALTLEX) -- thereby deciding whether resolve() ships as a deterministic resolver plus ambiguity gate with the embedding path retired, or whether unseen-goal resolution must move to a structured slot/parameter or retrieval-model architecture trained on independently authored goals?",
+  "hypothesis": "The parent's gate failure was an artifact of gating on an EMBEDDING score (cosine/margin), not of gating on the deterministic resolver's own intermediate state. A model-free integer ambiguity signal S = 1[famNONE] + 1[opNONE] + 1[opTIE] + 1[noslot] + 1[quant] computed from the resolver's own candidate search can be calibrated on a disjoint split to EXECUTE iff the resolver produced a mechanism and S <= t*. The pre-registered DESIGN satisfiability probe (calibration split only; test split NOT scored) shows this gate is calibration-feasible on all three axes at t*=0: AXIS-PRIMARY coverage 0.860 / pooled_false_accept 0.100 / unknown_precision 1.000; AXIS-ALTLEX 0.912 / 0.100 / 1.000; AXIS-HELDOUT 0.875 / 0.050 / 1.000 -- so the accept branch is genuinely reachable. The pre-registered null is that the same targets are NOT reached on the test split (GATE-NOT-MET), which is the outcome the parent actually observed for embedding gates. Neither the test-split gate values nor the retention bootstrap are measured in DESIGN.",
+  "falsifier": "D-PRIMARY is decisive in BOTH directions. FALSIFIES-SHIP (negative): on the AXIS-PRIMARY test split, pooled_false_accept(t*) > 0.10 OR unknown_precision(t*) < 0.85 OR coverage(t*) < 0.50 -> GATE-NOT-MET; no model-free gate exists at this operating point and resolve() must not ship deterministic-plus-gate. SUPPORTS-SHIP (positive): GATE-MET -> the deterministic resolve()+ambiguity-gate pair clears the safety/coverage operating point. Retention is separately falsifiable: D-ALTLEX/D-HELDOUT = LOST if the paired family-blocked 95% bootstrap upper bound of (deterministic correct - embedding correct) over test applicable goals is <= 0, i.e. the deterministic advantage does not survive the held-out mechanism set or the alternate lexicon; RETAINED if the lower bound > 0; MIXED otherwise. If the gate collapses AND/OR retention is lost, the next step must change architecture rather than re-tune a threshold.",
+  "baselines": [
+    {
+      "id": "B-LEX-ONLY",
+      "description": "Gate-free deterministic resolver: execute iff B-LEX-STRONG produced a mechanism (coverage-maximal, precision-minimal). Shows the incremental value of the ambiguity gate over the resolver alone and is the precision-floor baseline.",
+      "expected_behavior": "Non-degenerate by construction: DESIGN calibration probe shows B-LEX-ONLY executes 49/57 AXIS-PRIMARY calibration applicable and 2/20 calibration out-of-scope, so it is neither always-accept nor always-abstain. Its test-split values are outcomes and are NOT fixed here."
+    },
+    {
+      "id": "A-EMBED-COSINE",
+      "description": "Pinned embedding comparator (research/harness/candidate_resolver.py::EmbeddingArgmaxResolver, model sentence-transformers/all-MiniLM-L6-v2). Used only for the secondary retention checks D-ALTLEX (original 20 fixture intents) and D-HELDOUT (24 mechanically derived held-out intents in the G2-HELDOUT-INTENTS block). Never loads for D-PRIMARY.",
+      "expected_behavior": "Structurally live (parent smoke probe: resolves all 20 verbatim intents with 20 distinct selections). On AXIS-ALTLEX it competes on the same 20 intents; on AXIS-HELDOUT it competes over 24 held-out mechanisms. Its accuracies here are outcomes and are NOT fixed."
+    },
+    {
+      "id": "B-LEXTOK-JACCARD",
+      "description": "Parent-packet continuity null: research/harness/candidate_resolver.py::LexicalOverlapResolver, max token set-Jaccard against the 20 intent strings, never abstains. Reproduces the weak comparator the Director's predecessor mandate replaced.",
+      "expected_behavior": "Near or below chance on the primary set (parent measured 0.5269); reported for continuity only, never used as a decision comparator."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "description": "Null floor: research/harness/candidate_resolver.py::RandomRoleResolver, uniform over the 5 mechanisms whose declared role matches the inferred role, RandomState seed 4242; never abstains.",
+      "expected_behavior": "Chance-level (<= 1/5 = 0.20 conditional on correct role). V8 floor-sanity requires <= 0.35."
+    },
+    {
+      "id": "B-INCUMBENT-KERNEL",
+      "description": "Product baseline measured, not assumed: shipped src/spider/kernel.py::SpiderKernel.resolve over a registry distilled from the 20 exact intent strings with min_confidence=0.8; resolve() requires exact intent-string equality.",
+      "expected_behavior": "Mechanism-identity accuracy = 0.0 on every bank by construction (no goal is a verbatim intent string); resolves all 20 verbatim intents EXECUTABLE (PC-LIVENESS-AND-INTEGRITY)."
+    },
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "description": "Ceiling oracle: research/harness/candidate_resolver.py::InternalIdOracle, returns the true target_mechanism_id. Establishes the fixture/label ceiling.",
+      "expected_behavior": "Mechanism-identity accuracy = 1.0 on AXIS-PRIMARY applicable goals by construction, PROVIDED the fixture/label mapping is intact; an empty or unknown target id drops it below 1.0 -> MEASUREMENT_INVALID (V6)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-LIVENESS-AND-INTEGRITY",
+    "description": "Plumbing positive control with three arithmetically fallible sub-checks, each required 20/20: (i) FIXTURE-UNIQUENESS: create_fixture() has exactly 20 unique mechanism ids and 20 unique intent strings; (ii) INCUMBENT-VERBATIM: SpiderKernel.resolve returns EXECUTABLE at the correct mechanism id for each of the 20 verbatim intents; (iii) RESOLVER-SELF-MATCH: B-LEX-STRONG resolves each of the 20 verbatim intent strings to its own mechanism id.",
+    "expected_behavior": "All three sub-checks 20/20; any value < 20 or a denominator other than 20 is MEASUREMENT_INVALID (V5). The control can genuinely fail on a duplicate/ambiguous fixture (i), a broken registry/loader/threshold (ii), or a lexicon that cannot resolve its own canonical intents (iii)."
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-LABEL",
+    "description": "Instrument null with two arithmetically fallible sub-checks. (i) NC-SHUFFLED-LABEL: the applicable-goal target mechanism ids are permuted by a fixed derangement derived from seed 38180711589 and B-LEX-STRONG selection is credited against the shifted target; must collapse toward chance. (ii) NC-CONSTANT-SIGNAL: the ambiguity signal S is replaced by a constant for every goal, passed through the SAME calibrate-then-evaluate pipeline; a non-collapsed result exposes a broken credit/denominator rule (the RFX-02/RFX-03 class).",
+    "expected_behavior": "NC-SHUFFLED-LABEL selection accuracy <= 0.20 (chance ~ 1/20 = 0.05, allowance for the first-max tie-break). NC-CONSTANT-SIGNAL must yield either GATE-INVALID or an unknown_precision that is undefined/at prevalence, never >= 0.85. Any violation -> MEASUREMENT_INVALID (V10)."
+  },
+  "measurement_validity": [
+    "V1-METRIC-DEFINITION: primary metric is the AXIS-PRIMARY test-split triplet (pooled_false_accept, coverage, unknown_precision) at the calibration-chosen t*. pooled_false_accept = executed out-of-scope / all out-of-scope; coverage = executed applicable / all applicable; unknown_precision = gate-abstained out-of-scope / all gate-abstained goals WITH a resolver mechanism. Goals the resolver cannot resolve carry no candidate mechanism and are a coverage failure, reported separately as unresolved_applicable, not a signal-driven abstention. unknown_precision_inclusive (parent-faithful, includes unresolved) is reported as a secondary diagnostic and is NOT the primary metric. Every denominator must equal the axis applicable/out-of-scope count and be > 0. An abstention is executed=0.",
+    "V2-PRIMARY-SET: AXIS-PRIMARY bound set = the 160-goal bank minus V3 flags. DESIGN probe on the frozen bank: 9 flagged (7 applicable app_004/app_049/app_052/app_073/app_076/app_097/app_100; 2 out-of-scope oos_024/oos_026), so |primary applicable| = 113 >= 80 and |primary out-of-scope| = 38. If |primary applicable| < 80 at EXECUTE -> MEASUREMENT_INVALID. Excluded ids/count/reason logged.",
+    "V3-CONTAM-SCREEN: for every goal compute (a) max token set-Jaccard and (b) max char-trigram Jaccard against EVERY prior authoring surface: the 20 registry intents, all PARAPHRASES/NO_APPLICABLE_TEMPLATES/OOD_PARAPHRASES in the bound research/harness/goal_generator.py, the parent's PRIOR-PARENT-BANK-TEXTS extracted from the hash-bound parent prereg.md, and (for AXIS-HELDOUT) the 160 G1 goal texts. A goal is flagged iff max token-Jaccard >= 0.60 OR max char-trigram Jaccard >= 0.75. More than 20 flags on any axis -> MEASUREMENT_INVALID. The char-trigram representation differs from every arm's mechanism (avoids the parent's coupling critique). DESIGN probe: AXIS-PRIMARY 9 flags reproducing the parent exactly; AXIS-HELDOUT 0 flags.",
+    "V4-AUTHORSHIP-PROVENANCE: prereg.md records the exact authoring instruction for GOAL-BANK-G2, OOS-BANK-G2, LEXICON-G2-HELDOUT and LEXICON-G1-ALT, and hash-commits the raw outputs in CANONICAL-HASHES. The gate is operational: each extracted block's canonical JSON sha256 must equal the recorded value; each authoring instruction must contain NONE of the 20 registry intent strings (exact-substring check) and have max token-Jaccard < 0.60 against every prior surface; each raw bank output must contain no exact intent string. Any mismatch -> MEASUREMENT_INVALID. GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1 are inherited verbatim from the hash-bound parent prereg.md. RESIDUAL LIMITATION (disclosed): a fresh-context author cannot be cryptographically proven not to hold common intent strings in pretrained latent knowledge; the no-file/no-tool instruction and the contamination screen bound but do not eliminate this.",
+    "V5-PC: PC-LIVENESS-AND-INTEGRITY sub-checks (i) 20/20 fixture uniqueness, (ii) 20/20 incumbent verbatim resolution, (iii) 20/20 B-LEX-STRONG self-match on the 20 verbatim intents; else MEASUREMENT_INVALID.",
+    "V6-ORACLE-CEILING: B-INTERNAL-ID-ORACLE must score 1.0 on the AXIS-PRIMARY applicable primary set; else MEASUREMENT_INVALID.",
+    "V7-TREATMENT-LIVENESS: the T-LEX-AMBIG decision vector must vary on AXIS-PRIMARY (not constant execute and not constant abstain): executed applicable count strictly between 0 and |primary applicable|. A structurally inert treatment is MEASUREMENT_INVALID; a merely weak treatment is a valid negative.",
+    "V8-FLOOR-SANITY: B-RANDOM-ROLE selection accuracy <= 0.35 on the AXIS-PRIMARY applicable primary set; else MEASUREMENT_INVALID.",
+    "V9-NON-TAUTOLOGY: B-LEX-STRONG and the T-LEX-AMBIG gate must be pure-string functions whose code path does not import, instantiate or query any sentence-embedding model (static inspection of the frozen runner: the tokens 'sentence_transformers', 'torch' and 'EmbeddingArgmaxResolver' must not appear inside the primary decision path, which is reached before any optional embedding import). The comparator must be non-degenerate with respect to the treatment: B-LEX-ONLY's execution vector on the primary set differs from T-LEX-AMBIG's on >= 1 goal. A comparator that is a reparameterization of the treatment IS a violation.",
+    "V10-NC: NC-SHUFFLED-LABEL accuracy <= 0.20 AND NC-CONSTANT-SIGNAL does not reach unknown_precision >= 0.85 (must be GATE-INVALID, None, or <= prevalence); else MEASUREMENT_INVALID. Both run through the same pipeline as the treatment.",
+    "V11-BOOTSTRAP-SEED: retention uncertainty uses paired family-blocked bootstrap (B = 10000, alpha = 0.05, blocking unit = resource family, 5 families per axis) with numpy seed 38180711589 % 2**32 = 3820973221 called immediately before it. EXECUTE must record the actual call arguments and verify n_resamples == 10000, alpha == 0.05 and 5 families; else the affected retention decision is MEASUREMENT_INVALID.",
+    "V12-FREEZE-BINDING: three-part operational binder. (A) sha256(prereg.md) equals freeze.json.hashes['prereg.md']. (B) the running orchestration source (__file__) equals the FROZEN-RUNNER block inside the hash-bound prereg.md (normalized only for a trailing newline and CRLF); its sha256 is recorded in provenance.json. (C) sha256 of every file in spec.freeze_artifacts equals freeze.json.artifact_hashes[rel]. Any mismatch -> MEASUREMENT_INVALID; a missing/unreadable freeze.json -> BLOCKED. The embedded bank/lexicon/intent blocks are separately re-verified against the CANONICAL-HASHES block (V4).",
+    "V13-GATE-VALIDITY: the calibration split must be non-empty in both classes on each axis and the integer signal S must be finite for every calibration goal; otherwise D-PRIMARY is GATE-INVALID (a bounded negative for the gate sub-question only; it does NOT make the packet MEASUREMENT_INVALID and does NOT affect the retention decisions)."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-GATE-TRIPLET-PRIMARY",
+    "decisions": {
+      "D-PRIMARY": {
+        "role": "PRIMARY, claim-bearing, model-free",
+        "definition": "T-LEX-AMBIG on AXIS-PRIMARY: EXECUTE iff B-LEX-STRONG produced a mechanism and S <= t*, with t* calibrated on the disjoint calibration split by the objective-direct rule -- the smallest observed calibration S with cal pooled_false_accept <= 0.10 AND cal unknown_precision >= 0.85; if none, t* = argmin |cal pooled_false_accept - 0.10| subject to cal unknown_precision >= 0.85; if none, t* = max(S)+1 (abstain-all). Report the test-split triplet at t* plus unknown_precision_inclusive and unresolved_applicable. No model and no network are used.",
+        "outcomes": {
+          "GATE-MET": "All invalidating V-gates PASS AND test pooled_false_accept(t*) <= 0.10 AND test unknown_precision(t*) is defined and >= 0.85 AND test coverage(t*) >= 0.50 -> a model-free ambiguity gate reaches the operating point.",
+          "GATE-NOT-MET": "All such gates PASS AND any of the three targets is missed; report the attained triplet, the whole risk-coverage frontier and both precision semantics.",
+          "GATE-INVALID": "the calibration split lacks a class or S is non-finite (V13)."
+        }
+      },
+      "D-ALTLEX": {
+        "role": "SECONDARY generalization, non-gating for D-PRIMARY",
+        "definition": "Paired per-goal difference (B-LEX-STRONG correct - A-EMBED-COSINE correct) over AXIS-ALTLEX test applicable goals, family-blocked 95% bootstrap, B = 10000, alpha = 0.05, seed 3820973221. An abstention scores 0.",
+        "outcomes": {
+          "RETAINED": "lower bound > 0 -> the deterministic advantage survives the independently curated alternate lexicon.",
+          "LOST": "upper bound <= 0.",
+          "MIXED": "the CI contains 0.",
+          "BLOCKED": "the embedding stack cannot load; recorded, does not invalidate D-PRIMARY."
+        }
+      },
+      "D-HELDOUT": {
+        "role": "SECONDARY generalization, non-gating for D-PRIMARY",
+        "definition": "Paired per-goal difference (B-LEX-STRONG correct - A-EMBED-COSINE correct) over AXIS-HELDOUT test applicable goals, family-blocked 95% bootstrap, B = 10000, alpha = 0.05, seed 3820973221, using the 24 mechanically derived held-out intents.",
+        "outcomes": {
+          "RETAINED": "lower bound > 0 -> the deterministic advantage survives the held-out mechanism set.",
+          "LOST": "upper bound <= 0.",
+          "MIXED": "the CI contains 0.",
+          "BLOCKED": "the embedding stack cannot load; recorded, does not invalidate D-PRIMARY."
+        }
+      }
+    },
+    "overall_outcome_mapping": "status = MEASUREMENT_INVALID with outcome = INCONCLUSIVE if any V-gate that invalidates D-PRIMARY fails or the frozen bank/prereg is unusable; status = BLOCKED with outcome = INCONCLUSIVE only if the frozen files are missing/unreadable (a missing embedding model does NOT block: D-PRIMARY is model-free and D-ALTLEX/D-HELDOUT are then BLOCKED). Otherwise status = COMPLETE with outcome = D-PRIMARY. D-ALTLEX/D-HELDOUT are recorded independently and MUST NOT be collapsed into D-PRIMARY.",
+    "report": [
+      "M-GATE-TRIPLET-PRIMARY (t*, coverage, pooled_false_accept, unknown_precision, unknown_precision_inclusive, class)",
+      "M-GATE-TRIPLET-ALTLEX (secondary, same fields)",
+      "M-GATE-TRIPLET-HELDOUT (secondary, same fields)",
+      "M-GATE-TREATMENT-VECTOR (executed/abstained counts; unresolved_applicable)",
+      "M-DET-ACC-PRIMARY (B-LEX-STRONG selection accuracy, numerator/denominator)",
+      "M-DET-ACC-ALTLEX / M-DET-ACC-HELDOUT (secondary)",
+      "M-EMB-ACC-ALTLEX / M-EMB-ACC-HELDOUT (secondary)",
+      "M-PAIRED-DIFF-DET-MINUS-EMB-ALTLEX (obs, lower_ci, upper_ci)",
+      "M-PAIRED-DIFF-DET-MINUS-EMB-HELDOUT (obs, lower_ci, upper_ci)",
+      "M-MECH-ACC-RANDOM / M-MECH-ACC-INCUMBENT / M-MECH-ACC-ORACLE",
+      "M-PC-LIVENESS-AND-INTEGRITY",
+      "M-NC-SHUFFLED / M-NC-CONSTANT-SIGNAL",
+      "M-CONTROL-EXEC-ALL / M-CONTROL-ABSTAIN-ALL / M-CONTROL-RANDOM-GATE",
+      "M-CONTAM-MAX-JACCARD / M-N-CONTAM-FLAGGED",
+      "M-N-PRIMARY-APPLICABLE / M-N-PRIMARY-OOS",
+      "M-NON-TAUTOLOGY (embedder references in the primary path; decision disagreement count)"
+    ],
+    "precedence": "MEASUREMENT_INVALID > GATE-INVALID > GATE-NOT-MET > GATE-MET (D-PRIMARY); retention precedence LOST > MIXED > RETAINED > BLOCKED.",
+    "reachability": "Both D-PRIMARY branches are arithmetically reachable and demonstrated. (a) |primary applicable| = 113 >= 80 and |primary out-of-scope| = 38 on the frozen bank (DESIGN probe). (b) The pre-registered calibration-only satisfiability probe shows T-LEX-AMBIG is CAL-FEASIBLE at t*=0 on all three axes: AXIS-PRIMARY coverage 0.860 / pooled_false_accept 0.100 / unknown_precision 1.000 (abstained-resolved 7, executed 51, unresolved_applicable 8); AXIS-ALTLEX 0.912 / 0.100 / 1.000; AXIS-HELDOUT 0.875 / 0.050 / 1.000. So the accept region is non-empty on the calibration split. (c) The GATE-NOT-MET region is also reachable: the test split has different phrasings (disjoint operation verbs), the parent's embedding gate collapsed here, and the AXIS-PRIMARY calibration set itself contains 2 executed out-of-scope goals and 8 unresolved applicable goals, i.e. the signal is not a perfect separator by construction; a test-split miss on any of the three targets yields GATE-NOT-MET. (d) D-ALTLEX/D-HELDOUT are reachable in all four outcome classes: B-LEX-STRONG is a genuine competitor to A-EMBED-COSINE, the held-out intents are derived mechanically from LEXICON-G2-HELDOUT and are never tuned against either arm's output, and the CI can be strictly positive, strictly negative or straddle 0. The test-split gate triplet and the retention bootstrap are outcomes and are NOT measured in DESIGN.",
+    "validity_threat": "The primary unknown_precision counts signal-driven abstentions and EXCLUDES goals the resolver cannot structurally resolve (they are accounted as unresolved_applicable/coverage). The parent-faithful inclusive unknown_precision (secondary M-GATE-TRIPLET-* field unknown_precision_inclusive) is arithmetically lower on the DESIGN calibration split (0.69 / 0.78 / 0.79 at t*=0) because lexically ambiguous but applicable goals (e.g. 'note' posts-vs-comments, 'photo collection' photos-vs-albums) inflate the abstained-applicable count. This redefinition is pre-registered and justified (the mandate attributes abstention to the resolver's OWN signal), and the inclusive value is reported alongside so the reader can apply either standard; it is NOT used to flip D-PRIMARY."
+  },
+  "product_consequence_positive": "If D-PRIMARY = GATE-MET, a bank-blind, fully inspectable, zero-model-call deterministic resolver plus an integer ambiguity gate reaches the safe operating point pooled_false_accept <= 0.10 / coverage >= 0.50 / unknown_precision >= 0.85: resolve() is unblocked to ship the deterministic path with the embedding path retired, removing a model dependency from the resolve() hot path (latency, cost, and supply risk) and licensing EXPERIMENTAL for the deterministic-resolver-plus-gate sub-mechanism. If in addition D-ALTLEX and D-HELDOUT are RETAINED, the deterministic advantage is shown to generalize beyond the original five families and the original lexicon, which is the strongest form this bounded packet can support. No claim is promoted above EXPERIMENTAL.",
+  "product_consequence_negative": "If D-PRIMARY = GATE-NOT-MET, no model-free gate reaches the operating point on this fixture and resolve() must remain un-shipped for unseen goals; the next step is an architectural change (structured slot/parameter reasoning, or a retrieval model trained on independently authored goals) rather than another threshold re-tune. If D-ALTLEX or D-HELDOUT = LOST/MIXED, the deterministic selection advantage must not be cited as general, and the resolve() alias space is known to be bank- or lexicon-specific. Either negative keeps C-SEMANTIC-RESOLVE at HYPOTHESIS and explicitly forbids citing the parent's 97/113 or 0.3978 numbers as load-bearing.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": "Secondary retention checks: one stdout HTTPS download of the pinned sentence-transformers model from huggingface.co (cached after first fetch), plus a one-time pip bootstrap of numpy/scipy/scikit-learn/torch/sentence-transformers if absent. The claim-bearing D-PRIMARY path makes zero network requests and zero model calls. A bootstrap/model failure degrades D-ALTLEX/D-HELDOUT to BLOCKED, not the packet.",
+    "estimated_wall_clock_seconds": 360,
+    "compute_notes": "CPU-only. D-PRIMARY is stdlib-only (tokenisation, dictionary spans, integer arithmetic) over 320 goal texts. Secondary retention arms encode ~24 held-out intents + 20 fixture intents and ~120 goal texts once, then one 10000-resample family-blocked bootstrap per retention axis. No LLM, no browser, no server."
+  },
+  "expected_information_gain": "High and decision-relevant in both directions. The unbounded question left by the parent is precisely whether the deterministic resolver's OWN ambiguity signal can supply a safe abstention decision; the parent only showed that embedding-score gates cannot. This packet pre-registers a model-free signal and demonstrates calibration reachability, then tests it on a disjoint test split while also probing generalization to a held-out mechanism set and an independently curated lexicon. GATE-MET retires a model-dependent resolve() component and unblocks a deterministic shipped path; GATE-NOT-MET is the clean bounded negative the Director's stop trigger names and redirects the lane to structured/retrieval resolution. Either branch changes the C-SEMANTIC-RESOLVE product decision, and neither is a threshold re-tune of the parent.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both D-PRIMARY branches are arithmetically reachable and the accept region is non-empty. Frozen-bank counts: primary applicable 113 (>= 80), primary out-of-scope 38. The pre-registered calibration-only satisfiability probe (run through the frozen runner with --mechanics-only; test split NOT scored) shows T-LEX-AMBIG CAL-FEASIBLE at t*=0 on all three axes: AXIS-PRIMARY coverage 0.860 / pooled_false_accept 0.100 / unknown_precision 1.000; AXIS-ALTLEX 0.912 / 0.100 / 1.000; AXIS-HELDOUT 0.875 / 0.050 / 1.000. GATE-NOT-MET is also reachable: the calibration split already contains 2 executed out-of-scope AXIS-PRIMARY goals and 8 unresolved applicable goals, test phrasings use disjoint operation verbs, and the parent's embedding gate collapsed to coverage 0.0 here. D-ALTLEX/D-HELDOUT can be RETAINED/LOST/MIXED/BLOCKED. Test-split metrics and retention bootstrap are outcomes and are NOT measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md sections 7 (gate) and 9 (decision rules)",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block --mechanics-only output (calibration-only satisfiability probe)",
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#decision_rule.reachability"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "The claim-bearing D-PRIMARY path needs only the Python standard library and the frozen files: the runner is embedded verbatim in the hash-bound prereg.md, and the banks/lexicons/intents are embedded verbatim and hash-committed in CANONICAL-HASHES. The two inherited G1 blocks are re-verified against the hash-bound parent prereg.md. The optional retention arms reuse the pre-existing research/harness/candidate_resolver.py and the pinned sentence-transformers stack recorded by this lane; if unavailable the retention decisions degrade to BLOCKED and D-PRIMARY still completes. All bound artifacts (research/harness/*.py, src/spider/*.py, parent prereg.md) exist and are tracked.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md CANONICAL-HASHES and FROZEN-RUNNER blocks",
+        "research/harness/candidate_resolver.py, research/harness/goal_generator.py, research/harness/experiment_runner.py",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS / GOAL BANK / OOS BANK / LEXICON sources)",
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json (sentence-transformers/all-MiniLM-L6-v2 pins)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and comparators are genuinely distinct functions. T-LEX-AMBIG is the deterministic resolver plus an integer ambiguity gate; B-LEX-ONLY is the same resolver with no gate (V9 requires their execution vectors to differ on >= 1 primary goal); A-EMBED-COSINE is a dense-embedding argmax that loads a model (V9 requires the primary path to reference no embedder). The frozen bank is not lexically trivial: on the AXIS-PRIMARY calibration split B-LEX-ONLY executes 49/57 applicable and 2/20 out-of-scope, and 8 applicable goals are structurally unresolved, i.e. the arms are neither constant-execute nor constant-abstain and share no trivial reparameterization. Arm accuracies and the gate triplet are outcomes and are not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#baselines",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver, ::InternalIdOracle, ::RandomRoleResolver, ::LexicalOverlapResolver",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block (B-LEX-ONLY calibration counts)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete failure mode under the same implementation. PC-LIVENESS-AND-INTEGRITY fails on a duplicate/ambiguous fixture (i), a broken registry/loader/threshold (ii) or a lexicon that cannot resolve its own intents (iii). NC-SHUFFLED-LABEL fails if deterministic selection tracks shifted labels; NC-CONSTANT-SIGNAL fails if a constant signal reaches unknown_precision >= 0.85 (a broken credit/denominator). CTRL-EXEC-ALL and CTRL-ABSTAIN-ALL bound the gate triplet from both extremes; CTRL-RANDOM-GATE abstains the same number of goals at random and must NOT reach the treatment's unknown_precision, which is the matched-coverage sensitivity check. V2/V3 fail on a degenerate primary set or > 20 flags; V5-V13 fail on their named states. V3 is non-vacuous (9 AXIS-PRIMARY flags reproduce the parent; AXIS-HELDOUT 0).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#positive_control, #null_control",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block (CTRL-* and NC-* arms)",
+        "DESIGN probe: 9 AXIS-PRIMARY flags (7 applicable, 2 out-of-scope), reproducing the parent"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-LEX-AMBIG is proven live and non-degenerate on the frozen bank by the calibration-only DESIGN probe: on AXIS-PRIMARY it executes 51 calibration goals (49 applicable + 2 out-of-scope) and abstains on 28 (7 resolved out-of-scope via the signal + 8 unresolved applicable + 13 unresolved out-of-scope), so its decision vector is neither constant-execute nor constant-abstain and V7 holds (0 < executed_applicable < 113). The optional A-EMBED-COSINE retention comparator reuses the parent's EmbeddingArgmaxResolver, whose liveness on the 20 verbatim intents was verified by the parent smoke probe; it is not required for D-PRIMARY. No bank goal is scored with a model in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block --mechanics-only output (T-LEX-AMBIG calibration vector)",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility.treatment_liveness (parent embedding smoke probe)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change interpretation is listed in freeze_artifacts and hashed into freeze.json.artifact_hashes: the four research/harness modules (comparator arms, the intent/prior-template registry used by the contamination screen, the HTTP substrate, and the bootstrap/metric estimators) and the shipped src/spider kernel/registry/models/package init, plus the parent prereg.md that supplies the inherited GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1 and PRIOR-PARENT-BANK-TEXTS verbatim. The blind-authored G2 banks, both alternate lexicons and the mechanically derived held-out intents have no mutable file dependency: they are embedded verbatim in prereg.md and bound by freeze.json.hashes['prereg.md'], with per-block canonical sha256 in the CANONICAL-HASHES block. The resolver, gate and orchestration script are embedded verbatim in the FROZEN-RUNNER block (runner sha256 recorded in provenance.json). No unbound mutable code, task bank, dataset or fixture remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md sections 5 (frozen blocks) and 10-11 (runner and CANONICAL-HASHES)"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/harness/candidate_resolver.py",
+    "research/harness/goal_generator.py",
+    "research/harness/http_server.py",
+    "research/harness/experiment_runner.py",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "src/spider/__init__.py"
+  ]
+}

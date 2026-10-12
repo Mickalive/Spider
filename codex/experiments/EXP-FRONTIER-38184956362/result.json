@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38184956362",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "experiment_id": "EXP-FRONTIER-38184956362",
+    "decision_rule_branch": "G6 (FALSIFIES): >=1 eligible DEEP-admitting engine but fewer than MIN_ENGINES=2 distinct engines with discovery_reachable_fraction >= THRESHOLD=0.50; engine-stratified bounded negative",
+    "decision_reason": "fewer than 2 engines reach 0.5: none over 3 DEEP-admitting engine(s), limited=[] (engine-stratified bounded negative)",
+    "q1_census": {
+      "n_deep_discovered": 556,
+      "n_deep_fetched": 556,
+      "n_deep_with_controls": 208,
+      "census_complete": true,
+      "per_host": {
+        "doc.rust-lang.org": {"engine": "mdBook", "deep_discovered": 220, "deep_fetched": 220, "deep_with_controls": 13},
+        "docs.pytest.org": {"engine": "Sphinx-RTD", "deep_discovered": 160, "deep_fetched": 160, "deep_with_controls": 159},
+        "quotes.toscrape.com": {"engine": "custom", "deep_discovered": 99, "deep_fetched": 99, "deep_with_controls": 0},
+        "docs.readthedocs.io": {"engine": "Sphinx-RTD", "deep_discovered": 36, "deep_fetched": 36, "deep_with_controls": 28},
+        "jekyllrb.com": {"engine": "Jekyll", "deep_discovered": 24, "deep_fetched": 24, "deep_with_controls": 0},
+        "pandas.pydata.org": {"engine": "Sphinx", "deep_discovered": 9, "deep_fetched": 9, "deep_with_controls": 8},
+        "react.dev": {"engine": "Docusaurus", "deep_discovered": 8, "deep_fetched": 8, "deep_with_controls": 0},
+        "other 13 hosts": {"deep_discovered": 0, "deep_fetched": 0, "deep_with_controls": 0}
+      }
+    },
+    "q2_discovery_reachable_fraction": {
+      "definition": "fraction of live admitted DEEP (hop 3..6) state-carrying items reachable in <=K=3 fresh-agent GETs via ANY of the five frozen site-native discovery channels",
+      "admitted_items": 208,
+      "live_items": 208,
+      "dead_items": 0,
+      "reachable_items": 0,
+      "overall_fraction": 0.0,
+      "per_engine_fraction": {
+        "mdBook": 0.0,
+        "Sphinx": 0.0,
+        "Sphinx-RTD": 0.0
+      },
+      "per_channel_membership_ledger": {
+        "ROBOTS_SITEMAP": {"member_items": 0, "charged_get_cost": 3},
+        "SITEMAP_XML": {"member_items": 0, "charged_get_cost": 2},
+        "ON_SITE_SEARCH": {"member_items": 0, "charged_get_cost": 3, "probe_status_note": "all 208 probes returned HTTP 200; result pages contain no static links to the queried item (JS-rendered results)"},
+        "RSS_ATOM": {"member_items": 0, "charged_get_cost": 3},
+        "JSON_LD": {"member_items": 0, "charged_get_cost": 2}
+      },
+      "zero_admission_channels_disclosed": ["ROBOTS_SITEMAP", "SITEMAP_XML", "ON_SITE_SEARCH", "RSS_ATOM", "JSON_LD"]
+    },
+    "q3_materiality": {
+      "threshold": 0.5,
+      "min_engines": 2,
+      "engines_at_or_above_threshold": [],
+      "engines_limited": [],
+      "engines_with_any_deep": ["mdBook", "Sphinx", "Sphinx-RTD"],
+      "engines_with_zero_deep": ["Docusaurus", "GNU-web", "GitBook", "GitHubDocs", "Hugo", "Hugo-k8s", "Jekyll", "MDN-Yari", "MediaWiki", "WordPress", "custom", "phpBB"]
+    },
+    "pool_engines_census": {
+      "Docusaurus": 0, "GNU-web": 0, "GitBook": 0, "GitHubDocs": 0, "Hugo": 0, "Hugo-k8s": 0,
+      "Jekyll": 0, "MDN-Yari": 0, "MediaWiki": 0, "WordPress": 0, "custom": 0, "phpBB": 0,
+      "Sphinx": 8, "Sphinx-RTD": 187, "mdBook": 13
+    },
+    "host_census": {
+      "blog.wordpress.org": 0, "developer.mozilla.org": 0, "doc.rust-lang.org": 13, "docs.gitbook.com": 0,
+      "docs.github.com": 0, "docs.pytest.org": 159, "docs.python.org": 0, "docs.readthedocs.io": 28,
+      "docusaurus.io": 0, "en.wikipedia.org": 0, "forums.gentoo.org": 0, "gohugo.io": 0, "jekyllrb.com": 0,
+      "kubernetes.io": 0, "numpy.org": 0, "pandas.pydata.org": 8, "quotes.toscrape.com": 0, "react.dev": 0,
+      "www.gnu.org": 0, "www.mediawiki.org": 0
+    },
+    "seed_error_hosts": [],
+    "per_engine": {
+      "mdBook": {"hosts": ["doc.rust-lang.org"], "n_deep": 13, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": 0.0, "ci95": [0.0, 0.24705263800047095], "per_channel": {"ROBOTS_SITEMAP": 0.0, "SITEMAP_XML": 0.0, "ON_SITE_SEARCH": 0.0, "RSS_ATOM": 0.0, "JSON_LD": 0.0}, "hop_distribution": {"3": 13}},
+      "Sphinx": {"hosts": ["pandas.pydata.org"], "n_deep": 8, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": 0.0, "ci95": [0.0, 0.36941664755281933], "per_channel": {"ROBOTS_SITEMAP": 0.0, "SITEMAP_XML": 0.0, "ON_SITE_SEARCH": 0.0, "RSS_ATOM": 0.0, "JSON_LD": 0.0}, "hop_distribution": {"3": 8}},
+      "Sphinx-RTD": {"hosts": ["docs.pytest.org", "docs.readthedocs.io"], "n_deep": 187, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": 0.0, "ci95": [0.0, 0.01953333128693524], "per_channel": {"ROBOTS_SITEMAP": 0.0, "SITEMAP_XML": 0.0, "ON_SITE_SEARCH": 0.0, "RSS_ATOM": 0.0, "JSON_LD": 0.0}, "hop_distribution": {"3": 88, "4": 99}},
+      "Docusaurus": {"hosts": ["docusaurus.io", "react.dev"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "GNU-web": {"hosts": ["www.gnu.org"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "GitBook": {"hosts": ["docs.gitbook.com"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "GitHubDocs": {"hosts": ["docs.github.com"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "Hugo": {"hosts": ["gohugo.io"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "Hugo-k8s": {"hosts": ["kubernetes.io"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "Jekyll": {"hosts": ["jekyllrb.com"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "MDN-Yari": {"hosts": ["developer.mozilla.org"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "MediaWiki": {"hosts": ["en.wikipedia.org", "www.mediawiki.org"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "WordPress": {"hosts": ["blog.wordpress.org"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "custom": {"hosts": ["quotes.toscrape.com"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}},
+      "phpBB": {"hosts": ["forums.gentoo.org"], "n_deep": 0, "n_dead_excluded": 0, "limited": false, "reachable": 0, "fraction": null, "ci95": null, "per_channel": {"ROBOTS_SITEMAP": null, "SITEMAP_XML": null, "ON_SITE_SEARCH": null, "RSS_ATOM": null, "JSON_LD": null}, "hop_distribution": {}}
+    },
+    "baseline_B_SAME_HOST_BFS_PATH_COST": {
+      "definition": "per admitted DEEP item, the 1-based BFS discovery/fetch ordinal from the bound frame (<=250); the a-priori acquisition path the O(1) discovery claim must beat",
+      "admitted_items": 208,
+      "ordinal_min": 31,
+      "ordinal_max": 250,
+      "ordinal_mean": 166.0,
+      "items_reached_by_bfs_within_budget": 208,
+      "items_reached_by_discovery_within_charged_K3": 0,
+      "contrast": "discovery reached 0/208 (0.0%) at charged cost <=K=3 vs same-host BFS path cost which discovered 208/208 within the bound frame (ordinal <=250, mean 166.0)"
+    },
+    "baseline_B_PERSISTED_PATH_REACQUISITION": "inherited context (EXP-FRONTIER-37950626378 RACQ_PATH ~hop+1 fresh GETs); NOT re-measured in this packet",
+    "baseline_B_DIRECT_URL_REPLAY": "inherited context (EXP-FRONTIER-37950626378 RACQ_URL = 1 fresh GET); NOT re-measured in this packet",
+    "charged_ledger": {
+      "protocol_charged_costs": {"ROBOTS_SITEMAP": 3, "SITEMAP_XML": 2, "ON_SITE_SEARCH": 3, "RSS_ATOM": 3, "JSON_LD": 2},
+      "item_liveness_get_charged_per_channel": 1,
+      "actual_network_gets": {"inventory_channel_documents": 108, "census_deep_fetches": 556, "on_site_search_probes": 208, "item_liveness_gets": 208, "synthetic_null_probes": 3, "total_approx": 1083},
+      "all_charged_costs_within_K": true
+    }
+  },
+  "controls": {
+    "V1_CODE_IDENTITY": {"expected": "sha256(reconstructed module C) == b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f", "observed": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f; 3 repairs present (controls_seen None-guard x2, live key, census_deep + --frame + seed-matching index child)", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38184956362/prereg.md section 7; execute_module.py sha256 b9b2efdc..."},
+    "V4_FRAME_FIDELITY": {"expected": "frame sha256 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747; 20 hosts; 556 DEEP items", "observed": "sha256 2afe65b6... = 2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747; 20 hosts; 556 DEEP items; seed_error rows 0", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (bound frame)"},
+    "NC_BFS_CALIBRATION_FLAT": {"expected": "R_hop3_over_hop1 <= 3.0", "observed": "R=2.0 (p1_requests=2, p3_requests=4)", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38184956362/raw/controls.jsonl"},
+    "NC_BFS_CALIBRATION_GROWING": {"expected": "R_hop3_over_hop1 > 3.0", "observed": "R=6.5 (hop1_requests=2, first_hop3_requests=13, nodes_fetched=250)", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38184956362/raw/controls.jsonl"},
+    "PC_PARSER_CANARY_sitemap_xml": {"expected": "exact URL set ['https://example.com/a']", "observed": "['https://example.com/a']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_sitemap_index": {"expected": "index -> child ['https://example.com/s1.xml']", "observed": "child_sitemaps=['https://example.com/s1.xml'], is_index=true", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_sitemap_txt": {"expected": "exact URL set [a, b]", "observed": "['https://example.com/a', 'https://example.com/b']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_robots": {"expected": "FIRST Sitemap: line", "observed": "['https://example.com/s.xml']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_feed_rss": {"expected": "first item link ['https://example.com/p1']", "observed": "['https://example.com/p1']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_feed_atom": {"expected": "first entry link ['https://example.com/p2']", "observed": "['https://example.com/p2']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_PARSER_CANARY_jsonld": {"expected": "seed ld+json URL ['https://example.com/p3']", "observed": "['https://example.com/p3']", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_REACHABILITY_LISTED_LIVE": {"expected": "listed+live items reachable (3/3 True)", "observed": "sitemap_listed_live=True, jsonld_listed_live=True, search_listed_live=True (3/3)", "pass": true, "evidence": "raw/controls.jsonl; drives the actual evaluate_items scoring path"},
+    "NC_REACHABILITY_UNLISTED_OR_DEAD": {"expected": "unlisted-live and listed-404 NOT reachable", "observed": "unlisted_live_reachable=False, dead_reachable=False (dead_live_status=404)", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC_ENV": {"expected": "runtime record", "observed": "Python 3.12.15, stdlib urllib, ssl default True", "pass": true, "evidence": "raw/controls.jsonl"},
+    "NC_SYNTHETIC_UNREACHABLE_ITEM_direct": {"expected": "synthetic URL on frozen pool -> real HTTP status >= 400", "observed": "404 on doc.rust-lang.org, docs.python.org, numpy.org", "pass": true, "evidence": "raw/controls.jsonl"},
+    "PC-CENSUS-DEEP-FETCH": {"expected": "n_deep_fetched == n_deep_discovered per non-seed-error host; n_deep_with_controls >= 1 on >= 2 engines", "observed": "556/556 fetched on all 20 hosts; with_controls: mdBook 13, Sphinx-RTD 187, Sphinx 8 -> 3 engines >= 2", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl"},
+    "PC-SEED-LIVENESS": {"expected": "20/20 frozen seeds HTTP 200 at inventory gate", "observed": "20/20 HTTP 200; seed_error_hosts=[]", "pass": true, "evidence": "research/experiments/EXP-FRONTIER-38184956362/raw/channel_docs.jsonl"}
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/execute_module.py", "sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f", "role": "code", "note": "reconstructed frozen module (V1 identity gate PASS)"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/controls.jsonl", "sha256": "fddd9e429d27792527e0e580585270a875fc1e0ebc286edb109d31db5cd99672", "role": "raw", "note": "15/15 control rows PASS"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/channel_docs.jsonl", "sha256": "4ed67c117687d3eb75bb2c2dd97379b18ffea726232eaecf33ebaa2e875f1bb0", "role": "raw", "note": "per-host channel documents (inventory gate)"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl", "sha256": "8b7a5f919143ac1ae3c0a91c282d848a83c493656524bb0583e360225c38b40f", "role": "raw", "note": "Q1 census rows: discovered/fetched/with-controls separation per host"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl", "sha256": "95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45", "role": "raw", "note": "censused frame (bound frame + census backfill of controls_seen)"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl", "sha256": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5", "role": "raw", "note": "208 admitted DEEP items with per-channel membership + liveness"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json", "sha256": "d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d", "role": "derived", "note": "frozen compute_metrics output + decision"},
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl", "sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747", "role": "fixture", "note": "bound Q1 frame (frozen artifact)"},
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/execute_module.py", "sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a", "role": "fixture", "note": "bound base module (frozen artifact)"}
+  ],
+  "observations": [
+    "OBS-1 gate record: --stage controls ran 15/15 rows PASS with exit 0 (raw/controls.jsonl); --stage inventory ran 20/20 hosts with all seed fetches HTTP 200 (raw/channel_docs.jsonl); --stage structural --frame consumed the bound frame (20 hosts, 556 DEEP items, sha256 2afe65b6...) and fetched the full census; --stage discovery ran to exit 0 and printed 'DECISION FALSIFIES fewer than 2 engines reach 0.5: none over 3 DEEP-admitting engine(s), limited=[]'. All frozen gates V1..V5 passed.",
+    "OBS-2 Q1 census: 556 discovered DEEP (hop 3..6) items were each fetched once; 208 (37.4%) carry >= 1 named <input>/<select>. Per engine: mdBook (doc.rust-lang.org) 13/220, Sphinx-RTD (docs.pytest.org 159/160, docs.readthedocs.io 28/36) 187/196, Sphinx (pandas.pydata.org) 8/9. The remaining 348 discovered DEEP items carry no named controls; 12 of 15 engine classes host zero DEEP state-carrying items on this frame.",
+    "OBS-3 Q2 evaluation: all 208 admitted items returned HTTP 200 on the fresh liveness GET (0 dead), and none (0/208) is a member of any of the five frozen channel documents. Per-engine discovery-reachable fraction: mdBook 0.0 (CI95 [0.0, 0.247]), Sphinx 0.0 (CI95 [0.0, 0.369]), Sphinx-RTD 0.0 (CI95 [0.0, 0.0195]).",
+    "OBS-4 ON_SITE_SEARCH: all 208 slug-query probes returned HTTP 200, and every result page contained no static <a> link matching the queried item URL (JS-rendered search results).",
+    "OBS-5 Channel documents on the four DEEP-admitting hosts: doc.rust-lang.org robots.txt -> sitemap.txt listing 3 URLs (beta/, nightly/, stable/ roots); /sitemap.xml 404 and /sitemap_index.xml 404; no feed link; no JSON-LD URLs. docs.pytest.org /sitemap.xml (and robots -> same) lists 15 version-root URLs (en/4.6.x ... en/9.0.x, en/latest, en/stable) and no deep pages. docs.readthedocs.io sitemap documents 1 loc (https://docs.readthedocs.com/ and https://docs.readthedocs.com/platform/stable/). pandas.pydata.org has no robots Sitemap lines and /sitemap.xml + /sitemap_index.xml both 404; only a GET search form (action search.html, input q).",
+    "OBS-6 Independent recomputation (outside the frozen module) of item membership under the frozen norm_eq semantics matches the module output for all 208 items; even a V7-relaxed cross-host path comparison finds 0 items path-equivalent to any channel URL.",
+    "OBS-7 No engine is LIMITED: n_dead_excluded=0 for every engine (DEAD_LIMIT 10% not approached). engines_with_zero_deep (12) and engines_limited ([]) are disclosed in metrics.",
+    "OBS-8 Actual network GETs: inventory 108 + census 556 + ON_SITE_SEARCH probes 208 + item liveness 208 + synthetic-null 3 = 1083 total (approx). Charged protocol costs per channel (3,2,3,3,2) are all <= K=3; the item liveness GET is charged per channel; every redirect leg counted."
+  ],
+  "validity_notes": [
+    "VN-1 The measurement transaction is valid: all frozen gates (V1 code identity, V2 controls 15/15, V3 inventory 20/20 seeds HTTP 200, V4 frame fidelity 20 hosts/556 items/hash match, V5 census completeness 556/556) passed; status=COMPLETE. The FALSIFIES is a bounded scientific negative produced by the frozen decision rule (G6), NOT an infrastructure or measurement failure.",
+    "VN-2 The frozen entry-point executability defect class (parent AUDIT-VF-05: TypeError on controls_seen=None, KeyError 'live') is closed: the reconstructed module executed --stage controls/inventory/structural/discovery to completion (exit 0) on the real pool, and V1 bound the executed code identity.",
+    "VN-3 Construct degeneracy (disclosed in prereg section 14.1): 'state-carrying' counts theme chrome inputs (e.g., mdBook 'searchbar', Sphinx/Sphinx-RTD 'q'). The construct was not narrowed post-hoc. Consequence direction: even with this inflated construct, discovery reaches 0/208; a chrome-stripped construct would only lower the denominator's semantic weight, not change any decision.",
+    "VN-4 Empirical tilt (disclosed prereg section 14.2, design_review nonblocking finding 1): hosts in this pool with static named search forms (mdBook, Sphinx, Sphinx-RTD) expose shallow site indexes (version roots only), and hosts with deep-complete indexes (Docusaurus, Hugo, Jekyll...) carry no DEEP items or no named controls on this frame. The measured zero is consistent with that tilt. The FALSIFIES is bounded to this substrate class (credential-free GET-only stdlib HTTP), this frozen 20-host pool/frame and the five frozen channels; it is NOT a proof that no site on the credential-free Web can enumerate deep content (the in-substrate positive pole cited at prereg 11e was intentionally excluded from the frozen frame).",
+    "VN-5 ON_SITE_SEARCH coverage gap (prereg 14.6): search result pages are JS-rendered on all four queried hosts; recorded as a disclosed coverage gap of the static-HTTP instrument, not as a null success. Probes returned HTTP 200, proving endpoint liveness.",
+    "VN-6 Frame staleness was not a confound: 208/208 admitted item URLs were live (HTTP 200) at EXECUTE.",
+    "VN-7 docs.readthedocs.io's admitted item URLs live on docs.readthedocs.com (the parent BFS followed the seed redirect and used final_url as link base; a frozen frame property). V7 exact-host membership semantics prevent any cross-host matching; the channel documents for that host contain 1-2 URLs, none deep.",
+    "VN-8 Single-vantage measurement: all fetches came from one runner egress (no proxy rotation). Channel-document availability and liveness were not re-checked from a second network vantage; cross-vantage agreement is out of the frozen design's scope and is carried to unresolved.",
+    "VN-9 The ON_SITE_SEARCH channel's frozen semantics query the exact item slug. Results pages returned 200 but no static links; a human user with JS would see results. This is the instrument's disclosed static-HTTP boundary, not a mid-run modification.",
+    "VN-10 Representation: MAX_BODY=600000 with truncation flags recorded; no channel document used for scoring was truncated (all documents that were fetched had truncated=false)."
+  ],
+  "unresolved": [
+    "U-1 Whether a JS-executing substrate (browser-rendered search results) would change ON_SITE_SEARCH coverage: out of the frozen mandate's credential-free static-HTTP scope; remains untested.",
+    "U-2 Whether another pool (rebuilt from this Q1 census to select hosts with deep-complete static indexes AND named deep controls, e.g., the prereg 11e in-substrate positive pole docs.djangoproject.com) would reach the 0.50 threshold: the frozen frame was not rebuilt; SUPPORTS remains a real but unmeasured state of the world for this instrument.",
+    "U-3 Cross-vantage stationarity of channel documents (egress IP/ASN effects) was not measured; a single-vantage result is the standing reproducibility caveat for this substrate class.",
+    "U-4 A chrome/construct split (distribution of named-control types, e.g., searchbar vs q vs content form fields, per admitted item) was not recorded by the frozen module (it counts controls, not their names); a secondary split would require a new measurement outside the frozen scope.",
+    "U-5 docs.readthedocs.io remained on Sphinx-RTD across its docs.readthedocs.com redirect; the two Sphinx-RTD hosts are distinct base-domain hosts but share the readthedocs.com platform infrastructure, so 'distinct engines' here means distinct engine classes on distinct base-domain hosts per frozen V12, not necessarily independent server origins."
+  ]
+}

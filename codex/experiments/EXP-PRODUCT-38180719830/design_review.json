@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38180719830",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All three outcome branches are arithmetically attainable and demonstrably reachable on the exact frozen runner: (1) SUPPORTS branch - full EXECUTE-mode probe run passes D0-D4 and V8 (confidence exactly 0.9, 5/5 replay, 3/3 regression, all 7 refusal probes correct). (2) FALSIFIES branch - each clause has a concrete failing condition under the same code path (e.g., verify binds postconditions so a next_state shape mismatch makes D1 fail; any refusal returning non-null action or wrong status fails D2; counter-transcript mismatch fails D3; ablation/replay/regression failures fail D4). (3) BLOCKED/MEASUREMENT_INVALID branch - demonstrated by substituted carrier (carrier sha mismatch -> BLOCKED, kernel untouched), tampered freeze.json (prereg hash mismatch -> BLOCKED), and missing freeze.json in EXECUTE mode. Precedence (MEASUREMENT_INVALID > FALSIFIES > SUPPORTS) is free of unreachable branches; identity/binding failures gate before scientific measurement.",
+      "evidence_refs": [
+        "DESIGN hermetic probe: EXP_PROBE_MODE=1 full run -> status COMPLETE, outcome SUPPORTS, all clauses PASS",
+        "DESIGN hermetic probe: EXP_CARRIER_SRC=git:cfec9866 (substituted literal) -> status BLOCKED, outcome MEASUREMENT_INVALID, D0 FAIL, kernel untouched (sha 46929b3a...)",
+        "DESIGN hermetic probe: tampered freeze.json (wrong prereg hash) -> status BLOCKED, outcome MEASUREMENT_INVALID, V8 FAIL",
+        "spec.json#decision_rule.reachability (probe-verified)",
+        "prereg.md sections 5, 8, 14-15 (FROZEN RUNNER, CANONICAL-HASHES)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) Python 3.12 with stdlib only (http.server, urllib, unittest, tempfile, hashlib, json, re, subprocess, threading, dataclasses, pathlib) - no third-party packages required; (b) both git blobs exist in the repo object store and byte-verified: carrier b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 sha256 718efa6a..., literal cfec98660b0277ccbf295e8a4119e8d81ddccf50 sha256 46929b3a...; (c) all 5 freeze artifacts exist with recorded sha256 matching CANONICAL-HASHES: pyproject.toml (5f03fb59...), src/spider/__init__.py (3d173722...), src/spider/models.py (338aaf4d...), src/spider/registry.py (51fb440d...), tests/test_kernel.py (ff9c1561...); (d) shipped models.py/registry.py are byte-identical to the audited package copies used in EXP-PRODUCT-37973256064, and __init__.py is a compatible superset - probe confirms full certificate + regression run against installed carrier works; (e) tests/test_kernel.py suite passes 3/3 on the carrier (probe verified). No prerequisite is deferred to EXECUTE.",
+      "evidence_refs": [
+        "DESIGN verification: git cat-file blob for both blobs + sha256sum matches CANONICAL-HASHES",
+        "DESIGN verification: sha256sum of all 5 freeze_artifacts matches prereg.md CANONICAL-HASHES artifacts block",
+        "DESIGN hermetic probe: EXP_PROBE_MODE=1 run -> regression 3/3 PASS, carrier imports and runs",
+        "prereg.md section 15 (CANONICAL-HASHES)",
+        "spec.json#freeze_artifacts"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and baselines are structurally distinct objects with no ceiling/floor confound: Treatment = audited carrier kernel (git blob b15ed848..., 491 lines, has distill_parameterized, _infer_support, _derive_structural_names, _parameterized_confidence, TrajectoryCounters, confidence 0.9 path). B-LITERAL-KERNEL ablation = shipped literal kernel (git blob cfec9866..., 132 lines, NO distill_parameterized, confidence floor 0.5 < min_confidence 0.8), loaded in hermetic temp package from frozen blob so comparison is blob-vs-blob independent of treatment install. The induced support regex ^item\\-00[0-9]{1}$ and confidence 0.9 are arithmetic functions of the 5-induction-observation bank (probe-verified), making the positive certificate attributable solely to the carrier's parameterized path. PC-EXACT-REPLAY and B-LITERAL-KERNEL carry stable IDs inherited from the audited predecessor (EXP-PRODUCT-37973256064). No cost metric omits a dimension used by a comparator (credential-free path: model_calls=0, model_tokens=0 asserted in D3).",
+      "evidence_refs": [
+        "DESIGN probe: literal ablation has_distill_parameterized == False; carrier certificate EXECUTABLE@0.9 on held-out item-007; PC-EXACT-REPLAY 5/5",
+        "git cat-file blob sizes: carrier 491 lines, literal 132 lines",
+        "prereg.md sections 6-7 (carrier/literal structure, controls)",
+        "spec.json#baselines (structural distinction documented)",
+        "EXP-PRODUCT-37973256064/spec.json#baselines (stable control IDs)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete, exercised failure mode under the exact same code path that produces the certificate: PC-EXACT-REPLAY fails (<5/5 EXECUTABLE) if installed carrier cannot rebind/retrieve its own learned identity; B-LITERAL-KERNEL ablation FAILs if literal blob unexpectedly contains distill_parameterized (attribution broken) - probe confirms literal lacks it; NC-OUT-OF-SUPPORT-ID (item-010/item-999/item-xyz) FAILs if induced support over/under-matches (each must be EXPLORE with 'support' reason + null action); NC-MISSING-PARAMETER FAILs on any non-refusal; NC-WRONG-INTENT and NC-NO-APPLICABLE-MECHANISM FAIL if status != EXACTLY UNKNOWN (mandate clause b); regression FAILs if install broke package surface or suite drifts; V8 binding FAILs on any prereg/runner/artifact hash mismatch (demonstrated: tampered freeze.json -> V8 FAIL/BLOCKED). The control set is non-vacuous: DESIGN probe exercised every control in both SUPPORTS and BLOCKED configurations.",
+      "evidence_refs": [
+        "DESIGN hermetic probes: 7/7 refusal probes correct (EXPLORE with 'support'/'parameter' reason, UNKNOWN for wrong-intent/no-applicable, all null bound_action) in SUPPORTS run",
+        "DESIGN probe: tampered artifact hash -> V8 FAIL/BLOCKED; substituted carrier -> D0 FAIL/BLOCKED",
+        "prereg.md sections 7-8 (controls, decision rule), 11 (validity gates V6, V8, V9, V10)",
+        "spec.json#measurement_validity (V6, V8, V9, V10)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The carrier is already audited LIVE on a real credential-free substrate (EXP-PRODUCT-37973256064 audit PASS: 12/15 held-out EXECUTABLE, PC-EXACT-REPLAY 15/15, refusal 1.0). DESIGN hermetic probes re-proved liveness at the intended shipping path with the exact frozen runner: distill_parameterized over 5 observations -> mechanism (support ^item\\-00[0-9]{1}$, confidence 0.9, slots ['item']) -> resolve(held-out item-007) EXECUTABLE with non-null correctly bound action (url contains item-007) -> fixture status 200 -> verify true; counters fire on real calls (retrieval=9, verification=1, repair=1 transcript-consistent); regression 3/3 green. Structural liveness is enforced at EXECUTE by D1 (mechanism must be distilled and bind EXECUTABLE@0.9) and V9 (regression), so a silently dead treatment is BLOCKED, never a negative. The treatment object is fully specified (git blob b15ed848... + sha256 718efa6a...) so no unbound mutable code can masquerade as it.",
+      "evidence_refs": [
+        "EXP-PRODUCT-37973256064/audit.json + result.json (audited live carrier, 12/15 EXECUTABLE, refusal 1.0)",
+        "DESIGN hermetic probe: full EXECUTE-mode run SUPPORTS (D1 EXECUTABLE@0.9 -> 200 -> verify true; D3 counters transcript-consistent; D4 regression 3/3)",
+        "prereg.md sections 5, 14 (FROZEN RUNNER with distill_parameterized + TrajectoryCounters)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly the 5 existing immutable files whose identity can change interpretation: pyproject.toml (src discovery), src/spider/__init__.py + models.py + registry.py (package surface the installed carrier imports; models/registry byte-identical to audited package copies), tests/test_kernel.py (regression suite). All exist with recorded sha256 verified at DESIGN. src/spider/kernel.py is deliberately EXCLUDED from freeze_artifacts: it is the TREATMENT OBJECT - its pre-install identity (literal 46929b3a.../blob cfec9866...) and post-install identity (carrier 718efa6a.../blob b15ed848...) are pinned by the immutable CANONICAL-HASHES block (bound via freeze.json.hashes['prereg.md']) and the Director mandate's identity clause (d). Freezing a path hash of the file the experiment itself rewrites would be self-contradictory after installation; the git blob + sha256 pins exist precisely to survive this mutation. The certificate runner and canonical identities are embedded verbatim in prereg.md (FROZEN RUNNER and CANONICAL-HASHES) and are therefore bound by freeze.json.hashes['prereg.md']; the fixture is in-process stdlib inside the runner. No unbound mutable code, task bank, dataset, or fixture remains.",
+      "evidence_refs": [
+        "DESIGN verification: all 5 freeze_artifacts exist with sha256 matching CANONICAL-HASHES",
+        "prereg.md sections 13-15 (binding model, FROZEN RUNNER, CANONICAL-HASHES)",
+        "spec.json#freeze_artifacts",
+        "request.json#director_mandate.allocation.question clause (d) (identity pinned to git blob b15ed848 / sha256 718efa6a...)",
+        "codex/experiments/EXP-GRAPH-38175554380/freeze.json#artifact_hashes (v2 precedent: kernel.py frozen there because unmutable; contrasted here where mutation is treatment)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The current shipping kernel (src/spider/kernel.py) is the literal version (sha256 46929b3a...), confirming the mandate's premise that the carrier is not yet installed. This is the correct pre-condition for the certificate.",
+    "The probe run in EXP_PROBE_MODE=1 modifies the shipping kernel (installs carrier); the EXECUTE contract expects this and records pre/post identities. The working tree state after EXECUTE is intentionally left for the DIRECTOR verdict stage (prereg.md section 16, step 6)."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass with direct experimental evidence from hermetic DESIGN probes on the exact frozen runner. The decision rule has three reachable branches (SUPPORTS, FALSIFIES, BLOCKED/MEASUREMENT_INVALID) with correct precedence and demonstrated stop triggers. All measurement prerequisites are satisfied now with no deferred dependencies. Treatment and baselines are structurally distinct with no ceiling confound. Every control has an exercised failure mode. The treatment is live (audited + probe-reverified at shipping path). Freeze artifacts bound with the treatment object correctly excluded and identity-pinned by immutable git blobs. The design is capable of answering its question in both directions; no revision required.",
+  "evidence_refs": [
+    "DESIGN hermetic probes (non-outcome-bearing, shipping path restored after each): SUPPORTS run, substituted carrier BLOCKED, tampered freeze.json BLOCKED, missing freeze.json BLOCKED",
+    "Git object verification: both carrier and literal blobs exist with correct sha256",
+    "Freeze artifact verification: all 5 files exist with sha256 matching CANONICAL-HASHES",
+    "FROZEN RUNNER sha256 verification: a114804c391aa8360d0616fa27a4b217783abea4f005a29f87d22f7566daf2f3 matches CANONICAL-HASHES",
+    "EXP-PRODUCT-37973256064 audit.json (carrier audited live PASS on real credential-free substrate)"
+  ]
+}

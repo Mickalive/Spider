@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "run": {
+    "kind": "github_actions",
+    "run_id": "38189923154",
+    "run_attempt": 1,
+    "server_url": "https://github.com",
+    "repository": "Mickalive/Spider",
+    "branch": "lab2/intel",
+    "commit": "8d3e206928549f0a58f62c54788d86d026260cc5",
+    "commit_short": "8d3e2069",
+    "execution_checkpoint": {
+      "path": "research/experiments/EXP-INTEL-38175568787/execution_checkpoint.json",
+      "github_run_id": "38182136376",
+      "pre_execute_sha": "cad0dfa6d59078bd54efaf347f6f12002191fedd",
+      "note": "The execution checkpoint recorded an earlier dispatch attempt; this EXECUTE transaction ran under run_id 38189923154 at commit 8d3e2069. The checkpoint file is part of the packet and was not modified."
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {"sha256": "f05ecb934bdbe833088d1950acc72f9eabc5512d8d5093b42c20faadf7edcf64", "path": "research/experiments/EXP-INTEL-38175568787/request.json", "match": true},
+    "spec.json": {"sha256": "c490281c103e3869a9fa0ca34e4cde0f45229efd9ab081dabb2dcae9ad8172fe", "path": "research/experiments/EXP-INTEL-38175568787/spec.json", "match": true},
+    "prereg.md": {"sha256": "ff8073fb0720821dfba5451caba3a4cc4e1fc26934c9672326e82916b9703e8d", "path": "research/experiments/EXP-INTEL-38175568787/prereg.md", "match": true},
+    "design_review.json": {"sha256": "79df25926166586654477d955d458ca5144244a5e89ab63d9894d9ce2b231603", "path": "research/experiments/EXP-INTEL-38175568787/design_review.json", "status": "PASS", "match": true},
+    "freeze.json": {"path": "research/experiments/EXP-INTEL-38175568787/freeze.json", "frozen_at": "2026-10-11T23:10:31.023741+00:00", "design_contract_version": 2}
+  },
+  "freeze_artifacts": {
+    "note": "All three hashes in freeze.json.artifact_hashes were re-verified on disk before and after EXECUTE; all match.",
+    "entries": [
+      {"path": "research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py", "match": true, "sha256": "4e2b6710c78f4e4399a8ed5ae78e0231563fb832b780b80a955bcbc16b046862"},
+      {"path": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json", "match": true, "sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb"},
+      {"path": "research/intel/run_exp_37982024058.py", "match": true, "sha256": "2b5d5bb5da608adbcc68cc78120a88bc2b8809816e29f9d87d25c0c75bc25c00"}
+    ]
+  },
+  "prompt_strings": {
+    "P-TREAT-GOAL-SCHEMA": {"sha256": "36a4240aba96e46797c16aebbedcc548778a0c1097b4ce4432608148758c5716", "note": "frozen single-factor prompt treatment applied to both candidate cells; contains neither '#reveal-btn' nor 'TARGET-42'"}
+  },
+  "harness_config_hashes": {
+    "base_config": "research/experiments/EXP-INTEL-37982024058/raw/harness_config.json",
+    "base_config_sha256": "7aba9dc899c40dd29f87b4265835eea6dc0b889c66271a983e4b82b8f5bc7adb",
+    "M-14B-QWEN_overlay_sha256": "989f3f7681d4b00d590df240f5404e5179484414aba75ee3cde22b52cfadab43",
+    "M-8B-LLAMA_overlay_sha256": "46cd2127317fe85eb68c6ac04c4e0492b706c69e99ddab591f5810b9440dc7f2",
+    "M-14B-QWEN_diff_paths": ["candidate_models_frozen", "prompts.system"],
+    "M-8B-LLAMA_diff_paths": ["candidate_models_frozen", "prompts.system", "sampling.chat_format"],
+    "note": "Overlays are byte-identical to the frozen base config except for the predeclared candidate binding, the single-factor prompts.system treatment, and (only for M-8B-LLAMA) sampling.chat_format. No leakage flags set; see raw/materialized_configs.json."
+  },
+  "models": {
+    "M-14B-QWEN": {
+      "model": "Qwen2.5-14B-Instruct", "quant": "Q4_K_M", "chat_format": "qwen",
+      "url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+      "pinned_sha256": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b",
+      "pinned_bytes": 8988110976,
+      "execute_observed_sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008",
+      "execute_observed_bytes": 8988110976,
+      "digest_match_pinned": false,
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "load_attempted": false,
+      "local_path": "/tmp/opencode/gguf/Qwen2.5-14B-Instruct-Q4_K_M.gguf"
+    },
+    "M-8B-LLAMA": {
+      "model": "Meta-Llama-3.1-8B-Instruct", "quant": "Q4_K_M", "chat_format": "llama-3",
+      "url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "pinned_sha256": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a",
+      "pinned_bytes": 4920739232,
+      "execute_observed_sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "execute_observed_bytes": 4920739232,
+      "digest_match_pinned": false,
+      "disposition": "UNMEASURED_LOAD_FAILED",
+      "load_attempted": false,
+      "local_path": "/tmp/opencode/gguf/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
+    },
+    "remote_metadata_at_execute": {
+      "M-14B-QWEN": {"tree_lfs_oid": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008", "tree_xetHash": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b", "cdn_etag": "d989c91de35f32c18bdb8bec96a4b9fff2c3e5bca066503c63a5ca54dd537a4b", "tree_size": 8988110976},
+      "M-8B-LLAMA": {"tree_lfs_oid": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c", "tree_xetHash": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a", "cdn_etag": "854506123b68372492b8a99bb3a999594672b394791cf1153f8da5ffb5f1c59a", "tree_size": 4920739232},
+      "note": "The frozen pin equals the tree-API xetHash and the CDN etag; the served-body sha256 equals the tree-API lfs.oid. See raw/provisioning_evidence.json."
+    }
+  },
+  "environment": {
+    "os": "Linux 6.17.0-1022-azure x86_64",
+    "python": "3.12.15",
+    "venv": "/tmp/opencode/venv",
+    "llama_cpp_python": "0.2.90",
+    "playwright": "1.63.0",
+    "chrome": "Google Chrome 154.0.8037.97",
+    "chrome_path": "/usr/bin/google-chrome",
+    "cpu_cores": 4,
+    "mem_gb": 16.8,
+    "network": "huggingface.co and PyPI reachable; no hosted-provider credentials present"
+  },
+  "commands": [
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_materialize.py",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_controls.py --outdir research/experiments/EXP-INTEL-38175568787 --config research/experiments/EXP-INTEL-37982024058/raw/harness_config.json --chrome /usr/bin/google-chrome --gguf-dir /tmp/opencode/gguf",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_census.py research/experiments/EXP-INTEL-38175568787",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_comparators.py research/experiments/EXP-INTEL-38175568787",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_provision.py research/experiments/EXP-INTEL-38175568787",
+    "/tmp/opencode/venv/bin/python research/intel/exp_38175568787_eval.py"
+  ],
+  "gguf_download_routes": [
+    "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+    "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf?download=true",
+    "https://hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+    "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+    "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf?download=true"
+  ],
+  "authored_code": [
+    {"path": "research/intel/exp_38175568787_materialize.py", "sha256": "d8f40bf690184235f30a317b2681429a1e29412d68994b696acb360698b013b2"},
+    {"path": "research/intel/exp_38175568787_controls.py", "sha256": "f64c70f4d17dfd5dcd756f409ec5a74a9ea92af2ac28faed4cf165ea3821fda5"},
+    {"path": "research/intel/exp_38175568787_census.py", "sha256": "ac2d2a8718c6a84089fcd29fb39b1b8294e2c47cb9914e75bc8ee61b56199a6b"},
+    {"path": "research/intel/exp_38175568787_comparators.py", "sha256": "099fc5c2213b5e86b9e693ad0a28fefbb5d60ab5ff9ad81392b4f6e14f4c30fb"},
+    {"path": "research/intel/exp_38175568787_provision.py", "sha256": "d7a7898d7eaa1db88ca67ab38c6907752f56708ce01c51fc2544d48ba813a4d2"},
+    {"path": "research/intel/exp_38175568787_eval.py", "sha256": "2cc88022c22e1f25d0ba73e36749f2e8293e31f0b60d594c5573522cb80c5765"}
+  ],
+  "outcome_determining_code": [
+    {"path": "research/intel/exp_38175568787_controls.py", "role": "runs the frozen preflight controls (oracle/null/random) through the real frozen scorer; determines preflight_pass"},
+    {"path": "research/intel/exp_38175568787_provision.py", "role": "applies frozen ladder step 3a byte-level digest verification and writes per-candidate UNMEASURED_LOAD_FAILED dispositions"},
+    {"path": "research/intel/exp_38175568787_eval.py", "role": "deterministic frozen decision-rule evaluator; derives OUTCOME and B3_STATUS"},
+    {"path": "research/intel/run_exp_37982024058.py", "role": "frozen runner (not invoked for candidates because step 3a failed; its producer symbols were import-checked in preflight)"}
+  ],
+  "raw_evidence": [
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/preflight.json", "sha256": "5ccf07d150ff1f2a49ddacf060c0256563b52643a33760a9ec07be46d96bab70"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/controls.json", "sha256": "b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/materialized_configs.json", "sha256": "ab49352bdf22a07bebf25431163a4bd6d3e3e84cae2133ced47550211e3f849a"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/endpoint_census.json", "sha256": "8e9775b5ef2f8bf23d9a0e066e13da20873670ff752a6d6007a7ed9e767b903a"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/external_comparators.json", "sha256": "2c1505a719dd8449ef97d2e09b5cd259c5eb9abda3d4a48c7fdf77a1e45c44ba"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json", "sha256": "19996ffabdcb79e0438facdb3d19e7ae11186e049a218db8f8119557e26f54ac"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/raw/decision.json", "sha256": "22dfef6a8ed5e9981dd4fd081534317960c464c6b9377a693effd9a0604d8e9a"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-14B-QWEN/raw/provisioning_receipt.json", "sha256": "9db473e69fbd922e52f659bd43b4f7b37ac1a5e852e6848f65bf2fe3541dd001"},
+    {"path": "research/experiments/EXP-INTEL-38175568787/cells/M-8B-LLAMA/raw/provisioning_receipt.json", "sha256": "935961f8b8fc9b98d873d1f93c75ed6192f9145bdc86992bc4b3eec854ae9f48"}
+  ],
+  "notes": [
+    "This was a MEASUREMENT_INVALID transaction: the preflight harness passed, but the frozen ladder failed at step 3a for both candidates because the frozen-pinned GGUF sha256 differs from the sha256 of the served bytes. No model was loaded (fail-closed; frozen rule 3a).",
+    "Root cause recorded in raw/provisioning_evidence.json: the frozen pin equals the HF tree-API xetHash / CDN etag, while the served body sha256 equals the tree-API lfs.oid; the spec note 'sha256 equals the HF LFS OID (CDN etag)' conflated the two fields.",
+    "The GGUF files were downloaded to /tmp/opencode/gguf (ephemeral, outside the repo) and are not packet artifacts; their sha256 values are recorded in raw/provisioning_evidence.json.",
+    "No hosted provider was invoked; the endpoint census is credential/reachability only (no API keys were present).",
+    "No claim was promoted, weakened or falsified by this transaction.",
+    "REVIEW: all raw evidence preserved; measurement failure is not encoded as a negative scientific result."
+  ]
+}

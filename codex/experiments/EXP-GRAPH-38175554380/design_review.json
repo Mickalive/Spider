@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38175554380",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both D-RESOLVER branches are arithmetically reachable. Primary set size |primary| = 113 (DESIGN structural probe on frozen bank, >= 80 minimum). B-LEX-STRONG is live and non-degenerate: abstains on 11/113 unflagged applicable goals, resolves 102, mis-resolves 14/38 unflagged out-of-scope goals. B-INTERNAL-ID-ORACLE is 1.0 by construction. B-RANDOM-ROLE <= 0.35 by construction. A-EMBED-COSINE is an unmeasured outcome. All 5 resource families represented in primary set (113 goals over 20 cells), so family-blocked bootstrap (B=10000, alpha=0.05) is non-degenerate. D-GATE is decoupled with its own reachable GATE-NOT-MET branch (parent single-threshold gate was AB-NOT-MET at 0.5789). Gate arithmetic: with 56 test applicable and 18 test out-of-scope, unknown_precision >= 0.85 forces abstaining on essentially all 18 out-of-scope and <= 3 applicable; pooled_false_accept <= 0.10 allows <= 1 accepted out-of-scope; region is demandingly small but non-empty (e.g., accept 55 applicable, 0 out-of-scope). No branch makes another unreachable. Claim-bearing metric not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/spec.json#decision_rule.reachability",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 9-10",
+        "DESIGN structural probe: frozen-bank primary=113; B-LEX-STRONG abstains 11/113, resolves 102, mis-resolves 14/38 OOS; all 5 families present"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites exist or are installable from a reachable index. (a) Resolver arms and metric estimators are pre-existing tracked files bound in freeze_artifacts (research/harness/{candidate_resolver,goal_generator,experiment_runner,http_server}.py; src/spider/{kernel,registry,models,__init__}.py). (b) Embedding stack pinned to EXP-GRAPH-36287167610/provenance.json: sentence-transformers 3.0.1, torch 2.4.0, numpy 1.26.4, scikit-learn 1.5.1, model sentence-transformers/all-MiniLM-L6-v2 revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf. Runner requests recorded revision and falls back to unpinned name if unavailable, recording actual resolution. (c) Goal bank, lexicon, contamination constants frozen verbatim in prereg.md; B-LEX-STRONG resolver is verbatim transcription in prereg.md. (d) sklearn LogisticRegression available in pinned stack. If model/sklearn/network unavailable after bootstrap, runner writes status=BLOCKED (operational), never FALSIFIES. Known limitation (VN-08): parent packet could not fetch frozen revision and resolved to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41; this design records actually-resolved identity.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json (environment pins, model revision)",
+        "research/harness/candidate_resolver.py, research/harness/experiment_runner.py, src/spider/kernel.py (exist and tracked)",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 4-5 (GOAL BANK/OOS BANK/LEXICON blocks), 7 (B-LEX-STRONG), 13 (Frozen runner source)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (A-EMBED-COSINE) and primary comparator (B-LEX-STRONG) are genuinely distinct: dense 384-d cosine argmax requiring sentence-transformers model vs pure-string longest-phrase dictionary resolver loading no model. V9-NON-TAUTOLOGY is the structural check that B-LEX-STRONG code path references no embedder ('sentence_transformers', 'model', 'embed' tokens absent). Frozen bank is not lexically trivial: DESIGN structural probe shows B-LEX-STRONG abstains on 11/113 unflagged applicable goals, resolves 102, and mis-resolves 14/38 unflagged out-of-scope goals — neither constant-abstain nor constant-resolve, not pinned at ceiling. B-LEX-STRONG-LEARNED (op/family map learned on calibration labels only, freq>=2) bounds concern that fixed dictionary encodes bank; test-split operation verbs are disjoint from calibration (phrasings 1-3 vs 4-6 per cell), so degradation is expected sensitivity, not claim-bearing. Arm accuracies are outcomes, not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 6 (Arms), 4 (LEXICON block), 7 (B-LEX-STRONG)",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver, ::LexicalOverlapResolver, ::InternalIdOracle, ::RandomRoleResolver",
+        "DESIGN structural probe: B-LEX-STRONG abstains 11/113 applicable, mis-resolves 14/38 OOS (no gold accuracy computed)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each gated control has a concrete failure mode under the same implementation that scores the experiment. PC-LIVENESS-AND-INTEGRITY fails on: (i) duplicate/ambiguous fixture, (ii) broken registry/loader/threshold, (iii) wrong/mismatched model or registry order. NC-SHUFFLED-LABEL fails if embedding selection tracks the shifted deranged labels. NC-RANDOM-SCORE fails if shared argmax+credit pipeline is broken (RFX-02/RFX-03 denominator defect class). B-INTERNAL-ID-ORACLE fails on label defects; V6 catches it. V8-FLOOR-SANITY fails if random floor exceeds 0.35. V9 fails if comparator references embedder or is reparameterization of treatment (identical selections, no abstentions). V1 fails on missing/mismatched denominator. V11 fails if bootstrap args not (10000, 0.05, 5 families). V12 fails if bound artifact hash mismatches freeze.json. V3-CONTAM-SCREEN fails if >20 goals flagged; DESIGN probe: 9 flagged (7 applicable: app_004, app_049, app_052, app_073, app_076, app_097, app_100; 2 out-of-scope: oos_024, oos_026) — non-vacuous. V13 fails on empty calibration/test class. All controls are live and non-tautological.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md section 8 (Controls), section 12 (V1-V13)",
+        "DESIGN structural probe: 9 flagged goals at token>=0.60 or trigram>=0.75",
+        "research/harness/experiment_runner.py::paired_bootstrap (V11 implementation)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "A-EMBED-COSINE is the pre-existing EmbeddingArgmaxResolver (research/harness/candidate_resolver.py), which always returns a finite argmax over the 20 normalized intent embeddings and never structurally abstains. Parent packet EXP-GRAPH-36287167610's non-outcome-bearing smoke probe showed it resolves all 20 verbatim mechanism intents to a valid fixture mechanism_id with resolution_status=EXECUTABLE and 20 distinct selections. Same frozen module and pinned model (sentence-transformers/all-MiniLM-L6-v2) reused here. EXECUTE re-enforces liveness by V7 (>= 2 distinct valid mechanism selections on primary set). If model cannot load, runner writes status=BLOCKED rather than silently dead measurement. B-LEX-STRONG comparator separately proven live and non-degenerate by DESIGN structural probe (102/113 non-abstain on applicable). This is a Product experiment targeting C-SEMANTIC-RESOLVE (which gates C-LLM-INHERIT and C-PRODUCT-ECON per product_consequence), so treatment_liveness must be PASS (not NOT_APPLICABLE) — and it is.",
+      "evidence_refs": [
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-36287167610/provenance.json (model/environment pins)",
+        "DESIGN structural probe: B-LEX-STRONG non-abstain 102/113 applicable"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed in spec.freeze_artifacts and hashed into freeze.json.artifact_hashes: research/harness/{candidate_resolver,goal_generator,http_server,experiment_runner}.py and src/spider/{kernel,registry,models,__init__}.py. The independently authored goal bank (120 applicable, 40 out-of-scope), contamination constants (incl. PRIOR-PARENT-BANK-TEXTS = parent 140-goal texts), and independently authored operation/resource lexicon have no mutable file dependency because they are embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']; the B-LEX-STRONG resolver and orchestration script are verbatim transcriptions embedded in prereg.md and their sha256 are recorded in provenance.json. V12-A binds whole prereg.md; V12-B binds runner source to FROZEN RUNNER block; V4 re-verifies each extracted block against CANONICAL-HASHES. No unbound mutable code, task bank, dataset or fixture remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38175554380/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md sections 4-5 (GOAL BANK/OOS BANK/LEXICON/PRIOR-PARENT-BANK-TEXTS blocks and schema), 7 (B-LEX-STRONG), 13 (FROZEN RUNNER block), 14 (CANONICAL-HASHES)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "VN-08 (residual checkpoint identity): The frozen model revision c9745ed1d9f207416be6d2e6f8de32d1f161f9bf may not be fetchable (parent packet resolved to 1110a243fdf4706b3f48f1d95db1a4f5529b4d41). Runner records actually-resolved revision; results interpretable only for that checkpoint. This is a disclosed limitation, not a design defect.",
+    "VN-07 (residual authorship limitation): Fresh-context authors had no file/tool access and prompts contained no intent strings (max token-Jaccard 0.0207 vs prior surfaces), but latent pretrained knowledge cannot be cryptographically excluded. Contamination screen (token>=0.60 or trigram>=0.75) plus fixed bank-blind comparator is the mitigation."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is arithmetically reachable in both SUPPORTS and FALSIFIES directions with a non-degenerate primary set (113 goals, 5 families). The strong deterministic comparator B-LEX-STRONG is genuinely distinct from the embedding treatment, live, and non-tautological (V9). All controls have concrete failure modes and the contamination screen is non-vacuous (9 flagged). Treatment liveness is confirmed by parent smoke probe and structural probe. All mutable dependencies are hash-bound via freeze_artifacts and prereg.md embedding. The experiment is ready to freeze; no redesign required.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38175554380/request.json",
+    "research/experiments/EXP-GRAPH-38175554380/spec.json",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-36287167610/provenance.json",
+    "research/harness/candidate_resolver.py",
+    "research/harness/experiment_runner.py",
+    "research/harness/goal_generator.py",
+    "research/harness/http_server.py",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "src/spider/__init__.py"
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38164611798",
+  "lane": "frontier",
+  "git": {
+    "repo": "https://github.com/Spider/Spider",
+    "base_sha": "7174818443e126da8be7919c825320999f568486",
+    "head_sha": "7174818443e126da8be7919c825320999f568486",
+    "commit_message": "Frozen experiment EXP-FRONTIER-38164611798"
+  },
+  "freeze": {
+    "frozen_at": "2026-10-11T22:58:08.747338+00:00",
+    "freeze_json_sha256": "e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e",
+    "artifact_hashes": {
+      "design_review.json": "e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e",
+      "prereg.md": "61472fa8d8c2aab16a86456fd1e17201c342bb1f260a18447bf80c7766d8e770",
+      "request.json": "f9e5010e64e6da219131493212698835be082299b11412b801e7a4ced4616508",
+      "spec.json": "e53719b2d8505d4c15312020e8be5f1c36a257bf9fe3cf85011dc9303a05d467"
+    }
+  },
+  "execution": {
+    "started_at": "2026-10-11T23:06:00Z",
+    "completed_at": "2026-10-11T23:25:00Z",
+    "runner": {
+      "python": "3.12.15",
+      "platform": "linux",
+      "stdlib_only": true,
+      "network_enabled": true,
+      "no_pip_installs": true,
+      "no_browser": true,
+      "no_docker": true,
+      "no_model_calls": true
+    },
+    "stages_executed": [
+      {
+        "stage": "controls",
+        "command": "python3 execute_module.py --stage controls --out .",
+        "exit_code": 0,
+        "duration_seconds": 12,
+        "controls_passed": 15,
+        "controls_failed": 0
+      },
+      {
+        "stage": "inventory",
+        "command": "python3 execute_module.py --stage inventory --out .",
+        "exit_code": 0,
+        "duration_seconds": 45,
+        "hosts_inventoried": 20,
+        "seed_http_200": 20
+      },
+      {
+        "stage": "structural",
+        "command": "python3 execute_module.py --stage structural --out .",
+        "exit_code": 0,
+        "duration_seconds": 180,
+        "hosts_crawled": 20,
+        "budget": 250,
+        "depth": 6
+      },
+      {
+        "stage": "discovery",
+        "command": "python3 execute_module.py --stage discovery --out .",
+        "exit_code": 1,
+        "duration_seconds": 2,
+        "error": "TypeError: '>' not supported between instances of 'NoneType' and 'int' at host_census computation (controls_seen is None for unfetched pages)",
+        "frozen_code_defect": true
+      }
+    ],
+    "code_transcription": {
+      "source": "research/experiments/EXP-FRONTIER-38164611798/prereg.md section 16 (between CODE_BEGIN and CODE_END markers)",
+      "transcribed_to": "research/experiments/EXP-FRONTIER-38164611798/execute_module.py",
+      "code_sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+      "matches_frozen_hash": true,
+      "transcription_method": "block.strip() of bytes between CODE_BEGIN and CODE_END markers"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw/controls.jsonl",
+      "sha256": "fddd9e429d27792527e0e580585270a875fc1e0ebc286edb109d31db5cd99672",
+      "size_bytes": 2051,
+      "role": "raw",
+      "description": "15 control rows (13 distinct identities) from --stage controls"
+    },
+    {
+      "path": "raw/channel_docs.jsonl",
+      "sha256": "b42798c3cd285dda9f06fd87f5a09a6890e6aae53dc0126a73c21c5c23b979cc",
+      "size_bytes": 797794,
+      "role": "raw",
+      "description": "Per-host discovery channel endpoint liveness and URL sets from --stage inventory"
+    },
+    {
+      "path": "raw/structural.jsonl",
+      "sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+      "size_bytes": 789912,
+      "role": "raw",
+      "description": "Per-host BFS structural census (hop, ordinal, controls_seen) from --stage structural"
+    },
+    {
+      "path": "execute_module.py",
+      "sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+      "size_bytes": 47562,
+      "role": "code",
+      "description": "Transcribed frozen outcome-bearing module (hash-verified against prereg.md CODE_SHA256)"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.15",
+    "stdlib_modules": ["urllib", "gzip", "xml.etree", "html.parser", "http.server", "hashlib", "json", "math", "re", "threading", "time", "pathlib", "sys"],
+    "user_agent": "SPIDER-research-frontier-11798/1.0",
+    "timeout_seconds": 12.0,
+    "max_body_bytes": 600000,
+    "delay_between_hosts_seconds": 0.1,
+    "bfs_budget": 250,
+    "bfs_depth": 6,
+    "k_gets": 3,
+    "threshold": 0.50,
+    "min_engines": 2,
+    "deep_band": [3, 4, 5, 6]
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-FRONTIER-38164611798/request.json (sha256: f9e5010e64e6da219131493212698835be082299b11412b801e7a4ced4616508)",
+    "spec.json": "research/experiments/EXP-FRONTIER-38164611798/spec.json (sha256: e53719b2d8505d4c15312020e8be5f1c36a257bf9fe3cf85011dc9303a05d467)",
+    "prereg.md": "research/experiments/EXP-FRONTIER-38164611798/prereg.md (sha256: 61472fa8d8c2aab16a86456fd1e17201c342bb1f260a18447bf80c7766d8e770)",
+    "freeze.json": "research/experiments/EXP-FRONTIER-38164611798/freeze.json (sha256: e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e)",
+    "design_review.json": "research/experiments/EXP-FRONTIER-38164611798/design_review.json (sha256: e4868902b7706f0d12a1b7bc84a3e6f8ef0a402d48425325c4acbdc2249ec78e)"
+  },
+  "director_mandate": {
+    "action": "PIVOT",
+    "claim_id": "C-CROSSSITE",
+    "cognitive_reset": true,
+    "allocation_question": "On the credential-free GET-only stdlib-HTTP substrate, over a broadened frozen multi-host pool enumerated by DESIGN WITHOUT a required engine-count precondition, treat attainability itself as the measured object: (Q1) for each host/engine, how many state-carrying items sit at shortest-path hop >= 3 under the frozen same-host static-<a> BFS (depth <= 6, budget 250), reported per engine with an explicit count of engines that yield ZERO DEEP items; (Q2) conditional on the attained pool, what fraction of those DEEP items is reachable in <= K = 3 fresh-agent GETs via ANY of the five frozen site-native discovery channels (ROBOTS_SITEMAP, SITEMAP_XML, ON_SITE_SEARCH, RSS_ATOM, JSON_LD), with per-channel coverage disclosed and any channel yielding zero admitted DEEP items reported as such; and (Q3) is that O(1)-reachable fraction >= 0.50 on at least two distinct hosts/engines?"
+  },
+  "lane_charter": {
+    "lane": "frontier",
+    "mission": "Search outside the current solution basin for high-upside falsifiable mechanisms that could radically reduce agent exploration or change SPIDER's architecture.",
+    "allowed_code_roots": ["research/harness", "research/frontier"],
+    "priority_claims": ["C-WEB-DYNAMICS", "C-RESIDUAL-NOVELTY", "C-SEMANTIC-RESOLVE", "C-CROSSSITE"]
+  }
+}
