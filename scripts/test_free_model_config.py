@@ -31,6 +31,27 @@ assert config["free_price_evidence_url"] == "https://dev.opencode.ai/v2/docs/con
 assert config["free_price_checked_date"] == "2026-10-12"
 assert allowed == verified_free, "all twelve official free text models must be selectable"
 assert allowed <= verified_free, "unverified promotional model added"
+# Quality priors are anchored in independent/public benchmarks, never invented
+# SPIDER internal performance numbers. The ranking is a provisional fallback
+# and role-specific (coding is not the same skill as portfolio synthesis).
+ranking = config["ranking_provenance"]
+assert ranking["version"] == 1
+assert len(ranking["sources"]) >= 3
+assert ranking["date"] == "2026-10-12"
+assert "NOT SPIDER" in ranking["method"]
+MUSE = "opencode/muse-spark-1.3-contributor-free"
+LING = "opencode/ling-3.1-flash-free"
+MIMO = "opencode/mimo-v2.6-flash-free"
+SPACE = "opencode/space-bunny-free"
+LONGCAT = "opencode/longcat-2.5-preview-free"
+assert config["roles"]["coding"][:5] == [MIMO, MUSE, SPACE, LONGCAT, LING]
+assert config["roles"]["research"][:3] == [MUSE, LING, MIMO]
+assert config["roles"]["director"][:3] == [MUSE, LING, MIMO]
+assert config["roles"]["audit"][:2] == [LING, MUSE]
+assert config["roles"]["scout"][:2] == [LING, MUSE]
+assert config["free_only_allowed_models"][:3] == [MUSE, LING, MIMO]
+assert config["roles"]["research"][0] != config["roles"]["audit"][0]
+
 
 for role, candidates in config["roles"].items():
     assert candidates, role
