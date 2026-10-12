@@ -12,6 +12,15 @@ assert allowed
 assert all(m.startswith("opencode/") for m in allowed)
 assert all(m.endswith("-free") or m == "opencode/big-pickle" for m in allowed)
 assert "opencode/exo-free" not in allowed
+# Provider official pricing list at audit date, not inferred from -free suffix.
+verified_free = {
+    "opencode/big-pickle", "opencode/mimo-v2.5-free",
+    "opencode/ling-3.0-flash-fin-free", "opencode/nemotron-3-ultra-free",
+    "opencode/nemotron-3.5-lightning-free",
+    "opencode/muse-spark-1.3-contributor-free",
+}
+assert allowed <= verified_free, "unverified promotional model added"
+
 for role, candidates in config["roles"].items():
     assert candidates, role
     assert len(set(candidates)) == len(candidates), role
@@ -32,6 +41,7 @@ assert policy["read"]["*.env"] == "deny"
 assert 'OPENCODE_CONFIG_CONTENT' in shell
 assert 'SPIDER_HEADLESS_PERMISSION_DENIED' in shell
 assert 'headless-permission-denied' in shell
+assert 'The user has specified a rule which prevents you from using this specific tool call' in shell
 assert 'MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-3}"' in shell
 assert 'MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-1200}"' in shell
 assert all(len(candidates) <= 4 for candidates in config["roles"].values())

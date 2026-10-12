@@ -9,7 +9,7 @@ RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-5}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-240}"
 MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-1200}"
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found|deprecated)|has been deprecated|HTTP[^0-9]*403)'
-PERMISSION_RE='(The user rejected permission to use this specific tool call|permission denied|requires permission approval)'
+PERMISSION_RE='(The user rejected permission to use this specific tool call|The user has specified a rule which prevents you from using this specific tool call|permission denied|requires permission approval)'
 # Github Actions has no interactive permission dialog. Explicitly fail closed on
 # unknown external paths and loop prompts rather than silently rejecting tools.
 if [[ "${GITHUB_ACTIONS:-}" == true ]]; then
