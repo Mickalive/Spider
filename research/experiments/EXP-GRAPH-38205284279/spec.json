@@ -1,50 +1,89 @@
 {
   "experiment_id": "EXP-GRAPH-38205284279",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "question": "On an independently authored, no-reference held-out surface (new public-transit fleet goal bank + new synonym lexicon), does zero-tunable-parameter T-FRAME (frozen B-LEX-STRONG + structural abstention C1/C3/C4/C5/C6) PLUS the new pre-declared zero-parameter clause C7-CREATE-OBLIQUE hold pooled_false_accept<=0.10 AND coverage>=0.50 AND unknown_precision>=0.85 on a disjoint calibration/test split, while retaining selective_acc>=0.80, and can the previously BLOCKED retrieval comparator (Arm B) be unblocked and measured to decide the deterministic-vs-retrieval architecture fork?",
+  "hypothesis": "H1: T-FRAME+ (B-LEX-STRONG + C7-CREATE-OBLIQUE) holds the gate on AXIS-G3-NEW and AXIS-G2-RETEST test splits while preserving selective_acc>=0.80 on all four axes. H2: the stdlib retrieval comparator B-RETRIEVAL-TFIDF (calibration-fitted gate) is live and does not strictly dominate T-FRAME+ on AXIS-G3-NEW.",
+  "falsifier": "H1 falsified for AXIS-G3-NEW if test pooled_false_accept>0.10 OR coverage<0.50 OR unknown_precision<0.85, or if C7 drops coverage below 0.50, or if the measurement is invalid (treatment not live on test, or unknown_precision undefined on any axis). H1 bounded (not falsified) if the gate holds on AXIS-G2-RETEST but not AXIS-G3-NEW. H2 falsified if Arm B is not measurable, or if Arm B meets the G3 gate where T-FRAME+ does not (retrieval dominates).",
+  "baselines": [
+    "tframe_frozen: frozen clauses WITHOUT the new C7 (diagnostic isolation of the clause)",
+    "incumbent: B-LEX-STRONG + pre-existing lexical S<=0 gate (shipped logic, no structural clauses)",
+    "gatefree: execute-all resolved rows (execute-all ceiling baseline)",
+    "B-RETRIEVAL-TFIDF: stdlib TF-IDF nearest-class-centroid retrieval with a calibration-fitted gate (Arm B, previously BLOCKED)",
+    "B-EMBED-COSINE: the original embedding-cosine Arm B, NOT runnable (numpy absent); retained as the unblocked comparator's ancestor identity only"
+  ],
+  "positive_control": "PC-AXIS-G1-ALTLEX: AXIS-G1-ALTLEX, gate-met by EXP-GRAPH-38188798583, must remain gate-met; failure invalidates the measurement rather than falsifying H1.",
+  "null_control": "NC-EXEC-ALL (gatefree) must pool materially more false accepts than Arm A (calibration: 0.30 G3 / 0.60 G2 / 0.45 G1 / 0.40 ALT vs 0.0); NC-ABSTAIN-ALL coverage 0 with unknown_precision 1.0; CTRL-SHUFFLED-SELECTION and CTRL-RANDOM-ROLE near chance; CTRL-RANDOM-GATE volume-matched random abstention.",
+  "measurement_validity": [
+    "stdlib-only execution (Python 3.12): no numpy/sklearn/sentence_transformers/network/model/browser/credential",
+    "disjoint deterministic calibration/test split; no test row read by Arm A, any clause, the contamination screen, or the Arm B gate fit",
+    "Arm B gate fitted on calibration rows only, then frozen and applied to test",
+    "C7-CREATE-OBLIQUE is pre-declared and has zero tunable parameters; its firing was verified structurally before freeze",
+    "contamination screen (token Jaccard>=0.60 or trigram Jaccard>=0.75 vs goal_generator priors + parent/grandparent banks) drops near-duplicates before binding",
+    "two byte-identical --mechanics-only canary runs required before the scored run",
+    "runner identity bound by CANONICAL-RUNNER-SHA256 and runner_self_sha",
+    "G3 surface authored blind (no reference to frozen lexicons/banks; disjoint domain)"
+  ],
+  "decision_rule": "MEASUREMENT_INVALID (decision=null) if G3 test treatment not live, or unknown_precision undefined on any axis, or PC-AXIS-G1-ALTLEX fails. DECIDE_SHIP_TFRAME_BROAD if AXIS-G3-NEW and AXIS-G2-RETEST both gate-met and selection_preserved. DECIDE_SHIP_TFRAME_SCOPED if only AXIS-G2-RETEST gate-met and selection_preserved. DECIDE_REQUIRE_RETRIEVAL_B otherwise. Retrieval fork on AXIS-G3-NEW: RETRIEVAL_DOMINATES_G3 / TFRAME_DOMINATES_G3 / BOTH_PASS_G3 / NEITHER_PASSES_G3.",
+  "product_consequence_positive": "BROAD: the deterministic resolver + abstention gate is licensed to ship broadly, closing the audit's named gap 'unseen-goal calibrated resolution with abstention in the product path'; C-SEMANTIC-RESOLVE supports a scoped Product promotion of resolve()+abstention. SCOPED: Product keeps a bounded audited resolver plus a regression-free abstention boundary.",
+  "product_consequence_negative": "REQUIRE_RETRIEVAL_B: T-FRAME is not shipped; Product keeps the conservative shipped abstention boundary and the deterministic-vs-retrieval fork is recorded as retrieval-favouring on this surface. A measured Arm B that ties or loses still informs the fork.",
+  "estimated_cost": "No model calls/network/browser/third-party packages; one deterministic in-process run over ~500 bound rows; seconds of CPU; near-zero marginal cost.",
+  "expected_information_gain": "High: one frozen run decides the ship scope of C-SEMANTIC-RESOLVE (BROAD/SCOPED/REQUIRE_RETRIEVAL_B), whether C7 closes the named HELDOUT false-accept gap, and whether the deterministic-vs-retrieval fork favours structure or retrieval. Both outcomes change a current product decision.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All decision and retrieval-fork branches are reachable and were exercised by driving the full frozen main() path on a synthetic non-outcome-bearing decoy surface; branch arithmetic and precedence are exhaustive and mutually exclusive (MEASUREMENT_INVALID checked first).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8-design-satisfiability-probes",
+        "runner self-check: full main() on decoy surface returned valid JSON"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Python 3.12 stdlib suffices for both arms (Arm B is pure-stdlib TF-IDF); no numpy/sklearn/network/model/browser/credential is required. All runtime block dependencies were read successfully by the --mechanics-only and decoy runs.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#11-environment-and-execute-command"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Arm A (deterministic structure), tframe_frozen (A minus C7), the incumbent lexical S<=0 gate, gatefree (execute-all), and Arm B (calibration-fitted retrieval) are operationally distinct and separately reported; Arm B is the comparator and is never the cost denominator of Arm A.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#6-baselines-and-controls-stable-identifiers-reused-by-execute-and-audit",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#4-comparator-arm-b--b-retrieval-tfidf-retrievalembedding-fork-previously-blocked"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "On calibration, NC-EXEC-ALL pools 0.30-0.60 false accepts vs 0.0 for Arm A; the abstain-all control has coverage 0; shuffled/random controls are near-chance; removing C7 changes exactly the named HELDOUT rows. Controls demonstrably move.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#7-metrics-gates-and-controls-stable-identifiers-reused-by-execute-and-audit",
+        "runner --mechanics-only calibration report"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "On G3 calibration, T-FRAME+ executes 38/39 applicable rows (coverage 0.9744), abstains on 1, and is not degenerate (executed != 0 and != all); on G2 calibration it executes 35 and abstains on 5. The treatment is structurally live before freeze.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8-design-satisfiability-probes",
+        "runner --mechanics-only: G3 cal executed 38/39, unresolved 1"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The only external mutable interpretation dependencies (parent and grandparent preregs, and the contamination-prior generator) are enumerated in freeze_artifacts and will be hashed into freeze.json.artifact_hashes; the runner, banks and lexicons are embedded in the frozen prereg.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#12-freeze-artifacts-v2",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#freeze_artifacts"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/harness/goal_generator.py"
+  ]
 }
