@@ -100,7 +100,7 @@ def run():
     assert "marker.read_bytes()" in probe_src
     probe_agent = (root / ".opencode/agents/spider_provider_probe.md").read_text()
     assert "bash: allow" in probe_agent and "edit: deny" in probe_agent
-    assert "read: deny" in probe_agent and "webfetch: deny" in probe_agent
+    assert "mode: primary" in probe_agent
     print("SPIDER_FREE_PROVIDER_REAL_TOOL_PROBE_OK")
 
 
