@@ -1,0 +1,579 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38244432934",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-CLASSES": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          6.0,
+          5.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          6.0,
+          6.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-DEEP-VECTOR": [
+          10.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          5.0,
+          5.0,
+          6.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          5.0,
+          6.0,
+          6.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-DEEP-VECTOR": [
+          10.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 5.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-WEIGHT-ROBUST-L2": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L3": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-BOTH": 0.6666666666666666,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          6.0,
+          5.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          6.0,
+          6.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-DEEP-VECTOR": [
+          10.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      }
+    },
+    "M-DECISION": "SUPPORTS-COUNTER-DEPENDENT",
+    "M-CLASS-COST-VERDICTS": {
+      "P1-ENDPOINT": "STRICT-WIN-COUNTER-DEPENDENT",
+      "P2-STRUCTURE": "STRICT-WIN-COUNTER-DEPENDENT",
+      "P3-PERMISSION": "STRICT-WIN-COUNTER-DEPENDENT"
+    },
+    "M-IN-SUPPORT-PROBE-ID": 14,
+    "M-WEIGHT-GRID": [
+      1,
+      2,
+      3
+    ],
+    "M-WEIGHT-ROBUST-FRACTION-BAR": 1.0,
+    "M-CONTAMINATION-PROBES-TOTAL": 144,
+    "M-OVERBROAD-CONTAMINATION-RATE-MEAN": 4.0,
+    "M-BASE-LIVENESS-TRUE-TRIALS-TOTAL": 36,
+    "M-BASE-LIVENESS-TRIALS-TOTAL": 36,
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "M-LEGACY-REGRESSION-REPRODUCED": true,
+    "M-TRIALS-TOTAL": 36
+  },
+  "controls": {
+    "B-COLD": {
+      "type": "cost_baseline_primary",
+      "expected": "cold re-derivation success >= 0.90 per class; equal-weight product = 19 at L=3",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "product_L3": 19.0,
+          "product_L2": 18.0,
+          "product_L4": 20.0
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "product_L3": 19.0,
+          "product_L2": 18.0,
+          "product_L4": 20.0
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "product_L3": 19.0,
+          "product_L2": 18.0,
+          "product_L4": 20.0
+        }
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json"
+      ]
+    },
+    "B-COLD-MIN": {
+      "type": "cost_baseline_sensitivity",
+      "expected": "equal-weight product = 18 at L=2 on every class",
+      "observed": {
+        "P1-ENDPOINT": 18.0,
+        "P2-STRUCTURE": 18.0,
+        "P3-PERMISSION": 18.0
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json"
+      ]
+    },
+    "B-COLD-DEEP": {
+      "type": "cost_baseline_sensitivity",
+      "expected": "equal-weight product = 20 at L=4 on every class",
+      "observed": {
+        "P1-ENDPOINT": 20.0,
+        "P2-STRUCTURE": 20.0,
+        "P3-PERMISSION": 20.0
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json"
+      ]
+    },
+    "B-LITERAL-REPLAY": {
+      "type": "mechanism_control_must_fail",
+      "expected": "success <= 0.10 on every class (perturbation bites)",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V4-PERTURBATION_BITES"
+      ]
+    },
+    "B-NO-REPAIR": {
+      "type": "abstention_control_must_fail",
+      "expected": "success <= 0.10 on every class",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V6-NO_REPAIR_INERT"
+      ]
+    },
+    "T-REPAIR-REUSE": {
+      "type": "treatment",
+      "expected": "success >= 0.80; equal-weight product = 17 -> ratio ~0.944 at L=2 and ~0.895 at L=3 with fetch ratio <= 0.90",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "product": 17.0,
+          "ratio_L2": 0.9444444444444444,
+          "ratio_L3": 0.8947368421052632,
+          "ratio_L4": 0.85,
+          "fetch_ratio_L3": 0.6666666666666666
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "product": 17.0,
+          "ratio_L2": 0.9444444444444444,
+          "ratio_L3": 0.8947368421052632,
+          "ratio_L4": 0.85,
+          "fetch_ratio_L3": 0.5555555555555556
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "product": 17.0,
+          "ratio_L2": 0.9444444444444444,
+          "ratio_L3": 0.8947368421052632,
+          "ratio_L4": 0.85,
+          "fetch_ratio_L3": 0.6666666666666666
+        }
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json"
+      ]
+    },
+    "T-REPAIR-CONSERVATIVE": {
+      "type": "system_sensitivity_upper_bound",
+      "expected": "equal-weight product = 18 -> ratio exactly 1.00 at L=2 and ~0.947 at L=3",
+      "observed": {
+        "P1-ENDPOINT": {
+          "product": 18.0,
+          "ratio_L2": 1.0,
+          "ratio_L3": 0.9473684210526315
+        },
+        "P2-STRUCTURE": {
+          "product": 18.0,
+          "ratio_L2": 1.0,
+          "ratio_L3": 0.9473684210526315
+        },
+        "P3-PERMISSION": {
+          "product": 18.0,
+          "ratio_L2": 1.0,
+          "ratio_L3": 0.9473684210526315
+        }
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json"
+      ]
+    },
+    "T-REPAIR-LEGACY": {
+      "type": "replication_control",
+      "expected": "equal-weight product = 20 -> ratio > 1.00 at L=2 (prior regression reproduced)",
+      "observed": {
+        "P1-ENDPOINT": {
+          "product": 20.0,
+          "ratio_L2": 1.1111111111111112,
+          "ratio_L3": 1.0526315789473684
+        },
+        "P2-STRUCTURE": {
+          "product": 20.0,
+          "ratio_L2": 1.1111111111111112,
+          "ratio_L3": 1.0526315789473684
+        },
+        "P3-PERMISSION": {
+          "product": 20.0,
+          "ratio_L2": 1.1111111111111112,
+          "ratio_L3": 1.0526315789473684
+        }
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V13-LEGACY_REPRODUCTION"
+      ]
+    },
+    "PC-BASE-LIVENESS": {
+      "type": "positive_control",
+      "expected": "base_liveness true inside EVERY scored trial",
+      "observed": {
+        "true_trials": 36,
+        "trials_total": 36
+      },
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V12-POSITIVE_CONTROL"
+      ]
+    },
+    "NC-NO-PERTURBATION": {
+      "type": "negative_control_guard_specificity",
+      "expected": "stale == false (guard must not fire without perturbation)",
+      "observed": false,
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V7-GUARD_LIVENESS"
+      ]
+    },
+    "NC-NOISE": {
+      "type": "negative_control_guard_specificity",
+      "expected": "stale == false (non-semantic observed_at churn must not fire the guard)",
+      "observed": false,
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V7-GUARD_LIVENESS"
+      ]
+    },
+    "NC-OVERBROAD-REPAIR": {
+      "type": "negative_control_must_be_detected",
+      "expected": "over-broad contamination detected: M-OVERBROAD-CONTAMINATION-RATE-MEAN > 0.10",
+      "observed": {
+        "P1-ENDPOINT": 4.0,
+        "P2-STRUCTURE": 4.0,
+        "P3-PERMISSION": 4.0
+      },
+      "observed_note": "frozen metric is the mean over 12 trials per class of the count of the 4 unaffected probes broken by the over-broad rewrite; value 4.0 == 4/4 probes broken in every trial",
+      "mean": 4.0,
+      "result": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+        "V15-CONTAMINATION-INSTRUMENT-LIVE"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py",
+      "sha256": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_result_raw.json",
+      "sha256": "b2ac28d4e5e9528b2dbe9390518cc9075cfb262e06d10a9cca72c0330f8b996c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/mechanics_only_run1.json",
+      "sha256": "99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/mechanics_only_run2.json",
+      "sha256": "99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/prereg.md",
+      "sha256": "1bd397fe74c1480b59f18beaf21f3feb3a0c48a6b807e6392ec7bde0aa97ac95",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/spec.json",
+      "sha256": "bcdd3529a941fd40bccdf905d9a2ed4450acfb4f87ea32a0a274c06b36b68203",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/freeze.json",
+      "sha256": "bbc64a144af4f06365a37439875482c2d5d2bee14e0d4a79272b54b907afa99d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/request.json",
+      "sha256": "c8ee0a20b35d9e020b8ce40e8f6f275e4cd4f9997b8e73d170ee6eb884a3d60e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38244432934/design_review.json",
+      "sha256": "78028002869907b494f99940b3f3b08f28cdc3ddc4274cfe424c46311db866e6",
+      "role": "fixture"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Runner exited 0; raw JSON status=COMPLETE, invalid_reasons=[].",
+    "36/36 trials valid; 12 per class; rotating targets users/posts/comments (12 each).",
+    "repair_success=36/36 true; repair_guard_fired=36/36 true; cold_success=36/36 true; base_liveness=36/36 true.",
+    "literal_replay_success=0/36; norepair_success=0/36.",
+    "Equal-weight product counters are integral and identical across every trial of a class: T-REPAIR-REUSE=17, B-COLD-MIN=18 (L=2), B-COLD=19 (L=3), B-COLD-DEEP=20 (L=4), T-REPAIR-CONSERVATIVE=18, T-REPAIR-LEGACY=20.",
+    "Per-class reuse/cold ratios: M-PRODUCT-RATIO-REUSE-L2=0.9444444444444444, M-PRODUCT-RATIO-REUSE-L3=0.8947368421052632, M-PRODUCT-RATIO-REUSE-L4=0.85 on all three classes.",
+    "Per-class L=3 network-fetch ratio M-COST-FETCH-RATIO-L3 = 0.6666666666666666 (P1,P3) and 0.5555555555555556 (P2); reuse http mean 6 (P1,P3) / 5 (P2) vs cold http mean 9.",
+    "Per-class M-WEIGHT-ROBUST-BOTH = 0.7777777777777778 (P1,P3) and 0.6666666666666666 (P2); M-WEIGHT-ROBUST-L2 = 0.7778 (P1,P3) / 0.6667 (P2); M-WEIGHT-ROBUST-L3 = 0.8889 (P1,P3) / 0.7778 (P2).",
+    "Per-class critical repair-attempt weight M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2=2.0, -L3=3.0.",
+    "M-PRODUCT-RATIO-CONSERVATIVE-L2=1.0 and M-PRODUCT-RATIO-CONSERVATIVE-L3=0.9473684210526315 on all classes.",
+    "M-PRODUCT-RATIO-LEGACY-L2=1.1111111111111112 and M-PRODUCT-RATIO-LEGACY-L3=1.0526315789473684 on all classes; M-LEGACY-REGRESSION-REPRODUCED=true.",
+    "M-CONTAMINATION-RATE=0.0 on all classes (0/48 same-target probes per class); same-target contamination_n=0 in all 36 trials. M-CONTAMINATION-PROBES-TOTAL=144.",
+    "Over-broad rewrite broke all 4 unaffected probes in every one of the 36 trials (overbroad_contamination_n=4 for all trials; per-class M-OVERBROAD-CONTAMINATION-RATE=4.0).",
+    "M-WRITE-SET-MAX=1 and M-WRITE-SET-MEAN=1.0 on all classes; write_set_n=1 in all 36 trials.",
+    "NC-NO-PERTURBATION stale=false and NC-NOISE stale=false (jaccard=1.0, status=200).",
+    "Per-operation logs present in every trial (M-OPLOG-PRESENT=true): M-OPLOG-REPAIR-LEN-MEAN=17, M-OPLOG-LEGACY-LEN-MEAN=19.",
+    "M-REPAIR-SUCCESS-WILSON-LOWER=0.7574992425007574 on all classes (transcribed exactly).",
+    "Frozen classifier output: class_cost_verdicts = STRICT-WIN-COUNTER-DEPENDENT on all three classes; aggregate decision=SUPPORTS-COUNTER-DEPENDENT, outcome=MIXED (raw run and an independent re-implementation of the frozen pure classifier both produce this).",
+    "Two independent --mechanics-only runs were byte-identical (sha256 99be7f7bc8562dd112c6c0ad8f149465a6eb3b0d7fc420c2a4d95a32d58bc7ff).",
+    "Runner self-sha256=d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 (60855 bytes); carrier hashes kernel=3a6caf97..., models=338aaf4d..., registry=51fb440d..., all equal to freeze.json.artifact_hashes."
+  ],
+  "validity_notes": [
+    "V1-FREEZE_BINDING: runner extracted by literal marker split preserves the trailing newline; sha256=d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608, 60855 bytes, matches CANONICAL-RUNNER-SHA256. request/spec/prereg/design_review sha256 match freeze.json.hashes; carrier src/spider/{kernel,models,registry}.py match freeze.json.artifact_hashes. PASS.",
+    "V2-SUBSTRATE_ISOLATION: Python 3.12.15 stdlib only (ThreadingHTTPServer on 127.0.0.1 ephemeral port); no LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL; fresh per-process registry directory per Arm. PASS.",
+    "V3-DETERMINISM: two independent --mechanics-only runs byte-identical. PASS.",
+    "V4-PERTURBATION_BITES: B-LITERAL-REPLAY success 0.0 on all classes. PASS.",
+    "V5-COLD_BASELINE_LIVE: B-COLD success 1.0 on all classes (>=0.90). PASS.",
+    "V6-NO_REPAIR_INERT: B-NO-REPAIR success 0.0 on all classes. PASS.",
+    "V7-GUARD_LIVENESS: guard fire rate 1.0 on perturbed trials; NC-NO-PERTURBATION and NC-NOISE stale=false. PASS.",
+    "V8-NO_TARGET_LEAKAGE: M-WRITE-SET-MAX=1 on all classes; contamination measured on the 4 genuinely unaffected resources. PASS.",
+    "V9-INTEGER_COUNTERS: all product counters are integer sums of the shipped TrajectoryCounters surface; no estimated or token quantities. PASS.",
+    "V10-THRESHOLD_NOT_FITTED: all bars and the weight grid are preregistered in spec/prereg and were not tuned against any scored run. PASS.",
+    "V11-N_CONTROLLED: TRIALS_PER_CLASS=12 with rotating targets; 36 valid trials. PASS.",
+    "V12-POSITIVE_CONTROL: PC-BASE-LIVENESS true in 36/36 scored trials. PASS.",
+    "V13-LEGACY_REPRODUCTION: T-REPAIR-LEGACY ratio_L2=1.1111 > 1.00; M-LEGACY-REGRESSION-REPRODUCED=true. PASS.",
+    "V14-REUSE_IDENTITY: T-REPAIR-REUSE and T-REPAIR-LEGACY share seeds, perturbations, substrate and cold baseline; oplogs present in every trial and differ only by the legacy extra first-task resolve/fetch/verify (legacy mean 19 ops vs reuse mean 17). PASS.",
+    "V15-CONTAMINATION-INSTRUMENT-LIVE: M-CONTAMINATION-PROBES-TOTAL=144 > 0 and M-OVERBROAD-CONTAMINATION-RATE-MEAN=4.0 > 0.10; the parent's degenerate pinned-0.0 instrument is corrected. PASS.",
+    "Metric-shape caveat: the frozen id M-OVERBROAD-CONTAMINATION-RATE is the per-class mean of the COUNT of the 4 unaffected probes broken by the over-broad rewrite (0-4), not a 0-1 fraction, despite the name; the value is 4.0 (4/4 every trial), unambiguously above the 0.10 detection bar. M-CONTAMINATION-RATE is a true fraction (0/48 = 0.0) and is now a LIVE measurement, not the parent's structural pin, because the same instrument fires 4/4 on the over-broad rewrite.",
+    "Dynamic range: functional success has no dynamic range (treatment and cold both 1.0); this is a functional gate, not the measured advantage. The measured outcome is the cost ratio, whose dynamic range is live and two-sided (reuse 17 < cold 18/19 < legacy 20).",
+    "Representation loss: the substrate is a simplified localhost JSON API, not real websites; conclusions are about carrier/counter economics on this substrate, not real-web generalization. The cold denominator is cold re-derivation of the SAME carrier, not an external tool. The weight grid tests counter-choice robustness ({1,2,3}^4 monotone reweightings), NOT whether external agents weight these components this way.",
+    "The strict equal-weight win is real on the registered counter (ratios 0.9444/0.8947, fetch ratio 0.6667/0.5556) but robust only on a 0.6667-0.7778 fraction of the predeclared weight grid, so the frozen classifier returns STRICT-WIN-COUNTER-DEPENDENT (not ROBUST) for every class. Conservative L=3 ratio is 0.947 < 1.00, so the conservative bound does not by itself reverse the sign; the reversal comes from permitted monotone reweightings.",
+    "Raw value M-REPAIR-SUCCESS-WILSON-LOWER is transcribed verbatim as 0.7574992425007574 (audit F3)."
+  ],
+  "unresolved": [
+    "Whether localized repair should enter the product story is a DIRECTOR adjudication: this packet's frozen classifier yields SUPPORTS-COUNTER-DEPENDENT with outcome MIXED, which per spec.product_consequence_negative means the ~5.3% product-counter regression should be treated as effectively intrinsic/accounting-dependent.",
+    "Does the strict equal-weight win transfer to real Web tasks, a production carrier, or external agents? Not measured here (single synthetic credential-free substrate).",
+    "Is the registered equal-weight counter the product-correct counter? The result is counter-dependent by construction of the predeclared grid; the packet does not claim external weighting correctness.",
+    "Is T-REPAIR-LEGACY a faithful operation-sequence reconstruction or only a product-counter reconstruction? Oplogs are emitted but the prior system's real operation sequence is not independently known.",
+    "The exact structural interpretation of the per-class weight-robust fractions (P2 0.6667 vs P1/P3 0.7778) is not resolved: it follows from the P2 reuse vector shape (5,5,6,1) vs P1/P3 (6,5,5,1) on the predeclared grid."
+  ]
+}

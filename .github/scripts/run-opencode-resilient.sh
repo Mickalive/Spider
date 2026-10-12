@@ -4,12 +4,13 @@ ROLE=${1:?role}
 RECEIPT=${2:?receipt path}
 shift 2
 REAL="${OPENCODE_BIN:-$HOME/.opencode/bin/opencode}"
-MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-3}"
+MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-6}"
 RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-5}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-240}"
 MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-1200}"
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found|deprecated)|has been deprecated|HTTP[^0-9]*403)'
-PERMISSION_RE='(The user rejected permission to use this specific tool call|permission denied|requires permission approval)'
+PERMISSION_RE='(The user rejected permission to use this specific tool call|The user has specified a rule which prevents you from using this specific tool call|permission denied|requires permission approval)'
+AUTH_RE='(upstream request failed: invalid credential|invalid (api.?key|credential|token)|authentication failed|unauthori[sz]ed|status[^0-9]*401|HTTP[^0-9]*401)'
 # Github Actions has no interactive permission dialog. Explicitly fail closed on
 # unknown external paths and loop prompts rather than silently rejecting tools.
 if [[ "${GITHUB_ACTIONS:-}" == true ]]; then
@@ -68,6 +69,19 @@ if [[ ( "$ROLE" == audit || "$ROLE" == design_review ) && -z "${SPIDER_EXCLUDE_M
 fi
 if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   mapfile -t MODELS < <(printf '%s\n' "${MODELS[@]}" | grep -Fxv "$SPIDER_EXCLUDE_MODEL" || true)
+fi
+# If the headless FREE-provider smoke succeeded, try that proven model first
+# for every role, while retaining the independent producer exclusion above.
+# No external/provider-supplied model may enter this trusted configured list.
+if [[ -n "${SPIDER_PREFERRED_FREE_MODEL:-}" ]]; then
+  preferred="${SPIDER_PREFERRED_FREE_MODEL}"
+  for candidate in "${MODELS[@]}"; do
+    if [[ "$candidate" == "$preferred" ]]; then
+      mapfile -t MODELS < <(printf '%s\n' "$preferred" "${MODELS[@]}" | awk 'NF && !seen[$0]++')
+      echo "SPIDER_FREE_HEALTHY_FIRST role=$ROLE model=$preferred"
+      break
+    fi
+  done
 fi
 (( ${#MODELS[@]} > 0 )) || { echo "::error::No model candidates role=$ROLE"; exit 75; }
 # In a provider outage don't cycle the same failing free models seven times.
@@ -219,6 +233,14 @@ while (( attempt <= MAX_ATTEMPTS )); do
     retry_from_clean_baseline "$model" "$attempt" 76 output-missing
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
+  fi
+
+  # Authentication failure is shared by a provider; retrying different FREE
+  # models only consumes runner minutes. Fail closed, keep frozen evidence.
+  if grep -Eiq "$AUTH_RE" "$LOG"; then
+    write_receipt failure "$model" "$attempt" 78 provider-auth-invalid
+    echo "::error::SPIDER_PROVIDER_AUTH_INVALID role=$ROLE model=$model; repair free provider authentication before resuming" >&2
+    exit 78
   fi
 
   # A headless permission rejection is not a provider outage. Retrying all
