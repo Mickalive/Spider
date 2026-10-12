@@ -1,0 +1,384 @@
+{
+ "decision_reason": "fewer than 2 engines reach 0.5: none over 3 DEEP-admitting engine(s), limited=[] (engine-stratified bounded negative)",
+ "engine_classes_measured": [
+  "Docusaurus",
+  "GNU-web",
+  "GitBook",
+  "GitHubDocs",
+  "Hugo",
+  "Hugo-k8s",
+  "Jekyll",
+  "MDN-Yari",
+  "MediaWiki",
+  "Sphinx",
+  "Sphinx-RTD",
+  "WordPress",
+  "custom",
+  "mdBook",
+  "phpBB"
+ ],
+ "engines_at_or_above_threshold": [],
+ "engines_limited": [],
+ "engines_with_zero_deep": [
+  "Docusaurus",
+  "GNU-web",
+  "GitBook",
+  "GitHubDocs",
+  "Hugo",
+  "Hugo-k8s",
+  "Jekyll",
+  "MDN-Yari",
+  "MediaWiki",
+  "WordPress",
+  "custom",
+  "phpBB"
+ ],
+ "experiment_id": "EXP-FRONTIER-38184956362",
+ "host_census": {
+  "blog.wordpress.org": 0,
+  "developer.mozilla.org": 0,
+  "doc.rust-lang.org": 13,
+  "docs.gitbook.com": 0,
+  "docs.github.com": 0,
+  "docs.pytest.org": 159,
+  "docs.python.org": 0,
+  "docs.readthedocs.io": 28,
+  "docusaurus.io": 0,
+  "en.wikipedia.org": 0,
+  "forums.gentoo.org": 0,
+  "gohugo.io": 0,
+  "jekyllrb.com": 0,
+  "kubernetes.io": 0,
+  "numpy.org": 0,
+  "pandas.pydata.org": 8,
+  "quotes.toscrape.com": 0,
+  "react.dev": 0,
+  "www.gnu.org": 0,
+  "www.mediawiki.org": 0
+ },
+ "outcome": "FALSIFIES",
+ "per_engine": {
+  "Docusaurus": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "docusaurus.io",
+    "react.dev"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "GNU-web": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "www.gnu.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "GitBook": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "docs.gitbook.com"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "GitHubDocs": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "docs.github.com"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "Hugo": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "gohugo.io"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "Hugo-k8s": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "kubernetes.io"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "Jekyll": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "jekyllrb.com"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "MDN-Yari": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "developer.mozilla.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "MediaWiki": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "en.wikipedia.org",
+    "www.mediawiki.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "Sphinx": {
+   "ci95": [
+    0.0,
+    0.36941664755281933
+   ],
+   "fraction": 0.0,
+   "hop_distribution": {
+    "3": 8
+   },
+   "hosts": [
+    "pandas.pydata.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 8,
+   "per_channel": {
+    "JSON_LD": 0.0,
+    "ON_SITE_SEARCH": 0.0,
+    "ROBOTS_SITEMAP": 0.0,
+    "RSS_ATOM": 0.0,
+    "SITEMAP_XML": 0.0
+   },
+   "reachable": 0
+  },
+  "Sphinx-RTD": {
+   "ci95": [
+    0.0,
+    0.01953333128693524
+   ],
+   "fraction": 0.0,
+   "hop_distribution": {
+    "3": 88,
+    "4": 99
+   },
+   "hosts": [
+    "docs.pytest.org",
+    "docs.readthedocs.io"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 187,
+   "per_channel": {
+    "JSON_LD": 0.0,
+    "ON_SITE_SEARCH": 0.0,
+    "ROBOTS_SITEMAP": 0.0,
+    "RSS_ATOM": 0.0,
+    "SITEMAP_XML": 0.0
+   },
+   "reachable": 0
+  },
+  "WordPress": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "blog.wordpress.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "custom": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "quotes.toscrape.com"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  },
+  "mdBook": {
+   "ci95": [
+    0.0,
+    0.24705263800047095
+   ],
+   "fraction": 0.0,
+   "hop_distribution": {
+    "3": 13
+   },
+   "hosts": [
+    "doc.rust-lang.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 13,
+   "per_channel": {
+    "JSON_LD": 0.0,
+    "ON_SITE_SEARCH": 0.0,
+    "ROBOTS_SITEMAP": 0.0,
+    "RSS_ATOM": 0.0,
+    "SITEMAP_XML": 0.0
+   },
+   "reachable": 0
+  },
+  "phpBB": {
+   "ci95": null,
+   "fraction": null,
+   "hop_distribution": {},
+   "hosts": [
+    "forums.gentoo.org"
+   ],
+   "limited": false,
+   "n_dead_excluded": 0,
+   "n_deep": 0,
+   "per_channel": {
+    "JSON_LD": null,
+    "ON_SITE_SEARCH": null,
+    "ROBOTS_SITEMAP": null,
+    "RSS_ATOM": null,
+    "SITEMAP_XML": null
+   },
+   "reachable": 0
+  }
+ },
+ "pool_engines_census": {
+  "Docusaurus": 0,
+  "GNU-web": 0,
+  "GitBook": 0,
+  "GitHubDocs": 0,
+  "Hugo": 0,
+  "Hugo-k8s": 0,
+  "Jekyll": 0,
+  "MDN-Yari": 0,
+  "MediaWiki": 0,
+  "Sphinx": 8,
+  "Sphinx-RTD": 187,
+  "WordPress": 0,
+  "custom": 0,
+  "mdBook": 13,
+  "phpBB": 0
+ },
+ "seed_error_hosts": []
+}
