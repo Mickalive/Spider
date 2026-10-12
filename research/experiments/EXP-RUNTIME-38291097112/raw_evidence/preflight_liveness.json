@@ -1,0 +1,47 @@
+{
+  "status": "V3-LIVENESS-ONLY",
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "lane": "runtime",
+  "runner_self_sha": "ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229",
+  "server_ready": true,
+  "distill_live": true,
+  "task_read_verified": true,
+  "in_support_probe_id": 14,
+  "contamination_instrument_live": true,
+  "out_of_support_probe_degenerate": true,
+  "nc_no_perturbation_stale": false,
+  "nc_noise_stale": false,
+  "timer_resolution_s": 1e-09,
+  "mini_calibration": {
+    "calib_ok": true,
+    "reasons": [],
+    "n_cal": 60,
+    "medians_s": {
+      "fetch": 0.0003494160000627744,
+      "resolve": 4.093149993877887e-05,
+      "verify": 3.658499997527542e-05,
+      "repair": 1.9000003703695256e-07
+    },
+    "rse": {
+      "fetch": 0.0133835133406153,
+      "resolve": 0.0025958222159284906,
+      "verify": 0.0011997097317035135,
+      "repair": 0.0014602937263747727
+    },
+    "weights": [
+      1.0,
+      0.117143,
+      0.104703,
+      0.000544
+    ],
+    "bytes_median": 78.0,
+    "timer_resolution_s": 1e-09
+  },
+  "carrier": {
+    "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "v2_runner_sha256": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+    "v2_runner_bytes": 60855
+  }
+}

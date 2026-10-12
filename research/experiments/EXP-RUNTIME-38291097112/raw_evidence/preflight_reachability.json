@@ -1,0 +1,77 @@
+{
+  "status": "V3-REACHABILITY-PROBE",
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "lane": "runtime",
+  "runner_self_sha": "ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229",
+  "decision_rule": {
+    "class_cost_verdicts": {
+      "STRICT-WIN-MEASURED": "STRICT-WIN-MEASURED",
+      "SINGLE-SURFACE-CALIB": "SINGLE-SURFACE-MIXED",
+      "SINGLE-SURFACE-LAT": "SINGLE-SURFACE-MIXED",
+      "EQUAL-ONLY-MIXED": "EQUAL-ONLY-MIXED",
+      "BOUNDED-WIN": "BOUNDED-WIN",
+      "MIXED-TRADEOFF": "MIXED-TRADEOFF",
+      "COST-FAIL": "COST-FAIL",
+      "FUNCTIONAL-FAIL": "FUNCTIONAL-FAIL",
+      "COST-UNKNOWN": "COST-UNKNOWN"
+    },
+    "aggregate_decisions": {
+      "SUPPORTS": "SUPPORTS",
+      "MIXED-PARTIAL": "MIXED-PARTIAL",
+      "MIXED-COUNTER-DEPENDENT": "MIXED-COUNTER-DEPENDENT",
+      "MIXED": "MIXED",
+      "FALSIFIES": "FALSIFIES",
+      "INCONCLUSIVE": "INCONCLUSIVE"
+    },
+    "all_class_branches_reachable": true,
+    "all_aggregate_branches_reachable": true,
+    "calibrated_arithmetic": {
+      "parent_P1_vectors": {
+        "reuse": [
+          6,
+          5,
+          5,
+          1
+        ],
+        "cold_L2": [
+          8,
+          5,
+          5,
+          0
+        ],
+        "cold_L3": [
+          9,
+          5,
+          5,
+          0
+        ]
+      },
+      "time_order_weights_win_L2_L3": [
+        true,
+        true
+      ],
+      "repair_heavy_weights_win_L2_L3": [
+        false,
+        false
+      ],
+      "both_sides_exist": true
+    }
+  },
+  "repair_signal_probe": {
+    "P1": {
+      "patched": true,
+      "probe_body_present": true,
+      "probe_header_present": false
+    },
+    "P3": {
+      "patched": true,
+      "probe_body_present": true,
+      "probe_header_present": true
+    },
+    "P2": {
+      "patched": true,
+      "probe_body_present": true,
+      "probe_header_present": false
+    }
+  }
+}
