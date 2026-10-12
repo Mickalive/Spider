@@ -1,0 +1,731 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-CLASSES": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          6.0,
+          5.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          6.0,
+          6.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-LEGACY-VECTOR": [
+          7.0,
+          7.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.7803216368165052,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.7030740766039338,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.746588499983773,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.9169490000858787,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.324328499933472,
+        "M-LATENCY-R-L2": 1.2118075828609727,
+        "M-LATENCY-R-L3": 1.0976475307222375,
+        "M-LATENCY-R-L2-CI95": [
+          1.1799156855642476,
+          1.2838294639534704
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          1.0788680426878012,
+          1.1646716748539654
+        ],
+        "M-LATENCY-WIN": false,
+        "M-LATENCY-ORDER-REP-FIRST": 6,
+        "M-LATENCY-N": 12,
+        "M-WARMUP-EPISODES": 24,
+        "M-TIMED-EPISODE-ERRORS": 0,
+        "M-TIMED-LATENCIES-FINITE": true,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          5.0,
+          5.0,
+          6.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          5.0,
+          6.0,
+          6.0,
+          1.0
+        ],
+        "M-COST-REPAIR-LEGACY-VECTOR": [
+          6.0,
+          7.0,
+          6.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 5.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-WEIGHT-ROBUST-L2": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L3": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-BOTH": 0.6666666666666666,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.6819090552509073,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.6144038005973329,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.3463895001423225,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.8104190000467497,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.155493000098431,
+        "M-LATENCY-R-L2": 1.140659203118869,
+        "M-LATENCY-R-L3": 1.0459383519691572,
+        "M-LATENCY-R-L2-CI95": [
+          1.1048586566812086,
+          1.1661209661509635
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          1.002171497916499,
+          1.0668629781132997
+        ],
+        "M-LATENCY-WIN": false,
+        "M-LATENCY-ORDER-REP-FIRST": 6,
+        "M-LATENCY-N": 12,
+        "M-WARMUP-EPISODES": 24,
+        "M-TIMED-EPISODE-ERRORS": 0,
+        "M-TIMED-LATENCIES-FINITE": true,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-PROBES": 48,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-BASE-LIVENESS-TRUE-TRIALS": 12,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-REPAIR-REUSE-VECTOR": [
+          6.0,
+          5.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-CONSERVATIVE-VECTOR": [
+          6.0,
+          6.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-REPAIR-LEGACY-VECTOR": [
+          7.0,
+          7.0,
+          5.0,
+          1.0
+        ],
+        "M-COST-COLD-MIN-VECTOR": [
+          8.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-COST-COLD-VECTOR": [
+          9.0,
+          5.0,
+          5.0,
+          0.0
+        ],
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.7803216368165052,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.7030740766039338,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.725189500049964,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.7762869999369286,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.126483499931055,
+        "M-LATENCY-R-L2": 1.251279232783124,
+        "M-LATENCY-R-L3": 1.1450886693546485,
+        "M-LATENCY-R-L2-CI95": [
+          1.2213198697014722,
+          1.2853863253239317
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          1.0868859659869778,
+          1.1729779470542545
+        ],
+        "M-LATENCY-WIN": false,
+        "M-LATENCY-ORDER-REP-FIRST": 6,
+        "M-LATENCY-N": 12,
+        "M-WARMUP-EPISODES": 24,
+        "M-TIMED-EPISODE-ERRORS": 0,
+        "M-TIMED-LATENCIES-FINITE": true,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-OPLOG-REPAIR-LEN-MEAN": 17.0,
+        "M-OPLOG-LEGACY-LEN-MEAN": 19.0,
+        "M-OPLOG-PRESENT": true
+      }
+    },
+    "M-IN-SUPPORT-PROBE-ID": 14,
+    "M-CONTAMINATION-PROBES-TOTAL": 144,
+    "M-OVERBROAD-CONTAMINATION-RATE-MEAN": 4.0,
+    "M-BASE-LIVENESS-TRUE-TRIALS-TOTAL": 36,
+    "M-BASE-LIVENESS-TRIALS-TOTAL": 36,
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "M-LEGACY-REGRESSION-REPRODUCED": true,
+    "M-TRIALS-TOTAL": 36,
+    "M-CALIB-OK": true,
+    "M-CALIB-N": 300,
+    "M-CALIB-MEDIANS-S": {
+      "fetch": 0.00036241500004052796,
+      "resolve": 4.204849994948745e-05,
+      "verify": 3.779650000979018e-05,
+      "repair": 2.1100004232721403e-07
+    },
+    "M-CALIB-RSE": {
+      "fetch": 0.005390638671806325,
+      "resolve": 0.0012906076168196117,
+      "verify": 0.00039894746466030933,
+      "repair": 0.011810940348514277
+    },
+    "M-MEASURED-WEIGHTS": [
+      1.0,
+      0.116023,
+      0.104291,
+      0.000582
+    ],
+    "M-CALIB-BYTES-PER-FETCH-MEDIAN": 78.0,
+    "M-WARMUP-EPISODES-TOTAL": 72,
+    "M-TIMED-EPISODE-ERRORS-TOTAL": 0,
+    "M-MODEL-CALLS-TOTAL": 0,
+    "M-MODEL-TOKENS-TOTAL": 0,
+    "M-RUNNER-DECISION": "MIXED-PARTIAL",
+    "M-RUNNER-OUTCOME": "MIXED",
+    "M-CLASS-COST-VERDICTS": {
+      "P1-ENDPOINT": "SINGLE-SURFACE-MIXED",
+      "P2-STRUCTURE": "SINGLE-SURFACE-MIXED",
+      "P3-PERMISSION": "SINGLE-SURFACE-MIXED"
+    },
+    "M-RUNNER-INVALID-REASONS": [],
+    "M-RUNNER-SEED": 3931358744,
+    "M-RUNNER-SELF-SHA": "ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229"
+  },
+  "controls": {
+    "B-COLD": {
+      "type": "cost_baseline_primary",
+      "expected": "cold success >= 0.90 every class; cold product counter 19 at L=3",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "product": 19.0,
+          "latency_median_ms": 4.324328499933472
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "product": 19.0,
+          "latency_median_ms": 4.155493000098431
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "product": 19.0,
+          "latency_median_ms": 4.126483499931055
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES.*.M-COLD-SUCCESS"
+      ]
+    },
+    "B-COLD-MIN": {
+      "type": "cost_baseline_sensitivity",
+      "expected": "cold-min success >= 0.90; cold product counter 18 at L=2",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "product": 18.0,
+          "latency_median_ms": 3.9169490000858787
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "product": 18.0,
+          "latency_median_ms": 3.8104190000467497
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "product": 18.0,
+          "latency_median_ms": 3.7762869999369286
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES.*.M-COLD-MIN-SUCCESS"
+      ]
+    },
+    "B-COLD-DEEP": {
+      "type": "cost_baseline_sensitivity",
+      "expected": "untimed sensitivity L=4 (not scored in v3 runner; parent value carried as reference only)",
+      "observed": null,
+      "verdict": "NOT_APPLICABLE",
+      "evidence_refs": [],
+      "note": "v3 runner scores timed cold-L2/L3 decision denominators only; L=4 deep arm is not re-executed. No claim is made about L=4 in this packet."
+    },
+    "B-LITERAL-REPLAY": {
+      "type": "mechanism_control_must_fail",
+      "expected": "success <= 0.10 every class (perturbation bites)",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES.*.M-LITERAL-REPLAY-SUCCESS"
+      ]
+    },
+    "B-NO-REPAIR": {
+      "type": "mechanism_control_must_fail",
+      "expected": "success <= 0.10 every class; never a denominator",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES.*.M-NO-REPAIR-SUCCESS"
+      ]
+    },
+    "T-REPAIR-REUSE": {
+      "type": "treatment",
+      "expected": "timed treatment episode; functional gates per H1",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "guard": 1.0,
+          "write_max": 1,
+          "contam": 0.0,
+          "eq_L2": 0.9444444444444444,
+          "eq_L3": 0.8947368421052632,
+          "fetch_L3": 0.6666666666666666,
+          "cal_L2": 0.7803216368165052,
+          "cal_L3": 0.7030740766039338,
+          "cal_win": true,
+          "lat_R2": 1.2118075828609727,
+          "lat_R3": 1.0976475307222375,
+          "lat_win": false
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "guard": 1.0,
+          "write_max": 1,
+          "contam": 0.0,
+          "eq_L2": 0.9444444444444444,
+          "eq_L3": 0.8947368421052632,
+          "fetch_L3": 0.5555555555555556,
+          "cal_L2": 0.6819090552509073,
+          "cal_L3": 0.6144038005973329,
+          "cal_win": true,
+          "lat_R2": 1.140659203118869,
+          "lat_R3": 1.0459383519691572,
+          "lat_win": false
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "wilson_lower": 0.7574992425007574,
+          "guard": 1.0,
+          "write_max": 1,
+          "contam": 0.0,
+          "eq_L2": 0.9444444444444444,
+          "eq_L3": 0.8947368421052632,
+          "fetch_L3": 0.6666666666666666,
+          "cal_L2": 0.7803216368165052,
+          "cal_L3": 0.7030740766039338,
+          "cal_win": true,
+          "lat_R2": 1.251279232783124,
+          "lat_R3": 1.1450886693546485,
+          "lat_win": false
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics",
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#class_cost_verdicts"
+      ]
+    },
+    "T-REPAIR-CONSERVATIVE": {
+      "type": "sensitivity_excluded_from_classifier",
+      "expected": "untimed upper-bound sensitivity; excluded from classifier",
+      "observed": {
+        "P1-ENDPOINT": {
+          "L2": 1.0,
+          "L3": 0.9473684210526315
+        },
+        "P2-STRUCTURE": {
+          "L2": 1.0,
+          "L3": 0.9473684210526315
+        },
+        "P3-PERMISSION": {
+          "L2": 1.0,
+          "L3": 0.9473684210526315
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES.*.M-PRODUCT-RATIO-CONSERVATIVE-L*"
+      ]
+    },
+    "T-REPAIR-LEGACY": {
+      "type": "replication_control",
+      "expected": "legacy L=2 ratio > 1.00 every class (V13 premise; per executable runner + prereg this is a reported caveat, not an auto-invalidation gate -- design_review NB-1; here satisfied under both readings)",
+      "observed": {
+        "ratios_L2": {
+          "P1-ENDPOINT": 1.1111111111111112,
+          "P2-STRUCTURE": 1.1111111111111112,
+          "P3-PERMISSION": 1.1111111111111112
+        },
+        "M-LEGACY-REGRESSION-REPRODUCED": true
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-LEGACY-REGRESSION-REPRODUCED"
+      ]
+    },
+    "PC-BASE-LIVENESS": {
+      "type": "positive_control",
+      "expected": "base_liveness true in EVERY valid scored trial (36/36)",
+      "observed": {
+        "true_trials": 36,
+        "total": 36
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-BASE-LIVENESS-TRUE-TRIALS-TOTAL"
+      ]
+    },
+    "NC-NO-PERTURBATION": {
+      "type": "negative_control",
+      "expected": "stale=false",
+      "observed": 0.0,
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#nc_no_perturbation"
+      ]
+    },
+    "NC-NOISE": {
+      "type": "negative_control",
+      "expected": "stale=false",
+      "observed": 0.0,
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#nc_noise"
+      ]
+    },
+    "NC-OVERBROAD-REPAIR": {
+      "type": "must_fire_control",
+      "expected": "overbroad rate > 0.10 with probes > 0",
+      "observed": {
+        "mean_rate": 4.0,
+        "probes_total": 144,
+        "per_class": {
+          "P1-ENDPOINT": 4.0,
+          "P2-STRUCTURE": 4.0,
+          "P3-PERMISSION": 4.0
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-OVERBROAD-CONTAMINATION-RATE-MEAN"
+      ],
+      "note": "Rate is a per-trial count 0-4 (4 unaffected resources), not a 0-1 fraction; substance is 4/4 every trial."
+    },
+    "V0-SUBSTRATE-PIN": {
+      "type": "provenance_gate",
+      "expected": "parent v2 file 60855 bytes sha d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+      "observed": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 / 60855 bytes; runner imported and ran (refusal did not trigger)",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#carrier"
+      ]
+    },
+    "V1-FREEZE-BINDING": {
+      "type": "provenance_gate",
+      "expected": "runner self sha ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229; carrier hashes match freeze.json",
+      "observed": {
+        "runner_self_sha": "ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229",
+        "carrier": {
+          "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+          "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+          "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+          "v2_runner_sha256": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+          "v2_runner_bytes": 60855
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#carrier",
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#runner_self_sha"
+      ],
+      "note": "Carrier-hash enforcement lives at EXECUTE pre-flight per design_review NB-2; verified match before the scored run."
+    },
+    "V-CALIB": {
+      "type": "construction_gate",
+      "expected": "calib_ok=true, N=300/class, medians finite>0, timer<=1us, RSE<=0.30",
+      "observed": {
+        "calib_ok": true,
+        "reasons": [],
+        "n_cal": 300,
+        "medians_s": {
+          "fetch": 0.00036241500004052796,
+          "resolve": 4.204849994948745e-05,
+          "verify": 3.779650000979018e-05,
+          "repair": 2.1100004232721403e-07
+        },
+        "rse": {
+          "fetch": 0.005390638671806325,
+          "resolve": 0.0012906076168196117,
+          "verify": 0.00039894746466030933,
+          "repair": 0.011810940348514277
+        },
+        "weights": [
+          1.0,
+          0.116023,
+          0.104291,
+          0.000582
+        ],
+        "bytes_median": 78.0,
+        "timer_resolution_s": 1e-09
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#calibration"
+      ]
+    },
+    "V-TIMING": {
+      "type": "timing_integrity_gate",
+      "expected": "warmups==72, per-class parity exactly 6/6, timed errors==0, all latencies finite>0",
+      "observed": {
+        "warmups_total": 72,
+        "timed_errors_total": 0,
+        "per_class_order": {
+          "P1-ENDPOINT": 6,
+          "P2-STRUCTURE": 6,
+          "P3-PERMISSION": 6
+        },
+        "per_class_warmups": {
+          "P1-ENDPOINT": 24,
+          "P2-STRUCTURE": 24,
+          "P3-PERMISSION": 24
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-WARMUP-EPISODES-TOTAL"
+      ]
+    },
+    "V-FUNCTIONAL-H1": {
+      "type": "validity_gate",
+      "expected": "repair>=0.80, wilson>=0.60, contam<=0.10, write_max<=1, guard>=0.80 every class",
+      "observed": {
+        "P1-ENDPOINT": {
+          "success": 1.0,
+          "wilson": 0.7574992425007574,
+          "contam": 0.0,
+          "write_max": 1,
+          "guard": 1.0
+        },
+        "P2-STRUCTURE": {
+          "success": 1.0,
+          "wilson": 0.7574992425007574,
+          "contam": 0.0,
+          "write_max": 1,
+          "guard": 1.0
+        },
+        "P3-PERMISSION": {
+          "success": 1.0,
+          "wilson": 0.7574992425007574,
+          "contam": 0.0,
+          "write_max": 1,
+          "guard": 1.0
+        }
+      },
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json",
+      "sha256": "48409b3f9c579b49483c7a5f03e2ca1a5441576c460fc120a325228b245b1cac",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_delta_repair_calibrated_v3.py",
+      "sha256": "ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/preflight_reachability.json",
+      "sha256": "8700b5d96126078a8bb34a19c9ef172e63dd1ab4bb41ef3b9c4351c96ec208f4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/preflight_liveness.json",
+      "sha256": "c1b7dfe1772e4c4118b74044f9f8baa7c791084ec73bc343be0a285a74287689",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Scored run status COMPLETE with zero invalid_reasons; 36/36 trials valid (12 per class P1-ENDPOINT/P2-STRUCTURE/P3-PERMISSION); decision MIXED-PARTIAL (all three classes SINGLE-SURFACE-MIXED).",
+    "Equal-weight strict win reproduced exactly on all classes: reuse-vs-cold product ratios 0.9444 (L=2) / 0.8947 (L=3); fetch ratio 0.6667 (P1,P3) / 0.5556 (P2); reuse vectors (6,5,5,1) P1/P3 and (5,5,6,1) P2 vs cold (8,5,5,0)/(9,5,5,0).",
+    "Functional/locality gates hold on all classes: repair success 1.0 with Wilson lower 0.7574992425007574; guard fire 1.0; contamination 0.0/144 in-support probes; write-set max 1; literal-replay 0.0; no-repair 0.0.",
+    "Stage-A calibration live: calib_ok=true, N=300/class; medians fetch 0.00036241500004052796s, resolve 4.204849994948745e-05s, verify 3.779650000979018e-05s, repair-bookkeeping 2.1100004232721403e-07s; RSE 0.00539/0.00129/0.00040/0.01181 (all << 0.30 bar); timer resolution 1e-09s; bytes/fetch median 78.0; measured weights [1.0, 0.116023, 0.104291, 0.000582].",
+    "Calibrated surface: reuse strictly cheaper than cold at BOTH budgets on ALL classes (P1 0.7803/0.7031, P2 0.6819/0.6144, P3 0.7803/0.7031); M-CALIBRATED-WIN=true all classes; 81-combo band around measured weights M-CALIBRATED-ROBUST-BOTH=1.0 all classes.",
+    "Latency surface: reuse median episode SLOWER than cold at BOTH budgets on ALL classes -- P1 R_L2=1.2118075828609727 CI95 [1.1799156855642476, 1.2838294639534704] R_L3=1.0976475307222375 CI95 [1.0788680426878012, 1.1646716748539654]; P2 R_L2=1.140659203118869 CI95 [1.1048586566812086, 1.1661209661509635] R_L3=1.0459383519691572 CI95 [1.002171497916499, 1.0668629781132997]; P3 R_L2=1.251279232783124 CI95 [1.2213198697014722, 1.2853863253239317] R_L3=1.1450886693546485 CI95 [1.0868859659869778, 1.1729779470542545]; M-LATENCY-WIN=false all classes; every CI95 excludes 1.0 from above.",
+    "Absolute median episode latencies: P1 reuse 4.746588499983773ms vs cold-L2 3.9169490000858787ms vs cold-L3 4.324328499933472ms; P2 reuse 4.3463895001423225ms vs 3.8104190000467497ms vs 4.155493000098431ms; P3 reuse 4.725189500049964ms vs 3.7762869999369286ms vs 4.126483499931055ms.",
+    "Replication premise holds: legacy L=2 ratio 1.1111111111111112 all classes (M-LEGACY-REGRESSION-REPRODUCED=true); equal-weight grid-robustness 0.7778 (P1/P3) / 0.6667 (P2) with critical repair weights 2.0 (L=2) / 3.0 (L=3), matching the parent packet values.",
+    "Controls: base-liveness 36/36; overbroad 4/4 every trial (mean 4.0); NC stale false both; warmups 72/72 with exact 6/6 parity per class; timed errors 0; all latencies finite>0; model_calls total 0, model_tokens total 0 (measured from kernel counters).",
+    "Pre-flight probes: reachability all 8 class + 6 aggregate branches reachable; liveness server/distill/verify/instrument/NCs/timer/mini-calib all live; carrier + V0 pins verified before the scored run."
+  ],
+  "validity_notes": [
+    "B3 NOT SATISFIED is preserved as unknown: model_calls/model_tokens are measured 0 because no LLM/model endpoint exists on this substrate; no real model-call/token economics was constructed. The calibrated counter covers only the four counted op classes {http, retrieval, verification, repair}; byte volume (median 78/fetch) is diagnostic only with no byte<->time exchange rate.",
+    "The two new surfaces DIVERGE and that divergence is the finding, not a defect: the calibrated counted-op model says reuse wins decisively (band 1.0), while wall-clock episode latency says reuse loses decisively (all CIs above 1.0). The calibration workload times four op classes only; episode scaffolding (guard Jaccard computation, fused-probe signal work, registry construction, deepcopies, server-side dispatch) is uncounted and evidently favors cold. The calibrated counter is therefore an incomplete end-to-end model on this substrate.",
+    "Localhost timing scope: in-process ThreadingHTTPServer over 127.0.0.1; median episodes ~4ms; absolute reuse-cold gaps ~0.2-0.9ms. Timer resolution 1ns is >2 orders below the smallest calibrated median (~0.21us repair bookkeeping); RSEs are tiny (<=0.012). Parity order (6/6 per class) and 2 excluded warmups per trial control order/warmup confounding; latency CIs (B_LAT=2000 bootstrap, fixed seeds) all exclude 1.0, so the latency loss is not borderline noise.",
+    "Equal-weight counter-dependence reproduced, not resolved away: grid fractions 0.78/0.67 < 1.0 identical to the parent; the equal-weight strict win still does not survive the predeclared {1,2,3}^4 grid.",
+    "B-COLD-DEEP (L=4) was not re-executed by the v3 runner (timed L=2/L=3 decision denominators only); no L=4 claim is made here. Conservative arm is an untimed sensitivity excluded from the classifier per the frozen rule.",
+    "Design-review NB-1 (V13 gate-text inconsistency between spec prose and runner/prereg): moot for this run -- legacy regression reproduced (1.1111 > 1.00 all classes), so the gate is satisfied under both readings; recorded for downstream transparency.",
+    "Design-review NB-2 (carrier-hash enforcement at EXECUTE pre-flight rather than in-runner): enforced -- all three carrier hashes re-verified equal to freeze.json.artifact_hashes before the scored run.",
+    "Scope bounds: single credential-free stdlib substrate, shipped carrier, three LOCAL perturbation classes, n=12/class. No transfer claim to real web, production carrier, external agents, browser/network economics, or orthogonal repair mechanisms.",
+    "Discrete determinism projection only covers non-wall-clock state by construction; wall-clock latencies are inherently non-projected and were re-measured here with fixed seeds for resampling only."
+  ],
+  "unresolved": [
+    "Which uncounted episode-scaffolding component (guard/signal/registry/deepcopy/server dispatch) accounts for the ~0.2-0.9ms reuse latency excess -- the runner does not decompose scaffolding, so the mechanism of the latency loss is unidentified.",
+    "Whether any justifiable end-to-end counter (e.g. one pricing scaffolding, bytes, or real model calls/tokens if B3 is ever satisfied) could still show a strict reuse win at L=2 AND L=3 -- this packet tested the preregistered time-calibrated counted-op counter plus raw latency, not the space of all counters.",
+    "Transfer of either surface (calibrated weights, latency sign) to real-web substrates, production carriers, or external agent harnesses.",
+    "Real model-call/token economics (B3) remains unmeasured by construction."
+  ]
+}

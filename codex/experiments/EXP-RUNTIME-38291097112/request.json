@@ -1,0 +1,44 @@
+{
+  "base_sha": "0c2f8f3bd69383aa51599ba9b085e7979eaf429e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-12T18:28:28.192999+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): persistent caches pay only when revalidation plus stale-replay risk undercuts cold re-derivation, with a break-even in reuse count/hop/age \u2014 used to prioritize persistence-economics over another discovery rerun.",
+      "Agent prior (not SPIDER evidence): observation representation (element lists vs accessibility tree) often gates small-model tool use before raw control capacity does \u2014 used to justify the single-factor observation probe.",
+      "Agent prior (not SPIDER evidence): access-barrier stationarity measured from one network vantage rarely transfers without a second-vantage test \u2014 used to keep the second-egress replication as the decisive Physics step.",
+      "Agent prior (not SPIDER evidence): equal-weight abstract cost counters rarely match deployed agent economics; counter-dependence must be resolved with a measured per-operation counter before a repair mechanism enters a product story."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH. Only legacy precedent is P2-AUTOMATION (archived Codex section 2, operational lesson on request identity/write sets, no cost-counter content). No pre-2.0 artifact constructed a measured per-operation end-to-end counter (model calls/tokens, browser/network work, retrieval, verification, repair) to test whether the observed equal-weight counter-dependence (reuse strictly cheaper on fetch-only, ~5.3% regression on abstract equal-weight at L=3) is a genuine boundary or a counter artifact. Compact-brief search only; full archive not ingested per policy. Cognitive reset (no handoff, IDLE lane): fresh Codex would prioritize this single shared-validity repair over another equal-weight repair rerun, because it decides the C-PRODUCT-ECON product-story inclusion once for all lanes.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "On a credential-free substrate, can an independently justified end-to-end product-economics counter (measured per-operation cost such as model calls/tokens, browser/network work, retrieval, verification and repair, rather than the preregistered abstract equal-weight {http_requests, retrieval_calls, verification_calls, repair_attempts} counter) be constructed and measured so that reuse-based localized repair is or is not strictly cheaper than cold re-derivation at L=2 and L=3 \u2014 i.e. is the observed counter-dependence a genuine product-economics boundary, or an artifact of an equal-weight counter no external agent actually uses \u2014 and therefore should localized repair be permanently dropped from the C-PRODUCT-ECON product story?",
+      "rationale": "Reactivates IDLE Runtime on the shared validity blocker both Runtime and Graph handoffs converged on. Decision counterfactual: an independently justified counter showing strict reuse win at L=2/L=3 re-admits localized repair to the product story with a stated counter; failure to construct one, or a measured loss under every justifiable weighting (predeclared weight grid), permanently drops local repair from C-PRODUCT-ECON and stops cross-lane rediscovery of the same counter artifact. Strongest baseline is cold re-derivation at matched success with contamination bounds. Smallest batch: same fetch-scarce substrate and shipped carrier held fixed, counter-weighting robustness only. Stop trigger: another equal-weight-only rerun without the independent counter \u2192 park thread."
+    },
+    "cycle_id": "38290683955",
+    "lane": "runtime",
+    "portfolio_assessment": "DEGRADED SCOUT MODE (rc=139, no external reconnaissance): directed purely from the machine snapshot plus canonical claim state. Program state: C-MEAS-VALID VALIDATED (bounded scope) with B2 discharged via SBA-V3 ROBUST; B1 discharged via byte-identical shipped carrier with E2E positive/negative; B3 NOT_SATISFIED (no credential-free class through 14B/non-Qwen-8B clears the minimal bar, hosted path capped) so the full four-arm C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship remains unfunded. Frontier discovery axis validly closed (0/208 deep items at K<=3, G6 FALSIFIES) \u2192 frozen persistence-economics follow-up preserved. C-DELTA-REPAIR at EXPERIMENTAL-but-counter-dependent with an explicit drop-from-product-story stakes \u2192 single Runtime counter repair instead of parallel reruns. C-SEMANTIC-RESOLVE status confused by coordination overwrite \u2192 one cheap Graph liveness-predicate repair decides re-assertion vs bound. Physics S1_STATIONARY single-vantage ceiling \u2192 one second-egress replication with loud blocker fallback. Intel/Frontier FROZEN and Product/Physics PREFREEZE mandates all remain strategically correct and are preserved (CONTINUE/USE, Product parent PARKed); both IDLE lanes reactivated (Graph PIVOT, Runtime CONTINUE) so no lane is left accidentally dormant. No allocation funds LLM-gated execution, repeats a closed design, or rewards PASS volume.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is DEGRADED (model unavailable rc=139, zero external_directional_context, zero spider_evidence, empty agent_priors): it contributes no landscape findings and carries no authority. Its candidate_directions usefully echo the machine snapshot handoffs verbatim (frozen mandates plus generic reassess prompts) but add no independent signal, so every allocation was challenged against the Codex/snapshot directly: Frontier/Intel/Product/Physics inherited mandates survive on readiness, frozen-preservation, and decision-counterfactual merits; Graph and Runtime IDLE reactivations were chosen by global judgment (single shared-validity repairs with the smallest decisive batch), not by Scout suggestion. No Intel verification task was spun from Scout output because there was no uncertain-but-strategic external claim to verify."
+  },
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "inherited_last_verdict": "ADOPT-MEASUREMENT-VALID-AUDIT-PASS-FROZEN-CLASSIFIER-SUPPORTS-COUNTER-DEPENDENT-OUTCOME-MIXED-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-DROP-LOCAL-REPAIR-FROM-PRODUCT-STORY-NO-PROMOTION-CONTINUE-FALSE",
+  "inherited_next_question": "On a credential-free substrate, can an independently justified end-to-end product-economics counter (measured per-operation cost such as model calls/tokens, browser/network work, retrieval, verification and repair, rather than the preregistered abstract equal-weight {http_requests, retrieval_calls, verification_calls, repair_attempts} counter) be constructed and measured so that reuse-based localized repair is or is not strictly cheaper than cold re-derivation at L=2 and L=3 - i.e. is the observed counter-dependence a genuine product-economics boundary, or an artifact of an equal-weight counter no external agent actually uses, and therefore should localized repair be permanently dropped from the C-PRODUCT-ECON product story?",
+  "lane": "runtime",
+  "origin_github_run_id": "38291097112",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-38244432934",
+    "path": "research/experiments/EXP-RUNTIME-38244432934/handoff.json",
+    "sha256": "66aaa0097910fd64d40f67770c8a55fd777d8e6b0944973fba573ae29c1309c4"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "6dc40e6ce64e7acea613b46d4e7129dc8f77ff6a7e9a98f922a91d2b77b02d41",
+  "request_id": "9f14411bc21384a1681b96fb",
+  "schema_version": 1
+}
