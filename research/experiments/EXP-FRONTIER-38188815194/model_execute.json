@@ -1,10 +1,10 @@
 {
   "status": "failure",
-  "model": "opencode/north-mini-code-free",
-  "attempt": 4,
-  "exit_code": 75,
-  "category": "transient-pool-exhausted",
-  "github_run_id": "38257507482",
+  "model": "opencode/big-pickle",
+  "attempt": 1,
+  "exit_code": 1,
+  "category": "substantive",
+  "github_run_id": "38266079632",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-12T14:03:32.321502+00:00"
+  "recorded_at": "2026-10-12T14:54:56.408023+00:00"
 }
