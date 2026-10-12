@@ -17,6 +17,7 @@ def run():
     assert classify("Upstream request failed: Model is unavailable", 1) == "SERVICE_UNAVAILABLE"
     assert classify('{"name": "UnknownError", "data": {"message": "Unexpected server error."}}', 1) == "SERVICE_UNAVAILABLE"
     assert classify("   " + PROBE_TOKEN + "\n", 0) == "READY"
+    assert classify("\x1b[0m"+PROBE_TOKEN+"\x1b[0m\n", 0) == "READY"
     assert classify("printed " + PROBE_TOKEN + " in echo\n", 0) == "NO_ATTESTED_OUTPUT"
     assert classify("Model is unavailable\n"+PROBE_TOKEN, 1) == "SERVICE_UNAVAILABLE"
     assert classify("", 124, timeout=True) == "TIMEOUT"
@@ -30,6 +31,8 @@ def run():
         pass
     else:
         raise AssertionError("must reject paid routing")
+    with patch("probe_free_provider.subprocess.Popen", side_effect=FileNotFoundError):
+        assert run_probe("not-installed", models[0], 5) == "BINARY_UNAVAILABLE"
     with patch("probe_free_provider.subprocess.Popen") as fake:
         proc = fake.return_value
         proc.communicate.return_value = (PROBE_TOKEN+"\n", "")
