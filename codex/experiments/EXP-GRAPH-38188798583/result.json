@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38188798583",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-RAW-RUNNER-OUTCOME": {
+      "runner_status": "COMPLETE",
+      "decision": "DECIDE_SHIP_A_SCOPED",
+      "invalid_reasons": [],
+      "runner_self_sha": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+      "source": "raw_evidence/runner_result_raw.json"
+    },
+    "M-PREREQ-MECHANICS-ONLY": {
+      "status": "DESIGN-MECHANICS-ONLY",
+      "tframe_cal_executed": 49,
+      "tframe_cal_unresolved": 8,
+      "cal_feasible_tframe": {
+        "AXIS-PRIMARY": true,
+        "AXIS-ALTLEX": true,
+        "AXIS-HELDOUT": true
+      },
+      "embedding_status": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+      "source": "raw_evidence/mechanics_raw.json"
+    },
+    "M-GATE-TRIPLET-PRIMARY": {
+      "coverage": 0.9464285714285714,
+      "pooled_false_accept": 0.05555555555555555,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.85,
+      "executed": 54,
+      "executed_app": 53,
+      "executed_oos": 1,
+      "abstained_resolved": 4,
+      "selective_acc": 0.9056603773584906,
+      "unresolved_applicable": 3,
+      "gate_met": true,
+      "n_test_applicable": 56,
+      "n_test_oos": 18
+    },
+    "M-GATE-TRIPLET-ALTLEX": {
+      "coverage": 0.9464285714285714,
+      "pooled_false_accept": 0.05555555555555555,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.85,
+      "executed": 54,
+      "executed_app": 53,
+      "executed_oos": 1,
+      "abstained_resolved": 4,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 3,
+      "gate_met": true,
+      "n_test_applicable": 56,
+      "n_test_oos": 18
+    },
+    "M-GATE-TRIPLET-HELDOUT": {
+      "coverage": 0.925,
+      "pooled_false_accept": 0.1,
+      "unknown_precision": 0.8,
+      "unknown_precision_inclusive": 0.8571428571428571,
+      "executed": 39,
+      "executed_app": 37,
+      "executed_oos": 2,
+      "abstained_resolved": 10,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 1,
+      "gate_met": false,
+      "n_test_applicable": 40,
+      "n_test_oos": 20
+    },
+    "M-CAL-TRIPLET": {
+      "AXIS-PRIMARY": {
+        "coverage": 0.8596491228070176,
+        "pooled_false_accept": 0.0,
+        "unknown_precision": 1.0,
+        "unknown_precision_inclusive": 0.7142857142857143,
+        "executed": 49,
+        "executed_oos": 0,
+        "executed_app": 49,
+        "abstained_resolved": 9,
+        "selective_acc": 1.0,
+        "unresolved_applicable": 8
+      },
+      "AXIS-ALTLEX": {
+        "coverage": 0.9122807017543859,
+        "pooled_false_accept": 0.0,
+        "unknown_precision": 1.0,
+        "unknown_precision_inclusive": 0.8,
+        "executed": 52,
+        "executed_oos": 0,
+        "executed_app": 52,
+        "abstained_resolved": 8,
+        "selective_acc": 1.0,
+        "unresolved_applicable": 5
+      },
+      "AXIS-HELDOUT": {
+        "coverage": 0.875,
+        "pooled_false_accept": 0.0,
+        "unknown_precision": 1.0,
+        "unknown_precision_inclusive": 0.8,
+        "executed": 35,
+        "executed_oos": 0,
+        "executed_app": 35,
+        "abstained_resolved": 12,
+        "selective_acc": 1.0,
+        "unresolved_applicable": 5
+      }
+    },
+    "M-SELECTION-B-LEX-STRONG": {
+      "selective_acc": {
+        "AXIS-PRIMARY": 0.9056603773584906,
+        "AXIS-ALTLEX": 1.0,
+        "AXIS-HELDOUT": 1.0
+      },
+      "selection_preserved": true,
+      "rule": "B-LEX-STRONG",
+      "bar": {
+        ">=0.80_each_axis": true,
+        ">=0.8584_PRIMARY": true
+      }
+    },
+    "M-SELECTION-B-LEX-ONLY": {
+      "AXIS-PRIMARY": 0.9056603773584906,
+      "AXIS-ALTLEX": 1.0,
+      "AXIS-HELDOUT": 1.0
+    },
+    "M-SELECTION-T-LEX-AMBIG": {
+      "AXIS-PRIMARY": 0.9056603773584906,
+      "AXIS-ALTLEX": 1.0,
+      "AXIS-HELDOUT": 1.0
+    },
+    "M-B-LEX-ONLY": {
+      "AXIS-PRIMARY": {
+        "pooled_false_accept": 0.2777777777777778,
+        "coverage": 0.9464285714285714,
+        "unknown_precision": null,
+        "executed_oos": 5
+      },
+      "AXIS-ALTLEX": {
+        "pooled_false_accept": 0.2777777777777778,
+        "coverage": 0.9464285714285714,
+        "unknown_precision": null,
+        "executed_oos": 5
+      },
+      "AXIS-HELDOUT": {
+        "pooled_false_accept": 0.5,
+        "coverage": 0.975,
+        "unknown_precision": null,
+        "executed_oos": 10
+      }
+    },
+    "M-T-LEX-AMBIG": {
+      "AXIS-PRIMARY": {
+        "pooled_false_accept": 0.16666666666666666,
+        "coverage": 0.9464285714285714,
+        "unknown_precision": 1.0,
+        "executed_oos": 3,
+        "abstained_resolved": 2
+      },
+      "AXIS-ALTLEX": {
+        "pooled_false_accept": 0.16666666666666666,
+        "coverage": 0.9464285714285714,
+        "unknown_precision": 1.0,
+        "executed_oos": 3,
+        "abstained_resolved": 2
+      },
+      "AXIS-HELDOUT": {
+        "pooled_false_accept": 0.2,
+        "coverage": 0.975,
+        "unknown_precision": 1.0,
+        "executed_oos": 4,
+        "abstained_resolved": 6
+      }
+    },
+    "M-CTRL-RANDOM-GATE": {
+      "AXIS-PRIMARY": {
+        "pooled_false_accept": 0.6111111111111112,
+        "unknown_precision": 0.35,
+        "matched_abstention_count": 20
+      },
+      "AXIS-ALTLEX": {
+        "pooled_false_accept": 0.6111111111111112,
+        "unknown_precision": 0.35,
+        "matched_abstention_count": 20
+      },
+      "AXIS-HELDOUT": {
+        "pooled_false_accept": 0.6,
+        "unknown_precision": 0.38095238095238093,
+        "matched_abstention_count": 21
+      }
+    },
+    "M-NC-SHUFFLED-LABEL": {
+      "AXIS-PRIMARY": 0.018867924528301886,
+      "AXIS-ALTLEX": 0.03773584905660377,
+      "AXIS-HELDOUT": 0.08108108108108109
+    },
+    "M-B-RANDOM-ROLE": {
+      "AXIS-PRIMARY": 0.09433962264150944,
+      "AXIS-ALTLEX": 0.11320754716981132,
+      "AXIS-HELDOUT": 0.02702702702702703
+    },
+    "M-B-INCUMBENT-KERNEL": {
+      "AXIS-PRIMARY": 0.0,
+      "AXIS-ALTLEX": 0.0,
+      "AXIS-HELDOUT": 0.0
+    },
+    "M-CTRL-ABSTAIN-ALL": {
+      "AXIS-PRIMARY": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      },
+      "AXIS-ALTLEX": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      },
+      "AXIS-HELDOUT": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      }
+    },
+    "M-N": {
+      "AXIS-PRIMARY": {
+        "applicable": 113,
+        "oos": 38,
+        "cal": [
+          57,
+          20
+        ],
+        "test": [
+          56,
+          18
+        ],
+        "bound_rows": 151
+      },
+      "AXIS-ALTLEX": {
+        "applicable": 113,
+        "oos": 38,
+        "cal": [
+          57,
+          20
+        ],
+        "test": [
+          56,
+          18
+        ],
+        "bound_rows": 151
+      },
+      "AXIS-HELDOUT": {
+        "applicable": 80,
+        "oos": 40,
+        "cal": [
+          40,
+          20
+        ],
+        "test": [
+          40,
+          20
+        ],
+        "bound_rows": 120
+      }
+    },
+    "M-CONTAM-MAX-JACCARD": {
+      "AXIS-PRIMARY": {
+        "max_token_jaccard": 0.5714285714285714,
+        "max_trigram_jaccard": 0.5882352941176471,
+        "tok_threshold": 0.6,
+        "tri_threshold": 0.75,
+        "n_flagged": 9
+      },
+      "AXIS-ALTLEX": {
+        "max_token_jaccard": 0.5714285714285714,
+        "max_trigram_jaccard": 0.5882352941176471,
+        "tok_threshold": 0.6,
+        "tri_threshold": 0.75,
+        "n_flagged": 9
+      },
+      "AXIS-HELDOUT": {
+        "max_token_jaccard": 0.5714285714285714,
+        "max_trigram_jaccard": 0.5454545454545454,
+        "tok_threshold": 0.6,
+        "tri_threshold": 0.75,
+        "n_flagged": 0
+      }
+    },
+    "M-CONTAM-FLAGGED": {
+      "AXIS-PRIMARY": [
+        "app_004",
+        "app_049",
+        "app_052",
+        "app_073",
+        "app_076",
+        "app_097",
+        "app_100",
+        "oos_024",
+        "oos_026"
+      ],
+      "AXIS-ALTLEX": [
+        "app_004",
+        "app_049",
+        "app_052",
+        "app_073",
+        "app_076",
+        "app_097",
+        "app_100",
+        "oos_024",
+        "oos_026"
+      ],
+      "AXIS-HELDOUT": []
+    },
+    "M-EMBEDDING-STATUS": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+    "M-EXEC-VECTOR": {
+      "artifact": "derived/execution_vectors.json",
+      "note": "per-goal executed boolean + clause booleans + S + mech/target"
+    },
+    "M-NON-TAUTOLOGY": {
+      "vs_gatefree_all_rows": 47,
+      "vs_incumbent_all_rows": 13,
+      "claim": ">=1 goal differs"
+    },
+    "M-VALIDITY-GATES": {
+      "V1-FREEZE_BINDING": "PASS",
+      "V2-SPLIT_DISJOINT": "PASS",
+      "V3-CONTAMINATION_BOUNDS": "PASS",
+      "V4-NO_FITTED_PARAMETER": "PASS",
+      "V5-ARM_B_PREREQ_HANDLED": "PASS",
+      "V6-EXEC_VECTOR_NON_TAUTOLOGY": "PASS",
+      "V7-NON_CEILING_FLOOR": "PASS",
+      "V8-ARMS_INDEPENDENT": "PASS",
+      "V9-EMBEDDER_PATH_ISOLATED": "PASS",
+      "V10-UNKNOWN_PRECISION_N_SENSITIVITY": "PASS",
+      "V11-BOOTSTRAP_SEED": "NOT_APPLICABLE",
+      "V12-FREEZE_ARTIFACTS_HASHED": "PASS",
+      "V13-DECISION_BRANCH_REACHABLE": "PASS"
+    },
+    "M-FAILING-CRITERION": {
+      "axis": "AXIS-HELDOUT",
+      "criterion": "unknown_precision",
+      "observed": 0.8,
+      "target": 0.85,
+      "inclusive_diagnostic": 0.8571428571428571,
+      "note": "only failing gate criterion; FA exactly at target 2/20=0.10 and coverage 0.925 met"
+    }
+  },
+  "controls": {
+    "B-LEX-STRONG": {
+      "expected": "preserve deterministic selection; >=0.80 all axes, >=0.8584 PRIMARY",
+      "observed": {
+        "AXIS-PRIMARY": 0.9056603773584906,
+        "AXIS-ALTLEX": 1.0,
+        "AXIS-HELDOUT": 1.0
+      },
+      "pass": true,
+      "evidence": "raw_evidence/runner_result_raw.json#selection"
+    },
+    "B-LEX-ONLY": {
+      "expected": "higher pooled_false_accept than T-FRAME (no gate)",
+      "observed": {
+        "AXIS-PRIMARY": 0.2777777777777778,
+        "AXIS-ALTLEX": 0.2777777777777778,
+        "AXIS-HELDOUT": 0.5
+      },
+      "pass": true,
+      "evidence": "raw_evidence/runner_result_raw.json#test_metrics"
+    },
+    "T-LEX-AMBIG": {
+      "expected": "incumbent integer-signal gate; parent disjoint-test FA 0.1667",
+      "observed": {
+        "AXIS-PRIMARY": 0.16666666666666666,
+        "AXIS-ALTLEX": 0.16666666666666666,
+        "AXIS-HELDOUT": 0.2
+      },
+      "pass": true,
+      "note": "T-FRAME improves FA on all axes",
+      "evidence": "raw_evidence/runner_result_raw.json#test_metrics"
+    },
+    "CTRL-ABSTAIN-ALL": {
+      "expected": "coverage 0.0, unknown_precision 1.0 by convention",
+      "observed": {
+        "AXIS-PRIMARY": {
+          "coverage": 0.0,
+          "unknown_precision": 1.0
+        },
+        "AXIS-ALTLEX": {
+          "coverage": 0.0,
+          "unknown_precision": 1.0
+        },
+        "AXIS-HELDOUT": {
+          "coverage": 0.0,
+          "unknown_precision": 1.0
+        }
+      },
+      "pass": true
+    },
+    "CTRL-RANDOM-GATE": {
+      "expected": "at matched count, FA/UP far from T-FRAME",
+      "observed": {
+        "AXIS-PRIMARY": {
+          "pooled_false_accept": 0.6111111111111112,
+          "unknown_precision": 0.35,
+          "matched_abstention_count": 20
+        },
+        "AXIS-ALTLEX": {
+          "pooled_false_accept": 0.6111111111111112,
+          "unknown_precision": 0.35,
+          "matched_abstention_count": 20
+        },
+        "AXIS-HELDOUT": {
+          "pooled_false_accept": 0.6,
+          "unknown_precision": 0.38095238095238093,
+          "matched_abstention_count": 21
+        }
+      },
+      "pass": true,
+      "evidence": "raw_evidence/runner_result_raw.json#controls"
+    },
+    "NC-SHUFFLED-LABEL": {
+      "expected": "near-chance <=0.20",
+      "observed": {
+        "AXIS-PRIMARY": 0.018867924528301886,
+        "AXIS-ALTLEX": 0.03773584905660377,
+        "AXIS-HELDOUT": 0.08108108108108109
+      },
+      "pass": true
+    },
+    "B-RANDOM-ROLE": {
+      "expected": "<=0.35",
+      "observed": {
+        "AXIS-PRIMARY": 0.09433962264150944,
+        "AXIS-ALTLEX": 0.11320754716981132,
+        "AXIS-HELDOUT": 0.02702702702702703
+      },
+      "pass": true
+    },
+    "B-INCUMBENT-KERNEL": {
+      "expected": "0.0 by construction",
+      "observed": {
+        "AXIS-PRIMARY": 0.0,
+        "AXIS-ALTLEX": 0.0,
+        "AXIS-HELDOUT": 0.0
+      },
+      "pass": true
+    },
+    "PC-LIVENESS-AND-INTEGRITY": {
+      "expected": "all blocks extract; controls execute; T-FRAME live non-empty/non-full on PRIMARY cal",
+      "observed": {
+        "tframe_cal_executed": 49,
+        "tframe_cal_unresolved": 8,
+        "cal_feasible_all_axes": true
+      },
+      "pass": true,
+      "evidence": "raw_evidence/mechanics_raw.json"
+    },
+    "ARM-B-EMBEDDING": {
+      "expected": "prerequisite-gated; BLOCKED when stack absent (never a negative)",
+      "observed": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+      "pass": null,
+      "note": "operational BLOCKED, not a scientific result"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py",
+      "sha256": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_result_raw.json",
+      "sha256": "b65fb055371ff67290d5087e03b63c0197447167ea05fe98bacf3bc032460608",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/mechanics_raw.json",
+      "sha256": "339673528147a23f482ea352e5435425b470108a02fef2745803cc98e3aefdae",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/mechanics_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/derived/execution_vectors.json",
+      "sha256": "70a66258b078147ea8f15fd95e024544bd543efd6c6b1fdf448744b7b6caa3ba",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/derived/measurements.json",
+      "sha256": "eeec400f511c832ab616d79b424dff7a2d50439aa38298421ec7da30737b2964",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/derived/controls.json",
+      "sha256": "c920fbad261fc2d085baf7cbfb75e5a9a5741b5f2e61150184270a6cdd648b68",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/derived/contamination.json",
+      "sha256": "b563225587ed4253ca441cfd2c47d60a9937613ffb3c4e588f1203815949ba3d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38188798583/derived/verification.json",
+      "sha256": "49eb9642f3bfcd4b0bbfa4bde7a8e89acc9bcb2e64f6725e169e5fcc2953024e",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Frozen runner (CANONICAL-RUNNER-SHA256 4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62) executed with exit 0 and empty stderr; runtime runner_self_sha equals the canonical hash; invalid_reasons=[].",
+    "Frozen decision = DECIDE_SHIP_A_SCOPED (branch 3): AXIS-PRIMARY gate_met=true, AXIS-ALTLEX gate_met=true, AXIS-HELDOUT gate_met=false; selection_preserved=true.",
+    "Disjoint test triplets (coverage / pooled_false_accept / unknown_precision): AXIS-PRIMARY 0.9464 / 0.05556 (1/18) / 1.0; AXIS-ALTLEX 0.9464 / 0.05556 (1/18) / 1.0; AXIS-HELDOUT 0.9250 / 0.1000 (2/20) / 0.8000.",
+    "Only failing gate criterion is AXIS-HELDOUT unknown_precision 0.8000 < 0.85; AXIS-HELDOUT pooled_false_accept is exactly at target and coverage is met; unknown_precision_inclusive on HELDOUT = 0.85714.",
+    "Selective accuracy on executed applicable goals: PRIMARY 48/53=0.90566, ALTLEX 1.0, HELDOUT 1.0 (retention bar met: >=0.80 every axis, >=0.8584 PRIMARY).",
+    "HELDOUT test false accepts are oos_010 (mech_files_create, S=0) and oos_014 (mech_tickets_create, S=0); the 10 resolved abstentions are 8 OOS rows plus 2 applicable rows (app_052, app_066, both C4-COMPLEMENT).",
+    "Controls on the test split: gate-free B-LEX-ONLY pooled_false_accept 0.2778/0.2778/0.5000 with undefined unknown_precision; incumbent T-LEX-AMBIG 0.1667/0.1667/0.2000; CTRL-RANDOM-GATE at matched count 20/20/21 gives 0.6111/0.6111/0.6000 and unknown_precision 0.350/0.350/0.381; NC-SHUFFLED-LABEL 0.0189/0.0377/0.0811; B-RANDOM-ROLE 0.0943/0.1132/0.0270; B-INCUMBENT-KERNEL 0.0; CTRL-ABSTAIN-ALL coverage 0.0 / unknown_precision 1.0.",
+    "Contamination fingerprint reproduced: 9 flags on PRIMARY, 9 on ALTLEX, 0 on HELDOUT; max token Jaccard 0.5714 (<0.60) and max trigram Jaccard 0.5882 (<0.75) on PRIMARY/ALTLEX over the bound population.",
+    "Arm B embedding comparator is operationally BLOCKED: ModuleNotFoundError: No module named 'numpy'.",
+    "Independent EXECUTE-side recomputation reproduced every test and calibration metric from execution_vectors; split is disjoint; runner_tframe.comp() and parent runner_frozen.comp() agree on all 422 bound rows (306 applicable, 0 mechanism differences)."
+  ],
+  "validity_notes": [
+    "status=COMPLETE and measurement VALID: treatment is live on AXIS-PRIMARY test (0<executed_app=53<56 applicable) and unknown_precision is defined on every test axis (resolved abstentions 4/4/10), so no MEASUREMENT_INVALID branch fired.",
+    "outcome=MIXED maps the frozen branch DECIDE_SHIP_A_SCOPED: the primary architecture and the deterministic selection half are supported, while the all-three-axis generalization hypothesis (spec.hypothesis) is partially disconfirmed on AXIS-HELDOUT alone. Per spec.falsifier a bounded negative on AXIS-HELDOUT alone falsifies only the generalization claim, not the primary architecture.",
+    "Design degrees of freedom (disclosed in prereg section 9): the T-FRAME clause set was developed during DESIGN from the calibration split, the parent's published aggregate failure and frozen OOS-bank phrasings. T-FRAME has zero tunable parameters, so this is not a threshold fit; the confirmatory test split was not used to select any value.",
+    "Identifiability is bounded to these frozen banks, lexicons and the single i%splitmod split; no generalization beyond them is claimed.",
+    "unknown_precision on the test split rests on small resolved-abstention counts (4/4/10); the HELDOUT miss is one abstention away from 0.9, and its inclusive diagnostic (0.85714) passes. Reported, not hidden.",
+    "Arm B BLOCKED is an unavailable embedding-stack dependency (numpy absent), not a scientific negative and not a measurement invalidity of the claim-bearing Arm A path (python3 stdlib only).",
+    "Contamination screen removed a near-threshold envelope (max token Jaccard 0.5714 vs band 0.60; 9 flagged rows); no representation of this loss is hidden.",
+    "This stage does not self-promote C-SEMANTIC-RESOLVE (stays HYPOTHESIS) and makes no product change; DIRECTOR/AUDIT adjudicate any claim advance.",
+    "V11-BOOTSTRAP-SEED is NOT_APPLICABLE: no bootstrap was attempted; SEED=38188798583 mod 2^32 is recorded for the randomized controls."
+  ],
+  "unresolved": [
+    "Whether the AXIS-HELDOUT unknown_precision miss (0.8000 vs 0.85) is a stable property of the T-FRAME clause set on the G2 held-out families or an artifact of the single split and small resolved-abstention count (n=10) is not identifiable from this run.",
+    "Whether adding/repairing a clause to abstain on oos_010 and oos_014 (the two HELDOUT test false accepts, both CREATE, S=0) would recover HELDOUT unknown_precision without a calibration-fitted parameter remains untested; any such change is a new DESIGN, not an EXECUTE edit.",
+    "Whether the two applicable C4-COMPLEMENT dilutions on HELDOUT (app_052, app_066) can be recovered conservatively without harming coverage is unknown.",
+    "Arm B (retrieval/embedding resolver) remains unmeasured because the embedding stack is absent; its prerequisite repair is out of scope for this packet.",
+    "The residual near-threshold contamination envelope (0.5714 vs 0.60) was not stress-tested for material effect on the split."
+  ]
+}
