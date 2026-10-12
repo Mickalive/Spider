@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38182129488",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "All twelve validity gates V1-V8 pass on the scored schedule (V1_code_fidelity_manifest, V2_transport_conformance, V3_no_leak, V4_determinism, V5_arm_liveness, V6_counter_instrumentation, V7_matched_correctness, V8_ceiling_band, V8_m0_counter_distinctness, V8_mechanism_off, V8_memory_off_attribution, V8_reveal_order_attribution). No gate failure exists; MEASUREMENT_INVALID branch is correctly not triggered.",
+    "Determinism verified: the 80-cell × 20-session scored matrix was executed twice with byte-identical per-cell outcomes (determinism_ok=true in run_scored.json). The server_secret derivation is fully deterministic (no secrets, clock, or os.urandom).",
+    "No-leak protocol invariants (NC-NO-LEAK, F-LEAK gate) are clean on all 10 checked invariants in both probe and scored runs. The binding appears only in its own precursor receipt.",
+    "Code fidelity manifest (V1) records the EXECUTE harness sha256 (8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987) matching spec.design_satisfiability_probe.source_sha256 and the prereg.md BEGIN/END SBA-MEM-HARNESS block. Python version 3.12.15 recorded.",
+    "Transport conformance (V2) passes: all HTTP endpoints (healthz, session, task, commit) respond with correct status codes and JSON schemas on stdlib loopback HTTP.",
+    "Arm liveness (V5) holds: T-AMORTIZED-DISCOVERY and PC-EXACT-REPLAY achieve 1.0 at every family/novelty band; all ten arms execute end-to-end without exceptions.",
+    "Counter instrumentation (V6) is complete: all four dimensions (http_calls, retrieval_calls, verification_calls, repair_calls) recorded per cell with matched accounting across all arms.",
+    "Matched correctness (V7) holds exactly: matched_correctness == success_rate in all 80 scored cells (exact-match scoring). Minimum arm success_rate across all cells is 0.875 (B-COLD-RE-DERIVE etc. at F1|0.5), at the CORRECTNESS_FLOOR.",
+    "Sensitivity sub-gates (V8) all pass: ceiling band (novelty 0.0 all arms 1.0), mechanism-off (cold reaches 1.0), memory-off attribution (B-MEMORY-RECEIPT with per-task log reset degrades to (K-1)/K), reveal-order attribution (chain-before-precursor fails), M0 counter distinctness (T vs B-COLD-RE-DERIVE = 2/4 dimensions distinct at scored bands)."
+  ],
+  "baseline_findings": [
+    "The memoryless M0 baselines (B-COLD-RE-DERIVE, B-RETRIEVAL-SHAPED, B-KNOWLEDGE-NO-MEMORY) all achieve exactly (K-1)/K = 0.875 (F1) / 0.900 (F2) at novelty >= 0.50, matching the frozen arithmetic and the predecessor's certificate. Counter distinctness vs T is 2/4 dimensions (http_calls and repair_calls) on both families, satisfying V8_m0_counter_distinctness.",
+    "The state-only memory comparator B-MEMORY-STATE (M1) also achieves (K-1)/K, confirming that GET-observation state alone does not recover the binding (the binding lives only in a precursor receipt). This is the expected and observed isolation of 'state memory without receipt memory'.",
+    "The M2a comparator B-MEMORY-WINDOW-1 (retains 1 receipt) certifies at novelty 0.50 (capacity 1 >= distance 1) but not at 0.75 (capacity 1 < distance 2), exactly as predicted by the closed-form capacity threshold.",
+    "The M2b comparator B-MEMORY-WINDOW-2 (retains 2 receipts) and the M3 primary comparator B-MEMORY-RECEIPT (full log) both reach 1.0 at both scored bands, collapsing the treatment margin to 0. They are success- and counter-identical to T (0/4 counter dimensions distinct). This is the disclosed collapse mechanism on a single-success-path substrate, not a comparator bug.",
+    "The retrieval variant B-RETRIEVAL-MEMORYFUL (M3 + stale retrieval) equals B-MEMORY-RECEIPT in rate (1.0) while increasing retrieval_calls, confirming memory is the cause and retrieval is inert (NC-RETRIEVAL-REDUNDANT).",
+    "All control nulls behave as pre-declared: NC-MECHANISM-OFF raises cold to 1.0 (certificate FALSE), NC-MEMORY-OFF and NC-REVEAL-ORDER-FLIPPED both return (K-1)/K, NC-CEILING-BAND holds, NC-WINDOW-MONOTONIC holds (window-1 <= window-2 <= full), NC-NO-DISCOVERY-DIRECT and NC-BINDING-UNIQUENESS are probe-verified clean."
+  ],
+  "recomputed_metrics": {
+    "decision_label": "PARTIAL",
+    "predicted_decision_label": "PARTIAL",
+    "prediction_match": true,
+    "gates_V1_V8_all_pass": true,
+    "world_gates_pass": true,
+    "world_partial_certified": true,
+    "world_robust_certified": false,
+    "capacity_threshold": {
+      "F1-RECORDS": {
+        "0.5": 1,
+        "0.75": 2
+      },
+      "F2-WIDGETS": {
+        "0.5": 1,
+        "0.75": 2
+      }
+    },
+    "capacity_threshold_match_predicted": true,
+    "per_cell_success_rate_verified": true,
+    "all_matched_correctness_equal_success_rate": true,
+    "min_arm_success_rate": 0.875,
+    "counter_identification": {
+      "F1-RECORDS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.125,
+        "margin_M3": 0.0
+      },
+      "F2-WIDGETS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.09999999999999998,
+        "margin_M3": 0.0
+      }
+    },
+    "memory_lattice_certification_detail": {
+      "B-MEMORY-RECEIPT": {
+        "certifies_at_any_scored_cell": false,
+        "reason": "comparator_rate=1.0, margin=0.0 < MARGIN_FLOOR(0.05)"
+      },
+      "B-MEMORY-STATE": {
+        "certifies_at_scored_cells": true,
+        "cells": [
+          "F1-RECORDS|0.5",
+          "F1-RECORDS|0.75",
+          "F2-WIDGETS|0.5",
+          "F2-WIDGETS|0.75"
+        ]
+      },
+      "B-MEMORY-WINDOW-1": {
+        "certifies_at_scored_cells": true,
+        "cells": [
+          "F1-RECORDS|0.75",
+          "F2-WIDGETS|0.75"
+        ],
+        "does_not_certify_at": [
+          "F1-RECORDS|0.5",
+          "F2-WIDGETS|0.5"
+        ],
+        "reason": "capacity=1 < distance=2 at novelty 0.75"
+      },
+      "B-MEMORY-WINDOW-2": {
+        "certifies_at_any_scored_cell": false,
+        "reason": "comparator_rate=1.0, margin=0.0"
+      },
+      "B-RETRIEVAL-MEMORYFUL": {
+        "certifies_at_any_scored_cell": false,
+        "reason": "comparator_rate=1.0, margin=0.0"
+      }
+    },
+    "determinism_ok": true,
+    "scored_sessions_total": 3200,
+    "scored_cells": 80,
+    "sessions_per_cell": 20
+  },
+  "claim_ceiling": "The certified SBA-CREDENTIAL-FREE-V2 bank's (K-1)/K dynamic range does NOT survive a within-session full-receipt-memory comparator (B-MEMORY-RECEIPT). The range is a function of comparator within-session receipt-retention capacity, collapsing at capacity >= chain-to-precursor distance (1 at novelty 0.50, 2 at novelty 0.75). Weaker memoryful comparators (B-MEMORY-STATE, B-MEMORY-WINDOW-1 at novelty 0.75) do certify, yielding decision PARTIAL. The bank cannot supply discriminative dynamic range for a benchmark whose comparator arms carry within-session receipt memory (such as the four-arm C-LLM-INHERIT). This is a bounded substrate-validity result for SBA-CREDENTIAL-FREE-V2 with K∈{8,10} only; no mechanism promotion, no claim-status change, no generalization to external agents or natural Web tasks.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38182129488/result.json",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/run_scored.json (sha256: 430f8f65e0fc5e34c6ecdb29dcadcb6242bb7413cbacbed14cecc4d64dea8fef)",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/probe_mode.json (sha256: f8c587945ba85cb235f7c5344ee49fd3f4a9e42d16f48a5a57bc510b1be7f090)",
+    "research/experiments/EXP-RUNTIME-38182129488/artifacts/selftest_stdout.json (sha256: 74a833f62a408ffa3048875eacb60fef0e3a2bfe1259aefba7b4fb1fbdb8bb8e)",
+    "research/experiments/EXP-RUNTIME-38182129488/spec.json (frozen)",
+    "research/experiments/EXP-RUNTIME-38182129488/prereg.md (frozen)",
+    "research/experiments/EXP-RUNTIME-38182129488/freeze.json (frozen)",
+    "research/experiments/EXP-RUNTIME-38182129488/design_review.json (frozen)"
+  ],
+  "unresolved": [
+    "Whether a hardened V3 bank whose success requires mechanism- or composition-dependent behaviour (rather than mere receipt retention) can supply memory-robust dynamic range for a four-arm benchmark; this bank-design question is correctly handed to Product per the mandate stop trigger.",
+    "Whether real external comparator arms (COLD/INSTRUCTIONS/RETRIEVAL in C-LLM-INHERIT) behave like within-session full-receipt memory; only synthetic comparator policies were measured here.",
+    "Whether the flagship four-arm C-LLM-INHERIT benchmark can be run at all: B1 (audited parameterized carrier) and B3 (capable same-protocol endpoint) remain unresolved and gate it independently.",
+    "Whether the same capacity-threshold result holds for K outside {8,10} or for other credential-free constructions; only K=8 and K=10 were measured.",
+    "Whether the primary comparator's success/counter identity with T can be broken by a substrate change while preserving a credential-free discovery path; untested here."
+  ]
+}
