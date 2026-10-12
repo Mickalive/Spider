@@ -37,6 +37,7 @@ OUTAGE = re.compile(
 
 def classify(output: str, returncode: int, timeout: bool = False) -> str:
     """Auth/security failures take precedence; never hide them behind a 503."""
+    output = re.sub(r"\\x1b\\[[0-?]*[ -/]*[@-~]", "", output)
     if AUTH.search(output):
         return "AUTH_INVALID"
     if DENIED.search(output):
@@ -55,8 +56,11 @@ def run_probe(binary: str, model: str, deadline: int) -> str:
     # except the authentication the chosen OpenCode provider itself requires.
     prompt = f"Reply with EXACTLY the single string {PROBE_TOKEN}. No tools, no explanation."
     argv = [binary, "run", "--model", model, "--agent", "spider_provider_probe", prompt]
-    proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                            text=True, errors="replace", start_new_session=True)
+    try:
+        proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                text=True, errors="replace", start_new_session=True)
+    except OSError:
+        return "BINARY_UNAVAILABLE"
     try:
         stdout, stderr = proc.communicate(timeout=deadline)
         return classify((stdout or "") + "\n" + (stderr or ""), proc.returncode)
