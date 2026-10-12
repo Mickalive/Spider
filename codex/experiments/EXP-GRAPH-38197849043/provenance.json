@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "stage": "execute",
+  "producer_model": "opencode/big-pickle",
+  "github": {
+    "run_ids": {
+      "origin_github_run_id": "38197849043",
+      "execute_github_run_id": "38197849043",
+      "execute_attempt": "1"
+    },
+    "execution_checkpoint": {
+      "pre_execute_sha": "5000da22e0482134417cb150696181f51bd760dc",
+      "checkpoint_file": "research/experiments/EXP-GRAPH-38197849043/execution_checkpoint.json"
+    },
+    "note": "origin_github_run_id is from request.json; GITHUB_RUN_ID=38197849043 and GITHUB_RUN_ATTEMPT=1 were current for this EXECUTE stage. GITHUB_SHA=2e6945546a700c19b7fd411ea8daa30aae66e6dd equals request.json.base_sha."
+  },
+  "git": {
+    "head_commit": "38019369318090fab746c0cd5c67ee3024acc706",
+    "branch": "lab2/graph",
+    "base_sha": "2e6945546a700c19b7fd411ea8daa30aae66e6dd",
+    "pre_execute_sha": "5000da22e0482134417cb150696181f51bd760dc",
+    "scope_note": "EXECUTE wrote only research/experiments/EXP-GRAPH-38197849043/ (raw_evidence/, result.json, report.md, provenance.json). Frozen inputs and freeze_artifacts were not modified."
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "numpy": null,
+    "note": "Claim-bearing path is Python 3.12 stdlib only. No LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL is used; the substrate is an in-process ThreadingHTTPServer on an ephemeral 127.0.0.1 port."
+  },
+  "frozen_inputs": {
+    "request.json": "341c6e313d1b3fa54996f77ec29750cc75717c67956e67b899dacf98d3fffe42",
+    "spec.json": "4bb3eff04705f8903b3d40b4937e4bb88cbb38b6a1279f1c88bd8191c804c44f",
+    "prereg.md": "6ba9bce761206ae16f261bad8b0f6e91e66b1b010f445ad3cf8d7196cdfe1be8",
+    "freeze.json": "0c2a2f8dccccdd0fb169549660d6f441f0e0c97852fd414751820cb09feb6c55",
+    "design_review.json": "dd56434f3c3904a26c8e4028cdd7daba77fb856916961bd39e8ffa92927cb618"
+  },
+  "frozen_input_hashes_match": {
+    "prereg.md": true,
+    "request.json": true,
+    "spec.json": true,
+    "design_review.json": true
+  },
+  "frozen_artifact_hashes": {
+    "src/spider/kernel.py": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "runner_extraction": {
+    "source": "research/experiments/EXP-GRAPH-38197849043/prereg.md",
+    "markers": ["<!-- BEGIN FROZEN-RUNNER -->", "<!-- END FROZEN-RUNNER -->"],
+    "canonical_runner_sha256": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1",
+    "extracted_runner_sha256": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1",
+    "match": true
+  },
+  "commands": {
+    "extract_runner": "python3 research/experiments/EXP-GRAPH-38197849043/raw_evidence/extract_runner.py",
+    "canary_a": "python3 raw_evidence/runner_delta_repair.py --mechanics-only > raw_evidence/mechanics_raw_a.json",
+    "canary_b": "python3 raw_evidence/runner_delta_repair.py --mechanics-only > raw_evidence/mechanics_raw_b.json",
+    "scored": "python3 raw_evidence/runner_delta_repair.py > raw_evidence/runner_result_raw.json"
+  },
+  "seeds": {
+    "SEED": 38197849043,
+    "SEED_mod_2_32": 38197849043,
+    "note": "SEED = 38197849043 % 2**32 = 38197849043. Scored trials use SEED + 1000*(class_index+1) + trial_index; canary uses SEED+900+ci; negative controls use SEED+1 / SEED+2."
+  },
+  "datasets_fixtures": "None external. The runner constructs the five-resource JSON API substrate in-process (RESOURCES = users/posts/comments/albums/photos; TASK_IDS 1..5; LEARN_IDS 1..3/1..2/1..4). No task bank, dataset or file fixture is read.",
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_delta_repair.py", "sha256": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1", "role": "code"},
+    {"path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_result_raw.json", "sha256": "00c805de25116807f729e944a437bb2ec88a58bfd0e4c01d2ad87f79085537e4", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/mechanics_raw_a.json", "sha256": "473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/mechanics_raw_b.json", "sha256": "473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/extract_runner.py", "sha256": "41a193e721629da81760ebc9d7bd2ccc4780cb287c2203294ef11b0422914b66", "role": "code"}
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38188798583",
+  "lane": "graph",
+  "stage": "execute",
+  "producer_model": "opencode/big-pickle",
+  "github": {
+    "run_ids": {
+      "origin_github_run_id": "38188798583",
+      "execute_github_run_id": "38194347725",
+      "execute_attempt": "1"
+    },
+    "execution_checkpoint": {
+      "pre_execute_sha": "b832394677eae8436b21a93421c5c4247e3846d2"
+    },
+    "note": "origin_github_run_id is from request.json; 38194347725 is the EXECUTE run (execution_checkpoint.json)."
+  },
+  "git": {
+    "head_commit": "9deaa80a4595014352dc0c7cb85bea87dc99c520",
+    "branch": "lab2/graph",
+    "base_sha": "d5d2ad8b0f01624fdeb1c324ad4277a7f116e75e",
+    "scope_note": "EXECUTE wrote only research/experiments/EXP-GRAPH-38188798583/ (raw_evidence/, derived/, result.json, report.md, provenance.json). Frozen inputs and freeze_artifacts were not modified."
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "numpy": "ModuleNotFoundError: No module named 'numpy'",
+    "sentence_transformers": null,
+    "torch": null,
+    "scikit_learn": null,
+    "note": "Claim-bearing Arm A path is python3 stdlib only. Arm B embedding comparator BLOCKED (numpy absent); operational state, not a scientific negative."
+  },
+  "frozen_inputs": {
+    "request.json": "08a9649870f3e0e943c0e50259f10abaa0e0da71a9bfc5158b0146f826271986",
+    "spec.json": "c02d30f4bedb7a3106724c85ecc0164daa4786b1c62281b2f6fa49bf8bf44891",
+    "prereg.md": "621d600cd31fc2cd86a718b5ed40a8732b5d6ad5e632d0aa2ee83641bd56788e",
+    "freeze.json": "1975d49ea27e99c645d57a157d3222292f64d2765ef5356e843e4f56b98d020b",
+    "design_review.json": "28dc7ec1a0804c10e8b7ce527f19dba50c30910d220b82dfd1d465935980ef28"
+  },
+  "frozen_artifact_hashes": {
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md": "5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+  },
+  "freeze_verification": {
+    "freeze_hashes_match": true,
+    "artifact_hashes_match": true,
+    "runner_block_sha256": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+    "runner_matches_canonical": true,
+    "note": "A: freeze.json.hashes match on-disk packet; B: sha256(FROZEN-RUNNER block + trailing newline) == sha256(raw_evidence/runner_tframe.py) == CANONICAL-RUNNER-SHA256; C: all 3 freeze_artifacts hashes match freeze.json.artifact_hashes."
+  },
+  "runner": {
+    "embedded_block": "prereg.md#FROZEN-RUNNER",
+    "extracted_path": "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py",
+    "sha256": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+    "seed": 3829060215,
+    "run_command": "python3 research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py",
+    "exit_code": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mechanics_command": "python3 research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py --mechanics-only",
+    "mechanics_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "datasets_and_fixtures": {
+    "frozen_parent_prereg": "research/experiments/EXP-GRAPH-38180711589/prereg.md (GOAL-BANK-G1, OOS-BANK-G1, LEXICON-G1, LEXICON-G1-ALT, GOAL-BANK-G2, OOS-BANK-G2, LEXICON-G2-HELDOUT)",
+    "frozen_grandparent_prereg": "research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS)",
+    "prior_texts_source": "research/harness/goal_generator.py (INTENTS, PARAPHRASES, NO_APPLICABLE_TEMPLATES, OOD_PARAPHRASES)",
+    "AXIS-PRIMARY": "GOAL-BANK-G1 + OOS-BANK-G1 under LEXICON-G1; split i%6 in {1,3,5}=test; 151 bound rows (113 applicable + 38 OOS; cal [57,20], test [56,18])",
+    "AXIS-ALTLEX": "same banks under LEXICON-G1-ALT; same split; 151 bound rows",
+    "AXIS-HELDOUT": "GOAL-BANK-G2 + OOS-BANK-G2 under LEXICON-G2-HELDOUT; split i%4 in {1,3,5}=test; 120 bound rows (80 applicable + 40 OOS; cal [40,20], test [40,20])"
+  },
+  "commands": [
+    "python3 - <<'PY' (extract FROZEN-RUNNER block from prereg.md -> raw_evidence/runner_tframe.py; verify sha 4abc67b1...) PY",
+    "python3 research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py > research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_result_raw.json 2> research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_stderr.txt",
+    "python3 research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py --mechanics-only > research/experiments/EXP-GRAPH-38188798583/raw_evidence/mechanics_raw.json",
+    "python3 /tmp/opencode/verify/verify.py ; python3 /tmp/opencode/verify/verify2.py (independent recompute + selection equivalence)",
+    "python3 /tmp/opencode/verify/contam2.py ; python3 /tmp/opencode/verify/assemble.py ; python3 /tmp/opencode/verify/mkresult.py ; python3 /tmp/opencode/verify/mkprov.py"
+  ],
+  "result_artifacts": {
+    "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_tframe.py": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+    "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_result_raw.json": "b65fb055371ff67290d5087e03b63c0197447167ea05fe98bacf3bc032460608",
+    "research/experiments/EXP-GRAPH-38188798583/raw_evidence/runner_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/experiments/EXP-GRAPH-38188798583/raw_evidence/mechanics_raw.json": "339673528147a23f482ea352e5435425b470108a02fef2745803cc98e3aefdae",
+    "research/experiments/EXP-GRAPH-38188798583/raw_evidence/mechanics_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/experiments/EXP-GRAPH-38188798583/derived/execution_vectors.json": "70a66258b078147ea8f15fd95e024544bd543efd6c6b1fdf448744b7b6caa3ba",
+    "research/experiments/EXP-GRAPH-38188798583/derived/measurements.json": "eeec400f511c832ab616d79b424dff7a2d50439aa38298421ec7da30737b2964",
+    "research/experiments/EXP-GRAPH-38188798583/derived/controls.json": "c920fbad261fc2d085baf7cbfb75e5a9a5741b5f2e61150184270a6cdd648b68",
+    "research/experiments/EXP-GRAPH-38188798583/derived/contamination.json": "b563225587ed4253ca441cfd2c47d60a9937613ffb3c4e588f1203815949ba3d",
+    "research/experiments/EXP-GRAPH-38188798583/derived/verification.json": "49eb9642f3bfcd4b0bbfa4bde7a8e89acc9bcb2e64f6725e169e5fcc2953024e"
+  },
+  "packet_output_hashes": {
+    "result.json": "d3f3c4c6b84bbf784bcba9f1e92f9bd08aef84657b179ca322d5c3312e3a59da",
+    "report.md": "d53631818be73acaaa034d363baba699f01278e84939895bf61d3c0256ae4786",
+    "provenance.json": null,
+    "note": "provenance.json's own hash is not self-referential."
+  },
+  "notes": [
+    "All digest values were recomputed from on-disk files; result.json#artifacts hashes were regenerated after derived artifacts were final.",
+    "Frozen raw runner output is preserved at raw_evidence/runner_result_raw.json; result.json is the packet handoff, not a replacement for raw evidence."
+  ]
+}

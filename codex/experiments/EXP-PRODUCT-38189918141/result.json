@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38189918141",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "decision": "SAFE_BUT_CONSERVATIVE",
+  "reason": "zero false accepts (safe abstention boundary) but 9/19 legitimate declared ids refused; B-WIDENED-3 demonstrates a safe, complete alternative",
+  "claim_ids": [
+    "C-PARAM-INHERIT",
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_status_disposition": "No claim advance. C-PARAM-INHERIT retained EXPERIMENTAL; C-SEMANTIC-RESOLVE retained HYPOTHESIS. No product promotion.",
+  "metrics": {
+    "M-IDENTITY": {
+      "shipping_kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_expected_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "match": true
+    },
+    "M-BANK": {
+      "n_items": 78,
+      "n_in": 19,
+      "n_out": 59,
+      "unique_bids": 78,
+      "class_label_mismatches": 0,
+      "units": "count"
+    },
+    "M-FALSE-ACCEPT-COUNT": 0,
+    "M-FALSE-ACCEPT-RATE": 0.0,
+    "M-SILENT-FALSE-ACCEPT-COUNT": 0,
+    "M-FALSE-REJECT-COUNT": 9,
+    "M-COVERAGE": 0.5263157894736842,
+    "M-REFUSAL-ZERO-HTTP": 0,
+    "M-HTTP-TOTAL-T-SHIPPED": 10,
+    "M-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-BOUNDARY": {
+      "induced_support": {
+        "item": "^item\\-00[0-9]{1}$"
+      },
+      "slots": [
+        "item"
+      ],
+      "confidence": 0.9,
+      "accepted_in_grammar_ids": [
+        "item-000",
+        "item-001",
+        "item-002",
+        "item-003",
+        "item-004",
+        "item-005",
+        "item-006",
+        "item-007",
+        "item-008",
+        "item-009"
+      ],
+      "refused_in_grammar_ids": [
+        "item-010",
+        "item-011",
+        "item-042",
+        "item-099",
+        "item-100",
+        "item-123",
+        "item-256",
+        "item-500",
+        "item-999"
+      ],
+      "accepted_in_grammar_count": 10,
+      "refused_in_grammar_count": 9,
+      "note": "runner field certificate.M-BOUNDARY reports these ids as repr() strings (e.g. \"'item-000'\"); the values here are the underlying identifiers derived from the same raw treatment_records"
+    },
+    "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT": 38,
+    "M-CONTROL-PC-COARSE-HTTP-ON-OUT": 35,
+    "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT": 0,
+    "M-CONTROL-NC-REJECT-ALL-HTTP-TOTAL": 0,
+    "M-COMPARATOR-WIDENED3-FALSE-ACCEPT-COUNT": 0,
+    "M-COMPARATOR-WIDENED3-COVERAGE": 1.0,
+    "M-ABLATION-LITERAL-HAS-DISTILL-PARAMETERIZED": false,
+    "M-PC-EXACT-REPLAY": "PASS",
+    "M-DETERMINISM": "PASS",
+    "M-EXTERNAL-REPEAT-BYTE-IDENTICAL": true,
+    "M-REGRESSION": {
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    "V8-FREEZE-BINDING": "PASS",
+    "model_calls": 0,
+    "model_tokens": 0,
+    "browser_actions": 0,
+    "external_network_requests": 0
+  },
+  "controls": {
+    "V8_FREEZE_BINDING": {
+      "type": "validity_gate",
+      "expected_behavior": "prereg sha matches freeze hash; running runner source == FROZEN RUNNER block; all six artifact hashes match",
+      "observed_behavior": "PASS (prereg_sha_matches=true, runner_source_matches_frozen_block=true, artifact_hashes_match=true)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.V8_FREEZE_BINDING"
+      ]
+    },
+    "M-IDENTITY": {
+      "type": "identity_gate",
+      "expected_behavior": "src/spider/kernel.py sha256 == 718efa6a... == carrier git blob b15ed848...",
+      "observed_behavior": "PASS (shipping_kernel_sha256 == carrier_expected_sha256 == 718efa6a...)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#identities"
+      ]
+    },
+    "M-REGRESSION": {
+      "type": "validity_gate",
+      "expected_behavior": "tests/test_kernel.py discovers >= 3 tests and passes with 0 failures/errors",
+      "observed_behavior": "PASS (tests_run=3, failures=0, errors=0)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.M-REGRESSION",
+        "run_bank.log"
+      ]
+    },
+    "PC-EXACT-REPLAY": {
+      "type": "positive_control",
+      "expected_behavior": "5/5 training ids (item-001..005) re-resolve EXECUTABLE",
+      "observed_behavior": "PASS (5/5 EXECUTABLE)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.PC-EXACT-REPLAY"
+      ]
+    },
+    "B-LITERAL-KERNEL": {
+      "type": "ablation",
+      "expected_behavior": "pre-promotion literal kernel must lack distill_parameterized (has_distill_parameterized == False)",
+      "observed_behavior": "PASS (has_distill_parameterized=false)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.B-LITERAL-KERNEL"
+      ]
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "type": "validity_gate",
+      "expected_behavior": "two whole evaluations agree on treatment/coarse metrics and mechanism identity (port-invariant)",
+      "observed_behavior": "PASS; additionally two independent external process runs produced byte-identical stdout JSON",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.PC-DETERMINISM-REPEAT",
+        "run_bank.out.json",
+        "run_bank.repeat.out.json"
+      ]
+    },
+    "PC-UNSAFE-COARSE": {
+      "type": "positive_control",
+      "expected_behavior": "carrier's own __COARSE__ fallback must false-accept >= 1 OUT payload on the bank (non-vacuous detector)",
+      "observed_behavior": "PASS (false_accept_count=38; 35 of them issued an HTTP request returned 404)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.PC-UNSAFE-COARSE",
+        "run_bank.out.json#arms.PC-UNSAFE-COARSE"
+      ]
+    },
+    "NC-REJECT-ALL": {
+      "type": "null_control",
+      "expected_behavior": "empty registry accepts nothing and issues zero HTTP",
+      "observed_behavior": "PASS (accept_count=0, http_total=0)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.NC-REJECT-ALL",
+        "run_bank.out.json#arms.NC-REJECT-ALL"
+      ]
+    },
+    "B-WIDENED-3": {
+      "type": "strong_comparator",
+      "expected_behavior": "same carrier with support widened to ^item\\-[0-9]{3}$ achieves false_accept_count == 0 AND coverage == 1.0",
+      "observed_behavior": "PASS (false_accept_count=0, coverage=1.0; 19/19 IN accepted, 0/59 OUT accepted)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.B-WIDENED-3",
+        "run_bank.out.json#arms.B-WIDENED-3"
+      ]
+    },
+    "T-SHIPPED": {
+      "type": "treatment",
+      "expected_behavior": "safe (zero out-of-grammar binds, zero HTTP on out-of-grammar) at shipped thresholds",
+      "observed_behavior": "PASS safety (false_accept_count=0, http_on_out_label=0); coverage 10/19=0.5263 (9 declared ids refused)",
+      "status": "PASS",
+      "evidence_refs": [
+        "run_bank.out.json#certificate.T-SHIPPED",
+        "run_bank.out.json#arms.T-SHIPPED"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/harness/run_bank.py",
+      "sha256": "bc7a4545d8afaa8c23065bbf7a9634478d11d180a77fa68cdb319b395f88706c",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/run_bank.out.json",
+      "sha256": "7c8e90019a781af9e9cc3e573680b86fdb50c3b6e2589d56b02de0180def04b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/run_bank.repeat.out.json",
+      "sha256": "7c8e90019a781af9e9cc3e573680b86fdb50c3b6e2589d56b02de0180def04b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/run_bank.log",
+      "sha256": "455370b9d1905063476aa0f30c44389859fceb7eea5822cf650c7df33937417d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/run_bank.repeat.log",
+      "sha256": "dca06e01ca560c9a63485663b7986114097530131cbcdcb338a78614a80c948f",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "role": "fixture"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/prereg.md",
+      "sha256": "6d09ebc9aa83f98c93ef5c44dc61f4ce4d6009d8c6d893dabca1c9b1cdc5ebb3",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38189918141/freeze.json",
+      "sha256": "8edd27c9a954743ce299160de665051766ee0b345b24a607016509490389a045",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Primary execution: python3 research/experiments/EXP-PRODUCT-38189918141/harness/run_bank.py exited 0 with no env overrides (EXECUTE mode); stdout is valid JSON; run_bank.log records 'Ran 3 tests ... OK'.",
+    "V8_FREEZE_BINDING PASS: prereg_sha_matches=true, runner_source_matches_frozen_block=true, artifact_hashes_match=true.",
+    "M-IDENTITY PASS: shipping src/spider/kernel.py sha256 = 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 == carrier git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796.",
+    "Bank: 78 treatment records with 78 unique bids; 19 labelled IN and 59 labelled OUT; 0 class/label mismatches.",
+    "T-SHIPPED: exactly the 10 in-grammar ids item-000..item-009 bound EXECUTABLE (each oracle 200, verify true); the other 9 declared 3-digit ids item-010, item-011, item-042, item-099, item-100, item-123, item-256, item-500, item-999 refused with EXPLORE 'parameter item outside inferred support'.",
+    "T-SHIPPED false_accept_count=0, silent_false_accept_count=0, http_on_out_label=0 over the 59 OUT items; http_total=10 (all on the 10 accepted IN items).",
+    "Every one of the 59 refusals has bound_action null, a non-empty reason, status != EXECUTABLE, and http_delta=0 (0 refusal-semantics violations).",
+    "Route check for the 7 context/intent/param-mismatch items: 5 wrong-context/wrong-intent items returned exactly UNKNOWN 'no applicable validated mechanism'; 2 missing-parameter items (wrong key, empty params) returned EXPLORE \"missing required parameter 'item'\"; all with null bound action and 0 HTTP.",
+    "PC-UNSAFE-COARSE bound 38 of the 59 OUT payloads (35 issued an HTTP request answered 404), establishing a non-vacuous detector with large margin.",
+    "NC-REJECT-ALL accepted 0 items and issued 0 HTTP requests.",
+    "B-WIDENED-3 (support ^item\\-[0-9]{3}$) accepted all 19 declared IN ids with 0 false accepts and coverage 1.0.",
+    "B-LITERAL-KERNEL: the pre-promotion literal kernel lacks distill_parameterized (has_distill_parameterized=false).",
+    "PC-EXACT-REPLAY: item-001..item-005 all EXECUTABLE (5/5).",
+    "PC-DETERMINISM-REPEAT PASS; additionally the primary and independent repeat external process runs produced byte-identical stdout JSON (sha256 7c8e90019a781af9e9cc3e573680b86fdb50c3b6e2589d56b02de0180def04b6).",
+    "M-REGRESSION PASS: tests_run=3, failures=0, errors=0.",
+    "The induced mechanism identity is slots ['item'], support {'item': '^item\\-00[0-9]{1}$'}, confidence 0.9 (>= shipped default min_confidence 0.8), stable across both runs.",
+    "All six freeze artifacts (incl. src/spider/kernel.py) re-hashed identically after both runs; no freeze artifact and no src/spider file was written by the runner."
+  ],
+  "validity_notes": [
+    "EVIDENCE LEVEL: bounded product-local measurement on a designed stress bank and a single in-process loopback oracle; not a random sample of production traffic and not a generalization beyond the induced single-length support grammar.",
+    "GIT-TREE CAVEAT: `git status` is not clean repo-wide only because canonical Codex sync metadata (SPIDER_CODEX.md, codex/claim_state.json, codex/index.json) and untracked codex/experiments/ directories are dirty. Those files are outside the frozen artifact set and outside Product scope; all six freeze artifacts and all of src/ + tests/ are byte-clean before and after the run. V8 binds on artifact hashes, not on repo-wide cleanliness.",
+    "M-BOUNDARY REPRESENTATION QUIRK: the frozen runner's certificate.M-BOUNDARY.accepted_in_grammar_ids/refused_in_grammar_ids store repr() strings (e.g. \"'item-000'\") because the runner sorts r['value'] which is value_repr(item['value']). This is a cosmetic rendering of the frozen runner; the metric values recorded here are derived from the same raw treatment_records and are the underlying identifiers.",
+    "DESIGN-vs-EXECUTE CONTROL MARGIN: DESIGN probed the coarse fallback as accepting 36 OUT *string* payloads; EXECUTE observed false_accept_count=38 because the coarse predicate also accepts the 10 non-string type payloads (str() coercion). This strengthens (not weakens) the sensitivity margin and does not affect the treatment.",
+    "mechanism_id is NOT cited (it hashes the ephemeral-port-bearing action URL and is not stable); interpretation uses slots/support/confidence only, per the parent handoff do_not_assume.",
+    "The oracle is a non-echo 200/404 fixture; zero HTTP on out-of-grammar payloads is a necessary but not sufficient safety condition, and no external side effects are modeled.",
+    "Only one resource shape (/api/items/item-NNN) and one declared 3-digit identifier grammar are exercised; B-WIDENED-3 covers only a 3-digit family boundary, not a genuinely free-form grammar.",
+    "No economics are measured: model_calls=0, model_tokens=0, browser_actions=0, external network requests=0 by construction; the only network activity is loopback to the in-process oracle, whose own request counter is the authoritative HTTP measure."
+  ],
+  "unresolved": [
+    "Whether the carrier's abstention boundary generalizes beyond the single induced support grammar to multi-resource or genuinely free-form payloads is untested.",
+    "Whether the safe complete B-WIDENED-3 widening should be adopted into the shipped support inference is a product decision not licensed by this measurement (the packet neither advances nor promotes any claim).",
+    "Whether the shipped carrier beats cold/instructed/retrieval baselines on cost per successful task remains unaddressed; the four-arm C-LLM-INHERIT benchmark stays externally gated on Runtime B2, Intel B3 and a new Director mandate.",
+    "No latency/token/browser economics are measured for the carrier path (all zero by construction on this credential-free substrate)."
+  ]
+}

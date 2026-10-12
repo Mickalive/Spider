@@ -1,0 +1,100 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/run_scored.json",
+      "role": "raw scored matrix + gates + decision",
+      "sha256": "940c5609adfb8cae4de92c0a416ffb223b0aeca838c817932811f4848ba2fa1a"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/derived_metrics.json",
+      "role": "derived metrics",
+      "sha256": "1205502eda7b093dbe14d8296792a526a412c842775d90a3fc2623e4632eb446"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/protocol_invariants.json",
+      "role": "raw V2/V3 protocol evidence",
+      "sha256": "e3c1aec1e6fecd070dc8eb8ac051eeef2524aec48725a8026754b180bb887412"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/probe_stdout.json",
+      "role": "raw non-outcome probe; V1 fidelity",
+      "sha256": "92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/selftest_stdout.json",
+      "role": "raw evaluator selftest",
+      "sha256": "208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c"
+    }
+  ],
+  "base_sha": "01f12e971b3893c5b79d5512f730e53922509867",
+  "branch": "lab2/runtime",
+  "claim_context": {
+    "claim_ids": [
+      "C-MEAS-VALID"
+    ],
+    "effective_status_before": "VALIDATED",
+    "note": "EXECUTE does not adjudicate claim status; recorded for provenance only."
+  },
+  "commands": [
+    "python3 run_experiment.py --mode probe > artifacts/probe_stdout.json",
+    "python3 run_experiment.py --mode selftest > artifacts/selftest_stdout.json",
+    "python3 run_experiment.py --mode scored --out artifacts/run_scored.json"
+  ],
+  "environment": {
+    "network": "loopback only; no external network, no credentials, no LLM endpoint required",
+    "python": "3.12.15",
+    "randomness": "none; deterministic from run_seed=SPIDER-RUNTIME-SBA-V3-2026",
+    "run_seed": "SPIDER-RUNTIME-SBA-V3-2026",
+    "scored_wall_clock": "~19m50s (56 cells x 20 sessions x 2 determinism runs)",
+    "substrate": "SBA-CREDENTIAL-FREE-V3 (Session-Mechanism-Inheritance), stdlib http.server.ThreadingHTTPServer on 127.0.0.1 ephemeral port + urllib.request"
+  },
+  "execute_head_sha": "42e304bd42d7c7b8a1bda21daf7602560b8813e0",
+  "experiment_id": "EXP-RUNTIME-38194351940",
+  "freeze_artifact_hashes": {},
+  "frozen_inputs": {
+    "design_review.json": {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/design_review.json",
+      "sha256": "6c830def18409b41fc58e50d4144e3e58917d68fe3072c716e33e8e3790d2346"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/freeze.json",
+      "sha256": "eb8facca53824f215960e0413d8f48c67c1672ad90349e5647c250d55e9d49a3"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/prereg.md",
+      "sha256": "673a71cd81336203bc7d9a6a8cb77b066e44850ba742e0d461724d08ae410031"
+    },
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/request.json",
+      "request_hash": "151f0cce8abd1722c6c18d67d72f83f1318d7917060c00613c8978a7469e93cc",
+      "sha256": "f51a5d9ccbec9b75ddc134a6cba738d0cdd4f6de9ed1a329e3a56dd288c35c19"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/spec.json",
+      "sha256": "00a03015a83d8f86e979bc4c7e305d4669f23f3e079b20ebcd1ba49b37d3dcab"
+    }
+  },
+  "github_run_attempt": "1",
+  "github_run_id": "38205288634",
+  "harness": {
+    "frozen_probe_stdout_sha256": "92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e",
+    "frozen_selftest_stdout_sha256": "208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c",
+    "frozen_source_sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "path": "research/experiments/EXP-RUNTIME-38194351940/run_experiment.py",
+    "probe_stdout_sha256": "92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e",
+    "selftest_stdout_sha256": "208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c",
+    "sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "source_fidelity": "MATCH: harness written byte-identically from spec.json.design_satisfiability_probe.source"
+  },
+  "lane": "runtime",
+  "origin_github_run_id": "38194351940",
+  "parent": {
+    "experiment_id": "EXP-RUNTIME-38182129488",
+    "handoff_path": "research/experiments/EXP-RUNTIME-38182129488/handoff.json",
+    "handoff_sha256": "2192ce4494fd533557135b7696e6068880fe4b962495707d71d59f46bb6650c5"
+  },
+  "pre_execute_sha": "0a032b35e55c3e114c87ddf4e4f4fc270630cd2e",
+  "recorded_at_utc": "2026-10-12T06:04:55.089674+00:00",
+  "schema_version": 1,
+  "stage": "EXECUTE"
+}

@@ -1,0 +1,13 @@
+{
+  "artifact_hashes": {},
+  "design_contract_version": 2,
+  "experiment_id": "EXP-RUNTIME-38194351940",
+  "frozen_at": "2026-10-12T05:38:13.735339+00:00",
+  "hashes": {
+    "design_review.json": "6c830def18409b41fc58e50d4144e3e58917d68fe3072c716e33e8e3790d2346",
+    "prereg.md": "673a71cd81336203bc7d9a6a8cb77b066e44850ba742e0d461724d08ae410031",
+    "request.json": "f51a5d9ccbec9b75ddc134a6cba738d0cdd4f6de9ed1a329e3a56dd288c35c19",
+    "spec.json": "00a03015a83d8f86e979bc4c7e305d4669f23f3e079b20ebcd1ba49b37d3dcab"
+  },
+  "schema_version": 1
+}
