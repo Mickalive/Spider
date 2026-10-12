@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-RAW-RUNNER-STATUS": "COMPLETE",
+    "M-RAW-RUNNER-DECISION": "MIXED-TRADEOFF",
+    "M-RAW-RUNNER-OUTCOME": "MIXED",
+    "M-RAW-RUNNER-SELF-SHA256": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1",
+    "M-INVALID-REASONS": [],
+    "M-CLASS-COST-VERDICTS": {
+      "P1-ENDPOINT": "MIXED-TRADEOFF",
+      "P2-STRUCTURE": "MIXED-TRADEOFF",
+      "P3-PERMISSION": "MIXED-TRADEOFF"
+    },
+    "M-COST-VERDICT-STABLE-ACROSS-COLD-BUDGET": {
+      "P1-ENDPOINT": true,
+      "P2-STRUCTURE": true,
+      "P3-PERMISSION": true
+    },
+    "M-CLASSES": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 7.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.7777777777777778
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.6666666666666666
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-COST-PRODUCT-RATIO": 1.0526315789473684,
+        "M-COST-PRODUCT-RATIO-MIN": 1.1111111111111112,
+        "M-COST-PRODUCT-RATIO-DEEP": 1.0,
+        "M-COST-REPAIR-FETCH": 7.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO": 0.7777777777777778
+      }
+    },
+    "M-POOLED-REPAIR-SUCCESS": 1.0,
+    "M-POOLED-CONTAMINATION-RATE": 0.0,
+    "M-REPAIR-VS-COLD-PRODUCT-RATIO": {
+      "P1-ENDPOINT": 1.0526315789473684,
+      "P2-STRUCTURE": 1.0526315789473684,
+      "P3-PERMISSION": 1.0526315789473684
+    },
+    "M-REPAIR-VS-COLD-FETCH-RATIO": {
+      "P1-ENDPOINT": 0.7777777777777778,
+      "P2-STRUCTURE": 0.6666666666666666,
+      "P3-PERMISSION": 0.7777777777777778
+    },
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "M-TRIALS-TOTAL": 36,
+    "M-CARRIER-SHA256": {
+      "kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    }
+  },
+  "controls": {
+    "PC-BASE-LIVENESS": {
+      "id": "PC-BASE-LIVENESS",
+      "type": "positive_control",
+      "expected": "pre-perturbation every learned mechanism resolves EXECUTABLE and first read verifies",
+      "observed": {
+        "base_liveness_true_trials": 36,
+        "n_trials": 36
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#nc_*",
+        "raw_evidence/runner_result_raw.json#trials"
+      ]
+    },
+    "B-COLD": {
+      "id": "B-COLD",
+      "type": "baseline_primary_cost_comparator",
+      "expected": "cold re-derivation (L=3) success >= 0.90 on every class (V5)",
+      "observed": {
+        "P1-ENDPOINT": 1.0,
+        "P2-STRUCTURE": 1.0,
+        "P3-PERMISSION": 1.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "B-COLD-MIN": {
+      "id": "B-COLD-MIN",
+      "type": "baseline_cost_sensitivity",
+      "expected": "cold re-derivation L=2 live (cost sensitivity only)",
+      "observed": {
+        "P1-ENDPOINT": 18.0,
+        "P2-STRUCTURE": 18.0,
+        "P3-PERMISSION": 18.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "B-COLD-DEEP": {
+      "id": "B-COLD-DEEP",
+      "type": "baseline_cost_sensitivity",
+      "expected": "cold re-derivation L=4 live (cost sensitivity only)",
+      "observed": {
+        "P1-ENDPOINT": 20.0,
+        "P2-STRUCTURE": 20.0,
+        "P3-PERMISSION": 20.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "B-LITERAL-REPLAY": {
+      "id": "B-LITERAL-REPLAY",
+      "type": "mechanism_control_must_fail",
+      "expected": "literal replay of inherited unrepaired mechanism success <= 0.10 on every class (V4)",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "B-NO-REPAIR": {
+      "id": "B-NO-REPAIR",
+      "type": "abstention_control_must_fail",
+      "expected": "guard fires but system abstains; success <= 0.10 (V6); never a cost denominator",
+      "observed": {
+        "P1-ENDPOINT": 0.0,
+        "P2-STRUCTURE": 0.0,
+        "P3-PERMISSION": 0.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "T-LOCAL-REPAIR": {
+      "id": "T-LOCAL-REPAIR",
+      "type": "treatment",
+      "expected": "signal-driven local repair of the shipped carrier restores success >=0.80, Wilson lower >=0.60, guard >=0.80, write set <=1, contamination <=0.10",
+      "observed": {
+        "P1-ENDPOINT": {
+          "M-REPAIR-SUCCESS": 1.0,
+          "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+          "M-GUARD-FIRE-RATE": 1.0,
+          "M-WRITE-SET-MAX": 1,
+          "M-CONTAMINATION-RATE": 0.0
+        },
+        "P2-STRUCTURE": {
+          "M-REPAIR-SUCCESS": 1.0,
+          "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+          "M-GUARD-FIRE-RATE": 1.0,
+          "M-WRITE-SET-MAX": 1,
+          "M-CONTAMINATION-RATE": 0.0
+        },
+        "P3-PERMISSION": {
+          "M-REPAIR-SUCCESS": 1.0,
+          "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+          "M-GUARD-FIRE-RATE": 1.0,
+          "M-WRITE-SET-MAX": 1,
+          "M-CONTAMINATION-RATE": 0.0
+        }
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ]
+    },
+    "NC-NO-PERTURBATION": {
+      "id": "NC-NO-PERTURBATION",
+      "type": "negative_control",
+      "expected": "with no perturbation the guard must not fire (stale=false)",
+      "observed": {
+        "stale": false,
+        "info": {
+          "reason": "fresh",
+          "status": 200,
+          "jaccard": 1.0
+        }
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#nc_no_perturbation"
+      ]
+    },
+    "NC-NOISE": {
+      "id": "NC-NOISE",
+      "type": "negative_control",
+      "expected": "non-semantic observed_at churn must not fire the guard (stale=false)",
+      "observed": {
+        "stale": false,
+        "info": {
+          "reason": "fresh",
+          "status": 200,
+          "jaccard": 1.0
+        }
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#nc_noise"
+      ]
+    },
+    "NC-OVERBROAD-REPAIR": {
+      "id": "NC-OVERBROAD-REPAIR",
+      "type": "negative_control",
+      "expected": "applying the target's repaired postconditions to ALL mechanisms is detected as contaminated where a semantic change exists (expected > 0 for P2-STRUCTURE)",
+      "observed": {
+        "P1-ENDPOINT": 4.0,
+        "P2-STRUCTURE": 4.0,
+        "P3-PERMISSION": 4.0
+      },
+      "pass": true,
+      "evidence_refs": [
+        "raw_evidence/runner_result_raw.json#metrics.M-CLASSES"
+      ],
+      "note": "Observed 4/4 for every class, not only P2-STRUCTURE: the target's per-resource literal postconditions (e.g. kind=user vs kind=post) also break the other resources' verification. The control still demonstrates the contamination metric is sensitive to an over-broad rewrite."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_delta_repair.py",
+      "sha256": "0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/runner_result_raw.json",
+      "sha256": "00c805de25116807f729e944a437bb2ec88a58bfd0e4c01d2ad87f79085537e4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/mechanics_raw_a.json",
+      "sha256": "473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/mechanics_raw_b.json",
+      "sha256": "473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-38197849043/raw_evidence/extract_runner.py",
+      "sha256": "41a193e721629da81760ebc9d7bd2ccc4780cb287c2203294ef11b0422914b66",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "id": "O-ALL-TRIALS-VALID",
+      "observation": "All 36 scored trials (12 per perturbation class) completed validly; runner status=COMPLETE with invalid_reasons=[]."
+    },
+    {
+      "id": "O-REPAIR-12-OF-12",
+      "observation": "T-LOCAL-REPAIR restored end-to-end success on 12/12 trials in each of P1-ENDPOINT, P2-STRUCTURE and P3-PERMISSION (M-REPAIR-SUCCESS=1.0; Wilson 95% lower=0.7575)."
+    },
+    {
+      "id": "O-GUARD-12-OF-12",
+      "observation": "The deterministic guard fired on 12/12 perturbed trials in every class (M-GUARD-FIRE-RATE=1.0); NC-NO-PERTURBATION and NC-NOISE both stayed fresh (stale=false, jaccard=1.0)."
+    },
+    {
+      "id": "O-WRITE-SET-1",
+      "observation": "The repair write set was exactly one mechanism in all 36 trials (M-WRITE-SET-MAX=1, M-WRITE-SET-MEAN=1.0); no other resource mechanism was modified."
+    },
+    {
+      "id": "O-CONTAMINATION-ZERO",
+      "observation": "Behavioural contamination of the four unaffected resources was 0/48 probes summed across all classes (M-CONTAMINATION-RATE=0.0)."
+    },
+    {
+      "id": "O-PERTURBATION-BITES",
+      "observation": "Literal replay of the inherited unrepaired mechanism failed in all classes (M-LITERAL-REPLAY-SUCCESS=0.0); no-repair abstention also failed (M-NO-REPAIR-SUCCESS=0.0); cold re-derivation succeeded 12/12 (M-COLD-SUCCESS=1.0)."
+    },
+    {
+      "id": "O-NC-OVERBROAD-DETECTED",
+      "observation": "NC-OVERBROAD-REPAIR produced M-OVERBROAD-CONTAMINATION-RATE=4.0 (all four unaffected resources broken) in every class, confirming the contamination metric detects a global rewrite."
+    },
+    {
+      "id": "O-COST-NETWORK-CHEAPER",
+      "observation": "Repair used mean 7/6/7 live HTTP fetches vs cold mean 9 for P1/P2/P3 (M-COST-FETCH-RATIO=0.7778/0.6667/0.7778)."
+    },
+    {
+      "id": "O-COST-PRODUCT-REGRESSION",
+      "observation": "On the equal-weight registered product counter the repair cost mean 20 vs cold mean 19 in every class (M-COST-PRODUCT-RATIO=1.05263); repair additionally charges one repair_attempt plus its probe fetch."
+    },
+    {
+      "id": "O-COST-STABLE",
+      "observation": "The product ratio stays >1.0 across cold budgets: L=2 -> 1.1111, L=3 -> 1.05263, L=4 -> 1.0 (M-COST-PRODUCT-RATIO-MIN/-/-DEEP); cost_verdict_stable_across_cold_budget=true for all classes."
+    },
+    {
+      "id": "O-NOISE-FRESH",
+      "observation": "NC-NOISE (per-request observed_at nonce) did not trigger the required-field-filtered guard: M-NOISE-FALSE-TRIGGER-RATE=0.0."
+    },
+    {
+      "id": "O-CARRIER-BOUND",
+      "observation": "Carrier hashes recorded by the runner match freeze.json artifact hashes exactly (kernel 718efa6a..., models 338aaf4d..., registry 51fb440d...)."
+    }
+  ],
+  "validity_notes": [
+    "V1-FREEZE_BINDING: extracted runner bytes sha256 0322d92cfbc1314437a92eb0cdfeac43a8ecd3c5cdd520bae0a443c8d669eed1 equals prereg CANONICAL-RUNNER-SHA256; request/prereg/spec/design_review sha256 equal freeze.json.hashes; freeze.json.artifact_hashes equal the live carrier module hashes. PASS.",
+    "V2-SUBSTRATE_ISOLATION: runner is Python 3.12 stdlib only (http.server/urllib/json/math/random/tempfile/threading); no LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL. Registry state lives in a fresh per-process tempfile.mkdtemp directory; no cross-run mechanism leakage. PASS.",
+    "V3-DETERMINISM: two independent --mechanics-only canary runs are byte-identical (sha256 473144916093ac2f6a55f7b13d7ca760682d84fcf7c3d49c0638f3c091d08d7a both). The scored run is a single deterministic execution under fixed seeds; determinism gate is the canary as preregistered. PASS.",
+    "V4-PERTURBATION_BITES: B-LITERAL-REPLAY success 0.0 <= 0.10 on every class. PASS.",
+    "V5-COLD_BASELINE_LIVE: B-COLD success 1.0 >= 0.90 on every class. PASS.",
+    "V6-NO_REPAIR_INERT: B-NO-REPAIR success 0.0 <= 0.10. PASS.",
+    "V7-GUARD_LIVENESS: guard fires 1.0 >= 0.80 on perturbed trials and does not fire on NC-NO-PERTURBATION / NC-NOISE (both stale=false). PASS.",
+    "V8-NO_TARGET_LEAKAGE: repair writes exactly one mechanism (M-WRITE-SET-MAX=1) and contamination is measured only on the four genuinely unaffected resources (0/48). PASS.",
+    "V9-INTEGER_COUNTERS: all cost counters are integer counts from the shipped TrajectoryCounters surface plus the runner's honest HTTP counter; observed product means 20 vs 19 vs 18 and fetch means 7/6 vs 9. No estimated or model-token quantities. PASS.",
+    "V10-THRESHOLD_NOT_FITTED: JACCARD_THRESHOLD=0.85, PRODUCT_COST_BAR=1.00, PRODUCT_COST_MAX=1.15, FETCH_COST_BAR=0.90 are fixed in the frozen runner and were not re-tuned after the scored run. Attestation only; no scored-run tuning occurred. PASS.",
+    "V11-N_CONTROLLED: n=12 scored trials per class with targets rotating over users/posts/comments (4 each per class). PASS.",
+    "V12-POSITIVE_CONTROL: PC-BASE-LIVENESS true (base_liveness=true) in all 36 trials before perturbation. PASS.",
+    "NC-OVERBROAD-REPAIR deviation from the design prediction: the prereg anticipated >0 contamination for P2-STRUCTURE and 0 for P1/P3 where the schema is stable, but the runner observed 4/4 for every class. This is because each resource's distilled mechanism carries resource-specific literal postconditions (e.g. kind=user vs kind=post), so applying the target's postconditions to all mechanisms breaks the others regardless of class. The control still passes its intended sensitivity purpose (a global rewrite is detected as contaminated); it is a prediction miss in the control, not in the confirmatory metric and it did not affect the decision (invalid_reasons=[]).",
+    "Cost representation: the registered product counter is the equal-weight sum of integer {http_requests, retrieval_calls, verification_calls, repair_attempts} components. The repair is network-cheaper (fewer fetches) but pays one repair_attempt plus its probe fetch and additional retrieval/verification work, netting a ~5.3% product-counter regression that is stable across all three cold budgets. This is the preregistered MIXED-TRADEOFF tier, i.e. a bounded trade-off, not a strict cost win.",
+    "Scope: the substrate is a credential-free, in-process stdlib HTTP application on 127.0.0.1, not the live Web. Results bound C-DELTA-REPAIR only at this single credential-free-substrate ceiling; no live-site or cross-site generalization is claimed.",
+    "The scored run was executed once; V3 determinism is established by the byte-identical canary pair (as preregistered), not by repeating the 36-trial scored run."
+  ],
+  "unresolved": [
+    "Whether any local-repair policy can be STRICTLY product-counter-cheaper than cold re-derivation on this carrier (all classes currently regress ~5.3%; the ratio is >1.0 at L=2 and L=3 and exactly 1.0 at L=4). One candidate direction: reduce the retrieve/verify overhead of the repair path so the saved fetches dominate the one repair_attempt.",
+    "Whether the MIXED-TRADEOFF holds on a materially different substrate (live sites, non-string ids, nested schemas) or is an artifact of this minimal JSON API.",
+    "Why NC-OVERBROAD-REPAIR contaminates P1/P3 as well as P2 (resource-specific literal postconditions); if a class-specific over-broad prediction is required in future, the control should be redesigned to isolate the schema-change class.",
+    "Whether the equal-weight product counter is the right product-economics constraint, or whether a network-weighted counter would be the appropriate decision surface (the current registered counter is the preregistered constraint and yields MIXED-TRADEOFF)."
+  ]
+}

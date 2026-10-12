@@ -1,0 +1,112 @@
+{
+  "experiment_id": "EXP-GRAPH-38197849043",
+  "lane": "graph",
+  "claim_ids": [
+    "C-DELTA-REPAIR"
+  ],
+  "question": "On a credential-free, locally served, perturbable HTTP application (NOT the stale distributed nginx/gunicorn/WAL substrate), using the now-shipped parameterized carrier (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify) plus a deterministic structural+postcondition freshness guard: after a controlled LOCAL perturbation of one resource segment (endpoint parameter mutation, selector/structure change, or permission-boundary change), does a deterministic signal-driven local repair restore correct end-to-end task success at a repair cost strictly below cold re-derivation, with zero behavioural contamination of unaffected resource segments (localized write set; contamination rate <= preregistered bound), against strong baselines (cold re-derive, literal replay, no-repair)? Report the repair-vs-cold cost ratio by perturbation class and the contamination rate, to bound C-DELTA-REPAIR upward or falsify it.",
+  "hypothesis": "H1 (functional): after a single LOCAL perturbation of one segment, a signal-driven local repair of the SHIPPED parameterized mechanism restores correct end-to-end task success on the perturbed resource at rate >= 0.80 per class (Wilson 95% lower >= 0.60), with the deterministic guard firing on >= 0.80 of perturbed trials. H2 (locality): the repair write set is localized to the single perturbed mechanism (max <= 1) and contamination of the four unaffected resources is <= 0.10, while an over-broad all-mechanism rewrite (NC-OVERBROAD-REPAIR) is detected as contaminated. H3 (cost): the repair cost ratio versus cold re-derivation is < 1.00 on the equal-weight registered operation counter and <= 0.90 on live network fetches.",
+  "falsifier": "Valid negative for the mandate's strict cost claim if, on any perturbation class, the guarded local repair fails to be simultaneously (i) functionally live (success >= 0.80, Wilson lower >= 0.60), (ii) local (write set <= 1 mechanism, contamination <= 0.10), and (iii) strictly cheaper than cold re-derivation on the registered product counter (ratio < 1.00) AND on live fetches (ratio <= 0.90). A repair that is functional and local but only network-cheaper, not product-counter-cheaper, is MIXED (trade-off), not a strict support. A repair that contaminates unaffected segments, whose guard fails to fire, or whose cold/literal/no-repair baselines are not live, is MEASUREMENT_INVALID or FALSIFIES and must not be reported as a positive.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "role": "primary cost comparator",
+      "description": "Cold re-derivation on the same perturbed task: discovery probe + LEARN_IDS (L=3) fresh observations, distill_parameterized, then execute the same 5 tasks."
+    },
+    {
+      "id": "B-COLD-MIN",
+      "role": "cost sensitivity",
+      "description": "Identical to B-COLD but L=2 (carrier minimum viable re-derivation)."
+    },
+    {
+      "id": "B-COLD-DEEP",
+      "role": "cost sensitivity",
+      "description": "Identical to B-COLD but L=4."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "role": "mechanism control (must fail)",
+      "description": "Replay the inherited, unrepaired mechanism on the perturbed resource."
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "role": "abstention control (must fail)",
+      "description": "Guard detects staleness but the system abstains; non-executing baseline, never used as the cost denominator."
+    }
+  ],
+  "positive_control": "PC-BASE-LIVENESS: pre-perturbation, every learned mechanism resolves EXECUTABLE and its first read verifies (must be true, else MEASUREMENT_INVALID).",
+  "null_control": "NC-NO-PERTURBATION: with no perturbation the guard must not fire (stale=false). NC-NOISE: non-semantic observed_at churn must not fire the guard. NC-OVERBROAD-REPAIR: applying the target's repaired postconditions to ALL mechanisms must be detected as contaminated where a semantic change exists (expected > 0 for P2-STRUCTURE).",
+  "measurement_validity": [
+    "V1-FREEZE_BINDING: extracted runner bytes hash to CANONICAL-RUNNER-SHA256; request/prereg/artifact hashes match freeze.json.",
+    "V2-SUBSTRATE_ISOLATION: stdlib only; no LLM/network/credential/browser; fresh per-run registry directory (no cross-run mechanism leakage).",
+    "V3-DETERMINISM: fixed seeds; two independent canary runs byte-identical.",
+    "V4-PERTURBATION_BITES: B-LITERAL-REPLAY success <= 0.10 on every class.",
+    "V5-COLD_BASELINE_LIVE: B-COLD success >= 0.90 on every class (else MEASUREMENT_INVALID).",
+    "V6-NO_REPAIR_INERT: B-NO-REPAIR success <= 0.10 (else MEASUREMENT_INVALID).",
+    "V7-GUARD_LIVENESS: guard fires >= 0.80 on perturbed trials AND not on NC-NO-PERTURBATION / NC-NOISE.",
+    "V8-NO_TARGET_LEAKAGE: repair writes exactly one mechanism (max <= 1); contamination measured only on genuinely unaffected resources.",
+    "V9-INTEGER_COUNTERS: all cost counters are integer counts from the shipped TrajectoryCounters surface; no estimated/model-token quantities.",
+    "V10-THRESHOLD_NOT_FITTED: JACCARD_THRESHOLD=0.85 and all decision bars preregistered, not tuned against any scored run.",
+    "V11-N_CONTROLLED: TRIALS_PER_CLASS=12 with rotating targets.",
+    "V12-POSITIVE_CONTROL: PC-BASE-LIVENESS true before perturbation."
+  ],
+  "decision_rule": "Per class: functional_ok := repair_success >= 0.80 AND Wilson_lower >= 0.60 AND contamination_rate <= 0.10 AND write_set_max <= 1 AND guard_fire_rate >= 0.80. cost_verdict := FUNCTIONAL-FAIL if not functional_ok; STRICT-WIN if product_ratio < 1.00 AND fetch_ratio <= 0.90; BOUNDED-WIN if product_ratio <= 1.00 AND fetch_ratio <= 0.90; MIXED-TRADEOFF if product_ratio <= 1.15 AND fetch_ratio <= 0.90; else COST-FAIL. product_ratio = mean(repair product)/mean(cold product) over the equal-weight registered TrajectoryCounters components {http_requests, retrieval_calls, verification_calls, repair_attempts}; fetch_ratio = mean(repair http)/mean(cold http). Aggregate over P1-ENDPOINT/P2-STRUCTURE/P3-PERMISSION: any class invalid -> MEASUREMENT_INVALID/INCONCLUSIVE; all STRICT-WIN -> SUPPORTS; all in {STRICT-WIN, BOUNDED-WIN} -> SUPPORTS-BOUNDED; all in {STRICT-WIN, BOUNDED-WIN, MIXED-TRADEOFF} -> MIXED-TRADEOFF; some class in a positive/neutral tier -> MIXED; otherwise -> FALSIFIES. The --mechanics-only flag is a non-scored canary.",
+  "product_consequence_positive": "If SUPPORTS or SUPPORTS-BOUNDED: local repair earns a real maintenance cost term (strictly cheaper than cold re-derivation on the registered product counter and on network fetches, with a localized write set and contamination under bound) and local-repair is promoted into the treatment arm of the gated product-economics benchmark; C-DELTA-REPAIR is bounded upward (to the credential-free single-substrate ceiling) rather than globally validated.",
+  "product_consequence_negative": "If MIXED/MIXED-TRADEOFF/FALSIFIES: do not promote local repair. If contamination or no cost win -> remove local-repair from the product maintenance story before paying for a flagship run. If MIXED-TRADEOFF (network-cheaper but not product-counter-cheaper) -> restrict the claim to a network-cost-only maintenance benefit and keep the product counter as the binding constraint.",
+  "estimated_cost": "36 scored trials (12/class) + 3 canary trials; 5 resources x <=5 ids per trial; in-process stdlib HTTP only. Zero external model, credential, browser or network cost. Expected wall-clock < 10 minutes on one CPU.",
+  "expected_information_gain": "Decides the maintenance half of C-PRODUCT-ECON: whether the now-shipped parameterized carrier plus a deterministic freshness guard supports local repair at strictly lower cost than cold re-derivation under a contamination bound. Bounds the program's only starved claim (C-DELTA-REPAIR) upward or falsifies it, changing the next choice (promote repair into the treatment arm vs. remove local-repair).",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Every substantive branch of the frozen classifier (SUPPORTS, SUPPORTS-BOUNDED, MIXED, MIXED-TRADEOFF, FALSIFIES, MEASUREMENT_INVALID) was produced by driving the frozen aggregation code with synthetic non-substrate rows; no branch is empty or unreachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8-design-satisfiability-probes",
+        "runner self-check --mechanics-only"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All required instruments exist at freeze: Python 3.12 stdlib (http.server, urllib, json, hashlib) and the shipped carrier modules. No flask/requests/numpy; substrate is constructed in-process. The canary is green and deterministic, demonstrating the measurement path executes.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8-design-satisfiability-probes",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#11-environment-and-execute-command"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The mandate's strong comparator is cold re-derivation on the SAME perturbed task (B-COLD), which is live and distinct from the non-executing B-NO-REPAIR abstention control and from B-LITERAL-REPLAY. The cost denominator is fixed to B-COLD; B-NO-REPAIR is never the denominator.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#7-decision-rule"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Controls are demonstrably sensitive: literal replay fails (perturbation bites), B-NO-REPAIR fails, NC-OVERBROAD-REPAIR is detected as contaminated where semantics change, and NC-NO-PERTURBATION / NC-NOISE do not fire the guard. Canary confirms each on the real substrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#6-baselines-and-controls",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8-design-satisfiability-probes"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "Treatment T-LOCAL-REPAIR uses the shipped carrier and is structurally able to become EXECUTABLE: the canary shows distill_parameterized -> resolve -> verify succeeding and the repaired mechanism restoring successful execution on all three perturbation classes.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#4-substrate-treatment-identity-and-perturbation-classes",
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#8-design-satisfiability-probes"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All mutable local interpretation dependencies exist at freeze time and are listed explicitly: the three shipped carrier modules that define treatment identity and registry locality. No external task bank/dataset/fixture is read; the runner embeds the substrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38197849043/prereg.md#10-freeze-artifacts-and-canonical-hashes"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ]
+}
