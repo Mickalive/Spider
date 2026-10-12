@@ -1,11 +1,11 @@
 {
   "stage": "execute",
   "category": "EXECUTION_FAILURE",
-  "message": "stage exited with code 1",
+  "message": "stage exited with code 67",
   "retryable": false,
-  "fingerprint": "2ec9912af1c82b8c55d55e90",
-  "recorded_at": "2026-10-12T14:54:56.663540+00:00",
-  "github_run_id": "38266079632",
+  "fingerprint": "544fa9c5dea17caa309565e4",
+  "recorded_at": "2026-10-12T18:49:08.384864+00:00",
+  "github_run_id": "38291121892",
   "github_run_attempt": "1",
-  "control_revision": "1d6566a39f0e3a8f6c1ecbf23979483ed09952ddea6ded915ed599a78d2b4411"
+  "control_revision": "25cae451082d6f7453f5d4085cec561e03c1fe8c41adea6f4e490f99a70edd56"
 }
