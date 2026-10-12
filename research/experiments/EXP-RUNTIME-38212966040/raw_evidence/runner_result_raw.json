@@ -1,0 +1,2659 @@
+{
+  "status": "COMPLETE",
+  "experiment_id": "EXP-RUNTIME-38212966040",
+  "lane": "runtime",
+  "runner_self_sha": "fc150d1a95fb600b0eae08e821b367968ab99e1a99d843361a61ba5cbcb2f6b5",
+  "seed": 3853227672,
+  "invalid_reasons": [],
+  "decision": "SUPPORTS",
+  "outcome": "SUPPORTS",
+  "class_cost_verdicts": {
+    "P1-ENDPOINT": "STRICT-WIN",
+    "P2-STRUCTURE": "STRICT-WIN",
+    "P3-PERMISSION": "STRICT-WIN"
+  },
+  "metrics": {
+    "M-CLASSES": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 5.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-COLD-DEEP-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MEAN": 1.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-PRODUCT": 17.0,
+        "M-COST-REPAIR-CONSERVATIVE-PRODUCT": 18.0,
+        "M-COST-REPAIR-LEGACY-PRODUCT": 20.0,
+        "M-COST-COLD-PRODUCT": 19.0,
+        "M-COST-COLD-MIN-PRODUCT": 18.0,
+        "M-COST-COLD-DEEP-PRODUCT": 20.0,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L4": 0.85,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L3": 0.9473684210526315,
+        "M-PRODUCT-RATIO-CONSERVATIVE-L2": 1.0,
+        "M-PRODUCT-RATIO-LEGACY-L3": 1.0526315789473684,
+        "M-PRODUCT-RATIO-LEGACY-L2": 1.1111111111111112,
+        "M-COST-REPAIR-FETCH": 6.0,
+        "M-COST-COLD-FETCH": 9.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666
+      }
+    },
+    "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+    "M-LEGACY-REGRESSION-REPRODUCED": true,
+    "M-TRIALS-TOTAL": 36
+  },
+  "trials": [
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P1-ENDPOINT",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P2-STRUCTURE",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 6,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 5,
+        "retrieval": 6,
+        "verification": 6,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 6,
+        "retrieval": 7,
+        "verification": 6,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 15
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "comments",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "users",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    },
+    {
+      "valid": true,
+      "class": "P3-PERMISSION",
+      "target": "posts",
+      "repair_success": true,
+      "repair_guard_fired": true,
+      "repair_reason": "repaired",
+      "conservative_success": true,
+      "legacy_success": true,
+      "cold_success": true,
+      "cold_min_success": true,
+      "cold_deep_success": true,
+      "literal_success": false,
+      "norepair_success": false,
+      "norepair_guard_fired": true,
+      "repair_cost": {
+        "http": 6,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 1,
+        "product": 17
+      },
+      "conservative_cost": {
+        "http": 6,
+        "retrieval": 6,
+        "verification": 5,
+        "repair": 1,
+        "product": 18
+      },
+      "legacy_cost": {
+        "http": 7,
+        "retrieval": 7,
+        "verification": 5,
+        "repair": 1,
+        "product": 20
+      },
+      "cold_cost": {
+        "http": 9,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 19
+      },
+      "cold_min_cost": {
+        "http": 8,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 18
+      },
+      "cold_deep_cost": {
+        "http": 10,
+        "retrieval": 5,
+        "verification": 5,
+        "repair": 0,
+        "product": 20
+      },
+      "literal_cost": {
+        "http": 5,
+        "retrieval": 5,
+        "verification": 0,
+        "repair": 0,
+        "product": 10
+      },
+      "contamination_n": 0,
+      "overbroad_contamination_n": 0,
+      "write_set_n": 1,
+      "unaffected_n": 4,
+      "base_liveness": false
+    }
+  ],
+  "nc_no_perturbation": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  },
+  "nc_noise": {
+    "stale": false,
+    "info": {
+      "reason": "fresh",
+      "status": 200,
+      "jaccard": 1.0
+    }
+  },
+  "carrier": {
+    "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  }
+}
