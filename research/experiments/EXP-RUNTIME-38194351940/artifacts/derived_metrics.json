@@ -1,0 +1,266 @@
+{
+  "all_matched_correctness_equal": true,
+  "counter_distinctness_vs_T_at_0.5": {
+    "F1-RECORDS": {
+      "B-MEMORYLESS": 2,
+      "B-RETRIEVAL-REPLAY": 3,
+      "B-WITHIN-SESSION-COMPOSE": 2,
+      "B-WITHIN-SESSION-RECEIPT": 2
+    },
+    "F2-WIDGETS": {
+      "B-MEMORYLESS": 2,
+      "B-RETRIEVAL-REPLAY": 3,
+      "B-WITHIN-SESSION-COMPOSE": 2,
+      "B-WITHIN-SESSION-RECEIPT": 2
+    }
+  },
+  "decision": "ROBUST",
+  "determinism_ok": true,
+  "gates": {
+    "V1_code_fidelity_manifest": true,
+    "V2_transport_conformance": true,
+    "V3_no_leak": true,
+    "V4_determinism": true,
+    "V5_arm_liveness": true,
+    "V6_counter_instrumentation": true,
+    "V7_matched_correctness": true,
+    "V8_ceiling_band": true,
+    "V8_identity_disclosure": true,
+    "V8_mechanism_nondegenerate": true,
+    "V8_mechanism_off": true,
+    "V8_retention_counter_distinctness": true
+  },
+  "min_arm_success_rate": 0.875,
+  "n_cells": 56,
+  "per_instance_counters_at_0.5": {
+    "F1-RECORDS": {
+      "B-CROSS-SESSION-COMPILE": {
+        "http_calls": 34.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      },
+      "B-MEMORYLESS": {
+        "http_calls": 41.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      },
+      "B-RETRIEVAL-REPLAY": {
+        "http_calls": 36.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 8.0,
+        "verification_calls": 16.0
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "http_calls": 36.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      },
+      "B-WITHIN-SESSION-RECEIPT": {
+        "http_calls": 36.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      },
+      "PC-EXACT-REPLAY": {
+        "http_calls": 34.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      },
+      "T-MECHANISM-INHERIT": {
+        "http_calls": 34.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 16.0
+      }
+    },
+    "F2-WIDGETS": {
+      "B-CROSS-SESSION-COMPILE": {
+        "http_calls": 42.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      },
+      "B-MEMORYLESS": {
+        "http_calls": 51.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      },
+      "B-RETRIEVAL-REPLAY": {
+        "http_calls": 44.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 10.0,
+        "verification_calls": 20.0
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "http_calls": 44.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      },
+      "B-WITHIN-SESSION-RECEIPT": {
+        "http_calls": 44.0,
+        "repair_calls": 1.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      },
+      "PC-EXACT-REPLAY": {
+        "http_calls": 42.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      },
+      "T-MECHANISM-INHERIT": {
+        "http_calls": 42.0,
+        "repair_calls": 0.0,
+        "retrieval_calls": 0.0,
+        "verification_calls": 20.0
+      }
+    }
+  },
+  "retention_ladder": {
+    "F1-RECORDS|0.5": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-COMPOSE": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "t_rate": 1.0
+    },
+    "F1-RECORDS|0.75": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-COMPOSE": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "t_rate": 1.0
+    },
+    "F2-WIDGETS|0.5": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-COMPOSE": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "t_rate": 1.0
+    },
+    "F2-WIDGETS|0.75": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-COMPOSE": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "t_rate": 1.0
+    }
+  },
+  "success_rate_matrix": {
+    "F1-RECORDS": {
+      "0.0": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 1.0,
+        "B-RETRIEVAL-REPLAY": 1.0,
+        "B-WITHIN-SESSION-COMPOSE": 1.0,
+        "B-WITHIN-SESSION-RECEIPT": 1.0,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.25": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 1.0,
+        "B-RETRIEVAL-REPLAY": 1.0,
+        "B-WITHIN-SESSION-COMPOSE": 1.0,
+        "B-WITHIN-SESSION-RECEIPT": 1.0,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.5": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-COMPOSE": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.75": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-COMPOSE": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      }
+    },
+    "F2-WIDGETS": {
+      "0.0": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 1.0,
+        "B-RETRIEVAL-REPLAY": 1.0,
+        "B-WITHIN-SESSION-COMPOSE": 1.0,
+        "B-WITHIN-SESSION-RECEIPT": 1.0,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.25": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 1.0,
+        "B-RETRIEVAL-REPLAY": 1.0,
+        "B-WITHIN-SESSION-COMPOSE": 1.0,
+        "B-WITHIN-SESSION-RECEIPT": 1.0,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.5": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-COMPOSE": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      },
+      "0.75": {
+        "B-CROSS-SESSION-COMPILE": 1.0,
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-COMPOSE": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9,
+        "PC-EXACT-REPLAY": 1.0,
+        "T-MECHANISM-INHERIT": 1.0
+      }
+    }
+  },
+  "v1": {
+    "harness_sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "python": "3.12.15"
+  },
+  "world": {
+    "any_retention_certified": true,
+    "gates_pass": true,
+    "robust_certified": true
+  }
+}

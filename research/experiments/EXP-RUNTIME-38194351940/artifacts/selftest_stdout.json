@@ -1,0 +1,32 @@
+{
+  "branch_reachability": {
+    "COLLAPSED": "COLLAPSED",
+    "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+    "PARTIAL": "PARTIAL",
+    "ROBUST": "ROBUST"
+  },
+  "check_decision_is_robust": true,
+  "check_evaluator_matches_probe": true,
+  "decision": "ROBUST",
+  "gates": {
+    "V1_code_fidelity_manifest": true,
+    "V2_transport_conformance": true,
+    "V3_no_leak": true,
+    "V4_determinism": true,
+    "V5_arm_liveness": true,
+    "V6_counter_instrumentation": true,
+    "V7_matched_correctness": true,
+    "V8_ceiling_band": true,
+    "V8_identity_disclosure": true,
+    "V8_mechanism_nondegenerate": true,
+    "V8_mechanism_off": true,
+    "V8_retention_counter_distinctness": true
+  },
+  "note": "non-outcome-bearing: assemble_decision() (all gates + retention-lattice decision rule) exercised on probe-derived synthetic cells",
+  "probe_predicted_decision": "ROBUST",
+  "world": {
+    "any_retention_certified": true,
+    "gates_pass": true,
+    "robust_certified": true
+  }
+}

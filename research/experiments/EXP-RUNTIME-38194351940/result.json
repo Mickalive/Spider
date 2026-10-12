@@ -1,0 +1,696 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/run_experiment.py",
+      "role": "code",
+      "sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/run_scored.json",
+      "role": "raw",
+      "sha256": "940c5609adfb8cae4de92c0a416ffb223b0aeca838c817932811f4848ba2fa1a"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/derived_metrics.json",
+      "role": "derived",
+      "sha256": "1205502eda7b093dbe14d8296792a526a412c842775d90a3fc2623e4632eb446"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/protocol_invariants.json",
+      "role": "raw",
+      "sha256": "e3c1aec1e6fecd070dc8eb8ac051eeef2524aec48725a8026754b180bb887412"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/probe_stdout.json",
+      "role": "raw",
+      "sha256": "92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/artifacts/selftest_stdout.json",
+      "role": "raw",
+      "sha256": "208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/request.json",
+      "role": "fixture",
+      "sha256": "f51a5d9ccbec9b75ddc134a6cba738d0cdd4f6de9ed1a329e3a56dd288c35c19"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/spec.json",
+      "role": "fixture",
+      "sha256": "00a03015a83d8f86e979bc4c7e305d4669f23f3e079b20ebcd1ba49b37d3dcab"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/prereg.md",
+      "role": "fixture",
+      "sha256": "673a71cd81336203bc7d9a6a8cb77b066e44850ba742e0d461724d08ae410031"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/freeze.json",
+      "role": "fixture",
+      "sha256": "eb8facca53824f215960e0413d8f48c67c1672ad90349e5647c250d55e9d49a3"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38194351940/design_review.json",
+      "role": "fixture",
+      "sha256": "6c830def18409b41fc58e50d4144e3e58917d68fe3072c716e33e8e3790d2346"
+    }
+  ],
+  "controls": {
+    "B-CROSS-SESSION-COMPILE": {
+      "evidence_ref": "metrics.gates.V8_identity_disclosure; artifacts/run_scored.json",
+      "expected": "success- and counter-identical to T-MECHANISM-INHERIT at every cell",
+      "observed": {
+        "F1_cells": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 1.0,
+          "0.75": 1.0
+        },
+        "F2_cells": {
+          "0.0": 1.0,
+          "0.25": 1.0,
+          "0.5": 1.0,
+          "0.75": 1.0
+        },
+        "identical_success": true
+      },
+      "role": "identity positive control (disclosed, not a certificate comparator)",
+      "verdict": "PASS"
+    },
+    "B-MEMORYLESS": {
+      "evidence_ref": "metrics.success_rate_matrix",
+      "expected": "(K-1)/K at scored bands",
+      "observed": {
+        "F1-RECORDS|0.5": 0.875,
+        "F1-RECORDS|0.75": 0.875,
+        "F2-WIDGETS|0.5": 0.9,
+        "F2-WIDGETS|0.75": 0.9
+      },
+      "role": "baseline",
+      "verdict": "PASS"
+    },
+    "B-RETRIEVAL-REPLAY": {
+      "evidence_ref": "metrics.retention_certification.B-RETRIEVAL-REPLAY",
+      "expected": "(K-1)/K at scored bands",
+      "observed": {
+        "F1-RECORDS|0.5": 0.875,
+        "F1-RECORDS|0.75": 0.875,
+        "F2-WIDGETS|0.5": 0.9,
+        "F2-WIDGETS|0.75": 0.9
+      },
+      "role": "retention comparator (cross-session raw-example retention)",
+      "verdict": "PASS"
+    },
+    "B-WITHIN-SESSION-COMPOSE": {
+      "evidence_ref": "metrics.retention_certification.B-WITHIN-SESSION-COMPOSE",
+      "expected": "(K-1)/K at scored bands",
+      "observed": {
+        "F1-RECORDS|0.5": 0.875,
+        "F1-RECORDS|0.75": 0.875,
+        "F2-WIDGETS|0.5": 0.9,
+        "F2-WIDGETS|0.75": 0.9
+      },
+      "role": "retention comparator",
+      "verdict": "PASS"
+    },
+    "B-WITHIN-SESSION-RECEIPT": {
+      "evidence_ref": "metrics.retention_certification.B-WITHIN-SESSION-RECEIPT",
+      "expected": "(K-1)/K = 0.875 F1 / 0.900 F2 at scored bands",
+      "observed": {
+        "F1-RECORDS|0.5": 0.875,
+        "F1-RECORDS|0.75": 0.875,
+        "F2-WIDGETS|0.5": 0.9,
+        "F2-WIDGETS|0.75": 0.9
+      },
+      "role": "retention comparator (primary)",
+      "verdict": "PASS"
+    },
+    "NC-CEILING-BAND": {
+      "evidence_ref": "metrics.gates.V8_ceiling_band",
+      "expected": "at novelty 0.0 every arm equals 1.0",
+      "observed": {
+        "F1_novelty0": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "F2_novelty0": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "gate_V8_ceiling_band": true
+      },
+      "role": "band sensitivity",
+      "verdict": "PASS"
+    },
+    "NC-EXAMPLES-ISOLATION": {
+      "evidence_ref": "artifacts/protocol_invariants.json",
+      "expected": "no calibration example, mechanism or answer appears in a scored session body",
+      "observed": {
+        "chain_task_resource_null": true,
+        "no_answer_in_scored_chain_body": true,
+        "no_cal_examples_in_scored_bodies": true,
+        "no_mechanism_in_scored_session_body": true
+      },
+      "role": "attribution",
+      "verdict": "PASS"
+    },
+    "NC-IDENTITY-DISCLOSURE": {
+      "evidence_ref": "metrics.gates.V8_identity_disclosure",
+      "expected": "B-CROSS-SESSION-COMPILE == T at every band",
+      "observed": {
+        "gate_V8_identity_disclosure": true
+      },
+      "role": "identity positive control",
+      "verdict": "PASS"
+    },
+    "NC-MECHANISM-NONDEGENERATE": {
+      "evidence_ref": "metrics.mechanism_nondegeneracy",
+      "expected": "a!=0, distinct calibration inputs, exact affine recovery, no query collision over >=50 instances",
+      "observed": {
+        "a_zero": 0,
+        "duplicate_x": 0,
+        "instances": 100,
+        "min_query_gap": 399759921,
+        "ok": true,
+        "query_collision": 0,
+        "solve_fail": 0
+      },
+      "role": "identifiability",
+      "verdict": "PASS"
+    },
+    "NC-MECHANISM-OFF": {
+      "evidence_ref": "metrics.mechanism_off_within_session_rate",
+      "expected": "exposing the chain answer drives the within-session retention comparator to >= 0.95",
+      "observed": {
+        "F1-RECORDS": 1.0,
+        "F2-WIDGETS": 1.0
+      },
+      "role": "null_control (sensitivity)",
+      "verdict": "PASS"
+    },
+    "NC-NO-LEAK": {
+      "evidence_ref": "artifacts/protocol_invariants.json; metrics.gates.V3_no_leak",
+      "expected": "all 15 protocol invariants hold; no leak",
+      "observed": {
+        "all_pass": true,
+        "invariants": {
+          "cal_receipt_reveals_y_once": true,
+          "cal_recommit_409_no_y": true,
+          "cal_session_no_mechanism": true,
+          "cal_task_no_y": true,
+          "cal_task_reveals_x": true,
+          "chain_receipt_no_answer": true,
+          "chain_task_resource_null": true,
+          "chain_task_reveals_x": true,
+          "correct_answer_200": true,
+          "correct_answer_single_use_409": true,
+          "no_answer_in_scored_chain_body": true,
+          "no_cal_examples_in_scored_bodies": true,
+          "no_mechanism_in_scored_session_body": true,
+          "session_never_reveals_mechanism": true,
+          "wrong_answer_400_no_leak": true
+        },
+        "n_invariants": 15
+      },
+      "role": "F-LEAK contamination control",
+      "verdict": "PASS"
+    },
+    "NC-REPEAT-INPUT": {
+      "evidence_ref": "artifacts/protocol_invariants.json",
+      "expected": "wrong answer returns 400 with no leak; correct answer single-use (409)",
+      "observed": {
+        "chain_receipt_no_answer": true,
+        "correct_answer_200": true,
+        "correct_answer_single_use_409": true,
+        "wrong_answer_400_no_leak": true
+      },
+      "role": "attribution",
+      "verdict": "PASS"
+    },
+    "NC-RETENTION-LADDER": {
+      "evidence_ref": "metrics.retention_ladder",
+      "expected": "no retention-only scope closes the range at any scored cell",
+      "observed": {
+        "F1-RECORDS|0.5": [],
+        "F1-RECORDS|0.75": [],
+        "F2-WIDGETS|0.5": [],
+        "F2-WIDGETS|0.75": []
+      },
+      "role": "core manipulation",
+      "verdict": "PASS"
+    },
+    "NC-TOKEN-UNIQUENESS": {
+      "evidence_ref": "metrics.token_uniqueness (recomputed at EXECUTE from frozen derivation)",
+      "expected": "session tokens pairwise distinct over sampled derivations, collisions == 0",
+      "observed": {
+        "collisions": 0,
+        "ok": true,
+        "sampled": 160
+      },
+      "role": "derivation sanity",
+      "verdict": "PASS"
+    },
+    "PC-EXACT-REPLAY": {
+      "evidence_ref": "artifacts/run_scored.json (cells.*|PC-EXACT-REPLAY); metrics.success_rate_matrix",
+      "expected": "success_rate 1.0 at every family/novelty band",
+      "observed": {
+        "F1-RECORDS": 1.0,
+        "F2-WIDGETS": 1.0,
+        "all_bands_1.0": true
+      },
+      "role": "positive_control (oracle mechanism)",
+      "verdict": "PASS"
+    }
+  },
+  "decision_label": "ROBUST",
+  "experiment_id": "EXP-RUNTIME-38194351940",
+  "lane": "runtime",
+  "metrics": {
+    "bank_instances_scored_per_determinism_run": 1120,
+    "comparator_max": 0.95,
+    "correctness_floor": 0.8,
+    "counter_distinctness_vs_T_at_0.5": {
+      "F1-RECORDS": {
+        "B-MEMORYLESS": 2,
+        "B-RETRIEVAL-REPLAY": 3,
+        "B-WITHIN-SESSION-COMPOSE": 2,
+        "B-WITHIN-SESSION-RECEIPT": 2
+      },
+      "F2-WIDGETS": {
+        "B-MEMORYLESS": 2,
+        "B-RETRIEVAL-REPLAY": 3,
+        "B-WITHIN-SESSION-COMPOSE": 2,
+        "B-WITHIN-SESSION-RECEIPT": 2
+      }
+    },
+    "decision_label": "ROBUST",
+    "determinism_ok": true,
+    "determinism_runs": 2,
+    "gates": {
+      "V1_code_fidelity_manifest": true,
+      "V2_transport_conformance": true,
+      "V3_no_leak": true,
+      "V4_determinism": true,
+      "V5_arm_liveness": true,
+      "V6_counter_instrumentation": true,
+      "V7_matched_correctness": true,
+      "V8_ceiling_band": true,
+      "V8_identity_disclosure": true,
+      "V8_mechanism_nondegenerate": true,
+      "V8_mechanism_off": true,
+      "V8_retention_counter_distinctness": true
+    },
+    "harness_sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "margin_floor": 0.05,
+    "matched_correctness_ok": true,
+    "mechanism_nondegeneracy": {
+      "a_zero": 0,
+      "duplicate_x": 0,
+      "instances": 100,
+      "min_query_gap": 399759921,
+      "ok": true,
+      "query_collision": 0,
+      "solve_fail": 0
+    },
+    "mechanism_off_destroys_certificate": true,
+    "mechanism_off_within_session_rate": {
+      "F1-RECORDS": 1.0,
+      "F2-WIDGETS": 1.0
+    },
+    "min_arm_success_rate": 0.875,
+    "min_distinct_dims": 2,
+    "n_scored_cells": 56,
+    "per_instance_counters_at_0.5": {
+      "F1-RECORDS": {
+        "B-CROSS-SESSION-COMPILE": {
+          "http_calls": 34.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        },
+        "B-MEMORYLESS": {
+          "http_calls": 41.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        },
+        "B-RETRIEVAL-REPLAY": {
+          "http_calls": 36.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 8.0,
+          "verification_calls": 16.0
+        },
+        "B-WITHIN-SESSION-COMPOSE": {
+          "http_calls": 36.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        },
+        "B-WITHIN-SESSION-RECEIPT": {
+          "http_calls": 36.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        },
+        "PC-EXACT-REPLAY": {
+          "http_calls": 34.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        },
+        "T-MECHANISM-INHERIT": {
+          "http_calls": 34.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 16.0
+        }
+      },
+      "F2-WIDGETS": {
+        "B-CROSS-SESSION-COMPILE": {
+          "http_calls": 42.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        },
+        "B-MEMORYLESS": {
+          "http_calls": 51.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        },
+        "B-RETRIEVAL-REPLAY": {
+          "http_calls": 44.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 10.0,
+          "verification_calls": 20.0
+        },
+        "B-WITHIN-SESSION-COMPOSE": {
+          "http_calls": 44.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        },
+        "B-WITHIN-SESSION-RECEIPT": {
+          "http_calls": 44.0,
+          "repair_calls": 1.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        },
+        "PC-EXACT-REPLAY": {
+          "http_calls": 42.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        },
+        "T-MECHANISM-INHERIT": {
+          "http_calls": 42.0,
+          "repair_calls": 0.0,
+          "retrieval_calls": 0.0,
+          "verification_calls": 20.0
+        }
+      }
+    },
+    "python": "3.12.15",
+    "retention_certification": {
+      "B-RETRIEVAL-REPLAY": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-RECEIPT": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      }
+    },
+    "retention_ladder": {
+      "F1-RECORDS|0.5": {
+        "closing_retention_scopes": [],
+        "rates": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "t_rate": 1.0
+      },
+      "F1-RECORDS|0.75": {
+        "closing_retention_scopes": [],
+        "rates": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "t_rate": 1.0
+      },
+      "F2-WIDGETS|0.5": {
+        "closing_retention_scopes": [],
+        "rates": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "t_rate": 1.0
+      },
+      "F2-WIDGETS|0.75": {
+        "closing_retention_scopes": [],
+        "rates": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "t_rate": 1.0
+      }
+    },
+    "sessions_per_cell": 20,
+    "success_rate_matrix": {
+      "F1-RECORDS": {
+        "0.0": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.25": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.5": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.75": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.875,
+          "B-RETRIEVAL-REPLAY": 0.875,
+          "B-WITHIN-SESSION-COMPOSE": 0.875,
+          "B-WITHIN-SESSION-RECEIPT": 0.875,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.25": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 1.0,
+          "B-RETRIEVAL-REPLAY": 1.0,
+          "B-WITHIN-SESSION-COMPOSE": 1.0,
+          "B-WITHIN-SESSION-RECEIPT": 1.0,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.5": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        },
+        "0.75": {
+          "B-CROSS-SESSION-COMPILE": 1.0,
+          "B-MEMORYLESS": 0.9,
+          "B-RETRIEVAL-REPLAY": 0.9,
+          "B-WITHIN-SESSION-COMPOSE": 0.9,
+          "B-WITHIN-SESSION-RECEIPT": 0.9,
+          "PC-EXACT-REPLAY": 1.0,
+          "T-MECHANISM-INHERIT": 1.0
+        }
+      }
+    },
+    "token_uniqueness": {
+      "collisions": 0,
+      "ok": true,
+      "sampled": 160
+    },
+    "world": {
+      "any_retention_certified": true,
+      "gates_pass": true,
+      "robust_certified": true
+    }
+  },
+  "observations": [
+    "Frozen decision label is ROBUST; world={gates_pass:true, robust_certified:true, any_retention_certified:true}; determinism_ok=true.",
+    "All twelve evaluated validity gates are true: V1_code_fidelity_manifest, V2_transport_conformance, V3_no_leak, V4_determinism, V5_arm_liveness, V6_counter_instrumentation, V7_matched_correctness, V8_ceiling_band, V8_identity_disclosure, V8_mechanism_nondegenerate, V8_mechanism_off, V8_retention_counter_distinctness.",
+    "T-MECHANISM-INHERIT, PC-EXACT-REPLAY and B-CROSS-SESSION-COMPILE each scored success_rate 1.000 in all 8 family/novelty cells (2 families x 4 novelties).",
+    "B-WITHIN-SESSION-RECEIPT, B-WITHIN-SESSION-COMPOSE, B-RETRIEVAL-REPLAY and B-MEMORYLESS each scored 0.875 (F1-RECORDS, K=8) and 0.900 (F2-WIDGETS, K=10) at both scored bands (novelty 0.5 and 0.75), and 1.000 at novelty 0.0 and 0.25.",
+    "Treatment margin over every retention comparator is 0.125 (F1) and 0.100 (F2) at both scored bands; all three retention comparators certify at all four scored cells (12/12).",
+    "The retention frontier (retention scopes whose rate is within MARGIN_FLOOR=0.05 of T) is empty at all four scored cells.",
+    "Matched correctness equals success rate in all 56 cells; minimum arm success rate over all cells is 0.875 (CORRECTNESS_FLOOR=0.80).",
+    "Counter distinctness versus T at novelty 0.5: B-WITHIN-SESSION-RECEIPT 2/4, B-WITHIN-SESSION-COMPOSE 2/4, B-RETRIEVAL-REPLAY 3/4, B-MEMORYLESS 2/4, in both families.",
+    "Observed aggregate counters reproduce the frozen per-instance predictions exactly at novelty 0.5 (e.g. T F1 680/20=34 http, 320/20=16 verification, 0 retrieval, 0 repair; B-RETRIEVAL-REPLAY F1 720/20=36 http, 160/20=8 retrieval, 16 verification, 20/20=1 repair).",
+    "NC-MECHANISM-OFF (exposed chain answer) raised the within-session retention comparator to 1.0 in both families (F1 and F2), destroying the certificate direction.",
+    "NC-MECHANISM-NONDEGENERATE: 100 sampled bank instances, a_zero=0, duplicate_x=0, solve_fail=0, query_collision=0, min_query_gap=399759921.",
+    "Protocol invariants: 15/15 hold; all LEAK_KEYS (V3_no_leak) hold; the chain task resource_id is null in scored sessions and the required answer appears in no scored body.",
+    "The scored matrix (56 cells x 20 sessions = 1120 bank instances) was run twice inside the frozen harness and the two runs were byte-identical (determinism_ok=true).",
+    "The frozen harness sha256 equals spec.design_satisfiability_probe.source_sha256 (acbb1e1f...); probe-mode stdout reproduced the frozen sha256 (92eb44d0...) and selftest-mode stdout reproduced the frozen sha256 (208b7be4...) byte-for-byte."
+  ],
+  "outcome": "SUPPORTS",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether real external comparator arms (e.g. COLD / INSTRUCTIONS / RETRIEVAL in a future C-LLM-INHERIT benchmark) actually behave like within-session full-receipt memory; only synthetic comparator policies were measured here.",
+    "Whether the same memory-robust range holds for K outside {8,10} or for non-affine / non-SBA-CREDENTIAL-FREE-V3 hidden mechanisms; only K in {8,10} and one affine family were measured.",
+    "Whether the flagship four-arm C-LLM-INHERIT benchmark can be run at all: B1 (audited parameterized carrier promoted into the kernel) and B3 (capable same-protocol agent endpoint) remain unresolved and gate it independently.",
+    "Whether the identity control B-CROSS-SESSION-COMPILE can be separated from T by a substrate change while preserving a credential-free discovery path; untested here."
+  ],
+  "validity_notes": [
+    "Measurement transaction completed validly: status=COMPLETE, decision_label=ROBUST, all twelve evaluated V1-V8 gates true, matched correctness and determinism verified. This is a positive substrate-validity result, not an infrastructure failure.",
+    "Scope is bounded: the substrate is a synthetic credential-free stdlib-only HTTP bank (SBA-CREDENTIAL-FREE-V3, Session-Mechanism-Inheritance) on 127.0.0.1 loopback; it does not measure a real external LLM/browser agent or any natural/economically-bearing Web task.",
+    "Disclosed identity: B-CROSS-SESSION-COMPILE is success- and counter-identical to T by construction. It is a disclosed identity control, not a certificate comparator, and retention_certifies requires a strictly positive margin, so it cannot certify. The measurement is a statement about retention-vs-compilation over identical raw information, not about an independent mechanism.",
+    "Deterministic substrate: all derivations are deterministic from RUN_SEED (no clock, no secrets, no os.urandom); rates are exact (K-1)/K or 1.0 with no sampling noise, so validity rests on gates and control identifiability rather than statistical power.",
+    "The decision rule is evaluated only at novelty >= 0.50; novelty 0.0/0.25 cells are the ceiling band where all arms are 1.0 and no comparison is made.",
+    "The hidden mechanism family is a single affine family M(x)=(a*x+b) mod P; a ROBUST result certifies this V3 construction, not every possible memory-carried mechanism, and not K outside {8,10}.",
+    "No claim is promoted: this is substrate-validity evidence for C-MEAS-VALID only; it neither advances nor downgrades C-MEAS-VALID's effective status and does not authorize the four-arm benchmark (which independently requires B1 and B3).",
+    "Token uniqueness (NC-TOKEN-UNIQUENESS) was recomputed at EXECUTE from the frozen deterministic derivation rather than being part of run_execute(); it is a derivation-sanity check, not an outcome-bearing measurement."
+  ]
+}

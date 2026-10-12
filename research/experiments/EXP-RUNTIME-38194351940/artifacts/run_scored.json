@@ -1,0 +1,981 @@
+{
+  "cells": {
+    "F1-RECORDS|0.0|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 480,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 160,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.0|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 480,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 160,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.25|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 340,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 160
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 820,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.5,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 160,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.5,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.5,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.5,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.5|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 820,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.75,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 160,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.75,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.75,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 720,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 0.875,
+      "novelty": 0.75,
+      "success_rate": 0.875,
+      "successes": 140,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F1-RECORDS|0.75|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 680,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 320
+      },
+      "family": "F1-RECORDS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 160,
+      "tasks": 160
+    },
+    "F2-WIDGETS|0.0|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 600,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 200,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.0|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.0,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 600,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 200,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.25|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 420,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 200
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.25,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 1020,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.5,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 200,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.5,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.5,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.5,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.5|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.5,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|B-CROSS-SESSION-COMPILE": {
+      "arm": "B-CROSS-SESSION-COMPILE",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|B-MEMORYLESS": {
+      "arm": "B-MEMORYLESS",
+      "counters": {
+        "http_calls": 1020,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.75,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|B-RETRIEVAL-REPLAY": {
+      "arm": "B-RETRIEVAL-REPLAY",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 200,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.75,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|B-WITHIN-SESSION-COMPOSE": {
+      "arm": "B-WITHIN-SESSION-COMPOSE",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.75,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|B-WITHIN-SESSION-RECEIPT": {
+      "arm": "B-WITHIN-SESSION-RECEIPT",
+      "counters": {
+        "http_calls": 880,
+        "repair_calls": 20,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 0.9,
+      "novelty": 0.75,
+      "success_rate": 0.9,
+      "successes": 180,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|PC-EXACT-REPLAY": {
+      "arm": "PC-EXACT-REPLAY",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    },
+    "F2-WIDGETS|0.75|T-MECHANISM-INHERIT": {
+      "arm": "T-MECHANISM-INHERIT",
+      "counters": {
+        "http_calls": 840,
+        "repair_calls": 0,
+        "retrieval_calls": 0,
+        "verification_calls": 400
+      },
+      "family": "F2-WIDGETS",
+      "matched_correctness": 1.0,
+      "novelty": 0.75,
+      "success_rate": 1.0,
+      "successes": 200,
+      "tasks": 200
+    }
+  },
+  "controls": {
+    "mechanism_nondegeneracy": {
+      "a_zero": 0,
+      "duplicate_x": 0,
+      "instances": 100,
+      "min_query_gap": 399759921,
+      "ok": true,
+      "query_collision": 0,
+      "solve_fail": 0
+    },
+    "mechanism_off_destroys_certificate": true,
+    "mechanism_off_within_session_rate": {
+      "F1-RECORDS": 1.0,
+      "F2-WIDGETS": 1.0
+    }
+  },
+  "decision": "ROBUST",
+  "determinism_ok": true,
+  "gates": {
+    "V1_code_fidelity_manifest": true,
+    "V2_transport_conformance": true,
+    "V3_no_leak": true,
+    "V4_determinism": true,
+    "V5_arm_liveness": true,
+    "V6_counter_instrumentation": true,
+    "V7_matched_correctness": true,
+    "V8_ceiling_band": true,
+    "V8_identity_disclosure": true,
+    "V8_mechanism_nondegenerate": true,
+    "V8_mechanism_off": true,
+    "V8_retention_counter_distinctness": true
+  },
+  "lattice": {
+    "any_retention_certified": true,
+    "detail": {
+      "B-RETRIEVAL-REPLAY": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-RECEIPT": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.09999999999999998,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      }
+    },
+    "robust_certified": true
+  },
+  "v1": {
+    "harness_sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "python": "3.12.15"
+  },
+  "world": {
+    "any_retention_certified": true,
+    "gates_pass": true,
+    "robust_certified": true
+  }
+}

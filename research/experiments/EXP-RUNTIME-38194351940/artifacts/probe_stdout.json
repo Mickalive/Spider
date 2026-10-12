@@ -1,0 +1,892 @@
+{
+  "P": 1099511627689,
+  "arm_liveness": {
+    "B-CROSS-SESSION-COMPILE": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        }
+      }
+    },
+    "B-MEMORYLESS": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 72,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 72,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 123,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 123,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 90,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 90,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 153,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 153,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        }
+      }
+    },
+    "B-RETRIEVAL-REPLAY": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 24,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 24,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 24,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 24,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 30,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 30,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 30,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 30,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        }
+      }
+    },
+    "B-WITHIN-SESSION-COMPOSE": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        }
+      }
+    },
+    "B-WITHIN-SESSION-RECEIPT": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 108,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 0.875,
+          "successes": 21,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 132,
+            "repair_calls": 3,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 0.9,
+          "successes": 27,
+          "tasks": 30
+        }
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        }
+      }
+    },
+    "T-MECHANISM-INHERIT": {
+      "F1-RECORDS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 51,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 24
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 102,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 48
+          },
+          "rate": 1.0,
+          "successes": 24,
+          "tasks": 24
+        }
+      },
+      "F2-WIDGETS": {
+        "0.0": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.25": {
+          "counters": {
+            "http_calls": 63,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 30
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.5": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        },
+        "0.75": {
+          "counters": {
+            "http_calls": 126,
+            "repair_calls": 0,
+            "retrieval_calls": 0,
+            "verification_calls": 60
+          },
+          "rate": 1.0,
+          "successes": 30,
+          "tasks": 30
+        }
+      }
+    }
+  },
+  "arms": [
+    "T-MECHANISM-INHERIT",
+    "PC-EXACT-REPLAY",
+    "B-CROSS-SESSION-COMPILE",
+    "B-WITHIN-SESSION-RECEIPT",
+    "B-WITHIN-SESSION-COMPOSE",
+    "B-RETRIEVAL-REPLAY",
+    "B-MEMORYLESS"
+  ],
+  "branch_reachability": {
+    "COLLAPSED": "COLLAPSED",
+    "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+    "PARTIAL": "PARTIAL",
+    "ROBUST": "ROBUST"
+  },
+  "checks": {
+    "all_branches_inhabited": true,
+    "all_protocol_invariants_pass": true,
+    "ceiling_band_all_arms_one": true,
+    "cross_session_retention_in_band": true,
+    "identity_disclosure_matches_treatment": true,
+    "mechanism_nondegenerate": true,
+    "mechanism_off_destroys_certificate": true,
+    "no_retention_scope_closes_range": true,
+    "pc_exact_replay_all_bands": true,
+    "predicted_decision": "ROBUST",
+    "protocol_invariants": {
+      "cal_receipt_reveals_y_once": true,
+      "cal_recommit_409_no_y": true,
+      "cal_session_no_mechanism": true,
+      "cal_task_no_y": true,
+      "cal_task_reveals_x": true,
+      "chain_receipt_no_answer": true,
+      "chain_task_resource_null": true,
+      "chain_task_reveals_x": true,
+      "correct_answer_200": true,
+      "correct_answer_single_use_409": true,
+      "no_answer_in_scored_chain_body": true,
+      "no_cal_examples_in_scored_bodies": true,
+      "no_mechanism_in_scored_session_body": true,
+      "session_never_reveals_mechanism": true,
+      "wrong_answer_400_no_leak": true
+    },
+    "retention_counter_distinctness": true,
+    "token_uniqueness_ok": true,
+    "transport_stdlib_http": true,
+    "treatment_live_all_bands": true,
+    "within_session_comparator_in_band": true
+  },
+  "counter_distinctness": {
+    "F1-RECORDS": {
+      "B-MEMORYLESS": 2,
+      "B-RETRIEVAL-REPLAY": 3,
+      "B-WITHIN-SESSION-COMPOSE": 2,
+      "B-WITHIN-SESSION-RECEIPT": 2
+    },
+    "F2-WIDGETS": {
+      "B-MEMORYLESS": 2,
+      "B-RETRIEVAL-REPLAY": 3,
+      "B-WITHIN-SESSION-COMPOSE": 2,
+      "B-WITHIN-SESSION-RECEIPT": 2
+    }
+  },
+  "families": {
+    "F1-RECORDS": 8,
+    "F2-WIDGETS": 10
+  },
+  "lattice": {
+    "decision": "ROBUST",
+    "detail": {
+      "B-RETRIEVAL-REPLAY": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-COMPOSE": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      },
+      "B-WITHIN-SESSION-RECEIPT": {
+        "F1-RECORDS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F1-RECORDS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.875,
+          "margin": 0.125,
+          "min_arm_rate": 0.875,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.5": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        },
+        "F2-WIDGETS|0.75": {
+          "certifies": true,
+          "comparator_rate": 0.9,
+          "margin": 0.1,
+          "min_arm_rate": 0.9,
+          "t_rate": 1.0
+        }
+      }
+    },
+    "world": {
+      "any_retention_certified": true,
+      "gates_pass": true,
+      "robust_certified": true
+    }
+  },
+  "mechanism_nondegeneracy": {
+    "a_zero": 0,
+    "duplicate_x": 0,
+    "instances": 100,
+    "min_query_gap": 399759921,
+    "ok": true,
+    "query_collision": 0,
+    "solve_fail": 0
+  },
+  "mechanism_off": {
+    "k": 8,
+    "successes": 8,
+    "within_session_f1_rate": 1.0
+  },
+  "n_cal": 3,
+  "novelties": [
+    0.0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "predicted_decision": "ROBUST",
+  "retention_ladder": {
+    "F1-RECORDS|0.5": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875
+      }
+    },
+    "F1-RECORDS|0.75": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-MEMORYLESS": 0.875,
+        "B-RETRIEVAL-REPLAY": 0.875,
+        "B-WITHIN-SESSION-RECEIPT": 0.875
+      }
+    },
+    "F2-WIDGETS|0.5": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9
+      }
+    },
+    "F2-WIDGETS|0.75": {
+      "closing_retention_scopes": [],
+      "rates": {
+        "B-MEMORYLESS": 0.9,
+        "B-RETRIEVAL-REPLAY": 0.9,
+        "B-WITHIN-SESSION-RECEIPT": 0.9
+      }
+    }
+  },
+  "scored_band": 0.5,
+  "seed": "SPIDER-RUNTIME-SBA-V3-2026",
+  "token_uniqueness": {
+    "collisions": 0,
+    "sampled": 160
+  }
+}

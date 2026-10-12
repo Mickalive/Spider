@@ -1,0 +1,17 @@
+{
+  "cal_receipt_reveals_y_once": true,
+  "cal_recommit_409_no_y": true,
+  "cal_session_no_mechanism": true,
+  "cal_task_no_y": true,
+  "cal_task_reveals_x": true,
+  "chain_receipt_no_answer": true,
+  "chain_task_resource_null": true,
+  "chain_task_reveals_x": true,
+  "correct_answer_200": true,
+  "correct_answer_single_use_409": true,
+  "no_answer_in_scored_chain_body": true,
+  "no_cal_examples_in_scored_bodies": true,
+  "no_mechanism_in_scored_session_body": true,
+  "session_never_reveals_mechanism": true,
+  "wrong_answer_400_no_leak": true
+}
