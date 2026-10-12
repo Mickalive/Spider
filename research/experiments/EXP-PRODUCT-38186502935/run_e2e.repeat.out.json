@@ -1,0 +1,337 @@
+{
+  "certificate": {
+    "E2E_ABSTENTION": {
+      "http_delta_during_phase": 0,
+      "negatives": [
+        {
+          "bound_action": null,
+          "case": "out_of_support:item-010",
+          "reason": "parameter 'item' outside inferred support",
+          "status": "EXPLORE"
+        },
+        {
+          "bound_action": null,
+          "case": "out_of_support:item-999",
+          "reason": "parameter 'item' outside inferred support",
+          "status": "EXPLORE"
+        },
+        {
+          "bound_action": null,
+          "case": "out_of_support:item-xyz",
+          "reason": "parameter 'item' outside inferred support",
+          "status": "EXPLORE"
+        },
+        {
+          "bound_action": null,
+          "case": "missing_parameter",
+          "reason": "missing required parameter 'item'",
+          "status": "EXPLORE"
+        },
+        {
+          "bound_action": null,
+          "case": "missing_parameter_wrong_key",
+          "reason": "missing required parameter 'item'",
+          "status": "EXPLORE"
+        },
+        {
+          "bound_action": null,
+          "case": "wrong_intent",
+          "reason": "no applicable validated mechanism",
+          "status": "UNKNOWN"
+        },
+        {
+          "bound_action": null,
+          "case": "no_applicable_mechanism",
+          "reason": "no applicable validated mechanism",
+          "status": "UNKNOWN"
+        }
+      ],
+      "reason": "every refusal: recorded reason + null bound action + ZERO HTTP; out-of-support/missing-parameter EXPLORE; no-applicable exactly UNKNOWN",
+      "status": "PASS"
+    },
+    "E2E_CONTROLS": {
+      "literal_ablation": {
+        "has_distill_parameterized": false,
+        "reason": "literal kernel lacks distill_parameterized; positive certificate attributes to the installed carrier only",
+        "status": "PASS"
+      },
+      "pc_exact_replay": {
+        "reason": "all training ids re-resolve EXECUTABLE on as-installed carrier",
+        "replay": [
+          {
+            "id": "item-001",
+            "status": "EXECUTABLE"
+          },
+          {
+            "id": "item-002",
+            "status": "EXECUTABLE"
+          },
+          {
+            "id": "item-003",
+            "status": "EXECUTABLE"
+          },
+          {
+            "id": "item-004",
+            "status": "EXECUTABLE"
+          },
+          {
+            "id": "item-005",
+            "status": "EXECUTABLE"
+          }
+        ],
+        "status": "PASS"
+      },
+      "regression": {
+        "errors": 0,
+        "failures": 0,
+        "reason": "existing test_kernel suite passes on as-installed shipping path",
+        "status": "PASS",
+        "tests_run": 3
+      }
+    },
+    "E2E_COUNTERS": {
+      "counters_after": {
+        "browser_actions": 0,
+        "http_requests": 0,
+        "latency_ms": 0.0,
+        "model_calls": 0,
+        "model_tokens": 0,
+        "repair_attempts": 1,
+        "retrieval_calls": 9,
+        "verification_calls": 1
+      },
+      "expected_from_transcript": {
+        "repair_attempts": 1,
+        "retrieval_calls": 9,
+        "verification_calls": 1
+      },
+      "http_abstention_delta": 0,
+      "http_expected_legs": 6,
+      "http_fixture_counter_total": 6,
+      "reason": "kernel counters == invocation transcript; model_calls=0, model_tokens=0; runner-side http counter == executed legs (6)",
+      "status": "PASS"
+    },
+    "E2E_IDENTITY": {
+      "reason": "shipping kernel byte-identical to frozen carrier git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796 (sha256 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72) on a git-clean tree",
+      "status": "PASS"
+    },
+    "E2E_POSITIVE": {
+      "bound_action": {
+        "method": "GET",
+        "url": "http://127.0.0.1:34107/api/items/item-000"
+      },
+      "fixture_status": 200,
+      "held_out": "item-000",
+      "mechanism_id": "mech-45e7b46a83553492",
+      "parameter_slots": [
+        "item"
+      ],
+      "reason": "5 executed induction observations; never-observed id bound EXECUTABLE@0.9; fixture 200; verify true",
+      "resolution_confidence": 0.9,
+      "resolution_status": "EXECUTABLE",
+      "status": "PASS",
+      "support": {
+        "item": "^item\\-00[0-9]{1}$"
+      },
+      "verify": true
+    },
+    "V8_FREEZE_BINDING": {
+      "artifact_hashes_match": true,
+      "prereg_sha_matches": true,
+      "reason": "hash-bound prereg; running source == FROZEN RUNNER block; six freeze artifact hashes intact (incl. src/spider/kernel.py)",
+      "runner_source_matches_frozen_block": true,
+      "status": "PASS"
+    }
+  },
+  "counters": {
+    "browser_actions": 0,
+    "http_requests": 0,
+    "latency_ms": 0.0,
+    "model_calls": 0,
+    "model_tokens": 0,
+    "repair_attempts": 1,
+    "retrieval_calls": 9,
+    "verification_calls": 1
+  },
+  "counters_transcript": [
+    {
+      "op": "execute_induction",
+      "url": "http://127.0.0.1:34107/api/items/item-001"
+    },
+    {
+      "op": "execute_induction",
+      "url": "http://127.0.0.1:34107/api/items/item-002"
+    },
+    {
+      "op": "execute_induction",
+      "url": "http://127.0.0.1:34107/api/items/item-003"
+    },
+    {
+      "op": "execute_induction",
+      "url": "http://127.0.0.1:34107/api/items/item-004"
+    },
+    {
+      "op": "execute_induction",
+      "url": "http://127.0.0.1:34107/api/items/item-005"
+    },
+    {
+      "n": 5,
+      "op": "distill"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-000"
+      ],
+      "op": "resolve"
+    },
+    {
+      "op": "execute_positive",
+      "url": "http://127.0.0.1:34107/api/items/item-000"
+    },
+    {
+      "args": [
+        "mech-45e7b46a83553492"
+      ],
+      "op": "verify"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-010"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-999"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-xyz"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "<missing>"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "<wrong-key>"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "delete_item",
+        "item-000"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "never_seen_intent",
+        "<none>"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-000"
+      ],
+      "op": "rebind"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-001"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-002"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-003"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-004"
+      ],
+      "op": "resolve"
+    },
+    {
+      "args": [
+        "read_item",
+        "item-005"
+      ],
+      "op": "resolve"
+    }
+  ],
+  "experiment_id": "EXP-PRODUCT-38186502935",
+  "identities": {
+    "carrier_expected_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+    "shipping_kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"
+  },
+  "lane": "product",
+  "observations": [
+    {
+      "V8": "enforced",
+      "type": "binding"
+    },
+    {
+      "expected": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "type": "shipping_identity"
+    },
+    {
+      "literal_has_distill_parameterized": false,
+      "type": "derived"
+    },
+    {
+      "kernel_min_confidence_default": 0.8,
+      "type": "derived"
+    },
+    {
+      "confidence": 0.9,
+      "mechanism_id": "mech-45e7b46a83553492",
+      "slots": [
+        "item"
+      ],
+      "support": {
+        "item": "^item\\-00[0-9]{1}$"
+      },
+      "type": "derived"
+    }
+  ],
+  "outcome": "SUPPORTS",
+  "run_config": {
+    "literal_src": "git:cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+    "min_confidence_override": null,
+    "probe_mode": false,
+    "repo_root": "/home/runner/work/Spider/Spider"
+  },
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": []
+}
