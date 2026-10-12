@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38205292822",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches are concretely reachable on the frozen instrument. SUPPORTS was achieved by the DESIGN probe (R-SOUND T-CERT FA=0 cov=1.0; R-OVERWIDE T-CERT FA=0 REFUSED vs C-TRAINING-GATE FA=201). FALSIFIES is reachable: if the certificate adopted R-OVERWIDE, T-CERT would yield FA=201 (matching A-RAW-DECL). MIXED is reachable by a certificate that accepts some but not all sound declarations (coverage < 1.0, FA=0). MEASUREMENT_INVALID is reachable via carrier substitution, hash mismatch, regression failure, support drift, or any failing control. No branch is empty or arithmetically impossible; coverage ∈ [0,1], false-accept counts ∈ [0,404]; gate precedence does not shadow later branches.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#decision_rule/#decisions",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 4 and FROZEN RUNNER decision block",
+        "DESIGN probe (EXP_PROBE_MODE=1): SUPPORTS branch realized; all gates PASS; R-OVERWIDE A-RAW FA=201 proves FALSIFIES branch live"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) Python 3.11+ stdlib only (observed 3.12.15); (b) src/spider/kernel.py pre-state sha256 == frozen carrier 718efa6a... (git blob b15ed848...); (c) pre-promotion literal blob cfec9866... resolves and lacks distill_parameterized; (d) all five freeze_artifacts exist with exact recorded sha256 (pyproject.toml 5f03fb59..., src/spider/__init__.py 3d173722..., src/spider/models.py 338aaf4d..., src/spider/registry.py 51fb440d..., tests/test_kernel.py ff9c1561...); (e) public API imports cleanly, SpiderKernel.__init__ default min_confidence == 0.8; (f) POST_KERNEL materializes to sha256 3a6caf97... matching frozen constant; (g) REAL induction path probed for all seven families: distill_parameterized yields single slot per family at confidence 0.9 ≥ 0.8 with support == EXPECTED_SHIPPED exactly; (h) runner executed end-to-end in probe mode with all 22 gates PASS; (i) tests/test_kernel.py passes 3/3 on installed carrier. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md sections 1 and 7 (CANONICAL-HASHES; FROZEN RUNNER)",
+        "DESIGN probes: sha256 of five freeze artifacts and PRE/POST kernel; git cat-file on b15ed848 and cfec9866; induction-path probe for all seven families; unittest 3/3; normalized FROZEN RUNNER block equality; full probe-mode runner run (all gates PASS)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms share the same seven frozen induced mechanisms (same carrier package pinned by POST_SHA256 3a6caf97... and V8); the ONLY mutated object is verification_rule['parameter_supports'] (or, for T-CERT-GUARD, the supports produced by the real ingest_declaration code path). Under R-SOUND, T-CERT, C-TRAINING-GATE, and B-DECLARED-FULL coincide by design (all adopt sound declarations). Under R-OVERWIDE they separate: T-CERT FA=0 (refused) vs C-TRAINING-GATE FA=201 vs A-RAW FA=201. Under R-UNDER both guards refuse and preserve shipped support, separating from A-RAW. B-SHIPPED has independent identity (FA=0, coverage 0.675) enforced by M-SUPPORT-IDENTITY against frozen EXPECTED_SHIPPED. No ceiling/floor situation where all arms are guaranteed identical; cost metrics are identical across arms (zero model calls, loopback-only).",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#baselines / #positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 3 and FROZEN RUNNER make_arm_registry / cert_arm",
+        "research/experiments/EXP-PRODUCT-38201227093/handoff.json#carry_forward.established (carrier identity; support descriptor is the only mutated object)",
+        "DESIGN probe: arm separation confirmed on all four regimes"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a reachable failure mode on the exact code path that produces the certificate. PC-CERT-ADMITS-SOUND fails if certify_declaration rejects a sound declaration (over-conservative detector). PC-CERT-REFUSES-OVERWIDE fails if it rubber-stamps the over-wide declaration. PC-CERT-REFUSES-UNDER fails if it rubber-stamps a too-narrow declaration. PC-INGEST-ABSTAIN fails if refusal does not restore the shipped support. PC-UNSAFE-RAW (A-RAW-DECL under R-OVERWIDE, FA=201) proves the safety oracle is not blind and the FALSIFIES branch is live. NC-REJECT-ALL proves the null floor (accept=0, http=0). B-SHIPPED and B-DECLARED-FULL anchor the coverage endpoints. BP-EVASION-CERT-PASS proves the boundary is genuinely reachable (certificate admits R-EVASION, arm false-accepts). The DESIGN probe exercised all of these with the real code path: certificate CERTIFIED 7/7 on R-SOUND, REFUSED 7/7 on R-OVERWIDE, REFUSED 7/7 on R-UNDER, CERTIFIED 7/7 on R-EVASION with FA=7; A-RAW R-OVERWIDE FA=201; NC HTTP=0. None is vacuous or tautological.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 3 and FROZEN RUNNER certificate blocks",
+        "DESIGN probe: all positive controls and null control fired as specified"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is real shipped code (src/spider/kernel.py with ingest_declaration + module-level certify_declaration) installed by EXECUTE and exercised on the installed/materialized package. The DESIGN induction probe reproduced, for all seven families, a single-slot parameterized mechanism at confidence 0.9 ≥ 0.8 with support == EXPECTED_SHIPPED. After calling the real SpiderKernel.ingest_declaration with the sound declaration (R-SOUND), the certificate arm resolved all 120 IN items EXECUTABLE (coverage 1.0) with zero false rejects and issued 120 loopback HTTP requests, demonstrating the treatment structurally binds and executes. On refusal (R-OVERWIDE/R-UNDER) the same code path is exercised and preserves the shipped support (PC-INGEST-ABSTAIN). A structurally dead treatment would be caught by PC-EXACT-REPLAY (61/61 training IDs re-resolve EXECUTABLE on installed package) or by T-CERT R-SOUND coverage below 1.0 (MIXED) or MEASUREMENT_INVALID, never silently reported as a negative. The treatment bytes are frozen by POST_SHA256 and the install gate. Since this Product experiment targets C-PARAM-INHERIT, treatment_liveness must be PASS (not NOT_APPLICABLE) and it is.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 7 and FROZEN RUNNER run_once",
+        "DESIGN probe: T-CERT R-SOUND accept_count=120, coverage=1.0, http_total=120; T-CERT R-OVERWIDE support preserved on refusal 7/7; PC-EXACT-REPLAY 61/61 EXECUTABLE",
+        "research/experiments/EXP-PRODUCT-38201227093/handoff.json#carry_forward.established (carrier liveness and safe boundary)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly the five existing immutable files whose identity can change the interpretation: pyproject.toml (package definition), src/spider/__init__.py, src/spider/models.py, src/spider/registry.py (the package surface the installed kernel imports), and tests/test_kernel.py (regression suite). All five exist with sha256 recorded at DESIGN (verified matching: 5f03fb59..., 3d173722..., 338aaf4d..., 51fb440d..., ff9c1561...). src/spider/kernel.py is deliberately EXCLUDED because it is the treatment object that EXECUTE installs; its identity is pinned by two sha256 constants (pre-carrier 718efa6a..., post 3a6caf97...) and by the actual written file, and it is bound inside the prereg by the POST_KERNEL block. The POST_KERNEL source and the frozen runner are embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']. The frozen bank, oracle, label rule, certificate rules, and declaration regimes are all in-process inside the runner with no external dataset/fixture. No unbound mutable local code/data/task-bank/fixture dependency remains. This mirrors the accepted EXP-PRODUCT-38180719830 promotion freeze precedent.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38180719830/freeze.json#artifact_hashes (precedent: install-target kernel.py excluded and pinned by PRE/POST sha)",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md sections 5 and 7; DESIGN probe verified normalized FROZEN RUNNER block equality and POST_KERNEL sha 3a6caf97...",
+        "Direct sha256 verification of all five freeze artifacts at DESIGN time"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The DESIGN probe mode (EXP_PROBE_MODE=1) cannot exercise V8_FREEZE_BINDING against a real freeze.json (returns UNBOUND-RUN PASS). This is by design — the freeze.json will be created after this review passes. The actual EXECUTE will bind against the real freeze.json.",
+    "The carrier pre-state (718efa6a...) is the promoted carrier from EXP-PRODUCT-38180719830. An idempotent re-run would find the post-state (3a6caf97...) already installed; the runner handles this correctly by accepting either pre-state hash.",
+    "The frozen seven-family bank (524 items) is a local synthetic construction on a loopback oracle. V10-REPRESENTATION-LIMITS correctly bounds results to this bank and this installed carrier — not an end-to-end external-agent measurement."
+  ],
+  "rationale": "All six satisfiability and identifiability checks PASS. The decision rule is total and every branch is reachable; all hard prerequisites are available at DESIGN time; baselines are identifiable and separate on the frozen regimes; all positive controls fire and the null control remains null on the same code paths; the treatment (real shipped kernel code with ingest_declaration + certify_declaration) is structurally live and executable on the installed package; and all mutable local dependencies are bound by freeze_artifacts or by pinned sha256 constants in the prereg. The DESIGN probe (EXP_PROBE_MODE=1) executed the exact FROZEN RUNNER against a hermetic materialization of the POST_KERNEL and produced SUPPORTS with all 22 gates PASS, confirming the design is not vacuous. No blocking findings. The experiment is ready for freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38205292822/request.json",
+    "research/experiments/EXP-PRODUCT-38205292822/spec.json",
+    "research/experiments/EXP-PRODUCT-38205292822/prereg.md",
+    "DESIGN probe run (EXP_PROBE_MODE=1) producing SUPPORTS with all gates PASS",
+    "Direct file existence and sha256 verification of all five freeze_artifacts and carrier blobs"
+  ]
+}

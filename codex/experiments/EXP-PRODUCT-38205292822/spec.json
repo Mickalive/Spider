@@ -1,0 +1,243 @@
+{
+  "experiment_id": "EXP-PRODUCT-38205292822",
+  "lane": "product",
+  "design_contract_version": 2,
+  "claim_ids": [
+    "C-PARAM-INHERIT",
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "claim_scope_note": "Primary and binding target is C-PARAM-INHERIT (owner lanes graph+product; registry status EXPERIMENTAL). This packet SHIPS a real code change to src/spider/kernel.py and measures declaration-soundness certification on the frozen seven-family bank; it does not measure semantic resolution, so C-SEMANTIC-RESOLVE is carried only to RETAIN its HYPOTHESIS status (no update). The Director mandate forbids re-running the promotion certificate (EXP-PRODUCT-38180719830) and the observational-widening negative (EXP-PRODUCT-38197856050) and forbids substituting the carrier. This packet does neither: it installs NEW code on top of the byte-identical carrier and adds a certification step the parent gate lacked.",
+  "parent_handoff_received": {
+    "experiment_id": "EXP-PRODUCT-38201227093",
+    "path": "research/experiments/EXP-PRODUCT-38201227093/handoff.json",
+    "sha256": "bf5642316138ba7d0c35cbe1b314e1b489fdde35071accd9839484306899c869",
+    "four_way_preserved": {
+      "established": [
+        "In-run T-DECLARED-GUARD safe+complete on the seven-family bank (FA=0, HTTP-on-OUT=0, refusal-executed=0, coverage 1.0 vs shipped 0.6750).",
+        "Carrier identity 718efa6a... holds; pre-promotion literal cfec9866... lacks distill_parameterized.",
+        "B-DECLARED-FULL safe+complete support ceiling exists (FA=0, coverage 1.0).",
+        "T-AMBIGUITY-GUARD bounded UNSAFE on FAM-F (FA=4); B-DATA-WIDENED bounded negative (FA=18)."
+      ],
+      "rejected": [
+        "The specific purely observational pre-bind ambiguity-refusal rule (bounded UNSAFE on FAM-F).",
+        "The hypothesis that no safe+complete support exists on this bank.",
+        "The hypothesis that a training-consistency gate can detect an over-wide unsound declaration (BP-DECL-OVERWIDE adopted -> FA=201).",
+        "The hypothesis that the shipped conservative support is a safety defect (it is over-conservative, not unsafe)."
+      ],
+      "unknown": [
+        "Whether the declared-grammar guard still holds as REAL shipped source code.",
+        "How to certify declaration soundness in a real setting.",
+        "The full space of purely observational refusal rules.",
+        "Real-world cost/staleness of obtaining sound declared grammars.",
+        "The four-arm C-LLM-INHERIT benchmark remains dependency-gated on Runtime B2 and Intel B3."
+      ],
+      "do_not_assume": [
+        "Do not read the parent as advancing either claim.",
+        "Do not promote from the parent (promote_to_product=false there).",
+        "Do not generalize T-DECLARED-GUARD FA=0 into a general safety claim.",
+        "Do not treat T-AMBIGUITY-GUARD UNSAFE as the overall parent falsifier.",
+        "Do not re-run EXP-PRODUCT-38180719830 or EXP-PRODUCT-38197856050.",
+        "Do not substitute the carrier (identity/binding failure is BLOCKED/MEASUREMENT_INVALID, never a scientific negative)."
+      ]
+    }
+  },
+  "question": "When the ingested-declared-grammar applicability guard is implemented as REAL shipped code in src/spider/kernel.py -- SpiderKernel.ingest_declaration adopting an externally supplied declaration only when the module-level certify_declaration accepts it against a frozen audited negative bank -- does it (a) preserve safe+complete resolution under a SOUND declaration at coverage above the shipped 0.6750, (b) refuse a training-consistent OVER-WIDE declaration that the parent training-consistency gate adopts (the BP-DECL-OVERWIDE regime, 201 false accepts), and (c) how far does the soundness guarantee extend, i.e. what bounded closed-world trust boundary must the shipped kernel enforce when declaration soundness is not certifiable in the general case?",
+  "hypothesis": "A closed-world certificate (adopt iff the declaration is a valid regex that accepts every training positive AND rejects every value of a frozen audited negative bank) shipped as real code will: (i) under R-SOUND (each family's true declared grammar) hold zero false accepts, zero out-of-grammar HTTP executions and zero refusal-semantics violations at coverage 1.0, a strict safe-coverage gain over shipped 0.6750; (ii) under R-OVERWIDE (^<prefix>.*$, training-consistent but unsound) REFUSE the declaration and preserve the shipped support (zero false accepts), whereas C-TRAINING-GATE adopts it and inherits >= 1 (expected 201) false accepts; (iii) under R-EVASION (a certificate-passing declaration whose over-accept is withheld from the audited bank) STILL false-accept, proving the guarantee is closed-world; therefore the shipped product boundary is an audited allowlist plus UNKNOWN-first abstention for uncertified declarations. The treatment is expected to become EXECUTABLE on every IN item under R-SOUND (failure of that is a design/liveness failure, not a scientific negative).",
+  "falsifier": "The shipped-certificate treatment is FALSIFIED if it is unsafe where it must be safe: any of M-CERT-SOUND-FALSE-ACCEPT-COUNT, M-CERT-SOUND-HTTP-ON-OUT, M-CERT-SOUND-REFUSAL-EXECUTED-COUNT, M-CERT-OVERWIDE-FALSE-ACCEPT-COUNT, M-CERT-OVERWIDE-HTTP-ON-OUT or M-CERT-OVERWIDE-REFUSAL-EXECUTED-COUNT is > 0. The safe-coverage-gain claim is weakened to MIXED if M-CERT-SOUND-COVERAGE < 1.0. Separately, failure of any control/validity gate (V8_FREEZE_BINDING, M-CARRIER-PRE, M-INSTALL-POST, M-REGRESSION, PC-DETERMINISM-REPEAT, PC-EXACT-REPLAY, B-LITERAL-KERNEL, M-SUPPORT-IDENTITY, PC-CERT-ADMITS-SOUND, PC-CERT-REFUSES-OVERWIDE, PC-CERT-REFUSES-UNDER, PC-INGEST-ABSTAIN, PC-UNSAFE-RAW, B-SHIPPED, B-DECLARED-FULL, NC-REJECT-ALL, PC-DISCRIMINATION, BP-EVASION-CERT-PASS) is MEASUREMENT_INVALID/BLOCKED, never a negative. BP-EVASION-CERT-PASS must fire (certificate admits R-EVASION and the arm false-accepts); if it does not, the boundary probe is non-adversarial and the packet is MEASUREMENT_INVALID rather than evidence of general soundness.",
+  "baselines": [
+    {
+      "id": "B-SHIPPED",
+      "description": "Induced conservative single-observation-length supports, no widening; the frozen safety floor. Expected M-B-SHIPPED-FALSE-ACCEPT-COUNT=0 and M-B-SHIPPED-COVERAGE=0.6750 (81/120, 39 false rejects across the bank). Same value/logic as the parent's frozen EXPECTED_SHIPPED and source-backstopped by the M-SUPPORT-IDENTITY gate.",
+      "role": "safe-but-incomplete floor; the coverage baseline the treatment must strictly exceed without false-accept regression"
+    },
+    {
+      "id": "B-DECLARED-FULL",
+      "description": "Raw declared grammar per family under R-SOUND with no guard; the safe+complete support ceiling. Expected FA=0 and coverage 1.0. A comparator showing the ceiling is attainable, not an adopted shipped change.",
+      "role": "ceiling comparator / range of possible coverage"
+    },
+    {
+      "id": "C-TRAINING-GATE",
+      "description": "The parent declared_guard_support rule (adopt iff every training value fullmatches the declaration, else keep shipped) reproduced verbatim as comparator. Under R-OVERWIDE it must adopt and over-accept (expected M-GATE-OVERWIDE-FALSE-ACCEPT-COUNT=201, reproducing the recorded BP-DECL-OVERWIDE boundary). Under R-UNDER it must refuse and fall back to shipped.",
+      "role": "the incumbent guard the shipped certificate must strictly dominate on the audited over-wide class"
+    },
+    {
+      "id": "A-RAW-DECL",
+      "description": "Unconditional adoption of the regime declaration with no guard (ablation). Under R-OVERWIDE it must over-accept (expected 201), proving the unsoundness is intrinsic to the declaration and not introduced by any arm.",
+      "role": "unsound-adoption ablation / positive control PC-UNSAFE-RAW"
+    }
+  ],
+  "positive_control": {
+    "PC-CERT-ADMITS-SOUND": {
+      "expected_behavior": "certify_declaration accepts R-SOUND for all seven families (status CERTIFIED).",
+      "role": "certificate is not a reject-everything trivial detector"
+    },
+    "PC-CERT-REFUSES-OVERWIDE": {
+      "expected_behavior": "certify_declaration refuses R-OVERWIDE for all seven families (status REFUSED).",
+      "role": "certificate is sensitive to the audited over-wide class; mandatory for the discriminating claim"
+    },
+    "PC-CERT-REFUSES-UNDER": {
+      "expected_behavior": "certify_declaration refuses R-UNDER for all seven families (it rejects a training positive).",
+      "role": "certificate is not a rubber stamp; too-narrow declarations are refused"
+    },
+    "PC-INGEST-ABSTAIN": {
+      "expected_behavior": "on certificate refusal SpiderKernel.ingest_declaration leaves verification_rule['parameter_supports'][slot] byte-equal to the shipped inferred support and records declaration_certificate.status == 'REFUSED'.",
+      "role": "refusal semantics: UNKNOWN/abstention is preserved, no unsafe inheritance"
+    },
+    "PC-UNSAFE-RAW": {
+      "expected_behavior": "A-RAW-DECL under R-OVERWIDE false_accept_count >= 1 (expected 201).",
+      "role": "safety oracle is not blind; the FALSIFIES branch is live"
+    },
+    "PC-DISCRIMINATION": {
+      "expected_behavior": "M-CERT-OVERWIDE-FALSE-ACCEPT-COUNT == 0 while M-GATE-OVERWIDE-FALSE-ACCEPT-COUNT >= 1 on the same bank.",
+      "role": "the treatment strictly dominates the incumbent guard"
+    },
+    "BP-EVASION-CERT-PASS": {
+      "expected_behavior": "certify_declaration ADMITS R-EVASION for all seven families AND M-CERT-EVASION-FALSE-ACCEPT-COUNT >= 1 (expected 7).",
+      "role": "boundary probe proving the closed-world limitation; required to fire"
+    },
+    "PC-EXACT-REPLAY": {
+      "expected_behavior": "all 61 training ids re-resolve EXECUTABLE on the installed package (61/61).",
+      "role": "carrier rebind identity"
+    }
+  },
+  "null_control": {
+    "id": "NC-REJECT-ALL",
+    "role": "null floor; a detector that cannot be null is meaningless",
+    "expected_behavior": "Empty registry: nothing is accepted and no HTTP is issued. Expected accept_count == 0 and http_total == 0."
+  },
+  "measurement_validity": [
+    "V1-SUBSTRATE: Deterministic, stdlib-only, credential-free; loopback HTTP oracle on 127.0.0.1 with an ephemeral port; no external network, no model calls, no tokens.",
+    "V2-IDENTITY: V8_FREEZE_BINDING: prereg sha256, running source == FROZEN RUNNER block (normalized), and all freeze artifact_hashes re-hash identically.",
+    "V3-IDENTITY: M-CARRIER-PRE: src/spider/kernel.py pre-state sha256 is the frozen carrier 718efa6a... (or the post-state 3a6caf97... on an idempotent re-run).",
+    "V4-IDENTITY: M-INSTALL-POST: the materialized/installed kernel sha256 equals the frozen POST_SHA256 3a6caf97....",
+    "V5-IDENTITY: M-SUPPORT-IDENTITY: seven induced shipped supports equal frozen EXPECTED_SHIPPED; seven single-slot mechanisms at confidence 0.9 >= min_confidence 0.8.",
+    "V6-IDENTITY: B-LITERAL-KERNEL: the pre-promotion literal blob cfec9866... lacks distill_parameterized.",
+    "V7-REPRODUCIBILITY: Two independent run_once executions must produce identical arm metrics, certificate decisions and mechanism identity (PC-DETERMINISM-REPEAT).",
+    "V8-REGRESSION: The full tests/ suite must pass on the installed package (M-REGRESSION, tests_run >= 3).",
+    "V9-FREEZE-BINDING: kernel.py is the TREATMENT object and is therefore NOT in freeze_artifacts; its identity is pinned by the PRE/POST sha256 constants and by the actual written file. All other package/test files are frozen by hash. The POST_KERNEL source and the runner are embedded verbatim in prereg.md and bound by freeze.json.hashes['prereg.md'].",
+    "V10-REPRESENTATION-LIMITS: The bank is a local synthetic seven-family declared-grammar construction (524 items) on a loopback oracle; results are bounded to this bank and this installed carrier and are NOT an end-to-end external-agent measurement.",
+    "V11-MEASUREMENT-FAILURE-SEMANTICS: Any prerequisite, identity, freeze, regression or control failure is BLOCKED/MEASUREMENT_INVALID, never FALSIFIES."
+  ],
+  "decision_rule": {
+    "primary_metric": "M-CERT-SOUND-FALSE-ACCEPT-COUNT (T-CERT-GUARD under R-SOUND: count of OUT-labelled bank items whose resolve() status == EXECUTABLE); co-primary M-CERT-OVERWIDE-FALSE-ACCEPT-COUNT, M-CERT-SOUND-HTTP-ON-OUT, M-CERT-OVERWIDE-HTTP-ON-OUT, M-CERT-SOUND-REFUSAL-EXECUTED-COUNT, M-CERT-OVERWIDE-REFUSAL-EXECUTED-COUNT, M-CERT-SOUND-COVERAGE.",
+    "secondary_metrics": [
+      "M-CERT-SOUND-COVERAGE-BY-FAMILY / M-CERT-OVERWIDE-COVERAGE / M-CERT-OVERWIDE-REFUSED-BY-FAMILY / M-CERT-SOUND-ADOPTED-BY-FAMILY",
+      "M-CERT-EVASION-FALSE-ACCEPT-COUNT / M-CERT-EVASION-FALSE-ACCEPT-BIDS / M-CERT-EVASION-ADOPTED-BY-FAMILY",
+      "M-CERT-UNDER-COVERAGE / M-CERT-UNDER-FALSE-ACCEPT-COUNT",
+      "M-GATE-OVERWIDE-FALSE-ACCEPT-COUNT / M-RAW-OVERWIDE-FALSE-ACCEPT-COUNT",
+      "M-B-SHIPPED-FALSE-ACCEPT-COUNT / M-B-SHIPPED-COVERAGE / M-B-DECLARED-FULL-FALSE-ACCEPT-COUNT / M-B-DECLARED-FULL-COVERAGE / M-COVERAGE-DELTA-VS-SHIPPED",
+      "M-REGRESSION-TESTS-RUN / M-REFUSAL-SEMANTICS-VIOLATIONS / M-BANK-N-IN / M-BANK-N-OUT"
+    ],
+    "gates": {
+      "validity_gate": "ALL of V8_FREEZE_BINDING, M-CARRIER-PRE, M-INSTALL-POST, M-REGRESSION, PC-DETERMINISM-REPEAT, PC-EXACT-REPLAY, B-LITERAL-KERNEL, M-SUPPORT-IDENTITY, B-SHIPPED (FA==0), B-DECLARED-FULL (FA==0 AND coverage==1.0), NC-REJECT-ALL (accept==0 AND http_total==0) must PASS; otherwise status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE.",
+      "sensitivity_gate": "PC-CERT-ADMITS-SOUND (all CERTIFIED) AND PC-CERT-REFUSES-OVERWIDE (all REFUSED) AND PC-CERT-REFUSES-UNDER (all REFUSED) AND PC-INGEST-ABSTAIN (all preserved) AND PC-UNSAFE-RAW (FA>=1) AND PC-DISCRIMINATION (cert FA==0 AND gate FA>=1); otherwise status=MEASUREMENT_INVALID.",
+      "boundary_gate": "BP-EVASION-CERT-PASS: certificate admits R-EVASION for all families AND M-CERT-EVASION-FALSE-ACCEPT-COUNT >= 1; otherwise status=MEASUREMENT_INVALID (non-adversarial boundary probe, not evidence of general soundness)."
+    },
+    "decisions": {
+      "SHIPPED_CERTIFICATE_UNSAFE": {
+        "definition": "T-CERT-GUARD under R-SOUND or R-OVERWIDE has false_accept_count > 0 OR http_on_out_label > 0 OR refusal_executed_count > 0.",
+        "outcome": "FALSIFIES (status=COMPLETE)",
+        "meaning": "the shipped certificate either adopts an over-wide declaration or fails to abstain; no declaration-ingestion widening is licensed."
+      },
+      "SHIPPED_CERTIFICATE_SAFE_AND_COMPLETE": {
+        "definition": "all gates PASS AND M-CERT-SOUND-FALSE-ACCEPT-COUNT==0 AND M-CERT-SOUND-COVERAGE==1.0 AND M-CERT-OVERWIDE-FALSE-ACCEPT-COUNT==0 AND M-GATE-OVERWIDE-FALSE-ACCEPT-COUNT>=1.",
+        "outcome": "SUPPORTS (status=COMPLETE)",
+        "meaning": "the real shipped certificate safely widens to full coverage on sound declarations and refuses the audited over-wide declaration the incumbent gate adopts; soundness is closed-world (BP-EVASION FA>=1)."
+      },
+      "SHIPPED_CERTIFICATE_SAFE_BUT_INCOMPLETE": {
+        "definition": "all gates PASS, no safety violation, but M-CERT-SOUND-COVERAGE < 1.0.",
+        "outcome": "MIXED (status=COMPLETE)",
+        "meaning": "the certificate is safe but rejects some sound declaration; the safe-coverage gain is partial."
+      },
+      "MEASUREMENT_INVALID": {
+        "definition": "any gate above is not PASS.",
+        "outcome": "NOT_APPLICABLE (status=MEASUREMENT_INVALID)",
+        "meaning": "instrument/binding/control failure; resumable from the frozen packet, never a negative result."
+      }
+    },
+    "overall_outcome_mapping": {
+      "SUPPORTS": "SHIPPED_CERTIFICATE_SAFE_AND_COMPLETE",
+      "FALSIFIES": "SHIPPED_CERTIFICATE_UNSAFE",
+      "MIXED": "SHIPPED_CERTIFICATE_SAFE_BUT_INCOMPLETE",
+      "NOT_APPLICABLE": "MEASUREMENT_INVALID"
+    },
+    "claim_status_semantics": {
+      "C-PARAM-INHERIT": "RETAINED at EXPERIMENTAL in every branch; this packet is a ship-implementation and soundness-certification step, not the registered next_gate (four-arm C-LLM-INHERIT benchmark on a non-ceiling task bank). Even SUPPORTS does not advance it to VALIDATED.",
+      "C-SEMANTIC-RESOLVE": "RETAINED at HYPOTHESIS; not measured here.",
+      "promotion": "promote_to_product=false is NOT a frozen constraint on the experiment (the mandate asks to ship a guarded mechanism), but product promotion of the certificate would require a downstream DIRECTOR decision on the audited evidence; this spec does not itself authorize it."
+    }
+  },
+  "product_consequence_positive": "If SUPPORTS: ship SpiderKernel.ingest_declaration + certify_declaration in src/spider/kernel.py. External agents (or a mechanism registry) can then supply declared grammars that raise safe coverage from 0.6750 to 1.0 on the frozen bank, while training-consistent over-wide declarations are refused and the carrier abstains (UNKNOWN) rather than executing out-of-grammar targets. This closes the largest named open safety boundary on the promoted carrier (B1) and is a precondition for the flagship C-LLM-INHERIT arm to consume externally supplied mechanisms. The documented closed-world trust boundary (audited negative bank + UNKNOWN-first abstention) becomes the product contract for declaration ingestion.",
+  "product_consequence_negative": "If FALSIFIES: the shipped certificate cannot separate the sound declaration from the audited over-wide declaration (or is unsafe under R-SOUND), so the product must NOT ingest external declarations through this mechanism at all; keep the conservative carrier, disable declaration ingestion, and record declaration soundness as an unmet product gate. If MIXED: ship the certificate only where it abstains safely, and keep the conservative boundary on rejected families. If MEASUREMENT_INVALID: no product change; retry from the frozen packet. In all non-SUPPORTS branches the flagship C-LLM-INHERIT arm must not consume external declarations.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "model_tokens": 0,
+    "external_network": "none (loopback 127.0.0.1 ephemeral-port oracle only)",
+    "compute": "one CPU-scale deterministic run: seven-family induction + four declaration regimes x (T-CERT-GUARD, C-TRAINING-GATE, A-RAW-DECL) + B-SHIPPED + B-DECLARED-FULL + NC-REJECT-ALL; bank 524 items; two repeats for determinism; sub-minute.",
+    "risk": "low; the only mutable repo write is the treatment file src/spider/kernel.py, pinned by PRE/POST sha256 and regression-gated."
+  },
+  "expected_information_gain": "HIGH. Directly resolves both open unknowns carried from EXP-PRODUCT-38201227093: (i) whether the declared-grammar guard still holds as REAL shipped source code under a regression gate, and (ii) what certification step establishes declaration soundness, or -- since a general proof is unavailable -- what bounded closed-world trust boundary the shipped kernel must enforce. It produces a decisive product answer (ship the audited-certificate guard with UNKNOWN-first abstention, or disable declaration ingestion) and either licenses or blocks the flagship C-LLM-INHERIT arm's consumption of external mechanisms. It is not a repeat: it installs new code and adds a certification step the parent gate lacked.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The outcome mapping is total and every branch is concretely reachable by the frozen decision function on the frozen instrument. SUPPORTS is the predicted branch and was reproduced by the DESIGN sandboxed probe (R-SOUND T-CERT-GUARD FA=0 cov=1.0; R-OVERWIDE T-CERT FA=0 vs C-TRAINING-GATE FA=201; R-EVASION FA=7). FALSIFIES is reachable in the identical decision expression: A-RAW-DECL under R-OVERWIDE yields FA=201 (and if the certificate silently adopted the over-wide declaration, T-CERT R-OVERWIDE would yield the same positive count), so the negative branch is not vacuous. MIXED is reachable by a certificate that accepts some but not all sound declarations (coverage < 1.0 with FA=0). MEASUREMENT_INVALID is reachable via substituted carrier, frozen-block/artifact hash mismatch, regression failure, support drift, or a failing control (e.g. a certificate that rejected the sound declaration fails PC-CERT-ADMITS-SOUND). No branch is empty or arithmetically impossible: coverage in [0,1], false-accept counts in [0,404], and every gate has a concrete failure mode.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#decision_rule/#decisions",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 4 and the FROZEN RUNNER decision block",
+        "DESIGN sandboxed satisfiability probe (EXP_PROBE_MODE=1): R-SOUND T-CERT FA=0 cov=1.0; R-OVERWIDE T-CERT FA=0 cov=0.675 (REFUSED 7/7) vs C-TRAINING-GATE FA=201; R-EVASION CERTIFIED 7/7 and FA=7; R-UNDER REFUSED 7/7 cov=0.675; B-SHIPPED FA=0 cov=0.675; B-DECLARED-FULL FA=0 cov=1.0; regression 3/3; all 22 gates PASS."
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) python3.11+ stdlib only (observed 3.12.15); (b) src/spider/kernel.py pre-state sha256 == 718efa6a... (the frozen carrier) and its git blob b15ed848... resolves; (c) the pre-promotion literal blob cfec9866... resolves and lacks distill_parameterized; (d) all five freeze artifacts exist with recorded sha256 (pyproject.toml 5f03fb59..., src/spider/__init__.py 3d173722..., src/spider/models.py 338aaf4d..., src/spider/registry.py 51fb440d..., tests/test_kernel.py ff9c1561...); (e) the public API imports cleanly and SpiderKernel.__init__ default min_confidence == 0.8; (f) the POST kernel materializes to sha256 3a6caf97... and the FROZEN RUNNER block equals the runner source (normalized); (g) the REAL induction path was probed for all seven families: distill_parameterized yields a single slot (item/account/doc/region/invoice/case/token), confidence 0.9 >= 0.8, support == EXPECTED_SHIPPED exactly; (h) the runner executed end-to-end in probe mode with all gates PASS; (i) tests/test_kernel.py passes 3/3 on the installed/materialized kernel. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md sections 1 and 7 (CANONICAL-HASHES; FROZEN RUNNER)",
+        "DESIGN probes: sha256 of the five artifacts and PRE/POST kernel; git cat-file on b15ed848 and cfec9866; induction-path probe for all seven families; unittest 3/3; normalized FROZEN RUNNER block equality; full probe-mode runner run"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms are the SAME seven frozen induced mechanisms with ONLY verification_rule['parameter_supports'] (or, for T-CERT-GUARD, the parameter_supports produced by the real ingest_declaration code path) changed, so any false-accept/coverage difference is attributable to the guard. T-CERT-GUARD (certificate), C-TRAINING-GATE (training-consistency gate), A-RAW-DECL (no guard), B-SHIPPED (induced supports) and B-DECLARED-FULL (raw sound grammar) are structurally and behaviorally distinct on the frozen regimes: under R-SOUND T-CERT/C-TRAINING-GATE/B-DECLARED-FULL coincide BY DESIGN (the certificate and the gate both adopt every sound declaration, and labels are defined by those declarations); under R-OVERWIDE they separate (T-CERT FA=0, C-TRAINING-GATE/A-RAW FA=201) and under R-UNDER they separate from A-RAW (both guards refuse). B-SHIPPED has its own identity (FA=0, coverage 0.675) enforced by M-SUPPORT-IDENTITY against frozen EXPECTED_SHIPPED. The carrier bytes for every arm are the same installed package, pinned by POST_SHA256 and V8; no unbound mutable code can masquerade as an arm.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#baselines / #positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 3 and the FROZEN RUNNER make_arm_registry / cert_arm",
+        "research/experiments/EXP-PRODUCT-38201227093/handoff.json#carry_forward.established (carrier identity; support descriptor is the only mutated object)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a reachable failure mode on the exact code path that produces the certificate. PC-CERT-ADMITS-SOUND fails if certify_declaration rejects a sound declaration (over-conservative detector); PC-CERT-REFUSES-OVERWIDE fails if it rubber-stamps the over-wide declaration; PC-CERT-REFUSES-UNDER fails if it rubber-stamps a too-narrow declaration; PC-INGEST-ABSTAIN fails if refusal does not restore the shipped support; PC-UNSAFE-RAW (A-RAW-DECL under R-OVERWIDE, expected FA=201) proves the safety oracle is not blind and the FALSIFIES branch is live; NC-REJECT-ALL proves the floor; B-SHIPPED and B-DECLARED-FULL anchor the coverage endpoints; BP-EVASION-CERT-PASS proves the boundary is genuinely reachable. DESIGN's sandboxed probe exercised all of these with the real code path, so none is vacuous.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#positive_control / #null_control",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 3 and FROZEN RUNNER certificate blocks",
+        "DESIGN probe: certificate CERTIFIED 7/7 on R-SOUND, REFUSED 7/7 on R-OVERWIDE, REFUSED 7/7 on R-UNDER, CERTIFIED 7/7 on R-EVASION with FA=7; A-RAW R-OVERWIDE FA=201; NC HTTP=0"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is real shipped code and is exercised on the installed/materialized package. The DESIGN induction probe reproduced, for all seven families, a single-slot parameterized mechanism at confidence 0.9 >= 0.8 with support == EXPECTED_SHIPPED, and after calling the real SpiderKernel.ingest_declaration with the sound declaration the certificate arm resolved all 120 IN items EXECUTABLE (coverage 1.0) with zero false rejects and issued 120 loopback HTTP requests, so the treatment structurally binds and executes. On refusal (R-OVERWIDE/R-UNDER) the same code path is exercised and preserves the shipped support (PC-INGEST-ABSTAIN). A structurally dead treatment would be caught by PC-EXACT-REPLAY and by a T-CERT R-SOUND coverage below 1.0 (MIXED) or by MEASUREMENT_INVALID, never silently reported as a negative. The treatment bytes are frozen by POST_SHA256 and the install gate.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md section 7 and FROZEN RUNNER run_once",
+        "DESIGN probe: T-CERT R-SOUND accept_count=120, coverage=1.0, http_total=120; T-CERT R-OVERWIDE support preserved on refusal 7/7",
+        "research/experiments/EXP-PRODUCT-38201227093/handoff.json#carry_forward.established (carrier liveness and safe boundary)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists the five existing immutable files whose identity can change the interpretation of this experiment: pyproject.toml (package definition), src/spider/__init__.py + models.py + registry.py (the package surface the installed kernel imports), and tests/test_kernel.py (regression suite). All five exist with sha256 recorded at DESIGN and are re-hashed by V8 clause (C). src/spider/kernel.py is deliberately EXCLUDED because it is the treatment object that EXECUTE installs; its identity is pinned by two sha256 constants (pre-carrier 718efa6a..., post 3a6caf97...) and by the actual written file, and it is bound inside the prereg by the POST_KERNEL block. The POST_KERNEL source and the frozen runner are embedded verbatim in prereg.md and therefore bound by freeze.json.hashes['prereg.md']; the frozen bank, oracle, label rule, certificate rules and declaration regimes are all in-process inside the runner with no external dataset/fixture. No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-38205292822/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38180719830/freeze.json#artifact_hashes (precedent: the install-target kernel.py is excluded and pinned by PRE/POST sha)",
+        "research/experiments/EXP-PRODUCT-38205292822/prereg.md sections 5 and 7; DESIGN probe verified normalized FROZEN RUNNER block equality and POST_KERNEL sha 3a6caf97..."
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "pyproject.toml",
+    "src/spider/__init__.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "tests/test_kernel.py"
+  ],
+  "freeze_artifacts_note": "src/spider/kernel.py is intentionally not listed: it is the treatment object installed by this experiment, pinned by PRE/POST sha256 constants and by the written file. Listing it would make the V8 artifact_hashes re-check fail after installation (the pre-state hash would no longer match). This mirrors the accepted EXP-PRODUCT-38180719830 promotion freeze."
+}
