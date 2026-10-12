@@ -37,7 +37,7 @@ OUTAGE = re.compile(
 
 def classify(output: str, returncode: int, timeout: bool = False) -> str:
     """Auth/security failures take precedence; never hide them behind a 503."""
-    output = re.sub(r"\\x1b\\[[0-?]*[ -/]*[@-~]", "", output)
+    output = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", output)
     if AUTH.search(output):
         return "AUTH_INVALID"
     if DENIED.search(output):
