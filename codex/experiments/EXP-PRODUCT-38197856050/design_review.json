@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38197856050",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches are arithmetically reachable and no branch is masked by precedence. FALSIFIES (WIDENING_UNSAFE) is the DESIGN point-prediction: value-level probe confirms T-WIDENED FA=9 (exactly FAM-D region-010..region-999) and HTTP-on-OUT=9. MIXED (WIDENING_SAFE_BUT_INCOMPLETE) is reachable as the counterfactual where FAM-D did not over-accept (T restricted to FAM-A/B/C has FA=0, coverage<1). SUPPORTS (WIDENING_SAFE_AND_COMPLETE) is reachable via the strong upper-bound comparator B-DECLARED-FULL which achieves FA=0 AND coverage=1.0 on the same bank (value-level probe), proving the safe+complete branch is realizable. MEASUREMENT_INVALID is reachable via substituted carrier, support drift, freeze-binding mismatch, or failing validity/sensitivity gates. Precedence (MEASUREMENT_INVALID > FALSIFIES > SUPPORTS/MIXED) is total and free of dead branches.",
+      "evidence_refs": [
+        "spec.json#decision_rule.reachability",
+        "prereg.md sections 8-9 (decision rule, reachability, DESIGN probes D1/D6)",
+        "DESIGN value-level probes: T-WIDENED FA=9 cov=0.8413, B-SHIPPED FA=0 cov=0.5079, B-DECLARED-FULL FA=0 cov=1.0, PC-COARSE FA=153, PC-OVERWIDE FA=33"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) Python 3.12.15 with stdlib only; (b) both git blobs exist (carrier b15ed848... and literal cfec9866...); (c) shipping kernel src/spider/kernel.py has sha256 == 718efa6a... (carrier IS installed); (d) all SIX freeze artifacts exist with recorded sha256 matching prereg.md CANONICAL-HASHES; (e) public API imports cleanly (spider.SpiderKernel/Observation/Mechanism; spider.kernel.TrajectoryCounters; spider.registry.MechanismRegistry) and SpiderKernel.__init__ default min_confidence == 0.8; (f) induction path probed on synthetic observations for all four families reproduces expected single-slot mechanism (support/confidence 0.9); (g) frozen runner compiles (py_compile OK) and pure helpers imported/unit-checked; (h) training-only plumbing smoke test produced 25/25 EXECUTABLE for treatment (liveness). Any missing prerequisite triggers BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "prereg.md section 12 (CANONICAL-HASHES) and section 14 (FROZEN RUNNER)",
+        "DESIGN probes: sha256sum of six artifacts; git cat-file blob checks; API/threshold probe; induction-path probe for all four families; training-only plumbing smoke test 25/25 EXECUTABLE; py_compile OK"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms are structurally distinct objects built from the SAME four frozen induced mechanisms. The only difference between treatment and baselines is the support descriptor (verification_rule['parameter_supports']), which V12 proves is mechanism_id-independent. B-SHIPPED leaves greedy-prefix supports; T-WIDENED-PRINCIPLED applies widen_support; B-DECLARED-FULL applies declared grammars; PC-UNSAFE-COARSE applies __COARSE__; PC-OVERWIDE-OPEN applies open-width; NC-REJECT-ALL uses empty registry; B-LITERAL-KERNEL is a DIFFERENT frozen git blob lacking distill_parameterized. Carrier bytes pinned by explicit sha256, M-SUPPORT-IDENTITY gate, and V8 artifact hashes. No unbound mutable code can masquerade as the treatment.",
+      "evidence_refs": [
+        "spec.json#baselines / #positive_control / #null_control / #measurement_validity (V12)",
+        "prereg.md section 4 (arms) and 14 (FROZEN RUNNER: make_arm_registry rewrites only verification_rule)",
+        "DESIGN probe: mechanism_id identical across support rewrites for same family"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Both positive controls demonstrably fire on the exact code path that scores the experiment, using the full frozen bank (n=292). PC-UNSAFE-COARSE false_accept_count=153 (DESIGN prediction 153). PC-OVERWIDE-OPEN false_accept_count=33 (DESIGN prediction 33). NC-REJECT-ALL accept_count=0 and http_total=0. Sensitivity gates require BOTH positive controls >=1 AND null floor clean; both positive controls exceed threshold by wide margin (153, 33), proving the safety oracle is not vacuous. Validity anchors (PC-EXACT-REPLAY 25/25, PC-DETERMINISM-REPEAT, M-REGRESSION 3/3, M-SUPPORT-IDENTITY, B-LITERAL-KERNEL ablation) are all reachable failure modes that would produce MEASUREMENT_INVALID rather than a false negative.",
+      "evidence_refs": [
+        "spec.json#positive_control / #null_control / #measurement_validity (V11)",
+        "prereg.md section 4 (controls) and 8 (gates)",
+        "DESIGN full-bank probes: PC-UNSAFE-COARSE FA=153, PC-OVERWIDE-OPEN FA=33, NC-REJECT-ALL accept=0 http=0"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is structurally live on the credential-free substrate: (1) induction-path probe produced single-slot mechanism with confidence 0.9 (>= min_confidence 0.8) for all four families; (2) training-only plumbing smoke test of T-WIDENED-PRINCIPLED yielded 25/25 EXECUTABLE (false_reject_count=0) on all training values; (3) widened supports are strict supersets of shipped supports (V12), so liveness cannot decrease; (4) liveness inherited from parent experiments EXP-PRODUCT-38180719830 (promoted after D1-D4) and EXP-PRODUCT-38186502935 (full shipped path end-to-end, independent audit PASS). A silently dead treatment is caught by PC-EXACT-REPLAY 25/25 gate -> BLOCKED/MEASUREMENT_INVALID, never a negative. Treatment bytes frozen by sha256 + freeze-artifact hash.",
+      "evidence_refs": [
+        "DESIGN induction-path probe: slots/support/confidence for all four families (match EXPECTED_SHIPPED)",
+        "DESIGN training-only plumbing smoke test: treatment accept=25/25, false_reject_count=0",
+        "prereg.md section 9 (D3 treatment liveness)",
+        "EXP-PRODUCT-38186502935/handoff.json (carrier liveness, audit PASS)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly six existing immutable files whose identity can change interpretation: pyproject.toml, src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py (THE SHIPPED CARRIER - READ-ONLY, widening rule injected in-run), tests/test_kernel.py. All six exist with sha256 recorded at DESIGN and match prereg.md CANONICAL-HASHES. V8 clause (C) re-hashes all six at EXECUTE. The FROZEN RUNNER and CANONICAL-HASHES are embedded verbatim in prereg.md and bound by freeze.json.hashes['prereg.md']. The frozen bank, oracle, label rule, and widening rule are fully in-process inside the runner (no unbound dataset/task bank/fixture). No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "prereg.md section 11 (binding model), 12 (CANONICAL-HASHES), 14 (FROZEN RUNNER)",
+        "DESIGN sha256sum verification of all six artifacts matching prereg.md table"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The DESIGN point-prediction is FALSIFIES (WIDENING_UNSAFE) driven by FAM-D pinned-subrange identifiability limit. This is the intended discriminating result per the Director mandate, not a design flaw.",
+    "PC-OVERWIDE-OPEN false accepts (33) are concentrated on wrong-length payloads (LEN-TOO-SHORT/LONG, BIG) rather than FAM-D wrong-subrange; this is expected and confirms the control discriminates width sensitivity independently of the coarse sentinel."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass with independently verified evidence. The experiment is capable of answering its question: whether the frozen data-driven widening rule (widen_support) can safely generalize the shipped carrier's parameter support across four declared identifier grammars while preserving zero false accepts. The design correctly structures this as a safety/coverage certificate with a total decision rule, strong baselines, sensitive controls, a live treatment on the exact shipped bytes, and complete freeze binding. No blocking findings; the predicted FALSIFIES outcome is a valid scientific negative about one candidate inference rule, not a measurement failure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-38197856050/request.json",
+    "research/experiments/EXP-PRODUCT-38197856050/spec.json",
+    "research/experiments/EXP-PRODUCT-38197856050/prereg.md",
+    "DESIGN non-outcome probes: freeze artifact hashes, git blob hashes, API imports, induction path, widen_support arithmetic, treatment liveness 25/25, PC sensitivity 153/33, regression 3/3, B-LITERAL-KERNEL ablation"
+  ]
+}
