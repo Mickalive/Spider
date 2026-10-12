@@ -1,0 +1,20 @@
+{
+  "artifact_hashes": {
+    "pyproject.toml": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/kernel.py": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "tests/test_kernel.py": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-PRODUCT-38201227093",
+  "frozen_at": "2026-10-12T04:18:30.364215+00:00",
+  "hashes": {
+    "design_review.json": "df64ff36d75240a6d4473909c346272ead2eea2783a362441b49329c7ae2a480",
+    "prereg.md": "d1148472234e3f16bb239ecd366f7f47fe8edd63ee31abc8330ff395903bfee4",
+    "request.json": "8fc8868056b41f57e63df36dcb5e7c548476ff85b734021aa15823619795b8ac",
+    "spec.json": "477c5fa8af9dfec947fa1de26518e095b7027eb444e6c9bece26efeeab82ae63"
+  },
+  "schema_version": 1
+}
