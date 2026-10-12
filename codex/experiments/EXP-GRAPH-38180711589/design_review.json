@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38180711589",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both D-PRIMARY branches are arithmetically reachable. The frozen-bank calibration probe (run via --mechanics-only on the embedded FROZEN-RUNNER) demonstrates CAL-FEASIBLE at t*=0 on all three axes: AXIS-PRIMARY (coverage 0.860, pooled_false_accept 0.100, unknown_precision 1.000), AXIS-ALTLEX (0.912/0.100/1.000), AXIS-HELDOUT (0.875/0.050/1.000). The accept region is non-empty. GATE-NOT-MET is also reachable: the test split uses disjoint phrasings, the parent's embedding gate collapsed to coverage 0.0 here, and the calibration split already contains 2 executed out-of-scope and 8 unresolved applicable goals proving the signal is not a perfect separator. D-ALTLEX/D-HELDOUT can reach RETAINED/LOST/MIXED/BLOCKED. Thresholds (0.10, 0.50, 0.85) are arithmetically attainable. Precedence (MEASUREMENT_INVALID > GATE-INVALID > GATE-NOT-MET > GATE-MET) has no branch that makes later branches unreachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md sections 7 (gate) and 9 (decision rules)",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block --mechanics-only output (calibration-only satisfiability probe)",
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#decision_rule.reachability"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "The claim-bearing D-PRIMARY path requires only the Python standard library and frozen files: the runner is embedded verbatim in the hash-bound prereg.md (FROZEN-RUNNER sha256 verified), banks/lexicons/intent blocks are embedded verbatim and hash-committed in CANONICAL-HASHES (all 8 blocks verified), and inherited G1 blocks re-verify against the parent prereg.md. Optional retention arms (D-ALTLEX/D-HELDOUT) require numpy/scipy/scikit-learn/torch/sentence-transformers; if unavailable they degrade to BLOCKED, not MEASUREMENT_INVALID, and D-PRIMARY still completes. All bound artifacts (research/harness/*.py, src/spider/*.py, parent prereg.md) exist and are tracked. No credentials, browser, or model runtime are needed for D-PRIMARY.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md CANONICAL-HASHES and FROZEN-RUNNER blocks",
+        "research/harness/candidate_resolver.py, research/harness/goal_generator.py, research/harness/experiment_runner.py",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS / GOAL BANK / OOS BANK / LEXICON sources)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment T-LEX-AMBIG (deterministic resolver + integer ambiguity gate S) and comparators are genuinely distinct functions. B-LEX-ONLY is the same resolver without the gate; V9 requires their execution vectors to differ on >= 1 primary goal (calibration probe shows 7 resolved goals abstained by S>0, so test split will differ). A-EMBED-COSINE loads a dense embedding model; V9 requires the primary path to reference no embedder (verified: 'sentence_transformers', 'torch', 'EmbeddingArgmaxResolver' absent from primary path). The frozen bank is not lexically trivial: B-LEX-ONLY executes 49/57 applicable on calibration, 8 applicable goals are structurally unresolved. Arms are neither constant-execute nor constant-abstain and share no trivial reparameterization. Arm accuracies and gate triplet are outcomes not measured in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#baselines",
+        "research/harness/candidate_resolver.py (EmbeddingArgmaxResolver, InternalIdOracle, RandomRoleResolver, LexicalOverlapResolver)",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block (B-LEX-ONLY calibration counts, V9 static check)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a concrete failure mode under the same implementation. PC-LIVENESS-AND-INTEGRITY: 3 sub-checks (fixture uniqueness 20/20, incumbent verbatim resolution 20/20, B-LEX-STRONG self-match 20/20) can fail on duplicate/ambiguous fixture, broken registry/loader/threshold, or lexicon that cannot resolve its own canonical intents. NC-SHUFFLED-LABEL fails if deterministic selection tracks deranged labels; NC-CONSTANT-SIGNAL fails if a constant signal reaches unknown_precision >= 0.85 (exposing broken credit/denominator). CTRL-EXEC-ALL/CTRL-ABSTAIN-ALL/CTRL-RANDOM-GATE bound the gate triplet from extremes and matched-coverage. V2/V3 fail on degenerate primary set (<80 applicable) or >20 contamination flags (V3 non-vacuous: 9 AXIS-PRIMARY flags reproduce parent, 0 AXIS-HELDOUT). V5-V13 fail on their named states. All controls are arithmetically fallible.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#positive_control, #null_control",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block (CTRL-* and NC-* arms)",
+        "DESIGN probe: 9 AXIS-PRIMARY flags (7 applicable, 2 out-of-scope), reproducing the parent"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-LEX-AMBIG is proven live and non-degenerate on the frozen bank by the calibration-only DESIGN probe (--mechanics-only). On AXIS-PRIMARY it executes 51 calibration goals (49 applicable + 2 out-of-scope) and abstains on 28 (7 resolved out-of-scope via signal + 8 unresolved applicable + 13 unresolved out-of-scope), so its decision vector is neither constant-execute nor constant-abstain. V7 holds: 0 < executed_applicable (49) < |primary applicable| (113). The optional A-EMBED-COSINE retention comparator reuses the parent's EmbeddingArgmaxResolver, whose liveness on the 20 verbatim intents was verified by the parent smoke probe; it is not required for D-PRIMARY. No bank goal is scored with a model in DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md FROZEN-RUNNER block --mechanics-only output (T-LEX-AMBIG calibration vector: executed=51, abstained_resolved=7, unresolved_applicable=8)",
+        "research/harness/candidate_resolver.py::EmbeddingArgmaxResolver.resolve",
+        "research/experiments/EXP-GRAPH-38166215691/spec.json#freeze_eligibility.treatment_liveness (parent embedding smoke probe)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change interpretation is listed in spec.freeze_artifacts and hashed into freeze.json.artifact_hashes: the four research/harness modules (comparator arms, intent/prior-template registry for contamination screen, HTTP substrate, bootstrap/metric estimators) and the shipped src/spider kernel/registry/models/package init, plus the parent prereg.md supplying inherited GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1 and PRIOR-PARENT-BANK-TEXTS verbatim. The blind-authored G2 banks, both alternate lexicons, and mechanically derived held-out intents have no mutable file dependency: they are embedded verbatim in prereg.md and bound by freeze.json.hashes['prereg.md'], with per-block canonical sha256 in CANONICAL-HASHES (all 8 blocks verified). The resolver, gate, and orchestration script are embedded verbatim in the FROZEN-RUNNER block (runner sha256 5811a49524a012ba25483d61f78a0d696ccc82f0971386507217c0d9e2c9d6e5 verified). No unbound mutable code, task bank, dataset, or fixture remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38180711589/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md sections 5 (frozen blocks) and 10-11 (runner and CANONICAL-HASHES)",
+        "Verified: all 9 freeze_artifacts files exist; all 8 CANONICAL-HASHES blocks match; FROZEN-RUNNER sha256 matches"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Optional retention arms (D-ALTLEX/D-HELDOUT) depend on sentence-transformers/all-MiniLM-L6-v2 model download; if network or dependency unavailable they degrade to BLOCKED per design, which is correctly handled and does not invalidate D-PRIMARY.",
+    "Residual authorship limitation disclosed in V4 and prereg.md section 3: fresh-context blind authors cannot be cryptographically proven free of latent knowledge of common intent strings; contamination screen (V3) bounds but does not eliminate this."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The design cleanly isolates the one sub-mechanism the parent left unidentified (whether the deterministic resolver's own ambiguity signal can supply a safe abstention gate) with a both-directions falsifier on a disjoint calibration/test split, while adding generalization probes (held-out mechanism set, independent lexicon) that the parent's 113-goal set could not provide. The accept branch is demonstrably reachable (CAL-FEASIBLE at t*=0 on all three axes); the negative branch is reachable by construction (parent's embedding gate collapsed here, test phrasings are disjoint, signal is not a perfect separator). All controls are live and fallible. All prerequisites are satisfied for the model-free primary path. All mutable artifacts are frozen and hash-bound. No blocking findings.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38180711589/request.json",
+    "research/experiments/EXP-GRAPH-38180711589/spec.json",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/harness/candidate_resolver.py",
+    "research/harness/goal_generator.py",
+    "FROZEN-RUNNER --mechanics-only execution (verified)",
+    "CANONICAL-HASHES verification (8/8 blocks match)",
+    "FROZEN-RUNNER sha256 verification (match)"
+  ]
+}

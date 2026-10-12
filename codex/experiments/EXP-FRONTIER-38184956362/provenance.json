@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38184956362",
+  "lane": "frontier",
+  "mode": "EXECUTE",
+  "run_metadata": {
+    "started_utc": "2026-10-12T00:08:00Z",
+    "completed_utc": "2026-10-12T00:14:22Z",
+    "runner_host": "runnervmmprz5",
+    "os": "Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64",
+    "python": "3.12.15",
+    "network_transport": "stdlib urllib (credential-free GET-only, no proxy rotation)",
+    "model_calls": 0,
+    "credentials_used": "none",
+    "git_head_at_execute": "d7e1b89f07c3940995c672a81f43db67ab2fc07a",
+    "git_base_at_freeze": "68b17edeaba5a083280b53d2fddfab2d4ff79db5"
+  },
+  "frozen_inputs": [
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/request.json", "sha256": "b486067df3f872c311a8e47598717ad6f60d7747d0629cc9cb87ec49e7ec3485", "role": "mandate/immutable"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/spec.json", "sha256": "67439304c01a1425a18779358f9508232a743167bdbfb70e991b38fff5ea5adf", "role": "frozen spec"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/prereg.md", "sha256": "fbf0b8f3bc8835a2018e798ab783ed32aaeb057739f713e901de07138c34f3a3", "role": "frozen prereg (section 7 = source code identity; sha256 of stripped block b9b2efdc...)"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/freeze.json", "role": "frozen hash table"},
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl", "sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747", "role": "bound Q1 frame (external bound)"},
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/execute_module.py", "sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a", "role": "bound base module (external bound)"}
+  ],
+  "code_identity": {
+    "v1_gate": "PASS",
+    "source": "prereg.md section 7 FROZEN_CODE_BEGIN..FROZEN_CODE_END block (1148 lines, 51,171 bytes C)",
+    "reconstructed_sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+    "audit_repairs_confirmed": ["controls_seen None-guard in structural+discovery inclusion", "live key added to evaluate_items output", "census_deep() + --frame arg + base matching when selecting parent sitemap-index child (bundled seed URL list)"],
+    "module_embedded_locked_sources": "prereg.md fbf0b8f3..., spec.json 67439304c0..., request.json b486067df3... (frozen output checked against freeze.json)"
+  },
+  "commands": [
+    {"stage": "controls", "cmd": "python3 execute_module.py --stage controls --out research/experiments/EXP-FRONTIER-38184956362", "exit": 0, "result": "15/15 rows PASS", "artifact": "raw/controls.jsonl fddd9e429d27792527e0e580585270a875fc1e0ebc286edb109d31db5cd99672"},
+    {"stage": "inventory", "cmd": "python3 execute_module.py --stage inventory --out research/experiments/EXP-FRONTIER-38184956362", "exit": 0, "result": "20/20 hosts, 20/20 seeds HTTP 200", "artifact": "raw/channel_docs.jsonl 4ed67c117687d3eb75bb2c2dd97379b18ffea726232eaecf33ebaa2e875f1bb0"},
+    {"stage": "structural", "cmd": "python3 execute_module.py --stage structural --frame research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl --out research/experiments/EXP-FRONTIER-38184956362", "exit": 0, "result": "frame sha verified 2afe65b6...; 556/556 DEEP fetched; 208 with controls", "artifacts": ["raw/census.jsonl 8b7a5f919143ac1ae3c0a91c282d848a83c493656524bb0583e360225c38b40f", "raw/structural.jsonl 95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45"]},
+    {"stage": "discovery", "cmd": "python3 execute_module.py --stage discovery --out research/experiments/EXP-FRONTIER-38184956362", "exit": 0, "result": "DECISION FALSIFIES; 208 items, 0 reachable", "artifacts": ["raw/items.jsonl c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5", "derived/metrics.json d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d"]}
+  ],
+  "produced_outputs": [
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/result.json", "role": "packet result"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/report.md", "role": "packet report"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/provenance.json", "role": "packet provenance"},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/execute_module.py", "sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f", "role": "reconstructed frozen module copy"}
+  ],
+  "network_ledger": {
+    "inventory_channel_document_gets": 108,
+    "census_deep_fetches": 556,
+    "on_site_search_probes": 208,
+    "item_liveness_gets": 208,
+    "synthetic_null_probes": 3,
+    "total_approx": 1083,
+    "charged_protocol_costs": {"ROBOTS_SITEMAP": 3, "SITEMAP_XML": 2, "ON_SITE_SEARCH": 3, "RSS_ATOM": 3, "JSON_LD": 2},
+    "all_within_K": true
+  },
+  "validity_flags": {
+    "gates_passed": ["V1", "V2", "V3", "V4", "V5", "PC-SEED-LIVENESS", "PC-CENSUS-DEEP-FETCH"],
+    "outcome": "FALSIFIES",
+    "outcome_class": "engine-stratified bounded negative (G6), not infrastructure failure",
+    "execution_checkpoint_pre_execute_sha": "68b17edeaba5a083280b53d2fddfab2d4ff79db5"
+  },
+  "environment_notes": "Python stdlib urllib with default ssl context; single runner egress (no proxy rotation); no credentials, no model calls; BFS/depth and channel-document logic inherited from bound base module 75a01d49...; DELAY=0.1 between requests; MAX_BODY=600000 with truncation flags (no scored channel document truncated)."
+}

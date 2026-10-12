@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38169622704",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches (SUPPORTS, FALSIFIES, MIXED, MEASUREMENT_INVALID) are arithmetically reachable and were verified by the frozen rule-level classifier over synthetic worlds in design_satisfiability_probe.output.certificate.branch_reachability (each label maps to itself, all four inhabited). The precedence order (MEASUREMENT_INVALID first, then SUPPORTS, then FALSIFIES, then MIXED) is correctly implemented in classify() and no earlier branch makes a later one unreachable. The SUPPORTS branch is reachable in the predicted certifying world (F1 comparator 0.875, F2 comparator 0.900 in [0.80, 0.95), T/PC 1.0, matched correctness >= 0.80, >=2/4 counter distinctness, margins >= 0.05). The FALSIFIES branch is independently demonstrated by NC-MECHANISM-OFF which drives cold to 1.0 (probe-verified mechanism_off_destroys_certificate=true). The MIXED branch is reachable when gates pass but zero families certify for non-comparator-attributable reasons (e.g., margin or counter-distinctness failure). The MEASUREMENT_INVALID branch is reachable by any V1-V8 gate failure. The design_satisfiability_probe executed the frozen classify() on all four synthetic worlds and each returned its own label.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.certificate.branch_reachability",
+        "spec.json design_satisfiability_probe.output.checks.all_branches_inhabited",
+        "spec.json decision_rule.precedence",
+        "prereg.md section 7 (decision rule) and section 9 (probe output)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is satisfied at DESIGN time. Python 3.12.15 is installed and verified by the probe runs. The stdlib-only HTTP transport (http.server.ThreadingHTTPServer + urllib.request) answers on 127.0.0.1 (probe transport_stdlib_http=true). All 10 protocol invariants hold on the in-process model (session never reveals binding; chain resource null at scored band; precursor reveals binding once; precursor re-commit 409 no re-reveal; wrong/foreign binding 400 no leak; correct binding 200; repeat chain commit 409; binding absent from all session/task/error bodies). The server_secret derivation is deterministic from the frozen run_seed with no secrets, clock, or os.urandom. No credentials, browser, dataset, external endpoint, or model access is required. The COMPLETE EXECUTE harness (substrate construction, four arm policies, declared controls, scored-matrix driver, full V1-V8 evaluator, frozen decision rule) is embedded verbatim in prereg.md (BEGIN/END SBA-HARNESS) and in spec.design_satisfiability_probe.source (sha256 28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da), so the code that determines whether the measurement is possible exists in full at freeze time. The V1 code-fidelity manifest will record the EXECUTE harness sha256 and python version in result.json.artifacts. The probe and selftest modes (non-outcome-bearing) were executed at DESIGN and were byte-identical over two runs each.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.checks.transport_stdlib_http",
+        "spec.json design_satisfiability_probe.output.checks.protocol_invariants",
+        "spec.json design_satisfiability_probe.output.checks.all_protocol_invariants_pass",
+        "spec.json substrate.transport",
+        "spec.json substrate.randomness",
+        "spec.json measurement_validity.gates.V1_code_fidelity_manifest",
+        "prereg.md section 9 (frozen harness embedding and probe execution)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The positive control PC-EXACT-REPLAY achieves 1.0 at every novelty band (probe-verified pc_exact_replay_all_novelties=true). Both comparators B-COLD-RE-DERIVE and B-RETRIEVAL-SHAPED are predicted and probe-measured at the closed-form (K-1)/K: F1-RECORDS (K=8) 0.875, F2-WIDGETS (K=10) 0.900, both strictly inside the certification band [0.80, 0.95). The treatment T-AMORTIZED-DISCOVERY achieves 1.0 at every band (treatment_live_all_novelties=true). Counter distinctness is probe-measured: T vs COLD = 2/4 dimensions distinct (http_calls 17 vs 24, repair_calls 0 vs 1), T vs RETRIEVAL = 3/4 dimensions distinct (adds retrieval_calls 0 vs 8) for both families. Success margins at novelty >= 0.50: F1 0.125, F2 0.100, both >= 0.05 floor. Matched correctness equals success_rate (exact-match scoring) and is >= 0.80 for all arms at all bands. The probe executed one session per (arm, family, novelty) cell and reproduced the predicted vectors exactly. Arm rates are measured outputs from the frozen implementation, not equality-frozen constants. No ceiling or floor situation exists where all arms are guaranteed identical at the scored band.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json design_satisfiability_probe.output.counter_identification",
+        "spec.json design_satisfiability_probe.output.comparator_at_scored_band",
+        "spec.json counters.identification_requirement",
+        "spec.json pre_freeze_arithmetic_certificate.comparator_rate_closed_form",
+        "prereg.md section 6 (arithmetic certificate)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "The positive control PC-EXACT-REPLAY fires at 1.0 across all bands and families (probe-verified). The critical sensitivity control NC-MECHANISM-OFF (exposing the one-time binding via the session endpoint) drives B-COLD-RE-DERIVE to 1.0 on F1-RECORDS at novelty 0.50 (probe-verified cold_f1_rate=1.0, mechanism_off_destroys_certificate=true), which flips the certificate to FALSE under the same implementation that scores the experiment. NC-CEILING-BAND at novelty 0.00 yields all arms 1.0 (ceiling_band_all_arms_one=true), confirming the certificate is band-restricted and not tautological. NC-BINDING-UNIQUENESS is guaranteed by the 48-bit derivation and pairwise-distinct session indices (0 collisions over 160 sampled derivations). NC-NO-LEAK is enforced as hard gate V3/F-LEAK (probe scans every session/task/error body and silenced log). The memoryful boundary (NC-MEMORYFUL) is explicitly disclosed as a boundary diagnostic, not hidden. The certificate therefore moves when the mechanism it measures is removed, and is stable when the mechanism is not engaged (novelty < 0.50).",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.mechanism_off",
+        "spec.json design_satisfiability_probe.output.checks.mechanism_off_destroys_certificate",
+        "spec.json design_satisfiability_probe.output.checks.ceiling_band_all_arms_one",
+        "spec.json design_satisfiability_probe.output.binding_uniqueness",
+        "spec.json controls.NC-MECHANISM-OFF",
+        "spec.json controls.NC-CEILING-BAND",
+        "spec.json controls.NC-NO-LEAK",
+        "prereg.md section 5 (controls) and section 8 (V8 certificate sensitivity)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-AMORTIZED-DISCOVERY completed a full session at every novelty band (0.00, 0.25, 0.50, 0.75) and both families (F1-RECORDS, F2-WIDGETS) in the probe, achieving 1.0 success rate at all 8 (arm, family, novelty) combinations (treatment_live_all_novelties=true). PC-EXACT-REPLAY also achieved 1.0 at all bands (pc_exact_replay_all_novelties=true). defect_sessions=0 (no sessions failed at novelty < 0.50 where 1.0 is expected). The treatment executes end-to-end on the credential-free substrate: it issues one session GET, captures the one-time binding from the precursor receipt, and commits each task once using the retained binding for the chain task. The probe verified this liveness non-outcome-bearing before freeze. Since this experiment evaluates a SPIDER substrate (the SBA-CREDENTIAL-FREE-V2 task bank) that is a prerequisite for downstream Product/claim work, treatment liveness is required to be PASS (not NOT_APPLICABLE) and it is satisfied.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness.T-AMORTIZED-DISCOVERY",
+        "spec.json design_satisfiability_probe.output.checks.treatment_live_all_novelties",
+        "spec.json design_satisfiability_probe.output.checks.defect_sessions",
+        "spec.json arms.T-AMORTIZED-DISCOVERY",
+        "prereg.md section 9 (probe results)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "There are no pre-existing mutable local code, data, task-bank, or fixture dependencies that this experiment's interpretation depends on. The substrate class SBA-CREDENTIAL-FREE-V2 is generated entirely from the frozen literals in spec.json (class_id, derivations, endpoints, families, arms, controls, certificate arithmetic) using stdlib only. The COMPLETE harness (substrate construction, four arm policies, declared controls, scored-matrix driver, full V1-V8 evaluator, frozen decision rule) is embedded verbatim in prereg.md between BEGIN/END SBA-HARNESS and in spec.design_satisfiability_probe.source (sha256 28704cf16399e7117096dfb300ab230674a2cebd122d68a1620499f7c5d664da), and is therefore bound by the frozen prereg.md and spec.json hashes. The EXECUTE copy will be written to disk unchanged (or reconstructed byte-identically from the frozen literals), its sha256 plus python3 --version are recorded in the V1 code-fidelity manifest (gate V1) in result.json.artifacts, and the runner recomputes the embedded block sha256 against the frozen value before scoring. substrate.external_dependencies = [] and credentials_required = false. Accordingly freeze_artifacts = [] is correct and the freezer will accept this as fully bound.",
+      "evidence_refs": [
+        "spec.json freeze_artifacts = []",
+        "spec.json substrate.external_dependencies = []",
+        "spec.json substrate.credentials_required = false",
+        "spec.json design_satisfiability_probe.source_sha256",
+        "spec.json measurement_validity.gates.V1_code_fidelity_manifest",
+        "prereg.md section 9 (frozen harness embedding and sha256 binding)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule has four reachable branches with correct precedence. All measurement prerequisites (Python, stdlib HTTP, deterministic derivations, complete frozen harness) are satisfied at DESIGN time. Baselines are identifiable: positive control at 1.0, comparators at (K-1)/K strictly inside [0.80, 0.95), treatment at 1.0, with measured counter distinctness (2/4 and 3/4 dimensions) and success margins (0.125/0.100) exceeding the 0.05 floor. Controls are sensitive: NC-MECHANISM-OFF destroys the certificate (cold -> 1.0), NC-CEILING-BAND shows band restriction, NC-NO-LEAK guards contamination. Treatment T-AMORTIZED-DISCOVERY is live at 1.0 across all bands and families. No mutable external artifacts exist; the complete harness is bound by frozen prereg/spec hashes and the V1 manifest. The pre-freeze arithmetic certificate is sound: comparator rate (K-1)/K for K=8 (0.875) and K=10 (0.900) avoids collision with 0.95 and 0.80, K-sweep 6-12 all in band. The design is freeze-eligible.",
+  "evidence_refs": [
+    "spec.json design_satisfiability_probe.output.checks",
+    "spec.json design_satisfiability_probe.output.certificate",
+    "spec.json decision_rule",
+    "spec.json pre_freeze_arithmetic_certificate",
+    "prereg.md sections 6-10"
+  ]
+}
