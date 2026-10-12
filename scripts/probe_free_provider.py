@@ -120,8 +120,20 @@ def run_probe(binary: str, model: str, deadline: int) -> str:
             proc.communicate()
             return "TIMEOUT"
         passed = marker.is_file() and marker.read_bytes() == PROBE_TOKEN.encode()
-        return classify((stdout or "") + "\n" + (stderr or ""),
-                        proc.returncode, marker_ok=passed)
+        combined = (stdout or "") + "\n" + (stderr or "")
+        category = classify(combined, proc.returncode, marker_ok=passed)
+        if category == "NO_TOOL_ATTESTATION":
+            # This is the precise class Spider previously swallowed for almost
+            # every FREE model. Probe runs in an isolated empty directory with
+            # a fixed prompt. Print only a short sanitized fragment, never
+            # provider credentials, complete model output or user files.
+            safe = ANSI.sub("", combined)
+            safe = re.sub(r"(?:gh[pousr]_[A-Za-z0-9]{12,}|sk-[A-Za-z0-9_-]{12,}|"
+                          r"Bearer\\s+\\S+)", "[REDACTED]", safe, flags=re.I)
+            safe = " ".join(safe.split())[:450]
+            print(f"SPIDER_PROBE_FAILURE_DETAIL model={model} rc={proc.returncode} "
+                  f"diagnostic={safe!r}", flush=True)
+        return category
 
 
 def allowed_candidates(config: dict, limit: int) -> list[str]:
