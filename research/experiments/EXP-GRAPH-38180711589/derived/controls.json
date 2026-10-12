@@ -1,0 +1,247 @@
+{
+  "M-N-PRIMARY-APPLICABLE": 113,
+  "M-N-PRIMARY-OOS": 38,
+  "M-N-CAL": {
+    "applicable": 57,
+    "oos": 20
+  },
+  "M-N-TEST": {
+    "applicable": 56,
+    "oos": 18
+  },
+  "M-FLAGGED-IDS": [
+    "app_004",
+    "app_049",
+    "app_052",
+    "app_073",
+    "app_076",
+    "app_097",
+    "app_100",
+    "oos_024",
+    "oos_026"
+  ],
+  "M-N-CONTAM-FLAGGED": 9,
+  "M-CONTAM-MAX-JACCARD": {
+    "max_token_jaccard": 0.5714285714285714,
+    "max_trigram_jaccard": 0.5882352941176471,
+    "thresholds": {
+      "token": 0.6,
+      "trigram": 0.75
+    }
+  },
+  "M-DET-ACC-PRIMARY": {
+    "value": 0.8584070796460177,
+    "numerator": 97,
+    "denominator": 113
+  },
+  "M-DET-ACC-PRIMARY-TEST": {
+    "value": 0.8571428571428571,
+    "numerator": 48,
+    "denominator": 56
+  },
+  "M-PC-LIVENESS-AND-INTEGRITY": {
+    "fixture_unique_ids": true,
+    "fixture_unique_intents": true,
+    "incumbent_verbatim": 20,
+    "resolver_self_match": 20,
+    "n_fixture": 20,
+    "subcheck_i_pass": true,
+    "subcheck_ii_pass": true,
+    "subcheck_iii_pass": true,
+    "pass": true
+  },
+  "M-MECH-ACC-INCUMBENT": {
+    "value": 0.0,
+    "numerator": 0,
+    "denominator": 113
+  },
+  "M-MECH-ACC-ORACLE": {
+    "value": 1.0,
+    "numerator": 113,
+    "denominator": 113
+  },
+  "M-MECH-ACC-RANDOM": {
+    "value": 0.18584070796460178,
+    "numerator": 21,
+    "denominator": 113,
+    "rng": "numpy.random.RandomState(4242)"
+  },
+  "M-MECH-ACC-LEXTOK": {
+    "value": 0.08849557522123894,
+    "numerator": 10,
+    "denominator": 113
+  },
+  "M-NC-SHUFFLED": {
+    "value": 0.04424778761061947,
+    "numerator": 5,
+    "denominator": 113,
+    "derangement": "rejection-sampled fixed derangement of the applicable target list",
+    "seed": 3820973221,
+    "is_derangement": true
+  },
+  "M-NC-CONSTANT-SIGNAL": {
+    "t_star": 1,
+    "cal_class": "CAL-ABSTAIN-ALL",
+    "cal_metrics": {
+      "t": 1,
+      "coverage": 0.8596491228070176,
+      "pooled_false_accept": 0.45,
+      "unknown_precision": null,
+      "unknown_precision_inclusive": 0.5789473684210527,
+      "abstained_resolved": 0,
+      "executed": 58,
+      "executed_oos": 9,
+      "executed_app": 49,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 8
+    },
+    "test_metrics": {
+      "t": 1,
+      "coverage": 0.9464285714285714,
+      "pooled_false_accept": 0.2777777777777778,
+      "unknown_precision": null,
+      "unknown_precision_inclusive": 0.8125,
+      "abstained_resolved": 0,
+      "executed": 58,
+      "executed_oos": 5,
+      "executed_app": 53,
+      "selective_acc": 0.9056603773584906,
+      "unresolved_applicable": 3
+    },
+    "unknown_precision_defined": false,
+    "unknown_precision": null,
+    "at_prevalence_note": "signal-driven abstention precision under a constant signal; prevalence of oos among resolved goals",
+    "prevalence_oos_resolved_test": 0.08620689655172414
+  },
+  "M-GATE-TREATMENT-VECTOR": {
+    "t_star": 0,
+    "executed_applicable": 102,
+    "executed_total": 107,
+    "abstained_resolved": 9,
+    "unresolved_applicable": 11,
+    "n_primary_applicable": 113
+  },
+  "M-NON-TAUTOLOGY": {
+    "b_lex_only_vs_t_lex_ambig_disagreement_count": 9,
+    "primary_path_embedder_tokens": [],
+    "retention_block_first_embedder_line": 285
+  },
+  "gates": {
+    "V2-PRIMARY-SET": true,
+    "V3-CONTAM-SCREEN": true,
+    "V5-PC": true,
+    "V6-ORACLE-CEILING": true,
+    "V7-TREATMENT-LIVENESS": true,
+    "V8-FLOOR-SANITY": true,
+    "V9-NON-TAUTOLOGY": true,
+    "V10-NC": true,
+    "V13-GATE-VALIDITY": true
+  },
+  "M-RAW-RUNNER-OUTCOME": {
+    "D-PRIMARY": "GATE-NOT-MET",
+    "D-HELDOUT": "BLOCKED",
+    "D-ALTLEX": "BLOCKED"
+  },
+  "M-RAW-EMBEDDING-STATUS": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+  "M-GATE-TRIPLET-ALTLEX": {
+    "t_star": 0,
+    "class": "CAL-FEASIBLE",
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.16666666666666666,
+    "unknown_precision": 1.0,
+    "unknown_precision_inclusive": 0.8333333333333334
+  },
+  "M-DET-ACC-ALTLEX": {
+    "cal": 0.9122807017543859,
+    "test": 0.9464285714285714
+  },
+  "M-GATE-TRIPLET-HELDOUT": {
+    "t_star": 0,
+    "class": "CAL-FEASIBLE",
+    "coverage": 0.975,
+    "pooled_false_accept": 0.2,
+    "unknown_precision": 1.0,
+    "unknown_precision_inclusive": 0.9411764705882353
+  },
+  "M-DET-ACC-HELDOUT": {
+    "cal": 0.875,
+    "test": 0.975
+  },
+  "M-EMB-ACC-ALTLEX": null,
+  "M-EMB-ACC-HELDOUT": null,
+  "M-PAIRED-DIFF-DET-MINUS-EMB-ALTLEX": null,
+  "M-PAIRED-DIFF-DET-MINUS-EMB-HELDOUT": null,
+  "M-B-LEX-ONLY": {
+    "t": 3,
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.2777777777777778,
+    "unknown_precision": null,
+    "unknown_precision_inclusive": 0.8125,
+    "abstained_resolved": 0,
+    "executed": 58,
+    "executed_oos": 5,
+    "executed_app": 53,
+    "selective_acc": 0.9056603773584906,
+    "unresolved_applicable": 3,
+    "note": "gate-free resolver; equals CTRL-EXEC-ALL (t=maxS+1)"
+  },
+  "M-CONTROL-EXEC-ALL": {
+    "t": 3,
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.2777777777777778,
+    "unknown_precision": null,
+    "unknown_precision_inclusive": 0.8125,
+    "abstained_resolved": 0,
+    "executed": 58,
+    "executed_oos": 5,
+    "executed_app": 53,
+    "selective_acc": 0.9056603773584906,
+    "unresolved_applicable": 3
+  },
+  "M-CONTROL-ABSTAIN-ALL": {
+    "t": -1,
+    "coverage": 0.0,
+    "pooled_false_accept": 0.0,
+    "unknown_precision": 0.08620689655172414,
+    "unknown_precision_inclusive": 0.24324324324324326,
+    "abstained_resolved": 58,
+    "executed": 0,
+    "executed_oos": 0,
+    "executed_app": 0,
+    "selective_acc": null,
+    "unresolved_applicable": 3
+  },
+  "M-CONTROL-RANDOM-GATE": {
+    "pooled_false_accept": 0.7222222222222222,
+    "unknown_precision": 0.2777777777777778,
+    "matched_abstention_count": 18
+  },
+  "M-GATE-TRIPLET-PRIMARY": {
+    "t": 0,
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.16666666666666666,
+    "unknown_precision": 1.0,
+    "unknown_precision_inclusive": 0.8333333333333334,
+    "abstained_resolved": 2,
+    "executed": 56,
+    "executed_oos": 3,
+    "executed_app": 53,
+    "selective_acc": 0.9056603773584906,
+    "unresolved_applicable": 3,
+    "t_star": 0,
+    "cal_class": "CAL-FEASIBLE",
+    "cal_metrics": {
+      "t": 0,
+      "coverage": 0.8596491228070176,
+      "pooled_false_accept": 0.1,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.6923076923076923,
+      "abstained_resolved": 7,
+      "executed": 51,
+      "executed_oos": 2,
+      "executed_app": 49,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 8
+    }
+  }
+}
