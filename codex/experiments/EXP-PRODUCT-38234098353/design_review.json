@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38234098353",
+  "lane": "product",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches are reachable on the frozen instrument. SUPPORTS was realized by the DESIGN probe (T-SCORED-ADEQ within-envelope FA=0, HTTP-on-OUT=0, refusal-violations=0, coverage=1.0, delta +0.5454 over B-SHIPPED). FALSIFIES is reachable: the same safety predicate evaluates to >0 for A-NO-ADEQ (FA=6), A-NO-PROV (FA=3), A-NO-GROW (FA=9), C-FIAT-ADEQ (FA=6), C-FIAT-OVERTRUST (FA=3), C-FROZEN-CERT (FA=18), A-RAW-DECL (FA=18). MIXED is reachable via A-WITHHOLD-ALL (empty inferred allowlist) yielding coverage 20/44 == B-SHIPPED and FA=0. MEASUREMENT_INVALID is reachable via carrier hash mismatch, induction failure, support drift, adequacy drift, probe-token drift, regression failure, or any failing control. Gate precedence (validity/sensitivity/provenance/adequacy/growth/necessity/boundary -> MEASUREMENT_INVALID; then safety -> FALSIFIES; then coverage -> SUPPORTS vs MIXED) does not shadow later branches. All thresholds are arithmetically attainable (FA in [0,34], coverage in [0,1]).",
+      "evidence_refs": [
+        "spec.json#decision_rule#decisions",
+        "prereg.md FROZEN RUNNER decision block",
+        "DESIGN probe (EXP_PROBE_MODE=1): SUPPORTS with all seven gates PASS; ablations/incumbents FA=6/3/9/6/3/18/18 prove FALSIFIES live; A-WITHHOLD-ALL coverage 0.4545 proves MIXED realizable; determinism True; regression 3/3"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present at DESIGN time: (a) Python 3 stdlib only (observed 3.12.15); (b) src/spider/kernel.py is the frozen shipped carrier sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3, UNMODIFIED; (c) all five other freeze artifacts exist with recorded sha256; (d) public API imports under PYTHONPATH=src and SpiderKernel default min_confidence=0.8; (e) REAL induction path probed for all eleven families: distill_parameterized yields one slot each at confidence 0.9 >= 0.8 (M-MECHANISM-COUNT=11, M-SINGLE-SLOT, M-CONFIDENCE-0.9, M-SUPPORT-IDENTITY all True); (f) loopback oracle starts and answers; (g) runner executed end-to-end twice in probe mode with all seven gates PASS and determinism True; (h) design-time satisfiability probe confirmed the three budget-sparse over-accept tokens {abcd,abef,beef} are absent from the first PROBE_BUDGET=256 shuffled probe candidates for PROBE_SEED=38234098 (M-SPARSE-TOKENS-MISSED True); (i) tests/test_kernel.py passes 3/3 under PYTHONPATH=src (recorded in runner). The PYTHONPATH=src requirement is a known configuration, not a missing prerequisite. Any missing prerequisite makes the runner write BLOCKED/MEASUREMENT_INVALID, never FALSIFIES.",
+      "evidence_refs": [
+        "prereg.md sections 1 and 7 (CANONICAL-HASHES; FROZEN RUNNER)",
+        "DESIGN probes: sha256 of all six freeze artifacts; induction probe for all eleven families; M-SPARSE-TOKENS-MISSED; unittest 3/3 under PYTHONPATH=src; full two-run probe-mode execution (all gates PASS, determinism True)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "All arms are built from the SAME eleven frozen induced mechanisms (same carrier, same observations); the only mutated object is verification_rule['parameter_supports'] via the real ingest_declaration code path for certificate arms, direct support substitution for B-ORACLE/A-RAW, or recorded gate for provenance/adequacy withholding. Arms separate on the frozen bank: T-SCORED-ADEQ within-envelope FA=0 vs C-FIAT-ADEQ FA=6, C-FIAT-OVERTRUST FA=3, C-FROZEN-CERT FA=18, A-RAW-DECL FA=18 (discriminating axis is safety, not coverage: all reach 1.0); A-NO-ADEQ FA=6 isolates adequacy, A-NO-PROV FA=3 isolates measured provenance, A-NO-GROW FA=9 isolates growth; B-SHIPPED and A-WITHHOLD-ALL anchor the floor at FA=0/coverage 0.4545; B-ORACLE anchors the ceiling at FA=0/coverage 1.0. No ceiling/floor degeneracy where every arm is forced identical. Cost is identical across arms except the growth step, which is separately attributed.",
+      "evidence_refs": [
+        "spec.json#baselines / #positive_control / #null_control",
+        "prereg.md FROZEN RUNNER arm-construction function arm_decl / arm_substitute_true",
+        "DESIGN probe arm table: T=0, C-FIAT=6, C-FIAT-OVER=3, C-FROZEN=18, A-RAW=18, A-NO-ADEQ=6, A-NO-PROV=3, A-NO-GROW=9, B-SHIPPED=0, A-WITHHOLD=0, B-ORACLE=0"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every gated control has a reachable failure mode on the exact code path it guards. PC-PROV-SCORE-SEPARATES fails if scorer does not separate trusted from untrusted; PC-PROV-ADMITS-TRUSTED fails if inferred allowlist spuriously refuses trusted origin; PC-PROV-REFUSES-UNTRUSTED fails if provenance gate is inert; PC-PROV-REFUSES-SPARSE fails if growth surfaces budget-sparse over-accept (making provenance redundant); PC-ADEQUACY-CLASSIFIES/DETECTS/PASSES fail if detector is insensitive or reject-everything; PC-ADEQ-NEEDED/PC-PROV-NEEDED/PC-GROW-NEEDED fail if corresponding ablation does not false-accept (redundant mechanism); PC-CERT-ADMITS-SOUND fails if certificate rejects sound declaration; PC-GROW-CATCHES-PROBEABLE fails if growth does not surface probeable over-accept; PC-UNSAFE-RAW (FA=18) proves oracle is not blind; PC-DISCRIMINATION and PC-MEASURED-TRUST-DOMINATES-OVERTRUST prove T dominates incumbents; PC-INGEST-REFUSED-ABSTAINS exercises the REAL refusal path; NC/A-WITHHOLD-ALL proves the null floor; PC-GROW-MISSES-SPARSE and BP-TRUSTED-SPARSE-FAILS prove the budget-sparsity boundary is genuinely reachable (T boundary B11 FA=3). The DESIGN probe exercised every one with the real carrier: all fired as specified.",
+      "evidence_refs": [
+        "spec.json#positive_control / #null_control",
+        "prereg.md FROZEN RUNNER controls block",
+        "DESIGN probe controls: all 20 controls pass_=True (provenance separation 1.0/0.25; allowlist O1-O4; adequacy classification B7/B8 False; ablations 6/3/9; incumbents 6/3/18; boundary FA=3; determinism True)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is the SHIPPED carrier code path (SpiderKernel.ingest_declaration + certify_declaration), invoked unchanged, gated by the measured provenance score and the syntactic adequacy detector. The DESIGN probe exercised it on all eleven families: for the four trusted SOUND families the declaration was CERTIFIED and the support widened (their IN items resolved EXECUTABLE); for the three probeable evaders growth fed negatives and ingest_declaration REFUSED while preserving the support (PC-INGEST-REFUSED-ABSTAINS PASS); for the untrusted-origin sparse evader the provenance gate withheld it (conservative support byte-equal); for the two alphabet evaders the adequacy detector withheld them. T-SCORED-ADEQ resolved 44/44 within-envelope IN items with FA=0, so the treatment is structurally live and executable, not dead. A structurally dead treatment would be caught by T coverage <= B-SHIPPED (MIXED) or by a failing gate (MEASUREMENT_INVALID), never silently reported as a negative. No product code is written, so treatment_liveness concerns only the invoked shipped path, which is shown live. As a Product experiment targeting C-PARAM-INHERIT, treatment_liveness must be PASS (not NOT_APPLICABLE) and it is.",
+      "evidence_refs": [
+        "prereg.md FROZEN RUNNER arm_decl / refusal_violation_check / run_once",
+        "DESIGN probe: T-SCORED-ADEQ coverage 44/44=1.0, FA=0; M-T-CERTIFIED-COUNT=5, M-T-PROV-REFUSED-COUNT=1, M-T-ADEQ-REFUSED-COUNT=2; ingest refuse preserved"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts lists exactly the six existing immutable files whose identity can change the interpretation: pyproject.toml, src/spider/__init__.py, src/spider/models.py, src/spider/registry.py, src/spider/kernel.py (the SHIPPED carrier that this measurement-only packet invokes but does NOT modify), and tests/test_kernel.py (regression suite). All six exist with sha256 recorded at DESIGN (verified: kernel.py sha256 matches 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3). The frozen bank, provenance ledgers, adequacy detector, oracle, label rule, probe space, allowlist inference, and decision function are all in-process inside the FROZEN RUNNER block embedded in prereg.md, which is bound by freeze.json.hashes['prereg.md']; there is no external dataset or fixture. No timing-dependent quantity participates in the determinism equality projection. No unbound mutable local code/data/task-bank/fixture dependency remains.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "research/experiments/EXP-PRODUCT-38210179652/freeze.json#artifact_hashes (precedent shape)",
+        "prereg.md sections 5 and 7; DESIGN probe verified all six artifact sha256 and a full two-run execution"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The PYTHONPATH=src requirement for unittest discovery is a known configuration constraint, not a missing prerequisite; it is recorded in the FROZEN RUNNER and will be enforced at EXECUTE time.",
+    "The min_confidence default of 0.8 is a constructor parameter, not a class attribute; the DESIGN probe instantiates the kernel correctly so this does not affect measurement validity.",
+    "The adequacy detector is deliberately conservative (flags declarations whose true alphabet exceeds PROBE_ALPHA as INADEQUATE even if sound); this is a disclosed representation limit (V11), not a design defect."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass on the frozen design. The decision rule is total and all branches are reachable; every hard prerequisite is available now; treatment and baselines separate on the frozen task population; all positive/negative controls have live failure modes on the exact scoring code path; the shipped-carrier treatment is structurally live and executable; and all mutable local dependencies are bound in freeze_artifacts or the frozen runner. No blocking findings. The experiment is eligible for freeze.",
+  "evidence_refs": [
+    "spec.json",
+    "prereg.md",
+    "request.json",
+    "DESIGN probe artifacts (EXP_PROBE_MODE=1)",
+    "Verified freeze artifact hashes",
+    "Verified induction and probe-space properties"
+  ]
+}
