@@ -1,50 +1,1589 @@
 {
+  "schema_version": 1,
   "experiment_id": "EXP-RUNTIME-38194351940",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
-  "freeze_eligibility": {
-    "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "claim_scope_note": "C-MEAS-VALID only (registry owner lane runtime). This experiment produces substrate-validity evidence for a credential-free dynamic-range bank and nothing else: it does not promote any mechanism to Product Core, does not change C-MEAS-VALID status, and does not authorize the four-arm benchmark (which additionally requires B1 and B3).",
+  "question": "Can a hardened V3 credential-free bank be constructed and certified pre-freeze such that its success requires mechanism- or composition-dependent (memory-carried) behaviour -- supplying a memory-robust, non-ceiling dynamic range that a frozen within-session memoryful comparator (full commit-receipt log / chain-to-precursor-distance state) cannot reach -- thereby discharging readiness blocker B2 for the flagship four-arm inheritance benchmark without invoking or requiring an LLM endpoint?",
+  "hypothesis": "The predecessor's (K-1)/K dynamic range was a within-session receipt-retention artifact because the required value (a one-time session binding token) was literally present in a retained commit receipt. Moving the required knowledge out of the scored session -- into a hidden bank-wide affine mechanism M(x) = (a*x + b) mod P, exposed only as N_CAL=3 labelled (x, M(x)) examples in a SEPARATE calibration session -- makes within-session retention insufficient by construction (the scored session contains no labelled (x, M(x)) pair, no mechanism body and no answer) AND makes cross-session retention of the raw examples insufficient (nearest-input replay returns a stored y, not M(x_q)); only cross-session COMPILATION of (a, b) reaches the treatment. Predicted success rates at novelty >= 0.50: T-MECHANISM-INHERIT = PC-EXACT-REPLAY = B-CROSS-SESSION-COMPILE = 1.0; B-WITHIN-SESSION-RECEIPT = B-WITHIN-SESSION-COMPOSE = B-RETRIEVAL-REPLAY = B-MEMORYLESS = (K-1)/K = 0.875 (F1) / 0.900 (F2). Overall predicted decision: ROBUST.",
+  "falsifier": "The range does NOT survive retention-only comparators: for at least one family at a scored band, a retention comparator (B-WITHIN-SESSION-RECEIPT, B-WITHIN-SESSION-COMPOSE or B-RETRIEVAL-REPLAY) reaches >= COMPARATOR_MAX (0.95), OR the treatment margin over it is < MARGIN_FLOOR (0.05), OR fewer than MIN_DISTINCT_DIMS (2) of the four counters are distinct (decision PARTIAL or COLLAPSED). A V1-V8 gate failure instead yields MEASUREMENT_INVALID (infrastructure/validity failure, not a scientific result).",
+  "baselines": [
+    {
+      "id": "B-WITHIN-SESSION-RECEIPT",
+      "role": "retention comparator (primary)",
+      "retention_scope": "within one session; full commit-receipt log",
+      "policy": "one session per task batch; retains the full commit-receipt log and answers the chain task from any stored receipt; reset at the session boundary.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "nearest_ancestor": "EXP-RUNTIME-38182129488 B-MEMORY-RECEIPT (which collapsed the V2 range to T). Here it retains the calibration receipts but the labelled mechanism examples live in a DIFFERENT session, so it cannot recover M(x_q)."
     },
-    "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-WITHIN-SESSION-COMPOSE",
+      "role": "retention comparator",
+      "retention_scope": "within one session; full commit-receipt log + attempts composition",
+      "policy": "as B-WITHIN-SESSION-RECEIPT but also attempts to compose retained receipts; still reset at the session boundary.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      }
     },
-    "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-RETRIEVAL-REPLAY",
+      "role": "retention comparator (cross-session retention of raw examples)",
+      "retention_scope": "across the session boundary; stores the raw (x, y) calibration examples",
+      "policy": "retains the raw calibration pairs across the boundary and, on the scored chain task, retrieves the nearest stored x and replays its stored y. This is the strongest retention-only scope: it hoards the raw data, not just the compiled mechanism.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      }
     },
-    "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    {
+      "id": "B-MEMORYLESS",
+      "role": "baseline",
+      "retention_scope": "none; fresh session per task",
+      "policy": "fresh session per task, retains nothing.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      }
+    }
+  ],
+  "positive_control": "PC-EXACT-REPLAY (oracle): given the mechanism (a, b) by construction (as though it had compiled them from the calibration session); commits every task and answers the chain task exactly. Predicted 1.0 at every band. Complementary identity control B-CROSS-SESSION-COMPILE: a comparator allowed to carry the compiled (a, b) across the boundary -- predicted success- and counter-identical to T (disclosed, see decision_rule.identity_disclosure). Both confirm the substrate is solvable and that the calibration->scored transfer is the causal variable.",
+  "null_control": "NC-MECHANISM-OFF (sensitivity): expose the required chain answer directly (as the chain task's resource_id) so no mechanism is needed. The within-session retention comparator then reaches 1.0 and the certificate becomes FALSE (probe-measured F1 rate 1.0). Complementary nulls: NC-REPEAT-INPUT (the wrong answer for a repeated input returns 400 with no leak) and NC-EXAMPLES-ISOLATION (no calibration example or mechanism body ever appears in a scored session).",
+  "measurement_validity": {
+    "gates": {
+      "V1_code_fidelity_manifest": "EXECUTE records sha256 of every authored harness file plus python3 --version in result.json.artifacts; the harness must reproduce spec.design_satisfiability_probe.source_sha256 exactly before scoring.",
+      "V2_transport_conformance": "the full HTTP surface (all endpoints, methods and status codes in substrate.endpoints) passes a conformance gate before scoring.",
+      "V3_no_leak": "NC-NO-LEAK (F-LEAK gate) clean: no mechanism, calibration example or answer appears in any scored session/task/error body; the calibration y appears only inside its own calibration receipt and only once.",
+      "V4_determinism": "two identical scored runs produce byte-identical per-cell outcomes; all derivations are deterministic from RUN_SEED (no secrets, no clock, no os.urandom).",
+      "V5_arm_liveness": "T-MECHANISM-INHERIT = 1.0 and PC-EXACT-REPLAY = 1.0 at every band, and all seven arms execute end-to-end.",
+      "V6_counter_instrumentation": "all four counters (http_calls, retrieval_calls, verification_calls, repair_calls) are recorded with matched accounting for every arm and cell.",
+      "V7_matched_correctness": "exact-match scoring; matched_correctness == success_rate for every arm and cell.",
+      "V8_sensitivity": "EXECUTE evaluates five V8 sub-gates: V8_ceiling_band (novelty 0.0 -> all arms 1.0), V8_mechanism_off (exposed answer drives the within-session comparator to >= 0.95), V8_identity_disclosure (B-CROSS-SESSION-COMPILE == T), V8_retention_counter_distinctness (>= MIN_DISTINCT_DIMS dimensions distinct between T and B-WITHIN-SESSION-RECEIPT), V8_mechanism_nondegenerate (a != 0, distinct calibration inputs, exact affine recovery, no query collision over >= 50 instances). The retention ladder (no retention-only scope closes the range) is a declared CONTROL and predictor, deliberately NOT a validity gate: a closing retention scope is a scientific COLLAPSED/PARTIAL outcome, not a measurement failure."
     },
-    "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "invalid_condition": "any V1-V8 failure -> status MEASUREMENT_INVALID / decision MEASUREMENT_INVALID; no scientific ROBUST/PARTIAL/COLLAPSED is reported.",
+    "python": "3.12.15 (probe/selftest); re-recorded at EXECUTE via python3 --version in the V1 manifest"
+  },
+  "decision_rule": {
+    "retention_certifies": "For a retention comparator c in {B-WITHIN-SESSION-RECEIPT, B-WITHIN-SESSION-COMPOSE, B-RETRIEVAL-REPLAY} at a scored cell (family, novelty>=0.50): TRUE iff c.success_rate < COMPARATOR_MAX (0.95) AND every arm success_rate >= CORRECTNESS_FLOOR (0.80) AND matched_correctness >= 0.80 AND (T.success_rate - c.success_rate) >= MARGIN_FLOOR (0.05).",
+    "retention_ladder_metric": "the retention frontier is the set of retention scopes whose success_rate reaches within MARGIN_FLOOR of T (i.e. closes the range); the predictor reports it for every scored cell as retention_ladder. A non-empty closing set falsifies the design intent; the design succeeds when the set is empty at all scored cells.",
+    "ROBUST": "gates V1-V8 all pass AND every retention comparator retention_certifies at every scored cell (all 3 comparators x 2 families x 2 scored bands). The range survives both within-session receipt memory and cross-session raw-example retention.",
+    "PARTIAL": "gates V1-V8 all pass AND NOT ROBUST AND at least one retention comparator retention_certifies at >= 1 family/scored band while at least one comparator does not. The range survives some retention scopes but collapses for another.",
+    "COLLAPSED": "gates V1-V8 all pass AND no retention comparator retention_certifies at any family or scored band.",
+    "MEASUREMENT_INVALID": "any validity gate V1-V8 fails -> infrastructure/validity failure, not a scientific result.",
+    "precedence": "MEASUREMENT_INVALID (any V1-V8 failure, including liveness V5, leak V3 and the V8 sensitivity sub-gates) first; then ROBUST; else PARTIAL; else COLLAPSED. No gate failure can be reported as a scientific ROBUST/PARTIAL/COLLAPSED.",
+    "constants": {
+      "COMPARATOR_MAX": 0.95,
+      "CORRECTNESS_FLOOR": 0.8,
+      "MARGIN_FLOOR": 0.05,
+      "MIN_DISTINCT_DIMS": 2,
+      "COUNTER_DIMS": [
+        "http_calls",
+        "retrieval_calls",
+        "verification_calls",
+        "repair_calls"
+      ],
+      "N_CAL": 3,
+      "SCORED_SESSIONS_PER_CELL": 20
     },
-    "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+    "identity_disclosure": "B-CROSS-SESSION-COMPILE (a comparator allowed to carry the compiled mechanism across the boundary) is PREDICTED to be success- and counter-identical to T (margin 0). This is disclosed as a positive identity control and is NOT counted among the retention comparators. It is non-vacuous because (a) the certificate requires a positive margin, so an identical comparator can never certify, and (b) the discriminating signal is carried by the retention comparators (which retain only receipt logs or raw examples, never the compiled mechanism). This makes the measurement a statement about retention-vs-compilation, not about an independent mechanism.",
+    "branch_reachability": "Verified at DESIGN by the rule-level classifier classify() over synthetic worlds: all four labels inhabited (branch_reachability = {ROBUST, PARTIAL, COLLAPSED, MEASUREMENT_INVALID} each own label). ROBUST is the predicted actual measurement; PARTIAL is reachable via a synthetic world in which only some comparators certify; COLLAPSED via NC-MECHANISM-OFF (exposed answer) and via any world where a retention scope closes the range; MEASUREMENT_INVALID via any gate failure.",
+    "outcome_enum_mapping": {
+      "ROBUST": "SUPPORTS",
+      "PARTIAL": "MIXED",
+      "COLLAPSED": "FALSIFIES",
+      "MEASUREMENT_INVALID": "NOT_APPLICABLE"
+    },
+    "result_status_mapping": {
+      "ROBUST": "COMPLETE",
+      "PARTIAL": "COMPLETE",
+      "COLLAPSED": "COMPLETE",
+      "MEASUREMENT_INVALID": "MEASUREMENT_INVALID"
+    },
+    "mapping_note": "EXECUTE records result.json.decision_label = the frozen label (ROBUST/PARTIAL/COLLAPSED/MEASUREMENT_INVALID) and maps it via outcome_enum_mapping for the canonical outcome enum and via result_status_mapping for status. The ROBUST/PARTIAL/COLLAPSED distinction is the measurement and must not be collapsed into the enum."
+  },
+  "product_consequence_positive": "ROBUST: a credential-free, deterministic bank is constructible whose dynamic range is NOT reachable by a within-session full-receipt-memory comparator (margin >= 0.05 at every scored cell) and is NOT reachable by cross-session retention of the raw calibration examples (the separation is compile-vs-memorize over identical raw information). This discharges readiness blocker B2 for a later cycle: the flagship four-arm benchmark can be gated by a validated dynamic-range certificate rather than an artifact. No mechanism is promoted to Product Core; this supplies substrate-validity evidence for C-MEAS-VALID only.",
+  "product_consequence_negative": "PARTIAL or COLLAPSED: the claimed separation is reproducible by a retention-only comparator even after hardening (a bounded synthetic substrate-class negative). The benchmark must NOT be built on this bank; Product receives the measured comparator frontier (which retention scopes close the range and at which margin) and the concrete hardening requirement. This is a first-class decision-changing negative, not an infrastructure failure. Because the mandate stop rule forbids iterating banks indefinitely, a negative closes the current V3 thread and routes the dynamic-range question back to the Global Research Director.",
+  "estimated_cost": {
+    "browser_work": 0,
+    "model_calls": 0,
+    "model_tokens": 0,
+    "network": "loopback only (127.0.0.1 ephemeral port)",
+    "external_data_or_credentials": 0,
+    "scored_arm_family_novelty_cells": 56,
+    "bank_instances_scored": 1120,
+    "runs": 2,
+    "sessions_per_cell": 20,
+    "task_submissions": "~30000 commit requests across both determinism runs",
+    "wall_clock_minutes_estimate": "15-40",
+    "notes": "pure local CPU and Python stdlib; the DESIGN probe (168 instances) + selftest already ran in ~89s each. One EXECUTE matrix run scores 7 arms x 2 families x 4 novelties x 20 sessions = 1120 bank instances; the matrix is run twice for the V4 determinism gate. model_calls/tokens are zero by construction; the LLM endpoint B3 is NOT required."
+  },
+  "expected_information_gain": "Decisive for B2 and non-repeating. It converts the predecessor's disclosed, uninstrumented NC-MEMORYFUL ceiling into a pre-freeze-certified measurement of whether a hardened bank can separate its treatment from BOTH a within-session full-receipt-memory comparator AND a cross-session raw-example-retention comparator. The design is honest that ROBUST is the by-construction prediction (no retention-only scope can produce a fresh mechanism output); the decisive information is therefore whether the measured retention frontier is actually empty at every scored cell (a retained scope reaching within MARGIN_FLOOR of T is the scientific negative), together with the certified margins and counter accounting. Positive -> the bank-design change that discharges B2 is identified and certified. Negative -> a bounded substrate-class negative with the measured retention frontier, which stops the benchmark from being built on an invalid substrate and redirects design. The experiment cannot return 'neither'; the do-not-repeat boundary (V2 memoryless certificate) is respected.",
+  "substrate": {
+    "class_id": "SBA-CREDENTIAL-FREE-V3",
+    "name": "Session-Mechanism-Inheritance",
+    "derived_from": "SBA-CREDENTIAL-FREE-V2 (EXP-RUNTIME-38169622704)",
+    "description": "Credential-free, deterministic, stdlib-only multi-task HTTP bank. Across a session boundary the bank requires the agent to CARRY (compile) a hidden bank-wide affine mechanism M(x) = (a*x + b) mod P, of which it sees only N_CAL=3 labelled examples in a separate calibration session. The required chain answer is never present in any scored body, so retention-only scopes cannot reach the treatment.",
+    "credentials_required": false,
+    "external_dependencies": [],
+    "transport": "stdlib http.server.ThreadingHTTPServer on 127.0.0.1 ephemeral port; stdlib urllib.request client.",
+    "run_seed": "SPIDER-RUNTIME-SBA-V3-2026",
+    "randomness": "none; all derivations deterministic (no secrets, no clock, no os.urandom).",
+    "cycle_id": "38193775999",
+    "mechanism": {
+      "P": 1099511627689,
+      "P_note": "P = 2**40 - 87 is prime (Miller-Rabin, bit_length 40); every difference of distinct inputs is invertible mod P.",
+      "M": "M(x) = (a*x + b) mod P",
+      "a_derivation": "a = di(P-1, secret, family, idx, 'a') + 1  (in [1, P-1]; never 0)",
+      "b_derivation": "b = di(P, secret, family, idx, 'b')  (in [0, P-1])",
+      "secret_derivation": "secret = sha256(RUN_SEED | 'server_secret')[:32]",
+      "di": "di(n, secret, *parts) = int(sha256(str(n) + '|' + secret + '|' + '|'.join(parts))[:16], 16) % n",
+      "recovery": "exact unique affine solve from any 3 distinct (x, y) pairs mod P (since P is prime and the x are distinct); the frozen harness verifies a != 0, distinct calibration inputs, exact recovery and no query collision over 100 sampled bank instances (mechanism_nondegeneracy.ok == true)."
+    },
+    "families": {
+      "F1-RECORDS": 8,
+      "F2-WIDGETS": 10
+    },
+    "tasks_per_session_K": {
+      "F1-RECORDS": 8,
+      "F2-WIDGETS": 10
+    },
+    "novelty_ladder": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "scoring_band": "novelty >= 0.50",
+    "n_cal": 3,
+    "sessions_per_cell": 20,
+    "session_layout": {
+      "calibration_session": "phase='calibration'; exists only when novelty >= 0.50. Its tasks at indices 0..N_CAL-1 reveal x in the task body and, on success, y=M(x) in the receipt. It never reveals a, b or the mechanism body.",
+      "scored_session": "phase='scored'. All tasks are ordinary public tasks except one 'chain' task whose body reveals a fresh unlabelled x_q and which requires the answer M(x_q) (novelty 0.50, index K-3) or M(M(x_q)) (novelty 0.75, index K-1). No labelled (x, M(x)) pair, no mechanism body and no answer ever appear in a scored session.",
+      "requires_schema": "novelty >= 0.25",
+      "low_novelty_band": "novelty < 0.50: no calibration session and no chain task are engaged; every arm reaches 1.0 (ceiling band; the decision rule is not evaluated there)."
+    },
+    "endpoints": [
+      "GET /healthz -> {status:'ok'}",
+      "GET /api/v1/{family}/session?novelty={n}&idx={i}&phase={calibration|scored} -> session metadata (never the mechanism)",
+      "GET /api/v1/{family}/task/{index}?token=...&epoch=... -> task body {index, requires_schema, resource_id, is_chain}; the chain task's resource_id is null when novelty >= 0.50",
+      "POST /api/v1/{family}/commit -> 200 receipt | 400 (bad_session/bad_index/schema_required/bad_resource/no_answer) | 409 (already_committed / answer_already_used)"
+    ],
+    "no_leak_property": "the required chain answer M(x_q) (and the composed M(M(x_q))) appears in no session, task or error body; calibration labels appear only in their own calibration receipts; the wrong answer returns 400 with no leak."
+  },
+  "arms": {
+    "T-MECHANISM-INHERIT": {
+      "role": "treatment",
+      "memory_class": "carries the compiled mechanism across the session boundary",
+      "policy": "runs the calibration session, recovers (a, b) from 3 labelled examples by exact affine solve mod P, recomputes the required chain answer in the scored session.",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_instance": {
+        "F1-RECORDS": {
+          "0.5": {
+            "http_calls": 34,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 0
+          },
+          "0.75": {
+            "http_calls": 34,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 0
+          }
+        },
+        "F2-WIDGETS": {
+          "0.5": {
+            "http_calls": 42,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 0
+          },
+          "0.75": {
+            "http_calls": 42,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 0
+          }
+        }
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "role": "positive control (oracle mechanism)",
+      "memory_class": "given (a, b) by construction",
+      "policy": "answered the chain task from the oracle mechanism supplied by construction; commits every task.",
+      "predicted_success_rate_at_band": 1.0
+    },
+    "B-CROSS-SESSION-COMPILE": {
+      "role": "identity positive control (disclosed)",
+      "memory_class": "carries the compiled mechanism across the boundary by construction",
+      "policy": "identity-disclosure comparator; carries (a, b) across the boundary and answers exactly like T.",
+      "predicted_success_rate_at_band": 1.0,
+      "identity_disclosure": "PREDICTED success- and counter-identical to T; NOT a certificate comparator."
+    },
+    "B-WITHIN-SESSION-RECEIPT": {
+      "role": "retention comparator (primary)",
+      "memory_class": "within-session full commit-receipt log; reset at the boundary",
+      "policy": "retains the full receipt log within a session and answers the chain task from any stored receipt. Because the labelled examples live in a separate calibration session, its scored-session receipts contain no (x, M(x)) pair; it therefore fails the chain task by construction.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_instance": {
+        "F1-RECORDS": {
+          "0.5": {
+            "http_calls": 36,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 36,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 1
+          }
+        },
+        "F2-WIDGETS": {
+          "0.5": {
+            "http_calls": 44,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 44,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 1
+          }
+        }
+      }
+    },
+    "B-WITHIN-SESSION-COMPOSE": {
+      "role": "retention comparator",
+      "memory_class": "within-session full commit-receipt log; attempts composition",
+      "policy": "as B-WITHIN-SESSION-RECEIPT but also attempts to compose retained receipts; still reset at the boundary.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      }
+    },
+    "B-RETRIEVAL-REPLAY": {
+      "role": "retention comparator (cross-session raw-example retention)",
+      "memory_class": "cross-session; stores the raw calibration (x, y) examples",
+      "policy": "retains the raw calibration pairs across the boundary and on the chain task retrieves the nearest stored x and replays its stored y. Wrong on a fresh x_q by construction.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_instance": {
+        "F1-RECORDS": {
+          "0.5": {
+            "http_calls": 36,
+            "retrieval_calls": 8,
+            "verification_calls": 16,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 36,
+            "retrieval_calls": 8,
+            "verification_calls": 16,
+            "repair_calls": 1
+          }
+        },
+        "F2-WIDGETS": {
+          "0.5": {
+            "http_calls": 44,
+            "retrieval_calls": 10,
+            "verification_calls": 20,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 44,
+            "retrieval_calls": 10,
+            "verification_calls": 20,
+            "repair_calls": 1
+          }
+        }
+      }
+    },
+    "B-MEMORYLESS": {
+      "role": "baseline",
+      "memory_class": "none; fresh session per task",
+      "policy": "fresh session per task, retains nothing.",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_instance": {
+        "F1-RECORDS": {
+          "0.5": {
+            "http_calls": 41,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 41,
+            "retrieval_calls": 0,
+            "verification_calls": 16,
+            "repair_calls": 1
+          }
+        },
+        "F2-WIDGETS": {
+          "0.5": {
+            "http_calls": 51,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 1
+          },
+          "0.75": {
+            "http_calls": 51,
+            "retrieval_calls": 0,
+            "verification_calls": 20,
+            "repair_calls": 1
+          }
+        }
+      }
     }
   },
-  "freeze_artifacts": []
+  "counters": {
+    "dims": [
+      "http_calls",
+      "retrieval_calls",
+      "verification_calls",
+      "repair_calls"
+    ],
+    "scoring": "exact-match; matched_correctness == success_rate",
+    "probe_status": {
+      "note": "measured over 3 instances per (arm, family, novelty) cell in --mode probe; EXECUTE scores 20 sessions/cell.",
+      "T_vs_within_session_receipt_distinct_dims": {
+        "F1-RECORDS": {
+          "B-MEMORYLESS": 2,
+          "B-RETRIEVAL-REPLAY": 3,
+          "B-WITHIN-SESSION-COMPOSE": 2,
+          "B-WITHIN-SESSION-RECEIPT": 2
+        },
+        "F2-WIDGETS": {
+          "B-MEMORYLESS": 2,
+          "B-RETRIEVAL-REPLAY": 3,
+          "B-WITHIN-SESSION-COMPOSE": 2,
+          "B-WITHIN-SESSION-RECEIPT": 2
+        }
+      },
+      "per_instance_prediction_example_F1_0.5": {
+        "T-MECHANISM-INHERIT": {
+          "http_calls": 34,
+          "retrieval_calls": 0,
+          "verification_calls": 16,
+          "repair_calls": 0
+        },
+        "B-WITHIN-SESSION-RECEIPT": {
+          "http_calls": 36,
+          "retrieval_calls": 0,
+          "verification_calls": 16,
+          "repair_calls": 1
+        },
+        "B-RETRIEVAL-REPLAY": {
+          "http_calls": 36,
+          "retrieval_calls": 8,
+          "verification_calls": 16,
+          "repair_calls": 1
+        },
+        "B-MEMORYLESS": {
+          "http_calls": 41,
+          "retrieval_calls": 0,
+          "verification_calls": 16,
+          "repair_calls": 1
+        }
+      }
+    }
+  },
+  "controls": {
+    "NC-MECHANISM-OFF": {
+      "kind": "null_control (sensitivity)",
+      "assertion": "exposing the required chain answer (as resource_id) so no mechanism is needed makes the within-session retention comparator reach 1.0 and destroys the certificate.",
+      "probe_status": {
+        "k": 8,
+        "successes": 8,
+        "within_session_f1_rate": 1.0
+      },
+      "evidence_ref": "spec.json design_satisfiability_probe.output.mechanism_off (F1 within_session rate 1.0)"
+    },
+    "NC-CEILING-BAND": {
+      "kind": "band sensitivity",
+      "assertion": "at novelty 0.0 the mechanism is disengaged -> all seven arms 1.0; the decision rule is not evaluated there.",
+      "probe_status": true
+    },
+    "NC-EXAMPLES-ISOLATION": {
+      "kind": "attribution",
+      "assertion": "no calibration example, mechanism body or answer ever appears in a scored session body.",
+      "probe_status": {
+        "no_cal_examples_in_scored_bodies": true,
+        "no_mechanism_in_scored_session_body": true,
+        "no_answer_in_scored_chain_body": true,
+        "chain_task_resource_null": true
+      }
+    },
+    "NC-REPEAT-INPUT": {
+      "kind": "attribution",
+      "assertion": "the wrong answer for a repeated input returns 400 with no leak; the correct answer is single-use (409 on repeat).",
+      "probe_status": {
+        "wrong_answer_400_no_leak": true,
+        "correct_answer_200": true,
+        "correct_answer_single_use_409": true,
+        "chain_receipt_no_answer": true
+      }
+    },
+    "NC-MECHANISM-NONDEGENERATE": {
+      "kind": "identifiability",
+      "assertion": "M is a genuine affine map with non-zero slope on distinct inputs: a != 0, calibration inputs distinct, exact affine recovery, no query collision with calibration inputs.",
+      "probe_status": {
+        "a_zero": 0,
+        "duplicate_x": 0,
+        "instances": 100,
+        "min_query_gap": 399759921,
+        "ok": true,
+        "query_collision": 0,
+        "solve_fail": 0
+      }
+    },
+    "NC-IDENTITY-DISCLOSURE": {
+      "kind": "identity positive control",
+      "assertion": "B-CROSS-SESSION-COMPILE is success- and counter-identical to T (a disclosed identity, not a certificate comparator).",
+      "probe_status": true
+    },
+    "NC-TOKEN-UNIQUENESS": {
+      "kind": "derivation sanity",
+      "assertion": "session tokens are pairwise distinct over the sampled derivations.",
+      "probe_status": {
+        "collisions": 0,
+        "sampled": 160
+      }
+    },
+    "NC-NO-LEAK": {
+      "kind": "F-LEAK contamination control",
+      "assertion": "all 15 protocol invariants hold; no mechanism/answer/calibration label leaks into a scored body.",
+      "probe_status": {
+        "cal_receipt_reveals_y_once": true,
+        "cal_recommit_409_no_y": true,
+        "cal_session_no_mechanism": true,
+        "cal_task_no_y": true,
+        "cal_task_reveals_x": true,
+        "chain_receipt_no_answer": true,
+        "chain_task_resource_null": true,
+        "chain_task_reveals_x": true,
+        "correct_answer_200": true,
+        "correct_answer_single_use_409": true,
+        "no_answer_in_scored_chain_body": true,
+        "no_cal_examples_in_scored_bodies": true,
+        "no_mechanism_in_scored_session_body": true,
+        "session_never_reveals_mechanism": true,
+        "wrong_answer_400_no_leak": true
+      }
+    },
+    "NC-RETENTION-LADDER": {
+      "kind": "core manipulation",
+      "assertion": "no retention-only scope (within-session receipt, within-session compose, cross-session raw-example replay, memoryless) closes the range at any scored cell.",
+      "probe_status": {
+        "F1-RECORDS|0.5": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.875,
+            "B-RETRIEVAL-REPLAY": 0.875,
+            "B-WITHIN-SESSION-RECEIPT": 0.875
+          }
+        },
+        "F1-RECORDS|0.75": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.875,
+            "B-RETRIEVAL-REPLAY": 0.875,
+            "B-WITHIN-SESSION-RECEIPT": 0.875
+          }
+        },
+        "F2-WIDGETS|0.5": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.9,
+            "B-RETRIEVAL-REPLAY": 0.9,
+            "B-WITHIN-SESSION-RECEIPT": 0.9
+          }
+        },
+        "F2-WIDGETS|0.75": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.9,
+            "B-RETRIEVAL-REPLAY": 0.9,
+            "B-WITHIN-SESSION-RECEIPT": 0.9
+          }
+        }
+      }
+    }
+  },
+  "contamination_controls": {
+    "F-LEAK": {
+      "assertion": "the required chain answer and the mechanism never appear in any session/task/error body or log line; calibration labels appear only in their own calibration receipts.",
+      "gate": "V3_no_leak"
+    },
+    "F-CONTROL-SCOPE": {
+      "assertion": "the certificate comparators retain only receipt logs or raw (x,y) examples across the boundary; only the disclosed identity control B-CROSS-SESSION-COMPILE carries the compiled mechanism.",
+      "gate": "V8_identity_disclosure"
+    }
+  },
+  "retention_lattice_arithmetic": {
+    "note": "Unlike the predecessor's (K-1)/K receipt-distance artifact, the V3 hard problem is exactly one task per scored session (the chain task) whose answer is M(x_q) or M(M(x_q)). A retention-only scope cannot produce it: within-session receipts contain no labelled pair; cross-session raw-example retention returns a stored y != M(x_q) for a fresh x_q; a memoryless scope sees nothing. Hence every retention comparator succeeds on exactly the K-1 non-chain tasks and fails the chain task: rate = (K-1)/K.",
+    "closed_form": {
+      "F1-RECORDS": {
+        "K": 8,
+        "rate": "7/8 = 0.875"
+      },
+      "F2-WIDGETS": {
+        "K": 10,
+        "rate": "9/10 = 0.900"
+      }
+    },
+    "band": "[CORRECTNESS_FLOOR, COMPARATOR_MAX) = [0.80, 0.95)",
+    "margin": {
+      "F1-RECORDS": 0.125,
+      "F2-WIDGETS": 0.1
+    },
+    "matches_probe": true
+  },
+  "design_satisfiability_probe": {
+    "kind": "The frozen harness is embedded in full (V3 substrate construction + the affine mechanism + seven arm policies + declared controls + scored-matrix driver + full V1-V8 gate evaluator + frozen retention decision rule). Only its non-outcome-bearing --mode probe and --mode selftest paths were executed at DESIGN. The --mode scored path (matrix run twice for determinism, all gates, decision rule) is NOT executed at DESIGN.",
+    "executed_mode": "probe",
+    "harness_modes": {
+      "probe": "executed at DESIGN (non-outcome-bearing): transport, all protocol invariants, arm liveness, mechanism non-degeneracy, controls, decision-branch reachability, determinism.",
+      "selftest": "executed at DESIGN (non-outcome-bearing): exercises assemble_decision() (all gates + the retention decision rule) on probe-derived synthetic cells.",
+      "scored": "EXECUTE-only (outcome-bearing): 56 cells x 20 sessions run twice (V4), controls, transport/leak conformance, all V1-V8 gates and the frozen decision rule; NOT executed at DESIGN."
+    },
+    "determinism": "two probe runs byte-identical (probe_c == probe_d); two selftest runs byte-identical (selftest_d == selftest_e).",
+    "source": "#!/usr/bin/env python3\n\"\"\"DESIGN-time satisfiability probe for EXP-RUNTIME-38194351940.\n\nSubstrate class SBA-CREDENTIAL-FREE-V3 (Session-Mechanism-Inheritance).\n\nScientific question (director mandate on C-MEAS-VALID, action REOPEN):\n  The frozen SBA-CREDENTIAL-FREE-V2 (K-1)/K dynamic range collapsed onto a\n  comparator carrying a full within-session commit-receipt log\n  (EXP-RUNTIME-38182129488: B-MEMORY-RECEIPT rate 1.0, margin 0.0).  Can a\n  hardened V3 credential-free bank be constructed whose success requires\n  MECHANISM- or COMPOSITION-DEPENDENT behaviour -- i.e. carrying a compiled\n  hidden mechanism across a session boundary -- so that no retention-only\n  policy (within-session full-receipt memory, or cross-session retention of\n  all raw calibration examples) can reach the treatment, while a\n  cross-session compile-capable agent reaches it exactly?\n\nConstruction:\n  A hidden bank-wide affine mechanism M(x) = (a*x + b) mod P (P prime,\n  2**40 - 87) is fixed per (family, bank-instance) from the secret.  A\n  CALIBRATION session exposes N_CAL=3 labelled examples (x_j, y_j=M(x_j)) in\n  its task bodies/receipts.  A separate SCORED session exposes only a fresh\n  unlabelled input x_q on exactly one `chain` task (index K-3 at novelty 0.50;\n  index K-1 at novelty 0.75, where the required answer is the composed\n  M(M(x_q))); every other scored task is an ordinary public task.  An arm\n  succeeds on the chain task only by carrying a *compiled* mechanism across\n  the session boundary and evaluating it on the fresh x_q.\n\n  Information-theoretic property: the scored session contains NO labelled\n  (x, M(x)) pair, so within-session retention -- no matter its capacity --\n  cannot determine M(x_q).  Cross-session retention of the raw calibration\n  examples is likewise insufficient, because retrieval replays a stored y\n  rather than evaluating M on a fresh x.  Only cross-session *compilation*\n  (solving (a,b)) reaches the treatment.\n\nThis probe is NON-OUTCOME-BEARING.  It verifies:\n  * the stdlib HTTP transport answers on 127.0.0.1;\n  * protocol semantics / no-leak invariants;\n  * arm liveness on a few bank instances per (arm, family, novelty);\n  * the mechanism non-degeneracy (a != 0; 3 distinct x; affine solve exact);\n  * x_q never equals a calibration x (no accidental retention win);\n  * branch reachability of the frozen decision rule over synthetic worlds;\n  * determinism (two runs byte-identical).\n\nIt does NOT run the scored 20-instance matrix.  stdlib only.\n\"\"\"\nfrom __future__ import annotations\n\nimport hashlib\nimport json\nimport threading\nfrom http.server import BaseHTTPRequestHandler, ThreadingHTTPServer\nfrom urllib.error import HTTPError\nfrom urllib.request import Request, urlopen\n\nP = 1099511627689          # prime = 2**40 - 87 (verified at DESIGN)\nRUN_SEED = \"SPIDER-RUNTIME-SBA-V3-2026\"\nFAMILIES = {\"F1-RECORDS\": 8, \"F2-WIDGETS\": 10}\nNOVELTIES = [0.0, 0.25, 0.5, 0.75]\nSCORED_BAND = 0.50\nCOMPARATOR_MAX = 0.95\nCORRECTNESS_FLOOR = 0.80\nMARGIN_FLOOR = 0.05\nCOUNTER_DIMS = [\"http_calls\", \"retrieval_calls\", \"verification_calls\", \"repair_calls\"]\nMIN_DISTINCT_DIMS = 2\nN_CAL = 3\n\n# Arm roster.\nTREATMENT = \"T-MECHANISM-INHERIT\"\nPOSITIVE = \"PC-EXACT-REPLAY\"\nIDENTITY = \"B-CROSS-SESSION-COMPILE\"      # expected identical to T (disclosed)\nWITHIN_SESSION = [\"B-WITHIN-SESSION-RECEIPT\", \"B-WITHIN-SESSION-COMPOSE\"]\nCROSS_SESSION_RETENTION = [\"B-RETRIEVAL-REPLAY\"]\nRETAIN_COMPARATORS = WITHIN_SESSION + CROSS_SESSION_RETENTION\nMEMORYLESS = \"B-MEMORYLESS\"\nARMS = [TREATMENT, POSITIVE, IDENTITY, \"B-WITHIN-SESSION-RECEIPT\",\n        \"B-WITHIN-SESSION-COMPOSE\", \"B-RETRIEVAL-REPLAY\", MEMORYLESS]\n\nSCORED_SESSIONS_PER_CELL = 20\nLEAK_KEYS = (\"session_never_reveals_mechanism\", \"no_mechanism_in_scored_session_body\",\n             \"no_cal_examples_in_scored_bodies\", \"no_answer_in_scored_chain_body\",\n             \"wrong_answer_400_no_leak\", \"cal_receipt_reveals_y_once\",\n             \"chain_receipt_no_answer\")\n\n\n# --------------------------------------------------------------------------\n# deterministic derivations (no clock, no os.urandom, no secrets)\n# --------------------------------------------------------------------------\ndef h(*parts) -> str:\n    return hashlib.sha256(\"|\".join(str(p) for p in parts).encode()).hexdigest()\n\n\ndef _di(mod: int, *parts) -> int:\n    return int(h(*parts)[:16], 16) % mod\n\n\ndef server_secret() -> str:\n    return h(RUN_SEED, \"server_secret\")[:32]\n\n\ndef mechanism_params(family: str, idx: int):\n    a = _di(P - 1, server_secret(), family, idx, \"a\") + 1   # in [1, P-1]\n    b = _di(P, server_secret(), family, idx, \"b\")\n    return a, b\n\n\ndef mech_apply(a: int, b: int, x: int) -> int:\n    return (a * x + b) % P\n\n\ndef cal_points(family: str, idx: int):\n    xs = []\n    j = 0\n    while len(xs) < N_CAL:\n        x = _di(P, server_secret(), family, idx, \"xcal\", j)\n        if x not in xs:\n            xs.append(x)\n        j += 1\n    a, b = mechanism_params(family, idx)\n    return [(x, mech_apply(a, b, x)) for x in xs]\n\n\ndef query_x(family: str, idx: int) -> int:\n    return _di(P, server_secret(), family, idx, \"xq\")\n\n\ndef target_value(family: str, idx: int, novelty: float) -> int:\n    a, b = mechanism_params(family, idx)\n    y = mech_apply(a, b, query_x(family, idx))\n    if novelty == 0.75:\n        y = mech_apply(a, b, y)   # composed application\n    return y\n\n\ndef session_token(family, novelty, idx, phase):\n    return h(server_secret(), family, repr(novelty), idx, phase, \"token\")[:16]\n\n\ndef schema_epoch_value(family, novelty, idx, phase):\n    return h(server_secret(), family, repr(novelty), idx, phase, \"schema\")[:8]\n\n\ndef public_resource(family, novelty, i):\n    return h(server_secret(), family, repr(novelty), \"res\", i)[:10]\n\n\ndef k_of(family):\n    return FAMILIES[family]\n\n\ndef mechanism_active(novelty) -> bool:\n    return novelty >= SCORED_BAND\n\n\ndef chain_index(novelty, k):\n    if novelty == 0.5:\n        return k - 3\n    if novelty == 0.75:\n        return k - 1\n    return None\n\n\ndef mechanism_nondegeneracy(n_instances=50):\n    \"\"\"Sample bank instances: a != 0; N_CAL distinct x; exact affine recovery;\n    the scored query x_q never equals a calibration x.\"\"\"\n    deg = {\"instances\": 0, \"a_zero\": 0, \"duplicate_x\": 0, \"solve_fail\": 0,\n           \"query_collision\": 0, \"min_query_gap\": None}\n    for family in FAMILIES:\n        for inst in range(n_instances):\n            deg[\"instances\"] += 1\n            a, b = mechanism_params(family, inst)\n            if a == 0:\n                deg[\"a_zero\"] += 1\n            pts = cal_points(family, inst)\n            xs = [x for x, _ in pts]\n            if len(set(xs)) != N_CAL:\n                deg[\"duplicate_x\"] += 1\n            if recover_affine(pts) != (a, b):\n                deg[\"solve_fail\"] += 1\n            xq = query_x(family, inst)\n            gap = min(abs(xq - x) for x in xs)\n            if gap == 0:\n                deg[\"query_collision\"] += 1\n            deg[\"min_query_gap\"] = gap if deg[\"min_query_gap\"] is None else min(deg[\"min_query_gap\"], gap)\n    deg[\"ok\"] = (deg[\"a_zero\"] == 0 and deg[\"duplicate_x\"] == 0 and deg[\"solve_fail\"] == 0\n                 and deg[\"query_collision\"] == 0 and deg[\"min_query_gap\"] > 0)\n    return deg\n\n\ndef recover_affine(pairs):\n    \"\"\"Recover (a, b) from labelled examples; None if under-determined/inconsistent.\"\"\"\n    if not pairs or len(pairs) < 2:\n        return None\n    (x1, y1), (x2, y2) = pairs[0], pairs[1]\n    if (x1 - x2) % P == 0:\n        return None\n    a = ((y1 - y2) % P) * pow((x1 - x2) % P, -1, P) % P\n    b = (y1 - a * x1) % P\n    if any(mech_apply(a, b, x) != y % P for x, y in pairs):\n        return None\n    return a, b\n\n\n# --------------------------------------------------------------------------\n# server (credential-free, deterministic, stdlib-only)\n# --------------------------------------------------------------------------\nclass State:\n    def __init__(self, expose_mechanism=False):\n        self.lock = threading.Lock()\n        self.sessions = {}\n        self.expose_mechanism = expose_mechanism\n\n    def new_session(self, family, novelty, idx, phase):\n        with self.lock:\n            tok = session_token(family, novelty, idx, phase)\n            s = {\"family\": family, \"novelty\": novelty, \"idx\": idx, \"phase\": phase,\n                 \"token\": tok, \"schema\": schema_epoch_value(family, novelty, idx, phase),\n                 \"committed\": set()}\n            self.sessions[tok] = s\n            return s\n\n\ndef _task_kind(s, i):\n    family, nov = s[\"family\"], s[\"novelty\"]\n    active = mechanism_active(nov)\n    if s[\"phase\"] == \"calibration\" and active and i < N_CAL:\n        return \"calibration\"\n    ci = chain_index(nov, k_of(family))\n    if s[\"phase\"] == \"scored\" and active and ci is not None and i == ci:\n        return \"chain\"\n    return \"public\"\n\n\nclass Handler(BaseHTTPRequestHandler):\n    state: State = None\n\n    def log_message(self, *a):\n        pass\n\n    def _send(self, code, obj):\n        body = json.dumps(obj, sort_keys=True).encode()\n        self.send_response(code)\n        self.send_header(\"Content-Type\", \"application/json\")\n        self.send_header(\"Content-Length\", str(len(body)))\n        self.end_headers()\n        self.wfile.write(body)\n\n    def _q(self, key, default):\n        if \"?\" not in self.path:\n            return default\n        for kv in self.path.split(\"?\", 1)[1].split(\"&\"):\n            if kv.startswith(key + \"=\"):\n                return kv.split(\"=\", 1)[1]\n        return default\n\n    def do_GET(self):\n        path = self.path.split(\"?\", 1)[0]\n        if path == \"/healthz\":\n            return self._send(200, {\"status\": \"ok\"})\n        parts = path.strip(\"/\").split(\"/\")\n        if len(parts) == 4 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"session\":\n            family = parts[2]\n            if family not in FAMILIES:\n                return self._send(404, {\"error\": \"bad_family\"})\n            novelty = float(self._q(\"novelty\", 0.5))\n            idx = int(self._q(\"idx\", 0))\n            phase = self._q(\"phase\", \"scored\")\n            s = self.state.new_session(family, novelty, idx, phase)\n            return self._send(200, {\"session_token\": s[\"token\"], \"schema_epoch\": s[\"schema\"],\n                                    \"epoch\": idx, \"phase\": phase})\n        if len(parts) == 5 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"task\":\n            family = parts[2]\n            tok = self.headers.get(\"X-Session\", \"\")\n            s = self.state.sessions.get(tok)\n            if s is None:\n                return self._send(400, {\"error\": \"bad_session\"})\n            try:\n                i = int(parts[4])\n            except ValueError:\n                return self._send(400, {\"error\": \"bad_index\"})\n            k = k_of(family)\n            if not (0 <= i < k):\n                return self._send(400, {\"error\": \"bad_index\"})\n            kind = _task_kind(s, i)\n            out = {\"index\": i, \"kind\": kind, \"requires_schema\": s[\"novelty\"] >= 0.25,\n                   \"resource_id\": None, \"x\": None}\n            if kind == \"public\":\n                out[\"resource_id\"] = public_resource(family, s[\"novelty\"], i)\n            elif kind == \"calibration\":\n                out[\"x\"] = cal_points(family, s[\"idx\"])[i][0]\n                out[\"resource_id\"] = public_resource(family, s[\"novelty\"], i)\n            elif kind == \"chain\":\n                out[\"x\"] = query_x(family, s[\"idx\"])\n                if self.state.expose_mechanism:\n                    out[\"resource_id\"] = str(target_value(family, s[\"idx\"], s[\"novelty\"]))\n            return self._send(200, out)\n        return self._send(404, {\"error\": \"not_found\"})\n\n    def do_POST(self):\n        parts = self.path.strip(\"/\").split(\"/\")\n        if not (len(parts) == 4 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"commit\"):\n            return self._send(404, {\"error\": \"not_found\"})\n        family = parts[2]\n        if family not in FAMILIES:\n            return self._send(404, {\"error\": \"bad_family\"})\n        n = int(self.headers.get(\"Content-Length\", 0))\n        try:\n            body = json.loads(self.rfile.read(n).decode() or \"{}\")\n        except (ValueError, UnicodeDecodeError):\n            return self._send(400, {\"error\": \"bad_body\"})\n        s = self.state.sessions.get(body.get(\"session_token\"))\n        if s is None:\n            return self._send(400, {\"error\": \"bad_session\"})\n        i = body.get(\"index\")\n        if not isinstance(i, int) or not (0 <= i < k_of(family)):\n            return self._send(400, {\"error\": \"bad_index\"})\n        if i in s[\"committed\"]:\n            return self._send(409, {\"error\": \"already_committed\"})\n        if s[\"novelty\"] >= 0.25 and body.get(\"schema_epoch\") != s[\"schema\"]:\n            return self._send(400, {\"error\": \"schema_required\"})\n        kind = _task_kind(s, i)\n        if kind in (\"public\", \"calibration\"):\n            expected = public_resource(family, s[\"novelty\"], i)\n        else:  # chain\n            expected = str(target_value(family, s[\"idx\"], s[\"novelty\"]))\n        if body.get(\"resource_id\") != expected:\n            return self._send(400, {\"error\": \"bad_resource\"})\n        s[\"committed\"].add(i)\n        receipt = {\"index\": i, \"family\": family, \"epoch\": s[\"idx\"]}\n        if kind == \"calibration\":\n            x, y = cal_points(family, s[\"idx\"])[i]\n            receipt[\"x\"] = x\n            receipt[\"y\"] = y\n        return self._send(200, {\"receipt\": receipt})\n\n    def do_PUT(self):\n        return self._send(405, {\"error\": \"method_not_allowed\"})\n\n\ndef start_server(expose_mechanism=False):\n    state = State(expose_mechanism=expose_mechanism)\n    handler = type(\"H\", (Handler,), {\"state\": state})\n    httpd = ThreadingHTTPServer((\"127.0.0.1\", 0), handler)\n    t = threading.Thread(target=httpd.serve_forever, daemon=True)\n    t.start()\n    return httpd, state, f\"http://127.0.0.1:{httpd.server_address[1]}\"\n\n\ndef http_get(url, token=None):\n    req = Request(url, method=\"GET\")\n    if token:\n        req.add_header(\"X-Session\", token)\n    try:\n        with urlopen(req, timeout=10) as r:\n            return r.status, json.loads(r.read().decode())\n    except HTTPError as e:\n        return e.code, json.loads(e.read().decode())\n\n\ndef http_post(url, payload):\n    data = json.dumps(payload).encode()\n    req = Request(url, data=data, method=\"POST\", headers={\"Content-Type\": \"application/json\"})\n    try:\n        with urlopen(req, timeout=10) as r:\n            return r.status, json.loads(r.read().decode())\n    except HTTPError as e:\n        return e.code, json.loads(e.read().decode())\n\n\n# --------------------------------------------------------------------------\n# arm policies\n# --------------------------------------------------------------------------\ndef _sess(base, family, novelty, idx, phase, counters):\n    counters[\"http_calls\"] += 1\n    st, b = http_get(f\"{base}/api/v1/{family}/session?novelty={novelty}&idx={idx}&phase={phase}\")\n    assert st == 200, (st, b)\n    return b\n\n\ndef _task(base, family, tok, i, counters):\n    counters[\"http_calls\"] += 1\n    st, b = http_get(f\"{base}/api/v1/{family}/task/{i}\", token=tok)\n    assert st == 200, (st, b)\n    return b\n\n\ndef _commit(base, family, tok, i, schema, resource, counters):\n    counters[\"http_calls\"] += 1\n    return http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": i, \"schema_epoch\": schema, \"resource_id\": resource})\n\n\ndef _answer(arm, d, compiled, store, log, family, idx, novelty, counters):\n    if arm in (TREATMENT, IDENTITY):\n        if compiled is None:\n            return None\n        a, b = compiled\n        y = mech_apply(a, b, d[\"x\"])\n        if novelty == 0.75:\n            y = mech_apply(a, b, y)\n        return str(y)\n    if arm == POSITIVE:\n        return str(target_value(family, idx, novelty))\n    if arm in WITHIN_SESSION:\n        # no labelled (x, M(x)) pair exists inside the scored session\n        ys = [r.get(\"y\") for r in log if isinstance(r, dict) and \"y\" in r]\n        return str(ys[-1]) if ys else None\n    if arm in CROSS_SESSION_RETENTION:\n        if not store:\n            return None\n        xq = d[\"x\"]\n        _, yc = min(store, key=lambda p: abs(p[0] - xq))\n        return str(yc)\n    return None\n\n\ndef run_bank_instance(base, arm, family, novelty, idx):\n    \"\"\"Run one calibration (when active) + one scored session; return scored successes.\"\"\"\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    active = mechanism_active(novelty)\n    compiled = None\n    store = []\n\n    # ---- calibration phase (every arm sees the same raw examples) ----\n    if active:\n        s = _sess(base, family, novelty, idx, \"calibration\", counters)\n        log = []\n        for i in range(k):\n            d = _task(base, family, s[\"session_token\"], i, counters)\n            counters[\"verification_calls\"] += 1\n            st, b = _commit(base, family, s[\"session_token\"], i, s[\"schema_epoch\"],\n                            d[\"resource_id\"], counters)\n            if st == 200:\n                rec = b[\"receipt\"]\n                if d.get(\"kind\") == \"calibration\":\n                    if arm in (TREATMENT, IDENTITY):\n                        log.append((rec[\"x\"], rec[\"y\"]))\n                    if arm in CROSS_SESSION_RETENTION:\n                        store.append((rec[\"x\"], rec[\"y\"]))\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        if arm in (TREATMENT, IDENTITY):\n            compiled = recover_affine(log)\n        # WITHIN_SESSION arms discard their calibration log at the session boundary.\n\n    # ---- scored phase ----\n    if arm == MEMORYLESS:\n        successes = 0\n        for i in range(k):\n            s = _sess(base, family, novelty, idx, \"scored\", counters)\n            d = _task(base, family, s[\"session_token\"], i, counters)\n            counters[\"verification_calls\"] += 1\n            res = d.get(\"resource_id\")   # None on chain normally; exposed under NC-MECHANISM-OFF\n            st, _ = _commit(base, family, s[\"session_token\"], i, s[\"schema_epoch\"], res, counters)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    s = _sess(base, family, novelty, idx, \"scored\", counters)\n    log = []\n    successes = 0\n    for i in range(k):\n        d = _task(base, family, s[\"session_token\"], i, counters)\n        if arm in CROSS_SESSION_RETENTION:\n            counters[\"retrieval_calls\"] += 1\n        if d.get(\"kind\") == \"chain\":\n            if d.get(\"resource_id\") is not None:\n                res = d[\"resource_id\"]   # NC-MECHANISM-OFF world: answer exposed\n            else:\n                res = _answer(arm, d, compiled, store, log, family, idx, novelty, counters)\n        else:\n            res = d[\"resource_id\"]\n        counters[\"verification_calls\"] += 1\n        st, b = _commit(base, family, s[\"session_token\"], i, s[\"schema_epoch\"], res, counters)\n        if st == 200:\n            successes += 1\n            log.append(b[\"receipt\"])\n        elif st == 400:\n            counters[\"repair_calls\"] += 1\n            if d.get(\"kind\") == \"chain\":\n                # one declared repair: re-fetch the chain task and re-commit once\n                _task(base, family, s[\"session_token\"], i, counters)\n                _commit(base, family, s[\"session_token\"], i, s[\"schema_epoch\"], res, counters)\n    return successes, counters\n\n\n# --------------------------------------------------------------------------\n# protocol invariants\n# --------------------------------------------------------------------------\ndef protocol_invariants(base, family=\"F1-RECORDS\", novelty=0.5):\n    out = {}\n    k = k_of(family)\n    ci = chain_index(novelty, k)\n    a, b = mechanism_params(family, 0)\n    cal = cal_points(family, 0)\n    tgt = str(target_value(family, 0, novelty))\n\n    # calibration session\n    st, sc = http_get(f\"{base}/api/v1/{family}/session?novelty={novelty}&idx=0&phase=calibration\")\n    out[\"cal_session_no_mechanism\"] = st == 200 and all(\n        s not in json.dumps(sc, sort_keys=True) for s in (str(a), str(b), tgt))\n    tokc = sc[\"session_token\"]\n    cal_body = http_get(f\"{base}/api/v1/{family}/task/0\", token=tokc)[1]\n    out[\"cal_task_reveals_x\"] = cal_body.get(\"x\") == cal[0][0]\n    out[\"cal_task_no_y\"] = str(cal[0][1]) not in json.dumps(cal_body, sort_keys=True)\n    st, rc = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tokc, \"index\": 0, \"schema_epoch\": sc[\"schema_epoch\"],\n        \"resource_id\": public_resource(family, novelty, 0)})\n    out[\"cal_receipt_reveals_y_once\"] = (\n        st == 200 and rc[\"receipt\"].get(\"y\") == cal[0][1] and rc[\"receipt\"].get(\"x\") == cal[0][0])\n    st, rc2 = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tokc, \"index\": 0, \"schema_epoch\": sc[\"schema_epoch\"],\n        \"resource_id\": public_resource(family, novelty, 0)})\n    out[\"cal_recommit_409_no_y\"] = st == 409 and str(cal[0][1]) not in json.dumps(rc2, sort_keys=True)\n\n    # scored session\n    st, ss = http_get(f\"{base}/api/v1/{family}/session?novelty={novelty}&idx=0&phase=scored\")\n    out[\"session_never_reveals_mechanism\"] = st == 200 and all(\n        s not in json.dumps(ss, sort_keys=True) for s in (str(a), str(b), tgt))\n    out[\"no_mechanism_in_scored_session_body\"] = all(\n        s not in json.dumps(ss, sort_keys=True) for s in (str(a), str(b)))\n    toks = ss[\"session_token\"]\n    scored_bodies = [http_get(f\"{base}/api/v1/{family}/task/{i}\", token=toks)[1] for i in range(k)]\n    out[\"no_cal_examples_in_scored_bodies\"] = all(\n        str(cx) not in json.dumps(body, sort_keys=True) and str(cy) not in json.dumps(body, sort_keys=True)\n        for body in scored_bodies for cx, cy in cal)\n    chain_body = scored_bodies[ci]\n    out[\"chain_task_resource_null\"] = chain_body.get(\"kind\") == \"chain\" and chain_body.get(\"resource_id\") is None\n    out[\"chain_task_reveals_x\"] = chain_body.get(\"x\") == query_x(family, 0)\n    out[\"no_answer_in_scored_chain_body\"] = tgt not in json.dumps(chain_body, sort_keys=True)\n    st, be = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": toks, \"index\": ci, \"schema_epoch\": ss[\"schema_epoch\"],\n        \"resource_id\": \"0\"})\n    out[\"wrong_answer_400_no_leak\"] = st == 400 and tgt not in json.dumps(be, sort_keys=True)\n    st, br = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": toks, \"index\": ci, \"schema_epoch\": ss[\"schema_epoch\"],\n        \"resource_id\": tgt})\n    out[\"correct_answer_200\"] = st == 200\n    out[\"chain_receipt_no_answer\"] = tgt not in json.dumps(br, sort_keys=True)\n    st, br2 = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": toks, \"index\": ci, \"schema_epoch\": ss[\"schema_epoch\"],\n        \"resource_id\": tgt})\n    out[\"correct_answer_single_use_409\"] = st == 409\n    return out\n\n\n# --------------------------------------------------------------------------\n# certificate + branch classifier\n# --------------------------------------------------------------------------\ndef retention_certifies(comp_rate, t_rate, all_rates, matched_correctness):\n    return (comp_rate < COMPARATOR_MAX\n            and all(r >= CORRECTNESS_FLOOR for r in all_rates)\n            and matched_correctness >= CORRECTNESS_FLOOR\n            and (t_rate - comp_rate) >= MARGIN_FLOOR)\n\n\ndef classify(world):\n    if not world[\"gates_pass\"]:\n        return \"MEASUREMENT_INVALID\"\n    if world[\"robust_certified\"]:\n        return \"ROBUST\"\n    if world[\"any_retention_certified\"]:\n        return \"PARTIAL\"\n    return \"COLLAPSED\"\n\n\ndef branch_reachability():\n    return {\n        \"ROBUST\": classify({\"gates_pass\": True, \"robust_certified\": True, \"any_retention_certified\": True}),\n        \"PARTIAL\": classify({\"gates_pass\": True, \"robust_certified\": False, \"any_retention_certified\": True}),\n        \"COLLAPSED\": classify({\"gates_pass\": True, \"robust_certified\": False, \"any_retention_certified\": False}),\n        \"MEASUREMENT_INVALID\": classify({\"gates_pass\": False, \"robust_certified\": False, \"any_retention_certified\": False}),\n    }\n\n\ndef assess_lattice(liveness):\n    \"\"\"Evaluate retention_certifies per retention comparator and label the world (probe rates).\"\"\"\n    detail = {}\n    robust = True\n    any_cert = False\n    for comp in RETAIN_COMPARATORS:\n        detail[comp] = {}\n        for family in FAMILIES:\n            for nov in [n for n in NOVELTIES if n >= SCORED_BAND]:\n                t_rate = liveness[TREATMENT][family][str(nov)][\"rate\"]\n                comp_rate = liveness[comp][family][str(nov)][\"rate\"]\n                all_rates = [liveness[a][family][str(nov)][\"rate\"] for a in ARMS]\n                ok = retention_certifies(comp_rate, t_rate, all_rates, t_rate)\n                detail[comp][f\"{family}|{nov}\"] = {\n                    \"comparator_rate\": comp_rate, \"t_rate\": t_rate,\n                    \"margin\": round(t_rate - comp_rate, 6),\n                    \"min_arm_rate\": min(all_rates), \"certifies\": ok}\n                any_cert = any_cert or ok\n                robust = robust and ok\n    world = {\"gates_pass\": True, \"robust_certified\": robust, \"any_retention_certified\": any_cert}\n    return {\"detail\": detail, \"world\": world, \"decision\": classify(world)}\n\n\ndef cdist(c_t, c_c):\n    return sum(1 for d in COUNTER_DIMS if c_t[d] != c_c[d])\n\n\n# --------------------------------------------------------------------------\n# probe (DESIGN; non-outcome-bearing)\n# --------------------------------------------------------------------------\ndef run_probe(n_instances=3):\n    out = {\"seed\": RUN_SEED, \"P\": P, \"families\": FAMILIES, \"novelties\": NOVELTIES,\n           \"scored_band\": SCORED_BAND, \"arms\": ARMS, \"n_cal\": N_CAL}\n    httpd, state, base = start_server(expose_mechanism=False)\n    try:\n        out[\"checks\"] = {}\n        st, _ = http_get(f\"{base}/healthz\")\n        out[\"checks\"][\"transport_stdlib_http\"] = st == 200\n        out[\"checks\"][\"protocol_invariants\"] = protocol_invariants(base)\n        out[\"checks\"][\"all_protocol_invariants_pass\"] = all(out[\"checks\"][\"protocol_invariants\"].values())\n\n        liveness = {}\n        for arm in ARMS:\n            liveness[arm] = {}\n            for family in FAMILIES:\n                liveness[arm][family] = {}\n                for nov in NOVELTIES:\n                    succ_total = 0\n                    total = 0\n                    counters = {d: 0 for d in COUNTER_DIMS}\n                    for inst in range(n_instances):\n                        httpd_i, _, base_i = start_server(expose_mechanism=False)\n                        try:\n                            succ, c = run_bank_instance(base_i, arm, family, nov, inst)\n                        finally:\n                            httpd_i.shutdown()\n                        succ_total += succ\n                        total += k_of(family)\n                        for d in counters:\n                            counters[d] += c[d]\n                    liveness[arm][family][str(nov)] = {\n                        \"successes\": succ_total, \"tasks\": total,\n                        \"rate\": succ_total / total, \"counters\": counters}\n        out[\"arm_liveness\"] = liveness\n\n        # mechanism non-degeneracy over sampled bank instances\n        deg = mechanism_nondegeneracy(50)\n        out[\"mechanism_nondegeneracy\"] = deg\n        out[\"checks\"][\"mechanism_nondegenerate\"] = deg[\"ok\"]\n\n        out[\"checks\"][\"treatment_live_all_bands\"] = all(\n            liveness[TREATMENT][f][str(n)][\"rate\"] == 1.0 for f in FAMILIES for n in NOVELTIES)\n        out[\"checks\"][\"pc_exact_replay_all_bands\"] = all(\n            liveness[POSITIVE][f][str(n)][\"rate\"] == 1.0 for f in FAMILIES for n in NOVELTIES)\n        out[\"checks\"][\"ceiling_band_all_arms_one\"] = all(\n            liveness[a][f][\"0.0\"][\"rate\"] == 1.0 for f in FAMILIES for a in ARMS)\n        out[\"checks\"][\"within_session_comparator_in_band\"] = all(\n            CORRECTNESS_FLOOR <= liveness[c][f][str(n)][\"rate\"] < COMPARATOR_MAX\n            for c in WITHIN_SESSION for f in FAMILIES for n in (0.5, 0.75))\n        out[\"checks\"][\"cross_session_retention_in_band\"] = all(\n            CORRECTNESS_FLOOR <= liveness[c][f][str(n)][\"rate\"] < COMPARATOR_MAX\n            for c in CROSS_SESSION_RETENTION for f in FAMILIES for n in (0.5, 0.75))\n        out[\"checks\"][\"identity_disclosure_matches_treatment\"] = all(\n            liveness[IDENTITY][f][str(n)][\"rate\"] == liveness[TREATMENT][f][str(n)][\"rate\"]\n            for f in FAMILIES for n in NOVELTIES)\n\n        # NC-MECHANISM-OFF: expose the answer -> within-session comparator reaches 1.0\n        httpd_m, _, base_m = start_server(expose_mechanism=True)\n        try:\n            succ, _ = run_bank_instance(base_m, \"B-WITHIN-SESSION-RECEIPT\", \"F1-RECORDS\", 0.5, 0)\n        finally:\n            httpd_m.shutdown()\n        out[\"mechanism_off\"] = {\"within_session_f1_rate\": succ / k_of(\"F1-RECORDS\"),\n                                \"successes\": succ, \"k\": k_of(\"F1-RECORDS\")}\n        out[\"checks\"][\"mechanism_off_destroys_certificate\"] = (\n            out[\"mechanism_off\"][\"within_session_f1_rate\"] >= COMPARATOR_MAX)\n\n        # retention-only ladder: no retention scope closes the range\n        ladder = {}\n        for family in FAMILIES:\n            for nov in (0.5, 0.75):\n                rates = {a: liveness[a][family][str(nov)][\"rate\"] for a in\n                         [MEMORYLESS, \"B-WITHIN-SESSION-RECEIPT\", \"B-RETRIEVAL-REPLAY\"]}\n                closes = [a for a, r in rates.items() if r >= COMPARATOR_MAX]\n                ladder[f\"{family}|{nov}\"] = {\"rates\": rates, \"closing_retention_scopes\": closes}\n        out[\"retention_ladder\"] = ladder\n        out[\"checks\"][\"no_retention_scope_closes_range\"] = all(\n            len(v[\"closing_retention_scopes\"]) == 0 for v in ladder.values())\n\n        # counter distinctness T vs strongest retention comparators\n        ident = {}\n        for family in FAMILIES:\n            t = liveness[TREATMENT][family][\"0.5\"]\n            ident[family] = {}\n            for comp in RETAIN_COMPARATORS + [MEMORYLESS]:\n                ident[family][comp] = cdist(t[\"counters\"], liveness[comp][family][\"0.5\"][\"counters\"])\n        out[\"counter_distinctness\"] = ident\n        out[\"checks\"][\"retention_counter_distinctness\"] = all(\n            ident[f][\"B-WITHIN-SESSION-RECEIPT\"] >= MIN_DISTINCT_DIMS for f in FAMILIES)\n\n        # token uniqueness\n        seen = {}\n        coll = 0\n        for family in FAMILIES:\n            for nov in NOVELTIES:\n                for inst in range(10):\n                    for phase in (\"calibration\", \"scored\"):\n                        tok = session_token(family, nov, inst, phase)\n                        if tok in seen and seen[tok] != (family, nov, inst, phase):\n                            coll += 1\n                        seen[tok] = (family, nov, inst, phase)\n        out[\"token_uniqueness\"] = {\"sampled\": len(seen), \"collisions\": coll}\n        out[\"checks\"][\"token_uniqueness_ok\"] = coll == 0\n\n        out[\"lattice\"] = assess_lattice(liveness)\n        out[\"predicted_decision\"] = out[\"lattice\"][\"decision\"]\n        out[\"checks\"][\"predicted_decision\"] = out[\"predicted_decision\"]\n        out[\"branch_reachability\"] = branch_reachability()\n        out[\"checks\"][\"all_branches_inhabited\"] = len(set(out[\"branch_reachability\"].values())) == 4\n    finally:\n        httpd.shutdown()\n    return out\n\n\n# --------------------------------------------------------------------------\n# scored matrix + gate evaluation (EXECUTE; NOT run during DESIGN)\n# --------------------------------------------------------------------------\ndef run_scored_matrix(n_sessions=SCORED_SESSIONS_PER_CELL):\n    cells = {}\n    for family in FAMILIES:\n        k = k_of(family)\n        for nov in NOVELTIES:\n            for arm in ARMS:\n                succ_total = 0\n                total = 0\n                counters = {d: 0 for d in COUNTER_DIMS}\n                for inst in range(n_sessions):\n                    httpd, _, base = start_server(expose_mechanism=False)\n                    try:\n                        succ, c = run_bank_instance(base, arm, family, nov, inst)\n                    finally:\n                        httpd.shutdown()\n                    succ_total += succ\n                    total += k\n                    for d in counters:\n                        counters[d] += c[d]\n                cells[f\"{family}|{nov}|{arm}\"] = {\n                    \"family\": family, \"novelty\": nov, \"arm\": arm,\n                    \"successes\": succ_total, \"tasks\": total,\n                    \"success_rate\": succ_total / total,\n                    \"matched_correctness\": succ_total / total,\n                    \"counters\": counters}\n    return cells\n\n\ndef synthetic_cells_from_probe(probe, n_sessions=SCORED_SESSIONS_PER_CELL):\n    cells = {}\n    for f in FAMILIES:\n        for nov in NOVELTIES:\n            for arm in ARMS:\n                lv = probe[\"arm_liveness\"][arm][f][str(nov)]\n                cells[f\"{f}|{nov}|{arm}\"] = {\n                    \"family\": f, \"novelty\": nov, \"arm\": arm,\n                    \"successes\": round(lv[\"rate\"] * n_sessions * k_of(f)),\n                    \"tasks\": n_sessions * k_of(f),\n                    \"success_rate\": lv[\"rate\"], \"matched_correctness\": lv[\"rate\"],\n                    \"counters\": {d: lv[\"counters\"][d] * n_sessions for d in COUNTER_DIMS}}\n    return cells\n\n\ndef code_fidelity_manifest():\n    import sys\n    import pathlib\n    src_sha = None\n    try:\n        if \"__file__\" in globals() and __file__:\n            src_sha = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()\n    except OSError:\n        src_sha = None\n    return {\"python\": sys.version.split()[0], \"harness_sha256\": src_sha}\n\n\ndef _lattice_from_cells(cells):\n    detail = {}\n    robust = True\n    any_cert = False\n    for comp in RETAIN_COMPARATORS:\n        detail[comp] = {}\n        for family in FAMILIES:\n            for nov in [n for n in NOVELTIES if n >= SCORED_BAND]:\n                t_rate = cells[f\"{family}|{nov}|{TREATMENT}\"][\"success_rate\"]\n                comp_rate = cells[f\"{family}|{nov}|{comp}\"][\"success_rate\"]\n                all_rates = [cells[f\"{family}|{nov}|{a}\"][\"success_rate\"] for a in ARMS]\n                matched = cells[f\"{family}|{nov}|{TREATMENT}\"][\"matched_correctness\"]\n                ok = retention_certifies(comp_rate, t_rate, all_rates, matched)\n                detail[comp][f\"{family}|{nov}\"] = {\n                    \"comparator_rate\": comp_rate, \"t_rate\": t_rate,\n                    \"margin\": t_rate - comp_rate, \"min_arm_rate\": min(all_rates),\n                    \"certifies\": ok}\n                any_cert = any_cert or ok\n                robust = robust and ok\n    return {\"detail\": detail, \"robust_certified\": robust, \"any_retention_certified\": any_cert}\n\n\ndef assemble_decision(cells, controls, protocol, v1, determinism_ok, extra_gates=None):\n    gates = {}\n    gates[\"V5_arm_liveness\"] = all(\n        cells[f\"{f}|{n}|{a}\"][\"success_rate\"] == 1.0\n        for f in FAMILIES for n in NOVELTIES for a in (TREATMENT, POSITIVE))\n    gates[\"V8_ceiling_band\"] = all(\n        cells[f\"{f}|0.0|{a}\"][\"success_rate\"] == 1.0 for f in FAMILIES for a in ARMS)\n    gates[\"V8_identity_disclosure\"] = all(\n        cells[f\"{f}|{n}|{IDENTITY}\"][\"success_rate\"] == cells[f\"{f}|{n}|{TREATMENT}\"][\"success_rate\"]\n        for f in FAMILIES for n in NOVELTIES)\n    gates[\"V8_retention_counter_distinctness\"] = all(\n        cdist(cells[f\"{f}|0.5|{TREATMENT}\"][\"counters\"],\n              cells[f\"{f}|0.5|B-WITHIN-SESSION-RECEIPT\"][\"counters\"]) >= MIN_DISTINCT_DIMS\n        for f in FAMILIES)\n    if extra_gates:\n        gates.update(extra_gates)\n    gates[\"V1_code_fidelity_manifest\"] = bool(v1.get(\"harness_sha256\"))\n    gates[\"V2_transport_conformance\"] = all(protocol.values())\n    gates[\"V3_no_leak\"] = all(protocol[k] for k in LEAK_KEYS)\n    gates[\"V4_determinism\"] = bool(determinism_ok)\n    gates[\"V6_counter_instrumentation\"] = all(\n        all(d in c[\"counters\"] for d in COUNTER_DIMS) for c in cells.values())\n    gates[\"V7_matched_correctness\"] = all(\n        c[\"matched_correctness\"] == c[\"success_rate\"] for c in cells.values())\n    lattice = _lattice_from_cells(cells)\n    world = {\"gates_pass\": all(gates.values()), \"robust_certified\": lattice[\"robust_certified\"],\n             \"any_retention_certified\": lattice[\"any_retention_certified\"]}\n    return {\"gates\": gates, \"lattice\": lattice, \"world\": world,\n            \"decision\": classify(world), \"v1\": v1}\n\n\ndef run_execute_controls(n_sessions=SCORED_SESSIONS_PER_CELL):\n    mech_off = {}\n    for family in FAMILIES:\n        succ = 0\n        tot = 0\n        for inst in range(n_sessions):\n            httpd, _, base = start_server(expose_mechanism=True)\n            try:\n                s, _ = run_bank_instance(base, \"B-WITHIN-SESSION-RECEIPT\", family, 0.5, inst)\n            finally:\n                httpd.shutdown()\n            succ += s\n            tot += k_of(family)\n        mech_off[family] = succ / tot\n    return {\"mechanism_off_within_session_rate\": mech_off,\n            \"mechanism_off_destroys_certificate\": all(r >= COMPARATOR_MAX for r in mech_off.values()),\n            \"mechanism_nondegeneracy\": mechanism_nondegeneracy(50)}\n\n\ndef run_execute():\n    cells_a = run_scored_matrix()\n    cells_b = run_scored_matrix()\n    determinism_ok = json.dumps(cells_a, sort_keys=True) == json.dumps(cells_b, sort_keys=True)\n    controls = run_execute_controls()\n    httpd, _, base = start_server(expose_mechanism=False)\n    try:\n        protocol = protocol_invariants(base)\n    finally:\n        httpd.shutdown()\n    v1 = code_fidelity_manifest()\n    result = assemble_decision(cells_a, controls, protocol, v1, determinism_ok,\n                               extra_gates={\"V8_mechanism_off\": controls[\"mechanism_off_destroys_certificate\"],\n                                            \"V8_mechanism_nondegenerate\": controls[\"mechanism_nondegeneracy\"][\"ok\"]})\n    result[\"cells\"] = cells_a\n    result[\"controls\"] = controls\n    result[\"determinism_ok\"] = determinism_ok\n    return result\n\n\ndef run_selftest():\n    probe = run_probe()\n    cells = synthetic_cells_from_probe(probe)\n    controls = {\"mechanism_off_destroys_certificate\":\n                probe[\"checks\"][\"mechanism_off_destroys_certificate\"],\n                \"mechanism_nondegeneracy\": probe[\"mechanism_nondegeneracy\"]}\n    full = assemble_decision(cells, controls, probe[\"checks\"][\"protocol_invariants\"],\n                             {\"python\": \"synthetic\", \"harness_sha256\": \"synthetic\"}, True,\n                             extra_gates={\"V8_mechanism_off\": controls[\"mechanism_off_destroys_certificate\"],\n                                          \"V8_mechanism_nondegenerate\": controls[\"mechanism_nondegeneracy\"][\"ok\"]})\n    return {\"note\": (\"non-outcome-bearing: assemble_decision() (all gates + retention-lattice \"\n                     \"decision rule) exercised on probe-derived synthetic cells\"),\n            \"gates\": full[\"gates\"], \"world\": full[\"world\"], \"decision\": full[\"decision\"],\n            \"probe_predicted_decision\": probe[\"predicted_decision\"],\n            \"check_evaluator_matches_probe\": full[\"decision\"] == probe[\"predicted_decision\"],\n            \"check_decision_is_robust\": full[\"decision\"] == \"ROBUST\",\n            \"branch_reachability\": probe[\"branch_reachability\"]}\n\n\ndef main():\n    import argparse\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--mode\", choices=[\"probe\", \"selftest\", \"scored\"], default=\"probe\")\n    ap.add_argument(\"--out\", default=\"\")\n    args = ap.parse_args()\n    if args.mode == \"probe\":\n        print(json.dumps(run_probe(), indent=2, sort_keys=True))\n        return\n    if args.mode == \"selftest\":\n        print(json.dumps(run_selftest(), indent=2, sort_keys=True))\n        return\n    out = run_execute()\n    text = json.dumps(out, indent=2, sort_keys=True)\n    if args.out:\n        import pathlib\n        pathlib.Path(args.out).write_text(text + \"\\n\", encoding=\"utf-8\")\n    else:\n        print(text)\n\n\nif __name__ == \"__main__\":\n    main()\n",
+    "source_sha256": "acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+    "probe_stdout_sha256": "92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e",
+    "selftest_stdout_sha256": "208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c",
+    "selftest_summary": {
+      "decision": "ROBUST",
+      "all_gates": true,
+      "check_evaluator_matches_probe": true,
+      "check_decision_is_robust": true,
+      "branch_reachability": {
+        "COLLAPSED": "COLLAPSED",
+        "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+        "PARTIAL": "PARTIAL",
+        "ROBUST": "ROBUST"
+      }
+    },
+    "output": {
+      "P": 1099511627689,
+      "families": {
+        "F1-RECORDS": 8,
+        "F2-WIDGETS": 10
+      },
+      "novelties": [
+        0.0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "scored_band": 0.5,
+      "n_cal": 3,
+      "seed": "SPIDER-RUNTIME-SBA-V3-2026",
+      "checks": {
+        "all_branches_inhabited": true,
+        "all_protocol_invariants_pass": true,
+        "ceiling_band_all_arms_one": true,
+        "cross_session_retention_in_band": true,
+        "identity_disclosure_matches_treatment": true,
+        "mechanism_nondegenerate": true,
+        "mechanism_off_destroys_certificate": true,
+        "no_retention_scope_closes_range": true,
+        "pc_exact_replay_all_bands": true,
+        "predicted_decision": "ROBUST",
+        "protocol_invariants": {
+          "cal_receipt_reveals_y_once": true,
+          "cal_recommit_409_no_y": true,
+          "cal_session_no_mechanism": true,
+          "cal_task_no_y": true,
+          "cal_task_reveals_x": true,
+          "chain_receipt_no_answer": true,
+          "chain_task_resource_null": true,
+          "chain_task_reveals_x": true,
+          "correct_answer_200": true,
+          "correct_answer_single_use_409": true,
+          "no_answer_in_scored_chain_body": true,
+          "no_cal_examples_in_scored_bodies": true,
+          "no_mechanism_in_scored_session_body": true,
+          "session_never_reveals_mechanism": true,
+          "wrong_answer_400_no_leak": true
+        },
+        "retention_counter_distinctness": true,
+        "token_uniqueness_ok": true,
+        "transport_stdlib_http": true,
+        "treatment_live_all_bands": true,
+        "within_session_comparator_in_band": true
+      },
+      "predicted_decision": "ROBUST",
+      "branch_reachability": {
+        "COLLAPSED": "COLLAPSED",
+        "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+        "PARTIAL": "PARTIAL",
+        "ROBUST": "ROBUST"
+      },
+      "mechanism_nondegeneracy": {
+        "a_zero": 0,
+        "duplicate_x": 0,
+        "instances": 100,
+        "min_query_gap": 399759921,
+        "ok": true,
+        "query_collision": 0,
+        "solve_fail": 0
+      },
+      "mechanism_off": {
+        "k": 8,
+        "successes": 8,
+        "within_session_f1_rate": 1.0
+      },
+      "retention_ladder": {
+        "F1-RECORDS|0.5": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.875,
+            "B-RETRIEVAL-REPLAY": 0.875,
+            "B-WITHIN-SESSION-RECEIPT": 0.875
+          }
+        },
+        "F1-RECORDS|0.75": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.875,
+            "B-RETRIEVAL-REPLAY": 0.875,
+            "B-WITHIN-SESSION-RECEIPT": 0.875
+          }
+        },
+        "F2-WIDGETS|0.5": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.9,
+            "B-RETRIEVAL-REPLAY": 0.9,
+            "B-WITHIN-SESSION-RECEIPT": 0.9
+          }
+        },
+        "F2-WIDGETS|0.75": {
+          "closing_retention_scopes": [],
+          "rates": {
+            "B-MEMORYLESS": 0.9,
+            "B-RETRIEVAL-REPLAY": 0.9,
+            "B-WITHIN-SESSION-RECEIPT": 0.9
+          }
+        }
+      },
+      "counter_distinctness": {
+        "F1-RECORDS": {
+          "B-MEMORYLESS": 2,
+          "B-RETRIEVAL-REPLAY": 3,
+          "B-WITHIN-SESSION-COMPOSE": 2,
+          "B-WITHIN-SESSION-RECEIPT": 2
+        },
+        "F2-WIDGETS": {
+          "B-MEMORYLESS": 2,
+          "B-RETRIEVAL-REPLAY": 3,
+          "B-WITHIN-SESSION-COMPOSE": 2,
+          "B-WITHIN-SESSION-RECEIPT": 2
+        }
+      },
+      "token_uniqueness": {
+        "collisions": 0,
+        "sampled": 160
+      },
+      "arm_liveness": {
+        "B-CROSS-SESSION-COMPILE": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            }
+          }
+        },
+        "B-MEMORYLESS": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 72,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 72,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 123,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 123,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 90,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 90,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 153,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 153,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            }
+          }
+        },
+        "B-RETRIEVAL-REPLAY": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 24,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 24,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 24,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 24,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 30,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 30,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 30,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 30,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            }
+          }
+        },
+        "B-WITHIN-SESSION-COMPOSE": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            }
+          }
+        },
+        "B-WITHIN-SESSION-RECEIPT": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 108,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 0.875,
+              "successes": 21,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 132,
+                "repair_calls": 3,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 0.9,
+              "successes": 27,
+              "tasks": 30
+            }
+          }
+        },
+        "PC-EXACT-REPLAY": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            }
+          }
+        },
+        "T-MECHANISM-INHERIT": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 51,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 24
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 102,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 48
+              },
+              "rate": 1.0,
+              "successes": 24,
+              "tasks": 24
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 63,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 30
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 126,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 60
+              },
+              "rate": 1.0,
+              "successes": 30,
+              "tasks": 30
+            }
+          }
+        }
+      },
+      "lattice": {
+        "decision": "ROBUST",
+        "detail": {
+          "B-RETRIEVAL-REPLAY": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-WITHIN-SESSION-COMPOSE": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-WITHIN-SESSION-RECEIPT": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          }
+        },
+        "world": {
+          "any_retention_certified": true,
+          "gates_pass": true,
+          "robust_certified": true
+        }
+      }
+    }
+  },
+  "director_mandate_binding": {
+    "action": "REOPEN",
+    "claim_id": "C-MEAS-VALID",
+    "cognitive_reset": true,
+    "cycle_id": "38193775999",
+    "parent_handoff_disposition": "USE",
+    "request_hash": "151f0cce8abd1722c6c18d67d72f83f1318d7917060c00613c8978a7469e93cc",
+    "allocation_question": "Can a hardened V3 credential-free bank be constructed and certified pre-freeze such that its success requires mechanism- or composition-dependent (memory-carried) behaviour -- supplying a memory-robust, non-ceiling dynamic range that a frozen within-session memoryful comparator (chain-to-precursor-distance / receipt-log state) cannot reach -- thereby discharging readiness blocker B2 without invoking or requiring an LLM endpoint?",
+    "binding_note": "The Director mandate question is the binding direction (AGENTS.md precedence 5). The parent handoff EXP-RUNTIME-38182129488 is USE (continuity evidence) and its decision counterfactual is followed: the experiment is designed so that it cannot return 'neither'. The mandate stop rule is honored: one bank class, two retention scopes plus the identity control; if no constructible bank exceeds the retention comparators, the bounded substrate-class negative is recorded and the thread stops. The V2 memoryless certificate is NOT re-run.",
+    "dependencies": [
+      "Runtime's own SBA-CREDENTIAL-FREE-V2 certificate (EXP-RUNTIME-38169622704) and the memoryful-comparator limit (EXP-RUNTIME-38182129488).",
+      "Credential-free deterministic harness; no LLM endpoint required (runs parallel to Intel/B3)."
+    ],
+    "stop_rule": "smallest-decisive-batch: one frozen V3 bank, the within-session memoryful comparator, the cross-session raw-example-retention comparator, and the identity control. If no constructible bank exceeds the strongest retention comparator, record the bounded negative and stop; do not iterate banks and do not re-open the same failure."
+  },
+  "parent_handoff_continuity": {
+    "experiment_id": "EXP-RUNTIME-38182129488",
+    "path": "research/experiments/EXP-RUNTIME-38182129488/handoff.json",
+    "sha256": "2192ce4494fd533557135b7696e6068880fe4b962495707d71d59f46bb6650c5",
+    "disposition": "USE",
+    "usage": "Continuity evidence and the direct design brief. The parent measured that the V2 (K-1)/K separation is a within-session receipt-retention artifact (B-MEMORY-RECEIPT reaches T, margin 0, 0/4 counter dims distinct) and specified the next question: a hardened bank whose success requires mechanism- or composition-dependent behaviour. This experiment designs exactly that bank. It does not override the mandate.",
+    "established": [
+      "On the frozen SBA-CREDENTIAL-FREE-V2 synthetic credential-free stdlib-only bank with K in {8,10}, the engineered (K-1)/K treatment/comparator separation is a function of comparator within-session receipt-retention capacity, not of the treatment mechanism.",
+      "Measured capacity threshold = 1 retained commit receipt at novelty 0.50 and 2 at novelty 0.75, on both F1-RECORDS (K=8) and F2-WIDGETS (K=10).",
+      "B-MEMORY-RECEIPT is success- and counter-identical to T at both scored bands (rate 1.0, margin 0.0, 0/4 counter dimensions distinct); retrieval is inert in the collapse.",
+      "All twelve validity gates V1-V8 pass; the scored matrix ran twice byte-identically; exact-match scoring holds; minimum arm success rate is 0.875 at the correctness floor.",
+      "Independent audit status=PASS, producer_claim_supported=true, required_fixes=[] (audit.json sha256 4ed3c492dfff807cc7e0d519e0aef700edb9427c08853620a5a641c5494797fd)."
+    ],
+    "rejected": [
+      "The bounded hypothesis that the (K-1)/K separation is robust to a memoryful comparator: REJECTED for SBA-CREDENTIAL-FREE-V2 with K in {8,10} at the scored bands.",
+      "The bounded claim that the predecessor certificate supplies discriminative dynamic range for a benchmark whose comparator arms carry a full within-session receipt memory: REJECTED at this ceiling (PARTIAL).",
+      "The bounded hypothesis that retrieval is the causal factor in the collapse: REJECTED (NC-RETRIEVAL-REDUNDANT holds).",
+      "NOTE ON SCOPE: none of these rejections closes the Runtime substrate-validity domain, the broader C-MEAS-VALID claim, or credential-free measurement as a whole."
+    ],
+    "unknown": [
+      "Whether a hardened V3 bank whose success requires mechanism- or composition-dependent behaviour can supply memory-robust dynamic range for a four-arm benchmark.",
+      "Whether real external comparator arms (COLD / INSTRUCTIONS / RETRIEVAL in C-LLM-INHERIT) behave like within-session full-receipt memory; only synthetic comparator policies were measured.",
+      "Whether the capacity-threshold result holds for K outside {8,10} or for other credential-free constructions.",
+      "Whether the primary comparator's identity with T can be broken by a substrate change while preserving a credential-free discovery path.",
+      "Whether the flagship four-arm benchmark can run at all: B1 and B3 gate it independently."
+    ],
+    "do_not_assume": [
+      "Do NOT read the parent PARTIAL result as a global failure of the bank or of Runtime measurement validity; it is a bounded synthetic substrate-validity negative for SBA-CREDENTIAL-FREE-V2 with K in {8,10}.",
+      "Do NOT generalize to natural or economically-bearing Web tasks, external LLM/browser agents, baseline strength, agent capability, or K outside {8,10}.",
+      "Do NOT re-run the memoryless certificate; three deterministic REST iterations already exist and the mandate stop trigger explicitly excludes it.",
+      "Do NOT treat the 0-margin identity between the parent's B-MEMORY-RECEIPT and T as a comparator bug or a vacuous comparison; the certificate requires a positive margin.",
+      "Do NOT transfer this runtime result into another lane's claim status.",
+      "Do NOT assume the V3 design can be assumed robust before EXECUTE; ROBUST is only a prediction and the experiment is designed so that PARTIAL and COLLAPSED are equally legitimate outcomes."
+    ]
+  },
+  "legacy_comparative_reasoning": {
+    "legacy_classification": "DISTINCT_EXTENSION",
+    "pre2_guard": "P2-WP003 leakage precedent is the binding guard: the hidden mechanism and its answer must never be readable outside their single intended reveal (V3 / NC-NO-LEAK). The parent's memoryful comparator collapse is the direct ancestor of the retention comparators here.",
+    "codex_evidence_screened": "codex/legacy_brief.json (source archive/spider-codex-ultimate, artifact_count 1401) and codex/LEGACY_EVIDENCE_GUIDE.md: the legacy corpus has zero hits for a memoryless-vs-memoryful dynamic-range bank; the adjacent P2-REPLAY-COST finding (an 8.5x speed claim withdrawn to 1.002x) is an economics result, not a dynamic-range one. No duplicate of this measurement.",
+    "differences_from_pre2": "Pre-2.0 runtime work concerned substrate demand, maintenance economics and route replay, not a hidden-mechanism memory-carried dynamic-range bank. The V3 compile-vs-retain measurement is new Research-2.0 control-plane work.",
+    "comparative_reasoning_match": "The pre-2.0 corpus had no exact match for a memory-carried-mechanism bank; the closest items measured automation reliability and cache conversion. Hence this is a genuine extension, not a replay."
+  },
+  "freeze_artifacts": [],
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision labels are arithmetically reachable and were verified by the rule-level classifier classify() over synthetic worlds (branch_reachability returns each own label; all four inhabited). ROBUST: all three retention comparators at (K-1)/K in [0.80,0.95) with margin 0.125/0.100 -- the predicted world. PARTIAL: a world in which one comparator closes the range while another does not. COLLAPSED: a world in which a retention scope closes the range at every cell -- reached by NC-MECHANISM-OFF and by classify() when any retention scope reaches near T. MEASUREMENT_INVALID: any V1-V8 failure. No earlier branch makes a later one unreachable; the disclosed identity control has margin 0 and therefore can never certify, so it does not empty any branch.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.source_sha256 acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+        "spec.json design_satisfiability_probe.output.branch_reachability",
+        "spec.json design_satisfiability_probe.output.predicted_decision (ROBUST)",
+        "spec.json decision_rule",
+        "spec.json design_satisfiability_probe.output.mechanism_off (COLLAPSED direction)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is present now. python 3.12.15 is installed; stdlib http.server/urllib.request/hashlib/json/threading/collections import and a live in-process stdlib HTTP server on 127.0.0.1 answered all requests in probe and selftest (transport_stdlib_http=true). All 15 protocol invariants hold on the in-process model (no mechanism/answer/calibration-label leak into a scored body; chain resource null; calibration label revealed once; wrong answer 400 no leak; correct answer single-use). All derivations are deterministic from RUN_SEED; P is prime and affine recovery is exact. The complete EXECUTE path (56-cell matrix run twice, all gates, decision rule, controls) is embedded in the frozen harness and its decision path was exercised at DESIGN via --mode selftest; EXECUTE only writes the frozen file to disk and runs --mode scored. No credentials, browser, dataset, external endpoint, model or LLM access is required; B3 is not a prerequisite.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.source_sha256 acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+        "spec.json design_satisfiability_probe.output.checks.protocol_invariants",
+        "spec.json design_satisfiability_probe.output.checks.transport_stdlib_http",
+        "spec.json design_satisfiability_probe.output.mechanism_nondegeneracy",
+        "spec.json substrate"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The positive control PC-EXACT-REPLAY is 1.0 at every band, and the identity control B-CROSS-SESSION-COMPILE is probe-measured success- and counter-identical to T (disclosed). Each retention comparator is probe-measured at (K-1)/K: F1 7/8=0.875, F2 9/10=0.900, both in [0.80,0.95), margin 0.125/0.100 >= 0.05, and counter-distinct from T on >= 2/4 dimensions (B-WITHIN-SESSION-RECEIPT 2, B-RETRIEVAL-REPLAY 3, B-MEMORYLESS 2). The retention frontier is empty at every scored cell (retention_ladder.closing_retention_scopes == [] everywhere), which is the identified signal. Rates are measured outputs, not equality-frozen constants; the probe reproduced the closed-form predictions exactly. The disclosed identity is non-vacuous because the certificate requires a strictly positive margin, so an identical comparator can never certify; the discriminating signal is carried by the retention comparators.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json design_satisfiability_probe.output.counter_distinctness",
+        "spec.json design_satisfiability_probe.output.retention_ladder",
+        "spec.json decision_rule.identity_disclosure",
+        "spec.json arms"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control can fail and was probe-measured away from its boundary. NC-MECHANISM-OFF raises the within-session comparator to 1.0 and destroys the certificate (mechanism_off_destroys_certificate=true). NC-EXAMPLES-ISOLATION holds (no calibration example / mechanism body / answer in any scored body). NC-REPEAT-INPUT holds (wrong answer 400 no leak; correct answer single-use 409). NC-MECHANISM-NONDEGENERATE holds (0/100 a==0, 0 duplicate inputs, 0 solve failures, 0 query collisions, min_query_gap 399759921). NC-IDENTITY-DISCLOSURE holds. NC-TOKEN-UNIQUENESS 0/160 collisions. NC-CEILING-BAND all arms 1.0 at novelty 0.0. NC-NO-LEAK 15/15 invariants clean. NC-RETENTION-LADDER shows no retention-only scope closes the range. The lattice is therefore sensitive to removal of the very mechanism it measures. Note: the retention ladder is a declared control, not a validity gate, so a closing scope yields a scientific COLLAPSED/PARTIAL rather than MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.mechanism_off",
+        "spec.json design_satisfiability_probe.output.mechanism_nondegeneracy",
+        "spec.json design_satisfiability_probe.output.retention_ladder",
+        "spec.json design_satisfiability_probe.output.checks"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-MECHANISM-INHERIT completed a full calibration+scored instance at every family and band in the probe (1.0 at 0.00, 0.25, 0.50, 0.75 for both families; treatment_live_all_bands=true) and is in band at every scored cell. PC-EXACT-REPLAY is 1.0 at every band. All seven arms executed end-to-end without exceptions (arm_liveness present for all seven). The treatment executes on the credential-free substrate and the chain answer recomputation succeeds deterministically.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json design_satisfiability_probe.output.checks.treatment_live_all_bands",
+        "spec.json design_satisfiability_probe.output.checks.pc_exact_replay_all_bands"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "There is no pre-existing mutable local code, data, task bank or fixture that this experiment's interpretation depends on: the substrate is generated entirely from the frozen literals in spec.json (class_id, mechanism, derivations, endpoints, families, arms, controls, lattice arithmetic) with stdlib only and no external dataset, credential or repository file. The harness exists only as frozen text, not as an unbound external file: the COMPLETE harness (V3 substrate, affine mechanism, seven arm policies, declared controls, scored-matrix driver, full V1-V8 evaluator and frozen retention decision rule) is embedded verbatim in prereg.md and in spec.design_satisfiability_probe.source and is therefore bound by the frozen prereg/spec hashes; the EXECUTE copy is additionally recorded by the V1 code-fidelity manifest (sha256 of every authored file + python3 --version) in result.json.artifacts. Accordingly freeze_artifacts is empty, as the freezer requires for NOT_APPLICABLE.",
+      "evidence_refs": [
+        "spec.json substrate.external_dependencies = []",
+        "spec.json measurement_validity.gates.V1_code_fidelity_manifest",
+        "spec.json design_satisfiability_probe.source_sha256 acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9",
+        "scripts/freeze_experiment.py validate_v2_design (NOT_APPLICABLE requires empty artifacts)"
+      ]
+    }
+  }
 }
