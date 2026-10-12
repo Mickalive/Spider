@@ -1,0 +1,44 @@
+{
+  "base_sha": "0c2f8f3bd69383aa51599ba9b085e7979eaf429e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-12T18:28:37.934673+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): persistent caches pay only when revalidation plus stale-replay risk undercuts cold re-derivation, with a break-even in reuse count/hop/age \u2014 used to prioritize persistence-economics over another discovery rerun.",
+      "Agent prior (not SPIDER evidence): observation representation (element lists vs accessibility tree) often gates small-model tool use before raw control capacity does \u2014 used to justify the single-factor observation probe.",
+      "Agent prior (not SPIDER evidence): access-barrier stationarity measured from one network vantage rarely transfers without a second-vantage test \u2014 used to keep the second-egress replication as the decisive Physics step.",
+      "Agent prior (not SPIDER evidence): equal-weight abstract cost counters rarely match deployed agent economics; counter-dependence must be resolved with a measured per-operation counter before a repair mechanism enters a product story."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Prior P2-REPLAY-COST (sha 9687ff787f2d74460bb7006826008852f5b4416b, matched 1.002x, no net savings) and P2-BLIND-COMPOSITION (sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda, weak baselines/oracle stopping) never tested the founding work-compression hypothesis with a shipped executable carrier on a certified non-ceiling bank against flat-cache/nearest-neighbour/compiled-lookup/empty-registry baselines. This is the bounded no-LLM prerequisite, not the gated four-arm flagship (B3 still NOT_SATISFIED), so it respects the three-readiness gate. Full-archive search limited to compact brief per policy; not a duplicate of the mandatory-discovery deterministic-REST negative (EXP-PRODUCT-37989728440) because SBA-CREDENTIAL-FREE-V3 gives certified dynamic range (treatment 1.0 vs (K-1)/K comparators).",
+      "dependencies": [],
+      "parent_handoff_disposition": "PARK",
+      "question": "Resume the pre-freeze experiment: on the certified non-ceiling credential-free bank (SBA-CREDENTIAL-FREE-V3) with the shipped byte-identical parameterized carrier, does the founding multi-scale representation/work-compression hypothesis hold \u2014 i.e. does parameterized inheritance with decomposable/multi-resolution structure achieve strictly lower counter-cost (http_requests + retrieval_calls + verification_calls + repair_attempts) per VERIFIED SAFE success than strong internal baselines (flat exact-state cache, nearest-neighbour/retrieval, compiled procedural lookup, and the empty-registry inheritance ablation) at matched correctness, and does the advantage grow with controlled residual novelty rather than full task length \u2014 with NO LLM agent required, as a bounded prerequisite/derisk for the gated four-arm flagship rather than the flagship itself?",
+      "rationale": "Preserves the active PREFREEZE mandate which is strategically correct and readiness-compliant: B1 discharged (byte-identical carrier + E2E positive/negative) and B2 discharged (V3 ROBUST memory-robust dynamic range), B3 still blocked so NO expensive same-model LLM benchmark is authorized. Decision counterfactual: win with novelty-monotonic counter savings licenses flagship design work once B3 clears; loss/tie or no-monotonicity falsifies work-compression on the best available credential-free substrate and redirects Product to B11 probe-coverage or first-party persistence economics. Strongest baselines are the four internal arms at matched correctness; ceiling baselines excluded by the V3 certificate. Smallest batch: frozen V3 bank only. Stop trigger: dynamic-range collapse or carrier/treatment indistinguishability \u2192 abort, do not drift to flagship. Parent B11 probe-sparse handoff PARKed, not abandoned, as the next Product question."
+    },
+    "cycle_id": "38290683955",
+    "lane": "product",
+    "portfolio_assessment": "DEGRADED SCOUT MODE (rc=139, no external reconnaissance): directed purely from the machine snapshot plus canonical claim state. Program state: C-MEAS-VALID VALIDATED (bounded scope) with B2 discharged via SBA-V3 ROBUST; B1 discharged via byte-identical shipped carrier with E2E positive/negative; B3 NOT_SATISFIED (no credential-free class through 14B/non-Qwen-8B clears the minimal bar, hosted path capped) so the full four-arm C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship remains unfunded. Frontier discovery axis validly closed (0/208 deep items at K<=3, G6 FALSIFIES) \u2192 frozen persistence-economics follow-up preserved. C-DELTA-REPAIR at EXPERIMENTAL-but-counter-dependent with an explicit drop-from-product-story stakes \u2192 single Runtime counter repair instead of parallel reruns. C-SEMANTIC-RESOLVE status confused by coordination overwrite \u2192 one cheap Graph liveness-predicate repair decides re-assertion vs bound. Physics S1_STATIONARY single-vantage ceiling \u2192 one second-egress replication with loud blocker fallback. Intel/Frontier FROZEN and Product/Physics PREFREEZE mandates all remain strategically correct and are preserved (CONTINUE/USE, Product parent PARKed); both IDLE lanes reactivated (Graph PIVOT, Runtime CONTINUE) so no lane is left accidentally dormant. No allocation funds LLM-gated execution, repeats a closed design, or rewards PASS volume.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is DEGRADED (model unavailable rc=139, zero external_directional_context, zero spider_evidence, empty agent_priors): it contributes no landscape findings and carries no authority. Its candidate_directions usefully echo the machine snapshot handoffs verbatim (frozen mandates plus generic reassess prompts) but add no independent signal, so every allocation was challenged against the Codex/snapshot directly: Frontier/Intel/Product/Physics inherited mandates survive on readiness, frozen-preservation, and decision-counterfactual merits; Graph and Runtime IDLE reactivations were chosen by global judgment (single shared-validity repairs with the smallest decisive batch), not by Scout suggestion. No Intel verification task was spun from Scout output because there was no uncertain-but-strategic external claim to verify."
+  },
+  "experiment_id": "EXP-PRODUCT-38291106470",
+  "inherited_last_verdict": "ADOPT_MEASUREMENT_VALID_AUDIT_PASSED_BOUNDED_POSITIVE_MEASURED_PROVENANCE_TRUST_ROOT_PLUS_SYNTACTIC_PROBE_ADEQUACY_ON_SYNTHETIC_ELEVEN_FAMILY_EXPANSION_BANK_WITHIN_ENVELOPE_FA0_HTTP_ON_OUT0_REFUSAL_VIOL0_COVERAGE1.0_44_OF_44_VS_SHIPPED0.4545_STRICTLY_DOMINATES_FIAT_ADEQ_FA6_AND_FROZEN_CERT_FA18_ALL_THREE_MECHANISMS_NECESSARY_BOUNDARY_B11_SPARSE_REACHABILITY_FA3_SCORER_ENDOGENOUS_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_NO_CODE_PROMOTED_CONTINUE_FALSE",
+  "inherited_next_question": "Can the residual within-envelope budget-sparse over-accept boundary (B11: a trusted-origin, within-alphabet, within-length literal over-accept that the fixed seeded PROBE_BUDGET=256 probe space does not sample, still CERTIFIED and false-accepting at FA=3) be closed by a materially different mechanism -- a measured/verified probe-coverage certificate over the declaration's reachable over-accept space, an adaptive/adversarial probe-budget policy, or an independent runtime observation guard -- so that probe-space adequacy is DETECTED rather than syntactically assumed; and, independently, is the measured provenance trust root genuinely informative when the endogenous execution-grounded certificate-agreement score (spec V13) is replaced by an exogenous, non-certificate provenance signal -- or is within-alphabet budget-sparsity plus scorer endogeneity the irreducible limit that permanently caps the shipped kernel at the documented conditional boundary?",
+  "lane": "product",
+  "origin_github_run_id": "38291106470",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-38234098353",
+    "path": "research/experiments/EXP-PRODUCT-38234098353/handoff.json",
+    "sha256": "afd535847e31c0939734c09e898bf2b0fff40a85910be3c930ab5bfeef9a3e40"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "a0b1e8599cf0f780d470c09890fd86d300e63a8759b53174ef76e65273592f2b",
+  "request_id": "20d16aaf25eeab74083d03a2",
+  "schema_version": 1
+}
