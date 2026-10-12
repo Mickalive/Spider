@@ -24,6 +24,11 @@ on:
         required: false
         default: ""
         type: string
+      preferred_free_model:
+        description: "Verified free OpenCode model preferred by Factory health check; no paid override"
+        required: false
+        default: ""
+        type: string
       director_mandate_b64:
         description: "Base64-encoded Global Research Director mandate for a NEW experiment"
         required: false
@@ -43,6 +48,7 @@ env:
   CHAIN_DEPTH: ${{ inputs.chain_depth }}
   RESUME_EXPERIMENT_ID: ${{ inputs.resume_experiment_id }}
   DIRECTOR_MANDATE_B64: ${{ inputs.director_mandate_b64 }}
+  SPIDER_PREFERRED_FREE_MODEL: ${{ inputs.preferred_free_model }}
   GH_TOKEN: ${{ github.token }}
   SPIDER_CONTROL_HELPER: /tmp/spider-control-plane.py
 

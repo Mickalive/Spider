@@ -4,7 +4,7 @@ ROLE=${1:?role}
 RECEIPT=${2:?receipt path}
 shift 2
 REAL="${OPENCODE_BIN:-$HOME/.opencode/bin/opencode}"
-MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-3}"
+MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-6}"
 RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-5}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-240}"
 MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-1200}"
@@ -69,6 +69,19 @@ if [[ ( "$ROLE" == audit || "$ROLE" == design_review ) && -z "${SPIDER_EXCLUDE_M
 fi
 if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   mapfile -t MODELS < <(printf '%s\n' "${MODELS[@]}" | grep -Fxv "$SPIDER_EXCLUDE_MODEL" || true)
+fi
+# If the headless FREE-provider smoke succeeded, try that proven model first
+# for every role, while retaining the independent producer exclusion above.
+# No external/provider-supplied model may enter this trusted configured list.
+if [[ -n "${SPIDER_PREFERRED_FREE_MODEL:-}" ]]; then
+  preferred="${SPIDER_PREFERRED_FREE_MODEL}"
+  for candidate in "${MODELS[@]}"; do
+    if [[ "$candidate" == "$preferred" ]]; then
+      mapfile -t MODELS < <(printf '%s\n' "$preferred" "${MODELS[@]}" | awk 'NF && !seen[$0]++')
+      echo "SPIDER_FREE_HEALTHY_FIRST role=$ROLE model=$preferred"
+      break
+    fi
+  done
 fi
 (( ${#MODELS[@]} > 0 )) || { echo "::error::No model candidates role=$ROLE"; exit 75; }
 # In a provider outage don't cycle the same failing free models seven times.

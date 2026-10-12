@@ -80,13 +80,14 @@ def allowed_candidates(config: dict, limit: int) -> list[str]:
     if not approved:
         raise ValueError("no verified free models available")
     models = []
-    # Two roles/families to distinguish a model outage from auth-wide failure.
-    for role in ("scout", "director", "research"):
-        for model in config["roles"][role]:
-            if model not in approved or not model.startswith("opencode/"):
-                raise ValueError("model outside reviewed no-payment allowlist")
-            if model not in models:
-                models.append(model)
+    # Probe the complete verified-free catalog, not merely the first three
+    # models of one role. The previously blocked factory never tried newer
+    # free models despite their listing in the official price table.
+    for model in config["free_only_allowed_models"]:
+        if model not in approved or not model.startswith("opencode/"):
+            raise ValueError("model outside reviewed no-payment allowlist")
+        if model not in models:
+            models.append(model)
     return models[:limit]
 
 
@@ -95,11 +96,11 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=Path("config/models.json"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--bin", default=str(Path.home() / ".opencode/bin/opencode"))
-    parser.add_argument("--max-models", type=int, default=3)
-    parser.add_argument("--per-model-seconds", type=int, default=85)
+    parser.add_argument("--max-models", type=int, default=12)
+    parser.add_argument("--per-model-seconds", type=int, default=35)
     args = parser.parse_args()
-    if not (1 <= args.max_models <= 3 and 5 <= args.per_model_seconds <= 90):
-        parser.error("bounded free model preflight only: <=3 models, 5–90 seconds each")
+    if not (1 <= args.max_models <= 12 and 5 <= args.per_model_seconds <= 90):
+        parser.error("bounded free model preflight only: <=12 vetted models, 5–90 seconds each")
     config = json.loads(args.config.read_text(encoding="utf-8"))
     choices = allowed_candidates(config, args.max_models)
     policy_path = Path(".github/scripts/opencode-ci-permissions.json")
@@ -113,7 +114,8 @@ def main() -> None:
         print(f"SPIDER_PROVIDER_CHECK model={model} category={status}", flush=True)
         if status == "READY":
             break
-    ready = any(item["status"] == "READY" for item in attempts)
+    selected = next((item["model"] for item in attempts if item["status"] == "READY"), None)
+    ready = selected is not None
     reasons = [a["status"] for a in attempts]
     if ready:
         category = "READY"
@@ -130,6 +132,7 @@ def main() -> None:
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "ready": ready,
         "category": category,
+        "selected_model": selected,
         "attempts": attempts,
         "free_only": True,
         "no_paid_fallback": True,
