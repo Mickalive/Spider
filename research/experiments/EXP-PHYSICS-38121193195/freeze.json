@@ -1,0 +1,18 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl": "a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f",
+    "research/experiments/EXP-PHYSICS-38074818597/spec.json": "ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd",
+    "research/physics/exp_38074818597_lib.py": "c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e",
+    "research/physics/exp_38074818597_run.py": "ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-PHYSICS-38121193195",
+  "frozen_at": "2026-10-12T18:48:02.495584+00:00",
+  "hashes": {
+    "design_review.json": "e740ce134b4cd9690332badf42ff43abe647fa470fe748a936d45168e1bcf0d4",
+    "prereg.md": "2e0fda6bfb71a0364884609a922c3935efddc3f59a1cbaec5ffcdece91f34ba0",
+    "request.json": "6b50946f9e07f18b44c147935334e1551e78d171b40235695d144c99373dcac5",
+    "spec.json": "19e89e370c4673228d0196a514dbf0336a20184cbe5dc325dc0ffa1cf31f1a57"
+  },
+  "schema_version": 1
+}

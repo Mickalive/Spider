@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/exo-free",
-  "attempt": 4,
-  "exit_code": 1,
-  "category": "substantive",
-  "github_run_id": "38151070069",
+  "status": "success",
+  "model": "opencode/ling-3.1-flash-free",
+  "attempt": 1,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "38291089779",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-11T15:51:22.911265+00:00"
+  "recorded_at": "2026-10-12T18:47:21.223331+00:00"
 }

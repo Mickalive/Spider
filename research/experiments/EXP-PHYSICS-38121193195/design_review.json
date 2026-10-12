@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-38121193195",
+  "lane": "physics",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Both branches are reachable under the exact frozen five-clause rule. Positive branch S1_CROSS_VANTAGE_ROBUST requires all five clauses true; each threshold is arithmetically attainable: max binary MI at the parent anchor marginal (f_b=8/57~0.140) is H(0.140)~0.405 nats >> the 0.05 skill floor; the minimum permutation p is (1+0)/(1+10000)=9.999e-05 < 0.05; per-class persistence and FALSE_ACCEPT/FALSE_REJECT are 0/1-valued at the relevant small denominators so the 0.80/0.20 thresholds are attainable; the zero-denominator convention is applied consistently and clause 5 keeps an explicit denominator>=1 guard so it cannot be satisfied by convention. Negative branch S0_VANTAGE_SPECIFIC fires on any single false clause, and the frozen LOW-V2-INTRINSIC convention (V2_n_t0_intrinsic<3 -> S0, not MEASUREMENT_INVALID) adds a further reachable route. Precedence (MEASUREMENT_INVALID > S1 > S0) is well-formed and S0's condition (MVs hold AND NOT S1) is exhaustive over the valid-measurement space, so no branch makes a later branch unreachable. Independent verification: a non-outcome-bearing canary implementing the exact five-clause rule with the bound parent lib primitives (stdlib plug-in MI, B_EXCHANGE/B_CROSSVANTAGE permutation, endpoint-clustered bootstrap) on the prereg section-8 marginal selected S1 in 23/25 planted worlds (rho=0.98, perfect cross-vantage agreement) and 0/25 i.i.d. exchangeable worlds, reproducing the spec's declared calibration separation (0.9333 vs 0.0) qualitatively. Nonblocking ambiguity: PC_SYNTHETIC_STATIONARY ('single-vantage replica') does not state how V1-anchor data are populated for the cross-vantage clauses it is scored against; its calibration value equals PC_CROSS_SYNTHETIC_STATIONARY's, consistent with a V1==V2 replication, but EXECUTE/AUDIT need that stated.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#decision_rule",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#falsifier",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-6",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-8",
+        "research/physics/exp_38074818597_lib.py (mi_binary, perm_test_binary, cluster_bootstrap_ci primitives reused by the canary)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are available now or explicitly protocol-based, none is deferred to 'created during EXECUTE'. Tor: independently re-verified that the apt candidate 0.4.9.11-0ubuntu0.24.04.1 is present on this runner class (tor binary absent, candidate available), matching the spec's 2026-10-12 re-verification; the 2026-10-11 DESIGN probe already demonstrated the full chain (install rc=0, bootstrap 100% in 73 s, ip-literal pin held after SIGNAL NEWNYM, 7/7 oracle hosts classified correctly through the HTTPTunnelPort tunnel). V1: stable ASN AS8075 observed on two consecutive days (dynamic IP within AS8075 is expected and MV8 gates on ASN, not IP). Frozen fixtures: parent raw ambient_collection.jsonl has exactly 228 rows and the bound classifier replays it with 0/228 mismatches (MV5 satisfiable); the 57-endpoint pool is byte-identical and in identical order to the parent spec (MV10 satisfiable); the rung-0 marginal of the parent raw file exactly matches the prereg section-8 synthetic-control design prior (CLEAN 45, OTHER_NONBARRIER 4, BLOCK_403_CHALLENGE 6, TRANSPORT_ERROR 1, RATE_LIMIT_429 1). Oracle hosts and the 57 endpoints are public, credential-free, unauthenticated GET targets; remote Web responses cannot be frozen, but their identifiers and the sampling protocol are frozen in spec/prereg. No credentials, browsers, datasets or task banks are required (NOT_APPLICABLE).",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#frozen_universe",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-3",
+        "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl (228 rows, sha256 a418f66f...)",
+        "research/physics/exp_38074818597_lib.py (sha256 c0ff938b..., classifier replay 0/228 verified)",
+        "apt-cache policy tor: Candidate 0.4.9.11-0ubuntu0.24.04.1 (verified this review)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The treatment contrast (V1 direct runner egress vs V2 pinned Tor exit) can differ on the frozen pool: the parent anchor marginal carries 7 intrinsic endpoints (6 BLOCK_403_CHALLENGE + 1 TRANSPORT_ERROR), and the spec itself discloses that a Tor exit carries a different blocking regime, so the arms are not guaranteed identical. No ceiling/floor trap: degenerate V2 outcomes (all-intrinsic or all-CLEAN at the anchor) do not produce identical arms but route to S0 via clause 1 (n_t0_intrinsic<3 or per-class persistence) or clause 3 (MI=0 for a constant indicator), and the observed marginal leaves ~0.405 nats of MI headroom against the 0.05 floor, so the statistic is not structurally clamped in either direction. Baselines B_EXCHANGE_V2 and B_CROSSVANTAGE are endpoint-level permutation nulls that preserve the relevant marginals; B_CONSTANT_USABLE, B_MARGINAL_V2 and B_LASTSWEEP_V2 are computable from the same raw records; no cost dimension is omitted because the protocol uses zero model calls and counts HTTP GETs, egresses and wall clock explicitly. The secondary domain-clustered CI is well-defined: the pool collapses to exactly 53 registrable domains with the stated 7-endpoint/3-domain collapse (archlinux.org x2, djangoproject.com x3, spring.io x2), verified by computation.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#baselines",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#estimators",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.validity_notes",
+        "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl (rung-0 marginal)",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#frozen_universe (53-domain collapse verified)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive and null controls are calibrated to fire oppositely under the same implementation that scores the experiment, and this review independently reproduced the separation with a canary on the bound lib primitives and the exact five-clause rule: planted cross-vantage stationary worlds select S1 (23/25 at reduced R/perms/boot; spec calibration 0.9333 >= pc_power_min 0.80) while i.i.d. exchangeable worlds select S1 in 0/25 (spec calibration 0.0 <= nc_false_positive_max 0.05). The falsification-direction nulls are non-vacuous and disclosed: NC_CROSS_SUPERSET returns T1=0.0 while showing CV-significant fraction 0.7933, demonstrating that the transfer clause (not the agreement clause) does the discriminating work, and the <=0.05 budget (not an ==0 point requirement) correctly keeps MV7 from failing on sampling noise. NC_INDEPENDENT_STATIONARY isolates the cross-vantage clause (T1=0.0, CV 0.0067). Live controls (PC_ORACLE_BARRIER, NC_CLEAN_ORACLE) run at BOTH vantages at every rung start and any failure maps to MEASUREMENT_INVALID, so the controls are neither tautological nor impossible. All five synthetic controls are gated by MV7. Nonblocking: PC_SYNTHETIC_STATIONARY's V1-anchor population is unspecified (see decision_rule_reachability).",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.prerequisites.MV7",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-8",
+        "research/physics/exp_38074818597_lib.py (primitives used by the independent canary)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "Although this is a Physics experiment (not a Product experiment targeting C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON, where PASS would be mandatory), the treatment arm is live and demonstrated rather than stipulated: the treatment factor is a second independent egress realized as a pinned Tor exit, and the 2026-10-11 DESIGN probe (non-outcome-bearing, no frozen endpoint touched) installed tor 0.4.9.11, bootstrapped to 100% in 73 s, pinned an exit via SETCONF/ip-literal that survived SIGNAL NEWNYM, and classified all 7 oracle hosts correctly through the HTTPTunnelPort tunnel, with the V2 exit observed in NL (IsTor=true) versus V1 at AS8075/US (IsTor=false) - distinct IP, ASN and geography, satisfying MV1. The 2026-10-12 re-verification confirmed the same tor version remains apt-installable and V1 remains stable at AS8075, so EXECUTE can reproduce the substrate. If the exit cannot be pinned or held, MV2/MV9 force MEASUREMENT_INVALID rather than a silent single-vantage substitute, which is the mandated behavior. Residual risk (nonblocking): the specific exit-relay fingerprint/ip-literal is not frozen in spec/prereg, so the treatment instance is underdetermined pre-freeze despite the mandate's 'provisioned pre-freeze in DESIGN as a pinned Tor exit'; only provenance discipline (record the fingerprint; post-hoc switch not licensed) guards the residual degree of freedom.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages.V2",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.prerequisites.MV1",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.prerequisites.MV2",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.validity_notes (TREATMENT IDENTITY)",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-3",
+        "research/experiments/EXP-PHYSICS-38121193195/request.json#director_mandate.substrate_dependency"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All four freeze_artifacts exist pre-freeze and their sha256 values match the declared frozen_inputs hashes exactly (verified this review): parent spec ef50435d..., parent raw ambient_collection.jsonl a418f66f..., parent lib c0ff938b..., parent run ca3fd4b0.... The interpretation-determining constants are bound: the 57-endpoint pool is byte-identical (same order) to the bound parent spec, the frozen_intrinsic_classifier constants match the bound lib literally (CHALLENGE_RE_LITERAL, barrier_set, intrinsic_classes, severity_rank, rules), and EXECUTE is required to import the classifier from the bound module and pass MV5 replay (independently verified 0/228). Remote Web responses cannot be frozen; their target identifiers (57 URLs, oracle hosts) and sampling protocol (rungs, deterministic shuffle seed, HTTP parameters, seeds 38121193195-38121193198) are frozen in spec/prereg instead. Two mutable interpretation-relevant dependencies are NOT bound (nonblocking): (a) the pinned exit-relay fingerprint/ip-literal - the treatment instance - is chosen at EXECUTE and is neither a frozen literal nor a listed artifact; (b) the DESIGN calibration scripts/outputs (R=300, perms=1000, boot=1000; 0.9333/0.0/0.0/0.0 and CV fractions) exist only as text in spec/prereg with no committed artifact, repeating the exact pattern the parent handoff recorded as rejected ('pre-freeze textual attainability certificate's concrete figures are not reproducible artifacts'). Impact of (b) is bounded because every control re-runs live at EXECUTE under MV7 with frozen thresholds, so a miscalibration can at worst cause MEASUREMENT_INVALID, never a false S1; AUDIT must not treat the calibration figures as durable evidence.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#freeze_artifacts",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#frozen_inputs (all hashes verified)",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#frozen_intrinsic_classifier",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#sweep_protocol",
+        "research/experiments/EXP-PHYSICS-38074818597/handoff.json#rejected (parent's own lesson on non-reproducible certificates)",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages.V2.design_probe"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "N1",
+      "finding": "Treatment instance underdetermined pre-freeze. The mandate and spec.substrate_dependency require the second egress to be 'provisioned pre-freeze in DESIGN as a pinned Tor exit', but neither spec.json nor prereg.md records the pinned exit-relay fingerprint or ip-literal; vantages.V2 freezes only the pinning procedure. The DESIGN probe observed NL exits 192.42.116.14/192.42.116.95 without recording which relay was pinned. EXECUTE therefore chooses the treatment instance, and the only guards are the frozen treatment-identity rule (record the fingerprint in result.json/provenance.json; mid-session rotation is MV2 INVALID; post-hoc switch not licensed). A pre-declared candidate list or frozen fingerprint with an outcome-independent selection rule would close the residual degree of freedom; as frozen, the design remains capable but the treatment identity rests on EXECUTE discipline.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/request.json#director_mandate.substrate_dependency",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#vantages.V2",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#measurement_validity.validity_notes (TREATMENT IDENTITY)",
+        "research/experiments/EXP-PHYSICS-38121193195/prereg.md#section-8 (Treatment identity)"
+      ]
+    },
+    {
+      "id": "N2",
+      "finding": "PC_SYNTHETIC_STATIONARY is underspecified for this experiment's rule. It is described as a 'single-vantage replica control' with threshold 'S1 fraction >= 0.80', but S1_CROSS_VANTAGE_ROBUST includes the cross-vantage clauses CV_AGREEMENT_SIG and CV_DENYLIST_TRANSFER_VALID, which need V1-anchor data. The spec does not state how V1 is populated in that world; its DESIGN calibration (0.9333) exactly equals PC_CROSS_SYNTHETIC_STATIONARY's, consistent with a V1==V2 replication, but EXECUTE/AUDIT could reasonably implement a different world and dispute the MV7 gate. The spec should state the V1 population explicitly (e.g., V1_anchor=V2_anchor, V1_delta=V2_delta).",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control.PC_SYNTHETIC_STATIONARY",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control.PC_CROSS_SYNTHETIC_STATIONARY",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#decision_rule.clauses"
+      ]
+    },
+    {
+      "id": "N3",
+      "finding": "Calibration provenance is non-reproducible. The PC/NC calibration figures (R=300, perms=1000, boot=1000; T1 fractions 0.9333/0.0/0.0/0.0 and CV-significant fractions 0.9767/0.01/0.0067/0.7933, including the rho=0.92 -> 0.76 sensitivity point) exist only as text in spec.json and prereg.md; no calibration script or output artifact is committed to the repository. This repeats the exact defect the parent handoff lists under 'rejected' ('The pre-freeze textual attainability certificate's concrete figures are not reproducible artifacts'). Impact is bounded: all controls re-run live at EXECUTE under MV7 against frozen thresholds, so a wrong calibration can at worst waste a cycle as MEASUREMENT_INVALID and cannot produce a false S1; this review independently reproduced the qualitative separation (S1 in 23/25 planted worlds, 0/25 exchangeable worlds) with the bound lib primitives. AUDIT must not treat the declared figures as durable evidence.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#freeze_eligibility",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#positive_control",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control",
+        "research/experiments/EXP-PHYSICS-38074818597/handoff.json#rejected"
+      ]
+    },
+    {
+      "id": "N4",
+      "finding": "Imprecise eligibility wording. freeze_eligibility.control_sensitivity states 'NC false-positive 0.01 <= nc_false_positive_max 0.05', but for NC_SYNTHETIC_EXCHANGEABLE the T1 (S1-selection) fraction is 0.0 and 0.01 is the CV-significant fraction, a secondary diagnostic. Both values are within budget so the conclusion is unaffected, but the conflation could mislead AUDIT about which quantity is gated.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#freeze_eligibility.control_sensitivity",
+        "research/experiments/EXP-PHYSICS-38121193195/spec.json#null_control.NC_SYNTHETIC_EXCHANGEABLE"
+      ]
+    }
+  ],
+  "rationale": "The design is not freeze-incapable. I am ling-3.1-flash-free, a different model from the DESIGN producer (opencode/muse-spark-1.3-contributor-free per model_design.json; a prior review attempt by opencode/exo-free failed), satisfying the independent-review rule. I attacked all six declared PASSes and verified each independently with cheap non-outcome-bearing probes: (1) both decision branches trigger under the exact five-clause rule - my canary on the bound lib primitives selected S1 in 23/25 planted worlds and 0/25 exchangeable worlds, and every threshold is arithmetically attainable (MI headroom ~0.405 nats vs 0.05 floor; min perm p 9.999e-05 < 0.05); precedence is well-formed and exhaustive over valid measurements. (2) All hard prerequisites exist now: tor apt candidate 0.4.9.11-0ubuntu0.24.04.1 available (re-verified), the full install/bootstrap/pin/oracle chain was demonstrated at DESIGN, V1 is stable at AS8075, the parent raw fixture replays 0/228 through the bound classifier, and the 57-endpoint pool is byte-identical to the bound parent spec. (3) The vantages can differ on the frozen pool (7 intrinsic endpoints at the parent anchor; Tor-specific blocking disclosed), degenerate outcomes route to S0 rather than identical arms, and all baselines are computable from the same records with no omitted cost dimension. (4) Positive and null controls are calibrated to fire oppositely under the same scoring implementation, the falsification-direction nulls are non-vacuous (NC_CROSS_SUPERSET's CV=0.7933 shows the transfer clause discriminates), and live oracle controls gate every rung at both vantages. (5) The treatment (pinned Tor exit) is live and demonstrated, not stipulated. (6) All four freeze_artifacts exist with matching hashes. The defects I found are real but nonblocking: the exit-relay identity is not frozen pre-freeze (N1), PC_SYNTHETIC_STATIONARY's V1 population is unspecified (N2), the calibration figures are non-reproducible text (N3, mitigated by EXECUTE-time MV7 gating), and one eligibility sentence conflates the NC T1 fraction with the CV-significant fraction (N4). None prevents the experiment from answering its own question, so status is PASS with no blocking findings. I did not run the confirmatory experiment, inspected no future outcomes, and tuned no frozen threshold.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-38121193195/request.json sha256 6b50946f9e07f18b44c147935334e1551e78d171b40235695d144c99373dcac5",
+    "research/experiments/EXP-PHYSICS-38121193195/spec.json sha256 19e89e370c4673228d0196a514dbf0336a20184cbe5dc325dc0ffa1cf31f1a57",
+    "research/experiments/EXP-PHYSICS-38121193195/prereg.md sha256 2e0fda6bfb71a0364884609a922c3935efddc3f59a1cbaec5ffcdece91f34ba0",
+    "research/experiments/EXP-PHYSICS-38121193195/model_design.json (DESIGN producer: opencode/muse-spark-1.3-contributor-free)",
+    "research/experiments/EXP-PHYSICS-38121193195/model_design_review.json (prior review attempt: opencode/exo-free, failure)",
+    "research/experiments/EXP-PHYSICS-38074818597/spec.json sha256 ef50435dc10dcaba4ae56a7e7f6eb7e63be2b8fd2216900367c56a59fd3b17dd (verified)",
+    "research/experiments/EXP-PHYSICS-38074818597/raw/ambient_collection.jsonl sha256 a418f66f82cac16b66893f6081bd30d1c6fe9eb6a3bd9ff7f845a2a12f7af96f (verified, 228 rows, replay 0/228)",
+    "research/physics/exp_38074818597_lib.py sha256 c0ff938b0dd7883dcf67722eda215e2af74bdd458dc25ff663279c807d81557e (verified)",
+    "research/physics/exp_38074818597_run.py sha256 ca3fd4b037e69ee87c538f7740d800ea2ec0c94b9580953bb97799ea9af24e38 (verified)",
+    "apt-cache policy tor: Candidate 0.4.9.11-0ubuntu0.24.04.1 (verified this review)"
+  ]
+}
