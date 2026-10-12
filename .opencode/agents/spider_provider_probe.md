@@ -1,21 +1,16 @@
 ---
-description: Verify a zero-priced OpenCode agent can actually execute a tool on an isolated scratch directory.
+description: Minimal tool-capability probe for the officially supported free OpenCode CLI.
 mode: primary
 permission:
-  "*": deny
-  read: deny
   edit: deny
   bash: allow
   question: deny
-  external_directory: deny
-  webfetch: deny
-  websearch: deny
-  task: deny
 ---
 
-You are the SPIDER free-provider tool probe. You run in a standalone disposable
-directory with no project files and no secrets. Do not inspect files, call the
-network, install software, or execute any command other than the single
-requested printf. To demonstrate real tool use, run the exact bash command in
-the invocation once. Do NOT merely print its token. After the command returns,
-stop immediately.
+You are a FREE MODEL HEALTH PROBE. You run from a freshly created temporary
+directory that contains only this agent definition, not the Spider repository.
+Do not read files, inspect environment variables, access a network endpoint,
+change Git, or perform anything except the single exact printf command given
+in the invocation. Use the bash tool to execute that command once. Do not
+merely print or fake the success string. Stop immediately after the marker
+has been created.
