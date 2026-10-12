@@ -1,0 +1,48 @@
+{
+  "base_sha": "8094b3480afb7ff5bc4f3af5b880ff4b78d3b897",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-12T22:12:43.850486+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): persistent cross-episode state only pays when revalidation plus stale-replay risk undercuts cold re-derivation; break-even thinking disciplines persistence claims.",
+      "Agent prior (not SPIDER evidence): abstention/selective-risk gates, not raw selection accuracy, usually decide whether a resolver is shippable; a liveness-predicate scope defect is an instrumentation bug, not a scientific falsification.",
+      "Agent prior (not SPIDER evidence): when a capable-looking model loops on a trivial first action despite the answer being visible, the observation/action representation is a more likely culprit than raw planning capacity \u2014 vary representation first as the cheapest decisive probe.",
+      "Agent prior (not SPIDER evidence): single-vantage Web persistence findings routinely confound site behavior with egress/network identity; a second independent vantage is the minimum transfer test.",
+      "Agent prior (not SPIDER evidence): work-compression claims must beat flat-cache/retrieval/compiled-lookup baselines on cost per verified success with dynamic range below ceiling, or they are non-discriminating positives; derisk without the expensive LLM arm first.",
+      "Agent prior (not SPIDER evidence): equal-weight abstract counters can manufacture or hide repair-vs-rederive boundaries; the counter itself must be justified against real per-operation costs before the product story keeps localized repair."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Searched P2-REPLAY-COST (sha 9687ff787f2d74460bb7006826008852f5b4416b, withdrawn 8.5x), P2-BLIND-COMPOSITION (sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda, weak-baseline 3/3), P2-MIND2WEB (archived Codex section 1 Mind2Web V0.50). Prior work never ran the founding multi-scale work-compression test (parameterized inheritance with decomposable/multi-resolution structure vs flat cache / nearest-neighbour / procedural lookup / empty-registry ablation) on the certified non-ceiling SBA-CREDENTIAL-FREE-V3 bank with the shipped byte-identical carrier and no LLM arm. Derisks the gated flagship; the B11 probe-sparsity question is parked, not duplicated.",
+      "dependencies": [
+        "C-MEAS-VALID B2 discharged for SBA-CREDENTIAL-FREE-V3; B1/B3 still gate the full flagship, hence this no-LLM derisk"
+      ],
+      "parent_handoff_disposition": "PARK",
+      "question": "Resume the pre-freeze experiment: on the certified non-ceiling credential-free bank (SBA-CREDENTIAL-FREE-V3) with the shipped byte-identical parameterized carrier, does the founding multi-scale representation/work-compression hypothesis hold \u2014 i.e. does parameterized inheritance with decomposable/multi-resolution structure achieve strictly lower counter-cost (http_requests + retrieval_calls + verification_calls + repair_attempts) per VERIFIED SAFE success than strong internal baselines (flat exact-state cache, nearest-neighbour/retrieval, compiled procedural lookup, and the empty-registry inheritance ablation) at matched correctness, and does the advantage grow with controlled residual novelty rather than full task length \u2014 with NO LLM agent required, as a bounded prerequisite/derisk for the gated four-arm flagship rather than the flagship itself?",
+      "rationale": "Product PREFREEZE: cognitive reset applied (streak 9 on C-PARAM-INHERIT, tunnel flag). Leaving the PARAM sub-basin for the founding work-compression hypothesis is the globally higher-value move, and the active mandate is its cheapest valid form: B2 dynamic range now certified, but B1/B3 still block the flagship, so a no-LLM four-internal-baseline derisk is the readiness-correct step. Win licenses flagship planning; loss retires the multi-scale representation claim on this bank; invalid repairs the bank/carrier once for all flagship-dependent lanes. The local B11 probe-sparsity handoff is parked (valid but narrower guard work) because the flagship-gating derisk dominates on decision value. Bounded: certified bank only; stop if treatment/comparator distinction collapses."
+    },
+    "cycle_id": "38314939812",
+    "lane": "product",
+    "portfolio_assessment": "Three FROZEN transactions (Frontier C-CROSSSITE persistence economics, Intel C-LLM-INHERIT representation probe, Physics C-WEB-DYNAMICS second vantage) must complete under their mandates; all three also win on merit as the cheapest decision-changing next steps on closed/blocked threads. Three PREFREEZE lanes reactivated explicitly: Graph continues its single-defect liveness-predicate repair (smallest decisive re-freeze, no third surface); Runtime continues the counter-justification repair that decides whether localized repair lives or dies in the product story (single shared-validity repair, no more same-counter reruns); Product is redirected by cognitive reset off its 9-streak PARAM sub-basin to the founding work-compression derisk on the certified SBA-V3 bank with no LLM arm (readiness-correct given B1/B3 still gate the flagship), parking the narrower B11 guard question. No expensive flagship (C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON with LLM) is funded: B1+B3 remain unsatisfied, so all LLM-gated claims proceed only via blockers and derisks. Frontier's orthogonal work-compression alternative stays gated behind the same readiness rule.",
+    "schema_version": 1,
+    "scout_assessment": "Scout in DEGRADED mode (model unavailable rc=139): no external reconnaissance, no candidate synthesis beyond echoing inherited handoffs, no SPIDER evidence. Direction therefore reasoned directly from the machine snapshot, effective Codex events, lane charters, POLICY readiness/de-duplication/stop discipline, and legacy_brief screening. Scout non-advice: its per-lane 'reassess whether X' prompts were treated as cognitive-reset reminders, not recommendations; each reset was performed and each inherited handoff was judged on merit, with Product's handoff parked and the rest used."
+  },
+  "experiment_id": "EXP-PRODUCT-38315290076",
+  "inherited_last_verdict": "ADOPT_MEASUREMENT_VALID_AUDIT_PASSED_BOUNDED_POSITIVE_MEASURED_PROVENANCE_TRUST_ROOT_PLUS_SYNTACTIC_PROBE_ADEQUACY_ON_SYNTHETIC_ELEVEN_FAMILY_EXPANSION_BANK_WITHIN_ENVELOPE_FA0_HTTP_ON_OUT0_REFUSAL_VIOL0_COVERAGE1.0_44_OF_44_VS_SHIPPED0.4545_STRICTLY_DOMINATES_FIAT_ADEQ_FA6_AND_FROZEN_CERT_FA18_ALL_THREE_MECHANISMS_NECESSARY_BOUNDARY_B11_SPARSE_REACHABILITY_FA3_SCORER_ENDOGENOUS_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_NO_CODE_PROMOTED_CONTINUE_FALSE",
+  "inherited_next_question": "Can the residual within-envelope budget-sparse over-accept boundary (B11: a trusted-origin, within-alphabet, within-length literal over-accept that the fixed seeded PROBE_BUDGET=256 probe space does not sample, still CERTIFIED and false-accepting at FA=3) be closed by a materially different mechanism -- a measured/verified probe-coverage certificate over the declaration's reachable over-accept space, an adaptive/adversarial probe-budget policy, or an independent runtime observation guard -- so that probe-space adequacy is DETECTED rather than syntactically assumed; and, independently, is the measured provenance trust root genuinely informative when the endogenous execution-grounded certificate-agreement score (spec V13) is replaced by an exogenous, non-certificate provenance signal -- or is within-alphabet budget-sparsity plus scorer endogeneity the irreducible limit that permanently caps the shipped kernel at the documented conditional boundary?",
+  "lane": "product",
+  "origin_github_run_id": "38315290076",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-38234098353",
+    "path": "research/experiments/EXP-PRODUCT-38234098353/handoff.json",
+    "sha256": "afd535847e31c0939734c09e898bf2b0fff40a85910be3c930ab5bfeef9a3e40"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "be9350e7f5537f35a56ccb9b9e270306898850c6d31b403b120b62cbdd78ccf9",
+  "request_id": "753e10bf46e9f905b1828c55",
+  "schema_version": 1
+}
