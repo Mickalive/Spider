@@ -1,0 +1,524 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/harness/run_guard.py",
+      "role": "code",
+      "sha256": "f46b97c99bae20178af06a99218f8a5a439c06ca2d16e0c5d4168e4cd99bf5db"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/raw_evidence/raw_run_output.json",
+      "role": "raw",
+      "sha256": "22e34f281fc0f6b64d18de7eb5576527ea5f36e686bfc3bdd13c9372a0520867"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/raw_evidence/raw_run_stderr.txt",
+      "role": "raw",
+      "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/prereg.md",
+      "role": "fixture",
+      "sha256": "d1148472234e3f16bb239ecd366f7f47fe8edd63ee31abc8330ff395903bfee4"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/spec.json",
+      "role": "fixture",
+      "sha256": "477c5fa8af9dfec947fa1de26518e095b7027eb444e6c9bece26efeeab82ae63"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/request.json",
+      "role": "fixture",
+      "sha256": "8fc8868056b41f57e63df36dcb5e7c548476ff85b734021aa15823619795b8ac"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/freeze.json",
+      "role": "fixture",
+      "sha256": "8dada73f9162efe9a87769978e8b2ef220b2d9cf0a052f6cc2f83ea97468023f"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-38201227093/design_review.json",
+      "role": "fixture",
+      "sha256": "df64ff36d75240a6d4473909c346272ead2eea2783a362441b49329c7ae2a480"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "role": "code",
+      "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"
+    },
+    {
+      "path": "src/spider/__init__.py",
+      "role": "code",
+      "sha256": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77"
+    },
+    {
+      "path": "src/spider/models.py",
+      "role": "code",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "role": "code",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "role": "code",
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+    },
+    {
+      "path": "pyproject.toml",
+      "role": "code",
+      "sha256": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83"
+    }
+  ],
+  "controls": {
+    "B-DATA-WIDENED": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#arms.B-DATA-WIDENED"
+      ],
+      "expected": "false_accept_count == 18 (D9+F4+G5), coverage 110/120=0.9167",
+      "observed": {
+        "accept_count": 128,
+        "coverage": 0.9166666666666666,
+        "false_accept_count": 18,
+        "false_reject_count": 10,
+        "http_on_out": 18,
+        "http_total": 128,
+        "refusal_executed_count": 0,
+        "silent_false_accept_count": 0
+      },
+      "observed_summary": "FA=18 cov=0.9166666666666666 FR=10",
+      "result": "PASS",
+      "type": "comparator"
+    },
+    "B-DECLARED-FULL": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.B-DECLARED-FULL",
+        "raw_evidence/raw_run_output.json#arms.B-DECLARED-FULL"
+      ],
+      "expected": "false_accept_count == 0 AND coverage == 1.0 (ceiling; safe+complete achievable)",
+      "observed": {
+        "accept_count": 120,
+        "coverage": 1.0,
+        "false_accept_count": 0,
+        "false_reject_count": 0,
+        "http_on_out": 0,
+        "http_total": 120,
+        "refusal_executed_count": 0,
+        "silent_false_accept_count": 0
+      },
+      "observed_summary": "FA=0 cov=1.0 FR=0",
+      "result": "PASS",
+      "type": "strong_comparator"
+    },
+    "B-LITERAL-KERNEL": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.B-LITERAL-KERNEL"
+      ],
+      "expected": "hasattr(SpiderKernel,'distill_parameterized') == False",
+      "observed": {
+        "has_distill_parameterized": false,
+        "reason": "literal pre-promotion kernel cannot construct the parameterized mechanism",
+        "status": "PASS"
+      },
+      "result": "PASS",
+      "type": "ablation"
+    },
+    "B-SHIPPED": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.B-SHIPPED",
+        "raw_evidence/raw_run_output.json#arms.B-SHIPPED"
+      ],
+      "expected": "false_accept_count == 0 AND coverage < 1.0 (predicted 81/120=0.6750, false rejects 39)",
+      "observed": {
+        "accept_count": 81,
+        "coverage": 0.675,
+        "false_accept_count": 0,
+        "false_reject_count": 39,
+        "http_on_out": 0,
+        "http_total": 81,
+        "refusal_executed_count": 0,
+        "silent_false_accept_count": 0
+      },
+      "observed_summary": "FA=0 cov=0.675 FR=39 http_on_out=0",
+      "result": "PASS",
+      "type": "shipped_baseline"
+    },
+    "BP-DECL-OVERWIDE": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.BP-DECL-OVERWIDE"
+      ],
+      "expected": "adopted == all-true AND false_accept_count == 201 (unsound declaration passes gate; FALSIFIES branch live)",
+      "observed": {
+        "adopted": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true,
+          "E": true,
+          "F": true,
+          "G": true
+        },
+        "false_accept_count": 201,
+        "http_on_out": 180
+      },
+      "result": "PASS",
+      "type": "boundary_probe"
+    },
+    "NC-REJECT-ALL": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.NC-REJECT-ALL"
+      ],
+      "expected": "accept_count == 0 AND http_total == 0",
+      "observed": {
+        "accept_count": 0,
+        "http_total": 0
+      },
+      "result": "PASS",
+      "type": "null_control"
+    },
+    "PC-DECL-UNDER": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.PC-DECL-UNDER"
+      ],
+      "expected": "adopted == all-false AND false_accept_count == 0",
+      "observed": {
+        "adopted": {
+          "A": false,
+          "B": false,
+          "C": false,
+          "D": false,
+          "E": false,
+          "F": false,
+          "G": false
+        },
+        "coverage": 0.675,
+        "false_accept_count": 0
+      },
+      "result": "PASS",
+      "type": "gate_sensitivity_control"
+    },
+    "PC-DETERMINISM-REPEAT": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.PC-DETERMINISM-REPEAT"
+      ],
+      "expected": "two independent runs produce identical arm metrics and support identity",
+      "observed": {
+        "reason": "two independent runs produce identical arm metrics and support identity",
+        "status": "PASS"
+      },
+      "result": "PASS",
+      "type": "determinism_control"
+    },
+    "PC-EXACT-REPLAY": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.PC-EXACT-REPLAY"
+      ],
+      "expected": "61/61 training ids re-resolve EXECUTABLE under induced mechanisms",
+      "observed": {
+        "n_replayed": 61,
+        "status": "PASS"
+      },
+      "result": "PASS",
+      "type": "validity_anchor"
+    },
+    "PC-OVERWIDE-OPEN": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.PC-OVERWIDE-OPEN"
+      ],
+      "expected": "false_accept_count >= 1 (predicted 91)",
+      "observed": {
+        "false_accept_count": 91,
+        "http_on_out": 91
+      },
+      "result": "PASS",
+      "type": "positive_control"
+    },
+    "PC-UNSAFE-COARSE": {
+      "evidence_refs": [
+        "raw_evidence/raw_run_output.json#certificate.PC-UNSAFE-COARSE"
+      ],
+      "expected": "false_accept_count >= 1 (predicted 271)",
+      "observed": {
+        "false_accept_count": 271,
+        "http_on_out": 250
+      },
+      "result": "PASS",
+      "type": "positive_control"
+    }
+  },
+  "decision": "DECLARED_GUARD_SAFE_AND_COMPLETE__OBSERVATIONAL_GUARD_UNSAFE",
+  "experiment_id": "EXP-PRODUCT-38201227093",
+  "lane": "product",
+  "metrics": {
+    "M-ABLATION": {
+      "has_distill_parameterized": false,
+      "reason": "literal pre-promotion kernel cannot construct the parameterized mechanism",
+      "status": "PASS"
+    },
+    "M-B-DATA-WIDENED-COVERAGE": 0.9166666666666666,
+    "M-B-DATA-WIDENED-FALSE-ACCEPT-BIDS": [
+      "FD-OG-WRONGRANGE00",
+      "FD-OG-WRONGRANGE01",
+      "FD-OG-WRONGRANGE02",
+      "FD-OG-WRONGRANGE03",
+      "FD-OG-WRONGRANGE04",
+      "FD-OG-WRONGRANGE05",
+      "FD-OG-WRONGRANGE06",
+      "FD-OG-WRONGRANGE07",
+      "FD-OG-WRONGRANGE08",
+      "FF-OG-ALPHA-ALL",
+      "FF-OG-WRONGRANGE00",
+      "FF-OG-WRONGRANGE01",
+      "FF-OG-WRONGRANGE02",
+      "FG-OG-WRONGRANGE00",
+      "FG-OG-WRONGRANGE01",
+      "FG-OG-WRONGRANGE02",
+      "FG-OG-WRONGRANGE03",
+      "FG-OG-WRONGRANGE04"
+    ],
+    "M-B-DATA-WIDENED-FALSE-ACCEPT-BY-FAMILY": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 9,
+      "E": 0,
+      "F": 4,
+      "G": 5
+    },
+    "M-B-DATA-WIDENED-FALSE-ACCEPT-COUNT": 18,
+    "M-B-DATA-WIDENED-HTTP-ON-OUT": 18,
+    "M-B-DECLARED-FULL-COVERAGE": 1.0,
+    "M-B-DECLARED-FULL-FALSE-ACCEPT-COUNT": 0,
+    "M-B-SHIPPED-COVERAGE": 0.675,
+    "M-B-SHIPPED-FALSE-ACCEPT-COUNT": 0,
+    "M-B-SHIPPED-FALSE-REJECT-BY-FAMILY": {
+      "A": 8,
+      "B": 10,
+      "C": 13,
+      "D": 0,
+      "E": 8,
+      "F": 0,
+      "G": 0
+    },
+    "M-B-SHIPPED-FALSE-REJECT-COUNT": 39,
+    "M-BANK": {
+      "n_in": 120,
+      "n_items": 524,
+      "n_out": 404,
+      "per_family_n_in": {
+        "A": 16,
+        "B": 18,
+        "C": 19,
+        "D": 10,
+        "E": 16,
+        "F": 12,
+        "G": 29
+      },
+      "per_family_n_out": {
+        "A": 56,
+        "B": 55,
+        "C": 53,
+        "D": 65,
+        "E": 55,
+        "F": 61,
+        "G": 59
+      },
+      "unique_bids": true
+    },
+    "M-BOUNDARY-DECL-OVERWIDE-ADOPTED": {
+      "A": true,
+      "B": true,
+      "C": true,
+      "D": true,
+      "E": true,
+      "F": true,
+      "G": true
+    },
+    "M-BOUNDARY-DECL-OVERWIDE-FALSE-ACCEPT-COUNT": 201,
+    "M-CONTROL-NC-REJECT-ALL-ACCEPT-COUNT": 0,
+    "M-CONTROL-NC-REJECT-ALL-HTTP-TOTAL": 0,
+    "M-CONTROL-PC-COARSE-FALSE-ACCEPT-COUNT": 271,
+    "M-CONTROL-PC-DECL-UNDER-ADOPTED": {
+      "A": false,
+      "B": false,
+      "C": false,
+      "D": false,
+      "E": false,
+      "F": false,
+      "G": false
+    },
+    "M-CONTROL-PC-DECL-UNDER-FALSE-ACCEPT-COUNT": 0,
+    "M-CONTROL-PC-OVERWIDE-FALSE-ACCEPT-COUNT": 91,
+    "M-COVERAGE-DELTA": 0.32499999999999996,
+    "M-DECLARED-GUARD-ADOPTED-BY-FAMILY": {
+      "A": true,
+      "B": true,
+      "C": true,
+      "D": true,
+      "E": true,
+      "F": true,
+      "G": true
+    },
+    "M-DECLARED-GUARD-COVERAGE": 1.0,
+    "M-DECLARED-GUARD-COVERAGE-BY-FAMILY": {
+      "A": 1.0,
+      "B": 1.0,
+      "C": 1.0,
+      "D": 1.0,
+      "E": 1.0,
+      "F": 1.0,
+      "G": 1.0
+    },
+    "M-DECLARED-GUARD-FALSE-ACCEPT-BIDS": [],
+    "M-DECLARED-GUARD-FALSE-ACCEPT-COUNT": 0,
+    "M-DECLARED-GUARD-FALSE-REJECT-BIDS": [],
+    "M-DECLARED-GUARD-FALSE-REJECT-COUNT": 0,
+    "M-DECLARED-GUARD-HTTP-ON-OUT": 0,
+    "M-DECLARED-GUARD-REFUSAL-EXECUTED-COUNT": 0,
+    "M-DECLARED-GUARD-SILENT-FALSE-ACCEPT-COUNT": 0,
+    "M-DETERMINISM": {
+      "reason": "two independent runs produce identical arm metrics and support identity",
+      "status": "PASS"
+    },
+    "M-GUARD-SUPPORT-BY-FAMILY": {
+      "ambiguity_guard_support": {
+        "A": "^item\\-[0-9]{3}$",
+        "B": "^acct\\-[0-9]{4}$",
+        "C": "^doc\\-[0-9]{2}$",
+        "D": "^region\\-00[0-9]{1}$",
+        "E": "^invoice\\-[0-9]{4}$",
+        "F": "^case\\-[a-z]{3}$",
+        "G": "^token\\-ab[a-z]{1}$"
+      },
+      "declared_guard_support": {
+        "A": "^item\\-[0-9]{3}$",
+        "B": "^acct\\-[0-9]{4}$",
+        "C": "^doc\\-[0-9]{1,4}$",
+        "D": "^region\\-00[0-9]$",
+        "E": "^invoice\\-[0-9]{4}$",
+        "F": "^case\\-z[a-z]{2}$",
+        "G": "^token\\-ab[a-z]$"
+      }
+    },
+    "M-IDENTITY": {
+      "carrier_expected_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "match": true,
+      "shipping_kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72"
+    },
+    "M-OBSERVATIONAL-GUARD-COVERAGE": 0.9166666666666666,
+    "M-OBSERVATIONAL-GUARD-COVERAGE-BY-FAMILY": {
+      "A": 1.0,
+      "B": 1.0,
+      "C": 0.47368421052631576,
+      "D": 1.0,
+      "E": 1.0,
+      "F": 1.0,
+      "G": 1.0
+    },
+    "M-OBSERVATIONAL-GUARD-DISPOSITION": "UNSAFE",
+    "M-OBSERVATIONAL-GUARD-FALSE-ACCEPT-BIDS": [
+      "FF-OG-ALPHA-ALL",
+      "FF-OG-WRONGRANGE00",
+      "FF-OG-WRONGRANGE01",
+      "FF-OG-WRONGRANGE02"
+    ],
+    "M-OBSERVATIONAL-GUARD-FALSE-ACCEPT-COUNT": 4,
+    "M-OBSERVATIONAL-GUARD-FALSE-REJECT-COUNT": 10,
+    "M-OBSERVATIONAL-GUARD-HTTP-ON-OUT": 4,
+    "M-OBSERVATIONAL-GUARD-REFUSAL-EXECUTED-COUNT": 0,
+    "M-OBSERVATIONAL-GUARD-REFUSED-FAMILIES": [
+      "D",
+      "G"
+    ],
+    "M-PC-EXACT-REPLAY": {
+      "n_replayed": 61,
+      "status": "PASS"
+    },
+    "M-REFUSAL-SEMANTICS-VIOLATIONS": 0,
+    "M-REGRESSION": {
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "tests_run": 3
+    },
+    "M-SHIPPED-SUPPORT-BY-FAMILY": {
+      "A": "^item\\-00[0-9]{1}$",
+      "B": "^acct\\-000[0-9]{1}$",
+      "C": "^doc\\-0[0-9]{1}$",
+      "D": "^region\\-00[0-9]{1}$",
+      "E": "^invoice\\-000[0-9]{1}$",
+      "F": "^case\\-z[a-z]{2}$",
+      "G": "^token\\-ab[a-z]{1}$"
+    },
+    "M-SUPPORT-IDENTITY": {
+      "ambiguity": {
+        "A": "^item\\-[0-9]{3}$",
+        "B": "^acct\\-[0-9]{4}$",
+        "C": "^doc\\-[0-9]{2}$",
+        "D": "^region\\-00[0-9]{1}$",
+        "E": "^invoice\\-[0-9]{4}$",
+        "F": "^case\\-[a-z]{3}$",
+        "G": "^token\\-ab[a-z]{1}$"
+      },
+      "shipped": {
+        "A": "^item\\-00[0-9]{1}$",
+        "B": "^acct\\-000[0-9]{1}$",
+        "C": "^doc\\-0[0-9]{1}$",
+        "D": "^region\\-00[0-9]{1}$",
+        "E": "^invoice\\-000[0-9]{1}$",
+        "F": "^case\\-z[a-z]{2}$",
+        "G": "^token\\-ab[a-z]{1}$"
+      },
+      "status": "PASS",
+      "widened": {
+        "A": "^item\\-[0-9]{3}$",
+        "B": "^acct\\-[0-9]{4}$",
+        "C": "^doc\\-[0-9]{2}$",
+        "D": "^region\\-[0-9]{3}$",
+        "E": "^invoice\\-[0-9]{4}$",
+        "F": "^case\\-[a-z]{3}$",
+        "G": "^token\\-[a-z]{3}$"
+      }
+    },
+    "model_calls": 0,
+    "model_tokens": 0
+  },
+  "observational_guard_disposition": "UNSAFE",
+  "observations": [
+    "M-IDENTITY: src/spider/kernel.py sha256 = 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72, equal to frozen carrier git blob b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796; git tree for the six freeze artifacts was unchanged after the run.",
+    "M-BANK: the frozen runner constructed 524 unique-bid items; labels re-derived as 120 IN / 404 OUT; per-family in/out A 16/56, B 18/55, C 19/53, D 10/65, E 16/55, F 12/61, G 29/59, exactly matching the DESIGN bank composition.",
+    "M-SUPPORT-IDENTITY PASS: real-carrier induction reproduced the seven shipped supports (A ^item\\-00[0-9]{1}$, B ^acct\\-000[0-9]{1}$, C ^doc\\-0[0-9]{1}$, D ^region\\-00[0-9]{1}$, E ^invoice\\-000[0-9]{1}$, F ^case\\-z[a-z]{2}$, G ^token\\-ab[a-z]{1}$), the seven frozen widened supports, and the seven frozen ambiguity-guard supports; all 7 induced mechanisms are single-slot at confidence 0.9 >= 0.8.",
+    "T-DECLARED-GUARD observed false_accept_count=0, http_on_out=0, refusal_executed_count=0, false_reject_count=0, coverage=1.0 (120/120); adopted=True for all seven families.",
+    "T-AMBIGUITY-GUARD observed false_accept_count=4, http_on_out=4, refusal_executed_count=0, false_reject_count=10, coverage=0.9166666666666666; refused families = [D, G]; the four false accepts were bids FF-OG-ALPHA-ALL, FF-OG-WRONGRANGE00, FF-OG-WRONGRANGE01, FF-OG-WRONGRANGE02, all in FAM-F.",
+    "B-SHIPPED observed false_accept_count=0, coverage=0.675 (81/120), false_reject_count=39 (A 8, B 10, C 13, E 8).",
+    "B-DATA-WIDENED observed false_accept_count=18, http_on_out=18, coverage=0.9166666666666666; false accepts = FAM-D 9 (FD-OG-WRONGRANGE00..08), FAM-F 4 (same bids as the ambiguity guard), FAM-G 5 (FG-OG-WRONGRANGE00..04).",
+    "B-DECLARED-FULL observed false_accept_count=0 and coverage=1.0 on all seven families.",
+    "Controls fired as preregistered: PC-UNSAFE-COARSE false_accept_count=271; PC-OVERWIDE-OPEN false_accept_count=91; PC-DECL-UNDER adopted all-false with false_accept_count=0; BP-DECL-OVERWIDE adopted all-true with false_accept_count=201; NC-REJECT-ALL accept_count=0/http_total=0.",
+    "Validity anchors: PC-DETERMINISM-REPEAT PASS (two independent runs identical); PC-EXACT-REPLAY 61/61 EXECUTABLE; M-REGRESSION 3/3 (tests_run=3, failures=0, errors=0); B-LITERAL-KERNEL has_distill_parameterized=False; V8_FREEZE_BINDING PASS (prereg sha, runner-source==FROZEN-RUNNER-block, all six artifact hashes).",
+    "M-REFUSAL-SEMANTICS-VIOLATIONS=0: no OUT item with non-EXECUTABLE status issued HTTP in any arm.",
+    "V8 clause C re-hash after the run: all six march freeze artifacts still match freeze.json.artifact_hashes; src/spider/kernel.py still equals the carrier (run is read-only)."
+  ],
+  "outcome": "SUPPORTS",
+  "reason": "the ingested declared-grammar guard held zero false accepts and full coverage on the extended bank; the purely observational ambiguity guard disposition is UNSAFE",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether a purely observational ambiguity refusal can ever be made safe on grammars whose shared run is a non-digit class that does not saturate the observed remainder: this packet bounds the specific frozen rule UNSAFE on FAM-F/FAM-G, but does not enumerate the full space of observational rules.",
+    "Whether the shipped-candidate declared-grammar guard holds under an adversarially unsound or partially-observable declaration: BP-DECL-OVERWIDE shows the training-consistency gate cannot detect an over-wide declaration (FA=201); declaration soundness is assumed external and was NOT established for real-world grammars.",
+    "Whether declaring grammars is feasible in a real external-agent setting (cost of obtaining sound declarations, maintenance/staleness) was not measured; no economics, latency, retrieval or repair accounting was done (model_calls=0, model_tokens=0).",
+    "The registered C-PARAM-INHERIT next_gate (four-arm COLD/INSTRUCTIONS/RETRIEVAL/SPIDER cost-per-success benchmark on a non-ceiling task bank) remains unmet and unfunded (Runtime B2, Intel B3, new Director mandate)."
+  ],
+  "validity_notes": [
+    "V8-FREEZE-BINDING PASS: sha256(prereg.md)=d1148472234e3f16bb239ecd366f7f47fe8edd63ee31abc8330ff395903bfee4 == freeze.json.hashes['prereg.md']; the running harness/run_guard.py equals the FROZEN RUNNER block in prereg.md after normalization (norm = strip CRLF + trailing whitespace); all six freeze.artifact_hashes match on disk. The runner never writes src/spider/ or any freeze artifact.",
+    "All frozen identity/support constants and the DESIGN point-predictions were reproduced exactly; no deviation from the frozen spec was required or made.",
+    "Measurement is model-free and credential-free by construction: model_calls=0, model_tokens=0; no browser; all HTTP is loopback 127.0.0.1 on an ephemeral port against a stdlib ThreadingHTTPServer.",
+    "The two guard mechanisms are SHIPPED-CANDIDATE proposals injected in-run as support descriptors only (verification_rule['parameter_supports']); they are NOT shipped bytes. No source file under src/spider/ was modified.",
+    "SCOPE: the extended seven-family bank is a local synthetic declared-grammar construction (524 items). Results are bounded to this bank and the byte-identical carrier; they are not an end-to-end product-economics measurement.",
+    "V12 caveat (as preregistered): the arms mutate only verification_rule['parameter_supports'], which is support-independent of mechanism_id; equivalence to re-running distill_parameterized with the guard support is asserted by the frozen design and validated by the induction/identity/replay gates, not re-proved by a second code path.",
+    "T-DECLARED-GUARD and B-DECLARED-FULL coincide on the main bank by design because the gate adopts every sound declaration and the label rule IS the declared grammar; the gate's discriminating behaviour is exercised only by PC-DECL-UNDER (refuses) and BP-DECL-OVERWIDE (cannot detect an unsound declaration).",
+    "The T-AMBIGUITY-GUARD UNSAFE disposition is a bounded negative about the purely observational mechanism class on this bank; it is a mandatory co-report, not the packet falsifier and not a claim advance.",
+    "No claim status is changed by this producer output; final claim disposition belongs to DIRECTOR/AUDIT."
+  ]
+}
