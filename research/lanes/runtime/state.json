@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does a corrected, in-support contamination instrument (replacing the degenerate id='1' unaffected_behavior helper with in-support identifiers, as the prior packet's sensitive 4/4 NC-OVERBROAD-REPAIR rewarded) reproduce BOTH the strict product-counter win (reuse ratio < 1.00 at L=2 and L=3) AND a sensitive NC-OVERBROAD-REPAIR (contamination > 0.10) on the same fetch-scarce credential-free substrate with the shipped carrier held fixed - and does that strict win survive an independent counter-weighting / robustness test, given that T-REPAIR-CONSERVATIVE is exactly 1.00 at L=2 so the win currently depends on the reuse semantics not requiring a re-resolve - before localized repair can be included in the product story or the C-PRODUCT-ECON flagship benchmark funded?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-12T11:43:25.387675+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-12T13:02:47.036908+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "994971376da89ef3547eb4a72a5f0ad5aba4aa4eb7c4447f286a912e96b08d7b",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
+  "last_failure_control_revision": "905755fa5dcc3c912dd33bb57014ee285149120ba2ab868a0b275a79ed2c742c"
 }
