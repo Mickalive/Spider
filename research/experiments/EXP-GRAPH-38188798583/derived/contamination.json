@@ -1,0 +1,43 @@
+{
+  "AXIS-PRIMARY": {
+    "max_token_jaccard": 0.5714285714285714,
+    "max_trigram_jaccard": 0.5882352941176471,
+    "n_bound": 151,
+    "n_flagged": 9,
+    "flagged": [
+      "app_004",
+      "app_049",
+      "app_052",
+      "app_073",
+      "app_076",
+      "app_097",
+      "app_100",
+      "oos_024",
+      "oos_026"
+    ]
+  },
+  "AXIS-ALTLEX": {
+    "max_token_jaccard": 0.5714285714285714,
+    "max_trigram_jaccard": 0.5882352941176471,
+    "n_bound": 151,
+    "n_flagged": 9,
+    "flagged": [
+      "app_004",
+      "app_049",
+      "app_052",
+      "app_073",
+      "app_076",
+      "app_097",
+      "app_100",
+      "oos_024",
+      "oos_026"
+    ]
+  },
+  "AXIS-HELDOUT": {
+    "max_token_jaccard": 0.5714285714285714,
+    "max_trigram_jaccard": 0.5454545454545454,
+    "n_bound": 120,
+    "n_flagged": 0,
+    "flagged": []
+  }
+}

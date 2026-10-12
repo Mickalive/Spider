@@ -1,0 +1,116 @@
+{
+  "B-LEX-STRONG": {
+    "expected": "preserve deterministic selection; >=0.80 all axes, >=0.8584 PRIMARY",
+    "observed": {
+      "AXIS-PRIMARY": 0.9056603773584906,
+      "AXIS-ALTLEX": 1.0,
+      "AXIS-HELDOUT": 1.0
+    },
+    "pass": true,
+    "evidence": "raw_evidence/runner_result_raw.json#selection"
+  },
+  "B-LEX-ONLY": {
+    "expected": "higher pooled_false_accept than T-FRAME (no gate)",
+    "observed": {
+      "AXIS-PRIMARY": 0.2777777777777778,
+      "AXIS-ALTLEX": 0.2777777777777778,
+      "AXIS-HELDOUT": 0.5
+    },
+    "pass": true,
+    "evidence": "raw_evidence/runner_result_raw.json#test_metrics"
+  },
+  "T-LEX-AMBIG": {
+    "expected": "incumbent integer-signal gate; parent disjoint-test FA 0.1667",
+    "observed": {
+      "AXIS-PRIMARY": 0.16666666666666666,
+      "AXIS-ALTLEX": 0.16666666666666666,
+      "AXIS-HELDOUT": 0.2
+    },
+    "pass": true,
+    "note": "T-FRAME improves FA on all axes",
+    "evidence": "raw_evidence/runner_result_raw.json#test_metrics"
+  },
+  "CTRL-ABSTAIN-ALL": {
+    "expected": "coverage 0.0, unknown_precision 1.0 by convention",
+    "observed": {
+      "AXIS-PRIMARY": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      },
+      "AXIS-ALTLEX": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      },
+      "AXIS-HELDOUT": {
+        "coverage": 0.0,
+        "unknown_precision": 1.0
+      }
+    },
+    "pass": true
+  },
+  "CTRL-RANDOM-GATE": {
+    "expected": "at matched count, FA/UP far from T-FRAME",
+    "observed": {
+      "AXIS-PRIMARY": {
+        "pooled_false_accept": 0.6111111111111112,
+        "unknown_precision": 0.35,
+        "matched_abstention_count": 20
+      },
+      "AXIS-ALTLEX": {
+        "pooled_false_accept": 0.6111111111111112,
+        "unknown_precision": 0.35,
+        "matched_abstention_count": 20
+      },
+      "AXIS-HELDOUT": {
+        "pooled_false_accept": 0.6,
+        "unknown_precision": 0.38095238095238093,
+        "matched_abstention_count": 21
+      }
+    },
+    "pass": true,
+    "evidence": "raw_evidence/runner_result_raw.json#controls"
+  },
+  "NC-SHUFFLED-LABEL": {
+    "expected": "near-chance <=0.20",
+    "observed": {
+      "AXIS-PRIMARY": 0.018867924528301886,
+      "AXIS-ALTLEX": 0.03773584905660377,
+      "AXIS-HELDOUT": 0.08108108108108109
+    },
+    "pass": true
+  },
+  "B-RANDOM-ROLE": {
+    "expected": "<=0.35",
+    "observed": {
+      "AXIS-PRIMARY": 0.09433962264150944,
+      "AXIS-ALTLEX": 0.11320754716981132,
+      "AXIS-HELDOUT": 0.02702702702702703
+    },
+    "pass": true
+  },
+  "B-INCUMBENT-KERNEL": {
+    "expected": "0.0 by construction",
+    "observed": {
+      "AXIS-PRIMARY": 0.0,
+      "AXIS-ALTLEX": 0.0,
+      "AXIS-HELDOUT": 0.0
+    },
+    "pass": true
+  },
+  "PC-LIVENESS-AND-INTEGRITY": {
+    "expected": "all blocks extract; controls execute; T-FRAME live non-empty/non-full on PRIMARY cal",
+    "observed": {
+      "tframe_cal_executed": 49,
+      "tframe_cal_unresolved": 8,
+      "cal_feasible_all_axes": true
+    },
+    "pass": true,
+    "evidence": "raw_evidence/mechanics_raw.json"
+  },
+  "ARM-B-EMBEDDING": {
+    "expected": "prerequisite-gated; BLOCKED when stack absent (never a negative)",
+    "observed": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+    "pass": null,
+    "note": "operational BLOCKED, not a scientific result"
+  }
+}

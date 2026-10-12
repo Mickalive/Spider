@@ -1,0 +1,338 @@
+{
+  "M-RAW-RUNNER-OUTCOME": {
+    "runner_status": "COMPLETE",
+    "decision": "DECIDE_SHIP_A_SCOPED",
+    "invalid_reasons": [],
+    "runner_self_sha": "4abc67b1bf435940823b7dc1968c3ddfc4fa23f803b6b124f769d95157d2bc62",
+    "source": "raw_evidence/runner_result_raw.json"
+  },
+  "M-PREREQ-MECHANICS-ONLY": {
+    "status": "DESIGN-MECHANICS-ONLY",
+    "tframe_cal_executed": 49,
+    "tframe_cal_unresolved": 8,
+    "cal_feasible_tframe": {
+      "AXIS-PRIMARY": true,
+      "AXIS-ALTLEX": true,
+      "AXIS-HELDOUT": true
+    },
+    "embedding_status": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+    "source": "raw_evidence/mechanics_raw.json"
+  },
+  "M-GATE-TRIPLET-PRIMARY": {
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.05555555555555555,
+    "unknown_precision": 1.0,
+    "unknown_precision_inclusive": 0.85,
+    "executed": 54,
+    "executed_app": 53,
+    "executed_oos": 1,
+    "abstained_resolved": 4,
+    "selective_acc": 0.9056603773584906,
+    "unresolved_applicable": 3,
+    "gate_met": true,
+    "n_test_applicable": 56,
+    "n_test_oos": 18
+  },
+  "M-GATE-TRIPLET-ALTLEX": {
+    "coverage": 0.9464285714285714,
+    "pooled_false_accept": 0.05555555555555555,
+    "unknown_precision": 1.0,
+    "unknown_precision_inclusive": 0.85,
+    "executed": 54,
+    "executed_app": 53,
+    "executed_oos": 1,
+    "abstained_resolved": 4,
+    "selective_acc": 1.0,
+    "unresolved_applicable": 3,
+    "gate_met": true,
+    "n_test_applicable": 56,
+    "n_test_oos": 18
+  },
+  "M-GATE-TRIPLET-HELDOUT": {
+    "coverage": 0.925,
+    "pooled_false_accept": 0.1,
+    "unknown_precision": 0.8,
+    "unknown_precision_inclusive": 0.8571428571428571,
+    "executed": 39,
+    "executed_app": 37,
+    "executed_oos": 2,
+    "abstained_resolved": 10,
+    "selective_acc": 1.0,
+    "unresolved_applicable": 1,
+    "gate_met": false,
+    "n_test_applicable": 40,
+    "n_test_oos": 20
+  },
+  "M-CAL-TRIPLET": {
+    "AXIS-PRIMARY": {
+      "coverage": 0.8596491228070176,
+      "pooled_false_accept": 0.0,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.7142857142857143,
+      "executed": 49,
+      "executed_oos": 0,
+      "executed_app": 49,
+      "abstained_resolved": 9,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 8
+    },
+    "AXIS-ALTLEX": {
+      "coverage": 0.9122807017543859,
+      "pooled_false_accept": 0.0,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.8,
+      "executed": 52,
+      "executed_oos": 0,
+      "executed_app": 52,
+      "abstained_resolved": 8,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 5
+    },
+    "AXIS-HELDOUT": {
+      "coverage": 0.875,
+      "pooled_false_accept": 0.0,
+      "unknown_precision": 1.0,
+      "unknown_precision_inclusive": 0.8,
+      "executed": 35,
+      "executed_oos": 0,
+      "executed_app": 35,
+      "abstained_resolved": 12,
+      "selective_acc": 1.0,
+      "unresolved_applicable": 5
+    }
+  },
+  "M-SELECTION-B-LEX-STRONG": {
+    "selective_acc": {
+      "AXIS-PRIMARY": 0.9056603773584906,
+      "AXIS-ALTLEX": 1.0,
+      "AXIS-HELDOUT": 1.0
+    },
+    "selection_preserved": true,
+    "rule": "B-LEX-STRONG",
+    "bar": {
+      ">=0.80_each_axis": true,
+      ">=0.8584_PRIMARY": true
+    }
+  },
+  "M-SELECTION-B-LEX-ONLY": {
+    "AXIS-PRIMARY": 0.9056603773584906,
+    "AXIS-ALTLEX": 1.0,
+    "AXIS-HELDOUT": 1.0
+  },
+  "M-SELECTION-T-LEX-AMBIG": {
+    "AXIS-PRIMARY": 0.9056603773584906,
+    "AXIS-ALTLEX": 1.0,
+    "AXIS-HELDOUT": 1.0
+  },
+  "M-B-LEX-ONLY": {
+    "AXIS-PRIMARY": {
+      "pooled_false_accept": 0.2777777777777778,
+      "coverage": 0.9464285714285714,
+      "unknown_precision": null,
+      "executed_oos": 5
+    },
+    "AXIS-ALTLEX": {
+      "pooled_false_accept": 0.2777777777777778,
+      "coverage": 0.9464285714285714,
+      "unknown_precision": null,
+      "executed_oos": 5
+    },
+    "AXIS-HELDOUT": {
+      "pooled_false_accept": 0.5,
+      "coverage": 0.975,
+      "unknown_precision": null,
+      "executed_oos": 10
+    }
+  },
+  "M-T-LEX-AMBIG": {
+    "AXIS-PRIMARY": {
+      "pooled_false_accept": 0.16666666666666666,
+      "coverage": 0.9464285714285714,
+      "unknown_precision": 1.0,
+      "executed_oos": 3,
+      "abstained_resolved": 2
+    },
+    "AXIS-ALTLEX": {
+      "pooled_false_accept": 0.16666666666666666,
+      "coverage": 0.9464285714285714,
+      "unknown_precision": 1.0,
+      "executed_oos": 3,
+      "abstained_resolved": 2
+    },
+    "AXIS-HELDOUT": {
+      "pooled_false_accept": 0.2,
+      "coverage": 0.975,
+      "unknown_precision": 1.0,
+      "executed_oos": 4,
+      "abstained_resolved": 6
+    }
+  },
+  "M-CTRL-RANDOM-GATE": {
+    "AXIS-PRIMARY": {
+      "pooled_false_accept": 0.6111111111111112,
+      "unknown_precision": 0.35,
+      "matched_abstention_count": 20
+    },
+    "AXIS-ALTLEX": {
+      "pooled_false_accept": 0.6111111111111112,
+      "unknown_precision": 0.35,
+      "matched_abstention_count": 20
+    },
+    "AXIS-HELDOUT": {
+      "pooled_false_accept": 0.6,
+      "unknown_precision": 0.38095238095238093,
+      "matched_abstention_count": 21
+    }
+  },
+  "M-NC-SHUFFLED-LABEL": {
+    "AXIS-PRIMARY": 0.018867924528301886,
+    "AXIS-ALTLEX": 0.03773584905660377,
+    "AXIS-HELDOUT": 0.08108108108108109
+  },
+  "M-B-RANDOM-ROLE": {
+    "AXIS-PRIMARY": 0.09433962264150944,
+    "AXIS-ALTLEX": 0.11320754716981132,
+    "AXIS-HELDOUT": 0.02702702702702703
+  },
+  "M-B-INCUMBENT-KERNEL": {
+    "AXIS-PRIMARY": 0.0,
+    "AXIS-ALTLEX": 0.0,
+    "AXIS-HELDOUT": 0.0
+  },
+  "M-CTRL-ABSTAIN-ALL": {
+    "AXIS-PRIMARY": {
+      "coverage": 0.0,
+      "unknown_precision": 1.0
+    },
+    "AXIS-ALTLEX": {
+      "coverage": 0.0,
+      "unknown_precision": 1.0
+    },
+    "AXIS-HELDOUT": {
+      "coverage": 0.0,
+      "unknown_precision": 1.0
+    }
+  },
+  "M-N": {
+    "AXIS-PRIMARY": {
+      "applicable": 113,
+      "oos": 38,
+      "cal": [
+        57,
+        20
+      ],
+      "test": [
+        56,
+        18
+      ],
+      "bound_rows": 151
+    },
+    "AXIS-ALTLEX": {
+      "applicable": 113,
+      "oos": 38,
+      "cal": [
+        57,
+        20
+      ],
+      "test": [
+        56,
+        18
+      ],
+      "bound_rows": 151
+    },
+    "AXIS-HELDOUT": {
+      "applicable": 80,
+      "oos": 40,
+      "cal": [
+        40,
+        20
+      ],
+      "test": [
+        40,
+        20
+      ],
+      "bound_rows": 120
+    }
+  },
+  "M-CONTAM-MAX-JACCARD": {
+    "AXIS-PRIMARY": {
+      "max_token_jaccard": 0.5714285714285714,
+      "max_trigram_jaccard": 0.5882352941176471,
+      "tok_threshold": 0.6,
+      "tri_threshold": 0.75,
+      "n_flagged": 9
+    },
+    "AXIS-ALTLEX": {
+      "max_token_jaccard": 0.5714285714285714,
+      "max_trigram_jaccard": 0.5882352941176471,
+      "tok_threshold": 0.6,
+      "tri_threshold": 0.75,
+      "n_flagged": 9
+    },
+    "AXIS-HELDOUT": {
+      "max_token_jaccard": 0.5714285714285714,
+      "max_trigram_jaccard": 0.5454545454545454,
+      "tok_threshold": 0.6,
+      "tri_threshold": 0.75,
+      "n_flagged": 0
+    }
+  },
+  "M-CONTAM-FLAGGED": {
+    "AXIS-PRIMARY": [
+      "app_004",
+      "app_049",
+      "app_052",
+      "app_073",
+      "app_076",
+      "app_097",
+      "app_100",
+      "oos_024",
+      "oos_026"
+    ],
+    "AXIS-ALTLEX": [
+      "app_004",
+      "app_049",
+      "app_052",
+      "app_073",
+      "app_076",
+      "app_097",
+      "app_100",
+      "oos_024",
+      "oos_026"
+    ],
+    "AXIS-HELDOUT": []
+  },
+  "M-EMBEDDING-STATUS": "BLOCKED: ModuleNotFoundError: No module named 'numpy'",
+  "M-EXEC-VECTOR": {
+    "artifact": "derived/execution_vectors.json",
+    "note": "per-goal executed boolean + clause booleans + S + mech/target"
+  },
+  "M-NON-TAUTOLOGY": {
+    "vs_gatefree_all_rows": 47,
+    "vs_incumbent_all_rows": 13,
+    "claim": ">=1 goal differs"
+  },
+  "M-VALIDITY-GATES": {
+    "V1-FREEZE_BINDING": "PASS",
+    "V2-SPLIT_DISJOINT": "PASS",
+    "V3-CONTAMINATION_BOUNDS": "PASS",
+    "V4-NO_FITTED_PARAMETER": "PASS",
+    "V5-ARM_B_PREREQ_HANDLED": "PASS",
+    "V6-EXEC_VECTOR_NON_TAUTOLOGY": "PASS",
+    "V7-NON_CEILING_FLOOR": "PASS",
+    "V8-ARMS_INDEPENDENT": "PASS",
+    "V9-EMBEDDER_PATH_ISOLATED": "PASS",
+    "V10-UNKNOWN_PRECISION_N_SENSITIVITY": "PASS",
+    "V11-BOOTSTRAP_SEED": "NOT_APPLICABLE",
+    "V12-FREEZE_ARTIFACTS_HASHED": "PASS",
+    "V13-DECISION_BRANCH_REACHABLE": "PASS"
+  },
+  "M-FAILING-CRITERION": {
+    "axis": "AXIS-HELDOUT",
+    "criterion": "unknown_precision",
+    "observed": 0.8,
+    "target": 0.85,
+    "inclusive_diagnostic": 0.8571428571428571,
+    "note": "only failing gate criterion; FA exactly at target 2/20=0.10 and coverage 0.925 met"
+  }
+}
