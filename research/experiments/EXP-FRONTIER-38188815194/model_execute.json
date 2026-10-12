@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/big-pickle",
+  "attempt": 4,
+  "exit_code": 75,
+  "category": "transient-pool-exhausted",
+  "github_run_id": "38189927645",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-12T02:55:28.913123+00:00"
+}
