@@ -1,50 +1,195 @@
 {
+  "schema_version": 2,
+  "title": "Corrected-in-support contamination instrument plus an independent counter-weighting robustness test for the reuse-accounting strict win of signal-driven local repair vs cold re-derivation: does the win reproduce with a sensitive NC-OVERBROAD-REPAIR and survive reweighting, given T-REPAIR-CONSERVATIVE is exactly 1.00 at L=2? (C-DELTA-REPAIR CONTINUE / USE)",
   "experiment_id": "EXP-RUNTIME-38244432934",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-DELTA-REPAIR"],
+  "dependency_claim_ids": ["C-PRODUCT-ECON", "C-MEAS-VALID", "C-PARAM-INHERIT", "C-FRESHNESS"],
+  "question": "On the same fetch-scarce, credential-free, locally served substrate and the same shipped carrier held fixed (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify), with the F1 degenerate contamination helper CORRECTED to use an IN-SUPPORT probe id (^1[0-9]{1}$; TASK_IDS[0]=14) instead of the out-of-support literal id='1': does signal-driven local repair, under the preregistered reuse accounting, reproduce BOTH (a) the strict product-counter win (reuse ratio < 1.00 at L=2 and L=3 with fetch ratio <= 0.90) AND (b) a sensitive NC-OVERBROAD-REPAIR (over-broad contamination rate > 0.10), and (c) does that strict win survive an independent counter-weighting / robustness test over a predeclared weight grid, given that T-REPAIR-CONSERVATIVE is exactly 1.00 at L=2 - thereby deciding whether localized repair enters the product story or its ~5.3% product-counter regression is intrinsic to localized repair?",
+  "hypothesis": "H1 (functional, re-attested in-artifact): after a single LOCAL perturbation of one resource segment, reuse-based signal-driven local repair of the SHIPPED parameterized mechanism restores correct end-to-end success on ALL FIVE TASK_IDS=[14,15,16,17,18] (F6 fix: the fused first task read is counted) at rate >= 0.80 per class (Wilson 95% lower bound >= 0.60), guard firing on >= 0.80 of perturbed trials, for all three classes P1-ENDPOINT / P2-STRUCTURE / P3-PERMISSION. H2 (locality, now live): the repair's write set is localized to the single perturbed mechanism (M-WRITE-SET-MAX <= 1); behavioural contamination of the four unaffected resources measured with the IN-SUPPORT probe is <= 0.10 and the instrument is provably live because the deliberately over-broad all-mechanism rewrite NC-OVERBROAD-REPAIR is detected at rate > 0.10 (the prior audited packet observed 4/4 before the degenerate helper was introduced). H3 (cost, the mandate's strict claim): under the preregistered reuse semantics the repair product-counter ratio is STRICTLY below 1.00 at BOTH L=2 and L=3 and the network-fetch ratio at L=3 is <= 0.90. H4 (counter-robustness, the new mandate question): the strict win is not an artifact of the equal-weight counter choice: on the predeclared weight grid {1,2,3}^4 applied to the four registered counter components the repair arm beats cold at BOTH L=2 and L=3 on EVERY counter in the predeclared grid (M-WEIGHT-ROBUST-BOTH == 1.0, i.e. sign-invariant to the reweighting) and the conservative no-reuse-resolve ratio at L=3 remains < 1.00. H5 (replication premise): T-REPAIR-LEGACY (separate guard probe + full-batch re-execution), on the SAME substrate and cold baseline, still reproduces the prior product-counter regression (ratio > 1.00 at L=2), certifying that any difference is attributable to the repair system's accounting.",
+  "falsifier": "With H1 and a LIVE H2 instrument established on every class (guard fires, over-broad contamination > 0.10, same-target contamination <= 0.10, write set <= 1): the mandate's strict claim is validly NEGATIVE if the reuse product-counter ratio is >= 1.00 at L=2 OR at L=3, or the L=3 fetch ratio exceeds 0.90 (MIXED/COST-FAIL, not a strict support); and it is COUNTER-DEPENDENT (not ROBUST) if the strict inequalities hold but M-WEIGHT-ROBUST-BOTH < 1.0 or the conservative L=3 ratio is >= 1.00, i.e. the win exists only under the registered equal-weight counter and is reversed by at least one permitted monotone reweighting. A run whose corrected over-broad control is not sensitive (M-OVERBROAD-CONTAMINATION-RATE <= 0.10), whose contamination probe set is empty, whose guard false-fires, whose base-liveness positive control is not true inside the scored transaction, or whose cold / literal-replay / no-repair baselines are not live is MEASUREMENT_INVALID, never a scientific negative; an instrument failure must not be transcribed as falsification.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "type": "cost_baseline_primary",
+      "description": "Cold re-derivation: one discovery probe fetch + L=3 fresh observation fetches over LEARN_IDS=[11,12,13], distill_parameterized -> resolve -> execute -> verify the 5 TASK_IDS=[14,15,16,17,18]. The mandate's strong comparator and the ONLY cost denominator.",
+      "expected_outcome": "task success 1.0 on unperturbed resources (V5 gate >= 0.90); cold product counter = 19 at L=3 over the equal-weight registered counter {http_requests, retrieval_calls, verification_calls, repair_attempts}.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.B-COLD", "src/spider/kernel.py"]
+    },
+    {
+      "id": "B-COLD-MIN",
+      "type": "cost_baseline_sensitivity",
+      "description": "Identical to B-COLD but L=2 (LEARN_IDS_MIN=[11,12]), the carrier's minimum viable re-derivation. Mandate decision bar L=2.",
+      "expected_outcome": "cold product counter = 18 at L=2.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.B-COLD-MIN", "src/spider/kernel.py"]
+    },
+    {
+      "id": "B-COLD-DEEP",
+      "type": "cost_baseline_sensitivity",
+      "description": "Identical to B-COLD but L=4 (LEARN_IDS_DEEP=[10,11,12,13]).",
+      "expected_outcome": "cold product counter = 20 at L=4.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.B-COLD-DEEP", "src/spider/kernel.py"]
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "type": "mechanism_control_must_fail",
+      "description": "Replay the inherited (unrepaired) parameterized mechanism on the perturbed target. Establishes the perturbation actually bites (V4).",
+      "expected_outcome": "success <= 0.10 on every class; if it succeeds the perturbation did not bite -> MEASUREMENT_INVALID.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.B-LITERAL-REPLAY"]
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "type": "abstention_control_must_fail",
+      "description": "Guard detects staleness but the system abstains from repair. Non-executing; NEVER a cost denominator (V6).",
+      "expected_outcome": "success <= 0.10; else MEASUREMENT_INVALID.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.B-NO-REPAIR"]
+    },
+    {
+      "id": "T-REPAIR-REUSE",
+      "type": "treatment",
+      "description": "Freshness check fused into the first task read; after repair the reused probe observation is charged once (one repair_attempts, one repair probe fetch, one post-repair verify of the live body); first task id NOT re-resolved/re-fetched/re-verified. F6 fix: the fused first task's verify now counts toward success.",
+      "expected_outcome": "product counter = 17 (reuse) vs cold 18/19, i.e. ratio ~0.944 at L=2 and ~0.895 at L=3, fetch ratio ~0.556-0.667.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#claim_ceiling", "src/spider/kernel.py"]
+    },
+    {
+      "id": "T-REPAIR-CONSERVATIVE",
+      "type": "system_sensitivity_upper_bound",
+      "description": "Same reuse semantics plus one carrier rebind (charges +1 retrieval_calls). Upper bound on repair cost; bounds dependence on not re-resolving. Excluded from the classifier, but its L=3 ratio enters the ROBUST tier test.",
+      "expected_outcome": "product counter = 18 (ratio exactly 1.00 at L=2, ~0.947 at L=3).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.T-REPAIR-CONSERVATIVE"]
+    },
+    {
+      "id": "T-REPAIR-LEGACY",
+      "type": "replication_control",
+      "description": "Prior system: separate guard probe read before the batch, and full task batch re-executed after repair. Emits a per-operation log so V14-REUSE_IDENTITY is directly evidenced (audit A6).",
+      "expected_outcome": "product counter = 20 -> ratio ~1.111 at L=2 and ~1.053 at L=3, reproducing the prior regression (V13/H5).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.T-REPAIR-LEGACY", "codex/experiments/EXP-GRAPH-38197849043/result.json"]
+    }
+  ],
+  "positive_control": {
+    "id": "PC-BASE-LIVENESS",
+    "type": "positive_control_suite",
+    "success_criterion": "pre-perturbation, in EVERY scored trial, all five learned mechanisms resolve EXECUTABLE and their first read verifies under the in-support probe (trial field base_liveness=true; aggregate M-BASE-LIVENESS-TRUE-TRIALS-TOTAL == M-BASE-LIVENESS-TRIALS-TOTAL). The attestation is inside the scored artifact (audit F4/A4), not inferred from cold/repair success.",
+    "members": [
+      {
+        "id": "PC-BASE-LIVENESS",
+        "protocol": "Inside every scored trial: boot the local substrate, distill the mechanism from LEARN_IDS=[11,12,13] via the shipped distill_parameterized, then for each of the five resources resolve+fetch+verify an IN-SUPPORT probe id (TASK_IDS[0]=14) against the live server BEFORE applying the perturbation.",
+        "success_criterion": "all five resources return (200, id, verified=True) on the in-support probe; base_liveness=true for the trial.",
+        "failure_policy": "any failure -> MEASUREMENT_INVALID (carrier/substrate not live), never a scientific negative."
+      },
+      {
+        "id": "PC-BASE-LIVENESS-DESIGN",
+        "protocol": "Non-outcome-bearing DESIGN liveness probe (--liveness-only): same distill+resolve+fetch+verify on TASK_IDS[0], PLUS the corrected-instrument liveness comparison: in-support baseline verified on all resources and the old out-of-support probe id='1' degenerate (NO-RESOLVE) on all resources.",
+        "success_criterion": "server_ready=true, distill_live=true, task_read_verified=true, contamination_instrument_live=true, out_of_support_probe_degenerate=true.",
+        "failure_policy": "diagnostic only at DESIGN; the scored-trial PC-BASE-LIVENESS is the binding gate."
+      }
+    ]
+  },
+  "null_control": {
+    "id": "NC-NO-PERTURBATION+NC-NOISE+NC-OVERBROAD-REPAIR",
+    "type": "negative_controls",
+    "protocol": "NC-NO-PERTURBATION: run the guard on an unperturbed live body (stale must be false). NC-NOISE: inject non-semantic observed_at churn outside the mechanism's postcondition paths (stale must be false). NC-OVERBROAD-REPAIR: apply the target's repaired postconditions to ALL mechanisms and re-probe the four unaffected resources with the IN-SUPPORT probe; the over-broad contamination metric must flag the genuine semantic breakage (> 0.10). The prior degenerate helper (id='1') is replaced so this comparison is no longer structurally equal.",
+    "success_criterion": "NC-NO-PERTURBATION stale=false AND NC-NOISE stale=false; NC-OVERBROAD-REPAIR M-OVERBROAD-CONTAMINATION-RATE > 0.10 AND M-CONTAMINATION-PROBES-TOTAL > 0",
+    "failure_policy": "any false-firing guard -> guard not sensitive -> MEASUREMENT_INVALID; an insensitive NC-OVERBROAD-REPAIR -> MEASUREMENT_INVALID (the exact F1 failure must not recur), never a negative scientific result."
+  },
+  "measurement_validity": [
+    "Frozen runner identity: the executable decision path is embedded verbatim in prereg.md section 12; EXECUTE extracts the exact bytes by splitting on the FROZEN-RUNNER markers (the extraction preserves the runner's own trailing newline, the audit-F5 defect) and the extracted file must hash to CANONICAL-RUNNER-SHA256 = d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 (60855 bytes). Mismatch -> MEASUREMENT_INVALID.",
+    "Carrier identity: the shipped carrier (src/spider/kernel.py = 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3, src/spider/models.py = 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, src/spider/registry.py = 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c) is a freeze_artifact and is held fixed; EXECUTE re-verifies its sha256. Counter semantics are physical: every fetch +1 http_requests; every resolve (rebind calls resolve) +1 retrieval_calls; every verify +1 verification_calls; repair_attempts charged once per repair.",
+    "Substrate isolation: Python 3.12 stdlib only (ThreadingHTTPServer, localhost ephemeral port); no LLM, credential, external network, browser, nginx, gunicorn, Redis or WAL; therefore no model call exists and fetches are the scarce accounting resource.",
+    "Registry isolation: a fresh per-run registry directory is created so no cross-run mechanism state leaks between arms or trials.",
+    "Identifier disjointness: TASK_IDS=[14,15,16,17,18] are disjoint from LEARN_IDS=[11,12,13]; both lie in the carrier-inferred support ^1[0-9]{1}$, so re-derivation observation reads are genuine acquisition reads, never a double-charge of a task read. The corrected contamination probe uses TASK_IDS[0]=14, which the support accepts (audit F1).",
+    "Physical accounting only: the only difference between T-REPAIR-REUSE and T-REPAIR-LEGACY is the number of physical resolve/fetch/verify operations performed for the first task id; no cost is added post hoc. Both arms emit an explicit per-operation log (oplog) so the identity is directly evidenced (audit A6).",
+    "Thresholds are preregistered and not fitted: PRODUCT_COST_BAR=1.00 and FETCH_COST_BAR=0.90 are the mandate's semantics; PRODUCT_COST_MAX=1.15 is an a priori 15% materiality band; LEGACY_REGRESSION_FLOOR=1.00 is the prior verdict's sign; ROBUST_FRACTION_BAR=1.00 (sign-invariance across the whole grid) and WEIGHT_GRID={1,2,3}^4 were declared before any scored run. DESIGN self-attack on this bar: among all integer difference vectors that already win at equal weight, the minimum grid fraction is 5/9 ~= 0.5556, so any bar <= 0.50 would be structurally non-discriminating (COUNTER-DEPENDENT unreachable from the grid); the principled test is therefore sign-invariance across the ENTIRE grid, and both a ROBUST vector (fraction 1.0) and a realizable measured-shape vector (fraction 0.7778 < 1.0) exist. No scored cost was used to choose any threshold.",
+    "Dynamic range (mandate agent-prior 5): the outcome metric is a COST ratio, not a success rate, so the ceiling-level success of treatment and baseline (both 1.0) is a functional gate, not the measured advantage. The cost dynamic range is certified by arithmetic and by the prior audited run: reuse product 17 < cold 18/19 < legacy 20, i.e. both a live positive direction (reuse) and a live regression direction (legacy) exist on the same counters. The weight grid additionally certifies that the positive direction is not a single-point artifact.",
+    "Determinism: fixed seeds (SEED = origin_github_run_id 38244432934 % 2**32; per-trial seeds derived deterministically) and no wall-clock/port in output; two independent --mechanics-only runs must be byte-identical (V3).",
+    "n controlled: TRIALS_PER_CLASS=12 with rotating targets users/posts/comments.",
+    "Representation loss: the substrate is a simplified JSON API, not real websites; conclusions are about carrier/counter economics on this substrate, not real-web generalization. The cold denominator is cold re-derivation of the SAME carrier, not an external tool; external cost numbers are out of scope. The weight grid tests counter-choice robustness, NOT whether external agents weight these components this way.",
+    "Scope bound: this packet does not execute the gated C-PRODUCT-ECON flagship benchmark and does not mutate any cross-lane claim status; it produces decision inputs for the Runtime DIRECTOR and the Global Research Director."
+  ],
+  "decision_rule": "OUTCOME in {SUPPORTS, FALSIFIES, MIXED, INCONCLUSIVE}. Per class c in {P1-ENDPOINT,P2-STRUCTURE,P3-PERMISSION} with n>=12 valid trials: functional_ok := repair_success >= 0.80 AND repair_success_wilson_lower >= 0.60 AND contamination_rate <= 0.10 AND write_set_max <= 1 AND guard_fire_rate >= 0.80. strict_win_robust := (M-WEIGHT-ROBUST-BOTH >= 1.0) AND (M-PRODUCT-RATIO-CONSERVATIVE-L3 < 1.00). cost_verdict (first match wins): FUNCTIONAL-FAIL if not functional_ok; STRICT-WIN-ROBUST if pr_L2 < 1.00 AND pr_L3 < 1.00 AND fetch_ratio_L3 <= 0.90 AND strict_win_robust; STRICT-WIN-COUNTER-DEPENDENT if the same strict inequalities hold but NOT strict_win_robust; BOUNDED-WIN if pr_L2 <= 1.00 AND pr_L3 <= 1.00 AND fetch_ratio_L3 <= 0.90; MIXED-TRADEOFF if max(pr_L2,pr_L3) <= 1.15 AND fetch_ratio_L3 <= 0.90; COST-FAIL otherwise; COST-UNKNOWN if pr_L2/pr_L3/fetch_ratio_L3 is None. where pr_L2 = mean(reuse product)/mean(cold L=2 product), pr_L3 = mean(reuse product)/mean(cold L=3 product), fetch_ratio_L3 = mean(reuse http)/mean(cold http) at L=3, all over the equal-weight registered counter, and M-WEIGHT-ROBUST-BOTH is the fraction of the predeclared 81-vector grid on which the repair arm's weighted product counter is strictly below cold at BOTH L=2 and L=3; ROBUST requires this fraction to be 1.0 (no permitted reweighting reverses the sign). AGGREGATE (first match wins): (1) any validity gate fails (see validity checks below) -> status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE; (2) all classes STRICT-WIN-ROBUST -> decision=SUPPORTS, outcome=SUPPORTS; (3) all classes in {STRICT-WIN-ROBUST, STRICT-WIN-COUNTER-DEPENDENT} -> decision=SUPPORTS-COUNTER-DEPENDENT, outcome=MIXED; (4) all classes in the positive/neutral tiers -> decision=MIXED-TRADEOFF, outcome=MIXED; (5) some class positive/neutral -> decision=MIXED, outcome=MIXED; (6) otherwise -> decision=FALSIFIES, outcome=FALSIFIES. VALIDITY GATES (any failure -> MEASUREMENT_INVALID): V4 literal-replay success <= 0.10 per class; V5 cold success >= 0.90 per class; V6 no-repair success <= 0.10 per class; V7 guard fire >= 0.80 and NC-NO-PERTURBATION/NC-NOISE stale=false; V12 PC-BASE-LIVENESS true in every valid trial; V13 legacy L=2 ratio > 1.00; NEW V15 contamination-instrument-live: M-CONTAMINATION-PROBES-TOTAL > 0 AND M-OVERBROAD-CONTAMINATION-RATE-MEAN > 0.10 (the exact F1 defect must not recur). SYSTEM CONTROLS (reported, NOT in the classifier): M-PRODUCT-RATIO-CONSERVATIVE-L2/L3 (upper bound; L=2 is expected exactly 1.00) and M-PRODUCT-RATIO-LEGACY-L2/L3. PACKET MAPPING: SUPPORTS/FALSIFIES/MIXED -> result.status=COMPLETE; MEASUREMENT_INVALID -> result.status=MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If decision=SUPPORTS (all classes STRICT-WIN-ROBUST: strict product-counter win at L=2 and L=3 with a live over-broad control AND M-WEIGHT-ROBUST-BOTH >= 1.0 AND conservative L=3 < 1.00): the prior ~5.3% product-counter regression is a removable accounting overhead of the repair path, not an intrinsic tax on localized repair, and the win is not an artifact of the equal-weight counter; signal-driven local repair earns a positive maintenance cost term and may be included in the product story for the shipped carrier and in the flagship C-PRODUCT-ECON repair accounting. Whether C-DELTA-REPAIR advances beyond EXPERIMENTAL remains a DIRECTOR adjudication.",
+  "product_consequence_negative": "If decision=SUPPORTS-COUNTER-DEPENDENT (strict equal-weight win reproduces but does NOT survive reweighting and/or conservative L=3 >= 1.00): the win is counter-dependent; localized repair must NOT be treated as robustly product-counter-cheaper, and the ~5.3% regression should be treated as effectively intrinsic/accounting-dependent for the product story. If decision in {MIXED-TRADEOFF, MIXED} (not strictly below 1.00 at L=2 or L=3): the regression is intrinsic to localized repair at the carrier's viable re-derivation budgets; local repair is network-cheaper but not product-counter-cheaper and must be dropped from the product story (or used only where fetches are the sole scarce resource) before the flagship is funded. If decision=FALSIFIES: the repair is not functionally local and cost-effective on this substrate. If MEASUREMENT_INVALID: no product decision; the blocker is the instrument/counter semantics, not another run.",
+  "estimated_cost": "CPU-only, stdlib-only, no downloads and no external API spend. EXECUTE runs 3 classes x 12 trials x (reuse + conservative + legacy + cold + cold-min + cold-deep + literal + no-repair) on an in-process localhost server: ~10-40 minutes wall clock, negligible memory. No credential, model, browser or network dependency exists.",
+  "expected_information_gain": "High and decision-changing in both directions. The prior audited packet (EXP-RUNTIME-38212966040, REVISE) left three coupled unknowns: (i) would M-CONTAMINATION-RATE be 0.0 under a corrected in-support instrument; (ii) does NC-OVERBROAD-REPAIR become sensitive again (>0.10); (iii) does the strict win survive counter reweighting given T-REPAIR-CONSERVATIVE is exactly 1.00 at L=2. This experiment resolves all three in one bounded packet, adds a predeclared reweighting robustness surface that did not exist before, and re-attests the positive control inside the scored transaction. Positive (SUPPORTS) falsifies 'the win is accounting-dependent'; SUPPORTS-COUNTER-DEPENDENT or MIXED tells the product lane to drop local repair from the net-cost story; MEASUREMENT_INVALID (if the corrected control is somehow still insensitive) isolates the blocker to the counter semantics rather than the repair mechanism. No existing packet provides any of these branches.",
+  "metrics_stable_ids": [
+    "M-REPAIR-SUCCESS",
+    "M-REPAIR-SUCCESS-WILSON-LOWER",
+    "M-COLD-SUCCESS",
+    "M-COLD-MIN-SUCCESS",
+    "M-COLD-DEEP-SUCCESS",
+    "M-LITERAL-REPLAY-SUCCESS",
+    "M-NO-REPAIR-SUCCESS",
+    "M-GUARD-FIRE-RATE",
+    "M-CONTAMINATION-RATE",
+    "M-CONTAMINATION-PROBES",
+    "M-OVERBROAD-CONTAMINATION-RATE",
+    "M-BASE-LIVENESS-TRUE-TRIALS",
+    "M-IN-SUPPORT-PROBE-ID",
+    "M-WRITE-SET-MAX",
+    "M-COST-REPAIR-REUSE-PRODUCT",
+    "M-COST-REPAIR-CONSERVATIVE-PRODUCT",
+    "M-COST-REPAIR-LEGACY-PRODUCT",
+    "M-COST-COLD-PRODUCT",
+    "M-COST-COLD-MIN-PRODUCT",
+    "M-COST-COLD-DEEP-PRODUCT",
+    "M-COST-REPAIR-REUSE-VECTOR",
+    "M-COST-COLD-MIN-VECTOR",
+    "M-COST-COLD-VECTOR",
+    "M-PRODUCT-RATIO-REUSE-L2",
+    "M-PRODUCT-RATIO-REUSE-L3",
+    "M-PRODUCT-RATIO-REUSE-L4",
+    "M-PRODUCT-RATIO-CONSERVATIVE-L2",
+    "M-PRODUCT-RATIO-CONSERVATIVE-L3",
+    "M-PRODUCT-RATIO-LEGACY-L2",
+    "M-PRODUCT-RATIO-LEGACY-L3",
+    "M-COST-FETCH-RATIO-L3",
+    "M-WEIGHT-ROBUST-L2",
+    "M-WEIGHT-ROBUST-L3",
+    "M-WEIGHT-ROBUST-BOTH",
+    "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2",
+    "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3",
+    "M-LEGACY-REGRESSION-REPRODUCED",
+    "M-OPLOG-PRESENT",
+    "M-OPLOG-REPAIR-LEN-MEAN",
+    "M-OPLOG-LEGACY-LEN-MEAN",
+    "M-NO-PERTURBATION-FALSE-TRIGGER-RATE",
+    "M-NOISE-FALSE-TRIGGER-RATE"
+  ],
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The frozen pure classifier (cost_verdict + aggregate) was driven with synthetic rows at DESIGN time (non-substrate, non-outcome-bearing, --reachability-probe) and produced every class branch {STRICT-WIN-ROBUST, STRICT-WIN-COUNTER-DEPENDENT, BOUNDED-WIN, MIXED-TRADEOFF, COST-FAIL, FUNCTIONAL-FAIL, COST-UNKNOWN} and every aggregate decision {SUPPORTS, SUPPORTS-COUNTER-DEPENDENT, MIXED-TRADEOFF, MIXED, FALSIFIES, INCONCLUSIVE}; all_class_branches_reachable=true and all_aggregate_branches_reachable=true. No branch is shadowed: STRICT-WIN-COUNTER-DEPENDENT is reachable both by a robust fraction below 1.0 (probe uses 0.7778, the realizable measured-shape value) and by conservative L=3 = 1.00. The new weight-grid surface was independently probed (--reachability-probe.weight_grid_probe): the measured-shape reuse vector (6,5,5,1) vs cold (8,5,5,0)/(9,5,5,0) yields BOTH-sides fraction 0.7778 and an http-dominated vector yields 1.0, so a ROBUST/COUNTER-DEPENDENT split genuinely exists. DESIGN self-attack found the structural floor: among ALL integer difference vectors that already win at equal weight the minimum grid fraction is 0.5556, so the previous 0.50 bar could never select COUNTER-DEPENDENT (non-discriminating); the declared bar was therefore corrected to ROBUST_FRACTION_BAR=1.0 (sign-invariance across the whole grid), which is above the 0.5556 floor (bar_is_discriminating=true) and reachable on both sides (both_sides_reachable=true), with finite critical repair-weights 2.0 (L=2) and 3.0 (L=3). The substantive positive branch is realizable on this system (prior audited reuse product 17 vs cold 18/19 -> ratios 0.944/0.895) and the neutral/negative branches are realizable via the conservative surface (1.00 at L=2).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-12"]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All hard prerequisites are verified at DESIGN time without any confirmatory/outcome-bearing measurement. (a) Python 3.12 stdlib only; the shipped carrier imports and executes (verified). (b) The DESIGN liveness probe (--liveness-only, non-outcome-bearing) returned server_ready=true, distill_live=true, task_read_verified=true, contamination_instrument_live=true, out_of_support_probe_degenerate=true, nc_no_perturbation_stale=false, nc_noise_stale=false. (c) The carrier counter surface (TrajectoryCounters.add) exists and is exercised. (d) No external task bank/dataset/fixture is read; the substrate is built inside the frozen runner. (e) The repair-signal unit probe (--reachability-probe) produced a patch and probe body for all three classes. (f) The corrected contamination instrument was verified live: in-support probe (TASK_IDS[0]=14) returns (200, id, verified=True) on all resources, while the old out-of-support id='1' returns NO-RESOLVE on all resources; an over-broad rewrite is detected on 4/4 unaffected probes (rate 1.0 > 0.10). (g) All six decision branches and both weight-grid tiers are reachable (see decision_rule_reachability). No prerequisite is missing or assumed.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-12", "src/spider/kernel.py"]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The cost denominator is fixed in advance to B-COLD (cold re-derivation of the SAME carrier), never the B-NO-REPAIR abstention and never the fetch ratio quoted alone. B-COLD is strong (success 1.0, V5 >= 0.90, prior audited product 18/19/20) and distinct from the treatment, which shares the same carrier, substrate, seeds and perturbations and differs only in the physical number of resolve/fetch/verify operations for the first task id. Treatment/comparator identity is therefore well defined and directly evidenced by the emitted per-operation logs. T-REPAIR-CONSERVATIVE and T-REPAIR-LEGACY are controls/sensitivities excluded from the classifier, so they cannot silently become comparators; T-REPAIR-CONSERVATIVE is used only as a pre-declared bound inside the ROBUST tier test, and T-REPAIR-LEGACY only as the replication premise. The registered equal-weight counter is NOT re-tuned: the weight grid only reports sign changes on predeclared alternative weightings.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-5", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-6", "research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings"]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Distinct, non-tautological controls cover each failure mode, and the one control that was degenerate in the parent is now verified sensitive at DESIGN. Positive: PC-BASE-LIVENESS is scored inside every trial and is gated (V12), with base_liveness=true observed in the DESIGN canary. Perturbation-bites: B-LITERAL-REPLAY must fail (<=0.10); observed 0.0 in the DESIGN canary. Abstention: B-NO-REPAIR must fail; observed 0.0 with guard fired. Guard specificity: NC-NO-PERTURBATION and NC-NOISE must NOT fire (observed stale=false). Over-broad: NC-OVERBROAD-REPAIR must be detected; the corrected instrument measures 4/4 unaffected breakage (rate 1.0 > 0.10) for all three classes, versus the parent's structurally impossible 0.0 (audit F1/A1). Replication: T-REPAIR-LEGACY must reproduce the prior >1.00 at L=2 (V13); a failure is a reported validity caveat. No control is supplied the answer given to the treatment (the over-broad rewrite is applied blindly from the repaired target mechanism, not from the answer key).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-6", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38212966040/audit.json#validity_findings.A1-NC-OVERBROAD-VACUOUS"]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The treatment arm is structurally capable of becoming EXECUTABLE. It uses the same shipped carrier that the DESIGN probes executed end-to-end (distill -> resolve EXECUTABLE -> fetch 200 -> verify True), and the repair-signal probe shows local_repair produces a patch and a probe body for all three classes. The corrected contamination probe uses an in-support id and returns a verified live baseline on every resource (verified at DESIGN), so the locality gate is measurable. The prior audited packet showed this carrier's repair succeeds 12/12 on perturbed resources (with the contamination half invalidated only by the helper, now fixed). Self-attack recorded: (i) if the repair routine mis-parses a live signal the class falls to FUNCTIONAL-FAIL, a reportable outcome, not a design break; (ii) if the carrier's inferred support rejected the task ids, resolve would EXPLORE and no trial would execute, so the probes explicitly verify in-support resolution; (iii) the treatment's advantage depends on the repair not being forced to re-resolve - this is bounded and disclosed by the T-REPAIR-CONSERVATIVE surface AND directly tested by the weight grid; (iv) both success rates are at their 1.0 ceiling, so the success metric has no dynamic range - this is acceptable because the outcome is a cost ratio and the cost range is live (17 vs 18/19/20), certified in measurement_validity.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-5", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38212966040/audit.json#baseline_findings.T-REPAIR-REUSE"]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every mutable local code dependency whose identity can change the interpretation is listed in spec.freeze_artifacts and hashed at freeze time: the shipped carrier modules src/spider/kernel.py (counter/treatment semantics and support inference), src/spider/models.py (Mechanism/Observation/Resolution semantics) and src/spider/registry.py (read/upsert/invalidate; locality). The executable decision path (runner_delta_repair_reuse_v2.py) is embedded verbatim in prereg.md section 12 and bound by CANONICAL-RUNNER-SHA256=d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 plus freeze.json.hashes.prereg.md. No external task bank, dataset or fixture is read (the substrate is constructed inside the runner), so the list is complete; there is no unbound outcome-relevant local artifact.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38244432934/spec.json#freeze_artifacts", "research/experiments/EXP-RUNTIME-38244432934/prereg.md#section-10"]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ]
 }
