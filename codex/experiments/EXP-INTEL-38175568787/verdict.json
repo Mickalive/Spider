@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38175568787",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Packet is measurement-invalid (substrate/provisioning failure), so per design-contract v2 the prior effective epistemic status is retained and no scientific update is emitted. The frozen two-candidate capability ladder (M-14B-QWEN, M-8B-LLAMA) never executed: both candidates failed frozen step 3a (pinned GGUF sha256 != served-body sha256) and no model was loaded (UNMEASURED_LOAD_FAILED, fail-closed; result.json#metrics.decision_trace, audit.json#validity_findings). Zero COMPLETE cells -> frozen rule 4 -> OUTCOME=MEASUREMENT_INVALID / B3_STATUS=UNRESOLVED. Audit status=MEASUREMENT_INVALID, producer_claim_supported=false, and the audit explicitly states this is a substrate failure, not a scientific negative. C-LLM-INHERIT therefore remains HYPOTHESIS, unchanged from its Codex effective event (parent EXP-INTEL-38164607941 bounded FALSIFIES at the goal/schema ceiling for credential-free CPU-quantized Qwen2.5 3B-8B Q4_K_M). Do not read HYPOTHESIS here as promotion or as weakening."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After each candidate GGUF is re-pinned to the byte-level sha256 of the actually served body (verified by full download, not HF etag/xetHash metadata) and re-frozen, does either M-14B-QWEN or M-8B-LLAMA clear the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6), and if not, what is the exact credential/operational blocker that must be removed to run a same-model/tools/budget hosted capability test?",
+  "reason": "The frozen capability question is entirely unmeasured. Preflight PASSED through the real frozen scorer (PC-ORACLE-EPISODE 5/5; NC-NO-MODEL-ACTION parseable 0.0/success 0.0; B-RANDOM-ACTION parseable 1.0/success 0.2; freeze artifacts 3/3; required imports OK), and raw/controls.json is byte-identical to the audited parent (sha256 b0120e61be812a91b680cf848d01dc756cfd0dfc9a329ec8b78ba65c663ff639), so the measurement substrate (scorer/browser/page/parser) is live and deterministic. Both candidates then failed frozen step 3a: pinned sha256 equals the HF tree-API xetHash / CDN etag, while the served body hashes to the tree-API lfs.oid (byte counts match: M-14B-QWEN 8988110976, M-8B-LLAMA 4920739232; three independent download routes reproduced identical body hashes), so the frozen byte-level identity is unsatisfiable against stable, authentic content (audit.json#validity_findings; raw/provisioning_evidence.json#diagnosis). No model was loaded (fail-closed), no capability inference was taken, and the digest mismatch was never converted into a capability failure. Producer status/outcome = MEASUREMENT_INVALID/INCONCLUSIVE and audit status = MEASUREMENT_INVALID with producer_claim_supported=false, both consistent. Consequence: no claim update (C-LLM-INHERIT retained at HYPOTHESIS), no product promotion, and B3 (capable same-model endpoint) remains UNRESOLVED. The one durable finding is an operational freeze-process failure mode (metadata-vs-body digest mismatch can silently pass a v2 freeze_eligibility check), plus a credential/reachability census snapshot (0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations), 1 UNREACHABLE) and a non-evidence comparator table (3/3 CANDIDATE_NOT_EVIDENCE). continue=false because the next step requires a substrate repair (byte-verified re-pin/re-freeze) and a new Global Research Director mandate; this lane does not self-authorize a child experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38175568787/request.json#director_mandate",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#claim_ids",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#decision_rule",
+    "research/experiments/EXP-INTEL-38175568787/spec.json#freeze_eligibility.freeze_artifacts_bound",
+    "research/experiments/EXP-INTEL-38175568787/freeze.json#artifact_hashes",
+    "research/experiments/EXP-INTEL-38175568787/design_review.json#status",
+    "research/experiments/EXP-INTEL-38175568787/result.json#metrics.decision_trace",
+    "research/experiments/EXP-INTEL-38175568787/result.json#observations",
+    "research/experiments/EXP-INTEL-38175568787/result.json#validity_notes",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#status",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#claim_ceiling",
+    "research/experiments/EXP-INTEL-38175568787/audit.json#required_fixes",
+    "research/experiments/EXP-INTEL-38175568787/raw/provisioning_evidence.json#candidates",
+    "research/experiments/EXP-INTEL-38175568787/raw/controls.json",
+    "research/experiments/EXP-INTEL-38175568787/raw/endpoint_census.json",
+    "research/experiments/EXP-INTEL-38175568787/raw/external_comparators.json",
+    "research/experiments/EXP-INTEL-38175568787/report.md",
+    "research/experiments/EXP-INTEL-38175568787/provenance.json",
+    "codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT",
+    "research/experiments/EXP-INTEL-38164607941/handoff.json"
+  ]
+}
