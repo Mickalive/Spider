@@ -8,7 +8,7 @@
   "next_question": "Can a local-repair policy on the shipped parameterized carrier (src/spider/kernel.py: distill_parameterized -> resolve -> execute -> verify) eliminate the repair path's extra retrieval/verification overhead (reusing the freshness-guard probe observation, not double-charging verification) so that repair becomes strictly product-counter-cheaper than cold re-derivation on the registered equal-weight counter (ratio < 1.00 at the carrier minimum viable budget L=2, where the observed ratio is 1.1111111111111112 and 1.0526315789473684 at L=3), or is the ~5.3% product-counter regression intrinsic to localized repair under that counter -- and does the network-fetch-only win (fetch ratio 0.6666666666666666-0.7777777777777778) translate into a net end-to-end cost win on a substrate where fetches rather than model calls are the scarce resource?",
   "promotion_ready": false,
   "consecutive_failures": 2,
-  "updated_at": "2026-10-12T10:16:56.675502+00:00",
+  "updated_at": "2026-10-12T11:43:21.024891+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "7b144a1099a9eac71253784bf33f2c93c6e3a4b72298ce45c9406c59988e138e",
   "same_failure_count": 1,
