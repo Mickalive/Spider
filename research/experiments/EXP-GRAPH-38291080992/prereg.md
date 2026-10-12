@@ -10,31 +10,43 @@
 - CANONICAL-RUNNER-SHA256: `11fa24673a0d7ceb4c06252a6495dc6a11fcc5e47350c6ccbff7ced24edc7508`
 - environment: `Python 3.12.15`, **stdlib only** (no numpy / sklearn / sentence_transformers available).
 
-This prereg freezes the smallest decisive experiment requested by the mandate: one
-independently authored held-out generalization surface (`AXIS-G3-NEW`), a retest of the
-frozen HELDOUT surface with the new pre-declared structural clause (`AXIS-G2-RETEST`),
-regression retention on the two surfaces where the treatment already met the gate
-(`AXIS-G1-PRIMARY`, `AXIS-G1-ALTLEX`), and a now-measurable retrieval comparator (Arm B).
+This prereg freezes the smallest decisive experiment requested by the mandate: a
+single-validity-repair re-run on the SAME independently authored held-out surface
+(`AXIS-G3-NEW`, block bytes verified identical to the parent prereg) with the SAME
+zero-tunable-parameter clause set (no third surface, no refitting), a retest of the
+frozen HELDOUT surface (`AXIS-G2-RETEST`), regression retention on the two surfaces
+where the treatment already met the gate (`AXIS-G1-PRIMARY`, `AXIS-G1-ALTLEX`), and
+the now-measurable retrieval comparator (Arm B). The ONLY authorized change relative
+to the parent transaction is the treatment-liveness predicate scope repair
+(`audit.json#required_fixes` of the parent): the applicable-only predicate validated
+on calibration but evaluated on test is replaced by a global non-degeneracy predicate
+pre-declared on the exact split where it is evaluated.
 
 
 ## 1. Question, hypothesis, falsifier
 
-**Question (mandate).** On a materially different, independently authored held-out
-generalization surface (new goal bank + new synonym lexicon authored without reference to
-LEXICON-G1, LEXICON-G1-ALT, LEXICON-G2-HELDOUT or the T-FRAME clause set), does the
-zero-tunable-parameter T-FRAME architecture (frozen B-LEX-STRONG selector plus structural
-frame-completeness abstention C1-SUBOP / C3-NO-REFERENCE / C4-COMPLEMENT / C5-SET-QUANT /
-C6-SOURCE) hold `pooled_false_accept <= 0.10` AND `coverage >= 0.50` AND
-`unknown_precision >= 0.85` on a disjoint calibration/test split - including a pre-declared,
-NON-calibration-fitted structural clause that abstains on the CREATE-with-S=0 held-out
-false-accept pattern (`oos_010`/`oos_014`) without any fitted threshold and without reducing
-held-out coverage below 0.50 - and can the previously BLOCKED retrieval comparator (Arm B)
-be unblocked and measured so the deterministic-vs-retrieval fork is decided?
+**Question (mandate).** On a re-frozen run keeping the SAME G3-NEW surface (the
+blind-authored public-transit fleet goal bank + synonym lexicon from the parent
+transaction, reused byte-identically - §5) and the SAME zero-tunable-parameter
+T-FRAME clause set (frozen B-LEX-STRONG selector plus structural frame-completeness
+abstention C1-SUBOP / C3-NO-REFERENCE / C4-COMPLEMENT / C5-SET-QUANT / C6-SOURCE /
+C7-CREATE-OBLIQUE, with no refitting and no third independently authored surface),
+but repairing the liveness predicate so it is pre-declared on the exact split where
+it is evaluated, does the treatment validly reach a frozen ship-scope branch - and
+in particular, does T-FRAME+ hold `pooled_false_accept <= 0.10` AND `coverage >=
+0.50` AND `unknown_precision >= 0.85` on the disjoint calibration/test splits, is
+the AXIS-G2-RETEST `unknown_precision` shortfall (`0.8333 < 0.85` as
+auditor-recomputed in the parent packet) intrinsic to the no-refit deterministic
+clause set, and does the deterministic-vs-retrieval fork (parent: `BOTH_PASS_G3`
+with selective_acc `1.0 vs 0.2727`; Arm B G2 collapse at false_accept `0.70`)
+favour structure on this surface family - thereby deciding whether
+C-SEMANTIC-RESOLVE can be re-asserted to EXPERIMENTAL through a valid packet or
+stays bounded to PRIMARY+ALTLEX with Product keeping the conservative shipped
+abstention boundary?
 
-**Hypothesis (H1).** Adding the pre-declared zero-parameter clause `C7-CREATE-OBLIQUE` to the
-frozen T-FRAME selector yields a treatment (`T-FRAME+`, Arm A) that holds
-`pooled_false_accept <= 0.10 AND coverage >= 0.50 AND unknown_precision >= 0.85` on the
-disjoint test split of the new surface `AXIS-G3-NEW` **and** on the retested frozen
+**Hypothesis (H1).** The SAME treatment (`T-FRAME+`, Arm A, byte-identical clauses)
+holds `pooled_false_accept <= 0.10 AND coverage >= 0.50 AND unknown_precision >= 0.85` on the
+disjoint test split of the SAME surface `AXIS-G3-NEW` **and** on the retested frozen
 `AXIS-G2-RETEST` surface, while retaining `selective_acc >= 0.80` on all four axes.
 
 **Hypothesis (H2, comparator).** The stdlib retrieval comparator `B-RETRIEVAL-TFIDF`
@@ -60,7 +72,7 @@ PRIMARY+ALTLEX fixture and keeps the conservative shipped abstention boundary.
 The mandate sets `parent_handoff_disposition = USE`. The parent handoff (`research/experiments/EXP-GRAPH-38205284279/handoff.json`) is continuity evidence with a binding PIVOT mandate behind it; its four-way distinction is carried forward unchanged, and the Director's strategic question (request.json#director_mandate.allocation.question) is the binding research direction. The handoff `next_question` is advisory only.
 
 **established** (packet-level facts of the parent transaction):
-- The frozen deterministic transaction completed validly as an execution (runner sha256 `11fa24673a0d7ceb4c06252a6495dc6a11fcc5e47350c6ccbff7ced24edc7508`, two byte-identical `--mechanics-only` canaries, scored run twice byte-identical `c80a8f42...`, exit 0 empty stderr) but emitted `status=MEASUREMENT_INVALID`, `decision=null` via its own frozen liveness rule on `AXIS-G3-NEW` test (`36/36` applicable executed).
+- The frozen deterministic transaction completed validly as an execution (parent runner sha256 `d9edd0dc9e6a243847758c062744f4db6ffc9a93c986dcbf863f6a31bb7ffd4c`, two byte-identical `--mechanics-only` canaries, scored run twice byte-identical `c80a8f42...`, exit 0 empty stderr) but emitted `status=MEASUREMENT_INVALID`, `decision=null` via its own frozen liveness rule on `AXIS-G3-NEW` test (`36/36` applicable executed).
 - The invalidity is a pre-declared frozen-rule event: NOT infrastructure failure, NOT scientific falsification.
 - The defect is scoped to the liveness predicate: validated on G3 calibration (`38/39` applicable executed, 1 abstention) but evaluated on the G3 TEST split where structural abstention fired on 0 applicable rows (`36/36` executed; all 7 resolved abstentions on OOS).
 - Auditor-recomputed observations inside the invalid measurement: G3 test T-FRAME+ `pooled_false_accept=0.10 / coverage=1.0 / unknown_precision=1.0 / selective_acc=1.0`; C7 fires on 0 applicable rows on every axis and strictly reduces G3 test FA `0.20 -> 0.10` and G2 test FA `0.10 -> 0.00`.
@@ -97,9 +109,9 @@ Abstention = any frozen structural clause firing => `ABSTAIN` (`mech=None`):
 - `C5-SET-QUANT`: a set/quantifier token is present (all/every/each/both/... );
 - `C6-SOURCE`: a CREATE whose post-family span contains a source preposition (from/into/onto).
 
-**NEW pre-declared clause `C7-CREATE-OBLIQUE` (the mandate's required clause).** Zero tunable
-parameters; declared from the frozen HELDOUT false-accept pattern before any new outcome is
-observed. It fires for a bound CREATE operation when EITHER:
+**Inherited clause `C7-CREATE-OBLIQUE` (parent's pre-declared clause, reused byte-identically here).** Zero tunable
+parameters; declared from the frozen HELDOUT false-accept pattern before any parent outcome was
+observed, and frozen unchanged for this repair run per the mandate's no-refitting constraint. It fires for a bound CREATE operation when EITHER:
 - (a) a source/extraction preposition `{from, into, onto}` occurs anywhere in the instruction
   (the object is placed from/onto/into a host resource); OR
 - (b) a placement preposition `{to,on,onto,into,in,at,from,by,upon,toward,towards,with}` occurs
@@ -138,9 +150,9 @@ gate is never tuned on test. This is the smallest change that unblocks the fork 
 the harness stdlib-only and hash-bindable at freeze.
 
 
-## 5. Surface authorship provenance (`AXIS-G3-NEW`)
+## 5. Surface provenance (`AXIS-G3-NEW`, inherited byte-identically)
 
-`LEXICON-G3`, `GOAL-BANK-G3` and `OOS-BANK-G3` were authored by **fresh-context blind
+`LEXICON-G3`, `GOAL-BANK-G3` and `OOS-BANK-G3` were authored for the PARENT transaction by **fresh-context blind
 subagents** that received no repository access, no view of `LEXICON-G1`, `LEXICON-G1-ALT`,
 `LEXICON-G2-HELDOUT`, `GOAL-BANK-G1/G2`, `OOS-BANK-G1/G2`, and no description of the T-FRAME
 clause set. They were told only: (i) invent a new operational Web-agent domain distinct from
@@ -151,9 +163,16 @@ out-of-scope bank with 10 each of categories A (unsupported/invented operation),
 / sub-resource request), C (multi-step / conditional), D (other/nearby domain). The selected
 domain is **public transit fleet management** (families: `routes`, `vehicles`, `drivers`,
 `stops`, `fares`), clearly disjoint from the G1/G2 car-rental/helpdesk/animals surfaces and
-from `goal_generator.py`'s token vocabulary. This satisfies the mandate's "independently
+from `goal_generator.py`'s token vocabulary. This satisfied the parent mandate's "independently
 authored, no-reference" requirement. Bank statistics: 80 applicable rows = 16 (family, op)
 cells x 4 surfaces; 40 OOS rows = 4 categories x 10.
+
+**Reuse (this experiment, per the Director's stop rule).** No new surface was authored here:
+the three G3 blocks embedded in §13.1-13.3 below were verified byte-identical to the
+corresponding blocks of `research/experiments/EXP-GRAPH-38205284279/prereg.md` (block-text
+comparison in DESIGN: `LEXICON-G3`, `GOAL-BANK-G3`, `OOS-BANK-G3` all identical, lengths
+3834/6357/3672). Authoring a third independently authored surface would violate the mandate's
+stop rule; this design complies by pure reuse.
 
 **Contamination screen (frozen).** Any row whose token-set Jaccard `>= 0.60` OR char-trigram
 Jaccard `>= 0.75` against the union of {`goal_generator.py` INTENTS/PARAPHRASES/
@@ -200,8 +219,8 @@ Controls (stable ids):
 - `PC-AXIS-G1-ALTLEX`: AXIS-G1-ALTLEX must remain gate-met (known-positive from
   `EXP-GRAPH-38188798583`); if it fails, the measurement is invalid, not a science negative.
 - `NC-EXEC-ALL` (`gatefree`): execute-all pools the OOS false accepts; must show materially
-  higher `pooled_false_accept` than Arm A (calibration observes 0.30 on G3, 0.60 on G2,
-  0.45 on G1, 0.40 on ALT).
+  higher `pooled_false_accept` than Arm A (parent-published calibration: 0.30 on G3, 0.55 on G2,
+  0.275 on G1, 0.275 on ALT).
 - `NC-ABSTAIN-ALL`: all-abstain control, coverage 0, `unknown_precision` 1.0.
 - `CTRL-SHUFFLED-SELECTION` and `CTRL-RANDOM-ROLE`: label-permutation selection near chance.
 - `CTRL-RANDOM-GATE` (`matched_random_gate`): abstention volume matched by random rows.
@@ -209,21 +228,18 @@ Controls (stable ids):
 - `CTRL-INCUMBENT`: B-LEX-STRONG + lexical `S<=0` gate (the previously shipped logic).
 
 
-## 8. Design satisfiability probes (calibration/structural only; no test outcome observed)
+## 8. Design satisfiability probes (synthetic + published-evidence only; no test outcome observed)
 
-These probes are non-outcome-bearing. No test-split metric was computed in DESIGN.
+These probes are non-outcome-bearing. No test-split metric of THIS experiment was computed in DESIGN: the frozen runner was never executed on the real banks; real-bank numbers cited below are parent-published frozen evidence (`result.json`, `audit.json`), quoted for reachability arithmetic, not re-measured.
 
-**8.1 Treatment liveness, repaired scope (PASS).** The frozen predicate is evaluated on the `AXIS-G3-NEW` TEST split only (the exact split named in the predicate - the parent scope defect is closed by construction). Pre-freeze probes, all non-outcome-bearing: (a) `--mechanics-only` on the frozen G3 bank confirms the treatment is structurally live on calibration: `T-FRAME+` executes 38/39 calibration applicable rows (`coverage = 0.9744`), abstains on 1 (C4-COMPLEMENT), `unresolved_applicable = 1`, `pooled_false_accept = 0.0`, `unknown_precision = 1.0`, `selective_acc = 1.0`; (b) predicate arithmetic on the inherited published G3-TEST counts (prior packet evidence, not a new measurement: `executed_total=38`, `n_total_test=56`, `executed_app=36`, `abstained_resolved=7`) evaluates the repaired `LIVE` to True, while the parent predicate `0 < 36 < 36` evaluates False - the repair flips exactly the defective trigger and nothing else; (c) degeneracy sensitivity: execute-all (`abstained_resolved=0`) and abstain-all (`executed_total=0`) both evaluate `LIVE=False`, so the repaired predicate still rules out genuine degeneracy; (d) the full `main()` path with the repaired predicate was driven on synthetic decoys and returned valid JSON (see 8.3). No test-split metric of THIS experiment was computed in DESIGN.
+**8.1 Treatment liveness, repaired scope (PASS).** The frozen predicate is evaluated on the `AXIS-G3-NEW` TEST split only (the exact split named in the predicate - the parent scope defect is closed by construction). Pre-freeze probes, all non-outcome-bearing: (a) the extracted `FROZEN-RUNNER` module compiles and its frozen analysis path (`comp`/`frame`/`clause_c7`/`is_executed`/`metrics`) executes on synthetic rows with a toy lexicon, yielding a non-degenerate treatment (`executed=1`, `abstained_resolved=2` over 3 synthetic rows) for which the frozen liveness formula evaluates True; (b) predicate arithmetic on the parent-published G3-TEST counts (prior packet evidence, not a new measurement: `executed_total=38`, `n_total_test=56`, `executed_app=36`, `abstained_resolved=7`) evaluates the repaired `LIVE` to True, while the parent predicate `0 < 36 < 36` evaluates False - the repair flips exactly the defective trigger and nothing else; (c) degeneracy sensitivity: execute-all (`abstained_resolved=0`) and abstain-all (`executed_total=0`) analogues both evaluate `LIVE=False`, so the repaired predicate still rules out genuine degeneracy (a selector-degenerate run with all `mech=None` likewise yields `executed_total=0`); (d) calibration non-degeneracy is retained parent evidence (`T-FRAME+` executes 38/39 calibration applicable rows, coverage 0.9744, 1 abstention). No test-split metric of THIS experiment was computed in DESIGN.
 
-**8.2 C7 non-vacuity and zero applicable cost (PASS).** Structurally over the full frozen
-binding sets, `C7-CREATE-OBLIQUE` fires on **0** applicable rows on every axis and on
-2 G3 / 4 G2 / 2 G1 / 1 ALT OOS rows; on the frozen `${AXIS-G2-RETEST}` surface it fires on
+**8.2 C7 non-vacuity and zero applicable cost (PASS, parent-published structural facts quoted, not re-measured).** Per the parent `result.json#metrics.c7_firing` and `audit.json#recomputed_metrics`, `C7-CREATE-OBLIQUE` fires on **0** applicable rows on every axis and on
+2 G3 / 4 G2 / 2 G1 / 1 ALT OOS rows; on the frozen `AXIS-G2-RETEST` surface it fires on
 exactly the named false accepts `oos_010` and `oos_014` (plus `oos_006`, `oos_023`). No
 fitted parameter exists; C7 fires iff the structural triggers hold.
 
-**8.3 Decision-rule reachability (PASS).** The full `main()` path with the REPAIRED liveness predicate (Arm A + Arm B + controls +
-decision + fork) was driven end-to-end on a synthetic, non-outcome-bearing decoy surface and
-returned valid JSON on two synthetic decoys: one exercising the repaired-`LIVE=False` `MEASUREMENT_INVALID` path (new reason string emitted, `decision=null`), one exercising the `LIVE=True` `COMPLETE` path (`DECIDE_REQUIRE_RETRIEVAL_B`, fork `RETRIEVAL_DOMINATES_G3`); branch-combination enumeration over the frozen `if/elif/else` confirms all four outcomes (`DECIDE_SHIP_TFRAME_BROAD`, `DECIDE_SHIP_TFRAME_SCOPED`, `DECIDE_REQUIRE_RETRIEVAL_B`, `MEASUREMENT_INVALID`) are reachable. Branch map: `g3_gate & g2_gate &
+**8.3 Decision-rule reachability (PASS).** The exact frozen `if/elif/else` cascade (repaired-liveness invalid path with the new reason string and `decision=null`; `g3_gate & g2_gate & selection_preserved -> DECIDE_SHIP_TFRAME_BROAD`; `g2_gate & selection_preserved -> DECIDE_SHIP_TFRAME_SCOPED`; else `DECIDE_REQUIRE_RETRIEVAL_B`) was enumerated over synthetic inputs covering all four decision outcomes, and the retrieval-fork ordering was enumerated over all four gate combinations (`RETRIEVAL_DOMINATES_G3` / `TFRAME_DOMINATES_G3` / `BOTH_PASS_G3` / `NEITHER_PASSES_G3`); the repaired `LIVE` formula returned True on the synthetic non-degenerate rows (8.1a) and False on degenerate analogues. Branch map: `g3_gate & g2_gate &
 selection_preserved -> DECIDE_SHIP_TFRAME_BROAD`; `g2_gate & selection_preserved ->
 DECIDE_SHIP_TFRAME_SCOPED`; else `DECIDE_REQUIRE_RETRIEVAL_B`; any invalid reason ->
 `MEASUREMENT_INVALID` with `decision = null`. Retrieval fork: `RETRIEVAL_DOMINATES_G3` /
@@ -236,17 +252,15 @@ the bars are attainable and not at a ceiling/floor.
 
 **8.5 Baseline / comparator identity (PASS).** Arm A (deterministic structure) and Arm B
 (calibration-fitted instance retrieval) are distinct implementations; the incumbent lexical
-`S<=0` gate is a third, distinct arm. Arm B is live on calibration (20 classes, n_fit 40,
-`tau = 0.3649`, `mu = 0.0083`, calibration gate cov 1.0 / FA 0.10 / UP 1.0, feasible=True),
-so `DECIDE_REQUIRE_RETRIEVAL_B` is not an empty branch.
+`S<=0` gate is a third, distinct arm. Arm B measurability is parent-published evidence (`result.json#metrics.arm_b`: fitted `tau = 0.4278`, `mu = 0.0`, `cal_fit_feasible = true`; test measurable with G3 gate-met), quoted not re-measured; the frozen gate procedure (lexicographic maximise-feasibility-then-coverage on calibration rows only) is unchanged, so re-applying it at EXECUTE is the frozen procedure, not a refit of the clause set (refitting the deterministic clauses is forbidden).
+The `DECIDE_REQUIRE_RETRIEVAL_B` branch is therefore not an empty branch.
 
-**8.6 Control sensitivity (PASS).** NC-EXEC-ALL pools 0.30-0.60 false accepts on calibration
-vs 0.0 for Arm A; the abstain-all control has coverage 0; shuffled/random controls are
+**8.6 Control sensitivity (PASS, parent-published values quoted).** On the parent test splits NC-EXEC-ALL pools 0.2778-0.50 false accepts
+vs 0.0-0.10 for Arm A; the abstain-all control has coverage 0; shuffled/random controls are
 near-chance; the C7 clause is the only clause whose removal changes the two named HELDOUT
 rows. Controls can move.
 
-**8.7 Measurement prerequisites (PASS).** Python 3.12 stdlib only; all runtime block
-dependencies exist and were read successfully by the `--mechanics-only` and decoy runs; no
+**8.7 Measurement prerequisites (PASS).** Verified in DESIGN without outcome measurement: Python `3.12.15`; top-level runner imports are stdlib-only (`argparse`, `hashlib`, `json`, `math`, `os`, `re`, `random`, `sys`, `pathlib`, `__future__`) with the single declared repo-local `goal_generator` import inside `main()`; `numpy`/`sklearn`/`sentence_transformers` confirmed absent; `research/harness/goal_generator.py` imports cleanly (`INTENTS`/`PARAPHRASES` present); every block name the runner extracts (`GOAL-BANK-G1`, `OOS-BANK-G1`, `LEXICON-G1`, `LEXICON-G1-ALT`, `GOAL-BANK-G2`, `OOS-BANK-G2`, `LEXICON-G2-HELDOUT` in the parent prereg; `PRIOR-PARENT-BANK-TEXTS` in the grandparent prereg) verified present. No
 network, model, credential, browser or third-party package is required.
 
 **8.8 Freeze artifacts bounded (PASS).** The only external mutable files that can change the
@@ -256,9 +270,9 @@ this prereg and hashed.
 
 **8.9 Self-attack (declared threats, not failures).**
 - C7 trigger (a) uses `from/into/onto` anywhere; an unseen applicable that uses one as a
-  benign idiom would over-abstain. Verified 0 such rows exist in the frozen binding bank; the
+  benign idiom would over-abstain. Parent DESIGN verified 0 such rows in the frozen binding bank (clauses unchanged since); the
   threat is declared and would surface as reduced coverage, not a false accept.
-- C7 trigger (b) could in principle fire on a differently-parsed applicable; verified 0 on
+- C7 trigger (b) could in principle fire on a differently-parsed applicable; parent DESIGN verified 0 on
   the frozen bank.
 - The G3 applicable bank is structurally simple by construction; this makes the surface a
   fairness test of abstention and of the C7 clause, not of hard parsing. The OOS bank is the
@@ -268,7 +282,7 @@ this prereg and hashed.
 
 ## 8.10 Self-attack on the repaired design (empty-branch / identity / ceiling audit)
 
-- Empty/unreachable branches: with the SAME frozen surface and clause set, the G2-RETEST test metrics will reproduce deterministically, so `gate_met(AXIS-G2-RETEST)=false` is EXPECTED and `DECIDE_SHIP_TFRAME_BROAD / DECIDE_SHIP_TFRAME_SCOPED` are expected-unreachable. This is NOT a satisfiability failure: all branches are arithmetically reachable and decoy-exercised (8.3); the decision-changing fork is VALID-`DECIDE_REQUIRE_RETRIEVAL_B` (bounds the resolver to PRIMARY+ALTLEX with a valid fork observation) vs `MEASUREMENT_INVALID` (retires this surface family per the mandate rationale). A valid negative is the predicted informative outcome, and it changes the claim/product decision (retains HYPOTHESIS with a valid bound, keeps the conservative shipped abstention boundary).
+- Empty/unreachable branches: with the SAME frozen surface and clause set, the G2-RETEST test metrics will reproduce deterministically, so `gate_met(AXIS-G2-RETEST)=false` is EXPECTED and `DECIDE_SHIP_TFRAME_BROAD / DECIDE_SHIP_TFRAME_SCOPED` are expected-unreachable. This is NOT a satisfiability failure: all branches are arithmetically reachable and synthetically enumerated (8.3); the decision-changing fork is VALID-`DECIDE_REQUIRE_RETRIEVAL_B` (bounds the resolver to PRIMARY+ALTLEX with a valid fork observation) vs `MEASUREMENT_INVALID` (retires this surface family per the mandate rationale). A valid negative is the predicted informative outcome, and it changes the claim/product decision (retains HYPOTHESIS with a valid bound, keeps the conservative shipped abstention boundary).
 - Treatment/comparator identity: Arm A (deterministic lexical structure + 6 frozen clauses) and Arm B (calibration-fitted TF-IDF centroid retrieval) are distinct implementations sharing no fitted state; the incumbent and gatefree arms are separately reported. Identity holds.
 - Ceiling baselines: the G3 gate (`<= 2` OOS executes of 20; `>= 18/36` applicable executes; `UP >= 0.85`) is attainable and non-degenerate (8.4); `gatefree` FA `0.45` proves headroom.
 - Insensitive controls: every control moved on the parent run (NC-EXEC-ALL gap `0.35` on G3; random-gate FA `0.70-0.9444`); the repaired liveness preserves sensitivity to execute-all and abstain-all degeneracy (8.1c). The positive control `PC-AXIS-G1-ALTLEX` remains an invalidity trigger, not a science claim.
@@ -314,11 +328,7 @@ deterministic in-process run over ~500 bound rows plus calibration fitting for A
 wall time seconds; the only substantive design cost was the blind authoring of the G3 surface
 and the pre-declared clause. This is near-zero marginal cost for a decision-bearing result.
 
-**Expected information gain.** High. Exactly one frozen run decides the ship scope of the
-`C-SEMANTIC-RESOLVE` resolver (BROAD / SCOPED / REQUIRE_RETRIEVAL_B), whether the new
-zero-parameter `C7-CREATE-OBLIQUE` clause closes the previously named HELDOUT false-accept gap,
-and whether the deterministic-vs-retrieval fork favours structure or retrieval. Both positive
-and negative outcomes change a current product decision.
+**Expected information gain.** High governance value from a single validity repair. This run does not discover new metric values (the deterministic re-run is predicted to reproduce the parent gate vector); its information lies in converting a `MEASUREMENT_INVALID` status-confusion packet into a VALID decision: predicted VALID `DECIDE_REQUIRE_RETRIEVAL_B` bounds the `C-SEMANTIC-RESOLVE` resolver to PRIMARY+ALTLEX through a valid packet (retaining HYPOTHESIS with a structural-favouring fork observation) and keeps Product's conservative shipped abstention boundary; VALID ship-scope branches would re-open the EXPERIMENTAL question for the Director; G3 gate failure falsifies H1 on this surface family; a second `MEASUREMENT_INVALID` retires the surface family per the mandate rationale. Every branch changes the claim or product state, and both valid-positive and valid-negative outcomes change a current product decision.
 
 
 ## 11. Environment and EXECUTE command
@@ -1007,7 +1017,7 @@ if __name__ == "__main__":
 ## 14. Director-mandate conformance, pre-2.0 comparison, and stop-rule compliance
 
 - Binding direction: `request.json#director_mandate` (cycle `38290683955`, Graph PIVOT, `C-SEMANTIC-RESOLVE`). This design converts its strategic question into the smallest rigorous repair experiment: SAME G3-NEW surface, SAME zero-tunable clause set, single liveness-scope fix. No third surface authored, no refitting, no drift to the parent handoff's local proposal.
-- Pre-2.0 comparison (`codex/legacy_brief.json`, `codex/legacy_artifact_index.json`, targeted archive reads only): `LEGACY: DISTINCT_EXTENSION`. `P2-BLIND-COMPOSITION` (pre2 product summary artifact 4.697 sha `017a80aeb9a6759c8f6913a37031ff1616ec1bda`: 3/3 compositions with keyword/oracle caveats) and `P2-MIND2WEB` (archived Codex section 1: 176 routes, 3.41% exact matches) concern composition/retrieval breadth, not a deterministic resolver liveness-predicate scope defect on a fixed split. No pre-2.0 artefact tests a liveness-predicate scope repair; nothing is repeated. The guard from both precedents (strong comparators, no oracle/keyword crutches) is honored via the measurable stdlib retrieval Arm B and the frozen decoy-exercised fork.
+- Pre-2.0 comparison (`codex/legacy_brief.json`, `codex/legacy_artifact_index.json`, targeted archive reads only): `LEGACY: DISTINCT_EXTENSION`. `P2-BLIND-COMPOSITION` (pre2 product summary artifact 4.697 sha `017a80aeb9a6759c8f6913a37031ff1616ec1bda`: 3/3 compositions with keyword/oracle caveats) and `P2-MIND2WEB` (archived Codex section 1: 176 routes, 3.41% exact matches) concern composition/retrieval breadth, not a deterministic resolver liveness-predicate scope defect on a fixed split. Corroborating grep over the mounted `.spider-runtime/pre2/SPIDER_CODEX_ULTIME.md` (566403 lines): zero hits for `T-FRAME`, and `liveness` hits concern only infrastructure aliveness, never a resolver liveness predicate - no pre-2.0 artefact tests, or could test, a liveness-predicate scope repair; nothing is repeated. The guard from both precedents (strong comparators, no oracle/keyword crutches) is honored via the measurable stdlib retrieval Arm B and the frozen enumerated fork.
 - Stop-rule compliance: the mandate's "do not iterate surface thrice / any refit, third surface, or predicate evaluated off-split -> MEASUREMENT_INVALID, park thread" is frozen into the design - the G3 bank bytes are verbatim copies of the parent prereg blocks (sameness verifiable by block sha), the clause set is byte-identical including C7, and the predicate names its evaluated split explicitly.
 - Product consequence restated: VALID-`DECIDE_REQUIRE_RETRIEVAL_B` (expected) bounds T-FRAME to PRIMARY+ALTLEX, retains `C-SEMANTIC-RESOLVE` at HYPOTHESIS with a valid fork observation favouring structure (`BOTH_PASS_G3` with selective_acc asymmetry + G2 collapse), and Product keeps the conservative shipped abstention boundary. VALID ship-scope branches would re-open the EXPERIMENTAL question for the Director; `MEASUREMENT_INVALID` again retires this surface family. This packet itself promotes nothing to product.
 
