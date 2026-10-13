@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-38385040804/raw_evidence/runner_tframe_g3_oos.py", line 601, in <module>
+    main()
+  File "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-38385040804/raw_evidence/runner_tframe_g3_oos.py", line 479, in main
+    select_gids=[f"{a}:{r['gid']}" for _, r in sel_app] + [f"{a}:{r['gid']}" for _, r in sel_oos])
+                    ^
+UnboundLocalError: cannot access local variable 'a' where it is not associated with a value
