@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently re-ran the hash-verified embedded runner's --reachability-probe (synthetic, non-substrate, non-outcome-bearing): all 8 class branches {STRICT-WIN-MEASURED, SINGLE-SURFACE-MIXED, EQUAL-ONLY-MIXED, BOUNDED-WIN, MIXED-TRADEOFF, COST-FAIL, FUNCTIONAL-FAIL, COST-UNKNOWN} and all 6 aggregates {SUPPORTS, MIXED-PARTIAL, MIXED-COUNTER-DEPENDENT, MIXED, FALSIFIES, INCONCLUSIVE} were produced (all_class_branches_reachable=true, all_aggregate_branches_reachable=true). Precedence is first-match over nonempty regions: STRICT-SINGLE-EQUAL tier requires eq (pr_L2<1.00 AND pr_L3<1.00 AND fetch_L3<=0.90); BOUNDED-WIN is reachable from eq-false rows with pr<=1.00 (e.g. pr_L2==1.00); MIXED-TRADEOFF/COST-FAIL from successively worse rows; no branch shadows later branches (the probe exercises every branch end-to-end). Positive/support branch (all-STRICT-WIN-MEASURED -> SUPPORTS) and falsifying/decision-changing branches (EQUAL-ONLY-MIXED, FALSIFIES, INCONCLUSIVE) both concretely trigger. Thresholds are arithmetically attainable on live quantities: parent vectors give eq ratios 0.944/0.895 and fetch 0.667; legacy 1.111 sits inside the 1.15 MIXED-TRADEOFF band; Wilson bars are live (12/12 -> 0.7575 >= 0.60, 11/12 -> 0.646, 10/12 -> 0.552 < 0.60, independently computed from v2.wilson_lower). Calibrated arithmetic has both sides: reuse (6,5,5,1) beats cold (8,5,5,0)/(9,5,5,0) under time-order/fetch-dominant weights and loses under repair-heavy weights (1,1,1,5); SINGLE-SURFACE-MIXED is reachable from either surface alone. Which side the scored data lands on is decided by the run, not by DESIGN.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-7",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-12 (cost_verdict_v3/aggregate_v3; reviewer re-ran --reachability-probe on extraction hashing to CANONICAL-RUNNER-V3-SHA256)",
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (functional_ok, wilson_lower)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present now, not deferred to EXECUTE: Python 3.12.15 (stdlib only; ThreadingHTTPServer/urllib/perf_counter all standard); carrier files exist and hash-match the prereg pins (kernel 3a6caf97..., models 338aaf4d..., registry 51fb440d...); the immutable parent v2 runner exists and matches its V0 pin exactly (60855 bytes, sha d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608) and imports cleanly. Reviewer independently ran the frozen runner's --liveness-only: server_ready=true, distill_live=true, task_read_verified=true (resolve EXECUTABLE, fetch 200, verify True), contamination_instrument_live=true on in-support probe id=14, out_of_support_probe_degenerate=true, NCs fresh (stale=false both), timer resolution 1e-9 s, mini-calibration N=60 calib_ok=true with all four medians finite>0 (fetch~342us, resolve~41us, verify~37us, repair~0.19us) and RSE 0.001-0.016 << 0.30 bar. No credential, model, browser, external endpoint, task bank or dataset is required; model_calls/model_tokens are measured from kernel counters (structurally 0 on this substrate); B3 real-model economics is explicitly carried as unknown/out-of-scope, not assumed as a prerequisite. Registry disk I/O targets per-trial ephemeral state constructed inside the runner, not an external prerequisite.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-4",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-11",
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (V0 pin re-verified by reviewer)",
+        "src/spider/kernel.py, src/spider/models.py, src/spider/registry.py (hashes re-verified by reviewer)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines share carrier, substrate, seeds, perturbation classes and identifier banks and differ only in physical per-operation work (fused-probe reuse (6,5,5,1) vs cold re-derivation (8,5,5,0)/(9,5,5,0), legacy separate-probe (10-ish, full re-execution)) — a genuine, oplog-verifiable difference (V14). Cost dimensions are complete and symmetric: both arms are scored on the identical 4-tuple {http, retrieval, verification, repair}, end-to-end episode latency, and model_calls/model_tokens (0 for both); no dimension used by one comparator is omitted from the other. No ceiling/floor identity trap: functional success at 1.0 is a validity gate, not the measured advantage; the cost dynamic range is live (17 vs 18/19/20 parent counters) and latency is continuous. The open decision content is sign-identifiability on the two NEW surfaces: calibrated weights and latency can each place the verdict on either side (both_sides_exist=true under synthetic weight extremes; measured fetch-dominant weights are finite and re-measured independently at N_CAL=300 in the scored run). B-COLD/B-COLD-MIN are the only cost/latency denominators; abstention/must-fail controls are excluded from the classifier; conservative/legacy are reported sensitivities excluded from the classifier (legacy only as V13 premise).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/spec.json#baselines",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-5",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8.2",
+        "research/experiments/EXP-RUNTIME-38244432934/audit.json#baseline_findings (accepted parent evidence)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control is non-tautological and was verified live under the same implementation family that will score the experiment. Positive control PC-BASE-LIVENESS is computed inside every scored trial by run_trial_v3 and invalidates the trial if any of five resources fails (200, id, verified=True); the reviewer independently confirmed the carrier path fires (task_read_verified=true; contamination_instrument_live=true). Null controls NC-NO-PERTURBATION/NC-NOISE were run by the reviewer via the frozen runner's --liveness-only: stale=false under both, so they can remain null under the scoring implementation. Must-fire NC-OVERBROAD-REPAIR is discriminative (smoke 4/4 unaffected resources flagged; parent 4/4 every trial; V15 gate invalidates if overbroad_rate <= 0.10), not tautological: the probe measures behavioral change on unaffected resources and can stay silent if the instrument is insensitive (the parent F1 failure mode). Must-fail controls B-LITERAL-REPLAY/B-NO-REPAIR face a real perturbation (reviewer ran the frozen runner's repair_signal_probe: patched=true for P1/P2/P3; out-of-support id=1 degenerate everywhere) and are gated by V4/V6. Guard liveness and false-fire are gated by V7 against both NCs. No control is given the treatment's answer; no impossible bar (all bars are live inequalities on measured quantities).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8.3",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8.5",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-9 (V4-V8, V12, V15)",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-12 (reviewer re-ran --liveness-only and --reachability-probe)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The experiment's SPIDER treatment T-REPAIR-REUSE (fused-probe signal-driven local repair on the shipped carrier) produces non-null, executable behavior before any expensive arm: the reviewer, on the exact frozen runner extraction (sha ec480f38... == CANONICAL-RUNNER-V3-SHA256), confirmed distill_live=true, resolve returns EXECUTABLE with bound_action, fetch 200, verify True, and the repair-signal path generates concrete patches for all three perturbation classes (P1 endpoint rebind, P2 schema re-adoption, P3 header attach: patched=true each). The full timed treatment episode pattern (perturb -> 2 excluded warmups -> parity-ordered timed reuse/cold-L2/cold-L3 -> untimed arms -> write-set/contamination/overbroad from the timed arm) was previously smoke-executed valid end-to-end with write_set_n=1, contamination_n=0, overbroad_n=4 (prereg 8.5). No structural barrier exists between the frozen treatment and an executable episode; the scored run re-measures everything independently at n=12/class.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-5",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-8.5",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-12 (run_trial_v3; reviewer re-ran --liveness-only and --reachability-probe repair_signal_probe)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local code dependency that can change the interpretation is bound. The three carrier files listed in spec.freeze_artifacts exist and hash-match the prereg pins (reviewer re-verified). The executable decision path is embedded verbatim in prereg section 12; the reviewer reproduced the documented extraction (marker split, trailing newline preserved) and independently obtained sha256 ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229 == CANONICAL-RUNNER-V3-SHA256, so the classifier/runner identity is fail-closed at freeze via V1 + freeze.json hashes of prereg.md. The parent v2 runner is an immutable reference bound fail-closed by V0 (path + sha d4871091... + 60855 bytes verified before import; mismatch aborts, never yields a result). Grep of the v2 module, v3 runner and carrier shows no other pre-existing local file/fixture/task-bank reads: registry.py's JSONL I/O operates on per-trial ephemeral paths constructed inside the runner (Path('/tmp', tag) fresh Arms per call); the substrate is an in-process ThreadingHTTPServer over 127.0.0.1 with resources built in-runner. There are no remote targets (credential-free local substrate), so freezing target identifiers/sampling protocol remotely is NOT_APPLICABLE by construction; the in-process identifier banks (LEARN_IDS/TASK_IDS/IN_SUPPORT_PROBE_ID=14, classes, targets) are hard-coded in the pin-gated v2 module and thus bound with it. List judged complete.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38291097112/spec.json#freeze_artifacts",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-10",
+        "research/experiments/EXP-RUNTIME-38291097112/prereg.md#section-12 (reviewer hash-verified extraction)",
+        "src/spider/kernel.py, src/spider/models.py, src/spider/registry.py (hashes re-verified)",
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (V0 pin re-verified; no hidden file reads found)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "NB-1-V13-GATE-TEXT-INCONSISTENCY",
+      "severity": "nonblocking",
+      "description": "spec.json decision_rule lists V13-LEGACY_REPRODUCTION among the validity gates whose failure forces MEASUREMENT_INVALID/INCONCLUSIVE, while prereg section 9 and the frozen runner treat legacy-reproduction failure as a reported caveat only (M-LEGACY-REGRESSION-REPRODUCED is computed and reported but is NOT in the runner's `invalid` list). The executable classifier (hash-bound) and prereg agree with each other; the spec prose diverges. This does not affect reachability of the primary cw/lw decision content and cannot make the experiment unanswerable, but EXECUTE/AUDIT should adjudicate V13-failure per the executable runner + prereg (reported caveat, not automatic invalidation) and the packet should carry this discrepancy explicitly so downstream does not treat it as a silent rewrite."
+    },
+    {
+      "id": "NB-2-CARRIER-HASH-NOT-IN-RUNNER-GATE",
+      "severity": "nonblocking",
+      "description": "The v3 runner's _carrier() reports kernel/models/registry hashes on stdout but does not itself abort on mismatch (only the v2 file has an in-runner fail-closed pin via V0). Carrier identity binding therefore relies on the V1-FREEZE_BINDING/EXECUTE pre-flight comparison against freeze.json.artifact_hashes, per the prereg contract. Acceptable as designed, but the pre-flight comparison must actually be enforced at EXECUTE; a carrier-hash mismatch caught only in reporting would otherwise not refuse-to-run."
+    },
+    {
+      "id": "NB-3-DESIGN-MINICALIB-NOT-SCORED",
+      "severity": "nonblocking",
+      "description": "The reviewer's independent non-outcome-bearing --liveness-only probe reconfirmed the DESIGN-time mini-calibration (N=60) yields finite positive medians with fetch-dominant measured weights (~1, 0.120, 0.108, 0.0006) under which parent-like op-count vectors favor reuse on the calibrated surface. This is a feasibility signal only: no threshold, bar, or weight rule was chosen from it, the scored run re-measures at N_CAL=300 with fixed seeds, and both sides of the calibrated surface remain arithmetically possible (repair-heavy weights lose). Recorded so downstream never over-reads DESIGN probes as scored evidence for M-CALIBRATED-WIN."
+    }
+  ],
+  "rationale": "Independent pre-freeze review (reviewer model opencode/mimo-v2.6-flash-free; DESIGN producer was opencode/muse-spark-1.3-contributor-free — independent-review rule satisfied). Every declared PASS in spec.freeze_eligibility was attacked, not trusted, and none failed. (1) Decision reachability re-proven by re-running the hash-verified frozen classifier: all 8 class branches and 6 aggregates reachable, both calibrated-arithmetic sides exist, thresholds arithmetically live on parent-attested counter ranges and live Wilson bars; no precedence shadowing. (2) Measurement prerequisites all present now: carrier/v2 pins re-verified byte-for-byte, substrate+instrument+timer+calibration all live under the exact frozen runner; nothing deferred to EXECUTE; B3 carried as explicit unknown, not assumed. (3) Baselines identifiable: arms differ only in physical op work with symmetric cost dimensions (4-tuple + latency + model counters), strong cold denominators only, no ceiling/floor identity trap, both signs attainable on the new surfaces. (4) Controls non-tautological and live under the scoring implementation (PC fires, NCs measured null, overbroad must-fire, literal/norepair must-fail with real patches). (5) Treatment liveness confirmed end-to-end on the frozen carrier before expensive arms. (6) Freeze artifacts complete: 3 carrier files hash-bound, embedded runner hash-bound (extraction independently reproduced), v2 fail-closed pinned, no hidden local or remote dependencies. Three nonblocking findings recorded (V13 gate-text inconsistency between spec prose and runner/prereg; carrier-hash enforcement lives at V1 pre-flight rather than in-runner; DESIGN mini-calib is feasibility-only). The design is capable of answering its own frozen question in both directions (re-admit vs permanently drop localized repair from C-PRODUCT-ECON) and honors the mandate's stop trigger (not an equal-weight-only rerun). No confirmatory/outcome-bearing measurement was run or read by this reviewer; status=PASS.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38291097112/request.json",
+    "research/experiments/EXP-RUNTIME-38291097112/spec.json",
+    "research/experiments/EXP-RUNTIME-38291097112/prereg.md",
+    "research/experiments/EXP-RUNTIME-38291097112/model_design.json (producer identity: opencode/muse-spark-1.3-contributor-free)",
+    "research/experiments/EXP-RUNTIME-38244432934/handoff.json (sha256 66aaa0097910fd64d40f67770c8a55fd777d8e6b0944973fba573ae29c1309c4 re-verified)",
+    "research/experiments/EXP-RUNTIME-38244432934/audit.json",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (V0 pin: 60855 bytes, sha256 d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608)",
+    "src/spider/kernel.py (sha256 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3)",
+    "src/spider/models.py (sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78)",
+    "src/spider/registry.py (sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c)",
+    "reviewer probes (non-outcome-bearing): prereg section-12 runner extraction sha256 ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229 == CANONICAL-RUNNER-V3-SHA256; --reachability-probe (all branches reachable, both_sides_exist=true); --liveness-only (server/distill/instrument/NCs/timer/mini-calib live)"
+  ]
+}

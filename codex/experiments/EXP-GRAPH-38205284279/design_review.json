@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38205284279",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All decision branches (MEASUREMENT_INVALID, DECIDE_SHIP_TFRAME_BROAD, DECIDE_SHIP_TFRAME_SCOPED, DECIDE_REQUIRE_RETRIEVAL_B) and retrieval-fork branches (RETRIEVAL_DOMINATES_G3, TFRAME_DOMINATES_G3, BOTH_PASS_G3, NEITHER_PASSES_G3) are mutually exclusive, exhaustive, and were exercised end-to-end on a synthetic decoy surface per the design satisfiability probe. Gate thresholds (FA<=0.10 => <=2/20 OOS; coverage>=0.50 => >=18/36 applicable; UP>=0.85) are arithmetically attainable within the bounded test splits. MEASUREMENT_INVALID is checked first, preventing precedence conflicts.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.3-decision-rule-reachability-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.4-arithmetic-attainability-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#9-decision-rule-and-product-consequences"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "The runner uses only Python 3.12 stdlib (argparse, hashlib, json, math, re, random, sys, pathlib, os). Arm B is a pure-stdlib TF-IDF implementation requiring no numpy/sklearn/sentence_transformers. All external mutable dependencies (parent prereg, grandparent prereg, goal_generator.py) are listed in freeze_artifacts and were successfully read by --mechanics-only and decoy runs. No network, model, browser, or credential dependencies exist.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.7-measurement-prerequisites-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#11-environment-and-execute-command",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#freeze_artifacts"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Five operationally distinct arms are defined: tframeplus (T-FRAME+ with C7), tframe_frozen (T-FRAME without C7), incumbent (B-LEX-STRONG + S<=0 lexical gate), gatefree (execute-all ceiling), and B-RETRIEVAL-TFIDF (calibration-fitted TF-IDF retrieval). Each uses a different abstention/resolution mechanism. Arm B is the named retrieval comparator and is never used as a cost denominator for Arm A. No cost metrics are part of the decision rule (near-zero marginal CPU cost only), so the cost-dimension omission check is vacuously satisfied.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#6-baselines-and-controls-stable-identifiers-reused-by-execute-and-audit",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#4-comparator-arm-b--b-retrieval-tfidf-retrievalembedding-fork-previously-blocked",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#baselines"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive control PC-AXIS-G1-ALTLEX (Arm A on known gate-met surface) must remain gate-met or the measurement is invalid. Null controls are sensitive: NC-EXEC-ALL (gatefree) pools 0.30-0.60 false accepts on calibration vs 0.0 for Arm A; NC-ABSTAIN-ALL yields coverage 0 with UP 1.0; CTRL-SHUFFLED-SELECTION and CTRL-RANDOM-ROLE are near chance; CTRL-RANDOM-GATE is volume-matched random abstention. C7 removal changes exactly the two named HELDOUT false-accept rows (oos_010, oos_014). All controls demonstrably move under the same implementation.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.6-control-sensitivity-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#7-metrics-gates-and-controls-stable-identifiers-reused-by-execute-and-audit",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#positive_control",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#null_control"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-FRAME+ (Arm A) is structurally live: on G3 calibration it executes 38/39 applicable rows (coverage 0.9744), abstains on 1 via C4-COMPLEMENT, with 0 unresolved applicable, pooled_FA=0.0, UP=1.0, selective_acc=1.0. On G2 calibration it executes 35 and abstains on 5. C7 fires on 0 applicable rows across all axes. The treatment is deterministic stdlib code with no external dependencies; the test split (36 applicable rows) draws from the same bank distribution as calibration, making degenerate execution (0 or all) extremely unlikely. The decision rule explicitly checks liveness on the G3 test split and triggers MEASUREMENT_INVALID if violated.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.1-treatment-liveness-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#8.2-c7-non-vacuity-and-zero-applicable-cost-pass",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#9-decision-rule-and-product-consequences"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "spec.json#freeze_artifacts enumerates exactly three external mutable files: the parent prereg (EXP-GRAPH-38180711589/prereg.md) providing G1/G2 banks and lexicons, the grandparent prereg (EXP-GRAPH-38175554380/prereg.md) providing PRIOR-PARENT-BANK-TEXTS, and research/harness/goal_generator.py providing contamination priors. The runner, G3 banks, G3 lexicons, and all clause logic are embedded in this prereg and hashed via CANONICAL-RUNNER-SHA256 and runner_self_sha. Remote Web responses are not used.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#12-freeze-artifacts-v2",
+        "research/experiments/EXP-GRAPH-38205284279/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38205284279/prereg.md#10-cost-and-expected-information-gain"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The positive control PC-AXIS-G1-ALTLEX is the same Arm A treatment on a different surface rather than a fully independent positive control; this is acceptable for a regression-retention check but means a code regression in the shared selector would invalidate both treatment and positive control simultaneously.",
+    "The retrieval fork decision (RETRIEVAL_DOMINATES_G3 / TFRAME_DOMINATES_G3 / BOTH_PASS_G3 / NEITHER_PASSES_G3) is derived from the same test split used for the primary gate; this is by design but couples the two architecture decisions."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is reachable and arithmetically sound with proper precedence. Measurement prerequisites are satisfied with stdlib-only execution and all external dependencies bound in freeze_artifacts. Baselines are operationally distinct and the retrieval comparator is live on calibration. Controls are sensitive and separable. The T-FRAME+ treatment is demonstrably live on calibration with zero applicable-row cost from the new C7 clause. Freeze artifacts comprehensively bound all mutable interpretation dependencies. No blocking findings; the experiment is ready to freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38205284279/spec.json",
+    "research/experiments/EXP-GRAPH-38205284279/prereg.md",
+    "research/experiments/EXP-GRAPH-38205284279/request.json"
+  ]
+}
