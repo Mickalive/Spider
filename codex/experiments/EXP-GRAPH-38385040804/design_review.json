@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38385040804",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently verified against the frozen runner embedded in prereg.md#13. Cascade: MEASUREMENT_INVALID (invalid_reasons non-empty) -> DECIDE_SHIP_TFRAME_BROAD (g3_gate AND g2_gate AND selection_preserved) -> DECIDE_SHIP_TFRAME_SCOPED (NOT g3_gate AND g2_gate AND selection_preserved) -> DECIDE_REQUIRE_RETRIEVAL_B (else). All four decision outcomes are arithmetically reachable and no guard subsumes a later branch (SCOPED's guard is the negation of BROAD's first conjunct, not a superset of the else). Retrieval fork: all five values reachable (INFEASIBLE via no-feasible-gate or no-positive-margin on SELECT; the four gate orderings over the two booleans g3_gate/armB_g3_met). Thresholds attainable: G2 exclusive-UP flip is a one-row margin (published 10/12=0.8333<0.85 vs 11/12=0.9167>=0.85); G3 gate needs FA<=2/20 OOS executes, coverage>=18/36 app executes, UP>=0.85 - all attained by parent-published values (FA 2/20=0.10, coverage 1.0, UP 1.0); liveness predicate is True on parent-published G3-test counts (38/56 total, 36 app, 7 resolved abstentions) and False on execute-all/abstain-all/selector-degenerate analogues. Fit-pool validity bars independently re-derived from frozen inputs: N_TRAIN=102>=78, SELECT_APP=34>=20, SELECT_OOS=60>=20, train/select disjoint and (train+select) disjoint from every test text-sha. Forbidden fallbacks are structurally impossible (gate search reads only FIT-SELECT rows; mus candidates restricted to round(margin,4)>0; test rows never enter fit/select), so invalidity trigger (e) is enforceable rather than vacuous.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER main/arm_b_oos/gate_met)",
+        "research/experiments/EXP-GRAPH-38385040804/spec.json#decision_rule",
+        "codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE (parent-published gate vector: G3 met FA 0.10=2/20, G2 false solely on UP 10/12=0.8333)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Verified by direct probe, not by declaration: Python 3.12.15 present in environment; FROZEN-RUNNER block extracted and imports are stdlib-only (argparse/hashlib/json/math/os/re/random/sys/pathlib/__future__) plus one repo-local goal_generator import; research/harness/goal_generator.py present and imports cleanly exposing INTENTS(20)/PARAPHRASES(20 families)/NO_APPLICABLE_TEMPLATES(20)/OOD_PARAPHRASES(8); numpy confirmed absent (ModuleNotFoundError), consistent with the declared non-runnability of B-EMBED-COSINE; every runtime-read block verified present in its exact frozen file (GOAL-BANK-G1, OOS-BANK-G1, LEXICON-G1, LEXICON-G1-ALT, GOAL-BANK-G2, OOS-BANK-G2, LEXICON-G2-HELDOUT in EXP-GRAPH-38180711589/prereg.md; GOAL-BANK-G3, OOS-BANK-G3, LEXICON-G3 in EXP-GRAPH-38291080992/prereg.md; PRIOR-PARENT-BANK-TEXTS in EXP-GRAPH-38175554380/prereg.md); static scan of the runner confirms its only file I/O is those three prereg files, goal_generator.py, and its own file (self-hash); no network, browser, model, or credential dependency; hardcoded ROOT matches the execution environment. Fit-pool constructibility (the mandate's stop trigger) independently confirmed by re-deriving the frozen split+contamination-screen arithmetic from the frozen banks: pooled cal-app=136, N_TRAIN=102, SELECT_APP=34, SELECT_OOS=60, all disjointness bars hold - so the stop trigger is NOT hit and the experiment proceeds as declared.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#10",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER load_banks/build_fit_pool)",
+        "research/harness/goal_generator.py",
+        "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+        "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Five operationally distinct implementations verified in the frozen runner: tframeplus (B-LEX-STRONG selector + C1/C3/C4/C5/C6 + C7 clauses), tframe_frozen (same minus C7 - diagnostic isolation), incumbent (B-LEX-STRONG + lexical S<=0 gate, shipped logic), gatefree (execute-all resolved rows), and arm_b_oos (stdlib TF-IDF unigram+bigram nearest-class-centroid with IDF+centroids fit on pooled FIT-TRAIN, gate (tau,mu>0) selected on disjoint FIT-SELECT). Arm A and Arm B share no fitted state (disjoint code paths, disjoint data: A reads no calibration pool, B reads no clause state); Arm B is never the cost denominator of Arm A (uniform local deterministic CPU; no API/model-call cost dimension exists for either comparator, so no cost dimension is omitted). No ceiling/floor: parent-published gatefalse FA headroom (0.45 G3 / 0.50 G2 vs treatment 0.0-0.10) proves arms can differ on the frozen population, and parent evidence shows they did differ (G3 FA 0.10 vs gatefree 0.45; resubstitution Arm B collapsed G2 FA to 0.70). The pooled-retrieval dilution bias (same-surface classes in TRAIN for every test axis) is pre-disclosed in prereg.md#3 and biases AGAINST retrieval, i.e. in the conservative direction: viability found under pooling is robust evidence. Ancestor arms (resubstitution TFIDF, embedding-cosine) are explicitly identities-only, never decision arms.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#3",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.5",
+        "research/experiments/EXP-GRAPH-38385040804/spec.json#baselines",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER is_executed/arm_b_oos)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive control PC-AXIS-G1-ALTLEX is computed by the exact runner that scores the experiment (gates dict covers all four axes) and its failure is runner-enforced MEASUREMENT_INVALID (invalid_reasons append + decision=null), so it can genuinely fire under the scoring implementation; it is expected to pass on the frozen banks (parent: G1/ALTLEX gates hold). Null controls are all executed by the same implementation, not placeholders: NC-EXEC-ALL (gatefree FA 0.2778-0.50 vs Arm A 0.0-0.10 - material gap); NC-ABSTAIN-ALL is actually computed (coverage=0.0 floor, pooled_false_accept=null by no executes, unknown_precision_exclusive=OOS_resolved/all_resolved which is informative and NOT tautologically 1.0); CTRL-RANDOM-GATE is volume-matched (matched_abstention_count equals treatment abstention count, parent FA 0.65-0.75); CTRL-SHUFFLED-SELECTION and CTRL-RANDOM-ROLE are near-chance by construction. No control is tautological or impossible; both degeneracy directions (execute-all ceiling, abstain-all floor) are live under the repaired liveness predicate.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38385040804/spec.json#positive_control",
+        "research/experiments/EXP-GRAPH-38385040804/spec.json#null_control",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER abstain_all_metrics/matched_random_gate/shuffled_selection/random_role_selection)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The frozen question contains a SPIDER treatment arm (T-FRAME+ on C-SEMANTIC-RESOLVE; claim is not in the C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON product set, but treatment_liveness is satisfied with concrete evidence regardless). The exact frozen treatment is structurally executable: stdlib-only deterministic Python, zero tunable parameters, runner block extracted from prereg.md#13 and hash-verified (sha256 of block+trailing newline = 7816fbd2660c7d67a07704a9f35e00c3331b38ebd707f9a7a5ec3187c1ed2c9b, matching the declared CANONICAL-RUNNER-SHA256 for this experiment). The repaired liveness predicate is pre-declared on the exact evaluated split (AXIS-G3-NEW TEST: 0<executed_total<n_total AND executed_app>=1 AND abstained_resolved>=1), closing the grandparent applicable-only scope defect by construction. Non-outcome-bearing probes confirm liveness: LIVE=True on parent-published G3-test counts (38/56 total, 36 app, 7 resolved abstentions) while the defective predicate evaluated False; execute-all/abstain-all/selector-degenerate analogues all evaluate LIVE=False; calibration non-degeneracy retained (38/39 app executed, coverage 0.9744). Bank reuse is byte-identical (G3 blocks verified identical to EXP-GRAPH-38205284279: 6357/3672/3834 chars), so the deterministic reproduction is exact. There are no expensive arms to gate (single seconds-long deterministic run), so the treatment produces non-null executable behavior before any costly commitment.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#11",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER hash verification)",
+        "codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE (LIVENESS-G3-TEST-REPAIRED LIVE=True 38/56, 36 app, 7 resolved abstentions)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file/code/task-bank/fixture dependency that could change interpretation is listed in spec.json#freeze_artifacts and verified present: (1) research/experiments/EXP-GRAPH-38180711589/prereg.md - all seven runtime-read blocks (GOAL-BANK-G1, OOS-BANK-G1, LEXICON-G1, LEXICON-G1-ALT, GOAL-BANK-G2, OOS-BANK-G2, LEXICON-G2-HELDOUT) present; (2) research/experiments/EXP-GRAPH-38175554380/prereg.md - PRIOR-PARENT-BANK-TEXTS present; (3) research/experiments/EXP-GRAPH-38291080992/prereg.md - all three G3 blocks present and byte-identical to EXP-GRAPH-38205284279/prereg.md (6357/3672/3834 chars, matching the declared 3834/6357/3672 set), preserving the blind-authorship property by identity; (4) research/harness/goal_generator.py - imports cleanly. The treatment runner itself is embedded in this experiment's prereg.md#13 FROZEN-RUNNER block, hash-bound (7816fbd2... verified) and additionally self-hashed at runtime (runner_self_sha). Static scan confirms the runner reads exactly these four files plus its own file - no unbound mutable local dependency exists. Remote/Web responses: none (no network dependency). Parent handoff integrity verified: EXP-GRAPH-38291080992/handoff.json sha256 = 07049d2c5c43cda571dd8c7c5d300062709e96c33983316b0b9e2b6376b941fd, matching request.json#parent_handoff.sha256. Independent-review rule satisfied: DESIGN producer model opencode/muse-spark-1.3-contributor-free (model_design.json) differs from reviewer model opencode/ling-3.1-flash-free.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38385040804/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#4",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#12",
+        "research/experiments/EXP-GRAPH-38385040804/prereg.md#13",
+        "research/experiments/EXP-GRAPH-38385040804/model_design.json",
+        "research/experiments/EXP-GRAPH-38291080992/handoff.json"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Fit-pool arithmetic in prereg.md#3/#8.7 is overstated by 3 rows: 'Pooled cal-app = 60+40+39 = 139' uses the pre-screen G1 cal-app count, but the frozen contamination screen drops 9 G1 rows (3 cal-app, 4 test-app, 2 test-OOS), so the actual pool is 136 cal-app -> N_TRAIN=102, SELECT_APP=34 (independently re-derived from frozen inputs). All frozen validity bars (>=78/>=20/>=20) remain met with margin and are enforced on exact runtime counts, so this is not a satisfiability defect; AUDIT should cite runner-emitted counts rather than the prereg's approximate figures. Relatedly, prereg.md#4 discloses only the G3 screen effect (5 rows); the G1 screen effect (9 rows) is not disclosed in text even though the resulting bound count (151) is correctly stated in prereg.md#5.",
+    "Cascade semantics: DECIDE_SHIP_TFRAME_SCOPED requires only g2_gate AND selection_preserved, so it is arithmetically reachable in a world where AXIS-G3-NEW is gate-false - an H1-falsification trigger per prereg.md#1. The branch is pre-declared and decision-changing (not an empty branch), so this is not a blocking defect, but the SCOPED product consequence should be read jointly with the falsifier vector: a G3-false/G2-true outcome falsifies H1 while still emitting a ship-scoped decision.",
+    "Hash naming collision: two distinct values are both called 'CANONICAL-RUNNER-SHA256' - 11fa24673a0d... (parent EXP-GRAPH-38291080992 runner lineage, prereg.md#2) and 7816fbd2660c... (this experiment's extracted runner, prereg.md#10/#11, independently verified). Both are correct for their respective objects; AUDIT should disambiguate by experiment when citing."
+  ],
+  "rationale": "Independent pre-freeze review (reviewer model opencode/ling-3.1-flash-free vs DESIGN producer opencode/muse-spark-1.3-contributor-free, per model_design.json) found no blocking satisfiability or identifiability defect. All six required attacks pass under direct verification: (1) the decision cascade and five-value retrieval fork are fully reachable with attainable thresholds (G2 exclusive-UP flip is a one-row margin; all fit-pool bars re-derived and met with margin); (2) every named prerequisite is present now (Python 3.12.15, stdlib-only runner, goal_generator, all ten runtime-read bank/lexicon/prior blocks, no network/browser/credential, numpy absent as declared); (3) five operationally distinct arms with no shared fitted state, no ceiling (gatefree FA headroom 0.45/0.50), and no omitted cost dimension; (4) the positive control is runner-enforced and all null controls are executed by the same scoring implementation, with the abstain-all control informative rather than tautological; (5) the frozen T-FRAME+ treatment is hash-verified and structurally executable with the repaired liveness predicate on the exact evaluated split; (6) all four mutable local dependencies are listed, present, and hash-bound, with the runner embedded in the prereg and the parent handoff hash matching. The DESIGN's declared PASS claims in spec.freeze_eligibility survived attack; the three nonblocking findings (fit-pool count overstatement of 3 rows, SCOPED-reachable-under-G3-false semantics, dual CANONICAL-RUNNER-SHA256 naming) do not impair the experiment's ability to answer the Director's question and are deferred to AUDIT. The confirmatory experiment was NOT run; only static, hash, import, and frozen-input arithmetic probes were executed.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38385040804/request.json",
+    "research/experiments/EXP-GRAPH-38385040804/spec.json",
+    "research/experiments/EXP-GRAPH-38385040804/prereg.md",
+    "research/experiments/EXP-GRAPH-38385040804/model_design.json",
+    "research/experiments/EXP-GRAPH-38291080992/handoff.json",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md",
+    "research/experiments/EXP-GRAPH-38205284279/prereg.md",
+    "research/harness/goal_generator.py",
+    "codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE"
+  ]
+}
