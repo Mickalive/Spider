@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38446557638",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four cascade outcomes and all five fork values are logically reachable in the frozen runner. Positive/support branch: H1 SUPPORTED (G3 met, G1/ALTLEX met, selection_preserved, G2 gate-false solely on exclusive UP 10/12=0.8333<0.85) -> DECIDE_REQUIRE_RETRIEVAL_B, the deterministic expectation. Negative/decision-changing branches: (i) G2 flip to gate-met needs 11/12=0.9167>=0.85, a one-row margin, so H1-support and H1-falsify are adjacent, not empty; (ii) the retrieval fork is genuinely open because SELECT-feasibility (calibration rows) and the two TEST gate outcomes are independent -- all five combinations (INFEASIBLE / RETRIEVAL_DOMINATES / TFRAME_DOMINATES / BOTH_PASS / NEITHER) are reachable; (iii) all five MEASUREMENT_INVALID triggers are runner-enforced and reachable. Precedence is subsumption-free: the SCOPED elif (g2&selection_preserved) is reachable only when the first branch (g3&g2&selection_preserved) is false, i.e. g3 false, which is reachable. Thresholds are arithmetically attainable (G3 gate: <=2/20 OOS executes, >=18/36 app executes, UP>=0.85; parent TEST achieved FA 0.10/COV 1.0/UP 1.0, so attainable and non-ceiling on the discriminating axes; fit-pool bars measured 102/34/60 vs bars 78/20/20). Declared expected-unreachability of BROAD/SCOPED under deterministic no-refit reproduction is a predicted valid negative, not a structurally empty branch -- the one-row G2 margin keeps them triggerable in principle.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/spec.json#decision_rule",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#13 (frozen runner decision cascade, lines 630-679)",
+        "reviewer probe: synthetic enumeration of if/elif/else cascade over boolean inputs (no frozen data touched)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is available now and was independently re-verified. Python 3.12.15 present; the exact FROZEN-RUNNER block compiles and executes with stdlib-only imports (argparse/hashlib/json/math/os/re/random/sys/pathlib/__future__) plus one repo-local goal_generator import inside main(); numpy/sklearn/sentence_transformers absent and not required. goal_generator exposes INTENTS(20)/PARAPHRASES(20 families)/NO_APPLICABLE_TEMPLATES(20)/OOD_PARAPHRASES(8) as claimed. All 11 runtime-read blocks verified present in their exact frozen files (GOAL-BANK-G3/OOS-BANK-G3/LEXICON-G3 in EXP-GRAPH-38291080992/prereg.md; GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1/LEXICON-G1-ALT/GOAL-BANK-G2/OOS-BANK-G2/LEXICON-G2-HELDOUT in EXP-GRAPH-38180711589/prereg.md; PRIOR-PARENT-BANK-TEXTS in EXP-GRAPH-38175554380/prereg.md). Fit-pool construction independently re-measured via a non-outcome-bearing --mechanics-only execution: N_TRAIN=102>=78, SELECT_APP=34>=20, SELECT_OOS=60>=20, train/select disjoint and (train|select)/test disjoint both true, bars_met=true. No network/model/browser/credential required. The mandate stop trigger (no larger fit set constructible) is not hit (2.6x parent n_fit=39).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#10",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#13 (load_banks, build_fit_pool)",
+        "reviewer probe: python3 --version; importlib checks; block-presence scan of the three frozen prereg.md files; in-memory --mechanics-only execution reproducing N_TRAIN=102/SELECT_APP=34/SELECT_OOS=60 and bars_met=true"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Five decision arms are operationally distinct implementations that can differ on the frozen task population: Arm A (B-LEX-STRONG + C1/C3/C4/C5/C6/C7), tframe_frozen (A minus C7 -- differs on the 2/4/2/1 OOS rows where C7 fires, changing pooled FA), incumbent (lexical S<=0 gate), gatefree (execute-all), and B-RETRIEVAL-OOS (pooled TF-IDF nearest-centroid with disjoint FIT-TRAIN/FIT-SELECT/TEST, sharing no fitted state with Arm A and never Arm A's cost denominator). Measured calibration headroom proves non-ceiling/non-floor: gatefree FA 0.30-0.60 vs Arm A 0.0; abstain-all reaches the coverage 0.0 floor while treatment holds 0.86-0.97 calibration coverage. No cost metric enters the decision rule, so no comparator uses an omitted cost dimension. Arm B's exclusive==inclusive equivalence (every scored row decision-conditional) is disclosed and harmonized cross-arm. Minor disclosed limitation, non-blocking: Arm A and tframe_frozen are identical on applicable-row metrics because C7 fires on 0 applicable rows; they remain distinguishable via pooled FA on OOS rows, which is the declared purpose of that diagnostic baseline.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/spec.json#baselines",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#3",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.2",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.5",
+        "reviewer probe: --mechanics-only calibration metrics (gatefree FA 0.30/0.60/0.45/0.40 vs tframeplus 0.0 on the four axes; C7 OOS firing 2/4/2/1, app firing 0)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All controls are implemented in the same frozen runner that scores the experiment and are live in both directions. PC-AXIS-G1-ALTLEX is an independent-lexicon known-positive axis (calibration gate-met, coverage 0.9123) whose failure is runner-enforced MEASUREMENT_INVALID -- an instrument check, not a tautology and not a science negative. NC-EXEC-ALL pools materially more FA than Arm A (calibration 0.30-0.60 vs 0.0; parent TEST 0.2222-0.50). NC-ABSTAIN-ALL is executed, not a placeholder: coverage 0.0 floor, pooled_false_accept null (no executes), unknown_precision_exclusive defined over ALL resolved rows (informative, not 1.0 by construction). CTRL-RANDOM-GATE is volume-matched (parent FA 0.65-0.75); CTRL-SHUFFLED-SELECTION and CTRL-RANDOM-ROLE are near chance. No insensitive or impossible control found.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/spec.json#positive_control",
+        "research/experiments/EXP-GRAPH-38446557638/spec.json#null_control",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#13 (abstain_all_metrics, shuffled_selection, random_role_selection, matched_random_gate)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment (T-FRAME+ clause set, FROZEN-RUNNER block sha256 independently verified equal to CANONICAL-RUNNER-SHA256 4c412aec...) produces non-null executable behavior before any expensive arm runs. The repaired crash site (the construction dict, before the --mechanics-only branch) executes cleanly: two in-memory --mechanics-only executions of the exact block bytes both completed with empty stderr and byte-identical output, status=DESIGN-MECHANICS-ONLY, test_not_scored=true -- the escaped UnboundLocalError defect (parent line 479, `_` bound but `{a}` interpolated) is closed by demonstration, and the repair is minimal and metadata-only (train_gids/select_gids list comprehensions; no scoring-logic delta, so metrics cannot be altered by the repair). Calibration is non-degenerate: G3 38/39 applicable executed (coverage 0.9744), all four axes gate-met on calibration, and the pre-declared LIVE predicate (0<executed<n_total AND executed_app>=1 AND abstained_resolved>=1 on AXIS-G3-NEW TEST) is satisfiable against parent-published TEST counts (38/56 executed, 7 resolved abstentions) and false on degenerate analogues. The retrieval comparator is also live pre-freeze: SELECT fit feasible at tau=0.4156, mu=0.0005>0 (mu_active), so both fork directions are live. This is a graph-lane experiment whose frozen question contains a SPIDER mechanism treatment arm, so treatment_liveness is assessed on merits and passes (NOT_APPLICABLE not invoked).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#10",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#13 (repair site, lines 597-598)",
+        "reviewer probe: sha256(FROZEN-RUNNER block + trailing newline) == 4c412aec6ba21c9d1733ccb1d5e1105ea62bf116395a142ce72ddb9651f9a7b8; two byte-identical in-memory --mechanics-only executions, empty stderr, test_not_scored=true; calibration gate-met on all four axes; retrieval SELECT feasible tau=0.4156 mu=0.0005"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "The four freeze_artifacts are exactly the mutable local interpretation dependencies the frozen runner reads at runtime (verified against load_banks()): the three frozen prereg.md bank/lexicon/prior sources and research/harness/goal_generator.py. All four sha256 values independently recomputed and match both the prereg #12 claims and the parent EXP-GRAPH-38385040804 freeze.json#artifact_hashes (files unchanged since parent freeze). The runner itself is embedded in prereg.md #13 and bound by the prereg hash plus runtime runner_self_sha; its canonical extraction hash was independently verified. No remote Web responses are used, so no remote sampling protocol needs freezing; no other mutable local input is read (sys.path gains only research/harness). The current experiment's request.json/spec.json are immutable by workflow; model_design.json is provenance, not an interpretation dependency.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38446557638/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#4",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#12",
+        "research/experiments/EXP-GRAPH-38446557638/prereg.md#13",
+        "research/experiments/EXP-GRAPH-38385040804/freeze.json#artifact_hashes",
+        "reviewer probe: sha256 recomputation of all four freeze_artifacts (5a64e90d.../dc90bf71.../5a9cc119.../cb5218de... all match); parent handoff sha f97af96e... matches request.json#parent_handoff"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Retrieval SELECT gate is feasible with selective_acc=0.0 (independently reproduced: coverage 0.9412, FA 0.10, UP 0.9643, but 0 of 32 executed SELECT app rows correctly classified). The frozen gate criteria (FA<=0.10, COV>=0.50, UP>=0.85) exclude selective accuracy, so a BOTH_PASS_G3 or RETRIEVAL_DOMINATES_G3 fork could be declared on gate-level viability alone. The design pre-registers gate-level viability per RQF-05 and co-reports selective_acc for AUDIT adjudication (prereg #8.9); AUDIT must weigh selective_acc before reading a viability fork as product-viable retrieval.",
+    "H1-support is near-deterministic: the T-FRAME+ analysis logic is byte-identical to the audited parent lineage apart from a metadata-only repair, and the frozen banks are unchanged since the parent freeze (hashes verified against parent freeze.json). The experiment's discriminating power therefore rests on the one-row G2 exclusive margin (10/12 vs 11/12 around the 0.85 bar) and the honest-retrieval fork; BROAD/SCOPED are expected-unreachable in practice. This is the mandate's own question and the falsifier is genuine, but the design correctly discloses it (prereg #8.10) and no redesign is warranted at review time.",
+    "G3 TEST gate components coverage and UP were 1.0 in the parent run (near-ceiling on two of three components), while pooled_false_accept sits exactly at the 0.10 bar (2/20 OOS executes), making the G3 gate one-OOS-execution sensitive on FA only. Falsification load is correctly placed on the G2 margin and the retrieval fork; disclosed, non-blocking."
+  ],
+  "rationale": "Independent pre-freeze review under design_contract_version 2. Reviewer model (opencode/ling-3.1-flash-free) differs from the DESIGN producer (opencode/muse-spark-1.3-contributor-free per model_design.json), satisfying the independent-review rule. Every declared freeze_eligibility PASS was attacked and independently re-verified with permitted non-outcome-bearing probes: (1) all four freeze_artifacts plus the FROZEN-RUNNER block and parent handoff hash-verified, with the four artifacts matching the parent freeze.json (unchanged since parent freeze); (2) the exact frozen runner block (sha256 == CANONICAL-RUNNER-SHA256) was compiled and executed twice in --mechanics-only mode: rc=0, byte-identical, empty stderr, test_not_scored=true -- the repaired UnboundLocalError crash site executes cleanly and the repair is minimal and metadata-only; (3) the fit-pool construction was independently re-measured (N_TRAIN=102, SELECT_APP=34, SELECT_OOS=60, both disjointness checks true, bars_met) and the retrieval SELECT fit reproduced feasible at tau=0.4156, mu=0.0005>0, matching every declared DESIGN probe value; (4) the decision cascade and fork were enumerated over boolean inputs confirming all four decisions and all five fork values reachable with no subsumed guard, and the G2 flip is a one-row margin; (5) prerequisites verified present (Python 3.12.15, stdlib-only, all 11 runtime-read bank blocks, goal_generator names, no network/credential); (6) controls are live in both directions in the same scoring implementation. No check fails. Two disclosed validity caveats (SELECT selective_acc=0.0 coexisting with gate feasibility; near-deterministic H1-support) are recorded as nonblocking findings for AUDIT, not blockers: the design remains capable of answering the Director's ship/no-ship question, the falsifier is genuine, and the honest-retrieval fork is the live open measurement. The design may freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38446557638/request.json",
+    "research/experiments/EXP-GRAPH-38446557638/spec.json",
+    "research/experiments/EXP-GRAPH-38446557638/prereg.md",
+    "research/experiments/EXP-GRAPH-38446557638/model_design.json",
+    "research/experiments/EXP-GRAPH-38385040804/handoff.json",
+    "research/experiments/EXP-GRAPH-38385040804/freeze.json",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md",
+    "research/harness/goal_generator.py",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE (BLOCKED, consistent with the repair transaction)",
+    "reviewer probes: hash verification of 6 artifacts; FROZEN-RUNNER block hash == CANONICAL-RUNNER-SHA256; two byte-identical in-memory --mechanics-only executions (test_not_scored=true, empty stderr); fit-pool and retrieval-SELECT reproduction; environment and bank-block presence checks; synthetic decision-cascade enumeration"
+  ]
+}
