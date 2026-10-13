@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38205284279",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Liveness predicate validated on calibration split (38/39 applicable executed, 1 abstention) but evaluated on test split (36/36 executed, 0 applicable abstentions); test split liveness assumption did not hold per frozen design. Fix: ensure test split contains applicable-row abstention or adjust liveness predicate scope to calibration-delineated range."
+  ],
+  "validity_findings": [
+    "Gate thresholds met on AXIS-G3-NEW test: pooled_false_accept=0.10<=0.10, coverage=1.0>=0.50, unknown_precision=1.0>=0.85, selective_acc=1.0>=0.80. C7 strictly reduces G3 test pooled_false_accept from 0.20 (tframe_frozen) to 0.10 (tframeplus). Retrieval fork BOTH_PASS_G3 on G3 (Arm A and Arm B both gate-met). All controls moved as declared: PC-AXIS-G1-ALTLEX gate-met (invalidity trigger did not fire); NC-EXEC-ALL vs Arm A false accept comparison passes on all axes; NC-ABSTAIN-ALL coverage 0/UP 1.0; shuffled-selection ~0.038-0.083; random-role ~0.027-0.111; random-gate pooled_false_accept 0.70-0.94 with UP 0.05-0.33; incumbent lexical gate FA 0.167-0.20.",
+    "Liveness predicate failure: frozen predicate 0 < executed_app < n_applicable_test evaluates False because executed_app=36 and n_applicable_test=36 on AXIS-G3-NEW test. The predicate was validated on calibration split (38/39 applicable executed, 1 abstention per prereg#8.1) but the test split contained no applicable-row abstention (36/36 executed, 0 abstained on applicable rows). This is a frozen-design assumption that did not hold on the test split.",
+    "C7-CREATE-OBLIQUE fires on 0 applicable rows on every axis and on 2 G3 OOS rows (oos_010, oos_014, the named HELDOUT false-accept pattern). On AXIS-G2-RETEST it fires on test rows oos_006, oos_010, oos_014 (plus calibration row oos_023). C7 does not fire on any applicable row, which explains the liveness predicate failure on the applicable half."
+  ],
+  "baseline_findings": [
+    "Gatefree (execute-all) pooled_false_accept=0.45 on G3 vs Arm A's 0.10 \u2014 structural abstention removes 7 of 9 OOS false accepts. tframe_frozen (without C7) pooled_false_accept=0.20 on G3 vs Arm A's 0.10 \u2014 C7 suppresses 2 OOS false accepts. NC-EXEC-ALL vs Arm A: Arm A has materially lower false accepts on all four axes (0.0-0.10 vs 0.2778-0.50). All controls moved as pre-declared: selective_acc near chance for label-permuted and random-role controls; CTRL-B-LEX-ONLY selective_acc 1.0 (execution without abstention); CTRL-INCUMBENT FA 0.167-0.20 (no structural clauses).",
+    "Arm B (B-RETRIEVAL-TFIDF) G3: fitted tau=0.4278, mu=0.0, cal_fit_feasible=true, test pooled_false_accept=0.05 (gate-met), coverage=0.9167, unknown_precision=0.8636 (gate-met), selective_acc=0.2727. G2: pooled_false_accept=0.70 (gate-not-met), coverage=0.625, unknown_precision=0.2857 (gate-not-met), selective_acc=0.08."
+  ],
+  "recomputed_metrics": {
+    "liveness_predicate": {
+      "predicate": "0 < executed_app < n_applicable_test",
+      "executed_app": 36,
+      "n_applicable_test": 36,
+      "result": "False (36 not strictly less than 36)",
+      "notes": "Predicate validated on calibration (38/39 applicable, 1 abstention); test split had 36/36 executed with 0 applicable abstentions"
+    },
+    "gate_met_tframeplus_G3": {
+      "pooled_false_accept": 0.1,
+      "coverage": 1.0,
+      "unknown_precision": 1.0,
+      "selective_acc": 1.0,
+      "gate_thresholds": {
+        "FA_TARGET": 0.1,
+        "COV_TARGET": 0.5,
+        "PREC_TARGET": 0.85,
+        "SEL_TARGET": 0.8
+      },
+      "gate_met": true,
+      "notes": "All three gate thresholds met on AXIS-G3-NEW test for tframeplus (Arm A)"
+    },
+    "c7_firing_G3_test": {
+      "app": 0,
+      "oos": 2,
+      "notes": "C7 fires on 0 applicable rows and on 2 G3 test OOS rows (the named HELDOUT false-accept pattern oos_010/oos_014)"
+    },
+    "arm_b_g3_gate_met": {
+      "pooled_false_accept": 0.05,
+      "coverage": 0.9166666666666666,
+      "unknown_precision": 0.8636363636363636,
+      "selective_acc": 0.2727272727272727,
+      "gate_met": true,
+      "tau": 0.4278,
+      "mu": 0.0,
+      "notes": "Arm B G3 gate met on FA and unknown_precision; selective_acc far below Arm A's 1.0"
+    }
+  },
+  "claim_ceiling": "T-FRAME+ meets gate thresholds on AXIS-G3-NEW (FA<=0.10, coverage>=0.50, unknown_precision>=0.85) but measurement declared INVALID per frozen liveness predicate (executed_app == n_applicable_test on test split). On AXIS-G2-RETEST, gate not met (unknown_precision=0.8333 < 0.85). No ship decision licensed. Claim supported only as calibrated observation on G3 with liveness caveat; architecture bounded to PRIMARY+ALTLEX fixture pending resolution of G2-RETEST gate and liveness predicate scope.",
+  "evidence_refs": [
+    "result.json#invalid_reasons (treatment-not-live: AXIS-G3-NEW test executed_app == n_applicable_test)",
+    "result.json#gate_met_by_axis_tframeplus (AXIS-G3-NEW gate met: FA=0.10, coverage=1.0, unknown_precision=1.0)",
+    "result.json#c7_firing (C7 fires on 0 applicable / 2 OOS on G3 test)",
+    "result.json#arm_b (Arm B G3 metrics: FA=0.05, coverage=0.9167, unknown_precision=0.8636, sel_acc=0.2727)",
+    "spec.json#decision_rule (MEASUREMENT_INVALID if G3 test treatment not live, or unknown_precision undefined, or PC-AXIS-G1-ALTLEX fails)",
+    "prereg.md#8.1 (treatment liveness PASS on calibration: 38/39 applicable executed, 1 abstention)",
+    "prereg.md#8.9 (liveness predicate design: 0 < executed_app < n_applicable_test check)",
+    "prereg.md#9 (decision rule: MEASUREMENT_INVALID yields decision=null, no ship scope licensed)",
+    "report.md#4 (runner's own interpretation: invalidity narrow, not infrastructure failure)",
+    "provenance.json (GitHub run 38205284279, canonical runner SHA256 verification, determinism checks)"
+  ],
+  "unresolved": [
+    "Whether the frozen liveness predicate's MEASUREMENT_INVALID verdict is genuine measurement degeneracy (test split lacked applicable-row abstention by construction) or over-strict pre-declared trigger given treatment globally discriminating (0.10 vs 0.45 execute-all FA)",
+    "Whether the AXIS-G2-RETEST unknown_precision shortfall (0.8333 < 0.85) is reducible by any clause permitted by the mandate's no-refitting constraint",
+    "Whether a third independently authored surface is justified per the mandate's stop rule (do not iterate surface thrice), or whether the mandate's PIVOT action binds",
+    "Architecture fork resolution: BOTH_PASS_G3 on G3 but with asymmetric selective_acc (Arm A=1.0 vs Arm B=0.2727); within frozen arm definitions, unresolved whether a retrieval comparator with an active margin gate would change the fork classification"
+  ]
+}
