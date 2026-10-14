@@ -20,16 +20,22 @@ remain unsatisfiable, price in counters only and record the blocker.
 
 Refinement (no drift): the mandate names the counter fields and the two
 deliverables. This design fixes them as: (D1) the shipped 4-field unit counter
-(zero fitted quantities) plus the parity-controlled latency surface that prices
-all scaffolding in wall-clock, plus an honest preregistered 5-field
-scaffolding-inclusive sensitivity; (D2) a measured guard probe-coverage
-certificate over the frozen perturbation bank. "Scaffolding-priced" is honored
-by the pair: latency prices every scaffolding operation in time, the 5-field
-sensitivity prices it in ops, and the phase attribution locates it. The
-classifier decides on the shipped 4-field counter plus latency only, for the
-reachability reason recorded in §9 (the 5-field unit counter is deterministically
+(zero fitted quantities) framed honestly as a drift-checked deterministic
+premise (V-DRIFT-COLD pins the repair-independent cold nominals 18/19 exactly;
+V-EQ-HOLDS records the 17-vs-18/19 inequality with zero empirical variance by
+construction, per audit AF-3) plus the parity-controlled latency surface that
+prices all scaffolding in wall-clock as the empirical decider, plus an honest
+preregistered 5-field scaffolding-inclusive sensitivity; (D2) a measured guard
+probe-coverage certificate over the frozen perturbation bank with independent
+information beyond the gated episodes (36 per-trial fresh-silence probes plus
+12 held-out guard-only perturbations on fresh seeds). "Scaffolding-priced" is
+honored by the pair: latency prices every scaffolding operation in time, the
+5-field sensitivity prices it in ops, and the phase attribution locates it. The
+classifier decides on the shipped premise plus latency, for the reachability
+reason recorded in §9 (the 5-field unit counter is deterministically
 reuse-negative on nominal vectors, so deciding on it would make SUPPORTS
 arithmetically unreachable — a degenerate design; it is reported, not decided).
+An sp deficit without cold drift routes to PRICED-DEFICIT/DROP, never INVALID.
 
 ## 2. Inherited state (parent handoff EXP-RUNTIME-38291097112, sha 3139aa3b...)
 
@@ -78,8 +84,9 @@ claim; no conservative-arm superiority claim.
 ## 4. Arms, shipped counter, scaffold units
 
 Timed episodes (v4 inclusive boundary: arg deepcopy materialization + arm
-execution; applied symmetrically; v3-exact boundary via S-ARG subtraction as
-sensitivity): T-REPAIR-REUSE vs B-COLD (L=3) vs B-COLD-MIN (L=2), 2 excluded
+execution; placement symmetric, operand asymmetric by construction — reuse
+deepcopies the full mech dict, cold deepcopies `{}`; v3-exact boundary via
+S-ARG subtraction as sensitivity): T-REPAIR-REUSE vs B-COLD (L=3) vs B-COLD-MIN (L=2), 2 excluded
 warmups per trial, predeclared parity order. Untimed in-trial: T-REPAIR-CONSERVATIVE
 and T-REPAIR-LEGACY sensitivities, B-LITERAL-REPLAY / B-NO-REPAIR mechanism
 controls, contamination and write-set probes (outside timed sections, exactly as
@@ -101,6 +108,14 @@ post-repair/distill writes = 1); (S3) one per `registry.all()` full scan
 invocation. Kernel resolve/verify/fetch/repair charges stay in shipped fields
 only. The 5-field sensitivity M-SP5-RATIO-* = (shipped + scaffold) ratios,
 informational, excluded from the classifier (§9 reason).
+
+Untimed read-only instrumentation (never inside timed sections, never touching
+timed arms' counters): per-trial fresh-silence probes (one guard evaluation on
+the unperturbed body per trial, pre-perturbation, recorded as `fresh_silent`)
+and, after the scored bank, 12 held-out guard-only probes
+(`_heldout_guard_probes`: fresh app, `HELDOUT_N_PER_CLASS=4` per class, seeds
+`SEED4+50000+1000*(ci+1)+k` disjoint from the scored bank, resolve+fetch+guard
+only). Both reuse only already-exercised v2 calls with identical signatures.
 
 ## 5. Attribution method (answers unknown #1; never gates the priced decision)
 
@@ -131,40 +146,60 @@ in-support contamination probe id 14); V9 integer counters; V10 not-fitted (no
 calibration workload exists in v4 — the parent Stage-A fitter is deliberately
 removed because its repair weight 0.000582 predetermined the win direction,
 audit AF-3); V11 n=12 + 72 warmups; V13 legacy-regression premise (reported
-caveat); V14 reuse identity (oplogs + phases); V-EQ reproduction premise
-(deterministic shipped-counter eq holds every class; break = drift →
-MEASUREMENT_INVALID, never a negative); V-TIMING parity/finite; V-CLOSURE and
+caveat); V14 reuse identity (oplogs + phases); V-DRIFT-COLD gate (per-class
+cold shipped sums exactly 216/228 with cold http sums 96/108; cold path is
+repair-independent so the pin cannot mask a repair effect; break = drift →
+MEASUREMENT_INVALID, never a negative); V-EQ-HOLDS reported premise
+(deterministic 17/18, 17/19 inequality, zero empirical variance by
+construction — AF-3 lesson; an sp deficit without cold drift routes to
+PRICED-DEFICIT/DROP, never INVALID); V-TIMING parity/finite (S-ARG operand
+asymmetric by construction, isolated via M-LATENCY-R-L3-NOARG); V-CLOSURE and
 V-CERT on independent tracks (§8).
 
 ## 7. B11 second deliverable: probe-coverage certificate (V-CERT track)
 
 Bank (frozen, enumerated pre-run): the exact 36 scored perturbations
-(class,target,seed) with ground truth stale=True (guard verdict recorded from
-each reuse episode) + NC-NO-PERTURBATION and NC-NOISE with ground truth
-stale=False. Metrics: M-CERT-SENSITIVITY (fire rate on stale),
-M-CERT-SPECIFICITY (silence on fresh), M-CERT-COVERAGE (= sensitivity),
-M-CERT-FALSE-ACCEPTS (exact stale-but-silent count). Residual boundary,
-explicitly labeled: BND-REQUIRED-PATHS (DERIVED — perturbations outside
-required_paths cannot fire the Jaccard guard by construction);
+(class,target,seed) with ground truth stale=True by construction (perturbation
+applied by the runner before the guard runs — independent of the guard verdict,
+so not circular); guard verdict recorded from each reuse episode. Fresh-silence
+set: one read-only guard evaluation on the unperturbed body per trial
+(pre-perturbation, untimed), ground truth stale=False, n=36. Held-out set: 12
+guard-only probes on fresh perturbations (4/class, seeds disjoint from the
+scored bank), ground truth stale=True by construction, untimed, unscored for
+pricing — this set contributes genuinely new information beyond the gated
+episodes (guard generalization to unseen perturbations). NC set:
+NC-NO-PERTURBATION and NC-NOISE with ground truth stale=False. Metrics:
+M-CERT-SENSITIVITY (fire rate on the 36-episode bank),
+M-CERT-HELDOUT-SENSITIVITY (fire rate on the 12 unseen perturbations),
+M-CERT-SPECIFICITY (pooled silence rate over 36 fresh-silence + 2 NC probes,
+with M-CERT-SPECIFICITY-BANK/NC reported separately), M-CERT-FALSE-ACCEPTS
+(exact bank stale-but-silent count) + M-CERT-HELDOUT-FALSE-ACCEPTS. Residual
+boundary, explicitly labeled: BND-REQUIRED-PATHS (DERIVED — perturbations
+outside required_paths cannot fire the Jaccard guard by construction);
 BND-THRESHOLD (DERIVED — within-envelope perturbations holding Jaccard ≥ 0.85
 with verify-True cannot fire by construction); BND-PROBE-BUDGET (MEASURED —
 single fused probe at TASK_IDS[0]=14 per episode; detection measured only
-there). V-CERT: bank fully enumerated, each item scored exactly once with
-verdict+truth recorded, boundary enumerated with measured-vs-derived labels;
-failure invalidates only the certificate, never the priced decision. Schema
-co-owned with product for B11; this packet measures the runtime instance, it
-does not close product B11. B3: model_calls/model_tokens structurally 0 —
+there). V-CERT: bank fully enumerated, each of the 36+36+12+2 items scored
+exactly once with verdict+truth recorded, boundary enumerated with
+measured-vs-derived labels; failure invalidates only the certificate, never
+the priced decision. Schema co-owned with product for B11; this packet measures
+the runtime instance (including unseen-perturbation sensitivity), it does not
+close product B11. B3: model_calls/model_tokens structurally 0 —
 counters-only pricing with the blocker recorded (H5).
 
 ## 8. Decision rule (frozen pure classifier; synthetic reachability verified)
 
-Per class (n=12): functional_ok (parent bars); eq/V-EQ (shipped reuse<cold at L2
-AND L3, fetch_L3≤0.90); sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00;
+Per class (n=12): functional_ok (parent bars); V-DRIFT-COLD gate (cold sums
+exactly 216/228, cold http exactly 96/108 — repair-independent drift pin);
+sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00 (reported premise
+V-EQ-HOLDS: deterministic 17/18, 17/19 by protocol, zero empirical variance);
 lw := M-LATENCY-R-L2<1.00 AND M-LATENCY-R-L3<1.00 (medians; B_LAT=2000 bootstrap
-CIs reported alongside per-trial 12/12 sign patterns). Class first match:
-FUNCTIONAL-FAIL / COST-UNKNOWN (any ratio None) / PRICED-WIN (sp AND lw) /
-PRICED-DEFICIT. Aggregate first match: gate failure → MEASUREMENT_INVALID; any
-COST-UNKNOWN → INCONCLUSIVE; any FUNCTIONAL-FAIL → FALSIFIES-FUNCTIONAL; all
+CIs reported alongside per-trial 12/12 sign patterns; the empirical decider).
+Class first match: FUNCTIONAL-FAIL / COST-UNKNOWN (any ratio None) /
+PRICED-WIN (sp AND lw) / PRICED-DEFICIT (an sp deficit without cold drift
+lands here, never INVALID). Aggregate first match: gate failure (incl.
+V-DRIFT-COLD) → MEASUREMENT_INVALID; any FUNCTIONAL-FAIL →
+FALSIFIES-FUNCTIONAL; any COST-UNKNOWN → INCONCLUSIVE; all
 PRICED-WIN → SUPPORTS (re-admit localized repair to C-PRODUCT-ECON with honest
 denominators; no promotion; B3 blocker recorded); else → PERMANENT-DROP-BOUNDED
 (mandate stop trigger: persistent split converts to permanent bounded drop from
@@ -180,42 +215,72 @@ priced decision.
 
 - Empty/unreachable branches: frozen pure classifier driven with synthetic rows
   at DESIGN — all 4 class branches and all 4 aggregates produced (all True);
-  strict-inequality boundary tested (1.00 is NOT a win). Reachability probe
-  re-runs inside the frozen driver (`--reachability-probe`, pure, no substrate).
-- Arithmetic impossibility: nominal-vector arithmetic at DESIGN showed the
-  5-field unit counter deterministically reuse-negative (≈27–28 vs 21–22) →
-  DELIBERATELY excluded from the classifier (reported sensitivity instead);
-  the deciding surfaces (shipped 4-field: nominal win, deterministic premise;
-  latency: parent P2-L3 CI95 lower 1.0022, genuinely flippable) keep both
-  SUPPORTS and PERMANENT-DROP-BOUNDED reachable.
+  strict-inequality boundary tested (1.00 is NOT a win); aggregate checks
+  FUNCTIONAL-FAIL before COST-UNKNOWN, matching class order, so no functional
+  failure is masked by an unknown. Reachability probe re-runs inside the
+  frozen driver (`--reachability-probe`, pure, no substrate).
+- Arithmetic impossibility and the AF-3 lesson: nominal-vector arithmetic at
+  DESIGN confirms the shipped 4-field comparison is deterministic (17 vs 18/19
+  on every functional_ok trial) — it is therefore framed as a drift-checked
+  premise (V-DRIFT-COLD + V-EQ-HOLDS), never as an empirical win claim, so the
+  parent AF-3 quasi-structural flaw is removed rather than repeated with unit
+  weights. The 5-field unit counter (deterministic ≈27–28 vs 21–22 reuse
+  deficit) stays excluded from the classifier as reported sensitivity. The
+  empirical decider is latency: strict inequalities on live wall-clock medians
+  with no floor/ceiling — arithmetically attainable in both directions.
+- Honest prior predictive distribution: under the parent evidence (36/36
+  per-trial latency signs against reuse, gaps 5–25%, narrowest P2-L3 CI95
+  lower bound 1.0022) PERMANENT-DROP-BOUNDED with attribution is the expected
+  decision-changing outcome and SUPPORTS is the low-prior branch. SUPPORTS is
+  retained (not assumed away): if the world surprises us, re-admission is the
+  correct consequence, and the packet is decision-changing via DROP either way
+  under the mandate stop trigger. The v4 boundary change (symmetric placement)
+  attenuates ratios toward 1.0 but preserves order, so it is not claimed as a
+  flip mechanism; the v3-exact NOARG sensitivity would expose any
+  boundary-artifact dependence as a diagnostic.
+- Precedence (no swallow): V-DRIFT-COLD gates only repair-independent cold
+  nominals, so it cannot mask a repair effect; an sp deficit without cold drift
+  is arithmetically impossible on functional_ok trials, and if ever observed it
+  routes to PRICED-DEFICIT/DROP, never INVALID. Functional gates precede
+  cost-unknown at both levels.
 - Ceiling baselines: success-rate 1.0 ceilings are functional gates, never
   deciders; the deciders (integer cost ratios, continuous latency) have live
   dynamic range.
 - Treatment/comparator identity: arms share substrate/seeds/perturbations and
   differ only in preregistered physical/scaffold counts, evidenced by oplogs +
-  phase timings + scaffold counts (V14); timed boundary symmetric (S-ARG
-  sensitivity isolates the v3→v4 boundary change).
+  phase timings + scaffold counts (V14); S-ARG operand asymmetric by
+  construction (full mech-dict vs `{}`), disclosed and isolated via the NOARG
+  sensitivity rather than mislabeled symmetric.
 - Insensitive controls: overbroad instrument live in parent (4/4 every trial)
   and path re-verified in DESIGN smoke; must-fail/must-silent controls retained
-  with INVALID (not negative) failure policy.
+  with INVALID (not negative) failure policy; specificity pooled over 36
+  per-trial fresh-silence probes + 2 NCs; sensitivity over the 36-episode bank
+  plus 12 held-out unseen perturbations (independent information, not a relabel).
 - Missing prerequisites: none — imports, pins, hashes, timer, bank
-  enumerability all verified at DESIGN (§10 PASS).
-- Unbound mutable artifacts: exactly the 3 carrier files, hashes verified,
-  listed in spec.freeze_artifacts; v4 driver embedded below and hash-bound;
-  v2/v3 immutable pins; no external banks/fixtures.
+  enumerability, all 19 used v2 APIs (static name check), and cold-nominal
+  arithmetic all verified at DESIGN (§10 PASS, §15).
+- Unbound mutable artifacts: exactly 4 tracked files, hashes verified,
+  listed in spec.freeze_artifacts (3 carrier + the runtime-imported v2 runner,
+  additionally fail-closed by the V0 runtime pin); v4 driver embedded below and
+  hash-bound by the exact algorithm in §10; no external banks/fixtures (banks,
+  fresh-silence, held-out all built in-runner from pinned seeds).
 
 ## 10. Freeze binding
 
 freeze_artifacts = [`src/spider/kernel.py`, `src/spider/models.py`,
-`src/spider/registry.py`]. The v4 driver is the exact text between
-the two standalone marker lines in §12 (unique occurrences in this file).
-CANONICAL-RUNNER-V4-SHA256 = `17f2481e95d99b8f8b6367fa2677d9dbcb702567908c118e12e880865705a927`
+`src/spider/registry.py`,
+`research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py`].
+The v4 driver is the exact text between the two standalone marker lines in §12
+(`V4-RUNNER-BEGIN` and `V4-RUNNER-END`, each the unique occurrence of its kind
+in this file). CANONICAL-RUNNER-V4-SHA256 = `dbb214596afc121f8f8c7a7f1f98624843c222d127d0b86588858dc53a05f4bc`
 (computed 2026-10-14 from the §12 text by the exact algorithm EXECUTE must
-repeat: split this file on the two standalone §12 runner-marker lines (the
-BEGIN line and the END line, each the unique occurrence of its kind), take
-the middle span, take the substring between the first line ```` ```python ````
-and the last line ```` ``` ````, sha256 the UTF-8 bytes;
-the single ```python fence in this file is unique to §12, verified at DESIGN).
+repeat verbatim: split this file on the line exactly equal to
+`V4-RUNNER-BEGIN` and the line exactly equal to `V4-RUNNER-END`; take the
+middle span; split that span into lines; find the first line whose stripped
+form is exactly ```` ```python ```` and the last line whose stripped form is
+exactly ```` ``` ````; take the lines strictly between them; join with a
+single `\n` (no trailing newline); sha256 the UTF-8 bytes. The ```python
+fence-line is unique to §12 in this file, verified at DESIGN.)
 EXECUTE extracts by that algorithm and refuses on mismatch (V1).
 Request/spec/prereg/carrier hashes verified against freeze.json (V1).
 
@@ -242,6 +307,11 @@ Request/spec/prereg/carrier hashes verified against freeze.json (V1).
   with new instruments (attribution + certificate) and a terminal decision.
 - LEGACY verdict: NO_MATCH for scaffolding attribution/pricing (per mandate
   comparative_reasoning); DISTINCT_EXTENSION on replay-cost guards.
+- AF-3 application (parent audit, not pre-2.0): the calibrated counter's
+  quasi-structural win direction is not repeated with unit weights — the
+  shipped 4-field comparison is disclosed as a zero-variance deterministic
+  premise (V-DRIFT-COLD + V-EQ-HOLDS) and the empirical burden is carried
+  entirely by the inclusive-boundary latency surface plus attribution.
 
 ## 12. Frozen executable driver v4 (extract between markers; sha-bound)
 
@@ -277,6 +347,10 @@ B_LAT = 2000
 CLOSURE_BAR = 0.20
 ATTRIB_SHARE = 0.50
 FETCH_BAR = 0.90
+NOMINAL = {"reuse_sum": 17, "cold_l2_sum": 18, "cold_l3_sum": 19,
+           "cold_l2_http": 8, "cold_l3_http": 9}
+HELDOUT_N_PER_CLASS = 4
+HELDOUT_SEED_BASE = SEED4 + 50000
 
 
 def _repo_root() -> Path:
@@ -489,6 +563,25 @@ def run_trial_v4(cls, target, seed, j):
             base_live[r] = v2.unaffected_behavior(mechs, app.origin, r, "base",
                                                  v2.IN_SUPPORT_PROBE_ID)
         pre_unaffected = {r: base_live[r] for r in v2.RESOURCES}
+        fresh_silent = None
+        try:
+            farm = v2.Arm(copy.deepcopy(mechs), Path("/tmp"), "fresh4")
+            fmech = farm.target_mech(target)
+            if fmech is not None:
+                fslot = fmech.parameter_slots[0]
+                fr0 = farm.resolve(fmech.intent, {"resource_type": target},
+                                   {fslot: str(v2.TASK_IDS[0])})
+                if fr0.status.name == "EXECUTABLE" and fr0.bound_action is not None:
+                    ffailed = farm.netfetch(fr0.bound_action["url"],
+                                            fr0.bound_action.get("headers", {}),
+                                            origin=app.origin)
+                    fstale, _ = v2.guard(cached[target],
+                                         set(v2.flatten(fmech.postconditions)),
+                                         ffailed, farm, fmech,
+                                         {fslot: str(v2.TASK_IDS[0])})
+                    fresh_silent = (not bool(fstale))
+        except Exception:
+            fresh_silent = None
         app.state.set_perturb(cls, target, seed)
         try:
             v2.run_repair_reuse(app, app.origin, copy.deepcopy(mechs), cached[target],
@@ -576,6 +669,7 @@ def run_trial_v4(cls, target, seed, j):
             "contamination_n": contam,
             "overbroad_contamination_n": overbroad,
             "write_set_n": len(write_set),
+            "fresh_silent": fresh_silent,
             "unaffected_n": n_unaff,
             "base_liveness": all(v and v[0] == 200 and v[2] for v in
                                  (pre_unaffected[r] for r in v2.RESOURCES)),
@@ -586,6 +680,57 @@ def run_trial_v4(cls, target, seed, j):
         }
     finally:
         app.stop()
+
+
+def _heldout_guard_probes():
+    """Guard-only probes on fresh perturbations (untimed, unscored for pricing).
+
+    Fresh app, fresh seeds disjoint from the scored bank; resolve+fetch+guard
+    only, mirroring the exercised timed-path calls exactly. Ground truth
+    stale=True by construction (set_perturb replaces state, verified
+    non-accumulating in the pinned v2 module).
+    """
+    items = []
+    try:
+        app = v2.LocalApp()
+    except Exception:
+        return {"transport_ok": False, "items": items}
+    try:
+        if not v2.wait_ready(app):
+            return {"transport_ok": False, "items": items}
+        mechs, cached = v2.make_mech_dicts(app.origin, v2.Counters())
+        if mechs is None:
+            return {"transport_ok": False, "items": items}
+        for ci, cls in enumerate(CLASSES):
+            for k in range(HELDOUT_N_PER_CLASS):
+                target = TARGETS[(ci + k + 1) % len(TARGETS)]
+                seed = HELDOUT_SEED_BASE + 1000 * (ci + 1) + k
+                app.state.set_perturb(cls, target, seed)
+                fired = None
+                try:
+                    arm = v2.Arm(copy.deepcopy(mechs), Path("/tmp"), "heldout4")
+                    mech = arm.target_mech(target)
+                    if mech is not None:
+                        slot = mech.parameter_slots[0]
+                        r0 = arm.resolve(mech.intent, {"resource_type": target},
+                                         {slot: str(v2.TASK_IDS[0])})
+                        if r0.status.name == "EXECUTABLE" and r0.bound_action is not None:
+                            failed = arm.netfetch(r0.bound_action["url"],
+                                                  r0.bound_action.get("headers", {}),
+                                                  origin=app.origin)
+                            stale, _ = v2.guard(
+                                cached[target],
+                                set(v2.flatten(mech.postconditions)),
+                                failed, arm, mech,
+                                {slot: str(v2.TASK_IDS[0])})
+                            fired = bool(stale)
+                except Exception:
+                    fired = None
+                items.append({"class": cls, "target": target, "seed": seed,
+                              "ground_truth_stale": True, "guard_fired": fired})
+    finally:
+        app.stop()
+    return {"transport_ok": True, "items": items}
 
 
 def _shipped_sum(cost):
@@ -612,10 +757,10 @@ def cost_verdict_v4(m):
 
 
 def aggregate_v4(cvs):
-    if any(v == "COST-UNKNOWN" for v in cvs):
-        return "INCONCLUSIVE"
     if any(v == "FUNCTIONAL-FAIL" for v in cvs):
         return "FALSIFIES-FUNCTIONAL"
+    if any(v == "COST-UNKNOWN" for v in cvs):
+        return "INCONCLUSIVE"
     if all(v == "PRICED-WIN" for v in cvs):
         return "SUPPORTS"
     return "PERMANENT-DROP-BOUNDED"
@@ -698,6 +843,7 @@ def _per_class_metrics(cls, rows, seed_base):
     sc_c2 = sum(r["cold_min_scaffold"] for r in rows if r.get("cold_min_scaffold") is not None)
     sc_c3 = sum(r["cold_scaffold"] for r in rows if r.get("cold_scaffold") is not None)
     h_re = sum(_http_of(r["repair_cost"]) for r in rows)
+    h_c2 = sum(_http_of(r["cold_min_cost"]) for r in rows)
     h_c3 = sum(_http_of(r["cold_cost"]) for r in rows)
     m["M-SHIPPED-REUSE"] = sh_re
     m["M-SHIPPED-COLD-L2"] = sh_c2
@@ -705,6 +851,8 @@ def _per_class_metrics(cls, rows, seed_base):
     m["M-SHIPPED-RATIO-L2"] = (sh_re / sh_c2) if sh_c2 else None
     m["M-SHIPPED-RATIO-L3"] = (sh_re / sh_c3) if sh_c3 else None
     m["M-COST-FETCH-RATIO-L3"] = (h_re / h_c3) if h_c3 else None
+    m["M-COLD-HTTP-L2"] = h_c2
+    m["M-COLD-HTTP-L3"] = h_c3
     m["M-SCAFFOLD-REUSE"] = sc_re
     m["M-SCAFFOLD-COLD-L3"] = sc_c3
     m["M-SP5-RATIO-L2"] = ((sh_re + sc_re) / (sh_c2 + sc_c2)) if (sh_c2 + sc_c2) else None
@@ -810,7 +958,7 @@ def _attribution(per_class):
             "closure_ok": closure_ok, "answer": answer}
 
 
-def _certificate(trials, np_t, nz_t):
+def _certificate(trials, np_t, nz_t, heldout):
     bank = []
     for r in trials:
         if not r.get("valid"):
@@ -818,6 +966,10 @@ def _certificate(trials, np_t, nz_t):
         bank.append({"class": r["class"], "target": r["target"],
                      "ground_truth_stale": True,
                      "guard_fired": bool(r.get("repair_guard_fired"))})
+    fresh = [r.get("fresh_silent") for r in trials if r.get("valid")]
+    fresh_known = [f for f in fresh if f is not None]
+    spec_bank = (sum(1 for f in fresh_known if f) / len(fresh_known)
+                 if fresh_known else None)
     nc_items = [
         {"probe": "NC-NO-PERTURBATION", "ground_truth_stale": False,
          "guard_fired": bool(np_t.get("stale")) if np_t.get("stale") is not None else None},
@@ -827,16 +979,36 @@ def _certificate(trials, np_t, nz_t):
     stale_items = [b for b in bank if b["ground_truth_stale"]]
     sens = (sum(1 for b in stale_items if b["guard_fired"]) / len(stale_items)
             if stale_items else None)
-    fresh_known = [n for n in nc_items if n["guard_fired"] is not None]
-    spec = (sum(1 for n in fresh_known if not n["guard_fired"]) / len(fresh_known)
-            if fresh_known else None)
+    nc_known = [n for n in nc_items if n["guard_fired"] is not None]
+    spec_nc = (sum(1 for n in nc_known if not n["guard_fired"]) / len(nc_known)
+               if nc_known else None)
+    if fresh_known and nc_known:
+        spec = ((sum(1 for f in fresh_known if f)
+                 + sum(1 for n in nc_known if not n["guard_fired"]))
+                / (len(fresh_known) + len(nc_known)))
+    else:
+        spec = None
     fa = sum(1 for b in stale_items if not b["guard_fired"])
-    complete = (len(bank) == len(CLASSES) * TRIALS_PER_CLASS and len(fresh_known) == 2
-                and sens is not None and spec is not None)
+    h_items = ((heldout or {}).get("items") or [])
+    h_known = [h for h in h_items if h.get("guard_fired") is not None]
+    h_sens = (sum(1 for h in h_known if h["guard_fired"]) / len(h_known)
+              if h_known else None)
+    h_fa = sum(1 for h in h_known if not h["guard_fired"])
+    complete = (len(bank) == len(CLASSES) * TRIALS_PER_CLASS
+                and len(fresh_known) == len(CLASSES) * TRIALS_PER_CLASS
+                and len(h_known) == len(CLASSES) * HELDOUT_N_PER_CLASS
+                and len(nc_known) == 2
+                and sens is not None and spec is not None and h_sens is not None)
     return {
         "bank_n": len(bank), "bank_expected": len(CLASSES) * TRIALS_PER_CLASS,
-        "M-CERT-COVERAGE": sens, "M-CERT-SENSITIVITY": sens,
-        "M-CERT-SPECIFICITY": spec, "M-CERT-FALSE-ACCEPTS": fa,
+        "M-CERT-SENSITIVITY": sens, "M-CERT-SPECIFICITY": spec,
+        "M-CERT-SPECIFICITY-BANK": spec_bank, "M-CERT-SPECIFICITY-NC": spec_nc,
+        "M-CERT-FALSE-ACCEPTS": fa, "M-CERT-FRESH-N": len(fresh_known),
+        "M-CERT-HELDOUT-N": len(h_known),
+        "M-CERT-HELDOUT-EXPECTED": len(CLASSES) * HELDOUT_N_PER_CLASS,
+        "M-CERT-HELDOUT-SENSITIVITY": h_sens,
+        "M-CERT-HELDOUT-FALSE-ACCEPTS": h_fa,
+        "heldout_transport_ok": bool((heldout or {}).get("transport_ok")),
         "M-CERT-BOUNDARY": [
             {"id": "BND-REQUIRED-PATHS", "kind": "DERIVED",
              "statement": "Perturbations outside the mechanism required_paths cannot fire the Jaccard guard by construction (filtered token sets)."},
@@ -958,6 +1130,7 @@ def main():
             trials.append(run_trial_v4(cls, target, SEED4 + 1000 * (ci + 1) + j, j))
     np_t = v2.no_perturbation_trial(SEED4 + 1)
     nz_t = v2.noise_trial(SEED4 + 2)
+    heldout = _heldout_guard_probes()
 
     invalid = []
     legacy_caveats = []
@@ -999,22 +1172,29 @@ def main():
                    and math.isfinite(r.get("t_cold_min_s") or float("nan"))
                    and (r.get("t_reuse_s") or 0) > 0) for r in rows):
             invalid.append(f"{cls}:nonfinite-latency")
+        drift_cold = (m["M-SHIPPED-COLD-L2"] != TRIALS_PER_CLASS * NOMINAL["cold_l2_sum"]
+                      or m["M-SHIPPED-COLD-L3"] != TRIALS_PER_CLASS * NOMINAL["cold_l3_sum"]
+                      or m.get("M-COLD-HTTP-L2") != TRIALS_PER_CLASS * NOMINAL["cold_l2_http"]
+                      or m.get("M-COLD-HTTP-L3") != TRIALS_PER_CLASS * NOMINAL["cold_l3_http"])
+        if drift_cold:
+            invalid.append(f"{cls}:V-DRIFT-COLD-nominal-mismatch")
+        m["V-DRIFT-COLD-HOLDS"] = not drift_cold
         eq = (m["M-SHIPPED-RATIO-L2"] is not None and m["M-SHIPPED-RATIO-L3"] is not None
               and m["M-SHIPPED-RATIO-L2"] < 1.0 and m["M-SHIPPED-RATIO-L3"] < 1.0
               and (m["M-COST-FETCH-RATIO-L3"] or 1.0) <= FETCH_BAR)
-        if not eq:
-            invalid.append(f"{cls}:V-EQ-reproduction-broken")
         if not (m["M-LEGACY-RATIO-L2"] is not None and m["M-LEGACY-RATIO-L2"] > 1.00):
             legacy_caveats.append(f"{cls}:V13-legacy-regression-not-reproduced")
         m["V-EQ-HOLDS"] = bool(eq)
         per_class[cls] = m
 
-    cert = _certificate(trials, np_t, nz_t)
+    cert = _certificate(trials, np_t, nz_t, heldout)
     attribution = _attribution(per_class) if per_class else {"answer": "ATTRIBUTION-INVALID",
                                                              "closure_ok": False}
     class_verdicts = {cls: cost_verdict_v4(m) for cls, m in per_class.items()}
     if invalid:
         decision, outcome, status = "MEASUREMENT_INVALID", "INCONCLUSIVE", "MEASUREMENT_INVALID"
+    elif any(v == "FUNCTIONAL-FAIL" for v in class_verdicts.values()):
+        decision, outcome, status = "FALSIFIES-FUNCTIONAL", "FALSIFIES", "COMPLETE"
     elif any(v == "COST-UNKNOWN" for v in class_verdicts.values()):
         decision, outcome, status = "INCONCLUSIVE", "INCONCLUSIVE", "COMPLETE"
     else:
@@ -1052,7 +1232,8 @@ V4-RUNNER-END
 ## 13. Stable metric/control identities for downstream transmission
 
 Priced metrics (per class): `M-SHIPPED-REUSE`, `M-SHIPPED-COLD-L2/L3`,
-`M-SHIPPED-RATIO-L2/L3`, `M-COST-FETCH-RATIO-L3`, `M-LATENCY-REUSE-MED-S`,
+`M-SHIPPED-RATIO-L2/L3`, `M-COST-FETCH-RATIO-L3`, `M-COLD-HTTP-L2/L3`,
+`V-DRIFT-COLD-HOLDS`, `V-EQ-HOLDS` (reported premise), `M-LATENCY-REUSE-MED-S`,
 `M-LATENCY-COLD-L2/L3-MED-S`, `M-LATENCY-R-L2/L3` (+ `M-LATENCY-R-L2/L3-CI95`
 with `B_LAT=2000`, `M-LATENCY-SIGN-REUSE-SLOWER-L3`, `M-LATENCY-R-L3-NOARG`
 sensitivity). Functional/locality: `M-REPAIR-SUCCESS`,
@@ -1062,7 +1243,10 @@ sensitivity). Functional/locality: `M-REPAIR-SUCCESS`,
 (count 0–4, not a 0–1 rate). Sensitivity-only: `M-SCAFFOLD-*`,
 `M-SP5-RATIO-L2/L3`, `M-LEGACY-RATIO-L2`. Attribution: `M-PHASE-DELTAS`
 (12 keys), `M-CLOSURE-REUSE/COLD-MED`, excess/shares/votes/answer object.
-Certificate: `M-CERT-COVERAGE/SENSITIVITY/SPECIFICITY/FALSE-ACCEPTS`,
+Certificate: `M-CERT-SENSITIVITY` (bank n=36), `M-CERT-HELDOUT-SENSITIVITY`
+(held-out n=12), `M-CERT-SPECIFICITY` (pooled 36 fresh-silence + 2 NC, with
+`M-CERT-SPECIFICITY-BANK/NC` separately), `M-CERT-FALSE-ACCEPTS`,
+`M-CERT-HELDOUT-FALSE-ACCEPTS`, `M-CERT-FRESH-N`, `M-CERT-HELDOUT-N`,
 `M-CERT-BOUNDARY` (3 labeled entries). Model economics: `M-MODEL-CALLS`,
 `M-MODEL-TOKENS` (expected structural 0). Controls in `result.json`
 keyed by frozen baseline/control ids (`B-COLD`, `B-COLD-MIN`,
@@ -1074,26 +1258,31 @@ renamed by EXECUTE or AUDIT.
 
 ## 14. EXECUTE obligations (frozen design, no redesign)
 
-Run the §12 driver verbatim (V1 hash-checked): scored run writes
+Run the §12 driver verbatim (V1 hash-checked by the §10 algorithm): scored run writes
 `result.json` (schema_version 1 with all 11 mandatory top-level keys;
 `status` = measurement validity, `outcome` per §8 mapping;
 `PERMANENT-DROP-BOUNDED` → `FALSIFIES` is a bounded product-story drop,
 explicitly NOT a mechanism falsification), `report.md` (bounded by
 `result.json`, no claim beyond the frozen ceiling), `provenance.json`
 (run id, commits, carrier/v2 hashes, runner self-sha, environment).
-Preserve raw evidence: driver stdout JSON, the extracted driver file,
+Controls in `result.json` keyed by the frozen ids in §13 (including
+`V-DRIFT-COLD-HOLDS`/`V-EQ-HOLDS` and the certificate metrics). Preserve raw
+evidence: driver stdout JSON, the extracted driver file,
 liveness/reachability preflight outputs. Measurement failure (any gate in
 §8) is `MEASUREMENT_INVALID`/`INCONCLUSIVE`, never a negative. B3 stays a
-recorded blocker; B11 certificate is measured, not closed.
+recorded blocker; B11 certificate is measured (bank + fresh-silence +
+held-out), not closed.
 
 ## 15. DESIGN probe record 2026-10-14 (non-outcome-bearing only)
 
 No scored trial and no confirmatory measurement was run. Probes: (a) v2 pin
 re-verified (60855 bytes, d4871091…4962bc608) and carrier hashes byte-identical
 to the parent freeze (kernel 3a6caf97…, models 338aaf4d…, registry
-51fb440d…); Python 3.12.15 stdlib. (b) Pure synthetic reachability probe:
-all 4 class branches and all 4 aggregates reachable (all True); repair-signal
-live on all classes. (c) Discarded liveness smoke: server_ready true,
+51fb440d…); Python 3.12.15 stdlib. (b) Pure synthetic reachability probe
+(re-run at DESIGN on the edited classifier: cost_verdict_v4 + aggregate_v4
+with FUNCTIONAL-FAIL-first order at both levels): all 4 class branches and
+all 4 aggregates reachable (all True); repair-signal live on all classes.
+No substrate import, no outcome. (c) Discarded liveness smoke: server_ready true,
 distill_live true, task_read_verified true, contamination instrument live,
 out-of-support degenerate, NCs silent (false/false), timer 1ns, phase keys
 present, closure finite. (d) Legacy: `codex/legacy_artifact_index.json` scan
@@ -1102,6 +1291,18 @@ of a hit is not proof of absence from the full archive); DISTINCT_EXTENSION
 on P2-REPLAY-COST guards; P2-AUTOMATION licensed as method; P2-WP003
 leakage guard honored. (e) Claim state: C-DELTA-REPAIR effective EXPERIMENTAL
 (parent packet); B3 endpoint absent by construction (counters-only + blocker).
+(f) Static checks on the edited v4 driver (no execution): every v2 API name
+used (CLASSES, TARGETS, TRIALS_PER_CLASS, LEARN_IDS_MIN, TASK_IDS, RESOURCES,
+IN_SUPPORT_PROBE_ID, functional_ok, wilson_lower, mean, unaffected_behavior,
+no_perturbation_trial, noise_trial, synthetic_repair_signal_probe, LocalApp,
+wait_ready, Counters, make_mech_dicts, Arm, guard, local_repair,
+execute_batch, run_repair_reuse, run_cold, run_repair_legacy, run_literal,
+run_norepair, overbroad_contamination, flatten, set_perturb) verified present
+in the pinned v2 module; set_perturb verified replacing (non-accumulating), so
+one held-out app serves all 12 probes; cold-nominal arithmetic verified
+(12x18=216, 12x19=228, 12x8=96, 12x9=108); extraction algorithm of §10
+verified to reproduce the §12 driver body byte-identically (CANONICAL hash
+recomputed, not carried over).
 
 ## 16. Sign-off
 
