@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Which uncounted episode-scaffolding component accounts for the ~0.2-0.9ms reuse latency excess, and under a scaffolding-priced end-to-end counter (plus real model-call/token economics if B3 is ever satisfiable) is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 \u2014 i.e. does the SINGLE-SURFACE-MIXED split resolve toward re-admission or permanent drop from the C-PRODUCT-ECON product story?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-10-14T07:43:30.060297+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-10-14T08:08:53.404130+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "3139aa3bf8647e1474be2d53ff450fa019de6f0fc7faec32b7be26e173f6299e",
-  "same_failure_count": 2,
-  "last_failure_fingerprint": "4384944ffc0ef1bdfadc251a",
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "f44d199ab3d7a1cc1ee6462e",
   "last_failure_control_revision": "25cae451082d6f7453f5d4085cec561e03c1fe8c41adea6f4e490f99a70edd56"
 }
