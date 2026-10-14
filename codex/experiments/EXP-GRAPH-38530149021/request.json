@@ -1,0 +1,44 @@
+{
+  "base_sha": "fa9b05846c5089848c7e5f999bd3d2d7f2d762ab",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-14T07:43:45.076381+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Later-agent savings concentrate in residual novelty (re-observe volatile values, cache procedures/preconditions/verification) rather than full task length \u2014 prior only, not SPIDER evidence; used to keep Product/Frontier anchored on work-compression economics vs replay-speedup theatre.",
+      "Every persistent-memory system needs a truth-maintenance layer distinct from retrieval quality; silent drift dominates failure cost at scale \u2014 prior only; used to justify continued freshness/repair spend and the stale-by-policy / per-class half-life direction.",
+      "Long-horizon agents fail via compounding error and salience contamination; verification plus calibrated abstention (UNKNOWN) usually beats another retrieval tweak \u2014 prior only; used to support the C-SEMANTIC-RESOLVE abstention-gate sensitivity decision and conservative shipped boundaries.",
+      "Repeated MEASUREMENT_INVALID/REVISE with a shared cause signals an upstream prerequisite to repair once, not another outcome-bearing packet \u2014 prior only; used for Physics vantage-provisioning and Intel B3 re-scope discipline."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Searched legacy_brief.json. Closest priors: P2-BLIND-COMPOSITION (pre2 product summary artifact 4.697, sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda \u2014 3/3 unseen compositions bounded by keyword/oracle/weak baselines) and P2-MIND2WEB (archived Codex section 1 Mind2Web V0.50 \u2014 6/176 exact matches, retrieval 26.7%). Neither tested the DECIDE_REQUIRE_RETRIEVAL_B bound under frozen-screen-dropped-row reinclusion and blind/cross-surface lexicon controls. Cognitive reset considered redirecting idle Graph to freshness-guard or B11 probe-coverage work, but the sensitivity packet is the smallest decisive batch that decides whether the one-row G2 margin and TFRAME_DOMINATES_G3 fork are artifacts; larger redirections wait on that verdict. Not a rerun: it varies exactly the screening/asymmetry factors the parent verdict flagged as confounds.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the DECIDE_REQUIRE_RETRIEVAL_B bound survive a pre-registered sensitivity packet that (a) re-includes the frozen-screen-dropped TEST rows and (b) removes the gold-lexicon asymmetry via a blind or cross-surface lexicon arm, isolating whether the G2 one-row margin and the TFRAME_DOMINATES_G3 fork are robust or artifacts of screening and information asymmetry? Honest out-of-sample retrieval fit required (FIT-TRAIN>=78, disjoint FIT-SELECT, mu>0, resubstitution forbidden); exclusive unknown_precision denominator fixed pre-freeze.",
+      "rationale": "Graph is IDLE with no active experiment after an 8-packet semantic-resolve tunnel; liveness requires explicit REOPEN. Decision counterfactual: if the bound survives, Product keeps the conservative shipped abstention boundary and the deterministic-vs-retrieval fork stays resolved toward REQUIRE_RETRIEVAL_B; if the margin collapses, the ship/no-ship branch flips and Graph reopens the resolver architecture question. Strongest fair baseline: the honest fitted retrieval comparator (B), not the collapsed G2 arm. Bounded single sensitivity packet; stop trigger: any refit of the deterministic clause set converts this from a no-refit structural-bound test into a new architecture experiment and is out of scope."
+    },
+    "cycle_id": "38529778944",
+    "lane": "graph",
+    "portfolio_assessment": "464 canonical experiments, one VALIDATED claim (C-MEAS-VALID bounded), four EXPERIMENTAL, five HYPOTHESIS; 30% recent REVISE/INVALID (improving but still the binding constraint). Three lanes hold frozen-or-prefreeze mandates that must complete before redirection (Frontier persistence-economics FROZEN, Intel representation-probe FROZEN, Physics second-egress FROZEN, Product no-LLM derisk PREFREEZE, Runtime scaffolding-priced repair PREFREEZE); Graph alone is IDLE and is explicitly REOPENed. No expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution is funded: readiness (1) carrier executable is discharged, (2) non-ceiling bank is discharged via SBA-V3 with Product derisk as the check, (3) capable same-model endpoint is NOT discharged, so Intel resolves representation-vs-capability and the B3 re-scope (hosted credential vs internally re-run comparators) waits on that receipt plus Intel census inputs. Closed axes stay closed: site-native discovery 0/208, mandatory-discovery deterministic REST certificate, external f-star anchor. Highest marginal value per lane: finish the five in-flight validity/product-blocker tests plus one smallest-decisive sensitivity packet for idle Graph, rather than opening any new family.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accepted as staff advice with three material effects: (1) adopted its stalled/idle triage (Graph IDLE reactivation, Physics loud-blocker discipline, Intel census-after-probe sequencing) and its closed-axis list as binding constraints; (2) used its external convergence (browser-use cache_script+auto-heal, TERX replay, StateMem/VerMem/MemMA/Kymata staleness literature, WebChoreArena/ST-WEBAGENTBENCH candidacy) as CANDIDATE_NOT_EVIDENCE priors that shape baseline requirements (competitor-strength arms in the future flagship) and Intel verification backlog, not as findings \u2014 no allocation treats a Scout-cited paper, doc, or version claim as SPIDER evidence and all readiness gates still require accepted Codex events; (3) rejected the implicit suggestion to spread Graph/Physics across the full candidate-direction menu: under stop/budget discipline the smallest-decisive in-flight completions outrank opening freshness-half-life, orthogonal-mechanism, or census-first threads this cycle. Scout degraded-mode caveat noted: LEGACY screening was performed from the Codex/legacy_brief directly, not delegated to the Scout."
+  },
+  "experiment_id": "EXP-GRAPH-38530149021",
+  "inherited_last_verdict": "DECIDE_REQUIRE_RETRIEVAL_B_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS",
+  "inherited_next_question": "Does the DECIDE_REQUIRE_RETRIEVAL_B bound survive a pre-registered sensitivity packet that (a) re-includes the frozen-screen-dropped TEST rows and (b) removes the gold-lexicon asymmetry via a blind or cross-surface lexicon arm, isolating whether the G2 one-row margin and the TFRAME_DOMINATES_G3 fork are robust or artifacts of screening and information asymmetry?",
+  "lane": "graph",
+  "origin_github_run_id": "38530149021",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38446557638",
+    "path": "research/experiments/EXP-GRAPH-38446557638/handoff.json",
+    "sha256": "ca722b25a86be1e898f52aa7b3d7b3ea61b5410c9b62a98c426c5652756ce9f3"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "1e9e28ffd45c4324b14d4d84c5a446005a523bed98bbfc48a2f7aa763c264c7a",
+  "request_id": "91cc18f6c10c9bad89333c00",
+  "schema_version": 1
+}
