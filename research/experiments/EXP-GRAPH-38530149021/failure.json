@@ -1,11 +1,11 @@
 {
-  "stage": "audit",
-  "category": "AUDIT_FAILURE",
-  "message": "stage exited with code 67",
-  "retryable": false,
-  "fingerprint": "40afe8b1e0d3869dccdd2d4c",
-  "recorded_at": "2026-10-14T08:36:06.050295+00:00",
-  "github_run_id": "38530149021",
+  "stage": "install",
+  "category": "OPENCODE_INSTALL_FAILURE",
+  "message": "stage exited with code 75",
+  "retryable": true,
+  "fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "recorded_at": "2026-10-14T13:50:07.929977+00:00",
+  "github_run_id": "38574960134",
   "github_run_attempt": "1",
   "control_revision": "25cae451082d6f7453f5d4085cec561e03c1fe8c41adea6f4e490f99a70edd56"
 }
