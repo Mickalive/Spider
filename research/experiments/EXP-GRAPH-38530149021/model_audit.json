@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/mimo-v2.6-flash-free",
+  "attempt": 2,
+  "exit_code": 67,
+  "category": "headless-permission-denied",
+  "github_run_id": "38530149021",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-14T08:36:05.799864+00:00"
+}
