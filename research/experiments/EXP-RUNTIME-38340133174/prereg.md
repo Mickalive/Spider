@@ -208,8 +208,15 @@ priced decision.
 
 freeze_artifacts = [`src/spider/kernel.py`, `src/spider/models.py`,
 `src/spider/registry.py`]. The v4 driver is the exact text between
-the two standalone marker lines in §12 (unique occurrences in this file); EXECUTE extracts by splitting
-those markers and checks CANONICAL-RUNNER-V4-SHA256 (recorded at freeze).
+the two standalone marker lines in §12 (unique occurrences in this file).
+CANONICAL-RUNNER-V4-SHA256 = `17f2481e95d99b8f8b6367fa2677d9dbcb702567908c118e12e880865705a927`
+(computed 2026-10-14 from the §12 text by the exact algorithm EXECUTE must
+repeat: split this file on the two standalone §12 runner-marker lines (the
+BEGIN line and the END line, each the unique occurrence of its kind), take
+the middle span, take the substring between the first line ```` ```python ````
+and the last line ```` ``` ````, sha256 the UTF-8 bytes;
+the single ```python fence in this file is unique to §12, verified at DESIGN).
+EXECUTE extracts by that algorithm and refuses on mismatch (V1).
 Request/spec/prereg/carrier hashes verified against freeze.json (V1).
 
 ## 11. Legacy differentiation (pre-2.0 precedents; targeted comparison)
@@ -1042,4 +1049,64 @@ if __name__ == "__main__":
 ```
 V4-RUNNER-END
 
-...[truncated 8903 chars]
+## 13. Stable metric/control identities for downstream transmission
+
+Priced metrics (per class): `M-SHIPPED-REUSE`, `M-SHIPPED-COLD-L2/L3`,
+`M-SHIPPED-RATIO-L2/L3`, `M-COST-FETCH-RATIO-L3`, `M-LATENCY-REUSE-MED-S`,
+`M-LATENCY-COLD-L2/L3-MED-S`, `M-LATENCY-R-L2/L3` (+ `M-LATENCY-R-L2/L3-CI95`
+with `B_LAT=2000`, `M-LATENCY-SIGN-REUSE-SLOWER-L3`, `M-LATENCY-R-L3-NOARG`
+sensitivity). Functional/locality: `M-REPAIR-SUCCESS`,
+`M-REPAIR-SUCCESS-WILSON-LOWER`, `M-CONTAMINATION-RATE` (count-derived),
+`M-WRITE-SET-MAX`, `M-GUARD-FIRE-RATE`, `M-COLD-SUCCESS`, `M-LITERAL-SUCCESS`,
+`M-NOREPAIR-SUCCESS`, `M-BASE-LIVENESS`, `M-OVERBROAD-CONTAMINATION-N`
+(count 0–4, not a 0–1 rate). Sensitivity-only: `M-SCAFFOLD-*`,
+`M-SP5-RATIO-L2/L3`, `M-LEGACY-RATIO-L2`. Attribution: `M-PHASE-DELTAS`
+(12 keys), `M-CLOSURE-REUSE/COLD-MED`, excess/shares/votes/answer object.
+Certificate: `M-CERT-COVERAGE/SENSITIVITY/SPECIFICITY/FALSE-ACCEPTS`,
+`M-CERT-BOUNDARY` (3 labeled entries). Model economics: `M-MODEL-CALLS`,
+`M-MODEL-TOKENS` (expected structural 0). Controls in `result.json`
+keyed by frozen baseline/control ids (`B-COLD`, `B-COLD-MIN`,
+`B-LITERAL-REPLAY`, `B-NO-REPAIR`, `T-REPAIR-REUSE`, `T-REPAIR-CONSERVATIVE`,
+`T-REPAIR-LEGACY`, `PC-BASE-LIVENESS`, `NC-NO-PERTURBATION`, `NC-NOISE`,
+`NC-OVERBROAD-REPAIR`, `V-CLOSURE`, `V-CERT`); each records expected vs
+observed behavior and pass/fail with evidence refs. No metric/control may be
+renamed by EXECUTE or AUDIT.
+
+## 14. EXECUTE obligations (frozen design, no redesign)
+
+Run the §12 driver verbatim (V1 hash-checked): scored run writes
+`result.json` (schema_version 1 with all 11 mandatory top-level keys;
+`status` = measurement validity, `outcome` per §8 mapping;
+`PERMANENT-DROP-BOUNDED` → `FALSIFIES` is a bounded product-story drop,
+explicitly NOT a mechanism falsification), `report.md` (bounded by
+`result.json`, no claim beyond the frozen ceiling), `provenance.json`
+(run id, commits, carrier/v2 hashes, runner self-sha, environment).
+Preserve raw evidence: driver stdout JSON, the extracted driver file,
+liveness/reachability preflight outputs. Measurement failure (any gate in
+§8) is `MEASUREMENT_INVALID`/`INCONCLUSIVE`, never a negative. B3 stays a
+recorded blocker; B11 certificate is measured, not closed.
+
+## 15. DESIGN probe record 2026-10-14 (non-outcome-bearing only)
+
+No scored trial and no confirmatory measurement was run. Probes: (a) v2 pin
+re-verified (60855 bytes, d4871091…4962bc608) and carrier hashes byte-identical
+to the parent freeze (kernel 3a6caf97…, models 338aaf4d…, registry
+51fb440d…); Python 3.12.15 stdlib. (b) Pure synthetic reachability probe:
+all 4 class branches and all 4 aggregates reachable (all True); repair-signal
+live on all classes. (c) Discarded liveness smoke: server_ready true,
+distill_live true, task_read_verified true, contamination instrument live,
+out-of-support degenerate, NCs silent (false/false), timer 1ns, phase keys
+present, closure finite. (d) Legacy: `codex/legacy_artifact_index.json` scan
+yields 0 hits for 'scaffolding' → NO_MATCH for attribution/pricing (absence
+of a hit is not proof of absence from the full archive); DISTINCT_EXTENSION
+on P2-REPLAY-COST guards; P2-AUTOMATION licensed as method; P2-WP003
+leakage guard honored. (e) Claim state: C-DELTA-REPAIR effective EXPERIMENTAL
+(parent packet); B3 endpoint absent by construction (counters-only + blocker).
+
+## 16. Sign-off
+
+This preregistration is PRE-FREEZE and complete. The decision rule is
+reachable, prerequisites verified, baselines discriminating, controls
+sensitive, treatment live, and all mutable local dependencies bound (§9).
+Scored execution is deferred to EXECUTE under `freeze.json`.
+No outcome data was inspected at DESIGN.
