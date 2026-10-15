@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38816768796",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Cascade precedence is clean: MEASUREMENT_INVALID (null) -> TAU_RULE_INFEASIBLE (BLOCKED) -> BLIND_SURVIVES/BLIND_FAILS; no earlier branch subsumes the science branches, and the invalidity/infeasibility conjuncts are expected-pass drift guards on identical frozen banks (parent run_output.json corroborates every hardcoded tripwire: reincluded gids, gold screened/reincl vectors {G3:T,G2:F,G1:T,ALT:T}, retrieval tau=0.4156/mu=0.0005 with TFRAME_DOMINATES_G3 on both supersets and all retrieval TEST gates false). Thresholds are integer-attainable on the decided set (20 OOS / 40 app: FA<=0.10 means <=2 executed OOS, COV>=0.50 means >=20 executed app, UP_excl>=0.85 attainable at abstOOS=18/abstApp=3 giving 0.8571 — exactly the published tau=0.3333 vector). Both science branches are arithmetically live at the emitted tau*: static monotonicity shows SELECT pooled_false_accept is non-increasing in tau, so argmax-slack with the higher-tau tie-break deterministically emits the highest SELECT-feasible tau (published complete feasible list tops at 0.6; tau* != 0.2727 and != 0.3333). On G3 reincluded TEST the decision then reduces to a single sharp, genuinely open event: SURVIVES requires abstApp==3 at tau* (then abstOOS>=18>=5.667*3 keeps UP>=0.85 and FA<=2/20=0.10 holds by monotone FA); FAILS triggers if any 4th app row scores below tau* (abstOOS<=20 makes UP>=0.85 arithmetically impossible for abstApp>=4). Accepted evidence does not exclude either configuration (SELECT app coverage published 1.0 at all 9 feasible taus; TEST at 0.3333 has exactly 3 abstained app). BLIND_INERT collapse is pre-handled as VALID gate-false. taus is non-empty whenever fit-pool bars pass (SELECT 34+60 rows), so the rule always emits a tau* and cannot crash on an empty best.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.2",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38666634300/raw_evidence/run_output.json"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified available now, none deferred to EXECUTE creation: Python 3.12.15 present; frozen runner (prereg §13 block) compiles clean and imports stdlib only (argparse/hashlib/json/math/os/re/random/sys/pathlib/__future__) plus one repo-local goal_generator import inside load_banks; numpy/sklearn/sentence_transformers/requests/torch probed absent and correctly excluded from decision arms (B-EMBED-COSINE kept ancestor-identity-only); goal_generator probes INTENTS=20/PARAPHRASES=20/NO_APPLICABLE_TEMPLATES=20/OOD_PARAPHRASES=8; every runtime-read block verified PRESENT at its exact referenced file (GOAL-BANK-G3/OOS-BANK-G3/LEXICON-G3 in EXP-GRAPH-38291080992/prereg.md; G1/G2 banks+lexicons in EXP-GRAPH-38180711589/prereg.md; PRIOR-PARENT-BANK-TEXTS in EXP-GRAPH-38175554380/prereg.md); extracted runner sha256 (block bytes + one trailing newline) recomputed at review = d43563861b55600ebead5d344c0f5eede94e8ea93ff19d9c36a1af24320f536f, equal to the declared CANONICAL-RUNNER-SHA256; no network/model/browser/credential anywhere in scope; clause-refit and new-surface paths absent by code inspection; --mechanics-only path never scores TEST rows (empty test dicts passed to both arms; only CAL probes printed). No outcome-bearing probe was run by this review.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#10",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#13"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines can differ on the decided population; no ceiling/floor identity. Gold T-FRAME+ (lexicon+zero-parameter clauses) is live and gate-met on G3 reincluded (parent: FA 0.10/COV 1.0/UP 1.0) while blind differs operationally and empirically (parent blind FA 0.20 at tau=0.2727 fails where gold passes; published tau=0.3333 passes — arms diverge on the same frozen rows). B-RETRIEVAL-OOS is a distinct honest comparator (uni+bigram TF-IDF centroids, (tau,mu>0) gate, disjoint fit/select, fails all TEST gates with UP 0.68-0.70 << 0.85) and is byte-identical to the parent by the review's line-level diff of the frozen runner vs parent raw_evidence runner: the ONLY substantive change is the blind SELECT selection key ((coverage-lexicographic) -> (feasible, FA-slack, higher-tau)) plus EXP_ID/SEED, select_rule/select_slack reporting, and the pre-declared TAU_RULE_INFEASIBLE decision mapping — a genuine single-variable ablation, so calibration non-identity to the parent rule is proven without any new measurement. Gatefree execute-all shows FA headroom on both set families (0.2778-0.50 screened, 0.30-0.50 reincluded vs gold 0.0-0.10), so no floor/ceiling collapse of the gate. No cost metric is used in any decision, so no omitted cost dimension.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#3",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.5",
+        "research/experiments/EXP-GRAPH-38666634300/raw_evidence/runner_blind_resolver.py",
+        "research/experiments/EXP-GRAPH-38666634300/raw_evidence/run_output.json"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Under the same scoring implementation that will decide the experiment: PC-AXIS-G1-ALTLEX fires (parent reincluded ALTLEX FA 0.05/COV 0.933/UP 1.0/sel 1.0 gate-met; gold code byte-identical on frozen banks, and failure is runner-enforced MEASUREMENT_INVALID, not a science negative); nulls remain null with wide margins — NC-EXEC-ALL FA 0.30-0.50 vs gold <=0.10 on both supersets, NC-ABSTAIN-ALL executes with coverage 0.0 floor and informative UP, CTRL-RANDOM-GATE FA ~0.70, shuffled/random-role at 0.0 (parent values re-verified from run_output.json#controls). CTRL-BLIND-PERMUTED is correctly scoped: the execute/abstain partition depends only on label-invariant 1-NN scores, so permuted FA/COV/UP equal real blind by construction at any fixed tau* and the control is explicitly barred from gating the label; it still discriminates on its scoped target (selective_acc, real blind SELECT selective=0.0 published). No control is tautological with the decision label and none is impossible to fire.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38666634300/raw_evidence/run_output.json"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment (BLIND-JAC-1NN + max-slack higher-tau rule in the hashed §13 runner) is executable and produces non-null behavior before any expensive comparison: on identical banks the SELECT-feasible set is proven non-empty (parent audit published 9 feasible taus all at SELECT coverage 1.0, including 0.6, and parent SELECT gate at 0.2727 executed 39 rows), so the rule always emits a tau* and the blind arm always yields a well-defined gate vector on SELECT, screened and reincluded TEST; the parent already executed the same blind mechanism end-to-end (decision BLIND_FAILS, blind_inert=false, non-degenerate partition 44/16 at 0.2727). The --mechanics-only entry point gives a cheap pre-scoring liveness canary (blind_select feasible + executed/abstained counts) with TEST untouched. The residual worst case on TEST (zero executes or zero abstentions) is pre-declared VALID BLIND_INERT collapse mapping to gate-false — a scientific outcome, not an unexecutable treatment or a liveness cliff. No SPIDER-product claim of the C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON class is targeted here (claim C-SEMANTIC-RESOLVE); treatment liveness is PASS on the merits regardless.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#8.2",
+        "research/experiments/EXP-GRAPH-38666634300/raw_evidence/run_output.json"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "The four mutable local interpretation dependencies are exactly the four runtime file reads found in the frozen runner's load_banks (G1/G2 prereg, prior-bank prereg, G3 prereg, goal_generator.py); all four exist and their sha256 recomputed at review match both prereg §12 and parent EXP-GRAPH-38666634300/freeze.json#artifact_hashes (5a64e90d.../dc90bf71.../5a9cc119.../cb5218de...). No other local file/code/task-bank/fixture is read at runtime: the runner itself is embedded in the to-be-frozen prereg §13 with CANONICAL-RUNNER-SHA256 recomputed and matched at review; bank blocks, constants, splits, screen bands, the feasibility predicate, the max-slack rule and all continuity tripwire values (reincluded gids, expected gold vectors, retrieval tau/mu) are hardcoded inside that runner rather than read from mutable parent outputs; the parent handoff.json is provenance only and its sha matches request.json#parent_handoff (da318f26...). Remote/deterministic-bank reproduction needs no remote freeze.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38816768796/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#12",
+        "research/experiments/EXP-GRAPH-38816768796/prereg.md#13",
+        "research/experiments/EXP-GRAPH-38666634300/freeze.json",
+        "research/experiments/EXP-GRAPH-38666634300/handoff.json"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Tau*-determinacy nuance (prereg §1/§2/§8.2 uncertainty framing): SELECT pooled_false_accept is non-increasing in tau on the fixed SELECT pool, so argmax-FA-slack with the higher-tau tie-break deterministically emits the HIGHEST SELECT-feasible tau (0.6 under the published complete feasible list), not a value that 'depends on the unpublished SELECT FA ordering at the remaining feasible taus'. This strengthens determinacy and does not make either science branch unreachable (see decision_rule_reachability reason for the live abstApp==3 vs abstApp>=4 dichotomy at tau*), but DESIGN's stated residual uncertainty is analytically unnecessary and the emitted tau* is in fact provably != 0.3333 as well as != 0.2727.",
+    "Argument-hygiene only: prereg §8.4's SURVIVES-attainability arithmetic cites the published tau=0.3333 vector (FA 0.10/COV 0.925/UP 0.8571), which is not the vector at the emitted tau* (~0.6). The citation validly demonstrates that the gate triple FA<=0.10 AND COV>=0.50 AND UP>=0.85 is jointly attainable on the decided set; attainability specifically at tau* remains the open empirical question by design, and nothing in accepted evidence excludes it (published SELECT app coverage 1.0 at every feasible tau). No redesign implied; recorded so AUDIT does not read §8.4 as a vector-at-tau* proof.",
+    "Independent-review identity: DESIGN producer was opencode/muse-spark-1.3-contributor-free (model_design.json); this review was produced by opencode/mimo-v2.6-flash-free, satisfying the different-model requirement. DESIGN ran zero scoring (including zero SELECT scoring); this review likewise ran only hash/compile/import/block-existence/diff probes and read already-accepted parent evidence — no tau* selection, no TEST scoring, no outcome-bearing computation."
+  ],
+  "rationale": "Independent attack of all six design-contract v2 checks finds no capability defect: the decision cascade reaches both a support and a falsifying branch on arithmetically attainable, live configurations; every measurement prerequisite (Python 3.12.15, stdlib-only runner with matched canonical hash, all bank/lexicon/prior blocks at their frozen paths, goal_generator) is available now; treatment and strong baselines (gold T-FRAME+, honest B-RETRIEVAL-OOS, gatefree headroom) are operationally distinct and empirically divergent on the frozen G3 reincluded population, with the single-variable ablation confirmed by a line-level diff against the parent runner; controls fire and stay null with wide published margins under the same scoring code, and the permuted null is correctly scoped away from the gate; the frozen treatment is executable and its worst-case collapse is a pre-handled VALID outcome; and all four mutable local dependencies are hash-bound exactly as frozen (recomputed hashes equal parent freeze.json). Continuity tripwire constants were verified against the parent's accepted run_output.json, so no validity guard is expected to misfire on identical banks. Residual items (tau*-determinacy framing, §8.4 vector-at-tau* hygiene) are nonblocking documentation nuances that do not impair satisfiability or identifiability. Design is fit to freeze; no repair requested."
+  ,
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38816768796/request.json",
+    "research/experiments/EXP-GRAPH-38816768796/spec.json",
+    "research/experiments/EXP-GRAPH-38816768796/prereg.md",
+    "research/experiments/EXP-GRAPH-38816768796/model_design.json",
+    "research/experiments/EXP-GRAPH-38666634300/handoff.json",
+    "research/experiments/EXP-GRAPH-38666634300/freeze.json",
+    "research/experiments/EXP-GRAPH-38666634300/raw_evidence/run_output.json",
+    "research/experiments/EXP-GRAPH-38666634300/raw_evidence/runner_blind_resolver.py",
+    "research/experiments/EXP-GRAPH-38666634300/audit.json",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/harness/goal_generator.py"
+  ]
+}
