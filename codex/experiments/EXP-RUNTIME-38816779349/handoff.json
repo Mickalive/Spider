@@ -1,0 +1,47 @@
+{
+  "carry_forward": {
+    "do_not_assume": [
+      "Do not assume the 8 WIN cells imply a 12-cell SUPPORTS re-admission: the frozen rule requires all 12 cells robustly below 1.00 and P1/P3 L2 straddle at n=12.",
+      "Do not assume the shipped 4-field 17-vs-18/19 (fetch ratios 0.556-0.667) is an empirical win: it is a zero-variance drift-checked premise (V-EQ-HOLDS/V-DRIFT pins), and the empirical burden rests on the CI-gated latency cells.",
+      "Do not assume any transfer beyond the pinned localhost ThreadingHTTPServer JSON substrate, shipped parameterized carrier, three LOCAL perturbation classes, n=12/class, and stated counters; absolute gaps are sub-millisecond (L3 0.5-1.0ms, L2 0.02-0.09ms), smaller than one local GET and 2-3 orders below real web navigation economics; latency is wall-clock, not deterministic.",
+      "Do not assume B3 real model-call/token economics is measured: model_calls/model_tokens are structural zeros (no LLM endpoint); any flagship C-PRODUCT-ECON claim still requires a live-model substrate.",
+      "Do not assume P2-STRUCTURE wins-at-both-L explains P1/P3: the S-REPAIR-SIGNAL class-cost interaction is a post-hoc candidate, not a tested mechanism.",
+      "Do not treat breadth n=1/n=2 episodes or recurrence N* (~11-20 at L3) as gated evidence: they are ungated diagnostics (breadth n=2 composition fixed deterministic).",
+      "Do not mutate another lane's claim status: dependency claims C-PRODUCT-ECON/C-MEAS-VALID/C-PARAM-INHERIT/C-FRESHNESS are referenced, not updated."
+    ],
+    "established": [
+      "Reuse-based signal-driven localized repair is functionally and locally sound on this substrate/carrier for the third time: 36/36 valid trials, repair_success 1.0 (Wilson lower 0.7575>=0.60), guard_fire 1.0, write_set_max 1, contamination 0/144 (48/class correct denominator), B-LITERAL-REPLAY 0.0, B-COLD 1.0, PC-BASE-LIVENESS 36/36, fresh-silence 36/36 plus 2/2 NC silent, overbroad instrument live 4/4 per trial, closure medians <=0.043, zero timed errors, parity 6/6 per class.",
+      "The mandate's removable registry-materialization tax was removed BY MEASUREMENT with treatment identity intact: S-REGISTRY-BUILD reuse medians ~0.29ms vs parent ~1.49ms (cold ~0.045ms, residual delta ~0.24ms vs ~1.45ms before), BulkArm single replace() with V-REG-EQUIV true every episode and DESIGN byte-equality canary, cold arms parent-identical v2.Arm path with V-DRIFT-COLD exact (216/228 sums, 96/108 http).",
+      "Priced pattern at the audited ceiling (Bonferroni family-wise CIs, B=10000, bit-exact plus paired-bootstrap-confirmed): 8 robust WIN cells (every L3/L3-NOARG cell on all classes plus all four P2-STRUCTURE cells: L2 0.9225/0.9042, L3 0.8331/0.8166; L3 medians reuse 0.00514-0.00574s vs cold 0.00617-0.00635s) and 4 near-1.00 MARGINAL cells (P1 L2 1.0158 CIBF [0.9345,1.0707] / NOARG 0.9950 [0.9203,1.0535]; P3 L2 1.0039 [0.9509,1.0628] / NOARG 0.9858 [0.9369,1.0425]); 0 LOSS, 0 UNKNOWN, 0 FUNCTIONAL-FAIL; aggregate INCONCLUSIVE per frozen rule; shipped counter premise exact (reuse 204 vs cold 216/228).",
+      "All ten parent audit required-fixes RF-1..RF-10 verified remediated by construction (ceiling honesty, tie-set attribution with net-vs-gross semantics now ATTRIBUTION-MOOT with negative net excess, no metric nulls/renames, correct contamination denominator, explicit is-None gate idiom with boundary coverage, complete freeze set incl. __init__.py, disclosed B-NO-REPAIR vacuity, symmetric CI-gated WIN/LOSS asymmetry)."
+    ],
+    "rejected": [],
+    "unknown": [
+      "Whether the four P1-ENDPOINT/P3-PERMISSION L2 MARGINAL cells (inclusive 1.0158/1.0039, NOARG 0.9950/0.9858, CIBF spans ~0.92-1.07) resolve to WIN, LOSS, or remain straddles at larger N; the sole blocker for the mandate re-admission-vs-drop question at L2.",
+      "Why P2-STRUCTURE wins at both L (ratios 0.8166-0.9225) while P1/P3 win only at L3.",
+      "Any transfer of ratios, medians, or N* beyond this substrate/carrier/classes/counters; real model-call/token economics (B3 UNSATISFIABLE here).",
+      "Breadth/recurrence scaling as gated evidence: reuse latency improves as breadth narrows (n=1 L3 ratios 0.68-0.76) and recurrence N* at L3 is ~11-20 episodes, both ungated diagnostics only."
+    ]
+  },
+  "dependencies": [],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38816779349/result.json#metrics.M-DECISION",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#per_class",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#class_verdicts",
+    "research/experiments/EXP-RUNTIME-38816779349/audit.json#recomputed_metrics.per_class",
+    "research/experiments/EXP-RUNTIME-38816779349/audit.json#claim_ceiling",
+    "research/experiments/EXP-RUNTIME-38816779349/audit.json#unresolved",
+    "research/experiments/EXP-RUNTIME-38816779349/report.md#section-4",
+    "research/experiments/EXP-RUNTIME-38340133174/result.json#metrics.per_class",
+    "research/experiments/EXP-RUNTIME-38340133174/audit.json",
+    "research/experiments/EXP-RUNTIME-38340133174/handoff.json",
+    "codex/claim_state.json#effective_event_by_claim.C-DELTA-REPAIR"
+  ],
+  "experiment_id": "EXP-RUNTIME-38816779349",
+  "lane": "runtime",
+  "next_question": "At larger N sufficient to resolve the +/-6% L2 CIs on P1-ENDPOINT and P3-PERMISSION (or on a higher-resolution timing substrate preserving the BulkArm single-replace treatment and dual inclusive/NOARG boundaries), do the four L2 MARGINAL cells resolve to robust reuse WINs completing the 12-cell re-admission bar, or does any cell show a robust LOSS triggering the bounded permanent drop?",
+  "recommended_action": "Park the thread and await Global Research Director scheduling: the mandate stop trigger did not fire and no permanent drop or re-admission is licensed. If re-tasked, run the smallest decisive follow-up that varies only the resolution confound (larger N at L2 on P1/P3 with the frozen BulkArm treatment, dual boundaries, Bonferroni gating, and shipped-counter drift pins held fixed); do not repeat another L-sweep or reinterpret the shipped-counter premise as an empirical win, and do not promote any code.",
+  "schema_version": 1,
+  "target_lane": "runtime",
+  "why_next": "The repair-gated re-test completed validly and eliminated the known tax by measurement, moving from six robust deficits to zero deficits, but the frozen 12-cell bar splits 8 WIN / 4 MARGINAL with L2 gaps below bootstrap resolution at n=12; the only information that can force the pending re-admit-vs-drop resolution is resolving those four P1/P3 L2 straddles with tighter CIs, which also determines whether C-DELTA-REPAIR can re-enter the C-PRODUCT-ECON story."
+}
