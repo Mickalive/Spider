@@ -1,50 +1,133 @@
 {
   "experiment_id": "EXP-RUNTIME-38816779349",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "title": "No-tax repair-gated re-test: bulk-materialized localized repair vs cold re-derivation with breadth and recurrence scaling",
+  "claim_ids": ["C-DELTA-REPAIR"],
+  "dependency_claim_ids": ["C-PRODUCT-ECON", "C-MEAS-VALID", "C-PARAM-INHERIT", "C-FRESHNESS"],
+  "question": "Once the carrier per-episode registry-materialization tax is removed (single bulk replace) and the frozen driver gate defect is repaired, is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 on both timed boundaries (inclusive and S-ARG-subtracted NOARG), and how does the margin scale with inheritance breadth (n=1,2,5 registered mechanisms) and recurrence (amortized N*)?",
+  "hypothesis": "H1 (functional/locality gates, re-attested): after a single LOCAL perturbation, bulk-materialized reuse-based signal-driven local repair restores success on ALL FIVE TASK_IDS at rate >= 0.80 per class (Wilson lower >= 0.60), guard fires >= 0.80, write_set_max <= 1, same-target contamination <= 0.10 over 48 in-support unaffected probes per class (144 total), overbroad instrument fires > 0.10. H2 (shipped counter, deterministic drift-checked premise): under the shipped 4-field unit counter (http_requests + retrieval_calls + verification_calls + repair_attempts, unit weights, zero fitted quantities), reuse charges exactly 17 units vs cold 18 (L=2) / 19 (L=3) by arm protocol on every functional_ok trial (parent vectors P1/P3 (6,5,5,1), P2 (5,5,6,1) vs cold (8,5,5,0)/(9,5,5,0)); H2 has zero empirical variance by construction and is checked as V-DRIFT-COLD (repair-independent cold nominals) + V-DRIFT-REUSE (successful-repaired reuse trials) + reported V-EQ-HOLDS, never claimed as an empirical win. H3 (end-to-end latency, the empirical decider): median timed-episode latency ratio reuse/cold is robustly below 1.00 at BOTH L=2 and L=3 under BOTH the inclusive timed boundary AND the S-ARG-subtracted NOARG boundary, on every perturbation class, where robustly means the Bonferroni family-wise-corrected bootstrap CI (1-0.05/12 over 12 class x L x boundary cells, B=10000) lies strictly below 1.00. H4 (breadth/recurrence scaling, descriptive only): the reuse-vs-cold margin is reported at inheritance breadths n=1 (target-only registration, the mandate's second authorized repair), n=2 and n=5 (bulk replace, the gated treatment), plus a derived recurrence crossover N* = learn_cost/(cold_med - reuse_med) per L and boundary (null when the denominator is <= 0). H5 (B3): model_calls/model_tokens are structurally 0 (no LLM endpoint on substrate); real model-call/token economics is UNSATISFIABLE here, priced in counters only, blocker recorded. H6 (treatment identity): the bulk registry content is exactly the upsert-built content (V-REG-EQUIV byte/content pin per trial plus a DESIGN byte-equality canary), so the repair changes only materialization cost, never treatment semantics.",
+  "falsifier": "The re-admission claim FAILS toward PERMANENT-DROP-BOUNDED (reuse permanently dropped from the C-PRODUCT-ECON product story on this substrate/carrier/classes/counter, no further L-sweeps, mandate stop trigger fires) if, with H1 functional/locality gates holding and no cold/reuse nominal drift, ANY of the 12 gated cells (3 classes x L=2/L=3 x inclusive/NOARG) is a robust LOSS (median ratio >= 1.00 with Bonferroni CI lower bound >= 1.00). It FAILS differently (FALSIFIES-FUNCTIONAL: bounded mechanism concern, no re-admit, no permanent drop) if functional/locality soundness itself breaks. It FAILS to decide (INCONCLUSIVE: no re-admit, no permanent drop, thread parked) on any MARGINAL cell without a LOSS (near-1.00 straddle), any missing ratio/CI (COST-UNKNOWN), or any tripped validity gate (MEASUREMENT_INVALID, never a negative). The shipped-premise deficit path (reuse != 17 without cold drift) routes to PRICED-DEFICIT/DROP only via a robust latency LOSS; a pure shipped-count deviation without cold drift is a reuse-side anomaly and routes to MEASUREMENT_INVALID via V-DRIFT-REUSE (fail-safe sequencing pin; genuine repair failures are exempt by construction). Breadth/recurrence diagnostics (H4) and attribution (tie set) are reported and can never flip the gated decision.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "type": "cost_baseline_primary",
+      "description": "Cold re-derivation: discovery probe + L=3 fresh observation fetches over LEARN_IDS=[11,12,13], distill_parameterized -> resolve -> execute -> verify the 5 TASK_IDS=[14,15,16,17,18] via the shipped carrier on the parent-identical v2.Arm path (0 upserts at build, 1 upsert after distill). The mandate's strong comparator and the ONLY cost/latency denominator. Timed per episode (t_cold_L3) in parity order against the treatment episode. Byte-identical code path to the parent packet.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.B-COLD", "src/spider/kernel.py"],
+      "expected_outcome": "task success 1.0; shipped 4-field counter = 19 nominal at L=3 (exact per-episode vector (9,5,5,0); class sums pinned by V-DRIFT-COLD: 228 total, http 108)."
+    },
+    {
+      "id": "B-COLD-MIN",
+      "type": "cost_baseline_sensitivity",
+      "description": "Identical to B-COLD but L=2 (LEARN_IDS_MIN=[11,12]), the carrier's minimum viable re-derivation. Mandate decision bar L=2. Timed per episode (t_cold_L2).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.B-COLD-MIN", "src/spider/kernel.py"],
+      "expected_outcome": "task success 1.0; shipped 4-field counter = 18 nominal at L=2 (exact vector (8,5,5,0); pinned by V-DRIFT-COLD: 216 total, http 96)."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "type": "mechanism_control_must_fail",
+      "description": "Replay the inherited (unrepaired) parameterized mechanism on the perturbed target. Establishes the perturbation actually bites (V4). The live must-fail control.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.B-LITERAL-REPLAY"],
+      "expected_outcome": "success <= 0.10 on every class; if it succeeds the perturbation did not bite -> MEASUREMENT_INVALID."
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "type": "abstention_control_vacuous_disclosed",
+      "description": "Guard detects staleness but the system abstains from repair. Non-executing; NEVER a cost/latency denominator (V6). DISCLOSED VACUITY (audit RF-9 remedy): pinned v2 run_norepair hardcodes success=False, so the V6 gate (success <= 0.10 else INVALID) can never trip; only its guard-fired diagnostic (expected 36/36) is informative. The live must-fail control is B-LITERAL-REPLAY. The gate is retained for identifier stability with this disclosure, never relied upon for validity.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.B-NO-REPAIR", "research/experiments/EXP-RUNTIME-38340133174/audit.json#required_fixes.RF-9"],
+      "expected_outcome": "success 0.0 by construction; guard fires 36/36. Any success > 0.10 (impossible without v2 change, which the V0 pin would refuse) -> MEASUREMENT_INVALID."
+    },
+    {
+      "id": "T-REPAIR-REUSE-BULK",
+      "type": "treatment",
+      "description": "Treatment: freshness check fused into the first task read; after repair the reused probe observation is charged once (one repair_attempts, one repair probe fetch where the class emits one, one post-repair verify); first task id NOT re-resolved/re-fetched/re-verified. Registry materialization uses BulkArm: ONE MechanismRegistry.replace() of all 5 inherited mechanisms (single write) instead of 5 sequential upsert() read+rewrite cycles. Timed per episode (t_reuse) in parity order against cold episodes; arg deepcopy of the full mech dict stays inside the inclusive timed boundary (same operand as the parent reuse arm), with the S-ARG-subtracted NOARG boundary as gated co-decider (both must show robust reuse wins at both L on every class). Ungated diagnostic variants at breadth n=1 (target-only registration, the mandate's second authorized repair) and n=2 run the identical episode on deterministic breadth subsets (target + first sorted others); S-ARG still deepcopies the full dict so breadth scaling isolates to S-REGISTRY-BUILD.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.T-REPAIR-REUSE", "src/spider/registry.py"],
+      "expected_outcome": "shipped 4-field counter = 17 nominal (exact vectors P1/P3 (6,5,5,1), P2 (5,5,6,1)) vs cold 18/19 on every functional_ok trial (V-DRIFT-REUSE pin); episode latency compared empirically with Bonferroni-gated CIs, not assumed. Breadth episodes also ship 17 (recorded, ungated)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-BASE-LIVENESS",
+    "type": "positive_control_suite",
+    "success_criterion": "pre-perturbation, in EVERY scored trial, all five learned mechanisms resolve EXECUTABLE and verify on the in-support probe (base_liveness=true); aggregate true-trials == total. Attestation inside the scored artifact.",
+    "members": [
+      {
+        "id": "PC-BASE-LIVENESS",
+        "protocol": "Inside every scored trial: boot substrate, distill from LEARN_IDS via shipped distill_parameterized, then for each of five resources resolve+fetch+verify in-support probe id 14 against the live server BEFORE perturbation.",
+        "success_criterion": "all five return (200, id, verified=True); base_liveness=true for the trial."
+      },
+      {
+        "id": "PC-BASE-LIVENESS-DESIGN",
+        "protocol": "Non-outcome-bearing DESIGN liveness basis ONLY (not a scored experiment control): v2 pin + carrier-hash verification, module import, fresh-path liveness (server/distill/resolve-EXECUTABLE/fetch-200/verify-True/guard-silent/registry-RW booleans, unperturbed, discarded), pinned-module synthetic repair-signal probe (patched True on P1/P2/P3 synthetic inputs, non-bank seed), BulkArm-vs-upsert byte-equality canary on a discarded input (discrete content compare, untimed), timer check, pure synthetic classifier + gate-coverage reachability (all class/aggregate branches plus 0.0/0.10 gate boundaries), nominal-vector arithmetic (12x17/18/19). No timed reuse-vs-cold comparison is run at DESIGN.",
+        "success_criterion": "server path importable, pin verified, carrier hashes match parent freeze, timer 1ns, fresh path executes end-to-end with guard silent, repair signal patches on all classes, BulkArm bytes equal upsert bytes, all classifier branches and gate boundaries classify as expected, cold nominals exact."
+      }
+    ]
+  },
+  "null_control": {
+    "id": "NC-NO-PERTURBATION+NC-NOISE+NC-OVERBROAD-REPAIR+V-CLOSURE",
+    "type": "negative_controls",
+    "protocol": "NC-NO-PERTURBATION: guard on unperturbed body must be fresh (stale=false). NC-NOISE: observed_at churn must not fire. Per-trial fresh-silence: read-only guard on the unperturbed body in EVERY trial pre-perturbation (36 probes, untimed). NC-OVERBROAD-REPAIR: target repaired postconditions applied to ALL mechanisms; in-support probe on 4 unaffected resources must flag breakage (>0.10). V-CLOSURE: sum of preregistered phase timings must reconstruct each timed episode within 20% (median per class). B-NO-REPAIR vacuity disclosed (see baselines): gate retained, diagnostic only.",
+    "success_criterion": "NC-NO-PERTURBATION stale=false AND NC-NOISE stale=false AND pooled fresh-silence specificity recorded (36/36 expected silent); overbroad rate > 0.10 with probes>0; closure medians <= 0.20; B-NO-REPAIR success 0.0 with guard fired 36/36 (diagnostic).",
+    "failure_policy": "Any false-firing guard -> MEASUREMENT_INVALID. Insensitive overbroad -> MEASUREMENT_INVALID. Cold-nominal drift -> MEASUREMENT_INVALID (substrate changed, never a scientific negative). Reuse-nominal drift (V-DRIFT-REUSE) -> MEASUREMENT_INVALID (fail-safe sequencing pin; genuine repair failures exempt by construction). Registry-equivalence break (V-REG-EQUIV) -> MEASUREMENT_INVALID (treatment identity violated, never a negative). V-CLOSURE failure -> attribution INVALID only. Breadth/recurrence diagnostics never gate."
+  },
+  "measurement_validity": [
+    "V0-SUBSTRATE-PIN: the immutable parent v2 runner file must hash to d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608 (60855 bytes) before import; mismatch aborts (refuse-to-run), never a result.",
+    "V1-FREEZE_BINDING: the v5 driver is embedded verbatim in prereg.md section-12 between V5-DRIVER-BEGIN/END markers and pinned by CANONICAL-RUNNER-V5-SHA256 recorded in prereg section-10; a runtime extraction check recomputes the hash and refuses on mismatch. Request/spec/prereg/carrier hashes match freeze.json.",
+    "V2-SUBSTRATE_ISOLATION: Python 3.12 stdlib only (ThreadingHTTPServer, localhost ephemeral port); no LLM, credential, external network, browser; therefore model_calls/model_tokens are structurally 0 and fetches are the scarce accounting resource.",
+    "V3-DETERMINISM-PROJECTION: fresh seeds (SEED5=162073685=38816779349%2**32; per-trial SEED5+1000*(ci+1)+j; NC offsets +1/+2; bootstrap offsets +7000*(ci+1)+k; DESIGN canaries on discarded offsets disjoint from all scored offsets); the discrete/counter projection (success, counters, oplogs, order flags, validity flags, scaffold counts, phase timings) is recorded for audit recomputation; latency is wall-clock and NOT projected as deterministic.",
+    "V4-PERTURBATION_BITES: B-LITERAL-REPLAY success <= 0.10 every class (explicit is-None-or-greater check; observed 0.0 passes).",
+    "V5-COLD_BASELINE_LIVE: B-COLD success >= 0.90 every class (explicit is-None-or-less check).",
+    "V6-NO_REPAIR_INERT: B-NO-REPAIR success <= 0.10 (explicit check; vacuous by pinned-v2 construction, disclosed; never a denominator).",
+    "V7-GUARD_LIVENESS: guard fires >= 0.80 on perturbed bank trials AND NOT on NC-NO-PERTURBATION/NC-NOISE (explicit checks).",
+    "V8-NO_TARGET_LEAKAGE: repair writes exactly one mechanism (write_set_max <= 1, explicit check); contamination measured only on genuinely unaffected resources with the in-support probe (id=14); correct denominator 48 per class (4x12), 144 total.",
+    "V9-INTEGER_COUNTERS: cost counters are integer counts from the shipped TrajectoryCounters surface plus preregistered integer scaffold units; latency is perf_counter seconds; no estimated, fitted, or model-token quantities.",
+    "V10-THRESHOLD_NOT_FITTED: all bars, bootstraps (B_LAT=2000 for 95% diagnostic, B_BONF=10000 for family-wise Bonferroni CIs), N=12, scaffold unit definitions/parity, phase list, nominal vectors, breadth set {1,2,5}, and attribution-tie rule were preregistered before any scored run; NO calibration workload exists; the 5-field sensitivity weight (1:1 parity) is preregistered and informational only.",
+    "V11-N_CONTROLLED: TRIALS_PER_CLASS=12 with rotating targets; 2 warmups per trial excluded from timing; gated parity exactly 6 reuse-first/6 cold-first per class; breadth diagnostic episodes run after the gated triple in j-parity-rotated order (recorded).",
+    "V12-POSITIVE_CONTROL: PC-BASE-LIVENESS true inside EVERY valid scored trial.",
+    "V14-REUSE_IDENTITY: BulkArm registry content equals the breadth-subset input exactly (V-REG-EQUIV per-episode pin, all three breadth episodes); per-trial V-EQUIV fields record original-function warmup vs bulk-timed discrete projections for audit; treatment and cold arms differ only in preregistered resolve/fetch/verify/scaffold counts plus wall-clock (oplogs present every trial).",
+    "V15-CONTAMINATION-INSTRUMENT-LIVE: probes total > 0 AND overbroad rate > 0.10; else MEASUREMENT_INVALID.",
+    "V-DRIFT-COLD: per-class cold shipped sums must equal preregistered nominals exactly (M-SHIPPED-COLD-L2==216==12x18, M-SHIPPED-COLD-L3==228==12x19, M-COLD-HTTP-L2==96==12x8, M-COLD-HTTP-L3==108==12x9); break signals substrate/carrier drift -> MEASUREMENT_INVALID (never a negative). The cold path is repair-independent and parent-identical, so this gate cannot mask a repair effect.",
+    "V-EQ-PREMISE (reported, not a gate): shipped reuse-vs-cold inequality (reuse<cold at L2 AND L3, fetch_L3<=0.90) recorded as V-EQ-HOLDS with explicit None handling; deterministic 17/18 and 17/19 by arm protocol on functional_ok trials; a shipped-count anomaly without cold drift routes to PRICED-DEFICIT/DROP only via a robust latency LOSS, while a V-DRIFT-REUSE pin break routes fail-safe to INVALID.",
+    "V-TIMING: 2 warmups per trial plus one untimed perturbation-retention re-check per trial (guard stale=True required post-warmup, pre-timed; failure marks the trial invalid via n-control); per-class parity order exactly 6 reuse-first/6 cold-first for the gated triple; zero timed-episode errors; all episode latencies finite > 0; DUAL gated latency boundaries (inclusive with arg deepcopy inside timing, AND NOARG with S-ARG subtracted, fully symmetric); a gated WIN requires strict median win AND Bonferroni CI strictly below 1.00 on all 12 class x L x boundary cells.",
+    "V-CLOSURE (attribution track only): median |S-MISC|/episode <= 0.20 per class; failure invalidates only the attribution answer (UNATTRIBUTED/ATTRIBUTION-INVALID), never the priced decision.",
+    "V-REG-EQUIV (treatment-identity pin): every timed bulk episode (breadths 5, 2, 1) must satisfy registry-content == breadth-subset-input exactly; break -> MEASUREMENT_INVALID (never a negative).",
+    "Representation loss: simplified JSON API, not real websites; conclusions bounded to this substrate/carrier/classes/counters; model-call economics unmeasured by construction (B3 UNSATISFIABLE, carried as blocked-unknown); bytes reported diagnostic only.",
+    "Scope bound: does not execute the gated C-PRODUCT-ECON flagship; mutates no cross-lane claim status; produces terminal decision inputs for the Runtime DIRECTOR and Global Research Director. The B11 runtime certificate instance stands per the parent packet (audit AF-11) and is NOT re-measured here; guard wiring is re-attested via in-trial fresh-silence probes plus NCs."
+  ],
+  "decision_rule": "Per class c in {P1-ENDPOINT,P2-STRUCTURE,P3-PERMISSION}, n=12 valid trials. functional_ok := repair_success>=0.80 AND wilson_lower>=0.60 AND contamination<=0.10 (over 48 unaffected probes) AND write_set_max<=1 AND guard_fire>=0.80 (same bars as the parent packet). For each of 12 cells (class x L in {2,3} x boundary in {inclusive, NOARG}): R := median(reuse_episode_s)/median(cold_episode_s); BFCI := family-wise Bonferroni bootstrap CI at level 1-0.05/12 (B=10000, frozen seeds) with 95% CI (B=2000) reported as diagnostic. Cell verdict: UNKNOWN if R or BFCI missing; WIN if R<1.00 AND BFCI_upper<1.00; LOSS if R>=1.00 AND BFCI_lower>=1.00; else MARGINAL. Class verdict (first match): FUNCTIONAL-FAIL if !functional_ok; COST-UNKNOWN if any cell UNKNOWN; PRICED-DEFICIT if any cell LOSS; PRICED-WIN if all cells WIN; else PRICED-MARGINAL. Aggregate (first match): FALSIFIES-FUNCTIONAL if any class FUNCTIONAL-FAIL; INCONCLUSIVE if any class COST-UNKNOWN; PERMANENT-DROP-BOUNDED if any class PRICED-DEFICIT; SUPPORTS if all classes PRICED-WIN; else INCONCLUSIVE (marginal straddle: no re-admit, no permanent drop, thread parked). Any tripped validity gate (V0..V15, V-DRIFT-*, V-REG-EQUIV, V-TIMING) -> MEASUREMENT_INVALID (status; outcome INCONCLUSIVE; never a negative). Strict inequality throughout: 1.00 is never a win. All five aggregates {SUPPORTS, PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL, INCONCLUSIVE-via-UNKNOWN, INCONCLUSIVE-via-MARGINAL} plus MEASUREMENT_INVALID are demonstrated reachable by pure synthetic probes at DESIGN.",
+  "product_consequence_positive": "SUPPORTS (all 12 cells robust reuse wins with valid gates) RE-ADMITS reuse-based localized repair to the C-PRODUCT-ECON product story WITH honest denominators (shipped unit counter + dual-boundary latency with family-wise CIs + breadth/recurrence scaling + tie-set attribution). No code promotion (runtime lane; no kernel change; carrier byte-identical; harness repair only). B3 real model-call/token economics remains an explicit recorded blocker for any flagship product-economics claim.",
+  "product_consequence_negative": "PERMANENT-DROP-BOUNDED (any robust LOSS cell with valid gates) PERMANENTLY DROPS reuse-based localized repair from the C-PRODUCT-ECON product story on this substrate/carrier/classes/counter, with no further L-sweeps (mandate stop trigger fires; the drop is now licensed because the known removable tax was removed by measurement and the deficit persisted robustly). FALSIFIES-FUNCTIONAL (broken functional/locality soundness) is a bounded mechanism concern: no re-admit, no permanent drop. INCONCLUSIVE (marginal straddle or missing/unknown) parks the thread: no re-admit, no permanent drop. C-DELTA-REPAIR itself stays EXPERIMENTAL bounded to functional/locality soundness unless FALSIFIES-FUNCTIONAL. No promotion in any non-SUPPORTS branch.",
+  "estimated_cost": "CPU-only, stdlib-only, no downloads, no external API spend. No calibration workload. 36 trials x (2 warmups + 5 timed episodes + literal + norepair controls) on an in-process localhost server plus NC trials: ~15-60 minutes wall clock, negligible memory. No credential, model, browser or network dependency. B3 model economics unsatisfiable on this substrate by construction; priced in counters only with the blocker recorded. Bootstrap B_BONF=10000 over n=12 medians is trivial pure computation.",
+  "expected_information_gain": "Terminal and decision-changing in both directions; this packet executes the exact repair-gated re-test the parent verdict and the Global Research Director mandate prescribe, and FORCES the re-admission vs permanent-drop resolution the parent explicitly left pending (parent: no re-admission, no permanent drop). The parent proved the as-implemented deficit (six ratios 1.0235-1.2463, all CI95 above 1.00) but localized it entirely to a removable one-line harness artifact (S-REGISTRY-BUILD 39.2x; equalizing that one phase flips all ratios below 1.00 as a diagnostic, not a measurement). This design removes that tax BY MEASUREMENT (single bulk replace, content-pinned identical), repairs the frozen driver gate defect ((m or 1.0) idiom -> explicit is-None checks with 0.0/0.10 boundary coverage), hardens the decision against near-1.00 fragility (Bonferroni family-wise CIs gate both WIN and DROP; marginal straddles park instead of dropping), fixes all ten parent audit required-fixes RF-1..RF-10 by construction (ceiling honesty, tie-set attribution with net-vs-gross semantics, no metric nulls/renames, correct contamination denominator, gate idiom + preflight coverage, complete freeze set incl. __init__.py, disclosed B-NO-REPAIR vacuity, symmetric CI-gated asymmetry), and adds the two mandate scaling questions (breadth n=1,2,5 measuring both authorized repairs; derived recurrence N*) as ungated diagnostics. SUPPORTS re-admits localized repair to C-PRODUCT-ECON with honest denominators; a robust LOSS makes the drop permanent and stops the thread (bounded stop); a straddle parks it. No existing packet provides the no-tax measurement.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The frozen pure classifier plus gate block were driven with synthetic rows at DESIGN (non-substrate, non-outcome-bearing): all 5 class branches {PRICED-WIN, PRICED-DEFICIT, PRICED-MARGINAL, FUNCTIONAL-FAIL, COST-UNKNOWN} and all 4 aggregates {SUPPORTS, PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL, INCONCLUSIVE} (via UNKNOWN and via MARGINAL paths) produced; strict-inequality boundary tested (1.00 is NOT a win; R=1.00/CI_up=1.00 -> MARGINAL; R=1.00/CI_lo=1.00 -> LOSS); each validity gate driven at pass/fail including 0.0/0.10 boundaries (literal 0.0 passes, 0.11 trips; guard 0.79 trips; contam 5/48 trips; write 2 trips; overbroad 0.10 trips, 0.11 passes; norepair vacuity disclosed). No branch empty; no gate swallows a repair effect (V-DRIFT-COLD constrains only repair-independent cold nominals; V-DRIFT-REUSE only successful-repaired trials; V-REG-EQUIV only content identity).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-8", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-14"]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "All hard prerequisites verified at DESIGN without confirmatory measurement: Python 3.12.15 stdlib; carrier imports and executes with hashes byte-identical to the parent freeze (kernel 3a6caf97, models 338aaf4d, registry 51fb440d, __init__ 3d173722); v2 pin checked (60855 bytes d4871091, all v2 attributes used by the v5 driver verified present: Arm/Mechanism/MechanismRegistry/SpiderKernel/TrajectoryCounters/Counters/MIN_CONFIDENCE/_RUN_DIR plus every invoked v2 callable); DESIGN fresh-path liveness (server/distill/resolve-EXECUTABLE/fetch-200/verify-True/guard-silent/registry-RW, discarded) plus synthetic repair-signal probe (patched True P1/P2/P3) plus BulkArm-vs-upsert byte-equality canary (discrete, untimed) plus instrumented cold-episode smoke (phase keys present, closure finite); warmup non-interference by inspection plus per-trial V-RETAIN; reuse-pin nominals grounded in parent accepted vectors; no external bank/dataset/fixture/model endpoint needed; B3 declared not-applicable by mandate authorization.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-3", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15"]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Denominator fixed in advance to B-COLD/B-COLD-MIN (same-carrier cold re-derivation at L=3/L=2, parent-identical v2.Arm path) pinned to exact nominals by V-DRIFT-COLD (216/228 sums, 96/108 http; cold path repair-independent so the pin cannot mask a repair effect). Treatment (BulkArm single-replace, 1 write of 5 mechs) shares carrier/substrate/seeds/perturbations/target-rotation with baselines and differs in physical resolve/fetch/verify/scaffold counts plus wall-clock, evidenced by per-operation logs plus per-phase timings plus scaffold counts plus per-trial V-EQUIV projections. Shipped 4-field uses preregistered unit weights as a drift-checked deterministic premise (never an empirical win); the empirical burden rests on 12 CI-gated latency cells (inclusive AND NOARG, so the disclosed S-ARG deepcopy-operand asymmetry can only hurt reuse, never manufacture SUPPORTS). Completeness: shipped counter + dual-boundary latency jointly omit no cost dimension used by either comparator. No ceiling/floor: success 1.0 levels are functional gates; deciders are integer ratios plus continuous latency with live dynamic range.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-4", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-8"]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Distinct non-tautological controls per failure mode, inherited live from the parent PASS packet on the identical substrate/carrier and re-verified at DESIGN by fresh-path liveness: PC-BASE-LIVENESS scored in-trial; B-LITERAL-REPLAY must-fail (live); B-NO-REPAIR abstention with DISCLOSED vacuity (gate cannot trip by pinned-v2 construction; only guard-fired diagnostic informative; live must-fail role held by B-LITERAL-REPLAY); NC-NO-PERTURBATION/NC-NOISE must-silent; NC-OVERBROAD-REPAIR live (parent 4/4 every trial; re-fired at DESIGN); specificity pooled over 36 per-trial fresh-silence probes plus 2 NCs; V-REG-EQUIV content pin live (DESIGN byte-equality canary passes); V-DRIFT pins, V-RETAIN canary-verified attainable, V-TIMING parity enforced, V-CLOSURE attribution-only. Failure policy INVALID-not-negative throughout; breadth/recurrence/attribution tracks never flip the priced decision.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-6", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15"]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Treatment uses the shipped carrier the parent packets executed end-to-end (distill_parameterized -> resolve EXECUTABLE -> fetch 200 -> verify True; repair-signal path produces patches; DESIGN re-verified via pinned-module synthetic probe patched True on all three classes plus fresh-path end-to-end re-exercise to guard-silent plus cold-episode smoke with expected phase keys and finite closure; scored-bank repair liveness 36/36 inherited from the parent packet on the byte-identical carrier). BulkArm is live by construction (single replace() of the same mech dicts; DESIGN byte-equality canary proves identical registry content to the scored v2 path). Residual sequencing risk is fail-safe: V-DRIFT-COLD pins cold nominals, V-DRIFT-REUSE pins successful-repaired reuse trials to 17 with class-expected http, V-REG-EQUIV pins registry content, V-RETAIN verifies perturbation survival per trial (any reuse-side error routes to MEASUREMENT_INVALID, never to a spurious priced verdict), per-trial V-EQUIV fields record warmup-vs-timed projections for audit. Success rates at 1.0 are functional gates, not the measured advantage: the empirical dynamic range is the continuous latency surface plus family-wise CIs. No structural barrier to EXECUTABLE.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-4", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15"]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every mutable local code dependency whose identity can change the interpretation is listed and hashed at freeze (5 paths): src/spider/__init__.py, kernel.py, models.py, registry.py (all re-verified byte-identical to the parent freeze at DESIGN, closing audit RF-8) plus the runtime-imported parent v2 module (tracked in git, 60855 bytes, d4871091, V0 hash+size pin refuses on mismatch at runtime). The executable v5 driver has no file identity until EXECUTE extracts it, so path-listing is impossible; it is instead bound stronger by content: embedded verbatim in prereg.md section-12 between V5-DRIVER-BEGIN/END markers and pinned by CANONICAL-RUNNER-V5-SHA256 with a V1 runtime refuse-to-run extraction check (algorithm in prereg section-10), hence covered by the frozen prereg.md hash as well. Driver import closure is stdlib-only plus the pinned v2 module (verified at DESIGN); no other mutable imports exist. No external task bank/dataset/fixture is read (substrate, perturbation bank, fresh-silence probes all built in-runner from fresh pinned SEED5-derived seeds). List complete.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-10", "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-3"]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": ["src/spider/__init__.py", "src/spider/kernel.py", "src/spider/models.py", "src/spider/registry.py", "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py"]
 }
