@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38666634300",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently re-derived the frozen cascade from the FROZEN-RUNNER source: invalid_reasons (fit-pool bars, gold liveness, gold-reincluded UP-None any axis, PC-AXIS-G1-ALTLEX, 8 continuity tripwires) contains zero reference to the blind leg, so blind_g3_met is structurally independent of every invalidity conjunct and no guard subsumes a later branch. Status precedence is validity-before-science (invalid -> decision=null) and no invalidity branch is forced: every EXPECTED_* constant was verified against parent-published raw_evidence/run_output.json (gates == gates_reincl == {G3:true, G2:false, G1:true, ALT:true}; reincluded_gids == EXPECTED_FLAGGED_TEST on all four axes; test_n_reincl [40,20]/[40,20]/[60,20]/[60,20]), and the gold/gatefree/retrieval analysis code is byte-identical to the audited parent runner, so tripwires are expected-pass drift detectors rather than dead branches. Arithmetic re-checked statically: SURVIVES-arith (FA 1/20=0.05<=0.10, COV 37/40=0.925>=0.50, UP_excl 19/22=0.8636>=0.85; executed 38 + abstained 22 = 60 rows) is attainable and internally consistent; FAILS-arith (FA 0.25) and INERT (cov 0.0 / UP null -> arm_gate False) both reachable. Blind test gates are computed unconditionally in arm_blind_oos regardless of fit_feasible, and arm_gate(None)=False, so BLIND_FAILS is reachable even under SELECT infeasibility (which is correctly NOT an invalidity trigger). Live probe: --mechanics-only ran twice, rc=0, byte-identical stdout, test_not_scored=true, confirming tau selection and gate plumbing execute.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#13 (FROZEN-RUNNER main()/invalid_reasons/arm_gate/beam of blind test_gate construction)",
+        "research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json#gates, #gates_reincl, #reincluded_gids, #test_n_reincl",
+        "PROBE: python3 runner --mechanics-only x2 rc=0 byte-identical stdout sha256=43495829d2e0f2219d0d6813ba240e62b37052d033578bf8ae6ab1c87db8f3f9, test_not_scored=true, empty stderr",
+        "PROBE: static SURVIVES/FAILS/INERT gate arithmetic on 40app+20oos reincluded G3 set"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Re-probed every hard prerequisite without touching TEST outcomes. Python 3.12.15 present; numpy/sklearn/sentence_transformers/requests/torch all raise ModuleNotFoundError (stdlib-only claim holds); research/harness/goal_generator.py imports cleanly and exposes INTENTS(20)/PARAPHRASES(20)/NO_APPLICABLE_TEMPLATES(20)/OOD_PARAPHRASES(8) and is stdlib-only. The extracted FROZEN-RUNNER block hashes to 296fcf26e2820b75b0b3bc557946fd7e778a1c4986810f9f428f9e37ba38615a == CANONICAL-RUNNER-SHA256, and its --mechanics-only path executed successfully, proving all runtime-read bank blocks (GOAL/OOS/LEXICON-G1, G2, G3, LEXICON-G1-ALT, LEXICON-G2-HELDOUT, PRIOR-PARENT-BANK-TEXTS) exist and parse in their exact files, and that the fit pool builds to N_TRAIN=102 / SELECT_APP=34 / SELECT_OOS=60 with train/select and (train|select)/test-union disjointness all true. Retrieval leg re-fits to tau=0.4156, mu=0.0005, mu_active=true (exact parent reproduction). No network, model, browser, dataset download, or credential is named or needed; no clause-refit or new-surface code path exists (grep for refit/tune/grid returns only a comment). Output directory creation at EXECUTE is ordinary staging, not a measurement-capable prerequisite.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#10",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#11",
+        "PROBE: python3 --version; import-absence probes; goal_generator import probe",
+        "PROBE: FROZEN-RUNNER block sha256 == 296fcf26e2820b75b0b3bc557946fd7e778a1c4986810f9f428f9e37ba38615a",
+        "PROBE: mechanics output fit_pool {102,34,60, disjoint true, bars_met true} and retrieval_select {tau 0.4156, mu 0.0005, mu_active true}"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and baselines are operationally distinct implementations, not relabels. Function-level diff of the FROZEN-RUNNER against the audited parent runner: 28 of 32 common function bodies byte-identical; the four differing (arm_gate docstring only; arm_b_oos differing only by the inserted BLIND comment block, body identical after comment stripping; build_axes and main differing only by the pre-declared XSURF-leg removal and blind/tripwire additions); five new functions are the blind block. Blind vs retrieval separation confirmed empirically on the pooled FIT-SELECT calibration rows: 47/94 prediction disagreement with disjoint score scales (blind 0.0-0.75 over 22 candidates; retrieval 0.0-0.9196), plus five documented mechanism differences (unigram vs uni+bigram, no-IDF vs sublinear-tf*IDF, 1-NN vs centroid, Jaccard vs cosine, single-tau vs (tau,mu)) while deliberately sharing pooled rows (mechanism-given-data ablation). Blind reads no LEXICON-* (regex over the blind block returns only comment mentions; signatures are (text) / (tok_sets_targets, text) / (scored, tau) with no lex parameter), so it cannot collapse onto the deterministic arms. No ceiling/floor identity: gatefree (execute-all) headroom verified from parent-published evidence on both supersets (FA 0.2778-0.50 vs gold 0.0-0.10), so all arms are not forced identical; ancestor resub/embedding arms are identity-only and never decision arms. The decision rule contains no cost metric, so no cost dimension used by a comparator is omitted.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#3",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.5",
+        "research/experiments/EXP-GRAPH-38530149021/raw_evidence/runner_tframe_sensitivity.py (diff base)",
+        "research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json#test_metrics, #test_reincl_metrics (gatefree headroom)",
+        "PROBE: 47/94 blind-vs-retrieval SELECT disagreement, disjoint score scales",
+        "PROBE: 28/32 common functions byte-identical; arm_b_oos body identical ignoring comments"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive control can fire and can fail under the exact scoring implementation: PC-AXIS-G1-ALTLEX is evaluated on gold-reincluded ALTLEX metrics computed by byte-identical parent code, parent-published state is gate-met (FA 0.05, cov 0.9333, UP_excl 1.0), and failure is runner-enforced MEASUREMENT_INVALID rather than a science negative, so it is neither tautological nor impossible. Null controls can remain null under the same runner: NC-EXEC-ALL (gatefree) is a strict superset execution of gold (is_executed byte-identical, gatefree = mech!=None), so its FA is >= gold FA by construction with a demonstrated material parent gap of 0.2222-0.45 on every axis of both supersets; NC-ABSTAIN-ALL is computed on screened AND reincluded sets and pins coverage to the 0.0 floor while leaving UP informative (OOS share among resolved, not 1.0 by construction); CTRL-RANDOM-GATE is volume-matched (parent FA 0.65-0.75); shuffled/random-role are computed on both supersets. CTRL-BLIND-PERMUTED is correctly scoped: I reproduced its label-invariance empirically on SELECT (permuted FA/COV/UP/executed/abstained exactly equal real blind at the same tau=0.2727 while the predicted labels are shuffled), confirming it can only guard selective_acc and can never deaden or manufacture a gate conjunct; its decision-relevant selective reading is emitted for SELECT/screened/reincluded by the same run. Blind INERT is a pre-declared informative outcome of the treatment, not an insensitive control.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.9",
+        "research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json#controls, #test_metrics, #test_reincl_metrics",
+        "PROBE: permuted-vs-real blind SELECT partition equality (FA/COV/UP/executed equal) at frozen tau"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment (BLIND-JAC-1NN) is live and executable before any expensive arm runs, by actual pre-freeze execution rather than assertion: --mechanics-only fit blind 1-NN on the pooled FIT-TRAIN (102 exemplars), emitted a feasible SELECT-fitted tau=0.2727 with SELECT gate FA 0.0833 / COV 1.0 / UP_excl 1.0 (feasible=true), and the blind CAL pool was non-degenerate at 199 executed / 74 abstained with coverage 1.0 -- the treatment both executes and abstains, so it is not dead code. The naive degenerate blind operationalization (empty-lexicon T-FRAME) was explicitly rejected in the design, so the treatment is not structurally forced to coverage 0. The gold liveness predicate on the decided split re-evaluates True from parent-published reincluded counts (executed 42 of 60, executed_app 40, abstained_resolved 7), while the execute-all and abstain-all analogues evaluate False. Blind TEST degeneracy is pre-handled as VALID BLIND_INERT collapse (arm_gate returns false on UP-null), so no liveness cliff can manufacture invalidity or block the treatment from producing a decision. Note: this is a Graph/C-SEMANTIC-RESOLVE experiment, so the Product-claim mandatory-PASS rule does not apply, but treatment_liveness is PASS on the merits anyway.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json#test_reincl_metrics.AXIS-G3-NEW.tframeplus",
+        "PROBE: mechanics blind_select {feasible true, tau 0.2727} and blind_cal_probe {executed 199, abstained 74, coverage 1.0}"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "The runner's complete local read set is exactly the four files listed in spec.freeze_artifacts: three parent prereg.md files (G3 banks/lexicon, G1/G2 banks/lexicons, prior-bank texts) read via read_text, plus research/harness/goal_generator.py imported after a sys.path.insert of research/harness (stdlib-only, no further local imports; the two other goal_generator.py copies in the repo are shadowed by the path-0 insert and unused). I recomputed sha256 of all four: 5a64e90d... / dc90bf71... / 5a9cc119... / cb5218de..., equal to prereg.md#12 DESIGN shas AND to research/experiments/EXP-GRAPH-38530149021/freeze.json#artifact_hashes (files unchanged). Everything else that could change interpretation is embedded and hash-bound rather than read at runtime: the runner block itself (CANONICAL-RUNNER-SHA256 re-verified at 296fcf26...), all constants, EXPECTED_FLAGGED_TEST / EXPECTED_GOLD_* tripwire values (copied from parent-published evidence, not read), the gate rule and the screen. Remote/stateful inputs: none. The documented SPIDER_PREREG env override is never referenced by the frozen runner, so it introduces no mutable path.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38666634300/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#12",
+        "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.8",
+        "research/experiments/EXP-GRAPH-38530149021/freeze.json#artifact_hashes",
+        "PROBE: sha256sum of all four freeze_artifacts matches prereg #12 and parent freeze.json",
+        "PROBE: FROZEN-RUNNER read-set grep -- only G3SRC/G1G2SRC/GRANDPARENT prereg.md + goal_generator import"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Provenance citation label: spec/prereg point at 'run_output.json#reincluded_test_gids' (prereg #4, runner comment cites result.json#reincluded_test_gids), but the parent packet's actual key is raw_evidence/run_output.json#reincluded_gids and EXP-GRAPH-38530149021/result.json has no such field. The values are correct: I compared EXPECTED_FLAGGED_TEST against parent run_output.json#reincluded_gids and all four axes match exactly, so the tripwire constants are right -- only the key/path label is wrong. Fix in a future DESIGN if the packet is regenerated.",
+    "Estimated-cost row arithmetic: spec.estimated_cost says '~14 reincluded TEST rows', but flagged TEST rows added to the scored supersets total 16 axis-rows (G3 +4, G1 +6, ALT +6, G2 +0) -- 14 equals the sum of parent flagged totals across two unique axes (G3 5 + G1 9). Immaterial: cost is seconds of CPU over ~537 bound rows and no decision depends on it.",
+    "Forbidden-fallback class (e): clause refit, blind lexicon read and mu==0 are enforced structurally (no code path; mus filtered to >0; no lex parameter in the blind block) rather than by a dedicated runtime invalid_reasons entry, so enforcement rests on AUDIT diff rather than the runner itself. TEST-touch/resubstitution ARE runtime-enforced via the exact text-sha disjointness bar. This is adequate but weaker than a runtime assertion for those three items.",
+    "NC-EXEC-ALL, NC-ABSTAIN-ALL and the shuffled/random/random-gate controls are computed and emitted by the scoring runner but are not runner-enforced as invalidity conditions (only PC-AXIS-G1-ALTLEX and the continuity tripwires are). Their expected behavior is documented from parent-published values and their code paths are byte-identical to the audited parent, so this is a reporting-vs-enforcement choice, not an insensitivity.",
+    "On FIT-SELECT, real blind selective_acc (0.0) equals CTRL-BLIND-PERMUTED selective_acc (0.0), so on the calibration split the permuted-selection guard has no discriminating power there; the decision-relevant comparison is emitted on screened/reincluded TEST by the same run, and the pre-declared grading (gate-met with selective<0.80 = abstention-viable but resolution-deficient, no ship) keeps the resolution reading decision-changing rather than decorative.",
+    "The G3 SURVIVES arithmetic has little slack (UP_excl 0.8636 vs 0.85; FA 0.05 vs the FA-0.10 zero-slack band already disclosed in prereg #8.9(v)). Attainable and arithmetically consistent, but a near-threshold pass should carry the disclosed fragility caveat in the AUDIT reading."
+  ],
+  "rationale": "Independent pre-freeze review; DESIGN producer was opencode/muse-spark-1.3-contributor-free and this reviewer is opencode/mimo-v2.6-flash-free, satisfying the independent-model rule. I attacked each declared freeze_eligibility PASS rather than accepting it, using only non-outcome-bearing probes: extraction and sha256 of the FROZEN-RUNNER (matches CANONICAL-RUNNER-SHA256), two --mechanics-only canary runs (rc=0, byte-identical, test_not_scored=true), prerequisite/import probes, sha256 of all four freeze_artifacts (match prereg #12 and parent freeze.json), a function-level diff against the audited parent runner (gold/retrieval/gatefree analysis byte-identical; deltas exactly the pre-declared blind additions and XSURF removal), a calibration-only blind-vs-retrieval disagreement probe (47/94 on FIT-SELECT), and a permuted-null partition probe. I did not run the scored runner, did not compute any TEST gate/fork/decision of this experiment, and did not touch the frozen threshold; parent TEST values quoted as tripwire baselines come from accepted parent raw evidence. All six checks pass: both science branches and the invalid branch are reachable with no subsumed guard and verified-against-parent expected constants; every named prerequisite exists now and executes; treatment and baselines are demonstrably different statistics with gatefree headroom and no omitted cost dimension; the positive control can fire and the nulls can stay null under the same scorer; the blind treatment is live by execution (tau emitted, non-degenerate select and CAL pools); and the runner's entire mutable local read set is exactly the four hash-verified freeze_artifacts. The six remaining nits are documentation/enforcement-strength issues that do not make the design incapable of answering the Director's blind-viability question, so they are recorded as nonblocking.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38666634300/request.json#director_mandate",
+    "research/experiments/EXP-GRAPH-38666634300/spec.json",
+    "research/experiments/EXP-GRAPH-38666634300/prereg.md",
+    "research/experiments/EXP-GRAPH-38666634300/model_design.json (DESIGN producer identity)",
+    "research/experiments/EXP-GRAPH-38530149021/handoff.json (sha d275cce1da637817f6f5502ff52bc8d9102766ac6a76ecf8068bf581a2714b1f)",
+    "research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json",
+    "research/experiments/EXP-GRAPH-38530149021/freeze.json#artifact_hashes",
+    "codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE (HYPOTHESIS, parent decision BOUND_ROBUST_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS)",
+    "PROBE: FROZEN-RUNNER sha256=296fcf26e2820b75b0b3bc557946fd7e778a1c4986810f9f428f9e37ba38615a; mechanics-only x2 rc=0 byte-identical; fit_pool 102/34/60 bars_met; retrieval tau=0.4156 mu=0.0005; blind tau=0.2727 feasible; blind_cal 199/74; flagged_test_match_expected true on all four axes",
+    "PROBE: sha256 of research/experiments/EXP-GRAPH-38180711589/prereg.md, EXP-GRAPH-38175554380/prereg.md, EXP-GRAPH-38291080992/prereg.md, research/harness/goal_generator.py",
+    "PROBE: 47/94 blind-vs-retrieval FIT-SELECT disagreement; permuted-blind partition equality; 28/32 common functions byte-identical to parent runner"
+  ]
+}
