@@ -1,50 +1,76 @@
 {
   "experiment_id": "EXP-GRAPH-38666634300",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "Does the gold-lexicon-conditional bound survive with a genuinely blind resolver (no surface lexicon at all), separating the measured foreign-lexicon floor-collapse from full-blind viability on the frozen banks?",
+  "hypothesis": "H1 (full-blind viability): BLIND-JAC-1NN — word-unigram Jaccard 1-nearest TRAIN exemplar resolution over the pooled FIT-TRAIN pool with a single SELECT-fitted Jaccard threshold tau as its calibrated abstention gate, reading no LEXICON-* block at any stage — meets the frozen G3 gate (pooled_false_accept<=0.10 AND coverage>=0.50 AND unknown_precision_exclusive>=0.85) on AXIS-G3-NEW reincluded TEST. Expectation from DESIGN CAL probes (NOT results): blind SELECT gate feasible (tau=0.2727, FA 0.0833, COV 1.0, UP 1.0) with SELECT selective_acc=0.0 (pooled-dilution continuity with retrieval); TEST genuinely open.",
+  "falsifier": "H1 SUPPORTED (BLIND_SURVIVES) iff blind G3 reincluded gate-met on the exclusive denominator. H1 retired for this mechanism class (BLIND_FAILS) iff blind G3 reincluded gate-false, including the pre-handled VALID collapse BLIND_INERT (zero executes or zero resolved abstentions -> UP-null -> gate-false via the coverage/None bars, never invalidity). Gating any decision on unknown_precision_inclusive is pre-declared invalid (parent RQF-02 continuity). Blind survival is graded by selective_acc and CTRL-BLIND-PERMUTED: gate-met with selective_acc<0.80 reads as abstention-viable but resolution-deficient (gate redesign, no ship), not as shippable resolution. Any clause refit or new surface family is out of scope per the mandate stop trigger (BLOCKED).",
+  "baselines": [
+    "gold-T-FRAME+: frozen deterministic B-LEX-STRONG + C1/C3/C4/C5/C6 + C7-CREATE-OBLIQUE (zero tunable parameters; analysis functions byte-identical to the audited EXP-GRAPH-38530149021 runner apart from EXP_ID/SEED constants and the pre-declared blind-leg additions). Scored on screened AND reincluded TEST; screened leg is a disclosed validity reproduction, NEW evidence is the blind leg. Never the cost denominator of blind.",
+    "tframe_frozen: T-FRAME+ WITHOUT C7-CREATE-OBLIQUE (diagnostic isolation; parent continuity: tframe_frozen G3 FA 0.20 would fail where C7 carries 0.10).",
+    "b_incumbent_kernel: B-LEX-STRONG + pre-existing lexical S<=0 gate (shipped logic, no structural clauses).",
+    "gatefree: execute-all resolved rows (execute-all ceiling baseline; proves FA headroom on screened and reincluded TEST sets).",
+    "B-RETRIEVAL-OOS: honest comparator, unchanged construction. Stdlib TF-IDF (uni+bigram) nearest-class-centroid retrieval with centroids+IDF fit on pooled FIT-TRAIN (N_TRAIN=102), abstention gate (tau,mu) selected on disjoint pooled FIT-SELECT (SELECT_APP=34, SELECT_OOS=60) under hard mu>0, frozen gate applied unchanged to screened AND reincluded tests. Resubstitution and mu==0 fallbacks FORBIDDEN (BLOCKED). Expected reproduction: tau=0.4156, mu=0.0005, fork TFRAME_DOMINATES_G3 on both supersets (continuity tripwires, not new evidence).",
+    "B-RETRIEVAL-TFIDF-resub: ancestor identity only (n_fit=39 resubstitution, tau=0.4278, mu=0.0). NOT re-run; quoted historical value only.",
+    "B-EMBED-COSINE: original embedding-cosine Arm B, NOT runnable (numpy absent, DESIGN-verified); ancestor identity only, never a decision arm.",
+    "BLIND-JAC-1NN (treatment variant, NOT a baseline): genuinely blind resolver — word-unigram Jaccard 1-NN over pooled FIT-TRAIN exemplars, single-tau abstention gate fitted on FIT-SELECT. No LEXICON-* read at any stage (no lex parameter in blind scope; verified by diff). Mechanism distance from B-RETRIEVAL-OOS (identifiability): unigram-only vs uni+bigram features; no IDF/term weighting vs sublinear-tf*IDF; 1-NN exemplar vs per-class L2 centroid; Jaccard vs cosine; single-tau vs (tau,mu) margin gate. Shared by design: the SAME pooled rows (mechanism-given-data ablation). DESIGN CAL probe: 47/94 SELECT prediction disagreement vs retrieval."
+  ],
+  "positive_control": "PC-AXIS-G1-ALTLEX: gold T-FRAME+ on AXIS-G1-ALTLEX REINCLUDED TEST must remain gate-met (parent audited: FA 0.05, cov 0.9333, UP 1.0, sel 1.0). Failure is runner-enforced MEASUREMENT_INVALID (RQF-06 continuity), never a science negative.",
+  "null_control": "NC-EXEC-ALL (gatefree): must pool materially more false accepts than gold Arm A on screened and reincluded sets (parent TEST 0.2778-0.50 vs 0.0-0.10; DESIGN calibration 0.30-0.60 vs 0.0). NC-ABSTAIN-ALL: EXECUTED on screened AND reincluded sets (coverage 0.0 floor, UP informative over all resolved abstentions). CTRL-SHUFFLED-SELECTION / CTRL-RANDOM-ROLE near chance; CTRL-RANDOM-GATE volume-matched (parent FA 0.65-0.75). CTRL-BLIND-PERMUTED (TRAIN targets shuffled by Random(SEED+1), same tau): scoped to the SELECTION reading only — the execute/abstain partition is label-invariant so permuted FA/COV/UP equal real blind by construction; it guards selective_acc (expect ~chance), never the gate (pre-declared; DESIGN self-attack finding).",
+  "measurement_validity": [
+    "stdlib-only execution (Python 3.12): no numpy/sklearn/sentence_transformers/network/model/browser/credential (DESIGN-verified absent)",
+    "SAME frozen surfaces, banks, splits, screen and SAME zero-parameter clause set as the audited parent (gold analysis functions byte-identical apart from EXP_ID/SEED and pre-declared blind-leg additions); no new surface authored per mandate stop rule; any clause refit observed at any stage converts scope to BLOCKED",
+    "blindness contract: BLIND-JAC-1NN functions accept only (text,target) exemplar pairs; no LEXICON-* object is constructed, read, or in scope on the blind path (fit, select, or test); AUDIT diffs the blind block against this contract",
+    "G3/G1/G2 banks+lexicons+priors reused BY REFERENCE from frozen prereg blocks (DESIGN-verified sha equal to parent freeze.json artifact_hashes); all bound by freeze_artifacts hashes",
+    "disjoint pooled calibration/test splits (splitmods 4/4/6/6; FIT-TRAIN 102 / FIT-SELECT 34+60 by code identity); reincluded TEST = screened TEST plus parent-published flagged TEST gids (G3 +4 app, G1 +4 app/+2 OOS per axis, G2 +0); TRAIN cap SELECT = empty, (TRAIN union SELECT) cap (screened TEST union reincluded TEST) = empty at exact text-sha, runtime-enforced; no TEST row read by gold clauses, the screen, or either fit/select leg",
+    "retrieval IDF+centroids from FIT-TRAIN app rows only; gate (tau,mu) on FIT-SELECT only with hard mu>0; blind 1-NN exemplars from FIT-TRAIN app rows only; single tau on FIT-SELECT only; resubstitution/mu==0/test-touch/clause-refit fallbacks FORBIDDEN -> BLOCKED or MEASUREMENT_INVALID, never silent reuse",
+    "gold liveness on the exact decided split (AXIS-G3-NEW REINCLUDED TEST): (0<executed_total<n_total) AND (executed_app>=1) AND (abstained_resolved>=1); proven live from parent-published reincluded counts (42/60, 40 app, 7 abstR). Blind degeneracy (zero executes or zero resolved abstentions) is pre-declared VALID informative collapse (BLIND_INERT -> gate-false via coverage/None bars), never invalidity",
+    "contamination screen frozen (token Jaccard>=0.60 OR trigram Jaccard>=0.75 vs frozen priors+banks); reincluded TEST gids tripwired against parent-published lists; G2 reinclusion empty (margin analytic-invariant, runtime-verified)",
+    "two byte-identical --mechanics-only canaries required before the scored run; canaries never score TEST gates/forks/decisions (test_not_scored=true, DESIGN-verified)",
+    "runner identity bound by prereg hash + runtime runner_self_sha (CANONICAL-RUNNER-SHA256 recorded at DESIGN end after the execution gate); PC-AXIS-G1-ALTLEX gold-reincluded failure is runner-enforced invalidity",
+    "exclusive unknown_precision denominator is the sole gate input; inclusive is sensitivity-only (parent RQF-02 guard upheld); blind exclusive==inclusive by construction (every scored row decision-conditional; both reported)"
+  ],
+  "decision_rule": "MEASUREMENT_INVALID (decision=null) if ANY of: (a) gold liveness fails on AXIS-G3-NEW REINCLUDED TEST; (b) gold-reincluded unknown_precision_exclusive undefined on any axis; (c) PC-AXIS-G1-ALTLEX gold-reincluded gate false (runner-enforced); (d) FIT-pool bars fail (N_TRAIN!=102 OR SELECT_APP!=34 OR SELECT_OOS!=60 OR TRAIN cap SELECT != empty OR (TRAIN union SELECT) cap (screened TEST union reincluded TEST) != empty); (e) any forbidden fallback (resubstitution/mu==0/screened-or-reincluded test-touch/clause refit/blind lexicon read); (f) continuity tripwires fail: gold-screened gate vector != {G3 met, G1 met, ALTLEX met, G2 false} OR G2 screened FA/COV bars not passing OR screened fork != TFRAME_DOMINATES_G3 OR screened retrieval meets any TEST gate OR gold-reincluded vector != audited parent vector OR flagged TEST gid sets != parent-published OR reincluded fork != TFRAME_DOMINATES_G3 OR reincluded retrieval meets any TEST gate. Blind degeneracy (BLIND_INERT) is pre-declared VALID collapse, never invalidity; blind SELECT-infeasibility is informative, never invalid (frozen lexicographic rule always emits a tau). Else: BLIND_SURVIVES iff blind AXIS-G3-NEW reincluded gate-met (FA/COV/UP_excl), else BLIND_FAILS. Survival graded by selective_acc + CTRL-BLIND-PERMUTED in reason/product text (no extra label).",
+  "product_consequence_positive": "BLIND_SURVIVES: lexicon-free viability demonstrated on the novel G3 surface — re-opens the embedding-vs-deterministic fork against the DECIDE_REQUIRE_RETRIEVAL_B bound and forces re-examination of the shipped abstention boundary (a lexicon-free alternative exists). Graph continues blind-resolver architecture work (surface-local vs pooled memory, selective_acc hardening). Grade: if blind selective_acc>=0.80, full viability signal; if <0.80 (DESIGN-expected: SELECT sel 0.0 both blind and retrieval), abstention-viable but resolution-deficient -> gate redesign required (selective_acc into the gate), no ship. This packet itself promotes nothing.",
+  "product_consequence_negative": "BLIND_FAILS: full-blind ambitions retired on the frozen banks — two lexicon-free memory statistics (TF-IDF centroid AND Jaccard 1-NN) fail all TEST gates while the deterministic bound holds gold-conditionally and collapses under foreign lexicons (parent XSURF, quoted not re-run). Park the thread at PRIMARY+ALTLEX gold-lexicon-conditional bound; keep the conservative shipped abstention boundary with the retrieval-B requirement vacated in the gold-conditional sense; no further blind work without a new mechanism class (structural-heuristic blind reserved as explicit follow-up, not spent here). INVALID/BLOCKED parks or retires the family per the mandate stop rule. This packet promotes nothing itself.",
+  "estimated_cost": "No model calls, no network, no browser, no third-party packages, no new bank authorship. One deterministic stdlib in-process run over ~500 bound rows + 14 reincluded TEST rows + pooled retrieval fit (199 cal rows) + nested gate searches + blind 1-NN scoring + permuted null; seconds of CPU; near-zero marginal cost.",
+  "expected_information_gain": "One cheap batch decides the Director's blind-viability question. BLIND_SURVIVES re-opens the embedding-vs-deterministic fork and changes the shipped abstention boundary discussion (graded by selection quality). BLIND_FAILS retires full-blind ambitions and parks the thread at PRIMARY+ALTLEX with a hardened ceiling (two blind statistics fail + foreign-lexicon collapse). A second INVALID/BLOCKED retires or parks the family per the stop rule. Screened/gold/retrieval reproduction legs are disclosed non-evidence (validity tripwires); NEW evidence is the blind gate vector, the blind fork, and the permuted-selection guard. Every branch changes the claim or product state; no branch rewards PASS volume.",
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "BLIND_SURVIVES, BLIND_FAILS and null-invalid synthetically enumerated with no subsumed guard (blind gate-met boolean is independent of the continuity/invalidity conjuncts). Attainability: SURVIVES-arith (exec 37app+1oos, abstain 3app+19oos -> FA 0.05 COV 0.925 UP 0.864) True; FAILS-arith (FA 0.25) False; INERT (cov 0.0, UP null) False via pre-handled bars. Blind SELECT feasible by execution (tau=0.2727) so tau exists; TEST genuinely open.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#7", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.3", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.4"]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Python 3.12.15; runner imports stdlib-only plus one repo-local goal_generator import inside load_banks; numpy/sklearn/sentence_transformers verified absent; goal_generator exposes INTENTS(20)/PARAPHRASES(20)/NO_APPLICABLE_TEMPLATES(20)/OOD_PARAPHRASES(8); every runtime-read block verified present (G1/G2 lexicons, PRIOR-PARENT-BANK-TEXTS, G3 blocks); fit-pool construction identical to parent by code identity (102/34/60 probed by execution); no network/model/browser/credential; clause refit has no code path.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#8.7", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.1"]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Gold deterministic (lexicon+clauses), tframe_frozen (minus C7), incumbent lexical gate, gatefree execute-all, B-RETRIEVAL-OOS (TF-IDF centroid, tau+mu gate) and BLIND-JAC-1NN (unigram Jaccard 1-NN, single-tau gate, no lexicon in scope) are operationally distinct implementations with disjoint fitted statistics (clause state / centroid dicts+IDF / exemplar list) sharing only the frozen pooled rows by ablation design; blind reads no LEXICON-* at any stage. DESIGN CAL probe: 47/94 SELECT prediction disagreement blind-vs-retrieval, disjoint score scales. Ancestor resub/embedding arms are identities only, never decision arms.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#2", "research/experiments/EXP-GRAPH-38666634300/prereg.md#3", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.5"]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control live: NC-EXEC-ALL FA headroom (parent TEST gap 0.2222-0.50; DESIGN calibration 0.30-0.60 vs gold 0.0) re-reported on reincluded+screened; NC-ABSTAIN-ALL executed both supersets (coverage 0.0 floor, UP informative); shuffled/random-role near chance; random-gate parent FA 0.65-0.75; PC-AXIS-G1-ALTLEX runner-enforced as invalidity on the decided (reincluded) set. CTRL-BLIND-PERMUTED correctly scoped to the selection reading (label-invariance of the abstention partition proven: permuted FA/COV/UP equal real blind by construction), so it cannot manufacture an insensitive gate conjunct. Blind INERT is a live informative outcome, not a dead control.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#6", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.6", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.9"]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Gold liveness predicate True on parent-published G3-reincluded counts (42/60 executed, 40 app, 7 resolved abstentions) with execute-all/abstain-all analogues False. Blind treatment live by execution: SELECT-fitted tau=0.2727 feasible (FA 0.0833 COV 1.0 UP 1.0); blind CAL-pool executes 199/abstains 74 (non-degenerate). Blind TEST degeneracy pre-handled as VALID BLIND_INERT collapse, so no liveness cliff can manufacture invalidity. Empty-lexicon T-FRAME (degenerate coverage-0) explicitly rejected as the blind operationalization.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#8.1", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.4"]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Exactly the four mutable local interpretation dependencies in freeze_artifacts; DESIGN sha256 of all four verified equal to parent freeze.json artifact_hashes (files unchanged). Runner, banks, lexicons, constants and blind gate rule otherwise bound via this prereg's hash plus runtime runner_self_sha. No harness or other local code in scope.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-38666634300/prereg.md#12", "research/experiments/EXP-GRAPH-38666634300/prereg.md#8.8"]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md",
+    "research/harness/goal_generator.py"
+  ]
 }
