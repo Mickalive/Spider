@@ -130,10 +130,12 @@ reuse−coldL3; excess E = median episode gap. Closure gate V-CLOSURE: median
 |S-MISC|/episode ≤ 0.20 per class. Component X ATTRIBUTED iff its median delta
 ≥ 0.50×E on ≥ 2/3 classes with closure holding; E ≤ 0 → ATTRIBUTION-MOOT;
 closure failure → ATTRIBUTION-INVALID; else UNATTRIBUTED (honest unknown carried
-forward). DESIGN smoke (single discarded N=1 trial) confirmed the instrument
-executes and the registry-IO vs guard-compute asymmetry is measurable
-(5-upsert+scan ≈1.6ms vs token probe ≈9µs) — instrument liveness only, no
-outcome recorded.
+forward). DESIGN liveness (fresh path only, discarded, booleans recorded and no
+timings kept): server ready, distill live, resolve EXECUTABLE, fetch 200,
+verify True, guard silent on unperturbed body, registry read/write executes —
+no perturbation, no repair, no treatment-vs-baseline comparison, no outcome
+recorded. Phase-timer/closure liveness on scored episodes is EXECUTE's to
+demonstrate under V-CLOSURE, not DESIGN's to pre-measure.
 
 ## 6. Controls and validity gates
 
@@ -251,13 +253,14 @@ priced decision.
   phase timings + scaffold counts (V14); S-ARG operand asymmetric by
   construction (full mech-dict vs `{}`), disclosed and isolated via the NOARG
   sensitivity rather than mislabeled symmetric.
-- Insensitive controls: overbroad instrument live in parent (4/4 every trial)
-  and path re-verified in DESIGN smoke; must-fail/must-silent controls retained
+- Insensitive controls: overbroad instrument live in parent (4/4 every trial
+  on the byte-identical carrier; DESIGN verified the function present and
+  callable, live-fire basis inherited, not re-fired); must-fail/must-silent controls retained
   with INVALID (not negative) failure policy; specificity pooled over 36
   per-trial fresh-silence probes + 2 NCs; sensitivity over the 36-episode bank
   plus 12 held-out unseen perturbations (independent information, not a relabel).
 - Missing prerequisites: none — imports, pins, hashes, timer, bank
-  enumerability, all 19 used v2 APIs (static name check), and cold-nominal
+  enumerability, all 31 used v2-module attributes (static name check), and cold-nominal
   arithmetic all verified at DESIGN (§10 PASS, §15).
 - Unbound mutable artifacts: exactly 4 tracked files, hashes verified,
   listed in spec.freeze_artifacts (3 carrier + the runtime-imported v2 runner,
@@ -1279,26 +1282,40 @@ No scored trial and no confirmatory measurement was run. Probes: (a) v2 pin
 re-verified (60855 bytes, d4871091…4962bc608) and carrier hashes byte-identical
 to the parent freeze (kernel 3a6caf97…, models 338aaf4d…, registry
 51fb440d…); Python 3.12.15 stdlib. (b) Pure synthetic reachability probe
-(re-run at DESIGN on the edited classifier: cost_verdict_v4 + aggregate_v4
+(re-run at DESIGN on the frozen classifier: cost_verdict_v4 + aggregate_v4
 with FUNCTIONAL-FAIL-first order at both levels): all 4 class branches and
-all 4 aggregates reachable (all True); repair-signal live on all classes.
-No substrate import, no outcome. (c) Discarded liveness smoke: server_ready true,
-distill_live true, task_read_verified true, contamination instrument live,
-out-of-support degenerate, NCs silent (false/false), timer 1ns, phase keys
-present, closure finite. (d) Legacy: `codex/legacy_artifact_index.json` scan
-yields 0 hits for 'scaffolding' → NO_MATCH for attribution/pricing (absence
-of a hit is not proof of absence from the full archive); DISTINCT_EXTENSION
+all 4 aggregates reachable (all True); strict-inequality boundary verified
+(1.00 is NOT a win). No substrate, no perturbation, no outcome.
+Repair-signal liveness verified separately via the pinned module's own
+synthetic probe (patched True on P1/P2/P3 synthetic inputs, non-bank
+seed 7, discarded). (c) Fresh-path liveness (unperturbed, discarded,
+booleans only, no timings recorded): server_ready true, distill_live true,
+resolve EXECUTABLE, fetch 200, verify True, guard silent on the unperturbed
+body, registry read/write executes, timer 1ns. No perturbation, no repair,
+no scored seeds, no treatment-vs-baseline comparison. Contamination,
+out-of-support-degenerate, and phase-key/closure liveness basis is inherited
+from the parent PASS packet on the byte-identical carrier, not re-fired at
+DESIGN. (d) Legacy: compact `codex/legacy_artifact_index.json` scan yields
+0 hits for 'scaffolding'; full-archive grep of the mounted
+`.spider-runtime/pre2/SPIDER_CODEX_ULTIME.md` yields 30 hits, all inspected
+and all unrelated senses (repo/workflow scaffolding, retrieval scaffolding,
+accessibility scaffolding, non-stimulus scaffolding deltas) with zero
+episode-cost or scaffolding-pricing content → NO_MATCH for
+attribution/pricing stands on primary-source inspection, not on
+absence-of-hit; DISTINCT_EXTENSION
 on P2-REPLAY-COST guards; P2-AUTOMATION licensed as method; P2-WP003
 leakage guard honored. (e) Claim state: C-DELTA-REPAIR effective EXPERIMENTAL
 (parent packet); B3 endpoint absent by construction (counters-only + blocker).
-(f) Static checks on the edited v4 driver (no execution): every v2 API name
-used (CLASSES, TARGETS, TRIALS_PER_CLASS, LEARN_IDS_MIN, TASK_IDS, RESOURCES,
-IN_SUPPORT_PROBE_ID, functional_ok, wilson_lower, mean, unaffected_behavior,
-no_perturbation_trial, noise_trial, synthetic_repair_signal_probe, LocalApp,
-wait_ready, Counters, make_mech_dicts, Arm, guard, local_repair,
-execute_batch, run_repair_reuse, run_cold, run_repair_legacy, run_literal,
-run_norepair, overbroad_contamination, flatten, set_perturb) verified present
-in the pinned v2 module; set_perturb verified replacing (non-accumulating), so
+(f) Static checks on the frozen v4 driver (no execution of scored paths):
+all 31 v2-module attributes referenced as `v2.X` in the §12 body (Arm,
+CLASSES, Counters, IN_SUPPORT_PROBE_ID, LEARN_IDS, LEARN_IDS_MIN, LocalApp,
+Observation, RESOURCES, TARGETS, TASK_IDS, TRIALS_PER_CLASS, execute_batch,
+flatten, functional_ok, guard, local_repair, make_mech_dicts, mean,
+no_perturbation_trial, noise_trial, overbroad_contamination, run_cold,
+run_literal, run_norepair, run_repair_legacy, run_repair_reuse,
+synthetic_repair_signal_probe, unaffected_behavior, wait_ready,
+wilson_lower) verified present in the pinned v2 module by AST (defs, assigns
+and imports); AppState.set_perturb verified replacing (non-accumulating), so
 one held-out app serves all 12 probes; cold-nominal arithmetic verified
 (12x18=216, 12x19=228, 12x8=96, 12x9=108); extraction algorithm of §10
 verified to reproduce the §12 driver body byte-identically (CANONICAL hash
