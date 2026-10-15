@@ -37,6 +37,23 @@ reuse-negative on nominal vectors, so deciding on it would make SUPPORTS
 arithmetically unreachable — a degenerate design; it is reported, not decided).
 An sp deficit without cold drift routes to PRICED-DEFICIT/DROP, never INVALID.
 
+Non-degeneracy dilemma (stated explicitly so the structure cannot be misread
+as hiding a choice): the shipped 4-field counter is deterministic 17 vs 18/19
+by arm protocol — deciding on it alone would make PRICED-DEFICIT-via-shipped
+unreachable (structurally reuse-positive); the 5-field unit counter with
+preregistered 1:1 scaffold weights is deterministic ≈27 vs ≈21–22 — deciding
+on it would make SUPPORTS unreachable (structurally reuse-negative under an
+arbitrary weight choice). Both single-counter rules are degenerate in opposite
+directions, so neither is the decider. The only non-arbitrary
+scaffolding-inclusive measure is wall-clock latency under the inclusive timed
+boundary (every scaffolding operation consumes time by construction, with no
+weight choice anywhere), which is therefore the empirical decider; the shipped
+counter is retained as the mandate-named drift-checked premise (V-DRIFT-COLD +
+V-DRIFT-REUSE + V-EQ-HOLDS) and the 5-field form as reported sensitivity. The
+pair (premise + latency) jointly omits no cost dimension used by either
+comparator: auditable op dimensions in the counter, all residual scaffolding
+in time.
+
 ## 2. Inherited state (parent handoff EXP-RUNTIME-38291097112, sha 3139aa3b...)
 
 Established (preserved, not re-litigated): measurement-valid MIXED-PARTIAL
@@ -87,7 +104,11 @@ Timed episodes (v4 inclusive boundary: arg deepcopy materialization + arm
 execution; placement symmetric, operand asymmetric by construction — reuse
 deepcopies the full mech dict, cold deepcopies `{}`; v3-exact boundary via
 S-ARG subtraction as sensitivity): T-REPAIR-REUSE vs B-COLD (L=3) vs B-COLD-MIN (L=2), 2 excluded
-warmups per trial, predeclared parity order. Untimed in-trial: T-REPAIR-CONSERVATIVE
+warmups per trial, predeclared parity order. The 2 warmups call the ORIGINAL
+pinned v2 episode functions (`v2.run_repair_reuse`, `v2.run_cold`) and their
+discrete projections (success + shipped sums) are captured per trial as the
+V-EQUIV diagnostic: audit can compare original-function vs instrumented-episode
+discrete outcomes on identical trial state. V-EQUIV is recorded, never gated. Untimed in-trial: T-REPAIR-CONSERVATIVE
 and T-REPAIR-LEGACY sensitivities, B-LITERAL-REPLAY / B-NO-REPAIR mechanism
 controls, contamination and write-set probes (outside timed sections, exactly as
 parent v3). Baseline/treatment identifiers are frozen as in spec.json and reused
@@ -151,7 +172,16 @@ audit AF-3); V11 n=12 + 72 warmups; V13 legacy-regression premise (reported
 caveat); V14 reuse identity (oplogs + phases); V-DRIFT-COLD gate (per-class
 cold shipped sums exactly 216/228 with cold http sums 96/108; cold path is
 repair-independent so the pin cannot mask a repair effect; break = drift →
-MEASUREMENT_INVALID, never a negative); V-EQ-HOLDS reported premise
+MEASUREMENT_INVALID, never a negative); V-DRIFT-REUSE gate (every valid trial
+with repair reason `repaired` and repair success must show shipped reuse sum
+exactly 17 with class-expected http P1 6 / P2 5 / P3 6 — the parent accepted
+vectors (6,5,5,1)/(5,5,6,1) on the byte-identical carrier; break = reuse-side
+driver/substrate drift → MEASUREMENT_INVALID, never a negative; genuine repair
+failures can never trip it because the pin constrains only successful-repaired
+trials, and charging semantics live entirely in pinned v2 code the driver
+calls but never reimplements); V-EQUIV diagnostic (per-trial warmup
+original-function vs timed instrumented-episode discrete projections recorded
+for audit recomputation; not gated); V-EQ-HOLDS reported premise
 (deterministic 17/18, 17/19 inequality, zero empirical variance by
 construction — AF-3 lesson; an sp deficit without cold drift routes to
 PRICED-DEFICIT/DROP, never INVALID); V-TIMING parity/finite (S-ARG operand
@@ -184,7 +214,12 @@ single fused probe at TASK_IDS[0]=14 per episode; detection measured only
 there). V-CERT: bank fully enumerated, each of the 36+36+12+2 items scored
 exactly once with verdict+truth recorded, boundary enumerated with
 measured-vs-derived labels; failure invalidates only the certificate, never
-the priced decision. Schema co-owned with product for B11; this packet measures
+the priced decision. Census vs new information (no circularity claim): bank
+sensitivity is a completeness census over the same episodes the functional
+gate already scores — reported, not discovered; the certificate's NEW
+information is the 36 per-trial fresh-silence specificity probes, the 12
+held-out unseen-perturbation sensitivity probes, and the labeled residual
+boundary. Schema co-owned with product for B11; this packet measures
 the runtime instance (including unseen-perturbation sensitivity), it does not
 close product B11. B3: model_calls/model_tokens structurally 0 —
 counters-only pricing with the blocker recorded (H5).
@@ -193,14 +228,16 @@ counters-only pricing with the blocker recorded (H5).
 
 Per class (n=12): functional_ok (parent bars); V-DRIFT-COLD gate (cold sums
 exactly 216/228, cold http exactly 96/108 — repair-independent drift pin);
-sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00 (reported premise
+V-DRIFT-REUSE gate (every successful-repaired trial ships exactly 17 with
+class-expected http — reuse-side drift pin; genuine repair failures cannot
+trip it); sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00 (reported premise
 V-EQ-HOLDS: deterministic 17/18, 17/19 by protocol, zero empirical variance);
 lw := M-LATENCY-R-L2<1.00 AND M-LATENCY-R-L3<1.00 (medians; B_LAT=2000 bootstrap
 CIs reported alongside per-trial 12/12 sign patterns; the empirical decider).
 Class first match: FUNCTIONAL-FAIL / COST-UNKNOWN (any ratio None) /
 PRICED-WIN (sp AND lw) / PRICED-DEFICIT (an sp deficit without cold drift
 lands here, never INVALID). Aggregate first match: gate failure (incl.
-V-DRIFT-COLD) → MEASUREMENT_INVALID; any FUNCTIONAL-FAIL →
+V-DRIFT-COLD and V-DRIFT-REUSE) → MEASUREMENT_INVALID; any FUNCTIONAL-FAIL →
 FALSIFIES-FUNCTIONAL; any COST-UNKNOWN → INCONCLUSIVE; all
 PRICED-WIN → SUPPORTS (re-admit localized repair to C-PRODUCT-ECON with honest
 denominators; no promotion; B3 blocker recorded); else → PERMANENT-DROP-BOUNDED
@@ -220,7 +257,14 @@ priced decision.
   strict-inequality boundary tested (1.00 is NOT a win); aggregate checks
   FUNCTIONAL-FAIL before COST-UNKNOWN, matching class order, so no functional
   failure is masked by an unknown. Reachability probe re-runs inside the
-  frozen driver (`--reachability-probe`, pure, no substrate).
+  frozen driver (`--reachability-probe`, pure, no substrate). The one
+  defensive-unreachable path (sp deficit without cold drift) is retained
+  deliberately so the classifier is total under drift the pins did not catch;
+  it routes to PRICED-DEFICIT/DROP, and PRICED-DEFICIT itself is reachable via
+  the latency surface, so no DECISION branch is empty. The gates
+  (V-DRIFT-COLD, V-DRIFT-REUSE, V-TIMING, V-CLOSURE-track, V-CERT-track) are
+  fail-safe INVALID by construction — reachable trivially, and their firing
+  is a measurement verdict, not a shadowed decision.
 - Arithmetic impossibility and the AF-3 lesson: nominal-vector arithmetic at
   DESIGN confirms the shipped 4-field comparison is deterministic (17 vs 18/19
   on every functional_ok trial) — it is therefore framed as a drift-checked
@@ -248,11 +292,32 @@ priced decision.
 - Ceiling baselines: success-rate 1.0 ceilings are functional gates, never
   deciders; the deciders (integer cost ratios, continuous latency) have live
   dynamic range.
-- Treatment/comparator identity: arms share substrate/seeds/perturbations and
-  differ only in preregistered physical/scaffold counts, evidenced by oplogs +
-  phase timings + scaffold counts (V14); S-ARG operand asymmetric by
-  construction (full mech-dict vs `{}`), disclosed and isolated via the NOARG
-  sensitivity rather than mislabeled symmetric.
+- Treatment/comparator identity (honest reimplementation disclosure): the v4
+  timed episodes are NOT thin wrappers — they reimplement the v2 episode
+  sequencing with per-phase timers and integer scaffold units, calling the
+  identical pinned v2 primitives in the identical order. Sequence-equivalence
+  map (v2 `run_repair_reuse`/`run_cold` → v4 `run_reuse_episode`/
+  `run_cold_episode`): Arm-construct → target_mech → resolve → netfetch →
+  guard → local_repair → registry.upsert → charge_repair_attempt →
+  verify → execute_batch(TASK_IDS[1:]) for repair (fresh path omits
+  repair/upsert/charge/verify exactly as v2 does); discovery → observes →
+  distill_parameterized → upsert → execute_batch(TASK_IDS) for cold. All
+  charging semantics (fetch http+1, kernel counter sync, repair +1, rebind
+  excluded from reuse mode) live entirely in pinned v2/carrier code the driver
+  calls but never reimplements, so counter divergence requires a sequencing
+  error, not a semantic one. Residual sequencing risk is fail-safe three
+  ways: (i) V-DRIFT-COLD pins cold nominals exactly (repair-independent);
+  (ii) new V-DRIFT-REUSE pins successful-repaired reuse trials to exactly 17
+  with class-expected http (parent accepted vectors on the byte-identical
+  carrier) — any reuse-side sequencing error routes to MEASUREMENT_INVALID,
+  never to a spurious priced verdict; genuine repair failures cannot trip it;
+  (iii) per-trial V-EQUIV fields record original-function warmup vs
+  instrumented-episode discrete projections on identical trial state for audit
+  recomputation. Arms share substrate/seeds/perturbations and differ only in
+  preregistered physical/scaffold counts, evidenced by oplogs + phase timings
+  + scaffold counts (V14); S-ARG operand asymmetric by construction (full
+  mech-dict vs `{}`), disclosed and isolated via the NOARG sensitivity rather
+  than mislabeled symmetric.
 - Insensitive controls: overbroad instrument live in parent (4/4 every trial
   on the byte-identical carrier; DESIGN verified the function present and
   callable, live-fire basis inherited, not re-fired); must-fail/must-silent controls retained
@@ -275,8 +340,8 @@ freeze_artifacts = [`src/spider/kernel.py`, `src/spider/models.py`,
 `research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py`].
 The v4 driver is the exact text between the two standalone marker lines in §12
 (`V4-RUNNER-BEGIN` and `V4-RUNNER-END`, each the unique occurrence of its kind
-in this file). CANONICAL-RUNNER-V4-SHA256 = `dbb214596afc121f8f8c7a7f1f98624843c222d127d0b86588858dc53a05f4bc`
-(computed 2026-10-14 from the §12 text by the exact algorithm EXECUTE must
+in this file). CANONICAL-RUNNER-V4-SHA256 = `dcfbad8ac8f3b028798bbcba7248be279777eac4ad9d73f6258aa75cdcacd8ee`
+(computed 2026-10-15 from the §12 text by the exact algorithm EXECUTE must
 repeat verbatim: split this file on the line exactly equal to
 `V4-RUNNER-BEGIN` and the line exactly equal to `V4-RUNNER-END`; take the
 middle span; split that span into lines; find the first line whose stripped
@@ -323,7 +388,8 @@ V4-RUNNER-BEGIN
 #!/usr/bin/env python3
 # FROZEN RUNNER v4 for EXP-RUNTIME-38340133174 (runtime, design_contract_version 2).
 # C-DELTA-REPAIR terminal comparison: shipped 4-field unit counter + inclusive
-# episode latency + scaffolding attribution + B11 probe-coverage certificate.
+# episode latency + scaffolding attribution + B11 probe-coverage certificate
+# + V-DRIFT-REUSE fail-safe pin + V-EQUIV warmup-vs-timed diagnostic.
 # Reuses the IMMUTABLE parent v2 module by pin-checked import ONLY. Stdlib only.
 # Usage (stdout is always a single JSON object):
 #   python runner_delta_repair_scaffold_v4.py                      # scored run
@@ -352,6 +418,7 @@ ATTRIB_SHARE = 0.50
 FETCH_BAR = 0.90
 NOMINAL = {"reuse_sum": 17, "cold_l2_sum": 18, "cold_l3_sum": 19,
            "cold_l2_http": 8, "cold_l3_http": 9}
+REUSE_HTTP_EXPECTED = {"P1-ENDPOINT": 6, "P2-STRUCTURE": 5, "P3-PERMISSION": 6}
 HELDOUT_N_PER_CLASS = 4
 HELDOUT_SEED_BASE = SEED4 + 50000
 
@@ -587,10 +654,12 @@ def run_trial_v4(cls, target, seed, j):
             fresh_silent = None
         app.state.set_perturb(cls, target, seed)
         try:
-            v2.run_repair_reuse(app, app.origin, copy.deepcopy(mechs), cached[target],
-                                target, "reuse")
-            v2.run_cold(app, app.origin, target, v2.LEARN_IDS, "warmcold")
+            wu_reuse = v2.run_repair_reuse(app, app.origin, copy.deepcopy(mechs),
+                                           cached[target], target, "reuse")
+            wu_cold = v2.run_cold(app, app.origin, target, v2.LEARN_IDS, "warmcold")
             warmups = 2
+            wu_reuse_arm = (wu_reuse or {}).get("arm")
+            wu_cold_arm = (wu_cold or {}).get("arm")
             rep_first = (j % 2 == 0)
             if rep_first:
                 rep = _timed_episode(run_reuse_episode, app, app.origin,
@@ -679,6 +748,12 @@ def run_trial_v4(cls, target, seed, j):
             "t_reuse_s": rep.get("episode_s"), "t_cold_min_s": c2.get("episode_s"),
             "t_cold_s": c3.get("episode_s"),
             "order_rep_first": bool(rep_first), "warmups_done": warmups,
+            "warmup_reuse_success": bool((wu_reuse or {}).get("success")),
+            "warmup_reuse_shipped": (_shipped_sum(_arm_counters(wu_reuse_arm))
+                                     if wu_reuse_arm is not None else None),
+            "warmup_cold_success": bool((wu_cold or {}).get("success")),
+            "warmup_cold_shipped": (_shipped_sum(_arm_counters(wu_cold_arm))
+                                    if wu_cold_arm is not None else None),
             "timed_error": None, "model_calls": mcalls, "model_tokens": mtokens,
         }
     finally:
@@ -856,6 +931,13 @@ def _per_class_metrics(cls, rows, seed_base):
     m["M-COST-FETCH-RATIO-L3"] = (h_re / h_c3) if h_c3 else None
     m["M-COLD-HTTP-L2"] = h_c2
     m["M-COLD-HTTP-L3"] = h_c3
+    m["M-REUSE-HTTP"] = h_re
+    equiv = [r for r in rows if r.get("repair_reason") == "repaired"
+             and r.get("repair_success")
+             and r.get("warmup_reuse_shipped") is not None]
+    m["M-EQUIV-MATCH-N"] = sum(1 for r in equiv if r["warmup_reuse_shipped"]
+                               == _shipped_sum(r["repair_cost"]))
+    m["M-EQUIV-MATCH-DEN"] = len(equiv)
     m["M-SCAFFOLD-REUSE"] = sc_re
     m["M-SCAFFOLD-COLD-L3"] = sc_c3
     m["M-SP5-RATIO-L2"] = ((sh_re + sc_re) / (sh_c2 + sc_c2)) if (sh_c2 + sc_c2) else None
@@ -1182,6 +1264,16 @@ def main():
         if drift_cold:
             invalid.append(f"{cls}:V-DRIFT-COLD-nominal-mismatch")
         m["V-DRIFT-COLD-HOLDS"] = not drift_cold
+        drift_reuse = False
+        for r in rows:
+            if r.get("repair_reason") == "repaired" and r.get("repair_success"):
+                if (_shipped_sum(r["repair_cost"]) != NOMINAL["reuse_sum"]
+                        or _http_of(r["repair_cost"]) != REUSE_HTTP_EXPECTED[cls]):
+                    drift_reuse = True
+                    break
+        if drift_reuse:
+            invalid.append(f"{cls}:V-DRIFT-REUSE-nominal-mismatch")
+        m["V-DRIFT-REUSE-HOLDS"] = not drift_reuse
         eq = (m["M-SHIPPED-RATIO-L2"] is not None and m["M-SHIPPED-RATIO-L3"] is not None
               and m["M-SHIPPED-RATIO-L2"] < 1.0 and m["M-SHIPPED-RATIO-L3"] < 1.0
               and (m["M-COST-FETCH-RATIO-L3"] or 1.0) <= FETCH_BAR)
@@ -1236,7 +1328,8 @@ V4-RUNNER-END
 
 Priced metrics (per class): `M-SHIPPED-REUSE`, `M-SHIPPED-COLD-L2/L3`,
 `M-SHIPPED-RATIO-L2/L3`, `M-COST-FETCH-RATIO-L3`, `M-COLD-HTTP-L2/L3`,
-`V-DRIFT-COLD-HOLDS`, `V-EQ-HOLDS` (reported premise), `M-LATENCY-REUSE-MED-S`,
+`M-REUSE-HTTP` (per-class reuse http sum; pin expects P1 72 / P2 60 / P3 72),
+`V-DRIFT-COLD-HOLDS`, `V-DRIFT-REUSE-HOLDS`, `V-EQ-HOLDS` (reported premise), `M-LATENCY-REUSE-MED-S`,
 `M-LATENCY-COLD-L2/L3-MED-S`, `M-LATENCY-R-L2/L3` (+ `M-LATENCY-R-L2/L3-CI95`
 with `B_LAT=2000`, `M-LATENCY-SIGN-REUSE-SLOWER-L3`, `M-LATENCY-R-L3-NOARG`
 sensitivity). Functional/locality: `M-REPAIR-SUCCESS`,
@@ -1250,7 +1343,11 @@ Certificate: `M-CERT-SENSITIVITY` (bank n=36), `M-CERT-HELDOUT-SENSITIVITY`
 (held-out n=12), `M-CERT-SPECIFICITY` (pooled 36 fresh-silence + 2 NC, with
 `M-CERT-SPECIFICITY-BANK/NC` separately), `M-CERT-FALSE-ACCEPTS`,
 `M-CERT-HELDOUT-FALSE-ACCEPTS`, `M-CERT-FRESH-N`, `M-CERT-HELDOUT-N`,
-`M-CERT-BOUNDARY` (3 labeled entries). Model economics: `M-MODEL-CALLS`,
+`M-CERT-BOUNDARY` (3 labeled entries). V-EQUIV diagnostics (per trial):
+`warmup_reuse_success`, `warmup_reuse_shipped`, `warmup_cold_success`,
+`warmup_cold_shipped` (original-function discrete projections); per class
+`M-EQUIV-MATCH-N`/`M-EQUIV-MATCH-DEN` (timed-vs-warmup reuse-shipped agreement
+among repaired-success trials). Model economics: `M-MODEL-CALLS`,
 `M-MODEL-TOKENS` (expected structural 0). Controls in `result.json`
 keyed by frozen baseline/control ids (`B-COLD`, `B-COLD-MIN`,
 `B-LITERAL-REPLAY`, `B-NO-REPAIR`, `T-REPAIR-REUSE`, `T-REPAIR-CONSERVATIVE`,
@@ -1269,14 +1366,29 @@ explicitly NOT a mechanism falsification), `report.md` (bounded by
 `result.json`, no claim beyond the frozen ceiling), `provenance.json`
 (run id, commits, carrier/v2 hashes, runner self-sha, environment).
 Controls in `result.json` keyed by the frozen ids in §13 (including
-`V-DRIFT-COLD-HOLDS`/`V-EQ-HOLDS` and the certificate metrics). Preserve raw
+`V-DRIFT-COLD-HOLDS`/`V-DRIFT-REUSE-HOLDS`/`V-EQ-HOLDS` and the certificate metrics). Preserve raw
 evidence: driver stdout JSON, the extracted driver file,
 liveness/reachability preflight outputs. Measurement failure (any gate in
 §8) is `MEASUREMENT_INVALID`/`INCONCLUSIVE`, never a negative. B3 stays a
 recorded blocker; B11 certificate is measured (bank + fresh-silence +
 held-out), not closed.
 
-## 15. DESIGN probe record 2026-10-14 (non-outcome-bearing only)
+## 15. DESIGN probe record 2026-10-14/15 (non-outcome-bearing only)
+
+Prior-revision transparency: an earlier DESIGN submission of this packet
+received `design_review` status REVISE (factory exit 65); the review artifact
+was discarded by the factory's failed-stage cleanup before this revision, so
+its specific findings are unavailable to DESIGN. This revision therefore
+hardens all six satisfiability fronts preemptively rather than answering
+unknown findings: (i) new fail-safe V-DRIFT-REUSE pin (§6/§8/§12) protecting
+the priced DROP integrity against reuse-side sequencing drift; (ii) honest
+reimplementation disclosure with the sequence-equivalence map (§9) replacing
+any "wrapping only" reading; (iii) explicit non-degeneracy dilemma (§1) showing
+why shipped-premise-plus-latency is the unique non-degenerate decision
+structure; (iv) census-vs-new labeling for the certificate (§7); (v) V-EQUIV
+warmup-vs-timed diagnostic capture (§4/§12/§13); (vi) defensive-branch
+totality argument (§9). No scored trial and no confirmatory measurement was
+run in either revision.
 
 No scored trial and no confirmatory measurement was run. Probes: (a) v2 pin
 re-verified (60855 bytes, d4871091…4962bc608) and carrier hashes byte-identical
@@ -1328,3 +1440,16 @@ reachable, prerequisites verified, baselines discriminating, controls
 sensitive, treatment live, and all mutable local dependencies bound (§9).
 Scored execution is deferred to EXECUTE under `freeze.json`.
 No outcome data was inspected at DESIGN.
+
+2026-10-15 re-verification of the hardened driver (extraction by the §10
+algorithm reproduces the §12 body byte-identically under the new
+CANONICAL-RUNNER-V4-SHA256; pure synthetic `--reachability-probe`: all 4
+class + all 4 aggregate branches reachable, repair-signal patched True on
+P1/P2/P3; fresh-path `--liveness-only`: server/distill/resolve/fetch/verify
+live, guard silent, contamination instrument live, NCs silent, timer 1ns,
+instrumented-episode closure finite; static checks: all 31 `v2.X` attributes
+present in the pinned module, `REUSE_HTTP_EXPECTED` keys match v2 `CLASSES`,
+`NOMINAL` arithmetic 12x17=204/12x18=216/12x19=228/12x8=96/12x9=108 verified,
+reuse per-trial pin 17 with http 6/5/6 grounded in the parent accepted vectors
+(6,5,5,1)/(5,5,6,1) on the byte-identical carrier). No scored seeds, no
+perturbations, no repair-vs-cold comparison were executed or inspected.
