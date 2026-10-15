@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38816768796",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "FIX-1a (claim ceiling): bound report.md Interpretation ('The tie-break confound is closed: the failure travels with the mechanism, not the calibration rule') and spec#product_consequence_negative ('no further Jaccard-1NN blind work without a new mechanism class') to the narrower, correct wording already present in result.json#unresolved[0]: this packet retires only the word-unigram Jaccard-1NN mechanism-plus-calibration class under the TWO tested rules (ascending-tau lowest-feasible -> tau=0.2727 fails FA 0.20; max-slack higher-tau -> tau*=0.6 fails COV/UP). Calibration-robust gate-incapability is NOT established: tau=0.3333 is SELECT-feasible and passes the G3 reincluded gate (recomputed and parent-published), so gate-level outcome remains calibration-dependent across the tau family.",
+    "FIX-1b: strike or re-scope the product leg 'no further Jaccard-1NN blind work without a new mechanism class'. A coverage/UP-constrained SELECT rule, a held-out selection axis, or any rule that selects tau=0.3333 is not a new mechanism class, is pre-registered-feasible under the frozen banks, and is the only observed branch on which the gate passes; it remains untested. The parent handoff EXP-GRAPH-38666634300/handoff.json#carry_forward.do_not_assume[0] is only partially discharged by this packet (a second RULE failure was obtained, not a calibration-robust mechanism failure).",
+    "FIX-2 (information-gain disclosure): disclose that the frozen decision BLIND_FAILS@tau*=0.6 was logically entailed at DESIGN time by accepted parent evidence: (i) parent audit EXP-GRAPH-38666634300/audit.json#recomputed_metrics.auditor_posthoc_tau_sensitivity_NOT_a_decision_input.select_feasible_and_g3_gate_met=[0.3333] over the published SELECT-feasible list topping at 0.6, (ii) pooled_false_accept is non-increasing in tau by construction (runner_blind_resolver.py: exo/co with exo non-increasing, co fixed), and (iii) this packet's own frozen design_review.json#checks.decision_rule_reachability ('argmax-slack with the higher-tau tie-break deterministically emits the highest SELECT-feasible tau ... tops at 0.6; tau* != 0.2727 and != 0.3333'). Under a valid transaction (continuity tripwires force MEASUREMENT_INVALID on any bank drift), the only reachable science outcome at freeze was BLIND_FAILS. The packet must be recorded as a validity/continuity reproduction plus new SELECT per-tau vectors, not as a new discriminating test that 'closes' the tie-break question; expected information gain was near zero, contradicting spec#hypothesis 'TEST genuinely open' and spec#expected_information_gain.",
+    "FIX-3 (frozen factual error, correct in all downstream citations): spec#hypothesis 'SELECT feasible set has 9 taus ... all at coverage 1.0' is false for the upper taus. Auditor recomputation of the same frozen fit pool gives SELECT coverage 1.0 only at taus <= 0.375; coverage is 0.9706 (0.4), 0.9412 (0.4286, 0.5), 0.8529 (0.5556, 0.5714), 0.7941 (0.6). The feasible list itself (9 taus) is correct because the coverage bar is 0.5, so the decision is unaffected. The error originates in the parent audit's tie_break_that_decided_the_outcome note ('SELECT coverage is 1.0 at every feasible tau') and was inherited into this frozen design.",
+    "FIX-4 (provenance wording): provenance.json#extraction.method and report.md step 2 say the extracted runner is 'FROZEN-RUNNER block bytes + exactly one trailing newline'; the frozen block already ends in a newline and raw_evidence/runner_blind_resolver.py equals the block bytes exactly (sha256 d4356386...=CANONICAL-RUNNER-SHA256). Adding a further newline would break the canonical sha. Non-material to validity; correct the reproduction recipe.",
+    "FIX-5 (ceiling of the robust negative): state positively what IS calibration-robust across all nine SELECT-feasible taus: blind resolution quality is near-zero everywhere (SELECT selective_acc 0.0 at every tau; G3 reincluded TEST selective_acc 0.0-0.133 vs CTRL-BLIND-PERMUTED 0.0-0.025). The durable negative for C-SEMANTIC-RESOLVE is 'lexicon-free supervised Jaccard-1NN exemplar memory has no resolution signal on these pooled banks at any examined gate', while 'gate-level abstention viability at a knife-edge tau (0.3333: FA exactly 0.10, UP 0.8571 vs 0.85 bar) is open but ship-meaningless at selective_acc 0.054'."
+  ],
+  "validity_findings": [
+    "TRANSACTION INTEGRITY (RAW, independently re-verified): freeze.json#hashes re-verify byte-for-byte for request.json, spec.json, prereg.md, design_review.json; all four freeze.json#artifact_hashes (EXP-GRAPH-38175554380/prereg.md, EXP-GRAPH-38180711589/prereg.md, EXP-GRAPH-38291080992/prereg.md, research/harness/goal_generator.py) re-verify; parent_handoff sha256 da318f26... matches research/experiments/EXP-GRAPH-38666634300/handoff.json.",
+    "RUNNER IDENTITY + DETERMINISTIC RE-EXECUTION (RAW): the extracted raw_evidence/runner_blind_resolver.py is byte-identical to the prereg.md <!-- BEGIN/END FROZEN-RUNNER --> block bytes (auditor-extracted; sha256 d43563861b55600ebead5d344c0f5eede94e8ea93ff19d9c36a1af24320f536f = CANONICAL-RUNNER-SHA256 = runner_self_sha). Independent re-execution of the frozen runner reproduces raw_evidence/run_output.json byte-identically (sha256 9116cd3f...93212); the two mechanics-only canaries are byte-identical to each other (sha256 5dc12049...4450) and carry test_not_scored=true; code path confirms the mechanics entry never scores any TEST row.",
+    "SINGLE-VARIABLE ABLATION VERIFIED (DERIVED from code diff): auditor diff of parent EXP-GRAPH-38666634300/raw_evidence/runner_blind_resolver.py vs this packet's runner shows exactly 12 hunks, all confined to header comments, EXP_ID/SEED constants, the blind SELECT key ((feasible, coverage) with taus-ascending first-max -> (feasible, slack, tau) with strict-greater, i.e. higher-tau tie-break), the pre-declared select_rule/select_slack output fields, and the pre-declared TAU_RULE_INFEASIBLE (BLOCKED) drift-guard branch. Gold/retrieval/control/analysis code paths are unchanged, as frozen in spec#measurement_validity.",
+    "BLINDNESS CONTRACT VERIFIED (code inspection): arm_blind_oos/train pairs accept only (text, target) exemplars (runner_blind_resolver.py:492-556); blind_jac_predict has no lex parameter; no LEXICON-* object is constructed or read inside the blind fit/select/test path (lexicons are loaded only in load_banks for the gold arms). No lexicon read on the blind path confirmed.",
+    "LEAKAGE/SPLIT INTEGRITY (recomputed): fit pool N_TRAIN=102 / SELECT_APP=34 / SELECT_OOS=60 with train/select text-sha disjointness and (train|select) vs (screened|reincluded) TEST text-sha disjointness all re-verified via the frozen runner's construction bars (fit_pool.bars_met=true) and the auditor's independent rebuild; tau* selection uses only FIT-SELECT rows; flagged TEST gids exactly the parent-published sets (G3: app_026/030/036/076; G1/ALTLEX: app_004/052/076/100 + oos_024/026; G2: none). No TEST row is read by fit/select. No leakage found.",
+    "DECISION CORRECTLY APPLICABLE TO THE FROZEN RULE (DERIVED): all MEASUREMENT_INVALID conjuncts evaluate clean (invalid_reasons=[]; gold G3 reincluded live 42/60 with 40 app executed and 7 resolved abstentions; PC-AXIS-G1-ALTLEX gold-reincluded gate true; gold screened/reincluded gate vectors match the frozen expectations; retrieval forks TFRAME_DOMINATES_G3 on both supersets; no retrieval TEST gate met); blind SELECT feasible (not TAU_RULE_INFEASIBLE); blind_inert=false on G3 reincluded. decision=BLIND_FAILS at tau*=0.6 follows the frozen rule; result.json status=COMPLETE outcome=FALSIFIES is the correct packet mapping. The frozen-rule decision is SOUND and independently reproduced.",
+    "CLAIM-CEILING DEFECT (INTERPRETATION, material): report.md ('the tie-break confound is closed; the failure travels with the mechanism, not the calibration rule'; 'no further Jaccard-1NN blind work without a new mechanism class') exceeds what the evidence establishes. Auditor recomputation over ALL nine SELECT-feasible taus shows exactly one (0.3333) passes the AXIS-G3-NEW reincluded gate (FA 0.10/COV 0.925/UP_excl 0.8571), matching the parent audit's published select_feasible_and_g3_gate_met=[0.3333]. The max-slack higher-tau rule is a member of the rule family that systematically selects the most abstention-heavy feasible tau (FA non-increasing in tau => argmin-FA ties at the top of the feasible list => tau*=0.6 by construction); its failure (coverage/UP collapse) is a property of that rule, not proof that no SELECT rule can produce gate survival. This directly contradicts parent handoff do_not_assume[0]'s boundary and the producer's own result.json#unresolved[0]. producer_claim_supported=false on the stated ceiling; the frozen decision itself stands.",
+    "DESIGN-IDENTIFIABILITY DEFECT / INFORMATION GAIN ~0 (DERIVED, material): the frozen design_review.json#checks.decision_rule_reachability proves tau* deterministically equals the highest SELECT-feasible tau (0.6) and != 0.3333, while the parent audit it cites already published that among the SELECT-feasible set only 0.3333 passes the G3 reincluded gate. Therefore BLIND_FAILS@0.6 was a logical consequence of accepted evidence at freeze time; in a valid transaction (drift => MEASUREMENT_INVALID via continuity tripwires) BLIND_SURVIVES was unreachable. design_review's claim that 'accepted evidence does not exclude either configuration' is internally inconsistent with its own deterministic-emission argument plus the cited parent post hoc. The run legitimately produced new raw artifacts (full SELECT per-tau vectors at the 7 previously unpublished taus, reproduced controls), but its outcome is a validity reproduction of a known implication, not a new discriminating test of the director-mandate question. Producer disclosure of post-hoc knowledge (prereg §8.9, result.json#validity_notes) is honest but understates the entailment.",
+    "GRADING OF THE SURVIVING TAU (context for ceiling): the single gate-passing feasible tau (0.3333) is knife-edge on both bars (FA exactly 0.10 = 2/20 OOS; UP_excl 0.8571 vs 0.85) with selective_acc 0.054 — abstention-viable but resolution-deficient under the producer's own pre-registered grading; it cannot support any ship or viability-signaling claim beyond 'gate arithmetic achievable at one knife-edge calibration'. Conversely the near-zero resolution quality IS robust across the whole feasible family (see FIX-5).",
+    "PROVENANCE/INFRASTRUCTURE (no scientific weight): model_audit.json records a transient stage retry (exit 1, attempt 1) that did not affect the packet; execution_checkpoint.json pre_execute_sha recorded; provenance.json freeze re-verification matches the auditor's; extraction-method wording defect noted in FIX-4 (non-material)."
+  ],
+  "baseline_findings": [
+    "gold-T-FRAME+ (B-LEX-STRONG + C1/C3/C4/C5/C6 + C7-CREATE-OBLIQUE): continuity reproduced exactly — screened and reincluded gate vectors {G3: true, G2: false, G1-PRIMARY: true, G1-ALTLEX: true}; G3 reincluded cov 1.0 / FA 0.10 / UP_excl 1.0 / selective_acc 1.0 with 42/60 executed (40 app, 2 oos) and 7 resolved abstentions; selection_reincl_preserved=true. Gold liveness on the decided set is real.",
+    "tframe_frozen: reported as diagnostic isolation; parent continuity (G3 FA 0.20 without C7) unchanged; not a decision arm.",
+    "b_incumbent_kernel (S<=0 gate): FA 0.20 on G3 both supersets, selective_acc 1.0 on G3/G2/ALTLEX — consistent with shipped conservative abstention boundary; no drift.",
+    "gatefree (NC-EXEC-ALL execute-all ceiling): FA headroom live on both supersets (G3 screened/reincluded 0.45 vs gold 0.10; G2 0.50 vs gold 0.0; G1 0.2778 vs gold 0.0556); FA ceiling baseline confirmed, not a decision arm.",
+    "B-RETRIEVAL-OOS: reproduction exact (tau=0.4156, mu=0.0005, mu_active=true, n_fit=102, SELECT cov 0.9412 / FA 0.10 / UP_excl 0.9643 / selective 0.0); no TEST gate met on screened or reincluded sets; fork TFRAME_DOMINATES_G3 on both supersets. Continuity tripwire behaves as frozen. B-RETRIEVAL-TFIDF-resub and B-EMBED-COSINE correctly excluded as decision arms (ancestor identities; numpy absent).",
+    "NC-ABSTAIN-ALL: executed on both supersets (coverage 0.0 with informative UP: e.g. G3 0.20 screened); NC live.",
+    "CTRL-SHUFFLED-SELECTION / CTRL-RANDOM-ROLE: near chance on both supersets (0.0-0.083); live.",
+    "CTRL-RANDOM-GATE volume-matched: FA 0.55-0.72 screened and 0.55-0.70 reincluded; live and separated from gold.",
+    "CTRL-BLIND-PERMUTED: correctly scoped to the selection reading only — the execute/abstain partition is label-invariant by construction, so permuted FA/COV/UP equal real blind at the frozen tau* (recomputed identical: cov 0.10 / FA 0.0 / UP 0.3571) and permuted SELECT selective_acc 0.0 equals real blind 0.0. It is NOT an independent gate null (as the producer disclosed); it guards resolution-quality readings only.",
+    "CTRL-B-LEX-ONLY (gatefree selective_acc): 1.0 G3 both supersets, ~0.906-0.911 G1-PRIMARY, 1.0 G1-ALTLEX/G2 — consistent with parent; no drift.",
+    "Baseline strength: the strongest cheap lexicon-free baseline family (TF-IDF centroid retrieval) and the treatment (Jaccard 1-NN) both score SELECT selective_acc 0.0; gold remains the only gate-and-resolution-positive arm. Baseline suite is adequate for the frozen gate-level claim; the deficiency is in the interpretation ceiling, not in baseline strength."
+  ],
+  "recomputed_metrics": {
+    "audit_reexecution": {
+      "runner_sha256": "d43563861b55600ebead5d344c0f5eede94e8ea93ff19d9c36a1af24320f536f",
+      "reexecuted_run_output_sha256": "9116cd3f2590abdaefc7a0e27c7d12fc7e1f253e270c168271ca4eb9f4933212",
+      "matches_producer_run_output": true,
+      "freeze_hashes_all_reverify": true
+    },
+    "fit_pool": {
+      "n_fit_train": 102,
+      "n_select_app": 34,
+      "n_select_oos": 60,
+      "train_select_disjoint": true,
+      "fit_test_disjoint": true,
+      "bars_met": true
+    },
+    "blind_select_rule_recomputed": {
+      "blind_select_rule": "max-slack-fa-tiebreak-higher-tau",
+      "blind_select_tau": 0.6,
+      "blind_select_slack": 0.1,
+      "blind_select_fa": 0.0,
+      "blind_select_cov": 0.7941176470588235,
+      "blind_select_up_excl": 0.8955223880597015,
+      "blind_selective_select": 0.0,
+      "feasible": true,
+      "matches_result_json": true
+    },
+    "blind_select_per_tau_sweep_SELECT_POOL": {
+      "note": "auditor-derived new measurement on the frozen FIT-SELECT pool (94 rows); NOT a decision input; preserves producer metric names FA=pooled_false_accept, COV=coverage, UP=unknown_precision_exclusive",
+      "sweep": [
+        {"tau": 0.2727, "FA": 0.08333333333333333, "COV": 1.0, "UP": 1.0, "executed": 39, "feasible": true},
+        {"tau": 0.3333, "FA": 0.03333333333333333, "COV": 1.0, "UP": 1.0, "executed": 36, "feasible": true},
+        {"tau": 0.375, "FA": 0.016666666666666666, "COV": 1.0, "UP": 1.0, "executed": 35, "feasible": true},
+        {"tau": 0.4, "FA": 0.016666666666666666, "COV": 0.9705882352941176, "UP": 0.9833333333333333, "executed": 34, "feasible": true},
+        {"tau": 0.4286, "FA": 0.0, "COV": 0.9411764705882353, "UP": 0.967741935483871, "executed": 32, "feasible": true},
+        {"tau": 0.5, "FA": 0.0, "COV": 0.9411764705882353, "UP": 0.967741935483871, "executed": 32, "feasible": true},
+        {"tau": 0.5556, "FA": 0.0, "COV": 0.8529411764705882, "UP": 0.9230769230769231, "executed": 29, "feasible": true},
+        {"tau": 0.5714, "FA": 0.0, "COV": 0.8529411764705882, "UP": 0.9230769230769231, "executed": 29, "feasible": true},
+        {"tau": 0.6, "FA": 0.0, "COV": 0.7941176470588235, "UP": 0.8955223880597015, "executed": 27, "feasible": true}
+      ],
+      "feasible_taus_recomputed": [0.2727, 0.3333, 0.375, 0.4, 0.4286, 0.5, 0.5556, 0.5714, 0.6],
+      "matches_parent_audit_select_feasible_taus": true,
+      "select_cov_1_at_every_feasible_tau_claim": false,
+      "select_cov_1_holds_only_for_taus_le": 0.375
+    },
+    "blind_g3_reincluded_test_at_tau_star": {
+      "blind_g3_reincl_fa": 0.0,
+      "blind_g3_reincl_cov": 0.1,
+      "blind_g3_reincl_up_excl": 0.35714285714285715,
+      "blind_g3_reincl_selective": 0.0,
+      "blind_g3_reincl_executed_app": 4,
+      "blind_g3_reincl_executed_oos": 0,
+      "blind_g3_reincl_gate_met": false,
+      "blind_inert": false,
+      "matches_result_json": true
+    },
+    "auditor_posthoc_g3_reincluded_sweep_at_feasible_taus": {
+      "note": "DERIVED auditor sensitivity sweep, NOT a decision input; preserves frozen decision BLIND_FAILS@tau*=0.6",
+      "sweep": [
+        {"tau": 0.2727, "FA": 0.2, "COV": 1.0, "UP": 1.0, "selective_acc": 0.05, "gate_met": false},
+        {"tau": 0.3333, "FA": 0.1, "COV": 0.925, "UP": 0.8571428571428571, "selective_acc": 0.05405405405405406, "gate_met": true},
+        {"tau": 0.375, "FA": 0.0, "COV": 0.75, "UP": 0.6666666666666666, "selective_acc": 0.06666666666666667, "gate_met": false},
+        {"tau": 0.4, "FA": 0.0, "COV": 0.675, "UP": 0.6060606060606061, "selective_acc": 0.07407407407407407, "gate_met": false},
+        {"tau": 0.4286, "FA": 0.0, "COV": 0.375, "UP": 0.4444444444444444, "selective_acc": 0.13333333333333333, "gate_met": false},
+        {"tau": 0.5, "FA": 0.0, "COV": 0.3, "UP": 0.4166666666666667, "selective_acc": 0.08333333333333333, "gate_met": false},
+        {"tau": 0.5556, "FA": 0.0, "COV": 0.125, "UP": 0.36363636363636365, "selective_acc": 0.0, "gate_met": false},
+        {"tau": 0.5714, "FA": 0.0, "COV": 0.125, "UP": 0.36363636363636365, "selective_acc": 0.0, "gate_met": false},
+        {"tau": 0.6, "FA": 0.0, "COV": 0.1, "UP": 0.35714285714285715, "selective_acc": 0.0, "gate_met": false}
+      ],
+      "feasible_taus_passing_g3_reincluded_gate": [0.3333],
+      "matches_parent_audit_select_feasible_and_g3_gate_met": true,
+      "calibration_robust_gate_failure": false,
+      "resolution_quality_near_zero_all_feasible_taus": true
+    },
+    "alternative_select_rules_same_frozen_pool": {
+      "note": "auditor probe of rule sensitivity (DERIVED, not pre-registered); shows the outcome is rule-dependent",
+      "min_FA_then_lowest_tau": 0.4286,
+      "min_FA_then_highest_tau (= frozen max-slack rule)": 0.6,
+      "max_coverage_then_highest_tau": 0.375,
+      "g3_outcome_at_0.4286": "fails (UP 0.444)",
+      "g3_outcome_at_0.375": "fails (UP 0.667)",
+      "g3_outcome_at_0.3333": "passes (FA 0.10/COV 0.925/UP 0.8571, knife-edge)"
+    },
+    "blind_all_four_axes_at_tau_star_reincluded": {
+      "AXIS-G3-NEW": {"FA": 0.0, "COV": 0.1, "UP": 0.35714285714285715, "gate_met": false},
+      "AXIS-G2-RETEST": {"FA": 0.0, "COV": 0.0, "UP": 0.3333333333333333, "gate_met": false},
+      "AXIS-G1-PRIMARY": {"FA": 0.0, "COV": 0.03333333333333333, "UP": 0.2564102564102564, "gate_met": false},
+      "AXIS-G1-ALTLEX": {"FA": 0.0, "COV": 0.03333333333333333, "UP": 0.2564102564102564, "gate_met": false},
+      "matches_result_json": true
+    },
+    "gold_g3_reincluded_liveness": {
+      "executed": 42,
+      "n": 60,
+      "executed_app": 40,
+      "executed_oos": 2,
+      "abstained_resolved": 7,
+      "coverage": 1.0,
+      "pooled_false_accept": 0.1,
+      "unknown_precision_exclusive": 1.0,
+      "selective_acc": 1.0,
+      "matches_result_json": true
+    },
+    "retrieval_oos_reproduction": {
+      "retrieval_tau": 0.4156,
+      "retrieval_mu": 0.0005,
+      "mu_active": true,
+      "select_gate": {"coverage": 0.9411764705882353, "pooled_false_accept": 0.1, "unknown_precision_exclusive": 0.9642857142857143, "selective_acc": 0.0},
+      "fork_screened": "TFRAME_DOMINATES_G3",
+      "fork_reincl": "TFRAME_DOMINATES_G3",
+      "matches_result_json": true
+    },
+    "outcome_prentailment_check": {
+      "parent_audit_select_feasible_and_g3_gate_met": [0.3333],
+      "highest_select_feasible_tau": 0.6,
+      "fa_monotone_nonincreasing_in_tau": true,
+      "frozen_rule_emits": 0.6,
+      "gate_at_0.6_excluded_by_parent_published_evidence": true,
+      "blast_survives_reachable_in_valid_transaction": false,
+      "conclusion": "BLIND_FAILS@tau*=0.6 was entailed at freeze; only bank drift (=> MEASUREMENT_INVALID) could have changed the packet outcome"
+    }
+  },
+  "claim_ceiling": "VALID frozen-rule negative with a narrowed ceiling. ESTABLISHED: under the pre-registered non-lowest-tau-wins max-slack SELECT rule, BLIND-JAC-1NN selects tau*=0.6 (SELECT FA 0.0, slack 0.1) and fails the AXIS-G3-NEW reincluded gate by coverage/UP collapse (FA 0.0 / COV 0.10 / UP_excl 0.3571, selective_acc 0.0) while gold passes the same gate on the same rows — decision=BLIND_FAILS, status=COMPLETE, outcome=FALSIFIES, independently reproduced byte-identically, with all controls, continuity tripwires, split/disjointness bars and the blindness contract verified. ROBUST NEGATIVE: blind resolution quality is near zero at every one of the nine SELECT-feasible taus (SELECT selective_acc 0.0; TEST selective_acc 0.0-0.133 vs permuted 0.0-0.05) — this part of the failure IS calibration-robust and hardens the parent ceiling as the mandate intended. NOT ESTABLISHED (overclaim in report.md/spec product_consequence_negative): calibration-robust gate-incapability of the mechanism — exactly one SELECT-feasible tau (0.3333: FA exactly 0.10, COV 0.925, UP 0.8571, selective_acc 0.054, knife-edge on two bars) passes the G3 reincluded gate under the unchanged predicate, so 'the failure travels with the mechanism, not the calibration rule' and 'no further Jaccard-1NN work without a new mechanism class' are unjustified; parent handoff do_not_assume[0] is only partially discharged. Additionally the BLIND_FAILS@0.6 outcome was logically entailed at DESIGN time by parent-published post hoc (select_feasible_and_g3_gate_met=[0.3333]) plus FA monotonicity plus this packet's own frozen design_review deterministic-emission argument, so the packet contributes new SELECT per-tau raw vectors and a continuity reproduction, not a new discriminating test of the tie-break question. C-SEMANTIC-RESOLVE remains HYPOTHESIS; nothing promotes; parking the blind thread at the gold-lexicon-conditional bound is permissible, but calibration-rule variants (coverage/UP-constrained, held-out-axis) remain untested and are not excluded.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38816768796/freeze.json (hashes + artifact_hashes all re-verified)",
+    "research/experiments/EXP-GRAPH-38816768796/spec.json#hypothesis (overclaim: '9 taus all at coverage 1.0'; 'TEST genuinely open')",
+    "research/experiments/EXP-GRAPH-38816768796/spec.json#decision_rule",
+    "research/experiments/EXP-GRAPH-38816768796/spec.json#product_consequence_negative ('no further Jaccard-1NN blind work without a new mechanism class')",
+    "research/experiments/EXP-GRAPH-38816768796/design_review.json#checks.decision_rule_reachability (deterministic tau*=0.6 emission; internally inconsistent 'genuinely open' claim)",
+    "research/experiments/EXP-GRAPH-38816768796/raw_evidence/runner_blind_resolver.py (sha256 d4356386..., byte-identical to prereg FROZEN-RUNNER block; arm_blind_oos:492-556 rule + blindness contract; blind_gate_metrics:476-489; build_fit_pool:349-359)",
+    "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json (sha256 9116cd3f..., reproduced byte-identically by auditor re-execution)",
+    "research/experiments/EXP-GRAPH-38816768796/raw_evidence/mechanics_only_run1.json + mechanics_only_run2.json (sha256 5dc12049..., byte-identical canaries, test_not_scored=true)",
+    "research/experiments/EXP-GRAPH-38816768796/result.json#metrics (blind_select_tau=0.6, blind_g3_reincl_*, decision=BLIND_FAILS) — all recomputed and matched",
+    "research/experiments/EXP-GRAPH-38816768796/result.json#unresolved[0] (correct narrow ceiling, contradicted by report.md)",
+    "research/experiments/EXP-GRAPH-38816768796/report.md (overclaim: 'tie-break confound is closed', 'failure travels with the mechanism')",
+    "research/experiments/EXP-GRAPH-38816768796/provenance.json (extraction-method wording defect, FIX-4)",
+    "research/experiments/EXP-GRAPH-38666634300/audit.json#recomputed_metrics.auditor_posthoc_tau_sensitivity_NOT_a_decision_input (select_feasible_taus top 0.6; select_feasible_and_g3_gate_met=[0.3333]) — the entailment source",
+    "research/experiments/EXP-GRAPH-38666634300/handoff.json#carry_forward.do_not_assume[0] (tau=0.3333 gate-met boundary this packet was to address)",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE (effective HYPOTHESIS, retained)"
+  ],
+  "unresolved": [
+    "Which pre-registrable SELECT-only calibration rules, if any, would select tau=0.3333 rather than a FA-extremal tau? None of the simple rules probed (min-FA with either tie-break, max-coverage with either tie-break, parent feasible-max-coverage) select it; a held-out selection axis remains untested and is not excluded by this packet.",
+    "Does the knife-edge gate survival at 0.3333 (FA exactly 0.10 on 20 OOS rows; UP 0.8571 vs 0.85) have any product meaning given selective_acc 0.054 and permuted-level resolution? Parent decided_gate_margin power analysis (P(X>=4|n=20,p=0.10)=0.133) carries over unchanged.",
+    "The parent audit's post hoc enumerated 21 G3-reincluded candidate taus without listing them; whether that list literally contained 0.6 is not recoverable from the parent audit fields, but select_feasible_and_g3_gate_met=[0.3333] already excludes 0.6, which is what the entailment argument requires (auditor recomputation independently confirms 0.6 fails).",
+    "Pooled TRAIN dilution vs intrinsic mechanism weakness for the joint blind+retrieval SELECT selective_acc=0.0 remains undecomposed (carried from producer unresolved).",
+    "OOS-denominator power on the blind G3 outcome at tau*=0.6 (0 executed OOS; no FA-rate claim available) — carried from producer unresolved.",
+    "Whether the mandate question ('does BLIND_FAILS persist independent of the ascending-tau tie-break?') can still be answered by a future packet at acceptable cost, given that any rule family that optimizes SELECT FA alone provably drifts away from 0.3333 toward taus that fail TEST by UP/COV collapse; a held-out-axis or coverage-constrained rule is the smallest remaining discriminating test and requires a new Director mandate."
+  ]
+}
