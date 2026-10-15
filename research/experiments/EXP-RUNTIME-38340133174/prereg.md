@@ -31,11 +31,15 @@ information beyond the gated episodes (36 per-trial fresh-silence probes plus
 12 held-out guard-only perturbations on fresh seeds). "Scaffolding-priced" is
 honored by the pair: latency prices every scaffolding operation in time, the
 5-field sensitivity prices it in ops, and the phase attribution locates it. The
-classifier decides on the shipped premise plus latency, for the reachability
+classifier decides on the shipped premise plus dual-boundary latency, for the reachability
 reason recorded in §9 (the 5-field unit counter is deterministically
 reuse-negative on nominal vectors, so deciding on it would make SUPPORTS
 arithmetically unreachable — a degenerate design; it is reported, not decided).
-An sp deficit without cold drift routes to PRICED-DEFICIT/DROP, never INVALID.
+PRICED-WIN requires strict wins on the shipped premise, the inclusive latency
+boundary AND the v3-exact NOARG boundary at both L, so the disclosed
+deepcopy-operand asymmetry can only hurt reuse, never manufacture a win.
+An sp deficit without cold drift routes to PRICED-DEFICIT/DROP, never INVALID;
+a NOARG-only deficit likewise routes to PRICED-DEFICIT/DROP, never INVALID.
 
 Non-degeneracy dilemma (stated explicitly so the structure cannot be misread
 as hiding a choice): the shipped 4-field counter is deterministic 17 vs 18/19
@@ -45,12 +49,15 @@ preregistered 1:1 scaffold weights is deterministic ≈27 vs ≈21–22 — deci
 on it would make SUPPORTS unreachable (structurally reuse-negative under an
 arbitrary weight choice). Both single-counter rules are degenerate in opposite
 directions, so neither is the decider. The only non-arbitrary
-scaffolding-inclusive measure is wall-clock latency under the inclusive timed
-boundary (every scaffolding operation consumes time by construction, with no
-weight choice anywhere), which is therefore the empirical decider; the shipped
+scaffolding-inclusive measure is wall-clock latency (every scaffolding
+operation consumes time by construction, with no weight choice anywhere),
+which is therefore the empirical decider — measured on BOTH the inclusive
+timed boundary and the v3-exact S-ARG-subtracted boundary, with PRICED-WIN
+requiring strict wins on both so the disclosed operand asymmetry cannot
+manufacture a win; the shipped
 counter is retained as the mandate-named drift-checked premise (V-DRIFT-COLD +
 V-DRIFT-REUSE + V-EQ-HOLDS) and the 5-field form as reported sensitivity. The
-pair (premise + latency) jointly omits no cost dimension used by either
+pair (premise + dual-boundary latency) jointly omits no cost dimension used by either
 comparator: auditable op dimensions in the counter, all residual scaffolding
 in time.
 
@@ -100,15 +107,27 @@ claim; no conservative-arm superiority claim.
 
 ## 4. Arms, shipped counter, scaffold units
 
-Timed episodes (v4 inclusive boundary: arg deepcopy materialization + arm
-execution; placement symmetric, operand asymmetric by construction — reuse
-deepcopies the full mech dict, cold deepcopies `{}`; v3-exact boundary via
-S-ARG subtraction as sensitivity): T-REPAIR-REUSE vs B-COLD (L=3) vs B-COLD-MIN (L=2), 2 excluded
-warmups per trial, predeclared parity order. The 2 warmups call the ORIGINAL
+Timed episodes (dual gated latency boundaries: v4 INCLUSIVE boundary = arg
+deepcopy materialization + arm execution, placement symmetric, operand
+asymmetric by construction — reuse deepcopies the full mech dict, cold
+deepcopies `{}`; v3-EXACT boundary = inclusive minus S-ARG, symmetric in both
+placement and operand. BOTH boundaries gate the priced decision (§8): a
+PRICED-WIN requires reuse strictly faster under inclusive AND exclusive at
+both L=2 and L=3, so no win can be a deepcopy-operand artifact; any deficit on
+either boundary routes to PRICED-DEFICIT/DROP. The 2 warmups call the ORIGINAL
 pinned v2 episode functions (`v2.run_repair_reuse`, `v2.run_cold`) and their
 discrete projections (success + shipped sums) are captured per trial as the
 V-EQUIV diagnostic: audit can compare original-function vs instrumented-episode
-discrete outcomes on identical trial state. V-EQUIV is recorded, never gated. Untimed in-trial: T-REPAIR-CONSERVATIVE
+discrete outcomes on identical trial state. V-EQUIV is recorded, never gated.
+Between warmups and timed episodes every trial runs an untimed
+perturbation-retention re-check (fresh `retain4` arm on a deepcopied mechanism
+dict, resolve + fetch + guard on the perturbed target with the identical v2
+calls; requires guard stale=True): it proves the warmups did not heal or
+consume the perturbation (the server is read-only — no POST handler exists in
+the pinned v2 module — and `guard` is pure, so retention holds by
+construction; the tripwire makes it verified rather than asserted). Retention
+failure marks the trial invalid (n-control then forces MEASUREMENT_INVALID,
+never a negative). Untimed in-trial: T-REPAIR-CONSERVATIVE
 and T-REPAIR-LEGACY sensitivities, B-LITERAL-REPLAY / B-NO-REPAIR mechanism
 controls, contamination and write-set probes (outside timed sections, exactly as
 parent v3). Baseline/treatment identifiers are frozen as in spec.json and reused
@@ -179,14 +198,18 @@ vectors (6,5,5,1)/(5,5,6,1) on the byte-identical carrier; break = reuse-side
 driver/substrate drift → MEASUREMENT_INVALID, never a negative; genuine repair
 failures can never trip it because the pin constrains only successful-repaired
 trials, and charging semantics live entirely in pinned v2 code the driver
-calls but never reimplements); V-EQUIV diagnostic (per-trial warmup
+calls but never reimplements); V-RETAIN tripwire (untimed post-warmup guard
+re-check requires stale=True on the perturbed target; failure marks the trial
+invalid, never a negative); V-EQUIV diagnostic (per-trial warmup
 original-function vs timed instrumented-episode discrete projections recorded
 for audit recomputation; not gated); V-EQ-HOLDS reported premise
 (deterministic 17/18, 17/19 inequality, zero empirical variance by
 construction — AF-3 lesson; an sp deficit without cold drift routes to
-PRICED-DEFICIT/DROP, never INVALID); V-TIMING parity/finite (S-ARG operand
-asymmetric by construction, isolated via M-LATENCY-R-L3-NOARG); V-CLOSURE and
-V-CERT on independent tracks (§8).
+PRICED-DEFICIT/DROP, never INVALID); V-TIMING parity/finite/dual-boundary
+(S-ARG operand asymmetric by construction inside the inclusive boundary;
+PRICED-WIN requires strict wins on inclusive AND v3-exact NOARG at both L,
+so the disclosed asymmetry can only hurt reuse, never manufacture a win);
+V-CLOSURE and V-CERT on independent tracks (§8).
 
 ## 7. B11 second deliverable: probe-coverage certificate (V-CERT track)
 
@@ -230,14 +253,23 @@ Per class (n=12): functional_ok (parent bars); V-DRIFT-COLD gate (cold sums
 exactly 216/228, cold http exactly 96/108 — repair-independent drift pin);
 V-DRIFT-REUSE gate (every successful-repaired trial ships exactly 17 with
 class-expected http — reuse-side drift pin; genuine repair failures cannot
-trip it); sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00 (reported premise
-V-EQ-HOLDS: deterministic 17/18, 17/19 by protocol, zero empirical variance);
-lw := M-LATENCY-R-L2<1.00 AND M-LATENCY-R-L3<1.00 (medians; B_LAT=2000 bootstrap
-CIs reported alongside per-trial 12/12 sign patterns; the empirical decider).
-Class first match: FUNCTIONAL-FAIL / COST-UNKNOWN (any ratio None) /
+trip it); V-RETAIN (untimed post-warmup retention re-check stale=True on every
+trial; failure marks the trial invalid via n-control, never a negative);
+sp := M-SHIPPED-RATIO-L2<1.00 AND M-SHIPPED-RATIO-L3<1.00 (reported premise
+V-EQ-HOLDS: MEASURED from the run; the design PREDICTS deterministic 17/18,
+17/19 by protocol with zero empirical variance, and the V-DRIFT pins verify
+the prediction — an sp deficit without cold drift routes to PRICED-DEFICIT,
+never INVALID);
+lw := M-LATENCY-R-L2<1.00 AND M-LATENCY-R-L3<1.00 (inclusive medians)
+AND M-LATENCY-R-L2-NOARG<1.00 AND M-LATENCY-R-L3-NOARG<1.00 (v3-exact
+medians; B_LAT=2000 bootstrap CIs reported alongside per-trial 12/12 sign
+patterns; the empirical decider, robust to the disclosed S-ARG operand
+asymmetry by construction).
+Class first match: FUNCTIONAL-FAIL / COST-UNKNOWN (any of the six ratios None) /
 PRICED-WIN (sp AND lw) / PRICED-DEFICIT (an sp deficit without cold drift
-lands here, never INVALID). Aggregate first match: gate failure (incl.
-V-DRIFT-COLD and V-DRIFT-REUSE) → MEASUREMENT_INVALID; any FUNCTIONAL-FAIL →
+lands here, never INVALID; a NOARG-only deficit also lands here, never
+INVALID). Aggregate first match: gate failure (incl.
+V-DRIFT-COLD, V-DRIFT-REUSE, V-RETAIN-via-n-control) → MEASUREMENT_INVALID; any FUNCTIONAL-FAIL →
 FALSIFIES-FUNCTIONAL; any COST-UNKNOWN → INCONCLUSIVE; all
 PRICED-WIN → SUPPORTS (re-admit localized repair to C-PRODUCT-ECON with honest
 denominators; no promotion; B3 blocker recorded); else → PERMANENT-DROP-BOUNDED
@@ -254,17 +286,22 @@ priced decision.
 
 - Empty/unreachable branches: frozen pure classifier driven with synthetic rows
   at DESIGN — all 4 class branches and all 4 aggregates produced (all True);
-  strict-inequality boundary tested (1.00 is NOT a win); aggregate checks
-  FUNCTIONAL-FAIL before COST-UNKNOWN, matching class order, so no functional
-  failure is masked by an unknown. Reachability probe re-runs inside the
-  frozen driver (`--reachability-probe`, pure, no substrate). The one
-  defensive-unreachable path (sp deficit without cold drift) is retained
-  deliberately so the classifier is total under drift the pins did not catch;
-  it routes to PRICED-DEFICIT/DROP, and PRICED-DEFICIT itself is reachable via
-  the latency surface, so no DECISION branch is empty. The gates
-  (V-DRIFT-COLD, V-DRIFT-REUSE, V-TIMING, V-CLOSURE-track, V-CERT-track) are
-  fail-safe INVALID by construction — reachable trivially, and their firing
-  is a measurement verdict, not a shadowed decision.
+  strict-inequality boundary tested on shipped AND noarg conjuncts (1.00 is
+  NOT a win on any of the six ratios); dedicated `PRICED-DEFICIT-noarg` and
+  `PRICED-DEFICIT-noarg-boundary` probe rows prove the v3-exact conjunct bites
+  independently (a win on inclusive latency alone does NOT classify as
+  PRICED-WIN); aggregate checks FUNCTIONAL-FAIL before COST-UNKNOWN, matching
+  class order, so no functional failure is masked by an unknown. Reachability
+  probe re-runs inside the frozen driver (`--reachability-probe`, pure, no
+  substrate). The one defensive-unreachable path (sp deficit without cold
+  drift) is retained deliberately so the classifier is total under drift the
+  pins did not catch; it routes to PRICED-DEFICIT/DROP, and PRICED-DEFICIT
+  itself is reachable via three independent surfaces (shipped, inclusive
+  latency, exclusive latency), so no DECISION branch is empty. The gates
+  (V-DRIFT-COLD, V-DRIFT-REUSE, V-RETAIN-via-n-control, V-TIMING,
+  V-CLOSURE-track, V-CERT-track) are fail-safe INVALID by construction —
+  reachable trivially, and their firing is a measurement verdict, not a
+  shadowed decision.
 - Arithmetic impossibility and the AF-3 lesson: nominal-vector arithmetic at
   DESIGN confirms the shipped 4-field comparison is deterministic (17 vs 18/19
   on every functional_ok trial) — it is therefore framed as a drift-checked
@@ -282,8 +319,9 @@ priced decision.
   correct consequence, and the packet is decision-changing via DROP either way
   under the mandate stop trigger. The v4 boundary change (symmetric placement)
   attenuates ratios toward 1.0 but preserves order, so it is not claimed as a
-  flip mechanism; the v3-exact NOARG sensitivity would expose any
-  boundary-artifact dependence as a diagnostic.
+  flip mechanism; the v3-exact NOARG co-decider replaces the old diagnostic
+  role with a gate (inclusive-win/NOARG-loss now drops rather than merely
+  flagging), which can only make SUPPORTS harder, never easier.
 - Precedence (no swallow): V-DRIFT-COLD gates only repair-independent cold
   nominals, so it cannot mask a repair effect; an sp deficit without cold drift
   is arithmetically impossible on functional_ok trials, and if ever observed it
@@ -316,8 +354,21 @@ priced decision.
   recomputation. Arms share substrate/seeds/perturbations and differ only in
   preregistered physical/scaffold counts, evidenced by oplogs + phase timings
   + scaffold counts (V14); S-ARG operand asymmetric by construction (full
-  mech-dict vs `{}`), disclosed and isolated via the NOARG sensitivity rather
-  than mislabeled symmetric.
+  mech-dict vs `{}`), disclosed and NEUTRALIZED by the dual decider rather
+  than merely diagnosed: the asymmetry can only inflate the inclusive reuse
+  latency, so requiring strict wins on inclusive AND v3-exact at both L means
+  the artifact can only hurt reuse, never manufacture a PRICED-WIN (a win is
+  artifact-robust; a drop is valid either way). Attribution still prices the
+  inclusive excess with S-ARG as an explicit candidate component, so the
+  mandate's "which scaffolding component" question is answered on the full
+  surface including the deepcopy hypothesis.
+- Warmup non-interference (verified, not asserted): the pinned v2 module
+  contains no POST handler (read-only GET server), `set_perturb` is called
+  only by non-trial paths, `guard` is pure (builds new token sets, never
+  mutates the shared `cached` entry), and every trial arm constructs a private
+  registry from deepcopied inputs — so warmups cannot heal or consume the
+  perturbation by construction; the untimed V-RETAIN re-check converts this
+  from assertion to per-trial verified fact (fail-INVALID, never negative).
 - Insensitive controls: overbroad instrument live in parent (4/4 every trial
   on the byte-identical carrier; DESIGN verified the function present and
   callable, live-fire basis inherited, not re-fired); must-fail/must-silent controls retained
@@ -325,8 +376,17 @@ priced decision.
   per-trial fresh-silence probes + 2 NCs; sensitivity over the 36-episode bank
   plus 12 held-out unseen perturbations (independent information, not a relabel).
 - Missing prerequisites: none — imports, pins, hashes, timer, bank
-  enumerability, all 31 used v2-module attributes (static name check), and cold-nominal
-  arithmetic all verified at DESIGN (§10 PASS, §15).
+  enumerability, all 31 used v2-module attributes (presence by AST at prior
+  revision, upgraded here to full calling-convention verification: every v2
+  callable the driver invokes signature-checked 2026-10-15 — resolve/netfetch/
+  verify/charge_repair_attempt/rebind/target_mech/distill_parameterized/guard/
+  local_repair/execute_batch/runners/no_perturbation_trial/noise_trial/
+  overbroad_contamination/unaffected_behavior/make_mech_dicts/
+  synthetic_repair_signal_probe/wait_ready plus Counters short keys and
+  TrajectoryCounters long keys with model_calls/model_tokens — all compatible
+  with the driver's call sites), warmup non-interference (no-mutation
+  inspection + V-RETAIN tripwire), and cold-nominal arithmetic all verified
+  at DESIGN (§10 PASS, §15).
 - Unbound mutable artifacts: exactly 4 tracked files, hashes verified,
   listed in spec.freeze_artifacts (3 carrier + the runtime-imported v2 runner,
   additionally fail-closed by the V0 runtime pin); v4 driver embedded below and
@@ -340,7 +400,7 @@ freeze_artifacts = [`src/spider/kernel.py`, `src/spider/models.py`,
 `research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py`].
 The v4 driver is the exact text between the two standalone marker lines in §12
 (`V4-RUNNER-BEGIN` and `V4-RUNNER-END`, each the unique occurrence of its kind
-in this file). CANONICAL-RUNNER-V4-SHA256 = `dcfbad8ac8f3b028798bbcba7248be279777eac4ad9d73f6258aa75cdcacd8ee`
+in this file). CANONICAL-RUNNER-V4-SHA256 = `4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d`
 (computed 2026-10-15 from the §12 text by the exact algorithm EXECUTE must
 repeat verbatim: split this file on the line exactly equal to
 `V4-RUNNER-BEGIN` and the line exactly equal to `V4-RUNNER-END`; take the
@@ -660,6 +720,32 @@ def run_trial_v4(cls, target, seed, j):
             warmups = 2
             wu_reuse_arm = (wu_reuse or {}).get("arm")
             wu_cold_arm = (wu_cold or {}).get("arm")
+            try:
+                retain_arm = v2.Arm(copy.deepcopy(mechs), Path("/tmp"), "retain4")
+                retain_mech = retain_arm.target_mech(target)
+                retained = False
+                if retain_mech is not None:
+                    retain_slot = retain_mech.parameter_slots[0]
+                    retain_r0 = retain_arm.resolve(
+                        retain_mech.intent, {"resource_type": target},
+                        {retain_slot: str(v2.TASK_IDS[0])})
+                    if (retain_r0.status.name == "EXECUTABLE"
+                            and retain_r0.bound_action is not None):
+                        retain_failed = retain_arm.netfetch(
+                            retain_r0.bound_action["url"],
+                            retain_r0.bound_action.get("headers", {}),
+                            origin=app.origin)
+                        retain_stale, _ = v2.guard(
+                            cached[target],
+                            set(v2.flatten(retain_mech.postconditions)),
+                            retain_failed, retain_arm, retain_mech,
+                            {retain_slot: str(v2.TASK_IDS[0])})
+                        retained = bool(retain_stale)
+            except Exception:
+                retained = False
+            if not retained:
+                return {"valid": False, "reason": "perturbation-not-retained",
+                        "class": cls, "target": target}
             rep_first = (j % 2 == 0)
             if rep_first:
                 rep = _timed_episode(run_reuse_episode, app, app.origin,
@@ -710,6 +796,7 @@ def run_trial_v4(cls, target, seed, j):
                       for a in (rep, cons, leg, c3, c2) if "arm" in a)
         return {
             "valid": True, "class": cls, "target": target,
+            "retention_ok": True,
             "repair_success": bool(rep.get("ok")),
             "repair_guard_fired": bool(rep.get("guard_fired")),
             "repair_reason": rep.get("reason"),
@@ -827,9 +914,10 @@ def cost_verdict_v4(m):
         return "FUNCTIONAL-FAIL"
     sp2, sp3 = m.get("M-SHIPPED-RATIO-L2"), m.get("M-SHIPPED-RATIO-L3")
     lw2, lw3 = m.get("M-LATENCY-R-L2"), m.get("M-LATENCY-R-L3")
-    if sp2 is None or sp3 is None or lw2 is None or lw3 is None:
+    na2, na3 = m.get("M-LATENCY-R-L2-NOARG"), m.get("M-LATENCY-R-L3-NOARG")
+    if any(v is None for v in (sp2, sp3, lw2, lw3, na2, na3)):
         return "COST-UNKNOWN"
-    if sp2 < 1.0 and sp3 < 1.0 and lw2 < 1.0 and lw3 < 1.0:
+    if sp2 < 1.0 and sp3 < 1.0 and lw2 < 1.0 and lw3 < 1.0 and na2 < 1.0 and na3 < 1.0:
         return "PRICED-WIN"
     return "PRICED-DEFICIT"
 
@@ -845,20 +933,24 @@ def aggregate_v4(cvs):
 
 
 def synthetic_reachability_probe_v4():
-    def row(ok=True, sp2=0.9, sp3=0.85, lw2=0.95, lw3=0.93):
+    def row(ok=True, sp2=0.9, sp3=0.85, lw2=0.95, lw3=0.93, na2=0.96, na3=0.94):
         return {"M-REPAIR-SUCCESS": 1.0 if ok else 0.0,
                 "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7575 if ok else 0.0,
                 "M-CONTAMINATION-RATE": 0.0, "M-WRITE-SET-MAX": 1,
                 "M-GUARD-FIRE-RATE": 1.0,
                 "M-SHIPPED-RATIO-L2": sp2, "M-SHIPPED-RATIO-L3": sp3,
-                "M-LATENCY-R-L2": lw2, "M-LATENCY-R-L3": lw3}
+                "M-LATENCY-R-L2": lw2, "M-LATENCY-R-L3": lw3,
+                "M-LATENCY-R-L2-NOARG": na2, "M-LATENCY-R-L3-NOARG": na3}
     cases = {
         "PRICED-WIN": row(),
         "PRICED-DEFICIT-shipped": row(sp2=1.05),
         "PRICED-DEFICIT-latency": row(lw3=1.10),
+        "PRICED-DEFICIT-noarg": row(na3=1.02),
         "PRICED-DEFICIT-boundary": row(sp2=1.0),
+        "PRICED-DEFICIT-noarg-boundary": row(na2=1.0),
         "FUNCTIONAL-FAIL": row(ok=False),
-        "COST-UNKNOWN": row(sp2=None, sp3=None, lw2=None, lw3=None),
+        "COST-UNKNOWN": row(sp2=None, sp3=None, lw2=None, lw3=None,
+                            na2=None, na3=None),
     }
     verdicts = {k: cost_verdict_v4(v) for k, v in cases.items()}
     aggregates = {
@@ -964,8 +1056,12 @@ def _per_class_metrics(cls, rows, seed_base):
     m["M-LATENCY-SIGN-REUSE-SLOWER-L3"] = sum(1 for a, b in zip(t_rep, t_c3) if a > b)
     no_arg_rep = [r["t_reuse_s"] - (r.get("repair_phases") or {}).get("S-ARG", 0.0)
                   for r in rows]
+    no_arg_c2 = [r["t_cold_min_s"] - (r.get("cold_min_phases") or {}).get("S-ARG", 0.0)
+                 for r in rows]
     no_arg_c3 = [r["t_cold_s"] - (r.get("cold_phases") or {}).get("S-ARG", 0.0)
                  for r in rows]
+    m["M-LATENCY-R-L2-NOARG"] = ((_median(no_arg_rep) / _median(no_arg_c2))
+        if (_median(no_arg_rep) is not None and _median(no_arg_c2)) else None)
     m["M-LATENCY-R-L3-NOARG"] = ((_median(no_arg_rep) / _median(no_arg_c3))
         if (_median(no_arg_rep) is not None and _median(no_arg_c3)) else None)
     comp = {}
@@ -1331,8 +1427,11 @@ Priced metrics (per class): `M-SHIPPED-REUSE`, `M-SHIPPED-COLD-L2/L3`,
 `M-REUSE-HTTP` (per-class reuse http sum; pin expects P1 72 / P2 60 / P3 72),
 `V-DRIFT-COLD-HOLDS`, `V-DRIFT-REUSE-HOLDS`, `V-EQ-HOLDS` (reported premise), `M-LATENCY-REUSE-MED-S`,
 `M-LATENCY-COLD-L2/L3-MED-S`, `M-LATENCY-R-L2/L3` (+ `M-LATENCY-R-L2/L3-CI95`
-with `B_LAT=2000`, `M-LATENCY-SIGN-REUSE-SLOWER-L3`, `M-LATENCY-R-L3-NOARG`
-sensitivity). Functional/locality: `M-REPAIR-SUCCESS`,
+with `B_LAT=2000`, `M-LATENCY-SIGN-REUSE-SLOWER-L3`) and co-gated
+`M-LATENCY-R-L2-NOARG` / `M-LATENCY-R-L3-NOARG` (v3-exact boundary; strict
+<1.00 at both L required for PRICED-WIN). Per-trial `retention_ok`
+(post-warmup perturbation-retention re-check) recorded for audit; retention
+failure marks the trial invalid via n-control. Functional/locality: `M-REPAIR-SUCCESS`,
 `M-REPAIR-SUCCESS-WILSON-LOWER`, `M-CONTAMINATION-RATE` (count-derived),
 `M-WRITE-SET-MAX`, `M-GUARD-FIRE-RATE`, `M-COLD-SUCCESS`, `M-LITERAL-SUCCESS`,
 `M-NOREPAIR-SUCCESS`, `M-BASE-LIVENESS`, `M-OVERBROAD-CONTAMINATION-N`
@@ -1373,83 +1472,110 @@ liveness/reachability preflight outputs. Measurement failure (any gate in
 recorded blocker; B11 certificate is measured (bank + fresh-silence +
 held-out), not closed.
 
-## 15. DESIGN probe record 2026-10-14/15 (non-outcome-bearing only)
+## 15. DESIGN probe record 2026-10-15 (non-outcome-bearing only)
 
-Prior-revision transparency: an earlier DESIGN submission of this packet
-received `design_review` status REVISE (factory exit 65); the review artifact
-was discarded by the factory's failed-stage cleanup before this revision, so
-its specific findings are unavailable to DESIGN. This revision therefore
+Prior-revision transparency: two earlier DESIGN submissions of this packet
+received `design_review` status REVISE (factory exit 65); both review artifacts
+were discarded by the factory's failed-stage cleanup before this revision, so
+their specific findings are unavailable to DESIGN. This revision therefore
 hardens all six satisfiability fronts preemptively rather than answering
-unknown findings: (i) new fail-safe V-DRIFT-REUSE pin (§6/§8/§12) protecting
-the priced DROP integrity against reuse-side sequencing drift; (ii) honest
-reimplementation disclosure with the sequence-equivalence map (§9) replacing
-any "wrapping only" reading; (iii) explicit non-degeneracy dilemma (§1) showing
-why shipped-premise-plus-latency is the unique non-degenerate decision
-structure; (iv) census-vs-new labeling for the certificate (§7); (v) V-EQUIV
-warmup-vs-timed diagnostic capture (§4/§12/§13); (vi) defensive-branch
-totality argument (§9). No scored trial and no confirmatory measurement was
-run in either revision.
+unknown findings, retaining all prior hardening (fail-safe V-DRIFT-REUSE pin;
+honest reimplementation disclosure with sequence-equivalence map; explicit
+non-degeneracy dilemma; census-vs-new certificate labeling; V-EQUIV
+warmup-vs-timed diagnostic; defensive-branch totality) and adding three new
+structural hardenings: (vii) DUAL-BOUNDARY latency decider — PRICED-WIN now
+requires strict wins on the inclusive boundary AND the v3-exact
+S-ARG-subtracted boundary at both L, so the disclosed deepcopy-operand
+asymmetry can only hurt reuse, never manufacture a win (an inclusive-only win
+now drops via dedicated `PRICED-DEFICIT-noarg` probe rows); (viii) untimed
+V-RETAIN perturbation-retention tripwire between warmups and timed episodes,
+converting warmup non-interference from assertion to per-trial verified fact;
+(ix) calling-convention verification of every v2 callable (signatures, not
+just AST presence) plus a discriminating retention canary.
 
-No scored trial and no confirmatory measurement was run. Probes: (a) v2 pin
-re-verified (60855 bytes, d4871091…4962bc608) and carrier hashes byte-identical
-to the parent freeze (kernel 3a6caf97…, models 338aaf4d…, registry
-51fb440d…); Python 3.12.15 stdlib. (b) Pure synthetic reachability probe
-(re-run at DESIGN on the frozen classifier: cost_verdict_v4 + aggregate_v4
-with FUNCTIONAL-FAIL-first order at both levels): all 4 class branches and
-all 4 aggregates reachable (all True); strict-inequality boundary verified
-(1.00 is NOT a win). No substrate, no perturbation, no outcome.
-Repair-signal liveness verified separately via the pinned module's own
-synthetic probe (patched True on P1/P2/P3 synthetic inputs, non-bank
-seed 7, discarded). (c) Fresh-path liveness (unperturbed, discarded,
-booleans only, no timings recorded): server_ready true, distill_live true,
-resolve EXECUTABLE, fetch 200, verify True, guard silent on the unperturbed
-body, registry read/write executes, timer 1ns. No perturbation, no repair,
-no scored seeds, no treatment-vs-baseline comparison. Contamination,
-out-of-support-degenerate, and phase-key/closure liveness basis is inherited
-from the parent PASS packet on the byte-identical carrier, not re-fired at
-DESIGN. (d) Legacy: compact `codex/legacy_artifact_index.json` scan yields
-0 hits for 'scaffolding'; full-archive grep of the mounted
+No scored trial and no confirmatory measurement was run in any revision. All
+probes below were executed 2026-10-15 against the CURRENT §12 driver body
+(CANONICAL-RUNNER-V4-SHA256 =
+`4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d`):
+
+(a) Pins: v2 runner 60855 bytes,
+d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608; carrier
+hashes byte-identical to the parent freeze (kernel 3a6caf97…, models
+338aaf4d…, registry 51fb440d…); Python 3.12.15 stdlib-only.
+
+(b) Pure synthetic `--reachability-probe` (no substrate, no perturbation, no
+outcome): all 4 class branches {PRICED-WIN, PRICED-DEFICIT,
+FUNCTIONAL-FAIL, COST-UNKNOWN} and all 4 aggregates {SUPPORTS,
+PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL, INCONCLUSIVE} reachable (all
+True); strict-inequality boundary verified on all six ratios (1.00 is NOT a
+win); new `PRICED-DEFICIT-noarg` / `PRICED-DEFICIT-noarg-boundary` rows prove
+the v3-exact conjunct bites independently. Pinned-module repair-signal probe:
+patched True on P1/P2/P3 synthetic inputs.
+
+(c) Fresh-path `--liveness-only` (unperturbed, discarded, no timings kept, no
+repair, no scored seeds, no treatment-vs-baseline comparison): server_ready
+true, distill_live true, task read verified (resolve EXECUTABLE, fetch 200,
+verify True), contamination instrument live on in-support probe id 14,
+out-of-support probe degenerate, NC-NO-PERTURBATION/NC-NOISE silent,
+timer 1ns, v4 instrumented cold-episode phase keys present
+(S-ARG/S-DISCOVERY/S-DISTILL/S-EXECUTE/S-OBSERVE/S-REGISTRY-BUILD/S-REGISTRY-WRITE)
+with finite closure. Nothing inherited-without-refire remains: every control
+instrument the scored run depends on was re-fired under the v4 import at
+DESIGN.
+
+(d) Retention canary (control canary, discarded seed SEED4+777001, never in
+the scored bank; one guard read fresh + one guard read perturbed; no repair,
+no timing, no comparison): fresh branch stale=False, perturbed branch
+stale=True — the V-RETAIN tripwire discriminates correctly.
+
+(e) Calling-convention verification (static, no scored paths executed): every
+v2 callable the driver invokes signature-checked — Arm(mech_dicts, reg_dir,
+tag), resolve(intent, context, params), netfetch(url, headers, origin),
+verify(mid, body, params), charge_repair_attempt(), rebind(intent, context,
+params), target_mech(resource), distill_parameterized(observations),
+guard(cached_tokens, required_paths, failed, arm, mech, params),
+local_repair(arm, mech, resource, slot, probe_id, failed, origin),
+execute_batch(arm, intent, context, slot, ids, extra_header),
+run_repair_reuse(app, origin, mechs, cached, resource, mode),
+run_cold(app, origin, resource, ids, tag), run_repair_legacy/run_literal/
+run_norepair (matching arities), no_perturbation_trial/noise_trial(seed),
+overbroad_contamination(base_live, origin, resource, patched_mech_dict,
+probe_id), unaffected_behavior(mechs, origin, resource, tag, probe_id),
+make_mech_dicts(origin, counters), synthetic_repair_signal_probe(),
+wait_ready(app); Counters short keys (http/retrieval/verification/repair)
+and TrajectoryCounters long keys (http_requests/retrieval_calls/
+verification_calls/repair_attempts) plus model_calls/model_tokens all present
+— the driver's dual-key `_shipped_sum`/`_http_of` covers both. Warmup
+non-interference by inspection: no POST handler in the pinned module
+(read-only GET server), `set_perturb` called only by non-trial paths,
+`guard` pure (no mutation of the shared `cached` entry) — plus the V-RETAIN
+tripwire at runtime. Cold/reuse nominal arithmetic verified
+(12x17=204/12x18=216/12x19=228/12x8=96/12x9=108); extraction algorithm of §10
+verified to reproduce the §12 driver body byte-identically (CANONICAL hash
+recomputed from the edited body, not carried over).
+
+(f) Legacy: compact `codex/legacy_artifact_index.json` scan yields 0 hits for
+'scaffolding'; full-archive grep of the mounted
 `.spider-runtime/pre2/SPIDER_CODEX_ULTIME.md` yields 30 hits, all inspected
 and all unrelated senses (repo/workflow scaffolding, retrieval scaffolding,
 accessibility scaffolding, non-stimulus scaffolding deltas) with zero
 episode-cost or scaffolding-pricing content → NO_MATCH for
 attribution/pricing stands on primary-source inspection, not on
-absence-of-hit; DISTINCT_EXTENSION
-on P2-REPLAY-COST guards; P2-AUTOMATION licensed as method; P2-WP003
-leakage guard honored. (e) Claim state: C-DELTA-REPAIR effective EXPERIMENTAL
-(parent packet); B3 endpoint absent by construction (counters-only + blocker).
-(f) Static checks on the frozen v4 driver (no execution of scored paths):
-all 31 v2-module attributes referenced as `v2.X` in the §12 body (Arm,
-CLASSES, Counters, IN_SUPPORT_PROBE_ID, LEARN_IDS, LEARN_IDS_MIN, LocalApp,
-Observation, RESOURCES, TARGETS, TASK_IDS, TRIALS_PER_CLASS, execute_batch,
-flatten, functional_ok, guard, local_repair, make_mech_dicts, mean,
-no_perturbation_trial, noise_trial, overbroad_contamination, run_cold,
-run_literal, run_norepair, run_repair_legacy, run_repair_reuse,
-synthetic_repair_signal_probe, unaffected_behavior, wait_ready,
-wilson_lower) verified present in the pinned v2 module by AST (defs, assigns
-and imports); AppState.set_perturb verified replacing (non-accumulating), so
-one held-out app serves all 12 probes; cold-nominal arithmetic verified
-(12x18=216, 12x19=228, 12x8=96, 12x9=108); extraction algorithm of §10
-verified to reproduce the §12 driver body byte-identically (CANONICAL hash
-recomputed, not carried over).
+absence-of-hit; DISTINCT_EXTENSION on P2-REPLAY-COST guards; P2-AUTOMATION
+licensed as method; P2-WP003 leakage guard honored.
+
+(g) Claim state: C-DELTA-REPAIR effective EXPERIMENTAL (parent packet); B3
+endpoint absent by construction (counters-only + blocker).
 
 ## 16. Sign-off
 
 This preregistration is PRE-FREEZE and complete. The decision rule is
-reachable, prerequisites verified, baselines discriminating, controls
-sensitive, treatment live, and all mutable local dependencies bound (§9).
+reachable on all branches on both latency boundaries, prerequisites verified
+to calling-convention depth, baselines discriminating under a dual-boundary
+decider that neutralizes the disclosed operand asymmetry, controls sensitive
+with per-trial retention verification, treatment live under the v4
+implementation, and all mutable local dependencies bound (§9).
 Scored execution is deferred to EXECUTE under `freeze.json`.
-No outcome data was inspected at DESIGN.
-
-2026-10-15 re-verification of the hardened driver (extraction by the §10
-algorithm reproduces the §12 body byte-identically under the new
-CANONICAL-RUNNER-V4-SHA256; pure synthetic `--reachability-probe`: all 4
-class + all 4 aggregate branches reachable, repair-signal patched True on
-P1/P2/P3; fresh-path `--liveness-only`: server/distill/resolve/fetch/verify
-live, guard silent, contamination instrument live, NCs silent, timer 1ns,
-instrumented-episode closure finite; static checks: all 31 `v2.X` attributes
-present in the pinned module, `REUSE_HTTP_EXPECTED` keys match v2 `CLASSES`,
-`NOMINAL` arithmetic 12x17=204/12x18=216/12x19=228/12x8=96/12x9=108 verified,
-reuse per-trial pin 17 with http 6/5/6 grounded in the parent accepted vectors
-(6,5,5,1)/(5,5,6,1) on the byte-identical carrier). No scored seeds, no
-perturbations, no repair-vs-cold comparison were executed or inspected.
+No outcome data was inspected at DESIGN: no scored seeds, no scored-bank
+perturbations, no repair-vs-cold comparison were executed or inspected; the
+only perturbed read was the single discarded-seed retention canary (§15d).
