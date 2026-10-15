@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38340133174",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "RF-1-CLAIM-CEILING-OVERSTATED: result.json.metrics.decision_text_faithful='PERMANENT-DROP-BOUNDED' and report.md section 5 ('permanent bounded drop ... no re-admission, no further L-sweeps') exceed what the packet's own evidence supports. The AUDIT recomputation (AF-6) shows the entire measured reuse latency deficit, and 2x-7x more, is produced by the single per-phase delta S-REGISTRY-BUILD (reuse median 1.4866ms vs cold median 0.0379ms = 39.2x over 36 trials), whose origin in the frozen carrier is the v2 Arm.__init__ loop `for m in mech_dicts.values(): self.registry.upsert(Mechanism(**m))` (research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py:341-353) issuing one full JSONL read+rewrite per inherited mechanism on a fresh file (5 sequential cycles for reuse vs 1 for cold). Equalizing only that phase delta from packet-raw medians moves all six gated ratios below 1.00 (M-LATENCY-R-L3 1.1359/1.0374/1.1187 -> 0.8717/0.7769/0.8604; M-LATENCY-R-L2 1.2463/1.1521/1.2350 -> 0.9564/0.8628/0.9499). The maximum justified ceiling is an implementation-bounded negative that LOCALIZES a removable carrier tax, not a permanent product-story drop that closes the question. Correct decision_text_faithful, product_consequence application and report.md section 5 before any verdict adopts it.",
+    "RF-2-ATTRIBUTION-ANSWER-IS-A-TIE-NOT-A-DETERMINATION: result.json.metrics.attribution_answer='ATTRIBUTED-S-REGISTRY-BUILD' is selected by frozen-driver iteration order over PHASE_KEYS (raw_evidence/runner_delta_repair_scaffold_v4.py:646-689, `if votes[key] >= 2 and attributed is None`), not by evidence strength. AUDIT recomputation of shares_of_excess from raw trials gives three distinct components clearing the frozen >=0.50 share on >=2/3 classes: S-REGISTRY-BUILD (1.932/6.889/2.206, 3/3), S-PROBE (0.855/2.991/0.919, 3/3) and S-REPAIR-SIGNAL (0.757/0.208/0.870, 2/3); the aggregated 'REGISTRY' bucket also clears. Report attribution_answer as a tie set {S-REGISTRY-BUILD, S-PROBE, S-REPAIR-SIGNAL} resolved by first-match order, and record that the shares are non-decomposable (computed against a NET excess that already nets ~2.54ms of cold-side savings on P1), so no single component 'accounts for' the excess in an additive sense.",
+    "RF-3-MANDATORY-METRIC-NULLS-DESPITE-AVAILABLE-VALUES: result.json.metrics.per_class.*.M-SCAFFOLD-REUSE and .M-SCAFFOLD-COLD-L3 are recorded as null on all three classes, but raw_evidence/scored_run.json#per_class.* records M-SCAFFOLD-REUSE=120 and M-SCAFFOLD-COLD-L3=36 per class, and M-SP5-RATIO-L2=1.2857142857142858 / M-SP5-RATIO-L3=1.2272727272727273 are reported in the same object although they are computed directly from those two values. research/EXPERIMENT_PACKET.md section 1 forbids encoding an available value as null. Replace both nulls with the measured integers.",
+    "RF-4-METRIC-IDENTIFIER-DRIFT: result.json renames raw identifiers M-EQUIV-MATCH-N and M-EQUIV-MATCH-DEN into a synthetic result.json-only key 'M-EQUIV-MATCH' with value '12/12'. research/EXPERIMENT_PACKET.md section 1 requires stable metric identity so downstream stages can refer to the same objects. Emit M-EQUIV-MATCH-N=12 and M-EQUIV-MATCH-DEN=12 under their raw names.",
+    "RF-5-CONTAMINATION-DENOMINATOR-MISCOUNT: result.json.observations states 'contamination count 0/24 unaffected probes per class'. raw_evidence/scored_run.json#trials[*].unaffected_n is 4 (RESOURCES has 5 entries, minus the target), so the correct denominator is 4 x 12 = 48 in-support unaffected probes per class (144 across all 36 trials), consistent with the parent packet's audit AF-9 'contamination 0/144'. M-CONTAMINATION-RATE=0.0 is unaffected; the reported denominator is not.",
+    "RF-6-DRIVER-GATE-DEFECT: the frozen driver evaluates three must-pass upper-bound gates as `(m or 1.0) > 0.10` (raw_evidence/runner_delta_repair_scaffold_v4.py:885, 889, 893) and a fourth as `(m or 99) > 1` (line 895). In Python a legitimately observed 0.0 is falsy and is replaced by the default, so perfect must-fail-control behaviour spuriously trips MEASUREMENT_INVALID. This must be repaired to explicit `is None` checks in the next DESIGN revision; the driver is byte-bound by CANONICAL-RUNNER-V4-SHA256 and may not be edited in this packet, so the fix belongs to the successor design, not to this experiment.",
+    "RF-7-DESIGN-PREFLIGHT-COVERAGE-GAP: the defect in RF-6 was reachable before freeze and was not detected. raw_evidence/preflight_reachability.json exercises only synthetic_reachability_probe_v4 -> cost_verdict_v4 / aggregate_v4 (all 4+4 branches live); it never drives the gate block in main() with the boundary values (0.0) that the must-fail controls are designed to produce. spec.freeze_eligibility.decision_rule_reachability.status=PASS therefore overstates gate reachability. The successor DESIGN must probe the gate expressions at 0.0/0.10 and 1/0.10 boundaries.",
+    "RF-8-FREEZE-ARTIFACT-COMPLETENESS: src/spider/__init__.py is executed in the driver's import closure (it re-exports SpiderKernel from .kernel, which the driver imports) but is absent from spec.freeze_artifacts and from freeze.json.artifact_hashes, while spec.freeze_eligibility.freeze_artifacts_bound asserts 'no other mutable imports exist'. This is design_review.json#nonblocking_findings[NB1], already identified pre-freeze and still unbound at EXECUTE. Add it to the successor freeze set or soften the closure claim.",
+    "RF-9-VACUOUS-CONTROL-NOT-DISCLOSED: B-NO-REPAIR is reported PASS in result.json.controls with 'M-NOREPAIR-SUCCESS 0.0 ... guard fired 36/36', but the gate it backs (V6 'success <= 0.10 -> else MEASUREMENT_INVALID') can never trip: pinned v2 run_norepair hardcodes the constant success=False return (runner_delta_repair_reuse_v2.py:665). This is design_review.json#nonblocking_findings[NB2]. The control contributes only its guard-fired diagnostic and the producer did not record its vacuity in result.json.validity_notes, so a downstream reader may credit it as a live must-fail control.",
+    "RF-10-MANDATE-ASYMMETRY-ACTUALLY-FIRED: design_review.json#nonblocking_findings[NB5] warned that a single near-1.00 latency ratio converts to PERMANENT-DROP-BOUNDED with no further L-sweeps while bootstrap CIs are reported but not gated. In this run the narrowest ratio did exactly that: M-LATENCY-R-L3 = 1.0373822814820506 and M-LATENCY-R-L3-NOARG = 1.0234817873434012 on P2-STRUCTURE (CI95 lower bound 1.0233003314931735) are what carry P2 into the permanent-drop tier. Any DIRECTOR adoption must state that the 'permanent' label is triggered by the narrowest of six ratios, not by a uniform margin."
+  ],
+  "validity_findings": [
+    {
+      "id": "AF-1-FREEZE-PROVENANCE-INTEGRITY",
+      "severity": "info",
+      "finding": "Independently verified, all exact. freeze.json.artifact_hashes match working-tree bytes: src/spider/kernel.py 3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3, src/spider/models.py 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, src/spider/registry.py 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c, parent v2 runner 60855 bytes d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608. freeze.json.hashes match request.json c07d0b41..., spec.json 970bb0f2..., prereg.md 707cd27f..., design_review.json c72da266...; no frozen file was modified after freeze. The v4 driver executed in EXECUTE was reproduced byte-for-byte by re-running the prereg section-10 extraction algorithm (split on standalone V4-RUNNER-BEGIN/V4-RUNNER-END, first ```python fence to last ``` fence, join with single newline, no trailing newline): sha256 = 4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d == CANONICAL-RUNNER-V4-SHA256 and == sha256(raw_evidence/runner_delta_repair_scaffold_v4.py). The v4 driver's own content-binding argument (spec.freeze_artifacts_bound: 'path-listing is impossible, bound by content inside prereg.md') is sound and was not gamed. All four provenance artifact hashes match. See RF-8 for the one unbound file in the import closure."
+    },
+    {
+      "id": "AF-2-ALL-MATERIAL-METRICS-REPRODUCE-EXACTLY",
+      "severity": "info",
+      "finding": "Every material number in result.json was recomputed from raw_evidence/scored_run.json#trials (36 valid trials, 12/class, P1-ENDPOINT / P2-STRUCTURE / P3-PERMISSION) and agrees exactly. Counters: M-SHIPPED-REUSE = 204 per class from constant per-trial vectors (6,5,5,1) P1/P3 and (5,5,6,1) P2; M-SHIPPED-COLD-L2 = 216 from (8,5,5,0); M-SHIPPED-COLD-L3 = 228 from (9,5,5,0); M-REUSE-HTTP 72/60/72; M-COLD-HTTP-L2 96, M-COLD-HTTP-L3 108; M-SHIPPED-RATIO-L2 0.9444444444444444; M-SHIPPED-RATIO-L3 0.8947368421052632; M-COST-FETCH-RATIO-L3 0.6667/0.5556/0.6667; M-SP5-RATIO-L2 1.2857142857142858; M-SP5-RATIO-L3 1.2272727272727273; M-LEGACY-RATIO-L2 1.1111111111111112. Functional: M-REPAIR-SUCCESS 1.0, M-REPAIR-SUCCESS-WILSON-LOWER 0.7574992425007574, M-GUARD-FIRE-RATE 1.0, M-CONTAMINATION-RATE 0.0, M-WRITE-SET-MAX 1, M-COLD-SUCCESS 1.0, M-BASE-LIVENESS 1.0, M-LITERAL-SUCCESS 0.0, M-NOREPAIR-SUCCESS 0.0, M-OVERBROAD-CONTAMINATION-N 4.0. Latency: M-LATENCY-REUSE-MED-S 6.2711/5.8100/6.1778 ms; M-LATENCY-COLD-L3-MED-S 5.5208/5.6006/5.5221 ms; M-LATENCY-COLD-L2-MED-S 5.0316/5.0430/5.0023 ms; M-LATENCY-R-L2 1.2463344547216628/1.1520875791824003/1.2350022030076482; M-LATENCY-R-L3 1.1359033840059767/1.0373822814820506/1.118743231792022; NOARG variants 1.2281800770929898/1.1367204048060113/1.2194193593962173 and 1.1192245675190027/1.0234817873434012/1.1046228031771523. All six bootstrap CI95 intervals reproduce to <1e-12 with the frozen method (independent resample, B_LAT=2000, seeds SEED4+7000*(ci+1)+{1,2}). M-CLOSURE-REUSE-MED 0.004197/0.004264/0.003905 and M-CLOSURE-COLD-MED 0.006264/0.006474/0.006393 reproduce. No arithmetic error found in any reported metric."
+    },
+    {
+      "id": "AF-3-VN-DRIVER-OR-DEFAULT-ADJUDICATED-SUBSTANTIVELY-CORRECT",
+      "severity": "minor (accepted; see RF-6, RF-7)",
+      "finding": "The frozen executable's terminal state is status=MEASUREMENT_INVALID with 9 invalid_reasons ('perturbation-does-not-bite', 'abstention-control-fired', 'contamination-above-bar' x3 classes), while result.json reports status=COMPLETE / decision_text_faithful=PERMANENT-DROP-BOUNDED. I adjudicated this against the binding text rather than against either party's summary. The frozen spec.decision_rule and measurement_validity V4/V6/V8 state the gates semantically ('success <= 0.10', 'contamination <= 0.10'); the observed values are exactly 0.0 on all three classes for M-LITERAL-SUCCESS, M-NOREPAIR-SUCCESS and M-CONTAMINATION-RATE, which satisfy those textual bars. The driver's `(0.0 or 1.0) > 0.10` is a Python-falsiness defect, and the driver's own cost classifier path (v2.functional_ok, direct comparisons) returns PRICED-DEFICIT x3. On the substance no named section-8 validity gate fails, so the text-faithful COMPLETE reading is defensible and I do not invalidate the packet on this ground. I record two reservations rather than acceptance-as-is: (i) the override converts a fail-safe MEASUREMENT_INVALID into a negative FALSIFIES, which is the direction requiring the most scrutiny, and it was made after outcomes were visible; (ii) the divergence is a DESIGN-reachable defect that the frozen reachability probe never exercised (RF-7). The producer's handling is otherwise exemplary: the raw stdout is preserved verbatim in result.json.metrics.driver_emitted and never overwritten. Critically, the scientific direction does not depend on this override -- the latency deficit is a separate, independently robust surface."
+    },
+    {
+      "id": "AF-4-DEFICIT-IS-ROBUST-TO-ORDER-NOISE-AND-THE-DISCLOSED-S-ARG",
+      "severity": "info",
+      "finding": "The one genuinely discriminating surface in this packet survives the attacks available to me. (a) Order confound: the deficit is present in BOTH parity orders, not an artifact of running the reuse arm first (P1 R_L3 1.1385 reuse-first vs 1.1210 cold-first; P2 1.0435 vs 1.0344; P3 1.1479 vs 1.1072; 6/6 per class as preregistered). (b) Paired signs: reuse slower than cold-L3 in 35/36 and than cold-L2 in 35/36 individual trials (the single exception is the P3-L3 trial the producer flagged). (c) The disclosed S-ARG deepcopy-operand asymmetry is genuinely neutralized by the v3-exact NOARG boundary and the deficit survives it: the lowest NOARG ratio is 1.0234817873434012 (P2-L3), so this is not a deepcopy artifact. (d) Closure is tight (|S-MISC|/episode median 0.0039-0.0065 against a 0.20 bar), so the phase decomposition reconstructs both episodes and the attribution arithmetic is internally consistent. (e) V-EQUIV holds on BOTH arms, not only the reuse side the driver scored: I recomputed warmup_cold_shipped == shipped sum of cold_cost on 36/36 trials as well as warmup_reuse_shipped 36/36, so the v4 reimplementation's discrete projection is faithful to the pinned v2 functions."
+    },
+    {
+      "id": "AF-5-ATTRIBUTION-TRACK-IS-DEGENERATE-AS-SPECIFIED",
+      "severity": "material",
+      "finding": "H4's criterion ('component X ATTRIBUTED iff its median delta >= 0.50 x median episode gap on >=2/3 classes') is non-discriminating on this data and the frozen first-match order, not the evidence, selects the reported answer. Recomputed shares_of_excess (reuse-minus-coldL3 phase-median delta / median episode gap): S-REGISTRY-BUILD 1.932/6.889/2.206, S-PROBE 0.855/2.991/0.919, S-REPAIR-SIGNAL 0.757/0.208/0.870, S-REGISTRY-WRITE 0.409/1.411/0.488, S-ARG 0.105/0.376/0.120, S-REGISTRY-SCAN 0.113/0.407/0.130, S-POST-VERIFY 0.133/0.464/0.156, S-GUARD 0.001/0.514/0.001, S-CHARGE 0.004/0.012/0.004; negative (cold-side savings) S-EXECUTE -0.480/-1.777/-0.593, S-OBSERVE -2.041/-7.337/-2.328, S-DISCOVERY -0.689/-2.457/-0.745, S-DISTILL -0.180/-0.698/-0.215. Three components clear the bar on >=2/3 classes and two clear it on 3/3. The shares exceed 1.0 because the denominator is a NET excess (0.7503/0.2094/0.6557 ms) that already nets ~2.54ms of cold-side savings on P1, so the metric is not a decomposition and cannot single out a cause. The producer disclosed this honestly in result.json.unresolved[2] and report.md section 3; the defect is that attribution_answer is nevertheless published as a single value. The mandate's question 'which uncounted episode-scaffolding component accounts for the excess' is therefore answered only as 'reuse-side scaffolding in aggregate (~3.23ms gross) net of cold-side savings (~2.54ms)', with registry materialization the single largest term."
+    },
+    {
+      "id": "AF-6-THE-DOMINANT-LATENCY-TERM-IS-A-FROZEN-CARRIER-IMPLEMENTATION-ARTIFACT",
+      "severity": "material-ceiling-bound",
+      "finding": "This is the decisive audit finding. S-REGISTRY-BUILD is 1.4866ms median for the reuse arm and 0.0379ms for the cold arm across all 36 trials (39.2x); S-REGISTRY-WRITE is 0.4268ms vs 0.1234ms (3.5x); S-REGISTRY-SCAN is 0.0851ms vs 0.0000ms. The cause is in the pinned carrier, not in reuse semantics: v2.Arm.__init__ (research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py:341-353) materializes the registry by calling MechanismRegistry.upsert once PER MECHANISM, and upsert performs a full read-all plus write-all of the JSONL file (src/spider/registry.py:28-32). The reuse arm carries 5 inherited mechanisms (Arm built from the full mech_dicts) and executes only the one for the target resource, so it pays 5 sequential read+rewrite cycles plus a registry scan it does not need; the cold arm starts from `Arm({}, ...)` and performs 1 upsert. Equalizing ONLY the S-REGISTRY-BUILD phase delta using packet-raw per-trial values flips all six gated ratios below 1.00 (R_L3 0.8717/0.7769/0.8604; R_L2 0.9564/0.8628/0.9499); equalizing all registry phases gives R_L3 0.8015/0.7086/0.7871. Consequence: the wall-clock deficit that drives PERMANENT-DROP-BOUNDED is an O(n) file-rewrite artifact of the frozen harness carrier, is removable by a one-line change (a single bulk replace, or registering only the target mechanism), and scales adversarially with inheritance breadth. It does not license a permanent product-story drop. Caveat stated honestly: these are medians of components subtracted from medians of totals (not additive; residual ~0.06ms from median non-additivity plus |S-MISC|), they are a diagnostic decomposition of packet-raw data, not a re-measurement, and they are NOT a preregistered counterfactual; they bound what the evidence can support, they do not establish a win."
+    },
+    {
+      "id": "AF-7-BASELINE-IS-STRUCTURALLY-FAVOURABLE-TO-COLD-NO-AMORTIZATION-DENOMINATOR",
+      "severity": "material-ceiling-bound",
+      "finding": "B-COLD is live and its nominals pin exactly (V-DRIFT-COLD holds), but as a product-economics comparator it is weak in a specific, structural way, and the packet decides a C-PRODUCT-ECON admission question without addressing it. (a) Recurrence is fixed at h(N)=1 by construction: one reuse episode is compared to one cold episode. Reuse's entire economic case is amortization across recurrences; there is no recurrence loop and no amortization denominator anywhere in the packet. (b) The 5-mechanism learning cost is paid OUTSIDE the timed window in both arms (v2.make_mech_dicts at runner_delta_repair_scaffold_v4.py:241, before t0), so both arms are handed pre-learned knowledge and only the marginal episode is priced. (c) Cold derivation here is one distill_parameterized over 3 local JSON GETs producing ONE mechanism that covers all 5 task ids, whereas the reuse arm inherits 5 per-resource mechanisms and uses 1. Cold is therefore the cheapest available cold path by construction, and the reuse arm is the most expensive available reuse path by construction. (d) The shipped 4-field premise (M-SHIPPED-REUSE 204 vs 216/228) is a deterministic identity with zero empirical variance, exactly the parent audit AF-3 failure mode relocated from a fitted weight to a fixed one; it is disclosed as a premise and correctly carries no evidential weight, which means the entire decision rides on the latency surface examined in AF-6."
+    },
+    {
+      "id": "AF-8-SUBSTRATE-CANNOT-EXPRESS-THE-TESTED-EFFECT-AT-PRODUCT-SCALE",
+      "severity": "material-ceiling-bound",
+      "finding": "The measured excess (0.2094-0.7503 ms median) is smaller than a single local HTTP GET on this substrate (S-OBSERVE median 510.2us per fetch) and 2-3 orders of magnitude below real web navigation or network economics. The decision rule nonetheless routes a permanent C-PRODUCT-ECON product-story drop through this single-vantage localhost ThreadingHTTPServer measurement. No transfer to real web, browser/network economics, production carriers or external agent harnesses is licensed. Producer bounds this correctly in result.json.unresolved[1] and validity_notes; the defect is that the frozen product_consequence_negative lets the permanent-drop wording outrun that bound."
+    },
+    {
+      "id": "AF-9-B3-STRUCTURAL-ZEROS-CARRY-THE-BLOCKER-CORRECTLY",
+      "severity": "material-ceiling-bound",
+      "finding": "M-MODEL-CALLS-TOTAL=0 and M-MODEL-TOKENS-TOTAL=0 are read from kernel counters (per-trial model_calls/model_tokens summed over the reuse, conservative, legacy, cold-L3 and cold-L2 arms) and are structurally zero: no model endpoint exists on this substrate (V2-SUBSTRATE_ISOLATION). The mandate's 'model calls/tokens' component of an end-to-end counter is therefore absent, and this packet decides a product-economics claim with the largest cost term unmeasured. The producer records this correctly as UNSATISFIABLE-with-blocker in result.json.metrics (b3_model_economics), unresolved[0] and validity_notes, and does not convert the structural zero into evidence. The parent packet's AF-6 carry-forward is honoured."
+    },
+    {
+      "id": "AF-10-LEAKAGE-CONTROLS-AND-INDEPENDENCE-HOLD",
+      "severity": "info",
+      "finding": "No target leakage found. Each Arm writes to a unique path `_RUN_DIR/reg-<tag>-<seq>.jsonl` (v2 Arm._seq), so no registry state crosses arms or trials; cold arms always start from `Arm({}, ...)` and never receive the treatment's cached tokens. write_set_max = 1 on 36/36 trials (only the perturbed target mechanism changed). Contamination is measured only on genuinely unaffected resources with the in-support probe id 14 (TASK_IDS[0]); the out-of-support probe was confirmed degenerate in raw_evidence/preflight_liveness.json (out_of_support_probe_degenerate=true), so the F1 instrumentation defect the parent packet repaired has not recurred. Perturbation retention is verified post-warmup on every trial (retention_ok 36/36), so warmups did not heal the perturbation and the treatment was not silently trivialized. NC-OVERBROAD-REPAIR fires 4/4 on every trial, confirming the instrument is sensitive; M-OVERBROAD-CONTAMINATION-N = 4.0 is a per-trial COUNT of broken unaffected resources (0-4), not a 0-1 rate, carried under the producer identifier per parent AF-10."
+    },
+    {
+      "id": "AF-11-B11-CERTIFICATE-DELIVERABLE-IS-COMPLETE-BUT-DOES-NOT-CLOSE-B11",
+      "severity": "info",
+      "finding": "Recomputed from raw trials: bank_n 36 (sensitivity 36/36 = 1.0), M-CERT-FRESH-N 36, held-out n 12 on seeds SEED4+50000+1000*(ci+1)+k disjoint from the scored bank (sensitivity 12/12 = 1.0, 0 false accepts), M-CERT-SPECIFICITY pooled 38/38 = 1.0, M-CERT-SPECIFICITY-NC 1.0, certificate_complete = true. Boundary labels are honest: BND-REQUIRED-PATHS and BND-THRESHOLD are DERIVED (not measured) and only BND-PROBE-BUDGET is MEASURED, at the single fused probe id 14. Two limits must travel with this deliverable: (i) the certificate's ground truth is stale-by-construction before the guard runs and fresh-by-pre-perturbation, so it certifies guard wiring on this bank rather than real-world probe coverage; (ii) detection is measured at exactly one probe id per episode, which is the budget-sparse boundary the mandate asked about, so the certificate bounds rather than closes B11. The producer states this in report.md section 4 and does not overclaim."
+    },
+    {
+      "id": "AF-12-REPORT-CONSISTENCY-AND-DISCLOSURE-QUALITY",
+      "severity": "info",
+      "finding": "report.md does not exceed result.json and matches it at every checked number (ratios, medians, CIs, closure, certificate counts, attribution deltas, legacy 1.1111). It goes further than required in disclosing VN-DRIVER-OR-DEFAULT in section 1 with the raw stdout preserved, in naming S-PROBE and S-REPAIR-SIGNAL as co-qualifying attribution components in section 3, in naming S-ARG as the disclosed asymmetry and showing the deficit survives its removal, and in pointing AUDIT at the single adjudication point. No measurement exists only in the report. The defects found in this audit (RF-3, RF-4, RF-5) are transcription slips in result.json rather than concealment, and the producer explicitly asks for the driver-idiom question to be adjudicated by AUDIT/DIRECTOR rather than self-repaired."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "verdict": "PASS (frozen nominals, weak as a product comparator)",
+      "finding": "Primary cost/latency denominator, sole denominator as frozen. Recomputed 12/12 success per class, M-SHIPPED-COLD-L3 = 228 from a constant (9,5,5,0) vector, M-COLD-HTTP-L3 = 108; V-DRIFT-COLD holds exactly on all three classes so no substrate/carrier drift contaminated the comparison. Timed in 6/6 parity order against the treatment and shown by AF-4 to be free of order bias. Strength caveat carried from AF-7: it is the cheapest available cold path (one parameterized mechanism from 3 local GETs, Arm built from {}), compared at h(N)=1 with the learning cost excluded from the window, which biases the comparison against reuse by an amount this packet does not measure."
+    },
+    {
+      "id": "B-COLD-MIN",
+      "verdict": "PASS",
+      "finding": "L=2 mandate decision-bar denominator. Recomputed 12/12 success, M-SHIPPED-COLD-L2 = 216 from (8,5,5,0), M-COLD-HTTP-L2 = 96. Sound; inherits the AF-7 strength caveat."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "verdict": "PASS on substance, defective gate expression",
+      "finding": "Recomputed 0 successes in 12/12 trials on all three classes, so the perturbation genuinely bites (V4) and the treatment is not being handed a solved problem. However its gate is the defective `(m or 1.0) > 0.10` at runner_delta_repair_scaffold_v4.py:885, which converts the desired 0.0 into a spurious INVALID. See AF-3, RF-6, RF-7."
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "verdict": "PASS but VACUOUS BY CONSTRUCTION",
+      "finding": "M-NOREPAIR-SUCCESS = 0.0 on all classes as reported, and norepair_guard_fired 36/36 confirms the guard is live while the system abstains. But pinned v2 run_norepair hardcodes success=False (runner_delta_repair_reuse_v2.py:665), so the V6 gate can never trip under any implementation and contributes no discriminating power (design_review NB2). Correctly excluded from the classifier as a non-denominator, but the vacuity is not disclosed in result.json.validity_notes. See RF-9."
+    },
+    {
+      "id": "NC-OVERBROAD-REPAIR",
+      "verdict": "PASS",
+      "finding": "M-OVERBROAD-CONTAMINATION-N = 4.0 per trial on all three classes (target repaired postconditions applied to all mechanisms, in-support probe 14) -> the contamination instrument is demonstrably sensitive and V15 is satisfied. The value is a count of broken unaffected resources (0-4), not a rate; identifier preserved as-is."
+    },
+    {
+      "id": "PC-BASE-LIVENESS",
+      "verdict": "PASS",
+      "finding": "base_liveness true 36/36 and M-BASE-LIVENESS 1.0 per class, verified pre-perturbation inside every scored trial. Confirms the carrier was live before each treatment episode and that the reuse arm's starting knowledge was genuinely executable."
+    },
+    {
+      "id": "T-REPAIR-REUSE",
+      "verdict": "PASS as implemented; the deficit is real but carrier-bound",
+      "finding": "Treatment arm reproduces every frozen nominal exactly (M-SHIPPED-REUSE 204 with http 72/60/72 matching the parent-accepted (6,5,5,1)/(5,5,6,1) vectors, V-DRIFT-REUSE holds 36/36, repair_success 36/36, V-EQUIV 36/36 on both arms). Its wall-clock deficit is real and robust (AF-4). Its cause is a removable registry-materialization tax in the pinned carrier (AF-6), so it supports an implementation-bounded negative, not the permanent product-story drop claimed."
+    },
+    {
+      "id": "T-REPAIR-CONSERVATIVE",
+      "verdict": "PASS (reported sensitivity, correctly excluded from the classifier)",
+      "finding": "conservative_success 36/36 with shipped 18 per trial (http 6/6/5/1 shape, +1 retrieval from the rebind) as frozen. Untimed sensitivity only; no decision weight."
+    },
+    {
+      "id": "T-REPAIR-LEGACY",
+      "verdict": "PASS",
+      "finding": "M-LEGACY-RATIO-L2 = 1.1111111111111112 on every class with legacy_success 36/36, reproducing the prior product-counter regression (V13). legacy_caveats is empty, so the premise holds and no validity caveat is owed."
+    },
+    {
+      "id": "V-CERT",
+      "verdict": "PASS as a runtime instance; does NOT close product B11",
+      "finding": "Complete and recomputed exactly (AF-11). Two of three residual-boundary entries are DERIVED rather than measured and detection is measured at a single fused probe id. The producer's own scope statement -- this packet measures the runtime instance and does not close product B11 -- is correct and must be preserved downstream."
+    },
+    {
+      "id": "V-CLOSURE / V-DRIFT-COLD / V-DRIFT-REUSE / V-TIMING / V-RETAIN / V-EQ-PREMISE",
+      "verdict": "PASS (all reproduced from raw trials)",
+      "finding": "V-CLOSURE 0.0042/0.0043/0.0039 reuse and 0.0063/0.0065/0.0064 cold against a 0.20 bar; V-DRIFT-COLD exact 216/228 with http 96/108; V-DRIFT-REUSE 17 units with class http 6/5/6 on 36/36 repaired trials; V-TIMING 2 warmups on 36/36, 6/6 rep-first parity per class, 108/108 finite positive latencies, 0 timed errors; V-RETAIN 36/36; V-EQ-HOLDS true on all classes with fetch ratios 0.6667/0.5556/0.6667. The V-DRIFT pins are genuinely fail-safe: they constrain only successful-repaired trials, so a genuine repair failure routes to FUNCTIONAL-FAIL rather than to INVALID."
+    }
+  ],
+  "recomputed_metrics": {
+    "_note": "Recomputed by AUDIT from research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#trials and #per_class. Producer identifiers are preserved exactly; no producer metric or control id was renamed.",
+    "audit_recompute_scope": "counters, functional gates, latency medians and ratios on both frozen boundaries, bootstrap CI95, phase attribution shares, closure, certificate census, V-EQUIV on both arms, parity-order and paired-sign robustness, registry-materialization equalization diagnostic",
+    "M-N-VALID-TRIALS": 36,
+    "M-N": 12,
+    "M-REPAIR-SUCCESS": 1.0,
+    "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+    "M-GUARD-FIRE-RATE": 1.0,
+    "M-COLD-SUCCESS": 1.0,
+    "M-CONTAMINATION-RATE": 0.0,
+    "contamination_denominator_recomputed": "48 unaffected in-support probes per class (4 x 12 trials), 144 total -- NOT the 24 per class stated in result.json.observations",
+    "M-WRITE-SET-MAX": 1,
+    "M-LITERAL-SUCCESS": 0.0,
+    "M-NOREPAIR-SUCCESS": 0.0,
+    "M-OVERBROAD-CONTAMINATION-N": 4.0,
+    "M-BASE-LIVENESS": 1.0,
+    "M-SHIPPED-REUSE": 204,
+    "M-SHIPPED-COLD-L2": 216,
+    "M-SHIPPED-COLD-L3": 228,
+    "M-COLD-HTTP-L2": 96,
+    "M-COLD-HTTP-L3": 108,
+    "M-REUSE-HTTP": [72, 60, 72],
+    "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+    "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+    "M-COST-FETCH-RATIO-L3": [0.6666666666666666, 0.5555555555555556, 0.6666666666666666],
+    "M-SP5-RATIO-L2": 1.2857142857142858,
+    "M-SP5-RATIO-L3": 1.2272727272727273,
+    "M-SCAFFOLD-REUSE": 120,
+    "M-SCAFFOLD-COLD-L3": 36,
+    "M-SCAFFOLD-NOTE": "Both are 120 and 36 in raw_evidence/scored_run.json#per_class; result.json records them as null while reporting the ratios computed from them. See RF-3.",
+    "M-LEGACY-RATIO-L2": 1.1111111111111112,
+    "M-EQUIV-MATCH-N": 12,
+    "M-EQUIV-MATCH-DEN": 12,
+    "M-EQUIV-cold-side-AUDIT-only": "36/36 warmup_cold_shipped == shipped sum of cold_cost (not scored by the driver; independently verified)",
+    "M-LATENCY-REUSE-MED-S": [0.006271079499811094, 0.005809957500105156, 0.006177812000032645],
+    "M-LATENCY-COLD-L3-MED-S": [0.005520786000033695, 0.005600594500037914, 0.005522099999780039],
+    "M-LATENCY-COLD-L2-MED-S": [0.00503161850019751, 0.005042982499844584, 0.005002267999998367],
+    "M-LATENCY-R-L2": [1.2463344547216628, 1.1520875791824003, 1.2350022030076482],
+    "M-LATENCY-R-L3": [1.1359033840059767, 1.0373822814820506, 1.118743231792022],
+    "M-LATENCY-R-L2-NOARG": [1.2281800770929898, 1.1367204048060113, 1.2194193593962173],
+    "M-LATENCY-R-L3-NOARG": [1.1192245675190027, 1.0234817873434012, 1.1046228031771523],
+    "M-LATENCY-R-L2-CI95": [[1.2173188560989767, 1.3398124985544624], [1.1364629706487346, 1.175635948433178], [1.2189689666294081, 1.588419762339261]],
+    "M-LATENCY-R-L3-CI95": [[1.1027893616356872, 1.2173919737362517], [1.0233003314931735, 1.063396435587409], [1.0856813012538418, 1.43756826248085]],
+    "M-LATENCY-SIGN-REUSE-SLOWER-L3": ["12/12", "12/12", "11/12"],
+    "excess_med_s": [0.0007502934997773991, 0.00020936300006724196, 0.0006557120002526062],
+    "M-CLOSURE-REUSE-MED": [0.004196997826848022, 0.0042643450316679175, 0.0039053105336293637],
+    "M-CLOSURE-COLD-MED": [0.006263572672404032, 0.00647427985316725, 0.006392714473979],
+    "phase_deltas_med_s_recomputed": {
+      "S-ARG": [0.0785, 0.0787, 0.0786],
+      "S-REGISTRY-BUILD": [1.4493, 1.4422, 1.4466],
+      "S-REGISTRY-SCAN": [0.0851, 0.0851, 0.0852],
+      "S-PROBE": [0.6416, 0.6261, 0.6028],
+      "S-GUARD": [0.0011, 0.1076, 0.0009],
+      "S-REPAIR-SIGNAL": [0.5677, 0.0436, 0.5703],
+      "S-REGISTRY-WRITE": [0.3072, 0.2954, 0.32],
+      "S-CHARGE": [0.0028, 0.0026, 0.0027],
+      "S-POST-VERIFY": [0.1001, 0.0971, 0.1023],
+      "S-EXECUTE": [-0.36, -0.3719, -0.3888],
+      "S-DISCOVERY": [-0.517, -0.5145, -0.4888],
+      "S-OBSERVE": [-1.5316, -1.536, -1.5266],
+      "S-DISTILL": [-0.1351, -0.1461, -0.1412]
+    },
+    "shares_of_excess_recomputed": {
+      "S-ARG": [0.105, 0.376, 0.12],
+      "S-REGISTRY-BUILD": [1.932, 6.889, 2.206],
+      "S-REGISTRY-SCAN": [0.113, 0.407, 0.13],
+      "S-PROBE": [0.855, 2.991, 0.919],
+      "S-GUARD": [0.001, 0.514, 0.001],
+      "S-REPAIR-SIGNAL": [0.757, 0.208, 0.87],
+      "S-REGISTRY-WRITE": [0.409, 1.411, 0.488],
+      "S-POST-VERIFY": [0.133, 0.464, 0.156],
+      "votes_ge_half_recomputed": {"S-REGISTRY-BUILD": 3, "S-PROBE": 3, "S-REPAIR-SIGNAL": 2, "S-GUARD": 1, "S-REGISTRY-WRITE": 1, "S-ARG": 0, "S-REGISTRY-SCAN": 0, "S-POST-VERIFY": 0, "S-CHARGE": 0}
+    },
+    "attribution_answer_AUDIT": "TIE: {S-REGISTRY-BUILD, S-PROBE, S-REPAIR-SIGNAL} all satisfy the frozen >=0.50-share-on->=2/3-classes criterion; the reported single answer is fixed by PHASE_KEYS iteration order in the frozen driver, not by evidence strength",
+    "AUDIT-DIAG-S-REGISTRY-BUILD-ratio-36-trials": 39.2,
+    "AUDIT-DIAG-S-REGISTRY-BUILD-med-reuse-ms": 1.4866,
+    "AUDIT-DIAG-S-REGISTRY-BUILD-med-cold-ms": 0.0379,
+    "AUDIT-DIAG-equalize-S-REGISTRY-BUILD-only": {"M-LATENCY-R-L3": [0.8717, 0.7769, 0.8604], "M-LATENCY-R-L2": [0.9564, 0.8628, 0.9499]},
+    "AUDIT-DIAG-equalize-all-REGISTRY-phases": {"M-LATENCY-R-L3": [0.8015, 0.7086, 0.7871], "M-LATENCY-R-L2": [0.8794, 0.7869, 0.8689]},
+    "AUDIT-DIAG-equalize-REGISTRY+PROBE+REPAIR-SIGNAL": {"M-LATENCY-R-L3": [0.5786, 0.589, 0.575], "M-LATENCY-R-L2": [0.6349, 0.6542, 0.6347]},
+    "AUDIT-DIAG-caveat": "These equalization figures are a decomposition diagnostic computed from packet-raw per-phase deltas and per-trial latencies, NOT a re-measurement and NOT a preregistered counterfactual. Medians of components are not strictly additive to medians of totals (residual ~0.06ms from median non-additivity plus |S-MISC|). They are used only to bound what the evidence can support; they do not establish a win for reuse.",
+    "AUDIT-ROBUSTNESS-paired-sign-reuse-slower-than-cold-L3": "35/36",
+    "AUDIT-ROBUSTNESS-paired-sign-reuse-slower-than-cold-L2": "35/36",
+    "AUDIT-ROBUSTNESS-parity-order-M-LATENCY-R-L3": {"P1-ENDPOINT": {"reuse_first": 1.1385, "cold_first": 1.121}, "P2-STRUCTURE": {"reuse_first": 1.0435, "cold_first": 1.0344}, "P3-PERMISSION": {"reuse_first": 1.1479, "cold_first": 1.1072}},
+    "AUDIT-ROBUSTNESS-note": "deficit present in both frozen parity orders -> not a run-order artifact",
+    "M-CERT-SENSITIVITY": 1.0,
+    "M-CERT-HELDOUT-SENSITIVITY": 1.0,
+    "M-CERT-SPECIFICITY": 1.0,
+    "M-CERT-FALSE-ACCEPTS": 0,
+    "M-CERT-HELDOUT-FALSE-ACCEPTS": 0,
+    "M-CERT-FRESH-N": 36,
+    "M-CERT-HELDOUT-N": 12,
+    "certificate_complete": true,
+    "M-MODEL-CALLS-TOTAL": 0,
+    "M-MODEL-TOKENS-TOTAL": 0,
+    "M-MODEL-ECONOMICS-NOTE": "structural zeros, no endpoint on substrate (V2-SUBSTRATE_ISOLATION); blocker, not evidence",
+    "driver_emitted": {"status": "MEASUREMENT_INVALID", "outcome": "INCONCLUSIVE", "decision": "MEASUREMENT_INVALID", "invalid_reason_count": 9, "AUDIT-disposition": "gate expression defect (RF-6); no frozen textual gate actually failed; see AF-3"}
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING (narrower than the producer's written ceiling). C-DELTA-REPAIR mechanism soundness is re-attested, not rejected: on this substrate/carrier/classes at n=12/class, reuse-based signal-driven local repair restores 5/5 TASK_IDS at rate 1.0 (Wilson lower 0.7575 >= 0.60) on 36/36 valid trials after a single LOCAL perturbation, with guard fire 1.0, write_set_max 1, contamination 0/144 in-support unaffected probes, literal-replay 0.0 and abstention 0.0. C-DELTA-REPAIR remains EXPERIMENTAL bounded to functional/locality soundness. What is justified about the economics is strictly implementation-bounded and NOT a permanent product-story drop: (a) on the pinned v2 carrier, a single reuse episode is 1.0235x-1.2463x the wall-clock of the corresponding cold episode on both frozen timed boundaries and both L, with 35/36 per-trial signs and every bootstrap CI95 above 1.00; (b) that deficit is more than fully accounted for by reuse-side registry materialization -- S-REGISTRY-BUILD alone carries a share of 1.93/6.89/2.21 of the median episode gap and originates in Arm.__init__ performing one full JSONL read+rewrite per inherited mechanism (5 for reuse vs 1 for cold, 39.2x), of which 4 of 5 mechanisms are never used in the episode; (c) equalizing only that one phase, using packet-raw medians, moves all six gated ratios below 1.00. The maximum justified reading is therefore: as currently implemented, reuse-based localized repair pays a removable, inheritance-breadth-scaled registry-materialization tax that fully accounts for its measured deficit; the packet does NOT establish that reuse-based localized repair is permanently unprofitable, and it does NOT re-admit it either. Explicitly NOT licensed: any transfer of these ratios to real web, browser/network, production-carrier or external-agent economics (the whole excess, 0.21-0.75 ms, is smaller than one local GET at ~0.51 ms); any product-economics denominator that omits model calls/tokens (B3 structurally zero, UNSATISFIABLE here); any amortization or recurrence statement (h(N)=1 by construction, learning cost excluded from the timed window in both arms); any claim that a single named component 'accounts for' the excess (the attribution answer is a tie among three components under a non-decomposable net share); and any permanent-drop label, which in this run is triggered by the narrowest of six ratios (P2-L3, 1.0374 inclusive / 1.0235 NOARG, CI95 lower 1.0233) with CIs reported but not gated (design_review NB5).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38340133174/request.json",
+    "research/experiments/EXP-RUNTIME-38340133174/spec.json",
+    "research/experiments/EXP-RUNTIME-38340133174/prereg.md",
+    "research/experiments/EXP-RUNTIME-38340133174/freeze.json",
+    "research/experiments/EXP-RUNTIME-38340133174/design_review.json",
+    "research/experiments/EXP-RUNTIME-38340133174/result.json",
+    "research/experiments/EXP-RUNTIME-38340133174/report.md",
+    "research/experiments/EXP-RUNTIME-38340133174/provenance.json",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_reachability.json",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_liveness.json",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py",
+    "src/spider/registry.py",
+    "src/spider/kernel.py",
+    "src/spider/__init__.py",
+    "research/experiments/EXP-RUNTIME-38291097112/audit.json",
+    "research/experiments/EXP-RUNTIME-38291097112/handoff.json",
+    "research/experiments/EXP-RUNTIME-38291097112/verdict.json",
+    "codex/claim_state.json",
+    "research/EXPERIMENT_PACKET.md"
+  ],
+  "unresolved": [
+    "Whether reuse-based localized repair is cheaper than cold re-derivation once the carrier's per-episode registry materialization is made non-quadratic (single bulk replace, or registering only the target mechanism) is UNKNOWN. The packet measures the cost WITH the tax and never without it; the no-tax direction is a decomposition diagnostic from packet-raw data, not a measurement, and only a successor DESIGN/EXECUTE can settle it.",
+    "Whether the reuse arm's advantage grows with inheritance breadth or decays is UNKNOWN. S-REGISTRY-BUILD is 39.2x the cold arm's at n=5 inherited mechanisms and is O(n) sequential file rewrites, which suggests adverse scaling, but no breadth sweep was run and the direction on a real persistent registry is untested.",
+    "The amortization premise behind reuse economics (recurrence h(N), cold-derivation cost per recurrence) is UNKNOWN. This packet fixes h(N)=1 and excludes the learning cost from the timed window in both arms, so it cannot confirm or deny the reuse thesis, only its single-episode marginal form on this substrate.",
+    "Real model-call/token economics (B3) remain UNSATISFIABLE on this credential-free substrate; M-MODEL-CALLS-TOTAL and M-MODEL-TOKENS-TOTAL are structural zeros and must never be cited as a model-cost result.",
+    "Transfer to real websites, browser/network economics, production carriers, other perturbation classes, L=4, and external agent harnesses is untested and out of scope.",
+    "The B11 probe-coverage boundary remains open on the product side: detection was measured at exactly one fused probe id (14) per episode and two of three residual-boundary entries are DERIVED rather than measured. This packet certifies the runtime instance, not B11 closure.",
+    "The frozen driver's terminal state (status=MEASUREMENT_INVALID, 9 invalid_reasons) and the packet's adopted state (status=COMPLETE, PERMANENT-DROP-BOUNDED) remain formally divergent. I judge the text-faithful reading substantively correct (AF-3) and do not invalidate the packet, but no prereg amendment exists that authorizes the override, and DIRECTOR should record the disposition explicitly rather than treating COMPLETE as the frozen executable's own output.",
+    "Whether the attribution answer should be reported as a tie set rather than a single component is a packet-format question I cannot settle here; the producer disclosed the tie structure and left it to AUDIT/DIRECTOR, and the frozen rule as written does not define a tie-break beyond the driver's PHASE_KEYS iteration order."
+  ]
+}
