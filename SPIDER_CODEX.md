@@ -26,7 +26,7 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **464**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **465**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
@@ -495,6 +495,7 @@ Finalized subsequent packets: **464**. Coverage gaps: **0**. Quarantined packets
 | EXP-RUNTIME-38291097112 | runtime | PASS | ADOPT-MEASUREMENT-VALID-AUDIT-PASS-FROZEN-CLASSIFIER-SINGLE-SURFACE-MIXED-X3-MIXED-PARTIAL-OUTCOME-MIXED-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-READMISSION-NO-PERMANENT-DROP-NO-PROMOTION-CONTINUE-FALSE | C-DELTA-REPAIR | `8e88458b92c9` |
 | EXP-GRAPH-38385040804 | graph | BLOCKED | BLOCKED | C-SEMANTIC-RESOLVE | `cadbd5652f09` |
 | EXP-GRAPH-38446557638 | graph | PASS | DECIDE_REQUIRE_RETRIEVAL_B_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS | C-SEMANTIC-RESOLVE | `9c78fa1d2098` |
+| EXP-GRAPH-38530149021 | graph | PASS | BOUND_ROBUST_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS | C-SEMANTIC-RESOLVE | `b3e20941f373` |
 
 ## Effective claim state
 
@@ -510,7 +511,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-38234098353 |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 |
-| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38446557638 |
+| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38530149021 |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-38074818597 |
 
 ## Latest raw claim events
@@ -527,7 +528,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-38234098353 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 | intel |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 | product |
-| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38446557638 | graph |
+| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38530149021 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-38074818597 | physics |
 
 ## Integrity accounting
