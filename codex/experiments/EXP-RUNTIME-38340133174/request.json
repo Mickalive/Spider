@@ -1,0 +1,48 @@
+{
+  "base_sha": "96c39d36d6365a15fe403e21eb4e21e6975a8575",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-13T03:07:00.701803+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agent cost is dominated by compounding planning/salience errors and stale-replay false accepts, not single-step grounding \u2014 prior, not SPIDER evidence; favors persistence/invalidation and repair economics over another perception probe.",
+      "Reuse pays only when recurrence h(N) is high and verification/repair is cheap relative to cold derivation \u2014 prior, not SPIDER evidence; motivates first-party h(N)/Cwrite/Cmiss denominators before any moat claim.",
+      "Single-vantage stationarity rarely transfers across egresses/adversaries \u2014 prior, not SPIDER evidence; second-egress transfer is prerequisite before any denylist ships.",
+      "Repeated MEASUREMENT_INVALID on one family signals an upstream satisfiability/task-bank defect to repair once, not another near-duplicate outcome-bearing run \u2014 prior applied to physics invalid streak and residual-novelty ceiling loops.",
+      "Position/grouping/compilation of context often beats retrieval relevance alone \u2014 prior, not SPIDER evidence; motivates the multi-scale vs flat-cache ablation with identical context and metrics."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH with operational-prior support. Index scan: 0 hits for 'scaffolding'; the scaffolding-priced counter is new instrumentation, not a repeated measurement. It is licensed (not duplicated) by P2-AUTOMATION (immutable identity, explicit write sets, per-item recovery \u2014 operational lesson, no sha) and P2-WP003 (leakage-invalid, sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9): the 0.2\u20130.9ms uncounted excess is exactly the class of counterfactual-cost defect P2-REPLAY-COST (sha 9687ff787f2d74460bb7006826008852f5b4416b) withdrew the 8.5x claim over. Not a rerun: no prior packet priced episode scaffolding end-to-end or resolved SINGLE-SURFACE-MIXED toward re-admission vs drop. Decision counterfactual: attributed counter resolving the split re-admits localized repair into the C-PRODUCT-ECON story with honest denominators; persistent repair deficit at L=2/L=3 permanently drops it; unattributable excess parks delta-repair pending B3 model economics rather than funding more mixed verdicts.",
+      "dependencies": [
+        "product",
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Which uncounted episode-scaffolding component accounts for the ~0.2\u20130.9ms reuse latency excess, and under a shipped scaffolding-priced end-to-end counter (http_requests + retrieval_calls + verification_calls + repair_attempts, plus a measured probe-coverage certificate or runtime observation guard for the B11 budget-sparse boundary as the second deliverable), is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 \u2014 i.e. does the SINGLE-SURFACE-MIXED split resolve toward re-admission or permanent drop from the C-PRODUCT-ECON product story? If real model-call/token economics (B3) remain unsatisfiable, price in counters only and record the blocker.",
+      "rationale": "Runtime is IDLE with no active experiment and must be explicitly reactivated: its last packet (EXP-RUNTIME-38291097112, MIXED partial, EXPERIMENTAL retained, continue=false) left the single cheapest shared blocker in the program \u2014 an unpriced scaffolding excess that contaminates every reuse-vs-cold comparison in delta-repair, freshness persistence, and product-econ.Inspector-first repair-once logic applies: one runtime counter plus one B11 guard (probe-coverage certificate or observation guard co-owned with product) removes the validity blocker that would otherwise be re-discovered as MEASUREMENT_INVALID across lanes. Smallest decisive batch: attribute-then-price on the frozen single surface only; stop trigger: split unresolved after the priced comparison \u2014 permanent drop, no further L-sweeps."
+    },
+    "cycle_id": "38339869285",
+    "lane": "runtime",
+    "portfolio_assessment": "Program at 461 canonical experiments: only C-MEAS-VALID is VALIDATED (SBA-V3 derisks B2); four claims EXPERIMENTAL (C-DELTA-REPAIR mixed-partial, C-FRESHNESS single-anchor-blocked, C-PARAM-INHERIT bounded-positive with irreducible B11, C-RESIDUAL-NOVELTY ceiling-falsified on old substrate); five HYPOTHESIS. Three FROZEN transactions (frontier persistence break-even, intel representation probe, physics second-egress transfer) must complete under their mandates \u2014 all three are the cheapest decisive next steps on their threads, so all CONTINUE. Two PREFREEZE investments (graph semantic-resolve re-freeze repairing an invalid liveness scope defect with a retire-embeddings fork; product multi-scale derisk as circuit-breaker on a 9-streak PARAM-INHERIT tunnel) are strategically correct and CONTINUE. The one IDLE lane (runtime) is REOPENED on the single shared validity blocker (scaffolding-priced counter + B11 guard) that unblocks delta-repair admission, persistence economics, and product-econ denominators. No expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution is funded: B1 (executable carrier + known-negative refusal in the flagship bank) and B3 (capable same-model endpoint) remain open, and each allocation either repairs a gate or explicitly defers the flagship. Excluded everywhere: repeats of the closed 0/208 deep-discovery design, single-vantage ladder substitutes, third-surface iterations, and any use of arXiv:2608.05784v1 quantities in SPIDER cost models.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accepted as staff advice and verified against snapshot/Codex: its six contested-closure summaries (0/208 discovery close, B3 NOT_SATISFIED, SBA-V3/B2, B11 boundary, single-anchor D1V block, S1 single-vantage ceiling) match effective claim state and shaped the frozen-completion + readiness-gating structure. Its six questions are answered: (1) B3 via cheapest-first representation probe before credential/rescope spend; (2) runtime REOPENED on counter+B11 guard, not parked; (3) physics transfer completes, orthogonal program held as blocker-contingent fallback; (4) 4-anchor D1V route stays parked per accepted evidence, graph completes its re-freeze first; (5) product forced to the multi-scale derisk circuit-breaker over further B11 refinement; (6) repeats of closed/ceiling designs excluded in every rationale. External context (WebArena leaders, ReCAP, RAMPART, browser control-plane tax, MCP trust gap) treated as priors/directional hints only \u2014 none admitted as SPIDER evidence; WebArena-812 noted as candidate future task bank for recurrence h(N) via a later Intel verification, not assumed. No lane direction was delegated to the Scout; every allocation was cross-checked to Codex effective events, lane charters, and the flagship readiness rule."
+  },
+  "experiment_id": "EXP-RUNTIME-38340133174",
+  "inherited_last_verdict": "ADOPT-MEASUREMENT-VALID-AUDIT-PASS-FROZEN-CLASSIFIER-SINGLE-SURFACE-MIXED-X3-MIXED-PARTIAL-OUTCOME-MIXED-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-READMISSION-NO-PERMANENT-DROP-NO-PROMOTION-CONTINUE-FALSE",
+  "inherited_next_question": "Which uncounted episode-scaffolding component accounts for the ~0.2-0.9ms reuse latency excess, and under a scaffolding-priced end-to-end counter (plus real model-call/token economics if B3 is ever satisfiable) is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 \u2014 i.e. does the SINGLE-SURFACE-MIXED split resolve toward re-admission or permanent drop from the C-PRODUCT-ECON product story?",
+  "lane": "runtime",
+  "origin_github_run_id": "38340133174",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-38291097112",
+    "path": "research/experiments/EXP-RUNTIME-38291097112/handoff.json",
+    "sha256": "3139aa3bf8647e1474be2d53ff450fa019de6f0fc7faec32b7be26e173f6299e"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "9531abc48f0cd448718362da9f1c3717b700091ef354fdb1e3f1971defbd4eea",
+  "request_id": "d08ada60c23329612014b89a",
+  "schema_version": 1
+}
