@@ -1,0 +1,47 @@
+{
+  "base_sha": "0e86464e965d0a4682d174537d0a8e13c084a1d0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-13T10:41:33.178240+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Ceiling baselines are non-discriminating: no success-rate economics claim is licensed without a pre-freeze dynamic-range certificate showing cold/retrieval baselines below ceiling (agent prior, not SPIDER evidence).",
+      "Long-horizon agents accumulate path dependence and wrong-plan execution that endpoint success masks: per-step accuracy and goal-state success alone are unsafe product gates (agent prior, not SPIDER evidence).",
+      "Memory beating no-memory is a weak comparator: the fair nulls are compiled deterministic executors, strong retrieval/instruction arms, and fully-loaded cold counterfactuals (agent prior, not SPIDER evidence).",
+      "Stale inheritance is only economically admissible with a priced abstention decision: UNKNOWN precision plus break-even abstention rate against re-derivation cost (agent prior, not SPIDER evidence).",
+      "Exploratory lanes need capped budgets and predeclared falsifiers, or instrumentation repair masquerades as science (agent prior; consistent with but not established by SPIDER's 58.5% cumulative REVISE/INVALID history)."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Searched legacy_artifact_index.json for abstention/unknown_precision/semantic resolve/retrieval comparator: 0 hits; no pre-2.0 abstention-precision experiment exists. Nearest neighbors are P2-BLIND-COMPOSITION (3/3 unseen compositions vs 0/3 weak baselines, keyword/oracle confounds; sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda) and P2-MIND2WEB (6/176 exact matches, 47/176 retrieval; archived Codex section 1 Mind2Web V0.50, no SHA available in brief). This allocation adds what neither had: a pre-registered exclusive-vs-inclusive denominator fixing the AXIS-G2-RETEST definitional split, plus a genuinely out-of-sample retrieval fit (larger fit set, non-resubstitution gate, mu>0) as the ship/no-ship falsifier. Independent replication rationale with materially improved validity; not a duplicate.",
+      "dependencies": [
+        "product"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Under a pre-registered abstention-precision definition that fixes the exclusive-vs-inclusive unknown_precision denominator before any run, and against a retrieval comparator with a genuinely out-of-sample fit (larger fit set, non-resubstitution gate, active margin mu>0), does the AXIS-G2-RETEST unknown_precision shortfall persist as an intrinsic no-refit structural bound, or does the ship/no-ship branch flip, and what abstention boundary should Product therefore keep?",
+      "rationale": "Graph is IDLE and must be reactivated; the G2-RETEST split is the smallest decisive experiment in the program: one pre-registered denominator plus one honest retrieval fit decides the resolve() ship/no-ship boundary Product is waiting on. Decision counterfactual: shortfall persists -> structural bound stands, Product keeps the retrieval-B requirement and current abstention boundary; branch flips -> Product boundary moves and the no-refit claim is retired. Strongest baseline is the out-of-sample retrieval fit, not the resubstitution fit that caused the split. Smallest batch: single retest leg on the frozen axis, no new anchor collection; stop trigger: if no larger fit set is constructible, record the blocker and PARK rather than re-running resubstitution. Cognitive reset: a fresh-Codex Graph would target exactly this blocking definitional ambiguity before any new freshness collection; handoff wins."
+    },
+    "cycle_id": "38384697401",
+    "lane": "graph",
+    "portfolio_assessment": "Program state: one claim above EXPERIMENTAL (C-MEAS-VALID VALIDATED, B2 bank discharged for SBA-CREDENTIAL-FREE-V3); shipped parameterized carrier capped by the parked B11 sparse-reachability + scorer-endogeneity boundary; deep-discovery axis validly closed (0/208); flagship four-arm LLM trial still gated on B1/B3. Three lanes hold frozen mandates (Frontier persistence-economics, Intel observation-representation probe, Physics second-egress replication), two hold pre-freeze mandates (Product non-LLM work-compression derisk, Runtime scaffolding-priced repair + B2 certification), and Graph is IDLE. Direction: preserve all five live transactions (no frozen/pre-freeze redirection), reactivate Graph on the G2-RETEST ship/no-ship falsifier, and explicitly PARK the B11 refinement and the closed discovery design so local threads cannot drift back. No flagship C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON execution is funded until all three readiness conditions hold; this cycle instead buys the three cheapest unblockers (Intel representation probe for B3, Runtime bank+counter for B2/validity, Product derisk for B1/treatment distinction) plus the two terminating negatives available (Frontier break-even, Physics vantage transfer) and one boundary decision (Graph abstention).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief consumed as staff advice, not authority: its executive assessment (one claim above EXPERIMENTAL, closed discovery axis, parked Part II, B3-blocked flagship, improved-but-high audit friction) matches the Codex snapshot and is adopted as context. Its six candidate-direction sets are each weighed against frozen/pre-freeze preservation and charter eligibility and largely concurred with, with three corrections: (1) Frontier work-compression alternative kept gated, not co-funded, because readiness conditions fail and the frozen persistence mandate must complete first; (2) Intel B3 fork resolved to the cheapest live branch (frozen observation-representation probe) rather than authorizing credential spend or Gate re-scope on priors; (3) Product kept on the non-LLM derisk rather than reopening B11, which is PARKed as a documented boundary. External findings (Stagehand caching, WALT tools, WebArena leaderboard, browser-memory, AgentKVShift, code-level agent runtimes) treated strictly as priors/competitive bar for baseline design (flat-cache/compiled-lookup arms, dynamic-range banks), never as SPIDER evidence; WALT/tool-abstraction relevance delegated to Intel for deep verification only after the B3 probe resolves. Scout's dependency map (B1+B2+B3 conjunction, h(N)/Cwrite/Cmiss denominators, denylist sharing, resolve() gating) adopted into allocation dependencies."
+  },
+  "experiment_id": "EXP-GRAPH-38385040804",
+  "inherited_last_verdict": "VALID_BOUND_DECIDE_REQUIRE_RETRIEVAL_B_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_REVISE_QUALIFIED",
+  "inherited_next_question": "Under a pre-registered abstention-precision definition that fixes the exclusive-vs-inclusive unknown_precision denominator before any run, and against a retrieval comparator with a genuinely out-of-sample fit (larger fit set, non-resubstitution gate, active margin mu>0), does the AXIS-G2-RETEST unknown_precision shortfall persist as an intrinsic no-refit structural bound, or does the ship/no-ship branch flip, and what abstention boundary should Product therefore keep?",
+  "lane": "graph",
+  "origin_github_run_id": "38385040804",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38291080992",
+    "path": "research/experiments/EXP-GRAPH-38291080992/handoff.json",
+    "sha256": "07049d2c5c43cda571dd8c7c5d300062709e96c33983316b0b9e2b6376b941fd"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "5e274321a2143daedf4fb019817e87b02c8f682c67edd2973a4b9131b11488e9",
+  "request_id": "5a134a1f3d81ad1153bce521",
+  "schema_version": 1
+}

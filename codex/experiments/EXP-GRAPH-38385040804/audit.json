@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38385040804",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "New DESIGN transaction (frozen files are immutable in this packet): repair the two select_gids comprehensions in the prereg.md#13 FROZEN-RUNNER block (extracted runner line 479) - they bind '_' yet interpolate '{a}', and 'a' is function-local in main() (first assigned later by 'for a, v in axes.items()'), so every invocation raises UnboundLocalError before the --mechanics-only branch. Repair requires re-extraction, a new CANONICAL-RUNNER-SHA256 and a new freeze.json; the producer correctly did not patch frozen files.",
+    "Pre-freeze design review must EXECUTE the frozen runner's non-outcome-bearing entry point ('--mechanics-only', which sets test_not_scored=true and never scores TEST rows) in addition to static/hash/import probes. design_review.json passed treatment_liveness and measurement_prerequisites while its own rationale admits 'The confirmatory experiment was NOT run'; the crash is deterministic and one execution would have caught it.",
+    "Emit failure.json per EXPERIMENT_PACKET.md section 9 (stage=EXECUTE, category=frozen-design-implementation-defect, retryable only via a new DESIGN transaction, with the UnboundLocalError traceback as durable diagnostic). report.md section 6 references 'failure.json#smallest_next_action' but no failure.json exists in the packet.",
+    "Correct prereg.md section 3/section 8.7 fit-pool arithmetic to the screen-adjusted counts independently re-derived here (pooled cal-app 136 -> N_TRAIN=102, SELECT_APP=34, SELECT_OOS=60; not the prereg's 139/104/35) and disclose the G1 contamination-screen effect (9 rows: 3 cal-app, 4 test-app, 2 test-OOS) in section 4 alongside the disclosed G3 effect (5 rows). Nonblocking: all frozen bars (>=78/>=20/>=20) hold with margin and are enforced on runtime counts."
+  ],
+  "validity_findings": [
+    "Crash reproduced independently: the full scored run and '--mechanics-only' each exit 1 with zero stdout bytes and byte-identical stderr (sha256 1fefefe3c8d52adfdde5cdde5bd7303ef3094a2c12e017a661086df2635b5320): 'UnboundLocalError: cannot access local variable a' at extracted-runner line 479 in main(). The crashing 'construction = dict(...)' statement executes before the '--mechanics-only' branch, so both entry points fail identically - exactly as producer result.json reports.",
+    "Extraction is byte-faithful: my extraction of the prereg.md#13 FROZEN-RUNNER block plus exactly one trailing newline is byte-identical to raw_evidence/runner_tframe_g3_oos.py; sha256 7816fbd2660c7d67a07704a9f35e00c3331b38ebd707f9a7a5ec3187c1ed2c9b equals the declared CANONICAL-RUNNER-SHA256. The defect is verbatim in the frozen prereg block, not an extraction or environment error.",
+    "Freeze integrity verified: all four freeze.json.artifact_hashes re-computed and unchanged (EXP-GRAPH-38180711589/prereg.md 5a64e90d..., EXP-GRAPH-38175554380/prereg.md dc90bf71..., EXP-GRAPH-38291080992/prereg.md 5a9cc119..., research/harness/goal_generator.py cb5218de...); freeze.json packet hashes also match (prereg.md 4f40aeb2..., spec.json 28595abf..., request.json 5ba6d113..., design_review.json df301037...). No frozen file was modified by the producer.",
+    "Fit-pool construction is sound and would have passed its validity bars: independently re-derived (by importing the frozen runner module without running main) N_TRAIN=102>=78, SELECT_APP=34>=20, SELECT_OOS=60>=20, train-intersect-select=empty and (train-union-select)-intersect-any-test=empty by exact text-sha. The mandate's stop trigger (no larger fit set constructible) was NOT hit; the crash is unrelated to fit-pool validity.",
+    "Calibration non-degeneracy verified non-outcome-bearing: AXIS-G3-NEW calibration tframeplus executed 38/39 applicable rows, coverage 0.9744, gate-met - matching prereg.md#8.1(d); G2-RETEST/G1-PRIMARY/G1-ALTLEX calibration also non-degenerate and gate-met (coverage 0.875/0.8596/0.9123).",
+    "Design-review process gap: design_review.json passes all six v2 checks, but treatment_liveness and measurement_prerequisites rest on static scans, hash verification, import probes and parent-published counts; the review rationale states 'The confirmatory experiment was NOT run'. The frozen runner's main() construction path was never executed pre-freeze, so the deterministic crash escaped both DESIGN and independent review. This is a v2 review-gate defect, not a producer EXECUTE defect.",
+    "Dangling reference: report.md section 6 cites 'failure.json#smallest_next_action' but no failure.json exists in the packet; EXPERIMENT_PACKET.md section 9 requires it when a stage cannot complete.",
+    "No leakage path in the frozen construction: build_fit_pool reads only calibration rows of AXIS-G1-PRIMARY/G2-RETEST/G3-NEW; the (tau,mu) gate search reads only FIT-SELECT rows; TEST rows enter only the final scoring loop that was never reached. Disjointness verified by exact text-sha sets.",
+    "Legacy-position claim verified: codex/index.json lists 1401 historical artifacts with 0 metadata hits for abstention/unknown_precision/semantic resolve/retrieval comparator/t-frame/tframe - consistent with prereg.md section 0 (subject to the prereg's own caveat that index absence is not proof of full-archive absence).",
+    "Producer contract compliance: result.json uses status=BLOCKED, outcome=NOT_APPLICABLE, empty metrics/controls with the absence explained in validity_notes; the infrastructure/design-implementation failure is NOT encoded as scientific falsification, per the transmission contract. Producer observations are accurate in every checkable particular (crash line, hashes, root cause, immutability)."
+  ],
+  "baseline_findings": [
+    "No baseline or control was executed: the crash precedes all scoring, so tframeplus, tframe_frozen, incumbent, gatefree and arm_b_oos, and all named controls (PC-AXIS-G1-ALTLEX, NC-EXEC-ALL, NC-ABSTAIN-ALL, CTRL-SHUFFLED-SELECTION, CTRL-RANDOM-ROLE, CTRL-RANDOM-GATE, CTRL-B-LEX-ONLY, CTRL-INCUMBENT) have no observed values in this packet. Producer metrics/controls are empty and that emptiness is correct.",
+    "Baseline identifiability is design-level only (verified statically in the frozen code): five operationally distinct implementations with disjoint code paths and disjoint fitted state; Arm A (T-FRAME+) and Arm B-OOS share no fitted state and neither is the other's cost denominator (uniform local deterministic CPU; no API/model-call dimension exists). Gatefree headroom (parent FA 0.45 G3 / 0.50 G2) is inherited parent evidence, not re-measured here.",
+    "NC-ABSTAIN-ALL is genuinely implemented in the frozen code (abstain_all_metrics computed: coverage=0.0, pooled_false_accept=null by no executes, unknown_precision_exclusive=OOS_resolved/all_resolved) - the parent RQF-03 placeholder defect is fixed at code level, though never executed due to the crash.",
+    "B-RETRIEVAL-OOS feasibility under the hard mu>0 constraint is untested: the arm_b_oos code path was never reached, so the mandate's central honest-comparator question (H2) has no evidence either way; both the feasible and RETRIEVAL_INFEASIBLE_OOS branches remain live.",
+    "The pooled-retrieval dilution bias (same-surface classes in FIT-TRAIN for every test axis, incl. all G3 test classes via the 39 G3 calibration rows) remains a pre-disclosed conservative-direction caveat per prereg.md section 3; it was never exercised."
+  ],
+  "recomputed_metrics": {
+    "producer_test_metrics": "none - producer metrics={} confirmed correct; the runner crashed before any TEST row was scored, so there are no test metrics to recompute",
+    "crash_reproduction": {
+      "mechanics_only_exit_code": 1,
+      "scored_run_exit_code": 1,
+      "stdout_bytes_both": 0,
+      "stderr_sha256_both": "1fefefe3c8d52adfdde5cdde5bd7303ef3094a2c12e017a661086df2635b5320",
+      "error": "UnboundLocalError: cannot access local variable 'a' where it is not associated with a value (extracted runner line 479, main())"
+    },
+    "extraction_sha256_match": "7816fbd2660c7d67a07704a9f35e00c3331b38ebd707f9a7a5ec3187c1ed2c9b (byte-identical to declared CANONICAL-RUNNER-SHA256 and to raw_evidence/runner_tframe_g3_oos.py)",
+    "fit_pool_non_outcome_bearing": {
+      "n_fit_train": 102,
+      "n_select_app": 34,
+      "n_select_oos": 60,
+      "pooled_cal_app_rows": 136,
+      "pooled_cal_oos_rows": 60,
+      "bars_met": true,
+      "train_select_disjoint_by_text_sha": true,
+      "fit_test_disjoint_by_text_sha": true,
+      "note": "prereg.md section 3/8.7 arithmetic (139/104/35) is overstated by 3 rows because it uses the pre-screen G1 cal-app count; all frozen bars (>=78/>=20/>=20) still hold with margin"
+    },
+    "axis_bound_counts_non_outcome_bearing": {
+      "AXIS-G3-NEW": {"bound": 115, "flagged": 5, "cal_app": 39, "cal_oos": 20, "test_app": 36, "test_oos": 20},
+      "AXIS-G2-RETEST": {"bound": 120, "flagged": 0, "cal_app": 40, "cal_oos": 20, "test_app": 40, "test_oos": 20},
+      "AXIS-G1-PRIMARY": {"bound": 151, "flagged": 9, "cal_app": 57, "cal_oos": 20, "test_app": 56, "test_oos": 18},
+      "AXIS-G1-ALTLEX": {"bound": 151, "flagged": 9, "cal_app": 57, "cal_oos": 20, "test_app": 56, "test_oos": 18}
+    },
+    "calibration_tframeplus_non_outcome_bearing": {
+      "AXIS-G3-NEW": {"executed": 38, "executed_app": 38, "coverage": 0.9744, "gate_met": true},
+      "AXIS-G2-RETEST": {"executed": 35, "executed_app": 35, "coverage": 0.875, "gate_met": true},
+      "AXIS-G1-PRIMARY": {"executed": 49, "executed_app": 49, "coverage": 0.8596, "gate_met": true},
+      "AXIS-G1-ALTLEX": {"executed": 52, "executed_app": 52, "coverage": 0.9123, "gate_met": true},
+      "note": "calibration rows only; no TEST row was scored by the auditor"
+    }
+  },
+  "claim_ceiling": "Maximum justified claim: the frozen transaction is BLOCKED. The frozen runner (prereg.md#13 FROZEN-RUNNER, sha256 7816fbd2...) raises a deterministic UnboundLocalError at extracted-runner line 479 in main() before any TEST row is scored, on both the --mechanics-only and scored entry points, so EXP-GRAPH-38385040804 yields zero outcome-bearing measurements and no evidence for or against H1 (no-refit structural bound under the pre-registered exclusive unknown_precision denominator) or H2 (honest out-of-sample retrieval feasibility under a hard mu>0 gate). This is a frozen-design implementation defect, not a scientific negative: it must not be read as falsification of the no-refit bound or of retrieval viability, and it changes no claim state. C-SEMANTIC-RESOLVE retains its prior effective state (HYPOTHESIS; prior decision DECIDE_REQUIRE_RETRIEVAL_B — retain hypothesis, no promotion, from EXP-GRAPH-38291080992 per codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE). The only licensed facts are non-outcome-bearing: byte-faithful extraction, unchanged freeze artifacts, sound fit-pool construction (102/34/60 with disjointness), and non-degenerate calibration (G3 38/39 applicable executed, coverage 0.9744, gate-met). No gate vector, fork value, unknown_precision, coverage, false-accept or selective-accuracy claim is licensed by this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38385040804/result.json (producer status=BLOCKED, outcome=NOT_APPLICABLE, observations, validity_notes)",
+    "research/experiments/EXP-GRAPH-38385040804/report.md (crash report section 2; dangling failure.json reference section 6)",
+    "research/experiments/EXP-GRAPH-38385040804/prereg.md#13 (FROZEN-RUNNER block; defect at extracted line 479 = prereg.md lines 592-593)",
+    "research/experiments/EXP-GRAPH-38385040804/raw_evidence/runner_tframe_g3_oos.py (sha256 7816fbd2660c7d67a07704a9f35e00c3331b38ebd707f9a7a5ec3187c1ed2c9b)",
+    "research/experiments/EXP-GRAPH-38385040804/raw_evidence/mech_stderr.txt and run_stderr.txt (sha256 1fefefe3c8d52adfdde5cdde5bd7303ef3094a2c12e017a661086df2635b5320, byte-identical)",
+    "research/experiments/EXP-GRAPH-38385040804/raw_evidence/mech_stdout.json and run_stdout.json (sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, empty)",
+    "research/experiments/EXP-GRAPH-38385040804/freeze.json (all artifact_hashes and packet hashes re-verified unchanged)",
+    "research/experiments/EXP-GRAPH-38385040804/design_review.json (six PASS checks; rationale admits the confirmatory experiment was not run)",
+    "research/experiments/EXP-GRAPH-38291080992/handoff.json (sha256 07049d2c5c43cda571dd8c7c5d300062709e96c33983316b0b9e2b6376b941fd matches request.json#parent_handoff.sha256)",
+    "codex/claim_state.json.effective_event_by_claim.C-SEMANTIC-RESOLVE (prior effective HYPOTHESIS; DECIDE_REQUIRE_RETRIEVAL_B_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_REVISE_QUALIFIED)",
+    "codex/index.json (1401 historical artifacts; 0 abstention/unknown_precision/retrieval-comparator/t-frame hits)"
+  ],
+  "unresolved": [
+    "H1 (does the no-refit structural bound reproduce under the pre-registered exclusive unknown_precision denominator?): undecidable from this packet - no test metric was produced.",
+    "H2 (is B-RETRIEVAL-OOS feasible under a hard mu>0 gate on disjoint FIT-SELECT, and which of the five fork values obtains on AXIS-G3-NEW?): undecidable - the retrieval arm never executed.",
+    "Whether the repaired runner reproduces the parent gate vector (G3 gate-met at boundary, G2 gate-false solely on exclusive UP 10/12=0.8333 vs the one-row 11/12 flip margin) and whether the ship/no-ship branch flips: requires the new DESIGN transaction with the repaired, re-frozen runner.",
+    "failure.json is absent from the packet despite report.md section 6 citing failure.json#smallest_next_action; the smallest next action (repair + re-freeze in a new DESIGN transaction) is recorded here instead.",
+    "Program-level process question: whether v2 design_review should mandate executing the frozen runner's non-scoring entry point before freeze (the --mechanics-only path is non-outcome-bearing by construction and would have caught this deterministic crash)."
+  ]
+}

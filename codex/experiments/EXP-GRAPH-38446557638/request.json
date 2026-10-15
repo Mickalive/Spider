@@ -1,0 +1,43 @@
+{
+  "base_sha": "4106b96f67d415d50d977f4dffcfaedaa5e538dd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-13T18:25:32.907740+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): inherited work pays only when revalidation plus stale-replay risk undercuts cold re-derivation; break-even hop/time is the decision variable.",
+      "Agent prior (not SPIDER evidence): abstention-gated resolution and observation representation often dominate raw model capability in multi-step tool-use agents.",
+      "Agent prior (not SPIDER evidence): access-barrier persistence measured from one network vantage rarely transfers without a second-vantage test; single-vantage stationarity is a ceiling, not a law."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Relevant priors P2-BLIND-COMPOSITION (017a80aeb9a6759c8f6913a37031ff1616ec1bda, 3/3 vs 0/3 with keyword/oracle confounds) and P2-MIND2WEB (176 routes, 3.41% exact match) never tested exclusive-vs-inclusive unknown_precision denominators with an out-of-sample retrieval fit (n>=78, disjoint SELECT, mu>0, no resubstitution) on an independently authored bank. This is a runner-bug repair (UnboundLocalError, BLOCKED EXP-GRAPH-38385040804), not a rerun: smallest decisive batch deciding the ship/no-ship boundary Product must keep.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Under the pre-registered exclusive unknown_precision denominator and an honest out-of-sample retrieval fit (pooled FIT-TRAIN n>=78, disjoint FIT-SELECT, hard mu>0, resubstitution forbidden), does the AXIS-G2-RETEST unknown_precision shortfall persist as an intrinsic no-refit structural bound or does the ship/no-ship branch flip, once the frozen-runner UnboundLocalError is repaired in a new DESIGN transaction?",
+      "rationale": "Graph is IDLE with a BLOCKED runner defect, not a scientific verdict. Repairing the runner and re-firing the exclusive-denominator, no-refit retest is the smallest decisive batch: persist shortfall keeps conservative shipped boundary and bounds claim to PRIMARY+ALTLEX; flip re-asserts EXPERIMENTAL through a valid packet. Stops the G2/G3 re-litigation loop either way."
+    },
+    "cycle_id": "38445774205",
+    "lane": "graph",
+    "portfolio_assessment": "Frozen transactions preserved (Frontier/Intel/Physics FROZEN continue; Product/Runtime PREFREEZE mandates continue). Graph IDLE reactivated on its BLOCKED runner repair as the smallest decisive batch. No flagship C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON execution funded while B3 is NOT_SATISFIED; only the no-LLM counter-only derisk (Product) and blocker-removal probes (Intel representation, Runtime scaffolding+B11 guard) proceed. Discovery axis closed stays closed; persistence economics, second-vantage transfer, and ship/no-ship resolution are the three decision-changing bets this cycle.",
+    "schema_version": 1,
+    "scout_assessment": "Scout in DEGRADED MODE (rc=124): no external reconnaissance, no SPIDER evidence, no authority. Direction decided directly from machine snapshot, effective claim state, lane charters and legacy brief. Scout fallback per-lane questions coincide with the mandates already frozen or handoff-proposed, so they were adopted only where they independently won on Codex merits (all six lanes) and not as Scout authority."
+  },
+  "experiment_id": "EXP-GRAPH-38446557638",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "Under the pre-registered exclusive unknown_precision denominator and an honest out-of-sample retrieval fit (pooled FIT-TRAIN n>=78, disjoint FIT-SELECT, hard mu>0, resubstitution forbidden), does the AXIS-G2-RETEST unknown_precision shortfall persist as an intrinsic no-refit structural bound or does the ship/no-ship branch flip, once the frozen-runner UnboundLocalError is repaired in a new DESIGN transaction?",
+  "lane": "graph",
+  "origin_github_run_id": "38446557638",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38385040804",
+    "path": "research/experiments/EXP-GRAPH-38385040804/handoff.json",
+    "sha256": "f97af96e3d5e98335727459a15d28f1aacdad5b5b5f94a821cc7c4c3aa9009e0"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "3c5d96a78a7dcea6b26b8ef19a78e8d6cf34bc555b3ecd6b1a695a1ce3d00fff",
+  "request_id": "83228ac1566624593785e44a",
+  "schema_version": 1
+}
