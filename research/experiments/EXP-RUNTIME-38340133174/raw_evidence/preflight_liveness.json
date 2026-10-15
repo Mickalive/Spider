@@ -1,0 +1,32 @@
+{
+  "status": "V4-LIVENESS-ONLY",
+  "experiment_id": "EXP-RUNTIME-38340133174",
+  "lane": "runtime",
+  "runner_self_sha": "4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d",
+  "server_ready": true,
+  "distill_live": true,
+  "task_read_verified": true,
+  "in_support_probe_id": 14,
+  "contamination_instrument_live": true,
+  "out_of_support_probe_degenerate": true,
+  "nc_no_perturbation_stale": false,
+  "nc_noise_stale": false,
+  "timer_resolution_s": 1e-09,
+  "instrumented_episode_phase_keys": [
+    "S-ARG",
+    "S-DISCOVERY",
+    "S-DISTILL",
+    "S-EXECUTE",
+    "S-OBSERVE",
+    "S-REGISTRY-BUILD",
+    "S-REGISTRY-WRITE"
+  ],
+  "instrumented_episode_closure_finite": true,
+  "carrier": {
+    "kernel_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "models_sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "registry_sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "v2_runner_sha256": "d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608",
+    "v2_runner_bytes": 60855
+  }
+}

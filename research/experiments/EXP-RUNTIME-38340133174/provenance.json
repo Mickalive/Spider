@@ -1,0 +1,46 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_liveness.json": "56b20fa47e03481320b0cd56b9546ef91f90fff7b1c4a6bc392854788cc50fa0",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_reachability.json": "9d84ddf807515e9b05a518bfd4356ed65f9fb68d225c9ced545abdc9649e560b",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py": "4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d",
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json": "c573b81296c127464f8c7273a02e7801cd92d4b806c32fb1d16f37e70c1b878e"
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py (extracted verbatim from prereg.md section-12 by the section-10 algorithm; sha256 matches CANONICAL-RUNNER-V4-SHA256)",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (pinned v2 module, imported only; V0 hash+size pin passed)",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py (carrier; all hashes match freeze.json artifact_hashes)"
+  ],
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py --reachability-probe > raw_evidence/preflight_reachability.json",
+    "python3 research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py --liveness-only > raw_evidence/preflight_liveness.json",
+    "python3 research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py > raw_evidence/scored_run.json"
+  ],
+  "datasets_fixtures": "None external. All banks built in-runner from pinned seeds: scored SEED4=3980394806 with per-trial SEED4+1000*(ci+1)+j; held-out SEED4+50000+1000*(ci+1)+k (disjoint); bootstrap seeds SEED4+7000*(ci+1)+{1,2}; NC seeds SEED4+{1,2}.",
+  "environment": {
+    "external_network": false,
+    "os": "linux",
+    "packages": "stdlib only (argparse, copy, hashlib, importlib, json, math, random, sys, time, pathlib); no installs",
+    "python": "3.12.15",
+    "substrate": "ThreadingHTTPServer on localhost ephemeral port; perf_counter resolution 1ns",
+    "wall_clock_scored_run": "single foreground process; see file mtimes (not a measurement input)"
+  },
+  "executed_at": "2026-10-15T18:59:15Z",
+  "experiment_id": "EXP-RUNTIME-38340133174",
+  "extraction_check": "prereg.md split on standalone V4-RUNNER-BEGIN/V4-RUNNER-END markers; first ```python fence to last ``` fence; join with single newline (no trailing newline); sha256 4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d == CANONICAL-RUNNER-V4-SHA256; runner_self_sha in all three outputs identical",
+  "frozen_inputs": {
+    "design_review": "PASS (6/6 checks; nonblocking findings recorded, none outcome-bearing)",
+    "freeze_artifact_hashes_match": true,
+    "freeze_json": "2026-10-15T18:55:41.479216+00:00",
+    "prereg_sha256": "707cd27fbcd81054750703a3ae0cf09363932fb498294531db68b67e4d6a257f",
+    "request_sha256": "c07d0b41bcb60401e64a0306f092b091af43fe888238dc8657624a0ce89d6a3b",
+    "spec_sha256": "970bb0f2542a06953d50202901bdd12d56f48d225b1ac9c5bc62e21cd839d146"
+  },
+  "github_run_id": "38340133174",
+  "git_commit": "e86a3d87da10b403cba0a3b0725dc0dc6d02a7a7",
+  "lane": "runtime",
+  "model_calls_total": 0,
+  "model_tokens_total": 0,
+  "notes": "No frozen file modified during EXECUTE. New files only: raw_evidence/{runner,s scored_run, preflight_*}, result.json, report.md, provenance.json. No git commit/push/branch operations performed."
+}
