@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38816779349",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "AF-1-FREEZE-V1-CARRIER-INTEGRITY",
+      "severity": "info",
+      "finding": "Independently verified, all exact. freeze.json.hashes match working-tree bytes for request.json 354eb2ff..., spec.json 84948584..., prereg.md 4855e4b4..., design_review.json f67d1439... (all 4/4 MATCH); freeze.json.artifact_hashes match for all 5 frozen artifacts (src/spider/__init__.py 3d173722..., kernel.py 3a6caf97..., models.py 338aaf4d..., registry.py 51fb440d..., parent v2 runner 60855 bytes d4871091...). V1 binding recomputed de novo: the driver extracted from prereg.md section-12 between V5-DRIVER-BEGIN/END is byte-identical to raw_evidence/runner_v5.py; the canonical digest over the driver with the self-referential CANONICAL_RUNNER_V5_SHA256 line normalized to <PINNED> is b6db1effc40bac0357d30dab546d9ef98bc3570b998998486c6409a6c96b10b1 and matches both the embedded pin and prereg section-10. raw_evidence/driver_stdout.json#carrier records the same 4 carrier hashes + v2 pin. Chronology consistent: design_review.json (PASS, all six v2 checks PASS) precedes freeze.json frozen_at 22:52:50Z; all execute artifacts postdate freeze. No frozen file was modified after freeze.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/freeze.json",
+        "research/experiments/EXP-RUNTIME-38816779349/design_review.json",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-10",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py",
+        "research/experiments/EXP-RUNTIME-38816779349/provenance.json"
+      ]
+    },
+    {
+      "id": "AF-2-METRIC-RECOMPUTATION-EXACT",
+      "severity": "info",
+      "finding": "Every material metric recomputes bit-exact from raw_evidence/driver_stdout.json#trials using an independent implementation (no producer module imported). For all three classes (P1-ENDPOINT, P2-STRUCTURE, P3-PERMISSION): all per-class keys shared between result.json#metrics.per_class.* and driver_stdout.json#per_class.* are equal (0 unequal keys); all 12 Bonferroni family-wise CIs (M-LATENCY-R-{L2,L3}-CIBF and M-LATENCY-R-{L2,L3}-NOARG-CIBF) and all 12 CI95 diagnostics reproduce exactly under the frozen unpaired percentile bootstrap (B_BONF=10000, B_LAT=2000, tail=(0.05/12)/2, seeds SEED5+7000*(ci+1)+k, SEED5=162073685). Point estimates reproduce exactly: M-LATENCY-R-L2 = 1.015844/0.922482/1.003947, M-LATENCY-R-L3 = 0.903350/0.833144/0.911587, M-LATENCY-R-L2-NOARG = 0.994993/0.904248/0.985844, M-LATENCY-R-L3-NOARG = 0.884730/0.816649/0.895155; M-SHIPPED-REUSE=204, M-SHIPPED-COLD-L2=216, M-SHIPPED-COLD-L3=228, M-COLD-HTTP-L2=96, M-COLD-HTTP-L3=108, M-REUSE-HTTP=72/60/72 per class; M-REPAIR-SUCCESS=1.0, M-GUARD-FIRE-RATE=1.0, M-CONTAMINATION-RATE=0.0 over the correct denominator 48 per class (144 total), M-WRITE-SET-MAX=1, M-COLD-SUCCESS=M-LITERAL-SUCCESS-input basis=1.0/0.0, M-CLOSURE-REUSE-MED=0.0383/0.0427/0.0388 <= 0.20. Sole numeric delta anywhere: M-REPAIR-SUCCESS-WILSON-LOWER recomputes to 0.757505993 with z=1.9599639845 vs the producer's 0.757499243 with the carrier's pinned WILSON_Z=1.96 (absolute delta 6.8e-6; both far above the 0.60 bar; immaterial and not a defect).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#per_class",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#metrics.per_class"
+      ]
+    },
+    {
+      "id": "AF-3-DECISION-CHAIN-REPRODUCES",
+      "severity": "info",
+      "finding": "Frozen decision chain reproduced independently and matches the producer exactly. Cells: P1-ENDPOINT M-CELL-L2=MARGINAL (R=1.0158, CIBF [0.9345,1.0707]), M-CELL-L2-NA=MARGINAL (0.9950, [0.9203,1.0535]), M-CELL-L3=WIN (0.9034, [0.8473,0.9680]), M-CELL-L3-NA=WIN (0.8847, [0.8260,0.9513]); P2-STRUCTURE all four cells WIN (ratios 0.8166-0.9225, all CIBF upper < 1.00); P3-PERMISSION M-CELL-L2/M-CELL-L2-NA=MARGINAL (1.0039, [0.9509,1.0628]; 0.9858, [0.9369,1.0425]), M-CELL-L3/M-CELL-L3-NA=WIN. functional_ok holds on all three classes. Class verdicts: PRICED-MARGINAL / PRICED-WIN / PRICED-MARGINAL. Aggregate: not all PRICED-WIN, no LOSS, no UNKNOWN, no FUNCTIONAL-FAIL -> INCONCLUSIVE (marginal straddle) with invalid_reasons=[] -> status COMPLETE, outcome INCONCLUSIVE. This is exactly the frozen rule in spec.json#decision_rule and prereg (strict inequality; 1.00 is never a win; WIN gates CI upper < 1.00, LOSS gates CI lower >= 1.00). The producer's INCONCLUSIVE/no-re-admit/no-permanent-drop/no-promotion framing (report.md sections 4-5, result.json product note via driver_stdout.json#product_note='no-decision-no-drop-no-readmit') does not exceed the frozen rule.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#decision_rule",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#metrics.M-DECISION",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#class_verdicts",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/reachability_probe.json"
+      ]
+    },
+    {
+      "id": "AF-4-CONTROLS-AND-GATES-LIVE",
+      "severity": "info",
+      "finding": "All frozen controls and validity gates verified live from raw trials, no gate can mask a repair effect. 36/36 valid trials (12/class); 0 timed errors; 0 retention failures; warmups 2/2 everywhere; parity exactly 6 reuse-first/6 cold-first per class with episode_order consistent with order_rep_first on all 36 trials; target rotation matches the frozen formula TARGETS[(ci+j)%3] exactly. B-LITERAL-REPLAY success 0.0 (perturbation bites); B-COLD/B-COLD-MIN success 1.0; B-NO-REPAIR success 0.0 with guard fired 36/36 (vacuity disclosed per spec and validity_notes; live must-fail role held by B-LITERAL-REPLAY). Guard fired 36/36; per-trial fresh-silence 36/36; NC-NO-PERTURBATION stale=false and NC-NOISE stale=false. Contamination 0/144 with the correct 48-per-class denominator (parent RF-5 remedy verified); write_set_max 1 every trial; overbroad instrument 4/4 flags per trial (insensitive-instrument gate cannot be silently vacuous). V-DRIFT-COLD exact (216/228 sums, 96/108 http per class); V-DRIFT-REUSE exact (every repaired trial ships 17 with class http 6/5/6); V-REG-EQUIV true on every bulk episode; V-EQ-HOLDS true. Driver gate block uses explicit is-None checks (parent RF-6 remedy) and the DESIGN reachability/gate-coverage probes (raw_evidence/reachability_probe.json) demonstrate all decision branches and all gate boundaries (0.0/0.10/0.79/0.89/0.11/5-of-48/2-write) reachable before freeze (parent RF-7 remedy). No leakage route found: treatment and cold arms differ only in the preregistered resolve/fetch/verify/scaffold counts plus wall-clock, with per-trial oplogs and counters on file.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/reachability_probe.json#gate_coverage",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/liveness_only.json"
+      ]
+    },
+    {
+      "id": "AF-5-PAIRED-BOOTSTRAP-DIAGNOSTIC-CONFIRMS-STRADDLES",
+      "severity": "info",
+      "finding": "Attack on the frozen unpaired bootstrap: the 12 trials per class are paired (same trial, target, seed and substrate state produce both the reuse and the cold episode), but the frozen CI resamples reuse and cold independently, discarding pairing and (typically) inflating variance. Audit recomputed all 12 cells with a paired percentile bootstrap at the same Bonferroni level, B and seeds (AUDIT DIAGNOSTIC ONLY - not a frozen measurement, cannot flip the frozen decision). Result: identical classification. P1-ENDPOINT L2 [0.9374,1.0624] and L2-NOARG [0.9170,1.0425] remain MARGINAL; P3-PERMISSION L2 [0.9848,1.0624] and L2-NOARG [0.9685,1.0423] remain MARGINAL; all eight L3/L3-NOARG cells remain WIN; P2-STRUCTURE remains a 4-cell WIN (L2 [0.8226,0.9450], L2-NOARG [0.8025,0.9278]). The frozen INCONCLUSIVE (marginal straddle) is therefore not an artifact of the unpaired resampling choice.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py#_median_ratio_ci_bf",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials"
+      ]
+    },
+    {
+      "id": "AF-6-ORDER-PARITY-DIAGNOSTIC",
+      "severity": "info",
+      "finding": "Attack on order/timing artifacts: recomputed median ratios on the parity subsets (6 reuse-first vs 6 cold-first trials per class). L2 ratios: P1 1.0006 (reuse-first) vs 1.0158 (cold-first); P2 0.9211 vs 0.8915; P3 0.9928 vs 1.0084. L3 ratios stay < 1.00 in both subsets for all classes (P1 0.8982/0.9116, P2 0.8309/0.8303, P3 0.9299/0.9004). A ~1-1.5% L2 order asymmetry exists (later-timed arm runs slower) but is balanced 6/6 in the pooled estimate and both subsets remain near-1.00 straddles at L2; it does not manufacture any WIN or LOSS. The frozen parity structure (V-TIMING) does its job.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#measurement_validity.V-TIMING"
+      ]
+    },
+    {
+      "id": "AF-7-MEASUREMENT-SCALE-AND-ENVIRONMENT-EXPRESSIVENESS",
+      "severity": "info",
+      "finding": "The environment could express the tested effect at L3 but not at L2 at n=12, and the frozen rule handles this correctly. L3 median gaps are 0.5-1.0 ms (reuse 0.00514-0.00574 s vs cold-L3 0.00617-0.00635 s), yielding 8 robust WIN cells with CIBF uppers 0.85-0.97, far from 1.00. L2 median gaps are 0.02-0.09 ms, below the ~0.06-0.07 ms bootstrap half-width at n=12 (CIBF spans ~0.92-1.07), so the L2 margin is unresolvable here; the frozen rule parks the thread (INCONCLUSIVE) instead of deciding, which is the correct fail-safe. Absolute scale caveat (disclosed by the producer, re-confirmed): whole-class gaps are sub-millisecond, smaller than one local GET and 2-3 orders below real web navigation economics; latency is wall-clock, not deterministic; bootstrap tails are coarse at n=12. Conclusions must stay bounded to this localhost ThreadingHTTPServer substrate, the shipped parameterized carrier, the three LOCAL perturbation classes and the stated counters - exactly the ceiling the producer wrote.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#validity_notes",
+        "research/experiments/EXP-RUNTIME-38816779349/report.md#section-6",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/liveness_only.json#timer_resolution_s"
+      ]
+    },
+    {
+      "id": "AF-8-TAX-REMOVAL-AND-IDENTITY-VERIFIED",
+      "severity": "info",
+      "finding": "The mandate's removable tax was removed by measurement, not by narrative. Audit-recomputed S-REGISTRY-BUILD medians: reuse 0.2881/0.2928/0.2886 ms vs cold 0.0474/0.0435/0.0464 ms (residual delta ~0.24 ms) versus the parent packet's as-implemented ~1.44-1.49 ms reuse build (parent EXP-RUNTIME-38340133174 attribution ATTRIBUTED-S-REGISTRY-BUILD; parent gated ratios 1.0235-1.2463 confirmed from parent result.json#metrics.per_class.*). Treatment identity holds: BulkArm is a single MechanismRegistry.replace() over the same mech dicts, V-REG-EQUIV true on every episode, DESIGN byte-equality canary (bulk_bytes_equal_upsert=true, bulk_target_only_ok=true in liveness_only.json), warmup-vs-timed shipped-counter match 12/12 per class. Cold arms are byte-identical to the parent v2 path (frozen carrier hashes).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#per_class.*.M-PHASE-DELTAS",
+        "research/experiments/EXP-RUNTIME-38340133174/result.json#metrics.per_class",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/liveness_only.json"
+      ]
+    },
+    {
+      "id": "AF-9-PARENT-RF-REMEDIATION-VERIFIED-BY-CONSTRUCTION",
+      "severity": "info",
+      "finding": "Parent audit (EXP-RUNTIME-38340133174/audit.json, status REVISE, RF-1..RF-10) remedies verified in this packet: RF-1 ceiling - no PERMANENT-DROP/SUPPORTS overclaim; M-DECISION and product note stay at INCONCLUSIVE/no-decision. RF-2 attribution tie - driver returns the full qualifying set with net-vs-gross semantics (here ATTRIBUTION-MOOT, attribution_set=[], net excess negative on all classes: -0.000614/-0.001030/-0.000549 s). RF-3 metric nulls - M-SCAFFOLD-REUSE=120 and M-SCAFFOLD-COLD-L3=36 present per class. RF-4 identifier drift - M-EQUIV-MATCH-N/M-EQUIV-MATCH-DEN retained (12/12). RF-5 contamination denominator - 48/class, 144 total, verified. RF-6 gate idiom - explicit is-None checks in class_gate_reasons. RF-7 preflight coverage - gate-coverage probe exercises all pass/fail boundaries before freeze. RF-8 freeze completeness - __init__.py in freeze_artifacts, hash verified. RF-9 B-NO-REPAIR vacuity disclosed. RF-10 asymmetry - Bonferroni CIs gate both WIN and LOSS; marginal straddles park. Parent handoff sha256 cd05cbb8... verified against request.json#parent_handoff.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/audit.json",
+        "research/experiments/EXP-RUNTIME-38340133174/handoff.json",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#baselines.B-NO-REPAIR",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py#class_gate_reasons"
+      ]
+    },
+    {
+      "id": "AF-10-NON-BLOCKING-PROVENANCE-NOTES",
+      "severity": "info",
+      "finding": "Two non-blocking observations, neither affecting the decision or any frozen identifier. (a) result.json#metrics.per_class.* omits the driver's M-PHASE-DELTAS block (present verbatim in raw_evidence/driver_stdout.json#per_class and summarized in M-ATTR-* metrics); this is an omission from the derived handoff, not a null or a rename - all identifiers preserved, no mandatory value replaced by null. (b) raw trial rows do not record per-trial seed values; seeds are generated by the frozen driver formula SEED5+1000*(ci+1)+j (SEED5=162073685), so they are recomputable, but the raw rows alone cannot confirm them. Neither warrants REVISE at this ceiling.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#metrics.per_class",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#per_class.*.M-PHASE-DELTAS",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py#main"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "verdict": "PASS",
+      "finding": "Primary and sole frozen cost/latency denominator (L=3 cold re-derivation, parent-identical v2.Arm path). Recomputed: success 1.0 on all three classes; M-SHIPPED-COLD-L3 = 228 (12x19) and M-COLD-HTTP-L3 = 108 (12x9) exact per class on every trial; timed in parity 6/6 against the treatment episode; V-DRIFT-COLD holds exactly, so no substrate/carrier drift contaminated the comparison and the pin cannot mask a repair effect (cold is repair-independent). Strong cheap baseline as mandated; no ceiling/floor saturation on the latency surface.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls.B-COLD"
+      ]
+    },
+    {
+      "id": "B-COLD-MIN",
+      "verdict": "PASS",
+      "finding": "L=2 cold re-derivation, the mandate's decision-bar denominator. Recomputed: cold_min_success 1.0 every class; M-SHIPPED-COLD-L2 = 216 (12x18) and M-COLD-HTTP-L2 = 96 (12x8) exact; parity-timed. All three classes' L2 cells (the decision-critical straddles/wins) use this denominator.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls.B-COLD-MIN"
+      ]
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "verdict": "PASS",
+      "finding": "Live must-fail control: 0.0 success on all 3 classes (36/36 trials), confirming the perturbation actually bites on this substrate. Its failure mode (success > 0.10) is wired to MEASUREMENT_INVALID in the frozen gate block.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#per_class.*.M-LITERAL-SUCCESS",
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls.B-LITERAL-REPLAY"
+      ]
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "verdict": "PASS (diagnostic only, vacuity disclosed)",
+      "finding": "Abstention control is vacuous by pinned-v2 construction (success hardcoded False), disclosed in spec.json#baselines.B-NO-REPAIR and result.json#validity_notes per parent RF-9. Observed as expected: success 0.0, guard fired 36/36 (the only informative field). Never used as a cost/latency denominator; the live must-fail role is held by B-LITERAL-REPLAY. Correct handling.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#baselines.B-NO-REPAIR",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials.*.norepair_guard_fired"
+      ]
+    },
+    {
+      "id": "T-REPAIR-REUSE-BULK",
+      "verdict": "PASS (identity intact)",
+      "finding": "Treatment identity verified: BulkArm single MechanismRegistry.replace() of the inherited set; V-REG-EQUIV true on every timed bulk episode (36/36 gated + all breadth episodes); DESIGN byte-equality canary bulk_bytes_equal_upsert=true; shipped 4-field 17 on every functional_ok trial with class-expected http 6/5/6 (V-DRIFT-REUSE exact); warmup-vs-timed counter match 12/12 per class. Breadth n=1/n=2 episodes (the mandate's two authorized repairs) ran successfully 36/36 each and are correctly kept ungated.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls.T-REPAIR-REUSE-BULK",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py#BulkArm",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/liveness_only.json"
+      ]
+    },
+    {
+      "id": "SHIPPED-4-FIELD-PREMISE",
+      "verdict": "PASS (premise, not empirical win)",
+      "finding": "Recomputed per trial: reuse exactly 17 (P1/P3 vector (6,5,5,1), P2 (5,5,6,1)), cold-L2 exactly 18 (8,5,5,0), cold-L3 exactly 19 (9,5,5,0) on all 36 trials; class sums 204/216/228 exact. The producer consistently carries this as a zero-variance drift-checked premise (V-EQ-HOLDS) and never as an empirical advantage; the empirical burden is carried by the 12 CI-gated latency cells, as frozen. Correct.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#trials.*.repair_cost",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#measurement_validity.V-EQ-PREMISE"
+      ]
+    },
+    {
+      "id": "NC-AND-PC-SUITE",
+      "verdict": "PASS",
+      "finding": "NC-NO-PERTURBATION stale=false, NC-NOISE stale=false (2/2), per-trial fresh-silence 36/36, NC-OVERBROAD-REPAIR instrument live (4/4 flags every trial, rate 1.0 > 0.10), PC-BASE-LIVENESS true 36/36. All match frozen expectations; false-firing and insensitive-instrument failure policies are wired to MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/result.json#controls",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#nc_no_perturbation_stale",
+        "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json#nc_noise_stale"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "_note": "AUDIT recomputation from raw_evidence/driver_stdout.json#trials with an independent implementation (no producer module imported); producer metric/control identifiers preserved exactly. All values below MATCH the producer unless stated. The paired-bootstrap and order-split fields are AUDIT DIAGNOSTICS ONLY, not frozen measurements, and cannot flip the frozen decision.",
+    "audit_recompute_scope": {
+      "trials_recomputed": 36,
+      "classes": ["P1-ENDPOINT", "P2-STRUCTURE", "P3-PERMISSION"],
+      "ci_scheme": "frozen unpaired percentile bootstrap, B_BONF=10000, tail=(0.05/12)/2, seeds SEED5+7000*(ci+1)+k",
+      "freeze_and_binding_checks": "all PASS (AF-1)"
+    },
+    "M-N-VALID-TRIALS": 36,
+    "M-INVALID-REASONS": [],
+    "M-MODEL-CALLS-TOTAL": 0,
+    "M-MODEL-TOKENS-TOTAL": 0,
+    "M-B3-ECONOMICS": "UNSATISFIABLE-no-endpoint-counters-only-blocker-recorded",
+    "M-DECISION": "INCONCLUSIVE",
+    "M-CLASS-VERDICTS": {
+      "P1-ENDPOINT": "PRICED-MARGINAL",
+      "P2-STRUCTURE": "PRICED-WIN",
+      "P3-PERMISSION": "PRICED-MARGINAL"
+    },
+    "M-ATTR-ANSWER": "ATTRIBUTION-MOOT",
+    "M-ATTR-CLOSURE-OK": true,
+    "per_class": {
+      "P1-ENDPOINT": {
+        "M-N": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": {"audit_z_1.9599639845": 0.7575059933447591, "producer_z_1.96": 0.7574992425007574, "note": "delta 6.8e-6 from carrier WILSON_Z=1.96; immaterial, both >= 0.60"},
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-DENOMINATOR": 48,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-FRESH-SILENT": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 204,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-REUSE-HTTP": 72,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-LATENCY-REUSE-MED-S": 0.0057403369999065035,
+        "M-LATENCY-COLD-L2-MED-S": 0.0056508055000676904,
+        "M-LATENCY-COLD-L3-MED-S": 0.006354497499955869,
+        "M-LATENCY-R-L2": 1.0158440243320603,
+        "M-LATENCY-R-L2-CIBF": [0.9345069793589826, 1.0706668524513994],
+        "M-LATENCY-R-L2-NOARG": 0.9949925049833168,
+        "M-LATENCY-R-L2-NOARG-CIBF": [0.9202903058983847, 1.0535431386847176],
+        "M-LATENCY-R-L3": 0.9033502649023576,
+        "M-LATENCY-R-L3-CIBF": [0.8472514503443136, 0.9679581911958177],
+        "M-LATENCY-R-L3-NOARG": 0.8847301358517536,
+        "M-LATENCY-R-L3-NOARG-CIBF": [0.8260428787774545, 0.9512529430060888],
+        "M-CELL-L2": "MARGINAL",
+        "M-CELL-L2-NA": "MARGINAL",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-CLOSURE-REUSE-MED": 0.03828201738367278,
+        "M-CLOSURE-COLD-MED": 0.006671690714974406,
+        "S-REGISTRY-BUILD-MED-S": {"reuse": 0.0002880560000448895, "cold": 0.0000474360000453089},
+        "audit_paired_cibf_diagnostic": {"L2": [0.9374427934279658, 1.0623810812055328], "L2NA": [0.9170114940381666, 1.0425463550761118], "L3": [0.8675431482903272, 0.9218940587663534], "L3NA": [0.8526580171737574, 0.9061424850574342], "cells_unchanged": true},
+        "audit_order_split_diagnostic": {"R_L2_reuse_first": 1.000556907648174, "R_L2_cold_first": 1.0158440243320603, "R_L3_reuse_first": 0.8982391229783737, "R_L3_cold_first": 0.9115874060656673}
+      },
+      "P2-STRUCTURE": {
+        "M-N": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": {"audit_z_1.9599639845": 0.7575059933447591, "producer_z_1.96": 0.7574992425007574},
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-DENOMINATOR": 48,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-FRESH-SILENT": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 204,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-REUSE-HTTP": 60,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-LATENCY-REUSE-MED-S": 0.00514105299998846,
+        "M-LATENCY-COLD-L2-MED-S": 0.005573065500016128,
+        "M-LATENCY-COLD-L3-MED-S": 0.006170667499986848,
+        "M-LATENCY-R-L2": 0.9224820702311112,
+        "M-LATENCY-R-L2-CIBF": [0.8203871563055318, 0.9542592644553021],
+        "M-LATENCY-R-L2-NOARG": 0.9042478573542008,
+        "M-LATENCY-R-L2-NOARG-CIBF": [0.8057892173460022, 0.9373079620792918],
+        "M-LATENCY-R-L3": 0.8331437401220236,
+        "M-LATENCY-R-L3-CIBF": [0.7624788957003206, 0.8655301016327488],
+        "M-LATENCY-R-L3-NOARG": 0.8166494575848953,
+        "M-LATENCY-R-L3-NOARG-CIBF": [0.7477372576520837, 0.8537431538737192],
+        "M-CELL-L2": "WIN",
+        "M-CELL-L2-NA": "WIN",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-CLOSURE-REUSE-MED": 0.04272640350821923,
+        "M-CLOSURE-COLD-MED": 0.006186636747841973,
+        "S-REGISTRY-BUILD-MED-S": {"reuse": 0.0002927545000375176, "cold": 0.000043488000073921285},
+        "audit_paired_cibf_diagnostic": {"L2": [0.8226106814301896, 0.9450192053319846], "L2NA": [0.8025356729327268, 0.9277699993857853], "L3": [0.7818717899312935, 0.8627585631170958], "L3NA": [0.7638460740873241, 0.8472072751045894], "cells_unchanged": true},
+        "audit_order_split_diagnostic": {"R_L2_reuse_first": 0.9210785114054625, "R_L2_cold_first": 0.8915446028025125, "R_L3_reuse_first": 0.8308526589541951, "R_L3_cold_first": 0.8302585245230886}
+      },
+      "P3-PERMISSION": {
+        "M-N": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": {"audit_z_1.9599639845": 0.7575059933447591, "producer_z_1.96": 0.7574992425007574},
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-CONTAMINATION-DENOMINATOR": 48,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-FRESH-SILENT": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 204,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-REUSE-HTTP": 72,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-LATENCY-REUSE-MED-S": 0.005669359999956214,
+        "M-LATENCY-COLD-L2-MED-S": 0.005647073499972066,
+        "M-LATENCY-COLD-L3-MED-S": 0.00621922150003229,
+        "M-LATENCY-R-L2": 1.0039465574486073,
+        "M-LATENCY-R-L2-CIBF": [0.9509386580688243, 1.0627613975235604],
+        "M-LATENCY-R-L2-NOARG": 0.9858436947028474,
+        "M-LATENCY-R-L2-NOARG-CIBF": [0.9368615807154245, 1.0425479357223821],
+        "M-LATENCY-R-L3": 0.9115867637013376,
+        "M-LATENCY-R-L3-CIBF": [0.868751889934036, 0.9570928811231473],
+        "M-LATENCY-R-L3-NOARG": 0.8951549982684125,
+        "M-LATENCY-R-L3-NOARG-CIBF": [0.8544625234018476, 0.9405757671937864],
+        "M-CELL-L2": "MARGINAL",
+        "M-CELL-L2-NA": "MARGINAL",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-CLOSURE-REUSE-MED": 0.03884676062565404,
+        "M-CLOSURE-COLD-MED": 0.006828520439548125,
+        "S-REGISTRY-BUILD-MED-S": {"reuse": 0.00028856100004759355, "cold": 0.00004635549998956581},
+        "audit_paired_cibf_diagnostic": {"L2": [0.9847600557232385, 1.0624003675444493], "L2NA": [0.9684961979926999, 1.0422870757606995], "L3": [0.8777740224286877, 0.9480778023046138], "L3NA": [0.862357696258878, 0.932438197642377], "cells_unchanged": true},
+        "audit_order_split_diagnostic": {"R_L2_reuse_first": 0.9927800420773787, "R_L2_cold_first": 1.0084024346264697, "R_L3_reuse_first": 0.9299344583001083, "R_L3_cold_first": 0.9003666033279494}
+      }
+    },
+    "aggregate": {
+      "recomputed_decision": "INCONCLUSIVE",
+      "producer_decision": "INCONCLUSIVE",
+      "cells_win": 8,
+      "cells_marginal": 4,
+      "cells_loss": 0,
+      "cells_unknown": 0,
+      "status_valid": true,
+      "no_readmit_no_drop_no_promotion": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING (equal to, and not above, the producer's written ceiling). On this pinned localhost JSON substrate (5-resource ThreadingHTTPServer API), with the shipped parameterized carrier byte-identical to the parent freeze and the registry-materialization tax removed by the BulkArm single-replace treatment (V-REG-EQUIV pinned every episode): (1) reuse-based signal-driven local repair is functionally and locally sound - 36/36 valid trials, repair_success 1.0 (Wilson lower 0.7575 >= 0.60), guard fire 1.0, write_set_max 1, contamination 0/144 with the correct denominator, live bitten and live insensitive controls - re-attesting C-DELTA-REPAIR's functional/locality boundary for the third time on this substrate; (2) with the known tax removed BY MEASUREMENT (S-REGISTRY-BUILD reuse medians ~0.29 ms vs the parent's ~1.49 ms), the priced picture moved from the parent's six robust deficits (ratios 1.0235-1.2463) to 8 robust WIN cells (every L3/L3-NOARG cell on all three classes plus all four P2-STRUCTURE cells; Bonferroni family-wise CIs strictly below 1.00, audit-reproduced bit-exact and confirmed under a paired-bootstrap diagnostic) and 4 near-1.00 MARGINAL cells (P1-ENDPOINT and P3-PERMISSION at L2 on both boundaries, CIBF ~0.92-1.07, unresolvable at n=12; classification robust to paired resampling and to order-parity splits); (3) per the frozen decision rule this aggregate is INCONCLUSIVE - no re-admission of localized repair to the C-PRODUCT-ECON story, no permanent drop, no promotion, thread parked; C-DELTA-REPAIR stays EXPERIMENTAL bounded to functional/locality soundness; (4) the shipped 4-field counter comparison (reuse exactly 17 vs cold 18/19, fetch ratios 0.556-0.667) is a deterministic drift-checked premise, NOT an empirical win; (5) H5/B3: model_calls/model_tokens are structural zeros - real model-call/token economics is UNSATISFIABLE on this substrate and remains a recorded blocker; (6) nothing transfers to real web, browser/network, production carriers or external-agent economics: whole-class gaps are sub-millisecond (L3 0.5-1.0 ms, L2 <= 0.1 ms), smaller than one local GET, wall-clock not deterministic, bootstrap tails coarse at n=12, one substrate vantage, three LOCAL perturbation classes only. Breadth (n=1,2,5) and recurrence N* outputs are ungated diagnostics (L3 N* ~11-20 episodes) and cannot support any advantage claim on their own. This audit adds no new frozen-status change: the packet is a valid, fully reproducible INCONCLUSIVE measurement transaction.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38816779349/request.json",
+    "research/experiments/EXP-RUNTIME-38816779349/spec.json",
+    "research/experiments/EXP-RUNTIME-38816779349/prereg.md",
+    "research/experiments/EXP-RUNTIME-38816779349/freeze.json",
+    "research/experiments/EXP-RUNTIME-38816779349/design_review.json",
+    "research/experiments/EXP-RUNTIME-38816779349/result.json",
+    "research/experiments/EXP-RUNTIME-38816779349/report.md",
+    "research/experiments/EXP-RUNTIME-38816779349/provenance.json",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/driver_stdout.json",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/runner_v5.py",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/liveness_only.json",
+    "research/experiments/EXP-RUNTIME-38816779349/raw_evidence/reachability_probe.json",
+    "research/experiments/EXP-RUNTIME-38340133174/result.json",
+    "research/experiments/EXP-RUNTIME-38340133174/audit.json",
+    "research/experiments/EXP-RUNTIME-38340133174/handoff.json",
+    "codex/claim_state.json#effective_event_by_claim.C-DELTA-REPAIR",
+    "research/lanes/registry.json#lanes.runtime"
+  ],
+  "unresolved": [
+    "Whether the four P1-ENDPOINT/P3-PERMISSION L2 MARGINAL cells (inclusive 1.0158/1.0039, NOARG 0.9950/0.9858; CIBF ~ +/-6%) would resolve to WIN, LOSS or remain straddles at larger N; the audit paired-bootstrap and order-split diagnostics confirm the straddle is real at n=12 but cannot resolve it. This is the sole blocker for the mandate's re-admission-vs-drop question at L2.",
+    "Why P2-STRUCTURE wins at both L (ratios 0.8166-0.9225) while P1/P3 win only at L3; the producer's post-hoc candidate (class-specific S-REPAIR-SIGNAL cost interacting with L-scaled cold observation cost) is an untested observation, not a mechanism.",
+    "Per-trial seed values are not recorded in raw trial rows (derivable from the frozen driver formula SEED5+1000*(ci+1)+j); raw rows alone cannot independently confirm them. Non-blocking at this ceiling.",
+    "result.json#metrics.per_class.* omits the driver's M-PHASE-DELTAS block (retained verbatim in raw_evidence/driver_stdout.json and summarized by M-ATTR-* metrics); non-blocking, but a future packet could copy it for self-contained attribution recomputation.",
+    "Real model-call/token economics (B3) remains unmeasured by construction on this substrate; any flagship C-PRODUCT-ECON claim still requires a substrate with a live model endpoint.",
+    "Transfer of any ratio, median or N* beyond this localhost substrate, shipped carrier, three LOCAL classes and stated counters is unknown and unlicensed by this packet."
+  ]
+}
