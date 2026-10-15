@@ -1,0 +1,44 @@
+{
+  "base_sha": "f92828e617c1e4463e246946e183a8e5416cd451",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-15T01:37:47.448059+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): inherited/cached work normally pays only when revalidation plus stale-replay risk is cheaper than re-derivation, with a break-even that moves with depth and elapsed time \u2014 motivates pricing persistence explicitly rather than assuming it.",
+      "Agent prior (not SPIDER evidence): semantic routing without surface-form cues is the hard case for resolver generality; foreign-lexicon collapse does not by itself imply full-blind failure, so the blind test is the decisive separator.",
+      "Agent prior (not SPIDER evidence): when a capable model fails a trivial two-step web task while the target is visibly present, observation/action representation is a likelier culprit than raw multi-step reasoning \u2014 motivates varying representation before buying more model scale.",
+      "Agent prior (not SPIDER evidence): access barriers observed from one network vantage routinely confound endpoint properties with vantage properties; a persistence claim that does not survive a vantage change is a schedule, not a law."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Closest priors: P2-BLIND-COMPOSITION (pre2 product summary artifact 4.697, sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda \u2014 3/3 unseen compositions but keyword/oracle-guided stopping and weak baselines) and P2-MIND2WEB (archived Codex section 1 Mind2Web V0.50 \u2014 6/176 exact human-route matches, 47/176 retrieval; guard distinguishes retrieval/overlap from causal composition). This is not a rerun: no prior tested a genuinely blind resolver (no surface lexicon at all) with calibrated abstention on the frozen banks against the honest out-of-sample retrieval fit; the foreign-lexicon floor-collapse result makes this the exact separator between lexicon-asymmetry artifact and full-blind viability. Reactivates the IDLE lane on its highest-leverage open question rather than a ninth straight refinement elsewhere.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the gold-lexicon-conditional bound survive with a genuinely blind resolver (no surface lexicon at all), separating the measured foreign-lexicon floor-collapse from full-blind viability on the frozen banks?",
+      "rationale": "Cognitive reset performed despite the tunnel flag (9/10 recent on C-SEMANTIC-RESOLVE): a fresh-Codex lane would still pick this question, because the last accepted result (BOUND_ROBUST, audit PASS) left exactly one confound standing \u2014 the gold-lexicon asymmetry \u2014 and this test resolves it in the smallest decisive batch. Decision counterfactual: blind survival re-opens the embedding-vs-deterministic fork against the DECIDE_REQUIRE_RETRIEVAL_B bound and changes the shipped abstention boundary Product must keep; blind failure retires full-blind ambitions and parks the thread at PRIMARY+ALTLEX. Baseline is the frozen deterministic resolver plus the honest out-of-sample retrieval fit, exclusive unknown-precision denominator fixed pre-freeze. Stop trigger: one sensitivity packet on the frozen banks; no clause refit, no new surface family."
+    },
+    "cycle_id": "38666292793",
+    "lane": "graph",
+    "portfolio_assessment": "Program state: 465 canonical experiments; three lanes hold frozen mandates that must complete untouched (Frontier persistence-economics, Intel representation probe, Physics second-vantage); two hold strategically correct PREFREEZE mandates (Product work-compression derisk, Runtime repair-accounting repair); Graph is IDLE with a decisive one-packet blind-resolver follow-up. No lane is funded for the expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution: B1+B2 hold but B3 is NOT_SATISFIED, so Product runs the no-LLM derisk, Intel resolves representation-vs-capacity, and Runtime prices in counters with the blocker recorded. Discovery on the GET-only substrate is closed (0/208); persistence break-even, vantage transfer, blind viability, and repair re-admission are the four live falsifiers. B11 probe-refinement is deliberately parked as diminishing-returns depth against the untested founding hypothesis.",
+    "schema_version": 1,
+    "scout_assessment": "Scout is in DEGRADED MODE (model unavailable, rc=139): no external reconnaissance, no candidate synthesis beyond echoing lane handoffs, no spider_evidence. It contributed nothing independent this cycle, which is correctly handled as staff-advice absence rather than a blocker: every allocation above is reasoned directly from the machine snapshot, effective Codex state, lane charters, and the legacy brief, with comparative_reasoning completed from the compact brief despite the degraded Scout. The fallback candidate lists (which merely restate handoffs plus generic reassess prompts) were challenged rather than adopted \u2014 notably by parking Product's B11 handoff in favor of its active work-compression mandate. No Intel deep-verification tasking was needed because no new external claim entered through Scout."
+  },
+  "experiment_id": "EXP-GRAPH-38666634300",
+  "inherited_last_verdict": "BOUND_ROBUST_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS",
+  "inherited_next_question": "Does the gold-lexicon-conditional bound survive with a genuinely blind resolver (no surface lexicon at all), separating the measured foreign-lexicon floor-collapse from full-blind viability on the frozen banks?",
+  "lane": "graph",
+  "origin_github_run_id": "38666634300",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38530149021",
+    "path": "research/experiments/EXP-GRAPH-38530149021/handoff.json",
+    "sha256": "d275cce1da637817f6f5502ff52bc8d9102766ac6a76ecf8068bf581a2714b1f"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "df2254c9b4e7c0b04b63545cc319a0f997e36aa6b1314b595db7c25b4f606886",
+  "request_id": "42fa586d2ef5de33e98e946b",
+  "schema_version": 1
+}
