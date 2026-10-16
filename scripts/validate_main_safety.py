@@ -38,7 +38,7 @@ def main() -> None:
     require("group: spider-main-writer" in workflow, "main safety workflow must serialize with main writers")
     require("contents: write" in workflow, "main safety workflow needs rescue-ref write permission")
     require("bash scripts/main_safety_anchor.sh" in workflow, "main safety workflow must call canonical guard")
-    require("13,28,43,58" in workflow, "main safety workflow lost periodic backstop")
+    require("push:" in workflow and "workflow_dispatch:" in workflow, "main safety guard must run on every main push and permit manual recovery")
 
     for name, writer in (("Codex", codex), ("Product", product)):
         require("bash scripts/main_safety_anchor.sh || echo \"::warning::" in writer, f"{name} main writer must invoke safety anchor best-effort")
