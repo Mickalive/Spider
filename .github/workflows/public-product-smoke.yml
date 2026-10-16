@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Test exact kernel and invalidation semantics (offline, no LLM)
-        run: PYTHONPATH=src python -m unittest tests.test_public_product_demo -v
+        run: PYTHONPATH=src python -m unittest discover -s tests -p test_public_product_demo.py -v
       - name: Live read-only: observe, learn, store, reuse, independently verify
         shell: bash
         run: |
