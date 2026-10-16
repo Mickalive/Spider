@@ -1,10 +1,10 @@
 {
   "status": "failure",
-  "model": "opencode/space-bunny-free",
-  "attempt": 4,
+  "model": "opencode/mimo-v2.6-flash-free",
+  "attempt": 3,
   "exit_code": 78,
   "category": "provider-auth-invalid",
-  "github_run_id": "38920239597",
+  "github_run_id": "38939990146",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-16T15:59:27.297145+00:00"
+  "recorded_at": "2026-10-16T18:10:04.366410+00:00"
 }
