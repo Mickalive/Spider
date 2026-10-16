@@ -52,9 +52,9 @@ AF-7 states the environment could express the effect at L3 but not at L2 at n=12
 (L2 median gaps 0.02-0.09ms vs ~0.06-0.07ms bootstrap half-width) and the frozen
 rule correctly parks instead of deciding. This experiment varies ONLY the
 resolution confound: TRIALS_PER_CLASS 12 -> 36 (3x, fresh SEED6 bank), which
-narrows family-wise half-widths by sqrt(12/36) ~= 0.577 (projected ~3.2-4.1%,
-§15), sufficient to convert any true |R-1| effect above ~4% into a robust WIN or
-LOSS. Non-degeneracy note (inherited lesson): shipped-counter-only deciding is
+narrows family-wise half-widths by sqrt(12/36) ~= 0.577 (projected ~3.0-3.9%,
+§15), sufficient to convert a true |R-1| effect of ~5% or larger into a robust WIN or
+LOSS with margin (~4% at the resolution boundary). Non-degeneracy note (inherited lesson): shipped-counter-only deciding is
 structurally reuse-positive (deterministic 17/18, 17/19 by arm protocol) and
 scaffold-unit deciding is structurally reuse-negative under an arbitrary 1:1
 weight choice, so the shipped premise PLUS the dual-boundary CI-gated latency
@@ -105,8 +105,8 @@ disjoint offsets (scored +1000*(ci+1)+j; NC +1/+2; bootstrap +7000*(ci+1)+k;
 DESIGN canaries on discarded offsets). DESIGN liveness: server/distill (5 mechs)/
 resolve-EXECUTABLE/fetch-200/verify-True/guard-silent/registry-RW booleans
 (unperturbed, discarded), BulkArm-vs-upsert byte-equality canary (discrete content
-compare, untimed, identical bytes), timer granularity ~61ns nonzero minimum (4-5
-orders below the 0.02-1.0ms gaps). No timed reuse-vs-cold comparison is run at
+compare, untimed, identical bytes), timer granularity ~0.2µs measured
+minimum-nonzero-delta (2-4 orders below the 0.02-1.0ms gaps). No timed reuse-vs-cold comparison is run at
 DESIGN. Warmup non-interference by inspection (read-only GET server, no POST
 handler, set_perturb never called by trial arms, pure guard) enforced per trial by
 V-RETAIN. N=36 parity 18/18 even; Bonferroni tail indices integral at B=10000
@@ -136,12 +136,13 @@ the denominator is <= 0. Sequence-equivalence map (timed reuse): S-ARG deepcopy
 resolve+fetch -> S-GUARD -> S-REPAIR-SIGNAL local_repair -> S-REGISTRY-WRITE
 upsert(patched, the single repaired target) -> S-CHARGE -> S-POST-VERIFY ->
 S-EXECUTE batch. Charging semantics live entirely in pinned v2/carrier code the
-driver calls but never reimplements. Why N=36: parent half-widths 5.6-7.1% x
-sqrt(12/36) project to 3.2-4.1% (§15) — the smallest integer multiple of 12 that
-preserves exact target-rotation balance (each target 12x) while projecting
-resolution of any true effect above ~4%; N=24 would project only to ~4.0-5.0%
-(likely still straddling), N=48 buys only marginal extra narrowing (50% vs 42%)
-for 33% more wall-clock. True effects below ~3-4% remain straddles by
+driver calls but never reimplements. Why N=36: parent L2-marginal half-widths
+5.3-6.8% x sqrt(12/36) project to 3.0-3.9% (§15) — the smallest integer multiple
+of 12 that preserves exact target-rotation balance (each target 12x) while
+projecting resolution of true effects ~5% or larger (~4% at the boundary); N=24
+would project only to ~3.7-4.8% (likely still straddling), N=48 buys only marginal
+extra narrowing (50% vs 42%) for 33% more wall-clock. True effects below ~3%
+remain straddles by
 construction and PARK the thread per the stop trigger — a bounded, honest
 non-resolution, not a third funding request.
 
@@ -1478,7 +1479,8 @@ the gated comparison differs in physical resolve/fetch/verify/scaffold counts pl
 wall-clock — never identical. N changes trial count only, never the code path, so
 identity transfers. E3 ceiling baselines: cold latency is continuous (no ceiling);
 1.0 success levels are functional gates, never deciders; the 12 deciders have live
-dynamic range (61ns timer granularity vs 0.02-1.0ms gaps, 4-5 orders). The shipped
+dynamic range (~0.2µs measured timer granularity vs 0.02-1.0ms gaps, 2-4 orders;
+smallest L2 gaps ~20µs are ~100 timer ticks, so no quantization threat). The shipped
 17/18/19 counter is a drift-checked premise, never the decider. E4 insensitive
 controls: literal-replay must-fail live (parent 0.0); overbroad fires 4/4 in the
 parent and the instrument is re-fired at DESIGN; NCs silent; guard fires 108/108
@@ -1519,13 +1521,15 @@ equiv-false -> [registry-equivalence-broken]; drift-cold (+1 http) and drift-reu
 (+1 retrieval) -> [nominal-mismatch]; genuine repair-failed exempt -> [];
 parity-broken -> [parity-order-broken]; warmup-1 -> [warmup-violation].
 Arithmetic: SEED6=180486679 disjoint from SEED5=162073685 and SEED4=3980394806;
-Wilson lower for 36/36 = 0.903578 >= 0.60; parent half-widths 0.060/0.068/0.056/0.071
-project to 0.0346/0.0393/0.0323/0.0410 at N=36; parity 18/18 even; Bonferroni tail
+Wilson lower for 36/36 = 0.903578 >= 0.60; parent CIBF half-widths on the four
+L2 MARGINAL cells (P1 0.0681/0.0666, P3 0.0559/0.0528) project by 1/sqrt(3) to
+0.0393/0.0385/0.0323/0.0305 at N=36; parity 18/18 even; Bonferroni tail
 indices at B=10000 are integral (lo 20, hi 9978); rotation TARGETS[(ci+j)%3] yields
 exactly 12x per target per class. Liveness (discarded, unperturbed, this machine):
 Python 3.12.15, distill 5 mechs, resolve EXECUTABLE, fetch 200 with body, verify
 True, guard silent on unperturbed body, BulkArm-vs-upsert registry bytes
-byte-identical at n=5, timer nonzero minimum ~61ns. v2 module: 60855 bytes,
+byte-identical at n=5, timer minimum nonzero delta ~180ns (p50 ~200ns over 200k
+consecutive perf_counter calls on this machine; reported resolution 1ns). v2 module: 60855 bytes,
 d4871091, all 30 invoked attributes present (Arm, Mechanism, MechanismRegistry,
 SpiderKernel, TrajectoryCounters, Counters, MIN_CONFIDENCE, CLASSES, TARGETS,
 TRIALS_PER_CLASS, RESOURCES, LEARN_IDS, LEARN_IDS_MIN, TASK_IDS,
@@ -1534,6 +1538,8 @@ overbroad_contamination, guard, local_repair, execute_batch, run_repair_reuse,
 run_cold, run_literal, run_norepair, functional_ok, flatten, plus mean,
 wilson_lower, no_perturbation_trial, noise_trial, synthetic_repair_signal_probe).
 Carrier hashes match the parent freeze exactly
-(3d173722/3a6caf97/338aaf4d/51fb440d). Full probe outputs are reproduced by
-EXECUTE preflight from the frozen driver; the DESIGN runs above carry no outcome
-information about reuse-vs-cold latency at any N.
+(3d173722/3a6caf97/338aaf4d/51fb440d). Liveness re-verified independently on this
+machine at DESIGN finalization (extracted v6 driver --liveness-only): identical
+booleans, carrier/v2 pins, and BulkArm byte-equality; timer re-measured as above.
+Full probe outputs are reproduced by EXECUTE preflight from the frozen driver; the
+DESIGN runs above carry no outcome information about reuse-vs-cold latency at any N.
