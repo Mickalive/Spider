@@ -1,0 +1,18 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md": "5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md": "5a9cc1190674ffa5a8e6d604f6735ae6a9e2e27ffc9358c82d263f51b43d5735",
+    "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-GRAPH-38816768796",
+  "frozen_at": "2026-10-15T22:45:06.630283+00:00",
+  "hashes": {
+    "design_review.json": "e073fe9dee70aa36e438033d1150f6e6620fea62df6c135584681e9d732a9983",
+    "prereg.md": "e5a8d11daf76db066d95b73005473a131f1777ac8596ff617c77aa444f75b1bc",
+    "request.json": "fe1a096319e706c65de97e489366cad0ef1bbcb8a9b94444ec5481071898c086",
+    "spec.json": "418cf27d25bc13f4aee0ab4b21eb06d56c437c7cb1d4d54a76993a9f190626cc"
+  },
+  "schema_version": 1
+}

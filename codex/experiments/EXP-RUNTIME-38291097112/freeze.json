@@ -1,0 +1,17 @@
+{
+  "artifact_hashes": {
+    "src/spider/kernel.py": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "frozen_at": "2026-10-12T22:40:36.727022+00:00",
+  "hashes": {
+    "design_review.json": "7c93e3427eb573dc2503df98f8bcf63ae4c724688b1ba760bd5287731f640c16",
+    "prereg.md": "f19aeb7668fda5b50921b15434472ee7d5ff9fec96cdae3411cddf2e7a9c5797",
+    "request.json": "8ca473bfbce81af018ee8228d5ff3eef41246536d8c214f403a6a2305842af7b",
+    "spec.json": "a28cf5f568ec1d9ec80b0d1ffb085e2c02d0096ae761193a55a807af25fa3877"
+  },
+  "schema_version": 1
+}

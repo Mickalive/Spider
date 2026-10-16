@@ -44,6 +44,19 @@ jobs:
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v
 
+      - name: Verify guarded public Web reuse against live independent truth (PR only; NO LLM)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          PYTHONPATH=src python scripts/demo_public_reuse.py --output /tmp/spider-public-product.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/spider-public-product.json'))
+          assert r['success'] is True and r['training_examples'] == 2
+          assert len(r['holdout']) == 2 and all(x['verified'] for x in r['holdout'])
+          assert r['claims']['llm_cost_savings_demonstrated'] is False
+          print("SPIDER_PRODUCT_PUBLIC_REUSE_VERIFIED")
+          PY
+
       - name: Dry-run canonical Codex against all live Research 2.0 lanes
         shell: bash
         run: |

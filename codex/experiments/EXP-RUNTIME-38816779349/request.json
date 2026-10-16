@@ -1,0 +1,43 @@
+{
+  "base_sha": "0da183c6574c5328d1ff3afaba50458ec0aac795",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-15T22:24:02.170454+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): inherited state that is never re-validated decays in value; the cheapest decisive test is the one that varies only the suspected confound (tie-break rule, observation representation, source vantage, cost counter) while holding everything else frozen.",
+      "Agent prior (not SPIDER evidence): work-compression claims only matter against the strongest cheap baseline (exact cache, retrieval/nearest-neighbour, compiled procedure) on cost per verified success, not against a weak cold start; ceiling baselines cannot support an advantage claim.",
+      "Agent prior (not SPIDER evidence): repeated measurement-invalid findings with the same prerequisite failure signal a shared substrate defect to repair once, not another outcome-bearing run; a clean bounded negative that closes a thread is higher value than another inconclusive refinement."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH. Screened legacy brief/index: only P2-AUTOMATION (operational lesson on request identity/write sets, no delta-repair substance). No pre-2.0 artifact tested reuse-based localized repair vs cold re-derivation at L=2/L=3 on a fetch-scarce perturbable substrate with the shipped parameterized carrier and contamination bounds. Search limited to compact brief/index; no matching prior, so this repair-gated re-test is not a duplicate.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Once the carrier per-episode registry-materialization tax is removed (single bulk replace or target-only registration) and the frozen driver gate defect is repaired, is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 on both timed boundaries, and how does the margin scale with inheritance breadth and recurrence?",
+      "rationale": "Runtime is IDLE; this single repair-gated re-test removes the shared validity blocker (registry-materialization tax + driver gate defect) instead of rediscovering it as another invalid measurement across lanes. Decision counterfactual: a strict win at L=2/L=3 re-admits localized repair to the C-PRODUCT-ECON story; a persistent regression makes the drop permanent and stops the thread (bounded stop). Strongest baseline is cold re-derivation on the same fetch-scarce substrate with the shipped carrier held fixed; contamination null retained. Smallest decisive batch: L=2/L=3 on both timed boundaries only."
+    },
+    "cycle_id": "38816465757",
+    "lane": "runtime",
+    "portfolio_assessment": "Program state: C-MEAS-VALID VALIDATED (bounded authorship-separated real-Chromium scope) with B1+B2 discharged but B3 NOT_SATISFIED, so no expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution is licensed; the three frozen transactions (Frontier persistence economics, Physics second vantage, Intel observation-representation probe) must complete before any redirection; Product continues its PREFREEZE no-LLM work-compression derisk on SBA-V3; the two IDLE lanes are explicitly reactivated (Graph closes the blind-resolver tie-break confound, Runtime repairs the single shared delta-repair blocker once). C-CROSSSITE discovery is closed on this substrate class (0/208); C-SEMANTIC-RESOLVE stands at DECIDE_REQUIRE_RETRIEVAL_B/BLIND_FAILS pending the feasible-tau check; C-PARAM-INHERIT stays EXPERIMENTAL at its conditional boundary with B11 parked. Scout is DEGRADED (rc=139, no external reconnaissance); all direction is from the machine snapshot and canonical Codex state.",
+    "schema_version": 1,
+    "scout_assessment": "Scout is in DEGRADED SCOUT MODE (model unavailable rc=139): no external reconnaissance, no synthesis, no SPIDER evidence offered; candidate directions merely echo lane handoffs/snapshot mandates. It therefore did not alter any allocation beyond supplying the idle-lane reactivation prompt, which was independently verified against lane states. All comparative, readiness and de-duplication reasoning was done directly from the director snapshot, claim registries, legacy brief and Codex state; no prior was mistaken for evidence."
+  },
+  "experiment_id": "EXP-RUNTIME-38816779349",
+  "inherited_last_verdict": "ADOPT-AUDIT-REVISE-IMPLEMENTATION-BOUNDED-NEGATIVE-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-READMISSION-NO-PERMANENT-DROP-NO-PROMOTION-CONTINUE-FALSE",
+  "inherited_next_question": "Once the carrier per-episode registry-materialization tax is removed (single bulk replace or target-only registration) and the frozen driver gate defect is repaired, is reuse-based localized repair strictly cheaper than cold re-derivation at L=2 and L=3 on both timed boundaries, and how does the margin scale with inheritance breadth and recurrence?",
+  "lane": "runtime",
+  "origin_github_run_id": "38816779349",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-38340133174",
+    "path": "research/experiments/EXP-RUNTIME-38340133174/handoff.json",
+    "sha256": "cd05cbb896c9ed6f2c024509bd4adac6dc6416e3b251ffa5e426f9ab254a9f8e"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "314efa118822f3621281ccbdb96fae72b4c4d14b4d169df5893bfd27c0894b82",
+  "request_id": "a23a084b22c742000b01e2ef",
+  "schema_version": 1
+}
