@@ -43,7 +43,7 @@ two different holdout repositories, and invalidates on verification failure.
 PYTHONPATH=src python scripts/demo_public_reuse.py
 ```
 
-The [live public product smoke](.github/workflows/public-product-smoke.yml)
+The live public product smoke in the [existing CI](.github/workflows/ci.yml)
 checks real pages and official oracles; offline unit tests also prove that
 a fake/mismatched answer cannot become trusted memory. **This is not an
 autonomous browser-agent trial and demonstrates no monetary savings** versus
