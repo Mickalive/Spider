@@ -26,7 +26,7 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **471**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **472**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
@@ -501,6 +501,7 @@ Finalized subsequent packets: **471**. Coverage gaps: **0**. Quarantined packets
 | EXP-GRAPH-38666634300 | graph | PASS | BLIND_FAILS_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS | C-SEMANTIC-RESOLVE | `4b3da6f9b013` |
 | EXP-GRAPH-38816768796 | graph | REVISE | BLIND_FAILS_AT_FROZEN_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_REVISE_NO_PROMOTION | C-SEMANTIC-RESOLVE | `136687c0c227` |
 | EXP-RUNTIME-38816779349 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION | C-DELTA-REPAIR | `89877a157a60` |
+| EXP-GRAPH-38835183404 | graph | PASS | BLIND_FAILS_AT_HELDOUT_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_PASS_NO_PROMOTION | C-SEMANTIC-RESOLVE | `033eec277f16` |
 | EXP-RUNTIME-38835192343 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION-PARK | C-DELTA-REPAIR | `77a722867a0d` |
 
 ## Effective claim state
@@ -517,7 +518,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-38234098353 |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 |
-| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38816768796 |
+| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38835183404 |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-38074818597 |
 
 ## Latest raw claim events
@@ -534,7 +535,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-38234098353 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-37950616801 | intel |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-PRODUCT-37989728440 | product |
-| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38816768796 | graph |
+| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-GRAPH-38835183404 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-38074818597 | physics |
 
 ## Integrity accounting
