@@ -5,11 +5,7 @@
     "edit": "allow",
     "question": "deny",
     "doom_loop": "deny",
-    "external_directory": {
-      "*": "deny",
-      "/tmp/spider-*": "allow",
-      "/tmp/tmp*": "allow"
-    },
+    "external_directory": "allow",
     "read": {
       "*": "allow",
       "*.env": "deny",
