@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "At what write/read hit-rate economics \u2014 persistence hit rate h(N), write cost Cwrite, miss cost Cmiss \u2014 does persisted graph memory with the calibrated abstention boundary pay for itself end-to-end versus cold resolution on matched tasks with fully-loaded counterfactual costs?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-10-16T21:13:45.897599+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-10-16T21:52:50.549563+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "b9e12d1fb17364a3297725b07a645efa05f5381ea28713446f0f11cc56c25dfb",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "f44d199ab3d7a1cc1ee6462e",
+  "last_failure_control_revision": "483314ec6bd5937df1f6a0334448deff39770d6ec045c33e86beca131f9cbbf7"
 }
