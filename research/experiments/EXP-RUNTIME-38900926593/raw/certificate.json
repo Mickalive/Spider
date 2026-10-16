@@ -1,0 +1,63 @@
+{
+ "asn": {
+  "as": "AS8075 Microsoft Corporation",
+  "city": "Des Moines",
+  "country": "United States",
+  "isp": "Microsoft Corporation",
+  "org": "Microsoft Azure Cloud (centralus)",
+  "query": "172.212.165.179",
+  "regionName": "Iowa"
+ },
+ "distinct_ips": [
+  "172.212.165.179"
+ ],
+ "e_state": "E_BLOCKED",
+ "echo_ips": {
+  "httpbin": "172.212.165.179",
+  "ifconfig": "172.212.165.179",
+  "ipify": "172.212.165.179"
+ },
+ "echoes": {
+  "httpbin": {
+   "body_text": "{\n  \"origin\": \"172.212.165.179\"\n}\n",
+   "elapsed_ms": 151,
+   "parsed_ip": "172.212.165.179",
+   "status": 200,
+   "transport_error": null,
+   "url": "https://httpbin.org/ip"
+  },
+  "ifconfig": {
+   "body_text": "172.212.165.179",
+   "elapsed_ms": 111,
+   "parsed_ip": "172.212.165.179",
+   "status": 200,
+   "transport_error": null,
+   "url": "https://ifconfig.me/ip"
+  },
+  "ipify": {
+   "body_text": "{\"ip\":\"172.212.165.179\"}",
+   "elapsed_ms": 109,
+   "parsed_ip": "172.212.165.179",
+   "status": 200,
+   "transport_error": null,
+   "url": "https://api.ipify.org?format=json"
+  }
+ },
+ "enumeration": {
+  "enumerated_path_count": 1,
+  "proxy_env": {},
+  "single_enumerated_path": true,
+  "v4_default_routes": [
+   "default via 10.1.0.1 dev eth0 proto dhcp src 10.1.1.187 metric 100 "
+  ],
+  "v6_default_routes": [],
+  "v6_global_default_routes": []
+ },
+ "majority_agreement": 3,
+ "majority_ip": "172.212.165.179",
+ "majority_required": 2,
+ "overlays_excluded_a_priori": "Tor/VPN/WARP excluded per prereg section 3 (construct confound); not attempted",
+ "procedure": "spec.positive_control.C_EGRESS_CERTIFICATE",
+ "ran_before_ladder": true,
+ "recorded_at": "2026-10-16T17:54:11.959938+00:00"
+}
