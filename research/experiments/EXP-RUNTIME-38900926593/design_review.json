@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38900926593",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All live science branches are arithmetically reachable and precedence is clean. MI ceiling at the certified T0 barrier prevalence (6/57) is H(B)=0.336 nats > delta_SKILL=0.05, so STAT_SIG thresholds are attainable; FA granularity verified (n_t0_intrinsic=6: <=1 recovery allowed at tau_FA=0.20; 2 recoveries = 0.333 fails -> S1_HELD/S0_BREAK reachable). Synthetic calibration with the exact extended rule separates the regimes (S1_EXTENDED 294/300 at rho=0.98; S1_HELD 300/300 late-break; S0_BREAK 300/300 early-break and exchangeable). Precedence: MEASUREMENT_INVALID is scoped strictly to prerequisite/control failure; E_UNEXPECTED_PATH is a pre-registered halt contingency (COMPLETE/INCONCLUSIVE, no S-read) that only fires on an unexpected second egress path, not a science branch that shadows later branches; S1_EXTENDED -> S1_HELD -> S0_BREAK fully partition the measurement-valid space. E_PROVISIONED is correctly excluded as a live science branch (structurally unreachable per local enumeration) so no frozen branch depends on it. Independent reviewer probes confirmed the local single-path structure (one default route via eth0, no *PROXY* env, link-local-only IPv6), so the E_BLOCKED branch is the reachable certificate outcome.",
+      "evidence_refs": [
+        "spec.json:decision_rule.branch_precedence",
+        "spec.json:decision_rule.primary_decision_quantities",
+        "spec.json:falsifier",
+        "prereg.md:section 6 (calibration table)",
+        "review-probe: ip route / env / ip -6 route (single default route, no proxy, link-local IPv6 only)",
+        "review-probe: MI ceiling arithmetic H(6/57)=0.336 nats; FA granularity n=3..7"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are available now or explicitly fail-closed at EXECUTE. Python 3.12.15 present; design requires stdlib only, no credentials, browser, packages or lane modules. Independent live canaries reproduced the DESIGN probe: all 7 oracle hosts respond as expected (httpbin.org/status/429 -> 429, httpbingo.org/status/429 -> 429, no-such-host.invalid -> DNS failure, httpbin.org/status/403 -> 403 with empty body i.e. no challenge-marker confound, httpbin 200/uuid and example.com -> 200); 3/3 echo services (httpbin.org/ip, api.ipify.org, ifconfig.me/ip) agree on one IP 135.119.238.192; ip-api reachable. Frozen-universe reachability and the n_t0_intrinsic>=3 / n_t0_barrier>=3 anchor floors are EXECUTE-time gates that fail closed to MEASUREMENT_INVALID (not science), which is the correct handling; the reviewer deliberately did not re-probe the frozen 57-endpoint universe (outcome-bearing). The urllib HTTPError-on-4xx/5xx trap is frozen as a required implementation property (prereg section 2) and is exactly what PC_ORACLE_BARRIER detects.",
+      "evidence_refs": [
+        "prereg.md:section 7 (attainability certificate)",
+        "spec.json:measurement_validity.prerequisite_integrity",
+        "spec.json:positive_control.PC_ORACLE_BARRIER / null_control.NC_CLEAN_ORACLE",
+        "review-probe: oracle canaries 7/7 live with expected statuses (2026-10-16)",
+        "review-probe: echo 3/3 agreement 135.119.238.192; ip-api success",
+        "review-probe: python3 --version = 3.12.15"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (anchor->lag barrier information / intrinsic-denylist validity) can differ from every frozen baseline on this population. The pool mixes barrier and clean endpoints (S1 census 6/57 intrinsic at anchor; DESIGN probe 4/12 subset 403s), so both classes of the binary barrier indicator occur and MI is non-degenerate (ceiling 0.336 nats, floor ~0 under exchangeability). B_EXCHANGE is a proper strong null (global permutation of the lag indicator preserving both marginals); B_CONSTANT_USABLE is a strict predictive floor; B_MARGINAL and B_LASTSWEEP are non-gating diagnostics. Calibration on the exact extended rule shows separation in both directions (PC98 0.98 power vs NC 0.0 FP), so no baseline sits at a ceiling in the S1 regime or is unreachable in the S0 regime. All comparators are predictors computed on the same stored observations, so there is no costed system comparator with an omitted cost dimension.",
+      "evidence_refs": [
+        "spec.json:baselines",
+        "spec.json:freeze_eligibility.baseline_identifiability (attacked, not trusted)",
+        "prereg.md:section 6",
+        "review-probe: MI ceiling arithmetic; strata endpoints verified as subsets of the 57 (stress 5, candidates 6, disjoint)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive and null controls can both fire under the same implementation that will score the experiment. Live oracles verified now: PC_ORACLE_BARRIER hosts return 429/429/DNS-fail/403 as required (the 403 body is empty, so UNAVAILABLE_403 is not confounded by challenge-marker words); NC_CLEAN_ORACLE hosts return 200/CLEAN. The synthetic PC/NC bracket the exact estimator (power 294/300 >= 0.80 at rho=0.98; FP 0/300 <= 0.05). NC_CLASSIFIER_REPRODUCIBILITY gates on 0 mismatches with full first-262144-byte body retention, so AUDIT recomputes every class exactly from stored fields — this closes the Graph audit 'hash-only bodies' defect. The controls are sensitive to the documented instrument defect: if EXECUTE fails to catch HTTPError, 429/403 are recorded TRANSPORT_ERROR and PC_ORACLE_BARRIER misclassifies -> MEASUREMENT_INVALID, never a false science read. Egress controls are censuses that fail closed (echo disagreement -> UNRESOLVED -> INVALID; cross-sweep rotation -> INVALID with raw preserved), so no control is tautological or impossible.",
+      "evidence_refs": [
+        "spec.json:positive_control / null_control",
+        "prereg.md:sections 2, 2.1, 7",
+        "review-probe: httpbin 429 -> HTTPError 429 empty body; httpbingo 429 -> 429; no-such-host.invalid -> DNS fail; httpbin 403 -> 403 empty body; cleans -> 200",
+        "review-probe: CHALLENGE_RE compiles under Python 3.12 re (flags 34 = I|MULTILINE); sample matches/non-matches correct"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "NOT_APPLICABLE",
+      "reason": "The frozen question contains no SPIDER treatment/intervention arm: this is a Runtime-lane ambient substrate experiment on C-FRESHNESS (not a Product experiment on C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON, so the mandatory-PASS rule is not engaged). All observations are ambient single-GET probes (fresh-jar-equivalent, no retries); the anchor-built denylist is a predictor evaluated against later rungs, not an executed intervention; the E-certificate is a local enumeration plus echo census, and E_PROVISIONED is explicitly not a live branch (overlays excluded a priori with construct-confound reasons; unexpected second path halts to INCONCLUSIVE). There is therefore no treatment that could be structurally incapable of becoming executable.",
+      "evidence_refs": [
+        "spec.json:question",
+        "spec.json:sweep_protocol.ambient_probe",
+        "spec.json:scope_boundaries",
+        "prereg.md:sections 1, 3, 11"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "freeze_artifacts=[] is justified: no pre-existing mutable local file, code, task bank, dataset or fixture is an interpretation dependency. Every interpretation-determining constant is embedded literally in spec.json/prereg.md (which the deterministic freezer hashes): the 57-endpoint universe (verified: 57 unique URLs; strata verified as subsets), the challenge-marker regex (verified compilable) and full intrinsic classifier, the 262144-byte window, the ladder [0,300,900,1800,3600] with actual-delta floors, strata, thresholds, seeds 38900926593/38900926594, branch precedence, and the egress-certificate procedure. The inherited classifier is reproduced verbatim rather than read from the S1 packet at run time. Collection/analysis code does not exist at freeze; EXECUTE authors it as a literal realization (stdlib only, no lane-module imports) and records its hash in provenance.json, while NC_CLASSIFIER_REPRODUCIBILITY lets AUDIT recompute all classes exactly from retained bodies. Remote Web responses cannot be frozen; target identifiers and the sampling protocol are frozen in spec/prereg instead, and per-sweep egress IP + EGRESS_ROTATION fail-closed handle vantage drift. Parent handoff path and sha256 verified. DESIGN-local probe/calibration scripts were deleted before freeze with hashes recorded and are correctly not interpretation dependencies (EXECUTE re-verifies every floor from its own data).",
+      "evidence_refs": [
+        "spec.json:freeze_artifacts",
+        "spec.json:frozen_universe",
+        "spec.json:frozen_intrinsic_classifier",
+        "spec.json:measurement_validity.activity_disclosure",
+        "prereg.md:section 8",
+        "review-probe: 57 unique endpoints; strata subsets verified; regex compiles; parent handoff sha256 6efe10d9... matches request.json"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Wall-clock tail risk: worst-case sweep duration (57 endpoints x 30 s timeout) can approach or exceed the 100-minute wall_clock_cap; the failure mode is fail-closed MEASUREMENT_INVALID via anchor-incomplete/delta-floor gates, but the cap-exceeded handling is only implicit in sweep_protocol and could be stated explicitly in a future packet revision.",
+    "EXECUTE analysis-code latitude (bootstrap/permutation implementation minutiae) is residual but bounded: the metric definition, cluster rule (registrable_domain with www-stripped final-two-labels), resample counts and seeds are frozen literally; AUDIT should recompute STATIONARITY_SKILL/p/CI quantities from raw, not only classes.",
+    "Q-E's provision half is answered by a-priori overlay exclusion (Tor/VPN/WARP as construct confounds) plus the census certificate rather than an attempted provisioning attempt; this is disclosed, consistent with the mandate's fail-loud/PARK clause, and does not constitute a liveness defect because provision was never a frozen treatment arm.",
+    "DESIGN-local probe/calibration scripts were deleted before freeze (hashes recorded in spec); EXECUTE's obligation to re-verify floors, PC power and NC FP from its own run is the sole remaining enforcement path — already frozen, noted for AUDIT emphasis."
+  ],
+  "rationale": "Independent attack of every freeze_eligibility PASS claim finds the design capable of answering its own question. Branch reachability is certified by arithmetic (MI ceiling 0.336 nats > 0.05; FA/persistence granularity at n_t0_intrinsic>=3) and by synthetic calibration that separates S1_EXTENDED, S1_HELD and S0_BREAK under the exact frozen rule; MEASUREMENT_INVALID is confined to prerequisite failure and the E_UNEXPECTED_PATH halt is a pre-registered contingency, not a shadowing branch. Prerequisites are live now: the reviewer reproduced the certificate probe locally (single path, no proxy, link-local IPv6), confirmed 3/3 echo agreement on 135.119.238.192, and fired all 7 oracle/clean canaries with expected classes, including the empty-body 403 that keeps UNAVAILABLE_403 unconfounded. Baselines are identifiable on a mixed-class pool with a proper permutation null and a strict floor, with no omitted cost dimension among comparators. Controls are sensitive in both directions and catch the documented urllib HTTPError instrument trap by fail-closed INVALID. No SPIDER treatment arm exists, so treatment_liveness is correctly NOT_APPLICABLE (C-FRESHNESS Runtime substrate, not a forced Product claim). freeze_artifacts=[] is bound correctly because all interpretation constants are embedded in the hashed spec/prereg and no mutable local dependency exists at freeze. Only nonblocking robustness notes remain (wall-clock tail, analysis-code latitude, provision-by-exclusion disclosure). No outcome-bearing measurement was run; the confirmatory ladder was not executed.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38900926593/request.json",
+    "research/experiments/EXP-RUNTIME-38900926593/spec.json",
+    "research/experiments/EXP-RUNTIME-38900926593/prereg.md",
+    "research/experiments/EXP-RUNTIME-38835192343/handoff.json (sha256 verified)",
+    "review-probe: local path/env/IPv6 enumeration (2026-10-16)",
+    "review-probe: 7 oracle/clean canaries + 3 echo services + ip-api (2026-10-16)",
+    "review-probe: universe count/uniqueness, strata subset, regex compile, FA/persistence/MI arithmetic"
+  ]
+}
