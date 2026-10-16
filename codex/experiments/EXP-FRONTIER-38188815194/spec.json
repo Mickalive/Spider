@@ -1,0 +1,162 @@
+{
+  "spec_schema_version": 2,
+  "experiment_id": "EXP-FRONTIER-38188815194",
+  "lane": "frontier",
+  "design_contract_version": 2,
+  "director_target_claim": "C-CROSSSITE",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "question": "On the frozen credential-free GET-only 20-host/556-item frame, against (a) the mandate's per-item cold same-host BFS search comparator (frozen 1-based BFS discovery/fetch ordinal; mean 166.0, min 31, max 250 over the 208 admitted deep state-carrying items), (b) the fully-loaded per-item cost of maintaining the whole set by cold re-crawl (926/208 = 4.452 GETs/item), and (c) the strongest fair memoryful batch baseline (one cold re-crawl per host per cycle, 250+250+176+250 = 926 GETs, which re-yields every deep item), does persisting a deep state-carrying path and revalidating it (fresh GETs/bytes for path replay liveness and SHA-256 content-change detection) at nominal elapsed windows 0/300/900/1800 s undercut cold re-derivation; at what break-even hop, store-reuse density, and elapsed-cycle count does persistence stop paying; and is the naive exact-path replay false-accept rate bounded in the measurable session regime only?",
+  "hypothesis": "H1 (per-item, two comparators): path replay cost ~hop+1 GETs is far below the mandate's cold per-item search ordinal (mean 166.0), so that comparison pays at every window by construction (reported, not a decision branch); against the fully-loaded per-item cost of maintaining the whole set (926/208 = 4.452 GETs/item) the expected replay cost 931/208 = 4.476 GETs/item is essentially a tie, so this near-threshold comparison is the per-item decision comparator. H2 (batch, strongest fair): because sum_i(hop_i+1)=931 approximately equals the cold batch cost 926, the memoryful batch comparison is near-threshold and is decided by measured store-level path sharing (B-COLD-BATCH-CRAWL pays iff reval_unique_gets <= 833.4). H3 (naive replay): naive exact-path replay is cheap per use but carries a session-scale false-accept risk; if the measured session-scale change/dead rate is ~0, endpoint-level liveness dominates full-path revalidation. The mechanism's payoff is governed by maintenance/revalidation economics and reuse density, not by a one-time replay speedup.",
+  "falsifier": "The persistence claim fails if, at every measured window, the batch/store comparison against the strongest fair memoryful baseline does NOT pay (reval_unique_gets > 833.4) AND the fully-loaded per-item comparison also does NOT pay (mean(reval_path_gets) > 4.007, i.e. more than 10% above the 926/208 = 4.452 fully-loaded cold cost), with measurement valid. This is a bounded negative for full-path persistence on this substrate class, never an infrastructure failure. A decision of MIXED (fully-loaded per-item pays but the memoryful batch baseline does not, or the batch result flips across the window ladder) is a first-class discriminating outcome that bounds the mechanism to sparse reuse / endpoint-level liveness. The mandate's per-item search comparison (ordinal mean 166.0) is always abundant on this frame and is reported as a descriptive endpoint, not as a decision branch, because it has no dynamic range. Measurement failure (V1-V6), total seed failure, or zero reconstructed paths are INCONCLUSIVE/MEASUREMENT_INVALID and are not negative science.",
+  "baselines": [
+    {
+      "id": "B-COLD-BFS-PER-ITEM",
+      "kind": "mandate_comparator_measured_in_frame",
+      "definition": "Per admitted deep item, the frozen 1-based BFS discovery/fetch ordinal from research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (the item's 'ordinal'/'requests'), i.e. the mandate's cold same-host BFS search/re-derivation cost. Mean 166.0, min 31, max 250 over the 208 admitted items. Reported as a descriptive endpoint (M-COLD-ITEM-ORDINAL); an in-run reconstructed-BFS ordinal (M-COLD-ITEM-BFS-REMEASURED) is a fidelity cross-check only."
+    },
+    {
+      "id": "B-COLD-AMORTIZED-PER-ITEM",
+      "kind": "fully_loaded_per_item_decision_comparator",
+      "definition": "Fully-loaded per-item cold cost of maintaining the whole admitted set by one cold batch re-crawl: cold_batch_gets / n_items = 926/208 = 4.452 GETs/item. This is the memoryful, fully-loaded per-item comparator (honouring the P2-REPLAY-COST 'fully-loaded counterfactual cost' guard); persistence pays per item iff mean(reval_path_gets) <= 4.007 (at least 10% below 4.452). Near-threshold: expected mean path 931/208 = 4.476."
+    },
+    {
+      "id": "B-COLD-BATCH-CRAWL",
+      "kind": "strongest_fair_memoryful_baseline",
+      "definition": "One cold same-host BFS re-crawl per host per cycle (frozen policy: budget 250, depth 6, same-host static <a>), which re-yields all 208 deep items; cost = frozen row URL counts 250 (doc.rust-lang.org) + 250 (pandas.pydata.org) + 176 (docs.readthedocs.io) + 250 (docs.pytest.org) = 926 GETs. To pay, persist+revalidate must use <= 833.4 GETs/cycle (reval_unique_gets with store-level dedup). This is the memoryful batch comparator the Director's prior requires."
+    },
+    {
+      "id": "B-NAIVE-EXACT-PATH-REPLAY",
+      "kind": "competitor_strength_control_legacy_guard",
+      "definition": "Persisted path served with no revalidation (legacy P2-REPLAY-COST 'native exact-path cache'); cost 0 GETs per use. Its measured session-scale false-accept = item endpoint changed or dead at window w (M-FALSE-ACCEPT-NAIVE). Treated as a baseline/guard, never as the treatment or an assumed win."
+    },
+    {
+      "id": "A-ENDPOINT-ONLY-REVALIDATE",
+      "kind": "ablation_not_mandated_treatment",
+      "definition": "Revalidate only the item endpoint (1 GET/item/cycle; 208 GETs/cycle) instead of the full path, isolating whether full-path replay is necessary. Reported as an ablation, not as the mandated treatment object."
+    }
+  ],
+  "positive_control": "Nine in-process-fixture controls executed by the frozen module 'controls' stage under the SAME code that scores the experiment (bfs_with_parents, path_to, snapshot_path, revalidate_path, decide). Positive direction: C-PATH-CANARY (recovered path persists, all status 200), C-REVAL-CHANGE-DETECT (mutated endpoint detected by SHA-256), C-DECISION-CANARY-SUPPORTS (reval_unique_gets=700 <= 833.4 -> SUPPORTS), C-DECISION-CANARY-MIXED (reval_unique_gets=931 with mean path 4.0 <= 4.007 -> MIXED), C-DECISION-CANARY-MIXED-WINDOW (batch pays at one window only -> MIXED), C-DECISION-CANARY-FALSIFIES (reval_unique_gets=931 with mean path 5.0 > 4.007 -> FALSIFIES). All nine PASS at DESIGN; transcript in prereg section 13. A control failure at EXECUTE is a hard gate (V2) and blocks outcome stages.",
+  "null_control": "Null direction: C-REVAL-NOCHANGE (unchanged fixture -> 0 changed, 0 dead) and C-LIVENESS-404 (removed endpoint detected as dead via HTTP >=400) certify that the revalidation instrument does not fire spuriously and does fire on a real absence. The decision function's null is the no-effect partition: FALSIFIES fires only when BOTH the fully-loaded per-item comparison and the memoryful batch comparison fail at every window, so a per-item advantage cannot be mislabelled as a failure and a batch non-pay cannot be mislabelled as full support.",
+  "measurement_validity": [
+    {
+      "id": "V1",
+      "name": "code_identity_gate",
+      "rule": "EXECUTE extracts the frozen module from prereg section 9 (bytes strictly after the opening marker line and strictly before the closing marker line, .strip()) and sha256 must equal DERIVED_SHA256 = 0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce. Any mismatch -> status=MEASUREMENT_INVALID before any outcome stage."
+    },
+    {
+      "id": "V2",
+      "name": "controls_gate",
+      "rule": "The module 'controls' stage must report all nine controls PASS before the 'economics' stage runs. Any FAIL -> no outcome stage; status=MEASUREMENT_INVALID with the failing control id recorded."
+    },
+    {
+      "id": "V3",
+      "name": "frame_fidelity_gate",
+      "rule": "The bound items.jsonl must yield exactly 208 live=true admitted deep items on the four hosts, and reconstruction must recover a path for every admitted item (n_misses==0). Any missing item -> status=MEASUREMENT_INVALID listing the misses (representation loss, not a negative)."
+    },
+    {
+      "id": "V4",
+      "name": "budget_gate",
+      "rule": "total_gets <= TOTAL_GET_CEILING = 20000. Overflow -> status=MEASUREMENT_INVALID; never a negative."
+    },
+    {
+      "id": "V5",
+      "name": "seed_liveness_gate",
+      "rule": "Each host min-hop seed returns HTTP 200; a host whose seed fails is excluded with reason. Seed failure on every host -> outcome INCONCLUSIVE with the explicit 'not a scientific null' reason."
+    },
+    {
+      "id": "V6",
+      "name": "denominator_guard",
+      "rule": "cold_batch_gets > 0 and n_items > 0; no 0/0 may enter thresholding."
+    },
+    {
+      "id": "V7",
+      "name": "session_scale_bound",
+      "rule": "All change/dead/false-accept statements are bounded to the measured windows (nominal <=1800 s). No day-scale hazard or freshness-detector claim is permitted (legacy program established day-scale staleness is undecidable on committed corpora)."
+    },
+    {
+      "id": "V8",
+      "name": "decision_determinism",
+      "rule": "decide() is applied to the recorded per-window rows in raw/economics.jsonl; recomputation is stable and reproducible."
+    },
+    {
+      "id": "V9",
+      "name": "elapsed_reporting",
+      "rule": "Actual inter-window elapsed is recorded; windows are keyed by index, not by wall-clock attainment."
+    }
+  ],
+  "decision_rule": "Evaluated in order. G1 measurement validity: any V1-V6 FAIL -> status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE (never negative). G2 seed liveness: seed failure on every host -> outcome=INCONCLUSIVE with explicit reason; a single dead host is excluded and remaining hosts decide. G3 path-object existence: n_paths==0 -> outcome=INCONCLUSIVE (treatment object unconstructable). G4 decision: apply frozen decide(rows, cold_batch_gets=926) with n_items=208 (fully-loaded amortized per-item cold = 926/208 = 4.452 GETs). Per window w: S_w = mandate per-item search comparison pays iff mean(cold_item_gets) - mean(reval_path_gets) >= max(0.10*mean(cold), 5.0) (always true on this frame; reported, not a decision branch); A_w = fully-loaded per-item comparison pays iff 4.452 - mean(reval_path_gets) >= 0.10*4.452 = 0.445 (i.e. mean(reval_path_gets) <= 4.007); B_w = batch/store comparison pays iff 926 - reval_unique_gets >= max(0.10*926, 5.0) = 92.6 (i.e. reval_unique_gets <= 833.4). SUPPORTS iff B_w true at every measured window; FALSIFIES iff B_w false and A_w false at every measured window; MIXED otherwise (B false while A true, or B flips across the window ladder). Always report M-BREAK-EVEN-CYCLES = 926/reval_unique_gets, M-BREAK-EVEN-DENSITY = reval_unique_gets/n_items, and M-BREAK-EVEN-HOP (smallest observed hop whose mean path GETs reach that hop's mean cold ordinal; null if none), with search, amortized, and batch results reported separately and A-ENDPOINT-ONLY-REVALIDATE reported as an ablation.",
+  "product_consequence_positive": "SUPPORTS -> the on-disk persistence decision is positive even against the memoryful cold batch baseline: build a persisted inherited-path store with a revalidation policy and reuse it for deep state-carrying acquisition; feeds C-CROSSSITE maintenance economics and the product-cost decision (C-PRODUCT-ECON) as a bounded positive cost result. No claim promotion is made by this lane.",
+  "product_consequence_negative": "MIXED -> do not build a general full-path store; build endpoint-level liveness and/or reuse-bounded maintenance, because full-path persistence pays only per-item / at low reuse density on this substrate. FALSIFIES -> cold re-derivation (or a different representation) is at least as cheap as full-path persist+revalidate including the fully-loaded per-item cost; do not build the store and PARK the persistence subthread (no discovery rerun). No claim promotion is made by this lane.",
+  "estimated_cost": "stdlib-only (urllib + html.parser + http.server); zero pip installs, zero model calls, zero browser/Docker, zero credentials. Ceiling TOTAL_GET_CEILING=20000 GETs. Expected: reconstruction <= 926, snapshot <= 931, four revalidation cycles <= 4*931, far under ceiling; wall-clock dominated by the nominal 0/300/900/1800 s window ladder plus request latency (~30-70 min). Single runner vantage, credential-free GET-only.",
+  "expected_information_gain": "High. If SUPPORTS or MIXED, it changes the product build decision for persisted deep paths and yields a measured break-even (hop, reuse density, cycles). If FALSIFIES, it prevents building a general full-path store on this substrate class and bounds the mechanism. Any INCONCLUSIVE/MEASUREMENT_INVALID outcome still yields a durable, pre-registered negative-instrument result and an exact unblocking action.",
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "The frozen decision rule is exhaustively partitioned and all three outcome branches are reachable, with two genuinely near-threshold quantities. SUPPORTS requires the memoryful batch baseline to pay at every window (reval_unique_gets <= 833.4); certified reachable by C-DECISION-CANARY-SUPPORTS (reval_unique_gets=700). MIXED requires the batch to fail while the fully-loaded per-item comparison pays (mean(reval_path_gets) <= 4.007) or the batch to flip across windows; certified reachable by C-DECISION-CANARY-MIXED and C-DECISION-CANARY-MIXED-WINDOW. FALSIFIES requires both to fail (reval_unique_gets > 833.4 and mean path > 4.007); certified reachable by C-DECISION-CANARY-FALSIFIES. The frame keeps both thresholds live: expected reval_unique_gets ~= 931 > 833.4 and expected mean path 931/208 = 4.476 > 4.007, so FALSIFIES is the a-priori expected branch and SUPPORTS/MIXED are real alternative states of the world, not engineered. The mandate's per-item search comparison (mean 166) is reported but deliberately excluded from the decision partition because it is satisfied by construction; this is disclosed, not hidden. INCONCLUSIVE/MEASUREMENT_INVALID are reachable via G1/G2/G3. No branch is empty; no pre-freeze outcome fraction was measured.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#10 (decision rule and gates)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#12 (satisfiability self-disproof, decision-rule reachability)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#13 (observed DESIGN canary outcomes SUPPORTS/MIXED/MIXED/FALSIFIES)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#15 (disclosed a-priori tilt toward FALSIFIES)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every prerequisite exists at DESIGN, not deferred to EXECUTE. The bound frame files are present with matching hashes (items.jsonl sha256 c8215d69..., structural.jsonl sha256 2afe65b6...); the 208 admitted items were all live in the parent and sit on four hosts; the four min-hop seeds are the frame's own hop-0 URLs and were live in the parent; the frozen module is stdlib-only, imports cleanly, and was executed offline to completion at DESIGN (controls stage: all nine PASS). Reconstruction policy mirrors the bound parent bfs_structural (same-host static <a>, budget 250, depth 6, final-URL anchor after redirects), which is why the 28 docs.readthedocs.com-canonicalized items are reconstructible. Nothing possibility-determining is 'created during EXECUTE'.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#5 (population, frame, substrate)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#13 (offline controls probe and frame arithmetic probe)",
+        "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Five stable, mutually distinct comparators with no ceiling/floor omission: B-COLD-BFS-PER-ITEM (measured in-frame per-item search ordinal, mean 166.0, min 31, max 250; reported endpoint), B-COLD-AMORTIZED-PER-ITEM (fully-loaded per-item cold 926/208 = 4.452, the per-item decision comparator; near-threshold against expected 4.476), B-COLD-BATCH-CRAWL (strongest fair memoryful baseline; 250+250+176+250 = 926 GETs; pay iff reval_unique_gets <= 833.4 against expected ~931), B-NAIVE-EXACT-PATH-REPLAY (0 GETs/use; false-accept measured), and the A-ENDPOINT-ONLY-REVALIDATE ablation (208 GETs/cycle). Both decision thresholds are discriminating in both directions rather than saturated at a ceiling or floor; the trivially-abundant search comparator is disclosed and excluded from the decision partition. Cost dimensions (GETs, bytes, elapsed) are measured for the treatment and reconstructed for the comparators.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#7 (frozen metric ids)",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (row URL counts 250/250/176/250 and per-item ordinals)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control fires in both directions under the same code that scores the experiment, with observed DESIGN values: C-REVAL-CHANGE-DETECT fires on mutation and C-REVAL-NOCHANGE stays null on no change; C-LIVENESS-404 fires on removal; the decision canaries produce all three outcomes (SUPPORTS, MIXED twice, FALSIFIES). C-BFS-PARENT-CHAIN and C-PATH-CANARY certify the path object. All nine control rows PASSED in the DESIGN controls probe (all_pass=true, n=9, failed=[]). A control failure at EXECUTE is a hard gate (V2) that blocks outcome stages.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#8 (frozen control ids)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#13 (observed DESIGN controls values)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment is EXECUTED at pre-freeze cost, not merely declared executable. The frozen module's controls stage ran offline to mechanical completion at DESIGN: it recovered the parent chain [seed, /a.html, /b.html, /item.html], persisted a snapshot, revalidated it (no-change null, mutation detected, 404 detected), and applied the frozen decide() to produce SUPPORTS/MIXED/MIXED/FALSIFIES. The reconstruction policy is a documented mirror of the bound, previously-executed parent bfs_structural module, and the frozen module itself is pinned by DERIVED_SHA256 against the frozen prereg (V1). EXECUTE re-runs the controls stage as a hard gate before any outcome stage, so a structurally non-executable treatment is impossible by construction.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#9 (frozen EXECUTE module)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#13 (controls-stage execution transcript)",
+        "research/experiments/EXP-FRONTIER-38184956362/execute_module.py (bound parent BFS reference)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed as an exact repository-relative file path and will be hashed into freeze.json.artifact_hashes: the admitted-item population (items.jsonl), the frozen BFS frame with per-item hop/ordinal (38164611798/raw/structural.jsonl), the censused structural frame (38184956362/raw/structural.jsonl), the census and derived metrics, the parent execute_module.py reference implementations (b9b2efdc... and 75a01d49...), and the parent audit/result context. The executed module's own identity is pinned by DERIVED_SHA256 (0e42fa34...) against the frozen prereg.md block, and prereg.md is hashed in freeze.json.hashes.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-38188815194/spec.json#freeze_artifacts",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#17 (freeze artifacts)",
+        "research/experiments/EXP-FRONTIER-38188815194/prereg.md#9 (DERIVED_SHA256)"
+      ]
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json",
+    "research/experiments/EXP-FRONTIER-38184956362/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl",
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38184956362/audit.json",
+    "research/experiments/EXP-FRONTIER-38184956362/result.json"
+  ]
+}

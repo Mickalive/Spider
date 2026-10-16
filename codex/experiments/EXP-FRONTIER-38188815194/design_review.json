@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38188815194",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All three decision branches are mathematically reachable and certified by offline canaries. SUPPORTS requires reval_unique_gets <= 833.4 at every window (canary: 700 -> SUPPORTS). FALSIFIES requires reval_unique_gets > 833.4 AND mean path > 4.007 at every window (canary: 931/5.0 -> FALSIFIES). MIXED requires either batch failure with per-item pay (canary: 931/4.0 -> MIXED) or batch flip across windows (canary: 700 then 931 -> MIXED). The arithmetic is sound: cold_batch_gets=926, batch threshold=833.4, fully-loaded per-item=4.452, per-item threshold=4.007, expected sum(hop+1)=931. The a-priori tilt toward FALSIFIES is disclosed, not hidden. No branch is empty or engineered.",
+      "evidence_refs": [
+        "prereg.md#10 (decision rule and gates)",
+        "prereg.md#12.1 (adversarial reachability proof)",
+        "prereg.md#13 (observed DESIGN canary outcomes)",
+        "prereg.md#15 (disclosed a-priori tilt)",
+        "offline controls probe: all 9 controls PASS including 4 decision canaries"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every prerequisite exists at DESIGN. Frame files verified: items.jsonl (sha256 c8215d69...) yields exactly 208 live=true deep items on 4 hosts (hops 3-4, ordinal mean 166.0, min 31, max 250); structural.jsonl from 38164611798 (sha256 2afe65b6...) has correct URL counts 250/250/176/250=926; min-hop seeds match module constants. Frozen module is stdlib-only, imports cleanly, hash matches DERIVED_SHA256=0e42fa34..., controls stage executed offline at DESIGN with all 9 PASS. Reconstruction policy mirrors bound parent bfs_structural. Nothing possibility-determining is deferred to EXECUTE.",
+      "evidence_refs": [
+        "prereg.md#5 (population, frame, substrate)",
+        "prereg.md#13 (offline controls probe and frame arithmetic probe)",
+        "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl (verified 208 admitted)",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (verified 926 URLs)",
+        "offline module execution: controls stage all_pass=true, n=9, failed=[]"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Five stable, mutually distinct comparators with no ceiling/floor omission. B-COLD-BFS-PER-ITEM (per-item search ordinal, mean 166.0, reported descriptive endpoint). B-COLD-AMORTIZED-PER-ITEM (fully-loaded per-item cold 926/208=4.452, near-threshold per-item decision comparator vs expected 4.476). B-COLD-BATCH-CRAWL (strongest fair memoryful baseline: 250+250+176+250=926 GETs, threshold 833.4 vs expected ~931, discriminating batch decision comparator). B-NAIVE-EXACT-PATH-REPLAY (0 GETs/use, false-accept measured, competitor-strength control). A-ENDPOINT-ONLY-REVALIDATE (208 GETs/cycle, ablation). Both decision thresholds are discriminating in both directions (batch: 833.4 vs 931; per-item: 4.007 vs 4.476). The trivially-abundant search comparator is disclosed and excluded from the decision partition.",
+      "evidence_refs": [
+        "spec.json#baselines",
+        "prereg.md#7 (frozen metric ids)",
+        "prereg.md#12.3 (adversarial baseline identifiability proof)",
+        "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (row URL counts 250/250/176/250 and per-item ordinals)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All nine controls fire in both directions under the same code that scores the experiment, with observed DESIGN values. C-REVAL-NOCHANGE (null) vs C-REVAL-CHANGE-DETECT (mutation detected by SHA-256). C-LIVENESS-404 (404 detected). Decision canaries produce all three outcomes: SUPPORTS, MIXED (two distinct paths), FALSIFIES. C-BFS-PARENT-CHAIN and C-PATH-CANARY certify the path object. Offline controls probe at DESIGN: all_pass=true, n=9, failed=[]. V2 gate makes any control failure at EXECUTE a hard MEASUREMENT_INVALID block.",
+      "evidence_refs": [
+        "prereg.md#8 (frozen control ids)",
+        "prereg.md#13 (observed DESIGN controls values)",
+        "offline controls probe transcript: 9/9 PASS with bidirectional firing"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The treatment (path recovery + persist + revalidate + decide) was EXECUTED at pre-freeze cost, offline, to mechanical completion. The frozen module's controls stage ran and recovered the parent chain [seed, /a.html, /b.html, /item.html], persisted a snapshot (4 GETs), revalidated it (no-change null, mutation detected, 404 detected), and applied the frozen decide() to produce SUPPORTS/MIXED/MIXED/FALSIFIES. The reconstruction policy is a documented mirror of the bound, previously-executed parent bfs_structural module. The module itself is pinned by DERIVED_SHA256 against the frozen prereg (V1). EXECUTE re-runs the controls stage as a hard gate before any outcome stage, so a structurally non-executable treatment is impossible by construction.",
+      "evidence_refs": [
+        "prereg.md#9 (frozen EXECUTE module)",
+        "prereg.md#13 (controls-stage execution transcript)",
+        "research/experiments/EXP-FRONTIER-38184956362/execute_module.py (bound parent BFS reference)",
+        "offline execution: full pipeline bfs_with_parents -> path_to -> snapshot_path -> revalidate_path -> decide works"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All 9 mutable local files whose identity can change the interpretation are listed in spec.freeze_artifacts and prereg.md#17 as exact repository-relative paths and verified to exist. The admitted-item population (items.jsonl), the frozen BFS frame with per-item hop/ordinal (38164611798/raw/structural.jsonl), the censused structural frame (38184956362/raw/structural.jsonl), the census and derived metrics, the parent execute_module.py reference implementations, and the parent audit/result context are all bound. The executed module's identity is pinned by DERIVED_SHA256=0e42fa34... against the frozen prereg.md block (verified matching), and prereg.md itself will be hashed in freeze.json.hashes.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "prereg.md#17 (freeze artifacts)",
+        "prereg.md#9 (DERIVED_SHA256 verified matching)",
+        "file existence check: all 9 paths confirmed present"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The structural.jsonl from EXP-FRONTIER-38184956362 (sha256 95a3f15f...) differs from the reconstruction frame (38164611798, sha256 2afe65b6...). This is not a defect: the experiment uses the 38164611798 frame for reconstruction per the documented policy, and the 38184956362 frame is listed for audit traceability only.",
+    "The a-priori expected outcome is FALSIFIES (both near-threshold comparisons miss: expected reval_unique_gets=931 > 833.4 and expected mean path=4.476 > 4.007). This is explicitly disclosed in prereg.md#15 and does not invalidate the design; it makes a FALSIFIES outcome informative rather than a failure of sensitivity.",
+    "Single runner vantage limits external validity across ASN/geography (acknowledged in prereg.md#15 validity threats). This is an inherited substrate limitation, not a design flaw.",
+    "Session-scale bound (V7) explicitly prohibits day-scale extrapolation; the legacy volatility program proved day-scale staleness is structurally undecidable on committed corpora."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule is exhaustively partitioned with three genuinely reachable branches certified by offline canaries. Every measurement prerequisite exists at DESIGN with verified file hashes and offline module execution. Five distinct baselines provide discriminating comparisons at two near-threshold decision points (batch and per-item), with the abundant search comparator properly disclosed and excluded. All nine controls fire bidirectionally under the scoring code. The treatment pipeline executes to completion offline. All mutable interpretation dependencies are bound in freeze_artifacts with the module pinned by content hash. No blocking findings; the design is ready for freeze.",
+  "evidence_refs": [
+    "request.json (director_mandate PIVOT to C-CROSSSITE maintenance economics)",
+    "spec.json (design-contract v2 with freeze_eligibility claims)",
+    "prereg.md (full pre-registration with adversarial self-disproof in section 12)",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl (sha256 c8215d69...)",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl (sha256 2afe65b6...)",
+    "offline controls probe: all 9 PASS",
+    "offline module hash verification: DERIVED_SHA256 matches",
+    "freeze_artifacts existence: all 9 paths confirmed"
+  ]
+}
