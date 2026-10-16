@@ -1,10 +1,10 @@
 {
   "status": "failure",
-  "model": "opencode/muse-spark-1.3-contributor-free",
-  "attempt": 1,
-  "exit_code": 67,
-  "category": "headless-permission-denied",
-  "github_run_id": "38340127375",
+  "model": "opencode/space-bunny-free",
+  "attempt": 4,
+  "exit_code": 78,
+  "category": "provider-auth-invalid",
+  "github_run_id": "38920239597",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-13T03:17:09.946363+00:00"
+  "recorded_at": "2026-10-16T15:59:27.297145+00:00"
 }
