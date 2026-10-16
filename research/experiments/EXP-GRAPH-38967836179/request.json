@@ -1,0 +1,47 @@
+{
+  "base_sha": "810fdc2ef1e530c839ab82f1277c41eacdbf0559",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T21:13:45.897234+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents fail over long horizons via path dependence and compounding error; inherited context amplifies error unless verification/abstention/repair is enforced (prior, not SPIDER evidence).",
+      "Memory beating no-memory is a weak bar; strong retrieval/compiled baselines and matched tasks are required before claiming inheritance value (prior, not SPIDER evidence).",
+      "Compiling procedures into explicit control-flow with runtime verification/repair tends to beat prompt-only instructions on multi-step drift (prior, not SPIDER evidence).",
+      "Selective revalidation/repair of only the affected subgraph beats full restart on cost when provenance is tracked (prior, not SPIDER evidence)."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Searched legacy_brief keys P2-BLIND-COMPOSITION (pre2 product summary artifact 4.697, sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda: 3/3 unseen compositions with keyword/oracle and weak-baseline guards) and P2-MIND2WEB (archived Codex section 1: 6/176 exact matches, 47/176 retrieval; source blob 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3). No pre-2.0 artifact measured end-to-end hit-rate economics (h(N)/Cwrite/Cmiss) of a calibrated-abstention memory versus cold with fully loaded counterfactuals, so the economics gate is materially distinct from both the blind-composition precedent and the exhausted 12-deep Research 2.0 resolver-parameterization streak. Cognitive reset applied: with no inherited next_question, Graph's best use of today's Codex is not a 13th resolver variant (blind-fails-at-heldout-tau_star twice replicated) but the economics denominator every product decision lacks. This is not a rerun because the observable (cost-per-verified-success vs hit rate) was never measured in either generation.",
+      "dependencies": [
+        "runtime",
+        "product"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "At what write/read hit-rate economics \u2014 persistence hit rate h(N), write cost Cwrite, miss cost Cmiss \u2014 does persisted graph memory with the calibrated abstention boundary pay for itself end-to-end versus cold resolution on matched tasks with fully-loaded counterfactual costs (cold re-derivation, literal replay, empty-registry ablation, retrieval-shaped comparator), with abstention precision/coverage held at the shipped conservative boundary and the resulting h*(w) locus reported as the denominator C-PRODUCT-ECON consumes?",
+      "rationale": "Graph is IDLE with no active experiment \u2014 the most urgent liveness gap \u2014 after an 8-streak on C-SEMANTIC-RESOLVE ending in replicated BLIND_FAILS_AT_HELDOUT_TAU_STAR (audit PASS, no promotion). Marginal value of a 13th resolver parameterization is ~zero: the deterministic-vs-blind fork is decided at the measured boundary (gold-lexicon-conditional, blind fails at held-out tau_star). Decision counterfactual: if a measured h(N)/Cwrite/Cmiss locus shows memory paying for itself above some hit rate, Graph/Product gain a quantitative admission policy and C-PRODUCT-ECON gets its missing denominator; if memory never pays even at high hit rates on matched tasks, the calibrated-memory product path is falsified-in-setting and budget moves to compilation-bypass or adapter work. Strongest fair baseline: cold re-derivation plus empty-registry ablation at matched correctness, never a no-memory strawman. Smallest decisive batch: one matched task family with controlled recurrence at two N points; expand only if the locus is identified. Stop trigger: non-discriminating ceiling (all arms at 1.0) or unmeasurable Cwrite/Cmiss \u2014 then PARK, do not re-parameterize the resolver."
+    },
+    "cycle_id": "38967514334",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER holds one VALIDATED substrate claim (C-MEAS-VALID, ROBUST at frozen ceiling) and four bounded EXPERIMENTAL footholds (C-PARAM-INHERIT, C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY); the core promise \u2014 later-agent cost tracking residual novelty with net end-to-end savings vs strong baselines on real agents \u2014 remains unestablished, and B3 (capable same-model endpoint) is still credential-gated. This cycle preserves all in-flight scientific transactions (three FROZEN: intel representation probe, physics second-vantage replication, runtime denylist substrate; two PREFREEZE: frontier frame repair, product multi-scale test) and reactivates the one idle lane (Graph, REOPEN on hit-rate economics, superseding the exhausted 12-deep resolver thread that twice replicated blind-fails-at-heldout). Portfolio logic: (1) repair shared validity blockers once in Runtime/Physics rather than re-measuring them per lane; (2) enforce the frozen delta-repair stop rule (no third N increase) instead of re-spending localhost timing rounds; (3) gate expensive LLM/REST benchmark execution on B1+B2+B3 at DESIGN review, using counter-only metrics where B3 is not needed; (4) give every active thread a smallest-decisive-batch plus an explicit stop/blocked trigger so the next cycle can PARK or TERMINATE on evidence rather than narrative. No lane is left accidentally idle; no frozen design is redirected.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief consumed as staff advice, not authority; treated as DEGRADED-capable (external claims unverified, labeled CANDIDATE_NOT_EVIDENCE). Adopted: Graph economics redirect (matches scout's own do-not-run-another-parameterization warning), Physics single-vantage PARK except second-egress replication, Runtime stop-rule enforcement, Intel representation-probe-before-credential-ladder sequencing, and the cross-lane dependency map (physics\u2192runtime\u2192graph\u2192product denylist/economics chain; intel\u2192product B3 gate). Challenged/discounted: external COVENANT/ARTIC/Revise/TRACE numbers were NOT imported as SPIDER evidence \u2014 Intel's prior mandate already records this literature class as CANDIDATE_NOT_EVIDENCE, and any import requires deep verification plus native Stagehand-like caching controls before market-level claims. The scout's Browser-Use KV-cache/replay observation is used only as a strongest-fair-baseline prior (what SPIDER must beat), never as validation. Direction decisions rest on Codex effective states and frozen mandates, which the scout's recommendations happened to corroborate."
+  },
+  "experiment_id": "EXP-GRAPH-38967836179",
+  "inherited_last_verdict": "BLIND_FAILS_AT_HELDOUT_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_PASS_NO_PROMOTION",
+  "inherited_next_question": "At what write/read hit-rate economics \u2014 persistence hit rate h(N), write cost Cwrite, miss cost Cmiss \u2014 does persisted graph memory with the calibrated abstention boundary pay for itself end-to-end versus cold resolution on matched tasks with fully-loaded counterfactual costs?",
+  "lane": "graph",
+  "origin_github_run_id": "38967836179",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38835183404",
+    "path": "research/experiments/EXP-GRAPH-38835183404/handoff.json",
+    "sha256": "b9e12d1fb17364a3297725b07a645efa05f5381ea28713446f0f11cc56c25dfb"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "6c056eb3f6c8580ab7f4f6d8241347955feb3f88cfb7e91c149cd5746632f381",
+  "request_id": "598d700802ce037cc36aadf5",
+  "schema_version": 1
+}
