@@ -1,0 +1,843 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38835192343",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "decision": "INCONCLUSIVE",
+    "class_verdicts": {
+      "P1-ENDPOINT": "PRICED-MARGINAL",
+      "P2-STRUCTURE": "PRICED-WIN",
+      "P3-PERMISSION": "PRICED-MARGINAL"
+    },
+    "per_class": {
+      "P1-ENDPOINT": {
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.9035781695514236,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 612,
+        "M-SHIPPED-COLD-L2": 648,
+        "M-SHIPPED-COLD-L3": 684,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-COLD-HTTP-L2": 288,
+        "M-COLD-HTTP-L3": 324,
+        "M-REUSE-HTTP": 216,
+        "M-EQUIV-MATCH-N": 36,
+        "M-EQUIV-MATCH-DEN": 36,
+        "M-SCAFFOLD-REUSE": 360,
+        "M-SCAFFOLD-COLD-L3": 108,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-LATENCY-REUSE-MED-S": 0.00496289049999632,
+        "M-LATENCY-COLD-L2-MED-S": 0.0050165325000079974,
+        "M-LATENCY-COLD-L3-MED-S": 0.005536394500040842,
+        "M-LATENCY-R-L2": 0.9893069565458626,
+        "M-LATENCY-R-L3": 0.8964120060374506,
+        "M-LATENCY-R-L2-NOARG": 0.9734501400632206,
+        "M-LATENCY-R-L3-NOARG": 0.8820019017091969,
+        "M-LATENCY-R-L2-CI95": [
+          0.9829467364721755,
+          0.9993457558249424
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          0.8829418228673762,
+          0.9033987200260872
+        ],
+        "M-LATENCY-R-L2-CIBF": [
+          0.9723674650179986,
+          1.0044116936503464
+        ],
+        "M-LATENCY-R-L3-CIBF": [
+          0.8800399046381931,
+          0.9074391663358522
+        ],
+        "M-LATENCY-R-L2-NOARG-CI95": [
+          0.9668853694278211,
+          0.98353478845262
+        ],
+        "M-LATENCY-R-L3-NOARG-CI95": [
+          0.8696841238554414,
+          0.8890151575622934
+        ],
+        "M-LATENCY-R-L2-NOARG-CIBF": [
+          0.9576311196873958,
+          0.987763538827474
+        ],
+        "M-LATENCY-R-L3-NOARG-CIBF": [
+          0.8658444472661861,
+          0.8919077188406729
+        ],
+        "M-CELL-L2": "MARGINAL",
+        "M-CELL-L2-NA": "WIN",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": 0,
+        "M-PHASE-DELTAS": {
+          "S-ARG": {
+            "reuse_med_s": 8.258599996224802e-05,
+            "cold_med_s": 4.356500028279697e-06,
+            "delta_med_s": 7.822949993396833e-05
+          },
+          "S-REGISTRY-BUILD": {
+            "reuse_med_s": 0.0002508879999822966,
+            "cold_med_s": 3.971299997829192e-05,
+            "delta_med_s": 0.0002111750000040047
+          },
+          "S-REGISTRY-SCAN": {
+            "reuse_med_s": 6.180099995845012e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 6.180099995845012e-05
+          },
+          "S-PROBE": {
+            "reuse_med_s": 0.000617528000020684,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.000617528000020684
+          },
+          "S-GUARD": {
+            "reuse_med_s": 1.1715000027834321e-06,
+            "cold_med_s": 0.0,
+            "delta_med_s": 1.1715000027834321e-06
+          },
+          "S-REPAIR-SIGNAL": {
+            "reuse_med_s": 0.0005664335000119536,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.0005664335000119536
+          },
+          "S-REGISTRY-WRITE": {
+            "reuse_med_s": 0.000297936999970716,
+            "cold_med_s": 0.00012102199997343632,
+            "delta_med_s": 0.00017691499999727966
+          },
+          "S-CHARGE": {
+            "reuse_med_s": 2.418500002931978e-06,
+            "cold_med_s": 0.0,
+            "delta_med_s": 2.418500002931978e-06
+          },
+          "S-POST-VERIFY": {
+            "reuse_med_s": 9.676700005911698e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 9.676700005911698e-05
+          },
+          "S-EXECUTE": {
+            "reuse_med_s": 0.0027681120000124793,
+            "cold_med_s": 0.0031580514999518527,
+            "delta_med_s": -0.0003899394999393735
+          },
+          "S-DISCOVERY": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0005255525000507077,
+            "delta_med_s": -0.0005255525000507077
+          },
+          "S-OBSERVE": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0015286434999666199,
+            "delta_med_s": -0.0015286434999666199
+          },
+          "S-DISTILL": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.00013908349995972458,
+            "delta_med_s": -0.00013908349995972458
+          }
+        },
+        "M-CLOSURE-REUSE-MED": 0.03822340212083101,
+        "M-CLOSURE-COLD-MED": 0.00626603556201779,
+        "M-T-LEARN-MED-S": 0.008751144999962435,
+        "M-RECURRENCE-N-STAR-L2": 163.13979713764087,
+        "M-RECURRENCE-N-STAR-L2NA": 65.76174068013825,
+        "M-RECURRENCE-N-STAR-L3": 15.259082760160458,
+        "M-RECURRENCE-N-STAR-L3NA": 13.406528509185698,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 36,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true
+      },
+      "P2-STRUCTURE": {
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.9035781695514236,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 612,
+        "M-SHIPPED-COLD-L2": 648,
+        "M-SHIPPED-COLD-L3": 684,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-COLD-HTTP-L2": 288,
+        "M-COLD-HTTP-L3": 324,
+        "M-REUSE-HTTP": 180,
+        "M-EQUIV-MATCH-N": 36,
+        "M-EQUIV-MATCH-DEN": 36,
+        "M-SCAFFOLD-REUSE": 360,
+        "M-SCAFFOLD-COLD-L3": 108,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-LATENCY-REUSE-MED-S": 0.004499152000107642,
+        "M-LATENCY-COLD-L2-MED-S": 0.005000364000011359,
+        "M-LATENCY-COLD-L3-MED-S": 0.005540977000123348,
+        "M-LATENCY-R-L2": 0.899764897134973,
+        "M-LATENCY-R-L3": 0.8119781042237653,
+        "M-LATENCY-R-L2-NOARG": 0.8840239742958457,
+        "M-LATENCY-R-L3-NOARG": 0.7977096513772814,
+        "M-LATENCY-R-L2-CI95": [
+          0.8868598366171115,
+          0.9110383828433359
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          0.8017334828796875,
+          0.8220493700613
+        ],
+        "M-LATENCY-R-L2-CIBF": [
+          0.8801011599728705,
+          0.9174460042116535
+        ],
+        "M-LATENCY-R-L3-CIBF": [
+          0.7961256344890513,
+          0.8271257938687809
+        ],
+        "M-LATENCY-R-L2-NOARG-CI95": [
+          0.87162336529035,
+          0.8940525228579157
+        ],
+        "M-LATENCY-R-L3-NOARG-CI95": [
+          0.7870548995064938,
+          0.8074130189015557
+        ],
+        "M-LATENCY-R-L2-NOARG-CIBF": [
+          0.8645780333271726,
+          0.9006341223131464
+        ],
+        "M-LATENCY-R-L3-NOARG-CIBF": [
+          0.7811643911979497,
+          0.8124791715052112
+        ],
+        "M-CELL-L2": "WIN",
+        "M-CELL-L2-NA": "WIN",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": 0,
+        "M-PHASE-DELTAS": {
+          "S-ARG": {
+            "reuse_med_s": 8.193999997274659e-05,
+            "cold_med_s": 3.971000069213915e-06,
+            "delta_med_s": 7.796899990353268e-05
+          },
+          "S-REGISTRY-BUILD": {
+            "reuse_med_s": 0.00024936049999269017,
+            "cold_med_s": 3.611800002545351e-05,
+            "delta_med_s": 0.00021324249996723665
+          },
+          "S-REGISTRY-SCAN": {
+            "reuse_med_s": 6.157499996106708e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 6.157499996106708e-05
+          },
+          "S-PROBE": {
+            "reuse_med_s": 0.0006085244999667339,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.0006085244999667339
+          },
+          "S-GUARD": {
+            "reuse_med_s": 0.00010581499998352228,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.00010581499998352228
+          },
+          "S-REPAIR-SIGNAL": {
+            "reuse_med_s": 4.226199996537616e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 4.226199996537616e-05
+          },
+          "S-REGISTRY-WRITE": {
+            "reuse_med_s": 0.0002685484998892207,
+            "cold_med_s": 0.00011983600006715278,
+            "delta_med_s": 0.0001487124998220679
+          },
+          "S-CHARGE": {
+            "reuse_med_s": 2.168500031984877e-06,
+            "cold_med_s": 0.0,
+            "delta_med_s": 2.168500031984877e-06
+          },
+          "S-POST-VERIFY": {
+            "reuse_med_s": 8.073300000432937e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 8.073300000432937e-05
+          },
+          "S-EXECUTE": {
+            "reuse_med_s": 0.0027794034999715223,
+            "cold_med_s": 0.0031431944998985273,
+            "delta_med_s": -0.00036379099992700503
+          },
+          "S-DISCOVERY": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0005225304998930369,
+            "delta_med_s": -0.0005225304998930369
+          },
+          "S-OBSERVE": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0015118479999500778,
+            "delta_med_s": -0.0015118479999500778
+          },
+          "S-DISTILL": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.00014557350004906766,
+            "delta_med_s": -0.00014557350004906766
+          }
+        },
+        "M-CLOSURE-REUSE-MED": 0.04208251686583059,
+        "M-CLOSURE-COLD-MED": 0.006253952747366076,
+        "M-T-LEARN-MED-S": 0.008768486999997549,
+        "M-RECURRENCE-N-STAR-L2": 17.49456717253773,
+        "M-RECURRENCE-N-STAR-L2NA": 15.131999864656775,
+        "M-RECURRENCE-N-STAR-L3": 8.416468216701809,
+        "M-RECURRENCE-N-STAR-L3NA": 7.828349227526198,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 36,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true
+      },
+      "P3-PERMISSION": {
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.9035781695514236,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-COLD-SUCCESS": 1.0,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-BASE-LIVENESS": 1.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-SHIPPED-REUSE": 612,
+        "M-SHIPPED-COLD-L2": 648,
+        "M-SHIPPED-COLD-L3": 684,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-COLD-HTTP-L2": 288,
+        "M-COLD-HTTP-L3": 324,
+        "M-REUSE-HTTP": 216,
+        "M-EQUIV-MATCH-N": 36,
+        "M-EQUIV-MATCH-DEN": 36,
+        "M-SCAFFOLD-REUSE": 360,
+        "M-SCAFFOLD-COLD-L3": 108,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-LATENCY-REUSE-MED-S": 0.004961451999974997,
+        "M-LATENCY-COLD-L2-MED-S": 0.005010459000118317,
+        "M-LATENCY-COLD-L3-MED-S": 0.005569753500026309,
+        "M-LATENCY-R-L2": 0.9902190597423984,
+        "M-LATENCY-R-L3": 0.8907848435216319,
+        "M-LATENCY-R-L2-NOARG": 0.974186025740014,
+        "M-LATENCY-R-L3-NOARG": 0.8762726535030669,
+        "M-LATENCY-R-L2-CI95": [
+          0.9841477548353981,
+          0.9999184608661698
+        ],
+        "M-LATENCY-R-L3-CI95": [
+          0.8850730196120821,
+          0.9007658078049288
+        ],
+        "M-LATENCY-R-L2-CIBF": [
+          0.9775386013461891,
+          1.0044243546944631
+        ],
+        "M-LATENCY-R-L3-CIBF": [
+          0.8831932285487618,
+          0.9055682754770119
+        ],
+        "M-LATENCY-R-L2-NOARG-CI95": [
+          0.9677770850913068,
+          0.9838009640224163
+        ],
+        "M-LATENCY-R-L3-NOARG-CI95": [
+          0.8712778865837771,
+          0.8864976313356991
+        ],
+        "M-LATENCY-R-L2-NOARG-CIBF": [
+          0.9613742510885798,
+          0.9887015872797096
+        ],
+        "M-LATENCY-R-L3-NOARG-CIBF": [
+          0.8685505733465996,
+          0.8908953816097077
+        ],
+        "M-CELL-L2": "MARGINAL",
+        "M-CELL-L2-NA": "WIN",
+        "M-CELL-L3": "WIN",
+        "M-CELL-L3-NA": "WIN",
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": 1,
+        "M-PHASE-DELTAS": {
+          "S-ARG": {
+            "reuse_med_s": 8.273650007595279e-05,
+            "cold_med_s": 4.211000032228185e-06,
+            "delta_med_s": 7.85255000437246e-05
+          },
+          "S-REGISTRY-BUILD": {
+            "reuse_med_s": 0.0002519040000379391,
+            "cold_med_s": 3.90225001183353e-05,
+            "delta_med_s": 0.0002128814999196038
+          },
+          "S-REGISTRY-SCAN": {
+            "reuse_med_s": 6.214099994394928e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 6.214099994394928e-05
+          },
+          "S-PROBE": {
+            "reuse_med_s": 0.0005867099999932179,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.0005867099999932179
+          },
+          "S-GUARD": {
+            "reuse_med_s": 1.090999944608484e-06,
+            "cold_med_s": 0.0,
+            "delta_med_s": 1.090999944608484e-06
+          },
+          "S-REPAIR-SIGNAL": {
+            "reuse_med_s": 0.0005751424999971277,
+            "cold_med_s": 0.0,
+            "delta_med_s": 0.0005751424999971277
+          },
+          "S-REGISTRY-WRITE": {
+            "reuse_med_s": 0.0002949625001065215,
+            "cold_med_s": 0.00012133300015193527,
+            "delta_med_s": 0.0001736294999545862
+          },
+          "S-CHARGE": {
+            "reuse_med_s": 2.3640000108571257e-06,
+            "cold_med_s": 0.0,
+            "delta_med_s": 2.3640000108571257e-06
+          },
+          "S-POST-VERIFY": {
+            "reuse_med_s": 9.000200009268156e-05,
+            "cold_med_s": 0.0,
+            "delta_med_s": 9.000200009268156e-05
+          },
+          "S-EXECUTE": {
+            "reuse_med_s": 0.0028222009999581132,
+            "cold_med_s": 0.0031767780001246138,
+            "delta_med_s": -0.0003545770001665005
+          },
+          "S-DISCOVERY": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0004979199999297634,
+            "delta_med_s": -0.0004979199999297634
+          },
+          "S-OBSERVE": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.0015379489997258133,
+            "delta_med_s": -0.0015379489997258133
+          },
+          "S-DISTILL": {
+            "reuse_med_s": 0.0,
+            "cold_med_s": 0.00014160299997456605,
+            "delta_med_s": -0.00014160299997456605
+          }
+        },
+        "M-CLOSURE-REUSE-MED": 0.038762355964228765,
+        "M-CLOSURE-COLD-MED": 0.006592813791884946,
+        "M-T-LEARN-MED-S": 0.008762838499933423,
+        "M-RECURRENCE-N-STAR-L2": 178.8078942662629,
+        "M-RECURRENCE-N-STAR-L2NA": 67.80572142240676,
+        "M-RECURRENCE-N-STAR-L3": 14.405419843933082,
+        "M-RECURRENCE-N-STAR-L3NA": 12.724856040123639,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 36,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true
+      }
+    },
+    "attribution": {
+      "excess_med_s": {
+        "P1-ENDPOINT": -0.0005735040000445224,
+        "P2-STRUCTURE": -0.0010418250000157059,
+        "P3-PERMISSION": -0.0006083015000513115
+      },
+      "phase_deltas_med_s": {
+        "S-ARG": {
+          "P1-ENDPOINT": 7.822949993396833e-05,
+          "P2-STRUCTURE": 7.796899990353268e-05,
+          "P3-PERMISSION": 7.85255000437246e-05
+        },
+        "S-REGISTRY-BUILD": {
+          "P1-ENDPOINT": 0.0002111750000040047,
+          "P2-STRUCTURE": 0.00021324249996723665,
+          "P3-PERMISSION": 0.0002128814999196038
+        },
+        "S-REGISTRY-SCAN": {
+          "P1-ENDPOINT": 6.180099995845012e-05,
+          "P2-STRUCTURE": 6.157499996106708e-05,
+          "P3-PERMISSION": 6.214099994394928e-05
+        },
+        "S-PROBE": {
+          "P1-ENDPOINT": 0.000617528000020684,
+          "P2-STRUCTURE": 0.0006085244999667339,
+          "P3-PERMISSION": 0.0005867099999932179
+        },
+        "S-GUARD": {
+          "P1-ENDPOINT": 1.1715000027834321e-06,
+          "P2-STRUCTURE": 0.00010581499998352228,
+          "P3-PERMISSION": 1.090999944608484e-06
+        },
+        "S-REPAIR-SIGNAL": {
+          "P1-ENDPOINT": 0.0005664335000119536,
+          "P2-STRUCTURE": 4.226199996537616e-05,
+          "P3-PERMISSION": 0.0005751424999971277
+        },
+        "S-REGISTRY-WRITE": {
+          "P1-ENDPOINT": 0.00017691499999727966,
+          "P2-STRUCTURE": 0.0001487124998220679,
+          "P3-PERMISSION": 0.0001736294999545862
+        },
+        "S-CHARGE": {
+          "P1-ENDPOINT": 2.418500002931978e-06,
+          "P2-STRUCTURE": 2.168500031984877e-06,
+          "P3-PERMISSION": 2.3640000108571257e-06
+        },
+        "S-POST-VERIFY": {
+          "P1-ENDPOINT": 9.676700005911698e-05,
+          "P2-STRUCTURE": 8.073300000432937e-05,
+          "P3-PERMISSION": 9.000200009268156e-05
+        },
+        "S-EXECUTE": {
+          "P1-ENDPOINT": -0.0003899394999393735,
+          "P2-STRUCTURE": -0.00036379099992700503,
+          "P3-PERMISSION": -0.0003545770001665005
+        },
+        "S-DISCOVERY": {
+          "P1-ENDPOINT": -0.0005255525000507077,
+          "P2-STRUCTURE": -0.0005225304998930369,
+          "P3-PERMISSION": -0.0004979199999297634
+        },
+        "S-OBSERVE": {
+          "P1-ENDPOINT": -0.0015286434999666199,
+          "P2-STRUCTURE": -0.0015118479999500778,
+          "P3-PERMISSION": -0.0015379489997258133
+        },
+        "S-DISTILL": {
+          "P1-ENDPOINT": -0.00013908349995972458,
+          "P2-STRUCTURE": -0.00014557350004906766,
+          "P3-PERMISSION": -0.00014160299997456605
+        },
+        "REGISTRY": {
+          "P1-ENDPOINT": 0.00044989099995973447,
+          "P2-STRUCTURE": 0.00042352999975037164,
+          "P3-PERMISSION": 0.0004486519998181393
+        },
+        "GUARD": {
+          "P1-ENDPOINT": 0.0006186995000234674,
+          "P2-STRUCTURE": 0.0007143394999502561,
+          "P3-PERMISSION": 0.0005878009999378264
+        },
+        "COLD-FETCH": {
+          "P1-ENDPOINT": 0.002193279499977052,
+          "P2-STRUCTURE": 0.0021799519998921824,
+          "P3-PERMISSION": 0.002177471999630143
+        }
+      },
+      "shares_of_excess": {
+        "S-ARG": {
+          "P1-ENDPOINT": -0.1364061975642632,
+          "P2-STRUCTURE": -0.07483886439887434,
+          "P3-PERMISSION": -0.1290897688680709
+        },
+        "S-REGISTRY-BUILD": {
+          "P1-ENDPOINT": -0.3682188790097553,
+          "P2-STRUCTURE": -0.20468168834883205,
+          "P3-PERMISSION": -0.3499605046208941
+        },
+        "S-REGISTRY-SCAN": {
+          "P1-ENDPOINT": -0.10776036427584179,
+          "P2-STRUCTURE": -0.059103016303255165,
+          "P3-PERMISSION": -0.10215493458212345
+        },
+        "S-PROBE": {
+          "P1-ENDPOINT": -1.0767631960243413,
+          "P2-STRUCTURE": -0.5840947375591488,
+          "P3-PERMISSION": -0.9645052657994888
+        },
+        "S-GUARD": {
+          "P1-ENDPOINT": -0.00204270589689433,
+          "P2-STRUCTURE": -0.10156696180445572,
+          "P3-PERMISSION": -0.0017935184189360966
+        },
+        "S-REPAIR-SIGNAL": {
+          "P1-ENDPOINT": -0.9876714024104105,
+          "P2-STRUCTURE": -0.04056535403233657,
+          "P3-PERMISSION": -0.9454892022272069
+        },
+        "S-REGISTRY-WRITE": {
+          "P1-ENDPOINT": -0.3084808475329647,
+          "P2-STRUCTURE": -0.14274230299697743,
+          "P3-PERMISSION": -0.28543329243794435
+        },
+        "S-CHARGE": {
+          "P1-ENDPOINT": -0.004217058647793606,
+          "P2-STRUCTURE": -0.00208144365123911,
+          "P3-PERMISSION": -0.0038862307764450975
+        },
+        "S-POST-VERIFY": {
+          "P1-ENDPOINT": -0.16872942481936437,
+          "P2-STRUCTURE": -0.07749190123400024,
+          "P3-PERMISSION": -0.1479562356579586
+        },
+        "S-EXECUTE": {
+          "P1-ENDPOINT": 0.6799246385537008,
+          "P2-STRUCTURE": 0.3491862836095513,
+          "P3-PERMISSION": 0.5828968038655029
+        },
+        "S-DISCOVERY": {
+          "P1-ENDPOINT": 0.9163885517972115,
+          "P2-STRUCTURE": 0.5015530438270914,
+          "P3-PERMISSION": 0.8185414632180964
+        },
+        "S-OBSERVE": {
+          "P1-ENDPOINT": 2.665445227667022,
+          "P2-STRUCTURE": 1.451153504597496,
+          "P3-PERMISSION": 2.5282676429304947
+        },
+        "S-DISTILL": {
+          "P1-ENDPOINT": 0.24251530930721882,
+          "P2-STRUCTURE": 0.13972932118817757,
+          "P3-PERMISSION": 0.2327842360451545
+        },
+        "REGISTRY": {
+          "P1-ENDPOINT": -0.7844600908185617,
+          "P2-STRUCTURE": -0.40652700764906463,
+          "P3-PERMISSION": -0.7375487316409619
+        },
+        "GUARD": {
+          "P1-ENDPOINT": -1.0788059019212357,
+          "P2-STRUCTURE": -0.6856616993636044,
+          "P3-PERMISSION": -0.966298784218425
+        },
+        "COLD-FETCH": {
+          "P1-ENDPOINT": -3.824349088771452,
+          "P2-STRUCTURE": -2.092435869612765,
+          "P3-PERMISSION": -3.5795933421937454
+        }
+      },
+      "votes_ge_half": {
+        "S-ARG": 0,
+        "S-REGISTRY-BUILD": 0,
+        "S-REGISTRY-SCAN": 0,
+        "S-PROBE": 0,
+        "S-GUARD": 0,
+        "S-REPAIR-SIGNAL": 0,
+        "S-REGISTRY-WRITE": 0,
+        "S-CHARGE": 0,
+        "S-POST-VERIFY": 0,
+        "S-EXECUTE": 2,
+        "S-DISCOVERY": 3,
+        "S-OBSERVE": 3,
+        "S-DISTILL": 0,
+        "REGISTRY": 0,
+        "GUARD": 0,
+        "COLD-FETCH": 0
+      },
+      "attribution_set": [],
+      "closure_ok": true,
+      "answer": "ATTRIBUTION-MOOT",
+      "semantics": "net-gap shares: denominator is the NET median episode gap (reuse minus cold, net of cold-side savings); shares may exceed 1.0 and are non-decomposable; gross reuse-phase medians are in M-PHASE-DELTAS; the answer is the full qualifying set, never selected by driver iteration order."
+    },
+    "M-N-VALID-TRIALS": 108,
+    "M-MODEL-CALLS-TOTAL": 0,
+    "M-MODEL-TOKENS-TOTAL": 0,
+    "M-N-PER-CLASS": 36,
+    "NC-NO-PERTURBATION-STALE": false,
+    "NC-NOISE-STALE": false,
+    "B3-MODEL-ECONOMICS": "UNSATISFIABLE-no-endpoint-counters-only-blocker-recorded",
+    "SEED": 180486679
+  },
+  "controls": {
+    "B-COLD": {
+      "expected": "task success 1.0 per trial; shipped 19/trial, 684/class, http 324/class",
+      "observed": "M-COLD-SUCCESS 1.0 all classes; M-SHIPPED-COLD-L3 684/684/684; M-COLD-HTTP-L3 324/324/324",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "B-COLD-MIN": {
+      "expected": "task success 1.0 per trial; shipped 18/trial, 648/class, http 288/class",
+      "observed": "cold_min success 1.0 all trials (M-COLD-SUCCESS covers L3 path; no cold_min failure recorded; V-DRIFT-COLD exact); M-SHIPPED-COLD-L2 648/648/648; M-COLD-HTTP-L2 288/288/288",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "B-LITERAL-REPLAY": {
+      "expected": "success <= 0.10 every class (must-fail; perturbation bites)",
+      "observed": "M-LITERAL-SUCCESS 0.0 on P1-ENDPOINT, P2-STRUCTURE, P3-PERMISSION (0/108)",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "B-NO-REPAIR": {
+      "expected": "success 0.0 by pinned-v2 construction (DISCLOSED VACUITY); guard fires 108/108 diagnostic",
+      "observed": "M-NOREPAIR-SUCCESS 0.0 all classes; norepair guard fired on all 108 trials (M-GUARD-FIRE-RATE 1.0 reflects repair-arm guard; per-trial norepair_guard_fired true e.g. trial 0)",
+      "verdict": "pass-diagnostic-only",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#trials"
+      ]
+    },
+    "PC-BASE-LIVENESS": {
+      "expected": "base_liveness true in every valid trial (5/5 resources 200+verified pre-perturbation)",
+      "observed": "M-BASE-LIVENESS 1.0 all classes; 108/108 trials base_liveness true",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#trials"
+      ]
+    },
+    "NC-NO-PERTURBATION": {
+      "expected": "stale=false (guard silent on unperturbed body)",
+      "observed": "stale=false",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#nc_no_perturbation_stale"
+      ]
+    },
+    "NC-NOISE": {
+      "expected": "stale=false (observed_at churn must not fire)",
+      "observed": "stale=false",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#nc_noise_stale"
+      ]
+    },
+    "NC-OVERBROAD-REPAIR": {
+      "expected": "instrument fires > 0.10 (sensitive to leaked repair)",
+      "observed": "M-OVERBROAD-CONTAMINATION-N 4.0/4.0/4.0 (all classes > 0.10)",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "NC-FRESH-SILENCE-POOL": {
+      "expected": "108/108 pre-perturbation guard reads silent",
+      "observed": "fresh_silent true on all 108 trials (36/36 per class)",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#trials"
+      ]
+    },
+    "V-REG-EQUIV": {
+      "expected": "BulkArm content == upsert content every timed episode",
+      "observed": "reg_equiv true on all 108 timed reuse episodes; M-EQUIV-MATCH-N 36/36 per class",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#trials"
+      ]
+    },
+    "V-DRIFT-COLD": {
+      "expected": "cold nominals exact: 648/684 sums, 288/324 http per class",
+      "observed": "V-DRIFT-COLD-HOLDS true all classes; sums exact",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "V-DRIFT-REUSE": {
+      "expected": "successful-repaired reuse trials ship exactly 17 (class http 6/5/6)",
+      "observed": "V-DRIFT-REUSE-HOLDS true all classes; M-SHIPPED-REUSE 612/612/612; M-REUSE-HTTP 216/180/216",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "V-EQ-HOLDS": {
+      "expected": "shipped ratios < 1.0 both L and fetch ratio <= 0.90",
+      "observed": "V-EQ-HOLDS true all classes (L2 0.9444, L3 0.8947, fetch 0.6667/0.5556/0.6667)",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    },
+    "V-RETAIN": {
+      "expected": "perturbation retained post-warmup every trial",
+      "observed": "108/108 valid; zero perturbation-not-retained invalids; invalid_reasons=[]",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#invalid_reasons"
+      ]
+    },
+    "V-TIMING": {
+      "expected": "2 warmups, 18/18 parity per class, finite positive latencies, dual boundaries",
+      "observed": "warmups_done 2 all trials; order_rep_first 18/36 per class; all latencies finite positive; inclusive+NOARG ratios computed all 12 cells",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#trials"
+      ]
+    },
+    "V-CLOSURE": {
+      "expected": "phase-timing closure median <= 0.20 per class (attribution-only)",
+      "observed": "M-CLOSURE-REUSE-MED 0.038/0.042/0.039; M-CLOSURE-COLD-MED ~0.006; closure_ok true",
+      "verdict": "pass",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json#per_class"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/run_v6_output.json",
+      "sha256": "4d7fe38bcc6e616c4f459b4c8cbc6a42f75837a8df47c87f5a032f8b87be0647",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38835192343/raw_evidence/runner_v6.py",
+      "sha256": "ed8c6f6db29c791f6d9457873519275c63881266cc51183d661709faca854cc2",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "108/108 trials valid (36 per class); invalid_reasons=[]; no measurement failure.",
+    "Functional/locality bars hold on all classes at N=36: repair_success 1.0, Wilson lower 0.9036>=0.60, guard_fire 1.0>=0.80, write_set_max 1, contamination 0/144 per class (0/432 total), literal-replay 0.0<=0.10, cold 1.0>=0.90.",
+    "Shipped-counter nominals exact: reuse 612/class (17x36), cold-L2 648/class, cold-L3 684/class; reuse http 216/180/216 (P1/P2/P3), cold http 288/324.",
+    "Latency cells (median reuse/cold ratio R with Bonferroni family-wise CI, B=10000): P1 L2 R=0.9893 CIBF [0.9724,1.0044] MARGINAL; P1 L2-NOARG R=0.9735 CIBF [0.9576,0.9878] WIN; P1 L3 R=0.8964 CIBF [0.8800,0.9074] WIN; P1 L3-NOARG R=0.8820 CIBF [0.8658,0.8919] WIN.",
+    "P2 all four cells WIN: L2 R=0.8998 CIBF [0.8801,0.9174]; L2-NOARG R=0.8840 CIBF [0.8646,0.9006]; L3 R=0.8120 CIBF [0.7961,0.8271]; L3-NOARG R=0.7977 CIBF [0.7812,0.8125].",
+    "P3 L2 R=0.9902 CIBF [0.9775,1.0044] MARGINAL; P3 L2-NOARG R=0.9742 CIBF [0.9614,0.9887] WIN; P3 L3 R=0.8908 CIBF [0.8832,0.9056] WIN; P3 L3-NOARG R=0.8763 CIBF [0.8686,0.8909] WIN.",
+    "Cell tally at N=36: 10 WIN, 2 MARGINAL (P1-L2-inclusive, P3-L2-inclusive), 0 LOSS, 0 UNKNOWN.",
+    "Class verdicts per frozen rule: P1-ENDPOINT PRICED-MARGINAL, P2-STRUCTURE PRICED-WIN, P3-PERMISSION PRICED-MARGINAL; aggregate INCONCLUSIVE (marginal straddle).",
+    "Attribution (frozen tie set, diagnostic): excess reuse-minus-cold negative on all classes (P1 -0.57ms, P2 -1.04ms, P3 -0.61ms); closure_ok true; answer ATTRIBUTION-MOOT (no positive excess to attribute), attribution_set=[].",
+    "Recurrence diagnostic N*: finite positive all cells (e.g. P1 L2 163.1, P1 L3 15.3; P2 L2 17.5, P2 L3 8.4; P3 L2 178.8, P3 L3 14.4); never gates the decision.",
+    "NCs silent (no-perturbation stale=false, noise stale=false); overbroad instrument fires 4.0>0.10 all classes; carrier hashes match parent freeze exactly.",
+    "Model calls/tokens structurally 0 (108 trials); B3 real model economics UNSATISFIABLE here by construction."
+  ],
+  "validity_notes": [
+    "Localhost ThreadingHTTPServer vantage only; L2 inclusive median gaps (~0.05ms) remain sub-one-local-GET and 2-3 orders below real web navigation economics; no transfer of ratios to real web/browser/production/external-agent economics is licensed.",
+    "Latency is wall-clock, not deterministic; discrete/counter projection (success, counters, oplogs, order flags, scaffold counts, phase timings) is recorded for audit recomputation in raw_evidence/run_v6_output.json.",
+    "Multiplicity handled by Bonferroni family-wise CIs for gating (12 cells); 95% CIs (B=2000) reported as diagnostics only.",
+    "Bootstrap tail Monte Carlo noise at B_BONF=10000 (~21 samples per tail side) frozen by pinned bootstrap seeds; deterministic for this packet; audit may recompute.",
+    "B-NO-REPAIR gate vacuous by pinned-v2 construction (success hardcoded False); disclosed; live must-fail role held by B-LITERAL-REPLAY (0.0 observed).",
+    "S-ARG operand asymmetry (reuse deepcopies full dict, cold {}) disclosed; neutralized by requiring wins on BOTH inclusive and NOARG boundaries.",
+    "Order effects controlled by 18/18 gated-triple parity per class; residual influence second-order on read-only server.",
+    "Recurrence N* derived from gated medians plus untimed learning cost outside the episode window in both arms; not a measured amortization.",
+    "Scaffold-unit (1:1) ratio informational only (M-SP5-RATIO-L2/L3 ~1.23-1.29, reuse-negative under arbitrary weights); excluded from classifier per prereg."
+  ],
+  "unresolved": [
+    "Whether the two remaining P1/P3 L2-inclusive MARGINAL cells (R~0.99, family-wise upper ~1.004) would resolve to WIN on a higher-resolution timing substrate; per mandate stop trigger no third N increase is funded and the thread PARKs.",
+    "Why P2-STRUCTURE wins at both L (R~0.80-0.90) while P1/P3 win only clearly at L3 and marginally at L2 (post-hoc candidates only; not tested here).",
+    "Any transfer beyond this substrate/carrier/classes/counters; real model-call/token economics (B3 UNSATISFIABLE here)."
+  ]
+}
