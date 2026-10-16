@@ -1,0 +1,9 @@
+{"control_id": "C-BFS-PARENT-CHAIN", "observed": {"path": ["http://127.0.0.1:52839/", "http://127.0.0.1:52839/a.html", "http://127.0.0.1:52839/b.html", "http://127.0.0.1:52839/item.html"]}, "pass": true}
+{"control_id": "C-PATH-CANARY", "observed": {"path_len": 4, "snapshot_gets": 4}, "pass": true}
+{"control_id": "C-REVAL-NOCHANGE", "observed": {"changed": [], "dead": [], "gets": 4}, "pass": true}
+{"control_id": "C-REVAL-CHANGE-DETECT", "observed": {"changed": ["http://127.0.0.1:52839/item.html"]}, "pass": true}
+{"control_id": "C-LIVENESS-404", "observed": {"dead": ["http://127.0.0.1:52839/item.html"]}, "pass": true}
+{"control_id": "C-DECISION-CANARY-SUPPORTS", "observed": {"outcome": "SUPPORTS"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-MIXED", "observed": {"outcome": "MIXED"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-MIXED-WINDOW", "observed": {"outcome": "MIXED"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-FALSIFIES", "observed": {"outcome": "FALSIFIES"}, "pass": true}

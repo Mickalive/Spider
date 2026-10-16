@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38188815194",
+  "lane": "frontier",
+  "stage": "execute",
+  "recorded_at": "2026-10-16T15:42:12Z",
+  "github_run_id": "38920284823",
+  "github_run_attempt": "1",
+  "origin_github_run_id": "38188815194",
+  "execution_base_sha": "4b1e16842e6d136cc3ebab520ca9d068ba1cbc7e",
+  "request_base_sha": "d5d2ad8b0f01624fdeb1c324ad4277a7f116e75e",
+  "commits": {
+    "execution_base_sha": "4b1e16842e6d136cc3ebab520ca9d068ba1cbc7e",
+    "request_base_sha": "d5d2ad8b0f01624fdeb1c324ad4277a7f116e75e",
+    "note": "The request was issued against base d5d2ad8b; this EXECUTE attempt ran on base 4b1e1684. No git commit, push, branch switch or reset was performed by this agent."
+  },
+  "environment": {
+    "os": "linux",
+    "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "runner": "GitHub Actions hosted runner (GITHUB_WORKSPACE=/home/runner/work/Spider/Spider)",
+    "substrate": "credential-free, GET-only, Python stdlib urllib.request + html.parser + http.server; no browser, no Docker, no credentials, no API keys, no model endpoint calls, no pip installs",
+    "vantage": "single runner egress IP (external validity across ASN/geography not established; inherited limitation)",
+    "harness_envelope": {
+      "SPIDER_MODEL_MAX_RUNTIME_SECONDS": "1200 (default in .github/scripts/run-opencode-resilient.sh; no override present in .github/workflows/spider-lane.yml)",
+      "timeout_action": "kill -TERM then kill -KILL to the whole model process group (-$MODEL_PGID); the model group is additionally reaped after any parent exit to stop orphan descendants",
+      "implication": "The frozen nominal window ladder mandates time.sleep(300)+time.sleep(900)+time.sleep(1800) = 3000 s inside the agent process, plus roughly 926 + 931 + 4x931 network GETs at 0.1-0.3 s observed latency. Minimum wall clock >= 3558 s, which structurally exceeds the 1200 s envelope. See result.validity_notes VN-4."
+    }
+  },
+  "frozen_inputs": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/request.json",
+      "sha256": "ac770f5fb0ff56b1873d3c1dd6a234611010532afe613e750517172994fca923",
+      "expected_sha256": "ac770f5fb0ff56b1873d3c1dd6a234611010532afe613e750517172994fca923",
+      "verified": true
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/spec.json",
+      "sha256": "6a2a3778848f7f7d2794f73ea000255a280eaeb6b202f593334a6846b3ddd163",
+      "expected_sha256": "6a2a3778848f7f7d2794f73ea000255a280eaeb6b202f593334a6846b3ddd163",
+      "verified": true
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/prereg.md",
+      "sha256": "6449fe9fff686832bb1afd3b5913992356cd3ea14d79b2b0a8f0b9eb3634cfb8",
+      "expected_sha256": "6449fe9fff686832bb1afd3b5913992356cd3ea14d79b2b0a8f0b9eb3634cfb8",
+      "verified": true
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/design_review.json",
+      "sha256": "9e0c512196a91779faf1b24af11ee374bf9b2ab80ee3aec8db6259d8c333ed1b",
+      "expected_sha256": "9e0c512196a91779faf1b24af11ee374bf9b2ab80ee3aec8db6259d8c333ed1b",
+      "verified": true
+    }
+  ],
+  "frozen_artifacts_verified": [
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/execute_module.py", "sha256": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl", "sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/audit.json", "sha256": "5454dd3f3f6ecd093cd22fa870e265effa5aae82e883fb8e0797459b07438cd9", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json", "sha256": "d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/execute_module.py", "sha256": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl", "sha256": "8b7a5f919143ac1ae3c0a91c282d848a83c493656524bb0583e360225c38b40f", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl", "sha256": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl", "sha256": "95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45", "verified": true},
+    {"path": "research/experiments/EXP-FRONTIER-38184956362/result.json", "sha256": "da4c0b5b5b403c9683e34e9aa20c01ded6eb2d3eb344792ee40909bcfd32c32f", "verified": true}
+  ],
+  "parent_handoff_verified": {
+    "path": "research/experiments/EXP-FRONTIER-38184956362/handoff.json",
+    "sha256": "ffcd914d5f1ed0447fd239b6e723fc39b73bcc4e8b13b6b468d980414e90d6d6",
+    "expected_sha256": "ffcd914d5f1ed0447fd239b6e723fc39b73bcc4e8b13b6b468d980414e90d6d6",
+    "verified": true
+  },
+  "code_identity": {
+    "gate": "V1",
+    "status": "PASS",
+    "method": "Bytes strictly between the FROZEN_CODE_BEGIN and FROZEN_CODE_END marker lines of prereg.md, joined with newlines, .strip() applied, sha256 taken.",
+    "derived_sha256_expected": "0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce",
+    "derived_sha256_observed": "0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce",
+    "materialized_file": "research/experiments/EXP-FRONTIER-38188815194/execute_module.py",
+    "materialized_file_sha256": "f18e5b55e563c26f2c21aeaa131f84a7145068d8154b3950c870c2c3e988d262",
+    "materialized_file_note": "The materialized file is the frozen block plus one trailing newline; the V1 comparison is defined on the stripped block, which matches."
+  },
+  "commands": [
+    {
+      "purpose": "V1 code-identity gate",
+      "command": "python3 (inline): extract FROZEN_CODE block from prereg.md, strip, sha256, compare to DERIVED_SHA256",
+      "exit_code": 0,
+      "materially_affects_reproduction": true
+    },
+    {
+      "purpose": "V5 seed-liveness pre-run probe (non-outcome-bearing prerequisite)",
+      "command": "python3 (inline): urllib GET of the four frozen min-hop seeds with User-Agent spider-r2/1.0, timeout 20",
+      "exit_code": 0,
+      "observed": "doc.rust-lang.org/stable/book/ 200 (22496 B, 0.1 s); pandas.pydata.org/docs/ 200 (22046 B, 0.1 s); docs.readthedocs.io/en/stable/ 200 -> final https://docs.readthedocs.com/platform/stable/ (24433 B, 0.3 s); docs.pytest.org/en/stable/ 200 (31975 B, 0.3 s)",
+      "materially_affects_reproduction": true
+    },
+    {
+      "purpose": "V2 controls gate",
+      "command": "python3 research/experiments/EXP-FRONTIER-38188815194/execute_module.py --stage controls --out research/experiments/EXP-FRONTIER-38188815194/run",
+      "exit_code": 0,
+      "observed": "{\"stage\": \"controls\", \"all_pass\": true, \"n\": 9, \"failed\": []}",
+      "materially_affects_reproduction": true
+    },
+    {
+      "purpose": "Offline frame-arithmetic probe (reproduces prereg.md#13 pre-freeze values)",
+      "command": "python3 (inline): read bound items.jsonl and 38164611798/raw/structural.jsonl, recount admitted items, ordinals, sum(hop+1), cold_batch_gets and both thresholds",
+      "exit_code": 0,
+      "observed": "208 admitted; ordinal mean 166.0144 min 31 max 250; sum(hop+1)=931; cold_batch_gets=926; batch threshold 833.4; amortized per-item 4.451923, threshold 4.006731",
+      "materially_affects_reproduction": true
+    },
+    {
+      "purpose": "economics stage (reconstruction leg only; abandoned after the V3 failure)",
+      "command": "python3 research/experiments/EXP-FRONTIER-38188815194/execute_module.py --stage economics --out research/experiments/EXP-FRONTIER-38188815194/run",
+      "exit_code": "terminated (SIGKILL by this agent after the reconstruction leg completed and wrote run/raw/paths.jsonl)",
+      "observed": "reconstruction recovered 179 of 208 admitted items (n_misses=29); the stage was stopped before the first revalidation window, so run/raw/economics.jsonl, run/derived/metrics.json and run/derived/decision.json were never written",
+      "materially_affects_reproduction": true
+    }
+  ],
+  "process_hygiene": {
+    "orphan_preexisting_processes": [
+      {"pid": 17423, "ppid": 1, "started": "2026-10-16T15:01:44Z", "cmd": "python3 /tmp/opencode/exp38188815194_execute_module.py --stage all --out research/experiments/EXP-FRONTIER-38188815194", "origin": "prior EXECUTE attempt of this same experiment", "action": "SIGKILL during this attempt", "artifacts_destroyed": "none (no raw/ or derived/ output existed in the packet directory)"},
+      {"pid": 29013, "ppid": 1, "started": "2026-10-16T15:19:36Z", "cmd": "python3 -u research/experiments/EXP-FRONTIER-38188815194/execute_module.py --stage economics --out research/experiments/EXP-FRONTIER-38188815194", "origin": "prior EXECUTE attempt of this same experiment", "action": "SIGKILL during this attempt", "artifacts_destroyed": "none (no raw/ or derived/ output existed in the packet directory)"}
+    ],
+    "own_terminated_process": {"pid": 36342, "reason": "reconstruction evidence captured; the frozen transaction could not proceed past the failed V3 gate"},
+    "note": "These orphans are the mechanism by which the prior attempts recorded in failure.json and model_execute.json failed and left unattributable writers in the packet directory. They were reaped so that no producer artifact in this packet is attributable to them."
+  },
+  "network_ledger": {
+    "outcome_bearing_measurements_completed": 0,
+    "reconstruction_gets_bound": 926,
+    "note": "An exact GET count was not emitted because the frozen module writes derived/metrics.json (the only place total_gets is reported) only after the full window ladder, which was never reached. The per-host 250 budget bounds reconstruction at 926 GETs, far below TOTAL_GET_CEILING=20000 (V4 therefore cannot plausibly have failed, but it is recorded as UNKNOWN rather than asserted as PASS).",
+    "seed_probe_gets": 4,
+    "controls_gets": "in-process 127.0.0.1 fixture only, no external network"
+  },
+  "artifacts_written": [
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/result.json", "role": "canonical producer handoff"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/report.md", "role": "human-readable evidence chain"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/provenance.json", "role": "this file"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/execute_module.py", "role": "frozen EXECUTE driver materialized from prereg.md#9 (V1 PASS)"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl", "role": "raw controls evidence", "sha256": "904187ce34eeedcfdde8f759d405f61ad78c7b7b80ba6475e8d1b5a264c75658"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl", "role": "raw reconstructed-path evidence", "sha256": "5192435b4c8a28d7f978f2a82ee1bbdabf4d092a79ab1b6d0614737d1ca33c46"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/frame_misses.jsonl", "role": "raw V3 failure evidence (the 29 unreconstructible admitted items)", "sha256": "fd7d816b918ad2d8221a57029bb492066b8d6623dbf9c9bb1551312b5f21c92e"}
+  ],
+  "not_written": [
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/economics.jsonl", "reason": "no revalidation window completed"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/derived/metrics.json", "reason": "frozen module writes it only after the full window ladder"},
+    {"path": "research/experiments/EXP-FRONTIER-38188815194/run/derived/decision.json", "reason": "frozen decide() was never applied to any row"}
+  ],
+  "git_actions": {
+    "commit": false,
+    "push": false,
+    "branch_switch": false,
+    "reset": false,
+    "force_push": false
+  },
+  "reproduction": {
+    "note": "A re-run that reproduces this MEASUREMENT_INVALID disposition must (a) verify the V1 block hash, (b) run --stage controls and require 9/9, (c) confirm no orphaned execute_module process is alive, and (d) count recovered paths against the 208 admitted items before spending the 3000 s window ladder. Step (d) alone is sufficient to detect the frame drift that invalidated this attempt, and costs roughly 2 minutes instead of roughly 60. It does not weaken the frozen design; it is the V3 gate the frozen design already requires, evaluated before the expensive stage."
+  }
+}
