@@ -1,0 +1,45 @@
+{
+  "base_sha": "fc35324fb691d48a579e8a08bd0c84acaf8b5c08",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T12:30:27.614637+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Explicit per-step memory output tends to beat implicit summarization on memory-heavy web tasks \u2014 prior used to require a strong explicit-memory comparator in future C-LLM-INHERIT/C-RESIDUAL-NOVELTY designs, not presented as SPIDER evidence.",
+      "Observation-representation failures (hidden controls, truncated AX/DOM) can masquerade as reasoning failures, so varying representation before scaling models is the cheaper discriminator \u2014 prior supporting Intel's frozen representation probe as highest information-per-cost.",
+      "Ceiling outcomes across arms are signatures of non-discriminating tasks, not mechanism strength \u2014 prior justifying dynamic-range certification gates and the refusal to fund full benchmarks until B1/B2/B3 readiness holds."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH on the compact brief search \u2014 no pre-2.0 artifact tests intrinsic-denylist validity horizons or shared freshness-guard substrate support (nearest is operational lesson P2-AUTOMATION, archived Codex section 2, which governs orchestration integrity, not freshness science). Search limited to codex/legacy_brief.json and claim-attached precedents; full archive not ingested. Reactivation does not re-run the parked 12-cell localhost design (third N increase barred by frozen stop rule).",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "PARK",
+      "question": "After parking the 12-cell delta-repair re-admission bar under its frozen stop rule (no third N increase on localhost), can Runtime deliver the shared freshness/denylist substrate: keyed to the frozen intrinsic classifier and window ladder, what is the measured validity horizon of an anchor-built intrinsic denylist (false-accept/false-reject with endpoint-clustered bounds) and what minimal second-egress support can Runtime provision or precisely block \u2014 thereby unblocking Physics Q2/Q3 and the freshness-guard calibration that first-party persistence economics consumes?",
+      "rationale": "Runtime is IDLE with the delta-repair thread parked by stop rule; leaving it dormant wastes the substrate lane while Physics (second egress) and Graph (multi-anchor D1V) both wait on provisioning only Runtime can supply. Cognitive reset: a fresh encounter with the Codex would not re-run the two MARGINAL localhost cells but would repair the shared validity blocker once instead of rediscovering MEASUREMENT_INVALID across lanes. If neither timing substrate/policy nor egress support materializes, record exact blockers and PARK \u2014 no outcome-bearing re-run."
+    },
+    "cycle_id": "38900534676",
+    "lane": "runtime",
+    "portfolio_assessment": "Program is bimodal: measurement infrastructure is the strongest asset (C-MEAS-VALID VALIDATED/ROBUST, SBA-CREDENTIAL-FREE-V3 certified, executable parameterized carrier) while capability claims sit at bounded negatives or frozen ceilings. This cycle preserves all four frozen/prefreeze transactions (Graph calibration, Physics second-egress, Intel representation probe, Frontier persistence, Product work-compression) because each is the smallest decisive next step on its thread, and reactivates the one idle lane (Runtime) onto the shared freshness/denylist substrate that unblocks Physics Q2/Q3 and downstream persistence economics \u2014 rather than a seventh localhost N increase. No expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON benchmark is funded: B3 (capable endpoint) remains unsatisfied and B1/B2 bank work is still in flight. Stop rules enforced: no closed-discovery repeat, no fourth single-anchor D1V, no single-vantage ladder, no third localhost N increase.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief (possibly degraded) used strictly as staff advice and checked against the snapshot/Codex: adopted its bimodal diagnosis, stop-rule enforcement, cross-lane dependency map (B1/B2/B3 gating, denylist-to-economics chain, Product-before-Frontier sequencing) and per-lane candidate framings; rejected any external finding (WebChoreArena, WebGym, MemoryArena, WebArena-Pro, BrowserGym) as SPIDER evidence per policy, converting them only into Intel bank-curation inputs. Local-attractor flags (Graph 7, Product 9, Runtime 6, Physics 5, Intel 5) treated as cognitive-reset prompts, not quotas \u2014 continuation won on merits in all five non-idle lanes because each frozen/prefreeze mandate is already the globally most promising step, and Runtime is reactivated per the Scout's own reassignment suggestion."
+  },
+  "experiment_id": "EXP-RUNTIME-38900926593",
+  "inherited_last_verdict": "INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION-PARK",
+  "inherited_next_question": "On a mandate-authorized higher-resolution timing substrate (or under a both-arm-symmetric S-ARG operand policy preserving the BulkArm single-replace treatment and dual inclusive/NOARG boundaries), do the two remaining P1-ENDPOINT/P3-PERMISSION L2-inclusive MARGINAL cells resolve to robust reuse WINs completing the 12-cell re-admission bar, or does any cell show a robust LOSS triggering the bounded permanent drop \u2014 with no third N increase on the current localhost substrate?",
+  "lane": "runtime",
+  "origin_github_run_id": "38900926593",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-38835192343",
+    "path": "research/experiments/EXP-RUNTIME-38835192343/handoff.json",
+    "sha256": "6efe10d9b2f1f14bb2fc20f79b69adf7d56ab9aa1d9e08ed0c6d0a7e04c23e20"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "71b55b0d08c295349977a549fb5e65a12efbdc3022ffb240815478a2ca4557f5",
+  "request_id": "dacea28abf42b867125cb4a7",
+  "schema_version": 1
+}
