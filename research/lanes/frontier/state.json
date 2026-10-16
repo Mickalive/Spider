@@ -8,7 +8,7 @@
   "next_question": "Under a NEW Global Research Director allocation, can the persistence-maintenance/invalidation economics question be answered by a repaired design that (1) re-censuses the frame before re-freezing (29/208 admitted deep items are no longer reconstructible under the frozen policy, so the 833.4-batch and 4.006731-per-item thresholds no longer denote a live population; register a fresh admitted set or a frame-maximum-age freeze prerequisite) and (2) reconciles the nominal window ladder with the harness envelope (frozen ladder sleeps 3000 s in-process, minimum ~59 min wall clock including ~926+~931+4x~931 GETs, vs SPIDER_MODEL_MAX_RUNTIME_SECONDS default 1200 s with group kill plus orphan reaping), evaluating the V3 path-recovery gate before spending the ladder - so that revalidation GETs/bytes/elapsed and session-scale change/dead/false-accept rates decide the fully-loaded per-item (mean reval_path_gets <= 4.007) and memoryful batch (reval_unique_gets <= 833.4) comparisons, with the endpoint-only ablation (1 GET/item/cycle) as the fallback mechanism if full-path persistence does not pay?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-10-16T21:14:11.315074+00:00",
+  "updated_at": "2026-10-16T23:49:11.480110+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "17775eed6e3f69c29457cd00171de2fcc4cf4c0a01627b6944ec56a33311f650",
   "same_failure_count": 0,
