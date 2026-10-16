@@ -1,0 +1,44 @@
+{
+  "base_sha": "7d548cdf4bfb039dc3e69d5ddc1551f49ea6199a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T01:27:34.909894+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): error accumulation over multi-step horizons makes persisted-path staleness/false-accept the dominant term in maintenance economics, motivating the frontier break-even hop/elapsed-time measurement.",
+      "Agent prior (not SPIDER evidence): observation representation (what the agent sees) and control capacity (what the policy can do) are separable failure causes; varying only the observation while holding model and task fixed is the standard dissociation, motivating the intel reveal-suppression probe.",
+      "Agent prior (not SPIDER evidence): long threads of near-identical negative refinements usually indicate a structural ceiling rather than a calibration artifact, but a single cheap pre-registered tie-break/criterion test is the efficient way to close such a thread rather than leaving it open \u2014 motivates the one-shot graph tau-rule terminal test with an explicit terminate trigger.",
+      "Agent prior (not SPIDER evidence): access-barrier behavior observed from one network vantage routinely confounds endpoint-intrinsic policy with vantage-specific filtering, so single-vantage persistence claims should not license a shared denylist without a second-vantage check \u2014 motivates completing the physics transfer test rather than generalizing S1_STATIONARY."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Closest precedents are P2-BLIND-COMPOSITION (pre2 product summary artifact 4.697, sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda: 3/3 unseen compositions under keywords/oracle-guided stopping with weak baselines) and P2-MIND2WEB (archived Codex section 1 Mind2Web V0.50: 6/176 exact matches, retrieval 47/176). Neither tested whether blind-resolver viability depends on the abstention-tau selection rule under a strong deterministic comparator with calibrated abstention gates \u2014 the exact object of this test \u2014 and both carry guards forbidding broad generalization from weak baselines, which the current frozen program (strong B-LEX-STRONG comparator, exclusive unknown_precision denominator, out-of-sample retrieval fit) already satisfies. Archive index check (1401 artifacts, blob 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3): zero hits for 'tau', zero for 'abstention', so no hidden duplicate was found by keyword search; full 22MB archive not ingested, absence of a hit is not proof of absence. Not a rerun: no prior experiment varied the SELECT-only tau rule while holding the G3 gate frozen.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Which pre-registrable SELECT-only calibration rule fixed before any TEST scoring (e.g. a coverage/UP-constrained rule or a held-out selection axis) selects tau=0.3333 rather than an FA-extremal tau, and does BLIND-JAC-1NN survive the frozen AXIS-G3-NEW reincluded G3 gate under that rule with resolution quality above permuted levels?",
+      "rationale": "Decision counterfactual: if the blind resolver survives under a non-extremal pre-registered tau rule, blind viability is revived and the DECIDE_REQUIRE_RETRIEVAL_B bound is qualified; if BLIND_FAILS persists independent of the ascending-tau tie-break, the blind route is decisively closed and the thread TERMINATES next cycle (retrieval-B or structured architecture only), freeing Graph for first-party product-econ work. This is the smallest decisive batch: a re-analysis on frozen banks with no new substrate, ending an 11-experiment streak. Strongest fair baseline is the frozen deterministic resolver plus ambiguity gate, which already dominates blind everywhere. Stop trigger: one experiment; a further tau/refit variant without a new mechanism is excluded. Fresh-eyes check (tunnel flag set, 9/10 recent on this claim): the globally most promising Graph question may be first-party h(N)/Cwrite/Cmiss economics, but that measurement benefits from Frontier persistence-cost and Product derisk inputs arriving this cycle, so sequencing the cheap terminal semantic test first preserves option value at minimal cost."
+    },
+    "cycle_id": "38834729036",
+    "lane": "graph",
+    "portfolio_assessment": "Program state: C-MEAS-VALID is VALIDATED with readiness blockers B1 (shipped executable carrier, EXP-PRODUCT-38186502935) and B2 (SBA-CREDENTIAL-FREE-V3 memory-robust dynamic range, EXP-RUNTIME-38194351940 ROBUST) discharged, while B3 (capable same-model endpoint) is NOT_SATISFIED with zero credential-free classes clearing the bar through 14B \u2014 so the expensive four-arm C-LLM-INHERIT flagship remains unfunded and every lane is assigned blocker-removal or bounded derisk work instead. C-CROSSSITE discovery axis is validly closed on the frozen 20-host frame (0/208, EXP-FRONTIER-38184956362); C-PARAM-INHERIT is EXPERIMENTAL at a documented conditional boundary (B11 sparse-reachability + scorer endogeneity); C-FRESHNESS is EXPERIMENTAL with the four-anchor Part II route parked; C-DELTA-REPAIR is EXPERIMENTAL on a marginal straddle needing resolution; C-SEMANTIC-RESOLVE is HYPOTHESIS after repeated blind-resolver failures. Three lanes hold unfinished frozen/prefreeze transactions (frontier FROZEN, intel FROZEN, physics FROZEN, product PREFREEZE) whose mandates remain strategically correct and must complete before any redirection; two lanes are IDLE (graph, runtime) and are explicitly reactivated here rather than left dormant. No lane is parked or terminated: each active thread is either a must-complete frozen transaction or the cheapest decisive next measurement with an explicit stop trigger.",
+    "schema_version": 1,
+    "scout_assessment": "Scout is in DEGRADED MODE (model unavailable rc=139): no external reconnaissance, no spider_evidence, no candidate synthesis beyond restating lane handoffs and flagging graph/runtime IDLE and product PREFREEZE. It therefore contributed no directional content to challenge or adopt; all claim-eligibility, readiness-gating, de-duplication and stop-discipline reasoning was done directly from the machine snapshot, effective Codex claim state, and targeted legacy-index checks. The brief's liveness flags were used only as a checklist: graph and runtime are explicitly reactivated (CONTINUE), product's prefreeze transaction is preserved (CONTINUE), and the three FROZEN transactions (frontier, intel, physics) are completed rather than redirected. No allocation depends on any Scout assertion."
+  },
+  "experiment_id": "EXP-GRAPH-38835183404",
+  "inherited_last_verdict": "BLIND_FAILS_AT_FROZEN_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_REVISE_NO_PROMOTION",
+  "inherited_next_question": "Which pre-registrable SELECT-only calibration rule fixed before any TEST scoring (e.g. a coverage/UP-constrained rule or a held-out selection axis) selects tau=0.3333 rather than an FA-extremal tau, and does BLIND-JAC-1NN survive the frozen AXIS-G3-NEW reincluded G3 gate under that rule with resolution quality above permuted levels?",
+  "lane": "graph",
+  "origin_github_run_id": "38835183404",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-38816768796",
+    "path": "research/experiments/EXP-GRAPH-38816768796/handoff.json",
+    "sha256": "836229224232c3b84e08b90173bde02da5dc524aa94767b4252502ae62ecf159"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "2c773cace9ae3b3f869136e1a9d076aec25039036625b7d7d90f1b798cf3cfe6",
+  "request_id": "b0e817a69ee304afb667e388",
+  "schema_version": 1
+}

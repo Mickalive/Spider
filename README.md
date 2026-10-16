@@ -32,6 +32,24 @@ Six independent lanes run without synchronizing on one another:
 
 Each lane can advance while every other lane is slow, failed, auditing or idle.
 
+## Public product reuse demo (read-only, no paid inference)
+
+A narrow, executable slice now ties the existing Spider kernel to public
+GitHub Releases pages. It validates two training observations against the
+independent GitHub API, learns and persists a guarded route, reuses it for
+two different holdout repositories, and invalidates on verification failure.
+
+```bash
+PYTHONPATH=src python scripts/demo_public_reuse.py
+```
+
+The live public product smoke in the [existing CI](.github/workflows/ci.yml)
+checks real pages and official oracles; offline unit tests also prove that
+a fake/mismatched answer cannot become trusted memory. **This is not an
+autonomous browser-agent trial and demonstrates no monetary savings** versus
+GitHub's API. The more extensive Browser Use/Stagehand pilot remains in
+draft PR #42, and its paid credentials/adapters remain disabled.
+
 ## Product core
 
 The first stable surface is:

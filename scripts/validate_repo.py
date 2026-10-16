@@ -207,10 +207,10 @@ def main():
     require("if: always()" in pulse and "frozen transactions may still resume" in pulse, "frozen transactions must resume despite strategic control outage")
     require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
-    recovery_wf = text(".github/workflows/lane-recovery.yml")
-    require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
-    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "SPIDER_LANE_RECOVERY_DEFER_TO_SCHEDULE" in recovery_wf, "failed/cancelled lane recovery must defer to scheduled guarded Factory rather than amplify a provider outage")
-    require('cron: "*/30 * * * *"' in recovery_wf and "SPIDER_LANE_RECOVERY_PENDING" in recovery_wf and "SPIDER_LANE_RECOVERY_ALREADY_CONSIDERED" in recovery_wf, "Lane recovery must poll independently of GITHUB_TOKEN workflow_run delivery and avoid replaying failures already considered by a newer Factory")
+    # Obsolete lane-recovery action checked outcomes, but never dispatched
+    # recovery. Scheduled Factory owns every frozen continuation and circuit.
+    require(not (ROOT / ".github/workflows/lane-recovery.yml").exists(),
+            "no-op lane-recovery automation should remain retired")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("SPIDER_FACTORY_WAKE_AFTER_CODEX" not in codex_wf and "gh workflow run factory-pulse.yml" not in codex_wf, "Codex evidence-only updates must not wake a costly Director")
     require('"codex/**"' not in pulse and '"SPIDER_CODEX.md"' not in pulse, "Codex evidence-only pushes must not trigger costly Factory")
@@ -221,7 +221,7 @@ def main():
     require("group: spider-r2-factory-pulse" in pulse and "SPIDER_STALE_DIRECTION_SKIP" in pulse and "CURRENT_MAIN" in pulse, "Factory must serialize runs and refuse stale dispatch")
     factory_recovery = text(".github/workflows/factory-recovery.yml")
     require("SPIDER R2 Factory Pulse" in factory_recovery and "SPIDER_FACTORY_RECOVERY_RETRY" in factory_recovery and "SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN" in factory_recovery and "gh workflow run factory-pulse.yml" in factory_recovery, "Factory Pulse failures must have bounded external recovery")
-    require('cron: "*/30 * * * *"' in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory recovery must poll independently of GITHUB_TOKEN event chaining and inspect only the freshest pulse")
+    require("workflow_run:" in factory_recovery and "schedule:" not in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory failure recovery should react to events, while hourly Factory schedule is the independent safety net")
     require("CONSECUTIVE_FAILURES" in factory_recovery and "Historical failures" in factory_recovery, "Factory recovery circuit breaker must use consecutive failures, not lifetime failures on a long-lived SHA")
     require("GH_REPO:" in factory_recovery, "Factory recovery must provide explicit repository context to gh without checkout")
     require("conclusion == 'cancelled'" not in factory_recovery, "Factory recovery must not retry cancellation superseded by fresher direction")

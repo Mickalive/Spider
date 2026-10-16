@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38835192343",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently extracted the embedded v6 driver from prereg.md section-12 and recomputed the canonical digest: exact match to CANONICAL_RUNNER_V6_SHA256 (fe053ea6...245). Drove the frozen pure classifier + gate block via the driver's synthetic probe (non-outcome-bearing): all 5 class branches {PRICED-WIN, PRICED-DEFICIT, PRICED-MARGINAL, FUNCTIONAL-FAIL, COST-UNKNOWN} and all 4 aggregates {SUPPORTS, PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL, INCONCLUSIVE via UNKNOWN and via MARGINAL} produce; all_class_branches_reachable=true, all_aggregate_branches_reachable=true. Positive/support branch (SUPPORTS) and negative/falsifying branches (PERMANENT-DROP-BOUNDED via robust LOSS cell, FALSIFIES-FUNCTIONAL) are all arithmetically attainable; strict-inequality boundaries verified (R=1.00 is never a win; R=1.00/CI straddle -> MARGINAL; R=1.10 with lower>=1.00 -> LOSS). Gate-coverage at N=36 scale: every validity gate trips on its minimal crossing mutation (literal 4/36, cold 32/36, norepair 4/36, guard 28/36, contam 15/144, write-2, overbroad-0.09, equiv-false, drift +/-1, parity, warmup) and passes on legitimate 0.0/0.11 boundaries, including the genuine-repair-failure V-DRIFT-REUSE exemption (empty gates). Precedence is free of unreachable branches: the COST-UNKNOWN-before-LOSS ordering is fail-safe and does not block the DROP branch (pure-LOSS configurations still reach PERMANENT-DROP-BOUNDED, verified by aggregate probe). PARK-on-second-straddle is the product mapping of INCONCLUSIVE-via-MARGINAL, not a hidden state.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-12",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-15",
+        "independent-probe: v6-extraction canonical sha256 MATCH",
+        "independent-probe: extracted-driver --reachability-probe (all branches + gate coverage)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified on this machine without any timed reuse-vs-cold comparison. Python 3.12 stdlib-only: the extracted driver imported and ran its synthetic and liveness paths successfully. All 5 freeze artifacts exist and hash byte-identical to the parent freeze (kernel 3a6caf97, models 338aaf4d, registry 51fb440d, __init__ 3d173722; parent v2 runner 60855 bytes, d4871091) — V0 pin independently confirmed by size+sha256. All v2 attributes invoked by the v6 driver (superset of the claimed 30, 36 names checked) present by import probe (missing=[]); wilson_lower(36,36)=0.903578 >= 0.60 bar confirmed. Static arithmetic confirmed: SEED6=180486679 = 38835192343 % 2**32, disjoint from SEED5=162073685 and SEED4=3980394806; scored/NC/bootstrap/DESIGN offset families disjoint; N=36 parity 18/18 even; Bonferroni tail indices integral at B=10000 (lo 20, hi 9978); nominal products 36x17/18/19/8/9 = 612/648/684/288/324; target rotation TARGETS[(ci+j)%3] yields exactly 12x per target per class. No external bank, dataset, fixture, credential, model endpoint, browser or network is required: substrate is an in-process localhost ThreadingHTTPServer built in-runner from the pinned seed. No prerequisite is deferred to EXECUTE creation.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-3",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-15",
+        "independent-probe: sha256sum/size of all 5 freeze artifacts (match parent freeze)",
+        "independent-probe: import check of all 36 invoked v2 attributes (missing=[])"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (T-REPAIR-REUSE-BULK, BulkArm single replace) and the strong cold comparators (B-COLD L=3, B-COLD-MIN L=2 on the parent-identical v2.Arm path) share substrate, carrier, seed scheme, perturbation bank and target rotation, but differ in physical episode semantics: the reuse episode performs probe+guard+repair-signal+single registry write+verify+execute while cold performs discovery+L observation fetches+distill+upsert+execute — different resolve/fetch/verify/scaffold counts plus wall-clock. Difference is demonstrably expressible on this population: the parent packet produced 8 robust WIN cells (all L3 cells, Bonferroni CI uppers 0.85-0.97) on the byte-identical carrier; the four L2 cells straddled for resolution reasons (0.02-0.09ms median gaps vs ~0.06-0.07ms half-widths at n=12), not because arms are identical. No ceiling/floor: success 1.0 levels are functional gates (H1), never the priced deciders; the 12 deciders are continuous latency ratios with measured dynamic range (~180ns timer minimum-nonzero-delta vs 0.02-1.0ms parent gaps, 2-4 orders). Cost completeness: the shipped 4-field counter (http+retrieval+verification+repair, both arms) plus dual-boundary wall-clock (inclusive and NOARG, both arms) jointly cover every cost dimension either comparator uses; scaffold-unit ratio is preregistered informational-only and excluded from the classifier; the disclosed S-ARG operand asymmetry can only hurt reuse and is neutralized by requiring robust wins on BOTH boundaries. Previously-WIN cells are re-measured at common N (no selection asymmetry).",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-4",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38835192343/spec.json#baselines",
+        "research/experiments/EXP-RUNTIME-38816779349/handoff.json (parent 8 WIN / 4 MARGINAL evidence, sha-verified)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Independently ran the frozen driver's liveness path (unperturbed, discarded, no timed reuse-vs-cold comparison) under the exact V0/V1-bound implementation that will score the experiment: server_ready, distill_live (5 mechs), task_read_verified, contamination_instrument_live, out_of_support_probe_degenerate, bulk_bytes_equal_upsert, bulk_target_only_ok all true; NC-NO-PERTURBATION stale=false and NC-NOISE stale=false under the same carrier. Positive control PC-BASE-LIVENESS fires (resolve EXECUTABLE / fetch 200 / verify True on all five resources pre-perturbation, scored in every trial). Live must-fail B-LITERAL-REPLAY can fire: the synthetic repair-signal probe produced patched=true on all three live perturbation signatures (P1 redirect, P3 403-header, P2 schema), establishing the perturbation bites and the repair path is sensitive; parent observed literal success 0.0. NC-OVERBROAD-REPAIR instrument live (in-support probe verified 200-verified divergence detectable; parent 4/4). B-NO-REPAIR vacuity is explicitly disclosed in spec and prereg (pinned-v2 hardcodes success=False; gate retained for identifier stability only; live must-fail role held by B-LITERAL-REPLAY) — not tautological-as-load-bearing. The N=36 gate-coverage probe proves each gate trips on its minimal crossing input and passes legitimate 0.0 boundaries (explicit is-None handling verified), so no gate is impossible or always-red. Failure policy is INVALID-not-negative throughout; ground truth (perturbed=stale by construction) is independent of the guard verdict.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-15",
+        "independent-probe: extracted-driver --liveness-only (all booleans true, NCs silent)",
+        "independent-probe: repair_signal_probe patched=true for P1/P2/P3"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment T-REPAIR-REUSE-BULK produced non-null, executable behavior on this machine before any expensive arm: the extracted V1-bound driver constructed BulkArm end-to-end (single MechanismRegistry.replace of the 5-mechanism subset) with registry bytes byte-identical to the sequential-upsert path and full mechanism-id-set identity (bulk_bytes_equal_upsert=true, bulk_target_only_ok=true); the fresh path ran distill_parameterized -> resolve EXECUTABLE -> fetch 200 -> verify True end-to-end; the repair-signal path (local_repair, the treatment's repair core) produced patched mechanisms on each of the three live perturbation signatures; guard remained silent on unperturbed bodies. N=36 changes only trial count, never the treatment code path, so liveness transfers from the parent packet's 36/36 repair-success on the byte-identical carrier without a new mechanism. Residual sequencing risks are fail-safe by construction (V-DRIFT-COLD/V-DRIFT-REUSE/V-REG-EQUIV/V-RETAIN route any reuse-side anomaly to MEASUREMENT_INVALID, never a spurious priced verdict; per-trial retention re-check verifies perturbation survival post-warmup). No structural barrier to a non-null executable treatment exists; the experiment does contain a SPIDER treatment arm and treatment_liveness is assessed PASS, not NOT_APPLICABLE.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-4",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-15",
+        "independent-probe: extracted-driver --liveness-only (BulkArm byte-equality canary true)",
+        "independent-probe: repair_signal_probe patched=true P1/P2/P3"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All 5 listed freeze artifacts exist and were independently hashed: src/spider/__init__.py 3d173722, kernel.py 3a6caf97, models.py 338aaf4d, registry.py 51fb440d (byte-identical to the parent freeze), and research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (60855 bytes, d4871091). These exhaust the mutable import closure: the v6 driver imports stdlib only plus the V0-pinned v2 module; the v2 module imports stdlib only plus the frozen src/spider carrier package (spider.kernel/models/registry via sys.path insert of src/) — every mutable local file in that closure is listed. The v6 driver itself has no file identity until EXECUTE extracts it, so path-listing is impossible; it is instead bound stronger by content: embedded verbatim in frozen prereg.md section-12 between line-exact V6-DRIVER-BEGIN/END markers and pinned by CANONICAL_RUNNER_V6_SHA256, whose canonical digest (self-referential assignment replaced by placeholder) I independently recomputed from the prereg bytes and found EXACTLY MATCHING, with a V1 refuse-to-run runtime check. No external task bank, dataset or fixture is read (substrate, perturbation bank and fresh-silence probes are built in-runner from pinned SEED6-derived offsets; no remote endpoints exist). The parent handoff is sha-referenced continuity evidence (sha256 5a6dac34... verified against request.json), not a mutable interpretation dependency. List complete.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-10",
+        "research/experiments/EXP-RUNTIME-38835192343/prereg.md#section-12",
+        "independent-probe: sha256sum of all 5 freeze artifacts (match)",
+        "independent-probe: V1 canonical driver digest MATCH (fe053ea6...245)",
+        "independent-probe: v2 module import surface = stdlib + frozen src/spider carrier only"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "N1: Aggregate precedence evaluates COST-UNKNOWN (any missing ratio/CI) before PRICED-DEFICIT, so a configuration combining one UNKNOWN cell with a robust LOSS cell in another class maps to INCONCLUSIVE (park) rather than PERMANENT-DROP-BOUNDED. Verified fail-safe and the DROP branch remains reachable for pure-LOSS configurations (synthetic aggregate probe), but DIRECTOR should know a partial data-loss scenario parks rather than drops.",
+    "N2: The B-NO-REPAIR gate is vacuous by pinned-v2 construction (success hardcoded False, so the gate can never trip) — explicitly disclosed in spec and prereg, retained only for identifier stability; the live must-fail role is held by B-LITERAL-REPLAY, which the repair-signal probe confirms can fire on all three perturbation signatures. Not load-bearing for validity.",
+    "N3: True latency effects below ~3% remain straddles at N=36 by construction (1/sqrt(N) half-width projection, disclosed with a named non-shrinking-dispersion failure mode) and would PARK the thread per the mandate stop trigger. This is an honest bounded non-resolution path with a terminal product mapping, not an unsatisfiable design; the experiment still forces re-admit / permanent-drop / park-and-stop in every branch.",
+    "N4: At B_BONF=10000 the Bonferroni CI endpoints rest on ~21 bootstrap tail samples per side; Monte Carlo noise in the tail is disclosed in prereg section-7, frozen by pinned bootstrap seeds (deterministic for this packet), and recomputable by audit. Nonblocking."
+  ],
+  "rationale": "Independent pre-freeze review by a different model from the DESIGN producer (opencode/mimo-v2.6-flash-free vs DESIGN opencode/muse-spark-1.3-contributor-free; prior review attempt was a transient retry with no completed verdict). All six satisfiability/identifiability checks PASS under attack. I independently re-extracted the content-bound v6 driver from prereg.md (canonical sha256 exact match), verified the V0 substrate pin and all 5 freeze-artifact hashes against the parent freeze, name-checked all 36 invoked v2 attributes (missing=[]), re-derived the static arithmetic (SEED6, nominals 612/648/684/288/324, parity 18/18, Bonferroni tail indices 20/9978, Wilson(36/36)=0.9036, rotation 12x/target), and executed only non-outcome-bearing probes: the pure synthetic reachability/gate-coverage probe (all 5 class branches, all 4 aggregates, every gate trips at its minimal N=36 crossing and passes legitimate 0.0 boundaries) and the unperturbed liveness probe (server/distill/resolve/verify/NCs live; BulkArm byte-equality with the upsert path; repair-signal patches on all three perturbation signatures). No timed reuse-vs-cold comparison was run and no confirmatory outcome was inspected. The design is a pure larger-N resolution of the parent's frozen four L2 MARGINAL cells: both terminal branches (SUPPORTS completing the 12-cell bar; any robust LOSS -> permanent bounded drop) and both no-decision branches (straddle -> PARK per stop trigger; gate trip -> MEASUREMENT_INVALID) are reachable and decision-changing; treatment is live and executable before expensive arms; the freeze set plus the content-bound embedded driver exhaust the mutable interpretation surface. No blocking finding; the four nonblocking findings are disclosed fail-safe properties and power-honesty bounds that do not render the experiment incapable of answering its own question. Eligible for freeze.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38835192343/request.json",
+    "research/experiments/EXP-RUNTIME-38835192343/spec.json",
+    "research/experiments/EXP-RUNTIME-38835192343/prereg.md",
+    "research/experiments/EXP-RUNTIME-38816779349/handoff.json",
+    "research/experiments/EXP-RUNTIME-38816779349/spec.json",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py",
+    "src/spider/__init__.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "independent-probe: V1 canonical driver digest MATCH",
+    "independent-probe: extracted-driver --reachability-probe (all branches + gate coverage true)",
+    "independent-probe: extracted-driver --liveness-only (liveness + NCs + BulkArm byte-equality true)",
+    "independent-probe: sha256sum of 5 freeze artifacts + v2 pin + parent handoff sha",
+    "independent-probe: v2 attribute import check (36/36 present)"
+  ]
+}
