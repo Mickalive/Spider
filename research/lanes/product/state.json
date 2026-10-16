@@ -8,7 +8,7 @@
   "next_question": "Can the residual within-envelope budget-sparse over-accept boundary (B11: a trusted-origin, within-alphabet, within-length literal over-accept that the fixed seeded PROBE_BUDGET=256 probe space does not sample, still CERTIFIED and false-accepting at FA=3) be closed by a materially different mechanism -- a measured/verified probe-coverage certificate over the declaration's reachable over-accept space, an adaptive/adversarial probe-budget policy, or an independent runtime observation guard -- so that probe-space adequacy is DETECTED rather than syntactically assumed; and, independently, is the measured provenance trust root genuinely informative when the endogenous execution-grounded certificate-agreement score (spec V13) is replaced by an exogenous, non-certificate provenance signal -- or is within-alphabet budget-sparsity plus scorer endogeneity the irreducible limit that permanently caps the shipped kernel at the documented conditional boundary?",
   "promotion_ready": false,
   "consecutive_failures": 3,
-  "updated_at": "2026-10-12T22:39:51.618975+00:00",
+  "updated_at": "2026-10-16T15:00:01.948163+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "afd535847e31c0939734c09e898bf2b0fff40a85910be3c930ab5bfeef9a3e40",
   "same_failure_count": 3,
