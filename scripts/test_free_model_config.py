@@ -68,7 +68,7 @@ policy = permissions["permission"]
 assert policy["bash"] == "allow"
 assert policy["question"] == "deny"
 assert policy["doom_loop"] == "deny"
-assert policy["external_directory"]["*"] == "deny"
+assert policy["external_directory"] == "allow"
 assert policy["read"]["*.env"] == "deny"
 assert 'OPENCODE_CONFIG_CONTENT' in shell
 assert 'SPIDER_HEADLESS_PERMISSION_DENIED' in shell
