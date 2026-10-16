@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38816779349",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently extracted the embedded v5 driver from prereg.md section-12 (canonical sha256 recomputed = b6db1effc40bac0357d30dab546d9ef98bc3570b998998486c6409a6c96b10b1, V1 binding MATCH) and re-ran the pure-synthetic --reachability-probe: all 5 class branches {PRICED-WIN, PRICED-DEFICIT, PRICED-MARGINAL (at-1.00, straddle, boundary-win variants), FUNCTIONAL-FAIL, COST-UNKNOWN} and all 4 aggregates {SUPPORTS, PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL, INCONCLUSIVE (via UNKNOWN and via MARGINAL)} reproduced as claimed. Strict-inequality boundaries hold (R=1.00 -> MARGINAL never WIN; LOSS requires R>=1.00 with BFCI_lower>=1.00, demonstrated by the 1.10 case). Gate coverage re-verified at 0.0/0.10 boundaries: literal 0.0/norepair 0.0/contam 0.0 pass, 0.11/0.89/0.79/5-of-48/write-2/overbroad-0.09 trip exactly the expected gate, overbroad-0.11 passes, cold/reuse drift pins trip on one-unit deviation, genuine repair-failure exemption holds, parity/warmup violations trip. Arithmetic attainable: Bonferroni tail indices 20/9978 at B=10000 with alpha/12; contamination 5/48=0.1042>0.10; wilson 12/12=0.7575. Precedence is sound: class first-match FUNCTIONAL-FAIL -> COST-UNKNOWN -> PRICED-DEFICIT -> PRICED-WIN -> MARGINAL with disjoint/ordered conditions; aggregate mirrors it; the validity-gate MEASUREMENT_INVALID intercept is fail-safe by construction (V-DRIFT-COLD constrains only repair-independent cold nominals; V-DRIFT-REUSE only successful-repaired reuse trials; V-REG-EQUIV only content identity) and cannot swallow a repair effect. Positive (SUPPORTS) and negative/falsifying (PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL) branches plus both INCONCLUSIVE paths and MEASUREMENT_INVALID are all reachable.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-12",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-14",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15",
+        "/tmp/spider-388/dr/reach.json"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites verified present now, independently: Python 3.12.15 stdlib-only; all 5 freeze artifacts exist with hashes exactly matching spec/prereg claims (kernel.py 3a6caf97..., models.py 338aaf4d..., registry.py 51fb440d..., __init__.py 3d173722..., parent v2 runner d4871091... at 60855 bytes = V0 pin). The shipped MechanismRegistry.replace() API the BulkArm treatment requires exists (src/spider/registry.py:31). Pinned v2 module constants match prereg (functional bars 0.80/0.60/0.10/0.80, TRIALS_PER_CLASS=12, LEARN_IDS=[11,12,13], TASK_IDS=[14..18], IN_SUPPORT_PROBE_ID=14, RESOURCES/CLASSES/TARGETS, functional_ok semantics). v2 import closure is stdlib (http.server/urllib/threading/tempfile/...) plus spider.{kernel,models,registry} only. DESIGN liveness independently re-executed from the extracted frozen driver: server_ready, distill_live, task_read_verified (EXECUTABLE/200/True), contamination instrument live, BulkArm-vs-upsert byte-equality, target-only n=1 registry correct, NC-NO-PERTURBATION/NC-NOISE silent, timer 1ns, cold-episode phase keys present with finite closure. No credential, LLM endpoint, browser, external network, dataset or task bank is needed (substrate and perturbation bank are built in-runner from pinned SEED5=162073685); B3 model economics is explicitly NOT_APPLICABLE by mandate authorization (counters-only pricing, blocker recorded). Driver V1 binding verified by recomputed canonical hash MATCH. No prerequisite deferred to EXECUTE.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-3",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#measurement_validity",
+        "src/spider/registry.py",
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py",
+        "/tmp/spider-388/dr/live.json"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (T-REPAIR-REUSE-BULK, BulkArm single-replace) and the strong baselines (B-COLD L=3 / B-COLD-MIN L=2, parent-identical v2.Arm path) share substrate, carrier, seeds, perturbation bank and target rotation, and differ in physical work: cold performs discovery + L observe fetches + distill + 1 upsert; reuse performs bulk registry build + fused probe + guard + repair + single upsert + post-verify, skipping discovery/observe/distill. Per-episode shipped vectors differ by arm protocol (reuse 17 vs cold 18/19; http 6/5/6 vs 8/9) and are recorded per trial via counters plus oplogs plus phase timings. Cost-metric completeness holds: the shipped 4-field counter (http+retrieval+verification+repair) and dual-boundary latency are defined identically and symmetrically on both arms; no cost dimension used by one comparator is omitted from the other (scaffold units are informational on both, excluded from the classifier). No ceiling/floor degeneracy: the 1.00 success levels are functional gates, never deciders; the 12 gated deciders are continuous latency ratios with demonstrated live dynamic range on this exact substrate (parent pre-tax ratios 1.0235-1.2463 with CI95 above 1.00; equalization diagnostic flipped below 1.00), so both WIN and LOSS regions are reachable and the arms are not guaranteed identical. V-DRIFT-COLD pins only repair-independent cold nominals (216/228 sums, 96/108 http) so the pin cannot mask a repair effect; the empirical burden rests on the CI-gated latency cells with the disclosed S-ARG operand asymmetry neutralized by requiring wins on BOTH boundaries.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-4",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-8",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#baselines",
+        "research/experiments/EXP-RUNTIME-38340133174/spec.json#baselines.B-COLD"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Distinct non-tautological controls per failure mode, all live under the same scoring implementation. PC-BASE-LIVENESS fires: independently reproduced via the driver's --liveness-only mode (task_read_verified=true; distill/resolve-EXECUTABLE/fetch-200/verify-True on the unperturbed path). Null controls remain null under that same implementation: NC-NO-PERTURBATION stale=false and NC-NOISE stale=false reproduced exactly. The live must-fail role is held by B-LITERAL-REPLAY (run in-trial post-perturbation on the same bank; gate-coverage probe proves a 0.11 literal success trips 'perturbation-does-not-bite' -> MEASUREMENT_INVALID, 0.0 passes). NC-OVERBROAD-REPAIR sensitivity established: the in-support contamination instrument is live (probe 14 verified), parent fired 4/4, and the gate-coverage probe proves 0.09 trips 'overbroad-instrument-insensitive' while 0.11 passes. B-NO-REPAIR vacuity is honestly disclosed (success hardcoded False in pinned v2; its gate can never trip; only the 36/36 guard-fired diagnostic is informative) and is never load-bearing. V-REG-EQUIV content pin independently verified live (BulkArm registry bytes byte-identical to the sequential-upsert path). Ground truth is independent of the guard verdict (perturbed=stale by runner construction; fresh=silent by pre-perturbation read), so no control is tautological; failure policy is INVALID-not-negative throughout.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-6",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#positive_control",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#null_control",
+        "research/experiments/EXP-RUNTIME-38340133174/audit.json#required_fixes.RF-9",
+        "/tmp/spider-388/dr/live.json",
+        "/tmp/spider-388/dr/reach.json"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The frozen treatment (BulkArm single MechanismRegistry.replace() materialization plus signal-driven localized repair on the shipped carrier) produces non-null executable behavior before any expensive arm, verified independently at DESIGN without any timed reuse-vs-cold comparison: the driver's --liveness-only mode re-exercised the fresh path end-to-end (server/distill/resolve-EXECUTABLE/fetch-200/verify-True), constructed BulkArm via the shipped replace() API with byte-identical registry content to the v2 upsert path (bulk_bytes_equal_upsert=true), and confirmed target-only breadth n=1 holds exactly the target mechanism. The pinned-module synthetic repair-signal probe (re-run via --reachability-probe) returns patched=True on all three perturbation classes P1/P2/P3. Carrier hashes match the parent freeze byte-for-byte. Residual execution risks are fail-safe, not structural: V-DRIFT-REUSE pins successful-repaired reuse trials to the 17-unit nominal, V-REG-EQUIV pins registry content per episode, V-RETAIN verifies perturbation survival per trial, and any reuse-side anomaly routes to MEASUREMENT_INVALID rather than a spurious priced verdict. No structural barrier to an EXECUTABLE, non-null treatment episode exists. (Lane=runtime on C-DELTA-REPAIR, not one of the four Product claim ids, but a SPIDER mechanism treatment arm is present so treatment_liveness is assessed and passed on the merits.)",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-4",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-15",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#baselines.T-REPAIR-REUSE-BULK",
+        "/tmp/spider-388/dr/live.json",
+        "/tmp/spider-388/dr/reach.json"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local dependency whose bytes could change the interpretation is bound. The 5 listed freeze artifacts all exist and hash-verified: src/spider/__init__.py (3d173722...), kernel.py (3a6caf97...), models.py (338aaf4d...), registry.py (51fb440d...) - byte-identical to the parent freeze, closing RF-8 - and the runtime-imported parent v2 module (60855 bytes, d4871091...) which the driver V0-checks with refuse-to-run semantics. The driver's full import closure is stdlib plus exactly these pinned files; no other mutable import exists (verified by import inspection of the v2 module and the embedded driver). The v5 driver, which has no file identity until EXECUTE extracts it, is bound stronger than a path list: embedded verbatim in prereg.md section-12 between the standalone V5-DRIVER-BEGIN/END marker lines and pinned by CANONICAL-RUNNER-V5-SHA256; the reviewer independently re-extracted it and recomputed the canonical digest with the self-referential placeholder normalization - exact MATCH (b6db1eff...), with a V1 runtime refuse-to-run extraction check in the frozen driver. No external task bank, dataset, fixture or remote endpoint is read: the substrate, perturbation bank, fresh-silence probes and bootstrap are all built in-runner from pinned SEED5=162073685 with preregistered disjoint seed offsets. Request/spec/prereg are bound by freeze.json at freeze time (V1). The list is complete; no unbound interpretation-relevant mutable remains.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-10",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-12",
+        "research/experiments/EXP-RUNTIME-38816779349/prereg.md#section-3",
+        "research/experiments/EXP-RUNTIME-38816779349/spec.json#freeze_artifacts",
+        "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "NB1: The per-trial reuse warmup calls v2.run_repair_reuse (legacy 5-upsert materialization) rather than the BulkArm path, so the warmup slightly warms the upsert path instead of the bulk path. It is untimed, parity-symmetric across arms, and V-RETAIN independently re-verifies perturbation survival post-warmup, so this cannot decide the gated comparison.",
+    "NB2: The B-NO-REPAIR success gate is permanently vacuous under the pinned v2 module (success hardcoded False). This is honestly disclosed per parent RF-9; the gate is retained only for identifier stability and the live must-fail role correctly sits with B-LITERAL-REPLAY.",
+    "NB3: Bonferroni bootstrap tails at B_BONF=10000 hold ~21 samples per 0.0021 tail, which is coarse but deterministic under the frozen bootstrap seeds and disclosed in prereg section-7; AUDIT can recompute from raw trials.",
+    "NB4: The --mechanics-only and --liveness-only preflight modes do not invoke the V1 extraction-hash check (only the full confirmatory path does, immediately before the scored trials). Preflights are non-scoring; the confirmatory run refuses on V1 mismatch as required.",
+    "NB5: Breadth n=2 composition is fixed deterministic (target + first sorted other) rather than swept; this is disclosed in prereg section-7 and affects only ungated diagnostics (H4)."
+  ],
+  "rationale": "Independent design review (reviewer opencode/mimo-v2.6-flash-free, distinct from DESIGN producer opencode/muse-spark-1.3-contributor-free) attacked all six satisfiability/identifiability gates against the frozen spec/prereg/request rather than trusting spec.freeze_eligibility. All declared PASSes were reproduced by cheap non-outcome-bearing probes: the embedded driver was re-extracted and its V1 canonical binding recomputed (exact MATCH), the pure-synthetic reachability probe was re-run confirming every class branch, every aggregate (both INCONCLUSIVE paths), the strict-inequality boundaries, and every 0.0/0.10 gate boundary; the liveness smoke was re-run confirming the substrate, carrier, BulkArm byte-equality canary, target-only breadth, repair-signal patches on all three classes, and null-control silence; all 5 freeze artifacts hash-verified; the parent handoff sha, parent audit RF-1..RF-10, and Codex claim states (C-DELTA-REPAIR EXPERIMENTAL) were confirmed to exist as cited. The decision rule is total with both a positive (SUPPORTS) and negative (PERMANENT-DROP-BOUNDED, FALSIFIES-FUNCTIONAL) reachable branch under precedence that cannot be swallowed by validity gates (which are fail-safe INVALID-not-negative); treatment and baselines are physically distinguishable on this population with complete symmetric cost accounting and live latency dynamic range; controls are live, non-tautological, and honestly scoped (B-NO-REPAIR vacuity disclosed); the treatment is executable and non-null before expensive arms; and the freeze set plus content-bound driver exhaust the mutable dependency closure. No confirmatory measurement was run and no outcome-bearing latency comparison was inspected. The experiment is capable of answering its own frozen question; no blocking findings.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38816779349/request.json",
+    "research/experiments/EXP-RUNTIME-38816779349/spec.json",
+    "research/experiments/EXP-RUNTIME-38816779349/prereg.md",
+    "/tmp/spider-388/dr/reach.json",
+    "/tmp/spider-388/dr/live.json",
+    "research/experiments/EXP-RUNTIME-38340133174/handoff.json",
+    "research/experiments/EXP-RUNTIME-38340133174/audit.json",
+    "codex/claim_state.json",
+    "src/spider/registry.py",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py"
+  ]
+}
