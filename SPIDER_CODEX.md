@@ -26,7 +26,7 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **469**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **470**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
@@ -500,6 +500,7 @@ Finalized subsequent packets: **469**. Coverage gaps: **0**. Quarantined packets
 | EXP-GRAPH-38666634300 | graph | PASS | BLIND_FAILS_RETAIN_HYPOTHESIS_NO_PROMOTION_AUDIT_PASS | C-SEMANTIC-RESOLVE | `4b3da6f9b013` |
 | EXP-GRAPH-38816768796 | graph | REVISE | BLIND_FAILS_AT_FROZEN_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_REVISE_NO_PROMOTION | C-SEMANTIC-RESOLVE | `136687c0c227` |
 | EXP-RUNTIME-38816779349 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION | C-DELTA-REPAIR | `89877a157a60` |
+| EXP-RUNTIME-38835192343 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION-PARK | C-DELTA-REPAIR | `77a722867a0d` |
 
 ## Effective claim state
 
@@ -508,7 +509,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 | Claim | Status | Source |
 |---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38184956362 |
-| C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38816779349 |
+| C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38835192343 |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38194362040 |
 | C-MEAS-VALID | VALIDATED | EXP-RUNTIME-38194351940 |
@@ -525,7 +526,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38184956362 | frontier |
-| C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38816779349 | runtime |
+| C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38835192343 | runtime |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38194362040 | intel |
 | C-MEAS-VALID | VALIDATED | EXP-RUNTIME-38194351940 | runtime |

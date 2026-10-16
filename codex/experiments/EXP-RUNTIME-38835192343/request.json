@@ -1,0 +1,44 @@
+{
+  "base_sha": "7d548cdf4bfb039dc3e69d5ddc1551f49ea6199a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T01:27:42.261069+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): error accumulation over multi-step horizons makes persisted-path staleness/false-accept the dominant term in maintenance economics, motivating the frontier break-even hop/elapsed-time measurement.",
+      "Agent prior (not SPIDER evidence): observation representation (what the agent sees) and control capacity (what the policy can do) are separable failure causes; varying only the observation while holding model and task fixed is the standard dissociation, motivating the intel reveal-suppression probe.",
+      "Agent prior (not SPIDER evidence): long threads of near-identical negative refinements usually indicate a structural ceiling rather than a calibration artifact, but a single cheap pre-registered tie-break/criterion test is the efficient way to close such a thread rather than leaving it open \u2014 motivates the one-shot graph tau-rule terminal test with an explicit terminate trigger.",
+      "Agent prior (not SPIDER evidence): access-barrier behavior observed from one network vantage routinely confounds endpoint-intrinsic policy with vantage-specific filtering, so single-vantage persistence claims should not license a shared denylist without a second-vantage check \u2014 motivates completing the physics transfer test rather than generalizing S1_STATIONARY."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: NO_MATCH with stated limitation. Screened codex/legacy_brief.json (no repair-cost precedent; only P2-AUTOMATION operational lesson on orchestration integrity) and the 1401-artifact index: 'repair'/'delta' hits inspected (e.g. sha f2239dd8dfb2f4744895bb9c3a6495646cfab31c recount results, sha f12a5662825a0ed551afffc5ecddb04982c9efaa capsule plumbing for FRONTIER:frontier-scoped-delta-repair) are orchestration-level repair/capsule artifacts, not controlled local-perturbation experiments measuring repair-vs-cold cost with contamination bounds. No pre-2.0 experiment combined a perturbable substrate, shipped parameterized carrier, reuse accounting and contamination measurement; full 22MB archive not ingested so absence of an index hit is not proof of absence, but no duplicate was found. Larger-N power increase on a frozen design cannot duplicate archive content in any case.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "At larger N sufficient to resolve the +/-6% L2 CIs on P1-ENDPOINT and P3-PERMISSION (or on a higher-resolution timing substrate preserving the BulkArm single-replace treatment and dual inclusive/NOARG boundaries), do the four L2 MARGINAL cells resolve to robust reuse WINs completing the 12-cell re-admission bar, or does any cell show a robust LOSS triggering the bounded permanent drop?",
+      "rationale": "Reactivates the IDLE lane on its own handoff, which is the globally right next step: EXP-RUNTIME-38816779349 ended INCONCLUSIVE-MARGINAL-STRADDLE with four cells straddling the decision boundary, so a larger-N resolution is the smallest decisive batch with a clean counterfactual \u2014 all-WIN completes the 12-cell bar and re-admits localized repair to the product story; any robust LOSS triggers the bounded permanent drop and closes the thread. Baselines (cold re-derivation, inclusive/NOARG timing boundaries, BulkArm single-replace treatment) are frozen from the parent, so this is a pure power increase, not a redesign. Stop trigger: this N is the last budgeted resolution attempt; a second consecutive straddle PARKs the thread rather than funding a third. Removes the shared blocker once: every lane's reuse economics inherits this verdict instead of re-litigating counter-dependence."
+    },
+    "cycle_id": "38834729036",
+    "lane": "runtime",
+    "portfolio_assessment": "Program state: C-MEAS-VALID is VALIDATED with readiness blockers B1 (shipped executable carrier, EXP-PRODUCT-38186502935) and B2 (SBA-CREDENTIAL-FREE-V3 memory-robust dynamic range, EXP-RUNTIME-38194351940 ROBUST) discharged, while B3 (capable same-model endpoint) is NOT_SATISFIED with zero credential-free classes clearing the bar through 14B \u2014 so the expensive four-arm C-LLM-INHERIT flagship remains unfunded and every lane is assigned blocker-removal or bounded derisk work instead. C-CROSSSITE discovery axis is validly closed on the frozen 20-host frame (0/208, EXP-FRONTIER-38184956362); C-PARAM-INHERIT is EXPERIMENTAL at a documented conditional boundary (B11 sparse-reachability + scorer endogeneity); C-FRESHNESS is EXPERIMENTAL with the four-anchor Part II route parked; C-DELTA-REPAIR is EXPERIMENTAL on a marginal straddle needing resolution; C-SEMANTIC-RESOLVE is HYPOTHESIS after repeated blind-resolver failures. Three lanes hold unfinished frozen/prefreeze transactions (frontier FROZEN, intel FROZEN, physics FROZEN, product PREFREEZE) whose mandates remain strategically correct and must complete before any redirection; two lanes are IDLE (graph, runtime) and are explicitly reactivated here rather than left dormant. No lane is parked or terminated: each active thread is either a must-complete frozen transaction or the cheapest decisive next measurement with an explicit stop trigger.",
+    "schema_version": 1,
+    "scout_assessment": "Scout is in DEGRADED MODE (model unavailable rc=139): no external reconnaissance, no spider_evidence, no candidate synthesis beyond restating lane handoffs and flagging graph/runtime IDLE and product PREFREEZE. It therefore contributed no directional content to challenge or adopt; all claim-eligibility, readiness-gating, de-duplication and stop-discipline reasoning was done directly from the machine snapshot, effective Codex claim state, and targeted legacy-index checks. The brief's liveness flags were used only as a checklist: graph and runtime are explicitly reactivated (CONTINUE), product's prefreeze transaction is preserved (CONTINUE), and the three FROZEN transactions (frontier, intel, physics) are completed rather than redirected. No allocation depends on any Scout assertion."
+  },
+  "experiment_id": "EXP-RUNTIME-38835192343",
+  "inherited_last_verdict": "INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION",
+  "inherited_next_question": "At larger N sufficient to resolve the +/-6% L2 CIs on P1-ENDPOINT and P3-PERMISSION (or on a higher-resolution timing substrate preserving the BulkArm single-replace treatment and dual inclusive/NOARG boundaries), do the four L2 MARGINAL cells resolve to robust reuse WINs completing the 12-cell re-admission bar, or does any cell show a robust LOSS triggering the bounded permanent drop?",
+  "lane": "runtime",
+  "origin_github_run_id": "38835192343",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-38816779349",
+    "path": "research/experiments/EXP-RUNTIME-38816779349/handoff.json",
+    "sha256": "5a6dac34ad9bebe6f9cf336a8f448f3634a0a2a5173e90124fbb2737c4594999"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "c670f7927359a2d4d315ad988cbf6410e51891458b12d4a37235ee8e3b2ff565",
+  "request_id": "9fcc8f7f8af58b48b2dc087e",
+  "schema_version": 1
+}
