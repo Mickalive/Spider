@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Content-identity repair (the primary fix from parent audit EXP-INTEL-38175568787) is confirmed: both candidates' served-body sha256, byte counts, and GGUF header fingerprints match the frozen pins at EXECUTE time. The metadata-vs-body mismatch that caused the parent MEASUREMENT_INVALID did not recur.",
+    "Preflight controls all PASS: PC-ORACLE-EPISODE 5/5 (task_success=1.0, parseable_step1=1.0), NC-NO-MODEL-ACTION parseable=0.0/success=0.0, B-RANDOM-ACTION parseable=1.0/success=0.2 (<0.6). Freeze artifact hashes match. Required stack imports succeed. The scorer and mechanical verification are live.",
+    "Both candidate cells are COMPLETE (load_status=LOADED, PC-JSON-CONSTRAINED-DECODING 10/10, 5/5 episodes recorded). No candidate was UNMEASURED_LOAD_FAILED, EXCLUDED, or PARTIAL. The FALSIFIES branch is not emptied by operational failure.",
+    "Neither candidate CLEARS the frozen bar: M-14B-QWEN task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0; M-8B-LLAMA task_success_rate=0.0 (0/5), parseable_action_rate_step1=1.0. Both fall below the task_success_rate >= 0.6 threshold.",
+    "Endpoint census correctly records 0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations), 1 UNREACHABLE (HuggingFace Inference). No credential environment variables were present. Census is non-gating and observational only.",
+    "External comparator table enumerates 3 entries (QCR, Agentic Compilation, ColorBrowserAgent) with pinned primary sources, all labelled CANDIDATE_NOT_EVIDENCE. No external vendor numbers are used as SPIDER evidence.",
+    "The frozen decision rule was correctly applied: rule 1 (preflight) PASS, rule 2 (census) recorded, rule 3 (ladder) both candidates COMPLETE and FAIL bar, rule 4 → OUTCOME=FALSIFIES, B3_STATUS=NOT_SATISFIED. The decision_trace in raw/decision.json matches the frozen precedence order."
+  ],
+  "baseline_findings": [
+    "B-CARRIED-3B-8B-QWEN-GOAL-SCHEMA: Carried reference baseline (NOT re-run). Parent's M-7B-QWEN 0/5 and M-3B-QWEN 0/5 with parseable_action_rate_step1=1.0 certifies protocol hardness and decoding liveness. Used correctly as descriptive anchor only, not as a within-run comparator.",
+    "B-POLLINATIONS-CARRIED: Carried reference baseline (NOT re-run). Grandparent Pollinations gpt-oss-20b receipt shows operational caps (reasoning-only, ~197 token cap, intermittent 402, no pinning/SLA). Census correctly classifies as CREDENTIAL_FREE_OPERATIONALLY_CAPPED.",
+    "B-RANDOM-ACTION: Executed against the served page (fixing parent's about:blank defect). Observed parseable_action_rate_step1=1.0, task_success_rate=0.2 (1/5). Analytic P(task_success_rate>=3/5)≈1.15e-3 confirms bar is effectively unreachable by chance. PASS.",
+    "PC-ORACLE-EPISODE: 5/5 task_success through real frozen run_episode scorer against served page. Proves the completion path (click #reveal-btn → answer TARGET-42) is registerable by the scorer. PASS.",
+    "NC-NO-MODEL-ACTION: 5/5 episodes with fixed non-JSON content ('I will click the button'). Observed parseable=0.0, success=0.0. Verification logic correctly rejects non-JSON. PASS.",
+    "PC-JSON-CONSTRAINED-DECODING: 10/10 per candidate under frozen GBNF grammar. Constrained decoding is live for both model families (qwen and llama-3 chat formats). PASS."
+  ],
+  "recomputed_metrics": {
+    "M-14B-QWEN": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "mean_inference_latency_s": {"value": 12.535, "n_calls": 35, "unit": "s", "match": true},
+      "mean_completion_tokens": {"value": 15.0, "n_calls": 35, "unit": "tokens", "match": true},
+      "served_body_digest_verified": {"value": 1, "unit": "bool", "match": true},
+      "gguf_metadata_fingerprint_matched": {"value": 1, "unit": "bool", "match": true},
+      "cell_state": "COMPLETE",
+      "clears": false
+    },
+    "M-8B-LLAMA": {
+      "positive_control_pass_rate": {"value": 1.0, "k": 10, "n": 10, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "answer_action_emission_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "mean_inference_latency_s": {"value": 5.726, "n_calls": 35, "unit": "s", "match": true},
+      "mean_completion_tokens": {"value": 10.57, "n_calls": 35, "unit": "tokens", "match": true},
+      "served_body_digest_verified": {"value": 1, "unit": "bool", "match": true},
+      "gguf_metadata_fingerprint_matched": {"value": 1, "unit": "bool", "match": true},
+      "cell_state": "COMPLETE",
+      "clears": false
+    },
+    "PC-ORACLE-EPISODE": {
+      "task_success_rate": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true}
+    },
+    "NC-NO-MODEL-ACTION": {
+      "task_success_rate": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 0.0, "k": 0, "n": 5, "unit": "fraction", "match": true}
+    },
+    "B-RANDOM-ACTION": {
+      "task_success_rate": {"value": 0.2, "k": 1, "n": 5, "unit": "fraction", "match": true},
+      "parseable_action_rate_step1": {"value": 1.0, "k": 5, "n": 5, "unit": "fraction", "match": true}
+    },
+    "b3_status": "NOT_SATISFIED",
+    "providers_credential_required": {"value": 10, "unit": "providers", "match": true},
+    "providers_credential_free_operationally_capped": {"value": 1, "unit": "providers", "match": true},
+    "providers_provisionable_credentialed": {"value": 0, "unit": "providers", "match": true},
+    "providers_unreachable": {"value": 1, "unit": "providers", "match": true},
+    "candidates_measured_complete": {"value": 2, "n": 2, "unit": "cells", "match": true},
+    "served_body_digest_verified": {"value": 2, "n": 2, "unit": "candidates", "match": true},
+    "gguf_metadata_fingerprint_matched": {"value": 2, "n": 2, "unit": "candidates", "match": true},
+    "comparators_enumerated": {"value": 3, "unit": "entries", "primary_sources_pinned": 3, "evidence_label": "CANDIDATE_NOT_EVIDENCE", "match": true}
+  },
+  "claim_ceiling": "Bounded FALSIFIES: Neither M-14B-QWEN (Qwen2.5-14B-Instruct Q4_K_M) nor M-8B-LLAMA (Meta-Llama-3.1-8B-Instruct Q4_K_M) clears the frozen minimal multi-step Web-agent bar (task_success_rate >= 0.6 AND parseable_action_rate_step1 >= 0.6 over 5 episodes) under the byte-verified credential-free local protocol. The endpoint census finds no currently-provisionable credential-free same-protocol endpoint (local or hosted). Readiness condition (3) / blocker B3 is NOT_SATISFIED. This is a capability bound on the tested Q4_K_M classes only; it does not globally reject C-LLM-INHERIT, does not close hosted frontier classes (blocked, not tested), and says nothing about other quantisations, tasks, or domains.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38194362040/result.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/preflight.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/controls.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/provisioning_evidence.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/endpoint_census.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/external_comparators.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/decision.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/materialized_configs.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38194362040/provenance.json",
+    "research/experiments/EXP-INTEL-38194362040/freeze.json"
+  ],
+  "unresolved": [
+    "Whether a hosted frontier class (credential-gated, not tested) would clear the frozen minimal bar; no hosted model was invoked and no API credential exists in this factory.",
+    "Whether the failure mode (reveal click then hidden-button re-click loop, zero answer actions) reflects intrinsic multi-step control capacity or the frozen simplified observation representation (ELEMENTS still lists the hidden reveal button after reveal). This packet cannot separate those; a representation-level follow-up (accessibility tree / hidden-element suppression) is a different factor.",
+    "Whether the tested classes could clear the bar under any prompt or decoding variation; the frozen single-factor protocol uses one fixed P-TREAT-GOAL-SCHEMA prompt and temperature=0.0, so prompt/decoding sensitivity is not explored here.",
+    "Whether the HF Xet metadata/body mismatch (xetHash/etag vs lfs.oid) documented by the parent experiment affects other lanes' pinned GGUFs; not surveyed.",
+    "Whether other quantisations, model families, or tasks would change the bounded negative; out of the frozen scope.",
+    "M-8B-LLAMA step-0 selector inconsistency: all 5 episodes emit `selector: \"reveal-btn\"` (without '#') at step 0, yet `click_ok=true` and the click succeeds. The frozen parse_action accepts this as valid JSON matching the schema, and the Playwright click on `#reveal-btn` succeeds. This does not affect the outcome (task_success remains 0.0) but is noted as a minor schema-adherence variance."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38194351940",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision branches are inhabited by the frozen classify() function over synthetic worlds: ROBUST (gates_pass=True, robust_certified=True, any_retention_certified=True), PARTIAL (gates_pass=True, robust_certified=False, any_retention_certified=True), COLLAPSED (gates_pass=True, robust_certified=False, any_retention_certified=False), MEASUREMENT_INVALID (gates_pass=False). Thresholds are arithmetically attainable: predicted retention rates 0.875/0.900 lie in [CORRECTNESS_FLOOR=0.80, COMPARATOR_MAX=0.95) with margins 0.125/0.100 >= MARGIN_FLOOR=0.05. NC-MECHANISM-OFF drives within-session comparator to 1.0 >= COMPARATOR_MAX, making COLLAPSED reachable. Precedence is clean: MEASUREMENT_INVALID (any V1-V8 failure) evaluated first, then ROBUST (all 12 retention certifications), then PARTIAL (>=1 certifies), then COLLAPSED (none certify). No branch shadows another.",
+      "evidence_refs": [
+        "spec.json.decision_rule.branch_reachability",
+        "spec.json.design_satisfiability_probe.output.checks.all_branches_inhabited",
+        "spec.json.design_satisfiability_probe.output.branch_reachability",
+        "prereg.md section 7 (Decision rule)",
+        "prereg.md section 9 (probe output branch_reachability)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "All hard prerequisites are available now and verified at DESIGN: Python 3.12.15 + stdlib only (http.server.ThreadingHTTPServer, urllib.request, hashlib, json, threading); no external credentials, datasets, endpoints, browsers, or LLM endpoints required. The complete EXECUTE harness is embedded verbatim in prereg.md (BEGIN/END SBA-MECH-HARNESS) and in spec.design_satisfiability_probe.source, frozen by source_sha256=acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9. Probe mode verified stdlib HTTP transport answers on 127.0.0.1, all 15 protocol invariants hold, treatment liveness 1.0 at every band, PC 1.0, all seven arms execute end-to-end, mechanism non-degeneracy over 100 instances (a!=0, distinct x, exact recovery, zero query collisions), token uniqueness 0/160 collisions. No prerequisite is deferred to EXECUTE.",
+      "evidence_refs": [
+        "spec.json.substrate.transport",
+        "spec.json.substrate.credentials_required",
+        "spec.json.substrate.external_dependencies",
+        "spec.json.design_satisfiability_probe.output.checks.transport_stdlib_http",
+        "spec.json.design_satisfiability_probe.output.checks.all_protocol_invariants_pass",
+        "spec.json.design_satisfiability_probe.output.checks.treatment_live_all_bands",
+        "spec.json.design_satisfiability_probe.output.checks.pc_exact_replay_all_bands",
+        "spec.json.design_satisfiability_probe.output.checks.mechanism_nondegenerate",
+        "spec.json.design_satisfiability_probe.output.checks.token_uniqueness_ok",
+        "prereg.md section 9 (probe results)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment (T-MECHANISM-INHERIT) and strong baselines differ on the task population: T=1.0 at scored bands vs all three retention comparators at (K-1)/K = 0.875 (F1) / 0.900 (F2). Both families' retention rates lie strictly inside [0.80, 0.95) with margins 0.125/0.100 >= 0.05. Counter distinctness: T vs B-WITHIN-SESSION-RECEIPT = 2/4 dims, vs B-RETRIEVAL-REPLAY = 3/4 dims, vs B-MEMORYLESS = 2/4 dims (all >= MIN_DISTINCT_DIMS=2). Positive control PC-EXACT-REPLAY=1.0 and identity control B-CROSS-SESSION-COMPILE=1.0 (success- and counter-identical to T, disclosed). No ceiling/floor: treatment at ceiling (1.0) while retention comparators are separated by construction (scored session contains no labelled (x,M(x)) pair). Cost metrics include all four counter dimensions used by comparators (http_calls, retrieval_calls, verification_calls, repair_calls).",
+      "evidence_refs": [
+        "spec.json.arms.T-MECHANISM-INHERIT.predicted_success_rate_at_band",
+        "spec.json.arms.B-WITHIN-SESSION-RECEIPT.predicted_success_rate_at_band",
+        "spec.json.arms.B-RETRIEVAL-REPLAY.predicted_success_rate_at_band",
+        "spec.json.arms.B-MEMORYLESS.predicted_success_rate_at_band",
+        "spec.json.counters.probe_status.T_vs_within_session_receipt_distinct_dims",
+        "spec.json.retention_lattice_arithmetic.closed_form",
+        "spec.json.retention_lattice_arithmetic.margin",
+        "prereg.md section 5 (Arms, baselines and controls)",
+        "prereg.md section 6 (Pre-freeze arithmetic)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "All nine declared controls are probe-verified away from their boundaries: NC-MECHANISM-OFF (exposes chain answer) drives within-session comparator to 1.0 (8/8 F1 successes), destroying the certificate; NC-CEILING-BAND (novelty 0.0) yields all seven arms 1.0; NC-EXAMPLES-ISOLATION confirms no calibration example/mechanism/answer appears in any scored session body (4/4 assertions true); NC-REPEAT-INPUT confirms wrong answer 400 no leak, correct answer single-use 409; NC-MECHANISM-NONDEGENERATE over 100 instances: a_zero=0, duplicate_x=0, solve_fail=0, query_collision=0, min_query_gap=399759921; NC-IDENTITY-DISCLOSURE confirms B-CROSS-SESSION-COMPILE == T at all bands; NC-TOKEN-UNIQUENESS: 0 collisions over 160 sampled tokens; NC-NO-LEAK (F-LEAK guard): all 15 protocol invariants clean; NC-RETENTION-LADDER: empty closing_retention_scopes at all 4 scored cells. Each control fires or holds as declared, confirming the measurement substrate can detect both the positive signal and its destruction.",
+      "evidence_refs": [
+        "spec.json.controls.NC-MECHANISM-OFF.probe_status",
+        "spec.json.controls.NC-CEILING-BAND.probe_status",
+        "spec.json.controls.NC-EXAMPLES-ISOLATION.probe_status",
+        "spec.json.controls.NC-REPEAT-INPUT.probe_status",
+        "spec.json.controls.NC-MECHANISM-NONDEGENERATE.probe_status",
+        "spec.json.controls.NC-IDENTITY-DISCLOSURE.probe_status",
+        "spec.json.controls.NC-TOKEN-UNIQUENESS.probe_status",
+        "spec.json.controls.NC-NO-LEAK.probe_status",
+        "spec.json.controls.NC-RETENTION-LADDER.probe_status",
+        "prereg.md section 5 (Stable controls)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The frozen treatment T-MECHANISM-INHERIT produces non-null executable behavior at every band: probe verified treatment_live_all_bands=true (rate 1.0 at all 4 novelties x 2 families). The treatment policy runs the calibration session, recovers (a,b) by exact affine solve mod prime P from 3 labelled examples, and evaluates M(x_q) or M(M(x_q)) on the fresh chain-task input in the scored session. Mechanism non-degeneracy verified over 100 instances (a!=0, distinct calibration inputs, exact recovery, zero query collisions). PC-EXACT-REPLAY (oracle) also 1.0 at all bands. All seven arms execute end-to-end in probe mode. No LLM endpoint required; the harness is pure stdlib Python on 127.0.0.1 loopback. The treatment is structurally capable of execution before any expensive arms run.",
+      "evidence_refs": [
+        "spec.json.design_satisfiability_probe.output.checks.treatment_live_all_bands",
+        "spec.json.design_satisfiability_probe.output.checks.pc_exact_replay_all_bands",
+        "spec.json.design_satisfiability_probe.output.checks.mechanism_nondegenerate",
+        "spec.json.arms.T-MECHANISM-INHERIT.policy",
+        "spec.json.substrate.mechanism.recovery",
+        "prereg.md section 9 (probe results: treatment_live_all_bands)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "No mutable local code, data, task-bank, or fixture dependencies exist outside the frozen specification. The complete EXECUTE harness is embedded verbatim in prereg.md (between BEGIN/END SBA-MECH-HARNESS markers) and in spec.design_satisfiability_probe.source, bound by frozen hashes: source_sha256=acbb1e1f64cdb14e4d5a645e7bb800cbaf42091bc45ecfb40107abda890340e9, probe_stdout_sha256=92eb44d005888784d56addbbc35ae41869f9df1f57f9490c2c651c933e1da79e, selftest_stdout_sha256=208b7be424037a8e7348d243d61158c506da573fc096fcd2a68adc2ea3d4794c. The probe confirmed re-running the extracted source reproduces probe stdout byte-for-byte. Remote Web responses are not used (loopback only); target identifiers and sampling protocol are frozen in spec/prereg. freeze_artifacts = [] is correct.",
+      "evidence_refs": [
+        "spec.json.freeze_artifacts",
+        "spec.json.design_satisfiability_probe.source_sha256",
+        "spec.json.design_satisfiability_probe.probe_stdout_sha256",
+        "spec.json.design_satisfiability_probe.selftest_stdout_sha256",
+        "spec.json.design_satisfiability_probe.output.checks.predicted_decision",
+        "prereg.md section 9 (Frozen harness and design-time satisfiability probe)",
+        "prereg.md section 10 (freeze_artifacts_bound = NOT_APPLICABLE)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "The identity control B-CROSS-SESSION-COMPILE is predicted success- and counter-identical to T (margin 0). This is properly disclosed and excluded from retention_certifies (which requires positive margin). The measurement is correctly framed as compile-vs-retain over identical raw information.",
+    "The retention lattice arithmetic is exact (rates = (K-1)/K) with no sampling noise; validity rests entirely on gates and control identifiability, not statistical power. This is a feature, not a bug, for a substrate-validity experiment.",
+    "The experiment targets C-MEAS-VALID only (substrate validity) and does not promote any mechanism to Product Core. The mandate stop rule (no bank iteration on negative) is explicitly honored."
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule has four reachable branches with arithmetically attainable thresholds and clean precedence. All measurement prerequisites (Python stdlib, loopback HTTP, frozen harness) are available and verified at DESIGN. Treatment and baselines are identifiable: treatment reaches 1.0 while three retention comparators are pinned at (K-1)/K with >=2/4 counter dimensions distinct. All nine controls are probe-verified sensitive: NC-MECHANISM-OFF destroys the certificate, NC-NO-LEAK guards against P2-WP003-style leakage, NC-MECHANISM-NONDEGENERATE ensures the affine mechanism is genuine. The treatment is live at 1.0 across all bands. No mutable local artifacts exist outside the frozen spec/prereg hashes. The design is satisfiable and identifiable; it can answer its own question decisively (ROBUST, PARTIAL, or COLLAPSED) without infrastructure ambiguity.",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "spec.json.design_satisfiability_probe.output",
+    "spec.json.freeze_eligibility"
+  ]
+}

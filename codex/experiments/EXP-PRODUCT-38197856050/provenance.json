@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38197856050",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "github_run_id": "38197856050",
+  "origin_github_run_id": "38197856050",
+  "commits": {
+    "base_sha_request": "2e6945546a700c19b7fd411ea8daa30aae66e6dd",
+    "pre_execute_sha_execution_checkpoint": "34f637ed0c6513f67e69382ae3b6da81aa1a8d29",
+    "design_commit": "8c683815",
+    "freeze_commit": "34f637ed",
+    "execution_base_commit": "6270f0e9",
+    "head_at_execution": "6270f0e98b3c839f7c9fdbac44e87af883ee0008",
+    "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+    "literal_git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50"
+  },
+  "environment": {
+    "os": "linux",
+    "python": "3.12.15",
+    "interpreter": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3",
+    "dependencies": "stdlib only (http.server, urllib, unittest, tempfile, hashlib, json, re, subprocess, threading, pathlib); no third-party packages",
+    "network": "loopback 127.0.0.1 only; no egress; no credentials; no browser; no model"
+  },
+  "commands": [
+    "python3 -m py_compile research/experiments/EXP-PRODUCT-38197856050/harness/run_bank.py  # compile check",
+    "timeout 300 python3 research/experiments/EXP-PRODUCT-38197856050/harness/run_bank.py > research/experiments/EXP-PRODUCT-38197856050/raw_run_output.json 2> research/experiments/EXP-PRODUCT-38197856050/raw_run_stderr.txt  # the frozen certificate run, exit 0",
+    "sha256sum pyproject.toml src/spider/__init__.py src/spider/models.py src/spider/registry.py src/spider/kernel.py tests/test_kernel.py  # post-run freeze-artifact re-hash (all match freeze.json)"
+  ],
+  "materialization": {
+    "note": "harness/run_bank.py was extracted byte-for-byte from the FROZEN RUNNER block of prereg.md (regex between '<!-- BEGIN FROZEN RUNNER -->' and '<!-- END FROZEN RUNNER -->'); V8 clause B norm-equality (CRLF-normalized, rstrip) verified before execution.",
+    "running_source_hash": "1088b2e20fa9227aa960b3a8462819aa741e40c5254b5b75508a9c0c81193dab",
+    "norm_match": true
+  },
+  "frozen_inputs": {
+    "request.json": "d6f2b148def668732eebf8dfd56475628ae13e1b9810d6fa52525a53eca7909f",
+    "spec.json": "b0383ec1847efeb1092e056fb3c98ddc8a3682e58d666248a67be4389e171541",
+    "prereg.md": "0b702bc183b4a7cfb59d5244c8cdb938024115e370cd17d5179637e32513a0b6",
+    "design_review.json": "2f8e4e4fe7856663068feee02692db953d3e6a63d82143f1fc8dbb1ed337d461",
+    "freeze.json": "312f55805386be33736db78fd74464b12ef41f5feec4fa62a93fafd6efc84fcc"
+  },
+  "freeze_artifacts_rehashed": {
+    "pyproject.toml": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+    "src/spider/__init__.py": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "src/spider/kernel.py": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+    "tests/test_kernel.py": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+  },
+  "output_artifacts": {
+    "raw_run_output.json": "ba894b69ef5b20ee675ef1b470578b43ebaf64db44a5eb6a4b456b5a74ecb4d0",
+    "raw_run_stderr.txt": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2",
+    "harness/run_bank.py": "1088b2e20fa9227aa960b3a8462819aa741e40c5254b5b75508a9c0c81193dab",
+    "result.json": "8f5f55c0035b04e438deca3a7c152678d655631e5d0c666df06508707668e6bf",
+    "report.md": "1310f2ca8c690108989da125e06532764afdb672b7f7ee6902cfc6e88d70b907"
+  },
+  "reproducibility_notes": [
+    "The runner is deterministic: two in-process evaluation passes over fresh oracle servers yielded identical treatment/shipped/declared summaries and support identity (PC-DETERMINISM-REPEAT PASS).",
+    "All values match the frozen DESIGN point-predictions exactly (T-WIDENED FA=9 cov=0.8413; B-SHIPPED FA=0 cov=0.5079; B-DECLARED-FULL FA=0 cov=1.0; PC-COARSE FA=153; PC-OVERWIDE FA=33; null floor 0/0).",
+    "To reproduce: re-materialize harness/run_bank.py from prereg.md's FROZEN RUNNER block (norm-match), then run 'python3 harness/run_bank.py' at the repo root (or set EXP_TARGET_ROOT); the V8 freeze-binding check will reject any drift.",
+    "The whole transaction is credential-free, model-free and read-only on src/: post-run sha256 of all six freeze artifacts equals freeze.json.artifact_hashes."
+  ],
+  "hash_note": "result.json and report.md hashes recorded in output_artifacts are the hashes of the final files; result.json's own artifacts list leaves its self-hash as null to avoid a circular self-reference. All scientific quantities are bound to the raw evidence hash ba894b69... (raw_run_output.json) and the frozen input hashes above."
+}

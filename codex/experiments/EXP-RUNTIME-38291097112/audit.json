@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38291097112",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "AF-1-FREEZE-AND-PROVENANCE-INTEGRITY",
+      "severity": "info",
+      "finding": "All freeze bindings verified independently: freeze.json hashes match request.json, spec.json, prereg.md, design_review.json and the three carrier files (src/spider/kernel.py 3a6caf97..., models.py 338aaf4d..., registry.py 51fb440d...). The frozen runner embedded in prereg.md section 12 is byte-identical (36234 bytes) to raw_evidence/runner_delta_repair_calibrated_v3.py and hashes to ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229 == CANONICAL-RUNNER-V3-SHA256. All four artifact hashes in result.json/provenance.json match. The parent v2 runner pin (60855 bytes, sha d4871091dc5bf9aa21d918f2577612aa8c5762e314033d0bbbee46b4962bc608) is enforced fail-closed in-runner (V0) and verified present. No frozen file was modified post-freeze (git history: design c1c698b2 -> execute base f659c6f5; provenance.git.frozen_files_unmodified=true)."
+    },
+    {
+      "id": "AF-2-DECISION-RULE-EXECUTED-AS-FROZEN",
+      "severity": "info",
+      "finding": "The frozen classifier (cost_verdict_v3/aggregate_v3, hash-bound) was applied as preregistered. Independent recomputation from the 36 raw trials reproduces, for every class P1-ENDPOINT/P2-STRUCTURE/P3-PERMISSION: functional_ok=true (repair 1.0, Wilson lower 0.7575 >= 0.60, contamination 0.0 <= 0.10, write_set_max 1, guard 1.0), eq=true (M-PRODUCT-RATIO-REUSE-L2 0.9444 < 1, L3 0.8947 < 1, M-COST-FETCH-RATIO-L3 0.667/0.556 <= 0.90), cw=true (M-CALIBRATED-WIN), lw=false (M-LATENCY-R-L2 and R-L3 both > 1.00) -> SINGLE-SURFACE-MIXED on all three classes -> aggregate MIXED-PARTIAL -> outcome MIXED, status COMPLETE, invalid_reasons=[]. No misapplication of the decision rule found."
+    },
+    {
+      "id": "AF-3-H2-CALIBRATED-SURFACE-QUASI-STRUCTURALLY-DETERMINED",
+      "severity": "material-ceiling-bound",
+      "finding": "The H2 calibrated-win surface has weak independent discriminating power on this substrate and must not be over-read. The Stage-A 'repair' op times only Arm.charge_repair_attempt() - a TrajectoryCounters increment plus note/sync, median 2.11e-7s (weight 0.000582) - not the actual repair-path work (local_repair patch construction, registry upsert, guard/signal scaffolding). DESIGN already knew this: the pre-freeze mini-calibration (N=60, raw_evidence/preflight_liveness.json, weights [1.0, 0.117143, 0.104703, 0.000544]) sat three orders of magnitude below the precomputed critical repair weights (M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2=2.0, L3=3.0) at which the calibrated surface could flip. Given the mean op-count vectors (reuse saves 2-3 fetches, costs +1 near-free repair), the calibrated counter could essentially never show a reuse loss on this substrate; M-CALIBRATED-WIN=true and the 81-combo band 1.0 were near-guaranteed once V-CALIB passed. This was disclosed (design_review NB-3; result.json validity_notes calling the counter 'an incomplete end-to-end model'; repair explicitly labeled 'repair-bookkeeping'), was preregistered before outcomes, and both surfaces were reported - so this is NOT MEASUREMENT_INVALID and NOT a frozen-rule violation. But the producer's reading 'the parent's counter-dependence does NOT reproduce on this surface' is justified only as: under a fetch-numeraire re-weighting in which repair bookkeeping is ~free, reuse wins. The genuinely new, decision-relevant information in this packet is the latency surface (H3), not H2."
+    },
+    {
+      "id": "AF-4-SURFACE-DIVERGENCE-IS-REAL-AND-CORRECTLY-HELD-OPEN",
+      "severity": "info",
+      "finding": "The two preregistered surfaces genuinely diverge and the producer correctly treats the divergence as the finding rather than collapsing it. Calibrated counted-op model: reuse strictly cheaper at L=2 and L=3 on all classes (M-CALIBRATED-RATIO-REUSE-L2 0.7803/0.6819/0.7803, L3 0.7031/0.6144/0.7031; M-CALIBRATED-ROBUST-BOTH=1.0). End-to-end episode latency: reuse strictly slower at both budgets on all classes (M-LATENCY-R-L2 1.2118/1.1407/1.2513; R-L3 1.0976/1.0459/1.1451), with reuse slower than cold-L3 in 36/36 and slower than cold-L2 in 36/36 individual trials (independently counted from raw trials). The mechanism of the latency excess is unidentified (episode scaffolding - guard Jaccard, fused-probe signal work, registry construction, deepcopies, server dispatch - is uncounted by calibration); producer records this in unresolved and does not invent a decomposition. The mandate asked for an end-to-end counter; no single measured object on this substrate is one, and the packet says so."
+    },
+    {
+      "id": "AF-5-LATENCY-CI-MARGIN-P2-L3-MARGINAL",
+      "severity": "minor",
+      "finding": "Bootstrap CIs (B_LAT=2000, fixed seeds, percentile on the median ratio) were recomputed exactly and match result.json to 1e-9. Every CI95 excludes 1.0 from above as claimed, but the P2-STRUCTURE L3 interval lower bound is 1.002171497916499 - it clears 1.0 by ~0.2%. With n=12 paired trials and a percentile bootstrap this single interval is not individually decisive; the direction is nevertheless strongly supported by the per-trial sign pattern (reuse slower in 12/12 trials per class against both cold budgets) and by the L2 intervals, which clear 1.0 by 8-22%. Downstream should carry the P2-L3 CI margin rather than cite 'every CI excludes 1.0' as if all intervals were wide."
+    },
+    {
+      "id": "AF-6-B3-MODEL-ECONOMICS-ABSENT-BY-CONSTRUCTION",
+      "severity": "material-ceiling-bound",
+      "finding": "M-MODEL-CALLS-TOTAL=0 and M-MODEL-TOKENS-TOTAL=0 are measured from kernel counters but are structurally zero: no LLM/model endpoint exists on this credential-free substrate (V2-SUBSTRATE_ISOLATION; B3 NOT SATISFIED carried as unknown). The mandate's 'model calls/tokens' component of the end-to-end product-economics counter is therefore absent, and byte volume (median 78 B/fetch) is diagnostic only with no byte<->time rate. Any claim beyond this substrate about real agent product economics is out of ceiling; producer bounded this correctly in validity_notes and report.md."
+    },
+    {
+      "id": "AF-7-PRODUCT-CONSEQUENCE-TEXT-AMBIGUITY-SINGLE-SURFACE-MIXED",
+      "severity": "minor",
+      "finding": "Frozen spec.product_consequence_negative names the EQUAL-ONLY-MIXED tier for permanent drop, but its parenthetical gloss - 'equal-weight strict win reproduces but calibrated_win is false and/or latency_win is false' - also literally covers the OBSERVED pattern (eq=true, cw=true, lw=false = SINGLE-SURFACE-MIXED), whereas the frozen decision rule defines EQUAL-ONLY-MIXED strictly as eq with BOTH cw and lw false. The observed class verdict SINGLE-SURFACE-MIXED is therefore not unambiguously inside or outside the frozen permanent-drop clause. The producer applied the conservative reading (no permanent drop; 'adjudication matter for DIRECTOR'; promote_to_product=false; no re-admission) and did not overclaim in either direction. This is a frozen-text ambiguity, not a producer error; DIRECTOR must resolve it explicitly in verdict.json rather than citing either clause as self-executing."
+    },
+    {
+      "id": "AF-8-NB1-NB2-NB3-DISPOSITION",
+      "severity": "info",
+      "finding": "Design-review NB-1 (spec prose lists V13-LEGACY_REPRODUCTION as auto-invalidation while the hash-bound runner and prereg treat it as a reported caveat; the runner's invalid list indeed omits it): moot for this run - V13 satisfied under both readings (M-PRODUCT-RATIO-LEGACY-L2=1.1111111111111112 > 1.00 all classes, M-LEGACY-REGRESSION-REPRODUCED=true) - but the latent spec/runner inconsistency persists for future packets. NB-2 (carrier-hash enforcement at EXECUTE pre-flight, not in-runner): enforced - all three carrier hashes independently re-verified equal to freeze.json.artifact_hashes in this audit. NB-3 (DESIGN mini-calibration showed fetch-dominant weights favoring reuse): confirmed; absorbed into AF-3 - the DESIGN probe was not scored and no bar was fit to it, but it means H2's outcome direction was knowable pre-freeze."
+    },
+    {
+      "id": "AF-9-CONTROL-AND-LEAKAGE-VERDICTS",
+      "severity": "info",
+      "finding": "All controls verified from raw evidence: PC-BASE-LIVENESS 36/36 true trials; B-COLD/B-COLD-MIN success 1.0 with products 19/18 (exact per-trial constant); B-LITERAL-REPLAY 0.0 and B-NO-REPAIR 0.0 on all classes (perturbation bites, abstention inert, never a denominator); NC-NO-PERTURBATION and NC-NOISE both stale=false; NC-OVERBROAD-REPAIR fired 4/4 unaffected resources in every trial (in-support probe id 14, corrected F1 instrument live); V-TIMING 72/72 warmups, exact 6/6 rep-first parity per class, 0 timed errors, all latencies finite>0; V14 oplogs present every trial and legacy oplog differs from reuse exactly by the rebind+resolve repair and full-batch re-execution semantics (e.g. P1: reuse 17 ops with repair_attempt, legacy 19 ops with rebind+resolve; verified on raw trials). Leakage checks: write_set exactly 1 (only the perturbed target mechanism changed) on all 36 trials; contamination 0/144 in-support probes on genuinely unaffected resources; treatment uses pre-perturbation learned mechanisms plus cached structural tokens (the inheritance under test, not leakage); cold arms never receive the cache; calibration weights come from an independent unperturbed workload (Stage-A, own LocalApp, before any trial) and never from arm outcomes (V10). No baseline substitution: B-COLD is the sole cost/latency denominator; conservative/legacy arms are reported sensitivities correctly excluded from the classifier."
+    },
+    {
+      "id": "AF-10-METRIC-NOMENCLATURE-OVERBROAD-RATE",
+      "severity": "minor",
+      "finding": "M-OVERBROAD-CONTAMINATION-RATE / M-OVERBROAD-CONTAMINATION-RATE-MEAN = 4.0 is a per-trial COUNT of broken unaffected resources (0-4), not a 0-1 rate; the sensitivity gate (rate > CONTAMINATION_BAR=0.10) is satisfied in substance (4/4 every trial) and the misnomer is disclosed in result.json controls.NC-OVERBROAD-REPAIR.note. No arithmetic impact; naming invites downstream misreading and is preserved under the producer's identifier here rather than renamed."
+    },
+    {
+      "id": "AF-11-LATENCY-SCOPE-BOUNDS",
+      "severity": "material-ceiling-bound",
+      "finding": "The latency surface is measured on an in-process ThreadingHTTPServer over 127.0.0.1 with ~4ms median episodes and absolute reuse-cold gaps of ~0.2-0.9ms. Timing integrity is sound (1ns timer, RSEs <= 0.012, 6/6 order parity, 2 excluded warmups per trial, fixed bootstrap seeds), and the reuse-slower sign is unanimous per-trial, so this is not noise. But it is a single-vantage localhost measurement whose excess is unattributed (see AF-4); no transfer to real web, browser/network economics, production carriers or external agent harnesses is licensed. Producer's scope bounds in validity_notes/report.md are correct and complete on this point."
+    },
+    {
+      "id": "AF-12-REPORT-CONSISTENCY",
+      "severity": "info",
+      "finding": "report.md interpretation matches result.json and raw evidence at every checked number (ratios, medians, CIs, weights, control verdicts, decision MIXED-PARTIAL); observations contain observations, not interpretations; no measurement exists only in report.md; the report does not exceed the frozen claim (no re-admission requested, no promotion, permanent drop explicitly deferred). result.json metrics are the raw runner metrics plus six additive M-RUNNER-* mirror fields; every shared metric key is byte-identical to raw_evidence/runner_result_raw.json (verified by full dict comparison)."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "verdict": "PASS",
+      "finding": "Primary cost baseline live and strong: cold re-derivation success 1.0 (12/12 per class, recomputed), product counter 19 at L=3 constant across all trials, fetch count 9. Sole cost/latency denominator as frozen. Timed in parity order against treatment."
+    },
+    {
+      "id": "B-COLD-MIN",
+      "verdict": "PASS",
+      "finding": "L=2 sensitivity live: success 1.0 all classes, product 18 constant, fetch 8. Mandate decision bar denominator confirmed."
+    },
+    {
+      "id": "B-COLD-DEEP",
+      "verdict": "NOT_APPLICABLE",
+      "finding": "L=4 arm not re-executed by the v3 runner (frozen scope: timed L=2/L=3 decision denominators only); cold_deep_success=null in every raw trial; no L=4 claim made anywhere in the packet. Correctly recorded as NOT_APPLICABLE with null observed, not silently dropped."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "verdict": "PASS",
+      "finding": "Mechanism control must-fail satisfied: success 0.0 on all 36 trials (all three classes). Perturbation bites (V4)."
+    },
+    {
+      "id": "B-NO-REPAIR",
+      "verdict": "PASS",
+      "finding": "Abstention control must-fail satisfied: success 0.0, guard fired, on all trials; never used as a cost denominator (V6)."
+    },
+    {
+      "id": "T-REPAIR-REUSE",
+      "verdict": "PASS",
+      "finding": "Treatment functional/locality gates all hold at frozen bars on every class (recomputed exactly): M-REPAIR-SUCCESS=1.0, M-REPAIR-SUCCESS-WILSON-LOWER=0.7574992425007574 (12/12, z=1.96 verified), M-GUARD-FIRE-RATE=1.0, M-CONTAMINATION-RATE=0.0/48 probes per class (144 total), M-WRITE-SET-MAX=1. Cost vectors deterministic per class: reuse (6,5,5,1) P1/P3 and (5,5,6,1) P2 vs cold (9,5,5,0)/(8,5,5,0), reproducing the parent packet exactly."
+    },
+    {
+      "id": "T-REPAIR-LEGACY",
+      "verdict": "PASS",
+      "finding": "Replication control reproduces the parent regression: product 20, M-PRODUCT-RATIO-LEGACY-L2=1.1111111111111112 > 1.00 on all classes; M-LEGACY-REGRESSION-REPRODUCED=true. V13 premise holds under both the spec-prose and runner readings of the gate."
+    },
+    {
+      "id": "T-REPAIR-CONSERVATIVE",
+      "verdict": "PASS",
+      "finding": "Untimed upper-bound sensitivity reported and correctly excluded from the classifier: product 18, ratio L2=1.0 exactly, L3=0.9474. Does not reverse any sign by itself."
+    },
+    {
+      "id": "WEIGHT-GRID-REPLICATION",
+      "verdict": "PASS",
+      "finding": "Equal-weight counter-dependence reproduced exactly from parent semantics: M-WEIGHT-ROBUST-L2=0.7778 (P1/P3) and 0.6667 (P2), L3=0.8889/0.7778, BOTH=0.7778/0.6667 over the predeclared {1,2,3}^4 grid; M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2=2.0, L3=3.0. Independently recomputed (P1: win iff repair-weight < 2*fetch-weight at L2 / 3*fetch-weight at L3 -> 7/9 and 8/9 of grid marginals; matches)."
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputation_method": "Independent recomputation from raw_evidence/runner_result_raw.json (36 valid trials, sha 48409b3f...) without importing the runner; bootstrap CIs reimplemented with the frozen seeds (SEED3=3931358744, B_LAT=2000, percentile on median ratio); all comparisons at abs tol 1e-9 relative.",
+    "all_checked_metrics_match_raw": true,
+    "M-TRIALS-TOTAL": 36,
+    "M-RUNNER-DECISION": "MIXED-PARTIAL",
+    "M-RUNNER-OUTCOME": "MIXED",
+    "M-RUNNER-INVALID-REASONS": [],
+    "M-MEASURED-WEIGHTS": [1.0, 0.116023, 0.104291, 0.000582],
+    "weights_reproduce_from_medians": true,
+    "M-CALIB-OK": true,
+    "M-CALIB-N": 300,
+    "per_class": {
+      "P1-ENDPOINT": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-VECTOR": [6.0, 5.0, 5.0, 1.0],
+        "M-COST-COLD-VECTOR": [9.0, 5.0, 5.0, 0.0],
+        "M-COST-COLD-MIN-VECTOR": [8.0, 5.0, 5.0, 0.0],
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.7803216368165052,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.7030740766039338,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.746588499983773,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.9169490000858787,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.324328499933472,
+        "M-LATENCY-R-L2": 1.2118075828609727,
+        "M-LATENCY-R-L3": 1.0976475307222375,
+        "M-LATENCY-R-L2-CI95": [1.1799156855642476, 1.2838294639534704],
+        "M-LATENCY-R-L3-CI95": [1.0788680426878012, 1.1646716748539654],
+        "M-LATENCY-WIN": false,
+        "class_cost_verdict": "SINGLE-SURFACE-MIXED",
+        "reuse_slower_than_coldL3_trials": "12/12"
+      },
+      "P2-STRUCTURE": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-VECTOR": [5.0, 5.0, 6.0, 1.0],
+        "M-COST-COLD-VECTOR": [9.0, 5.0, 5.0, 0.0],
+        "M-COST-COLD-MIN-VECTOR": [8.0, 5.0, 5.0, 0.0],
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-WEIGHT-ROBUST-L2": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L3": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-BOTH": 0.6666666666666666,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.6819090552509073,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.6144038005973329,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.3463895001423225,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.8104190000467497,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.155493000098431,
+        "M-LATENCY-R-L2": 1.140659203118869,
+        "M-LATENCY-R-L3": 1.0459383519691572,
+        "M-LATENCY-R-L2-CI95": [1.1048586566812086, 1.1661209661509635],
+        "M-LATENCY-R-L3-CI95": [1.002171497916499, 1.0668629781132997],
+        "M-LATENCY-WIN": false,
+        "class_cost_verdict": "SINGLE-SURFACE-MIXED",
+        "reuse_slower_than_coldL3_trials": "12/12",
+        "note": "M-LATENCY-R-L3-CI95 lower bound clears 1.0 by ~0.2% (AF-5); direction supported by 12/12 per-trial signs."
+      },
+      "P3-PERMISSION": {
+        "n": 12,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-COLD-SUCCESS": 1.0,
+        "M-COLD-MIN-SUCCESS": 1.0,
+        "M-LITERAL-REPLAY-SUCCESS": 0.0,
+        "M-NO-REPAIR-SUCCESS": 0.0,
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-OVERBROAD-CONTAMINATION-RATE": 4.0,
+        "M-WRITE-SET-MAX": 1,
+        "M-COST-REPAIR-REUSE-VECTOR": [6.0, 5.0, 5.0, 1.0],
+        "M-COST-COLD-VECTOR": [9.0, 5.0, 5.0, 0.0],
+        "M-COST-COLD-MIN-VECTOR": [8.0, 5.0, 5.0, 0.0],
+        "M-PRODUCT-RATIO-REUSE-L2": 0.9444444444444444,
+        "M-PRODUCT-RATIO-REUSE-L3": 0.8947368421052632,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-WEIGHT-ROBUST-L2": 0.7777777777777778,
+        "M-WEIGHT-ROBUST-L3": 0.8888888888888888,
+        "M-WEIGHT-ROBUST-BOTH": 0.7777777777777778,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L2": 2.0,
+        "M-WEIGHT-CRITICAL-REPAIR-WEIGHT-L3": 3.0,
+        "M-CALIBRATED-RATIO-REUSE-L2": 0.7803216368165052,
+        "M-CALIBRATED-RATIO-REUSE-L3": 0.7030740766039338,
+        "M-CALIBRATED-WIN": true,
+        "M-CALIBRATED-ROBUST-BOTH": 1.0,
+        "M-LATENCY-MEDIAN-MS-REUSE": 4.725189500049964,
+        "M-LATENCY-MEDIAN-MS-COLD-L2": 3.7762869999369286,
+        "M-LATENCY-MEDIAN-MS-COLD-L3": 4.126483499931055,
+        "M-LATENCY-R-L2": 1.251279232783124,
+        "M-LATENCY-R-L3": 1.1450886693546485,
+        "M-LATENCY-R-L2-CI95": [1.2213198697014722, 1.2853863253239317],
+        "M-LATENCY-R-L3-CI95": [1.0868859659869778, 1.1729779470542545],
+        "M-LATENCY-WIN": false,
+        "class_cost_verdict": "SINGLE-SURFACE-MIXED",
+        "reuse_slower_than_coldL3_trials": "12/12"
+      }
+    },
+    "aggregate_checks": {
+      "M-CONTAMINATION-PROBES-TOTAL": 144,
+      "M-BASE-LIVENESS-TRUE-TRIALS-TOTAL": 36,
+      "M-BASE-LIVENESS-TRIALS-TOTAL": 36,
+      "M-WARMUP-EPISODES-TOTAL": 72,
+      "M-TIMED-EPISODE-ERRORS-TOTAL": 0,
+      "M-NOISE-FALSE-TRIGGER-RATE": 0.0,
+      "M-NO-PERTURBATION-FALSE-TRIGGER-RATE": 0.0,
+      "M-LEGACY-REGRESSION-REPRODUCED": true,
+      "M-MODEL-CALLS-TOTAL": 0,
+      "M-MODEL-TOKENS-TOTAL": 0,
+      "M-OVERBROAD-CONTAMINATION-RATE-MEAN": 4.0,
+      "trial_level_reuse_slower_than_coldL2": "36/36",
+      "trial_level_reuse_slower_than_coldL3": "36/36",
+      "frozen_classifier_replay": "functional_ok=true, eq=true, cw=true, lw=false -> SINGLE-SURFACE-MIXED x3 -> MIXED-PARTIAL -> outcome MIXED (exact match to raw and result)"
+    }
+  },
+  "claim_ceiling": "MEASUREMENT-VALID, BOUNDED MIXED: on the credential-free localhost stdlib substrate with the shipped hash-pinned carrier, three LOCAL perturbation classes (P1-ENDPOINT/P2-STRUCTURE/P3-PERMISSION), n=12/class, and the frozen classifier, reuse-based localized repair is functionally/locality-sound (H1: success 1.0, Wilson 0.7575, contamination 0/144, write-set 1) and reproduces the parent equal-weight strict win (0.9444 L2 / 0.8947 L3) plus the parent counter-dependence (grid 0.78/0.67, critical repair weights 2.0/3.0); under the preregistered fetch-numeraire time-calibrated counted-op counter (weights [1.0, 0.116023, 0.104291, 0.000582] where the repair dimension is counter-bookkeeping only, ~0.21us - a near-free dimension whose win direction was knowable at DESIGN, AF-3) reuse is strictly cheaper at L=2 and L=3 (band 1.0), BUT under measured end-to-end episode latency reuse is strictly SLOWER at L=2 and L=3 on every class (R 1.05-1.25, all CI95 above 1.0, 36/36 per-trial signs; P2-L3 margin ~0.2%, AF-5). Decision SINGLE-SURFACE-MIXED x3 = MIXED-PARTIAL = outcome MIXED is the correct frozen-rule result. Maximum justified claim: the equal-weight counter-dependence is NOT resolvable as a pure equal-weight artifact - one product-adjacent measured surface (time-calibrated op economics) favors reuse, the only true end-to-end surface measured (wall-clock episode latency) decisively disfavors it, and no constructed counter on this substrate is complete end-to-end (model calls/tokens structurally absent per B3, scaffolding uncounted, AF-6). Localized repair is NOT re-admitted to C-PRODUCT-ECON by this evidence; permanent drop is NOT self-executing from the frozen text for SINGLE-SURFACE-MIXED (AF-7) and remains a DIRECTOR adjudication. Not a falsification of the repair mechanism; no promotion; no claim transfers to real web, production carriers, external agents, or model-call economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-38291097112/request.json",
+    "research/experiments/EXP-RUNTIME-38291097112/spec.json (decision_rule, product_consequence_positive/negative, measurement_validity V0-V15/V-CALIB/V-TIMING)",
+    "research/experiments/EXP-RUNTIME-38291097112/prereg.md (sections 5-9, 12 frozen runner)",
+    "research/experiments/EXP-RUNTIME-38291097112/freeze.json (all hashes independently verified)",
+    "research/experiments/EXP-RUNTIME-38291097112/design_review.json (NB-1/NB-2/NB-3)",
+    "research/experiments/EXP-RUNTIME-38291097112/result.json (metrics.M-CLASSES.*, controls.*, validity_notes, unresolved)",
+    "research/experiments/EXP-RUNTIME-38291097112/report.md",
+    "research/experiments/EXP-RUNTIME-38291097112/provenance.json",
+    "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_result_raw.json (sha 48409b3f9c579b49483c7a5f03e2ca1a5441576c460fc120a325228b245b1cac; 36 valid trials, calibration, NCs, carrier pins)",
+    "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/runner_delta_repair_calibrated_v3.py (sha ec480f38c3c5c2f2bfff282aea3ef75654b0c6d2f4453dbca6d0321f03002229; byte-identical to prereg-embedded runner)",
+    "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/preflight_liveness.json (DESIGN/EXECUTE mini-calibration N=60 weights [1.0, 0.117143, 0.104703, 0.000544])",
+    "research/experiments/EXP-RUNTIME-38291097112/raw_evidence/preflight_reachability.json (all classifier branches reachable)",
+    "research/experiments/EXP-RUNTIME-38244432934/raw_evidence/runner_delta_repair_reuse_v2.py (V0 pin d4871091.../60855 bytes; grid_robust, critical_repair_weight, functional_ok, charge_repair_attempt semantics)",
+    "research/experiments/EXP-RUNTIME-38244432934/audit.json (parent ceiling SUPPORTS-COUNTER-DEPENDENT; parent equal-weight numbers reproduced exactly here)",
+    "codex/claim_state.json#effective_event_by_claim.C-DELTA-REPAIR (prior effective status EXPERIMENTAL, inherited via EXP-RUNTIME-38244432934)"
+  ],
+  "unresolved": [
+    "Which uncounted episode-scaffolding component (guard Jaccard computation, fused-probe signal work, registry construction, deepcopies, server dispatch) accounts for the ~0.2-0.9ms reuse latency excess; the runner does not decompose scaffolding, so the MECHANISM of the latency loss (the decision-relevant surface) is unidentified (producer unresolved #1, confirmed).",
+    "Whether any justifiable end-to-end counter that prices scaffolding, bytes, or real model calls/tokens (if B3 is ever satisfied) could still show a strict reuse win at L=2 AND L=3; this packet tested the preregistered time-calibrated counted-op counter (repair dimension = bookkeeping only, AF-3) plus raw latency, not the space of all counters (producer unresolved #2, confirmed and sharpened by AF-3).",
+    "P2-STRUCTURE M-LATENCY-R-L3 CI95 lower bound 1.00217 clears 1.0 by ~0.2%; downstream should not cite the latency loss on P2-L3 as individually CI-decisive without the 12/12 sign pattern (AF-5).",
+    "Frozen product_consequence_negative text ambiguity for SINGLE-SURFACE-MIXED (EQUAL-ONLY-MIXED tier name vs parenthetical gloss) must be explicitly adjudicated by DIRECTOR before any permanent-drop decision is recorded as self-executing from the frozen rule (AF-7).",
+    "Transfer of either surface (calibrated weights, latency sign) to real-web substrates, production carriers, browser/network economics, or external agent harnesses (producer unresolved #3, confirmed; single localhost vantage).",
+    "Real model-call/token economics (B3) remains unmeasured by construction; model_calls/model_tokens=0 are structural zeros, not findings about model cost (producer unresolved #4, confirmed; AF-6).",
+    "Latent spec/runner inconsistency NB-1 (V13 auto-invalidation in spec prose vs caveat in executable classifier) persists for future packets though moot here (V13 satisfied)."
+  ]
+}

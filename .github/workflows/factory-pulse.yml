@@ -20,17 +20,15 @@ on:
       - "AGENTS.md"
       - "SPIDER_ARCHITECTURE_RESEARCH2.md"
       - "SPIDER_MASTER_PROMPT.md"
-      - "SPIDER_CODEX.md"
-      - "codex/**"
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "17 * * * *"
 
 permissions:
   contents: read
   actions: write
 
 concurrency:
-  group: spider-r2-factory-pulse-${{ github.sha }}
+  group: spider-r2-factory-pulse
   cancel-in-progress: true
 
 jobs:
@@ -79,20 +77,40 @@ jobs:
           fi
           exit 0
 
+      - name: Verify a live FREE model before launching scientific research
+        id: provider
+        if: ${{ steps.install.outputs.ready == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/probe_free_provider.py --output .spider-runtime/provider_preflight.json
+          READY=$(jq -r '.ready' .spider-runtime/provider_preflight.json)
+          echo "ready=$READY" >> "$GITHUB_OUTPUT"
+          PREFERRED=$(jq -r '.selected_model // empty' .spider-runtime/provider_preflight.json)
+          echo "selected_model=$PREFERRED" >> "$GITHUB_OUTPUT"
+          if [[ -n "$PREFERRED" ]]; then
+            echo "SPIDER_FREE_MODEL_SELECTED model=$PREFERRED"
+          fi
+          if [[ "$READY" != true ]]; then
+            CATEGORY=$(jq -r '.category' .spider-runtime/provider_preflight.json)
+            echo "::warning::SPIDER_PROVIDER_GATE_BLOCKED category=$CATEGORY (free-provider access unavailable; no research dispatch)"
+          fi
+
       - name: Scout lane — general reconnaissance
         id: scout
-        if: ${{ steps.install.outputs.ready == 'true' }}
+        if: ${{ steps.provider.outputs.ready == 'true' }}
         env:
-          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "300"
-          SPIDER_MODEL_STALL_SECONDS: "120"
-          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_PREFERRED_FREE_MODEL: ${{ steps.provider.outputs.selected_model }}
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "150"
+          SPIDER_MODEL_STALL_SECONDS: "75"
+          SPIDER_MODEL_MAX_ATTEMPTS: "2"
           SPIDER_MODEL_RETRY_DELAY_SECONDS: "5"
         shell: bash
         run: |
           set +e
           set -uo pipefail
           export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/scout_brief.json"
-          timeout --signal=TERM --kill-after=15s 180s bash .github/scripts/run-opencode-resilient.sh scout .spider-runtime/model_scout.json run --agent spider_research_scout             "SCOUT LANE cycle=$GITHUB_RUN_ID. Read the control-plane charter and exact .spider-runtime/director_snapshot.json. Maintain broad situational awareness across the full SPIDER Codex, all lane trajectories, general agent knowledge and shallow external reconnaissance when available. Do NOT choose allocations. Write ONLY .spider-runtime/scout_brief.json using the exact schema in .opencode/agents/spider_research_scout.md."
+          timeout --signal=TERM --kill-after=15s 240s bash .github/scripts/run-opencode-resilient.sh scout .spider-runtime/model_scout.json run --agent spider_research_scout             "SCOUT LANE cycle=$GITHUB_RUN_ID. Read the control-plane charter and exact .spider-runtime/director_snapshot.json. Maintain broad situational awareness across the full SPIDER Codex, all lane trajectories, general agent knowledge and shallow external reconnaissance when available. Do NOT choose allocations. Write ONLY .spider-runtime/scout_brief.json using the exact schema in .opencode/agents/spider_research_scout.md."
           rc=$?
 
           git reset --hard HEAD >/dev/null 2>&1 || true
@@ -116,18 +134,19 @@ jobs:
 
       - name: Global Research Director — choose lane objectives
         id: director
-        if: ${{ steps.install.outputs.ready == 'true' }}
+        if: ${{ steps.provider.outputs.ready == 'true' }}
         env:
-          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "720"
-          SPIDER_MODEL_STALL_SECONDS: "240"
-          SPIDER_MODEL_MAX_ATTEMPTS: "7"
-          SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
+          SPIDER_PREFERRED_FREE_MODEL: ${{ steps.provider.outputs.selected_model }}
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "840"
+          SPIDER_MODEL_STALL_SECONDS: "210"
+          SPIDER_MODEL_MAX_ATTEMPTS: "3"
+          SPIDER_MODEL_RETRY_DELAY_SECONDS: "5"
         shell: bash
         run: |
           set +e
           set -uo pipefail
           export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/director_allocation.json"
-          timeout --signal=TERM --kill-after=15s 480s bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout may be in DEGRADED SCOUT MODE. Its brief is staff advice, never a prerequisite or authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
+          timeout --signal=TERM --kill-after=15s 1000s bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout may be in DEGRADED SCOUT MODE. Its brief is staff advice, never a prerequisite or authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
           rc=$?
 
           git reset --hard HEAD >/dev/null 2>&1 || true
@@ -154,6 +173,7 @@ jobs:
             .spider-runtime/director_allocation.json
             .spider-runtime/model_scout.json
             .spider-runtime/model_global_director.json
+            .spider-runtime/provider_preflight.json
           if-no-files-found: ignore
           retention-days: 14
 
@@ -162,9 +182,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           DIRECTION_READY: ${{ steps.director.outputs.ready }}
+          PREFERRED_FREE: ${{ steps.provider.outputs.selected_model }}
         shell: bash
         run: |
           set -euo pipefail
+
+          # Provider-wide authentication/service outage: preserve every frozen
+          # packet, run no new agents, and do not amplify recovery workflows.
+          if [[ "${{ steps.provider.outputs.ready }}" != true ]]; then
+            echo "::warning::SPIDER_PROVIDER_GATE_BLOCKED: free model preflight has no verified response; scientific research is parked, not declared successful."
+            exit 0
+          fi
 
           # A direction cycle is authoritative only for the main commit it
           # started from. Newer main commits may run concurrently; stale cycles
@@ -254,7 +282,7 @@ jobs:
                 continue
               fi
               echo "SPIDER_RESUME_FROZEN lane=$LANE experiment=$ACTIVE_EXP stage=$ACTIVE_STAGE"
-              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-frozen" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-frozen" -f "chain_depth=0"                 -f "preferred_free_model=$PREFERRED_FREE" -f "resume_experiment_id=$ACTIVE_EXP"; then
                 echo "::error::Failed to resume frozen lane=$LANE experiment=$ACTIVE_EXP"
                 DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
               fi
@@ -282,7 +310,7 @@ jobs:
             # A PIVOT/REOPEN/SUPERSEDE still allocates a fresh transaction.
             if [[ "$ACTIVE_STAGE" == "PREFREEZE" && "$ACTIVE_HAS_MANDATE" == true && "$ACTION" == "CONTINUE" && "$NEW_DISPOSITION" == "USE" && -n "$ACTIVE_OLD_CLAIM" && "$ACTIVE_OLD_CLAIM" == "$TARGET_CLAIM" ]]; then
               echo "SPIDER_RESUME_DIRECTED_PREFREEZE lane=$LANE experiment=$ACTIVE_EXP"
-              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "preferred_free_model=$PREFERRED_FREE" -f "resume_experiment_id=$ACTIVE_EXP"; then
                 echo "::error::Failed to resume directed prefreeze lane=$LANE experiment=$ACTIVE_EXP"
                 DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
               fi
@@ -306,7 +334,7 @@ jobs:
               echo "SPIDER_DIRECTOR_DISPATCH lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
             fi
 
-            if ! gh workflow run spider-lane.yml --ref main               -f "lane=$LANE" -f "reason=global-director-$ACTION" -f "chain_depth=0"               -f "director_mandate_b64=$MANDATE_B64"; then
+            if ! gh workflow run spider-lane.yml --ref main               -f "lane=$LANE" -f "reason=global-director-$ACTION" -f "chain_depth=0"               -f "preferred_free_model=$PREFERRED_FREE" -f "director_mandate_b64=$MANDATE_B64"; then
               echo "::error::Failed Director dispatch lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
               DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
             fi

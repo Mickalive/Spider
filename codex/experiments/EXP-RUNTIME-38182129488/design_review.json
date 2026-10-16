@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38182129488",
+  "lane": "runtime",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision labels (ROBUST, PARTIAL, COLLAPSED, MEASUREMENT_INVALID) are arithmetically reachable. The rule-level classifier classify_mem() verified branch inhabitancy over synthetic worlds (spec.design_satisfiability_probe.output.branch_reachability). ROBUST is reachable if B-MEMORY-RECEIPT recovers the binding imperfectly (rate < 0.95 with margin >= 0.05). PARTIAL is reachable and predicted: B-MEMORY-STATE and B-MEMORY-WINDOW-1@0.75 have margin 0.125/0.100 >= 0.05 with comp_rate < 0.95. COLLAPSED is reachable if even state-only memory closes the range. MEASUREMENT_INVALID is reachable via any V1-V8 gate failure. Precedence (MEASUREMENT_INVALID first, then ROBUST, PARTIAL, COLLAPSED) is free of shadowing. The identity disclosure (B-MEMORY-RECEIPT success- and counter-identical to T) is consistent with margin 0, which mem_certifies correctly rejects.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.branch_reachability",
+        "spec.json design_satisfiability_probe.output.predicted_decision",
+        "spec.json decision_rule.mem_certifies",
+        "spec.json decision_rule.precedence",
+        "spec.json decision_rule.identity_disclosure"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is available now. Python 3.12.15 is installed; stdlib modules (http.server, urllib.request, hashlib, json, threading, collections) import successfully. The probe verified stdlib HTTP transport answers on 127.0.0.1 (transport_stdlib_http=true) and all protocol invariants hold on the in-process model (10/10 invariants clean). No credentials, browser, external dataset, model endpoint, or external task bank are required. The complete EXECUTE harness (80-cell matrix, all gates, decision rule, controls) is embedded verbatim in the frozen prereg.md and spec.design_satisfiability_probe.source, bound by their hashes. The --mode selftest exercised the full decision path assemble_decision() on probe-derived synthetic cells. No prerequisite is deferred to EXECUTE.",
+      "evidence_refs": [
+        "spec.json substrate.transport",
+        "spec.json substrate.credentials_required",
+        "spec.json substrate.external_dependencies",
+        "spec.json design_satisfiability_probe.output.checks.transport_stdlib_http",
+        "spec.json design_satisfiability_probe.output.checks.protocol_invariants",
+        "spec.json design_satisfiability_probe.output.checks.all_protocol_invariants_pass"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment T-AMORTIZED-DISCOVERY is at 1.0 at all bands. The memoryless baseline B-COLD-RE-DERIVE is probe-measured at (K-1)/K (F1 0.875, F2 0.900), both strictly inside [0.80, 0.95), with margin 0.125/0.100 >= 0.05 and counter distinctness 2/4 (gate V8_m0_counter_distinctness). The memoryful ladder provides the discriminating signal: B-MEMORY-STATE and B-MEMORY-WINDOW-1@0.75 are rate-distinct from T (margin 0.125/0.100) and counter-distinct (repair_calls differs). B-MEMORY-WINDOW-1@0.50, B-MEMORY-WINDOW-2, and B-MEMORY-RECEIPT are predicted rate- and counter-identical to T (margin 0). This identity is explicitly disclosed as the substantive collapse mechanism (the substrate has a single success path), and the decision rule handles it correctly: mem_certifies requires a positive margin, so an identical comparator can never certify, making the PARTIAL branch observable via the weaker comparators that remain distinct. No ceiling/floor situation forces all arms identical at the scored bands.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json counters.probe_status",
+        "spec.json design_satisfiability_probe.output.counter_identification",
+        "spec.json decision_rule.identity_disclosure",
+        "spec.json arms"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control was probe-measured away from its boundary and can fail under the same implementation that scores the experiment. NC-MECHANISM-OFF raises cold to 1.0 and destroys the predecessor certificate (mechanism_off_destroys_certificate=true). NC-MEMORY-OFF drives B-MEMORY-RECEIPT back to (K-1)/K (memory_off_matches_m0=true), isolating receipt retention as the cause. NC-REVEAL-ORDER-FLIPPED fails the chain at (K-1)/K (reveal_order_flipped_fails_chain=true), isolating the precursor reveal. NC-RETRIEVAL-REDUNDANT leaves full-memory rate at 1.0 (retrieval_redundant_no_gain=true), showing retrieval is inert. NC-CEILING-BAND yields all ten arms 1.0 at novelty 0.0. NC-WINDOW-MONOTONIC holds (window_monotonic=true). NC-BINDING-UNIQUENESS: 0/160 collisions. NC-NO-LEAK is a hard V3/F-LEAK gate (10/10 invariants clean). The lattice is sensitive to removal of the very memory it measures.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.mechanism_off",
+        "spec.json design_satisfiability_probe.output.memory_off",
+        "spec.json design_satisfiability_probe.output.reveal_order_flipped",
+        "spec.json design_satisfiability_probe.output.retrieval_redundant",
+        "spec.json design_satisfiability_probe.output.checks",
+        "spec.json controls"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-AMORTIZED-DISCOVERY completed a full session at every novelty band (0.00, 0.25, 0.50, 0.75) and family in the probe (treatment_live_all_novelties=true). PC-EXACT-REPLAY also achieved 1.0 at every band (pc_exact_replay_all_novelties=true). All ten memory-lattice arms executed end-to-end without exceptions in the probe (arm_liveness present for all ten). The treatment executes on the credential-free SBA-CREDENTIAL-FREE-V2 substrate and produces non-null, executable behavior before any expensive arms run. This is a substrate-validity experiment (C-MEAS-VALID), not a Product experiment targeting C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON, but treatment liveness is verified regardless.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json design_satisfiability_probe.output.checks.treatment_live_all_novelties",
+        "spec.json design_satisfiability_probe.output.checks.pc_exact_replay_all_novelties"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "There are no pre-existing mutable local files, code, task banks, or fixtures that this experiment's interpretation depends on. The substrate is generated entirely from frozen literals in spec.json (class_id, derivations, endpoints, families, K, novelty ladder, arms, controls, lattice arithmetic) using Python stdlib only. The COMPLETE harness (substrate construction, ten arm policies, declared controls, scored-matrix driver, full V1-V8 evaluator, frozen memory-lattice decision rule) is embedded verbatim in prereg.md (between BEGIN/END SBA-MEM-HARNESS) and in spec.design_satisfiability_probe.source, and is therefore bound by the frozen prereg/spec hashes. The EXECUTE copy is additionally recorded by the V1 code-fidelity manifest (sha256 of every authored harness file + python3 --version) in result.json.artifacts. freeze_artifacts is correctly empty, satisfying the NOT_APPLICABLE requirement.",
+      "evidence_refs": [
+        "spec.json substrate.external_dependencies",
+        "spec.json measurement_validity.gates.V1_code_fidelity_manifest",
+        "spec.json design_satisfiability_probe.source_sha256",
+        "spec.json freeze_artifacts",
+        "scripts/freeze_experiment.py validate_v2_design (NOT_APPLICABLE requires empty artifacts)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "check": "baseline_identifiability",
+      "note": "The PRIMARY comparator B-MEMORY-RECEIPT is predicted success- and counter-identical to the treatment (margin 0, 0/4 dimensions distinct). This is explicitly disclosed as the collapse mechanism, not an accidental identity. The decision rule correctly requires a positive margin for mem_certifies, so the identical comparator cannot certify, and the discriminating signal is carried by the weaker memoryful comparators (B-MEMORY-STATE, B-MEMORY-WINDOW-1@0.75) that remain rate- and counter-distinct. This design choice is scientifically sound and non-blocking."
+    },
+    {
+      "check": "decision_rule_reachability",
+      "note": "ROBUST requires the full-receipt-memory comparator B-MEMORY-RECEIPT to mem_certify (rate < 0.95 with margin >= 0.05). Given the single-success-path substrate, this branch is arithmetically reachable but scientifically implausible under the frozen construction (it would require the precursor receipt to not disclose the binding). The design correctly treats this as a reachable but unlikely branch, and the PARTIAL prediction reflects the arithmetic certainty of the collapse."
+    }
+  ],
+  "rationale": "All six satisfiability/identifiability checks pass. The decision rule has four reachable branches with correct precedence. All measurement prerequisites are satisfied by the frozen stdlib-only harness. Baselines are identifiable: the memoryless comparator is in-band with margin >= 0.05 and counter distinctness 2/4; the memoryful ladder provides the discriminating signal via weaker comparators while the primary comparator's identity with treatment is the measured collapse mechanism. Controls are sensitive and probe-verified. Treatment is live at 1.0 across all bands. No mutable external artifacts exist; the harness is frozen in prereg/spec. The experiment is capable of answering its question and should proceed to freeze.",
+  "evidence_refs": [
+    "spec.json",
+    "prereg.md",
+    "spec.json design_satisfiability_probe.output",
+    "spec.json decision_rule",
+    "spec.json arms",
+    "spec.json controls",
+    "spec.json substrate"
+  ]
+}

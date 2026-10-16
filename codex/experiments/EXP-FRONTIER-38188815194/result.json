@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38188815194",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-CODE-IDENTITY-SHA256": "0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce",
+    "M-CODE-IDENTITY-PASS": true,
+    "M-CONTROLS-PASSED": 9,
+    "M-CONTROLS-FAILED": 0,
+    "M-FRAME-FIDELITY-n_admitted": 208,
+    "M-FRAME-FIDELITY-n_paths": 179,
+    "M-FRAME-FIDELITY-n_misses": 29,
+    "M-FRAME-FIDELITY-miss_rate": 0.13942307692307692,
+    "M-FRAME-FIDELITY-misses_by_host": {
+      "doc.rust-lang.org": 3,
+      "docs.pytest.org": 26,
+      "pandas.pydata.org": 0,
+      "docs.readthedocs.io": 0
+    },
+    "M-FRAME-FIDELITY-misses_by_hop": {
+      "3": 3,
+      "4": 26
+    },
+    "M-FRAME-FIDELITY-frame_fidelity_ok": false,
+    "M-COLD-BATCH-GETS": 926,
+    "M-COLD-ITEM-ORDINAL": {
+      "n": 208,
+      "mean": 166.01442307692307,
+      "min": 31,
+      "max": 250
+    },
+    "M-COLD-ITEM-BFS-REMEASURED": null,
+    "M-COLD-BATCH-BYTES": null,
+    "M-REVAL-PATH-GETS": null,
+    "M-REVAL-UNIQUE-GETS": null,
+    "M-REVAL-PATH-BYTES": null,
+    "M-REVAL-PATH-ELAPSED": null,
+    "M-CHANGE-RATE": null,
+    "M-DEAD-RATE": null,
+    "M-FALSE-ACCEPT-NAIVE": null,
+    "M-ENDPOINT-GETS": null,
+    "M-BREAK-EVEN-HOP": null,
+    "M-BREAK-EVEN-DENSITY": null,
+    "M-BREAK-EVEN-CYCLES": null,
+    "M-NON-DECISIONAL-recovered_path_len_mean": 4.402234636871508,
+    "M-NON-DECISIONAL-recovered_path_len_sum": 788,
+    "M-DENOMINATOR-cold_batch_gets": 926,
+    "M-DENOMINATOR-n_items_partial_run": 179,
+    "M-THRESHOLD-batch_pay_gets": 833.4,
+    "M-THRESHOLD-amortized_per_item_pay_gets": 4.006730769230769
+  },
+  "controls": {
+    "C-CODE-IDENTITY": {
+      "type": "gate",
+      "expected": "sha256(stripped FROZEN_CODE block from prereg.md section 9) == 0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce",
+      "observed": "0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/prereg.md#9", "research/experiments/EXP-FRONTIER-38188815194/execute_module.py"]
+    },
+    "C-CONTROLS-GATE": {
+      "type": "gate",
+      "expected": "all nine frozen controls PASS before the economics stage (V2)",
+      "observed": "9 of 9 PASS, failed=[]",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl"]
+    },
+    "C-BFS-PARENT-CHAIN": {
+      "type": "positive",
+      "expected": "parent-tracking BFS recovers [seed, /a.html, /b.html, /item.html]",
+      "observed": "path recovered exactly in that order",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L1"]
+    },
+    "C-PATH-CANARY": {
+      "type": "positive",
+      "expected": "snapshot of a recovered path succeeds, all status 200",
+      "observed": "path_len=4, snapshot_gets=4",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L2"]
+    },
+    "C-REVAL-NOCHANGE": {
+      "type": "null",
+      "expected": "unchanged fixture yields 0 changed, 0 dead (no spurious firing)",
+      "observed": "changed=[], dead=[], gets=4",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L3"]
+    },
+    "C-REVAL-CHANGE-DETECT": {
+      "type": "positive",
+      "expected": "mutated endpoint is detected by SHA-256",
+      "observed": "changed=['.../item.html']",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L4"]
+    },
+    "C-LIVENESS-404": {
+      "type": "positive",
+      "expected": "removed endpoint detected as dead via HTTP >=400",
+      "observed": "dead=['.../item.html']",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L5"]
+    },
+    "C-DECISION-CANARY-SUPPORTS": {
+      "type": "positive",
+      "expected": "decide(reval_unique_gets=700) -> SUPPORTS",
+      "observed": "SUPPORTS",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L6"]
+    },
+    "C-DECISION-CANARY-MIXED": {
+      "type": "positive",
+      "expected": "decide(reval_unique_gets=931, mean path 4.0) -> MIXED",
+      "observed": "MIXED",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L7"]
+    },
+    "C-DECISION-CANARY-MIXED-WINDOW": {
+      "type": "positive",
+      "expected": "batch pays at one window only -> MIXED",
+      "observed": "MIXED",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L8"]
+    },
+    "C-DECISION-CANARY-FALSIFIES": {
+      "type": "negative",
+      "expected": "decide(reval_unique_gets=931, mean path 5.0) -> FALSIFIES",
+      "observed": "FALSIFIES",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl#L9"]
+    },
+    "C-SEED-LIVENESS": {
+      "type": "gate",
+      "expected": "each host min-hop seed returns HTTP 200 (V5)",
+      "observed": "4 of 4 seeds HTTP 200 (doc.rust-lang.org/stable/book/ 200; pandas.pydata.org/docs/ 200; docs.readthedocs.io/en/stable/ 200 -> final docs.readthedocs.com/platform/stable/; docs.pytest.org/en/stable/ 200); live reconstruction also returned paths on all four hosts",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl", "research/experiments/EXP-FRONTIER-38188815194/provenance.json#pre_run_seed_probe"]
+    },
+    "C-FRAME-FIDELITY": {
+      "type": "gate",
+      "expected": "items.jsonl yields exactly 208 live=true admitted deep items on the four hosts AND reconstruction recovers a path for every admitted item (n_misses==0) (V3)",
+      "observed": "208 admitted items confirmed; reconstruction recovered 179; n_misses=29 (docs.pytest.org 26, doc.rust-lang.org 3); n_misses != 0",
+      "status": "FAIL",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/frame_misses.jsonl", "research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl", "research/experiments/EXP-FRONTIER-38188815194/prereg.md#11 V3"]
+    },
+    "C-BUDGET": {
+      "type": "gate",
+      "expected": "total_gets <= 20000 (V4)",
+      "observed": "not reached: the economics stage did not complete, so the frozen module never emitted derived/metrics.json and no authoritative total_gets exists; reconstruction alone is bounded by the 250-per-host budget (926 max) plus 179 snapshot GETs, far under the ceiling",
+      "status": "UNKNOWN",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/prereg.md#11 V4"]
+    },
+    "C-DENOMINATOR-GUARD": {
+      "type": "gate",
+      "expected": "cold_batch_gets>0 and n_items>0; no 0/0 enters thresholding (V6)",
+      "observed": "cold_batch_gets=926>0 and n_items=179>0 in the partial reconstruction; the guard itself holds",
+      "status": "PASS",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl"]
+    },
+    "C-DECISION-DETERMINISM": {
+      "type": "gate",
+      "expected": "decide() applied to recorded raw/economics.jsonl rows; recomputation stable (V8)",
+      "observed": "not reached: raw/economics.jsonl was never written because no revalidation window completed",
+      "status": "UNKNOWN",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38188815194/prereg.md#11 V8"]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/frame_misses.jsonl",
+      "sha256": "fd7d816b918ad2d8221a57029bb492066b8d6623dbf9c9bb1551312b5f21c92e",
+      "role": "raw",
+      "description": "The 29 admitted deep items for which the frozen reconstruction policy recovered no parent chain. This is the decisive V3 raw evidence."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl",
+      "sha256": "5192435b4c8a28d7f978f2a82ee1bbdabf4d092a79ab1b6d0614737d1ca33c46",
+      "role": "raw",
+      "description": "179 recovered BFS parent chains (url, path, len) from the live reconstruction under the frozen policy."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/controls.jsonl",
+      "sha256": "904187ce34eeedcfdde8f759d405f61ad78c7b7b80ba6475e8d1b5a264c75658",
+      "role": "raw",
+      "description": "Nine frozen offline in-process HTTP-fixture control rows, 9/9 PASS (V2 gate)."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/execute_module.py",
+      "sha256": "f18e5b55e563c26f2c21aeaa131f84a7145068d8154b3950c870c2c3e988d262",
+      "role": "code",
+      "description": "Frozen EXECUTE driver reconstructed byte-for-byte from prereg.md section 9. The sha256 of the stripped block, 0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce, matches DERIVED_SHA256 (V1 PASS); the file hash differs because the reconstruction appends one trailing newline."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/raw/economics.jsonl",
+      "sha256": null,
+      "role": "raw",
+      "description": "ABSENT. No revalidation window completed, so no per-window cost, change, dead or false-accept row exists. Explicitly checked and empty."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/derived/metrics.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "ABSENT. The frozen module writes this only after the full window ladder; it was never reached. Explicitly checked and absent."
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/run/derived/decision.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "ABSENT. No frozen decide() application exists because no economics row was produced. Explicitly checked and absent."
+    }
+  ],
+  "observations": [
+    "OBS-1 [RAW]: The frozen module reconstructed from prereg.md section 9 hashed to 0e42fa34c19d4c40b613610789cc8e3486308f6454e6d625c71c451fb06317ce, identical to the frozen DERIVED_SHA256 (V1 PASS).",
+    "OBS-2 [RAW]: All nine frozen offline controls PASS under the same code that scores the experiment: C-BFS-PARENT-CHAIN, C-PATH-CANARY, C-REVAL-NOCHANGE (null, changed=[] dead=[]), C-REVAL-CHANGE-DETECT (fires on mutation), C-LIVENESS-404 (fires on removal), and the four decision canaries returning SUPPORTS, MIXED, MIXED, FALSIFIES (V2 PASS).",
+    "OBS-3 [RAW]: All four frozen min-hop seeds returned HTTP 200 in a direct pre-run probe: doc.rust-lang.org/stable/book/ (22496 B), pandas.pydata.org/docs/ (22046 B), docs.readthedocs.io/en/stable/ (200, final URL https://docs.readthedocs.com/platform/stable/, 24433 B), docs.pytest.org/en/stable/ (31975 B) (V5 PASS).",
+    "OBS-4 [RAW]: The bound frame arithmetic reproduced the pre-registered values exactly: 208 live=true admitted items across four hosts (doc.rust-lang.org 13, pandas.pydata.org 8, docs.readthedocs.io 28, docs.pytest.org 159; hops 3 and 4 only); per-item cold BFS discovery ordinal mean 166.0144, min 31, max 250; sum(hop+1)=931; cold_batch_gets = 250+250+176+250 = 926; batch pay threshold 833.4; fully-loaded amortized per-item cold 926/208 = 4.451923 with pay threshold 4.006731.",
+    "OBS-5 [RAW]: Live reconstruction under the frozen policy (same-host static <a>, item-blind FIFO in document order, per-seed budget 250, depth 6, each URL fetched once, anchor = netloc of the seed's final URL after redirects) recovered a parent chain for 179 of the 208 admitted items. n_misses = 29.",
+    "OBS-6 [RAW]: The 29 misses are concentrated on two hosts: docs.pytest.org 26 and doc.rust-lang.org 3. By hop: 26 at hop 4 and 3 at hop 3. Zero misses on pandas.pydata.org and docs.readthedocs.io.",
+    "OBS-7 [RAW]: Every one of the 26 docs.pytest.org misses has a URL under /en/stable/announce/release-*.html (for example .../announce/release-4.1.1.html, .../announce/release-4.2.0.html, .../announce/release-4.2.1.html).",
+    "OBS-8 [RAW]: All three doc.rust-lang.org misses are https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html, .../book/ch09-02-recoverable-errors-with-result.html and .../reference/behavior-considered-undefined.html.",
+    "OBS-9 [RAW]: The 179 recovered paths have length mean 4.402235 and sum 788. Recorded as a raw descriptor of the partial reconstruction only; it is not the frozen per-item decision quantity, which is defined over the full 208-item admitted set.",
+    "OBS-10 [RAW]: The economics stage never reached the first revalidation window. run/raw/economics.jsonl does not exist, and run/derived/metrics.json and run/derived/decision.json do not exist.",
+    "OBS-11 [RAW]: Two orphaned processes from the two immediately preceding EXECUTE attempts of this same experiment were still running at the start of this attempt, both with ppid=1 (reparented to init): PID 17423 started 2026-10-16T15:01:44Z running 'python3 /tmp/opencode/exp38188815194_execute_module.py --stage all --out research/experiments/EXP-FRONTIER-38188815194', and PID 29013 started 2026-10-16T15:19:36Z running the economics stage into the same packet directory. Neither had written any raw/ or derived/ output into the packet directory. Both were terminated (SIGKILL) during this attempt to prevent unattributable concurrent writers into the packet directory; they had produced no artifacts, so no evidence was destroyed.",
+    "OBS-12 [RAW]: This attempt's own reconstruction process (PID 36342) was terminated by me after its reconstruction output was captured, because the frozen transaction could not continue past V3."
+  ],
+  "validity_notes": [
+    "VN-1 [DECISIVE GATE FAILURE]: prereg.md#11 V3 requires that reconstruction recover a path for every admitted item (n_misses==0) and states explicitly that 'Any missing item -> status=MEASUREMENT_INVALID listing the misses (representation loss, not a negative)'. n_misses=29. Per decision-rule gate G1, a V1-V6 failure yields status=MEASUREMENT_INVALID and outcome=NOT_APPLICABLE. This disposition was fixed by the frozen design BEFORE any revalidation cost was observed; it is a pre-registered representation-loss catch, not a post-hoc judgement, and it is not a scientific negative.",
+    "VN-2 [WHAT THIS IS NOT]: This packet does NOT show that full-path persistence fails to beat cold re-derivation. It contains no revalidation cost, no change rate, no dead rate, no naive-replay false-accept rate and no frozen decide() outcome. Nothing here may be read as support for or against C-CROSSSITE maintenance economics.",
+    "VN-3 [MOST LIKELY CAUSE, NOT ESTABLISHED]: The miss pattern is consistent with live-site restructuring since the frozen BFS frame was captured: the 26 docs.pytest.org misses are all per-release changelog pages under /en/stable/announce/, and the 3 doc.rust-lang.org misses are book-chapter and reference pages from a restructured edition. This diagnosis is a hypothesis about cause, NOT a measured observation; the frozen design did not authorise fetching the missing URLs individually to distinguish 'page removed' from 'page no longer linked within depth 6 of the frozen seed'. n_misses is the measured quantity and it alone triggers V3.",
+    "VN-4 [SECOND, INDEPENDENT BLOCKER - HARNESS ENVELOPE]: even with an intact frame the frozen design could not have completed in this run. The frozen module sleeps the nominal ladder 300+900+1800 = 3000 s before and between revalidation windows, and must additionally issue roughly 926 reconstruction GETs + ~931 snapshot GETs + 4x~931 revalidation GETs at observed single-host latencies of 0.1-0.3 s. The minimum wall clock is therefore >= 3558 s (about 59 minutes). The invoking harness .github/scripts/run-opencode-resilient.sh defaults SPIDER_MODEL_MAX_RUNTIME_SECONDS to 1200 s and, on expiry, issues kill -TERM then kill -KILL to the entire model process group (-$MODEL_PGID), and additionally reaps the model group after any parent exit specifically to stop orphan descendants. The frozen confirmatory measurement is therefore structurally unreachable inside one EXECUTE agent process. This is an infrastructure envelope mismatch, not a scientific negative, and it is the same mechanism behind the prior recorded EXECUTE failures (failure.json 'stage exited with code 67'; model_execute.json attempt 3 exit_code 124, category transient).",
+    "VN-5 [REPRESENTATION LOSS]: the population actually represented in run/raw/paths.jsonl is 179 of the 208 admitted deep items (86.06%), missing 3 on doc.rust-lang.org and 26 on docs.pytest.org. Any per-item cost computed on that subset is computed on a non-random subset of the frame and must never be compared against the frozen per-item threshold 4.006731, which is defined over the full 208-item admitted set. The subset path-length mean 4.402235 is recorded in metrics under an explicitly NON-DECISIONAL key for that reason and must not be thresholded.",
+    "VN-6 [DO NOT OVER-READ THE SUBSET MEAN]: it is tempting to note that the subset mean 4.402235 already exceeds the frozen per-item pay threshold 4.006731, which would point toward the pre-registered a-priori FALSIFIES branch of prereg.md#15. That comparison is INVALID and is not made here: the threshold is defined over 208 items, the subset is 179 items selected by exactly the variable under study (site survival), and no revalidation window was ever executed. Reporting it as a decision would be a preregistration weakening after seeing outcomes.",
+    "VN-7 [SUBSTRATE]: single runner vantage, credential-free, GET-only, stdlib urllib, no browser, no Docker, no credentials, no model calls, no pip installs. Results are not external-valid across ASN, geography or egress IP (inherited limitation from the parent program).",
+    "VN-8 [SESSION-SCALE BOUND NOT EXERCISED]: V7 forbids day-scale staleness or freshness-detector statements. No window was measured at all this run, so no change, dead or false-accept statistic exists at any horizon.",
+    "VN-9 [ORPHAN CONTAMINATION CONTROLLED]: see OBS-11. Two prior-attempt orphans were concurrently writing into this experiment's packet directory and were terminated during this attempt. No packet-directory raw/ or derived/ artifact from them exists, so no producer measurement in this packet is attributable to them. A future attempt should verify no orphaned execute_module process is live before starting.",
+    "VN-10 [FROZEN INPUT INTEGRITY]: every freeze.json.hashes entry (request.json, spec.json, prereg.md, design_review.json) and every freeze.json.artifact_hashes entry (9 files) was re-hashed at the start of this attempt and matched. No frozen file was modified. The parent handoff sha256 ffcd914d5f1ed0447fd239b6e723fc39b73bcc4e8b13b6b468d980414e90d6d6 matched. The only file written inside the packet directory by this attempt is execute_module.py (the frozen V1 reconstruction of the prereg block, which prereg.md#9 names as the EXECUTE driver) and the run/ evidence directory."
+  ],
+  "unresolved": [
+    "U-1: Whether the persistence-maintenance economics question is answerable at all on this frame. The frozen 20-host/556-item frame was captured before the live sites restructured; 29 of 208 admitted deep items are no longer reconstructible under the frozen policy. A re-census is required before any re-run of this question.",
+    "U-2: For each of the 29 misses, whether the page is gone (HTTP 404) or merely no longer linked within depth 6 of the frozen seed. The frozen design contains no arm that distinguishes these, so the cause is unresolved.",
+    "U-3: The four outcome-bearing quantities remain entirely unmeasured: revalidation GETs, revalidation bytes, elapsed revalidation time, and the session-scale change/dead/false-accept rates (M-REVAL-PATH-GETS, M-REVAL-UNIQUE-GETS, M-REVAL-PATH-BYTES, M-REVAL-PATH-ELAPSED, M-CHANGE-RATE, M-DEAD-RATE, M-FALSE-ACCEPT-NAIVE are all null).",
+    "U-4: Whether store-level path sharing (M-BREAK-EVEN-DENSITY) would have cleared the 833.4 batch threshold. This was the single quantity the prereg identified as deciding H2 (prereg.md#15 discloses the a-priori expectation that it would not, at ~931).",
+    "U-5: The harness-envelope mismatch (VN-4) is unresolved at the program level and will deterministically re-block any EXECUTE attempt of this packet, or of any future packet with a nominal ladder longer than SPIDER_MODEL_MAX_RUNTIME_SECONDS, until either the frozen ladder is re-registered against a longer envelope or the envelope is raised.",
+    "U-6: Whether A-ENDPOINT-ONLY-REVALIDATE (the endpoint-only ablation, 1 GET/item/cycle) would beat the fully-loaded per-item cold cost 4.451923. Unmeasured; the ablation was never executed."
+  ]
+}

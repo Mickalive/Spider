@@ -1,0 +1,23 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+    "research/experiments/EXP-FRONTIER-38184956362/audit.json": "5454dd3f3f6ecd093cd22fa870e265effa5aae82e883fb8e0797459b07438cd9",
+    "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json": "d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d",
+    "research/experiments/EXP-FRONTIER-38184956362/execute_module.py": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/census.jsonl": "8b7a5f919143ac1ae3c0a91c282d848a83c493656524bb0583e360225c38b40f",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl": "95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45",
+    "research/experiments/EXP-FRONTIER-38184956362/result.json": "da4c0c5b5b403c9683e34e9aa20c01ded6eb2d3eb344792ee40909bcfd32c32f"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-FRONTIER-38188815194",
+  "frozen_at": "2026-10-12T01:26:26.649075+00:00",
+  "hashes": {
+    "design_review.json": "9e0c512196a91779faf1b24af11ee374bf9b2ab80ee3aec8db6259d8c333ed1b",
+    "prereg.md": "6449fe9fff686832bb1afd3b5913992356cd3ea14d79b2b0a8f0b9eb3634cfb8",
+    "request.json": "ac770f5fb0ff56b1873d3c1dd6a234611010532afe613e750517172994fca923",
+    "spec.json": "6a2a3778848f7f7d2794f73ea000255a280eaeb6b202f593334a6846b3ddd163"
+  },
+  "schema_version": 1
+}

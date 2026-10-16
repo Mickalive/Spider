@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38446557638",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "FIX-1 (binding on any downstream reuse of the retrieval-vacating claim): frozen prereg.md#7 requires the fork co-report set 'selective_acc, n_fit, cal-to-test gap, mu, lexicon asymmetry, and dilution caveat'. result.json and report.md contain zero occurrences of the lexicon-asymmetry item: Arm A is scored with the surface gold lexicons read from freeze-bound artifacts (LEXICON-G1/G1-ALT/G2-HELDOUT in EXP-GRAPH-38180711589/prereg.md, LEXICON-G3 in EXP-GRAPH-38291080992/prereg.md, authored with the banks; parent audit EXP-GRAPH-38291080992/audit.json required_fixes[4](b)), whereas B-RETRIEVAL-OOS is lexicon-free. DIRECTOR must carry this asymmetry, together with the already-disclosed pooled-dilution caveat (report.md#5) and SELECT selective_acc=0.0 (report.md#4), into verdict.json.reason / handoff.json.do_not_assume so 'retrieval-B requirement vacated as specified' is not over-read as an information-matched or mechanism-general negative. Producer files are frozen and are not to be rewritten.",
+    "FIX-2 (claim/parent identity traceability): report.md#3 and spec.json#hypothesis say 'reproduces the parent gate vector' / 'parent-published 10/12'. The direct parent EXP-GRAPH-38385040804 is BLOCKED with result.json#metrics={} and published no gate vector; the published gate vector and the 10/12 exclusive-UP value belong to EXP-GRAPH-38291080992 (grandparent, prereg.md#0 labels it 'Grandparent context'). verdict.json/handoff.json must name EXP-GRAPH-38291080992 explicitly as the gate-vector parent so downstream agents do not cite EXP-GRAPH-38385040804 as a measurement source.",
+    "FIX-3 (evidence-reference completeness): result.json#controls.B-RETRIEVAL-TFIDF-resub has evidence_refs=[] while quoting ancestor values (n_fit=39, tau=0.4278, mu=0.0, cal 0.9487 -> test 0.2727); those values verify against research/experiments/EXP-GRAPH-38291080992/audit.json and result.json and must be cited there. Also raw_evidence/mechanics_check.json is listed in result.json#artifacts and committed by f2822367 but is absent from provenance.json#commands (which lists only the two --mechanics-only canaries); record its producing command or drop it from the artifact list in the next packet."
+  ],
+  "validity_findings": [
+    "FREEZE/PROVENANCE INTEGRITY VERIFIED. sha256 of the four frozen inputs matches freeze.json#hashes exactly (spec.json 7b2513a4..., prereg.md 86e0f5f1..., request.json 415bb148..., design_review.json d18124b9...), and all four freeze.json#artifact_hashes re-verify against the working tree (EXP-GRAPH-38175554380/prereg.md dc90bf71..., EXP-GRAPH-38180711589/prereg.md 5a64e90d..., EXP-GRAPH-38291080992/prereg.md 5a9cc119..., research/harness/goal_generator.py cb5218de...). No frozen file was mutated by EXECUTE.",
+    "RUNNER IDENTITY VERIFIED (RAW EVIDENCE -> OBSERVATION). Independent extraction of the prereg.md#13 FROZEN-RUNNER block (bytes between <!-- BEGIN FROZEN-RUNNER --> and <!-- END FROZEN-RUNNER --> plus exactly one trailing newline) is byte-identical to raw_evidence/runner_tframe_g3_oos.py, sha256 4c412aec6ba21c9d1733ccb1d5e1105ea62bf116395a142ce72ddb9651f9a7b8 = CANONICAL-RUNNER-SHA256; run_output.json#runner_self_sha matches.",
+    "REPAIR SCOPE VERIFIED AS CLAIMED. Unified diff of raw_evidence/runner_tframe_g3_oos.py against the direct parent EXP-GRAPH-38385040804/raw_evidence/runner_tframe_g3_oos.py shows exactly four changed lines: header comment, EXP_ID, SEED, and the two select_gids comprehensions ('for _, r in' -> 'for a, r in'). This matches report.md#1 ('the sole logic delta vs the parent') and prereg.md#2. The repair is metadata/loop-binding only and cannot alter scoring logic.",
+    "FULL INDEPENDENT RE-EXECUTION REPRODUCES RAW EVIDENCE BYTE-IDENTICALLY. Under Python 3.12.15 (provenance.json#environment.python) the frozen runner, executed by this audit without writing any file, emitted sha256 2c8adbb7e6d0072b1f919bea44dd285f9a9479f4bf4b178bc303b65541b99966 = recorded raw_evidence/run_output.json, and --mechanics-only emitted eb45678216c11bbd797fefc454e754324508f3d83b1c043288aed54e53fbaea8 = recorded mechanics_only_1.json/mechanics_only_2.json/mechanics_check.json. RAW EVIDENCE is therefore reproducible and not post-hoc edited.",
+    "DERIVED MEASUREMENTS RECOMPUTED FROM ROW-LEVEL VECTORS, ZERO MISMATCH. Every Arm A test metric in result.json#metrics was recomputed independently from run_output.json#execution_vectors using the frozen definitions (is_executed/metrics/gate_met semantics, FA<=0.10, cov>=0.50, UP_excl>=0.85): 4 axes x 4 modes (tframeplus, tframe_frozen, incumbent, gatefree) x 10 fields compared, 0 mismatches. result.json#controls, #observations, gate_vector_exclusive, selection_preserved, liveness_G3_TEST, invalid_reasons=[], decision=DECIDE_REQUIRE_RETRIEVAL_B, fork=TFRAME_DOMINATES_G3, test_n, c7_firing all match the raw output field-for-field; result.json is a faithful transcription of run_output.json (no inherited parent numbers, as report.md#1 asserts).",
+    "SEEDED NULL/POSITIVE CONTROLS RECOMPUTED INDEPENDENTLY (SEED=4086819270 = 38446557638 % 2**32), ZERO MISMATCH: CTRL-SHUFFLED-SELECTION, CTRL-RANDOM-ROLE, CTRL-RANDOM-GATE (incl. matched_abstention_count 18/23/20/20), NC-ABSTAIN-ALL (coverage 0.0, FA null, UP_exclusive 0.2/0.20408163265306123/0.08620689655172414/0.08620689655172414, UP_inclusive 0.35714285714285715/0.3333333333333333/0.24324324324324326/0.24324324324324326), NC-EXEC-ALL and CTRL-INCUMBENT (via gatefree/incumbent modes). Parent audit RQF-03 (placeholder NC-ABSTAIN-ALL) is genuinely closed: the control is executed, not hardcoded, and its UP_exclusive is informative rather than 1.0.",
+    "LEAKAGE TEST: NO TEST ROW REACHES FIT OR GATE SELECTION. Rebuilt the frozen fit pool from run_output.json#execution_vectors (cal rows of AXIS-G1-PRIMARY, AXIS-G2-RETEST, AXIS-G3-NEW in gid order, every 4th pooled-app row to SELECT): pooled cal-app=136 -> n_train=102, n_select_app=34, n_select_oos=60, train/select gid sets identical to run_output.json#fit_pool. By exact text_sha256: train intersect select = 0, (train union select) intersect all-axis TEST = 0, global cal intersect test = 0. Code inspection of runner arm_b_oos (lines 311-384) confirms IDF/centroids are built from train rows only, (tau,mu) searched on sel_app+sel_oos only with candidate margins round(m,4)>0 (mu=0.0005 > 0), and the frozen gate is applied unchanged to tests. Decision-rule invalidity clauses (d) and (e) did not fire; run_output.json#fit_pool.bars_met=true.",
+    "DESIGN STAGE DID NOT SEE OUTCOME-BEARING TEST DATA. raw_evidence/mechanics_only_1.json has status=DESIGN-MECHANICS-ONLY, test_not_scored=true, and contains only axes.cal_n/cal_metrics/c7_firing/fit_pool/retrieval_select/liveness -- no test_metrics key and no arm-B test gate. The DESIGN-visible quantities (calibration metrics, SELECT-gate feasibility tau=0.4156/mu=0.0005) are construction evidence, pre-declared as such in prereg.md#1/#8.1. The live open measurement (Arm B TEST gates) was not observable pre-freeze.",
+    "POSITIVE CONTROL IS RUNNER-ENFORCED AND PASSES. PC-AXIS-G1-ALTLEX is implemented in runner lines 529-530 (gate false appends 'positive-control-failed' and forces decision=null); observed gate=true (FA 0.05555555555555555 <= 0.10, coverage 0.9464285714285714 >= 0.50, UP_exclusive 1.0 >= 0.85). Parent audit RQF-06 (spec/runner divergence) is closed.",
+    "H1 IS SATISFIED UNDER THE SINGLE FROZEN TEXT, AND THAT TEXT MATCHES THE REALIZED VECTOR. spec.json#hypothesis and prereg.md#1 carry one identical H1 (G3 met, G1-PRIMARY met, G1-ALTLEX met, selection_preserved, G2 false SOLELY on UP_exclusive<0.85 with FA 0.0 and coverage 0.925 passing) and spec.json#falsifier/prereg.md#1 falsifier cover the realized G3-pass/G2-fail vector. Recomputed: G2 fails only on UP_exclusive (FA 0.0 and coverage 0.925 both pass), selection_preserved=(1.0,1.0,0.9056603773584906,1.0). Parent-audit RQF-01 (contradictory frozen H1 texts) does not recur in this packet.",
+    "REPRODUCTION CHARACTER OF THE ARM A LEG IS DISCLOSED, NOT SMUGGLED. Arm A test values are JSON-identical to EXP-GRAPH-38291080992/result.json#metrics for all four axes (tframeplus fields), identical c7_firing (2/4/2/1), and identical gatefree/incumbent FA, while selection/liveness/decision match as well. The ONLY new measurement in this packet is the honest-retrieval leg: fork BOTH_PASS_G3 (ancestor resubstitution fit, EXP-GRAPH-38291080992) -> TFRAME_DOMINATES_G3 (this packet's disjoint FIT-TRAIN/FIT-SELECT mu>0 fit). report.md#5 and result.json#validity_notes[0] label the Arm A leg a 'validity-transaction reproduction, not new evidence', satisfying parent-audit RQF-04.",
+    "INTERPRETATION IS WITHIN THE FROZEN BOUND. report.md#4's 'VACATES the retrieval-B requirement as specified / Product may no longer cite retrieval viability as the reason' is verbatim the frozen spec.json#product_consequence_negative and prereg.md#7 REQUIRE+TFRAME_DOMINATES branch, not a new claim; the producer also preserves prereg.md#3's disclaimer that collapse 'vacates the retrieval-B requirement as specified without falsifying retrieval in general' (report.md#5, result.json#validity_notes[3]), states outcome=MIXED/status=COMPLETE, retains HYPOTHESIS with a narrowed ceiling, and states 'This packet promotes nothing itself'. No contradiction between result.json and report.md was found; no number in report.md deviates from run_output.json.",
+    "DISCLOSURE SET IS 5/6 AGAINST THE FROZEN FORK CO-REPORT OBLIGATION. prereg.md#7 requires the fork's selective_acc, n_fit, cal-to-test gap, mu, lexicon asymmetry and dilution caveat to be co-reported. result.json/report.md supply selective_acc (SELECT 0.0, tests 0.25/0.0714/0.125/0.125), n_fit (fit_pool.n_train=102), cal-to-test gap (armB_select_gate vs armB_*_test), mu (0.0005, mu_active) and the dilution caveat; the lexicon asymmetry is absent (see required_fixes FIX-1). This is an omission, not a misstatement, and does not change any measured value.",
+    "PRECISION CAVEAT ON THE 'BYTE-IDENTICAL LINEAGE' WORDING. spec.json#measurement_validity states treatment analysis logic is byte-identical to the CANONICAL-RUNNER-SHA256 11fa2467... lineage apart from the repair and EXP_ID/SEED constants. Verified: comp/frame/analyze/build_axis and is_executed logic are identical to EXP-GRAPH-38291080992/raw_evidence/runner_tframe_g3.py modulo comments; clause_c7 differs only in its docstring (body identical); however the exclusive/inclusive key naming in metrics/gate_met, abstain_all_metrics, the fit-pool machinery and the PC trigger were introduced by the direct parent's declared repair chain (runner diff grandparent->parent = 319 lines). Value semantics are unchanged, demonstrated empirically: Arm A outputs are JSON-identical to EXP-GRAPH-38291080992. The literal byte-identity claim holds against the direct parent (4-line diff), not against 11fa2467.",
+    "MEASUREMENT FRAGILITY (DERIVABLE FROM RECORDED FACTS ONLY; no post-hoc test-side measurement was run by this audit). (a) AXIS-G3-NEW pooled_false_accept sits exactly at the gate boundary 2/20=0.10 and is carried entirely by C7: tframe_frozen FA is 0.20 (would fail), and C7 fires on 0 applicable rows, only on 2 test OOS rows (report.md#3 discloses the numbers; design_review.json#nonblocking_findings[2] flags the one-OOS sensitivity). (b) AXIS-G1-PRIMARY/ALTLEX unknown_precision_exclusive is 4/4=1.0 over a four-row denominator: a single abstained applicable row would give 4/5=0.80<0.85 and falsify H1. (c) The frozen contamination screen removed test rows whose treatment behavior is not recorded anywhere: G1 per axis dropped 4 test-app (app_004, app_052, app_076, app_100) and 2 test-OOS (oos_024, oos_026) plus 3 cal-app; G3 dropped 4 test-app (app_026, app_030, app_036, app_076) plus 1 cal-app; G2 dropped none. Unscreened G1 FA denominator would be 20 with up to 2 further OOS executes possible (3/20=0.15 would fail the 0.10 bar); G1/G3 UP denominators would grow by up to 4 abstained-app candidates. Therefore every gate, and H1 itself, is conditional on the frozen screened population; screen re-inclusion robustness is untested (unresolved, see unresolved). (d) G1-PRIMARY and G1-ALTLEX are text-sha identical row-for-row, so 'four axes' is three independent surfaces and selection_preserved contains a duplicated factor. (e) No confidence intervals or split/seed sensitivity anywhere: splits are deterministic every-kth rules inherited from the parent, FA denominators are n=20 (G3/G2) and n=18 (G1), the discriminating G2 UP denominator is n=12, and the flip needs 11/12 (one row). None of this is hidden -- report.md#3/#5 and result.json#metrics.g2_exclusive_margin expose most of it -- but it caps every claim at these frozen banks.",
+    "PRIOR AUDIT-STAGE INFRASTRUCTURE FAILURE IS NOT EVIDENCE. failure.json (stage=audit, AUDIT_FAILURE, exit 67, recorded 2026-10-13T23:51:47) and model_audit.json (status=retry, exit 1, category=transient) record failed audit attempts of this packet; commit 37b92903 contains only failure.json/model_audit.json/lane state, no audit.json. Per EXPERIMENT_PACKET.md#9 these are operational events and neither support nor weaken any scientific claim; this audit supersedes them."
+  ],
+  "baseline_findings": [
+    "NC-EXEC-ALL (gatefree execute-all) is live and separates: recomputed test FA G3 0.45, G2 0.50, G1 0.2777777777777778, ALTLEX 0.2777777777777778 vs Arm A 0.10/0.0/0.05555555555555555/0.05555555555555555 -- exactly the pre-registered expectation (0.2778-0.50 vs 0.0-0.10), so the treatment has real false-accept headroom against it and is not a floor artifact.",
+    "NC-ABSTAIN-ALL is genuinely EXECUTED (parent RQF-03 closed): coverage 0.0 on all axes, pooled_false_accept null, UP_exclusive 0.08620689655172414-0.20408163265306123 (informative, not 1.0), UP_inclusive 0.24324324324324326-0.35714285714285715 -- the abstention instrument reaches the floor while Arm A holds coverage 0.925-1.0. Independently recomputed from execution_vectors with identical values.",
+    "CTRL-RANDOM-GATE is volume-matched and separates strongly: FA 0.65/0.60/0.7777777777777778/0.7777777777777778 (matched_abstention_count 18/23/20/20) vs treatment 0.10/0.0/0.0556/0.0556, with UP 0.20-0.3889 vs 0.8333-1.0. CTRL-SHUFFLED-SELECTION (0.0-0.0556) and CTRL-RANDOM-ROLE (0.0189-0.1081) are near chance against treatment selective_acc 0.9057-1.0. All four controls recompute exactly under SEED=4086819270.",
+    "CTRL-INCUMBENT (shipped B-LEX-STRONG + S<=0) fails the frozen gate on all four axes (FA 0.20/0.20/0.1667/0.1667 > 0.10) while reaching the same selective_acc as gatefree (1.0/1.0/0.9057/1.0); the shipped logic therefore buys accuracy but not abstention precision, which is the claim being tested. CTRL-B-LEX-ONLY equals Arm A selective_acc on all four axes (1.0/1.0/0.9057/1.0), correctly showing Arm A's abstention removes only OOS rows here and does not change executed-app accuracy.",
+    "tframe_frozen is a correct diagnostic isolation of C7: identical to Arm A on applicable metrics (C7 fires on 0 applicable rows) and differing only through pooled OOS FA (G3 0.20->0.10, G2 0.10->0.00, G1/ALT unchanged at 0.0556). It is diagnostic, never a decision arm, and its numbers establish that the entire G3 gate pass -- and hence the G3 half of the TFRAME_DOMINATES_G3 fork -- rests on C7's two test-OOS suppressions. This baseline is strong enough to expose that dependence rather than hide it.",
+    "B-RETRIEVAL-OOS is a real, distinct comparator (separate stdlib TF-IDF implementation, no shared fitted state with Arm A, never Arm A's cost denominator) and the honest-fit protocol is enforced by code (mu>0 candidates only, SELECT-only gate search, frozen application). But it is an information-asymmetric and functionally weak comparator for any reading broader than the frozen gate: 60 pooled classes for 102 train rows (~1.7 rows/class), SELECT selective_acc 0/32=0.0 while still gate-feasible, test selective_acc 0.0714-0.25 (chance within a 20-class surface is ~0.05), and no lexicon while Arm A holds the surface gold lexicons. Its failure supports only a gate-level, implementation-specific negative (frozen fork language 'gate-level statements only', prereg.md#7), exactly as parent audit RQF-05 required; design_review.json#nonblocking_findings[0] tasked AUDIT with weighing SELECT selective_acc=0.0 before any viability reading, and this audit does: Arm B never demonstrated task competence even on the fit side, so TFRAME_DOMINATES_G3 is NOT evidence that retrieval mechanisms are non-viable, and the pre-registered pooling dilution biases against it.",
+    "B-RETRIEVAL-TFIDF-resub and B-EMBED-COSINE are correctly excluded from the decision (ancestor identity only; the latter not runnable, numpy absent). The resubstitution comparator's quoted values (n_fit=39, tau=0.4278, mu=0.0, cal 0.9487 -> test 0.2727) verify against research/experiments/EXP-GRAPH-38291080992/audit.json required_fixes[4] and result.json#metrics.arm_b_g3/arm_b_g3_cal_fit; only its evidence_refs are missing (required_fixes FIX-3).",
+    "Baseline set as a whole is adequate for the frozen decision rule: execute-all ceiling, shipped-incumbent, clause ablation, volume-matched and role/selection chance controls, abstention floor, positive control, and one honest out-of-sample learned comparator. No control is a placeholder, no control is insensitive in the direction that matters, and every control value was reproduced by this audit."
+  ],
+  "recomputed_metrics": {
+    "independent_reexecution": {
+      "python": "3.12.15",
+      "full_run_output_sha256": "2c8adbb7e6d0072b1f919bea44dd285f9a9479f4bf4b178bc303b65541b99966",
+      "full_run_byte_identical": true,
+      "mechanics_only_sha256": "eb45678216c11bbd797fefc454e754324508f3d83b1c043288aed54e53fbaea8",
+      "mechanics_only_byte_identical": true,
+      "runner_block_extraction_matches_canonical": true,
+      "runner_diff_vs_direct_parent": "4 lines (header, EXP_ID, SEED, two select_gids loop bindings)"
+    },
+    "metric_recompute_vs_result_json": {
+      "source": "raw_evidence/run_output.json#execution_vectors (row-level)",
+      "axes": 4,
+      "modes": ["tframeplus", "tframe_frozen", "incumbent", "gatefree"],
+      "fields_per_mode": 10,
+      "mismatches": [],
+      "result_json_transcription_errors": 0
+    },
+    "armA_AXIS-G3-NEW_test": {
+      "pooled_false_accept": 0.1,
+      "pooled_false_accept_counts": "2/20",
+      "coverage": 1.0,
+      "coverage_counts": "36/36",
+      "unknown_precision_exclusive": 1.0,
+      "unknown_precision_exclusive_counts": "7/7",
+      "unknown_precision_inclusive": 1.0,
+      "unknown_precision_inclusive_counts": "18/18",
+      "selective_acc": 1.0,
+      "executed": 38,
+      "executed_app": 36,
+      "executed_oos": 2,
+      "abstained_resolved": 7,
+      "unresolved_applicable": 0,
+      "gate_met": true
+    },
+    "armA_AXIS-G2-RETEST_test": {
+      "pooled_false_accept": 0.0,
+      "pooled_false_accept_counts": "0/20",
+      "coverage": 0.925,
+      "coverage_counts": "37/40",
+      "unknown_precision_exclusive": 0.8333333333333334,
+      "unknown_precision_exclusive_counts": "10/12",
+      "unknown_precision_inclusive": 0.8695652173913043,
+      "unknown_precision_inclusive_counts": "20/23",
+      "selective_acc": 1.0,
+      "executed": 37,
+      "executed_app": 37,
+      "executed_oos": 0,
+      "abstained_resolved": 12,
+      "unresolved_applicable": 1,
+      "gate_met": false,
+      "fails_only_on": "unknown_precision_exclusive 10/12 = 0.8333333333333334 < 0.85 (FA and coverage pass)"
+    },
+    "armA_AXIS-G1-PRIMARY_test": {
+      "pooled_false_accept": 0.05555555555555555,
+      "pooled_false_accept_counts": "1/18",
+      "coverage": 0.9464285714285714,
+      "coverage_counts": "53/56",
+      "unknown_precision_exclusive": 1.0,
+      "unknown_precision_exclusive_counts": "4/4",
+      "unknown_precision_inclusive": 0.85,
+      "unknown_precision_inclusive_counts": "17/20",
+      "selective_acc": 0.9056603773584906,
+      "executed": 54,
+      "executed_app": 53,
+      "executed_oos": 1,
+      "abstained_resolved": 4,
+      "unresolved_applicable": 3,
+      "gate_met": true
+    },
+    "armA_AXIS-G1-ALTLEX_test": {
+      "pooled_false_accept": 0.05555555555555555,
+      "pooled_false_accept_counts": "1/18",
+      "coverage": 0.9464285714285714,
+      "coverage_counts": "53/56",
+      "unknown_precision_exclusive": 1.0,
+      "unknown_precision_exclusive_counts": "4/4",
+      "unknown_precision_inclusive": 0.85,
+      "unknown_precision_inclusive_counts": "17/20",
+      "selective_acc": 1.0,
+      "executed": 54,
+      "executed_app": 53,
+      "executed_oos": 1,
+      "abstained_resolved": 4,
+      "unresolved_applicable": 3,
+      "gate_met": true
+    },
+    "gate_vector_exclusive": {
+      "AXIS-G3-NEW": true,
+      "AXIS-G2-RETEST": false,
+      "AXIS-G1-PRIMARY": true,
+      "AXIS-G1-ALTLEX": true
+    },
+    "selection_selective_acc": {
+      "AXIS-G3-NEW": 1.0,
+      "AXIS-G2-RETEST": 1.0,
+      "AXIS-G1-PRIMARY": 0.9056603773584906,
+      "AXIS-G1-ALTLEX": 1.0
+    },
+    "selection_preserved": true,
+    "decision": "DECIDE_REQUIRE_RETRIEVAL_B",
+    "fork": "TFRAME_DOMINATES_G3",
+    "retrieval_oos_feasible": true,
+    "liveness_G3_TEST": {
+      "live": true,
+      "executed_total": 38,
+      "n_total": 56,
+      "executed_app": 36,
+      "abstained_resolved": 7
+    },
+    "invalid_reasons": [],
+    "fit_pool": {
+      "n_train": 102,
+      "n_select_app": 34,
+      "n_select_oos": 60,
+      "pooled_cal_app_rebuilt": 136,
+      "train_select_disjoint": true,
+      "fit_test_disjoint": true,
+      "independent_text_sha_overlap_train_vs_select": 0,
+      "independent_text_sha_overlap_fit_vs_all_axis_test": 0,
+      "independent_cal_vs_test_sha_overlap": 0,
+      "bars_met": true
+    },
+    "armB_select_gate": {
+      "tau": 0.4156,
+      "mu": 0.0005,
+      "mu_active": true,
+      "pooled_false_accept": 0.1,
+      "pooled_false_accept_counts": "6/60",
+      "coverage": 0.9411764705882353,
+      "coverage_counts": "32/34",
+      "unknown_precision_exclusive": 0.9642857142857143,
+      "unknown_precision_exclusive_counts": "54/56",
+      "selective_acc": 0.0,
+      "selective_acc_counts": "0/32",
+      "executed": 38,
+      "abstained": 56,
+      "verification_method": "byte-identical full re-execution plus code-path inspection; no row-level Arm B scores are recorded in run_output.json, so row-level independent recomputation is not possible from packet evidence"
+    },
+    "armB_AXIS-G3-NEW_test": {
+      "pooled_false_accept": 0.05,
+      "coverage": 0.7777777777777778,
+      "unknown_precision_exclusive": 0.7037037037037037,
+      "selective_acc": 0.25,
+      "executed": 29,
+      "abstained": 27,
+      "gate_met": false
+    },
+    "armB_AXIS-G2-RETEST_test": {
+      "pooled_false_accept": 0.0,
+      "coverage": 0.35,
+      "unknown_precision_exclusive": 0.43478260869565216,
+      "selective_acc": 0.07142857142857142,
+      "executed": 14,
+      "abstained": 46,
+      "gate_met": false
+    },
+    "armB_AXIS-G1-PRIMARY_test": {
+      "pooled_false_accept": 0.0,
+      "coverage": 0.42857142857142855,
+      "unknown_precision_exclusive": 0.36,
+      "selective_acc": 0.125,
+      "executed": 24,
+      "abstained": 50,
+      "gate_met": false
+    },
+    "armB_AXIS-G1-ALTLEX_test": {
+      "pooled_false_accept": 0.0,
+      "coverage": 0.42857142857142855,
+      "unknown_precision_exclusive": 0.36,
+      "selective_acc": 0.125,
+      "executed": 24,
+      "abstained": 50,
+      "gate_met": false
+    },
+    "armB_gate_met": {
+      "g3": false,
+      "g2": false
+    },
+    "controls_recomputed": {
+      "NC-EXEC-ALL_pooled_false_accept": {
+        "AXIS-G3-NEW": 0.45,
+        "AXIS-G2-RETEST": 0.5,
+        "AXIS-G1-PRIMARY": 0.2777777777777778,
+        "AXIS-G1-ALTLEX": 0.2777777777777778
+      },
+      "CTRL-INCUMBENT": {
+        "pooled_false_accept": {
+          "AXIS-G3-NEW": 0.2,
+          "AXIS-G2-RETEST": 0.2,
+          "AXIS-G1-PRIMARY": 0.16666666666666666,
+          "AXIS-G1-ALTLEX": 0.16666666666666666
+        },
+        "selective_acc": {
+          "AXIS-G3-NEW": 1.0,
+          "AXIS-G2-RETEST": 1.0,
+          "AXIS-G1-PRIMARY": 0.9056603773584906,
+          "AXIS-G1-ALTLEX": 1.0
+        }
+      },
+      "CTRL-B-LEX-ONLY_selective_acc": {
+        "AXIS-G3-NEW": 1.0,
+        "AXIS-G2-RETEST": 1.0,
+        "AXIS-G1-PRIMARY": 0.9056603773584906,
+        "AXIS-G1-ALTLEX": 1.0
+      },
+      "NC-ABSTAIN-ALL": {
+        "coverage": 0.0,
+        "pooled_false_accept": null,
+        "unknown_precision_exclusive": {
+          "AXIS-G3-NEW": 0.2,
+          "AXIS-G2-RETEST": 0.20408163265306123,
+          "AXIS-G1-PRIMARY": 0.08620689655172414,
+          "AXIS-G1-ALTLEX": 0.08620689655172414
+        },
+        "unknown_precision_inclusive": {
+          "AXIS-G3-NEW": 0.35714285714285715,
+          "AXIS-G2-RETEST": 0.3333333333333333,
+          "AXIS-G1-PRIMARY": 0.24324324324324326,
+          "AXIS-G1-ALTLEX": 0.24324324324324326
+        }
+      },
+      "CTRL-RANDOM-GATE": {
+        "pooled_false_accept": {
+          "AXIS-G3-NEW": 0.65,
+          "AXIS-G2-RETEST": 0.6,
+          "AXIS-G1-PRIMARY": 0.7777777777777778,
+          "AXIS-G1-ALTLEX": 0.7777777777777778
+        },
+        "matched_abstention_count": {
+          "AXIS-G3-NEW": 18,
+          "AXIS-G2-RETEST": 23,
+          "AXIS-G1-PRIMARY": 20,
+          "AXIS-G1-ALTLEX": 20
+        }
+      },
+      "CTRL-SHUFFLED-SELECTION": {
+        "AXIS-G3-NEW": 0.05555555555555555,
+        "AXIS-G2-RETEST": 0.05405405405405406,
+        "AXIS-G1-PRIMARY": 0.0,
+        "AXIS-G1-ALTLEX": 0.0
+      },
+      "CTRL-RANDOM-ROLE": {
+        "AXIS-G3-NEW": 0.027777777777777776,
+        "AXIS-G2-RETEST": 0.10810810810810811,
+        "AXIS-G1-PRIMARY": 0.018867924528301886,
+        "AXIS-G1-ALTLEX": 0.018867924528301886
+      },
+      "PC-AXIS-G1-ALTLEX": {
+        "gate_met": true,
+        "recomputed": "FA 0.05555555555555555 <= 0.10, coverage 0.9464285714285714 >= 0.50, unknown_precision_exclusive 1.0 >= 0.85",
+        "runner_enforced": true
+      },
+      "seed": 4086819270,
+      "mismatches_vs_run_output": 0
+    },
+    "tframe_frozen_pooled_false_accept": {
+      "AXIS-G3-NEW": 0.2,
+      "AXIS-G2-RETEST": 0.1,
+      "AXIS-G1-PRIMARY": 0.05555555555555555,
+      "AXIS-G1-ALTLEX": 0.05555555555555555,
+      "c7_delta_test": {
+        "AXIS-G3-NEW": "0.20 -> 0.10",
+        "AXIS-G2-RETEST": "0.10 -> 0.00",
+        "AXIS-G1-PRIMARY": "unchanged",
+        "AXIS-G1-ALTLEX": "unchanged"
+      },
+      "c7_firing_bound_totals_app_oos": {
+        "AXIS-G3-NEW": [0, 2],
+        "AXIS-G2-RETEST": [0, 4],
+        "AXIS-G1-PRIMARY": [0, 2],
+        "AXIS-G1-ALTLEX": [0, 1]
+      }
+    },
+    "parent_reproduction_check_vs_EXP-GRAPH-38291080992": {
+      "armA_tframeplus_test_fields_identical_all_four_axes": true,
+      "c7_firing_identical": true,
+      "nc_exec_all_and_incumbent_test_fa_identical": true,
+      "gates_identical": true,
+      "selection_identical": true,
+      "decision_identical": "DECIDE_REQUIRE_RETRIEVAL_B",
+      "fork_changed": "BOTH_PASS_G3 -> TFRAME_DOMINATES_G3",
+      "direct_parent_EXP-GRAPH-38385040804_metrics": "{} (BLOCKED, zero outcome-bearing measurements)"
+    },
+    "screen_drop_accounting": {
+      "AXIS-G3-NEW": {
+        "flagged": 5,
+        "dropped_cal_app": 1,
+        "dropped_test_app": 4,
+        "dropped_test_oos": 0,
+        "dropped_gids": ["app_009", "app_026", "app_030", "app_036", "app_076"]
+      },
+      "AXIS-G2-RETEST": {
+        "flagged": 0,
+        "dropped_test_app": 0,
+        "dropped_test_oos": 0
+      },
+      "AXIS-G1-PRIMARY": {
+        "flagged": 9,
+        "dropped_cal_app": 3,
+        "dropped_test_app": 4,
+        "dropped_test_oos": 2,
+        "dropped_gids": ["app_004", "app_049", "app_052", "app_073", "app_076", "app_097", "app_100", "oos_024", "oos_026"]
+      },
+      "AXIS-G1-ALTLEX": {
+        "flagged": 9,
+        "identical_flagged_set_to_AXIS-G1-PRIMARY": true,
+        "dropped_test_app": 4,
+        "dropped_test_oos": 2
+      },
+      "note": "split assignment of dropped gids derived arithmetically from the frozen rule (i % splitmod) in (1,3,5); no excluded test row was scored by this audit"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CLAIM (this packet only, bounded to the frozen banks, splits, lexicons and screened population). (1) TRANSACTION VALIDITY: freeze hashes and all four freeze_artifacts re-verify; the FROZEN-RUNNER block extracts byte-identically to raw_evidence/runner_tframe_g3_oos.py (sha256 4c412aec6ba21c9d1733ccb1d5e1105ea62bf116395a142ce72ddb9651f9a7b8); an independent full re-execution reproduces run_output.json byte-identically (2c8adbb7e6d0072b1f919bea44dd285f9a9479f4bf4b178bc303b65541b99966) and both mechanics canaries (eb456782...); all Arm A metrics and all seeded controls recompute with zero mismatches from row-level execution_vectors; fit/select/test disjointness holds by exact text-sha (102/34/60, zero overlapping hashes); PC-AXIS-G1-ALTLEX passes under runner enforcement; invalid_reasons=[]. Therefore status=COMPLETE with decision DECIDE_REQUIRE_RETRIEVAL_B and fork TFRAME_DOMINATES_G3 is a valid frozen-rule outcome, not an infrastructure event and not a scientific falsification. (2) WHAT IS ESTABLISHED: on these frozen banks the repaired deterministic T-FRAME+ reproduces the EXP-GRAPH-38291080992 gate vector exactly at gate level under the pre-registered EXCLUSIVE denominator (G3 FA 0.10=2/20, cov 1.0, UP_excl 1.0, sel 1.0; G1-PRIMARY and G1-ALTLEX FA 0.0556=1/18, cov 0.9464, UP_excl 1.0; G2-RETEST gate-false SOLELY on UP_excl 10/12=0.8333<0.85 with FA 0.0 and cov 0.925 passing; selection_preserved 1.0/1.0/0.9057/1.0), i.e. frozen-spec H1 is SUPPORTED and the ship/no-ship branch does not flip; and the honest pooled FIT-TRAIN/FIT-SELECT mu>0 B-RETRIEVAL-OOS comparator -- SELECT-feasible at tau=0.4156, mu=0.0005 (SELECT FA 0.10, cov 0.9412, UP 0.9643) yet with SELECT selective_acc 0/32 -- fails every axis TEST gate (UP_excl 0.7037/0.4348/0.36/0.36; selective_acc 0.25/0.0714/0.125/0.125), which under the frozen cascade emits the pre-registered product consequence REQUIRE + TFRAME_DOMINATES_G3 = vacate the retrieval-B requirement as specified, boundary returns to the Director. (3) CEILING LIMITS -- NOT justified by this packet: no new outcome evidence for the deterministic clause set (Arm A fields are JSON-identical to EXP-GRAPH-38291080992 on all four axes; this is a validity-transaction reproduction under a repaired runner, disclosed in report.md#5 and validity_notes[0]); no claim elevation -- C-SEMANTIC-RESOLVE stays at effective status HYPOTHESIS per the frozen prereg.md#7 branch ('HYPOTHESIS retained with narrowed ceiling') and codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE; no product promotion (spec: 'This packet promotes nothing itself'; verdict authority is the Director's alone); no statistical generalization (deterministic every-kth splits, no CIs, FA denominators n=18-20, discriminating G2 UP denominator n=12, flip requires 11/12 = one row); every gate is conditional on the frozen contamination screen, which removed 2 test-OOS and 4 test-app rows per G1 axis and 4 test-app rows on G3, so G1 UP_excl 4/4 and G1 FA 1/18 are one-to-three-row margins away from flipping H1, and G3 FA sits exactly at the 0.10 boundary carried entirely by two C7 test-OOS suppressions; the ship/no-ship branch is denominator-conditional (unknown_precision_inclusive on identical rows reads G2 0.8696 >= 0.85 and would emit DECIDE_SHIP_TFRAME_BROAD -- pre-declared invalid for decisions and disclosed in report.md#5, so DECIDE_REQUIRE_RETRIEVAL_B must never be quoted as a robust negative without that sensitivity); four axes are three independent surfaces (G1-PRIMARY and G1-ALTLEX are text-sha identical); Arm A holds the surface gold lexicons while Arm B holds none, so the fork is not an information-matched comparison; the retrieval negative is gate-level, implementation-specific (pooled stdlib TF-IDF nearest centroid over 60 pooled classes with ~1.7 train rows per class), conditional on the frozen SELECT gate-selection tie-break, and biased against retrieval by the pre-registered pooling dilution -- it supports ONLY 'this honest retrieval comparator does not meet the frozen gates on these tests, so the retrieval-B requirement is vacated as specified', and explicitly NOT 'retrieval is not viable' or 'structure beats retrieval in general' (prereg.md#3 disclaimer preserved). (4) EVIDENCE CLASS: negative/bounded result plus a reproduction, first-class and correctly encoded as outcome=MIXED, status=COMPLETE; the prior audit-stage failure.json is infrastructure and carries no scientific weight."
+  ,
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38446557638/freeze.json (hashes + artifact_hashes; all re-verified by audit)",
+    "research/experiments/EXP-GRAPH-38446557638/spec.json (hypothesis, falsifier, decision_rule, baselines, product_consequence_negative, freeze_eligibility)",
+    "research/experiments/EXP-GRAPH-38446557638/prereg.md#0/#1/#2/#3/#5/#6/#7/#8.9/#10/#13 (single H1 text, honest-comparator contract, frozen cascade, fork co-report set, FROZEN-RUNNER block lines 119-721)",
+    "research/experiments/EXP-GRAPH-38446557638/raw_evidence/run_output.json (sha256 2c8adbb7e6d0072b1f919bea44dd285f9a9479f4bf4b178bc303b65541b99966; execution_vectors, gates, fit_pool, arm_b_oos, controls, flagged)",
+    "research/experiments/EXP-GRAPH-38446557638/raw_evidence/runner_tframe_g3_oos.py (sha256 4c412aec6ba21c9d1733ccb1d5e1105ea62bf116395a142ce72ddb9651f9a7b8; metrics 234-254, arm_b_oos 311-384, build_fit_pool 294-304, invalidity+PC 521-560)",
+    "research/experiments/EXP-GRAPH-38446557638/raw_evidence/mechanics_only_1.json and mechanics_only_2.json (sha256 eb45678216c11bbd797fefc454e754324508f3d83b1c043288aed54e53fbaea8; status=DESIGN-MECHANICS-ONLY, test_not_scored=true)",
+    "research/experiments/EXP-GRAPH-38446557638/result.json (metrics.armA_*, metrics.armB_*, metrics.fit_pool, metrics.decision, metrics.fork, controls.*, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-GRAPH-38446557638/report.md (sections 1-5: reproduction disclosure, outcome table, frozen-consequence interpretation, caveats)",
+    "research/experiments/EXP-GRAPH-38446557638/provenance.json (commands, exact_output_hashes, freeze_artifact_hashes_verified, runner_identity, environment)",
+    "research/experiments/EXP-GRAPH-38446557638/design_review.json (six PASS; nonblocking_findings[0] SELECT selective_acc=0.0, [1] near-deterministic H1, [2] G3 FA boundary -- all adjudicated in this audit)",
+    "research/experiments/EXP-GRAPH-38446557638/failure.json and model_audit.json (prior audit-stage infrastructure failure; superseded by this audit)",
+    "research/experiments/EXP-GRAPH-38385040804/result.json (direct parent: status=BLOCKED, metrics={}, zero outcome-bearing measurements) and handoff.json (do_not_assume entries preserved here)",
+    "research/experiments/EXP-GRAPH-38291080992/result.json (gate-vector parent: identical Arm A test metrics, fork BOTH_PASS_G3, resubstitution fit tau=0.4278/mu=0.0) and audit.json (RQF-01..RQF-06 baseline for the fix audit)",
+    "research/experiments/EXP-GRAPH-38291080992/raw_evidence/runner_tframe_g3.py (sha256 lineage 11fa2467...; function-level diff used for the byte-identity precision finding)",
+    "research/lanes/registry.json#lanes.graph (C-SEMANTIC-RESOLVE is a priority claim of the graph lane)",
+    "codex/claim_state.json#effective_event_by_claim.C-SEMANTIC-RESOLVE (effective status HYPOTHESIS from EXP-GRAPH-38385040804 BLOCKED, prior effective EXP-GRAPH-38291080992 retain-hypothesis)",
+    "audit procedure: independent full runner re-execution and --mechanics-only re-execution piped to sha256 (no producer file read-modified), independent metric/control recomputation from execution_vectors, independent fit-pool/text-sha disjointness reconstruction, unified diffs of runner vs EXP-GRAPH-38385040804 and EXP-GRAPH-38291080992 runners, freeze/prereg block extraction hash checks"
+  ],
+  "unresolved": [
+    "Producer unresolved #1 retained: whether pooled-retrieval dilution (cross-domain distractor classes in pooled FIT-TRAIN) explains part of the Arm B TEST collapse versus an intrinsic retrieval weakness on these surfaces. This audit adds that the diagnosis is not closed by packet evidence: SELECT selective_acc is 0/32 while the ancestor resubstitution fit reached cal 0.9487, and the pooled design gives ~1.7 train rows per class over 60 classes -- neither the class-coverage/composition of the every-4th-row SELECT split nor the train-row-per-class effect has been isolated.",
+    "Producer unresolved #2 retained and quantified: whether the one-row G2 exclusive margin (10/12 vs 11/12 needed) is stable; no sensitivity rerun is authorized by this packet.",
+    "Screen re-inclusion sensitivity (new, quantified, not measured): the frozen contamination screen removed 2 test-OOS and 4 test-app rows per G1 axis and 4 test-app rows on G3. Recomputing the frozen gates with those rows re-included would require scoring excluded TEST rows post hoc, which this audit deliberately did NOT do. Exposures derivable without scoring: G1 FA would have denominator 20 with up to 2 additional OOS executes possible (3/20 = 0.15 > 0.10 fails); G1 UP_excl 4/4 fails at 4/5 = 0.80 if even one dropped test-app row is a resolved abstention; G3 UP_excl 7/7 fails at 7/9 = 0.778 if two dropped test-app rows are resolved abstentions. A pre-registered screen-sensitivity check is the smallest robustness action for the H1 bound.",
+    "Gate-selection sensitivity (new): the frozen lexicographic SELECT rule (feasible, then max coverage, first-wins ties over ascending tau/mu) yields tau=0.4156, mu=0.0005; whether other SELECT-feasible (tau, mu>0) gates would give the same TFRAME_DOMINATES_G3 fork on TEST is untested, so the fork is conditional on that single selection rule.",
+    "Gold-lexicon exposure (carried from EXP-GRAPH-38291080992/audit.json claim_ceiling): whether Arm A's surface gold lexicons, authored alongside the banks, could be excluded from packet evidence has never been tested (needs a blind-lexicon or cross-surface test). Until then no independent-replication or generalization reading of the Arm A bound is safe.",
+    "Whether G1-PRIMARY/G1-ALTLEX should be treated as one surface (text-sha identical rows) in any downstream aggregation of 'four axes'; selection_preserved currently counts the duplicated factor twice.",
+    "Traceability items that DIRECTOR must resolve before any claim_update reason uses the phrase 'parent': gate-vector parent is EXP-GRAPH-38291080992, direct parent EXP-GRAPH-38385040804 published no metrics (required_fixes FIX-2).",
+    "Operational, non-scientific: failure.json(stage=audit, exit 67) and model_audit.json(status=retry) record failed audit attempts; this audit.json is the completed AUDIT output for the packet and those failures neither support nor weaken any claim."
+  ]
+}

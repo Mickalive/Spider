@@ -17,7 +17,7 @@ Active architecture: `SPIDER_ARCHITECTURE_RESEARCH2.md`.
 
 A results-driven **product delivery loop** and the independent **scientific research factory** now have distinct success criteria. The product may compose existing Browser Use / Stagehand / Playwright-style agents with SPIDER's conservative reusable-mechanism bridge; Physics is not a prerequisite. The research factory keeps six lanes and the *same* historical-and-current Codex, but should fund experiments according to decision-changing information value and strong baselines.
 
-See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md). Prototype code on the strategy branch is **not promoted**, and the benchmark scorer is descriptive only; no externally validated product saving has yet been measured.
+See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md) and the [plain-language product status](docs/PRODUCT_STATUS_2026-10-12.md). The real-browser prototype remains on **draft PR #42**, not on `main`. Its Browser Use / Stagehand billing adapters are **not** part of the zero-paid-model Research factory. No externally validated product saving has yet been measured.
 
 ## Active lanes
 
@@ -31,6 +31,24 @@ Six independent lanes run without synchronizing on one another:
 - `frontier` — high-upside orthogonal hypotheses and new research directions.
 
 Each lane can advance while every other lane is slow, failed, auditing or idle.
+
+## Public product reuse demo (read-only, no paid inference)
+
+A narrow, executable slice now ties the existing Spider kernel to public
+GitHub Releases pages. It validates two training observations against the
+independent GitHub API, learns and persists a guarded route, reuses it for
+two different holdout repositories, and invalidates on verification failure.
+
+```bash
+PYTHONPATH=src python scripts/demo_public_reuse.py
+```
+
+The live public product smoke in the [existing CI](.github/workflows/ci.yml)
+checks real pages and official oracles; offline unit tests also prove that
+a fake/mismatched answer cannot become trusted memory. **This is not an
+autonomous browser-agent trial and demonstrates no monetary savings** versus
+GitHub's API. The more extensive Browser Use/Stagehand pilot remains in
+draft PR #42, and its paid credentials/adapters remain disabled.
 
 ## Product core
 

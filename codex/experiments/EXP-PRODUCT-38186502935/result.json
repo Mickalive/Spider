@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38186502935",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-E2E-PASS": {
+      "value": true,
+      "primary_metric": true,
+      "clauses": {
+        "E2E-IDENTITY": "PASS",
+        "E2E-POSITIVE": "PASS",
+        "E2E-ABSTENTION": "PASS",
+        "E2E-COUNTERS": "PASS",
+        "E2E-CONTROLS": "PASS",
+        "V8-FREEZE-BINDING": "PASS"
+      },
+      "definition": "binary conjunction of the five frozen E2E clauses with V8 enforced at EXECUTE; COMPLETE/SUPPORTS iff all clauses PASS"
+    },
+    "M-IDENTITY": {
+      "shipping_kernel_path": "src/spider/kernel.py",
+      "shipping_kernel_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_expected_sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "carrier_git_blob": "b15ed8487e2d1326df4ca64fb4c7b6e5a0ebf796",
+      "literal_git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "literal_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "shipping_matches_carrier": true,
+      "git_blob_b15ed848_sha256_recomputed": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72",
+      "git_blob_cfec9866_sha256_recomputed": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "git_tree_clean_for_measured_artifacts": true,
+      "git_tree_note": "no tracked src/, tests/ or pyproject.toml change; only the canonical Codex sync metadata (SPIDER_CODEX.md, codex/claim_state.json, codex/index.json) and two untracked codex experiment dirs from the sync merge are dirty, outside Product scope and not measured"
+    },
+    "M-POSITIVE": {
+      "mechanism_id": "mech-1cfc19af1d03f157",
+      "parameter_slots": ["item"],
+      "induced_support": {"item": "^item\\-00[0-9]{1}$"},
+      "confidence": 0.9,
+      "resolution_status": "EXECUTABLE",
+      "bound_action": {"method": "GET", "url": "http://127.0.0.1:40955/api/items/item-000"},
+      "bound_action_url_contains_held_out": true,
+      "held_out_identifier": "item-000",
+      "held_out_never_observed_prior_occurrences": 0,
+      "fixture_status": 200,
+      "verify": true,
+      "clause_pass": true,
+      "induced_min_confidence_default": 0.8,
+      "threshold_overrides": null
+    },
+    "M-ABSTENTIONS": {
+      "probes_total": 7,
+      "refusals_with_null_action": 7,
+      "refusals_with_recorded_reason": 7,
+      "refusals_status_not_executable": 7,
+      "out_of_support": [
+        {"case": "out_of_support:item-010", "status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null},
+        {"case": "out_of_support:item-999", "status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null},
+        {"case": "out_of_support:item-xyz", "status": "EXPLORE", "reason": "parameter 'item' outside inferred support", "bound_action": null}
+      ],
+      "missing_parameter": [
+        {"case": "missing_parameter", "status": "EXPLORE", "reason": "missing required parameter 'item'", "bound_action": null},
+        {"case": "missing_parameter_wrong_key", "status": "EXPLORE", "reason": "missing required parameter 'item'", "bound_action": null}
+      ],
+      "wrong_intent": {"case": "wrong_intent", "status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "no_applicable_mechanism": {"case": "no_applicable_mechanism", "status": "UNKNOWN", "reason": "no applicable validated mechanism", "bound_action": null, "exactly_unknown": true},
+      "http_delta_during_phase": 0,
+      "clause_pass": true
+    },
+    "M-COUNTERS": {
+      "retrieval_calls": 9,
+      "verification_calls": 1,
+      "repair_attempts": 1,
+      "model_calls": 0,
+      "model_tokens": 0,
+      "browser_actions": 0,
+      "latency_ms": 0.0,
+      "counters_kernel_http_requests": 0,
+      "expected_from_transcript": {"retrieval_calls": 9, "verification_calls": 1, "repair_attempts": 1},
+      "counters_equal_transcript": true,
+      "transcript_length": 22,
+      "http_fixture_counter_total": 6,
+      "http_expected_legs": 6,
+      "http_breakdown": {"induction": 5, "positive_execute": 1, "abstention": 0},
+      "clause_pass": true
+    },
+    "M-PC-EXACT-REPLAY": {
+      "executable": 5,
+      "total": 5,
+      "statuses": ["EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE", "EXECUTABLE"],
+      "pass": true
+    },
+    "M-ABLATION": {
+      "literal_git_blob": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+      "literal_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "literal_has_distill_parameterized": false,
+      "pass": true
+    },
+    "M-REGRESSION": {
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0,
+      "successful": true,
+      "suite": "tests/test_kernel.py discovered via tests/test_*.py",
+      "pass": true
+    },
+    "M-SUPPORT": {
+      "mechanism_id": "mech-1cfc19af1d03f157",
+      "parameter_slots": ["item"],
+      "induced_support": "^item\\-00[0-9]{1}$",
+      "confidence": 0.9,
+      "induction_observations": 5
+    },
+    "M-DETERMINISM-REPEAT": {
+      "note": "second independent run of the identical frozen runner in EXECUTE mode; all six clause statuses, all counters and all control statuses identical to the primary run",
+      "all_clause_statuses_equal": true,
+      "counters_equal": true,
+      "mechanism_id_run1": "mech-1cfc19af1d03f157",
+      "mechanism_id_run2": "mech-45e7b46a83553492",
+      "mechanism_id_instability_cause": "mechanism_id = 'mech-' + sha256({intent, template, slots}); template embeds the executed action URL, whose ephemeral loopback port differs between runs, so mechanism_id is not cross-run stable by construction. Decision-relevant clause statuses and counters are stable."
+    }
+  },
+  "controls": {
+    "B-SHIPPED-IDENTITY": {
+      "type": "identity_baseline",
+      "expected_behavior": "shipping kernel src/spider/kernel.py sha256 == carrier 718efa6a... on the measured source tree; anything else -> BLOCKED/MEASUREMENT_INVALID",
+      "observed_behavior": "shipping_kernel_sha256 == 718efa6a... == recomputed sha256 of git blob b15ed848...; no tracked src/ change",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_IDENTITY", "research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#identities"]
+    },
+    "B-LITERAL-KERNEL": {
+      "type": "ablation",
+      "expected_behavior": "pre-promotion literal kernel (git blob cfec9866..., sha256 46929b3a...) loaded in a hermetic temp package with the same shipped models.py/registry.py/__init__.py must NOT have distill_parameterized",
+      "observed_behavior": "has_distill_parameterized == false",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_CONTROLS.literal_ablation"]
+    },
+    "PC-EXACT-REPLAY": {
+      "type": "positive_control",
+      "expected_behavior": "5/5 training ids item-001..item-005 re-resolve EXECUTABLE on the as-installed carrier; <5/5 -> FALSIFIES",
+      "observed_behavior": "5/5 EXECUTABLE",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_CONTROLS.pc_exact_replay"]
+    },
+    "NC-OUT-OF-SUPPORT-ID": {
+      "type": "null_control",
+      "expected_behavior": "resolve(item-010), resolve(item-999), resolve(item-xyz) -> EXPLORE with reason containing 'outside inferred support' + bound_action null + zero HTTP (3/3)",
+      "observed_behavior": "3/3 EXPLORE with reason \"parameter 'item' outside inferred support\", bound_action null, zero HTTP; includes designated known-negative item-010",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_ABSTENTION.negatives"]
+    },
+    "NC-MISSING-PARAMETER": {
+      "type": "null_control",
+      "expected_behavior": "resolve with {} and {'wrong_key':'x'} -> EXPLORE with reason containing 'missing required parameter' + bound_action null + zero HTTP (2/2)",
+      "observed_behavior": "2/2 EXPLORE with reason \"missing required parameter 'item'\", bound_action null, zero HTTP",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_ABSTENTION.negatives"]
+    },
+    "NC-WRONG-INTENT": {
+      "type": "null_control",
+      "expected_behavior": "resolve('delete_item', ctx, valid params) -> EXACTLY ResolutionStatus.UNKNOWN with non-empty reason, bound_action null, zero HTTP",
+      "observed_behavior": "UNKNOWN, reason \"no applicable validated mechanism\", bound_action null, zero HTTP",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_ABSTENTION.negatives"]
+    },
+    "NC-NO-APPLICABLE-MECHANISM": {
+      "type": "null_control",
+      "expected_behavior": "resolve('never_seen_intent', {}, {}) -> EXACTLY ResolutionStatus.UNKNOWN with recorded reason, bound_action null, zero HTTP",
+      "observed_behavior": "UNKNOWN, reason \"no applicable validated mechanism\", bound_action null, zero HTTP",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.E2E_ABSTENTION.negatives"]
+    },
+    "V8-FREEZE-BINDING": {
+      "type": "binding_gate",
+      "expected_behavior": "freeze.json present and readable; prereg sha match; running runner source == FROZEN RUNNER block; all six freeze artifact hashes match (incl. src/spider/kernel.py)",
+      "observed_behavior": "prereg_sha_matches=true, runner_source_matches_frozen_block=true, artifact_hashes_match=true",
+      "pass": true,
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json#certificate.V8_FREEZE_BINDING"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/harness/run_e2e.py", "sha256": "78ba7411490cc47e2fc0220e65606e3d9be63f0392558f7f7f77166aa5dd1ac3", "role": "code", "note": "FROZEN RUNNER materialized byte-exact (normalized-equal) from prereg.md section 14; the running source was checked == FROZEN RUNNER block by V8-B"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/run_e2e.out.json", "sha256": "d1907cd76065d16a0f79c43599d4327207521f3f0f9396e64c22aa3003571e48", "role": "raw", "note": "primary run stdout: single JSON document with all certificate clauses, identities, counters, transcript and negatives"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/run_e2e.log", "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2", "role": "raw", "note": "primary run stderr: unittest banner only ('Ran 3 tests in 0.002s / OK'); regression output goes to stderr by design"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/run_e2e.repeat.out.json", "sha256": "7bb13a5e0ed7926f2089d1cd9e99c548c885bfe109b9cccadef6a526ca45f522", "role": "raw", "note": "determinism re-run stdout; identical clause/counter/control statuses to primary run"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/run_e2e.repeat.log", "sha256": "50e0b0587dce90871df6ee215b272b51bb1e2c66169a78bd07fa35f55e12b4b2", "role": "raw", "note": "determinism re-run stderr: unittest banner only"},
+    {"path": "src/spider/kernel.py", "sha256": "718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72", "role": "fixture", "note": "the as-installed shipped carrier / measured treatment; byte-identical to carrier git blob b15ed848...; re-hashed unchanged after both runs (READ-ONLY measurement)"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/prereg.md", "sha256": "183ee8c9e8e1ec4afd15400bb199ccdc1c6a387277f8c60e70871903f61f9724", "role": "fixture", "note": "frozen preregistration (V8-A re-verified at runtime)"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/freeze.json", "sha256": "6a73d1b010ceecb847e186fa349c34051cd345283b3330c133bdf0cbecd9d44d", "role": "fixture", "note": "frozen binding; existence and contents enforced by V8 at runtime"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/design_review.json", "sha256": "44e176c1e2fc1b071646c041145e40712c37166df3a0a4fc39d59ecd5cddba2d", "role": "fixture", "note": "independent v2 DESIGN REVIEW PASS"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/request.json", "sha256": "cd1de1747da3b121ae13e4ccfbfa46b7a9ce808cdd281d2234c67b71faecca94", "role": "fixture", "note": "frozen request incl. binding director_mandate"},
+    {"path": "research/experiments/EXP-PRODUCT-38186502935/spec.json", "sha256": "6dbdf9d532c728ea74c0f14430ac43248aeec6136c6ceb7d4f80f6fea27d03db", "role": "fixture", "note": "frozen experiment spec"}
+  ],
+  "observations": [
+    {"type": "raw", "item": "primary run exited 0; stdout is one parseable JSON document (8342 bytes); stderr contains only the unittest banner 'Ran 3 tests in 0.002s / OK'."},
+    {"type": "raw", "item": "run_config: repo_root=/home/runner/work/Spider/Spider (auto-detected), literal_src=git:cfec98660b0277ccbf295e8a4119e8d81ddccf50, probe_mode=false, min_confidence_override=null; executed with no EXP_* environment overrides (EXECUTE mode)."},
+    {"type": "raw", "item": "V8 enforced: prereg_sha_matches=true, runner_source_matches_frozen_block=true, artifact_hashes_match=true."},
+    {"type": "raw", "item": "shipping identity: src/spider/kernel.py sha256 = 718efa6a167c2fdc483a8fbaaf1a05ce018dcb1c52808414b2a6a76d788bfb72 == frozen carrier blob b15ed848... (recomputed from the git object store)."},
+    {"type": "raw", "item": "literal ablation package (hermetic temp dir, same shipped models.py/registry.py/__init__.py) has_distill_parameterized == false."},
+    {"type": "raw", "item": "shipped SpiderKernel.__init__ min_confidence default observed = 0.8; no override passed."},
+    {"type": "derived", "item": "distill_parameterized on 5 executed induction GETs (item-001..item-005, each fixture 200) produced mechanism_id mech-1cfc19af1d03f157 with parameter_slots ['item'], support {'item': '^item\\-00[0-9]{1}$'}, confidence 0.9."},
+    {"type": "raw", "item": "positive: resolve(read_item, ctx, {'item':'item-000'}) -> EXECUTABLE, confidence 0.9, bound_action {'method':'GET','url':'http://127.0.0.1:40955/api/items/item-000'}; executing it returned fixture status 200; verify(mech-1cfc19af1d03f157, body, params) == true."},
+    {"type": "raw", "item": "all 7 refusal probes returned bound_action null with a non-empty reason and status != EXECUTABLE: item-010/item-999/item-xyz -> EXPLORE \"parameter 'item' outside inferred support\"; {} and {'wrong_key':'x'} -> EXPLORE \"missing required parameter 'item'\"; delete_item -> UNKNOWN \"no applicable validated mechanism\"; never_seen_intent -> UNKNOWN \"no applicable validated mechanism\"."},
+    {"type": "raw", "item": "runner-side fixture request counter total == 6 (5 induction GETs + 1 positive execute) and its delta across the entire abstention phase == 0."},
+    {"type": "raw", "item": "kernel counters snapshot: retrieval_calls=9, verification_calls=1, repair_attempts=1, model_calls=0, model_tokens=0, browser_actions=0, kernel http_requests=0; equal to the invocation transcript (transcript length 22)."},
+    {"type": "raw", "item": "PC-EXACT-REPLAY: item-001..item-005 all EXECUTABLE (5/5). Regression suite discovered via tests/test_*.py ran 3 tests, 0 failures, 0 errors."},
+    {"type": "raw", "item": "V5 never-observed sweep: a repo-wide content search (research/, codex/, src/, tests/, .spider-runtime/; excluding this experiment directory) found 0 occurrences of 'item-000'."},
+    {"type": "raw", "item": "post-run integrity: all six freeze artifact sha256 still match freeze.json; 'git status --porcelain' shows no tracked src/, tests/ or pyproject.toml modification (only canonical Codex sync metadata is dirty)."},
+    {"type": "raw", "item": "determinism re-run: all six clause statuses, all counters and all control statuses identical to the primary run; mechanism_id and bound_action URL differ only because they embed the ephemeral loopback port."}
+  ],
+  "validity_notes": [
+    "V1-DETERMINISM: fixture is stdlib http.server.ThreadingHTTPServer on 127.0.0.1:0 with fixed JSON responses; no RNG, no wall-clock, no external network. Induced support ('^item\\-00[0-9]{1}$'), slots (['item']) and confidence (0.9) are arithmetic functions of the 5 executed induction GETs. A second full run reproduced every decision-relevant status and counter.",
+    "V2-CREDENTIAL-FREE + HTTP-EXECUTION ACCOUNTING: model_calls == 0 and model_tokens == 0 asserted by E2E-COUNTERS; the only HTTP activity is urllib to the in-process loopback fixture, counted runner-side. Total fixture counter == 6 executed legs (5 induction + 1 positive), abstention-phase delta == 0. The kernel's own http_requests counter reads 0 by construction (TrajectoryCounters does not auto-increment it); the runner-side counter is the honest ledger and is the one gated.",
+    "V3-IDENTITY-PREMISE-GATE: shipping kernel sha256 == carrier 718efa6a... == recomputed sha256 of git blob b15ed848..., on a tree with no tracked src/tests/pyproject change. The premise of the Director mandate (promotion merge in effect) holds.",
+    "V4-STOP-TRIGGER: not fired; the E2E path was measured only against the byte-identical carrier, never a substituted carrier.",
+    "V5-HELD-OUT-NEVER-OBSERVED: item-000 is inside the induced support and has 0 occurrences in a repo-wide sweep of all prior artifacts. item-010 (two-digit suffix, outside support) is the designated known-negative abstention.",
+    "V6-REFUSAL-SEMANTICS PASS: 7/7 refusals have null bound action, non-empty reason and non-EXECUTABLE status; out-of-support and missing-parameter are EXPLORE with the correct reason class ('support' / 'missing required parameter'); wrong-intent and no-applicable are EXACTLY ResolutionStatus.UNKNOWN; zero HTTP across the phase.",
+    "V7-TRANSCRIPT-HONESTY PASS: kernel counters equal the invocation transcript (retrieval 9 == 8 resolve + 1 rebind; verification 1 == 1 verify; repair 1 == 1 rebind); the runner-side fixture counter equals the executed HTTP legs independently of kernel counters.",
+    "V8-FREEZE-BINDING PASS (EXECUTE mode): freeze.json present and readable; sha256(prereg.md) matches; the running source equals the FROZEN RUNNER block; all six freeze artifact hashes (incl. src/spider/kernel.py) match. The runner never wrote any freeze artifact; all six re-hashed unchanged after both runs.",
+    "V9-REGRESSION PASS: tests/test_kernel.py 3/3, 0 failures, 0 errors on the as-installed shipping path.",
+    "V10-ABLATION-ATTRIBUTION PASS: the literal pre-promotion kernel has no distill_parameterized, so the positive certificate is attributable to the installed carrier only.",
+    "GIT-TREE CAVEAT (non-blocking): the working tree is not globally clean because the canonical Codex sync metadata (SPIDER_CODEX.md, codex/claim_state.json, codex/index.json) and two untracked codex/experiments directories differ from HEAD. None of these is a measured artifact or a freeze artifact; no tracked src/, tests/ or pyproject.toml file is modified. The frozen runner implements E2E-IDENTITY as the carrier-sha check and does not implement a global git-clean subcheck; this caveat is disclosed rather than silently ignored. It is outside the Product lane's allowed edit scope (product may not edit codex/) and does not affect the measured shipping-path bytes.",
+    "REPRESENTATION CAVEAT (non-blocking): mechanism_id is 'mech-' + sha256({intent, template, slots}) where template embeds the executed action URL. Because the fixture binds an ephemeral port, mechanism_id and the bound_action URL are not stable across independent runs even though the support/slots/confidence and all clause statuses are. Downstream work should reference the mechanism by its induced support/slots/confidence, not by a cross-run mechanism_id.",
+    "SCOPE: this is readiness condition (1) only. It does not run the four-arm C-LLM-INHERIT benchmark (readiness (2)+(3) unmet), does not re-run the promotion certificate or the mandatory-discovery REST certificate, does not compare COLD/INSTRUCTIONS/RETRIEVAL arms, and makes no economics or wall-clock claim (model_calls=model_tokens=0, latency_ms=0).",
+    "REPRESENTATION LOSS: the substrate is a minimal deterministic GET/JSON loopback fixture over a single resource shape; correctness/refusal is established only for the induced single-digit-suffix support grammar, not for free-form payload values.",
+    "INFRASTRUCTURE-VS-NEGATIVE: no infrastructure failure occurred; status=COMPLETE with outcome=SUPPORTS reflects a valid measurement transaction under the frozen decision rule, not a claim advance. C-PARAM-INHERIT stays EXPERIMENTAL."
+  ],
+  "unresolved": [
+    "Whether the conservative support inference (single-digit suffix learned from 5 examples) is a defect for free-form payload values remains untested; this packet probes only the in-support unseen boundary (item-000) and the out-of-support boundary (item-010).",
+    "Whether the shipped carrier beats cold/instructed/retrieval baselines on cost per successful task is not addressed here; it requires readiness (2) (budget-stable credential-free model endpoint, Intel) and (3) (certified asymmetric-discovery task bank, Runtime) plus a NEW Global Research Director mandate.",
+    "Cross-run stability of mechanism_id is empty: it is deliberately not stable because it hashes the ephemeral-port-bearing action URL; whether a stable mechanism handle is desired for product instrumentation is a downstream product question (inherited from the parent handoff unknown about support inference as a product interface).",
+    "Independent audit re-verification of this producer packet and the DIRECTOR readiness-(1) adjudication are downstream stages, not producer-settable questions."
+  ]
+}

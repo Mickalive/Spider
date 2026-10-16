@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38291080992",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Frozen cascade verified independently by exhaustive boolean enumeration (invalid -> null; g3_gate & g2_gate & selection_preserved -> DECIDE_SHIP_TFRAME_BROAD; g2_gate & selection_preserved -> DECIDE_SHIP_TFRAME_SCOPED; else -> DECIDE_REQUIRE_RETRIEVAL_B): all four decision outcomes and all four retrieval-fork values are structurally reachable, and precedence is clean - the invalidity branch is checked first and no branch shadows a later one. Thresholds are arithmetically attainable on the bounded splits (G3 test FA<=0.10 means <=2 of 20 OOS; coverage>=0.50 means >=18 of 36; UP>=0.85 attainable e.g. 6/7=0.857; G1 selection margins 0.9057-1.0 vs the 0.80 bar), so no bar is at a floor/ceiling. Both a positive/support path (G3 gate-met plus ship branches under an attainable G2 UP>=0.85) and a decision-changing alternative (VALID DECIDE_REQUIRE_RETRIEVAL_B vs MEASUREMENT_INVALID) exist in the rule. Attack on actual triggering: a unified diff shows the runner's metrics path is byte-identical to the parent runner (only EXP_ID/SEED header lines and the liveness predicate differ), so the realized terminal under frozen inputs is predicted unique (COMPLETE / DECIDE_REQUIRE_RETRIEVAL_B / BOTH_PASS_G3), which the spec and prereg explicitly disclose as a mandated no-refit reproduction whose information is packet validity; the unrealizable branches fail safe - only a bound, never a ship/promotion, can be emitted. Structural reachability plus disclosed reproduction satisfies this check; the single-realizable-terminal concern is recorded as a nonblocking finding.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#decision_rule",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.10",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#13.4 (FROZEN-RUNNER cascade lines)",
+        "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json (parent gates/decision evidence)",
+        "probe: boolean enumeration of decision cascade and fork over all input combinations (4/4 decisions, 4/4 forks)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Probed in DESIGN without any outcome-bearing measurement. Python 3.12.15 present; numpy/sklearn/sentence_transformers confirmed absent exactly as declared; research/harness/goal_generator.py imports cleanly (INTENTS 20, PARAPHRASES 20, NO_APPLICABLE_TEMPLATES 20, OOD_PARAPHRASES 8) and has stdlib-only imports with no repo-local module dependencies. Every block the runner extracts is present and JSON-parseable in the exact file it reads at runtime (GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1/LEXICON-G1-ALT/GOAL-BANK-G2/OOS-BANK-G2/LEXICON-G2-HELDOUT in research/experiments/EXP-GRAPH-38180711589/prereg.md; PRIOR-PARENT-BANK-TEXTS list of 140 in research/experiments/EXP-GRAPH-38175554380/prereg.md; LEXICON-G3 80-row GOAL-BANK-G3 and 40-row OOS-BANK-G3 embedded in this prereg). The extracted FROZEN-RUNNER compiles, imports with no side effects, and its sha256 equals CANONICAL-RUNNER-SHA256 (11fa2467...) under the declared exactly-one-trailing-newline convention. Parent handoff path exists and its sha256 matches request.json. All hard prerequisites are available now and hash-bound; none are deferred to EXECUTE. No network, model, credential, browser or third-party package is required.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#11",
+        "research/experiments/EXP-GRAPH-38291080992/request.json (parent_handoff sha256)",
+        "probe: block extraction + JSON parse + module compile/import + CANONICAL-RUNNER-SHA256 match + goal_generator import + numpy/sklearn absence check"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines are operationally distinct and demonstrably able to differ on this task population. Accepted parent evidence shows material separation: AXIS-G3-NEW test Arm A FA 0.10 vs gatefree 0.45 vs incumbent 0.20, and Arm B selective_acc 0.2727 vs Arm A 1.0 at FA 0.05; AXIS-G2-RETEST Arm A FA 0.0 vs Arm B collapse (pooled_false_accept 0.70, gate not met). Gatefree headroom of 0.35-0.40 on FA shows the population is not ceiling/floor locked for the discriminative dimension. Both arms are scored with identical metric definitions and identical gate thresholds (FA<=0.10, cov>=0.50, UP>=0.85); Arm A uses zero fitted parameters while Arm B's (tau, mu) gate is fit on calibration rows only by the frozen lexicographic rule - a comparator-favorable asymmetry, not a treatment-favorable one. No cost metric or denominator is used anywhere in the decision, so no comparator cost dimension is omitted. probe confirmed arm_b never reads its seed argument, so decision-relevant comparator metrics are not seed-dependent.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#baselines",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#3",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#4",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json (test_metrics and arm_b per axis)",
+        "probe: runner diff vs parent runner; arm_b seed-usage scan"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Under the same implementation that will score the experiment, the load-bearing controls are computed, not asserted. Positive control PC-AXIS-G1-ALTLEX derives from the same gate_met path used for the decision gates (parent evidence: ALTLEX FA 0.0556 / cov 0.9464 / UP 1.0 / sel 1.0, gate True); it would flip to False if the shared selector or clause set regressed, so it is not tautological and is not impossible. Primary null NC-EXEC-ALL (gatefree) is computed from the scoring path and moved materially in the parent (FA 0.45 G3 / 0.50 G2 / 0.2778 G1 vs Arm A 0.10 / 0.0 / 0.0556), with genuine headroom to remain null-or-not. CTRL-RANDOM-GATE (FA 0.70), CTRL-SHUFFLED-SELECTION (0.083) and CTRL-RANDOM-ROLE (0.111) are computed per run. A synthetic-row canary through the frozen code reproduced control movement (tframeplus FA 0.0 vs gatefree FA 0.5; C7 fired on the oblique CREATE row producing abstained_resolved=1) and the repaired LIVE formula discriminated non-degenerate from execute-all/abstain-all degeneracy. The hardcoded abstain-all and incumbent-constant output fields are non-load-bearing placeholders and are recorded as nonblocking findings.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#positive_control",
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#null_control",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json (controls and gates)",
+        "probe: synthetic-row canary of metrics/gate_met/clause_c7 and LIVE-formula degeneracy arithmetic"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The frozen SPIDER treatment T-FRAME+ can produce non-null executable behavior before any expensive arm runs, demonstrated without computing this experiment's test outcomes: (a) the extracted FROZEN-RUNNER compiles and imports with no side effects; (b) a synthetic-row smoke test executed the full analysis path comp/frame/clause_c7/is_executed/metrics plus gate_met and Arm B fitting end-to-end (C7 fired on a synthetic oblique CREATE row, abstained_resolved=1, gate_met evaluated True, arm_b returned fitted tau/mu and classes); (c) the repaired predicate is pre-declared on the exact evaluated split (AXIS-G3-NEW TEST) and was arithmetically verified: LIVE=(0<executed_total<n_total AND executed_app>=1 AND abstained_resolved>=1) evaluates True on parent-published G3-test counts (38/56 executed, 36 applicable, 7 resolved abstentions) while the parent predicate 0<36<36 evaluated False, and execute-all (abstained_resolved=0), abstain-all (executed_total=0) and selector-degenerate analogues all evaluate False, so genuine degeneracy is still rejected; (d) parent accepted evidence shows the treatment executes 36/36 applicable G3-test rows with discriminating behavior (FA 0.10 vs execute-all 0.45); (e) EXECUTE is required to pass two byte-identical --mechanics-only canaries before the scored run. This graph-lane experiment does contain a SPIDER treatment arm, so treatment_liveness is assessed as PASS rather than NOT_APPLICABLE.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#1 (liveness repair, frozen)",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#11 (V2 canary)",
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#freeze_eligibility.treatment_liveness (attacked, then re-verified)",
+        "probe: runner import; synthetic analysis-path smoke; LIVE arithmetic on parent-published counts and degenerate analogues"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity could change the interpretation is bound: spec.freeze_artifacts lists the two runtime-read preregs (research/experiments/EXP-GRAPH-38180711589/prereg.md carrying all G1/G2 banks and lexicons; research/experiments/EXP-GRAPH-38175554380/prereg.md carrying PRIOR-PARENT-BANK-TEXTS) and the contamination-prior generator research/harness/goal_generator.py - all three exist and were sha256-hashed in probe. A source scan of the frozen runner shows its only reads are its own prereg (SPIDER_PREREG default), those two preregs, and goal_generator, whose imports are stdlib-only (no nested repo-local dependency escapes the freeze list). The runner, G3 lexicon and both G3 banks are embedded in this prereg and hashed by the freezer; the runner additionally self-hashes, and probe confirmed the G3 blocks are byte-identical to the parent EXP-GRAPH-38205284279/prereg.md blocks (3834/6357/3672 chars) with CANONICAL-RUNNER-SHA256 matching under the declared newline convention. No remote/web response enters the measurement, so target identifiers/sampling freeze requirements are NOT_APPLICABLE for the remote dimension.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38291080992/spec.json#freeze_artifacts",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#8.8",
+        "research/experiments/EXP-GRAPH-38291080992/prereg.md#12",
+        "probe: existence+sha256 of the three freeze_artifacts; runner read-path scan; G3 block byte-identity vs parent prereg; canonical runner sha match"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Single realizable terminal under deterministic reproduction: a unified diff shows this runner differs from the parent runner only in EXP_ID/SEED header lines and the liveness predicate, all inputs are hash-frozen, and arm_b ignores its seed, so the run's decision-relevant metrics are predicted byte-reproducible - the realized terminal is expected unique (COMPLETE / DECIDE_REQUIRE_RETRIEVAL_B / BOTH_PASS_G3) with DECIDE_SHIP_TFRAME_BROAD, DECIDE_SHIP_TFRAME_SCOPED and MEASUREMENT_INVALID unrealizable in execution. The design discloses this (spec.decision_rule 'BROAD/SCOPED expected-unreachable'; prereg #8.10/#10) and it fails safe (only a bound, never a promotion, can be emitted), so it does not block freeze; but AUDIT/DIRECTOR should classify this packet as a validity-transaction reproduction rather than a discriminating test, and the mandate's 'PASS with ship-scope branch' counterfactual should be treated as arithmetically unavailable under the no-refit constraint.",
+    "spec.decision_rule and prereg #9 declare MEASUREMENT_INVALID if PC-AXIS-G1-ALTLEX fails, but the frozen runner's invalid_reasons only implements the liveness and unknown_precision-undefined triggers - a PC failure would be emitted as COMPLETE with a decision. Latent (parent evidence: ALTLEX gate True, deterministic), inherited unchanged from the parent runner, and recomputable by AUDIT, but the spec/runner divergence should be reconciled or explicitly delegated to AUDIT before EXECUTE.",
+    "Two control fields are hardcoded constants in the runner output rather than computed: ctrl_abstain_all_cov=0.0 / ctrl_abstain_all_up=1.0 and b_incumbent_kernel=0.0. In particular an all-abstain control's unknown_precision under this experiment's own definition would pool applicable and OOS resolved rows (not 1.0), so these fields are placeholders and must not be read as measured control values. The load-bearing controls (NC-EXEC-ALL FA, CTRL-RANDOM-GATE, shuffled/random-role, PC gates) are genuinely computed.",
+    "DECIDE_REQUIRE_RETRIEVAL_B is the unconditional else-branch: it fires even if the retrieval fork is NEITHER_PASSES_G3 (Arm B also failing the G3 gate), so the decision label can imply 'require retrieval' in a state where retrieval does not pass either. The fork is emitted separately, and under parent evidence the realized fork is BOTH_PASS_G3, so this label/fork mismatch is unreachable in this transaction but should be read by AUDIT via the fork field, not the decision string alone.",
+    "Execution-environment assumptions: the runner hardcodes ROOT=/home/runner/work/Spider/Spider and honors an SPIDER_PREREG environment override for its prereg path. EXECUTE must control SPIDER_PREREG (default path is the frozen prereg) and run in the standard workspace layout; both are inherited from the parent transaction.",
+    "Axis-G3-NEW Arm A sits exactly at the FA boundary (pooled_false_accept = 0.10 = 2/20, passing only via '<='). Determinism makes this stable, but any reproduction perturbation would flip the G3 gate and therefore the decision; freeze hashes on the three artifacts plus the canonical runner sha are the mitigation."
+  ],
+  "rationale": "Independent review by a different model (opencode/mimo-v2.6-flash-free; DESIGN producer was opencode/muse-spark-1.3-contributor-free). All six satisfiability/identifiability checks were re-derived from probes rather than accepted from spec.freeze_eligibility: (1) the decision cascade was exhaustively enumerated with sound precedence and attainable thresholds; (2) every runtime prerequisite (Python 3.12.15, stdlib-only, all extracted blocks in the exact frozen files, canonical runner hash under the declared newline convention, handoff sha) was verified present now, not deferred to EXECUTE; (3) treatment and baselines are distinct implementations with demonstrated separation on this population and no asymmetric cost metric; (4) the positive control and primary null are computed by the same scoring path and moved in the parent, confirmed by a synthetic canary; (5) the frozen treatment is live - the analysis path executes on synthetic rows, the repaired liveness predicate evaluates True on parent-published G3-test counts while still rejecting execute-all/abstain-all degeneracy, and mechanics-only canaries are mandated before the scored run; (6) all three mutable local dependencies are bound and no interpretation-relevant file escapes freeze_artifacts. The only deep contest was decision-rule reachability: because the run is a mandated deterministic no-refit reproduction, exactly one terminal is expected in execution, which I record as a loud nonblocking finding rather than a blocker, since the branches are structurally and arithmetically reachable, the predictability is disclosed in the frozen text, the realized outcome fails safe (a valid bound, never a ship promotion), and no legal repair exists within the mandate's stop rules (no refit, no third surface) - REVISE would deadlock a near-zero-cost Director-mandated validity repair that can answer its own question (valid packet, intrinsic G2 shortfall, structure-favouring fork). No check is FAIL; no blocking findings; the experiment is ready to freeze with the listed nonblocking findings carried into AUDIT.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38291080992/request.json",
+    "research/experiments/EXP-GRAPH-38291080992/spec.json",
+    "research/experiments/EXP-GRAPH-38291080992/prereg.md (incl. embedded LEXICON-G3/GOAL-BANK-G3/OOS-BANK-G3/FROZEN-RUNNER)",
+    "research/experiments/EXP-GRAPH-38205284279/raw_evidence/run_output.json (accepted parent packet evidence: gates, controls, arm_b, invalid_reasons)",
+    "research/experiments/EXP-GRAPH-38205284279/prereg.md (parent FROZEN-RUNNER diff base; G3 block byte-identity source)",
+    "research/experiments/EXP-GRAPH-38180711589/prereg.md (frozen G1/G2 banks and lexicons)",
+    "research/experiments/EXP-GRAPH-38175554380/prereg.md (PRIOR-PARENT-BANK-TEXTS)",
+    "research/harness/goal_generator.py (contamination priors)",
+    "probe: CANONICAL-RUNNER-SHA256 match under one-trailing-newline convention",
+    "probe: G3 block byte-identity (3834/6357/3672) vs parent prereg",
+    "probe: runner compile/import + synthetic analysis-path and Arm B smoke test",
+    "probe: repaired LIVE arithmetic on parent-published counts (38/56, 36 app, 7 resolved abstentions) and degenerate analogues",
+    "probe: boolean enumeration of decision cascade and retrieval fork",
+    "probe: freeze_artifacts existence and sha256; runner read-path scan; goal_generator import; numpy/sklearn/sentence_transformers absence"
+  ]
+}

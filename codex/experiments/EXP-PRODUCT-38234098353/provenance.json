@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-38234098353",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "origin_github_run_id": "38234098353",
+  "request_id": "3c8a8cf56256499e4440cea1",
+  "base_sha": "4e6d7ef451eb38e0f0f1c82960f6833e466d2a6a",
+  "git_head_at_execute": "8443a2f7e605cf398cc3f31d29dac8c7b0894de6",
+  "git_recent_commits": [
+    "8443a2f7 R2 product: execution base EXP-PRODUCT-38234098353",
+    "4b75bb26 R2 product: freeze EXP-PRODUCT-38234098353",
+    "6ccca958 R2 product: proposed design EXP-PRODUCT-38234098353",
+    "3fe8e12c R2 product: allocate EXP-PRODUCT-38234098353",
+    "9dff0dd4 Merge remote-tracking branch 'origin/main' into lab2/product"
+  ],
+  "working_tree_clean_for_frozen_paths": true,
+  "commands": [
+    "python3 - <<'PY'  # extract FROZEN RUNNER block verbatim from prereg.md -> raw_evidence/run_scored_adeq.py",
+    "EXP_PROBE_MODE=1 PYTHONPATH=src SPIDER_SRC=src EXP_PACKET_DIR=research/experiments/EXP-PRODUCT-38234098353 python3 research/experiments/EXP-PRODUCT-38234098353/raw_evidence/run_scored_adeq.py > research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run1.json 2> research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run1.txt",
+    "EXP_PROBE_MODE=1 PYTHONPATH=src SPIDER_SRC=src EXP_PACKET_DIR=research/experiments/EXP-PRODUCT-38234098353 python3 research/experiments/EXP-PRODUCT-38234098353/raw_evidence/run_scored_adeq.py > research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run2.json 2> research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run2.txt",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_*.py'"
+  ],
+  "runner_extraction": {
+    "source": "prereg.md between '<!-- BEGIN FROZEN RUNNER -->' and closing fence, first line after the opening fence excluded",
+    "materialized_path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/run_scored_adeq.py",
+    "raw_byte_sha256": "26e9fef024309d9c8ef20373786a78d7fc57a6688e8c32adec8843a63a678d47",
+    "declared_frozen_runner_sha256": "26e9fef024309d9c8ef20373786a78d7fc57a6688e8c32adec8843a63a678d47",
+    "matches": true
+  },
+  "frozen_inputs": {
+    "request.json": "0b05f5b2ee970ca76210939fb92126440f3f6d0a14b9bad01066d74ceec6551d",
+    "spec.json": "4155f76ec36ce0cb3f524269085f5d5c67cf95a3f0b4f243b270809040be21db",
+    "prereg.md": "69d60f2f0752d402f0f2cc7db97d8f2f75a7a893938f82af25b0ca138611864f",
+    "design_review.json": "acc426b120fea59a868665d19d9f36758182dd558b87b73702e84dfa12d9ff75",
+    "freeze.json": "6917a4cde718f3b091848fd05bfb26bd46036d45bcfbb45124a1a2313028130f"
+  },
+  "freeze_hashes_expected": {
+    "request.json": "0b05f5b2ee970ca76210939fb92126440f3f6d0a14b9bad01066d74ceec6551d",
+    "spec.json": "4155f76ec36ce0cb3f524269085f5d5c67cf95a3f0b4f243b270809040be21db",
+    "prereg.md": "69d60f2f0752d402f0f2cc7db97d8f2f75a7a893938f82af25b0ca138611864f",
+    "design_review.json": "acc426b120fea59a868665d19d9f36758182dd558b87b73702e84dfa12d9ff75"
+  },
+  "freeze_artifact_hashes_rehashed_after_run": {
+    "pyproject.toml": {
+      "expected": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+      "actual": "5f03fb5914f388c19973831287cce6773c7364e1bea856a595cd7247d3115b83",
+      "match": true
+    },
+    "src/spider/__init__.py": {
+      "expected": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+      "actual": "3d173722b38c5130a5145b1558412a399f851c8ed4fbf2ddfa4022e4cb2b5a77",
+      "match": true
+    },
+    "src/spider/kernel.py": {
+      "expected": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "actual": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+      "match": true
+    },
+    "src/spider/models.py": {
+      "expected": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "actual": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "match": true
+    },
+    "src/spider/registry.py": {
+      "expected": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "actual": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "match": true
+    },
+    "tests/test_kernel.py": {
+      "expected": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "actual": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "match": true
+    }
+  },
+  "code_paths": {
+    "carrier": "src/spider/kernel.py#SpiderKernel.ingest_declaration / module-level certify_declaration",
+    "carrier_sha256": "3a6caf970f5c86db19419f7ae57c7125f409eceba922eb2d5a9f5964140bb1b3",
+    "carrier_modified_by_packet": false,
+    "runner": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/run_scored_adeq.py"
+  },
+  "raw_evidence": {
+    "primary_stdout": {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run1.json",
+      "sha256": "d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5"
+    },
+    "primary_stderr": {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run1.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "second_stdout": {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_output_run2.json",
+      "sha256": "d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5"
+    },
+    "second_stderr": {
+      "path": "research/experiments/EXP-PRODUCT-38234098353/raw_evidence/raw_run_stderr_run2.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "determinism": {
+    "in_process_two_run_once_identical": true,
+    "cross_process_full_rerun_full_stdout_identical": true,
+    "excluded_metrics": [],
+    "note": "the frozen runner emits no latency/timing metric, so no timing-dependent quantity participates in the determinism projection"
+  },
+  "regression": {
+    "command": "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_*.py'",
+    "tests_run": 3,
+    "failures": 0,
+    "errors": 0,
+    "ok": true
+  },
+  "fixtures": {
+    "bank": "in-process synthetic eleven-family expansion bank B1-B10 (within envelope) + B11 (boundary) declared in the FROZEN RUNNER (no external dataset)",
+    "provenance_ledgers": "in-process frozen 4-entry per-origin historical ledgers for O1-O6 (trusted O1-O4: 4 SOUND; untrusted O5,O6: 1 SOUND + 3 budget-sparse UNSOUND)",
+    "oracle": "one loopback ThreadingHTTPServer on 127.0.0.1 ephemeral port, grammars from the frozen true-grammar table plus calibration resources",
+    "probe_space": "deterministic seed 38234098, alphabet '0123456789abcdef', lengths 1..4, PROBE_BUDGET=256/family",
+    "inferred_allowlist": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ]
+  },
+  "environment": {
+    "python": "3.12.15",
+    "python_full": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "network": "loopback 127.0.0.1 only; no external network, no model/token calls",
+    "credentials": "none"
+  },
+  "artifacts": {
+    "result": "result.json",
+    "report": "report.md",
+    "raw_stdout_sha256": "d120d78556d5a4f8d4fa5349e7ed37c4f2dfc4668162ba4974492f9cb63140f5"
+  }
+}

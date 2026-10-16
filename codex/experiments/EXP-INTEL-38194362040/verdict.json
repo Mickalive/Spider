@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "decision": "FALSIFIES",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded falsification at the byte-verified credential-free local capability ceiling, adopted with audit PASS (producer_claim_supported=true, required_fixes=[]). The corrected freeze repair succeeded (both candidates IDENTITY-PASS: served-body sha256 == frozen pins == HF tree-API lfs.oid at equal byte count; GGUF fingerprints match; parent metadata-vs-body mismatch did not recur) and both cells are COMPLETE yet fail the frozen bar: M-14B-QWEN task_success_rate=0.0 (0/5) and M-8B-LLAMA task_success_rate=0.0 (0/5), both parseable_action_rate_step1=1.0, PC 10/10, answer_action_emission_rate=0.0. Behavioural mode identical to the carried 3B-8B anchors (step-0 reveal click then hidden-button re-click loop, zero answer actions) even though the reveal succeeds and PAGE_TEXT contains TARGET-42. Endpoint census: 0 PROVISIONABLE_CREDENTIATED, 10 CREDENTIAL_REQUIRED, 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations), 1 UNREACHABLE (HF Inference); no credential env var present. Frozen rule 4 -> OUTCOME=FALSIFIES, B3_STATUS=NOT_SATISFIED. This is a valid scientific negative bounded to the predeclared credential-free local Q4_K_M classes tested (Qwen2.5-14B, Llama-3.1-8B, plus carried Qwen 3B-8B anchors) and the recorded non-provisionable hosted census; it does NOT globally reject C-LLM-INHERIT, does NOT close hosted frontier classes (blocked, not tested), and says nothing about other quantisations/tasks/domains. Claim status retained at HYPOTHESIS (no promotion; the claim's own next gate - the four-arm same-model/tools/budget benchmark - remains blocked on B3)."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Which re-scope does the Global Research Director authorize now that B3 is NOT_SATISFIED (no credential-free local Q4_K_M class through 14B or non-Qwen 8B clears the frozen minimal bar; 0 provisionable hosted providers; the sole credential-free hosted path is operationally capped): obtain a hosted credential (with model pinning/SLA) to test a frontier class under the identical protocol, re-scope Gate 3 by dropping the same-model external published-baseline anchor in favour of internally re-run comparators on a dynamic-range task bank (B2-owned), or authorize the materially orthogonal intel probe - suppressing the hidden reveal button from the ELEMENTS observation (or a full accessibility-tree observation) - to separate observation-representation failure from raw multi-step control capacity on the already-tested classes?",
+  "reason": "Valid bounded negative: producer result status=COMPLETE, outcome=FALSIFIES, decision_trace matches the frozen rule precedence (rule1 preflight PASS with all five checks - PC-ORACLE-EPISODE 5/5, NC-NO-MODEL-ACTION 0.0/0.0, B-RANDOM-ACTION parseable 1.0/success 0.2<0.6, freeze artifacts 3/3 hash match, stack imports OK; rule2 census recorded non-gating; rule3 both candidates COMPLETE and TREATMENT_FAILS_BAR; rule4 -> FALSIFIES with B3_STATUS=NOT_SATISFIED). Independent audit status=PASS, producer_claim_supported=true, all recomputed_metrics match, required_fixes=[] and no blocking validity findings (one minor non-outcome schema-adherence note: M-8B-LLAMA emitted selector 'reveal-btn' without '#' yet clicks succeeded). Content-identity repair - the entire purpose of this corrected continuation - is confirmed at EXECUTE time for both pinned GGUFs (raw/provisioning_evidence.json, provenance.json#models), so the FALSIFIES branch is populated by real capability measurement, not operational failure: no cell was UNMEASURED_LOAD_FAILED, EXCLUDED or PARTIAL. The bounded negative now covers scale (14B Qwen) and family (non-Qwen 8B Llama) axes in addition to the carried 3B-8B anchors; the failure mode (reveal then hidden-button re-click loop, zero answer actions) is not a decoding failure (PC 10/10, step-1 parseable 5/5) and reproduces the carried anchor behaviour. The exact hosted credential/operational blocker per provider is recorded in raw/endpoint_census.json (0 provisionable; exact missing env vars and HTTP statuses; Pollinations capped; HF Inference unreachable). Per the mandate's explicit stop rule ('if no candidate clears the bar at byte-verified pinning AND no hosted endpoint can be provisioned without credentials, record the blocker and STOP probing'), continue=false and the re-scope choice (hosted credential / internal comparators / different model class / orthogonal representation probe) is escalated to the Global Research Director; B3 must remain the explicit readiness blocker when scheduling the gated four-arm benchmark. C-LLM-INHERIT stays HYPOTHESIS per its prior effective event; this packet neither promotes nor globally rejects it.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38194362040/result.json",
+    "research/experiments/EXP-INTEL-38194362040/result.json#metrics.decision_trace",
+    "research/experiments/EXP-INTEL-38194362040/result.json#observations",
+    "research/experiments/EXP-INTEL-38194362040/result.json#validity_notes",
+    "research/experiments/EXP-INTEL-38194362040/audit.json",
+    "research/experiments/EXP-INTEL-38194362040/audit.json#claim_ceiling",
+    "research/experiments/EXP-INTEL-38194362040/audit.json#unresolved",
+    "research/experiments/EXP-INTEL-38194362040/spec.json#decision_rule",
+    "research/experiments/EXP-INTEL-38194362040/spec.json#falsifier",
+    "research/experiments/EXP-INTEL-38194362040/freeze.json",
+    "research/experiments/EXP-INTEL-38194362040/design_review.json",
+    "research/experiments/EXP-INTEL-38194362040/report.md",
+    "research/experiments/EXP-INTEL-38194362040/provenance.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/preflight.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/controls.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/provisioning_evidence.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/endpoint_census.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/external_comparators.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/decision.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38175568787/handoff.json",
+    "research/experiments/EXP-INTEL-38164607941/verdict.json",
+    "codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+ "code_paths": [
+  "research/experiments/EXP-GRAPH-38530149021/raw_evidence/runner_tframe_sensitivity.py"
+ ],
+ "commands": [
+  "python3 research/experiments/EXP-GRAPH-38530149021/raw_evidence/runner_tframe_sensitivity.py --mechanics-only (twice; byte-identical required)",
+  "python3 research/experiments/EXP-GRAPH-38530149021/raw_evidence/runner_tframe_sensitivity.py > research/experiments/EXP-GRAPH-38530149021/raw_evidence/run_output.json"
+ ],
+ "datasets": [
+  {
+   "construction": "pool = AXIS-G1-PRIMARY cal + AXIS-G2-RETEST cal + AXIS-G3-NEW cal; every 4th pooled-app row (idx%4==3) to FIT-SELECT; remainder FIT-TRAIN; all pooled cal-OOS to FIT-SELECT",
+   "counts": {
+    "SELECT_APP": 34,
+    "SELECT_OOS": 60,
+    "TRAIN": 102
+   },
+   "disjointness": {
+    "fit_test_union_disjoint": true,
+    "train_select_disjoint": true
+   },
+   "role": "retrieval-fit-pool"
+  }
+ ],
+ "environment": {
+  "numpy_present": false,
+  "python": "3.12.15",
+  "sentence_transformers_present": false,
+  "sklearn_present": false,
+  "stdlib_only_runner": true
+ },
+ "experiment_id": "EXP-GRAPH-38530149021",
+ "freeze_artifact_hashes_verified": {
+  "research/experiments/EXP-GRAPH-38175554380/prereg.md": "dc90bf71ed03a2329b641d46c1f4f70a53dbeef95ebd6d688645f697868aff9b",
+  "research/experiments/EXP-GRAPH-38180711589/prereg.md": "5a64e90da4d1c13b4a290b988cc6096838119d09869abd69512d095cd9318cb0",
+  "research/experiments/EXP-GRAPH-38291080992/prereg.md": "5a9cc1190674ffa5a8e6d604f6735ae6a9e2e27ffc9358c82d263f51b43d5735",
+  "research/harness/goal_generator.py": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+ },
+ "frozen_inputs": {
+  "design_review_sha256": "e71c51a269d7d0e1638b7acffc4cbb1429778403b13d13fc1876481d8eeef956",
+  "freeze_sha256": "45f017e00a17299d32983a34494afd40cd7f85d9844b57e7022c5f6f8800e5bb(prereg.md)",
+  "prereg_sha256": "45f017e00a17299d32983a34494afd40cd7f85d9844b57e7022c5f6f8800e5bb",
+  "request_sha256": "8a796de2691902a0a8452f476f9f9ee49cae7583b6a44a4916d337ca51a95a43",
+  "spec_sha256": "bcc5f7dd98113cf36986f8823cb399a57c4e604ccd8bde0a671d9a3b6f49a8c1"
+ },
+ "github_run_id": "38530149021",
+ "head_commit": "8756b02f10db21bd41e93b3df2b595c58ae75ef8",
+ "lane": "graph",
+ "material_artifacts": [
+  {
+   "role": "code",
+   "sha256": "89baf53026da8b33d80bf891a7c116b69b5bec8f60c9ae55a3ef8c484984ce29"
+  },
+  {
+   "role": "raw",
+   "sha256": "c5a1786f0f89da9e872466fb7eb351244221bcd0456e5e7ae410f5063723ef54"
+  },
+  {
+   "role": "raw",
+   "sha256": "9251f48e0212196b2d0f4a51d54bb0a7ae5f3e59c6fc0b8b384f78457393dfc2"
+  }
+ ],
+ "notes": "EXECUTE ran the frozen design only: extracted FROZEN-RUNNER block + one trailing newline (sha verified), ran --mechanics-only twice byte-identical, then the single scored run. No frozen file modified; no clause refit; no outcome-bearing deviation.",
+ "result_sha256": "d271c1ca32f388bae67edc7c6a0997db52e7df7a770d164133615c943f205fc7",
+ "runner": "research/experiments/EXP-GRAPH-38530149021/raw_evidence/runner_tframe_sensitivity.py",
+ "runner_self_sha": "89baf53026da8b33d80bf891a7c116b69b5bec8f60c9ae55a3ef8c484984ce29",
+ "seed": 4170410653
+}

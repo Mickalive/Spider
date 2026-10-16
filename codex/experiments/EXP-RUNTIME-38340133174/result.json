@@ -1,0 +1,414 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json",
+      "role": "raw",
+      "sha256": "c573b81296c127464f8c7273a02e7801cd92d4b806c32fb1d16f37e70c1b878e"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/runner_delta_repair_scaffold_v4.py",
+      "role": "code",
+      "sha256": "4a97d95ce5b9e4a5e318c5162e106a3ca6d931bf5bff7d68ae94b5fc9409357d"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_reachability.json",
+      "role": "raw",
+      "sha256": "9d84ddf807515e9b05a518bfd4356ed65f9fb68d225c9ced545abdc9649e560b"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/preflight_liveness.json",
+      "role": "raw",
+      "sha256": "56b20fa47e03481320b0cd56b9546ef91f90fff7b1c4a6bc392854788cc50fa0"
+    }
+  ],
+  "controls": {
+    "B-COLD": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-COLD-SUCCESS",
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-SHIPPED-COLD-L3"
+      ],
+      "expected": "task success >= 0.90 per class; shipped sum exactly 228 (12x19), http exactly 108 (12x9)",
+      "observed": "M-COLD-SUCCESS 1.0 on P1/P2/P3; M-SHIPPED-COLD-L3 228, M-COLD-HTTP-L3 108 on every class",
+      "status": "PASS"
+    },
+    "B-COLD-MIN": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-SHIPPED-COLD-L2"
+      ],
+      "expected": "shipped sum exactly 216 (12x18), http exactly 96 (12x8)",
+      "observed": "M-SHIPPED-COLD-L2 216, M-COLD-HTTP-L2 96 on every class",
+      "status": "PASS"
+    },
+    "B-LITERAL-REPLAY": {
+      "disclosure": "Frozen driver \u00a712 emitted the spurious string 'perturbation-does-not-bite' for all 3 classes because it evaluates (M-LITERAL-SUCCESS or 1.0) > 0.10 and Python maps legitimate 0.0 to 1.0. Under the frozen textual gate (success <= 0.10) the observed 0.0 passes. See validity_notes VN-DRIVER-OR-DEFAULT.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-LITERAL-SUCCESS"
+      ],
+      "expected": "success <= 0.10 on every class (perturbation bites)",
+      "observed": "M-LITERAL-SUCCESS 0.0 on P1/P2/P3 (0/12 literal successes per class)",
+      "status": "PASS"
+    },
+    "B-NO-REPAIR": {
+      "disclosure": "Same frozen-driver (M-NOREPAIR-SUCCESS or 1.0) artifact as B-LITERAL-REPLAY; textual gate holds. See VN-DRIVER-OR-DEFAULT.",
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-NOREPAIR-SUCCESS"
+      ],
+      "expected": "success <= 0.10 (abstention inert; never a denominator)",
+      "observed": "M-NOREPAIR-SUCCESS 0.0 on every class; norepair guard fired 36/36 (guard live while system abstains)",
+      "status": "PASS"
+    },
+    "NC-NO-PERTURBATION": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#nc_no_perturbation_stale"
+      ],
+      "expected": "stale=false",
+      "observed": "stale=false",
+      "status": "PASS"
+    },
+    "NC-NOISE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#nc_noise_stale"
+      ],
+      "expected": "stale=false",
+      "observed": "stale=false",
+      "status": "PASS"
+    },
+    "NC-OVERBROAD-REPAIR": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-OVERBROAD-CONTAMINATION-N"
+      ],
+      "expected": "mean count > 0.10 (instrument live)",
+      "observed": "M-OVERBROAD-CONTAMINATION-N 4.0 on every class",
+      "status": "PASS"
+    },
+    "PC-BASE-LIVENESS": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-BASE-LIVENESS"
+      ],
+      "expected": "true in every scored trial (36/36)",
+      "observed": "M-BASE-LIVENESS 1.0 on every class; 36/36 trials base-live",
+      "status": "PASS"
+    },
+    "T-REPAIR-CONSERVATIVE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#trials.*.conservative_success"
+      ],
+      "expected": "reported sensitivity only, excluded from classifier",
+      "observed": "conservative_success 36/36; reported sensitivity only",
+      "status": "PASS"
+    },
+    "T-REPAIR-LEGACY": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-LEGACY-RATIO-L2"
+      ],
+      "expected": "shipped ratio > 1.00 at L=2 (prior product-counter regression reproduces)",
+      "observed": "M-LEGACY-RATIO-L2 1.1111 on every class; legacy_success 36/36; no V13 caveat",
+      "status": "PASS"
+    },
+    "T-REPAIR-REUSE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-SHIPPED-REUSE"
+      ],
+      "expected": "shipped 17 per repaired trial, class http P1 6 / P2 5 / P3 6; latency compared empirically",
+      "observed": "M-SHIPPED-REUSE 204 (12x17) every class; http sums P1 72 / P2 60 / P3 72; repair_success 1.0; latency ratios 1.037-1.246 (deficit on both boundaries, both L)",
+      "status": "PASS"
+    },
+    "V-CERT": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#certificate"
+      ],
+      "expected": "bank 36 + fresh-silence 36 + held-out 12 + NC 2 singly scored; boundary labeled",
+      "observed": "certificate_complete=true; bank sensitivity 1.0 (36/36); held-out sensitivity 1.0 (12/12); pooled specificity 1.0 (38/38); 0 false accepts; 3 boundary entries labeled (2 DERIVED, 1 MEASURED)",
+      "status": "PASS"
+    },
+    "V-CLOSURE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.M-CLOSURE-REUSE-MED"
+      ],
+      "expected": "median |S-MISC|/episode <= 0.20 per class (attribution track only)",
+      "observed": "M-CLOSURE-REUSE-MED 0.0042/0.0043/0.0039; M-CLOSURE-COLD-MED 0.0063/0.0065/0.0064",
+      "status": "PASS"
+    },
+    "V-DRIFT-COLD": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.V-DRIFT-COLD-HOLDS"
+      ],
+      "expected": "cold shipped sums exactly 216/228 with http 96/108 per class",
+      "observed": "V-DRIFT-COLD-HOLDS true on all 3 classes (exact nominals, no drift)",
+      "status": "PASS"
+    },
+    "V-DRIFT-REUSE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.V-DRIFT-REUSE-HOLDS"
+      ],
+      "expected": "every repaired-success trial ships exactly 17 with class-expected http",
+      "observed": "V-DRIFT-REUSE-HOLDS true on all 3 classes (36/36 repaired trials at nominal)",
+      "status": "PASS"
+    },
+    "V-EQ-PREMISE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#per_class.*.V-EQ-HOLDS"
+      ],
+      "expected": "shipped reuse<cold at L2 and L3 with fetch_L3 <= 0.90 (reported premise, zero empirical variance)",
+      "observed": "V-EQ-HOLDS true all classes: ratios 0.9444/0.8947, fetch 0.6667/0.5556/0.6667",
+      "status": "PASS"
+    },
+    "V-RETAIN": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#trials.*.retention_ok"
+      ],
+      "expected": "post-warmup guard re-check stale=True on every trial",
+      "observed": "retention_ok 36/36; 0 perturbation-not-retained trials",
+      "status": "PASS"
+    },
+    "V-TIMING": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-38340133174/raw_evidence/scored_run.json#trials"
+      ],
+      "expected": "2 warmups/trial, 6/6 parity per class, finite positive latencies, zero timed errors",
+      "observed": "warmups_done 2 on 36/36; rep-first 6/6 per class; all 108 episode latencies finite > 0; 0 timed-episode errors",
+      "status": "PASS"
+    }
+  },
+  "experiment_id": "EXP-RUNTIME-38340133174",
+  "lane": "runtime",
+  "metrics": {
+    "M-CERT-FALSE-ACCEPTS": 0,
+    "M-CERT-HELDOUT-FALSE-ACCEPTS": 0,
+    "M-CERT-HELDOUT-SENSITIVITY": 1.0,
+    "M-CERT-SENSITIVITY": 1.0,
+    "M-CERT-SPECIFICITY": 1.0,
+    "M-CERT-SPECIFICITY-BANK": 1.0,
+    "M-CERT-SPECIFICITY-NC": 1.0,
+    "M-MODEL-CALLS-TOTAL": 0,
+    "M-MODEL-TOKENS-TOTAL": 0,
+    "M-N-VALID-TRIALS": 36,
+    "attribution_answer": "ATTRIBUTED-S-REGISTRY-BUILD",
+    "certificate_complete": true,
+    "class_verdicts_text_faithful": {
+      "P1-ENDPOINT": "PRICED-DEFICIT",
+      "P2-STRUCTURE": "PRICED-DEFICIT",
+      "P3-PERMISSION": "PRICED-DEFICIT"
+    },
+    "decision_text_faithful": "PERMANENT-DROP-BOUNDED",
+    "driver_emitted": {
+      "class_verdicts": {
+        "P1-ENDPOINT": "PRICED-DEFICIT",
+        "P2-STRUCTURE": "PRICED-DEFICIT",
+        "P3-PERMISSION": "PRICED-DEFICIT"
+      },
+      "decision": "MEASUREMENT_INVALID",
+      "invalid_reasons": [
+        "P1-ENDPOINT:perturbation-does-not-bite",
+        "P1-ENDPOINT:abstention-control-fired",
+        "P1-ENDPOINT:contamination-above-bar",
+        "P2-STRUCTURE:perturbation-does-not-bite",
+        "P2-STRUCTURE:abstention-control-fired",
+        "P2-STRUCTURE:contamination-above-bar",
+        "P3-PERMISSION:perturbation-does-not-bite",
+        "P3-PERMISSION:abstention-control-fired",
+        "P3-PERMISSION:contamination-above-bar"
+      ],
+      "note": "Raw driver stdout only; the 9 invalid_reasons are the VN-DRIVER-OR-DEFAULT artifact (legitimate 0.0 metric values mapped to 1.0 by Python 'or' defaults), not measurement failures. Preserved verbatim, not followed.",
+      "outcome": "INCONCLUSIVE",
+      "status": "MEASUREMENT_INVALID"
+    },
+    "per_class": {
+      "P1-ENDPOINT": {
+        "M-BASE-LIVENESS": 1.0,
+        "M-CERT-SPECIFICITY-BANK": 1.0,
+        "M-CLOSURE-COLD-MED": 0.006263572672404032,
+        "M-CLOSURE-REUSE-MED": 0.004196997826848022,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-COLD-SUCCESS": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-EQUIV-MATCH": "12/12",
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-LATENCY-COLD-L2-MED-S": 0.00503161850019751,
+        "M-LATENCY-COLD-L3-MED-S": 0.005520786000033695,
+        "M-LATENCY-R-L2": 1.2463344547216628,
+        "M-LATENCY-R-L2-CI95": [
+          1.2173188560989767,
+          1.3398124985544624
+        ],
+        "M-LATENCY-R-L2-NOARG": 1.2281800770929898,
+        "M-LATENCY-R-L3": 1.1359033840059767,
+        "M-LATENCY-R-L3-CI95": [
+          1.1027893616356872,
+          1.2173919737362517
+        ],
+        "M-LATENCY-R-L3-NOARG": 1.1192245675190027,
+        "M-LATENCY-REUSE-MED-S": 0.006271079499811094,
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": "12/12",
+        "M-LEGACY-RATIO-L2": 1.1111111111111112,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 12,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-REUSE-HTTP": 72,
+        "M-SCAFFOLD-COLD-L3": null,
+        "M-SCAFFOLD-REUSE": null,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-SHIPPED-REUSE": 204,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-WRITE-SET-MAX": 1,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true,
+        "excess_med_s": 0.0007502934997773991
+      },
+      "P2-STRUCTURE": {
+        "M-BASE-LIVENESS": 1.0,
+        "M-CERT-SPECIFICITY-BANK": 1.0,
+        "M-CLOSURE-COLD-MED": 0.00647427985316725,
+        "M-CLOSURE-REUSE-MED": 0.0042643450316679175,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-COLD-SUCCESS": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-COST-FETCH-RATIO-L3": 0.5555555555555556,
+        "M-EQUIV-MATCH": "12/12",
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-LATENCY-COLD-L2-MED-S": 0.005042982499844584,
+        "M-LATENCY-COLD-L3-MED-S": 0.005600594500037914,
+        "M-LATENCY-R-L2": 1.1520875791824003,
+        "M-LATENCY-R-L2-CI95": [
+          1.1364629706487346,
+          1.175635948433178
+        ],
+        "M-LATENCY-R-L3": 1.0373822814820506,
+        "M-LATENCY-R-L3-CI95": [
+          1.0233003314931735,
+          1.063396435587409
+        ],
+        "M-LATENCY-R-L2-NOARG": 1.1367204048060113,
+        "M-LATENCY-R-L3-NOARG": 1.0234817873434012,
+        "M-LATENCY-REUSE-MED-S": 0.005809957500105156,
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": "12/12",
+        "M-LEGACY-RATIO-L2": 1.1111111111111112,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 12,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-REUSE-HTTP": 60,
+        "M-SCAFFOLD-COLD-L3": null,
+        "M-SCAFFOLD-REUSE": null,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-SHIPPED-REUSE": 204,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-WRITE-SET-MAX": 1,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true,
+        "excess_med_s": 0.00020936300006724196
+      },
+      "P3-PERMISSION": {
+        "M-BASE-LIVENESS": 1.0,
+        "M-CERT-SPECIFICITY-BANK": 1.0,
+        "M-CLOSURE-COLD-MED": 0.006392714473979,
+        "M-CLOSURE-REUSE-MED": 0.0039053105336293637,
+        "M-COLD-HTTP-L2": 96,
+        "M-COLD-HTTP-L3": 108,
+        "M-COLD-SUCCESS": 1.0,
+        "M-CONTAMINATION-RATE": 0.0,
+        "M-COST-FETCH-RATIO-L3": 0.6666666666666666,
+        "M-EQUIV-MATCH": "12/12",
+        "M-GUARD-FIRE-RATE": 1.0,
+        "M-LATENCY-COLD-L2-MED-S": 0.005002267999998367,
+        "M-LATENCY-COLD-L3-MED-S": 0.005522099999780039,
+        "M-LATENCY-R-L2": 1.2350022030076482,
+        "M-LATENCY-R-L2-CI95": [
+          1.2189689666294081,
+          1.588419762339261
+        ],
+        "M-LATENCY-R-L3": 1.118743231792022,
+        "M-LATENCY-R-L3-CI95": [
+          1.0856813012538418,
+          1.43756826248085
+        ],
+        "M-LATENCY-R-L2-NOARG": 1.2194193593962173,
+        "M-LATENCY-R-L3-NOARG": 1.1046228031771523,
+        "M-LATENCY-REUSE-MED-S": 0.006177812000032645,
+        "M-LATENCY-SIGN-REUSE-SLOWER-L3": "11/12",
+        "M-LEGACY-RATIO-L2": 1.1111111111111112,
+        "M-LITERAL-SUCCESS": 0.0,
+        "M-MODEL-CALLS": 0,
+        "M-MODEL-TOKENS": 0,
+        "M-N": 12,
+        "M-NOREPAIR-SUCCESS": 0.0,
+        "M-OVERBROAD-CONTAMINATION-N": 4.0,
+        "M-REPAIR-SUCCESS": 1.0,
+        "M-REPAIR-SUCCESS-WILSON-LOWER": 0.7574992425007574,
+        "M-REUSE-HTTP": 72,
+        "M-SCAFFOLD-COLD-L3": null,
+        "M-SCAFFOLD-REUSE": null,
+        "M-SHIPPED-COLD-L2": 216,
+        "M-SHIPPED-COLD-L3": 228,
+        "M-SHIPPED-RATIO-L2": 0.9444444444444444,
+        "M-SHIPPED-RATIO-L3": 0.8947368421052632,
+        "M-SHIPPED-REUSE": 204,
+        "M-SP5-RATIO-L2": 1.2857142857142858,
+        "M-SP5-RATIO-L3": 1.2272727272727273,
+        "M-WRITE-SET-MAX": 1,
+        "V-DRIFT-COLD-HOLDS": true,
+        "V-DRIFT-REUSE-HOLDS": true,
+        "V-EQ-HOLDS": true,
+        "excess_med_s": 0.0006557120002526062
+      }
+    }
+  },
+  "observations": [
+    "36/36 trials valid; every trial repair reason 'repaired' with repair_success true; retention_ok 36/36; warmups_done 2 on 36/36; rep-first parity 6/6 per class.",
+    "Per-class functional metrics: repair_success 1.0, Wilson lower 0.7575, contamination count 0/24 unaffected probes per class (rate 0.0), write_set_max 1, guard_fire 1.0, cold_success 1.0, base_liveness 1.0.",
+    "Must-fail controls observed at 0.0: M-LITERAL-SUCCESS 0.0 and M-NOREPAIR-SUCCESS 0.0 on all 3 classes (norepair guard fired 36/36 while system abstained).",
+    "Cold shipped sums exactly 216 (L2) and 228 (L3) with http 96/108 per class; reuse shipped sums exactly 204 (12x17) with http 72/60/72; shipped ratios 0.9444 (L2) and 0.8947 (L3); fetch ratios 0.6667/0.5556/0.6667.",
+    "Median episode latencies: reuse 6.27ms/5.81ms/6.18ms vs cold-L3 5.52ms/5.60ms/5.52ms; excess 0.75ms/0.21ms/0.66ms (inside the parent 0.2-0.9ms band).",
+    "All six latency ratios above 1.00 on both timed boundaries: inclusive 1.246/1.136 (L2), 1.136/1.037/1.119 (L3); NOARG 1.228/1.137 (L2), 1.119/1.023/1.105 (L3); all six bootstrap CI95 lower bounds above 1.00 (lowest 1.0233, P2-L3).",
+    "Per-trial reuse-slower signs at L3: 12/12 P1, 12/12 P2, 11/12 P3 (35/36).",
+    "Scaffolding-inclusive 5-field sensitivity ratios 1.2857 (L2) / 1.2273 (L3) on every class (reuse worse; reported, excluded from classifier per frozen design).",
+    "Attribution: closure medians 0.0039-0.0043 (reuse) and 0.0063-0.0065 (cold), far below the 0.20 bar; S-REGISTRY-BUILD median delta ~1.44-1.45ms exceeds half the excess on 3/3 classes; S-PROBE also exceeds half on 3/3; S-REPAIR-SIGNAL on 2/3 (P1, P3); frozen first-match order yields ATTRIBUTED-S-REGISTRY-BUILD.",
+    "Certificate: bank sensitivity 36/36, held-out sensitivity 12/12 on disjoint fresh seeds, pooled specificity 38/38 (36 fresh-silence + 2 NC), 0 false accepts; residual boundary labeled with 2 DERIVED + 1 MEASURED entries.",
+    "V-EQUIV: timed instrumented-episode shipped sums match original-function warmup projections 12/12 on every class (36/36).",
+    "Raw driver stdout (preserved verbatim in scored_run.json) prints decision MEASUREMENT_INVALID with 9 invalid_reasons strings; its per-class cost verdicts are PRICED-DEFICIT x3 and all numeric metrics above are unaffected by the labeling artifact.",
+    "Model calls and tokens structurally 0 (0/36 trials); B3 endpoint absent by construction."
+  ],
+  "outcome": "FALSIFIES",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "B3 real model-call/token economics remains UNSATISFIABLE on this substrate (counters-only pricing; blocker recorded, not resolved).",
+    "Transfer off the localhost stdlib substrate, to production carriers, external agents, or other perturbation classes was not tested and is out of scope.",
+    "Attribution tie structure: S-PROBE also reaches the 0.50 share on 3/3 classes and S-REPAIR-SIGNAL on 2/3; the frozen first-match order reports S-REGISTRY-BUILD. The excess is net of ~2.0-2.2ms cold-side savings (discovery/observe/distill/execute phases negative for reuse), so component shares exceed 1.0; a future design could preregister net-vs-gross attribution semantics.",
+    "One P3-L3 trial was reuse-faster (11/12 signs); the P2-L3-NOARG margin is the narrowest (ratio 1.0235, CI lower 1.0233) but still strictly above 1.00 with the full CI above 1.00.",
+    "Whether the frozen-driver 'or 1.0' idiom should be repaired in a future DESIGN revision (replacing None-defaults with explicit 'is None' checks) is left to the lane DIRECTOR and AUDIT; this packet follows the frozen text and preserves the raw stdout for adjudication.",
+    "C-DELTA-REPAIR mechanism soundness (functional/locality) is NOT rejected by this packet; only the end-to-end product-economics re-admission is dropped."
+  ],
+  "validity_notes": [
+    "VN-DRIVER-OR-DEFAULT (code artifact, disclosed, text-faithful verdict reported): the frozen \u00a712 driver evaluates three must-pass upper-bound gates as (metric or 1.0) > 0.10 (M-LITERAL-SUCCESS, M-NOREPAIR-SUCCESS, M-CONTAMINATION-RATE). In Python, a legitimately observed 0.0 is falsy, so 0.0 is replaced by 1.0 and the gate spuriously trips. Observed values are exactly 0.0 on all 3 classes for all three metrics, which satisfy the frozen textual gates (spec.json decision_rule/positive_control/ null_control; prereg \u00a76 V4/V6/V8: success <= 0.10, contamination <= 0.10). The driver's own per-class cost classifier (v2.functional_ok, which uses direct comparisons) returns PRICED-DEFICIT x3, confirming functional_ok=true. Per prereg \u00a714, measurement failure is defined by failure of a \u00a78 gate; no \u00a78 textual gate failed, so status=COMPLETE with the text-faithful decision PERMANENT-DROP-BOUNDED is reported, and the raw MEASUREMENT_INVALID stdout is preserved verbatim in scored_run.json for AUDIT adjudication. No frozen file was modified.",
+    "Representation loss: simplified localhost JSON-API substrate, not real websites; conclusions bounded to this carrier, three LOCAL perturbation classes, n=12/class, and the stated counters.",
+    "Wall-clock latency is subject to host noise; mitigated by in-trial parity order (6/6 per class), 2 warmups per trial, dual gated boundaries, B_LAT=2000 bootstrap CIs, and 35/36 per-trial sign consistency.",
+    "S-ARG deepcopy-operand asymmetry (full mech dict vs {}) is disclosed and neutralized: PRICED-DEFICIT holds on the v3-exact NOARG boundary too (lowest NOARG ratio 1.0235), so the deficit is not a deepcopy artifact.",
+    "Attribution shares above 1.0 (e.g. S-REGISTRY-BUILD 1.93/6.89/2.21) are an arithmetic consequence of offsetting cold-side savings, not an error; the frozen >= 0.50-share rule is applied as written.",
+    "P3 M-LATENCY-R-L2 point value equals the P1 value to displayed precision in this summary; exact per-trial latencies are in scored_run.json trials for audit recomputation.",
+    "B3 model economics unmeasured by construction (structural zeros); carried as an explicit blocker, not as evidence.",
+    "No cross-lane claim status is mutated by this packet; C-PRODUCT-ECON consequences are inputs to the Runtime DIRECTOR and Global Research Director."
+  ]
+}

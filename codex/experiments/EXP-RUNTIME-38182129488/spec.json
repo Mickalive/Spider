@@ -1,0 +1,2242 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-38182129488",
+  "lane": "runtime",
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "claim_scope_note": "C-MEAS-VALID only (registry owner lane runtime). This experiment produces substrate-validity evidence: it measures whether the certified SBA-CREDENTIAL-FREE-V2 pre-freeze dynamic range survives a MEMORYFUL comparator, or is an artifact of the memoryless comparator construction of the predecessor. It does not change any claim status, does not promote a mechanism, and does not execute the expensive four-arm C-LLM-INHERIT benchmark. It either upgrades the predecessor's bounded certificate or records a bounded substrate-class negative.",
+  "question": "Does the certified SBA-CREDENTIAL-FREE-V2 dynamic range survive a memoryful comparator (the disclosed NC-MEMORYFUL boundary, where a within-session receipt-retaining cold agent reaches 1.0), or is the (K-1)/K treatment/comparator separation an artifact of the memoryless comparator construction -- and therefore can this bank provide discriminative dynamic range for a benchmark (such as the four-arm C-LLM-INHERIT: COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER) whose comparator arms may themselves carry within-session memory, rather than only for the frozen memoryless B-COLD-RE-DERIVE / B-RETRIEVAL-SHAPED construction?",
+  "hypothesis": "The predecessor's (K-1)/K range does NOT survive a comparator that retains the full within-session commit-receipt log. The range is a function of comparator MEMORY CAPACITY, not of the treatment mechanism: it survives a state-only comparator (M1, retains observed task state but no receipts) and a sub-distance receipt comparator (M2a, retains 1 receipt), and it collapses as soon as the comparator retains a number of commit receipts spanning the chain-to-precursor distance (1 at novelty 0.50, 2 at novelty 0.75). Concretely, predicted success rates at novelty >= 0.50: B-MEMORY-STATE and B-MEMORY-WINDOW-1@0.75 and B-KNOWLEDGE-NO-MEMORY and both M0 comparators = (K-1)/K = 0.875 (F1) / 0.900 (F2); B-MEMORY-WINDOW-1@0.50, B-MEMORY-WINDOW-2, B-MEMORY-RECEIPT, B-RETRIEVAL-MEMORYFUL = 1.0. The strongest memoryful comparator B-MEMORY-RECEIPT is predicted to be success- AND counter-identical to T (margin 0; this equivalence is itself the collapse mechanism, because the substrate's single success path means any comparator that recovers the binding is behaviourally the treatment). Overall predicted decision: PARTIAL, with capacity threshold 1 at novelty 0.50 and 2 at novelty 0.75 on both families.",
+  "falsifier": "The range survives the strongest memoryful comparator: for at least one family at novelty >= 0.50, B-MEMORY-RECEIPT success_rate < 0.95 with a treatment margin >= 0.05 and all arms at/above the correctness floor (decision ROBUST). That would falsify the 'memoryless-construction artifact' reading and support the bank as genuine, memory-robust B2 dynamic range against a full-receipt-memory comparator. Any failure of the validity gates V1-V8 instead yields MEASUREMENT_INVALID (infrastructure/validity failure, not a scientific result).",
+  "baselines": [
+    "B-COLD-RE-DERIVE (M0): memoryless-per-task cold re-derivation (a fresh session GET before every task, no retained in-session binding). Inherited predecessor comparator; predicted (K-1)/K = 0.875 (F1) / 0.900 (F2) at novelty >= 0.50.",
+    "B-RETRIEVAL-SHAPED (M0): as cold plus one nearest-neighbour retrieval call per task over a store of PRIOR-session receipts; retrieves a stale foreign-session binding for the chain task. Predicted (K-1)/K.",
+    "B-KNOWLEDGE-NO-MEMORY (M-K): knows the chain semantics but starts a fresh session per task and retains nothing; cannot reach the same-session precursor. Predicted (K-1)/K. Isolates 'semantics without memory'.",
+    "B-MEMORY-STATE (M1): one session; retains observed GET resource_id state but NO commit receipts. Predicted (K-1)/K. Isolates 'state memory without receipt memory'.",
+    "B-MEMORY-WINDOW-1 (M2a): one session; retains only the last 1 successful commit receipt. Predicted 1.0 at novelty 0.50 (carry distance 1) and (K-1)/K at novelty 0.75 (carry distance 2).",
+    "B-MEMORY-WINDOW-2 (M2b): one session; retains the last 2 successful commit receipts. Predicted 1.0 at both scored bands.",
+    "B-MEMORY-RECEIPT (M3, PRIMARY): one session; retains the full commit-receipt log and generically scans it for a chain_resource_id field. Predicted 1.0 at both scored bands with counters identical to T. This is the strongest memoryful comparator."
+  ],
+  "positive_control": "PC-EXACT-REPLAY: given the session schema and binding by construction; commits every task once with no wasted discovery. Expected success_rate = 1.0 at every novelty band; if < 1.0 the world is defective (MEASUREMENT_INVALID) or the treatment is not live. Probe-verified 1.0 at all bands for both families; its counters (F1 (17,0,8,0), F2 (21,0,10,0)) are identical to T on every band, confirming the single-success-path structure.",
+  "null_control": "NC-MECHANISM-OFF: exposing the one-time binding directly via the session endpoint makes B-COLD-RE-DERIVE reach 1.0 and therefore makes the predecessor's certificate FALSE; a certificate that survives this is insensitive and non-identifying. Probe-verified: mechanism-off cold F1 rate = 1.0, certificate FALSE. Complementary nulls: NC-CEILING-BAND (all arms 1.0 at novelty 0.00 where the chain mechanism is disengaged), NC-MEMORY-OFF (B-MEMORY-RECEIPT with a per-task log reset must degrade to (K-1)/K, isolating receipt retention as the cause), NC-REVEAL-ORDER-FLIPPED (committing the chain before its precursor removes the reveal and must fail the chain), NC-RETRIEVAL-REDUNDANT (adding stale retrieval to full memory must not change the rate), NC-WINDOW-MONOTONIC (window-1 <= window-2 <= full).",
+  "measurement_validity": {
+    "gates": {
+      "V1_code_fidelity_manifest": "EXECUTE records sha256 of every authored harness file plus python3 --version in result.json.artifacts; the harness embeds the frozen SBA-CREDENTIAL-FREE-V2 construction and all ten arm policies verbatim (sha256 recorded below), so the interpretation dependency is bound by the frozen spec/prereg hashes.",
+      "V2_transport_conformance": "the full HTTP surface (all endpoints, methods and status codes in substrate.endpoints) passes a conformance test before any scoring; DESIGN verified the session/task/commit surface over real stdlib HTTP and all protocol semantics on the in-process model.",
+      "V3_no_leak": "NC-NO-LEAK (F-LEAK gate) clean: the binding appears only in its own precursor receipt; it is absent from every session body, task body, error body and log line.",
+      "V4_determinism": "two identical scored runs produce byte-identical per-cell outcomes; server_secret and every derivation are deterministic (no secrets/clock/os.urandom). DESIGN probe and selftest were each byte-identical over two runs.",
+      "V5_arm_liveness": "T-AMORTIZED-DISCOVERY = 1.0 and PC-EXACT-REPLAY = 1.0 at every band, and all ten memory-lattice arms execute end-to-end without exceptions.",
+      "V6_counter_instrumentation": "all four counters (http_calls, retrieval_calls, verification_calls, repair_calls) recorded per cell with matched accounting.",
+      "V7_matched_correctness": "exact-match scoring; matched_correctness == success_rate for every arm.",
+      "V8_sensitivity": "EXECUTE evaluates five sub-gates: V8_ceiling_band (novelty 0.0 -> all ten arms 1.0); V8_mechanism_off (exposing the binding raises cold to >= 0.95); V8_memory_off_attribution (B-MEMORY-RECEIPT with per-task log reset equals (K-1)/K); V8_reveal_order_attribution (chain-before-precursor fails the chain); V8_m0_counter_distinctness (T vs B-COLD-RE-DERIVE >= 2/4 counter dimensions distinct at the scored band). A lattice that does not move in these worlds is non-identifying. DESIGN probe measured all five."
+    },
+    "invalid_condition": "any V1-V8 failure -> status MEASUREMENT_INVALID / decision MEASUREMENT_INVALID; no scientific branch is claimed.",
+    "python": "3.12.15 (recorded at EXECUTE via python3 --version in the V1 manifest)"
+  },
+  "decision_rule": {
+    "mem_certifies": "For a memoryful comparator arm c (one of B-MEMORY-STATE, B-MEMORY-WINDOW-1, B-MEMORY-WINDOW-2, B-MEMORY-RECEIPT) at a scored cell (family, novelty) with novelty in {0.50, 0.75}: mem_certifies(c, family, novelty) is TRUE iff c.success_rate < COMPARATOR_MAX (0.95) AND every arm success_rate >= CORRECTNESS_FLOOR (0.80) AND matched_correctness >= 0.80 AND (T.success_rate - c.success_rate) >= MARGIN_FLOOR (0.05). Counter distinctness is reported as a diagnostic, not a certificate input (see identity_disclosure): requiring counter distinctness would make PARTIAL unobservable, because any comparator that recovers the binding is counter-identical to T on this single-success-path substrate.",
+    "ROBUST": "gates V1-V8 all pass AND robust_certified is TRUE (the PRIMARY full-receipt-memory comparator B-MEMORY-RECEIPT mem_certifies on at least one family at novelty >= 0.50). The (K-1)/K separation survives a full within-session receipt-retaining comparator -> the predecessor's dynamic-range certificate is robust to memory; the bank supplies discriminative range even for memoryful comparator arms. Do NOT promote a mechanism; this is substrate-validity evidence only.",
+    "PARTIAL": "gates V1-V8 all pass AND robust_certified is FALSE AND partial_certified is TRUE (at least one weaker memoryful comparator -- B-MEMORY-STATE, B-MEMORY-WINDOW-1 or B-MEMORY-WINDOW-2 -- mem_certifies on at least one family at novelty >= 0.50). The range survives only comparators whose retained-receipt capacity is below the chain-to-precursor distance; it collapses for a full-receipt-memory comparator. This is the PREDICTED outcome and the decisive answer to the mandate: the (K-1)/K separation is a function of comparator memory capacity, so the bank cannot supply discriminative range against a memoryful comparator. Freeze nothing new; report the capacity threshold and hand the bank-design question to Product.",
+    "COLLAPSED": "gates V1-V8 all pass AND no memoryful comparator mem_certifies at any family or scored band. The range is exhausted even by state-only memory; the certificate does not separate T from any memoryful comparator at all. Bounded substrate-class negative.",
+    "MEASUREMENT_INVALID": "any validity gate V1-V8 fails -> infrastructure/validity failure, not a scientific result.",
+    "precedence": "MEASUREMENT_INVALID (any V1-V8 failure, including liveness V5, leak V3 and the V8 sensitivity sub-gates) is evaluated first and overrides every other branch; then ROBUST if robust_certified; else PARTIAL if partial_certified; else COLLAPSED. No gate failure can be reported as a scientific ROBUST/PARTIAL/COLLAPSED. Implemented by harness classify_mem().",
+    "identity_disclosure": "The PRIMARY comparator B-MEMORY-RECEIPT is PREDICTED to be success- and counter-identical to T (margin 0, 0/4 counter dimensions distinct). This is not an accidental treatment/comparator identity: it is the substantive collapse result. The frozen substrate has a single success path (only the current session's binding satisfies the chain commit), so any comparator whose memory spans the chain-to-precursor distance necessarily reproduces the treatment exactly. The comparison is nevertheless non-vacuous because (a) mem_certifies requires a positive margin so an identical comparator cannot certify, and (b) the lattice contains memoryful comparators (B-MEMORY-STATE, B-MEMORY-WINDOW-1, B-MEMORY-WINDOW-2) that are behaviourally DISTINCT from T (rate and/or counters) and that carry the discriminating signal and the capacity threshold.",
+    "capacity_threshold_metric": "capacity_threshold(family, novelty) = the smallest retained-receipt capacity in the ladder [B-MEMORY-STATE=0, B-MEMORY-WINDOW-1=1, B-MEMORY-WINDOW-2=2] at which (T - comparator) drops below MARGIN_FLOOR; null if no capacity <= 2 closes the range. Predicted (closed form and probe-measured): 1 at novelty 0.50 and 2 at novelty 0.75, on both families.",
+    "branch_reachability": "Verified at DESIGN by the rule-level classifier classify_mem() over synthetic worlds; see design_satisfiability_probe.output.branch_reachability (all four labels inhabited). ROBUST is arithmetically emittable and would be realized if the full receipt-memory comparator failed to recover the binding (e.g. absent the precursor reveal); PARTIAL is the predicted world; COLLAPSED is realized when even state-only memory closes the range; MEASUREMENT_INVALID by any gate. NC-MECHANISM-OFF independently drives cold to 1.0 and flips the range FALSE, and NC-MEMORY-OFF independently drives the primary comparator back to (K-1)/K, making both the falling and rising directions reachable under the same implementation that scores the experiment.",
+    "outcome_enum_mapping": {
+      "ROBUST": "SUPPORTS",
+      "PARTIAL": "MIXED",
+      "COLLAPSED": "FALSIFIES",
+      "MEASUREMENT_INVALID": "NOT_APPLICABLE"
+    },
+    "result_status_mapping": {
+      "ROBUST": "COMPLETE",
+      "PARTIAL": "COMPLETE",
+      "COLLAPSED": "COMPLETE",
+      "MEASUREMENT_INVALID": "MEASUREMENT_INVALID"
+    },
+    "mapping_note": "EXECUTE records result.json.decision_label = the frozen label (ROBUST/PARTIAL/COLLAPSED/MEASUREMENT_INVALID) and result.json.outcome = the canonical enum via outcome_enum_mapping; status via result_status_mapping. A valid scientific MIXED/FALSIFIES is status=COMPLETE, not an execution failure. The decision labels are the primary scientific answer and must not be collapsed into the enum (the ROBUST vs PARTIAL vs COLLAPSED distinction is the measurement)."
+  },
+  "product_consequence_positive": "If the range survives the full-receipt-memory comparator (ROBUST), Runtime has a memory-robust B2 dynamic range and the engineered bank can gate a benchmark whose comparator arms carry within-session memory (including a full-receipt-memory COLD/INSTRUCTIONS baseline); the flagship four-arm C-LLM-INHERIT benchmark becomes fundable with the memoryful-comparator objection closed. C-MEAS-VALID gains substrate-validity evidence only; no mechanism promotion.",
+  "product_consequence_negative": "If the range collapses for a full-receipt-memory comparator (PARTIAL or COLLAPSED, the predicted outcome), the predecessor's (K-1)/K separation is a comparator-capacity artifact: a generic memoryful agent reaches the treatment level and is counter-identical to it. The bank cannot supply discriminative dynamic range for a benchmark with memoryful comparator arms, and the memoryless certificate must NOT be re-run (three deterministic REST iterations already exist). Product receives the concrete bank-design requirement (hardened V3 that requires mechanism- or composition-dependent success, not merely receipt retention) and the measured capacity threshold (1 receipt at novelty 0.50, 2 at 0.75). This is a first-class, decision-changing negative, not an infrastructure failure.",
+  "estimated_cost": {
+    "browser_work": 0,
+    "model_calls": 0,
+    "model_tokens": 0,
+    "network": "loopback only (127.0.0.1 ephemeral port)",
+    "notes": "pure local CPU and Python stdlib; DESIGN probe and selftest already run (two executions each, byte-identical).",
+    "scored_sessions": 1600,
+    "scored_arm_family_novelty_cells": 80,
+    "sessions_per_cell": 20,
+    "task_submissions": "~16000 commit requests",
+    "wall_clock_minutes_estimate": "5-15"
+  },
+  "expected_information_gain": "Decisive for the B2 blocker. It converts the predecessor's disclosed, uninstrumented NC-MEMORYFUL boundary into a measured, quantitative memory-capacity threshold and either (ROBUST) certifies the bank against a memoryful comparator or (PARTIAL/COLLAPSED) establishes that the (K-1)/K range is a comparator-construction artifact and specifies the hardening Product must apply. Both outcomes remove the current critical-path ambiguity; neither requires running the expensive C-LLM-INHERIT benchmark.",
+  "substrate": {
+    "class_id": "SBA-CREDENTIAL-FREE-V2",
+    "reused_from": "EXP-RUNTIME-38169622704 (frozen predecessor; run_seed, derivations, families, K, novelty ladder, endpoint semantics and 48-bit binding are reused VERBATIM so this is a genuine extension, not a new bank)",
+    "description": "Session-Binding-Amortized: credential-free, stdlib-only, deterministic multi-task HTTP sessions in which a one-time 48-bit session binding is discovered exactly once inside a precursor task receipt and amortized across the remainder of the session.",
+    "credentials_required": false,
+    "external_dependencies": [],
+    "transport": "stdlib http.server.ThreadingHTTPServer on 127.0.0.1 ephemeral port; stdlib urllib.request client",
+    "run_seed": "SPIDER-RUNTIME-SBA-V2-2026",
+    "randomness": "none; server_secret is deterministic (no secrets, no clock, no os.urandom)",
+    "derivation": {
+      "server_secret": "sha256(run_seed + '|server_secret')[:32]",
+      "session_token": "sha256(secret|family|novelty|idx|'token')[:16]",
+      "session_binding": "sha256(secret|family|novelty|idx|'binding')[:12] (48-bit)",
+      "schema_epoch": "sha256(secret|family|novelty|idx|'schema')[:8]",
+      "public_resource": "sha256(secret|family|novelty|'res'|i)[:10] (session-independent)"
+    },
+    "families": [
+      "F1-RECORDS",
+      "F2-WIDGETS"
+    ],
+    "tasks_per_session_K": {
+      "F1-RECORDS": 8,
+      "F2-WIDGETS": 10
+    },
+    "novelty_ladder": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "scoring_band": "novelty >= 0.50",
+    "sessions_per_cell": 20,
+    "task_layout": {
+      "chain_task": "resource_id is null on GET when novelty >= 0.50; only the current session's binding satisfies commit",
+      "precursor_task": "its first successful commit receipt carries chain_resource_id = binding exactly once",
+      "chain_task_index": {
+        "0.5": "K-3",
+        "0.75": "K-1"
+      },
+      "precursor_task_index": {
+        "0.5": "K-4",
+        "0.75": "K-3"
+      },
+      "chain_to_precursor_distance": {
+        "0.5": 1,
+        "0.75": 2
+      },
+      "requires_schema": "novelty >= 0.25",
+      "low_novelty_band": "novelty < 0.50: the chain task's resource_id is public, so every arm including all comparators reaches 1.0 (ceiling band; the decision rule is not evaluated there)"
+    },
+    "commit_semantics": {
+      "chain": "requires resource_id == current session binding; a repeat chain commit in the same session -> 409; wrong/foreign binding -> 400 with no binding echoed",
+      "precursor": "first success reveals binding in receipt; re-commit -> 409 with NO re-reveal",
+      "requires": "valid session_token; schema_epoch must match when requires_schema; resource_id must equal the expected resource for the task"
+    },
+    "endpoints": [
+      "GET  /healthz                              -> 200 {status:'ok'}",
+      "GET  /api/v1/{family}/session?novelty={n}  -> 200 {session_token, schema_epoch, epoch}; never contains the binding",
+      "GET  /api/v1/{family}/task/{i}             -> 200 {index, requires_schema, resource_id, is_chain}; chain task resource_id null when novelty >= 0.50",
+      "POST /api/v1/{family}/commit               -> 200 receipt | 400 bad_session/bad_index/schema_required/bad_resource | 409 already_committed"
+    ]
+  },
+  "arms": {
+    "T-AMORTIZED-DISCOVERY": {
+      "role": "treatment",
+      "memory_class": "retain receipts + chain semantics",
+      "policy": "one session GET per session; retain receipts; capture the one-time binding from the precursor receipt; commit each task once (chain uses the retained binding)",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 0
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 0
+        }
+      }
+    },
+    "PC-EXACT-REPLAY": {
+      "role": "positive_control",
+      "memory_class": "oracle binding",
+      "policy": "given the session schema and binding by construction; commits every task once with no wasted discovery",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 0
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 0
+        }
+      }
+    },
+    "B-KNOWLEDGE-NO-MEMORY": {
+      "role": "memory-class diagnostic (M-K)",
+      "memory_class": "semantics only, fresh session per task",
+      "policy": "knows the chain rule but starts a fresh session per task and retains nothing; cannot reach the same-session precursor",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 24,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 1
+        },
+        "F2-WIDGETS": {
+          "http_calls": 30,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 1
+        }
+      }
+    },
+    "B-COLD-RE-DERIVE": {
+      "role": "comparator (M0)",
+      "memory_class": "memoryless-per-task",
+      "policy": "re-issue session GET and discard context before every task; no retained in-session binding",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 24,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 1
+        },
+        "F2-WIDGETS": {
+          "http_calls": 30,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 1
+        }
+      }
+    },
+    "B-RETRIEVAL-SHAPED": {
+      "role": "comparator (M0 + stale retrieval)",
+      "memory_class": "memoryless + one retrieval per task",
+      "policy": "as B-COLD-RE-DERIVE plus one nearest-neighbour retrieval call per task over a store of PRIOR-session receipts; retrieves a stale foreign-session binding for the chain task",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 24,
+          "retrieval_calls": 8,
+          "verification_calls": 8,
+          "repair_calls": 1
+        },
+        "F2-WIDGETS": {
+          "http_calls": 30,
+          "retrieval_calls": 10,
+          "verification_calls": 10,
+          "repair_calls": 1
+        }
+      }
+    },
+    "B-MEMORY-STATE": {
+      "role": "memoryful comparator (M1)",
+      "memory_class": "state only, no receipts",
+      "policy": "one session; retains observed GET resource_id state but no commit receipts; at the chain task supplies the last observed non-null resource_id",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": 0.875,
+        "F2-WIDGETS": 0.9
+      },
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 1
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 1
+        }
+      }
+    },
+    "B-MEMORY-WINDOW-1": {
+      "role": "memoryful comparator (M2a)",
+      "memory_class": "last 1 commit receipt",
+      "policy": "one session; retains only the most recent successful commit receipt; at the chain task scans the retained receipts for a chain_resource_id field",
+      "predicted_success_rate_at_band": {
+        "F1-RECORDS": {
+          "0.5": 1.0,
+          "0.75": 0.875
+        },
+        "F2-WIDGETS": {
+          "0.5": 1.0,
+          "0.75": 0.9
+        }
+      },
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "0.5": {
+            "http_calls": 17,
+            "retrieval_calls": 0,
+            "verification_calls": 8,
+            "repair_calls": 0
+          },
+          "0.75": {
+            "http_calls": 17,
+            "retrieval_calls": 0,
+            "verification_calls": 8,
+            "repair_calls": 1
+          }
+        },
+        "F2-WIDGETS": {
+          "0.5": {
+            "http_calls": 21,
+            "retrieval_calls": 0,
+            "verification_calls": 10,
+            "repair_calls": 0
+          },
+          "0.75": {
+            "http_calls": 21,
+            "retrieval_calls": 0,
+            "verification_calls": 10,
+            "repair_calls": 1
+          }
+        }
+      }
+    },
+    "B-MEMORY-WINDOW-2": {
+      "role": "memoryful comparator (M2b)",
+      "memory_class": "last 2 commit receipts",
+      "policy": "one session; retains the last 2 successful commit receipts; at the chain task scans them for a chain_resource_id field",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 0
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 0
+        }
+      }
+    },
+    "B-MEMORY-RECEIPT": {
+      "role": "PRIMARY memoryful comparator (M3)",
+      "memory_class": "full commit-receipt log",
+      "policy": "one session; retains the full commit-receipt log and generically scans it for a chain_resource_id field at the chain task",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 0,
+          "verification_calls": 8,
+          "repair_calls": 0
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 0,
+          "verification_calls": 10,
+          "repair_calls": 0
+        }
+      },
+      "predicted_identity_with_treatment": "counter- and success-identical to T at every band (margin 0); this is the collapse mechanism, not a comparator bug."
+    },
+    "B-RETRIEVAL-MEMORYFUL": {
+      "role": "memoryful comparator (M3 + stale retrieval)",
+      "memory_class": "full receipt log + retrieval",
+      "policy": "as B-MEMORY-RECEIPT plus one retrieval call per task; memory is strictly preferred and retrieval is a stale fallback, so the rate must equal M3 while retrieval_calls increase",
+      "predicted_success_rate_at_band": 1.0,
+      "predicted_counters_per_session": {
+        "F1-RECORDS": {
+          "http_calls": 17,
+          "retrieval_calls": 8,
+          "verification_calls": 8,
+          "repair_calls": 0
+        },
+        "F2-WIDGETS": {
+          "http_calls": 21,
+          "retrieval_calls": 10,
+          "verification_calls": 10,
+          "repair_calls": 0
+        }
+      }
+    }
+  },
+  "counters": {
+    "dimensions": [
+      "http_calls",
+      "retrieval_calls",
+      "verification_calls",
+      "repair_calls"
+    ],
+    "identification_requirement": "For the memoryless baseline M0: >= 2 of 4 dimensions distinct between T and B-COLD-RE-DERIVE at the scored band (preserved from the predecessor, gate V8_m0_counter_distinctness). For memoryful comparators, counter distinctness is a DIAGNOSTIC and is NOT a certificate input: any comparator that recovers the binding is counter-identical to T on this single-success-path substrate, so requiring distinctness would make PARTIAL/COLLAPSED unobservable.",
+    "matched": "all ten arms instrumented with the same four counters and accounting",
+    "probe_status": {
+      "F1-RECORDS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.125,
+        "margin_M3": 0.0
+      },
+      "F2-WIDGETS": {
+        "T_vs_M0_distinct_dimensions": 2,
+        "T_vs_M3_distinct_dimensions": 0,
+        "margin_M0": 0.1,
+        "margin_M3": 0.0
+      }
+    }
+  },
+  "controls": {
+    "NC-MECHANISM-OFF": {
+      "purpose": "sensitivity: comparator succeeds when the amortization mechanism is removed (binding exposed via the session endpoint)",
+      "expected": "cold=1.0 -> predecessor certificate FALSE",
+      "probe_status": {
+        "cold_f1_rate": 1.0,
+        "successes": 8,
+        "k": 8,
+        "destroys_certificate": true
+      }
+    },
+    "NC-CEILING-BAND": {
+      "purpose": "band-sensitivity: at novelty 0.0 the chain mechanism is not engaged, so every arm reaches 1.0 and the decision rule is not evaluated there; shows the rule is band-restricted, not tautological",
+      "expected": "all ten arms 1.0 at novelty 0.0",
+      "probe_status": {
+        "all_arms_one_at_novelty_0.0": true
+      }
+    },
+    "NC-MEMORY-OFF": {
+      "purpose": "attribution: B-MEMORY-RECEIPT with a per-task receipt-log reset must degrade to the M0 rate; isolates receipt retention as the cause of the M3 success",
+      "expected": "(K-1)/K at novelty 0.50 and 0.75",
+      "probe_status": {
+        "rate_at_novelty": {
+          "0.5": 0.875,
+          "0.75": 0.875
+        },
+        "matches_expected": true
+      }
+    },
+    "NC-REVEAL-ORDER-FLIPPED": {
+      "purpose": "attribution: full receipt memory but the chain task is committed before its precursor, so the log contains no chain_resource_id at chain time; isolates the precursor first-commit reveal as the cause of the M3 success",
+      "expected": "(K-1)/K at novelty 0.50 and 0.75",
+      "probe_status": {
+        "rate_at_novelty": {
+          "0.5": 0.875,
+          "0.75": 0.875
+        },
+        "matches_expected": true
+      }
+    },
+    "NC-RETRIEVAL-REDUNDANT": {
+      "purpose": "sensitivity: adding stale retrieval to full receipt memory must not change the rate (memory is the cause, retrieval is inert)",
+      "expected": "1.0 at novelty 0.50 and 0.75",
+      "probe_status": {
+        "rate_at_novelty": {
+          "0.5": 1.0,
+          "0.75": 1.0
+        },
+        "matches_expected": true
+      }
+    },
+    "NC-WINDOW-MONOTONIC": {
+      "purpose": "ordering: retained-receipt capacity is monotone in outcome, window-1 <= window-2 <= full receipt at every (family, band)",
+      "expected": "monotone",
+      "probe_status": {
+        "monotone": true
+      }
+    },
+    "NC-NO-DISCOVERY-DIRECT": {
+      "purpose": "valid session token but ignores schema/receipts",
+      "expected": "1.0 at novelty 0.00; 0.0 at novelty >= 0.25",
+      "probe_status": {
+        "rate_at_novelty": {
+          "0.0": 1.0,
+          "0.5": 0.0
+        },
+        "matches_expected": true
+      }
+    },
+    "NC-BINDING-UNIQUENESS": {
+      "purpose": "48-bit session bindings are pairwise distinct over the sampled matrix",
+      "expected": "no collisions",
+      "probe_status": {
+        "binding_bits": 48,
+        "collisions": 0,
+        "sampled": 160
+      }
+    },
+    "NC-NO-LEAK": {
+      "purpose": "contamination gate F-LEAK (P2-WP003 leakage precedent guard): the binding never appears in any session/task/error body or log line; it appears only in the precursor receipt of its own session",
+      "expected": "clean",
+      "probe_status": {
+        "session_never_reveals_binding": true,
+        "no_binding_in_session_body": true,
+        "no_binding_in_task_bodies": true,
+        "no_binding_in_error_body": true,
+        "wrong_binding_400_no_leak": true,
+        "precursor_recommit_409_no_reveal": true,
+        "chain_task_resource_null": true,
+        "precursor_reveals_binding_once": true,
+        "correct_binding_200": true,
+        "chain_binding_single_use_409": true
+      }
+    },
+    "NC-MEMORYFUL-LATTICE": {
+      "purpose": "the core manipulation: the pre-declared ordered memory lattice M0..M3 plus retrieval variants, differing ONLY in retained within-session memory. This is the treatment contrast, not a boundary footnote.",
+      "expected": "PARTIAL (M1 and sub-distance M2 survive; full-receipt M3 collapses), capacity threshold 1 @0.50 and 2 @0.75",
+      "probe_status": {
+        "predicted_decision": "PARTIAL",
+        "capacity_threshold": {
+          "F1-RECORDS": {
+            "0.5": 1,
+            "0.75": 2
+          },
+          "F2-WIDGETS": {
+            "0.5": 1,
+            "0.75": 2
+          }
+        }
+      }
+    }
+  },
+  "contamination_controls": {
+    "F-LEAK": {
+      "assertion": "the session binding never appears in any session/task body, any error body, or any log line; it appears only in the precursor receipt of its own session",
+      "gate": "V3_no_leak"
+    }
+  },
+  "memory_lattice_arithmetic": {
+    "closed_form": "A comparator with retained-receipt capacity c recovers the binding iff c >= chain_to_precursor_distance(novelty). The treatment margin over it is (K-1)/K collapse: comparator rate = 1.0 when c >= distance, else (K-1)/K. State-only memory (c=0 but retaining GET state) does not help because the binding is only in a precursor RECEIPT, so M1 = (K-1)/K.",
+    "distance": {
+      "0.5": 1,
+      "0.75": 2
+    },
+    "K": {
+      "F1-RECORDS": 8,
+      "F2-WIDGETS": 10
+    },
+    "K_sweep": {
+      "6": {
+        "comparator_rate": 0.8333333333333334,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "7": {
+        "comparator_rate": 0.8571428571428571,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "8": {
+        "comparator_rate": 0.875,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "9": {
+        "comparator_rate": 0.8888888888888888,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "10": {
+        "comparator_rate": 0.9,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "11": {
+        "comparator_rate": 0.9090909090909091,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      },
+      "12": {
+        "comparator_rate": 0.9166666666666666,
+        "in_band": true,
+        "collides_095": false,
+        "collides_floor": false
+      }
+    },
+    "band": [
+      0.8,
+      0.95
+    ],
+    "band_semantics": "a comparator certifies a range when 0.80 <= success_rate < 0.95",
+    "matched_correctness_floor": 0.8,
+    "success_margin_floor": 0.05,
+    "predicted_at_novelty_ge_0.50": {
+      "F1-RECORDS": {
+        "B-COLD-RE-DERIVE": 0.875,
+        "B-RETRIEVAL-SHAPED": 0.875,
+        "B-KNOWLEDGE-NO-MEMORY": 0.875,
+        "B-MEMORY-STATE": 0.875,
+        "B-MEMORY-WINDOW-1": {
+          "0.5": 1.0,
+          "0.75": 0.875
+        },
+        "B-MEMORY-WINDOW-2": 1.0,
+        "B-MEMORY-RECEIPT": 1.0,
+        "B-RETRIEVAL-MEMORYFUL": 1.0
+      },
+      "F2-WIDGETS": {
+        "B-COLD-RE-DERIVE": 0.9,
+        "B-RETRIEVAL-SHAPED": 0.9,
+        "B-KNOWLEDGE-NO-MEMORY": 0.9,
+        "B-MEMORY-STATE": 0.9,
+        "B-MEMORY-WINDOW-1": {
+          "0.5": 1.0,
+          "0.75": 0.9
+        },
+        "B-MEMORY-WINDOW-2": 1.0,
+        "B-MEMORY-RECEIPT": 1.0,
+        "B-RETRIEVAL-MEMORYFUL": 1.0
+      }
+    },
+    "predicted_decision": "PARTIAL",
+    "capacity_threshold_predicted": {
+      "F1-RECORDS": {
+        "0.5": 1,
+        "0.75": 2
+      },
+      "F2-WIDGETS": {
+        "0.5": 1,
+        "0.75": 2
+      }
+    },
+    "no_threshold_collision": true
+  },
+  "design_satisfiability_probe": {
+    "kind": "The frozen harness is embedded in full (substrate construction reused verbatim from EXP-RUNTIME-38169622704 + ten arm policies + declared controls + scored-matrix driver + full V1-V8 gate evaluator + frozen memory-lattice decision rule). Only its non-outcome-bearing `--mode probe` and `--mode selftest` were executed at DESIGN. The `--mode scored` path (matrix run twice for determinism, all gates, decision rule) is NOT run at DESIGN.",
+    "executed_mode": "probe",
+    "harness_modes": {
+      "probe": "executed at DESIGN (non-outcome-bearing)",
+      "selftest": "executed at DESIGN (non-outcome-bearing): exercises assemble_decision() (all gates + memory-lattice decision rule) on probe-derived synthetic cells",
+      "scored": "EXECUTE-only (outcome-bearing): 80-cell x 20-session matrix run twice (V4 determinism), controls, transport/leak conformance, all V1-V8 gates and the frozen decision rule; NOT executed at DESIGN"
+    },
+    "determinism": "two probe runs byte-identical; two selftest runs byte-identical",
+    "source": "#!/usr/bin/env python3\n\"\"\"DESIGN-time satisfiability probe for EXP-RUNTIME-38182129488.\n\nSubstrate class SBA-CREDENTIAL-FREE-V2 (Session-Binding-Amortized), REUSED\nverbatim from the frozen predecessor EXP-RUNTIME-38169622704 (same RUN_SEED,\nsame server, same derivations, same families/K/novelty ladder, same 48-bit\nbinding, same endpoint semantics).\n\nScientific question (director mandate on C-MEAS-VALID):\n  Does the certified (K-1)/K dynamic range survive a comparator that is\n  *memoryful* within a session -- i.e. one that retains action/response\n  receipts across tasks -- or was the predecessor's range an artifact of the\n  memoryless-per-task construction of its comparators (B-COLD-RE-DERIVE,\n  B-RETRIEVAL-SHAPED)?\n\nThis harness instantiates a pre-declared ordered MEMORY LATTICE of comparators\nthat differ ONLY in how much within-session memory they retain, and classifies\nthe resulting robustness as ROBUST / PARTIAL / COLLAPSED / MEASUREMENT_INVALID.\n\nThis probe is NON-OUTCOME-BEARING.  It verifies:\n  * the stdlib HTTP transport answers on 127.0.0.1;\n  * protocol semantics/invariants of the SBA construction;\n  * arm liveness on ONE session per (arm, family, novelty band);\n  * the closed-form predictions of the memory lattice;\n  * decision-branch reachability over synthetic worlds;\n  * determinism (two runs byte-identical).\n\nIt does NOT run the scored N-session matrix that produces the scientific\nmeasurement.  stdlib only.\n\"\"\"\nfrom __future__ import annotations\n\nimport hashlib\nimport json\nimport threading\nfrom collections import deque\nfrom http.server import BaseHTTPRequestHandler, ThreadingHTTPServer\nfrom urllib.error import HTTPError\nfrom urllib.request import Request, urlopen\n\nRUN_SEED = \"SPIDER-RUNTIME-SBA-V2-2026\"  # frozen predecessor construction\nFAMILIES = {\"F1-RECORDS\": 8, \"F2-WIDGETS\": 10}\nNOVELTIES = [0.0, 0.25, 0.5, 0.75]\nSCORED_BAND = 0.50\nCOMPARATOR_MAX = 0.95\nCORRECTNESS_FLOOR = 0.80\nMARGIN_FLOOR = 0.05\nCOUNTER_DIMS = [\"http_calls\", \"retrieval_calls\", \"verification_calls\", \"repair_calls\"]\nMIN_DISTINCT_DIMS = 2\nBINDING_HEX = 12  # 48-bit\n\n# Memory-lattice arms (ordered by retained-memory capacity).\nARMS = [\n    \"T-AMORTIZED-DISCOVERY\",       # treatment\n    \"PC-EXACT-REPLAY\",             # positive control (oracle binding)\n    \"B-KNOWLEDGE-NO-MEMORY\",       # M-K: semantics, per-task fresh session\n    \"B-COLD-RE-DERIVE\",            # M0: no memory\n    \"B-RETRIEVAL-SHAPED\",          # M0 + stale retrieval\n    \"B-MEMORY-STATE\",              # M1: GET-observation state, no receipts\n    \"B-MEMORY-WINDOW-1\",           # M2a: last 1 commit receipt\n    \"B-MEMORY-WINDOW-2\",           # M2b: last 2 commit receipts\n    \"B-MEMORY-RECEIPT\",            # M3: full commit-receipt log (PRIMARY)\n    \"B-RETRIEVAL-MEMORYFUL\",       # M3 + stale retrieval\n]\n\n# Pre-declared comparator classes and the primary comparator.\nCOMPARATOR_CLASSES = {\n    \"M0\": [\"B-COLD-RE-DERIVE\", \"B-RETRIEVAL-SHAPED\"],\n    \"M1\": [\"B-MEMORY-STATE\"],\n    \"M2\": [\"B-MEMORY-WINDOW-1\", \"B-MEMORY-WINDOW-2\"],\n    \"M3\": [\"B-MEMORY-RECEIPT\", \"B-RETRIEVAL-MEMORYFUL\"],\n}\nPRIMARY_COMPARATOR = \"B-MEMORY-RECEIPT\"\nWEAKER_COMPARATORS = [\"B-MEMORY-STATE\", \"B-MEMORY-WINDOW-1\", \"B-MEMORY-WINDOW-2\"]\n\n\ndef h(*parts) -> str:\n    return hashlib.sha256(\"|\".join(str(p) for p in parts).encode()).hexdigest()\n\n\ndef counter_distinctness(c_t, c_c) -> int:\n    return sum(1 for d in COUNTER_DIMS if c_t[d] != c_c[d])\n\n\ndef binding_uniqueness_check(n_sessions=20) -> dict:\n    seen = {}\n    collisions = 0\n    sampled = 0\n    for family in FAMILIES:\n        for nov in NOVELTIES:\n            for idx in range(n_sessions):\n                sampled += 1\n                b = session_binding(family, nov, idx)\n                if b in seen and seen[b] != (family, nov, idx):\n                    collisions += 1\n                seen[b] = (family, nov, idx)\n    return {\"sampled\": sampled, \"collisions\": collisions,\n            \"binding_bits\": BINDING_HEX * 4}\n\n\ndef server_secret() -> str:\n    return h(RUN_SEED, \"server_secret\")[:32]\n\n\ndef _drv(family: str, novelty: float, idx: int, label: str, n: int) -> str:\n    return h(server_secret(), family, repr(novelty), idx, label)[:n]\n\n\ndef session_token(family, novelty, idx):\n    return _drv(family, novelty, idx, \"token\", 16)\n\n\ndef session_binding(family, novelty, idx):\n    return _drv(family, novelty, idx, \"binding\", BINDING_HEX)\n\n\ndef schema_epoch_value(family, novelty, idx):\n    return _drv(family, novelty, idx, \"schema\", 8)\n\n\ndef public_resource(family, novelty, i):\n    return h(server_secret(), family, repr(novelty), \"res\", i)[:10]\n\n\ndef k_of(family):\n    return FAMILIES[family]\n\n\ndef chain_index(novelty, k):\n    return k - 3 if novelty == 0.5 else k - 1\n\n\ndef precursor_index(novelty, k):\n    return k - 4 if novelty == 0.5 else k - 3\n\n\ndef chain_requires_binding(novelty):\n    return novelty >= SCORED_BAND\n\n\n# --------------------------------------------------------------------------\n# server (frozen; identical to EXP-RUNTIME-38169622704)\n# --------------------------------------------------------------------------\nclass State:\n    def __init__(self, expose_binding=False):\n        self.lock = threading.Lock()\n        self.sessions = {}\n        self.next_idx = 0\n        self.expose_binding = expose_binding\n\n    def new_session(self, family, novelty):\n        with self.lock:\n            idx = self.next_idx\n            self.next_idx += 1\n            tok = session_token(family, novelty, idx)\n            s = {\n                \"family\": family, \"novelty\": novelty, \"idx\": idx, \"token\": tok,\n                \"binding\": session_binding(family, novelty, idx),\n                \"schema\": schema_epoch_value(family, novelty, idx),\n                \"committed\": {},\n            }\n            self.sessions[tok] = s\n            return s\n\n\nclass Handler(BaseHTTPRequestHandler):\n    state: State = None  # injected\n\n    def log_message(self, *a):\n        pass\n\n    def _send(self, code, obj):\n        body = json.dumps(obj, sort_keys=True).encode()\n        self.send_response(code)\n        self.send_header(\"Content-Type\", \"application/json\")\n        self.send_header(\"Content-Length\", str(len(body)))\n        self.end_headers()\n        self.wfile.write(body)\n\n    def do_GET(self):\n        path = self.path.split(\"?\", 1)[0]\n        if path == \"/healthz\":\n            return self._send(200, {\"status\": \"ok\"})\n        parts = path.strip(\"/\").split(\"/\")\n        if len(parts) == 4 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"session\":\n            family = parts[2]\n            if family not in FAMILIES:\n                return self._send(404, {\"error\": \"bad_family\"})\n            novelty = self._query_novelty()\n            s = self.state.new_session(family, novelty)\n            resp = {\"session_token\": s[\"token\"], \"schema_epoch\": s[\"schema\"], \"epoch\": s[\"idx\"]}\n            if self.state.expose_binding:\n                resp[\"binding\"] = s[\"binding\"]\n            return self._send(200, resp)\n        if len(parts) == 5 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"task\":\n            family = parts[2]\n            tok = self.headers.get(\"X-Session\", \"\")\n            s = self.state.sessions.get(tok)\n            if s is None:\n                return self._send(400, {\"error\": \"bad_session\"})\n            try:\n                i = int(parts[4])\n            except ValueError:\n                return self._send(400, {\"error\": \"bad_index\"})\n            k = k_of(family)\n            if not (0 <= i < k):\n                return self._send(400, {\"error\": \"bad_index\"})\n            ci = chain_index(s[\"novelty\"], k)\n            is_chain = i == ci\n            requires = s[\"novelty\"] >= 0.25\n            if is_chain and chain_requires_binding(s[\"novelty\"]):\n                resource = None\n            else:\n                resource = public_resource(family, s[\"novelty\"], i)\n            return self._send(200, {\n                \"index\": i, \"requires_schema\": requires,\n                \"resource_id\": resource, \"is_chain\": is_chain,\n            })\n        return self._send(404, {\"error\": \"not_found\"})\n\n    def _query_novelty(self):\n        if \"?\" not in self.path:\n            return 0.5\n        qs = self.path.split(\"?\", 1)[1]\n        for kv in qs.split(\"&\"):\n            if kv.startswith(\"novelty=\"):\n                try:\n                    return float(kv.split(\"=\", 1)[1])\n                except ValueError:\n                    return 0.5\n        return 0.5\n\n    def do_POST(self):\n        parts = self.path.strip(\"/\").split(\"/\")\n        if not (len(parts) == 4 and parts[:2] == [\"api\", \"v1\"] and parts[3] == \"commit\"):\n            return self._send(404, {\"error\": \"not_found\"})\n        family = parts[2]\n        if family not in FAMILIES:\n            return self._send(404, {\"error\": \"bad_family\"})\n        n = int(self.headers.get(\"Content-Length\", 0))\n        try:\n            body = json.loads(self.rfile.read(n).decode() or \"{}\")\n        except (ValueError, UnicodeDecodeError):\n            return self._send(400, {\"error\": \"bad_body\"})\n        tok = body.get(\"session_token\")\n        s = self.state.sessions.get(tok)\n        if s is None:\n            return self._send(400, {\"error\": \"bad_session\"})\n        idx = body.get(\"index\")\n        if not isinstance(idx, int) or not (0 <= idx < k_of(family)):\n            return self._send(400, {\"error\": \"bad_index\"})\n        if idx in s[\"committed\"]:\n            return self._send(409, {\"error\": \"already_committed\"})\n        if s[\"novelty\"] >= 0.25 and body.get(\"schema_epoch\") != s[\"schema\"]:\n            return self._send(400, {\"error\": \"schema_required\"})\n        k = k_of(family)\n        ci = chain_index(s[\"novelty\"], k)\n        pi = precursor_index(s[\"novelty\"], k)\n        resource = body.get(\"resource_id\")\n        if idx == ci and chain_requires_binding(s[\"novelty\"]):\n            expected = s[\"binding\"]\n        else:\n            expected = public_resource(family, s[\"novelty\"], idx)\n        if resource != expected:\n            return self._send(400, {\"error\": \"bad_resource\"})\n        s[\"committed\"][idx] = True\n        receipt = {\"index\": idx, \"family\": family, \"epoch\": s[\"idx\"]}\n        if idx == pi and not s[\"committed\"].get(\"__revealed__\"):\n            s[\"committed\"][\"__revealed__\"] = True\n            receipt[\"chain_resource_id\"] = s[\"binding\"]\n        return self._send(200, {\"receipt\": receipt})\n\n    def do_PUT(self):\n        return self._send(405, {\"error\": \"method_not_allowed\"})\n\n\ndef start_server(expose_binding=False):\n    state = State(expose_binding=expose_binding)\n    handler = type(\"H\", (Handler,), {\"state\": state})\n    httpd = ThreadingHTTPServer((\"127.0.0.1\", 0), handler)\n    t = threading.Thread(target=httpd.serve_forever, daemon=True)\n    t.start()\n    return httpd, state, f\"http://127.0.0.1:{httpd.server_address[1]}\"\n\n\ndef http_get(url, token=None):\n    req = Request(url, method=\"GET\")\n    if token:\n        req.add_header(\"X-Session\", token)\n    try:\n        with urlopen(req, timeout=10) as r:\n            return r.status, json.loads(r.read().decode())\n    except HTTPError as e:\n        return e.code, json.loads(e.read().decode())\n\n\ndef http_post(url, payload):\n    data = json.dumps(payload).encode()\n    req = Request(url, data=data, method=\"POST\", headers={\"Content-Type\": \"application/json\"})\n    try:\n        with urlopen(req, timeout=10) as r:\n            return r.status, json.loads(r.read().decode())\n    except HTTPError as e:\n        return e.code, json.loads(e.read().decode())\n\n\ndef _mk(base, family, novelty, counters):\n    def sess():\n        counters[\"http_calls\"] += 1\n        st, b = http_get(f\"{base}/api/v1/{family}/session?novelty={novelty}\")\n        assert st == 200\n        return b\n\n    def task(tok, i):\n        counters[\"http_calls\"] += 1\n        st, b = http_get(f\"{base}/api/v1/{family}/task/{i}\", token=tok)\n        assert st == 200\n        return b\n\n    def commit(tok, i, schema, resource):\n        counters[\"http_calls\"] += 1\n        return http_post(f\"{base}/api/v1/{family}/commit\", {\n            \"session_token\": tok, \"index\": i,\n            \"schema_epoch\": schema, \"resource_id\": resource,\n        })\n\n    return sess, task, commit\n\n\ndef _scan_chains(receipts):\n    \"\"\"Generic scan of retained receipts for a chain_resource_id field.\"\"\"\n    cand = None\n    for r in receipts:\n        if isinstance(r, dict) and r.get(\"chain_resource_id\"):\n            cand = r[\"chain_resource_id\"]\n    return cand\n\n\n# --------------------------------------------------------------------------\n# arms (memory lattice).  Each arm is a distinct memory policy over the\n# IDENTICAL frozen substrate.\n# --------------------------------------------------------------------------\ndef run_arm(base, state, arm, family, novelty):\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    successes = 0\n    ci = chain_index(novelty, k)\n    pi = precursor_index(novelty, k)\n    chain_active = chain_requires_binding(novelty)\n    sess, task, commit = _mk(base, family, novelty, counters)\n\n    if arm == \"T-AMORTIZED-DISCOVERY\":\n        s = sess()\n        receipts = {}\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = receipts[pi][\"receipt\"][\"chain_resource_id\"]\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n                receipts[i] = b\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"PC-EXACT-REPLAY\":\n        s = sess()\n        binding = session_binding(family, novelty, s[\"epoch\"])\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            res = binding if (d[\"is_chain\"] and chain_active) else d[\"resource_id\"]\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-KNOWLEDGE-NO-MEMORY\":\n        # knows the chain rule but starts a fresh session per task and keeps\n        # nothing across tasks -> cannot reach the same-session precursor.\n        for i in range(k):\n            s = sess()\n            d = task(s[\"session_token\"], i)\n            res = d[\"resource_id\"]\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-COLD-RE-DERIVE\":\n        for i in range(k):\n            s = sess()\n            d = task(s[\"session_token\"], i)\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = s.get(\"binding\")  # only non-None under NC-MECHANISM-OFF\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-RETRIEVAL-SHAPED\":\n        foreign = session_binding(family, novelty, 999999)\n        for i in range(k):\n            s = sess()\n            d = task(s[\"session_token\"], i)\n            counters[\"retrieval_calls\"] += 1\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = foreign\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-MEMORY-STATE\":\n        # one session; retains observed GET resource_id values only (no receipts)\n        s = sess()\n        last_state = None\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            if d[\"resource_id\"] is not None:\n                last_state = d[\"resource_id\"]\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = last_state\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm in (\"B-MEMORY-WINDOW-1\", \"B-MEMORY-WINDOW-2\"):\n        m = 1 if arm.endswith(\"1\") else 2\n        s = sess()\n        window = deque(maxlen=m)\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = _scan_chains(window)\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n                window.append(b[\"receipt\"])\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-MEMORY-RECEIPT\":\n        s = sess()\n        log = []\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = _scan_chains(log)\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n                log.append(b[\"receipt\"])\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    if arm == \"B-RETRIEVAL-MEMORYFUL\":\n        s = sess()\n        log = []\n        foreign = session_binding(family, novelty, 999999)\n        for i in range(k):\n            d = task(s[\"session_token\"], i)\n            counters[\"retrieval_calls\"] += 1\n            res = d[\"resource_id\"]\n            if d[\"is_chain\"] and chain_active:\n                res = _scan_chains(log) or foreign  # memory preferred, stale fallback\n            counters[\"verification_calls\"] += 1\n            st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n            if st == 200:\n                successes += 1\n                log.append(b[\"receipt\"])\n            elif st == 400:\n                counters[\"repair_calls\"] += 1\n        return successes, counters\n\n    raise AssertionError(arm)\n\n\n# --------------------------------------------------------------------------\n# controls (declared nulls, measured in probe mode)\n# --------------------------------------------------------------------------\ndef run_no_discovery_direct(base, family, novelty):\n    \"\"\"NC-NO-DISCOVERY-DIRECT: valid session but ignores schema_epoch/receipts.\"\"\"\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    successes = 0\n    sess, task, commit = _mk(base, family, novelty, counters)\n    s = sess()\n    for i in range(k):\n        d = task(s[\"session_token\"], i)\n        st, _ = commit(s[\"session_token\"], i, \"\", d[\"resource_id\"])\n        if st == 200:\n            successes += 1\n    return successes, k, counters\n\n\ndef run_memory_off(base, family, novelty):\n    \"\"\"NC-MEMORY-OFF: identical to B-MEMORY-RECEIPT but the receipt log is\n    reset after every task.  Must degrade to the M0 rate; this isolates the\n    *cause* of the M3 success (receipt retention).\"\"\"\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    successes = 0\n    chain_active = chain_requires_binding(novelty)\n    sess, task, commit = _mk(base, family, novelty, counters)\n    s = sess()\n    for i in range(k):\n        d = task(s[\"session_token\"], i)\n        log = []  # reset every task\n        res = d[\"resource_id\"]\n        if d[\"is_chain\"] and chain_active:\n            res = _scan_chains(log)\n        counters[\"verification_calls\"] += 1\n        st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n        if st == 200:\n            successes += 1\n            log.append(b[\"receipt\"])\n        elif st == 400:\n            counters[\"repair_calls\"] += 1\n    return successes, k, counters\n\n\ndef run_retrieval_redundant(base, family, novelty):\n    \"\"\"NC-RETRIEVAL-REDUNDANT: full receipt memory, and every chain task is\n    additionally offered the correct (foreign) stale binding.  Memory must\n    remain the cause; result must stay at the M3 rate.\"\"\"\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    successes = 0\n    chain_active = chain_requires_binding(novelty)\n    sess, task, commit = _mk(base, family, novelty, counters)\n    s = sess()\n    log = []\n    foreign = session_binding(family, novelty, 999999)\n    for i in range(k):\n        d = task(s[\"session_token\"], i)\n        counters[\"retrieval_calls\"] += 1\n        res = d[\"resource_id\"]\n        if d[\"is_chain\"] and chain_active:\n            res = _scan_chains(log)  # memory strictly preferred\n        counters[\"verification_calls\"] += 1\n        st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n        if st == 200:\n            successes += 1\n            log.append(b[\"receipt\"])\n        elif st == 400:\n            counters[\"repair_calls\"] += 1\n    return successes, k, counters\n\n\ndef run_reveal_order_flipped(base, family, novelty):\n    \"\"\"NC-REVEAL-ORDER-FLIPPED: full receipt memory, but the chain task is\n    committed BEFORE its precursor in the same session.  At chain time the\n    log contains no chain_resource_id, so the chain must fail; this isolates\n    the precursor first-commit reveal as the cause of the M3 success.\"\"\"\n    k = k_of(family)\n    counters = {d: 0 for d in COUNTER_DIMS}\n    successes = 0\n    chain_active = chain_requires_binding(novelty)\n    sess, task, commit = _mk(base, family, novelty, counters)\n    s = sess()\n    ci = chain_index(novelty, k)\n    pi = precursor_index(novelty, k)\n    order = [i for i in range(k) if i not in (ci, pi)] + [ci, pi]\n    log = []\n    for i in order:\n        d = task(s[\"session_token\"], i)\n        res = d[\"resource_id\"]\n        if d[\"is_chain\"] and chain_active:\n            res = _scan_chains(log)\n        counters[\"verification_calls\"] += 1\n        st, b = commit(s[\"session_token\"], i, s[\"schema_epoch\"], res)\n        if st == 200:\n            successes += 1\n            log.append(b[\"receipt\"])\n        elif st == 400:\n            counters[\"repair_calls\"] += 1\n    return successes, k, counters\n\n\ndef capacity_threshold(liveness, family, nov):\n    \"\"\"Smallest retained-receipt capacity at which the range closes for a\n    (family, band).  Capacity is the number of retained commit receipts the\n    comparator scans: B-MEMORY-STATE=0, window-1=1, window-2=2, receipt=full.\n    Returns None if the range never closes by capacity<=2 (full-memory cmp\n    is evaluated separately).\"\"\"\n    t = liveness[\"T-AMORTIZED-DISCOVERY\"][family][str(nov)][\"rate\"]\n    ladder = [(\"B-MEMORY-STATE\", 0),\n              (\"B-MEMORY-WINDOW-1\", 1),\n              (\"B-MEMORY-WINDOW-2\", 2)]\n    for arm, cap in ladder:\n        r = liveness[arm][family][str(nov)][\"rate\"]\n        if (t - r) < MARGIN_FLOOR:\n            return cap\n    return None\n\n\n# --------------------------------------------------------------------------\n# protocol invariants (frozen; identical to predecessor)\n# --------------------------------------------------------------------------\ndef protocol_invariants(base, family=\"F1-RECORDS\", novelty=0.5):\n    out = {}\n    k = k_of(family)\n    st, s = http_get(f\"{base}/api/v1/{family}/session?novelty={novelty}\")\n    out[\"session_never_reveals_binding\"] = st == 200 and \"binding\" not in s\n    tok = s[\"session_token\"]\n    binding = session_binding(family, novelty, s[\"epoch\"])\n    out[\"no_binding_in_session_body\"] = binding not in json.dumps(s, sort_keys=True)\n    task_bodies = [http_get(f\"{base}/api/v1/{family}/task/{i}\", token=tok)[1]\n                   for i in range(k)]\n    out[\"no_binding_in_task_bodies\"] = all(\n        binding not in json.dumps(b, sort_keys=True) for b in task_bodies)\n    st, d_chain = http_get(f\"{base}/api/v1/{family}/task/{chain_index(novelty, k)}\", token=tok)\n    out[\"chain_task_resource_null\"] = st == 200 and d_chain[\"resource_id\"] is None and d_chain[\"is_chain\"]\n    st, b = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": chain_index(novelty, k),\n        \"schema_epoch\": s[\"schema_epoch\"], \"resource_id\": \"0\" * BINDING_HEX,\n    })\n    out[\"wrong_binding_400_no_leak\"] = st == 400 and \"chain_resource_id\" not in b\n    out[\"no_binding_in_error_body\"] = binding not in json.dumps(b, sort_keys=True)\n    st, b = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": precursor_index(novelty, k),\n        \"schema_epoch\": s[\"schema_epoch\"],\n        \"resource_id\": public_resource(family, novelty, precursor_index(novelty, k)),\n    })\n    out[\"precursor_reveals_binding_once\"] = (\n        st == 200 and b[\"receipt\"].get(\"chain_resource_id\") == session_binding(family, novelty, s[\"epoch\"]))\n    st, b = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": precursor_index(novelty, k),\n        \"schema_epoch\": s[\"schema_epoch\"],\n        \"resource_id\": public_resource(family, novelty, precursor_index(novelty, k)),\n    })\n    out[\"precursor_recommit_409_no_reveal\"] = st == 409 and \"chain_resource_id\" not in b\n    st, b = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": chain_index(novelty, k),\n        \"schema_epoch\": s[\"schema_epoch\"],\n        \"resource_id\": session_binding(family, novelty, s[\"epoch\"]),\n    })\n    out[\"correct_binding_200\"] = st == 200\n    st, b = http_post(f\"{base}/api/v1/{family}/commit\", {\n        \"session_token\": tok, \"index\": chain_index(novelty, k),\n        \"schema_epoch\": s[\"schema_epoch\"],\n        \"resource_id\": session_binding(family, novelty, s[\"epoch\"]),\n    })\n    out[\"chain_binding_single_use_409\"] = st == 409\n    return out\n\n\n# --------------------------------------------------------------------------\n# robustness certificate + memory-lattice branch classifier\n# --------------------------------------------------------------------------\ndef mem_certifies(comp_rate, t_rate, all_rates, matched_correctness):\n    \"\"\"Robustness certificate for ONE comparator at ONE (family, novelty).\n\n    Requires: comparator below the ceiling, no arm below the correctness\n    floor, matched correctness at the treatment level, and a >= MARGIN_FLOOR\n    treatment margin over the comparator.  Counter distinctness is reported as\n    a diagnostic only (it is not required for a band certificate, to avoid an\n    empty PARTIAL branch when a memoryful comparator reproduces the treatment\n    counters exactly -- a counter-equivalence is itself an interpretable\n    finding).\n    \"\"\"\n    return (\n        comp_rate < COMPARATOR_MAX\n        and all(r >= CORRECTNESS_FLOOR for r in all_rates)\n        and matched_correctness >= CORRECTNESS_FLOOR\n        and (t_rate - comp_rate) >= MARGIN_FLOOR\n    )\n\n\ndef classify_mem(world):\n    \"\"\"Frozen decision rule over the assembled gate world.\n\n    Precedence:\n      gates fail                                  -> MEASUREMENT_INVALID\n      primary comparator (full receipt memory)    -> ROBUST\n      any weaker comparator certifies             -> PARTIAL\n      otherwise                                   -> COLLAPSED\n    \"\"\"\n    if not world[\"gates_pass\"]:\n        return \"MEASUREMENT_INVALID\"\n    if world[\"robust_certified\"]:\n        return \"ROBUST\"\n    if world[\"partial_certified\"]:\n        return \"PARTIAL\"\n    return \"COLLAPSED\"\n\n\ndef branch_reachability_mem():\n    \"\"\"Construct one synthetic world per decision label (all four reachable).\"\"\"\n    worlds = {\n        \"ROBUST\": classify_mem({\n            \"gates_pass\": True, \"robust_certified\": True, \"partial_certified\": True}),\n        \"PARTIAL\": classify_mem({\n            \"gates_pass\": True, \"robust_certified\": False, \"partial_certified\": True}),\n        \"COLLAPSED\": classify_mem({\n            \"gates_pass\": True, \"robust_certified\": False, \"partial_certified\": False}),\n        \"MEASUREMENT_INVALID\": classify_mem({\n            \"gates_pass\": False, \"robust_certified\": False, \"partial_certified\": False}),\n    }\n    return worlds\n\n\ndef _rates_at(liveness, family, nov):\n    return [liveness[a][family][str(nov)][\"rate\"] for a in ARMS]\n\n\ndef assess_memory_lattice(liveness):\n    \"\"\"Evaluate mem_certifies() for every comparator class and label the world.\n\n    Uses the probe's single-session per-cell rates -- a closed-form\n    *prediction*, not the scored measurement.\n    \"\"\"\n    detail = {}\n    robust = False\n    partial = False\n    for comp in [c for cls in COMPARATOR_CLASSES.values() for c in cls]:\n        detail[comp] = {}\n        for family in FAMILIES:\n            for nov in [n for n in NOVELTIES if n >= SCORED_BAND]:\n                t_rate = liveness[\"T-AMORTIZED-DISCOVERY\"][family][str(nov)][\"rate\"]\n                comp_rate = liveness[comp][family][str(nov)][\"rate\"]\n                all_rates = _rates_at(liveness, family, nov)\n                matched = t_rate\n                ok = mem_certifies(comp_rate, t_rate, all_rates, matched)\n                detail[comp][f\"{family}|{nov}\"] = {\n                    \"comparator_rate\": comp_rate, \"t_rate\": t_rate,\n                    \"margin\": round(t_rate - comp_rate, 6),\n                    \"min_arm_rate\": min(all_rates), \"certifies\": ok}\n                if comp == PRIMARY_COMPARATOR and ok:\n                    robust = True\n                if comp in WEAKER_COMPARATORS and ok:\n                    partial = True\n    world = {\"gates_pass\": True, \"robust_certified\": robust,\n             \"partial_certified\": partial}\n    return {\"detail\": detail, \"world\": world, \"decision\": classify_mem(world)}\n\n\n# --------------------------------------------------------------------------\n# main probe (DESIGN; non-outcome-bearing)\n# --------------------------------------------------------------------------\ndef run_probe():\n    out = {\"seed\": RUN_SEED, \"families\": FAMILIES, \"novelties\": NOVELTIES,\n           \"scored_band\": SCORED_BAND, \"arms\": ARMS,\n           \"primary_comparator\": PRIMARY_COMPARATOR}\n    httpd, state, base = start_server(expose_binding=False)\n    try:\n        out[\"checks\"] = {\"transport_stdlib_http\": False}\n        st, _ = http_get(f\"{base}/healthz\")\n        out[\"checks\"][\"transport_stdlib_http\"] = st == 200\n        out[\"checks\"][\"protocol_invariants\"] = protocol_invariants(base)\n        out[\"checks\"][\"all_protocol_invariants_pass\"] = all(\n            out[\"checks\"][\"protocol_invariants\"].values())\n\n        liveness = {}\n        for arm in ARMS:\n            liveness[arm] = {}\n            for family in FAMILIES:\n                liveness[arm][family] = {}\n                for nov in NOVELTIES:\n                    httpd_i, state_i, base_i = start_server(expose_binding=False)\n                    try:\n                        succ, counters = run_arm(base_i, state_i, arm, family, nov)\n                    finally:\n                        httpd_i.shutdown()\n                    k = k_of(family)\n                    liveness[arm][family][str(nov)] = {\n                        \"successes\": succ, \"k\": k, \"rate\": succ / k, \"counters\": counters,\n                    }\n        out[\"arm_liveness\"] = liveness\n\n        # treatment + positive-control liveness\n        out[\"checks\"][\"treatment_live_all_novelties\"] = all(\n            liveness[\"T-AMORTIZED-DISCOVERY\"][f][str(n)][\"rate\"] == 1.0\n            for f in FAMILIES for n in NOVELTIES)\n        out[\"checks\"][\"pc_exact_replay_all_novelties\"] = all(\n            liveness[\"PC-EXACT-REPLAY\"][f][str(n)][\"rate\"] == 1.0\n            for f in FAMILIES for n in NOVELTIES)\n\n        # closed-form memory-lattice predictions (non-outcome arithmetic)\n        k1, k2 = k_of(\"F1-RECORDS\"), k_of(\"F2-WIDGETS\")\n        m0_f1 = (k1 - 1) / k1\n        m0_f2 = (k2 - 1) / k2\n        pred = {}\n        for arm in ARMS:\n            pred[arm] = {}\n            for family in FAMILIES:\n                k = k_of(family)\n                m0 = (k - 1) / k\n                rates = {}\n                for nov in NOVELTIES:\n                    if not chain_requires_binding(nov):\n                        rates[str(nov)] = 1.0\n                    elif arm in (\"T-AMORTIZED-DISCOVERY\", \"PC-EXACT-REPLAY\",\n                                 \"B-MEMORY-WINDOW-2\", \"B-MEMORY-RECEIPT\",\n                                 \"B-RETRIEVAL-MEMORYFUL\"):\n                        rates[str(nov)] = 1.0\n                    elif arm == \"B-MEMORY-WINDOW-1\":\n                        rates[str(nov)] = 1.0 if nov == 0.5 else m0\n                    else:\n                        rates[str(nov)] = m0\n                pred[arm][family] = rates\n        out[\"closed_form_predictions\"] = pred\n        out[\"checks\"][\"closed_form_matches_probe\"] = all(\n            pred[a][f][str(n)] == liveness[a][f][str(n)][\"rate\"]\n            for a in ARMS for f in FAMILIES for n in NOVELTIES)\n        out[\"checks\"][\"primary_collapses\"] = (\n            liveness[PRIMARY_COMPARATOR][\"F1-RECORDS\"][\"0.5\"][\"rate\"] == 1.0\n            and liveness[PRIMARY_COMPARATOR][\"F2-WIDGETS\"][\"0.5\"][\"rate\"] == 1.0)\n        out[\"checks\"][\"weak_comparator_in_band\"] = all(\n            CORRECTNESS_FLOOR <= liveness[c][f][str(n)][\"rate\"] < COMPARATOR_MAX\n            for c in (\"B-MEMORY-STATE\", \"B-COLD-RE-DERIVE\")\n            for f in FAMILIES for n in (0.5, 0.75))\n\n        # mechanism-off: exposing the binding makes the cold comparator recover\n        httpd_m, state_m, base_m = start_server(expose_binding=True)\n        try:\n            succ, _ = run_arm(base_m, state_m, \"B-COLD-RE-DERIVE\", \"F1-RECORDS\", 0.5)\n        finally:\n            httpd_m.shutdown()\n        out[\"mechanism_off\"] = {\"cold_f1_rate\": succ / k1, \"successes\": succ, \"k\": k1}\n        out[\"checks\"][\"mechanism_off_destroys_certificate\"] = (succ / k1) >= COMPARATOR_MAX\n\n        # NC-NO-DISCOVERY-DIRECT\n        ndd = {}\n        for nov in (0.0, 0.5):\n            httpd_c, state_c, base_c = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_no_discovery_direct(base_c, \"F1-RECORDS\", nov)\n            finally:\n                httpd_c.shutdown()\n            ndd[str(nov)] = succ / kk\n        out[\"no_discovery_direct\"] = ndd\n        out[\"checks\"][\"no_discovery_direct_expected\"] = (\n            ndd[\"0.0\"] == 1.0 and ndd[\"0.5\"] == 0.0)\n\n        # NC-MEMORY-OFF: M3 with per-task log reset must equal M0\n        mo = {}\n        for nov in (0.5, 0.75):\n            httpd_c, state_c, base_c = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_memory_off(base_c, \"F1-RECORDS\", nov)\n            finally:\n                httpd_c.shutdown()\n            mo[str(nov)] = succ / kk\n        out[\"memory_off\"] = mo\n        out[\"checks\"][\"memory_off_matches_m0\"] = all(\n            mo[str(n)] == m0_f1 for n in (0.5, 0.75))\n\n        # NC-RETRIEVAL-REDUNDANT: adding stale retrieval to M3 leaves rate at 1.0\n        rr = {}\n        for nov in (0.5, 0.75):\n            httpd_c, state_c, base_c = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_retrieval_redundant(base_c, \"F1-RECORDS\", nov)\n            finally:\n                httpd_c.shutdown()\n            rr[str(nov)] = succ / kk\n        out[\"retrieval_redundant\"] = rr\n        out[\"checks\"][\"retrieval_redundant_no_gain\"] = all(v == 1.0 for v in rr.values())\n\n        # NC-REVEAL-ORDER-FLIPPED: chain-before-precursor must fail the chain\n        rof = {}\n        for nov in (0.5, 0.75):\n            httpd_c, state_c, base_c = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_reveal_order_flipped(base_c, \"F1-RECORDS\", nov)\n            finally:\n                httpd_c.shutdown()\n            rof[str(nov)] = succ / kk\n        out[\"reveal_order_flipped\"] = rof\n        out[\"checks\"][\"reveal_order_flipped_fails_chain\"] = all(\n            rof[str(n)] == m0_f1 for n in (0.5, 0.75))\n\n        # capacity threshold: minimal retained-receipt capacity closing the range\n        ct = {}\n        for family in FAMILIES:\n            ct[family] = {str(n): capacity_threshold(liveness, family, n)\n                          for n in (0.5, 0.75)}\n        out[\"capacity_threshold\"] = ct\n        out[\"checks\"][\"capacity_threshold_expected\"] = all(\n            ct[f][\"0.5\"] == 1 and ct[f][\"0.75\"] == 2 for f in FAMILIES)\n\n        # NC-CEILING-BAND: all arms reach 1.0 at novelty 0.0\n        out[\"checks\"][\"ceiling_band_all_arms_one\"] = all(\n            liveness[a][f][\"0.0\"][\"rate\"] == 1.0 for f in FAMILIES for a in ARMS)\n\n        # NC-WINDOW-MONOTONIC: window1 <= window2 <= full per (family, band)\n        out[\"checks\"][\"window_monotonic\"] = all(\n            liveness[\"B-MEMORY-WINDOW-1\"][f][str(n)][\"rate\"]\n            <= liveness[\"B-MEMORY-WINDOW-2\"][f][str(n)][\"rate\"]\n            <= liveness[\"B-MEMORY-RECEIPT\"][f][str(n)][\"rate\"]\n            for f in FAMILIES for n in (0.5, 0.75))\n\n        # NC-BINDING-UNIQUENESS\n        out[\"binding_uniqueness\"] = binding_uniqueness_check()\n        out[\"checks\"][\"binding_uniqueness_ok\"] = out[\"binding_uniqueness\"][\"collisions\"] == 0\n\n        # closed-form (K-1)/K band sweep\n        cf = {}\n        for k in range(6, 13):\n            rate = (k - 1) / k\n            cf[str(k)] = {\"comparator_rate\": rate,\n                          \"in_band\": CORRECTNESS_FLOOR <= rate < COMPARATOR_MAX,\n                          \"collides_095\": rate == COMPARATOR_MAX,\n                          \"collides_floor\": rate == CORRECTNESS_FLOOR}\n        out[\"closed_form\"] = cf\n        out[\"checks\"][\"k_sweep_all_in_band\"] = all(v[\"in_band\"] for v in cf.values())\n        out[\"checks\"][\"no_rate_collides_with_095\"] = all(not v[\"collides_095\"] for v in cf.values())\n        out[\"checks\"][\"no_rate_collides_with_floor\"] = all(not v[\"collides_floor\"] for v in cf.values())\n\n        # behavioural diagnostics at scored band\n        ident = {}\n        for family in FAMILIES:\n            t = liveness[\"T-AMORTIZED-DISCOVERY\"][family][\"0.5\"]\n            m3 = liveness[PRIMARY_COMPARATOR][family][\"0.5\"]\n            m0 = liveness[\"B-COLD-RE-DERIVE\"][family][\"0.5\"]\n            ident[family] = {\n                \"T_vs_M0_distinct_dimensions\": counter_distinctness(t[\"counters\"], m0[\"counters\"]),\n                \"T_vs_M3_distinct_dimensions\": counter_distinctness(t[\"counters\"], m3[\"counters\"]),\n                \"margin_M0\": round(t[\"rate\"] - m0[\"rate\"], 6),\n                \"margin_M3\": round(t[\"rate\"] - m3[\"rate\"], 6),\n            }\n        out[\"counter_identification\"] = ident\n        out[\"checks\"][\"counter_identification_diagnostic\"] = ident\n\n        # memory-lattice assessment\n        out[\"memory_lattice\"] = assess_memory_lattice(liveness)\n        out[\"predicted_decision\"] = out[\"memory_lattice\"][\"decision\"]\n        out[\"checks\"][\"predicted_decision\"] = out[\"predicted_decision\"]\n\n        # branch reachability: all four labels constructible\n        out[\"branch_reachability\"] = branch_reachability_mem()\n        out[\"checks\"][\"all_branches_inhabited\"] = (\n            len(set(out[\"branch_reachability\"].values())) == 4)\n    finally:\n        httpd.shutdown()\n    return out\n\n\n# --------------------------------------------------------------------------\n# scored matrix + gate evaluation (EXECUTE; NOT run during DESIGN)\n# --------------------------------------------------------------------------\nSCORED_SESSIONS_PER_CELL = 20\nLEAK_KEYS = (\"session_never_reveals_binding\", \"no_binding_in_session_body\",\n             \"no_binding_in_task_bodies\", \"no_binding_in_error_body\",\n             \"wrong_binding_400_no_leak\", \"precursor_recommit_409_no_reveal\")\n\n\ndef run_scored_matrix(n_sessions=SCORED_SESSIONS_PER_CELL):\n    \"\"\"Run the frozen scored matrix.  Outcome-bearing; EXECUTE only.\"\"\"\n    cells = {}\n    for family in FAMILIES:\n        k = k_of(family)\n        for nov in NOVELTIES:\n            for arm in ARMS:\n                succ_total = 0\n                total = 0\n                counters = {d: 0 for d in COUNTER_DIMS}\n                for _ in range(n_sessions):\n                    httpd, state, base = start_server(expose_binding=False)\n                    try:\n                        succ, c = run_arm(base, state, arm, family, nov)\n                    finally:\n                        httpd.shutdown()\n                    succ_total += succ\n                    total += k\n                    for d in counters:\n                        counters[d] += c[d]\n                cells[f\"{family}|{nov}|{arm}\"] = {\n                    \"family\": family, \"novelty\": nov, \"arm\": arm,\n                    \"successes\": succ_total, \"tasks\": total,\n                    \"success_rate\": succ_total / total,\n                    \"matched_correctness\": succ_total / total,\n                    \"counters\": counters,\n                }\n    return cells\n\n\ndef synthetic_cells_from_probe(probe, n_sessions=SCORED_SESSIONS_PER_CELL):\n    \"\"\"Build predicted scored cells from probe-measured per-cell results.\"\"\"\n    cells = {}\n    for f in FAMILIES:\n        for nov in NOVELTIES:\n            for arm in ARMS:\n                lv = probe[\"arm_liveness\"][arm][f][str(nov)]\n                cells[f\"{f}|{nov}|{arm}\"] = {\n                    \"family\": f, \"novelty\": nov, \"arm\": arm,\n                    \"successes\": round(lv[\"rate\"] * n_sessions * k_of(f)),\n                    \"tasks\": n_sessions * k_of(f),\n                    \"success_rate\": lv[\"rate\"],\n                    \"matched_correctness\": lv[\"rate\"],\n                    \"counters\": {d: lv[\"counters\"][d] * n_sessions for d in COUNTER_DIMS},\n                }\n    return cells\n\n\ndef evaluate_scored(cells, extra_gates=None):\n    \"\"\"Evaluate the V1-V8 gates and the memory-lattice certificate.\"\"\"\n    gates = {}\n    gates[\"V5_arm_liveness\"] = all(\n        cells[f\"{f}|{n}|{a}\"][\"success_rate\"] == 1.0\n        for f in FAMILIES for n in NOVELTIES\n        for a in (\"T-AMORTIZED-DISCOVERY\", \"PC-EXACT-REPLAY\"))\n    gates[\"V8_ceiling_band\"] = all(\n        cells[f\"{f}|0.0|{a}\"][\"success_rate\"] == 1.0\n        for f in FAMILIES for a in ARMS)\n    if extra_gates:\n        gates.update(extra_gates)\n    ident = {}\n    for f in FAMILIES:\n        t = cells[f\"{f}|0.5|T-AMORTIZED-DISCOVERY\"]\n        m0 = cells[f\"{f}|0.5|B-COLD-RE-DERIVE\"]\n        m3 = cells[f\"{f}|0.5|{PRIMARY_COMPARATOR}\"]\n        ident[f] = {\n            \"T_vs_M0_distinct_dimensions\": counter_distinctness(t[\"counters\"], m0[\"counters\"]),\n            \"T_vs_M3_distinct_dimensions\": counter_distinctness(t[\"counters\"], m3[\"counters\"]),\n            \"margin_M0\": t[\"success_rate\"] - m0[\"success_rate\"],\n            \"margin_M3\": t[\"success_rate\"] - m3[\"success_rate\"],\n        }\n    return gates, ident\n\n\ndef assess_memory_lattice_cells(cells):\n    \"\"\"EXECUTE: evaluate mem_certifies() over the scored cells.\"\"\"\n    detail = {}\n    robust = False\n    partial = False\n    for comp in [c for cls in COMPARATOR_CLASSES.values() for c in cls]:\n        detail[comp] = {}\n        for family in FAMILIES:\n            for nov in [n for n in NOVELTIES if n >= SCORED_BAND]:\n                t_rate = cells[f\"{family}|{nov}|T-AMORTIZED-DISCOVERY\"][\"success_rate\"]\n                comp_rate = cells[f\"{family}|{nov}|{comp}\"][\"success_rate\"]\n                all_rates = [cells[f\"{family}|{nov}|{a}\"][\"success_rate\"] for a in ARMS]\n                matched = cells[f\"{family}|{nov}|T-AMORTIZED-DISCOVERY\"][\"matched_correctness\"]\n                ok = mem_certifies(comp_rate, t_rate, all_rates, matched)\n                detail[comp][f\"{family}|{nov}\"] = {\n                    \"comparator_rate\": comp_rate, \"t_rate\": t_rate,\n                    \"margin\": t_rate - comp_rate,\n                    \"min_arm_rate\": min(all_rates), \"certifies\": ok}\n                if comp == PRIMARY_COMPARATOR and ok:\n                    robust = True\n                if comp in WEAKER_COMPARATORS and ok:\n                    partial = True\n    return {\"detail\": detail, \"robust_certified\": robust, \"partial_certified\": partial}\n\n\ndef run_execute_controls(n_sessions=SCORED_SESSIONS_PER_CELL):\n    \"\"\"EXECUTE-only control measurements on the scored schedule.\"\"\"\n    rates = {}\n    for family in FAMILIES:\n        succ_total = 0\n        total = 0\n        for _ in range(n_sessions):\n            httpd, state, base = start_server(expose_binding=True)\n            try:\n                succ, _ = run_arm(base, state, \"B-COLD-RE-DERIVE\", family, 0.5)\n            finally:\n                httpd.shutdown()\n            succ_total += succ\n            total += k_of(family)\n        rates[family] = succ_total / total\n    mem_off = {}\n    for family in FAMILIES:\n        succ_total = 0\n        total = 0\n        for _ in range(n_sessions):\n            httpd, state, base = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_memory_off(base, family, 0.5)\n            finally:\n                httpd.shutdown()\n            succ_total += succ\n            total += kk\n        mem_off[family] = succ_total / total\n    rof = {}\n    for family in FAMILIES:\n        succ_total = 0\n        total = 0\n        for _ in range(n_sessions):\n            httpd, state, base = start_server(expose_binding=False)\n            try:\n                succ, kk, _ = run_reveal_order_flipped(base, family, 0.5)\n            finally:\n                httpd.shutdown()\n            succ_total += succ\n            total += kk\n        rof[family] = succ_total / total\n    return {\"mechanism_off_cold_rate\": rates,\n            \"mechanism_off_destroys_certificate\":\n                all(r >= COMPARATOR_MAX for r in rates.values()),\n            \"memory_off_rate\": mem_off,\n            \"memory_off_matches_m0\":\n                all(abs(mem_off[f] - (k_of(f) - 1) / k_of(f)) < 1e-9 for f in FAMILIES),\n            \"reveal_order_flipped_rate\": rof,\n            \"reveal_order_flipped_fails_chain\":\n                all(abs(rof[f] - (k_of(f) - 1) / k_of(f)) < 1e-9 for f in FAMILIES)}\n\n\ndef code_fidelity_manifest():\n    import sys\n    import pathlib\n    src_sha = None\n    try:\n        if \"__file__\" in globals() and __file__:\n            src_sha = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()\n    except OSError:\n        src_sha = None\n    return {\"python\": sys.version.split()[0], \"harness_sha256\": src_sha}\n\n\ndef assemble_decision(cells, controls, protocol, v1, determinism_ok):\n    \"\"\"EXECUTE: full gate world + memory-lattice decision.\"\"\"\n    gates, ident = evaluate_scored(\n        cells,\n        extra_gates={\n            \"V8_mechanism_off\": controls[\"mechanism_off_destroys_certificate\"],\n            \"V8_memory_off_attribution\": controls[\"memory_off_matches_m0\"],\n            \"V8_reveal_order_attribution\": controls[\"reveal_order_flipped_fails_chain\"],\n        })\n    gates[\"V8_m0_counter_distinctness\"] = all(\n        ident[f][\"T_vs_M0_distinct_dimensions\"] >= MIN_DISTINCT_DIMS for f in FAMILIES)\n    gates[\"V1_code_fidelity_manifest\"] = bool(v1.get(\"harness_sha256\"))\n    gates[\"V2_transport_conformance\"] = all(protocol.values())\n    gates[\"V3_no_leak\"] = all(protocol[k] for k in LEAK_KEYS)\n    gates[\"V4_determinism\"] = bool(determinism_ok)\n    gates[\"V6_counter_instrumentation\"] = all(\n        all(d in c[\"counters\"] for d in COUNTER_DIMS) for c in cells.values())\n    gates[\"V7_matched_correctness\"] = all(\n        c[\"matched_correctness\"] == c[\"success_rate\"] for c in cells.values())\n    lattice = assess_memory_lattice_cells(cells)\n    world = {\"gates_pass\": all(gates.values()),\n             \"robust_certified\": lattice[\"robust_certified\"],\n             \"partial_certified\": lattice[\"partial_certified\"]}\n    return {\"gates\": gates, \"counter_identification\": ident,\n            \"memory_lattice\": lattice, \"world\": world,\n            \"decision\": classify_mem(world), \"v1\": v1}\n\n\ndef run_execute():\n    \"\"\"EXECUTE-only: full scoring twice (determinism) + frozen decision rule.\"\"\"\n    cells_a = run_scored_matrix()\n    cells_b = run_scored_matrix()\n    determinism_ok = json.dumps(cells_a, sort_keys=True) == json.dumps(cells_b, sort_keys=True)\n    controls = run_execute_controls()\n    httpd, state, base = start_server(expose_binding=False)\n    try:\n        protocol = protocol_invariants(base)\n    finally:\n        httpd.shutdown()\n    v1 = code_fidelity_manifest()\n    result = assemble_decision(cells_a, controls, protocol, v1, determinism_ok)\n    result[\"cells\"] = cells_a\n    result[\"controls\"] = controls\n    result[\"determinism_ok\"] = determinism_ok\n    return result\n\n\ndef run_selftest():\n    \"\"\"Exercise the full EXECUTE decision path on probe-derived synthetic cells.\"\"\"\n    probe = run_probe()\n    cells = synthetic_cells_from_probe(probe)\n    controls = {\n        \"mechanism_off_destroys_certificate\": probe[\"checks\"][\"mechanism_off_destroys_certificate\"],\n        \"memory_off_matches_m0\": probe[\"checks\"][\"memory_off_matches_m0\"],\n        \"reveal_order_flipped_fails_chain\": probe[\"checks\"][\"reveal_order_flipped_fails_chain\"],\n    }\n    full = assemble_decision(cells, controls, probe[\"checks\"][\"protocol_invariants\"],\n                             {\"python\": \"synthetic\", \"harness_sha256\": \"synthetic\"}, True)\n    return {\n        \"note\": (\"non-outcome-bearing: assemble_decision() (all gates + memory-lattice \"\n                 \"decision rule) exercised on probe-derived synthetic cells\"),\n        \"gates\": full[\"gates\"],\n        \"world\": full[\"world\"],\n        \"decision\": full[\"decision\"],\n        \"probe_predicted_decision\": probe[\"predicted_decision\"],\n        \"check_evaluator_matches_probe\":\n            full[\"decision\"] == probe[\"predicted_decision\"],\n        \"check_decision_is_partial\": full[\"decision\"] == \"PARTIAL\",\n    }\n\n\ndef main():\n    import argparse\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--mode\", choices=[\"probe\", \"selftest\", \"scored\"], default=\"probe\")\n    ap.add_argument(\"--out\", default=\"\")\n    args = ap.parse_args()\n    if args.mode == \"probe\":\n        print(json.dumps(run_probe(), indent=2, sort_keys=True))\n        return\n    if args.mode == \"selftest\":\n        print(json.dumps(run_selftest(), indent=2, sort_keys=True))\n        return\n    out = run_execute()\n    text = json.dumps(out, indent=2, sort_keys=True)\n    if args.out:\n        import pathlib\n        pathlib.Path(args.out).write_text(text + \"\\n\", encoding=\"utf-8\")\n    else:\n        print(text)\n\n\nif __name__ == \"__main__\":\n    main()\n",
+    "source_sha256": "8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+    "output": {
+      "arm_liveness": {
+        "B-COLD-RE-DERIVE": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            }
+          }
+        },
+        "B-KNOWLEDGE-NO-MEMORY": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            }
+          }
+        },
+        "B-MEMORY-RECEIPT": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            }
+          }
+        },
+        "B-MEMORY-STATE": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            }
+          }
+        },
+        "B-MEMORY-WINDOW-1": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 1,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            }
+          }
+        },
+        "B-MEMORY-WINDOW-2": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            }
+          }
+        },
+        "B-RETRIEVAL-MEMORYFUL": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            }
+          }
+        },
+        "B-RETRIEVAL-SHAPED": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 0,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 24,
+                "repair_calls": 1,
+                "retrieval_calls": 8,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 0.875,
+              "successes": 7
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 0,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 30,
+                "repair_calls": 1,
+                "retrieval_calls": 10,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 0.9,
+              "successes": 9
+            }
+          }
+        },
+        "PC-EXACT-REPLAY": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            }
+          }
+        },
+        "T-AMORTIZED-DISCOVERY": {
+          "F1-RECORDS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 17,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 8
+              },
+              "k": 8,
+              "rate": 1.0,
+              "successes": 8
+            }
+          },
+          "F2-WIDGETS": {
+            "0.0": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.25": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.5": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            },
+            "0.75": {
+              "counters": {
+                "http_calls": 21,
+                "repair_calls": 0,
+                "retrieval_calls": 0,
+                "verification_calls": 10
+              },
+              "k": 10,
+              "rate": 1.0,
+              "successes": 10
+            }
+          }
+        }
+      },
+      "arms": [
+        "T-AMORTIZED-DISCOVERY",
+        "PC-EXACT-REPLAY",
+        "B-KNOWLEDGE-NO-MEMORY",
+        "B-COLD-RE-DERIVE",
+        "B-RETRIEVAL-SHAPED",
+        "B-MEMORY-STATE",
+        "B-MEMORY-WINDOW-1",
+        "B-MEMORY-WINDOW-2",
+        "B-MEMORY-RECEIPT",
+        "B-RETRIEVAL-MEMORYFUL"
+      ],
+      "binding_uniqueness": {
+        "binding_bits": 48,
+        "collisions": 0,
+        "sampled": 160
+      },
+      "branch_reachability": {
+        "COLLAPSED": "COLLAPSED",
+        "MEASUREMENT_INVALID": "MEASUREMENT_INVALID",
+        "PARTIAL": "PARTIAL",
+        "ROBUST": "ROBUST"
+      },
+      "capacity_threshold": {
+        "F1-RECORDS": {
+          "0.5": 1,
+          "0.75": 2
+        },
+        "F2-WIDGETS": {
+          "0.5": 1,
+          "0.75": 2
+        }
+      },
+      "checks": {
+        "all_branches_inhabited": true,
+        "all_protocol_invariants_pass": true,
+        "binding_uniqueness_ok": true,
+        "capacity_threshold_expected": true,
+        "ceiling_band_all_arms_one": true,
+        "closed_form_matches_probe": true,
+        "counter_identification_diagnostic": {
+          "F1-RECORDS": {
+            "T_vs_M0_distinct_dimensions": 2,
+            "T_vs_M3_distinct_dimensions": 0,
+            "margin_M0": 0.125,
+            "margin_M3": 0.0
+          },
+          "F2-WIDGETS": {
+            "T_vs_M0_distinct_dimensions": 2,
+            "T_vs_M3_distinct_dimensions": 0,
+            "margin_M0": 0.1,
+            "margin_M3": 0.0
+          }
+        },
+        "k_sweep_all_in_band": true,
+        "mechanism_off_destroys_certificate": true,
+        "memory_off_matches_m0": true,
+        "no_discovery_direct_expected": true,
+        "no_rate_collides_with_095": true,
+        "no_rate_collides_with_floor": true,
+        "pc_exact_replay_all_novelties": true,
+        "predicted_decision": "PARTIAL",
+        "primary_collapses": true,
+        "protocol_invariants": {
+          "chain_binding_single_use_409": true,
+          "chain_task_resource_null": true,
+          "correct_binding_200": true,
+          "no_binding_in_error_body": true,
+          "no_binding_in_session_body": true,
+          "no_binding_in_task_bodies": true,
+          "precursor_recommit_409_no_reveal": true,
+          "precursor_reveals_binding_once": true,
+          "session_never_reveals_binding": true,
+          "wrong_binding_400_no_leak": true
+        },
+        "retrieval_redundant_no_gain": true,
+        "reveal_order_flipped_fails_chain": true,
+        "transport_stdlib_http": true,
+        "treatment_live_all_novelties": true,
+        "weak_comparator_in_band": true,
+        "window_monotonic": true
+      },
+      "closed_form": {
+        "10": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.9,
+          "in_band": true
+        },
+        "11": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.9090909090909091,
+          "in_band": true
+        },
+        "12": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.9166666666666666,
+          "in_band": true
+        },
+        "6": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.8333333333333334,
+          "in_band": true
+        },
+        "7": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.8571428571428571,
+          "in_band": true
+        },
+        "8": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.875,
+          "in_band": true
+        },
+        "9": {
+          "collides_095": false,
+          "collides_floor": false,
+          "comparator_rate": 0.8888888888888888,
+          "in_band": true
+        }
+      },
+      "closed_form_predictions": {
+        "B-COLD-RE-DERIVE": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.875,
+            "0.75": 0.875
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.9,
+            "0.75": 0.9
+          }
+        },
+        "B-KNOWLEDGE-NO-MEMORY": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.875,
+            "0.75": 0.875
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.9,
+            "0.75": 0.9
+          }
+        },
+        "B-MEMORY-RECEIPT": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          }
+        },
+        "B-MEMORY-STATE": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.875,
+            "0.75": 0.875
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.9,
+            "0.75": 0.9
+          }
+        },
+        "B-MEMORY-WINDOW-1": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 0.875
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 0.9
+          }
+        },
+        "B-MEMORY-WINDOW-2": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          }
+        },
+        "B-RETRIEVAL-MEMORYFUL": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          }
+        },
+        "B-RETRIEVAL-SHAPED": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.875,
+            "0.75": 0.875
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 0.9,
+            "0.75": 0.9
+          }
+        },
+        "PC-EXACT-REPLAY": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          }
+        },
+        "T-AMORTIZED-DISCOVERY": {
+          "F1-RECORDS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          },
+          "F2-WIDGETS": {
+            "0.0": 1.0,
+            "0.25": 1.0,
+            "0.5": 1.0,
+            "0.75": 1.0
+          }
+        }
+      },
+      "counter_identification": {
+        "F1-RECORDS": {
+          "T_vs_M0_distinct_dimensions": 2,
+          "T_vs_M3_distinct_dimensions": 0,
+          "margin_M0": 0.125,
+          "margin_M3": 0.0
+        },
+        "F2-WIDGETS": {
+          "T_vs_M0_distinct_dimensions": 2,
+          "T_vs_M3_distinct_dimensions": 0,
+          "margin_M0": 0.1,
+          "margin_M3": 0.0
+        }
+      },
+      "families": {
+        "F1-RECORDS": 8,
+        "F2-WIDGETS": 10
+      },
+      "mechanism_off": {
+        "cold_f1_rate": 1.0,
+        "k": 8,
+        "successes": 8
+      },
+      "memory_lattice": {
+        "decision": "PARTIAL",
+        "detail": {
+          "B-COLD-RE-DERIVE": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-MEMORY-RECEIPT": {
+            "F1-RECORDS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-MEMORY-STATE": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-MEMORY-WINDOW-1": {
+            "F1-RECORDS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-MEMORY-WINDOW-2": {
+            "F1-RECORDS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-RETRIEVAL-MEMORYFUL": {
+            "F1-RECORDS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": false,
+              "comparator_rate": 1.0,
+              "margin": 0.0,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          },
+          "B-RETRIEVAL-SHAPED": {
+            "F1-RECORDS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F1-RECORDS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.875,
+              "margin": 0.125,
+              "min_arm_rate": 0.875,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.5": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            },
+            "F2-WIDGETS|0.75": {
+              "certifies": true,
+              "comparator_rate": 0.9,
+              "margin": 0.1,
+              "min_arm_rate": 0.9,
+              "t_rate": 1.0
+            }
+          }
+        },
+        "world": {
+          "gates_pass": true,
+          "partial_certified": true,
+          "robust_certified": false
+        }
+      },
+      "memory_off": {
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "no_discovery_direct": {
+        "0.0": 1.0,
+        "0.5": 0.0
+      },
+      "novelties": [
+        0.0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "predicted_decision": "PARTIAL",
+      "primary_comparator": "B-MEMORY-RECEIPT",
+      "retrieval_redundant": {
+        "0.5": 1.0,
+        "0.75": 1.0
+      },
+      "reveal_order_flipped": {
+        "0.5": 0.875,
+        "0.75": 0.875
+      },
+      "scored_band": 0.5,
+      "seed": "SPIDER-RUNTIME-SBA-V2-2026"
+    },
+    "output_sha256": "f8c587945ba85cb235f7c5344ee49fd3f4a9e42d16f48a5a57bc510b1be7f090",
+    "execute_evaluator_selftest": {
+      "check_decision_is_partial": true,
+      "check_evaluator_matches_probe": true,
+      "decision": "PARTIAL",
+      "gates": {
+        "V1_code_fidelity_manifest": true,
+        "V2_transport_conformance": true,
+        "V3_no_leak": true,
+        "V4_determinism": true,
+        "V5_arm_liveness": true,
+        "V6_counter_instrumentation": true,
+        "V7_matched_correctness": true,
+        "V8_ceiling_band": true,
+        "V8_m0_counter_distinctness": true,
+        "V8_mechanism_off": true,
+        "V8_memory_off_attribution": true,
+        "V8_reveal_order_attribution": true
+      },
+      "note": "non-outcome-bearing: assemble_decision() (all gates + memory-lattice decision rule) exercised on probe-derived synthetic cells",
+      "probe_predicted_decision": "PARTIAL",
+      "world": {
+        "gates_pass": true,
+        "partial_certified": true,
+        "robust_certified": false
+      }
+    },
+    "execute_evaluator_selftest_sha256": "74a833f62a408ffa3048875eacb60fef0e3a2bfe1259aefba7b4fb1fbdb8bb8e",
+    "satisfiable": true
+  },
+  "director_mandate_binding": {
+    "action": "REOPEN",
+    "claim_id": "C-MEAS-VALID",
+    "cognitive_reset": true,
+    "cycle_id": "38181497149",
+    "parent_handoff_disposition": "USE",
+    "request_hash": "5b85f96ce805a37278e03e8e0608c55bc7e927eeab39b724142c5d75e5b6ee47",
+    "allocation_question": "Does the certified SBA-CREDENTIAL-FREE-V2 dynamic range survive a memoryful comparator (the disclosed NC-MEMORYFUL boundary, where a within-session receipt-retaining cold agent reaches 1.0), or is the (K-1)/K treatment/comparator separation an artifact of the memoryless comparator construction -- and therefore can this bank provide discriminative dynamic range for the full four-arm C-LLM-INHERIT benchmark (COLD vs INSTRUCTIONS vs RETRIEVAL vs SPIDER), whose comparator arms may themselves carry memory, rather than only for the frozen memoryless B-COLD-RE-DERIVE / B-RETRIEVAL-SHAPED construction?",
+    "binding_note": "The Director mandate question is the binding direction (AGENTS.md precedence 5). The parent handoff EXP-RUNTIME-38169622704 is USE (continuity evidence); its disclosed NC-MEMORYFUL boundary is the exact object this experiment instruments. The mandate stop trigger is honored: one experiment; if memoryful comparators close the gap, the memoryless certificate is NOT re-run; the artifact is reported and the bank-design question is handed to Product.",
+    "out_of_scope_control_plane_defect": "scripts/freeze_experiment.py not enforcing the C1 certificate gate (exposed by EXP-PRODUCT-37989728440) is a separate, non-experimental control-plane repair named in the mandate. It is NOT executed here; it is recorded as a dependency/portfolio action and does not affect this packet's frozen design."
+  },
+  "parent_handoff_continuity": {
+    "experiment_id": "EXP-RUNTIME-38169622704",
+    "path": "research/experiments/EXP-RUNTIME-38169622704/handoff.json",
+    "sha256": "44373f8388a73fb39a8475b39bb519aedf72216e69ea77ae48b477b3942b30f3",
+    "disposition": "USE",
+    "usage": "Continuity evidence and the direct substrate/metric source. The predecessor froze the SBA-CREDENTIAL-FREE-V2 construction and its counter-only metric, certified both families at (K-1)/K against MEMORYLESS comparators, and DISCLOSED NC-MEMORYFUL (a within-session receipt-retaining cold agent reaches 1.0) as an uninstrumented boundary. This experiment instruments that boundary. It does not override the mandate.",
+    "established": [
+      "SBA-CREDENTIAL-FREE-V2 is satisfiable and reproducible: F1 comparator 0.875, F2 comparator 0.900, both in [0.80,0.95), T/PC 1.0, matched_correctness == success_rate, gates V1-V8 all true, audit PASS."
+    ],
+    "unknown": [
+      "Whether the (K-1)/K separation survives a MEMORYFUL comparator, and at which retained-receipt capacity it collapses."
+    ],
+    "do_not_assume": [
+      "The predecessor certificate transferred to a memoryful comparator; no memoryful comparator was scored there."
+    ]
+  },
+  "legacy_comparative_reasoning": {
+    "legacy_classification": "DISTINCT_EXTENSION",
+    "pre2_guard": "P2-WP003 leakage precedent is the binding guard: the one-time session binding must never be readable outside its single intended reveal (V3 / NC-NO-LEAK). The predecessor's memoryless NC-RETAIN-RECEIPT diagnostic (1.0 at distance 1, (K-1)/K at distance 2) is the direct ancestor of the window-1 arm and is extended into the full pre-declared memory lattice.",
+    "differences_from_pre2": "Pre-2.0 runtime work concerned substrate demand and maintenance economics, not task-bank dynamic range and not comparator memory capacity. The memoryful-robustness measurement is new Research-2.0 control-plane work.",
+    "comparative_reasoning_match": "The pre-2.0 corpus had NO exact match for a memoryful-comparator test on an asymmetric-discovery bank; the closest items (DERIVATION_MANIFEST FAIL/REJECTED artifact 537; freshness/TTL NULL-by-discipline; intel route-ladder VALIDATED_USEFUL) measured other things. Hence this is a genuine extension, not a replay."
+  },
+  "freeze_artifacts": [],
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All four decision labels are arithmetically reachable and were verified by the rule-level classifier classify_mem() over synthetic worlds (branch_reachability_mem returns each own label; all four inhabited). ROBUST: requires the full-receipt comparator B-MEMORY-RECEIPT to mem_certify (rate < 0.95 with margin >= 0.05) -- emittable and would occur if the precursor receipt did not disclose the binding. PARTIAL: some weaker memoryful comparator (state, window-1, window-2) mem_certifies while the full one does not -- the predicted world (state and window-1@0.75 are in band, margin 0.125/0.100). COLLAPSED: no memoryful comparator mem_certifies (e.g. even state memory recovers the binding). MEASUREMENT_INVALID: any V1-V8 failure. No earlier branch makes a later one unreachable; the identity disclosure (B-MEMORY-RECEIPT identical to T) is consistent with margin 0 and therefore cannot certify, so it does not empty any branch.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.source_sha256 8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+        "spec.json design_satisfiability_probe.output.branch_reachability",
+        "spec.json design_satisfiability_probe.output.predicted_decision (PARTIAL)",
+        "spec.json decision_rule",
+        "EXP-RUNTIME-38169622704 artifacts/run_scored.json (memoryless predecessor baseline)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite is present now. python 3.12.15 is installed; stdlib http.server/urllib.request/hashlib/json/threading/collections import and a live in-process stdlib HTTP server on 127.0.0.1 answered the session request (probe transport_stdlib_http=true). All protocol invariants hold on the in-process model (session never reveals binding; chain resource null; precursor reveals binding once; precursor re-commit 409 with no re-reveal; wrong/foreign binding 400 with no leak; correct binding 200; repeat chain commit 409; binding absent from all session/task/error bodies). server_secret is deterministic from run_seed. No credentials, browser, dataset, external endpoint or model access is required. The complete EXECUTE path (80-cell matrix run twice, all gates, decision rule, five controls) is embedded in the frozen harness and its decision path was exercised at DESIGN via --mode selftest; EXECUTE only writes the frozen file to disk and runs --mode scored.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.source_sha256 8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+        "spec.json design_satisfiability_probe.output.checks.protocol_invariants",
+        "spec.json design_satisfiability_probe.output.checks.transport_stdlib_http",
+        "spec.json substrate"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The positive control PC-EXACT-REPLAY is 1.0. The memoryless baseline B-COLD-RE-DERIVE is probe-measured at (K-1)/K: F1 7/8=0.875, F2 9/10=0.900 (both in [0.80,0.95)), counter-distinct from T on 2/4 dimensions, margin 0.125/0.100 >= 0.05 (gate V8_m0_counter_distinctness). The memoryful ladder is identified by success rate and capacity: B-MEMORY-STATE and B-MEMORY-WINDOW-1@0.75 are rate-distinct from T by 0.125/0.100 and counter-distinct (repair_calls differs); B-MEMORY-WINDOW-1@0.50, B-MEMORY-WINDOW-2 and B-MEMORY-RECEIPT are predicted rate- and counter-identical to T (margin 0). That identity is DISCLOSED, is the substantive collapse result, and is non-vacuous because (a) mem_certifies requires a positive margin, so an identical comparator can never certify, and (b) the discriminating signal is carried by the memoryful comparators that are NOT identical (state, window-1, window-2 at 0.75). Arm rates are measured outputs, not equality-frozen constants; the probe executed one session per arm/family/band and reproduced the predicted vectors exactly (closed_form_matches_probe=true).",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json counters.probe_status",
+        "spec.json design_satisfiability_probe.output.counter_identification",
+        "spec.json decision_rule.identity_disclosure",
+        "spec.json arms"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Each control can fail and was probe-measured away from its boundary. NC-MECHANISM-OFF raises cold to 1.0 and destroys the predecessor certificate (mechanism_off_destroys_certificate=true). NC-MEMORY-OFF drives B-MEMORY-RECEIPT back to (K-1)/K (0.875), isolating receipt retention as the cause (memory_off_matches_m0=true). NC-REVEAL-ORDER-FLIPPED fails the chain at (K-1)/K, isolating the precursor reveal (reveal_order_flipped_fails_chain=true). NC-RETRIEVAL-REDUNDANT leaves the full-memory rate at 1.0, showing retrieval is inert (retrieval_redundant_no_gain=true). NC-CEILING-BAND yields all ten arms 1.0 at novelty 0.0. NC-WINDOW-MONOTONIC holds. NC-BINDING-UNIQUENESS has 0/160 collisions. NC-NO-LEAK is a hard V3/F-LEAK gate (10/10 invariants clean). The lattice is therefore sensitive to removal of the very memory it measures.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.mechanism_off",
+        "spec.json design_satisfiability_probe.output.memory_off",
+        "spec.json design_satisfiability_probe.output.reveal_order_flipped",
+        "spec.json design_satisfiability_probe.output.retrieval_redundant",
+        "spec.json design_satisfiability_probe.output.checks"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "T-AMORTIZED-DISCOVERY completed a full session at every novelty band and family in the probe (1.0 at 0.00, 0.25, 0.50, 0.75 for both families; treatment_live_all_novelties=true) and PC-EXACT-REPLAY completed 1.0 at every band. All ten memory-lattice arms executed end-to-end without exceptions in the probe (arm_liveness present for all ten). The treatment executes on the credential-free substrate.",
+      "evidence_refs": [
+        "spec.json design_satisfiability_probe.output.arm_liveness",
+        "spec.json design_satisfiability_probe.output.checks.treatment_live_all_novelties",
+        "spec.json design_satisfiability_probe.output.checks.pc_exact_replay_all_novelties"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "NOT_APPLICABLE",
+      "reason": "There is no pre-existing mutable local code, data, task bank or fixture that this experiment's interpretation depends on: the substrate is generated entirely from the frozen literals in spec.json (class_id, derivations, endpoints, families, arms, controls, lattice arithmetic) with stdlib only and no external dataset, credential or repository file. The harness exists only as frozen text, not as an unbound external file: the COMPLETE harness (substrate construction, ten arm policies, declared controls, scored-matrix driver, full V1-V8 evaluator and frozen memory-lattice decision rule) is embedded verbatim in prereg.md and in spec.design_satisfiability_probe.source and is therefore bound by the frozen prereg/spec hashes; the EXECUTE copy is additionally recorded by the V1 code-fidelity manifest (sha256 of every authored file + python3 --version) in result.json.artifacts. Accordingly freeze_artifacts is empty, as the freezer requires for NOT_APPLICABLE.",
+      "evidence_refs": [
+        "spec.json substrate.external_dependencies = []",
+        "spec.json measurement_validity.gates.V1_code_fidelity_manifest",
+        "spec.json design_satisfiability_probe.source_sha256 8ee0de445efc5c4c3c32e090a9799b24c092785d6d2bf31321aea3255334f987",
+        "scripts/freeze_experiment.py validate_v2_design (NOT_APPLICABLE requires empty artifacts)"
+      ]
+    }
+  }
+}

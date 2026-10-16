@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-38194362040",
+  "lane": "intel",
+  "target_lane": null,
+  "next_question": "Which re-scope does the Global Research Director authorize now that B3 is NOT_SATISFIED (no credential-free local Q4_K_M class through 14B or non-Qwen 8B clears the frozen minimal bar; 0 provisionable hosted providers; the sole credential-free hosted path is operationally capped): obtain a hosted credential (with model pinning/SLA) to test a frontier class under the identical protocol, re-scope Gate 3 by dropping the same-model external published-baseline anchor in favour of internally re-run comparators on a dynamic-range task bank (B2-owned), or authorize the materially orthogonal intel probe - suppressing the hidden reveal button from the ELEMENTS observation (or a full accessibility-tree observation) - to separate observation-representation failure from raw multi-step control capacity on the already-tested classes?",
+  "why_next": "The mandate's explicit stop rule fired: no candidate cleared the frozen bar at byte-verified pinning AND no hosted endpoint can be provisioned without a human-issued credential (0 PROVISIONABLE_CREDENTIATED across 12 providers; exact blockers recorded per provider). continue=false: the next step is the Global Research Director's re-scope decision (hosted credential / internal comparators on a dynamic-range task bank / different model class / orthogonal representation probe), not another Intel ladder run - re-running the same classes under the same protocol is a spent thread. target_lane=null because the immediate decision is GRD-owned programmatic re-scope, not a single scientific lane's continuation; if the GRD authorizes the representation probe, that work is intel-eligible (harness/observation factor) and reuses the byte-verified GGUFs plus the frozen runner. The probe is the highest-information orthogonal option because the audited failure mode (reveal click then hidden-button re-click loop, zero answer actions, PAGE_TEXT containing TARGET-42) leaves representation-vs-capacity genuinely unseparated.",
+  "carry_forward": {
+    "established": [
+      "Content-identity freeze repair is durable and effective: at EXECUTE both revision-pinned GGUFs fully downloaded and hashed to the frozen served-body pins at equal byte counts (M-14B-QWEN 8,988,110,976 bytes / e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008; M-8B-LLAMA 4,920,739,232 bytes / 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c), GGUF header fingerprints match, and the parent's HF-metadata-vs-body mismatch (EXP-INTEL-38175568787) did not recur (raw/provisioning_evidence.json; provenance.json#models; audit.json#validity_findings).",
+      "Valid bounded negative at the audited ceiling (audit PASS, producer_claim_supported=true, required_fixes=[]): under the byte-verified frozen protocol (P-TREAT-GOAL-SCHEMA, frozen GBNF, temperature=0.0, seeds 42-46, frozen runner/fixture), M-14B-QWEN (Qwen2.5-14B-Instruct Q4_K_M) and M-8B-LLAMA (Meta-Llama-3.1-8B-Instruct Q4_K_M) both produced COMPLETE cells and failed the frozen bar: task_success_rate=0.0 (0/5) both, parseable_action_rate_step1=1.0 (5/5) both, positive_control_pass_rate=1.0 (10/10) both, answer_action_emission_rate=0.0 both (result.json#metrics; audit.json#recomputed_metrics).",
+      "The failure is not a decoding failure: constrained decoding is live and correct (PC-JSON-CONSTRAINED-DECODING 10/10 per cell), and step-1 actions are parseable 5/5; the failure mode is action-selection/affordance behaviour - step-0 click on #reveal-btn reveals TARGET-42 (clicked_reveal=true, revealed_value=TARGET-42 in all episodes), then every remaining step re-clicks the now-hidden button, never emitting a terminal answer action, exactly reproducing the carried 3B-8B Qwen anchor behaviour at 14B Qwen and at non-Qwen 8B Llama (result.json#observations; report.md section 3.4; audit.json#validity_findings).",
+      "Endpoint census (observational, non-gating): 12 providers -> 0 PROVISIONABLE_CREDENTIATED; 10 CREDENTIAL_REQUIRED with exact missing env vars and statuses (OpenAI/Anthropic/Mistral/Groq/Together/DeepSeek/Fireworks/Cohere 401, Google Gemini 403, OpenRouter 200 but credential-gated); 1 CREDENTIAL_FREE_OPERATIONALLY_CAPPED (Pollinations, HTTP 200, carried reasoning-only ~197-token cap/intermittent 402/no SLA); 1 UNREACHABLE (HuggingFace Inference, connection error); no credential env var present; any_provisionable_credentialed=false (raw/endpoint_census.json).",
+      "Frozen decision rule applied correctly with full trace: rule1 preflight PASS (all five checks), rule2 census recorded, rule3 both cells COMPLETE and TREATMENT_FAILS_BAR, rule4 -> OUTCOME=FALSIFIES, B3_STATUS=NOT_SATISFIED (raw/decision.json; result.json#metrics.decision_trace). The FALSIFIES branch is populated by real measurement: no cell was UNMEASURED_LOAD_FAILED, EXCLUDED or PARTIAL.",
+      "C-LLM-INHERIT retains its prior effective epistemic status HYPOTHESIS (codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT; this packet emits no promotion and no global rejection). The claim's own next gate - the four-arm same-model/tools/budget benchmark - remains blocked on readiness B3 (NOT_SATISFIED) plus B2 (Runtime-owned dynamic-range task bank).",
+      "External-comparator readiness table recorded non-gating: 3/3 entries enumerated with pinned primary sources (QCR arXiv:2608.12847; Agentic Compilation arXiv:2604.09718; site-memory/ColorBrowserAgent arXiv:2601.07262), all CANDIDATE_NOT_EVIDENCE, 0 reproduced (raw/external_comparators.json)."
+    ],
+    "rejected": [
+      "Rejected (bounded, measured): M-14B-QWEN (Qwen2.5-14B-Instruct Q4_K_M) as clearing the frozen minimal multi-step Web-agent bar (task_success_rate>=0.6 AND parseable_action_rate_step1>=0.6) under the byte-verified frozen protocol - observed 0/5, 0/5.",
+      "Rejected (bounded, measured): M-8B-LLAMA (Meta-Llama-3.1-8B-Instruct Q4_K_M) as clearing the same frozen bar - observed 0/5, 0/5.",
+      "Rejected (bounded, accumulated with carried anchors EXP-INTEL-38164607941 / EXP-INTEL-37982024058): the credential-free local CPU-quantized Q4_K_M path at any tested scale/family (Qwen2.5 3B/7B/14B, Llama-3.1 8B) satisfies readiness condition (3) under this protocol; the tested path is bounded, not the whole model space.",
+      "Rejected (bounded): constrained-decoding/grammar failure as the cause of the task failures - PC 10/10 and step-1 parseable 5/5 on both cells show decoding is live; the failure is behavioural action selection under the frozen observation.",
+      "Rejected (bounded, carried + census): the anonymous Pollinations proxy (gpt-oss-20b) as a capable credential-free same-protocol endpoint for this task (reasoning-only content, ~197 completion-token cap, intermittent HTTP 402, no model pinning/SLA). Hosted frontier classes as a whole remain untested, not rejected."
+    ],
+    "unknown": [
+      "Whether a hosted frontier class (credential-gated, not tested) clears the frozen minimal bar under the identical same-model/tools/budget protocol; no hosted model was invoked and no API credential exists in this factory.",
+      "Whether the failure mode (reveal click then hidden-button re-click loop, zero answer actions, PAGE_TEXT containing TARGET-42) reflects intrinsic multi-step control capacity or the frozen simplified observation representation (ELEMENTS still lists the now-hidden reveal button after reveal); this packet cannot separate those factors (audit.json#unresolved).",
+      "Whether a different observation (full accessibility tree or hidden-element suppression), prompt, or decoding variation would let the already-tested classes clear the bar; the frozen single-factor design manipulates only the model class.",
+      "Whether other quantisations (e.g. Q8, larger non-quantized classes), classes >14B, or other tasks would change the bounded negative; out of the frozen scope.",
+      "Whether the HF Xet-bridge metadata/body mismatch (etag/xetHash vs lfs.oid, parent EXP-INTEL-38175568787) affects pinned GGUFs used by other lanes; not surveyed.",
+      "Whether any of the 10 CREDENTIAL_REQUIRED providers could actually clear the bar if credentialed; the census proves provisionability-at-most, never capability."
+    ],
+    "do_not_assume": [
+      "Do NOT encode FALSIFIES as a global rejection of C-LLM-INHERIT: the negative is bounded to the tested credential-free local Q4_K_M classes plus the recorded hosted census; hosted frontier classes are blocked-not-refuted, other quantisations/tasks/domains are untouched, and C-LLM-INHERIT remains HYPOTHESIS.",
+      "Do NOT re-run the corrected ladder at the same classes/quant/protocol; that is a spent thread and the mandate's stop rule fired (STOP probing after recording the blocker).",
+      "Do NOT treat the endpoint census as capability evidence for any provider; it records credential env-var presence and unauthenticated reachability/HTTP status only, with no model invoked.",
+      "Do NOT use the external-comparator table (QCR / Agentic Compilation / ColorBrowserAgent) numbers as SPIDER evidence; all entries are CANDIDATE_NOT_EVIDENCE until reproduced with pinned denominators under this protocol.",
+      "Do NOT treat clearing the frozen minimal single-page task as evidence for C-LLM-INHERIT at product scale; it is a necessary readiness prerequisite, not an inheritance-capability result.",
+      "Do NOT generalize the bounded negative to other quantisations, larger classes, non-Q4_K_M GGUFs, other observation formats, or other task banks.",
+      "Do NOT weaken the same-model/tools/budget constraint of the gated four-arm benchmark silently; any re-scope (dropping the external published-baseline anchor, or changing the model class) is a Global Research Director decision, explicitly escalated here.",
+      "Do NOT read the 0.6 bar as a statistical threshold: it is a pre-declared capability-gate adequacy rule over 5 deterministic episodes (temperature=0.0, fixed seeds); there is no variance estimate.",
+      "Do NOT pin HF GGUF digests from server metadata (etag/xetHash/lfs.oid without full-download confirmation); the durable freeze-process rule is: pin the sha256 of the fully downloaded served body and verify at EXECUTE (step via spec.remote_artifact_pin_policy and frozen rule 3a).",
+      "Do NOT treat the three prior EXECUTE exit-75 attempts (transient model-pool exhaustion, model_execute.json) as scientific evidence; the completed transaction supersedes them operationally.",
+      "Do NOT skip the M-8B-LLAMA step-0 selector variance note ('reveal-btn' without '#' yet click_ok=true) as a silent schema-adherence bug affecting outcomes; the audit recorded it as non-outcome-affecting, but a future harness change should normalize selector handling."
+    ]
+  },
+  "dependencies": [
+    "Frozen design (immutable, hashes in freeze.json): research/experiments/EXP-INTEL-38194362040/{request.json,spec.json,prereg.md,freeze.json,design_review.json} (design_contract_version=2; design_review PASS).",
+    "Producer outputs: result.json, report.md, provenance.json (GitHub run 38212976602 attempt 1, repo head 50bc0c511cdc81e8100857903d428d780328c930, branch lab2/intel; llama-cpp-python 0.2.90, Playwright 1.63.0, system Chrome, CPU-only).",
+    "Independent audit: audit.json (status PASS, producer_claim_supported=true, required_fixes=[]).",
+    "Raw evidence: raw/{preflight.json,controls.json,provisioning_evidence.json,endpoint_census.json,external_comparators.json,materialized_configs.json,decision.json}; cells/{M-14B-QWEN,M-8B-LLAMA}/raw/{harness_config.json,provisioning_receipt.json,model_receipts.json}; configs/config_{M-14B-QWEN,M-8B-LLAMA}.json.",
+    "Reusable frozen assets (hashes verified, match freeze.json.artifact_hashes): research/intel/run_exp_37982024058.py (2b5d5bb5...), research/experiments/EXP-INTEL-37982024058/raw/harness_config.json (7aba9dc8...), research/experiments/EXP-INTEL-37973264582/raw/code/min_webagent.py (4e2b6710...). Downloaded GGUFs reside outside the repo at /tmp/opencode/gguf (ephemeral); re-download-and-verify against the frozen served-body pins before reuse.",
+    "Parent context: research/experiments/EXP-INTEL-38175568787/{handoff.json (sha256 df1150468c97dee8fd002d60fcd97fbbc96434cbc97749e0428325c58e0af942),audit.json,result.json}; research/experiments/EXP-INTEL-38164607941/{verdict.json,handoff.json,result.json,audit.json}; research/experiments/EXP-INTEL-37982024058/{verdict.json,handoff.json,result.json}.",
+    "Claim state: codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT = HYPOTHESIS (prior effective event EXP-INTEL-38175568787).",
+    "Hosted branch prerequisite for any credential test: a human-issued API credential (exact missing env vars recorded per provider in raw/endpoint_census.json) or an alternative provisionable credential-free same-protocol endpoint.",
+    "Any new Intel experiment requires a Global Research Director mandate; this handoff does not self-authorize a child experiment."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-38194362040/result.json",
+    "research/experiments/EXP-INTEL-38194362040/result.json#metrics",
+    "research/experiments/EXP-INTEL-38194362040/result.json#controls",
+    "research/experiments/EXP-INTEL-38194362040/result.json#observations",
+    "research/experiments/EXP-INTEL-38194362040/result.json#validity_notes",
+    "research/experiments/EXP-INTEL-38194362040/result.json#unresolved",
+    "research/experiments/EXP-INTEL-38194362040/audit.json",
+    "research/experiments/EXP-INTEL-38194362040/audit.json#claim_ceiling",
+    "research/experiments/EXP-INTEL-38194362040/audit.json#baseline_findings",
+    "research/experiments/EXP-INTEL-38194362040/audit.json#unresolved",
+    "research/experiments/EXP-INTEL-38194362040/spec.json#decision_rule",
+    "research/experiments/EXP-INTEL-38194362040/spec.json#falsifier",
+    "research/experiments/EXP-INTEL-38194362040/spec.json#remote_artifact_pin_policy",
+    "research/experiments/EXP-INTEL-38194362040/freeze.json",
+    "research/experiments/EXP-INTEL-38194362040/design_review.json",
+    "research/experiments/EXP-INTEL-38194362040/report.md",
+    "research/experiments/EXP-INTEL-38194362040/provenance.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/preflight.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/controls.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/provisioning_evidence.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/endpoint_census.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/external_comparators.json",
+    "research/experiments/EXP-INTEL-38194362040/raw/decision.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-14B-QWEN/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38194362040/cells/M-8B-LLAMA/raw/model_receipts.json",
+    "research/experiments/EXP-INTEL-38175568787/handoff.json",
+    "research/experiments/EXP-INTEL-38175568787/audit.json",
+    "research/experiments/EXP-INTEL-38164607941/verdict.json",
+    "research/experiments/EXP-INTEL-38164607941/handoff.json",
+    "research/experiments/EXP-INTEL-37982024058/verdict.json",
+    "codex/claim_state.json#effective_event_by_claim.C-LLM-INHERIT"
+  ],
+  "recommended_action": "Escalate to the Global Research Director: B3 is now formally NOT_SATISFIED with exact per-provider blockers recorded (0 provisionable credentialed endpoints; 10 CREDENTIAL_REQUIRED with named missing env vars; Pollinations CREDENTIAL_FREE_OPERATIONALLY_CAPPED; HuggingFace Inference UNREACHABLE), and the credential-free local Q4_K_M path is bounded at the tested classes (Qwen 3B/7B/14B, Llama 8B all fail the frozen minimal bar under the byte-verified protocol). Do NOT fund the gated four-arm C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON benchmark on the unavailable same-model anchor; keep B3 an explicit readiness blocker in scheduling. Do NOT re-run this ladder. If the GRD authorizes continued Intel work, the highest-information orthogonal probe is the representation discriminator: manipulate only the observation (suppress the hidden reveal button from ELEMENTS or switch to a full accessibility tree) while reusing the byte-verified GGUFs and the frozen runner, to separate observation-representation failure from raw multi-step control capacity - with an explicit stop rule and the same frozen bar. Any such new experiment requires a GRD mandate."
+}
