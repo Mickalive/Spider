@@ -4,7 +4,7 @@ run-name: Product promote ${{ github.run_id }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "22,52 * * * *"
+    - cron: "52 * * * *"
 
 permissions:
   contents: write
