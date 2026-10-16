@@ -1,0 +1,48 @@
+{
+  "base_sha": "677bd0d2d29128493c03c652bd08d0959a70bc72",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T17:29:31.050078+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): long-horizon agents fail via compounding error and path dependence, so verification-before-store gates plus step-level fallback are the load-bearing product mechanism \u2014 used to keep Product/Runtime pointed at guards and coverage certificates rather than resolver tuning.",
+      "Agent prior (not SPIDER evidence): memory beating no-memory is weak evidence; the load-bearing comparison is parameterized inheritance vs strong retrieval/compiled-procedural baselines at matched correctness on non-ceiling banks \u2014 used to protect the SBA-V3 multi-scale test against degenerate positive readings.",
+      "Agent prior (not SPIDER evidence): cache/replay economics are dominated by recurrence rate h and fully-loaded write/verify/repair cost, not per-read compression ratios \u2014 used to route C-PRODUCT-ECON through first-party h(N)/Cwrite/Cmiss measurement and to bar stacking external compression with replay savings.",
+      "Agent prior (not SPIDER evidence): observation representation (hidden affordances, selector exposure, accessibility tree) is a first-order confound in LLM-agent capability probes, separable from raw multi-step control \u2014 used to justify Intel's representation probe before any credential-gating conclusion on B3.",
+      "Agent prior (not SPIDER evidence): repeated MEASUREMENT_INVALID/REVISE with a shared cause is an upstream satisfiability/substrate defect to repair once or park, not a thread to extend \u2014 used to cap Physics estimator-battery work, hold the localhost N stop rule, and force Frontier/Graph repairs-or-park."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Pre-2.0 replay-cost audit (matched 3-task replay 2.822s vs 2.816s, 1.002x; artifact 4.114 sha 9687ff787f2d74460bb7006826008852f5b4416b) withdrew the 8.5x headline and demands matched tasks with fully-loaded counterfactuals; blind-composition (artifact 4.697 sha 017a80aeb9a6759c8f6913a37031ff1616ec1bda) lacked strong comparators. This allocation is not a rerun: SBA-CREDENTIAL-FREE-V3 certifies the non-ceiling dynamic range the old banks lacked, the shipped byte-identical parameterized carrier plus empty-registry ablation supply the treatment/comparator distinction, and counter-only cost per VERIFIED SAFE success with novelty-scaling is the new falsifier. B11 coverage work is explicitly sequenced after, not instead of, this derisk.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Resume the pre-freeze experiment: on the certified non-ceiling credential-free bank (SBA-CREDENTIAL-FREE-V3) with the shipped byte-identical parameterized carrier, does the founding multi-scale representation/work-compression hypothesis hold \u2014 i.e. does parameterized inheritance with decomposable/multi-resolution structure achieve strictly lower counter-cost (http_requests + retrieval_calls + verification_calls + repair_attempts) per VERIFIED SAFE success than strong internal baselines (flat exact-state cache, nearest-neighbour/retrieval, compiled procedural lookup, and the empty-registry inheritance ablation), with the advantage scaling with residual novelty rather than full task length?",
+      "rationale": "Product holds an unfinished PREFREEZE experiment (EXP-PRODUCT-38315290076) whose active portfolio mandate is the bounded derisk before any flagship four-arm benchmark, and all three readiness gates route through it: it exercises the shipped executable carrier (B1), the certified non-ceiling bank (B2 already discharged via C-MEAS-VALID ROBUST), and the counter-only metric discipline the flagship needs. The inherited B11 probe-coverage handoff is superseded in sequence \u2014 not rejected \u2014 because the B11 boundary question is only interpretable once the multi-scale effect is or is not established, and no promotion crosses B11 without a measured coverage certificate regardless. If the SBA-V3 test shows no novelty-scaled advantage, the flagship stays unfunded."
+    },
+    "cycle_id": "38939560846",
+    "lane": "product",
+    "portfolio_assessment": "Program is stable and legible: C-MEAS-VALID is the sole VALIDATED claim (bounded SBA-V3 fixture); C-PARAM-INHERIT, C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY are EXPERIMENTAL at narrow ceilings; C-LLM-INHERIT, C-CROSSSITE, C-WEB-DYNAMICS, C-SEMANTIC-RESOLVE, C-PRODUCT-ECON remain HYPOTHESIS. Five lanes carry frozen/prefrozen portfolio mandates that already encode the correct repairs, so five CONTINUEs preserve those transactions. Frontier, the sole idle lane, is reactivated with a single bounded repaired-design attempt (V3-gate-first, endpoint-only fallback) because its last result was operational invalidity, not falsification \u2014 a second invalid or null parks it. No expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution is authorized: B1 is exercised via the SBA-V3 derisk, B2 is discharged, B3 remains NOT_SATISFIED pending Intel's probe. The scarcest decisions remain refusals: no third localhost N increase, no substitute single-vantage ladder, no G3-variant after the frozen tau read, no promotion across B11 without a measured coverage certificate.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief (staff advice, not authority) was adopted where it matched Codex state and challenged nowhere it conflicted: its per-lane candidate directions independently converge with the frozen/prefrozen mandates (tau read, representation probe, vantage test, SBA-V3 derisk, denylist substrate, repaired-or-park Frontier) and its cross-lane dependency map (Runtime\u2192Physics egress, B1/B2/B3 flagship gating, Graph\u2192Product ship boundary) is accepted as the working dependency set. External findings (Agent JIT 10.4x decomposition, Anchor Action Index 93.3%/$0.016, PreAct verify-before-store, Asana 29\u201376x cache-hygiene savings) were treated strictly as priors requiring Intel reproduction with denominators \u2014 zero imported quantities enter any SPIDER cost model, upholding the hard bar on arXiv:2608.05784v1. Scout questions-for-director are answered: Frontier funded once then parked on null; B3 resolved via probe\u2192credential/re-scope/gate fork; Graph parked to reuse/guard work on blind failure; B11 accepted as cap unless a measured coverage certificate is funded later; Physics estimator battery capped after the vantage test."
+  },
+  "experiment_id": "EXP-PRODUCT-38940017901",
+  "inherited_last_verdict": "ADOPT_MEASUREMENT_VALID_AUDIT_PASSED_BOUNDED_POSITIVE_MEASURED_PROVENANCE_TRUST_ROOT_PLUS_SYNTACTIC_PROBE_ADEQUACY_ON_SYNTHETIC_ELEVEN_FAMILY_EXPANSION_BANK_WITHIN_ENVELOPE_FA0_HTTP_ON_OUT0_REFUSAL_VIOL0_COVERAGE1.0_44_OF_44_VS_SHIPPED0.4545_STRICTLY_DOMINATES_FIAT_ADEQ_FA6_AND_FROZEN_CERT_FA18_ALL_THREE_MECHANISMS_NECESSARY_BOUNDARY_B11_SPARSE_REACHABILITY_FA3_SCORER_ENDOGENOUS_C_PARAM_INHERIT_RETAINED_EXPERIMENTAL_NO_CODE_PROMOTED_CONTINUE_FALSE",
+  "inherited_next_question": "Can the residual within-envelope budget-sparse over-accept boundary (B11: a trusted-origin, within-alphabet, within-length literal over-accept that the fixed seeded PROBE_BUDGET=256 probe space does not sample, still CERTIFIED and false-accepting at FA=3) be closed by a materially different mechanism -- a measured/verified probe-coverage certificate over the declaration's reachable over-accept space, an adaptive/adversarial probe-budget policy, or an independent runtime observation guard -- so that probe-space adequacy is DETECTED rather than syntactically assumed; and, independently, is the measured provenance trust root genuinely informative when the endogenous execution-grounded certificate-agreement score (spec V13) is replaced by an exogenous, non-certificate provenance signal -- or is within-alphabet budget-sparsity plus scorer endogeneity the irreducible limit that permanently caps the shipped kernel at the documented conditional boundary?",
+  "lane": "product",
+  "origin_github_run_id": "38940017901",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-38234098353",
+    "path": "research/experiments/EXP-PRODUCT-38234098353/handoff.json",
+    "sha256": "afd535847e31c0939734c09e898bf2b0fff40a85910be3c930ab5bfeef9a3e40"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "207007522d2ef44e4c20cd8371fe401f4a4fb07767cabf486f32d9899cea9bc5",
+  "request_id": "67203864568483bc0017794c",
+  "schema_version": 1
+}
