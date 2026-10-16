@@ -5,8 +5,6 @@ on:
   workflow_run:
     workflows: ["SPIDER R2 Factory Pulse"]
     types: [completed]
-  schedule:
-    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
