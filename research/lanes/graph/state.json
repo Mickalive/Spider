@@ -8,7 +8,7 @@
   "next_question": "Which pre-registrable SELECT-only calibration rule fixed before any TEST scoring (e.g. a coverage/UP-constrained rule or a held-out selection axis) selects tau=0.3333 rather than an FA-extremal tau, and does BLIND-JAC-1NN survive the frozen AXIS-G3-NEW reincluded G3 gate under that rule with resolution quality above permuted levels?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-10-16T14:59:43.619543+00:00",
+  "updated_at": "2026-10-16T17:29:13.299465+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "836229224232c3b84e08b90173bde02da5dc524aa94767b4252502ae62ecf159",
   "same_failure_count": 0,
