@@ -1,0 +1,24 @@
+{
+  "artifact_hashes": {
+    "research/experiments/EXP-FRONTIER-38164611798/execute_module.py": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+    "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+    "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json": "d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d",
+    "research/experiments/EXP-FRONTIER-38184956362/execute_module.py": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5",
+    "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl": "95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45",
+    "research/experiments/EXP-FRONTIER-38188815194/audit.json": "7cd7a1a6fa124e09db28cf7ae2e2de57933545c8e90b63907746cfeb3f6dee5a",
+    "research/experiments/EXP-FRONTIER-38188815194/execute_module.py": "f18e5b55e563c26f2c21aeaa131f84a7145068d8154b3950c870c2c3e988d262",
+    "research/experiments/EXP-FRONTIER-38188815194/result.json": "eb076db8d41e09a214d49a167c0d5c6b3c57b54703ccd71b08be77ea817efa0b",
+    "research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl": "5192435b4c8a28d7f978f2a82ee1bbdabf4d092a79ab1b6d0614737d1ca33c46"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-FRONTIER-38940047535",
+  "frozen_at": "2026-10-17T00:29:40.399949+00:00",
+  "hashes": {
+    "design_review.json": "5c3462878f213e4082472475e5522726de9e1110616ac8fb6310efbde82a19ef",
+    "prereg.md": "3b517667d1a2589d1087cd4bd5e163bbc17946bbadeafdfd715ab7de0938e1b6",
+    "request.json": "1c6a3124a628b1a9fccca0d086d8f86ee39584b7ceb2715430cb57db85b543eb",
+    "spec.json": "0a814faafb14767a4424a41f72a17e97d207602dc9d363c808af803f408f3cad"
+  },
+  "schema_version": 1
+}

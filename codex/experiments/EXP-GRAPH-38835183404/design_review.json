@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-38835183404",
+  "lane": "graph",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Cascade precedence MEASUREMENT_INVALID -> TAU_RULE_INFEASIBLE(BLOCKED) -> BLIND_SURVIVES/BLIND_FAILS is clean with no subsumed guard (blind_g3_met at tau* is independent of the continuity/invalidity conjuncts; BLIND_INERT is pre-handled VALID gate-false via coverage/None bars, never invalidity). Both science branches are arithmetically live on published vectors: SURVIVES-arith at tau=0.3333 (G3 reincluded FA 0.10/COV 0.925/UP_excl 0.8571, independently re-read from parent audit recomputed_metrics.auditor_posthoc_g3_reincluded_sweep_at_feasible_taus); FAILS-arith at any of the eight other published failing vectors (e.g. 0.2727 FA 0.20; 0.4286 UP 0.444; 0.6 COV 0.10) and at the H-empty pooled-median fallback (deterministic 0.4286 over the published 9-tau feasible set, lower-median index (9-1)//2=4, published failing vector). Thresholds are integer-attainable on the decided set (G3 reincluded 40 app + 20 OOS: FA<=0.10 means <=2 executed OOS; the published 0.3333 vector jointly meets all three bars). Unlike the parent FIX-2 entailment, tau* here is NOT deterministic from published evidence: emission depends on H (G3-origin SELECT-slice membership under the same bars), and grep across all accepted experiment packets finds zero per-axis SELECT-slice sweeps (parent audit publishes only the pooled SELECT sweep and the TEST reincluded sweep; both are slice-blind). Pooled-only determinacy (median(F)=0.4286) was deliberately declined on record, so no pooled-only emission re-entails an outcome. TAU_RULE_INFEASIBLE is a drift guard provably non-taken on identical banks (same unchanged predicate that yielded 9 feasible taus in two accepted packets). Neither SURVIVES nor FAILS is entailed at freeze; the packet structurally escapes the parent FIX-2 failure mode.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#7",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.3",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.4",
+        "research/experiments/EXP-GRAPH-38816768796/audit.json#recomputed_metrics.blind_select_per_tau_sweep_SELECT_POOL",
+        "research/experiments/EXP-GRAPH-38816768796/audit.json#recomputed_metrics.auditor_posthoc_g3_reincluded_sweep_at_feasible_taus",
+        "research/experiments/EXP-GRAPH-38816768796/handoff.json (FIX-2/FIX-3/do_not_assume guards)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Independently probed without any runner execution or SELECT/TEST scoring: Python 3.12.15 present; numpy/sklearn/sentence_transformers raise ModuleNotFoundError as claimed; research/harness/goal_generator.py imports and exposes INTENTS(20)/PARAPHRASES(20)/NO_APPLICABLE_TEMPLATES(20)/OOD_PARAPHRASES(8); every runtime-read block exists (GOAL-BANK-G3/OOS-BANK-G3/LEXICON-G3 in 38291080992/prereg.md; GOAL-BANK-G1/OOS-BANK-G1/LEXICON-G1/LEXICON-G1-ALT/GOAL-BANK-G2/OOS-BANK-G2/LEXICON-G2-HELDOUT in 38180711589/prereg.md; PRIOR-PARENT-BANK-TEXTS in 38175554380/prereg.md); frozen runner block extracts, py_compiles clean, and its sha256 (block bytes + one trailing newline) independently recomputes to the claimed CANONICAL-RUNNER-SHA256 e9555d9e979d292576eccc365161c2062eaad369c8008e937079704e471dfffa; held-out slice uses only (nm,row) origin tags already carried by build_fit_pool (AST check: blind functions _blind_token_set/blind_jac_predict/blind_gate_metrics/arm_blind_oos have no lex parameter and no LEXICON-* name references); fit-pool identity corroborated by parent run_output fit_pool (102/34/60, bars_met=true); no network/model/browser/credential and no clause-refit code path. No prerequisite is deferred to EXECUTE creation.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.7",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#10-11",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#fit_pool"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines can differ on the frozen population; no ceiling/floor identity. Gold T-FRAME+ (lexicon + zero-parameter clauses) is live and gate-met on G3 reincluded (parent: FA 0.10/COV 1.0/UP_excl 1.0, 42/60 executed) while blind differs operationally and empirically (parent blind fails at 0.6 with COV 0.10/UP 0.357 where gold passes on the same rows; published tau=0.3333 passes where gold also passes — arms diverge by tau). B-RETRIEVAL-OOS is a distinct honest comparator (uni+bigram TF-IDF centroids, (tau,mu>0) gate, disjoint fit/select; parent reproduction tau=0.4156/mu=0.0005, no TEST gate met, fork TFRAME_DOMINATES_G3 on both supersets). Blind vs retrieval mechanism distance is five operational points (unigram vs uni+bigram; raw sets vs sublinear-tf*IDF; 1-NN exemplar vs centroid; Jaccard vs cosine; single-tau vs (tau,mu)) sharing only pooled rows by ablation design. Line-level static diff of the frozen runner vs the audited parent runner shows non-equality confined to header comments, EXP_ID/SEED constants, the blind SELECT rule block, and select_H/select_fallback/select_heldout_n/select_feasible_sorted reporting — a genuine single-variable ablation with proven calibration non-identity (median operator is neither lowest-tau-wins nor FA-extremal; pooled-median fallback emits 0.4286 distinct from both prior frozen emissions 0.2727 and 0.6). Gatefree execute-all shows FA headroom on reinincluded sets (0.30-0.45 vs gold 0.0-0.10), so no floor collapse. No comparative cost metric enters any decision, so no omitted cost dimension.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#2-3",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.2",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.5",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#test_reincl_metrics",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/runner_blind_resolver.py (diff baseline)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control is live under the same scoring implementation. PC-AXIS-G1-ALTLEX: parent gold-reincluded ALTLEX gate is true (FA 0.05/COV 0.9333/UP_excl 1.0), runner-enforced as MEASUREMENT_INVALID on failure. NC-EXEC-ALL (gatefree) pools materially more FA than gold on both set families (parent reincluded FA 0.30-0.45 vs gold 0.0-0.10). NC-ABSTAIN-ALL is executed on screened and reincluded sets (coverage 0.0 floor, UP exclusive informative over all resolved abstentions). CTRL-SHUFFLED-SELECTION / CTRL-RANDOM-ROLE / CTRL-RANDOM-GATE are parent-continuous and re-executed. CTRL-BLIND-PERMUTED is correctly scoped to the selection reading only: the execute/abstain partition is a function of Jaccard scores, not labels, so permuted FA/COV/UP equal real blind by construction for any fixed tau* — the design explicitly refuses to gate a label on this tautology (parent self-attack continuity) and instead guards selective_acc. The decision gate is measured directly on the blind arm at the frozen tau*, not through any control, so no control can deaden it. Blind INERT and slice-UP-null are pre-declared informative events (gate-false / H-exclusion), not dead controls. No tautological or impossible control is used to license a decision.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#6",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.6",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.9(iii)",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#controls"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment (BLIND-JAC-1NN + heldout-g3-covup-median rule in the hashed runner block) is executable and non-null before any expensive arm: the parent already executed the same blind mechanism end-to-end (decision BLIND_FAILS, blind_inert=false, non-degenerate TEST partitions at every published feasible tau: 44/16 at 0.2727 through 4/56 at 0.6); the pooled SELECT-feasible set is proven non-empty on identical banks (9 published feasible taus, every one with SELECT coverage >= 0.79), so any emitted tau* produces a well-defined SELECT and TEST gate vector; the held-out slice is structurally non-empty (parent-published select_gids contain 30 AXIS-G3-NEW-origin rows of 94 SELECT rows, carried with nm tags by build_fit_pool). Gold liveness on the decided set (AXIS-G3-NEW reincluded) is True from parent-published counts (42/60 executed, 40 app, 7 resolved abstentions). Worst-case blind TEST degeneracy is pre-handled as VALID BLIND_INERT collapse mapping to gate-false, so no liveness cliff can manufacture invalidity. H-empty takes the pre-registered pooled-median fallback with a total emission. --mechanics-only gives a cheap TEST-untouched liveness canary. Claim is C-SEMANTIC-RESOLVE (not a C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON product claim), but treatment liveness passes on the merits.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#2",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.1",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#arm_blind_oos",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#test_reincl_metrics.AXIS-G3-NEW.tframeplus",
+        "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json#fit_pool.select_gids"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Independently recomputed sha256 of all four freeze_artifacts and verified byte-equality with parent freeze.json#artifact_hashes: 38180711589/prereg.md 5a64e90d..., 38175554380/prereg.md dc90bf71..., 38291080992/prereg.md 5a9cc119..., goal_generator.py cb5218de.... Static audit of the frozen runner confirms the only runtime-read local files are exactly those four (G1G2SRC/G3SRC/GRANDPARENT preregs + goal_generator import); EXPECTED_FLAGGED_TEST / EXPECTED_GOLD_* tripwire values and the parent-published reincluded gid lists are hard-coded constants, not runtime file reads, so parent result.json/raw_evidence are not mutable interpretation dependencies. The runner itself, constants, held-out median rule, and feasibility predicate are embedded in this experiment's prereg.md FROZEN-RUNNER block and bound at freeze via the prereg hash plus the independently verified CANONICAL-RUNNER-SHA256 (e9555d9e...). No harness or other local code is in scope. Remote responses are not involved.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#12",
+        "research/experiments/EXP-GRAPH-38835183404/prereg.md#8.8",
+        "research/experiments/EXP-GRAPH-38816768796/freeze.json#artifact_hashes"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Conditional-entailment nuance (disclosed in prereg §8.9(ii), accepted): among the nine pooled-feasible taus, accepted evidence shows only 0.3333 passes the G3 reincluded gate, so conditional on the event {H-median emits 0.3333} the TEST gate-met is expected from published values; conditional on H-empty the fallback 0.4286 has a published failing vector. Unconditional openness is preserved because H membership (G3-origin SELECT-slice metrics per tau) is unpublished in every accepted packet — information gain lives in the emission event itself, which is exactly the Director's which-rule question.",
+    "Researcher-degrees-of-freedom disclosure (prereg §8.9(i), accepted): the rule was designed with post-hoc knowledge that a knife-edge feasible-and-passing tau exists. The mitigation is structural (SELECT-only inputs, unpublished H slice, no pooled-only deterministic emission, AUDIT re-derivation of tau*/select_H/select_fallback with TEST-blindness checks), and the residual risk is inherent to the binding Director question rather than a design incapacity.",
+    "SURVIVES is reachable only via tau*=0.3333 (sole published gate-passing feasible tau); FAILS is reachable via any of the eight other feasible emissions or the H-empty fallback. This asymmetry is disclosed in the spec expectation and does not make either branch unreachable or entailed.",
+    "A prior design_review attempt on this experiment (model opencode/ling-3.1-flash-free) exited retry/transient without producing this artifact; this review (model opencode/mimo-v2.6-flash-free, independent of DESIGN model opencode/muse-spark-1.3-contributor-free) supersedes it."
+  ],
+  "rationale": "Independent pre-freeze review of the six satisfiability/identifiability checks, treating every spec.freeze_eligibility PASS as a claim to attack. All six checks pass on independently recomputed evidence: the decision cascade is reachable with both science branches genuinely open because the held-out G3-slice H membership is unpublished anywhere in accepted evidence (the exact structural escape from the parent FIX-2 entailment failure, confirmed by grep across all experiment packets and by inspection of parent/grandparent audit recomputed_metrics, which publish only pooled-SELECT and TEST sweeps); prerequisites (Python 3.12.15, stdlib-only runner, goal_generator, all bank/lexicon/prior blocks, CANONICAL-RUNNER-SHA256) are present now and were probed without any SELECT/TEST scoring; treatment and strong baselines are operationally distinct and empirically divergent on the frozen rows with gatefree FA headroom and no cost-metric omission; all controls are live with the permuted null correctly scoped to the selection reading (label-invariance proven, so it cannot deaden the gate); the blind treatment is live by prior accepted execution plus a structurally non-empty 30-row G3 SELECT slice and non-degenerate partitions at every published feasible tau; and all four mutable local interpretation dependencies are hash-bound and equal to the parent freeze. No blocking finding. Design is capable of answering its own question; recommend freeze eligibility on these checks.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-38835183404/request.json",
+    "research/experiments/EXP-GRAPH-38835183404/spec.json",
+    "research/experiments/EXP-GRAPH-38835183404/prereg.md",
+    "research/experiments/EXP-GRAPH-38816768796/raw_evidence/run_output.json",
+    "research/experiments/EXP-GRAPH-38816768796/audit.json",
+    "research/experiments/EXP-GRAPH-38816768796/handoff.json",
+    "research/experiments/EXP-GRAPH-38816768796/freeze.json",
+    "research/experiments/EXP-GRAPH-38666634300/audit.json",
+    "research/experiments/EXP-GRAPH-38816768796/raw_evidence/runner_blind_resolver.py"
+  ]
+}
