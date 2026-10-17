@@ -4,8 +4,8 @@
   "message": "stage exited with code 78",
   "retryable": false,
   "fingerprint": "4488742a99b0dfb65598c32a",
-  "recorded_at": "2026-10-16T18:12:08.203379+00:00",
-  "github_run_id": "38940028187",
+  "recorded_at": "2026-10-17T00:27:08.741888+00:00",
+  "github_run_id": "38983355397",
   "github_run_attempt": "1",
   "control_revision": "483314ec6bd5937df1f6a0334448deff39770d6ec045c33e86beca131f9cbbf7"
 }
