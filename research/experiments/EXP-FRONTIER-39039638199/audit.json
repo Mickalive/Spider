@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "AUD-V1-RECONSTRUCTION-DISCLOSED-AND-FAITHFUL",
+      "class": "validity",
+      "severity": "non-blocking (load-bearing disclosure, verified)",
+      "finding": "derived/metrics.json and derived/decision.json were NOT emitted by the frozen process. The frozen module completed the entire primary transaction (35/35 offline controls, observation-0 census, 360 s separation, observation-1 re-fetch of all 1107 admitted pages, 10 self-pairs, 10 control probes) and then raised ValueError in parent_window() at 2026-10-17T15:18:18Z while entering the SECONDARY B-RETRO-LONG-DT channel, before writing the derived files. Verified: raw/PROGRESS.json has no finished_utc; the stderr traceback at /tmp/opencode/exp390_run2.log shows the exact ValueError (time data '2026-10-17T00:45:32.184Z' does not match format '%Y-%m-%dT%H:%M:%SZ'); observation O2 in result.json matches. The derived files were produced by importing the byte-identical frozen module (stripped sha256 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, re-verified by the auditor against prereg.md#10) and replaying its own pure summarize()/decide() over its own RAW rows; the four values the frozen process could not emit (M-WALL-S, M-PARTIAL, M-TIME-TRUNCATED-HOSTS, the GET ledger) are reconstructed from the frozen run's own checkpoints and itemised in run/derived/metrics.json#reconstruction_notes and result.json#validity_notes. Auditor independently recomputed every primary metric from run/raw/*.jsonl and all values match exactly. status=COMPLETE is justified: the primary measurement transaction completed and all primary RAW evidence was written by the frozen process before the crash; the crash is confined to a secondary channel that by frozen design (prereg.md#11 step 6) cannot change the primary label.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#observations.O2",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#validity_notes",
+        "research/experiments/EXP-FRONTIER-39039638199/run/derived/metrics.json#reconstruction_notes",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+        "/tmp/opencode/exp390_run2.log",
+        "/tmp/opencode/exp390_rederive.py"
+      ]
+    },
+    {
+      "id": "AUD-V2-RETRO-NOT-ADMITTED-DEFECTS-VERIFIED",
+      "class": "validity",
+      "severity": "disclosed limitation bounding the claim ceiling (not a falsification)",
+      "finding": "The B-RETRO-LONG-DT channel is NOT ADMITTED by its own frozen gate, for two independent frozen-module defects, both verified by the auditor: (1) parent_window() parses the frozen parent provenance timestamps with strptime pattern %Y-%m-%dT%H:%M:%SZ, but the bound parent provenance.json timeline_utc records scored_run_started=2026-10-17T00:45:32.184Z and scored_run_finished=2026-10-17T00:46:04.288Z with fractional seconds, so it raises ValueError (this is the crash); (2) even with a tolerant read, the frozen gate computes dt_h = (rec.t_start - p_end)/3600 where rec.t_start is a time.monotonic() reading and p_end is a POSIX epoch value, mixing two clocks; the auditor recomputed dt_h from raw/retro.jsonl and gets median -497831.608 h, outside the frozen [6 h, 30 d] admission band. Consequence: the days-to-weeks band stays undecided, exactly as the frozen design permits. The channel WAS executed in a separate clearly-labelled pass: 292 parent reference pages re-fetched, 0 byte changes, strata 31 deep / 261 shallow, max per-host change rate 0.00 (not negotiation-suspected); reported only as a non-decisional secondary observation (run/derived/retro_secondary.json, run/raw/retro.jsonl). By frozen design it cannot change the primary label.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/retro.jsonl",
+        "research/experiments/EXP-FRONTIER-38940047535/provenance.json#timeline_utc",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#10 (parent_window, retro gate)",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#11 step 6"
+      ]
+    },
+    {
+      "id": "AUD-V3-DESIGN-REVIEW-MDC-ARITHMETIC-SLIP",
+      "class": "validity",
+      "severity": "non-decisional documentation error in design_review.json",
+      "finding": "design_review.json#checks.decision_rule_reachability states the first detectable deep count at the live frame sizes is 'k=7 (rate ~1.0%, p=0.069 at k=6 is not detectable)'. Exact recomputation of the frozen contrast (contrast_p) gives p=0.10146 at k=6, p=0.06921 at k=7, p=0.04719 at k=8: the first detectable count is k=8, rate 8/686=0.011662. The producer's M-CONCENTRATION-MDC-RATE=0.011661807580174927 is CORRECT; the review's k=7 figure is an arithmetic slip. The MDC metric is always reported by rule (spec.json decision_rule step 4) and never branches, so there is no decision impact.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/design_review.json#checks.decision_rule_reachability",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-CONCENTRATION-MDC-RATE",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#decision_rule.step_4"
+      ]
+    },
+    {
+      "id": "AUD-V4-RETRO-HOP-SPLIT-DOC-ERROR-IN-SPEC",
+      "class": "validity",
+      "severity": "non-decisional documentation error in spec.json",
+      "finding": "spec.json#baselines[1].declared_limits and spec.json#claim_ceiling_rules.CC-E state '253 of 292 reference pages are hop<=2'. The auditor's recount of the frozen parent census (status=200, sha256 non-null; matches design_review.json nonblocking NB-1) gives 261 hop<=2 and 31 hop>=3, which is what result.json#metrics.M-RETRO-N-SHALLOW=261 / M-RETRO-N-DEEP=31 reports. Direction of the caveat (retro channel is shallow-biased and readthedocs-heavy) is unchanged; the exact split in spec.json is off by 8 pages.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#claim_ceiling_rules.CC-E",
+        "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/design_review.json#nonblocking_findings.NB-1"
+      ]
+    },
+    {
+      "id": "AUD-V5-REPORT-H2-WORDING-CONTRADICTS-FROZEN-H2",
+      "class": "validity",
+      "severity": "non-decisional prose mislabeling of a frozen hypothesis id in report.md",
+      "finding": "report.md section 4 item 2 states 'H2 falsified, H3 not reached', but the frozen spec.json hypothesis H2 is 'hazard is NOT concentrated in the deep stratum ... one-sided exact binomial p-value for p_deep > p_shallow is > 0.05 and both stratum upper bounds sit at or below the same certified level'. The observed state (M-CONCENTRATION-P-ONE-SIDED=1.0, M-CHANGE-TEXT-DEEP=M-CHANGE-TEXT-SHALLOW=0, both certified levels 0.01) SUPPORTS H2 as frozen; the substance of the following sentence (no concentration detected, bounded at M-CONCENTRATION-MDC-RATE, not an identity claim) is correct. result.json outcome=SUPPORTS correctly refers to the frozen decision-label mapping (CERTIFY_BOTH -> COMPLETE/SUPPORTS, spec.json decision_rule step 3). Recommendation: correct the report wording in place; no metric, label or ceiling change.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/report.md#4",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#hypothesis",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#decision_rule.step_3"
+      ]
+    },
+    {
+      "id": "AUD-V6-STALE-FREEZE-TIME-MDC-FIGURES",
+      "class": "validity",
+      "severity": "non-blocking; freeze-time arithmetic correctly superseded by live metric",
+      "finding": "prereg.md#13, prereg.md#17 item 8 and spec.json#expected_information_gain quote a contrast power ceiling of 'roughly 1.6%' computed at canary sizes (n_deep=380, n_shallow=420: first detectable k=6, rate 0.0158). At the measured frame (n_deep=686, n_shallow=421) the exact MDC is 8/686=0.011662, which the producer reports as M-CONCENTRATION-MDC-RATE and discloses in validity_notes ('cannot detect a deep-stratum excess below ... 0.011662 ... bounds concentration at ~1.17%'). The freeze-time figures are superseded by the live metric; the producer's power-ceiling disclosure uses the correct measured-frame value.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#13",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#17",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#expected_information_gain",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#validity_notes"
+      ]
+    },
+    {
+      "id": "AUD-V7-CERTIFICATION-IS-TEXT-CHANNEL-ONLY",
+      "class": "validity",
+      "severity": "disclosed, bounds the product reading of the label",
+      "finding": "The certified level is computed on the frozen structural-text channel, which is blind to HTML attributes by construction (C-DETECT-ATTR-ONLY). The conservative byte channel finds 7 attribute/script-only changes (3 deep, 4 shallow) and its exact bounds are M-HAZARD-BYTE-UB95-DEEP=0.011264 and M-HAZARD-BYTE-UB95-SHALLOW=0.021609: the shallow byte bound EXCEEDS the 0.01 certified level, so the CERTIFY_BOTH_AT_0P01 label does not certify byte-identity at 1% for the shallow stratum. The producer discloses this (report.md section 3 and 6, interpretation 4); the product consequence is correctly scoped to the frozen channel. A product decision that requires byte-identity would need a guard even on this evidence.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-HAZARD-BYTE-UB95-SHALLOW",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-CHANGE-ATTR-ONLY-ALL",
+        "research/experiments/EXP-FRONTIER-39039638199/report.md#3",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#baselines.B-BYTE-CHANNEL"
+      ]
+    },
+    {
+      "id": "AUD-V8-ALL-FROZEN-GATES-VERIFIED-PASS",
+      "class": "validity",
+      "severity": "positive confirmation",
+      "finding": "The auditor re-evaluated every measurement-validity gate against the RAW evidence: V1 code identity PASS (stripped module sha256 = 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, identical to prereg.md#10 block and result.json#M-CODE-SHA256-STRIPPED); V2 controls PASS (raw/controls.jsonl has exactly 35 rows, all pass=true; live positive 3/3 fired, live nulls 0/2, self-pairs 0/10); V3 seed liveness PASS (4/4 hop-0 seed rows HTTP 200, M-SEED-ERRORS={}); V5 separation PASS (requested 360 s >= 300; per-pair dt min 377.06 s >= 300; max 439.83 s <= 900; 0 pairs excluded below the floor, M-N-PAIR-EXCLUDED-BELOW-DT-MIN=0); V6 censoring PASS (0/1107 pages non-200 at observation 1; M-CENSOR-FRAC-* = 0); V7 page-gone separation PASS (M-DEAD-404-*=0, M-RATE-LIMITED-*=0, M-UNREACHABLE-*=0; the 6 obs0 non-200 rows are outside the admitted estimand and preserved in raw/census.jsonl); V8 envelope PASS (ledger 8+1123+1137=2268 <= 3200; wall 463.32 s <= 900 s, reconstructed from frozen checkpoints); V9 detector sensitivity PASS (offline injections both directions); V10 confounding tags correctly empty (M-HOSTS-WITH-BOTH-STRATA=4; max host concentration 0.332542 < 0.60; max version-pinned fraction 0.032070 < 0.80). No leakage found: GET-only, credential-free, deterministic target order, count-based frozen caps, timestamp-only DT floor exclusion; no outcome-dependent selection anywhere in the pair path.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/obs1.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/selfpair.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/derived/code_identity.json",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#measurement_validity"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "AUD-B1-MATCHED-SHALLOW-COMPARATOR-STRONG",
+      "finding": "B-SHALLOW-MATCHED-DT is a genuinely strong comparator: the hop<=2 stratum of the SAME live frame, SAME instrument, SAME UA, SAME measured per-pair separation (BFS caps are per host per stratum, so both strata come from the same sweeps). It removes host composition, vantage, transport and window as explanations for any deep-vs-shallow difference. M-HOST-TABLE is published (rust 220/43, pytest 219/98, readthedocs 28/140, pandas 219/140), all four hosts contribute >=25 paired pages to EACH stratum, M-HOSTS-WITH-BOTH-STRATA=4, max host concentration 0.332542 < HOST_CONC_WARN 0.60. There is no ceiling artifact: the deep stratum is 63.99% MOVING_ALIAS (release-mutable) content, version-pinned fraction 0.032070 << 0.80, so a zero in the deep stratum is measured, not true by construction.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-HOST-TABLE",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-CLASS-FRAC-MOVING_ALIAS-DEEP",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#baselines"
+      ]
+    },
+    {
+      "id": "AUD-B2-LIVE-POSITIVE-SENSITIVITY-DEMONSTRATED",
+      "finding": "C-LIVE-POS-SENSITIVITY: all 3 of 3 pre-registered volatile URLs (cloudflare cdn-cgi/trace, api.github.com/rate_limit, timeapi.io current zone) returned HTTP 200 at both observations and changed on the PRIMARY text channel (M-LIVE-POS-CHANGED=3, M-LIVE-POS-OK=3, verified in raw/control_probes.jsonl). Selection was pre-registered from a disclosed 6-URL pool probed at DESIGN (prereg.md#15 P4: 3 fired, 2 stable, 1 unreachable), not post-hoc. The zero-event result on the frame is therefore interpretable, which is the property the parent packet (EXP-FRONTIER-38940047535) could never demonstrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15.P4",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#controls.C-LIVE-POS-SENSITIVITY"
+      ]
+    },
+    {
+      "id": "AUD-B3-NULL-FAMILIES-HELD",
+      "finding": "C-LIVE-NULL-STABILITY: 0 of 2 static anchors changed (example.com, www.iana.org/domains/reserved; both 200 at both observations; M-LIVE-NULL-CHANGED=0, M-LIVE-NULL-OK=2). C-SELFPAIR-DETERMINISM: 0 of 10 in-frame self-pairs changed on text OR byte, max intra-pair gap 0.006 s (M-SELFPAIR-CHANGED=0, M-SELFPAIR-BYTE-CHANGED=0, M-SELFPAIR-N=10, M-SELFPAIR-MAX-GAP-S=0.006). The in-frame family is the stronger null because it runs on multi-megabyte documentation pages inside the measured frame; it held, so the zero is not detector noise.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/selfpair.jsonl",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#null_control"
+      ]
+    },
+    {
+      "id": "AUD-B4-BYTE-AND-TRANSPORT-CHANNELS",
+      "finding": "B-BYTE-CHANNEL is reported beside every text bound and catches exactly the 7 attribute/script-only changes the primary channel is blind to by construction; its bounds (deep 0.011264, shallow 0.021609) quantify the width of that blindness (see AUD-V7: shallow byte bound exceeds the 1% certified level). B-TRANSPORT-CHANNEL correctly stays a covariate and never an event: 359 of 1107 pairs (219 deep, 140 shallow) moved ETag/Last-Modified while canonical text was unchanged - the pre-2.0 cycle-8 instrument lesson replicated at scale on real HTML. Their cause is not identified (weak validators, per-request cache-busting tokens, or edge routing are candidate explanations) and is disclosed as unresolved by the producer; they must not be reused as evidence of staleness.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#metrics.M-CHANGE-TRANSPORT-ALL",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#baselines.B-TRANSPORT-CHANNEL",
+        "research/experiments/EXP-FRONTIER-39039638199/result.json#observations.O10"
+      ]
+    },
+    {
+      "id": "AUD-B5-RETRO-SECONDARY-EXECUTED-BUT-NOT-ADMITTED",
+      "finding": "B-RETRO-LONG-DT was executed in a labelled secondary pass (292 parent reference pages re-fetched; 0 byte changes; not negotiation-suspected) but is NOT ADMITTED because of the two frozen defects verified in AUD-V2 (fractional-second strptime crash; monotonic-vs-epoch clock mixing yielding dt_h ~ -497831.608 h). By frozen design it cannot change the primary label. The true elapsed separation of that pass is order 14-15 h (parent window end 2026-10-17T00:46:04Z; retro pass executed 2026-10-17 ~15:19Z), which lies inside the [6 h, 30 d] band, so the observational content (0/292 byte changes over ~14.5 h on a shallow-biased, readthedocs-heavy reference set) is real but formally undecided. The days-to-weeks band remains open and bounds the claim ceiling.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/retro.jsonl",
+        "research/experiments/EXP-FRONTIER-38940047535/provenance.json#timeline_utc"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "method": "Auditor independent recomputation from run/raw/census.jsonl and run/raw/obs1.jsonl (Python, stdlib only), plus exact Clopper-Pearson one-sided bounds (1-0.05^(1/n) at k=0; bisection sup{p: P(X<=k)>0.05} at k>0) and exact binomial-tail contrast. Every value below matches result.json/run/derived/metrics.json exactly.",
+    "M-N-DISCOVERED": 1119,
+    "M-N-ADMITTED": 1107,
+    "M-N-PAIR-ALL": 1107,
+    "M-N-PAIR-DEEP": 686,
+    "M-N-PAIR-SHALLOW": 421,
+    "M-N-PAIR-EXCLUDED-BELOW-DT-MIN": 0,
+    "M-CENSORED-ALL": 0,
+    "M-CENSORED-DEEP": 0,
+    "M-CENSORED-SHALLOW": 0,
+    "M-CENSOR-FRAC-DEEP": 0.0,
+    "M-CENSOR-FRAC-SHALLOW": 0.0,
+    "M-DEAD-404-DEEP": 0,
+    "M-DEAD-404-SHALLOW": 0,
+    "M-DEAD-UB95-DEEP": 0.004357435376452668,
+    "M-DEAD-UB95-SHALLOW": 0.007090496587222661,
+    "M-UNREACHABLE-DEEP": 0,
+    "M-UNREACHABLE-SHALLOW": 0,
+    "M-RATE-LIMITED-DEEP": 0,
+    "M-RATE-LIMITED-SHALLOW": 0,
+    "M-CHANGE-TEXT-ALL": 0,
+    "M-CHANGE-TEXT-DEEP": 0,
+    "M-CHANGE-TEXT-SHALLOW": 0,
+    "M-CHANGE-BYTE-ALL": 7,
+    "M-CHANGE-BYTE-DEEP": 3,
+    "M-CHANGE-BYTE-SHALLOW": 4,
+    "M-CHANGE-ATTR-ONLY-ALL": 7,
+    "M-CHANGE-ATTR-ONLY-DEEP": 3,
+    "M-CHANGE-ATTR-ONLY-SHALLOW": 4,
+    "M-CHANGE-TRANSPORT-ALL": 359,
+    "M-CHANGE-TRANSPORT-DEEP": 219,
+    "M-CHANGE-TRANSPORT-SHALLOW": 140,
+    "M-HAZARD-TEXT-UB95-ALL": 0.002702513499849235,
+    "M-HAZARD-TEXT-UB95-DEEP": 0.004357435376452668,
+    "M-HAZARD-TEXT-UB95-SHALLOW": 0.007090496587222661,
+    "M-HAZARD-BYTE-UB95-ALL": 0.011844280506174865,
+    "M-HAZARD-BYTE-UB95-DEEP": 0.011263598661371554,
+    "M-HAZARD-BYTE-UB95-SHALLOW": 0.021609516981362542,
+    "M-CERT-LEVEL-TEXT-DEEP": 0.01,
+    "M-CERT-LEVEL-TEXT-SHALLOW": 0.01,
+    "M-DT-MIN-S": 377.06,
+    "M-DT-MEDIAN-S": 407.97,
+    "M-DT-P90-S": 430.52,
+    "M-DT-MAX-S": 439.83,
+    "M-HOST-CONC-MAX-DEEP": 0.3206997084548105,
+    "M-HOST-CONC-MAX-SHALLOW": 0.332541567695962,
+    "M-HOSTS-WITH-BOTH-STRATA": 4,
+    "M-CLASS-FRAC-VERSION_PINNED-DEEP": 0.03206997084548105,
+    "M-CLASS-FRAC-MOVING_ALIAS-DEEP": 0.6399416909620991,
+    "M-CLASS-FRAC-OTHER-DEEP": 0.32798833819241985,
+    "M-CLASS-FRAC-VERSION_PINNED-SHALLOW": 0.0023752969121140144,
+    "M-CLASS-FRAC-MOVING_ALIAS-SHALLOW": 0.6508313539192399,
+    "M-CLASS-FRAC-OTHER-SHALLOW": 0.34679334916864607,
+    "M-CHANGE-BY-CLASS-VERSION_PINNED-DEEP": 0,
+    "M-CHANGE-BY-CLASS-MOVING_ALIAS-DEEP": 0,
+    "M-CHANGE-BY-CLASS-OTHER-DEEP": 0,
+    "M-CHANGE-BY-CLASS-VERSION_PINNED-SHALLOW": 0,
+    "M-CHANGE-BY-CLASS-MOVING_ALIAS-SHALLOW": 0,
+    "M-CHANGE-BY-CLASS-OTHER-SHALLOW": 0,
+    "M-CONCENTRATION-P-ONE-SIDED": 1.0,
+    "M-CONCENTRATION-DETECTED": false,
+    "M-CONCENTRATION-MDC-RATE": 0.011661807580174927,
+    "M-LIVE-POS-CHANGED": 3,
+    "M-LIVE-POS-OK": 3,
+    "M-LIVE-NULL-CHANGED": 0,
+    "M-LIVE-NULL-OK": 2,
+    "M-SELFPAIR-CHANGED": 0,
+    "M-SELFPAIR-BYTE-CHANGED": 0,
+    "M-SELFPAIR-N": 10,
+    "M-SELFPAIR-MAX-GAP-S": 0.006,
+    "M-OFFLINE-CONTROLS-PASS": "35/35",
+    "M-N-TRUNCATED": 0,
+    "M-SEED-ERRORS": {},
+    "M-DEEP-CAPPED-HOSTS": 3,
+    "M-SHALLOW-CAPPED-HOSTS": 2,
+    "M-GETS-CONTROLS-OFFLINE": 8,
+    "M-GETS-OBS0": 1123,
+    "M-GETS-OBS1": 1137,
+    "M-GETS-TOTAL": 2268,
+    "M-WALL-S": 463.32,
+    "M-PARTIAL": false,
+    "M-SEPARATION-REQUESTED-S": 360.0,
+    "M-RETRO-N-ALL": 292,
+    "M-RETRO-N-DEEP": 31,
+    "M-RETRO-N-SHALLOW": 261,
+    "M-RETRO-CHANGE-BYTE-ALL": 0,
+    "M-RETRO-UB95-ALL": 0.010206909410248878,
+    "M-RETRO-UB95-DEEP": 0.09211405994732375,
+    "M-RETRO-UB95-SHALLOW": 0.0114122816198034,
+    "M-RETRO-CERT-LEVEL-ALL": 0.02,
+    "M-RETRO-CERT-LEVEL-DEEP": null,
+    "M-RETRO-CERT-LEVEL-SHALLOW": 0.02,
+    "M-DECISION-LABEL": "CERTIFY_BOTH_AT_0P01",
+    "code_identity_stripped_sha256": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+    "match_with_result_json": "all recomputed values equal result.json metrics exactly; decision label, tags=[] and status mapping recomputed identically from the frozen decide() rule"
+  },
+  "claim_ceiling": "Maximum justified claim ceiling: a session-scale per-page invalidation upper bound for a DECLARED page class, at the MEASURED separation only. Concretely: for credential-free GET-only server-rendered documentation pages on four hosts (doc.rust-lang.org, docs.pytest.org, docs.readthedocs.io, pandas.pydata.org) reached by same-host <a> navigation, from one egress vantage, on the frozen structural-text channel, the exact one-sided 95% Clopper-Pearson upper bound on per-page invalidation hazard over a median 407.97 s (min 377.06 s, max 439.83 s) window is 0.004357 deep (n=686) and 0.007090 shallow (n=421), so both strata certify the coarsest grid level 0.01 (CERTIFY_BOTH_AT_0P01, no narrowing tags). The byte channel bounds the primary channel's attribute blindness at 0.011264 deep / 0.021609 shallow (shallow exceeds 0.01, so the certification is text-channel only). Deep-stratum concentration is not detected and is bounded at M-CONCENTRATION-MDC-RATE=0.011662 (~1.17%), which is a bound, not an absence of concentration. The days-to-weeks band is undecided (B-RETRO-LONG-DT executed but not admitted; AUD-V2). C-WEB-DYNAMICS stays HYPOTHESIS per spec.json#claim_ceiling_rules CC-A..CC-D; no EXPERIMENTAL or PRODUCT_CORE promotion, no shipped freshness mechanism, no tolerance choice (1%/2%/5% is a Product decision), and no extrapolation to JavaScript-rendered content, authenticated pages, other vantages, or longer reuse lags. The producer's claimed ceiling does not exceed this and the auditor does not narrow it further.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-39039638199/request.json",
+    "research/experiments/EXP-FRONTIER-39039638199/spec.json",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#10",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#11",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#13",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#17",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md#20",
+    "research/experiments/EXP-FRONTIER-39039638199/freeze.json",
+    "research/experiments/EXP-FRONTIER-39039638199/design_review.json",
+    "research/experiments/EXP-FRONTIER-39039638199/result.json",
+    "research/experiments/EXP-FRONTIER-39039638199/report.md",
+    "research/experiments/EXP-FRONTIER-39039638199/provenance.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/obs1.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/selfpair.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/retro.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/derived/metrics.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/derived/decision.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/derived/code_identity.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+    "codex/claim_state.json",
+    "research/claims/registry.json",
+    "research/lanes/registry.json",
+    "research/experiments/EXP-FRONTIER-38940047535/handoff.json",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json",
+    "research/experiments/EXP-FRONTIER-38940047535/audit.json",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "/tmp/opencode/exp390_run2.log",
+    "/tmp/opencode/exp390_rederive.py"
+  ],
+  "unresolved": [
+    "Days-to-weeks band undecided: the B-RETRO-LONG-DT channel is structurally unusable until the two frozen defects are repaired at DESIGN (fractional-second-tolerant parent_window() parse; POSIX-epoch dt_h) and the packet re-frozen and re-run. Smallest unblocking action per the producer: a DESIGN-stage correction plus re-run (~292 GETs). The observational content (0/292 byte changes over ~14.5 h) must not be cited as a bound until admission is possible (CC-E).",
+    "Product tolerance choice (1% / 2% / 5%) is a Product decision; the packet certifies only what the data support (prereg.md#20).",
+    "Guard architecture (hop-depth-stratified guard vs one global TTL) depends on how often hop>=3 state is actually reused, which this packet does not measure (prereg.md#20).",
+    "Cause of the 359 ETag/Last-Modified moves with unchanged canonical text is not identified; they are a covariate only and must not be reused as staleness evidence.",
+    "JavaScript-rendered content, authenticated pages and additional egress vantages remain unmeasured (prereg.md#17 items 1, 2, 9).",
+    "Packet-hygiene corrections (non-decisional, no impact on label or ceiling): fix design_review.json MDC arithmetic (k=7 -> k=8), spec.json retro hop split (253 -> 261), and report.md 'H2 falsified' wording to match the frozen spec.json H2 definition. These do not require re-execution.",
+    "Whether a hop-depth-scoped zero-GET guard exemption should be recorded as a bounded negative for the guard question on this page class (consumed by C-FRESHNESS owners graph/runtime/product) is a DIRECTOR/Product decision, not something this packet settles beyond the certified bounds."
+  ]
+}

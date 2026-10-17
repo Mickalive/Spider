@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "model": "opencode/longcat-2.5-preview-free",
+  "attempt": 4,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "39039638199",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-17T16:01:01.484729+00:00"
+}
