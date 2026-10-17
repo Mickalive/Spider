@@ -1,0 +1,20 @@
+{
+  "stage": "all",
+  "code_sha256_stripped": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+  "smoke": false,
+  "started_utc": "2026-10-17T15:10:35.398909+00:00",
+  "wall_budget_s": 900.0,
+  "gets_after_offline_controls": 8,
+  "offline_controls": {
+    "n": 35,
+    "passed": 35
+  },
+  "obs0": {
+    "gets_ledger": 1131,
+    "n_fetched": 1119,
+    "n_admitted": 1107,
+    "wall_s": 36.59
+  },
+  "separation_requested_s": 360.0,
+  "obs1_targets": 1107
+}

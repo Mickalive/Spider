@@ -1,0 +1,10 @@
+{"byte_changed": false, "gap_s": 0.0, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://doc.rust-lang.org/stable/book/"}
+{"byte_changed": false, "gap_s": 0.006, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://doc.rust-lang.org/stable/std/convert/trait.From.html"}
+{"byte_changed": false, "gap_s": 0.002, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://doc.rust-lang.org/stable/std/range/struct.Range.html"}
+{"byte_changed": false, "gap_s": 0.001, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://docs.pytest.org/en/stable/_modules/_pytest/freeze_support.html"}
+{"byte_changed": false, "gap_s": 0.0, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://docs.pytest.org/en/stable/announce/release-3.0.6.html"}
+{"byte_changed": false, "gap_s": 0.0, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://docs.pytest.org/en/stable/announce/release-7.4.1.html"}
+{"byte_changed": false, "gap_s": 0.0, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://docs.readthedocs.com/platform/stable/automated-access.html"}
+{"byte_changed": false, "gap_s": 0.003, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spreadsheets.html"}
+{"byte_changed": false, "gap_s": 0.001, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://pandas.pydata.org/docs/whatsnew/v2.3.3.html"}
+{"byte_changed": false, "gap_s": 0.001, "status_a": 200, "status_b": 200, "text_changed": false, "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html"}

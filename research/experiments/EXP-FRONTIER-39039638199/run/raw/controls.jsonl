@@ -1,0 +1,35 @@
+{"control": "C-CANON-IDEMPOTENT", "expected": "canon(canon(x))==canon(x)", "observed": "static text_sha stable=True", "pass": true}
+{"control": "C-DETECT-TEXT-INJECTION", "expected": "visible-text change -> TEXT differs", "observed": "text_changed=True byte_changed=True", "pass": true}
+{"control": "C-DETECT-ATTR-ONLY", "expected": "attribute-only change -> TEXT same, BYTE differs", "observed": "text_same=True byte_diff=True", "pass": true}
+{"control": "C-DETECT-SCRIPT-ONLY", "expected": "script-nonce change -> TEXT same, BYTE differs", "observed": "text_same=True byte_diff=True", "pass": true}
+{"control": "C-CENSOR-404-DETECTED", "expected": "404 at obs1 -> censored channel, not a text event", "observed": "obs0=200 obs1=404", "pass": true}
+{"control": "C-LIVE-DETECTOR-ON-FIXTURE", "expected": "two identical fixture GETs -> no change", "observed": "text_same=True", "pass": true}
+{"control": "C-CP-BOUND-N60", "expected": "exact one-sided 95% UB at k=0,n=60", "observed": "ub=0.048703 expected=0.048703", "pass": true}
+{"control": "C-CP-BOUND-N150", "expected": "exact one-sided 95% UB at k=0,n=150", "observed": "ub=0.019773 expected=0.019773", "pass": true}
+{"control": "C-CP-BOUND-N299", "expected": "exact one-sided 95% UB at k=0,n=299", "observed": "ub=0.009969 expected=0.009969", "pass": true}
+{"control": "C-CP-BOUND-K1N400", "expected": "exact one-sided 95% UB at k=1,n=400", "observed": "ub=0.011804 expected=0.011804", "pass": true}
+{"control": "C-CERT-LEVEL-LADDER", "expected": "cert_level(0,299)=0.01, (0,150)=0.02, (0,60)=0.05, (1,400)=0.02", "observed": "levels=[0.01, 0.02, 0.05, 0.02]", "pass": true}
+{"control": "C-CONTRAST-POWER", "expected": "contrast_p(6,380,0,420)<=0.05 and contrast_p(5,380,0,420)>0.05", "observed": "p6=0.04235 p5=0.07185 mdc=0.015789473684210527", "pass": true}
+{"control": "C-DECIDE-CERTIFY-BOTH", "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01", "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01", "pass": true}
+{"control": "C-DECIDE-GUARD-BOTH", "expected": "reachable decision branch: CERTIFY_SHALLOW_GUARD_DEEP", "observed": "status=COMPLETE certified_deep=None certified_shallow=0.05", "pass": true}
+{"control": "C-DECIDE-GUARD-DEEP", "expected": "reachable decision branch: CERTIFY_SHALLOW_GUARD_DEEP", "observed": "status=COMPLETE certified_deep=None certified_shallow=0.01", "pass": true}
+{"control": "C-DECIDE-GUARD-SHALLOW", "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P05", "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.05", "pass": true}
+{"control": "C-DECIDE-INSUFFICIENT-N", "expected": "reachable decision branch: REFUSE_CERTIFY_INSUFFICIENT_N", "observed": "status=COMPLETE certified_deep=None certified_shallow=None", "pass": true}
+{"control": "C-DECIDE-CENSORED", "expected": "reachable decision branch: REFUSE_CERTIFY_CENSORED_DEEP", "observed": "status=COMPLETE certified_deep=None certified_shallow=None", "pass": true}
+{"control": "C-DECIDE-CONTROL-FAIL", "expected": "reachable decision branch: NO_DATA_CONTROL_OR_FRAME_FAIL", "observed": "status=MEASUREMENT_INVALID certified_deep=None certified_shallow=None", "pass": true}
+{"control": "C-DECIDE-NOT-IDENTIFIABLE", "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE", "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01", "pass": true}
+{"control": "C-DECIDE-HOST-CONCENTRATED", "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__HOST_CONCENTRATED", "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01", "pass": true}
+{"control": "C-DECIDE-VERSION-PINNED", "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__BOUNDED_TO_VERSION_PINNED", "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01", "pass": true}
+{"control": "C-DECIDE-BRANCHES-DISTINCT", "expected": ">=9 distinct decision labels", "observed": "labels=['CERTIFY_BOTH_AT_0P01', 'CERTIFY_BOTH_AT_0P01__BOUNDED_TO_VERSION_PINNED', 'CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE', 'CERTIFY_BOTH_AT_0P01__HOST_CONCENTRATED', 'CERTIFY_BOTH_AT_0P05', 'CERTIFY_SHALLOW_GUARD_DEEP', 'NO_DATA_CONTROL_OR_FRAME_FAIL', 'REFUSE_CERTIFY_CENSORED_DEEP', 'REFUSE_CERTIFY_INSUFFICIENT_N']", "pass": true}
+{"control": "C-SUMMARY-ZERO-EVENTS", "expected": "CERTIFY_BOTH_AT_0P01, no tags, n=380/420, 3 hosts span both strata", "observed": "CERTIFY_BOTH_AT_0P01 deep=0.01 shallow=0.01 tags=[] ub_deep=0.007853", "pass": true}
+{"control": "C-SUMMARY-DEEP-EVENTS", "expected": "CERTIFY_BOTH_AT_0P05 with concentration detected (p=0.01468)", "observed": "CERTIFY_BOTH_AT_0P05 p=0.01468 detected=True deep_level=0.05", "pass": true}
+{"control": "C-SUMMARY-CENSOR-AND-DEAD", "expected": "page-gone separated from change: 25 dead -> UB 0.082146; censoring 9.5% tolerated", "observed": "dead_deep=25 ub=0.082146 cens_frac=0.0952 label=CERTIFY_BOTH_AT_0P01", "pass": true}
+{"control": "C-SUMMARY-CENSOR-REFUSAL", "expected": "REFUSE_CERTIFY_CENSORED_DEEP (stratum-specific) above CENSOR_MAX", "observed": "REFUSE_CERTIFY_CENSORED_DEEP cens_frac=0.345", "pass": true}
+{"control": "C-SUMMARY-INSUFFICIENT-N", "expected": "REFUSE_CERTIFY_INSUFFICIENT_N", "observed": "REFUSE_CERTIFY_INSUFFICIENT_N", "pass": true}
+{"control": "C-SUMMARY-GUARD-BOTH", "expected": "GUARD_REQUIRED_BOTH_STRATA (UB>0.05 in both strata)", "observed": "GUARD_REQUIRED_BOTH_STRATA ub_deep=0.07556 ub_shallow=0.06845", "pass": true}
+{"control": "C-SUMMARY-GUARD-DEEP-ONLY", "expected": "CERTIFY_SHALLOW_GUARD_DEEP", "observed": "CERTIFY_SHALLOW_GUARD_DEEP deep=None shallow=0.01", "pass": true}
+{"control": "C-SUMMARY-GUARD-SHALLOW-ONLY", "expected": "CERTIFY_DEEP_GUARD_SHALLOW", "observed": "CERTIFY_DEEP_GUARD_SHALLOW deep=0.01 shallow=None", "pass": true}
+{"control": "C-SUMMARY-SHORT-SEPARATION", "expected": "NO_DATA_CONTROL_OR_FRAME_FAIL when requested separation<DT_MIN_S", "observed": "NO_DATA_CONTROL_OR_FRAME_FAIL dt_median=None control_ok=True frame_ok=False", "pass": true}
+{"control": "C-SUMMARY-ELIGIBLE-DT-FLOOR", "expected": "pairs below DT_MIN_S excluded, not analysed at too short a lag", "observed": "eligible=0 excluded=800 label=NO_DATA_CONTROL_OR_FRAME_FAIL", "pass": true}
+{"control": "C-SUMMARY-DEPTH-NOT-IDENTIFIABLE", "expected": "DEPTH_NOT_IDENTIFIABLE tag when <MIN_HOSTS_BOTH hosts span both strata", "observed": "CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE_HOST_CONCENTRATED hosts_both=1", "pass": true}
+{"control": "C-SUMMARY-MDC-REPORTED", "expected": "M-CONCENTRATION-MDC-RATE reported even with zero events (0.0158)", "observed": "mdc=0.01579 p=1.0", "pass": true}

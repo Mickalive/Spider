@@ -1,0 +1,41 @@
+{
+  "label": "CERTIFY_BOTH_AT_0P01",
+  "primary_metrics_identical": false,
+  "retro_metrics": {
+    "M-RETRO-CERT-LEVEL-ALL": 0.02,
+    "M-RETRO-CERT-LEVEL-DEEP": null,
+    "M-RETRO-CERT-LEVEL-SHALLOW": 0.02,
+    "M-RETRO-CHANGE-BYTE-ALL": 0,
+    "M-RETRO-CHANGE-BYTE-DEEP": 0,
+    "M-RETRO-CHANGE-BYTE-SHALLOW": 0,
+    "M-RETRO-INFO": {
+      "admitted": false,
+      "dt_h_max": -497831.606,
+      "dt_h_median": -497831.608,
+      "dt_h_min": -497831.61,
+      "max_per_host_change_rate": 0.0,
+      "max_window_d": 30.0,
+      "min_window_h": 6.0,
+      "n_byte_changed": 0,
+      "n_comparable": 292,
+      "negotiation_suspected": false,
+      "not_admitted_reason": "measured window -497831.608 h outside [6.0 h, 30.0 d]",
+      "parent_window_end_utc": "2026-10-17T00:46:04.288000+00:00",
+      "parent_window_s": 32.104000091552734,
+      "parent_window_start_utc": "2026-10-17T00:45:32.184000+00:00",
+      "parse_note": "fractional-second-tolerant read of the frozen parent provenance timestamps; the frozen strict pattern '%Y-%m-%dT%H:%M:%SZ' cannot read '2026-10-17T00:45:32.184Z'"
+    },
+    "M-RETRO-N-ALL": 292,
+    "M-RETRO-N-DEEP": 31,
+    "M-RETRO-N-SHALLOW": 261,
+    "M-RETRO-UB95-ALL": 0.010206909410248878,
+    "M-RETRO-UB95-DEEP": 0.09211405994732375,
+    "M-RETRO-UB95-SHALLOW": 0.0114122816198034
+  },
+  "status": "COMPLETE",
+  "validity": {
+    "control_ok": true,
+    "frame_ok": true,
+    "retro_admitted": false
+  }
+}

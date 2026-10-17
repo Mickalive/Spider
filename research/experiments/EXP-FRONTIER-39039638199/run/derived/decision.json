@@ -1,0 +1,8 @@
+{
+  "certified_deep": 0.01,
+  "certified_shallow": 0.01,
+  "label": "CERTIFY_BOTH_AT_0P01",
+  "reason": "both strata certify zero-GET tolerance at the measured separation; coarsest certified level 0.01",
+  "status": "COMPLETE",
+  "tags": []
+}

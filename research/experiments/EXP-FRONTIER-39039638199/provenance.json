@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "github_run_id": "39039638199",
+  "github_run_attempt": "1",
+  "pre_execute_sha": "acdb61b2cd447ac1134436174d49d5640e6cfbdd",
+  "observed_head_sha_at_execute": "d523e929af9595ea512773ad3bf20874e19ead9c",
+  "request_base_sha": "deefde289de8b1c540d2a36708d7fe401b60938f",
+  "agent": "opencode/space-bunny-free (SPIDER Research 2.0 frontier EXECUTE)",
+  "model_execute_attempts": {
+    "attempt_1": "opencode/ling-3.1-flash-free exit_code=1 category=transient (model_execute.json, no scientific output)",
+    "attempt_2": "opencode/space-bunny-free (this run)"
+  },
+  "frozen_inputs": {
+    "freeze.json_hashes_verified": {
+      "design_review.json": {
+        "expected": "23b80c9b5b7352a3174fe1a4dc73d9cb5301fdfaa24022f716f4a7a3b09dc8e8",
+        "observed": "23b80c9b5b7352a3174fe1a4dc73d9cb5301fdfaa24022f716f4a7a3b09dc8e8",
+        "match": true
+      },
+      "prereg.md": {
+        "expected": "fe48f00e716751be9dbbc1bf5c6491584811c763ee1abba657cb8ceff1abfd0f",
+        "observed": "fe48f00e716751be9dbbc1bf5c6491584811c763ee1abba657cb8ceff1abfd0f",
+        "match": true
+      },
+      "request.json": {
+        "expected": "77b65405c3e1e795352217d46988bdb218ff343ce7d721bfc34dea7f80cea197",
+        "observed": "77b65405c3e1e795352217d46988bdb218ff343ce7d721bfc34dea7f80cea197",
+        "match": true
+      },
+      "spec.json": {
+        "expected": "11de41657f6c0aa32f8d6cf08684d6ea3cc8e17e91edfdb5fcfdd3842b166541",
+        "observed": "11de41657f6c0aa32f8d6cf08684d6ea3cc8e17e91edfdb5fcfdd3842b166541",
+        "match": true
+      }
+    },
+    "freeze.json_artifact_hashes_verified": {
+      "codex/claim_state.json": {
+        "expected": "07d06135b1ec357f75d3cc9095a2a2edbcdfc8d6edbe98f935fc7067e704796b",
+        "observed": "07d06135b1ec357f75d3cc9095a2a2edbcdfc8d6edbe98f935fc7067e704796b",
+        "match": true
+      },
+      "research/claims/registry.json": {
+        "expected": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+        "observed": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/audit.json": {
+        "expected": "6213195ec56d08200119eac98859e6c045d600420f2ee4e34b32e85353328026",
+        "observed": "6213195ec56d08200119eac98859e6c045d600420f2ee4e34b32e85353328026",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/execute_module.py": {
+        "expected": "6b6a1f39236328c8c3f4acabde3740ebde6388e76e35235e733285f69413ea40",
+        "observed": "6b6a1f39236328c8c3f4acabde3740ebde6388e76e35235e733285f69413ea40",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/freeze.json": {
+        "expected": "4b3442afa15fa51d5e921f56b20bee2764abcf60988e23610205ac715b4d6c46",
+        "observed": "4b3442afa15fa51d5e921f56b20bee2764abcf60988e23610205ac715b4d6c46",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/handoff.json": {
+        "expected": "6ad3d1291db49d05ecafd88ae58c4ce0d27f633f9d3dc01a62f741dfd5dd555e",
+        "observed": "6ad3d1291db49d05ecafd88ae58c4ce0d27f633f9d3dc01a62f741dfd5dd555e",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/provenance.json": {
+        "expected": "5dd8fe3b6caae73663b9d1e5a32eaf69184862e93efb23f2cd19e642a852a2ff",
+        "observed": "5dd8fe3b6caae73663b9d1e5a32eaf69184862e93efb23f2cd19e642a852a2ff",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/result.json": {
+        "expected": "accd6d7a7495567f5c6985e19925b0255338ee1b3386dd8a58c2ffc916c58ee6",
+        "observed": "accd6d7a7495567f5c6985e19925b0255338ee1b3386dd8a58c2ffc916c58ee6",
+        "match": true
+      },
+      "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl": {
+        "expected": "37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7",
+        "observed": "37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7",
+        "match": true
+      },
+      "research/lanes/registry.json": {
+        "expected": "9ec60d738de5537cd79d9b1684f02dd549062493dea90cef13f2945549e31f73",
+        "observed": "9ec60d738de5537cd79d9b1684f02dd549062493dea90cef13f2945549e31f73",
+        "match": true
+      }
+    },
+    "note": "every hash above re-verified OK before and after execution; no frozen file was modified"
+  },
+  "executed_module": {
+    "path": "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+    "sha256_stripped": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+    "derivation_sha256_prereg_md_10": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+    "identity_match": true,
+    "extraction": "byte-exact block between the FROZEN_CODE_BEGIN and FROZEN_CODE_END marker lines of prereg.md#10, .strip()ed",
+    "modified_by_execute": false
+  },
+  "commands": [
+    {
+      "cmd": "python3 research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py --stage all --out research/experiments/EXP-FRONTIER-39039638199/run",
+      "role": "frozen PRIMARY transaction (offline controls, obs0 census, 360 s separation, obs1, self-pairs, control probes)",
+      "started_utc": "2026-10-17T15:10:35.398909Z",
+      "died_utc": "2026-10-17T15:18:18.715476Z",
+      "wall_s": 463.32,
+      "exit": "ValueError in parent_window() after all primary RAW evidence was written"
+    },
+    {
+      "cmd": "python3 /tmp/opencode/exp390_rederive.py",
+      "role": "non-frozen re-derivation: imports the unmodified frozen module, re-verifies its self-hash, replays its own summarize()/decide() over its own RAW rows, then executes the secondary B-RETRO-LONG-DT channel with a fractional-second-tolerant read of the frozen parent timestamps",
+      "note": "the driver lives outside the repository in /tmp/opencode and changes nothing inside the packet; every deviation is itemised in run/derived/metrics.json#reconstruction_notes and result.json#validity_notes"
+    },
+    {
+      "cmd": "(aborted first launch, same frozen command, 2026-10-17T15:08:30Z)",
+      "role": "completed its obs0 census then was killed during the separation by the orchestration shell timeout (not an experiment failure); its raw rows were overwritten by the recorded 15:10:35Z transaction"
+    }
+  ],
+  "environment": {
+    "python": "3.12.15",
+    "platform": "linux",
+    "runner": "GitHub Actions ubuntu-latest x64",
+    "network": "outbound HTTPS egress used for a credential-free GET-only crawl of four documentation hosts plus five control URLs",
+    "user_agent": "spider-r2/1.0",
+    "concurrency": "WORKERS=6, PER_HOST_CONCURRENCY=2, PER_HOST_SPACING_S=0.10",
+    "browser": "none",
+    "javascript_engine": "none",
+    "model_endpoint": "none",
+    "credentials": "none",
+    "pip_install": "none",
+    "money_cost": "zero (free-model lane)"
+  },
+  "substrate": {
+    "seeds": [
+      "doc.rust-lang.org https://doc.rust-lang.org/stable/book/",
+      "docs.pytest.org https://docs.pytest.org/en/stable/",
+      "docs.readthedocs.io https://docs.readthedocs.io/en/stable/",
+      "pandas.pydata.org https://pandas.pydata.org/docs/"
+    ],
+    "positive_control_urls": [
+      "https://www.cloudflare.com/cdn-cgi/trace",
+      "https://api.github.com/rate_limit",
+      "https://timeapi.io/api/Time/current/zone?timeZone=UTC"
+    ],
+    "null_control_urls": [
+      "https://example.com/",
+      "https://www.iana.org/domains/reserved"
+    ],
+    "parent_retrospective_reference": "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl (292 rows with status=200 and a sha256)"
+  },
+  "measurements": {
+    "total_gets_reconstructed": 2268,
+    "get_ceiling_total": 3200,
+    "observation_0_gets": 1123,
+    "observation_1_gets": 1137,
+    "offline_fixture_gets": 8,
+    "retro_gets_secondary": 292,
+    "bytes_observation_0_mb": 100.9,
+    "body_truncations": 0,
+    "observation_0_wall_s": 36.59,
+    "requested_separation_s": 360.0,
+    "measured_dt_median_s": 407.97,
+    "measured_dt_max_s": 439.83,
+    "module_wall_budget_s": 900.0,
+    "module_wall_s": 463.32
+  },
+  "inputs_consumed": {
+    "frozen_artifacts": [
+      "codex/claim_state.json",
+      "research/claims/registry.json",
+      "research/experiments/EXP-FRONTIER-38940047535/audit.json",
+      "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+      "research/experiments/EXP-FRONTIER-38940047535/freeze.json",
+      "research/experiments/EXP-FRONTIER-38940047535/handoff.json",
+      "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+      "research/experiments/EXP-FRONTIER-38940047535/result.json",
+      "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+      "research/lanes/registry.json"
+    ],
+    "fixture_server": "in-process http.server.ThreadingHTTPServer on 127.0.0.1 for the 8 offline fixture GETs"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+      "sha256": "45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/obs1.jsonl",
+      "sha256": "1343bf8c17c1e862c97e68257aa01f35ef66eb94e25e792dfb72509d221e7698",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/selfpair.jsonl",
+      "sha256": "23962e3f5fb7134d7d5ec17f89f08357d5bedec684c91905c021fa703942d41b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+      "sha256": "85f91e4f8ee5095090760d138c5ae55322bea160a6852b3483ac5b4c7bff658d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl",
+      "sha256": "4c1c81ff7cc0d13088816acc78f8bcee2f56183585b47a5249288c8853603509",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+      "sha256": "960d953197480f4e5979a865ceafa6f713fcb00373ef880d10bc4ac5e0b4f1ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/retro.jsonl",
+      "sha256": "69e8d51851e1aed5642a7c3fe15008051d2d1e9862eb725471f751e1a866113d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/metrics.json",
+      "sha256": "234974c7a8f76e649883bc4380badca75925d8011a80819275d65c567a100c72",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/decision.json",
+      "sha256": "d8aecb4fc602dc05d8d3ef90c6743d60e5165860a28c985c41b4a8775de31b73",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json",
+      "sha256": "1c4035dd64bac1f3d49aa907bc3dd1f8490fc8128e9af7833af7d51bf949ed5f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/code_identity.json",
+      "sha256": "227ae5f00e86974382287ce1b264e23b64d4b6110f33393c71a73a853db375f0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+      "sha256": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/provenance.json",
+      "sha256": null,
+      "role": "derived",
+      "note": "self-referential; hash recorded in result.json#artifacts is omitted here"
+    }
+  ],
+  "reproduction_notes": [
+    "Re-derivation without network: import run/execute_module.py, read run/raw/*.jsonl, reconstruct the per-host sweep bookkeeping and the GET ledger, and call M.summarize()/M.decide() - see run/derived/metrics.json#reconstruction_notes.",
+    "A full fresh transaction requires ~2540 live GETs and ~460 s of wall clock plus a 360 s in-process separation.",
+    "Two frozen-module defects must be repaired before B-RETRO-LONG-DT can ever be admitted: parent_window() strptime pattern and the monotonic-vs-epoch dt_h computation in the retro gate."
+  ],
+  "claim_state_read_only": {
+    "C-WEB-DYNAMICS_effective_status": "HYPOTHESIS (codex/claim_state.json effective_event_by_claim, source EXP-PHYSICS-38074818597)",
+    "C-CROSSSITE_effective_status": "HYPOTHESIS (effective_event_by_claim, latest EXP-FRONTIER-38940047535 MEASUREMENT_INVALID)",
+    "note": "codex/index.json, codex/claim_state.json and codex/experiments were read only; the producer did not edit any Codex file."
+  },
+  "git": "no commit, push, branch switch or reset was performed; the only working-tree change is this experiment directory (plus a pre-existing codex/index.json modification present before this run)"
+}
