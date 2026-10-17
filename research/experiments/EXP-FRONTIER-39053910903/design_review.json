@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-39053910903",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "Independently re-executed the frozen reference decision source (prereg.md#12; recomputed block sha256 89cafdcd4ed181682367d58a9e466ab34b5779a8babc515bdef4c4b9b06c7817, MATCH) against all 22 C-DECIDE-LONG-* canary metric states: 22/22 produced the exact expected label/status/outcome, 20 distinct labels, matching the frozen table. Independently recomputed the Clopper-Pearson arithmetic with a separate implementation and cross-checked the hash-pinned parent cert_level: UB95(0,686)=0.004357435376452668, UB95(0,421)=0.007090496587222661, first k with UB95>0.05 is 25 deep / 14 shallow, min-n for k=0 certification is 299/149/59 at 0.01/0.02/0.05, and deep k<=2 / shallow k=0 certify 0.01 while k=3..7 deep and k=1..3 shallow drop to 0.02 - every stated threshold is arithmetically attainable. The support branch (CERTIFY_LONG_BOTH_AT_0P01/0P02/0P05) and the falsifying/decision-changing branches (GUARD_REQUIRED_LONG_* at 25/686 or 14/421 events; REFUSE_LONG_CENSORED_*; REFUSE_LONG_WINDOW_ABOVE_BAND after 2026-11-16T15:11:11.988909Z; NO_DATA_*) are all reachable at realistic frame states. Growth-contrast exact p-values re-verified (a=5,b=0 -> 0.03125; a=4,b=0 -> 0.0625; a=6,b=1 -> 0.0625). Precedence is clean: validity -> power -> window -> censoring -> certification -> tags, with no branch making a later decision branch unreachable; REFUSE_LONG_WINDOW_BELOW_BAND is provably unreachable in this transaction (epoch monotone, W now ~8.0 h), which is disclosed, retained as defensive totality and exercised by its canary.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#12",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#12.1",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#11.1",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#decision_rule",
+        "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py (sha256 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, re-verified)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite was verified on the real substrate by this review, not accepted on assertion. Frozen population file exists and its sha256 re-computes to 45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff, matching the Director mandate; its structure re-parses as 1119 rows / 1107 admitted / 12 excluded, deep 686 / shallow 421, hop histogram {0:4,1:138,2:279,3:543,4:143}, classes 713/371/23, all four documentation hosts spanning both strata. The hash-pinned parent instrument module exists, its sha256 re-computes to 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, it imports cleanly under the runner's Python 3.12.15, and its inherited offline suite passes 35/35 on this runner (23 offline_controls + 12 summary_control, all pass=true). The frozen repaired parser reproduces all four real anchor epochs (1792249835.398909 / 1792249835.398909 / 1792197932.184 / 1792197964.288) and refuses every garbage input tested with ValueError, never None; the four-artifact anchor-consistency check holds (start-anchor delta 0.000000000 s; frozen_at 1452.0 s before start; died_utc after obs0 end). Network egress was independently probed at review time with single non-pair GETs: example.com 200, https://www.cloudflare.com/cdn-cgi/trace 200, docs.pytest.org 200. Window admission is live now: W against the frozen obs0 anchor is ~8.0 h, inside [6 h, 720 h], and the named 30 d deadline 2026-11-16T15:11:11.988909Z is in the future. Budget fits the envelope: ~2234 live GETs <= 3200; projected ~490 s module wall <= 900 <= harness SPIDER_MODEL_MAX_RUNTIME_SECONDS=1200. No credential, LLM, browser, JS engine, Docker or pip install is required. The only object created during EXECUTE is this packet's own orchestration module; its instrument core (canon/text_sha/fetch/cp_ub95/cert_level) is byte-frozen by the parent-module import and its decision rule is behaviourally frozen by the hash-pinned reference source and canary table inside the byte-frozen prereg.md, with mandatory AUDIT re-runs - a disclosed workflow limitation (DESIGN restricted to spec+prereg), not an unavailable measurement substrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#15",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#18",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#freeze_artifacts",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#measurement_validity#V1-V5",
+        "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl (sha256 re-verified 45e426fd...)",
+        "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py (sha256 re-verified 5d2509f6...; 35/35 offline controls re-run)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The primary comparator B-SHORT-WINDOW-MATCHED is the identical 1107 URLs, identical imported instrument, identical vantage and identical sweep policy, differing only in separation (360 s in-launch vs ~8 h across launches), so no window difference can be attributed to page set, instrument, transport, host mix or sweep order. The arms can genuinely differ: the parent's own accepted rows already moved 7 pages bytewise (attribute/script-only) in 7 minutes, and the frame's most active host contributes 168 pages over a window 60x longer. No ceiling: version-pinned share is 0.032 deep / 0.002 shallow against the 0.80 warn, max host concentration 0.321/0.333 against 0.60, all four hosts have >=25 pages in both strata, and the hop histogram reaches level 4 - a zero at the long window would be measured, not true by construction. No floor: the frozen detector is proven to fire on injected visible-text change (inherited C-DETECT-TEXT-INJECTION, re-passed here) and the live positive-control family is reachable and previously fired 3/3 under the same detector. No comparator's cost or estimand dimension is omitted: the byte channel (the channel that exceeded 0.01 even in the parent) is reported beside every text bound, transport is an explicitly non-gating covariate with a documented reason, and the 292-page legacy ladder is declared SECONDARY, zero-GET, subset-nested and barred from strengthening the primary bound. The one declared asymmetry (edge/CDN warming can only suppress the short channel, never inflate the long window) biases against the contrast's positive branch and is disclosed in B-SHORT-WINDOW-MATCHED and V13.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#measurement_validity#V12",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#measurement_validity#V13",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#9",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#4 (population structure re-parsed at review)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive control can fire and null controls can stay null under the same imported detector that scores the frame. Live reachability was independently probed at review time (cloudflare trace and example.com both HTTP 200, single GETs, no pairs created); the identical URL set fired 3/3 on the primary text channel in the accepted parent run at the same 360 s in-launch separation, and the pass condition (>=1 fired, >=2 OK) is comfortably attainable, not tautological (real third-party volatility) and not impossible. Null families: the deterministic zero-GET reproduction control was independently recomputed from the two frozen censuses and reproduces n=292, byte_changed=0, transport_changed=13 and UB95=0.010206909410248878 at full float equality, with M-LEGACY14H-W-H=14.409 h inside [13,16]; the static-anchor and in-frame self-pair families were silent 2/2 and 10/10 in the parent under the same code and are structurally capable of either firing (a change on example.com is detectable) or remaining null. The inherited 35/35 offline suite, including the text-injection positive and attribute/script-only negatives, was re-run on this runner and passed. The one structural gap - no live positive control can span the ~8 h primary window because no live fetch exists at the obs0 epoch - is inherent to the estimand, explicitly disclosed as V13, carried as reported diagnostics rather than argued away, and correctly priced into claim ceiling CC-A (the bound is about what two credential-free GETs returned, not about origin content). That gap narrows the claim; it does not make the controls non-discriminating.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#positive_control",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#null_control",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#null_control_2",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#null_control_3",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#measurement_validity#V13",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#13",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#15#D7 (reproduced bit-exactly at review)"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "This is a Frontier measurement experiment targeting C-WEB-DYNAMICS, not a Product experiment on C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON, so the mandatory product-treatment rule does not bind; nonetheless the frozen 'treatment' - the checkpointed cross-launch second observation over the frozen population - is demonstrably executable before any expensive arm (there are none). Independently verified at review time: network egress works from this runner (HTTP 200 on example.com, cloudflare trace and docs.pytest.org via single GETs), the hash-pinned population file parses to the declared 1107 admitted pages, and the measured window against the frozen obs0 anchor is ~8.0 h, inside the mandated [6 h, 30 d] band with the 2026-11-16 deadline still ahead. The treatment needs no crawl, no BFS, no store, no LLM and no credential; the parent's starvation/drift failure class is structurally excluded because the population is a frozen hash-pinned manifest with the 12 non-admitted rows permanently excluded. The failed-launch path is live: rows are per-launch and a killed launch recomputes from its own epoch stamps, and if the 30 d ceiling is missed the refusal branch fires and the persisted epoch-stamped OBS1 rows become the successor-rung anchor. The one non-null-executability risk - mass host outage turning the run into REFUSE_LONG_CENSORED_* - is a measurement-valid refusal branch, not structural incapability, and DESIGN's 12/12 stratified liveness sample plus this review's probes show the frame is still fetchable ~8 h after obs0.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#7.2",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#7.3",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#15#D6",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#measurement_validity#V6",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#freeze_eligibility#treatment_liveness"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All 17 paths in spec.freeze_artifacts exist on disk at review time and the three sha-pinned identities re-compute exactly: parent census 45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff (the primary population), parent execute_module.py 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573 (the imported instrument), grandparent census 37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7 (the ladder endpoint), plus parent handoff 92aef32b... and research/claims/registry.json 3511a788... matching request.json. Every mutable local input that can change the interpretation is covered: the frozen population, the epoch anchors (PROGRESS/provenance/freeze of both parent and grandparent), the imported instrument, the inherited comparator rows and control probes, the parent result/audit/handoff for the accepted comparator and defect record, and the three registries fixing claim/lane/epistemic state. The packet's own execute_module.py cannot be a freeze artifact because DESIGN was workflow-restricted to spec.json and prereg.md; that limitation is disclosed in V1 and prereg.md#18 and is compensated by a behavioural freeze (hash-pinned reference decision source inside the byte-frozen prereg.md, 22-entry canary table, mandatory AUDIT re-run of every canary against the module's own decide() and recomputation of every load-bearing metric from raw rows) - remote Web responses are correctly not frozen, and their target identifiers (the 1107 URLs, the 3+2 control URLs) and the sampling protocol are frozen in spec/prereg instead. No unbound local dependency was found that could move the primary bound or the decision label.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#freeze_artifacts",
+        "research/experiments/EXP-FRONTIER-39053910903/spec.json#freeze_eligibility#freeze_artifacts_bound",
+        "research/experiments/EXP-FRONTIER-39053910903/prereg.md#18",
+        "research/experiments/EXP-FRONTIER-39053910903/request.json (parent_handoff sha256 and claim_registry_sha256 re-verified)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Behavioural-freeze residual (declared, accepted): this packet's own execute_module.py is authored at EXECUTE and cannot be byte-hashed at freeze. The instrument core and decision arithmetic are pinned, but the stage orchestration and metric-derivation glue are only behaviourally bound. AUDIT must enforce prereg.md#18 literally: re-run all 22 C-DECIDE-LONG-* canaries against the module's own decide(), re-run C-PARSE-REFUSES-GARBAGE, C-ANCHOR-CONSISTENCY, C-LEGACY-REPRODUCTION at full float equality, the 35 inherited controls, and recompute every load-bearing metric from run/raw/*.jsonl alone; any deviation is a required fix.",
+    "Canary-table default-state ambiguity: prereg.md#12.1 states the default metric states but omits byte_ub_deep/byte_ub_shallow defaults. A re-runner that seeds the defaults with the parent's frozen byte bounds (0.011264/0.021609) instead of None will see spurious BYTE_IDENTITY_NOT_CERTIFIED_* tags appended and will false-fail most of the table (this reviewer hit exactly that on first execution). AUDIT should use byte_ub=None as the implied default, or the table's defaults should be made explicit in a future packet.",
+    "Unbound provenance citation: the reproduction canary's expected constant 0.010206909410248878 is cited as coming from research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json, which is not in freeze_artifacts. Interpretation cannot drift because the constant itself is frozen inside prereg.md and the canary recomputes from two frozen censuses (both bound), but the citation target is unbound; a successor packet should list it or drop the file-level citation.",
+    "codex/legacy_artifact_index.json (blob sha 9bb76113... cited in the legacy disposition) is not in freeze_artifacts. It affects only the LEGACY non-duplication narrative, not any metric or decision branch; the blob sha pinned in spec text is sufficient for that purpose.",
+    "Cosmetic drift: spec.json#question contains the typo 'hash-prozen' (for 'hash-pinned'); prereg.md#10 says spec.metric_ids holds 143 ids while spec.json currently lists 144. Neither affects any threshold, artifact identity or decision branch."
+  ],
+  "rationale": "Independent pre-freeze review (DESIGN producer was opencode/space-bunny-free per model_design.json; this review is a different model) attacked all six satisfiability/identifiability checks with cheap non-outcome-bearing probes only - no confirmatory measurement was run and no two-observation pair for the frozen question was created. Every declared PASS in spec.freeze_eligibility was treated as a claim and re-verified from source: the frozen reference decision source re-hashes to its declared sha256 and reproduces all 22 canary labels (20 distinct); the Clopper-Pearson certification ladder and guard thresholds were recomputed independently and match to the digit; the repaired parser, anchor consistency, population manifest, grandparent subset relation and the deterministic 14.4 h reproduction canary were all re-derived from the hash-pinned artifacts and match bit-for-bit; the parent instrument imports and passes 35/35 offline controls on this runner; network egress and the four-host frame are live now and the measured window (~8.0 h) sits inside the mandated [6 h, 30 d] band with the 30 d deadline ahead; all 17 freeze_artifacts exist and the sha-pinned ones re-compute exactly. Both a support branch and a falsifying/decision-changing branch are arithmetically and operationally reachable; no ceiling or floor pins the arms together; controls are non-tautological and two-directional under the same scoring code; the cross-launch second observation is executable without credentials or an unbuilt substrate. The residual risks are real but disclosed and ceiling-priced rather than hidden: no live positive control spans the primary window (V13/CC-A), the packet's own module is only behaviourally frozen (V1, prereg.md#18, AUDIT-enforced), and the window is bounded by a named deadline with a successor-rung fallback. Nothing in this design is already incapable of answering its frozen question, so freeze may proceed.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-39053910903/request.json",
+    "research/experiments/EXP-FRONTIER-39053910903/spec.json",
+    "research/experiments/EXP-FRONTIER-39053910903/prereg.md",
+    "research/experiments/EXP-FRONTIER-39053910903/model_design.json (DESIGN producer identity, independence check)",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+    "research/experiments/EXP-FRONTIER-39039638199/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "research/lanes/registry.json",
+    "codex/claim_state.json"
+  ]
+}
