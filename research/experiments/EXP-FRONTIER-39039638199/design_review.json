@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "decide() is total and ordered on the frozen inputs and was independently re-executed offline against the exact frozen module (sha256 of stripped FROZEN_CODE block = DERIVED_SHA256 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, matching prereg.md#10). A fresh --stage controls run reproduced 35/35 offline canaries pass, including 10 C-DECIDE-* branch canaries and 11 C-SUMMARY-* pipeline canaries that produce 9 distinct labels. Independent decide() calls at measured frame sizes (n_deep=686, n_shallow=421) reached CERTIFY_BOTH_AT_0P01, CERTIFY_SHALLOW_GUARD_DEEP, CERTIFY_DEEP_GUARD_SHALLOW, GUARD_REQUIRED_BOTH_STRATA, REFUSE_CERTIFY_INSUFFICIENT_N, REFUSE_CERTIFY_CENSORED_DEEP and NO_DATA_CONTROL_OR_FRAME_FAIL. Independent exact Clopper-Pearson arithmetic reproduced the frozen ladder: min n for level 0.05/0.02/0.01 is 59/149/299; at n=686 the first event still certifies 0.01 and k=3 breaks 0.01 while k=25 breaks 0.05; at n=421 the first event already breaks 0.01 and k=14 breaks 0.05. Contrast power at the live frame sizes: first detectable deep count with zero shallow events is k=7 (rate ~1.0%, p=0.069 at k=6 is not detectable) — consistent with the disclosed ~1.6% MDC at the canary sizes and the always-reported M-CONCENTRATION-MDC-RATE. Precedence is fail-closed (validity before frame before censoring before certification); no earlier branch silently swallows a later scientific branch, and the validity branch is explicitly MEASUREMENT_INVALID rather than a negative.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#10",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#11",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#13",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15",
+        "independent-probe: /tmp/opencode/exp390_module.py --stage controls (35/35)",
+        "independent-probe: CP/contrast arithmetic and decide() canaries"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite was available at review time, not deferred to EXECUTE. Network egress: all four frozen seeds returned HTTP 200 in a single-GET liveness canary (doc.rust-lang.org, docs.pytest.org, docs.readthedocs.io, pandas.pydata.org, latencies 145-589 ms). The three frozen positive-control URLs and two frozen null anchors all returned HTTP 200 in the same canary. The parent retrospective inputs exist and are bound: research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl contains 292 rows with status=200 and a sha256 (the exact OBS-RETRO reference set), and provenance.json timeline_utc carries parseable scored_run_started/finished timestamps (module parent_window() splits on space and parses the leading Z-suffix, so the trailing parenthetical on scored_run_finished is safe). The frozen module is stdlib-only, imports cleanly, compiles, and was executed offline end-to-end under review with code identity re-pinned. No pip install, browser, JavaScript engine, Docker, model endpoint or credential is required. Handoff sha256 6ad3d1291db49d05ecafd88ae58c4ce0d27f633f9d3dc01a62f741dfd5dd555e matches request.json#parent_handoff.sha256. C-WEB-DYNAMICS effective status HYPOTHESIS and frontier priority-claim ownership are present in codex/claim_state.json, research/claims/registry.json and research/lanes/registry.json.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#measurement_validity",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#6",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15",
+        "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+        "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+        "independent-probe: single-GET liveness of 4 seeds + 5 control URLs (all HTTP 200)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The primary comparator B-SHALLOW-MATCHED-DT is the other stratum of the same live fetch-complete frame, same instrument, same UA, same measured separation, so treatment-vs-comparator differences cannot be explained by vantage, transport, instrument or time-window drift. The DESIGN full-cap sweep (P8, exact frozen module) established that both strata are large, host-diverse and not ceiling/floor: deep 686 / shallow 421 paired-capable pages, all four hosts contributing >=25 pages to each stratum (M-HOSTS-WITH-BOTH-STRATA expected 4 >= MIN_HOSTS_BOTH=2), max host concentration 0.321 < 0.60, max version-pinned fraction 0.032 << 0.80 (96.8% of deep pages are MOVING_ALIAS), so a deep-stratum zero would be measured rather than true by construction. Floor is also excluded: the offline injection controls prove the primary channel fires on visible-text change, and the positive control is externally volatile content, not a synthetic tautology. The estimand is text-channel change with the byte channel reported beside every text bound (M-HAZARD-BYTE-UB95-*), so the conservative sensitivity comparator cannot be omitted from the cost of blindness. The secondary B-RETRO-LONG-DT channel is real second-observation data (parent census hashes + parent provenance window), declared SECONDARY and structurally unable to change the primary label. Host x depth and URL-class confounds are disclosed and narrowed by V10 tags rather than ignored.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#baselines",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#measurement_validity V10",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15 P8",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#17"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Positive and null controls can both behave correctly under the same hash-pinned module that will score EXECUTE. Offline fixture canaries (freshly re-run under review, 35/35) prove the primary channel fires on injected visible-text change (C-DETECT-TEXT-INJECTION), is blind to attribute-only and script-nonce-only churn while the byte channel sees them (C-DETECT-ATTR-ONLY, C-DETECT-SCRIPT-ONLY), detects a fixture 404 into the censoring channel (C-CENSOR-404-DETECTED), and stays silent on two identical fixture GETs (C-LIVE-DETECTOR-ON-FIXTURE). Live: the positive gate requires >=1 of 3 pre-registered volatile URLs to show a PRIMARY-CHANNEL text change between observations and >=2 of 3 to return 200; the DESIGN selection disclosure (6-URL pool, 3 fired / 2 stable / 1 unreachable within <=5 s) is auditable and non-post-hoc; a single-GET review canary confirmed all three still return HTTP 200. The null family requires M-LIVE-NULL-CHANGED==0 on two frozen static anchors with both 200 at obs1, and M-SELFPAIR-CHANGED==0 across 10 in-frame self-pairs with gap <=5 s — the self-pair family runs inside the measured frame itself and is the stronger detector-noise null for multi-megabyte documentation pages. Any positive-control failure or null/self-pair change is a hard MEASUREMENT_INVALID that forbids a zero-event interpretation (mandate stop trigger), so the controls are neither tautological nor impossible. Residual risk that a 5 s-volatile URL is text-stable at ~360 s is fail-closed, not a path to false certification.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#positive_control",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#null_control",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#9",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15 P4/P7",
+        "independent-probe: offline_controls() 35/35 PASS; control-URL liveness HTTP 200"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "There is no classical treatment arm; the live mechanism is the fetch-complete, stratum-reserved, level-ordered BFS census (the repair of the parent's discover-until-budget starvation), and its liveness is that the deep stratum is actually fetched. That was demonstrated on the bound hosts with the exact frozen module (self-hash matching DERIVED_SHA256) at the frozen full caps before freeze: deep 686 / shallow 421 admitted, hop histogram reaching level 5, all four hosts contributing to both strata with >=25 pages each, 1107 HTTP 200 of 1119 rows, 37.26 s wall, ~24.5 GET/s. The tiny-cap smoke (SHALLOW_CAP=22, DEEP_CAP=6) confirmed the descent rule itself: 4/4 hosts still reached hop 3 with 24/24 HTTP 200 deep pages, i.e. the deep stratum survives shallow-budget exhaustion — the exact parent failure mode (90.3% of discovered deep URLs never fetched, 2 of 4 hosts). Instrument identity is re-pinnable at EXECUTE via V1-CODE-IDENTITY, and a review re-extraction of the FROZEN_CODE block reproduced DERIVED_SHA256 exactly. The mechanism is therefore non-null and executable before any expensive arm; the parent's synthetic-only liveness gap (AUD-DESIGN-SATIFIABILITY-GAP) is structurally closed on the real substrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#repairs_of_parent_defects",
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#freeze_eligibility.treatment_liveness",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#4",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#15 P8/P8b",
+        "independent-probe: sha256(stripped FROZEN_CODE block)==DERIVED_SHA256"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "All ten declared freeze_artifacts exist on disk at review time and cover every mutable local dependency that can change interpretation: the parent execute_module.py (reused transport/norm/link policy), the parent census.jsonl (both design-time deep-topology evidence and the OBS-RETRO observation-0 reference — verified to contain 292 status-200 rows with sha256), the parent provenance.json (retro window timestamps — verified timeline_utc present and parseable), parent result.json/audit.json/handoff.json/freeze.json (defects repaired, continuity state, parent hash chain), and the three mutable registries that fix claim identity, claim status and lane authority (codex/claim_state.json, research/claims/registry.json, research/lanes/registry.json). The executed module is not a separate repository file at freeze time and is instead identity-pinned by DERIVED_SHA256 inside a prereg.md that freeze.json.hashes binds; the review independently re-extracted the FROZEN_CODE block and reproduced the pinned hash. Remote Web responses cannot and are not frozen; their target identifiers (four seed URLs, three positive-control URLs, two null-anchor URLs, the parent-census URL set) and the sampling protocol (crawls policy, caps, separation bounds, GET ceilings, stride self-pair, retro admission gates) are frozen in spec.json/prereg.md as required. No additional mutable local file/code/task-bank/fixture dependency that could flip a decision label was found outside freeze_artifacts.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-39039638199/spec.json#freeze_artifacts",
+        "research/experiments/EXP-FRONTIER-39039638199/prereg.md#19",
+        "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+        "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+        "independent-probe: existence + content canaries on all freeze_artifacts"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "NB-1-RETRO-HOP-COUNT-DOC",
+      "detail": "spec.json#claim_ceiling_rules.CC-E and baselines[1].declared_limits state '253 of 292 reference pages are hop<=2'; an independent recount of parent census.jsonl restricted to status=200 and non-null sha256 gives 261 hop<=2 and 31 hop>=3. The direction of the caveat (retro channel is shallow-biased and readthedocs-heavy) is unchanged; only the exact split is off by 8 pages. Does not affect the primary decision rule.",
+      "severity": "nonblocking"
+    },
+    {
+      "id": "NB-2-RETRO-WINDOW-TIMING",
+      "detail": "B-RETRO-LONG-DT admission requires the measured median window in [6 h, 30 d] from parent scored_run_finished (2026-10-17T00:46:04Z). If EXECUTE were to run before ~06:46Z on 2026-10-17 the secondary channel would be frozen-out by its own gate. Given DESIGN probes completed at 14:25-14:36Z the same day, ordinary freeze-then-execute ordering lands well inside the window; the gate is frozen and disclosed, so this is an operational note, not a design defect.",
+      "severity": "nonblocking"
+    },
+    {
+      "id": "NB-3-POS-CONTROL-WINDOW-EXTRAPOLATION",
+      "detail": "Positive-control candidates were selected on <=5 s double-GET volatility (prereg.md#15 P4), while the EXECUTE gate measures change over ~360 s. All three frozen positives are time/token-bearing endpoints (cdn-cgi/trace ts/fl, rate_limit counters, timeapi current time), so text-channel change at 360 s is structurally expected; if any nevertheless fails to fire, the disposition is hard MEASUREMENT_INVALID / stop-trigger rather than a weakened gate.",
+      "severity": "nonblocking"
+    },
+    {
+      "id": "NB-4-DT-MAX-FAIL-CLOSED",
+      "detail": "frame_ok requires M-DT-MAX-S <= DT_MAX_S=900 over all pairs. A single late observation-1 fetch with dt>900 would void the whole measurement even if the bulk of pairs sit near 360 s. At measured throughput (~24.5 GET/s over ~1107 obs1 targets, ~45 s of spread) the tail is expected near ~405 s, far below the ceiling; the fail-closed behaviour is disclosed in V5 and is preferable to silent inclusion of short/long lags.",
+      "severity": "nonblocking"
+    }
+  ],
+  "rationale": "Independent review attacked every freeze_eligibility PASS claim rather than inheriting it. The frozen EXECUTE module was re-extracted from prereg.md and its stripped sha256 reproduced DERIVED_SHA256 exactly; a fresh offline-controls run passed 35/35 fixture, exact-bound, contrast-power, decision-branch and pipeline canaries; independent Clopper-Pearson and contrast arithmetic matched the frozen ladder and power claims; decide() was re-called at measured frame sizes and reached both the support branch (CERTIFY_BOTH_AT_0P01) and the falsifying/decision-changing branches (GUARD_REQUIRED_BOTH_STRATA, CERTIFY_SHALLOW_GUARD_DEEP, CERTIFY_DEEP_GUARD_SHALLOW) plus both REFUSE_CERTIFY_* and the MEASUREMENT_INVALID gate. Live prerequisites (4 seeds, 3 positive controls, 2 null anchors) all returned HTTP 200 under single-GET canaries; the parent retrospective census and provenance artifacts exist with the required content. Baselines are the matched shallow stratum of the same live frame plus a real parent-census second observation, with no ceiling (version-pinned share 3.2% deep) and no floor (positive control proven to fire). Controls are non-tautological, dual-direction, and fail closed. The census mechanism's liveness was demonstrated on the bound hosts with the exact frozen module (deep 686 / shallow 421, 4/4 hosts in both strata, tiny-cap descent smoke). All ten freeze_artifacts exist and cover every mutable local dependency; remote responses are handled by freezing target identifiers and sampling protocol. Four nonblocking documentation/timing/fail-closed notes are recorded and do not make the design incapable of answering its frozen question. No FAIL among the six checks; status PASS."
+  ,  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-39039638199/request.json",
+    "research/experiments/EXP-FRONTIER-39039638199/spec.json",
+    "research/experiments/EXP-FRONTIER-39039638199/prereg.md",
+    "research/experiments/EXP-FRONTIER-38940047535/handoff.json",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/freeze.json",
+    "codex/claim_state.json",
+    "research/claims/registry.json",
+    "research/lanes/registry.json",
+    "independent-probe: module hash re-extraction + offline controls 35/35 + CP arithmetic + decide() canaries + seed/control liveness + freeze_artifacts existence/content"
+  ]
+}

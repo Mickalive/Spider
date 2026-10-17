@@ -1,0 +1,24 @@
+{
+  "artifact_hashes": {
+    "codex/claim_state.json": "07d06135b1ec357f75d3cc9095a2a2edbcdfc8d6edbe98f935fc7067e704796b",
+    "research/claims/registry.json": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+    "research/experiments/EXP-FRONTIER-38940047535/audit.json": "6213195ec56d08200119eac98859e6c045d600420f2ee4e34b32e85353328026",
+    "research/experiments/EXP-FRONTIER-38940047535/execute_module.py": "6b6a1f39236328c8c3f4acabde3740ebde6388e76e35235e733285f69413ea40",
+    "research/experiments/EXP-FRONTIER-38940047535/freeze.json": "4b3442afa15fa51d5e921f56b20bee2764abcf60988e23610205ac715b4d6c46",
+    "research/experiments/EXP-FRONTIER-38940047535/handoff.json": "6ad3d1291db49d05ecafd88ae58c4ce0d27f633f9d3dc01a62f741dfd5dd555e",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json": "5dd8fe3b6caae73663b9d1e5a32eaf69184862e93efb23f2cd19e642a852a2ff",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json": "accd6d7a7495567f5c6985e19925b0255338ee1b3386dd8a58c2ffc916c58ee6",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl": "37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7",
+    "research/lanes/registry.json": "9ec60d738de5537cd79d9b1684f02dd549062493dea90cef13f2945549e31f73"
+  },
+  "design_contract_version": 2,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "frozen_at": "2026-10-17T14:46:23.389566+00:00",
+  "hashes": {
+    "design_review.json": "23b80c9b5b7352a3174fe1a4dc73d9cb5301fdfaa24022f716f4a7a3b09dc8e8",
+    "prereg.md": "fe48f00e716751be9dbbc1bf5c6491584811c763ee1abba657cb8ceff1abfd0f",
+    "request.json": "77b65405c3e1e795352217d46988bdb218ff343ce7d721bfc34dea7f80cea197",
+    "spec.json": "11de41657f6c0aa32f8d6cf08684d6ea3cc8e17e91edfdb5fcfdd3842b166541"
+  },
+  "schema_version": 1
+}
