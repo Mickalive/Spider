@@ -1,0 +1,643 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-CENSOR-FRAC-ALL": 0.0,
+    "M-CENSOR-FRAC-DEEP": 0.0,
+    "M-CENSOR-FRAC-SHALLOW": 0.0,
+    "M-CENSORED-ALL": 0,
+    "M-CENSORED-DEEP": 0,
+    "M-CENSORED-SHALLOW": 0,
+    "M-CERT-LEVEL-TEXT-ALL": 0.01,
+    "M-CERT-LEVEL-TEXT-DEEP": 0.01,
+    "M-CERT-LEVEL-TEXT-SHALLOW": 0.01,
+    "M-CHANGE-ATTR-ONLY-ALL": 7,
+    "M-CHANGE-ATTR-ONLY-DEEP": 3,
+    "M-CHANGE-ATTR-ONLY-SHALLOW": 4,
+    "M-CHANGE-BY-CLASS-MOVING_ALIAS-DEEP": 0,
+    "M-CHANGE-BY-CLASS-MOVING_ALIAS-SHALLOW": 0,
+    "M-CHANGE-BY-CLASS-OTHER-DEEP": 0,
+    "M-CHANGE-BY-CLASS-OTHER-SHALLOW": 0,
+    "M-CHANGE-BY-CLASS-VERSION_PINNED-DEEP": 0,
+    "M-CHANGE-BY-CLASS-VERSION_PINNED-SHALLOW": 0,
+    "M-CHANGE-BYTE-ALL": 7,
+    "M-CHANGE-BYTE-DEEP": 3,
+    "M-CHANGE-BYTE-SHALLOW": 4,
+    "M-CHANGE-RATE-TEXT-ALL": 0.0,
+    "M-CHANGE-RATE-TEXT-DEEP": 0.0,
+    "M-CHANGE-RATE-TEXT-SHALLOW": 0.0,
+    "M-CHANGE-TEXT-ALL": 0,
+    "M-CHANGE-TEXT-DEEP": 0,
+    "M-CHANGE-TEXT-SHALLOW": 0,
+    "M-CHANGE-TRANSPORT-ALL": 359,
+    "M-CHANGE-TRANSPORT-DEEP": 219,
+    "M-CHANGE-TRANSPORT-SHALLOW": 140,
+    "M-CLASS-FRAC-MOVING_ALIAS-DEEP": 0.6399416909620991,
+    "M-CLASS-FRAC-MOVING_ALIAS-SHALLOW": 0.6508313539192399,
+    "M-CLASS-FRAC-OTHER-DEEP": 0.32798833819241985,
+    "M-CLASS-FRAC-OTHER-SHALLOW": 0.34679334916864607,
+    "M-CLASS-FRAC-VERSION_PINNED-DEEP": 0.03206997084548105,
+    "M-CLASS-FRAC-VERSION_PINNED-SHALLOW": 0.0023752969121140144,
+    "M-CONCENTRATION-DETECTED": false,
+    "M-CONCENTRATION-MDC-RATE": 0.011661807580174927,
+    "M-CONCENTRATION-P-ONE-SIDED": 1.0,
+    "M-DEAD-404-DEEP": 0,
+    "M-DEAD-404-SHALLOW": 0,
+    "M-DEAD-UB95-DEEP": 0.004357435376452668,
+    "M-DEAD-UB95-SHALLOW": 0.007090496587222661,
+    "M-DEEP-CAPPED-HOSTS": 3,
+    "M-DT-MAX-S": 439.83,
+    "M-DT-MEDIAN-ALLPAIRS-S": 407.97,
+    "M-DT-MEDIAN-S": 407.97,
+    "M-DT-MIN-S": 377.06,
+    "M-DT-P90-S": 430.52,
+    "M-GETS-CONTROLS-OFFLINE": 8,
+    "M-GETS-OBS0": 1123,
+    "M-GETS-OBS1": 1137,
+    "M-GETS-TOTAL": 2268,
+    "M-HAZARD-BYTE-UB95-ALL": 0.011844280506174865,
+    "M-HAZARD-BYTE-UB95-DEEP": 0.011263598661371554,
+    "M-HAZARD-BYTE-UB95-SHALLOW": 0.021609516981362542,
+    "M-HAZARD-TEXT-UB95-ALL": 0.002702513499849235,
+    "M-HAZARD-TEXT-UB95-DEEP": 0.004357435376452668,
+    "M-HAZARD-TEXT-UB95-SHALLOW": 0.007090496587222661,
+    "M-HOST-CONC-MAX-DEEP": 0.3206997084548105,
+    "M-HOST-CONC-MAX-SHALLOW": 0.332541567695962,
+    "M-HOST-TABLE": {
+      "doc.rust-lang.org": {
+        "k_text_deep": 0,
+        "k_text_shallow": 0,
+        "n_deep": 220,
+        "n_shallow": 43
+      },
+      "docs.pytest.org": {
+        "k_text_deep": 0,
+        "k_text_shallow": 0,
+        "n_deep": 219,
+        "n_shallow": 98
+      },
+      "docs.readthedocs.io": {
+        "k_text_deep": 0,
+        "k_text_shallow": 0,
+        "n_deep": 28,
+        "n_shallow": 140
+      },
+      "pandas.pydata.org": {
+        "k_text_deep": 0,
+        "k_text_shallow": 0,
+        "n_deep": 219,
+        "n_shallow": 140
+      }
+    },
+    "M-HOSTS-WITH-BOTH-STRATA": 4,
+    "M-LIVE-NULL-CHANGED": 0,
+    "M-LIVE-NULL-OK": 2,
+    "M-LIVE-POS-CHANGED": 3,
+    "M-LIVE-POS-OK": 3,
+    "M-N-ADMITTED": 1107,
+    "M-N-DISCOVERED": 1119,
+    "M-N-PAIR-ALL": 1107,
+    "M-N-PAIR-DEEP": 686,
+    "M-N-PAIR-EXCLUDED-BELOW-DT-MIN": 0,
+    "M-N-PAIR-SHALLOW": 421,
+    "M-N-TRUNCATED": 0,
+    "M-OFFLINE-CONTROLS-FAILING": [],
+    "M-OFFLINE-CONTROLS-PASS": "35/35",
+    "M-PARTIAL": false,
+    "M-RATE-LIMITED-DEEP": 0,
+    "M-RATE-LIMITED-SHALLOW": 0,
+    "M-RETRO-CERT-LEVEL-ALL": 0.02,
+    "M-RETRO-CERT-LEVEL-DEEP": null,
+    "M-RETRO-CERT-LEVEL-SHALLOW": 0.02,
+    "M-RETRO-CHANGE-BYTE-ALL": 0,
+    "M-RETRO-CHANGE-BYTE-DEEP": 0,
+    "M-RETRO-CHANGE-BYTE-SHALLOW": 0,
+    "M-RETRO-INFO": {
+      "admitted": false,
+      "dt_h_max": -497831.606,
+      "dt_h_median": -497831.608,
+      "dt_h_min": -497831.61,
+      "max_per_host_change_rate": 0.0,
+      "max_window_d": 30.0,
+      "min_window_h": 6.0,
+      "n_byte_changed": 0,
+      "n_comparable": 292,
+      "negotiation_suspected": false,
+      "not_admitted_reason": "measured window -497831.608 h outside [6.0 h, 30.0 d]",
+      "parent_window_end_utc": "2026-10-17T00:46:04.288000+00:00",
+      "parent_window_s": 32.104000091552734,
+      "parent_window_start_utc": "2026-10-17T00:45:32.184000+00:00",
+      "parse_note": "fractional-second-tolerant read of the frozen parent provenance timestamps; the frozen strict pattern '%Y-%m-%dT%H:%M:%SZ' cannot read '2026-10-17T00:45:32.184Z'"
+    },
+    "M-RETRO-N-ALL": 292,
+    "M-RETRO-N-DEEP": 31,
+    "M-RETRO-N-SHALLOW": 261,
+    "M-RETRO-UB95-ALL": 0.010206909410248878,
+    "M-RETRO-UB95-DEEP": 0.09211405994732375,
+    "M-RETRO-UB95-SHALLOW": 0.0114122816198034,
+    "M-SEED-ERRORS": {},
+    "M-SELFPAIR-BYTE-CHANGED": 0,
+    "M-SELFPAIR-CHANGED": 0,
+    "M-SELFPAIR-MAX-GAP-S": 0.006,
+    "M-SELFPAIR-N": 10,
+    "M-SEPARATION-REQUESTED-S": 360.0,
+    "M-SHALLOW-CAPPED-HOSTS": 2,
+    "M-TIME-TRUNCATED-HOSTS": 0,
+    "M-UNREACHABLE-DEEP": 0,
+    "M-UNREACHABLE-SHALLOW": 0,
+    "M-WALL-S": 463.32,
+    "M-DECISION-LABEL": "CERTIFY_BOTH_AT_0P01",
+    "M-DECISION-CERTIFIED-DEEP": 0.01,
+    "M-DECISION-CERTIFIED-SHALLOW": 0.01,
+    "M-DECISION-TAGS": [],
+    "M-VALIDITY-CONTROL-OK": true,
+    "M-VALIDITY-FRAME-OK": true,
+    "M-VALIDITY-RETRO-ADMITTED": false,
+    "M-CODE-SHA256-STRIPPED": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573"
+  },
+  "controls": {
+    "C-CANON-IDEMPOTENT": {
+      "family": "offline-fixture-or-exact",
+      "expected": "canon(canon(x))==canon(x)",
+      "observed": "static text_sha stable=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DETECT-TEXT-INJECTION": {
+      "family": "offline-fixture-or-exact",
+      "expected": "visible-text change -> TEXT differs",
+      "observed": "text_changed=True byte_changed=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DETECT-ATTR-ONLY": {
+      "family": "offline-fixture-or-exact",
+      "expected": "attribute-only change -> TEXT same, BYTE differs",
+      "observed": "text_same=True byte_diff=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DETECT-SCRIPT-ONLY": {
+      "family": "offline-fixture-or-exact",
+      "expected": "script-nonce change -> TEXT same, BYTE differs",
+      "observed": "text_same=True byte_diff=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CENSOR-404-DETECTED": {
+      "family": "offline-fixture-or-exact",
+      "expected": "404 at obs1 -> censored channel, not a text event",
+      "observed": "obs0=200 obs1=404",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-LIVE-DETECTOR-ON-FIXTURE": {
+      "family": "offline-fixture-or-exact",
+      "expected": "two identical fixture GETs -> no change",
+      "observed": "text_same=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CP-BOUND-N60": {
+      "family": "offline-fixture-or-exact",
+      "expected": "exact one-sided 95% UB at k=0,n=60",
+      "observed": "ub=0.048703 expected=0.048703",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CP-BOUND-N150": {
+      "family": "offline-fixture-or-exact",
+      "expected": "exact one-sided 95% UB at k=0,n=150",
+      "observed": "ub=0.019773 expected=0.019773",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CP-BOUND-N299": {
+      "family": "offline-fixture-or-exact",
+      "expected": "exact one-sided 95% UB at k=0,n=299",
+      "observed": "ub=0.009969 expected=0.009969",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CP-BOUND-K1N400": {
+      "family": "offline-fixture-or-exact",
+      "expected": "exact one-sided 95% UB at k=1,n=400",
+      "observed": "ub=0.011804 expected=0.011804",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CERT-LEVEL-LADDER": {
+      "family": "offline-fixture-or-exact",
+      "expected": "cert_level(0,299)=0.01, (0,150)=0.02, (0,60)=0.05, (1,400)=0.02",
+      "observed": "levels=[0.01, 0.02, 0.05, 0.02]",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-CONTRAST-POWER": {
+      "family": "offline-fixture-or-exact",
+      "expected": "contrast_p(6,380,0,420)<=0.05 and contrast_p(5,380,0,420)>0.05",
+      "observed": "p6=0.04235 p5=0.07185 mdc=0.015789473684210527",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-CERTIFY-BOTH": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01",
+      "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-GUARD-BOTH": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_SHALLOW_GUARD_DEEP",
+      "observed": "status=COMPLETE certified_deep=None certified_shallow=0.05",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-GUARD-DEEP": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_SHALLOW_GUARD_DEEP",
+      "observed": "status=COMPLETE certified_deep=None certified_shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-GUARD-SHALLOW": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P05",
+      "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.05",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-INSUFFICIENT-N": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: REFUSE_CERTIFY_INSUFFICIENT_N",
+      "observed": "status=COMPLETE certified_deep=None certified_shallow=None",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-CENSORED": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: REFUSE_CERTIFY_CENSORED_DEEP",
+      "observed": "status=COMPLETE certified_deep=None certified_shallow=None",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-CONTROL-FAIL": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: NO_DATA_CONTROL_OR_FRAME_FAIL",
+      "observed": "status=MEASUREMENT_INVALID certified_deep=None certified_shallow=None",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-NOT-IDENTIFIABLE": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE",
+      "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-HOST-CONCENTRATED": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__HOST_CONCENTRATED",
+      "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-VERSION-PINNED": {
+      "family": "offline-fixture-or-exact",
+      "expected": "reachable decision branch: CERTIFY_BOTH_AT_0P01__BOUNDED_TO_VERSION_PINNED",
+      "observed": "status=COMPLETE certified_deep=0.01 certified_shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-DECIDE-BRANCHES-DISTINCT": {
+      "family": "offline-fixture-or-exact",
+      "expected": ">=9 distinct decision labels",
+      "observed": "labels=['CERTIFY_BOTH_AT_0P01', 'CERTIFY_BOTH_AT_0P01__BOUNDED_TO_VERSION_PINNED', 'CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE', 'CERTIFY_BOTH_AT_0P01__HOST_CONCENTRATED', 'CERTIFY_BOTH_AT_0P05', 'CERTIFY_SHALLOW_GUARD_DEEP', 'NO_DATA_CONTROL_OR_FRAME_FAIL', 'REFUSE_CERTIFY_CENSORED_DEEP', 'REFUSE_CERTIFY_INSUFFICIENT_N']",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-ZERO-EVENTS": {
+      "family": "offline-fixture-or-exact",
+      "expected": "CERTIFY_BOTH_AT_0P01, no tags, n=380/420, 3 hosts span both strata",
+      "observed": "CERTIFY_BOTH_AT_0P01 deep=0.01 shallow=0.01 tags=[] ub_deep=0.007853",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-DEEP-EVENTS": {
+      "family": "offline-fixture-or-exact",
+      "expected": "CERTIFY_BOTH_AT_0P05 with concentration detected (p=0.01468)",
+      "observed": "CERTIFY_BOTH_AT_0P05 p=0.01468 detected=True deep_level=0.05",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-CENSOR-AND-DEAD": {
+      "family": "offline-fixture-or-exact",
+      "expected": "page-gone separated from change: 25 dead -> UB 0.082146; censoring 9.5% tolerated",
+      "observed": "dead_deep=25 ub=0.082146 cens_frac=0.0952 label=CERTIFY_BOTH_AT_0P01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-CENSOR-REFUSAL": {
+      "family": "offline-fixture-or-exact",
+      "expected": "REFUSE_CERTIFY_CENSORED_DEEP (stratum-specific) above CENSOR_MAX",
+      "observed": "REFUSE_CERTIFY_CENSORED_DEEP cens_frac=0.345",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-INSUFFICIENT-N": {
+      "family": "offline-fixture-or-exact",
+      "expected": "REFUSE_CERTIFY_INSUFFICIENT_N",
+      "observed": "REFUSE_CERTIFY_INSUFFICIENT_N",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-GUARD-BOTH": {
+      "family": "offline-fixture-or-exact",
+      "expected": "GUARD_REQUIRED_BOTH_STRATA (UB>0.05 in both strata)",
+      "observed": "GUARD_REQUIRED_BOTH_STRATA ub_deep=0.07556 ub_shallow=0.06845",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-GUARD-DEEP-ONLY": {
+      "family": "offline-fixture-or-exact",
+      "expected": "CERTIFY_SHALLOW_GUARD_DEEP",
+      "observed": "CERTIFY_SHALLOW_GUARD_DEEP deep=None shallow=0.01",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-GUARD-SHALLOW-ONLY": {
+      "family": "offline-fixture-or-exact",
+      "expected": "CERTIFY_DEEP_GUARD_SHALLOW",
+      "observed": "CERTIFY_DEEP_GUARD_SHALLOW deep=0.01 shallow=None",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-SHORT-SEPARATION": {
+      "family": "offline-fixture-or-exact",
+      "expected": "NO_DATA_CONTROL_OR_FRAME_FAIL when requested separation<DT_MIN_S",
+      "observed": "NO_DATA_CONTROL_OR_FRAME_FAIL dt_median=None control_ok=True frame_ok=False",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-ELIGIBLE-DT-FLOOR": {
+      "family": "offline-fixture-or-exact",
+      "expected": "pairs below DT_MIN_S excluded, not analysed at too short a lag",
+      "observed": "eligible=0 excluded=800 label=NO_DATA_CONTROL_OR_FRAME_FAIL",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-DEPTH-NOT-IDENTIFIABLE": {
+      "family": "offline-fixture-or-exact",
+      "expected": "DEPTH_NOT_IDENTIFIABLE tag when <MIN_HOSTS_BOTH hosts span both strata",
+      "observed": "CERTIFY_BOTH_AT_0P01__DEPTH_NOT_IDENTIFIABLE_HOST_CONCENTRATED hosts_both=1",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-SUMMARY-MDC-REPORTED": {
+      "family": "offline-fixture-or-exact",
+      "expected": "M-CONCENTRATION-MDC-RATE reported even with zero events (0.0158)",
+      "observed": "mdc=0.01579 p=1.0",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl"
+    },
+    "C-LIVE-POS-SENSITIVITY": {
+      "family": "live-positive",
+      "expected": "M-LIVE-POS-CHANGED >= 1 AND M-LIVE-POS-OK >= 2",
+      "observed": "3 of 3 frozen volatile URLs returned HTTP 200 at both observations and all 3 changed on the PRIMARY text channel; M-LIVE-POS-CHANGED=3, M-LIVE-POS-OK=3",
+      "pass": true,
+      "evidence_ref": ".../run/raw/control_probes.jsonl"
+    },
+    "C-LIVE-NULL-STABILITY": {
+      "family": "live-null",
+      "expected": "M-LIVE-NULL-CHANGED == 0 AND M-LIVE-NULL-OK == 2",
+      "observed": "example.com and www.iana.org/domains/reserved both HTTP 200 at both observations, 0 text changes; M-LIVE-NULL-CHANGED=0, M-LIVE-NULL-OK=2",
+      "pass": true,
+      "evidence_ref": ".../run/raw/control_probes.jsonl"
+    },
+    "C-SELFPAIR-DETERMINISM": {
+      "family": "in-frame-null",
+      "expected": "M-SELFPAIR-CHANGED == 0 AND M-SELFPAIR-N == 10",
+      "observed": "10 admitted census pages each fetched twice inside observation 1; M-SELFPAIR-N=10, M-SELFPAIR-CHANGED=0, M-SELFPAIR-BYTE-CHANGED=0, M-SELFPAIR-MAX-GAP-S=0.006",
+      "pass": true,
+      "evidence_ref": ".../run/raw/selfpair.jsonl"
+    },
+    "C-FRAME-DEPTH-PRESENT": {
+      "family": "frame",
+      "expected": "M-N-PAIR-DEEP >= 60 and >= MIN_HOSTS_BOTH=2 hosts with >= 25 paired pages in EACH stratum",
+      "observed": "M-N-PAIR-DEEP=686, M-N-PAIR-SHALLOW=421, M-HOSTS-WITH-BOTH-STRATA=4 (deep/shallow per host: rust 220/43, pytest 219/98, readthedocs 28/140, pandas 219/140); M-N-PAIR-EXCLUDED-BELOW-DT-MIN=0",
+      "pass": true,
+      "evidence_ref": ".../run/derived/metrics.json#M-HOST-TABLE"
+    },
+    "C-CODE-IDENTITY": {
+      "family": "identity",
+      "expected": "sha256(stripped execute_module.py) == DERIVED_SHA256 = 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+      "observed": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573; module reconstructed byte-exactly from the prereg.md#10 FROZEN_CODE block and never edited",
+      "pass": true,
+      "evidence_ref": ".../run/derived/code_identity.json"
+    },
+    "C-SEED-LIVENESS": {
+      "family": "frame",
+      "expected": "all four frozen seeds HTTP 200 at observation 0 and M-SEED-ERRORS empty",
+      "observed": "4/4 seeds HTTP 200 (hop-0 rows: 4), M-SEED-ERRORS={}",
+      "pass": true,
+      "evidence_ref": ".../run/raw/census.jsonl"
+    },
+    "C-LEDGER-RECONCILIATION": {
+      "family": "envelope",
+      "expected": "M-GETS-CONTROLS-OFFLINE + M-GETS-OBS0 + M-GETS-OBS1 = M-GETS-TOTAL <= 3200",
+      "observed": "8 + 1123 + 1137 = 2268 <= 3200; observation-1 ledger (1137) is reconstructed from the frozen module GET counter and the raw obs1 (1107) + self-pair (20) + control-probe (10) rows the module wrote",
+      "pass": true,
+      "evidence_ref": ".../run/raw/PROGRESS.json, .../run/derived/metrics.json#reconstruction_notes"
+    },
+    "C-RETRO-INSTRUMENT-ADMISSION": {
+      "family": "secondary-channel",
+      "expected": "retro admitted iff not negotiation_suspected AND median window in [6 h, 30 d]",
+      "observed": "NOT ADMITTED: 292 comparable parent pages re-fetched with 0 byte changes and max per-host change rate 0.00 (not negotiation-suspected), but the frozen gate computes dt_h = (rec.t_start - p_end)/3600 where rec.t_start is a time.monotonic() reading and p_end is a POSIX epoch value, mixing two clocks and yielding a nonsensical -497831.61 h median window, outside [6 h, 30 d]. The second, independent frozen defect is parent_window() strptime with pattern %Y-%m-%dT%H:%M:%SZ against the real value 2026-10-17T00:45:32.184Z. By frozen design this secondary channel cannot change the primary label.",
+      "pass": false,
+      "evidence_ref": ".../run/derived/retro_secondary.json, .../run/raw/retro.jsonl"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+      "sha256": "45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff",
+      "role": "raw",
+      "bytes": 698505
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/obs1.jsonl",
+      "sha256": "1343bf8c17c1e862c97e68257aa01f35ef66eb94e25e792dfb72509d221e7698",
+      "role": "raw",
+      "bytes": 791021
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/selfpair.jsonl",
+      "sha256": "23962e3f5fb7134d7d5ec17f89f08357d5bedec684c91905c021fa703942d41b",
+      "role": "raw",
+      "bytes": 1706
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+      "sha256": "85f91e4f8ee5095090760d138c5ae55322bea160a6852b3483ac5b4c7bff658d",
+      "role": "raw",
+      "bytes": 5069
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/controls.jsonl",
+      "sha256": "4c1c81ff7cc0d13088816acc78f8bcee2f56183585b47a5249288c8853603509",
+      "role": "raw",
+      "bytes": 6618
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+      "sha256": "960d953197480f4e5979a865ceafa6f713fcb00373ef880d10bc4ac5e0b4f1ba",
+      "role": "raw",
+      "bytes": 474
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/raw/retro.jsonl",
+      "sha256": "69e8d51851e1aed5642a7c3fe15008051d2d1e9862eb725471f751e1a866113d",
+      "role": "raw",
+      "bytes": 155797
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/metrics.json",
+      "sha256": "234974c7a8f76e649883bc4380badca75925d8011a80819275d65c567a100c72",
+      "role": "derived",
+      "bytes": 7453
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/decision.json",
+      "sha256": "d8aecb4fc602dc05d8d3ef90c6743d60e5165860a28c985c41b4a8775de31b73",
+      "role": "derived",
+      "bytes": 242
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json",
+      "sha256": "1c4035dd64bac1f3d49aa907bc3dd1f8490fc8128e9af7833af7d51bf949ed5f",
+      "role": "derived",
+      "bytes": 1447
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/derived/code_identity.json",
+      "sha256": "227ae5f00e86974382287ce1b264e23b64d4b6110f33393c71a73a853db375f0",
+      "role": "derived",
+      "bytes": 209
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+      "sha256": "5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573",
+      "role": "code",
+      "bytes": 63090
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/report.md",
+      "sha256": "e82ea2c9dc423d47665fbcd364997808ff05220506da9946455cf678b4632b54",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-39039638199/provenance.json",
+      "sha256": "8e8e012e0afa4113905cc55b14a2b3666457bbe2ef08e993ac99757d873ab2ce",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "kind": "raw-observation",
+      "id": "O1",
+      "statement": "The frozen module (self-hash 5d2509f6..., byte-identical to the prereg.md#10 block) ran --stage all on 2026-10-17T15:10:35Z and completed 35/35 offline controls, the observation-0 fetch-complete census (1119 rows written, 1107 HTTP 200, 6x HTTP 404, 6 transport errors, 36.59 s), the 360 s separation, the observation-1 re-fetch of all 1107 admitted pages (1107/1107 HTTP 200), the 10 self-pairs and the 10 control-probe fetches.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O2",
+      "statement": "The frozen module then raised ValueError in parent_window() (strptime pattern %Y-%m-%dT%H:%M:%SZ vs the real timestamp 2026-10-17T00:45:32.184Z) at 2026-10-17T15:18:18Z, i.e. while entering the SECONDARY B-RETRO-LONG-DT channel, after all primary RAW evidence had been written and before derived/metrics.json and derived/decision.json existed.",
+      "evidence_ref": ".../run/raw/PROGRESS.json (no finished_utc), run stderr traceback at /tmp/opencode/exp390_run2.log"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O3",
+      "statement": "derived/metrics.json and derived/decision.json in this packet were produced by importing the unmodified frozen module and replaying its own pure summarize()/decide() over its own RAW rows; the only values not produced by that replay are M-WALL-S, M-PARTIAL, M-TIME-TRUNCATED-HOSTS and the GET ledger, which are reconstructed from the frozen run own checkpoints and disclosed in derived/metrics.json#reconstruction_notes.",
+      "evidence_ref": ".../run/derived/metrics.json"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O4",
+      "statement": "All three frozen positive-control URLs changed on the primary text channel between the two observations (cloudflare cdn-cgi/trace, api.github.com/rate_limit, timeapi.io current zone).",
+      "evidence_ref": ".../run/raw/control_probes.jsonl"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O5",
+      "statement": "Both frozen null anchors (example.com, www.iana.org/domains/reserved) returned HTTP 200 at both observations with zero text change; all 10 in-frame self-pairs were text- and byte-stable with a maximum intra-pair gap of 0.006 s.",
+      "evidence_ref": ".../run/raw/control_probes.jsonl, .../run/raw/selfpair.jsonl"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O6",
+      "statement": "Zero of the 1107 observation-1 re-fetches failed: censoring is 0/1107, so no page was right-censored, no page returned 404/410, and none was rate-limited at observation 1.",
+      "evidence_ref": ".../run/raw/obs1.jsonl"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O7",
+      "statement": "Measured separations of the 1107 eligible pairs: min 377.06 s, median 407.97 s, p90 430.52 s, max 439.83 s; 0 pairs fell below the frozen DT_MIN_S floor of 300 s and the maximum is far below DT_MAX_S=900 s.",
+      "evidence_ref": ".../run/derived/metrics.json#M-DT-MEDIAN-S"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O8",
+      "statement": "Zero of 1107 pairs changed on the primary structural-text channel: k_text=0 in the deep stratum (n=686) and k_text=0 in the shallow stratum (n=421), and 0 in every URL class.",
+      "evidence_ref": ".../run/derived/metrics.json"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O9",
+      "statement": "7 of 1107 pairs changed on the byte channel (3 deep, 4 shallow) while none changed on the text channel; all 7 are therefore attribute-only or script-only churn under the frozen canonicalisation.",
+      "evidence_ref": ".../run/derived/metrics.json#M-CHANGE-BYTE-ALL"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O10",
+      "statement": "359 of 1107 pairs (219 deep, 140 shallow) show an ETag or Last-Modified difference while their canonical text is unchanged - the exact asymmetry the pre-2.0 cycle-8 finding warned about, reproduced on real HTML pages at scale.",
+      "evidence_ref": ".../run/derived/metrics.json#M-CHANGE-TRANSPORT-ALL"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O11",
+      "statement": "The observation-0 frame reproduces the frozen DESIGN sweep almost exactly: deep 686 / shallow 421 (DESIGN: 686/421), 1107 admitted (DESIGN: 1107), 1119 rows (DESIGN: 1119), all four hosts in both strata, 0 truncated bodies.",
+      "evidence_ref": ".../run/derived/metrics.json, prereg.md#15 P8"
+    },
+    {
+      "kind": "raw-observation",
+      "id": "O12",
+      "statement": "A first launch of the same frozen command at 15:08:30Z completed its observation-0 census (1119 rows, 1107 admitted, 40.16 s) and was then killed during the separation by the orchestration shell timeout, not by the experiment; the recorded transaction is the complete second launch at 15:10:35Z.",
+      "evidence_ref": ".../run/raw/PROGRESS.json (started_utc) and derived/metrics.json"
+    }
+  ],
+  "validity_notes": [
+    "RECONSTRUCTION (disclosed, load-bearing): the frozen module could not write derived/metrics.json or derived/decision.json because it raised ValueError in parent_window() while entering the SECONDARY retro channel. Those two files were produced by importing the byte-identical unmodified frozen module and replaying its own pure summarize()/decide() over its own RAW rows. No frozen file was edited: freeze.json artifact_hashes and hashes were all re-verified OK before and after execution. V1-CODE-IDENTITY holds (5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573).",
+    "RECONSTRUCTED FIELDS: M-WALL-S (463.32 s, from frozen PROGRESS.started_utc 2026-10-17T15:10:35.398909Z to process death 2026-10-17T15:18:18.715476Z), M-PARTIAL (false), M-TIME-TRUNCATED-HOSTS (0, because all four hosts swept concurrently inside a 36.59 s observation-0 wall, far below the frozen PER_HOST_WALL_S=150 s) and the observation-1/total GET ledger (2268) are reconstructions from the frozen run own checkpoints and raw rows, not values emitted by the frozen process. Every disclosure is in derived/metrics.json#reconstruction_notes.",
+    "TWO INDEPENDENT FROZEN DEFECTS, both confined to the SECONDARY B-RETRO-LONG-DT channel: (1) parent_window() uses strptime pattern %Y-%m-%dT%H:%M:%SZ but the frozen parent provenance.json records scored_run_started=2026-10-17T00:45:32.184Z with fractional seconds, so it raises ValueError; (2) even with a tolerant read, the frozen retro gate computes dt_h = (rec.t_start - p_end)/3600 where rec.t_start is a time.monotonic() reading and p_end is a POSIX epoch value, mixing two clocks and producing a -497831.61 h median window. Consequence: the secondary channel is NOT ADMITTED by its own frozen gate and the days-to-weeks band stays undecided, exactly as the frozen design permits (prereg.md#11 step 6). This does not touch the primary label.",
+    "The retro channel WAS nevertheless executed in a separate, clearly-labelled pass (292 parent reference pages re-fetched, 0 byte changes, max per-host change rate 0.00 so not negotiation-suspected) and is reported in derived/retro_secondary.json and raw/retro.jsonl as a non-decisional secondary observation only.",
+    "REPRESENTATION LOSS (V11, load-bearing): no JavaScript is executed, so client-rendered content is NOT measured; HTML attributes are invisible on the primary channel by construction (quantified: 7 attr-only changes); bodies are truncated at 8 MB (M-N-TRUNCATED=0); one egress vantage, one runner, credential-free GET-only, server-rendered HTML; the frame is four documentation hosts reached by same-host <a> navigation only and is not a sample of the Web.",
+    "WINDOW SCOPE: the certification holds only at the measured separation (median 407.97 s, max 439.83 s). It is not a claim about the days-to-weeks band, about JavaScript-rendered or authenticated content, or about any other egress vantage (CC-B, prereg.md#17 items 1, 2, 9).",
+    "POWER CEILING: with n_deep=686 and n_shallow=421 and zero events, the exact one-sided contrast cannot detect a deep-stratum excess below M-CONCENTRATION-MDC-RATE=0.011662. M-CONCENTRATION-DETECTED=false therefore bounds concentration at ~1.17%, it is not an absence of concentration (prereg.md#13, #17 item 8).",
+    "CONFOUNDING: hop depth remains partly confounded with host and URL class even though all four hosts span both strata and neither stratum is version-pinned-ceilinged (deep 3.21%, shallow 0.24% VERSION_PINNED). M-HOST-TABLE is reported so the reader can see per-host n and k.",
+    "CLAIM CEILING: C-WEB-DYNAMICS stays HYPOTHESIS (CC-C); this packet produces a bounded page-class measurement, not evidence of predictive dynamical structure, and the producer does not self-promote.",
+    "NO PRODUCT PROMOTION: the certified tolerance is a session-scale bound for a declared page class and is not a shipped freshness mechanism (CC-B, spec.json#product_consequence_positive).",
+    "PREREGISTRATION TIMING (V12): no two-observation pair existed at freeze time; DESIGN probes fetched every frame URL at most once, and this transaction (2026-10-17T15:10Z) is the first and only two-observation diff on this frame."
+  ],
+  "unresolved": [
+    "The frozen B-RETRO-LONG-DT channel remains unusable until the module parent_window() timestamp pattern and the monotonic-vs-epoch dt_h computation are repaired; it is the only route in this design to a window two orders of magnitude longer than the in-process separation, so the days-to-weeks band is still undecided. Smallest unblocking action: a DESIGN-stage correction of parse() to accept fractional seconds and of the retro dt_h to use a POSIX epoch clock, re-frozen and re-run.",
+    "Whether the product should adopt 1 %, 2 % or 5 % as the tolerance is a Product decision; this packet certifies only what the data support (prereg.md#20).",
+    "Whether a hop-depth-stratified guard or one global TTL is the better architecture depends on how often hop>=3 state is actually reused, which this packet does not measure (prereg.md#20).",
+    "The days-to-weeks band, JavaScript-rendered pages, authenticated pages and additional egress vantages remain open (prereg.md#17 items 1, 2, 9).",
+    "The 359 pairs whose ETag/Last-Modified moved while their canonical text did not are unexplained by this packet: they could be weak/misconfigured validators, per-request cache-busting tokens, or edge routing differences. Their cause is not identified here and M-CHANGE-TRANSPORT-* is a covariate only by frozen design (B-TRANSPORT-CHANNEL).",
+    "C-FRESHNESS guard calibration (owner lanes graph/runtime/product) consumes the certified tolerances but is out of scope for this packet."
+  ]
+}

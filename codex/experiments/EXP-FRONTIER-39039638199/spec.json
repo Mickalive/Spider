@@ -1,0 +1,337 @@
+{
+  "spec_schema_version": 2,
+  "experiment_id": "EXP-FRONTIER-39039638199",
+  "lane": "frontier",
+  "design_contract_version": 2,
+  "director_target_claim": "C-WEB-DYNAMICS",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "On the live documentation Web, is session-scale invalidation hazard concentrated in the deep stratum (hop>=3) rather than the shallow stratum (hop<=2), and can a two-observation census diff on a fetch-complete census frame - with a demonstrated live positive sensitivity control, stable null controls, an in-frame self-pair determinism null, an exact one-sided Clopper-Pearson per-page hazard upper bound, an explicit page-gone channel separated from the change channel, and censoring-aware refusal gates - certify, or explicitly refuse to certify, named zero-GET staleness tolerances for the two strata inside one session, so that the product decision 'is any session-scale freshness guard needed at all' is settled by measurement instead of assumption?",
+  "hypothesis": "H1 (primary, certification): over a measured session-scale separation DT with DT>=300 s, the per-page probability that the server-rendered HTML text of a credential-free GET-only documentation page changes is small enough that a zero-GET intra-session freshness guard is unnecessary, at a named certified tolerance level L in {0.01, 0.02, 0.05}, separately for hop<=2 and hop>=3. H2 (mandate contrast): hazard is NOT concentrated in the deep stratum relative to the shallow stratum at this separation, i.e. the one-sided exact binomial p-value for p_deep > p_shallow is > 0.05 and both stratum upper bounds sit at or below the same certified level. H3 (bounded negative alternative, pre-registered as an equally acceptable outcome): either the deep stratum's upper bound exceeds the shallow stratum's certified level, or the exact contrast rejects, in which case a guard is required only where hop>=3 state is reused. H4 (declared UNKNOWN, not tested here): the days-to-weeks band, JavaScript-rendered content, authenticated pages, and any vantage other than this runner's egress.",
+  "falsifier": "The certification hypothesis is falsified for a stratum S when the exact one-sided 95% Clopper-Pearson upper bound on the text-channel change probability for S exceeds the coarsest grid level (0.05), or when the observation-1 censoring fraction for S exceeds CENSOR_MAX=0.20, or when the eligible paired n for S is below MIN_N_PER_STRATUM=60. The mandate contrast H2 is falsified when the exact one-sided p-value for p_deep > p_shallow is <= 0.05 (M-CONCENTRATION-DETECTED true). The measurement itself is invalidated (never falsified) when any live positive control fails to fire, any null control or self-pair changes, a seed fails at observation 0, the measured separation falls below DT_MIN_S=300 s or above DT_MAX_S=900 s, or the GET ceiling is exceeded.",
+  "baselines": [
+    {
+      "id": "B-SHALLOW-MATCHED-DT",
+      "role": "primary matched comparator (the mandate's own contrast)",
+      "definition": "The hop<=2 stratum of the SAME fetch-complete frame, crawled with the SAME policy, by the SAME instrument, at the SAME measured separation. It is the comparator that makes a deep-stratum hazard meaningful, and it is also the stratum against which the product decision is actually taken.",
+      "why_strong": "It removes host composition, instrument, vantage, transport and separation as explanations for any deep-vs-shallow difference; it is measured live in the same transaction rather than assumed or inherited as a constant."
+    },
+    {
+      "id": "B-RETRO-LONG-DT",
+      "role": "secondary same-population comparator at a much longer separation (SECONDARY: cannot change the primary decision label)",
+      "definition": "The frozen parent census EXP-FRONTIER-38940047535/run/raw/census.jsonl supplies 292 observation-0 body hashes and hop labels captured inside a measured 32.1 s window (provenance.json timeline_utc: 2026-10-17T00:45:32.184Z .. 00:46:04.288Z). This packet re-fetches exactly those URLs at observation 1 and compares sha256 of the full body, giving a same-instrument comparison at a separation of order 0.5-2 days instead of ~6 minutes.",
+      "why_strong": "It is the only route to any window longer than the harness envelope allows in-process, it is a genuine second observation rather than an assumption, and it directly tests whether a certified ~6-minute tolerance silently hides non-zero multi-hour hazard.",
+      "declared_limits": "readthedocs/pytest-heavy and shallow-biased (253 of 292 reference pages are hop<=2), single reference instrument instance, admitted only if not negotiation-suspected and if the measured median window is within [6 h, 30 d]."
+    },
+    {
+      "id": "B-BYTE-CHANNEL",
+      "role": "conservative sensitivity channel for the same estimand",
+      "definition": "sha256 of the raw full response body, compared on the same pairs. It catches attribute-only, script-only, markup-only and transport churn that the primary structural-text channel is blind to by construction.",
+      "why_strong": "A certification made only on the narrow channel would be an artefact of the detector's blindness; the byte bound is reported beside every text bound so the reader can see the width of that blindness."
+    },
+    {
+      "id": "B-TRANSPORT-CHANNEL",
+      "role": "covariate only, never a decision variable",
+      "definition": "ETag / Last-Modified difference on the same pairs.",
+      "why_strong": "Pre-2.0 Intel cycle-8 evidence (codex/legacy_artifact_index.json artifact 4.443, sha 43d21a4a384b5a242c6bb6f4725e4093982f0fb) found a resource that varies bytewise under one unchanged ETag, so an ETag-only detector is demonstrably insensitive; it is therefore recorded as a covariate and never used to define an event."
+    }
+  ],
+  "positive_control": {
+    "id": "C-LIVE-POS-SENSITIVITY",
+    "definition": "Three pre-registered volatile URLs are fetched at observation 0 and observation 1 and at least one must show a PRIMARY-CHANNEL (structural text) change. Frozen URLs: https://www.cloudflare.com/cdn-cgi/trace , https://api.github.com/rate_limit , https://timeapi.io/api/Time/current/zone?timeZone=UTC .",
+    "pass_condition": "M-LIVE-POS-CHANGED >= 1 AND M-LIVE-POS-OK >= 2",
+    "selection_disclosure": "A candidate pool of six was probed at DESIGN with two GETs <=5 s apart; three fired (the three frozen above) and three did not (api.github.com/repos/rust-lang/rust/releases/latest and api.github.com/repos/python/cpython/events?per_page=10 were stable within 5 s; worldtimeapi.org was unreachable). The full pool and each per-URL probe outcome are recorded in prereg.md#15 so that the sensitivity demonstration is auditable and is not a post-hoc selection of winners.",
+    "failure_disposition": "If no positive control fires between the two observations, the instrument cannot distinguish change from stability, the transaction is MEASUREMENT_INVALID / NOT_APPLICABLE / NO_DATA, and no certification or hazard statement may be made in either direction. This is the mandate's stop trigger."
+  },
+  "null_control": {
+    "definition": "Two distinct null families, because one is not enough. (1) C-LIVE-NULL-STABILITY: two pre-registered static anchors, https://example.com/ and https://www.iana.org/domains/reserved , fetched at both observations; M-LIVE-NULL-CHANGED must be exactly 0 and both must return 200 at observation 1. (2) C-SELFPAIR-DETERMINISM: SELFPAIR_N=10 admitted census pages (deterministic stride sample of the observation-1 target list) are each fetched twice inside observation 1 with a gap <= SELFPAIR_MAX_GAP_S=5 s; M-SELFPAIR-CHANGED must be exactly 0. Family (2) is the stronger of the two because it runs inside the measured frame itself and is not subject to the argument that a tiny external page and a multi-megabyte documentation page differ in volatility.",
+    "pass_condition": "M-LIVE-NULL-CHANGED == 0 AND M-LIVE-NULL-OK == 2 AND M-SELFPAIR-CHANGED == 0 AND M-SELFPAIR-N == 10",
+    "failure_disposition": "A false positive inside the frame means a zero-event result is uninterpretable: status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. A false positive on an external anchor is treated identically rather than discounted."
+  },
+  "measurement_validity": [
+    {
+      "id": "V1-CODE-IDENTITY",
+      "rule": "sha256 of the stripped bytes of the reconstructed execute_module.py must equal DERIVED_SHA256 in prereg.md#10; the module also records its own self-hash into derived/code_identity.json and into derived/metrics.json. prereg.md is itself hashed in freeze.json.hashes.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V2-CONTROLS",
+      "rule": "All 35 offline controls in raw/controls.jsonl pass (fixture detector injections, exact-bound canaries, cert-level ladder, contrast power, 10 decision-branch canaries, 11 raw->derived->decision pipeline canaries) AND the live gates C-LIVE-POS-SENSITIVITY and the null families pass.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V3-SEED-LIVENESS",
+      "rule": "All four frozen seeds return HTTP 200 at observation 0 and M-SEED-ERRORS is empty.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V4-FRAME-COMPLETENESS",
+      "rule": "The deep stratum is actually fetched, not merely discovered: M-N-PAIR-DEEP >= MIN_N_PER_STRATUM=60 and at least MIN_HOSTS_BOTH=2 hosts contribute >= MIN_HOST_STRATUM_N=25 paired pages in EACH stratum. This is the explicit repair of the parent's census gate, which failed because its frozen policy stopped FETCHING when DISCOVERY hit the budget (90.3% of discovered deep URLs never fetched).",
+      "failure_disposition": "REFUSE_CERTIFY_INSUFFICIENT_N (status=COMPLETE, outcome=INCONCLUSIVE) - a measurement-valid refusal, never a scientific zero"
+    },
+    {
+      "id": "V5-SEPARATION-WINDOW",
+      "rule": "Requested separation >= DT_MIN_S=300 s; every eligible pair has dt_s >= DT_MIN_S=300; M-DT-MAX-S <= DT_MAX_S=900 s. Pairs below the floor are excluded by a timestamp-only, outcome-independent rule and counted in M-N-PAIR-EXCLUDED-BELOW-DT-MIN. DT_MIN_S is not arbitrary: the pre-2.0 corpus had a median same-target revisit gap of 2707 ms and its separated-pair definition started at 300 s (codex/legacy_artifact_index.json artifact 4.1052, sha 81aba1e898d96fe3c49ae9cd0f4ef00dfdad46a4), so below 300 s the instrument cannot separate page dynamics from navigation and reset noise.",
+      "failure_disposition": "NO_DATA_CONTROL_OR_FRAME_FAIL (status=MEASUREMENT_INVALID)"
+    },
+    {
+      "id": "V6-CENSORING",
+      "rule": "Pages that are 200 at observation 0 but not 200 at observation 1 are right-censored for the change estimand, never silently counted as unchanged and never silently counted as changed. Per stratum: M-CENSOR-FRAC-S <= CENSOR_MAX=0.20, else that stratum refuses certification.",
+      "failure_disposition": "REFUSE_CERTIFY_CENSORED_<strata> (status=COMPLETE, outcome=INCONCLUSIVE)"
+    },
+    {
+      "id": "V7-PAGE-GONE-SEPARATION",
+      "rule": "Observation-1 HTTP 404/410 is a distinct event class from content change, reported as M-DEAD-404-<stratum> with its own bound M-DEAD-UB95-<stratum>; 429/403/503 are counted separately as M-RATE-LIMITED-<stratum>. This adds the arm the parent explicitly lacked (parent handoff U-2: 'no arm separating page-gone from page-delinked or unreachable-under-policy'). It follows the pre-2.0 taxonomy rule that outage/partial availability must not be misread as staleness (CHANGE_EVENT_TAXONOMY_V0, sha f41395817d98f153f098df42cf2cd48f0052eceb, CE-5).",
+      "failure_disposition": "reported, not a validity failure"
+    },
+    {
+      "id": "V8-ENVELOPE-AND-LEDGER",
+      "rule": "M-GETS-CONTROLS-OFFLINE + M-GETS-OBS0 + M-GETS-OBS1 = M-GETS-TOTAL, the live GETs stay within GET_CEILING_TOTAL=3200, per-host concurrency <= 2 with >= 0.10 s spacing, and M-WALL-S <= MODULE_WALL_BUDGET_S=900.",
+      "failure_disposition": "M-PARTIAL is reported; the decision uses only what the ledger actually reconciled"
+    },
+    {
+      "id": "V9-DETECTOR-SENSITIVITY-AND-SPECIFICITY",
+      "rule": "Offline injections prove the primary channel fires on visible-text change (C-DETECT-TEXT-INJECTION) and is blind, by construction and by test, to attribute-only and script-only churn (C-DETECT-ATTR-ONLY, C-DETECT-SCRIPT-ONLY); the blind spot is quantified live as M-CHANGE-ATTR-ONLY-<stratum> and bounded as M-HAZARD-BYTE-UB95-<stratum>.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V10-HOST-STRATUM-CONFOUNDING",
+      "rule": "Hop depth is confounded with host and with URL class. M-HOST-TABLE reports every host's n and k per stratum; M-HOSTS-WITH-BOTH-STRATA counts hosts spanning both strata; M-HOST-CONC-MAX-<stratum> flags a stratum where one host supplies >= HOST_CONC_WARN=0.60 of the paired pages; M-CLASS-FRAC-{VERSION_PINNED,MOVING_ALIAS,OTHER}-<stratum> reports the immutability composition; a stratum that is >= VERSION_PINNED_FRAC_WARN=0.80 version-pinned is tagged BOUNDED_TO_VERSION_PINNED because a zero there would be true by construction rather than measured.",
+      "failure_disposition": "label tags DEPTH_NOT_IDENTIFIABLE / HOST_CONCENTRATED / BOUNDED_TO_VERSION_PINNED, each of which narrows the claim ceiling"
+    },
+    {
+      "id": "V11-REPRESENTATION-LOSS",
+      "rule": "Disclosed and load-bearing: (a) no JavaScript is executed, so client-rendered content is NOT measured; (b) HTML attributes are invisible on the primary channel; (c) bodies are truncated at MAX_BODY_BYTES=8000000 (M-N-TRUNCATED reported, none observed at DESIGN); (d) one egress vantage, one runner, credential-free GET-only, server-rendered HTML; (e) the frame is four documentation hosts reached by same-host <a> navigation only, so it is not a sample of the Web.",
+      "failure_disposition": "n/a - these bound the claim ceiling and are repeated in validity_notes"
+    },
+    {
+      "id": "V12-PREREGISTRATION-TIMING",
+      "rule": "Every threshold, canonicalisation, classifier, cap, bound, control URL and decision branch is frozen in prereg.md before any two-observation pair exists. The DESIGN probes recorded in prereg.md#15 fetched every URL at most once, so no page of the measured frame has a two-observation pair at freeze time and no hazard, change, dead-page or tolerance quantity was computed during DESIGN.",
+      "failure_disposition": "n/a"
+    }
+  ],
+  "decision_rule": {
+    "form": "Total, ordered, disjoint function decide(m) over the frozen metrics in prereg.md#11. There is no branch that depends on anything not present in m, and no branch can be produced or destroyed by redefining a metric after outcomes are visible.",
+    "step_0_validity": "If not (V1..V3, V5, V8 ledger) hold, or the positive control does not fire, or any null control or self-pair changes, or any offline control fails -> label NO_DATA_CONTROL_OR_FRAME_FAIL, status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. This is never a scientific negative.",
+    "step_1_frame": "Else if M-N-PAIR-DEEP < 60 or M-N-PAIR-SHALLOW < 60 -> REFUSE_CERTIFY_INSUFFICIENT_N, status=COMPLETE, outcome=INCONCLUSIVE.",
+    "step_2_censoring": "Else if M-CENSOR-FRAC-DEEP > 0.20 or M-CENSOR-FRAC-SHALLOW > 0.20 -> REFUSE_CERTIFY_CENSORED_DEEP and/or _SHALLOW (stratum-specific), status=COMPLETE, outcome=INCONCLUSIVE.",
+    "step_3_certification": "Else compute per stratum L = cert_level(k_text, n) = the tightest L in {0.01, 0.02, 0.05} with the exact one-sided 95% CP upper bound <= L, else None. Then: both None -> GUARD_REQUIRED_BOTH_STRATA (status=COMPLETE, outcome=FALSIFIES); deep None only -> CERTIFY_SHALLOW_GUARD_DEEP (COMPLETE, MIXED); shallow None only -> CERTIFY_DEEP_GUARD_SHALLOW (COMPLETE, MIXED); both certified -> CERTIFY_BOTH_AT_<max(L_deep,L_shallow)> (COMPLETE, SUPPORTS).",
+    "step_4_contrast": "Independently of the label, M-CONCENTRATION-P-ONE-SIDED = exact one-sided binomial tail for P(shallow events | pooled rate) tests p_deep > p_shallow at ALPHA=0.05; M-CONCENTRATION-DETECTED is true only when that p <= 0.05 AND k_deep > k_shallow. M-CONCENTRATION-MDC-RATE always reports the smallest deep rate this frame could have detected, so 'no concentration detected' is never rendered as 'no concentration'.",
+    "step_5_tags": "Append __DEPTH_NOT_IDENTIFIABLE when M-HOSTS-WITH-BOTH-STRATA < 2, __HOST_CONCENTRATED when max host concentration >= 0.60, __BOUNDED_TO_VERSION_PINNED when a stratum is >= 0.80 version-pinned. Tags narrow the claim ceiling and never strengthen it.",
+    "step_6_retro_channel": "The B-RETRO-LONG-DT channel is reported with its own window, n, k, bound and certified level, and is admitted only when not negotiation-suspected and its median window lies in [6 h, 30 d]. It CANNOT change the primary label; it can only add or withhold a longer-window statement.",
+    "exhaustiveness": "Nine distinct labels were produced by offline canaries C-DECIDE-* and C-SUMMARY-* in raw/controls.jsonl before freeze; every one is reachable from a state of the world and none is engineered. Branches that a data-dependent redefinition could manufacture were removed by freezing the canonicalisation, the class regexes, the caps and the bounds in the module hash."
+  },
+  "product_consequence_positive": "Product can skip a zero-GET intra-session freshness guard for a named stratum of credential-free server-rendered documentation pages at reuse lags up to the measured separation, at the certified tolerance level, for this host class and vantage. Concretely: CERTIFY_BOTH_AT_0P01 or _0P02 means inherited knowledge from hop<=2 AND hop>=3 pages may be reused without a freshness GET for lags <= the measured DT; CERTIFY_SHALLOW_GUARD_DEEP means the guard (or a TTL ladder) is required only where hop>=3 state is reused, which is exactly where Graph's resolver and Runtime's denylist work would need a guard. A non-zero retro channel at 0.5-2 days would additionally license a TTL-shaped policy (reuse without GET, revalidate after T) instead of an unconditional intra-session guard. No promotion, no Product Core entry, no shipped number: the certified tolerance is a session-scale bound for a declared page class, not a general freshness mechanism.",
+  "product_consequence_negative": "GUARD_REQUIRED_BOTH_STRATA or CERTIFY_SHALLOW_GUARD_DEEP leaves the product decision UNCHANGED in the negative direction: an intra-session freshness guard (or a TTL) must be designed wherever the corresponding stratum's state is reused, and the design must be scoped by hop depth rather than by assumption. REFUSE_CERTIFY_* and NO_DATA_* leave the decision exactly where it is - unknown - and, per the mandate, are recorded as measurement outcomes with the named blocker rather than converted into an assumption. In no branch does this packet license 'no guard needed'.",
+  "estimated_cost": {
+    "live_gets": "~2540 of a 3200 ceiling (measured: 1123 GETs and 100.9 MB for the observation-0 sweep of the frozen full-cap frame; ~1107 observation-1 GETs for the admitted set; 292 retrospective GETs; ~20 control/self-pair GETs).",
+    "bytes": "~220 MB total across both observations plus the retrospective channel.",
+    "wall_clock": "observation 0 measured 37.3 s on the bound hosts; projected total module wall ~460 s (sweep 40 s + separation 360 s + observation 1 ~70 s) against MODULE_WALL_BUDGET_S=900 and the harness envelope SPIDER_MODEL_MAX_RUNTIME_SECONDS=1200.",
+    "compute": "stdlib-only Python, no browser, no JavaScript engine, no model endpoint, no credentials, no pip install. Money cost zero on the free-model lane.",
+    "design_cost_already_spent": "104 probe GETs (frame reachability, control pool, transport cost) plus one full-cap observation-0 sweep of 1123 GETs, all single-observation."
+  },
+  "expected_information_gain": "The product question 'does an agent need any intra-session freshness guard at all' is currently assumption, not measurement: every hazard metric in the parent packet is null because its second observation never happened (EXP-FRONTIER-38940047535 VN-7). This packet is the smallest design that can settle it by measurement, because it needs no store, no revalidation ladder, no cost model and no multi-cycle window. Each branch changes a decision: CERTIFY_BOTH retires the guard question for the declared page class at the named tolerance; CERTIFY_SHALLOW_GUARD_DEEP converts an open question into a hop-depth-scoped guard requirement (the mandate's stated counterfactual); GUARD_REQUIRED_BOTH makes a guard mandatory and gives its required sensitivity; REFUSE_CERTIFY_* and NO_DATA_* name the exact missing prerequisite at a cost of ~460 s instead of leaving the question open for another cycle. The power ceiling is stated in advance: with the measured frame the exact contrast can only detect deep-stratification at a deep hazard of roughly 1.6% or above, so a 'no concentration' result is a bound, not an absence claim. The secondary retrospective channel is the only route in this design to a window two orders of magnitude longer than the in-process separation, at ~292 extra GETs.",
+  "legacy_disposition": {
+    "classification": "LEGACY: DISTINCT_EXTENSION of the pre-2.0 frontier volatility/freshness thread, plus one REPLICATION of its instrument lesson, with NO_MATCH against the pre-2.0 next-state work named in the Director mandate.",
+    "non_duplicate_of_mandate_named_precedents": "The Director screened the compact legacy set and recorded NO_MATCH: P2-WP002B (901 true next-state transitions, rule DIM-ACC 0.6238 vs NN 0.6295 vs shuffle 0.5706) and P2-WP003B (sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e; action-only MSE 0.756 vs full 0.735, pre-state mechanics <3% additional variance) concern ONE-STEP next-state prediction and action-feature mechanics on committed trajectory corpora; P2-WP003 (sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9) is MEASUREMENT_INVALID for prev_action leakage. None of them measures per-page invalidation probability over a wall-clock window on a live frame, and none is repeated here.",
+    "targeted_primary_source_comparisons": [
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/ledger + reports/CENSUS_REPORT_V3.md + results/census/CENSUS_V3.json",
+        "sha": "81aba1e898d96fe3c49ae9cd0f4ef00dfdad46a4",
+        "codex_ref": "codex/legacy_artifact_index.json artifact 4.1052 / 4.1053 / 4.1253",
+        "what_it_established": "A census-first, zero-network, structure-only census over committed corpora DENIED the days-to-weeks staleness question structurally: max same-target revisit gap 0.021812 d (31.4 min), median 2707 ms, 26 separated pairs (>=300 s), expected events 26 < 64 required. It also mined validation-tier priors: openlibrary double-reset drift 7/12 at seconds scale, and 62/62 placebo zero-drift pairs.",
+        "relation_here": "DISTINCT_EXTENSION. The legacy denial is a statement about COMMITTED BYTES and about the days-to-weeks band. This packet creates a NEW live longitudinal two-observation frame (which the legacy cycle report itself names as the only discriminating path: 'Exactly one discriminating path exists: an authorized longitudinal collection'), and it deliberately scopes the estimand to the session-scale band that legacy actually measured mass for, at a separation (>=300 s) that legacy itself defined as the 'separated' regime. The seconds-scale drift prior (7/12 on a dynamic site) is carried as a prior, not as evidence, and no day-scale claim is made."
+      },
+      {
+        "artifact": "results/intel/reproductions/cycle8/ttl_window1.json",
+        "sha": "43d21a4a384bc5a242c6bb6f4725e4093982f0fb",
+        "codex_ref": "codex/legacy_artifact_index.json artifact 4.443",
+        "what_it_established": "A frozen change-detection rule 'CHANGED iff ETag differs; if ETag absent on either side, CHANGED iff head-hash differs', with the explicit cycle-8 finding that a resource can vary bytewise under ONE unchanged ETag, and that a per-request trace identifier makes a resource volatile without its content changing.",
+        "relation_here": "REPLICATION + REPAIR. The instrument lesson is replicated and adopted as a bound artifact: the ETag/Last-Modified channel is a covariate only (B-TRANSPORT-CHANNEL) and the event channels are body-hash based. The pre-2.0 rule was decided on a synthetic/JSON fixture set; this packet makes the same lesson load-bearing on real HTML pages and additionally reports the reverse error, byte-changed-but-text-unchanged, which the legacy rule could not see."
+      },
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/contracts/CHANGE_EVENT_TAXONOMY_V0.md and contracts/FRESHNESS_SIGNAL_CONTRACT_V0.md",
+        "sha": "f41395817d98f153f098df42cf2cd48f0052eceb / 0a53685fd4188dfc17beefca9950c1e6921d4a39",
+        "codex_ref": "codex/legacy_artifact_index.json artifacts 4.1247 / 4.1248",
+        "what_it_established": "A shared vocabulary in which CE-1/2/3/5 are the admissible environment-side classes, CE-4 (session/auth) is excluded by design, CE-6 (cosmetic churn below tolerance) is by construction not an event, CE-5 (outage) must not be misread as staleness; and a contract declaring seconds-scale extrapolation INVALID and controller-side replica-store rates INVALID as environment hazard.",
+        "relation_here": "ADOPTED AS THE EVENT TAXONOMY. This packet instantiates it rather than re-deriving it: text-channel change maps to CE-1/CE-2/CE-3, attribute/script-only churn maps to CE-6 and is counted separately (M-CHANGE-ATTR-ONLY), 404/410 and 5xx map to the CE-5/death channels and are never folded into the change rate, and no session-state, cookie or authenticated class is present because every fetch is a credential-free GET with a canonical reset between pages. The contract's ban on seconds-to-days extrapolation is honoured literally: every bound here carries its measured window and no bound is transported across timescales."
+      },
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/results/census_v3/CENSUS_REPORT.json + intel cycle6/7/8/9 TTL windows",
+        "sha": "cc697069ad1f9b53454556cc697069ad1f5b2c96f / 9878122f352b (cycle6 ttl_window1)",
+        "codex_ref": "codex/legacy_artifact_index.json artifacts 4.1055 / 4.253 / 4.380",
+        "what_it_established": "Repeated TTL-window protocols in which window 2 was declared NOT_EXECUTED because it required a >=24 h calendar gap that no cycle could wait for, with a window-regress cap of 3 windows.",
+        "relation_here": "THIS IS THE GAP THIS PACKET ATTACKS. The legacy program could not obtain a long-window two-observation comparison inside its own harness. The B-RETRO-LONG-DT channel obtains one at zero additional waiting by reusing the parent's already-frozen observation-0 hashes as a real first observation, which is exactly the longitudinal second point the legacy protocol was blocked from taking. The pre-2.0 window-2 requirement of >=24 h is also the reason DT_MAX_S is set at 900 s for the primary channel and why the longer window is carried by a separate, explicitly secondary channel."
+      }
+    ],
+    "explicit_non_duplication_of_research_2_0_precedents": "EXP-FRONTIER-37950626378 (hop-scaling cost law) measures GET/byte cost as a function of N and is a different estimand; EXP-FRONTIER-38184956362 (bounded negative) closed the site-native DISCOVERY axis (0/208 deep items within <=3 charged GETs) and is preserved as inherited and is not re-run; EXP-FRONTIER-38940047535 measured persistence-maintenance ECONOMICS and produced no hazard quantity at all (all M-CHANGE-*, M-DEAD-*, M-HAZARD-*, M-TAU-LADDER null), so nothing here repeats it."
+  },
+  "parent_handoff_disposition": {
+    "source": "research/experiments/EXP-FRONTIER-38940047535/handoff.json (sha256 6ad3d1291db49d05ecafd88ae58c4ce0d27f633f9d3dc01a62f741dfd5dd555e)",
+    "disposition": "USE as continuity evidence. The Director mandate (CONTINUE, claim C-WEB-DYNAMICS) is the binding direction; the parent handoff's next_question is advisory and its PARK instruction on the persistence-economics subthread is honoured - this packet contains no store, no revalidation ladder and no cold-vs-store cost comparison.",
+    "established_preserved": [
+      "The parent's scoring instrument was sound (code identity, 15/15 offline controls, 4/4 seed liveness), so its failure was not instrumental - the audit ceiling supports no statement about persistence economics in either direction, and C-CROSSSITE stays HYPOTHESIS.",
+      "Definitional coverage held in the parent (n_paths == n_admitted), so the aged-external-list miss mode of EXP-FRONTIER-38188815194 is structurally eliminated.",
+      "The blocking defect is census POLICY, not runtime: fetching stopped when discovery hit BUDGET=250, leaving 363 of 402 discovered deep URLs never fetched, and admitted items came from only 2 of 4 hosts.",
+      "Census-population degeneracy was measured, not assumed: 926 is a DISCOVERED-URL count, not a GET count (302 GETs were spent under the identical policy), and the parent's cited economics.jsonl does not exist in the repository.",
+      "Design satisfiability on the bound seeds was never demonstrated: the parent's treatment-liveness probes ran only on locally generated synthetic sites (n_admitted=96/120) while the review states 'No frame page was crawled for this review'."
+    ],
+    "rejected_preserved": [
+      "Site-native discovery channels deliver 0/208 deep state-carrying items within <=3 charged GETs on that substrate class (inherited accepted Codex evidence, EXP-FRONTIER-38184956362, audit PASS). Not re-run; does not close other axes.",
+      "Any reuse of 926 / 833.4 / 4.006731 as GET-based thresholds is rejected. No cost quantity is computed in this packet at all, so the unit defect cannot recur.",
+      "The parent's MIN_ADMITTED=40 reachability claim is rejected as unestablished; this packet does not inherit any threshold from it."
+    ],
+    "unknown_addressed": [
+      "Parent VN-7 / U-1 / U-2 (no invalidation observation of any kind; deep population never fetched; page-gone indistinguishable from unreachable) - addressed by the fetch-complete frame, the two-observation diff and the separate death channel.",
+      "Parent U-5 (whether MIN_ADMITTED=40 is reachable under ANY census policy on these seeds) - addressed by a DESIGN probe on the bound hosts themselves rather than on synthetic sites.",
+      "Parent U-3 (all hazard metrics null) - addressed directly as the estimand.",
+      "Parent U-4 (VN-4 counterfactual arithmetic, non-decisional) - not carried forward; no arithmetic substitute is used anywhere in this packet."
+    ],
+    "do_not_assume_carried_forward": [
+      "Do not read the parent's MEASUREMENT_INVALID as falsification of persistence economics or of C-CROSSSITE.",
+      "Do not read any null metric here as 'nothing changes': a zero is only interpretable when the positive control fired, both null families stayed silent and the frame gate passed, and it is always a bound at a measured window, never an absence claim.",
+      "Do not extrapolate any bound here to the days-to-weeks band, to JavaScript-rendered pages, to authenticated pages or to any other egress vantage.",
+      "Do not treat the certified tolerance as a shipped freshness mechanism; it is a session-scale bound for a declared page class.",
+      "Do not re-run or weaken the parent's persistence-economics design; that thread is parked by mandate."
+    ]
+  },
+  "repairs_of_parent_defects": [
+    {
+      "parent_defect": "Discover-until-budget starvation: 363 of 402 discovered deep URLs (90.3%) never fetched; deep stratum admitted from only 2 of 4 hosts.",
+      "repair": "Stratum-reserved, level-ordered BFS: levels 0-2 (SHALLOW) are capped at SHALLOW_CAP_PER_HOST=140 fetches and levels >=3 (DEEP) at DEEP_CAP_PER_HOST=220 fetches; when the shallow budget is exhausted the sweep SKIPS the level but keeps descending, so the deep stratum is always fetched. Verified live at DESIGN with the exact frozen module: deep 686 / shallow 421 admitted, all four hosts contributing to both strata, 0 deep URLs discovered-but-unfetched beyond the declared caps."
+    },
+    {
+      "parent_defect": "No arm separating page-gone from page-delinked from unreachable-under-policy (parent U-2), so a 404 could be misread as staleness.",
+      "repair": "M-DEAD-404-<stratum> and M-DEAD-UB95-<stratum> as an independent right-censored channel; 429/403/503 counted as M-RATE-LIMITED-<stratum>; only 200-at-both-observations pairs enter the change estimand."
+    },
+    {
+      "parent_defect": "Live positive sensitivity control never exercised (parent VN-7): all five control URLs were fetched once at observation 0 only, so a zero-event hazard result would have been uninterpretable.",
+      "repair": "Three pre-registered volatile URLs plus two static null anchors are fetched at BOTH observations and a hard gate requires >=1 positive firing and 0 null/self-pair changes; DESIGN probed a six-URL candidate pool and disclosed which fired."
+    },
+    {
+      "parent_defect": "Design satisfiability demonstrated only on synthetic sites (audit AUD-DESIGN-SATIFIABILITY-GAP).",
+      "repair": "Four DESIGN probes on the BOUND HOSTS: deep-URL fetchability (23/24 previously-unfetched deep URLs HTTP 200), shallow fetchability (24/24), a transport-cost probe (10.05 GET/s, p50 0.149 s), and a full-cap observation-0 sweep of the exact frozen module (1119 rows, 1107 admitted, 37.3 s) that measures the frame size, the deep/shallow split and the host composition the decision rule needs."
+    },
+    {
+      "parent_defect": "Envelope risk from in-process waiting (parent-of-parent used a 3000 s ladder; SPIDER_MODEL_MAX_RUNTIME_SECONDS=1200).",
+      "repair": "Separation frozen at 360 s with hard bounds [300, 900] s, per-stage checkpoints in raw/PROGRESS.json, a measured throughput basis (10 GET/s observed, 24.5 GET/s in the full sweep) and GET ceilings per observation; the module writes observation-0 artifacts BEFORE sleeping so a killed run still leaves RAW evidence."
+    }
+  ],
+  "design_probes_observed": {
+    "boundary": "Cheap pre-freeze satisfiability probes only, executed 2026-10-17T14:25Z..14:36Z. Every URL was fetched AT MOST ONCE except the six control candidates, which were fetched twice within <=5 s for instrument-sensitivity selection. No page of the measured frame has a two-observation pair, so no hazard, change, dead-page, tolerance or concentration quantity was computed at DESIGN.",
+    "P1_seed_liveness": "4/4 frozen seeds HTTP 200 (22496 / 31975 / 24433 / 22046 bytes; latency 0.128 / 0.366 / 0.449 / 0.375 s).",
+    "P2_deep_fetchability": "24 previously-unfetched deep URLs sampled deterministically from the parent's census (8 doc.rust-lang.org, 8 docs.pytest.org, 4 pandas.pydata.org, 4 known-good readthedocs deep): 23/24 HTTP 200, 1x HTTP 404 (pandas.pydata.org/donate.html), latency 0.113-0.483 s, body 7974 B - 1.5 MB. Confirms the deep stratum is reachable, which the parent never established.",
+    "P3_shallow_fetchability": "24/24 previously fetched shallow URLs HTTP 200, mean latency 0.144 s.",
+    "P4_control_candidate_pool": "10 candidates x 2 GETs <=5 s apart. Fired: www.cloudflare.com/cdn-cgi/trace, api.github.com/rate_limit, timeapi.io/api/Time/current/zone. Did not fire: api.github.com/repos/rust-lang/rust/releases/latest, api.github.com/repos/python/cpython/events?per_page=10 (both stable within 5 s), worldtimeapi.org (unreachable). Static nulls stable: example.com, www.iana.org/domains/reserved, api.github.com/repos/octocat/Hello-World, www.rfc-editor.org/rfc/rfc9110.html.",
+    "P5_transport_cost": "32 GETs with the frozen concurrency policy (6 workers, per-host concurrency 2, 0.10 s spacing, 12 s timeout, UA spider-r2/1.0): wall 3.18 s, 10.05 GET/s, latency p50 0.149 s / p90 0.233 s / max 0.473 s, 32/32 2xx, 2.96 MB.",
+    "P6_exact_bound_arithmetic": "Offline only. One-sided 95% CP upper bound at k=0: n=59 -> 0.049508, n=149 -> 0.019905, n=299 -> 0.009969; minimum n for a certified level 0.05/0.02/0.01 is 59/149/299. Contrast power at n_deep=380, n_shallow=420 with zero shallow events: first detectable deep count is 6 (rate 0.0158, p=0.042); 5 events give p=0.072. At the certified-1% n the bound is broken by the first event (k=1,n=299 -> 0.0158 -> level 0.02).",
+    "P7_offline_control_suite": "35/35 offline controls pass under the frozen module: 6 fixture detector/canonicalisation controls, 4 exact-bound controls, 1 cert-ladder control, 1 contrast-power control, 10 decision-branch canaries, 11 raw->derived->decision pipeline canaries (including one that exercises every certification level, the censoring refusal, the page-gone channel, the short-separation frame failure, the DT eligibility floor and the depth-not-identifiable tag).",
+    "P8_full_cap_obs0_sweep": "Run with the EXACT frozen module (self-hash 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573) at the frozen full caps: 1123 live GETs (plus 8 offline fixture GETs), 1119 rows written, 1107 HTTP 200 / 6x HTTP 404 / 6 transport errors, 100.9 MB, 37.26 s wall. Strata: deep(hop>=3)=686 {doc.rust-lang.org 220, docs.pytest.org 219, docs.readthedocs.io 28, pandas.pydata.org 219}, shallow(hop<=2)=421 {43, 98, 140, 140}. Hop histogram {0:4, 1:138, 2:281, 3:550, 4:145, 5:1}. URL classes: deep {MOVING_ALIAS 439, OTHER 225, VERSION_PINNED 22}, shallow {274, 146, 1}. All four hosts populate both strata with >=25 paired pages, so M-HOSTS-WITH-BOTH-STRATA=4 is expected; maximum host concentration 220/686=0.321 < HOST_CONC_WARN=0.60; maximum version-pinned fraction 22/686=0.032 < 0.80.",
+    "probe_consequence": "Every satisfiability question the parent's audit raised is now answered on the bound substrate: the deep stratum is fetchable, large (n~686 >> MIN_N_PER_STRATUM=60 and > the 299 needed for a 1% certification), host-diverse, not a version-pinned ceiling, and cheap enough (37 s for observation 0, ~24.5 GET/s) to carry a 360 s separation plus a full second observation inside the harness envelope."
+  },
+  "metric_ids": [
+    "M-GETS-TOTAL", "M-GETS-CONTROLS-OFFLINE", "M-GETS-OBS0", "M-GETS-OBS1",
+    "M-N-DISCOVERED", "M-N-ADMITTED", "M-N-PAIR-ALL", "M-N-PAIR-DEEP", "M-N-PAIR-SHALLOW",
+    "M-N-PAIR-EXCLUDED-BELOW-DT-MIN", "M-CENSORED-ALL", "M-CENSORED-DEEP", "M-CENSORED-SHALLOW",
+    "M-CENSOR-FRAC-DEEP", "M-CENSOR-FRAC-SHALLOW", "M-DEAD-404-DEEP", "M-DEAD-404-SHALLOW",
+    "M-DEAD-UB95-DEEP", "M-DEAD-UB95-SHALLOW", "M-UNREACHABLE-DEEP", "M-UNREACHABLE-SHALLOW",
+    "M-RATE-LIMITED-DEEP", "M-RATE-LIMITED-SHALLOW",
+    "M-CHANGE-TEXT-ALL", "M-CHANGE-TEXT-DEEP", "M-CHANGE-TEXT-SHALLOW",
+    "M-CHANGE-RATE-TEXT-DEEP", "M-CHANGE-RATE-TEXT-SHALLOW",
+    "M-CHANGE-BYTE-ALL", "M-CHANGE-BYTE-DEEP", "M-CHANGE-BYTE-SHALLOW",
+    "M-CHANGE-ATTR-ONLY-ALL", "M-CHANGE-ATTR-ONLY-DEEP", "M-CHANGE-ATTR-ONLY-SHALLOW",
+    "M-CHANGE-TRANSPORT-ALL", "M-CHANGE-TRANSPORT-DEEP", "M-CHANGE-TRANSPORT-SHALLOW",
+    "M-HAZARD-TEXT-UB95-ALL", "M-HAZARD-TEXT-UB95-DEEP", "M-HAZARD-TEXT-UB95-SHALLOW",
+    "M-HAZARD-BYTE-UB95-ALL", "M-HAZARD-BYTE-UB95-DEEP", "M-HAZARD-BYTE-UB95-SHALLOW",
+    "M-CERT-LEVEL-TEXT-DEEP", "M-CERT-LEVEL-TEXT-SHALLOW",
+    "M-DT-MIN-S", "M-DT-MEDIAN-S", "M-DT-P90-S", "M-DT-MAX-S", "M-DT-MEDIAN-ALLPAIRS-S",
+    "M-HOST-TABLE", "M-HOSTS-WITH-BOTH-STRATA", "M-HOST-CONC-MAX-DEEP", "M-HOST-CONC-MAX-SHALLOW",
+    "M-CLASS-FRAC-VERSION_PINNED-DEEP", "M-CLASS-FRAC-VERSION_PINNED-SHALLOW",
+    "M-CLASS-FRAC-MOVING_ALIAS-DEEP", "M-CLASS-FRAC-MOVING_ALIAS-SHALLOW",
+    "M-CLASS-FRAC-OTHER-DEEP", "M-CLASS-FRAC-OTHER-SHALLOW",
+    "M-CHANGE-BY-CLASS-VERSION_PINNED-DEEP", "M-CHANGE-BY-CLASS-MOVING_ALIAS-DEEP",
+    "M-CHANGE-BY-CLASS-OTHER-DEEP", "M-CHANGE-BY-CLASS-VERSION_PINNED-SHALLOW",
+    "M-CHANGE-BY-CLASS-MOVING_ALIAS-SHALLOW", "M-CHANGE-BY-CLASS-OTHER-SHALLOW",
+    "M-CONCENTRATION-P-ONE-SIDED", "M-CONCENTRATION-DETECTED", "M-CONCENTRATION-MDC-RATE",
+    "M-LIVE-POS-CHANGED", "M-LIVE-POS-OK", "M-LIVE-NULL-CHANGED", "M-LIVE-NULL-OK",
+    "M-SELFPAIR-CHANGED", "M-SELFPAIR-BYTE-CHANGED", "M-SELFPAIR-N", "M-SELFPAIR-MAX-GAP-S",
+    "M-OFFLINE-CONTROLS-PASS", "M-OFFLINE-CONTROLS-FAILING",
+    "M-RETRO-N-ALL", "M-RETRO-N-DEEP", "M-RETRO-N-SHALLOW",
+    "M-RETRO-CHANGE-BYTE-ALL", "M-RETRO-CHANGE-BYTE-DEEP", "M-RETRO-CHANGE-BYTE-SHALLOW",
+    "M-RETRO-UB95-ALL", "M-RETRO-UB95-DEEP", "M-RETRO-UB95-SHALLOW",
+    "M-RETRO-CERT-LEVEL-ALL", "M-RETRO-CERT-LEVEL-DEEP", "M-RETRO-CERT-LEVEL-SHALLOW", "M-RETRO-INFO",
+    "M-SEED-ERRORS", "M-N-TRUNCATED", "M-TIME-TRUNCATED-HOSTS", "M-SHALLOW-CAPPED-HOSTS",
+    "M-DEEP-CAPPED-HOSTS", "M-SEPARATION-REQUESTED-S", "M-WALL-S", "M-PARTIAL"
+  ],
+  "control_ids": [
+    "C-CANON-IDEMPOTENT", "C-DETECT-TEXT-INJECTION", "C-DETECT-ATTR-ONLY", "C-DETECT-SCRIPT-ONLY",
+    "C-CENSOR-404-DETECTED", "C-LIVE-DETECTOR-ON-FIXTURE", "C-CP-BOUND-N60", "C-CP-BOUND-N150",
+    "C-CP-BOUND-N299", "C-CP-BOUND-K1N400", "C-CERT-LEVEL-LADDER", "C-CONTRAST-POWER",
+    "C-DECIDE-CERTIFY-BOTH", "C-DECIDE-GUARD-BOTH", "C-DECIDE-GUARD-DEEP", "C-DECIDE-GUARD-SHALLOW",
+    "C-DECIDE-INSUFFICIENT-N", "C-DECIDE-CENSORED", "C-DECIDE-CONTROL-FAIL",
+    "C-DECIDE-NOT-IDENTIFIABLE", "C-DECIDE-HOST-CONCENTRATED", "C-DECIDE-VERSION-PINNED",
+    "C-DECIDE-BRANCHES-DISTINCT", "C-SUMMARY-ZERO-EVENTS", "C-SUMMARY-DEEP-EVENTS",
+    "C-SUMMARY-CENSOR-AND-DEAD", "C-SUMMARY-CENSOR-REFUSAL", "C-SUMMARY-INSUFFICIENT-N",
+    "C-SUMMARY-GUARD-BOTH", "C-SUMMARY-GUARD-DEEP-ONLY", "C-SUMMARY-GUARD-SHALLOW-ONLY",
+    "C-SUMMARY-SHORT-SEPARATION", "C-SUMMARY-ELIGIBLE-DT-FLOOR",
+    "C-SUMMARY-DEPTH-NOT-IDENTIFIABLE", "C-SUMMARY-MDC-REPORTED",
+    "C-FRAME-DEPTH-PRESENT", "C-LIVE-POS-SENSITIVITY", "C-LIVE-NULL-STABILITY",
+    "C-SELFPAIR-DETERMINISM", "C-RETRO-INSTRUMENT-ADMISSION", "C-CODE-IDENTITY", "C-SEED-LIVENESS",
+    "C-LEDGER-RECONCILIATION"
+  ],
+  "freeze_eligibility": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "decide() is a total ordered function on ten frozen inputs and was executed before freeze on eleven synthetic raw-row frames plus ten direct canaries, producing nine distinct labels (CERTIFY_BOTH_AT_0P01, CERTIFY_BOTH_AT_0P05, CERTIFY_SHALLOW_GUARD_DEEP, CERTIFY_DEEP_GUARD_SHALLOW, GUARD_REQUIRED_BOTH_STRATA, REFUSE_CERTIFY_INSUFFICIENT_N, REFUSE_CERTIFY_CENSORED_DEEP, REFUSE_CERTIFY_CENSORED_DEEP_SHALLOW, NO_DATA_CONTROL_OR_FRAME_FAIL) plus three narrowing tags. Every branch is a state of the world reachable at the measured frame sizes: the certification branch is reachable because n_deep=686 and n_shallow=421 both exceed the 299 needed for a 1% level; the guard branches are reachable because the first event at n=299 already breaks the 1% level and 12 events at n=380 break even the 5% level (both computed exactly offline); the censoring refusal is reachable because the DESIGN sweep already produced 12 non-200 rows; the short-separation frame failure is reachable if the sweep itself exhausts the envelope; the insufficient-n refusal is reachable if a seed's deep population collapses. No branch is empty, none is engineered, and none can be produced by redefining a metric after outcomes are visible because the canonicalisation, class regexes, caps, bounds and thresholds are all inside the hashed module.",
+      "evidence_refs": ["prereg.md#11", "prereg.md#10", "prereg.md#14", "prereg.md#15"]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every prerequisite was exercised on the real substrate at DESIGN, not asserted. Network egress from this runner is confirmed for all four frozen seeds (HTTP 200), for 24 deep URLs the parent never fetched (23/24 HTTP 200, one 404), for 24 shallow URLs (24/24 HTTP 200) and for all 10 control candidates. The frozen module is stdlib-only, compiles, imports cleanly and was executed end to end at DESIGN in two modes: 35/35 offline controls (fixture HTTP server, exact bounds, decision and pipeline canaries) and a full-cap live observation-0 sweep that produced real artifacts (1119 rows, 1107 admitted, 100.9 MB, 37.26 s, self-hash matching DERIVED_SHA256). No pip install, model endpoint, browser, Docker, JavaScript engine or credential is required. The two parent bound artifacts the module reads at EXECUTE exist at their frozen paths and are listed in freeze_artifacts, so the retrospective channel's inputs cannot silently drift. Measured throughput (10.05 GET/s in the cost probe, 24.5 GET/s in the full sweep) puts the projected ~460 s module wall inside MODULE_WALL_BUDGET_S=900 and the 1200 s harness envelope.",
+      "evidence_refs": ["prereg.md#6", "prereg.md#15", "prereg.md#16", "prereg.md#19"]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "The primary comparator (B-SHALLOW-MATCHED-DT) is the other stratum of the same live frame at the same measured separation, so no baseline is a stale inherited constant and no comparison can be won by a difference in instrument, vantage, transport or host mix. The secondary comparator (B-RETRO-LONG-DT) is a real second observation rather than an assumption, and it is declared SECONDARY so it cannot manufacture a primary win. The byte channel and the transport channel are the sensitivity comparators that keep the narrow primary channel honest. There is no ceiling baseline: the frame is not a store of immutable artefacts, the measured version-pinned fraction is 3.2% of deep pages and 0.2% of shallow pages (far below the 0.80 BOUNDED_TO_VERSION_PINNED guard), and 96.8% of the deep stratum is MOVING_ALIAS content that changes at release boundaries - so a zero in the deep stratum would be measured, not true by construction. There is no floor baseline either: the live positive control fires when content changes, and the frozen detector is proven by offline injection to fire on visible-text change.",
+      "evidence_refs": ["spec.json#baselines", "prereg.md#7", "prereg.md#17"]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Every control fires in both directions under the same code that scores the experiment, and all were observed before freeze. Offline: an injected visible-text change is detected on the primary channel; an attribute-only change and a script-nonce-only change are provably invisible on the primary channel and visible on the byte channel; a fixture 404 is detected and routed to the censoring channel; two identical fixture GETs are unchanged; the exact one-sided Clopper-Pearson bound reproduces hand-computed values at (0,60)=0.048703, (0,150)=0.019773, (0,299)=0.009969, (1,400)=0.011804 to 5e-6; the certification ladder resolves (0,299)->0.01, (0,150)->0.02, (0,60)->0.05, (1,400)->0.02; the contrast canary separates p(6 deep events)=0.042 from p(5)=0.072. Live: a six-URL candidate pool was probed at DESIGN with the exact detector, three fired and are frozen as the positive controls, two static anchors and two further static pages stayed silent and two are frozen as null controls. At EXECUTE the gate requires >=1 of 3 positives to change between the two observations, 0 of 2 nulls to change, and 0 of 10 in-frame self-pairs to change; any failure is a hard MEASUREMENT_INVALID that forbids a zero-event interpretation. The in-frame self-pair family is deliberately included because an external tiny page cannot demonstrate the absence of detector noise on multi-megabyte documentation pages.",
+      "evidence_refs": ["prereg.md#9", "prereg.md#10", "prereg.md#15"]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "There is no treatment arm in the classical sense; the live mechanism is the fetch-complete stratum-reserved census, and its liveness is the deep stratum being genuinely fetched. That was demonstrated on the bound hosts with the exact frozen module at the frozen full caps, not on synthetic sites: 686 deep pages (hop>=3) and 421 shallow pages (hop<=2) admitted, hop histogram reaching level 5, all four hosts contributing to both strata, 0 pages discovered and then unfetched beyond the declared caps, 1107 HTTP 200 of 1119 attempted. The parent's failure mode is therefore structurally excluded: its census stopped FETCHING when DISCOVERY hit the budget and left 90.3% of discovered deep URLs unfetched, admitted from 2 of 4 hosts; this sweep reached 4 of 4 hosts in both strata. A second smoke with tiny caps (SHALLOW_CAP=22, DEEP_CAP=6) confirmed the descent rule itself: all four hosts still reached hop 3 with 24/24 HTTP 200 deep pages, i.e. the deep stratum survives even when the shallow budget is exhausted, which is precisely the case the parent failed. Instrument identity is pinned by DERIVED_SHA256 and the module's own self-hash equalled it in the DESIGN run.",
+      "evidence_refs": ["prereg.md#6", "prereg.md#10", "prereg.md#15"]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed as an exact repository-relative path that exists at freeze time and will be hashed into freeze.json.artifact_hashes: the parent's execute_module.py (the transport, normalisation and link-extraction policy this module reuses), the parent's census.jsonl (both the design-time deep-stratum topology evidence and, at EXECUTE, the retrospective channel's observation-0 reference), the parent's provenance.json (the observation-0 window timestamps from which the retrospective separation is computed), the parent's result.json / audit.json / handoff.json (the defects this packet repairs and the four-way continuity state), the parent's freeze.json (the hash chain that verifies the parent's census identity), and the three mutable registries that fix claim identity, claim status and lane-charter authority. The executed module is not a separate repository file at freeze time; its identity is pinned by DERIVED_SHA256 against the frozen preregistration block, and prereg.md is itself hashed in freeze.json.hashes.",
+      "evidence_refs": ["spec.json#freeze_artifacts", "prereg.md#10", "prereg.md#19"]
+    }
+  },
+  "freeze_artifacts": [
+    "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json",
+    "research/experiments/EXP-FRONTIER-38940047535/audit.json",
+    "research/experiments/EXP-FRONTIER-38940047535/handoff.json",
+    "research/experiments/EXP-FRONTIER-38940047535/freeze.json",
+    "codex/claim_state.json",
+    "research/claims/registry.json",
+    "research/lanes/registry.json"
+  ],
+  "claim_ceiling_rules": {
+    "CC-A": "The most this packet can establish is a session-scale per-page invalidation upper bound, per hop-depth stratum, for credential-free GET-only server-rendered documentation pages on four documentation hosts reachable by same-host <a> navigation, from a single egress vantage, at the measured separation. Any wording that exceeds this is out of scope.",
+    "CC-B": "A certified level is a statement about the observed pairs only. It is NOT a claim that the Web is stable, NOT a claim about the days-to-weeks band (pre-2.0 evidence: undecidable on committed corpora, sha 81aba1e898d96fe3c49ae9cd0f4ef00dfdad46a4), NOT a claim about JavaScript-rendered or authenticated content, and NOT a claim about a second vantage.",
+    "CC-C": "C-WEB-DYNAMICS stays HYPOTHESIS regardless of outcome. A certification is a bounded measurement about a page class, not evidence of predictive dynamical structure of the kind the claim title describes; a guard-required outcome is likewise a bounded measurement. No EXPERIMENTAL or PRODUCT_CORE promotion is available from this packet, and no self-promotion is permitted.",
+    "CC-D": "NO_DATA_* and REFUSE_CERTIFY_* are packet/measurement dispositions. Under research/EXPERIMENT_PACKET.md section 7 they do not move the effective epistemic status of C-WEB-DYNAMICS, which remains HYPOTHESIS (codex/claim_state.json effective_event_by_claim['C-WEB-DYNAMICS'] = HYPOTHESIS, from EXP-PHYSICS-38074818597).",
+    "CC-E": "The retrospective channel may be cited only with its measured window and its own host-composition caveat (253 of 292 reference pages are hop<=2, readthedocs-heavy). It may not be combined with the primary channel to form a stronger bound than either supports alone."
+  },
+  "claim_dependencies": {
+    "C-FRESHNESS": "Consumes this packet's certified tolerances as guard-design inputs. Owned by graph/runtime/product, NOT in scope here and NOT updated by this packet (frozen spec.claim_ids = ['C-WEB-DYNAMICS'] only).",
+    "C-CROSSSITE": "Untouched. Remains HYPOTHESIS; the parent's persistence-economics thread stays parked by mandate.",
+    "C-SEMANTIC-RESOLVE": "Untouched and explicitly not re-litigated by this packet."
+  }
+}
