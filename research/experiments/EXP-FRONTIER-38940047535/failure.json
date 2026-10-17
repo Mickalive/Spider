@@ -1,0 +1,11 @@
+{
+  "stage": "audit",
+  "category": "AUDIT_FAILURE",
+  "message": "stage exited with code 78",
+  "retryable": false,
+  "fingerprint": "58e7d3513e173b19560a60a0",
+  "recorded_at": "2026-10-17T01:09:25.484239+00:00",
+  "github_run_id": "38983361748",
+  "github_run_attempt": "1",
+  "control_revision": "483314ec6bd5937df1f6a0334448deff39770d6ec045c33e86beca131f9cbbf7"
+}
