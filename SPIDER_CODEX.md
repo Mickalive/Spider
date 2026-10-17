@@ -26,7 +26,7 @@ Historical PASS tags are hints, not automatically validated scientific claims.
 
 Canonical subsequent evidence is in codex/experiments/<experiment_id>/.
 Use the same codex/index.json and codex/claim_state.json across both periods.
-Finalized subsequent packets: **472**. Coverage gaps: **0**. Quarantined packets: **2**.
+Finalized subsequent packets: **473**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 | Experiment | Lane | Audit | Verdict | Claims | Source commit |
@@ -503,6 +503,7 @@ Finalized subsequent packets: **472**. Coverage gaps: **0**. Quarantined packets
 | EXP-RUNTIME-38816779349 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION | C-DELTA-REPAIR | `89877a157a60` |
 | EXP-GRAPH-38835183404 | graph | PASS | BLIND_FAILS_AT_HELDOUT_TAU_STAR_RETAIN_HYPOTHESIS_AUDIT_PASS_NO_PROMOTION | C-SEMANTIC-RESOLVE | `033eec277f16` |
 | EXP-RUNTIME-38835192343 | runtime | PASS | INCONCLUSIVE-MARGINAL-STRADDLE-NO-READMIT-NO-PERMANENT-DROP-RETAIN-C-DELTA-REPAIR-EXPERIMENTAL-NO-PROMOTION-PARK | C-DELTA-REPAIR | `77a722867a0d` |
+| EXP-FRONTIER-38940047535 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `b5027a5a4264` |
 
 ## Effective claim state
 
@@ -510,7 +511,7 @@ This table is the state used for research direction. Packet-level MEASUREMENT_IN
 
 | Claim | Status | Source |
 |---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38188815194 |
+| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38940047535 |
 | C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38835192343 |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38194362040 |
@@ -527,7 +528,7 @@ Chronological event stream for auditability; not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38188815194 | frontier |
+| C-CROSSSITE | HYPOTHESIS | EXP-FRONTIER-38940047535 | frontier |
 | C-DELTA-REPAIR | EXPERIMENTAL | EXP-RUNTIME-38835192343 | runtime |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-37992949248 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-38194362040 | intel |

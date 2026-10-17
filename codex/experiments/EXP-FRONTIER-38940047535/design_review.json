@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38940047535",
+  "lane": "frontier",
+  "status": "PASS",
+  "checks": {
+    "decision_rule_reachability": {
+      "status": "PASS",
+      "reason": "All five decide() states were reproduced under the exact frozen module (recomputed sha256 of the stripped FROZEN_CODE block = 017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a, matching DERIVED_SHA256; --stage controls -> all_pass=true, n=15, including the five decision canaries SUPPORTS/MIXED/MIXED-FLIP/FALSIFIES/NO_DATA). Thresholds are arithmetically attainable and consistent with the mandate: 0.9*926 = 833.4 exactly (batch) and 0.9*cold/N = 4.006730... (per-item) on the reference frame. The population-level regions are nonempty: FALSIFIES = {K > 0.9*cold, K <= cold} is feasible and, given K <= N*mean_path, A failing is then automatic (consistent with the frozen identifiability note); SUPPORTS is feasible but requires N <= 0.225*cold because admission hop>=3 forces mean_path >= 4, which is population-conditional, not engineered. Precedence is clean: gates G1-G5 are pre-registered dispositions, 0 completed cycles can only yield NO_DATA/INCONCLUSIVE (never FALSIFIES), and no branch structurally empties a later branch. Reachability caveat, recorded nonblocking: the cycle admission rule checks wall-clock only, not the GET ledger, and V5 is evaluated only post-hoc, so a falsifying-shaped population (K ~ 0.95*cold) completed for 3 cycles costs ~3300-3900 GETs > TOTAL_GET_CEILING 3200 and would be converted to MEASUREMENT_INVALID whenever mean per-GET latency p <= ~0.13 s; FALSIFIES remains recordable in the attainable window p ~ 0.13-0.30 s (inside the DESIGN-measured 0.02-0.36 s range), and the expected low-sharing-safe regime (K ~ 200 on the parent geometry) stays far below the ceiling at any latency with >= 1 completed cycle.",
+      "evidence_refs": [
+        "prereg.md#10 FROZEN_CODE block, sha256 recomputed at review == DERIVED_SHA256",
+        "prereg.md#11 decision rule and gates G1-G6; spec.json#decision_rule",
+        "probe: python3 <extracted frozen module> --stage controls -> {all_pass:true, n:15, failed:[]}",
+        "probe: static budget/admission simulation of TOTAL_GET_CEILING vs FALSIFIES region (3 completed cycles breach V5 for K > ~750 at cold=926; FALSIFIES window p ~ 0.134-0.305 s)",
+        "prereg.md#13-#14, #17 (disclosed tilt, satisfiability self-disproof)",
+        "spec.json#freeze_eligibility.decision_rule_reachability (attacked, not trusted)"
+      ]
+    },
+    "measurement_prerequisites": {
+      "status": "PASS",
+      "reason": "Every hard prerequisite was independently exercised at review time. All four bound seeds returned HTTP 200 with byte counts matching DESIGN (22496/22046/24433/31975 B; latencies 0.058-0.400 s; docs.readthedocs.io still redirects to docs.readthedocs.com, confirming the post-redirect anchor rule). All five registered control URLs are reachable: 3/3 positive-control URLs changed body across an 8 s re-fetch (status 200 both observations) and both null-control URLs (example.com, iana.org/domains/reserved) were stable. The frozen module is stdlib-only, compiles, imports and runs with zero pip installs, zero model calls, zero browser, zero Docker and zero credentials. The harness envelope assumed by V8 is real: .github/scripts/run-opencode-resilient.sh:10 defaults SPIDER_MODEL_MAX_RUNTIME_SECONDS to 1200 s and spider-lane.yml does not override it. All ten spec.freeze_artifacts exist and their sha256 prefixes match prereg §15 exactly (c8215d69, 2afe65b6, 95a3f15f, d51568c5, b9b2efdc, 75a01d49, f18e5b55, 5192435b, eb076db8, 7cd7a1a6), and the parent handoff matches 17775eed. research/lanes/registry.json (repo_root locator) exists. No prerequisite is deferred to EXECUTE.",
+      "evidence_refs": [
+        "probe: GET on the 4 SEEDS from prereg.md#6 -> HTTP 200 x4, latencies 0.058-0.400 s",
+        "probe: 8 s re-fetch of POS_CONTROL_URLS and NULL_CONTROL_URLS (prereg.md#9) -> 3/3 pos differ, 2/2 null stable",
+        "probe: sha256sum of all ten spec.freeze_artifacts paths, prefixes match prereg.md#15",
+        ".github/scripts/run-opencode-resilient.sh:10 MAX_RUNTIME_SECONDS default 1200; no override in .github/workflows/spider-lane.yml",
+        "prereg.md#6 (substrate), #15 (DESIGN probes), #16 (budget/schedule)"
+      ]
+    },
+    "baseline_identifiability": {
+      "status": "PASS",
+      "reason": "Treatment and strong baselines can differ on the proposed population, and no ceiling/floor forces the arms equal. An independent synthetic two-host run through the frozen code produced store K=170 vs cold=200 with a_pays=[false,false,false] and b_pays=[true,true,true] (MIXED), demonstrating live separation of the two decision comparisons; the FALSIFIES region (K > 0.9*cold) is also arithmetically nonempty. The 0-GET floor competitor (B-NAIVE-EXACT-PATH-REPLAY) wins cost by construction but is instrumented for safety (false-accept + bound + tau ladder) rather than scored as an assumed loss, so it cannot collapse the comparison; B-COLD-BFS-PER-ITEM is satisfied by construction and is correctly demoted to descriptive-only outside the decision partition; B-COLD-PARENT-START is reported only as a generality bound. The strongest fair baseline and the per-item comparator are derived from the SAME live census and ledger (numerator and denominator one measurement), replacing the aged 926/208 constants as the mandate authorizes. All comparators are scored in the same unit (HTTP GETs, with bytes and elapsed recorded per page), and the Web-work-only scope boundary (prereg §1) is disclosed, so no cost dimension used by any comparator is silently omitted. Nonblocking: spec's B-COLD-BATCH-CRAWL text says 'one cold crawl per host per cycle' while the module measures cold once at census and reuses it for every cycle; prereg §17 discloses this as a one-shot estimate and the reuse cannot change the label (cold is cycle-invariant by construction).",
+      "evidence_refs": [
+        "spec.json#baselines (seven comparators, kinds and measured_or_derived)",
+        "probe: synthetic two-host _run_live through the frozen module -> MIXED, K=170 vs cold=200, a_pays/b_pays non-degenerate",
+        "prereg.md#7 arms, #8 metric ids, #11 identifiability note, #17 one-shot cold-cost disclosure",
+        "spec.json#freeze_eligibility.baseline_identifiability (attacked, not trusted)"
+      ]
+    },
+    "control_sensitivity": {
+      "status": "PASS",
+      "reason": "Both control directions fire under the identical frozen code that scores the experiment, and this was re-verified independently. Re-running --stage controls on the exact FROZEN_CODE block yields 15/15 PASS: the fixture mutation is detected while its sibling stays UNCHANGED (page state, not instrument, causes the verdict), 404 -> DEAD, 302 to a new final URL -> MOVED, dedup accounting separates |union|=5 from sum|path|=6, the Poisson/Wilson/tau bounds are strictly directed in both directions, and all five decision states are produced. The live pair was probed at review: 3/3 volatile URLs changed body within 8 s (so the transport-level positive control can fire over real HTTP) and 2/2 stable URLs did not; the end-to-end smoke reproduced M-LIVE-POS-CHANGE=true and M-LIVE-NULL-CHANGED=false through the actual obs-diff code path. Controls are neither tautological (fixture controls mutate server state; live controls hit independent real servers) nor impossible (V10 downgrades a non-firing positive to VACUOUS-RISK and a null firing to a spurious-firing alarm, never to a scientific negative). V2 makes any control FAIL a hard gate that blocks the census entirely.",
+      "evidence_refs": [
+        "probe: python3 <frozen module> --stage controls -> 15/15 pass, failed=[]",
+        "probe: 8 s dual observation of POS_CONTROL_URLS/NULL_CONTROL_URLS -> 3/3 differ, 0/2 differ",
+        "probe: synthetic end-to-end run -> M-LIVE-POS-CHANGE=true, M-LIVE-NULL-CHANGED=false",
+        "prereg.md#9 control ids, #12 V2/V10 gates, #15 observed DESIGN control values",
+        "spec.json#positive_control, #null_control"
+      ]
+    },
+    "treatment_liveness": {
+      "status": "PASS",
+      "reason": "The exact frozen treatment (T-PERSIST-PATH-STORE: maintain the persisted deep-path store by revalidating each distinct stored page once per cycle) produced non-null, executable behavior under the pinned code before any expensive arm. Module identity was re-pinned independently (sha256 of the stripped FROZEN_CODE block matches DERIVED_SHA256). An independent smoke on a locally generated two-host synthetic site ran the complete live transaction through _run_live: census 200 GETs with n_admitted=120 >= MIN_ADMITTED and definitional coverage; store built with K=170 distinct pages (sharing factor 2.824); 3 revalidation cycles executed; decide() returned a non-null MIXED with a_pays=[false,false,false], b_pays=[true,true,true]; the endpoint-only ablation was read exactly from cycle rows at zero extra GET cost (M-ENDPOINT-GETS=120, M-INTERIOR-ONLY-FAILS=0); hazard UB95 and the tau ladder populated; M-TOTAL-GETS=718 reconciles exactly with the ledger (200 census + 2 obs0 probes + 3*(170+2)); envelope/budget/denominator gates PASS. The abort paths are implemented in code and were executed at DESIGN (census-gate FAIL before any revalidation GET; envelope exhaustion -> 0 cycles -> NO_DATA; control FAIL -> rc=1 and no census). No frame page was crawled for this review: the confirmatory experiment remains unobserved.",
+      "evidence_refs": [
+        "prereg.md#10 frozen EXECUTE module; sha256 recomputed at review == 017c8bbc...04a0a",
+        "probe: independent synthetic two-host _run_live -> MIXED, n_admitted=120, K=170, cycles=3, total_gets=718, gates all PASS",
+        "prereg.md#15 end-to-end treatment-liveness probe and executed abort paths",
+        "spec.json#freeze_eligibility.treatment_liveness (attacked, not trusted)"
+      ]
+    },
+    "freeze_artifacts_bound": {
+      "status": "PASS",
+      "reason": "Every mutable local file that can change the measurement's interpretation is bound. The frozen module's only runtime file reads are PARENT_ITEMS (EXP-FRONTIER-38184956362/raw/items.jsonl) and PARENT_STRUCT (EXP-FRONTIER-38164611798/raw/structural.jsonl); both are in spec.freeze_artifacts, and all ten listed paths exist with sha256 prefixes matching prereg §15 exactly. The module's own identity is pinned by DERIVED_SHA256 against prereg §10 (recomputed and matched) and prereg.md/spec.json themselves are hashed into freeze.json at freeze time, so no local code or fixture can drift into the interpretation unnoticed. Remote Web responses cannot be frozen, so their target identifiers (four bound seeds, three positive and two null control URLs) and the sampling protocol (FIFO static-link BFS, BUDGET=250, DEPTH=6, ADMIT_MIN_HOP=3, admission rule, 3-cycle/60 s schedule, thresholds) are frozen inside the hashed module and the spec/prereg text instead, as required. The parent handoff is bound by request.json's embedded sha256 (17775eed...). Nonblocking gaps: research/lanes/registry.json, used only by repo_root() to locate the repository, is not in freeze_artifacts - if unresolved the two reference loads silently return empty, misstating the covariates M-CENSUS-OVERLAP-PARENT208 and M-COLD-BATCH-REF-STRUCT but never altering the decision partition; and codex/legacy_brief.json supports the legacy-disposition narrative only and is unpinned.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts (ten exact repository-relative paths)",
+        "probe: existence + sha256 prefix verification of all ten paths (all match prereg.md#15)",
+        "probe: grep of frozen module for file reads -> only PARENT_ITEMS, PARENT_STRUCT, and repo_root's registry.json locator",
+        "prereg.md#10 DERIVED_SHA256 (recomputed), #19 freeze artifacts",
+        "request.json parent_handoff sha256 17775eed6e3f69c29457cd00171de2fcc4cf4c0a01627b6944ec56a33311f650 (verified present)"
+      ]
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    "Budget-gate vs falsifying region interaction: TOTAL_GET_CEILING (3200) is enforced only post-hoc as V5, and the cycle admission rule in the frozen module checks wall-clock but not the GET ledger. For a low-sharing (falsifying-shaped) population, K ~ 0.95*cold ~ 880 makes three completed cycles cost ~3300-3900 GETs, so whenever mean per-GET latency p <= ~0.13 s all three cycles complete and the post-hoc V5 gate would convert a would-be FALSIFIES (or a high-K MIXED with K > ~750 at cold=926) into MEASUREMENT_INVALID; at p > ~0.30 s with cold=926 no cycle completes and the run is INCONCLUSIVE. FALSIFIES is therefore recordable in the attainable window p ~ 0.13-0.30 s (inside the DESIGN-measured 0.02-0.36 s range), and the spec's expected regime (sharing factor ~4, K ~ 200) has ample headroom (~1550 GETs). This is a pre-registered invalid branch, not a mislabeling risk, but under the mandate's 'second invalid parks the thread' rule it is the single most likely way this funded attempt ends unanswered; EXECUTE should record the ledger-vs-admission arithmetic explicitly if V5 fires.",
+    "SUPPORTS is population-conditional, not generically reachable: because admission requires hop >= 3, mean_path >= 4 always, so A_w can only pay when 0.9*cold/N >= 4, i.e. N <= 0.225*cold (<= ~208 at cold=926). On a deeper/wider live stratum SUPPORTS becomes structurally impossible and the label set reduces to MIXED/FALSIFIES. This is consistent with the disclosed tilt (H2 expects A to fail) and does not empty the positive decision-changing branch (MIXED is robustly reachable), but the spec's claim that SUPPORTS is a reachable state of the world should be read under this precondition.",
+    "The per-cycle cost rows are cycle-invariant by construction (mean_path, K, sum|path| and cold are all census-fixed), so 'pays at every measured cycle' is effectively a single 2-bit comparison repeated; the three cycles carry the invalidation/hazard information, not the cost decision. Spec and prereg disclose this ('cross-cycle disagreement sub-state ... cannot be produced by a frozen store page set'), so it is an audit-clarity note, not an identifiability defect.",
+    "Wording/implementation mismatch: spec.json's B-COLD-BATCH-CRAWL definition says 'one cold frozen-policy crawl per host per cycle' while the module measures cold once (at census) and reuses it for every cycle; prereg §17 discloses the one-shot estimate. The label cannot change (cold is cycle-invariant), but AUDIT should compare against the prereg text, not the spec baseline phrase.",
+    "Gate-key naming mismatch inside the frozen module: metrics['gates'] uses keys 'V4_budget' and 'V10_envelope', whereas prereg §12 defines V5 = budget and V8 = envelope, and prereg V10 is the live change-detector gate (reported separately as M-LIVE-POS-CHANGE). Cosmetic only - all quantities are computed identically - but a downstream AUDIT reading gate keys literally could mislabel the invalid signature.",
+    "research/lanes/registry.json (repo_root() locator) and codex/legacy_brief.json (legacy-disposition narrative) are not in spec.freeze_artifacts. Neither can alter the decision partition: the first only affects the two covariate reference loads (silently empty if unresolved, visible in M-CENSUS-OVERLAP-PARENT208/M-COLD-BATCH-REF-STRUCT), the second supports narrative classification only.",
+    "Independent-review rule satisfied and recorded: DESIGN producer model is opencode/space-bunny-free (model_design.json), this review was produced by opencode/mimo-v2.6-flash-free. All declared PASS values in spec.freeze_eligibility were treated as claims and re-derived from independent probes rather than inherited."
+  ],
+  "rationale": "The design is capable of answering its own question and no check fails. Independent evidence gathered at review: (1) the frozen module's identity was re-pinned by recomputing sha256 over the stripped FROZEN_CODE block (exact match to DERIVED_SHA256); (2) the 15/15 offline fixture controls and all five decision canaries were re-executed under that exact code; (3) all four bound seeds and all five control URLs were probed live (seeds 200, 3/3 positive controls changed within 8 s, 2/2 nulls stable); (4) all ten freeze artifacts exist with hash prefixes matching prereg §15; (5) an independent synthetic two-host end-to-end run of the exact frozen module produced a non-null decision (MIXED) with exact GET-ledger reconciliation, populated hazard bound and tau ladder, zero-cost endpoint ablation, and all gates passing, plus the pre-registered abort paths; (6) static arithmetic established that the SUPPORTS and FALSIFIES regions are nonempty, thresholds are attainable (0.9*926 = 833.4 exactly), and A-implies-B holds, while also quantifying the one real reachability caveat: the post-hoc V5 budget gate can convert a falsifying-shaped population into MEASUREMENT_INVALID when three cycles complete at p <= ~0.13 s per GET. The harness envelope assumed by V8 (1200 s default) was confirmed in the workflow scripts. The experiment's expected regime sits far below every ceiling; the residual risks are population- or latency-conditional, pre-registered as invalid (never as negatives), and are recorded as nonblocking findings for EXECUTE/AUDIT. No confirmatory measurement was run, no frame page was crawled, and no frozen threshold was tuned: spec/prereg are unedited.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38940047535/spec.json",
+    "research/experiments/EXP-FRONTIER-38940047535/prereg.md (§10 FROZEN_CODE block sha256 recomputed == 017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a)",
+    "research/experiments/EXP-FRONTIER-38940047535/request.json (director_mandate, parent_handoff sha256 verified)",
+    "probe: --stage controls on extracted frozen module -> all_pass=true n=15",
+    "probe: GET preflight of 4 seeds (HTTP 200 x4) and 5 control URLs (3/3 pos changed, 2/2 null stable over 8 s)",
+    "probe: synthetic two-host end-to-end _run_live -> MIXED, n_admitted=120, K=170, cycles=3, total_gets=718, gates PASS",
+    "probe: sha256 prefix verification of all ten spec.freeze_artifacts (all match prereg §15)",
+    "probe: static TOTAL_GET_CEILING/wall-clock admission simulation over cold, K, p regimes",
+    ".github/scripts/run-opencode-resilient.sh:10 (SPIDER_MODEL_MAX_RUNTIME_SECONDS default 1200)",
+    "research/experiments/EXP-FRONTIER-38940047535/model_design.json (DESIGN producer model opencode/space-bunny-free)"
+  ]
+}

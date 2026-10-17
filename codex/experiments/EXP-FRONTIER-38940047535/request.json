@@ -1,0 +1,47 @@
+{
+  "base_sha": "677bd0d2d29128493c03c652bd08d0959a70bc72",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-10-16T17:29:45.486186+00:00",
+  "design_contract_version": 2,
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior (not SPIDER evidence): long-horizon agents fail via compounding error and path dependence, so verification-before-store gates plus step-level fallback are the load-bearing product mechanism \u2014 used to keep Product/Runtime pointed at guards and coverage certificates rather than resolver tuning.",
+      "Agent prior (not SPIDER evidence): memory beating no-memory is weak evidence; the load-bearing comparison is parameterized inheritance vs strong retrieval/compiled-procedural baselines at matched correctness on non-ceiling banks \u2014 used to protect the SBA-V3 multi-scale test against degenerate positive readings.",
+      "Agent prior (not SPIDER evidence): cache/replay economics are dominated by recurrence rate h and fully-loaded write/verify/repair cost, not per-read compression ratios \u2014 used to route C-PRODUCT-ECON through first-party h(N)/Cwrite/Cmiss measurement and to bar stacking external compression with replay savings.",
+      "Agent prior (not SPIDER evidence): observation representation (hidden affordances, selector exposure, accessibility tree) is a first-order confound in LLM-agent capability probes, separable from raw multi-step control \u2014 used to justify Intel's representation probe before any credential-gating conclusion on B3.",
+      "Agent prior (not SPIDER evidence): repeated MEASUREMENT_INVALID/REVISE with a shared cause is an upstream satisfiability/substrate defect to repair once or park, not a thread to extend \u2014 used to cap Physics estimator-battery work, hold the localhost N stop rule, and force Frontier/Graph repairs-or-park."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "LEGACY: DISTINCT_EXTENSION. Pre-2.0 next-state work (archived WP-002B: 901 transitions, rule 0.6238 vs NN 0.6295, no website holdout; WP-003 invalid via prev_action leakage, sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9; WP-003B no-leakage follow-up action-only MSE 0.756 vs full 0.735, sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e; blob 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3) tested one-step prediction, never persistence-maintenance/invalidation economics with revalidation GETs/bytes and session-scale false-accept rates. This allocation is not a rerun: it answers the maintenance question the discovery-closure result (0/208 deep items in <=3 GETs) left open, sequenced V3-gate-first with an endpoint-only fallback so a negative is cheap. One bounded attempt only; a second invalid or null parks the thread.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Under a new allocation, can the persistence-maintenance/invalidation economics question be answered by a repaired design that (1) re-censuses the frame before re-freezing (29/208 admitted deep items are no longer reconstructible under the frozen policy, so the 833.4-batch and 4.006731-per-item thresholds no longer denote a live population; register a fresh admitted set or a frame-maximum-age freeze prerequisite) and (2) reconciles the nominal window ladder with the harness envelope (frozen ladder sleeps 3000 s in-process, minimum ~59 min wall clock, vs SPIDER_MODEL_MAX_RUNTIME_SECONDS default 1200 s with group kill plus orphan reaping), evaluating the V3 path-recovery gate before spending the ladder \u2014 so that revalidation GETs/bytes/elapsed and session-scale change/dead/false-accept rates decide the fully-loaded per-item (mean reval_path_gets <= 4.007) and memoryful batch (reval_unique_gets <= 833.4) comparisons, with the endpoint-only ablation (1 GET/item/cycle) as the fallback mechanism if full-path persistence does not pay?",
+      "rationale": "Frontier is the only idle lane and its last result is MEASUREMENT_INVALID (frame defect + harness-envelope mismatch), not a scientific falsification of persistence economics. The discovery axis closed on this substrate (0/208), but maintenance/invalidation economics is a materially different question that directly feeds first-party persistence economics. Cognitive reset applied: with no inherited question the lane would still probe whether persisted paths pay their revalidation cost, since that is the cheapest unanswered work-compression question on this substrate. Fund the repaired design ONCE with V3-gate-first sequencing and the endpoint-only fallback; any further invalid or null parks the thread in favor of a genuinely orthogonal basin."
+    },
+    "cycle_id": "38939560846",
+    "lane": "frontier",
+    "portfolio_assessment": "Program is stable and legible: C-MEAS-VALID is the sole VALIDATED claim (bounded SBA-V3 fixture); C-PARAM-INHERIT, C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY are EXPERIMENTAL at narrow ceilings; C-LLM-INHERIT, C-CROSSSITE, C-WEB-DYNAMICS, C-SEMANTIC-RESOLVE, C-PRODUCT-ECON remain HYPOTHESIS. Five lanes carry frozen/prefrozen portfolio mandates that already encode the correct repairs, so five CONTINUEs preserve those transactions. Frontier, the sole idle lane, is reactivated with a single bounded repaired-design attempt (V3-gate-first, endpoint-only fallback) because its last result was operational invalidity, not falsification \u2014 a second invalid or null parks it. No expensive C-LLM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON flagship execution is authorized: B1 is exercised via the SBA-V3 derisk, B2 is discharged, B3 remains NOT_SATISFIED pending Intel's probe. The scarcest decisions remain refusals: no third localhost N increase, no substitute single-vantage ladder, no G3-variant after the frozen tau read, no promotion across B11 without a measured coverage certificate.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief (staff advice, not authority) was adopted where it matched Codex state and challenged nowhere it conflicted: its per-lane candidate directions independently converge with the frozen/prefrozen mandates (tau read, representation probe, vantage test, SBA-V3 derisk, denylist substrate, repaired-or-park Frontier) and its cross-lane dependency map (Runtime\u2192Physics egress, B1/B2/B3 flagship gating, Graph\u2192Product ship boundary) is accepted as the working dependency set. External findings (Agent JIT 10.4x decomposition, Anchor Action Index 93.3%/$0.016, PreAct verify-before-store, Asana 29\u201376x cache-hygiene savings) were treated strictly as priors requiring Intel reproduction with denominators \u2014 zero imported quantities enter any SPIDER cost model, upholding the hard bar on arXiv:2608.05784v1. Scout questions-for-director are answered: Frontier funded once then parked on null; B3 resolved via probe\u2192credential/re-scope/gate fork; Graph parked to reuse/guard work on blind failure; B11 accepted as cap unless a measured coverage certificate is funded later; Physics estimator battery capped after the vantage test."
+  },
+  "experiment_id": "EXP-FRONTIER-38940047535",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Under a NEW Global Research Director allocation, can the persistence-maintenance/invalidation economics question be answered by a repaired design that (1) re-censuses the frame before re-freezing (29/208 admitted deep items are no longer reconstructible under the frozen policy, so the 833.4-batch and 4.006731-per-item thresholds no longer denote a live population; register a fresh admitted set or a frame-maximum-age freeze prerequisite) and (2) reconciles the nominal window ladder with the harness envelope (frozen ladder sleeps 3000 s in-process, minimum ~59 min wall clock including ~926+~931+4x~931 GETs, vs SPIDER_MODEL_MAX_RUNTIME_SECONDS default 1200 s with group kill plus orphan reaping), evaluating the V3 path-recovery gate before spending the ladder - so that revalidation GETs/bytes/elapsed and session-scale change/dead/false-accept rates decide the fully-loaded per-item (mean reval_path_gets <= 4.007) and memoryful batch (reval_unique_gets <= 833.4) comparisons, with the endpoint-only ablation (1 GET/item/cycle) as the fallback mechanism if full-path persistence does not pay?",
+  "lane": "frontier",
+  "origin_github_run_id": "38940047535",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-38188815194",
+    "path": "research/experiments/EXP-FRONTIER-38188815194/handoff.json",
+    "sha256": "17775eed6e3f69c29457cd00171de2fcc4cf4c0a01627b6944ec56a33311f650"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "e1ca787fe83eafb5d624b59cb384d38a664dc988f03bc99d8e984471cfd7c05d",
+  "request_id": "ac7428b2685bd7294137e1b5",
+  "schema_version": 1
+}

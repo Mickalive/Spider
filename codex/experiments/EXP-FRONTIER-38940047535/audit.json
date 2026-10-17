@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+
+ "experiment_id": "EXP-FRONTIER-38940047535",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "AUD-V1-CODE-IDENTITY",
+      "control_or_gate": "V1 C-CODE-IDENTITY",
+      "finding": "PASS independently verified. sha256 of the stripped prereg.md#10 FROZEN_CODE block (bytes strictly between the FROZEN_CODE_BEGIN line 362 and FROZEN_CODE_END line 1252, .strip()) recomputes to 017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a, exactly DERIVED_SHA256. The executed execute_module.py is byte-identical to the stripped block except one trailing newline. Producer disposition correct.",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/prereg.md#10", "research/experiments/EXP-FRONTIER-38940047535/execute_module.py"]
+    },
+    {
+      "id": "AUD-V2-CONTROLS-GATE",
+      "control_or_gate": "V2 C-CONTROLS-GATE",
+      "finding": "PASS independently verified. run/raw/controls.jsonl contains exactly 15 rows, all pass=true, preserving producer identifiers C-BFS-PARENT-CHAIN, C-STORE-DEDUP-ACCOUNTING, C-PATH-CANARY, C-REVAL-NOCHANGE, C-REVAL-CHANGE-DETECT, C-LIVENESS-404, C-REVAL-MOVED-REDIRECT, C-HAZARD-BOUND-RULE3, C-WILSON-BOUND-DIRECTION, C-TAU-LADDER-MONOTONE, C-DECISION-CANARY-SUPPORTS, C-DECISION-CANARY-MIXED, C-DECISION-CANARY-MIXED-FLIP, C-DECISION-CANARY-FALSIFIES, C-DECISION-CANARY-NODATA. The instrument is sound; the gate failure is not instrumental.",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/raw/controls.jsonl"]
+    },
+    {
+      "id": "AUD-V3-SEED-LIVENESS",
+      "control_or_gate": "V3 C-SEED-LIVENESS",
+      "finding": "PASS independently verified. run/derived/metrics.json reports n_live_hosts=4, seed_errors={}. All four bound seeds returned HTTP 200 (also recorded in run/raw/census.jsonl per-host rows and provenance.json substrate.seeds).",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json", "research/experiments/EXP-FRONTIER-38940047535/provenance.json"]
+    },
+    {
+      "id": "AUD-V4-CENSUS-GATE-DECISIVE",
+      "control_or_gate": "V4 C-CENSUS-GATE (DECISIVE)",
+      "finding": "FAIL confirmed by independent recomputation from run/raw/census.jsonl: 31 rows have admitted=true (29 at hop 3, 2 at hop 4), which is less than MIN_ADMITTED=40. The frozen G3 maps this to status=MEASUREMENT_INVALID, decision=NO_DATA, zero revalidation GETs spent. run/raw/module_stdout.log shows census_gate=FAIL with the exact gate values; run/derived/decision.json shows outcome=NO_DATA with census_gate_failed=true. M-REVALIDATION-GETS-SPENT=0 and M-WINDOWS-COMPLETED=0 confirm the ladder was never entered. This is representation loss, exactly as pre-registered, never a scientific negative. Producer disposition correct.",
+      "severity": "GATE_FAIL_PRE_REGISTERED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl", "research/experiments/EXP-FRONTIER-38940047535/run/derived/decision.json", "research/experiments/EXP-FRONTIER-38940047535/run/raw/module_stdout.log", "research/experiments/EXP-FRONTIER-38940047535/prereg.md#11"]
+    },
+    {
+      "id": "AUD-CENSUS-POPULATION-DEGENERACY",
+      "control_or_gate": "Census policy / population registration",
+      "finding": "The gate failure has a mechanical cause the producer correctly identified: the frozen BFS stops FETCHing when DISCOVERY reaches BUDGET=250 (while queue and len(out) < BUDGET in prereg.md#10 bfs_census), so on hosts with wide shallow strata the deep stratum is discovered but never dequeued. Independently verified from run/raw/census.jsonl hop histograms: pandas.pydata.org placed 234 of 250 discovered URLs at hop 2 (13 GETs total, 9 hop-3 discovered, 0 fetched, 0 admitted); doc.rust-lang.org exposed 207 hop-3 URLs from 4 fetched hop-2 pages (10 GETs total, 0 admitted). 363 of 402 discovered hop>=3 URLs (90.3%) were never fetched; 624 of 926 discovered URLs (67.39%) were never fetched at any hop. Only docs.readthedocs.io (28 admitted, 176/176 fetched) and docs.pytest.org (3 admitted, 103 fetched) contributed admitted items. The population the frozen design requires could not be registered.",
+      "severity": "SUBSTRATE_CENSUS_INTERACTION",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl", "research/experiments/EXP-FRONTIER-38940047535/prereg.md#10"]
+    },
+    {
+      "id": "AUD-DESIGN-SATIFIABILITY-GAP",
+      "control_or_gate": "freeze_eligibility.measurement_prerequisites / treatment_liveness",
+      "finding": "DESIGN-LEVEL FINDING (not an execution defect). The frozen MIN_ADMITTED=40 threshold was never shown to be reachable under the frozen census policy on the four bound seeds. The DESIGN pre-freeze probes and the independent design_review.json treatment_liveness check passed on a locally generated synthetic site (n_admitted=96 and n_admitted=120 on two different synthetic runs), never on the bound seeds. The design review explicitly states 'No frame page was crawled for this review: the confirmatory experiment remains unobserved.' The only live evidence about the deep stratum was the parent frame's 208 admitted items, whose actual crawl GET behavior is not reconstructable (the parent's cited economics.jsonl is absent, and its cold_batch_gets=926 is a discovered-count, not a GET-count, per the producer's VN-5). The V4 gate did exactly what it exists for at EXECUTE, so the producer's execution is valid; but the design's satisfiability argument (prereg.md#14) asserts population-level reachability without establishing that the census policy produces a non-degenerate population on the live sites. This is the root cause of the second consecutive MEASUREMENT_INVALID on this thread.",
+      "severity": "DESIGN_GAP",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/design_review.json", "research/experiments/EXP-FRONTIER-38940047535/prereg.md#14", "research/experiments/EXP-FRONTIER-38940047535/spec.json#freeze_eligibility.measurement_prerequisites"]
+    },
+    {
+      "id": "AUD-V5-BUDGET-ENVELOPE",
+      "control_or_gate": "V5 C-BUDGET / V8 C-ENVELOPE",
+      "finding": "PASS independently verified. M-TOTAL-GETS=335 <= TOTAL_GET_CEILING=3200; M-MODULE-ELAPSED-S=32.004s <= MODULE_WALL_BUDGET_S=620s; time_truncated=false on all four hosts. The GET ledger reconciles exactly: 28 fixture-control GETs + 5 observation-0 control probes + 302 census GETs = 335. The envelope repair (parent defect 2) is confirmed as an envelope fact: the ladder would have fitted had the population existed.",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "id": "AUD-V12-ACCOUNTING-UNEXERCISED",
+      "control_or_gate": "V12 C-ACCOUNTING-RECONCILIATION",
+      "finding": "UNKNOWN is the correct recording and the producer correctly recorded it. With zero revalidation cycles there is no store cost to reconcile against a physical spend, so V12 could not be exercised on the treatment. The census side reconciles exactly (28+5+302=335). No accounting mismatch is possible to observe in this packet.",
+      "severity": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "id": "AUD-V10-LIVE-CONTROL-NOT-EXERCISED",
+      "control_or_gate": "V10 C-LIVE-POS-CHANGE / C-LIVE-NULL-CHANGED",
+      "finding": "NOT_EXERCISED is the correct recording and the producer correctly recorded it. run/raw/control_probes.jsonl contains exactly 5 rows, all at obs=0 (3 positive-control URLs, 2 null-control URLs), all HTTP 200. The run aborted at V4 before any second observation, so no diff could be computed. M-LIVE-POS-CHANGE and M-LIVE-NULL-CHANGED are null, not false. No invalidation observation of any kind exists in this packet; nothing here may be read as 'nothing changes.'",
+      "severity": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/raw/control_probes.jsonl"]
+    },
+    {
+      "id": "AUD-FROZEN-INTEGRITY",
+      "control_or_gate": "Freeze integrity",
+      "finding": "All ten freeze.json.artifact_hashes and all four freeze.json.hashes re-verified as matching by independent sha256 recomputation at audit time. No frozen file (request.json, spec.json, prereg.md, freeze.json, design_review.json) was modified. The executed module is a byte-exact reconstruction of the frozen preregistration block. No leakage, no frozen-file mutation, no post-freeze design change.",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/freeze.json"]
+    },
+    {
+      "id": "AUD-INHERITED-UNIT-DEFECT",
+      "control_or_gate": "Inherited constants (VN-5)",
+      "finding": "The producer's VN-5 finding is confirmed and is an audit-worthy inherited-defect observation. The mandate's constants 833.4 (batch) and 4.006731 (per-item) derive from cold_batch_gets=926, but 926 is the frozen frame's per-host DISCOVERED-URL count, not a GET count: this run rediscovered exactly 926 URLs while spending 302 GETs under the identical policy. The parent's cited per-GET artifact (EXP-FRONTIER-38188815194/run/raw/economics.jsonl) does not exist in the repository. The inherited thresholds were computed against a different unit from the one M-COLD-BATCH-GETS is defined to be. This run's own accounting is internally consistent. This finding is about the historical constants; it changes no frozen value in this packet.",
+      "severity": "INHERITED_DEFECT_DISCLOSED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/result.json#VN-5", "research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "id": "AUD-NO-SCIENTIFIC-CLAIM",
+      "control_or_gate": "Claim discipline",
+      "finding": "The producer made no scientific claim and promoted no claim. result.json status=MEASUREMENT_INVALID / outcome=NOT_APPLICABLE with every outcome-bearing metric explicitly null; report.md section 6 states 'No claim promotion' and records the mandate's parking rule as live; VN-14 explicitly states C-CROSSSITE remains HYPOTHESIS. The VN-4 counterfactual arithmetic (cold=302, N=31, cold/N=9.742, both margin tests would pass) is independently verified as arithmetically correct but is correctly quarantined as non-decisional: decide() was not applied to these rows, no cycle ran, and the population is degenerate (2 of 4 hosts zero admitted, cold/N inflated by the same starvation that produced the gate failure). The counterfactual must not be used as a substitute measurement or as evidence that the mechanism wins.",
+      "severity": "OK",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/result.json", "research/experiments/EXP-FRONTIER-38940047535/report.md#6"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD-BATCH-CRAWL",
+      "kind": "strongest_fair_memoryful_baseline",
+      "finding": "NOT_EXERCISED. The cold baseline was measured at census (M-COLD-BATCH-GETS=302, per-host 10/13/176/103, independently verified) but no revalidation cycle ran, so the aggregate comparison B_w was never evaluated. The 302 GET figure is a ledger-measured census spend, correctly distinguished from M-COLD-BATCH-DISCOVERED=926.",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json#per_host"]
+    },
+    {
+      "baseline_id": "B-COLD-AMORTIZED-PER-ITEM",
+      "kind": "fully_loaded_per_item_decision_comparator",
+      "finding": "NOT_EXERCISED. The per-item comparator cold/N = 302/31 = 9.742 was never used in a decision because the census gate failed first. The auditor notes the producer's own U-4 caveat is correct: this ratio is inflated by the same discovery-budget starvation that caused the gate failure (2 of 4 hosts contributed zero admitted items), so it is not a fair fully-loaded per-item cost of maintaining a representative population.",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/result.json#VN-4", "research/experiments/EXP-FRONTIER-38940047535/result.json#U-4"]
+    },
+    {
+      "baseline_id": "B-COLD-BFS-PER-ITEM",
+      "kind": "mandate_comparator_descriptive_only",
+      "finding": "Measured and independently verified from run/raw/census.jsonl: n=31, mean ordinal 150.129, min 101, max 174. Correctly demoted to a descriptive endpoint outside the decision partition (satisfied by construction, no dynamic range), identical disposition to the parent packet.",
+      "status": "MEASURED_DESCRIPTIVE_ONLY",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json#M-COLD-ITEM-ORDINAL"]
+    },
+    {
+      "baseline_id": "B-NAIVE-EXACT-PATH-REPLAY",
+      "kind": "competitor_strength_floor_baseline",
+      "finding": "NOT_EXERCISED. M-FALSE-ACCEPT-NAIVE is null (absence verified); no cycle measured, so the session-scale false-accept guard was never exercised and the tau ladder was never populated.",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "baseline_id": "B-COLD-PARENT-START",
+      "kind": "generality_bound_reported_only",
+      "finding": "NOT_EXERCISED. n_admitted=31 is the arithmetic cost of a targeted parent-start fetch, but no cycle ran and no generality bound was evaluated.",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "baseline_id": "A-ENDPOINT-ONLY-REVALIDATE",
+      "kind": "mandated_fallback_arm_executed",
+      "finding": "NOT_EXERCISED. The fallback arm was never instantiated because the census gate failed before any revalidation GET. M-ENDPOINT-GETS and M-INTERIOR-ONLY-FAILS are null (absence verified).",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    },
+    {
+      "baseline_id": "B-STORE-NO-SHARING",
+      "kind": "pessimistic_accounting_sensitivity",
+      "finding": "NOT_EXERCISED. M-REVAL-NOSHARE-GETS is null (absence verified); the no-sharing sensitivity verdict S-NOSHARE was never produced.",
+      "status": "NOT_EXERCISED",
+      "evidence_refs": ["research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json"]
+    }
+  ],
+  "recomputed_metrics": {
+    "M-CODE-IDENTITY-SHA256": {
+      "expected": "017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a",
+      "recomputed": "017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a",
+      "producer_value": "017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a",
+      "verdict": "MATCH (V1 PASS)"
+    },
+    "M-CONTROLS": {
+      "passed": 15,
+      "failed": 0,
+      "producer_value": "15/15 PASS",
+      "recomputed_from": "research/experiments/EXP-FRONTIER-38940047535/run/raw/controls.jsonl (all 15 rows pass=true)",
+      "verdict": "MATCH (V2 PASS)"
+    },
+    "M-CENSUS-n_admitted": {
+      "recomputed": 31,
+      "producer_value": 31,
+      "recomputed_from": "count of admitted=true rows in run/raw/census.jsonl (29 hop-3, 2 hop-4)",
+      "verdict": "MATCH"
+    },
+    "M-CENSUS-n_union_pages": {
+      "recomputed": 42,
+      "producer_value": 42,
+      "recomputed_from": "distinct union of paths in run/raw/paths.jsonl; equals row count of run/raw/store_pages.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-CENSUS-n_interior_pages": {
+      "recomputed": 11,
+      "producer_value": 11,
+      "recomputed_from": "union pages in run/raw/paths.jsonl not equal to any admitted endpoint",
+      "verdict": "MATCH"
+    },
+    "M-CENSUS-mean_path_len": {
+      "recomputed": 4.064516129032258,
+      "producer_value": 4.064516129032258,
+      "recomputed_from": "sum(path lengths)=126 / n=31 in run/raw/paths.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-COLD-BATCH-GETS": {
+      "recomputed": 302,
+      "producer_value": 302,
+      "recomputed_from": "per-host gets 10+13+176+103 in run/derived/metrics.json; consistent with 335 total - 28 fixture - 5 probes",
+      "verdict": "MATCH"
+    },
+    "M-COLD-BATCH-DISCOVERED": {
+      "recomputed": 926,
+      "producer_value": 926,
+      "recomputed_from": "row count of run/raw/census.jsonl (250+250+176+250)",
+      "verdict": "MATCH"
+    },
+    "M-COLD-BATCH-BYTES": {
+      "recomputed": 20560422,
+      "producer_value": 20560422,
+      "verdict": "MATCH (module-reported; not independently recomputable from census.jsonl which lacks a per-row GET ledger)"
+    },
+    "M-CENSUS-OVERLAP-PARENT208": {
+      "recomputed": 31,
+      "producer_value": 31,
+      "recomputed_from": "count of admitted rows with in_parent_208=true in run/raw/census.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-STORE-SHARING-FACTOR": {
+      "recomputed": 3.0,
+      "producer_value": 3.0,
+      "recomputed_from": "sum|path|=126 / |union|=42 in run/raw/paths.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-REUSE-ITEMS-PER-PAGE": {
+      "recomputed": 2.8181818181818183,
+      "producer_value": 2.8181818181818183,
+      "recomputed_from": "n_admitted=31 / interior pages=11 in run/raw/paths.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-COLD-ITEM-ORDINAL": {
+      "recomputed": {"n": 31, "mean": 150.1290322580645, "min": 101, "max": 174},
+      "producer_value": {"n": 31, "mean": 150.1290322580645, "min": 101, "max": 174},
+      "recomputed_from": "ordinal field of admitted rows in run/raw/census.jsonl",
+      "verdict": "MATCH"
+    },
+    "M-TOTAL-GETS": {
+      "recomputed": 335,
+      "producer_value": 335,
+      "recomputed_from": "28 fixture + 5 observation-0 probes + 302 census; reconciles exactly",
+      "verdict": "MATCH"
+    },
+    "M-WINDOWS-COMPLETED": {
+      "recomputed": 0,
+      "producer_value": 0,
+      "verdict": "MATCH"
+    },
+    "M-REVALIDATION-GETS-SPENT": {
+      "recomputed": 0,
+      "producer_value": 0,
+      "verdict": "MATCH"
+    },
+    "M-MODULE-ELAPSED-S": {
+      "recomputed": 32.00429992999989,
+      "producer_value": 32.00429992999989,
+      "verdict": "MATCH (module monotonic clock; consistent with run/raw/module_stdout.log elapsed_s=32.0)"
+    },
+    "M-NON-DECISIONAL-hop_ge3-never-fetched": {
+      "recomputed": 363,
+      "producer_value": 363,
+      "recomputed_from": "hop>=3 rows in run/raw/census.jsonl with status=null",
+      "verdict": "MATCH"
+    },
+    "M-NON-DECISIONAL-all-hops-never-fetched-share": {
+      "recomputed": 0.673866090712743,
+      "producer_value": 0.6738660043196544,
+      "verdict": "MATCH (difference < 1e-7, rounding)"
+    },
+    "COUNTERFACTUAL-NON-DECISIONAL-decide-inputs": {
+      "note": "VN-4 arithmetic verified but non-decisional; decide() was NOT applied to these rows",
+      "cold_amortized_per_item": 9.741935483870968,
+      "A_margin": 5.67741935483871,
+      "A_need": 0.9741935483870968,
+      "A_pays": true,
+      "B_margin": 260,
+      "B_need": 30.2,
+      "B_pays": true,
+      "verdict": "ARITHMETIC MATCH; correctly quarantined as non-decisional by the producer"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING: this packet supports NO statement about persistence-maintenance economics and NO update to C-CROSSSITE in either direction. The only durable findings are instrument-side and census-side: (1) V1 code identity PASS (sha256 017c8bbc...04a0a recomputed MATCH); (2) V2 15/15 offline controls PASS under the scoring code (auditor-read run/raw/controls.jsonl, including all five decision canaries); (3) V3 seed liveness PASS 4/4; (4) V4 census gate FAIL is decisive and pre-registered (n_admitted=31 < MIN_ADMITTED=40, independently recomputed from run/raw/census.jsonl) -> frozen G3 maps to status=MEASUREMENT_INVALID / decision=NO_DATA / zero revalidation GETs, representation loss never a negative; (5) the envelope repair (parent defect 2) is confirmed as an envelope fact (32.0 s of 620 s module budget, 335 of 3200 GETs, no per-host truncation); (6) the inherited 926 constant is a discovered-count, not a GET-count (VN-5 confirmed: 926 rediscovered, 302 GETs spent under the identical policy; parent economics.jsonl absent). All outcome-bearing quantities (M-REVAL-PATH-GETS, M-REVAL-UNIQUE-GETS, M-REVAL-NOSHARE-GETS, M-REVAL-PATH-BYTES, M-REVAL-PATH-ELAPSED, M-CHANGE-RATE, M-DEAD-RATE, M-FALSE-ACCEPT-NAIVE, M-HAZARD-RATE-UB95, M-PAGE-INVALID-UB95, M-FALSE-ACCEPT-UB95, M-TAU-LADDER, M-ENDPOINT-GETS, M-INTERIOR-ONLY-FAILS, M-BREAK-EVEN-*, M-LIVE-POS-CHANGE, M-LIVE-NULL-CHANGED) remain unmeasured (null, absence verified). The VN-4 counterfactual arithmetic is verified but non-decisional. C-CROSSSITE remains at its prior effective status HYPOTHESIS (codex/claim_state.json effective_event_by_claim[C-CROSSSITE] = parent EXP-FRONTIER-38188815194 MEASUREMENT_INVALID). No promotion, no downgrade, no MEASUREMENT_INVALID/BLOCKED substitution for the epistemic state.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-38940047535/prereg.md#10",
+    "research/experiments/EXP-FRONTIER-38940047535/prereg.md#11",
+    "research/experiments/EXP-FRONTIER-38940047535/prereg.md#14",
+    "research/experiments/EXP-FRONTIER-38940047535/spec.json#freeze_eligibility",
+    "research/experiments/EXP-FRONTIER-38940047535/design_review.json",
+    "research/experiments/EXP-FRONTIER-38940047535/freeze.json",
+    "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/controls.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/control_probes.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/paths.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/store_pages.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/module_stdout.log",
+    "research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json",
+    "research/experiments/EXP-FRONTIER-38940047535/run/derived/decision.json",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json",
+    "research/experiments/EXP-FRONTIER-38940047535/report.md",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json#VN-4",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json#VN-5",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json#U-4",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json#U-5",
+    "research/experiments/EXP-FRONTIER-38940047535/result.json#VN-15",
+    "research/experiments/EXP-FRONTIER-38940047535/request.json#director_mandate",
+    "research/experiments/EXP-FRONTIER-38940047535/failure.json",
+    "codex/claim_state.json"
+  ],
+  "unresolved": [
+    "AUD-U1: Whether the persistence-maintenance/invalidation economics question is answerable at all on the live documentation substrate with a census policy that actually fetches its deep stratum. 363 of 402 discovered hop>=3 URLs (90.3%) were never fetched because the frozen BFS stops fetching at discovery-budget exhaustion (BUDGET=250 on len(out)), while doc.rust-lang.org and pandas.pydata.org exhaust the budget at hop<=2. The smallest identified unblocking action is a census-policy repair (fetch-until-budget rather than discover-until-budget, or a pruning rule that does not let a wide shallow sidebar consume the whole queue), which the producer correctly identifies as owned by runtime/C-MEAS-VALID, not answerable inside this frozen packet.",
+    "AUD-U2: How much of the deep stratum still exists on the live Web. 363 discovered deep URLs have unknown status; 8 of 39 fetched deep URLs were dead/errored at census time (6 transport errors, 2 HTTP 404s, all on docs.readthedocs.io). The frozen design contains no arm distinguishing page-gone (404) from page-delinked or unreachable-under-policy, so the cause of the deep-stratum shortfall cannot be separated from this packet.",
+    "AUD-U3: All outcome-bearing quantities remain unmeasured (M-REVAL-*, M-CHANGE-*, M-DEAD-*, M-FALSE-ACCEPT-*, M-HAZARD-*, M-TAU-LADDER, M-INTERIOR-ONLY-FAILS, M-BREAK-EVEN-*, M-LIVE-POS-CHANGE, M-LIVE-NULL-CHANGED). Only M-WINDOWS-COMPLETED=0 and M-REVALIDATION-GETS-SPENT=0 are established.",
+    "AUD-U4: Whether a store built on a properly fetched deep population would clear the frozen margin rule. The VN-4 counterfactual arithmetic is verified but describes a degenerate population (2 of 4 hosts zero admitted, cold/N=9.74 inflated by the same starvation that produced the gate failure) and is explicitly non-decisional.",
+    "AUD-U5: Whether MIN_ADMITTED=40 is reachable under any census policy variant on the four bound seeds. The design never established this; the DESIGN and design_review.json treatment-liveness probes used synthetic sites (n_admitted=96 and n_admitted=120) that do not reproduce the wide-shallow-stratum topology of the bound hosts. A bound-seed census probe at DESIGN, or a lower MIN_ADMITTED, or a fetch-budget census policy, would be required to establish satisfiability before any future freeze.",
+    "AUD-U6: Whether the inherited 833.4 / 4.006731 constants were ever GET-based. The parent's cited economics.jsonl (EXP-FRONTIER-38188815194/run/raw/economics.jsonl) is absent from the repository, so the provenance of the inherited cold_batch_gets=926 constant cannot be settled from surviving evidence. This run's VN-5 finding (926 is a discovered-count, 302 is the live GET spend under the identical policy) is the strongest available evidence that the inherited constants were not GET-based.",
+    "AUD-U7: This is the second consecutive MEASUREMENT_INVALID on this thread (parent EXP-FRONTIER-38188815194 was MEASUREMENT_INVALID / NOT_APPLICABLE for its V3 frame-fidelity gate). The director mandate funded exactly one bounded repaired-design attempt and stated that a second invalid or null parks the full-path persistence subthread. That rule is now live for the Global Research Director's decision; this lane does not self-authorize a further attempt.",
+    "AUD-U8: The prior audit failure (failure.json: stage=audit, exit_code=78, category=AUDIT_FAILURE, recorded 2026-10-17T01:09:25Z) is an infrastructure event, not a scientific one. It is not evidence for or against any scientific claim and does not affect this audit's disposition."
+  ]
+}
