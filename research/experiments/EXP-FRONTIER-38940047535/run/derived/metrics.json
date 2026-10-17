@@ -1,0 +1,124 @@
+{
+  "M-CENSUS-GETS": 307,
+  "M-CENSUS-OVERLAP-PARENT208": 31,
+  "M-CENSUS-max_path_len": 5,
+  "M-CENSUS-mean_path_len": 4.064516129032258,
+  "M-CENSUS-n_admitted": 31,
+  "M-CENSUS-n_interior_pages": 11,
+  "M-CENSUS-n_union_pages": 42,
+  "M-COLD-BATCH-BYTES": 20560422,
+  "M-COLD-BATCH-DISCOVERED": 926,
+  "M-COLD-BATCH-GETS": 302,
+  "M-COLD-BATCH-REF-STRUCT": {
+    "blog.wordpress.org": 250,
+    "developer.mozilla.org": 250,
+    "doc.rust-lang.org": 250,
+    "docs.gitbook.com": 250,
+    "docs.github.com": 250,
+    "docs.pytest.org": 250,
+    "docs.python.org": 250,
+    "docs.readthedocs.io": 176,
+    "docusaurus.io": 250,
+    "en.wikipedia.org": 250,
+    "forums.gentoo.org": 250,
+    "gohugo.io": 250,
+    "jekyllrb.com": 212,
+    "kubernetes.io": 250,
+    "numpy.org": 250,
+    "pandas.pydata.org": 250,
+    "quotes.toscrape.com": 250,
+    "react.dev": 224,
+    "www.gnu.org": 250,
+    "www.mediawiki.org": 250
+  },
+  "M-COLD-ITEM-ORDINAL": {
+    "max": 174,
+    "mean": 150.1290322580645,
+    "min": 101,
+    "n": 31
+  },
+  "M-MODULE-ELAPSED-S": 32.00429992999989,
+  "M-REUSE-ITEMS-PER-PAGE": 2.8181818181818183,
+  "M-STORE-SHARING-FACTOR": 3.0,
+  "M-TOTAL-GETS": 335,
+  "M-WINDOWS-COMPLETED": 0,
+  "census_elapsed_s": 32.004290902999855,
+  "decision": {
+    "census_gate": {
+      "V3_seed_liveness": {
+        "n_live_hosts": 4,
+        "pass": true
+      },
+      "V3b_census_min_admitted": {
+        "min": 40,
+        "n_admitted": 31,
+        "pass": false
+      },
+      "V3c_coverage_definitional": {
+        "n_admitted": 31,
+        "n_paths": 31,
+        "pass": true
+      },
+      "V6_denominator": {
+        "cold_batch_gets": 302,
+        "n_admitted": 31,
+        "pass": true
+      }
+    },
+    "census_gate_failed": true,
+    "outcome": "NO_DATA"
+  },
+  "gates_census": {
+    "V3_seed_liveness": {
+      "n_live_hosts": 4,
+      "pass": true
+    },
+    "V3b_census_min_admitted": {
+      "min": 40,
+      "n_admitted": 31,
+      "pass": false
+    },
+    "V3c_coverage_definitional": {
+      "n_admitted": 31,
+      "n_paths": 31,
+      "pass": true
+    },
+    "V6_denominator": {
+      "cold_batch_gets": 302,
+      "n_admitted": 31,
+      "pass": true
+    }
+  },
+  "n_live_hosts": 4,
+  "per_host": {
+    "doc.rust-lang.org": {
+      "gets": 10,
+      "n_admitted": 0,
+      "n_crawled_at_record_time": 10,
+      "n_discovered": 250,
+      "time_truncated": false
+    },
+    "docs.pytest.org": {
+      "gets": 103,
+      "n_admitted": 3,
+      "n_crawled_at_record_time": 103,
+      "n_discovered": 250,
+      "time_truncated": false
+    },
+    "docs.readthedocs.io": {
+      "gets": 176,
+      "n_admitted": 28,
+      "n_crawled_at_record_time": 176,
+      "n_discovered": 176,
+      "time_truncated": false
+    },
+    "pandas.pydata.org": {
+      "gets": 13,
+      "n_admitted": 0,
+      "n_crawled_at_record_time": 13,
+      "n_discovered": 250,
+      "time_truncated": false
+    }
+  },
+  "seed_errors": {}
+}

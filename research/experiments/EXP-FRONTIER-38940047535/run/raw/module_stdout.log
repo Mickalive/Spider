@@ -1,0 +1,2 @@
+{"stage": "controls", "all_pass": true, "n": 15, "failed": []}
+{"stage": "live", "census_gate": "FAIL", "gates": {"V3_seed_liveness": {"n_live_hosts": 4, "pass": true}, "V3b_census_min_admitted": {"n_admitted": 31, "min": 40, "pass": false}, "V3c_coverage_definitional": {"n_paths": 31, "n_admitted": 31, "pass": true}, "V6_denominator": {"cold_batch_gets": 302, "n_admitted": 31, "pass": true}}, "gets": 335, "elapsed_s": 32.0}

@@ -1,0 +1,15 @@
+{"control_id": "C-BFS-PARENT-CHAIN", "observed": {"path": ["http://127.0.0.1:59131/", "http://127.0.0.1:59131/a.html", "http://127.0.0.1:59131/item.html"], "want": ["http://127.0.0.1:59131/", "http://127.0.0.1:59131/a.html", "http://127.0.0.1:59131/item.html"]}, "pass": true}
+{"control_id": "C-STORE-DEDUP-ACCOUNTING", "observed": {"distinct_union": 5, "noshare_sum": 6, "sharing_factor": 1.2}, "pass": true}
+{"control_id": "C-REVAL-NOCHANGE", "observed": {"gets": 5, "verdicts": {"http://127.0.0.1:59131/": "UNCHANGED", "http://127.0.0.1:59131/a.html": "UNCHANGED", "http://127.0.0.1:59131/item.html": "UNCHANGED", "http://127.0.0.1:59131/item2.html": "UNCHANGED", "http://127.0.0.1:59131/x.html": "UNCHANGED"}}, "pass": true}
+{"control_id": "C-PATH-CANARY", "observed": {"gets": 5, "n_union": 5}, "pass": true}
+{"control_id": "C-REVAL-CHANGE-DETECT", "observed": {"verdicts": {"http://127.0.0.1:59131/": "UNCHANGED", "http://127.0.0.1:59131/a.html": "UNCHANGED", "http://127.0.0.1:59131/item.html": "CHANGED", "http://127.0.0.1:59131/item2.html": "UNCHANGED", "http://127.0.0.1:59131/x.html": "UNCHANGED"}}, "pass": true}
+{"control_id": "C-LIVENESS-404", "observed": {"verdicts": {"http://127.0.0.1:59131/": "UNCHANGED", "http://127.0.0.1:59131/a.html": "UNCHANGED", "http://127.0.0.1:59131/item.html": "DEAD", "http://127.0.0.1:59131/item2.html": "UNCHANGED", "http://127.0.0.1:59131/x.html": "UNCHANGED"}}, "pass": true}
+{"control_id": "C-REVAL-MOVED-REDIRECT", "observed": {"verdict": "MOVED"}, "pass": true}
+{"control_id": "C-HAZARD-BOUND-RULE3", "observed": {"ub_five": 0.005, "ub_zero": 0.003}, "pass": true}
+{"control_id": "C-WILSON-BOUND-DIRECTION", "observed": {"wilson_seven": 0.03567707292555804, "wilson_thirty": 0.10504770626130436, "wilson_zero": 0.009512294334296508}, "pass": true}
+{"control_id": "C-TAU-LADDER-MONOTONE", "observed": {"tau": {"0.005": 0.4166666666666667, "0.01": 0.8333333333333334, "0.02": 1.6666666666666667, "0.05": 4.166666666666667, "0.1": 8.333333333333334}}, "pass": true}
+{"control_id": "C-DECISION-CANARY-SUPPORTS", "observed": {"detail": {"a_pays": [true], "b_noshare_pays": [true], "b_pays": [true], "batch_threshold_gets": 833.4, "break_even_cycles": 3.0866666666666664, "cold_amortized_gets": 4.451923076923077, "cycles": 1, "n_items": 208, "noshare_outcome": "SUPPORTS", "noshare_threshold_gets": 833.4, "outcome": "SUPPORTS"}, "outcome": "SUPPORTS"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-MIXED", "observed": {"detail": {"a_pays": [false], "b_noshare_pays": [true], "b_pays": [true], "batch_threshold_gets": 833.4, "break_even_cycles": 4.606965174129353, "cold_amortized_gets": 4.451923076923077, "cycles": 1, "n_items": 208, "noshare_outcome": "MIXED", "noshare_threshold_gets": 833.4, "outcome": "MIXED"}, "outcome": "MIXED"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-MIXED-FLIP", "observed": {"outcome": "MIXED"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-FALSIFIES", "observed": {"outcome": "FALSIFIES"}, "pass": true}
+{"control_id": "C-DECISION-CANARY-NODATA", "observed": {"outcome": "NO_DATA"}, "pass": true}

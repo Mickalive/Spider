@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-38940047535",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "origin": {
+    "github_run_id": "38940047535",
+    "execute_github_run_id": "38983361748",
+    "execute_github_run_attempt": "1",
+    "cycle_id": "38939560846",
+    "request_id": "ac7428b2685bd7294137e1b5",
+    "request_hash": "e1ca787fe83eafb5d624b59cb384d38a664dc988f03bc99d8e984471cfd7c05d",
+    "producer_model": "opencode/space-bunny-free",
+    "execute_model_record": "research/experiments/EXP-FRONTIER-38940047535/model_execute.json (status=retry, model=opencode/ling-3.1-flash-free, attempt=3, exit_code=1, category=transient, recorded_at=2026-10-17T00:44:58Z - a harness-level retry record of this stage, not a scientific event)",
+    "director_mandate_action": "CONTINUE",
+    "director_target_claim": "C-CROSSSITE",
+    "parent_handoff": {
+      "path": "research/experiments/EXP-FRONTIER-38188815194/handoff.json",
+      "sha256": "17775eed6e3f69c29457cd00171de2fcc4cf4c0a01627b6944ec56a33311f650",
+      "verified_present_and_matching": true
+    }
+  },
+  "git": {
+    "executed_at_head": "07610b79cf7e7fe80366c6abcc68dd32bed99748",
+    "branch": "lab2/frontier",
+    "request_base_sha": "677bd0d2d29128493c03c652bd08d0959a70bc72",
+    "execution_checkpoint_pre_execute_sha": "02e4034dbf0a25c3517a0e24c3d2ca0e11711cbc",
+    "base_sha_drift_disclosed": true,
+    "base_sha_drift_assessment": "All ten freeze.json.artifact_hashes and all four freeze.json.hashes re-verified as matching after the run; no frozen file was created, edited or deleted by this lane. Treated as disclosed non-threat, consistent with the precedent disposition for the parent packet.",
+    "git_operations_performed": "none - no commit, push, branch switch, reset, add -A, clean or stash was executed",
+    "unrelated_worktree_state_observed_not_touched": [
+      "SPIDER_CODEX.md (modified)",
+      "codex/claim_state.json (modified)",
+      "codex/index.json (modified)",
+      "codex/experiments/EXP-GRAPH-38835183404/ (untracked, another lane's evidence)"
+    ]
+  },
+  "environment": {
+    "os": "Linux (GitHub Actions ubuntu runner)",
+    "python": "Python 3.12.15",
+    "dependencies": "stdlib only (urllib, hashlib, html.parser, http.server, socketserver, threading, math, json, pathlib, argparse, time)",
+    "pip_installs": 0,
+    "model_endpoint_calls": 0,
+    "browser_or_docker_or_credentials": "none",
+    "vantage": "single runner egress IP, credential-free GET-only, User-Agent spider-r2/1.0, no cookie processor, per-request timeout 12.0 s",
+    "SPIDER_MODEL_MAX_RUNTIME_SECONDS": "unset in this process; .github/scripts/run-opencode-resilient.sh:10 defaults it to 1200 s and the lane workflow does not override it",
+    "harness_behaviour_relevant_to_validity": "on timeout the harness sends TERM/KILL to the whole process group and then git reset --hard + git clean -fd; this run finished in 32.0 s of module wall clock, so that path was never entered"
+  },
+  "frozen_inputs_verification": {
+    "method": "sha256 recomputed after the run and compared with freeze.json",
+    "artifact_hashes_all_match": true,
+    "hashes_all_match": true,
+    "checked": {
+      "research/experiments/EXP-FRONTIER-38164611798/execute_module.py": "75a01d490ec81609cbf87a606f8cfa9227d07f07765b2eb4fd876fef2c8ff53a",
+      "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747",
+      "research/experiments/EXP-FRONTIER-38184956362/derived/metrics.json": "d51568c56de800fb4bd3d5aec748a625edd8c15e69fbdacfc57215f0e5b6c17d",
+      "research/experiments/EXP-FRONTIER-38184956362/execute_module.py": "b9b2efdc78266717946022002eb3bef301979ac6fc0967254202747037c5956f",
+      "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5",
+      "research/experiments/EXP-FRONTIER-38184956362/raw/structural.jsonl": "95a3f15f9e7164096cf6c18fc3b6b1212c91caad88d741020ec885f0b520fd45",
+      "research/experiments/EXP-FRONTIER-38188815194/audit.json": "7cd7a1a6fa124e09db28cf7ae2e2de57933545c8e90b63907746cfeb3f6dee5a",
+      "research/experiments/EXP-FRONTIER-38188815194/execute_module.py": "f18e5b55e563c26f2c21aeaa131f84a7145068d8154b3950c870c2c3e988d262",
+      "research/experiments/EXP-FRONTIER-38188815194/result.json": "eb076db8d41e09a214d49a167c0d5c6b3c57b54703ccd71b08be77ea817efa0b",
+      "research/experiments/EXP-FRONTIER-38188815194/run/raw/paths.jsonl": "5192435b4c8a28d7f978f2a82ee1bbdabf4d092a79ab1b6d0614737d1ca33c46",
+      "design_review.json": "5c3462878f213e4082472475e5522726de9e1110616ac8fb6310efbde82a19ef",
+      "prereg.md": "3b517667d1a2589d1087cd4bd5e163bbc17946bbadeafdfd715ab7de0938e1b6",
+      "request.json": "1c6a3124a628b1a9fccca0d086d8f86ee39584b7ceb2715430cb57db85b543eb",
+      "spec.json": "0a814faafb14767a4424a41f72a17e97d207602dc9d363c808af803f408f3cad"
+    }
+  },
+  "code_identity": {
+    "derivation_rule": "prereg.md section 10: bytes strictly after the FROZEN_CODE_BEGIN marker line and strictly before the FROZEN_CODE_END marker line, .strip(), sha256",
+    "prereg_md_block_lines": "362-1252 (1-indexed, closed markers at 362 and 1252)",
+    "DERIVED_SHA256_expected": "017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a",
+    "DERIVED_SHA256_recomputed": "017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a",
+    "match": true,
+    "executed_module_path": "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+    "executed_module_sha256": "6b6a1f39236328c8c3f4acabde3740ebde6388e76e35235e733285f69413ea40",
+    "executed_module_note": "identical to the stripped frozen block except for one appended newline byte; compiles with py_compile; no code was written or altered by EXECUTE"
+  },
+  "commands": [
+    "python3 -c \"<extract FROZEN_CODE block, verify sha256, write execute_module.py>\"  # V1 code identity; recomputed 017c8bbc...04a0a == DERIVED_SHA256",
+    "python3 -c \"import py_compile; py_compile.compile('research/experiments/EXP-FRONTIER-38940047535/execute_module.py', doraise=True)\"",
+    "python3 research/experiments/EXP-FRONTIER-38940047535/execute_module.py --stage controls --out /tmp/opencode/exp38940047535/controls_probe   # V2 probe -> {\"stage\":\"controls\",\"all_pass\":true,\"n\":15,\"failed\":[]}, rc=0",
+    "nohup python3 -u research/experiments/EXP-FRONTIER-38940047535/execute_module.py --stage all --out research/experiments/EXP-FRONTIER-38940047535/run   # scored run, frozen defaults (--sleep 0.0, --cycles 3), single attempt, no re-run"
+  ],
+  "timeline_utc": {
+    "module_reconstructed": "2026-10-17T00:45:27Z",
+    "controls_probe_passed": "2026-10-17T00:45:30Z",
+    "scored_run_started": "2026-10-17T00:45:32.184Z",
+    "scored_run_finished": "2026-10-17T00:46:04.288Z (module wall clock 32.004 s by its own monotonic clock)",
+    "packet_written": "2026-10-17T00:47:57Z"
+  },
+  "substrate": {
+    "seeds": [
+      {"label": "doc.rust-lang.org", "url": "https://doc.rust-lang.org/stable/book/", "observed_status": 200},
+      {"label": "pandas.pydata.org", "url": "https://pandas.pydata.org/docs/", "observed_status": 200},
+      {"label": "docs.readthedocs.io", "url": "https://docs.readthedocs.io/en/stable/", "observed_status": 200},
+      {"label": "docs.pytest.org", "url": "https://docs.pytest.org/en/stable/", "observed_status": 200}
+    ],
+    "seed_liveness": "4/4 HTTP 200, seed_errors={} (V3 PASS)",
+    "control_urls_observation_0": [
+      {"role": "pos", "url": "https://www.cloudflare.com/cdn-cgi/trace", "status": 200, "body_len": 217, "sha256_prefix": "f6d95b1d481d"},
+      {"role": "pos", "url": "https://api.github.com/rate_limit", "status": 200, "body_len": 424, "sha256_prefix": "1920f0611e81"},
+      {"role": "pos", "url": "https://timeapi.io/api/Time/current/zone?timeZone=UTC", "status": 200, "body_len": 219, "sha256_prefix": "9952a4220e39"},
+      {"role": "null", "url": "https://example.com/", "status": 200, "body_len": 577, "sha256_prefix": "25ddf2c883e0"},
+      {"role": "null", "url": "https://www.iana.org/domains/reserved", "status": 200, "body_len": 10948, "sha256_prefix": "600b83257eec"}
+    ],
+    "control_observations_count": 1,
+    "control_note": "only observation 0 exists; the run aborted at the V4 census gate before any revalidation cycle, so the V10 positive/null diff was never computed (M-LIVE-POS-CHANGE and M-LIVE-NULL-CHANGED are null, not false)",
+    "remote_content_not_freezeable": "the four seed URLs and five control URLs are live remote responses and cannot be frozen; their identities, the crawl policy (BUDGET=250, DEPTH=6, ADMIT_MIN_HOP=3, FIFO, same-host static <a>, budget-capped asset extensions) and the schedule are frozen inside the hashed module and prereg instead"
+  },
+  "datasets_and_fixtures": {
+    "local_frozen_references_read_by_the_module": [
+      {"path": "research/experiments/EXP-FRONTIER-38184956362/raw/items.jsonl", "role": "parent admitted-item list; used only for covariate M-CENSUS-OVERLAP-PARENT208 (observed 31)", "sha256": "c8215d69fbc4f230bd7087773c44aeecd68021a8b3349666adc5c19b0ed26ec5"},
+      {"path": "research/experiments/EXP-FRONTIER-38164611798/raw/structural.jsonl", "role": "frozen 20-host structural frame; used only for covariate M-COLD-BATCH-REF-STRUCT", "sha256": "2afe65b63f751ef0d25578b02c9a667d43f866a0ac54504ebe1e1f4db839d747"}
+    ],
+    "registry_locator": "research/lanes/registry.json (used by repo_root() only; not in freeze_artifacts, and it cannot alter the decision partition)",
+    "offline_fixture": "in-process http.server fixture inside the frozen module (8 paths, mutation/404/302 state switches); no external network",
+    "parent_artifact_absent": "research/experiments/EXP-FRONTIER-38188815194/run/raw/economics.jsonl is cited in the parent result.json but does not exist in the repository, so the provenance of the inherited cold_batch_gets=926 constant cannot be settled from surviving evidence (see result.json VN-5)"
+  },
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/execute_module.py", "sha256": "6b6a1f39236328c8c3f4acabde3740ebde6388e76e35235e733285f69413ea40", "role": "code"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/controls.jsonl", "sha256": "aa1ce4036074549493d1c47f4b04fd72780412f25322edac512d716d4680d22f", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/control_probes.jsonl", "sha256": "70e0bae5bd13a86692331cafec426528045178193d0e293ff9bb1fef79efeda4", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl", "sha256": "37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/paths.jsonl", "sha256": "5dc7d91a4f5bc5759426e96eda3f9d0f8c88e5789e2919b3ccb33c31ac653c11", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/store_pages.jsonl", "sha256": "56d940eaf1d5b20f65b682d753ed633c31ad67ee6f38861179386cd6dc256bfb", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/raw/module_stdout.log", "sha256": "4b56266e00c1ba0b8bba41881ec88ac90dd17595a243f96f1da0f4ad0428bd98", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/derived/metrics.json", "sha256": "97de07cf0b22d4d7fe53449c2ddc7359ac679a928776d31dd83d3e88c1a20045", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/run/derived/decision.json", "sha256": "4cd637e1f901efd5e829f90ba78031f2d73065342af7210589cc386d9ca62c2e", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/result.json", "sha256": "acd6d7a7495567f5c6985e19925b0255338ee1b3386dd8a58c2ffc916c58ee6", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-38940047535/report.md", "sha256": "c0360de91ea48ac9cb013a6a94ecafbb7950fb8f91bc3ee1fc2a677f64b9284b", "role": "derived"}
+  ],
+  "reproduction": {
+    "recipe": [
+      "1. Verify V1: extract the FROZEN_CODE block from research/experiments/EXP-FRONTIER-38940047535/prereg.md using the prereg's own rule and confirm sha256 == 017c8bbcab9e8751ac5718affcf6563aa36c1cef82e6e23078c4d3d880804a0a.",
+      "2. Run: python3 <module> --stage controls --out <tmp> and confirm 15/15 pass.",
+      "3. Run: python3 <module> --stage all --out <dir> from the repository root (repo_root() resolves via research/lanes/registry.json so the two frozen reference files load).",
+      "4. Read <dir>/derived/decision.json and <dir>/derived/metrics.json; the frozen gate order in prereg section 11 (G1-G6) then maps the run to status/outcome exactly as recorded in result.json.",
+      "5. Recompute any census quantity offline from <dir>/raw/census.jsonl, <dir>/raw/paths.jsonl and <dir>/raw/store_pages.jsonl (all inputs to the frozen gates are written there, satisfying V9)."
+    ],
+    "determinism_note": "census outcomes depend on live remote content and on live site structure; a re-run is NOT expected to reproduce n_admitted=31 exactly. What reproduces exactly offline is the code identity, the 15 offline controls, the decision-function canaries and every arithmetic recomputation from the recorded rows.",
+    "one_attempt_only": "per prereg section 16 the census was executed exactly once; no retry, no enlarged budget, no altered constants and no population-improving re-run was performed, and none is proposed"
+  },
+  "scope_discipline": {
+    "paths_written_by_execute": [
+      "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+      "research/experiments/EXP-FRONTIER-38940047535/run/**",
+      "research/experiments/EXP-FRONTIER-38940047535/result.json",
+      "research/experiments/EXP-FRONTIER-38940047535/report.md",
+      "research/experiments/EXP-FRONTIER-38940047535/provenance.json"
+    ],
+    "product_lane_code_changes": "not applicable - this is the frontier lane and no registry-authorized code root (research/harness, research/frontier) was modified; the executed module is a byte-exact reconstruction of the frozen preregistration block placed inside this experiment's own directory",
+    "forbidden_actions_not_taken": "no edit to constitutional files, SPIDER_CODEX.md, codex/*, .github/*, .opencode/*, another lane or another experiment; no claim promotion; no commit/push/switch/reset"
+  }
+}

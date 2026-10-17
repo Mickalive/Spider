@@ -1,0 +1,25 @@
+{
+  "census_gate": {
+    "V3_seed_liveness": {
+      "n_live_hosts": 4,
+      "pass": true
+    },
+    "V3b_census_min_admitted": {
+      "min": 40,
+      "n_admitted": 31,
+      "pass": false
+    },
+    "V3c_coverage_definitional": {
+      "n_admitted": 31,
+      "n_paths": 31,
+      "pass": true
+    },
+    "V6_denominator": {
+      "cold_batch_gets": 302,
+      "n_admitted": 31,
+      "pass": true
+    }
+  },
+  "census_gate_failed": true,
+  "outcome": "NO_DATA"
+}
