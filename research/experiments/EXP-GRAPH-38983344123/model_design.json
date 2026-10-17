@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/mimo-v2.6-flash-free",
+  "attempt": 1,
+  "exit_code": 78,
+  "category": "provider-auth-invalid",
+  "github_run_id": "39004348409",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-17T05:16:00.707317+00:00"
+}
