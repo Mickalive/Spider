@@ -1,50 +1,642 @@
 {
+  "spec_schema_version": 2,
   "experiment_id": "EXP-FRONTIER-39053910903",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": "",
+  "design_contract_version": 2,
+  "director_target_claim": "C-WEB-DYNAMICS",
+  "claim_ids": [
+    "C-WEB-DYNAMICS"
+  ],
+  "question": "Using the hash-prozen observation-0 census of EXP-FRONTIER-39039638199 (research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl, sha256 45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff, 1107 admitted pages with per-page structural-text and byte hashes captured 2026-10-17T15:10:35.398909Z..15:11:11.988909Z) as a genuine first observation, with the two admission defects the parent audit verified repaired by construction (a closed, fractional-second-tolerant ISO-8601 anchor parser that refuses malformed input instead of silently returning None, and a window computed on a single POSIX-epoch clock with no monotonic/epoch mixing), can an envelope-safe, checkpointed second observation certify - or explicitly refuse to certify - a zero-GET structural-text tolerance at realistic session-reuse lags inside the Director-mandated [6 h, 30 d] band, on the same four-host credential-free server-rendered documentation frame: does the accepted ~7-minute CERTIFY_BOTH_AT_0P01 bound hold as the window grows, decay into a TTL-shaped revalidation requirement whose interval is licensed by nesting, or decay into a mandatory guard; and what is the first live per-page hazard bound for the hours-to-days band that the pre-2.0 program structurally could never measure?",
+  "hypothesis": "H1 (primary, window certification, pre-registered as the claim under test): for the frozen 1107-page documentation frame, at a measured separation W inside the mandated [6 h, 30 d] band, the exact one-sided 95% Clopper-Pearson upper bound on the per-page probability that the primary structural-text channel differs between the frozen observation-0 capture and this packet's second observation is at or below a named level L in {0.01, 0.02, 0.05} separately for the hop<=2 (SHALLOW) and hop>=3 (DEEP) strata. H2 (window-growth contrast, the decision-relevant novelty): a matched same-page, same-instrument, same-vantage comparison of the long window W against an in-launch short window of 360 s over the identical 1107 URLs either fails to separate at this power (fewer than 5 long-window-only discordant pages, exact one-sided McNemar p > 0.05) or detects positive growth (>= 5 long-window-only discordant pages at p <= 0.05); any short-window-only discordant page is declared REVERTING-CHURN evidence, i.e. a page that differed between the two in-launch observations but equalled the frozen observation-0 capture, which lowers the completeness of the differ-at-instant-W bound without making it wrong for a single reuse point. H3 (bounded negative alternative, pre-registered as an equally acceptable outcome): if either stratum's bound exceeds the coarsest grid level 0.05, or either stratum's censoring exceeds CENSOR_MAX=0.20, or either stratum's paired n falls below MIN_N_PER_STRATUM=60, or the measured window falls outside [6 h, 30 d], the packet refuses to certify and instead reports the guard requirement at its measured sensitivity. H4 (declared UNKNOWN, explicitly not tested here): JavaScript-rendered content, authenticated pages, any egress vantage other than this runner, every lag beyond the measured window W, the >72 h band unless the launch delay actually lands there, the product's chosen tolerance among 1%/2%/5%, and whether hop-depth-scoped guarding beats one global TTL in real sessions.",
+  "falsifier": "The primary certification hypothesis is falsified for a stratum S when the exact one-sided 95% Clopper-Pearson upper bound on the structural-text change probability for S over the frozen page set at window W exceeds the coarsest grid level 0.05 (first reachable at 25/686 deep or 14/421 shallow events), or when the S censoring fraction exceeds 0.20, or when the paired n for S is below 60, or when W is outside [6 h, 30 d]. The window-growth contrast H2 is falsified (growth detected) when the exact one-sided conditional-binomial p-value for long-window-only discordant pages exceeding short-window-only discordant pages is <= 0.05; it is falsified in the opposite direction when short-window-only discordant pages dominate, which is declared reverting churn. The measurement itself is invalidated - never falsified - when any offline canary fails, when the repaired parser cannot reproduce the four frozen epoch anchors, when the anchor-consistency check fails, when the frozen census file hash does not match, when the frozen×frozen 14.4 h byte canary does not reproduce the parent's recorded value bit-for-bit, when no live positive control fires between the two in-launch observations, when any null anchor or in-frame self-pair changes, when the GET ledger does not reconcile within GET_CEILING_TOTAL=3200, or when the module's self-hash is not recorded.",
+  "baselines": [
+    {
+      "id": "B-SHORT-WINDOW-MATCHED",
+      "role": "PRIMARY matched comparator: identical pages, identical instrument, identical vantage, identical sweep policy, different separation",
+      "definition": "An in-launch third observation (OBS2) of exactly the same 1107 URLs taken SHORT_SEPARATION_S=360.0 s after this packet's OBS1 sweep of the same URLs, compared against OBS1 rather than against the frozen observation-0 capture. It supplies (a) the S variable for the paired window-growth contrast, (b) an in-run non-regression demonstration that the repaired code detects text change on this very frame, and (c) a direct replication of the accepted parent's nominal separation (360 s requested; measured median 407.97 s) under this packet's code.",
+      "why_strong": "It removes page set, instrument, vantage, transport, host mix, URL class and sweep order as explanations for any window difference. The only manipulated factor is the elapsed time. Its weakness is also declared: it is the second sweep of the same launch, so edge/CDN warming between the two sweeps can only suppress its sensitivity, never inflate the long window's.",
+      "cost": "1107 GETs plus a 360 s in-process sleep plus a 30 s inter-sweep politeness gap"
+    },
+    {
+      "id": "B-ACCEPTED-PARENT-SHORT-WINDOW",
+      "role": "inherited accepted comparator at the 7-minute window (audit PASS, Director-verified recomputation)",
+      "definition": "EXP-FRONTIER-39039638199: 0 of 1107 paired pages changed text over a median 407.97 s separation; exact one-sided 95% Clopper-Pearson UB95 = 0.004357435376452668 (deep, n=686) and 0.007090496587222661 (shallow, n=421); frozen label CERTIFY_BOTH_AT_0P01; audit PASS with producer_claim_supported=true. Its raw rows are a hash-pinned freeze artifact of this packet.",
+      "why_strong": "It is an audited, independently recomputed measurement on exactly this page set with exactly this detector, so the window-growth statement is anchored at a real measured point rather than at an assumption.",
+      "declared_limits": "Its window is 407.97 s, i.e. the seconds-to-minutes band; it says nothing about hours-to-days, and its own frozen ceiling forbids extrapolating one. It is not re-measured by this packet; it is cited, never combined arithmetically with the long window."
+    },
+    {
+      "id": "B-BYTE-CHANNEL",
+      "role": "conservative sensitivity channel for the same estimand on the primary population",
+      "definition": "sha256 of the raw full response body on the identical 1107 pairs, reported beside every structural-text bound. It is the channel that catches attribute-only and script-only churn which the primary channel is blind to by construction.",
+      "why_strong": "A certification made only on the narrow channel would be an artefact of the detector's blindness. In the parent at the 7-minute window the two channels disagreed in exactly this way (7/1107 byte changes, all attribute/script-only, text unchanged), so the byte bound is not a formality.",
+      "inherited_reference": "the parent's frozen accepted byte bounds at the short window were UB95 = 0.011264 deep and 0.021609 shallow, both above 0.01, i.e. byte-identity was NOT certifiable even at 7 minutes"
+    },
+    {
+      "id": "B-TRANSPORT-CHANNEL",
+      "role": "covariate only, never a decision variable and never a validity gate",
+      "definition": "ETag / Last-Modified difference on the identical pairs, reported per host, plus the count of pairs whose body_len is unchanged.",
+      "why_strong_and_why_not_a_gate": "Pre-2.0 Intel cycle-8 evidence (codex/legacy_artifact_index.json artifact 4.443, sha 43d21a4a384bc5a242c6bb6f4725e4093982f0fb) established that a resource can vary bytewise under one unchanged ETag and that a per-request trace identifier can make a resource volatile without its content changing, so an ETag-only detector is demonstrably insensitive. Conversely, in the parent's own accepted raw rows all 359 of 1107 transport moves came from a single host (pandas.pydata.org Last-Modified values moving with no text change), so a 'transport must move' gate would be a host-specific artefact, not a validity condition. It is therefore reported as a covariate with a declared structural expectation, never gated."
+    },
+    {
+      "id": "B-LEGACY-BYTE-LADDER",
+      "role": "SECONDARY timescale ladder on a 292-page subset of the SAME frame; can never change the primary label",
+      "definition": "Three window points computed on the 292 admitted grandparent pages (research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl, sha256 37f3d87b49083e77b117bc5796f2ac9a3c4784e61e4acbf644a3c4fea1e487d7), which are a strict SUBSET of the primary 1107 (verified overlap 292/292, legacy-only 0): point P0 = grandparent anchor 2026-10-17T00:46:04.288Z -> frozen obs0 (about 14.4 h, byte channel, ZERO extra GETs because both endpoints are frozen); point P3 = frozen obs0 -> this packet's OBS1 on the same 292 URLs (about W, byte channel, reuses the OBS1 rows); point P4 = grandparent anchor -> this packet's OBS1 on the same 292 URLs (about W+14.4 h, byte channel, also zero extra GETs).",
+      "why_strong": "It converts the parent's structurally unadmitted retrospective channel into a properly dated, three-point, same-page ladder spanning roughly a 200x range of windows, at zero marginal GET cost, and it exercises the mandated fractional-second repair on the only artifact that actually contains fractional-second timestamps.",
+      "declared_limits": "byte channel only (the grandparent census carries no text_sha256), 292 pages, shallow-biased (261 shallow / 31 deep), readthedocs-heavy (168/292), and nested inside (not independent of) the primary population. It is a subset contrast, so it can never be stronger than the primary bound and must never be combined with it into a single stronger number."
+    },
+    {
+      "id": "B-DEPTH-STRATUM-CONTRAST",
+      "role": "reported two-sided exact contrast, symmetric in direction, never part of the primary label",
+      "definition": "Exact conditional-binomial one-sided tails in BOTH directions for p_deep > p_shallow and p_shallow > p_deep on the identical page set at window W, plus the minimum detectable deep and shallow rates.",
+      "why_strong": "The parent tested depth concentration only in the deep>shallow direction at the 7-minute window where nothing changed anywhere. At an hours window the volatile class (readthedocs, 168 pages, 140 of them shallow) makes the shallow>deep direction a live possibility, so a pre-registered one-directional test would be a rigged contrast. Reporting both directions with an MDC prevents 'no concentration detected' from being read as 'no concentration'.",
+      "declared_limits": "hop depth remains confounded with host and URL class inside each stratum; the MDC is reported so that a null is never rendered as an absence"
+    }
+  ],
+  "positive_control": {
+    "id": "C-LIVE-POS-SENSITIVITY",
+    "definition": "Three pre-registered volatile URLs fetched at OBS1 and again at OBS2, i.e. across the 360 s in-launch separation: https://www.cloudflare.com/cdn-cgi/trace , https://api.github.com/rate_limit , https://timeapi.io/api/Time/current/zone?timeZone=UTC . Identical set to the parent's accepted positive control; no re-selection after outcomes.",
+    "pass_condition": "M-LIVE-POS-CHANGED >= 1 AND M-LIVE-POS-OK >= 2, with the SAME frozen detector (canon()/text_sha() imported from the hash-pinned parent module) used to score them as for the frame",
+    "selection_disclosure": "Inherited verbatim from EXP-FRONTIER-39039638199, which probed a ten-URL candidate pool at DESIGN with two GETs <= 5 s apart and recorded which fired; DESIGN for THIS packet made no new selection and performed only one liveness GET per control URL (all three HTTP 200 at 2026-10-17T22:56Z), which establishes reachability, not volatility.",
+    "failure_disposition": "If no positive control fires, the instrument cannot distinguish change from stability, the transaction is NO_DATA_CONTROL_OR_INPUT_FAIL with status=MEASUREMENT_INVALID and outcome=NOT_APPLICABLE, and no certification or hazard statement may be made in either direction. This is the Director's stop trigger and it is NOT a scientific negative.",
+    "declared_scope_limit": "This control spans the 360 s short window only. No live positive control can span the ~8 h primary window, because no live fetch exists at the observation-0 epoch. The primary window's residual sensitivity risk is therefore carried as validity check V13 (fetch-freshness diagnostics) rather than as a control, and is stated as a limitation, not argued away."
+  },
+  "null_control": {
+    "id": "C-NULL-FAMILY-EXTERNAL-STATIC",
+    "definition": "Two pre-registered static anchors, https://example.com/ and https://www.iana.org/domains/reserved , fetched at OBS1 and OBS2.",
+    "pass_condition": "M-LIVE-NULL-CHANGED == 0 AND M-LIVE-NULL-OK == 2",
+    "failure_disposition": "A false positive on an external anchor is MEASUREMENT_INVALID, not a discountable nuisance."
+  },
+  "null_control_2": {
+    "id": "C-NULL-FAMILY-IN-FRAME-SELFPAIR",
+    "definition": "SELFPAIR_N=10 admitted pages (deterministic stride sample of the OBS1 target list) each fetched twice inside OBS1 with a gap <= SELFPAIR_MAX_GAP_S=5 s.",
+    "pass_condition": "M-SELFPAIR-CHANGED == 0 AND M-SELFPAIR-N == 10 AND M-SELFPAIR-BYTE-CHANGED == 0",
+    "why_this_is_the_stronger_family": "It runs inside the measured frame on multi-megabyte documentation pages, so it cannot be dismissed by the argument that a 577-byte example.com behaves differently from a documentation page. It is the direct noise-floor demonstration for the detector that scores the primary window.",
+    "failure_disposition": "A false positive inside the frame makes a zero-event long-window result uninterpretable: status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE."
+  },
+  "null_control_3": {
+    "id": "C-NULL-FAMILY-DETERMINISTIC-REPRODUCTION",
+    "definition": "A frozen-by-frozen, zero-GET reproduction of the parent's retrospective byte comparison over the 292-page overlap: overlap = 292, byte_changed = 0, UB95 = 0.010206909410248878 (bit-identical to the value the parent packet itself recorded at research/experiments/EXP-FRONTIER-39039638199/run/derived/retro_secondary.json#retro_metrics.M-RETRO-UB95-ALL).",
+    "pass_condition": "The recomputation reproduces n=292, k=0 and UB95 equal to 0.010206909410248878 to full float equality, and M-LEGACY14H-W-H lies in [13.0, 16.0] h",
+    "why_this_family_exists": "It is a null for the whole derivation path rather than for one URL: it proves that the byte comparison, the pair construction and the bound arithmetic in THIS packet's module reproduce a value computed by a DIFFERENT process in a DIFFERENT packet. It is the cheapest available check that the two repairs did not silently corrupt the comparison path.",
+    "failure_disposition": "MEASUREMENT_INVALID: the derivation path is not trustworthy and no bound from this run may be cited."
+  },
+  "measurement_validity": [
+    {
+      "id": "V1-CODE-AND-INSTRUMENT-IDENTITY",
+      "rule": "The measurement module imports canon(), text_sha(), norm(), is_asset(), url_class(), fetch(), fetch_many(), cp_ub95(), cert_level(), binom_tail(), contrast_p() and mdc_deep_rate() from research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py, whose sha256 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573 is bound in freeze.json.artifact_hashes and re-verified at load time, together with that module's own self-hash recomputed over its stripped bytes. This packet's own module records its stripped self-hash into run/derived/code_identity.json. Every threshold of the decision rule is additionally pinned by the 22 frozen C-DECIDE-LONG-* canaries and the frozen reference decision source in prereg.md#12.",
+      "declared_freeze_limitation": "DESIGN for this packet is restricted by the workflow prompt to spec.json and prereg.md, so unlike the parent packet DESIGN could not author and byte-hash the executable module. The freeze is therefore BEHAVIOURAL for this packet's own module (frozen rule text + frozen canary table in prereg.md, which AUDIT re-runs against the module's own decide()) and BYTE-HASH for every external interpretation dependency (freeze_artifacts). This limitation is disclosed rather than papered over.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V2-OFFLINE-CONTROL-SUITE",
+      "rule": "All inherited parent offline controls pass unchanged under the imported module (35 canaries: 6 fixture detector/canonicalisation controls, 4 exact-bound controls, 1 certification-ladder control, 1 contrast-power control, 10 decision-branch canaries, 11 raw->derived->decision pipeline canaries) AND all packet-specific offline canaries pass: C-PARSE-FRACTIONAL-ANCHORS, C-PARSE-REFUSES-GARBAGE, C-CLOCK-EPOCH-ONLY, C-ANCHOR-CONSISTENCY, C-POPULATION-MANIFEST, C-REPRO-LEGACY-14H-POINT, C-NESTING-LEMMA-CANARY, C-GROWTH-EXACT-P, C-CLASS-POWER-GATE, and the 22 C-DECIDE-LONG-* label canaries. DESIGN re-ran the inherited 35 canaries on this runner and observed 35/35 pass.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V3-ANCHOR-PARSER-CLOSEDNESS",
+      "rule": "parse_epoch(s, field) accepts exactly ISO-8601 instants with optional fractional seconds and an explicit Z or +/-HH:MM offset, anchored at the start of the string, with a year range check of 2000..2100, and RAISES ValueError on anything else - including on a non-string, a missing field, a trailing-only match or a string without a timezone designator. The parent's frozen parse() did the opposite: it returned None silently for '2026-10-17T15:10:35.398909+00:00' (because that string does not end in Z) and raised ValueError for '2026-10-17T00:45:32.184Z'. Both failure modes are now hard failures that name the offending anchor field.",
+      "failure_disposition": "MEASUREMENT_INVALID via C-PARSE-FRACTIONAL-ANCHORS / C-PARSE-REFUSES-GARBAGE"
+    },
+    {
+      "id": "V4-SINGLE-CLOCK-DISCIPLINE",
+      "rule": "Every duration in this packet is computed from POSIX-epoch seconds only. time.monotonic() is used solely for per-stage wall-budget accounting and is never subtracted from, or added to, an epoch value. The prohibited construction is demonstrated at DESIGN to be catastrophic: mixing this process's monotonic clock with the grandparent epoch anchor yields a median window of about -497832 h, which is the artefact the parent audit verified (recorded -497831.608 h).",
+      "failure_disposition": "MEASUREMENT_INVALID via C-CLOCK-EPOCH-ONLY"
+    },
+    {
+      "id": "V5-ANCHOR-CONSISTENCY",
+      "rule": "Four independent frozen artifacts must agree on the observation-0 epoch before any window may be computed: (a) research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json started_utc = 2026-10-17T15:10:35.398909+00:00; (b) the same packet's provenance.json commands[0].started_utc, which DESIGN verified is byte-identical to (a) with delta 0.000000000 s; (c) freeze.json frozen_at 2026-10-17T14:46:23.389566Z, which must be <= the observation-0 start; (d) provenance.json commands[0].died_utc 2026-10-17T15:18:18.715476Z, which must be >= the observation-0 end. The observation-0 window end is (a) + PROGRESS.obs0.wall_s = 36.59 s.",
+      "failure_disposition": "NO_DATA_CONTROL_OR_INPUT_FAIL (status=MEASUREMENT_INVALID)"
+    },
+    {
+      "id": "V6-FROZEN-POPULATION-IDENTITY",
+      "rule": "The population is exactly the 1107 admitted rows of the hash-pinned census (status 200 with a non-null text_sha256), unique by URL, with hop and host carried from the same rows. The 12 excluded rows (6x HTTP 404, 6x malformed-URL transport errors) are reported in M-N-EXCLUDED-OBS0 with their exact reasons and are never re-admitted. No page is discovered, crawled or added: this packet re-fetches a frozen population and nothing else.",
+      "failure_disposition": "NO_DATA_CONTROL_OR_INPUT_FAIL"
+    },
+    {
+      "id": "V7-WINDOW-QUANTISATION",
+      "rule": "The observation-0 rows carry only the parent process's monotonic t_start/t_end, which are not convertible to epoch. The window is therefore resolved at OBSERVATION granularity, not from per-page obs0 stamps. Because the imported fetch() may not be modified, each live fetch is wrapped so that time.time() is read immediately BEFORE and immediately AFTER the parent fetch call, giving every OBS1 and OBS2 page its own epoch bracket [epoch_pre, epoch_post] on the same POSIX clock. Per page: dt_h_min(p) = (epoch_pre(p) - observation-0 window END)/3600 and dt_h_max(p) = (epoch_post(p) - observation-0 window START)/3600. The admission gate uses W = min over pages of dt_h_min(p), the most conservative single number available; M-W-H-PRIMARY-MEDIAN and M-W-H-PRIMARY-MAX are reported alongside. Every bound built on the window is stated at the admitted W. The observation-side quantisation is 36.59 s, which DESIGN computed as 0.131 percent of a 7.76 h window, and the fetch-side bracket is at most the 12 s REQUEST_TIMEOUT plus transfer time, which only widens the interval in the conservative direction.",
+      "failure_disposition": "n/a - disclosed as representation loss; it is small, quantified and always in the conservative direction"
+    },
+    {
+      "id": "V8-WINDOW-ADMISSION-AND-SUBBAND",
+      "rule": "The measured dt_h_min must lie in the Director-mandated band [MIN_WINDOW_H=6.0 h, MAX_WINDOW_D*24=720 h]. Inside the band the window is labelled with an explicit sub-band: HOURS [6, 24), DAY [24, 72), DAYS [72, 720]. The sub-band is part of the primary label as an informational suffix __BAND_<name> and is never used to strengthen or weaken the bound. The 30 d ceiling corresponds to the hard deadline 2026-11-16T15:11:11.988909Z; after it the packet's own refusal branch fires and its persisted OBS1 rows become the anchor for a successor transaction.",
+      "failure_disposition": "REFUSE_LONG_WINDOW_BELOW_BAND / REFUSE_LONG_WINDOW_ABOVE_BAND (status=COMPLETE, outcome=INCONCLUSIVE)"
+    },
+    {
+      "id": "V9-SHORT-WINDOW-ELIGIBILITY",
+      "rule": "OBS2 pairs enter the short-window comparison only when their measured OBS1->OBS2 separation is >= DT_MIN_S=300 s and <= DT_MAX_S=900 s, a timestamp-only and outcome-independent rule. Pairs below the floor are counted in M-SHORT-N-PAIR-EXCLUDED-BELOW-DT-MIN and never analysed at too short a lag. DESIGN computed the expected separation as about 430-440 s for every page, inside the admitted range.",
+      "failure_disposition": "the short-window channel is reported with its exclusions; if fewer than 60 pairs per stratum survive, the growth contrast is labelled UNDERPOWERED and is not computed"
+    },
+    {
+      "id": "V10-CENSORING-AND-PAGE-GONE",
+      "rule": "Pages that were 200 at observation 0 but are not 200 at OBS1 are right-censored for the change estimand and are never counted as unchanged and never counted as changed. Per stratum M-CENSOR-FRAC-S must not exceed CENSOR_MAX=0.20 or that stratum refuses certification. HTTP 404/410 are reported separately as M-DEAD-404-S with their own bound M-DEAD-UB95-S; 429/403/503 are reported separately as M-RATE-LIMITED-S. DESIGN measured 12/12 HTTP 200 on a deterministic 12-page sample covering all six stratum x class buckets, so the expected censoring fraction is far below the gate, but the gate is live because documentation pages are removed.",
+      "failure_disposition": "REFUSE_LONG_CENSORED_<strata> (status=COMPLETE, outcome=INCONCLUSIVE)"
+    },
+    {
+      "id": "V11-DETECTOR-SENSITIVITY-AND-SPECIFICITY",
+      "rule": "Offline injections prove the primary channel fires on a visible-text change (C-DETECT-TEXT-INJECTION) and is blind by construction and by test to attribute-only and script-only churn (C-DETECT-ATTR-ONLY, C-DETECT-SCRIPT-ONLY). The blind spot is quantified live as M-CHANGE-ATTR-ONLY-S and bounded as M-HAZARD-BYTE-UB95-S. In the parent's accepted raw rows the byte channel produced exactly 7 attribute/script-only changes with zero text changes, so this channel is known to bind.",
+      "failure_disposition": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V12-HOST-STRATUM-CONFOUNDING",
+      "rule": "M-HOST-TABLE reports every host's paired n per stratum; M-HOSTS-WITH-BOTH-STRATA counts hosts with >= MIN_HOST_STRATUM_N=25 pages in BOTH strata; M-HOST-CONC-MAX-S flags a stratum supplied >= HOST_CONC_WARN=0.60 by one host; M-CLASS-FRAC-{VERSION_PINNED,MOVING_ALIAS,OTHER}-S reports immutability composition and a stratum that is >= VERSION_PINNED_FRAC_WARN=0.80 version-pinned is tagged BOUNDED_TO_VERSION_PINNED because a zero there would be true by construction. The frozen population has deep 686 / shallow 421 with all four hosts spanning both strata, max host concentration 0.321 deep and 0.333 shallow, and version-pinned share 0.032 deep and 0.002 shallow, so the frame is neither host-concentrated nor a version-pinned ceiling.",
+      "failure_disposition": "labels carry DEPTH_NOT_IDENTIFIABLE / HOST_CONCENTRATED / BOUNDED_TO_VERSION_PINNED tags, each of which narrows the claim ceiling"
+    },
+    {
+      "id": "V13-FETCH-FRESHNESS-AT-THE-LONG-WINDOW",
+      "rule": "DISCLOSED RESIDUAL RISK, mitigated by reporting rather than by a gate. No live positive control can span the ~8 h primary window because no live fetch exists at the observation-0 epoch, so a stale or cached OBS1 response would be indistinguishable from a stable page at the text channel. Four reported diagnostics bear on it: M-CHANGE-TRANSPORT-S (per host; the parent's accepted rows show all 359 moves came from pandas.pydata.org Last-Modified alone, so it is a covariate, never a gate), M-PAIR-BODYLEN-IDENTICAL-S, M-CENSORED-S and M-RATE-LIMITED-S. The two in-launch null families and the self-pair null establish detector noise, not origin freshness. This risk is NOT argued away: it is the reason the claim ceiling in CC-A is a statement about what a credential-free GET at two instants returned, not about origin content.",
+      "failure_disposition": "n/a - disclosed; it is why no interpretation may claim 'the origin did not change', only 'two credential-free GETs agreed'"
+    },
+    {
+      "id": "V14-REPRESENTATION-LOSS",
+      "rule": "Disclosed and load-bearing: (a) no JavaScript is executed, so client-rendered content is NOT measured; (b) HTML attributes are invisible on the primary channel by construction; (c) bodies are truncated at MAX_BODY_BYTES=8000000 with M-N-TRUNCATED reported; (d) one egress vantage, one runner, credential-free GET-only, server-rendered HTML; (e) the frame is four documentation hosts reachable by same-host <a> navigation in the parent run, so it is a frozen population and NOT a sample of the Web; (f) the 292-page legacy ladder is byte-only and has no structural-text hashes; (g) hop depth remains partly confounded with host and URL class.",
+      "failure_disposition": "n/a - these bound the claim ceiling and are repeated in result validity_notes"
+    },
+    {
+      "id": "V15-ENVELOPE-AND-LEDGER",
+      "rule": "Live GETs = offline fixture GETs + OBS1 targets + OBS2 targets + self-pairs + control probes, tracked by the imported module's own counter, must reconcile and stay within GET_CEILING_TOTAL=3200. The projected live total is about 2234. Module wall is projected at about 490 s against MODULE_WALL_BUDGET_S=900, which sits inside the harness envelope SPIDER_MODEL_MAX_RUNTIME_SECONDS=1200. Per-host concurrency is 2 with >= 0.10 s spacing, and a frozen circuit breaker halts a host's remaining fetches once it has accumulated CIRCUIT_BREAK_RATE_LIMIT_N=10 rate-limit responses; a broken host yields censoring and can only lose power, never manufacture a change event.",
+      "failure_disposition": "NO_DATA_LEDGER_FAIL if the ledger does not reconcile; M-PARTIAL is reported otherwise"
+    },
+    {
+      "id": "V16-PREREGISTRATION-TIMING",
+      "rule": "Every threshold, sub-band edge, contrast rule, control URL, class power gate and decision branch is frozen in this preregistration before any OBS1 or OBS2 row exists. The DESIGN probes recorded in prereg.md#15 fetched 21 live URLs AT MOST ONCE each (4 seeds, 3 positive controls, 2 null anchors and a 12-page population-liveness sample) and therefore created ZERO two-observation pairs; they can produce no hazard, change, dead-page or tolerance quantity for the frozen question. The one outcome-bearing computation performed at DESIGN (the frozen-by-frozen 14.4 h byte point over the 292-page overlap, 0 changes, UB95 0.010206909410248878) is disclosed in prereg.md#15 as probe D7 with its exact value, is computed only from already-accepted frozen artifacts, and set no threshold: CERT_GRID, ALPHA, MIN_N_PER_STRATUM, MIN_HOST_STRATUM_N, MIN_HOSTS_BOTH, CENSOR_MAX, HOST_CONC_WARN, VERSION_PINNED_FRAC_WARN, DT_MIN_S, DT_MAX_S, SHALLOW_MAX_HOP, SELFPAIR_N and the entire control URL set are inherited verbatim from EXP-FRONTIER-39039638199.",
+      "failure_disposition": "n/a"
+    },
+    {
+      "id": "V17-NESTED-WINDOW-LEMMA",
+      "rule": "L1-WINDOW-NESTING is a frozen structural lemma, not a fitted regularity: for a FIXED page set, a FIXED detector and FIXED status-200-at-both-ends, the event 'the structural text at instant t2 differs from the text at instant t1' is monotone increasing in t2 - t1. Therefore (i) a certification at the largest measured window W implies certification at every smaller window on the same page set, and (ii) an upper bound at W bounds every smaller window. Consequences: M-TTL-LICENSED-LAG-H is exactly the largest measured window for the population and stratum concerned, and NOTHING may be claimed beyond it. The lemma is verified offline on synthetic monotone schedules (C-NESTING-LEMMA-CANARY) and it is explicitly void where reverting churn exists, which is why the short-window channel is measured and its short-window-only discordant pages are reported.",
+      "failure_disposition": "n/a - a false lemma would be a derivation defect caught by C-NESTING-LEMMA-CANARY"
+    }
+  ],
+  "decision_rule": {
+    "form": "Total, ordered, disjoint function decide(m) over frozen metrics only. Frozen reference implementation and the frozen canary table are in prereg.md#12; the executed module must implement exactly that rule and AUDIT re-runs the 22 C-DECIDE-LONG-* canaries against the module's own decide(). No branch depends on anything outside m, and no branch can be manufactured by redefining a metric after outcomes are visible because every threshold is frozen in the hash-pinned preregistration.",
+    "step_0_input_and_control_validity": "If not control_ok (any offline canary failed, or the repaired parser cannot reproduce the four frozen epoch anchors, or the anchor-consistency check failed, or the frozen census hash mismatched, or the frozen-by-frozen 14.4 h byte canary failed to reproduce, or no live positive control fired, or any null anchor or in-frame self-pair changed) or not obs0_integrity_ok -> label NO_DATA_CONTROL_OR_INPUT_FAIL, status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. This is never a scientific negative. Else if the GET ledger does not reconcile within GET_CEILING_TOTAL -> NO_DATA_LEDGER_FAIL, status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE.",
+    "step_1_frozen_frame_power": "Else if n_deep < 60 or n_shallow < 60 -> REFUSE_LONG_INSUFFICIENT_N, status=COMPLETE, outcome=INCONCLUSIVE.",
+    "step_2_window_admission": "Else if W = dt_h_min is None or W < 6.0 h -> REFUSE_LONG_WINDOW_BELOW_BAND, status=COMPLETE, outcome=INCONCLUSIVE. Else if W > 720 h -> REFUSE_LONG_WINDOW_ABOVE_BAND, status=COMPLETE, outcome=INCONCLUSIVE. Else set band = HOURS if W < 24, DAY if W < 72, else DAYS.",
+    "step_3_censoring": "Else if censor_frac_deep > 0.20 or censor_frac_shallow > 0.20 -> REFUSE_LONG_CENSORED_DEEP and/or _SHALLOW, status=COMPLETE, outcome=INCONCLUSIVE.",
+    "step_4_primary_certification": "Else compute per stratum L = cert_level(k_text, n) = the tightest L in {0.01, 0.02, 0.05} whose exact one-sided 95% Clopper-Pearson upper bound is <= L, else None. Both None -> GUARD_REQUIRED_LONG_BOTH_STRATA (COMPLETE, FALSIFIES). Deep None only -> GUARD_REQUIRED_LONG_DEEP_ONLY (COMPLETE, MIXED). Shallow None only -> GUARD_REQUIRED_LONG_SHALLOW_ONLY (COMPLETE, MIXED). Both -> CERTIFY_LONG_BOTH_AT_<max(L_deep,L_shallow)> (COMPLETE, SUPPORTS).",
+    "step_5_narrowing_tags": "Append __BAND_<sub-band> (informational), __DEPTH_NOT_IDENTIFIABLE when hosts_both < 2, __HOST_CONCENTRATED when max host concentration >= 0.60, __BOUNDED_TO_VERSION_PINNED when a stratum is >= 0.80 version-pinned, __BYTE_IDENTITY_NOT_CERTIFIED_<stratum> when that stratum's byte bound exceeds its certified text level, and __CIRCUIT_BROKEN when the frozen rate-limit breaker fired. Tags only narrow the ceiling; none can change the base label.",
+    "step_6_reported_not_decided": "The window-growth contrast, the depth contrast, the per-class decomposition and the three-point legacy byte ladder are computed and reported with their own statistics, power limits and sub-population caveats. NONE of them can change the step-4 label. Their only power over the label is indirect and pre-declared: they bound what the primary bound may be claimed to mean.",
+    "reachability": "All twenty distinct labels were produced by the frozen canary table in prereg.md#12 with every expected label matching. The certification branches are reachable because k=0 at n=686 and n=421 certifies 0.01, k=2 deep still certifies 0.01, k=3 deep drops to 0.02, k=8 deep drops to 0.05 and the first k whose bound exceeds 0.05 is 25 deep or 14 shallow - all arithmetic states of the world at this frame size, not engineered branches. The guard branches need 25/686 or 14/421 changed pages in about 8 h, which is within reach for a documentation frame whose most active host contributes 168 pages. The censoring refusal is reachable because documentation pages are deleted. The window-above-band refusal is reachable after 2026-11-16T15:11:11.988909Z. The window-below-band refusal is provably unreachable in THIS transaction because the observation-0 anchor is frozen more than 7.7 h in the past relative to DESIGN completion and the epoch clock is monotone; it is retained as defensive totality, disclosed as non-reachable here, and is exercised by the C-DECIDE-LONG-WINDOW-BELOW canary so that the branch is known to work.",
+    "exhaustiveness": "22 canaries, 20 distinct labels, 2 intentional aliases (the 6 h boundary canary coincides with the 0P01 canary, and the control-failure canary coincides with the input-integrity canary because step 0 merges them). No label is unreachable and none is engineered."
+  },
+  "product_consequence_positive": "CERTIFY_LONG_BOTH_AT_0P01 means: for this declared page class, at this vantage, a zero-GET reuse of inherited structural text is licensed at a 1% per-page tolerance for every lag up to the measured window W, by L1-WINDOW-NESTING - so a working-day-scale session-reuse window needs no structural-text revalidation, and C-PRODUCT-ECON may price the session-scale revalidation GETs that this removes. CERTIFY_LONG_BOTH_AT_0P02 / _0P05 means the same statement at a 2% / 5% per-page tolerance, which converts the product question from 'is a guard needed at all' into 'which tolerance does the product accept, and at what sensitivity does a byte-identity requirement override it' - and the byte tags name exactly when it overrides. In every certifying branch M-TTL-LICENSED-LAG-H is the measured W, which is a TTL-shaped revalidation interval licensed by measurement rather than by assumption, with no claim beyond it. No promotion, no Product Core entry, no shipped number: this is a bounded bound for a declared page class at one vantage.",
+  "product_consequence_negative": "GUARD_REQUIRED_LONG_BOTH_STRATA or GUARD_REQUIRED_LONG_DEEP_ONLY / _SHALLOW_ONLY answers the product question in the negative direction and at a price: a freshness guard becomes mandatory at the measured lag, and the required sensitivity is given by the reported UB95 rather than left to assumption; the stratum-specific labels tell the resolver exactly which inheritance depths must be guarded and which need not. REFUSE_LONG_* and NO_DATA_* leave the product decision exactly where it is - unknown - and name the missing prerequisite: insufficient paired n, a window outside the mandated band, excessive censoring, page-gone volume, or a failed instrument. In no branch does this packet license 'no guard needed' without naming the page class, the channel, the vantage and the measured window.",
+  "estimated_cost": {
+    "live_gets": "about 2234 of the 3200 ceiling: 1107 OBS1 targets + 1107 OBS2 targets + 20 self-pair GETs + 10 control-probe GETs, plus 8 in-process offline fixture GETs. This is 12 percent fewer live GETs than the parent packet (2268) despite adding a second full-frame sweep, because the legacy ladder costs 0 extra GETs instead of the parent's 292.",
+    "bytes": "about 205 MB: two full-frame sweeps of about 100.9 MB each, matching the parent's measured observation-0 volume.",
+    "wall_clock": "projected about 490 s: OBS1 sweep about 45 s (parent measured 1123 GETs in 37 s at 24.5 GET/s) + 30 s inter-sweep politeness gap + 360 s in-process short-window sleep + OBS2 sweep about 45 s + self-pairs and probes about 5 s + offline controls about 3 s + derivation about 5 s, against MODULE_WALL_BUDGET_S=900 and the harness envelope SPIDER_MODEL_MAX_RUNTIME_SECONDS=1200.",
+    "compute": "stdlib-only Python 3.12, no browser, no JavaScript engine, no model endpoint, no credentials, no pip install, no LLM calls, no GPU. Financial cost zero.",
+    "design_cost_already_spent": "21 single-observation liveness GETs, plus purely offline arithmetic, parser, clock and reproduction probes. No live two-observation pair exists for the frozen question at freeze time.",
+    "politeness": "the frozen frame is re-fetched at most twice per page per launch, with per-host concurrency 2, >= 0.10 s spacing, a 30 s gap between the two sweeps and a frozen rate-limit circuit breaker; the four documentation hosts received about 554 requests each across the two sweeps"
+  },
+  "expected_information_gain": "The product freshness question is currently measured only up to about 7 minutes. The Director's mandate names the hours-to-days band as the band in which real session reuse lives, and the pre-2.0 program could not enter it twice: the corpus census denied the days-to-weeks band structurally because no committed corpus held a same-target revisit beyond 31.4 minutes (sha 81aba1e898d96fe3c49ae9cd0f4ef00dfdad46a4), and the Intel TTL protocol declared window 2 NOT_EXECUTED because it required a >= 24 h calendar gap no cycle could wait out (sha 383df5cee7e2241d73a6174361d9f635381816c9, 7ce37c3ea7a9b1531d71797cb7b4f777bf2e1f56, fa21a4e0d157a24ba60058975743f832c5025cb5). The only route into that band available to SPIDER is a genuine second observation separated from a frozen first one by more than the harness envelope, and the Director's own named smallest unblocking action is exactly the two-repair re-freeze this packet performs. Every outcome branch changes a decision: certification licenses zero-GET session-scale reuse and a measured TTL; a coarser certification turns the product question into a tolerance choice; a guard outcome mandates a guard and gives its sensitivity at a named lag; a stratum-specific outcome scopes the guard by inheritance depth; a refusal names the missing prerequisite at the cost of about 490 s instead of leaving the question open for another cycle. The declared power limits are stated in advance so that a null is never over-read: the frame can only detect a deep excess at or above 0.0364 and a shallow excess at or above 0.0333 at the guard threshold, the growth contrast needs >= 5 long-window-only discordant pages, the VERSION_PINNED class (n=23) is declared underpowered and certifies nothing, and the 292-page legacy ladder speaks for no stratum. Marginal gain over the accepted parent is the timescale band itself, a matched same-page window contrast, a three-point byte ladder at zero marginal cost, and a class-scoped decomposition that the 7-minute zero made impossible.",
+  "legacy_disposition": {
+    "classification": "LEGACY: DISTINCT_EXTENSION of the pre-2.0 frontier volatility/freshness thread, plus REPLICATION of its instrument lesson and a REPAIR of the one long-window channel it structurally could not execute. NO_MATCH against the pre-2.0 next-state work named in the Director mandate.",
+    "screening_method": "Topic-keyword screening of codex/legacy_artifact_index.json (1401 artifacts, blob sha 9bb76113aeaf46d9aecdd8a38349a3a7741e57c3) over paths, roles and verdict tokens for freshness|stale|ttl|window|census|volatil|timescale|hazard|stationar|invalidation|revalidat|stability|drift, which returned 89 candidate artifacts, followed by targeted primary-source reads of the mounted .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md at the exact line ranges recorded in the index for the five load-bearing artifacts. The 22 MB source was not loaded wholesale and the absence of a keyword hit was never treated as proof of absence.",
+    "targeted_primary_source_comparisons": [
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/reports/CENSUS_REPORT_V3.md",
+        "sha": "81aba1e898d96fe3c49ae9cd0f4ef00dfdad46a4",
+        "codex_ref": "codex/legacy_artifact_index.json artifact 4.1052 (lines 524803-524878)",
+        "what_it_established": "A zero-network, deterministic corpus census DENIED the days-to-weeks staleness band structurally: the eligible corpus's largest same-target revisit gap was 0.021812 d (31.4 min), 26 separated pairs existed at all against a required 64, and the report states verbatim 'Days-to-weeks staleness band strata: OUT OF SCOPE on committed bytes'. It also mined validation-tier priors: openlibrary 7/12 double-reset drift at seconds scale with exact Clopper-Pearson CI [0.276670, 0.848348], and 62/62 placebo zero-drift pairs.",
+        "relation_here": "DISTINCT_EXTENSION, and the direct ancestor of this design. The legacy denial is about COMMITTED BYTES and about the days-to-weeks band. This packet does not re-run the census and does not re-litigate it; it takes the only discriminating path that report itself names (see 4.1053) and measures a live longitudinal window instead. The seconds-scale drift prior is carried as a labelled PRIOR, never as evidence. No day-scale claim is made unless the measured window actually lands in the DAY or DAYS sub-band, which is why the sub-band is part of the label."
+      },
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/reports/CYCLE_32968938133_REPORT.md",
+        "sha": "869b3d6d9484cc675795797ffccf6e6b3cfee74a",
+        "codex_ref": "codex/legacy_artifact_index.json artifact 4.1053 (lines 524879-524935)",
+        "what_it_established": "The binding charter-v3 closure record: the freshness question is 'provably undecidable without new time-axis data', and verbatim 'Exactly one discriminating path exists: an authorized longitudinal collection (sentinel pilot -> panel)'.",
+        "relation_here": "THIS PACKET IS THAT AUTHORISED LONGITUDINAL COLLECTION, at the smallest possible scale. It differs from the proposed sentinel panel in being a bounded measurement over an already-frozen population with an already-measured short window, a frozen decision rule, an exact bound and a full control suite, rather than a standing panel. It does not claim to close the charter's broader sentinel programme."
+      },
+      {
+        "artifact": "results/intel/reproductions/cycle6/ttl_window2_protocol.json and results/intel/reproductions/cycle8/ttl_window2_protocol.json",
+        "sha": "383df5cee7e2241d73a6174361d9f635381816c9 / 7ce37c3ea7a9b1531d71797cb7b4f777bf2e1f56 / fa21a4e0d157a24ba60058975743f832c5025cb5",
+        "codex_ref": "codex/legacy_artifact_index.json artifacts 4.243, 4.445, 4.446",
+        "what_it_established": "A frozen two-window TTL protocol whose window 2 was declared status NOT_EXECUTED_THIS_RUN with reason 'single-session constraint disclosed at freeze time; >=24h calendar gap required', required_gap_hours 24, an explicit window2_eligibility_ts_ms, a positive-differential STALE_TTL attribution rule and a window-regress cap of 3 windows after which TTL is declared unmeasurable-this-cycle.",
+        "relation_here": "DISTINCT_EXTENSION and the clearest structural precedent this packet attacks. Two differences are load-bearing. First, the substrate: the legacy estimand was replay-artifact staleness (discovery-versus-replay differentials on route records and replica-store fingerprints over application hosts such as restful-booker), whereas this packet measures per-page structural-text invalidation of a documentation frame; the words 'window' and 'TTL' coincide but the estimands do not. Second, the constraint: the legacy protocol could not leave a session, whereas this packet's second observation is separated from the frozen first by more than the harness envelope by construction, which is the whole content of the mandated repair. The legacy >= 24 h floor is recorded here as the DAY sub-band boundary precisely so that the comparison to the legacy protocol is exact rather than rhetorical: if the launch lands after 2026-10-18T00:46:04.288Z the legacy byte ladder's longest point enters the same band the legacy protocol required and could not enter."
+      },
+      {
+        "artifact": "results/intel/reproductions/cycle8/ttl_window1.json",
+        "sha": "43d21a4a384bc5a242c6bb6f4725e4093982f0fb",
+        "codex_ref": "codex/legacy_artifact_index.json artifact 4.443",
+        "what_it_established": "A frozen change-detection rule 'CHANGED iff ETag differs; if ETag absent on either side, CHANGED iff head-hash differs', plus the cycle-8 finding that a resource can vary bytewise under ONE unchanged ETag and that a per-request trace identifier makes a resource volatile without its content changing.",
+        "relation_here": "REPLICATION AND REPAIR of the instrument lesson. The lesson is adopted as B-TRANSPORT-CHANNEL: the transport channel is a covariate only and never defines an event. This packet additionally reports the reverse error that the legacy rule could not see - byte-changed-but-text-unchanged - and quantifies it in both directions (the parent's accepted rows contain exactly 7 such pages). DESIGN verified against the parent's accepted raw rows that all 359 of its transport moves came from one host's Last-Modified values with zero text change, which is why a transport-based gate was explicitly rejected here as a host-specific artefact."
+      },
+      {
+        "artifact": "frontier/web-physics-volatility-freshness/contracts/CHANGE_EVENT_TAXONOMY_V0.md and contracts/FRESHNESS_SIGNAL_CONTRACT_V0.md",
+        "sha": "f41395817d98f153f098df42cf2cd48f0052eceb / 0a53685fd4188dfc17beefca9950c1e6921d4a39",
+        "codex_ref": "codex/legacy_artifact_index.json artifacts 4.1247 / 4.1248",
+        "what_it_established": "A shared vocabulary in which CE-1/2/3/5 are the admissible environment-side classes, CE-4 (session/auth) is excluded by design, CE-6 (cosmetic churn below tolerance) is by construction not an event, CE-5 (outage) must not be misread as staleness, and a contract declaring seconds-scale extrapolation INVALID.",
+        "relation_here": "ADOPTED, not re-derived. Text-channel change maps to CE-1/CE-2/CE-3; attribute/script-only churn is CE-6 and is counted separately (M-CHANGE-ATTR-ONLY); 404/410 and 5xx map to the CE-5/death channels and never enter the change rate; no session, cookie or authenticated class exists because every fetch is a credential-free GET. The ban on seconds-to-days extrapolation is honoured literally and is the reason V8 puts the measured window inside the label and the reason L1-WINDOW-NESTING is used to extend a certification only DOWNWARD in window, never upward."
+      }
+    ],
+    "non_duplicate_of_mandate_named_precedents": "The Director screened the compact legacy set and recorded NO_MATCH on the pre-2.0 next-state work: P2-WP002B (901 true next-state transitions; rule DIM-ACC 0.6238 vs nearest-neighbour 0.6295 vs shuffle 0.5706; no website holdout) and P2-WP003B (sha f6cfdfc749cae9eb4d9fcc4b11b94b63a2bcfb6e; action-only MSE 0.756 vs full 0.735) concern one-step next-state prediction and action-feature mechanics on committed trajectory corpora, and P2-WP003 (sha 292e3243d9bc7a3b88712788a7cb05709eb74eb9) is MEASUREMENT_INVALID for prev_action leakage. None measures a per-page invalidation probability over a wall-clock window on a live frame; none is repeated here.",
+    "explicit_non_duplication_of_research_2_0_precedents": "EXP-FRONTIER-39039638199 measured the SAME estimand at the 7-minute window and its own frozen ceiling left the hours-to-days band UNDECIDED and its retrospective channel NOT ADMITTED; this packet is a new measurement at a window 60x or more longer, not a re-run, and it does not re-adjudicate the parent's label. EXP-FRONTIER-37950626378 (hop-scaling cost law) measures GET/byte cost as a function of N and is a different estimand. EXP-FRONTIER-38184956362 closed the site-native DISCOVERY axis (0/208 deep items within <=3 charged GETs) and is inherited as a bounded negative, not re-run. EXP-FRONTIER-38940047535 and EXP-FRONTIER-38188815194 are the twice-MEASUREMENT_INVALID persistence-economics thread, parked by mandate, and are used here ONLY as a frozen epoch anchor and a frozen byte census, never as a design to repeat.",
+    "differences_from_the_parent_packet": [
+      "REPAIR 1 of the two audit-verified defects: a closed, fractional-second-tolerant anchor parser that refuses malformed input, replacing a parser that silently returned None on the observation-0 anchor and crashed on the legacy anchors.",
+      "REPAIR 2: every duration computed on a single POSIX-epoch clock; the parent's monotonic-vs-epoch mixing produced a -497831.608 h window and is now demonstrated at DESIGN to produce about -497832 h and is structurally unreachable in the frozen code path.",
+      "STRUCTURE: the parent slept 360 s in-process and derived the long window from a DIFFERENT packet's census; this packet reuses an already-frozen observation-0 as a genuine first observation and adds an envelope-safe checkpointed stage structure with epoch checkpoints, an atomic stage write and a persisted, epoch-stamped OBS1 that becomes the anchor for a successor rung.",
+      "COST: the parent's retrospective channel spent 292 GETs re-fetching the grandparent census; because that census is a strict subset of the frozen observation-0 population, the same three window points are obtained here from the parent's own rows plus this packet's OBS1 rows at ZERO extra GETs.",
+      "POWER AND COMPARISON: the parent compared two hop strata at one window; this packet compares two windows on the same pages with an exact one-sided conditional-binomial growth contrast, a deterministic zero-GET reproduction canary, a two-sided depth contrast with MDC, and a per-class decomposition with an explicit power gate that the 7-minute zero made impossible.",
+      "SCOPE OF CLAIM: the parent's certification was certified at one instant-pair; this packet's certification is carried by L1-WINDOW-NESTING to every smaller lag on the same page set and stops dead at the measured window, with the sub-band named inside the label."
+    ]
+  },
+  "parent_handoff_disposition": {
+    "source": "research/experiments/EXP-FRONTIER-39039638199/handoff.json (sha256 92aef32b7467ff478e4b50343eed451b2bedde4268ab9b21c0e0ae0dea00add2), read in full at DESIGN",
+    "disposition": "USE as continuity evidence. The Director mandate (CONTINUE, target claim C-WEB-DYNAMICS, sha-pinned observation-0 census, two named DESIGN repairs, checkpointed across launches) is the binding direction and is followed without drift; the parent handoff's next_question is advisory and its PARK instruction on the persistence-economics subthread is honoured - this packet contains no store, no revalidation ladder and no cold-versus-store cost comparison.",
+    "established_preserved": [
+      "The parent's instrument was sound and its result is accepted: 0/1107 text changes at a median 407.97 s separation, UB95 0.004357 deep and 0.007090 shallow, CERTIFY_BOTH_AT_0P01, audit PASS with producer_claim_supported=true and a Director-recomputed match on every load-bearing metric.",
+      "Instrument sensitivity was demonstrated live, not assumed: 3/3 volatile URLs changed, 2/2 static anchors and 10/10 in-frame self-pairs stayed silent, 35/35 offline controls passed. This packet re-uses exactly that control set unchanged.",
+      "The stratum-reserved level-ordered crawl produced a fetch-complete frame (deep 686, shallow 421, all four hosts in both strata, no starvation). This packet inherits that frozen population instead of re-crawling it, which is why it needs no BFS and no seed liveness gate.",
+      "The page-gone channel is a distinct event class from content change and is kept distinct here (M-DEAD-404-S with its own bound, M-RATE-LIMITED-S separate).",
+      "C-WEB-DYNAMICS remains HYPOTHESIS and the parent's frozen ceiling CC-C/CC-D forbids promotion from a page-class hazard measurement; this packet adopts the same ceiling.",
+      "A hazard measurement is a bounded statement about a page class at a measured window, never an absence claim; the parent's own do_not_assume is carried forward verbatim in prereg.md#19."
+    ],
+    "rejected_preserved": [
+      "The parent's NOT ADMITTED retrospective channel is NOT cited as a bound and NOT reused as evidence of long-window stability. Its window was -497831.608 h. What is reused is its frozen INPUT (the grandparent census and its fractional-second provenance anchors) and its recorded arithmetic, which this packet recomputes as a deterministic zero-GET canary with a bit-identical expected value.",
+      "A transport-channel validity gate is rejected: in the parent's accepted raw rows all 359 of 1107 transport moves came from one host's Last-Modified values with zero text change, so such a gate would test one host's header policy rather than the measurement.",
+      "Byte-identity at 0.01 is not certifiable on this frame (parent byte UB95 0.011264 deep and 0.021609 shallow even at 7 minutes), so a product requiring byte-identity needs a guard regardless of what the text channel certifies; this packet keeps the byte tags for exactly that reason.",
+      "Site-native discovery stays closed (0/208 within <=3 charged GETs, EXP-FRONTIER-38184956362, inherited) and is not re-run.",
+      "The C-CROSSSITE persistence-economics thread stays parked by mandate; C-CROSSSITE is untouched and remains HYPOTHESIS."
+    ],
+    "unknown_addressed": [
+      "UNKNOWN[0]/audit unresolved[0] - the hours-to-days band is UNDECIDED because the long-window channel could not be admitted. Addressed directly: the channel is rebuilt with both named repairs, admitted by its own gate, and its measurement IS the primary estimand of this packet.",
+      "UNKNOWN[1] - whether the 0.01 certification holds as the reuse lag grows. Addressed by the matched short-window contrast, the three-point legacy byte ladder and the nesting lemma, all frozen here.",
+      "UNKNOWN[3] - the cause of the 359 transport moves. Not solved here; the channel stays a covariate and the cause remains open, which is stated rather than guessed.",
+      "UNKNOWN[6] - the Director/Product decision on whether a bounded negative for the guard requirement should be recorded for C-FRESHNESS. Still a consumer-lane decision; this packet supplies the bound and does not take the decision."
+    ],
+    "do_not_assume_carried_forward": [
+      "Do NOT read the parent's CERTIFY_BOTH_AT_0P01 as 'no freshness guard is ever needed': it is a structural-text-channel, four-host, one-vantage, credential-free, GET-only, server-rendered bound at a 7-minute window.",
+      "Do NOT extrapolate any bound to the days-to-weeks band or to any other timescale; this packet's own bound carries its own measured window and its own sub-band, and L1-WINDOW-NESTING extends a certification only to SMALLER lags.",
+      "Do NOT treat the re-admitted legacy byte ladder as a structural-text result: the grandparent census carries no text hashes, so it is byte-only and shallow-biased.",
+      "Do NOT treat the VERSION_PINNED class as certified: at n=23 its zero would be true by construction and the class is declared underpowered by the frozen power gate.",
+      "Do NOT read 'no window-growth detected' as 'no window-growth': the contrast is underpowered below 5 long-window-only discordant pages and its MDC is reported.",
+      "Do NOT treat the frozen frame as a sample of the Web: it is a frozen population of 1107 URLs on four documentation hosts reached by same-host anchor navigation, from one vantage.",
+      "Do NOT promote C-WEB-DYNAMICS from this packet under any branch."
+    ]
+  },
+  "repairs_of_parent_defects": [
+    {
+      "parent_defect": "D1: parse() used datetime.strptime(s, '%Y-%m-%dT%H:%M:%SZ') and returned None for anything not ending in Z. DESIGN reproduced both failure modes on the real artifacts: it returns None SILENTLY for the observation-0 anchor '2026-10-17T15:10:35.398909+00:00' (that string does not end in Z) and raises ValueError for the legacy anchors '2026-10-17T00:45:32.184Z' and '2026-10-17T00:46:04.288Z', and the legacy finished timestamp additionally carries a trailing parenthetical suffix '(module wall clock 32.004 s by its own monotonic clock)' that must be stripped rather than parsed.",
+      "repair": "parse_epoch(s, field): anchored regex for ISO-8601 date-time with optional fractional seconds and an explicit Z or +/-HH:MM offset, year range 2000..2100, conversion through datetime.fromisoformat, and a hard ValueError naming the offending anchor field for every other input. No input can yield None. Exercised by C-PARSE-FRACTIONAL-ANCHORS (the four real anchors parse to epochs 1792249835.398909, 1792249835.398909, 1792197932.184000 and 1792197964.288000) and C-PARSE-REFUSES-GARBAGE (empty string, None, plain date, missing timezone, year 1899, trailing-garbage-only, and a string with no leading timestamp all raise)."
+    },
+    {
+      "parent_defect": "D2: dt_h was computed as (rec['t_start'] - p_end)/3600 where rec['t_start'] is time.monotonic() inside fetch() and p_end is a POSIX epoch value, mixing two clocks. The parent's retro_secondary.json recorded dt_h_min -497831.61, dt_h_median -497831.608 and dt_h_max -497831.606, which is outside the frozen [6 h, 30 d] band and is why the channel was not admitted.",
+      "repair": "Single-clock discipline: every duration in this packet is a difference of two POSIX-epoch values obtained from time.time() bracketing the frozen anchors and around each live fetch; time.monotonic() is confined to wall-budget accounting and is never combined with an epoch value. DESIGN reproduced the prohibited arithmetic on this runner and obtained about -497832 h, confirming both the mechanism and that the repaired path is the only one reachable. Exercised by C-CLOCK-EPOCH-ONLY."
+    },
+    {
+      "parent_defect": "D3 (found at DESIGN by the satisfiability attack, not named in the parent's audit): the parent had no anchor-consistency check, so a single mis-parsed or mis-sourced timestamp would have silently defined the whole window. The observation-0 anchor is in fact recorded in TWO independent frozen artifacts plus a freeze timestamp plus a process-death timestamp, and none of them is checked against the others.",
+      "repair": "C-ANCHOR-CONSISTENCY over four artifacts: PROGRESS.json started_utc versus provenance.json commands[0].started_utc must be byte-identical (DESIGN measured delta 0.000000000 s), freeze.json frozen_at must be <= the observation-0 start (measured 1452.0 s before), and provenance.json commands[0].died_utc must be >= the observation-0 end. Failure is NO_DATA_CONTROL_OR_INPUT_FAIL, not a silent window."
+    },
+    {
+      "parent_defect": "D4 (found at DESIGN): the observation-0 rows carry only the parent process's MONOTONIC t_start/t_end, which are not convertible to epoch, so per-page dt at the long window is not directly recoverable and the parent's per-page dt_s logic cannot be reused across launches.",
+      "repair": "Window quantisation declared and bounded (V7): dt is resolved at OBSERVATION granularity as a conservative interval [epoch(OBS1 fetch) - obs0 window END, epoch(last OBS1 fetch) - obs0 window START], all bounds use the conservative lower edge, and the quantisation is quantified at 36.59 s = 0.131 percent of a 7.76 h window. Per-page dt IS retained for the in-launch short window, where both endpoints are epoch-stamped by this packet."
+    },
+    {
+      "parent_defect": "D5 (found at DESIGN): the parent derived the long window from a DIFFERENT packet's census, so the channel depended on a foreign provenance file with no integrity binding in this transaction and burned 292 GETs re-fetching a population that turned out to be a strict subset of the parent's own observation-0 population.",
+      "repair": "The legacy ladder is recomputed from frozen x frozen rows and this packet's OBS1 rows at zero extra GETs, and every foreign input is listed in freeze_artifacts so it is hash-bound at freeze. DESIGN verified the subset relation exactly: overlap 292, legacy-only 0, deep 31 / shallow 261, readthedocs 168 / pytest 101 / pandas 13 / rust 10."
+    }
+  ],
+  "design_probes_observed": {
+    "boundary": "Cheap pre-freeze satisfiability probes only, executed 2026-10-17T22:53Z..23:05Z. Twenty-one live URLs were fetched AT MOST ONCE each, so no two-observation pair of any kind exists for the frozen question. One outcome-bearing computation over already-accepted frozen artifacts was performed and is disclosed with its exact value (probe D7); it set no threshold. No threshold, grid, band edge, control URL or decision branch in this packet was chosen after observing any outcome.",
+    "D1_parser_and_anchor_consistency": "OFFLINE. The parent's strict parser returns None on '2026-10-17T15:10:35.398909+00:00' and raises ValueError on '2026-10-17T00:45:32.184Z' and '2026-10-17T00:46:04.288Z'. The repaired parser returns epochs 1792249835.398909 (observation-0 start), 1792249835.398909 (provenance anchor, delta 0.000000000 s), 1792197932.184000 (legacy start) and 1792197964.288000 (legacy end, suffix correctly stripped). freeze.json frozen_at 1792248383.389566 is 1452.0 s before the observation-0 start; provenance died_utc 1792250298.715476 is after the observation-0 end 1792249871.988909. The observation-0 window is 36.59 s wide.",
+    "D2_clock_discipline": "OFFLINE plus one local time call. At DESIGN the repaired window computes W_primary = 7.756 h (sub-band HOURS) and W_legacy = 22.175 h (sub-band HOURS, entering DAY after 2026-10-18T00:46:04.288Z). The prohibited monotonic-minus-epoch construction yields about -497832 h, reproducing the parent's -497831.608 h artefact. Window quantisation is 0.131 percent of the primary window.",
+    "D3_bound_arithmetic": "OFFLINE, using the hash-pinned parent cp_ub95/cert_level. UB95(0, 686) = 0.004357 and UB95(0, 421) = 0.007090 reproduce the parent's accepted values. Minimum n for a certified level: 299 at 0.01, 149 at 0.02, 59 at 0.05. First k whose bound exceeds 0.05: 25/686 deep (rate 0.0364) and 14/421 shallow (rate 0.0333). First k that drops deep below the 0.01 level: k=3; below 0.05: k=8. Censoring is not the binding gate: even at 35 percent censoring the deep stratum would still certify 0.01 (n=446, UB 0.00669).",
+    "D4_growth_contrast_power": "OFFLINE. Exact one-sided conditional-binomial p on discordant pages: 5 long-window-only gives 0.03125, 4 gives 0.0625, 6 with 1 short-only gives 0.0625, 0/0 is underpowered. GROWTH_MDC_COUNT is therefore 5 and is frozen as the minimum detectable discordant count.",
+    "D5_live_liveness": "LIVE, 9 single GETs at 2026-10-17T22:56Z. All four seeds HTTP 200 (22496 / 31975 / 24433 / 22046 bytes). All three positive-control URLs HTTP 200. Both null anchors HTTP 200. This establishes egress and reachability only, never volatility, and creates no pair.",
+    "D6_population_liveness": "LIVE, 12 single GETs at 2026-10-17T23:00Z, deterministic one page per host x stratum x class bucket over the first 12 of 14 buckets. 12/12 HTTP 200, covering all six stratum x class combinations including deep VERSION_PINNED (n=22 in the population) and shallow VERSION_PINNED (n=1). The frozen population is therefore still fetchable about 8 h after observation 0, so the censoring gate has real headroom but is not vacuous.",
+    "D7_disclosed_existing_data_point": "OFFLINE, frozen x frozen, ZERO GETs, DISCLOSED WITH ITS EXACT VALUE. The 292-page grandparent overlap compared to the frozen observation-0 rows gives n=292, byte_changed=0, UB95=0.010206909410248878 and cert_level 0.02 at a true window of about 14.4 h, bit-identical to the value the parent packet recorded in run/derived/retro_secondary.json; 13 of the 292 pairs show a transport move. This is adopted as control C-NULL-FAMILY-DETERMINISTIC-REPRODUCTION and as the P0 rung of the secondary ladder. It set no threshold, and it is computed only from already-accepted frozen artifacts.",
+    "D8_instrument_reproduction": "OFFLINE. The hash-pinned parent module's inherited 35 offline controls pass 35/35 on this runner, and replaying its own summarize()/decide() over its own frozen raw rows reproduces every load-bearing accepted metric exactly: n 686/421, text changes 0/0, UB95 0.004357/0.007090, hosts spanning both strata 4, live positive controls 3 fired, nulls 0, self-pairs 0, label CERTIFY_BOTH_AT_0P01. This is a REPRODUCTION of an already-accepted packet's numbers and yields no new information about the long window; it establishes only that the import-and-reuse path is exact before any live GET is spent.",
+    "D9_population_structure": "OFFLINE over the frozen census. 1119 rows, 1107 admitted, 12 excluded (6x HTTP 404, 6x malformed-URL transport errors). Deep 686 / shallow 421. Hop histogram {0:4, 1:138, 2:279, 3:543, 4:143}. Host x stratum: rust 220/43, pytest 219/98, readthedocs 28/140, pandas 219/140. Classes ALL: MOVING_ALIAS 713, OTHER 371, VERSION_PINNED 23; deep 439/225/22, shallow 274/146/1. Max host concentration 0.321 deep and 0.333 shallow, both far below the 0.60 warn; version-pinned share 0.032 deep and 0.002 shallow, far below the 0.80 warn, so the frame is NOT a version-pinned ceiling and a zero would be measured rather than true by construction.",
+    "D10_decision_branch_reachability": "OFFLINE, against the frozen reference decision source (prereg.md#12, sha256 89cafdcd4ed181682367d58a9e466ab34b5779a8babc515bdef4c4b9b06c7817). All 22 C-DECIDE-LONG-* canaries produce exactly their expected label, 20 distinct labels, 2 intentional aliases. Two defects were found and fixed by this attack before freeze: a sub-band classifier that accepted 5.9 h as HOURS because its first edge was 0.0 instead of MIN_WINDOW_H, and a tag join that emitted four underscores. Both were corrected and the canary table re-verified. REFUSE_LONG_WINDOW_BELOW_BAND is provably unreachable in this transaction and is retained only as defensive totality with the proof recorded in prereg.md#11.",
+    "probe_consequence": "Every satisfiability question this design depends on is answered on the real substrate at zero or near-zero cost: the two named repairs are demonstrated to work and their failure modes are demonstrated to be unreachable; the frozen population is intact, diverse, non-ceiling and still fetchable; every decision branch is reachable at realistic frame sizes with exact arithmetic; the instrument reuse path reproduces the parent's accepted numbers bit-for-bit; and the total live budget is about 2234 GETs at a projected 490 s wall. No unresolved prerequisite remains for this packet to freeze."
+  },
+  "metric_ids": [
+    "M-LAUNCH-ID",
+    "M-WALL-S",
+    "M-PARTIAL",
+    "M-N-TRUNCATED",
+    "M-GETS-TOTAL",
+    "M-GETS-CONTROLS-OFFLINE",
+    "M-GETS-OBS1-LONG",
+    "M-GETS-OBS2-SHORT",
+    "M-GETS-SELFPAIR",
+    "M-GETS-PROBES",
+    "M-OFFLINE-CONTROLS-PASS",
+    "M-OFFLINE-CONTROLS-FAILING",
+    "M-OBS0-EPOCH-START",
+    "M-OBS0-EPOCH-END",
+    "M-OBS0-QUANTISATION-S",
+    "M-ANCHOR-DELTA-S",
+    "M-LEGACY-EPOCH-END",
+    "M-W-H-PRIMARY-MIN",
+    "M-W-H-PRIMARY-MEDIAN",
+    "M-W-H-PRIMARY-MAX",
+    "M-SUBBAND-PRIMARY",
+    "M-W-H-SHORT-MIN-S",
+    "M-W-H-SHORT-MEDIAN-S",
+    "M-W-H-SHORT-P90-S",
+    "M-W-H-SHORT-MAX-S",
+    "M-N-POPULATION",
+    "M-N-ADMITTED-OBS0",
+    "M-N-EXCLUDED-OBS0",
+    "M-N-PAIR-ALL",
+    "M-N-PAIR-DEEP",
+    "M-N-PAIR-SHALLOW",
+    "M-CHANGE-TEXT-ALL",
+    "M-CHANGE-TEXT-DEEP",
+    "M-CHANGE-TEXT-SHALLOW",
+    "M-CHANGE-RATE-TEXT-DEEP",
+    "M-CHANGE-RATE-TEXT-SHALLOW",
+    "M-CHANGE-BYTE-ALL",
+    "M-CHANGE-BYTE-DEEP",
+    "M-CHANGE-BYTE-SHALLOW",
+    "M-CHANGE-ATTR-ONLY-ALL",
+    "M-CHANGE-ATTR-ONLY-DEEP",
+    "M-CHANGE-ATTR-ONLY-SHALLOW",
+    "M-CHANGE-TRANSPORT-ALL",
+    "M-CHANGE-TRANSPORT-DEEP",
+    "M-CHANGE-TRANSPORT-SHALLOW",
+    "M-PAIR-BODYLEN-IDENTICAL-ALL",
+    "M-HAZARD-TEXT-UB95-ALL",
+    "M-HAZARD-TEXT-UB95-DEEP",
+    "M-HAZARD-TEXT-UB95-SHALLOW",
+    "M-HAZARD-BYTE-UB95-ALL",
+    "M-HAZARD-BYTE-UB95-DEEP",
+    "M-HAZARD-BYTE-UB95-SHALLOW",
+    "M-CERT-LEVEL-TEXT-DEEP",
+    "M-CERT-LEVEL-TEXT-SHALLOW",
+    "M-CERT-LEVEL-BYTE-DEEP",
+    "M-CERT-LEVEL-BYTE-SHALLOW",
+    "M-CENSORED-ALL",
+    "M-CENSORED-DEEP",
+    "M-CENSORED-SHALLOW",
+    "M-CENSOR-FRAC-DEEP",
+    "M-CENSOR-FRAC-SHALLOW",
+    "M-DEAD-404-DEEP",
+    "M-DEAD-404-SHALLOW",
+    "M-DEAD-UB95-DEEP",
+    "M-DEAD-UB95-SHALLOW",
+    "M-UNREACHABLE-DEEP",
+    "M-UNREACHABLE-SHALLOW",
+    "M-RATE-LIMITED-DEEP",
+    "M-RATE-LIMITED-SHALLOW",
+    "M-CIRCUIT-BROKEN-HOSTS",
+    "M-HOST-TABLE",
+    "M-HOSTS-WITH-BOTH-STRATA",
+    "M-HOST-CONC-MAX-DEEP",
+    "M-HOST-CONC-MAX-SHALLOW",
+    "M-CLASS-FRAC-VERSION_PINNED-DEEP",
+    "M-CLASS-FRAC-VERSION_PINNED-SHALLOW",
+    "M-CLASS-FRAC-MOVING_ALIAS-DEEP",
+    "M-CLASS-FRAC-MOVING_ALIAS-SHALLOW",
+    "M-CLASS-FRAC-OTHER-DEEP",
+    "M-CLASS-FRAC-OTHER-SHALLOW",
+    "M-CLASS-N-MOVING_ALIAS-ALL",
+    "M-CLASS-N-OTHER-ALL",
+    "M-CLASS-N-VERSION_PINNED-ALL",
+    "M-CLASS-CHANGE-TEXT-MOVING_ALIAS-ALL",
+    "M-CLASS-CHANGE-TEXT-OTHER-ALL",
+    "M-CLASS-CHANGE-TEXT-VERSION_PINNED-ALL",
+    "M-CLASS-UB95-MOVING_ALIAS-ALL",
+    "M-CLASS-UB95-OTHER-ALL",
+    "M-CLASS-UB95-VERSION_PINNED-ALL",
+    "M-CLASS-CERT-LEVEL-MOVING_ALIAS-ALL",
+    "M-CLASS-CERT-LEVEL-OTHER-ALL",
+    "M-CLASS-CERT-LEVEL-VERSION_PINNED-ALL",
+    "M-CLASS-POWER-VERDICT-MOVING_ALIAS-ALL",
+    "M-CLASS-POWER-VERDICT-OTHER-ALL",
+    "M-CLASS-POWER-VERDICT-VERSION_PINNED-ALL",
+    "M-SHORT-N-PAIR-ALL",
+    "M-SHORT-N-PAIR-DEEP",
+    "M-SHORT-N-PAIR-SHALLOW",
+    "M-SHORT-N-PAIR-EXCLUDED-BELOW-DT-MIN",
+    "M-SHORT-CHANGE-TEXT-ALL",
+    "M-SHORT-CHANGE-TEXT-DEEP",
+    "M-SHORT-CHANGE-TEXT-SHALLOW",
+    "M-SHORT-HAZARD-TEXT-UB95-ALL",
+    "M-SHORT-HAZARD-TEXT-UB95-DEEP",
+    "M-SHORT-HAZARD-TEXT-UB95-SHALLOW",
+    "M-SHORT-CERT-LEVEL-DEEP",
+    "M-SHORT-CERT-LEVEL-SHALLOW",
+    "M-GROWTH-A-LONG-ONLY",
+    "M-GROWTH-B-SHORT-ONLY",
+    "M-GROWTH-P-ONE-SIDED",
+    "M-GROWTH-MDC-COUNT",
+    "M-GROWTH-CLASSIFICATION",
+    "M-DEPTH-CONTRAST-P-DEEP",
+    "M-DEPTH-CONTRAST-P-SHALLOW",
+    "M-DEPTH-CONTRAST-MDC-DEEP-RATE",
+    "M-DEPTH-CONTRAST-MDC-SHALLOW-RATE",
+    "M-DEPTH-CONTRAST-CLASSIFICATION",
+    "M-TTL-LICENSED-LAG-H",
+    "M-NESTING-MONOTONE-CHECK",
+    "M-LEGACY14H-N",
+    "M-LEGACY14H-CHANGE-BYTE",
+    "M-LEGACY14H-UB95",
+    "M-LEGACY14H-CERT-LEVEL",
+    "M-LEGACY14H-TRANSPORT-CHANGED",
+    "M-LEGACY14H-W-H",
+    "M-LEGACYPLUS-N",
+    "M-LEGACYPLUS-CHANGE-BYTE",
+    "M-LEGACYPLUS-UB95",
+    "M-LEGACYPLUS-CERT-LEVEL",
+    "M-LEGACYPLUS-W-H",
+    "M-LONGPLUS-N",
+    "M-LONGPLUS-CHANGE-BYTE",
+    "M-LONGPLUS-UB95",
+    "M-LONGPLUS-CERT-LEVEL",
+    "M-LONGPLUS-W-H",
+    "M-LIVE-POS-CHANGED",
+    "M-LIVE-POS-OK",
+    "M-LIVE-NULL-CHANGED",
+    "M-LIVE-NULL-OK",
+    "M-SELFPAIR-CHANGED",
+    "M-SELFPAIR-BYTE-CHANGED",
+    "M-SELFPAIR-N",
+    "M-SELFPAIR-MAX-GAP-S",
+    "M-DECISION-LABEL"
+  ],
+  "control_ids": [
+    "C-CANON-IDEMPOTENT",
+    "C-DETECT-TEXT-INJECTION",
+    "C-DETECT-ATTR-ONLY",
+    "C-DETECT-SCRIPT-ONLY",
+    "C-CENSOR-404-DETECTED",
+    "C-LIVE-DETECTOR-ON-FIXTURE",
+    "C-CP-BOUND-N60",
+    "C-CP-BOUND-N150",
+    "C-CP-BOUND-N299",
+    "C-CP-BOUND-K1N400",
+    "C-CERT-LEVEL-LADDER",
+    "C-CONTRAST-POWER",
+    "C-DECIDE-CERTIFY-BOTH",
+    "C-DECIDE-GUARD-BOTH",
+    "C-DECIDE-GUARD-DEEP",
+    "C-DECIDE-GUARD-SHALLOW",
+    "C-DECIDE-INSUFFICIENT-N",
+    "C-DECIDE-CENSORED",
+    "C-DECIDE-CONTROL-FAIL",
+    "C-DECIDE-NOT-IDENTIFIABLE",
+    "C-DECIDE-HOST-CONCENTRATED",
+    "C-DECIDE-VERSION-PINNED",
+    "C-DECIDE-BRANCHES-DISTINCT",
+    "C-SUMMARY-ZERO-EVENTS",
+    "C-SUMMARY-DEEP-EVENTS",
+    "C-SUMMARY-CENSOR-AND-DEAD",
+    "C-SUMMARY-CENSOR-REFUSAL",
+    "C-SUMMARY-INSUFFICIENT-N",
+    "C-SUMMARY-GUARD-BOTH",
+    "C-SUMMARY-GUARD-DEEP-ONLY",
+    "C-SUMMARY-GUARD-SHALLOW-ONLY",
+    "C-SUMMARY-SHORT-SEPARATION",
+    "C-SUMMARY-ELIGIBLE-DT-FLOOR",
+    "C-SUMMARY-DEPTH-NOT-IDENTIFIABLE",
+    "C-SUMMARY-MDC-REPORTED",
+    "C-PARSE-FRACTIONAL-ANCHORS",
+    "C-PARSE-REFUSES-GARBAGE",
+    "C-CLOCK-EPOCH-ONLY",
+    "C-ANCHOR-CONSISTENCY",
+    "C-POPULATION-MANIFEST",
+    "C-REPRO-LEGACY-14H-POINT",
+    "C-NESTING-LEMMA-CANARY",
+    "C-GROWTH-EXACT-P",
+    "C-CLASS-POWER-GATE",
+    "C-DECIDE-LONG-CERTIFY-0P01",
+    "C-DECIDE-LONG-HOURS-EDGE-6H",
+    "C-DECIDE-LONG-CERTIFY-0P02",
+    "C-DECIDE-LONG-CERTIFY-0P05",
+    "C-DECIDE-LONG-GUARD-BOTH",
+    "C-DECIDE-LONG-GUARD-DEEP-ONLY",
+    "C-DECIDE-LONG-GUARD-SHALLOW-ONLY",
+    "C-DECIDE-LONG-INSUFFICIENT-N",
+    "C-DECIDE-LONG-WINDOW-BELOW",
+    "C-DECIDE-LONG-WINDOW-ABOVE",
+    "C-DECIDE-LONG-CENSORED-DEEP",
+    "C-DECIDE-LONG-CENSORED-BOTH",
+    "C-DECIDE-LONG-CONTROL-FAIL",
+    "C-DECIDE-LONG-INPUT-INTEGRITY-FAIL",
+    "C-DECIDE-LONG-LEDGER-FAIL",
+    "C-DECIDE-LONG-DEPTH-NOT-IDENTIFIABLE",
+    "C-DECIDE-LONG-HOST-CONCENTRATED",
+    "C-DECIDE-LONG-VERSION-PINNED",
+    "C-DECIDE-LONG-BYTE-NOT-CERTIFIED",
+    "C-DECIDE-LONG-CIRCUIT-BROKEN",
+    "C-DECIDE-LONG-BAND-DAY",
+    "C-DECIDE-LONG-BAND-DAYS",
+    "C-LIVE-POS-SENSITIVITY",
+    "C-LIVE-NULL-STABILITY",
+    "C-SELFPAIR-DETERMINISM",
+    "C-LEGACY-REPRODUCTION",
+    "C-FRAME-DEPTH-PRESENT",
+    "C-CODE-IDENTITY",
+    "C-LEDGER-RECONCILIATION"
+  ],
   "freeze_eligibility": {
     "decision_rule_reachability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The frozen reference decision source in prereg.md#12 (sha256 89cafdcd4ed181682367d58a9e466ab34b5779a8babc515bdef4c4b9b06c7817) is a total ordered function on thirteen frozen inputs and was executed at DESIGN against twenty-two canary metric states, producing every expected label exactly: three certification labels, two stratum-specific guard labels, one both-strata guard label, five measurement-valid refusals, two measurement-invalid labels and seven tag-bearing certifications across three sub-bands, giving twenty distinct labels with two intentional aliases. Each branch is a state of the world at this frame size, verified arithmetically and not engineered: certification at 0.01 needs k=0 with n>=299 (the frame has 686 and 421); dropping to 0.02 needs 3 deep events; dropping to 0.05 needs 8 deep or 4 shallow events; exceeding 0.05 - the guard branches - needs 25 deep or 14 shallow events, which a documentation frame whose most active host contributes 168 pages can plausibly produce in about eight hours. The censoring refusal is reachable because documentation pages are deleted and the parent's own observation-0 sweep already contained 6 such 404s. The insufficient-n refusal is reachable if the frozen population partially rots. The window-above-band refusal is reachable after the hard deadline 2026-11-16T15:11:11.988909Z. The window-below-band refusal is provably unreachable in this transaction because the observation-0 anchor is frozen more than 7.7 h before DESIGN completion and the epoch clock is monotone; it is kept only as defensive totality, that unreachability is declared, and the C-DECIDE-LONG-WINDOW-BELOW canary exercises it so the branch is known to work. This attack found and fixed two defects before freeze (a sub-band classifier that accepted 5.9 h as HOURS, and a tag join emitting four underscores) and re-verified the full table afterwards.",
+      "evidence_refs": [
+        "prereg.md#11",
+        "prereg.md#12",
+        "prereg.md#15#D10",
+        "spec.json#decision_rule",
+        "spec.json#design_probes_observed"
+      ]
     },
     "measurement_prerequisites": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every prerequisite was exercised on the real substrate at DESIGN rather than asserted. Network egress is confirmed today for all four frozen seeds (HTTP 200, 22496/31975/24433/22046 bytes), for all three positive-control URLs, for both null anchors and for a deterministic 12-page sample of the frozen population covering all six host x stratum x class buckets at 12/12 HTTP 200 - so the 1107-page frame is still fetchable about eight hours after observation 0. The hash-pinned parent module imports cleanly, its own stripped self-hash reproduces 5d2509f691193c610a9797e4c473ee9425c010c1a4bd35f65b43e3aca672c573, its 35 offline controls pass 35/35 on this runner, and replaying its own summarize()/decide() over its own frozen raw rows reproduces every load-bearing accepted metric bit-for-bit including UB95 0.004357/0.007090 and the label CERTIFY_BOTH_AT_0P01. The two mandated repairs are demonstrated working on the four real anchor strings and their two failure modes are demonstrated unreachable. No pip install, model endpoint, browser, Docker, JavaScript engine or credential is required; the work is stdlib-only Python 3.12 with zero financial cost. Every foreign input the measurement reads is an existing repository file listed in freeze_artifacts, so no input can silently drift. Measured throughput from the parent's accepted run (1123 GETs in 36.59 s) plus DESIGN's own 21-GET probe put the projected 490 s module wall inside MODULE_WALL_BUDGET_S=900 and the 1200 s harness envelope. The one date-sensitive prerequisite is a hard deadline, and it is named: the 30 d band ceiling expires 2026-11-16T15:11:11.988909Z, after which the packet's own refusal branch fires and its persisted OBS1 rows become the anchor for a successor rung.",
+      "evidence_refs": [
+        "prereg.md#15#D5",
+        "prereg.md#15#D6",
+        "prereg.md#15#D8",
+        "prereg.md#15#D1",
+        "prereg.md#15#D2",
+        "spec.json#estimated_cost",
+        "spec.json#freeze_artifacts"
+      ]
     },
     "baseline_identifiability": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "The primary comparator B-SHORT-WINDOW-MATCHED is the identical 1107 URLs, by the identical hash-pinned instrument, from the identical vantage, under the identical sweep policy, under the identical epoch clock, with only the elapsed time changed - so no difference between the two windows can be attributed to page set, instrument, transport, host mix, URL class or sweep order, and the frozen measurement-policy constants (WORKERS 6, PER_HOST_CONCURRENCY 2, PER_HOST_SPACING_S 0.10, UA spider-r2/1.0, MAX_BODY_BYTES 8000000, REQUEST_TIMEOUT 12) are identical on both sides. The second comparator B-ACCEPTED-PARENT-SHORT-WINDOW is an audited, independently recomputed measurement on exactly this page set with exactly this detector, so the window-growth statement is anchored at a measured point rather than an assumption. The secondary ladder is declared SECONDARY, is a strict subset of the primary population (verified 292/292 overlap, zero legacy-only), and therefore cannot manufacture a primary win. There is no ceiling baseline: the frozen population is 64.0 percent MOVING_ALIAS deep and 65.1 percent MOVING_ALIAS shallow, version-pinned share is 0.032 deep and 0.002 shallow against a 0.80 warn, max host concentration is 0.321 deep and 0.333 shallow against a 0.60 warn, all four hosts span both strata with >= 25 pages each, and the hop histogram reaches level 4 - so a zero would be measured, not true by construction. There is no floor baseline either: the live positive control fires on second-scale volatility and the frozen detector is proven by offline injection to fire on visible-text change. The one identified weak comparator - same-launch edge warming suppressing the short channel's sensitivity - can only bias against the short channel, never in favour of the long window, and is declared in V13.",
+      "evidence_refs": [
+        "spec.json#baselines",
+        "prereg.md#7",
+        "prereg.md#15#D9",
+        "spec.json#measurement_validity#V12",
+        "spec.json#measurement_validity#V13"
+      ]
     },
     "control_sensitivity": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every control fires in both directions under the same code that scores the experiment, and every one was exercised before freeze. Offline, the inherited suite passes 35/35 on this runner: an injected visible-text change is detected on the primary channel; an attribute-only change and a script-nonce-only change are provably invisible on the primary channel and visible on the byte channel; a fixture 404 is routed to the censoring channel; two identical fixture GETs are unchanged; the exact one-sided Clopper-Pearson bound reproduces hand-computed values at (0,60), (0,150), (0,299) and (1,400); the certification ladder resolves correctly; the contrast canary separates its two neighbouring event counts. New to this packet: the repaired parser is shown to fail on four malformed inputs and to reproduce four real anchors; the epoch clock is shown to give 7.756 h while the prohibited mixed clock gives about -497832 h; the anchor-consistency check is shown to hold with delta 0.000000000 s across two independent artifacts; the population manifest is shown to hold at 1107/686/421; and the deterministic zero-GET reproduction control is shown to reproduce the parent's recorded UB95 0.010206909410248878 bit-for-bit from two frozen artifacts, which is a null for the entire derivation path rather than for one URL. Live, DESIGN confirmed reachability of all three positive controls and both null anchors and 12/12 of a stratified population sample, and the parent's accepted run already demonstrated that all three positive controls FIRE at this separation while 2/2 null anchors and 10/10 in-frame self-pairs stayed silent. The residual, stated rather than hidden: no live positive control can span the ~8 h primary window, because no live fetch exists at the observation-0 epoch; that gap is carried as validity check V13 with four reported diagnostics and it is the reason the claim ceiling speaks about what two credential-free GETs returned rather than about origin content.",
+      "evidence_refs": [
+        "prereg.md#9",
+        "prereg.md#15#D5",
+        "prereg.md#15#D7",
+        "prereg.md#15#D8",
+        "spec.json#measurement_validity#V11",
+        "spec.json#measurement_validity#V13"
+      ]
     },
     "treatment_liveness": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "This packet has no treatment arm in the classical sense; its live mechanism is the cross-launch second observation of a frozen population, and its liveness is that the frozen population is still reachable, still hash-identical and still paired - which was demonstrated live rather than on synthetic sites. DESIGN fetched a deterministic 12-page sample spanning all six host x stratum x class buckets and got 12/12 HTTP 200 roughly eight hours after observation 0, and separately confirmed all four seeds and all five control URLs reachable. The treatment is therefore structurally capable of becoming EXECUTABLE: it needs no crawl, no BFS, no store, no revalidation ladder, no LLM and no credential. The parent packet's structural failure mode cannot recur because this packet performs no discovery at all: the population is the 1107 admitted rows of a hash-pinned file, and 12 rows that were not admitted at observation 0 (6x HTTP 404, 6x malformed URLs) are reported as excluded rather than silently re-admitted, which eliminates the entire class of starvation and drift defects. The parent's stratum-reserved crawl - which did reach 4 of 4 hosts in both strata - is inherited as a frozen population rather than re-run. Two further liveness facts bound the transaction: the 30 d band ceiling is a hard, named deadline rather than an open-ended dependency, and the checkpointed stage structure means a killed launch leaves its persisted epoch-stamped OBS1 rows usable as the anchor for a successor rung instead of discarding a paid-for observation.",
+      "evidence_refs": [
+        "prereg.md#6",
+        "prereg.md#15#D6",
+        "prereg.md#15#D9",
+        "spec.json#measurement_validity#V6",
+        "spec.json#estimated_cost"
+      ]
     },
     "freeze_artifacts_bound": {
-      "status": "PENDING",
-      "reason": "",
-      "evidence_refs": []
+      "status": "PASS",
+      "reason": "Every mutable local file whose identity can change the interpretation is listed as an exact repository-relative path that exists at freeze time and will be hashed into freeze.json.artifact_hashes. That set is: the parent's census.jsonl, which is the frozen observation-0 population and the sole input to the primary estimand; the parent's PROGRESS.json, which is the only epoch anchor for that population; the parent's execute_module.py, which is imported and therefore determines the detector, the canonicalisation, the fetch policy and the bound arithmetic; the parent's obs1.jsonl and control_probes.jsonl, which supply the inherited short-window comparator and the inherited control set; the parent's provenance.json, freeze.json, result.json, audit.json and handoff.json, which supply the cross-anchored epoch, the hash chain, the inherited accepted numbers, the two named defects and the four-way continuity state; the grandparent census.jsonl, provenance.json, execute_module.py and freeze.json, which supply the secondary ladder's frozen endpoint, its fractional-second epoch anchors, its byte-only channel and its hash chain; and the three mutable registries that fix lane-charter authority, claim identity and current claim status. This packet's OWN module is not a repository file at freeze time, and that limitation is declared rather than concealed: DESIGN for this packet is restricted by its workflow prompt to spec.json and prereg.md and therefore cannot author and byte-hash the executable, so the freeze is behavioural for that module - frozen rule text, frozen constants, frozen reference decision source and a twenty-two-entry canary table in the hash-pinned preregistration, which the independent design review and AUDIT re-execute against the module's own decide() - while remaining byte-hash for every external interpretation dependency. AUDIT is required to re-run all twenty-two C-DECIDE-LONG-* canaries against the module's own decide() function and to report any deviation as a required fix.",
+      "evidence_refs": [
+        "spec.json#freeze_artifacts",
+        "prereg.md#10",
+        "prereg.md#12",
+        "prereg.md#18"
+      ]
     }
   },
-  "freeze_artifacts": []
+  "freeze_artifacts": [
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/PROGRESS.json",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/obs1.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/raw/control_probes.jsonl",
+    "research/experiments/EXP-FRONTIER-39039638199/run/execute_module.py",
+    "research/experiments/EXP-FRONTIER-39039638199/provenance.json",
+    "research/experiments/EXP-FRONTIER-39039638199/freeze.json",
+    "research/experiments/EXP-FRONTIER-39039638199/result.json",
+    "research/experiments/EXP-FRONTIER-39039638199/audit.json",
+    "research/experiments/EXP-FRONTIER-39039638199/handoff.json",
+    "research/experiments/EXP-FRONTIER-38940047535/run/raw/census.jsonl",
+    "research/experiments/EXP-FRONTIER-38940047535/provenance.json",
+    "research/experiments/EXP-FRONTIER-38940047535/execute_module.py",
+    "research/experiments/EXP-FRONTIER-38940047535/freeze.json",
+    "codex/claim_state.json",
+    "research/claims/registry.json",
+    "research/lanes/registry.json"
+  ],
+  "claim_ceiling_rules": {
+    "CC-A": "The most this packet can establish is a per-page structural-text invalidation upper bound, per hop-depth stratum, for credential-free GET-only server-rendered documentation pages on four documentation hosts, from a single egress vantage, at the measured window W, on a frozen population of 1107 URLs. Because no live control spans W, the bound is a statement about what two credential-free GETs at two instants returned, not a claim about origin content. Any wording that exceeds this is out of scope.",
+    "CC-B": "A certified level is a statement about the observed pairs at the measured window only. L1-WINDOW-NESTING carries it to every SMALLER lag on the same page set and to nothing larger. It is NOT a claim that the Web is stable, NOT a claim about the days-to-weeks band unless the measured sub-band says so, NOT a claim about JavaScript-rendered or authenticated content, and NOT a claim about a second vantage. M-TTL-LICENSED-LAG-H equals the measured window and is the maximum lag any downstream statement may use.",
+    "CC-C": "C-WEB-DYNAMICS stays HYPOTHESIS regardless of outcome. A per-page hazard bound is a bounded measurement about a declared page class, not evidence of the predictive dynamical structure the claim title describes, and a guard-required outcome is likewise a bounded measurement. No EXPERIMENTAL, VALIDATED, PRODUCT_CORE or SHIPPED status is available from this packet and no self-promotion is permitted.",
+    "CC-D": "NO_DATA_* and REFUSE_LONG_* are packet and measurement dispositions. Under research/EXPERIMENT_PACKET.md section 7 they do not move the effective epistemic status of C-WEB-DYNAMICS, which remains HYPOTHESIS (codex/claim_state.json effective_event_by_claim['C-WEB-DYNAMICS'] = HYPOTHESIS).",
+    "CC-E": "The secondary ladder, the growth contrast, the depth contrast and the per-class decomposition may be cited only with their own window, population, channel and power limit. The 292-page ladder is byte-only and shallow-biased (261 shallow / 31 deep, readthedocs 168) and is nested inside the primary population, so it can never be stronger than the primary bound and must never be combined with it into a single stronger number. A class whose n is below 299 / 149 / 59 certifies nothing at 0.01 / 0.02 / 0.05 and is labelled CLASS_UNDERPOWERED; the VERSION_PINNED class at n=23 is expected to be exactly that.",
+    "CC-F": "The frozen frame is a frozen population, not a sample of the Web: four documentation hosts reached by same-host anchor navigation in the parent run, one runner, one egress vantage, no JavaScript execution, no credentials, no authentication, and hop depth partly confounded with host and URL class even though all four hosts span both strata.",
+    "CC-G": "This packet measures a page-level property. It does not measure SPIDER's inheritance economics, does not price a store-versus-cold comparison, does not compare a TTL ladder against any alternative guard architecture, and must not be cited as evidence for or against any of those."
+  },
+  "claim_dependencies": {
+    "C-FRESHNESS": "Consumes this packet's certified tolerance, its nesting-limited TTL interval M-TTL-LICENSED-LAG-H and its byte-identity tags as guard-design inputs. Owned by graph/runtime/product. NOT in scope here and NOT updated by this packet: frozen spec.claim_ids = ['C-WEB-DYNAMICS'] only, because C-FRESHNESS is not in the frontier lane charter's priority_claims.",
+    "C-PRODUCT-ECON": "Consumes M-TTL-LICENSED-LAG-H and the certified level as a first-party input for pricing session-scale revalidation GETs. Not updated by this packet.",
+    "C-CROSSSITE": "Untouched. Remains HYPOTHESIS; the persistence-economics thread stays parked by mandate and is used here only as a frozen epoch anchor and a frozen byte census.",
+    "C-RESIDUAL-NOVELTY": "Untouched and explicitly not exercised; Product owns the internal multi-scale work-compression test.",
+    "C-SEMANTIC-RESOLVE": "Untouched and explicitly not re-litigated by this packet."
+  }
 }
