@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/step-5-preview-free",
+  "attempt": 7,
+  "exit_code": 75,
+  "category": "transient-pool-exhausted",
+  "github_run_id": "39053910903",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-10-17T18:34:57.578263+00:00"
+}
