@@ -1,10 +1,10 @@
 {
   "status": "failure",
-  "model": "opencode/longcat-2.5-preview-free",
-  "attempt": 5,
-  "exit_code": 78,
-  "category": "provider-auth-invalid",
-  "github_run_id": "39075784513",
+  "model": "opencode/step-5-preview-free",
+  "attempt": 7,
+  "exit_code": 75,
+  "category": "transient-pool-exhausted",
+  "github_run_id": "39085940840",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-17T23:51:29.922905+00:00"
+  "recorded_at": "2026-10-18T02:01:05.342401+00:00"
 }
