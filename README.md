@@ -19,6 +19,34 @@ A results-driven **product delivery loop** and the independent **scientific rese
 
 See [the two-factory decision and product gates](docs/TWO_FACTORIES_PRODUCT_DECISION_2026-10-11.md) and the [plain-language product status](docs/PRODUCT_STATUS_2026-10-12.md). The real-browser prototype remains on **draft PR #42**, not on `main`. Its Browser Use / Stagehand billing adapters are **not** part of the zero-paid-model Research factory. No externally validated product saving has yet been measured.
 
+## Executable product pilot — independently gated
+
+The optional Browser Use integration, real Playwright/Chromium compiled-workflow baseline,
+read-only Spider mechanism bridge, two-family portal, and no-spend randomized
+five-arm plan are described in [the product pilot runbook](docs/PRODUCT_PILOT_RUNBOOK.md).
+
+No model/API payments are invoked by the default tests. Fully loaded economic
+measurements remain **unverified**, and this product branch must not bypass the
+independent Product-lane promotion audit.
+
+## Real public-site product evaluation (not yet a product claim)
+
+The next benchmark is implemented as an **opt-in** public read-only runner:
+[public task protocol](docs/PUBLIC_SITE_BENCHMARK_2026-10-11.md). It supports
+Browser Use cold/instructions/retrieval runs, trace-learned Spider inheritance,
+a compiled-page workflow, **direct official API** (the simplest strong baseline)
+and real **Stagehand v4 Browserbase server-side caching**. Every branch reports
+provider costs as incomplete until memory, training, browser and verification
+spend are reconciled.
+
+GitHub Releases is confirmed readable on both training and unseen holdouts in
+CI. PyPI is quarantined because CI receives a protection interstitial for
+several project pages; model runs on that site are blocked until a fresh
+per-family probe passes. Stagehand and Browser Use require explicit spending
+permission and user provider credentials; CI makes no such calls.
+The [advisory go/pivot gate](scripts/decide_product_gate.py) never promotes
+Product research by itself.
+
 ## Active lanes
 
 Six independent lanes run without synchronizing on one another:
