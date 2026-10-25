@@ -8,7 +8,7 @@
   "next_question": "Using this packet's frozen observation-0 census (research/experiments/EXP-FRONTIER-39039638199/run/raw/census.jsonl, sha256 45e426fd298af4cbfb7b5167a8c7498504ef6db36314053f6b3cf45c299a21ff, 1107 admitted pages with per-page text hashes captured 2026-10-17T15:10:35Z..15:11:12Z) as a genuine first observation, and repairing at DESIGN exactly the two frozen admission defects the audit verified (parent_window() must parse fractional-second timestamps such as 2026-10-17T00:45:32.184Z, and the long-window dt_h must be computed on a single POSIX-epoch clock instead of mixing time.monotonic() with epoch seconds), can a re-frozen, envelope-safe long-window second observation - checkpointed across launches so a 6 h to 30 d separation fits SPIDER_MODEL_MAX_RUNTIME_SECONDS instead of the <=900 s in-process window - certify, or explicitly refuse to certify, a zero-GET structural-text tolerance at realistic session reuse lags (6 h to 30 d) for the same four-host credential-free server-rendered documentation frame: does the ~7-minute CERTIFY_BOTH_AT_0P01 result hold as the window grows, decay into a TTL-shaped revalidation requirement, or decay into a required guard; and what first live per-page hazard bound does that give for the hours-to-days band that the pre-2.0 program structurally could never measure?",
   "promotion_ready": false,
   "consecutive_failures": 9,
-  "updated_at": "2026-10-24T11:58:26.700817+00:00",
+  "updated_at": "2026-10-25T16:40:29.550906+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "92aef32b7467ff478e4b50343eed451b2bedde4268ab9b21c0e0ae0dea00add2",
   "same_failure_count": 7,
