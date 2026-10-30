@@ -1,10 +1,10 @@
 {
   "status": "failure",
-  "model": "opencode/nemotron-3-ultra-free",
+  "model": "opencode/step-5-preview-free",
   "attempt": 7,
   "exit_code": 75,
   "category": "transient-pool-exhausted",
-  "github_run_id": "40892796443",
+  "github_run_id": "41116424944",
   "github_run_attempt": "1",
-  "recorded_at": "2026-10-29T15:00:47.142787+00:00"
+  "recorded_at": "2026-10-30T19:43:34.988712+00:00"
 }
