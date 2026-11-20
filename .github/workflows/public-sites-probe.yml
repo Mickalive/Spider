@@ -1,0 +1,43 @@
+name: Spider public read-only evidence probe
+
+on:
+  pull_request:
+    paths:
+      - "src/spider/public_tasks.py"
+      - "src/spider/public_learning.py"
+      - "scripts/run_public_benchmark.py"
+      - "tests/test_public_benchmark.py"
+      - ".github/workflows/public-sites-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spider-public-probe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  public-sites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Query only four curated public pages and independent read-only APIs (NO LLM)
+        run: PYTHONPATH=src python scripts/run_public_benchmark.py --mode probe --output /tmp/spider-public-readonly-probe.json
+      - name: Refuse to claim task readiness when real pages and official APIs disagree
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          data = json.load(open('/tmp/spider-public-readonly-probe.json'))
+          print(json.dumps(data, indent=2))
+          if not data["family_ready"].get("github"):
+              raise SystemExit("NO_VERIFIED_PUBLIC_FAMILY; no public-site LLM benchmark permitted")
+          if not data["family_ready"].get("pypi"):
+              print("SPIDER_PUBLIC_PYPI_QUARANTINED: page is blocked/challenged; paid PyPI trials disabled")
+          print("SPIDER_PUBLIC_GITHUB_FAMILY_VERIFIED; only explicitly passing families are model-ready")
+          PY
