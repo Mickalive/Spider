@@ -1,11 +1,11 @@
 {
-  "stage": "install",
-  "category": "OPENCODE_INSTALL_FAILURE",
+  "stage": "execute",
+  "category": "EXECUTION_FAILURE",
   "message": "stage exited with code 75",
   "retryable": true,
-  "fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "recorded_at": "2026-11-25T04:32:15.550004+00:00",
-  "github_run_id": "45547281733",
+  "fingerprint": "fbf5825ef2ac96580695178f",
+  "recorded_at": "2026-11-26T00:15:04.784545+00:00",
+  "github_run_id": "45724986077",
   "github_run_attempt": "1",
   "control_revision": "483314ec6bd5937df1f6a0334448deff39770d6ec045c33e86beca131f9cbbf7"
 }
